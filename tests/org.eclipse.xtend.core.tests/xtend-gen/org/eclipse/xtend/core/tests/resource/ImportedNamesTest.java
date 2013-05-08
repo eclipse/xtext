@@ -22,10 +22,10 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
   @Inject
   private Manager resourceDescriptionManager;
   
-  private final List<String> primitives = Collections.<String>unmodifiableList(Lists.<String>newArrayList("boolean", "int", "char", "byte", "short", "long"));
+  private final List<String> primitives = Collections.<String>unmodifiableList(Lists.<String>newArrayList("boolean", "int", "char", "byte", "short", "long", "float", "double", "void"));
   
   @Test
-  public void testPrimitvesNotIncluded() {
+  public void testPrimitivesNotIncluded() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testPackage");
@@ -60,9 +60,32 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       _builder.append("byte t;");
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("float f;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("double d;");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("List<Object> l;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (x == i == b == c == s == l == t == f == d) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("println(\"never happens\")");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();

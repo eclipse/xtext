@@ -45,7 +45,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3
  */
-public class DefaultReferenceFinder implements IReferenceFinder {
+public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinderExtension1 {
 
 	private IResourceDescriptions indexData;
 
@@ -57,6 +57,10 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		super();
 		this.indexData = indexData;
 		this.serviceProviderRegistry = serviceProviderRegistry;
+	}
+	
+	protected IResourceDescriptions getIndexData() {
+		return indexData;
 	}
 
 	public void findReferences(Iterable<URI> targetURIs, final Iterable<URI> sourceResourceURIs,
@@ -77,8 +81,8 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			for (URI sourceResourceURI : sourceResourceURIs) {
 				IResourceDescription resourceDescription = indexData.getResourceDescription(sourceResourceURI);
 				if (resourceDescription != null)
-					findIndexedReferences(targetURIsAsSet, resourceDescription, referenceAcceptor,
-							subMonitor.newChild(1));
+					findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor,
+							subMonitor.newChild(1), localResourceAccess);
 			}
 		}
 	}
@@ -91,15 +95,34 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 				findLocalReferences(targetURIs, localResourceAccess, referenceAcceptor, subMonitor.newChild(1));
 			}
 			Set<URI> targetURIsAsSet = newLinkedHashSet(targetURIs);
-			findAllIndexedReferences(referenceAcceptor, subMonitor, targetURIsAsSet);
+			findAllIndexedReferences(referenceAcceptor, subMonitor, targetURIsAsSet, localResourceAccess);
 		}
 	}
 
+	/**
+	 * @deprecated use {@link #findAllIndexedReferences(IAcceptor, SubMonitor, Set, org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess)}
+	 */
+	@Deprecated
 	protected void findAllIndexedReferences(IAcceptor<IReferenceDescription> referenceAcceptor, SubMonitor subMonitor,
 			Set<URI> targetURIsAsSet) {
+		findAllIndexedReferences(referenceAcceptor, subMonitor, targetURIsAsSet, null);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void findAllIndexedReferences(IAcceptor<IReferenceDescription> referenceAcceptor, SubMonitor subMonitor,
+			Set<URI> targetURIsAsSet, ILocalResourceAccess localResourceAccess) {
 		subMonitor.setWorkRemaining(size(indexData.getAllResourceDescriptions()));
 		for (IResourceDescription resourceDescription : indexData.getAllResourceDescriptions()) {
-			findIndexedReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1));
+			IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceDescription.getURI());
+			IReferenceFinder referenceFinder = serviceProvider.get(IReferenceFinder.class);
+			if (referenceFinder instanceof IReferenceFinderExtension1) {
+				IReferenceFinderExtension1 extension1 = (IReferenceFinderExtension1) referenceFinder;
+				extension1.findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1), localResourceAccess);
+			} else {
+				findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1), localResourceAccess);
+			}
 		}
 	}
 
@@ -232,8 +255,18 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		return null;
 	}
 
-	protected void findIndexedReferences(Set<URI> targetURIs, IResourceDescription resourceDescription,
-			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
+	/**
+	 * @deprecated use {@link #findReferences(Set, IResourceDescription, IAcceptor, IProgressMonitor, org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess)}
+	 */
+	@Deprecated
+	protected void findIndexedReferences(Set<URI> targetURIs, IResourceDescription resourceDescription, IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
+		findReferences(targetURIs, resourceDescription, acceptor, monitor, null);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void findReferences(Set<URI> targetURIs, IResourceDescription resourceDescription, IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor, ILocalResourceAccess localResourceAccess) {
 		for (IReferenceDescription referenceDescription : resourceDescription.getReferenceDescriptions()) {
 			if (targetURIs.contains(referenceDescription.getTargetEObjectUri())) {
 				acceptor.accept(referenceDescription);

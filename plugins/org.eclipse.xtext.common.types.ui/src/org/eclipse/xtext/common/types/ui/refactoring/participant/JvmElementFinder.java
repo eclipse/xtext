@@ -10,19 +10,20 @@ package org.eclipse.xtext.common.types.ui.refactoring.participant;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -52,19 +53,27 @@ public class JvmElementFinder {
 	}
 
 	public EObject findJvmElementDeclarationInIndex(EObject jvmElement, IProject project, ResourceSet resourceSet) {
-		// TODO lookup top level type container in index instead? 
-		QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(jvmElement);
+		JvmType type = EcoreUtil2.getContainerOfType(jvmElement, JvmType.class);
+		if (type == null)
+			return null;
+		QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(type);
 		if (qualifiedName != null) {
-			for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
-				if (resourceDescription.getURI().isPlatformResource()
-						&& Strings.equal(project.getName(), resourceDescription.getURI().segment(1))) {
-					Iterator<IEObjectDescription> matches = resourceDescription.getExportedObjects(jvmElement.eClass(),
-							qualifiedName, true).iterator();
-					if(matches.hasNext()) {
-						URI eObjectURI = matches.next().getEObjectURI();
-						return resourceSet.getEObject(eObjectURI, true);
+			Iterator<IEObjectDescription> exportedObjects = resourceDescriptions.getExportedObjects(type.eClass(), qualifiedName, false).iterator();
+			if (exportedObjects.hasNext()) {
+				URI eObjectURI = exportedObjects.next().getEObjectURI();
+				EObject eObject = resourceSet.getEObject(eObjectURI, true);
+				if (type != jvmElement) {
+					TreeIterator<EObject> contents = eObject.eAllContents();
+					QualifiedName nameOfActualElement = qualifiedNameProvider.getFullyQualifiedName(jvmElement);
+					while (contents.hasNext()) {
+						EObject next = contents.next();
+						if (jvmElement.eClass().isInstance(next) && 
+							nameOfActualElement.equals(qualifiedNameProvider.getFullyQualifiedName(jvmElement))) {
+							return next;
+						}
 					}
 				}
+				return eObject;
 			}
 		}
 		return null;
