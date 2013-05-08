@@ -74,7 +74,10 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 	}
 	
 	public Iterable<QualifiedName> getImportedNames() {
-		throw new UnsupportedOperationException("getImportedNames()");
+		IResourceDescription snapShot = snapShotProvider.get();
+		if (snapShot != null)
+			return snapShot.getImportedNames();
+		return Collections.emptyList();
 	}
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -54,8 +55,7 @@ public class SearchFilterTest extends AbstractXtendUITestCase {
 				"class Foo {\n" +
 				"  def bar() {this}\n" +
 				"}");
-		expect(iterator, "test.Foo", XTEND_CLASS);
-		expect(iterator, "test.Foo.bar", XTEND_FUNCTION);
+		// nothing in it, since xtedn only exports JvmGenericTypes and those are filtered.
 		assertFalse(iterator.hasNext());
 	}
 	
@@ -66,9 +66,7 @@ public class SearchFilterTest extends AbstractXtendUITestCase {
 				"  def dispatch foo(Object x) {x.toString}\n" +
 				"  def dispatch foo(String y) {y}\n" +
 				"}");
-		expect(iterator, "test.Foo", XTEND_CLASS);
-		expect(iterator, "test.Foo.foo", XTEND_FUNCTION);
-		expect(iterator, "test.Foo.foo", XTEND_FUNCTION);
+		// nothing in it, since xtedn only exports JvmGenericTypes and those are filtered.
 		assertFalse(iterator.hasNext()); 
 	}
 
