@@ -12,6 +12,7 @@
         <cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.commons.lang" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.commons.lang.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.apache.ant" componentType="osgi.bundle" versionDesignator="1.8.0"/>
         <cs:dependency name="org.apache.log4j" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.log4j.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.easymock" componentType="osgi.bundle"/>
