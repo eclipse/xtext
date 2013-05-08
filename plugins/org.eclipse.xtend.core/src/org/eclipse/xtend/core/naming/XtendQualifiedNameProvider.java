@@ -9,16 +9,13 @@ package org.eclipse.xtend.core.naming;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
@@ -38,27 +35,41 @@ public class XtendQualifiedNameProvider extends XbaseQualifiedNameProvider {
 	public QualifiedName getFullyQualifiedName(EObject obj) {
 		if (obj instanceof XtendTypeDeclaration) {
 			XtendTypeDeclaration typeDecl = (XtendTypeDeclaration) obj;
-			if (typeDecl.getName() == null)
+			String typeName = typeDecl.getName();
+			if (typeName == null)
 				return null;
 			XtendFile file = (XtendFile) typeDecl.eContainer();
-			final String qualifiedName = (file.getPackage() != null ? file.getPackage() + "." : "")
-					+ typeDecl.getName();
-			return qualifiedNameConverter.toQualifiedName(qualifiedName);
+			String packageName = file.getPackage();
+			if (packageName != null) {
+				return qualifiedNameConverter.toQualifiedName(packageName).append(typeName);
+			}
+			return QualifiedName.create(typeName);
 		}
-		if(obj instanceof XtendConstructor) {
+		if (obj instanceof XtendConstructor) {
 			return getFullyQualifiedName(obj.eContainer());
 		}
-		if (obj instanceof JvmGenericType
-			|| obj instanceof JvmAnnotationType
-			|| obj instanceof JvmEnumerationType
-			|| obj instanceof JvmOperation
-			|| obj instanceof JvmConstructor
-			|| obj instanceof JvmField
-			|| obj instanceof XtendField
-			|| obj instanceof XtendFunction) {
-			return super.getFullyQualifiedName(obj);
+		if (obj instanceof JvmIdentifiableElement && !(obj instanceof JvmTypeParameter)) {
+			return getFullyQualifiedName((JvmIdentifiableElement) obj);
+		}
+		if (obj instanceof XtendField) {
+			return concatNames(obj, ((XtendField) obj).getName());
+		}
+		if (obj instanceof XtendFunction) {
+			return concatNames(obj, ((XtendFunction) obj).getName());
+		}
+		if (obj instanceof XtendEnumLiteral) {
+			return concatNames(obj, ((XtendEnumLiteral) obj).getName());
 		}
 		return null;
+	}
+
+	protected QualifiedName concatNames(EObject obj, String name) {
+		if (name == null)
+			return null;
+		QualifiedName parentName = getFullyQualifiedName(obj.eContainer());
+		if (parentName == null)
+			return null;
+		return parentName.append(name);
 	}
 
 }
