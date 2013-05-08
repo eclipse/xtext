@@ -14,13 +14,11 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
@@ -40,17 +38,16 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 	
 	@Override
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		if (eObject instanceof JvmTypeReference || eObject instanceof XExpression)
-			return false;
-		return super.createEObjectDescriptions(eObject, acceptor);
+		boolean isJvmType = (eObject instanceof JvmType);
+		if (isJvmType)
+			super.createEObjectDescriptions(eObject, acceptor);
+		return isJvmType;
 	}
 	
 	@Override
 	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI,
 			IAcceptor<IReferenceDescription> acceptor) {
-		if (from instanceof XComputedTypeReference)
-			return false;
-		return super.createReferenceDescriptions(from, exportedContainerURI, acceptor);
+		return false;
 	}
 	
 	@Override
