@@ -11,8 +11,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
@@ -37,10 +41,24 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		if(!(context instanceof XtendFile)) 
 			return Collections.emptyList();
 		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context, ignoreCase);
-		if (!Strings.isEmpty(((XtendFile) context).getPackage())) {
-			importedNamespaceResolvers.add(new ImportNormalizer(getQualifiedNameConverter().toQualifiedName(((XtendFile) context)
-					.getPackage()), true, ignoreCase));
+		String packageName = ((XtendFile) context).getPackage();
+		if (!Strings.isEmpty(packageName)) {
+			ImportNormalizer packageLocalTypes = new ImportNormalizer(getQualifiedNameConverter().toQualifiedName(packageName), true, ignoreCase);
+			if (!importedNamespaceResolvers.isEmpty())
+				importedNamespaceResolvers.add(packageLocalTypes);
+			else
+				return Collections.singletonList(packageLocalTypes);
 		}
 		return importedNamespaceResolvers;
 	}
+	
+	@Override
+	protected IScope internalGetScope(IScope parent, IScope globalScope, EObject context, EReference reference) {
+		// only members create a new scope, e.g via type parameters
+		XtendMember member = EcoreUtil2.getContainerOfType(context, XtendMember.class);
+		if (member != null)
+			return super.internalGetScope(parent, globalScope, member, reference);
+		return super.internalGetScope(parent, globalScope, context, reference);
+	}
+	
 }

@@ -215,21 +215,27 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
 		if(EcoreUtil.getRootContainer(context) != context) 
 			return Collections.emptyList();
-		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		XImportSection importSection = importsConfiguration.getImportSection((XtextResource) context.eResource());
 		if(importSection != null) {
-			for (XImportDeclaration imp: importSection.getImportDeclarations()) {
-				if (!imp.isStatic()) {
-					String value = imp.getImportedNamespace();
-					if(value == null)
-						value = imp.getImportedTypeName();
-					ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
-					if (resolver != null)
-						importedNamespaceResolvers.add(resolver);
-				}
+			return getImportedNamespaceResolvers(importSection, ignoreCase);
+		}
+		return Collections.emptyList();
+	}
+
+	protected List<ImportNormalizer> getImportedNamespaceResolvers(XImportSection importSection, boolean ignoreCase) {
+		List<XImportDeclaration> importDeclarations = importSection.getImportDeclarations();
+		List<ImportNormalizer> result = Lists.newArrayListWithExpectedSize(importDeclarations.size());
+		for (XImportDeclaration imp: importDeclarations) {
+			if (!imp.isStatic()) {
+				String value = imp.getImportedNamespace();
+				if(value == null)
+					value = imp.getImportedTypeName();
+				ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
+				if (resolver != null)
+					result.add(resolver);
 			}
 		}
-		return importedNamespaceResolvers;
+		return result;
 	}
 
 
@@ -290,7 +296,7 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 		return "*";
 	}
 	
-	
-
-
+	protected IJvmModelAssociations getAssociations() {
+		return associations;
+	}
 }

@@ -8,37 +8,32 @@
 package org.eclipse.xtext.xbase.scoping;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
-	@Inject
-	private IQualifiedNameConverter qualifiedNameConverter;
-
 	@Override
 	public QualifiedName getFullyQualifiedName(EObject obj) {
-		if (obj instanceof JvmType 
-				|| obj instanceof JvmMember) {
-			final String qualifiedName = ((JvmIdentifiableElement) obj).getQualifiedName();
-			if (qualifiedName == null)
-				return null;
-			return qualifiedNameConverter.toQualifiedName(qualifiedName);
-		}
-		if(obj instanceof JvmFormalParameter || obj instanceof JvmTypeParameter)
-			return null;
+		if (obj instanceof JvmIdentifiableElement)
+			return getFullyQualifiedName((JvmIdentifiableElement) obj);
 		return super.getFullyQualifiedName(obj);
 	}
 
+	protected QualifiedName getFullyQualifiedName(JvmIdentifiableElement obj) {
+		if (obj instanceof JvmType || obj instanceof JvmMember) {
+			final String qualifiedName = obj.getQualifiedName();
+			if (qualifiedName == null)
+				return null;
+			return getConverter().toQualifiedName(qualifiedName);
+		}
+		return null;
+	}
 }
+

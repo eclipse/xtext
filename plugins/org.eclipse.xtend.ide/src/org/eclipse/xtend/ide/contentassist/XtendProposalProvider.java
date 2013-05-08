@@ -3,9 +3,6 @@
 */
 package org.eclipse.xtend.ide.contentassist;
 
-import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Sets.*;
-
 import java.util.List;
 import java.util.Set;
 
@@ -35,9 +32,9 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -60,7 +57,10 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		if (model instanceof XtendField) {
 			//TODO go up type hierarchy and collect all local fields
 			final List<XtendField> siblings = EcoreUtil2.getSiblingsOfType(model, XtendField.class);
-			Set<String> alreadyTaken = newHashSet(transform(siblings, SimpleAttributeResolver.NAME_RESOLVER));
+			Set<String> alreadyTaken = Sets.newHashSet();
+			for(XtendField sibling: siblings) {
+				alreadyTaken.add(sibling.getName());
+			}
 			alreadyTaken.addAll(getAllKeywords());
 			completions.getVariableProposals(model, XtendPackage.Literals.XTEND_FIELD__TYPE,
 					VariableType.INSTANCE_FIELD, alreadyTaken, new JdtVariableCompletions.CompletionDataAcceptor() {
@@ -99,7 +99,10 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			final ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendParameter) {
 			final List<XtendParameter> siblings = EcoreUtil2.getSiblingsOfType(model, XtendParameter.class);
-			Set<String> alreadyTaken = newHashSet(transform(siblings, SimpleAttributeResolver.NAME_RESOLVER));
+			Set<String> alreadyTaken = Sets.newHashSet();
+			for(XtendParameter sibling: siblings) {
+				alreadyTaken.add(sibling.getName());
+			}
 			alreadyTaken.addAll(getAllKeywords());
 			completions.getVariableProposals(model, XtendPackage.Literals.XTEND_PARAMETER__PARAMETER_TYPE,
 					VariableType.PARAMETER, alreadyTaken, new JdtVariableCompletions.CompletionDataAcceptor() {

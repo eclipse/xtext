@@ -9,15 +9,18 @@ package org.eclipse.xtend.core.naming;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -48,15 +51,17 @@ public class XtendQualifiedNameProvider extends XbaseQualifiedNameProvider {
 		if(obj instanceof XtendConstructor) {
 			return getFullyQualifiedName(obj.eContainer());
 		}
-		if (obj instanceof JvmGenericType
-			|| obj instanceof JvmAnnotationType
-			|| obj instanceof JvmEnumerationType
-			|| obj instanceof JvmOperation
-			|| obj instanceof JvmConstructor
-			|| obj instanceof JvmField
-			|| obj instanceof XtendField
-			|| obj instanceof XtendFunction) {
-			return super.getFullyQualifiedName(obj);
+		if (obj instanceof JvmIdentifiableElement) {
+			return getFullyQualifiedName((JvmIdentifiableElement) obj);
+		}
+		if (obj instanceof XtendField) {
+			return getFullyQualifiedName(obj.eContainer()).append(((XtendField)obj).getName());
+		}
+		if (obj instanceof XtendFunction) {
+			return getFullyQualifiedName(obj.eContainer()).append(((XtendFunction)obj).getName());
+		}
+		if (obj instanceof XtendEnumLiteral) {
+			return getFullyQualifiedName(obj.eContainer()).append(((XtendEnumLiteral)obj).getName());
 		}
 		return null;
 	}

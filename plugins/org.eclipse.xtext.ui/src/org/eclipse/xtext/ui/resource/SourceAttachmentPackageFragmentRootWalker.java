@@ -95,8 +95,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 						if (buildPropertiesFile.exists()) {
 							Properties buildProperties = new Properties();
 							try {
-								buildProperties.load(buildPropertiesFile.getContents(true));
-
+								loadBuildProperties(buildPropertiesFile, buildProperties);
 								// Process the bin includes entries.
 								//
 								String binIncludes = buildProperties.getProperty("bin.includes");
@@ -171,6 +170,12 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 		visitAll = false;
 		binIncludePatterns = null;
 		return result;
+	}
+
+	protected void loadBuildProperties(IFile buildPropertiesFile, Properties result) throws CoreException, IOException {
+		InputStream buildPropertiesContents = buildPropertiesFile.getContents(true);
+		result.load(buildPropertiesContents);
+		buildPropertiesContents.close();
 	}
 
 	private static final int YES = 1;
