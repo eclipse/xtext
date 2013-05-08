@@ -13,7 +13,6 @@ import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
-import org.eclipse.xtext.common.types.ui.notification.DeltaConverter;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
 import com.google.inject.Inject;
@@ -27,7 +26,7 @@ public class JavaChangeQueueFiller implements IElementChangedListener {
 	private QueuedBuildData queue;
 	
 	@Inject
-	private DeltaConverter deltaConverter;
+	private BuilderDeltaConverter deltaConverter;
 	
 	public JavaChangeQueueFiller() {
 		JavaCore.addElementChangedListener(this, ElementChangedEvent.POST_CHANGE);
