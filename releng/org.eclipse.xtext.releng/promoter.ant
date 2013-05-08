@@ -12,7 +12,6 @@
 		<!-- supply defaults -->
 		<property name="build.id" value="" />
 		<property name="hudson.build.id" value="" />
-		<property name="skip.javadoc" value="false" />
 
 		<propertyfile file="${promoter.properties.file}" comment="Promoter script properties">
 			<entry key="java.home" value="${java.home}" />

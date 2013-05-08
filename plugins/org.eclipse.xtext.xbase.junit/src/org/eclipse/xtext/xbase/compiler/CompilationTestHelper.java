@@ -122,7 +122,6 @@ public class CompilationTestHelper {
 	 * Parses, validates and compiles the given source. Calls the given acceptor for each
 	 * resource which is generated from the source.
 	 *  
-	 * @param source some code written in the language under test.
 	 * @param resourceSet - the {@link ResourceSet} to use
 	 * @param acceptor gets called once for each file generated in {@link IGenerator}
 	 */

@@ -7,7 +7,6 @@
 		<property name="output" value="./javadoc" />
 		<property name="checkoutLocation" value="../.." />
 		<property name="targetPlatform" value="${eclipse.home}" />
-		<property name="skip.javadoc" value="false" />
 
 		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
 		<condition property="build.stable" value="yes">
