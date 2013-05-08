@@ -1,25 +1,46 @@
 package org.eclipse.xtend.core.resource
 
-import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager
-import org.eclipse.xtext.resource.impl.DefaultResourceDescription
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
-import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
+import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.impl.DefaultResourceDescription
+import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp
+import org.eclipse.xtext.util.IResourceScopeCache
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager {
-
-	override protected createResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
-		return new XtendResourceDescription(resource, strategy)
+	
+	@Inject IBatchTypeResolver typeResolver
+	@Inject IQualifiedNameConverter nameConverter
+	
+	override IResourceDescription createResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
+		return new XtendResourceDescription(resource, strategy, cache, typeResolver, nameConverter);
 	}
 }
 
 class XtendResourceDescription extends DefaultResourceDescription {
 
-	val primitivesFilter = #['boolean', 'int', 'char', 'byte', 'short', 'long']
+	val primitivesFilter = #{'boolean', 'int', 'char', 'byte', 'short', 'long', 'double', 'float', 'void'}
+
+	IBatchTypeResolver typeResolver
+	IQualifiedNameConverter nameConverter
 
 	new(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		super(resource, strategy)
+	}
+
+	new(Resource resource, IDefaultResourceDescriptionStrategy strategy, IResourceScopeCache cache, IBatchTypeResolver typeResolver, IQualifiedNameConverter nameConverter) {
+		super(resource, strategy, cache)
+		this.typeResolver = typeResolver
+		this.nameConverter = nameConverter
 	}
 
 	override protected getLookUp() {
@@ -29,12 +50,34 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	}
 
 	def override Iterable<QualifiedName> getImportedNames() {
-		var originalImportedNames = super.getImportedNames();
-
-		var filteredImportedNames = originalImportedNames.filter [
+		val result = newArrayList()
+		result.addAll(super.getImportedNames())
+		for (eobject : resource.contents) {
+			val types = typeResolver.resolveTypes(eobject)
+			val actualTypes = EcoreUtil::getAllContents(eobject, true).filter(typeof(XExpression)).toList.map[types.getActualType(it)]
+			for (typeRef : actualTypes) {
+				registerAllTypes(typeRef.type) [
+					result += nameConverter.toQualifiedName(it).toLowerCase
+				]
+			}
+		}
+		return result.filter [
 			!primitivesFilter.contains(it.lastSegment)
-		]
-
-		return filteredImportedNames;
+		].toSet
 	}
+	
+	def void registerAllTypes(JvmType type, (String)=>void acceptor) {
+		if (type == null)
+			return;
+		acceptor.apply(type.identifier)
+		switch type {
+			JvmGenericType : {
+				registerAllTypes(type?.extendedClass?.type, acceptor)
+				type.extendedInterfaces.forEach[
+					registerAllTypes(it?.type, acceptor)
+				]
+			}
+		}
+	}
+	
 }

@@ -9,10 +9,10 @@ class ImportedNamesTest extends AbstractXtendTestCase {
 	@Inject
 	IResourceDescription$Manager resourceDescriptionManager
 	
-	val primitives = #["boolean", "int", "char", "byte", "short", "long"]
+	val primitives = #["boolean", "int", "char", "byte", "short", "long", "float", "double", "void"]
 		
 	@Test
-	def void testPrimitvesNotIncluded () {
+	def void testPrimitivesNotIncluded () {
 		val file = this.file('''
 			package testPackage
 			
@@ -27,12 +27,20 @@ class ImportedNamesTest extends AbstractXtendTestCase {
 				short s;
 				long l;
 				byte t;
+				float f;
+				double d;
 				
 				List<Object> l;
+				
+				def void foo() {
+					if (x == i == b == c == s == l == t == f == d) {
+						println("never happens")
+					}
+				}
 			}
 		''')
 		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
-		//println(description.getImportedNames.toString().replace(',','\n'))
+//		println(description.getImportedNames.toString().replace(',','\n'))
 		assertFalse(description.importedNames.exists[ primitives.contains(it.lastSegment) ]);
 	}
 }
