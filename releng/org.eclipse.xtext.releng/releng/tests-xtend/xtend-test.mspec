@@ -3,5 +3,4 @@
   <mspec:property key="target.os" value="*"/>
   <mspec:property key="target.arch" value="*"/>
   <mspec:property key="target.ws" value="*"/>
-  <mspec:property key="eclipse.target.platform" value="${eclipse.download}/eclipse/updates/3.5"/>
-</mspec:mspec>
+ </mspec:mspec>
