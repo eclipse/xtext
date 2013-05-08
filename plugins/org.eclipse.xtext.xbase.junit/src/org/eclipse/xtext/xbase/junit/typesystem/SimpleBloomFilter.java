@@ -25,7 +25,7 @@ import com.google.common.primitives.Ints;
 
 /**
  * A simplified variant of com.google.common.hash.BloomFilter 
- * {@linkplain http://guava-libraries.googlecode.com/git/guava/src/com/google/common/hash/BloomFilter.java}
+ * {@linkplain <a href="http://guava-libraries.googlecode.com/git/guava/src/com/google/common/hash/BloomFilter.java">BloomFilter.java</a>}
  * 
  * It can only work with Strings.
  * 
@@ -73,7 +73,7 @@ public final class SimpleBloomFilter {
 
 	/**
 	 * Puts an element into this {@code BloomFilter}. Ensures that subsequent invocations of
-	 * {@link #mightContain(Object)} with the same element will always return {@code true}.
+	 * {@link #mightContain(String)} with the same element will always return {@code true}.
 	 * 
 	 * @return true if the bloom filter's bits changed as a result of this operation. If the bits changed, this is
 	 *         <i>definitely</i> the first time {@code object} has been added to the filter. If the bits haven't
@@ -110,7 +110,7 @@ public final class SimpleBloomFilter {
 	}
 
 	/**
-	 * Creates a {@code Builder} of a {@link BloomFilter BloomFilter<T>}, with the expected number of insertions, and a
+	 * Creates a {@code Builder} of a {@link com.google.common.hash.BloomFilter BloomFilter<T>}, with the expected number of insertions, and a
 	 * default expected false positive probability of 3%.
 	 * 
 	 * <p>
@@ -120,8 +120,6 @@ public final class SimpleBloomFilter {
 	 * <p>
 	 * The constructed {@code BloomFilter<T>} will be serializable if the provided {@code Funnel<T>} is.
 	 * 
-	 * @param funnel
-	 *            the funnel of T's that the constructed {@code BloomFilter<T>} will use
 	 * @param expectedInsertions
 	 *            the number of expected insertions to the constructed {@code BloomFilter<T>}; must be positive
 	 * @return a {@code BloomFilter}
