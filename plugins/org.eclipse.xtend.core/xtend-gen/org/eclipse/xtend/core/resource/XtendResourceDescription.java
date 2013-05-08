@@ -83,15 +83,18 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           };
         final List<LightweightTypeReference> actualTypes = ListExtensions.<XExpression, LightweightTypeReference>map(_list, _function);
         for (final LightweightTypeReference typeRef : actualTypes) {
-          JvmType _type = typeRef.getType();
-          final Procedure1<String> _function_1 = new Procedure1<String>() {
-              public void apply(final String it) {
-                QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
-                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                result.add(_lowerCase);
-              }
-            };
-          this.registerAllTypes(_type, _function_1);
+          boolean _notEquals = (!Objects.equal(typeRef, null));
+          if (_notEquals) {
+            JvmType _type = typeRef.getType();
+            final Procedure1<String> _function_1 = new Procedure1<String>() {
+                public void apply(final String it) {
+                  QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
+                  QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                  result.add(_lowerCase);
+                }
+              };
+            this.registerAllTypes(_type, _function_1);
+          }
         }
       }
     }
