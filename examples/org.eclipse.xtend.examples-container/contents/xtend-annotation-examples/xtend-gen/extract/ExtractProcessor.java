@@ -8,9 +8,9 @@
 package extract;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
@@ -44,11 +44,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
     final MutableInterfaceDeclaration interfaceType = context.findInterface(_interfaceName);
     List<TypeReference> _implementedInterfaces = annotatedClass.getImplementedInterfaces();
     TypeReference _newTypeReference = context.newTypeReference(interfaceType);
-    List<TypeReference> _xlistliteral = null;
-    Builder<TypeReference> _builder = ImmutableList.builder();
-    _builder.add(_newTypeReference);
-    _xlistliteral = _builder.build();
-    Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_implementedInterfaces, _xlistliteral);
+    Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_implementedInterfaces, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_newTypeReference)));
     annotatedClass.setImplementedInterfaces(_plus);
     Iterable<? extends MutableMethodDeclaration> _declaredMethods = annotatedClass.getDeclaredMethods();
     for (final MutableMethodDeclaration method : _declaredMethods) {
