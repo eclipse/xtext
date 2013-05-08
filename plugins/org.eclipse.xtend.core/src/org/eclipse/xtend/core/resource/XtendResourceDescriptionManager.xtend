@@ -56,9 +56,11 @@ class XtendResourceDescription extends DefaultResourceDescription {
 			val types = typeResolver.resolveTypes(eobject)
 			val actualTypes = EcoreUtil::getAllContents(eobject, true).filter(typeof(XExpression)).toList.map[types.getActualType(it)]
 			for (typeRef : actualTypes) {
-				registerAllTypes(typeRef.type) [
-					result += nameConverter.toQualifiedName(it).toLowerCase
-				]
+				if (typeRef != null) {
+					registerAllTypes(typeRef.type) [
+						result += nameConverter.toQualifiedName(it).toLowerCase
+					]
+				}
 			}
 		}
 		return result.filter [
