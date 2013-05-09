@@ -56,7 +56,7 @@
 	<target name="compiler.init" depends="clean">
 		<taskdef name="xtendc" classname="org.eclipse.xtend.core.compiler.batch.XtendCompilerAntTask">
 			<classpath>
-				<path refid="compiled.xtend" />
+				<path refid="xtend.deps" />
 			</classpath>
 		</taskdef>
 	</target>
