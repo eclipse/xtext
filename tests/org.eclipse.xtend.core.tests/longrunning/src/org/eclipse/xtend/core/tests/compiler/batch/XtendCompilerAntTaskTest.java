@@ -21,11 +21,13 @@ import org.eclipse.pde.core.plugin.TargetPlatform;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@Ignore
 public class XtendCompilerAntTaskTest {
 	protected Project project;
 	private StringBuffer logBuffer;
