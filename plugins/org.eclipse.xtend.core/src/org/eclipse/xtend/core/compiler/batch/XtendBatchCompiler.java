@@ -298,7 +298,8 @@ public class XtendBatchCompiler {
 		File outputDirectory = createTempDir("stubs");
 		JavaIoFileSystemAccess fileSystemAccess = javaIoFileSystemAccessProvider.get();
 		fileSystemAccess.setOutputPath(outputDirectory.toString());
-		for (Resource resource : resourceSet.getResources()) {
+		List<Resource> resources = Lists.newArrayList(resourceSet.getResources());
+		for (Resource resource : resources) {
 			IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
 			for (IEObjectDescription jvmTypeDescription : description.getExportedObjects()) {
 
