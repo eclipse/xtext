@@ -21,13 +21,11 @@ import org.eclipse.pde.core.plugin.TargetPlatform;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-@Ignore
 public class XtendCompilerAntTaskTest {
 	protected Project project;
 	private StringBuffer logBuffer;
@@ -46,7 +44,7 @@ public class XtendCompilerAntTaskTest {
 	public void tearDown() {
 		project = null;
 	}
-
+	
 	@Test
 	public void testSrcdirAsAttr() {
 		executeTarget("compile");
@@ -116,7 +114,7 @@ public class XtendCompilerAntTaskTest {
 		File antFile = new File(System.getProperty("root"), filename);
 		File pluginsFolder = new File(new File(TargetPlatform.getLocation()), "plugins");
 		project.setUserProperty("deps.dir", pluginsFolder.getAbsolutePath());
-		
+
 		project.setUserProperty("ant.file", antFile.getAbsolutePath());
 		project.addBuildListener(new AntTestListener(Project.MSG_ERR));
 		ProjectHelper.configureProject(project, antFile);
