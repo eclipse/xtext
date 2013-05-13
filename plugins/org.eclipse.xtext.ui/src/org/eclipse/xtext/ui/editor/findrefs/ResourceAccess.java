@@ -79,6 +79,10 @@ public class ResourceAccess implements IReferenceFinder.ILocalResourceAccess {
 	}
 	
 	protected ResourceSet getResourceSet(IProject p) {
+		// if the initially registered resource set wasn'T configured with a java project, we aways use the same resourceSet (old behavior)
+		if (resourceSets.isEmpty() && fallBackResourceSet != null) {
+			return fallBackResourceSet;
+		}
 		if (resourceSets.containsKey(p)) {
 			return resourceSets.get(p);
 		}
