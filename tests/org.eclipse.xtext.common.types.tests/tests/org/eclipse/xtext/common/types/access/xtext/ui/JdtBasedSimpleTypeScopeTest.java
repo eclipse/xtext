@@ -60,6 +60,15 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 			}
 		}));
 	}
+	
+	@Test public void testGetContents_03() {
+		Iterable<IEObjectDescription> contents = typeScope.getAllElements();
+		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return "java.util.Map.Entry".equals(input.getName().toString());
+			}
+		}));
+	}
 
 	@Override
 	protected IScope getTypeScope() {

@@ -40,6 +40,13 @@ public class NullJdtTypeProvider implements IJdtTypeProvider, Resource.Factory {
 	public JvmType findTypeByName(String name) {
 		return null;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
+		return null;
+	}
 
 	public ResourceSet getResourceSet() {
 		return resourceSet;

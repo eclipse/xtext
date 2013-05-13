@@ -125,7 +125,7 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 
 		public QualifiedName getQualifiedName() {
 			if (qualifiedName == null)
-				qualifiedName = converter.toQualifiedName(constructor.getDeclaringType().getFullyQualifiedName());
+				qualifiedName = converter.toQualifiedName(constructor.getDeclaringType().getFullyQualifiedName('.'));
 			return qualifiedName;
 		}
 
@@ -182,7 +182,7 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 
 		public QualifiedName getQualifiedName() {
 			if (qualifiedName == null)
-				qualifiedName = converter.toQualifiedName(type.getFullyQualifiedName());
+				qualifiedName = converter.toQualifiedName(type.getFullyQualifiedName('.'));
 			return qualifiedName;
 		}
 

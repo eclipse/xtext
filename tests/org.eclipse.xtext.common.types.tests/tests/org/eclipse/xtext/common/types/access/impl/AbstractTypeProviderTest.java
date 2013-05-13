@@ -465,6 +465,22 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testMemberCount_05() {
 		String typeName = NestedTypes.Outer.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		doTestMemberCount_05(type);
+	}
+	
+	@Test public void testMemberCount_05_01() {
+		String typeName = NestedTypes.Outer.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, false);
+		doTestMemberCount_05(type);
+	}
+	
+	@Test public void testMemberCount_05_02() {
+		String typeName = NestedTypes.Outer.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, true);
+		assertNull(type);
+	}
+	
+	private void doTestMemberCount_05(JvmGenericType type) {
 		int methodCount = NestedTypes.Outer.class.getDeclaredMethods().length;
 		assertEquals(1, methodCount);
 		int constructorCount = NestedTypes.Outer.class.getDeclaredConstructors().length;
@@ -473,10 +489,24 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(1, nestedTypesCount);
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
 	}
-
+	
 	@Test public void testMemberCount_06() {
 		String typeName = NestedTypes.Outer.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		doTestMemberCount_06(type);
+	}
+	@Test public void testMemberCount_06_01() {
+		String typeName = NestedTypes.Outer.Inner.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, false);
+		doTestMemberCount_06(type);
+	}
+	@Test public void testMemberCount_06_02() {
+		String typeName = NestedTypes.Outer.Inner.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, true);
+		assertNull(type);
+	}
+	
+	private void doTestMemberCount_06(JvmGenericType type) {
 		int methodCount = NestedTypes.Outer.Inner.class.getDeclaredMethods().length;
 		assertEquals(1, methodCount);
 		int constructorCount = NestedTypes.Outer.Inner.class.getDeclaredConstructors().length;
@@ -503,6 +533,20 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testMemberCount_08() {
 		String typeName = StaticNestedTypes.Outer.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		doTestMemberCount_08(type);
+	}
+	@Test public void testMemberCount_08_01() {
+		String typeName = StaticNestedTypes.Outer.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, false);
+		doTestMemberCount_08(type);
+	}
+	@Test public void testMemberCount_08_02() {
+		String typeName = StaticNestedTypes.Outer.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, true);
+		assertNull(type);
+	}
+	
+	private void doTestMemberCount_08(JvmGenericType type) {
 		int methodCount = StaticNestedTypes.Outer.class.getDeclaredMethods().length;
 		assertEquals(1, methodCount);
 		int constructorCount = StaticNestedTypes.Outer.class.getDeclaredConstructors().length;
@@ -515,6 +559,19 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testMemberCount_09() {
 		String typeName = StaticNestedTypes.Outer.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		doTestMemberCount_09(type);
+	}
+	@Test public void testMemberCount_09_01() {
+		String typeName = StaticNestedTypes.Outer.Inner.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, false);
+		doTestMemberCount_09(type);
+	}
+	@Test public void testMemberCount_09_02() {
+		String typeName = StaticNestedTypes.Outer.Inner.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, true);
+		assertNull(type);
+	}
+	private void doTestMemberCount_09(JvmGenericType type) {
 		int methodCount = StaticNestedTypes.Outer.Inner.class.getDeclaredMethods().length;
 		assertEquals(1, methodCount);
 		int constructorCount = StaticNestedTypes.Outer.Inner.class.getDeclaredConstructors().length;
@@ -541,6 +598,19 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testMemberCount_11() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		doTestMemberCount_11(type);
+	}
+	@Test public void testMemberCount_11_01() {
+		String typeName = ParameterizedTypes.Inner.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, false);
+		doTestMemberCount_11(type);
+	}
+	@Test public void testMemberCount_11_02() {
+		String typeName = ParameterizedTypes.Inner.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, true);
+		assertNull(type);
+	}
+	private void doTestMemberCount_11(JvmGenericType type) {
 		int methodCount = ParameterizedTypes.Inner.class.getDeclaredMethods().length;
 		assertEquals(7, methodCount);
 		int fieldCount = ParameterizedTypes.Inner.class.getDeclaredFields().length;
@@ -567,6 +637,19 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testMemberCount_13() {
 		String typeName = Fields.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		doTestMemberCount_13(type);
+	}
+	@Test public void testMemberCount_13_01() {
+		String typeName = Fields.Inner.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, false);
+		doTestMemberCount_13(type);
+	}
+	@Test public void testMemberCount_13_02() {
+		String typeName = Fields.Inner.class.getName().replace('$', '.');
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, true);
+		assertNull(type);
+	}
+	private void doTestMemberCount_13(JvmGenericType type) {
 		int constructorCount = Fields.Inner.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount); // default constructor
 		int fieldCount = Fields.Inner.class.getDeclaredFields().length;
@@ -1656,6 +1739,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testInnerType_WrappedIterator_01() throws Exception {
 		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
 				"com.google.common.collect.AbstractMultimap$WrappedCollection$WrappedIterator");
+		doTestInnerType_WrappedIterator_01(wrappedIterator);
+	}
+	@Test public void testInnerType_WrappedIterator_01b() throws Exception {
+		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
+				"com.google.common.collect.AbstractMultimap.WrappedCollection.WrappedIterator", false);
+		doTestInnerType_WrappedIterator_01(wrappedIterator);
+	}
+	private void doTestInnerType_WrappedIterator_01(JvmGenericType wrappedIterator) {
 		assertEquals(2, Iterables.size(wrappedIterator.getDeclaredConstructors()));
 		// default constructor
 		assertTrue(Iterables.any(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
@@ -1681,6 +1772,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testInnerType_WrappedIterator_02() throws Exception {
 		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
 				"org.eclipse.xtext.common.types.testSetups.NestedParameterizedTypes$WrappedCollection$WrappedIterator");
+		doTestInnerType_WrappedIterator_02(wrappedIterator);
+	}
+	@Test public void testInnerType_WrappedIterator_02b() throws Exception {
+		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
+				"org.eclipse.xtext.common.types.testSetups.NestedParameterizedTypes.WrappedCollection.WrappedIterator", false);
+		doTestInnerType_WrappedIterator_02(wrappedIterator);
+	}
+	protected void doTestInnerType_WrappedIterator_02(JvmGenericType wrappedIterator) {
 		assertEquals(3, Iterables.size(wrappedIterator.getDeclaredConstructors()));
 		JvmConstructor constructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
@@ -1706,6 +1805,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testInnerType_WrappedIterator_03() throws Exception {
 		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
 				"org.eclipse.xtext.common.types.testSetups.NestedParameterizedTypes$WrappedCollection$WrappedIterator");
+		doTestInnerType_WrappedIterator_03(wrappedIterator);
+	}
+	@Test public void testInnerType_WrappedIterator_03b() throws Exception {
+		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
+				"org.eclipse.xtext.common.types.testSetups.NestedParameterizedTypes.WrappedCollection.WrappedIterator", false);
+		doTestInnerType_WrappedIterator_03(wrappedIterator);
+	}
+	protected void doTestInnerType_WrappedIterator_03(JvmGenericType wrappedIterator) {
 		assertEquals(3, Iterables.size(wrappedIterator.getDeclaredConstructors()));
 		JvmConstructor constructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
@@ -1818,8 +1925,21 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	
 	@Test public void testAnnotations_01() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
-		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.class.getName());
 		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName);
+		doTestAnnotation_01(target);
+	}
+	@Test public void testAnnotations_01_01() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName().replace('$', '.');
+		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName, false);
+		doTestAnnotation_01(target);
+	}
+	@Test public void testAnnotations_01_02() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName().replace('$', '.');
+		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName, true);
+		assertNull(target);
+	}
+	private void doTestAnnotation_01(JvmAnnotationTarget target) {
+		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.class.getName());
 		assertEquals(1, target.getAnnotations().size());
 		JvmAnnotationReference annotationReference = target.getAnnotations().get(0);
 		assertSame(annotationType, annotationReference.getAnnotation());
@@ -2592,6 +2712,18 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertNotNull(getTypeProvider().findTypeByName("java.util.Arrays$ArrayList"));
 	}
 	
+	@Test public void testArraysArraylist_03() {
+		assertNotNull(getTypeProvider().findTypeByName("java.util.Arrays.ArrayList", false));
+	}
+	
+	@Test public void testArraysArraylist_04() {
+		assertNotNull(getTypeProvider().findTypeByName("java.util.Arrays$ArrayList", false));
+	}
+	
+	@Test public void testArraysArraylist_05() {
+		assertNull(getTypeProvider().findTypeByName("java.util.Arrays.ArrayList", true));
+	}
+	
 	@Test public void testGoogleFunction() {
 		String functionType = Function.class.getName();
 		assertNotNull(getTypeProvider().findTypeByName(functionType));
@@ -2673,10 +2805,22 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	}
 	
 	@Test
-	public void testFindTypeByName_$StartsWithDollar() {
+	public void testFindTypeByName_$StartsWithDollar_01() {
 //		Class<org.eclipse.xtext.common.types.testSetups.$StartsWithDollar> clazz = org.eclipse.xtext.common.types.testSetups.$StartsWithDollar.class;
 		String typeName = "org.eclipse.xtext.common.types.testSetups.$StartsWithDollar";
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		doTestFindTypeByName_$StartsWithDollar(type);
+	}
+	
+	@Test
+	public void testFindTypeByName_$StartsWithDollar_02() {
+//		Class<org.eclipse.xtext.common.types.testSetups.$StartsWithDollar> clazz = org.eclipse.xtext.common.types.testSetups.$StartsWithDollar.class;
+		String typeName = "org.eclipse.xtext.common.types.testSetups.$StartsWithDollar";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, false);
+		doTestFindTypeByName_$StartsWithDollar(type);
+	}
+	
+	private void doTestFindTypeByName_$StartsWithDollar(JvmGenericType type) {
 		assertNotNull(type);
 		Iterable<String> innerTypes = Iterables.transform(Iterables.filter(type.getMembers(), JvmType.class), new Function<JvmType, String>() {
 			public String apply(JvmType input) {

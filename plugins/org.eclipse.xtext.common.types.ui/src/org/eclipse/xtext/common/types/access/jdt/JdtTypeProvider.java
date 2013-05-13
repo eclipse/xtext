@@ -93,6 +93,23 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 	
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
+		JvmType result = findTypeByName(name);
+		if (result != null || isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
+			return result;
+		}
+		ClassNameVariants nameVariants = new ClassNameVariants(name);
+		while(result == null && nameVariants.hasNext()) {
+			String nextVariant = nameVariants.next();
+			result = findTypeByName(nextVariant);
+		}
+		return result;
+	}
+	
 	@Nullable
 	private String getSignature(String name) {
 		if (Strings.isEmpty(name))

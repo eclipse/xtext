@@ -69,11 +69,17 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
 
 	@Test public void testCustomArrayList_01() throws Exception {
-		newBuilder().append("custom ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
+		newBuilder().append("custom ArrayLis").assertText(
+				"java.util.ArrayList",
+				"java.util.Arrays.ArrayList",
+				"com.google.common.collect.ArrayListMultimap");
 	}
 	
 	@Test public void testCustomArrayList_02() throws Exception {
-		newBuilder().append("import java.util.* custom ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
+		newBuilder().append("import java.util.* custom ArrayLis").assertText(
+				"ArrayList",
+				"Arrays.ArrayList",
+				"com.google.common.collect.ArrayListMultimap");
 	}
 	
 	@Test public void testDefaultBlockingQueue_01() throws Exception {
@@ -102,16 +108,16 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	
 	@Test public void testSubtypeArrayList_01() throws Exception {
 		if (isJDT_3_6_orLater())
-			newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList");
+			newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList", "java.util.Arrays.ArrayList");
 		else // hierarchy scope is broken in 3.5.2 thus we accept all types with valid prefix
-			newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
+			newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList", "java.util.Arrays.ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 	
 	@Test public void testSubtypeArrayList_02() throws Exception {
 		if (isJDT_3_6_orLater())
-			newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList");
+			newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList", "Arrays.ArrayList");
 		else // hierarchy scope is broken in 3.5.2 thus we accept all types with valid prefix
-			newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
+			newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList", "Arrays.ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 
 	@Test public void testSubtypeBlockingQueue_01() throws Exception {

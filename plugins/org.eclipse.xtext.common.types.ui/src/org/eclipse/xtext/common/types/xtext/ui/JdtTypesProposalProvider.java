@@ -173,7 +173,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						}
 						for(char[] enclosingType: enclosingTypeNames) {
 							fqName.append(enclosingType);
-							fqName.append('$');
+							fqName.append('.');
 						}
 						fqName.append(simpleTypeName);
 						String fqNameAsString = fqName.toString();
@@ -262,7 +262,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 							}
 							for(char[] enclosingType: enclosingTypeNames) {
 								fqName.append(enclosingType);
-								fqName.append('$');
+								fqName.append('.');
 							}
 							fqName.append(simpleTypeName);
 							String fqNameAsString = fqName.toString();

@@ -206,6 +206,34 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	}
 	
 	@Test
+	public void testJvmTypeNestedClassWithDot_01() {
+		Resource resource = resourceSet.createResource(URI.createURI("foo.typesRefactoring"));
+		JvmGenericType container = TypesFactory.eINSTANCE.createJvmGenericType();
+		container.setSimpleName("SimpleName");
+		container.setPackageName("package.name");
+		JvmGenericType expected = TypesFactory.eINSTANCE.createJvmGenericType();
+		expected.setSimpleName("Child");
+		container.getMembers().add(expected);
+		resource.getContents().add(container);
+		JvmType actual = getTypeProvider().findTypeByName("package.name.SimpleName.Child", false);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testJvmTypeNestedClassWithDot_02() {
+		Resource resource = resourceSet.createResource(URI.createURI("foo.typesRefactoring"));
+		JvmGenericType container = TypesFactory.eINSTANCE.createJvmGenericType();
+		container.setSimpleName("SimpleName");
+		container.setPackageName("package.name");
+		JvmGenericType expected = TypesFactory.eINSTANCE.createJvmGenericType();
+		expected.setSimpleName("Child");
+		container.getMembers().add(expected);
+		resource.getContents().add(container);
+		JvmType actual = getTypeProvider().findTypeByName("package.name.SimpleName.Child", true);
+		assertNull(actual);
+	}
+	
+	@Test
 	public void testJvmTypeArray() {
 		Resource resource = resourceSet.createResource(URI.createURI("foo.typesRefactoring"));
 		JvmGenericType expected = TypesFactory.eINSTANCE.createJvmGenericType();
