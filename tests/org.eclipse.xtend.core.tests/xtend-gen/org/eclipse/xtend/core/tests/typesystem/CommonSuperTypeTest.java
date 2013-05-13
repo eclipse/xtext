@@ -213,14 +213,16 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   protected String fixup(final String type) {
     String _elvis = null;
-    String _replace = type==null?(String)null:type.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure");
-    String _replace_1 = _replace==null?(String)null:_replace.replace("$Function<", "com.google.common.base.Function<");
-    String _replace_2 = _replace_1==null?(String)null:_replace_1.replace("$Predicate<", "com.google.common.base.Predicate<");
-    String _replace_3 = _replace_2==null?(String)null:_replace_2.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function");
-    if (_replace_3 != null) {
-      _elvis = _replace_3;
+    String _replace = type==null?(String)null:type.replace("$$Procedure", "org.eclipse.xtext.xbase.lib.Procedures.Procedure");
+    String _replace_1 = _replace==null?(String)null:_replace.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure");
+    String _replace_2 = _replace_1==null?(String)null:_replace_1.replace("$Function<", "com.google.common.base.Function<");
+    String _replace_3 = _replace_2==null?(String)null:_replace_2.replace("$Predicate<", "com.google.common.base.Predicate<");
+    String _replace_4 = _replace_3==null?(String)null:_replace_3.replace("$$Function", "org.eclipse.xtext.xbase.lib.Functions.Function");
+    String _replace_5 = _replace_4==null?(String)null:_replace_4.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function");
+    if (_replace_5 != null) {
+      _elvis = _replace_5;
     } else {
-      _elvis = ObjectExtensions.<String>operator_elvis(_replace_3, "Object");
+      _elvis = ObjectExtensions.<String>operator_elvis(_replace_5, "Object");
     }
     return _elvis;
   }
@@ -603,5 +605,16 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   @Test
   public void testCommonSuperType_70() {
     this.isSuperTypeOf("Iterable<?>", "Iterable<? super CharSequence>", "Iterable<?>");
+  }
+  
+  @Test
+  public void testCommonSuperType_71() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Object", "$$Function1<? super Object, ? extends Object>", "$$Function1<? super String, ? extends String>");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ?>");
+  }
+  
+  @Test
+  public void testCommonSuperType_72() {
+    this.isSuperTypeOf("Function1<?, ?>", "$$Function1<Object, Object>", "$$Function1<String, String>");
   }
 }

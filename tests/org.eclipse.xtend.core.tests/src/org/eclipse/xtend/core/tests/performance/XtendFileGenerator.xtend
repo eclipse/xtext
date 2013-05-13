@@ -110,7 +110,7 @@ class XtendFileGenerator {
 			
 			/**
 			 * a function accepting a closure
-			 * (Person)=>String is a synonym for org.eclipse.xtext.xbase.lib.Functions$Function1<Person,String>
+			 * (Person)=>String is a synonym for org.eclipse.xtext.xbase.lib.Functions.Function1<Person,String>
 			 * The general syntax if
 			 * (typeParam1 ,... typeParamN) => returnType
 			 */

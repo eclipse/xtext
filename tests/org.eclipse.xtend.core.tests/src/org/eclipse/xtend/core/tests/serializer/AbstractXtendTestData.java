@@ -71,6 +71,12 @@ public abstract class AbstractXtendTestData extends AbstractXtendTestCase {
 		str.append("\n");
 		str.append("class Xtend02_SimpleExpressions {\n");
 		str.append("	\n");
+		str.append("	new() {\n");
+		str.append("		super()");
+		str.append("	}\n");
+		str.append("	new(int i) {\n");
+		str.append("		this()");
+		str.append("	}\n");
 		str.append("	/**\n");
 		str.append("	 * string literals can be multi line and \n");
 		str.append("	 * can be terminated by either single quotes or double quotes\n");
@@ -84,7 +90,7 @@ public abstract class AbstractXtendTestData extends AbstractXtendTestCase {
 		str.append("	}\n");
 		str.append("	\n");
 		str.append("	def intLiteral() {\n");
-		str.append("		42 + 21\n");
+		str.append("		42 + 21 + super.hashCode\n");
 		str.append("	}\n");
 		str.append("	\n");
 		str.append("	def nullLiteral() {\n");
@@ -93,6 +99,8 @@ public abstract class AbstractXtendTestData extends AbstractXtendTestCase {
 		str.append("	\n");
 		str.append("	def objectConstruction() {\n");
 		str.append("		new ArrayList<String>()\n");
+		str.append("		new ArrayList<String>(1)\n");
+		str.append("		new ArrayList<String>(newArrayList)\n");
 		str.append("	}\n");
 		str.append("	\n");
 		str.append("	/**\n");

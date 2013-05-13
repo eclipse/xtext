@@ -40,7 +40,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	@Override
 	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
 		List<ImportNormalizer> implicitImports = super.getImplicitImports(ignoreCase);
-		implicitImports.add(new ImportNormalizer(XTEND_LIB, true, false));
+		implicitImports.add(doCreateImportNormalizer(XTEND_LIB, true, false));
 		return implicitImports;
 	}
 
@@ -51,7 +51,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context, ignoreCase);
 		String packageName = ((XtendFile) context).getPackage();
 		if (!Strings.isEmpty(packageName)) {
-			ImportNormalizer packageLocalTypes = new ImportNormalizer(getQualifiedNameConverter().toQualifiedName(packageName), true, ignoreCase);
+			ImportNormalizer packageLocalTypes = doCreateImportNormalizer(getQualifiedNameConverter().toQualifiedName(packageName), true, ignoreCase);
 			if (!importedNamespaceResolvers.isEmpty())
 				importedNamespaceResolvers.add(packageLocalTypes);
 			else

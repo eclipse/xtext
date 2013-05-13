@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -38,22 +39,14 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 			return TypeInResourceSetAdapter.class.equals(type);
 		}
 		
-		protected JvmType tryFindTypeInIndex(String name, IndexedJvmTypeAccess indexAccess, ResourceSet resourceSet) {
-			if (indexAccess != null) {
-				JvmType result = typeByQueryString.get(name);
-				if (result != null)
-					return result;
-				int index = name.indexOf('$');
-				if (index < 0)
-					index = name.indexOf('[');
-				String qualifiedNameString = index < 0 ? name : name.substring(0, index);
-				List<String> nameSegments = Strings.split(qualifiedNameString, '.');
-				QualifiedName qualifiedName = QualifiedName.create(nameSegments);
-				EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, resourceSet);
-				if (candidate instanceof JvmType) {
-					typeByQueryString.put(name, (JvmType) candidate);
-					return (JvmType) candidate;
-				}
+		protected JvmType tryFindTypeInIndex(String name, ClasspathTypeProvider typeProvider, boolean binaryNestedTypeDelimiter) {
+			JvmType result = typeByQueryString.get(name);
+			if (result != null)
+				return result;
+			JvmType candidate = typeProvider.doTryFindInIndex(name, binaryNestedTypeDelimiter);
+			if (candidate != null) {
+				typeByQueryString.put(name, candidate);
+				return candidate;
 			}
 			return null;
 		}
@@ -107,61 +100,121 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 	public ClassFinder getClassFinder() {
 		return classFinder;
 	}
-
+	
 	@Override
 	public JvmType findTypeByName(String name) {
-		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 		try {
-			/*
-			 * TODO Since most types are top level types, we could try to find a dollar sign in the name
-			 * and only use the class loaded in that case (lastIndexOf('.') to and subsequent indexOf('$')). 
-			 * The uri for top level types is easily created from the FQN.
-			 * Important note: Primitives (esp boolean and int) are used quite often and identified
-			 * by the classFinder before the class loader is used. Thus the primitives URI has to be created propertly.
-			 * Otherwise we would suffer a performance penalty. 
-			 */
-			
 			// seems to be the only reliable way to locate nested types
 			// since dollar signs are a quite good indicator but not necessarily the best
 			Class<?> clazz = classFinder.forName(name);
-			URI resourceURI = uriHelper.createResourceURI(clazz);
-			if (indexedJvmTypeAccess != null) {
-				URI proxyURI = resourceURI.appendFragment(uriHelper.getFragment(clazz));
-				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
-				if (candidate instanceof JvmType)
-					return (JvmType) candidate;
-			}
-			TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
-			return findTypeByClass(clazz, result);
+			return findTypeByClass(clazz);
 		} catch (ClassNotFoundException e) {
-			return tryFindTypeInIndex(name, indexedJvmTypeAccess);
+			return tryFindTypeInIndex(name, true);
 		} catch (NoClassDefFoundError e) { 
 			/* 
 			 * Error will be thrown if the contents of the binary class file does not match the expectation (transitively).
 			 * See java.lang.ClassLoader.defineClass(String, byte[], int, int, ProtectionDomain)
 			 */
-			return tryFindTypeInIndex(name, indexedJvmTypeAccess);
+			return tryFindTypeInIndex(name, true);
 		}
 	}
 
-	protected JvmType tryFindTypeInIndex(String name, IndexedJvmTypeAccess indexAccess) {
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
+		if (isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
+			return findTypeByName(name);
+		}
+		return doFindTypeByName(name);
+	}
+
+	private JvmType doFindTypeByName(String name) {
+		try {
+			// seems to be the only reliable way to locate nested types
+			// since dollar signs are a quite good indicator but not necessarily the best
+			Class<?> clazz = findClassByName(name);
+			return findTypeByClass(clazz);
+		} catch (ClassNotFoundException e) {
+			return tryFindTypeInIndex(name, false);
+		} catch (NoClassDefFoundError e) { 
+			/* 
+			 * Error will be thrown if the contents of the binary class file does not match the expectation (transitively).
+			 * See java.lang.ClassLoader.defineClass(String, byte[], int, int, ProtectionDomain)
+			 */
+			return tryFindTypeInIndex(name, false);
+		}
+	}
+
+	private JvmType findTypeByClass(Class<?> clazz) {
+		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
+		URI resourceURI = uriHelper.createResourceURI(clazz);
+		if (indexedJvmTypeAccess != null) {
+			URI proxyURI = resourceURI.appendFragment(uriHelper.getFragment(clazz));
+			EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
+			if (candidate instanceof JvmType)
+				return (JvmType) candidate;
+		}
+		TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
+		return findTypeByClass(clazz, result);
+	}
+
+	private Class<?> findClassByName(String name) throws ClassNotFoundException {
+		try {
+			Class<?> clazz = classFinder.forName(name);
+			return clazz;
+		} catch(ClassNotFoundException exception) {
+			ClassNameVariants variants = new ClassNameVariants(name);
+			while(variants.hasNext()) {
+				try {
+					String nextName = variants.next();
+					Class<?> clazz = classFinder.forName(nextName);
+					return clazz;
+				} catch(ClassNotFoundException ignore) {
+				}
+			}
+			throw exception;
+		}
+	}
+
+	protected JvmType tryFindTypeInIndex(String name, boolean binaryNestedTypeDelimiter) {
 		TypeInResourceSetAdapter adapter = (TypeInResourceSetAdapter) EcoreUtil.getAdapter(getResourceSet().eAdapters(), TypeInResourceSetAdapter.class);
 		if (adapter != null) {
-			return adapter.tryFindTypeInIndex(name, indexAccess, getResourceSet());
+			return adapter.tryFindTypeInIndex(name, this, binaryNestedTypeDelimiter);
 		} else {
-			if (indexAccess != null) {
-				int index = name.indexOf('$');
-				if (index < 0)
-					index = name.indexOf('[');
-				String qualifiedNameString = index < 0 ? name : name.substring(0, index);
-				List<String> nameSegments = Strings.split(qualifiedNameString, '.');
-				QualifiedName qualifiedName = QualifiedName.create(nameSegments);
-				EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
-				if (candidate instanceof JvmType)
-					return (JvmType) candidate;
-			}
-			return null;
+			return doTryFindInIndex(name, binaryNestedTypeDelimiter);
 		}
+	}
+
+	@Nullable
+	private JvmType doTryFindInIndex(String name, boolean binaryNestedTypeDelimiter) {
+		IndexedJvmTypeAccess indexAccess = getIndexedJvmTypeAccess();
+		if (indexAccess != null) {
+			JvmType result = doTryFindInIndex(name, indexAccess);
+			if (result == null && !isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
+				ClassNameVariants variants = new ClassNameVariants(name);
+				while(result == null && variants.hasNext()) {
+					String nextVariant = variants.next();
+					result = doTryFindInIndex(nextVariant, indexAccess);
+				}
+			}
+			return result;
+		}
+		return null;
+	}
+
+	private JvmType doTryFindInIndex(String name, IndexedJvmTypeAccess indexAccess) {
+		int index = name.indexOf('$');
+		if (index < 0)
+			index = name.indexOf('[');
+		String qualifiedNameString = index < 0 ? name : name.substring(0, index);
+		List<String> nameSegments = Strings.split(qualifiedNameString, '.');
+		QualifiedName qualifiedName = QualifiedName.create(nameSegments);
+		EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
+		if (candidate instanceof JvmType)
+			return (JvmType) candidate;
+		return null;
 	}
 	
 	@Override

@@ -428,6 +428,58 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   }
   
   @Test
+  public void formatPreferencesExample_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Movies {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def settings(XtendFormatterConfig config) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val List<FormatterSetting> settings = newArrayList()");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for (entry : config.namedProperties.entrySet) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val key = entry.key");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val category = key.split(\".\").head");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("var catEnum = Category::byName(category)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if (catEnum == null)");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("catEnum = Category::OTHER");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("settings.add(");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("createSetting(catEnum, SettingsData::WidgetType::NUMBER_FIELD,");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("key, key.toFirstUpper, newArrayList(entry.value.name)))");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return settings");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
   public void typeReferenceIntegration() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*");

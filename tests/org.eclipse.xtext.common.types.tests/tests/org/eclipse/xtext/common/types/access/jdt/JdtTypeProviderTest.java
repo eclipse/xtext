@@ -236,25 +236,23 @@ public class JdtTypeProviderTest extends AbstractJdtTypeProviderTest {
 	@Override
 	@Test
 	@Ignore("TODO This one fails due to a bug in JDT for binary types")
-	public void testFindTypeByName_$StartsWithDollar() {
-		super.testFindTypeByName_$StartsWithDollar();
+	public void testFindTypeByName_$StartsWithDollar_01() {
+		super.testFindTypeByName_$StartsWithDollar_01();
 	}
 	
 	@Override
-	@Test
-	@Ignore("TODO This one fails due to a bug in JDT for parameter annotations of binary, inner constructor")
-	public void testInnerType_WrappedIterator_02() throws Exception {
-		super.testInnerType_WrappedIterator_02();
+	protected void doTestInnerType_WrappedIterator_02(JvmGenericType wrappedIterator) {
+		assertNotNull(wrappedIterator);
 	}
 	
 	@Override
-	@Test
-	@Ignore("TODO This one fails due to a bug in JDT for parameter annotations of binary, inner constructor")
-	public void testInnerType_WrappedIterator_03() throws Exception {
-		super.testInnerType_WrappedIterator_03();
+	protected void doTestInnerType_WrappedIterator_03(JvmGenericType wrappedIterator) {
+		// TODO This one fails due to a bug in JDT for parameter annotations of binary, inner constructor
+		assertNotNull(wrappedIterator);
 	}
 
 	// tests for the presence of the bug above
+	@Override
 	@Test
 	public void testFindTypeByName_$StartsWithDollar_02() {
 		String typeName = "org.eclipse.xtext.common.types.testSetups.$StartsWithDollar";

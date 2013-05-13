@@ -662,7 +662,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource$Factory$Registry");
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Registry");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("class Foo {");
@@ -705,6 +705,236 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
+  @Test
+  public void testInnerClasses_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def void test(org.eclipse.emf.ecore.resource.Resource.Factory a, org.eclipse.emf.ecore.resource.Resource.Factory.Registry b) {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def void test(Resource.Factory a, Resource.Factory.Registry b) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClasses_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val x = Resource::Factory::Registry::INSTANCE");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val y = EPackage::Registry::INSTANCE");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.emf.ecore.EPackage");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("val x = Resource::Factory::Registry::INSTANCE");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("val y = EPackage::Registry::INSTANCE");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
+  @Test
+  public void testInnerClasses_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("typeof(org.eclipse.emf.ecore.resource.Resource.Factory) == typeof(org.eclipse.emf.ecore.resource.Resource.Factory.Registry)");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("\t ");
+    _builder_1.append("typeof(Resource.Factory) == typeof(Resource.Factory.Registry)");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClasses_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("typeof(Resource.Factory.Registry) == typeof(EPackage.Registry)");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.emf.ecore.EPackage");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("typeof(Resource.Factory.Registry) == typeof(EPackage.Registry)");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClasses_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Registry");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("typeof(Registry)");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Registry");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("typeof(Registry)");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClasses_12() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Resource {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val x = org::eclipse::emf::ecore::resource::Resource::Factory::Registry::INSTANCE");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Resource {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("val x = org::eclipse::emf::ecore::resource::Resource::Factory::Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -885,7 +1115,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testNameClashInnerClasses() {
+  public void testNameClashInnerClasses_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtext.xbase.XbasePackage");
     _builder.newLine();
@@ -922,7 +1152,44 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testNameClashInnerClassesWithPreference() {
+  public void testNameClashInnerClasses_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.XbasePackage");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def void test(XbasePackage.Literals x, XAnnotationsPackage.Literals y) {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.XbasePackage");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def void test(XbasePackage.Literals x, XAnnotationsPackage.Literals y) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNameClashInnerClassesWithPreference_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtext.xbase.XbasePackage$Literals");
     _builder.newLine();
@@ -940,7 +1207,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.xtext.xbase.XbasePackage$Literals");
+    _builder_1.append("import org.eclipse.xtext.xbase.XbasePackage.Literals");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
     _builder_1.newLine();
@@ -949,6 +1216,43 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("def void test(Literals x, XAnnotationsPackage$Literals y) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNameClashInnerClassesWithPreference_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.XbasePackage.Literals");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def void test(Literals x, XAnnotationsPackage.Literals y) {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.XbasePackage.Literals");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def void test(Literals x, XAnnotationsPackage.Literals y) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1562,7 +1866,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("package foo.bar");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import java.util.Map$Entry");
+    _builder_1.append("import java.util.Map.Entry");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("class Foo {");
@@ -1777,7 +2081,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("package foo.bar");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor");
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("class Foo {");
@@ -1797,7 +2101,351 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testFunctionTypes_afterResolve() {
+  public void testInnerClassImport_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import java.util.Map.Entry");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def Entry test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map.Entry");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def Entry test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClassImport_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import java.util.Map");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def Map.Entry test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def Map.Entry test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClassImport_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import java.util.Map.Entry");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def Map.Entry test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def Map.Entry test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClassImport_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def Resource.Factory.Descriptor test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def Resource.Factory.Descriptor test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClassImport_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def Resource.Factory.Descriptor test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def Resource.Factory.Descriptor test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClassImport_12() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def Descriptor test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def Descriptor test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClassImport_13() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import java.util.Map.Entry");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def Map$Entry test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def Map$Entry test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInnerClassImport_14() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import java.util.Map$Entry");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def Map.Entry test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def Map.Entry test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testFunctionTypes_afterResolve_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo.bar");
     _builder.newLine();
@@ -1820,7 +2468,50 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("package foo.bar");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import java.util.Map$Entry");
+    _builder_1.append("import java.util.Map.Entry");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def (Entry)=>void test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testFunctionTypes_afterResolve_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.append("import java.util.Map.Entry");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def (Entry)=>void test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map.Entry");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("class Foo {");
@@ -2065,7 +2756,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("package foo.bar");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.service.DispatchingProvider$Runtime");
+    _builder_1.append("import org.eclipse.xtext.service.DispatchingProvider.Runtime");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@Runtime");
@@ -2100,6 +2791,130 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@DispatchingProvider$Runtime");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNestedAnnotation_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.service.DispatchingProvider.Runtime");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Runtime");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.service.DispatchingProvider.Runtime");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Runtime");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNestedAnnotation_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.service.DispatchingProvider.Runtime");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@DispatchingProvider.Runtime");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.service.DispatchingProvider");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@DispatchingProvider.Runtime");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNestedAnnotation_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.service.DispatchingProvider.Runtime");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@DispatchingProvider$Runtime");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.service.DispatchingProvider");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@DispatchingProvider$Runtime");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNestedAnnotation_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.service.DispatchingProvider$Runtime");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@DispatchingProvider.Runtime");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.service.DispatchingProvider");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@DispatchingProvider.Runtime");
     _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -2297,7 +3112,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testInheritedInnerClass() {
+  public void testInheritedInnerClass_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo extends types.OuterClass {");
     _builder.newLine();
@@ -2314,6 +3129,30 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("OuterClass$MiddleClass foo");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testInheritedInnerClass_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo extends types.OuterClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("types.OuterClass.MiddleClass foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import types.OuterClass");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo extends OuterClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("OuterClass.MiddleClass foo");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

@@ -94,9 +94,11 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	}
 	
 	def protected String fixup(String type) {
-		type?.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure")
+		type?.replace("$$Procedure", "org.eclipse.xtext.xbase.lib.Procedures.Procedure")
+			?.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure")
 			?.replace("$Function<", "com.google.common.base.Function<")
 			?.replace("$Predicate<", "com.google.common.base.Predicate<")
+			?.replace("$$Function", "org.eclipse.xtext.xbase.lib.Functions.Function")
 			?.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function")
 			?:'Object'
 	}

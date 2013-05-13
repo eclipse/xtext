@@ -267,7 +267,6 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  }
 			}
 		''')
-
 	}
 
 	@Test def testInnerClasses_02() {
@@ -344,7 +343,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  }
 			}
 		'''.assertIsOrganizedTo('''
-			import org.eclipse.emf.ecore.resource.Resource$Factory$Registry
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Registry
 
 			class Foo {
 			  def test() {
@@ -365,6 +364,122 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			class Resource {
 			  def test() {
 			    val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE
+			  }
+			}
+		''', false)
+	}
+	
+	@Test def testInnerClasses_07() {
+		'''
+			class Foo {
+			  def void test(org.eclipse.emf.ecore.resource.Resource.Factory a, org.eclipse.emf.ecore.resource.Resource.Factory.Registry b) {
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.emf.ecore.resource.Resource
+
+			class Foo {
+			  def void test(Resource.Factory a, Resource.Factory.Registry b) {
+			  }
+			}
+		''')
+	}
+	
+	@Test def testInnerClasses_08() {
+		'''
+			import org.eclipse.emf.ecore.resource.Resource
+			import org.eclipse.emf.ecore.EPackage
+
+			class Foo {
+			  def test() {
+			    val x = Resource::Factory::Registry::INSTANCE
+			    val y = EPackage::Registry::INSTANCE
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.emf.ecore.EPackage
+			import org.eclipse.emf.ecore.resource.Resource
+
+			class Foo {
+			  def test() {
+			    val x = Resource::Factory::Registry::INSTANCE
+			    val y = EPackage::Registry::INSTANCE
+			  }
+			}
+		''', false)
+	}
+
+	@Test def testInnerClasses_09() {
+		'''
+			class Foo {
+			  def test() {
+				 typeof(org.eclipse.emf.ecore.resource.Resource.Factory) == typeof(org.eclipse.emf.ecore.resource.Resource.Factory.Registry)
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.emf.ecore.resource.Resource
+
+			class Foo {
+			  def test() {
+				 typeof(Resource.Factory) == typeof(Resource.Factory.Registry)
+			  }
+			}
+		''')
+	}
+
+	@Test def testInnerClasses_10() {
+		'''
+			import org.eclipse.emf.ecore.resource.Resource
+			import org.eclipse.emf.ecore.EPackage
+
+			class Foo {
+			  def test() {
+			    typeof(Resource.Factory.Registry) == typeof(EPackage.Registry)
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.emf.ecore.EPackage
+			import org.eclipse.emf.ecore.resource.Resource
+
+			class Foo {
+			  def test() {
+			    typeof(Resource.Factory.Registry) == typeof(EPackage.Registry)
+			  }
+			}
+		''')
+	}
+
+	@Test def testInnerClasses_11() {
+		'''
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Registry
+
+			class Foo {
+			  def test() {
+			    typeof(Registry)
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Registry
+
+			class Foo {
+			  def test() {
+			    typeof(Registry)
+			  }
+			}
+		''')
+	}
+	
+	@Test def testInnerClasses_12() {
+		'''
+			class Resource {
+			  def test() {
+			    val x = org::eclipse::emf::ecore::resource::Resource::Factory::Registry::INSTANCE
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			class Resource {
+			  def test() {
+			    val x = org::eclipse::emf::ecore::resource::Resource::Factory::Registry::INSTANCE
 			  }
 			}
 		''', false)
@@ -462,7 +577,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 
-	@Test def testNameClashInnerClasses() {
+	@Test def testNameClashInnerClasses_01() {
 		'''
 			import org.eclipse.xtext.xbase.XbasePackage
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
@@ -482,8 +597,27 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 
+	@Test def testNameClashInnerClasses_02() {
+		'''
+			import org.eclipse.xtext.xbase.XbasePackage
+			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
-	@Test def testNameClashInnerClassesWithPreference() {
+			class Foo {
+			  def void test(XbasePackage.Literals x, XAnnotationsPackage.Literals y) {
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.xtext.xbase.XbasePackage
+			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
+			class Foo {
+			  def void test(XbasePackage.Literals x, XAnnotationsPackage.Literals y) {
+			  }
+			}
+		''')
+	}
+
+	@Test def testNameClashInnerClassesWithPreference_01() {
 		'''
 			import org.eclipse.xtext.xbase.XbasePackage$Literals
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
@@ -493,11 +627,31 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  }
 			}
 		'''.assertIsOrganizedTo('''
-			import org.eclipse.xtext.xbase.XbasePackage$Literals
+			import org.eclipse.xtext.xbase.XbasePackage.Literals
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 			class Foo {
 			  def void test(Literals x, XAnnotationsPackage$Literals y) {
+			  }
+			}
+		''')
+	}
+
+	@Test def testNameClashInnerClassesWithPreference_02() {
+		'''
+			import org.eclipse.xtext.xbase.XbasePackage.Literals
+			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
+			class Foo {
+			  def void test(Literals x, XAnnotationsPackage.Literals y) {
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.xtext.xbase.XbasePackage.Literals
+			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
+			class Foo {
+			  def void test(Literals x, XAnnotationsPackage.Literals y) {
 			  }
 			}
 		''')
@@ -799,7 +953,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			package foo.bar
 
-			import java.util.Map$Entry
+			import java.util.Map.Entry
 
 			class Foo {
 			  def Entry test() {
@@ -909,7 +1063,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			package foo.bar
 
-			import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor
 
 			class Foo {
 			  def Descriptor test() {
@@ -918,8 +1072,184 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test def testInnerClassImport_07() {
+		'''
+			package foo.bar
+			import java.util.Map.Entry
+			class Foo {
+			  def Entry test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
 
-	@Test def testFunctionTypes_afterResolve() {
+			import java.util.Map.Entry
+
+			class Foo {
+			  def Entry test() {
+			    return null
+			  }
+			}
+		''')
+	}
+
+	@Test def testInnerClassImport_08() {
+		'''
+			package foo.bar
+			import java.util.Map
+			class Foo {
+			  def Map.Entry test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import java.util.Map
+
+			class Foo {
+			  def Map.Entry test() {
+			    return null
+			  }
+			}
+		''')
+	}
+
+	@Test def testInnerClassImport_09() {
+		'''
+			package foo.bar
+			import java.util.Map.Entry
+			class Foo {
+			  def Map.Entry test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import java.util.Map
+
+			class Foo {
+			  def Map.Entry test() {
+			    return null
+			  }
+			}
+		''')
+	}
+
+	@Test def testInnerClassImport_10() {
+		'''
+			package foo.bar
+			import org.eclipse.emf.ecore.resource.Resource
+			class Foo {
+			  def Resource.Factory.Descriptor test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import org.eclipse.emf.ecore.resource.Resource
+
+			class Foo {
+			  def Resource.Factory.Descriptor test() {
+			    return null
+			  }
+			}
+		''')
+	}
+
+	@Test def testInnerClassImport_11() {
+		'''
+			package foo.bar
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor
+			class Foo {
+			  def Resource.Factory.Descriptor test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import org.eclipse.emf.ecore.resource.Resource
+
+			class Foo {
+			  def Resource.Factory.Descriptor test() {
+			    return null
+			  }
+			}
+		''')
+	}
+
+	@Test def testInnerClassImport_12() {
+		'''
+			package foo.bar
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor
+			class Foo {
+			  def Descriptor test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor
+
+			class Foo {
+			  def Descriptor test() {
+			    return null
+			  }
+			}
+		''')
+	}
+	
+	@Test def testInnerClassImport_13() {
+		'''
+			package foo.bar
+			import java.util.Map.Entry
+			class Foo {
+			  def Map$Entry test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import java.util.Map
+
+			class Foo {
+			  def Map$Entry test() {
+			    return null
+			  }
+			}
+		''')
+	}
+	
+	@Test def testInnerClassImport_14() {
+		'''
+			package foo.bar
+			import java.util.Map$Entry
+			class Foo {
+			  def Map.Entry test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import java.util.Map
+
+			class Foo {
+			  def Map.Entry test() {
+			    return null
+			  }
+			}
+		''')
+	}
+
+	@Test def testFunctionTypes_afterResolve_01() {
 		'''
 			package foo.bar
 			import java.util.Map$Entry
@@ -931,7 +1261,29 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			package foo.bar
 
-			import java.util.Map$Entry
+			import java.util.Map.Entry
+
+			class Foo {
+			  def (Entry)=>void test() {
+			    return null
+			  }
+			}
+		''')
+	}
+
+	@Test def testFunctionTypes_afterResolve_02() {
+		'''
+			package foo.bar
+			import java.util.Map.Entry
+			class Foo {
+			  def (Entry)=>void test() {
+			    return null
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import java.util.Map.Entry
 
 			class Foo {
 			  def (Entry)=>void test() {
@@ -1065,7 +1417,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			package foo.bar
 
-			import org.eclipse.xtext.service.DispatchingProvider$Runtime
+			import org.eclipse.xtext.service.DispatchingProvider.Runtime
 
 			@Runtime
 			class Foo {
@@ -1088,6 +1440,86 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import org.eclipse.xtext.service.DispatchingProvider
 
 			@DispatchingProvider$Runtime
+			class Foo {
+			}
+		''')
+	}
+	
+	@Test def testNestedAnnotation_03() {
+		'''
+			package foo.bar
+
+			import org.eclipse.xtext.service.DispatchingProvider.Runtime
+
+			@Runtime
+			class Foo {
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import org.eclipse.xtext.service.DispatchingProvider.Runtime
+
+			@Runtime
+			class Foo {
+			}
+		''')
+	}
+
+	@Test def testNestedAnnotation_04() {
+		'''
+			package foo.bar
+
+			import org.eclipse.xtext.service.DispatchingProvider.Runtime
+
+			@DispatchingProvider.Runtime
+			class Foo {
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import org.eclipse.xtext.service.DispatchingProvider
+
+			@DispatchingProvider.Runtime
+			class Foo {
+			}
+		''')
+	}
+	
+	@Test def testNestedAnnotation_05() {
+		'''
+			package foo.bar
+
+			import org.eclipse.xtext.service.DispatchingProvider.Runtime
+
+			@DispatchingProvider$Runtime
+			class Foo {
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import org.eclipse.xtext.service.DispatchingProvider
+
+			@DispatchingProvider$Runtime
+			class Foo {
+			}
+		''')
+	}
+	
+	@Test def testNestedAnnotation_06() {
+		'''
+			package foo.bar
+
+			import org.eclipse.xtext.service.DispatchingProvider$Runtime
+
+			@DispatchingProvider.Runtime
+			class Foo {
+			}
+		'''.assertIsOrganizedTo('''
+			package foo.bar
+
+			import org.eclipse.xtext.service.DispatchingProvider
+
+			@DispatchingProvider.Runtime
 			class Foo {
 			}
 		''')
@@ -1193,7 +1625,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	@Test def testInheritedInnerClass() {
+	@Test def testInheritedInnerClass_01() {
 		'''
 			class Foo extends types.OuterClass {
 				types.OuterClass$MiddleClass foo
@@ -1203,6 +1635,20 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			
 			class Foo extends OuterClass {
 				OuterClass$MiddleClass foo
+			}
+		''')
+	}
+	
+	@Test def testInheritedInnerClass_02() {
+		'''
+			class Foo extends types.OuterClass {
+				types.OuterClass.MiddleClass foo
+			}
+		'''.assertIsOrganizedTo('''
+			import types.OuterClass
+			
+			class Foo extends OuterClass {
+				OuterClass.MiddleClass foo
 			}
 		''')
 	}

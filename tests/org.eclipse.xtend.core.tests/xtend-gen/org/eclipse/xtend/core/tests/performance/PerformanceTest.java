@@ -214,6 +214,46 @@ public class PerformanceTest extends AbstractXtendTestCase {
    * Task 'LightweightTypeReference#collectSuperTypes' took 1ms (62 measurements).
    * Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 32ms (11370 measurements).
    * -------------------------------------------------------------------------------------------------------------------------
+   * 
+   * Before '.' as nested class delimiter:
+   * Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+   * -------------------------------------------------------------------------------------------------------------------------
+   * Task 'PerformanceTest.doCompile' took 8366ms (3 measurements).
+   * Task 'AbstractParser.parse' took 513ms (171 measurements).
+   * Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 409ms (171 measurements).
+   * Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 421ms (171 measurements).
+   * Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 138ms (171 measurements).
+   * Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 1ms (171 measurements).
+   * Task 'ResourceValidatorImpl.validation' took 6980ms (171 measurements).
+   * Task 'DefaultReentrantTypeResolver.resolve' took 5119ms (342 measurements).
+   * Task 'StaticExtensionImportsScope.getLocalElementsByName' took 848ms (16962 measurements).
+   * Task 'StaticImportsScope.getLocalElementsByName' took 3ms (1866 measurements).
+   * -------------------------------------------------------------------------------------------------------------------------
+   * After '.' as nested class delimiter:
+   * Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+   * -------------------------------------------------------------------------------------------------------------------------
+   * Task 'PerformanceTest.doCompile' took 12666ms (3 measurements).
+   * Task 'AbstractParser.parse' took 512ms (171 measurements).
+   * Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 440ms (171 measurements).
+   * Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 749ms (171 measurements).
+   * Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 318ms (171 measurements).
+   * Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (171 measurements).
+   * Task 'ResourceValidatorImpl.validation' took 10917ms (171 measurements).
+   * Task 'DefaultReentrantTypeResolver.resolve' took 7794ms (342 measurements).
+   * Task 'StaticExtensionImportsScope.getLocalElementsByName' took 971ms (16962 measurements).
+   * Task 'StaticImportsScope.getLocalElementsByName' took 5ms (1866 measurements).
+   * -------------------------------------------------------------------------------------------------------------------------
+   * Test 'doCompile(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+   * -------------------------------------------------------------------------------------------------------------------------
+   * Task 'PerformanceTest.doCompile' took 9396ms (1 measurements).
+   * Task 'AbstractParser.parse' took 762ms (57 measurements).
+   * Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 516ms (57 measurements).
+   * Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 1631ms (57 measurements).
+   * Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 1082ms (57 measurements).
+   * Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 1ms (57 measurements).
+   * Task 'ResourceValidatorImpl.validation' took 6433ms (57 measurements).
+   * Task 'DefaultReentrantTypeResolver.resolve' took 4842ms (114 measurements).
+   * -------------------------------------------------------------------------------------------------------------------------
    */
   @Test
   public void doCompile() {
@@ -251,6 +291,12 @@ public class PerformanceTest extends AbstractXtendTestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  @Ignore
+  public void doCompileAgain() {
+    this.doCompile();
   }
   
   @Test
