@@ -87,23 +87,21 @@ public class IndexedJvmTypeAccess {
 	public EObject getIndexedJvmType(QualifiedName qualifiedName, String fragment, ResourceSet resourceSet) {
 		if (resourceSet != null) {
 			IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(resourceSet);
-			if (descriptions != null) {
-				Iterable<IEObjectDescription> candidates = descriptions.getExportedObjects(TypesPackage.Literals.JVM_TYPE, qualifiedName, false);
-				Iterator<IEObjectDescription> iterator = candidates.iterator();
-				if (iterator.hasNext()) {
-					IEObjectDescription description = iterator.next();
-					EObject typeProxy = description.getEObjectOrProxy();
-					if (typeProxy.eIsProxy()) {
-						typeProxy = EcoreUtil.resolve(typeProxy, resourceSet);
-					}
-					if (!typeProxy.eIsProxy() && typeProxy instanceof JvmType) {
-						if (fragment != null) {
-							EObject result = resolveJavaObject((JvmType) typeProxy, fragment);
-							if (result != null)
-								return result;
-						} else
-							return typeProxy;
-					}
+			Iterable<IEObjectDescription> candidates = descriptions.getExportedObjects(TypesPackage.Literals.JVM_TYPE, qualifiedName, false);
+			Iterator<IEObjectDescription> iterator = candidates.iterator();
+			if (iterator.hasNext()) {
+				IEObjectDescription description = iterator.next();
+				EObject typeProxy = description.getEObjectOrProxy();
+				if (typeProxy.eIsProxy()) {
+					typeProxy = EcoreUtil.resolve(typeProxy, resourceSet);
+				}
+				if (!typeProxy.eIsProxy() && typeProxy instanceof JvmType) {
+					if (fragment != null) {
+						EObject result = resolveJavaObject((JvmType) typeProxy, fragment);
+						if (result != null)
+							return result;
+					} else
+						return typeProxy;
 				}
 			}
 		}
@@ -138,6 +136,9 @@ public class IndexedJvmTypeAccess {
 			if (rootType.getIdentifier().equals(fragment)) {
 				return rootType;
 			}
+			if (rootType.getIdentifier().length() >= fragment.length()) {
+				return null;
+			}
 			int paren = fragment.indexOf('(');
 			if (paren == -1)
 				paren = fragment.length();
@@ -145,7 +146,8 @@ public class IndexedJvmTypeAccess {
 			int dot = fragment.lastIndexOf('.', paren);
 			final int max = Math.max(dollar, dot);
 			if (max == -1) {
-				logger.warn("Couldn't resolve java object for root type "+rootType.getQualifiedName()+" and fragment '"+fragment + "'");
+				if (logger.isDebugEnabled())
+					logger.debug("Couldn't resolve java object for root type "+rootType.getQualifiedName()+" and fragment '"+fragment + "'");
 				return null;
 			}
 			String subFragment = fragment.substring(0, max);

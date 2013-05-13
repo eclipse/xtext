@@ -263,16 +263,19 @@ public class TypeUsageCollector {
 			if (nodes.size() == 1) {
 				String text = NodeModelUtils.getTokenText(nodes.get(0));
 				if (!referencedType.eIsProxy()) {
-					int dollar = text.lastIndexOf('$');
-					String preferredTypeText = text; 
-					if (dollar >= 0) {
-						JvmDeclaredType declaredType = referencedType;
-						while(declaredType.getDeclaringType() != null && dollar >= 0) {
-							declaredType = declaredType.getDeclaringType();
-							preferredTypeText = text.substring(0, dollar);
-							dollar = text.lastIndexOf('$', dollar-1);
+					Pair<JvmDeclaredType, String> result = findPreferredText(referencedType, text, "$");
+					if (result != null) {
+						return result;
+					}
+					result = findPreferredText(referencedType, text, ".");
+					if (result != null) {
+						return result;
+					}
+					if (text.endsWith("::")) {
+						result = findPreferredText(referencedType, text.substring(0, text.length() - 2), "::");
+						if (result != null) {
+							return result;
 						}
-						return Tuples.create(declaredType, preferredTypeText);
 					}
 				} else {
 					int dollar = text.indexOf('$');
@@ -286,6 +289,20 @@ public class TypeUsageCollector {
 			}
 		}
 		return Tuples.create(referencedType, null);
+	}
+
+	private Pair<JvmDeclaredType,String> findPreferredText(JvmDeclaredType referencedType, String text, String delimiter) {
+		int idx = text.lastIndexOf(delimiter);
+		if (idx >= 0) {
+			JvmDeclaredType declaredType = referencedType;
+			while(declaredType.getDeclaringType() != null && idx >= 0) {
+				declaredType = declaredType.getDeclaringType();
+				text = text.substring(0, idx);
+				idx = text.lastIndexOf(delimiter, idx-1);
+			}
+			return Tuples.create(declaredType, text);
+		}
+		return null;
 	}
 	
 	protected void acceptPreferredType(EObject owner, EReference referenceToTypeOrMember) {

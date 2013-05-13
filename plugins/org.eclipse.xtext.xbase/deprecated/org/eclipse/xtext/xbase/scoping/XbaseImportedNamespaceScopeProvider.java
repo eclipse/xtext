@@ -109,7 +109,7 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		
 		// local element
 		if (name!=null) {
-			ImportNormalizer localNormalizer = new ImportNormalizer(name, true, ignoreCase); 
+			ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
 			result = createImportScope(result, singletonList(localNormalizer), resourceOnlySelectable, reference.getEReferenceType(), ignoreCase);
 		}
 		
@@ -163,7 +163,8 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 	}
 	
 	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
-		return singletonList(new ImportNormalizer(QualifiedName.create("java","lang"), true, ignoreCase));
+		return Collections.<ImportNormalizer>singletonList(
+				doCreateImportNormalizer(QualifiedName.create("java","lang"), true, ignoreCase));
 	}
 	
 	protected ImportScope createImportScope(IScope parent, List<ImportNormalizer> namespaceResolvers, ISelectable importFrom, EClass type, boolean ignoreCase) {
@@ -249,9 +250,8 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		}
 	}
 
-	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard,
-			boolean ignoreCase) {
-		return new NestedTypeAwareImportNormalizer(importedNamespace, wildcard, ignoreCase);
+	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard,	boolean ignoreCase) {
+		return AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(importedNamespace, wildcard, ignoreCase);
 	}
 
 	protected QualifiedName getQualifiedNameOfLocalElement(final EObject context) {
