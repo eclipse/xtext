@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
-import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.util.Collections;
@@ -119,7 +118,7 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 		
 		// local element
 		if (name!=null) {
-			ImportNormalizer localNormalizer = new ImportNormalizer(name, true, ignoreCase); 
+			ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
 			result = createImportScope(result, singletonList(localNormalizer), resourceOnlySelectable, reference.getEReferenceType(), ignoreCase);
 		}
 		
@@ -172,32 +171,20 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 		return result;
 	}
 	
+	/**
+	 * @param ignoreCase {@code true} if the import normalizer should use case insensitive compare logic. 
+	 */
 	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
-		return newArrayList(
-				new ImportNormalizer(JAVA_LANG, true, false),
-				new ImportNormalizer(XBASE_LIB, true, false));
+		return Lists.<ImportNormalizer>newArrayList(
+				doCreateImportNormalizer(JAVA_LANG, true, false),
+				doCreateImportNormalizer(XBASE_LIB, true, false));
 	}
 	
 	protected ImportScope createImportScope(IScope parent, List<ImportNormalizer> namespaceResolvers, ISelectable importFrom, EClass type, boolean ignoreCase) {
 		if (importFrom == null)
 			throw new NullPointerException("importFrom");
 		
-		return new ImportScope(namespaceResolvers, parent, importFrom, type, ignoreCase) {
-			@Override
-			protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
-				if (name.getSegmentCount() > 1)
-					return null;
-				final IEObjectDescription result = super.getSingleLocalElementByName(name);
-				return result;
-			}
-			
-			@Override
-			protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-				if (name.getSegmentCount() > 1)
-					return Collections.emptyList();
-				return super.getLocalElementsByName(name);
-			}
-		};
+		return new ImportScope(namespaceResolvers, parent, importFrom, type, ignoreCase);
 	}
 	
 	protected Object getKey(Notifier context, EReference reference) {
@@ -267,7 +254,7 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 
 	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard,
 			boolean ignoreCase) {
-		return new NestedTypeAwareImportNormalizer(importedNamespace, wildcard, ignoreCase);
+		return AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(importedNamespace, wildcard, ignoreCase);
 	}
 
 	protected QualifiedName getQualifiedNameOfLocalElement(final EObject context) {

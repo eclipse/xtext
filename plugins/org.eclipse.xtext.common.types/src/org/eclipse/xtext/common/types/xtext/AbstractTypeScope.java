@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.xtext;
 
 import static java.util.Collections.*;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -51,7 +52,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	@Override
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		try {
-			JvmType type = typeProvider.findTypeByName(qualifiedNameConverter.toString(name));
+			JvmType type = typeProvider.findTypeByName(qualifiedNameConverter.toString(name), false);
 			if (type == null)
 				return null;
 			IEObjectDescription result = EObjectDescription.create(name, type);
@@ -74,10 +75,18 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	@Override
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		if (object instanceof JvmIdentifiableElement) {
-			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(
-					qualifiedNameConverter.toQualifiedName(((JvmIdentifiableElement) object).getQualifiedName()),
-					object));
-			return filterResult(result);
+			JvmIdentifiableElement identifiable = ((JvmIdentifiableElement) object);
+			String qualifiedNameWithDots = identifiable.getQualifiedName('.');
+			String qualifiedNameWithDollar = identifiable.getQualifiedName();
+			if (qualifiedNameWithDollar.equals(qualifiedNameWithDots)) {
+				final Set<IEObjectDescription> result = singleton(
+						EObjectDescription.create(qualifiedNameConverter.toQualifiedName(qualifiedNameWithDots), object));
+				return filterResult(result);
+			} else {
+				return filterResult(Arrays.asList(
+						EObjectDescription.create(qualifiedNameConverter.toQualifiedName(qualifiedNameWithDots), object),
+						EObjectDescription.create(qualifiedNameConverter.toQualifiedName(qualifiedNameWithDollar), object)));
+			}
 		}
 		return emptySet();
 	}

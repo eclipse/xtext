@@ -26,9 +26,6 @@ import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
-import org.eclipse.jdt.core.IJavaProject
-import com.yourkit.api.Controller
-import com.yourkit.Constants
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

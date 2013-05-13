@@ -322,6 +322,17 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 				XbasePackage.Literals.XFEATURE_CALL, 
 				"Type mismatch: cannot convert from Set<? extends Entry<? extends String, ? extends String>> to Set<Entry<? extends String, ? extends String>>");
 	}
+
+	@Test 
+	public void testEntrySetAddAll_05() throws Exception {
+		assertConformanceError(
+				"{" +
+				"  val java.util.Map<? extends String, ? extends String> it = null" +
+				"  val java.util.Set<java.util.Map.Entry<? extends String, ? extends String>> set = entrySet" +
+				"}",
+				XbasePackage.Literals.XFEATURE_CALL, 
+				"Type mismatch: cannot convert from Set<? extends Entry<? extends String, ? extends String>> to Set<Entry<? extends String, ? extends String>>");
+	}
 	
 	@Test 
 	public void testEntrySetAdd_01() throws Exception {
@@ -331,6 +342,17 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 				"  set.add(set.head)" +
 				"}",
 				XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
+				"Type mismatch: type Entry<? extends String, ? extends String> is not applicable at this location");
+	}
+	
+	@Test 
+	public void testEntrySetAdd_02() throws Exception {
+		assertConformanceError(
+				"{" +
+						"  val java.util.Set<? extends java.util.Map.Entry<? extends String, ? extends String>> set = null" +
+						"  set.add(set.head)" +
+						"}",
+						XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
 				"Type mismatch: type Entry<? extends String, ? extends String> is not applicable at this location");
 	}
 	

@@ -133,15 +133,15 @@ public class ImportOrganizer {
 	protected String getPackageLocalName(JvmDeclaredType type) {
 		String packageName = type.getPackageName();
 		if(isEmpty(packageName)) 
-			return type.getIdentifier();
+			return type.getQualifiedName('.');
 		else 
-			return type.getIdentifier().substring(packageName.length() + 1);
+			return type.getQualifiedName('.').substring(packageName.length() + 1);
 	}
 	
 	protected boolean needsImport(JvmDeclaredType type, String name, 
 			NonOverridableTypesProvider nonOverridableTypesProvider, Iterable<TypeUsage> usages)  {
-		return !((type.getIdentifier().equals(name))
-			|| isUsedInLocalContextOnly(type, usages, nonOverridableTypesProvider, name));
+		boolean nameEquals = type.getQualifiedName().equals(name) || type.getQualifiedName('.').equals(name);
+		return !( nameEquals || isUsedInLocalContextOnly(type, usages, nonOverridableTypesProvider, name));
 	}
 	
 	protected boolean isUsedInLocalContextOnly(JvmDeclaredType type, Iterable<TypeUsage> usages, 

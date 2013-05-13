@@ -71,12 +71,12 @@ public class ConflictResolver {
 					if(type == singleLocalType)
 						result.put(type.getSimpleName(), type);
 					else 
-						result.put(type.getIdentifier(), type);
+						result.put(type.getQualifiedName('.'), type);
 				}
 			}
 			else if(isConflictsWithNonOverridableTypes(types, usages, nonOverridableTypesProvider, simpleName)) {
 				for (JvmDeclaredType type : types) 
-					result.put(type.getIdentifier(), type);
+					result.put(type.getQualifiedName('.'), type);
 			} else {
 				if (types.size() == 1) {
 					result.put(simpleName, types.iterator().next());
@@ -86,7 +86,7 @@ public class ConflictResolver {
 						if (type == bestMatch)
 							result.put(simpleName, type);
 						else
-							result.put(type.getIdentifier(), type);
+							result.put(type.getQualifiedName('.'), type);
 					}
 				}
 			}
@@ -99,9 +99,9 @@ public class ConflictResolver {
 		for(JvmDeclaredType type: config.getLocallyDefinedTypes(resource)) {
 			String packageName = type.getPackageName();
 			if(isEmpty(packageName)) 
-				result.put(type.getIdentifier(), type);
+				result.put(type.getQualifiedName('.'), type);
 			else 
-				result.put(type.getIdentifier().substring(packageName.length() + 1), type);
+				result.put(type.getQualifiedName('.').substring(packageName.length() + 1), type);
 		}
 		return result;
 	}

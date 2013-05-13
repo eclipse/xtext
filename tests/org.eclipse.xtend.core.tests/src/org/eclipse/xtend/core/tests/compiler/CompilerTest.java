@@ -2006,13 +2006,54 @@ public class CompilerTest extends AbstractXtendTestCase {
 		assertEquals(singleton("foo"),apply(class1,"foo"));
 	}
 	
-	@Test public void testImportNestedTypes() throws Exception {
+	@Test public void testImportNestedTypes_01() throws Exception {
 		String code = 
 				"package x " +
 				"import java.util.Map$Entry " +
 				"import java.util.Map " +
 				"class Z { " +
 				" def foo(Map$Entry e1, Entry e2, Map m) {" +
+				" }" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testImportNestedTypes_02() throws Exception {
+		String code = 
+				"package x " +
+				"import java.util.Map.Entry " +
+				"import java.util.Map " +
+				"class Z { " +
+				" def foo(Map$Entry e1, Entry e2, Map m) {" +
+				" }" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+
+	@Test public void testImportNestedTypes_03() throws Exception {
+		String code = 
+				"package x " +
+				"import java.util.Map.Entry " +
+				"import java.util.Map " +
+				"class Z { " +
+				" def foo(Map.Entry e1, Entry e2, Map m) {" +
+				" }" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+
+	@Test public void testImportNestedTypes_04() throws Exception {
+		String code = 
+				"package x " +
+				"import java.util.Map$Entry " +
+				"import java.util.Map " +
+				"class Z { " +
+				" def foo(Map.Entry e1, Entry e2, Map m) {" +
 				" }" +
 				"}";
 		String javaCode = compileToJavaCode(code);

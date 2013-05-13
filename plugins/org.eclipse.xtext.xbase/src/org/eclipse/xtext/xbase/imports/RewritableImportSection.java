@@ -322,18 +322,7 @@ public class RewritableImportSection {
 	 * e.g. in rename refactoring. 
 	 */
 	protected String serializeType(JvmDeclaredType type) {
-		JvmDeclaredType current = type;
-		StringBuffer buffer = new StringBuffer(current.getSimpleName());
-		while(current.getDeclaringType() != null) {
-			current = current.getDeclaringType();
-			buffer.insert(0, "$");
-			buffer.insert(0, current.getSimpleName());
-		}
-		if(!isEmpty(current.getPackageName())) {
-			buffer.insert(0,  ".");
-			buffer.insert(0, current.getPackageName());
-		}
-		return buffer.toString();
+		return type.getQualifiedName('.');
 	}
 	
 	protected String serializeImports(List<XImportDeclaration> allDeclarations) {

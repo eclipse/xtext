@@ -362,7 +362,7 @@ public class XtendFileGenerator {
     _builder.append("* a function accepting a closure");
     _builder.newLine();
     _builder.append("\t ");
-    _builder.append("* (Person)=>String is a synonym for org.eclipse.xtext.xbase.lib.Functions$Function1<Person,String>");
+    _builder.append("* (Person)=>String is a synonym for org.eclipse.xtext.xbase.lib.Functions.Function1<Person,String>");
     _builder.newLine();
     _builder.append("\t ");
     _builder.append("* The general syntax if");

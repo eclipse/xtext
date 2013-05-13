@@ -332,20 +332,36 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(false, expr);
 	}
 	
-	@Test public void testReferenceInnerClasses() throws Exception {
+	@Test public void testReferenceInnerClasses_01() throws Exception {
 		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata::OuterClass$InnerClass::SINGLETON");
 	}
 	
-	@Test public void testReferenceInnerClasses_00() throws Exception {
+	@Test public void testReferenceInnerClasses_02() throws Exception {
 		assertEvaluatesTo("FOO", "[testdata.OuterClass$InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass$InnerClass())");
 	}
 	
-	@Test public void testReferenceInnerClasses_01() throws Exception {
+	@Test public void testReferenceInnerClasses_03() throws Exception {
 		assertEvaluatesTo(null, "{for (x : newArrayList(new testdata.OuterClass$InnerClass())) { x.toString } null}");
 	}
 	
-	@Test public void testReferenceInnerClasses_02() throws Exception {
+	@Test public void testReferenceInnerClasses_04() throws Exception {
 		assertEvaluatesTo("FOO", "[testdata.OuterClass$InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass$InnerClass)");
+	}
+	
+	@Test public void testReferenceInnerClasses_05() throws Exception {
+		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata::OuterClass::InnerClass::SINGLETON");
+	}
+	
+	@Test public void testReferenceInnerClasses_06() throws Exception {
+		assertEvaluatesTo("FOO", "[testdata.OuterClass.InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass.InnerClass())");
+	}
+	
+	@Test public void testReferenceInnerClasses_07() throws Exception {
+		assertEvaluatesTo(null, "{for (x : newArrayList(new testdata.OuterClass.InnerClass())) { x.toString } null}");
+	}
+	
+	@Test public void testReferenceInnerClasses_08() throws Exception {
+		assertEvaluatesTo("FOO", "[testdata.OuterClass.InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass.InnerClass)");
 	}
 	
 	/*
@@ -2001,6 +2017,20 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 */
 	@Test public void testInstanceOf_08() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "null instanceof java.util.List<?>");
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Test public void testInstanceOf_09() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "[|'foo'] instanceof org.eclipse.xtext.xbase.lib.Functions.Function0");
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Test public void testInstanceOf_10() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "[|'foo'] instanceof org.eclipse.xtext.xbase.lib.Functions.Function0<?>");
 	}
 	
 	@Test public void testClosure_01() throws Exception {
