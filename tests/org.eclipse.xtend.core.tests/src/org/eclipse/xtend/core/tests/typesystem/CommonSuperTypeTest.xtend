@@ -83,9 +83,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	def protected String fixup(String type) {
-		type?.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure")
+		type?.replace("$$Procedure", "org.eclipse.xtext.xbase.lib.Procedures.Procedure")
+			?.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure")
 			?.replace("$Function<", "com.google.common.base.Function<")
 			?.replace("$Predicate<", "com.google.common.base.Predicate<")
+			?.replace("$$Function", "org.eclipse.xtext.xbase.lib.Functions.Function")
 			?.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function")
 			?:'Object'
 	}
@@ -442,6 +444,15 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		"Iterable<?>".isSuperTypeOf("Iterable<? super CharSequence>", "Iterable<?>")
 	}
 	
+	@Test
+	def void testCommonSuperType_71() {
+		"(String)=>Object".isSuperTypeOf("$$Function1<? super Object, ? extends Object>", "$$Function1<? super String, ? extends String>").isFunctionAndEquivalentTo("Function1<? super String, ?>")
+	}
+	
+	@Test
+	def void testCommonSuperType_72() {
+		"Function1<?, ?>".isSuperTypeOf("$$Function1<Object, Object>", "$$Function1<String, String>")
+	}
 }
 
 /**

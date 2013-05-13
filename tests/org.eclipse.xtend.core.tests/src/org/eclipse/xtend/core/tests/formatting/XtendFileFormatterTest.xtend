@@ -243,7 +243,26 @@ class XtendFileFormatter extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
-	
+	@Test def formatPreferencesExample_02() {
+		assertFormatted('''
+			class Movies {
+				def settings(XtendFormatterConfig config) {
+					val List<FormatterSetting> settings = newArrayList()
+					for (entry : config.namedProperties.entrySet) {
+						val key = entry.key
+						val category = key.split(".").head
+						var catEnum = Category::byName(category)
+						if (catEnum == null)
+							catEnum = Category::OTHER
+						settings.add(
+							createSetting(catEnum, SettingsData::WidgetType::NUMBER_FIELD,
+								key, key.toFirstUpper, newArrayList(entry.value.name)))
+					}
+					return settings
+				}
+			}
+		''')	
+	}
 
 	@Test def typeReferenceIntegration() {
 		assertFormatted('''

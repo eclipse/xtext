@@ -1936,10 +1936,21 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertEquals("org.eclipse.xtext.RuleCall", typeProvider.getTypeForIdentifiable(e1).getIdentifier());
 	}
 	
-	@Test public void testBug342848() throws Exception {
+	@Test public void testBug342848_01() throws Exception {
 		String fileAsText= 
 				"import org.eclipse.xtext.xbase.lib.Functions\n" +
 				"class Clazz { def void method(Functions$Function0<Integer> f) { f.apply } }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendParameter parameter = function.getParameters().get(0);
+		String identifier = parameter.getParameterType().getIdentifier();
+		assertEquals(Functions.Function0.class.getName()+ "<java.lang.Integer>", identifier);
+	}
+	
+	@Test public void testBug342848_02() throws Exception {
+		String fileAsText= 
+				"import org.eclipse.xtext.xbase.lib.Functions\n" +
+				"class Clazz { def void method(Functions.Function0<Integer> f) { f.apply } }";
 		XtendFile file = file(fileAsText, true);
 		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
 		XtendParameter parameter = function.getParameters().get(0);
@@ -1953,6 +1964,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"  Annotation failed\n" +
 				"  java.lang.annotation.Annotation success\n" +
 				"  reflect.AccessibleObject failedToo\n" +
+				"  Thread.State anotherSuccess\n" +
+				"  Thread$State thirdSuccess\n" +
 				"}");
 		XtendClass xClass = (XtendClass) file.getXtendTypes().get(0);
 		XtendField failed  = (XtendField) xClass.getMembers().get(0);
@@ -1961,6 +1974,10 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertFalse("java.lang.annotation", success.getType().getType().eIsProxy());
 		XtendField failedToo  = (XtendField) xClass.getMembers().get(2);
 		assertTrue("reflect.AccessibleObject", failedToo.getType().getType().eIsProxy());
+		XtendField anotherSuccess  = (XtendField) xClass.getMembers().get(3);
+		assertFalse("Thread.State", anotherSuccess.getType().getType().eIsProxy());
+		XtendField thirdSuccess  = (XtendField) xClass.getMembers().get(4);
+		assertFalse("Thread$State", thirdSuccess.getType().getType().eIsProxy());
 	}
 	
 	@Test public void testImplicitFirstArgument_00() throws Exception {
