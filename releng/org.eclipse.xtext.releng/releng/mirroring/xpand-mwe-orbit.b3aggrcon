@@ -32,6 +32,6 @@
     <features name="org.eclipse.emf.source.feature.group"/>
   </repositories>
   <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/">
-     <features name="org.eclipse.emf.compare.feature.group"/>
+    <features name="org.eclipse.emf.compare.feature.group"/>
   </repositories>
 </aggregator:Contribution>

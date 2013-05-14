@@ -2,21 +2,27 @@ setpref targetPlatformPath="${build.root}/target.platform"
 #setpref org.eclipse.buckminster.core.maxParallelResolutions=1
 #setpref org.eclipse.buckminster.core.maxParallelMaterializations=1
 
+# Xtext compile
 importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
 addbaseline -A "api-baseline"
 
 import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtext-platform-${ECLIPSE.TARGET.ALIAS}.mspec"
 resolve "${releng.project.location}/releng/xtext.cquery"
-resolve "${releng.project.location}/releng/tests/xtext-test.mspec"
-resolve "${releng.project.location}/releng/tests-xtend/xtend-test.mspec"
-
-perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#zip.examples"
-
 build
 
-perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#package.tmf-xtext-Update"
+#Xtext Testing
+#importtargetdefinition  -DuseMirror=true -A "${releng.project.location}/releng/tests/tests-buildserver.target
 
-junit --launch "org.eclipse.xtext.purexbase.tests/xtext.purexbase.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.purexbase.tests.xml"
+#resolve "${releng.project.location}/releng/tests/xtext-test.mspec"
+#resolve "${releng.project.location}/releng/tests-xtend/xtend-test.mspec"
+
+#perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#zip.examples"
+
+#build
+
+#perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#package.tmf-xtext-Update"
+
+#junit --launch "org.eclipse.xtend.core.tests/xtend.core.tests.slow.launch" --flatXML --output "${build.root}/xtext.test.results/tests.xml"
 #junit --launch "org.eclipse.xtend.ide.tests/xtend.ide.tests.fast.launch" --flatXML --output "${build.root}/xtend.test.results/xtend.ide.tests.fast.xml"
 
 #perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtend.examples-container#zip.examples.content"
@@ -26,6 +32,6 @@ junit --launch "org.eclipse.xtext.purexbase.tests/xtext.purexbase.tests.launch" 
 
 #build
 
-#junit --launch "org.eclipse.xtext.common.types.tests/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
+#junit --launch "org.eclipse.xtext.tests/xtext.tests.launch" --flatXML --output "${build.root}/xtext.test.results/xtext.tests.xml"
 
 #perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.releng#setup.promoter"
