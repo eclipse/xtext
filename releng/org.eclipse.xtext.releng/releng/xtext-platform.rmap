@@ -7,9 +7,11 @@
   <rm:property key="mwe.p2.repository" value="${xpand_mwe.download}/modeling/emft/mwe/updates/nightly"/>
   <rm:property key="gef.p2.repository" value="${eclipse.download}/tools/gef/updates/releases"/>
   <rm:property key="maven.p2.repository" value="${eclipse.download}/technology/m2e/releases/1.0/1.0.0.20110606-1526/"/>
+  <rm:property key="maven.repository.uri" value="file:${user.home}/.m2/repository"/>
+  
   <rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit"/>
   <rm:property key="jdt_annotation.p2.repository" value="${eclipse.download}/eclipse/updates/3.8"/>
-  <rm:property key="composite.p2.repository" value="${checkout.location}/org.eclipse.xtext.releng/releng/mirroring/Galileo"/>
+
   <rm:locator pattern="^org\.eclipse\.xtext\.releng$" searchPathRef="local.releng"/>
   <rm:locator pattern="^org\.eclipse\.emf\.(?:mwe2\.runtime|mwe2\.lib|mwe)(?:\..+)?$" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
@@ -35,9 +37,11 @@
   <rm:locator searchPathRef="platform"/>
   <rm:searchPath name="google-maven">
     <rm:provider xsi:type="maven:MavenProvider" componentTypes="maven,osgi.bundle" readerType="maven2">
-      <rm:uri format="http://localhost:8081/nexus/content/repositories/releases/"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="maven.repository.uri"/>
+      </rm:uri>
       <maven:mappings>
-        <maven:entry artifactId="guava" groupId="com.google.guava" name="com.google.guava"/>
+        <maven:entry artifactId="guava" groupId="com.google.guava" name="com.google.guava" />
         <maven:entry artifactId="guava" groupId="com.google.guava" name="com.google.guava.source"/>
       </maven:mappings>
     </rm:provider>
@@ -115,11 +119,18 @@
     </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="platform">
-    <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Galileo)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="eclipse.target.platform"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Latest)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="eclipse.latest.target.platform"/>
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
