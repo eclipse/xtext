@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.lib;
 
+import static org.junit.Assert.*;
+
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

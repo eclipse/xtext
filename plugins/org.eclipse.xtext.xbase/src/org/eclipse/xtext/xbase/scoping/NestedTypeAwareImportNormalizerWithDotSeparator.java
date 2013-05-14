@@ -28,9 +28,6 @@ public class NestedTypeAwareImportNormalizerWithDotSeparator extends AbstractNes
 	
 	public NestedTypeAwareImportNormalizerWithDotSeparator(QualifiedName importedNamespace, boolean wildcard, boolean ignoreCase) {
 		super(importedNamespace, wildcard, ignoreCase);
-		if (importedNamespace.toString().indexOf('$') >= 0) {
-			throw new IllegalArgumentException(importedNamespace.toString());
-		}
 	}
 	
 	@Override
@@ -87,20 +84,8 @@ public class NestedTypeAwareImportNormalizerWithDotSeparator extends AbstractNes
 	
 	protected QualifiedName internalResolve(QualifiedName relativeName) {
 		QualifiedName importedNamespace = getImportedNamespacePrefix();
-		int matched = 1;
-		int importedSegmentCount = importedNamespace.getSegmentCount();
-		int relativeSegmentCount = relativeName.getSegmentCount();
-		while(matched <= importedSegmentCount && matched <= relativeSegmentCount) {
-			boolean mismatch = false;
-			for(int i = 0; i < matched && !mismatch; i++) {
-				if (!importedNamespace.getSegment(importedSegmentCount - matched + i).equals(relativeName.getSegment(i))) {
-					mismatch = true;
-				}
-			}
-			if (!mismatch) {
-				return importedNamespace.skipLast(matched).append(relativeName);
-			}
-			matched++;
+		if (importedNamespace.getLastSegment().equals(relativeName.getFirstSegment())) {
+			return importedNamespace.skipLast(1).append(relativeName);
 		}
 		return null;
 	}

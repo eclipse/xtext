@@ -10,18 +10,28 @@ package org.eclipse.xtext.xbase.tests.scoping;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
+import org.eclipse.xtext.xbase.scoping.NestedTypeAwareImportNormalizer;
+import org.eclipse.xtext.xbase.scoping.NestedTypeAwareImportNormalizerWithDotSeparator;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractNestedTypeAwareImportNormalizerTest extends Assert {
+public class AbstractNestedTypeAwareImportNormalizerTest extends Assert {
 
-	protected ImportNormalizer createImportNormalizer(QualifiedName imported, boolean wildcard) {
-		return AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(imported, wildcard, false);
+	@Test
+	public void testCreateWithDollar() {
+		QualifiedName importedName = QualifiedName.create("java", "util", "Map$Entry");
+		ImportNormalizer result = AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(importedName, false, false);
+		assertTrue(result instanceof NestedTypeAwareImportNormalizer);
 	}
 	
-	@Test public abstract void testIgnoreCase();
+	@Test
+	public void testCreateWithDot() {
+		QualifiedName importedName = QualifiedName.create("java", "util", "Map", "Entry");
+		ImportNormalizer result = AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(importedName, false, false);
+		assertTrue(result instanceof NestedTypeAwareImportNormalizerWithDotSeparator);
+	}
 	
 }

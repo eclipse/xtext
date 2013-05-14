@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NestedTypeAwareImportNormalizerWIthInvalidConfigTest extends AbstractNestedTypeAwareImportNormalizerTest {
+public class NestedTypeAwareImportNormalizerWIthInvalidConfigTest extends AbstractNestedTypeAwareImportNormalizerTestBase {
 
 	@Override
 	@Test(expected = IllegalArgumentException.class)
