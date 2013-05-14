@@ -93,5 +93,11 @@
                 <message_argument value="org.eclipse.xtext.generator_2.4.0"/>
             </message_arguments>
         </filter>
+        <filter comment="guava" id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.grammarAccess.GrammarAccess"/>
+                <message_argument value="org.eclipse.xtext.generator_2.4.2"/>
+            </message_arguments>
+        </filter>
     </resource>
 </component>
