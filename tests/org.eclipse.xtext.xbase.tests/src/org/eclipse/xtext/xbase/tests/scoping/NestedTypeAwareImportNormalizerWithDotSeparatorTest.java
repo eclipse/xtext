@@ -9,13 +9,14 @@ package org.eclipse.xtext.xbase.tests.scoping;
 
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
+import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.NestedTypeAwareImportNormalizerWithDotSeparator;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NestedTypeAwareImportNormalizerWithDotSeparatorTest extends AbstractNestedTypeAwareImportNormalizerTest {
+public class NestedTypeAwareImportNormalizerWithDotSeparatorTest extends AbstractNestedTypeAwareImportNormalizerTestBase {
 
 	@Override
 	@Test(expected = IllegalArgumentException.class)
@@ -77,7 +78,7 @@ public class NestedTypeAwareImportNormalizerWithDotSeparatorTest extends Abstrac
 
 	@Override
 	protected ImportNormalizer createImportNormalizer(QualifiedName imported, boolean wildcard) {
-		ImportNormalizer result = super.createImportNormalizer(imported, wildcard);
+		ImportNormalizer result = AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(imported, wildcard, false);
 		assertTrue(result instanceof NestedTypeAwareImportNormalizerWithDotSeparator);
 		return result;
 	}

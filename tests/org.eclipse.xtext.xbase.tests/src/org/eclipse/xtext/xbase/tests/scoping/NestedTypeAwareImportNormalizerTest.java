@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NestedTypeAwareImportNormalizerTest extends AbstractNestedTypeAwareImportNormalizerTest {
+public class NestedTypeAwareImportNormalizerTest extends AbstractNestedTypeAwareImportNormalizerTestBase {
 
 	@Override
 	@Test(expected = IllegalArgumentException.class)
@@ -43,7 +43,7 @@ public class NestedTypeAwareImportNormalizerTest extends AbstractNestedTypeAware
 		assertEquals(null, wildcardImportNormalizer.resolve(xytextRelativeNameWithDollar));
 
 		ImportNormalizer xtextImportNormalizer = createImportNormalizer(xytextRelativeNameWithDollar, false);
-		assertEquals(xytextRelativeNameWithDollar, xtextImportNormalizer.resolve(xytextRelativeNameWithDollar));
+		assertEquals(null, xtextImportNormalizer.resolve(xytextRelativeNameWithDollar));
 	}
 	
 	@Test public void testResolve_NestedTypes() throws Exception {
@@ -55,8 +55,8 @@ public class NestedTypeAwareImportNormalizerTest extends AbstractNestedTypeAware
 		QualifiedName imported = QualifiedName.create("java", "util", "Map$Entry");
 		QualifiedName expected = QualifiedName.create("java", "util", "Map$Entry");
 		ImportNormalizer importNormalizer = createImportNormalizer(imported, false);
-		assertEquals(expected, importNormalizer.resolve(mapEntry));
-		assertEquals(expected, importNormalizer.resolve(mapEntryWithDot));
+		assertEquals(null, importNormalizer.resolve(mapEntry));
+		assertEquals(null, importNormalizer.resolve(mapEntryWithDot));
 		assertEquals(null, importNormalizer.resolve(maps));
 		assertEquals(null, importNormalizer.resolve(mapsInternal));
 		assertEquals(null, importNormalizer.resolve(mapsInternalWithDot));
