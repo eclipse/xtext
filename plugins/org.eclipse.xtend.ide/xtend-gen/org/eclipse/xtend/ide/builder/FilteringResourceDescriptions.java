@@ -1,9 +1,11 @@
 package org.eclipse.xtend.ide.builder;
 
-import java.util.Set;
+import com.google.common.base.Objects;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -22,10 +24,10 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return this._delegate;
   }
   
-  private final Set<URI> _allowedUris;
+  private final IJavaProject _project;
   
-  public Set<URI> getAllowedUris() {
-    return this._allowedUris;
+  public IJavaProject getProject() {
+    return this._project;
   }
   
   public Iterable<IResourceDescription> getAllResourceDescriptions() {
@@ -33,10 +35,9 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     Iterable<IResourceDescription> _allResourceDescriptions = _delegate.getAllResourceDescriptions();
     final Function1<IResourceDescription,Boolean> _function = new Function1<IResourceDescription,Boolean>() {
         public Boolean apply(final IResourceDescription it) {
-          Set<URI> _allowedUris = FilteringResourceDescriptions.this.getAllowedUris();
           URI _uRI = it.getURI();
-          boolean _contains = _allowedUris.contains(_uRI);
-          return Boolean.valueOf(_contains);
+          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_uRI);
+          return Boolean.valueOf(_isContainedUri);
         }
       };
     Iterable<IResourceDescription> _filter = IterableExtensions.<IResourceDescription>filter(_allResourceDescriptions, _function);
@@ -44,13 +45,20 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
   }
   
   public IResourceDescription getResourceDescription(final URI normalizedURI) {
-    Set<URI> _allowedUris = this.getAllowedUris();
-    boolean _contains = _allowedUris.contains(normalizedURI);
-    if (_contains) {
+    boolean _isContainedUri = this.isContainedUri(normalizedURI);
+    if (_isContainedUri) {
       IResourceDescriptions _delegate = this.getDelegate();
       return _delegate.getResourceDescription(normalizedURI);
     }
     return null;
+  }
+  
+  private boolean isContainedUri(final URI uri) {
+    String _segment = uri.segment(1);
+    IJavaProject _project = this.getProject();
+    IProject _project_1 = _project.getProject();
+    String _name = _project_1.getName();
+    return Objects.equal(_segment, _name);
   }
   
   public Iterable<IEObjectDescription> getExportedObjects() {
@@ -58,11 +66,9 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     Iterable<IEObjectDescription> _exportedObjects = _delegate.getExportedObjects();
     final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
         public Boolean apply(final IEObjectDescription it) {
-          Set<URI> _allowedUris = FilteringResourceDescriptions.this.getAllowedUris();
           URI _eObjectURI = it.getEObjectURI();
-          URI _trimFragment = _eObjectURI.trimFragment();
-          boolean _contains = _allowedUris.contains(_trimFragment);
-          return Boolean.valueOf(_contains);
+          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
+          return Boolean.valueOf(_isContainedUri);
         }
       };
     Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjects, _function);
@@ -74,11 +80,9 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     Iterable<IEObjectDescription> _exportedObjects = _delegate.getExportedObjects(type, name, ignoreCase);
     final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
         public Boolean apply(final IEObjectDescription it) {
-          Set<URI> _allowedUris = FilteringResourceDescriptions.this.getAllowedUris();
           URI _eObjectURI = it.getEObjectURI();
-          URI _trimFragment = _eObjectURI.trimFragment();
-          boolean _contains = _allowedUris.contains(_trimFragment);
-          return Boolean.valueOf(_contains);
+          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
+          return Boolean.valueOf(_isContainedUri);
         }
       };
     Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjects, _function);
@@ -90,11 +94,9 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     Iterable<IEObjectDescription> _exportedObjectsByObject = _delegate.getExportedObjectsByObject(object);
     final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
         public Boolean apply(final IEObjectDescription it) {
-          Set<URI> _allowedUris = FilteringResourceDescriptions.this.getAllowedUris();
           URI _eObjectURI = it.getEObjectURI();
-          URI _trimFragment = _eObjectURI.trimFragment();
-          boolean _contains = _allowedUris.contains(_trimFragment);
-          return Boolean.valueOf(_contains);
+          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
+          return Boolean.valueOf(_isContainedUri);
         }
       };
     Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjectsByObject, _function);
@@ -106,11 +108,9 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     Iterable<IEObjectDescription> _exportedObjectsByType = _delegate.getExportedObjectsByType(type);
     final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
         public Boolean apply(final IEObjectDescription it) {
-          Set<URI> _allowedUris = FilteringResourceDescriptions.this.getAllowedUris();
           URI _eObjectURI = it.getEObjectURI();
-          URI _trimFragment = _eObjectURI.trimFragment();
-          boolean _contains = _allowedUris.contains(_trimFragment);
-          return Boolean.valueOf(_contains);
+          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
+          return Boolean.valueOf(_isContainedUri);
         }
       };
     Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjectsByType, _function);
@@ -123,10 +123,10 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return _isEmpty;
   }
   
-  public FilteringResourceDescriptions(final IResourceDescriptions delegate, final Set<URI> allowedUris) {
+  public FilteringResourceDescriptions(final IResourceDescriptions delegate, final IJavaProject project) {
     super();
     this._delegate = delegate;
-    this._allowedUris = allowedUris;
+    this._project = project;
   }
   
   @Override
@@ -134,7 +134,7 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((_delegate== null) ? 0 : _delegate.hashCode());
-    result = prime * result + ((_allowedUris== null) ? 0 : _allowedUris.hashCode());
+    result = prime * result + ((_project== null) ? 0 : _project.hashCode());
     return result;
   }
   
@@ -152,10 +152,10 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
         return false;
     } else if (!_delegate.equals(other._delegate))
       return false;
-    if (_allowedUris == null) {
-      if (other._allowedUris != null)
+    if (_project == null) {
+      if (other._project != null)
         return false;
-    } else if (!_allowedUris.equals(other._allowedUris))
+    } else if (!_project.equals(other._project))
       return false;
     return true;
   }
