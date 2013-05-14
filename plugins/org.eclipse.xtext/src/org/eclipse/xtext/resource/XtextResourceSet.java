@@ -106,6 +106,9 @@ public class XtextResourceSet extends ResourceSetImpl {
 			return inverseRemove;
 		}
 		
+		/**
+		 * @since 2.4
+		 */
 		@Override
 		protected void doClear() {
 			super.doClear();

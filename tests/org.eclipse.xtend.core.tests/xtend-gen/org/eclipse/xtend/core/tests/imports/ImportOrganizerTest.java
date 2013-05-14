@@ -1938,7 +1938,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("def Map$Entry test() {");
+    _builder.append("def java.util.Map$Entry test() {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return null");
@@ -2024,7 +2024,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("def Resource$Factory$Descriptor test() {");
+    _builder.append("def org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor test() {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return null");
@@ -2196,7 +2196,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("def Map.Entry test() {");
+    _builder.append("def java.util.Map.Entry test() {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return null");
@@ -2282,7 +2282,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("def Resource.Factory.Descriptor test() {");
+    _builder.append("def org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor test() {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return null");
@@ -2368,7 +2368,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("def Map$Entry test() {");
+    _builder.append("def java.util.Map$Entry test() {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return null");
@@ -2411,7 +2411,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("def Map.Entry test() {");
+    _builder.append("def java.util.Map.Entry test() {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return null");
@@ -2777,7 +2777,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("import org.eclipse.xtext.service.DispatchingProvider$Runtime");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("@DispatchingProvider$Runtime");
+    _builder.append("@org.eclipse.xtext.service.DispatchingProvider$Runtime");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -2839,7 +2839,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("import org.eclipse.xtext.service.DispatchingProvider.Runtime");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("@DispatchingProvider.Runtime");
+    _builder.append("@org.eclipse.xtext.service.DispatchingProvider.Runtime");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -2870,7 +2870,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("import org.eclipse.xtext.service.DispatchingProvider.Runtime");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("@DispatchingProvider$Runtime");
+    _builder.append("@org.eclipse.xtext.service.DispatchingProvider$Runtime");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -2901,7 +2901,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("import org.eclipse.xtext.service.DispatchingProvider$Runtime");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("@DispatchingProvider.Runtime");
+    _builder.append("@org.eclipse.xtext.service.DispatchingProvider.Runtime");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
