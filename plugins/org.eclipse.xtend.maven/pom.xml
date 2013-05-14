@@ -23,8 +23,7 @@
 	<name>Xtend Parent/Container</name>
 
 	<properties>
-		<deployment.folder>/shared/common/xtend/maven/</deployment.folder>
-		<deployment.url>file://${deployment.folder}</deployment.url>
+		<guava.version>[10.0.1,)</guava.version>
 		<xtend.repo.name>Xtend provisional repository</xtend.repo.name>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -115,8 +114,6 @@
 				<!-- local.build changes ant script behavior which creates standalone 
 					jar -->
 				<local.build>true</local.build>
-				<deployment.folder>/Applications/nexus-2.4.0-09-bundle/sonatype-work/nexus/storage/snapshots/</deployment.folder>
-				<deployment.url>file:/Applications/nexus-2.4.0-09-bundle/sonatype-work/nexus/storage/snapshots/</deployment.url>
 			</properties>
 
 			<distributionManagement>
