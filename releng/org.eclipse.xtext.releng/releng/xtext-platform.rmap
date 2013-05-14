@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+<rm:rmap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:maven="http://www.eclipse.org/buckminster/MavenProvider-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   <rm:property key="checkout.location" value="${workspace.root}/"/>
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
   <rm:property key="xpand_mwe.download" value="${eclipse.download}"/>
@@ -10,13 +10,14 @@
   <rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit"/>
   <rm:property key="jdt_annotation.p2.repository" value="${eclipse.download}/eclipse/updates/3.8"/>
   <rm:property key="composite.p2.repository" value="${checkout.location}/org.eclipse.xtext.releng/releng/mirroring/Galileo"/>
-  
   <rm:locator pattern="^org\.eclipse\.xtext\.releng$" searchPathRef="local.releng"/>
   <rm:locator pattern="^org\.eclipse\.emf\.(?:mwe2\.runtime|mwe2\.lib|mwe)(?:\..+)?$" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.(?:xpand|xtend)(?:\..+)?$" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.apache(?:\..+)?$" searchPathRef="orbit" failOnError="false"/>
-  <rm:locator pattern="^com\.google(?:\..+)?$" searchPathRef="orbit"/>
+  <rm:locator pattern="^com\.google\.guava(?:\..+)?$" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Latest)" searchPathRef="google-maven"/>
+  <rm:locator pattern="^com\.google\.guava(?:\..+)?$" resolutionFilter="(!(ECLIPSE.TARGET.ALIAS=Latest))" searchPathRef="orbit"/>
+  <rm:locator pattern="^com\.google\.inject(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^javax\.inject(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.aopalliance$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.easymock$" searchPathRef="orbit"/>
@@ -31,11 +32,19 @@
   <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="maven"/>
   <rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator pattern="org.eclipse.jdt.annotation" searchPathRef="jdt.annotation"/>
-  
   <rm:locator searchPathRef="platform"/>
-  
+  <rm:searchPath name="google-maven">
+    <rm:provider xsi:type="maven:MavenProvider" componentTypes="maven,osgi.bundle" readerType="maven2">
+      <rm:uri format="http://localhost:8081/nexus/content/repositories/releases/"/>
+      <maven:mappings>
+        <maven:entry artifactId="guava" groupId="com.google.guava" name="com.google.guava"/>
+        <maven:entry artifactId="guava" groupId="com.google.guava" name="com.google.guava.source"/>
+      </maven:mappings>
+    </rm:provider>
+  </rm:searchPath>
   <rm:searchPath name="local.releng">
     <rm:provider componentTypes="buckminster" readerType="local" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/releng/{1}">
         <bc:propertyRef key="checkout.location"/>
         <bc:propertyRef key="buckminster.component"/>
@@ -44,6 +53,8 @@
   </rm:searchPath>
   <rm:searchPath name="mwe">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="mwe.p2.repository"/>
       </rm:uri>
@@ -51,6 +62,8 @@
   </rm:searchPath>
   <rm:searchPath name="xpand">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="xpand.p2.repository"/>
       </rm:uri>
@@ -58,6 +71,8 @@
   </rm:searchPath>
   <rm:searchPath name="emf">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="emf.target.platform"/>
       </rm:uri>
@@ -65,6 +80,8 @@
   </rm:searchPath>
   <rm:searchPath name="orbit">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="orbit.p2.repository"/>
       </rm:uri>
@@ -72,6 +89,8 @@
   </rm:searchPath>
   <rm:searchPath name="maven">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="maven.p2.repository"/>
       </rm:uri>
@@ -79,6 +98,8 @@
   </rm:searchPath>
   <rm:searchPath name="gef">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="gef.p2.repository"/>
       </rm:uri>
@@ -86,6 +107,8 @@
   </rm:searchPath>
   <rm:searchPath name="jdt.annotation">
     <rm:provider componentTypes="osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="jdt_annotation.p2.repository"/>
       </rm:uri>
@@ -93,6 +116,8 @@
   </rm:searchPath>
   <rm:searchPath name="platform">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="eclipse.target.platform"/>
       </rm:uri>
