@@ -14,8 +14,8 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.Test;
 
 import com.google.common.collect.Iterators;

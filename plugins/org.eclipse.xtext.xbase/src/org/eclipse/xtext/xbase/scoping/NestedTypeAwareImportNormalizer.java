@@ -102,27 +102,45 @@ public class NestedTypeAwareImportNormalizer extends AbstractNestedTypeAwareImpo
 	}
 
 	private QualifiedName internalResolve(QualifiedName relativeName) {
-		if (relativeName.getLastSegment().equals(getImportedNamespacePrefix().getLastSegment())) {
+		if (relativeName.getSegmentCount() != 1) {
+			throw new IllegalArgumentException(relativeName.toString());
+		}
+		String lastImportSegment = getImportedNamespacePrefix().getLastSegment();
+		int importDollarIndex = lastImportSegment.lastIndexOf('$');
+		if (importDollarIndex != -1) {
+			lastImportSegment = lastImportSegment.substring(importDollarIndex + 1);
+		}
+		String singleSegment = relativeName.getFirstSegment();
+		if (lastImportSegment.equals(singleSegment)) {
 			return getImportedNamespacePrefix();
 		}
-		String relativeNameAsString = relativeName.getLastSegment();
-		String lastImportedSegment = getImportedNamespacePrefix().getLastSegment();
-		int dollar = relativeNameAsString.indexOf('$');
-		if (dollar >= 0) {
-			if (dollar == lastImportedSegment.length() && relativeNameAsString.startsWith(lastImportedSegment))
-				return getImportedNamespacePrefix().skipLast(1).append(relativeNameAsString);
-		}
-		int importedDollar = lastImportedSegment.lastIndexOf('$');
-		if (importedDollar >= 0) {
-			String nestedTypeName = lastImportedSegment.substring(importedDollar + 1);
-			if (relativeNameAsString.startsWith(nestedTypeName)) {
-				if (nestedTypeName.length() == relativeNameAsString.length())
-					return getImportedNamespacePrefix();
-				if (relativeNameAsString.charAt(nestedTypeName.length()) == '$')
-					return getImportedNamespacePrefix().skipLast(1).append(
-							lastImportedSegment + relativeNameAsString.substring(nestedTypeName.length())); 
+		if (singleSegment.startsWith(lastImportSegment) && singleSegment.charAt(lastImportSegment.length()) == '$') {
+			if (importDollarIndex == -1)
+				return getImportedNamespacePrefix().skipLast(1).append(relativeName);
+			else {
+				String resolvedLastSegment = getImportedNamespacePrefix().getLastSegment() + singleSegment.substring(lastImportSegment.length());
+				return getImportedNamespacePrefix().skipLast(1).append(resolvedLastSegment);
 			}
 		}
 		return null;
+//		String relativeNameAsString = relativeName.getLastSegment();
+//		String lastImportedSegment = getImportedNamespacePrefix().getLastSegment();
+//		int dollar = relativeNameAsString.indexOf('$');
+//		if (dollar >= 0) {
+//			if (dollar == lastImportedSegment.length() && relativeNameAsString.startsWith(lastImportedSegment))
+//				return getImportedNamespacePrefix().skipLast(1).append(relativeNameAsString);
+//		}
+//		int importedDollar = lastImportedSegment.lastIndexOf('$');
+//		if (importedDollar >= 0) {
+//			String nestedTypeName = lastImportedSegment.substring(importedDollar + 1);
+//			if (relativeNameAsString.startsWith(nestedTypeName)) {
+//				if (nestedTypeName.length() == relativeNameAsString.length())
+//					return getImportedNamespacePrefix();
+//				if (relativeNameAsString.charAt(nestedTypeName.length()) == '$')
+//					return getImportedNamespacePrefix().skipLast(1).append(
+//							lastImportedSegment + relativeNameAsString.substring(nestedTypeName.length())); 
+//			}
+//		}
+//		return null;
 	}
 }
