@@ -89,6 +89,278 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testNestedTypeResolution_01() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolution_02() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolution_03() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolution_04() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(Internal$ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolution_05() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(EDataType$Internal$ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolution_06() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory\n" +
+				"class C {\n" +
+				"	def m(Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolution_07() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate\n" +
+				"class C {\n" +
+				"	def m(ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolution_08() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal\n" +
+				"class C {\n" +
+				"	def m(Internal$ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolution_09() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType\n" +
+				"class C {\n" +
+				"	def m(EDataType$Internal$ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	
+	@Test public void testNestedTypeResolutionWithDot_01() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolutionWithDot_02() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDot_03() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDot_04() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(Internal.ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDot_05() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(EDataType.Internal.ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDot_06() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory\n" +
+				"class C {\n" +
+				"	def m(Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolutionWithDot_07() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate\n" +
+				"class C {\n" +
+				"	def m(ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolutionWithDot_08() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal\n" +
+				"class C {\n" +
+				"	def m(Internal.ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolutionWithDot_09() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType\n" +
+				"class C {\n" +
+				"	def m(EDataType.Internal.ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	
+	@Test public void testNestedTypeResolutionWithDotInImport_01() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDotInImport_02() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDotInImport_03() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(Internal$ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDotInImport_04() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory.Registry\n" +
+				"class C {\n" +
+				"	def m(EDataType$Internal$ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDotInImport_05() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate.Factory\n" +
+				"class C {\n" +
+				"	def m(Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolutionWithDotInImport_06() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal.ConversionDelegate\n" +
+				"class C {\n" +
+				"	def m(ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolutionWithDotInImport_07() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType.Internal\n" +
+				"class C {\n" +
+				"	def m(Internal$ConversionDelegate$Factory$Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	
+	@Test public void testNestedTypeResolutionWithDotInUsage_01() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDotInUsage_02() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDotInUsage_03() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(Internal.ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDotInUsage_04() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
+				"class C {\n" +
+				"	def m(EDataType.Internal.ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", false);
+	}
+	@Test public void testNestedTypeResolutionWithDotInUsage_05() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory\n" +
+				"class C {\n" +
+				"	def m(Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolutionWithDotInUsage_06() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate\n" +
+				"class C {\n" +
+				"	def m(ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	@Test public void testNestedTypeResolutionWithDotInUsage_07() throws Exception {
+		doTestNestedTypeResolution(
+				"import org.eclipse.emf.ecore.EDataType$Internal\n" +
+				"class C {\n" +
+				"	def m(Internal.ConversionDelegate.Factory.Registry r) {\n" +
+				"	}\n" +
+				"}\n", true);
+	}
+	
+	protected void doTestNestedTypeResolution(String input, boolean success) throws Exception {
+		XtendFile file = file(input); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XtendParameter firstParameter = m.getParameters().get(0);
+		JvmType parameterType = firstParameter.getParameterType().getType();
+		if (success)
+			assertEquals("org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry", parameterType.getIdentifier());
+		else
+			assertTrue(parameterType.eIsProxy());
+	}
+	
 	@Test public void testBug405144_01() throws Exception {
 		XtendFile file = file(
 				"import com.google.inject.Injector\n" +

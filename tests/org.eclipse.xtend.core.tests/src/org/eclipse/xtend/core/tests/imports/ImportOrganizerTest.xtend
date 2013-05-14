@@ -990,7 +990,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			package foo.bar
 			import java.util.Map$Entry
 			class Foo {
-			  def Map$Entry test() {
+			  def java.util.Map$Entry test() {
 			    return null
 			  }
 			}
@@ -1034,7 +1034,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			package foo.bar
 			import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor
 			class Foo {
-			  def Resource$Factory$Descriptor test() {
+			  def org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor test() {
 			    return null
 			  }
 			}
@@ -1122,7 +1122,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			package foo.bar
 			import java.util.Map.Entry
 			class Foo {
-			  def Map.Entry test() {
+			  def java.util.Map.Entry test() {
 			    return null
 			  }
 			}
@@ -1166,7 +1166,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			package foo.bar
 			import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor
 			class Foo {
-			  def Resource.Factory.Descriptor test() {
+			  def org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor test() {
 			    return null
 			  }
 			}
@@ -1210,7 +1210,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			package foo.bar
 			import java.util.Map.Entry
 			class Foo {
-			  def Map$Entry test() {
+			  def java.util.Map$Entry test() {
 			    return null
 			  }
 			}
@@ -1232,7 +1232,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			package foo.bar
 			import java.util.Map$Entry
 			class Foo {
-			  def Map.Entry test() {
+			  def java.util.Map.Entry test() {
 			    return null
 			  }
 			}
@@ -1431,7 +1431,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			import org.eclipse.xtext.service.DispatchingProvider$Runtime
 
-			@DispatchingProvider$Runtime
+			@org.eclipse.xtext.service.DispatchingProvider$Runtime
 			class Foo {
 			}
 		'''.assertIsOrganizedTo('''
@@ -1471,7 +1471,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			import org.eclipse.xtext.service.DispatchingProvider.Runtime
 
-			@DispatchingProvider.Runtime
+			@org.eclipse.xtext.service.DispatchingProvider.Runtime
 			class Foo {
 			}
 		'''.assertIsOrganizedTo('''
@@ -1491,7 +1491,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			import org.eclipse.xtext.service.DispatchingProvider.Runtime
 
-			@DispatchingProvider$Runtime
+			@org.eclipse.xtext.service.DispatchingProvider$Runtime
 			class Foo {
 			}
 		'''.assertIsOrganizedTo('''
@@ -1511,7 +1511,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			import org.eclipse.xtext.service.DispatchingProvider$Runtime
 
-			@DispatchingProvider.Runtime
+			@org.eclipse.xtext.service.DispatchingProvider.Runtime
 			class Foo {
 			}
 		'''.assertIsOrganizedTo('''
