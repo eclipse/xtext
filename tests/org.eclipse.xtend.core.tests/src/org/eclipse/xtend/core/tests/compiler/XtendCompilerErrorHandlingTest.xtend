@@ -6,7 +6,8 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.junit.Testimport org.eclipse.xtext.generator.IFilePostProcessor
+import org.junit.Test
+import org.eclipse.xtext.generator.IFilePostProcessor
 
 class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	

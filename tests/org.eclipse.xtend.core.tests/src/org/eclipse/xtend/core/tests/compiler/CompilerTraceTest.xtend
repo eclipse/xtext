@@ -14,7 +14,8 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
-import org.junit.Testimport org.eclipse.xtext.generator.IFilePostProcessor
+import org.junit.Test
+import org.eclipse.xtext.generator.IFilePostProcessor
 
 /**
  * @author Sebastian Zarnekow
