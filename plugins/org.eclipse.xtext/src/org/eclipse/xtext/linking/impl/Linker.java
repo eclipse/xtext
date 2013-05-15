@@ -60,9 +60,7 @@ public class Linker extends AbstractCleaningLinker {
 
 	private void ensureLinked(EObject obj, IDiagnosticProducer producer, ICompositeNode node,
 			Set<EReference> handledReferences) {
-		Iterator<INode> iterator = node.getChildren().iterator();
-		while(iterator.hasNext()) {
-			INode abstractNode = iterator.next();
+		for(INode abstractNode = node.getFirstChild(); abstractNode != null; abstractNode = abstractNode.getNextSibling()) {
 			if (abstractNode.getGrammarElement() instanceof CrossReference) {
 				CrossReference ref = (CrossReference) abstractNode.getGrammarElement();
 				producer.setNode(abstractNode);
