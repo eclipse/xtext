@@ -528,6 +528,53 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertNotNull(typeLookup.findAnnotationType('myusercode.MyClassAnnotation'))
 		]
 	}
+	@Test def void testIntroduceNewTypeAndWorWithIt() {
+		assertProcessing(
+			'myannotation/NewTypesAddingAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+
+				@Active(typeof(NewTypesAddingAnnotationProcessor))
+				annotation NewTypesAddingAnnotation { }
+				class NewTypesAddingAnnotationProcessor implements RegisterGlobalsParticipant<ClassDeclaration>, TransformationParticipant<MutableClassDeclaration> {
+					
+					override doRegisterGlobals(List<? extends ClassDeclaration> sourceClasses, RegisterGlobalsContext context) {
+						for (clazz : sourceClasses) {
+							context.registerClass(clazz.qualifiedName+"Derived")
+						}
+					}
+					
+					override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {
+						classes.forEach [ ele |
+							val cl = context.findClass(ele.qualifiedName+"Derived")
+							cl.extendedClass = newTypeReference(ele)
+						]
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.NewTypesAddingAnnotation
+				class MyClass {
+				}
+			'''
+		) [
+			val declaredClass = typeLookup.findClass('myusercode.MyClass')
+			assertNotNull(declaredClass)
+			val clazz = typeLookup.findClass('myusercode.MyClassDerived')
+			assertNotNull(clazz)
+			assertEquals(declaredClass.qualifiedName, clazz.extendedClass.type.qualifiedName)
+		]
+	}
 	
 	val THREE_ANNOTATIONS = 'three.xtend' -> '''
 		import java.util.List
