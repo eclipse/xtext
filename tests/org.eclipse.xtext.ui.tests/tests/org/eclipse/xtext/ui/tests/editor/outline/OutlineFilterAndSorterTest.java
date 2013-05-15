@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 
 import java.util.List;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -44,9 +45,9 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 		});
 		Model model = OutlineTestFactory.eINSTANCE.createModel();
 		nodes = Lists.newArrayList();
-		nodes.add(new EObjectNode(model, null, null, "one", true));
-		nodes.add(new EObjectNode(model, null, null, "two", true));
-		nodes.add(new EObjectNode(model, null, null, "three", true));
+		nodes.add(new EObjectNode(model, null, (ImageDescriptor) null, "one", true));
+		nodes.add(new EObjectNode(model, null, (ImageDescriptor) null, "two", true));
+		nodes.add(new EObjectNode(model, null, (ImageDescriptor) null, "three", true));
 		filterAndSorter = new OutlineFilterAndSorter();
 	}
 

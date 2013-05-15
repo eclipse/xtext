@@ -16,7 +16,9 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Predicate;
@@ -54,9 +56,28 @@ public class OutlineRefreshJob extends Job {
 
 	protected IOutlineNode refreshOutlineModel(final IProgressMonitor monitor, final OutlineTreeState formerState,
 			final OutlineTreeState newState) {
+		final IOutlineTreeProvider treeProvider = outlinePage.getTreeProvider();
+		if(treeProvider instanceof IOutlineTreeProvider.Extension
+				&& !((IOutlineTreeProvider.Extension) treeProvider).needsDisplayThread()) {
+			return iternalRefreshOutlineModel(formerState, newState, treeProvider);
+		} else {
+			return new DisplayRunnableWithResult<IOutlineNode>() {
+				@Override
+				protected IOutlineNode run() throws Exception {
+					return iternalRefreshOutlineModel(formerState, newState, treeProvider);
+				}
+			}.syncExec();
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected IOutlineNode iternalRefreshOutlineModel(final OutlineTreeState formerState,
+			final OutlineTreeState newState, final IOutlineTreeProvider treeProvider) {
 		IOutlineNode rootNode = outlinePage.getXtextDocument().readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
 			public IOutlineNode exec(XtextResource resource) throws Exception {
-				IOutlineNode rootNode = outlinePage.getTreeProvider().createRoot(outlinePage.getXtextDocument());
+				IOutlineNode rootNode = treeProvider.createRoot(outlinePage.getXtextDocument());
 				restoreChildrenSelectionAndExpansion(rootNode, resource, formerState, newState);
 				return rootNode;
 			}

@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -33,7 +34,15 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
-public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider {
+/**
+ * @deprecated This implementation requires that the outline nodes are calculated in the UI thread, which will cause the
+ *             UI to block. Into the bargain, the abundance of polymorphic dispatchers makes debugging pretty hard.
+ *             Use {@link DefaultOutlineTreeProvider2} instead.
+ * @author Jan Koehnlein - Initial contribution and API
+ */
+@Deprecated
+public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider,
+		IOutlineTreeProvider.Extension {
 
 	@Inject
 	protected ILabelProvider labelProvider;
@@ -43,8 +52,8 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 
 	public DefaultOutlineTreeProvider() {
 	}
-	
-	/** 
+
+	/**
 	 * For testing.
 	 */
 	public DefaultOutlineTreeProvider(ILabelProvider labelProvider, ILocationInFileProvider locationInFileProvider) {
@@ -61,11 +70,11 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	protected PolymorphicDispatcher<Object> textDispatcher = PolymorphicDispatcher.createForSingleTarget("_text", 1, 1,
 			this);
 
-	protected PolymorphicDispatcher<Image> imageDispatcher = PolymorphicDispatcher.createForSingleTarget("_image", 1, 1,
-			this);
-
-	protected PolymorphicDispatcher<Boolean> isLeafDispatcher = PolymorphicDispatcher.createForSingleTarget("_isLeaf", 1,
+	protected PolymorphicDispatcher<Image> imageDispatcher = PolymorphicDispatcher.createForSingleTarget("_image", 1,
 			1, this);
+
+	protected PolymorphicDispatcher<Boolean> isLeafDispatcher = PolymorphicDispatcher.createForSingleTarget("_isLeaf",
+			1, 1, this);
 
 	public IOutlineNode createRoot(IXtextDocument document) {
 		DocumentRootNode documentNode = new DocumentRootNode(labelProvider.getImage(document),
@@ -105,22 +114,23 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	protected void createNode(IOutlineNode parent, EObject modelElement) {
 		createNodeDispatcher.invoke(parent, modelElement);
 	}
-	
+
 	/**
 	 * @since 2.1
 	 */
 	protected void _createNode(DocumentRootNode parentNode, EObject modelElement) {
 		Object text = textDispatcher.invoke(modelElement);
-		if(text == null) {
+		if (text == null) {
 			text = modelElement.eResource().getURI().trimFileExtension().lastSegment();
 		}
-		createEObjectNode(parentNode, modelElement, imageDispatcher.invoke(modelElement), text, isLeafDispatcher.invoke(modelElement));
+		createEObjectNode(parentNode, modelElement, imageDispatcher.invoke(modelElement), text,
+				isLeafDispatcher.invoke(modelElement));
 	}
 
 	protected void _createNode(IOutlineNode parentNode, EObject modelElement) {
 		Object text = textDispatcher.invoke(modelElement);
 		boolean isLeaf = isLeafDispatcher.invoke(modelElement);
-		if(text == null && isLeaf)
+		if (text == null && isLeaf)
 			return;
 		Image image = imageDispatcher.invoke(modelElement);
 		createEObjectNode(parentNode, modelElement, image, text, isLeaf);
@@ -135,8 +145,8 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	 * @since 2.2
 	 */
 	protected boolean isLocalElement(IOutlineNode node, final EObject element) {
-		if(node instanceof AbstractOutlineNode) {
-			return ((AbstractOutlineNode)node).getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+		if (node instanceof AbstractOutlineNode) {
+			return ((AbstractOutlineNode) node).getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>() {
 				public Boolean exec(XtextResource state) throws Exception {
 					return element.eResource() == state;
 				}
@@ -144,7 +154,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		}
 		return true;
 	}
-	
+
 	/**
 	 * @since 2.1
 	 */
@@ -154,7 +164,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
 			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
-		if(isLocalElement(parentNode, modelElement))
+		if (isLocalElement(parentNode, modelElement))
 			eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
 		return eObjectNode;
 	}
@@ -167,8 +177,8 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		});
 	}
 
-	protected EStructuralFeatureNode createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner, EStructuralFeature feature,
-			Image image, Object text, boolean isLeaf) {
+	protected EStructuralFeatureNode createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner,
+			EStructuralFeature feature, Image image, Object text, boolean isLeaf) {
 		boolean isFeatureSet = owner.eIsSet(feature);
 		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, image,
 				text, isLeaf || !isFeatureSet);
@@ -176,7 +186,9 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 			ITextRegion region = locationInFileProvider.getFullTextRegion(owner, feature, 0);
 			if (feature.isMany()) {
 				int numValues = ((Collection<?>) owner.eGet(feature)).size();
-				region = region.merge(locationInFileProvider.getFullTextRegion(owner, feature, numValues - 1));
+				ITextRegion fullTextRegion = locationInFileProvider.getFullTextRegion(owner, feature, numValues - 1);
+				if (fullTextRegion != null)
+					region = region.merge(fullTextRegion);
 			}
 			eStructuralFeatureNode.setTextRegion(region);
 		}
@@ -224,6 +236,16 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 
 	protected String nullSafeClassName(Object object) {
 		return (object != null) ? object.getClass().getName() : "null";
+	}
+
+	/**
+	 * Unfortunately, this implementation has to run in hte display thread, as we're using {@link Image}s instead of
+	 * {@link ImageDescriptor}s.
+	 * 
+	 * @since 2.4
+	 */
+	public boolean needsDisplayThread() {
+		return true;
 	}
 
 }

@@ -14,12 +14,11 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -28,21 +27,17 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider2;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
-import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
-import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
-import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.inject.Inject;
@@ -52,7 +47,8 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein
  */
-public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
+public class XtendOutlineTreeProvider extends DefaultOutlineTreeProvider2 implements  
+	IOutlineTreeProvider.ModeAware {
 
 	private static final OutlineMode HIDE_INHERITED_MODE = new OutlineMode("hide", "hide inherited members");
 
@@ -75,20 +71,27 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 	@Inject
 	private JvmTypeExtensions typeExtensions;
 
-	protected void _createChildren(DocumentRootNode parentNode, XtendFile xtendFile) {
-		if (xtendFile.getPackage() != null)
-			createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE,
-					images.forPackage(), xtendFile.getPackage(), true);
-		if (xtendFile.getImportSection() != null && !xtendFile.getImportSection().getImportDeclarations().isEmpty())
-			createEStructuralFeatureNode(parentNode, xtendFile.getImportSection(),
-					XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS, images.forImportContainer(),
-					"import declarations", false);
-		for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
-			EObjectNode classNode = createEObjectNode(parentNode, xtendType);
-			createFeatureNodes(classNode, xtendType);
+	@Inject 
+	private XtendOutlineNodeFactory factory;
+	
+	@Override
+	protected void internalCreateChildren(DocumentRootNode parentNode, EObject modelElement) {
+		if(modelElement instanceof XtendFile) {
+			XtendFile xtendFile = (XtendFile) modelElement;
+			if (xtendFile.getPackage() != null)
+				factory.createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE,
+						images.forPackage(), xtendFile.getPackage(), true);
+			if (xtendFile.getImportSection() != null && !xtendFile.getImportSection().getImportDeclarations().isEmpty())
+				factory.createEStructuralFeatureNode(parentNode, xtendFile.getImportSection(),
+						XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS, images.forImportContainer(),
+						"import declarations", false);
+			for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
+				EObjectNode classNode = createNode(parentNode, xtendType);
+				createFeatureNodes(classNode, xtendType);
+			}
 		}
 	}
-
+	
 	protected void createFeatureNodes(IOutlineNode parentNode, XtendTypeDeclaration xtendType) {
 		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 		if (inferredType != null) {
@@ -96,7 +99,7 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 			createFeatureNodesForType(parentNode, xtendType, inferredType, inferredType, processedFeatures, 0);
 		} else {
 			for (XtendMember member : xtendType.getMembers())
-				createEObjectNode(parentNode, member);
+				createNode(parentNode, member);
 		}
 	}
 
@@ -136,7 +139,7 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 							processedFeatures.add(dispatchCase);
 						}
 						if(inheritsDispatchCases) 
-							dispatcherNode.setImage(images.forDispatcherFunction(dispatcher.getVisibility(), 
+							dispatcherNode.setImageDescriptor(images.forDispatcherFunction(dispatcher.getVisibility(), 
 									adornments.get(dispatcher) | JavaElementImageDescriptor.OVERRIDES));
 					}
 				}
@@ -175,66 +178,40 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 
 	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmDeclaredType inferredType,
 			JvmFeature jvmFeature, EObject semanticFeature, int inheritanceDepth) {
-		Object text = textDispatcher.invoke(semanticFeature);
-		Image image = imageDispatcher.invoke(semanticFeature);
 		final boolean synthetic = typeExtensions.isSynthetic(jvmFeature);
-		if (synthetic) {
-			text = textDispatcher.invoke(jvmFeature);
-			image = imageDispatcher.invoke(jvmFeature);
-		}
+		Object text = getText(synthetic ? jvmFeature : semanticFeature);
+		ImageDescriptor image = getImageDescriptor(synthetic ? jvmFeature : semanticFeature);
 		if (jvmFeature.getDeclaringType() != inferredType) {
 			if (getCurrentMode() == SHOW_INHERITED_MODE) {
 				StyledString label = (text instanceof StyledString) ? (StyledString) text : new StyledString(
 						text.toString());
 				label.append(new StyledString(" - " + jvmFeature.getDeclaringType().getIdentifier(),
 						StyledString.COUNTER_STYLER));
-				return createXtendFeatureNode(parentNode, jvmFeature, image, label, true, synthetic, inheritanceDepth);
+				return factory.createXtendFeatureNode(parentNode, jvmFeature, image, label, true, synthetic, inheritanceDepth);
 			}
 			return null;
 		} else {
-			return createXtendFeatureNode(parentNode, semanticFeature, image, text, true, synthetic, inheritanceDepth);
+			return factory.createXtendFeatureNode(parentNode, semanticFeature, image, text, true, synthetic, inheritanceDepth);
 		}
 	}
 
-	protected XtendFeatureNode createXtendFeatureNode(IOutlineNode parentNode, EObject modelElement, Image image,
-			Object text, boolean isLeaf, boolean synthetic, int inheritanceDepth) {
-		XtendFeatureNode featureNode = new XtendFeatureNode(modelElement, parentNode, image, text, isLeaf);
-		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
-		if (parserNode != null)
-			featureNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
-		if (isLocalElement(parentNode, modelElement))
-			featureNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
-		featureNode.setStatic(isStatic(modelElement));
-		featureNode.setSynthetic(synthetic);
-		featureNode.setInheritanceDepth(inheritanceDepth);
-		return featureNode;
-	}
+	private int currentModeIndex = 0;
 
-	protected boolean isStatic(EObject element) {
-		if (element instanceof JvmField)
-			return ((JvmField) element).isStatic();
-		else if (element instanceof JvmOperation)
-			return ((JvmOperation) element).isStatic();
-		else if (element instanceof XtendField)
-			return ((XtendField) element).isStatic();
-		else if (element instanceof XtendFunction)
-			return ((XtendFunction) element).isStatic();
-		else
-			return false;
-	}
-
-	@Override
-	protected boolean _isLeaf(EObject element) {
-		return true;
-	}
-
-	protected Object _text(XImportDeclaration importDeclaration) {
-		return (importDeclaration.getImportedNamespace() != null) ? importDeclaration.getImportedNamespace()
-				: importDeclaration.getImportedTypeName();
-	}
-
-	@Override
 	public List<OutlineMode> getOutlineModes() {
 		return MODES;
+	}
+	
+	public OutlineMode getCurrentMode() {
+		return getOutlineModes().get(currentModeIndex);
+	}
+	
+	public OutlineMode getNextMode() {
+		return getOutlineModes().get((currentModeIndex + 1) % getOutlineModes().size());
+	}
+	
+	public void setCurrentMode(OutlineMode outlineMode) {
+		int newIndex = getOutlineModes().indexOf(outlineMode);
+		if(newIndex != -1)
+			currentModeIndex = newIndex;
 	}
 }

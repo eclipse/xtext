@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.editor.GlobalURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
 import org.junit.Test;
 
@@ -97,9 +96,9 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 	@Test public void testOpenFromOutline() throws Exception {
 		XtextEditor bazXtendEditor = workbenchTestHelper.openEditor("outlinetest.Baz.xtend",
 				"package outlinetest class Baz extends Foo { int baz }");
-		ModeAwareOutlineTreeProvider tp = (ModeAwareOutlineTreeProvider) treeProvider;
+		IOutlineTreeProvider.ModeAware tp = (IOutlineTreeProvider.ModeAware) treeProvider;
 		tp.setCurrentMode(tp.getOutlineModes().get(1));
-		IOutlineNode outlineRoot = tp.createRoot(bazXtendEditor.getDocument());
+		IOutlineNode outlineRoot = treeProvider.createRoot(bazXtendEditor.getDocument());
 		IOutlineNode bazNode = outlineRoot.getChildren().get(1);
 		assertEquals("Baz", bazNode.getText().toString());
 		assertTrue(bazNode.getChildren().size() > 2);
