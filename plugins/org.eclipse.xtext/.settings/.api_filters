@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter comment="c.g.inject 2.0-&gt;3.0" id="0"/>
         <filter comment="Added new API that is required to fix a bug. See Bug 405541 - XtendMavenPlugin/BatchCompiler Output Encoding Issue" id="924844039">
             <message_arguments>
                 <message_argument value="2.4.1"/>
@@ -11,6 +12,12 @@
             <message_arguments>
                 <message_argument value="2.4.2"/>
                 <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
+        <filter comment="consistent c.g.inject version" id="927989779">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="com.google.inject"/>
             </message_arguments>
         </filter>
     </resource>
