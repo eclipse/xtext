@@ -9,9 +9,8 @@ package org.eclipse.xtend.ide.highlighting;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
-import org.eclipse.xtext.ui.IImageHelper;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 
@@ -25,14 +24,14 @@ import com.google.inject.Singleton;
 public class ShowWhitespaceCharactersActionContributor implements IActionContributor {
 
 	@Inject
-	private IImageHelper imageHelper;
+	private IImageDescriptorHelper imageHelper;
 
 	public void contributeActions(XtextEditor editor) {
 		IAction action = editor.getAction(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS);
-		action.setImageDescriptor(ImageDescriptor.createFromImage(imageHelper
-				.getImage("full/etool16/show_whitespace_chars.gif")));
-		action.setDisabledImageDescriptor(ImageDescriptor.createFromImage(imageHelper
-				.getImage("full/dtool16/show_whitespace_chars.gif")));
+		action.setImageDescriptor(imageHelper
+				.getImageDescriptor("full/etool16/show_whitespace_chars.gif"));
+		action.setDisabledImageDescriptor(imageHelper
+				.getImageDescriptor("full/dtool16/show_whitespace_chars.gif"));
 		IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
 		toolBarManager.remove(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS);
 		toolBarManager.add(action);

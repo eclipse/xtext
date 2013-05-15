@@ -18,13 +18,12 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtext.ui.IImageHelper;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -33,10 +32,10 @@ public class AbstractNewXtendElementWizard extends NewElementWizard {
 
 	private AbstractNewXtendElementWizardPage page;
 
-	public AbstractNewXtendElementWizard(IImageHelper imgHelper, AbstractNewXtendElementWizardPage page, String title) {
+	public AbstractNewXtendElementWizard(IImageDescriptorHelper imgHelper, AbstractNewXtendElementWizardPage page, String title) {
 		this.page= page;
-		Image image = imgHelper.getImage("xtend_wizard_big.png");
-		setDefaultPageImageDescriptor(ImageDescriptor.createFromImage(image));
+		ImageDescriptor image = imgHelper.getImageDescriptor("xtend_wizard_big.png");
+		setDefaultPageImageDescriptor(image);
 		setDialogSettings(JavaPlugin.getDefault().getDialogSettings());
 		setWindowTitle(title);
 	}

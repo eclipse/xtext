@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.wizards;
 
-import org.eclipse.xtext.ui.IImageHelper;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 
 import com.google.inject.Inject;
 
@@ -18,7 +18,7 @@ public class NewXtendEnumWizard extends AbstractNewXtendElementWizard {
 public static final String TITLE = "Xtend Enum"; //$NON-NLS-1$
 
 	@Inject
-	public NewXtendEnumWizard(IImageHelper imgHelper, NewXtendEnumWizardPage page) {
+	public NewXtendEnumWizard(IImageDescriptorHelper imgHelper, NewXtendEnumWizardPage page) {
 		super(imgHelper, page, TITLE);
 	}
 }
