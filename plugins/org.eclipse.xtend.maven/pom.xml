@@ -23,7 +23,7 @@
 	<name>Xtend Parent/Container</name>
 
 	<properties>
-		<guava.version>[10.0.1,)</guava.version>
+		<guava.version>[10.0.1,15.0)</guava.version>
 		<xtend.repo.name>Xtend provisional repository</xtend.repo.name>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
