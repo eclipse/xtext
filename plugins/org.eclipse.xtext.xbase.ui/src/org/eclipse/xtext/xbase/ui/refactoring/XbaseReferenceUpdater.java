@@ -59,7 +59,8 @@ import com.google.inject.Inject;
  */
 public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 
-	@Inject@LinkingScopeProviderBinding
+	@Inject
+	@LinkingScopeProviderBinding
 	private IScopeProvider scopeProvider;
 
 	@Inject
@@ -187,7 +188,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 		while(currentMember.getDeclaringType() != null 
 				&& section.getImportedType(currentMember.getSimpleName()) != currentMember) {
 			currentMember = currentMember.getDeclaringType();
-			relativeName.insert(0, "$");
+			relativeName.insert(0, ".");
 			relativeName.insert(0, currentMember.getSimpleName());
 		}
 		return Tuples.create((JvmDeclaredType) currentMember, qualifiedNameConverter.toQualifiedName(relativeName.toString()));

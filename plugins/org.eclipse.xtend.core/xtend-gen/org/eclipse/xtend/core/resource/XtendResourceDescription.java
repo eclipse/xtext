@@ -4,8 +4,8 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +14,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -64,7 +66,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   }
   
   public Iterable<QualifiedName> getImportedNames() {
-    final ArrayList<QualifiedName> result = CollectionLiterals.<QualifiedName>newArrayList();
+    final HashSet<QualifiedName> result = CollectionLiterals.<QualifiedName>newHashSet();
     Iterable<QualifiedName> _importedNames = super.getImportedNames();
     Iterables.<QualifiedName>addAll(result, _importedNames);
     Resource _resource = this.getResource();
@@ -86,14 +88,40 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           boolean _notEquals = (!Objects.equal(typeRef, null));
           if (_notEquals) {
             JvmType _type = typeRef.getType();
-            final Procedure1<String> _function_1 = new Procedure1<String>() {
-                public void apply(final String it) {
+            final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
+                public Boolean apply(final String it) {
                   QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
                   QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                  result.add(_lowerCase);
+                  boolean _add = result.add(_lowerCase);
+                  return Boolean.valueOf(_add);
                 }
               };
             this.registerAllTypes(_type, _function_1);
+          }
+        }
+        TreeIterator<Object> _allContents_1 = EcoreUtil.<Object>getAllContents(eobject, true);
+        Iterator<JvmIdentifiableElement> _filter_1 = Iterators.<JvmIdentifiableElement>filter(_allContents_1, JvmIdentifiableElement.class);
+        List<JvmIdentifiableElement> _list_1 = IteratorExtensions.<JvmIdentifiableElement>toList(_filter_1);
+        final Function1<JvmIdentifiableElement,LightweightTypeReference> _function_2 = new Function1<JvmIdentifiableElement,LightweightTypeReference>() {
+            public LightweightTypeReference apply(final JvmIdentifiableElement it) {
+              LightweightTypeReference _actualType = types.getActualType(it);
+              return _actualType;
+            }
+          };
+        final List<LightweightTypeReference> typesOfIdentifiables = ListExtensions.<JvmIdentifiableElement, LightweightTypeReference>map(_list_1, _function_2);
+        for (final LightweightTypeReference typeRef_1 : typesOfIdentifiables) {
+          boolean _notEquals_1 = (!Objects.equal(typeRef_1, null));
+          if (_notEquals_1) {
+            JvmType _type_1 = typeRef_1.getType();
+            final Function1<String,Boolean> _function_3 = new Function1<String,Boolean>() {
+                public Boolean apply(final String it) {
+                  QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
+                  QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                  boolean _add = result.add(_lowerCase);
+                  return Boolean.valueOf(_add);
+                }
+              };
+            this.registerAllTypes(_type_1, _function_3);
           }
         }
       }
@@ -110,29 +138,33 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     return IterableExtensions.<QualifiedName>toSet(_filter);
   }
   
-  public void registerAllTypes(final JvmType type, final Procedure1<? super String> acceptor) {
+  public void registerAllTypes(final JvmType type, final Function1<? super String,? extends Boolean> acceptor) {
     boolean _equals = Objects.equal(type, null);
     if (_equals) {
       return;
     }
     String _identifier = type.getIdentifier();
-    acceptor.apply(_identifier);
-    boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof JvmGenericType) {
-        final JvmGenericType _jvmGenericType = (JvmGenericType)type;
-        _matched=true;
-        JvmTypeReference _extendedClass = _jvmGenericType==null?(JvmTypeReference)null:_jvmGenericType.getExtendedClass();
-        JvmType _type = _extendedClass==null?(JvmType)null:_extendedClass.getType();
-        this.registerAllTypes(_type, acceptor);
-        Iterable<JvmTypeReference> _extendedInterfaces = _jvmGenericType.getExtendedInterfaces();
-        final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
-            public void apply(final JvmTypeReference it) {
-              JvmType _type = it==null?(JvmType)null:it.getType();
-              XtendResourceDescription.this.registerAllTypes(_type, acceptor);
-            }
-          };
-        IterableExtensions.<JvmTypeReference>forEach(_extendedInterfaces, _function);
+    Boolean _apply = acceptor.apply(_identifier);
+    if ((_apply).booleanValue()) {
+      boolean _matched = false;
+      if (!_matched) {
+        if (type instanceof JvmGenericType) {
+          final JvmGenericType _jvmGenericType = (JvmGenericType)type;
+          _matched=true;
+          JvmDeclaredType _declaringType = _jvmGenericType.getDeclaringType();
+          this.registerAllTypes(_declaringType, acceptor);
+          JvmTypeReference _extendedClass = _jvmGenericType==null?(JvmTypeReference)null:_jvmGenericType.getExtendedClass();
+          JvmType _type = _extendedClass==null?(JvmType)null:_extendedClass.getType();
+          this.registerAllTypes(_type, acceptor);
+          Iterable<JvmTypeReference> _extendedInterfaces = _jvmGenericType.getExtendedInterfaces();
+          final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
+              public void apply(final JvmTypeReference it) {
+                JvmType _type = it==null?(JvmType)null:it.getType();
+                XtendResourceDescription.this.registerAllTypes(_type, acceptor);
+              }
+            };
+          IterableExtensions.<JvmTypeReference>forEach(_extendedInterfaces, _function);
+        }
       }
     }
   }

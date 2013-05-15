@@ -10,8 +10,10 @@ package org.eclipse.xtext.generator.serializer
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.ENamedElement
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.xtext.Grammar
@@ -19,18 +21,15 @@ import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider$IConstraint
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic$Acceptor
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider$INodesForEObjectProvider
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService$ValueTransient
 import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.emf.ecore.ENamedElement
-import java.util.List
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	

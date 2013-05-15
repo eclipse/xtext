@@ -67,9 +67,9 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
               boolean _notEquals = (!Objects.equal(obj, null));
               if (_notEquals) {
                 String _identifier = obj.getIdentifier();
-                String _lowerCase = _identifier.toLowerCase();
-                QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_lowerCase);
-                boolean _add = names.add(_qualifiedName);
+                QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
+                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                boolean _add = names.add(_lowerCase);
                 _xifexpression = Boolean.valueOf(_add);
               }
               _xblockexpression = (_xifexpression);
@@ -80,24 +80,17 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
       localResourceAccess.<Boolean>readOnly(uri, _function_2);
     }
     Iterable<QualifiedName> _importedNames = resourceDescription.getImportedNames();
-    final Function1<QualifiedName,QualifiedName> _function_3 = new Function1<QualifiedName,QualifiedName>() {
-        public QualifiedName apply(final QualifiedName it) {
-          QualifiedName _lowerCase = it.toLowerCase();
-          return _lowerCase;
-        }
-      };
-    Iterable<QualifiedName> _map_1 = IterableExtensions.<QualifiedName, QualifiedName>map(_importedNames, _function_3);
-    final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_map_1);
-    final Function1<QualifiedName,Boolean> _function_4 = new Function1<QualifiedName,Boolean>() {
+    final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
+    final Function1<QualifiedName,Boolean> _function_3 = new Function1<QualifiedName,Boolean>() {
         public Boolean apply(final QualifiedName it) {
           boolean _contains = importedNames.contains(it);
           return Boolean.valueOf(_contains);
         }
       };
-    boolean _exists_1 = IterableExtensions.<QualifiedName>exists(names, _function_4);
+    boolean _exists_1 = IterableExtensions.<QualifiedName>exists(names, _function_3);
     if (_exists_1) {
       URI _uRI = resourceDescription.getURI();
-      final IUnitOfWork<Object,ResourceSet> _function_5 = new IUnitOfWork<Object,ResourceSet>() {
+      final IUnitOfWork<Object,ResourceSet> _function_4 = new IUnitOfWork<Object,ResourceSet>() {
           public Object exec(final ResourceSet it) throws Exception {
             URI _uRI = resourceDescription.getURI();
             Resource _resource = it.getResource(_uRI, true);
@@ -110,7 +103,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
             return null;
           }
         };
-      localResourceAccess.<Object>readOnly(_uRI, _function_5);
+      localResourceAccess.<Object>readOnly(_uRI, _function_4);
     }
   }
 }

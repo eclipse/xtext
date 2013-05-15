@@ -192,7 +192,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			IType javaClass = findJavaType("test.JavaClass");
 			assertNotNull(javaClass);
 			renameJavaElement(javaClass, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
+			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass").replace('$', '.'));
 		} finally {
 			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
@@ -208,7 +208,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IType javaClass = findJavaType("test.JavaClass.Inner");
 		assertNotNull(javaClass);
 		renameJavaElement(javaClass, "NewInner");
-		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner", "NewInner"));
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner", "NewInner").replace('$', '.'));
 	}
 
 	@Test
@@ -221,7 +221,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IType javaClass = findJavaType("test.JavaClass.Inner");
 		assertNotNull(javaClass);
 		renameJavaElement(javaClass, "NewInner");
-		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner", "NewInner"));
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner", "NewInner").replace('$', '.'));
 	}
 
 	@Test
@@ -234,7 +234,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IType javaClass = findJavaType("test.JavaClass.Middle");
 		assertNotNull(javaClass);
 		renameJavaElement(javaClass, "NewMiddle");
-		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Middle", "NewMiddle"));
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Middle", "NewMiddle").replace('$', '.'));
 	}
 
 	@Test
@@ -335,7 +335,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IType javaType = findJavaType("test.JavaClass.Inner");
 		assertNotNull(javaType);
 		renameJavaElement(javaType, "NewInner");
-		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner",  "NewInner"));
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner",  "NewInner").replace('$', '.'));
 	}
 		
 	@Test
@@ -348,7 +348,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IType javaType = findJavaType("test.JavaClass.Inner");
 		assertNotNull(javaType);
 		renameJavaElement(javaType, "NewInner");
-		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner",  "NewInner"));
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner",  "NewInner").replace('$', '.'));
 	}
 		
 	@Test

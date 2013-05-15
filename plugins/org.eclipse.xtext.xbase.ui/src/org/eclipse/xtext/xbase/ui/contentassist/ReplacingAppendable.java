@@ -206,7 +206,7 @@ public class ReplacingAppendable extends AbstractStringBuilderBasedAppendable {
 	}
 
 	protected char getInnerTypeSeparator() {
-		return '$';
+		return '.';
 	}
 
 	@Override
