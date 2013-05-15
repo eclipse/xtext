@@ -20,7 +20,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.XExpression
 import com.google.common.base.Objects
 import bug380058.Amount
-import org.eclipse.xtext.generator.trace.ITraceRegionProviderimport org.eclipse.xtext.generator.IFilePostProcessor
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider
+import org.eclipse.xtext.generator.IFilePostProcessor
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

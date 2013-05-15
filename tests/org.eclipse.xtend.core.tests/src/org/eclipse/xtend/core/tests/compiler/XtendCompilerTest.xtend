@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
+import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.junit.Ignore
-import org.junit.Testimport com.google.inject.Inject
 import org.eclipse.xtext.generator.IFilePostProcessor
+import org.junit.Ignore
+import org.junit.Test
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
 
