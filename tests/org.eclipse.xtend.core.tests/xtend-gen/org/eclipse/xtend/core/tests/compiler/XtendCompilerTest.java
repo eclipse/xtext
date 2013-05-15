@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -15,6 +16,7 @@ import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -23,6 +25,9 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendCompilerTest extends AbstractXtendCompilerTest {
+  @Inject
+  protected IFilePostProcessor postProcessor;
+  
   @Test
   public void testClassAndLocalVarConflict() {
     StringConcatenation _builder = new StringConcatenation();
@@ -6784,8 +6789,12 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
       Iterable<JvmDeclaredType> _filter_1 = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
       final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>last(_filter_1);
       final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(barType);
-      final CharSequence barJavaCode = this.generator.generateType(barType, generatorConfig);
-      final CharSequence bazJavaCode = this.generator.generateType(bazType, generatorConfig);
+      CharSequence barJavaCode = this.generator.generateType(barType, generatorConfig);
+      CharSequence _postProcess = this.postProcessor.postProcess(null, barJavaCode);
+      barJavaCode = _postProcess;
+      CharSequence bazJavaCode = this.generator.generateType(bazType, generatorConfig);
+      CharSequence _postProcess_1 = this.postProcessor.postProcess(null, bazJavaCode);
+      bazJavaCode = _postProcess_1;
       String _string_1 = expectedBarClass.toString();
       String _string_2 = barJavaCode.toString();
       XtendCompilerTest.assertEquals(_string_1, _string_2);

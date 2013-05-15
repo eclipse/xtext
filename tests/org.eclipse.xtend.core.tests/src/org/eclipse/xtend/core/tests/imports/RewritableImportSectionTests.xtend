@@ -305,7 +305,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 	def protected processLinebreaks(CharSequence sequence) {
 		val lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(xtendFile.eResource.URI).lineSeparator
 		if(ignoreLinebreaks)
-			sequence.toString.replaceAll(Pattern::quote(lineSeparator) + "*", " ")
+			sequence.toString.replaceAll("(" + lineSeparator + ")+", " ")
 		else
 			sequence.toString
 	}

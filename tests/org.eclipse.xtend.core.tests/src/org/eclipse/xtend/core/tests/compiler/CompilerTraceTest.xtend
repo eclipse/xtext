@@ -14,7 +14,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
-import org.junit.Test
+import org.junit.Testimport org.eclipse.xtext.generator.IFilePostProcessor
 
 /**
  * @author Sebastian Zarnekow
@@ -26,7 +26,9 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 
 	@Inject extension IXtendJvmAssociations
-	
+
+	@Inject protected IFilePostProcessor postProcessor
+
 	@Test
 	def void testClassComment() throws Exception {
 		'''
@@ -773,8 +775,9 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		val actualXtendCode = xtendGroup1 + xtendGroup2 + xtendGroup3 
 		val file = file(actualXtendCode, true)
 		val inferredType = (file.getXtendTypes.head as XtendClass).getInferredType
-		val compiledCode = generator.generateType(inferredType, generatorConfigProvider.get(inferredType));
-		
+		var compiledCode = generator.generateType(inferredType, generatorConfigProvider.get(inferredType));
+		compiledCode = postProcessor.postProcess(null, compiledCode);
+
 		val javaMatcher = p.matcher(java.toString);
 		assertTrue("javaMatcher.matches", javaMatcher.matches());
 		val javaGroup1 = javaMatcher.group(1);

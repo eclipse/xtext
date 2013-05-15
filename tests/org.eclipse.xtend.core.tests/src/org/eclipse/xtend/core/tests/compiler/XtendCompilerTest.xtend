@@ -9,10 +9,13 @@ package org.eclipse.xtend.core.tests.compiler
 
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.junit.Ignore
-import org.junit.Test
+import org.junit.Testimport com.google.inject.Inject
+import org.eclipse.xtext.generator.IFilePostProcessor
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
-	
+
+	@Inject protected IFilePostProcessor postProcessor
+
 	@Test
 	def testClassAndLocalVarConflict() {
 		assertCompilesTo('''
@@ -3121,8 +3124,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
 		val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
 		val generatorConfig =  generatorConfigProvider.get(barType)
-		val barJavaCode = generator.generateType(barType, generatorConfig);
-		val bazJavaCode = generator.generateType(bazType, generatorConfig);
+		var barJavaCode = generator.generateType(barType, generatorConfig);
+		barJavaCode = postProcessor.postProcess(null, barJavaCode);
+		var bazJavaCode = generator.generateType(bazType, generatorConfig);
+		bazJavaCode = postProcessor.postProcess(null, bazJavaCode);
 		XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
 		XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
 	}

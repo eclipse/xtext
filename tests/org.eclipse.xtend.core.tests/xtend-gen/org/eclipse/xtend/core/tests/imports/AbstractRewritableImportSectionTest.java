@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Pattern;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -360,9 +359,9 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       boolean _isIgnoreLinebreaks = this.isIgnoreLinebreaks();
       if (_isIgnoreLinebreaks) {
         String _string = sequence.toString();
-        String _quote = Pattern.quote(lineSeparator);
-        String _plus = (_quote + "*");
-        String _replaceAll = _string.replaceAll(_plus, " ");
+        String _plus = ("(" + lineSeparator);
+        String _plus_1 = (_plus + ")+");
+        String _replaceAll = _string.replaceAll(_plus_1, " ");
         _xifexpression = _replaceAll;
       } else {
         String _string_1 = sequence.toString();

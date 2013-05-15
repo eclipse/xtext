@@ -8,7 +8,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 public class BasicFormatterPreferenceKeys {
   public final static StringKey lineSeparator = new Function0<StringKey>() {
     public StringKey apply() {
-      StringKey _stringKey = new StringKey("line.separator", "\n");
+      String _property = System.getProperty("line.separator");
+      StringKey _stringKey = new StringKey("line.separator", _property);
       return _stringKey;
     }
   }.apply();

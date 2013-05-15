@@ -21,6 +21,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
@@ -47,6 +48,9 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   
   @Inject
   protected OnTheFlyJavaCompiler compiler;
+  
+  @Inject
+  protected IFilePostProcessor postProcessor;
   
   protected boolean useJavaCompiler = false;
   
@@ -86,7 +90,9 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
       boolean _isDisabled = DisableCodeGenerationAdapter.isDisabled(inferredType);
       Assert.assertFalse(_isDisabled);
-      final CharSequence javaCode = this.generator.generateType(inferredType, config);
+      CharSequence javaCode = this.generator.generateType(inferredType, config);
+      CharSequence _postProcess = this.postProcessor.postProcess(null, javaCode);
+      javaCode = _postProcess;
       String _string_1 = expected.toString();
       String _string_2 = javaCode.toString();
       XtendCompilerTest.assertEquals(_string_1, _string_2);

@@ -9,6 +9,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider.Factory;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
@@ -28,6 +29,9 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
+  
+  @Inject
+  protected IFilePostProcessor postProcessor;
   
   @Test
   public void testUnresolvedSuperclass() {
@@ -494,7 +498,9 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
         Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
         final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
         GeneratorConfig _get = this.generatorConfigProvider.get(inferredType);
-        final CharSequence javaCode = this.generator.generateType(inferredType, _get);
+        CharSequence javaCode = this.generator.generateType(inferredType, _get);
+        CharSequence _postProcess = this.postProcessor.postProcess(null, javaCode);
+        javaCode = _postProcess;
         String _string_1 = expected.toString();
         String _string_2 = javaCode.toString();
         Assert.assertEquals(_string_1, _string_2);

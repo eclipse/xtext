@@ -17,6 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
@@ -49,6 +50,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
+  
+  @Inject
+  protected IFilePostProcessor postProcessor;
   
   @Test
   public void testClassComment() throws Exception {
@@ -1568,7 +1572,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       final JvmGenericType inferredType = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
       GeneratorConfig _get = this.generatorConfigProvider.get(inferredType);
-      final CharSequence compiledCode = this.generator.generateType(inferredType, _get);
+      CharSequence compiledCode = this.generator.generateType(inferredType, _get);
+      CharSequence _postProcess = this.postProcessor.postProcess(null, compiledCode);
+      compiledCode = _postProcess;
       String _string = java.toString();
       final Matcher javaMatcher = this.p.matcher(_string);
       boolean _matches_1 = javaMatcher.matches();
