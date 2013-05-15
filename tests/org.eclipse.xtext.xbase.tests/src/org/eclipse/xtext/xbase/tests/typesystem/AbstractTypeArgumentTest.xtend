@@ -16,16 +16,15 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XbasePackage$Literals
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
+import org.junit.Ignore
 import org.junit.Test
 
-import static org.junit.Assert.*
-import org.junit.Ignore
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -106,8 +105,8 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		].toList
 		return result.sortBy [
 			val structuralFeature = switch(it) {
-				XAbstractFeatureCall: XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE
-				XConstructorCall: XbasePackage$Literals::XCONSTRUCTOR_CALL__CONSTRUCTOR
+				XAbstractFeatureCall: XABSTRACT_FEATURE_CALL__FEATURE
+				XConstructorCall: XCONSTRUCTOR_CALL__CONSTRUCTOR
 			} 
 			return NodeModelUtils::findNodesForFeature(it, structuralFeature).head.offset
 		]

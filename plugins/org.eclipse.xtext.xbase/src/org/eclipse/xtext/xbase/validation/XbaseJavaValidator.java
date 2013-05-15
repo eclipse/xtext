@@ -1062,11 +1062,21 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				JvmType type = importedNames.remove(simpleName);
 				imports.remove(type);
 			} else {
-				while (simpleName.contains("$")) {
-					simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
-					if (importedNames.containsKey(simpleName)) {
-						imports.remove(importedNames.remove(simpleName));
-						break;
+				if (simpleName.contains("$")) {
+					while (simpleName.contains("$")) {
+						simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
+						if (importedNames.containsKey(simpleName)) {
+							imports.remove(importedNames.remove(simpleName));
+							break;
+						}
+					}
+				} else if (simpleName.contains(".")) {
+					while (simpleName.contains(".")) {
+						simpleName = simpleName.substring(0, simpleName.lastIndexOf('.'));
+						if (importedNames.containsKey(simpleName)) {
+							imports.remove(importedNames.remove(simpleName));
+							break;
+						}
 					}
 				}
 			}
