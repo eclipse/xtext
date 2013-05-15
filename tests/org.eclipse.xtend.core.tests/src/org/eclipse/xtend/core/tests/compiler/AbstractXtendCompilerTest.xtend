@@ -20,7 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.XExpression
 import com.google.common.base.Objects
 import bug380058.Amount
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider
+import org.eclipse.xtext.generator.trace.ITraceRegionProviderimport org.eclipse.xtext.generator.IFilePostProcessor
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,6 +30,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject protected JvmModelGenerator generator
 	@Inject protected IGeneratorConfigProvider generatorConfigProvider
 	@Inject protected OnTheFlyJavaCompiler compiler
+	@Inject protected IFilePostProcessor postProcessor
 	
 	protected boolean useJavaCompiler = false
 	
@@ -59,7 +60,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		val file = file(input.toString(), true)
 		val inferredType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
 		assertFalse(DisableCodeGenerationAdapter::isDisabled(inferredType))
-		val javaCode = generator.generateType(inferredType, config);
+		var javaCode = generator.generateType(inferredType, config);
+		javaCode = postProcessor.postProcess(null, javaCode);
 		XtendCompilerTest::assertEquals(expected.toString, javaCode.toString);
 		if (useJavaCompiler && file.xtendTypes.size == 1) {
 			val typeName = if (file.package != null) {

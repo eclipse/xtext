@@ -6,7 +6,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.junit.Test
+import org.junit.Testimport org.eclipse.xtext.generator.IFilePostProcessor
 
 class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	
@@ -15,6 +15,8 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	@Inject ElementIssueProvider$Factory issueProviderFactory
 	
 	@Inject IGeneratorConfigProvider generatorConfigProvider
+
+	@Inject protected IFilePostProcessor postProcessor
 
 	@Test
 	def testUnresolvedSuperclass() {
@@ -294,7 +296,8 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		try {
 			issueProviderFactory.attachData(resource)
 			val inferredType = resource.contents.filter(typeof(JvmDeclaredType)).head
-			val javaCode = generator.generateType(inferredType, generatorConfigProvider.get(inferredType));
+			var javaCode = generator.generateType(inferredType, generatorConfigProvider.get(inferredType));
+			javaCode = postProcessor.postProcess(null, javaCode)
 			assertEquals(expected.toString, javaCode.toString)
 		} finally {
 			issueProviderFactory.detachData(resource);
