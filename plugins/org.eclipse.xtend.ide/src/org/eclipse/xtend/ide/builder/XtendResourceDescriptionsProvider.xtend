@@ -1,17 +1,16 @@
 package org.eclipse.xtend.ide.builder
 
-import java.util.Set
+import com.google.inject.Inject
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
-import org.eclipse.jdt.core.IJavaProject
-import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
-import com.google.inject.Inject
 
 class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	
@@ -49,6 +48,9 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	}
 	
 	def private boolean isContainedUri(URI uri) {
+		// we expect platform://resource URIs here, where the second segment denotes the project's name.
+		if (uri == null || uri.segmentCount<2)
+			return false
 		return uri.segment(1) == project.project.name
 	}
 	
