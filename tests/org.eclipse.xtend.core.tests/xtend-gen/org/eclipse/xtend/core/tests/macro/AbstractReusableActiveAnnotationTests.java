@@ -1028,6 +1028,104 @@ public abstract class AbstractReusableActiveAnnotationTests {
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
   
+  @Test
+  public void testIntroduceNewTypeAndWorWithIt() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(NewTypesAddingAnnotationProcessor))");
+    _builder.newLine();
+    _builder.append("annotation NewTypesAddingAnnotation { }");
+    _builder.newLine();
+    _builder.append("class NewTypesAddingAnnotationProcessor implements RegisterGlobalsParticipant<ClassDeclaration>, TransformationParticipant<MutableClassDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doRegisterGlobals(List<? extends ClassDeclaration> sourceClasses, RegisterGlobalsContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for (clazz : sourceClasses) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("context.registerClass(clazz.qualifiedName+\"Derived\")");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("classes.forEach [ ele |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val cl = context.findClass(ele.qualifiedName+\"Derived\")");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("cl.extendedClass = newTypeReference(ele)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/NewTypesAddingAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.NewTypesAddingAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration declaredClass = _typeLookup.findClass("myusercode.MyClass");
+          Assert.assertNotNull(declaredClass);
+          TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
+          final MutableClassDeclaration clazz = _typeLookup_1.findClass("myusercode.MyClassDerived");
+          Assert.assertNotNull(clazz);
+          String _qualifiedName = declaredClass.getQualifiedName();
+          TypeReference _extendedClass = clazz.getExtendedClass();
+          Type _type = _extendedClass.getType();
+          String _qualifiedName_1 = _type.getQualifiedName();
+          Assert.assertEquals(_qualifiedName, _qualifiedName_1);
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
   private final Pair<String,String> THREE_ANNOTATIONS = new Function0<Pair<String,String>>() {
     public Pair<String,String> apply() {
       StringConcatenation _builder = new StringConcatenation();
