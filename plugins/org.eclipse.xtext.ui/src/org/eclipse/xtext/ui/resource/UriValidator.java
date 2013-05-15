@@ -54,20 +54,22 @@ public class UriValidator {
 		}
 		return false;
 	}
-	
-	
+
 	/**
 	 * @return whether there's possibly an {@link IResourceServiceProvider} for the given storage
 	 * @since 2.4
 	 */
 	public boolean isPossiblyManaged(IStorage storage) {
-		IPath fullPath = storage.getFullPath();
-		if (fullPath == null)
-			return true;
 		if (!registry.getContentTypeToFactoryMap().isEmpty())
 			return true;
-		String fileExtension = URI.encodeSegment(fullPath.getFileExtension(), true);
-		return registry.getExtensionToFactoryMap().containsKey(fileExtension);
+		String name = storage.getName();
+		if (name == null) {
+			return true;
+		}
+		int index = name.lastIndexOf('.');
+		if (index == -1) {
+			return true;
+		}
+		return registry.getExtensionToFactoryMap().containsKey(name.substring(index + 1));
 	}
-
 }

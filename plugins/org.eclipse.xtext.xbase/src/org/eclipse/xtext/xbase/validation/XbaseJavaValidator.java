@@ -1013,16 +1013,18 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected void handleTypeUsageInStaticFeatureCall(final Map<JvmType, XImportDeclaration> staticImports,
 			final Map<JvmType, XImportDeclaration> extensionImports, INode n) {
 		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) n.getSemanticElement();
-		if(featureCall.isStatic()
-				&& (featureCall.getFeature() instanceof JvmField ||
-					featureCall.getFeature() instanceof JvmOperation)) {
+		boolean isExtension = featureCall.isExtension();
+		if (featureCall.isStatic() || isExtension) {
 			JvmFeature feature = (JvmFeature) featureCall.getFeature();
-			if(feature.getDeclaringType() != null) {
+			JvmDeclaredType declaringType = feature.getDeclaringType();
+			if (declaringType != null) {
 				JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
 				JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
-				if(!contains(featureCallOwner.getAllFeatures(), feature)) {
-					if(featureCall.isExtension() || staticImports.remove(feature.getDeclaringType()) == null) {
-						extensionImports.remove(feature.getDeclaringType());
+				if (featureCallOwner != declaringType) {
+					if (isExtension) {
+						extensionImports.remove(declaringType);
+					} else {
+						staticImports.remove(declaringType);
 					}
 				}
 			}
