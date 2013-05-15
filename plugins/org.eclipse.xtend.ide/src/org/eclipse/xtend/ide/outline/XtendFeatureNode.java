@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.outline;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 
@@ -25,8 +25,8 @@ public class XtendFeatureNode extends EObjectNode {
 	
 	private int inheritanceDepth; 
 	
-	public XtendFeatureNode(EObject eObject, IOutlineNode parent, Image image, Object text, boolean isLeaf) {
-		super(eObject, parent, image, text, isLeaf);
+	public XtendFeatureNode(EObject eObject, IOutlineNode parent, ImageDescriptor imageDescriptor, Object text, boolean isLeaf) {
+		super(eObject, parent, imageDescriptor, text, isLeaf);
 	}
 	
 	public void setDispatch(boolean isDispatch) {

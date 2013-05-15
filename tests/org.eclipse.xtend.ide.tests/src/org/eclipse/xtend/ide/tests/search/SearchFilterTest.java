@@ -8,19 +8,17 @@
 package org.eclipse.xtend.ide.tests.search;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.ide.search.XtendSearchFilter;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtend.ide.search.XtendSearchFilter;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;

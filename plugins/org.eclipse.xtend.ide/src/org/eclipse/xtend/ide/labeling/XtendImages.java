@@ -9,9 +9,8 @@ package org.eclipse.xtend.ide.labeling;
 
 import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.ui.IImageHelper;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImages2;
 
 import com.google.inject.Inject;
@@ -24,7 +23,7 @@ import com.google.inject.Inject;
 public class XtendImages extends XbaseImages2 {
 
 	@Inject
-	private IImageHelper imageHelper;
+	private IImageDescriptorHelper imageHelper;
 	
 	public ImageDescriptor forFilter() {
 		return JavaPluginImages.DESC_ELCL_FILTER;
@@ -38,18 +37,18 @@ public class XtendImages extends XbaseImages2 {
 		return JavaPluginImages.DESC_OBJ_OVERRIDES;
 	}
 
-	public Image forPackage() {
-		return getJdtImage(JavaPluginImages.DESC_OBJS_PACKDECL);
+	public ImageDescriptor forPackage() {
+		return JavaPluginImages.DESC_OBJS_PACKDECL;
 	}
 
-	public Image forDispatcherFunction(JvmVisibility visibility, int adornments) {
+	public ImageDescriptor forDispatcherFunction(JvmVisibility visibility, int adornments) {
 		String fileName = new StringBuilder("dispatch_method_")
 			.append(visibility.getName().toLowerCase())
 			.append(".png").toString();
-		return getDecorated(ImageDescriptor.createFromImage(imageHelper.getImage(fileName)), adornments);
+		return getDecorated(imageHelper.getImageDescriptor(fileName), adornments);
 	}
 
-	public Image forFile() {
-		return imageHelper.getImage("xtend.gif");
+	public ImageDescriptor forFile() {
+		return imageHelper.getImageDescriptor("xtend.gif");
 	}
 }
