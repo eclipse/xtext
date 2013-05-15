@@ -46,7 +46,6 @@ import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeContentProvider;
@@ -182,8 +181,8 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	 * @since 2.2
 	 */
 	protected void setInfoText() {
-		if(treeProvider instanceof ModeAwareOutlineTreeProvider) 
-			setInfoText("Press " + invokingKeystroke + " to " + ((ModeAwareOutlineTreeProvider) treeProvider)
+		if(treeProvider instanceof IOutlineTreeProvider.ModeAware) 
+			setInfoText("Press " + invokingKeystroke + " to " + ((IOutlineTreeProvider.ModeAware) treeProvider)
 					.getNextMode().getDescription());
 		else 
 			setInfoText(Messages.QuickOutlinePopup_pressESC);
@@ -405,10 +404,10 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	 * @since 2.2
 	 */
 	protected void changeOutlineMode() {
-		if(treeProvider instanceof ModeAwareOutlineTreeProvider) {
-			ModeAwareOutlineTreeProvider modeTreeProvider = (ModeAwareOutlineTreeProvider) treeProvider;
+		if(treeProvider instanceof IOutlineTreeProvider.ModeAware) {
+			IOutlineTreeProvider.ModeAware modeTreeProvider = (IOutlineTreeProvider.ModeAware) treeProvider;
 			OutlineMode nextMode = modeTreeProvider.getNextMode();
-			((ModeAwareOutlineTreeProvider) treeProvider).setCurrentMode(nextMode);
+			modeTreeProvider.setCurrentMode(nextMode);
 			setInfoText();
 			setInput(document);
 		}

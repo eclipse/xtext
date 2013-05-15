@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -26,10 +27,12 @@ import com.google.common.collect.Lists;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractOutlineNode implements IOutlineNode {
+public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.Extension {
 
 	private Image image;
 
+	private ImageDescriptor imageDescriptor;
+	
 	private Object text;
 
 	private AbstractOutlineNode parent;
@@ -40,9 +43,24 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 
 	private ITextRegion textRegion;
 
+	/**
+	 * @deprecated use {@link #AbstractOutlineNode(IOutlineNode, ImageDescriptor, Object, boolean)} instead.
+	 */
+	@Deprecated
 	protected AbstractOutlineNode(IOutlineNode parent, Image image, Object text, boolean isLeaf) {
 		this.text = text == null ? "<unnamed>" : text;
 		this.image = image;
+		this.isLeaf = isLeaf;
+		setParent(parent);
+		textRegion = ITextRegion.EMPTY_REGION;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected AbstractOutlineNode(IOutlineNode parent, ImageDescriptor imageDescriptor, Object text, boolean isLeaf) {
+		this.text = text == null ? "<unnamed>" : text;
+		this.imageDescriptor = imageDescriptor;
 		this.isLeaf = isLeaf;
 		setParent(parent);
 		textRegion = ITextRegion.EMPTY_REGION;
@@ -105,12 +123,30 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		this.text = text;
 	}
 
+	/**
+	 * @deprecated use {@link #getImageDescriptor()} instead.
+	 */
+	@Deprecated
 	public Image getImage() {
 		return image;
 	}
 
 	public void setImage(Image image) {
 		this.image = image;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public ImageDescriptor getImageDescriptor() {
+		return imageDescriptor;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setImageDescriptor(ImageDescriptor imageDescriptor) {
+		this.imageDescriptor = imageDescriptor;
 	}
 
 	public IXtextDocument getDocument() {

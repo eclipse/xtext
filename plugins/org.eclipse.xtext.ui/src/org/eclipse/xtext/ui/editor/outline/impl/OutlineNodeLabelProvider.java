@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.impl;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StyledString;
@@ -40,8 +41,14 @@ public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider 
 			return super.doGetText(element);
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected Object doGetImage(Object element) {
+			if (element instanceof IOutlineNode.Extension) {
+				ImageDescriptor imageDescriptor = ((IOutlineNode.Extension) element).getImageDescriptor();
+				if(imageDescriptor != null)
+					return imageDescriptor;
+			}
 			if (element instanceof IOutlineNode) {
 				return ((IOutlineNode) element).getImage();
 			}

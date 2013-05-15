@@ -254,20 +254,6 @@ public class PerformanceTest extends AbstractXtendTestCase {
    * Task 'ResourceValidatorImpl.validation' took 6433ms (57 measurements).
    * Task 'DefaultReentrantTypeResolver.resolve' took 4842ms (114 measurements).
    * -------------------------------------------------------------------------------------------------------------------------
-   * After '.' as nested class delimiter with fixed import normalizers
-   * Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
-   * -------------------------------------------------------------------------------------------------------------------------
-   * Task 'PerformanceTest.doCompile' took 12876ms (3 measurements).
-   * Task 'AbstractParser.parse' took 519ms (171 measurements).
-   * Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 450ms (171 measurements).
-   * Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 740ms (171 measurements).
-   * Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 310ms (171 measurements).
-   * Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 2ms (171 measurements).
-   * Task 'ResourceValidatorImpl.validation' took 11122ms (171 measurements).
-   * Task 'DefaultReentrantTypeResolver.resolve' took 8023ms (342 measurements).
-   * Task 'StaticExtensionImportsScope.getLocalElementsByName' took 989ms (16962 measurements).
-   * Task 'StaticImportsScope.getLocalElementsByName' took 9ms (1866 measurements).
-   * -------------------------------------------------------------------------------------------------------------------------
    */
   @Test
   public void doCompile() {
