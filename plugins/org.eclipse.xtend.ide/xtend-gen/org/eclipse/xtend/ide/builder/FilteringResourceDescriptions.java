@@ -54,6 +54,18 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
   }
   
   private boolean isContainedUri(final URI uri) {
+    boolean _or = false;
+    boolean _equals = Objects.equal(uri, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      int _segmentCount = uri.segmentCount();
+      boolean _lessThan = (_segmentCount < 2);
+      _or = (_equals || _lessThan);
+    }
+    if (_or) {
+      return false;
+    }
     String _segment = uri.segment(1);
     IJavaProject _project = this.getProject();
     IProject _project_1 = _project.getProject();
