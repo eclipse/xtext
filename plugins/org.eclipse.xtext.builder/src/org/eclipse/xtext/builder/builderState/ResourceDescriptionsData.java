@@ -168,6 +168,7 @@ public class ResourceDescriptionsData extends AbstractCompoundSelectable {
 					Set<IResourceDescription> set = Sets.newHashSetWithExpectedSize(2);
 					set.add((IResourceDescription)existing);
 					set.add(description);
+					target.put(lowerCase, set);
 				} else {
 					@SuppressWarnings("unchecked")
 					Set<IResourceDescription> set = (Set<IResourceDescription>) existing;
