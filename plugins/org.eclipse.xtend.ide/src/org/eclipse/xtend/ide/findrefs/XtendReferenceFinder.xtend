@@ -34,11 +34,11 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 			localResourceAccess.readOnly(uri) [
 				val obj = EcoreUtil2::getContainerOfType(it.getEObject(uri, true), typeof(JvmType))
 				if (obj!=null) {
-					names += nameConverter.toQualifiedName(obj.identifier.toLowerCase)
+					names += nameConverter.toQualifiedName(obj.identifier).toLowerCase
 				}
 			]
 		}
-		val importedNames = resourceDescription.importedNames.map[toLowerCase].toSet
+		val importedNames = resourceDescription.importedNames.toSet
 		if (names.exists[
 			importedNames.contains(it)
 		]) {

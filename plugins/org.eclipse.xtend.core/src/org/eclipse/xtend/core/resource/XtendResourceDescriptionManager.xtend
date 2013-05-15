@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp
 import org.eclipse.xtext.util.IResourceScopeCache
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager {
 	
@@ -50,12 +51,20 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	}
 
 	def override Iterable<QualifiedName> getImportedNames() {
-		val result = newArrayList()
+		val result = newHashSet()
 		result.addAll(super.getImportedNames())
 		for (eobject : resource.contents) {
 			val types = typeResolver.resolveTypes(eobject)
 			val actualTypes = EcoreUtil::getAllContents(eobject, true).filter(typeof(XExpression)).toList.map[types.getActualType(it)]
 			for (typeRef : actualTypes) {
+				if (typeRef != null) {
+					registerAllTypes(typeRef.type) [
+						result += nameConverter.toQualifiedName(it).toLowerCase
+					]
+				}
+			}
+			val typesOfIdentifiables = EcoreUtil::getAllContents(eobject, true).filter(typeof(JvmIdentifiableElement)).toList.map[types.getActualType(it)]
+			for (typeRef : typesOfIdentifiables) {
 				if (typeRef != null) {
 					registerAllTypes(typeRef.type) [
 						result += nameConverter.toQualifiedName(it).toLowerCase
@@ -68,16 +77,18 @@ class XtendResourceDescription extends DefaultResourceDescription {
 		].toSet
 	}
 	
-	def void registerAllTypes(JvmType type, (String)=>void acceptor) {
+	def void registerAllTypes(JvmType type, (String)=>boolean acceptor) {
 		if (type == null)
 			return;
-		acceptor.apply(type.identifier)
-		switch type {
-			JvmGenericType : {
-				registerAllTypes(type?.extendedClass?.type, acceptor)
-				type.extendedInterfaces.forEach[
-					registerAllTypes(it?.type, acceptor)
-				]
+		if (acceptor.apply(type.identifier)) {
+			switch type {
+				JvmGenericType : {
+					registerAllTypes(type.declaringType, acceptor)
+					registerAllTypes(type?.extendedClass?.type, acceptor)
+					type.extendedInterfaces.forEach[
+						registerAllTypes(it?.type, acceptor)
+					]
+				}
 			}
 		}
 	}
