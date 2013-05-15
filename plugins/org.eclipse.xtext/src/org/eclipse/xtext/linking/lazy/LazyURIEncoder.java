@@ -126,9 +126,10 @@ public class LazyURIEncoder {
 		if (parserNode == node)
 			return;
 		if (isAncestor(parserNode, node)) {
-			getRelativePath(result, parserNode, node.getParent());
+			ICompositeNode parent = node.getParent();
+			getRelativePath(result, parserNode, parent);
 			int idx = 0;
-			INode child = node.getParent().getFirstChild();
+			INode child = parent.getFirstChild();
 			while(child != node && child.hasNextSibling()) {
 				idx++;
 				child = child.getNextSibling();
@@ -141,13 +142,10 @@ public class LazyURIEncoder {
 	}
 	
 	protected boolean isAncestor(INode parent, INode child) {
-		if (child.equals(parent))
-			return true;
-		INode node = child;
-		while (node.getParent() != null) {
-			if (node.getParent().equals(parent))
+		for (INode node = child; node != null; node = node.getParent()) {
+			if (node.equals(parent)) {
 				return true;
-			node = node.getParent();
+			}
 		}
 		return false;
 	}

@@ -115,8 +115,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 		if (eClass.getEAllReferences().size() - eClass.getEAllContainments().size() == 0)
 			return;
 
-		for (Iterator<INode> iterator = parentNode.getChildren().iterator(); iterator.hasNext(); ) {
-			INode node = iterator.next();
+		for (INode node = parentNode.getFirstChild(); node != null; node = node.getNextSibling()) {
 			EObject grammarElement = node.getGrammarElement();
 			if (grammarElement instanceof CrossReference && !Iterables.isEmpty(node.getLeafNodes())) {
 				producer.setNode(node);
