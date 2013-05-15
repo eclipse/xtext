@@ -7,117 +7,129 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.labeling;
 
-import org.eclipse.jdt.core.Flags;
-import org.eclipse.jdt.internal.ui.JavaPlugin;
-import org.eclipse.jdt.internal.ui.JavaPluginImages;
-import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
-
 import static org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider.*;
 
+import org.eclipse.jdt.core.Flags;
+import org.eclipse.jdt.internal.ui.JavaPluginImages;
+import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
- * Obsoletes {@link XbaseImages} to allow better adornments. Use {@link XbaseImageAdornments} for 
- * calculating adornments.
+ * Obsoletes {@link XbaseImages} to allow better adornments and use {@link ImageDescriptor}s instead of
+ * {@link org.eclipse.swt.graphics.Image}s. Use {@link XbaseImageAdornments} for calculating adornments.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4.2
  */
 public class XbaseImages2 {
-		
-	public Image forImportContainer() {
-		return getJdtImage(JavaPluginImages.DESC_OBJS_IMPCONT);
+
+	public ImageDescriptor forImportContainer() {
+		return JavaPluginImages.DESC_OBJS_IMPCONT;
 	}
 
-	public Image forImport() {
-		return getJdtImage(JavaPluginImages.DESC_OBJS_IMPDECL);
+	public ImageDescriptor forImport() {
+		return JavaPluginImages.DESC_OBJS_IMPDECL;
 	}
 
 	/**
-	 * @param visibility the visibility of the class
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param visibility
+	 *            the visibility of the class
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forClass(JvmVisibility visibility, int adornments) {
+	public ImageDescriptor forClass(JvmVisibility visibility, int adornments) {
 		return getDecorated(getTypeImageDescriptor(false, false, toFlags(visibility), false), adornments);
 	}
 
 	/**
-	 * @param visibility the visibility of the interface
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param visibility
+	 *            the visibility of the interface
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forInterface(JvmVisibility visibility, int adornments) {
-		return getDecorated(getTypeImageDescriptor(false, true, toFlags(visibility) | Flags.AccInterface, false), adornments);
+	public ImageDescriptor forInterface(JvmVisibility visibility, int adornments) {
+		return getDecorated(getTypeImageDescriptor(false, true, toFlags(visibility) | Flags.AccInterface, false),
+				adornments);
 	}
 
 	/**
-	 * @param visibility the visibility of the enum
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param visibility
+	 *            the visibility of the enum
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forEnum(JvmVisibility visibility, int adornments) {
-		return getDecorated(getTypeImageDescriptor(false, false, toFlags(visibility) | Flags.AccEnum, false), adornments);
+	public ImageDescriptor forEnum(JvmVisibility visibility, int adornments) {
+		return getDecorated(getTypeImageDescriptor(false, false, toFlags(visibility) | Flags.AccEnum, false),
+				adornments);
 	}
 
 	/**
-	 * @param visibility the visibility of the annotation type
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param visibility
+	 *            the visibility of the annotation type
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forAnnotation(JvmVisibility visibility, int adornments) {
-		return getDecorated(getTypeImageDescriptor(false, true, toFlags(visibility) | Flags.AccAnnotation, false), adornments);
+	public ImageDescriptor forAnnotation(JvmVisibility visibility, int adornments) {
+		return getDecorated(getTypeImageDescriptor(false, true, toFlags(visibility) | Flags.AccAnnotation, false),
+				adornments);
 	}
 
 	/**
-	 * @param visibility the visibility of the constructor
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param visibility
+	 *            the visibility of the constructor
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forConstructor(JvmVisibility visibility, int adornments) {
-		return getDecorated(getMethodImageDescriptor(false, toFlags(visibility)), adornments | 
-				JavaElementImageDescriptor.CONSTRUCTOR);
+	public ImageDescriptor forConstructor(JvmVisibility visibility, int adornments) {
+		return getDecorated(getMethodImageDescriptor(false, toFlags(visibility)), adornments
+				| JavaElementImageDescriptor.CONSTRUCTOR);
 	}
 
 	/**
-	 * @param visibility the visibility of the operation
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param visibility
+	 *            the visibility of the operation
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forOperation(JvmVisibility visibility, int adornments) {
+	public ImageDescriptor forOperation(JvmVisibility visibility, int adornments) {
 		return getDecorated(getMethodImageDescriptor(false, toFlags(visibility)), adornments);
 	}
-	
+
 	/**
-	 * @param visibility the visibility of the field
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param visibility
+	 *            the visibility of the field
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forField(JvmVisibility visibility, int adornments) {
+	public ImageDescriptor forField(JvmVisibility visibility, int adornments) {
 		return getDecorated(getFieldImageDescriptor(false, toFlags(visibility)), adornments);
 	}
-	
+
 	/**
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forLocalVariable(int adornments){
+	public ImageDescriptor forLocalVariable(int adornments) {
 		return getDecorated(JavaPluginImages.DESC_OBJS_LOCAL_VARIABLE, adornments);
 	}
-	
+
 	/**
-	 * @param adornments OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
+	 * @param adornments
+	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
-	public Image forTypeParameter(int adornments) {
+	public ImageDescriptor forTypeParameter(int adornments) {
 		return getDecorated(JavaPluginImages.DESC_OBJS_TYPEVARIABLE, adornments);
 	}
 
-	protected Image getJdtImage(ImageDescriptor descriptor) {
-		return JavaPlugin.getImageDescriptorRegistry().get(descriptor);
+	protected ImageDescriptor getDecorated(ImageDescriptor baseImage, int adornments) {
+		if (adornments == 0)
+			return baseImage;
+		else
+			return new JavaElementImageDescriptor(baseImage, adornments, JavaElementImageProvider.SMALL_SIZE);
 	}
 
-	protected Image getDecorated(ImageDescriptor baseImage, int adornments) {
-		if(adornments == 0)
-			return getJdtImage(baseImage);
-		else
-			return getDecoratedImage(baseImage, adornments, JavaElementImageProvider.SMALL_SIZE);
-	}
-	
 	protected int toFlags(JvmVisibility visibility) {
 		switch (visibility) {
 			case PRIVATE:

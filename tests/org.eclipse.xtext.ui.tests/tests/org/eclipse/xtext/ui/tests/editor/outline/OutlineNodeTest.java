@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
@@ -50,24 +51,24 @@ public class OutlineNodeTest extends AbstractXtextTests {
 	}
 
 	@Test public void testParentChildOpposites() {
-		EObjectNode parentNode = new EObjectNode(parentElement, null, null, "parent", false);
-		EObjectNode childNode = new EObjectNode(child0Element, parentNode, null, "child", false);
+		EObjectNode parentNode = new EObjectNode(parentElement, null, (ImageDescriptor) null, "parent", false);
+		EObjectNode childNode = new EObjectNode(child0Element, parentNode, (ImageDescriptor) null, "child", false);
 		assertEquals(childNode.getParent(), parentNode);
 		assertTrue(parentNode.getChildren().contains(childNode));
 	}
 
 	@Test public void testAddChildToLeafNode() {
-		EObjectNode parentNode = new EObjectNode(parentElement, null, null, "parent", true);
+		EObjectNode parentNode = new EObjectNode(parentElement, null, (ImageDescriptor) null, "parent", true);
 		assertFalse(parentNode.hasChildren());
 		assertTrue(parentNode.getChildren().isEmpty());
-		EObjectNode childNode = new EObjectNode(child0Element, parentNode, null, "child", false);
+		EObjectNode childNode = new EObjectNode(child0Element, parentNode, (ImageDescriptor) null, "child", false);
 		assertTrue(parentNode.hasChildren());
 		assertTrue(parentNode.getChildren().contains(childNode));
 	}
 
 	@Test public void testMethodsDelegateToParent() {
 		DocumentRootNode rootNode = createRootNode();
-		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, (ImageDescriptor) null, "parent", false);
 		assertNotNull(parentNode.getDocument());
 		assertNotNull(parentNode.getTreeProvider());
 		assertEquals(rootNode.getDocument(), parentNode.getDocument());
@@ -76,15 +77,15 @@ public class OutlineNodeTest extends AbstractXtextTests {
 
 	@Test public void testCreateChildrenLazily() {
 		DocumentRootNode rootNode = createRootNode();
-		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, (ImageDescriptor) null, "parent", false);
 		assertFalse(parentNode.getChildren().isEmpty());
 	}
 
 	@Test public void testStateAccess() {
 		DocumentRootNode rootNode = createRootNode();
-		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, (ImageDescriptor) null, "parent", false);
 		EStructuralFeatureNode featureNode = new EStructuralFeatureNode(parentElement,
-				OutlineTestPackage.Literals.ELEMENT__XREFS, parentNode, null, "eClassifiers", true);
+				OutlineTestPackage.Literals.ELEMENT__XREFS, parentNode, (ImageDescriptor) null, "eClassifiers", true);
 		IUnitOfWork<Boolean, EObject> work = new IUnitOfWork<Boolean, EObject>() {
 			public Boolean exec(EObject state) throws Exception {
 				return state != null;
@@ -96,8 +97,8 @@ public class OutlineNodeTest extends AbstractXtextTests {
 	}
 	
 	@Test public void testEqualsNotImplemented() throws Exception {
-		EObjectNode node0 = new EObjectNode(parentElement, null, null, "parent", false);
-		EObjectNode node1 = new EObjectNode(parentElement, null, null, "parent", false);
+		EObjectNode node0 = new EObjectNode(parentElement, null, (ImageDescriptor) null, "parent", false);
+		EObjectNode node1 = new EObjectNode(parentElement, null, (ImageDescriptor) null, "parent", false);
 		assertNotSame(node0, node1);
 	}
 
@@ -106,10 +107,10 @@ public class OutlineNodeTest extends AbstractXtextTests {
 		document.setInput(resource);
 		IOutlineTreeStructureProvider treeStructureProvider = new IOutlineTreeStructureProvider() {
 			public void createChildren(IOutlineNode parentNode, EObject modelElement) {
-				new EObjectNode(child0Element, parentNode, null, "child", false);
+				new EObjectNode(child0Element, parentNode, (ImageDescriptor) null, "child", false);
 			}
 		};
-		DocumentRootNode rootNode = new DocumentRootNode(null, "root", document, treeStructureProvider);
+		DocumentRootNode rootNode = new DocumentRootNode((ImageDescriptor) null, "root", document, treeStructureProvider);
 		return rootNode;
 	}
 
