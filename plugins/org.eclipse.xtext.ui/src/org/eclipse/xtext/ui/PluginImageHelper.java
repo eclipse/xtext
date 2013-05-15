@@ -131,7 +131,13 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 	 * @since 2.4
 	 */
 	public ImageDescriptor getImageDescriptor(Image image) {
-		return ImageDescriptor.createFromImage(image);
+		for(Map.Entry<ImageDescriptor, Image> entry : registry.entrySet()) {
+			if(entry.getValue().equals(image))
+				return entry.getKey();
+		}
+		ImageDescriptor newDescriptor = ImageDescriptor.createFromImage(image);
+		registry.put(newDescriptor, image);
+		return newDescriptor;
 	}
 
 	public void setPathSuffix(String pathSuffix) {

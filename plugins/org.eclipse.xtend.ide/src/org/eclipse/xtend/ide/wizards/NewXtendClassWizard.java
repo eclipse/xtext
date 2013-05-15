@@ -1,6 +1,6 @@
 package org.eclipse.xtend.ide.wizards;
 
-import org.eclipse.xtext.ui.IImageHelper;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 
 import com.google.inject.Inject;
 
@@ -13,7 +13,7 @@ public class NewXtendClassWizard extends AbstractNewXtendElementWizard {
 	public static final String TITLE = "Xtend Class"; //$NON-NLS-1$
 
 	@Inject
-	public NewXtendClassWizard(IImageHelper imgHelper, NewXtendClassWizardPage page) {
+	public NewXtendClassWizard(IImageDescriptorHelper imgHelper, NewXtendClassWizardPage page) {
 		super(imgHelper, page, TITLE);
 	}
 }

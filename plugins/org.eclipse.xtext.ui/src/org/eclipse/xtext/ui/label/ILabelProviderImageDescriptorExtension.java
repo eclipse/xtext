@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.label;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 /**
+ * Implementing classes must not rely on being run on the display thread.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */

@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.outline;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ui.PluginImageHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterOutlineContribution;
@@ -63,11 +62,6 @@ public class ShowSyntheticMembersContribution extends AbstractFilterOutlineContr
 		action.setText("Show Synthetic Members");
 		action.setDescription("Show Synthetic Members");
 		action.setToolTipText("Show Synthetic Members");
-		action.setImageDescriptor(getImageDescriptor("generated_code_view.png"));
+		action.setImageDescriptor(imageHelper.getImageDescriptor("generated_code_view.png"));
 	}
-
-	protected ImageDescriptor getImageDescriptor(String imagePath) {
-		return ImageDescriptor.createFromImage(imageHelper.getImage(imagePath));
-	}
-
 }
