@@ -276,7 +276,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		childResolvedTypes.reassignType(type, lightweightThisType);
 		
 		List<JvmMember> members = type.getMembers();
-		for(int i = 0; i < members.size(); i++) {
+		int size = members.size();
+		for(int i = 0; i < size; i++) {
 			doPrepare(childResolvedTypes, childSession, members.get(i), resolvedTypesByType);
 		}
 	}

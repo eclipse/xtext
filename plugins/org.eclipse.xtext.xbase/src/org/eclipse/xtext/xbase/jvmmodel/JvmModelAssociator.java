@@ -115,31 +115,40 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
-	public JvmIdentifiableElement getLogicalContainer(EObject object) {
-		if (object == null)
+	public JvmIdentifiableElement getLogicalContainer(EObject context) {
+		return getLogicalContainer(context, false);
+	}
+
+	public JvmIdentifiableElement getNearestLogicalContainer(EObject context) {
+		return getLogicalContainer(context, true);
+	}
+
+	protected JvmIdentifiableElement getLogicalContainer(EObject object, boolean considerContainer) {
+		if (object == null) {
 			return null;
-		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(object.eResource());
-		if (mapping.containsKey(object)) {
-			return mapping.get(object);
 		}
-		if (object.eContainer() != null && !mapping.containsKey(object.eContainer())) {
-			Set<EObject> elements = getJvmElements(object.eContainer());
-			for (EObject eObject : elements) {
-				if (eObject instanceof JvmIdentifiableElement) {
-					return (JvmIdentifiableElement) eObject;
+		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(object.eResource());
+		do {
+			if (mapping.containsKey(object)) {
+				return mapping.get(object);
+			}
+			EObject container = object.eContainer();
+			if (container == null) {
+				return null;
+			}
+			if (!mapping.containsKey(container)) {
+				Set<EObject> elements = getJvmElements(container);
+				if (!elements.isEmpty()) {
+					for (EObject eObject : elements) {
+						if (eObject instanceof JvmIdentifiableElement) {
+							return (JvmIdentifiableElement) eObject;
+						}
+					}
 				}
 			}
-		}
+			object = container;
+		} while (considerContainer);
 		return null;
-	}
-	
-	public JvmIdentifiableElement getNearestLogicalContainer(EObject context) {
-		if (context == null)
-			return null;
-		JvmIdentifiableElement locicalContainer = getLogicalContainer(context);
-		if (locicalContainer != null)
-			return locicalContainer;
-		return getNearestLogicalContainer(context.eContainer());
 	}
 
 	public void associateLogicalContainer(EObject logicalChild, JvmIdentifiableElement element) {

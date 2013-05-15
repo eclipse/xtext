@@ -477,10 +477,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		if (!type.isOwnedBy(getReferenceOwner())) {
+		ITypeReferenceOwner referenceOwner = getReferenceOwner();
+		if (!type.isOwnedBy(referenceOwner)) {
 			throw new IllegalArgumentException("type is associated with an incompatible owner");
 		}
-		if (!expectation.isOwnedBy(getReferenceOwner())) {
+		if (!expectation.isOwnedBy(referenceOwner)) {
 			throw new IllegalArgumentException("expected type is associated with an incompatible owner");
 		}
 		
@@ -490,7 +491,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		// this will resolve them to their type parameter constraints if any and no other thing is available
 		// mind the conformance hint
 		
-		TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getReferenceOwner()) {
+		TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), referenceOwner) {
 			@Override
 			@Nullable
 			protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
@@ -623,8 +624,6 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				return result;
 			}
 		}
-		if (types == null)
-			return getDeclaredType(identifiable);
 		LightweightTypeReference result = basicGetTypes().get(identifiable);
 		if (result == null) {
 			return getDeclaredType(identifiable);
@@ -635,10 +634,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	@Nullable
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmType) {
-			ParameterizedTypeReference result = new ParameterizedTypeReference(getConverter().getOwner(), (JvmType) identifiable);
+			ITypeReferenceOwner owner = getConverter().getOwner();
+			ParameterizedTypeReference result = new ParameterizedTypeReference(owner, (JvmType) identifiable);
 			if (identifiable instanceof JvmTypeParameterDeclarator) {
 				for(JvmTypeParameter param: ((JvmTypeParameterDeclarator) identifiable).getTypeParameters()) {
-					result.addTypeArgument(new ParameterizedTypeReference(getConverter().getOwner(), param));
+					result.addTypeArgument(new ParameterizedTypeReference(owner, param));
 				}
 			}
 			return result;

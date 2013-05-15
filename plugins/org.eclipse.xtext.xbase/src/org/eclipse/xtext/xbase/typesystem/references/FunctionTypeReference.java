@@ -81,9 +81,11 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		if (super.isOwnedBy(owner)) {
 			if (returnType != null && !returnType.isOwnedBy(owner))
 				return false;
-			for(LightweightTypeReference parameterType: expose(parameterTypes)) {
-				if (!parameterType.isOwnedBy(owner)) {
-					return false;
+			if (parameterTypes != null) {
+				for(LightweightTypeReference parameterType: parameterTypes) {
+					if (!parameterType.isOwnedBy(owner)) {
+						return false;
+					}
 				}
 			}
 			return true;

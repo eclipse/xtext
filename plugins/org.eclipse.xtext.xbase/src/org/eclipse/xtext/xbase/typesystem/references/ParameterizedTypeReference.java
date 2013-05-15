@@ -133,9 +133,11 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	@Override
 	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		if (super.isOwnedBy(owner)) {
-			for(LightweightTypeReference typeArgument: expose(typeArguments)) {
-				if (!typeArgument.isOwnedBy(owner))
-					return false;
+			if (typeArguments != null) {
+				for(LightweightTypeReference typeArgument: typeArguments) {
+					if (!typeArgument.isOwnedBy(owner))
+						return false;
+				}
 			}
 			return true;
 		}
