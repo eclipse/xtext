@@ -204,7 +204,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 									StringBuilder typeNameBuilder = new StringBuilder(simpleTypeName.length);
 									for (char[] enclosingType : enclosingTypeNames) {
 										typeNameBuilder.append(enclosingType);
-										typeNameBuilder.append('$');
+										typeNameBuilder.append('.');
 									}
 									typeNameBuilder.append(simpleTypeName);
 									String typeName = typeNameBuilder.toString();
@@ -269,7 +269,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		}
 		for (char[] enclosingType : enclosingTypeNames) {
 			fqName.append(enclosingType);
-			fqName.append('$');
+			fqName.append('.');
 		}
 		fqName.append(simpleTypeName);
 		String fqNameAsString = fqName.toString();
@@ -295,18 +295,13 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 								if(importType instanceof JvmDeclaredType
 										&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
 									StringBuilder label = new StringBuilder("Import '");
-									label.append(new String(simpleTypeName));
+									label.append(simpleTypeName);
 									label.append("' (");
-									label.append(new String(packageName));
+									label.append(packageName);
 									if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
-										boolean isFirst = true;
 										for(char[] enclosingTypeName: enclosingTypeNames) {
-											if(isFirst) 
-												label.append(".");
-											else 
-												label.append("$");
-											isFirst = false;
-											label.append(new String(enclosingTypeName));
+											label.append(".");
+											label.append(enclosingTypeName);
 										}
 									}
 									label.append(")");
