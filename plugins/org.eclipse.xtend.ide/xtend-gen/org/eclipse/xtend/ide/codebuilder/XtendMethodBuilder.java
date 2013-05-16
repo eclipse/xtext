@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
@@ -88,6 +87,6 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
   
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
-    return ((XtendClass) _ownerSource);
+    return ((XtendTypeDeclaration) _ownerSource);
   }
 }

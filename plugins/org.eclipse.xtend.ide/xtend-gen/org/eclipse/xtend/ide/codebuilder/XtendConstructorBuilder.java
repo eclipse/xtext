@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.codebuilder;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
@@ -64,6 +63,6 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
   
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
-    return ((XtendClass) _ownerSource);
+    return ((XtendTypeDeclaration) _ownerSource);
   }
 }

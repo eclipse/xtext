@@ -7,14 +7,14 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
@@ -34,8 +34,8 @@ import org.eclipse.xtend.ide.codebuilder.XtendFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendMethodBuilder;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
+import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
@@ -96,7 +96,7 @@ public class CodeBuilderFactory {
     {
       final Object ownerSource = this.getSource(owner);
       AbstractClassBuilder _xifexpression = null;
-      if ((ownerSource instanceof XtendClass)) {
+      if ((ownerSource instanceof XtendTypeDeclaration)) {
         XtendClassBuilder _get = this.xtendClassBuilderProvider.get();
         _xifexpression = _get;
       } else {
@@ -116,7 +116,7 @@ public class CodeBuilderFactory {
     {
       final Object ownerSource = this.getSource(owner);
       AbstractInterfaceBuilder _xifexpression = null;
-      if ((ownerSource instanceof XtendClass)) {
+      if ((ownerSource instanceof XtendTypeDeclaration)) {
         XtendInterfaceBuilder _get = this.xtendInterfaceBuilderProvider.get();
         _xifexpression = _get;
       } else {
@@ -136,7 +136,7 @@ public class CodeBuilderFactory {
     {
       final Object ownerSource = this.getSource(owner);
       AbstractAnnotationBuilder _xifexpression = null;
-      if ((ownerSource instanceof XtendClass)) {
+      if ((ownerSource instanceof XtendTypeDeclaration)) {
         XtendAnnotationBuilder _get = this.xtendAnnotationBuilderProvider.get();
         _xifexpression = _get;
       } else {
@@ -156,7 +156,7 @@ public class CodeBuilderFactory {
     {
       final Object ownerSource = this.getSource(owner);
       AbstractFieldBuilder _xifexpression = null;
-      if ((ownerSource instanceof XtendClass)) {
+      if ((ownerSource instanceof XtendTypeDeclaration)) {
         XtendFieldBuilder _get = this.xtendFieldBuilderProvider.get();
         _xifexpression = _get;
       } else {
@@ -176,7 +176,7 @@ public class CodeBuilderFactory {
     {
       final Object ownerSource = this.getSource(owner);
       AbstractConstructorBuilder _xifexpression = null;
-      if ((ownerSource instanceof XtendClass)) {
+      if ((ownerSource instanceof XtendTypeDeclaration)) {
         XtendConstructorBuilder _get = this.xtendConstructorBuilderProvider.get();
         _xifexpression = _get;
       } else {
@@ -196,7 +196,7 @@ public class CodeBuilderFactory {
     {
       final Object ownerSource = this.getSource(owner);
       AbstractMethodBuilder _xifexpression = null;
-      if ((ownerSource instanceof XtendClass)) {
+      if ((ownerSource instanceof XtendTypeDeclaration)) {
         XtendMethodBuilder _get = this.xtendMethodBuilderProvider.get();
         _xifexpression = _get;
       } else {
@@ -214,12 +214,9 @@ public class CodeBuilderFactory {
   public Object getSource(final JvmDeclaredType element) {
     IJavaElement _xblockexpression = null;
     {
-      if ((element instanceof JvmGenericType)) {
-        final XtendClass xtendClass = this._iXtendJvmAssociations.getXtendClass(((JvmGenericType) element));
-        boolean _notEquals = (!Objects.equal(xtendClass, null));
-        if (_notEquals) {
-          return xtendClass;
-        }
+      final EObject xtendType = this._iXtendJvmAssociations.getPrimarySourceElement(element);
+      if ((xtendType instanceof XtendTypeDeclaration)) {
+        return xtendType;
       }
       final IJavaElement jvmElement = this._iJavaElementFinder.findExactElementFor(element);
       IJavaElement _xifexpression = null;

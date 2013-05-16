@@ -3,7 +3,6 @@ package org.eclipse.xtend.ide.codebuilder;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
@@ -71,6 +70,6 @@ public class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements X
   
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
-    return ((XtendClass) _ownerSource);
+    return ((XtendTypeDeclaration) _ownerSource);
   }
 }

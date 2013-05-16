@@ -89,8 +89,12 @@ public class QuickfixTestBuilder {
     try {
       QuickfixTestBuilder _xblockexpression = null;
       {
+        int _minus = (-1);
         String _string = model.toString();
-        String _replace = _string.replace("|", "");
+        int _indexOf = _string.indexOf("|");
+        Assert.assertNotEquals("No position marker | found in model", _minus, _indexOf);
+        String _string_1 = model.toString();
+        String _replace = _string_1.replace("|", "");
         final IFile file = this._workbenchTestHelper.createFile(fileName, _replace);
         XtextEditor _openEditorSafely = this.openEditorSafely(file);
         this.editor = _openEditorSafely;
@@ -104,9 +108,9 @@ public class QuickfixTestBuilder {
             }
           };
         document.<List<Issue>>readOnly(_function);
-        String _string_1 = model.toString();
-        int _indexOf = _string_1.indexOf("|");
-        this.caretOffset = _indexOf;
+        String _string_2 = model.toString();
+        int _indexOf_1 = _string_2.indexOf("|");
+        this.caretOffset = _indexOf_1;
         _xblockexpression = (this);
       }
       return _xblockexpression;
@@ -197,6 +201,42 @@ public class QuickfixTestBuilder {
           }
         };
       IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedLabels)), _function_2);
+      _xblockexpression = (this);
+    }
+    return _xblockexpression;
+  }
+  
+  public QuickfixTestBuilder assertNoResolutionLabels(final String... unExpectedLabels) {
+    QuickfixTestBuilder _xblockexpression = null;
+    {
+      Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
+      final Function1<Issue,List<IssueResolution>> _function = new Function1<Issue,List<IssueResolution>>() {
+          public List<IssueResolution> apply(final Issue it) {
+            List<IssueResolution> _resolutions = QuickfixTestBuilder.this._issueResolutionProvider.getResolutions(it);
+            return _resolutions;
+          }
+        };
+      Iterable<List<IssueResolution>> _map = IterableExtensions.<Issue, List<IssueResolution>>map(_issuesAtCaret, _function);
+      Iterable<IssueResolution> _flatten = Iterables.<IssueResolution>concat(_map);
+      final Function1<IssueResolution,String> _function_1 = new Function1<IssueResolution,String>() {
+          public String apply(final IssueResolution it) {
+            String _label = it.getLabel();
+            return _label;
+          }
+        };
+      Iterable<String> _map_1 = IterableExtensions.<IssueResolution, String>map(_flatten, _function_1);
+      final Set<String> actualLabels = IterableExtensions.<String>toSet(_map_1);
+      final Procedure1<String> _function_2 = new Procedure1<String>() {
+          public void apply(final String it) {
+            String _plus = ("Label \'" + it);
+            String _plus_1 = (_plus + "\' should not appear. Got ");
+            String _join = IterableExtensions.join(actualLabels, ", ");
+            String _plus_2 = (_plus_1 + _join);
+            boolean _contains = actualLabels.contains(it);
+            Assert.assertFalse(_plus_2, _contains);
+          }
+        };
+      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(unExpectedLabels)), _function_2);
       _xblockexpression = (this);
     }
     return _xblockexpression;
