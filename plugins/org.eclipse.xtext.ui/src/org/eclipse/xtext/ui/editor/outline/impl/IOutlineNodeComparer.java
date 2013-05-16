@@ -25,7 +25,6 @@ public interface IOutlineNodeComparer {
 	boolean equals(IOutlineNode node1, IOutlineNode node2);
 
 	class Default implements IOutlineNodeComparer {
-		@SuppressWarnings("deprecation")
 		public boolean equals(IOutlineNode node1, IOutlineNode node2) {
 			if (node1 == null || node2 == null)
 				return node1 == null && node2 == null;
