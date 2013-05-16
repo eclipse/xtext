@@ -32,7 +32,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider2;
+import org.eclipse.xtext.ui.editor.outline.impl.BackgroundOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
@@ -47,7 +47,7 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein
  */
-public class XtendOutlineTreeProvider extends DefaultOutlineTreeProvider2 implements  
+public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider implements  
 	IOutlineTreeProvider.ModeAware {
 
 	private static final OutlineMode HIDE_INHERITED_MODE = new OutlineMode("hide", "hide inherited members");
