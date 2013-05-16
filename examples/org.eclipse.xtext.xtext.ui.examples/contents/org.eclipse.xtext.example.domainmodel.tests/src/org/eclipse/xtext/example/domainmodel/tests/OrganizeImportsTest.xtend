@@ -265,7 +265,7 @@ class OrganizeImportsTest {
 			  }
 			}
 		'''.assertIsOrganizedTo('''
-			import org.eclipse.emf.ecore.resource.Resource$Factory$Registry
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Registry
 
 			entity Foo {
 			  op test() : void {
@@ -398,7 +398,7 @@ class OrganizeImportsTest {
 			  }
 			}
 		'''.assertIsOrganizedTo('''
-			import org.eclipse.xtext.xbase.XbasePackage$Literals
+			import org.eclipse.xtext.xbase.XbasePackage.Literals
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 			entity Foo {
@@ -505,7 +505,7 @@ class OrganizeImportsTest {
 				}
 			}
 		'''.assertIsOrganizedTo('''
-			import java.util.Map$Entry
+			import java.util.Map.Entry
 
 			package foo.bar {
 				entity Foo {
@@ -625,7 +625,7 @@ class OrganizeImportsTest {
 				}
 			}
 		'''.assertIsOrganizedTo('''
-			import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor
+			import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor
 
 			package foo.bar {
 				entity Foo {
@@ -649,7 +649,7 @@ class OrganizeImportsTest {
 				}
 			}
 		'''.assertIsOrganizedTo('''
-			import java.util.Map$Entry
+			import java.util.Map.Entry
 
 			package foo.bar {
 				entity Foo {
