@@ -66,6 +66,7 @@ public class UriValidator {
 		if (name == null) {
 			return true;
 		}
+		name = URI.encodeSegment(name, true); 
 		int index = name.lastIndexOf('.');
 		if (index == -1) {
 			return true;

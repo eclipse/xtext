@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class XtendResourceDescription extends DefaultResourceDescription {
-  private final Set<String> primitivesFilter = Collections.<String>unmodifiableSet(Sets.<String>newHashSet("boolean", "int", "char", "byte", "short", "long", "double", "float", "void"));
+  private final static Set<String> primitivesFilter = Collections.<String>unmodifiableSet(Sets.<String>newHashSet("boolean", "int", "char", "byte", "short", "long", "double", "float", "void"));
   
   private IBatchTypeResolver typeResolver;
   
@@ -139,7 +139,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
         public Boolean apply(final QualifiedName it) {
           String _lastSegment = it.getLastSegment();
-          boolean _contains = XtendResourceDescription.this.primitivesFilter.contains(_lastSegment);
+          boolean _contains = XtendResourceDescription.primitivesFilter.contains(_lastSegment);
           boolean _not = (!_contains);
           return Boolean.valueOf(_not);
         }
