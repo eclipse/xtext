@@ -177,13 +177,25 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		ResourceSet rs = forcedResourceSet != null ? forcedResourceSet : new XtextResourceSet();
 		for (String loadedResource : loadedResources) {
 			URI loadedResourceUri = URI.createURI(loadedResource);
-			Resource res = rs.getResource(loadedResourceUri, true);
 			if(equal(loadedResourceUri.fileExtension(), "ecore")) {
 				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
 				if(resourceServiceProvider == null) {
 					EcoreSupportStandaloneSetup.setup();
 				}
+			} else if (equal(loadedResourceUri.fileExtension(), "xcore")) {
+				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
+				if(resourceServiceProvider == null) {
+					try {
+						Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
+						xcore.getDeclaredMethod("doSetup", new Class[0]).invoke(null);
+					} catch (ClassNotFoundException e) {
+						LOG.error("Couldn't initialize Xcore support. Is it on the classpath?");
+					} catch (Exception e) {
+						LOG.error("Couldn'T initialize Xcore support.", e);
+					}
+				}
 			}
+			Resource res = rs.getResource(loadedResourceUri, true);
 			if (res == null || res.getContents().isEmpty())
 				LOG.error("Error loading '" + loadedResource + "'");
 			else if (!res.getErrors().isEmpty())
