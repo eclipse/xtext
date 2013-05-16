@@ -92,7 +92,7 @@ public class QuickfixTestBuilder {
         int _minus = (-1);
         String _string = model.toString();
         int _indexOf = _string.indexOf("|");
-        Assert.assertNotEquals("No position marker | found in model", _minus, _indexOf);
+        Assert.assertNotSame("No position marker | found in model", Integer.valueOf(_minus), Integer.valueOf(_indexOf));
         String _string_1 = model.toString();
         String _replace = _string_1.replace("|", "");
         final IFile file = this._workbenchTestHelper.createFile(fileName, _replace);

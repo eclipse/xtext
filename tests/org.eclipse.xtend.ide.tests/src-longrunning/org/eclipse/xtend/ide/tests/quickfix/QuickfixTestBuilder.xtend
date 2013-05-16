@@ -52,7 +52,7 @@ class QuickfixTestBuilder {
 	}
 	
 	def create(String fileName, CharSequence model) {
-		assertNotEquals('No position marker | found in model', -1, model.toString.indexOf("|"))
+		assertNotSame('No position marker | found in model', -1, model.toString.indexOf("|"))
 		val file = createFile(fileName, model.toString.replace("|", ""))
 		editor = openEditorSafely(file)
 		val document = editor.document
