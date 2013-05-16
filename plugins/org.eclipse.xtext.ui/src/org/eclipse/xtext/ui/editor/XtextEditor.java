@@ -82,6 +82,7 @@ import org.eclipse.ui.texteditor.TextNavigationAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer;
@@ -171,6 +172,9 @@ public class XtextEditor extends TextEditor {
 	@Inject
 	private ITokenTypeToPartitionTypeMapperExtension tokenTypeToPartitionTypeMapperExtension;
 
+	@Inject 
+	private IImageHelper imageHelper;
+	
 	private String keyBindingScope;
 
 	private ISelectionChangedListener selectionChangedListener;
@@ -184,6 +188,7 @@ public class XtextEditor extends TextEditor {
 	};
 
 	private String languageName;
+	
 
 	public XtextEditor() {
 		if (log.isDebugEnabled())
@@ -625,7 +630,7 @@ public class XtextEditor extends TextEditor {
 		IEditorRegistry editorRegistry = PlatformUI.getWorkbench().getEditorRegistry();
 		IEditorDescriptor editorDesc = editorRegistry.findEditor(getSite().getId());
 		ImageDescriptor imageDesc = editorDesc != null ? editorDesc.getImageDescriptor() : null;
-		return imageDesc != null ? imageDesc.createImage() : super.getDefaultImage();
+		return imageDesc != null ? imageHelper.getImage(imageDesc) : super.getDefaultImage();
 	}
 
 	/*
