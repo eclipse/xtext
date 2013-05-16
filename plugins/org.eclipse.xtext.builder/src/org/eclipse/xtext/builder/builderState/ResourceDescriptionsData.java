@@ -159,21 +159,21 @@ public class ResourceDescriptionsData extends AbstractCompoundSelectable {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void registerDescription(IResourceDescription description, Map<QualifiedName, Object> target) {
 		for(IEObjectDescription object: description.getExportedObjects()) {
 			QualifiedName lowerCase = object.getName().toLowerCase();
 			Object existing = target.put(lowerCase, description);
 			if (existing != null && existing != description) {
+				Set<IResourceDescription> set = null;
 				if (existing instanceof IResourceDescription) {
-					Set<IResourceDescription> set = Sets.newHashSetWithExpectedSize(2);
+					set = Sets.newHashSetWithExpectedSize(2);
 					set.add((IResourceDescription)existing);
-					set.add(description);
-					target.put(lowerCase, set);
 				} else {
-					@SuppressWarnings("unchecked")
-					Set<IResourceDescription> set = (Set<IResourceDescription>) existing;
-					set.add(description);
+					set = (Set<IResourceDescription>) existing;
 				}
+				set.add(description);
+				target.put(lowerCase, set);
 			}
 		}
 	}
