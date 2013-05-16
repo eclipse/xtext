@@ -179,10 +179,6 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		return RestrictionKind.VALID;
 	}
 	
-	/*
-	 * JDT 3.6 or later could use root.getResolvedClasspathEntry, but that was not available in 3.5
-	 * Therefore we inline the implementation here but avoid throwing an exception in case there is no entry
-	 */
 	@Nullable 
 	protected IClasspathEntry getResolvedClasspathEntry(IJavaProject javaProject, @NonNull IPackageFragmentRoot root) throws JavaModelException {
 		IClasspathEntry result = null;
@@ -191,12 +187,11 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		@SuppressWarnings("rawtypes")
 		Map rootPathToResolvedEntries = castedProject.getPerProjectInfo().rootPathToResolvedEntries;
 		if (rootPathToResolvedEntries != null) {
-			if (root.getJavaProject().equals(javaProject)) {
-				result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getPath());
-			} else {
+			result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getPath());
+			if (result == null)
 				result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getJavaProject().getPath());
-			}
 		}
+		
 		return result;
 	}
 }
