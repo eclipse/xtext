@@ -216,7 +216,7 @@ public class RefactoringWizardOpenOperation_NonForking {
 			return clazz.getDeclaredField(name);
 		} catch (NoSuchFieldException e) {
 			if(clazz.getSuperclass() != null)
-				return clazz.getSuperclass().getDeclaredField(name);
+				return getPrivateField(clazz.getSuperclass(), name);
 		}
 		return null; // dead code
 	}
