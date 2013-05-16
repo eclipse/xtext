@@ -31,7 +31,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -76,14 +75,14 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         final IResolvedTypes types = this.typeResolver.resolveTypes(eobject);
         TreeIterator<Object> _allContents = EcoreUtil.<Object>getAllContents(eobject, true);
         Iterator<XExpression> _filter = Iterators.<XExpression>filter(_allContents, XExpression.class);
-        List<XExpression> _list = IteratorExtensions.<XExpression>toList(_filter);
         final Function1<XExpression,LightweightTypeReference> _function = new Function1<XExpression,LightweightTypeReference>() {
             public LightweightTypeReference apply(final XExpression it) {
               LightweightTypeReference _actualType = types.getActualType(it);
               return _actualType;
             }
           };
-        final List<LightweightTypeReference> actualTypes = ListExtensions.<XExpression, LightweightTypeReference>map(_list, _function);
+        Iterator<LightweightTypeReference> _map = IteratorExtensions.<XExpression, LightweightTypeReference>map(_filter, _function);
+        final Iterable<LightweightTypeReference> actualTypes = IteratorExtensions.<LightweightTypeReference>toIterable(_map);
         for (final LightweightTypeReference typeRef : actualTypes) {
           boolean _notEquals = (!Objects.equal(typeRef, null));
           if (_notEquals) {
@@ -101,14 +100,25 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         }
         TreeIterator<Object> _allContents_1 = EcoreUtil.<Object>getAllContents(eobject, true);
         Iterator<JvmIdentifiableElement> _filter_1 = Iterators.<JvmIdentifiableElement>filter(_allContents_1, JvmIdentifiableElement.class);
-        List<JvmIdentifiableElement> _list_1 = IteratorExtensions.<JvmIdentifiableElement>toList(_filter_1);
         final Function1<JvmIdentifiableElement,LightweightTypeReference> _function_2 = new Function1<JvmIdentifiableElement,LightweightTypeReference>() {
             public LightweightTypeReference apply(final JvmIdentifiableElement it) {
-              LightweightTypeReference _actualType = types.getActualType(it);
-              return _actualType;
+              LightweightTypeReference _xifexpression = null;
+              boolean _or = false;
+              boolean _not = (!(it instanceof JvmType));
+              if (_not) {
+                _or = true;
+              } else {
+                _or = (_not || (it instanceof JvmDeclaredType));
+              }
+              if (_or) {
+                LightweightTypeReference _actualType = types.getActualType(it);
+                _xifexpression = _actualType;
+              }
+              return _xifexpression;
             }
           };
-        final List<LightweightTypeReference> typesOfIdentifiables = ListExtensions.<JvmIdentifiableElement, LightweightTypeReference>map(_list_1, _function_2);
+        Iterator<LightweightTypeReference> _map_1 = IteratorExtensions.<JvmIdentifiableElement, LightweightTypeReference>map(_filter_1, _function_2);
+        final Iterable<LightweightTypeReference> typesOfIdentifiables = IteratorExtensions.<LightweightTypeReference>toIterable(_map_1);
         for (final LightweightTypeReference typeRef_1 : typesOfIdentifiables) {
           boolean _notEquals_1 = (!Objects.equal(typeRef_1, null));
           if (_notEquals_1) {
