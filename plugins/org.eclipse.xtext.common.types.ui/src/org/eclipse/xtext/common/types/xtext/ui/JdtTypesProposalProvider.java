@@ -261,8 +261,15 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 								fqName.append('.');
 							}
 							for(char[] enclosingType: enclosingTypeNames) {
+								/*
+								 * the JDT index sometimes yields enclosingTypeNames in the form
+								 * char[][] { { Outer$Middle } }
+								 * rather than
+								 * char[][] { { Outer }, { Middle } }
+								 * thus we create the fqName as the binary name and post process the proposal later on
+								 */
 								fqName.append(enclosingType);
-								fqName.append('.');
+								fqName.append('$');
 							}
 							fqName.append(simpleTypeName);
 							String fqNameAsString = fqName.toString();
@@ -326,14 +333,21 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor, final IJvmTypeProvider jvmTypeProvider, IValueConverter<String> valueConverter) {
 		if (acceptor.canAcceptMoreProposals()) {
 			int lastDot = typeName.lastIndexOf('.');
-			StyledString displayString = new StyledString(typeName);
-			if (lastDot != -1)
-				displayString = new StyledString(typeName.substring(lastDot + 1)).append(" - " + typeName.substring(0, lastDot), StyledString.QUALIFIER_STYLER);
-			Image img = computeImage(typeName,isInnerType, modifiers);
+			final StyledString displayString;
+			if (lastDot != -1) {
+				if (isInnerType) {
+					displayString = new StyledString(typeName.substring(lastDot + 1).replace('$', '.')).append(" - " + typeName.substring(0, lastDot), StyledString.QUALIFIER_STYLER); 
+				} else {
+					displayString = new StyledString(typeName.substring(lastDot + 1)).append(" - " + typeName.substring(0, lastDot), StyledString.QUALIFIER_STYLER);
+				}
+			} else {
+				displayString = new StyledString(isInnerType ? typeName.replace('$', '.') : typeName);
+			}
+			Image img = computeImage(typeName, isInnerType, modifiers);
 			String proposalAsString = typeName;
 			if (valueConverter != null) {
 				try {
-					proposalAsString = valueConverter.toString(proposalAsString);
+					proposalAsString = valueConverter.toString(isInnerType ? proposalAsString.replace('$', '.') : proposalAsString);
 				} catch(ValueConverterException vce) {
 					return;
 				}
