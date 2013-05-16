@@ -68,7 +68,7 @@ public class JvmElementFinder {
 					while (contents.hasNext()) {
 						EObject next = contents.next();
 						if (jvmElement.eClass().isInstance(next) && 
-							nameOfActualElement.equals(qualifiedNameProvider.getFullyQualifiedName(jvmElement))) {
+							nameOfActualElement.equals(qualifiedNameProvider.getFullyQualifiedName(next))) {
 							return next;
 						}
 					}
