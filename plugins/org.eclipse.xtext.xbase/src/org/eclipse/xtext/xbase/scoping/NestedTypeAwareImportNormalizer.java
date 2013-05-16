@@ -83,6 +83,10 @@ public class NestedTypeAwareImportNormalizer extends AbstractNestedTypeAwareImpo
 	@Override
 	protected QualifiedName resolveNonWildcard(QualifiedName relativeName) {
 		if (relativeName.getSegmentCount()==1) {
+			// legacy import support, e.g. import java.util.Map$Entry allows to use Map$Entry as the simple name
+			if (getImportedNamespacePrefix().getLastSegment().equals(relativeName.getFirstSegment())) {
+				return getImportedNamespacePrefix();
+			}
 			return internalResolve(relativeName);
 		} else {
 			StringBuilder concatenated = new StringBuilder();
@@ -123,24 +127,5 @@ public class NestedTypeAwareImportNormalizer extends AbstractNestedTypeAwareImpo
 			}
 		}
 		return null;
-//		String relativeNameAsString = relativeName.getLastSegment();
-//		String lastImportedSegment = getImportedNamespacePrefix().getLastSegment();
-//		int dollar = relativeNameAsString.indexOf('$');
-//		if (dollar >= 0) {
-//			if (dollar == lastImportedSegment.length() && relativeNameAsString.startsWith(lastImportedSegment))
-//				return getImportedNamespacePrefix().skipLast(1).append(relativeNameAsString);
-//		}
-//		int importedDollar = lastImportedSegment.lastIndexOf('$');
-//		if (importedDollar >= 0) {
-//			String nestedTypeName = lastImportedSegment.substring(importedDollar + 1);
-//			if (relativeNameAsString.startsWith(nestedTypeName)) {
-//				if (nestedTypeName.length() == relativeNameAsString.length())
-//					return getImportedNamespacePrefix();
-//				if (relativeNameAsString.charAt(nestedTypeName.length()) == '$')
-//					return getImportedNamespacePrefix().skipLast(1).append(
-//							lastImportedSegment + relativeNameAsString.substring(nestedTypeName.length())); 
-//			}
-//		}
-//		return null;
 	}
 }
