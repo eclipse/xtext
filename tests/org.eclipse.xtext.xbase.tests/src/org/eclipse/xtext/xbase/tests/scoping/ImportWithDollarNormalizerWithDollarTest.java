@@ -28,5 +28,14 @@ public class ImportWithDollarNormalizerWithDollarTest extends AbstractImportWith
 		ImportNormalizer result = new NestedTypeAwareImportNormalizer(imported, wildcard, false);
 		return result;
 	}
+	
+	@Override
+	@Test
+	public void testMap$Entry_Map$Entry_01() {
+		QualifiedName map$entry = createMapEntryImport();
+		ImportNormalizer normalizer = createImportNormalizer(map$entry, false);
+		QualifiedName relative = QualifiedName.create("Map$Entry");
+		assertEquals(map$entry, normalizer.resolve(relative));
+	}
 
 }
