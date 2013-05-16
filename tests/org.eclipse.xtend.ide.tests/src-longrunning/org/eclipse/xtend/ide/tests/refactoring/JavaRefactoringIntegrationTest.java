@@ -1047,6 +1047,16 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		fileAsserts.assertFileContains(javaClass, "int bar = baz");
 	}
 
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=408201
+	@Test
+	public void testRenameSecondXtendField() throws Exception {
+		String xtendModel = "class XtendClass { int foo int bar }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
+		assertDocumentContains(editor, xtendModel.replace("bar", "baz"));
+	}
+
 	@Test
 	public void testRenameXtendEnumLiteral() throws Exception {
 		String xtendModel = "enum XtendEnum { FOO }";
