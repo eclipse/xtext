@@ -506,7 +506,7 @@ public class OrganizeImportsTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource$Factory$Registry");
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Registry");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("entity Foo {");
@@ -765,7 +765,7 @@ public class OrganizeImportsTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.xtext.xbase.XbasePackage$Literals");
+    _builder_1.append("import org.eclipse.xtext.xbase.XbasePackage.Literals");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
     _builder_1.newLine();
@@ -971,7 +971,7 @@ public class OrganizeImportsTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.Map$Entry");
+    _builder_1.append("import java.util.Map.Entry");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("package foo.bar {");
@@ -1226,7 +1226,7 @@ public class OrganizeImportsTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor");
+    _builder_1.append("import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("package foo.bar {");
@@ -1277,7 +1277,7 @@ public class OrganizeImportsTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.Map$Entry");
+    _builder_1.append("import java.util.Map.Entry");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("package foo.bar {");
