@@ -31,7 +31,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -126,7 +125,6 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
     }
   }
   
-  @Ignore
   @Test
   public void testAddMethod() {
     try {
