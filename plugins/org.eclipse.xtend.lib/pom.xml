@@ -23,6 +23,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<sourceDirectory>../org.eclipse.xtend.lib/src</sourceDirectory>
+		<sourceDirectory>src</sourceDirectory>
 	</build>
 </project>

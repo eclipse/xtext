@@ -16,7 +16,7 @@
 		<galileo-url>http://download.eclipse.org/eclipse/updates/3.5</galileo-url>
 		<juno-url>http://download.eclipse.org/eclipse/updates/3.8</juno-url>
 		<emf-url>http://download.eclipse.org/modeling/emf/emf/updates/nightly</emf-url>
-		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases</xtext-url>
+		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest</xtext-url>
 		<mirroring.phase>prepare-package</mirroring.phase>
 		<skipMirroring>false</skipMirroring>
 	</properties>

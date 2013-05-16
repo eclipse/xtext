@@ -12,8 +12,8 @@
 	<version>2.4.2-SNAPSHOT</version>
 	<modules>
 		<module>../org.eclipse.xtend.standalone.maven</module>
-		<module>../org.eclipse.xtend.lib.maven</module>
-		<module>../org.eclipse.xtext.xbase.lib.maven</module>
+		<module>../org.eclipse.xtend.lib</module>
+		<module>../org.eclipse.xtext.xbase.lib</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
@@ -128,7 +128,7 @@
 					<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
 				</snapshotRepository>
 			</distributionManagement>
-			<repositories>
+			<!-- <repositories>
 				<repository>
 					<releases>
 						<enabled>false</enabled>
@@ -149,6 +149,7 @@
 					<url>http://localhost:8081/nexus/content/repositories/releases/</url>
 				</repository>
 			</repositories>
+			-->
 			<pluginRepositories>
 				<pluginRepository>
 					<releases>
