@@ -231,13 +231,17 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			public boolean isCandidateMatchingPrefix(String name, String prefix) {
 				if (original.isCandidateMatchingPrefix(name, prefix))
 					return true;
-				String sub = name;
+				String withoutDollars = name.replace('$', '.');
+				String prefixWithoutDollars = prefix.replace('$', '.');
+				if ((withoutDollars != name || prefixWithoutDollars != prefix) && original.isCandidateMatchingPrefix(withoutDollars, prefixWithoutDollars))
+					return true;
+				String sub = withoutDollars;
 				int delimiter = sub.indexOf('.');
 				while(delimiter != -1) {
 					sub = sub.substring(delimiter + 1);
 					delimiter = sub.indexOf('.');
-					if (delimiter == -1 || prefix.length() > 0 && Character.isLowerCase(prefix.charAt(0))) {
-						if (original.isCandidateMatchingPrefix(sub, prefix))
+					if (delimiter == -1 || prefixWithoutDollars.length() > 0 && Character.isLowerCase(prefixWithoutDollars.charAt(0))) {
+						if (original.isCandidateMatchingPrefix(sub, prefixWithoutDollars))
 							return true;
 					}
 				}
