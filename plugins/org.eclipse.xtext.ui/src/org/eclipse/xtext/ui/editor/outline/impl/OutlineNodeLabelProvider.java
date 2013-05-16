@@ -41,7 +41,6 @@ public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider 
 			return super.doGetText(element);
 		}
 
-		@SuppressWarnings("deprecation")
 		@Override
 		protected Object doGetImage(Object element) {
 			if (element instanceof IOutlineNode.Extension) {

@@ -24,9 +24,9 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	private IOutlineTreeStructureProvider treeProvider;
 
 	/**
-	 * @deprecated use {@link #DocumentRootNode(ImageDescriptor, Object, IXtextDocument, IOutlineTreeStructureProvider)} instead.
+	 * A {@link BackgroundOutlineTreeProvider} must use
+	 * {@link #DocumentRootNode(ImageDescriptor, Object, IXtextDocument, IOutlineTreeStructureProvider)} instead.
 	 */
-	@Deprecated
 	public DocumentRootNode(Image image, Object text, IXtextDocument document,
 			IOutlineTreeStructureProvider treeProvider) {
 		super(null, image, text, false);

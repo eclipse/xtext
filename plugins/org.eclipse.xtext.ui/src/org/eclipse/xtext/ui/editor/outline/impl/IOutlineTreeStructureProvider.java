@@ -15,7 +15,7 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@ImplementedBy(DefaultOutlineTreeProvider2.class)
+@ImplementedBy(BackgroundOutlineTreeProvider.class)
 public interface IOutlineTreeStructureProvider  {
 
 	void createChildren(IOutlineNode parentNode, EObject modelElement);
