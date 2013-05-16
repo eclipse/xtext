@@ -14,6 +14,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenEnum;
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -26,6 +27,8 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment;
 
 /**
@@ -106,6 +109,22 @@ public class GenModelAccess {
 		if (genModelURI == null) {
 			if (EcorePackage.eNS_URI.equals(nsURI)) // if we really want to use the registered ecore ...
 				return null;
+			
+			// look into the resource set to find a genpackage for the given URI
+			for (Resource res: resourceSet.getResources()) {
+				
+				// we only look into the first level, as genmodels are usually among the top level elements.
+				// this just to avoid traversing all eobjects in the resource set.
+				for (EObject obj : res.getContents()) {
+					if (obj instanceof GenModel) {
+						for (GenPackage genPackage:((GenModel) obj).getGenPackages()) {
+							if (genPackage.getNSURI().equals(nsURI)) {
+								return genPackage.eResource();
+							}
+						}
+					}
+				}
+			}
 			
 			StringBuilder buf = new StringBuilder();
 			if (locationInfo != null && locationInfo.length() > 0)
