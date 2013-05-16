@@ -16,7 +16,6 @@ import org.eclipse.xtext.util.IResourceScopeCache
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.common.types.JvmArrayType
 import org.eclipse.xtext.common.types.JvmDeclaredType
 
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager {
@@ -31,7 +30,7 @@ class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescripti
 
 class XtendResourceDescription extends DefaultResourceDescription {
 
-	val primitivesFilter = #{'boolean', 'int', 'char', 'byte', 'short', 'long', 'double', 'float', 'void'}
+	static val primitivesFilter = #{'boolean', 'int', 'char', 'byte', 'short', 'long', 'double', 'float', 'void'}
 
 	IBatchTypeResolver typeResolver
 	IQualifiedNameConverter nameConverter
