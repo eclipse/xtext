@@ -27,9 +27,9 @@ public class EStructuralFeatureNode extends AbstractOutlineNode {
 	private EStructuralFeature feature;
 
 	/**
-	 * @deprecated use {@link #EStructuralFeatureNode(EObject, EStructuralFeature, IOutlineNode, ImageDescriptor, Object, boolean)} instead.
+	 * A {@link BackgroundOutlineTreeProvider} must use
+	 * {@link #EStructuralFeatureNode(EObject, EStructuralFeature, IOutlineNode, ImageDescriptor, Object, boolean)} instead.
 	 */
-	@Deprecated
 	public EStructuralFeatureNode(EObject owner, EStructuralFeature feature, IOutlineNode parent, Image image, Object text,
 			boolean isLeaf) {
 		super(parent, image, text, isLeaf);
