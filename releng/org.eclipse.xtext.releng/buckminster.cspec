@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.xtext.releng" componentType="buckminster" version="1.0.0.qualifier">
     <cs:dependencies>
         <cs:dependency name="com.google.guava" componentType="osgi.bundle"/>
-        <cs:dependency name="com.google.guava.source" componentType="osgi.bundle" filter="(ECLIPSE.TARGET.ALIAS=Galileo)"/>
+        <cs:dependency name="com.google.guava.source" componentType="osgi.bundle"/>
         <cs:dependency name="com.google.inject" componentType="osgi.bundle" versionDesignator="3.0.0"/>
         <cs:dependency name="com.google.inject.source" componentType="osgi.bundle" versionDesignator="3.0.0"/>
         <cs:dependency name="javax.inject" componentType="osgi.bundle"/>
@@ -38,7 +38,6 @@
         <cs:dependency name="org.eclipse.xpand" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.xtend" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.xtend.typesystem.emf" componentType="osgi.bundle"/>
-        <cs:dependency name="org.junit" componentType="osgi.bundle" versionDesignator="[3.8.0,4.0.0)"/>
         <cs:dependency name="org.junit" componentType="osgi.bundle" versionDesignator="[4.7.0,5.0.0)"/>
         <cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.8.0"/>
         <cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="[3.2.0,4.0.0)"/>
