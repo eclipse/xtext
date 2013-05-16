@@ -15,6 +15,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -26,20 +27,26 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
- * A default outline provider using {@link ImageDescriptor}s instead of {@link Image}s.
- *  
+ * An outline tree (structure) provider using {@link ImageDescriptor}s instead of {@link Image}s. This allows to create
+ * the tree of {@link IOutlineNode}s in a background job. Use this class instead of the
+ * {@link DefaultOutlineTreeProvider} if the UI blocks too long because of the outline calculation. Note that the
+ * default implementation already calculates hidden nodes on demand only.
+ * 
+ * It is essential that the {@link ILabelProvider} implements {@link ILabelProviderImageDescriptorExtension} and that
+ * the method {@link ILabelProviderImageDescriptorExtension#getImageDescriptor(Object)} does not need to be executed in
+ * the {@link Display} thread, e.g. does not create {@link Image} objects internally.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4
  */
-public class DefaultOutlineTreeProvider2 implements IOutlineTreeStructureProvider, IOutlineTreeProvider,
-		IOutlineTreeProvider.Extension {
+public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider {
 
 	@Inject
 	private ILabelProvider labelProvider;
 
 	@Inject
 	private OutlineNodeFactory factory;
-	
+
 	public IOutlineNode createRoot(IXtextDocument document) {
 		return factory.createRoot(document, getImageDescriptor(document), getText(document), this);
 	}
@@ -48,16 +55,16 @@ public class DefaultOutlineTreeProvider2 implements IOutlineTreeStructureProvide
 		if (modelElement != null && parentNode.hasChildren()) {
 			if (parentNode instanceof DocumentRootNode)
 				internalCreateChildren((DocumentRootNode) parentNode, modelElement);
-			else if(parentNode instanceof EStructuralFeatureNode)
+			else if (parentNode instanceof EStructuralFeatureNode)
 				internalCreateChildren((EStructuralFeatureNode) parentNode, modelElement);
-			else 
+			else
 				internalCreateChildren(parentNode, modelElement);
 		}
 	}
 
 	protected void internalCreateChildren(DocumentRootNode parentNode, EObject modelElement) {
 		Object text = getText(modelElement);
-		if (text == null) 
+		if (text == null)
 			text = modelElement.eResource().getURI().trimFileExtension().lastSegment();
 		ImageDescriptor imageDescriptor = getImageDescriptor(modelElement);
 		factory.createEObjectNode(parentNode, modelElement, imageDescriptor, text, isLeaf(modelElement));
@@ -92,12 +99,12 @@ public class DefaultOutlineTreeProvider2 implements IOutlineTreeStructureProvide
 	}
 
 	protected ImageDescriptor getImageDescriptor(Object modelElement) {
-		if(labelProvider instanceof ILabelProviderImageDescriptorExtension)
+		if (labelProvider instanceof ILabelProviderImageDescriptorExtension)
 			return ((ILabelProviderImageDescriptorExtension) labelProvider).getImageDescriptor(modelElement);
-		else 
+		else
 			return null;
 	}
-	
+
 	protected Object getText(Object modelElement) {
 		if (labelProvider instanceof IStyledLabelProvider)
 			return ((IStyledLabelProvider) labelProvider).getStyledText(modelElement);
@@ -112,11 +119,7 @@ public class DefaultOutlineTreeProvider2 implements IOutlineTreeStructureProvide
 			}
 		});
 	}
-	
-	public boolean needsDisplayThread() {
-		return false;
-	}
-	
+
 	protected OutlineNodeFactory getOutlineNodeFactory() {
 		return factory;
 	}

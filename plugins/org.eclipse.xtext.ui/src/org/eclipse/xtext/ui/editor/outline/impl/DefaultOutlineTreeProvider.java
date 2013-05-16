@@ -13,7 +13,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -35,14 +34,11 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
- * @deprecated This implementation requires that the outline nodes are calculated in the UI thread, which will cause the
- *             UI to block. Into the bargain, the abundance of polymorphic dispatchers makes debugging pretty hard.
- *             Use {@link DefaultOutlineTreeProvider2} instead.
+ * The default implementation of an {@link IOutlineTreeProvider}.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Deprecated
-public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider,
-		IOutlineTreeProvider.Extension {
+public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider {
 
 	@Inject
 	protected ILabelProvider labelProvider;
@@ -237,15 +233,4 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	protected String nullSafeClassName(Object object) {
 		return (object != null) ? object.getClass().getName() : "null";
 	}
-
-	/**
-	 * Unfortunately, this implementation has to run in hte display thread, as we're using {@link Image}s instead of
-	 * {@link ImageDescriptor}s.
-	 * 
-	 * @since 2.4
-	 */
-	public boolean needsDisplayThread() {
-		return true;
-	}
-
 }

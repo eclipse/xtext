@@ -32,7 +32,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 	private Image image;
 
 	private ImageDescriptor imageDescriptor;
-	
+
 	private Object text;
 
 	private AbstractOutlineNode parent;
@@ -44,9 +44,9 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 	private ITextRegion textRegion;
 
 	/**
-	 * @deprecated use {@link #AbstractOutlineNode(IOutlineNode, ImageDescriptor, Object, boolean)} instead.
+	 * A {@link BackgroundOutlineTreeProvider} must use
+	 * {@link #AbstractOutlineNode(IOutlineNode, ImageDescriptor, Object, boolean)} instead.
 	 */
-	@Deprecated
 	protected AbstractOutlineNode(IOutlineNode parent, Image image, Object text, boolean isLeaf) {
 		this.text = text == null ? "<unnamed>" : text;
 		this.image = image;
@@ -98,7 +98,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 					getTreeProvider().createChildren(AbstractOutlineNode.this, eObject);
 				}
 			});
-			if(children == null) {
+			if (children == null) {
 				// tree provider did not create any child
 				isLeaf = true;
 				return Collections.emptyList();
@@ -134,14 +134,14 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 	public void setImage(Image image) {
 		this.image = image;
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
 	public ImageDescriptor getImageDescriptor() {
 		return imageDescriptor;
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
@@ -194,9 +194,9 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 			return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
 				public T exec(XtextResource state) throws Exception {
 					EObject eObject;
-					if(state.getResourceSet() != null) 
+					if (state.getResourceSet() != null)
 						eObject = state.getResourceSet().getEObject(getEObjectURI(), true);
-					else 
+					else
 						eObject = state.getEObject(getEObjectURI().fragment());
 					return work.exec(eObject);
 				}
