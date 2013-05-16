@@ -131,11 +131,11 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 				QualifiedName jvmTypeName = getQualifiedNameOfLocalElement(declaredType);
 				if (declaredType.getDeclaringType() == null && !Strings.isEmpty(declaredType.getPackageName())) {
 					QualifiedName packageName = this.qualifiedNameConverter.toQualifiedName(declaredType.getPackageName());
-					ImportNormalizer normalizer = new ImportNormalizer(packageName, true, ignoreCase);
+					ImportNormalizer normalizer = doCreateImportNormalizer(packageName, true, ignoreCase);
 					result = createImportScope(result, singletonList(normalizer), globalScopeSelectable, reference.getEReferenceType(), ignoreCase);
 				}
 				if (jvmTypeName != null && !jvmTypeName.equals(name)) {
-					ImportNormalizer localNormalizer = new ImportNormalizer(jvmTypeName, true, ignoreCase); 
+					ImportNormalizer localNormalizer = doCreateImportNormalizer(jvmTypeName, true, ignoreCase); 
 					result = createImportScope(result, singletonList(localNormalizer), resourceOnlySelectable, reference.getEReferenceType(), ignoreCase);
 				}
 			}

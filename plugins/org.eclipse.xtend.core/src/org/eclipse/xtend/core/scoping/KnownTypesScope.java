@@ -1,0 +1,86 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtend.core.scoping;
+
+import java.util.List;
+
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.Strings;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class KnownTypesScope extends AbstractScope {
+	
+	private final List<JvmType> types;
+	private final IScope parent;
+
+	public KnownTypesScope(List<JvmType> types, IScope parent) {
+		this.types = types;
+		this.parent = parent;
+	}
+	
+	@Override
+	public IEObjectDescription getSingleElement(QualifiedName name) {
+		JvmType result = null;
+		int index = -1;
+		String firstSegment = name.getFirstSegment();
+		int dollar = firstSegment.indexOf('$');
+		if (dollar > 0) {
+			firstSegment = firstSegment.substring(0, dollar);
+		}
+		for(int i = 0; i < types.size(); i++) {
+			JvmType type = types.get(i);
+			if (isMatch(i, type, firstSegment, name)) {
+				if (result != null && result != type)
+					return null;
+				else {
+					result = type;
+					index = i;
+				}
+			}
+		}
+		if (result != null) {
+			JvmType actualResult = dollar > 0 || name.getSegmentCount() > 0 ? findNestedType(result, index, name) : result;
+			if (actualResult == null) {
+				return parent.getSingleElement(name);
+			}
+			return EObjectDescription.create(name, actualResult);
+		}
+		return parent.getSingleElement(name);
+	}
+
+	protected JvmType findNestedType(JvmType result, int index, QualifiedName name) {
+		List<String> segments = name.getSegmentCount() == 1 ? Strings.split(name.getFirstSegment(), '$') : name.getSegments();
+		for(int i = 1; i < segments.size() && result instanceof JvmDeclaredType; i++) {
+			JvmDeclaredType declaredType = (JvmDeclaredType) result;
+			String simpleName = segments.get(i);
+			for(JvmMember member: declaredType.getMembers()) {
+				if (member instanceof JvmType && simpleName.equals(member.getSimpleName())) {
+					result = (JvmType) member;
+					break;
+				}
+			}
+			if (declaredType == result) {
+				return null;
+			}
+		}
+		return result;
+	}
+
+	protected boolean isMatch(int index, JvmType type, String simpleName, QualifiedName relativeName) {
+		return simpleName.equals(type.getSimpleName());
+	}
+
+}
