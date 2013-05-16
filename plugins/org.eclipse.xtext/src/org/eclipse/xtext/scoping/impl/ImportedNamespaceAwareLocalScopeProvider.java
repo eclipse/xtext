@@ -190,13 +190,13 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
 		if (!namespaceResolvers.isEmpty()) {
 			if (isRelativeImport() && name!=null) {
-				ImportNormalizer localNormalizer = new ImportNormalizer(name, true, ignoreCase); 
+				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
 				result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
 			}
 			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(), isIgnoreCase(reference));
 		}
 		if (name!=null) {
-			ImportNormalizer localNormalizer = new ImportNormalizer(name, true, ignoreCase); 
+			ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
 			result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
 		}
 		return result;
