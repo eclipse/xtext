@@ -1084,6 +1084,26 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("import java.awt.Label /** @see Label */ class X{} ");
 		helper.assertNoIssues(clazz.eContainer());
 	}
+	
+	@Test public void testImportUnused_8() throws Exception {
+		XtendClass clazz = clazz("import java.util.Map.Entry class X { private Entry sb def foo(){sb}}");
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
+	}
+	
+	@Test public void testImportUnused_9() throws Exception {
+		XtendClass clazz = clazz("import java.util.Map class X { private Map.Entry sb def foo(){sb}}");
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
+	}
+	
+	@Test public void testImportUnused_10() throws Exception {
+		XtendClass clazz = clazz("import org.eclipse.xtext.xbase.XbasePackage class X { var x = XbasePackage::Literals::XEXPRESSION }");
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
+	}
+	
+	@Test public void testImportUnused_11() throws Exception {
+		XtendClass clazz = clazz("import org.eclipse.xtext.xbase.XbasePackage class X { var x = XbasePackage$Literals::XEXPRESSION }");
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
+	}
 
 	@Test public void testStaticImportUnused_0() throws Exception {
 		XtendClass clazz = clazz("import static java.util.Collections.* class X {}");
@@ -1094,7 +1114,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("import static java.util.Collections.* class X { var x = singleton('') }");
 		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
 	}
-
+	
 	@Test public void testStaticExtensionImportUnused_0() throws Exception {
 		XtendClass clazz = clazz("import static extension java.util.Collections.* class X {}");
 		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_UNUSED);
