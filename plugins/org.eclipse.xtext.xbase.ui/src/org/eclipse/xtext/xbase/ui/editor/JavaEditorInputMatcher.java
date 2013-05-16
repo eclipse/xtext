@@ -41,11 +41,15 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 	@Inject
 	private StacktraceBasedEditorDecider decisions;
 	
-	public boolean matches(IEditorReference editorRef, IEditorInput newInput) {
+	@Inject
+	private XbaseEditorInputRedirector editorInputRedirector;
+	
+	public boolean matches(IEditorReference editorRef, IEditorInput inputToCheck) {
 		try {
 			if (!editorInfo.getEditorId().equals(editorRef.getId())) {
 				return false;
 			}
+			IEditorInput newInput = editorInputRedirector.findOriginalSource(inputToCheck);
 			IEditorInput currentInput = editorRef.getEditorInput();
 			if (newInput.equals(currentInput)) {
 				return true;
