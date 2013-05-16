@@ -10,13 +10,13 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.jdt.core.IType
-import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
 
 /**
  * @author Jan Koehnlein
@@ -70,7 +70,7 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 	}
 	
 	override getXtendType() {
-		ownerSource as XtendClass
+		ownerSource as XtendTypeDeclaration
 	}
 }
 

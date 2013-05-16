@@ -92,7 +92,8 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 				newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
-			} else if(eContainingFeature == XtendPackage.Literals.XTEND_CLASS__IMPLEMENTS) {
+			} else if(eContainingFeature == XtendPackage.Literals.XTEND_CLASS__IMPLEMENTS
+					|| eContainingFeature == XtendPackage.Literals.XTEND_INTERFACE__EXTENDS) {
 				newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newXtendInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newLocalXtendInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);

@@ -52,6 +52,7 @@ class QuickfixTestBuilder {
 	}
 	
 	def create(String fileName, CharSequence model) {
+		assertNotEquals('No position marker | found in model', -1, model.toString.indexOf("|"))
 		val file = createFile(fileName, model.toString.replace("|", ""))
 		editor = openEditorSafely(file)
 		val document = editor.document
@@ -83,6 +84,14 @@ class QuickfixTestBuilder {
 		val actualLabels = issuesAtCaret.map[resolutions].flatten.map[label].toSet
 		expectedLabels.forEach[
 			assertTrue('Label \'' + it + '\' missing. Got ' + actualLabels.join(', '), actualLabels.contains(it))
+		]
+		this
+	}
+
+	def assertNoResolutionLabels(String... unExpectedLabels) {
+		val actualLabels = issuesAtCaret.map[resolutions].flatten.map[label].toSet
+		unExpectedLabels.forEach[
+			assertFalse('Label \'' + it + '\' should not appear. Got ' + actualLabels.join(', '), actualLabels.contains(it))
 		]
 		this
 	}

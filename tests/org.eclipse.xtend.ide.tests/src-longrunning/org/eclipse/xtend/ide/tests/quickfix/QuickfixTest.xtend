@@ -1001,21 +1001,68 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, CLASS_EXPECTED)
 		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create local Xtend class 'Bar'")
+		.assertNoResolutionLabels("Create Java interface 'Bar'", "Create Xtend interface 'Bar'", "Create local Xtend interface 'Bar'")
 	}
 
 	@Test
-	def void missingSuperInterface() {
+	def void missingImplementedInterface() {
 		create('Foo.xtend', '''
 			class Foo implements Bar| {
 			}
 		''')
 		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, INTERFACE_EXPECTED)
-		.assertResolutionLabelsSubset("Create Java interface 'Bar'", "Create local Xtend interface 'Bar'")
+		.assertResolutionLabelsSubset("Create Java interface 'Bar'", "Create Xtend interface 'Bar'", "Create local Xtend interface 'Bar'")
+		.assertNoResolutionLabels("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create local Xtend class 'Bar'")
+	}
+
+	@Test
+	def void missingSuperInterface() {
+		create('Foo.xtend', '''
+			interface Foo extends Bar| {
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, INTERFACE_EXPECTED)
+		.assertResolutionLabelsSubset("Create Java interface 'Bar'", "Create Xtend interface 'Bar'", "Create local Xtend interface 'Bar'")
+		.assertNoResolutionLabels("Create Java class 'Bar'", "Create Xtend class 'Bar'", "Create local Xtend class 'Bar'")
 		.assertModelAfterQuickfix("Create local Xtend interface 'Bar'", '''
-			class Foo implements Bar {
+			interface Foo extends Bar {
 			}
 			
 			interface Bar {
+			}
+		''')
+	}
+
+	@Test
+	def void missingTypeAsAnnotationValue() {
+		create('Foo.xtend', '''
+			import org.eclipse.xtend.lib.macro.Active
+
+			@Active(typeof(Bar|)) 
+				annotation Foo {
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Create Java interface 'Bar'", "Create Xtend interface 'Bar'", "Create local Xtend interface 'Bar'", 
+			"Create Java class 'Bar'", "Create Xtend class 'Bar'", "Create local Xtend class 'Bar'")
+		.assertModelAfterQuickfix("Create local Xtend interface 'Bar'", '''
+			import org.eclipse.xtend.lib.macro.Active
+
+			@Active(typeof(Bar)) 
+				annotation Foo {
+			}
+			
+			interface Bar {
+			}
+		''')
+		.assertModelAfterQuickfix("Create local Xtend class 'Bar'", '''
+			import org.eclipse.xtend.lib.macro.Active
+
+			@Active(typeof(Bar)) 
+				annotation Foo {
+			}
+			
+			class Bar {
 			}
 		''')
 	}
