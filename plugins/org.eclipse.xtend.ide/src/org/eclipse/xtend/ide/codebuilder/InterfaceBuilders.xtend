@@ -2,7 +2,7 @@ package org.eclipse.xtend.ide.codebuilder
 
 import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
-import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
@@ -46,7 +46,7 @@ class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements ICodeBui
 	}
 	
 	override getXtendType() {
-		ownerSource as XtendClass
+		ownerSource as XtendTypeDeclaration
 	}
 }
 
