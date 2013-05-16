@@ -659,7 +659,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (value instanceof Double) {
+					if (element instanceof Double) {
 						values.addUnique(element);
 					} else {
 						values.addUnique(((Number)element).doubleValue());
@@ -681,7 +681,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (value instanceof Float) {
+					if (element instanceof Float) {
 						values.addUnique(element);
 					} else {
 						values.addUnique(((Number)element).floatValue());
@@ -725,7 +725,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (value instanceof Byte) {
+					if (element instanceof Byte) {
 						values.addUnique(element);
 					} else {
 						values.addUnique(((Number)element).byteValue());
@@ -747,7 +747,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (value instanceof Long) {
+					if (element instanceof Long) {
 						values.addUnique(element);
 					} else {
 						values.addUnique(((Number)element).longValue());
@@ -785,7 +785,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (value instanceof Integer) {
+					if (element instanceof Integer) {
 						values.addUnique(element);
 					} else {
 						values.addUnique(((Number)element).intValue());
