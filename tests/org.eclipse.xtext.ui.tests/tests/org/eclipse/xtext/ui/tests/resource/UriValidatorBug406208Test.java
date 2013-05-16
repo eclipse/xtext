@@ -43,11 +43,11 @@ public class UriValidatorBug406208Test implements IStorage, IResourceServiceProv
 	}
 
 	public IPath getFullPath() {
-		return new Path("fileName.file extension");
+		throw new UnsupportedOperationException();
 	}
 
 	public String getName() {
-		throw new UnsupportedOperationException();
+		return "fileName.file extension";
 	}
 
 	public boolean isReadOnly() {
