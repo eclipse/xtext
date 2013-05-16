@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
+import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
@@ -88,6 +90,9 @@ public class ImplementMemberFromSuperAssist {
 
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
+	
+	@Inject
+	private IImageHelper imageHelper;
 
 	private static Pattern bodyExpressionPattern = Pattern.compile("\\{\\s*(.*?)\\s*$\\s*\\}", Pattern.MULTILINE
 			| Pattern.DOTALL);
@@ -158,8 +163,9 @@ public class ImplementMemberFromSuperAssist {
 		String code = appendable.getCode();
 		if (!isValidProposal(code.trim(), context, conflictHelper) && !isValidProposal(simpleName, context, conflictHelper))
 			return null;
+		ImageDescriptor imageDescriptor = images.forOperation(overridden.getVisibility(), adornments.getOverrideAdornment(overridden));
 		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
-				getLabel(overridden), images.forOperation(overridden.getVisibility(), adornments.getOverrideAdornment(overridden)).createImage());
+				getLabel(overridden), imageHelper.getImage(imageDescriptor));
 		Matcher matcher = bodyExpressionPattern.matcher(code);
 		if (matcher.find()) {
 			int bodyExpressionLength = matcher.end(1) - matcher.start(1);
