@@ -2,6 +2,6 @@
     <cq:rootRequest name="org.eclipse.xtext.build" componentType="eclipse.feature"/>
     <cq:advisorNode namePattern="^org\.eclipse\.(?:xtext|xtend|xtend2)(?:\..*)?\.source$" skipComponent="true"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.releng$" useMaterialization="false" useWorkspace="false"/>
-    <cq:advisorNode namePattern="^com\.google\.guava$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" componentType="osgi.bundle" versionOverride="15.0"/>
+    <cq:advisorNode namePattern="^com\.google\.guava$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" componentType="osgi.bundle" versionOverride="14.0"/>
     <cq:advisorNode namePattern="^com\.google\.guava\.source$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" skipComponent="true"/>
 </cq:componentQuery>

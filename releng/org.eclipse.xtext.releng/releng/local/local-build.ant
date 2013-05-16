@@ -27,7 +27,7 @@
 	<property name="commands.file" value="${releng.project.location}/releng/local/commands.txt" />
 
 	<!-- Against which platform to build (Galileo,Latest)-->
-	<property name="ECLIPSE.TARGET.ALIAS" value="Galileo" />
+	<property name="ECLIPSE.TARGET.ALIAS" value="Latest" />
 
 	<!-- ================================= 
           target: Runs 
