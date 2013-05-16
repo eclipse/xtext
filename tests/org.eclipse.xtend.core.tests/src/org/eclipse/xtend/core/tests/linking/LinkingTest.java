@@ -127,7 +127,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"class C {\n" +
 				"	def m(EDataType$Internal$ConversionDelegate$Factory$Registry r) {\n" +
 				"	}\n" +
-				"}\n", false);
+				"}\n", true);
 	}
 	@Test public void testNestedTypeResolution_06() throws Exception {
 		doTestNestedTypeResolution(
