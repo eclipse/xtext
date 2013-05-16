@@ -42,8 +42,8 @@ public class NestedTypeAwareImportNormalizerTest extends AbstractNestedTypeAware
 		assertEquals(null, wildcardImportNormalizer.resolve(xytextRelativeName));
 		assertEquals(null, wildcardImportNormalizer.resolve(xytextRelativeNameWithDollar));
 
-		ImportNormalizer xtextImportNormalizer = createImportNormalizer(xytextRelativeNameWithDollar, false);
-		assertEquals(null, xtextImportNormalizer.resolve(xytextRelativeNameWithDollar));
+		ImportNormalizer xytextRelativeNameWithDollarNormalizer = createImportNormalizer(xytextRelativeNameWithDollar, false);
+		assertEquals(xytextRelativeNameWithDollar, xytextRelativeNameWithDollarNormalizer.resolve(xytextRelativeNameWithDollar));
 	}
 	
 	@Test public void testResolve_NestedTypes() throws Exception {
@@ -55,7 +55,7 @@ public class NestedTypeAwareImportNormalizerTest extends AbstractNestedTypeAware
 		QualifiedName imported = QualifiedName.create("java", "util", "Map$Entry");
 		QualifiedName expected = QualifiedName.create("java", "util", "Map$Entry");
 		ImportNormalizer importNormalizer = createImportNormalizer(imported, false);
-		assertEquals(null, importNormalizer.resolve(mapEntry));
+		assertEquals(imported, importNormalizer.resolve(mapEntry));
 		assertEquals(null, importNormalizer.resolve(mapEntryWithDot));
 		assertEquals(null, importNormalizer.resolve(maps));
 		assertEquals(null, importNormalizer.resolve(mapsInternal));
