@@ -1011,10 +1011,15 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected void handleTypeUsageInStaticFeatureCall(final Map<JvmType, XImportDeclaration> staticImports,
-			final Map<JvmType, XImportDeclaration> extensionImports, INode n) {
-		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) n.getSemanticElement();
+			final Map<JvmType, XImportDeclaration> extensionImports, INode node) {
+		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) node.getSemanticElement();
 		boolean isExtension = featureCall.isExtension();
 		if (featureCall.isStatic() || isExtension) {
+			if (featureCall instanceof XFeatureCall) {
+				if (((XFeatureCall) featureCall).getDeclaringType() != null) {
+					return;
+				}
+			}
 			JvmFeature feature = (JvmFeature) featureCall.getFeature();
 			JvmDeclaredType declaringType = feature.getDeclaringType();
 			if (declaringType != null) {
@@ -1062,25 +1067,28 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				JvmType type = importedNames.remove(simpleName);
 				imports.remove(type);
 			} else {
-				if (simpleName.contains("$")) {
-					while (simpleName.contains("$")) {
-						simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
-						if (importedNames.containsKey(simpleName)) {
-							imports.remove(importedNames.remove(simpleName));
-							break;
-						}
-					}
-				} else if (simpleName.contains(".")) {
-					while (simpleName.contains(".")) {
-						simpleName = simpleName.substring(0, simpleName.lastIndexOf('.'));
-						if (importedNames.containsKey(simpleName)) {
-							imports.remove(importedNames.remove(simpleName));
-							break;
-						}
-					}
+				if (markImportUsed(imports, importedNames, simpleName, "$")) {
+					return;
+				}
+				if (markImportUsed(imports, importedNames, simpleName, ".")) {
+					return;
+				}
+				if (markImportUsed(imports, importedNames, simpleName, "::")) {
+					return;
 				}
 			}
 		}
+	}
+	
+	protected boolean markImportUsed(Map<JvmType, XImportDeclaration> imports, Map<String, JvmType> importedNames, String simpleName, String delimiter) {
+		int idx = simpleName.indexOf(delimiter);
+		if (idx < 0)
+			return false;
+		String firstSegment = simpleName.substring(0, idx);
+		if (importedNames.containsKey(firstSegment)) {
+			imports.remove(importedNames.remove(firstSegment));
+		}
+		return true;
 	}
 
 	protected Set<EObject> collectPrimarySourceElements(XImportSection importSection, final Map<JvmType, XImportDeclaration> imports,
