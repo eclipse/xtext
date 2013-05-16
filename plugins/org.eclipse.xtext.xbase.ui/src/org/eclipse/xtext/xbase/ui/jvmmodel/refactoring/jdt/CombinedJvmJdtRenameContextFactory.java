@@ -52,12 +52,15 @@ public class CombinedJvmJdtRenameContextFactory extends JdtRefactoringContextFac
 		if (!jvmElements.isEmpty()) {
 			Map<URI, IJavaElement> jvm2javaElement = newLinkedHashMap();
 			for (JvmIdentifiableElement jvmElement : filter(jvmElements, JvmIdentifiableElement.class)) {
-				IJavaElement javaElement = getJavaElementFinder().findExactElementFor(jvmElement);
+				JvmIdentifiableElement jvmElementToBeRenamed = (jvmElement instanceof JvmConstructor) 
+						? ((JvmConstructor) jvmElement).getDeclaringType()
+						: jvmElement;
+				IJavaElement javaElement = getJavaElementFinder().findExactElementFor(jvmElementToBeRenamed);
 				if (javaElement != null)
 					if (javaElement instanceof IMethod)
-						addDeclaringMethod(jvmElement, javaElement, jvm2javaElement);
+						addDeclaringMethod(jvmElementToBeRenamed, javaElement, jvm2javaElement);
 					else
-						jvm2javaElement.put(EcoreUtil.getURI(jvmElement), javaElement);
+						jvm2javaElement.put(EcoreUtil.getURI(jvmElementToBeRenamed), javaElement);
 			}
 			if (!jvm2javaElement.isEmpty()) {
 				return new CombinedJvmJdtRenameContext(declarationTarget, jvm2javaElement, editor, selection, resource);
