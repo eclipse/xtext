@@ -70,7 +70,6 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		assertNoErrorsInWorkspace
 	}
 	
-	@Ignore
 	@Test def void testAddMethod() {
 		val type3 = workbenchTestHelper.createFile('Type3.xtend', '''
 			class Type3 {

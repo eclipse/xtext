@@ -40,11 +40,17 @@ public class ConstructorTypeScopeWrapper implements IScope {
 	private final EObject context;
 	private final IVisibilityHelper visibilityHelper;
 	private final IScope typeScope;
+	private final boolean strict;
 
 	public ConstructorTypeScopeWrapper(EObject context, IVisibilityHelper visibilityHelper, IScope typeScope) {
+		this(context, visibilityHelper, typeScope, false);
+	}
+	
+	public ConstructorTypeScopeWrapper(EObject context, IVisibilityHelper visibilityHelper, IScope typeScope, boolean strict) {
 		this.context = context;
 		this.visibilityHelper = visibilityHelper;
 		this.typeScope = typeScope;
+		this.strict = strict;
 	}
 
 	/**
@@ -73,11 +79,12 @@ public class ConstructorTypeScopeWrapper implements IScope {
 							typeDescription.getName(), constructor, ConstructorScopes.CONSTRUCTOR_BUCKET, visible);
 					result.add(constructorDescription);
 				}
-			} else {
+			} else if (!strict) {
 				result.add(new SimpleIdentifiableElementDescription(typeDescription));
 			}
 		} else if (proxy instanceof JvmType) {
-			result.add(new SimpleIdentifiableElementDescription(typeDescription));
+			if (!strict)
+				result.add(new SimpleIdentifiableElementDescription(typeDescription));
 		}
 	}
 
