@@ -8,7 +8,6 @@
 package org.eclipse.xtext.linking.lazy;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -117,7 +116,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 		for (INode node = parentNode.getFirstChild(); node != null; node = node.getNextSibling()) {
 			EObject grammarElement = node.getGrammarElement();
-			if (grammarElement instanceof CrossReference && !Iterables.isEmpty(node.getLeafNodes())) {
+			if (grammarElement instanceof CrossReference && hasLeafNodes(node)) {
 				producer.setNode(node);
 				final EReference eRef = GrammarUtil.getReference((CrossReference) grammarElement, eClass);
 				if (eRef == null) {
@@ -134,6 +133,13 @@ public class LazyLinker extends AbstractCleaningLinker {
 		if (shouldCheckParentNode(parentNode)) {
 			installProxies(obj, producer, settingsToLink, parentNode.getParent());
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected boolean hasLeafNodes(INode node) {
+		return !Iterables.isEmpty(node.getLeafNodes());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -266,4 +272,10 @@ public class LazyLinker extends AbstractCleaningLinker {
 		return grammarAccess;
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	protected OnChangeEvictingCache getCache() {
+		return cache;
+	}
 }
