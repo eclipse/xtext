@@ -16,10 +16,13 @@ import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl;
 import org.eclipse.xtend.core.macro.TransformationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
+import org.eclipse.xtend.lib.macro.declaration.Declaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
@@ -122,8 +125,27 @@ public class AnnotationProcessor {
                     List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
                     final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
                         public MutableNamedElement apply(final XtendAnnotationTarget it) {
-                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          final MemberDeclaration xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                          Declaration _switchResult = null;
+                          boolean _matched = false;
+                          if (!_matched) {
+                            if (it instanceof XtendMember) {
+                              final XtendMember _xtendMember = (XtendMember)it;
+                              _matched=true;
+                              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                              MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(_xtendMember);
+                              _switchResult = _xtendMemberDeclaration;
+                            }
+                          }
+                          if (!_matched) {
+                            if (it instanceof XtendParameter) {
+                              final XtendParameter _xtendParameter = (XtendParameter)it;
+                              _matched=true;
+                              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                              XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(_xtendParameter);
+                              _switchResult = _xtendParameterDeclaration;
+                            }
+                          }
+                          final Declaration xtendMember = _switchResult;
                           return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
                         }
                       };
