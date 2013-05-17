@@ -149,6 +149,18 @@ public class LazyURIEncoder {
 		}
 		return false;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public INode getNode(EObject object, String fragment) {
+		List<String> split = Strings.split(fragment, LazyURIEncoder.SEP);
+		INode compositeNode = NodeModelUtils.getNode(object);
+		if (compositeNode == null)
+			throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
+		INode node = getNode(compositeNode, split.get(3));
+		return node;
+	}
 
 	/**
 	 * ONLY public to be testable

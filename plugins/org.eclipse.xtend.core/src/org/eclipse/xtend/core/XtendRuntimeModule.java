@@ -10,6 +10,9 @@ import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
+import org.eclipse.xtend.core.linking.Linker;
+import org.eclipse.xtend.core.linking.LinkingProxyAwareResource;
+import org.eclipse.xtend.core.linking.URIEncoder;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
@@ -27,10 +30,13 @@ import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
@@ -174,5 +180,19 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	@Override
 	public Class<? extends IResourceValidator> bindIResourceValidator() {
 		return org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.class;
+	}
+	
+	@Override
+	public Class<? extends ILinker> bindILinker() {
+		return Linker.class;
+	}
+	
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return LinkingProxyAwareResource.class;
+	}
+	
+	public Class<? extends LazyURIEncoder> bindLazyURIEncoder() {
+		return URIEncoder.class;
 	}
 }

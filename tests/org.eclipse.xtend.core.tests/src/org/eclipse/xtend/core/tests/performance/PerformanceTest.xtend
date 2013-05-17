@@ -276,6 +276,18 @@ class PerformanceTest extends AbstractXtendTestCase {
 	Task 'StaticExtensionImportsScope.getLocalElementsByName' took 986ms (16962 measurements).
 	Task 'StaticImportsScope.getLocalElementsByName' took 11ms (1866 measurements).
 	-------------------------------------------------------------------------------------------------------------------------
+	After specialized lazy linking
+	Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 6193ms (3 measurements).
+	Task 'AbstractParser.parse' took 495ms (171 measurements).
+	Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 295ms (171 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 342ms (171 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 133ms (171 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 3ms (171 measurements).
+	Task 'ResourceValidatorImpl.validation' took 5014ms (171 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 3885ms (342 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
 	 */
 	@Test def void doCompile() {
 		val num = 50;
