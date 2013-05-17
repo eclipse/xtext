@@ -20,6 +20,7 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import org.eclipse.xtend.core.xtend.XtendParameter
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -65,7 +66,10 @@ class AnnotationProcessor {
 					
 					runWithCancelIndiciator(ctx, monitor) [|
 						val map = ctx.annotatedSourceElements.map[
-							val xtendMember = ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)
+							val xtendMember = switch it {
+								XtendMember : ctx.compilationUnit.toXtendMemberDeclaration(it)
+								XtendParameter : ctx.compilationUnit.toXtendParameterDeclaration(it)
+							}
 							return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember)
 						]
 						processor.doTransform(map, modifyCtx)

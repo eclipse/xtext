@@ -193,6 +193,43 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
+	@Test def void testParameterAnnotation() {
+		assertProcessing(
+			'myannotation/AbstractAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
+
+				@Active(typeof(ParamProcessor))
+				annotation Param { }
+				class ParamProcessor implements TransformationParticipant<MutableParameterDeclaration> {
+					
+					override doTransform(List<? extends MutableParameterDeclaration> params, extension TransformationContext context) {
+						params.forEach[
+							simpleName = simpleName+'foo'
+						]
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
+					def void foo(@myannotation.Param String a, @myannotation.Param String b) {
+					}
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertTrue(clazz.declaredMethods.head.parameters.forall[simpleName.endsWith('foo')])
+		]
+	}
+	
 	@Test def void testSetDocumentation() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''
@@ -528,7 +565,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertNotNull(typeLookup.findAnnotationType('myusercode.MyClassAnnotation'))
 		]
 	}
-	@Test def void testIntroduceNewTypeAndWorWithIt() {
+	@Test def void testIntroduceNewTypeAndWorkWithIt() {
 		assertProcessing(
 			'myannotation/NewTypesAddingAnnotation.xtend' -> '''
 				package myannotation
