@@ -53,7 +53,7 @@ public abstract class AbstractTypeProviderPerformanceTest {
 	}
 	
 	@Test
-	public void testLoadTypesAndresolveAllParameterNames() throws Exception {
+	public void testLoadTypesAndResolveAllParameterNames() throws Exception {
 		for (String name : getClassNamesToLoad()) {
 			JvmDeclaredType type = loadAndResolve(name, true, true, true, true, true);
 			TreeIterator<Object> iterator = EcoreUtil.getAllContents(type.eResource().getResourceSet(), true);
