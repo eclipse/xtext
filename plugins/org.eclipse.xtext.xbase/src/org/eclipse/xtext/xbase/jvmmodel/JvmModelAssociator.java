@@ -136,16 +136,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			if (container == null) {
 				return null;
 			}
-			if (!mapping.containsKey(container)) {
-				Set<EObject> elements = getJvmElements(container);
-				if (!elements.isEmpty()) {
-					for (EObject eObject : elements) {
-						if (eObject instanceof JvmIdentifiableElement) {
-							return (JvmIdentifiableElement) eObject;
-						}
-					}
-				}
-			}
 			object = container;
 		} while (considerContainer);
 		return null;
