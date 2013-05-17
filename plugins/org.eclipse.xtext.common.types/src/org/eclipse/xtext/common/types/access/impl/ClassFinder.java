@@ -16,6 +16,19 @@ import java.util.Map;
  */
 public class ClassFinder {
 	
+	private static final Class<?> NULL_CLASS;
+
+	static
+	{
+		class Null
+		{
+			
+		}
+		NULL_CLASS = Null.class;
+	}
+	
+	private static final ClassNotFoundException CACHED_EXCEPTION = new ClassNotFoundException(); 
+	
 	private final ClassLoader classLoader;
 	private final ClassNameUtil classNameUtil;
 	
@@ -25,31 +38,28 @@ public class ClassFinder {
 	}
 	
 	private Map<String, Class<?>> cache = newHashMapWithExpectedSize(500);
+	
+	{
+		for (Class<?> primitiveType : Primitives.ALL_PRIMITIVE_TYPES) {
+			cache.put(primitiveType.getName(), primitiveType);
+		}
+	}
 
 	public Class<?> forName(String name) throws ClassNotFoundException {
+		Class<?> result = cache.get(name);
+		if (result != null) {
+			if (result == NULL_CLASS)
+				throw CACHED_EXCEPTION;
+			return result;
+		}
+
 		try {
-			if (name.length() <= "boolean".length() && name.indexOf('.') == -1) {
-				Class<?> result = Primitives.forName(name);
-				if (result != null)
-					return result;
-			}
-			
-			if (cache.containsKey(name)) {
-				Class<?> result = cache.get(name);
-				if (result == null)
-					throw new ClassNotFoundException(name);
-				return result;
-			}
-			Class<?> result = Class.forName(classNameUtil.normalizeClassName(name), false, classLoader);
+			result = Class.forName(classNameUtil.normalizeClassName(name), false, classLoader);
 			cache.put(name, result);
 			return result;
 		} catch(ClassNotFoundException e) {
-			Class<?> result = Primitives.forName(name);
-			if (result == null) {
-				cache.put(name, null);
-				throw e;
-			}
-			return result;
+			cache.put(name, NULL_CLASS);
+			throw e;
 		}
 	}
 	
