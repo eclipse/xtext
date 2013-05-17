@@ -56,6 +56,10 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 			throw new IllegalArgumentException("primitive type references are not supported as constraint bounds");
 		super.setTypeReference(newTypeReference);
 	}
+	
+	public void internalSetTypeReference(JvmTypeReference newTypeReference) {
+		super.setTypeReference(newTypeReference);
+	}
 
 	/**
 	 * Constraint bounds are definitely invalid if they are <code>not null</code> and point to a primitive type.
