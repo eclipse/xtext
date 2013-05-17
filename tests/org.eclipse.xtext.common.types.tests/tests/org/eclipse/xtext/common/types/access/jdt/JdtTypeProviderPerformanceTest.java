@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderPerformanceTest;
@@ -44,6 +45,15 @@ public class JdtTypeProviderPerformanceTest extends AbstractTypeProviderPerforma
 	
 	protected boolean useSources() {
 		return false;
+	}
+	
+	@Override
+	protected JvmDeclaredType loadAndResolve(String name, boolean accessMembers, boolean accessAnnotations,
+			boolean accessTypeParams, boolean accessParameter, boolean accessParameterNames) {
+		if (!accessParameterNames)
+			resourceSet.getResources().clear();
+		return super.loadAndResolve(name, accessMembers, accessAnnotations, accessTypeParams, accessParameter,
+				accessParameterNames);
 	}
 
 	@After
