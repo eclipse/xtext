@@ -219,11 +219,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			ITreeAppendable b, String collectionsMethod, Class<?> guavaHelper, String guavaHelperMethod) {
 		LightweightTypeReference collectionElementType = getCollectionElementType(literal);
 		if(collectionElementType != null) {
-			JvmType collectionsClass = getTypeReferences().findDeclaredType(Collections.class, literal);
-			JvmType guavaClass = getTypeReferences().findDeclaredType(guavaHelper, literal);
-			b.append(collectionsClass).append(".<");
+			JvmTypeReference collectionsClass = getTypeReferences().getTypeForName(Collections.class, literal);
+			JvmTypeReference guavaClass = getTypeReferences().getTypeForName(guavaHelper, literal);
+			getTypeReferenceSerializer().serialize(collectionsClass, literal, b);
+			b.append(".<");
 			getTypeReferenceSerializer().serialize(collectionElementType.toTypeReference(), literal, b);
-			b.append(">").append(collectionsMethod).append("(").append(guavaClass).append(".<");
+			b.append(">").append(collectionsMethod).append("(");
+			getTypeReferenceSerializer().serialize(guavaClass, literal, b);
+			b.append(".<");
 			getTypeReferenceSerializer().serialize(collectionElementType.toTypeReference(), literal, b);
 			b.append(">").append(guavaHelperMethod).append("(");
 			boolean isFirst = true;
