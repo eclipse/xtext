@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -29,7 +28,6 @@ import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Strings;
@@ -131,11 +129,7 @@ public class ScopeProviderAccess {
 		URI uri = EcoreUtil.getURI(toBeLinked);
 		String fragment = uri.fragment();
 		if (encoder.isCrossLinkFragment(expression.eResource(), fragment)) {
-			List<String> split = Strings.split(fragment, LazyURIEncoder.SEP);
-			INode compositeNode = NodeModelUtils.getNode(expression);
-			if (compositeNode == null)
-				throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
-			INode node = encoder.getNode(compositeNode, split.get(3));
+			INode node = encoder.getNode(expression, fragment);
 			final EClass requiredType = reference.getEReferenceType();
 			if (requiredType == null)
 				return Collections.emptyList();

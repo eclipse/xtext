@@ -344,6 +344,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return this;
 	}
 
+	@Deprecated
 	public List<String> getImports() {
 		return state.getImports();
 	}
