@@ -165,16 +165,19 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 			Class<?> clazz = classFinder.forName(name);
 			return clazz;
 		} catch(ClassNotFoundException exception) {
-			ClassNameVariants variants = new ClassNameVariants(name);
-			while(variants.hasNext()) {
-				try {
-					String nextName = variants.next();
-					Class<?> clazz = classFinder.forName(nextName);
-					return clazz;
-				} catch(ClassNotFoundException ignore) {
-				}
+			int index = name.lastIndexOf('.');
+			if (index == -1) {
+				throw exception;
 			}
-			throw exception;
+			String baseName = name.substring(0, index);
+			try {
+				Class<?> resolvedOuterClass = findClassByName(baseName);
+				baseName = resolvedOuterClass.getName();
+			} catch (ClassNotFoundException baseNameException) {
+				throw exception;
+			}
+			Class<?> clazz = classFinder.forName(baseName + '$' + name.substring(index + 1));
+			return clazz;
 		}
 	}
 
