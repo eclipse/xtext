@@ -26,9 +26,11 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
@@ -177,9 +179,15 @@ public class TypeReferences {
 			throw new NullPointerException("clazz");
 		JvmType declaredType = findDeclaredType(clazz, context);
 		if (declaredType == null)
-			return null;
+			return getUnknownTypeReference(clazz.getName());
 		JvmParameterizedTypeReference result = createTypeRef(declaredType, params);
 		return result;
+	}
+	
+	protected JvmUnknownTypeReference getUnknownTypeReference(String qualifiedName) {
+		JvmUnknownTypeReference reference = TypesFactory.eINSTANCE.createJvmUnknownTypeReference();
+		reference.setQualifiedName(qualifiedName);
+		return reference;
 	}
 
 	public JvmTypeReference getTypeForName(String typeName, Notifier context, JvmTypeReference... params) {
@@ -187,7 +195,7 @@ public class TypeReferences {
 			throw new NullPointerException("typeName");
 		JvmType declaredType = findDeclaredType(typeName, context);
 		if (declaredType == null)
-			return null;
+			return getUnknownTypeReference(typeName);
 		JvmParameterizedTypeReference result = createTypeRef(declaredType, params);
 		return result;
 	}
