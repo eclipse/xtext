@@ -166,7 +166,7 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 			return clazz;
 		} catch(ClassNotFoundException exception) {
 			int index = name.lastIndexOf('.');
-			if (index == -1) {
+			if (index <= 0) {
 				throw exception;
 			}
 			String baseName = name.substring(0, index);
