@@ -186,6 +186,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.common.types.util.FeatureOverridesService", "org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService")
 				.addTypeToType(EObjectAtOffsetHelper.class.getCanonicalName(), "org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper")
 				.addTypeToType(CancelableDiagnostician.class.getCanonicalName(), "org.eclipse.xtext.xbase.validation.XbaseDiagnostician")
+				.addTypeToType("org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider",
+						"org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter")
 				;
 		if (doesUseXbaseWithAnnotations(grammar)) {
 			config = config
