@@ -15,34 +15,31 @@ import org.eclipse.xtext.util.ITextRegion;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class TypeUsage {
-	private String text;
+	private JvmDeclaredType usedType;
+	private String usedTypeName;
 	
 	private ITextRegion textRegion;
 	
 	private JvmMember context;
 
-	private boolean staticAccess;
-
-	private boolean noDelimiter;
-
-	public TypeUsage(String text, ITextRegion textRegion, JvmMember context, boolean staticAccess, boolean noDelimiter) {
-		this.text = text;
+	public TypeUsage(JvmDeclaredType usedType, ITextRegion textRegion, JvmMember context) {
+		this.usedType = usedType;
 		this.textRegion = textRegion;
 		this.context = context;
-		this.staticAccess = staticAccess;
-		this.noDelimiter = noDelimiter;
 	}
 	
-	public boolean isStaticAccess() {
-		return staticAccess;
+	public TypeUsage(String usedTypeName, ITextRegion textRegion, JvmMember context) {
+		this.usedTypeName = usedTypeName;
+		this.textRegion = textRegion;
+		this.context = context;
 	}
 	
-	public boolean isTrailingDelimiterSuppressed() {
-		return noDelimiter;
+	public JvmDeclaredType getUsedType() {
+		return usedType;
 	}
 	
-	public String getText() {
-		return text;
+	public String getUsedTypeName() {
+		return usedTypeName;
 	}
 	
 	public ITextRegion getTextRegion() {

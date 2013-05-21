@@ -315,4 +315,9 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	public boolean isStatic() {
 		return getFeatureCall().isStatic();
 	}
+	
+	public boolean isTypeLiteral() {
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		return featureCall.isTypeLiteral();
+	}
 }

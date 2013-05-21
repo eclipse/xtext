@@ -23,4 +23,6 @@ public interface IFeatureLinkingCandidate extends ILinkingCandidate {
 	
 	boolean isExtension();
 	
+	boolean isTypeLiteral();
+	
 }

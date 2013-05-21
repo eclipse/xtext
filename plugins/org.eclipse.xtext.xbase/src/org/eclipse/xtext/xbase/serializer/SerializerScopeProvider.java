@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.serializer;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -59,6 +61,9 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (isFeatureCallScope(reference)) {
@@ -97,7 +102,7 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 		JvmIdentifiableElement feature = call.getFeature();
 		// this and super - logical container aware FeatureScopes
 		if (feature instanceof JvmType) {
-			return getThisOrSuperScope(call, (JvmType) feature);
+			return getTypeScope(call, (JvmType) feature);
 		}
 		if (feature instanceof JvmConstructor) {
 			return getThisOrSuperScope(call, (JvmConstructor) feature);
@@ -152,6 +157,26 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 			}
 		}
 		return new SingletonScope(EObjectDescription.create(name, constructor), IScope.NULLSCOPE);
+	}
+	
+	protected IScope getTypeScope(XAbstractFeatureCall call, JvmType type) {
+		if (call.isTypeLiteral()) {
+			return getTypeScope((JvmType) call.getFeature());
+		} 
+		return getThisOrSuperScope(call, type);
+	}
+	
+	protected IScope getTypeScope(JvmType type) {
+		// TODO evaluate imports
+		String qualifiedNameWithDots = type.getQualifiedName('.');
+		String qualifiedNameWithDollar = type.getQualifiedName();
+		if (qualifiedNameWithDollar.equals(qualifiedNameWithDots)) {
+			return new SingletonScope(EObjectDescription.create(qualifiedNameConverter.toQualifiedName(qualifiedNameWithDots), type), IScope.NULLSCOPE);
+		} else {
+			return new SimpleScope(Arrays.asList(
+					EObjectDescription.create(qualifiedNameConverter.toQualifiedName(qualifiedNameWithDots), type),
+					EObjectDescription.create(qualifiedNameConverter.toQualifiedName(qualifiedNameWithDollar), type)));
+		}
 	}
 	
 	protected IScope getThisOrSuperScope(XAbstractFeatureCall call, JvmType thisOrSuper) {

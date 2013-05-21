@@ -371,42 +371,75 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			AbstractTypeComputationState child = state.withNonVoidExpectation();
 			child.computeTypes(implicitFirstArgument);
 		}
+		if (featureCall.isTypeLiteral() || featureCall.isPackageFragment()) {
+			return new ResolvedTypeLiteral(featureCall, resolvedTo, state);
+		}
 		return new ResolvedFeature(featureCall, resolvedTo, helper, state);
 	}
 	
 	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, final StackedResolvedTypes demandComputedTypes, IIdentifiableElementDescription description) {
-		if (description.getSyntacticReceiverType() != null) { // TOOD double check how we can deal with the demand computed types in an elegant manner
-			final ExpressionAwareStackedResolvedTypes resolvedTypes = demandComputedTypes.pushTypes(featureCall);
-			ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
-			return new FeatureLinkingCandidate(featureCall, description, state) {
+		if (description.getSyntacticReceiverType() != null) { 
+			return createCandidateWithReceiverType(featureCall, demandComputedTypes, description);
+		}
+		// pretty much the same constraints as in #createCandidateWithReceiverType but after the fact
+		// the demanc computed types have to merged there, too
+		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
+		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
+		if (description instanceof ScopeProviderAccess.ErrorDescription) {
+			ScopeProviderAccess.ErrorDescription errorDescription = (ScopeProviderAccess.ErrorDescription) description;
+			boolean followUpError = errorDescription.isFollowUpError();
+			if (followUpError) {
+				return new FollowUpError(featureCall, state);
+			}
+			return new UnresolvableFeatureCall(featureCall, errorDescription.getNode(), description.getName().toString(), state);
+		} else if (description.isTypeLiteral()) {
+			return new TypeLiteralLinkingCandidate(featureCall, description, state);
+		} else {
+			return new FeatureLinkingCandidate(featureCall, description, state);
+		}
+	}
+
+	protected IFeatureLinkingCandidate createCandidateWithReceiverType(XAbstractFeatureCall featureCall, final StackedResolvedTypes demandComputedTypes,
+			IIdentifiableElementDescription description) {
+		final ExpressionAwareStackedResolvedTypes resolvedTypes = demandComputedTypes.pushTypes(featureCall);
+		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
+		if (description instanceof ScopeProviderAccess.ErrorDescription) {
+			ScopeProviderAccess.ErrorDescription errorDescription = (ScopeProviderAccess.ErrorDescription) description;
+			boolean followUpError = errorDescription.isFollowUpError();
+			if (followUpError) {
+				return new FollowUpError(featureCall, state) {
+					@Override
+					public void applyToComputationState() {
+						super.applyToComputationState();
+						demandComputedTypes.mergeIntoParent();
+					}
+				};
+			}
+			return new UnresolvableFeatureCall(featureCall, errorDescription.getNode(), description.getName().toString(), state) {
 				@Override
 				public void applyToComputationState() {
 					super.applyToComputationState();
-					XExpression receiver = getReceiver();
-					if (receiver != null) {
-						LightweightTypeReference receiverType = getReceiverType();
-						if (receiverType == null) {
-							throw new IllegalStateException("Cannot determine receiver's type");
-						}
-						LightweightTypeReference expectedReceiverType = new FeatureLinkHelper().getExpectedReceiverType(getFeature(), receiverType);
-						TypeExpectation refinedExpectation = new TypeExpectation(expectedReceiverType, getState(), false);
-						demandComputedTypes.refineExpectedType(receiver, refinedExpectation);
-					}
 					demandComputedTypes.mergeIntoParent();
 				}
 			};
 		}
-		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
-		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
-		if (description instanceof ScopeProviderAccess.ErrorDescription) {
-			boolean followUpError = ((ScopeProviderAccess.ErrorDescription) description).isFollowUpError();
-			if (followUpError) {
-				return new FollowUpError(featureCall, state);
+		return new FeatureLinkingCandidate(featureCall, description, state) {
+			@Override
+			public void applyToComputationState() {
+				super.applyToComputationState();
+				XExpression receiver = getReceiver();
+				if (receiver != null) {
+					LightweightTypeReference receiverType = getReceiverType();
+					if (receiverType == null) {
+						throw new IllegalStateException("Cannot determine receiver's type");
+					}
+					LightweightTypeReference expectedReceiverType = new FeatureLinkHelper().getExpectedReceiverType(getFeature(), receiverType);
+					TypeExpectation refinedExpectation = new TypeExpectation(expectedReceiverType, getState(), false);
+					demandComputedTypes.refineExpectedType(receiver, refinedExpectation);
+				}
+				demandComputedTypes.mergeIntoParent();
 			}
-			return new UnresolvableFeatureCall(featureCall, ((ScopeProviderAccess.ErrorDescription) description).getNode(), description.getName().toString(), state);
-		} else {
-			return new FeatureLinkingCandidate(featureCall, description, state);
-		}
+		};
 	}
 	
 	public List<IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall) {

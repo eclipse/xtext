@@ -55,10 +55,8 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
@@ -97,9 +95,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	@Inject
 	private XbaseQualifiedNameValueConverter qualifiedNameValueConverter;
-	
-	@Inject
-	private StaticQualifierValueConverter staticQualifierValueConverter;
 	
 	@Inject
 	private StaticQualifierPrefixMatcher staticQualifierPrefixMatcher;
@@ -222,17 +217,17 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, qualifiedNameValueConverter, TypeMatchFilters.all(), acceptor);
 	}
 	
-	@Override
-	public void completeXFeatureCall_DeclaringType(EObject model, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		proposeDeclaringTypeForStaticInvocation(model, assignment, context, acceptor);
-	}
+//	@Override
+//	public void completeXFeatureCall_DeclaringType(EObject model, Assignment assignment, ContentAssistContext context,
+//			ICompletionProposalAcceptor acceptor) {
+//		proposeDeclaringTypeForStaticInvocation(model, assignment, context, acceptor);
+//	}
 	
 	public void proposeDeclaringTypeForStaticInvocation(EObject model, Assignment assignment, ContentAssistContext context, 
 			ICompletionProposalAcceptor acceptor){
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
 			ContentAssistContext modifiedContext = context.copy().setMatcher(staticQualifierPrefixMatcher).toContext();
-			completeJavaTypes(modifiedContext, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, staticQualifierValueConverter, TypeMatchFilters.all(), acceptor);
+			completeJavaTypes(modifiedContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, qualifiedNameValueConverter, TypeMatchFilters.all(), acceptor);
 		}
 	}
 	
@@ -311,9 +306,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					return;
 				}
 			}
-		}
-		if (model instanceof XFeatureCall && ((XFeatureCall) model).getDeclaringType() != null) {
-			super.completeXFeatureCall_Feature(model, assignment, context, acceptor);
 		}
 		if (model == null || model instanceof XExpression || model instanceof XCatchClause)
 			createLocalVariableAndImplicitProposals(model, context, acceptor);

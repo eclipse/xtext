@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.tests.annotations;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -51,20 +52,84 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 		assertNotNull(getAnnotationOnClass(text, Singleton.class));
 	}
 	
-	@Test public void testParameterizedAnnotationOnType() throws Exception {
+	@Test public void testParameterizedAnnotationOnType_01() throws Exception {
 		final String text = "@com.google.inject.ImplementedBy(typeof(String)) class Foo {}";
 		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
 		assertTrue(implementedBy.value() == String.class);
 	}
 	
-	@Test public void testKeyValueParameterizedAnnotationOnType() throws Exception {
+	@Test public void testParameterizedAnnotationOnType_02() throws Exception {
+		final String text = "@com.google.inject.ImplementedBy(String) class Foo {}";
+		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
+		assertTrue(implementedBy.value() == String.class);
+	}
+	
+	@Test public void testParameterizedAnnotationOnType_03() throws Exception {
+		final String text = "@com.google.inject.ImplementedBy(java.lang.String) class Foo {}";
+		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
+		assertTrue(implementedBy.value() == String.class);
+	}
+	
+	@Test public void testParameterizedAnnotationOnType_04() throws Exception {
+		final String text = "@com.google.inject.ImplementedBy(java.util.Map.Entry) class Foo {}";
+		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
+		assertTrue(implementedBy.value() == Map.Entry.class);
+	}
+	
+	@Test public void testParameterizedAnnotationOnType_05() throws Exception {
+		final String text = "@com.google.inject.ImplementedBy(java.util.Map$Entry) class Foo {}";
+		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
+		assertTrue(implementedBy.value() == Map.Entry.class);
+	}
+	
+	@Test public void testKeyValueParameterizedAnnotationOnType_01() throws Exception {
 		final String text = "@com.google.inject.ImplementedBy( value = typeof(String)) class Foo {}";
 		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
 		assertTrue(implementedBy.value() == String.class);
 	}
 	
+	@Test public void testKeyValueParameterizedAnnotationOnType_02() throws Exception {
+		final String text = "@com.google.inject.ImplementedBy( value = String) class Foo {}";
+		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
+		assertTrue(implementedBy.value() == String.class);
+	}
+	
+	@Test public void testKeyValueParameterizedAnnotationOnType_03() throws Exception {
+		final String text = "@com.google.inject.ImplementedBy( value = java.lang.String) class Foo {}";
+		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
+		assertTrue(implementedBy.value() == String.class);
+	}
+	@Test public void testKeyValueParameterizedAnnotationOnType_04() throws Exception {
+		final String text = "@com.google.inject.ImplementedBy( value = java.util.Map.Entry) class Foo {}";
+		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
+		assertTrue(implementedBy.value() == Map.Entry.class);
+	}
+	@Test public void testKeyValueParameterizedAnnotationOnType_05() throws Exception {
+		final String text = "@com.google.inject.ImplementedBy( value = java.util.Map$Entry) class Foo {}";
+		ImplementedBy implementedBy = getAnnotationOnClass(text, ImplementedBy.class);
+		assertTrue(implementedBy.value() == Map.Entry.class);
+	}
+	
 	@Test public void testKeyValueParameterizedAnnotationOnField() throws Exception {
 		final String text = "class Foo { @com.google.inject.Inject(optional = true) String string }";
+		Inject inject = getAnnotationOnField(text, Inject.class);
+		assertTrue(inject.optional());
+	}
+	
+	@Test public void testKeyValueParameterizedAnnotationOnField_02() throws Exception {
+		final String text = "class Foo { @com.google.inject.Inject(optional = b) String string static val b = true }";
+		Inject inject = getAnnotationOnField(text, Inject.class);
+		assertTrue(inject.optional());
+	}
+	
+	@Test public void testKeyValueParameterizedAnnotationOnField_03() throws Exception {
+		final String text = "class Foo { @com.google.inject.Inject(optional = Foo.b) String string static val b = true }";
+		Inject inject = getAnnotationOnField(text, Inject.class);
+		assertTrue(inject.optional());
+	}
+	
+	@Test public void testKeyValueParameterizedAnnotationOnField_04() throws Exception {
+		final String text = "class Foo { @com.google.inject.Inject(optional = Foo::b) String string static val b = true }";
 		Inject inject = getAnnotationOnField(text, Inject.class);
 		assertTrue(inject.optional());
 	}
@@ -97,8 +162,30 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 		assertNotNull(check);
 		assertEquals(CheckType.NORMAL, check.value());
 	}
-
+	
+	@Test public void testBug351554_02() throws Exception {
+		final String text = 
+				"class Foo {\n" +
+				"	@org.eclipse.xtext.validation.Check(org.eclipse.xtext.validation.CheckType::NORMAL)\n" +
+				"	def void checkSomething(Object o) {}\n" +
+				"}";
+		Check check = getAnnotationOnMethod(text, Check.class);
+		assertNotNull(check);
+		assertEquals(CheckType.NORMAL, check.value());
+	}
+	
 	@Test public void testBug351554_03() throws Exception {
+		final String text = 
+				"class Foo {\n" +
+				"	@org.eclipse.xtext.validation.Check(org.eclipse.xtext.validation.CheckType.NORMAL)\n" +
+				"	def void checkSomething(Object o) {}\n" +
+				"}";
+		Check check = getAnnotationOnMethod(text, Check.class);
+		assertNotNull(check);
+		assertEquals(CheckType.NORMAL, check.value());
+	}
+
+	@Test public void testBug351554_04() throws Exception {
 		final String text = 
 			"@testdata.Annotation1(children = @testdata.Annotation2(#['a', 'b']), value=true)\n" +
 			"class Foo {}";

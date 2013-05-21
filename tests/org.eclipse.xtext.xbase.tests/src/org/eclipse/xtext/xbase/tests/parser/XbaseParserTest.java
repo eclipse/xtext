@@ -264,42 +264,56 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testStaticFeatureCall_0() throws Exception {
-		XFeatureCall call = (XFeatureCall) expression("String::valueOf('')");
-		assertNotNull(call.getDeclaringType());
-		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("String::valueOf('')");
+		assertNotNull(call.getMemberCallTarget());
+		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
 		assertEquals("java.lang.String.valueOf(java.lang.Object)", call.getFeature().getIdentifier());
 	}
 	
 	@Test public void testStaticFeatureCall_1() throws Exception {
-		XFeatureCall call = (XFeatureCall) expression("String::CASE_INSENSITIVE_ORDER");
-		assertNotNull(call.getDeclaringType());
-		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("String::CASE_INSENSITIVE_ORDER");
+		assertNotNull(call.getMemberCallTarget());
+		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
 		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
 	}
 
 	@Test public void testStaticFeatureCall_2() throws Exception {
-		XFeatureCall call = (XFeatureCall) expression("java::lang::String::valueOf('')");
-		assertNotNull(call.getDeclaringType());
-		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("java::lang::String::valueOf('')");
+		assertNotNull(call.getMemberCallTarget());
+		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
 		assertEquals("java.lang.String.valueOf(java.lang.Object)", call.getFeature().getIdentifier());
 	}
 	
 	@Test public void testStaticFeatureCall_3() throws Exception {
-		XFeatureCall call = (XFeatureCall) expression("java::lang::String::CASE_INSENSITIVE_ORDER");
-		assertNotNull(call.getDeclaringType());
-		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("java::lang::String::CASE_INSENSITIVE_ORDER");
+		assertNotNull(call.getMemberCallTarget());
+		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
+		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_4() throws Exception {
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("java.lang.String::valueOf('')");
+		assertNotNull(call.getMemberCallTarget());
+		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
+		assertEquals("java.lang.String.valueOf(java.lang.Object)", call.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_5() throws Exception {
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("java.lang.String::CASE_INSENSITIVE_ORDER");
+		assertNotNull(call.getMemberCallTarget());
+		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
 		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
 	}
 	
 	@Test public void testMemberFeatureCall_00() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("'holla'?.bar(4)");
 		assertTrue(call.isNullSafe());
-		assertFalse(call.isSpreading());
+		assertFalse(call.isExplicitStatic());
 	}
 	@Test public void testMemberFeatureCall_01() throws Exception {
-		XMemberFeatureCall call = (XMemberFeatureCall) expression("somList*.bar(4)");
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("somList::bar(4)");
 		assertFalse(call.isNullSafe());
-		assertTrue(call.isSpreading());
+		assertTrue(call.isExplicitStatic());
 	}
 
 	@Test public void testIf_0() throws Exception {

@@ -147,6 +147,22 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testTypeLiteral_5() throws Exception {
 		"typeof(int[]).superclass".resolvesTo("Class<? super int[]>")
 	}
+	
+	@Test def void testTypeLiteral_6() throws Exception {
+		"String".resolvesTo("Class<String>")
+	}
+	
+	@Test def void testTypeLiteral_7() throws Exception {
+		"void".resolvesTo("Class<Void>")
+	}
+	
+	@Test def void testTypeLiteral_8() throws Exception {
+		"int".resolvesTo("Class<Integer>")
+	}
+	
+	@Test def void testTypeLiteral_9() throws Exception {
+		"java.lang.String".resolvesTo("Class<String>")
+	}
 
 	@Test def void testBooleanLiteral() throws Exception {
 		"true".resolvesTo("boolean")
