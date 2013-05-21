@@ -20,10 +20,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -128,7 +130,9 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 					JvmDeclaredType importedType = importedTypeAndRelativeName.getFirst();
 					QualifiedName importRelativeName = importedTypeAndRelativeName.getSecond();
 					boolean isStaticExtensionFeatureCall = isStaticExtensionFeatureCall(referringElement, reference, newTargetElement);
-					IScope scope = scopeProvider.getScope(referringElement, reference);
+					// constructor calls and type references are import aware, but only type reference can be disambiguated by using
+					// #getSingleElement
+					IScope scope = scopeProvider.getScope(referringElement, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 					if (scope != null) {
 						((ImportAwareUpdateAcceptor) updateAcceptor).removeImport(importedType,
 								isStaticFeatureCall,
@@ -138,7 +142,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 						EObject resolvedSingleElement = null;
 						if(singleElement != null) 
 							resolvedSingleElement = EcoreUtil.resolve(singleElement.getEObjectOrProxy(), referringElement);
-						if (singleElement == null || resolvedSingleElement == newTargetElement) {
+						if (singleElement == null || resolvedSingleElement == EcoreUtil2.getContainerOfType(newTargetElement, JvmDeclaredType.class)) {
 							if(!isEmpty(importedType.getPackageName())) 
 								((ImportAwareUpdateAcceptor) updateAcceptor).acceptImport(importedType,
 										isStaticFeatureCall,
