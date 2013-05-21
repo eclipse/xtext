@@ -66,12 +66,10 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 	@Singleton
 	public static class ExtensionClassNameProvider {
 	
-		private final Collection<String> literalClassNames;
-		private final Map<String, Collection<String>> extensionClassNames;
+		private Collection<String> literalClassNames;
+		private Map<String, Collection<String>> extensionClassNames;
 		
 		public ExtensionClassNameProvider() {
-			this.literalClassNames = computeLiteralClassNames();
-			this.extensionClassNames = computeExtensionClassNames();
 		}
 
 		protected Map<String, Collection<String>> computeExtensionClassNames() {
@@ -98,10 +96,16 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 		}
 
 		protected Collection<String> getLiteralClassNames() {
+			if (literalClassNames == null) {
+				literalClassNames = computeLiteralClassNames();
+			}
 			return literalClassNames;
 		}
 		
 		protected Map<String, Collection<String>> getExtensionClassNames() {
+			if (extensionClassNames == null) {
+				this.extensionClassNames = computeExtensionClassNames();
+			}
 			return extensionClassNames;
 		}
 		
