@@ -301,17 +301,6 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 	 * @param idx the index in an expression list of a block. Otherwise to be ignored.
 	 */
 	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, Resource resource, boolean includeCurrentBlock, int idx) {
-		if (context instanceof XFeatureCall) {
-			XFeatureCall featureCall = (XFeatureCall) context;
-			if (featureCall.getDeclaringType() != null) {
-				JvmTypeReference typeReference = typeReferences.createTypeRef(featureCall.getDeclaringType());
-				JvmFeatureScopeAcceptor featureScopeDescriptions = new JvmFeatureScopeAcceptor();
-				IAcceptor<IJvmFeatureDescriptionProvider> curried = featureScopeDescriptions.curry(typeReference, featureCall);
-				addFeatureDescriptionProviders(getContextType(featureCall), null, null, null, getDefaultPriority(), true, curried);
-				IScope result = featureScopeDescriptions.createScope(IScope.NULLSCOPE);
-				return result;
-			}
-		}
 		DelegatingScope implicitFeaturesAndStatics = new DelegatingScope(IScope.NULLSCOPE);
 		LocalVariableScopeContext scopeContext = createLocalVariableScopeContext(context, reference, includeCurrentBlock, idx);
 		IScope localVariableScope = createLocalVarScope(implicitFeaturesAndStatics, scopeContext);
