@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
+import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.XFeatureCall
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -40,6 +42,10 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		val xExpression = expression(expression, false)
 		val featureCalls = EcoreUtil2::eAll(xExpression).filter(typeof(XAbstractFeatureCall)).toList
 		return featureCalls.sortBy [ NodeModelUtils::findNodesForFeature(it, XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE).head.offset ]
+	}
+	
+	def protected filterTypeLiteralsAndPackageFragments(Iterable<XAbstractFeatureCall> featureCalls) {
+		featureCalls.filter[ !packageFragment && !typeLiteral ]
 	}
 	
 	override protected expression(CharSequence expression, boolean resolve) throws Exception {

@@ -63,6 +63,8 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 
 	boolean isStatic();
 	
+	boolean isTypeLiteral();
+	
 	boolean isExtension();
 	
 }

@@ -937,17 +937,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	//TODO apply cast rules case's type guards
 	//TODO null guard is not allowed with any other primitives but boolean (null -> false)
 
-	/*
-	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
-	 */
-	@Check
-	public void checkSpreadOperatorNotUsed(XMemberFeatureCall featureCall) {
-		if (featureCall.isSpreading()) {
-			error("The spreading operator is not yet supported.", featureCall,
-					Literals.XMEMBER_FEATURE_CALL__SPREADING, "unssupported_spread_operator");
-		}
-	}
-
 	@Check
 	void checkNullSafeFeatureCallWithPrimitives(XMemberFeatureCall featureCall) {
 		if (featureCall.isNullSafe() && getActualType(featureCall.getMemberCallTarget()).isPrimitive()) {
@@ -996,7 +985,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 							handleTypeUsageInCrossReference(imports, importedNames, n);
 						} else if (n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")){
 							handleTypeUsageInComment(imports, importedNames, n);
-						} else if (n.getSemanticElement() instanceof XAbstractFeatureCall) {
+						} else if (n.hasDirectSemanticElement() && n.getSemanticElement() instanceof XAbstractFeatureCall) {
+							handleTypeUsageInTypeLiteral(imports, importedNames, (XAbstractFeatureCall) n.getSemanticElement(), n);
 							handleTypeUsageInStaticFeatureCall(staticImports, extensionImports, n);
 						}
 					}
@@ -1015,11 +1005,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) node.getSemanticElement();
 		boolean isExtension = featureCall.isExtension();
 		if (featureCall.isStatic() || isExtension) {
-			if (featureCall instanceof XFeatureCall) {
-				if (((XFeatureCall) featureCall).getDeclaringType() != null) {
-					return;
-				}
-			}
 			JvmFeature feature = (JvmFeature) featureCall.getFeature();
 			JvmDeclaredType declaringType = feature.getDeclaringType();
 			if (declaringType != null) {
@@ -1045,6 +1030,15 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 		}
 	}
+	
+	protected void handleTypeUsageInTypeLiteral(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, XAbstractFeatureCall featureCall, INode node) {
+		if (featureCall instanceof XFeatureCall) {
+			XFeatureCall casted = (XFeatureCall) featureCall;
+			if (casted.isPackageFragment() || !casted.isTypeLiteral())
+				return;
+			doHandleTypeReference(imports, importedNames, node);
+		}
+	}
 
 	protected void handleTypeUsageInCrossReference(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, INode n) {
 		CrossReference crossReference = (CrossReference) n.getGrammarElement();
@@ -1052,30 +1046,31 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (classifier instanceof EClass
 			 && (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) 
 					|| TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf((EClass) classifier))) {
-			// Filter out HiddenLeafNodes to avoid confusion by comments etc.
-			StringBuilder builder = new StringBuilder();
-			for(ILeafNode leafNode : n.getLeafNodes()){
-				if(!leafNode.isHidden()){
-					builder.append(leafNode.getText());
-				}
+			doHandleTypeReference(imports, importedNames, n);
+		}
+	}
+
+	private void doHandleTypeReference(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, INode n) {
+		// Filter out HiddenLeafNodes to avoid confusion by comments etc.
+		StringBuilder builder = new StringBuilder();
+		for(ILeafNode leafNode : n.getLeafNodes()){
+			if(!leafNode.isHidden()){
+				builder.append(leafNode.getText());
 			}
-			String simpleName = builder.toString().trim();
-			if (simpleName.endsWith("::"))
-				simpleName = simpleName.substring(0, simpleName.length() - 2);
-			// handle StaticQualifier Workaround (see Xbase grammar)
-			if (importedNames.containsKey(simpleName)) {
-				JvmType type = importedNames.remove(simpleName);
-				imports.remove(type);
-			} else {
-				if (markImportUsed(imports, importedNames, simpleName, "$")) {
-					return;
-				}
-				if (markImportUsed(imports, importedNames, simpleName, ".")) {
-					return;
-				}
-				if (markImportUsed(imports, importedNames, simpleName, "::")) {
-					return;
-				}
+		}
+		String simpleName = builder.toString();
+		if (importedNames.containsKey(simpleName)) {
+			JvmType type = importedNames.remove(simpleName);
+			imports.remove(type);
+		} else {
+			if (markImportUsed(imports, importedNames, simpleName, "$")) {
+				return;
+			}
+			if (markImportUsed(imports, importedNames, simpleName, ".")) {
+				return;
+			}
+			if (markImportUsed(imports, importedNames, simpleName, "::")) {
+				return;
 			}
 		}
 	}
