@@ -17,9 +17,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -42,9 +43,6 @@ public class ImportOrganizer {
 	
 	@Inject(optional=true)
 	private IUnresolvedTypeResolver unresolvedTypeResolver;
-	
-	@Inject
-	private StaticQualifierValueConverter staticQualifierConverter;
 	
 	@Inject
 	private XbaseQualifiedNameValueConverter nameValueConverter;
@@ -102,21 +100,37 @@ public class ImportOrganizer {
 				nameToUse = packageLocalName;
 			}
 		}
-		String textToUse = getConcreteSyntax(nameToUse, usage);
-		if(!equal(usage.getText(), textToUse)) {
-			return new ReplaceRegion(usage.getTextRegion(), textToUse);
-		}
-		return null;
+		String textToUse = getConcreteSyntax(nameToUse, type, usage);
+		return new ReplaceRegion(usage.getTextRegion(), textToUse);
 	}
 
-	private String getConcreteSyntax(String name, TypeUsage usage) {
-		if (usage.isStaticAccess()) {
-			if (usage.isTrailingDelimiterSuppressed()) {
-				return staticQualifierConverter.toStringWithoutNamespaceDelimiter(name);
+	private String getConcreteSyntax(String name, JvmDeclaredType importedType, TypeUsage usage) {
+		JvmDeclaredType usedType = usage.getUsedType();
+		if (usedType == null) {
+			String typeName = usage.getUsedTypeName();
+			String suffix = getSuffix(usage);
+			String fullTypeName = typeName + suffix;
+			return nameValueConverter.toString(fullTypeName);
+		} else {
+			if (usedType != importedType) {
+				List<String> segments = Lists.newLinkedList();
+				while(usedType != importedType) {
+					segments.add(0, usedType.getSimpleName());
+					usedType = usedType.getDeclaringType();
+				}
+				name = name + '.' + Joiner.on('.').join(segments);
+			} else {
+				String suffix = getSuffix(usage);
+				name = name + suffix;
 			}
-			return staticQualifierConverter.toString(name);
+			return nameValueConverter.toString(name);
 		}
-		return nameValueConverter.toString(name);
+	}
+
+	protected String getSuffix(TypeUsage usage) {
+		String suffix = usage.getSuffix();
+		suffix = suffix.replace('$', '.').replace("::", ".");
+		return suffix;
 	}
 	
 	private void addImports(Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages, RewritableImportSection target) {

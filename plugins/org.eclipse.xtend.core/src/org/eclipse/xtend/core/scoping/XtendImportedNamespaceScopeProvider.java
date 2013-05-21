@@ -28,9 +28,6 @@ import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -41,7 +38,6 @@ import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
-import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -205,7 +201,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 						}
 						concreteImports.add(importedType);
 						if (importedType.eContainer() instanceof JvmDeclaredType) {
-							String importSyntax = getImportSyntax(importDeclaration);
+							String importSyntax = getImportsConfiguration().getLegacyImportSyntax(importDeclaration);
 							if (importSyntax != null) {
 								hasLegacyImport = true;
 								importedNames.add(getQualifiedNameConverter().toQualifiedName(importSyntax));
@@ -221,28 +217,6 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		return getImportScope(wildcardImports, concreteImports, hasLegacyImport ? importedNames : null, parent, typeScope);
 	}
 
-	/*
-	 * We cannot just use importDeclaration.getImportedTypeName since that would return the name from
-	 * the resolved type rather than the concrete syntax. 
-	 */
-	protected String getImportSyntax(XImportDeclaration importDeclaration) {
-		List<INode> list = NodeModelUtils.findNodesForFeature(importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
-		if (list.isEmpty()) {
-			return null;
-		}
-		INode singleNode = list.get(0);
-		if (singleNode.getText().indexOf('$') < 0) {
-			return null;
-		}
-		StringBuilder sb = new StringBuilder();
-		for(ILeafNode node: singleNode.getLeafNodes()) {
-			if (!node.isHidden()) {
-				sb.append(node.getText().replace("^", ""));
-			}
-		}
-		return sb.toString();
-	}
-	
 	private AbstractScope getImportScope(List<ImportNormalizer> wildcardImports, List<JvmType> concreteImports, List<QualifiedName> importedNames,
 			AbstractScope parent, RecordingTypeScope typeScope) {
 		AbstractScope result = parent;

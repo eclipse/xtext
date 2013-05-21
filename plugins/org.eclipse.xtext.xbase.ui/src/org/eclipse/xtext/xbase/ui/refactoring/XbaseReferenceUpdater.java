@@ -26,7 +26,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -34,7 +33,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
@@ -60,10 +58,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
-
-	@Inject
-	@LinkingScopeProviderBinding
-	private IScopeProvider scopeProvider;
 
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
@@ -124,7 +118,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 				&& !isImplicitVariable(newTargetElement, reference, newReferenceText)) {
 			boolean isStaticFeatureCall = isStaticFeatureCall(referringElement, reference, newTargetElement);
 			// do nothing on static feature calls with explicit type as the type reference has a separate reference
-			if(!isStaticFeatureCall || ((XFeatureCall) referringElement).getDeclaringType() == null) {
+			if(!isStaticFeatureCall) {
 				Pair<JvmDeclaredType, QualifiedName> importedTypeAndRelativeName = getImportedTypeAndRelativeName((JvmMember)newTargetElement, ((ImportAwareUpdateAcceptor) updateAcceptor).getImportSection());
 				if(importedTypeAndRelativeName != null) {
 					JvmDeclaredType importedType = importedTypeAndRelativeName.getFirst();
@@ -132,7 +126,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 					boolean isStaticExtensionFeatureCall = isStaticExtensionFeatureCall(referringElement, reference, newTargetElement);
 					// constructor calls and type references are import aware, but only type reference can be disambiguated by using
 					// #getSingleElement
-					IScope scope = scopeProvider.getScope(referringElement, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+					IScope scope = getLinkingScopeProvider().getScope(referringElement, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 					if (scope != null) {
 						((ImportAwareUpdateAcceptor) updateAcceptor).removeImport(importedType,
 								isStaticFeatureCall,
