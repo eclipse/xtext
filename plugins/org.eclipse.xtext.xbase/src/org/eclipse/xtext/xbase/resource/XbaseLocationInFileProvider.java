@@ -21,12 +21,14 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
+import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -34,51 +36,47 @@ import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sebastian Zarnekow - Support linking of feature calls as type literals	
  */
 @Singleton
 public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
 	
 	@Inject
-	private StaticQualifierValueConverter staticQualifierValueConverter; 
+	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
 	
 	@Override
 	public ITextRegion getSignificantTextRegion(EObject element) {
 		if(element instanceof XSwitchExpression && ((XSwitchExpression)element).getLocalVarName() != null) {
 			 return getLocationOfAttribute(element, XbasePackage.Literals.XSWITCH_EXPRESSION__LOCAL_VAR_NAME, -1, true);
 		}
+		if (element instanceof XAbstractFeatureCall) {
+			XAbstractFeatureCall typeLiteral = typeLiteralHelper.getRootTypeLiteral((XAbstractFeatureCall) element);
+			if (typeLiteral != null) {
+				if (typeLiteral instanceof XMemberFeatureCall) {
+					XAbstractFeatureCall target = (XAbstractFeatureCall) ((XMemberFeatureCall) typeLiteral).getMemberCallTarget();
+					if (target.isTypeLiteral()) {
+						return super.getSignificantTextRegion(typeLiteral);
+					}
+				}
+				INode node = NodeModelUtils.findActualNodeFor(typeLiteral);
+				if (node != null) {
+					return new TextRegionWithLineInformation(node.getOffset(), node.getLength(), node.getStartLine() - 1, node.getEndLine() - 1);
+				}
+			}
+		}
 		return super.getSignificantTextRegion(element);
 	}
 	
 	@Override
-	protected ITextRegion getLocationOfCrossReference(EObject owner, EReference reference, int indexInList,
-			boolean isSignificant) {
-		if (owner instanceof XFeatureCall && reference == XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE && isSignificant) {
-			List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
-			if (!nodes.isEmpty()) {
-				INode qualifierNode = nodes.get(0);
-				ITextRegion result = ITextRegion.EMPTY_REGION;
-				INode pending = null;
-				String delimiter = staticQualifierValueConverter.getStringNamespaceDelimiter();
-				for (INode node : qualifierNode.getLeafNodes()) {
-					if (!isHidden(node)) {
-						int length = node.getLength();
-						if (length != 0) {
-							if (pending != null) {
-								result.merge(new TextRegionWithLineInformation(pending.getOffset(), length, pending.getStartLine() - 1, pending.getEndLine() - 1));
-								pending = null;
-							}
-							if (delimiter.equals(node.getText())) {
-								pending = node;
-							} else {
-								result = result.merge(new TextRegionWithLineInformation(node.getOffset(), length, node.getStartLine() - 1, node.getEndLine() - 1));
-							}
-						}
-					}
-				}
-				return result;
+	protected ITextRegion getLocationOfContainmentReference(EObject owner, EReference reference, int indexInList, RegionDescription query) {
+		if (owner instanceof XMemberFeatureCall && reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+			XMemberFeatureCall casted = (XMemberFeatureCall) owner;
+			if (casted.isExplicitStatic() || casted.isStaticWithDeclaringType()) {
+				XExpression target = ((XMemberFeatureCall) owner).getMemberCallTarget();
+				return getTextRegion(target, query);
 			}
 		}
-		return super.getLocationOfCrossReference(owner, reference, indexInList, isSignificant);
+		return super.getLocationOfContainmentReference(owner, reference, indexInList, query);
 	}
 	
 	@Override

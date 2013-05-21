@@ -1140,6 +1140,50 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')	
 	}
+
+	@Test
+	def void missingTypeInstanceAccess() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Collections|.sort
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Import 'Collections' (java.util)")
+		.assertModelAfterQuickfix('''
+			import java.util.Collections
+			
+			class Foo {
+				def foo() {
+					Collections.sort
+				}
+			}
+		''')	
+	}
+
+	@Test
+	def void missingTypeLiteralAccess() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Collections|.newInstance
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Import 'Collections' (java.util)")
+		.assertModelAfterQuickfix('''
+			import java.util.Collections
+			
+			class Foo {
+				def foo() {
+					Collections.newInstance
+				}
+			}
+		''')	
+	}
 	
 	@Test
 	def void missingAnnotationImport() {
