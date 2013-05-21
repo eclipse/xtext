@@ -33,7 +33,24 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	
 	private QualifiedName lowerCase;
 
-	public static final QualifiedName EMPTY = new QualifiedName();
+	public static final QualifiedName EMPTY = new QualifiedName() {
+		@Override
+		public QualifiedName append(QualifiedName relativeQualifiedName) {
+			return relativeQualifiedName;
+		}
+		@Override
+		public QualifiedName append(String segment) {
+			return QualifiedName.create(segment);
+		}
+		@Override
+		public QualifiedName toLowerCase() {
+			return this;
+		}
+		@Override
+		public QualifiedName toUpperCase() {
+			return this;
+		}
+	};
 
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
@@ -66,6 +83,9 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	 */
 	public static QualifiedName createFromStream(EObjectInputStream eObjectInputStream) throws IOException{
 		int segmentCount = eObjectInputStream.readCompressedInt();
+		if (segmentCount == 0) {
+			return QualifiedName.EMPTY;
+		}
 		String[] segments = new String[segmentCount];
 		for (int i = 0; i < segmentCount; ++i) {
 			segments[i] = eObjectInputStream.readSegmentedString();

@@ -546,6 +546,41 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("java.util.List<java.lang.Integer>", toString(typeRef));
 	}
 	
+	@Test public void testFeatureCall_27() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Boolean>", "newArrayList('').map(s|" +
+				"org.eclipse.xtext.xbase.lib.ObjectExtensions::operator_equals(" +
+				"	org.eclipse.xtext.xbase.lib.IntegerExtensions::operator_plus(s.length,1), 5)" +
+				").map(b| org.eclipse.xtext.xbase.lib.BooleanExtensions::operator_not(b) )");
+	}
+	
+	@Test public void testFeatureCall_28() throws Exception {
+		assertResolvedType("boolean", "org::eclipse::xtext::xbase::lib::ObjectExtensions::operator_equals('', '')");
+	}
+	
+	@Test public void testFeatureCall_29() throws Exception {
+		assertResolvedType("boolean", "org.eclipse.xtext.xbase.lib.ObjectExtensions::operator_equals('', '')");
+	}
+	
+	@Test public void testFeatureCall_30() throws Exception {
+		assertResolvedType("boolean", "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals('', '')");
+	}
+	
+	@Test public void testFeatureCall_31() throws Exception {
+		assertResolvedType("org.eclipse.xtext.xbase.lib.ObjectExtensions", "org.eclipse.xtext.xbase.lib.ObjectExtensions.newInstance");
+	}
+	
+	@Test public void testFeatureCall_32() throws Exception {
+		assertResolvedType("java.lang.String", "org.eclipse.xtext.xbase.lib.ObjectExtensions.getName");
+	}
+	
+	@Test public void testFeatureCall_33() throws Exception {
+		assertResolvedType("java.lang.Class<org.eclipse.xtext.xbase.lib.ObjectExtensions>", "org.eclipse.xtext.xbase.lib.ObjectExtensions");
+	}
+	
+	@Test public void testFeatureCall_34() throws Exception {
+		assertResolvedType("boolean", "org.eclipse.xtext.xbase.lib.StringExtensions.identityEquals(null)");
+	}
+	
 	@Test public void testFeatureCall_Bug342134_01() throws Exception {
 		assertResolvedType("java.lang.Iterable<java.lang.String>", "newArrayList('').map(e|newArrayList(e)).flatten");
 	}

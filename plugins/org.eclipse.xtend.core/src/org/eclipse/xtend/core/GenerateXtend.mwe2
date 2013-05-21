@@ -89,7 +89,9 @@ Workflow {
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = quickfix.QuickfixProviderFragment {}
-			fragment = labeling.LabelProviderFragment {}
+			fragment = labeling.LabelProviderFragment {
+				generateStub = false
+			}
 			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = outline.QuickOutlineFragment {}
 			fragment = compare.CompareFragment {
