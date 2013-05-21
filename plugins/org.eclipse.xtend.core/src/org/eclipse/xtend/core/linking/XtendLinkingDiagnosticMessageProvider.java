@@ -25,6 +25,8 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedAnnotationTypeAwareMessageProducer;
@@ -46,7 +48,11 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
 			linkText = e.getNode().getText();
 		}
 		EObject contextObject = context.getContext();
-		if(context.getReference() != XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE && contextObject instanceof XAbstractFeatureCall && !(contextObject instanceof XBinaryOperation || contextObject instanceof XUnaryOperation)){
+		if (isStaticMemberCallTarget(contextObject)) {
+			String message = String.format("%s cannot be resolved to a type.", linkText);
+			return new DiagnosticMessage(message, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
+		}
+		if(contextObject instanceof XAbstractFeatureCall && !(contextObject instanceof XBinaryOperation || contextObject instanceof XUnaryOperation)){
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall)contextObject;
 			XtendTypeDeclaration xtendType = EcoreUtil2.getContainerOfType(featureCall, XtendTypeDeclaration.class);
 			if(xtendType != null){
@@ -62,6 +68,17 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
 		EClass referenceType = context.getReference().getEReferenceType();
 		String msg = String.format("%s cannot be resolved%s.", linkText, getTypeName(referenceType, context.getReference()));
 		return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
+	}
+
+	protected boolean isStaticMemberCallTarget(EObject contextObject) {
+		boolean candidate = contextObject instanceof XFeatureCall && contextObject.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET;
+		if (candidate) {
+			XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) contextObject.eContainer();
+			if (memberFeatureCall.isExplicitStatic()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Nullable

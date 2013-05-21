@@ -178,6 +178,26 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testTypeLiteral_6() throws Exception {
+    this.resolvesTo("String", "Class<String>");
+  }
+  
+  @Test
+  public void testTypeLiteral_7() throws Exception {
+    this.resolvesTo("void", "Class<Void>");
+  }
+  
+  @Test
+  public void testTypeLiteral_8() throws Exception {
+    this.resolvesTo("int", "Class<Integer>");
+  }
+  
+  @Test
+  public void testTypeLiteral_9() throws Exception {
+    this.resolvesTo("java.lang.String", "Class<String>");
+  }
+  
+  @Test
   public void testBooleanLiteral() throws Exception {
     this.resolvesTo("true", "boolean");
     this.resolvesTo("false", "boolean");

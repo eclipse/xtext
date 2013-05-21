@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
  */
 @NonNullByDefault
 public class FeatureLinkHelper {
-
+	
 	@Nullable
 	public XExpression getSyntacticReceiver(XExpression expression) {
 		if (expression instanceof XAbstractFeatureCall) {

@@ -154,7 +154,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 
 	protected boolean isStaticAccess(XAbstractFeatureCall call) {
-		return call instanceof XFeatureCall && ((XFeatureCall)call).getDeclaringType() != null; 
+		return call instanceof XMemberFeatureCall && ((XMemberFeatureCall)call).isExplicitStatic(); 
 	}
 	
 	@Nullable
@@ -172,11 +172,11 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected JvmTypeReference getReceiverType(XAbstractFeatureCall featureCall) {
 		XExpression actualReceiver = featureCall.getActualReceiver();
 		if(actualReceiver == null) {
-			if(featureCall instanceof XFeatureCall) {
-				JvmDeclaredType declaringType = ((XFeatureCall)featureCall).getDeclaringType();
-				if(declaringType != null) 
-					return typeRefs.createTypeRef(declaringType);
-			}
+//			if(featureCall instanceof XFeatureCall) {
+//				JvmDeclaredType declaringType = ((XFeatureCall)featureCall).getDeclaringType();
+//				if(declaringType != null) 
+//					return typeRefs.createTypeRef(declaringType);
+//			}
 			return typeRefs.createTypeRef(getCallersType(featureCall));
 		} else {
 			JvmTypeReference typeRef = typeProvider.getType(actualReceiver);

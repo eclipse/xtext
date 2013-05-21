@@ -89,6 +89,9 @@ public class XExpressionHelper {
 		if (featureCall instanceof XAssignment) {
 			return true;
 		}
+		if (featureCall.isPackageFragment() || featureCall.isTypeLiteral()) {
+			return false;
+		}
 		final JvmIdentifiableElement feature = featureCall.getFeature();
 		if (feature == null || feature.eIsProxy())
 			return true; // linking problems ... could be anything

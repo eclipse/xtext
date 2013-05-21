@@ -34,7 +34,6 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -109,7 +108,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
-		if (isStatic() && !isExtension() && isInstanceAccessSyntax()) {
+		if (isInvalidStaticSyntax()) {
 			String message = String.format("The static %1$s %2$s%3$s should be accessed in a static way",
 					getFeatureTypeName(),
 					getFeature().getSimpleName(),
@@ -168,10 +167,23 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 					return false;
 				}
 			}
-		} else {
-			
 		}
 		return true;
+	}
+
+	protected boolean isInvalidStaticSyntax() {
+		boolean result = isStatic() && !isExtension() && (isInstanceAccessSyntax() && !isStaticWithDeclaringType());
+		if (result)
+			return true;
+		return false;
+	}
+
+	protected boolean isStaticWithDeclaringType() {
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XMemberFeatureCall) {
+			return ((XMemberFeatureCall) featureCall).isStaticWithDeclaringType();
+		}
+		return false;
 	}
 
 	protected boolean isExplicitOperationCallOrBuilderSyntax() {
@@ -208,8 +220,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 
 	protected boolean isStaticAccessSyntax() {
 		XAbstractFeatureCall featureCall = getFeatureCall();
-		if (featureCall instanceof XFeatureCall) {
-			return ((XFeatureCall) featureCall).getDeclaringType() != null;
+		if (featureCall instanceof XMemberFeatureCall) {
+			return ((XMemberFeatureCall) featureCall).isExplicitStatic();
 		}
 		return false;
 	}
@@ -223,7 +235,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		}
 		return featureCall instanceof XMemberFeatureCall;
 	}
-
+	
 	protected List<XExpression> createArgumentList(XExpression head, List<XExpression> tail) {
 		// TODO investigate in optimized List impls like HEAD, syntacticArguments
 		List<XExpression> result = Lists.newArrayListWithExpectedSize(tail.size() + 1);
@@ -264,6 +276,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	public boolean isStatic() {
 		return description.isStatic();
+	}
+	
+	public boolean isTypeLiteral() {
+		return false;
 	}
 	
 	@Override
@@ -606,6 +622,17 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	public void applyToModel() {
 		resolveLinkingProxy(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XMemberFeatureCall) {
+			XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
+			XExpression syntacticReceiver = casted.getMemberCallTarget();
+			if (isStatic() && syntacticReceiver instanceof XAbstractFeatureCall && !isExtension()) {
+				IFeatureLinkingCandidate candidate = getState().getResolvedTypes().getLinkingCandidate((XAbstractFeatureCall) syntacticReceiver);
+				if (candidate != null && candidate.isTypeLiteral()) {
+					((XMemberFeatureCall) featureCall).setStaticWithDeclaringType(true);
+				}
+			}
+		}
 	}
 
 }

@@ -51,7 +51,7 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 	protected boolean looksLikeLocalVariable() {
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall instanceof XFeatureCall) {
-			boolean result = !featureCall.isExplicitOperationCallOrBuilderSyntax();
+			boolean result = !featureCall.isExplicitOperationCallOrBuilderSyntax() && featureCall.getTypeArguments().isEmpty();
 			return result;
 		}
 		return false;
