@@ -81,6 +81,28 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 				XABSTRACT_FEATURE_CALL__FEATURE);
 		checkFindReferences(inferredType, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
+	
+	@Test public void testFindReferencesTypeLiteral() throws Exception {
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo { def foo() { Foo } }").getXtendTypes().get(0);
+		waitForAutoBuild();
+		JvmGenericType inferredType = associations.getInferredType(classFoo);
+		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
+
+		final MockAcceptor mockAcceptor = new MockAcceptor();
+		mockAcceptor.expect(((XBlockExpression) functionFoo.getExpression()).getExpressions().get(0), inferredType,	XABSTRACT_FEATURE_CALL__FEATURE);
+		checkFindReferences(inferredType, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+	}
+	
+	@Test public void testFindReferencesTypeLiteralWithPackageFragment() throws Exception {
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "package com.acme class Foo { def foo() { com.acme.Foo } }").getXtendTypes().get(0);
+		waitForAutoBuild();
+		JvmGenericType inferredType = associations.getInferredType(classFoo);
+		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
+		
+		final MockAcceptor mockAcceptor = new MockAcceptor();
+		mockAcceptor.expect(((XBlockExpression) functionFoo.getExpression()).getExpressions().get(0), inferredType,	XABSTRACT_FEATURE_CALL__FEATURE);
+		checkFindReferences(inferredType, "Java References to com.acme.Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+	}
 
 	@Test public void testFindReferencesToConstructor() throws Exception {
 		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo {}").getXtendTypes().get(0);

@@ -50,10 +50,13 @@ import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.ISimilarityMatcher;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
+import org.eclipse.xtext.util.Arrays;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.typesystem.internal.TypeLiteralHelper;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
+import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
@@ -95,6 +98,9 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
 	
+	@Inject
+	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
+	
 	@NonNullByDefault
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, 
@@ -102,11 +108,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			throws Exception {
 		String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 		IScope scope = scopeProvider.getScope(referenceOwner, unresolvedReference);
-		boolean useJavaSearch = false;
-		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(unresolvedReference.getEReferenceType()))
-			useJavaSearch = true;
-		if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(unresolvedReference.getEReferenceType()))
-			useJavaSearch = true;
+		boolean useJavaSearch = isUseJavaSearch(unresolvedReference, issue);;
 		if (useJavaSearch) {
 			JvmDeclaredType jvmType = importsConfiguration.getContextJvmDeclaredType(referenceOwner);
 			IJavaSearchScope javaSearchScope = getJavaSearchScope(referenceOwner);
@@ -137,6 +139,14 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 				createResolution(issue, issueResolutionAcceptor, issueString, referableElement);
 			}
 		}
+	}
+
+	protected boolean isUseJavaSearch(EReference unresolvedReference, Issue issue) {
+		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(unresolvedReference.getEReferenceType()))
+			return true;
+		if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(unresolvedReference.getEReferenceType()))
+			return true;
+		return false;
 	}
 
 	protected void createResolution(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, String issueString, IEObjectDescription solution) {

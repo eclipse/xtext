@@ -429,6 +429,5 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			appendable.commitChanges();
 		}
 	}
-	
 
 }

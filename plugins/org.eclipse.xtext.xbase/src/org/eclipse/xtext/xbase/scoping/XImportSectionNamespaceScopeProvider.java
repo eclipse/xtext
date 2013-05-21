@@ -208,6 +208,10 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 		}
 		return Collections.emptyList();
 	}
+	
+	protected IImportsConfiguration getImportsConfiguration() {
+		return importsConfiguration;
+	}
 
 	protected List<ImportNormalizer> getImportedNamespaceResolvers(XImportSection importSection, boolean ignoreCase) {
 		List<XImportDeclaration> importDeclarations = importSection.getImportDeclarations();

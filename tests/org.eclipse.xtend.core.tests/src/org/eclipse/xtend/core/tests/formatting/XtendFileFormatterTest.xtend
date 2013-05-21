@@ -264,6 +264,30 @@ class XtendFileFormatter extends AbstractXtendFormatterTest {
 		''')	
 	}
 
+	@Test def formatAssignment_01() {
+		assertFormatted('''
+			class C {
+				int i
+			
+				def m() {
+					this.i = 5
+				}
+			}
+		''')	
+	}
+
+	@Test def formatAssignment_02() {
+		assertFormatted('''
+			class C {
+				static int i
+			
+				def m() {
+					C::i = 5
+				}
+			}
+		''')	
+	}
+	
 	@Test def typeReferenceIntegration() {
 		assertFormatted('''
 			import java.util.*

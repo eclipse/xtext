@@ -85,12 +85,22 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 		return super.getImplicitFirstArgument();
 	}
 	
+	@Override
+	public boolean isPackageFragment() {
+		return false;
+	}
+	
+	@Override
+	public boolean isTypeLiteral() {
+		return false;
+	}
+	
 	/**
 	 * checks whether the feature was successfully linked
 	 * Any features which rely on side effects done during linking of feature should call this method.
 	 */
 	protected void ensureFeatureLinked() {
-		// trigger linking
+		// simply trigger linking
 		getFeature();
 	}
 	
