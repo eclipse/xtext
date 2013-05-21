@@ -251,4 +251,20 @@ public interface XAbstractFeatureCall extends XExpression
 	 */
 	boolean isExtension();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isPackageFragment();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isTypeLiteral();
+
 } // XAbstractFeatureCall

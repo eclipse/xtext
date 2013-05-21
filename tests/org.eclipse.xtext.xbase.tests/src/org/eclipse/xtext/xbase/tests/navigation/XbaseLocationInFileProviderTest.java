@@ -62,7 +62,7 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testFeatureCall_03() throws Exception {
 		String text = "String::valueOf('a')";
-		XFeatureCall featureCall = castedExpression(text);
+		XMemberFeatureCall featureCall = castedExpression(text);
 		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
 		assertEquals(text.substring(text.indexOf('v')), significant);
@@ -70,7 +70,7 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testFeatureCall_04() throws Exception {
 		String text = "String::<Invalid>valueOf('a')";
-		XFeatureCall featureCall = castedExpression(text);
+		XMemberFeatureCall featureCall = castedExpression(text);
 		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
 		assertEquals(text.substring(text.indexOf('>') + 1), significant);
@@ -86,34 +86,194 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testStaticFeatureCall_01() throws Exception {
 		String text = "String::<Invalid>valueOf('a')";
-		XFeatureCall featureCall = castedExpression(text);
-		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
 		assertEquals("String", significant);
 	}
 	
 	@Test public void testStaticFeatureCall_02() throws Exception {
-		String text = "java::util::Collection::emptyList";
-		XFeatureCall featureCall = castedExpression(text);
-		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		String text = "java::util::Collections::emptyList";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
-		assertEquals("java::util::Collection", significant);
+		assertEquals("java::util::Collections", significant);
 	}
 	
 	@Test public void testStaticFeatureCall_03() throws Exception {
 		String text = "String::<Invalid>valueOf('a')";
-		XFeatureCall featureCall = castedExpression(text);
-		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
-		assertEquals("String::", significant);
+		assertEquals("String", significant);
 	}
 	
 	@Test public void testStaticFeatureCall_04() throws Exception {
-		String text = "java::util::Collection::emptyList";
-		XFeatureCall featureCall = castedExpression(text);
-		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		String text = "java::util::Collections::emptyList";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
-		assertEquals("java::util::Collection::", significant);
+		assertEquals("java::util::Collections", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_05() throws Exception {
+		String text = "java::util::UnknownThing::emptyList";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java::util::UnknownThing", significant);
+	}
+
+	@Test public void testStaticFeatureCall_06() throws Exception {
+		String text = "java::util::UnknownThing::emptyList";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java::util::UnknownThing", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_07() throws Exception {
+		String text = "java.util.UnknownThing::emptyList";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java.util.UnknownThing", significant);
+	}
+
+	@Test public void testStaticFeatureCall_08() throws Exception {
+		String text = "java.util.UnknownThing::emptyList";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java.util.UnknownThing", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_09() throws Exception {
+		String text = "java.util.Collections::emptyList";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java.util.Collections", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_10() throws Exception {
+		String text = "java.util.Collections::emptyList";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java.util.Collections", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_11() throws Exception {
+		String text = "java.lang.Thread.State.NEW";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("State", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_12() throws Exception {
+		String text = "java.lang.Thread.State::NEW";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("State", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_13() throws Exception {
+		String text = "java.lang.Thread$State.NEW";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java.lang.Thread$State", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_14() throws Exception {
+		String text = "java.lang.Thread$State::NEW";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java.lang.Thread$State", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_15() throws Exception {
+		String text = "java::lang::Thread$State::NEW";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java::lang::Thread$State", significant);
+	}
+
+	@Test public void testStaticFeatureCall_16() throws Exception {
+		String text = "java.lang.Thread.State::NEW";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("State", significant);
+	}
+
+	@Test public void testTypeLiteral_01() throws Exception {
+		String text = "java::lang::Thread$State";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, significant);
+	}
+	
+	@Test public void testTypeLiteral_02() throws Exception {
+		String text = "java::lang::Thread::State";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, significant);
+	}
+	
+	@Test public void testTypeLiteral_03() throws Exception {
+		String text = "java.lang.Thread$State";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, significant);
+	}
+	
+	@Test public void testTypeLiteral_04() throws Exception {
+		String text = "java.lang.Thread.State";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, significant);
+	}
+	
+	@Test public void testTypeLiteral_05() throws Exception {
+		String text = "java::lang::Thread$State";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+		String full = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, full);
+	}
+	
+	@Test public void testTypeLiteral_06() throws Exception {
+		String text = "java::lang::Thread::State";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+		String full = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, full);
+	}
+	
+	@Test public void testTypeLiteral_07() throws Exception {
+		String text = "java::lang::Thread$State";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+		String full = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, full);
+	}
+	
+	@Test public void testTypeLiteral_08() throws Exception {
+		String text = "java::lang::Thread::State";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0);
+		String full = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, full);
 	}
 	
 	@Test public void testMemberFeatureCall_01() throws Exception {
@@ -133,11 +293,11 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testMemberFeatureCall_03() throws Exception {
-		String text = "'a'*.toString";
+		String text = "'a'::toString";
 		XMemberFeatureCall featureCall = castedExpression(text);
 		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
 		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
-		assertEquals(text.substring(text.indexOf('.') + 1) , significant);
+		assertEquals(text.substring(text.indexOf(':') + 2) , significant);
 	}
 	
 	@Test public void testQualifiedAssignment_01() throws Exception {

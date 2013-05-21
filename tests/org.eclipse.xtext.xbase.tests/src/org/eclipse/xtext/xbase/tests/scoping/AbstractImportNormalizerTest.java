@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.scoping;
 
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
-import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
 import org.junit.Assert;
 import org.junit.Test;
 

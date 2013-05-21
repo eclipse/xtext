@@ -475,13 +475,13 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Spreading</b></em>' attribute.
+	 * The feature id for the '<em><b>Explicit Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL__SPREADING = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+	int XMEMBER_FEATURE_CALL__EXPLICIT_STATIC = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Null Safe</b></em>' attribute.
@@ -493,13 +493,40 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL__NULL_SAFE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Type Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__TYPE_LITERAL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Static With Declaring Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Package Fragment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>XMember Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 5;
+	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
@@ -584,13 +611,22 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' reference.
+	 * The feature id for the '<em><b>Type Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL__DECLARING_TYPE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XFEATURE_CALL__TYPE_LITERAL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Package Fragment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__PACKAGE_FRAGMENT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>XFeature Call</em>' class.
@@ -599,7 +635,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -1542,13 +1578,22 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__VALUE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__EXPLICIT_STATIC = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>XAssignment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl <em>XReturn Expression</em>}' class.
@@ -1924,15 +1969,15 @@ public interface XbasePackage extends EPackage
 	EAttribute getXMemberFeatureCall_ExplicitOperationCall();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading <em>Spreading</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitStatic <em>Explicit Static</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Spreading</em>'.
-	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading()
+	 * @return the meta object for the attribute '<em>Explicit Static</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitStatic()
 	 * @see #getXMemberFeatureCall()
 	 * @generated
 	 */
-	EAttribute getXMemberFeatureCall_Spreading();
+	EAttribute getXMemberFeatureCall_ExplicitStatic();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isNullSafe <em>Null Safe</em>}'.
@@ -1944,6 +1989,39 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXMemberFeatureCall_NullSafe();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral <em>Type Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_TypeLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isStaticWithDeclaringType <em>Static With Declaring Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static With Declaring Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isStaticWithDeclaringType()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_StaticWithDeclaringType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isPackageFragment <em>Package Fragment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package Fragment</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isPackageFragment()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_PackageFragment();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
@@ -1978,15 +2056,26 @@ public interface XbasePackage extends EPackage
 	EAttribute getXFeatureCall_ExplicitOperationCall();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType <em>Declaring Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral <em>Type Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Declaring Type</em>'.
-	 * @see org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType()
+	 * @return the meta object for the attribute '<em>Type Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral()
 	 * @see #getXFeatureCall()
 	 * @generated
 	 */
-	EReference getXFeatureCall_DeclaringType();
+	EAttribute getXFeatureCall_TypeLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFeatureCall#isPackageFragment <em>Package Fragment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package Fragment</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#isPackageFragment()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXFeatureCall_PackageFragment();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
@@ -2594,6 +2683,17 @@ public interface XbasePackage extends EPackage
 	EReference getXAssignment_Value();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAssignment#isExplicitStatic <em>Explicit Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Explicit Static</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment#isExplicitStatic()
+	 * @see #getXAssignment()
+	 * @generated
+	 */
+	EAttribute getXAssignment_ExplicitStatic();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XReturnExpression <em>XReturn Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2910,12 +3010,12 @@ public interface XbasePackage extends EPackage
 		EAttribute XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL = eINSTANCE.getXMemberFeatureCall_ExplicitOperationCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Spreading</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Explicit Static</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute XMEMBER_FEATURE_CALL__SPREADING = eINSTANCE.getXMemberFeatureCall_Spreading();
+		EAttribute XMEMBER_FEATURE_CALL__EXPLICIT_STATIC = eINSTANCE.getXMemberFeatureCall_ExplicitStatic();
 
 		/**
 		 * The meta object literal for the '<em><b>Null Safe</b></em>' attribute feature.
@@ -2924,6 +3024,30 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XMEMBER_FEATURE_CALL__NULL_SAFE = eINSTANCE.getXMemberFeatureCall_NullSafe();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__TYPE_LITERAL = eINSTANCE.getXMemberFeatureCall_TypeLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Static With Declaring Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE = eINSTANCE.getXMemberFeatureCall_StaticWithDeclaringType();
+
+		/**
+		 * The meta object literal for the '<em><b>Package Fragment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT = eINSTANCE.getXMemberFeatureCall_PackageFragment();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
@@ -2952,12 +3076,20 @@ public interface XbasePackage extends EPackage
 		EAttribute XFEATURE_CALL__EXPLICIT_OPERATION_CALL = eINSTANCE.getXFeatureCall_ExplicitOperationCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Declaring Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type Literal</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XFEATURE_CALL__DECLARING_TYPE = eINSTANCE.getXFeatureCall_DeclaringType();
+		EAttribute XFEATURE_CALL__TYPE_LITERAL = eINSTANCE.getXFeatureCall_TypeLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Package Fragment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XFEATURE_CALL__PACKAGE_FRAGMENT = eINSTANCE.getXFeatureCall_PackageFragment();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -3458,6 +3590,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XASSIGNMENT__VALUE = eINSTANCE.getXAssignment_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Explicit Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XASSIGNMENT__EXPLICIT_STATIC = eINSTANCE.getXAssignment_ExplicitStatic();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl <em>XReturn Expression</em>}' class.

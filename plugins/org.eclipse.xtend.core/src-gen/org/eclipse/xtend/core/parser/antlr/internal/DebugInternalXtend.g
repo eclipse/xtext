@@ -349,13 +349,23 @@ ruleXAnnotationElementValue :
 	ruleXBooleanLiteral |
 	ruleXNumberLiteral |
 	ruleXTypeLiteral |
-	ruleXAnnotationValueFieldReference |
+	ruleXAnnotationValueMemberFieldReference |
 	'(' ruleXAnnotationElementValueStringConcatenation ')'
+;
+
+// Rule XAnnotationValueMemberFieldReference
+ruleXAnnotationValueMemberFieldReference :
+	ruleXAnnotationValueFieldReference (
+		(
+			'.' |
+			'::'
+		) ruleIdOrSuper
+	)*
 ;
 
 // Rule XAnnotationValueFieldReference
 ruleXAnnotationValueFieldReference :
-	ruleStaticQualifier? ruleIdOrSuper
+	ruleIdOrSuper
 ;
 
 // Rule XExpression
@@ -544,18 +554,24 @@ ruleXCastedExpression :
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
 		( (
-		'.' ruleFeatureCallID ruleOpSingleAssign
+		(
+			'.' |
+			'::'
+		) ruleFeatureCallID ruleOpSingleAssign
 		) => (
-			'.' ruleFeatureCallID ruleOpSingleAssign
+			(
+				'.' |
+				'::'
+			) ruleFeatureCallID ruleOpSingleAssign
 		) ) ruleXAssignment |
 		( (
 		'.' |
 		'?.' |
-		'*.'
+		'::'
 		) => (
 			'.' |
 			'?.' |
-			'*.'
+			'::'
 		) ) (
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
@@ -756,7 +772,7 @@ ruleXExpressionInsideBlock :
 
 // Rule XFeatureCall
 ruleXFeatureCall :
-	ruleStaticQualifier? (
+	(
 		'<' ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
 		)* '>'
@@ -784,13 +800,6 @@ ruleXFeatureCall :
 ruleIdOrSuper :
 	ruleFeatureCallID |
 	'super'
-;
-
-// Rule StaticQualifier
-ruleStaticQualifier :
-	(
-		ruleValidID '::'
-	)+
 ;
 
 // Rule XConstructorCall
