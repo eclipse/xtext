@@ -364,6 +364,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("FOO", "[testdata.OuterClass.InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass.InnerClass)");
 	}
 	
+	@Test public void testReferenceInnerClasses_09() throws Exception {
+		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata.OuterClass$InnerClass::SINGLETON");
+	}
+	
+	@Test public void testReferenceInnerClasses_10() throws Exception {
+		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata.OuterClass.InnerClass::SINGLETON");
+	}
+	
 	/*
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341642
 	 */

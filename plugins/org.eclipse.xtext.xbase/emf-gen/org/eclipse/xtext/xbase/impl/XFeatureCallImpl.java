@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getDeclaringType <em>Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isTypeLiteral <em>Type Literal</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +85,26 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * @ordered
 	 */
 	protected JvmDeclaredType declaringType;
+
+	/**
+	 * The default value of the '{@link #isTypeLiteral() <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTypeLiteral()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TYPE_LITERAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTypeLiteral() <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTypeLiteral()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean typeLiteral = TYPE_LITERAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -191,6 +212,29 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isTypeLiteral()
+	{
+		return typeLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeLiteral(boolean newTypeLiteral)
+	{
+		boolean oldTypeLiteral = typeLiteral;
+		typeLiteral = newTypeLiteral;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XFEATURE_CALL__TYPE_LITERAL, oldTypeLiteral, typeLiteral));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -219,6 +263,8 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
 				if (resolve) return getDeclaringType();
 				return basicGetDeclaringType();
+			case XbasePackage.XFEATURE_CALL__TYPE_LITERAL:
+				return isTypeLiteral();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -244,6 +290,9 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
 				setDeclaringType((JvmDeclaredType)newValue);
 				return;
+			case XbasePackage.XFEATURE_CALL__TYPE_LITERAL:
+				setTypeLiteral((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -267,6 +316,9 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
 				setDeclaringType((JvmDeclaredType)null);
 				return;
+			case XbasePackage.XFEATURE_CALL__TYPE_LITERAL:
+				setTypeLiteral(TYPE_LITERAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -287,6 +339,8 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 				return explicitOperationCall != EXPLICIT_OPERATION_CALL_EDEFAULT;
 			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
 				return declaringType != null;
+			case XbasePackage.XFEATURE_CALL__TYPE_LITERAL:
+				return typeLiteral != TYPE_LITERAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -304,6 +358,8 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (explicitOperationCall: ");
 		result.append(explicitOperationCall);
+		result.append(", typeLiteral: ");
+		result.append(typeLiteral);
 		result.append(')');
 		return result.toString();
 	}

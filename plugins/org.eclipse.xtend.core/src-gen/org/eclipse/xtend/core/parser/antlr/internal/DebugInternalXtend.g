@@ -790,7 +790,12 @@ ruleIdOrSuper :
 ruleStaticQualifier :
 	(
 		ruleValidID '::'
-	)+
+	)+ |
+	ruleValidID (
+		( (
+		'.'
+		) => '.' ) ruleValidID
+	)+ '::'
 ;
 
 // Rule XConstructorCall

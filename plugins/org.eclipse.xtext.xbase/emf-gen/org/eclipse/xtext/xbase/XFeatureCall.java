@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType <em>Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral <em>Type Literal</em>}</li>
  * </ul>
  * </p>
  *
@@ -98,5 +99,31 @@ public interface XFeatureCall extends XAbstractFeatureCall
 	 * @generated
 	 */
 	void setDeclaringType(JvmDeclaredType value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Literal</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Literal</em>' attribute.
+	 * @see #setTypeLiteral(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXFeatureCall_TypeLiteral()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	boolean isTypeLiteral();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Literal</em>' attribute.
+	 * @see #isTypeLiteral()
+	 * @generated
+	 */
+	void setTypeLiteral(boolean value);
 
 } // XFeatureCall

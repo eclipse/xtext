@@ -3763,9 +3763,9 @@ ruleStaticQualifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRul
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(
+((
     { 
-        newCompositeNode(grammarAccess.getStaticQualifierAccess().getValidIDParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getStaticQualifierAccess().getValidIDParserRuleCall_0_0()); 
     }
     this_ValidID_0=ruleValidID    {
 		$current.merge(this_ValidID_0);
@@ -3778,9 +3778,46 @@ ruleStaticQualifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRul
 	kw='::' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getStaticQualifierAccess().getColonColonKeyword_1()); 
+        newLeafNode(kw, grammarAccess.getStaticQualifierAccess().getColonColonKeyword_0_1()); 
     }
 )+
+    |(
+    { 
+        newCompositeNode(grammarAccess.getStaticQualifierAccess().getValidIDParserRuleCall_1_0()); 
+    }
+    this_ValidID_2=ruleValidID    {
+		$current.merge(this_ValidID_2);
+    }
+
+    { 
+        afterParserOrEnumRuleCall();
+    }
+(((
+	'.' 
+)=>
+	kw='.' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getStaticQualifierAccess().getFullStopKeyword_1_1_0()); 
+    }
+)
+    { 
+        newCompositeNode(grammarAccess.getStaticQualifierAccess().getValidIDParserRuleCall_1_1_1()); 
+    }
+    this_ValidID_4=ruleValidID    {
+		$current.merge(this_ValidID_4);
+    }
+
+    { 
+        afterParserOrEnumRuleCall();
+    }
+)+
+	kw='::' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getStaticQualifierAccess().getColonColonKeyword_1_2()); 
+    }
+))
     ;
 
 

@@ -704,7 +704,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE");
+    _builder_1.append("val x = org.eclipse.emf.ecore.resource.Resource$Factory$Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -934,7 +934,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val x = org::eclipse::emf::ecore::resource::Resource::Factory::Registry::INSTANCE");
+    _builder_1.append("val x = org.eclipse.emf.ecore.resource.Resource.Factory.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -3579,7 +3579,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Bug406086 {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("val x = bug406086::^def::Bug406086::FIELD");
+    _builder_1.append("val x = bug406086.^def.Bug406086::FIELD");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

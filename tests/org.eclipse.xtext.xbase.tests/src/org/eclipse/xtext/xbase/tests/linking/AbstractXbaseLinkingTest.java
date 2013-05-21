@@ -342,6 +342,62 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
 	}
 	
+	@Test public void testStaticFeatureCall_10() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata.MethodOverrides4::staticM5()");
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_11() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata.MethodOverrides4::<java.io.Serializable>staticM5()");
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_12() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata.MethodOverrides4::<CharSequence>staticM5()");
+		assertEquals("testdata.MethodOverrides3.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	// TODO here we would expect an error marker since <Object> is no valid type argument
+	@Test public void testStaticFeatureCall_13() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata.MethodOverrides4::<Object>staticM5()");
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	// TODO here we would expect an error marker since <String> is ambiguous
+	@Test public void testStaticFeatureCall_14() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata.MethodOverrides4::<String>staticM5()");
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_15() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val iterable = testdata.MethodOverrides4::staticM5() }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XFeatureCall featureCall = (XFeatureCall) variable.getRight();
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_16() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val Iterable<java.io.Serializable> iterable = testdata.MethodOverrides4::staticM5() }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XFeatureCall featureCall = (XFeatureCall) variable.getRight();
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Ignore("TODO eager binding of type arguments to expectation")
+	@Test public void testStaticFeatureCall_17() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val Iterable<CharSequence> iterable = testdata.MethodOverrides4::staticM5() }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XFeatureCall featureCall = (XFeatureCall) variable.getRight();
+		assertEquals("testdata.MethodOverrides3.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_18() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val Iterable<Object> iterable = testdata.MethodOverrides4::staticM5() }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XFeatureCall featureCall = (XFeatureCall) variable.getRight();
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
 	
 	@Test public void testGenerics() throws Exception {
 		expression("new testdata.GenericType1<String>() += 'foo'", true);
@@ -452,6 +508,11 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("instanceVsStatic.C.OK", exp.getFeature().getIdentifier());
 	}
 	
+	@Test public void testPropertyAccess_8() throws Exception {
+		XFeatureCall exp = (XFeatureCall) expression("instanceVsStatic.C::OK");
+		assertEquals("instanceVsStatic.C.OK", exp.getFeature().getIdentifier());
+	}
+	
 	@Test public void testPropertySetter_1() throws Exception {
 		XAssignment exp = (XAssignment) expression("new testdata.Properties1().prop1 = 'Text'");
 		assertEquals(((XConstructorCall)exp.getAssignable()).getConstructor().getDeclaringType(), ((JvmField)exp.getFeature()).getDeclaringType());
@@ -499,6 +560,11 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 	
 	@Test public void testStaticVsInstance_8() throws Exception {
 		XFeatureCall exp = (XFeatureCall) expression("instanceVsStatic::C::m2(1, 2)");
+		assertEquals("instanceVsStatic.C.m2(instanceVsStatic.C,int,int)", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_9() throws Exception {
+		XFeatureCall exp = (XFeatureCall) expression("instanceVsStatic.C::m2(1, 2)");
 		assertEquals("instanceVsStatic.C.m2(instanceVsStatic.C,int,int)", exp.getFeature().getIdentifier());
 	}
 	

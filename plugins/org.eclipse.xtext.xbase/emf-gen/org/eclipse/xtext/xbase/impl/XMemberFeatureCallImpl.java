@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isSpreading <em>Spreading</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isNullSafe <em>Null Safe</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isTypeLiteral <em>Type Literal</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,6 +125,26 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * @ordered
 	 */
 	protected boolean nullSafe = NULL_SAFE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isTypeLiteral() <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTypeLiteral()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TYPE_LITERAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTypeLiteral() <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTypeLiteral()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean typeLiteral = TYPE_LITERAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -282,6 +303,29 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isTypeLiteral()
+	{
+		return typeLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeLiteral(boolean newTypeLiteral)
+	{
+		boolean oldTypeLiteral = typeLiteral;
+		typeLiteral = newTypeLiteral;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL, oldTypeLiteral, typeLiteral));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -315,6 +359,8 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return isSpreading();
 			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
 				return isNullSafe();
+			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
+				return isTypeLiteral();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -346,6 +392,9 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
 				setNullSafe((Boolean)newValue);
 				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
+				setTypeLiteral((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -375,6 +424,9 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
 				setNullSafe(NULL_SAFE_EDEFAULT);
 				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
+				setTypeLiteral(TYPE_LITERAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -399,6 +451,8 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return spreading != SPREADING_EDEFAULT;
 			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
 				return nullSafe != NULL_SAFE_EDEFAULT;
+			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
+				return typeLiteral != TYPE_LITERAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -420,6 +474,8 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 		result.append(spreading);
 		result.append(", nullSafe: ");
 		result.append(nullSafe);
+		result.append(", typeLiteral: ");
+		result.append(typeLiteral);
 		result.append(')');
 		return result.toString();
 	}
