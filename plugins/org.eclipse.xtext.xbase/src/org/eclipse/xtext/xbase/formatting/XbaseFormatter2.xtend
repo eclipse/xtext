@@ -140,6 +140,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 
 	def protected dispatch void format(XAssignment expr, FormattableDocument format) {
 		format += expr.nodeForKeyword("=").surround[oneSpace]
+		format += expr.nodeForKeyword(if (expr.explicitStatic) '::' else '.').surround[noSpace]
 		expr.assignable.format(format)
 		expr.value.format(format)
 	}
@@ -231,7 +232,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 	def protected XClosure builder(List<XExpression> params) {
 		if (params.last != null){
 			val grammarElement = (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement
-			if(grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 || grammarElement == XFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_5_0)
+			if(grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 || grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0)
 				params.last as XClosure
 		}
 	}
@@ -328,9 +329,6 @@ class XbaseFormatter2 extends AbstractFormatter {
 	}
 
 	def protected dispatch void format(XFeatureCall expr, FormattableDocument format) {
-		val declaringType = expr.nodeForFeature(XFEATURE_CALL__DECLARING_TYPE)
-		declaringType.formatStaticQualifier(format)
-		format += declaringType.append[noSpace]
 		formatFeatureCallTypeParameters(expr, format)
 		if (expr.explicitOperationCall) {
 			val open = expr.nodeForKeyword("(")
@@ -387,7 +385,11 @@ class XbaseFormatter2 extends AbstractFormatter {
 			val targetNode = call.memberCallTarget.nodeForEObject
 			if (targetNode != null) {
 				val callOffset = targetNode.offset + targetNode.length
-				val op = call.nodeForKeyword(if (call.nullSafe) "?." else ".")
+				val op = call.nodeForKeyword(switch it: call {
+					case nullSafe: "?."
+					case explicitStatic: "::"
+					default: "."
+				})
 				format += op.prepend[noSpace]
 				if (call.explicitOperationCall) {
 					val callNode = call.nodeForEObject

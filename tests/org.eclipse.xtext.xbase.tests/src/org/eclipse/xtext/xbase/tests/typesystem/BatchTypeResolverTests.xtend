@@ -258,10 +258,11 @@ class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 	override resolvesFeatureCallsTo(String expression, String... types) {
 		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
 		val featureCalls = expressionWithQualifiedNames.findFeatureCalls
-		assertFalse(featureCalls.empty)
-		assertEquals(types.size, featureCalls.size)
 		val resolvedTypes = typeResolver.resolveTypes(featureCalls.head)
-		featureCalls.forEach [ featureCall, index |
+		val actualFeatureCalls = featureCalls.filterTypeLiteralsAndPackageFragments
+		assertFalse(actualFeatureCalls.empty)
+		assertEquals(types.size, actualFeatureCalls.size)
+		actualFeatureCalls.forEach [ featureCall, index |
 			val type = resolvedTypes.getActualType(featureCall)
 			assertEquals('''failed for feature call at «index»''', types.get(index), type.simpleName); 
 		]

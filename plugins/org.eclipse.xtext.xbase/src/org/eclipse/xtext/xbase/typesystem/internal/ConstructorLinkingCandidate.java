@@ -57,11 +57,6 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	}
 	
 	@Override
-	protected IConstructorLinkingCandidate getThis() {
-		return this;
-	}
-	
-	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		JvmDeclaredType declaringType = getConstructor().getDeclaringType();
 		if (declaringType.isAbstract()) {
