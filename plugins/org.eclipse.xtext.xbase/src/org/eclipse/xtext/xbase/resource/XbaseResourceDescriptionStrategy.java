@@ -10,14 +10,17 @@ package org.eclipse.xtext.xbase.resource;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.ImmutableMap;
@@ -79,5 +82,12 @@ public class XbaseResourceDescriptionStrategy extends DefaultResourceDescription
 			if (genericType.isInterface())
 				userData.put(IS_INTERFACE, Boolean.TRUE.toString());
 		}
+	}
+	
+	@Override
+	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI, IAcceptor<IReferenceDescription> acceptor) {
+		if (from instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) from).isPackageFragment())
+			return false;
+		return super.createReferenceDescriptions(from, exportedContainerURI, acceptor);
 	}
 }

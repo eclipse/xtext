@@ -3,6 +3,7 @@ package org.eclipse.xtend.ide.findrefs;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -91,9 +93,9 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     if (_exists_1) {
       URI _uRI = resourceDescription.getURI();
       final IUnitOfWork<Object,ResourceSet> _function_4 = new IUnitOfWork<Object,ResourceSet>() {
-          public Object exec(final ResourceSet it) throws Exception {
+          public Object exec(final ResourceSet resourceSet) throws Exception {
             URI _uRI = resourceDescription.getURI();
-            Resource _resource = it.getResource(_uRI, true);
+            Resource _resource = resourceSet.getResource(_uRI, true);
             final IAcceptor<IReferenceDescription> _function = new IAcceptor<IReferenceDescription>() {
                 public void accept(final IReferenceDescription it) {
                   acceptor.accept(it);
@@ -105,5 +107,20 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
         };
       localResourceAccess.<Object>readOnly(_uRI, _function_4);
     }
+  }
+  
+  protected void findLocalReferencesFromElement(final Set<URI> targetURISet, final EObject sourceCandidate, final Resource localResource, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI, final Map<EObject,URI> exportedElementsMap) {
+    boolean _matched = false;
+    if (!_matched) {
+      if (sourceCandidate instanceof XAbstractFeatureCall) {
+        final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)sourceCandidate;
+        boolean _isPackageFragment = _xAbstractFeatureCall.isPackageFragment();
+        if (_isPackageFragment) {
+          _matched=true;
+          return;
+        }
+      }
+    }
+    super.findLocalReferencesFromElement(targetURISet, sourceCandidate, localResource, acceptor, currentExportedContainerURI, exportedElementsMap);
   }
 }

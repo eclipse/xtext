@@ -29,6 +29,114 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   @Ignore("fails in old implementation")
   @Test
+  public void testMethodTypeParamInference_04() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testMethodTypeParamInference_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testReturnType_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_03() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_04() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_06() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_07() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_08() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_09() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_10() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_11() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testOverloadedMethods_12() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testJEP101Example_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testJEP101Example_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testJEP101Example_03() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testNumberLiteralInClosure_01() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -155,6 +263,12 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   @Ignore("fails in old implementation")
   @Test
+  public void testFeatureCall_06_00() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testFeatureCall_33() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -173,6 +287,24 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   @Ignore("fails in old implementation")
   @Test
+  public void testToList_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testToList_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testToList_03() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testToList_04() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -185,7 +317,25 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   @Ignore("fails in old implementation")
   @Test
+  public void testToList_06() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testToList_07() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testToList_08() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testToList_09() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -221,7 +371,25 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   @Ignore("fails in old implementation")
   @Test
+  public void testDependentTypeArgumentResolution_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testDependentTypeArgumentResolution_03() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_04() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -233,7 +401,25 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   @Ignore("fails in old implementation")
   @Test
+  public void testDependentTypeArgumentResolution_06() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_07() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testDependentTypeArgumentResolution_08() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_09() throws Exception {
     Assert.fail("fails in old implementation");
   }
   

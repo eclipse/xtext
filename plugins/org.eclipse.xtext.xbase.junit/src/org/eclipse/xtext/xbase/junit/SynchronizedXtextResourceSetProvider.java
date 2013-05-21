@@ -20,7 +20,6 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow
  * @since 2.4
  */
-@SuppressWarnings("restriction")
 public class SynchronizedXtextResourceSetProvider implements Provider<SynchronizedXtextResourceSet> {
 
 	@Inject

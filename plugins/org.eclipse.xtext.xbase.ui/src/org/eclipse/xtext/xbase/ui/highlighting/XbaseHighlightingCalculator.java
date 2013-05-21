@@ -122,10 +122,14 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	}
 
 	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		TreeIterator<EObject> iterator = resource.getAllContents();
+		TreeIterator<EObject> iterator = EcoreUtil2.eAll(resource.getParseResult().getRootASTElement());
 		while (iterator.hasNext()) {
 			EObject object = iterator.next();
 			if (object instanceof XAbstractFeatureCall) {
+				if (((XAbstractFeatureCall) object).isPackageFragment()) {
+					iterator.prune();
+					continue;
+				}
 				computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
 			}
 			// Handle XAnnotation in a special way because we want the @ highlighted too
@@ -178,8 +182,9 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 			}
 			XExpression implicitReceiver = featureCall.getImplicitReceiver();
 			if (featureCall instanceof  XMemberFeatureCall){
+				XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if(((JvmOperation) feature).isStatic()){
+					if(((JvmOperation) feature).isStatic() && !casted.isStaticWithDeclaringType()){
 							highlightFeatureCall(featureCall, acceptor, 
 								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 					}
@@ -219,8 +224,13 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		}
 	}
 
-	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor,String id) {
-		highlightObjectAtFeature(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, id);
+	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor, String id) {
+		if (featureCall.isTypeLiteral()) {
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(featureCall);
+			highlightNode(node, id, acceptor);
+		} else {
+			highlightObjectAtFeature(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, id);
+		}
 	}
 	
 	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
@@ -285,9 +295,9 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	 * Highlights an object at the position of the given {@link EStructuralFeature}
 	 */
 	protected void highlightObjectAtFeature(IHighlightedPositionAcceptor acceptor, EObject object, EStructuralFeature feature, String id) {
-		List<INode> childs = NodeModelUtils.findNodesForFeature(object, feature);
-		if (childs.size() > 0)
-			highlightNode(childs.get(0), id, acceptor);
+		List<INode> children = NodeModelUtils.findNodesForFeature(object, feature);
+		if (children.size() > 0)
+			highlightNode(children.get(0), id, acceptor);
 	}
 	
 	/**

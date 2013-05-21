@@ -17,6 +17,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.junit.Test;
 
@@ -726,6 +727,19 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 				"class SomeClass extends org.junit.Assert {\n" +
 				"  def void method() {\n" + 
 				"    Assert::assertTrue(false)\n" + 
+				"  }\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) getFirstFeatureCall(clazz);
+		assertLinksTo("org.junit.Assert.assertTrue(boolean)", featureCall);
+		assertNull(featureCall.getImplicitFirstArgument());
+		assertNull(featureCall.getImplicitReceiver());
+	}
+	
+	@Test public void testStaticMethod_overloaded_noImport() throws Exception {
+		XtendClass clazz = clazz(
+				"class SomeClass extends org.junit.Assert {\n" +
+				"  def void method() {\n" + 
+				"    assertTrue(false)\n" + 
 				"  }\n" +
 				"}");
 		XFeatureCall featureCall = (XFeatureCall) getFirstFeatureCall(clazz);

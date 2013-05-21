@@ -7,16 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.findrefs;
 
-import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 
-import java.util.Queue;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -25,18 +19,12 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.ResourceAccess;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor;
+import org.eclipse.xtext.xbase.junit.ui.FindReferencesTestUtil;
+import org.eclipse.xtext.xbase.junit.ui.FindReferencesTestUtil.MockAcceptor;
 import org.junit.Test;
 
-import com.google.common.base.Predicate;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -49,9 +37,9 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private IXtendJvmAssociations associations;
-
+	
 	@Inject
-	private Provider<CheckingReferenceQueryExecutor> executorProvider;
+	private FindReferencesTestUtil findReferencesTester;
 
 	@Override
 	public void tearDown() throws Exception {
@@ -67,7 +55,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(classBar.getExtends(), inferredTypeFoo, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		findReferencesTester.checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesThis() throws Exception {
@@ -79,7 +67,29 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(((XBlockExpression) functionFoo.getExpression()).getExpressions().get(0), inferredType,
 				XABSTRACT_FEATURE_CALL__FEATURE);
-		checkFindReferences(inferredType, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		findReferencesTester.checkFindReferences(inferredType, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+	}
+	
+	@Test public void testFindReferencesTypeLiteral() throws Exception {
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo { def foo() { Foo } }").getXtendTypes().get(0);
+		waitForAutoBuild();
+		JvmGenericType inferredType = associations.getInferredType(classFoo);
+		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
+
+		final MockAcceptor mockAcceptor = new MockAcceptor();
+		mockAcceptor.expect(((XBlockExpression) functionFoo.getExpression()).getExpressions().get(0), inferredType,	XABSTRACT_FEATURE_CALL__FEATURE);
+		findReferencesTester.checkFindReferences(inferredType, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+	}
+	
+	@Test public void testFindReferencesTypeLiteralWithPackageFragment() throws Exception {
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "package com.acme class Foo { def foo() { com.acme.Foo } }").getXtendTypes().get(0);
+		waitForAutoBuild();
+		JvmGenericType inferredType = associations.getInferredType(classFoo);
+		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
+		
+		final MockAcceptor mockAcceptor = new MockAcceptor();
+		mockAcceptor.expect(((XBlockExpression) functionFoo.getExpression()).getExpressions().get(0), inferredType,	XABSTRACT_FEATURE_CALL__FEATURE);
+		findReferencesTester.checkFindReferences(inferredType, "Java References to com.acme.Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesToConstructor() throws Exception {
@@ -92,7 +102,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(((XBlockExpression) functionBar.getExpression()).getExpressions().get(0),
 				inferredConstructor, XCONSTRUCTOR_CALL__CONSTRUCTOR);
-		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		findReferencesTester.checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesFromReturnType() throws Exception {
@@ -104,7 +114,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(functionBar.getReturnType(), inferredTypeFoo, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		findReferencesTester.checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesFromParameter() throws Exception {
@@ -117,7 +127,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(functionBar.getParameters().get(0).getParameterType(), inferredTypeFoo,
 				JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		findReferencesTester.checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesToFunction() throws Exception {
@@ -135,87 +145,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 				inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
 		mockAcceptor.expect(((XBlockExpression) functionBaz.getExpression()).getExpressions().get(0),
 				inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
-		checkFindReferences(functionFoo, "Java References to Foo.foo (/test.project/src/Foo.xtend)", mockAcceptor);
-	}
-
-	protected void checkFindReferences(EObject target, String expectedLabel, final MockAcceptor mockAcceptor) {
-		CheckingReferenceQueryExecutor executor = executorProvider.get();
-		executor.init(target, expectedLabel, mockAcceptor);
-		executor.execute();
-		mockAcceptor.assertFinished();
-	}
-
-	public static class CheckingReferenceQueryExecutor extends JvmModelReferenceQueryExecutor {
-
-		@Inject
-		private IReferenceFinder referenceFinder;
-		
-		@Inject
-		private Provider<ResourceAccess> resourceAccessProvider;
-		
-		private Iterable<URI> targetURIs;
-		private Predicate<IReferenceDescription> filter;
-		private ResourceAccess localResourceAccess;
-		private IAcceptor<IReferenceDescription> filteringAcceptor;
-
-		@Override
-		public void init(EObject target) {
-		}
-
-		public void init(EObject target, String expectedLabel, final IAcceptor<IReferenceDescription> acceptor) {
-			targetURIs = getTargetURIs(target);
-			filter = getFilter(target);
-			assertEquals(expectedLabel, getLabel(target));
-			this.filteringAcceptor = new IAcceptor<IReferenceDescription>() {
-				public void accept(IReferenceDescription t) {
-					if (filter.apply(t))
-						acceptor.accept(t);
-				}
-			};
-			localResourceAccess = resourceAccessProvider.get();
-			localResourceAccess.registerResourceSet(target.eResource().getResourceSet());
-		}
-
-		@Override
-		public void execute() {
-			referenceFinder.findAllReferences(targetURIs, localResourceAccess, filteringAcceptor, null);
-		}
-	}
-
-	public static class MockAcceptor implements IAcceptor<IReferenceDescription> {
-
-		private Queue<IReferenceDescription> expectationQueue = newLinkedList();
-
-		public void expect(EObject from, EObject to, EReference eReference) {
-			expectationQueue.add(new DefaultReferenceDescription(from, to, eReference, 0, null));
-		}
-
-		public void assertFinished() {
-			IReferenceDescription nextExpected = expectationQueue.poll();
-			if (nextExpected != null)
-				fail("Expected " + toString(nextExpected));
-		}
-
-		private String toString(IReferenceDescription rd) {
-			return rd.getSourceEObjectUri() + " ---" + rd.getEReference().getName() + "---> "
-					+ rd.getTargetEObjectUri();
-		}
-
-		private String toString(IReferenceDescription expected, IReferenceDescription actual) {
-			return "Expected: \n" + toString(expected) + "\n but got:\n" + toString(actual) + "\n queueSize="
-					+ expectationQueue.size() + "\n";
-		}
-
-		public void accept(IReferenceDescription description) {
-			IReferenceDescription nextExpected = expectationQueue.poll();
-			assertNotNull(nextExpected);
-			assertEquals(toString(nextExpected, description), nextExpected.getSourceEObjectUri(),
-					description.getSourceEObjectUri());
-			assertEquals(toString(nextExpected, description), nextExpected.getTargetEObjectUri(),
-					description.getTargetEObjectUri());
-			assertEquals(toString(nextExpected, description), nextExpected.getEReference(), description.getEReference());
-		}
-
+		findReferencesTester.checkFindReferences(functionFoo, "Java References to Foo.foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 }

@@ -109,6 +109,10 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 	public XExpression getSyntacticReceiver() {
 		return null;
 	}
+	
+	public boolean isSyntacticReceiverPossibleArgument() {
+		return false;
+	}
 
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 		return Collections.emptyMap();
@@ -140,4 +144,7 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return false;
 	}
 
+	public boolean isTypeLiteral() {
+		return false;
+	}
 }

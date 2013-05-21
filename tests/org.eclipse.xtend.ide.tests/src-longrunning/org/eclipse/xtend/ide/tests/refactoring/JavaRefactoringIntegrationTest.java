@@ -1135,7 +1135,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
 			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
 			fileAsserts.assertFileExists("src/test/NewExtension.java");
-			fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension.*");
+			fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension.*",  "class XtendRef { def bar() { foo('') } }");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
 			waitForAutoBuild();

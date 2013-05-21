@@ -15,6 +15,10 @@ import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder$ILocalResourceAcces
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
+import java.util.Map
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
 
 class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceFinder {
 	IQualifiedNameConverter nameConverter
@@ -39,16 +43,22 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 			]
 		}
 		val importedNames = resourceDescription.importedNames.toSet
-		if (names.exists[
-			importedNames.contains(it)
-		]) {
-			localResourceAccess.readOnly(resourceDescription.URI) [
-				findLocalReferencesInResource(targetURIs, it.getResource(resourceDescription.URI, true), [
+		if (names.exists[ importedNames.contains(it) ]) {
+			localResourceAccess.readOnly(resourceDescription.URI) [ resourceSet |
+				findLocalReferencesInResource(targetURIs, resourceSet.getResource(resourceDescription.URI, true), [
 					acceptor.accept(it)
 				])
 				return null
 			]
 		} 
+	}
+	
+	override protected findLocalReferencesFromElement(Set<URI> targetURISet, EObject sourceCandidate, Resource localResource, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI, Map<EObject,URI> exportedElementsMap) {
+		switch sourceCandidate {
+			// ignore type references in package fragments
+			XAbstractFeatureCall case sourceCandidate.packageFragment: return
+			default: super.findLocalReferencesFromElement(targetURISet, sourceCandidate, localResource, acceptor, currentExportedContainerURI, exportedElementsMap)
+		}
 	}
 
 }

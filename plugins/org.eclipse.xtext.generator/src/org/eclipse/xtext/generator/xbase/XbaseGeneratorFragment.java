@@ -266,7 +266,9 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider.CrossRefResolutionConverter",
 						"org.eclipse.xtext.xbase.ui.quickfix.XbaseCrossRefResolutionConverter")
 				.addTypeToTypeEagerSingleton("org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator",
-						"org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator");
+						"org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator")
+				.addTypeToType("org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper",
+					 	"org.eclipse.xtext.xbase.ui.navigation.TypeLiteralAwareHyperlinkHelper");
 		if (useInferredJvmModel) {
 			// rename refactoring
 			bindFactory = bindFactory

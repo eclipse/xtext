@@ -427,6 +427,18 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testTypeLiteral_3() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testTypeLiteral_6() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeLiteral_7() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeLiteral_8() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeLiteral_9() throws Exception {
+		fail("fails in old implementation")
+	}
 	
 	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_2() throws Exception {
 		fail("fails in old implementation")
@@ -2824,6 +2836,64 @@ class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest {
 		typeProvider
 	}
 	
+	@Ignore("fails in old implementation") @Test override testMethodTypeParamInference_04() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testMethodTypeParamInference_05() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testReturnType_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_03() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_04() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_05() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_06() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_07() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_08() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_09() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_10() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_11() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testOverloadedMethods_12() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testJEP101Example_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testJEP101Example_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testJEP101Example_03() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testNumberLiteralInClosure_01() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -2907,6 +2977,10 @@ class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testFeatureCall_06_00() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testFeatureCall_33() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -2919,15 +2993,31 @@ class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testToList_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testToList_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testToList_03() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testToList_04() throws Exception {
 		fail("fails in old implementation")
 	}
-	
 	@Ignore("fails in old implementation") @Test override testToList_05() throws Exception {
 		fail("fails in old implementation")
 	}
-	
+	@Ignore("fails in old implementation") @Test override testToList_06() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testToList_07() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testToList_08() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testToList_09() throws Exception {
 		fail("fails in old implementation")
 	}
 	
@@ -2951,13 +3041,31 @@ class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_02() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_03() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_04() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_05() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_06() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_07() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_08() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_09() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_10() throws Exception {

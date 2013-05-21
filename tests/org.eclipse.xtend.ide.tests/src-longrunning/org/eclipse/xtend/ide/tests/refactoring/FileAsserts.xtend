@@ -18,11 +18,13 @@ class FileAsserts {
 		file as IFile
 	}
 
-	def assertFileContains(IFile file, String expectedContents) throws Exception {
+	def assertFileContains(IFile file, String... expectedContents) throws Exception {
 		file.refreshLocal(IResource::DEPTH_ZERO, null);
 		val fileContents = getContents(file);
-		assertTrue('''Substring '«expectedContents»' not found in '«fileContents»' ''', 
-			fileContents.contains(expectedContents)
-		)
+		expectedContents.forEach [ expectation |
+			assertTrue('''Substring '«expectation»' not found in '«fileContents»' ''', 
+				fileContents.contains(expectation)
+			)
+		]
 	}
 }

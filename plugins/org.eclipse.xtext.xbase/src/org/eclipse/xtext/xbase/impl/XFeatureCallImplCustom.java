@@ -48,4 +48,16 @@ public class XFeatureCallImplCustom extends XFeatureCallImpl {
 	public boolean isExtension() {
 		return isExtension(null);
 	}
+	
+	@Override
+	public boolean isPackageFragment() {
+		ensureFeatureLinked();
+		return super.isPackageFragment();
+	}
+	
+	@Override
+	public boolean isTypeLiteral() {
+		ensureFeatureLinked();
+		return super.isTypeLiteral();
+	}
 }

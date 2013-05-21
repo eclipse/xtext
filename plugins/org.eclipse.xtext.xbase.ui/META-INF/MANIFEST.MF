@@ -28,7 +28,8 @@ Require-Bundle: org.eclipse.xtext.xbase;bundle-version="2.4.2";visibility:=reexp
  org.apache.commons.lang;bundle-version="2.1.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XtypeActivator
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.eclipse.xtext.xbase.lib
 Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.ui.contentassist;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.ui.contentassist.antlr;x-internal:=true,
@@ -54,6 +55,7 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;x-internal:=true,
  org.eclipse.xtext.xbase.ui.labeling;x-internal:=true,
  org.eclipse.xtext.xbase.ui.launching;x-internal:=true,
+ org.eclipse.xtext.xbase.ui.navigation;x-internal:=true,
  org.eclipse.xtext.xbase.ui.outline;x-internal:=true,
  org.eclipse.xtext.xbase.ui.quickfix;x-internal:=true,
  org.eclipse.xtext.xbase.ui.refactoring;x-internal:=true,

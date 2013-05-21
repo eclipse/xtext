@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -37,7 +37,7 @@ public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeat
 			EnumSet<ConformanceHint> receiverConformanceHints,
 			int bucketId,
 			boolean visible) {
-		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, receiverConformanceHints, bucketId, visible);
+		super(qualifiedName, feature, EcoreUtil.copy(receiver), receiverType, typeParameterMapping, receiverConformanceHints, bucketId, visible);
 	}
 	
 	@Override
