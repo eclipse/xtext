@@ -39,7 +39,8 @@ public class JvmModelReferenceUpdater extends DefaultReferenceUpdater {
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
 	
-	@Inject@LinkingScopeProviderBinding
+	@Inject
+	@LinkingScopeProviderBinding
 	private IScopeProvider linkingScopeProvider; 
 	
 	@Override
@@ -130,6 +131,9 @@ public class JvmModelReferenceUpdater extends DefaultReferenceUpdater {
 					return newText.length() < currentText.length();
 			}
 		};
-
+	}
+	
+	protected IScopeProvider getLinkingScopeProvider() {
+		return linkingScopeProvider;
 	}
 }

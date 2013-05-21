@@ -121,6 +121,7 @@ public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinde
 				IReferenceFinderExtension1 extension1 = (IReferenceFinderExtension1) referenceFinder;
 				extension1.findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1), localResourceAccess);
 			} else {
+				// don't use the language specific reference finder here for backwards compatibility reasons
 				findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1), localResourceAccess);
 			}
 		}
@@ -159,9 +160,12 @@ public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinde
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void findLocalReferencesFromElement(final Set<URI> targetURISet, EObject sourceCandidate,
+	protected void findLocalReferencesFromElement(
+			final Set<URI> targetURISet, 
+			EObject sourceCandidate,
 			Resource localResource,
-			final IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI, 
+			final IAcceptor<IReferenceDescription> acceptor, 
+			URI currentExportedContainerURI, 
 			Map<EObject, URI> exportedElementsMap) {
 		URI sourceURI = null; 
 		if(exportedElementsMap.containsKey(sourceCandidate)) { 

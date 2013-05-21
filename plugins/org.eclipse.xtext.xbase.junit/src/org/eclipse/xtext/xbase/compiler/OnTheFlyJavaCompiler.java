@@ -49,7 +49,6 @@ import com.google.inject.internal.MoreTypes;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class OnTheFlyJavaCompiler {
 
 	static class DelegateOutStream extends OutputStream {
