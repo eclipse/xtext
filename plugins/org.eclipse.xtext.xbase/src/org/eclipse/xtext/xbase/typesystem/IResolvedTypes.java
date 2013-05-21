@@ -20,6 +20,8 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -116,6 +118,26 @@ public interface IResolvedTypes {
 	 */
 	@Nullable
 	JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall);
+	
+	/**
+	 * Returns the intermediate linking candidate for the given feature call, if any.
+	 * If the feature call is <code>null</code>, the result is <code>null</code>.
+	 * @param featureCall the feature call that is queried for the current linking state.
+	 * @return the potentially intermediate linking state or <code>null</code> if none.
+	 */
+	@Nullable
+	IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall);
+	
+	/**
+	 * Returns the intermediate linking candidate for the given constructor call, if any.
+	 * If the constructor call is <code>null</code>, the result is <code>null</code>.
+	 * If the constructor call is broken, it may return a {@link JvmType} instead of 
+	 * a {@link JvmConstructor}.
+	 * @param constructorCall the constructor call that is queried for the current linking state.
+	 * @return the potentially intermediate linking state or <code>null</code> if none.
+	 */
+	@Nullable
+	IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall);
 
 	IResolvedTypes NULL = new NullResolvedTypes();
 
@@ -175,7 +197,17 @@ public interface IResolvedTypes {
 		}
 		
 		@Nullable
+		public IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall) {
+			return null;
+		}
+		
+		@Nullable
 		public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
+			return null;
+		}
+		
+		@Nullable
+		public IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall) {
 			return null;
 		}
 	}

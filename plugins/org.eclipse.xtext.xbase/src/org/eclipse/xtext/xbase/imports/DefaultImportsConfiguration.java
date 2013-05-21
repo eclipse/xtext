@@ -31,12 +31,15 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -132,6 +135,28 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		return 0;
 	}
 
+	/*
+	 * We cannot just use importDeclaration.getImportedTypeName since that would return the name from
+	 * the resolved type rather than the concrete syntax. 
+	 */
+	public String getLegacyImportSyntax(XImportDeclaration importDeclaration) {
+		List<INode> list = NodeModelUtils.findNodesForFeature(importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
+		if (list.isEmpty()) {
+			return null;
+		}
+		INode singleNode = list.get(0);
+		if (singleNode.getText().indexOf('$') < 0) {
+			return null;
+		}
+		StringBuilder sb = new StringBuilder();
+		for(ILeafNode node: singleNode.getLeafNodes()) {
+			if (!node.isHidden()) {
+				sb.append(node.getText().replace("^", ""));
+			}
+		}
+		return sb.toString();
+	}
+	
 	protected INode findPreviousNode(ICompositeNode node, List<EObject> pathToImportSection) {
 		if(pathToImportSection.isEmpty() || node.getGrammarElement() != pathToImportSection.get(0)) 
 			return null;

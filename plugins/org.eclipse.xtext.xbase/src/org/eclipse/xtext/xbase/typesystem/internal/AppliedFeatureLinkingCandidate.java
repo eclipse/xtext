@@ -73,5 +73,9 @@ public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate 
 	public boolean isExtension() {
 		return delegate.isExtension();
 	}
+	
+	public boolean isTypeLiteral() {
+		return delegate.isTypeLiteral();
+	}
 
 }
