@@ -1,7 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.validation
 
+import com.google.inject.Inject
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendField
+import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
@@ -9,31 +18,36 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
-
-import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
-import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.xbase.annotations.validation.AnnotationValueValidator
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator
 
+import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 class AnnotationValidation extends AbstractDeclarativeValidator {
+	
+	@Inject
+	AnnotationValueValidator annotationValueValidator;
 	
 	override protected getEPackages() {
 		newArrayList(XtendPackage::eINSTANCE, XbasePackage::eINSTANCE, XAnnotationsPackage::eINSTANCE)
 	}
 	
-	@Check def checkAnnotation(XtendAnnotationType it) {
+	@Check 
+	def checkAnnotation(XtendAnnotationType it) {
 		for (it : members.filter(typeof(XtendField))) {
 			if (!isValidAnnotationValueType(type)) {
-				error('''Invalid type «type.simpleName» for the annotation attribute «name»; only primitive type, String, Class, annotation, enumeration are permitted or 1-dimensional arrays thereof''', it, XTEND_FIELD__TYPE, IssueCodes::INVALID_ANNOTATION_VALUE_TYPE)
+				error('''Invalid type «type.simpleName» for the annotation attribute «name»; only primitive type, String, Class, annotation, enumeration are permitted or 1-dimensional arrays thereof''',
+					it,
+					XTEND_FIELD__TYPE,
+					IssueCodes::INVALID_ANNOTATION_VALUE_TYPE
+				)
 			}
 			if(initialValue != null) {
-				for(EObject subExpression: EcoreUtil2::eAllContents(initialValue)) {
-					if(!XbaseWithAnnotationsJavaValidator::expressionTypesAllowedAsValues.contains(subExpression.eClass)) 
-						error("The value for an annotation attribute must be a constant expression", it, XTEND_FIELD__INITIAL_VALUE, org::eclipse::xtext::xbase::validation::IssueCodes::ANNOTATIONS_ILLEGAL_ATTRIBUTE);
-				}
+				annotationValueValidator.validateAnnotationValue(initialValue, this)
 			}
 		}
 	}

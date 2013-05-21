@@ -63,6 +63,10 @@ public class FollowUpError extends AbstractUnresolvableReference implements IFea
 		return false;
 	}
 	
+	public boolean isTypeLiteral() {
+		return false;
+	}
+	
 	public EReference getReference() {
 		return XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}

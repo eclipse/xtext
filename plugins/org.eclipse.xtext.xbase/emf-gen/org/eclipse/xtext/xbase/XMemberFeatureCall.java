@@ -20,8 +20,11 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallTarget <em>Member Call Target</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallArguments <em>Member Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading <em>Spreading</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitStatic <em>Explicit Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isNullSafe <em>Null Safe</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral <em>Type Literal</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,30 +103,30 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	void setExplicitOperationCall(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Spreading</b></em>' attribute.
+	 * Returns the value of the '<em><b>Explicit Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Spreading</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Explicit Static</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Spreading</em>' attribute.
-	 * @see #setSpreading(boolean)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_Spreading()
+	 * @return the value of the '<em>Explicit Static</em>' attribute.
+	 * @see #setExplicitStatic(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_ExplicitStatic()
 	 * @model
 	 * @generated
 	 */
-	boolean isSpreading();
+	boolean isExplicitStatic();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading <em>Spreading</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitStatic <em>Explicit Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Spreading</em>' attribute.
-	 * @see #isSpreading()
+	 * @param value the new value of the '<em>Explicit Static</em>' attribute.
+	 * @see #isExplicitStatic()
 	 * @generated
 	 */
-	void setSpreading(boolean value);
+	void setExplicitStatic(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Null Safe</b></em>' attribute.
@@ -150,5 +153,83 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	 * @generated
 	 */
 	void setNullSafe(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Literal</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Literal</em>' attribute.
+	 * @see #setTypeLiteral(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_TypeLiteral()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	boolean isTypeLiteral();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Literal</em>' attribute.
+	 * @see #isTypeLiteral()
+	 * @generated
+	 */
+	void setTypeLiteral(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Static With Declaring Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Static With Declaring Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Static With Declaring Type</em>' attribute.
+	 * @see #setStaticWithDeclaringType(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_StaticWithDeclaringType()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	boolean isStaticWithDeclaringType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isStaticWithDeclaringType <em>Static With Declaring Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Static With Declaring Type</em>' attribute.
+	 * @see #isStaticWithDeclaringType()
+	 * @generated
+	 */
+	void setStaticWithDeclaringType(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Package Fragment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Package Fragment</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Package Fragment</em>' attribute.
+	 * @see #setPackageFragment(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_PackageFragment()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	boolean isPackageFragment();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isPackageFragment <em>Package Fragment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Package Fragment</em>' attribute.
+	 * @see #isPackageFragment()
+	 * @generated
+	 */
+	void setPackageFragment(boolean value);
 
 } // XMemberFeatureCall

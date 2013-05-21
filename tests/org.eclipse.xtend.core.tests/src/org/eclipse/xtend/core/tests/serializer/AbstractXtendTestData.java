@@ -136,4 +136,55 @@ public abstract class AbstractXtendTestData extends AbstractXtendTestCase {
 		str.append("}");
 		doTest(str.toString());
 	}
+	
+	@Test public void testTypeLiteralsNoImports() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("class TypeLiterals {\n");
+		str.append("	def m() {\n");
+		str.append("		java.lang.String.getName\n");
+		str.append("		String.getName\n");
+		str.append("		java.util.Map.Entry.getName\n");
+		str.append("		java.util.Map$Entry.getName\n");
+		str.append("	}\n");
+		str.append("}");
+		doTest(str.toString());
+	}
+	
+	@Test public void testTypeLiteralsImports() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("import java.util.Map\n");
+		str.append("class TypeLiterals {\n");
+		str.append("	def m() {\n");
+		str.append("		Map$Entry.getName\n");
+		str.append("		Map.Entry.getName\n");
+		str.append("	}\n");
+		str.append("}");
+		doTest(str.toString());
+	}
+	
+	@Test public void testTypeLiteralsNestedImportsWithDollar() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("import java.util.Map$Entry\n");
+		str.append("class TypeLiterals {\n");
+		str.append("	def m() {\n");
+		str.append("		Map$Entry.getName\n");
+		str.append("		Entry.getName\n");
+		str.append("	}\n");
+		str.append("}");
+		doTest(str.toString());
+	}
+	
+	@Test public void testTypeLiteralsNestedImportsWithDot() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("package myPackage\n");
+		str.append("import java.util.Map.Entry\n");
+		str.append("class TypeLiterals {\n");
+		str.append("	def m() {\n");
+		str.append("		Entry.getName\n");
+		str.append("		TypeLiterals.getName\n");
+		str.append("		myPackage.TypeLiterals.getName\n");
+		str.append("	}\n");
+		str.append("}");
+		doTest(str.toString());
+	}
 }
