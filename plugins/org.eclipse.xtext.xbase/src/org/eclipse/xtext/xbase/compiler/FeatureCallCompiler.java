@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -103,7 +104,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
-		if (obj instanceof XAbstractFeatureCall) {
+		if (obj instanceof XFeatureCall) {
+			_toJavaExpression((XFeatureCall) obj, appendable);
+		} else if (obj instanceof XMemberFeatureCall) {
+			_toJavaExpression((XMemberFeatureCall) obj, appendable);
+		} else if (obj instanceof XAbstractFeatureCall) {
 			_toJavaExpression((XAbstractFeatureCall) obj, appendable);
 		} else if (obj instanceof XAnnotationElementValueBinaryOperation) {
 			_toJavaExpression((XAnnotationElementValueBinaryOperation) obj, appendable);
@@ -116,6 +121,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
 		if (obj instanceof XFeatureCall) {
 			_toJavaStatement((XFeatureCall) obj, appendable, isReferenced);
+		} else if (obj instanceof XMemberFeatureCall) {
+			_toJavaStatement((XMemberFeatureCall) obj, appendable, isReferenced);
 		} else if (obj instanceof XAbstractFeatureCall) {
 			_toJavaStatement((XAbstractFeatureCall) obj, appendable, isReferenced);
 		} else if (obj instanceof XAnnotationElementValueBinaryOperation) {
@@ -125,6 +132,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
+	/**
+	 * No-op.
+	 * 
+	 * @param expr defined by dispatch signature
+	 * @param b defined by dispatch signature
+	 * @param isReferenced defined by dispatch signature 
+	 */
 	protected void _toJavaStatement(final XAnnotationElementValueBinaryOperation expr, ITreeAppendable b, final boolean isReferenced) {
 	}
 	
@@ -171,6 +185,18 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected XExpression getActualReceiver(final XAbstractFeatureCall expr) {
 		return featureCallToJavaMapping.getActualReceiver(expr);
 	}
+	
+	protected void _toJavaStatement(final XMemberFeatureCall expr, final ITreeAppendable b, boolean isReferenced) {
+		if (expr.isTypeLiteral()) {
+			generateComment(new Later() {
+				public void exec(ITreeAppendable appendable) {
+					internalToJavaExpression(expr, appendable);
+				}
+			}, b, isReferenced);
+		} else {
+			_toJavaStatement((XAbstractFeatureCall) expr, b, isReferenced);
+		}
+	}
 
 	protected void _toJavaStatement(final XFeatureCall expr, final ITreeAppendable b, boolean isReferenced) {
 		// if it's a call to this() or super() make sure the arguments are forced to be compiled to expressions.
@@ -178,6 +204,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.newLine();
 			featureCalltoJavaExpression(expr, b, false);
 			b.append(";");
+		} else if (expr.isTypeLiteral()) {
+			generateComment(new Later() {
+				public void exec(ITreeAppendable appendable) {
+					internalToJavaExpression(expr, appendable);
+				}
+			}, b, isReferenced);
 		} else {
 			_toJavaStatement((XAbstractFeatureCall) expr, b, isReferenced);
 		}
@@ -269,6 +301,22 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 		} else {
 			internalToJavaStatement(arg, b, true);
+		}
+	}
+	
+	protected void _toJavaExpression(XMemberFeatureCall call, ITreeAppendable b) {
+		if (call.isTypeLiteral()) {
+			b.append((JvmType) call.getFeature()).append(".class");
+		} else {
+			_toJavaExpression((XAbstractFeatureCall) call, b);
+		}
+	}
+	
+	protected void _toJavaExpression(XFeatureCall call, ITreeAppendable b) {
+		if (call.isTypeLiteral()) {
+			b.append((JvmType) call.getFeature()).append(".class");
+		} else {
+			_toJavaExpression((XAbstractFeatureCall) call, b);
 		}
 	}
 
@@ -619,6 +667,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					} else {
 						b.append(featureCall.getDeclaringType());
 					}
+					return true;
+				}
+			}
+			if (call instanceof XMemberFeatureCall) {
+				XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) call;
+				if (memberFeatureCall.isStaticWithDeclaringType()) {
+					XAbstractFeatureCall target = (XAbstractFeatureCall) memberFeatureCall.getMemberCallTarget();
+					JvmType declaringType = (JvmType) target.getFeature();
+					b.trace(target, false).append(declaringType);
 					return true;
 				}
 			}

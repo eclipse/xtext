@@ -59,6 +59,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
@@ -214,58 +215,60 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	/**
 	 * don't call this directly. Always call evaluate() internalEvaluate()
 	 */
-	protected Object doEvaluate(XExpression assignment, IEvaluationContext context, CancelIndicator indicator) {
-		if (assignment instanceof XAssignment) {
-	      return _doEvaluate((XAssignment)assignment, context, indicator);
-	    } else if (assignment instanceof XDoWhileExpression) {
-	      return _doEvaluate((XDoWhileExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XMemberFeatureCall) {
-	      return _doEvaluate((XMemberFeatureCall)assignment, context, indicator);
-	    } else if (assignment instanceof XWhileExpression) {
-	      return _doEvaluate((XWhileExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XAbstractFeatureCall) {
-	      return _doEvaluate((XAbstractFeatureCall)assignment, context, indicator);
-	    } else if (assignment instanceof XBlockExpression) {
-	      return _doEvaluate((XBlockExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XBooleanLiteral) {
-	      return _doEvaluate((XBooleanLiteral)assignment, context, indicator);
-	    } else if (assignment instanceof XCastedExpression) {
-	      return _doEvaluate((XCastedExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XClosure) {
-	      return _doEvaluate((XClosure)assignment, context, indicator);
-	    } else if (assignment instanceof XConstructorCall) {
-	      return _doEvaluate((XConstructorCall)assignment, context, indicator);
-	    } else if (assignment instanceof XForLoopExpression) {
-	      return _doEvaluate((XForLoopExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XIfExpression) {
-	      return _doEvaluate((XIfExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XInstanceOfExpression) {
-	      return _doEvaluate((XInstanceOfExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XNullLiteral) {
-	      return _doEvaluate((XNullLiteral)assignment, context, indicator);
-	    } else if (assignment instanceof XNumberLiteral) {
-	      return _doEvaluate((XNumberLiteral)assignment, context, indicator);
-	    } else if (assignment instanceof XReturnExpression) {
-	      return _doEvaluate((XReturnExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XStringLiteral) {
-	      return _doEvaluate((XStringLiteral)assignment, context, indicator);
-	    } else if (assignment instanceof XSwitchExpression) {
-	      return _doEvaluate((XSwitchExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XThrowExpression) {
-	      return _doEvaluate((XThrowExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XTryCatchFinallyExpression) {
-	      return _doEvaluate((XTryCatchFinallyExpression)assignment, context, indicator);
-	    } else if (assignment instanceof XTypeLiteral) {
-	      return _doEvaluate((XTypeLiteral)assignment, context, indicator);
-	    } else if (assignment instanceof XVariableDeclaration) {
-		      return _doEvaluate((XVariableDeclaration)assignment, context, indicator);
-	    } else if (assignment instanceof XListLiteral) {
-		      return _doEvaluate((XListLiteral)assignment, context, indicator);
-	    } else if (assignment instanceof XSetLiteral) {
-		      return _doEvaluate((XSetLiteral)assignment, context, indicator);
+	protected Object doEvaluate(XExpression expression, IEvaluationContext context, CancelIndicator indicator) {
+		if (expression instanceof XAssignment) {
+	      return _doEvaluate((XAssignment)expression, context, indicator);
+	    } else if (expression instanceof XDoWhileExpression) {
+	      return _doEvaluate((XDoWhileExpression)expression, context, indicator);
+	    } else if (expression instanceof XMemberFeatureCall) {
+	      return _doEvaluate((XMemberFeatureCall)expression, context, indicator);
+	    } else if (expression instanceof XWhileExpression) {
+	      return _doEvaluate((XWhileExpression)expression, context, indicator);
+	    } else if (expression instanceof XFeatureCall) {
+	    	return _doEvaluate((XFeatureCall)expression, context, indicator);
+	    } else if (expression instanceof XAbstractFeatureCall) {
+	    	return _doEvaluate((XAbstractFeatureCall)expression, context, indicator);
+	    } else if (expression instanceof XBlockExpression) {
+	      return _doEvaluate((XBlockExpression)expression, context, indicator);
+	    } else if (expression instanceof XBooleanLiteral) {
+	      return _doEvaluate((XBooleanLiteral)expression, context, indicator);
+	    } else if (expression instanceof XCastedExpression) {
+	      return _doEvaluate((XCastedExpression)expression, context, indicator);
+	    } else if (expression instanceof XClosure) {
+	      return _doEvaluate((XClosure)expression, context, indicator);
+	    } else if (expression instanceof XConstructorCall) {
+	      return _doEvaluate((XConstructorCall)expression, context, indicator);
+	    } else if (expression instanceof XForLoopExpression) {
+	      return _doEvaluate((XForLoopExpression)expression, context, indicator);
+	    } else if (expression instanceof XIfExpression) {
+	      return _doEvaluate((XIfExpression)expression, context, indicator);
+	    } else if (expression instanceof XInstanceOfExpression) {
+	      return _doEvaluate((XInstanceOfExpression)expression, context, indicator);
+	    } else if (expression instanceof XNullLiteral) {
+	      return _doEvaluate((XNullLiteral)expression, context, indicator);
+	    } else if (expression instanceof XNumberLiteral) {
+	      return _doEvaluate((XNumberLiteral)expression, context, indicator);
+	    } else if (expression instanceof XReturnExpression) {
+	      return _doEvaluate((XReturnExpression)expression, context, indicator);
+	    } else if (expression instanceof XStringLiteral) {
+	      return _doEvaluate((XStringLiteral)expression, context, indicator);
+	    } else if (expression instanceof XSwitchExpression) {
+	      return _doEvaluate((XSwitchExpression)expression, context, indicator);
+	    } else if (expression instanceof XThrowExpression) {
+	      return _doEvaluate((XThrowExpression)expression, context, indicator);
+	    } else if (expression instanceof XTryCatchFinallyExpression) {
+	      return _doEvaluate((XTryCatchFinallyExpression)expression, context, indicator);
+	    } else if (expression instanceof XTypeLiteral) {
+	      return _doEvaluate((XTypeLiteral)expression, context, indicator);
+	    } else if (expression instanceof XVariableDeclaration) {
+		      return _doEvaluate((XVariableDeclaration)expression, context, indicator);
+	    } else if (expression instanceof XListLiteral) {
+		      return _doEvaluate((XListLiteral)expression, context, indicator);
+	    } else if (expression instanceof XSetLiteral) {
+		      return _doEvaluate((XSetLiteral)expression, context, indicator);
 	    } else {
 	      throw new IllegalArgumentException("Unhandled parameter types: " +
-	        Arrays.<Object>asList(assignment, context, indicator).toString());
+	        Arrays.<Object>asList(expression, context, indicator).toString());
 	    }
 	}
 
@@ -684,7 +687,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object _doEvaluate(final XMemberFeatureCall featureCall, final IEvaluationContext context, final CancelIndicator indicator) {
-		if (featureCall.isSpreading()) {
+		if (featureCall.isTypeLiteral()) {
+			JvmType type = (JvmType) featureCall.getFeature();
+			try {
+				Class<?> result = classFinder.forName(type.getQualifiedName());
+				return result;
+			} catch (ClassNotFoundException cnfe) {
+				throw new EvaluationException(cnfe);
+			}
+		} else if (featureCall.isSpreading()) {
 			Object memberCallTarget = internalEvaluate(featureCall.getMemberCallTarget(), context, indicator);
 			if (memberCallTarget == null)
 				return throwNullPointerException(featureCall.getMemberCallTarget(), "iterable evaluated to 'null'");
@@ -791,6 +802,20 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return null;
 	}
 
+	protected Object _doEvaluate(XFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
+		if (featureCall.isTypeLiteral()) {
+			JvmType type = (JvmType) featureCall.getFeature();
+			try {
+				Class<?> result = classFinder.forName(type.getQualifiedName());
+				return result;
+			} catch (ClassNotFoundException cnfe) {
+				throw new EvaluationException(cnfe);
+			}
+		} else {
+			return _doEvaluate((XAbstractFeatureCall) featureCall, context, indicator);
+		}
+	}
+	
 	protected Object _doEvaluate(XAbstractFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
 		if (expressionHelper.isShortCircuitOperation(featureCall)) {
 			XExpression leftOperand = ((XBinaryOperation)featureCall).getLeftOperand();

@@ -363,7 +363,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			class Resource {
 			  def test() {
-			    val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE
+			    val x = org.eclipse.emf.ecore.resource.Resource$Factory$Registry::INSTANCE
 			  }
 			}
 		''', false)
@@ -479,7 +479,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			class Resource {
 			  def test() {
-			    val x = org::eclipse::emf::ecore::resource::Resource::Factory::Registry::INSTANCE
+			    val x = org.eclipse.emf.ecore.resource.Resource.Factory.Registry::INSTANCE
 			  }
 			}
 		''', false)
@@ -1883,7 +1883,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			package pack
 
 			class Bug406086 {
-				val x = bug406086::^def::Bug406086::FIELD
+				val x = bug406086.^def.Bug406086::FIELD
 			}
 		''')
 	}

@@ -657,14 +657,18 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		if (internalView.eNotificationRequired()) {
 			boolean wasDeliver = internalView.eDeliver();
 			internalView.eSetDeliver(false);
-			internalView.eSet(structuralFeature, newFeature);
+			internalSetValue(internalView, structuralFeature, newFeature);
 			internalView.eSetDeliver(wasDeliver);
 			if (newFeature != oldFeature) {
 				internalView.eNotify(new ENotificationImpl(internalView, Notification.RESOLVE, featureId, oldFeature, newFeature));
 			}
 		} else {
-			internalView.eSet(structuralFeature, newFeature);
+			internalSetValue(internalView, structuralFeature, newFeature);
 		}
+	}
+
+	protected void internalSetValue(InternalEObject featureCall, EReference structuralFeature, JvmIdentifiableElement newValue) {
+		featureCall.eSet(structuralFeature, newValue);
 	}
 	
 	protected int getArityMismatch(JvmExecutable executable, List<XExpression> arguments) {

@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isSpreading <em>Spreading</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isNullSafe <em>Null Safe</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isTypeLiteral <em>Type Literal</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -145,6 +146,26 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * @ordered
 	 */
 	protected boolean typeLiteral = TYPE_LITERAL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isStaticWithDeclaringType() <em>Static With Declaring Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStaticWithDeclaringType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATIC_WITH_DECLARING_TYPE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStaticWithDeclaringType() <em>Static With Declaring Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStaticWithDeclaringType()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean staticWithDeclaringType = STATIC_WITH_DECLARING_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -326,6 +347,29 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isStaticWithDeclaringType()
+	{
+		return staticWithDeclaringType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStaticWithDeclaringType(boolean newStaticWithDeclaringType)
+	{
+		boolean oldStaticWithDeclaringType = staticWithDeclaringType;
+		staticWithDeclaringType = newStaticWithDeclaringType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE, oldStaticWithDeclaringType, staticWithDeclaringType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -361,6 +405,8 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return isNullSafe();
 			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
 				return isTypeLiteral();
+			case XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE:
+				return isStaticWithDeclaringType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -395,6 +441,9 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
 				setTypeLiteral((Boolean)newValue);
 				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE:
+				setStaticWithDeclaringType((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -427,6 +476,9 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
 				setTypeLiteral(TYPE_LITERAL_EDEFAULT);
 				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE:
+				setStaticWithDeclaringType(STATIC_WITH_DECLARING_TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -453,6 +505,8 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return nullSafe != NULL_SAFE_EDEFAULT;
 			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
 				return typeLiteral != TYPE_LITERAL_EDEFAULT;
+			case XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE:
+				return staticWithDeclaringType != STATIC_WITH_DECLARING_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -476,6 +530,8 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 		result.append(nullSafe);
 		result.append(", typeLiteral: ");
 		result.append(typeLiteral);
+		result.append(", staticWithDeclaringType: ");
+		result.append(staticWithDeclaringType);
 		result.append(')');
 		return result.toString();
 	}
