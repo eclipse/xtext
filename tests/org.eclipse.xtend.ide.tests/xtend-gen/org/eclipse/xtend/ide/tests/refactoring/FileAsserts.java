@@ -6,7 +6,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
@@ -28,16 +31,21 @@ public class FileAsserts {
     return _xblockexpression;
   }
   
-  public void assertFileContains(final IFile file, final String expectedContents) throws Exception {
+  public void assertFileContains(final IFile file, final String... expectedContents) throws Exception {
     file.refreshLocal(IResource.DEPTH_ZERO, null);
     final String fileContents = this._workbenchTestHelper.getContents(file);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Substring \'");
-    _builder.append(expectedContents, "");
-    _builder.append("\' not found in \'");
-    _builder.append(fileContents, "");
-    _builder.append("\' ");
-    boolean _contains = fileContents.contains(expectedContents);
-    Assert.assertTrue(_builder.toString(), _contains);
+    final Procedure1<String> _function = new Procedure1<String>() {
+        public void apply(final String expectation) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Substring \'");
+          _builder.append(expectation, "");
+          _builder.append("\' not found in \'");
+          _builder.append(fileContents, "");
+          _builder.append("\' ");
+          boolean _contains = fileContents.contains(expectation);
+          Assert.assertTrue(_builder.toString(), _contains);
+        }
+      };
+    IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedContents)), _function);
   }
 }

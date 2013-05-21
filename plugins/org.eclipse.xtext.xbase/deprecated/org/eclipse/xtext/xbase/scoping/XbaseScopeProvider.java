@@ -301,17 +301,6 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 	 * @param idx the index in an expression list of a block. Otherwise to be ignored.
 	 */
 	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, Resource resource, boolean includeCurrentBlock, int idx) {
-		if (context instanceof XFeatureCall) {
-			XFeatureCall featureCall = (XFeatureCall) context;
-			if (featureCall.getDeclaringType() != null) {
-				JvmTypeReference typeReference = typeReferences.createTypeRef(featureCall.getDeclaringType());
-				JvmFeatureScopeAcceptor featureScopeDescriptions = new JvmFeatureScopeAcceptor();
-				IAcceptor<IJvmFeatureDescriptionProvider> curried = featureScopeDescriptions.curry(typeReference, featureCall);
-				addFeatureDescriptionProviders(getContextType(featureCall), null, null, null, getDefaultPriority(), true, curried);
-				IScope result = featureScopeDescriptions.createScope(IScope.NULLSCOPE);
-				return result;
-			}
-		}
 		DelegatingScope implicitFeaturesAndStatics = new DelegatingScope(IScope.NULLSCOPE);
 		LocalVariableScopeContext scopeContext = createLocalVariableScopeContext(context, reference, includeCurrentBlock, idx);
 		IScope localVariableScope = createLocalVarScope(implicitFeaturesAndStatics, scopeContext);
@@ -356,11 +345,25 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 		if (context instanceof XNullLiteral)
 			receiverType = unkownToObject(receiverType, receiver);
 		if (receiverType != null) {
+			if (receiver instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) receiver).isTypeLiteral()) {
+				XAbstractFeatureCall featureCall = (XAbstractFeatureCall) receiver;
+				JvmTypeReference typeReference = typeReferences.createTypeRef((JvmType)featureCall.getFeature());
+				JvmFeatureScopeAcceptor featureScopeDescriptions = new JvmFeatureScopeAcceptor();
+				IAcceptor<IJvmFeatureDescriptionProvider> curried = featureScopeDescriptions.curry(typeReference, featureCall);
+				addFeatureDescriptionProviders(getContextType(featureCall), null, null, null, getDefaultPriority(), true, curried);
+				if (receiver.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+					XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) receiver.eContainer();
+					if (!memberFeatureCall.isExplicitStatic()) {
+						addFeatureScopes(receiverType, context, getContextType(context), null, null, getDefaultPriority(), featureScopeDescriptions);
+					}
+				}
+				IScope result = featureScopeDescriptions.createScope(IScope.NULLSCOPE);
+				return result;
+			}
 			return createFeatureScopeForTypeRef(receiverType, context, null, IScope.NULLSCOPE);
 		} else {
 			return IScope.NULLSCOPE;
 		}
-		
 	}
 	
 

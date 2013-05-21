@@ -91,11 +91,11 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		val result = EcoreUtil2::eAll(xExpression).filter(typeof(XExpression)).filter [ it |
 			switch(it) {
 				XAbstractFeatureCall:
-					!it.typeArguments.empty ||
+					!typeLiteral && !packageFragment && (!it.typeArguments.empty ||
 					switch feature: it.feature {
 						JvmTypeParameterDeclarator: !feature.typeParameters.empty
 						default: false
-					}
+					})
 				XConstructorCall:
 					!it.typeArguments.empty ||
 					!(it.constructor.declaringType as JvmGenericType).typeParameters.empty

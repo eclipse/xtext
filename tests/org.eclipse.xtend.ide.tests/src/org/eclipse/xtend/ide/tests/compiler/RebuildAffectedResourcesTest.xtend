@@ -10,14 +10,13 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.internal.Stopwatches
-import org.junit.Ignore
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
-import org.junit.After
 
 class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 

@@ -70,7 +70,7 @@ public class CompilationTestHelper {
 	 * 
 	 * @param source some valid source code written in the language under test
 	 * @param expected the expected Java source code.
-	 * @throws IOException 
+	 * @throws IOException if the resource loading fails 
 	 */
 	public void assertCompilesTo(CharSequence source, final CharSequence expected) throws IOException {
 		final boolean[] called = {false};
@@ -110,7 +110,7 @@ public class CompilationTestHelper {
 	 *  
 	 * @param source some code written in the language under test.
 	 * @param acceptor gets called once for each file generated in {@link IGenerator}
-	 * @throws IOException 
+	 * @throws IOException if the resource loading fails 
 	 */
 	@SuppressWarnings("unchecked")
 	public void compile(CharSequence source, IAcceptor<Result> acceptor) throws IOException {
@@ -235,8 +235,8 @@ public class CompilationTestHelper {
 	 * creates a fresh resource set with the given resources
 	 * 
 	 * @param resources - pairs of file names and their contents 
-	 * @return a resourceset, containing the given resources.
-	 * @throws IOException 
+	 * @return a ResourceSet, containing the given resources.
+	 * @throws IOException if the resource loading fails 
 	 */
 	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();

@@ -26,6 +26,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 	}
 	
 	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected, boolean validate) {
+		assertFalse (expected.toString.contains("$"))
 		val xtendFile = file(model.toString, validate)
 		val changes = importOrganizer.getOrganizedImportChanges(xtendFile.eResource as XtextResource)
 		val builder = new StringBuilder(model)
@@ -263,7 +264,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import org.eclipse.emf.ecore.resource.Resource
 
 			class Foo {
-			  def void test(Resource$Factory a, Resource$Factory$Registry b) {
+			  def void test(Resource.Factory a, Resource.Factory.Registry b) {
 			  }
 			}
 		''')
@@ -286,8 +287,8 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			class Foo {
 			  def test() {
-			    val x = Resource$Factory$Registry::INSTANCE
-			    val y = EPackage$Registry::INSTANCE
+			    val x = Resource.Factory.Registry::INSTANCE
+			    val y = EPackage.Registry::INSTANCE
 			  }
 			}
 		''', false)
@@ -305,7 +306,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			class Foo {
 			  def test() {
-				 typeof(Resource$Factory) == typeof(Resource$Factory$Registry)
+				 typeof(Resource.Factory) == typeof(Resource.Factory.Registry)
 			  }
 			}
 		''')
@@ -327,7 +328,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			class Foo {
 			  def test() {
-			    typeof(Resource$Factory$Registry) == typeof(EPackage$Registry)
+			    typeof(Resource.Factory.Registry) == typeof(EPackage.Registry)
 			  }
 			}
 		''')
@@ -363,7 +364,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			class Resource {
 			  def test() {
-			    val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE
+			    val x = org.eclipse.emf.ecore.resource.Resource.Factory.Registry::INSTANCE
 			  }
 			}
 		''', false)
@@ -402,8 +403,8 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			class Foo {
 			  def test() {
-			    val x = Resource::Factory::Registry::INSTANCE
-			    val y = EPackage::Registry::INSTANCE
+			    val x = Resource.Factory.Registry::INSTANCE
+			    val y = EPackage.Registry::INSTANCE
 			  }
 			}
 		''', false)
@@ -479,7 +480,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			class Resource {
 			  def test() {
-			    val x = org::eclipse::emf::ecore::resource::Resource::Factory::Registry::INSTANCE
+			    val x = org.eclipse.emf.ecore.resource.Resource.Factory.Registry::INSTANCE
 			  }
 			}
 		''', false)
@@ -591,7 +592,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 			class Foo {
-			  def void test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) {
+			  def void test(XbasePackage.Literals x, XAnnotationsPackage.Literals y) {
 			  }
 			}
 		''')
@@ -631,7 +632,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 			class Foo {
-			  def void test(Literals x, XAnnotationsPackage$Literals y) {
+			  def void test(Literals x, XAnnotationsPackage.Literals y) {
 			  }
 			}
 		''')
@@ -978,7 +979,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import java.util.Map
 
 			class Foo {
-			  def Map$Entry test() {
+			  def Map.Entry test() {
 			    return null
 			  }
 			}
@@ -1000,7 +1001,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import java.util.Map
 
 			class Foo {
-			  def Map$Entry test() {
+			  def Map.Entry test() {
 			    return null
 			  }
 			}
@@ -1022,7 +1023,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import org.eclipse.emf.ecore.resource.Resource
 
 			class Foo {
-			  def Resource$Factory$Descriptor test() {
+			  def Resource.Factory.Descriptor test() {
 			    return null
 			  }
 			}
@@ -1044,7 +1045,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import org.eclipse.emf.ecore.resource.Resource
 
 			class Foo {
-			  def Resource$Factory$Descriptor test() {
+			  def Resource.Factory.Descriptor test() {
 			    return null
 			  }
 			}
@@ -1220,7 +1221,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import java.util.Map
 
 			class Foo {
-			  def Map$Entry test() {
+			  def Map.Entry test() {
 			    return null
 			  }
 			}
@@ -1439,7 +1440,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			import org.eclipse.xtext.service.DispatchingProvider
 
-			@DispatchingProvider$Runtime
+			@DispatchingProvider.Runtime
 			class Foo {
 			}
 		''')
@@ -1499,7 +1500,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			import org.eclipse.xtext.service.DispatchingProvider
 
-			@DispatchingProvider$Runtime
+			@DispatchingProvider.Runtime
 			class Foo {
 			}
 		''')
@@ -1634,7 +1635,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import types.OuterClass
 			
 			class Foo extends OuterClass {
-				OuterClass$MiddleClass foo
+				OuterClass.MiddleClass foo
 			}
 		''')
 	}
@@ -1883,7 +1884,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			package pack
 
 			class Bug406086 {
-				val x = bug406086::^def::Bug406086::FIELD
+				val x = bug406086.^def.Bug406086::FIELD
 			}
 		''')
 	}

@@ -11,17 +11,20 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
-import org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.ui.navigation.TypeLiteralAwareHyperlinkHelper;
 
 import com.google.inject.Inject;
 
 /**
+ * Redirects hyperlinks to the source elements if the referenced target is
+ * an inferred element.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class XtendHyperlinkHelper extends TypeAwareHyperlinkHelper {
+public class XtendHyperlinkHelper extends TypeLiteralAwareHyperlinkHelper {
 
 	@Inject
 	private IJvmModelAssociations associations;
@@ -29,11 +32,12 @@ public class XtendHyperlinkHelper extends TypeAwareHyperlinkHelper {
 	@Override
 	public void createHyperlinksTo(XtextResource from, Region region, EObject to, IHyperlinkAcceptor acceptor) {
 		Set<EObject> sourceElements = associations.getSourceElements(to);
-		if(sourceElements.isEmpty()) 
+		if(sourceElements.isEmpty()) { 
 			super.createHyperlinksTo(from, region, to, acceptor);
-		else 
+		} else { 
 			for(EObject sourceElement: sourceElements) {
 				super.createHyperlinksTo(from, region, sourceElement, acceptor);
 			}
+		}
 	}
 }

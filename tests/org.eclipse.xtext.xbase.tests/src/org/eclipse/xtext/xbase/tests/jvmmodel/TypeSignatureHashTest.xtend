@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
 
-import static org.junit.Assert.*
 import static extension org.eclipse.xtext.util.Strings.*;
 
 /**

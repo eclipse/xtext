@@ -59,37 +59,44 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		if (object instanceof JvmIdentifiableElement) {
 			JvmIdentifiableElement identifiable = (JvmIdentifiableElement) object;
 			StringBuilder builder = new StringBuilder(identifiable.getSimpleName());
-			if (object instanceof JvmExecutable) {
-				JvmExecutable executable = (JvmExecutable) object;
-				builder.append('(');
-				boolean first = true;
-				for(JvmFormalParameter parameter: executable.getParameters()) {
-					if (!first) {
-						builder.append(',');
-					} else {
-						first = false;
-					}
-					if (parameter.getParameterType() != null && parameter.getParameterType().getType() != null)
-						builder.append(parameter.getParameterType().getType().getIdentifier());
-					else
-						builder.append("null");
-				}
-				builder.append(')');
-			}
-			if (getImplicitFirstArgument() != null) {
-				builder.append(":implicitFirstArgument");
-			}
-			if (getImplicitReceiver() != null) {
-				builder.append(":implicitReceiver");
-			}
-			if (isVisible()) {
-				builder.append('+');
-			} else {
-				builder.append('-');
-			}
+			computeShadowingKey(identifiable, builder);
 			return builder.toString();
 		}
 		return getName().toString() + (isVisible() ? '+' : '-');
+	}
+
+	protected void computeShadowingKey(JvmIdentifiableElement identifiable, StringBuilder result) {
+		if (identifiable instanceof JvmExecutable) {
+			JvmExecutable executable = (JvmExecutable) identifiable;
+			result.append('(');
+			boolean first = true;
+			for(JvmFormalParameter parameter: executable.getParameters()) {
+				if (!first) {
+					result.append(',');
+				} else {
+					first = false;
+				}
+				if (parameter.getParameterType() != null && parameter.getParameterType().getType() != null)
+					result.append(parameter.getParameterType().getType().getIdentifier());
+				else
+					result.append("null");
+			}
+			result.append(')');
+		}
+		if (getImplicitFirstArgument() != null) {
+			result.append(":implicitFirstArgument");
+		}
+		if (getImplicitReceiver() != null) {
+			result.append(":implicitReceiver");
+		}
+		if (isTypeLiteral()) {
+			result.append(":typeLiteral");
+		}
+		if (isVisible()) {
+			result.append('+');
+		} else {
+			result.append('-');
+		}
 	}
 	
 	public int getBucketId() {
@@ -128,6 +135,10 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return null;
 	}
 	
+	public boolean isSyntacticReceiverPossibleArgument() {
+		return true;
+	}
+	
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 		return Collections.emptyMap();
 	}
@@ -157,6 +168,10 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 	@Nullable
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return null;
+	}
+	
+	public boolean isTypeLiteral() {
+		return false;
 	}
 
 }

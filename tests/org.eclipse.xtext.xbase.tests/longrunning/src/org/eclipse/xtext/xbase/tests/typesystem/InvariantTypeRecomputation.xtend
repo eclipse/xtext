@@ -28,6 +28,7 @@ import org.junit.Assert
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
 import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
+import org.eclipse.xtext.xbase.typesystem.internal.ITypeLiteralLinkingCandidate
 
 /**
  * @author Sebastian Zarnekow
@@ -81,6 +82,24 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 			assertEqualLinkingData(firstLinkingData, secondLinkingData)
 		]
 		return result
+	}
+	
+	def dispatch void assertEqualLinkingData(ITypeLiteralLinkingCandidate left, ITypeLiteralLinkingCandidate right) {
+		Assert::assertEquals('type', left.type, right.type)
+		Assert::assertEquals('featureCall', left.featureCall, right.featureCall)
+		doAssertEqualLinkingData(left, right)
+		
+		Assert::assertEquals('isStatic', left.isStatic, right.isStatic)
+		Assert::assertEquals('isTypeLiteral', left.isTypeLiteral, right.isTypeLiteral)
+		Assert::assertEquals('isExtension', left.isExtension, right.isExtension)
+	}
+	
+	def dispatch void assertEqualLinkingData(ITypeLiteralLinkingCandidate left, ILinkingCandidate right) {
+		Assert::fail('''«left» vs «right»''')
+	}
+	
+	def dispatch void assertEqualLinkingData(ILinkingCandidate left, ITypeLiteralLinkingCandidate right) {
+		Assert::fail('''«left» vs «right»''')
 	}
 	
 	def dispatch void assertEqualLinkingData(IConstructorLinkingCandidate left, IConstructorLinkingCandidate right) {
@@ -145,6 +164,7 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 		assertEqualTypes('syntacticReceiverType', left.invokeAndCast("getSyntacticReceiverType"), left.invokeAndCast("getSyntacticReceiverType"))
 		
 		Assert::assertEquals('isStatic', left.isStatic, right.isStatic)
+		Assert::assertEquals('isTypeLiteral', left.isTypeLiteral, right.isTypeLiteral)
 		Assert::assertEquals('syntacticReceiver', left.invoke('getSyntacticReceiver'), right.invoke('getSyntacticReceiver'))
 		Assert::assertEquals('isExtension', left.isExtension, right.isExtension)
 		

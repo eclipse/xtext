@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.internal.ITypeLiteralLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument;
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitReceiver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
@@ -117,6 +119,41 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
       };
     MapExtensions.<XExpression, ILinkingCandidate>forEach(firstRun, _function);
     return result;
+  }
+  
+  protected void _assertEqualLinkingData(final ITypeLiteralLinkingCandidate left, final ITypeLiteralLinkingCandidate right) {
+    JvmType _type = left.getType();
+    JvmType _type_1 = right.getType();
+    Assert.assertEquals("type", _type, _type_1);
+    XAbstractFeatureCall _featureCall = left.getFeatureCall();
+    XAbstractFeatureCall _featureCall_1 = right.getFeatureCall();
+    Assert.assertEquals("featureCall", _featureCall, _featureCall_1);
+    this.doAssertEqualLinkingData(left, right);
+    boolean _isStatic = left.isStatic();
+    boolean _isStatic_1 = right.isStatic();
+    Assert.assertEquals("isStatic", Boolean.valueOf(_isStatic), Boolean.valueOf(_isStatic_1));
+    boolean _isTypeLiteral = left.isTypeLiteral();
+    boolean _isTypeLiteral_1 = right.isTypeLiteral();
+    Assert.assertEquals("isTypeLiteral", Boolean.valueOf(_isTypeLiteral), Boolean.valueOf(_isTypeLiteral_1));
+    boolean _isExtension = left.isExtension();
+    boolean _isExtension_1 = right.isExtension();
+    Assert.assertEquals("isExtension", Boolean.valueOf(_isExtension), Boolean.valueOf(_isExtension_1));
+  }
+  
+  protected void _assertEqualLinkingData(final ITypeLiteralLinkingCandidate left, final ILinkingCandidate right) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(left, "");
+    _builder.append(" vs ");
+    _builder.append(right, "");
+    Assert.fail(_builder.toString());
+  }
+  
+  protected void _assertEqualLinkingData(final ILinkingCandidate left, final ITypeLiteralLinkingCandidate right) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(left, "");
+    _builder.append(" vs ");
+    _builder.append(right, "");
+    Assert.fail(_builder.toString());
   }
   
   protected void _assertEqualLinkingData(final IConstructorLinkingCandidate left, final IConstructorLinkingCandidate right) {
@@ -243,6 +280,9 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
       boolean _isStatic = left.isStatic();
       boolean _isStatic_1 = right.isStatic();
       Assert.assertEquals("isStatic", Boolean.valueOf(_isStatic), Boolean.valueOf(_isStatic_1));
+      boolean _isTypeLiteral = left.isTypeLiteral();
+      boolean _isTypeLiteral_1 = right.isTypeLiteral();
+      Assert.assertEquals("isTypeLiteral", Boolean.valueOf(_isTypeLiteral), Boolean.valueOf(_isTypeLiteral_1));
       Object _invoke_8 = this._reflectExtensions.invoke(left, "getSyntacticReceiver");
       Object _invoke_9 = this._reflectExtensions.invoke(right, "getSyntacticReceiver");
       Assert.assertEquals("syntacticReceiver", _invoke_8, _invoke_9);
@@ -385,6 +425,10 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
          && right instanceof IFeatureLinkingCandidate) {
       _assertEqualLinkingData((ImplicitReceiver)left, (IFeatureLinkingCandidate)right);
       return;
+    } else if (left instanceof ITypeLiteralLinkingCandidate
+         && right instanceof ITypeLiteralLinkingCandidate) {
+      _assertEqualLinkingData((ITypeLiteralLinkingCandidate)left, (ITypeLiteralLinkingCandidate)right);
+      return;
     } else if (left instanceof TypeInsteadOfConstructorLinkingCandidate
          && right instanceof TypeInsteadOfConstructorLinkingCandidate) {
       _assertEqualLinkingData((TypeInsteadOfConstructorLinkingCandidate)left, (TypeInsteadOfConstructorLinkingCandidate)right);
@@ -392,6 +436,10 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     } else if (left instanceof TypeInsteadOfConstructorLinkingCandidate
          && right instanceof IConstructorLinkingCandidate) {
       _assertEqualLinkingData((TypeInsteadOfConstructorLinkingCandidate)left, (IConstructorLinkingCandidate)right);
+      return;
+    } else if (left instanceof ITypeLiteralLinkingCandidate
+         && right != null) {
+      _assertEqualLinkingData((ITypeLiteralLinkingCandidate)left, right);
       return;
     } else if (left instanceof IFeatureLinkingCandidate
          && right instanceof ImplicitReceiver) {
@@ -408,6 +456,10 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     } else if (left instanceof IFeatureLinkingCandidate
          && right instanceof IFeatureLinkingCandidate) {
       _assertEqualLinkingData((IFeatureLinkingCandidate)left, (IFeatureLinkingCandidate)right);
+      return;
+    } else if (left != null
+         && right instanceof ITypeLiteralLinkingCandidate) {
+      _assertEqualLinkingData(left, (ITypeLiteralLinkingCandidate)right);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

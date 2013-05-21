@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.tests.serializer;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -47,7 +47,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		closure.setExplicitSyntax(true);
 		XInstanceOfExpression instanceOfExpression = factory.createXInstanceOfExpression();
 		instanceOfExpression.setExpression(closure);
-		instanceOfExpression.setType(EcoreUtil2.clone(casted.getType()));
+		instanceOfExpression.setType(EcoreUtil.copy(casted.getType()));
 		resource.getContents().clear();
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
@@ -67,7 +67,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		ifExpression.setThen(stringLiteral);
 		XInstanceOfExpression instanceOfExpression = factory.createXInstanceOfExpression();
 		instanceOfExpression.setExpression(ifExpression);
-		instanceOfExpression.setType(EcoreUtil2.clone(casted.getType()));
+		instanceOfExpression.setType(EcoreUtil.copy(casted.getType()));
 		resource.getContents().clear();
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);

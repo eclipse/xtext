@@ -441,7 +441,9 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				if(context == grammarAccess.getXAnnotationElementValueRule() ||
 				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
 				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
-				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
+				   context == grammarAccess.getXAnnotationValueFieldReferenceRule() ||
+				   context == grammarAccess.getXAnnotationValueMemberFieldReferenceRule() ||
+				   context == grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getXMemberFeatureCallMemberCallTargetAction_1_0()) {
 					sequence_XAnnotationValueFieldReference(context, (XFeatureCall) semanticObject); 
 					return; 
 				}
@@ -614,7 +616,15 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				}
 				else break;
 			case XbasePackage.XMEMBER_FEATURE_CALL:
-				if(context == grammarAccess.getXAdditiveExpressionRule() ||
+				if(context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationValueMemberFieldReferenceRule() ||
+				   context == grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getXMemberFeatureCallMemberCallTargetAction_1_0()) {
+					sequence_XAnnotationValueMemberFieldReference(context, (XMemberFeatureCall) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -1102,9 +1112,18 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	
 	/**
 	 * Constraint:
-	 *     (declaringType=[JvmDeclaredType|StaticQualifier]? feature=[JvmIdentifiableElement|IdOrSuper])
+	 *     feature=[JvmIdentifiableElement|IdOrSuper]
 	 */
 	protected void sequence_XAnnotationValueFieldReference(EObject context, XFeatureCall semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (memberCallTarget=XAnnotationValueMemberFieldReference_XMemberFeatureCall_1_0 explicitStatic?='::'? feature=[JvmIdentifiableElement|IdOrSuper])
+	 */
+	protected void sequence_XAnnotationValueMemberFieldReference(EObject context, XMemberFeatureCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
