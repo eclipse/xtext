@@ -493,13 +493,22 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL__NULL_SAFE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Type Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__TYPE_LITERAL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>XMember Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 5;
+	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
@@ -593,13 +602,22 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__DECLARING_TYPE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Type Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__TYPE_LITERAL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>XFeature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -1946,6 +1964,17 @@ public interface XbasePackage extends EPackage
 	EAttribute getXMemberFeatureCall_NullSafe();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral <em>Type Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_TypeLiteral();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1987,6 +2016,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXFeatureCall_DeclaringType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral <em>Type Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXFeatureCall_TypeLiteral();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
@@ -2926,6 +2966,14 @@ public interface XbasePackage extends EPackage
 		EAttribute XMEMBER_FEATURE_CALL__NULL_SAFE = eINSTANCE.getXMemberFeatureCall_NullSafe();
 
 		/**
+		 * The meta object literal for the '<em><b>Type Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__TYPE_LITERAL = eINSTANCE.getXMemberFeatureCall_TypeLiteral();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2958,6 +3006,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XFEATURE_CALL__DECLARING_TYPE = eINSTANCE.getXFeatureCall_DeclaringType();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XFEATURE_CALL__TYPE_LITERAL = eINSTANCE.getXFeatureCall_TypeLiteral();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.

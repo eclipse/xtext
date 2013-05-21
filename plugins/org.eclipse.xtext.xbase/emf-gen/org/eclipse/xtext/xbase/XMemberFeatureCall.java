@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading <em>Spreading</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isNullSafe <em>Null Safe</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral <em>Type Literal</em>}</li>
  * </ul>
  * </p>
  *
@@ -150,5 +151,31 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	 * @generated
 	 */
 	void setNullSafe(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Literal</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Literal</em>' attribute.
+	 * @see #setTypeLiteral(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_TypeLiteral()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	boolean isTypeLiteral();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Literal</em>' attribute.
+	 * @see #isTypeLiteral()
+	 * @generated
+	 */
+	void setTypeLiteral(boolean value);
 
 } // XMemberFeatureCall

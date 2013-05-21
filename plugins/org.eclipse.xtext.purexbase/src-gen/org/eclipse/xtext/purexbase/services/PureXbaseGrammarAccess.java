@@ -634,7 +634,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//// StaticQualifier: ValidID ('::' ValidID)*; and XFeatureCall: (StaticQualifier '::')? ValidID
 	//// Make sure to change the value converter if you change the syntax of the StaticQualifier
 	//StaticQualifier:
-	//	(ValidID "::")+;
+	//	(ValidID "::")+ | ValidID ("." ValidID)+ "::";
 	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
 		return gaXbase.getStaticQualifierAccess();
 	}

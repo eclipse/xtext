@@ -62,6 +62,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXFeatureCallAccess().getAlternatives_4_1(), "rule__XFeatureCall__Alternatives_4_1");
 					put(grammarAccess.getFeatureCallIDAccess().getAlternatives(), "rule__FeatureCallID__Alternatives");
 					put(grammarAccess.getIdOrSuperAccess().getAlternatives(), "rule__IdOrSuper__Alternatives");
+					put(grammarAccess.getStaticQualifierAccess().getAlternatives(), "rule__StaticQualifier__Alternatives");
 					put(grammarAccess.getXConstructorCallAccess().getAlternatives_4_1(), "rule__XConstructorCall__Alternatives_4_1");
 					put(grammarAccess.getXBooleanLiteralAccess().getAlternatives_1(), "rule__XBooleanLiteral__Alternatives_1");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getAlternatives_3(), "rule__XTryCatchFinallyExpression__Alternatives_3");
@@ -183,7 +184,9 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXFeatureCallAccess().getGroup_4(), "rule__XFeatureCall__Group_4__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup_4_1_1(), "rule__XFeatureCall__Group_4_1_1__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup_4_1_1_1(), "rule__XFeatureCall__Group_4_1_1_1__0");
-					put(grammarAccess.getStaticQualifierAccess().getGroup(), "rule__StaticQualifier__Group__0");
+					put(grammarAccess.getStaticQualifierAccess().getGroup_0(), "rule__StaticQualifier__Group_0__0");
+					put(grammarAccess.getStaticQualifierAccess().getGroup_1(), "rule__StaticQualifier__Group_1__0");
+					put(grammarAccess.getStaticQualifierAccess().getGroup_1_1(), "rule__StaticQualifier__Group_1_1__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup(), "rule__XConstructorCall__Group__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup_3(), "rule__XConstructorCall__Group_3__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup_3_2(), "rule__XConstructorCall__Group_3_2__0");

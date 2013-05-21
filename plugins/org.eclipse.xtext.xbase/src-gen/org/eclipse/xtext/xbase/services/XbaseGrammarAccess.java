@@ -2421,25 +2421,53 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class StaticQualifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StaticQualifier");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cValidIDParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword cColonColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final RuleCall cValidIDParserRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
+		private final Keyword cColonColonKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final RuleCall cValidIDParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final RuleCall cValidIDParserRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
+		private final Keyword cColonColonKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//// This is a workaround since ANTLR will not be able to resolve
 		//// StaticQualifier: ValidID ('::' ValidID)*; and XFeatureCall: (StaticQualifier '::')? ValidID
 		//// Make sure to change the value converter if you change the syntax of the StaticQualifier
 		//StaticQualifier:
-		//	(ValidID "::")+;
+		//	(ValidID "::")+ | ValidID ("." ValidID)+ "::";
 		public ParserRule getRule() { return rule; }
 
+		//(ValidID "::")+ | ValidID ("." ValidID)+ "::"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
 		//(ValidID "::")+
-		public Group getGroup() { return cGroup; }
+		public Group getGroup_0() { return cGroup_0; }
 
 		//ValidID
-		public RuleCall getValidIDParserRuleCall_0() { return cValidIDParserRuleCall_0; }
+		public RuleCall getValidIDParserRuleCall_0_0() { return cValidIDParserRuleCall_0_0; }
 
 		//"::"
-		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
+		public Keyword getColonColonKeyword_0_1() { return cColonColonKeyword_0_1; }
+
+		//ValidID ("." ValidID)+ "::"
+		public Group getGroup_1() { return cGroup_1; }
+
+		//ValidID
+		public RuleCall getValidIDParserRuleCall_1_0() { return cValidIDParserRuleCall_1_0; }
+
+		//(=> "." ValidID)+
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//=> "."
+		public Keyword getFullStopKeyword_1_1_0() { return cFullStopKeyword_1_1_0; }
+
+		//ValidID
+		public RuleCall getValidIDParserRuleCall_1_1_1() { return cValidIDParserRuleCall_1_1_1; }
+
+		//"::"
+		public Keyword getColonColonKeyword_1_2() { return cColonColonKeyword_1_2; }
 	}
 
 	public class XConstructorCallElements extends AbstractParserRuleElementFinder {
@@ -3557,7 +3585,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//// StaticQualifier: ValidID ('::' ValidID)*; and XFeatureCall: (StaticQualifier '::')? ValidID
 	//// Make sure to change the value converter if you change the syntax of the StaticQualifier
 	//StaticQualifier:
-	//	(ValidID "::")+;
+	//	(ValidID "::")+ | ValidID ("." ValidID)+ "::";
 	public StaticQualifierElements getStaticQualifierAccess() {
 		return (pStaticQualifier != null) ? pStaticQualifier : (pStaticQualifier = new StaticQualifierElements());
 	}
