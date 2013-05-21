@@ -75,6 +75,10 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 	public boolean isStatic() {
 		return false;
 	}
+	
+	public boolean isTypeLiteral() {
+		return false;
+	}
 
 	public boolean isExtension() {
 		return false;

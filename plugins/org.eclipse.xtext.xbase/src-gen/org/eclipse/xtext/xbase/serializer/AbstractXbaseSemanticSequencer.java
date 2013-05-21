@@ -1044,7 +1044,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (
 	 *         (feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment) | 
-	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment)
+	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 explicitStatic?='::'? feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment)
 	 *     )
 	 */
 	protected void sequence_XAssignment_XMemberFeatureCall(EObject context, XAssignment semanticObject) {
@@ -1174,7 +1174,6 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	/**
 	 * Constraint:
 	 *     (
-	 *         declaringType=[JvmDeclaredType|StaticQualifier]? 
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
 	 *         feature=[JvmIdentifiableElement|IdOrSuper] 
 	 *         (explicitOperationCall?='(' (featureCallArguments+=XShortClosure | (featureCallArguments+=XExpression featureCallArguments+=XExpression*))?)? 
@@ -1230,7 +1229,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (
 	 *         memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0 
-	 *         (nullSafe?='?.' | spreading?='*.')? 
+	 *         (nullSafe?='?.' | explicitStatic?='::')? 
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
 	 *         feature=[JvmIdentifiableElement|FeatureCallID] 
 	 *         (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)? 

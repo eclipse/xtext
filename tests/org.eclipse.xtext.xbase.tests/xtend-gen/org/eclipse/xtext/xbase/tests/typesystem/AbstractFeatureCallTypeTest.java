@@ -71,6 +71,26 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
     }
   }
   
+  protected Iterable<XAbstractFeatureCall> filterTypeLiteralsAndPackageFragments(final Iterable<XAbstractFeatureCall> featureCalls) {
+    final Function1<XAbstractFeatureCall,Boolean> _function = new Function1<XAbstractFeatureCall,Boolean>() {
+        public Boolean apply(final XAbstractFeatureCall it) {
+          boolean _and = false;
+          boolean _isPackageFragment = it.isPackageFragment();
+          boolean _not = (!_isPackageFragment);
+          if (!_not) {
+            _and = false;
+          } else {
+            boolean _isTypeLiteral = it.isTypeLiteral();
+            boolean _not_1 = (!_isTypeLiteral);
+            _and = (_not && _not_1);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+    Iterable<XAbstractFeatureCall> _filter = IterableExtensions.<XAbstractFeatureCall>filter(featureCalls, _function);
+    return _filter;
+  }
+  
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {

@@ -42,6 +42,10 @@ public class NullFeatureLinkingCandidate extends AbstractNullLinkingCandidate im
 		return false;
 	}
 	
+	public boolean isTypeLiteral() {
+		return false;
+	}
+	
 	public void applyToComputationState() {
 		FeatureLinkHelper helper = new FeatureLinkHelper();
 		XExpression receiver = helper.getSyntacticReceiver(getFeatureCall());

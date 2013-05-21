@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 
 import com.google.inject.Inject;
 
@@ -62,6 +65,9 @@ public class FeatureScopes implements IFeatureNames {
 	
 	@Inject(optional = true)
 	private XbaseFactory xbaseFactory = XbaseFactory.eINSTANCE;
+	
+	@Inject
+	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
 	
 	/**
 	 * creates the feature scope for {@link XAbstractFeatureCall}, including the local variables in case it is a feature
@@ -92,17 +98,14 @@ public class FeatureScopes implements IFeatureNames {
 	 * @param reference the reference who's value shall be scoped. Not necessarily a feature of the context.
 	 */
 	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		IScope root = IScope.NULLSCOPE;
 		if (context instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) context;
-			JvmDeclaredType declaringType = featureCall.getDeclaringType();
-			if (declaringType != null) {
-				if (declaringType.eIsProxy()) {
-					return createFollowUpErrorScope();
-				}
-				return createStaticScope(featureCall, declaringType, null, null, IScope.NULLSCOPE, session);
+			if (!featureCall.isExplicitOperationCallOrBuilderSyntax()) {
+				root = createTypeLiteralScope(context, root, session, resolvedTypes, QualifiedName.EMPTY);		
 			}
 		}
-		IScope staticImports = createStaticFeaturesScope(context, IScope.NULLSCOPE, session);
+		IScope staticImports = createStaticFeaturesScope(context, root, session);
 		IScope staticMembers = createStaticScope(asAbstractFeatureCall(context), null, null, staticImports, session, resolvedTypes);
 		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticMembers, session, resolvedTypes);
 		IScope dynamicExtensions = createDynamicExtensionsScope(null, null, context, staticExtensions, session, resolvedTypes);
@@ -176,11 +179,17 @@ public class FeatureScopes implements IFeatureNames {
 		LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
 		if (receiverType != null && !isUnknownReceiverType(receiverType)) {
 			JvmIdentifiableElement linkedReceiver = resolvedTypes.getLinkedFeature(asAbstractFeatureCall(receiver));
+			boolean typeLiteral = false;
+			IScope root = createTypeLiteralScope(featureCall, receiver, session, resolvedTypes, receiverType, linkedReceiver);
+			if (root != null) {
+				typeLiteral = true;
+			} else {
+				root = IScope.NULLSCOPE;
+			}
 			// check if 'super' was used as receiver which renders extension features and static features invalid
-			if (isValidFeatureCallArgument(receiver, linkedReceiver, session)) {
-				
+			if (typeLiteral || isValidFeatureCallArgument(receiver, linkedReceiver, session)) {
 				// static members that are invoked on a receiver, e.g. myString.CASE_INSENSITIVE_ORDER
-				IScope staticScope = createStaticScope(asAbstractFeatureCall(featureCall), receiver, receiverType, IScope.NULLSCOPE, session, resolvedTypes);
+				IScope staticScope = createStaticScope(asAbstractFeatureCall(featureCall), receiver, receiverType, root, session, resolvedTypes);
 				
 				// static extensions, if any, e.g. iterable.map [], or things that have been imported by means of import static extension MyType
 				IScope staticExtensionScope = createStaticExtensionsScope(receiver, receiverType, featureCall, staticScope, session, resolvedTypes);
@@ -191,15 +200,36 @@ public class FeatureScopes implements IFeatureNames {
 				// instance members, e.g. this.toString
 				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, extensionScope);
 			} else {
-				
 				// put only instance members into the scope
 				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, IScope.NULLSCOPE);
 			}
+		} else if (typeLiteralHelper.isPotentialTypeLiteral(featureCall, resolvedTypes)) {
+			IScope errorScope = createFollowUpErrorScope(receiverType);
+			List<String> prefix = typeLiteralHelper.getTypeNameSegmentsFromConcreteSyntax((XMemberFeatureCall) featureCall);
+			if (prefix == null) {
+				return errorScope;
+			}
+			return createTypeLiteralScope(featureCall, errorScope, session, resolvedTypes, QualifiedName.create(prefix));
 		} else {
-			return createFollowUpErrorScope();
+			return createFollowUpErrorScope(receiverType);
 		}
 	}
-	
+
+	@Nullable
+	private IScope createTypeLiteralScope(XExpression featureCall, XExpression receiver, IFeatureScopeSession session,
+			IResolvedTypes resolvedTypes, LightweightTypeReference receiverType, JvmIdentifiableElement linkedReceiver) {
+		if (linkedReceiver instanceof JvmDeclaredType) {
+			IFeatureLinkingCandidate candidate = resolvedTypes.getLinkingCandidate(asAbstractFeatureCall(receiver));
+			if (candidate != null && candidate.isTypeLiteral()) {
+				JvmDeclaredType declaringType = (JvmDeclaredType) linkedReceiver;
+				IScope result = new NestedTypeLiteralScope(IScope.NULLSCOPE, session, asAbstractFeatureCall(featureCall), receiverType, declaringType);
+				result = createStaticFeatureOnTypeLiteralScope(asAbstractFeatureCall(featureCall), declaringType, receiver, receiverType, result, session);
+				return result;
+			}
+		}
+		return null;
+	}
+
 	protected boolean isUnknownReceiverType(LightweightTypeReference receiverType) {
 		if (receiverType.isUnknown()) {
 			return true;
@@ -215,11 +245,11 @@ public class FeatureScopes implements IFeatureNames {
 		return false;
 	}
 
-	protected IScope createFollowUpErrorScope() {
+	protected IScope createFollowUpErrorScope(@Nullable final LightweightTypeReference receiverType) {
 		return new SimpleScope(Collections.<IEObjectDescription>emptyList()) {
 			@Override
 			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-				return Collections.<IEObjectDescription>singletonList(new ScopeProviderAccess.ErrorDescription());
+				return Collections.<IEObjectDescription>singletonList(new ScopeProviderAccess.ErrorDescription(receiverType));
 			}
 		};
 	}
@@ -269,6 +299,12 @@ public class FeatureScopes implements IFeatureNames {
 			IScope parent, IFeatureScopeSession session) {
 		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type));
 		return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
+	}
+	
+	protected IScope createStaticFeatureOnTypeLiteralScope(XAbstractFeatureCall featureCall, JvmType type, XExpression receiver, LightweightTypeReference receiverType,
+			IScope parent, IFeatureScopeSession session) {
+		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type));
+		return new StaticFeatureOnTypeLiteralScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
 	}
 	
 	protected IScope createDynamicExtensionsScope(XExpression firstArgument, LightweightTypeReference firstArgumentType, EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
@@ -329,6 +365,10 @@ public class FeatureScopes implements IFeatureNames {
 		return null;
 	}
 
+	protected IScope createTypeLiteralScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes, QualifiedName parentSegments) {
+		return new TypeLiteralScope(parent, session, asAbstractFeatureCall(featureCall), resolvedTypes, parentSegments);
+	}
+	
 	protected IScope createStaticFeaturesScope(EObject featureCall, IScope parent, IFeatureScopeSession session) {
 		return new StaticImportsScope(parent, session, asAbstractFeatureCall(featureCall));
 	}

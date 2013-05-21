@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import static com.google.common.collect.Iterables.*;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
