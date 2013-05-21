@@ -189,18 +189,24 @@ ruleXCastedExpression :
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
 		( (
-		'.' ruleFeatureCallID ruleOpSingleAssign
+		(
+			'.' |
+			'::'
+		) ruleFeatureCallID ruleOpSingleAssign
 		) => (
-			'.' ruleFeatureCallID ruleOpSingleAssign
+			(
+				'.' |
+				'::'
+			) ruleFeatureCallID ruleOpSingleAssign
 		) ) ruleXAssignment |
 		( (
 		'.' |
 		'?.' |
-		'*.'
+		'::'
 		) => (
 			'.' |
 			'?.' |
-			'*.'
+			'::'
 		) ) (
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
@@ -419,7 +425,7 @@ ruleFullJvmFormalParameter :
 
 // Rule XFeatureCall
 ruleXFeatureCall :
-	ruleStaticQualifier? (
+	(
 		'<' ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
 		)* '>'
@@ -456,13 +462,6 @@ ruleFeatureCallID :
 ruleIdOrSuper :
 	ruleFeatureCallID |
 	'super'
-;
-
-// Rule StaticQualifier
-ruleStaticQualifier :
-	(
-		ruleValidID '::'
-	)+
 ;
 
 // Rule XConstructorCall

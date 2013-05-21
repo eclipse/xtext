@@ -15,7 +15,7 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :
-	{XAssignment} /* (declaringType=[types::JvmDeclaredType] '::')? */ feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |	
+	{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |	
 	XOrExpression (
 		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
 	)?;
@@ -96,8 +96,8 @@ XCastedExpression returns XExpression:
 
 XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
-	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
-	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|spreading?="*.")) 
+	(=>({XAssignment.assignable=current} ('.'|explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|explicitStatic?="::")) 
 		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
 		feature=[types::JvmIdentifiableElement|FeatureCallID] (
 			=>explicitOperationCall?='(' 
@@ -219,7 +219,6 @@ FullJvmFormalParameter returns types::JvmFormalParameter:
 
 XFeatureCall returns XExpression:
 	{XFeatureCall}
-	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
 	feature=[types::JvmIdentifiableElement|IdOrSuper] 
 	(=>explicitOperationCall?='(' 
@@ -238,13 +237,6 @@ IdOrSuper :
 	FeatureCallID | 'super'
 ;
 	
-// This is a workaround since ANTLR will not be able to resolve
-// StaticQualifier: ValidID ('::' ValidID)*; and XFeatureCall: (StaticQualifier '::')? ValidID
-// Make sure to change the value converter if you change the syntax of the StaticQualifier
-StaticQualifier:
-	(ValidID '::')+
-;
-
 XConstructorCall returns XExpression:
 	{XConstructorCall}
 	'new' constructor=[types::JvmConstructor|QualifiedName] 

@@ -14,6 +14,7 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 	@Inject extension WorkbenchTestHelper
 	
 	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected) {
+		assertFalse (expected.toString.contains("$"))
 		val xtendFile = xtendFile("Foo", model.toString)
 		val changes = importOrganizer.getOrganizedImportChanges(xtendFile.eResource as XtextResource)
 		val builder = new StringBuilder(model)
@@ -41,7 +42,7 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 		'''.assertIsOrganizedTo('''
 			import java.util.Map
 			
-			class Foo implements Map$Entry {
+			class Foo implements Map.Entry {
 			}
 		''')
 	}
@@ -58,7 +59,55 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			
 			class Foo {
 				def m() {
-					Map$Entry::DoesNotMatter
+					Map.Entry::DoesNotMatter
+				}
+			}
+		''')
+	}
+	
+	@Test def testUnresolvedNestedType_03() {
+		'''
+			class Foo implements Map.Entry {
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Map
+			
+			class Foo implements Map.Entry {
+			}
+		''')
+	}
+	
+	@Test def testUnresolvedNestedType_04() {
+		'''
+			class Foo {
+				def m() {
+					Map.Entry::DoesNotMatter
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Map
+			
+			class Foo {
+				def m() {
+					Map.Entry::DoesNotMatter
+				}
+			}
+		''')
+	}
+	
+	@Test def testUnresolvedNestedType_05() {
+		'''
+			class Foo {
+				def m() {
+					Map::Entry::DoesNotMatter
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Map
+			
+			class Foo {
+				def m() {
+					Map.Entry::DoesNotMatter
 				}
 			}
 		''')

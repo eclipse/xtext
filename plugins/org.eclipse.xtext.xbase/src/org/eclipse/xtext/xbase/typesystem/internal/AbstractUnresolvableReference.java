@@ -41,10 +41,11 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 	}
 
 	public void applyToComputationState() {
-		state.getResolvedTypes().acceptLinkingInformation(expression, this);
+		StackedResolvedTypes resolvedTypes = getResolvedTypes();
+		resolvedTypes.acceptLinkingInformation(expression, this);
 		computeArgumentTypes();
 		applyType();
-		getResolvedTypes().mergeIntoParent();
+		resolvedTypes.mergeIntoParent();
 	}
 
 	protected void applyType() {
