@@ -21,11 +21,5 @@ public class XbaseWithAnnotationsProposalProvider extends AbstractXbaseWithAnnot
 		completeJavaTypes(context, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, 
 				TypeMatchFilters.all(IJavaSearchConstants.ANNOTATION_TYPE), acceptor);
 	}
-	
-	@Override
-	public void completeXAnnotationValueFieldReference_DeclaringType(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		proposeDeclaringTypeForStaticInvocation(model, assignment, context, acceptor);
-	}
 
 }

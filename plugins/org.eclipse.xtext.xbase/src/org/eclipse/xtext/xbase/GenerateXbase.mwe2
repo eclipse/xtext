@@ -116,7 +116,9 @@ Workflow {
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = formatting.FormatterFragment {}
 			fragment = quickfix.QuickfixProviderFragment {}
-			fragment = labeling.LabelProviderFragment {}
+			fragment = labeling.LabelProviderFragment {
+				generateStub = false
+			}
 			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
@@ -153,7 +155,9 @@ Workflow {
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = formatting.FormatterFragment {}
 			fragment = quickfix.QuickfixProviderFragment {}
-			fragment = labeling.LabelProviderFragment {}
+			fragment = labeling.LabelProviderFragment {
+				generateXtendStub = true
+			}
 			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {

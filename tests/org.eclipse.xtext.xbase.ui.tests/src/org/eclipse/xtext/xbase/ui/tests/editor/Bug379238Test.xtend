@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
 import org.junit.Test
 
-import static org.junit.Assert.*
 import org.eclipse.jface.text.Region
 
 /**
@@ -28,8 +27,6 @@ class Bug379238Test extends AbstractXbaseUITestCase {
 	
 	@Inject
 	TestingXbaseHoverProvider hoverProvider
-	
-	
 	
 	@Test
 	def testXConstructorWithNullConstructorNoException() throws Exception {

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -27,13 +28,17 @@ import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
@@ -45,6 +50,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -140,7 +146,11 @@ public class ScopeProviderAccess {
 				QualifiedName qualifiedLinkName = qualifiedNameConverter.toQualifiedName(crossRefString);
 				Iterable<IEObjectDescription> descriptions = scope.getElements(qualifiedLinkName);
 				if (Iterables.isEmpty(descriptions)) {
-					return Collections.<IEObjectDescription>singletonList(new ErrorDescription(node, qualifiedLinkName));
+					INode errorNode = getErrorNode(expression, node);
+					if (errorNode != node) {
+						qualifiedLinkName = getErrorName(errorNode);
+					}
+					return Collections.<IEObjectDescription>singletonList(new ErrorDescription(getErrorNode(expression, node), qualifiedLinkName));
 				}
 				return descriptions;
 			}
@@ -150,22 +160,99 @@ public class ScopeProviderAccess {
 		}
 	}
 	
+	private QualifiedName getErrorName(INode errorNode) {
+		List<String> segments = Lists.newArrayListWithCapacity(4);
+		for(ILeafNode leaf: errorNode.getLeafNodes()) {
+			if (!leaf.isHidden()) {
+				String text = leaf.getText();
+				// XParenthesizedExpression
+				if (text.equals("(") || text.equals(")")) {
+					continue;
+				}
+				if (!text.equals(".") && !text.equals("::")) {
+					if (text.charAt(0) == '^')
+						segments.add(text.substring(1));
+					else
+						segments.add(text);
+				}
+			}
+		}
+		return QualifiedName.create(segments);
+	}
+	
+	/**
+	 * Returns the node that best describes the error, e.g. if there is an expression
+	 * <code>com::foo::DoesNotExist::method()</code> the error will be rooted at <code>com</code>, but
+	 * the real problem is <code>com::foo::DoesNotExist</code>.
+	 */
+	private INode getErrorNode(XExpression expression, INode node) {
+		if (expression instanceof XFeatureCall) {
+			XFeatureCall featureCall = (XFeatureCall) expression;
+			if (!canBeTypeLiteral(featureCall)) {
+				return node;
+			}
+			if (featureCall.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+				XMemberFeatureCall container = (XMemberFeatureCall) featureCall.eContainer();
+				if (canBeTypeLiteral(container)) {
+					boolean explicitStatic = container.isExplicitStatic();
+					XMemberFeatureCall outerMost = getLongestTypeLiteralCandidate(container, explicitStatic);
+					if (outerMost != null)
+						return NodeModelUtils.getNode(outerMost);
+				}
+			}
+		}
+		return node;
+	}
+
+	@Nullable
+	private XMemberFeatureCall getLongestTypeLiteralCandidate(XMemberFeatureCall current, boolean mustBeStatic) {
+		if (current.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+			XMemberFeatureCall container = (XMemberFeatureCall) current.eContainer();
+			if (canBeTypeLiteral(container)) {
+				if (!mustBeStatic && !container.isExplicitStatic()) {
+					return null;
+				}
+				if (mustBeStatic != container.isExplicitStatic()) {
+					return current;
+				}
+				if (mustBeStatic && container.eContainingFeature() != XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+					return current;
+				}
+				return getLongestTypeLiteralCandidate(container, mustBeStatic);
+			}
+		}
+		if (mustBeStatic) {
+			return null;
+		}
+		if (!mustBeStatic && !current.isExplicitStatic()) {
+			return null;
+		}
+		return current;
+	}
+
+	private boolean canBeTypeLiteral(XAbstractFeatureCall featureCall) {
+		return !featureCall.isExplicitOperationCallOrBuilderSyntax() && featureCall.getTypeArguments().isEmpty();
+	}
+
 	public static class ErrorDescription implements IIdentifiableElementDescription {
 
-		private QualifiedName name;
-		private INode node;
-		private boolean followUp;
+		private final QualifiedName name;
+		private final INode node;
+		private final boolean followUp;
+		private final LightweightTypeReference syntacticReceiverType;
 
 		public ErrorDescription(INode node, QualifiedName name) {
 			this.node = node;
 			this.name = name;
 			this.followUp = false;
+			this.syntacticReceiverType = null;
 		}
 		
-		public ErrorDescription() {
+		public ErrorDescription(@Nullable LightweightTypeReference syntacticReceiverType) {
 			this.node = null;
 			this.name = null;
 			this.followUp = true;
+			this.syntacticReceiverType = syntacticReceiverType;
 		}
 		
 		public boolean isFollowUpError() {
@@ -240,12 +327,16 @@ public class ScopeProviderAccess {
 
 		@Nullable
 		public LightweightTypeReference getSyntacticReceiverType() {
-			return null;
+			return syntacticReceiverType;
 		}
 
 		@Nullable
 		public XExpression getSyntacticReceiver() {
 			return null;
+		}
+		
+		public boolean isSyntacticReceiverPossibleArgument() {
+			return false;
 		}
 
 		@NonNull
@@ -287,6 +378,10 @@ public class ScopeProviderAccess {
 		}
 
 		public boolean isExtension() {
+			return false;
+		}
+		
+		public boolean isTypeLiteral() {
 			return false;
 		}
 

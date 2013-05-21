@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.ui;
 
 import java.io.InputStream;
@@ -32,7 +39,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
-@SuppressWarnings("restriction")
 public abstract class AbstractXbaseContentAssistTest extends Assert implements ResourceLoadHelper {
 
 	@Inject
@@ -155,11 +161,58 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	protected static final String[] STRING_FEATURES;
 	protected static final String[] STATIC_STRING_FEATURES;
+	protected static final String[] CLASS_FEATURES;
+	protected static final String[] STATIC_CLASS_FEATURES;
 	
 	static {
 		List<String> features = Lists.newArrayList();
 		List<String> staticFeatures = Lists.newArrayList();
-		for(Method method: String.class.getMethods()) {
+		addMethods(String.class, features, staticFeatures);
+		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
+		features.remove("compareTo()");
+		Set<String> featuresAsSet = Sets.newHashSet(features);
+		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
+		addFields(String.class, features, staticFeatures, featuresAsSet, staticFeaturesAsSet);
+		// StringExtensions
+		features.add("toFirstLower");
+		features.add("toFirstUpper");
+		features.add("nullOrEmpty");
+		// Object extensions
+		features.add("identityEquals()");
+		STRING_FEATURES = features.toArray(new String[features.size()]);
+		STATIC_STRING_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
+	}
+	
+	static {
+		List<String> features = Lists.newArrayList();
+		List<String> staticFeatures = Lists.newArrayList();
+		addMethods(Class.class, features, staticFeatures);
+		features.remove("compareTo()");
+		Set<String> featuresAsSet = Sets.newHashSet(features);
+		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
+		addFields(Class.class, features, staticFeatures, featuresAsSet, staticFeaturesAsSet);
+		// Object extensions
+		features.add("identityEquals()");
+		CLASS_FEATURES = features.toArray(new String[features.size()]);
+		STATIC_CLASS_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
+	}
+
+	protected static void addFields(Class<?> type, List<String> features, List<String> staticFeatures, Set<String> featuresAsSet,
+			Set<String> staticFeaturesAsSet) {
+		for(Field field: type.getFields()) {
+			Set<String> asSet = featuresAsSet;
+			List<String> list = features;
+			if (Modifier.isStatic(field.getModifiers())) {
+				list = staticFeatures;
+				asSet = staticFeaturesAsSet;
+			}
+			if (asSet.add(field.getName()))
+				list.add(field.getName());
+		}
+	}
+
+	protected static void addMethods(Class<?> type, List<String> features, List<String> staticFeatures) {
+		for(Method method: type.getMethods()) {
 			List<String> list = features;
 			if (Modifier.isStatic(method.getModifiers()))
 				list = staticFeatures;
@@ -175,28 +228,6 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 				list.add(method.getName() + "()");				
 			}
 		}
-		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
-		features.remove("compareTo()");
-		Set<String> featuresAsSet = Sets.newHashSet(features);
-		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
-		for(Field field: String.class.getFields()) {
-			Set<String> asSet = featuresAsSet;
-			List<String> list = features;
-			if (Modifier.isStatic(field.getModifiers())) {
-				list = staticFeatures;
-				asSet = staticFeaturesAsSet;
-			}
-			if (asSet.add(field.getName()))
-				list.add(field.getName());
-		}
-		// StringExtensions
-		features.add("toFirstLower");
-		features.add("toFirstUpper");
-		features.add("nullOrEmpty");
-		// Object extensions
-		features.add("identityEquals()");
-		STRING_FEATURES = features.toArray(new String[features.size()]);
-		STATIC_STRING_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
 	}
 	
 	public String[] getStringFeatures() {
@@ -205,6 +236,14 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	public String[] getStaticStringFeatures() {
 		return STATIC_STRING_FEATURES;
+	}
+	
+	public String[] getClassFeatures() {
+		return CLASS_FEATURES;
+	}
+	
+	public String[] getStaticClassFeatures() {
+		return STATIC_CLASS_FEATURES;
 	}
 
 	protected String[] expect(String[]... arrays) {
@@ -312,6 +351,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, getKeywordsAndStatics()));
 	}
 	
+	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=381327#c3")
 	@Test public void testOnStringLiteral_24() throws Exception {
 		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"===", "==", "=>"}, getKeywordsAndStatics()));
 	}
@@ -364,6 +404,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString +''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
 	
+	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=381327#c3")
 	@Test public void testOnStringLiteral_37() throws Exception {
 		newBuilder().append("''.toString ==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"==", "===", "=>"}, getKeywordsAndStatics()));
 	}
@@ -414,6 +455,10 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	@Test public void testStaticFeatures_01() throws Exception {
 		newBuilder().append("String::").assertText(getStaticStringFeatures());
+	}
+	
+	@Test public void testStaticFeatures_02() throws Exception {
+		newBuilder().append("String.").assertText(expect(getStaticStringFeatures(), getClassFeatures()));
 	}
 	
 	@Test public void testNull() throws Exception {

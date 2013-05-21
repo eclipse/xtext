@@ -150,6 +150,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		Issue issue = issues.get(0);
 		assertEquals(input.indexOf("com::acme"), issue.getOffset().intValue());
 		assertEquals("com::acme::Unknown".length(), issue.getLength().intValue());
+		assertEquals("com.acme.Unknown cannot be resolved to a type.", issue.getMessage());
 		assertEquals(1, issue.getLineNumber().intValue());
 	}
 	

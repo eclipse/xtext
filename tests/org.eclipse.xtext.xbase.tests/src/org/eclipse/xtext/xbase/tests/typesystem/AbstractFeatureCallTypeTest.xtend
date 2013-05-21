@@ -42,6 +42,10 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		return featureCalls.sortBy [ NodeModelUtils::findNodesForFeature(it, XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE).head.offset ]
 	}
 	
+	def protected filterTypeLiteralsAndPackageFragments(Iterable<XAbstractFeatureCall> featureCalls) {
+		featureCalls.filter[ !packageFragment && !typeLiteral ]
+	}
+	
 	override protected expression(CharSequence expression, boolean resolve) throws Exception {
 		val string = expression.toString
 		if (!seenExpressions.add(string)) {
