@@ -1671,6 +1671,20 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "}");
 		helper.assertWarning(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, RAW_TYPE);
 	}
+	
+	@Test
+	public void testRawTypeOnField() throws Exception {
+		XtendFile file = file(
+				"class Foo { public val Class<java.util.Map<?, ?>> x = typeof(java.util.Map) }");
+		helper.assertNoIssues(file.getXtendTypes().get(0));
+	}
+	
+	@Test
+	public void testRawTypeOnFieldFromTypeLiteral() throws Exception {
+		XtendFile file = file(
+				"class Foo { public val Class<java.util.Map<?, ?>> x = java.util.Map }");
+		helper.assertNoIssues(file.getXtendTypes().get(0));
+	}
 
 	@Test
 	public void testReturnTypeInvalidNumOfTypeParameters_0() throws Exception {

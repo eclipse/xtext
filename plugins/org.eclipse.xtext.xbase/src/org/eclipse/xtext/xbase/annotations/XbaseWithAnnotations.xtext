@@ -37,12 +37,18 @@ XAnnotationElementValue returns xbase::XExpression :
 	XBooleanLiteral |
 	XNumberLiteral |
 	XTypeLiteral |
-	XAnnotationValueFieldReference |
+	XAnnotationValueMemberFieldReference |
 	'(' XAnnotationElementValueStringConcatenation ')'
+;
+
+XAnnotationValueMemberFieldReference returns xbase::XExpression :
+	XAnnotationValueFieldReference (
+		{xbase::XMemberFeatureCall.memberCallTarget=current} ("."|explicitStatic?="::")
+		feature=[types::JvmIdentifiableElement|IdOrSuper] 
+	)*
 ;
 
 XAnnotationValueFieldReference returns xbase::XExpression :
 	{xbase::XFeatureCall} 
-	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
 	feature=[types::JvmIdentifiableElement|IdOrSuper] 
 ;

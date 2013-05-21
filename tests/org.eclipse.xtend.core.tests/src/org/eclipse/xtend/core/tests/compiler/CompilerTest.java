@@ -116,6 +116,82 @@ public class CompilerTest extends AbstractXtendTestCase {
 		invokeAndExpect2("zonkzonkzonk",code,"produceString", "zonk");
 	}
 	
+	@Test public void testRecursiveTypeParameter_05() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   selftypes.ConcreteBuilder::create.append(s).append(s).build\n" + 
+				" }";
+		invokeAndExpect2("zonkzonk",code,"produceString", "zonk");
+	}
+	
+	@Test public void testRecursiveTypeParameter_06() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   selftypes.ConcreteSubBuilder::create.append(s).appendTwice(s).build\n" + 
+				" }";
+		invokeAndExpect2("zonkzonkzonk",code,"produceString", "zonk");
+	}
+	
+	@Test public void testRecursiveTypeParameter_07() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   s.inferReturnType.build\n" + 
+				" }\n" +
+				" def inferReturnType(String s) {\n" +
+				"   selftypes.ConcreteBuilder::create.append(s).append(s)" +
+				" }";
+		invokeAndExpect2("zonkzonk",code,"produceString", "zonk");
+	}
+
+	@Test public void testRecursiveTypeParameter_08() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   s.inferReturnType.appendTwice(s).build\n" + 
+				" }\n" +
+				" def inferReturnType(String s) {\n" +
+				"   selftypes.ConcreteSubBuilder::create.append(s)" +
+				" }";
+		invokeAndExpect2("zonkzonkzonk",code,"produceString", "zonk");
+	}
+	
+	@Test public void testRecursiveTypeParameter_09() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   selftypes.ConcreteBuilder.create.append(s).append(s).build\n" + 
+				" }";
+		invokeAndExpect2("zonkzonk",code,"produceString", "zonk");
+	}
+	
+	@Test public void testRecursiveTypeParameter_10() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   selftypes.ConcreteSubBuilder.create.append(s).appendTwice(s).build\n" + 
+				" }";
+		invokeAndExpect2("zonkzonkzonk",code,"produceString", "zonk");
+	}
+	
+	@Test public void testRecursiveTypeParameter_11() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   s.inferReturnType.build\n" + 
+				" }\n" +
+				" def inferReturnType(String s) {\n" +
+				"   selftypes.ConcreteBuilder.create.append(s).append(s)" +
+				" }";
+		invokeAndExpect2("zonkzonk",code,"produceString", "zonk");
+	}
+
+	@Test public void testRecursiveTypeParameter_12() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   s.inferReturnType.appendTwice(s).build\n" + 
+				" }\n" +
+				" def inferReturnType(String s) {\n" +
+				"   selftypes.ConcreteSubBuilder.create.append(s)" +
+				" }";
+		invokeAndExpect2("zonkzonkzonk",code,"produceString", "zonk");
+	}
+	
 	@Test public void testBug372864() throws Exception {
 		String code = 
 				" def String testSwitch(Object e) {\n" + 

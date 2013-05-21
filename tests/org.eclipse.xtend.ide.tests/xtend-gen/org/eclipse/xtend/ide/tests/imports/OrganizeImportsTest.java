@@ -29,8 +29,11 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
     try {
-      String _string = model.toString();
-      final XtendFile xtendFile = this._workbenchTestHelper.xtendFile("Foo", _string);
+      String _string = expected.toString();
+      boolean _contains = _string.contains("$");
+      Assert.assertFalse(_contains);
+      String _string_1 = model.toString();
+      final XtendFile xtendFile = this._workbenchTestHelper.xtendFile("Foo", _string_1);
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       StringBuilder _stringBuilder = new StringBuilder(model);
@@ -51,9 +54,9 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
         String _text = it.getText();
         builder.replace(_offset, _plus, _text);
       }
-      String _string_1 = expected.toString();
-      String _string_2 = builder.toString();
-      Assert.assertEquals(_string_1, _string_2);
+      String _string_2 = expected.toString();
+      String _string_3 = builder.toString();
+      Assert.assertEquals(_string_2, _string_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -88,7 +91,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.append("import java.util.Map");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("class Foo implements Map$Entry {");
+    _builder_1.append("class Foo implements Map.Entry {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -121,7 +124,97 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.append("def m() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("Map$Entry::DoesNotMatter");
+    _builder_1.append("Map.Entry::DoesNotMatter");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testUnresolvedNestedType_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements Map.Entry {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo implements Map.Entry {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testUnresolvedNestedType_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Map.Entry::DoesNotMatter");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Map.Entry::DoesNotMatter");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testUnresolvedNestedType_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Map::Entry::DoesNotMatter");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Map.Entry::DoesNotMatter");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");

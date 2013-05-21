@@ -80,9 +80,16 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 			return;
 		EObject crossLinkedEObject = eObjectAtOffsetHelper.getCrossReferencedElement(crossRefNode);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
-			Region region = new Region(crossRefNode.getOffset(), crossRefNode.getLength());
-			createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
+			createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void createHyperlinksTo(XtextResource resource, INode node, EObject target, IHyperlinkAcceptor acceptor) {
+		Region region = new Region(node.getOffset(), node.getLength());
+		createHyperlinksTo(resource, region, target, acceptor);
 	}
 	
 	/**
