@@ -305,7 +305,7 @@ public class JvmModelGenerator implements IGenerator {
             JvmAnnotationType _annotation = it.getAnnotation();
             String _identifier = _annotation==null?(String)null:_annotation.getIdentifier();
             String _name = SuppressWarnings.class.getName();
-            boolean _equals = _identifier==null?false:_identifier.equals(_name);
+            boolean _equals = Objects.equal(_identifier, _name);
             boolean _not = (!_equals);
             return _not;
           }

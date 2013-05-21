@@ -56,6 +56,10 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableReferenceWithNo
 		return false;
 	}
 	
+	public boolean isTypeLiteral() {
+		return false;
+	}
+	
 	public EReference getReference() {
 		return XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}

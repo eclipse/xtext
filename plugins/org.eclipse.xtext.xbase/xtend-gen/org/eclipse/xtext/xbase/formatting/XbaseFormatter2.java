@@ -743,8 +743,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
           _or = true;
         } else {
           XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
-          RuleCall _featureCallArgumentsXClosureParserRuleCall_5_0 = _xFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_5_0();
-          boolean _equals_1 = Objects.equal(grammarElement, _featureCallArgumentsXClosureParserRuleCall_5_0);
+          RuleCall _featureCallArgumentsXClosureParserRuleCall_4_0 = _xFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_4_0();
+          boolean _equals_1 = Objects.equal(grammarElement, _featureCallArgumentsXClosureParserRuleCall_4_0);
           _or = (_equals || _equals_1);
         }
         if (_or) {
@@ -1032,25 +1032,16 @@ public class XbaseFormatter2 extends AbstractFormatter {
   }
   
   protected void _format(final XFeatureCall expr, final FormattableDocument format) {
-    final INode declaringType = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE);
-    this.formatStaticQualifier(declaringType, format);
-    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(declaringType, _function);
-    format.operator_add(_append);
     this.formatFeatureCallTypeParameters(expr, format);
     boolean _isExplicitOperationCall = expr.isExplicitOperationCall();
     if (_isExplicitOperationCall) {
       final ILeafNode open = this._nodeModelAccess.nodeForKeyword(expr, "(");
-      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.noSpace();
           }
         };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(open, _function_1);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(open, _function);
       format.operator_add(_prepend);
       boolean _isMultiParamInOwnLine = this.isMultiParamInOwnLine(expr, format);
       if (_isMultiParamInOwnLine) {

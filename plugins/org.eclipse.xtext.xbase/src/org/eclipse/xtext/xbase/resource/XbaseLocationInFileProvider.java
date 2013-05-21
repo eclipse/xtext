@@ -26,10 +26,8 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -37,9 +35,6 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
-	
-	@Inject
-	private StaticQualifierValueConverter staticQualifierValueConverter; 
 	
 	@Override
 	public ITextRegion getSignificantTextRegion(EObject element) {
@@ -52,28 +47,16 @@ public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
 	@Override
 	protected ITextRegion getLocationOfCrossReference(EObject owner, EReference reference, int indexInList,
 			boolean isSignificant) {
-		if (owner instanceof XFeatureCall && reference == XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE && isSignificant) {
-			List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
-			if (!nodes.isEmpty()) {
-				INode qualifierNode = nodes.get(0);
-				ITextRegion result = ITextRegion.EMPTY_REGION;
-				INode pending = null;
-				String delimiter = staticQualifierValueConverter.getStringNamespaceDelimiter();
-				for (INode node : qualifierNode.getLeafNodes()) {
-					if (!isHidden(node)) {
-						int length = node.getLength();
-						if (length != 0) {
-							if (pending != null) {
-								result.merge(new TextRegionWithLineInformation(pending.getOffset(), length, pending.getStartLine() - 1, pending.getEndLine() - 1));
-								pending = null;
-							}
-							if (delimiter.equals(node.getText())) {
-								pending = node;
-							} else {
-								result = result.merge(new TextRegionWithLineInformation(node.getOffset(), length, node.getStartLine() - 1, node.getEndLine() - 1));
-							}
-						}
-					}
+		if (owner instanceof XMemberFeatureCall && reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
+			List<INode> featureNodes = NodeModelUtils.findNodesForFeature(owner, reference);
+			ITextRegion result = ITextRegion.EMPTY_REGION;
+			if (!featureNodes.isEmpty()) {
+				INode featureNode = featureNodes.get(0);
+				result = result.merge(new TextRegionWithLineInformation(featureNode.getOffset(), featureNode.getLength(), featureNode.getStartLine() - 1, featureNode.getEndLine() - 1));
+				List<INode> targetNodes = NodeModelUtils.findNodesForFeature(owner, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET);
+				if (!targetNodes.isEmpty()) {
+					INode targetNode = targetNodes.get(0);
+					result = result.merge(new TextRegionWithLineInformation(targetNode.getOffset(), targetNode.getLength(), targetNode.getStartLine() - 1, targetNode.getEndLine() - 1));
 				}
 				return result;
 			}

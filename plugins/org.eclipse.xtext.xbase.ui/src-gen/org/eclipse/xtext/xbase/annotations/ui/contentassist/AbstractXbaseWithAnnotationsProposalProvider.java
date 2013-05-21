@@ -9,7 +9,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
 /**
- * Represents a generated, default implementation of interface {@link IProposalProvider}.
+ * Represents a generated, default implementation of superclass {@link org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider}.
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
@@ -37,7 +37,10 @@ public class AbstractXbaseWithAnnotationsProposalProvider extends org.eclipse.xt
 	public void completeXAnnotationElementValueStringConcatenation_RightOperand(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-	public void completeXAnnotationValueFieldReference_DeclaringType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void completeXAnnotationValueMemberFieldReference_ExplicitStatic(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
+	public void completeXAnnotationValueMemberFieldReference_Feature(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		lookupCrossReference(((CrossReference)assignment.getTerminal()), context, acceptor);
 	}
 	public void completeXAnnotationValueFieldReference_Feature(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -54,6 +57,9 @@ public class AbstractXbaseWithAnnotationsProposalProvider extends org.eclipse.xt
 		// subclasses may override
 	}
 	public void complete_XAnnotationElementValue(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
+	public void complete_XAnnotationValueMemberFieldReference(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
 	public void complete_XAnnotationValueFieldReference(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
