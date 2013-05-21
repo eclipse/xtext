@@ -19,6 +19,11 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"return _length;", "'foo'.length");
 	}
 	
+	@Test public void testExtensionOnTypeLiteral() throws Exception {
+		assertCompilesTo("\nboolean _identityEquals = (org.eclipse.xtext.xbase.lib.StringExtensions.class == null);\n" + 
+				"return _identityEquals;", "org.eclipse.xtext.xbase.lib.StringExtensions.identityEquals(null)");
+	}
+	
 	@Test public void testBug377855() throws Exception {
 		assertCompilesToStatement(
 				"\n" + 
