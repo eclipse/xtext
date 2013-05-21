@@ -12,7 +12,6 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.RewritableImportSection
 import org.junit.Test
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
-import java.util.regex.Pattern
 
 class RewritableImportSectionTest_0 extends AbstractRewritableImportSectionTest {
 	
