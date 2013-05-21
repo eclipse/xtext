@@ -15,9 +15,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
-import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
@@ -26,8 +24,6 @@ import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.inject.Inject;
 
@@ -142,33 +138,5 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		}
 		if (monitor == null || !monitor.isCanceled())
 			super.resolveLazyCrossReferences(monitor);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * This overridden variant implements some special sugar for the declaring type of static feature calls.
-	 * The type node includes a trailing {@code ::} which is undesired as part of the error range. Thus it is stripped here.
-	 */
-	@Override
-	protected Diagnostic createDiagnostic(Triple<EObject, EReference, INode> triple, DiagnosticMessage message) {
-		EObject object = triple.getFirst();
-		EReference reference = triple.getSecond();
-		// we don't use the location in file provider here, since the node is already known and it would be unnecessary to recompute it.
-		if (object instanceof XFeatureCall && reference == XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE) {
-			Diagnostic diagnostic = new XtextLinkingDiagnostic(triple.getThird(), message.getMessage(),
-					message.getIssueCode(), message.getIssueData()) {
-				@Override
-				public int getLength() {
-					int result = super.getLength();
-					// strip the trailing ::
-					if (result >= 2)
-						result -= 2;
-					return result;
-				}
-			};
-			return diagnostic;
-		}
-		return super.createDiagnostic(triple, message);
 	}
 }

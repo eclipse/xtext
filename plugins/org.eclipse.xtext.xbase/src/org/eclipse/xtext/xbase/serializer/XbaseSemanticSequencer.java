@@ -177,32 +177,28 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		SequenceFeeder acceptor = createSequencerFeeder(featureCall, nodes);
 		XFeatureCallElements featureCallElements = grammarAccess.getXFeatureCallAccess();
 
-		// declaringType=[JvmDeclaredType|StaticQualifier]?
-		if (featureCall.getDeclaringType() != null)
-			acceptor.accept(featureCallElements.getDeclaringTypeJvmDeclaredTypeStaticQualifierParserRuleCall_1_0_1(), featureCall.getDeclaringType());
-
 		// (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
 		List<JvmTypeReference> typeArguments = featureCall.getTypeArguments();
 		if (!typeArguments.isEmpty()) {
-			acceptor.accept(featureCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_1_0(), typeArguments.get(0), 0);
+			acceptor.accept(featureCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0(), typeArguments.get(0), 0);
 			for (int i = 1; i < typeArguments.size(); i++)
-				acceptor.accept(featureCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_2_1_0(), typeArguments.get(i), i);
+				acceptor.accept(featureCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0(), typeArguments.get(i), i);
 		}
 
 		// feature=[JvmIdentifiableElement|IdOrSuper]
-		acceptor.accept(featureCallElements.getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_3_0_1(), featureCall.getFeature());
+		acceptor.accept(featureCallElements.getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_2_0_1(), featureCall.getFeature());
 
 		// (explicitOperationCall?='(' (featureCallArguments+=XShortClosure | (featureCallArguments+=XExpression featureCallArguments+=XExpression*))?)? featureCallArguments+=XClosure?
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax()) {
 			if (featureCall.isExplicitOperationCall())
-				acceptor.accept(featureCallElements.getExplicitOperationCallLeftParenthesisKeyword_4_0_0());
+				acceptor.accept(featureCallElements.getExplicitOperationCallLeftParenthesisKeyword_3_0_0());
 			List<XExpression> arguments = featureCall.getFeatureCallArguments();
 			if (!arguments.isEmpty()) {
 				if (featureCall.isExplicitOperationCall() && isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
-					acceptor.accept(featureCallElements.getFeatureCallArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
-					acceptor.accept(featureCallElements.getFeatureCallArgumentsXClosureParserRuleCall_5_0(), arguments.get(1), 1);
+					acceptor.accept(featureCallElements.getFeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0(), arguments.get(0), 0);
+					acceptor.accept(featureCallElements.getFeatureCallArgumentsXClosureParserRuleCall_4_0(), arguments.get(1), 1);
 				} else if (featureCall.isExplicitOperationCall() && isXShortClosure(featureCall, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
-					acceptor.accept(featureCallElements.getFeatureCallArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
+					acceptor.accept(featureCallElements.getFeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0(), arguments.get(0), 0);
 				} else {
 					int diff = 0;
 					if (isBuilderSyntax(featureCall, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, featureCall.isExplicitOperationCall(), nodes)) {
@@ -210,13 +206,13 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 					}
 					if (featureCall.isExplicitOperationCall()) {
 						if (arguments.size() - diff > 0)
-							acceptor.accept(featureCallElements.getFeatureCallArgumentsXExpressionParserRuleCall_4_1_1_0_0(), arguments.get(0), 0);
+							acceptor.accept(featureCallElements.getFeatureCallArgumentsXExpressionParserRuleCall_3_1_1_0_0(), arguments.get(0), 0);
 						for (int i = 1; i < arguments.size() - diff; i++)
-							acceptor.accept(featureCallElements.getFeatureCallArgumentsXExpressionParserRuleCall_4_1_1_1_1_0(), arguments.get(i), i);
+							acceptor.accept(featureCallElements.getFeatureCallArgumentsXExpressionParserRuleCall_3_1_1_1_1_0(), arguments.get(i), i);
 					}
 					if (diff != 0) {
 						int lastIdx = arguments.size() - 1;
-						acceptor.accept(featureCallElements.getFeatureCallArgumentsXClosureParserRuleCall_5_0(), arguments.get(lastIdx), lastIdx);
+						acceptor.accept(featureCallElements.getFeatureCallArgumentsXClosureParserRuleCall_4_0(), arguments.get(lastIdx), lastIdx);
 					}
 				}
 			}
@@ -319,11 +315,11 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		// memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0
 		acceptor.accept(memberFeatureCallElements.getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0(), featureCall.getMemberCallTarget());
 
-		// (nullSafe?='?.' | spreading?='*.')?
+		// (nullSafe?='?.' | explicitStatic?='::')?
 		if (featureCall.isNullSafe())
 			acceptor.accept(memberFeatureCallElements.getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0());
-		else if (featureCall.isSpreading())
-			acceptor.accept(memberFeatureCallElements.getSpreadingAsteriskFullStopKeyword_1_1_0_0_1_2_0());
+		else if (featureCall.isExplicitStatic())
+			acceptor.accept(memberFeatureCallElements.getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0());
 
 		// (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
 		List<JvmTypeReference> typeArguments = featureCall.getTypeArguments();

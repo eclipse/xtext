@@ -158,5 +158,9 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return null;
 	}
+	
+	public boolean isTypeLiteral() {
+		return false;
+	}
 
 }

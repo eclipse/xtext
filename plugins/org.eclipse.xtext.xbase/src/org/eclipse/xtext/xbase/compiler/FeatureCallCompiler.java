@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -125,11 +126,24 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
+	/**
+	 * No-op.
+	 * 
+	 * @param expr defined by dispatch signature
+	 * @param b defined by dispatch signature
+	 * @param isReferenced defined by dispatch signature 
+	 */
 	protected void _toJavaStatement(final XAnnotationElementValueBinaryOperation expr, ITreeAppendable b, final boolean isReferenced) {
 	}
 	
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
-		if (expressionHelper.isShortCircuitOperation(expr)) {
+		if (expr.isTypeLiteral()) {
+			generateComment(new Later() {
+				public void exec(ITreeAppendable appendable) {
+					internalToJavaExpression(expr, appendable);
+				}
+			}, b, isReferenced);
+		} else if (expressionHelper.isShortCircuitOperation(expr)) {
 			generateShortCircuitInvocation(expr, b);
 		} else {
 			XExpression receiver = getActualReceiver(expr);
@@ -171,7 +185,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected XExpression getActualReceiver(final XAbstractFeatureCall expr) {
 		return featureCallToJavaMapping.getActualReceiver(expr);
 	}
-
+	
 	protected void _toJavaStatement(final XFeatureCall expr, final ITreeAppendable b, boolean isReferenced) {
 		// if it's a call to this() or super() make sure the arguments are forced to be compiled to expressions.
 		if (expr.getFeature() instanceof JvmConstructor) {
@@ -273,7 +287,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void _toJavaExpression(XAbstractFeatureCall call, ITreeAppendable b) {
-		if (isPrimitiveVoid(call)) {
+		if (call.isTypeLiteral()) {
+			b.append((JvmType) call.getFeature()).append(".class");
+		} else if (isPrimitiveVoid(call)) {
 			throw new IllegalArgumentException("feature yields 'void'");
 		} else {
 			final String referenceName = getReferenceName(call, b);
@@ -486,22 +502,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (startNode != null) {
 			List<INode> resultNodes = Lists.newArrayList();
 			if (call instanceof XFeatureCall) {
-				if (((XFeatureCall) call).getDeclaringType() != null) {
-					boolean crossRefSeen = false;
-					for (INode child : startNode.getChildren()) {
-						if (crossRefSeen) {
-							resultNodes.add(child);
-						} else {
-							EObject grammarElement = child.getGrammarElement();
-							if (grammarElement instanceof CrossReference) {
-								crossRefSeen = true;
-							}
-						}
-					}
-				} else {
-					for (INode child : startNode.getChildren()) {
-						resultNodes.add(child);
-					}
+				for (INode child : startNode.getChildren()) {
+					resultNodes.add(child);
 				}
 			} else if (call instanceof XMemberFeatureCall) {
 				boolean keywordSeen = false;
@@ -527,26 +529,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (startNode != null) {
 			List<INode> resultNodes = Lists.newArrayList();
 			if (call instanceof XFeatureCall) {
-				if (((XFeatureCall) call).getDeclaringType() != null) {
-					boolean typeRefSeen = false;
-					for (INode child : startNode.getChildren()) {
-						if (typeRefSeen) {
-							if (child.getGrammarElement() instanceof CrossReference)
-								break;
-							resultNodes.add(child);
-						} else {
-							EObject grammarElement = child.getGrammarElement();
-							if (grammarElement instanceof CrossReference) {
-								typeRefSeen = true;
-							}
-						}
-					}
-				} else {
-					for (INode child : startNode.getChildren()) {
-						if (child.getGrammarElement() instanceof CrossReference)
-							break;
-						resultNodes.add(child);
-					}
+				for (INode child : startNode.getChildren()) {
+					if (child.getGrammarElement() instanceof CrossReference)
+						break;
+					resultNodes.add(child);
 				}
 			} else if (call instanceof XMemberFeatureCall) {
 				boolean keywordSeen = false;
@@ -610,15 +596,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (expressionHelper.findInlineAnnotation(call) != null) {
 				return false;
 			}
-			if (call instanceof XFeatureCall) {
-				XFeatureCall featureCall = (XFeatureCall) call;
-				if (featureCall.getDeclaringType() != null) {
-					ILocationData qualifierLocation = getStaticQualifierLocation(featureCall);
-					if (qualifierLocation != null) {
-						b.trace(qualifierLocation).append(featureCall.getDeclaringType());
-					} else {
-						b.append(featureCall.getDeclaringType());
-					}
+			if (call instanceof XMemberFeatureCall) {
+				XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) call;
+				if (memberFeatureCall.isStaticWithDeclaringType()) {
+					XAbstractFeatureCall target = (XAbstractFeatureCall) memberFeatureCall.getMemberCallTarget();
+					JvmType declaringType = (JvmType) target.getFeature();
+					b.trace(target, false).append(declaringType);
 					return true;
 				}
 			}
@@ -632,15 +615,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else {
 			return false;
 		}
-	}
-	
-	@Nullable
-	protected ILocationData getStaticQualifierLocation(XFeatureCall call) {
-		ITextRegionWithLineInformation result = (ITextRegionWithLineInformation) locationInFileProvider.getSignificantTextRegion(call, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
-		if (result == null || result.getLength() == 0)
-			return null;
-		return new LocationData(result.getOffset(), result.getLength(), result.getLineNumber(),
-				result.getEndLineNumber(), null);
 	}
 	
 	protected void appendNullValue(JvmTypeReference type, EObject context, ITreeAppendable b) {

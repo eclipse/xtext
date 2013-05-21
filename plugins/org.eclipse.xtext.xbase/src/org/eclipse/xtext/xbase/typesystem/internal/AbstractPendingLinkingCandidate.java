@@ -650,21 +650,29 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		if (newFeature.eIsProxy()) {
 			newFeature = (JvmIdentifiableElement) internalView.eResolveProxy((InternalEObject) newFeature);
 		}
-		EObject oldFeature = (EObject) internalView.eGet(structuralFeature, false);
+		resolveLinkingProxy(internalView, newFeature, structuralFeature, featureId);
+	}
+
+	protected void resolveLinkingProxy(InternalEObject owner, JvmIdentifiableElement newValue, EReference structuralFeature, int featureId) {
+		EObject oldFeature = (EObject) owner.eGet(structuralFeature, false);
 		if (oldFeature == null || !(oldFeature.eIsProxy())) {
 			throw new IllegalStateException("Feature was already resolved to " + oldFeature);
 		}
-		if (internalView.eNotificationRequired()) {
-			boolean wasDeliver = internalView.eDeliver();
-			internalView.eSetDeliver(false);
-			internalView.eSet(structuralFeature, newFeature);
-			internalView.eSetDeliver(wasDeliver);
-			if (newFeature != oldFeature) {
-				internalView.eNotify(new ENotificationImpl(internalView, Notification.RESOLVE, featureId, oldFeature, newFeature));
+		if (owner.eNotificationRequired()) {
+			boolean wasDeliver = owner.eDeliver();
+			owner.eSetDeliver(false);
+			internalSetValue(owner, structuralFeature, newValue);
+			owner.eSetDeliver(wasDeliver);
+			if (newValue != oldFeature) {
+				owner.eNotify(new ENotificationImpl(owner, Notification.RESOLVE, featureId, oldFeature, newValue));
 			}
 		} else {
-			internalView.eSet(structuralFeature, newFeature);
+			internalSetValue(owner, structuralFeature, newValue);
 		}
+	}
+
+	protected void internalSetValue(InternalEObject featureCall, EReference structuralFeature, JvmIdentifiableElement newValue) {
+		featureCall.eSet(structuralFeature, newValue);
 	}
 	
 	protected int getArityMismatch(JvmExecutable executable, List<XExpression> arguments) {
