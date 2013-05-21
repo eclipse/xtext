@@ -546,6 +546,13 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("java.util.List<java.lang.Integer>", toString(typeRef));
 	}
 	
+	@Test public void testFeatureCall_27() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Boolean>", "newArrayList('').map(s|" +
+				"org.eclipse.xtext.xbase.lib.ObjectExtensions::operator_equals(" +
+				"	org.eclipse.xtext.xbase.lib.IntegerExtensions::operator_plus(s.length,1), 5)" +
+				").map(b| org.eclipse.xtext.xbase.lib.BooleanExtensions::operator_not(b) )");
+	}
+	
 	@Test public void testFeatureCall_Bug342134_01() throws Exception {
 		assertResolvedType("java.lang.Iterable<java.lang.String>", "newArrayList('').map(e|newArrayList(e)).flatten");
 	}

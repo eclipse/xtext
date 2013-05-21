@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.converison;
+package org.eclipse.xtext.xbase.tests.conversion;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -22,6 +22,27 @@ public class ValueConverterTest extends AbstractXbaseTestCase {
 
 	@Inject
 	private IValueConverterService valueConverterService;
+	
+	@Test public void testStaticQualifier_01() throws Exception {
+		String value = (String) valueConverterService.toValue("java::lang::String", "StaticQualifier", null);
+		assertEquals("java.lang.String", value);
+	}
+	@Test public void testStaticQualifier_02() throws Exception {
+		String value = (String) valueConverterService.toValue("java::lang::String::", "StaticQualifier", null);
+		assertEquals("java.lang.String", value);
+	}
+	@Test public void testStaticQualifier_03() throws Exception {
+		String value = (String) valueConverterService.toValue("java.lang.String", "StaticQualifier", null);
+		assertEquals("java.lang.String", value);
+	}
+	@Test public void testStaticQualifier_04() throws Exception {
+		String value = (String) valueConverterService.toValue("java.lang.String::", "StaticQualifier", null);
+		assertEquals("java.lang.String", value);
+	}
+	@Test public void testStaticQualifier_05() throws Exception {
+		String syntax = valueConverterService.toString("java.lang.String", "StaticQualifier");
+		assertEquals("java.lang.String::", syntax);
+	}
 	
 	@Test public void testIntWithUnderscore() throws Exception {
 		Object value = valueConverterService.toValue("123_456", "INT", null);

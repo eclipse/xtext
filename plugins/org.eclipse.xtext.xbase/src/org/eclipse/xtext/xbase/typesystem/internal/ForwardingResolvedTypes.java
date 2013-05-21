@@ -18,6 +18,8 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -79,7 +81,17 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 	}
 	
 	@Nullable
+	public IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall) {
+		return delegate().getLinkingCandidate(featureCall);
+	}
+	
+	@Nullable
 	public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
 		return delegate().getLinkedFeature(constructorCall);
+	}
+	
+	@Nullable
+	public IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall) {
+		return delegate().getLinkingCandidate(constructorCall);
 	}
 }

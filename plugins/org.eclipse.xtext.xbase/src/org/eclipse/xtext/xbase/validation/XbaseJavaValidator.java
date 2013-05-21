@@ -937,17 +937,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	//TODO apply cast rules case's type guards
 	//TODO null guard is not allowed with any other primitives but boolean (null -> false)
 
-	/*
-	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
-	 */
-	@Check
-	public void checkSpreadOperatorNotUsed(XMemberFeatureCall featureCall) {
-		if (featureCall.isSpreading()) {
-			error("The spreading operator is not yet supported.", featureCall,
-					Literals.XMEMBER_FEATURE_CALL__SPREADING, "unssupported_spread_operator");
-		}
-	}
-
 	@Check
 	void checkNullSafeFeatureCallWithPrimitives(XMemberFeatureCall featureCall) {
 		if (featureCall.isNullSafe() && getActualType(featureCall.getMemberCallTarget()).isPrimitive()) {
@@ -1015,11 +1004,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) node.getSemanticElement();
 		boolean isExtension = featureCall.isExtension();
 		if (featureCall.isStatic() || isExtension) {
-			if (featureCall instanceof XFeatureCall) {
-				if (((XFeatureCall) featureCall).getDeclaringType() != null) {
-					return;
-				}
-			}
 			JvmFeature feature = (JvmFeature) featureCall.getFeature();
 			JvmDeclaredType declaringType = feature.getDeclaringType();
 			if (declaringType != null) {

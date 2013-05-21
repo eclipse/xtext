@@ -140,4 +140,7 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return false;
 	}
 
+	public boolean isTypeLiteral() {
+		return false;
+	}
 }

@@ -24,6 +24,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
@@ -314,5 +316,16 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	
 	public boolean isStatic() {
 		return getFeatureCall().isStatic();
+	}
+	
+	public boolean isTypeLiteral() {
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XMemberFeatureCall) {
+			return ((XMemberFeatureCall) featureCall).isTypeLiteral();
+		}
+		if (featureCall instanceof XFeatureCall) {
+			return ((XFeatureCall) featureCall).isTypeLiteral();
+		}
+		return false;
 	}
 }

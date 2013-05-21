@@ -289,6 +289,10 @@ public class ScopeProviderAccess {
 		public boolean isExtension() {
 			return false;
 		}
+		
+		public boolean isTypeLiteral() {
+			return false;
+		}
 
 	}
 

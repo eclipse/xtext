@@ -25,6 +25,8 @@ import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
+import org.eclipse.xtext.xbase.XFeatureCall
+import org.eclipse.xtext.xbase.XMemberFeatureCall
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -90,6 +92,20 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		xExpression.resolveTypes
 		val result = EcoreUtil2::eAll(xExpression).filter(typeof(XExpression)).filter [ it |
 			switch(it) {
+				XFeatureCall:
+					!typeLiteral && !packageFragment && (
+						!it.typeArguments.empty ||
+						switch feature: it.feature {
+							JvmTypeParameterDeclarator: !feature.typeParameters.empty
+							default: false
+						})
+				XMemberFeatureCall:
+					!typeLiteral && !packageFragment && (
+						!it.typeArguments.empty ||
+						switch feature: it.feature {
+							JvmTypeParameterDeclarator: !feature.typeParameters.empty
+							default: false
+						})
 				XAbstractFeatureCall:
 					!it.typeArguments.empty ||
 					switch feature: it.feature {

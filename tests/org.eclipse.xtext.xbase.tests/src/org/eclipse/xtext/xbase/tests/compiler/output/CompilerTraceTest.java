@@ -285,6 +285,51 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	public void testStaticFeatureCall_09() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<Object> _emptyList = Collections.<Object>em#ptyL#ist();\n" + 
+				"return _emptyList;", 
+				"java.util.Collections::#emptyList#");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_10() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<Object> _emptyList = Co#lle#ctions.<Object>emptyList();\n" + 
+				"return _emptyList;", 
+				"#java.util.Collections#::<Object>emptyList");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_11() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<String> _singletonList = Collections.<S#tri#ng>singletonList(\"value\");\n" + 
+				"return _singletonList;", 
+				"java.util.Collections::<#String#>singletonList('value')");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_12() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<String> _singletonList = Co#llections.<Stri#ng>singletonList(\"value\");\n" + 
+				"return _singletonList;", 
+				"#java.util.Collections::<String>singletonList('value')#");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_13() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<String> _singletonList = Collections.<Stri#ng>singletonList(\"va#lue\");\n" + 
+				"return _singletonList;", 
+				"java.util.Collections::#<String>singletonList('value')#");
+	}
+	
+	@Test
 	public void testConstructorCall_01() throws Exception {
 		assertTrace( 
 				"\nString _string = new S#tri#ng();\n" +
