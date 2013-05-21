@@ -14,12 +14,14 @@ import static com.google.common.collect.Maps.newHashMap;
 import static java.util.Collections.emptyList;
 
 import java.io.IOException;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -42,8 +44,20 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Boolean.TRUE, "typeof(java.lang.annotation.RetentionPolicy).enum");
 	}
 	
+	@Test public void testReservedWordEnum_02() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "java.lang.annotation.RetentionPolicy.enum");
+	}
+	
+	@Test public void testReservedWordEnum_03() throws Exception {
+		assertEvaluatesTo(RetentionPolicy.SOURCE, "java.lang.annotation.RetentionPolicy.SOURCE");
+	}
+	
 	@Test public void testReservedWordInterface() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "typeof(Iterable).interface");
+	}
+	
+	@Test public void testReservedWordInterface_02() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "Iterable.interface");
 	}
 	
 	@Test public void testReservedWordAnnotation() throws Exception {
@@ -364,6 +378,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("FOO", "[testdata.OuterClass.InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass.InnerClass)");
 	}
 	
+	@Test public void testReferenceInnerClasses_09() throws Exception {
+		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata.OuterClass$InnerClass::SINGLETON");
+	}
+	
+	@Test public void testReferenceInnerClasses_10() throws Exception {
+		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata.OuterClass.InnerClass::SINGLETON");
+	}
+	
 	/*
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341642
 	 */
@@ -453,6 +475,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("", "try {typeof(String).newInstance} catch(Exception e) {}");
 	}
 	
+	@Test public void testGenerics_00_b() throws Exception {
+		assertEvaluatesTo("", "try {String.newInstance} catch(Exception e) {}");
+	}
+	
 	@Test public void testGenerics_01() throws Exception {
 		assertEvaluatesTo("y",
 				"{" +
@@ -466,6 +492,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"new java.util.ArrayList<Object>().addAll(typeof(String).declaredFields)");
 	}
 	
+	@Test public void testGenerics_02_b() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE,
+				"new java.util.ArrayList<Object>().addAll(String.declaredFields)");
+	}
+	
 	@Test public void testGenerics_03() throws Exception {
 		assertEvaluatesTo("y",
 				"{" +
@@ -477,6 +508,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testGenerics_04() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE,
 				"new java.util.ArrayList<Object>.addAll(typeof(String).declaredFields)");
+	}
+	
+	@Test public void testGenerics_04_b() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE,
+				"new java.util.ArrayList<Object>.addAll(String.declaredFields)");
 	}
 
 	@Test public void testGenerics_05() throws Exception {
@@ -512,6 +548,18 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testStaticFeatureCall_02() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "Boolean::FALSE");
+	}
+	
+	@Test public void testStaticFeatureCall_03() throws Exception {
+		assertEvaluatesTo("false", "String.valueOf(false)");
+	}
+	
+	@Test public void testStaticFeatureCall_04() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "Boolean.FALSE");
+	}
+	
+	@Test public void testStaticFeatureCall_05() throws Exception {
+		assertEvaluatesTo("false", "java.lang.String.valueOf(false)");
 	}
 	
 	@Test public void testPrimitiveConversion_01() throws Exception {
@@ -858,6 +906,35 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testTypeLiteral_04() throws Exception {
 		assertEvaluatesTo(int[][].class, "typeof(int[][])");
 	}
+	
+	@Test public void testTypeLiteral_05() throws Exception {
+		assertEvaluatesTo(Void.class, "Void");
+	}
+
+	@Test public void testTypeLiteral_06() throws Exception {
+		assertEvaluatesTo(void.class, "void");
+	}
+	
+	@Test public void testTypeLiteral_07() throws Exception {
+		assertEvaluatesTo(void.class, "void");
+	}
+	
+	@Test public void testTypeLiteral_08() throws Exception {
+		assertEvaluatesTo(Map.Entry.class, "typeof(java.util.Map$Entry)");
+	}
+	
+	@Test public void testTypeLiteral_09() throws Exception {
+		assertEvaluatesTo(Map.Entry.class, "typeof(java.util.Map.Entry)");
+	}
+	
+	@Test public void testTypeLiteral_10() throws Exception {
+		assertEvaluatesTo(Map.Entry.class, "java.util.Map$Entry");
+	}
+	
+	@Test public void testTypeLiteral_11() throws Exception {
+		assertEvaluatesTo(Map.Entry.class, "java.util.Map.Entry");
+	}
+
 	
 	@Test public void testIdentityEquals_0() throws Exception {
 		assertEvaluatesTo(true, "1===1");

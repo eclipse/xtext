@@ -38,15 +38,13 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -58,6 +56,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypes;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
@@ -91,6 +90,9 @@ public class TypeUsageCollector {
 	@Inject
 	private IBatchTypeResolver batchTypeResolver;
 	
+	@Inject
+	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
+	
 	private JvmDeclaredType currentThisType;
 	
 	private JvmMember currentContext;
@@ -104,6 +106,25 @@ public class TypeUsageCollector {
 	private Set<JvmType> knownTypesForStaticImports;
 
 	private IEObjectDocumentationProviderExtension documentationProvider;
+	
+	protected static class PreferredType {
+		public final JvmType referencedType;
+		public final JvmType usedType;
+		public final String unresolvedTypeName;
+		public PreferredType(JvmType referencedType, JvmType usedType) {
+			if (referencedType.eIsProxy()) {
+				throw new IllegalArgumentException();
+			}
+			this.referencedType = referencedType;
+			this.usedType = usedType;
+			this.unresolvedTypeName = null;
+		}
+		public PreferredType(String name) {
+			this.unresolvedTypeName = name;
+			this.referencedType = null;
+			this.usedType = null;
+		}
+	}
 
 	@Inject
 	private void setDocumentationProvider(IEObjectDocumentationProvider documentationProvider) {
@@ -136,14 +157,34 @@ public class TypeUsageCollector {
 			} else if (next instanceof XTypeLiteral) {
 				acceptPreferredType(next, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
 			} else if (next instanceof XFeatureCall) {
-				final XFeatureCall featureCall = (XFeatureCall) next;
-				if (featureCall.getDeclaringType() == null) {
-					collectStaticImportsFrom(featureCall);
+				XFeatureCall featureCall = (XFeatureCall) next;
+				if (featureCall.getFeature() instanceof JvmType && featureCall.isTypeLiteral()) {
+					if (isOuterTypeLiteral(featureCall)) {
+						contents.prune();
+						continue;
+					}
+					acceptPreferredType(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+				} else if (featureCall.getFeature().eIsProxy()) {
+					acceptPreferredType(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 				} else {
-					acceptPreferredType(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE);
+					collectStaticImportsFrom(featureCall);
 				}
-			} else if (next instanceof XMemberFeatureCall 
-					|| next instanceof XBinaryOperation 
+			} else if (next instanceof XMemberFeatureCall) {
+				XMemberFeatureCall featureCall = (XMemberFeatureCall) next;
+				if (featureCall.getFeature() instanceof JvmType && featureCall.isTypeLiteral()) {
+					if (isOuterTypeLiteral(featureCall)) {
+						contents.prune();
+						continue;
+					}
+					acceptPreferredType(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+				}
+				if (!featureCall.isExplicitStatic()) {
+					XExpression target = featureCall.getMemberCallTarget();
+					if (!isTypeLiteral(target)) {
+						collectStaticImportsFrom((XAbstractFeatureCall) next);
+					}
+				} 
+			} else if (next instanceof XBinaryOperation 
 					|| next instanceof XUnaryOperation
 					|| (next instanceof XAssignment && !contains(currentThisType.getAllFeatures(), ((XAssignment) next).getFeature()))) {
 				collectStaticImportsFrom((XAbstractFeatureCall) next);
@@ -166,6 +207,23 @@ public class TypeUsageCollector {
 			}
 		}
 	}
+	
+	private boolean isOuterTypeLiteral(XAbstractFeatureCall featureCall) {
+		if (featureCall.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+			XMemberFeatureCall container = (XMemberFeatureCall) featureCall.eContainer();
+			if (container.isTypeLiteral()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isTypeLiteral(XExpression memberCallTarget) {
+		if (memberCallTarget instanceof XAbstractFeatureCall) {
+			return ((XAbstractFeatureCall) memberCallTarget).isTypeLiteral();
+		}
+		return false;
+	}
 
 	private void collectStaticImportsFrom(final XAbstractFeatureCall featureCall) {
 		JvmIdentifiableElement feature = featureCall.getFeature();
@@ -186,10 +244,12 @@ public class TypeUsageCollector {
 					JvmTypeReference typeRef = typeReferences.getTypeForName(docTypeText, currentThisType);
 					ITextRegion textRegion = new TextRegion(docTypeReference.getOffset(), docTypeReference.getLength());
 					JvmType referencedType = typeRef != null ? typeRef.getType() : null;
-					if(referencedType instanceof JvmDeclaredType && !referencedType.eIsProxy()) 
-						typeUsages.addTypeUsage((JvmDeclaredType) referencedType, docTypeText, textRegion, currentThisType, false, false);
-					else
-						typeUsages.addUnresolved(docTypeText, textRegion, currentThisType, false, false);
+					if(referencedType instanceof JvmDeclaredType && !referencedType.eIsProxy()) {
+						JvmDeclaredType casted = (JvmDeclaredType) referencedType;
+						typeUsages.addTypeUsage(casted, casted, textRegion, currentThisType);
+					} else {
+						typeUsages.addUnresolved(docTypeText, "", textRegion, currentThisType);
+					}
 				}
 			}
 		}
@@ -210,7 +270,7 @@ public class TypeUsageCollector {
 		if (ref instanceof JvmParameterizedTypeReference) {
 			acceptPreferredType(ref, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		} else {
-			acceptType(ref.getType(), ref.getIdentifier(), locationInFileProvider.getFullTextRegion(ref), false, false);
+			acceptType(ref.getType(), locationInFileProvider.getFullTextRegion(ref));
 		}
 	}
 	
@@ -227,7 +287,7 @@ public class TypeUsageCollector {
 	 * @param reference a reference to a {@link JvmType} or {@link JvmMember} that is declared in a type.
 	 * @return the referenced type or one of its containers.
 	 */
-	protected Pair<? extends JvmType, String> findPreferredType(EObject owner, EReference reference) {
+	protected PreferredType findPreferredType(EObject owner, EReference reference, String text) {
 		JvmIdentifiableElement referencedThing = (JvmIdentifiableElement) owner.eGet(reference);
 		if (referencedThing != null && owner instanceof XConstructorCall && referencedThing.eIsProxy()) {
 			JvmIdentifiableElement potentiallyLinkedType = batchTypeResolver.resolveTypes(owner).getLinkedFeature((XConstructorCall)owner);
@@ -242,98 +302,123 @@ public class TypeUsageCollector {
 			referencedType = ((JvmMember) referencedThing).getDeclaringType();
 		} else if(referencedThing instanceof JvmType) {
 			if (referencedThing.eIsProxy()) {
-				List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
-				if (nodes.size() == 1) {
-					String text = NodeModelUtils.getTokenText(nodes.get(0));
-					int dollar = text.indexOf('$');
-					if (dollar > 0) {
-						String preferredTypeText = text.substring(0, dollar);
-						return Tuples.create((JvmType) referencedThing, preferredTypeText);
-					}
-				}
+				String importedName = getFirstNameSegment(owner, reference);
+				return new PreferredType(importedName);
 			}
-			return Tuples.create((JvmType)referencedThing, null);
+			return null;
 		}
-		return findPreferredType(owner, reference, referencedType);
+		return findPreferredType(referencedType, text);
 	}
 
-	private Pair<? extends JvmType, String> findPreferredType(EObject owner, EReference reference, JvmDeclaredType referencedType) {
-		if (referencedType != null) {
-			List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
-			if (nodes.size() == 1) {
-				String text = NodeModelUtils.getTokenText(nodes.get(0));
-				if (!referencedType.eIsProxy()) {
-					Pair<JvmDeclaredType, String> result = findPreferredText(referencedType, text, "$");
-					if (result != null) {
-						return result;
-					}
-					result = findPreferredText(referencedType, text, ".");
-					if (result != null) {
-						return result;
-					}
-					if (text.endsWith("::")) {
-						result = findPreferredText(referencedType, text.substring(0, text.length() - 2), "::");
-						if (result != null) {
-							return result;
-						}
-					}
-				} else {
-					int dollar = text.indexOf('$');
-					if (dollar > 0) {
-						String preferredTypeText = text.substring(0, dollar);
-						return Tuples.create(referencedType, preferredTypeText);
-					} else {
-						return Tuples.create(referencedType, text);
-					}
-				}
-			}
+	private String getFirstNameSegment(EObject owner, EReference reference) {
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
+		if (nodes.size() == 1) {
+			String text = NodeModelUtils.getTokenText(nodes.get(0));
+			return getFirstNameSegment(text);
 		}
-		return Tuples.create(referencedType, null);
+		throw new IllegalStateException("Cannot find node for feature");
 	}
 
-	private Pair<JvmDeclaredType,String> findPreferredText(JvmDeclaredType referencedType, String text, String delimiter) {
-		int idx = text.lastIndexOf(delimiter);
-		if (idx >= 0) {
-			JvmDeclaredType declaredType = referencedType;
-			while(declaredType.getDeclaringType() != null && idx >= 0) {
-				declaredType = declaredType.getDeclaringType();
-				text = text.substring(0, idx);
-				idx = text.lastIndexOf(delimiter, idx-1);
+	protected String getFirstNameSegment(String text) {
+		int firstDelimiter = text.indexOf('.');
+		if (firstDelimiter == -1) {
+			firstDelimiter = text.indexOf('$');
+		} else {
+			int dollar = text.indexOf('$');
+			if (dollar != -1) {
+				firstDelimiter = Math.min(firstDelimiter, dollar);
 			}
-			return Tuples.create(declaredType, text);
 		}
-		return null;
+		if (firstDelimiter == -1) {
+			firstDelimiter = text.indexOf("::");
+			if (firstDelimiter == text.length() - 2 && firstDelimiter >= 0) {
+				text = text.substring(0, firstDelimiter);
+				firstDelimiter = -1;
+			}
+		} else {
+			int colon = text.indexOf("::");
+			if (colon != text.length() - 2 && colon != -1) {
+				firstDelimiter = Math.min(firstDelimiter, colon);
+			}
+		}
+		if (firstDelimiter != -1) {
+			return text.substring(0, firstDelimiter);
+		}
+		return text;
 	}
-	
+
+	private PreferredType findPreferredType(JvmDeclaredType referencedType, String text) {
+		if (referencedType != null && !referencedType.eIsProxy()) {
+			if (referencedType.getDeclaringType() == null) {
+				return new PreferredType(referencedType, referencedType);
+			}
+			String outerSegment = getFirstNameSegment(text);
+			JvmType outerType = findDeclaringTypeBySimpleName(referencedType, outerSegment);
+			if (outerType == null) {
+				throw new IllegalStateException();
+			}
+			return new PreferredType(outerType, referencedType);
+		}
+		String name = getFirstNameSegment(text);
+		return new PreferredType(name);
+	}
+
+	private JvmDeclaredType findDeclaringTypeBySimpleName(JvmDeclaredType referencedType, String outerSegment) {
+		if (referencedType.getDeclaringType() == null || outerSegment.equals(referencedType.getSimpleName())) {
+			return referencedType;
+		}
+		return findDeclaringTypeBySimpleName(referencedType.getDeclaringType(), outerSegment);
+	}
+
 	protected void acceptPreferredType(EObject owner, EReference referenceToTypeOrMember) {
 		ITextRegion refRegion = locationInFileProvider.getFullTextRegion(owner, referenceToTypeOrMember, 0);
 		IParseResult parseResult = resource.getParseResult();
 		if(parseResult != null) {
-			String refText = parseResult.getRootNode().getText().substring(
-					refRegion.getOffset(), refRegion.getOffset() + refRegion.getLength());
-			Pair<? extends JvmType, String> preferredType = findPreferredType(owner, referenceToTypeOrMember);
-			boolean noDelimiter = false;
-			boolean staticAccess = referenceToTypeOrMember == XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE;
-			if (preferredType.getFirst() != null) {
-				if (preferredType.getSecond() != null) {
-					refRegion = new TextRegion(refRegion.getOffset(), refRegion.getLength() - refText.length() + preferredType.getSecond().length());
-					if (staticAccess && !Strings.equal(preferredType.getSecond(), refText)) {
-						noDelimiter = true;
+			String completeText = parseResult.getRootNode().getText();
+			String refText = completeText.substring(refRegion.getOffset(), refRegion.getOffset() + refRegion.getLength());
+			PreferredType preferredType = findPreferredType(owner, referenceToTypeOrMember, refText);
+			if (preferredType != null) {
+				if (preferredType.referencedType != null) {
+					acceptType(preferredType.referencedType, preferredType.usedType, refRegion);
+				} else {
+					String suffix = refText.substring(preferredType.unresolvedTypeName.length());
+					if (owner instanceof XFeatureCall) {
+						XFeatureCall featureCall = (XFeatureCall) owner; 
+						if (typeLiteralHelper.isPotentialTypeLiteral(featureCall, null)) {
+							XAbstractFeatureCall root = typeLiteralHelper.getRootTypeLiteral(featureCall);
+							if (root != null) {
+								ITextRegion region = locationInFileProvider.getSignificantTextRegion(root);
+								if (region.getOffset() == refRegion.getOffset()) {
+									suffix = completeText.substring(region.getOffset(), region.getOffset() + region.getLength());
+									suffix = suffix.substring(preferredType.unresolvedTypeName.length());
+									refRegion = region;
+								}
+							}
+						}
 					}
-					refText = preferredType.getSecond();
+					acceptUnresolvedType(preferredType.unresolvedTypeName, suffix, refRegion);
 				}
 			}
-			acceptType(preferredType.getFirst(), refText, refRegion, staticAccess, noDelimiter);
 		}
 	}
 	
-	protected void acceptType(JvmType type, String refText, ITextRegion refRegion, boolean staticAccess, boolean noDelimiter) {
+	protected void acceptType(JvmType type, ITextRegion refRegion) {
+		acceptType(type, type, refRegion);
+	}
+	
+	protected void acceptType(JvmType type, JvmType usedType, ITextRegion refRegion) {
 		if(currentContext != null) {
 			if (type == null || type.eIsProxy()) {
-				typeUsages.addUnresolved(refText, refRegion, currentContext, staticAccess, noDelimiter);
+				throw new IllegalArgumentException();
 			} else if (type instanceof JvmDeclaredType) {
-				typeUsages.addTypeUsage((JvmDeclaredType) type, refText, refRegion, currentContext, staticAccess, noDelimiter);
+				typeUsages.addTypeUsage((JvmDeclaredType) type, (JvmDeclaredType) usedType, refRegion, currentContext);
 			}
+		}
+	}
+	
+	protected void acceptUnresolvedType(String usedTypeName, String suffix, ITextRegion refRegion) {
+		if(currentContext != null) {
+			typeUsages.addUnresolved(usedTypeName, suffix, refRegion, currentContext);
 		}
 	}
 	

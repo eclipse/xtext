@@ -11,17 +11,17 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
-import org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.ui.navigation.TypeLiteralAwareHyperlinkHelper;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class XtendHyperlinkHelper extends TypeAwareHyperlinkHelper {
+public class XtendHyperlinkHelper extends TypeLiteralAwareHyperlinkHelper {
 
 	@Inject
 	private IJvmModelAssociations associations;
