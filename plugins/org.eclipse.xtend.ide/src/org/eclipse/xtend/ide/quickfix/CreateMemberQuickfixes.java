@@ -29,9 +29,13 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -116,9 +120,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					
 				} else if(call instanceof XFeatureCall) {
 					if(!call.isExplicitOperationCallOrBuilderSyntax()) {
-						if(!isStaticAccess(call)) {
-							newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
-						}
+						newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					}
@@ -154,7 +156,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 
 	protected boolean isStaticAccess(XAbstractFeatureCall call) {
-		return call instanceof XFeatureCall && ((XFeatureCall)call).getDeclaringType() != null; 
+		return call instanceof XMemberFeatureCall && ((XMemberFeatureCall)call).isExplicitStatic(); 
 	}
 	
 	@Nullable
@@ -172,12 +174,17 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected JvmTypeReference getReceiverType(XAbstractFeatureCall featureCall) {
 		XExpression actualReceiver = featureCall.getActualReceiver();
 		if(actualReceiver == null) {
-			if(featureCall instanceof XFeatureCall) {
-				JvmDeclaredType declaringType = ((XFeatureCall)featureCall).getDeclaringType();
-				if(declaringType != null) 
-					return typeRefs.createTypeRef(declaringType);
-			}
+//			if(featureCall instanceof XFeatureCall) {
+//				JvmDeclaredType declaringType = ((XFeatureCall)featureCall).getDeclaringType();
+//				if(declaringType != null) 
+//					return typeRefs.createTypeRef(declaringType);
+//			}
 			return typeRefs.createTypeRef(getCallersType(featureCall));
+		} else if (actualReceiver instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) actualReceiver).isTypeLiteral()) {
+			JvmType type = (JvmType) ((XAbstractFeatureCall) actualReceiver).getFeature();
+			JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+			reference.setType(type);
+			return reference;
 		} else {
 			JvmTypeReference typeRef = typeProvider.getType(actualReceiver);
 			if(typeRef != null && typeRef.getType() instanceof JvmDeclaredType)

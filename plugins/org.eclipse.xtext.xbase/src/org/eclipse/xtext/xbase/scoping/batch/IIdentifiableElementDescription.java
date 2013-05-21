@@ -49,6 +49,8 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	@Nullable
 	XExpression getSyntacticReceiver();
 	
+	boolean isSyntacticReceiverPossibleArgument();
+	
 	Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping();
 	
 	EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints();
@@ -62,6 +64,8 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	boolean isVisible();
 
 	boolean isStatic();
+	
+	boolean isTypeLiteral();
 	
 	boolean isExtension();
 	

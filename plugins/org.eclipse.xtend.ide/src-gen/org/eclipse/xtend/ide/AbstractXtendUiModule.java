@@ -88,11 +88,6 @@ public abstract class AbstractXtendUiModule extends DefaultUiModule {
 		return org.eclipse.xtend.ide.quickfix.XtendQuickfixProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
-	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtend.ide.labeling.XtendDescriptionLabelProvider.class);
-	}
-
 	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider> bindIOutlineTreeProvider() {
 		return org.eclipse.xtend.ide.outline.XtendOutlineTreeProvider.class;

@@ -31,13 +31,26 @@ public class TypeUsages {
 	
 	private List<TypeUsage> unresolvedTypes = newArrayList();
 	
-	public void addTypeUsage(JvmDeclaredType type, String text, ITextRegion textRegion, JvmMember context, boolean staticAccess, boolean noDelimiter) {
-		simpleName2types.put(type.getSimpleName(), type);
-		types2usages.put(type, new TypeUsage(text, textRegion, context, staticAccess, noDelimiter));
+	public void addTypeUsage(
+			JvmDeclaredType typeToImport,
+			JvmDeclaredType usedType,
+			ITextRegion textRegion,
+			JvmMember context) {
+		simpleName2types.put(typeToImport.getSimpleName(), typeToImport);
+		types2usages.put(typeToImport, new TypeUsage(usedType, textRegion, context));
 	}
 	
-	public void addUnresolved(String text, ITextRegion textRegion, JvmMember context, boolean staticAccess, boolean noDelimiter) {
-		unresolvedTypes.add(new TypeUsage(text, textRegion, context, staticAccess, noDelimiter));
+	public void addTypeUsage(
+			JvmDeclaredType typeToImport,
+			String suffix,
+			ITextRegion textRegion,
+			JvmMember context) {
+		simpleName2types.put(typeToImport.getSimpleName(), typeToImport);
+		types2usages.put(typeToImport, new TypeUsage(typeToImport, suffix, textRegion, context));
+	}
+	
+	public void addUnresolved(String unresolvedTypeName, String suffix, ITextRegion textRegion, JvmMember context) {
+		unresolvedTypes.add(new TypeUsage(unresolvedTypeName, suffix, textRegion, context));
 	}
 	
 	public Multimap<String, JvmDeclaredType> getSimpleName2Types() {

@@ -38,8 +38,11 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected, final boolean validate) {
     try {
-      String _string = model.toString();
-      final XtendFile xtendFile = this.file(_string, validate);
+      String _string = expected.toString();
+      boolean _contains = _string.contains("$");
+      Assert.assertFalse(_contains);
+      String _string_1 = model.toString();
+      final XtendFile xtendFile = this.file(_string_1, validate);
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       StringBuilder _stringBuilder = new StringBuilder(model);
@@ -82,9 +85,9 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
         String _text = it_1.getText();
         builder.replace(_offset, _plus, _text);
       }
-      String _string_1 = expected.toString();
-      String _string_2 = builder.toString();
-      Assert.assertEquals(_string_1, _string_2);
+      String _string_2 = expected.toString();
+      String _string_3 = builder.toString();
+      Assert.assertEquals(_string_2, _string_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -504,7 +507,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("def void test(Resource$Factory a, Resource$Factory$Registry b) {");
+    _builder_1.append("def void test(Resource.Factory a, Resource.Factory.Registry b) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -550,10 +553,10 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val x = Resource$Factory$Registry::INSTANCE");
+    _builder_1.append("val x = Resource.Factory.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val y = EPackage$Registry::INSTANCE");
+    _builder_1.append("val y = EPackage.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -589,7 +592,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def test() {");
     _builder_1.newLine();
     _builder_1.append("\t ");
-    _builder_1.append("typeof(Resource$Factory) == typeof(Resource$Factory$Registry)");
+    _builder_1.append("typeof(Resource.Factory) == typeof(Resource.Factory.Registry)");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -632,7 +635,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("typeof(Resource$Factory$Registry) == typeof(EPackage$Registry)");
+    _builder_1.append("typeof(Resource.Factory.Registry) == typeof(EPackage.Registry)");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -704,7 +707,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE");
+    _builder_1.append("val x = org.eclipse.emf.ecore.resource.Resource.Factory.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -780,10 +783,10 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val x = Resource::Factory::Registry::INSTANCE");
+    _builder_1.append("val x = Resource.Factory.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val y = EPackage::Registry::INSTANCE");
+    _builder_1.append("val y = EPackage.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -934,7 +937,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val x = org::eclipse::emf::ecore::resource::Resource::Factory::Registry::INSTANCE");
+    _builder_1.append("val x = org.eclipse.emf.ecore.resource.Resource.Factory.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1141,7 +1144,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("def void test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) {");
+    _builder_1.append("def void test(XbasePackage.Literals x, XAnnotationsPackage.Literals y) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1215,7 +1218,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("def void test(Literals x, XAnnotationsPackage$Literals y) {");
+    _builder_1.append("def void test(Literals x, XAnnotationsPackage.Literals y) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1915,7 +1918,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("def Map$Entry test() {");
+    _builder_1.append("def Map.Entry test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null");
@@ -1958,7 +1961,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("def Map$Entry test() {");
+    _builder_1.append("def Map.Entry test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null");
@@ -2001,7 +2004,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("def Resource$Factory$Descriptor test() {");
+    _builder_1.append("def Resource.Factory.Descriptor test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null");
@@ -2044,7 +2047,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("def Resource$Factory$Descriptor test() {");
+    _builder_1.append("def Resource.Factory.Descriptor test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null");
@@ -2388,7 +2391,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("def Map$Entry test() {");
+    _builder_1.append("def Map.Entry test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null");
@@ -2790,7 +2793,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("import org.eclipse.xtext.service.DispatchingProvider");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@DispatchingProvider$Runtime");
+    _builder_1.append("@DispatchingProvider.Runtime");
     _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -2883,7 +2886,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("import org.eclipse.xtext.service.DispatchingProvider");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@DispatchingProvider$Runtime");
+    _builder_1.append("@DispatchingProvider.Runtime");
     _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -3128,7 +3131,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Foo extends OuterClass {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("OuterClass$MiddleClass foo");
+    _builder_1.append("OuterClass.MiddleClass foo");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -3579,7 +3582,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("class Bug406086 {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("val x = bug406086::^def::Bug406086::FIELD");
+    _builder_1.append("val x = bug406086.^def.Bug406086::FIELD");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

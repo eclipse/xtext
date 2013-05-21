@@ -113,7 +113,7 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 			XConstructorCall constructorCall = (XConstructorCall) semanticObject;
 			if (constructorCall.eContainer() instanceof XMemberFeatureCall) {
 				XMemberFeatureCall container = (XMemberFeatureCall) constructorCall.eContainer();
-				if (container.getMemberCallTarget() == constructorCall && !container.isNullSafe() && !container.isSpreading()) {
+				if (container.getMemberCallTarget() == constructorCall && !container.isNullSafe()) {
 					if (constructorCall.getArguments().isEmpty() && constructorCall.getTypeArguments().isEmpty()) {
 						if (nodes != null) {
 							ISynNavigable fromState = transition;
