@@ -21,6 +21,8 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -169,6 +171,22 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 			return null;
 		IResolvedTypes delegate = getDelegate(constructorCall);
 		return delegate.getLinkedFeature(constructorCall);
+	}
+	
+	@Nullable
+	public IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall) {
+		if (featureCall == null)
+			return null;
+		IResolvedTypes delegate = getDelegate(featureCall);
+		return delegate.getLinkingCandidate(featureCall);
+	}
+	
+	@Nullable
+	public IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall) {
+		if (constructorCall == null)
+			return null;
+		IResolvedTypes delegate = getDelegate(constructorCall);
+		return delegate.getLinkingCandidate(constructorCall);
 	}
 
 	@Override

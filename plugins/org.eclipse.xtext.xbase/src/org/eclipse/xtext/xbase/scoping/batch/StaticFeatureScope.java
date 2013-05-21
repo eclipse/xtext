@@ -129,5 +129,13 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 		}
 		return allDescriptions;
 	}
+	
+	protected LightweightTypeReference getReceiverType() {
+		return receiverType;
+	}
+	
+	protected XExpression getReceiver() {
+		return receiver;
+	}
 
 }

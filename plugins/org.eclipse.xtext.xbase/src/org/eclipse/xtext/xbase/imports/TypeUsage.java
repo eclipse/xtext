@@ -15,34 +15,43 @@ import org.eclipse.xtext.util.ITextRegion;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class TypeUsage {
-	private String text;
-	
+	private JvmDeclaredType usedType;
+	private String usedTypeName;
+	private String suffix;
 	private ITextRegion textRegion;
-	
 	private JvmMember context;
 
-	private boolean staticAccess;
-
-	private boolean noDelimiter;
-
-	public TypeUsage(String text, ITextRegion textRegion, JvmMember context, boolean staticAccess, boolean noDelimiter) {
-		this.text = text;
+	public TypeUsage(JvmDeclaredType usedType, String suffix, ITextRegion textRegion, JvmMember context) {
+		this.usedType = usedType;
 		this.textRegion = textRegion;
 		this.context = context;
-		this.staticAccess = staticAccess;
-		this.noDelimiter = noDelimiter;
+		this.suffix = suffix;
 	}
 	
-	public boolean isStaticAccess() {
-		return staticAccess;
+	public TypeUsage(JvmDeclaredType usedType, ITextRegion textRegion, JvmMember context) {
+		this.usedType = usedType;
+		this.textRegion = textRegion;
+		this.context = context;
+		this.suffix = "";
 	}
 	
-	public boolean isTrailingDelimiterSuppressed() {
-		return noDelimiter;
+	public TypeUsage(String usedTypeName, String suffix, ITextRegion textRegion, JvmMember context) {
+		this.usedTypeName = usedTypeName;
+		this.textRegion = textRegion;
+		this.context = context;
+		this.suffix = suffix;
 	}
 	
-	public String getText() {
-		return text;
+	public JvmDeclaredType getUsedType() {
+		return usedType;
+	}
+	
+	public String getUsedTypeName() {
+		return usedTypeName;
+	}
+	
+	public String getSuffix() {
+		return suffix;
 	}
 	
 	public ITextRegion getTextRegion() {
