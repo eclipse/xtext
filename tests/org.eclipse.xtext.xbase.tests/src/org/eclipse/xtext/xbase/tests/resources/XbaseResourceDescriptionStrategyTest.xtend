@@ -7,8 +7,6 @@ import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
 
-import static org.junit.Assert.*
-
 class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase {
 	
 	@Inject XbaseResourceDescriptionStrategy descriptionStrategy

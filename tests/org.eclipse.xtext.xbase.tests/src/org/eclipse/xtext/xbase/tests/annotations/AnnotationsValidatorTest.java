@@ -99,7 +99,7 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 	
 	@Test public void testSideEffect_1() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['foo'.replace('foo', 'bar')])", false);
-		validator.assertError(annotation, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
+		validator.assertError(annotation, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
 	}
 	
 	@Test public void testEmptyValueList_03() throws Exception {

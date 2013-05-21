@@ -196,7 +196,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cXBooleanLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cXNumberLiteralParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cXTypeLiteralParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cXAnnotationValueFieldReferenceParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cXAnnotationValueMemberFieldReferenceParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		private final Group cGroup_7 = (Group)cAlternatives.eContents().get(7);
 		private final Keyword cLeftParenthesisKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final RuleCall cXAnnotationElementValueStringConcatenationParserRuleCall_7_1 = (RuleCall)cGroup_7.eContents().get(1);
@@ -204,11 +204,11 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		
 		//XAnnotationElementValue returns xbase::XExpression:
 		//	XAnnotation | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
-		//	XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
+		//	XAnnotationValueMemberFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
 		public ParserRule getRule() { return rule; }
 
 		//XAnnotation | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
-		//XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")"
+		//XAnnotationValueMemberFieldReference | "(" XAnnotationElementValueStringConcatenation ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//XAnnotation
@@ -229,8 +229,8 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//XTypeLiteral
 		public RuleCall getXTypeLiteralParserRuleCall_5() { return cXTypeLiteralParserRuleCall_5; }
 
-		//XAnnotationValueFieldReference
-		public RuleCall getXAnnotationValueFieldReferenceParserRuleCall_6() { return cXAnnotationValueFieldReferenceParserRuleCall_6; }
+		//XAnnotationValueMemberFieldReference
+		public RuleCall getXAnnotationValueMemberFieldReferenceParserRuleCall_6() { return cXAnnotationValueMemberFieldReferenceParserRuleCall_6; }
 
 		//"(" XAnnotationElementValueStringConcatenation ")"
 		public Group getGroup_7() { return cGroup_7; }
@@ -245,46 +245,87 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		public Keyword getRightParenthesisKeyword_7_2() { return cRightParenthesisKeyword_7_2; }
 	}
 
+	public class XAnnotationValueMemberFieldReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XAnnotationValueMemberFieldReference");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cXAnnotationValueFieldReferenceParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cXMemberFeatureCallMemberCallTargetAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_1_0 = (Keyword)cAlternatives_1_1.eContents().get(0);
+		private final Assignment cExplicitStaticAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
+		private final Keyword cExplicitStaticColonColonKeyword_1_1_1_0 = (Keyword)cExplicitStaticAssignment_1_1_1.eContents().get(0);
+		private final Assignment cFeatureAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final CrossReference cFeatureJvmIdentifiableElementCrossReference_1_2_0 = (CrossReference)cFeatureAssignment_1_2.eContents().get(0);
+		private final RuleCall cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_2_0_1 = (RuleCall)cFeatureJvmIdentifiableElementCrossReference_1_2_0.eContents().get(1);
+		
+		//XAnnotationValueMemberFieldReference returns xbase::XExpression:
+		//	XAnnotationValueFieldReference ({xbase::XMemberFeatureCall.memberCallTarget=current} ("." | explicitStatic?="::")
+		//	feature=[types::JvmIdentifiableElement|IdOrSuper])*;
+		public ParserRule getRule() { return rule; }
+
+		//XAnnotationValueFieldReference ({xbase::XMemberFeatureCall.memberCallTarget=current} ("." | explicitStatic?="::")
+		//feature=[types::JvmIdentifiableElement|IdOrSuper])*
+		public Group getGroup() { return cGroup; }
+
+		//XAnnotationValueFieldReference
+		public RuleCall getXAnnotationValueFieldReferenceParserRuleCall_0() { return cXAnnotationValueFieldReferenceParserRuleCall_0; }
+
+		//({xbase::XMemberFeatureCall.memberCallTarget=current} ("." | explicitStatic?="::")
+		//feature=[types::JvmIdentifiableElement|IdOrSuper])*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{xbase::XMemberFeatureCall.memberCallTarget=current}
+		public Action getXMemberFeatureCallMemberCallTargetAction_1_0() { return cXMemberFeatureCallMemberCallTargetAction_1_0; }
+
+		//"." | explicitStatic?="::"
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+
+		//"."
+		public Keyword getFullStopKeyword_1_1_0() { return cFullStopKeyword_1_1_0; }
+
+		//explicitStatic?="::"
+		public Assignment getExplicitStaticAssignment_1_1_1() { return cExplicitStaticAssignment_1_1_1; }
+
+		//"::"
+		public Keyword getExplicitStaticColonColonKeyword_1_1_1_0() { return cExplicitStaticColonColonKeyword_1_1_1_0; }
+
+		//feature=[types::JvmIdentifiableElement|IdOrSuper]
+		public Assignment getFeatureAssignment_1_2() { return cFeatureAssignment_1_2; }
+
+		//[types::JvmIdentifiableElement|IdOrSuper]
+		public CrossReference getFeatureJvmIdentifiableElementCrossReference_1_2_0() { return cFeatureJvmIdentifiableElementCrossReference_1_2_0; }
+
+		//IdOrSuper
+		public RuleCall getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_2_0_1() { return cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_2_0_1; }
+	}
+
 	public class XAnnotationValueFieldReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XAnnotationValueFieldReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cXFeatureCallAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cDeclaringTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDeclaringTypeJvmDeclaredTypeCrossReference_1_0 = (CrossReference)cDeclaringTypeAssignment_1.eContents().get(0);
-		private final RuleCall cDeclaringTypeJvmDeclaredTypeStaticQualifierParserRuleCall_1_0_1 = (RuleCall)cDeclaringTypeJvmDeclaredTypeCrossReference_1_0.eContents().get(1);
-		private final Assignment cFeatureAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cFeatureJvmIdentifiableElementCrossReference_2_0 = (CrossReference)cFeatureAssignment_2.eContents().get(0);
-		private final RuleCall cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_2_0_1 = (RuleCall)cFeatureJvmIdentifiableElementCrossReference_2_0.eContents().get(1);
+		private final Assignment cFeatureAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cFeatureJvmIdentifiableElementCrossReference_1_0 = (CrossReference)cFeatureAssignment_1.eContents().get(0);
+		private final RuleCall cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_0_1 = (RuleCall)cFeatureJvmIdentifiableElementCrossReference_1_0.eContents().get(1);
 		
 		//XAnnotationValueFieldReference returns xbase::XExpression:
-		//	{xbase::XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]?
-		//	feature=[types::JvmIdentifiableElement|IdOrSuper];
+		//	{xbase::XFeatureCall} feature=[types::JvmIdentifiableElement|IdOrSuper];
 		public ParserRule getRule() { return rule; }
 
-		//{xbase::XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]?
-		//feature=[types::JvmIdentifiableElement|IdOrSuper]
+		//{xbase::XFeatureCall} feature=[types::JvmIdentifiableElement|IdOrSuper]
 		public Group getGroup() { return cGroup; }
 
 		//{xbase::XFeatureCall}
 		public Action getXFeatureCallAction_0() { return cXFeatureCallAction_0; }
 
-		//declaringType=[types::JvmDeclaredType|StaticQualifier]?
-		public Assignment getDeclaringTypeAssignment_1() { return cDeclaringTypeAssignment_1; }
-
-		//[types::JvmDeclaredType|StaticQualifier]
-		public CrossReference getDeclaringTypeJvmDeclaredTypeCrossReference_1_0() { return cDeclaringTypeJvmDeclaredTypeCrossReference_1_0; }
-
-		//StaticQualifier
-		public RuleCall getDeclaringTypeJvmDeclaredTypeStaticQualifierParserRuleCall_1_0_1() { return cDeclaringTypeJvmDeclaredTypeStaticQualifierParserRuleCall_1_0_1; }
-
 		//feature=[types::JvmIdentifiableElement|IdOrSuper]
-		public Assignment getFeatureAssignment_2() { return cFeatureAssignment_2; }
+		public Assignment getFeatureAssignment_1() { return cFeatureAssignment_1; }
 
 		//[types::JvmIdentifiableElement|IdOrSuper]
-		public CrossReference getFeatureJvmIdentifiableElementCrossReference_2_0() { return cFeatureJvmIdentifiableElementCrossReference_2_0; }
+		public CrossReference getFeatureJvmIdentifiableElementCrossReference_1_0() { return cFeatureJvmIdentifiableElementCrossReference_1_0; }
 
 		//IdOrSuper
-		public RuleCall getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_2_0_1() { return cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_2_0_1; }
+		public RuleCall getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_0_1() { return cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_0_1; }
 	}
 	
 	
@@ -292,6 +333,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	private XAnnotationElementValuePairElements pXAnnotationElementValuePair;
 	private XAnnotationElementValueStringConcatenationElements pXAnnotationElementValueStringConcatenation;
 	private XAnnotationElementValueElements pXAnnotationElementValue;
+	private XAnnotationValueMemberFieldReferenceElements pXAnnotationValueMemberFieldReference;
 	private XAnnotationValueFieldReferenceElements pXAnnotationValueFieldReference;
 	
 	private final Grammar grammar;
@@ -367,7 +409,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 
 	//XAnnotationElementValue returns xbase::XExpression:
 	//	XAnnotation | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
-	//	XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
+	//	XAnnotationValueMemberFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
 	public XAnnotationElementValueElements getXAnnotationElementValueAccess() {
 		return (pXAnnotationElementValue != null) ? pXAnnotationElementValue : (pXAnnotationElementValue = new XAnnotationElementValueElements());
 	}
@@ -376,9 +418,19 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		return getXAnnotationElementValueAccess().getRule();
 	}
 
+	//XAnnotationValueMemberFieldReference returns xbase::XExpression:
+	//	XAnnotationValueFieldReference ({xbase::XMemberFeatureCall.memberCallTarget=current} ("." | explicitStatic?="::")
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper])*;
+	public XAnnotationValueMemberFieldReferenceElements getXAnnotationValueMemberFieldReferenceAccess() {
+		return (pXAnnotationValueMemberFieldReference != null) ? pXAnnotationValueMemberFieldReference : (pXAnnotationValueMemberFieldReference = new XAnnotationValueMemberFieldReferenceElements());
+	}
+	
+	public ParserRule getXAnnotationValueMemberFieldReferenceRule() {
+		return getXAnnotationValueMemberFieldReferenceAccess().getRule();
+	}
+
 	//XAnnotationValueFieldReference returns xbase::XExpression:
-	//	{xbase::XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]?
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper];
+	//	{xbase::XFeatureCall} feature=[types::JvmIdentifiableElement|IdOrSuper];
 	public XAnnotationValueFieldReferenceElements getXAnnotationValueFieldReferenceAccess() {
 		return (pXAnnotationValueFieldReference != null) ? pXAnnotationValueFieldReference : (pXAnnotationValueFieldReference = new XAnnotationValueFieldReferenceElements());
 	}
@@ -398,9 +450,8 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XAssignment returns XExpression:
-	//	{XAssignment} / * (declaringType=[types::JvmDeclaredType] '::')? * /
-	//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment | XOrExpression (=>
-	//	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
+	//	{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment | XOrExpression
+	//	(=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 	//	rightOperand=XAssignment)?;
 	public XbaseGrammarAccess.XAssignmentElements getXAssignmentAccess() {
 		return gaXbase.getXAssignmentAccess();
@@ -609,9 +660,10 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XMemberFeatureCall returns XExpression:
-	//	XPrimaryExpression (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement|FeatureCallID]
-	//	OpSingleAssign) value=XAssignment | => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." |
-	//	spreading?="*.")) ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ("." | explicitStatic?="::")
+	//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment | =>
+	//	({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ("<"
+	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
 	//	feature=[types::JvmIdentifiableElement|FeatureCallID] (=> explicitOperationCall?="("
 	//	(memberCallArguments+=XShortClosure | memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?
 	//	memberCallArguments+=XClosure?)*;
@@ -831,10 +883,9 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XFeatureCall returns XExpression:
-	//	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
-	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement|IdOrSuper] (=>
-	//	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
-	//	featureCallArguments+=XExpression)*)? ")")? featureCallArguments+=XClosure?;
+	//	{XFeatureCall} ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (featureCallArguments+=XShortClosure
+	//	| featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)? ")")? featureCallArguments+=XClosure?;
 	public XbaseGrammarAccess.XFeatureCallElements getXFeatureCallAccess() {
 		return gaXbase.getXFeatureCallAccess();
 	}
@@ -861,19 +912,6 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	
 	public ParserRule getIdOrSuperRule() {
 		return getIdOrSuperAccess().getRule();
-	}
-
-	//// This is a workaround since ANTLR will not be able to resolve
-	//// StaticQualifier: ValidID ('::' ValidID)*; and XFeatureCall: (StaticQualifier '::')? ValidID
-	//// Make sure to change the value converter if you change the syntax of the StaticQualifier
-	//StaticQualifier:
-	//	(ValidID "::")+;
-	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
-		return gaXbase.getStaticQualifierAccess();
-	}
-	
-	public ParserRule getStaticQualifierRule() {
-		return getStaticQualifierAccess().getRule();
 	}
 
 	//XConstructorCall returns XExpression:

@@ -1,12 +1,18 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.validation;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -15,7 +21,6 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -26,12 +31,18 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
+import org.eclipse.xtext.xbase.annotations.validation.AnnotationValueValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class AnnotationValidation extends AbstractDeclarativeValidator {
+  @Inject
+  private AnnotationValueValidator annotationValueValidator;
+  
   protected List<EPackage> getEPackages() {
     ArrayList<EPackage> _newArrayList = CollectionLiterals.<EPackage>newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
     return _newArrayList;
@@ -56,21 +67,15 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
           String _name = it_1.getName();
           _builder.append(_name, "");
           _builder.append("; only primitive type, String, Class, annotation, enumeration are permitted or 1-dimensional arrays thereof");
-          this.error(_builder.toString(), it_1, Literals.XTEND_FIELD__TYPE, IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
+          this.error(_builder.toString(), it_1, 
+            Literals.XTEND_FIELD__TYPE, 
+            IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
         }
         XExpression _initialValue = it_1.getInitialValue();
         boolean _notEquals = (!Objects.equal(_initialValue, null));
         if (_notEquals) {
           XExpression _initialValue_1 = it_1.getInitialValue();
-          Iterable<EObject> _eAllContents = EcoreUtil2.eAllContents(_initialValue_1);
-          for (final EObject subExpression : _eAllContents) {
-            EClass _eClass = subExpression.eClass();
-            boolean _contains = XbaseWithAnnotationsJavaValidator.expressionTypesAllowedAsValues.contains(_eClass);
-            boolean _not_1 = (!_contains);
-            if (_not_1) {
-              this.error("The value for an annotation attribute must be a constant expression", it_1, Literals.XTEND_FIELD__INITIAL_VALUE, org.eclipse.xtext.xbase.validation.IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE);
-            }
-          }
+          this.annotationValueValidator.validateAnnotationValue(_initialValue_1, this);
         }
       }
     }

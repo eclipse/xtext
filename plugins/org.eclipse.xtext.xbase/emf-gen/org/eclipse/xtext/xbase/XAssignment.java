@@ -18,6 +18,7 @@ package org.eclipse.xtext.xbase;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XAssignment#getAssignable <em>Assignable</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAssignment#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XAssignment#isExplicitStatic <em>Explicit Static</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,5 +79,31 @@ public interface XAssignment extends XAbstractFeatureCall
 	 * @generated
 	 */
 	void setValue(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Explicit Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Explicit Static</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Explicit Static</em>' attribute.
+	 * @see #setExplicitStatic(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAssignment_ExplicitStatic()
+	 * @model
+	 * @generated
+	 */
+	boolean isExplicitStatic();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAssignment#isExplicitStatic <em>Explicit Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Explicit Static</em>' attribute.
+	 * @see #isExplicitStatic()
+	 * @generated
+	 */
+	void setExplicitStatic(boolean value);
 
 } // XAssignment

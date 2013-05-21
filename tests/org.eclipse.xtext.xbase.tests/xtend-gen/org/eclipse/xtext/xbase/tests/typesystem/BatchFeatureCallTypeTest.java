@@ -37,14 +37,15 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   public void resolvesFeatureCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XAbstractFeatureCall> featureCalls = this.findFeatureCalls(expressionWithQualifiedNames);
-    boolean _isEmpty = featureCalls.isEmpty();
-    Assert.assertFalse(_isEmpty);
-    int _size = ((List<String>)Conversions.doWrapArray(types)).size();
-    int _size_1 = featureCalls.size();
-    Assert.assertEquals(_size, _size_1);
     IBatchTypeResolver _typeResolver = this.getTypeResolver();
     XAbstractFeatureCall _head = IterableExtensions.<XAbstractFeatureCall>head(featureCalls);
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
+    final Iterable<XAbstractFeatureCall> actualFeatureCalls = this.filterTypeLiteralsAndPackageFragments(featureCalls);
+    boolean _isEmpty = IterableExtensions.isEmpty(actualFeatureCalls);
+    Assert.assertFalse(_isEmpty);
+    int _size = ((List<String>)Conversions.doWrapArray(types)).size();
+    int _size_1 = IterableExtensions.size(actualFeatureCalls);
+    Assert.assertEquals(_size, _size_1);
     final Procedure2<XAbstractFeatureCall,Integer> _function = new Procedure2<XAbstractFeatureCall,Integer>() {
         public void apply(final XAbstractFeatureCall featureCall, final Integer index) {
           final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
@@ -56,7 +57,7 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
           Assert.assertEquals(_builder.toString(), _get, _simpleName);
         }
       };
-    IterableExtensions.<XAbstractFeatureCall>forEach(featureCalls, _function);
+    IterableExtensions.<XAbstractFeatureCall>forEach(actualFeatureCalls, _function);
   }
   
   @Test
