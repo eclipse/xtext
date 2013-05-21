@@ -124,7 +124,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 				&& !isImplicitVariable(newTargetElement, reference, newReferenceText)) {
 			boolean isStaticFeatureCall = isStaticFeatureCall(referringElement, reference, newTargetElement);
 			// do nothing on static feature calls with explicit type as the type reference has a separate reference
-			if(!isStaticFeatureCall || ((XFeatureCall) referringElement).getDeclaringType() == null) {
+			if(!isStaticFeatureCall) {
 				Pair<JvmDeclaredType, QualifiedName> importedTypeAndRelativeName = getImportedTypeAndRelativeName((JvmMember)newTargetElement, ((ImportAwareUpdateAcceptor) updateAcceptor).getImportSection());
 				if(importedTypeAndRelativeName != null) {
 					JvmDeclaredType importedType = importedTypeAndRelativeName.getFirst();

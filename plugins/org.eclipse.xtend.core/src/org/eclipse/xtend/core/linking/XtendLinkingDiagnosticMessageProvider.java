@@ -26,7 +26,6 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedAnnotationTypeAwareMessageProducer;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 
@@ -46,7 +45,7 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
 			linkText = e.getNode().getText();
 		}
 		EObject contextObject = context.getContext();
-		if(context.getReference() != XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE && contextObject instanceof XAbstractFeatureCall && !(contextObject instanceof XBinaryOperation || contextObject instanceof XUnaryOperation)){
+		if(contextObject instanceof XAbstractFeatureCall && !(contextObject instanceof XBinaryOperation || contextObject instanceof XUnaryOperation)){
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall)contextObject;
 			XtendTypeDeclaration xtendType = EcoreUtil2.getContainerOfType(featureCall, XtendTypeDeclaration.class);
 			if(xtendType != null){

@@ -19,6 +19,8 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -69,6 +71,55 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected Iterable<XAbstractFeatureCall> filterTypeLiteralsAndPackageFragments(final Iterable<XAbstractFeatureCall> featureCalls) {
+    final Function1<XAbstractFeatureCall,Boolean> _function = new Function1<XAbstractFeatureCall,Boolean>() {
+        public Boolean apply(final XAbstractFeatureCall it) {
+          boolean _switchResult = false;
+          boolean _matched = false;
+          if (!_matched) {
+            if (it instanceof XMemberFeatureCall) {
+              final XMemberFeatureCall _xMemberFeatureCall = (XMemberFeatureCall)it;
+              _matched=true;
+              boolean _and = false;
+              boolean _isPackageFragment = _xMemberFeatureCall.isPackageFragment();
+              boolean _not = (!_isPackageFragment);
+              if (!_not) {
+                _and = false;
+              } else {
+                boolean _isTypeLiteral = _xMemberFeatureCall.isTypeLiteral();
+                boolean _not_1 = (!_isTypeLiteral);
+                _and = (_not && _not_1);
+              }
+              _switchResult = _and;
+            }
+          }
+          if (!_matched) {
+            if (it instanceof XFeatureCall) {
+              final XFeatureCall _xFeatureCall = (XFeatureCall)it;
+              _matched=true;
+              boolean _and = false;
+              boolean _isPackageFragment = _xFeatureCall.isPackageFragment();
+              boolean _not = (!_isPackageFragment);
+              if (!_not) {
+                _and = false;
+              } else {
+                boolean _isTypeLiteral = _xFeatureCall.isTypeLiteral();
+                boolean _not_1 = (!_isTypeLiteral);
+                _and = (_not && _not_1);
+              }
+              _switchResult = _and;
+            }
+          }
+          if (!_matched) {
+            _switchResult = true;
+          }
+          return Boolean.valueOf(_switchResult);
+        }
+      };
+    Iterable<XAbstractFeatureCall> _filter = IterableExtensions.<XAbstractFeatureCall>filter(featureCalls, _function);
+    return _filter;
   }
   
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {

@@ -38,16 +38,24 @@ public class XMemberFeatureCallImplCustom extends XMemberFeatureCallImpl {
 	
 	@Override
 	public EList<XExpression> getActualArguments() {
+		if (isStaticWithDeclaringType()) {
+			return getMemberCallArguments();
+		}
 		return getActualArguments(getMemberCallTarget(), getMemberCallArguments());
 	}
 	
 	@Override
 	public XExpression getActualReceiver() {
+		if (isStaticWithDeclaringType())
+			return null;
 		return getActualReceiver(getMemberCallTarget());
 	}
 	
 	@Override
 	public boolean isExtension() {
+		if (isStaticWithDeclaringType()) {
+			return false;
+		}
 		return isExtension(getMemberCallTarget());
 	}
 }

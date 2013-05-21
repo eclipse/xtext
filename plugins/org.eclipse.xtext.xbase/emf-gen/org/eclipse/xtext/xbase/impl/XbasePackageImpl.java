@@ -690,7 +690,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getXMemberFeatureCall_Spreading()
+	public EAttribute getXMemberFeatureCall_ExplicitStatic()
 	{
 		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(3);
 	}
@@ -703,6 +703,36 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	public EAttribute getXMemberFeatureCall_NullSafe()
 	{
 		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXMemberFeatureCall_TypeLiteral()
+	{
+		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXMemberFeatureCall_StaticWithDeclaringType()
+	{
+		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXMemberFeatureCall_PackageFragment()
+	{
+		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -740,9 +770,19 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXFeatureCall_DeclaringType()
+	public EAttribute getXFeatureCall_TypeLiteral()
 	{
-		return (EReference)xFeatureCallEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)xFeatureCallEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXFeatureCall_PackageFragment()
+	{
+		return (EAttribute)xFeatureCallEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1320,6 +1360,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXAssignment_ExplicitStatic()
+	{
+		return (EAttribute)xAssignmentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXReturnExpression()
 	{
 		return xReturnExpressionEClass;
@@ -1404,13 +1454,17 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEReference(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET);
 		createEReference(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS);
 		createEAttribute(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL);
-		createEAttribute(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__SPREADING);
+		createEAttribute(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__EXPLICIT_STATIC);
 		createEAttribute(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__NULL_SAFE);
+		createEAttribute(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__TYPE_LITERAL);
+		createEAttribute(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE);
+		createEAttribute(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT);
 
 		xFeatureCallEClass = createEClass(XFEATURE_CALL);
 		createEReference(xFeatureCallEClass, XFEATURE_CALL__FEATURE_CALL_ARGUMENTS);
 		createEAttribute(xFeatureCallEClass, XFEATURE_CALL__EXPLICIT_OPERATION_CALL);
-		createEReference(xFeatureCallEClass, XFEATURE_CALL__DECLARING_TYPE);
+		createEAttribute(xFeatureCallEClass, XFEATURE_CALL__TYPE_LITERAL);
+		createEAttribute(xFeatureCallEClass, XFEATURE_CALL__PACKAGE_FRAGMENT);
 
 		xConstructorCallEClass = createEClass(XCONSTRUCTOR_CALL);
 		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__CONSTRUCTOR);
@@ -1490,6 +1544,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xAssignmentEClass = createEClass(XASSIGNMENT);
 		createEReference(xAssignmentEClass, XASSIGNMENT__ASSIGNABLE);
 		createEReference(xAssignmentEClass, XASSIGNMENT__VALUE);
+		createEAttribute(xAssignmentEClass, XASSIGNMENT__EXPLICIT_STATIC);
 
 		xReturnExpressionEClass = createEClass(XRETURN_EXPRESSION);
 		createEReference(xReturnExpressionEClass, XRETURN_EXPRESSION__EXPRESSION);
@@ -1613,13 +1668,17 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEReference(getXMemberFeatureCall_MemberCallTarget(), this.getXExpression(), null, "memberCallTarget", null, 0, 1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXMemberFeatureCall_MemberCallArguments(), this.getXExpression(), null, "memberCallArguments", null, 0, -1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXMemberFeatureCall_ExplicitOperationCall(), ecorePackage.getEBoolean(), "explicitOperationCall", null, 0, 1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getXMemberFeatureCall_Spreading(), ecorePackage.getEBoolean(), "spreading", null, 0, 1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXMemberFeatureCall_ExplicitStatic(), ecorePackage.getEBoolean(), "explicitStatic", null, 0, 1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXMemberFeatureCall_NullSafe(), ecorePackage.getEBoolean(), "nullSafe", null, 0, 1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXMemberFeatureCall_TypeLiteral(), ecorePackage.getEBoolean(), "typeLiteral", null, 0, 1, XMemberFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXMemberFeatureCall_StaticWithDeclaringType(), ecorePackage.getEBoolean(), "staticWithDeclaringType", null, 0, 1, XMemberFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXMemberFeatureCall_PackageFragment(), ecorePackage.getEBoolean(), "packageFragment", null, 0, 1, XMemberFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(xFeatureCallEClass, XFeatureCall.class, "XFeatureCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXFeatureCall_FeatureCallArguments(), this.getXExpression(), null, "featureCallArguments", null, 0, -1, XFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXFeatureCall_ExplicitOperationCall(), ecorePackage.getEBoolean(), "explicitOperationCall", null, 0, 1, XFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXFeatureCall_DeclaringType(), theTypesPackage.getJvmDeclaredType(), null, "declaringType", null, 0, 1, XFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXFeatureCall_TypeLiteral(), ecorePackage.getEBoolean(), "typeLiteral", null, 0, 1, XFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXFeatureCall_PackageFragment(), ecorePackage.getEBoolean(), "packageFragment", null, 0, 1, XFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(xConstructorCallEClass, XConstructorCall.class, "XConstructorCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXConstructorCall_Constructor(), theTypesPackage.getJvmConstructor(), null, "constructor", null, 0, 1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1701,6 +1760,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEClass(xAssignmentEClass, XAssignment.class, "XAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXAssignment_Assignable(), this.getXExpression(), null, "assignable", null, 0, 1, XAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXAssignment_Value(), this.getXExpression(), null, "value", null, 0, 1, XAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXAssignment_ExplicitStatic(), ecorePackage.getEBoolean(), "explicitStatic", null, 0, 1, XAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xReturnExpressionEClass, XReturnExpression.class, "XReturnExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXReturnExpression_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XReturnExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

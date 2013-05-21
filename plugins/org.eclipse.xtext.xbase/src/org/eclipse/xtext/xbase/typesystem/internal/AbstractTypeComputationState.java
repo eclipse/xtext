@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.batch.TypeLiteralDescription;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -404,6 +405,8 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				return new FollowUpError(featureCall, state);
 			}
 			return new UnresolvableFeatureCall(featureCall, ((ScopeProviderAccess.ErrorDescription) description).getNode(), description.getName().toString(), state);
+		} else if (description.isTypeLiteral()) {
+			return new TypeLiteralLinkingCandidate(featureCall, description, state);
 		} else {
 			return new FeatureLinkingCandidate(featureCall, description, state);
 		}
