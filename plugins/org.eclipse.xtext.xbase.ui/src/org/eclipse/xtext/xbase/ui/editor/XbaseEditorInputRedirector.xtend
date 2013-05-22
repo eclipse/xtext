@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.editor
 
 import com.google.inject.Inject
@@ -24,11 +31,15 @@ class XbaseEditorInputRedirector {
 
 	@Inject
 	private FileExtensionProvider fileExtensionProvider
-
-	def IEditorInput findOriginalSource(IEditorInput input) {
+	
+	/**
+	 * @param an input
+	 * 
+	 * @return the original source for an editor input that points to an Xtext resource copied to the output folder, the given input otherwise 
+	 */
+	def IEditorInput findOriginalSourceForOuputFolderCopy(IEditorInput input) {
 		val resource = ResourceUtil::getFile(input)
 		if (resource != null) {
-
 			// if the given resource is already pointing to a language file
 			if (fileExtensionProvider.isValid(resource.fullPath.fileExtension)) {
 				val project = JavaCore::create(resource.project)
@@ -46,8 +57,17 @@ class XbaseEditorInputRedirector {
 						}
 					}
 				}
-				return input
 			}
+		}
+		return input;
+	}
+
+	def IEditorInput findOriginalSource(IEditorInput input) {
+		val resource = ResourceUtil::getFile(input)
+		if (resource != null) {
+			val original = findOriginalSourceForOuputFolderCopy(input)
+			if (original !== input)
+				return original
 
 			val trace = traceInformation.getTraceToSource(resource);
 			if (trace == null)
