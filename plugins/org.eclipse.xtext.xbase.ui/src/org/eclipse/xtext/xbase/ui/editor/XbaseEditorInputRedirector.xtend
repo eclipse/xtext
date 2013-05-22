@@ -20,6 +20,7 @@ import org.eclipse.xtext.generator.trace.ILocationInResource
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput
+import org.eclipse.jdt.core.IClasspathEntry
 
 class XbaseEditorInputRedirector {
 
@@ -54,6 +55,19 @@ class XbaseEditorInputRedirector {
 							if (newFile.exists) {
 								return new FileEditorInput(newFile)
 							}
+						}
+					}
+					// check if it's sitting in one of the output folders set on the source folders
+					for (sourceFolder : project.rawClasspath.filter[entryKind == IClasspathEntry::CPE_SOURCE]) {
+						if (sourceFolder.outputLocation != null
+							&& sourceFolder.outputLocation.isPrefixOf(resource.fullPath)) {
+								val relative = resource.fullPath.removeFirstSegments(sourceFolder.outputLocation.segmentCount)
+								val source = project.findPackageFragmentRoots(sourceFolder).head
+								val fullPath = source.correspondingResource.projectRelativePath.append(relative)
+								val newFile = resource.project.getFile(fullPath)
+								if(newFile.exists) {
+									return new FileEditorInput(newFile)
+								}
 						}
 					}
 				}
