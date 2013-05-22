@@ -1,6 +1,7 @@
 version = '2.4.1'
 
 apply plugin: 'java'
+apply plugin: 'eclipse'
 
 sourceCompatibility = 1.5
 targetCompatibility = 1.5
@@ -8,15 +9,20 @@ targetCompatibility = 1.5
 
 def xtendVersion = version
 
-dependencies {
-	repositories { 
-		mavenCentral()
+sourceSets {
+	main { 
+		java { 
+			srcDir 'src/main/xtend-gen' 
+		}
 	}
+}
+
+dependencies {
+	repositories {  mavenCentral() }
 
 	compile gradleApi()
 	compile 'org.eclipse.xtext:org.eclipse.xtext.xbase.lib:'+xtendVersion
 	compile 'org.eclipse.xtend:org.eclipse.xtend.lib:'+xtendVersion
 	compile 'org.eclipse.xtend:org.eclipse.xtend.standalone:'+xtendVersion
-	compile 'org.apache.logging.log4j:log4j:2.0-beta6'
 	compile 'com.google.inject:guice:3.0'
 }
