@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -96,6 +97,46 @@ public class XbaseEditorInputRedirector {
                     FileEditorInput _fileEditorInput = new FileEditorInput(newFile);
                     return _fileEditorInput;
                   }
+                }
+              }
+            }
+            IClasspathEntry[] _rawClasspath = project.getRawClasspath();
+            final Function1<IClasspathEntry,Boolean> _function_1 = new Function1<IClasspathEntry,Boolean>() {
+                public Boolean apply(final IClasspathEntry it) {
+                  int _entryKind = it.getEntryKind();
+                  boolean _equals = (_entryKind == IClasspathEntry.CPE_SOURCE);
+                  return Boolean.valueOf(_equals);
+                }
+              };
+            Iterable<IClasspathEntry> _filter_1 = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(_rawClasspath)), _function_1);
+            for (final IClasspathEntry sourceFolder : _filter_1) {
+              boolean _and = false;
+              IPath _outputLocation_2 = sourceFolder.getOutputLocation();
+              boolean _notEquals_1 = (!Objects.equal(_outputLocation_2, null));
+              if (!_notEquals_1) {
+                _and = false;
+              } else {
+                IPath _outputLocation_3 = sourceFolder.getOutputLocation();
+                IPath _fullPath_3 = resource.getFullPath();
+                boolean _isPrefixOf_1 = _outputLocation_3.isPrefixOf(_fullPath_3);
+                _and = (_notEquals_1 && _isPrefixOf_1);
+              }
+              if (_and) {
+                IPath _fullPath_4 = resource.getFullPath();
+                IPath _outputLocation_4 = sourceFolder.getOutputLocation();
+                int _segmentCount_1 = _outputLocation_4.segmentCount();
+                final IPath relative_1 = _fullPath_4.removeFirstSegments(_segmentCount_1);
+                IPackageFragmentRoot[] _findPackageFragmentRoots = project.findPackageFragmentRoots(sourceFolder);
+                final IPackageFragmentRoot source_1 = IterableExtensions.<IPackageFragmentRoot>head(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_findPackageFragmentRoots)));
+                IResource _correspondingResource = source_1.getCorrespondingResource();
+                IPath _projectRelativePath = _correspondingResource.getProjectRelativePath();
+                final IPath fullPath = _projectRelativePath.append(relative_1);
+                IProject _project_1 = resource.getProject();
+                final IFile newFile = _project_1.getFile(fullPath);
+                boolean _exists_1 = newFile.exists();
+                if (_exists_1) {
+                  FileEditorInput _fileEditorInput = new FileEditorInput(newFile);
+                  return _fileEditorInput;
                 }
               }
             }
