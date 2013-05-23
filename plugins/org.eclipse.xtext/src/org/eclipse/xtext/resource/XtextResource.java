@@ -95,6 +95,8 @@ public class XtextResource extends ResourceImpl {
 	@Named(Constants.LANGUAGE_NAME) 
 	private String languageName;
 	
+	private long modificationStamp = Integer.MIN_VALUE;
+	
 	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
 		
 		public String getFragment(EObject obj) {
@@ -434,4 +436,22 @@ public class XtextResource extends ResourceImpl {
 	public void setLanguageName(String languageName) {
 		this.languageName = languageName;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setModificationStamp(long documentModificationStamp) {
+		this.modificationStamp = documentModificationStamp;
+	}
+	
+	/**
+	 * The modification stamp of the document reflected in the current state of this resource.
+	 * Has to be set externally.
+	 *  
+	 * @since 2.4
+	 */
+	public long getModificationStamp() {
+		return modificationStamp;
+	}
+	
 }
