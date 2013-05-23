@@ -209,7 +209,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 				}
 				throw e;
 			} finally {
-				checkAndUpdateAnnotations();
+				if(!(work instanceof ReconcilingUnitOfWork))
+					checkAndUpdateAnnotations();
 			}
 		}
 		
