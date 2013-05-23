@@ -10,6 +10,7 @@ package org.eclipse.xtext.util.concurrent;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 
 /**
@@ -18,14 +19,20 @@ import org.eclipse.emf.common.util.WrappedException;
  */
 public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 
+	private static Logger log = Logger.getLogger(AbstractReadWriteAcces.class); 
+	
 	protected abstract P getState();
 
 	protected final ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
 	protected final Lock writeLock = rwLock.writeLock();
 	protected final Lock readLock = rwLock.readLock();
 
-	public <T> T readOnly(IUnitOfWork<T, P> work) {
+	public <T> T readOnly(IUnitOfWork<T, P> work) {	
+		if(log.isTraceEnabled()) 
+			log.trace("Trying to acquire read lock...");
 		readLock.lock();
+		if(log.isTraceEnabled()) 
+			log.trace("...read lock acquired.");
 		try {
 			P state = getState();
 			beforeReadOnly(state,work);
@@ -38,11 +45,17 @@ public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 			throw new WrappedException(e);
 		} finally {
 			readLock.unlock();
+			if(log.isTraceEnabled()) 
+				log.trace("Read lock released.");
 		}
 	}
 
 	public <T> T modify(IUnitOfWork<T, P> work) {
+		if(log.isTraceEnabled()) 
+			log.trace("Trying to acquire write lock...");
 		writeLock.lock();
+		if(log.isTraceEnabled()) 
+			log.trace("...write lock acquired.");
 		P state = null;
 		T exec = null;
 		try {
@@ -56,11 +69,19 @@ public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 			throw new WrappedException(e);
 		} finally {
 			writeLock.unlock();
+			if(log.isTraceEnabled()) 
+				log.trace("Write lock released.");
 			try {
+				if(log.isTraceEnabled()) 
+					log.trace("Trying to acquire read lock...");
 				readLock.lock();
+				if(log.isTraceEnabled()) 
+					log.trace("...read lock acquired.");
 				afterModify(state, exec, work);
 			} finally {
 				readLock.unlock();
+				if(log.isTraceEnabled()) 
+					log.trace("Read lock released.");
 			}
 		}
 	}
