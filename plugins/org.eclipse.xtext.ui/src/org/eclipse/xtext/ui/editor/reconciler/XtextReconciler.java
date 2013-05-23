@@ -82,7 +82,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 
 		public void documentChanged(DocumentEvent event) {
-			if (Display.getCurrent() != null) {
+			if (Display.getCurrent() == null) {
 				log.error("Changes to the document must only be applied from the Display thread to keep them ordered",
 						new Exception());
 			}
