@@ -150,6 +150,58 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test 
+	def void missingMethodInAbstractClass() {
+		create('Foo.xtend', '''
+			abstract class Foo {
+				def String foo() {
+					bar|()
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'bar()'")
+		.assertModelAfterQuickfix("Create method 'bar()'", '''
+			abstract class Foo {
+				def String foo() {
+					bar()
+				}
+				
+				def String bar()
+				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMethodInInterface() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo(Bar bar) {
+					bar.bar|()
+				}
+			}
+			
+			interface Bar {
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Create method 'bar()' in 'Bar'")
+		.assertModelAfterQuickfix("Create method 'bar()' in 'Bar'", '''
+			class Foo {
+				def foo(Bar bar) {
+					bar.bar()
+				}
+			}
+			
+			interface Bar {
+				
+				def void bar()
+				
+			}
+		''')
+	}
+	
+	@Test 
 	def void missingMemberExplicitThis() {
 		create('Foo.xtend', '''
 			class Foo {

@@ -66,10 +66,34 @@ public abstract class AbstractMethodBuilder extends AbstractCodeBuilder {
     this._staticFlag = staticFlag;
   }
   
+  private boolean _abstractFlag;
+  
+  public boolean isAbstractFlag() {
+    return this._abstractFlag;
+  }
+  
+  public void setAbstractFlag(final boolean abstractFlag) {
+    this._abstractFlag = abstractFlag;
+  }
+  
   protected IAppendable appendDefaultBody(final IAppendable appendable, final String statementSeparator) {
-    IAppendable _append = appendable.append("throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")");
-    IAppendable _append_1 = _append.append(statementSeparator);
-    return _append_1;
+    IAppendable _xblockexpression = null;
+    {
+      boolean _isAbstractFlag = this.isAbstractFlag();
+      boolean _not = (!_isAbstractFlag);
+      if (_not) {
+        IAppendable _append = appendable.append(" {");
+        IAppendable _increaseIndentation = _append.increaseIndentation();
+        IAppendable _newLine = _increaseIndentation.newLine();
+        IAppendable _append_1 = _newLine.append("throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")");
+        IAppendable _append_2 = _append_1.append(statementSeparator);
+        IAppendable _decreaseIndentation = _append_2.decreaseIndentation();
+        IAppendable _newLine_1 = _decreaseIndentation.newLine();
+        _newLine_1.append("}");
+      }
+      _xblockexpression = (appendable);
+    }
+    return _xblockexpression;
   }
   
   public String getImage() {

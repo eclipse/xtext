@@ -58,18 +58,18 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
       if (_isStaticFlag) {
         appendable.append("static ");
       }
+      boolean _isAbstractFlag = this.isAbstractFlag();
+      if (_isAbstractFlag) {
+        JvmTypeReference _returnType = this.getReturnType();
+        IAppendable _appendType = this.appendType(appendable, _returnType, "void");
+        _appendType.append(" ");
+      }
       String _methodName = this.getMethodName();
       IAppendable _append_1 = appendable.append(_methodName);
       List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
       IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
-      IAppendable _append_2 = _appendParameters.append(" {");
-      IAppendable _increaseIndentation = _append_2.increaseIndentation();
-      IAppendable _newLine = _increaseIndentation.newLine();
-      IAppendable _appendDefaultBody = this.appendDefaultBody(_newLine, "");
-      IAppendable _decreaseIndentation = _appendDefaultBody.decreaseIndentation();
-      IAppendable _newLine_1 = _decreaseIndentation.newLine();
-      IAppendable _append_3 = _newLine_1.append("}");
-      _xblockexpression = (_append_3);
+      IAppendable _appendDefaultBody = this.appendDefaultBody(_appendParameters, "");
+      _xblockexpression = (_appendDefaultBody);
     }
     return _xblockexpression;
   }

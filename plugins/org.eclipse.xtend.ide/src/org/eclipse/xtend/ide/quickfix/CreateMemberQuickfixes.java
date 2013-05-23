@@ -27,6 +27,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -253,17 +254,25 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		boolean isLocal = callersType == containerType.getType();
 		boolean isStatic = isStaticAccess(call);
-		if(containerType.getType() instanceof JvmDeclaredType) 
-			newMethodQuickfix((JvmDeclaredType) containerType.getType(), name, returnType, argumentTypes, isStatic, false, isLocal, call, issue, issueResolutionAcceptor);
+		boolean isAbstract = true;
+		if(containerType.getType() instanceof JvmGenericType) {
+			isAbstract = !((JvmGenericType) containerType.getType()).isInstantiateable();
+		} else if(containerType.getType() instanceof JvmDeclaredType) {
+			isAbstract = ((JvmDeclaredType) containerType.getType()).isAbstract();
+		}
+		if(containerType.getType() instanceof JvmDeclaredType) {
+			JvmDeclaredType declaredType = (JvmDeclaredType) containerType.getType();
+			newMethodQuickfix(declaredType, name, returnType, argumentTypes, isStatic, isAbstract, false, isLocal, call, issue, issueResolutionAcceptor);
+		}
 		if(!isLocal && !isStatic) {
 			List<JvmTypeReference> extensionMethodParameterTypes = newArrayList(argumentTypes);
 			extensionMethodParameterTypes.add(0, containerType);
-			newMethodQuickfix(callersType, name, returnType, extensionMethodParameterTypes, false, true, true, call, issue, issueResolutionAcceptor);
+			newMethodQuickfix(callersType, name, returnType, extensionMethodParameterTypes, false, isAbstract, true, true, call, issue, issueResolutionAcceptor);
 		}
 	}
 	
 	protected void newMethodQuickfix(JvmDeclaredType containerType, String name, @Nullable JvmTypeReference returnType,
-		List<JvmTypeReference> parameterTypes, boolean isStatic, boolean isExtension, boolean isLocal, XAbstractFeatureCall call, 
+		List<JvmTypeReference> parameterTypes, boolean isStatic, boolean isAbstract, boolean isExtension, boolean isLocal, XAbstractFeatureCall call, 
 		final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		AbstractMethodBuilder methodBuilder = codeBuilderFactory.createMethodBuilder(containerType);
 		methodBuilder.setMethodName(name);
@@ -272,6 +281,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		methodBuilder.setContext(call);
 		methodBuilder.setVisibility(JvmVisibility.PUBLIC);
 		methodBuilder.setStaticFlag(isStatic);
+		methodBuilder.setAbstractFlag(isAbstract);
 		StringBuffer label = new StringBuffer("Create ");
 		if(isStatic)
 			label.append("static ");

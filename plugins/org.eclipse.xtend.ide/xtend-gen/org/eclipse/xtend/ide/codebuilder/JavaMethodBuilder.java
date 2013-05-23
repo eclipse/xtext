@@ -45,6 +45,10 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
     {
       JvmVisibility _visibility = this.getVisibility();
       this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
+      boolean _isAbstractFlag = this.isAbstractFlag();
+      if (_isAbstractFlag) {
+        appendable.append("abstract ");
+      }
       boolean _isStaticFlag = this.isStaticFlag();
       if (_isStaticFlag) {
         appendable.append("static ");
@@ -56,14 +60,14 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
       IAppendable _append_1 = _append.append(_methodName);
       List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
       IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
-      IAppendable _append_2 = _appendParameters.append(" {");
-      IAppendable _increaseIndentation = _append_2.increaseIndentation();
-      IAppendable _newLine = _increaseIndentation.newLine();
-      IAppendable _appendDefaultBody = this.appendDefaultBody(_newLine, ";");
-      IAppendable _decreaseIndentation = _appendDefaultBody.decreaseIndentation();
-      IAppendable _newLine_1 = _decreaseIndentation.newLine();
-      IAppendable _append_3 = _newLine_1.append("}");
-      _xblockexpression = (_append_3);
+      this.appendDefaultBody(_appendParameters, ";");
+      IAppendable _xifexpression = null;
+      boolean _isAbstractFlag_1 = this.isAbstractFlag();
+      if (_isAbstractFlag_1) {
+        IAppendable _append_2 = appendable.append(";");
+        _xifexpression = _append_2;
+      }
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
