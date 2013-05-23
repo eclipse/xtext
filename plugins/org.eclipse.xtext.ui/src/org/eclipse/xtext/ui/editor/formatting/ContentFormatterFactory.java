@@ -43,6 +43,9 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 		}
 	}
 
+	/**
+	 * TODO: Use a {@link org.eclipse.xtext.util.ReplaceRegion} instead of the {@link ReplaceRegion}.
+	 */
 	public class FormattingUnitOfWork implements
 			IUnitOfWork<ReplaceRegion, XtextResource> {
 
