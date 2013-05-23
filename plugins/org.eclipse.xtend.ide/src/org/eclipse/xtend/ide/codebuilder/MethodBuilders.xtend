@@ -27,10 +27,16 @@ abstract class AbstractMethodBuilder extends AbstractCodeBuilder {
 	@Property JvmTypeReference returnType
 	@Property List<JvmTypeReference> parameterTypes = emptyList
 	@Property boolean staticFlag
+	@Property boolean abstractFlag
 
 	def protected appendDefaultBody(IAppendable appendable, String statementSeparator) {
-		appendable.append('throw new UnsupportedOperationException("TODO: auto-generated method stub")')
-			.append(statementSeparator)
+		if(!abstractFlag) 
+			appendable.append(' {').increaseIndentation.newLine
+				.append('throw new UnsupportedOperationException("TODO: auto-generated method stub")')
+				.append(statementSeparator)
+				.decreaseIndentation.newLine
+				.append('}')
+		appendable
 	}
 	
 	override getImage() {
@@ -62,12 +68,11 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$X
 			.appendVisibility(visibility, PUBLIC)
 		if(staticFlag)
 			appendable.append('static ')
+		if(abstractFlag)
+			appendable.appendType(returnType, "void").append(' ')
 		appendable.append(methodName)
 			.appendParameters(parameterTypes)
-			.append(' {').increaseIndentation.newLine
 			.appendDefaultBody('')
-			.decreaseIndentation.newLine
-			.append('}')
 	}
 
 	override getInsertOffset() {
@@ -98,16 +103,17 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Ja
 	override build(IAppendable appendable) {
 		appendable
 			.appendVisibility(visibility, DEFAULT)
+		if(abstractFlag)
+			appendable.append('abstract ')
 		if(staticFlag)
 			appendable.append('static ')
 		appendable
 			.appendType(returnType, "void").append(' ')
 			.append(methodName)
 			.appendParameters(parameterTypes)
-			.append(' {').increaseIndentation.newLine
 			.appendDefaultBody(';')
-			.decreaseIndentation.newLine
-			.append('}')
+		if(abstractFlag)
+			appendable.append(';')
 	}
 
 	override getIType() {
