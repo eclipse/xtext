@@ -53,10 +53,7 @@ public class ReplaceRegion {
 	}
 	
 	public void applyTo(StringBuilder builder) {
-//		if (offset == builder.length())
-//			builder.append(text);
-//		else
-			builder.replace(offset, getEndOffset(), text);
+		builder.replace(offset, getEndOffset(), text);
 	}
 	
 	@Override

@@ -17,13 +17,13 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.reconciler.ReconcilerReplaceRegion;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
@@ -94,8 +94,9 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		document.set("abstract rules firstRule");
 		XtextDocumentReconcileStrategy strategy = injector.getInstance(XtextDocumentReconcileStrategy.class);
 		strategy.setDocument(document);
+		strategy.setResource(resource);
 		try {
-			strategy.reconcile(new Region(0, document.getLength()));
+			strategy.reconcile(new ReconcilerReplaceRegion(0, document.getLength(), document.get()));
 			fail("Expected ParseException");
 		} catch(ParseException expected) {
 			assertTrue(expected.getMessage().contains("Make sure the EPackage has been registered"));
