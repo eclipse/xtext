@@ -12,6 +12,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.internal.corext.refactoring.ParameterInfo;
 import org.eclipse.jdt.internal.ui.refactoring.ChangeParametersControl;
 import org.eclipse.jdt.internal.ui.refactoring.IParameterListChangeListener;
@@ -188,7 +189,7 @@ public class ExtractMethodUserInputPage extends UserInputWizardPage {
 		previewLabel.setLayoutData(gridData);
 		signaturePreview = editorFactory.newEditor(new IEditedResourceProvider() {
 			public XtextResource createResource() {
-				URI resourceURI = EcoreUtil2.getNormalizedResourceURI(refactoring.getXtendClass());
+				URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(refactoring.getXtendClass()).trimFragment();
 				IProject project = projectUtil.getProject(resourceURI);
 				ResourceSet resourceSet = resourceSetProvider.get(project);
 				return (XtextResource) resourceSet.getResource(resourceURI, true);
