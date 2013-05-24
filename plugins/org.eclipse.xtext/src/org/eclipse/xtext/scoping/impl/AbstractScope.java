@@ -150,7 +150,7 @@ public abstract class AbstractScope implements IScope {
 	}
 	
 	public Iterable<IEObjectDescription> getElements(final EObject object) {
-		final URI uri = EcoreUtil2.getNormalizedURI(object);
+		final URI uri = EcoreUtil2.getPlatformResourceOrNormalizedURI(object);
 		Iterable<IEObjectDescription> localElements = getLocalElementsByEObject(object, uri);
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> get() {

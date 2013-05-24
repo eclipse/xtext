@@ -93,8 +93,11 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		ResourceSet resourceSet = getResourceSet(storage);
 		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
 		configureResourceSet(resourceSet, uri);
-		URI normalized = resourceSet.getURIConverter().normalize(uri);
-		XtextResource resource = (XtextResource) resourceFactory.createResource(normalized);
+		URI uriForResource = uri; 
+		if (!uri.isPlatform()) {
+			uriForResource = resourceSet.getURIConverter().normalize(uri);
+		}
+		XtextResource resource = (XtextResource) resourceFactory.createResource(uriForResource);
 		resourceSet.getResources().add(resource);
 		resource.setValidationDisabled(isValidationDisabled(storage));
 		return resource;

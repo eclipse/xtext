@@ -140,7 +140,7 @@ public class DispatchRenameSupport {
 					if (indexJvmSubType instanceof JvmGenericType) {
 						allSubTypes.add((JvmGenericType) indexJvmSubType);
 					} else {
-						EObject jvmSubTypeInOtherResourceSet = type.eResource().getResourceSet().getEObject(EcoreUtil2.getNormalizedURI(jvmSubType), true);
+						EObject jvmSubTypeInOtherResourceSet = type.eResource().getResourceSet().getEObject(EcoreUtil2.getPlatformResourceOrNormalizedURI(jvmSubType), true);
 						if(jvmSubTypeInOtherResourceSet instanceof JvmGenericType)
 							allSubTypes.add((JvmGenericType) jvmSubTypeInOtherResourceSet);
 					}

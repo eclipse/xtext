@@ -147,7 +147,7 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
-		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
+		URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(object).trimFragment();
 		if (localDescriptions.hasDescription(resourceURI))
 			return localDescriptions.getExportedObjectsByObject(object);
 		return globalDescriptions.getExportedObjectsByObject(object);

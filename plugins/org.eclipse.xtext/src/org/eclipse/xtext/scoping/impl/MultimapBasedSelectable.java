@@ -53,7 +53,7 @@ public class MultimapBasedSelectable implements ISelectable {
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
-		final URI uri = EcoreUtil2.getNormalizedURI(object);
+		final URI uri = EcoreUtil2.getPlatformResourceOrNormalizedURI(object);
 		return Iterables.filter(allDescriptions, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEObjectOrProxy() == object)
