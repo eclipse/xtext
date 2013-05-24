@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class P2DirectorLaunch {
-  public final static String REPOSITORY = "http://download.eclipse.org/tools/buckminster/headless-4.2/";
+  public final static String REPOSITORY = "http://download.eclipse.org/tools/buckminster/headless-4.3/";
   
   private final static String PROFILE = "Buckminster";
   
