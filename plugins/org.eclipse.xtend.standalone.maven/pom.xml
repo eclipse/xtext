@@ -103,6 +103,10 @@
 							<id>org.eclipse.jdt.annotation</id>
 						</iu>
 						<iu>
+							<id>org.eclipse.equinox.common</id>
+							<version>3.5.1.R35x_v20090807-1100</version>
+						</iu>
+						<iu>
 							<id>org.antlr.runtime</id>
 						</iu>
 						<iu>
@@ -155,6 +159,10 @@
 						</iu>
 						<iu>
 							<id>org.eclipse.jdt.annotation.source</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.equinox.common.source</id>
+							<version>3.5.1.R35x_v20090807-1100</version>
 						</iu>
 						<iu>
 							<id>org.eclipse.xtext.source</id>

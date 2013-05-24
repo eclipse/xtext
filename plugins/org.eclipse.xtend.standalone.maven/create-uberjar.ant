@@ -155,6 +155,7 @@
 				<include name="*.png" />
 				<include name="**/*.ecore" />
 				<include name="META-INF/**" />
+				<include name="testdata/**" />
 			</fileset>
 		</delete>
 		<delete dir="${contentDir}/about_files" />
