@@ -24,7 +24,7 @@ import com.google.inject.Provider;
  */
 public class DocumentLockerTest extends AbstractXtextDocumentTest {
 	
-	@Test public void testNoDeadlockOnReentrant() throws Exception {
+	@Test public void testNoUpdateContentProcessOnReentrant() throws Exception {
 		final List<String> s = Lists.newArrayList();
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>() {
@@ -48,17 +48,17 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
 				document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource state) throws Exception {
-						assertEquals(2, s.size());
+						assertEquals(1, s.size());
 						document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 							@Override
 							public void process(XtextResource state) throws Exception {
-								assertEquals(3, s.size());
+								assertEquals(1, s.size());
 							}
 						});
 					}
 				});
 			}
 		});
-		assertEquals(3, s.size());
+		assertEquals(1, s.size());
 	}
 }

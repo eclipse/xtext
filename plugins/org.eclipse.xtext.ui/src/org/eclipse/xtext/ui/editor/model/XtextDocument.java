@@ -164,7 +164,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 				log.debug("read - " + Thread.currentThread().getName());
 			// Don't updateContent on write lock request. Reentrant read doesn't matter as 
 			// updateContentBeforeRead() is cheap when the pending event queue is swept
-			if (rwLock.getWriteHoldCount() == 0)
+			if (getReadHoldCount() == 1 && getWriteHoldCount() == 0)
 				updateContentBeforeRead();
 		}
 
@@ -229,36 +229,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 			}
 		}
 
-		public <T> T process(IUnitOfWork<T, XtextResource> transaction) {
-			if (transaction != null) {
-				int readLocksHeld = rwLock.getReadHoldCount();
-				for(int i=0; i<readLocksHeld; ++i)
-					readLock.unlock();
-				if(log.isTraceEnabled()) {
-					log.trace("read lock released.");
-					log.trace("Trying to acquire write lock...");
-				}
-				writeLock.lock();
-				if(log.isTraceEnabled()) 
-					log.trace("...write lock acquired.");
-				try {
-					if (log.isDebugEnabled())
-						log.debug("process - " + Thread.currentThread().getName());
-					return modify(transaction);
-				} finally {
-					if(log.isTraceEnabled()) 
-						log.trace("Downgrading from write lock to read lock...");
-					for(int i=0; i<readLocksHeld; ++i)
-						readLock.lock();
-					if(log.isTraceEnabled()) 
-						log.trace("...read lock acquired...");
-					writeLock.unlock();
-					if(log.isTraceEnabled()) 
-						log.trace("write lock released.");
-				}
-			}
-			return null;
-		}
 	}
 
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
