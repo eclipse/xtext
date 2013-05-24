@@ -179,7 +179,7 @@ public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 	 * @noreference
 	 */
 	protected int getReadHoldCount() {
-		return rwLock.getReadHoldCount();
+		return readLockCount.get();
 	}
 
 	private void acquireReadLock() {
