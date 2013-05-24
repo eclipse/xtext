@@ -190,18 +190,18 @@ public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinde
 						InternalEList<EObject> values = (InternalEList<EObject>) value;
 						for(int i=0; i< values.size(); ++i) {
 							EObject refElement = resolveInternalProxy(values.basicGet(i), localResource);
-							URI refURI= EcoreUtil2.getNormalizedURI(refElement);
+							URI refURI= EcoreUtil2.getPlatformResourceOrNormalizedURI(refElement);
 							if(targetURISet.contains(refURI)) {
-								sourceURI = (sourceURI == null) ? EcoreUtil2.getNormalizedURI(sourceCandidate) : sourceURI;
+								sourceURI = (sourceURI == null) ? EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate) : sourceURI;
 								acceptor.accept(new DefaultReferenceDescription(
 										sourceURI, refURI, ref, i, currentExportedContainerURI));
 							}
 						}
 					} else {
 						EObject refElement = resolveInternalProxy((EObject) value, localResource);
-						URI refURI= EcoreUtil2.getNormalizedURI(refElement);
+						URI refURI= EcoreUtil2.getPlatformResourceOrNormalizedURI(refElement);
 						if(targetURISet.contains(refURI)) {
-							sourceURI = (sourceURI == null) ? EcoreUtil2.getNormalizedURI(sourceCandidate) : sourceURI;
+							sourceURI = (sourceURI == null) ? EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate) : sourceURI;
 							acceptor.accept(new DefaultReferenceDescription(
 									sourceURI, refURI, ref, -1, currentExportedContainerURI));
 						}
@@ -219,7 +219,7 @@ public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinde
 	}
 	
 	protected Map<EObject, URI> createExportedElementsMap(Resource resource) {
-		URI uri = EcoreUtil2.getNormalizedURI(resource);
+		URI uri = EcoreUtil2.getPlatformResourceOrNormalizedURI(resource);
 		IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
 		if (resourceServiceProvider == null) {
 			return Collections.emptyMap();

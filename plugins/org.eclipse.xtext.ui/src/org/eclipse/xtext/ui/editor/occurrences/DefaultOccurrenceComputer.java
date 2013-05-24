@@ -131,7 +131,7 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 	 * @since 2.3
 	 */
 	protected Iterable<URI> getTargetURIs(EObject target) {
-		return singleton(EcoreUtil2.getNormalizedURI(target));
+		return singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(target));
 	}
 	
 	/**

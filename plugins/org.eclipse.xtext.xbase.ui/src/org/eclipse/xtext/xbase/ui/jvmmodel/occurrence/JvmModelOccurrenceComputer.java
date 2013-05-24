@@ -31,7 +31,7 @@ public class JvmModelOccurrenceComputer extends DefaultOccurrenceComputer {
 		return concat(super.getTargetURIs(target),
 				transform(associations.getJvmElements(target), new Function<EObject, URI>() {
 					public URI apply(EObject input) {
-						return EcoreUtil2.getNormalizedURI(input);
+						return EcoreUtil2.getPlatformResourceOrNormalizedURI(input);
 					}
 				}));
 	}

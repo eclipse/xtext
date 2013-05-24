@@ -202,7 +202,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	 * resources which would otherwise cause unexpected conflicts
 	 * (see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=340561">bug 340561</a>).
 	 */
-	private class ClientAwareDirtyResource implements IDirtyResource {
+	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension {
 
 		public String getContents() {
 			return dirtyResource.getContents();
@@ -226,6 +226,10 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		
 		private void discardThisResource() {
 			markEditorClean(currentClient);
+		}
+
+		public URI getNormalizedURI() {
+			return dirtyResource.getNormalizedURI();
 		}
 		
 	}

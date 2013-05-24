@@ -164,7 +164,7 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
-		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
+		URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(object).trimFragment();
 		if (dirtyStateManager.hasContent(resourceURI))
 			return dirtyStateManager.getExportedObjectsByObject(object);
 		return globalDescriptions.getExportedObjectsByObject(object);

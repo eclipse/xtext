@@ -66,7 +66,7 @@ public class LayeredTypeResourceDescription implements IResourceDescription {
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
-		final URI uri = EcoreUtil2.getNormalizedURI(object);
+		final URI uri = EcoreUtil2.getPlatformResourceOrNormalizedURI(object);
 		Iterable<IEObjectDescription> additionallyFiltered = Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEObjectOrProxy() == object)

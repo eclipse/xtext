@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentMap;
 
 import org.eclipse.emf.common.util.URI;
@@ -121,10 +122,30 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	}
 
 	public String getContent(URI uri) {
-		IDirtyResource dirtyResource = managedResources.get(uri);
+		IDirtyResource dirtyResource = findDirtyResourcebyURIorNormalizedURI(uri);
 		if (dirtyResource != null)
 			return dirtyResource.getContents();
 		return null;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected IDirtyResource findDirtyResourcebyURIorNormalizedURI(URI uri) {
+		IDirtyResource dirtyResource = managedResources.get(uri);
+		if (dirtyResource == null) {
+			Iterator<IDirtyResource> iterator = managedResources.values().iterator();
+			while (dirtyResource == null && iterator.hasNext()) {
+				IDirtyResource res = iterator.next();
+				if (res instanceof IDirtyResource.NormalizedURISupportExtension) {
+					URI normalizedURI = ((IDirtyResource.NormalizedURISupportExtension) res).getNormalizedURI();
+					if (normalizedURI.equals(uri)) {
+						dirtyResource = res;
+					}
+				}
+			}
+		}
+		return dirtyResource;
 	}
 	
 	public IExternalContentProvider getActualContentProvider() {
@@ -135,7 +156,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 			}
 			
 			public String getContent(URI uri) {
-				IDirtyResource dirtyResource = managedResources.get(uri);
+				IDirtyResource dirtyResource = DirtyStateManager.this.findDirtyResourcebyURIorNormalizedURI(uri);
 				if (dirtyResource != null)
 					return dirtyResource.getActualContents();
 				return null;
@@ -148,7 +169,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	}
 
 	public boolean hasContent(URI uri) {
-		return managedResources.containsKey(uri);
+		return findDirtyResourcebyURIorNormalizedURI(uri) != null;
 	}
 
 	public boolean isEmpty() {
@@ -176,7 +197,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
-		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
+		URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(object).trimFragment();
 		IDirtyResource dirtyResource = getDirtyResource(resourceURI);
 		if (dirtyResource != null) {
 			return dirtyResource.getDescription().getExportedObjectsByObject(object);
