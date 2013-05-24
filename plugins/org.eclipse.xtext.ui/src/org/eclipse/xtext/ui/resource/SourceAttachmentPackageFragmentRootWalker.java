@@ -40,7 +40,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 	private Set<Pattern> binIncludePatterns;
 	private boolean visitAll;
 	private String bundleSymbolicName;
-	
+
 	public String getBundleSymbolicName() {
 		return bundleSymbolicName;
 	}
@@ -50,44 +50,43 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 	 */
 	@Override
 	public T traverse(IPackageFragmentRoot root, boolean stopOnFirstResult) throws JavaModelException {
-		bundleSymbolicName = null;
-		// Determine the bundle name from the manifest.
-		//
-		IPath path = root.isExternal() ? root.getPath() : root.getUnderlyingResource().getLocation();
-		if (path != null) {
-			if ("jar".equals(path.getFileExtension())) {
-				try {
-					final File file = path.toFile();
-					if (file != null && file.exists()) {
-						JarFile jarFile = new JarFile(file);
-						try {
-							Manifest manifest = jarFile.getManifest();
-							if (manifest != null)
-								bundleSymbolicName = getBundleSymbolicName(manifest);
-						} finally {
-							jarFile.close();
+		try {
+			bundleSymbolicName = null;
+			// Determine the bundle name from the manifest.
+			//
+			IPath path = root.isExternal() ? root.getPath() : root.getUnderlyingResource().getLocation();
+			if (path != null) {
+				if ("jar".equals(path.getFileExtension())) {
+					try {
+						final File file = path.toFile();
+						if (file != null && file.exists()) {
+							JarFile jarFile = new JarFile(file);
+							try {
+								Manifest manifest = jarFile.getManifest();
+								if (manifest != null)
+									bundleSymbolicName = getBundleSymbolicName(manifest);
+							} finally {
+								jarFile.close();
+							}
 						}
+					} catch (IOException e) {
+						LOG.error(e.getMessage(), e);
 					}
-				} catch (IOException e) {
-					LOG.error(e.getMessage(), e);
 				}
 			}
-		}
 
-		T result = super.traverse(root, stopOnFirstResult);
-
-		if (!stopOnFirstResult || result == null) {
 			IPath sourceAttachmentPath = root.getSourceAttachmentPath();
 			if (sourceAttachmentPath != null && sourceAttachmentPath.isPrefixOf(path)) {
 				// This is not a package fragment root we can actually walk because it's not on the project's class path.
 				//
-				IPackageFragmentRoot packageFragmentRoot = root.getJavaProject().getPackageFragmentRoot(sourceAttachmentPath.toOSString());
+				IPackageFragmentRoot packageFragmentRoot = root.getJavaProject().getPackageFragmentRoot(
+						sourceAttachmentPath.toOSString());
 				if (packageFragmentRoot instanceof ExternalPackageFragmentRoot) {
 					// This lets us determine the linked resource for this attachement
 					//
-					IResource resource = ((ExternalPackageFragmentRoot)packageFragmentRoot).resource();
+					IResource resource = ((ExternalPackageFragmentRoot) packageFragmentRoot).resource();
 					if (resource instanceof IFolder) {
-						IFolder folder = (IFolder)resource;
+						IFolder folder = (IFolder) resource;
 
 						// Use the build.properties to determine which resources are destined for the deployed bundle.
 						//
@@ -123,8 +122,9 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 											//
 											String binIncludePattern = Pattern.quote(binInclude);
 											if (binIncludePattern.contains("**")) {
-												binIncludePattern = binIncludePattern.replace("**", "\0").replace("*", "\\E[^/]*\\Q").replace("\0", "\\E.*\\Q");
-											}  else if (binIncludePattern.contains("*")) {
+												binIncludePattern = binIncludePattern.replace("**", "\0")
+														.replace("*", "\\E[^/]*\\Q").replace("\0", "\\E.*\\Q");
+											} else if (binIncludePattern.contains("*")) {
 												binIncludePattern = binIncludePattern.replace("*", "\\E[^/]*\\Q");
 											}
 
@@ -143,8 +143,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 											inputStream = new FileInputStream(manifestFile);
 											Manifest manifest = new Manifest(inputStream);
 											bundleSymbolicName = getBundleSymbolicName(manifest);
-										}
-										finally {
+										} finally {
 											if (inputStream != null)
 												inputStream.close();
 										}
@@ -153,7 +152,10 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 									// Traverse the folder; the traversal is guarded to visit only the bin includes.
 									//
 									TraversalState state = new TraversalState(folder);
-									result = traverse(folder, stopOnFirstResult, state);
+									T result = traverse(folder, stopOnFirstResult, state);
+									if (stopOnFirstResult && result != null) {
+										return result;
+									}
 								}
 
 							} catch (Exception e) {
@@ -163,13 +165,13 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 					}
 				}
 			}
+			return super.traverse(root, stopOnFirstResult);
+		} finally {
+			// Clear the state that's cached during this traversal.
+			//
+			visitAll = false;
+			binIncludePatterns = null;
 		}
-
-		// Clear the state that's cached during this traversal.
-		//
-		visitAll = false;
-		binIncludePatterns = null;
-		return result;
 	}
 
 	protected void loadBuildProperties(IFile buildPropertiesFile, Properties result) throws CoreException, IOException {
@@ -183,7 +185,8 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 	private static final int NO = -1;
 
 	/**
-	 * Determine if the entry is for sure in the bin includes, maybe in the bin includes, or definitely not in the bin includes.
+	 * Determine if the entry is for sure in the bin includes, maybe in the bin includes, or definitely not in the bin
+	 * includes.
 	 */
 	protected int isBinInclude(String path) {
 		for (Pattern pattern : binIncludePatterns) {
@@ -200,7 +203,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 			IPath path = new Path("");
 			List<?> parents = state.getParents();
 			for (int i = 1, count = parents.size(); i < count; ++i) {
-				path = path.append(((IFolder)parents.get(i)).getName());
+				path = path.append(((IFolder) parents.get(i)).getName());
 			}
 			for (IResource resource : folder.members()) {
 				switch (resource.getType()) {
@@ -209,7 +212,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 						//
 						if (isBinInclude(path.append(resource.getName()).toString() + "/") != NO) {
 							state.push(resource);
-							result = traverse((IFolder)resource, stopOnFirstResult, state);
+							result = traverse((IFolder) resource, stopOnFirstResult, state);
 							state.pop();
 						}
 						break;
@@ -218,7 +221,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 						// If the file is definitely in the bin includes, handle it.
 						//
 						if (isBinInclude(path.append(resource.getName()).toString()) == YES) {
-							result = handle((IFile)resource, state);
+							result = handle((IFile) resource, state);
 						}
 						break;
 					}
@@ -252,7 +255,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 		if (bundleSymbolicName != null) {
 			URI logicalURI = URI.createPlatformResourceURI(bundleSymbolicName, false);
 			List<?> parents = state.getParents();
-			for(int i = 1; i < parents.size(); i++) {
+			for (int i = 1; i < parents.size(); i++) {
 				Object obj = parents.get(i);
 				if (obj instanceof IPackageFragment) {
 					logicalURI = logicalURI.appendSegments(((IPackageFragment) obj).getElementName().split("\\."));
@@ -268,7 +271,8 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 	}
 
 	/**
-	 * Delegate to {@link #handle(URI, IStorage, org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState)}.
+	 * Delegate to
+	 * {@link #handle(URI, IStorage, org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState)}.
 	 */
 	@Override
 	protected T handle(IJarEntryResource jarEntry, TraversalState state) {
@@ -306,7 +310,8 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 	protected abstract URI getURI(IJarEntryResource jarEntry, TraversalState state);
 
 	/**
-	 * Handle this URI, where the storage is either a jar entry from the classpath or an IFile in the bundle's bin includes.
+	 * Handle this URI, where the storage is either a jar entry from the classpath or an IFile in the bundle's bin
+	 * includes.
 	 */
 	protected abstract T handle(URI uri, IStorage storage, TraversalState state);
 

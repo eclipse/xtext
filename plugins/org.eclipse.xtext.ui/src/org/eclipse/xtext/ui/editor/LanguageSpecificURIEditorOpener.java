@@ -75,6 +75,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next().getFirst();
+				// TODO we should create a JarEntryEditorInput if storage is a NonJavaResource from jdt to match the editor input used when double clicking on the same resource in a jar.
 				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage)
 						: new XtextReadonlyEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();

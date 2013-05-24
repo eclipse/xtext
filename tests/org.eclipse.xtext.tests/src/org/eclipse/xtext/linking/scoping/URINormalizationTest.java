@@ -39,7 +39,7 @@ public class URINormalizationTest extends AbstractXtextTests {
 		IScope scope = scopeProvider.getScope(bar, ImportedURIPackage.Literals.TYPE__EXTENDS);
 		Iterable<IEObjectDescription> elements = scope.getElements(foo);
 		assertEquals(1, size(elements));
-		assertEquals(EcoreUtil2.getNormalizedURI(foo), elements.iterator().next().getEObjectURI());
+		assertEquals(EcoreUtil2.getPlatformResourceOrNormalizedURI(foo), elements.iterator().next().getEObjectURI());
 	}
 	
 }

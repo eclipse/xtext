@@ -30,8 +30,8 @@ public class JdtRefactoringContext extends IRenameElementContext.Impl {
 
 	public JdtRefactoringContext(EObject targetJvmElement, IJavaElement javaElement, IEditorPart editor,
 			ISelection selection, XtextResource contextResource, boolean isRealJvmMember) {
-		super(getNormalizedURI(targetJvmElement), targetJvmElement.eClass(), editor, selection,
-				getNormalizedURI(contextResource));
+		super(getPlatformResourceOrNormalizedURI(targetJvmElement), targetJvmElement.eClass(), editor, selection,
+				getPlatformResourceOrNormalizedURI(contextResource));
 		this.javaElement = javaElement;
 		this.isRealJvmElement = isRealJvmMember;
 	}
