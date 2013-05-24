@@ -62,7 +62,7 @@ public class RuleOverrideUtil {
 				}
 			}
 		};
-		referenceFinder.findAllReferences(singleton(EcoreUtil2.getNormalizedURI(grammar)), null, acceptor,
+		referenceFinder.findAllReferences(singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(grammar)), null, acceptor,
 				new NullProgressMonitor());
 		return overridingRules;
 	}

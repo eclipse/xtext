@@ -43,7 +43,7 @@ public class XtendRenameStrategy extends DefaultJvmModelRenameStrategy {
 	protected IPath getPathToRename(URI elementURI, ResourceSet resourceSet) {
 		EObject targetObject = resourceSet.getEObject(elementURI, false);
 		if (targetObject instanceof XtendTypeDeclaration) {
-			URI resourceURI = EcoreUtil2.getNormalizedResourceURI(targetObject);
+			URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(targetObject).trimFragment();
 			if (!resourceURI.isPlatformResource())
 				throw new RefactoringException("Renamed type does not reside in the workspace");
 			IPath path = new Path("/").append(new Path(resourceURI.path()).removeFirstSegments(1));

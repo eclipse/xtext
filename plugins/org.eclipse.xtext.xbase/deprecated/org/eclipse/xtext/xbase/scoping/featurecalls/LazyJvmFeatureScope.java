@@ -64,7 +64,7 @@ public class LazyJvmFeatureScope extends JvmFeatureScope {
 	@Override
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		// we know that we never have a parent scope
-		URI uri = EcoreUtil2.getNormalizedURI(object);
+		URI uri = EcoreUtil2.getPlatformResourceOrNormalizedURI(object);
 		Iterable<IEObjectDescription> result = getLocalElementsByEObject(object, uri);
 		return result;
 	}

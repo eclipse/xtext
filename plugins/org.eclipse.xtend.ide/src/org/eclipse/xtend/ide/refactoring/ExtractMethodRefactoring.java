@@ -157,7 +157,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 		this.expressions = expressions;
 		this.firstExpression = expressions.get(0);
 		this.lastExpression = expressions.get(expressions.size()-1);
-		this.resourceURI = EcoreUtil2.getNormalizedResourceURI(firstExpression);
+		this.resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(firstExpression).trimFragment();
 		this.xtendClass = EcoreUtil2.getContainerOfType(firstExpression, XtendClass.class);
 		this.originalMethod = EcoreUtil2.getContainerOfType(firstExpression, XtendFunction.class);
 		if (xtendClass == null || originalMethod == null)

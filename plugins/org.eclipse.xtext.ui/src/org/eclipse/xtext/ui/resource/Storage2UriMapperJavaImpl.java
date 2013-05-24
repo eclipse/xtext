@@ -106,7 +106,13 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		if (data.uriPrefix == null)
 			return null;
 		IPath path = root.isExternal() ? root.getPath() : root.getUnderlyingResource().getLocation();
-		URI physical = URI.createFileURI(path.toFile().getPath());
+		URI physical = null;
+		if (root.isArchive()) {
+			String archiveScheme = "zip".equalsIgnoreCase(root.getPath().getFileExtension()) ? "zip" : "jar";
+			physical = URI.createURI(archiveScheme+":file:"+path.toFile().getPath()+"!/");
+		} else {
+			physical = URI.createFileURI(path.toFile().getPath()+"/");
+		}
 		return Tuples.create(data.uriPrefix, physical);
 	}
 	
@@ -207,7 +213,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			};
 			walker.traverse(root, false);
 			if (walker.getBundleSymbolicName() != null)
-				data.uriPrefix = URI.createPlatformResourceURI(walker.getBundleSymbolicName(), true);
+				data.uriPrefix = URI.createPlatformResourceURI(walker.getBundleSymbolicName()+"/", true);
 		} catch (JavaModelException e) {
 			log.error(e.getMessage(), e);
 		}
