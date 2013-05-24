@@ -5,7 +5,7 @@ import java.io.File
 
 class P2DirectorLaunch {
 	
-	public static val String REPOSITORY = "http://download.eclipse.org/tools/buckminster/headless-4.2/"
+	public static val String REPOSITORY = "http://download.eclipse.org/tools/buckminster/headless-4.3/"
 	static val String PROFILE = "Buckminster"
 	static val IUS = newArrayList(
 		"org.eclipse.buckminster.cmdline.product",
