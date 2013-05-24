@@ -3,6 +3,8 @@ package org.eclipse.xtext.xbase.ui.labeling;
 import com.google.common.base.Objects;
 import java.util.Arrays;
 import javax.inject.Inject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -53,33 +55,30 @@ public class XbaseImageAdornments {
   }
   
   protected int _get(final JvmOperation it) {
-    int _xblockexpression = (int) 0;
-    {
-      boolean _isAbstract = it.isAbstract();
-      int _or = this.or(0, _isAbstract, JavaElementImageDescriptor.ABSTRACT);
-      boolean _isFinal = it.isFinal();
-      int _or_1 = this.or(_or, _isFinal, JavaElementImageDescriptor.FINAL);
-      boolean _isSynchronized = it.isSynchronized();
-      int _or_2 = this.or(_or_1, _isSynchronized, JavaElementImageDescriptor.SYNCHRONIZED);
-      boolean _isStatic = it.isStatic();
-      int _or_3 = this.or(_or_2, _isStatic, JavaElementImageDescriptor.STATIC);
-      boolean _isDeprecated = DeprecationUtil.isDeprecated(it);
-      int _or_4 = this.or(_or_3, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
-      boolean _isNative = it.isNative();
-      final int adornment = this.or(_or_4, _isNative, 0x4000);
+    boolean _isAbstract = it.isAbstract();
+    int _or = this.or(0, _isAbstract, JavaElementImageDescriptor.ABSTRACT);
+    boolean _isFinal = it.isFinal();
+    int _or_1 = this.or(_or, _isFinal, JavaElementImageDescriptor.FINAL);
+    boolean _isSynchronized = it.isSynchronized();
+    int _or_2 = this.or(_or_1, _isSynchronized, JavaElementImageDescriptor.SYNCHRONIZED);
+    boolean _isStatic = it.isStatic();
+    int _or_3 = this.or(_or_2, _isStatic, JavaElementImageDescriptor.STATIC);
+    boolean _isDeprecated = DeprecationUtil.isDeprecated(it);
+    int _or_4 = this.or(_or_3, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
+    boolean _isNative = it.isNative();
+    final int adornment = this.or(_or_4, _isNative, 0x4000);
+    Resource _eResource = it.eResource();
+    ResourceSet _resourceSet = _eResource==null?(ResourceSet)null:_eResource.getResourceSet();
+    boolean _notEquals = (!Objects.equal(_resourceSet, null));
+    if (_notEquals) {
       final JvmOperation overriddenOperation = this._overrideHelper.findOverriddenOperation(it);
-      int _xifexpression = (int) 0;
-      boolean _notEquals = (!Objects.equal(overriddenOperation, null));
-      if (_notEquals) {
+      boolean _notEquals_1 = (!Objects.equal(overriddenOperation, null));
+      if (_notEquals_1) {
         int _overrideAdornment = this.getOverrideAdornment(overriddenOperation);
-        int _bitwiseOr = (adornment | _overrideAdornment);
-        _xifexpression = _bitwiseOr;
-      } else {
-        _xifexpression = adornment;
+        return (adornment | _overrideAdornment);
       }
-      _xblockexpression = (_xifexpression);
     }
-    return _xblockexpression;
+    return adornment;
   }
   
   protected int _get(final Void it) {

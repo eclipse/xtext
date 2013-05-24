@@ -47,11 +47,12 @@ class XbaseImageAdornments {
 			.or(deprecated, DEPRECATED)
 			.or(native, 0x4000) // JavaElementImageDescription.NATIVE not available before 3.7
 			
-		val overriddenOperation = findOverriddenOperation
-		if(overriddenOperation != null) 
-			adornment.bitwiseOr(getOverrideAdornment(overriddenOperation))
-		else 
-			adornment
+		if(eResource?.resourceSet != null) {
+			val overriddenOperation = findOverriddenOperation
+			if(overriddenOperation != null) 
+				return adornment.bitwiseOr(getOverrideAdornment(overriddenOperation))
+		}
+		return adornment
 	}
 	
 	def dispatch get(Void it) {
