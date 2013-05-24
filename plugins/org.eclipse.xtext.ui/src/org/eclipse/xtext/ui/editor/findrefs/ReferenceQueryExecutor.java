@@ -49,7 +49,7 @@ public class ReferenceQueryExecutor {
 	private ReferenceQuery referenceQuery;
 
 	protected Iterable<URI> getTargetURIs(EObject primaryTarget) {
-		return singleton(EcoreUtil2.getNormalizedURI(primaryTarget));
+		return singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(primaryTarget));
 	}
 
 	public String getLabel(EObject primaryTarget) {

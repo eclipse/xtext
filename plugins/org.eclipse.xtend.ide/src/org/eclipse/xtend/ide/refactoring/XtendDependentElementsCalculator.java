@@ -40,10 +40,10 @@ public class XtendDependentElementsCalculator extends JvmModelDependentElementsC
 		if (baseElement instanceof XtendFunction && ((XtendFunction) baseElement).isDispatch()) {
 			Set<URI> result = newHashSet();
 			for(JvmOperation dispatchOperation: dispatchRenameSupport.getAllDispatchOperations((XtendFunction) baseElement)) {
-				result.add(EcoreUtil2.getNormalizedURI(dispatchOperation));
+				result.add(EcoreUtil2.getPlatformResourceOrNormalizedURI(dispatchOperation));
 				XtendFunction xtendFunction = associations.getXtendFunction(dispatchOperation);
 				if(xtendFunction != null) {
-					result.add(EcoreUtil2.getNormalizedURI(xtendFunction));
+					result.add(EcoreUtil2.getPlatformResourceOrNormalizedURI(xtendFunction));
 				}
 			}
 			return newArrayList(result);

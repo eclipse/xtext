@@ -40,7 +40,7 @@ public interface IRenameContextFactory {
 
 		public IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor editor,
 				final ITextSelection selection, XtextResource resource) {
-			if(!resourceServiceProvider.canHandle(EcoreUtil2.getNormalizedURI(targetElement))) {
+			if(!resourceServiceProvider.canHandle(EcoreUtil2.getPlatformResourceOrNormalizedURI(targetElement))) {
 				IRenameElementContext externalRenameElementContext = createExternalRenameElementContext(targetElement,
 					editor, selection, resource);
 				if (externalRenameElementContext != null)
@@ -51,7 +51,7 @@ public interface IRenameContextFactory {
 
 		protected IRenameElementContext createExternalRenameElementContext(EObject targetElement, XtextEditor editor,
 				ITextSelection selection, XtextResource resource) {
-			if (!resourceServiceProvider.canHandle(EcoreUtil2.getNormalizedURI(targetElement))) {
+			if (!resourceServiceProvider.canHandle(EcoreUtil2.getPlatformResourceOrNormalizedURI(targetElement))) {
 				IRenameContextFactory contextFactory = globalServiceProvider.findService(targetElement,
 						IRenameContextFactory.class);
 				if (contextFactory != null)
@@ -62,7 +62,7 @@ public interface IRenameContextFactory {
 
 		protected IRenameElementContext createLocalRenameElementContext(EObject targetElement, XtextEditor editor,
 				ITextSelection selection, XtextResource resource) {
-			final URI targetElementURI = EcoreUtil2.getNormalizedURI(targetElement);
+			final URI targetElementURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(targetElement);
 			IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(targetElementURI,
 					targetElement.eClass(), editor, selection, resource.getURI());
 			return renameElementContext;

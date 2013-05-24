@@ -171,7 +171,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		assertTrue(editor.isDirty());
 		doRename();
 		assertTrue(editor.isDirty());
-		assertEquals(dirtyModel.replaceAll("B", "C"), editor.getDocument().get());
+		assertEquals(dirtyModel.replace("B", "C"), editor.getDocument().get());
 	}
 
 	@Test public void testRefFromOtherXtextLanguage() throws Exception {

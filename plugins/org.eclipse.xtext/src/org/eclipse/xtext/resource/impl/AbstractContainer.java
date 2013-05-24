@@ -50,7 +50,7 @@ public abstract class AbstractContainer extends AbstractCompoundSelectable imple
 	
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
-		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
+		URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(object).trimFragment();
 		IResourceDescription description = getResourceDescription(resourceURI);
 		if (description == null)
 			return Collections.emptyList();

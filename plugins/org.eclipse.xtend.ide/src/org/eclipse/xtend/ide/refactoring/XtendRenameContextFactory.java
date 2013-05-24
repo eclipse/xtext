@@ -53,7 +53,7 @@ public class XtendRenameContextFactory extends CombinedJvmJdtRenameContextFactor
 			IProject project = projectUtil.getProject(declarationTarget.eResource().getURI());
 			ResourceSet resourceSet = resourceSetProvider.get(project);
 			XtendFunction relaodedDispatchFunction = (XtendFunction) resourceSet.getEObject(
-					EcoreUtil2.getNormalizedURI(declarationTarget), true);
+					EcoreUtil2.getPlatformResourceOrNormalizedURI(declarationTarget), true);
 			Iterable<JvmOperation> allDispatchOperations = dispatchRenameSupport
 					.getAllDispatchOperations(relaodedDispatchFunction);
 			Map<URI, IJavaElement> jvm2javaElement = newLinkedHashMap();
