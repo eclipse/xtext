@@ -36,7 +36,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
@@ -160,7 +159,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return _forField;
   }
   
-  protected Object _text(final XtendFile element) {
+  protected String text(final XtendFile element) {
     Resource _eResource = element.eResource();
     URI _uRI = _eResource.getURI();
     URI _trimFileExtension = _uRI.trimFileExtension();
@@ -168,7 +167,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return _lastSegment;
   }
   
-  protected Object _text(final XtendClass element) {
+  protected String text(final XtendClass element) {
     String _name = element.getName();
     String _xifexpression = null;
     EList<JvmTypeParameter> _typeParameters = element.getTypeParameters();
@@ -184,7 +183,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return _plus;
   }
   
-  protected Object _text(final XtendInterface element) {
+  protected String text(final XtendInterface element) {
     String _name = element.getName();
     String _xifexpression = null;
     EList<JvmTypeParameter> _typeParameters = element.getTypeParameters();
@@ -200,26 +199,26 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return _plus;
   }
   
-  protected Object _text(final XtendTypeDeclaration element) {
+  protected String text(final XtendTypeDeclaration element) {
     String _name = element.getName();
     return _name;
   }
   
-  protected Object _text(final XtendConstructor element) {
+  protected String text(final XtendConstructor element) {
     JvmConstructor _inferredConstructor = this._iXtendJvmAssociations.getInferredConstructor(element);
     String _parameters = this.uiStrings.parameters(_inferredConstructor);
     String _plus = ("new" + _parameters);
     return _plus;
   }
   
-  protected Object _text(final XtendFunction element) {
+  protected StyledString text(final XtendFunction element) {
     String _name = element.getName();
     JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
     StyledString _signature = this.signature(_name, _directlyInferredOperation);
     return _signature;
   }
   
-  protected Object _text(final XtendField element) {
+  protected StyledString text(final XtendField element) {
     StyledString _xblockexpression = null;
     {
       boolean _and = false;
@@ -258,7 +257,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return _xblockexpression;
   }
   
-  protected Object _text(final XtendEnumLiteral element) {
+  protected String text(final XtendEnumLiteral element) {
     String _name = element.getName();
     return _name;
   }
@@ -329,47 +328,6 @@ public class XtendLabelProvider extends XbaseLabelProvider {
       return _imageDescriptor((XImportSection)constructor);
     } else if (constructor != null) {
       return _imageDescriptor(constructor);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(constructor).toString());
-    }
-  }
-  
-  protected Object text(final Object constructor) {
-    if (constructor instanceof JvmConstructor) {
-      return _text((JvmConstructor)constructor);
-    } else if (constructor instanceof JvmOperation) {
-      return _text((JvmOperation)constructor);
-    } else if (constructor instanceof JvmField) {
-      return _text((JvmField)constructor);
-    } else if (constructor instanceof JvmGenericType) {
-      return _text((JvmGenericType)constructor);
-    } else if (constructor instanceof XtendClass) {
-      return _text((XtendClass)constructor);
-    } else if (constructor instanceof XtendInterface) {
-      return _text((XtendInterface)constructor);
-    } else if (constructor instanceof XtendConstructor) {
-      return _text((XtendConstructor)constructor);
-    } else if (constructor instanceof XtendEnumLiteral) {
-      return _text((XtendEnumLiteral)constructor);
-    } else if (constructor instanceof XtendField) {
-      return _text((XtendField)constructor);
-    } else if (constructor instanceof XtendFunction) {
-      return _text((XtendFunction)constructor);
-    } else if (constructor instanceof XtendTypeDeclaration) {
-      return _text((XtendTypeDeclaration)constructor);
-    } else if (constructor instanceof JvmFormalParameter) {
-      return _text((JvmFormalParameter)constructor);
-    } else if (constructor instanceof XVariableDeclaration) {
-      return _text((XVariableDeclaration)constructor);
-    } else if (constructor instanceof XtendFile) {
-      return _text((XtendFile)constructor);
-    } else if (constructor instanceof XCasePart) {
-      return _text((XCasePart)constructor);
-    } else if (constructor instanceof XImportDeclaration) {
-      return _text((XImportDeclaration)constructor);
-    } else if (constructor != null) {
-      return _text(constructor);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(constructor).toString());

@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.ui.label.AbstractLabelProvider;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
 @SuppressWarnings("all")
-public class XbaseLabelProvider extends AbstractLabelProvider {
+public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   @Inject
   private XbaseImages2 images;
   
@@ -94,7 +94,7 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return _forAnnotation;
   }
   
-  protected String _text(final JvmGenericType genericType) {
+  protected String text(final JvmGenericType genericType) {
     String _simpleName = genericType.getSimpleName();
     return _simpleName;
   }
@@ -106,7 +106,7 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return _forOperation;
   }
   
-  protected Object _text(final JvmOperation element) {
+  protected Object text(final JvmOperation element) {
     String _simpleName = element.getSimpleName();
     StyledString _signature = this.signature(_simpleName, element);
     return _signature;
@@ -119,7 +119,7 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return _forConstructor;
   }
   
-  protected String _text(final JvmConstructor constructor) {
+  protected String text(final JvmConstructor constructor) {
     String _parameters = this.uiStrings.parameters(constructor);
     String _plus = ("new" + _parameters);
     return _plus;
@@ -132,7 +132,7 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return _forField;
   }
   
-  protected String _text(final JvmField field) {
+  protected String text(final JvmField field) {
     String _simpleName = field.getSimpleName();
     String _plus = (_simpleName + " : ");
     JvmTypeReference _type = field.getType();
@@ -147,7 +147,7 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return _forLocalVariable;
   }
   
-  protected String _text(final JvmFormalParameter parameter) {
+  protected String text(final JvmFormalParameter parameter) {
     String _xblockexpression = null;
     {
       final JvmTypeReference parameterType = parameter.getParameterType();
@@ -174,7 +174,7 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return _forLocalVariable;
   }
   
-  protected String _text(final XImportDeclaration importDeclaration) {
+  protected String text(final XImportDeclaration importDeclaration) {
     String _xifexpression = null;
     String _importedNamespace = importDeclaration.getImportedNamespace();
     boolean _notEquals = (!Objects.equal(_importedNamespace, null));
@@ -188,7 +188,7 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return _xifexpression;
   }
   
-  protected String _text(final XVariableDeclaration variableDeclaration) {
+  protected String text(final XVariableDeclaration variableDeclaration) {
     String _xblockexpression = null;
     {
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(variableDeclaration);
@@ -216,7 +216,7 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return _forTypeParameter;
   }
   
-  protected String _text(final XCasePart casePart) {
+  protected String text(final XCasePart casePart) {
     String _xblockexpression = null;
     {
       EObject _eContainer = casePart.eContainer();
@@ -277,10 +277,6 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     return null;
   }
   
-  protected String _text(final Object element) {
-    return null;
-  }
-  
   protected Object doGetImage(final Object element) {
     Object _elvis = null;
     ImageDescriptor _imageDescriptor = element==null?(ImageDescriptor)null:this.imageDescriptor(element);
@@ -289,18 +285,6 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
     } else {
       Object _doGetImage = super.doGetImage(element);
       _elvis = ObjectExtensions.<Object>operator_elvis(_imageDescriptor, _doGetImage);
-    }
-    return _elvis;
-  }
-  
-  protected Object doGetText(final Object element) {
-    Object _elvis = null;
-    Object _text = element==null?(Object)null:this.text(element);
-    if (_text != null) {
-      _elvis = _text;
-    } else {
-      Object _doGetText = super.doGetText(element);
-      _elvis = ObjectExtensions.<Object>operator_elvis(_text, _doGetText);
     }
     return _elvis;
   }
@@ -330,31 +314,6 @@ public class XbaseLabelProvider extends AbstractLabelProvider {
       return _imageDescriptor((XImportSection)constructor);
     } else if (constructor != null) {
       return _imageDescriptor(constructor);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(constructor).toString());
-    }
-  }
-  
-  protected Object text(final Object constructor) {
-    if (constructor instanceof JvmConstructor) {
-      return _text((JvmConstructor)constructor);
-    } else if (constructor instanceof JvmOperation) {
-      return _text((JvmOperation)constructor);
-    } else if (constructor instanceof JvmField) {
-      return _text((JvmField)constructor);
-    } else if (constructor instanceof JvmGenericType) {
-      return _text((JvmGenericType)constructor);
-    } else if (constructor instanceof JvmFormalParameter) {
-      return _text((JvmFormalParameter)constructor);
-    } else if (constructor instanceof XVariableDeclaration) {
-      return _text((XVariableDeclaration)constructor);
-    } else if (constructor instanceof XCasePart) {
-      return _text((XCasePart)constructor);
-    } else if (constructor instanceof XImportDeclaration) {
-      return _text((XImportDeclaration)constructor);
-    } else if (constructor != null) {
-      return _text(constructor);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(constructor).toString());
