@@ -86,37 +86,37 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		images.forField(element.visibility, adornments.get(element.jvmField))
 	}
 	
-	protected def dispatch text(XtendFile element) {
+	protected def text(XtendFile element) {
 		element.eResource.URI.trimFileExtension.lastSegment
 	}
 
-	protected def dispatch text(XtendClass element) {
+	protected def text(XtendClass element) {
 		element.name + if(element.typeParameters.empty)  
 			"" 
 		else 
 			uiStrings.typeParameters(element.typeParameters)
 	}
 
-	protected def dispatch text(XtendInterface element) {
+	protected def text(XtendInterface element) {
 		element.name + if(element.typeParameters.empty)  
 			"" 
 		else 
 			uiStrings.typeParameters(element.typeParameters)
 	}
 
-	protected def dispatch text(XtendTypeDeclaration element) {
+	protected def text(XtendTypeDeclaration element) {
 		element.name
 	}
 
-	protected def dispatch text(XtendConstructor element) {
+	protected def text(XtendConstructor element) {
 		"new" + uiStrings.parameters(element.inferredConstructor)
 	}
 	
-	protected def dispatch text(XtendFunction element) {
+	protected def text(XtendFunction element) {
 		signature(element.name, element.directlyInferredOperation)
 	}
 	
-	protected def dispatch text(XtendField element) {
+	protected def text(XtendField element) {
 		if (element.name == null && element.extension) 
 			return new StyledString(uiStrings.referenceToString(element.type, "extension"), StyledString::DECORATIONS_STYLER)
 		val fieldType = element.displayedType
@@ -129,7 +129,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		new StyledString(element.name)
 	}
 
-	protected def dispatch text(XtendEnumLiteral element) {
+	protected def text(XtendEnumLiteral element) {
 		element.name
 	}
 
