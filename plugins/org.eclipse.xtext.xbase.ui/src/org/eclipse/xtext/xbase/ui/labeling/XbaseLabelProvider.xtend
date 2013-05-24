@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.ui.label.AbstractLabelProvider
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XSwitchExpression
@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.validation.UIStrings
 import org.eclipse.xtext.xtype.XImportDeclaration
 import org.eclipse.xtext.xtype.XImportSection
 
-class XbaseLabelProvider extends AbstractLabelProvider {
+class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	
 	@Inject XbaseImages2 images
 
@@ -61,7 +61,7 @@ class XbaseLabelProvider extends AbstractLabelProvider {
 		images.forAnnotation(annotationType.visibility, adornments.get(annotationType))
 	}
 
-	protected def dispatch String text(JvmGenericType genericType) {
+	protected def String text(JvmGenericType genericType) {
 		genericType.simpleName
 	}
 
@@ -69,7 +69,7 @@ class XbaseLabelProvider extends AbstractLabelProvider {
 		images.forOperation(operation.visibility, adornments.get(operation))
 	}
 
-	protected def dispatch Object text(JvmOperation element) {
+	protected def Object text(JvmOperation element) {
 		signature(element.simpleName, element)
 	}
 
@@ -77,7 +77,7 @@ class XbaseLabelProvider extends AbstractLabelProvider {
 		images.forConstructor(constructor.visibility, adornments.get(constructor))
 	}
 
-	protected def dispatch String text(JvmConstructor constructor) {
+	protected def String text(JvmConstructor constructor) {
 		"new" + uiStrings.parameters(constructor)
 	}
 
@@ -85,7 +85,7 @@ class XbaseLabelProvider extends AbstractLabelProvider {
 		images.forField(field.visibility, adornments.get(field))
 	}
 
-	protected def dispatch String text(JvmField field) {
+	protected def String text(JvmField field) {
 		field.simpleName + " : " + field.type.simpleName
 	}
 
@@ -93,7 +93,7 @@ class XbaseLabelProvider extends AbstractLabelProvider {
 		images.forLocalVariable(adornments.get(parameter))
 	}
 
-	protected def dispatch String text(JvmFormalParameter parameter) {
+	protected def String text(JvmFormalParameter parameter) {
 		val parameterType = parameter.parameterType
 		if (parameterType == null)
 			parameter.name
@@ -105,14 +105,14 @@ class XbaseLabelProvider extends AbstractLabelProvider {
 		images.forLocalVariable(adornments.get(variableDeclaration))
 	}
 
-	protected def dispatch String text(XImportDeclaration importDeclaration) {
+	protected def String text(XImportDeclaration importDeclaration) {
 		if (importDeclaration.getImportedNamespace() != null) 
 			importDeclaration.getImportedNamespace()
 		else
 			importDeclaration.getImportedTypeName()
 	}
 
-	protected def dispatch String text(XVariableDeclaration variableDeclaration) {
+	protected def String text(XVariableDeclaration variableDeclaration) {
 		val resolvedTypes = typeResolver.resolveTypes(variableDeclaration)
 		val type = resolvedTypes.getActualType(variableDeclaration as JvmIdentifiableElement)
 		if (type != null)
@@ -125,7 +125,7 @@ class XbaseLabelProvider extends AbstractLabelProvider {
 		images.forTypeParameter(adornments.get(parameter))
 	}
 
-	protected def dispatch String text(XCasePart casePart) {
+	protected def String text(XCasePart casePart) {
 		if (casePart.eContainer instanceof XSwitchExpression) {
 			val switchExpression = casePart.eContainer as XSwitchExpression
 			if (switchExpression != null) {
@@ -155,16 +155,7 @@ class XbaseLabelProvider extends AbstractLabelProvider {
 		null
 	}
 
-	protected def dispatch String text(Object element) {
-		null
-	}
-
 	override protected doGetImage(Object element) {
 		element?.imageDescriptor ?: super.doGetImage(element)
 	}
-
-	override protected doGetText(Object element) {
-		element?.text ?: super.doGetText(element)
-	}
-
 }
