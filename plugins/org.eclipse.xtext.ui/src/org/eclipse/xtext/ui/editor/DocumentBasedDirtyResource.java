@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -19,7 +20,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IResourceDescription> {
+public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension, Provider<IResourceDescription> {
 	
 	private IXtextDocument document;
 	private IResourceDescription description;
@@ -133,6 +134,17 @@ public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IRes
 		if (document == null)
 			throw new IllegalStateException("Cannot use getActualContents if this dirty resource is not connected to a document");
 		return document.get();
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public URI getNormalizedURI() {
+		return document.readOnly(new IUnitOfWork<URI, XtextResource>(){
+			public URI exec(XtextResource state) throws Exception {
+				return EcoreUtil2.getNormalizedURI(state);
+			}
+		});
 	}
 
 }

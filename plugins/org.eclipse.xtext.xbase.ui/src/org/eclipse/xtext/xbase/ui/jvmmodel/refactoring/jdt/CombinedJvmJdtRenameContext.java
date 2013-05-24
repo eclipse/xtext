@@ -28,8 +28,8 @@ public class CombinedJvmJdtRenameContext extends IRenameElementContext.Impl {
 
 	public CombinedJvmJdtRenameContext(EObject targetElement, Map<URI, IJavaElement> jvm2javaElements, XtextEditor editor,
 			ITextSelection selection, XtextResource contextResource) {
-		super(getNormalizedURI(targetElement), targetElement.eClass(), editor, selection,
-				getNormalizedURI(contextResource));
+		super(getPlatformResourceOrNormalizedURI(targetElement), targetElement.eClass(), editor, selection,
+				getPlatformResourceOrNormalizedURI(contextResource));
 		this.jvm2javaElements = jvm2javaElements;
 	}
 

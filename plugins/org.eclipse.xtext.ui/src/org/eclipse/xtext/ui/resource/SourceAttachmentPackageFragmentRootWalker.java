@@ -74,9 +74,8 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 			}
 		}
 
-		T result = super.traverse(root, stopOnFirstResult);
-
-		if (!stopOnFirstResult || result == null) {
+		T result = null;
+		if (!stopOnFirstResult) {
 			IPath sourceAttachmentPath = root.getSourceAttachmentPath();
 			if (sourceAttachmentPath != null && sourceAttachmentPath.isPrefixOf(path)) {
 				// This is not a package fragment root we can actually walk because it's not on the project's class path.
@@ -164,6 +163,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 				}
 			}
 		}
+		result = super.traverse(root, stopOnFirstResult);
 
 		// Clear the state that's cached during this traversal.
 		//

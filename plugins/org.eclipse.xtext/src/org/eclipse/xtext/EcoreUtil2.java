@@ -595,6 +595,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		return URIConverter.INSTANCE.normalize(EcoreUtil.getURI(eObject).trimFragment());
 	}
 	
+	
 	public static URI getNormalizedURI(EObject eObject) {
 		URI rawURI = EcoreUtil.getURI(eObject);
 		Resource resource = eObject.eResource();
@@ -610,6 +611,38 @@ public class EcoreUtil2 extends EcoreUtil {
 			return resource.getResourceSet().getURIConverter().normalize(resource.getURI());
 		} else {
 			return URIConverter.INSTANCE.normalize(resource.getURI());
+		}
+	}
+	
+	/**
+	 * @return the
+	 * @since 2.4
+	 */
+	public static URI getPlatformResourceOrNormalizedURI(EObject eObject) {
+		URI rawURI = EcoreUtil.getURI(eObject);
+		if (rawURI.isPlatformResource()) {
+			return rawURI;
+		}
+		Resource resource = eObject.eResource();
+		if(resource != null && resource.getResourceSet() != null) {
+			return resource.getResourceSet().getURIConverter().normalize(rawURI);
+		} else {
+			return URIConverter.INSTANCE.normalize(rawURI);
+		}
+	}
+	/**
+	 * @return the
+	 * @since 2.4
+	 */
+	public static URI getPlatformResourceOrNormalizedURI(Resource resource) {
+		URI rawURI = resource.getURI();
+		if (rawURI.isPlatformResource()) {
+			return rawURI;
+		}
+		if(resource.getResourceSet() != null) {
+			return resource.getResourceSet().getURIConverter().normalize(rawURI);
+		} else {
+			return URIConverter.INSTANCE.normalize(rawURI);
 		}
 	}
 	

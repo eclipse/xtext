@@ -87,7 +87,7 @@ public class ExtractVariableRefactoring extends Refactoring {
 	public boolean initialize(IXtextDocument document, XExpression expression) {
 		this.document = document;
 		this.expression = expression;
-		resourceURI = EcoreUtil2.getNormalizedResourceURI(expression);
+		resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(expression).trimFragment();
 		successor = expressionUtil.findSuccessorExpressionForVariableDeclaration(expression);
 		if(successor == null)
 			return false;

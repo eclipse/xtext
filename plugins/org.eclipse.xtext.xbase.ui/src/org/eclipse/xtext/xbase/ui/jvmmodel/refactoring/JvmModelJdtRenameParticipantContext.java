@@ -70,7 +70,7 @@ public class JvmModelJdtRenameParticipantContext extends IRenameElementContext.I
 			EObject renameTargetElement = associations.getPrimarySourceElement(jvmElement);
 			if (renameTargetElement != null) {
 				return singletonList(new JvmModelJdtRenameParticipantContext(participant,
-						EcoreUtil2.getNormalizedURI(renameTargetElement), renameTargetElement.eClass()));
+						EcoreUtil2.getPlatformResourceOrNormalizedURI(renameTargetElement), renameTargetElement.eClass()));
 			}
 			return super.createJdtParticipantXtextSourceContexts(participant, jvmElement);
 		}

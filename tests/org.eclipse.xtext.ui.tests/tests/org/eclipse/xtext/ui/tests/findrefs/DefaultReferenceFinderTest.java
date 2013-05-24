@@ -146,12 +146,12 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	}
 
 	protected void findAllRefs(EObject target, IReferenceFinder.ILocalResourceAccess localResourceAccess) {
-		referenceFinder.findAllReferences(singleton(EcoreUtil2.getNormalizedURI(target)), localResourceAccess,
+		referenceFinder.findAllReferences(singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(target)), localResourceAccess,
 				acceptor, null);
 	}
 
 	protected void findRefs(EObject target, Resource sourceResource, IReferenceFinder.ILocalResourceAccess localResourceAccess) {
-		referenceFinder.findReferences(singleton(EcoreUtil2.getNormalizedURI(target)),
+		referenceFinder.findReferences(singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(target)),
 				singleton(sourceResource.getURI()), localResourceAccess, acceptor, null);
 	}
 

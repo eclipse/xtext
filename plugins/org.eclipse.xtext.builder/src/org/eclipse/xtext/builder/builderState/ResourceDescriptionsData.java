@@ -135,7 +135,7 @@ public class ResourceDescriptionsData extends AbstractCompoundSelectable {
 	
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
-		URI resourceURI = EcoreUtil2.getNormalizedResourceURI(object);
+		URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(object);
 		IResourceDescription description = getResourceDescription(resourceURI);
 		if (description == null)
 			return Collections.emptyList();

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -64,21 +65,28 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 		try {
 			IPackageFragmentRoot[] roots = javaProject.getAllPackageFragmentRoots();
 			for (IPackageFragmentRoot root : roots) {
-				try {
-					Pair<URI,URI> mapping = storage2UriMapper.getURIMapping(root);
-					if (mapping != null) {
-						hashMap.put(mapping.getFirst(), mapping.getSecond());
+				Pair<URI, URI> uriMapping = storage2UriMapper.getURIMapping(root);
+				if (uriMapping != null) {
+					
+					// we could just install the prefix mapping, i.e. platform:resource/my.project/ -> file:/my/path/to/my.project/
+					// but then we wouldn't be able to load resources when using hosted bundles, because the target path points to the bin folder.
+					// so instead we install qualified file mappings, which also makes normalization faster (i.e. just a lookup in a map instead of testing prefix URIs)
+					//
+					Map<URI, IStorage> mapping = storage2UriMapper.getAllEntries(root);
+					for (URI key : mapping.keySet()) {
+						URI physicalURI = key.replacePrefix(uriMapping.getFirst(), uriMapping.getSecond());
+						hashMap.put(key, physicalURI);
 					}
-				} catch (JavaModelException e) {
-					LOG.error(e.getMessage(), e);
 				}
 			}
 			final IProject project = javaProject.getProject();
 			for (IProject iProject : project.getWorkspace().getRoot().getProjects()) {
 				if (iProject.isAccessible()) {
 					IPath location = iProject.getLocation();
-					if (location != null)
-						hashMap.put(URI.createPlatformResourceURI(iProject.getName(), true), URI.createFileURI(location.toFile().getPath()));
+					if (location != null) {
+						// append a trailing slash so that URI.isPrefix is true.
+						hashMap.put(URI.createPlatformResourceURI(iProject.getName()+"/", true), URI.createFileURI(location.toFile().getPath()+"/"));
+					}
 				}
 			}
 		} catch (JavaModelException e) {
