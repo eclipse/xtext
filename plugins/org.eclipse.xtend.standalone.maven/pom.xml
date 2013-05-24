@@ -15,6 +15,7 @@
 		<tycho-version>0.17.0</tycho-version>
 		<galileo-url>http://download.eclipse.org/eclipse/updates/3.5</galileo-url>
 		<juno-url>http://download.eclipse.org/eclipse/updates/3.8</juno-url>
+		<orbit-url>http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/</orbit-url>
 		<emf-url>http://download.eclipse.org/modeling/emf/emf/updates/nightly</emf-url>
 		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest</xtext-url>
 		<mirroring.phase>prepare-package</mirroring.phase>
