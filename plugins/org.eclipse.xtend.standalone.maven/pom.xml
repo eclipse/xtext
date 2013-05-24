@@ -128,16 +128,10 @@
 							<id>org.eclipse.xtext.xbase</id>
 						</iu>
 						<iu>
-							<id>org.eclipse.xtext.xbase.lib</id>
-						</iu>
-						<iu>
 							<id>org.eclipse.xtext.xbase.junit</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.xtend.core</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtend.lib</id>
 						</iu>
 
 						<!-- Sources -->
@@ -177,13 +171,7 @@
 							<id>org.eclipse.xtext.xbase.source</id>
 						</iu>
 						<iu>
-							<id>org.eclipse.xtext.xbase.lib.source</id>
-						</iu>
-						<iu>
 							<id>org.eclipse.xtend.core.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtend.lib.source</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.xtext.smap.source</id>
@@ -281,6 +269,16 @@
 					<groupId>javax.mail</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
