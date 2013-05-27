@@ -1444,13 +1444,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	private ModifierValidator classModifierValidator = new ModifierValidator(
-			newArrayList("public", "static", "final", "abstract"), this);
+			newArrayList("public", "package", "static", "final", "abstract"), this);
 		
 	private ModifierValidator interfaceModifierValidator = new ModifierValidator(
-			newArrayList("public", "abstract"), this);
+			newArrayList("public", "package", "abstract"), this);
 		
 	private ModifierValidator enumModifierValidator = new ModifierValidator(
-			newArrayList("public"), this);
+			newArrayList("public", "package"), this);
 		
 	private ModifierValidator fieldModifierValidator = new ModifierValidator(
 			newArrayList("public", "protected", "package", "private", "static", "final", "val", "var", "extension"), this);
@@ -1468,7 +1468,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			newArrayList("public", "abstract", "def", "override"), this);
 		
 	private ModifierValidator annotationTypeModifierValidator = new ModifierValidator(
-			newArrayList("public", "abstract"), this);
+			newArrayList("public", "package", "abstract"), this);
 		
 	@Check
 	protected void checkModifiers(XtendClass xtendClass) {

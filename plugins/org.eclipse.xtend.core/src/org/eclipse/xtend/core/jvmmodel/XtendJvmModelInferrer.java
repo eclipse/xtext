@@ -263,6 +263,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	protected void initialize(XtendAnnotationType source, JvmAnnotationType inferredJvmType) {
+		inferredJvmType.setVisibility(source.getVisibility());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
 		for (XtendMember member : source.getMembers()) {
@@ -299,7 +300,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {
-		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
+		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setAbstract(source.isAbstract());
 		if (!inferredJvmType.isAbstract()) {
 			inferredJvmType.setFinal(source.isFinal());
@@ -339,7 +340,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	protected void initialize(XtendInterface source, JvmGenericType inferredJvmType) {
-		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
+		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setInterface(true);
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		for (JvmTypeReference intf : source.getExtends()) {
@@ -357,7 +358,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	protected void initialize(XtendEnum source, JvmEnumerationType inferredJvmType) {
-		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
+		inferredJvmType.setVisibility(source.getVisibility());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendEnumLiteral) 

@@ -45,7 +45,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package class Foo{}");
       XtendClass _clazz_1 = this.clazz(_builder_1.toString());
-      this._validationTestHelper.assertError(_clazz_1, Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertNoErrors(_clazz_1);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected class Foo{}");
       XtendClass _clazz_2 = this.clazz(_builder_2.toString());
@@ -85,7 +85,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package interface Foo{}");
       XtendInterface _interfaze_1 = this.interfaze(_builder_1.toString());
-      this._validationTestHelper.assertError(_interfaze_1, Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertNoErrors(_interfaze_1);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected interface Foo{}");
       XtendInterface _interfaze_2 = this.interfaze(_builder_2.toString());
@@ -125,7 +125,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package enum Foo{}");
       XtendEnum _enumeration_1 = this.enumeration(_builder_1.toString());
-      this._validationTestHelper.assertError(_enumeration_1, Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertNoErrors(_enumeration_1);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected enum Foo{}");
       XtendEnum _enumeration_2 = this.enumeration(_builder_2.toString());
@@ -165,7 +165,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package annotation Foo{}");
       XtendAnnotationType _annotationType_1 = this.annotationType(_builder_1.toString());
-      this._validationTestHelper.assertError(_annotationType_1, Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertNoErrors(_annotationType_1);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected annotation Foo{}");
       XtendAnnotationType _annotationType_2 = this.annotationType(_builder_2.toString());
