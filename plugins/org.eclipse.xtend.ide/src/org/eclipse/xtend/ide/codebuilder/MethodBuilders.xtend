@@ -114,6 +114,7 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Ja
 			.appendDefaultBody(';')
 		if(abstractFlag)
 			appendable.append(';')
+		appendable
 	}
 
 	override getIType() {

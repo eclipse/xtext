@@ -61,13 +61,11 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
       List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
       IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
       this.appendDefaultBody(_appendParameters, ";");
-      IAppendable _xifexpression = null;
       boolean _isAbstractFlag_1 = this.isAbstractFlag();
       if (_isAbstractFlag_1) {
-        IAppendable _append_2 = appendable.append(";");
-        _xifexpression = _append_2;
+        appendable.append(";");
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = (appendable);
     }
     return _xblockexpression;
   }
