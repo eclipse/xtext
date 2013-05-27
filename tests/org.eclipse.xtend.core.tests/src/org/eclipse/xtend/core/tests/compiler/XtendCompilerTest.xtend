@@ -3275,6 +3275,53 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			''')
 	}
+	
+	@Test
+	def compilePackagePrivateClass() {
+		assertCompilesTo('''
+			package class Foo {
+			}
+		''', '''
+			@SuppressWarnings("all")
+			class Foo {
+			}
+		''')
+	}
+
+	@Test
+	def compilePackagePrivateInterface() {
+		assertCompilesTo('''
+			package interface Foo {
+			}
+		''', '''
+			@SuppressWarnings("all")
+			interface Foo {
+			}
+		''')
+	}
+
+	@Test
+	def compilePackagePrivateEnum() {
+		assertCompilesTo('''
+			package enum Foo {
+			}
+		''', '''
+			@SuppressWarnings("all")
+			enum Foo {
+			}
+		''')
+	}
+
+	@Test
+	def compilePackagePrivateAnnotationType() {
+		assertCompilesTo('''
+			package annotation Foo {
+			}
+		''', '''
+			@interface Foo {
+			}
+		''')
+	}
 
 }
 

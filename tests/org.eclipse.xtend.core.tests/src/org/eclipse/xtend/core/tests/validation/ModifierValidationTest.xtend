@@ -24,7 +24,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	
 	@Test def void testClassAllowedModifiers() {
 		clazz('''private class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)
-		clazz('''package class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)
+		clazz('''package class Foo{}''').assertNoErrors
 		clazz('''protected class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)
 		clazz('''public class Foo{}''').assertNoErrors
 		clazz('''static class Foo{}''').assertNoErrors		
@@ -35,7 +35,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	
 	@Test def void testInterfaceAllowedModifiers() {
 		interfaze('''private interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
-		interfaze('''package interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
+		interfaze('''package interface Foo{}''').assertNoErrors
 		interfaze('''protected interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
 		interfaze('''public interface Foo{}''').assertNoErrors
 		interfaze('''static interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)		
@@ -46,7 +46,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	
 	@Test def void testEnumAllowedModifiers() {
 		enumeration('''private enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
-		enumeration('''package enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
+		enumeration('''package enum Foo{}''').assertNoErrors
 		enumeration('''protected enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
 		enumeration('''public enum Foo{}''').assertNoErrors
 		enumeration('''static enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)		
@@ -57,7 +57,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	
 	@Test def void testAnnotationTypeAllowedModifiers() {
 		annotationType('''private annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
-		annotationType('''package annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
+		annotationType('''package annotation Foo{}''').assertNoErrors
 		annotationType('''protected annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
 		annotationType('''public annotation Foo{}''').assertNoErrors
 		annotationType('''static annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
