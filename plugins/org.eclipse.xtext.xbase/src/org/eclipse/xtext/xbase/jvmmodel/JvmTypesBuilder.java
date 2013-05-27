@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +55,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Pair;
@@ -75,8 +75,8 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
-import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -94,7 +94,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
-@SuppressWarnings("deprecation")
 @NonNullByDefault
 public class JvmTypesBuilder {
 
@@ -110,22 +109,13 @@ public class JvmTypesBuilder {
 	private TypeReferences references;
 	
 	@Inject
-	private ClassURIHelper uriHelper;
-
-	@Inject
 	private IEObjectDocumentationProvider documentationProvider;
 	
-	@Inject
-	private NumberLiterals numberLiterals;
-
 	@Inject
 	private TypesFactory typesFactory;
 	
 	@Inject(optional = true)
 	private XtypeFactory xtypesFactory = XtypeFactory.eINSTANCE;
-	
-	@Inject
-	private VisibilityService visibilityService;
 	
 	@Inject
 	private AnnotationLookup annotationLookup;
@@ -1238,18 +1228,25 @@ public class JvmTypesBuilder {
 		return reference;
 	}
 
+	/**
+	 * @since 2.4
+	 */
 	@Nullable 
-	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value) {
-		return toJvmAnnotationValue(value, false);
-	}
-	
-	@Nullable 
-	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value, boolean evaluate) {
+	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value, @Nullable JvmTypeReference explicitType, boolean evaluate) {
 		if (value != null) {
 			AnnotationValueTranslator translator = null;
 			JvmAnnotationValue result = null;
 			if (value instanceof XListLiteral) {
-				for (XExpression expr : ((XListLiteral) value).getElements()) {
+				List<XExpression> elements = ((XListLiteral) value).getElements();
+				if(elements.isEmpty()) {
+					StandardTypeReferenceOwner typeReferenceOwner = new StandardTypeReferenceOwner(commonTypeComputationServices, value);
+					final OwnedConverter ownedConverter = new OwnedConverter(typeReferenceOwner);
+					LightweightTypeReference type = ownedConverter.apply(explicitType);
+					if(type.isArray()) {
+						return createEmptyAnnotationValueArray(((ArrayTypeReference)type).getComponentType());
+					}
+				}
+				for (XExpression expr : elements) {
 					if(translator == null) 
 						translator = translator(expr, evaluate);
 					if(translator != null) {
@@ -1275,6 +1272,45 @@ public class JvmTypesBuilder {
 			return result;
 		}
 		return null;
+	}
+	
+	protected JvmAnnotationValue createEmptyAnnotationValueArray(LightweightTypeReference componentType) {
+		if(componentType.isWrapper()) {
+			return createEmptyAnnotationValueArray(componentType.getPrimitiveIfWrapperType());
+		} else {
+			String identifier = componentType.getIdentifier();
+			if(equal("java.lang.String", identifier)) {
+				return typesFactory.createJvmStringAnnotationValue();
+			} else if(componentType.isPrimitive()) {
+				if(equal("boolean", identifier)) 
+					return typesFactory.createJvmBooleanAnnotationValue();
+				else if(equal("byte", identifier)) 
+					return typesFactory.createJvmByteAnnotationValue();
+				else if(equal("short", identifier)) 
+					return typesFactory.createJvmShortAnnotationValue();
+				else if(equal("char", identifier)) 
+					return typesFactory.createJvmCharAnnotationValue();
+				else if(equal("integer", identifier)) 
+					return typesFactory.createJvmIntAnnotationValue();
+				else if(equal("long", identifier)) 
+					return typesFactory.createJvmLongAnnotationValue();
+				else if(equal("float", identifier)) 
+					return typesFactory.createJvmFloatAnnotationValue();
+				else if(equal("double", identifier)) 
+					return typesFactory.createJvmDoubleAnnotationValue();
+			}
+		}
+		return typesFactory.createJvmCustomAnnotationValue();
+	}
+	
+	@Nullable 
+	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value) {
+		return toJvmAnnotationValue(value, false);
+	}
+	
+	@Nullable 
+	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value, boolean evaluate) {
+		return toJvmAnnotationValue(value, null, evaluate);
 	}
 
 	@Nullable 
@@ -1375,7 +1411,6 @@ public class JvmTypesBuilder {
 			};
 		}
 	}
-
 	protected interface AnnotationValueTranslator {
 		@Nullable
 		JvmAnnotationValue createValue(XExpression expr);

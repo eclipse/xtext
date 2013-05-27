@@ -7,6 +7,7 @@ import java.util.List
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmAnnotationType
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumerationType
@@ -26,9 +27,6 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
-
-import static extension org.junit.Assert.*
-import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
