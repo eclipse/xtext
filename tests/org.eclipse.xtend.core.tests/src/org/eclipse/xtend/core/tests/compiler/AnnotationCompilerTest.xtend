@@ -35,6 +35,19 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testAnnotationWithoutDefaultStringArray() {
+		assertCompilesTo('''
+			annotation DependsOn {
+				String[] value
+			}
+		''', '''
+			public @interface DependsOn {
+			  public String[] value();
+			}
+		''')
+	}
+		
+	@Test
 	def testAnnotationWithDefaultEmptyStringArray() {
 		assertCompilesTo('''
 			annotation DependsOn {
@@ -61,11 +74,10 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	@Ignore
 	def testAnnotationWithDefaultIntArray() {
 		assertCompilesTo('''
 			annotation DependsOn {
-				val value = #[ 1, 2 ]
+				int[] value = #[ 1, 2 ]
 			}
 		''', '''
 			public @interface DependsOn {
@@ -75,11 +87,10 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	@Ignore
 	def testAnnotationWithDefaultBooleanArray() {
 		assertCompilesTo('''
 			annotation DependsOn {
-				val value = #[ true, true ]
+				boolean[] value = #[ true, true ]
 			}
 		''', '''
 			public @interface DependsOn {
@@ -89,11 +100,10 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	@Ignore
 	def testAnnotationWithDefaultLongArray() {
 		assertCompilesTo('''
 			annotation DependsOn {
-				val value = #[ 1l, 2l ]
+				long[] value = #[ 1l, 2l ]
 			}
 		''', '''
 			public @interface DependsOn {
