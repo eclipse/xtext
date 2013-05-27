@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -45,6 +44,27 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private String string;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testAnnotationWithoutDefaultStringArray() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("annotation DependsOn {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public @interface DependsOn {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String[] value();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -94,13 +114,12 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore
   public void testAnnotationWithDefaultIntArray() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("annotation DependsOn {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("val value = #[ 1, 2 ]");
+    _builder.append("int[] value = #[ 1, 2 ]");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -116,13 +135,12 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore
   public void testAnnotationWithDefaultBooleanArray() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("annotation DependsOn {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("val value = #[ true, true ]");
+    _builder.append("boolean[] value = #[ true, true ]");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -138,13 +156,12 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore
   public void testAnnotationWithDefaultLongArray() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("annotation DependsOn {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("val value = #[ 1l, 2l ]");
+    _builder.append("long[] value = #[ 1l, 2l ]");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
