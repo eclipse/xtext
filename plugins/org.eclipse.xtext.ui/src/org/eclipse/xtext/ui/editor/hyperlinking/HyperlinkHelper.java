@@ -101,7 +101,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		final URIConverter uriConverter = from.getResourceSet().getURIConverter();
 		final String hyperlinkText = labelProvider.getText(to);
 		final URI uri = EcoreUtil.getURI(to);
-		final URI normalized = uriConverter.normalize(uri);
+		final URI normalized = uri.isPlatformResource()?uri:uriConverter.normalize(uri);
 
 		XtextHyperlink result = hyperlinkProvider.get();
 		result.setHyperlinkRegion(region);
