@@ -1290,7 +1290,7 @@ public class JvmTypesBuilder {
 					return typesFactory.createJvmShortAnnotationValue();
 				else if(equal("char", identifier)) 
 					return typesFactory.createJvmCharAnnotationValue();
-				else if(equal("integer", identifier)) 
+				else if(equal("int", identifier)) 
 					return typesFactory.createJvmIntAnnotationValue();
 				else if(equal("long", identifier)) 
 					return typesFactory.createJvmLongAnnotationValue();
