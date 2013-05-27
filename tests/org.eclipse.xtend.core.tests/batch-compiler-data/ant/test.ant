@@ -36,6 +36,7 @@
 			<include name="com.google.guava_10*.jar" />
 			<include name="com.google.inject_*.jar" />
 			<include name="javax.injec*.jar" />
+			<include name="org.eclipse.equinox.common*.jar" />
 			<include name="org.eclipse.jdt.core*.jar" />
 			<include name="org.antlr*.jar" />
 			<include name="org.eclipse.xtext_${xtext-version}.jar" />
