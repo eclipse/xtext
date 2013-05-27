@@ -1,6 +1,6 @@
 package org.eclipse.xtext.ui.generator.labeling;
 
-import static java.util.Collections.*;
+import static org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.*;
 
 import java.util.Set;
 
@@ -22,15 +22,21 @@ public class LabelProviderFragment extends AbstractStubGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		BindFactory bindFactory = new BindFactory();
 		if(isGenerateStub())
-			return new BindFactory()
+			bindFactory
 				.addTypeToType("org.eclipse.jface.viewers.ILabelProvider", getEObjectLabelProviderQualifiedName(grammar, getNaming()))
 				.addConfiguredBinding("ResourceUIServiceLabelProvider",
 					"binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)" +
 					".annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)" +
-					".to(" + getDescriptionLabelProviderQualifiedName(grammar, getNaming()) + ".class)").getBindings();
-		else 
-			return emptySet();
+					".to(" + getDescriptionLabelProviderQualifiedName(grammar, getNaming()) + ".class)");
+		else if(doesUseXbase(grammar))
+			bindFactory.addTypeToType("org.eclipse.jface.viewers.ILabelProvider", "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider")
+				.addConfiguredBinding("ResourceUIServiceLabelProvider",
+						"binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)" +
+								".annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)" +
+								".to(org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider.class)");
+		return bindFactory.getBindings();
 	}
 
 	public static String getDescriptionLabelProviderQualifiedName(Grammar grammar, Naming n) {
