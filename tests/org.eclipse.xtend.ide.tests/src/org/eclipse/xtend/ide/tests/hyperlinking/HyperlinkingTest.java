@@ -12,6 +12,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
+import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -38,8 +39,11 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("foo"), true);
 		assertEquals(3, hyperlinks.length);
 		assertEquals("foo(Number) : Object", hyperlinks[0].getHyperlinkText());
+		assertTrue(((XtextHyperlink)hyperlinks[0]).getURI().isPlatformResource());
 		assertEquals("foo(String) : Object", hyperlinks[1].getHyperlinkText());
+		assertTrue(((XtextHyperlink)hyperlinks[1]).getURI().isPlatformResource());
 		assertEquals("foo(Object) : Object", hyperlinks[2].getHyperlinkText());
+		assertTrue(((XtextHyperlink)hyperlinks[2]).getURI().isPlatformResource());
 	}
 	
 	@Test public void testPlainMethod() throws Exception {
@@ -51,6 +55,7 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("foo"), true);
 		assertEquals(1, hyperlinks.length);
 		assertEquals("foo() : Object", hyperlinks[0].getHyperlinkText());
+		assertTrue(((XtextHyperlink)hyperlinks[0]).getURI().isPlatformResource());
 	}
 	
 	@Test public void testConstructor() throws Exception {
@@ -62,6 +67,7 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("Foo", 10), true);
 		assertEquals(1, hyperlinks.length);
 		assertEquals("Foo", hyperlinks[0].getHyperlinkText());
+		assertTrue(((XtextHyperlink)hyperlinks[0]).getURI().isPlatformResource());
 	}
 
 	@Test public void testSuperClass() throws Exception {
