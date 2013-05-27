@@ -9,12 +9,17 @@ package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.lang.annotation.Annotation;
+
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -33,7 +38,14 @@ import com.google.inject.Inject;
  */
 public class JvmModelCompleter {
 	
-	@Inject private TypeReferences references;
+	@Inject 
+	private TypeReferences references;
+	
+	@Inject 
+	private TypesFactory typesFactory;
+	
+	@Inject 
+	private JvmTypeExtensions typeExtensions;  
 
 	public void complete(Iterable<? extends JvmIdentifiableElement> elements) {
 		for (JvmIdentifiableElement element : elements) {
@@ -58,18 +70,56 @@ public class JvmModelCompleter {
 		if (element instanceof JvmEnumerationLiteral) {
 			completeJvmEnumerationLiteral((JvmEnumerationLiteral)element);
 		}
+		if (element instanceof JvmAnnotationType) {
+			completeJvmAnnotationType((JvmAnnotationType)element);
+		}
 	}
 	
 	protected void completeJvmEnumerationType(JvmEnumerationType element) {
-		ensureSuperTypeObject(element);
+		if (element.getSuperTypes().isEmpty()) {
+			JvmTypeReference objectType = references.getTypeForName(Enum.class, element,
+					references.createTypeRef(element));
+			if (objectType != null)
+				element.getSuperTypes().add(objectType);
+		}
+		
+		JvmOperation values = typesFactory.createJvmOperation();
+		values.setVisibility(JvmVisibility.PUBLIC);
+		values.setStatic(true);
+		values.setSimpleName("values");
+		values.setReturnType(references.createArrayType(references.createTypeRef(element)));
+		typeExtensions.setSynthetic(values, true);
+		element.getMembers().add(values);
+		
+		JvmOperation valueOf = typesFactory.createJvmOperation();
+		valueOf.setVisibility(JvmVisibility.PUBLIC);
+		valueOf.setStatic(true);
+		valueOf.setSimpleName("valueOf");
+		valueOf.setReturnType(references.createTypeRef(element));
+		JvmFormalParameter param = typesFactory.createJvmFormalParameter();
+		param.setName("name");
+		param.setParameterType(references.getTypeForName(String.class, element));
+		valueOf.getParameters().add(param);
+		typeExtensions.setSynthetic(valueOf, true);
+		element.getMembers().add(valueOf);
 	}
 
 	protected void completeJvmEnumerationLiteral(JvmEnumerationLiteral element) {
 		if (element.getType() == null) {
 			element.setType(references.createTypeRef(element.getDeclaringType()));
 		}
+		element.setStatic(true);
 	}
 
+	protected void completeJvmAnnotationType(JvmAnnotationType element) {
+		if (element.getSuperTypes().isEmpty()) {
+			JvmTypeReference objectType = references.getTypeForName(Annotation.class, element);
+			if (objectType != null)
+				element.getSuperTypes().add(objectType);
+		}
+
+	}
+	
 	public void completeJvmConstructor(JvmConstructor constructor) {
 		JvmDeclaredType declaringType = constructor.getDeclaringType();
 		if(declaringType != null) {

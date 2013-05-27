@@ -75,7 +75,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
-import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
+import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
 import static org.eclipse.xtext.util.Strings.*
 
 /**
@@ -171,7 +171,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateAnnotationsWithSyntheticSuppressWarnings(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
-		val noSuppressWarningsFilter = [JvmAnnotationReference it | !(it.annotation?.getIdentifier()?.equals(typeof(SuppressWarnings).name))]
+		val noSuppressWarningsFilter = [JvmAnnotationReference it | annotation?.identifier != typeof(SuppressWarnings).name]
 		annotations.filter(noSuppressWarningsFilter).generateAnnotations(appendable, true, config)
 		appendable.append('''@SuppressWarnings("all")''').newLine
 	}
@@ -219,7 +219,7 @@ class JvmModelGenerator implements IGenerator {
 		childAppendable.append("@interface ")
 		childAppendable.traceSignificant(it).append(simpleName)
 		childAppendable.append(" {")
-		for (operation : members.filter(typeof(JvmOperation))) {
+		for (operation : membersToBeCompiled.filter(typeof(JvmOperation))) {
 			generateAnnotationMethod(operation, childAppendable, config)
 		}
 		childAppendable.newLine.append("}")
@@ -333,15 +333,20 @@ class JvmModelGenerator implements IGenerator {
 	}
 		
 	def void generateExtendsClause(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
-		if (it instanceof JvmGenericType && (it as JvmGenericType).isInterface) {
-			val withoutObject = superTypes.filter( typeRef | typeRef.identifier != "java.lang.Object")
+		val implicitSuperType = switch it {
+			JvmAnnotationType: 'java.lang.Annotation'
+			JvmEnumerationType: '''java.lang.Enum<«identifier»>'''.toString
+			default: 'java.lang.Object'
+		} 
+		if (it instanceof JvmAnnotationType || (it instanceof JvmGenericType && (it as JvmGenericType).isInterface)) {
+			val withoutObject = superTypes.filter [ typeRef | typeRef.identifier != implicitSuperType ]
 			appendable.forEachSafely(withoutObject, [
 					prefix = 'extends '	separator =  ', ' suffix =  ' '
 				], [
 					it, app | serializeSafely(app)
 				])
 		} else {
-			val withoutObject = superTypes.filter( typeRef | typeRef.identifier != "java.lang.Object")
+			val withoutObject = superTypes.filter [ typeRef | typeRef.identifier != implicitSuperType ]
 			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).isInterface).head
 			val superInterfaces = withoutObject.filter(typeRef | typeRef != superClazz)
 			if (superClazz != null) {
@@ -812,7 +817,17 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	def Iterable<JvmMember> getMembersToBeCompiled(JvmDeclaredType it) {
-		members.filter[!(it instanceof JvmConstructor && (it as JvmConstructor).singleSyntheticDefaultConstructor)]
+	
+	def dispatch Iterable<JvmMember> getMembersToBeCompiled(JvmEnumerationType type) {
+		val syntheticEnumMethods = #{ type.simpleName + "." + 'valueOf(java.lang.String)', type.simpleName + "." + 'values()' }
+		type.members.filter[
+			!(it instanceof JvmOperation && syntheticEnumMethods.contains(identifier))  
+		]
+	}
+
+	def dispatch Iterable<JvmMember> getMembersToBeCompiled(JvmDeclaredType it) {
+		members.filter[
+			!(it instanceof JvmConstructor && (it as JvmConstructor).singleSyntheticDefaultConstructor)
+		]
 	}
 }

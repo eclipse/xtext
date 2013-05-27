@@ -9,10 +9,12 @@ package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -305,9 +307,8 @@ public class JvmModelGenerator implements IGenerator {
             JvmAnnotationType _annotation = it.getAnnotation();
             String _identifier = _annotation==null?(String)null:_annotation.getIdentifier();
             String _name = SuppressWarnings.class.getName();
-            boolean _equals = _identifier==null?false:_identifier.equals(_name);
-            boolean _not = (!_equals);
-            return _not;
+            boolean _notEquals = (!Objects.equal(_identifier, _name));
+            return _notEquals;
           }
         };
       final Function1<JvmAnnotationReference,Boolean> noSuppressWarningsFilter = _function;
@@ -422,8 +423,8 @@ public class JvmModelGenerator implements IGenerator {
       String _simpleName = it.getSimpleName();
       _traceSignificant.append(_simpleName);
       childAppendable.append(" {");
-      EList<JvmMember> _members = it.getMembers();
-      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
+      Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
+      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_membersToBeCompiled, JvmOperation.class);
       for (final JvmOperation operation : _filter) {
         this.generateAnnotationMethod(operation, childAppendable, config);
       }
@@ -647,19 +648,51 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void generateExtendsClause(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
-    boolean _and = false;
-    if (!(it instanceof JvmGenericType)) {
-      _and = false;
-    } else {
-      boolean _isInterface = ((JvmGenericType) it).isInterface();
-      _and = ((it instanceof JvmGenericType) && _isInterface);
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof JvmAnnotationType) {
+        final JvmAnnotationType _jvmAnnotationType = (JvmAnnotationType)it;
+        _matched=true;
+        _switchResult = "java.lang.Annotation";
+      }
     }
-    if (_and) {
+    if (!_matched) {
+      if (it instanceof JvmEnumerationType) {
+        final JvmEnumerationType _jvmEnumerationType = (JvmEnumerationType)it;
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("java.lang.Enum<");
+        String _identifier = _jvmEnumerationType.getIdentifier();
+        _builder.append(_identifier, "");
+        _builder.append(">");
+        String _string = _builder.toString();
+        _switchResult = _string;
+      }
+    }
+    if (!_matched) {
+      _switchResult = "java.lang.Object";
+    }
+    final String implicitSuperType = _switchResult;
+    boolean _or = false;
+    if ((it instanceof JvmAnnotationType)) {
+      _or = true;
+    } else {
+      boolean _and = false;
+      if (!(it instanceof JvmGenericType)) {
+        _and = false;
+      } else {
+        boolean _isInterface = ((JvmGenericType) it).isInterface();
+        _and = ((it instanceof JvmGenericType) && _isInterface);
+      }
+      _or = ((it instanceof JvmAnnotationType) || _and);
+    }
+    if (_or) {
       EList<JvmTypeReference> _superTypes = it.getSuperTypes();
       final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
           public Boolean apply(final JvmTypeReference typeRef) {
             String _identifier = typeRef.getIdentifier();
-            boolean _notEquals = (!Objects.equal(_identifier, "java.lang.Object"));
+            boolean _notEquals = (!Objects.equal(_identifier, implicitSuperType));
             return Boolean.valueOf(_notEquals);
           }
         };
@@ -682,7 +715,7 @@ public class JvmModelGenerator implements IGenerator {
       final Function1<JvmTypeReference,Boolean> _function_3 = new Function1<JvmTypeReference,Boolean>() {
           public Boolean apply(final JvmTypeReference typeRef) {
             String _identifier = typeRef.getIdentifier();
-            boolean _notEquals = (!Objects.equal(_identifier, "java.lang.Object"));
+            boolean _notEquals = (!Objects.equal(_identifier, implicitSuperType));
             return Boolean.valueOf(_notEquals);
           }
         };
@@ -1732,7 +1765,38 @@ public class JvmModelGenerator implements IGenerator {
     return _xifexpression;
   }
   
-  public Iterable<JvmMember> getMembersToBeCompiled(final JvmDeclaredType it) {
+  protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmEnumerationType type) {
+    Iterable<JvmMember> _xblockexpression = null;
+    {
+      String _simpleName = type.getSimpleName();
+      String _plus = (_simpleName + ".");
+      String _plus_1 = (_plus + "valueOf(java.lang.String)");
+      String _simpleName_1 = type.getSimpleName();
+      String _plus_2 = (_simpleName_1 + ".");
+      String _plus_3 = (_plus_2 + "values()");
+      final Set<String> syntheticEnumMethods = Collections.<String>unmodifiableSet(Sets.<String>newHashSet(_plus_1, _plus_3));
+      EList<JvmMember> _members = type.getMembers();
+      final Function1<JvmMember,Boolean> _function = new Function1<JvmMember,Boolean>() {
+          public Boolean apply(final JvmMember it) {
+            boolean _and = false;
+            if (!(it instanceof JvmOperation)) {
+              _and = false;
+            } else {
+              String _identifier = it.getIdentifier();
+              boolean _contains = syntheticEnumMethods.contains(_identifier);
+              _and = ((it instanceof JvmOperation) && _contains);
+            }
+            boolean _not = (!_and);
+            return Boolean.valueOf(_not);
+          }
+        };
+      Iterable<JvmMember> _filter = IterableExtensions.<JvmMember>filter(_members, _function);
+      _xblockexpression = (_filter);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmDeclaredType it) {
     EList<JvmMember> _members = it.getMembers();
     final Function1<JvmMember,Boolean> _function = new Function1<JvmMember,Boolean>() {
         public Boolean apply(final JvmMember it) {
@@ -1854,6 +1918,17 @@ public class JvmModelGenerator implements IGenerator {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(value, appendable, config).toString());
+    }
+  }
+  
+  public Iterable<JvmMember> getMembersToBeCompiled(final JvmDeclaredType type) {
+    if (type instanceof JvmEnumerationType) {
+      return _getMembersToBeCompiled((JvmEnumerationType)type);
+    } else if (type != null) {
+      return _getMembersToBeCompiled(type);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(type).toString());
     }
   }
 }
