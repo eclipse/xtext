@@ -819,7 +819,7 @@ class JvmModelGenerator implements IGenerator {
 	
 	
 	def dispatch Iterable<JvmMember> getMembersToBeCompiled(JvmEnumerationType type) {
-		val syntheticEnumMethods = #{ type.simpleName + "." + 'valueOf(java.lang.String)', type.simpleName + "." + 'values()' }
+		val syntheticEnumMethods = #{ type.identifier + "." + 'valueOf(java.lang.String)', type.identifier + "." + 'values()' }
 		type.members.filter[
 			!(it instanceof JvmOperation && syntheticEnumMethods.contains(identifier))  
 		]
