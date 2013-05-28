@@ -30,7 +30,10 @@ public class TestProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("source.. = src/,\\");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("src-gen/");
+    _builder.append("src-gen/,\\");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("xtend-gen/");
     _builder.newLine();
     _builder.append("bin.includes = META-INF/,\\");
     _builder.newLine();

@@ -14,7 +14,7 @@ class DefaultProjectFactoryContributor implements IProjectFactoryContributor {
 
 	override contributeFiles(IProject project, IFileCreator fileWriter) {}
 	
-	def protected  IFile writeToFile(CharSequence chrSeq, IFileCreator fCreator, String fileName) {
+	def protected IFile writeToFile(CharSequence chrSeq, IFileCreator fCreator, String fileName) {
 		return fCreator.writeToFile(chrSeq,fileName);
 	}
 }

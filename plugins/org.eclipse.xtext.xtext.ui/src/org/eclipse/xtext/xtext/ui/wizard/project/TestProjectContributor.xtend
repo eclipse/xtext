@@ -25,7 +25,8 @@ class TestProjectContributor extends DefaultProjectFactoryContributor {
 	def private contributeBuildProperties(IFileCreator fileWriter) {
 		'''
 		source.. = src/,\
-		          src-gen/
+		          src-gen/,\
+		          xtend-gen/
 		bin.includes = META-INF/,\
 		       .
 		'''.writeToFile(fileWriter, "build.properties")

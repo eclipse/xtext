@@ -126,6 +126,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected void configureDslUiProjectFactory(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
+		factory.addFolders(singletonList(XTEND_GEN_ROOT));
 		List<String> requiredBundles = getDslUiProjectRequiredBundles();
 		factory.setProjectName(getXtextProjectInfo().getUiProjectName());
 		factory.addProjectNatures(getDslUiProjectNatures());
@@ -240,6 +241,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected void configureTestProjectFactory(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
+		factory.addFolders(singletonList(XTEND_GEN_ROOT));
 		List<String> requiredBundles = getTestProjectRequiredBundles();
 		factory.setProjectName(getXtextProjectInfo().getTestProjectName());
 		factory.addProjectNatures(getTestProjectNatures());
