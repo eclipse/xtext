@@ -76,6 +76,10 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 					for (URI key : mapping.keySet()) {
 						URI physicalURI = key.replacePrefix(uriMapping.getFirst(), uriMapping.getSecond());
 						hashMap.put(key, physicalURI);
+						if (key.isPlatformResource()) {
+							URI pluginURI = URI.createPlatformPluginURI(key.toPlatformString(false), false);
+							hashMap.put(pluginURI, physicalURI);
+						}
 					}
 				}
 			}
