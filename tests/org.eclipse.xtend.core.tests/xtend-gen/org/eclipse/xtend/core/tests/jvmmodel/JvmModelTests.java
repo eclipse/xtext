@@ -182,6 +182,9 @@ public class JvmModelTests extends AbstractXtendTestCase {
   public void testEnumArtificialMethods() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package bar");
+      _builder.newLine();
+      _builder.newLine();
       _builder.append("enum Foo {");
       _builder.newLine();
       _builder.append("}");
@@ -195,7 +198,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       JvmMember _get = inferred.get(0);
       final JvmOperation values = ((JvmOperation) _get);
       String _identifier = values.getIdentifier();
-      Assert.assertEquals("Foo.values()", _identifier);
+      Assert.assertEquals("bar.Foo.values()", _identifier);
       boolean _isStatic = values.isStatic();
       Assert.assertTrue(_isStatic);
       JvmVisibility _visibility = values.getVisibility();
@@ -203,7 +206,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       JvmMember _get_1 = inferred.get(1);
       final JvmOperation valueOf = ((JvmOperation) _get_1);
       String _identifier_1 = valueOf.getIdentifier();
-      Assert.assertEquals("Foo.valueOf(java.lang.String)", _identifier_1);
+      Assert.assertEquals("bar.Foo.valueOf(java.lang.String)", _identifier_1);
       boolean _isStatic_1 = valueOf.isStatic();
       Assert.assertTrue(_isStatic_1);
       JvmVisibility _visibility_1 = valueOf.getVisibility();

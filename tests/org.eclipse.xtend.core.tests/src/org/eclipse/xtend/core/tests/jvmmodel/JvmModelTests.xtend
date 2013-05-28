@@ -78,16 +78,18 @@ class JvmModelTests extends AbstractXtendTestCase {
 	@Test
 	def testEnumArtificialMethods() {
 		val inferred = '''
+			package bar
+			
 			enum Foo {
 			}
 		'''.toString.enumeration.inferredEnumerationType.members
 		assertEquals(2, inferred.size)
 		val values = inferred.get(0) as JvmOperation
-		assertEquals("Foo.values()", values.identifier)
+		assertEquals("bar.Foo.values()", values.identifier)
 		assertTrue(values.static)
 		assertEquals(JvmVisibility::PUBLIC, values.visibility)
 		val valueOf = inferred.get(1) as JvmOperation
-		assertEquals("Foo.valueOf(java.lang.String)", valueOf.identifier)
+		assertEquals("bar.Foo.valueOf(java.lang.String)", valueOf.identifier)
 		assertTrue(valueOf.static)
 		assertEquals(JvmVisibility::PUBLIC, valueOf.visibility)
 	}

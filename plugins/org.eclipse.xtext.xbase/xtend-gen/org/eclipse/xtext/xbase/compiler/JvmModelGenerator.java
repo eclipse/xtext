@@ -1768,11 +1768,11 @@ public class JvmModelGenerator implements IGenerator {
   protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmEnumerationType type) {
     Iterable<JvmMember> _xblockexpression = null;
     {
-      String _simpleName = type.getSimpleName();
-      String _plus = (_simpleName + ".");
+      String _identifier = type.getIdentifier();
+      String _plus = (_identifier + ".");
       String _plus_1 = (_plus + "valueOf(java.lang.String)");
-      String _simpleName_1 = type.getSimpleName();
-      String _plus_2 = (_simpleName_1 + ".");
+      String _identifier_1 = type.getIdentifier();
+      String _plus_2 = (_identifier_1 + ".");
       String _plus_3 = (_plus_2 + "values()");
       final Set<String> syntheticEnumMethods = Collections.<String>unmodifiableSet(Sets.<String>newHashSet(_plus_1, _plus_3));
       EList<JvmMember> _members = type.getMembers();

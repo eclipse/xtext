@@ -199,6 +199,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 			members += expression.toEnumerationLiteral("BAR")
 			members += expression.toEnumerationLiteral("BAZ")
 		]
+		expression.eResource.contents.add(enumeration)
 		completer.complete(enumeration)
 		val compiled = compile(expression.eResource, enumeration)
 		

@@ -440,9 +440,12 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
           }
         };
       final JvmEnumerationType enumeration = this.builder.toEnumerationType(expression, "my.test.Foo", _function);
-      this.completer.complete(enumeration);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, enumeration);
+      EList<EObject> _contents = _eResource.getContents();
+      _contents.add(enumeration);
+      this.completer.complete(enumeration);
+      Resource _eResource_1 = expression.eResource();
+      final Class<? extends Object> compiled = this.compile(_eResource_1, enumeration);
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
