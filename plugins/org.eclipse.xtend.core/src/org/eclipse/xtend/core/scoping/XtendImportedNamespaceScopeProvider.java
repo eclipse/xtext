@@ -35,7 +35,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
@@ -66,9 +65,6 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	
 	@Inject
 	private IResourceScopeCache resourceScopeCache;
-	
-	@Inject
-	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
