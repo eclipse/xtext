@@ -245,12 +245,13 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			String authority = uri.authority();
 			authority = authority.substring(0, authority.length() - 1);
 			URI archiveURI = URI.createURI(authority);
-			if (archiveURI.isFile()) { // platform uris have already been handled
-				IPath archivePath = new Path(archiveURI.toFileString());
+			if (archiveURI.isFile() || archiveURI.isPlatformResource()) {
+				IPath archivePath = new Path(archiveURI.isPlatformResource()? archiveURI.toPlatformString(true): archiveURI.toFileString());
 				for (PackageFragmentRootData data : cachedPackageFragmentRootData.values()) {
-					// TODO better isPrefix
 					if (data.uriPrefix != null && archivePath.equals(data.root.getPath())) {
-						URI expectedURI = data.uriPrefix.appendSegments(uri.segments());
+						// prefixes have an empty last segment.
+						URI prefix = data.uriPrefix.lastSegment().length()==0 ? data.uriPrefix.trimSegments(1) : data.uriPrefix;
+						URI expectedURI = prefix.appendSegments(uri.segments());
 						IStorage storage = data.uri2Storage.get(expectedURI);
 						if (storage != null) {
 							result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
