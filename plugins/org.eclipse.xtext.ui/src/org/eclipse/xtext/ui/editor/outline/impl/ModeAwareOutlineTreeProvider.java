@@ -14,9 +14,7 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.2
- * @deprecated The super class requires to run in the UI thread. Implement {@link org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider.ModeAware} instead.
  */
-@Deprecated
 public abstract class ModeAwareOutlineTreeProvider extends DefaultOutlineTreeProvider implements IOutlineTreeProvider.ModeAware {
 
 	private int currentModeIndex = 0;
