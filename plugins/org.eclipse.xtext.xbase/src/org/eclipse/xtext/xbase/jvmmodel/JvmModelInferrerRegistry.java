@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.plugin.RegistryReader;
 
 import com.google.inject.ImplementedBy;
@@ -43,7 +44,7 @@ public class JvmModelInferrerRegistry {
 		return map;
 	}
 	
-	private boolean isUseRegistry = true;
+	private boolean isUseRegistry = EMFPlugin.IS_ECLIPSE_RUNNING;
 	
 	public void setUseRegistry(boolean isUseRegistry) {
 		this.isUseRegistry = isUseRegistry;
