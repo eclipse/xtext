@@ -427,7 +427,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 					// TODO: Should we use the resource set somehow to obtain the URIConverter for the file protocol?
 					// see also todo below, but don't run into a stackoverflow ;-)
 					Map<String, ?> attributes = URIConverter.INSTANCE.getAttributes(emfURI, null);
-					readOnly = "true".equals(attributes.get(URIConverter.ATTRIBUTE_READ_ONLY));
+					readOnly = Boolean.TRUE.equals(attributes.get(URIConverter.ATTRIBUTE_READ_ONLY));
 				}
 				info.isReadOnly=  readOnly;
 				info.isModifiable= !readOnly;
