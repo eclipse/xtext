@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class StringCollection<T extends StringCollection<T>.Item> implements Iterable<T> {
 	public class Item implements Comparable<Item> {
 		protected String escaped = null;

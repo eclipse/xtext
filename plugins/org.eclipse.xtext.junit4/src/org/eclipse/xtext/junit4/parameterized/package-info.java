@@ -5,22 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.junit4.parameterized;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 
 /**
- * use org.xpect.parameter.ParameterParser from www.xpect-tests.org instead.
+ * This package has been deprecated in favor of http://www.xpect-tests.org/
  * 
- * @author Moritz Eysholdt - Initial contribution and API
+ * In contrast to this implementation, Xpect provides better JUnit integration and an 
+ * Xtext editor that supports both the to-be-tested DSL and the Xpect syntax.
  */
-@Deprecated
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface ParameterSyntax {
-	String value() default "";
+@java.lang.Deprecated
+package org.eclipse.xtext.junit4.parameterized;
 
-}

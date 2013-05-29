@@ -42,7 +42,7 @@ import com.google.common.collect.Multimap;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+@Deprecated
 public class XpectParameterProvider implements IParameterProvider {
 
 	protected static class AssignedProduction extends StringProduction {
