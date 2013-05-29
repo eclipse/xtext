@@ -365,7 +365,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"\n" + 
 				"Object _object = new Object();\n" +
-				"if (_object!=null) _object.notify();",
+				"if (_object!=null) {\n" +
+				"  _object.notify();\n" +
+				"}",
 				"new Object()?.notify");
 	}
 	
@@ -374,7 +376,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"\n" + 
 				"Object _object = new Object();\n" +
 				"String _string = _object.toString();\n" +
-				"if (_string!=null) _string.notify();",
+				"if (_string!=null) {\n" +
+				"  _string.notify();\n" +
+				"}",
 				"new Object().toString?.notify");
 	}
 	
@@ -382,9 +386,47 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"\n" + 
 				"Object _object = new Object();\n" +
-				"String _string = _object==null?(String)null:_object.toString();\n" +
-				"if (_string!=null) _string.notify();",
+				"String _string = null;\n" +
+				"if (_object!=null) {\n" +
+				"  _string=_object.toString();\n" +
+				"}\n" +
+				"if (_string!=null) {\n" +
+				"  _string.notify();\n" +
+				"}",
 				"new Object()?.toString?.notify");
+	}
+	
+	@Test public void testNullSafeFeatureCall_04() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"String _string = new String();\n" +
+				"String _substring = null;\n" +
+				"if (_string!=null) {\n" +
+				"  _substring=_string.substring(1);\n" +
+				"}\n" +
+				"int _length = 0;\n" +
+				"if (_substring!=null) {\n" +
+				"  _length=_substring.length();\n" +
+				"}\n" +
+				"return _length;",
+				"new String()?.substring(1)?.length");
+	}
+	
+	@Test public void testNullSafeFeatureCall_05() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"int _xblockexpression = (int) 0;\n" +
+				"{\n" +
+				"  int x = 0;\n" +
+				"  String _string = new String();\n" +
+				"  if (_string!=null) {\n" +
+				"    int _x = x = 2;\n" +
+				"    _string.substring(_x);\n" +
+				"  }\n" +
+				"  _xblockexpression = (x);\n" +
+				"}\n" +
+				"return _xblockexpression;",
+				"{var x = 0; new String()?.substring(x=2); x}");
 	}
 	
 	@Test public void testInline_01() throws Exception {
