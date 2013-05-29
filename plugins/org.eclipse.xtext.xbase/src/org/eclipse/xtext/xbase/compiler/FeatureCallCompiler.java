@@ -150,29 +150,75 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (receiver != null) {
 				prepareExpression(receiver, b);
 			}
-			for (XExpression arg : getActualArguments(expr)) {
-				prepareExpression(arg, b);
-			}
-			if (!isReferenced) {
-				b.newLine();
-				if (!expressionHelper.hasSideEffects(expr, false)) {
-					b.append("/* ");
-				}
-				try {
-					featureCalltoJavaExpression(expr, b, false);
-					b.append(";");
-				} finally {
+			if (expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isNullSafe()) {
+				if (!isReferenced) {
 					if (!expressionHelper.hasSideEffects(expr, false)) {
-						b.append(" */");
+						b.append("/* ");
+					}
+					try {
+						b.newLine().append("if (");
+						internalToJavaExpression(((XMemberFeatureCall) expr).getMemberCallTarget(), b);
+						b.append("!=null) {").increaseIndentation();
+						for (XExpression arg : getActualArguments(expr)) {
+							prepareExpression(arg, b);
+						}
+						b.newLine();
+						featureCalltoJavaExpression(expr, b, false);
+						b.append(";");
+					} finally {
+						b.decreaseIndentation().newLine().append("}");
+						if (!expressionHelper.hasSideEffects(expr, false)) {
+							b.append(" */");
+						}
+					}
+				} else if (isVariableDeclarationRequired(expr, b)) {
+					Later later = new Later() {
+						public void exec(ITreeAppendable appendable) {
+							appendNullValueUntyped(getTypeForVariableDeclaration(expr), expr, appendable);
+						}
+					};
+					declareFreshLocalVariable(expr, b, later);
+					b.newLine().append("if (");
+					internalToJavaExpression(((XMemberFeatureCall) expr).getMemberCallTarget(), b);
+					b.append("!=null) {").increaseIndentation();
+					try {
+						for (XExpression arg : getActualArguments(expr)) {
+							prepareExpression(arg, b);
+						}
+						b.newLine();
+						b.append(b.getName(expr));
+						b.append("=");
+						featureCalltoJavaExpression(expr, b, true);
+						b.append(";");
+					} finally {
+						b.decreaseIndentation().newLine().append("}");
 					}
 				}
-			} else if (isVariableDeclarationRequired(expr, b)) {
-				Later later = new Later() {
-					public void exec(ITreeAppendable appendable) {
-						featureCalltoJavaExpression(expr, appendable, true);
+			} else {
+				for (XExpression arg : getActualArguments(expr)) {
+					prepareExpression(arg, b);
+				}
+				if (!isReferenced) {
+					b.newLine();
+					if (!expressionHelper.hasSideEffects(expr, false)) {
+						b.append("/* ");
 					}
-				};
-				declareFreshLocalVariable(expr, b, later);
+					try {
+						featureCalltoJavaExpression(expr, b, false);
+						b.append(";");
+					} finally {
+						if (!expressionHelper.hasSideEffects(expr, false)) {
+							b.append(" */");
+						}
+					}
+				} else if (isVariableDeclarationRequired(expr, b)) {
+					Later later = new Later() {
+						public void exec(ITreeAppendable appendable) {
+							featureCalltoJavaExpression(expr, appendable, true);
+						}
+					};
+					declareFreshLocalVariable(expr, b, later);
+				}
 			}
 		}
 	}
@@ -580,22 +626,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected boolean appendReceiver(XAbstractFeatureCall call, ITreeAppendable b, boolean isExpressionContext) {
-		if (call instanceof XMemberFeatureCall) {
-			XMemberFeatureCall expr = ((XMemberFeatureCall) call);
-			if (expr.isNullSafe()) {
-				if (isExpressionContext) {
-					internalToJavaExpression(expr.getMemberCallTarget(), b);
-					b.append("==null?");
-					JvmTypeReference type = getType(call);
-					appendNullValue(type, call, b);
-					b.append(":");
-				} else {
-					b.append("if (");
-					internalToJavaExpression(expr.getMemberCallTarget(), b);
-					b.append("!=null) ");
-				}
-			}
-		}
 		if (call.isStatic()) {
 			if (expressionHelper.findInlineAnnotation(call) != null) {
 				return false;
@@ -633,7 +663,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.append(getDefaultLiteral((JvmPrimitiveType) type.getType()));
 		}
 	}
-
+	
+	protected void appendNullValueUntyped(JvmTypeReference type, EObject context, ITreeAppendable b) {
+		if (!primitives.isPrimitive(type)) {
+			b.append("null");
+		} else {
+			b.append(getDefaultLiteral((JvmPrimitiveType) type.getType()));
+		}
+	}
 
 	protected String getDefaultLiteral(JvmPrimitiveType primitiveType) {
 		final String name = primitiveType.getIdentifier();
