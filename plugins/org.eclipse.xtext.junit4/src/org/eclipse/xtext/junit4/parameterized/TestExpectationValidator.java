@@ -20,6 +20,7 @@ import org.junit.Test;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.ANNOTATION_TYPE)
 public @interface TestExpectationValidator {

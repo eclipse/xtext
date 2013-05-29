@@ -15,6 +15,7 @@ import com.google.common.base.Function;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class ActualCollection extends StringCollection<ActualItem> {
 
 	public static class ToString implements Function<Object, String> {

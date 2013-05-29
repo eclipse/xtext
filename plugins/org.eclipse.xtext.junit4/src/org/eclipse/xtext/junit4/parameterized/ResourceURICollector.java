@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class ResourceURICollector {
 	public static class FilePredicate implements Predicate<File> {
 		private final String[] fileExtensions;

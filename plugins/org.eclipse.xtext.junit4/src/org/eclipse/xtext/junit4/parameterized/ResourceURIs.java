@@ -6,6 +6,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * use org.xpect.runner.XpectTestFiles from www.xpect-tests.org instead.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
+@Deprecated
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.TYPE })

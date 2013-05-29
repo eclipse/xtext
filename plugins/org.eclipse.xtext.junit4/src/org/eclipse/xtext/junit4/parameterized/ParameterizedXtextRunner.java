@@ -53,8 +53,11 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 /**
+ * use org.xpect.runner.XpectRunner from www.xpect-tests.org instead.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 
 	protected static class MethodWithExpectation {

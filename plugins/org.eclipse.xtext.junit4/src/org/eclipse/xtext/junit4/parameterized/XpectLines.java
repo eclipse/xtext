@@ -31,8 +31,15 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 /**
+ * use org.xpect.runner.Xpect from www.xpect-tests.org instead. In Xpect, test methods don't have return values anymore.
+ * Instead, the test expectation is passed in as method parameter. To handle a method with a Lines expectation you can
+ * use a method declaration such as
+ * 
+ * <code>@Xpect public void exportedObjects(@LinesExpectation ILinesExpectation expectation) { }</code>
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @TestExpectationValidator(validator = LinesResultValidator.class)
