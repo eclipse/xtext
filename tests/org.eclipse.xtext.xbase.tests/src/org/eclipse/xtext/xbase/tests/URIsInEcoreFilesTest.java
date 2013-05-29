@@ -24,7 +24,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -32,7 +31,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore
 public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 
 	private ResourceSet resourceSet;
