@@ -2713,7 +2713,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				    final Inner<LocalName> _function = new Inner<LocalName>() {
 				        public void useProcedure(final Procedure1<? super LocalName> it) {
 				          if (true) {
-				            if (it!=null) it.apply(param);
+				            if (it!=null) {
+				              it.apply(param);
+				            }
 				          }
 				        }
 				      };

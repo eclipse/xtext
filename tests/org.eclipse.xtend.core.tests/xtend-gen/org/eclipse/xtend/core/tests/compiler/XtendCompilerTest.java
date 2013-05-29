@@ -5991,7 +5991,13 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (true) {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("if (it!=null) it.apply(param);");
+    _builder_1.append("if (it!=null) {");
+    _builder_1.newLine();
+    _builder_1.append("              ");
+    _builder_1.append("it.apply(param);");
+    _builder_1.newLine();
+    _builder_1.append("            ");
+    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("}");
