@@ -21,9 +21,11 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -1239,7 +1241,8 @@ public class JvmTypesBuilder {
 			if (value instanceof XListLiteral) {
 				List<XExpression> elements = ((XListLiteral) value).getElements();
 				if(elements.isEmpty()) {
-					StandardTypeReferenceOwner typeReferenceOwner = new StandardTypeReferenceOwner(commonTypeComputationServices, value);
+					ResourceSet resourceSetOrNull = EcoreUtil2.getResourceSet(value);
+					StandardTypeReferenceOwner typeReferenceOwner = new StandardTypeReferenceOwner(commonTypeComputationServices, resourceSetOrNull);
 					final OwnedConverter ownedConverter = new OwnedConverter(typeReferenceOwner);
 					LightweightTypeReference type = ownedConverter.apply(explicitType);
 					if(type.isArray()) {
