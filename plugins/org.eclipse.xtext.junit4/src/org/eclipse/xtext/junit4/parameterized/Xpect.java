@@ -13,6 +13,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * This class will be removed in the next release after 2.4.2
+ * 
  * use org.xpect.runner.Xpect from www.xpect-tests.org instead.
  * 
  * @author Moritz Eysholdt - Initial contribution and API

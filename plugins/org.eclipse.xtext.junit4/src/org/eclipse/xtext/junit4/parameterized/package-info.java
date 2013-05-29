@@ -11,6 +11,8 @@
  * 
  * In contrast to this implementation, Xpect provides better JUnit integration and an 
  * Xtext editor that supports both the to-be-tested DSL and the Xpect syntax.
+ * 
+ * This package will be removed in the next release after 2.4.2
  */
 @java.lang.Deprecated
 package org.eclipse.xtext.junit4.parameterized;
