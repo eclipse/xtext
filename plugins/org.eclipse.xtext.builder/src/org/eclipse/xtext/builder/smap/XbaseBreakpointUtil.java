@@ -61,8 +61,11 @@ public class XbaseBreakpointUtil {
 			IStorage storage = ((IStorageEditorInput) input).getStorage();
 			if (storage instanceof IResource)
 				return (IResource) storage;
-			if (storage instanceof IJarEntryResource)
-				return ((IJarEntryResource) storage).getPackageFragmentRoot().getUnderlyingResource();
+			if (storage instanceof IJarEntryResource) {
+				IResource underlyingResource = ((IJarEntryResource) storage).getPackageFragmentRoot().getUnderlyingResource();
+				if (underlyingResource != null)
+					return underlyingResource;
+			}
 		} else if (input instanceof IClassFileEditorInput) {
 			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
 			return getBreakpointResource(classFile.findPrimaryType());
