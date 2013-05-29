@@ -33,7 +33,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sven Efftinge
  */
-@Ignore
 public class URIsInEcoreFilesXtendTest extends Assert {
 
 	private ResourceSet resourceSet;
