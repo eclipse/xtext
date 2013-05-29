@@ -15,8 +15,11 @@ import com.google.common.collect.Multimap;
 import com.google.inject.ImplementedBy;
 
 /**
+ * use org.xpect.parameter.IParameterProvider from www.xpect-tests.org instead.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 @ImplementedBy(XpectParameterProvider.class)
 public interface IParameterProvider {
 

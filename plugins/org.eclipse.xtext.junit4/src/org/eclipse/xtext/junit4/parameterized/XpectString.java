@@ -22,8 +22,15 @@ import org.junit.Assert;
 import org.junit.ComparisonFailure;
 
 /**
+ * use org.xpect.runner.Xpect from www.xpect-tests.org instead. In Xpect, test methods don't have return values anymore.
+ * Instead, the test expectation is passed in as method parameter. To handle a method with a String expectation you can
+ * use a method declaration such as
+ * 
+ * <code>@Xpect public void linkedName(@StringExpectation IStringExpectation expectation) { }</code>
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @TestExpectationValidator(validator = StringResultValidator.class)
