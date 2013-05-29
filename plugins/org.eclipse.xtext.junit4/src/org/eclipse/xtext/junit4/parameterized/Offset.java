@@ -30,6 +30,8 @@ import com.google.common.base.Predicates;
  * myparam1 myparam2). The method parameter type can be any of the following types int, INode, EObject,
  * ICrossEReferenceAndEObject, IEAttributeAndEObject, IEReferenceAndEObject, IEStructuralFeatureAndEObject, etc.
  * 
+ * This class will be removed in the next release after 2.4.2
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @Deprecated
