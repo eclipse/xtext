@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IPath;
@@ -74,7 +75,13 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 					//
 					Map<URI, IStorage> mapping = storage2UriMapper.getAllEntries(root);
 					for (URI key : mapping.keySet()) {
-						URI physicalURI = key.replacePrefix(uriMapping.getFirst(), uriMapping.getSecond());
+						IStorage storage = mapping.get(key);
+						URI physicalURI = null;
+						if (storage instanceof IFile) {
+							physicalURI = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
+						} else {
+							physicalURI = key.replacePrefix(uriMapping.getFirst(), uriMapping.getSecond());
+						}
 						hashMap.put(key, physicalURI);
 						if (key.isPlatformResource()) {
 							URI pluginURI = URI.createPlatformPluginURI(key.toPlatformString(false), false);
