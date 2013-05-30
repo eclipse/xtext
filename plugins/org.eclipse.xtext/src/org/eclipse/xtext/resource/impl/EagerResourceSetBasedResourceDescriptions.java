@@ -38,8 +38,6 @@ import com.google.inject.Inject;
 public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundSelectable implements
 		IResourceDescriptions.IContextAware {
 
-	private final static Logger LOG = Logger.getLogger(EagerResourceSetBasedResourceDescriptions.class);
-
 	private Map<URI, IResourceDescription> descriptions = null;
 
 	private ResourceSet resourceSet;
@@ -55,10 +53,6 @@ public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundS
 				IResourceDescription description = computeResourceDescription(resource.getURI());
 				if (description != null) {
 					descriptions.put(resource.getURI(), description);
-				} else {
-					LOG.warn("Couldn't index resource '"
-							+ resource.getURI()
-							+ "'. The reason is propably that no IResourceServiceProvider or IResourceDescription.Manager was registered.");
 				}
 			}
 		}
