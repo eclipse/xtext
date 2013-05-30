@@ -434,6 +434,19 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"{var x = 0; new String()?.substring(x=2); x}");
 	}
 	
+	@Test public void testNullSafeFeatureCall_06() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"String _string = new String();\n" + 
+				"String s = _string;\n" + 
+				"String _string_1 = null;\n" + 
+				"if (s!=null) {\n" + 
+				"  _string_1=s.toString();\n" + 
+				"}\n" + 
+				"return _string_1;", 
+				"{ var s = new String; return s?.toString() }");
+	}
+	
 	@Test public void testInline_01() throws Exception {
 		assertCompilesTo(
 				"\n" + 

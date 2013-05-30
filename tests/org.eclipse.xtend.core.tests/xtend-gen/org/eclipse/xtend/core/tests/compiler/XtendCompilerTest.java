@@ -7145,4 +7145,73 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testNullSafeFeatureCall_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo { ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension org.eclipse.xtext.xbase.lib.util.ReflectExtensions");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() throws Throwable {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new String().get(\'toString\')?.get(\'substring\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Extension");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private ReflectExtensions _reflectExtensions;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object bar() throws Throwable {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _get = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _string = new String();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _get_1 = this._reflectExtensions.<Object>get(_string, \"toString\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (_get_1!=null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_get=this._reflectExtensions.<Object>get(_get_1, \"substring\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _get;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }
