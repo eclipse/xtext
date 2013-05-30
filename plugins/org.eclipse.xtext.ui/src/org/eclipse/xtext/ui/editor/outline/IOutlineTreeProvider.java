@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.outline;
 import java.util.List;
 
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.outline.impl.BackgroundOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 
 import com.google.inject.ImplementedBy;
@@ -21,7 +21,7 @@ import com.google.inject.ImplementedBy;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@ImplementedBy(BackgroundOutlineTreeProvider.class)
+@ImplementedBy(DefaultOutlineTreeProvider.class)
 public interface IOutlineTreeProvider {
 
 	IOutlineNode createRoot(IXtextDocument document);

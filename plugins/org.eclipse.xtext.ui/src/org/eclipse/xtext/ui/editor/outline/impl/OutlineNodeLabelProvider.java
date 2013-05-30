@@ -45,11 +45,13 @@ public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider 
 		protected Object doGetImage(Object element) {
 			if (element instanceof IOutlineNode.Extension) {
 				ImageDescriptor imageDescriptor = ((IOutlineNode.Extension) element).getImageDescriptor();
-				if(imageDescriptor != null)
+				if (imageDescriptor != null)
 					return imageDescriptor;
 			}
 			if (element instanceof IOutlineNode) {
-				return ((IOutlineNode) element).getImage();
+				Image image = ((IOutlineNode) element).getImage();
+				if (image != null) 
+					return image;
 			}
 			return super.doGetImage(element);
 		}
