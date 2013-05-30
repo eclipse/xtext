@@ -80,7 +80,7 @@ public class DefaultUITraceURIConverter extends DefaultTraceURIConverter {
 	protected URI computeTraceURI(URI uri, IJavaProject javaProject) throws JavaModelException {
 		for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots())
 			if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
-				URI prefix = URI.createPlatformResourceURI(root.getResource().getFullPath().toString() + "/", true);
+				URI prefix = URI.createPlatformResourceURI(root.getResource().getFullPath().addTrailingSeparator().toString(), true);
 				if (isPrefix(prefix, uri))
 					return uri.deresolve(prefix).trimFragment().trimQuery();
 			}
