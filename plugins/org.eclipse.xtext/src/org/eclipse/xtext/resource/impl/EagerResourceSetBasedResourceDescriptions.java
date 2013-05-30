@@ -7,14 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import static com.google.common.collect.Maps.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -37,26 +39,38 @@ import com.google.inject.Inject;
  */
 public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundSelectable implements
 		IResourceDescriptions.IContextAware {
-
-	private Map<URI, IResourceDescription> descriptions = null;
-
-	private ResourceSet resourceSet;
+	
+	static class Descriptions extends AdapterImpl {
+		Map<URI, IResourceDescription> map = newHashMap();
+	}
 
 	@Inject
 	private IResourceServiceProvider.Registry registry;
-
+	public ResourceSet resourceSet;
+	
+	private Descriptions getDescriptions(ResourceSet rs) {
+		for (Adapter a : rs.eAdapters()) {
+			if (a instanceof Descriptions) {
+				return (Descriptions) a;
+			}
+		}
+		return null;
+	}
+	
 	private Map<URI, IResourceDescription> getDescriptionsMap() {
+		Descriptions descriptions = getDescriptions(getResourceSet());
 		if (descriptions == null) {
-			descriptions = new HashMap<URI, IResourceDescription>();
+			descriptions = new Descriptions();
+			getResourceSet().eAdapters().add(descriptions);
 			List<Resource> list = new ArrayList<Resource>(getResourceSet().getResources());
 			for (Resource resource : list) {
 				IResourceDescription description = computeResourceDescription(resource.getURI());
 				if (description != null) {
-					descriptions.put(resource.getURI(), description);
+					descriptions.map.put(resource.getURI(), description);
 				}
 			}
 		}
-		return descriptions;
+		return descriptions.map;
 	}
 
 	private IResourceDescription computeResourceDescription(URI uri) {
