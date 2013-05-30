@@ -102,7 +102,7 @@ public class GenModelAccess {
 	 * @since 2.1
 	 */
 	public static Resource getGenModelResource(String locationInfo, String nsURI, ResourceSet resourceSet) {
-		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(nsURI);
+		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
 		if (genModelURI == null) {
 			if (EcorePackage.eNS_URI.equals(nsURI)) // if we really want to use the registered ecore ...
 				return null;
