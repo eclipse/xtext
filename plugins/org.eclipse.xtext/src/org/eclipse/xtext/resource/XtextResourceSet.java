@@ -204,7 +204,17 @@ public class XtextResourceSet extends ResourceSetImpl {
         }
         return uriConverter;
     }
-
+    
+    @Override
+    public Map<Object, Object> getLoadOptions() {
+      if (loadOptions == null)
+      {
+        loadOptions = new HashMap<Object, Object>();
+        loadOptions.put(URIConverter.OPTION_TIMEOUT, 500);
+      }
+      return loadOptions;
+    }
+    
     public Object getClasspathURIContext() {
         return classpathURIContext;
     }
