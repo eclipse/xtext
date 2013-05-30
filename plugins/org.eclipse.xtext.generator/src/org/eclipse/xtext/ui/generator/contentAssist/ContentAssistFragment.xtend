@@ -95,7 +95,7 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 				import «genProposalProviderName»
 				
 				/**
-				 * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+				 * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
 				 */
 				class «grammar.proposalProviderName.toSimpleName» extends «genProposalProviderName.toSimpleName» {
 				}

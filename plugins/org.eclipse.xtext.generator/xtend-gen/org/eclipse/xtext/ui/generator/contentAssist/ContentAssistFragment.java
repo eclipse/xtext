@@ -185,7 +185,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       _builder.append("/**");
       _builder.newLine();
       _builder.append(" ");
-      _builder.append("* see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant");
+      _builder.append("* see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
