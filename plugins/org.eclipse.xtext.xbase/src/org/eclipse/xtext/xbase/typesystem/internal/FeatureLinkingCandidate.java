@@ -273,6 +273,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return description.isStatic();
 	}
 	
+	@Override
 	public boolean isTypeLiteral() {
 		return false;
 	}
@@ -308,7 +309,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		int result = super.compareByArityWith(right);
 		if (result == 0) {
 			boolean isExecutable = getFeature() instanceof JvmExecutable;
-			if (isExecutable != right.getFeature() instanceof JvmExecutable && isVisible() == right.isVisible()) {
+			if (isExecutable != right.getFeature() instanceof JvmExecutable && isVisible() == right.isVisible() && isTypeLiteral() == right.isTypeLiteral()) {
 				// TODO this code looks bogus to me (we need to verify why / if we need this)
 				if (getExpression() instanceof XAssignment) {
 					if (isExecutable)
