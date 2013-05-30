@@ -20,7 +20,7 @@ import java.lang.annotation.ElementType
  * Adds a getter and setter method for all fields
  * Adds PropertyChangeSupport to this class and informs all listeners on change.
  */
-@Target(ElementType::TYPE)
+@Target(ElementType.TYPE)
 @Active(typeof(ObservableCompilationParticipant))
 annotation Observable {
 }

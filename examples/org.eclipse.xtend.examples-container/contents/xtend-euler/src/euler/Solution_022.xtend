@@ -32,10 +32,10 @@ import static extension java.lang.Character.*
 class Solution_022 {
 
 	def static void main(String[] args) {
-		val reader = new BufferedReader(new InputStreamReader(typeof(Solution_022).getResourceAsStream("names.txt")))
+		val reader = new BufferedReader(new InputStreamReader(Solution_022.getResourceAsStream("names.txt")))
 		try {
 			val line = reader.readLine
-			val matcher = Pattern::compile('"(\\w+)"').matcher(line)
+			val matcher = Pattern.compile('"(\\w+)"').matcher(line)
 			val names = <String>newArrayList
 			while(matcher.find) {
 				names.add(matcher.group(1))

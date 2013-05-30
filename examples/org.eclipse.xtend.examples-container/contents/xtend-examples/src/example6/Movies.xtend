@@ -43,9 +43,9 @@ class Movies {
 		val segments = line.split('  ').iterator
 		return new Movie(
 			segments.next, 
-			Integer::parseInt(segments.next), 
-			Double::parseDouble(segments.next), 
-			Long::parseLong(segments.next), 
+			Integer.parseInt(segments.next), 
+			Double.parseDouble(segments.next), 
+			Long.parseLong(segments.next), 
 			segments.toSet
 		)
 	]

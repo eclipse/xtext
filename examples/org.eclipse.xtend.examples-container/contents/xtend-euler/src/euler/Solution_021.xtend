@@ -44,7 +44,7 @@ class Solution_021 {
 	}
 
 	def static sumOfDivisors(int input) {
-		val sqrt = Math::sqrt(input).floor.intValue;
+		val sqrt = Math.sqrt(input).floor.intValue;
 		(2..sqrt).filter [ div |
 			input % div == 0
 		].fold(1) [ i1, i2 |

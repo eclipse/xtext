@@ -13,7 +13,7 @@ import static org.junit.Assert.*
 
 class ExtractTest {
 	
-	extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(typeof(Extract))
+	extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Extract)
 	
 	@Test def void testExtractAnnotation() {
 		'''
@@ -33,7 +33,7 @@ class ExtractTest {
 			interf.declaredMethods.head => [
 				assertEquals('doStuff', simpleName)
 				assertEquals(string, returnType)
-				assertEquals(typeof(IllegalArgumentException).newTypeReference, exceptions.head)
+				assertEquals(IllegalArgumentException.newTypeReference, exceptions.head)
 			]
 		]
 	}
