@@ -23,6 +23,10 @@ public interface ITypeReferenceOwner {
 	
 	CommonTypeComputationServices getServices();
 	
+	/**
+	 * Returns the context resource set if any.
+	 * May return null if there is no context information available.
+	 */
 	ResourceSet getContextResourceSet();
 
 	/*
