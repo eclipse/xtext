@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.EStructuralFeature
 
-import static org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextExtensions.*
 
 import static extension org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.*
 
@@ -85,7 +84,7 @@ class Ecore2XtextExtensions {
 			: (acceptor.addAll(classifiers) -> 
 			 classifiers.typeSelect(EClass).collect(c|c.allAssignedClassifiers(acceptor))));
 	 */
-	def private static void allAssignedClassifiers(EClass eClazz, Collection acceptor) {
+	def private static void allAssignedClassifiers(EClass eClazz, Collection<EClassifier> acceptor) {
 		val classifiers = eClazz.EAllStructuralFeatures.filter([f|needsAssignment(f)]).map([EType]).toList
 		classifiers += subClasses(eClazz)
 		classifiers.removeAll(acceptor)

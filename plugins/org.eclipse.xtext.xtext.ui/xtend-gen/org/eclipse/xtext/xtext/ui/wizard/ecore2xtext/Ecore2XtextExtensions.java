@@ -238,7 +238,7 @@ public class Ecore2XtextExtensions {
    * : (acceptor.addAll(classifiers) ->
    * classifiers.typeSelect(EClass).collect(c|c.allAssignedClassifiers(acceptor))));
    */
-  private static void allAssignedClassifiers(final EClass eClazz, final Collection acceptor) {
+  private static void allAssignedClassifiers(final EClass eClazz, final Collection<EClassifier> acceptor) {
     EList<EStructuralFeature> _eAllStructuralFeatures = eClazz.getEAllStructuralFeatures();
     final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
         public Boolean apply(final EStructuralFeature f) {
