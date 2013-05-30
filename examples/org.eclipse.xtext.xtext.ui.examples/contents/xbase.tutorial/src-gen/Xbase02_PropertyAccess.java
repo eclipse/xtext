@@ -14,5 +14,7 @@ public class Xbase02_PropertyAccess {
     /* (_plus + _name); */
     Collections.<String>singleton("So lonely");
     System.err.println();
+    Collections.<String>singleton("Lonely, lonely ...");
+    System.err.println();
   }
 }
