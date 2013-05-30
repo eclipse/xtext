@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSetLiteral;
@@ -1240,6 +1241,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr instanceof XInstanceOfExpression) {
 			return false;
 		}
+		if (expr instanceof XMemberFeatureCall && isVariableDeclarationRequired((XMemberFeatureCall) expr, b))
+			return true;
 		final EObject container = expr.eContainer();
 		if ((container instanceof XVariableDeclaration)
 			|| (container instanceof XReturnExpression) 
