@@ -199,7 +199,10 @@ public class FeatureProjectFactory extends ProjectFactory {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("<feature id=\"");
-        String _sourceFeatureName = includedFeature==null?(String)null:this.sourceFeatureName(includedFeature);
+        String _sourceFeatureName = null;
+        if (includedFeature!=null) {
+          _sourceFeatureName=this.sourceFeatureName(includedFeature);
+        }
         _builder.append(_sourceFeatureName, "	");
         _builder.append("\" version=\"0.0.0\">");
         _builder.newLineIfNotEmpty();

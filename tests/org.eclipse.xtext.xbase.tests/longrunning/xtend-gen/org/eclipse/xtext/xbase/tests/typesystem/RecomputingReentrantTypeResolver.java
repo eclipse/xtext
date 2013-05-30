@@ -323,8 +323,14 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   }
   
   public void assertEqualTypes(final String message, final LightweightTypeReference left, final LightweightTypeReference right) {
-    String _string = left==null?(String)null:left.toString();
-    String _string_1 = right==null?(String)null:right.toString();
+    String _string = null;
+    if (left!=null) {
+      _string=left.toString();
+    }
+    String _string_1 = null;
+    if (right!=null) {
+      _string_1=right.toString();
+    }
     Assert.assertEquals(message, _string, _string_1);
   }
   

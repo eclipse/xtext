@@ -330,18 +330,20 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   
   public Collection<TypeData> doGetTypeData(final XExpression expression) {
     final Collection<TypeData> result = super.doGetTypeData(expression);
-    final Procedure1<TypeData> _function = new Procedure1<TypeData>() {
-        public void apply(final TypeData it) {
-          ITypeReferenceOwner _referenceOwner = ValidatingRootResolvedTypes.this.getReferenceOwner();
-          boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
-          boolean _not = (!_isOwnedBy);
-          if (_not) {
-            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-            throw _illegalArgumentException;
+    if (result!=null) {
+      final Procedure1<TypeData> _function = new Procedure1<TypeData>() {
+          public void apply(final TypeData it) {
+            ITypeReferenceOwner _referenceOwner = ValidatingRootResolvedTypes.this.getReferenceOwner();
+            boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
+            boolean _not = (!_isOwnedBy);
+            if (_not) {
+              IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
+              throw _illegalArgumentException;
+            }
           }
-        }
-      };
-    if (result!=null) IterableExtensions.<TypeData>forEach(result, _function);
+        };
+      IterableExtensions.<TypeData>forEach(result, _function);
+    }
     return result;
   }
 }

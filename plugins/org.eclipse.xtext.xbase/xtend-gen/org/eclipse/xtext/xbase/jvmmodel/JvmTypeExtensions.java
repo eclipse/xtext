@@ -30,7 +30,11 @@ public class JvmTypeExtensions {
     EList<Adapter> _eAdapters = it.eAdapters();
     Iterable<CompilationStrategyAdapter> _filter = Iterables.<CompilationStrategyAdapter>filter(_eAdapters, CompilationStrategyAdapter.class);
     final CompilationStrategyAdapter adapter = IterableExtensions.<CompilationStrategyAdapter>head(_filter);
-    return adapter==null?(Procedure1<ITreeAppendable>)null:adapter.getCompilationStrategy();
+    Procedure1<ITreeAppendable> _compilationStrategy = null;
+    if (adapter!=null) {
+      _compilationStrategy=adapter.getCompilationStrategy();
+    }
+    return _compilationStrategy;
   }
   
   public boolean isSingleSyntheticDefaultConstructor(final JvmConstructor it) {

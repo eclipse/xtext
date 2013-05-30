@@ -279,7 +279,10 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   
   protected Object doGetImage(final Object element) {
     Object _elvis = null;
-    ImageDescriptor _imageDescriptor = element==null?(ImageDescriptor)null:this.imageDescriptor(element);
+    ImageDescriptor _imageDescriptor = null;
+    if (element!=null) {
+      _imageDescriptor=this.imageDescriptor(element);
+    }
     if (_imageDescriptor != null) {
       _elvis = _imageDescriptor;
     } else {

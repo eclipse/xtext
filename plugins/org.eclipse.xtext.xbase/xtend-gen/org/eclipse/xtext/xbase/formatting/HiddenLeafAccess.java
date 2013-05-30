@@ -55,7 +55,10 @@ public class HiddenLeafAccess {
         HiddenLeafs _newHiddenLeafs = this.newHiddenLeafs(_xifexpression_1, nodes);
         _xifexpression = _newHiddenLeafs;
       } else {
-        int _offset_2 = node==null?0:node.getOffset();
+        int _offset_2 = 0;
+        if (node!=null) {
+          _offset_2=node.getOffset();
+        }
         HiddenLeafs _hiddenLeafs = new HiddenLeafs(_offset_2);
         _xifexpression = _hiddenLeafs;
       }
@@ -177,7 +180,10 @@ public class HiddenLeafAccess {
         HiddenLeafs _newHiddenLeafs = this.newHiddenLeafs(_plus, _findNextHiddenLeafs);
         _xifexpression = _newHiddenLeafs;
       } else {
-        int _offset_1 = node==null?0:node.getOffset();
+        int _offset_1 = 0;
+        if (node!=null) {
+          _offset_1=node.getOffset();
+        }
         HiddenLeafs _hiddenLeafs = new HiddenLeafs(_offset_1);
         _xifexpression = _hiddenLeafs;
       }

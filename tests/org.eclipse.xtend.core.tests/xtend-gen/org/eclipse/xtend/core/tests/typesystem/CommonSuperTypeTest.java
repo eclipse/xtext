@@ -107,7 +107,10 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       final TypeConformanceComputer conformanceComputer = _services.getTypeConformanceComputer();
       LightweightTypeReference computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, this);
       String _key = superTypeAndParam.getKey();
-      String _simpleName = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
+      String _simpleName = null;
+      if (computedSuperType!=null) {
+        _simpleName=computedSuperType.getSimpleName();
+      }
       Assert.assertEquals(_key, _simpleName);
       CommonTypeComputationServices _services_1 = this.getServices();
       TypeConformanceComputer _typeConformanceComputer = _services_1.getTypeConformanceComputer();
@@ -116,7 +119,10 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       LightweightTypeReference _commonSuperType = _typeConformanceComputer.getCommonSuperType(_list, this);
       computedSuperType = _commonSuperType;
       String _key_1 = superTypeAndParam.getKey();
-      String _simpleName_1 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
+      String _simpleName_1 = null;
+      if (computedSuperType!=null) {
+        _simpleName_1=computedSuperType.getSimpleName();
+      }
       Assert.assertEquals(_key_1, _simpleName_1);
       CommonTypeComputationServices _services_2 = this.getServices();
       TypeConformanceComputer _typeConformanceComputer_1 = _services_2.getTypeConformanceComputer();
@@ -124,14 +130,23 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       LightweightTypeReference _commonSuperType_1 = _typeConformanceComputer_1.getCommonSuperType(_reverseView, this);
       computedSuperType = _commonSuperType_1;
       String _key_2 = superTypeAndParam.getKey();
-      String _simpleName_2 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
+      String _simpleName_2 = null;
+      if (computedSuperType!=null) {
+        _simpleName_2=computedSuperType.getSimpleName();
+      }
       Assert.assertEquals(_key_2, _simpleName_2);
       boolean _or = false;
-      boolean _isPrimitiveVoid = computedSuperType==null?false:computedSuperType.isPrimitiveVoid();
+      boolean _isPrimitiveVoid = false;
+      if (computedSuperType!=null) {
+        _isPrimitiveVoid=computedSuperType.isPrimitiveVoid();
+      }
       if (_isPrimitiveVoid) {
         _or = true;
       } else {
-        boolean _isPrimitive = computedSuperType==null?false:computedSuperType.isPrimitive();
+        boolean _isPrimitive = false;
+        if (computedSuperType!=null) {
+          _isPrimitive=computedSuperType.isPrimitive();
+        }
         _or = (_isPrimitiveVoid || _isPrimitive);
       }
       boolean _not_1 = (!_or);
@@ -146,7 +161,10 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         LightweightTypeReference _commonSuperType_2 = _typeConformanceComputer_2.getCommonSuperType(_list_1, this);
         computedSuperType = _commonSuperType_2;
         String _key_3 = superTypeAndParam.getKey();
-        String _simpleName_3 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
+        String _simpleName_3 = null;
+        if (computedSuperType!=null) {
+          _simpleName_3=computedSuperType.getSimpleName();
+        }
         Assert.assertEquals(_key_3, _simpleName_3);
       }
       boolean _notEquals = (!Objects.equal(computedSuperType, null));
@@ -158,7 +176,10 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
                     String _key = superTypeAndParam.getKey();
                     ITypeReferenceOwner _owner = superType.getOwner();
                     LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(it, superType)), _owner);
-                    String _simpleName = _commonSuperType==null?(String)null:_commonSuperType.getSimpleName();
+                    String _simpleName = null;
+                    if (_commonSuperType!=null) {
+                      _simpleName=_commonSuperType.getSimpleName();
+                    }
                     Assert.assertEquals(_key, _simpleName);
                   }
                 };
@@ -213,12 +234,30 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   protected String fixup(final String type) {
     String _elvis = null;
-    String _replace = type==null?(String)null:type.replace("$$Procedure", "org.eclipse.xtext.xbase.lib.Procedures.Procedure");
-    String _replace_1 = _replace==null?(String)null:_replace.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure");
-    String _replace_2 = _replace_1==null?(String)null:_replace_1.replace("$Function<", "com.google.common.base.Function<");
-    String _replace_3 = _replace_2==null?(String)null:_replace_2.replace("$Predicate<", "com.google.common.base.Predicate<");
-    String _replace_4 = _replace_3==null?(String)null:_replace_3.replace("$$Function", "org.eclipse.xtext.xbase.lib.Functions.Function");
-    String _replace_5 = _replace_4==null?(String)null:_replace_4.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function");
+    String _replace = null;
+    if (type!=null) {
+      _replace=type.replace("$$Procedure", "org.eclipse.xtext.xbase.lib.Procedures.Procedure");
+    }
+    String _replace_1 = null;
+    if (_replace!=null) {
+      _replace_1=_replace.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure");
+    }
+    String _replace_2 = null;
+    if (_replace_1!=null) {
+      _replace_2=_replace_1.replace("$Function<", "com.google.common.base.Function<");
+    }
+    String _replace_3 = null;
+    if (_replace_2!=null) {
+      _replace_3=_replace_2.replace("$Predicate<", "com.google.common.base.Predicate<");
+    }
+    String _replace_4 = null;
+    if (_replace_3!=null) {
+      _replace_4=_replace_3.replace("$$Function", "org.eclipse.xtext.xbase.lib.Functions.Function");
+    }
+    String _replace_5 = null;
+    if (_replace_4!=null) {
+      _replace_5=_replace_4.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function");
+    }
     if (_replace_5 != null) {
       _elvis = _replace_5;
     } else {

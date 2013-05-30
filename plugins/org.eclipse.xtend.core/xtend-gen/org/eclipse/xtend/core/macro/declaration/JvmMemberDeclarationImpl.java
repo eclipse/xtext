@@ -29,7 +29,11 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     EList<Adapter> _eAdapters = _delegate.eAdapters();
     Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, DocumentationAdapter.class);
     final DocumentationAdapter adapter = ((DocumentationAdapter) _adapter);
-    return adapter==null?(String)null:adapter.getDocumentation();
+    String _documentation = null;
+    if (adapter!=null) {
+      _documentation=adapter.getDocumentation();
+    }
+    return _documentation;
   }
   
   public void setDocComment(final String docComment) {

@@ -107,27 +107,42 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
       final ArrayList<JvmTypeReference> typeReferences = _arrayList;
       JvmTypeReference computedSuperType = this.typeConformanceComputer.getCommonSuperType(typeReferences);
       String _key = superTypeAndParam.getKey();
-      String _simpleName = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
+      String _simpleName = null;
+      if (computedSuperType!=null) {
+        _simpleName=computedSuperType.getSimpleName();
+      }
       Assert.assertEquals(_key, _simpleName);
       Iterable<JvmTypeReference> _plus = Iterables.<JvmTypeReference>concat(typeReferences, typeReferences);
       List<JvmTypeReference> _list = IterableExtensions.<JvmTypeReference>toList(_plus);
       JvmTypeReference _commonSuperType = this.typeConformanceComputer.getCommonSuperType(_list);
       computedSuperType = _commonSuperType;
       String _key_1 = superTypeAndParam.getKey();
-      String _simpleName_1 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
+      String _simpleName_1 = null;
+      if (computedSuperType!=null) {
+        _simpleName_1=computedSuperType.getSimpleName();
+      }
       Assert.assertEquals(_key_1, _simpleName_1);
       List<JvmTypeReference> _reverseView = ListExtensions.<JvmTypeReference>reverseView(typeReferences);
       JvmTypeReference _commonSuperType_1 = this.typeConformanceComputer.getCommonSuperType(_reverseView);
       computedSuperType = _commonSuperType_1;
       String _key_2 = superTypeAndParam.getKey();
-      String _simpleName_2 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
+      String _simpleName_2 = null;
+      if (computedSuperType!=null) {
+        _simpleName_2=computedSuperType.getSimpleName();
+      }
       Assert.assertEquals(_key_2, _simpleName_2);
       boolean _or = false;
-      boolean _is = computedSuperType==null?false:this._typeReferences.is(computedSuperType, Void.TYPE);
+      boolean _is = false;
+      if (computedSuperType!=null) {
+        _is=this._typeReferences.is(computedSuperType, Void.TYPE);
+      }
       if (_is) {
         _or = true;
       } else {
-        boolean _isPrimitive = computedSuperType==null?false:this._primitives.isPrimitive(computedSuperType);
+        boolean _isPrimitive = false;
+        if (computedSuperType!=null) {
+          _isPrimitive=this._primitives.isPrimitive(computedSuperType);
+        }
         _or = (_is || _isPrimitive);
       }
       boolean _not_1 = (!_or);
@@ -140,7 +155,10 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
         JvmTypeReference _commonSuperType_2 = this.typeConformanceComputer.getCommonSuperType(_list_1);
         computedSuperType = _commonSuperType_2;
         String _key_3 = superTypeAndParam.getKey();
-        String _simpleName_3 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
+        String _simpleName_3 = null;
+        if (computedSuperType!=null) {
+          _simpleName_3=computedSuperType.getSimpleName();
+        }
         Assert.assertEquals(_key_3, _simpleName_3);
       }
       return computedSuperType;

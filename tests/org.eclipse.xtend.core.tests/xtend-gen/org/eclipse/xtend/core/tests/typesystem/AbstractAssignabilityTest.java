@@ -171,12 +171,30 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   
   protected String fixup(final String type) {
     String _elvis = null;
-    String _replace = type==null?(String)null:type.replace("$$Procedure", "org.eclipse.xtext.xbase.lib.Procedures.Procedure");
-    String _replace_1 = _replace==null?(String)null:_replace.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure");
-    String _replace_2 = _replace_1==null?(String)null:_replace_1.replace("$Function<", "com.google.common.base.Function<");
-    String _replace_3 = _replace_2==null?(String)null:_replace_2.replace("$Predicate<", "com.google.common.base.Predicate<");
-    String _replace_4 = _replace_3==null?(String)null:_replace_3.replace("$$Function", "org.eclipse.xtext.xbase.lib.Functions.Function");
-    String _replace_5 = _replace_4==null?(String)null:_replace_4.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function");
+    String _replace = null;
+    if (type!=null) {
+      _replace=type.replace("$$Procedure", "org.eclipse.xtext.xbase.lib.Procedures.Procedure");
+    }
+    String _replace_1 = null;
+    if (_replace!=null) {
+      _replace_1=_replace.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure");
+    }
+    String _replace_2 = null;
+    if (_replace_1!=null) {
+      _replace_2=_replace_1.replace("$Function<", "com.google.common.base.Function<");
+    }
+    String _replace_3 = null;
+    if (_replace_2!=null) {
+      _replace_3=_replace_2.replace("$Predicate<", "com.google.common.base.Predicate<");
+    }
+    String _replace_4 = null;
+    if (_replace_3!=null) {
+      _replace_4=_replace_3.replace("$$Function", "org.eclipse.xtext.xbase.lib.Functions.Function");
+    }
+    String _replace_5 = null;
+    if (_replace_4!=null) {
+      _replace_5=_replace_4.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function");
+    }
     if (_replace_5 != null) {
       _elvis = _replace_5;
     } else {

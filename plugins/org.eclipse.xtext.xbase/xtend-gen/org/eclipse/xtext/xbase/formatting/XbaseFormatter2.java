@@ -884,7 +884,10 @@ public class XbaseFormatter2 extends AbstractFormatter {
    */
   protected boolean isMultilineLambda(final XClosure closure) {
     final ILeafNode closingBracket = this._nodeModelAccess.nodeForKeyword(closure, "]");
-    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
+    HiddenLeafs _hiddenLeafsBefore = null;
+    if (closingBracket!=null) {
+      _hiddenLeafsBefore=this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
+    }
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
@@ -1076,7 +1079,10 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   protected boolean _isMultiParamInOwnLine(final XMemberFeatureCall fc, final FormattableDocument doc) {
     final ILeafNode closingBracket = this._nodeModelAccess.nodeForKeyword(fc, ")");
-    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
+    HiddenLeafs _hiddenLeafsBefore = null;
+    if (closingBracket!=null) {
+      _hiddenLeafsBefore=this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
+    }
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
@@ -1099,7 +1105,10 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   protected boolean _isMultiParamInOwnLine(final XFeatureCall fc, final FormattableDocument doc) {
     final ILeafNode closingBracket = this._nodeModelAccess.nodeForKeyword(fc, ")");
-    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
+    HiddenLeafs _hiddenLeafsBefore = null;
+    if (closingBracket!=null) {
+      _hiddenLeafsBefore=this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
+    }
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
@@ -1122,7 +1131,10 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   protected boolean _isMultiParamInOwnLine(final XConstructorCall fc, final FormattableDocument doc) {
     final ILeafNode closingBracket = this._nodeModelAccess.nodeForKeyword(fc, ")");
-    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
+    HiddenLeafs _hiddenLeafsBefore = null;
+    if (closingBracket!=null) {
+      _hiddenLeafsBefore=this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
+    }
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
@@ -1523,27 +1535,55 @@ public class XbaseFormatter2 extends AbstractFormatter {
     }
     XExpression _then = expr.getThen();
     final INode thennode = this._nodeModelAccess.nodeForEObject(_then);
+    INode _nodeForEObject_1 = null;
     XExpression _else = expr.getElse();
-    final INode elsenode = _else==null?(INode)null:this._nodeModelAccess.nodeForEObject(_else);
+    if (_else!=null) {
+      _nodeForEObject_1=this._nodeModelAccess.nodeForEObject(_else);
+    }
+    final INode elsenode = _nodeForEObject_1;
     boolean _or = false;
     boolean _or_1 = false;
-    String _text = thennode==null?(String)null:thennode.getText();
-    String _trim = _text==null?(String)null:_text.trim();
-    boolean _contains = _trim==null?false:_trim.contains("\n");
+    String _text = null;
+    if (thennode!=null) {
+      _text=thennode.getText();
+    }
+    String _trim = null;
+    if (_text!=null) {
+      _trim=_text.trim();
+    }
+    boolean _contains = false;
+    if (_trim!=null) {
+      _contains=_trim.contains("\n");
+    }
     if (_contains) {
       _or_1 = true;
     } else {
-      HiddenLeafs _hiddenLeafsBefore = thennode==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(thennode);
-      int _newLines = _hiddenLeafsBefore==null?0:_hiddenLeafsBefore.getNewLines();
+      HiddenLeafs _hiddenLeafsBefore = null;
+      if (thennode!=null) {
+        _hiddenLeafsBefore=this._hiddenLeafAccess.getHiddenLeafsBefore(thennode);
+      }
+      int _newLines = 0;
+      if (_hiddenLeafsBefore!=null) {
+        _newLines=_hiddenLeafsBefore.getNewLines();
+      }
       boolean _greaterThan = (_newLines > 0);
       _or_1 = (_contains || _greaterThan);
     }
     if (_or_1) {
       _or = true;
     } else {
-      String _text_1 = elsenode==null?(String)null:elsenode.getText();
-      String _trim_1 = _text_1==null?(String)null:_text_1.trim();
-      boolean _contains_1 = _trim_1==null?false:_trim_1.contains("\n");
+      String _text_1 = null;
+      if (elsenode!=null) {
+        _text_1=elsenode.getText();
+      }
+      String _trim_1 = null;
+      if (_text_1!=null) {
+        _trim_1=_text_1.trim();
+      }
+      boolean _contains_1 = false;
+      if (_trim_1!=null) {
+        _contains_1=_trim_1.contains("\n");
+      }
       _or = (_or_1 || _contains_1);
     }
     final boolean multiline = _or;
@@ -2375,10 +2415,19 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if (!_and_2) {
       _and_1 = false;
     } else {
+      INode _nodeForEObject_1 = null;
       XExpression _default = expr.getDefault();
-      INode _nodeForEObject_1 = _default==null?(INode)null:this._nodeModelAccess.nodeForEObject(_default);
-      String _text_1 = _nodeForEObject_1==null?(String)null:_nodeForEObject_1.getText();
-      boolean _contains_1 = _text_1==null?false:_text_1.contains("\n");
+      if (_default!=null) {
+        _nodeForEObject_1=this._nodeModelAccess.nodeForEObject(_default);
+      }
+      String _text_1 = null;
+      if (_nodeForEObject_1!=null) {
+        _text_1=_nodeForEObject_1.getText();
+      }
+      boolean _contains_1 = false;
+      if (_text_1!=null) {
+        _contains_1=_text_1.contains("\n");
+      }
       boolean _not_4 = (!_contains_1);
       _and_1 = (_and_2 && _not_4);
     }

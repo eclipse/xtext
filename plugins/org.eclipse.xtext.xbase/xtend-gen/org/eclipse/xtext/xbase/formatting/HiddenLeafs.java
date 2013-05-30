@@ -62,7 +62,10 @@ public class HiddenLeafs {
     final Function2<Integer,LeafInfo,Integer> _function = new Function2<Integer,LeafInfo,Integer>() {
         public Integer apply(final Integer x, final LeafInfo i) {
           ILeafNode _node = i.getNode();
-          int _length = _node==null?0:_node.getLength();
+          int _length = 0;
+          if (_node!=null) {
+            _length=_node.getLength();
+          }
           int _plus = ((x).intValue() + _length);
           return Integer.valueOf(_plus);
         }

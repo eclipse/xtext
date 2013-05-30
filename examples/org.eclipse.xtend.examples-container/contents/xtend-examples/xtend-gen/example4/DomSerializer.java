@@ -67,15 +67,21 @@ public class DomSerializer {
   }
   
   private String applyContents(final Node n) {
+    String _join = null;
+    List<CharSequence> _map = null;
     ArrayList<Node> _contents = n.getContents();
-    final Function1<Node,CharSequence> _function = new Function1<Node,CharSequence>() {
-        public CharSequence apply(final Node it) {
-          CharSequence _text = DomSerializer.this.toText(it);
-          return _text;
-        }
-      };
-    List<CharSequence> _map = _contents==null?(List<CharSequence>)null:ListExtensions.<Node, CharSequence>map(_contents, _function);
-    String _join = _map==null?(String)null:IterableExtensions.join(_map);
+    if (_contents!=null) {
+      final Function1<Node,CharSequence> _function = new Function1<Node,CharSequence>() {
+          public CharSequence apply(final Node it) {
+            CharSequence _text = DomSerializer.this.toText(it);
+            return _text;
+          }
+        };
+      _map=ListExtensions.<Node, CharSequence>map(_contents, _function);
+    }
+    if (_map!=null) {
+      _join=IterableExtensions.join(_map);
+    }
     return _join;
   }
 }

@@ -109,7 +109,10 @@ public class DebugGraphGenerator {
                 String _contextName = this.nameFunction.getContextName(context);
                 String _plus = ("Context: " + _contextName);
                 String _plus_1 = (_plus + " Type:");
-                String _name = type==null?(String)null:type.getName();
+                String _name = null;
+                if (type!=null) {
+                  _name=type.getName();
+                }
                 String _plus_2 = (_plus_1 + _name);
                 System.out.println(_plus_2);
                 t.printStackTrace();
@@ -154,7 +157,10 @@ public class DebugGraphGenerator {
     String _contextName = this.nameFunction.getContextName(ctx);
     String _plus = (_directory + _contextName);
     String _plus_1 = (_plus + "_");
-    String _name = type==null?(String)null:type.getName();
+    String _name = null;
+    if (type!=null) {
+      _name=type.getName();
+    }
     String _plus_2 = (_plus_1 + _name);
     String _plus_3 = (_plus_2 + ".dot");
     return _plus_3;

@@ -43,7 +43,10 @@ public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolve
       Assert.assertTrue(_isEmpty_1);
       ITypeProvider _typeProvider = this.getTypeProvider();
       final JvmTypeReference resolvedType = _typeProvider.getType(xExpression);
-      String _simpleName = resolvedType==null?(String)null:resolvedType.getSimpleName();
+      String _simpleName = null;
+      if (resolvedType!=null) {
+        _simpleName=resolvedType.getSimpleName();
+      }
       Assert.assertEquals(type, _simpleName);
       TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
       Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);

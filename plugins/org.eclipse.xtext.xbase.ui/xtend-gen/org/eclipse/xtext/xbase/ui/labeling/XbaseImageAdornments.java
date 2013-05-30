@@ -68,7 +68,10 @@ public class XbaseImageAdornments {
     boolean _isNative = it.isNative();
     final int adornment = this.or(_or_4, _isNative, 0x4000);
     Resource _eResource = it.eResource();
-    ResourceSet _resourceSet = _eResource==null?(ResourceSet)null:_eResource.getResourceSet();
+    ResourceSet _resourceSet = null;
+    if (_eResource!=null) {
+      _resourceSet=_eResource.getResourceSet();
+    }
     boolean _notEquals = (!Objects.equal(_resourceSet, null));
     if (_notEquals) {
       final JvmOperation overriddenOperation = this._overrideHelper.findOverriddenOperation(it);

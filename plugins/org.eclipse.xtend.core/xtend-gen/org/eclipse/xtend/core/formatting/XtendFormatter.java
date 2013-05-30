@@ -141,7 +141,9 @@ public class XtendFormatter extends XbaseFormatter2 {
       format.operator_add(_append_2);
     }
     XImportSection _importSection = xtendFile.getImportSection();
-    if (_importSection!=null) this.format(_importSection, format);
+    if (_importSection!=null) {
+      this.format(_importSection, format);
+    }
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     for (final XtendTypeDeclaration clazz : _xtendTypes) {
       {
@@ -716,8 +718,14 @@ public class XtendFormatter extends XbaseFormatter2 {
   }
   
   protected void formatMemberParameter(final Collection<XtendParameter> parameters, final INode open, final INode close, final FormattableDocument format) {
-    HiddenLeafs _hiddenLeafsBefore = close==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(close);
-    int _newLines = _hiddenLeafsBefore==null?0:_hiddenLeafsBefore.getNewLines();
+    HiddenLeafs _hiddenLeafsBefore = null;
+    if (close!=null) {
+      _hiddenLeafsBefore=this._hiddenLeafAccess.getHiddenLeafsBefore(close);
+    }
+    int _newLines = 0;
+    if (_hiddenLeafsBefore!=null) {
+      _newLines=_hiddenLeafsBefore.getNewLines();
+    }
     boolean _greaterThan = (_newLines > 0);
     if (_greaterThan) {
       INode comma = null;

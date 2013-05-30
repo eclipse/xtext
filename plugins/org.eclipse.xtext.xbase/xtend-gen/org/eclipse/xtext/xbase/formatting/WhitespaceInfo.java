@@ -19,7 +19,10 @@ public class WhitespaceInfo extends LeafInfo {
   
   public int getLength() {
     ILeafNode _node = this.getNode();
-    int _length = _node==null?0:_node.getLength();
+    int _length = 0;
+    if (_node!=null) {
+      _length=_node.getLength();
+    }
     return _length;
   }
   
@@ -70,7 +73,10 @@ public class WhitespaceInfo extends LeafInfo {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("WS: \"");
     ILeafNode _node = this.getNode();
-    String _text = _node==null?(String)null:_node.getText();
+    String _text = null;
+    if (_node!=null) {
+      _text=_node.getText();
+    }
     _builder.append(_text, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();

@@ -144,7 +144,10 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       }
       final IFile sourceFile = _xifexpression;
       IPath _fullPath = jarFile.getFullPath();
-      IPath _fullPath_1 = sourceFile==null?(IPath)null:sourceFile.getFullPath();
+      IPath _fullPath_1 = null;
+      if (sourceFile!=null) {
+        _fullPath_1=sourceFile.getFullPath();
+      }
       final IClasspathEntry cp = JavaCore.newLibraryEntry(_fullPath, _fullPath_1, null);
       JavaProjectSetupUtil.addToClasspath(jp, cp);
       return JavaCore.createJarPackageFragmentRootFrom(jarFile);

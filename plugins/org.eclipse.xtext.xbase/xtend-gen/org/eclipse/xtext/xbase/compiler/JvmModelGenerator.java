@@ -305,7 +305,10 @@ public class JvmModelGenerator implements IGenerator {
       final Function1<JvmAnnotationReference,Boolean> _function = new Function1<JvmAnnotationReference,Boolean>() {
           public Boolean apply(final JvmAnnotationReference it) {
             JvmAnnotationType _annotation = it.getAnnotation();
-            String _identifier = _annotation==null?(String)null:_annotation.getIdentifier();
+            String _identifier = null;
+            if (_annotation!=null) {
+              _identifier=_annotation.getIdentifier();
+            }
             String _name = SuppressWarnings.class.getName();
             boolean _notEquals = (!Objects.equal(_identifier, _name));
             return _notEquals;
@@ -782,8 +785,14 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   protected ITreeAppendable _generateMember(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
-    Class<? extends JvmMember> _class = it==null?(Class<? extends JvmMember>)null:it.getClass();
-    String _name = _class==null?(String)null:_class.getName();
+    Class<? extends JvmMember> _class = null;
+    if (it!=null) {
+      _class=it.getClass();
+    }
+    String _name = null;
+    if (_class!=null) {
+      _name=_class.getName();
+    }
     String _plus = ("generateMember not implemented for elements of type " + _name);
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus);
     throw _unsupportedOperationException;
@@ -1227,7 +1236,10 @@ public class JvmModelGenerator implements IGenerator {
     EList<Adapter> _eAdapters = it.eAdapters();
     Iterable<FileHeaderAdapter> _filter = Iterables.<FileHeaderAdapter>filter(_eAdapters, FileHeaderAdapter.class);
     final FileHeaderAdapter fileHeaderAdapter = IterableExtensions.<FileHeaderAdapter>head(_filter);
-    String _headerText = fileHeaderAdapter==null?(String)null:fileHeaderAdapter.getHeaderText();
+    String _headerText = null;
+    if (fileHeaderAdapter!=null) {
+      _headerText=fileHeaderAdapter.getHeaderText();
+    }
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_headerText);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {
@@ -1242,7 +1254,10 @@ public class JvmModelGenerator implements IGenerator {
     EList<Adapter> _eAdapters = it.eAdapters();
     Iterable<DocumentationAdapter> _filter = Iterables.<DocumentationAdapter>filter(_eAdapters, DocumentationAdapter.class);
     final DocumentationAdapter adapter = IterableExtensions.<DocumentationAdapter>head(_filter);
-    String _documentation = adapter==null?(String)null:adapter.getDocumentation();
+    String _documentation = null;
+    if (adapter!=null) {
+      _documentation=adapter.getDocumentation();
+    }
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_documentation);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {

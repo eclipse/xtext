@@ -75,7 +75,11 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
         }
       };
     XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
-    final XExpression expression = _findFirst==null?(XExpression)null:_findFirst.getValue();
+    XExpression _value_2 = null;
+    if (_findFirst!=null) {
+      _value_2=_findFirst.getValue();
+    }
+    final XExpression expression = _value_2;
     boolean _notEquals_1 = (!Objects.equal(expression, null));
     if (_notEquals_1) {
       CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
@@ -112,7 +116,11 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
         }
       };
     XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
-    final XExpression expression = _findFirst==null?(XExpression)null:_findFirst.getValue();
+    XExpression _value_2 = null;
+    if (_findFirst!=null) {
+      _value_2=_findFirst.getValue();
+    }
+    final XExpression expression = _value_2;
     boolean _notEquals_1 = (!Objects.equal(expression, null));
     if (_notEquals_1) {
       CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();

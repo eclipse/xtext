@@ -76,8 +76,15 @@ public class FormatterTester {
       }
       Resource _eResource_2 = parsed.eResource();
       IParseResult _parseResult = ((XtextResource) _eResource_2).getParseResult();
-      ICompositeNode _rootNode = _parseResult==null?(ICompositeNode)null:_parseResult.getRootNode();
-      final String oldDocument = _rootNode==null?(String)null:_rootNode.getText();
+      ICompositeNode _rootNode = null;
+      if (_parseResult!=null) {
+        _rootNode=_parseResult.getRootNode();
+      }
+      String _text = null;
+      if (_rootNode!=null) {
+        _text=_rootNode.getText();
+      }
+      final String oldDocument = _text;
       final IBasicFormatter formatter = this.formatter;
       boolean _matched = false;
       if (!_matched) {
@@ -271,8 +278,14 @@ public class FormatterTester {
       int lastOffset = 0;
       Iterable<ILeafNode> _elvis = null;
       IParseResult _parseResult = res.getParseResult();
-      ICompositeNode _rootNode = _parseResult==null?(ICompositeNode)null:_parseResult.getRootNode();
-      Iterable<ILeafNode> _leafNodes = _rootNode==null?(Iterable<ILeafNode>)null:_rootNode.getLeafNodes();
+      ICompositeNode _rootNode = null;
+      if (_parseResult!=null) {
+        _rootNode=_parseResult.getRootNode();
+      }
+      Iterable<ILeafNode> _leafNodes = null;
+      if (_rootNode!=null) {
+        _leafNodes=_rootNode.getLeafNodes();
+      }
       if (_leafNodes != null) {
         _elvis = _leafNodes;
       } else {

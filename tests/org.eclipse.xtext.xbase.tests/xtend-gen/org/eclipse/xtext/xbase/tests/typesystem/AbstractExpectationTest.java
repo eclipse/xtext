@@ -105,7 +105,10 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     final Function1<ITypeExpectation,String> _function = new Function1<ITypeExpectation,String>() {
         public String apply(final ITypeExpectation it) {
           LightweightTypeReference _expectedType = it.getExpectedType();
-          String _simpleName = _expectedType==null?(String)null:_expectedType.getSimpleName();
+          String _simpleName = null;
+          if (_expectedType!=null) {
+            _simpleName=_expectedType.getSimpleName();
+          }
           return _simpleName;
         }
       };
@@ -118,7 +121,10 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     final Function1<ITypeExpectation,String> _function_1 = new Function1<ITypeExpectation,String>() {
         public String apply(final ITypeExpectation it) {
           LightweightTypeReference _expectedType = it.getExpectedType();
-          String _simpleName = _expectedType==null?(String)null:_expectedType.getSimpleName();
+          String _simpleName = null;
+          if (_expectedType!=null) {
+            _simpleName=_expectedType.getSimpleName();
+          }
           return _simpleName;
         }
       };
@@ -224,7 +230,10 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     final Function1<ITypeExpectation,String> _function = new Function1<ITypeExpectation,String>() {
         public String apply(final ITypeExpectation it) {
           LightweightTypeReference _expectedType = it.getExpectedType();
-          String _simpleName = _expectedType==null?(String)null:_expectedType.getSimpleName();
+          String _simpleName = null;
+          if (_expectedType!=null) {
+            _simpleName=_expectedType.getSimpleName();
+          }
           return _simpleName;
         }
       };

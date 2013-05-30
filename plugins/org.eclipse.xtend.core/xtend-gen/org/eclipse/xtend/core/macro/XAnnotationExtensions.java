@@ -195,7 +195,10 @@ public class XAnnotationExtensions {
     final Function1<JvmAnnotationReference,Boolean> _function = new Function1<JvmAnnotationReference,Boolean>() {
         public Boolean apply(final JvmAnnotationReference it) {
           JvmAnnotationType _annotation = it.getAnnotation();
-          String _identifier = _annotation==null?(String)null:_annotation.getIdentifier();
+          String _identifier = null;
+          if (_annotation!=null) {
+            _identifier=_annotation.getIdentifier();
+          }
           String _name = Active.class.getName();
           boolean _equals = Objects.equal(_identifier, _name);
           return Boolean.valueOf(_equals);

@@ -39,7 +39,10 @@ public class ConstantExpressionsInterpreter {
         _matched=true;
         String _xblockexpression = null;
         {
-          String _simpleName = expectedType==null?(String)null:expectedType.getSimpleName();
+          String _simpleName = null;
+          if (expectedType!=null) {
+            _simpleName=expectedType.getSimpleName();
+          }
           boolean _equals = Objects.equal(_simpleName, "char");
           if (_equals) {
             String _value = _xStringLiteral.getValue();
@@ -66,7 +69,10 @@ public class ConstantExpressionsInterpreter {
         Number _switchResult_1 = null;
         boolean _matched_1 = false;
         if (!_matched_1) {
-          String _simpleName = expectedType==null?(String)null:expectedType.getSimpleName();
+          String _simpleName = null;
+          if (expectedType!=null) {
+            _simpleName=expectedType.getSimpleName();
+          }
           boolean _equals = Objects.equal(_simpleName, "long");
           if (_equals) {
             _matched_1=true;
@@ -76,7 +82,10 @@ public class ConstantExpressionsInterpreter {
           }
         }
         if (!_matched_1) {
-          String _simpleName_1 = expectedType==null?(String)null:expectedType.getSimpleName();
+          String _simpleName_1 = null;
+          if (expectedType!=null) {
+            _simpleName_1=expectedType.getSimpleName();
+          }
           boolean _equals_1 = Objects.equal(_simpleName_1, "short");
           if (_equals_1) {
             _matched_1=true;
@@ -86,7 +95,10 @@ public class ConstantExpressionsInterpreter {
           }
         }
         if (!_matched_1) {
-          String _simpleName_2 = expectedType==null?(String)null:expectedType.getSimpleName();
+          String _simpleName_2 = null;
+          if (expectedType!=null) {
+            _simpleName_2=expectedType.getSimpleName();
+          }
           boolean _equals_2 = Objects.equal(_simpleName_2, "byte");
           if (_equals_2) {
             _matched_1=true;
@@ -96,7 +108,10 @@ public class ConstantExpressionsInterpreter {
           }
         }
         if (!_matched_1) {
-          String _simpleName_3 = expectedType==null?(String)null:expectedType.getSimpleName();
+          String _simpleName_3 = null;
+          if (expectedType!=null) {
+            _simpleName_3=expectedType.getSimpleName();
+          }
           boolean _equals_3 = Objects.equal(_simpleName_3, "float");
           if (_equals_3) {
             _matched_1=true;
@@ -106,7 +121,10 @@ public class ConstantExpressionsInterpreter {
           }
         }
         if (!_matched_1) {
-          String _simpleName_4 = expectedType==null?(String)null:expectedType.getSimpleName();
+          String _simpleName_4 = null;
+          if (expectedType!=null) {
+            _simpleName_4=expectedType.getSimpleName();
+          }
           boolean _equals_4 = Objects.equal(_simpleName_4, "double");
           if (_equals_4) {
             _matched_1=true;

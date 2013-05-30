@@ -43,8 +43,12 @@ public class CompilationContextImpl implements CompilationContext {
   
   public ImportManager getImportManager(final ITreeAppendable appendable) {
     try {
-      Object _get = this.reflectExtensions.<Object>get(appendable, "state");
-      return _get==null?(ImportManager)null:this.reflectExtensions.<ImportManager>get(_get, "importManager");
+      ImportManager _get = null;
+      Object _get_1 = this.reflectExtensions.<Object>get(appendable, "state");
+      if (_get_1!=null) {
+        _get=this.reflectExtensions.<ImportManager>get(_get_1, "importManager");
+      }
+      return _get;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -107,7 +107,10 @@ public class Case_14 extends AbstractXtendTestCase {
     Assert.assertEquals(1, _size);
     EList<JvmTypeReference> _superTypes = type.getSuperTypes();
     JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes);
-    String _qualifiedName = _head==null?(String)null:_head.getQualifiedName();
+    String _qualifiedName = null;
+    if (_head!=null) {
+      _qualifiedName=_head.getQualifiedName();
+    }
     Assert.assertEquals("java.lang.Object", _qualifiedName);
   }
 }

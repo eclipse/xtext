@@ -69,7 +69,9 @@ public class LoopParams {
   public ITreeAppendable appendPrefix(final ITreeAppendable app) {
     ITreeAppendable _xblockexpression = null;
     {
-      if (this.prefix!=null) this.prefix.apply(app);
+      if (this.prefix!=null) {
+        this.prefix.apply(app);
+      }
       _xblockexpression = (app);
     }
     return _xblockexpression;
@@ -78,7 +80,9 @@ public class LoopParams {
   public ITreeAppendable appendSeparator(final ITreeAppendable app) {
     ITreeAppendable _xblockexpression = null;
     {
-      if (this.separator!=null) this.separator.apply(app);
+      if (this.separator!=null) {
+        this.separator.apply(app);
+      }
       _xblockexpression = (app);
     }
     return _xblockexpression;
@@ -87,7 +91,9 @@ public class LoopParams {
   public ITreeAppendable appendSuffix(final ITreeAppendable app) {
     ITreeAppendable _xblockexpression = null;
     {
-      if (this.suffix!=null) this.suffix.apply(app);
+      if (this.suffix!=null) {
+        this.suffix.apply(app);
+      }
       _xblockexpression = (app);
     }
     return _xblockexpression;

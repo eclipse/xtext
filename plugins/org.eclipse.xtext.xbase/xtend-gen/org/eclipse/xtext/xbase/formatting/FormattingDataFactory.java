@@ -258,12 +258,18 @@ public class FormattingDataFactory {
             final boolean equalIndentationChange = (increaseIndentationChange == _multiply);
             boolean _and = false;
             CommentInfo _trailingComment = _whitespaceInfo.trailingComment();
-            boolean _isTrailing = _trailingComment==null?false:_trailingComment.isTrailing();
+            boolean _isTrailing = false;
+            if (_trailingComment!=null) {
+              _isTrailing=_trailingComment.isTrailing();
+            }
             if (!_isTrailing) {
               _and = false;
             } else {
               CommentInfo _trailingComment_1 = _whitespaceInfo.trailingComment();
-              boolean _isMultiline = _trailingComment_1==null?false:_trailingComment_1.isMultiline();
+              boolean _isMultiline = false;
+              if (_trailingComment_1!=null) {
+                _isMultiline=_trailingComment_1.isMultiline();
+              }
               boolean _not = (!_isMultiline);
               _and = (_isTrailing && _not);
             }
@@ -307,12 +313,18 @@ public class FormattingDataFactory {
                 } else {
                   boolean _or = false;
                   CommentInfo _leadingComment = _whitespaceInfo.leadingComment();
-                  boolean _isMultiline_1 = _leadingComment==null?false:_leadingComment.isMultiline();
+                  boolean _isMultiline_1 = false;
+                  if (_leadingComment!=null) {
+                    _isMultiline_1=_leadingComment.isMultiline();
+                  }
                   if (_isMultiline_1) {
                     _or = true;
                   } else {
                     CommentInfo _trailingComment_2 = _whitespaceInfo.trailingComment();
-                    boolean _isMultiline_2 = _trailingComment_2==null?false:_trailingComment_2.isMultiline();
+                    boolean _isMultiline_2 = false;
+                    if (_trailingComment_2!=null) {
+                      _isMultiline_2=_trailingComment_2.isMultiline();
+                    }
                     _or = (_isMultiline_1 || _isMultiline_2);
                   }
                   _and_1 = (_and_2 && _or);
@@ -321,14 +333,20 @@ public class FormattingDataFactory {
                   newLines = 1;
                 }
                 CommentInfo _leadingComment_1 = _whitespaceInfo.leadingComment();
-                boolean _endsWithNewLine = _leadingComment_1==null?false:_leadingComment_1.endsWithNewLine();
+                boolean _endsWithNewLine = false;
+                if (_leadingComment_1!=null) {
+                  _endsWithNewLine=_leadingComment_1.endsWithNewLine();
+                }
                 if (_endsWithNewLine) {
                   int _minus_1 = (newLines - 1);
                   newLines = _minus_1;
                 }
                 boolean _and_3 = false;
                 CommentInfo _leadingComment_2 = _whitespaceInfo.leadingComment();
-                boolean _endsWithNewLine_1 = _leadingComment_2==null?false:_leadingComment_2.endsWithNewLine();
+                boolean _endsWithNewLine_1 = false;
+                if (_leadingComment_2!=null) {
+                  _endsWithNewLine_1=_leadingComment_2.endsWithNewLine();
+                }
                 boolean _not_2 = (!_endsWithNewLine_1);
                 if (!_not_2) {
                   _and_3 = false;
@@ -402,7 +420,10 @@ public class FormattingDataFactory {
               } else {
                 int newLines_1 = 1;
                 CommentInfo _leadingComment_3 = _whitespaceInfo.leadingComment();
-                boolean _endsWithNewLine_2 = _leadingComment_3==null?false:_leadingComment_3.endsWithNewLine();
+                boolean _endsWithNewLine_2 = false;
+                if (_leadingComment_3!=null) {
+                  _endsWithNewLine_2=_leadingComment_3.endsWithNewLine();
+                }
                 if (_endsWithNewLine_2) {
                   int _minus_2 = (newLines_1 - 1);
                   newLines_1 = _minus_2;
@@ -486,7 +507,10 @@ public class FormattingDataFactory {
               Iterable<FormattingData> _elvis = null;
               HiddenLeafs _hiddenLeafsBefore = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(_hiddenLeafsBefore, init);
-              Iterable<FormattingData> _apply = _newFormattingData==null?(Iterable<FormattingData>)null:_newFormattingData.apply(doc);
+              Iterable<FormattingData> _apply = null;
+              if (_newFormattingData!=null) {
+                _apply=_newFormattingData.apply(doc);
+              }
               if (_apply != null) {
                 _elvis = _apply;
               } else {
@@ -497,7 +521,10 @@ public class FormattingDataFactory {
               Iterable<FormattingData> _elvis_1 = null;
               HiddenLeafs _hiddenLeafsAfter = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsAfter(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData_1 = FormattingDataFactory.this.newFormattingData(_hiddenLeafsAfter, init);
-              Iterable<FormattingData> _apply_1 = _newFormattingData_1==null?(Iterable<FormattingData>)null:_newFormattingData_1.apply(doc);
+              Iterable<FormattingData> _apply_1 = null;
+              if (_newFormattingData_1!=null) {
+                _apply_1=_newFormattingData_1.apply(doc);
+              }
               if (_apply_1 != null) {
                 _elvis_1 = _apply_1;
               } else {
@@ -525,7 +552,10 @@ public class FormattingDataFactory {
               Iterable<FormattingData> _elvis = null;
               HiddenLeafs _hiddenLeafsBefore = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(_hiddenLeafsBefore, before);
-              Iterable<FormattingData> _apply = _newFormattingData==null?(Iterable<FormattingData>)null:_newFormattingData.apply(doc);
+              Iterable<FormattingData> _apply = null;
+              if (_newFormattingData!=null) {
+                _apply=_newFormattingData.apply(doc);
+              }
               if (_apply != null) {
                 _elvis = _apply;
               } else {
@@ -536,7 +566,10 @@ public class FormattingDataFactory {
               Iterable<FormattingData> _elvis_1 = null;
               HiddenLeafs _hiddenLeafsAfter = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsAfter(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData_1 = FormattingDataFactory.this.newFormattingData(_hiddenLeafsAfter, after);
-              Iterable<FormattingData> _apply_1 = _newFormattingData_1==null?(Iterable<FormattingData>)null:_newFormattingData_1.apply(doc);
+              Iterable<FormattingData> _apply_1 = null;
+              if (_newFormattingData_1!=null) {
+                _apply_1=_newFormattingData_1.apply(doc);
+              }
               if (_apply_1 != null) {
                 _elvis_1 = _apply_1;
               } else {

@@ -75,7 +75,10 @@ public class GrammarConstraints extends GeneratedFile {
         _builder.append(_name_3, "");
         _builder.append(" returns ");
         EClass _commonType = gcc.getCommonType();
-        String _name_4 = _commonType==null?(String)null:_commonType.getName();
+        String _name_4 = null;
+        if (_commonType!=null) {
+          _name_4=_commonType.getName();
+        }
         _builder.append(_name_4, "");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
@@ -115,7 +118,10 @@ public class GrammarConstraints extends GeneratedFile {
         _builder.append(_name_6, "");
         _builder.append(" returns ");
         EClass _type = constraint_1.getType();
-        String _name_7 = _type==null?(String)null:_type.getName();
+        String _name_7 = null;
+        if (_type!=null) {
+          _name_7=_type.getName();
+        }
         _builder.append(_name_7, "");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
@@ -126,7 +132,10 @@ public class GrammarConstraints extends GeneratedFile {
             _builder.append("\t");
             _builder.append("{");
             EClass _type_1 = constraint_1.getType();
-            String _name_8 = _type_1==null?(String)null:_type_1.getName();
+            String _name_8 = null;
+            if (_type_1!=null) {
+              _name_8=_type_1.getName();
+            }
             _builder.append(_name_8, "	");
             _builder.append("};");
             _builder.newLineIfNotEmpty();
