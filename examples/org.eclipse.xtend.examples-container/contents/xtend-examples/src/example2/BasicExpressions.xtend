@@ -25,7 +25,7 @@ class BasicExpressions {
 		assertEquals(true, !false)
 		
 		// class literals
-		assertEquals(getClass(), typeof(BasicExpressions))
+		assertEquals(getClass(), BasicExpressions)
 	}
 	
 	@Test def void collections() {

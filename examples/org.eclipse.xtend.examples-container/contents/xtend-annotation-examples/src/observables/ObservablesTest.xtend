@@ -7,13 +7,12 @@
  *******************************************************************************/
 package observables
 
-import java.util.Observable
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester
 import org.junit.Test
 
 class ObservableTests {
 
-	extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(typeof(Observable))
+	extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(Observable)
 
 	@Test def void testObservable() {
 		'''

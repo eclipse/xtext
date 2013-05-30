@@ -20,8 +20,8 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility
 /**
  * Extracts an interface for all locally declared public methods.
  */
-@Target(ElementType::TYPE)
-@Active(typeof(ExtractProcessor))
+@Target(ElementType.TYPE)
+@Active(ExtractProcessor)
 annotation Extract {}
 
 class ExtractProcessor extends AbstractClassProcessor {
@@ -42,7 +42,7 @@ class ExtractProcessor extends AbstractClassProcessor {
 		
 		// add the public methods to the interface
 		for (method : annotatedClass.declaredMethods) {
-			if (method.visibility == Visibility::PUBLIC) {
+			if (method.visibility == Visibility.PUBLIC) {
 				interfaceType.addMethod(method.simpleName) [
 					docComment = method.docComment
 					returnType = method.returnType

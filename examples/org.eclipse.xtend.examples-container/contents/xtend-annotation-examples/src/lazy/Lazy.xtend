@@ -18,8 +18,8 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility
 /**
  * Adds a lazy getter and an initializer method.
  */
-@Target(ElementType::FIELD)
-@Active(typeof(LazyProcessor))
+@Target(ElementType.FIELD)
+@Active(LazyProcessor)
 annotation Lazy {
 }
 
@@ -33,7 +33,7 @@ class LazyProcessor extends AbstractFieldProcessor {
 			field.addError("A lazy field must have an initializer.")
 		
 		field.declaringType.addMethod('_init' + field.simpleName) [
-			visibility = Visibility::PRIVATE
+			visibility = Visibility.PRIVATE
 			returnType = field.type
 			// reassign the initializer expression to be the init method's body
 			// this automatically removes the expression as the field's initializer

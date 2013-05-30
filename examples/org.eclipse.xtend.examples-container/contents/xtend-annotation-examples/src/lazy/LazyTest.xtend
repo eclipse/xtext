@@ -11,7 +11,7 @@ import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester
 import org.junit.Test
 
 class LazyTest {
-	extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(typeof(Lazy))
+	extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Lazy)
 
 	@Test def void testLazy() {
 		'''
