@@ -73,7 +73,7 @@ class Solution_011 {
 		'''.toString
 		var rows = 20
 		var columns = 20
-		val it = gridAsString.split("\\n").map[ split(' ').map[ s | Integer::valueOf(s) ].toList ].toList
+		val it = gridAsString.split("\\n").map[ split(' ').map[ s | Integer.valueOf(s) ].toList ].toList
 		var result = 0
 		for(c: 0..columns-4) {
 			for(r: 0..rows-1) {
@@ -104,7 +104,7 @@ class Solution_011 {
 	}
 
 	def max(int current, int a, int b, int c, int d) {
-		Math::max(current, a * b * c * d)
+		Math.max(current, a * b * c * d)
 	}
 
 }

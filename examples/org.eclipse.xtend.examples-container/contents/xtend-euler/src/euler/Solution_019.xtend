@@ -32,7 +32,7 @@ import static java.util.Calendar.*
 class Solution_019 {
 
 	def static void main(String[] args) {
-		val calendar = GregorianCalendar::instance
+		val calendar = GregorianCalendar.instance
 		calendar.set(1901, 1, 1)
 		var result = 0
 		do {

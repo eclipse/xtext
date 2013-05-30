@@ -43,7 +43,7 @@ class Solution_023 {
 	}
 
 	def static isAbundant(int input) {
-		val sqrt = Math::sqrt(input).floor.intValue;
+		val sqrt = Math.sqrt(input).floor.intValue;
 		val sumOfDivisors = (2..sqrt).filter [ div |
 			div != input && input % div == 0
 		].fold(1) [ i1, i2 |
