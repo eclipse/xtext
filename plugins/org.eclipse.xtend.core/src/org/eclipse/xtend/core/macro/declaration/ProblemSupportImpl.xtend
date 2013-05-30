@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
+import org.eclipse.emf.ecore.resource.Resource
 
 class ProblemSupportImpl implements ProblemSupport {
 	
@@ -67,13 +68,16 @@ class ProblemSupportImpl implements ProblemSupport {
 		}
 	}
 	
-	def private getResourceAndEObject(Element element) {
+	def private Pair<Resource,EObject> getResourceAndEObject(Element element) {
 		checkCanceled
 		switch element {
 			AbstractElementImpl<? extends EObject>: {
 				val resource = element.delegate.eResource
 				if (resource == compilationUnit.xtendFile.eResource) {
 					val eobject = compilationUnit.jvmAssociations.getPrimarySourceElement(element.delegate)
+					if (eobject == null) {
+						return resource -> element.delegate
+					}
 					return resource -> eobject
 				}
 			} 
