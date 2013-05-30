@@ -25,7 +25,7 @@ class Solution_003 extends AbstractIterator<Long> {
 	}
 
 	long compound = 600851475143L
-	long sqrt = Math::sqrt(compound).longValue
+	long sqrt = Math.sqrt(compound).longValue
 	long current = 2
 
 	override protected computeNext() {
@@ -41,6 +41,6 @@ class Solution_003 extends AbstractIterator<Long> {
 	}
 
 	def isPrime(long l) {
-		(2..Math::sqrt(l).intValue).filter[ i | l % i == 0 ].empty
+		(2..Math.sqrt(l).intValue).filter[ i | l % i == 0 ].empty
 	}
 }

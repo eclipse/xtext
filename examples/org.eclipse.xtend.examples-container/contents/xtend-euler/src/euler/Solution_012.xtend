@@ -48,7 +48,7 @@ class Solution_012 {
 	}
 
 	def static numberOfDivisors(long triangle) {
-		var max = Math::sqrt(triangle).longValue
+		var max = Math.sqrt(triangle).longValue
 		var result = 0L
 		var i = 1L
 		while(i < max) {
