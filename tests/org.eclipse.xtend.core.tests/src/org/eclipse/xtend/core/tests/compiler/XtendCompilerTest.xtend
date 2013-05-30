@@ -3324,6 +3324,38 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def testNullSafeFeatureCall_07() {
+		assertCompilesTo(
+				'''
+					class Foo { 
+						extension org.eclipse.xtext.xbase.lib.util.ReflectExtensions
+						def bar() throws Throwable {
+							new String().get('toString')?.get('substring')
+						}
+					}
+				''', '''
+					import org.eclipse.xtext.xbase.lib.Extension;
+					import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
+					
+					@SuppressWarnings("all")
+					public class Foo {
+					  @Extension
+					  private ReflectExtensions _reflectExtensions;
+					  
+					  public Object bar() throws Throwable {
+					    Object _get = null;
+					    String _string = new String();
+					    Object _get_1 = this._reflectExtensions.<Object>get(_string, "toString");
+					    if (_get_1!=null) {
+					      _get=this._reflectExtensions.<Object>get(_get_1, "substring");
+					    }
+					    return _get;
+					  }
+					}
+				''');
+	}
+	
 
 }
 
