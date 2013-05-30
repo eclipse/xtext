@@ -16,8 +16,12 @@ person.forename +' '+ person.name
 
 
 // static features can be accessed using ::
-java::util::Collections::singleton("So lonely") 
+java.util.Collections::singleton("So lonely") 
 System::err.println()
+
+// but the dot works, too
+java.util.Collections.singleton("Lonely, lonely ...") 
+System.err.println()
 
 
 

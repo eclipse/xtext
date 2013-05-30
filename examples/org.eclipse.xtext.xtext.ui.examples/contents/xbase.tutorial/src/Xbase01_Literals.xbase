@@ -10,24 +10,45 @@ null
 // String Literal
 'Hello World'
 
-// Number Literals are mostly like in Java
-// (consult the documentation for more details)
-42
-0.42e2
-
 // Boolean Literal
 true
 false
 
-// Class Literal (in java : String.class)
-typeof(String)
-
-// Collection literals are done using a library approach.
-newArrayList(3,5,7)
-newHashSet('foo','bar','baz')
-newHashMap( 1->'one', 2->'two', 3->'three' )
+// Number Literals (consult the documentation for the nifty details)
+42
+0.42e2
 
 // Into the bargain, there are number literals for 
 // java.math.BigInteger and java.math.BigDecimal
 0xbeef_beef_beef_beef_beef#BI
 0.123_456_789_123_456_789_123_456_789_123_456_789e4242BD
+
+// Class Literals (in java : String.class)
+String
+String.getField('CASE_INSENSITIVE_ORDER')
+// public static final java.util.Comparator java.lang.String.CASE_INSENSITIVE_ORDER (Field)
+
+// nested type literals
+java.util.Map.Entry
+
+// Collections can be instantiated conveniently
+newArrayList(3,5,7)
+newHashSet('foo','bar','baz')
+newHashMap( 1->'one', 2->'two', 3->'three' )
+
+// Arrays and literals for immutable lists, sets and maps
+var String[] stringArray = #['a', 'b', 'c']
+stringArray.get(1)
+// b (String)
+
+var listOfStrings = #['a', 'b', 'c']
+listOfStrings
+// [a, b, c] (List<String>)
+
+var setOfStrings = #{'a', 'b', 'c'}
+setOfStrings
+// [b, c, a] (Set<String>)
+
+var immutableMap = #{'a'->'A', 'b'->'B', 'c'->'C'}
+immutableMap
+// {b=B, c=C, a=A} (Map<String, String>)
