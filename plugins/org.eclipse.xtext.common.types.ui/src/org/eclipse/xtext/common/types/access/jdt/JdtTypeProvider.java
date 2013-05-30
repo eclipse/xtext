@@ -125,8 +125,9 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	
 	@Nullable
 	private JvmType findObjectType(@NonNull String signature, @NonNull URI resourceURI) {
-		JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI);
-		if (result != null) {
+		TypeResource resource = getLoadedResourceForJavaURI(resourceURI);
+		JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource);
+		if (result != null || resource != null) {
 			return result;
 		}
 		try {
@@ -139,8 +140,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	@Nullable
-	private JvmType findLoadedOrDerivedObjectType(@NonNull String signature, @NonNull URI resourceURI) {
-		JvmType result = findObjectTypeInResourceSet(signature, resourceURI);
+	private JvmType findLoadedOrDerivedObjectType(@NonNull String signature, @NonNull URI resourceURI, @Nullable TypeResource resource) {
+		JvmType result = resource != null ? findTypeBySignature(signature, resource) : null;
 		if (result != null) {
 			return result;
 		}
@@ -212,13 +213,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	private JvmType findObjectTypeInResourceSet(@NonNull String signature, @NonNull URI resourceURI) {
+	@Nullable
+	private TypeResource getLoadedResourceForJavaURI(@NonNull URI resourceURI) {
 		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, false);
-		if (resource != null) {
-			JvmType result = findTypeBySignature(signature, resource);
-			return result;
-		}
-		return null;
+		return resource;
 	}
 
 	private JvmType findPrimitiveType(@NonNull String signature, @NonNull URI resourceURI) {
