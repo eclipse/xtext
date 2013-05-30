@@ -572,6 +572,10 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return false;
 	}
 	
+	public boolean isTypeLiteral() {
+		return false;
+	}
+	
 	protected ExpressionTypeComputationState getState() {
 		return state;
 	}

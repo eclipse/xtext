@@ -89,6 +89,74 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testSugarOverTypeLiteral_01() throws Exception {
+		XtendFile file = file(
+				"import org.eclipse.emf.ecore.resource.Resource\n" +
+				"import org.eclipse.emf.common.util.URI\n" +
+				"class C {\n" +
+				"	def m(Resource it, URI unused) {\n" +
+				"		URI" +
+				"	}\n" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("org.eclipse.emf.ecore.resource.Resource.getURI()", method.getIdentifier());
+	}
+	
+	@Test public void testSugarOverTypeLiteral_02() throws Exception {
+		XtendFile file = file(
+				"import org.eclipse.emf.ecore.resource.Resource\n" +
+				"import org.eclipse.emf.common.util.URI\n" +
+				"class C {\n" +
+				"	def m(Resource Resource, URI unused) {\n" +
+				"		Resource.URI" +
+				"	}\n" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("org.eclipse.emf.ecore.resource.Resource.getURI()", method.getIdentifier());
+	}
+
+	@Test public void testSugarOverTypeLiteral_03() throws Exception {
+		XtendFile file = file(
+				"import org.eclipse.emf.ecore.EPackage\n" +
+				"class C {\n" +
+				"	def m(Object it) {\n" +
+				"		EPackage" +
+				"	}" +
+				"	def void getEPackage(Object o) {}\n" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.getEPackage(java.lang.Object)", method.getIdentifier());
+	}
+	
+	@Test public void testSugarOverTypeLiteral_04() throws Exception {
+		XtendFile file = file(
+				"import org.eclipse.emf.ecore.EPackage\n" +
+				"class C {\n" +
+				"	def m(Object it) {\n" +
+				"		EPackage" +
+				"	}" +
+				"	def void getEPackage(String s) {}\n" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("org.eclipse.emf.ecore.EPackage", method.getIdentifier());
+	}
+	
 	@Test public void testNestedTypeResolution_01() throws Exception {
 		doTestNestedTypeResolution(
 				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
