@@ -253,6 +253,16 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 	override isStrictFloatingPoint() {
 		delegate.isStrictFloatingPoint	
 	}
+	
+	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+		val result = super.addMethod(name, initializer)
+		result.setAbstract(true)
+		return result;
+	}
+	
+	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+		throw new UnsupportedOperationException("The interface '"+simpleName+"' cannot declare any constructors.")
+	}
 
 }
 

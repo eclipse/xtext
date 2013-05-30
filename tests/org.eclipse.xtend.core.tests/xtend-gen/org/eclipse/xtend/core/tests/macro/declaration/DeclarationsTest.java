@@ -471,6 +471,35 @@ public class DeclarationsTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testMutableInterfaceDeclaration() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("interface MyInterface {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableInterfaceDeclaration genInterface = _typeLookup.findInterface("foo.MyInterface");
+          final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+              public void apply(final MutableMethodDeclaration it) {
+              }
+            };
+          final MutableMethodDeclaration m = genInterface.addMethod("newMethod", _function);
+          boolean _isAbstract = m.isAbstract();
+          Assert.assertTrue(_isAbstract);
+        }
+      };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
   public void testTypeReferences() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
