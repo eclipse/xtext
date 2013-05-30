@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -91,6 +92,8 @@ public abstract class AbstractXtendTestCase extends Assert {
 			Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 			resource.load(new StringInputStream(string), null);
 			assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+		}
+		for (Resource resource: new ArrayList<Resource>(set.getResources())) {
 			XtendFile file = (XtendFile) resource.getContents().get(0);
 			result.add(file);
 		}
