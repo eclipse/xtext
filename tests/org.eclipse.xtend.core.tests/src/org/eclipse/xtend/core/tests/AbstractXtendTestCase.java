@@ -8,13 +8,19 @@
 package org.eclipse.xtend.core.tests;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -86,14 +92,31 @@ public abstract class AbstractXtendTestCase extends Assert {
 	protected Iterable<XtendFile> files(boolean validate, String ... contents) throws Exception {
 		XtextResourceSet set = getResourceSet();
 		List<XtendFile> result = newArrayList();
+		final Map<URI, String> uri2contents = newHashMap();
+		set.setURIConverter(new ExtensibleURIConverterImpl() {
+			@Override
+			public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
+				if (uri2contents.containsKey(uri)) {
+					return new StringInputStream(uri2contents.get(uri));
+				}
+				return super.createInputStream(uri, options);
+			}
+		});
+		// fill the map
 		for (String string : contents) {
 			String fileName = getFileName(string);
-			Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
-			resource.load(new StringInputStream(string), null);
+			URI uri = URI.createURI(fileName + ".xtend");
+			uri2contents.put(uri, string);
+			set.createResource(uri);
+		}
+		
+		for (Resource resource: new ArrayList<Resource>(set.getResources())) {
+			resource.load(null);
 			assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 			XtendFile file = (XtendFile) resource.getContents().get(0);
 			result.add(file);
 		}
+		
 		if (validate) {
 			for (XtendFile file : result) {
 				List<Issue> issues = ((XtextResource) file.eResource()).getResourceServiceProvider().getResourceValidator()
