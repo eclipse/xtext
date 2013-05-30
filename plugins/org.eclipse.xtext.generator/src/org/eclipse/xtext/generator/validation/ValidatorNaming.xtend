@@ -14,7 +14,7 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.Naming
 
 import static org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.generator.IInheriting$Util.*
+import static extension org.eclipse.xtext.generator.IInheriting.Util.*
 
 /**
  * @author Jan Koehnlein
