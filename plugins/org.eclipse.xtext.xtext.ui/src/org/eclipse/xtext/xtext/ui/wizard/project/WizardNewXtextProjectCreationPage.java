@@ -50,8 +50,8 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	private final IStructuredSelection selection;
 	private Text extensionsField;
 	private Combo generatorConfigurationField;
-	private Button createFeaturPeoject;
-	
+	private Button createFeatureProject;
+
 	/**
 	 * Constructs a new WizardNewXtextProjectCreationPage.
 	 * 
@@ -85,8 +85,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	protected String[] getWorkingSetIdents() {
-		return new String[] { 
-				"org.eclipse.jdt.ui.JavaWorkingSetPage", //$NON-NLS-1$
+		return new String[] { "org.eclipse.jdt.ui.JavaWorkingSetPage", //$NON-NLS-1$
 				"org.eclipse.pde.ui.pluginWorkingSet", //$NON-NLS-1$
 				"org.eclipse.ui.resourceWorkingSetPage" //$NON-NLS-1$
 		};
@@ -99,7 +98,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	 *            the name of the DSL
 	 */
 	protected void setDefaults(String projectSuffix) {
-		languageNameField.setText("org.xtext.example." + projectSuffix+".MyDsl"); //$NON-NLS-1$
+		languageNameField.setText("org.xtext.example." + projectSuffix + ".MyDsl"); //$NON-NLS-1$
 		extensionsField.setText(projectSuffix);
 
 		fillMweSnippet();
@@ -115,7 +114,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			public String apply(WizardContribution input) {
 				return input.getName();
 			}
-		}) );
+		}));
 		if (generatorConfigurationField != null) {
 			generatorConfigurationField.setItems(names.toArray(new String[names.size()]));
 			generatorConfigurationField.select(indexOfDefault(names));
@@ -130,7 +129,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	protected String getDefaultConfigName() {
 		return "Standard";
 	}
-	
+
 	/**
 	 * Find the next available (default) DSL name
 	 */
@@ -213,17 +212,19 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	protected void createProjectLayoutGroup(Composite parent) {
-		if (WizardContribution.getFromRegistry().size() > 1) {
-			Group layoutGroup = new Group(parent, SWT.NONE);
-			layoutGroup.setFont(parent.getFont());
-			layoutGroup.setText(Messages.WizardNewXtextProjectCreationPage_LabelLayout);
-			layoutGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-			layoutGroup.setLayout(new GridLayout(1, false));
-	
-			Composite composite = new Composite(layoutGroup, SWT.NONE);
-			composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-			composite.setLayout(new GridLayout(2, false));
+		boolean showGeneratorConfigCombo = WizardContribution.getFromRegistry().size() > 1;
 
+		Group layoutGroup = new Group(parent, SWT.NONE);
+		layoutGroup.setFont(parent.getFont());
+		layoutGroup.setText(Messages.WizardNewXtextProjectCreationPage_LabelLayout);
+		layoutGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		layoutGroup.setLayout(new GridLayout(1, false));
+
+		Composite composite = new Composite(layoutGroup, SWT.NONE);
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		composite.setLayout(new GridLayout(showGeneratorConfigCombo ? 2 : 1, false));
+
+		if (showGeneratorConfigCombo) {
 			Label generatorConfigLabel = new Label(composite, SWT.NONE);
 			generatorConfigLabel.setText(Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration);
 
@@ -232,16 +233,15 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			data.horizontalSpan = 1;
 			generatorConfigurationField.setLayoutData(data);
 			generatorConfigurationField.setFont(parent.getFont());
-
-			createFeaturPeoject = new Button(composite, SWT.CHECK);
-			createFeaturPeoject
-					.setText(Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel);
-			GridData createFeaturPeojectData = new GridData(SWT.FILL, SWT.CENTER, true, false);
-			createFeaturPeojectData.horizontalSpan = 1;
-			createFeaturPeoject.setLayoutData(createFeaturPeojectData);
-			createFeaturPeoject.setSelection(true);
-
 		}
+
+		createFeatureProject = new Button(composite, SWT.CHECK);
+		createFeatureProject.setText(Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel);
+		GridData featureGD = new GridData(SWT.FILL, SWT.CENTER, true, false);
+		featureGD.horizontalSpan = 1;
+		createFeatureProject.setLayoutData(featureGD);
+		createFeatureProject.setSelection(true);
+
 	}
 
 	/**
@@ -256,12 +256,12 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	public String getGeneratorConfig() {
-		if (generatorConfigurationField==null)
+		if (generatorConfigurationField == null)
 			return WizardContribution.getFromRegistry().values().iterator().next().getName();
 		return generatorConfigurationField.getItems()[generatorConfigurationField.getSelectionIndex()];
 	}
 
 	public boolean isCreateFeatureProject() {
-		return createFeaturPeoject.getSelection();
+		return createFeatureProject.getSelection();
 	}
 }

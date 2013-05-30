@@ -4,7 +4,6 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.core.runtime.Path
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo
 
-import static org.eclipse.xtext.xtext.ui.wizard.releng.templates.BuckminsterFilesCreator.*
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor
 import org.eclipse.xtext.xtext.ui.wizard.releng.P2DirectorLaunch
 
