@@ -197,6 +197,20 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		]
 	}
 	
+	@Test def testMutableInterfaceDeclaration() {
+		validFile('''
+		package foo
+		
+		interface MyInterface {
+			
+		}
+		''').asCompilationUnit [
+			val genInterface = typeLookup.findInterface('foo.MyInterface')
+			val m = genInterface.addMethod('newMethod') []
+			assertTrue(m.isAbstract)
+		]
+	}
+	
 	@Test def testTypeReferences() {
 		validFile('''
 		package foo

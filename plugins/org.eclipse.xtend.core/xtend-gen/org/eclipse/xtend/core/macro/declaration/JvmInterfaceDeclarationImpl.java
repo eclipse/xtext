@@ -12,7 +12,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
+import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
@@ -97,5 +100,19 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     JvmGenericType _delegate = this.getDelegate();
     boolean _isStrictFloatingPoint = _delegate.isStrictFloatingPoint();
     return _isStrictFloatingPoint;
+  }
+  
+  public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
+    final MutableMethodDeclaration result = super.addMethod(name, initializer);
+    result.setAbstract(true);
+    return result;
+  }
+  
+  public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
+    String _simpleName = this.getSimpleName();
+    String _plus = ("The interface \'" + _simpleName);
+    String _plus_1 = (_plus + "\' cannot declare any constructors.");
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus_1);
+    throw _unsupportedOperationException;
   }
 }
