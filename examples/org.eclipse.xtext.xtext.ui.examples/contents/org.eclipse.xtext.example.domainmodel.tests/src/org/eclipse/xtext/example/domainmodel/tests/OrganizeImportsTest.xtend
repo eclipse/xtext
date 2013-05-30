@@ -186,7 +186,7 @@ class OrganizeImportsTest {
 			import org.eclipse.emf.ecore.resource.Resource
 
 			entity Foo {
-			  op test(Resource$Factory a, Resource$Factory$Registry b) : void {}
+			  op test(Resource.Factory a, Resource.Factory.Registry b) : void {}
 			}
 		''')
 	}
@@ -208,8 +208,8 @@ class OrganizeImportsTest {
 
 			entity Foo {
 			  op test() : void {
-			    val x = Resource$Factory$Registry::INSTANCE
-			    val y = EPackage$Registry::INSTANCE
+			    val x = Resource.Factory.Registry::INSTANCE
+			    val y = EPackage.Registry::INSTANCE
 			  }
 			}
 		''')
@@ -227,7 +227,7 @@ class OrganizeImportsTest {
 
 			entity Foo {
 			  op test() : boolean {
-				 typeof(Resource$Factory) == typeof(Resource$Factory$Registry)
+				 typeof(Resource.Factory) == typeof(Resource.Factory.Registry)
 			  }
 			}
 		''')
@@ -249,7 +249,7 @@ class OrganizeImportsTest {
 
 			entity Foo {
 			  op test() : void {
-			    typeof(Resource$Factory$Registry) == typeof(EPackage$Registry)
+			    typeof(Resource.Factory.Registry) == typeof(EPackage.Registry)
 			  }
 			}
 		''')
@@ -381,7 +381,7 @@ class OrganizeImportsTest {
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 			entity Foo {
-			  op test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) : void {
+			  op test(XbasePackage.Literals x, XAnnotationsPackage.Literals y) : void {
 			  }
 			}
 		''')
@@ -402,15 +402,14 @@ class OrganizeImportsTest {
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 			entity Foo {
-			  op test(Literals x, XAnnotationsPackage$Literals y) : void {
+			  op test(Literals x, XAnnotationsPackage.Literals y) : void {
 			  }
 			}
 		''')
 	}
 
 
-	// TODO: activate when static imports are available 
-	@Ignore@Test def testStaticImport_01() {
+	@Test def testStaticImport_01() {
 		'''
 			import static java.util.Collections.*
 			entity Foo {
@@ -425,19 +424,18 @@ class OrganizeImportsTest {
 
 			entity Foo {
 			  op test(List<String> s) : void {
-			  	singleton(s)
+			  	shuffle(s)
 			  }
 			}
 		''')
 	}
 
-	// TODO: activate when static extension imports are available 
-	@Ignore@Test def testStaticImport_02() {
+	@Test def testStaticImport_02() {
 		'''
 			import static extension java.util.Collections.*
-			class Foo {
-			  def void test(java.util.List<String> s) {
-			    s.sort
+			entity Foo {
+			  op test(java.util.List<String> s) : void {
+			    s.shuffle
 			  }
 			}
 		'''.assertIsOrganizedTo('''
@@ -447,7 +445,7 @@ class OrganizeImportsTest {
 
 			entity Foo {
 			  op test(List<String> s) : void {
-			    s.sort
+			    s.shuffle
 			  }
 			}
 		''')
@@ -471,8 +469,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	// TODO: activate when static extension imports are available 
-	@Ignore@Test def testStaticExtensions() {
+	@Test def testStaticExtensions() {
 		'''
 			import static extension java.util.Collections.*
 			entity Foo {
@@ -533,7 +530,7 @@ class OrganizeImportsTest {
 
 			package foo.bar {
 				entity Foo {
-				  op test() : Map$Entry {
+				  op test() : Map.Entry {
 				    return null
 				  }
 				}
@@ -557,7 +554,7 @@ class OrganizeImportsTest {
 
 			package foo.bar {
 				entity Foo {
-				  op test() : Map$Entry {
+				  op test() : Map.Entry {
 				    return null
 				  }
 				}
@@ -581,7 +578,7 @@ class OrganizeImportsTest {
 
 			package foo.bar {
 				entity Foo {
-				  op test() : Resource$Factory$Descriptor {
+				  op test() : Resource.Factory.Descriptor {
 				    return null
 				  }
 				}
@@ -605,7 +602,7 @@ class OrganizeImportsTest {
 
 			package foo.bar {
 				entity Foo {
-				  op test() : Resource$Factory$Descriptor {
+				  op test() : Resource.Factory.Descriptor {
 				    return null
 				  }
 				}
@@ -661,8 +658,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	// TODO: reenable once static imports are abvailable
-	@Ignore@Test def testImport_PairOf() {
+	@Test def testImport_PairOf() {
 		'''
 			import static org.eclipse.xtext.xbase.lib.Pair.*
 

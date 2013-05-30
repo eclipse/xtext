@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -351,7 +350,7 @@ public class OrganizeImportsTest {
     _builder_1.append("entity Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("op test(Resource$Factory a, Resource$Factory$Registry b) : void {}");
+    _builder_1.append("op test(Resource.Factory a, Resource.Factory.Registry b) : void {}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -394,10 +393,10 @@ public class OrganizeImportsTest {
     _builder_1.append("op test() : void {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val x = Resource$Factory$Registry::INSTANCE");
+    _builder_1.append("val x = Resource.Factory.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("val y = EPackage$Registry::INSTANCE");
+    _builder_1.append("val y = EPackage.Registry::INSTANCE");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -433,7 +432,7 @@ public class OrganizeImportsTest {
     _builder_1.append("op test() : boolean {");
     _builder_1.newLine();
     _builder_1.append("\t ");
-    _builder_1.append("typeof(Resource$Factory) == typeof(Resource$Factory$Registry)");
+    _builder_1.append("typeof(Resource.Factory) == typeof(Resource.Factory.Registry)");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -476,7 +475,7 @@ public class OrganizeImportsTest {
     _builder_1.append("op test() : void {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("typeof(Resource$Factory$Registry) == typeof(EPackage$Registry)");
+    _builder_1.append("typeof(Resource.Factory.Registry) == typeof(EPackage.Registry)");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -736,7 +735,7 @@ public class OrganizeImportsTest {
     _builder_1.append("entity Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("op test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) : void {");
+    _builder_1.append("op test(XbasePackage.Literals x, XAnnotationsPackage.Literals y) : void {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -773,7 +772,7 @@ public class OrganizeImportsTest {
     _builder_1.append("entity Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("op test(Literals x, XAnnotationsPackage$Literals y) : void {");
+    _builder_1.append("op test(Literals x, XAnnotationsPackage.Literals y) : void {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -783,7 +782,6 @@ public class OrganizeImportsTest {
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
   
-  @Ignore
   @Test
   public void testStaticImport_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -815,7 +813,7 @@ public class OrganizeImportsTest {
     _builder_1.append("op test(List<String> s) : void {");
     _builder_1.newLine();
     _builder_1.append("  \t");
-    _builder_1.append("singleton(s)");
+    _builder_1.append("shuffle(s)");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -825,19 +823,18 @@ public class OrganizeImportsTest {
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
   
-  @Ignore
   @Test
   public void testStaticImport_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension java.util.Collections.*");
     _builder.newLine();
-    _builder.append("class Foo {");
+    _builder.append("entity Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("def void test(java.util.List<String> s) {");
+    _builder.append("op test(java.util.List<String> s) : void {");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("s.sort");
+    _builder.append("s.shuffle");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -857,7 +854,7 @@ public class OrganizeImportsTest {
     _builder_1.append("op test(List<String> s) : void {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("s.sort");
+    _builder_1.append("s.shuffle");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -903,7 +900,6 @@ public class OrganizeImportsTest {
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
   
-  @Ignore
   @Test
   public void testStaticExtensions() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1031,7 +1027,7 @@ public class OrganizeImportsTest {
     _builder_1.append("entity Foo {");
     _builder_1.newLine();
     _builder_1.append("\t  ");
-    _builder_1.append("op test() : Map$Entry {");
+    _builder_1.append("op test() : Map.Entry {");
     _builder_1.newLine();
     _builder_1.append("\t    ");
     _builder_1.append("return null");
@@ -1082,7 +1078,7 @@ public class OrganizeImportsTest {
     _builder_1.append("entity Foo {");
     _builder_1.newLine();
     _builder_1.append("\t  ");
-    _builder_1.append("op test() : Map$Entry {");
+    _builder_1.append("op test() : Map.Entry {");
     _builder_1.newLine();
     _builder_1.append("\t    ");
     _builder_1.append("return null");
@@ -1133,7 +1129,7 @@ public class OrganizeImportsTest {
     _builder_1.append("entity Foo {");
     _builder_1.newLine();
     _builder_1.append("\t  ");
-    _builder_1.append("op test() : Resource$Factory$Descriptor {");
+    _builder_1.append("op test() : Resource.Factory.Descriptor {");
     _builder_1.newLine();
     _builder_1.append("\t    ");
     _builder_1.append("return null");
@@ -1184,7 +1180,7 @@ public class OrganizeImportsTest {
     _builder_1.append("entity Foo {");
     _builder_1.newLine();
     _builder_1.append("\t  ");
-    _builder_1.append("op test() : Resource$Factory$Descriptor {");
+    _builder_1.append("op test() : Resource.Factory.Descriptor {");
     _builder_1.newLine();
     _builder_1.append("\t    ");
     _builder_1.append("return null");
@@ -1302,7 +1298,6 @@ public class OrganizeImportsTest {
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
   
-  @Ignore
   @Test
   public void testImport_PairOf() {
     StringConcatenation _builder = new StringConcatenation();
