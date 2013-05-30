@@ -38,8 +38,6 @@ import com.google.inject.Inject;
 public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundSelectable implements
 		IResourceDescriptions.IContextAware {
 
-	private final static Logger LOG = Logger.getLogger(EagerResourceSetBasedResourceDescriptions.class);
-
 	private Map<URI, IResourceDescription> descriptions = null;
 
 	private ResourceSet resourceSet;
