@@ -26,9 +26,9 @@ public interface IResourceDescriptions extends ISelectable {
 	Iterable<IResourceDescription> getAllResourceDescriptions();
 
 	/**
-	 * Returns the resource descriptions for the given URI. It's the client's responsibility to normalize the URI.
+	 * Returns the resource descriptions for the given URI. 
 	 */
-	IResourceDescription getResourceDescription(URI normalizedURI);
+	IResourceDescription getResourceDescription(URI uri);
 
 	/**
 	 * A context aware instance {@link IResourceDescriptions}. Needs to be configured with the current context before
