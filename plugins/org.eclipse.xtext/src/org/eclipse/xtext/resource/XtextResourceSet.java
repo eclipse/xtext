@@ -205,6 +205,13 @@ public class XtextResourceSet extends ResourceSetImpl {
         return uriConverter;
     }
     
+    /**
+     * The default load options will set a timeout of 500ms.
+     * This allows to cancel load requests that try to read a resource from 
+     * a {@code http://..} URI.
+     * 
+	 * @since 2.4
+	 */
     @Override
     public Map<Object, Object> getLoadOptions() {
       if (loadOptions == null)
