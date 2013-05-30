@@ -36,8 +36,10 @@ import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
+import org.eclipse.xtext.resource.impl.EagerResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
@@ -194,5 +196,13 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends LazyURIEncoder> bindLazyURIEncoder() {
 		return URIEncoder.class;
+	}
+	
+	/**
+	 * @since 2.4.2
+	 */
+	@Override
+	public void configureIResourceDescriptions(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class).to(EagerResourceSetBasedResourceDescriptions.class);
 	}
 }
