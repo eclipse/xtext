@@ -49,10 +49,10 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 		return services;
 	}
 
+	/**
+	 * Returns the context resource set if any.
+	 */
 	public ResourceSet getContextResourceSet() {
-		if (context == null) {
-			throw new IllegalStateException("Owner was instantiated without a resourceSet");
-		}
 		return context;
 	}
 
