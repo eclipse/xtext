@@ -81,42 +81,47 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	 */
 	@Override
 	protected void updateTextListeners(WidgetCommand cmd) {
-		@SuppressWarnings("unchecked")
-		List<ITextListener> textListeners= fTextListeners;
-		if (textListeners != null) {
-			textListeners= new ArrayList<ITextListener>(textListeners);
-			DocumentEvent event= cmd.event;
-			if (event instanceof SlaveDocumentEvent)
-				event= ((SlaveDocumentEvent) event).getMasterEvent();
-			int usedDiff = 0;
-			if (event == null) {
-				if (lengthDiff > 0) {
-					usedDiff = lengthDiff;
+		if (cmd.event == null && cmd.length == 0 && cmd.start == 0 && cmd.text == null) {
+			// handle plain redraw changes
+			super.updateTextListeners(cmd);
+		} else {
+			@SuppressWarnings("unchecked")
+			List<ITextListener> textListeners= fTextListeners;
+			if (textListeners != null) {
+				textListeners= new ArrayList<ITextListener>(textListeners);
+				DocumentEvent event= cmd.event;
+				if (event instanceof SlaveDocumentEvent)
+					event= ((SlaveDocumentEvent) event).getMasterEvent();
+				int usedDiff = 0;
+				if (event == null) {
+					if (lengthDiff > 0) {
+						usedDiff = lengthDiff;
+					}
+					lengthDiff = Integer.MIN_VALUE;
+				} else {
+					lengthDiff = event.fText.length() - event.fLength;
 				}
-				lengthDiff = Integer.MIN_VALUE;
-			} else {
-				lengthDiff = event.fText.length() - event.fLength;
-			}
-			int length = cmd.length + usedDiff;
-			String text = cmd.text;
-			if (usedDiff != 0) {
-				try {
-					IRegion model = getModelCoverage();
-					length = Math.min(cmd.start + length, model.getLength()) - cmd.start;
-					text = getDocument().get(cmd.start + model.getOffset(), length);
-				} catch(BadLocationException e) {
-					length = cmd.length;
-					log.debug("Ignored BadLocationException when fixing document events", e);
+				int length = cmd.length + usedDiff;
+				String text = cmd.text;
+				if (usedDiff != 0) {
+					try {
+						IRegion model = getModelCoverage();
+						length = Math.min(cmd.start + length, model.getLength()) - cmd.start;
+						text = getDocument().get(cmd.start + model.getOffset(), length);
+					} catch(BadLocationException e) {
+						length = cmd.length;
+						log.debug("Ignored BadLocationException when fixing document events", e);
+					}
 				}
-			}
-			TextEvent e= new TextEvent(cmd.start, length, text, cmd.preservedText, event, redraws()) {};
-			for (int i= 0; i < textListeners.size(); i++) {
-				ITextListener l= textListeners.get(i);
-				try {
-					l.textChanged(e);
-				} catch (NullPointerException exception) {
-					// in 3.8 this throws NPEs (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369244)
-					log.info(e);
+				TextEvent e= new TextEvent(cmd.start, length, text, cmd.preservedText, event, redraws()) {};
+				for (int i= 0; i < textListeners.size(); i++) {
+					ITextListener l= textListeners.get(i);
+					try {
+						l.textChanged(e);
+					} catch (NullPointerException exception) {
+						// in 3.8 this throws NPEs (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369244)
+						log.info(e);
+					}
 				}
 			}
 		}

@@ -24,6 +24,8 @@ import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITextViewerExtension;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.text.edits.MultiTextEdit;
+import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider;
@@ -161,12 +163,21 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				}
 				proposal.setCursorPosition(escapedShortname.length());
 				int initialCursorLine = document.getLineOfOffset(proposal.getReplacementOffset());
-				document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), escapedShortname);
+				ReplaceEdit replaceEdit = new ReplaceEdit(proposal.getReplacementOffset(), proposal.getReplacementLength(), escapedShortname);
 
 				// add import statement
 				List<ReplaceRegion> importChanges = importSection.rewrite();
 				TextEdit textEdit = replaceConverter.convertToTextEdit(importChanges);
+				if (textEdit != null) {
+					MultiTextEdit compound = new MultiTextEdit();
+					compound.addChild(textEdit);
+					compound.addChild(replaceEdit);
+					textEdit = compound;
+				} else {
+					textEdit = replaceEdit;
+				}
 				textEdit.apply(document);
+				
 				int cursorPosition = proposal.getCursorPosition() + replaceConverter.getReplaceLengthDelta(importChanges);
 				proposal.setCursorPosition(cursorPosition);
 				int newCursorLine = document.getLineOfOffset(cursorPosition);
