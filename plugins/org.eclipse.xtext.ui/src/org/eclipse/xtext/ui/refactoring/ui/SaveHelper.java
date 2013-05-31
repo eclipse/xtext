@@ -48,7 +48,7 @@ public class SaveHelper {
 				
 			}
 		}.syncExec();
-		syncUtil.waitForAutoBuild(null);
+		syncUtil.waitForBuild(null);
 	}
 
 	protected IWorkbenchPage getWorkbenchPage(IRenameElementContext context) {
