@@ -76,8 +76,10 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 	protected void computeArgumentTypes() {
 		List<XExpression> arguments = getArguments();
 		for (XExpression argument : arguments) {
-			AbstractTypeComputationState argumentState = state.withNonVoidExpectation();
-			argumentState.computeTypes(argument);
+			if (getResolvedTypes().doGetTypeData(argument) == null) {
+				AbstractTypeComputationState argumentState = state.withNonVoidExpectation();
+				argumentState.computeTypes(argument);
+			}
 		}
 	}
 
