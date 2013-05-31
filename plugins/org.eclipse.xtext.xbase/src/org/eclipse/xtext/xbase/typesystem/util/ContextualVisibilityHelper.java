@@ -65,7 +65,7 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 		if (visibility == JvmVisibility.PUBLIC) {
 			return true;
 		}
-		JvmDeclaredType type = member.getDeclaringType();
+		JvmDeclaredType type = member instanceof JvmDeclaredType ? (JvmDeclaredType) member : member.getDeclaringType();
 		if (type == rawContextType) {
 			return true;
 		}
@@ -80,6 +80,12 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 			}
 			if (superTypeNames.contains(type.getIdentifier())) {
 				return true;
+			}
+			if (type == member) {
+				JvmDeclaredType declaringType = member.getDeclaringType();
+				if (declaringType != null && superTypeNames.contains(declaringType.getIdentifier())) {
+					return true;
+				}
 			}
 		}
 		if (type != null && rawContextType instanceof JvmDeclaredType && (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)) {

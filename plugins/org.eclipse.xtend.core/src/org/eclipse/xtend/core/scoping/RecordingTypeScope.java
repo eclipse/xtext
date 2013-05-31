@@ -63,7 +63,7 @@ class RecordingTypeScope extends AbstractTypeScope {
 	
 	@Override
 	public IEObjectDescription getSingleElement(EObject object) {
-		throw new UnsupportedOperationException();
+		return typeScope.getSingleElement(object);
 	}
 	
 }

@@ -438,6 +438,11 @@ public class ConfigurableCompletionProposal implements
 		this.priority = priority;
 	}
 
+	/**
+	 * Returns the priority of the proposal. The bigger the returned int value, the 
+	 * higher is the precedence of the proposal. Proposals with higher priority will
+	 * be listed above proposals with lower priority.
+	 */
 	public int getPriority() {
 		return priority;
 	}

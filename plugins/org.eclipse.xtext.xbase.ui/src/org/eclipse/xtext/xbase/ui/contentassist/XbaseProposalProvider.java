@@ -153,7 +153,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	public void completeXImportDeclaration_ImportedType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true,
-				getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+				getQualifiedNameValueConverter(), createVisibilityFilter(context, IJavaSearchConstants.TYPE), acceptor);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 
 	protected void completeJavaTypes(ContentAssistContext context, EReference reference, ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, reference, qualifiedNameValueConverter, TypeMatchFilters.all(), acceptor);
+		completeJavaTypes(context, reference, qualifiedNameValueConverter, createVisibilityFilter(context), acceptor);
 	}
 	
 	protected void completeJavaTypes(ContentAssistContext context, EReference reference, ITypesProposalProvider.Filter filter, ICompletionProposalAcceptor acceptor) {
@@ -214,7 +214,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	public void completeXTypeLiteral_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, qualifiedNameValueConverter, TypeMatchFilters.all(), acceptor);
+		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, qualifiedNameValueConverter, createVisibilityFilter(context), acceptor);
 	}
 	
 //	@Override
@@ -223,12 +223,21 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 //		proposeDeclaringTypeForStaticInvocation(model, assignment, context, acceptor);
 //	}
 	
+	
 	public void proposeDeclaringTypeForStaticInvocation(EObject model, Assignment assignment, ContentAssistContext context, 
 			ICompletionProposalAcceptor acceptor){
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
 			ContentAssistContext modifiedContext = context.copy().setMatcher(staticQualifierPrefixMatcher).toContext();
-			completeJavaTypes(modifiedContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, qualifiedNameValueConverter, TypeMatchFilters.all(), acceptor);
+			completeJavaTypes(modifiedContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, qualifiedNameValueConverter, createVisibilityFilter(context), acceptor);
 		}
+	}
+	
+	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context) {
+		return createVisibilityFilter(context, IJavaSearchConstants.TYPE);
+	}
+	
+	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
+		return new TypeMatchFilters.All(searchFor);
 	}
 	
 	@Override
@@ -307,8 +316,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				}
 			}
 		}
-		if (model == null || model instanceof XExpression || model instanceof XCatchClause)
+		if (model == null || model instanceof XExpression || model instanceof XCatchClause) {
 			createLocalVariableAndImplicitProposals(model, context, acceptor);
+		}
 	}
 
 	protected Keyword getXForLoopRightParenthesis() {
@@ -361,7 +371,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			Predicate<IEObjectDescription> filter) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
 			completeJavaTypes(contentAssistContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-					qualifiedNameValueConverter, TypeMatchFilters.canInstantiate(), acceptor);
+					qualifiedNameValueConverter, TypeMatchFilters.and(TypeMatchFilters.canInstantiate(), createVisibilityFilter(contentAssistContext)), acceptor);
 			return;
 		}
 		// guard for feature call scopes
@@ -432,6 +442,8 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), contentAssistContext);
 		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, contentAssistContext.getResource(), includeCurrentObject, idx);
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
+		
+		proposeDeclaringTypeForStaticInvocation(context, null /* ignore */, contentAssistContext, acceptor);
 	}
 
 	protected String getFeatureCallRuleName() {

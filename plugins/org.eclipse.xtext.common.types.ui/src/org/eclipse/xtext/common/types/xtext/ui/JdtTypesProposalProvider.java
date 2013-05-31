@@ -365,7 +365,8 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						return jvmTypeProvider.findTypeByName(typeName);
 					}});
 				theProposal.setHover(hover);
-				theProposal.setPriority(priorities.getDefaultPriority() + jdtTypeRelevance.getRelevance(typeName, context.getPrefix()));
+				priorities.adjustCrossReferencePriority(theProposal, context.getPrefix());
+				theProposal.setPriority(theProposal.getPriority() + jdtTypeRelevance.getRelevance(typeName, context.getPrefix()));
 			}
 			acceptor.accept(proposal);
 		}
