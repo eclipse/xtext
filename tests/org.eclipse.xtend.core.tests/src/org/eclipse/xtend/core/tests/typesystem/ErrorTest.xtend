@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -883,6 +884,35 @@ class ErrorTest extends AbstractXtendTestCase {
 				}
 				def static invokeMe() {
 					j = 47 new .i
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_58() throws Exception {
+		'''
+			class C {
+				def m() {
+					{ 
+						var Object x = ('' a<b>).toString() 
+						x 
+					}
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	
+	@Test
+	def void testErrorModel_59() throws Exception {
+		'''
+			class C {
+				def m() {
+					{ 
+						var Object x = null
+						x 
+					} + ''
 				}
 			}
 		'''.processWithoutException

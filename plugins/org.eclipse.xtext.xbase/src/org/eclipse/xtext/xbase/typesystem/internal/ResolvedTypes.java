@@ -464,8 +464,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
-		if (ensureTypesMapExists().put(identifiable, reference) != null) {
-			throw new IllegalStateException("identifiable was already typed");
+		LightweightTypeReference prev = ensureTypesMapExists().put(identifiable, reference);
+		if (prev!= null) {
+			throw new IllegalStateException("identifiable [" + identifiable + "] was already typed as [" + prev.getIdentifier() + "]");
 		}
 	}
 	
