@@ -10,7 +10,10 @@ package org.eclipse.xtext.ui.refactoring.ui;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
@@ -36,14 +39,17 @@ public class SyncUtil {
 
 	@Inject(optional = true)
 	private IWorkbench workbench;
-
+	
+	@Inject(optional = true)
+	private IWorkspace workspace;
+	
 	public void totalSync(final boolean saveAll) throws InvocationTargetException, InterruptedException {
 		if (Display.getCurrent() != null && workbench != null) {
 			workbench.getProgressService().run(false, true, new IRunnableWithProgress() {
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					SubMonitor progress = SubMonitor.convert(monitor, 6);
 					syncAllEditors(workbench, saveAll, progress.newChild(1));
-					waitForAutoBuild(progress.newChild(4));
+					waitForBuild(progress.newChild(4));
 					yieldToQueuedDisplayJobs(progress.newChild(1));
 				}
 			});
@@ -55,15 +61,17 @@ public class SyncUtil {
 		for (IWorkbenchWindow window : workbench.getWorkbenchWindows()) {
 			SubMonitor pm1 = pm0.newChild(1).setWorkRemaining(window.getPages().length);
 			for (IWorkbenchPage page : window.getPages()) {
-				SubMonitor pm2 = pm1.newChild(1).setWorkRemaining(page.getEditorReferences().length);
+				SubMonitor pm2 = pm1.newChild(1).setWorkRemaining(2 * page.getEditorReferences().length);
 				for (IEditorReference editorReference : page.getEditorReferences()) {
-					IEditorPart editor = editorReference.getEditor(true);
-					if (editor == null)
-						throw new IllegalStateException("Could not restore editor " + editorReference.getName());
-					if (editor instanceof XtextEditor)
-						waitForReconciler((XtextEditor) editor);
-					if (saveAll)
-						editor.doSave(monitor);
+					if(pm2.isCanceled())
+						return;
+					IEditorPart editor = editorReference.getEditor(false);
+					if (editor != null) {
+						if (editor instanceof XtextEditor)
+							waitForReconciler((XtextEditor) editor);
+						if (saveAll)
+							editor.doSave(pm2.newChild(1));
+					}
 					pm2.worked(1);
 				}
 			}
@@ -78,7 +86,19 @@ public class SyncUtil {
 			}
 		});
 	}
+	
+	public void waitForBuild(IProgressMonitor monitor) {
+		try {
+			workspace.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, monitor);
+		} catch (CoreException e) {
+			throw new OperationCanceledException(e.getMessage());
+		}
+	}
 
+	/**
+	 * @deprecated we should not rely on auto build to be triggered. Use {@link #waitForBuild(IProgressMonitor)} instead.
+	 */
+	@Deprecated
 	public void waitForAutoBuild(IProgressMonitor monitor) {
 		boolean wasInterrupted = false;
 		do {
@@ -102,6 +122,8 @@ public class SyncUtil {
 		int count = 0;
 		if (Display.getCurrent() != null) {
 			while (count < maxJobsToYieldTo && Display.getCurrent().readAndDispatch()) {
+				if(monitor.isCanceled())
+					throw new OperationCanceledException();
 				++count;
 				pm.worked(1);
 			}
