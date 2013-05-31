@@ -3,6 +3,7 @@
 */
 package org.eclipse.xtend.ide.contentassist;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.Assignment;
@@ -32,6 +34,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
@@ -71,6 +74,30 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		} else {
 			super.completeMember_Name(model, assignment, context, acceptor);
 		}
+	}
+	
+	@Override
+	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
+		XtendFile file = (XtendFile) context.getRootModel();
+		final char[] contextPackageName = Strings.emptyIfNull(file.getPackage()).toCharArray(); 
+		return new TypeMatchFilters.All(searchFor) {
+			@Override
+			public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
+					char[][] enclosingTypeNames, String path) {
+				if (super.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
+					if (Flags.isPublic(modifiers)) {
+						return true;
+					}
+					if (Flags.isPrivate(modifiers)) {
+						return false;
+					}
+					if (Arrays.equals(contextPackageName, packageName)) {
+						return true;
+					}
+				}
+				return false;
+			}
+		};
 	}
 	
 	@Override
