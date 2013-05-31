@@ -104,6 +104,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		if (expression != null) {
 			if (expression.eContainer() == null && expression.eResource() == null)
 				throw new IllegalStateException("Dangling expression: " + expression);
+			assert getResolvedTypes().doGetTypeData(expression) == null : "Expression was already resolved: " + expression;  
 			ExpressionAwareStackedResolvedTypes stackedResolvedTypes = doComputeTypes(expression);
 			stackedResolvedTypes.performMergeIntoParent();
 			return new ResolutionBasedComputationResult(expression, resolvedTypes);
