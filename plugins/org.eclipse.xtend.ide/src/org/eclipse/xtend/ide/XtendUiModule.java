@@ -19,6 +19,7 @@ import org.eclipse.xtend.ide.builder.SourceRelativeFileSystemAccess;
 import org.eclipse.xtend.ide.builder.XtendBuilderParticipant;
 import org.eclipse.xtend.ide.builder.XtendResourceDescriptionsProvider;
 import org.eclipse.xtend.ide.contentassist.EscapeSequenceAwarePrefixMatcher;
+import org.eclipse.xtend.ide.contentassist.OperatorAwareComparator;
 import org.eclipse.xtend.ide.contentassist.TemplateProposalProvider;
 import org.eclipse.xtend.ide.contentassist.XtendContentAssistFactory;
 import org.eclipse.xtend.ide.editor.InitiallyCollapsableAwareFoldingStructureProvider;
@@ -75,6 +76,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalComparator;
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
@@ -409,5 +411,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends JavaTypeQuickfixes> bindJavaTypeQuickfixes() {
 		return TypeLiteralAwareJavaTypeQuickfixes.class;
+	}
+	
+	public Class<? extends ICompletionProposalComparator> bindICompletionProposalComparator() {
+		return OperatorAwareComparator.class;
 	}
 }

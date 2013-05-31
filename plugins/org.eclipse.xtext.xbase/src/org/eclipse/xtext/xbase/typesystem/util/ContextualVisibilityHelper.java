@@ -65,7 +65,7 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 		if (visibility == JvmVisibility.PUBLIC) {
 			return true;
 		}
-		JvmDeclaredType type = member.getDeclaringType();
+		JvmDeclaredType type = member instanceof JvmDeclaredType ? (JvmDeclaredType) member : member.getDeclaringType();
 		if (type == rawContextType) {
 			return true;
 		}
