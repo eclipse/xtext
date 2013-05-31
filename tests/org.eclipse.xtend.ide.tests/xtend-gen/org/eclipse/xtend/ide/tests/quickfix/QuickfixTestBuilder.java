@@ -380,7 +380,7 @@ public class QuickfixTestBuilder {
     XtextEditor _xblockexpression = null;
     {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      this._syncUtil.waitForAutoBuild(_nullProgressMonitor);
+      this._syncUtil.waitForBuild(_nullProgressMonitor);
       this._syncUtil.yieldToQueuedDisplayJobs(null);
       XtextEditor editor = this._workbenchTestHelper.openEditor(file);
       this._syncUtil.waitForReconciler(editor);
