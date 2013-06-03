@@ -166,5 +166,20 @@ public class FeatureCallAsTypeLiteralHelper {
 		}
 		return null;
 	}
+
+	public boolean isDefiniteTypeLiteral(XAbstractFeatureCall featureCall) {
+		if (featureCall.isExplicitOperationCallOrBuilderSyntax())
+			return false;
+		if (!featureCall.getTypeArguments().isEmpty())
+			return false;
+		if (featureCall.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+			XMemberFeatureCall container = (XMemberFeatureCall) featureCall.eContainer();
+			if (container.isExplicitStatic()) {
+				return true;
+			}
+			return isDefiniteTypeLiteral(container);
+		}
+		return false;
+	}
 	
 }

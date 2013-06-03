@@ -102,7 +102,10 @@ public class FeatureScopes implements IFeatureNames {
 		if (context instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) context;
 			if (!featureCall.isExplicitOperationCallOrBuilderSyntax()) {
-				root = createTypeLiteralScope(context, root, session, resolvedTypes, QualifiedName.EMPTY);		
+				root = createTypeLiteralScope(context, root, session, resolvedTypes, QualifiedName.EMPTY);
+				if (isDefiniteTypeLiteral(featureCall)) {
+					return root;
+				}
 			}
 		}
 		IScope staticImports = createStaticFeaturesScope(context, root, session);
@@ -113,6 +116,10 @@ public class FeatureScopes implements IFeatureNames {
 		IScope constructors = createConstructorDelegates(context, implicitReceivers, session, resolvedTypes);
 		IScope localVariables = new LocalVariableScope(constructors, session, asAbstractFeatureCall(context));
 		return localVariables;
+	}
+	
+	protected boolean isDefiniteTypeLiteral(XFeatureCall featureCall) {
+		return typeLiteralHelper.isDefiniteTypeLiteral(featureCall);
 	}
 
 	protected IScope createConstructorDelegates(EObject context, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
