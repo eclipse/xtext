@@ -3588,4 +3588,49 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testBug409648() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static extension org.eclipse.emf.ecore.util.EcoreUtil.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.common.util.URI");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def foo(EObject it) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("URI::createURI(\"someString\")");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.emf.common.util.URI");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.EObject");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def foo(EObject it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("URI::createURI(\"someString\")");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
 }

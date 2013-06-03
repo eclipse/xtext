@@ -174,6 +174,10 @@ class LegacyFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest {
 		typeProvider
 	}
 	
+	override protected findFeatureCalls(CharSequence expression) {
+		super.findFeatureCalls(expression).filterTypeLiteralsAndPackageFragments.toList
+	}
+	
 	@Test 
 	def void testSetup() {
 		assertTrue(typeProvider instanceof XbaseBatchTypeProvider)
