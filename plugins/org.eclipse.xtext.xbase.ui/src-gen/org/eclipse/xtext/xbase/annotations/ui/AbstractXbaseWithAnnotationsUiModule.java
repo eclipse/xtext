@@ -74,11 +74,6 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultUiModu
 	}
 
 	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper> bindIHyperlinkHelper() {
-		return org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher> bindPrefixMatcher() {
 		return org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher.class;
 	}
@@ -146,6 +141,11 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultUiModu
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator> bindXbaseUIValidator() {
 		return org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper> bindIHyperlinkHelper() {
+		return org.eclipse.xtext.xbase.ui.navigation.TypeLiteralAwareHyperlinkHelper.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
