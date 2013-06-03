@@ -31,7 +31,9 @@ public class ImageExtensions {
         ImageDimension _imageDimension = new ImageDimension(_width, _height);
         return _imageDimension;
       } finally {
-        if (stream!=null) stream.close();
+        if (stream!=null) {
+          stream.close();
+        }
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
