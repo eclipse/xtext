@@ -57,6 +57,10 @@ public class ProjectFactory {
 	protected List<String> projectNatures;
 	protected List<String> builderIds;
 	protected List<IWorkingSet> workingSets;
+	/**
+	 * @since 2.4
+	 */
+	protected String defaultCharset;
 
 	private List<IProjectFactoryContributor> contributors;
 
@@ -114,6 +118,13 @@ public class ProjectFactory {
 		}
 		contributors.add(projectFactoryContributor);
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setProjectDefaultCharset(String encoding) {
+		this.defaultCharset = encoding;
+	}
 
 	public IProject createProject(IProgressMonitor monitor, Shell shell) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, 10);
@@ -130,6 +141,7 @@ public class ProjectFactory {
 			project.setDescription(description, subMonitor.newChild(1));
 			createFolders(project, subMonitor, shell);
 			enhanceProject(project, subMonitor, shell);
+			project.setDefaultCharset(defaultCharset, subMonitor.newChild(1));
 
 			if (contributors != null) {
 				IFileCreator fileCreator = new IFileCreator() {
