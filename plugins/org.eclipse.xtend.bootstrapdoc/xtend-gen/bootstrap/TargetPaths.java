@@ -7,7 +7,6 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -46,8 +45,11 @@ public class TargetPaths {
   public String getTargetPath(final Identifiable element) {
     String _elvis = null;
     TargetPathAdapter _targetPathAdapter = this.getTargetPathAdapter(element);
-    Map<Identifiable,String> _targetPaths = _targetPathAdapter==null?(Map<Identifiable,String>)null:_targetPathAdapter.targetPaths;
-    String _get = _targetPaths==null?(String)null:_targetPaths.get(element);
+    String _get = null;
+    TargetPathAdapter _targetPathAdapter_1 = this.getTargetPathAdapter(element);
+    if (_targetPathAdapter.targetPaths!=null) {
+      _get=_targetPathAdapter.targetPaths.get(element);
+    }
     if (_get != null) {
       _elvis = _get;
     } else {
@@ -60,7 +62,7 @@ public class TargetPaths {
     boolean _xblockexpression = false;
     {
       TargetPathAdapter _targetPathAdapter = this.getTargetPathAdapter(element);
-      final List<AbstractSection> targetFileRoots = _targetPathAdapter==null?(List<AbstractSection>)null:_targetPathAdapter.targetFileRoots;
+      final List<AbstractSection> targetFileRoots = _targetPathAdapter.targetFileRoots;
       boolean _xifexpression = false;
       boolean _notEquals = (!Objects.equal(targetFileRoots, null));
       if (_notEquals) {
@@ -77,12 +79,12 @@ public class TargetPaths {
   public List<? extends AbstractSection> getTargetRoots(final Document document) {
     List<? extends AbstractSection> _elvis = null;
     TargetPathAdapter _targetPathAdapter = this.getTargetPathAdapter(document);
-    List<AbstractSection> _targetFileRoots = _targetPathAdapter==null?(List<AbstractSection>)null:_targetPathAdapter.targetFileRoots;
-    if (_targetFileRoots != null) {
-      _elvis = _targetFileRoots;
+    if (_targetPathAdapter.targetFileRoots != null) {
+      _elvis = _targetPathAdapter.targetFileRoots;
     } else {
       ArrayList<Document> _newArrayList = CollectionLiterals.<Document>newArrayList(document);
-      _elvis = ObjectExtensions.<List<? extends AbstractSection>>operator_elvis(_targetFileRoots, _newArrayList);
+      _elvis = ObjectExtensions.<List<? extends AbstractSection>>operator_elvis(
+        _targetPathAdapter.targetFileRoots, _newArrayList);
     }
     return _elvis;
   }
@@ -122,11 +124,26 @@ public class TargetPaths {
   }
   
   protected TargetPathAdapter getTargetPathAdapter(final Identifiable element) {
-    Resource _eResource = element==null?(Resource)null:element.eResource();
-    ResourceSet _resourceSet = _eResource==null?(ResourceSet)null:_eResource.getResourceSet();
-    EList<Adapter> _eAdapters = _resourceSet==null?(EList<Adapter>)null:_resourceSet.eAdapters();
-    Iterable<TargetPathAdapter> _filter = _eAdapters==null?(Iterable<TargetPathAdapter>)null:Iterables.<TargetPathAdapter>filter(_eAdapters, TargetPathAdapter.class);
-    TargetPathAdapter _head = _filter==null?(TargetPathAdapter)null:IterableExtensions.<TargetPathAdapter>head(_filter);
+    TargetPathAdapter _head = null;
+    Iterable<TargetPathAdapter> _filter = null;
+    Resource _eResource = null;
+    if (element!=null) {
+      _eResource=element.eResource();
+    }
+    ResourceSet _resourceSet = null;
+    if (_eResource!=null) {
+      _resourceSet=_eResource.getResourceSet();
+    }
+    EList<Adapter> _eAdapters = null;
+    if (_resourceSet!=null) {
+      _eAdapters=_resourceSet.eAdapters();
+    }
+    if (_eAdapters!=null) {
+      _filter=Iterables.<TargetPathAdapter>filter(_eAdapters, TargetPathAdapter.class);
+    }
+    if (_filter!=null) {
+      _head=IterableExtensions.<TargetPathAdapter>head(_filter);
+    }
     return _head;
   }
 }

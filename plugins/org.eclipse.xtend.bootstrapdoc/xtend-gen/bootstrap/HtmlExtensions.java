@@ -335,7 +335,11 @@ public class HtmlExtensions {
     {
       final ImageDimension dimension = this._imageExtensions.getDimension(it);
       String _caption = it.getCaption();
-      final String caption = _caption==null?(String)null:_caption.trim();
+      String _trim = null;
+      if (_caption!=null) {
+        _trim=_caption.trim();
+      }
+      final String caption = _trim;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<div class=\"thumbnail\">");
       _builder.newLine();
@@ -378,10 +382,18 @@ public class HtmlExtensions {
   protected CharSequence _toHtml(final CodeRef it, final ParagraphState state) {
     CharSequence _xblockexpression = null;
     {
+      String _sourceCodeURI = null;
       JvmDeclaredType _element = it.getElement();
-      final String sourceCodeURI = _element==null?(String)null:this._codeRefs.getSourceCodeURI(_element);
+      if (_element!=null) {
+        _sourceCodeURI=this._codeRefs.getSourceCodeURI(_element);
+      }
+      final String sourceCodeURI = _sourceCodeURI;
+      String _javaDocURI = null;
       JvmDeclaredType _element_1 = it.getElement();
-      final String javaDocURI = _element_1==null?(String)null:this._codeRefs.getJavaDocURI(_element_1);
+      if (_element_1!=null) {
+        _javaDocURI=this._codeRefs.getJavaDocURI(_element_1);
+      }
+      final String javaDocURI = _javaDocURI;
       StringConcatenation _builder = new StringConcatenation();
       {
         boolean _notEquals = (!Objects.equal(javaDocURI, null));
@@ -401,7 +413,10 @@ public class HtmlExtensions {
         } else {
           _builder.append("<abbr title=\"");
           JvmDeclaredType _element_2 = it.getElement();
-          String _identifier = _element_2==null?(String)null:_element_2.getIdentifier();
+          String _identifier = null;
+          if (_element_2!=null) {
+            _identifier=_element_2.getIdentifier();
+          }
           _builder.append(_identifier, "");
           _builder.append("\">");
           {
@@ -411,8 +426,14 @@ public class HtmlExtensions {
             }
           }
           JvmDeclaredType _element_4 = it.getElement();
-          String _simpleName = _element_4==null?(String)null:_element_4.getSimpleName();
-          String _trim = _simpleName==null?(String)null:_simpleName.trim();
+          String _simpleName = null;
+          if (_element_4!=null) {
+            _simpleName=_element_4.getSimpleName();
+          }
+          String _trim = null;
+          if (_simpleName!=null) {
+            _trim=_simpleName.trim();
+          }
           _builder.append(_trim, "");
           _builder.append("</abbr>");
         }
@@ -456,7 +477,10 @@ public class HtmlExtensions {
       } else {
         boolean _and = false;
         EObject _eContainer = it.eContainer();
-        EStructuralFeature _eContainingFeature = _eContainer==null?(EStructuralFeature)null:_eContainer.eContainingFeature();
+        EStructuralFeature _eContainingFeature = null;
+        if (_eContainer!=null) {
+          _eContainingFeature=_eContainer.eContainingFeature();
+        }
         boolean _equals = Objects.equal(_eContainingFeature, Literals.ABSTRACT_SECTION__CONTENTS);
         if (!_equals) {
           _and = false;
@@ -487,8 +511,14 @@ public class HtmlExtensions {
         _builder.append("<pre class=\"prettyprint lang-");
         String _elvis = null;
         LangDef _language = it.getLanguage();
-        String _name = _language==null?(String)null:_language.getName();
-        String _lowerCase = _name==null?(String)null:_name.toLowerCase();
+        String _name = null;
+        if (_language!=null) {
+          _name=_language.getName();
+        }
+        String _lowerCase = null;
+        if (_name!=null) {
+          _lowerCase=_name.toLowerCase();
+        }
         if (_lowerCase != null) {
           _elvis = _lowerCase;
         } else {
@@ -512,8 +542,14 @@ public class HtmlExtensions {
         _builder_1.append("<code class=\"prettyprint lang-");
         String _elvis_1 = null;
         LangDef _language_1 = it.getLanguage();
-        String _name_1 = _language_1==null?(String)null:_language_1.getName();
-        String _lowerCase_1 = _name_1==null?(String)null:_name_1.toLowerCase();
+        String _name_1 = null;
+        if (_language_1!=null) {
+          _name_1=_language_1.getName();
+        }
+        String _lowerCase_1 = null;
+        if (_name_1!=null) {
+          _lowerCase_1=_name_1.toLowerCase();
+        }
         if (_lowerCase_1 != null) {
           _elvis_1 = _lowerCase_1;
         } else {
