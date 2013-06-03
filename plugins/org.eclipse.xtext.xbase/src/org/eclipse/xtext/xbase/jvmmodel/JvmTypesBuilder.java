@@ -768,10 +768,10 @@ public class JvmTypesBuilder {
 			public void apply(@Nullable ITreeAppendable p) {
 				if (p == null)
 					return;
-				JvmTypeReference typeRef = JvmTypesBuilder.this.newTypeRef(sourceElement, ToStringHelper.class);
+				JvmType type = JvmTypesBuilder.this.references.findDeclaredType(ToStringHelper.class, sourceElement);
 				p.append("String result = new ");
-				if (typeRef != null) {
-					p.append(typeRef.getType());
+				if (type != null) {
+					p.append(type);
 				} else {
 					p.append(ToStringHelper.class.getName());
 				}
