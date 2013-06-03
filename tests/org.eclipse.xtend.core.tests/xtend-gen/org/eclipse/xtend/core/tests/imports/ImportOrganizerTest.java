@@ -114,6 +114,45 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testInstanceOf() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Object o) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (o instanceof String) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class C {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void m(Object o) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if (o instanceof String) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testDefaultPackage() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo implements java.io.Serializable {}");
