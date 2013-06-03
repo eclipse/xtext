@@ -8,6 +8,9 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
+import java.util.List;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractOldAPIFeatureCallTypeTest;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -25,6 +28,13 @@ public class LegacyFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   protected ITypeProvider getTypeProvider() {
     return this.typeProvider;
+  }
+  
+  protected List<XAbstractFeatureCall> findFeatureCalls(final CharSequence expression) {
+    List<XAbstractFeatureCall> _findFeatureCalls = super.findFeatureCalls(expression);
+    Iterable<XAbstractFeatureCall> _filterTypeLiteralsAndPackageFragments = this.filterTypeLiteralsAndPackageFragments(_findFeatureCalls);
+    List<XAbstractFeatureCall> _list = IterableExtensions.<XAbstractFeatureCall>toList(_filterTypeLiteralsAndPackageFragments);
+    return _list;
   }
   
   @Test
