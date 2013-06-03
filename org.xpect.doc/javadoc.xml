@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" classpath=".:${java.home}/../lib/tools.jar" packagenames="org.xpect.doc" sourcepath="src">
+            <doclet name="org.xpect.doc.Doclet" path="/Volumes/public/eclipse/Xpect/Xpect/org.xpect.doc/bin"/>
+        </javadoc>
+    </target>
+</project>
