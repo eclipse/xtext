@@ -291,6 +291,14 @@ QualifiedName:
 Number hidden():
 	HEX | (INT | DECIMAL) ('.' (INT | DECIMAL))?;
 
+/**
+ * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+ * which makes downstream grammars break on classloading, when a rule is removed.
+ */
+StaticQualifier:
+	(ValidID '::')+
+;
+
 terminal HEX:
 	('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F'|'_')+ 
 	('#' (('b'|'B')('i'|'I') | ('l'|'L')))?;
