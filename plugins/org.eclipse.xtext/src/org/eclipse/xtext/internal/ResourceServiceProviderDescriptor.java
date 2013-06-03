@@ -50,7 +50,11 @@ public class ResourceServiceProviderDescriptor implements IResourceServiceProvid
 		}
 		String type = this.extension == null ? "null" : this.extension.getClass().getName();
 		String valid = IResourceServiceProvider.class + " or " + IResourceServiceProvider.Provider.class;
-		throw new ClassCastException("The type " + type + " is not a valid " + valid);
+		String suffix = "";
+		if (element != null && element.getDeclaringExtension() != null && element.getDeclaringExtension().getContributor() != null) {
+			suffix += " contributed by "+element.getDeclaringExtension().getContributor();
+		}
+		throw new ClassCastException("The type " + type + " is not a valid " + valid + suffix);
 	}
 
 }
