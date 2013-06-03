@@ -112,6 +112,10 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 			importDeclaration.getImportedTypeName()
 	}
 
+	protected def String text(XImportSection importSection) {
+		return "import declarations";
+	}
+
 	protected def String text(XVariableDeclaration variableDeclaration) {
 		val resolvedTypes = typeResolver.resolveTypes(variableDeclaration)
 		val type = resolvedTypes.getActualType(variableDeclaration as JvmIdentifiableElement)

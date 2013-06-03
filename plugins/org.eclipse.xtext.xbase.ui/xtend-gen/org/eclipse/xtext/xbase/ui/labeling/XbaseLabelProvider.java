@@ -188,6 +188,10 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     return _xifexpression;
   }
   
+  protected String text(final XImportSection importSection) {
+    return "import declarations";
+  }
+  
   protected String text(final XVariableDeclaration variableDeclaration) {
     String _xblockexpression = null;
     {
