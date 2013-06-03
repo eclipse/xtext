@@ -221,6 +221,10 @@ component = DirectoryCleaner {
 	directory = "${runtimeProject}.ui/src-gen"
 }
 
+component = DirectoryCleaner {
+	directory = "${runtimeProject}.tests/src-gen"
+}
+
 component = Generator {
 	pathRtProject = runtimeProject
 	pathUiProject = "${runtimeProject}.ui"
