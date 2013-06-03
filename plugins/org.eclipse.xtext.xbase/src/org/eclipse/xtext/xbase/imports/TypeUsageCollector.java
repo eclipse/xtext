@@ -150,8 +150,6 @@ public class TypeUsageCollector {
 				acceptType((JvmTypeReference) next);
 			} else if (next instanceof XAnnotation) {
 				acceptPreferredType(next, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE);
-			} else if (next instanceof XInstanceOfExpression) {
-				acceptType(((XInstanceOfExpression) next).getType());
 			} else if (next instanceof XConstructorCall) {
 				acceptPreferredType(next, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
 			} else if (next instanceof XTypeLiteral) {
