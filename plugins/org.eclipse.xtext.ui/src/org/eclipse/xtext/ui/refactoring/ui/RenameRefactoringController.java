@@ -32,6 +32,8 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
+ * Handles the various UI states of a refactoring, such as linked mode, dialog, and direct refactoring.
+ *  
  * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
@@ -52,6 +54,9 @@ public class RenameRefactoringController {
 	@Inject
 	private Provider<LinkedEditingUndoSupport> undoSupportProvider;
 	
+	@Inject
+	private RefactoringPreferences preferences;
+	
 	private RenameLinkedMode activeLinkedMode;
 
 	private IRenameElementContext renameElementContext;
@@ -70,6 +75,14 @@ public class RenameRefactoringController {
 		}
 		this.renameElementContext = renameElementContext;
 		this.newName = null;
+	}
+	
+	public void startRefactoring(IRenameElementContext renameElementContext) {
+		initialize(renameElementContext);
+		if(preferences.useInlineRefactoring() && getActiveLinkedMode() == null)
+			startRefactoring(RefactoringType.LINKED_EDITING);
+		else 
+			startRefactoring(RefactoringType.REFACTORING_DIALOG);
 	}
 
 	public void startRefactoring(RefactoringType refactoringType) {
