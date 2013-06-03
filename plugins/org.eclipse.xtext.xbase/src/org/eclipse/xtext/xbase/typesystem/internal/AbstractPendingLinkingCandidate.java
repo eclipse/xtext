@@ -387,7 +387,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				}
 				return other;
 			}
-			if(isVarArgs() && !right.isVarArgs() || isTypeLiteral() && !right.isTypeLiteral()) {
+			if (isVarArgs() != right.isVarArgs()) {
+				if (isVarArgs())
+					return right;
+				return this;
+			}
+			if(isTypeLiteral() && !right.isTypeLiteral()) {
 				return right;
 			}
 			return this;

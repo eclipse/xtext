@@ -109,12 +109,26 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	 * Try to resolve this reference iff there are hints available.
 	 * May be invoked multiple times since it will simply returns if
 	 * the reference is already resolved.
+	 * 
+	 * This is fully equivalent to {@code tryResolve(true)}.
+	 * 
+	 * @see #tryResolve(boolean)
 	 */
 	public void tryResolve() {
+		tryResolve(true);
+	}
+	
+	/**
+	 * Try to resolve this reference iff there are hints available.
+	 * May be invoked multiple times since it will simply returns if
+	 * the reference is already resolved. The caller can decide whether
+	 * type constraints are considered to be significant hints or not. 
+	 */
+	public void tryResolve(boolean constraintsAreSignificant) {
 		if (internalIsResolved())
 			return;
 		List<LightweightBoundTypeArgument> hints = getAllHints();
-		if (!hints.isEmpty() && hasSignificantHints(hints)) {
+		if (!hints.isEmpty() && hasSignificantHints(hints, constraintsAreSignificant)) {
 			resolveWithHints(hints);
 		}
 	}
@@ -142,9 +156,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	protected boolean hasSignificantHints(List<LightweightBoundTypeArgument> hints) {
+		return hasSignificantHints(hints, true);
+	}
+	
+	protected boolean hasSignificantHints(List<LightweightBoundTypeArgument> hints, boolean constraintsAreSignificant) {
 		for (LightweightBoundTypeArgument hint: hints) {
 			if (!(hint.getOrigin() instanceof VarianceInfo)) {
-				return true;
+				if (constraintsAreSignificant || hint.getSource() != BoundTypeArgumentSource.CONSTRAINT)
+					return true;
 			}
 		}
 		return false;

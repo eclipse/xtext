@@ -48,7 +48,11 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 	protected void tryResolveUnboundReferences() {
 		for (UnboundTypeReference unbound : basicGetTypeParameters().values()) {
 			if (unbound.getExpression() == expression) {
-				unbound.tryResolve();
+				// resolve all type parameters of the expression that
+				// have already been annotated with significant hints
+				// the type constraints themselves are not considered to
+				// be significant 'enough'
+				unbound.tryResolve(false);
 			}
 		}
 	}
