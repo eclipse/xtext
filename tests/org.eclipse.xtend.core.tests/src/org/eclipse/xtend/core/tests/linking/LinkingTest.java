@@ -89,6 +89,52 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testExplicitTypeOverSugar_01() throws Exception {
+		XtendFile file = file(
+				"import static extension org.eclipse.emf.ecore.util.EcoreUtil.*\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"import org.eclipse.emf.common.util.URI\n" + 
+				"\n" + 
+				"class C {\n" + 
+				"  def m(EObject it) {\n" + 
+				"    URI::createURI(\"someString\")\n" + 
+				"  }\n" + 
+				"}"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("org.eclipse.emf.common.util.URI.createURI(java.lang.String)", method.getIdentifier());
+		assertTrue(featureCall.isStaticWithDeclaringType());
+		XFeatureCall target = (XFeatureCall) featureCall.getMemberCallTarget();
+		assertTrue(target.isTypeLiteral());
+		assertEquals("org.eclipse.emf.common.util.URI", target.getFeature().getIdentifier());
+	}
+
+	@Test public void testExplicitTypeOverSugar_02() throws Exception {
+		XtendFile file = file(
+				"import static extension org.eclipse.emf.ecore.util.EcoreUtil.*\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"import org.eclipse.emf.common.util.URI\n" + 
+				"\n" + 
+				"class C {\n" + 
+				"  def m(EObject it) {\n" + 
+				"    URI.appendFragment(\"someString\")\n" + 
+				"  }\n" + 
+				"}"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("org.eclipse.emf.common.util.URI.appendFragment(java.lang.String)", method.getIdentifier());
+		assertFalse(featureCall.isStaticWithDeclaringType());
+		XFeatureCall target = (XFeatureCall) featureCall.getMemberCallTarget();
+		assertFalse(target.isTypeLiteral());
+		assertEquals("org.eclipse.emf.ecore.util.EcoreUtil.getURI(org.eclipse.emf.ecore.EObject)", target.getFeature().getIdentifier());
+	}
+	
 	@Test public void testSugarOverTypeLiteral_01() throws Exception {
 		XtendFile file = file(
 				"import org.eclipse.emf.ecore.resource.Resource\n" +
