@@ -55,6 +55,24 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			class Foo implements Serializable {}
 		''')
 	}
+	
+	@Test def testInstanceOf() {
+		'''
+			class C {
+				def void m(Object o) {
+					if (o instanceof String) {
+					}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class C {
+				def void m(Object o) {
+					if (o instanceof String) {
+					}
+				}
+			}
+		''')
+	}
 
 	@Test def testDefaultPackage() {
 		'''
