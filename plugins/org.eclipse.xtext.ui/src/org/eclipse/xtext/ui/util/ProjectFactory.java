@@ -8,11 +8,16 @@
 package org.eclipse.xtext.ui.util;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.internal.preferences.EclipsePreferences;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -34,6 +39,7 @@ import org.eclipse.ui.IWorkingSet;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -43,6 +49,17 @@ import com.google.inject.Inject;
 public class ProjectFactory {
 
 	private static final Logger logger = Logger.getLogger(ProjectFactory.class);
+
+	/**
+	 * copied form {@link EclipsePreferences}
+	 * @since 2.4
+	 */
+	protected static final String VERSION_KEY = "eclipse.preferences.version"; //$NON-NLS-1$
+	/**
+	 * @since 2.4
+	 */
+	protected static final String VERSION_VALUE = "1"; //$NON-NLS-1$
+
 
 	@Inject(optional = true)
 	protected IWorkbench workbench;
@@ -57,6 +74,11 @@ public class ProjectFactory {
 	protected List<String> projectNatures;
 	protected List<String> builderIds;
 	protected List<IWorkingSet> workingSets;
+	
+	/**
+	 * @since 2.4
+	 */
+	protected Map<String, Properties> properties = Maps.newLinkedHashMap();
 
 	private List<IProjectFactoryContributor> contributors;
 
@@ -114,6 +136,19 @@ public class ProjectFactory {
 		}
 		contributors.add(projectFactoryContributor);
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Properties getProjectProperties(String settingsFile) {
+		Properties eclipsePreferences = this.properties.get(settingsFile);
+		if (eclipsePreferences == null) {
+			eclipsePreferences = new Properties();
+			eclipsePreferences.put(VERSION_KEY, VERSION_VALUE);
+			this.properties.put(settingsFile, eclipsePreferences);
+		}
+		return eclipsePreferences;
+	}
 
 	public IProject createProject(IProgressMonitor monitor, Shell shell) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, 10);
@@ -130,6 +165,7 @@ public class ProjectFactory {
 			project.setDescription(description, subMonitor.newChild(1));
 			createFolders(project, subMonitor, shell);
 			enhanceProject(project, subMonitor, shell);
+			createPropertyFiles(project, subMonitor.newChild(1));
 
 			if (contributors != null) {
 				IFileCreator fileCreator = new IFileCreator() {
@@ -168,7 +204,31 @@ public class ProjectFactory {
 			workbench.getWorkingSetManager().addToWorkingSets(project,
 					workingSets.toArray(new IWorkingSet[workingSets.size()]));
 		}
-
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void createPropertyFiles(final IProject project, SubMonitor monitor) {
+		for (Map.Entry<String, Properties> e : properties.entrySet()) {
+			String name = e.getKey();
+			Properties properties = e.getValue();
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			try {
+				properties.store(outputStream, null);
+				outputStream.close();
+				ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+				IFolder folder = project.getFolder(EclipsePreferences.DEFAULT_PREFERENCES_DIRNAME);
+				if (!folder.exists())
+					folder.create(true, true, monitor.newChild(1));
+				IFile file = folder.getFile(name + "." + EclipsePreferences.PREFS_FILE_EXTENSION);
+				file.create(inputStream, true, monitor.newChild(1));
+			} catch (IOException e1) {
+				logger.error(e1);
+			} catch (CoreException e1) {
+				logger.error(e1);
+			}
+		}
 	}
 
 	protected boolean deleteExistingProject(IProject project, final Shell theShell, SubMonitor subMonitor)
