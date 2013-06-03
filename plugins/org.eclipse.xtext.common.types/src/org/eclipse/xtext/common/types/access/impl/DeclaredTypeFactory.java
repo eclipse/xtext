@@ -164,6 +164,13 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		if (log.isDebugEnabled())
 			log.debug("Invalid class file for: " + clazz.getCanonicalName());
 	}
+	
+	private void logNoClassDefFoundError(NoClassDefFoundError error, Class<?> clazz, String description) {
+		log.error("Incomplete " + description + " for " + clazz.getCanonicalName() + ": " + error);
+		if (log.isDebugEnabled()) {
+			log.debug(error.getMessage(), error);
+		}
+	}
 
 	private static final Object[] EMPTY_ARRAY = new Object[0];
 
@@ -333,14 +340,18 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	protected void createNestedTypes(Class<?> clazz, JvmDeclaredType result) {
-		Class<?>[] declaredClasses = clazz.getDeclaredClasses();
-		if (declaredClasses.length != 0) {
-			InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
-			for (Class<?> declaredClass : declaredClasses) {
-				if (!declaredClass.isAnonymousClass() && !declaredClass.isSynthetic()) {
-					members.addUnique(createType(declaredClass));
+		try {
+			Class<?>[] declaredClasses = clazz.getDeclaredClasses();
+			if (declaredClasses.length != 0) {
+				InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
+				for (Class<?> declaredClass : declaredClasses) {
+					if (!declaredClass.isAnonymousClass() && !declaredClass.isSynthetic()) {
+						members.addUnique(createType(declaredClass));
+					}
 				}
 			}
+		} catch(NoClassDefFoundError e) {
+			logNoClassDefFoundError(e, clazz, "nested types");
 		}
 	}
 
@@ -395,42 +406,54 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	protected void createFields(Class<?> clazz, JvmDeclaredType result) {
-		Field[] declaredFields = clazz.getDeclaredFields();
-		if (declaredFields.length != 0) {
-			InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
-			for (Field field : declaredFields) {
-				if (!field.isSynthetic()) {
-					members.addUnique(createField(field));
+		try {
+			Field[] declaredFields = clazz.getDeclaredFields();
+			if (declaredFields.length != 0) {
+				InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
+				for (Field field : declaredFields) {
+					if (!field.isSynthetic()) {
+						members.addUnique(createField(field));
+					}
 				}
 			}
+		} catch (NoClassDefFoundError e) {
+			logNoClassDefFoundError(e, clazz, "fields");
 		}
 	}
 
 	protected void createConstructors(Class<?> clazz, JvmDeclaredType result) {
-		Constructor<?>[] declaredConstructors = clazz.getDeclaredConstructors();
-		if (declaredConstructors.length != 0) {
-			InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
-			for (Constructor<?> constructor : declaredConstructors) {
-				if (!constructor.isSynthetic()) {
-					members.addUnique(createConstructor(constructor));
+		try {
+			Constructor<?>[] declaredConstructors = clazz.getDeclaredConstructors();
+			if (declaredConstructors.length != 0) {
+				InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
+				for (Constructor<?> constructor : declaredConstructors) {
+					if (!constructor.isSynthetic()) {
+						members.addUnique(createConstructor(constructor));
+					}
 				}
 			}
+		} catch (NoClassDefFoundError e) {
+			logNoClassDefFoundError(e, clazz, "constructors");
 		}
 	}
 
 	protected void createMethods(Class<?> clazz, JvmDeclaredType result) {
-		Method[] declaredMethods = clazz.getDeclaredMethods();
-		if (declaredMethods.length != 0) {
-			InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
-			for (Method method : declaredMethods) {
-				if (!method.isSynthetic()) {
-					JvmOperation operation = createOperation(method);
-					if (clazz.isAnnotation()) {
-						setDefaultValue(operation, method);
+		try {
+			Method[] declaredMethods = clazz.getDeclaredMethods();
+			if (declaredMethods.length != 0) {
+				InternalEList<JvmMember> members = (InternalEList<JvmMember>)result.getMembers();
+				for (Method method : declaredMethods) {
+					if (!method.isSynthetic()) {
+						JvmOperation operation = createOperation(method);
+						if (clazz.isAnnotation()) {
+							setDefaultValue(operation, method);
+						}
+						members.addUnique(operation);
 					}
-					members.addUnique(operation);
 				}
 			}
+		} catch (NoClassDefFoundError e) {
+			logNoClassDefFoundError(e, clazz, "methods");
 		}
 	}
 

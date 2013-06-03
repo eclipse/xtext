@@ -1,8 +1,6 @@
 package generator
 
 import java.io.File
-
-import static extension generator.Generator.*
 import org.eclipse.xtend.core.XtendStandaloneSetup
 
 class Generator {

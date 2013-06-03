@@ -53,7 +53,10 @@ public class DocumentationBody extends Body {
       EList<TextOrMarkup> _contents = chapter.getContents();
       for(final TextOrMarkup content : _contents) {
         _builder.append("\t\t\t");
-        CharSequence _htmlParagraph = content==null?(CharSequence)null:this._htmlExtensions.toHtmlParagraph(content);
+        CharSequence _htmlParagraph = null;
+        if (content!=null) {
+          _htmlParagraph=this._htmlExtensions.toHtmlParagraph(content);
+        }
         _builder.append(_htmlParagraph, "			");
         _builder.newLineIfNotEmpty();
       }

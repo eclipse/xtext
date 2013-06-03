@@ -1,6 +1,6 @@
 section:xbaseInferredType[Inferring a JVM Model]
 
-In many cases, you will want your DSLs concepts to be usable as Java elements. E.g. an e[Entity] will
+In many cases, you will want your DSLs concepts to be usable as Java elements, e.g. an e[Entity] will
 become a Java class and should be usable as such. In the domain model example, you can write  
 
 code[DomainExample][
@@ -13,7 +13,7 @@ entity Person {
 ...
 ]
 
-i.e. use entities instead of Java types or even mix Java types as codeRef[java.util.List] with entities such as e[Person].
+You can use entities instead of Java types or even mix Java types as codeRef[java.util.List] with entities such as e[Person].
 One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let e[Entity]
 inherit from codeRef[org.eclipse.xtext.common.types.JvmGenericType]. But this would result in a lot of 
 accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how
@@ -26,7 +26,7 @@ codeRef[org.eclipse.xtext.common.types.JvmDeclaredType][JvmDeclaredTypes]. As Xb
 would like to map your concepts to JVM elements, you have to implement this component yourself. This
 usually boils down to using an injected codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder] to create
 a hierarchy of JVM elements. The codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder][builder] helps
-to initialize the produced types with sensible default and encapsulates the logic that associates the
+to initialize the produced types with sensible defaults and encapsulates the logic that associates the
 source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented 
 using polymorphic dispatch functions and extension methods, it is a good choice to write the 
 codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] in Xtend. It becomes even simpler if you

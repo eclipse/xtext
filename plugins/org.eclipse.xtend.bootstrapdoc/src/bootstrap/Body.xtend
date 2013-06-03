@@ -51,7 +51,7 @@ class Body {
 		</section>
 	'''
 	
-	def h3plus(AbstractSection section, int hLevel) '''
+	def CharSequence h3plus(AbstractSection section, int hLevel) '''
 		<!-- subsection -->
 		<section id="«section.hrefId»" style="padding-top: 68px; margin-top: -68px;">
 		<h«hLevel»>«section.title.toHtmlText»</h«hLevel»>

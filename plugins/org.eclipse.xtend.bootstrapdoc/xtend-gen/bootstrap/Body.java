@@ -174,7 +174,7 @@ public class Body {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(section);
       for(final AbstractSection subSection : _sections) {
         int _plus = (hLevel + 1);
-        Object _h3plus = this.h3plus(subSection, _plus);
+        CharSequence _h3plus = this.h3plus(subSection, _plus);
         _builder.append(_h3plus, "");
         _builder.newLineIfNotEmpty();
       }

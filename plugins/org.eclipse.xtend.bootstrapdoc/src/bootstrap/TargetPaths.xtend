@@ -35,13 +35,15 @@ class TargetPaths {
 		document.targetPathAdapter?.targetFileRoots ?: newArrayList(document)
 	}
 
-	def protected traverseChildren(Identifiable element, TargetPathAdapter adapter, String prefix, 
+	def protected void traverseChildren(Identifiable element, TargetPathAdapter adapter, String prefix, 
 		String parentPath, (AbstractSection)=>boolean predicate) {
 		var String thisPath = parentPath
 		if (element instanceof AbstractSection) {
 			val resolved = (element as AbstractSection).resolve
-			if(resolved != element)
-				return traverseChildren(resolved, adapter, prefix, parentPath, predicate)
+			if(resolved != element) {
+				traverseChildren(resolved, adapter, prefix, parentPath, predicate)
+				return
+			}
 			if(predicate.apply(element as AbstractSection)) {
 				thisPath = 
 					if(adapter.targetFileRoots.empty)
@@ -63,8 +65,9 @@ class TargetPaths {
 	}
 }
 
+@Data
 class TargetPathAdapter extends AdapterImpl {
-	public Map<Identifiable, String> targetPaths = newHashMap()
-	public List<AbstractSection> targetFileRoots = newArrayList()
+	val Map<Identifiable, String> targetPaths = newHashMap()
+	val List<AbstractSection> targetFileRoots = newArrayList()
 }
 	

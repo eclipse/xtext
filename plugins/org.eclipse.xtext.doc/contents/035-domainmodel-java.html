@@ -46,7 +46,7 @@ translated to Java source code. The syntax should look very familiar. Here is an
 &nbsp;&nbsp;&nbsp;&nbsp;zip:&nbsp;String<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;city:&nbsp;String<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -107,7 +107,7 @@ Click on <em>Finish</em> to create the projects.
 </p>
 <p>
 <div class="image" >
-<img src="tutorial/images/30min_wizard.png" class=" " 
+<img src="images/30min_wizard.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -146,7 +146,7 @@ The Eclipse editor and all the other workbench related functionality.
 </p>
 <p>
 <div class="image" >
-<img src="tutorial/images/30min_initialprojectlayout.png" class=" " 
+<img src="images/30min_initialprojectlayout.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -171,7 +171,7 @@ Model:<br/>
 &nbsp;&nbsp;greetings+=Greeting*;<br/>
 &nbsp;&nbsp;<br/>
 Greeting:<br/>
-&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;
+&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -217,7 +217,8 @@ Operation:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>(params+=FullJvmFormalParameter&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?<span class="string">&apos;)&apos;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
+&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
+<br/>
 </p>
 </div>
 </div>
@@ -233,7 +234,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
 		</p>
 		</div>
 		</div>
@@ -250,7 +251,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<p class="code">
 		Domainmodel:<br/>
 		&nbsp;&nbsp;importSection=XImportSection?<br/>
-		&nbsp;&nbsp;elements+=AbstractElement*;
+		&nbsp;&nbsp;elements+=AbstractElement*;<br/>
 		</p>
 		</div>
 		</div>
@@ -268,7 +269,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		AbstractElement:<br/>
-		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity;
+		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity;<br/>
 		</p>
 		</div>
 		</div>
@@ -283,7 +284,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		PackageDeclaration:<br/>
 		&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name=QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;elements+=AbstractElement*<br/>
-		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
 		</p>
 		</div>
 		</div>
@@ -296,7 +297,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		    implementation will add the package names as the prefix to contained entities and nested packages.
 		    The qualified name of an <em>Entity</em> &apos;Baz&apos; which is contained in a <em>PackageDeclaration</em> &apos;foo.bar&apos;
 		    will be &apos;foo.bar.Baz&apos;. In case you do not like the default behavior you will need
-		    to use a different implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a>.
+		    to use a different implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a>.
 	</li>
 	<li>
 		
@@ -307,7 +308,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ValidID&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=JvmTypeReference)?&nbsp;<span class="string">&apos;{&apos;</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;features+=Feature*<br/>
-		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
 		</p>
 		</div>
 		</div>
@@ -327,7 +328,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		Feature:<br/>
-		&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation;
+		&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation;<br/>
 		</p>
 		</div>
 		</div>
@@ -341,7 +342,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		Property:<br/>
-		&nbsp;&nbsp;name=ValidID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference;
+		&nbsp;&nbsp;name=ValidID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference;<br/>
 		</p>
 		</div>
 		</div>
@@ -358,7 +359,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>(params+=FullJvmFormalParameter&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?<span class="string">&apos;)&apos;</span><br/>
 		&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-		&nbsp;&nbsp;body=XBlockExpression;
+		&nbsp;&nbsp;body=XBlockExpression;<br/>
 		</p>
 		</div>
 		</div>
@@ -373,7 +374,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<p class="code">
 		{<br/>
 		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"Hello&nbsp;World"</span>&nbsp;+&nbsp;<span class="string">"!"</span><br/>
-		}
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -397,7 +398,7 @@ messages in the Console View.
 </p>
 <p>
 <div class="image" >
-<img src="tutorial/images/JvmTutorial_RunGenerator.png" class=" " 
+<img src="images/JvmTutorial_RunGenerator.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -408,10 +409,10 @@ messages in the Console View.
 <p>
 The syntax alone is not enough to make the language work. We need to map the domain specific concepts to some other language
 in order to tell Xtext how it is executed. Usually you define a code generator or an interpreter for that matter,
-but languages using Xbase can omit this step and make use of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a>.
+but languages using Xbase can omit this step and make use of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a>.
 </p>
 <p>
-The idea is that you translate your language concepts to any number of Java types (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmDeclaredType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType" >JvmDeclaredType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java" title="View Source Code" >(src)</a>). 
+The idea is that you translate your language concepts to any number of Java types (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmDeclaredType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType" >JvmDeclaredType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java" title="View Source Code" >(src)</a>). 
 Such a type can be a Java class, Java interface, Java annotation type or a Java enum and may contain
 any valid members. In the end you as a language developer are responsible to create a correct model
 according to the Java language.
@@ -482,14 +483,14 @@ in the src folder. Please replace its contents with the following :
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
 </p>
 <p>
 Let&apos;s go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the involved API
-for details, especially the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a>).
+for details, especially the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a>).
 </p>
 <p>
 <ol>
@@ -500,14 +501,14 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
 		</p>
 		</div>
 		</div>
 		
 		    Using the dispatch keyword makes sure that the method is called for instances of type <em>Entity</em>
 		    only. Have a look at <a href="http://www.xtend-lang.org/documentation">the Xtend documentation</a> on polymorphic dispatch to 
-		    understand Xtend&apos;s dispatch functions. Extending <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer" >AbstractModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java" title="View Source Code" >(src)</a> makes 
+		    understand Xtend&apos;s dispatch functions. Extending <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer" >AbstractModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java" title="View Source Code" >(src)</a> makes 
 		    sure we don&apos;t have to walk the syntax model on our own.
 	</li>
 	<li>
@@ -516,15 +517,15 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		<div class="incode">
 		<p class="code">
 		acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;&nbsp;<br/>
-		...
+		...<br/>
 		</p>
 		</div>
 		</div>
 		
-		  Every <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmDeclaredType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType" >JvmDeclaredType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java" title="View Source Code" >(src)</a> you create in the model inference needs
+		  Every <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmDeclaredType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType" >JvmDeclaredType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java" title="View Source Code" >(src)</a> you create in the model inference needs
 		  to be passed to the <em>acceptor</em> in order to get recognized.
 		  
-		  The extension method <em>toClass</em> comes from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a>.
+		  The extension method <em>toClass</em> comes from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a>.
 		  That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
 		  
 		  Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
@@ -532,7 +533,14 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 	</li>
 	<li>
 		
-		    <span class="inlinecode">).initializeLater&nbsp;[</span>
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		).initializeLater&nbsp;[<br/>
+		</p>
+		</div>
+		</div>
+		
 		    The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
 		    and be passed to the <em>acceptor</em>.
 		    The types&apos; features are created in the second phase. The actions in this phase are specified in the lambda
@@ -540,12 +548,19 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 	</li>
 	<li>
 		
-		    <span class="inlinecode">documentation&nbsp;=&nbsp;element.documentation</span>
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		documentation&nbsp;=&nbsp;element.documentation<br/>
+		</p>
+		</div>
+		</div>
+		
 		    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
 		    to an invocation of the method 
-		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#setDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmIdentifiableElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmIdentifiableElement" >JvmIdentifiableElement</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java" title="View Source Code" >(src)</a> element,String documentation)</em>
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#setDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmIdentifiableElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmIdentifiableElement" >JvmIdentifiableElement</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java" title="View Source Code" >(src)</a> element,String documentation)</em>
 		    and <span class="inlinecode">element.documentation</span> is in fact calling the extension method  
-		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#getDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> element)</em>
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#getDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> element)</em>
 		    
 		    Xtend&apos;s extension methods are explained in detail on the <a href="http://www.xtend-lang.org/documentation">Xtend website</a>.
 	</li>
@@ -555,7 +570,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">if</span>&nbsp;(element.superType&nbsp;!=&nbsp;null)<br/>
-		&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;entity.superType.cloneWithProxies
+		&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;entity.superType.cloneWithProxies<br/>
 		</p>
 		</div>
 		</div>
@@ -578,7 +593,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
 		</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;}<br/>
-		}
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -597,7 +612,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
-		}
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -617,7 +632,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
 		&nbsp;&nbsp;]<br/>
-		}
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -641,7 +656,7 @@ bar.
 </p>
 <p>
 <div class="image" >
-<img src="tutorial/images/JvmTutorial_LaunchEditor.png" class=" " 
+<img src="images/JvmTutorial_LaunchEditor.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -661,7 +676,7 @@ Have fun!
 </p>
 <p>
 <div class="image" >
-<img src="tutorial/images/JvmTutorial_Editor.png" 
+<img src="images/JvmTutorial_Editor.png" 
 />
 <div class="caption">
 </div>
