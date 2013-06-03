@@ -1888,4 +1888,27 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test def testBug409648() {
+		'''
+			import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+			import org.eclipse.emf.ecore.EObject
+			import org.eclipse.emf.common.util.URI
+			
+			class Foo {
+			  def foo(EObject it) {
+			    URI::createURI("someString")
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.emf.common.util.URI
+			import org.eclipse.emf.ecore.EObject
+			
+			class Foo {
+			  def foo(EObject it) {
+			    URI::createURI("someString")
+			  }
+			}
+		''')
+	}
 }
