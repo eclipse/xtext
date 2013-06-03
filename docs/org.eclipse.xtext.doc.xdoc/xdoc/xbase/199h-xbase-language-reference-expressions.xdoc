@@ -127,6 +127,7 @@ The following defines the operators and the corresponding Java method signatures
 
 table[
   tr[td[code[e1 += e2]]       td[code[e1.operator_add(e2)]]]
+  tr[td[code[e1 -= e2]]       td[code[e1.operator_remove(e2)]]]
   tr[td[]td[]]
   
   tr[td[code[e1 || e2]]       td[code[e1.operator_or(e2)]]]
@@ -137,6 +138,8 @@ table[
   
   tr[td[code[e1 == e2]]       td[code[e1.operator_equals(e2)]]]
   tr[td[code[e1 != e2]]       td[code[e1.operator_notEquals(e2)]]]
+  tr[td[code[e1 === e2]]      td[code[e1.operator_tripleEquals(e2)]]]
+  tr[td[code[e1 !== e2]]      td[code[e1.operator_tripleNotEquals(e2)]]]
   tr[td[]td[]]
 
   tr[td[code[e1 < e2]]        td[code[e1.operator_lessThan(e2)]]]
@@ -147,6 +150,8 @@ table[
   
   tr[td[code[e1 -> e2]]       td[code[e1.operator_mappedTo(e2)]]]
   tr[td[code[e1 .. e2]]       td[code[e1.operator_upTo(e2)]]]
+  tr[td[code[e1 >.. e2]]      td[code[e1.operator_greaterThanDoubleDot(e2)]]]
+  tr[td[code[e1 ..< e2]]      td[code[e1.operator_doubleDotLessThan(e2)]]]
   tr[td[code[e1 => e2]]       td[code[e1.operator_doubleArrow(e2)]]]
   tr[td[code[e1 << e2]]       td[code[e1.operator_doubleLessThan(e2)]]]
   tr[td[code[e1 >> e2]]       td[code[e1.operator_doubleGreaterThan(e2)]]]
@@ -169,6 +174,7 @@ table[
   
   tr[td[code[! e1]]           td[code[e1.operator_not()]]]
   tr[td[code[- e1]]           td[code[e1.operator_minus()]]]
+  tr[td[code[+ e1]]           td[code[e1.operator_plus()]]]
 ]
     
 The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 

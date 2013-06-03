@@ -2,7 +2,7 @@ document[Xtend User Guide]
 
 codelanguage-def[Xtend][
   abstract,continue,def,override,for,new,switch,assert,default,goto,package,synchronized,
-  boolean,do,if,private,this,it,break,double,implements,protected,throw,
+  boolean,do,if,private,this,it,self,break,double,implements,protected,throw,
   byte,else,import,public,throws,
   case,enum,instanceof,return,
   catch,extends,int,short,try,
@@ -11,6 +11,7 @@ codelanguage-def[Xtend][
   float,super,while,create,dispatch,extension,typeof,as,
   val, var,
   true, false, null,
+  annotation, interface,
   IF, ELSE, ELSEIF, ENDIF, FOR, ENDFOR, BEFORE, AFTER, SEPARATOR
 ]
 

@@ -163,7 +163,7 @@ section2:active_annotations_assigning_expressions[Assigning Expressions]
 
 A second alternative is to put expressions from the Xtend source into the context of a generated Java element.
 This allows to directly use the code that was written in the source file. An 
-annotation code[@Lazy] which turns fields into lazily initialized properties, may be used like this: 
+annotation code[Xtend][@Lazy] which turns fields into lazily initialized properties, may be used like this: 
 
 code[Xtend] [
   class MyClass {
@@ -172,7 +172,7 @@ code[Xtend] [
 ]
 
 The processor for this e[active annotation] could infer a synthetic initializer method
-and add a getter-method, which calls the initializer if the field is still code[null]. 
+and add a getter-method, which calls the initializer if the field is still code[Xtend][null]. 
 Therefore, the initialization expression of the field has to become the method body of the synthesized initializer method.
 The following code performs this transformation:
 
@@ -258,7 +258,7 @@ The example project contains a couple of test cases:
 
 code[Xtend][
 class LazyTest {
-  extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(typeof(Lazy))
+  extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(Lazy)
 
   @Test def void testLazy() {
     '''
@@ -320,7 +320,7 @@ code[Xtend][
     interf.declaredMethods.head => \[
       assertEquals('doStuff', simpleName)
       assertEquals(string, returnType)
-      assertEquals(typeof(IllegalArgumentException).newTypeReference, exceptions.head)
+      assertEquals(IllegalArgumentException.newTypeReference, exceptions.head)
     \]
   \]
 }

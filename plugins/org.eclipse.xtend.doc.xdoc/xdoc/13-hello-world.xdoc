@@ -1,6 +1,6 @@
 chapter:GettingStarted[Hello World]
 
-The first thing you want to see in any language is a "Hello World" example. 
+The first thing you want to see in any language is a e[Hello World] example. 
 In Xtend, that reads as
 code[Xtend][
   class HelloWorld {
@@ -12,7 +12,7 @@ code[Xtend][
 
 You see that Xtend looks quite similar to Java. At a first glance the main difference seems to be the code[Xtend][def]
 keyword to declare a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
-Admittedly 'Hello World' programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real things
+Admittedly e[Hello World] programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real things
 as you will learn in a second.
 
 An Xtend class resides in a plain Eclipse Java project. As soon as the SDK is installed, Eclipse will automatically 

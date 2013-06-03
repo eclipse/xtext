@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
-import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

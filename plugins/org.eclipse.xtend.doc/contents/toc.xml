@@ -175,9 +175,9 @@
 		</topic>
 		<topic href="contents/40-annotations.html#activeAnnotations" label="Active Annotations" >
 			<topic href="contents/40-annotations.html#active_annotations_processor" label="Annotation Processor" >
-				<topic href="contents/40-annotations.html#active_annotations_register_globals" label="Phase 1: Register Globals (org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant)" >
+				<topic href="contents/40-annotations.html#active_annotations_register_globals" label="Phase 1: Register Globals" >
 				</topic>
-				<topic href="contents/40-annotations.html#active_annotations_transformation_phase" label="Phase 2: Transformation (org.eclipse.xtend.lib.macro.TransformationParticipant)" >
+				<topic href="contents/40-annotations.html#active_annotations_transformation_phase" label="Phase 2: Transformation" >
 				</topic>
 			</topic>
 			<topic href="contents/40-annotations.html#active_annotations_expression" label="On Expressions and Statements" >

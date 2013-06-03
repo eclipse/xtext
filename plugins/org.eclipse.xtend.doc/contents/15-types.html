@@ -46,7 +46,7 @@ write the following:
 <span class="keyword">def</span>&nbsp;toList(String[]&nbsp;array)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">val</span>&nbsp;List&lt;String&gt;&nbsp;asList&nbsp;=&nbsp;array<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;asList<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -61,8 +61,8 @@ converted to arrays on demand.
 </p>
 <p>
 Another very useful conversion applies to lambda expressions. A lambda expression
-usually is of one of the types declared in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
-or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However, if the expected type is an interface or a class with a single 
+usually is of one of the types declared in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
+or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However, if the expected type is an interface or a class with a single 
 abstract method declaration, a lambda expression is automatically converted to that
 type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.html#closureTypes" title="Go to &quot;Typing&quot;" >section closureTypes</a>
 for more details. 

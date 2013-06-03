@@ -1154,6 +1154,14 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
+<span class="inlinecode">e1&nbsp;-=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_remove(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
 </td>
 <td>
 </td>
@@ -1200,6 +1208,22 @@ The following defines the operators and the corresponding Java method signatures
 </td>
 <td>
 <span class="inlinecode">e1.operator_notEquals(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;===&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_tripleEquals(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;!==&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_tripleNotEquals(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1260,6 +1284,22 @@ The following defines the operators and the corresponding Java method signatures
 </td>
 <td>
 <span class="inlinecode">e1.operator_upTo(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&gt;..&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_greaterThanDoubleDot(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;..&lt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_doubleDotLessThan(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1406,6 +1446,14 @@ The following defines the operators and the corresponding Java method signatures
 </td>
 <td>
 <span class="inlinecode">e1.operator_minus()</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">+&nbsp;e1</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_plus()</span>
 </td>
 </tr>
 </table>

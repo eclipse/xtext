@@ -204,7 +204,7 @@ public class ReleaseNotes24 extends AbstractXtendWebsite {
     _builder.append("-DarchetypeArtifactId=xtend-android-archetype \\");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("-DarchetypeCatalog=http://build.eclipse.org/common/xtend/maven/");
+    _builder.append("-DarchetypeCatalog=http://repo.maven.apache.org/maven2");
     _builder.newLine();
     _builder.append("</pre>");
     _builder.newLine();

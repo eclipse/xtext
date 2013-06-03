@@ -530,7 +530,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("The <a href=\"#library\">runtime library</a> as well as a plug-in to run the compiler in a Maven build can be be obtained from");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t");
-    _builder.append("the following Maven repository: <a href=\"http://build.eclipse.org/common/xtend/maven/\">http://build.eclipse.org/common/xtend/maven/</a>.");
+    _builder.append("the Maven Central Repository: <a href=\"http://repo.maven.apache.org/maven2\">http://repo.maven.apache.org/maven2</a>.");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t");
     _builder.append("</p>");
@@ -556,7 +556,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("&lt;id&gt;xtend&lt;/id&gt;");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("&lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;");
+    _builder.append("&lt;url&gt;http://repo.maven.apache.org/maven2&lt;/url&gt;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("&lt;/repository&gt;");
@@ -572,7 +572,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("&lt;id&gt;xtend&lt;/id&gt;");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("&lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;");
+    _builder.append("&lt;url&gt;http://repo.maven.apache.org/maven2&lt;/url&gt;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("&lt;/pluginRepository&gt;");
@@ -612,7 +612,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("&lt;version&gt;2.4.0&lt;/version&gt;");
+    _builder.append("&lt;version&gt;2.4.2&lt;/version&gt;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("&lt;executions&gt;");
@@ -707,7 +707,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t");
-    _builder.append("The <a href=\"api/2.4.0/index.html\">runtime library</a> is contained in the same Maven repository as the plug-in : <a href=\"http://build.eclipse.org/common/xtend/maven/\">http://build.eclipse.org/common/xtend/maven/</a>.");
+    _builder.append("The <a href=\"api/2.4.0/index.html\">runtime library</a> is available from Maven Central, too: <a href=\"http://repo.maven.apache.org/maven2\">http://repo.maven.apache.org/maven2</a>.");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t");
     _builder.append("</p>");
@@ -736,7 +736,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("&lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("&lt;version&gt;2.4.0&lt;/version&gt;");
+    _builder.append("&lt;version&gt;2.4.2&lt;/version&gt;");
     _builder.newLine();
     _builder.append("&lt;/dependency&gt;</pre>");
     _builder.newLine();

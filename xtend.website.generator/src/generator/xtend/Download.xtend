@@ -182,7 +182,7 @@ class Download extends AbstractXtendWebsite {
 							<h2 style="padding-top: 15px;">Maven Plug-In</h2>
 							<p>
 								The <a href="#library">runtime library</a> as well as a plug-in to run the compiler in a Maven build can be be obtained from
-								the following Maven repository: <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.
+								the Maven Central Repository: <a href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a>.
 							</p>
 							<p>
 								Here is the XML for the repository:
@@ -191,13 +191,13 @@ class Download extends AbstractXtendWebsite {
 &lt;repositories&gt;
   &lt;repository&gt;
     &lt;id&gt;xtend&lt;/id&gt;
-    &lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;
+    &lt;url&gt;http://repo.maven.apache.org/maven2&lt;/url&gt;
   &lt;/repository&gt;
 &lt;/repositories&gt;
 &lt;pluginRepositories&gt;
   &lt;pluginRepository&gt;
     &lt;id&gt;xtend&lt;/id&gt;
-    &lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;
+    &lt;url&gt;http://repo.maven.apache.org/maven2&lt;/url&gt;
   &lt;/pluginRepository&gt;
 &lt;/pluginRepositories&gt;</pre>
 								<p>
@@ -211,7 +211,7 @@ class Download extends AbstractXtendWebsite {
 &lt;plugin&gt;
   &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
   &lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;
-  &lt;version&gt;2.4.0&lt;/version&gt;
+  &lt;version&gt;2.4.2&lt;/version&gt;
   &lt;executions&gt;
     &lt;execution&gt;
       &lt;goals&gt;
@@ -243,7 +243,7 @@ class Download extends AbstractXtendWebsite {
 							<section>
 							<h2 style="padding-top: 15px;">Getting the runtime library via Maven</h2>
 							<p>
-								The <a href="api/2.4.0/index.html">runtime library</a> is contained in the same Maven repository as the plug-in : <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.
+								The <a href="api/2.4.0/index.html">runtime library</a> is available from Maven Central, too: <a href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a>.
 							</p>
 							The XML for the dependency is :
 							</p>
@@ -253,7 +253,7 @@ class Download extends AbstractXtendWebsite {
 &lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
   &lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;
-  &lt;version&gt;2.4.0&lt;/version&gt;
+  &lt;version&gt;2.4.2&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 								<p>
 							</p>

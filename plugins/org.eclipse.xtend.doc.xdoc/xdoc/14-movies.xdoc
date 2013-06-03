@@ -57,9 +57,9 @@ class Movies {
     val segments = line.split('  ').iterator
     return new Movie(
       segments.next, 
-      Integer::parseInt(segments.next), 
-      Double::parseDouble(segments.next), 
-      Long::parseLong(segments.next), 
+      Integer.parseInt(segments.next), 
+      Double.parseDouble(segments.next), 
+      Long.parseLong(segments.next), 
       segments.toSet
     )
   \]
@@ -106,9 +106,9 @@ is invoked on the iterator to consume its remaining values.
 code[Xtend][
 return new Movie (
   segments.next, 
-  Integer::parseInt(segments.next), 
-  Double::parseDouble(segments.next), 
-  Long::parseLong(segments.next), 
+  Integer.parseInt(segments.next), 
+  Double.parseDouble(segments.next), 
+  Long.parseLong(segments.next), 
   segments.toSet
 )
 ]

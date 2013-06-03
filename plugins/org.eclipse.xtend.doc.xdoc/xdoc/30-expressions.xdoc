@@ -21,7 +21,8 @@ or a ref:templates[template expression].
 section:Xtend_Expressions_Literals[Literals]
 
 A literal denotes a fixed unchangeable value. Literals for ref:stringLiterals[strings], ref:numberLiterals[numbers], ref:booleanLiteral[booleans],
-code[Xtend][null] and ref:typeLiteral[Java types] are supported.
+code[Xtend][null] and ref:typeLiteral[Java types] are supported as well as literals for unmodifiable collection types like lists,
+sets and maps or literals for arrays.
 
 section2:stringLiterals[String Literals]
 
@@ -45,7 +46,7 @@ code[Xtend][
 
 section2:characterLiterals[Character Literals]
 
-Character literals use the same notation as String literals. If a single character literal is used in a context where a primitive code[char] or
+Character literals use the same notation as String literals. If a single character literal is used in a context where a primitive code[Xtend][char] or
 the wrapper type codeRef[java.lang.Character] is expected, the compiler will treat the literal as such a value or instance.
 
 code[Xtend][
@@ -99,11 +100,27 @@ The null pointer literal code[Xtend][null] has exactly the same semantics as in 
 
 section2:typeLiteral[Type Literals]
 
-Type literals are specified using the keyword code[Xtend][typeof] :
-code[Xtend][
-  typeof(java.lang.String) // yields java.lang.String.class
-  typeof(int\[\]) // yields int\[\].class
+The syntax for type literals is generally the plain name of the type, e.g. the snippet code[Xtend][String]
+is equivalent to the Java code code[Java][String.class]. Nested types use the delimiter code['.'].
+
+To disambiguate the expression, type literals may also be specified using the keyword code[Xtend][typeof].
+
+ul[
+  item[code[Xtend][Map.Entry] is equivalent to code[Java][Map.Entry.class]]
+  item[code[Xtend][typeof(StringBuilder)] yields code[Java][StringBuilder.class]]
 ]
+
+Consequently it is possible to access the members of a type reflectively by using its plain name code[Xtend][String.getDeclaredFields].
+
+The keyword code[Xtend][typeof] is mandatory for references to array types, e.g. code[Xtend][typeof(int\[\]]
+
+Older versions of Xtend (2.4.1 and before) used the dollar as the delimiter character for nested types and
+enforced the use of code[Xtend][typeof] for all type literals:
+
+ul[
+  item[code[Xtend][typeof(Map$Entry)] yields code[Java][Map.Entry.class]]
+]
+
 
 section2:collectionLiterals[Collection Literals]
 
@@ -154,12 +171,12 @@ code[Xtend][
   val int\[\] intArray = newIntArrayOfSize(400)
 ]
 
-Retrieving and setting values of arrays is done through the extension methods code[get(int)] and 
-code[set(int, T)] which are specifically overloaded for arrays and are translated directly to the
-equivalent native Java code code[myArray\[int\]].
+Retrieving and setting values of arrays is done through the extension methods code[Xtend][get(int)] and 
+code[Xtend][set(int, T)] which are specifically overloaded for arrays and are translated directly to the
+equivalent native Java code code[Xtend][myArray\[int\]].
 
-Also code[length] is available as an extension method and is directly translated to Java's equivalent
-code[myArray.length].
+Also code[Xtend][length] is available as an extension method and is directly translated to Java's equivalent
+code[Java][myArray.length].
 
 Furthermore arrays are automatically converted to lists (code[java.util.List]) when needed. This works similar to how boxing and unboxing between
 primitives and their respective wrapper types work.
@@ -217,8 +234,8 @@ table[
   
   tr[td[code[e1 == e2]]       td[code[e1.operator_equals(e2)]]]
   tr[td[code[e1 != e2]]       td[code[e1.operator_notEquals(e2)]]]
-  tr[td[code[e1 === e2]]       td[code[e1.operator_tripleEquals(e2)]]]
-  tr[td[code[e1 !== e2]]       td[code[e1.operator_tripleNotEquals(e2)]]]
+  tr[td[code[e1 === e2]]      td[code[e1.operator_tripleEquals(e2)]]]
+  tr[td[code[e1 !== e2]]      td[code[e1.operator_tripleNotEquals(e2)]]]
   tr[td[]td[]]
 
   tr[td[code[e1 < e2]]        td[code[e1.operator_lessThan(e2)]]]
@@ -229,8 +246,8 @@ table[
   
   tr[td[code[e1 -> e2]]       td[code[e1.operator_mappedTo(e2)]]]
   tr[td[code[e1 .. e2]]       td[code[e1.operator_upTo(e2)]]]
-  tr[td[code[e1 >.. e2]]       td[code[e1.operator_greaterThanDoubleDot(e2)]]]
-  tr[td[code[e1 ..< e2]]       td[code[e1.operator_doubleDotLessThan(e2)]]]
+  tr[td[code[e1 >.. e2]]      td[code[e1.operator_greaterThanDoubleDot(e2)]]]
+  tr[td[code[e1 ..< e2]]      td[code[e1.operator_doubleDotLessThan(e2)]]]
   tr[td[code[e1 => e2]]       td[code[e1.operator_doubleArrow(e2)]]]
   tr[td[code[e1 << e2]]       td[code[e1.operator_doubleLessThan(e2)]]]
   tr[td[code[e1 >> e2]]       td[code[e1.operator_doubleGreaterThan(e2)]]]
@@ -599,6 +616,8 @@ code[Xtend][
   myRef?.doStuff
 ]
 
+Arguments that would be passed to the method are only evaluated if the method will be invoked at all. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:constructorCall[Constructor Call]
@@ -677,7 +696,7 @@ When a method call's last parameter is a lambda it can be passed right after the
 For instance if you want to sort some strings by their length, you could write :
 
 code[Xtend][
-  Collections::sort(someStrings) \[ a, b |
+  Collections.sort(someStrings) \[ a, b |
     a.length - b.length
   \]
 ]
@@ -685,7 +704,7 @@ code[Xtend][
 which is just the same as writing
 
 code[Xtend][
-  Collections::sort(someStrings, \[ a, b |
+  Collections.sort(someStrings, \[ a, b |
     a.length - b.length
   \])
 ]
@@ -703,8 +722,8 @@ A lambda expression also captures the current scope. Any final local variables a
 from within the lambda body. 
 That is exactly what we did with the variable code[textField] above.
 
-The variable code[this] refers to the outer class. The lambda instance itself is available with the identifier
-code[self].
+The variable code[Xtend][this] refers to the outer class. The lambda instance itself is available with the identifier
+code[Xtend][self].
 
 code[Xtend][
 	val lineReader = new LineReader(r);
@@ -730,7 +749,7 @@ code[Xtend][
   val toUpperCaseFunction = \[ String s | s.toUpperCase \] // inferred type is (String)=>String
 ]
 
-The type will be one of the types found in codeRef[org.eclipse.xtext.xbase.lib.Functions] or codeRef[org.eclipse.xtext.xbase.lib.Procedures].
+The type will be one of the inner types found in codeRef[org.eclipse.xtext.xbase.lib.Functions] or codeRef[org.eclipse.xtext.xbase.lib.Procedures].
 It is a procedure if the return type is code[Xtend][void], otherwise it is a function.
 
 Xtend supports a shorthand syntax for function types. Instead of writing code[Xtend][Function1<? super String,? extends String>]
@@ -753,7 +772,7 @@ Of course you can always ref:Xtend_Expressions_TryCatch[catch and handle] them.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:ifExpression[If Expression]
 
-An if expression is used to choose between two different values based on a predicate.
+An if-expression is used to choose between two different values based on a predicate.
 
 An expression 
 code[Xtend][
@@ -795,7 +814,7 @@ Given the following example:
  
 code[Xtend][
   switch myString {
-    case myString.length>5 : "a long string."
+    case myString.length > 5 : "a long string."
     case 'some' : "It's some string."
     default : "It's another short string."
   }

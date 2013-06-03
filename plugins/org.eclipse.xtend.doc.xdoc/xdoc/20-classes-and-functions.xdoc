@@ -65,8 +65,8 @@ ref:extensionMethods[extension methods] for details.
 section:Xtend_ClassDeclaration[Class Declaration]
 
 The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects:
-All Xtend types are code[public] by default since that's the common case. Java's "package private" 
-default visibility is declared by the more explicit keyword code[package] in Xtend. In contrast to Java,
+All Xtend types are code[Xtend][public] by default since that's the common case. Java's "package private" 
+default visibility is declared by the more explicit keyword code[Xtend][package] in Xtend. In contrast to Java,
 Xtend supports multiple public top level class declarations per file. Each Xtend class
 is compiled to a separate top-level Java class.
 
@@ -127,7 +127,7 @@ section:fields[Fields]
 A field can have an initializer. Final fields are declared using code[Xtend][val], while 
 code[Xtend][var] introduces a non-final field and can be omitted. Yet, if an initializer expression
 is present, the type of a field can be inferred if code[Xtend][val] or code[Xtend][var] was
-used to introduce the field. The keyword code[final] is synonym to code[val].
+used to introduce the field. The keyword code[Xtend][final] is synonym to code[Xtend][val].
 Fields marked as code[Xtend][static] will be compiled to static Java fields.  
 
 code[Xtend][
@@ -159,7 +159,7 @@ code[Xtend][
   }
 ]
 
-Method declarations start with the keyword code[def].
+Method declarations start with the keyword code[Xtend][def].
 The default visibility of a plain method is code[Xtend][public]. You can explicitly declare it as
 being code[Xtend][public], code[Xtend][protected], code[Xtend][package] or code[Xtend][private].
 
@@ -577,7 +577,7 @@ code[Java][
 And if you have obtained an instance of that type (through a factory or dependency injection or what ever) like this:
 code[Xtend][
   class MyServlet {
-    extension EntityPersistence ep = Factory.get(typeof(EntityPersistence))
+    extension EntityPersistence ep = Factory.get(EntityPersistence)
     ...
     
   }
