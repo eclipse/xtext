@@ -126,7 +126,7 @@
    </extension>
    
    <!-- ========= org.eclipse.xtext.example.tutorial ========= -->
-	<extension point="org.eclipse.ui.newWizards">
+<!--	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewTutorialExampleWizard" 
 			name="%XtextTutorial_name" 
 			class="org.eclipse.xtext.xtext.ui.examples.ExternalEditorAwareExampleInstallerWizard" 
@@ -154,5 +154,5 @@
 		 <projectDescriptor name="org.eclipse.xtext.example.tutorial.tests" contentURI="contents/org.eclipse.xtext.example.tutorial.tests.zip" description="A test suite and some utilities to test drive the APIs."/>
 		 <projectDescriptor name="org.eclipse.xtext.example.tutorial.ui" contentURI="contents/org.eclipse.xtext.example.tutorial.ui.zip" description="A smart editor for the language."/>
 	  </example>
-	</extension>  
+	</extension> -->  
 </plugin>
