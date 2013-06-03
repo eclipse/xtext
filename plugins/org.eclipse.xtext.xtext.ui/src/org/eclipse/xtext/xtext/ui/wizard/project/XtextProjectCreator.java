@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.AbstractProjectCreator;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -131,6 +132,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.setProjectName(getXtextProjectInfo().getUiProjectName());
 		factory.addProjectNatures(getDslUiProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
+		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
 		factory.setLocation(getXtextProjectInfo().getUiProjectLocation());
 	}
 
@@ -161,6 +163,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.addProjectNatures(getDslProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
 		factory.setLocation(getXtextProjectInfo().getDslProjectLocation());
+		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
 		factory.addContributor(createDslProjectContributor());
 	}
 
@@ -247,6 +250,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.addProjectNatures(getTestProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
 		factory.addImportedPackages(getTestProjectImportedPackages());
+		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
 		factory.setLocation(getXtextProjectInfo().getTestProjectLocation());
 	}
 
