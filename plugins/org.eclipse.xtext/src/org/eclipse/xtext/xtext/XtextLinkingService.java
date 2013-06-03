@@ -51,6 +51,7 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -123,7 +124,13 @@ public class XtextLinkingService extends DefaultLinkingService {
 				}
 				URI classpathURI = URI.createURI(
 						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + "." + fileExtension);
-				URI normalizedURI = resourceSet.getURIConverter().normalize(classpathURI);
+				URI normalizedURI = null;
+				if (resourceSet instanceof XtextResourceSet) {
+					XtextResourceSet set = (XtextResourceSet) resourceSet;
+					normalizedURI = set.getClasspathUriResolver().resolve(set.getClasspathURIContext(), classpathURI);
+				} else {
+					normalizedURI = resourceSet.getURIConverter().normalize(classpathURI);
+				}
 				final Resource resource = resourceSet.getResource(normalizedURI, true);
 				if (!resource.getContents().isEmpty()) {
 					final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
