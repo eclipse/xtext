@@ -139,7 +139,7 @@ class QuickfixTestBuilder {
 	}
 	
 	def protected openEditorSafely(IFile file) throws Exception {
-		waitForAutoBuild(new NullProgressMonitor)
+		waitForBuild(new NullProgressMonitor)
 		yieldToQueuedDisplayJobs(null)
 		var editor = openEditor(file)
 		waitForReconciler(editor)
