@@ -58,7 +58,11 @@ public class CodeRefs {
             public Boolean apply(final String it) {
               boolean _xblockexpression = false;
               {
-                final String identifier = element==null?(String)null:element.getIdentifier();
+                String _identifier = null;
+                if (element!=null) {
+                  _identifier=element.getIdentifier();
+                }
+                final String identifier = _identifier;
                 boolean _and = false;
                 boolean _notEquals = (!Objects.equal(identifier, null));
                 if (!_notEquals) {
