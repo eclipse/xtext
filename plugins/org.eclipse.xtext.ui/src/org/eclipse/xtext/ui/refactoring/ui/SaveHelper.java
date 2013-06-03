@@ -8,6 +8,10 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ui.IEditorPart;
@@ -33,6 +37,9 @@ public class SaveHelper {
 	@Inject(optional = true)
 	private IWorkbench workbench;
 	
+	@Inject(optional = true)
+	private IWorkspace workspace;
+	
 	@Inject  
 	private SyncUtil syncUtil;
 
@@ -40,12 +47,15 @@ public class SaveHelper {
 		new DisplayRunnable() {
 			@Override
 			protected void run() throws Exception {
-				IWorkbenchPage workbenchPage = getWorkbenchPage(context);
-				if (prefs.isSaveAllBeforeRefactoring()) 
-					workbenchPage.saveAllEditors(false);
-				else
-					saveDeclaringEditor(context, workbenchPage);
-				
+				workspace.run(new IWorkspaceRunnable() {
+					public void run(IProgressMonitor monitor) throws CoreException {
+						IWorkbenchPage workbenchPage = getWorkbenchPage(context);
+						if (prefs.isSaveAllBeforeRefactoring()) 
+							workbenchPage.saveAllEditors(false);
+						else
+							saveDeclaringEditor(context, workbenchPage);
+					}
+				}, new NullProgressMonitor());
 			}
 		}.syncExec();
 		syncUtil.waitForBuild(null);
@@ -72,5 +82,5 @@ public class SaveHelper {
 		return null;
 	}
 	
-
+	
 }
