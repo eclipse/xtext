@@ -46,36 +46,41 @@ The syntax is the same as the one known from Java (see link[http://docs.oracle.c
 
 section3:Xbase_Syntax_Whitespace[White Space]
 
-The white space characters code[' '], code['\t'], code['\n'], and code['\r] are allowed to occur anywhere between the other syntactic elements. 
+The white space characters code[' '], code['\t'], code['\n'], and code['\r'] are allowed to occur anywhere between the other syntactic elements. 
 
 section3:Xbase_Syntax_Keywords[Reserved Keywords]
 
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 ol[
-  item[code[Xbase][as]]
-    item[code[Xbase][case]]
-    item[code[Xbase][catch]]
-    item[code[Xbase][default]]
-    item[code[Xbase][do]]
-    item[code[Xbase][else]]
-    item[code[Xbase][extends]]
-    item[code[Xbase][false]]
-    item[code[Xbase][finally]]
-    item[code[Xbase][for]]
-    item[code[Xbase][if]]
-    item[code[Xbase][instanceof]]
-    item[code[Xbase][new]]
-    item[code[Xbase][null]]
-    item[code[Xbase][return]]
-    item[code[Xbase][super]]
-    item[code[Xbase][switch]]
-    item[code[Xbase][throw]]
-    item[code[Xbase][true]]
-    item[code[Xbase][try]]
-    item[code[Xbase][typeof]]
-    item[code[Xbase][val]]
-    item[code[Xbase][var]]
-    item[code[Xbase][while]]
+	item[code[Xbase][as]]
+	item[code[Xbase][case]]
+	item[code[Xbase][catch]]
+	item[code[Xbase][default]]
+	item[code[Xbase][do]]
+	item[code[Xbase][else]]
+	item[code[Xbase][extends]]
+	item[code[Xbase][extension]]
+	item[code[Xbase][false]]
+	item[code[Xbase][finally]]
+	item[code[Xbase][for]]
+	item[code[Xbase][if]]
+	item[code[Xbase][import]]
+	item[code[Xbase][instanceof]]
+	item[code[Xbase][new]]
+	item[code[Xbase][null]]
+	item[code[Xbase][return]]
+	item[code[Xbase][static]]
+	item[code[Xbase][super]]
+	item[code[Xbase][switch]]
+	item[code[Xbase][throw]]
+	item[code[Xbase][true]]
+	item[code[Xbase][try]]
+	item[code[Xbase][typeof]]
+	item[code[Xbase][val]]
+	item[code[Xbase][var]]
+	item[code[Xbase][while]]
 ]
 
-In case some of the keywords have to be used as identifiers, the escape character for ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 
+The four keywords code[Xbase][extends, static, import, extension] can be used when invoking operations.
+In case some of the other keywords have to be used as identifiers, the escape character for 
+ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 

@@ -2,17 +2,18 @@ section2:xbaseLanguageRef_Expressions[Expressions]
 
 Expressions are the main language constructs which are used to express behavior and compute values. The concept of 
 statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
-be helpful. An expression always results in a value (it might be the value code[Xbase][null] though). In addition, every resolved expressions is
+be helpful. An expression always results in a value (it might be the value code[Xbase][null] though). In addition, every resolved expression is
 of a static type.
 
 section3:Xbase_Expressions_Literals[Literals]
 
 A literal denotes a fixed unchangeable value. Literals for strings, numbers, booleans,
-code[Xbase][null] and Java types are supported.
+code[Xbase][null] and Java types are supported. Additionally, there exists a literal syntax for
+collections and arrays.
 
 section4:Xbase_Expressions_StringLiteral[String Literals]
 
-String literals can either use code[Xbase]['single quotes'] or code[Xbase]["double quotes"] as their terminals. When using
+String literals can either use code[Xbase]['single quotes'] or code[Xbase]["double quotes"] as their terminating characters. When using
 double quotes all literals allowed by Java string literals are supported. In addition new line 
 characters are allowed, i.e. in Xbase string literals can span multiple lines. When using single 
 quotes the only difference is that single quotes within the literal have to be escaped and double quotes 
@@ -21,7 +22,7 @@ do not.
 See link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.5][§ 3.10.5 String Literals]
 
 In contrast to Java, equal string literals within the same class do not necessarily refer to the same
-instance at runtime.
+instance at runtime, especially in the interpreted mode.
 
 section4[Examples]
 
@@ -85,15 +86,27 @@ ul[
 
 section4:Xbase_Expressions_TypeLiteral[Type Literals]
 
-Type literals are specified using the keyword code[Xbase][typeof] :
+The syntax for type literals is generally the plain name of the type, e.g. the Xbase snippet code[Xbase][String]
+is equivalent to the Java code code[Java][String.class]. Nested types use the delimiter code['.'].
+
+To disambiguate the expression, type literals may also be specified using the keyword code[Xbase][typeof].
 
 ul[
-  item[code[Xbase][typeof(String)] which yields code[Java][String.class]]
+  item[code[Xbase][Map.Entry] is equivalent to code[Java][Map.Entry.class]]
+  item[code[Xbase][typeof(StringBuilder)] yields code[Java][StringBuilder.class]]
+]
+
+Consequently it is possible to access the members of a type reflectively by using its plain name code[Xbase][String.getDeclaredFields].
+
+Older versions of Xbase used the dollar as the delimiter character for nested types:
+
+ul[
+  item[code[Xbase][typeof(Map$Entry)] yields code[Java][Map.Entry.class]]
 ]
 
 section3:Xbase_Expressions_TypeCasts[Type Casts]
 
-Type cast behave the same as in Java, but have a slightly more readable syntax.
+Type cast behave the same as in Java, but have a more readable syntax.
 Type casts bind stronger than any other operator but weaker than feature calls.
 
 The conformance rules for casts are defined in the link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.5][Java Language Specification].
@@ -203,8 +216,6 @@ code[Xbase][
   person.lastName = 'Coltrane'
 ]
 
-
-
 section3:Xbase_Expressions_PropertyAssignment[Assignments]
 
 ref:Xbase_Expressions_VariableDeclaration[Local variables] can be reassigned using the code[=] operator. Also properties can be set using 
@@ -275,11 +286,18 @@ code[Xbase][
 
 section4:Xbase_Expressions_staticFeatureCalls[Static Feature Calls]
 
-To access static members of a type, use code[::], e.g.
+Static feature calls use the same notation as in Java, e.g. it is possible write code[Xbase][Collections.emptyList()]
+in Xbase. To make the static invocation more explicit, the double colon can be used as the delimiter.
+The following snippet is fully equivalent to the previous example:
 
 code[Xbase][
-   java::util::Collections::singleton("Lonesome Cowboy")
-   System::err.println("An error occurred")
+   java.util.Collections::emptyList
+]
+
+Prior to Xbase 2.4.2, this more verbose variant was the only supported syntax to invoke static methods:
+
+code[Xbase][
+   java::util::Collections::emptyList
 ]
 
 section3:Xbase_Expressions_ImplicitThis[Implicit variables 'this' and 'it']
@@ -301,7 +319,6 @@ As code[Xbase][this] is bound to the surrounding object in Java, code[Xbase][it]
 in finer-grained constructs such as function parameters. That is why code[Xbase][it.myProperty] has 
 higher precedence than code[Xbase][this.myProperty]. code[Xbase][it] is also the 
 ref:Xbase_Expressions_implicit_parameter[default parameter name in lambda expressions]. 
-
 
 
 section3:Xbase_Expressions_ConstructorCall[Constructor Call]
@@ -444,6 +461,16 @@ ul[
   item[code[Xbase][\[ a, b, c | a+b+c \] // inferred argument types]]
 ]
 
+section4:Xbase_lambda_self[Refering the current function]
+
+If a lambda expressions implements an abstract SAM type that offers additional methods, those can be
+accessed on the receiver code[Xbase][self]:
+code[Xbase][
+val AbstractIterator<String> emptyIterator = \[
+	return self.endOfData
+\] 
+]
+
 section3:Xbase_Expressions_IfExpression[If Expression]
 
 An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves  
@@ -497,7 +524,8 @@ the main expression code[e] is evaluated first and then each case sequentially. 
 contains a variable declaration using the syntax known from ref:Xbase_Expressions_ForLoop[for loops], the value is bound to the given name.
 Expressions of type codeRef[java.lang.Boolean] or code[Xbase][boolean] are not allowed in a switch expression.
 
-The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[Xbase][true].
+The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard
+expression evaluates to code[Xbase][true].
 Then the right hand expression of the case evaluated and the result is returned.
 
 If none of the guards matches the default expression is evaluated and returned. If no default expression
@@ -527,9 +555,11 @@ switch x {
 }
 ]
 
-Only if the switch value passes a type guard, i.e. an instanceof operation returns code[Xbase][true], the case's guard expression is executed using the same semantics as explained above. 
+Only if the switch value passes a type guard, i.e. an instanceof operation returns code[Xbase][true], the case's guard expression is executed
+using the same semantics as explained above. 
 If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
-the type guard works like an automated cast. All subsequent references to the switch value will be of the type specified in the type guard.
+the type guard works like an automated cast. All subsequent references to the switch value will be of the type specified in the type guard,
+unless it is reassigned to a new value.
 
 section4[Typing]
 
@@ -553,10 +583,10 @@ ul[
   ]
   item[
     code[Xbase][
-      switch x : foo.bar.complicated('hello',42) {
+      switch x : foo.bar.complicated('hello', 42) {
         case "hello42" : ...
         case x.length<2 : ...
-        default : ....
+        default : ...
       }
     ]
   ]

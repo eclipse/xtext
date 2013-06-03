@@ -20,7 +20,7 @@ import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 
 Now identify the location in your grammar where you want references to Java types and Xbase expressions to appear
 and call the appropriate rules of the super grammar. Adding Xbase expression to the domainmodel example leads to the
-additional concept e[Operation].: An e[Operation]'s 
+additional concept e[Operation]: An e[Operation]'s 
 parameters are e[FullJvmFormalParameters]. The production rule for e[FullJvmFormalParameters] expects
 both the name and the type here. That is reasonable since the type of parameters should not be inferred. 
 The operation's return type is a e[JvmTypeReference] and its e[body] is
@@ -46,7 +46,7 @@ Feature:
  
 Property:
   name = ID ':' type = JvmTypeReference
-; 
+;
 ]
 
 Note: You will have to adapt the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] to these

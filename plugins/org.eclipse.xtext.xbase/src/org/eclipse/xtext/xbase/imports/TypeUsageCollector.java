@@ -27,7 +27,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
@@ -46,7 +45,6 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
@@ -73,7 +71,8 @@ public class TypeUsageCollector {
 	private ImplicitlyImportedTypes implicitImports;
 	
 	@Inject
-	private SuperTypeCollector superTypeCollector;
+	@SuppressWarnings("deprecation")
+	private org.eclipse.xtext.common.types.util.SuperTypeCollector superTypeCollector;
 	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
@@ -434,6 +433,7 @@ public class TypeUsageCollector {
 		typeUsages.addExtensionImport(declarator);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected boolean needsStaticImport(JvmDeclaredType declarator) {
 		if(currentThisType == declarator)
 			return false;

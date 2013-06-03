@@ -600,7 +600,7 @@ public class Application {
 						<p>
 							The grammar for our DSL is rather simple. We inherit from <code class="prettyprint lang-xtend">org.eclipse.xtext.xbase.Xbase</code> to get the
 							syntax of the expressions. As we want to refer to the type 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a>, we have to import Xbase's Ecore model. The single type 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a>, we have to import Xbase's Ecore model. The single type 
 							inferred from this grammar goes into the Ecore model <code class="prettyprint lang-xtend">simpleExpressions</code>.
 						</p>
 						<p>
@@ -628,7 +628,7 @@ Script returns XBlockExpression:
 						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this
-							is defined by the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">(src)</a>. The language
+							is defined by the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">(src)</a>. The language
 							generator automatically generates an Xtend stub for it. Nevertheless, it is up to the language developer to 
 							implement the <code class="prettyprint lang-xtend">infer()</code> method.
 						</p>
@@ -787,7 +787,7 @@ Task:
 							an <strong>XImportSection</strong> as in this example. The imports are followed by the <strong>Declarations</strong>.
 							A <strong>Declaration</strong> can be a <strong>Task</strong> or a <strong>Parameter</strong>. A <strong>Parameter</strong> can declare a type and an initialization
 							expression. <strong>Tasks</strong> define dependencies on other tasks by means of an Xtext cross-reference. They also
-							contain an action, which is a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a> from Xbase, thus everthing 
+							contain an action, which is a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a> from Xbase, thus everthing 
 							is possible within a task.
 						</p>
 						</section>
@@ -796,7 +796,7 @@ Task:
 						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							For each <strong>BuildFile</strong> we create a Java class that extends the library class 
-							<abbr title="org.xtext.builddsl.lib.BuildScript">BuildScript</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend">(src)</a>. We generate a main method allowing to execute the script as
+							<abbr title="org.xtext.builddsl.lib.BuildScript">BuildScript</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.java">(src)</a>. We generate a main method allowing to execute the script as
 							a Java application with command line parameters. The use of <code class="prettyprint lang-java">System.exit</code> allows to return error codes
 							to the caller.
 						</p>
@@ -866,7 +866,7 @@ class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
 							<p>
 						</p>
 						<p>
-							Each <strong>Task</strong> becomes a method in the Java class. A <abbr title="org.xtext.builddsl.lib.DependsOn">@DependsOn</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.xtend">(src)</a> annotation
+							Each <strong>Task</strong> becomes a method in the Java class. A <abbr title="org.xtext.builddsl.lib.DependsOn">@DependsOn</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.java">(src)</a> annotation
 							communicates the dependencies to the runtime. The superclass will scan for such annotations and execute
 							the dependencies in the right order.
 						</p>
@@ -911,7 +911,7 @@ members += file.tasks.map[ task | toMethod(task.methodName, task.newTypeRef(Void
 							<p>
 						</p>
 						<p>
-							Finally, we create a field with the <abbr title="org.xtext.builddsl.lib.Param">@Param</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.xtend">(src)</a> annotation from each <strong>Parameter</strong>. 
+							Finally, we create a field with the <abbr title="org.xtext.builddsl.lib.Param">@Param</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java">(src)</a> annotation from each <strong>Parameter</strong>. 
 							The superclass will make the so marked fields initializable from command line arguments.
 						</p>
 						<p>
@@ -1473,7 +1473,7 @@ def protected addConstructors(JvmDeclaredType inferredType,
 						<p>
 							The corresponding inferrer code does not show anything particularly new so we skip most of it for brevity. To detect 
 							whether a type is an <abbr title="org.xtext.mongobeans.lib.IMongoBean">IMongoBean</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">(src)</a> or a primitive mongoDB type, we use the last helper 
-							class <abbr title="org.xtext.mongobeans.jvmmodel.MongoTypes">MongoTypes</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/jvmmodel/MongoTypes.xtend">(src)</a>. The following snippet shows the inference of the getter for
+							class <abbr title="org.xtext.mongobeans.jvmmodel.MongoTypes">MongoTypes</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/jvmmodel/MongoTypes.java">(src)</a>. The following snippet shows the inference of the getter for
 							multi-valued properties:
 						</p>
 						<p>
@@ -1600,7 +1600,7 @@ public Class&lt;? extends IQualifiedNameProvider&gt; bindIQualifiedNameProvider(
 						<h2 style="padding-top: 15px;">Validation</h2>
 						<p>
 							The Java driver for mongoDB cannot map all Java types to mongoDB types. To enforce that constraint, 
-							we have added the <abbr title="org.xtext.mongobeans.validation.MongoBeansValidator">MongoBeansValidator</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/validation/MongoBeansValidator.xtend">(src)</a>. It also checks for missing types 
+							we have added the <abbr title="org.xtext.mongobeans.validation.MongoBeansValidator">MongoBeansValidator</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/validation/MongoBeansValidator.java">(src)</a>. It also checks for missing types 
 							and avoids name collisions in the generated code with the implicitly defined property <code class="prettyprint lang-xtend">dbObject</code>.
 						</p>
 						<p>
@@ -2635,7 +2635,7 @@ private CharSequence generate() {
 						<h2 style="padding-top: 15px;">Extending the Compiler</h2>
 						<p>
 							We have added additional expressions to Xbase, so we have to tell the compiler how to translate them
-							to Java. The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler">XbaseCompiler</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">(src)</a> has a method 
+							to Java. The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler">XbaseCompiler</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">(src)</a> has a method 
 							<code class="prettyprint lang-java">doInternalToJavaStatement</code> that dispatches the compilation with regard to the type of the
 							current expression. This is where we have to hook in with our <abbr title="org.xtext.template.jvmmodel.TemplateCompiler">TemplateCompiler</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend">(src)</a>:
 						</p>
@@ -2685,9 +2685,9 @@ RichString : {
 							<p>
 						</p>
 						<p>
-							As our <strong>RichStringLiteral</strong> inherits from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XStringLiteral.html"><abbr title="org.eclipse.xtext.xbase.XStringLiteral">XStringLiteral</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java">(src)</a>, it does not
+							As our <strong>RichStringLiteral</strong> inherits from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XStringLiteral.html"><abbr title="org.eclipse.xtext.xbase.XStringLiteral">XStringLiteral</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java">(src)</a>, it does not
 							need any special treatment. The same holds for <strong>RichStringIf</strong> and <strong>RichStringElseIif</strong>. The <strong>RichStringForLoop</strong>
-							requires special treatment, because as opposed to the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XForLoopExpression.html"><abbr title="org.eclipse.xtext.xbase.XForLoopExpression">XForLoopExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">(src)</a>
+							requires special treatment, because as opposed to the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XForLoopExpression.html"><abbr title="org.eclipse.xtext.xbase.XForLoopExpression">XForLoopExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">(src)</a>
 							that always returns <code class="prettyprint lang-java">null</code>, we want it to return a concatenation of its results. This looks
 							like
 						</p>
@@ -2735,7 +2735,7 @@ override protected internalToConvertedExpression(XExpression obj,
 						<p>
 							As usual, we have to bind our <abbr title="org.xtext.template.jvmmodel.TemplateCompiler">TemplateCompiler</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend">(src)</a> in the 
 							<abbr title="org.xtext.template.TemplateRuntimeModule">TemplateRuntimeModule</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java">(src)</a> in order to be picked up as the 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler">XbaseCompiler</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">(src)</a> in the context of our language.
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler">XbaseCompiler</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">(src)</a> in the context of our language.
 						</p>
 						</section>
 						<!--  section -->
@@ -2745,7 +2745,7 @@ override protected internalToConvertedExpression(XExpression obj,
 							The type system has to know how to determine the types of our new expressions. This is the job of the 
 							<abbr title="org.xtext.template.typesystem.TemplateTypeComputer">TemplateTypeComputer</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend">(src)</a>: <strong>RichString</strong> becomes a 
 							<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/StringBuilder.html"><abbr title="java.lang.StringBuilder">StringBuilder</abbr></a>. As opposed to its super type 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XForLoopExpression.html"><abbr title="org.eclipse.xtext.xbase.XForLoopExpression">XForLoopExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">(src)</a> a <strong>RichStringForLoop</strong> is of type
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/XForLoopExpression.html"><abbr title="org.eclipse.xtext.xbase.XForLoopExpression">XForLoopExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">(src)</a> a <strong>RichStringForLoop</strong> is of type
 							<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/StringBuilder.html"><abbr title="java.lang.StringBuilder">StringBuilder</abbr></a> as well. The for-loop's body is expected to have a type, as the results
 							must be concatenatable, which is different from Xbase's for-loop.
 						</p>
@@ -2853,7 +2853,7 @@ public class TemplateProposalProvider
 						</p>
 						<p>
 							The goal is a language to control a turtle drawing an image. Technically, this example will teach you how to adapt 
-							and use the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a> for your own languages.
+							and use the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a> for your own languages.
 						</p>
 						<!--  section -->
 						<section id="tortoise_solution" style="padding-top: 68px; margin-top: -68px;">
@@ -2900,7 +2900,7 @@ end  // sub square</pre>
 							added without the need to regenerate the whole language infrastructure.
 						</p>
 						<p>
-							The core of the runtime library is the class <abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend">(src)</a>. You can
+							The core of the runtime library is the class <abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.java">(src)</a>. You can
 							think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows 
 							modifying it using methods. Here is an excerpt of its code:
 						</p>
@@ -2988,7 +2988,7 @@ Executable:
 						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							With the tortoise commands defined as methods in the runtime library class 
-							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend">(src)</a>, we have to infer a Java class that inherits from this. 
+							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.java">(src)</a>, we have to infer a Java class that inherits from this. 
 							Within this class, we create a method for each <strong>Program</strong> and <strong>SubProgram</strong>. The resulting code looks 
 							like this:
 						</p>
@@ -3028,7 +3028,7 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 						<h2 style="padding-top: 15px;">Interpreter</h2>
 						<p>
 							The Xbase language library does not only provide a compiler that generates Java code, but also an 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">interpreter</a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>. This has been adapted 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">interpreter</a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>. This has been adapted 
 							to execute our <strong>Programs</strong>.
 						</p>
 						<p>
@@ -3038,9 +3038,9 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 						</p>
 						<p>
 							The first thing we have to cope with is the mixture of existing Java methods (from the super class
-							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend">(src)</a>) and inferred ones. While the former are evaluated
+							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.java">(src)</a>) and inferred ones. While the former are evaluated
 							via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
-							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend">(src)</a> to <code class="prettyprint lang-xtend">this</code> and intercept calls to the inferred 
+							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.java">(src)</a> to <code class="prettyprint lang-xtend">this</code> and intercept calls to the inferred 
 							methods to execute them directly. This is accomplished by overriding the method <code class="prettyprint lang-xtend">invokeOperation</code>:
 						</p>
 						<p>
@@ -3074,10 +3074,10 @@ override protected invokeOperation(JvmOperation operation,
 						</p>
 						<p>
 							One thing you have to know about the Java inferrence is that when creating Java elements using the
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>, the infrastructure stores the information which 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>, the infrastructure stores the information which 
 							elements have been inferred from which source elements. To navigate these traces, we use the Xbase service
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">(src)</a>. So to detect whether a 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmOperation.html"><abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">(src)</a> is inferred, we check whether it has a source element.
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">(src)</a>. So to detect whether a 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmOperation.html"><abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">(src)</a> is inferred, we check whether it has a source element.
 							If so, we have to setup an execution context binding <code class="prettyprint lang-xtend">this</code> and the parameters as local variables and then 
 							execute the method's body using the interpreter.
 						</p>

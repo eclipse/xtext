@@ -1,4 +1,4 @@
-document[Xtext 2.4 Documentation]
+document[Xtext 2.4.2 Documentation]
 
 codelanguage-def[Java][
   abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
@@ -52,6 +52,7 @@ codelanguage-def[Xbase][
   finally,
   this, 
   it,
+  self,
   int, 
   boolean, 
   short, 
@@ -61,7 +62,10 @@ codelanguage-def[Xbase][
   long, 
   byte, 
   void,
-  return
+  return,
+  import,
+  static,
+  extension
 ]
 
 codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, false]

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<toc topic="contents/xtext.html" label="Xtext 2.4 Documentation" >
-	<topic href="contents/xtext_14.html#Xtext%202.4%20Documentation_14" label="Getting Started" >
+<toc topic="contents/xtext.html" label="Xtext 2.4.2 Documentation" >
+	<topic href="contents/xtext_14.html#Xtext%202.4.2%20Documentation_14" label="Getting Started" >
 		<topic href="contents/010-xtext-in-5-minutes.html#FirstFiveMinutes" label="5 Minutes Tutorial" >
 			<topic href="contents/010-xtext-in-5-minutes.html#NewProject" label="Creating A New Xtext Project" >
 			</topic>
@@ -44,7 +44,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_15.html#Xtext%202.4%20Documentation_15" label="Reference Documentation" >
+	<topic href="contents/xtext_15.html#Xtext%202.4.2%20Documentation_15" label="Reference Documentation" >
 		<topic href="contents/000-introduction.html#Overview" label="Overview" >
 			<topic href="contents/000-introduction.html#Overview_1" label="What is Xtext?" >
 			</topic>
@@ -362,14 +362,8 @@
 					</topic>
 				</topic>
 				<topic href="contents/199-xtext-and-java.html#xbaseLanguageRef_Types" label="Types" >
-					<topic href="contents/199-xtext-and-java.html#Xbase_Types_Arrays" label="Arrays" >
-					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_TypeReferences" label="Simple Type References" >
 						<topic href="contents/199-xtext-and-java.html#Xbase_Types_TypeReferences_3" label="Examples" >
-						</topic>
-					</topic>
-					<topic href="contents/199-xtext-and-java.html#Xbase_Types_FunctionTypes" label="Function Types" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Types_FunctionTypes_3" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_ParameterizedTypeReference" label="Parameterized Type References" >
@@ -377,6 +371,12 @@
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_Primitives" label="Primitives" >
+					</topic>
+					<topic href="contents/199-xtext-and-java.html#Xbase_Types_Arrays" label="Arrays" >
+					</topic>
+					<topic href="contents/199-xtext-and-java.html#Xbase_Types_FunctionTypes" label="Function Types" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Types_FunctionTypes_3" label="Examples" >
+						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_ConformanceRules" label="Conformance and Conversion" >
 					</topic>
@@ -434,6 +434,8 @@
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" label="Implicit Parameter it" >
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Lambda_17" label="Examples" >
+						</topic>
+						<topic href="contents/199-xtext-and-java.html#Xbase_lambda_self" label="Refering the current function" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_IfExpression" label="If Expression" >
@@ -538,7 +540,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_16.html#Xtext%202.4%20Documentation_16" label="Appendix" >
+	<topic href="contents/xtext_16.html#Xtext%202.4.2%20Documentation_16" label="Appendix" >
 		<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x" label="Migrating from Xtext 1.0.x to 2.0" >
 			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_4" label="Take the Shortcut" >
 			</topic>

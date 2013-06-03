@@ -19,7 +19,7 @@ in the previous section is no longer necessary. If we start from the ref:Domainm
 example in the tutorial] again, we have to replace all cross-references to e[Types] by calls to the production 
 rule e[JvmTypeReference]. The rules e[DataType], e[Type], and e[QualifiedName] become obsolete (the latter is 
 already defined in Xbase), and the e[Type] in e[AbstractEntity] must be changed to e[Entity]. As we now have 
-all kinds of generic Java collections at hand, e[Feature.many] is obsolete, too. The whole grammar now reads:
+all kinds of generic Java collections at hand, e[Feature.many] is obsolete, too. The whole grammar now reads concisely:
 
 code[Xtext][
 grammar org.eclipse.xtext.example.Domainmodel with
@@ -131,9 +131,10 @@ class DomainmodelGenerator implements IGenerator {
 }
 ]
 
-Please note that when e[org.eclipse.xtext.xbase.Xbase] is used the default binding for codeRef[org.eclipse.xtext.generator.IGenerator]
-is codeRef[org.eclipse.xtext.xbase.compiler.JvmModelGenerator]. To use a custom one we have to bind our
-own implementation in e[org.example.domainmodel.DomainmodelRuntimeModule] like this:
+Please note that when e[org.eclipse.xtext.xbase.Xbase] is used the default binding for the interface 
+codeRef[org.eclipse.xtext.generator.IGenerator] is codeRef[org.eclipse.xtext.xbase.compiler.JvmModelGenerator].
+To use a custom one we have to bind our own implementation in e[org.example.domainmodel.DomainmodelRuntimeModule]
+like this:
 code[Java][
 public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDomainmodelRuntimeModule {
 	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {

@@ -2,16 +2,6 @@ section2:xbaseLanguageRef_Types[Types]
 
 Basically all kinds of JVM types are available and referable. 
 
-section3:Xbase_Types_Arrays[Arrays]
-
-Arrays cannot be declared explicitly,
-but they can be passed around and they are (if needed) transparently converted to a List of the component type.
-
-In other words, the return type of a Java method that returns an array of ints (code[Java][int\[\]]) can be directly assigned to 
-a variable of type codeRef[java.util.List][List<Integer>]. Due to type inference
-this conversion happens implicitly. The conversion is bi-directional: Any method that takes an array as argument can be invoked 
-with a code[List] instead.
-
 section3:Xbase_Types_TypeReferences[Simple Type References]
 
 A simple type reference only consists of a e[qualified name]. A qualified name is a name made up of identifiers which are separated by a dot 
@@ -26,32 +16,11 @@ ul[
   item[code[String]]
 ]
 
-section3:Xbase_Types_FunctionTypes[Function Types]
-
-Xbase introduces e[lambda expressions], and therefore an additional function type signature. On the JVM-Level a lambda
-expression (or more generally any function object) is just an instance of one of the types in 
-codeRef[org.eclipse.xtext.xbase.lib.Functions], 
-depending on the number of arguments. However, as lambda expressions are a very important language feature, 
-a special sugared syntax for function types has been introduced.  
-So instead of writing code[Java][Function1<String,Boolean>] one can write code[Xbase][(String)=>Boolean].
-
-For more information on lambda expressions see ref:Xbase_Expressions_Lambda.
-
-
-section4[Examples]
-
-ul[
-  item[code[Xbase][=>Boolean // predicate without parameters]]
-  item[code[Xbase][()=>String // provider of string]]
-  item[code[Xbase][(String)=>Boolean // One argument predicate]]
-  item[code[Xbase][(Mutable)=>void // A procedure doing side effects only]]
-  item[code[Xbase][(List<String>, Integer)=>String]]
-]
-
 section3:Xbase_Types_ParameterizedTypeReference[Parameterized Type References]
 
-The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please 
-refer to the third edition of the  link[http://docs.oracle.com/javase/specs/jls/se7/html/index.html][Java Language Specification].
+The general syntax for type references allows to take any number of type arguments. The semantics as well
+as the syntax is almost the same as in Java, so please refer to the third edition of the 
+link[http://docs.oracle.com/javase/specs/jls/se7/html/index.html][Java Language Specification].
 
 The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax of type references is shown, including function types and
 type arguments.
@@ -72,9 +41,42 @@ section3:Xbase_Types_Primitives[Primitives]
 Xbase supports all Java primitives. The conformance rules (e.g. boxing and unboxing) are also exactly like defined
 in the Java Language Specification.
 
+section3:Xbase_Types_Arrays[Arrays]
+
+Arrays cannot be instantiated arbitrarily, but there are a couple of useful library functions that
+allow to create arrays with a fixed length or an initial value set.
+Besides this restriction, they can be passed around and they are transparently converted to a List of the component type on demand.
+
+In other words, the return type of a Java method that returns an array of ints (code[Java][int\[\]]) can be directly assigned to 
+a variable of type codeRef[java.util.List][List<Integer>]. Due to type inference
+this conversion happens implicitly. The conversion is bi-directional: Any method that takes an array as argument can be invoked 
+with an argument that has the type code[List<ComponentType>] instead.
+
+section3:Xbase_Types_FunctionTypes[Function Types]
+
+Xbase introduces e[lambda expressions], and therefore an additional function type signature. On the JVM-Level a lambda
+expression (or more generally any function object) is just an instance of one of the types in 
+codeRef[org.eclipse.xtext.xbase.lib.Functions], 
+depending on the number of arguments. However, as lambda expressions are a very important language feature, 
+a special sugared syntax for function types has been introduced.  
+So instead of writing code[Java][Function1<String, Boolean>] one can write code[Xbase][(String)=>boolean].
+
+For more information on lambda expressions see ref:Xbase_Expressions_Lambda.
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][=>Boolean // predicate without parameters]]
+  item[code[Xbase][()=>String // provider of string]]
+  item[code[Xbase][(String)=>boolean // One argument predicate]]
+  item[code[Xbase][(Mutable)=>void // A procedure doing side effects only]]
+  item[code[Xbase][(List<String>, Integer)=>String]]
+]
+
 section3:Xbase_Types_ConformanceRules[Conformance and Conversion]
 
-Type conformance rules are used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, 
+Type conformance rules are used in order to find out whether some expression can be used in a certain situation.
+For instance when assigning a value to a variable, 
 the type of the right hand expression needs to conform to the type of the variable.
 
 As Xbase implements the type system of Java it also fully supports the conformance rules defined
