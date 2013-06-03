@@ -42,7 +42,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.RefactoringType;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -260,8 +259,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		waitForDisplay();
 		IRenameElementContext context = new IRenameElementContext.Impl(greetingParserRuleUri,
 				XtextPackage.Literals.PARSER_RULE, editor, selection, grammarUri);
-		renameRefactoringController.initialize(context);
-		renameRefactoringController.startRefactoring(RefactoringType.LINKED_EDITING);
+		renameRefactoringController.startRefactoring(context);
 		waitForDisplay();
 		pressKeys(editor, REFACTOREDCLASSIFIERNAME + "\n");
 		waitForDisplay();
