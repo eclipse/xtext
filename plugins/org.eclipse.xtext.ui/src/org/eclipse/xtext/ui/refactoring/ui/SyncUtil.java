@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
@@ -43,17 +44,28 @@ public class SyncUtil {
 	@Inject(optional = true)
 	private IWorkspace workspace;
 	
-	public void totalSync(final boolean saveAll) throws InvocationTargetException, InterruptedException {
+	public void totalSync(final boolean saveAll, boolean useProgressDialog) throws InvocationTargetException, InterruptedException {
 		if (Display.getCurrent() != null && workbench != null) {
-			workbench.getProgressService().run(false, true, new IRunnableWithProgress() {
-				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					SubMonitor progress = SubMonitor.convert(monitor, 6);
-					syncAllEditors(workbench, saveAll, progress.newChild(1));
-					waitForBuild(progress.newChild(4));
-					yieldToQueuedDisplayJobs(progress.newChild(1));
-				}
-			});
+			if (useProgressDialog) {
+				workbench.getProgressService().run(false, true, new IRunnableWithProgress() {
+					public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+						SubMonitor progress = SubMonitor.convert(monitor, 6);
+						syncAllEditors(workbench, saveAll, progress.newChild(1));
+						waitForBuild(progress.newChild(4));
+						yieldToQueuedDisplayJobs(progress.newChild(1));
+					}
+				});
+			} else {
+				SubMonitor progress = SubMonitor.convert(new NullProgressMonitor());
+				syncAllEditors(workbench, saveAll, progress.newChild(1));
+				waitForBuild(progress.newChild(4));
+				yieldToQueuedDisplayJobs(progress.newChild(1));
+			}
 		}
+	}
+
+	public void totalSync(final boolean saveAll) throws InvocationTargetException, InterruptedException {
+		totalSync(saveAll, true);
 	}
 
 	public void syncAllEditors(IWorkbench workbench, final boolean saveAll, IProgressMonitor monitor) {

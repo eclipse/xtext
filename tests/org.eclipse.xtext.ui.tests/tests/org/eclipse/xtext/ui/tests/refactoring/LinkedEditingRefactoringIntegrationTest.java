@@ -28,7 +28,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.RefactoringType;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
@@ -96,8 +95,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditi
 				return new IRenameElementContext.Impl(EcoreUtil.getURI(referenced), referenced.eClass(), editor, selection, state.getURI());
 			}
 		});
-		renameRefactoringController.initialize(context);
-		renameRefactoringController.startRefactoring(RefactoringType.LINKED_EDITING);
+		renameRefactoringController.startRefactoring(context);
 		waitForDisplay();
 		pressKeys(editor, "NewTestClass\n");
 		waitForReconciler(editor);

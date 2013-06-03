@@ -64,7 +64,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 		try {
 			final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
-				syncUtil.totalSync(false);
+				syncUtil.totalSync(false, renameRefactoringController.getActiveLinkedMode() == null);
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				IRenameElementContext renameElementContext = editor.getDocument().readOnly(
 						new IUnitOfWork<IRenameElementContext, XtextResource>() {
@@ -130,11 +130,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 	}
 
 	protected void startRenameElement(IRenameElementContext renameElementContext) throws InterruptedException {
-		renameRefactoringController.initialize(renameElementContext);
-		if(preferences.useInlineRefactoring())
-			renameRefactoringController.startRefactoring(RefactoringType.LINKED_EDITING);
-		else 
-			renameRefactoringController.startRefactoring(RefactoringType.REFACTORING_DIALOG);
+		renameRefactoringController.startRefactoring(renameElementContext);
 	}
 
 }
