@@ -26,6 +26,9 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.texteditor.IDocumentProviderExtension;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -40,24 +43,25 @@ public class SyncUtil {
 
 	@Inject(optional = true)
 	private IWorkbench workbench;
-	
+
 	@Inject(optional = true)
 	private IWorkspace workspace;
-	
-	public void totalSync(final boolean saveAll, boolean useProgressDialog) throws InvocationTargetException, InterruptedException {
+
+	public void totalSync(final boolean saveAll, boolean useProgressDialog) throws InvocationTargetException,
+			InterruptedException {
 		if (Display.getCurrent() != null && workbench != null) {
 			if (useProgressDialog) {
 				workbench.getProgressService().run(false, true, new IRunnableWithProgress() {
 					public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 						SubMonitor progress = SubMonitor.convert(monitor, 6);
-						syncAllEditors(workbench, saveAll, progress.newChild(1));
+						reconcileAllEditors(workbench, saveAll, progress.newChild(1));
 						waitForBuild(progress.newChild(4));
 						yieldToQueuedDisplayJobs(progress.newChild(1));
 					}
 				});
 			} else {
 				SubMonitor progress = SubMonitor.convert(new NullProgressMonitor());
-				syncAllEditors(workbench, saveAll, progress.newChild(1));
+				reconcileAllEditors(workbench, saveAll, progress.newChild(1));
 				waitForBuild(progress.newChild(4));
 				yieldToQueuedDisplayJobs(progress.newChild(1));
 			}
@@ -68,14 +72,22 @@ public class SyncUtil {
 		totalSync(saveAll, true);
 	}
 
+	/**
+	 * @deprecated use {@link #reconcileAllEditors(IWorkbench, boolean, IProgressMonitor)} instead
+	 */
+	@Deprecated
 	public void syncAllEditors(IWorkbench workbench, final boolean saveAll, IProgressMonitor monitor) {
+		reconcileAllEditors(workbench, saveAll, monitor);
+	}
+
+	public void reconcileAllEditors(IWorkbench workbench, final boolean saveAll, IProgressMonitor monitor) {
 		SubMonitor pm0 = SubMonitor.convert(monitor, workbench.getWorkbenchWindowCount());
 		for (IWorkbenchWindow window : workbench.getWorkbenchWindows()) {
 			SubMonitor pm1 = pm0.newChild(1).setWorkRemaining(window.getPages().length);
 			for (IWorkbenchPage page : window.getPages()) {
 				SubMonitor pm2 = pm1.newChild(1).setWorkRemaining(2 * page.getEditorReferences().length);
 				for (IEditorReference editorReference : page.getEditorReferences()) {
-					if(pm2.isCanceled())
+					if (pm2.isCanceled())
 						return;
 					IEditorPart editor = editorReference.getEditor(false);
 					if (editor != null) {
@@ -90,6 +102,24 @@ public class SyncUtil {
 		}
 	}
 
+	/**
+	 * Some action on a file might have be too fast, such that the modification stamp is the same for the saved file. As
+	 * a result, the editor's content is not updated. Use this method to explicitly update an editor when you know the
+	 * underlying file has changed.
+	 */
+	public void synchronizeEditorWithFile(IEditorPart editor) {
+		if (editor instanceof ITextEditor) {
+			IDocumentProvider documentProvider = ((ITextEditor) editor).getDocumentProvider();
+			if (documentProvider instanceof IDocumentProviderExtension) {
+				try {
+					((IDocumentProviderExtension) documentProvider).synchronize(editor.getEditorInput());
+				} catch (CoreException e) {
+					LOG.error("Error synchronizing editor ", e);
+				}
+			}
+		}
+	}
+
 	public void waitForReconciler(XtextEditor editor) {
 		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -98,7 +128,7 @@ public class SyncUtil {
 			}
 		});
 	}
-	
+
 	public void waitForBuild(IProgressMonitor monitor) {
 		try {
 			workspace.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, monitor);
@@ -108,7 +138,8 @@ public class SyncUtil {
 	}
 
 	/**
-	 * @deprecated we should not rely on auto build to be triggered. Use {@link #waitForBuild(IProgressMonitor)} instead.
+	 * @deprecated we should not rely on auto build to be triggered. Use {@link #waitForBuild(IProgressMonitor)}
+	 *             instead.
 	 */
 	@Deprecated
 	public void waitForAutoBuild(IProgressMonitor monitor) {
@@ -134,12 +165,12 @@ public class SyncUtil {
 		int count = 0;
 		if (Display.getCurrent() != null) {
 			while (count < maxJobsToYieldTo && Display.getCurrent().readAndDispatch()) {
-				if(pm.isCanceled())
+				if (pm.isCanceled())
 					throw new OperationCanceledException();
 				++count;
 				pm.worked(1);
 			}
-			if(count == maxJobsToYieldTo) {
+			if (count == maxJobsToYieldTo) {
 				LOG.error("maxJobsToYieldTo probably exceeded. Worked: " + count);
 			}
 		}
