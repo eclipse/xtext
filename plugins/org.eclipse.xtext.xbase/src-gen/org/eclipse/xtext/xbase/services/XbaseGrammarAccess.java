@@ -2952,6 +2952,27 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//DECIMAL
 		public RuleCall getDECIMALTerminalRuleCall_1_1_1_1() { return cDECIMALTerminalRuleCall_1_1_1_1; }
 	}
+
+	public class StaticQualifierElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StaticQualifier");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cValidIDParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cColonColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		////FOR "better" downwards compatibility
+		//StaticQualifier:
+		//	(ValidID "::")+;
+		public ParserRule getRule() { return rule; }
+
+		//(ValidID "::")+
+		public Group getGroup() { return cGroup; }
+
+		//ValidID
+		public RuleCall getValidIDParserRuleCall_0() { return cValidIDParserRuleCall_0; }
+
+		//"::"
+		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
+	}
 	
 	
 	private XExpressionElements pXExpression;
@@ -3011,6 +3032,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private XCatchClauseElements pXCatchClause;
 	private QualifiedNameElements pQualifiedName;
 	private NumberElements pNumber;
+	private StaticQualifierElements pStaticQualifier;
 	private TerminalRule tHEX;
 	private TerminalRule tINT;
 	private TerminalRule tDECIMAL;
@@ -3649,6 +3671,17 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getNumberRule() {
 		return getNumberAccess().getRule();
+	}
+
+	////FOR "better" downwards compatibility
+	//StaticQualifier:
+	//	(ValidID "::")+;
+	public StaticQualifierElements getStaticQualifierAccess() {
+		return (pStaticQualifier != null) ? pStaticQualifier : (pStaticQualifier = new StaticQualifierElements());
+	}
+	
+	public ParserRule getStaticQualifierRule() {
+		return getStaticQualifierAccess().getRule();
 	}
 
 	//terminal HEX:
