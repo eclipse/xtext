@@ -15,6 +15,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.junit.After;
@@ -563,6 +565,18 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendFunction function = function("def create result:'foo' foo() { if (true) 'foo'+'bar' else return 'baz' }");
 		helper.assertError(function, XRETURN_EXPRESSION, INVALID_RETURN, "Void functions cannot return a value.");
 		helper.assertNoError(function, INVALID_EARLY_EXIT);
+	}
+	
+	@Test public void testTypeCompatibility_01() throws Exception {
+		XtendFile file = file(
+				"class Foo { public val Class<? extends java.util.Map<?, ?>> x = typeof(java.util.Map) }");
+		helper.assertError(file, XTYPE_LITERAL, INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from Class<Map> to Class<? extends Map<?, ?>>");
+	}
+	
+	@Test public void testTypeCompatibility_02() throws Exception {
+		XtendFile file = file(
+				"class Foo { public val Class<java.util.Map<?, ?>> x = java.util.Map }");
+		helper.assertError(file, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from Class<Map> to Class<Map<?, ?>>");
 	}
 
 	@Test public void testReturnTypeCompatibility_00() throws Exception {
@@ -1673,17 +1687,39 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	public void testRawTypeOnField() throws Exception {
+	public void testRawTypeOnField_01() throws Exception {
 		XtendFile file = file(
-				"class Foo { public val Class<java.util.Map<?, ?>> x = typeof(java.util.Map) }");
+				"class Foo { public val Object x = typeof(java.util.Map) }");
 		helper.assertNoIssues(file.getXtendTypes().get(0));
 	}
 	
 	@Test
-	public void testRawTypeOnFieldFromTypeLiteral() throws Exception {
+	public void testRawTypeOnField_02() throws Exception {
+		String fileAsText = "class Foo { public val x = typeof(java.util.Map) }";
+		XtendFile file = file(fileAsText);
+		helper.assertWarning(file, XTEND_FIELD, RAW_TYPE, "Map is a raw type. References to generic type Map<K,V> should be parameterized");
+		List<Issue> issues = helper.validate(file);
+		assertEquals(1, issues.size());
+		assertEquals(fileAsText.indexOf('x'), issues.get(0).getOffset().intValue());
+		assertEquals(1, issues.get(0).getLength().intValue());
+	}
+	
+	@Test
+	public void testRawTypeOnFieldFromTypeLiteral_01() throws Exception {
 		XtendFile file = file(
-				"class Foo { public val Class<java.util.Map<?, ?>> x = java.util.Map }");
+				"class Foo { public val Object x = java.util.Map }");
 		helper.assertNoIssues(file.getXtendTypes().get(0));
+	}
+	
+	@Test
+	public void testRawTypeOnFieldFromTypeLiteral_02() throws Exception {
+		String fileAsText = "class Foo { public val x = java.util.Map }";
+		XtendFile file = file(fileAsText);
+		helper.assertWarning(file, XTEND_FIELD, RAW_TYPE, "Map is a raw type. References to generic type Map<K,V> should be parameterized");
+		List<Issue> issues = helper.validate(file);
+		assertEquals(1, issues.size());
+		assertEquals(fileAsText.indexOf('x'), issues.get(0).getOffset().intValue());
+		assertEquals(1, issues.get(0).getLength().intValue());
 	}
 
 	@Test
