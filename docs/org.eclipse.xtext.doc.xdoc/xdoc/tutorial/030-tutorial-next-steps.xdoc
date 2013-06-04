@@ -40,7 +40,7 @@ package my.company.blog {
 ]
 
 code[Xtext][
-grammar org.eclipse.xtext.example.Domainmodel with
+grammar org.example.domainmodel.Domainmodel with
                                       org.eclipse.xtext.common.Terminals
 
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
