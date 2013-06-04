@@ -3356,6 +3356,45 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				''');
 	}
 	
+	@Test def testNullSafeFeatureCall_08() {
+		assertCompilesTo(
+				'''
+					class Foo { 
+						String field
+						def bar(String str) {
+							new Foo().field?.toString?.substring(1) ?: ''
+						}
+					}
+				''', '''
+					import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+					
+					@SuppressWarnings("all")
+					public class Foo {
+					  private String field;
+					  
+					  public String bar(final String str) {
+					    String _elvis = null;
+					    Foo _foo = new Foo();
+					    String _field = _foo.field;
+					    String _string = null;
+					    if (_field!=null) {
+					      _string=_field.toString();
+					    }
+					    String _substring = null;
+					    if (_string!=null) {
+					      _substring=_string.substring(1);
+					    }
+					    if (_substring != null) {
+					      _elvis = _substring;
+					    } else {
+					      _elvis = ObjectExtensions.<String>operator_elvis(_substring, "");
+					    }
+					    return _elvis;
+					  }
+					}
+				''');
+	}
+	
 
 }
 
