@@ -13,7 +13,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -27,6 +30,7 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.inject.Inject;
@@ -41,6 +45,9 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 	
 	@Inject
 	private Primitives primitives;
+	
+	@Inject
+	private IJvmModelAssociations jvmModelAssociations;
 	
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -66,14 +73,55 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 							+ getTypeSignature(typeRef.getType()) 
 							+ "; it cannot be parameterized with arguments " 
 							+ getTypeArguments(typeRef),
-						TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+						IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS, typeRef);
 			} else {
 				if(numTypeParameters > 0) 
 					warning(typeRef.getType().getSimpleName() 
 							+ " is a raw type. References to generic type " 
 							+ getTypeSignature(typeRef.getType()) 
-							+ " should be parameterized",
-							TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, IssueCodes.RAW_TYPE);
+							+ " should be parameterized", IssueCodes.RAW_TYPE, typeRef);
+			}
+		}
+	}
+	
+	protected void warning(String message, String issueCode, JvmParameterizedTypeReference typeReference) {
+		EObject rootContainer = EcoreUtil.getRootContainer(typeReference);
+		Resource resource = rootContainer.eResource();
+		if (resource.getContents().get(0) == rootContainer) {
+			super.warning(message, typeReference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, issueCode);
+		} else {
+			EObject container = typeReference;
+			EObject sourceElement = jvmModelAssociations.getPrimarySourceElement(container);
+			container = container.eContainer();
+			while(sourceElement == null && container != null) {
+				sourceElement = jvmModelAssociations.getPrimarySourceElement(container);
+				container = container.eContainer();
+			}
+			if (sourceElement != null) {
+				warning(message, sourceElement, sourceElement.eClass().getEStructuralFeature("name"), -1, issueCode);
+			} else {
+				super.warning(message, typeReference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, issueCode);
+			}
+		}
+	}
+	
+	protected void error(String message, String issueCode, JvmParameterizedTypeReference typeReference) {
+		EObject rootContainer = EcoreUtil.getRootContainer(typeReference);
+		Resource resource = rootContainer.eResource();
+		if (resource.getContents().get(0) == rootContainer) {
+			super.error(message, typeReference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, issueCode);
+		} else {
+			EObject container = typeReference;
+			EObject sourceElement = jvmModelAssociations.getPrimarySourceElement(container);
+			container = container.eContainer();
+			while(sourceElement == null && container != null) {
+				sourceElement = jvmModelAssociations.getPrimarySourceElement(container);
+				container = container.eContainer();
+			}
+			if (sourceElement != null) {
+				error(message, sourceElement, sourceElement.eClass().getEStructuralFeature("name"), -1, issueCode);
+			} else {
+				super.error(message, typeReference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, issueCode);
 			}
 		}
 	}
