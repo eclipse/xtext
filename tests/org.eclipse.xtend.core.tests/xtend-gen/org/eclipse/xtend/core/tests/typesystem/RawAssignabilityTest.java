@@ -366,4 +366,28 @@ public class RawAssignabilityTest extends AbstractAssignabilityTest {
     this.isAssignableFrom("Comparable<Integer>", "(int)=>int");
     this.isAssignableFrom("Comparable<String>", "(int)=>int");
   }
+  
+  @Test
+  public void testBug409847_01() {
+    this.isAssignableFrom("java.lang.Class<? extends java.lang.Iterable<?>>", "java.lang.Class<java.util.ArrayList>");
+    this.isAssignableFrom("java.lang.Class<? extends java.lang.Iterable<?>>", "java.lang.Class<java.util.ArrayList<java.lang.Integer>>");
+    this.isAssignableFrom("java.lang.Class<? extends java.lang.Iterable>", "java.lang.Class<java.util.ArrayList>");
+  }
+  
+  @Test
+  public void testBug409847_02() {
+    this.isAssignableFrom("java.lang.Class<java.util.ArrayList<?>>", "java.lang.Class<java.util.ArrayList>");
+  }
+  
+  @Test
+  public void testBug409847_03() {
+    this.isAssignableFrom("java.lang.Class<java.util.ArrayList>", "java.lang.Class<java.util.ArrayList<?>>");
+  }
+  
+  @Test
+  public void testBug409847_04() {
+    this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList>");
+    this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>");
+    this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable>", "java.util.ArrayList<java.util.ArrayList>");
+  }
 }
