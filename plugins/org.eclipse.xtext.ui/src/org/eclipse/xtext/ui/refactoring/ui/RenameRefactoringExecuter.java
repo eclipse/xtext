@@ -109,11 +109,13 @@ public class RenameRefactoringExecuter {
 									validationStatus.getMessageMatchingSeverity(RefactoringStatus.FATAL))); 
 					return;
 				} else {
-					for(Object affectedObject: affectedObjects) {
-						if(affectedObject instanceof IFile) {
-							IEditorPart editorWithFileChanged = window.getActivePage().findEditor(new FileEditorInput((IFile) affectedObject));
-							if(editorWithFileChanged != null) {
-								syncUtil.synchronizeEditorWithFile(editorWithFileChanged);
+					if(affectedObjects != null) {
+						for(Object affectedObject: affectedObjects) {
+							if(affectedObject instanceof IFile) {
+								IEditorPart editorWithFileChanged = window.getActivePage().findEditor(new FileEditorInput((IFile) affectedObject));
+								if(editorWithFileChanged != null) {
+									syncUtil.synchronizeEditorWithFile(editorWithFileChanged);
+								}
 							}
 						}
 					}
