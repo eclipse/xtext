@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.conformance;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -126,6 +127,9 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			}
 			LightweightTypeReference rightSuperType = rightReference.getSuperType(leftType);
 			if (rightSuperType != null) {
+				if (leftReference.isRawType() || rightSuperType.isRawType()) {
+					return TypeConformanceResult.create(param, ConformanceHint.SUCCESS, ConformanceHint.SUBTYPE, ConformanceHint.RAWTYPE_CONVERSION);
+				}
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperType, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
 					return TypeConformanceResult.merge(result, TypeConformanceResult.create(param, ConformanceHint.SUBTYPE));
@@ -146,11 +150,13 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		if (param.rawType) {
 			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
-		if (leftReference.isRawType() || rightReference.isRawType()) {
-			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS, ConformanceHint.RAWTYPE_CONVERSION);
+		if (!param.isAsTypeArgument()) {
+			if (leftReference.isRawType() || rightReference.isRawType()) {
+				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS, ConformanceHint.RAWTYPE_CONVERSION);
+			}
+			if (leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
+				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
-		if (leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
-			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		return areArgumentsConformant(leftReference, rightReference, param.unboundComputationAddsHints, param);
 	}
 

@@ -32,6 +32,11 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 				if (!result.isConformant()) {
 					return result;
 				}
+				if (result.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION)) {
+					if (!(lowerBound.isRawType() && right.isRawType())) {
+						return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+					}
+				}
 				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 			}
 			for(LightweightTypeReference upperBound: leftWildcard.getUpperBounds()) {
@@ -39,6 +44,11 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 						false, false, false, false, param.unboundComputationAddsHints, false));
 				if (!result.isConformant()) {
 					return result;
+				}
+				if (result.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION)) {
+					if (!(upperBound.isRawType() && right.isRawType())) {
+						return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+					}
 				}
 			}
 			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);

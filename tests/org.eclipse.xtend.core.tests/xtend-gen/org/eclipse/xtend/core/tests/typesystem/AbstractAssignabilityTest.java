@@ -874,4 +874,28 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     String _replace = typeName.replace("$", "org.eclipse.xtend.core.tests.typesystem.ScenarioBug395002$SelfBound");
     return _replace;
   }
+  
+  @Test
+  public void testBug409847_01() {
+    this.isNotAssignableFrom("java.lang.Class<? extends java.lang.Iterable<?>>", "java.lang.Class<java.util.ArrayList>");
+    this.isAssignableFrom("java.lang.Class<? extends java.lang.Iterable<?>>", "java.lang.Class<java.util.ArrayList<java.lang.Integer>>");
+    this.isAssignableFrom("java.lang.Class<? extends java.lang.Iterable>", "java.lang.Class<java.util.ArrayList>");
+  }
+  
+  @Test
+  public void testBug409847_02() {
+    this.isNotAssignableFrom("java.lang.Class<java.util.ArrayList<?>>", "java.lang.Class<java.util.ArrayList>");
+  }
+  
+  @Test
+  public void testBug409847_03() {
+    this.isNotAssignableFrom("java.lang.Class<java.util.ArrayList>", "java.lang.Class<java.util.ArrayList<?>>");
+  }
+  
+  @Test
+  public void testBug409847_04() {
+    this.isNotAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList>");
+    this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>");
+    this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable>", "java.util.ArrayList<java.util.ArrayList>");
+  }
 }
