@@ -95,7 +95,7 @@ grammar org.example.domainmodel.Domainmodel with
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
 Domainmodel :
-  elements += Type*
+  (elements += Type)*
 ;
   
 Type:
@@ -108,12 +108,12 @@ DataType:
  
 Entity:
   'entity' name = ID ('extends' superType = \[Entity\])? '{'
-     features += Feature*
+     (features += Feature)*
   '}'
 ;
  
 Feature:
-  many?='many'? name = ID ':' type = \[Type\]
+  (many ?= 'many')? name = ID ':' type = \[Type\]
 ;
 ]
 
@@ -124,7 +124,7 @@ ol[
     The first rule in a grammar is always used as the entry or start rule.  
     code[Xtext][
     Domainmodel :
-      elements += Type*
+      (elements += Type)*
     ;
     ]
     
@@ -159,7 +159,7 @@ ol[
     code[Xtext][
     Entity :
       'entity' name = ID ('extends' superType = \[Entity\])? '{'
-        features += Feature*
+        (features += Feature)*
       '}'
     ;
     ]

@@ -8,7 +8,7 @@ section:NewProject[Creating A New Xtext Project]
 
 The first step is to create a new Xtext project by choosing e[File -> New -> Project...]. The dialog
 offers a couple of different project types. Select e[New Xtext Project] from the category e[Xtext] and
-finish the wizard with the default settings. You will find 3 new projects in your workspace which are mostly
+finish the wizard with the default settings. You will find 4 new projects in your workspace which are mostly
 empty. The Xtext grammar editor will be opened and show the definition of a very simple e[Hello World] language.
 
 code[Xtext][

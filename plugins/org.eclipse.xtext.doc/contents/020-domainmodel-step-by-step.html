@@ -89,7 +89,7 @@ Click on <em>Finish</em> to create the projects.
 </p>
 <p>
 <div class="image" >
-<img src="images/30min_wizard.png" class=" " 
+<img src="tutorial/images/30min_wizard.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -128,7 +128,7 @@ The Eclipse editor and all the other workbench related functionality.
 </p>
 <p>
 <div class="image" >
-<img src="images/30min_initialprojectlayout.png" class=" " 
+<img src="tutorial/images/30min_initialprojectlayout.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -172,7 +172,7 @@ Let&apos;s now just replace that grammar definition with the one for our domain 
 <span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
 <br/>
 Domainmodel&nbsp;:<br/>
-&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
+&nbsp;&nbsp;(elements&nbsp;+=&nbsp;Type)*<br/>
 ;<br/>
 &nbsp;&nbsp;<br/>
 Type:<br/>
@@ -185,12 +185,12 @@ DataType:<br/>
 &nbsp;<br/>
 Entity:<br/>
 &nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features&nbsp;+=&nbsp;Feature*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
 &nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
 ;<br/>
 &nbsp;<br/>
 Feature:<br/>
-&nbsp;&nbsp;many?=<span class="string">&apos;many&apos;</span>?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]<br/>
+&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]<br/>
 ;<br/>
 </p>
 </div>
@@ -208,7 +208,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		<div class="incode">
 		<p class="code">
 		Domainmodel&nbsp;:<br/>
-		&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
+		&nbsp;&nbsp;(elements&nbsp;+=&nbsp;Type)*<br/>
 		;<br/>
 		</p>
 		</div>
@@ -261,7 +261,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		<p class="code">
 		Entity&nbsp;:<br/>
 		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;features&nbsp;+=&nbsp;Feature*<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
 		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
 		;<br/>
 		</p>
@@ -322,7 +322,7 @@ messages in the Console View.
 </p>
 <p>
 <div class="image" >
-<img src="images/30min_rungenerator.png" class=" " 
+<img src="tutorial/images/30min_rungenerator.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -337,7 +337,7 @@ memory settings and parameters set. Now you can hit <em>Run</em> to start a new 
 </p>
 <p>
 <div class="image" >
-<img src="images/30min_launchconfiguration.png" class=" " 
+<img src="tutorial/images/30min_launchconfiguration.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -354,7 +354,7 @@ the outline view, find references etc.
 </p>
 <p>
 <div class="image" >
-<img src="images/30min_editor.png" 
+<img src="tutorial/images/30min_editor.png" 
 />
 <div class="caption">
 </div>
@@ -604,7 +604,7 @@ into smaller parts and have cross-references across file boundaries.
 </p>
 <p>
 <div class="image" >
-<img src="images/30min_multipleeditors.png" 
+<img src="tutorial/images/30min_multipleeditors.png" 
 />
 <div class="caption">
 </div>

@@ -20,10 +20,10 @@ ol[
  
     code[Xtend][
       import org.eclipse.xtext.junit4.XtextRunner
-      import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
+      import org.example.domainmodel.DomainmodelInjectorProvider
       
-      @InjectWith(typeof(DomainmodelInjectorProvider))
-      @RunWith(typeof(XtextRunner))
+      @InjectWith(DomainmodelInjectorProvider)
+      @RunWith(XtextRunner)
       class ParserTest {
       }
     ]
@@ -55,7 +55,6 @@ ol[
     ]
   ]
   item[
-    After saving the Xtend file, it is time to run the test. Please locate the generated java class
-    in the e[xtend-gen] folder and select e[Run As -> JUnit Test] from the context menu.
+    After saving the Xtend file, it is time to run the test. Select e[Run As -> JUnit Test] from the editor's context menu.
   ]
 ]

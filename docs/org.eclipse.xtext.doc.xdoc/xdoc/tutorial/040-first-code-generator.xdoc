@@ -25,12 +25,12 @@ public class HasAuthor {
 }
 ]
 
-First of all, locate the file e[DomainmodelGenerator.xtend] in the package e[org.eclipse.xtext.example.generator].
+First of all, locate the file e[DomainmodelGenerator.xtend] in the package e[org.example.domainmodel.generator].
 This Xtend class is used to generate code for your models in the standalone scenario and in the interactive
 Eclipse environment.
 
 code[Xtend][
-package org.eclipse.xtext.example.generator
+package org.example.domainmodel.generator
 
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
@@ -56,7 +56,7 @@ ol[
     code[Xtend][
     class DomainmodelGenerator implements IGenerator {
       override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-        for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+        for(e: resource.allContents.toIterable.filter(Entity)) {
           ...
         }
       }
@@ -79,7 +79,7 @@ ol[
     
     code[Xtend][
     override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-      for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+      for(e: resource.allContents.toIterable.filter(Entity)) {
         fsa.generateFile(
           e.fullyQualifiedName.toString("/") + ".java",
           e.compile)
@@ -177,13 +177,13 @@ e[dmodel] file in a Java Project. Now simply create a new source folder e[src-ge
 and see how the compiler will pick up your sample e[Entities] and generate Java code for them. 
 
 code[Xtend][
-package org.eclipse.xtext.example.generator
+package org.example.domainmodel.generator
 
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.example.domainmodel.Entity
-import org.eclipse.xtext.example.domainmodel.Feature
+import org.example.domainmodel.domainmodel.Entity
+import org.example.domainmodel.domainmodel.Feature
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 import com.google.inject.Inject
@@ -193,7 +193,7 @@ class DomainmodelGenerator implements IGenerator {
   @Inject extension IQualifiedNameProvider
 
   override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-    for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+    for(e: resource.allContents.toIterable.filter(Entity)) {
       fsa.generateFile(
         e.fullyQualifiedName.toString("/") + ".java",
         e.compile)

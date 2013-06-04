@@ -61,7 +61,7 @@ That is, the syntax and the grammar for the language look like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 <br/>
 <span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span><br/>
@@ -150,7 +150,7 @@ the generated code.
 </div>
 </p>
 <p>
-First of all, locate the file <em>DomainmodelGenerator.xtend</em> in the package <em>org.eclipse.xtext.example.generator</em>.
+First of all, locate the file <em>DomainmodelGenerator.xtend</em> in the package <em>org.example.domainmodel.generator</em>.
 This Xtend class is used to generate code for your models in the standalone scenario and in the interactive
 Eclipse environment.
 </p>
@@ -158,7 +158,7 @@ Eclipse environment.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;org.eclipse.xtext.example.generator<br/>
+<span class="keyword">package</span>&nbsp;org.example.domainmodel.generator<br/>
 <br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.resource.Resource<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator<br/>
@@ -184,14 +184,14 @@ all entities within a resource and trigger code generation for each one.
 		    we need to iterate a resource with all its deeply nested elements. This can be achieved with the method
 		    <span class="inlinecode">getAllContents()</span>. To use the resulting <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/TreeIterator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.TreeIterator" >TreeIterator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java" title="View Source Code" >(src)</a> in
 		    a for loop, we use the extension method <span class="inlinecode">toIterable()</span> from the built-in library class
-		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions" >IteratorExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>.
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions" >IteratorExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>.
 		    
 		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
 		&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(Entity))&nbsp;{<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;}<br/>
@@ -207,7 +207,7 @@ all entities within a resource and trigger code generation for each one.
 		    should yield. This information should be derived from the qualified name of the <em>Entity</em> since
 		    Java enforces this pattern. The qualified name itself has to be obtained from a special service
 		    that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
-		    inject the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> into the generator.
+		    inject the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> into the generator.
 		    
 		    <div class="literallayout">
 		<div class="incode">
@@ -225,7 +225,7 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-		&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(Entity))&nbsp;{<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
@@ -356,13 +356,13 @@ and see how the compiler will pick up your sample <em>Entities</em> and generate
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;org.eclipse.xtext.example.generator<br/>
+<span class="keyword">package</span>&nbsp;org.example.domainmodel.generator<br/>
 <br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.resource.Resource<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IFileSystemAccess<br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.Entity<br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.Feature<br/>
+<span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Entity<br/>
+<span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Feature<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.naming.IQualifiedNameProvider<br/>
 <br/>
 <span class="keyword">import</span>&nbsp;com.google.inject.Inject<br/>
@@ -372,7 +372,7 @@ and see how the compiler will pick up your sample <em>Entities</em> and generate
 &nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
 <br/>
 &nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(Entity))&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
@@ -435,18 +435,18 @@ write the test case.
 		    plugin, and select <em>New -&gt; Xtend Class</em> from the context menu. Provide a meaningful name and
 		    enter the package before you hit finish.
 		    
-		    The core of the test infrastructure is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/junit4/XtextRunner.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.XtextRunner" >XtextRunner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java" title="View Source Code" >(src)</a> and
-		    the language specific <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/junit4/IInjectorProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.IInjectorProvider" >IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a>. Both have to be provided
+		    The core of the test infrastructure is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/junit4/XtextRunner.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.XtextRunner" >XtextRunner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java" title="View Source Code" >(src)</a> and
+		    the language specific <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/junit4/IInjectorProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.IInjectorProvider" >IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a>. Both have to be provided
 		    by means of class annotations:  
 		 
 		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.XtextRunner<br/>
-		<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider<br/>
+		<span class="keyword">import</span>&nbsp;org.example.domainmodel.DomainmodelInjectorProvider<br/>
 		<br/>
-		@InjectWith(<span class="keyword">typeof</span>(DomainmodelInjectorProvider))<br/>
-		@RunWith(<span class="keyword">typeof</span>(XtextRunner))<br/>
+		@InjectWith(DomainmodelInjectorProvider)<br/>
+		@RunWith(XtextRunner)<br/>
 		<span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
 		}<br/>
 		</p>
@@ -487,8 +487,7 @@ write the test case.
 	</li>
 	<li>
 		
-		    After saving the Xtend file, it is time to run the test. Please locate the generated java class
-		    in the <em>xtend-gen</em> folder and select <em>Run As -&gt; JUnit Test</em> from the context menu.
+		    After saving the Xtend file, it is time to run the test. Select <em>Run As -&gt; JUnit Test</em> from the editor&apos;s context menu.
 	</li>
 </ol>
 </p>
@@ -522,7 +521,7 @@ of code:
 </div>
 </p>
 <p>
-Any name for the method will do. The important thing is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>
+Any name for the method will do. The important thing is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>
 annotation that advises the framework to use the method as a validation rule. If the name starts with
 a lower case letter, a warning will be attached to the name of the <em>Entity</em>.
 </p>
