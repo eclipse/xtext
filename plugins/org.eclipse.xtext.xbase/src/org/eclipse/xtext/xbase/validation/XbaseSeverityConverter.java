@@ -43,7 +43,7 @@ public class XbaseSeverityConverter extends SeverityConverter {
 	}
 
 	/**
-	 * @returns String delegationKey:defaultSeverity
+	 * @return String delegationKey:defaultSeverity
 	 */
 	public static String encodeDefaultSeverity(String delegationKey, String defaultSeverity) {
 		return new StringBuilder(delegationKey).append(DEFAULT_SEVERITY_SEPARATOR).append(defaultSeverity).toString();
@@ -51,7 +51,7 @@ public class XbaseSeverityConverter extends SeverityConverter {
 
 	/**
 	 * Returns decoded delegation key or <code>null</code> if encodedValue can not be parsed.
-	 * @returns {@link Pair} where getFirst() is delegationKey and getSecond() is the defaultSeverity.
+	 * @return {@link Pair} where getFirst() is delegationKey and getSecond() is the defaultSeverity.
 	 * @see XbaseSeverityConverter#encodeDefaultSeverity(String, String)
 	 */
 	public static Pair<String, String> decodeDelegationKey(String encodedValue) {

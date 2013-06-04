@@ -344,7 +344,7 @@ ol[
                 boolean isPrelinkingPhase) {
     ]
     Using the dispatch keyword makes sure that the method is called for instances of type e[Entity]
-    only. Have a look at link[http://www.xtend-lang.org/documentation][the Xtend documentation] on polymorphic dispatch to 
+    only. Have a look at link[http://www.eclipse.org/xtend/documentation.html#polymorphicDispatch][the Xtend documentation] on polymorphic dispatch to 
     understand Xtend's dispatch functions. Extending codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] makes 
     sure we don't have to walk the syntax model on our own.
   ]
@@ -381,7 +381,7 @@ ol[
     and code[element.documentation] is in fact calling the extension method  
     codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#getDocumentation(codeRef[org.eclipse.emf.ecore.EObject] element)]
     
-    Xtend's extension methods are explained in detail on the link[http://www.xtend-lang.org/documentation][Xtend website].
+    Xtend's extension methods are explained in detail on the link[http://www.eclipse.org/xtend/documentation.html#extensionMethods][Xtend website].
   ]
   item[
     code[Xtend][
@@ -452,7 +452,7 @@ img[images/JvmTutorial_LaunchEditor.png][ ][ ][ ]
 
 In the new workbench, create a Java project (e[File -> New -> Project...  -> Java Project].
 Xbase relies on a small runtime library on the class path. To add this, right-click on the project and
-go to e[Java Build Path -> Libraries -> Add Library] and choose e[Xtend Library]. The create a new file 
+go to e[Java Build Path -> Libraries -> Add Library] and choose e[Xtend Library]. Then create a new file 
 with the file extension you chose in the beginning (e[*.dmodel]) in the source folder of the Java project.
 This will open the generated entity editor. Try it and discover the rich functionality it provides. You 
 should also have a look at the preferences of your language to find out what can be individually configured 
