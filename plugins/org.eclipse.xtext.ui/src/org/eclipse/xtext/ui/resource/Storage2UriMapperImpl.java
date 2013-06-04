@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -88,10 +89,23 @@ import com.google.inject.Singleton;
 	}
 
 	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
-		if (!uri.isPlatformResource())
+		if (!uri.isPlatformResource()) {
+			// support storage lookup by absolute file URI as it is possibly resolved by importURI references
+			if (uri.isFile()) {
+				IPath path = new Path(uri.toFileString());
+				if (path.isAbsolute()) {
+					IFile file = getWorkspaceRoot().getFileForLocation(path);
+					return getStorages(file);
+				}
+			}
 			return emptySet();
+		}
 		IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
-		if (!file.isAccessible()) {
+		return getStorages(file);
+	}
+
+	private Iterable<Pair<IStorage, IProject>> getStorages(IFile file) {
+		if (file == null || !file.isAccessible()) {
 			return emptySet();
 		}
 		return singleton(Tuples.<IStorage,IProject>create(file, file.getProject()));
