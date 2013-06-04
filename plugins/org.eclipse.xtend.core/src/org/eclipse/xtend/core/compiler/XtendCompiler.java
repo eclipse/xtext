@@ -312,6 +312,13 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	@Override
+	protected XExpression normalizeBlockExpression(XExpression expr) {
+		if (expr instanceof RichString)
+			return expr;
+		return super.normalizeBlockExpression(expr);
+	}
+	
+	@Override
 	public void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
 		if (obj instanceof RichString)
 			_toJavaStatement((RichString)obj, appendable, isReferenced);

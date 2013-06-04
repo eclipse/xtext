@@ -3395,6 +3395,88 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				''');
 	}
 	
+	@Test def testNullSafeFeatureCall_09() {
+		assertCompilesTo(
+				'''
+					class BlockExpression {
+					   def foo(String source) {
+					        val x = { "" }?.toString
+					        val y = {{{ "" }}}?.toString
+					        val z = {{{ var i = 1; "" + i }}}?.toString
+					   }
+					}
+				''', '''
+					@SuppressWarnings("all")
+					public class BlockExpression {
+					  public void foo(final String source) {
+					    String _string = null;
+					    if (""!=null) {
+					      _string="".toString();
+					    }
+					    final String x = _string;
+					    String _string_1 = null;
+					    if (""!=null) {
+					      _string_1="".toString();
+					    }
+					    final String y = _string_1;
+					    String _xblockexpression = null;
+					    {
+					      int i = 1;
+					      String _plus = ("" + Integer.valueOf(i));
+					      _xblockexpression = (_plus);
+					    }
+					    String _string_2 = null;
+					    if (_xblockexpression!=null) {
+					      _string_2=_xblockexpression.toString();
+					    }
+					    final String z = _string_2;
+					  }
+					}
+				''');
+	}
+	
+	@Test def testNullSafeFeatureCall_10() {
+		assertCompilesTo(
+				'''
+					class StrangeBug {
+					    def getAnzuwendendeModi(String source) {
+						    {
+						        if (true)
+						            <String>newArrayList()
+						        else {
+						            <String>newHashSet()
+						        }
+						    }?.toList
+					    }
+					}
+				''', '''
+					import java.util.AbstractCollection;
+					import java.util.ArrayList;
+					import java.util.HashSet;
+					import java.util.List;
+					import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+					import org.eclipse.xtext.xbase.lib.IterableExtensions;
+					
+					@SuppressWarnings("all")
+					public class StrangeBug {
+					  public List<String> getAnzuwendendeModi(final String source) {
+					    List<String> _list = null;
+					    AbstractCollection<String> _xifexpression = null;
+					    if (true) {
+					      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
+					      _xifexpression = _newArrayList;
+					    } else {
+					      HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
+					      _xifexpression = _newHashSet;
+					    }
+					    if (_xifexpression!=null) {
+					      _list=IterableExtensions.<String>toList(_xifexpression);
+					    }
+					    return _list;
+					  }
+					}
+				''');
+	}
 
 }
 
