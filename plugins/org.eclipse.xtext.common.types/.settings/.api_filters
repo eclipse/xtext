@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Appeasing API tooling: It's ok to add fields to @noimplement @noextend interface" id="923795461">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
         <filter comment="Nobody should implement the extended interfaces. Except for us" id="924844039">
             <message_arguments>
                 <message_argument value="2.4.1"/>
@@ -147,6 +153,50 @@
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
                 <message_argument value="JVM_OPERATION_FEATURE_COUNT"/>
                 <message_argument value="14"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage$Literals">
+        <filter comment="Appeasing API tooling: It's ok to add fields to @noimplement @noextend interface" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_FIELD__TRANSIENT"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Appeasing API tooling: It's ok to add fields to @noimplement @noextend interface" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_FIELD__VOLATILE"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Appeasing API tooling: It's ok to add fields to @noimplement @noextend interface" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_GENERIC_TYPE__STRICT_FLOATING_POINT"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Appeasing API tooling: It's ok to add fields to @noimplement @noextend interface" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_OPERATION__DEFAULT"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Appeasing API tooling: It's ok to add fields to @noimplement @noextend interface" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_OPERATION__NATIVE"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Appeasing API tooling: It's ok to add fields to @noimplement @noextend interface" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_OPERATION__STRICT_FLOATING_POINT"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Appeasing API tooling: It's ok to add fields to @noimplement @noextend interface" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_OPERATION__SYNCHRONIZED"/>
             </message_arguments>
         </filter>
     </resource>
