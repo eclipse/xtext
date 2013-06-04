@@ -34,7 +34,7 @@ The annotation declaration looks like this:
 <div class="incode">
 <p class="code">
 @Active(<span class="keyword">typeof</span>(ExtractProcessor))<br/>
-<span class="keyword">annotation</span>&nbsp;Extract&nbsp;{}
+<span class="keyword">annotation</span>&nbsp;Extract&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -85,7 +85,7 @@ For example the ExtractProcessor adds one interface per annotated class:
 &nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -153,7 +153,7 @@ The <span class="inlinecode">ExtractProcessor</span> implements the method <span
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -167,7 +167,13 @@ which is used as an <a href="20-classes-and-functions.html#Extension_Provider" t
 Next up the newly created interface is added to the existing list of implemented interfaces. 
 </p>
 <p>
-<span class="inlinecode">annotatedClass.implementedInterfaces&nbsp;=&nbsp;annotatedClass.implementedInterfaces&nbsp;+&nbsp;#[interfaceType.newTypeReference]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+annotatedClass.implementedInterfaces&nbsp;=&nbsp;annotatedClass.implementedInterfaces&nbsp;+&nbsp;#[interfaceType.newTypeReference]<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The code calls <span class="inlinecode">setImplementedInterfaces(Iterable&lt;TypeReference&gt;)</span> on the annotated class. The right
@@ -203,7 +209,7 @@ observableType.addMethod(<span class="string">&apos;set&apos;</span>&nbsp;+&nbsp
 &nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>fieldName<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>fieldName<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;_propertyChangeSupport.firePropertyChange("&laquo;</span>fieldName<span class="string">&raquo;",&nbsp;_oldValue,&nbsp;&laquo;</span>fieldName<span class="string">&raquo;);<br/>
 &nbsp;&nbsp;&apos;&apos;&apos;</span>]<br/>
-]
+]<br/>
 </p>
 </div>
 </div>
@@ -227,7 +233,7 @@ annotation <span class="inlinecode">@Lazy</span> which turns fields into lazily 
 <p class="code">
 <span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
 &nbsp;&nbsp;@Lazy&nbsp;String&nbsp;myField&nbsp;=&nbsp;expensiveComputation()<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -262,7 +268,7 @@ The following code performs this transformation:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>field.simpleName<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>]<br/>
 &nbsp;&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -292,7 +298,7 @@ the constraint check accordingly:
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(field.initializer&nbsp;==&nbsp;<span class="keyword">null</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;field.addError(<span class="string">"A&nbsp;lazy&nbsp;field&nbsp;must&nbsp;have&nbsp;an&nbsp;initializer."</span>)<br/>
 &nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -324,7 +330,7 @@ The maven dependency is
 &nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend.standalone&lt;/artifactId&gt;<br/>
 &nbsp;&nbsp;&lt;version&gt;2.4.0&lt;/version&gt;<br/>
 &nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;<br/>
-&lt;/dependency&gt;
+&lt;/dependency&gt;<br/>
 </p>
 </div>
 </div>
@@ -379,7 +385,7 @@ The example project contains a couple of test cases:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -419,7 +425,7 @@ not so fragile against changes in the formatting. The <span class="inlinecode">@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(IllegalArgumentException.newTypeReference,&nbsp;exceptions.head)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -449,7 +455,13 @@ an <span class="inlinecode">_</span> and have the visibility of the Xtend field.
 Thus, an Xtend field
 </p>
 <p>
-<span class="inlinecode">@Property&nbsp;String&nbsp;name</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Property&nbsp;String&nbsp;name<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 will compile to the Java code
@@ -466,7 +478,7 @@ will compile to the Java code
 <br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setName(<span class="keyword">final</span>&nbsp;String&nbsp;name)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">this</span>._name&nbsp;=&nbsp;name;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -511,7 +523,7 @@ Example:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;p&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person(args.get(0),&nbsp;args.get(1))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;println(p.getFirstName()&nbsp;+&nbsp;<span class="string">&apos;&nbsp;&apos;</span>&nbsp;+&nbsp;p.lastName)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>

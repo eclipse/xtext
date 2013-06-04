@@ -21,6 +21,9 @@ import com.google.inject.name.Named
 
 class GenerateBootstrapDoc {
 	
+	/**
+	 * Use the main methods in xtext.website.generator and xtend.website.generator, instead.
+	 */
 	def static void main(String[] args) {
 		val injector = new Config().createInjectorAndDoEMFRegistration
 		injector.getInstance(typeof(GenerateBootstrapDoc)).generate

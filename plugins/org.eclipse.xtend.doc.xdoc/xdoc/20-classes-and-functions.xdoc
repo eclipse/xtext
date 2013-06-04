@@ -445,7 +445,7 @@ Annotations are available on classes, fields, methods and parameters. They are p
 with the code[@] character and accept a number of key-value pairs or a single default value
 for the annotation property named code[value]. Annotation
 values that expect arrays can handle single values, too. Value arrays are enclosed in array 
-literals code[Xtend][#\['first', 'second'\]]
+literals code[Xtend][#\['first', 'second'\]].
 The semantics for annotations are exactly like defined in the 
 link[http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html][Java Language Specification]. 
 Here is an example:
@@ -453,10 +453,10 @@ Here is an example:
 code[Xtend][
   @TypeAnnotation("some value")
   class MyClass {
-    @FieldAnnotation(children = #\[ @MyAnno(true), @MyAnno(false) \])
-    String myField
+    @FieldAnnotation(value = @NestedAnnotation(true))
+    static val CONSTANT = 'a compile-time constant'
     
-    @MethodAnnotation(children = #\[ @MyAnno(true), @MyAnno \])
+    @MethodAnnotation(constant = CONSTANT)
     def String myMethod(@ParameterAnnotation String param) {
       //...
     }
@@ -465,6 +465,9 @@ code[Xtend][
 
 In addition ref:activeAnnotations[Active Annotations] allow users to participate in compilation of
 Xtend code to Java source code.
+
+Please note that it is currently not possible to use nested annotation values in lists. The following notation
+is not yet supported but will be implemented in a future release: code[Xtend][@Anno( values = #\[ @Anno(..) \]].
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:extensionMethods[Extension Methods]

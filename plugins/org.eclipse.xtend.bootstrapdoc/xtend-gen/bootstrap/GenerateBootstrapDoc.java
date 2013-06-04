@@ -52,6 +52,9 @@ import org.eclipse.xtext.xdoc.xdoc.ImageRef;
 
 @SuppressWarnings("all")
 public class GenerateBootstrapDoc {
+  /**
+   * Use the main methods in xtext.website.generator and xtend.website.generator, instead.
+   */
   public static void main(final String[] args) {
     Config _config = new Config();
     final Injector injector = _config.createInjectorAndDoEMFRegistration();

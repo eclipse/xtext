@@ -1200,7 +1200,7 @@ public String label(final Object it) {
 							with the <code class="prettyprint lang-xtend">@</code> character and accept a number of key-value pairs or a single default value
 							for the annotation property named <code class="prettyprint lang-xtend">value</code>. Annotation
 							values that expect arrays can handle single values, too. Value arrays are enclosed in array 
-							literals <code class="prettyprint lang-xtend">#['first', 'second']</code>
+							literals <code class="prettyprint lang-xtend">#['first', 'second']</code>.
 							The semantics for annotations are exactly like defined in the 
 							<a href="http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html">Java Language Specification</a>. 
 							Here is an example:
@@ -1210,10 +1210,10 @@ public String label(final Object it) {
 							<pre class="prettyprint lang-xtend linenums">
 @TypeAnnotation("some value")
 class MyClass {
-  @FieldAnnotation(children = #[ @MyAnno(true), @MyAnno(false) ])
-  String myField
+  @FieldAnnotation(value = @NestedAnnotation(true))
+  static val CONSTANT = 'a compile-time constant'
   
-  @MethodAnnotation(children = #[ @MyAnno(true), @MyAnno ])
+  @MethodAnnotation(constant = CONSTANT)
   def String myMethod(@ParameterAnnotation String param) {
     //...
   }
@@ -1223,6 +1223,10 @@ class MyClass {
 						<p>
 							In addition <a href="#activeAnnotations">Active Annotations</a> allow users to participate in compilation of
 							Xtend code to Java source code.
+						</p>
+						<p>
+							Please note that it is currently not possible to use nested annotation values in lists. The following notation
+							is not yet supported but will be implemented in a future release: <code class="prettyprint lang-xtend">@Anno( values = #[ @Anno(..) ]</code>.
 						</p>
 						</section>
 						<!--  section -->

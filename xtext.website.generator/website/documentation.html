@@ -241,7 +241,7 @@
 						<p>
 							The first step is to create a new Xtext project by choosing <strong>File -&gt; New -&gt; Project...</strong>. The dialog
 							offers a couple of different project types. Select <strong>New Xtext Project</strong> from the category <strong>Xtext</strong> and
-							finish the wizard with the default settings. You will find 3 new projects in your workspace which are mostly
+							finish the wizard with the default settings. You will find 4 new projects in your workspace which are mostly
 							empty. The Xtext grammar editor will be opened and show the definition of a very simple <strong>Hello World</strong> language.
 						</p>
 						<p>
@@ -271,7 +271,7 @@ Hello World!</pre>
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/FiveMinTutorial_FreshProject.png" alt="" width="880" height="684">
+								<img src="images/FiveMinTutorial_FreshProject.png" alt="" width="1029" height="747">
 							</div>
 							<p>
 						</p>
@@ -315,7 +315,7 @@ Hello World!</pre>
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/FiveMinTutorial_Editor.png" alt="" width="767" height="505">
+								<img src="images/FiveMinTutorial_Editor.png" alt="" width="894" height="600">
 							</div>
 							<p>
 						</p>
@@ -410,7 +410,7 @@ entity Comment extends HasAuthor {
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/30min_wizard.png" alt="" width="633" height="547">
+								<img src="images/30min_wizard.png" alt="" width="639" height="687">
 							</div>
 							<p>
 						</p>
@@ -435,7 +435,7 @@ entity Comment extends HasAuthor {
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/30min_initialprojectlayout.png" alt="" width="912" height="544">
+								<img src="images/30min_initialprojectlayout.png" alt="" width="1109" height="761">
 							</div>
 							<p>
 						</p>
@@ -474,7 +474,7 @@ grammar org.example.domainmodel.Domainmodel with
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
 Domainmodel :
-  elements += Type*
+  (elements += Type)*
 ;
   
 Type:
@@ -487,12 +487,12 @@ DataType:
  
 Entity:
   'entity' name = ID ('extends' superType = [Entity])? '{'
-     features += Feature*
+     (features += Feature)*
   '}'
 ;
  
 Feature:
-  many?='many'? name = ID ':' type = [Type]
+  (many ?= 'many')? name = ID ':' type = [Type]
 ;</pre>
 							<p>
 						</p>
@@ -505,7 +505,7 @@ Feature:
 								<li>The first rule in a grammar is always used as the entry or start rule.  
 								<pre class="prettyprint lang-xtext linenums">
 Domainmodel :
-  elements += Type*
+  (elements += Type)*
 ;</pre>
 								    
 								    It says that a <strong>Domainmodel</strong> contains an arbitrary number (<code class="prettyprint lang-xtext">*</code>) of <strong>Type</strong>s which will be added (<code class="prettyprint lang-xtext">+=</code>)
@@ -531,7 +531,7 @@ DataType:
 								<pre class="prettyprint lang-xtext linenums">
 Entity :
   'entity' name = ID ('extends' superType = [Entity])? '{'
-    features += Feature*
+    (features += Feature)*
   '}'
 ;</pre>
 								    
@@ -582,7 +582,7 @@ Feature:
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/30min_rungenerator.png" alt="" width="601" height="510">
+								<img src="images/30min_rungenerator.png" alt="" width="579" height="521">
 							</div>
 							<p>
 						</p>
@@ -614,7 +614,7 @@ Feature:
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/30min_editor.png" alt="" width="879" height="637">
+								<img src="images/30min_editor.png" alt="" width="952" height="753">
 							</div>
 							<p>
 						</p>
@@ -820,7 +820,7 @@ Feature:
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/30min_multipleeditors.png" alt="" width="978" height="448">
+								<img src="images/30min_multipleeditors.png" alt="" width="918" height="579">
 							</div>
 							<p>
 						</p>
@@ -883,7 +883,7 @@ package my.company.blog {
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtext linenums">
-grammar org.eclipse.xtext.example.Domainmodel with
+grammar org.example.domainmodel.Domainmodel with
                                       org.eclipse.xtext.common.Terminals
 
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
@@ -968,14 +968,14 @@ public class HasAuthor {
 							<p>
 						</p>
 						<p>
-							First of all, locate the file <strong>DomainmodelGenerator.xtend</strong> in the package <strong>org.eclipse.xtext.example.generator</strong>.
+							First of all, locate the file <strong>DomainmodelGenerator.xtend</strong> in the package <strong>org.example.domainmodel.generator</strong>.
 							This Xtend class is used to generate code for your models in the standalone scenario and in the interactive
 							Eclipse environment.
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-package org.eclipse.xtext.example.generator
+package org.example.domainmodel.generator
 
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
@@ -1003,7 +1003,7 @@ class DomainmodelGenerator implements IGenerator {
 								<pre class="prettyprint lang-xtend linenums">
 class DomainmodelGenerator implements IGenerator {
   override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-    for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+    for(e: resource.allContents.toIterable.filter(Entity)) {
       ...
     }
   }
@@ -1022,7 +1022,7 @@ class DomainmodelGenerator implements IGenerator {
 								    
 								<pre class="prettyprint lang-xtend linenums">
 override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-  for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+  for(e: resource.allContents.toIterable.filter(Entity)) {
     fsa.generateFile(
       e.fullyQualifiedName.toString("/") + ".java",
       e.compile)
@@ -1109,13 +1109,13 @@ def compile(Entity e) '''
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-package org.eclipse.xtext.example.generator
+package org.example.domainmodel.generator
 
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.example.domainmodel.Entity
-import org.eclipse.xtext.example.domainmodel.Feature
+import org.example.domainmodel.domainmodel.Entity
+import org.example.domainmodel.domainmodel.Feature
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 import com.google.inject.Inject
@@ -1125,7 +1125,7 @@ class DomainmodelGenerator implements IGenerator {
   @Inject extension IQualifiedNameProvider
 
   override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-    for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+    for(e: resource.allContents.toIterable.filter(Entity)) {
       fsa.generateFile(
         e.fullyQualifiedName.toString("/") + ".java",
         e.compile)
@@ -1193,10 +1193,10 @@ class DomainmodelGenerator implements IGenerator {
 								 
 								<pre class="prettyprint lang-xtend linenums">
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
+import org.example.domainmodel.DomainmodelInjectorProvider
 
-@InjectWith(typeof(DomainmodelInjectorProvider))
-@RunWith(typeof(XtextRunner))
+@InjectWith(DomainmodelInjectorProvider)
+@RunWith(XtextRunner)
 class ParserTest {
 }</pre></li>
 								<li>The actual test case is pretty straight forward with Xtend. The utility class 
@@ -1222,8 +1222,7 @@ def void parseDomainmodel() {
   val entity = model.elements.head as Entity
   assertSame(entity, entity.features.head.type)
 }</pre></li>
-								<li>After saving the Xtend file, it is time to run the test. Please locate the generated java class
-								    in the <strong>xtend-gen</strong> folder and select <strong>Run As -&gt; JUnit Test</strong> from the context menu.</li>
+								<li>After saving the Xtend file, it is time to run the test. Select <strong>Run As -&gt; JUnit Test</strong> from the editor's context menu.</li>
 							</ol>
 							<p>
 						</p>
@@ -1381,7 +1380,7 @@ package my.model {
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/30min_wizard.png" alt="" width="633" height="547">
+								<img src="images/30min_wizard.png" alt="" width="639" height="687">
 							</div>
 							<p>
 						</p>
@@ -1406,7 +1405,7 @@ package my.model {
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/30min_initialprojectlayout.png" alt="" width="912" height="544">
+								<img src="images/30min_initialprojectlayout.png" alt="" width="1109" height="761">
 							</div>
 							<p>
 						</p>
@@ -1577,7 +1576,7 @@ Operation:
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/JvmTutorial_RunGenerator.png" alt="" width="770" height="575">
+								<img src="images/JvmTutorial_RunGenerator.png" alt="" width="690" height="599">
 							</div>
 							<p>
 						</p>
@@ -1676,7 +1675,7 @@ def dispatch void infer(Entity element,
           IAcceptor&lt;JvmDeclaredType&gt; acceptor, 
           boolean isPrelinkingPhase) {</pre>
 								    Using the dispatch keyword makes sure that the method is called for instances of type <strong>Entity</strong>
-								    only. Have a look at <a href="http://www.xtend-lang.org/documentation">the Xtend documentation</a> on polymorphic dispatch to 
+								    only. Have a look at <a href="http://www.eclipse.org/xtend/documentation.html#polymorphicDispatch">the Xtend documentation</a> on polymorphic dispatch to 
 								    understand Xtend's dispatch functions. Extending <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer">AbstractModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java">(src)</a> makes 
 								    sure we don't have to walk the syntax model on our own.</li>
 								<li><pre class="prettyprint lang-xtend linenums">
@@ -1704,7 +1703,7 @@ documentation = element.documentation</pre>
 								    and <code class="prettyprint lang-xtend">element.documentation</code> is in fact calling the extension method  
 								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a><strong>#getDocumentation(<a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> element)</strong>
 								    
-								    Xtend's extension methods are explained in detail on the <a href="http://www.xtend-lang.org/documentation">Xtend website</a>.</li>
+								    Xtend's extension methods are explained in detail on the <a href="http://www.eclipse.org/xtend/documentation.html#extensionMethods">Xtend website</a>.</li>
 								<li><pre class="prettyprint lang-xtend linenums">
 if (element.superType != null)
    superTypes += entity.superType.cloneWithProxies</pre>
@@ -1772,7 +1771,7 @@ Operation : {
 						<p>
 							In the new workbench, create a Java project (<strong>File -&gt; New -&gt; Project...  -&gt; Java Project</strong>.
 							Xbase relies on a small runtime library on the class path. To add this, right-click on the project and
-							go to <strong>Java Build Path -&gt; Libraries -&gt; Add Library</strong> and choose <strong>Xtend Library</strong>. The create a new file 
+							go to <strong>Java Build Path -&gt; Libraries -&gt; Add Library</strong> and choose <strong>Xtend Library</strong>. Then create a new file 
 							with the file extension you chose in the beginning (<strong>*.dmodel</strong>) in the source folder of the Java project.
 							This will open the generated entity editor. Try it and discover the rich functionality it provides. You 
 							should also have a look at the preferences of your language to find out what can be individually configured 
@@ -1784,7 +1783,7 @@ Operation : {
 						<p>
 							</p>
 							<div class="thumbnail">
-								<img src="images/JvmTutorial_Editor.png" alt="" width="673" height="486">
+								<img src="images/JvmTutorial_Editor.png" alt="" width="663" height="424">
 							</div>
 							<p>
 						</p>
@@ -8331,6 +8330,9 @@ terminal ID:
 							<tr><td><code class="prettyprint lang-xtend">e1 += e2</code></td>
 							<td><code class="prettyprint lang-xtend">e1.operator_add(e2)</code></td>
 							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 -= e2</code></td>
+							<td><code class="prettyprint lang-xtend">e1.operator_remove(e2)</code></td>
+							</tr>
 							<tr><td></td>
 							<td></td>
 							</tr>
@@ -8351,6 +8353,12 @@ terminal ID:
 							</tr>
 							<tr><td><code class="prettyprint lang-xtend">e1 != e2</code></td>
 							<td><code class="prettyprint lang-xtend">e1.operator_notEquals(e2)</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 === e2</code></td>
+							<td><code class="prettyprint lang-xtend">e1.operator_tripleEquals(e2)</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 !== e2</code></td>
+							<td><code class="prettyprint lang-xtend">e1.operator_tripleNotEquals(e2)</code></td>
 							</tr>
 							<tr><td></td>
 							<td></td>
@@ -8375,6 +8383,12 @@ terminal ID:
 							</tr>
 							<tr><td><code class="prettyprint lang-xtend">e1 .. e2</code></td>
 							<td><code class="prettyprint lang-xtend">e1.operator_upTo(e2)</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 &gt;.. e2</code></td>
+							<td><code class="prettyprint lang-xtend">e1.operator_greaterThanDoubleDot(e2)</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 ..&lt; e2</code></td>
+							<td><code class="prettyprint lang-xtend">e1.operator_doubleDotLessThan(e2)</code></td>
 							</tr>
 							<tr><td><code class="prettyprint lang-xtend">e1 =&gt; e2</code></td>
 							<td><code class="prettyprint lang-xtend">e1.operator_doubleArrow(e2)</code></td>
@@ -8432,6 +8446,9 @@ terminal ID:
 							</tr>
 							<tr><td><code class="prettyprint lang-xtend">- e1</code></td>
 							<td><code class="prettyprint lang-xtend">e1.operator_minus()</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">+ e1</code></td>
+							<td><code class="prettyprint lang-xtend">e1.operator_plus()</code></td>
 							</tr>
 							</table>
 							<p>

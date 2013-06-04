@@ -138,7 +138,7 @@ import com.google.inject.Singleton;
 	}
 	
 	@Deprecated public void resourceChanged(IResourceChangeEvent event) {
-		log.warn("Storage2UriMapperImpl.resourceChanged(IResourceChangeEvent) is deperectaed and does nothing.");
+		log.warn("Storage2UriMapperImpl.resourceChanged(IResourceChangeEvent) is deprecated and does nothing.");
 	}
 	
 }
