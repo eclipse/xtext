@@ -701,6 +701,30 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	def private selfBound(String typeName) {
 		typeName.replace("$", "org.eclipse.xtend.core.tests.typesystem.ScenarioBug395002$SelfBound")
 	}
+	
+	@Test
+	def void testBug409847_01() {
+		"java.lang.Class<? extends java.lang.Iterable<?>>".isNotAssignableFrom("java.lang.Class<java.util.ArrayList>")
+		"java.lang.Class<? extends java.lang.Iterable<?>>".isAssignableFrom("java.lang.Class<java.util.ArrayList<java.lang.Integer>>")
+		"java.lang.Class<? extends java.lang.Iterable>".isAssignableFrom("java.lang.Class<java.util.ArrayList>")
+	}
+	
+	@Test
+	def void testBug409847_02() {
+		"java.lang.Class<java.util.ArrayList<?>>".isNotAssignableFrom("java.lang.Class<java.util.ArrayList>")
+	}
+	
+	@Test
+	def void testBug409847_03() {
+		"java.lang.Class<java.util.ArrayList>".isNotAssignableFrom("java.lang.Class<java.util.ArrayList<?>>")
+	}
+	
+	@Test
+	def void testBug409847_04() {
+		"java.lang.Iterable<? extends java.lang.Iterable<?>>".isNotAssignableFrom("java.util.ArrayList<java.util.ArrayList>")
+		"java.lang.Iterable<? extends java.lang.Iterable<?>>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>")
+		"java.lang.Iterable<? extends java.lang.Iterable>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList>")
+	}
 }
 
 /**
@@ -1409,5 +1433,28 @@ class RawAssignabilityTest extends AbstractAssignabilityTest {
 		"Comparable<String>".isAssignableFrom("(int)=>int")
 	}
 	
+	@Test
+	override testBug409847_01() {
+		"java.lang.Class<? extends java.lang.Iterable<?>>".isAssignableFrom("java.lang.Class<java.util.ArrayList>")
+		"java.lang.Class<? extends java.lang.Iterable<?>>".isAssignableFrom("java.lang.Class<java.util.ArrayList<java.lang.Integer>>")
+		"java.lang.Class<? extends java.lang.Iterable>".isAssignableFrom("java.lang.Class<java.util.ArrayList>")
+	}
+	
+	@Test
+	override testBug409847_02() {
+		"java.lang.Class<java.util.ArrayList<?>>".isAssignableFrom("java.lang.Class<java.util.ArrayList>")
+	}
+	
+	@Test
+	override testBug409847_03() {
+		"java.lang.Class<java.util.ArrayList>".isAssignableFrom("java.lang.Class<java.util.ArrayList<?>>")
+	}
+
+	@Test
+	override testBug409847_04() {
+		"java.lang.Iterable<? extends java.lang.Iterable<?>>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList>")
+		"java.lang.Iterable<? extends java.lang.Iterable<?>>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>")
+		"java.lang.Iterable<? extends java.lang.Iterable>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList>")
+	}	
 }
 
