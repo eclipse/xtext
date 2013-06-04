@@ -203,6 +203,21 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertEquals("org.eclipse.emf.ecore.EPackage", method.getIdentifier());
 	}
 	
+	@Test public void testExplicitStaticInvocation_01() throws Exception {
+		XtendFile file = file(
+				"class C {\n" +
+				"	static def void getFields() {\n" +
+				"		C::fields" +
+				"	}" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.getFields()", method.getIdentifier());
+	}
+	
 	@Test public void testNestedTypeResolution_01() throws Exception {
 		doTestNestedTypeResolution(
 				"import org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry\n" +
