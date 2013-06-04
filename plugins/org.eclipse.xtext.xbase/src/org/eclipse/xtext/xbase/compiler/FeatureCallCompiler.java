@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+is * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse protected License v1.0
  * which accompanies this distribution, and is available at
@@ -309,6 +309,17 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return true;
 		if (expr instanceof XAnnotationElementValueBinaryOperation)
 			return false;
+		if (expr.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+			if (((XMemberFeatureCall) expr.eContainer()).isNullSafe()) {
+				if (expr instanceof XFeatureCall) {
+					JvmIdentifiableElement feature = ((XFeatureCall) expr).getFeature();
+					if (feature instanceof JvmField || feature instanceof JvmFormalParameter)
+						return false;
+					return !b.hasName(feature);
+				}
+				return !b.hasName(expr);
+			}
+		}
 		if (expr instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expr;
 			if (featureCall.isTypeLiteral() || featureCall.isPackageFragment()) {
@@ -320,10 +331,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (feature instanceof JvmField || feature instanceof JvmFormalParameter)
 				return false;
 			return !b.hasName(feature);
-		}
-		if (expr.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
-			if (((XMemberFeatureCall) expr.eContainer()).isNullSafe())
-				return true;
 		}
 		return super.isVariableDeclarationRequired(expr, b);
 	}
