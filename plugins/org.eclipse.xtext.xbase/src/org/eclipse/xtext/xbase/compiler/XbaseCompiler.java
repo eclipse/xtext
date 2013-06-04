@@ -265,8 +265,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	@Override
 	protected List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
-		return featureCall.getActualArguments();
+		EList<XExpression> actualArguments = featureCall.getActualArguments();
+		List<XExpression> normalizedArguments = normalizeBlockExpression(actualArguments);
+		return normalizedArguments;
 	}
+	
 	@Nullable
 	@Override
 	protected XExpression getActualReceiver(XAbstractFeatureCall featureCall) {

@@ -7,6 +7,7 @@ is * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,6 +55,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -144,6 +146,22 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return true;
 	}
 	
+	protected List<XExpression> normalizeBlockExpression(Collection<XExpression> expr) {
+		List<XExpression> result  = Lists.newArrayListWithExpectedSize(expr.size());
+		for(XExpression e:expr)
+			result.add(normalizeBlockExpression(e));
+		return result;
+	}
+
+	protected XExpression normalizeBlockExpression(XExpression expr) {
+		if (expr instanceof XBlockExpression) {
+			XBlockExpression block = ((XBlockExpression) expr);
+			if (block.getExpressions().size() == 1)
+				return normalizeBlockExpression(block.getExpressions().get(0));
+		}
+		return expr;
+	}
+	
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
 		if (expr.isTypeLiteral()) {
 			generateComment(new Later() {
@@ -159,7 +177,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				prepareExpression(receiver, b);
 			}
 			if (expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isNullSafe()) {
-				XExpression memberCallTarget = ((XMemberFeatureCall) expr).getMemberCallTarget();
+				XExpression memberCallTarget = normalizeBlockExpression(((XMemberFeatureCall) expr).getMemberCallTarget());
 				if (!isReferenced) {
 					if (!expressionHelper.hasSideEffects(expr, false)) {
 						b.append("/* ");
