@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -200,26 +202,39 @@ public class XtextResourceSet extends ResourceSetImpl {
                     }
                     return super.normalize(uri);
                 }
+                
+				@Override
+                public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
+					// timeout is set here because e.g. SAXXMIHandler.resolveEntity(String,String) calls it without a timeout
+					// causing the builder to wait too long...
+                	options = addTimeout(options);
+                	return super.createInputStream(uri, options);
+                }
+				
+				@Override
+				public Map<String, ?> contentDescription(URI uri, Map<?, ?> options) throws IOException {
+					options = addTimeout(options);
+					return super.contentDescription(uri, options);
+				}
+
             };
         }
         return uriConverter;
     }
     
     /**
-     * The default load options will set a timeout of 500ms.
-     * This allows to cancel load requests that try to read a resource from 
-     * a {@code http://..} URI.
+     * returns a copy of the given map containing a timeout of 500ms 
+     * if the given option map did not already specify a {@link URIConverter#OPTION_TIMEOUT}
      * 
-	 * @since 2.4
-	 */
-    @Override
-    public Map<Object, Object> getLoadOptions() {
-      if (loadOptions == null)
-      {
-        loadOptions = new HashMap<Object, Object>();
-        loadOptions.put(URIConverter.OPTION_TIMEOUT, 500);
-      }
-      return loadOptions;
+     * @since 2.4
+     */
+    protected Map<?, ?> addTimeout(Map<?, ?> options) {
+    	if (!options.containsKey(URIConverter.OPTION_TIMEOUT)) {
+    		HashMap<Object, Object> newOptions = new HashMap<Object, Object>(options);
+    		newOptions.put(URIConverter.OPTION_TIMEOUT, 500);
+    		options = newOptions;
+    	}
+    	return options;
     }
     
     public Object getClasspathURIContext() {
