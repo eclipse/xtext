@@ -189,6 +189,9 @@ public class FeatureScopes implements IFeatureNames {
 			boolean typeLiteral = false;
 			IScope root = createTypeLiteralScope(featureCall, receiver, session, resolvedTypes, receiverType, linkedReceiver);
 			if (root != null) {
+				if (featureCall instanceof XMemberFeatureCall && ((XMemberFeatureCall) featureCall).isExplicitStatic()) {
+                    return root;
+                }
 				typeLiteral = true;
 			} else {
 				root = IScope.NULLSCOPE;

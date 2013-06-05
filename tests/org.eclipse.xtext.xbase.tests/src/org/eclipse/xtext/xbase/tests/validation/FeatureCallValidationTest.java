@@ -286,6 +286,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expression);
 	}
 	
+	@Ignore("Currently the reference cannot be resolved at all. See bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=409849") 
 	@Test public void testStaticFeatureAccess_1() throws Exception {
 		XExpression expression = expression("String::hashCode()");
 		helper.assertError(expression, XABSTRACT_FEATURE_CALL, STATIC_ACCESS_TO_INSTANCE_MEMBER);
