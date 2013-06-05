@@ -118,12 +118,12 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	
 	protected def text(XtendField element) {
 		if (element.name == null && element.extension) 
-			return new StyledString(uiStrings.referenceToString(element.type, "extension"), StyledString::DECORATIONS_STYLER)
+			return new StyledString(uiStrings.referenceToString(element.type, "extension"), StyledString.DECORATIONS_STYLER)
 		val fieldType = element.displayedType
 		if (fieldType != null) {
 			val type = uiStrings.referenceToString(fieldType, "")
 			if (type.length != 0) {
-				return new StyledString(element.name).append(new StyledString(" : " + type,StyledString::DECORATIONS_STYLER))
+				return new StyledString(element.name).append(new StyledString(" : " + type,StyledString.DECORATIONS_STYLER))
 			}
 		}
 		new StyledString(element.name)

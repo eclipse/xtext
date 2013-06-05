@@ -58,9 +58,9 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 		appendable.append(
 			switch visibility {
 				case skippableDefault: ''
-				case JvmVisibility::PRIVATE: 'private '
-				case JvmVisibility::PROTECTED: 'protected '
-				case JvmVisibility::PUBLIC: 'public '
+				case JvmVisibility.PRIVATE: 'private '
+				case JvmVisibility.PROTECTED: 'protected '
+				case JvmVisibility.PUBLIC: 'public '
 				default: ''
 			})
 	}
@@ -88,7 +88,7 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 				appendable.append(" ")
 				val acceptor = new VariableNameAcceptor(notAllowed)
 				getVariableProposals(typeRef.identifierOrObject, context, 
-					JdtVariableCompletions$VariableType::PARAMETER, notAllowed, acceptor)
+					JdtVariableCompletions.VariableType.PARAMETER, notAllowed, acceptor)
 				appendable.append(acceptor.getVariableName())
 			}
 			if (iterator.hasNext())
@@ -112,7 +112,7 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 	}
 }
 
-class VariableNameAcceptor implements JdtVariableCompletions$CompletionDataAcceptor {
+class VariableNameAcceptor implements JdtVariableCompletions.CompletionDataAcceptor {
 
 	val Set<String> notallowed
 	val Set<String> variableNames = newHashSet()
@@ -127,8 +127,8 @@ class VariableNameAcceptor implements JdtVariableCompletions$CompletionDataAccep
 	}
 
 	def getVariableName() {
-		val candidates = Lists::newArrayList(variableNames);
-		Collections::sort(candidates,
+		val candidates = Lists.newArrayList(variableNames);
+		Collections.sort(candidates,
 			[ left, right | left.length() - right.length() ])
 		if (candidates.size > 0)
 			return candidates.get(0)

@@ -9,7 +9,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 @Singleton
 class ProcessorInstanceForJvmTypeProvider {
 	
-	static val logger = Logger::getLogger(typeof(ProcessorInstanceForJvmTypeProvider))
+	static val logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider)
 	
 	private ClassLoader classLoader;
 	

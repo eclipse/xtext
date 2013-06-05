@@ -56,7 +56,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 		result.addAll(super.getImportedNames())
 		for (eobject : resource.contents) {
 			val types = typeResolver.resolveTypes(eobject)
-			val actualTypes = EcoreUtil::getAllContents(eobject, true).filter(typeof(XExpression)).map[types.getActualType(it)].toIterable
+			val actualTypes = EcoreUtil.getAllContents(eobject, true).filter(XExpression).map[types.getActualType(it)].toIterable
 			for (typeRef : actualTypes) {
 				if (typeRef != null) {
 					registerAllTypes(typeRef.type) [
@@ -64,7 +64,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 					]
 				}
 			}
-			val typesOfIdentifiables = EcoreUtil::getAllContents(eobject, true).filter(typeof(JvmIdentifiableElement)).map[
+			val typesOfIdentifiables = EcoreUtil.getAllContents(eobject, true).filter(JvmIdentifiableElement).map[
 				if (!(it instanceof JvmType) || it instanceof JvmDeclaredType)
 					types.getActualType(it)
 			].toIterable

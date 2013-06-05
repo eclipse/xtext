@@ -36,7 +36,7 @@ abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 	}
 } 
 
-class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xtend {
+class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject XtypeTypeReferenceSerializer typeRefSerializer
 
@@ -70,7 +70,7 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xte
 	}
 }
 
-class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Java {
+class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
 	
 	@Inject TypeReferenceSerializer typeRefSerializer
 

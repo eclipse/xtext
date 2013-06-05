@@ -36,13 +36,13 @@ import org.eclipse.xtend.ide.codebuilder.ICodeBuilder
 class CodeBuilderQuickfix {
 	
 	@Inject IURIEditorOpener editorOpener
-	@Inject ReplacingAppendable$Factory appendableFactory 
+	@Inject ReplacingAppendable.Factory appendableFactory 
 	
 	def addQuickfix(ICodeBuilder builder, String label, Issue issue, IssueResolutionAcceptor acceptor) {
 		if (builder.isValid) {
 			val modification = switch builder {
-				ICodeBuilder$Xtend: builder.xtendModification
-				ICodeBuilder$Java: builder.javaModification
+				ICodeBuilder.Xtend: builder.xtendModification
+				ICodeBuilder.Java: builder.javaModification
 			} 
 			acceptor.accept(issue, label, builder.preview, builder.image, modification)
 		}
@@ -50,9 +50,9 @@ class CodeBuilderQuickfix {
 	
 	def protected getImage(ICodeBuilder builder) {
 		switch builder.visibility {
-			case JvmVisibility::PRIVATE: 'fix_private_obj.gif'
-			case JvmVisibility::PUBLIC: 'fix_public_obj.gif'
-			case JvmVisibility::PROTECTED: 'fix_protected_obj.gif'
+			case JvmVisibility.PRIVATE: 'fix_private_obj.gif'
+			case JvmVisibility.PUBLIC: 'fix_public_obj.gif'
+			case JvmVisibility.PROTECTED: 'fix_protected_obj.gif'
 			default: 'fix_default_obj.gif'
 		} 	
 	}
@@ -61,10 +61,10 @@ class CodeBuilderQuickfix {
 		builder.ownerSource instanceof XtendClass
 	}
 	
-	def protected IModification getXtendModification(ICodeBuilder$Xtend builder) {
+	def protected IModification getXtendModification(ICodeBuilder.Xtend builder) {
 		[
 			val xtendClass = builder.xtendType
-			val editor = editorOpener.open(EcoreUtil::getURI(xtendClass), false);
+			val editor = editorOpener.open(EcoreUtil.getURI(xtendClass), false);
 			if (!(editor instanceof XtextEditor)) {
 				return
 			}
@@ -79,7 +79,7 @@ class CodeBuilderQuickfix {
 		]
 	}
 
-	def protected IModification getJavaModification(ICodeBuilder$Java builder) {
+	def protected IModification getJavaModification(ICodeBuilder.Java builder) {
 		[
 			val type = builder.IType
 			val importManager = new ImportManager(true, ".".charAt(0))

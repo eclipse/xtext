@@ -46,7 +46,7 @@ import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
-import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
@@ -60,7 +60,7 @@ abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends Abs
 	override remove() {
 		if (delegate.eContainer == null)
 			return;
-		EcoreUtil::remove(delegate)
+		EcoreUtil.remove(delegate)
 		if (delegate.eContainer != null)
 			throw new IllegalStateException("Couldn't remove "+delegate.toString)
 	}
@@ -72,13 +72,13 @@ abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends Abs
 
 abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> implements MutableAnnotationTarget {
 	override getAnnotations() {
-		ImmutableList::copyOf(delegate.annotations.map[compilationUnit.toAnnotationReference(it)])
+		ImmutableList.copyOf(delegate.annotations.map[compilationUnit.toAnnotationReference(it)])
 	}	
 	
 	override addAnnotation(Type annotationType) {
 		switch annotationType { 
 			JvmAnnotationTypeDeclarationImpl : {
-				val result = TypesFactory::eINSTANCE.createJvmAnnotationReference
+				val result = TypesFactory.eINSTANCE.createJvmAnnotationReference
 				result.setAnnotation(annotationType.delegate)
 				this.delegate.annotations.add(result)
 				return compilationUnit.toAnnotationReference(result)
@@ -95,12 +95,12 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
 	
 	override getDocComment() {
-		val adapter = EcoreUtil::getAdapter(delegate.eAdapters(), typeof(DocumentationAdapter)) as DocumentationAdapter;
+		val adapter = EcoreUtil.getAdapter(delegate.eAdapters(), DocumentationAdapter) as DocumentationAdapter;
 		return adapter?.getDocumentation();
 	}
 	
 	override setDocComment(String docComment) {
-		var adapter = EcoreUtil::getAdapter(delegate.eAdapters(), typeof(DocumentationAdapter)) as DocumentationAdapter;
+		var adapter = EcoreUtil.getAdapter(delegate.eAdapters(), DocumentationAdapter) as DocumentationAdapter;
 		if (adapter == null) {
 			adapter = new DocumentationAdapter
 			delegate.eAdapters += adapter
@@ -114,10 +114,10 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	
 	override setVisibility(Visibility visibility) {
 		delegate.visibility = switch visibility {
-			case Visibility::DEFAULT : JvmVisibility::DEFAULT
-			case Visibility::PUBLIC : JvmVisibility::PUBLIC
-			case Visibility::PRIVATE : JvmVisibility::PRIVATE
-			case Visibility::PROTECTED : JvmVisibility::PROTECTED
+			case Visibility.DEFAULT : JvmVisibility.DEFAULT
+			case Visibility.PUBLIC : JvmVisibility.PUBLIC
+			case Visibility.PRIVATE : JvmVisibility.PRIVATE
+			case Visibility.PROTECTED : JvmVisibility.PROTECTED
 		}
 	}
 	
@@ -137,7 +137,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> implements MutableTypeDeclaration {
 	
 	override getDeclaredMembers() {
-		ImmutableList::copyOf(delegate.members.map[compilationUnit.toMemberDeclaration(it)])
+		ImmutableList.copyOf(delegate.members.map[compilationUnit.toMemberDeclaration(it)])
 	}
 	
 	override getSimpleName() {
@@ -158,12 +158,12 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	
 	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
 		// remove default constructor
-		val constructor = delegate.members.filter(typeof(JvmConstructor)).findFirst[compilationUnit.typeExtensions.isSingleSyntheticDefaultConstructor(it)]
+		val constructor = delegate.members.filter(JvmConstructor).findFirst[compilationUnit.typeExtensions.isSingleSyntheticDefaultConstructor(it)]
 		if (constructor != null) {
-			EcoreUtil::remove(constructor)
+			EcoreUtil.remove(constructor)
 		}
-		val newConstructor = TypesFactory::eINSTANCE.createJvmConstructor
-		newConstructor.visibility = JvmVisibility::PUBLIC
+		val newConstructor = TypesFactory.eINSTANCE.createJvmConstructor
+		newConstructor.visibility = JvmVisibility.PUBLIC
 		newConstructor.simpleName = simpleName
 		delegate.members.add(newConstructor)
 		val mutableConstructorDeclaration = compilationUnit.toMemberDeclaration(newConstructor) as MutableConstructorDeclaration
@@ -172,9 +172,9 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
-		val newField = TypesFactory::eINSTANCE.createJvmField
+		val newField = TypesFactory.eINSTANCE.createJvmField
 		newField.simpleName = name
-		newField.visibility = JvmVisibility::PRIVATE
+		newField.visibility = JvmVisibility.PRIVATE
 		delegate.members.add(newField)
 		val mutableFieldDeclaration = compilationUnit.toMemberDeclaration(newField) as MutableFieldDeclaration
 		initializer.apply(mutableFieldDeclaration)
@@ -182,8 +182,8 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
-		val newMethod = TypesFactory::eINSTANCE.createJvmOperation
-		newMethod.visibility = JvmVisibility::PUBLIC
+		val newMethod = TypesFactory.eINSTANCE.createJvmOperation
+		newMethod.visibility = JvmVisibility.PUBLIC
 		newMethod.simpleName = name
 		newMethod.returnType = compilationUnit.toJvmTypeReference(compilationUnit.typeReferenceProvider.primitiveVoid)
 		delegate.members.add(newMethod)
@@ -205,23 +205,23 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override getDeclaredMethods() {
-		declaredMembers.filter(typeof(MutableMethodDeclaration))
+		declaredMembers.filter(MutableMethodDeclaration)
 	}
 	
 	override getDeclaredFields() {
-		declaredMembers.filter(typeof(MutableFieldDeclaration))
+		declaredMembers.filter(MutableFieldDeclaration)
 	}
 	
 	override getDeclaredClasses() {
-		declaredMembers.filter(typeof(MutableClassDeclaration))
+		declaredMembers.filter(MutableClassDeclaration)
 	}
 	
 	override getDeclaredConstructors() {
-		declaredMembers.filter(typeof(MutableConstructorDeclaration))
+		declaredMembers.filter(MutableConstructorDeclaration)
 	}
 	
 	override getDeclaredInterfaces() {
-		declaredMembers.filter(typeof(MutableInterfaceDeclaration))
+		declaredMembers.filter(MutableInterfaceDeclaration)
 	}
 	
 }
@@ -330,7 +330,7 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		val newTypeRef = 
 			switch superclass {
 				TypeReferenceImpl : superclass.delegate.toJavaCompliantTypeReference
-				case null : compilationUnit.typeReferences.getTypeForName(typeof(Object), compilationUnit.xtendFile)
+				case null : compilationUnit.typeReferences.getTypeForName(Object, compilationUnit.xtendFile)
 			}
 		val oldType = delegate.superTypes.findFirst[it.type instanceof JvmGenericType && !(type as JvmGenericType).isInterface]
 		if (oldType != null)
@@ -341,15 +341,15 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	override setImplementedInterfaces(Iterable<? extends TypeReference> superInterfaces) {
 		val oldInterfaces = delegate.superTypes.filter[it.type instanceof JvmGenericType && (type as JvmGenericType).isInterface]
 		delegate.superTypes.removeAll(oldInterfaces)
-		delegate.superTypes.addAll(superInterfaces.filter(typeof(TypeReferenceImpl)).map[delegate.toJavaCompliantTypeReference])
+		delegate.superTypes.addAll(superInterfaces.filter(TypeReferenceImpl).map[delegate.toJavaCompliantTypeReference])
 	}
 
 	override findField(String name) {
-		declaredMembers.filter(typeof(MutableFieldDeclaration)).findFirst[it.simpleName == name]
+		declaredMembers.filter(MutableFieldDeclaration).findFirst[it.simpleName == name]
 	}
 	
 	override findMethod(String name, TypeReference[] parameterTypes) {
-		declaredMembers.filter(typeof(MutableMethodDeclaration)).findFirst[
+		declaredMembers.filter(MutableMethodDeclaration).findFirst[
 			it.simpleName == name 
 			&& it.parameters.map[type].toList == parameterTypes.toList
 		]
@@ -402,12 +402,12 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	override addTypeParameter(String name, TypeReference... upperBounds) {
-		val param = TypesFactory::eINSTANCE.createJvmTypeParameter
+		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)
 		for (upper : upperBounds) {
 			val typeRef = compilationUnit.toJvmTypeReference(upper)
-			val jvmUpperBound = TypesFactory::eINSTANCE.createJvmUpperBound
+			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
 			jvmUpperBound.setTypeReference(typeRef)
 			param.constraints.add(jvmUpperBound)
 		}
@@ -419,7 +419,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	override addParameter(String name, TypeReference type) {
-		val param = TypesFactory::eINSTANCE.createJvmFormalParameter
+		val param = TypesFactory.eINSTANCE.createJvmFormalParameter
 		param.name = name
 		param.parameterType = compilationUnit.toJvmTypeReference(type)
 		delegate.parameters.add(param)
@@ -677,7 +677,7 @@ class JvmAnnotationReferenceImpl extends AbstractElementImpl<JvmAnnotationRefere
 	}
 	
 	override set(String name, String... values) {
-		val newValue = TypesFactory::eINSTANCE.createJvmStringAnnotationValue
+		val newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue
 		if (name != null)
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
@@ -685,7 +685,7 @@ class JvmAnnotationReferenceImpl extends AbstractElementImpl<JvmAnnotationRefere
 	}
 	
 	override set(String name, boolean... values) {
-		val newValue = TypesFactory::eINSTANCE.createJvmBooleanAnnotationValue
+		val newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue
 		if (name != null)
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
@@ -693,7 +693,7 @@ class JvmAnnotationReferenceImpl extends AbstractElementImpl<JvmAnnotationRefere
 	}
 	
 	override set(String name, int... values) {
-		val newValue = TypesFactory::eINSTANCE.createJvmIntAnnotationValue
+		val newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue
 		if (name != null)
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
