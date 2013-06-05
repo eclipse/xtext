@@ -22,9 +22,9 @@ class BuckminsterFilesCreator {
 	static String COMMANDS_FILE_NAME = "commands.txt"
 	static String INSTALL_BUCKY_LAUNCH = ".InstallHeadlessBuckminster.launch"
 	
-	IProjectFactoryContributor$IFileCreator fileCreator
+	IProjectFactoryContributor.IFileCreator fileCreator
 	
-	new(IProjectFactoryContributor$IFileCreator fileCreator) {
+	new(IProjectFactoryContributor.IFileCreator fileCreator) {
 		this.fileCreator = fileCreator
 	}
 	
@@ -189,12 +189,12 @@ class BuckminsterFilesCreator {
 		<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Install headless buckminster"/>
 		<booleanAttribute key="default" value="true"/>
 		<booleanAttribute key="includeOptional" value="true"/>
-		<stringAttribute key="location" value="«P2DirectorLaunch::LOCATION»"/>
-		<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog «P2DirectorLaunch::args»"/>
+		<stringAttribute key="location" value="«P2DirectorLaunch.LOCATION»"/>
+		<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog «P2DirectorLaunch.args»"/>
 		<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
 		<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xms40m -Xmx512m"/>
 		<stringAttribute key="pde.version" value="3.3"/>
-		<stringAttribute key="product" value="«P2DirectorLaunch::PRODUCT»"/>
+		<stringAttribute key="product" value="«P2DirectorLaunch.PRODUCT»"/>
 		<booleanAttribute key="show_selected_only" value="false"/>
 		<stringAttribute key="templateConfig" value="${target_home}/configuration/config.ini"/>
 		<booleanAttribute key="tracing" value="false"/>

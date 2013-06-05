@@ -16,7 +16,7 @@ import org.eclipse.xtext.validation.Issue
  */
 class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
 
-	@Fix(ArithmeticsValidator::NORMALIZABLE)
+	@Fix(ArithmeticsValidator.NORMALIZABLE)
 	def normalize(Issue issue, IssueResolutionAcceptor acceptor) {
 		val string = issue.data.get(0)
 		acceptor.accept(issue, "Replace with "+string, "Replace expression with '"+string+"'", "upcase.png", [

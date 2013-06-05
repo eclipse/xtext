@@ -15,7 +15,7 @@ class P2DirectorLaunch {
 		"org.eclipse.buckminster.git.headless.feature.feature.group",
 		"org.eclipse.buckminster.maven.headless.feature.feature.group")
 	
-	public static val String DESTINATION_JAVA = System::getProperty("user.home")+File::separatorChar+"buckminster"
+	public static val String DESTINATION_JAVA = System.getProperty("user.home")+File.separatorChar+"buckminster"
 	public static val String LOCATION = "${workspace_loc}/../runtime-InstallHeadlessBuckminster"
 	public static val String PRODUCT = "org.eclipse.equinox.p2.director.product"
 	

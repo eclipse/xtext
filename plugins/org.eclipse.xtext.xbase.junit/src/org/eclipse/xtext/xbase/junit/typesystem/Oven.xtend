@@ -38,7 +38,7 @@ class Oven extends Assert {
 	@Inject
 	IBatchTypeResolver typeResolver
 	
-	val SimpleBloomFilter alreadyBaked = SimpleBloomFilter::create(5000000)
+	val SimpleBloomFilter alreadyBaked = SimpleBloomFilter.create(5000000)
 	
 	@Inject extension ReflectExtensions
 	
@@ -97,9 +97,9 @@ class Oven extends Assert {
 			CompoundReentrantTypeResolver: {
 				val delegate = internalTypes.invoke("getDelegate", expression)
 				if (delegate instanceof RootResolvedTypes)
-					delegate.invoke("getTypeData", expression, Boolean::FALSE) as TypeData
+					delegate.invoke("getTypeData", expression, Boolean.FALSE) as TypeData
 			} 
-			default: internalTypes.invoke("getTypeData", expression, Boolean::FALSE) as TypeData
+			default: internalTypes.invoke("getTypeData", expression, Boolean.FALSE) as TypeData
 		}
 		assertNotNull("Type is not resolved. Expression: " + expression.toString, type)
 	}
