@@ -25,7 +25,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
    		val e  = m.block
    		acceptor.accept(e.toClass(e.eResource.name)).initializeLater [
    			members += e.toMethod("myMethod", inferredType) [
-   				exceptions += e.newTypeRef(typeof(Throwable))
+   				exceptions += e.newTypeRef(Throwable)
    				body = e
    			]
    		]

@@ -12,27 +12,27 @@ import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator
 class NodeModelAccess {
 
 	def INode nodeForEObject(EObject obj) {
-		NodeModelUtils::findActualNodeFor(obj)
+		NodeModelUtils.findActualNodeFor(obj)
 	}
 
 	def ILeafNode nodeForKeyword(EObject obj, String kw) {
-		val node = NodeModelUtils::findActualNodeFor(obj)
+		val node = NodeModelUtils.findActualNodeFor(obj)
 		node.asTreeIterable.findFirst[semanticElement == obj && grammarElement instanceof Keyword && text == kw] as ILeafNode
 	}
 
 	def Iterable<ILeafNode> nodesForKeyword(EObject obj, String kw) {
-		val node = NodeModelUtils::findActualNodeFor(obj)
-		node.asTreeIterable.filter(typeof(ILeafNode)).filter [
+		val node = NodeModelUtils.findActualNodeFor(obj)
+		node.asTreeIterable.filter(ILeafNode).filter [
 			semanticElement == obj && grammarElement instanceof Keyword && text == kw
 		]
 	}
 
 	def INode nodeForFeature(EObject obj, EStructuralFeature feature) {
-		NodeModelUtils::findNodesForFeature(obj, feature).head
+		NodeModelUtils.findNodesForFeature(obj, feature).head
 	}
 
 	def Iterable<INode> nodesForFeature(EObject obj, EStructuralFeature feature) {
-		NodeModelUtils::findNodesForFeature(obj, feature)
+		NodeModelUtils.findNodesForFeature(obj, feature)
 	}
 
 	def ILeafNode immediatelyFollowingKeyword(EObject obj, String kw) {

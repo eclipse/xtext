@@ -152,7 +152,7 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 			else
 				returnType.getSimpleName
 		new StyledString(simpleName + uiStrings.parameters(element))
-			.append(new StyledString(" : " + returnTypeString, StyledString::DECORATIONS_STYLER))
+			.append(new StyledString(" : " + returnTypeString, StyledString.DECORATIONS_STYLER))
 	}
 	
 	protected def dispatch ImageDescriptor imageDescriptor(Object element) {

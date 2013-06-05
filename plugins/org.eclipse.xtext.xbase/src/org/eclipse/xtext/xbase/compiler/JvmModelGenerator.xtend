@@ -113,7 +113,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch void internalDoGenerate(EObject obj, IFileSystemAccess fsa) {}
 	
 	def dispatch void internalDoGenerate(JvmDeclaredType type, IFileSystemAccess fsa) {
-		if (DisableCodeGenerationAdapter::isDisabled(type))
+		if (DisableCodeGenerationAdapter.isDisabled(type))
 			return;
 		if(type.qualifiedName != null)
 			fsa.generateFile(type.qualifiedName.replace('.', '/') + '.java', type.generateType(generatorConfigProvider.get(type)))
@@ -171,7 +171,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def generateAnnotationsWithSyntheticSuppressWarnings(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
-		val noSuppressWarningsFilter = [JvmAnnotationReference it | annotation?.identifier != typeof(SuppressWarnings).name]
+		val noSuppressWarningsFilter = [JvmAnnotationReference it | annotation?.identifier != SuppressWarnings.name]
 		annotations.filter(noSuppressWarningsFilter).generateAnnotations(appendable, true, config)
 		appendable.append('''@SuppressWarnings("all")''').newLine
 	}
@@ -219,7 +219,7 @@ class JvmModelGenerator implements IGenerator {
 		childAppendable.append("@interface ")
 		childAppendable.traceSignificant(it).append(simpleName)
 		childAppendable.append(" {")
-		for (operation : membersToBeCompiled.filter(typeof(JvmOperation))) {
+		for (operation : membersToBeCompiled.filter(JvmOperation)) {
 			generateAnnotationMethod(operation, childAppendable, config)
 		}
 		childAppendable.newLine.append("}")
@@ -323,10 +323,10 @@ class JvmModelGenerator implements IGenerator {
 	def javaName(JvmVisibility visibility) {
 		if (visibility != null)
 			return switch visibility {
-					case JvmVisibility::PRIVATE : 'private '
-					case JvmVisibility::PUBLIC : 'public '
-					case JvmVisibility::PROTECTED : 'protected '
-					case JvmVisibility::DEFAULT : ''
+					case JvmVisibility.PRIVATE : 'private '
+					case JvmVisibility.PUBLIC : 'public '
+					case JvmVisibility.PROTECTED : 'protected '
+					case JvmVisibility.DEFAULT : ''
 				}
 		else 
 			return ''
@@ -475,7 +475,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateTypeParameterConstraints(JvmTypeParameter it, ITreeAppendable appendable, GeneratorConfig config) {
-		val upperBounds = constraints.filter(typeof(JvmUpperBound))
+		val upperBounds = constraints.filter(JvmUpperBound)
 		appendable.forEachSafely(upperBounds, [
 				prefix = ' extends ' separator = ' & '
 			], [
@@ -545,7 +545,7 @@ class JvmModelGenerator implements IGenerator {
 				if(errors.empty) {
 					val returnType = switch(op) { 
 						JvmOperation: op.returnType
-						JvmConstructor: Void::TYPE.getTypeForName(op) 
+						JvmConstructor: Void.TYPE.getTypeForName(op) 
 						default: null
 					}
 					if (expression instanceof XBlockExpression && (expression as XBlockExpression).expressions.size != 1 && returnType instanceof JvmVoid) {
@@ -586,14 +586,14 @@ class JvmModelGenerator implements IGenerator {
 	
 	
 	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
-        val fileHeaderAdapter = it.eAdapters.filter(typeof(FileHeaderAdapter)).head
+        val fileHeaderAdapter = it.eAdapters.filter(FileHeaderAdapter).head
         if(!fileHeaderAdapter?.headerText.nullOrEmpty) {
 		generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource), appendable, config)
         }
     }
 
 	def void generateJavaDoc(EObject it, ITreeAppendable appendable, GeneratorConfig config) {
-		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
+		val adapter = it.eAdapters.filter(DocumentationAdapter).head
 		if(!adapter?.documentation.nullOrEmpty) {
 			// TODO we should track the source of the documentation in the documentation adapter
 			val sourceElements = jvmModelAssociations.getSourceElements(it)
@@ -613,20 +613,20 @@ class JvmModelGenerator implements IGenerator {
 				val text = region.text
 				if(text != null && text.length > 0){
 					val fqn = qualifiedNameConverter.toQualifiedName(text)
-					val context = NodeModelUtils::findActualSemanticObjectFor(node)
+					val context = NodeModelUtils.findActualSemanticObjectFor(node)
 					if(fqn.segmentCount == 1 && context != null){
 						val scope = scopeProvider.getScope(context, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)
 						val candidate = scope.getSingleElement(fqn)
 						if(candidate != null) {
 							val jvmType = 	(
 											if(candidate.EObjectOrProxy.eIsProxy)
-												EcoreUtil::resolve(candidate.EObjectOrProxy, context)
+												EcoreUtil.resolve(candidate.EObjectOrProxy, context)
 											else
 												candidate.EObjectOrProxy
 											) as JvmType
 							if(jvmType instanceof JvmDeclaredType && !jvmType.eIsProxy) {
 								val referencedType = jvmType as JvmDeclaredType
-								val contextDeclarator = EcoreUtil2::getContainerOfType(it,typeof(JvmDeclaredType))
+								val contextDeclarator = EcoreUtil2.getContainerOfType(it,JvmDeclaredType)
 								if(referencedType.packageName != contextDeclarator.packageName){
 									val importManager = getImportManager(appendable)
 									importManager.addImportFor(jvmType)
@@ -656,7 +656,7 @@ class JvmModelGenerator implements IGenerator {
 			doc.newLine
 			doc.append(" */")
 		if (!documentationNodes.empty) {
-			var documentationTrace = ITextRegionWithLineInformation::EMPTY_REGION
+			var documentationTrace = ITextRegionWithLineInformation.EMPTY_REGION
 			for(node: documentationNodes) {
 				documentationTrace = documentationTrace.merge(new TextRegionWithLineInformation(node.offset, node.length, node.startLine, node.endLine)) 
 			}
@@ -728,9 +728,9 @@ class JvmModelGenerator implements IGenerator {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(
 				switch(it) {
-					case Double::isNaN(it) : "Double.NaN"
-					case Double::POSITIVE_INFINITY : "Double.POSITIVE_INFINITY" 
-					case Double::NEGATIVE_INFINITY : "Double.NEGATIVE_INFINITY"
+					case Double.isNaN(it) : "Double.NaN"
+					case Double.POSITIVE_INFINITY : "Double.POSITIVE_INFINITY" 
+					case Double.NEGATIVE_INFINITY : "Double.NEGATIVE_INFINITY"
 					default: toString + "d" 
 				})
 		])
@@ -740,9 +740,9 @@ class JvmModelGenerator implements IGenerator {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(
 				switch(it) {
-					case Float::isNaN(it) : "Float.NaN"
-					case Float::POSITIVE_INFINITY : "Float.POSITIVE_INFINITY" 
-					case Float::NEGATIVE_INFINITY : "Float.NEGATIVE_INFINITY"
+					case Float.isNaN(it) : "Float.NaN"
+					case Float.POSITIVE_INFINITY : "Float.POSITIVE_INFINITY" 
+					case Float.NEGATIVE_INFINITY : "Float.NEGATIVE_INFINITY"
 					default: toString + "f" 
 				})
 		])
@@ -750,13 +750,13 @@ class JvmModelGenerator implements IGenerator {
 	
 	def dispatch void toJavaLiteral(JvmCharAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
-			appendable.append("'" + Strings::convertToJavaString(toString, true) + "'")			
+			appendable.append("'" + Strings.convertToJavaString(toString, true) + "'")			
 		])
 	}
 		
 	def dispatch void toJavaLiteral(JvmStringAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
-			appendable.append('"' + Strings::convertToJavaString(toString, true) + '"')			
+			appendable.append('"' + Strings.convertToJavaString(toString, true) + '"')			
 		])
 	}
 		
@@ -784,7 +784,7 @@ class JvmModelGenerator implements IGenerator {
 		if(values.isEmpty)
 			appendable.append('{}')
 		else 
-			appendable.forEachWithShortcut(values.filter(typeof(XExpression)), [
+			appendable.forEachWithShortcut(values.filter(XExpression), [
 				compiler.toJavaExpression(it, appendable)
 			])
 	}

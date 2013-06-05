@@ -32,7 +32,7 @@ class InsertionOffsets {
 	def getNewFieldInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
 		if (ownerType.members.empty)
 			return inEmpty(ownerType)
-		val lastDefinedField = ownerType.members.filter(typeof(XtendField)).last
+		val lastDefinedField = ownerType.members.filter(XtendField).last
 		if (lastDefinedField == null)
 			return before(ownerType.members.head)
 		else
@@ -40,7 +40,7 @@ class InsertionOffsets {
 	}
 
 	def getNewMethodInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
-		val callingMember = EcoreUtil2::getContainerOfType(call, typeof(XtendMember))
+		val callingMember = EcoreUtil2.getContainerOfType(call, XtendMember)
 		if (callingMember != null && ownerType.members.contains(callingMember))
 			return after(callingMember)
 		else if (ownerType.members.empty)
@@ -50,7 +50,7 @@ class InsertionOffsets {
 	}
 
 	def getNewConstructorInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
-		val lastDefinedConstructor = ownerType.members.filter(typeof(XtendConstructor)).last
+		val lastDefinedConstructor = ownerType.members.filter(XtendConstructor).last
 		if(lastDefinedConstructor == null)
 			return getNewFieldInsertOffset(call, ownerType)		
 		else	
@@ -58,16 +58,16 @@ class InsertionOffsets {
 	}
 
 	def protected before(EObject element) {
-		NodeModelUtils::findActualNodeFor(element).offset
+		NodeModelUtils.findActualNodeFor(element).offset
 	}
 
 	def protected after(EObject element) {
-		val node = NodeModelUtils::findActualNodeFor(element)
+		val node = NodeModelUtils.findActualNodeFor(element)
 		node.offset + node.length
 	}
 	
 	def protected inEmpty(XtendTypeDeclaration ownerType) {
-		val classNode = NodeModelUtils::findActualNodeFor(ownerType)
+		val classNode = NodeModelUtils.findActualNodeFor(ownerType)
 		val openingBraceNode = classNode.leafNodes.findFirst[text == "{"]
 		if(openingBraceNode != null)
 			openingBraceNode.offset + 1

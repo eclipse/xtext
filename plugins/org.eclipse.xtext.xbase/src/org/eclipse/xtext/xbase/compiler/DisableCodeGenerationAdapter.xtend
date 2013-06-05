@@ -35,6 +35,6 @@ class DisableCodeGenerationAdapter extends AdapterImpl {
 	}
 	
 	def private static getAdapter(JvmDeclaredType declaredType) {
-		return EcoreUtil::getAdapter(declaredType.eAdapters, typeof(DisableCodeGenerationAdapter))
+		return EcoreUtil.getAdapter(declaredType.eAdapters, DisableCodeGenerationAdapter)
 	}
 }

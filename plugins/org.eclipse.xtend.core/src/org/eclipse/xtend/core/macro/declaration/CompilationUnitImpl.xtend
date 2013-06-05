@@ -191,10 +191,10 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	def Visibility toVisibility(JvmVisibility delegate) {
 		switch delegate {
-			case JvmVisibility::DEFAULT: Visibility::DEFAULT
-			case JvmVisibility::PRIVATE: Visibility::PRIVATE
-			case JvmVisibility::PROTECTED: Visibility::PROTECTED
-			case JvmVisibility::PUBLIC: Visibility::PUBLIC
+			case JvmVisibility.DEFAULT: Visibility.DEFAULT
+			case JvmVisibility.PRIVATE: Visibility.PRIVATE
+			case JvmVisibility.PROTECTED: Visibility.PROTECTED
+			case JvmVisibility.PUBLIC: Visibility.PUBLIC
 		}
 	}
 
@@ -455,7 +455,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def Object translateAnnotationValue(JvmAnnotationValue value) {
 		val List<?> result = switch value {
-			JvmCustomAnnotationValue : value.values.filter(typeof(XExpression)).map[evaluate(it)].toList
+			JvmCustomAnnotationValue : value.values.filter(XExpression).map[evaluate(it)].toList
 			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)]
 			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)]
 			JvmStringAnnotationValue : value.values
@@ -471,7 +471,7 @@ class CompilationUnitImpl implements CompilationUnit {
 			default : emptyList
 		}
 		if (result.size > 1)
-			return ImmutableList::copyOf(result)
+			return ImmutableList.copyOf(result)
 		return result.head
 	}
 	

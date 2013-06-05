@@ -51,7 +51,7 @@ class ActiveAnnotationContextProvider {
 	
 	def List<? extends ActiveAnnotationContext> computeContext(XtendFile file) {
 		//TODO measure and improve (is called twice for each xtendfile)
-		val task = Stopwatches::forTask('[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)')
+		val task = Stopwatches.forTask('[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)')
 		task.start
 		try {
 			cache.get('annotation context', file.eResource) [|
@@ -67,8 +67,8 @@ class ActiveAnnotationContextProvider {
 						if (processorInstance != null) {
 							fa.setProcessorInstance(processorInstance)
 						} else {
-							file.eResource.errors.add(new EObjectDiagnosticImpl(Severity::ERROR, 
-								IssueCodes::PROCESSING_ERROR, "Couldn't instantiate the referenced annotation processor of type '"+processorType.identifier
+							file.eResource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 
+								IssueCodes.PROCESSING_ERROR, "Couldn't instantiate the referenced annotation processor of type '"+processorType.identifier
 								+"'. This is usually the case when the processor resides in the same project as the annotated element.", file, null, -1, null))
 						}
 						annotatedElements.put(key, fa)

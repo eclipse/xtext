@@ -54,7 +54,7 @@ abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedEle
 abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extends XtendNamedElementImpl<T> implements AnnotationTarget {
 	
 	override getAnnotations() {
-		ImmutableList::copyOf( this.delegate.annotations.map[compilationUnit.toAnnotationReference(it)] )
+		ImmutableList.copyOf( this.delegate.annotations.map[compilationUnit.toAnnotationReference(it)] )
 	}
 	
 	override findAnnotation(Type annotationType) {
@@ -128,23 +128,23 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 	}
 	
 	override getDeclaredMethods() {
-		declaredMembers.filter(typeof(MethodDeclaration))
+		declaredMembers.filter(MethodDeclaration)
 	}
 	
 	override getDeclaredFields() {
-		declaredMembers.filter(typeof(FieldDeclaration))
+		declaredMembers.filter(FieldDeclaration)
 	}
 	
 	override getDeclaredClasses() {
-		declaredMembers.filter(typeof(ClassDeclaration))
+		declaredMembers.filter(ClassDeclaration)
 	}
 	
 	override getDeclaredConstructors() {
-		declaredMembers.filter(typeof(ConstructorDeclaration))
+		declaredMembers.filter(ConstructorDeclaration)
 	}
 	
 	override getDeclaredInterfaces() {
-		declaredMembers.filter(typeof(InterfaceDeclaration))
+		declaredMembers.filter(InterfaceDeclaration)
 	}
 	
 }
@@ -402,7 +402,7 @@ class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationIm
 class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParameter> implements TypeParameterDeclaration {
 	
 	override getUpperBounds() {
-		delegate.constraints.filter(typeof(JvmUpperBound)).map[compilationUnit.toTypeReference(typeReference)].toList
+		delegate.constraints.filter(JvmUpperBound).map[compilationUnit.toTypeReference(typeReference)].toList
 	}
 	
 	override getSimpleName() {

@@ -36,7 +36,7 @@ class AnnotationProcessor {
 	 * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
 	 */
 	def indexingPhase(ActiveAnnotationContext ctx, IJvmDeclaredTypeAcceptor acceptor, CancelIndicator monitor) {
-		val task = Stopwatches::forTask('[macros] indexingPhase (AnnotationProcessor.indexingPhase)')
+		val task = Stopwatches.forTask('[macros] indexingPhase (AnnotationProcessor.indexingPhase)')
 		task.start
 		try {
 			switch processor : ctx.processorInstance {
@@ -56,7 +56,7 @@ class AnnotationProcessor {
 	}
 
 	def inferencePhase(ActiveAnnotationContext ctx, CancelIndicator monitor) {
-		val task = Stopwatches::forTask('[macros] inferencePhase (AnnotationProcessor.inferencePhase)')
+		val task = Stopwatches.forTask('[macros] inferencePhase (AnnotationProcessor.inferencePhase)')
 		task.start
 		try {
 			switch processor : ctx.processorInstance{
@@ -93,7 +93,7 @@ class AnnotationProcessor {
 					ctx.compilationUnit.canceled = true
 					return;
 				}
-				Thread::sleep(100)
+				Thread.sleep(100)
 			}
 		]).start
 		try {

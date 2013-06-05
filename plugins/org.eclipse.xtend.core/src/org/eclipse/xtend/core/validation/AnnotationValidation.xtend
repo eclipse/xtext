@@ -33,17 +33,17 @@ class AnnotationValidation extends AbstractDeclarativeValidator {
 	AnnotationValueValidator annotationValueValidator;
 	
 	override protected getEPackages() {
-		newArrayList(XtendPackage::eINSTANCE, XbasePackage::eINSTANCE, XAnnotationsPackage::eINSTANCE)
+		newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE)
 	}
 	
 	@Check 
 	def checkAnnotation(XtendAnnotationType it) {
-		for (it : members.filter(typeof(XtendField))) {
+		for (it : members.filter(XtendField)) {
 			if (!isValidAnnotationValueType(type)) {
 				error('''Invalid type «type.simpleName» for the annotation attribute «name»; only primitive type, String, Class, annotation, enumeration are permitted or 1-dimensional arrays thereof''',
 					it,
 					XTEND_FIELD__TYPE,
-					IssueCodes::INVALID_ANNOTATION_VALUE_TYPE
+					IssueCodes.INVALID_ANNOTATION_VALUE_TYPE
 				)
 			}
 			if(initialValue != null) {

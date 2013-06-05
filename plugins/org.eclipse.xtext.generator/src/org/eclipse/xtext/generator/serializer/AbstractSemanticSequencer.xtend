@@ -69,18 +69,18 @@ class AbstractSemanticSequencer extends GeneratedFile {
 //		localConstraints.exists[superConstraints.contains(it)]
 //	}
 	
-	override getFileContents(SerializerGenFileNames$GenFileName filename) {
+	override getFileContents(SerializerGenFileNames.GenFileName filename) {
 		val file = new JavaEMFFile(grammar.eResource.resourceSet, filename.packageName);
 		
-		file.imported(typeof(EObject))
-		file.imported(typeof(GenericSequencer))
-		file.imported(typeof(ISemanticSequencer))
-		file.imported(typeof(ITransientValueService))
-		file.imported(typeof(ISemanticSequenceAcceptor))
-		file.imported(typeof(ISemanticSequencerDiagnosticProvider))
-		file.imported(typeof(ISerializationDiagnostic$Acceptor))
-		file.imported(typeof(Inject))
-		file.imported(typeof(Provider))
+		file.imported(EObject)
+		file.imported(GenericSequencer)
+		file.imported(ISemanticSequencer)
+		file.imported(ITransientValueService)
+		file.imported(ISemanticSequenceAcceptor)
+		file.imported(ISemanticSequencerDiagnosticProvider)
+		file.imported(ISerializationDiagnostic.Acceptor)
+		file.imported(Inject)
+		file.imported(Provider)
 		
 		val localConstraints = grammar.grammarConstraints
 		val superConstraints = grammar.superGrammar.grammarConstraints
@@ -88,7 +88,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		val superGrammar = if(localConstraints.exists[superConstraints.contains(it)]) 
 				file.imported(names.semanticSequencer.getQualifiedName(grammar.usedGrammars.head))
 			else
-				file.imported(typeof(AbstractDelegatingSemanticSequencer))
+				file.imported(AbstractDelegatingSemanticSequencer)
 		val _abstract = if (filename.isAbstract) "abstract " else "" 
 		file.body = '''
 			@SuppressWarnings("all")
@@ -137,7 +137,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		}
 	'''
 	
-	def genMethodSequence(JavaEMFFile file, IGrammarConstraintProvider$IConstraint c) '''
+	def genMethodSequence(JavaEMFFile file, IGrammarConstraintProvider.IConstraint c) '''
 		/**
 		 * Constraint:
 		 *     «if(c.body == null) "{"+c.type.name+"}" else c.body.toString().replaceAll("\\n","\n*     ")»
@@ -147,12 +147,12 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			«IF c.canGenerate()»
 				if(errorAcceptor != null) {
 					«FOR f:c.features.filter(e|e != null)»
-						if(transientValues.isValueTransient(«cast»semanticObject, «file.importedGenTypeLiteral(f.feature)») == «file.imported(typeof(ITransientValueService$ValueTransient))».YES)
+						if(transientValues.isValueTransient(«cast»semanticObject, «file.importedGenTypeLiteral(f.feature)») == «file.imported(ITransientValueService.ValueTransient)».YES)
 							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(«cast»semanticObject, «file.importedGenTypeLiteral(f.feature)»));
 					«ENDFOR»
 				}
-				«file.imported(typeof(ISemanticNodeProvider$INodesForEObjectProvider))» nodes = createNodeProvider(«cast»semanticObject);
-				«file.imported(typeof(SequenceFeeder))» feeder = createSequencerFeeder(«cast»semanticObject, nodes);
+				«file.imported(ISemanticNodeProvider.INodesForEObjectProvider)» nodes = createNodeProvider(«cast»semanticObject);
+				«file.imported(SequenceFeeder)» feeder = createSequencerFeeder(«cast»semanticObject, nodes);
 				«FOR f: if(c.body.featureInfo != null) newArrayList(c.body.featureInfo) else c.body.children.filter(e|e.featureInfo != null).map(e|e.featureInfo)»
 					«val assignment=f.assignments.get(0)»
 					feeder.accept(grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«file.getGetAccessor(f.feature)»());

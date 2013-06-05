@@ -36,20 +36,20 @@ class ProblemSupportImpl implements ProblemSupport {
 	override addError(Element element, String message) {
 		checkCanceled
 		val resAndObj = getResourceAndEObject(element)
-		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity::ERROR, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
+		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override addWarning(Element element, String message) {
 		checkCanceled
 		val resAndObj = getResourceAndEObject(element)
-		resAndObj.key.warnings.add(new EObjectDiagnosticImpl(Severity::WARNING, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
+		resAndObj.key.warnings.add(new EObjectDiagnosticImpl(Severity.WARNING, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override getProblems(Element element) {
 		checkCanceled
 		val resAndObj = getResourceAndEObject(element)
 		val resource = resAndObj.key
-		val issues = (resource.errors + resource.warnings).filter(typeof(EObjectDiagnosticImpl))
+		val issues = (resource.errors + resource.warnings).filter(EObjectDiagnosticImpl)
 		
 		val result = issues.filter[diag | diag.problematicObject == resAndObj.value ].map[ diag |
 			new ProblemImpl(diag.code, diag.message, translateSeverity(diag.severity)) as Problem
@@ -59,12 +59,12 @@ class ProblemSupportImpl implements ProblemSupport {
 	
 	def EStructuralFeature getSignificantFeature(EObject obj) {
 		return switch obj {
-			XtendTypeDeclaration : XtendPackage::eINSTANCE.xtendTypeDeclaration_Name
-			XtendField : XtendPackage::eINSTANCE.xtendField_Name
-			XtendFunction : XtendPackage::eINSTANCE.xtendFunction_Name
+			XtendTypeDeclaration : XtendPackage.eINSTANCE.xtendTypeDeclaration_Name
+			XtendField : XtendPackage.eINSTANCE.xtendField_Name
+			XtendFunction : XtendPackage.eINSTANCE.xtendFunction_Name
 			// FIXME: find something appropriate for constructors
-			//XtendConstructor : XtendPackage::eINSTANCE.xtendConstructor_Name
-			JvmFormalParameter : TypesPackage::eINSTANCE.jvmFormalParameter_Name
+			//XtendConstructor : XtendPackage.eINSTANCE.xtendConstructor_Name
+			JvmFormalParameter : TypesPackage.eINSTANCE.jvmFormalParameter_Name
 		}
 	}
 	
@@ -85,12 +85,12 @@ class ProblemSupportImpl implements ProblemSupport {
 		throw new IllegalArgumentException("You can only add issues on locally declared elements.")
 	}
 	
-	def private Problem$Severity translateSeverity(Severity severity) {
+	def private Problem.Severity translateSeverity(Severity severity) {
 		switch (severity) {
-			case Severity::ERROR : Problem$Severity::ERROR
-			case Severity::WARNING : Problem$Severity::WARNING
-			case Severity::INFO : Problem$Severity::INFO
-			case Severity::IGNORE : Problem$Severity::IGNORE
+			case Severity.ERROR : Problem.Severity.ERROR
+			case Severity.WARNING : Problem.Severity.WARNING
+			case Severity.INFO : Problem.Severity.INFO
+			case Severity.IGNORE : Problem.Severity.IGNORE
 		}
 	}
 }
@@ -100,11 +100,11 @@ class ProblemImpl implements Problem {
 	
 	String id
 	String message
-	Problem$Severity severity	
+	Problem.Severity severity	
 	
 	new(String id,
 	String message,
-	Problem$Severity severity) {
+	Problem.Severity severity) {
 		this.id = id
 		this.message = message
 		this.severity = severity

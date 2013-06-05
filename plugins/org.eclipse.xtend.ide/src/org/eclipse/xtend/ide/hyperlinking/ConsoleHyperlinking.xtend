@@ -52,7 +52,7 @@ class XtendFileHyperlink implements IHyperlink {
 		val indexOfColon = fileName.indexOf(":")
 		if (indexOfColon != -1) {
 			this.fileName = fileName.substring(0, indexOfColon)
-			this.lineNumber = Integer::valueOf(fileName.substring(indexOfColon+1))
+			this.lineNumber = Integer.valueOf(fileName.substring(indexOfColon+1))
 		} else {
 			this.fileName = fileName
 		}
@@ -66,7 +66,7 @@ class XtendFileHyperlink implements IHyperlink {
 				AbstractSourceLookupDirector : {
 					val result = l.getSourceElement(fileName)
 					switch result {	IFile : {
-						val editor = IDE::openEditor(workbench.activeWorkbenchWindow.activePage, result)
+						val editor = IDE.openEditor(workbench.activeWorkbenchWindow.activePage, result)
 						switch editor { XtextEditor : {
 							val region = editor.document.getLineInformation(lineNumber - 1)
 							editor.selectAndReveal(region.offset, region.length)
@@ -86,7 +86,7 @@ class XtendFileHyperlink implements IHyperlink {
 	}
 	
 	def private ILaunch getLaunch() {
-		val process = console.getAttribute(IDebugUIConstants::ATTR_CONSOLE_PROCESS) as IProcess
+		val process = console.getAttribute(IDebugUIConstants.ATTR_CONSOLE_PROCESS) as IProcess
 		if (process != null) {
 		    return process.getLaunch();
 		}

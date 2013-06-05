@@ -14,27 +14,27 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	@Property CompilationUnitImpl compilationUnit
 	
 	override registerAnnotationType(String qualifiedName) throws IllegalArgumentException {
-		val newType = TypesFactory::eINSTANCE.createJvmAnnotationType
-		newType.setVisibility(JvmVisibility::PUBLIC)
+		val newType = TypesFactory.eINSTANCE.createJvmAnnotationType
+		newType.setVisibility(JvmVisibility.PUBLIC)
 		setNameAndAccept(newType, qualifiedName)
 	}
 	
 	override registerClass(String qualifiedName) throws IllegalArgumentException {
-		val newType = TypesFactory::eINSTANCE.createJvmGenericType
-		newType.setVisibility(JvmVisibility::PUBLIC)
-		newType.superTypes += compilationUnit.typeReferences.getTypeForName(typeof(Object), compilationUnit.xtendFile)
+		val newType = TypesFactory.eINSTANCE.createJvmGenericType
+		newType.setVisibility(JvmVisibility.PUBLIC)
+		newType.superTypes += compilationUnit.typeReferences.getTypeForName(Object, compilationUnit.xtendFile)
 		setNameAndAccept(newType, qualifiedName)
 	}
 	
 	override registerEnumerationType(String qualifiedName) throws IllegalArgumentException {
-		val newType = TypesFactory::eINSTANCE.createJvmEnumerationType
-		newType.setVisibility(JvmVisibility::PUBLIC)
+		val newType = TypesFactory.eINSTANCE.createJvmEnumerationType
+		newType.setVisibility(JvmVisibility.PUBLIC)
 		setNameAndAccept(newType, qualifiedName)
 	}
 	
 	override registerInterface(String qualifiedName) throws IllegalArgumentException {
-		val newType = TypesFactory::eINSTANCE.createJvmGenericType
-		newType.setVisibility(JvmVisibility::PUBLIC)
+		val newType = TypesFactory.eINSTANCE.createJvmGenericType
+		newType.setVisibility(JvmVisibility.PUBLIC)
 		newType.interface = true
 		setNameAndAccept(newType, qualifiedName)
 	}
@@ -60,7 +60,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	}
 	
 	private def JvmDeclaredType findType(String string) {
-		return findRecursively( string, compilationUnit.xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)))
+		return findRecursively( string, compilationUnit.xtendFile.eResource.contents.filter(JvmDeclaredType))
 	}
 	
 	private def JvmDeclaredType findRecursively(String string, Iterable<? extends JvmDeclaredType> types) {
@@ -69,7 +69,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 				if (string == type.identifier) {
 					return type;
 				}
-				val result = findRecursively(string, type.members.filter(typeof(JvmDeclaredType)))
+				val result = findRecursively(string, type.members.filter(JvmDeclaredType))
 				if (result != null)
 					return result
 			}

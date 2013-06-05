@@ -19,7 +19,7 @@ class SyntacticSequencer extends GeneratedFile {
 	
 	@Inject@Named("fileHeader") String fileHeader
 	
-	override getFileContents(SerializerGenFileNames$GenFileName filename) {
+	override getFileContents(SerializerGenFileNames.GenFileName filename) {
 		if (generateXtendStub) '''
 			/*
 			 «fileHeader»

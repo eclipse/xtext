@@ -19,7 +19,7 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	override getResourceDescriptions(ResourceSet resourceSet) {
 		val result = super.getResourceDescriptions(resourceSet)
 		switch result {
-			CurrentDescriptions$ResourceSetAware : {
+			CurrentDescriptions.ResourceSetAware : {
 				switch d:result.delegate {
 					CurrentDescriptions : {
 						return new FilteringResourceDescriptions(result, projectProvider.getJavaProject(resourceSet))

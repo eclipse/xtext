@@ -18,14 +18,14 @@ abstract class AbstractAnnotationBuilder extends AbstractCodeBuilder {
 	
 }
 
-class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder$Xtend {
+class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject XtypeTypeReferenceSerializer typeRefSerializer
 
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
-		super.valid && annotationName != null && visibility == JvmVisibility::PUBLIC  
+		super.valid && annotationName != null && visibility == JvmVisibility.PUBLIC  
 	}	
 
 	override protected getTypeReferenceSerializer() {
@@ -50,7 +50,7 @@ class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeB
 	}
 }
 
-class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder$Java {
+class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder.Java {
 	
 	@Inject TypeReferenceSerializer typeRefSerializer
 
@@ -63,7 +63,7 @@ class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBu
 	}
 	
 	override build(IAppendable appendable) {
-		appendable.appendVisibility(visibility, JvmVisibility::DEFAULT)
+		appendable.appendVisibility(visibility, JvmVisibility.DEFAULT)
 			.append('@interface ').append(annotationName).append(' {')
 			.newLine.append('}')
 	}

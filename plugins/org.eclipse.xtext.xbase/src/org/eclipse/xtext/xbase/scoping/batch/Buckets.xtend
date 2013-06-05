@@ -30,7 +30,7 @@ class TypeBucket {
 	int id
 	List<? extends JvmType> types
 	def getHints() {
-		EnumSet::of(ConformanceHint::CHECKED, ConformanceHint::SUCCESS)
+		EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS)
 	}
 }
 

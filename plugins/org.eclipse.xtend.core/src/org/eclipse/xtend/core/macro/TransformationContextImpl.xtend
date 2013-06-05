@@ -37,7 +37,7 @@ class TransformationContextImpl implements TransformationContext {
 	
 	override getPrimaryGeneratedJavaElement(NamedElement source) {
 		if (isSource(source)) {
-			val derivedElement = associations.getJvmElements((source as XtendNamedElementImpl<?>).delegate).filter(typeof(JvmIdentifiableElement)).head
+			val derivedElement = associations.getJvmElements((source as XtendNamedElementImpl<?>).delegate).filter(JvmIdentifiableElement).head
 			if (derivedElement != null)
 				return unit.toNamedElement(derivedElement)
 		}

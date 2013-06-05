@@ -46,7 +46,7 @@ class JvmElementsProxifyingUnloader implements IReferableElementsUnloader {
 				}
 			}
 		}
-		(element as InternalEObject).eSetProxyURI(EcoreUtil::getURI(element))
+		(element as InternalEObject).eSetProxyURI(EcoreUtil.getURI(element))
 	}
 	
 }

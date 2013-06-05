@@ -14,7 +14,7 @@ import org.eclipse.xtext.example.arithmetics.interpreter.Calculator
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
 
-import static org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage$Literals.*
+import static org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage.Literals.*
 
 /**
  * Custom validation rules. 
@@ -40,7 +40,7 @@ class ArithmeticsValidator extends AbstractArithmeticsValidator {
 		if (expr instanceof NumberLiteral || expr instanceof FunctionCall) 
 			return;
 		// ignore evaluations
-		if (EcoreUtil2::getContainerOfType(expr, typeof(Evaluation))!=null)
+		if (EcoreUtil2.getContainerOfType(expr, Evaluation)!=null)
 			return;
 		
 		val contents = expr.eAllContents
@@ -54,7 +54,7 @@ class ArithmeticsValidator extends AbstractArithmeticsValidator {
 			warning(
 					"Expression could be normalized to constant '"+decimal+"'", 
 					null,
-					ValidationMessageAcceptor::INSIGNIFICANT_INDEX,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 					NORMALIZABLE,
 					decimal.toString())
 		}

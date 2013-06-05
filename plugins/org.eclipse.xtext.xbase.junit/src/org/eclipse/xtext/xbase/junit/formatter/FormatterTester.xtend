@@ -29,7 +29,7 @@ class FormatterTester {
 		val fullToBeParsed = (prefix + toBeFormatted + postfix)
 		val parsed = fullToBeParsed.parse
 		if (!allowErrors)
-			Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
+			Assert.assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult?.rootNode?.text
 
 		switch formatter { AbstractFormatter: formatter.allowIdentityEdits = true }
@@ -44,7 +44,7 @@ class FormatterTester {
 			edits += createMissingEditReplacements(parsed.eResource as XtextResource, edits, start, length)
 		val newDocument = oldDocument.applyEdits(edits)
 		try {
-			Assert::assertEquals((prefix + expectation + postfix).toString, newDocument.toString)
+			Assert.assertEquals((prefix + expectation + postfix).toString, newDocument.toString)
 		} catch (AssertionError e) {
 			println(oldDocument.applyDebugEdits(edits))
 			println()
@@ -56,11 +56,11 @@ class FormatterTester {
 			formatter.format(parsed.eResource as XtextResource, 0, fullToBeParsed.length, cfg))
 		val parsed2 = parsed2Doc.parse
 		if (!allowErrors)
-			Assert::assertEquals(0, parsed2.eResource.errors.size)
+			Assert.assertEquals(0, parsed2.eResource.errors.size)
 		val edits2 = formatter.format(parsed2.eResource as XtextResource, 0, parsed2Doc.length, cfg)
 		val newDocument2 = parsed2Doc.applyEdits(edits2)
 		try {
-			Assert::assertEquals(parsed2Doc, newDocument2.toString)
+			Assert.assertEquals(parsed2Doc, newDocument2.toString)
 		} catch (AssertionError e) {
 			println(newDocument.applyDebugEdits(edits2))
 			println()

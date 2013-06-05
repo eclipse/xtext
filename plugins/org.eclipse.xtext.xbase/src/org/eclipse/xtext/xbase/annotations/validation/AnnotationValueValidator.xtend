@@ -32,7 +32,7 @@ class AnnotationValueValidator {
 	def void validateAnnotationValue(XExpression value, ValidationMessageAcceptor acceptor) {
 		if (!isValidAnnotationValue(value, true)) {
 			acceptor.acceptError("The value for an annotation attribute must be a constant expression", value, null,
-				ValidationMessageAcceptor::INSIGNIFICANT_INDEX, IssueCodes::ANNOTATIONS_ILLEGAL_ATTRIBUTE);
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE);
 		}
 	}
 	
