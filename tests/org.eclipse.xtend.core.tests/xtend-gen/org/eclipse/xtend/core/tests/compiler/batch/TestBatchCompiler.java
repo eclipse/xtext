@@ -129,6 +129,14 @@ public class TestBatchCompiler {
   }
   
   @Test
+  public void testClassPath() {
+    this.batchCompiler.setSourcePath("./batch-compiler-data/classpathTest/src");
+    this.batchCompiler.setClassPath("./batch-compiler-data/classpathTest/dependency");
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue("Compiling with correct dependency resolution", _compile);
+  }
+  
+  @Test
   public void testCompileTestDataWithTrace() {
     this.batchCompiler.setWriteTraceFiles(true);
     this.batchCompiler.compile();

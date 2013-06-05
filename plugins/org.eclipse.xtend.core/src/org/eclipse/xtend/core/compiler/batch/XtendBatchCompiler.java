@@ -249,13 +249,14 @@ public class XtendBatchCompiler {
 
 	public boolean compile() {
 		try {
-			ResourceSet resourceSet = loadXtendFiles();
-			File sourceDirectory = createStubs(resourceSet);
+			ResourceSet resourceSet = resourceSetProvider.get();
 			File classDirectory = createTempDir("classes");
+			installJvmTypeProvider(resourceSet, classDirectory);
+			loadXtendFiles(resourceSet);
+			File sourceDirectory = createStubs(resourceSet);
 			if (!preCompileStubs(sourceDirectory, classDirectory)) {
 				log.debug("Compilation of stubs and existing Java code had errors. This is expected and usually is not a probblem.");
 			}
-			installJvmTypeProvider(resourceSet, classDirectory);
 			EcoreUtil.resolveAll(resourceSet);
 			List<Issue> issues = validate(resourceSet);
 			Iterable<Issue> errors = Iterables.filter(issues, SeverityFilter.ERROR);
@@ -273,8 +274,7 @@ public class XtendBatchCompiler {
 		return true;
 	}
 
-	protected ResourceSet loadXtendFiles() {
-		final ResourceSet resourceSet = resourceSetProvider.get();
+	protected ResourceSet loadXtendFiles(final ResourceSet resourceSet) {
 		encodingProvider.setDefaultEncoding(getFileEncoding());
 		final NameBasedFilter nameBasedFilter = new NameBasedFilter();
 		nameBasedFilter.setExtension(fileExtensionProvider.getPrimaryFileExtension());
@@ -292,6 +292,12 @@ public class XtendBatchCompiler {
 			}
 		});
 		return resourceSet;
+	}
+	
+	@Deprecated
+	protected ResourceSet loadXtendFiles() {
+		final ResourceSet resourceSet = resourceSetProvider.get();
+		return loadXtendFiles(resourceSet);
 	}
 
 	protected File createStubs(ResourceSet resourceSet) {
