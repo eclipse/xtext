@@ -8,6 +8,42 @@ import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
+	@Test def void testChangeJavaDoc() {
+		assertProcessing(
+			'myannotation/ChangeDocAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+
+				@Active(typeof(ChangeDocProcessor))
+				annotation ChangeDoc{ }
+				class ChangeDocProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+						clazz.docComment = clazz.docComment.toLowerCase
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				/**
+				 * MAKE ME LOWER CASE!
+				 */
+				@myannotation.ChangeDoc class MyClass {
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertEquals("make me lower case!",clazz.docComment)
+		]
+	}
+	
 	@Test def void testAddConstructor() {
 		assertProcessing(
 			'myannotation/AddConstructorAnnotation.xtend' -> '''
