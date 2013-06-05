@@ -155,7 +155,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 							moveSubpackagesToNewResource(topMost, set);
 					}
 					if (!topMost.eResource().getURI().toString().equals(topMost.getNsURI())) 
-						movePackageToNewResource(pack, set);
+						movePackageToNewResource(topMost, set);
 				}
 			}
 		}
