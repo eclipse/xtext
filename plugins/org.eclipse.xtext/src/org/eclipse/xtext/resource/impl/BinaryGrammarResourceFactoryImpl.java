@@ -11,6 +11,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -19,7 +21,28 @@ import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 public class BinaryGrammarResourceFactoryImpl implements Factory {
 
 	public Resource createResource(URI uri) {
-		return new BinaryResourceImpl(uri);
+		XMIResourceImpl resource = new XMIResourceImpl(uri);
+		
+		// make it a binary resource
+		resource.getDefaultLoadOptions().put(XMLResource.OPTION_BINARY, Boolean.TRUE);
+		resource.getDefaultSaveOptions().put(XMLResource.OPTION_BINARY, Boolean.TRUE);
+		
+		// don't do any resolution, since the only external references point to Ecore elements from EPackages in the registry. 
+		resource.getDefaultLoadOptions().put(XMLResource.OPTION_URI_HANDLER,
+				new XMLResource.URIHandler() {
+
+					public void setBaseURI(URI uri) {
+					}
+
+					public URI resolve(URI uri) {
+						return uri;
+					}
+
+					public URI deresolve(URI uri) {
+						return uri;
+					}
+				});
+		return resource;
 	}
 
 }
