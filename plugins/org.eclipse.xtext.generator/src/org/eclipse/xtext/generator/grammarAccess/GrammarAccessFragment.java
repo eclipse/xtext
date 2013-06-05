@@ -154,6 +154,8 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 						else
 							moveSubpackagesToNewResource(topMost, set);
 					}
+					if (!topMost.eResource().getURI().toString().equals(topMost.getNsURI())) 
+						movePackageToNewResource(pack, set);
 				}
 			}
 		}
@@ -166,15 +168,22 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 				if (sub.getEClassifiers().isEmpty()) {
 					moveSubpackagesToNewResource(sub, set);
 				} else {
-					Resource resource = set.createResource(
-							URI.createURI("___temp___." + FragmentFakingEcoreResourceFactoryImpl.ECORE_SUFFIX),
-							ContentHandler.UNSPECIFIED_CONTENT_TYPE);
-					resource.setURI(URI.createURI(sub.getNsURI()));
-					resource.getContents().add(sub);
+					movePackageToNewResource(sub, set);
 					pack.getESubpackages().remove(i);
 				}
 			}
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void movePackageToNewResource(EPackage pack, ResourceSet set) {
+		Resource resource = set.createResource(
+				URI.createURI("___temp___." + FragmentFakingEcoreResourceFactoryImpl.ECORE_SUFFIX),
+				ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		resource.setURI(URI.createURI(pack.getNsURI()));
+		resource.getContents().add(pack);
 	}
 
 	public void setXmlVersion(String xmlVersion) {
