@@ -118,7 +118,7 @@ class BuckminsterFilesCreator {
 		<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
 		  <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
 		  <rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/composite/releases/"/>
-		  <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/juno"/>
+		  <rm:property key="eclipse.target.platform" value="${eclipse.download}/releases/kepler"/>
 		  <rm:redirect pattern="«projectInfo.projectName»" href="«PROJECT_RMAP_NAME»"/>
 		  <rm:locator pattern="^org\.eclipse\.(?:xtext|xpand|xtend|xtend2|emf\.mwe|emf\.mwe2)(?:\..+)?$" searchPathRef="xtext"/>
 		  <rm:locator pattern="^com\.google.*" searchPathRef="xtext"/>
