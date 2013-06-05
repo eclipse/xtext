@@ -89,6 +89,13 @@ class TestBatchCompiler {
 		batchCompiler.sourcePath = BUG396747_SRC_DIRECTORY
 		assertTrue("Compiling empty file pass", batchCompiler.compile)
 	}
+	
+	@Test
+	def void testClassPath() {
+		batchCompiler.sourcePath = './batch-compiler-data/classpathTest/src'
+		batchCompiler.setClassPath('./batch-compiler-data/classpathTest/dependency')
+		assertTrue("Compiling with correct dependency resolution", batchCompiler.compile)
+	}
 
 	@Test
 	def void testCompileTestDataWithTrace() {
