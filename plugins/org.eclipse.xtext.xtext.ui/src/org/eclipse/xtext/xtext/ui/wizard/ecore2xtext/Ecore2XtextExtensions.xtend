@@ -29,7 +29,7 @@ class Ecore2XtextExtensions {
 		if (rootElementClass == null) {
 			EPackageInfos.map([allReferencedClassifiers(EPackage,false)]).flatten.toSet.filter([needsConcreteRule(it)])
 		} else {
-			val c = newArrayList(typeof(EClassifier).cast(rootElementClass))
+			val c = newArrayList(EClassifier.cast(rootElementClass))
 			allAssignedClassifiers(rootElementClass,c)
 			c.filter([cl|needsConcreteRule(cl)]).toSet
 		}
@@ -43,9 +43,9 @@ class Ecore2XtextExtensions {
 	*/
 	def static Collection<EClass> allDispatcherRuleClasses(Ecore2XtextProjectInfo it) {
 		if(rootElementClass == null)
-			EPackageInfos.map([allReferencedClassifiers(EPackage,false)]).flatten.toSet.filter([c|needsDispatcherRule(c)]).filter(typeof(EClass)).toSet
+			EPackageInfos.map([allReferencedClassifiers(EPackage,false)]).flatten.toSet.filter([c|needsDispatcherRule(c)]).filter(EClass).toSet
 		else
-			allConcreteRuleClassifiers(it).filter(typeof(EClass)).map([c|c.EAllReferences.filter([r|needsAssignment(r)]).map([EType])]).flatten.filter(typeof(EClass)).toSet
+			allConcreteRuleClassifiers(it).filter(EClass).map([c|c.EAllReferences.filter([r|needsAssignment(r)]).map([EType])]).flatten.filter(EClass).toSet
 	}
 	/**
 	 * cached Collection[EPackage] allReferencedEPackages(Ecore2XtextProjectInfo this) :
@@ -65,7 +65,7 @@ class Ecore2XtextExtensions {
 
 	// EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment() && (includeCrossRefs || f.isContainment())).EType.flatten()).add(eString()).toSet();
 	def static  allReferencedClassifiers(EPackage ePack, boolean includeCrossRefs) {
-		val strFeatures = ePack.EClassifiers.filter(typeof(EClass)).map([
+		val strFeatures = ePack.EClassifiers.filter(EClass).map([
 			it.EAllStructuralFeatures.filter([
 				f | (needsAssignment(f) && (includeCrossRefs || isContainment(f)))
 			])
@@ -92,7 +92,7 @@ class Ecore2XtextExtensions {
 			return
 		else {
 			acceptor += classifiers
-			classifiers.filter(typeof(EClass)).forEach([c|allAssignedClassifiers(c,acceptor)])
+			classifiers.filter(EClass).forEach([c|allAssignedClassifiers(c,acceptor)])
 		}
 	}
 
@@ -233,11 +233,11 @@ def static isEcoreType(EClassifier it) {
 }
 
 def static boolean isID(EStructuralFeature it) {
-	 it instanceof EAttribute && typeof(EAttribute).cast(it).ID;
+	 it instanceof EAttribute && EAttribute.cast(it).ID;
 }
 	def static boolean needsAssignment(EStructuralFeature it) {
 		//	!derived && !transient && !(EReference.isInstance(this) && ((EReference)this).container) && !(EDataType.isInstance(this.EType) && !((EDataType) this.EType).serializable);
-		!derived && !transient && !((it instanceof EReference) && typeof(EReference).cast(it).container) && !((it.EType instanceof EDataType) && !typeof(EDataType).cast(it.EType).serializable);
+		!derived && !transient && !((it instanceof EReference) && EReference.cast(it).container) && !((it.EType instanceof EDataType) && !EDataType.cast(it.EType).serializable);
 	}
 
 	
@@ -285,7 +285,7 @@ def static boolean isID(EStructuralFeature it) {
 		EPackage.EClassifiers.typeSelect(EClass).select(c|c.EAllSuperTypes.contains(this));	
  	*/
 	def static subClasses(EClass it) {
-		EPackage.EClassifiers.filter(typeof(EClass)).filter(c|c.EAllSuperTypes.contains(it));
+		EPackage.EClassifiers.filter(EClass).filter(c|c.EAllSuperTypes.contains(it));
 	}
 
 	/*
@@ -299,13 +299,13 @@ allContainmentReferences(EClass this) :
 	inlinedFeatures().typeSelect(EReference).select(r|r.isContainment()); 
 	 */
 	 def static allAttributes(EClass it) {
-	 	inlinedFeatures(it).filter(typeof(EAttribute))
+	 	inlinedFeatures(it).filter(EAttribute)
 	 }
 	 def static allCrossReferences(EClass it) {
-	 	inlinedFeatures(it).filter(typeof(EReference)).filter([f|!f.containment])
+	 	inlinedFeatures(it).filter(EReference).filter([f|!f.containment])
 	 }
 	 def static allContainmentReferences(EClass it) {
-	 	inlinedFeatures(it).filter(typeof(EReference)).filter([f|f.containment])
+	 	inlinedFeatures(it).filter(EReference).filter([f|f.containment])
 	 }
 	
 }

@@ -8,7 +8,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 import org.eclipse.xtext.common.types.JvmField
 
 class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
@@ -23,7 +23,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 			documentation = entity.documentation
 			if (entity.superType != null)
 				superTypes += entity.superType.cloneWithProxies
-			val procedure = entity.newTypeRef(typeof(Procedure1), it.newTypeRef())
+			val procedure = entity.newTypeRef(Procedure1, it.newTypeRef())
 			members += entity.toConstructor() []
 			members += entity.toConstructor() [
 				parameters += entity.toParameter("initializer", procedure)

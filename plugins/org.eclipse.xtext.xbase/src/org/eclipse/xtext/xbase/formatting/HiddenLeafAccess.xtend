@@ -32,7 +32,7 @@ class HiddenLeafAccess {
 					val c = node.text.charAt(i)
 					if(c.toString == "\n")
 						newLines = newLines + 1
-					else if(!Character::isWhitespace(c))
+					else if(!Character.isWhitespace(c))
 						comment = true
 				}
 			if(comment) {
@@ -129,11 +129,11 @@ class HiddenLeafAccess {
 	}
 	
 	def int getNewLinesInComments() {
-		leafs.filter(typeof(CommentInfo)).fold(0, [x, i | x + i.newLines])
+		leafs.filter(CommentInfo).fold(0, [x, i | x + i.newLines])
 	}
 
 	def containsComment(){
-		leafs.filter(typeof(CommentInfo)).size > 0
+		leafs.filter(CommentInfo).size > 0
 	}
 }
 

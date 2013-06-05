@@ -8,7 +8,7 @@ import org.eclipse.xtext.xbase.lib.Pair
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 
 class FormattableDocument {
-	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
+	private static val Logger log = Logger.getLogger(FormattableDocument)
 	@Property val FormattingPreferenceValues cfg
 	@Property val String document
 	@Property val TreeMap<Integer, FormattingData> formattings
@@ -196,7 +196,7 @@ class FormattableDocument {
 	}
 	
 	def protected boolean isWhitespace(String doc) {
-		(0..doc.length-1).forall[Character::isWhitespace(doc.charAt(it))]
+		(0..doc.length-1).forall[Character.isWhitespace(doc.charAt(it))]
 	}
 	
 	def int lineLengthBefore(int offset) {

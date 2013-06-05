@@ -25,7 +25,7 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 	}
 	
 	override getObject() {
-		toTypeReference(typeReferences.createTypeRef(typeReferences.findDeclaredType(typeof(Object), xtendFile)))
+		toTypeReference(typeReferences.createTypeRef(typeReferences.findDeclaredType(Object, xtendFile)))
 	}
 	
 	override getPrimitiveBoolean() {
@@ -99,14 +99,14 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 			}
 			PrimitiveTypeImpl : {
 				return switch typeDeclaration.kind {
-					case PrimitiveType$Kind::BOOLEAN : primitiveBoolean
-					case PrimitiveType$Kind::BYTE : primitiveByte
-					case PrimitiveType$Kind::CHAR : primitiveChar
-					case PrimitiveType$Kind::DOUBLE : primitiveDouble
-					case PrimitiveType$Kind::FLOAT : primitiveFloat
-					case PrimitiveType$Kind::INT : primitiveInt
-					case PrimitiveType$Kind::LONG : primitiveLong
-					case PrimitiveType$Kind::SHORT : primitiveShort
+					case PrimitiveType.Kind.BOOLEAN : primitiveBoolean
+					case PrimitiveType.Kind.BYTE : primitiveByte
+					case PrimitiveType.Kind.CHAR : primitiveChar
+					case PrimitiveType.Kind.DOUBLE : primitiveDouble
+					case PrimitiveType.Kind.FLOAT : primitiveFloat
+					case PrimitiveType.Kind.INT : primitiveInt
+					case PrimitiveType.Kind.LONG : primitiveLong
+					case PrimitiveType.Kind.SHORT : primitiveShort
 				}
 			}
 			VoidTypeImpl : {

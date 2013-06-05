@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 
-class CompilationContextImpl implements CompilationStrategy$CompilationContext {
+class CompilationContextImpl implements CompilationStrategy.CompilationContext {
 
 	extension ReflectExtensions reflectExtensions = new ReflectExtensions
 

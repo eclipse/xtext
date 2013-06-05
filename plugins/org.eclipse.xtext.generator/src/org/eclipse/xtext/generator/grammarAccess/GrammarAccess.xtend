@@ -39,7 +39,7 @@ class GrammarAccess {
 	 * @return the java identifier
 	 */
 	def String toJavaIdentifier(String text, boolean uppercaseFirst) {
-		GrammarAccessUtil::toJavaIdentifier(text, uppercaseFirst)
+		GrammarAccessUtil.toJavaIdentifier(text, uppercaseFirst)
 	}
 		
 	/** 
@@ -60,7 +60,7 @@ class GrammarAccess {
 	 * @return the element's identifier
 	 */
 	def String gaElementIdentifyer(AbstractElement element) {
-		GrammarAccessUtil::getUniqueElementName(element);
+		GrammarAccessUtil.getUniqueElementName(element);
 	}
 	/**
 	 * Returns the full qulified Java class name of a GrammarAccess implementation for a grammar.
@@ -68,7 +68,7 @@ class GrammarAccess {
 	 * @return the GrammarAccess' full qualified Java class name
 	 */
 	def String gaFQName(Grammar grammar) {
-		GrammarAccessUtil::getGrammarAccessFQName(grammar, naming)
+		GrammarAccessUtil.getGrammarAccessFQName(grammar, naming)
 	}
 
 	/**
@@ -186,7 +186,7 @@ class GrammarAccess {
 	 *
 	 */
 	def String grammarFragmentToStr(EObject ele, String prefix) {
-		GrammarAccessUtil::serialize(ele, prefix);
+		GrammarAccessUtil.serialize(ele, prefix);
 	}
 	
 }

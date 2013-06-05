@@ -29,16 +29,16 @@ class ErrorSafeExtensions {
 	
 	@Inject extension TypeReferenceSerializer 
 
-	@Inject IElementIssueProvider$Factory issueProviderFactory
+	@Inject IElementIssueProvider.Factory issueProviderFactory
 
 	def Iterable<Issue> getErrors(EObject element) {
 		val issueProvider = issueProviderFactory.get(element.eResource)
-		issueProvider.getIssues(element).filter[severity == Severity::ERROR]
+		issueProvider.getIssues(element).filter[severity == Severity.ERROR]
 	}
 
 	def boolean hasErrors(EObject element) {
 		val issueProvider = issueProviderFactory.get(element.eResource)
-		issueProvider.getIssues(element).exists[it.severity == Severity::ERROR]
+		issueProvider.getIssues(element).exists[it.severity == Severity.ERROR]
 	}
 	
 	def <T extends EObject> void forEachSafely(ITreeAppendable appendable, Iterable<T> elements, 
@@ -144,7 +144,7 @@ class ErrorSafeExtensions {
 	}
 }
 
-class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor$InheritanceAware<Boolean> {
+class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.InheritanceAware<Boolean> {
 	
 	override protected handleNullReference() {
 		true

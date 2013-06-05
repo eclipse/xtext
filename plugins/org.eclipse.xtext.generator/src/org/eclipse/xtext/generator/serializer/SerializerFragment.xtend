@@ -25,7 +25,7 @@ import com.google.inject.name.Names
 import org.eclipse.xtext.generator.IStubGenerating
 import static java.util.Collections.*
 
-class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating$XtendOption {
+class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
 	
 	@Inject AbstractSemanticSequencer abstractSemanticSequencer
 	
@@ -49,7 +49,7 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	
 	override protected addLocalBindings(Binder binder) {
 		binder
-			.bind(typeof(Boolean)).annotatedWith(Names::named("generateXtendStub")).toInstance(generateXtendStub && generateStub)
+			.bind(Boolean).annotatedWith(Names.named("generateXtendStub")).toInstance(generateXtendStub && generateStub)
 	}
 	
 	def setGenerateDebugData(boolean doGenerate) {
@@ -70,26 +70,26 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		val bf = new BindFactory();
-		bf.addTypeToType(typeof(ISemanticSequencer).name, names.semanticSequencer.qualifiedName);
-		bf.addTypeToType(typeof(ISyntacticSequencer).name, names.syntacticSequencer.qualifiedName);
-		bf.addTypeToType(typeof(ISerializer).name, typeof(Serializer).name);
+		bf.addTypeToType(ISemanticSequencer.name, names.semanticSequencer.qualifiedName);
+		bf.addTypeToType(ISyntacticSequencer.name, names.syntacticSequencer.qualifiedName);
+		bf.addTypeToType(ISerializer.name, Serializer.name);
 		return bf.bindings;
 	}
 	
 	override generate(Xtend2ExecutionContext ctx) {
 		if(srcGenOnly) {
-			ctx.writeFile(Generator::SRC_GEN, names.semanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.semanticSequencer));
-			ctx.writeFile(Generator::SRC_GEN, names.syntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.syntacticSequencer));
+			ctx.writeFile(Generator.SRC_GEN, names.semanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.semanticSequencer));
+			ctx.writeFile(Generator.SRC_GEN, names.syntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.syntacticSequencer));
 		} else {
-			ctx.writeFile(Generator::SRC, names.semanticSequencer.fileName, semanticSequencer.getFileContents(names.semanticSequencer));
-			ctx.writeFile(Generator::SRC, names.syntacticSequencer.fileName, syntacticSequencer.getFileContents(names.syntacticSequencer));
-			ctx.writeFile(Generator::SRC_GEN, names.abstractSemanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.abstractSemanticSequencer));
-			ctx.writeFile(Generator::SRC_GEN, names.abstractSyntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.abstractSyntacticSequencer));
+			ctx.writeFile(Generator.SRC, names.semanticSequencer.fileName, semanticSequencer.getFileContents(names.semanticSequencer));
+			ctx.writeFile(Generator.SRC, names.syntacticSequencer.fileName, syntacticSequencer.getFileContents(names.syntacticSequencer));
+			ctx.writeFile(Generator.SRC_GEN, names.abstractSemanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.abstractSemanticSequencer));
+			ctx.writeFile(Generator.SRC_GEN, names.abstractSyntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.abstractSyntacticSequencer));
 		}
 		if(generateDebugData) {
-			ctx.writeFile(Generator::SRC_GEN, names.grammarConstraints.fileName, grammarConstraints.getFileContents(names.grammarConstraints));
+			ctx.writeFile(Generator.SRC_GEN, names.grammarConstraints.fileName, grammarConstraints.getFileContents(names.grammarConstraints));
 			for(obj:debugGraphGenerator.generateDebugGraphs) 
-				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
+				ctx.writeFile(Generator.SRC_GEN, obj.key, obj.value);
 		}
 	}
 	

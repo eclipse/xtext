@@ -159,14 +159,14 @@ class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> implements
 
 	override getKind() {
 		switch simpleName {
-			case 'boolean' : PrimitiveType$Kind::BOOLEAN
-			case 'int' : PrimitiveType$Kind::INT
-			case 'char' : PrimitiveType$Kind::CHAR
-			case 'double' : PrimitiveType$Kind::DOUBLE
-			case 'long' : PrimitiveType$Kind::LONG
-			case 'short' : PrimitiveType$Kind::SHORT
-			case 'float' : PrimitiveType$Kind::FLOAT
-			case 'byte' : PrimitiveType$Kind::BYTE
+			case 'boolean' : PrimitiveType.Kind.BOOLEAN
+			case 'int' : PrimitiveType.Kind.INT
+			case 'char' : PrimitiveType.Kind.CHAR
+			case 'double' : PrimitiveType.Kind.DOUBLE
+			case 'long' : PrimitiveType.Kind.LONG
+			case 'short' : PrimitiveType.Kind.SHORT
+			case 'float' : PrimitiveType.Kind.FLOAT
+			case 'byte' : PrimitiveType.Kind.BYTE
 		}
 	}
 	
@@ -191,7 +191,7 @@ class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> implements
 class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParameter> implements TypeParameterDeclaration {
 	
 	override getUpperBounds() {
-		delegate.constraints.filter(typeof(JvmUpperBound)).map[compilationUnit.toTypeReference(typeReference)].toList
+		delegate.constraints.filter(JvmUpperBound).map[compilationUnit.toTypeReference(typeReference)].toList
 	}
 	
 	override getSimpleName() {

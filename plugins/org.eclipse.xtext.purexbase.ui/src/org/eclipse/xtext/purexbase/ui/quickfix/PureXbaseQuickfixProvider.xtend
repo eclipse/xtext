@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider
  */
 class PureXbaseQuickfixProvider extends XbaseQuickfixProvider {
 
-//	@Fix(MyDslValidator::INVALID_NAME)
+//	@Fix(MyDslValidator.INVALID_NAME)
 //	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
 //		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
 //			context |

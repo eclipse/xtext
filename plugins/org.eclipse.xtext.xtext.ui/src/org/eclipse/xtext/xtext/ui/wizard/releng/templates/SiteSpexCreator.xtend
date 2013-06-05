@@ -3,7 +3,7 @@ package org.eclipse.xtext.xtext.ui.wizard.releng.templates
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor
 import org.eclipse.core.resources.IProject
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor$IFileCreator
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator
 import org.eclipse.core.resources.IFile
 /**
  * Creates spex for the site feature to define build time dependencies.<br>

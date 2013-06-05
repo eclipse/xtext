@@ -49,7 +49,7 @@ abstract class AbstractMethodBuilder extends AbstractCodeBuilder {
 	}
 }
 
-class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Xtend {
+class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject XtypeTypeReferenceSerializer typeRefSerializer
 
@@ -88,7 +88,7 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$X
 	}
 }
 
-class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Java {
+class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Java {
 	
 	@Inject TypeReferenceSerializer typeRefSerializer
 

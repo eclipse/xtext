@@ -39,18 +39,18 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	
 	@Inject extension SyntacticSequencerUtil util
 	
-	override getFileContents(SerializerGenFileNames$GenFileName filename) {
+	override getFileContents(SerializerGenFileNames.GenFileName filename) {
 		val file = new JavaFile(filename.packageName);
 		
-		file.imported(typeof(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer))
-		file.imported(typeof(RuleCall))
-		file.imported(typeof(INode))
-		file.imported(typeof(ISyntacticSequencerPDAProvider$ISynTransition))
-		file.imported(typeof(Inject))
-		file.imported(typeof(IGrammarAccess))
-		file.imported(typeof(EObject))
-		file.imported(typeof(List))
-		file.imported(typeof(GrammarAlias$AbstractElementAlias))
+		file.imported(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer)
+		file.imported(RuleCall)
+		file.imported(INode)
+		file.imported(ISyntacticSequencerPDAProvider.ISynTransition)
+		file.imported(Inject)
+		file.imported(IGrammarAccess)
+		file.imported(EObject)
+		file.imported(List)
+		file.imported(GrammarAlias.AbstractElementAlias)
 		
 		val _abstract = if (filename.isAbstract) "abstract " else ""
 		file.body = '''
@@ -83,7 +83,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 					 * Syntax:
 					 *     «group.second»
 					 */
-					protected void emit_«group.first»(EObject semanticObject, «file.imported(typeof(ISyntacticSequencerPDAProvider$ISynNavigable))» transition, List<INode> nodes) {
+					protected void emit_«group.first»(EObject semanticObject, «file.imported(ISyntacticSequencerPDAProvider.ISynNavigable)» transition, List<INode> nodes) {
 						acceptNodes(transition, nodes);
 					}
 					
@@ -141,12 +141,12 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	
 	def genGetUnassignedRuleCallToken(JavaFile file, AbstractRule rule) '''
 		/**
-		 * «NodeModelUtils::getNode(rule).textWithoutComments.trim.replace("\n", "\n* ")»
+		 * «NodeModelUtils.getNode(rule).textWithoutComments.trim.replace("\n", "\n* ")»
 		 */
 		protected String «rule.unassignedCalledTokenRuleName»(EObject semanticObject, RuleCall ruleCall, INode node) {
 			if (node != null)
 				return getTokenText(node);
-			return "«Strings::convertToJavaString(rule.alternatives.defaultValue(newHashSet))»";
+			return "«Strings.convertToJavaString(rule.alternatives.defaultValue(newHashSet))»";
 		}
 	'''
 	

@@ -7,11 +7,11 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IReferenceDescription
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescriptions
-import org.eclipse.xtext.resource.IResourceServiceProvider$Registry
+import org.eclipse.xtext.resource.IResourceServiceProvider.Registry
 import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder
 import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder$ILocalResourceAccess
+import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.common.types.JvmType
@@ -36,7 +36,7 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 		val names = newHashSet()
 		for (uri : targetURIs) {
 			localResourceAccess.readOnly(uri) [
-				val obj = EcoreUtil2::getContainerOfType(it.getEObject(uri, true), typeof(JvmType))
+				val obj = EcoreUtil2.getContainerOfType(it.getEObject(uri, true), JvmType)
 				if (obj!=null) {
 					names += nameConverter.toQualifiedName(obj.identifier).toLowerCase
 				}

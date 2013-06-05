@@ -18,14 +18,14 @@ abstract class AbstractClassBuilder extends AbstractCodeBuilder {
 	
 }
 
-class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder$Xtend {
+class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject XtypeTypeReferenceSerializer typeRefSerializer
 
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
-		super.valid && className != null && visibility == JvmVisibility::PUBLIC  
+		super.valid && className != null && visibility == JvmVisibility.PUBLIC  
 	}	
 
 	override protected getTypeReferenceSerializer() {
@@ -50,7 +50,7 @@ class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder$Xte
 	}
 }
 
-class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuilder$Java {
+class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Java {
 	
 	@Inject TypeReferenceSerializer typeRefSerializer
 
@@ -63,7 +63,7 @@ class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuilder$Java
 	}
 	
 	override build(IAppendable appendable) {
-		appendable.appendVisibility(visibility, JvmVisibility::DEFAULT)
+		appendable.appendVisibility(visibility, JvmVisibility.DEFAULT)
 			.append('class ').append(className).append(' {')
 			.newLine.append('}')
 	}

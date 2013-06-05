@@ -40,7 +40,7 @@ abstract class AbstractConstructorBuilder extends AbstractCodeBuilder {
 	}
 }
 
-class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder$Xtend {
+class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject XtypeTypeReferenceSerializer typeRefSerializer
 
@@ -74,7 +74,7 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 	}
 }
 
-class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder$Java {
+class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Java {
 	
 	@Inject TypeReferenceSerializer typeRefSerializer
 

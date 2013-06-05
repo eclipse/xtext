@@ -37,7 +37,7 @@ class RichStringFormatter {
 	@Inject extension FormattingDataFactory
 	
 	def void format((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichString richString) {
-		if(EcoreUtil2::getContainerOfType(richString.eContainer, typeof(RichString)) != null)
+		if(EcoreUtil2.getContainerOfType(richString.eContainer, RichString) != null)
 			return;
 		if(richString.hasSyntaxError)
 			return;
@@ -58,7 +58,7 @@ class RichStringFormatter {
 				val increaseIndentationChange = if(canIndent && line == lines.head) 1 else 0
 				val decraseIndentationChange = if(canIndent && line == lines.last) -1 else 0
 				val nloffset = if(line.leadingSemanticNewLine) line.offset + line.newLineCharCount else line.offset
-				val i = Math::min(line.indentLength, impl.model.rootIndentLenght)
+				val i = Math.min(line.indentLength, impl.model.rootIndentLenght)
 				val nllength = if(line.leadingSemanticNewLine) i else line.newLineCharCount + i  
 				if(line.leadingSemanticNewLine) 
 					doc += new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, if(doc.debugConflicts) new RuntimeException, 0)
@@ -100,7 +100,7 @@ class RichStringFormatter {
 	
 	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichStringIf expr) {
 		doc += expr.nodeForKeyword("IF").surround([noSpace],[oneSpace])
-		doc += expr.nodeForFeature(XtendPackage$Literals::RICH_STRING_ELSE_IF__IF).append[noSpace]
+		doc += expr.nodeForFeature(XtendPackage.Literals.RICH_STRING_ELSE_IF__IF).append[noSpace]
 		formatter.apply(expr.^if, doc)
 		fmt(formatter, doc, expr.then)
 		for(elseif:expr.elseIfs)
@@ -112,7 +112,7 @@ class RichStringFormatter {
 	
 	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichStringElseIf expr) {
 		doc += expr.nodeForKeyword("ELSEIF").surround([noSpace],[oneSpace])
-		doc += expr.nodeForFeature(XtendPackage$Literals::RICH_STRING_ELSE_IF__IF).append[noSpace]
+		doc += expr.nodeForFeature(XtendPackage.Literals.RICH_STRING_ELSE_IF__IF).append[noSpace]
 		formatter.apply(expr.^if, doc)
 	}
 	
@@ -128,12 +128,12 @@ class RichStringFormatter {
 		formatter.apply(expr.separator, doc)
 		doc += expr.nodeForKeyword("AFTER").surround[oneSpace]
 		formatter.apply(expr.after, doc)
-		doc += expr.nodeForFeature(XbasePackage$Literals::XFOR_LOOP_EXPRESSION__EACH_EXPRESSION).prepend[noSpace]
+		doc += expr.nodeForFeature(XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION).prepend[noSpace]
 		doc += expr.nodeForKeyword("ENDFOR").surround[noSpace]
 	}
 }
 
-class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
+class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	private val RichString string
 	private val String document
 	private val NodeModelAccess nodeModelAccess
@@ -187,7 +187,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 //		println("announceNextLiteral()")
 		if(lastLiteralEndOffset > 0 && contentStartOffset < 0) 
 			contentStartOffset = lastLiteralEndOffset
-		val node = nodeModelAccess.nodeForFeature(object, XbasePackage$Literals::XSTRING_LITERAL__VALUE)
+		val node = nodeModelAccess.nodeForFeature(object, XbasePackage.Literals.XSTRING_LITERAL__VALUE)
 		if(node != null) {
 			offset = node.offset + node.literalPrefixLenght
 			lastLiteralEndOffset = (node.offset + node.length) - node.literalPostfixLenght
@@ -228,7 +228,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 					}
 				}
 				if(newContentStartColumn < contentStartColumn)
-					for(ws:indentationStack.filter(typeof(SemanticWhitespace)).toList)
+					for(ws:indentationStack.filter(SemanticWhitespace).toList)
 						if(ws.column > newContentStartColumn)
 							indentationStack.remove(ws)
 				if(_outdentThisLine) {
@@ -265,7 +265,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 		super.acceptSemanticText(text, origin)
 //		println('''acceptSemanticText("«text»")''')
 		if(!content) {
-			if(text.length > 0 && (0..(text.length - 1)).fold(false, [v, i | v || !Character::isWhitespace(text.charAt(i))]))
+			if(text.length > 0 && (0..(text.length - 1)).fold(false, [v, i | v || !Character.isWhitespace(text.charAt(i))]))
 				startContent()
 		}
 		offset = offset + text.length

@@ -31,9 +31,9 @@ import org.eclipse.xtext.xtype.XImportDeclaration
 import org.eclipse.xtext.xtype.XImportSection
 
 import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
-import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
+import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
-import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
+import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import java.util.List

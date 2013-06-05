@@ -68,11 +68,11 @@ class CommonTypeComputationServices {
 	
 	@Inject(optional = true)
 	@Property
-	XtypeFactory xtypeFactory = XtypeFactory::eINSTANCE;
+	XtypeFactory xtypeFactory = XtypeFactory.eINSTANCE;
 	
 	@Inject(optional = true)
 	@Property
-	TypesFactory typesFactory = TypesFactory::eINSTANCE;
+	TypesFactory typesFactory = TypesFactory.eINSTANCE;
 }
 
 /**
