@@ -13,12 +13,12 @@ class JvmTypeExtensions {
 	@Inject extension ILogicalContainerProvider 
 	
 	def (ITreeAppendable)=>void getCompilationStrategy(JvmIdentifiableElement it) {
-		val adapter = eAdapters.filter(typeof(CompilationStrategyAdapter)).head
+		val adapter = eAdapters.filter(CompilationStrategyAdapter).head
 		return adapter?.compilationStrategy
 	}
 	
 	def isSingleSyntheticDefaultConstructor(JvmConstructor it) {
-		return parameters.empty && associatedExpression == null && compilationStrategy == null && declaringType.members.filter(typeof(JvmConstructor)).size == 1
+		return parameters.empty && associatedExpression == null && compilationStrategy == null && declaringType.members.filter(JvmConstructor).size == 1
 	}
 	
 	def isSynthetic(JvmIdentifiableElement element) {
@@ -30,7 +30,7 @@ class JvmTypeExtensions {
 	}
 	
 	def protected JvmIdentifiableMetaData getMetaData(JvmIdentifiableElement element) {
-		var metaData = EcoreUtil::getAdapter(element.eAdapters, typeof(JvmIdentifiableMetaData)) as JvmIdentifiableMetaData
+		var metaData = EcoreUtil.getAdapter(element.eAdapters, JvmIdentifiableMetaData) as JvmIdentifiableMetaData
 		if (metaData == null) {
 			metaData = new JvmIdentifiableMetaData
 			element.eAdapters += metaData
@@ -44,7 +44,7 @@ class JvmIdentifiableMetaData extends AdapterImpl {
 	@Property boolean synthetic
 	
 	override isAdapterForType(Object type) {
-		typeof(JvmIdentifiableMetaData) == type
+		JvmIdentifiableMetaData == type
 	}
 	
 }

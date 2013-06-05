@@ -33,12 +33,12 @@ class ConstantExpressionsInterpreter {
 			XBooleanLiteral : expression.isTrue
 			XNumberLiteral : {
 				switch expectedType {
-					case expectedType?.simpleName == 'long' : Long::valueOf(expression.value) 
-					case expectedType?.simpleName == 'short' : Short::valueOf(expression.value) 
-					case expectedType?.simpleName == 'byte' : Byte::valueOf(expression.value) 
-					case expectedType?.simpleName == 'float' : Float::valueOf(expression.value) 
-					case expectedType?.simpleName == 'double' : Double::valueOf(expression.value) 
-					default: Integer::valueOf(expression.value) 
+					case expectedType?.simpleName == 'long' : Long.valueOf(expression.value) 
+					case expectedType?.simpleName == 'short' : Short.valueOf(expression.value) 
+					case expectedType?.simpleName == 'byte' : Byte.valueOf(expression.value) 
+					case expectedType?.simpleName == 'float' : Float.valueOf(expression.value) 
+					case expectedType?.simpleName == 'double' : Double.valueOf(expression.value) 
+					default: Integer.valueOf(expression.value) 
 				}
 			}
 			// arrays?

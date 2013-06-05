@@ -62,7 +62,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 	}
 	
 	override generate(Xtend2ExecutionContext ctx) {
-		ctx.writeFile(Generator::SRC_GEN, abstractValidatorName.asPath + ".java", '''
+		ctx.writeFile(Generator.SRC_GEN, abstractValidatorName.asPath + ".java", '''
 			/*
 			 «fileHeader»
 			 */
@@ -94,7 +94,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 			}
 		''')
 		if(generateStub) {
-			ctx.writeFile(Generator::SRC, grammar.validatorName.asPath + '.xtend', '''
+			ctx.writeFile(Generator.SRC, grammar.validatorName.asPath + '.xtend', '''
 				/*
 				 «fileHeader»
 				 */
@@ -124,13 +124,13 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 	}
 
 	def getGeneratedPackagesToValidate() {
-		grammar.metamodelDeclarations.filter(typeof(GeneratedMetamodel)).map[EPackage]
+		grammar.metamodelDeclarations.filter(GeneratedMetamodel).map[EPackage]
 	}
 
 	def protected getRegistryPackagesToValidate() {
 		val packages = allEPackagesToValidate(grammar)
 		packages.removeAll(
-			allMetamodelDeclarations(grammar).filter(typeof(GeneratedMetamodel)).map[EPackage].toList
+			allMetamodelDeclarations(grammar).filter(GeneratedMetamodel).map[EPackage].toList
 		)
 		packages
 	}

@@ -23,7 +23,7 @@ class SemanticSequencer extends GeneratedFile {
 	
 	@Inject@Named("fileHeader") String fileHeader
 	
-	override CharSequence getFileContents(SerializerGenFileNames$GenFileName filename) {
+	override CharSequence getFileContents(SerializerGenFileNames.GenFileName filename) {
 		if(generateXtendStub) '''
 			/*
 			 «fileHeader»

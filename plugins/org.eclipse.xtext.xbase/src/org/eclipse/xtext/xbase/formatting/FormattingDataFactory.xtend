@@ -39,7 +39,7 @@ class FormattingDataFactory {
 			val blankline = doc.cfg.get(key)
 			val preserve = doc.cfg.get(preserveBlankLines)
 			val min = blankline + 1
-			val max = Math::max(preserve + 1, min)
+			val max = Math.max(preserve + 1, min)
 			newNewLineData(leafs, min, max, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 		]
 	}
@@ -125,7 +125,7 @@ class FormattingDataFactory {
 						val space = if (leaf.offset == 0) "" else " "
 						result += new WhitespaceData(leaf.offset, leaf.length, 0 , 0, if (trace) new RuntimeException(), space)
 					} else if (!applied) {
-						var newLines = Math::min(Math::max(leafs.newLines, minNewLines), maxNewLines)
+						var newLines = Math.min(Math.max(leafs.newLines, minNewLines), maxNewLines)
 						if (newLines < 1 && leaf.offset > 0 &&
 							(leaf.leadingComment?.multiline || leaf.trailingComment?.multiline))
 							newLines = 1

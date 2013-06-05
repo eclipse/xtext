@@ -15,7 +15,7 @@ class ArithmeticExtensionGenerator {
 	def static void main(String[] args) {
 		new XbaseStandaloneSetup()
 			.createInjectorAndDoEMFRegistration()
-			.getInstance(typeof(ArithmeticExtensionGenerator))
+			.getInstance(ArithmeticExtensionGenerator)
 			.generate()
 	}
 	
@@ -40,7 +40,7 @@ class ArithmeticExtensionGenerator {
 		for(type: types) {
 			val file = new File(path + type.className + ".java")
 			val newContent = if(file.exists) {
-				val content = Files::readFileIntoString(file.absolutePath)
+				val content = Files.readFileIntoString(file.absolutePath)
 				'''
 					«content.substring(0, content.indexOf(startMarker))»
 						«generateAllOperations(type)»
