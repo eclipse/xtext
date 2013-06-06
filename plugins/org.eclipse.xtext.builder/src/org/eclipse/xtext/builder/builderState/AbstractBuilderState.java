@@ -27,6 +27,8 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperExtension;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
@@ -46,12 +48,17 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 
 	@Inject
 	private PersistedStateProvider persister;
+	
+	@Inject
+	private IStorage2UriMapper storage2UriMapper;
 
 	private volatile boolean isLoaded = false;
 
 	public synchronized void load() {
 		if (!isLoaded) {
 			resourceDescriptionData = new ResourceDescriptionsData(persister.load());
+			if(storage2UriMapper instanceof IStorage2UriMapperExtension)
+				((IStorage2UriMapperExtension) storage2UriMapper).initializeCache();
 			isLoaded = true;
 		}
 	}
