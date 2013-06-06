@@ -31,5 +31,5 @@ Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.serializer
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.15",
- org.ibm.icu.text;version="4.0.0";resolution:=optional,
+ com.ibm.icu.text;version="4.0.0";resolution:=optional,
  org.eclipse.xtext.xbase.lib
