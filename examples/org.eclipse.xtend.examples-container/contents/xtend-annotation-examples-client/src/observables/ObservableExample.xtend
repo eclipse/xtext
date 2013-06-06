@@ -20,7 +20,7 @@ class ObservableExample {
 			
 			// 2. add an observer 
 			addPropertyChangeListener [
-				println('''property «propertyName» changed from «oldValue» to «newValue»''')
+				println('''property Â«propertyNameÂ» changed from Â«oldValueÂ» to Â«newValueÂ»''')
 			]
 			
 			// 3. invoke some setters

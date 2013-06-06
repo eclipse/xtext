@@ -26,31 +26,31 @@ class StatemachineGenerator implements IGenerator {
 		import java.io.IOException;
 		import java.io.InputStreamReader;
 		
-		public class «sm.eResource.className» {
+		public class Â«sm.eResource.classNameÂ» {
 			
 			public static void main(String[] args) {
-				new «sm.eResource.className»().run();
+				new Â«sm.eResource.classNameÂ»().run();
 			}
 			
-			«FOR c : sm.commands»
-				«c.declareCommand»
-			«ENDFOR»
+			Â«FOR c : sm.commandsÂ»
+				Â«c.declareCommandÂ»
+			Â«ENDFORÂ»
 			
 			protected void run() {
 				boolean executeActions = true;
-				String currentState = "«sm.states.head.name»";
+				String currentState = "Â«sm.states.head.nameÂ»";
 				String lastEvent = null;
 				while (true) {
-					«FOR state : sm.states»
-						«state.generateCode»
-					«ENDFOR»
-					«FOR resetEvent : sm.resetEvents»
-						if ("«resetEvent.name»".equals(lastEvent)) {
+					Â«FOR state : sm.statesÂ»
+						Â«state.generateCodeÂ»
+					Â«ENDFORÂ»
+					Â«FOR resetEvent : sm.resetEventsÂ»
+						if ("Â«resetEvent.nameÂ»".equals(lastEvent)) {
 							System.out.println("Resetting state machine.");
-							currentState = "«sm.states.head.name»";
+							currentState = "Â«sm.states.head.nameÂ»";
 							executeActions = true;
 						}
-					«ENDFOR»
+					Â«ENDFORÂ»
 					
 				}
 			}
@@ -69,28 +69,28 @@ class StatemachineGenerator implements IGenerator {
 	'''
 	
 	def declareCommand(Command command) '''
-		protected void do«command.name.toFirstUpper»() {
-			System.out.println("Executing command «command.name» («command.code»)");
+		protected void doÂ«command.name.toFirstUpperÂ»() {
+			System.out.println("Executing command Â«command.nameÂ» (Â«command.codeÂ»)");
 		}
 	'''
 	
 	def generateCode(State state) '''
-		if (currentState.equals("«state.name»")) {
+		if (currentState.equals("Â«state.nameÂ»")) {
 			if (executeActions) {
-				«FOR c : state.actions»
-					do«c.name.toFirstUpper»();
-				«ENDFOR»
+				Â«FOR c : state.actionsÂ»
+					doÂ«c.name.toFirstUpperÂ»();
+				Â«ENDFORÂ»
 				executeActions = false;
 			}
-			System.out.println("Your are now in state '«state.name»'. Possible events are [«
-				state.transitions.map(t | t.event.name).join(', ')»].");
+			System.out.println("Your are now in state 'Â«state.nameÂ»'. Possible events are [Â«
+				state.transitions.map(t | t.event.name).join(', ')Â»].");
 			lastEvent = receiveEvent();
-			«FOR t : state.transitions»
-				if ("«t.event.name»".equals(lastEvent)) {
-					currentState = "«t.state.name»";
+			Â«FOR t : state.transitionsÂ»
+				if ("Â«t.event.nameÂ»".equals(lastEvent)) {
+					currentState = "Â«t.state.nameÂ»";
 					executeActions = true;
 				}
-			«ENDFOR»
+			Â«ENDFORÂ»
 		}
 	'''
 	

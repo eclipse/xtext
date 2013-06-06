@@ -44,9 +44,9 @@ class LazyProcessor extends AbstractFieldProcessor {
 		field.declaringType.addMethod('get' + field.simpleName.toFirstUpper) [
 			returnType = field.type
 			body = ['''
-				if («field.simpleName»==null)
-				  «field.simpleName» = _init«field.simpleName»();
-				return «field.simpleName»;
+				if (Â«field.simpleNameÂ»==null)
+				  Â«field.simpleNameÂ» = _initÂ«field.simpleNameÂ»();
+				return Â«field.simpleNameÂ»;
 			''']
 		]
 	}
