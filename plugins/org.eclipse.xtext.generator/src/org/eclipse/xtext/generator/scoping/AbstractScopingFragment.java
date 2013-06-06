@@ -100,16 +100,16 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		BindFactory factory = new BindFactory();
 		if(isGenerateStub) {
-			factory.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar, getNaming()))
-					.addConfiguredBinding(
-							IScopeProvider.class.getName() + "Delegate",
-							"binder.bind(" + IScopeProvider.class.getName() + ".class"
-									+ ").annotatedWith(com.google.inject.name.Names.named("
-									+ AbstractDeclarativeScopeProvider.class.getName() + ".NAMED_DELEGATE" + ")).to("
-									+ getLocalScopeProvider().getName() + ".class)");
+			factory.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar, getNaming()));
 		} else {
 			factory.addTypeToType(IScopeProvider.class.getName(), getLocalScopeProvider().getName());
 		}
+		factory.addConfiguredBinding(
+				IScopeProvider.class.getName() + "Delegate",
+				"binder.bind(" + IScopeProvider.class.getName() + ".class"
+						+ ").annotatedWith(com.google.inject.name.Names.named("
+						+ AbstractDeclarativeScopeProvider.class.getName() + ".NAMED_DELEGATE" + ")).to("
+						+ getLocalScopeProvider().getName() + ".class)");
 		factory.addTypeToType(IGlobalScopeProvider.class.getName(), getGlobalScopeProvider().getName());
 		factory.addConfiguredBinding(IgnoreCaseLinking.class.getSimpleName(), "binder.bindConstant().annotatedWith("
 				+ IgnoreCaseLinking.class.getName() + ".class).to(" + isIgnoreCase() + ")");
