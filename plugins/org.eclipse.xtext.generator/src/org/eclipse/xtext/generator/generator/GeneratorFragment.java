@@ -125,6 +125,13 @@ public class GeneratorFragment extends AbstractGeneratorFragment implements IStu
 			};
 		return Strings.EMPTY_ARRAY;
 	}
+	
+	@Override
+	public String[] getRequiredBundlesUi(Grammar grammar) {
+		return new String[] {
+				"org.eclipse.xtext.builder"
+		};
+	}
 
 	public static String getGeneratorName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + ".generator." + GrammarUtil.getName(grammar) + "Generator";
