@@ -66,7 +66,7 @@ class OrganizeImportsTest {
 
 	@Test def testDefaultPackageLeadingWhitespace() {
 		'''
-			«»
+			Â«Â»
 			   	
 			entity Foo extends java.io.Serializable {}
 		'''.assertIsOrganizedTo('''
