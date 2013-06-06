@@ -229,8 +229,8 @@ public class XtextResourceSet extends ResourceSetImpl {
      * @since 2.4
      */
     protected Map<?, ?> addTimeout(Map<?, ?> options) {
-    	if (!options.containsKey(URIConverter.OPTION_TIMEOUT)) {
-    		HashMap<Object, Object> newOptions = new HashMap<Object, Object>(options);
+    	if (options == null || !options.containsKey(URIConverter.OPTION_TIMEOUT)) {
+    		HashMap<Object, Object> newOptions = options != null ? new HashMap<Object, Object>(options) : new HashMap<Object, Object>();
     		newOptions.put(URIConverter.OPTION_TIMEOUT, 500);
     		options = newOptions;
     	}
