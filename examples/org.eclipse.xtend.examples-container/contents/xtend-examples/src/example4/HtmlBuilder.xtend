@@ -107,12 +107,12 @@ class DomSerializer {
 				n.text
 				
 			A : 
-				'''<a href="«n.href»">«n.applyContents»</a>'''
+				'''<a href="Â«n.hrefÂ»">Â«n.applyContentsÂ»</a>'''
 				
 			default : '''
-				<«n.tagName»>
-					«n.applyContents»
-				</«n.tagName»>
+				<Â«n.tagNameÂ»>
+					Â«n.applyContentsÂ»
+				</Â«n.tagNameÂ»>
 			'''
 		}
 	}

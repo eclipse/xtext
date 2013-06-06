@@ -36,16 +36,16 @@ class ObservableCompilationParticipant extends AbstractClassProcessor {
 
 			clazz.addMethod('get' + fieldName.toFirstUpper) [
 				returnType = fieldType
-				body = ['''return this.«fieldName»;''']
+				body = ['''return this.Â«fieldNameÂ»;''']
 			]
 
 			clazz.addMethod('set' + fieldName.toFirstUpper) [
 				addParameter(fieldName, fieldType)
 				body = [
 					'''
-						«fieldType» _oldValue = this.«fieldName»;
-						this.«fieldName» = «fieldName»;
-						_propertyChangeSupport.firePropertyChange("«fieldName»", _oldValue, «fieldName»);
+						Â«fieldTypeÂ» _oldValue = this.Â«fieldNameÂ»;
+						this.Â«fieldNameÂ» = Â«fieldNameÂ»;
+						_propertyChangeSupport.firePropertyChange("Â«fieldNameÂ»", _oldValue, Â«fieldNameÂ»);
 					''']
 			]
 		}
@@ -54,7 +54,7 @@ class ObservableCompilationParticipant extends AbstractClassProcessor {
 		val changeSupportType = typeof(PropertyChangeSupport).newTypeReference
 		clazz.addField("_propertyChangeSupport") [
 			type = changeSupportType
-			initializer = ['''new «toJavaCode(changeSupportType)»(this)''']
+			initializer = ['''new Â«toJavaCode(changeSupportType)Â»(this)''']
 		]
 
 		val propertyChangeListener = typeof(PropertyChangeListener).newTypeReference
