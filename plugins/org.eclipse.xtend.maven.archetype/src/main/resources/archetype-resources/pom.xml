@@ -6,25 +6,10 @@
 	<artifactId>\${artifactId}</artifactId>
 	<version>\${version}</version>
 	<name>xtend-quickstart</name>
-
-	<repositories>
-		<repository>
-			<id>OSS Sonatype</id>
-			<url>https://oss.sonatype.org/content/groups/public/</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>OSS Sonatype</id>
-			<url>https://oss.sonatype.org/content/groups/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<properties>
         <project.build.sourceEncoding>${sourceEncoding}</project.build.sourceEncoding>
         <xtend.version>${project.version}</xtend.version>
 	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -52,8 +37,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
@@ -67,5 +50,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 </project>
