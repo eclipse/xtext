@@ -38,7 +38,7 @@ class StatemachineGenerator implements IGenerator {
 			
 			protected void run() {
 				boolean executeActions = true;
-				String currentState = "«sm.states.head.name»";
+				String currentState = "«sm.states.head?.name»";
 				String lastEvent = null;
 				while (true) {
 					«FOR state : sm.states»
