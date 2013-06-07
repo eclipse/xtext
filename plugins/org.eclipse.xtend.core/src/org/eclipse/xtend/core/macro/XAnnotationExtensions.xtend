@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendEnum
 import org.eclipse.xtend.core.xtend.XtendEnumLiteral
+import org.eclipse.xtext.xbase.XFeatureCall
 
 class XAnnotationExtensions {
 	
@@ -89,14 +90,20 @@ class XAnnotationExtensions {
 		]
 		switch annoVal {
 			JvmTypeAnnotationValue : {
-				return annoVal.values.head.type
+				return annoVal.values.head?.type
 			}
 			JvmCustomAnnotationValue : {
-				return (annoVal.values.head as XTypeLiteral).type				
+				switch customAnnoVal : annoVal.values?.head {
+					XTypeLiteral: return customAnnoVal.type
+					XFeatureCall: {
+						switch feature:customAnnoVal.feature {
+							JvmType: return feature
+						}
+					}
+				}
 			}
-			default :
-				return null				
 		}
+		return null				
 	}
 	
 	def getProcessorType(XAnnotation it) {
