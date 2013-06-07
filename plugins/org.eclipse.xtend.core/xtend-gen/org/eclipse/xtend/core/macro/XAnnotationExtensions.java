@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals;
@@ -230,16 +232,47 @@ public class XAnnotationExtensions {
         _matched=true;
         EList<JvmTypeReference> _values_1 = _jvmTypeAnnotationValue.getValues();
         JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
-        return _head.getType();
+        JvmType _type = null;
+        if (_head!=null) {
+          _type=_head.getType();
+        }
+        return _type;
       }
     }
     if (!_matched) {
       if (annoVal instanceof JvmCustomAnnotationValue) {
         final JvmCustomAnnotationValue _jvmCustomAnnotationValue = (JvmCustomAnnotationValue)annoVal;
         _matched=true;
+        Object _head = null;
         EList<Object> _values_1 = _jvmCustomAnnotationValue.getValues();
-        Object _head = IterableExtensions.<Object>head(_values_1);
-        return ((XTypeLiteral) _head).getType();
+        if (_values_1!=null) {
+          _head=IterableExtensions.<Object>head(_values_1);
+        }
+        final Object customAnnoVal = _head;
+        boolean _matched_1 = false;
+        if (!_matched_1) {
+          if (customAnnoVal instanceof XTypeLiteral) {
+            final XTypeLiteral _xTypeLiteral = (XTypeLiteral)customAnnoVal;
+            _matched_1=true;
+            return _xTypeLiteral.getType();
+          }
+        }
+        if (!_matched_1) {
+          if (customAnnoVal instanceof XFeatureCall) {
+            final XFeatureCall _xFeatureCall = (XFeatureCall)customAnnoVal;
+            _matched_1=true;
+            JvmIdentifiableElement _feature = _xFeatureCall.getFeature();
+            final JvmIdentifiableElement feature = _feature;
+            boolean _matched_2 = false;
+            if (!_matched_2) {
+              if (feature instanceof JvmType) {
+                final JvmType _jvmType = (JvmType)feature;
+                _matched_2=true;
+                return _jvmType;
+              }
+            }
+          }
+        }
       }
     }
     return null;
