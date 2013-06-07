@@ -137,6 +137,10 @@ public class AnnotationValueValidator {
     return false;
   }
   
+  protected boolean _isValidAnnotationValue(final Void identifiable) {
+    return true;
+  }
+  
   protected boolean _isValidAnnotationValue(final JvmField field) {
     boolean _isStatic = field.isStatic();
     if (_isStatic) {
@@ -191,6 +195,8 @@ public class AnnotationValueValidator {
       return _isValidAnnotationValue((JvmField)enumLiteral);
     } else if (enumLiteral != null) {
       return _isValidAnnotationValue(enumLiteral);
+    } else if (enumLiteral == null) {
+      return _isValidAnnotationValue((Void)null);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(enumLiteral).toString());

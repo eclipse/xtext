@@ -78,9 +78,13 @@ class AnnotationValueValidator {
 	protected def dispatch boolean isValidAnnotationValue(XAnnotationElementValueBinaryOperation expression, boolean allowNesting) {
 		return expression.leftOperand.isValidAnnotationValue(false) && expression.rightOperand.isValidAnnotationValue(false)
 	}
-	
 	protected def dispatch boolean isValidAnnotationValue(JvmIdentifiableElement identifiable) {
 		return false
+	}
+	protected def dispatch boolean isValidAnnotationValue(Void identifiable) {
+		// indicates a syntax error
+		// consider the thing to be valid
+		return true
 	}
 	protected def dispatch boolean isValidAnnotationValue(JvmField field) {
 		if (field.static) {
