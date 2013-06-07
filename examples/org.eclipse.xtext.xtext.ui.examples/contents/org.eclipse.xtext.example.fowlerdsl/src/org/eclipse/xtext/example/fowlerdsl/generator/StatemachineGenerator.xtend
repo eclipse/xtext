@@ -47,7 +47,7 @@ class StatemachineGenerator implements IGenerator {
 					«FOR resetEvent : sm.resetEvents»
 						if ("«resetEvent.name»".equals(lastEvent)) {
 							System.out.println("Resetting state machine.");
-							currentState = "«sm.states.head.name»";
+							currentState = "«sm.states.head?.name»";
 							executeActions = true;
 						}
 					«ENDFOR»

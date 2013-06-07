@@ -132,7 +132,10 @@ public class StatemachineGenerator implements IGenerator {
         _builder.append("currentState = \"");
         EList<State> _states_2 = sm.getStates();
         State _head_1 = IterableExtensions.<State>head(_states_2);
-        String _name_2 = _head_1.getName();
+        String _name_2 = null;
+        if (_head_1!=null) {
+          _name_2=_head_1.getName();
+        }
         _builder.append(_name_2, "				");
         _builder.append("\";");
         _builder.newLineIfNotEmpty();
