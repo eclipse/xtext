@@ -802,6 +802,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				name = featureNameProvider.getSimpleName(feature);
 			}
 		}
+		if(name == null)
+			name = "/* name is null */";
 		b.trace(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0).append(name);
 		if (feature instanceof JvmExecutable) {
 			b.append("(");
