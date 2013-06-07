@@ -257,6 +257,8 @@ public class XtendBatchCompiler {
 			if (!preCompileStubs(sourceDirectory, classDirectory)) {
 				log.debug("Compilation of stubs and existing Java code had errors. This is expected and usually is not a probblem.");
 			}
+			// install a fresh type provider for the second phase, so we clear all previously cached classes and misses.
+			installJvmTypeProvider(resourceSet, classDirectory);
 			EcoreUtil.resolveAll(resourceSet);
 			List<Issue> issues = validate(resourceSet);
 			Iterable<Issue> errors = Iterables.filter(issues, SeverityFilter.ERROR);
