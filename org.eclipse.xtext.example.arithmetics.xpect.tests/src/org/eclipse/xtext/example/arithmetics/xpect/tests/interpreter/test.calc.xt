@@ -1,0 +1,7 @@
+// XPECT_SETUP org.eclipse.xtext.example.arithmetics.xpect.tests.interpreter.InterpreterTest END_SETUP
+
+
+module foo
+
+// XPECT eval --> 7
+3 + 4;
