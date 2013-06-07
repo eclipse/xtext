@@ -82,7 +82,7 @@ public class KnownTypesScope extends AbstractScope {
 			return type;
 		}
 		if (name.startsWith(typeName)) {
-			JvmType result = findNestedType(type, index, typeName.skipFirst(typeName.getSegmentCount() - 1));
+			JvmType result = findNestedType(type, index, name.skipFirst(typeName.getSegmentCount()-1));
 			return result;
 		}
 		if (name.getSegmentCount() > typeName.getSegmentCount()) {
