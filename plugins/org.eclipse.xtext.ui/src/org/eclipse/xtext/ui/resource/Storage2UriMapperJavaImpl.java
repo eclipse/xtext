@@ -325,7 +325,6 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			clearCache(project, datas);
 		} catch (JavaModelException e) {
 			log.error("Error getting package fragments roots of " + project.getElementName(), e);
-			e.printStackTrace();
 		}
 	}
 	
