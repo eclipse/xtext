@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
@@ -56,6 +59,23 @@ import com.google.common.primitives.Ints;
  */
 @NonNullByDefault
 public abstract class LightweightTypeReference {
+	
+	public static final int KIND_LIGHTWEIGHT_TYPE_REFERENCE = 1;
+	public static final int KIND_ANY_TYPE_REFERENCE = 2;
+	public static final int KIND_ARRAY_TYPE_REFERENCE = 3;
+	public static final int KIND_COMPOUND_TYPE_REFERENCE = 4;
+	public static final int KIND_PARAMETERIZED_TYPE_REFERENCE = 5;
+	public static final int KIND_UNBOUND_TYPE_REFERENCE = 6;
+	public static final int KIND_UNKNOWN_TYPE_REFERENCE = 7;
+	public static final int KIND_WILDCARD_TYPE_REFERENCE = 8;
+	public static final int KIND_FUNCTION_TYPE_REFERENCE = 9;
+	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	public int getKind() {
+		return KIND_LIGHTWEIGHT_TYPE_REFERENCE;
+	}
 	
 	public static class IdentifierFunction implements Function<LightweightTypeReference, String> {
 		
@@ -248,15 +268,10 @@ public abstract class LightweightTypeReference {
 	 * That is, it points to a parameterized type but does not define type arguments or
 	 * it points to an external type parameter that has a raw type constraint.
 	 * Type parameters that are declared by the current owner are not considered to be raw types.
+	 * 
+	 * A type is also a raw type if it inherits from a raw type.
 	 */
-	public final boolean isRawType() {
-		return isRawType(Sets.<JvmType>newHashSetWithExpectedSize(1));
-	}
-	
-	/**
-	 * @param seenTypes an aggregating set of traversed types to guard against infinite recursion
-	 */
-	protected boolean isRawType(Set<JvmType> seenTypes) {
+	public boolean isRawType() {
 		return false;
 	}
 	
@@ -315,8 +330,20 @@ public abstract class LightweightTypeReference {
 	}
 	
 	/**
+	 * Returns the resolved super type for the given raw type or <code>null</code> if the raw type
+	 * is not a valid super type of this type. 
+	 * 
+	 * @param rawType the raw type that should be resolved.
+	 * @return the resolved super type.
+	 */
+	@Nullable
+	public LightweightTypeReference getSuperType(Class<?> rawType) {
+		return null;
+	}
+	
+	/**
 	 * Returns the resolved super type for the given raw type or null if the raw type
-	 * is not a valid super type. 
+	 * is not a valid super type of this type. 
 	 * 
 	 * @param rawType the raw type that should be resolved.
 	 * @return the resolved super type.
@@ -414,7 +441,7 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public boolean isPrimitiveVoid() {
-		return isType(Void.TYPE);
+		return false;
 	}
 	
 	/**
@@ -473,6 +500,8 @@ public abstract class LightweightTypeReference {
 		if (isType(clazz)) {
 			return true;
 		}
+		// TODO interfaces don't inherit from non-interfaces, primitives, arrays, object
+		// A final type does not have any subtypes
 		JvmType type = findType(clazz);
 		if (type == null) {
 			return false;
@@ -488,6 +517,9 @@ public abstract class LightweightTypeReference {
 		if (type == null) {
 			throw new IllegalArgumentException("type may not be null");
 		}
+		// TODO interfaces don't inherit from non-interfaces, primitives, arrays, object
+		// A final type does not have any subtypes
+		// check for type == this.type
 		ParameterizedTypeReference other = new ParameterizedTypeReference(getOwner(), type);
 		boolean result = other.isAssignableFrom(this);
 		return result;
@@ -540,6 +572,19 @@ public abstract class LightweightTypeReference {
 		return getServices().getTypeReferences().findDeclaredType(type, getOwner().getContextResourceSet());
 	}
 	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	@Nullable
+	protected LightweightTypeReference internalFindTopLevelType(Class<?> rawType) {
+		ResourceSet resourceSet = getOwner().getContextResourceSet();
+		Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(rawType.getName()), true);
+		JvmType type = (JvmType) typeResource.getContents().get(0);
+		if (type == null)
+			return null;
+		return new ParameterizedTypeReference(getOwner(), type);
+	}
+	
 	protected JvmType findNonNullType(Class<?> type) {
 		JvmType result = findType(type);
 		if (result == null) {
@@ -548,6 +593,12 @@ public abstract class LightweightTypeReference {
 		return result;
 	}
 
+	/**
+	 * Returns true if this type reference represents an type with the given
+	 * raw type <code>clazz</code>.
+	 * Returns false if this is not exactly the given type, but a sub type, a
+	 * super type or a completely unrelated type.
+	 */
 	public abstract boolean isType(Class<?> clazz);
 	
 	public void accept(TypeReferenceVisitor visitor) {
@@ -597,7 +648,7 @@ public abstract class LightweightTypeReference {
 		return getFunctionTypeKind() != FunctionTypeKind.NONE;
 	}
 	
-	protected boolean isInterfaceType() {
+	public boolean isInterfaceType() {
 		return false;
 	}
 	

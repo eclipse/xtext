@@ -44,6 +44,14 @@ public class ArrayTypesTest extends AbstractXbaseTestCase {
     Assert.assertEquals("String[]", _simpleName);
   }
   
+  @Test
+  public void testTryConvertToArray_03() {
+    final LightweightTypeReference typeReference = this.toTypeReference("java.util.Collection");
+    final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
+    String _simpleName = arrayType.getSimpleName();
+    Assert.assertEquals("Object[]", _simpleName);
+  }
+  
   protected LightweightTypeReference toTypeReference(final String reference) {
     try {
       StringConcatenation _builder = new StringConcatenation();

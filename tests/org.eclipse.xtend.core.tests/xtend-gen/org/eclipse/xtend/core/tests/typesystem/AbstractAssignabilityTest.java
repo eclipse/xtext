@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
+import org.eclipse.xtend.core.tests.typesystem.StrangeIterable;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -159,9 +160,23 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       if (expectation) {
         List<LightweightTypeReference> _allSuperTypes = lhsType.getAllSuperTypes();
         for (final LightweightTypeReference superType : _allSuperTypes) {
-          String _string_1 = superType.toString();
-          boolean _testIsAssignable_1 = this.testIsAssignable(superType, rhsType);
-          Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
+          boolean _or = false;
+          boolean _isArray = superType.isArray();
+          boolean _isArray_1 = lhsType.isArray();
+          boolean _equals = (_isArray == _isArray_1);
+          if (_equals) {
+            _or = true;
+          } else {
+            boolean _isArray_2 = lhsType.isArray();
+            boolean _isArray_3 = rhsType.isArray();
+            boolean _equals_1 = (_isArray_2 == _isArray_3);
+            _or = (_equals || _equals_1);
+          }
+          if (_or) {
+            String _string_1 = superType.toString();
+            boolean _testIsAssignable_1 = this.testIsAssignable(superType, rhsType);
+            Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
+          }
         }
       }
     } catch (Throwable _e) {
@@ -510,6 +525,8 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   public void testTypeParameter_06() {
     Pair<String,String> _mappedTo = Pair.<String, String>of("String[]", "T extends String[]");
     this.isAssignableFrom(_mappedTo, "T");
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("String[]", "T extends V, V extends String[]");
+    this.isAssignableFrom(_mappedTo_1, "T");
   }
   
   @Test
@@ -897,5 +914,36 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isNotAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList>");
     this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>");
     this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable>", "java.util.ArrayList<java.util.ArrayList>");
+  }
+  
+  @Test
+  public void testUncheckedConversion_01() {
+    this.isAssignableFrom("java.lang.Iterable<?>", StrangeIterable.class);
+    this.isAssignableFrom("java.lang.Iterable<? super String>", StrangeIterable.class);
+    this.isAssignableFrom("java.lang.Iterable<? extends String>", StrangeIterable.class);
+    this.isAssignableFrom("java.lang.Iterable<String>", StrangeIterable.class);
+    this.isAssignableFrom("java.lang.Iterable", StrangeIterable.class);
+  }
+  
+  @Test
+  public void testUncheckedConversion_02() {
+    String _strangeIterable = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable<?>", _strangeIterable);
+    String _strangeIterable_1 = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable<? super String>", _strangeIterable_1);
+    String _strangeIterable_2 = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable<? extends String>", _strangeIterable_2);
+    String _strangeIterable_3 = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable<String>", _strangeIterable_3);
+    String _strangeIterable_4 = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable", _strangeIterable_4);
+  }
+  
+  private String strangeIterable(final String typeParam) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("org.eclipse.xtend.core.tests.typesystem.StrangeIterable<");
+    _builder.append(typeParam, "");
+    _builder.append(">");
+    return _builder.toString();
   }
 }
