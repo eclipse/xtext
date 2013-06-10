@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -99,8 +98,6 @@ public class XtendBatchCompiler {
 	protected Provider<ResourceSetBasedResourceDescriptions> resourceSetDescriptionsProvider;
 	@Inject
 	private JvmModelGenerator generator;
-	@Inject
-	private IXtendJvmAssociations xtendJvmAssociations;
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
 	@Inject
@@ -251,14 +248,15 @@ public class XtendBatchCompiler {
 		try {
 			ResourceSet resourceSet = resourceSetProvider.get();
 			File classDirectory = createTempDir("classes");
-			installJvmTypeProvider(resourceSet, classDirectory);
+			// install a type provider without index lookup for the first phase
+			installJvmTypeProvider(resourceSet, classDirectory, true);
 			loadXtendFiles(resourceSet);
 			File sourceDirectory = createStubs(resourceSet);
 			if (!preCompileStubs(sourceDirectory, classDirectory)) {
 				log.debug("Compilation of stubs and existing Java code had errors. This is expected and usually is not a probblem.");
 			}
 			// install a fresh type provider for the second phase, so we clear all previously cached classes and misses.
-			installJvmTypeProvider(resourceSet, classDirectory);
+			installJvmTypeProvider(resourceSet, classDirectory, false);
 			EcoreUtil.resolveAll(resourceSet);
 			List<Issue> issues = validate(resourceSet);
 			Iterable<Issue> errors = Iterables.filter(issues, SeverityFilter.ERROR);
@@ -384,8 +382,34 @@ public class XtendBatchCompiler {
 		}
 		return issues;
 	}
-
+	
+	/**
+	 * Installs the complete JvmTypeProvider including index access into the {@link ResourceSet}.
+	 * The lookup classpath is enhanced with the given tmp directory.
+	 * @deprecated use the explicit variant {@link #installJvmTypeProvider(ResourceSet, File, boolean)} instead.
+	 */
+	@Deprecated
 	protected void installJvmTypeProvider(ResourceSet resourceSet, File tmpClassDirectory) {
+		internalInstallJvmTypeProvider(resourceSet, tmpClassDirectory, false);
+	}
+	
+	/**
+	 * Installs the JvmTypeProvider optionally including index access into the {@link ResourceSet}.
+	 * The lookup classpath is enhanced with the given tmp directory.
+	 */
+	protected void installJvmTypeProvider(ResourceSet resourceSet, File tmpClassDirectory, boolean skipIndexLookup) {
+		if (skipIndexLookup) {
+			internalInstallJvmTypeProvider(resourceSet, tmpClassDirectory, skipIndexLookup);
+		} else {
+			// delegate to the deprecated signature in case it was overridden by clients
+			installJvmTypeProvider(resourceSet, tmpClassDirectory);
+		}
+	}
+
+	/**
+	 * Performs the actual installation of the JvmTypeProvider.
+	 */
+	private void internalInstallJvmTypeProvider(ResourceSet resourceSet, File tmpClassDirectory, boolean skipIndexLookup) {
 		Iterable<String> classPathEntries = concat(getClassPathEntries(), getSourcePathDirectories(),
 				asList(tmpClassDirectory.toString()));
 		classPathEntries = filter(classPathEntries, new Predicate<String>() {
@@ -394,7 +418,6 @@ public class XtendBatchCompiler {
 			}
 		});
 		Iterable<URL> classPathUrls = Iterables.transform(classPathEntries, new Function<String, URL>() {
-
 			public URL apply(String from) {
 				try {
 					return new File(from).toURI().toURL();
@@ -407,7 +430,7 @@ public class XtendBatchCompiler {
 			log.debug("classpath used for Xtend compilation : " + classPathUrls);
 		}
 		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), useCurrentClassLoaderAsParent ? getClass().getClassLoader() : null);
-		new ClasspathTypeProvider(urlClassLoader, resourceSet, indexedJvmTypeAccess);
+		new ClasspathTypeProvider(urlClassLoader, resourceSet, skipIndexLookup ? null : indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 		
 		// for annotation processing we need to have the compiler's classpath as a parent.
