@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -198,13 +199,13 @@ public class FunctionTypes {
 	
 	public FunctionTypeKind getFunctionTypeKind(ParameterizedTypeReference typeReference) {
 		JvmType type = typeReference.getType();
-		if (type instanceof JvmGenericType) {
+		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			JvmDeclaredType outerType = ((JvmGenericType) type).getDeclaringType();
 			if (outerType != null) {
-				if (Procedures.class.getCanonicalName().equals(outerType.getQualifiedName())) {
+				if (Procedures.class.getName().equals(outerType.getIdentifier())) {
 					return FunctionTypeKind.PROCEDURE;
 				}
-				if (Functions.class.getCanonicalName().equals(outerType.getQualifiedName())) {
+				if (Functions.class.getName().equals(outerType.getIdentifier())) {
 					return FunctionTypeKind.FUNCTION;
 				}
 			}
