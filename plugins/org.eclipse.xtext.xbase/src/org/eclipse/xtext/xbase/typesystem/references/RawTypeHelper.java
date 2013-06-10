@@ -253,7 +253,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 				return reference.getUpperBoundSubstitute();
 			}
 			if (reference.getUpperBounds().size() == 1) {
-				return reference.getUpperBoundSubstitute();
+				return reference.getUpperBoundSubstitute().accept(this, resourceSet);
 			}
 			CompoundTypeReference result = new CompoundTypeReference(reference.getOwner(), false);
 			enhanceCompoundReference(reference.getUpperBounds(), result, resourceSet);

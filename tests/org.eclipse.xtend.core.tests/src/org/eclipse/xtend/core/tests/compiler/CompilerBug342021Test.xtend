@@ -870,7 +870,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Iterable<Object> m(final Object o) {
-			    Iterable<Object> _switchResult = null;
+			    List<Object> _switchResult = null;
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (o instanceof Boolean) {
@@ -892,7 +892,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        _matched=true;
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
 			        Object[] _array = _newArrayList.toArray();
-			        _switchResult = ((Iterable<Object>)Conversions.doWrapArray(_array));
+			        _switchResult = ((List<Object>)Conversions.doWrapArray(_array));
 			      }
 			    }
 			    if (!_matched) {

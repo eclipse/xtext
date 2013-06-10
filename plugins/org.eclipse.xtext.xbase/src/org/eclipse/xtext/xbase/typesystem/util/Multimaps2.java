@@ -19,6 +19,9 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 /**
+ * Provides static creating a {@link #newLinkedHashListMultimap() LinkedHashListMultimap}.
+ * 
+ * @see Multimaps
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class Multimaps2 {
