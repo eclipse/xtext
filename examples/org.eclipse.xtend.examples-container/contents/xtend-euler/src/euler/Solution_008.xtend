@@ -62,7 +62,7 @@ class Solution_008 {
 			84580156166097919133875499200524063689912560717606
 			05886116467109405077541002256983155200055935729725
 			71636269561882670428252483600823257530420752963450
-		'''.toString.replace('\n', '')
+		'''.toString.replaceAll('\\r|\\n', '')
 		println((0..length-5).map [i |
 			substring(i, i + 5).toCharArray.fold(1) [ r, c |
 				r * c.toString.parseInt
