@@ -11,14 +11,18 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
+import org.eclipse.xtend.core.tests.typesystem.StrangeIterable;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -27,8 +31,12 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -154,14 +162,32 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
         _xifexpression_1 = _anyTypeReference_1;
       }
       final LightweightTypeReference rhsType = _xifexpression_1;
+      String _simpleName = lhsType.getSimpleName();
+      String _plus = (_simpleName + " := ");
+      String _simpleName_1 = rhsType.getSimpleName();
+      String _plus_1 = (_plus + _simpleName_1);
       boolean _testIsAssignable = this.testIsAssignable(lhsType, rhsType);
-      Assert.assertEquals(Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable));
+      Assert.assertEquals(_plus_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable));
       if (expectation) {
         List<LightweightTypeReference> _allSuperTypes = lhsType.getAllSuperTypes();
         for (final LightweightTypeReference superType : _allSuperTypes) {
-          String _string_1 = superType.toString();
-          boolean _testIsAssignable_1 = this.testIsAssignable(superType, rhsType);
-          Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
+          boolean _or = false;
+          boolean _isArray = superType.isArray();
+          boolean _isArray_1 = lhsType.isArray();
+          boolean _equals = (_isArray == _isArray_1);
+          if (_equals) {
+            _or = true;
+          } else {
+            boolean _isArray_2 = lhsType.isArray();
+            boolean _isArray_3 = rhsType.isArray();
+            boolean _equals_1 = (_isArray_2 == _isArray_3);
+            _or = (_equals || _equals_1);
+          }
+          if (_or) {
+            String _string_1 = superType.toString();
+            boolean _testIsAssignable_1 = this.testIsAssignable(superType, rhsType);
+            Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
+          }
         }
       }
     } catch (Throwable _e) {
@@ -224,6 +250,23 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       wcRhs.addUpperBound(_wrapperTypeIfPrimitive);
       boolean _doIsAssignable_3 = this.doIsAssignable(lhs, wcRhs);
       Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_3));
+      CompoundTypeReference _compoundTypeReference = new CompoundTypeReference(this, true);
+      final CompoundTypeReference compoundRhs = _compoundTypeReference;
+      compoundRhs.addComponent(rhs);
+      ITypeReferenceOwner _owner = rhs.getOwner();
+      CommonTypeComputationServices _services = _owner.getServices();
+      TypeReferences _typeReferences = _services.getTypeReferences();
+      ITypeReferenceOwner _owner_1 = rhs.getOwner();
+      ResourceSet _contextResourceSet = _owner_1.getContextResourceSet();
+      final JvmType object = _typeReferences.findDeclaredType(Object.class, _contextResourceSet);
+      ITypeReferenceOwner _owner_2 = rhs.getOwner();
+      ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_owner_2, object);
+      compoundRhs.addComponent(_parameterizedTypeReference);
+      String _plus = (lhs + " := ");
+      String _string = compoundRhs.toString();
+      String _plus_1 = (_plus + _string);
+      boolean _doIsAssignable_4 = this.doIsAssignable(lhs, compoundRhs);
+      Assert.assertEquals(_plus_1, Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_4));
     }
     return result;
   }
@@ -391,9 +434,9 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   
   @Test
   public void testListToArrayType_01() {
-    this.isAssignableFrom("int[]", "Iterable<Integer>");
-    this.isAssignableFrom("int[]", "Iterable<? extends Integer>");
-    this.isNotAssignableFrom("int[]", "Iterable<? super Integer>");
+    this.isAssignableFrom("int[]", "java.util.List<Integer>");
+    this.isAssignableFrom("int[]", "java.util.List<? extends Integer>");
+    this.isNotAssignableFrom("int[]", "java.util.List<? super Integer>");
   }
   
   @Test
@@ -510,6 +553,8 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   public void testTypeParameter_06() {
     Pair<String,String> _mappedTo = Pair.<String, String>of("String[]", "T extends String[]");
     this.isAssignableFrom(_mappedTo, "T");
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("String[]", "T extends V, V extends String[]");
+    this.isAssignableFrom(_mappedTo_1, "T");
   }
   
   @Test
@@ -520,6 +565,12 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   
   @Test
   public abstract void testTypeParameter_08();
+  
+  @Test
+  public void testTypeParameter_09() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("int", "T extends Integer");
+    this.isAssignableFrom(_mappedTo, "T");
+  }
   
   @Test
   public void testTwoTypeParameters_01() {
@@ -852,7 +903,6 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isAssignableFrom(_mappedTo, "A");
   }
   
-  @Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
   @Test
   public void testBug395002_02() {
     String _selfBound = this.selfBound("$<? extends $<?, A>, ?>");
@@ -897,5 +947,57 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isNotAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList>");
     this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>");
     this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable>", "java.util.ArrayList<java.util.ArrayList>");
+  }
+  
+  @Test
+  public void testUncheckedConversion_01() {
+    this.isAssignableFrom("java.lang.Iterable<?>", StrangeIterable.class);
+    this.isAssignableFrom("java.lang.Iterable<? super String>", StrangeIterable.class);
+    this.isAssignableFrom("java.lang.Iterable<? extends String>", StrangeIterable.class);
+    this.isAssignableFrom("java.lang.Iterable<String>", StrangeIterable.class);
+    this.isAssignableFrom("java.lang.Iterable", StrangeIterable.class);
+  }
+  
+  @Test
+  public void testUncheckedConversion_02() {
+    String _strangeIterable = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable<?>", _strangeIterable);
+    String _strangeIterable_1 = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable<? super String>", _strangeIterable_1);
+    String _strangeIterable_2 = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable<? extends String>", _strangeIterable_2);
+    String _strangeIterable_3 = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable<String>", _strangeIterable_3);
+    String _strangeIterable_4 = this.strangeIterable("java.lang.Exception");
+    this.isAssignableFrom("java.lang.Iterable", _strangeIterable_4);
+  }
+  
+  @Test
+  public void testCharArrayIsIterable() {
+    this.isAssignableFrom("java.lang.Iterable<?>", "char[]");
+    this.isAssignableFrom("java.lang.Iterable<? extends Character>", "char[]");
+    this.isAssignableFrom("java.lang.Iterable<Character>", "char[]");
+    this.isAssignableFrom("java.lang.Iterable<? super Character>", "char[]");
+    this.isAssignableFrom("java.lang.Iterable", "char[]");
+  }
+  
+  @Test
+  public void testStringIsNotComparableInteger() {
+    this.isNotAssignableFrom("java.lang.Comparable<? extends Integer>", "String");
+    this.isNotAssignableFrom("java.lang.Comparable<Integer>", "String");
+  }
+  
+  @Test
+  public void testStringIsComparableString() {
+    this.isAssignableFrom("java.lang.Comparable<? extends String>", "String");
+    this.isAssignableFrom("java.lang.Comparable<String>", "String");
+  }
+  
+  private String strangeIterable(final String typeParam) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("org.eclipse.xtend.core.tests.typesystem.StrangeIterable<");
+    _builder.append(typeParam, "");
+    _builder.append(">");
+    return _builder.toString();
   }
 }
