@@ -85,10 +85,11 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		val operation = function.directlyInferredOperation
 		val lhsType = if (lhsAndParams.key != null) operation.parameters.head.parameterType.toLightweightReference else new AnyTypeReference(this)
 		val rhsType = if (rhs != null) operation.parameters.last.parameterType.toLightweightReference else new AnyTypeReference(this)
-		assertEquals(expectation, lhsType.testIsAssignable(rhsType))
+		assertEquals(lhsType.simpleName + " := " + rhsType.simpleName, expectation, lhsType.testIsAssignable(rhsType))
 		if (expectation) {
 			for(superType: lhsType.allSuperTypes) {
-				assertEquals(superType.toString, expectation, superType.testIsAssignable(rhsType))		
+				if (superType.array == lhsType.array || lhsType.array == rhsType.array)
+					assertEquals(superType.toString, expectation, superType.testIsAssignable(rhsType))		
 			}
 		}
 	}
@@ -280,9 +281,9 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	
 	@Test
 	def void testListToArrayType_01() {
-		"int[]".isAssignableFrom("Iterable<Integer>")
-		"int[]".isAssignableFrom("Iterable<? extends Integer>")
-		"int[]".isNotAssignableFrom("Iterable<? super Integer>")
+		"int[]".isAssignableFrom("java.util.List<Integer>")
+		"int[]".isAssignableFrom("java.util.List<? extends Integer>")
+		"int[]".isNotAssignableFrom("java.util.List<? super Integer>")
 	}
 	
 	@Test
@@ -390,6 +391,7 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	def void testTypeParameter_06() {
 		// is invalid parameter bound but should be assignable anyway 
 		("String[]"->"T extends String[]").isAssignableFrom("T")
+		("String[]"->"T extends V, V extends String[]").isAssignableFrom("T")
 	}
 	
 	@Test
@@ -686,7 +688,6 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		("$<?, A>".selfBound->"A extends $<?,A>".selfBound).isAssignableFrom("A")
 	}
 	
-	@Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
 	@Test
 	def void testBug395002_02() {
 		("$<? extends $<?, A>, ?>".selfBound->"A extends $<?,A>".selfBound).isAssignableFrom("$<?, A>")
@@ -724,6 +725,49 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		"java.lang.Iterable<? extends java.lang.Iterable<?>>".isNotAssignableFrom("java.util.ArrayList<java.util.ArrayList>")
 		"java.lang.Iterable<? extends java.lang.Iterable<?>>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>")
 		"java.lang.Iterable<? extends java.lang.Iterable>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList>")
+	}
+	
+	@Test
+	def void testUncheckedConversion_01() {
+		"java.lang.Iterable<?>".isAssignableFrom(StrangeIterable)
+		"java.lang.Iterable<? super String>".isAssignableFrom(StrangeIterable)
+		"java.lang.Iterable<? extends String>".isAssignableFrom(StrangeIterable)
+		"java.lang.Iterable<String>".isAssignableFrom(StrangeIterable)
+		"java.lang.Iterable".isAssignableFrom(StrangeIterable)
+	}
+	
+	@Test
+	def void testUncheckedConversion_02() {
+		"java.lang.Iterable<?>".isAssignableFrom(strangeIterable('java.lang.Exception'))
+		"java.lang.Iterable<? super String>".isAssignableFrom(strangeIterable('java.lang.Exception'))
+		"java.lang.Iterable<? extends String>".isAssignableFrom(strangeIterable('java.lang.Exception'))
+		"java.lang.Iterable<String>".isAssignableFrom(strangeIterable('java.lang.Exception'))
+		"java.lang.Iterable".isAssignableFrom(strangeIterable('java.lang.Exception'))
+	}
+	
+	@Test
+	def void testCharArrayIsIterable() {
+		"java.lang.Iterable<?>".isAssignableFrom("char[]")
+		"java.lang.Iterable<? extends Character>".isAssignableFrom("char[]")
+		"java.lang.Iterable<Character>".isAssignableFrom("char[]")
+		"java.lang.Iterable<? super Character>".isAssignableFrom("char[]")
+		"java.lang.Iterable".isAssignableFrom("char[]")
+	}
+	
+	@Test
+	def void testStringIsNotComparableInteger() {
+		"java.lang.Comparable<? extends Integer>".isNotAssignableFrom("String")
+		"java.lang.Comparable<Integer>".isNotAssignableFrom("String")
+	}
+	
+	@Test
+	def void testStringIsComparableString() {
+		"java.lang.Comparable<? extends String>".isAssignableFrom("String")
+		"java.lang.Comparable<String>".isAssignableFrom("String")
+	}
+	
+	private def String strangeIterable(String typeParam) {
+		'''org.eclipse.xtend.core.tests.typesystem.StrangeIterable<«typeParam»>'''
 	}
 }
 
@@ -1455,6 +1499,14 @@ class RawAssignabilityTest extends AbstractAssignabilityTest {
 		"java.lang.Iterable<? extends java.lang.Iterable<?>>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList>")
 		"java.lang.Iterable<? extends java.lang.Iterable<?>>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>")
 		"java.lang.Iterable<? extends java.lang.Iterable>".isAssignableFrom("java.util.ArrayList<java.util.ArrayList>")
-	}	
+	}
+	
+	@Test
+	override void testStringIsNotComparableInteger() {
+		"java.lang.Comparable<? extends Integer>".isAssignableFrom("String")
+		"java.lang.Comparable<Integer>".isAssignableFrom("String")
+	}
+	
 }
 
+interface StrangeIterable<T> extends Iterable {}

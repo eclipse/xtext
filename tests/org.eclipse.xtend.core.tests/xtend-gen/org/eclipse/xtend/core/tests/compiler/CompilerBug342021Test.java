@@ -2149,7 +2149,7 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Iterable<Object> m(final Object o) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<Object> _switchResult = null;");
+    _builder_1.append("List<Object> _switchResult = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("boolean _matched = false;");
@@ -2215,7 +2215,7 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.append("Object[] _array = _newArrayList.toArray();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("_switchResult = ((Iterable<Object>)Conversions.doWrapArray(_array));");
+    _builder_1.append("_switchResult = ((List<Object>)Conversions.doWrapArray(_array));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

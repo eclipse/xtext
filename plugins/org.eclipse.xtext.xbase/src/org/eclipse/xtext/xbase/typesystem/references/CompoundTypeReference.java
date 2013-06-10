@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -38,6 +37,14 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		super(owner);
 		this.synonym = synonym;
 		this.resolved = true;
+	}
+	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_COMPOUND_TYPE_REFERENCE;
 	}
 	
 	@Override
@@ -89,14 +96,34 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		// TODO common type?
 		return super.getTypeArguments();
 	}
-	
+
 	@Override
-	protected boolean isRawType(Set<JvmType> seenTypes) {
+	public boolean isRawType() {
 		for(LightweightTypeReference component: expose(components)) {
-			if (component.isRawType(seenTypes))
+			if (component.isRawType())
 				return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public LightweightTypeReference getRawTypeReference() {
+		if (isAllRawType()) {
+			return this;
+		}
+		CompoundTypeReference result = new CompoundTypeReference(getOwner(), isSynonym());
+		for(LightweightTypeReference component: expose(components)) {
+			result.addComponent(component.getRawTypeReference());
+		}
+		return result;
+	}
+	
+	private boolean isAllRawType() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (!component.isRawType())
+				return false;
+		}
+		return true;
 	}
 	
 	@Override
@@ -138,6 +165,19 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	@Override
 	@Nullable
 	public LightweightTypeReference getSuperType(JvmType rawType) {
+		if (components == null || components.isEmpty())
+			return null;
+		for(LightweightTypeReference component: components) {
+			LightweightTypeReference result = component.getSuperType(rawType);
+			if (result != null)
+				return result;
+		}
+		return null;
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		if (components == null || components.isEmpty())
 			return null;
 		for(LightweightTypeReference component: components) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +24,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -41,91 +42,149 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Booleans;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
 @Singleton
-public class TypeConformanceComputer {
+public class TypeConformanceComputer extends RawTypeConformanceComputer {
 
-	protected AbstractConformanceVisitor<LightweightTypeReference> leftDispatcher = createStrategySelector();
+	@Inject
+	private RawTypeConformanceComputer rawTypeConformanceComputer = new RawTypeConformanceComputer();
 	
-	@NonNull
-	protected TypeConformanceStrategySelector createStrategySelector() {
-		return new TypeConformanceStrategySelector(this);
-	}
-
 	public boolean isConformant(LightweightTypeReference left, LightweightTypeReference right) {
-		return isConformant(left, right, false);
+		return (isConformant(left, right, ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0;
 	}
 	
-	public boolean isConformant(LightweightTypeReference left, LightweightTypeReference right, boolean ignoreGenerics) {
-		if (left == right && left != null)
-			return true;
-		TypeConformanceResult result = isConformant(left, right, new TypeConformanceComputationArgument(ignoreGenerics, false, true, true, false, false));
-		return result.isConformant();
-	}
-	
-	@NonNull
-	public TypeConformanceResult isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument flags) {
-		if (left == right && left != null) {
-			return TypeConformanceResult.create(flags, ConformanceHint.SUCCESS);
+	public TypeConformanceResult isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument argument) {
+		int flags = ALLOW_RAW_TYPE_CONVERSION;
+		if (argument.allowPrimitiveConversion) {
+			flags |= ALLOW_BOXING_UNBOXING;
 		}
-		return left.accept(leftDispatcher, TypeConformanceComputationArgument.Internal.create(
-				right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion, flags.allowPrimitiveWidening, flags.unboundComputationAddsHints, flags.allowSynonyms));
+		if (argument.allowPrimitiveWidening) {
+			flags |= ALLOW_PRIMITIVE_WIDENING;
+		}
+		if (argument.allowSynonyms) {
+			flags |= ALLOW_SYNONYMS;
+		}
+		if (argument.rawType) {
+			flags |= RAW_TYPE;
+		}
+		if (argument.asTypeArgument) {
+			flags |= AS_TYPE_ARGUMENT;
+		}
+		if (argument.unboundComputationAddsHints) {
+			flags |= UNBOUND_COMPUTATION_ADDS_HINTS;
+		}
+		int result = isConformant(left, right, flags);
+		EnumSet<ConformanceHint> resultFlags = EnumSet.noneOf(ConformanceHint.class);
+		if ((result & SUCCESS) != 0) {
+			resultFlags.add(ConformanceHint.SUCCESS);
+		} else {
+			resultFlags.add(ConformanceHint.INCOMPATIBLE);
+		}
+		if ((result & DEMAND_CONVERSION) != 0) {
+			resultFlags.add(ConformanceHint.DEMAND_CONVERSION);
+		}
+		if ((result & SUBTYPE) != 0) {
+			resultFlags.add(ConformanceHint.SUBTYPE);
+		}
+		if ((result & PRIMITIVE_WIDENING) != 0) {
+			resultFlags.add(ConformanceHint.PRIMITIVE_WIDENING);
+		}
+		if ((result & UNBOXING) != 0) {
+			resultFlags.add(ConformanceHint.UNBOXING);
+		}
+		if ((result & BOXING) != 0) {
+			resultFlags.add(ConformanceHint.BOXING);
+		}
+		if ((result & RAW_TYPE_CONVERSION) != 0) {
+			resultFlags.add(ConformanceHint.RAWTYPE_CONVERSION);
+		}
+		if ((result & RAW_TYPE) != 0) {
+			resultFlags.add(ConformanceHint.RAW);
+		}
+		if ((result & SYNONYM) != 0) {
+			resultFlags.add(ConformanceHint.SYNONYM);
+		}
+		return new TypeConformanceResult(resultFlags);
 	}
 	
-	/**
-	 * Populates a {@link Multiset} with the maximum number of necessary steps
-	 * from a given type to its super types. Sorting the set by the steps creates 
-	 * a stable order on from the direct super class, the most specialized implemented 
-	 * interfaces up to object.
-	 * E.g. although {@link StringBuilder} implements {@link java.io.Serializable} and 
-	 * {@link CharSequence}, serializable is treated as more specific by this algorithm
-	 * since the super class AbstractStringBuilder implements {@link CharSequence}, too.
-	 * Thus the number of steps to {@link java.io.Serializable} is <code>1</code> while 
-	 * {@link CharSequence} requires <code>2</code> hops. 
-	 */
-	@NonNullByDefault
-	protected static class MaxDistanceRawTypeAcceptor implements SuperTypeAcceptor {
-
-		/**
-		 * The set with with the distance information.
-		 */
-		private final Multiset<JvmType> distances;
-		
-		/**
-		 * All seen raw types mapped to their resolved parameterized references.
-		 */
-		private final Multimap<JvmType, LightweightTypeReference> rawTypeToReference;
-		
-		protected MaxDistanceRawTypeAcceptor(
-				Multiset<JvmType> result, 
-				Multimap<JvmType, LightweightTypeReference> all) {
-			this.distances = result;
-			this.rawTypeToReference = all;
+	@Override
+	public int isConformant(LightweightTypeReference left, LightweightTypeReference right, int flags) {
+		if (left == right && left != null) // TODO handle null
+			return flags | SUCCESS;
+		if ((flags & RAW_TYPE) != 0 || ((left.isRawType() || right.isRawType()) && (flags & ALLOW_RAW_TYPE_CONVERSION) != 0)) {
+			int result = rawTypeConformanceComputer.isConformant(left, right, flags);
+			return result;
 		}
-		
-		public boolean accept(LightweightTypeReference superType, int distance) {
-			if (superType == null)
-				throw new IllegalStateException("superType may not be null");
-			JvmType type = superType.getType();
-			if (type != null) {
-				rawTypeToReference.put(type, superType);
-				if (distances.contains(type)) {
-					int currentCount = distances.count(type);
-					if (currentCount < distance + 1) {
-						distances.setCount(type, distance + 1);
-					}
-				} else {
-					distances.add(type, distance + 1);
+		return doIsConformant(left, right, flags);
+	}
+	
+	@Override
+	protected LightweightTypeReference getSuperType(ParameterizedTypeReference current, JvmType type) {
+		return current.getSuperType(type);
+	}
+	
+	@Override
+	protected int doIsConformantTypeArguments(ParameterizedTypeReference left, ParameterizedTypeReference right, int flags) {
+		List<LightweightTypeReference> leftTypeArguments = left.getTypeArguments();
+		List<LightweightTypeReference> rightTypeArguments = right.getTypeArguments();
+		int size = leftTypeArguments.size();
+		if (size == rightTypeArguments.size()) {
+			int argumentFlags = (flags | AS_TYPE_ARGUMENT) & ~(ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_RAW_TYPE_CONVERSION);  
+			for(int i = 0; i < size; i++) {
+				if ((doIsConformant(leftTypeArguments.get(i), rightTypeArguments.get(i), argumentFlags) & SUCCESS) == 0) {
+					return flags;
 				}
 			}
-			return true;
+		} else if ((flags & ALLOW_RAW_TYPE_CONVERSION) != 0) {
+			if (size == 0 || rightTypeArguments.isEmpty()) {
+				return flags | SUCCESS | RAW_TYPE_CONVERSION;
+			}
+		} else {
+			return flags;
 		}
-		
+		return flags | SUCCESS;
+	}
+	
+	@Override
+	protected int doIsConformant(FunctionTypeReference left, FunctionTypeReference right, int flags) {
+		List<LightweightTypeReference> leftParameterTypes = left.getParameterTypes();
+		List<LightweightTypeReference> rightParameterTypes = right.getParameterTypes();
+		if (leftParameterTypes.size() != rightParameterTypes.size()) {
+			return flags;
+		}
+		LightweightTypeReference leftReturnType = left.getReturnType();
+		LightweightTypeReference rightReturnType = right.getReturnType();
+		if (leftReturnType!=rightReturnType && (leftReturnType == null || rightReturnType == null)) {
+			return flags;
+		}
+		boolean leftIsVoid = leftReturnType != null && leftReturnType.isPrimitiveVoid();
+		boolean rightIsVoid = rightReturnType != null && rightReturnType.isPrimitiveVoid();
+		if (leftIsVoid) {
+			if (!rightIsVoid) {
+				return flags;
+			}
+		} else if (rightIsVoid) {
+			return flags;
+		}
+		if (leftReturnType != rightReturnType && !leftIsVoid && (doIsConformant(leftReturnType, rightReturnType, flags & ~ALLOW_PRIMITIVE_WIDENING) & SUCCESS) == 0) {
+			return flags;
+		}
+		for(int i = 0; i < leftParameterTypes.size(); i++) {
+			LightweightTypeReference leftParameterType = leftParameterTypes.get(i);
+			LightweightTypeReference rightParameterType = rightParameterTypes.get(i);
+			if (leftParameterType!=rightParameterType && (leftParameterType == null || rightParameterType == null)) {
+				return flags;
+			}
+			if ((doIsConformant(rightParameterType, leftParameterType, flags & ~ALLOW_PRIMITIVE_WIDENING) & SUCCESS) == 0) {
+				return flags;
+			} 
+		}
+		return flags | SUCCESS;
 	}
 	
 	/**
@@ -200,7 +259,8 @@ public class TypeConformanceComputer {
 						break;
 					result = getTypeParametersForSupertype(all, rawType, owner, types);
 					for(LightweightTypeReference alreadyCollected: referencesWithSameDistance) {
-						if (isConformant(result, alreadyCollected, true)) {
+						if ((isConformant(result, alreadyCollected,
+								TypeConformanceComputer.RAW_TYPE | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0) {
 							classSeen = classSeen || isClass(rawType);
 							continue outer;
 						}
@@ -230,28 +290,143 @@ public class TypeConformanceComputer {
 		}
 		return null;
 	}
-
+	
 	protected boolean isClass(JvmType type) {
-		if (type instanceof JvmArrayType)
+		if (type.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE)
 			return isClass(((JvmArrayType) type).getComponentType());
-		return type instanceof JvmGenericType && !((JvmGenericType) type).isInterface();
+		return type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && !((JvmGenericType) type).isInterface();
+	}
+	
+	/**
+	 * Populates a {@link Multiset} with the maximum number of necessary steps
+	 * from a given type to its super types. Sorting the set by the steps creates 
+	 * a stable order on from the direct super class, the most specialized implemented 
+	 * interfaces up to object.
+	 * E.g. although {@link StringBuilder} implements {@link java.io.Serializable} and 
+	 * {@link CharSequence}, serializable is treated as more specific by this algorithm
+	 * since the super class AbstractStringBuilder implements {@link CharSequence}, too.
+	 * Thus the number of steps to {@link java.io.Serializable} is <code>1</code> while 
+	 * {@link CharSequence} requires <code>2</code> hops. 
+	 */
+	@NonNullByDefault
+	protected static class MaxDistanceRawTypeAcceptor implements SuperTypeAcceptor {
+
+		/**
+		 * The set with with the distance information.
+		 */
+		private final Multiset<JvmType> distances;
+		
+		/**
+		 * All seen raw types mapped to their resolved parameterized references.
+		 */
+		private final Multimap<JvmType, LightweightTypeReference> rawTypeToReference;
+		
+		protected MaxDistanceRawTypeAcceptor(
+				Multiset<JvmType> result, 
+				Multimap<JvmType, LightweightTypeReference> all) {
+			this.distances = result;
+			this.rawTypeToReference = all;
+		}
+		
+		public boolean accept(LightweightTypeReference superType, int distance) {
+			if (superType == null)
+				throw new IllegalStateException("superType may not be null");
+			JvmType type = superType.getType();
+			if (type != null) {
+				rawTypeToReference.put(type, superType);
+				if (distances.contains(type)) {
+					int currentCount = distances.count(type);
+					if (currentCount < distance + 1) {
+						distances.setCount(type, distance + 1);
+					}
+				} else {
+					distances.add(type, distance + 1);
+				}
+			}
+			return true;
+		}
+		
+	}
+	
+	protected void initializeDistance(final LightweightTypeReference firstType, Multimap<JvmType, LightweightTypeReference> all,
+			Multiset<JvmType> cumulatedDistance) {
+		MaxDistanceRawTypeAcceptor acceptor = new MaxDistanceRawTypeAcceptor(cumulatedDistance, all);
+		acceptor.accept(firstType, 0);
+		firstType.collectSuperTypes(acceptor);
+	}
+
+	/**
+	 * Keeps the cumulated distance for all the common raw super types of the given references.
+	 * Interfaces that are more directly implemented will get a lower total count than more general
+	 * interfaces.
+	 */
+	protected void cumulateDistance(final List<LightweightTypeReference> references, Multimap<JvmType, LightweightTypeReference> all,
+			Multiset<JvmType> cumulatedDistance) {
+		for(LightweightTypeReference other: references) {
+			Multiset<JvmType> otherDistance = LinkedHashMultiset.create();
+			initializeDistance(other, all, otherDistance);
+			cumulatedDistance.retainAll(otherDistance);
+			for(Multiset.Entry<JvmType> typeToDistance: otherDistance.entrySet()) {
+				if (cumulatedDistance.contains(typeToDistance.getElement()))
+					cumulatedDistance.add(typeToDistance.getElement(), typeToDistance.getCount());
+			}
+		}
+	}
+
+	protected void inplaceSortByDistanceAndName(List<Entry<JvmType>> candidates) {
+		Collections.sort(candidates,new Comparator<Entry<JvmType>>() {
+			public int compare(Entry<JvmType> o1, Entry<JvmType> o2) {
+				if (o1.getCount() == o2.getCount()) {
+					JvmType element1 = o1.getElement();
+					JvmType element2 = o2.getElement();
+					return compare(element1, element2);
+				}
+				if (o1.getCount() < o2.getCount())
+					return -1;
+				return 1;
+			}
+
+			protected int compare(JvmType element1, JvmType element2) {
+				if (element1.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE && element2.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
+					return compare(((JvmArrayType) element1).getComponentType(), ((JvmArrayType) element2).getComponentType());
+				}
+				if (element1.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && element2.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+					int result = Booleans.compare(((JvmGenericType) element1).isInterface(), ((JvmGenericType) element2).isInterface());
+					if (result != 0) {
+						return result;
+					}
+				}
+				return element1.getIdentifier().compareTo(element2.getIdentifier());
+			}
+		});
 	}
 
 	protected List<LightweightTypeReference> replacePrimitivesAndRemoveAnyReferences(List<LightweightTypeReference> types) {
 		List<LightweightTypeReference> result = Lists.newArrayList();
 		for(LightweightTypeReference type: types) {
-			if (!(type instanceof AnyTypeReference))
-				result.add(type.getWrapperTypeIfPrimitive());
+			if (!(type.isAny()))
+				result.add(getWrapperTypeIfPrimitive(type));
 		}
 		return result;
 	}
 
 	protected boolean containsPrimitiveOrAnyReferences(List<LightweightTypeReference> types) {
 		for(LightweightTypeReference type: types) {
-			if (type.isPrimitive() || type instanceof AnyTypeReference)
+			if (type.isPrimitive() || type.isAny())
 				return true;
 		}
 		return false;
+	}
+	
+	protected LightweightTypeReference getFirstForRawType(Multimap<JvmType, LightweightTypeReference> all, JvmType rawType) {
+		Iterator<LightweightTypeReference> iterator = all.get(rawType).iterator();
+		while(iterator.hasNext()) {
+			LightweightTypeReference result = iterator.next();
+			if (result instanceof ParameterizedTypeReference || result instanceof ArrayTypeReference) {
+				return result;
+			}
+		}
+		throw new IllegalStateException(all.toString() + " does not contain a useful type reference for rawtype " + rawType.getIdentifier());
 	}
 	
 	protected LightweightTypeReference getTypeParametersForSupertype(
@@ -311,7 +486,7 @@ public class TypeConformanceComputer {
 			if (resultAsFunctionType != null)
 				return resultAsFunctionType;
 			return result;
-		} else if (rawType instanceof JvmArrayType) {
+		} else if (rawType.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
 			JvmComponentType componentType = ((JvmArrayType) rawType).getComponentType();
 			Multimap<JvmType,LightweightTypeReference> copiedMultimap = LinkedHashMultimap.create(all);
 			Collection<LightweightTypeReference> originalReferences = all.get(rawType);
@@ -334,80 +509,6 @@ public class TypeConformanceComputer {
 			}
 		}
 		return null;
-	}
-	
-	
-
-	protected void addComponentType(LightweightTypeReference reference, List<LightweightTypeReference> result) {
-		if (reference.isArray()) {
-			result.add(((ArrayTypeReference) reference).getComponentType());
-		} else {
-			result.add(reference);
-		}
-	}
-
-	protected LightweightTypeReference getFirstForRawType(Multimap<JvmType, LightweightTypeReference> all, JvmType rawType) {
-		Iterator<LightweightTypeReference> iterator = all.get(rawType).iterator();
-		while(iterator.hasNext()) {
-			LightweightTypeReference result = iterator.next();
-			if (result instanceof ParameterizedTypeReference || result instanceof ArrayTypeReference) {
-				return result;
-			}
-		}
-		throw new IllegalStateException(all.toString() + " does not contain a useful type reference for rawtype " + rawType.getQualifiedName());
-	}
-
-	protected void initializeDistance(final LightweightTypeReference firstType, Multimap<JvmType, LightweightTypeReference> all,
-			Multiset<JvmType> cumulatedDistance) {
-		MaxDistanceRawTypeAcceptor acceptor = new MaxDistanceRawTypeAcceptor(cumulatedDistance, all);
-		acceptor.accept(firstType, 0);
-		firstType.collectSuperTypes(acceptor);
-	}
-
-	/**
-	 * Keeps the cumulated distance for all the common raw super types of the given references.
-	 * Interfaces that are more directly implemented will get a lower total count than more general
-	 * interfaces.
-	 */
-	protected void cumulateDistance(final List<LightweightTypeReference> references, Multimap<JvmType, LightweightTypeReference> all,
-			Multiset<JvmType> cumulatedDistance) {
-		for(LightweightTypeReference other: references) {
-			Multiset<JvmType> otherDistance = LinkedHashMultiset.create();
-			initializeDistance(other, all, otherDistance);
-			cumulatedDistance.retainAll(otherDistance);
-			for(Multiset.Entry<JvmType> typeToDistance: otherDistance.entrySet()) {
-				if (cumulatedDistance.contains(typeToDistance.getElement()))
-					cumulatedDistance.add(typeToDistance.getElement(), typeToDistance.getCount());
-			}
-		}
-	}
-
-	protected void inplaceSortByDistanceAndName(List<Entry<JvmType>> candidates) {
-		Collections.sort(candidates,new Comparator<Entry<JvmType>>() {
-			public int compare(Entry<JvmType> o1, Entry<JvmType> o2) {
-				if (o1.getCount() == o2.getCount()) {
-					JvmType element1 = o1.getElement();
-					JvmType element2 = o2.getElement();
-					return compare(element1, element2);
-				}
-				if (o1.getCount() < o2.getCount())
-					return -1;
-				return 1;
-			}
-
-			protected int compare(JvmType element1, JvmType element2) {
-				if (element1 instanceof JvmArrayType && element2 instanceof JvmArrayType) {
-					return compare(((JvmArrayType) element1).getComponentType(), ((JvmArrayType) element2).getComponentType());
-				}
-				if (element1 instanceof JvmGenericType && element2 instanceof JvmGenericType) {
-					int result = Booleans.compare(((JvmGenericType) element1).isInterface(), ((JvmGenericType) element2).isInterface());
-					if (result != 0) {
-						return result;
-					}
-				}
-				return element1.getIdentifier().compareTo(element2.getIdentifier());
-			}
-		});
 	}
 	
 	public LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types, List<LightweightTypeReference> initiallyRequested, ITypeReferenceOwner owner) {
@@ -458,7 +559,7 @@ public class TypeConformanceComputer {
 		result.addUpperBound(superType.copyInto(owner));
 		return result;
 	}
-
+	
 	private void addIdentifier(LightweightTypeReference type, Set<String> allNames, Set<String> allBoundNames) {
 		if (type instanceof UnboundTypeReference && !type.isResolved()) {
 			allNames.add(((UnboundTypeReference) type).getHandle().toString());
@@ -468,13 +569,13 @@ public class TypeConformanceComputer {
 			allBoundNames.add(identifier);
 		}
 	}
-
+	
 	private String getIdentifier(LightweightTypeReference type) {
 		if (type instanceof UnboundTypeReference && !type.isResolved())
 			return ((UnboundTypeReference) type).getHandle().toString();
 		return type.getJavaIdentifier();
 	}
-
+	
 	private LightweightTypeReference getMostSpecialTypeIfAllWildcards(List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
 		boolean objectIsCandidate = false;
 		boolean lowerBoundSeen = false;
@@ -509,6 +610,14 @@ public class TypeConformanceComputer {
 		}
 		return type;
 	}
+	
+	protected void addComponentType(LightweightTypeReference reference, List<LightweightTypeReference> result) {
+		if (reference.isArray()) {
+			result.add(((ArrayTypeReference) reference).getComponentType());
+		} else {
+			result.add(reference);
+		}
+	}
 
 	protected WildcardTypeReference createObjectWildcardReference(ITypeReferenceOwner owner) {
 		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
@@ -517,15 +626,15 @@ public class TypeConformanceComputer {
 		result.addUpperBound(objectReference);
 		return result;
 	}
-
+	
 	protected LightweightTypeReference conformsToAll(LightweightTypeReference type, List<LightweightTypeReference> types) {
 		LightweightTypeReference result = type;
 		for (int i = 0; i < types.size(); i++) {
 			LightweightTypeReference other = types.get(i);
 			if (result != other) {
 				// if we stumble accross unbound references without any hints, assume they are compatible and add respective hints
-				TypeConformanceResult conformance = isConformant(result, other, new TypeConformanceComputationArgument(false, false, true, true, true, false));
-				if (conformance.isConformant()) {
+				int conformance = isConformant(result, other, ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | UNBOUND_COMPUTATION_ADDS_HINTS | ALLOW_RAW_TYPE_CONVERSION);
+				if ((conformance & SUCCESS) != 0) {
 					boolean resultIsFunctionType = result instanceof FunctionTypeReference;
 					if (!resultIsFunctionType && (other instanceof FunctionTypeReference) &&
 							other.isAssignableFrom(result)) {
