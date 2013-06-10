@@ -8,15 +8,13 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 
 /**
  * Strategy to deal with Xbase specific conversion of types to arrays.
@@ -39,18 +37,64 @@ public class ArrayTypes {
 	 */
 	@Nullable
 	public ArrayTypeReference tryConvertToArray(ParameterizedTypeReference typeReference) {
-		if (typeReference.isSubtypeOf(Iterable.class)) {
-			DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> parameterMapping = collector.getTypeParameterMapping(typeReference);
-			JvmType iterableType = typeReference.getOwner().getServices().getTypeReferences().findDeclaredType(Iterable.class, typeReference.getOwner().getContextResourceSet());
-			if (iterableType instanceof JvmTypeParameterDeclarator) {
-				JvmTypeParameter typeParameter = ((JvmTypeParameterDeclarator) iterableType).getTypeParameters().get(0);
-				UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(parameterMapping, typeReference.getOwner());
-				ParameterizedTypeReference unboundTypeParameter = new ParameterizedTypeReference(typeReference.getOwner(), typeParameter);
-				LightweightTypeReference componentType = substitutor.substitute(unboundTypeParameter).getUpperBoundSubstitute();
-				if (componentType.isAny())
-					return null;
-				ArrayTypeReference array = new ArrayTypeReference(typeReference.getOwner(), componentType);
+		ArrayTypeReference result = doTryConvertToArray(typeReference);
+		if (result != null) {
+			return result;
+		} else {
+			JvmType type = typeReference.getType();
+			if (type.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+				return doTryConvertToArray(typeReference, new RecursionGuard<JvmTypeParameter>());
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * This handles bogus constraint definitions, e.g. 
+	 * <ul>
+	 * 	<li>{@code T extends String[]},</li>
+	 * 	<li>{@code T extends V[]}, or</li>
+	 * 	<li>{@code T extends V, V extends String[]}</li>
+	 * </ul>
+	 */
+	@Nullable
+	private ArrayTypeReference doTryConvertToArray(ParameterizedTypeReference typeReference, RecursionGuard<JvmTypeParameter> recursionGuard) {
+		JvmType type = typeReference.getType();
+		if (recursionGuard.tryNext((JvmTypeParameter) type)) {
+			List<LightweightTypeReference> superTypes = typeReference.getSuperTypes();
+			for(int i = 0, size = superTypes.size(); i < size; i++) {
+				LightweightTypeReference superType = superTypes.get(i);
+				if (superType.isArray()) {
+					return (ArrayTypeReference) superType;
+				}
+				ArrayTypeReference result = doTryConvertToArray(typeReference);
+				if (result != null) {
+					return result;
+				} else {
+					JvmType rawSuperType = superType.getType();
+					if (rawSuperType != null && rawSuperType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+						result = doTryConvertToArray((ParameterizedTypeReference) superType, recursionGuard);
+						if (result != null)
+							return result;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private ArrayTypeReference doTryConvertToArray(ParameterizedTypeReference typeReference) {
+		LightweightTypeReference parameterizedIterable = typeReference.getSuperType(Iterable.class);
+		if (parameterizedIterable != null) {
+			ITypeReferenceOwner owner = typeReference.getOwner();
+			if (parameterizedIterable.isRawType()) {
+				LightweightTypeReference objectType = parameterizedIterable.getSuperTypes().get(0);
+				ArrayTypeReference array = new ArrayTypeReference(owner, objectType);
+				return array;
+			} else {
+				LightweightTypeReference componentType = parameterizedIterable.getTypeArguments().get(0).getUpperBoundSubstitute();
+				ArrayTypeReference array = new ArrayTypeReference(owner, componentType);
 				return array;
 			}
 		}

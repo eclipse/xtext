@@ -86,12 +86,42 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 				if (parameterTypeReference.isArray() && !rawReceiverType.isArray() && !rawReceiverType.isSubtypeOf(Iterable.class)) {
 					return null;
 				}
+			} else if (isArrayTypeMismatch(rawReceiverType, rawParameterType)) {
+				return null;
 			}
 		}
 		if (implicit) {
 			return new StaticExtensionFeatureDescriptionWithImplicitFirstArgument(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
 		}
 		return new StaticExtensionFeatureDescription(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
+	}
+	
+	private boolean isArrayTypeMismatch(LightweightTypeReference rawReceiverType, JvmType rawParameterType) {
+		if (rawReceiverType.isArray()) {
+			LightweightTypeReference parameterTypeReference = new OwnedConverter(rawReceiverType.getOwner()).toRawLightweightReference(rawParameterType);
+			if (parameterTypeReference.getSuperType(Iterable.class) == null && isArrayTypeMismatch(rawReceiverType, parameterTypeReference)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isArrayTypeMismatch(LightweightTypeReference receiverType, LightweightTypeReference parameterType) {
+		if (receiverType.isArray()) {
+			if (parameterType.isArray()) {
+				LightweightTypeReference componentType = parameterType.getComponentType();
+				if (isArrayTypeMismatch(receiverType.getComponentType(), componentType)) {
+					return true;
+				}
+				return false;
+			}
+			return true;
+		} else {
+			if (!parameterType.isArray() && parameterType.isPrimitive()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override

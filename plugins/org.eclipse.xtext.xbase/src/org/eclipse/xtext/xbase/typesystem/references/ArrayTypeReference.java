@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -18,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
@@ -48,6 +48,14 @@ public class ArrayTypeReference extends LightweightTypeReference {
 		if (!component.isOwnedBy(owner)) {
 			throw new IllegalArgumentException("component is not valid in current context");
 		}
+	}
+	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_ARRAY_TYPE_REFERENCE;
 	}
 	
 	@Override
@@ -102,31 +110,63 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	@Override
 	@Nullable
 	public LightweightTypeReference getSuperType(JvmType rawType) {
-		if (rawType instanceof JvmArrayType) {
+		if (rawType.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
 			JvmComponentType rawComponentType = ((JvmArrayType) rawType).getComponentType();
 			LightweightTypeReference result = component.getSuperType(rawComponentType);
 			if (result == null) {
 				return null;
 			}
+			if (result == component)
+				return this;
 			return new ArrayTypeReference(getOwner(), result);
-		}
-		String identifier = rawType.getIdentifier();
-		if (Cloneable.class.getCanonicalName().equals(identifier)
-				|| Serializable.class.getCanonicalName().equals(identifier)
-				|| Object.class.getCanonicalName().equals(identifier)) {
-			return new ParameterizedTypeReference(getOwner(), rawType);
+		} else if (rawType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+			String identifier = rawType.getIdentifier();
+			if (Object.class.getName().equals(identifier)
+					|| Cloneable.class.getName().equals(identifier)
+					|| Serializable.class.getName().equals(identifier)) {
+				return new ParameterizedTypeReference(getOwner(), rawType);
+			}
 		}
 		return null;
 	}
 	
+	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(Class<?> rawType) {
+		if (isType(rawType)) {
+			return this;
+		}
+		Class<?> rawComponentType = rawType.getComponentType();
+		if (rawComponentType == null) {
+			if (Object.class.equals(rawType) || Cloneable.class.equals(rawType) || Serializable.class.equals(rawType)) {
+				return internalFindTopLevelType(rawType);
+			}
+			return null;
+		}
+		LightweightTypeReference resultComponent = component.getSuperType(rawComponentType);
+		if (resultComponent == null) {
+			return null;
+		}
+		return new ArrayTypeReference(getOwner(), resultComponent);
+	}
+
 	@Override
 	public boolean isResolved() {
 		return component.isResolved();
 	}
 	
 	@Override
-	protected boolean isRawType(Set<JvmType> seenTypes) {
-		return component.isRawType(seenTypes);
+	public boolean isRawType() {
+		return component.isRawType();
+	}
+	
+	@Override
+	public LightweightTypeReference getRawTypeReference() {
+		LightweightTypeReference rawComponent = component.getRawTypeReference();
+		if (rawComponent == component) {
+			return this;
+		}
+		return new ArrayTypeReference(getOwner(), rawComponent);
 	}
 	
 	@Override
@@ -179,8 +219,9 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public boolean isType(Class<?> clazz) {
-		if (clazz.isArray()) {
-			return component.isType(clazz.getComponentType());
+		Class<?> clazzComponentType = clazz.getComponentType();
+		if (clazzComponentType != null) {
+			return component.isType(clazzComponentType);
 		}
 		return false;
 	}

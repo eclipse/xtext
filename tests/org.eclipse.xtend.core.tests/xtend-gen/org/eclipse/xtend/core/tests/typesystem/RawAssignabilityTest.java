@@ -390,4 +390,10 @@ public class RawAssignabilityTest extends AbstractAssignabilityTest {
     this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>");
     this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable>", "java.util.ArrayList<java.util.ArrayList>");
   }
+  
+  @Test
+  public void testStringIsNotComparableInteger() {
+    this.isAssignableFrom("java.lang.Comparable<? extends Integer>", "String");
+    this.isAssignableFrom("java.lang.Comparable<Integer>", "String");
+  }
 }
