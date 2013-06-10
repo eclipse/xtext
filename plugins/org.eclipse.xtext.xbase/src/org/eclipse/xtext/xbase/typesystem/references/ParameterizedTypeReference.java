@@ -8,10 +8,15 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.io.Serializable;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -24,19 +29,17 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.IdentifierFunction;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.JavaIdentifierFunction;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.SimpleNameFunction;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.UniqueIdentifierFunction;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -61,6 +64,14 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		this.resolved = !(type instanceof JvmTypeParameter);
 	}
 	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_PARAMETERIZED_TYPE_REFERENCE;
+	}
+	
 	@Override
 	public JvmTypeReference toTypeReference() {
 		JvmParameterizedTypeReference result = getTypesFactory().createJvmParameterizedTypeReference();
@@ -71,6 +82,27 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			}
 		}
 		return result;
+	}
+	
+	@Override
+	public LightweightTypeReference getRawTypeReference() {
+		if (typeArguments == null && type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			return this;
+		}
+		if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			return new ParameterizedTypeReference(getOwner(), type);
+		}
+		// TODO optimize
+		return super.getRawTypeReference();
+	}
+	
+	@Override
+	public List<JvmType> getRawTypes() {
+		if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			return Collections.singletonList(type);
+		}
+		// TODO optimize
+		return super.getRawTypes();
 	}
 	
 	protected boolean isTypeVisible(IVisibilityHelper visibilityHelper) {
@@ -115,19 +147,43 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	protected boolean isRawType(Set<JvmType> seenTypes) {
-		if (type instanceof JvmGenericType) {
-			if (!((JvmGenericType) type).getTypeParameters().isEmpty() && expose(typeArguments).isEmpty())
-				return true;
-		} 
-		else if (type instanceof JvmTypeParameter && seenTypes.add(type)) {
+	public boolean isRawType() {
+		EClass typeClass = type.eClass();
+		if (typeClass == TypesPackage.Literals.JVM_GENERIC_TYPE && typeArguments == null) {
+			return ((InternalEObject)type).eIsSet(TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS);
+		} else if (typeClass == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
 			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
-			List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
-			for(JvmTypeConstraint constraint: constraints) {
-				JvmTypeReference typeReference = constraint.getTypeReference();
-				LightweightTypeReference lightweightConstraint = new OwnedConverter(getOwner()).toLightweightReference(typeReference);
-				if (lightweightConstraint.isRawType(seenTypes)) {
-					return true;
+			return isRawType(typeParameter, new RecursionGuard<JvmTypeParameter>());
+		}
+		return false;
+	}
+	
+	// Here we already know that we don't have type arguments
+	private boolean isRawType(JvmTypeParameter current, RecursionGuard<JvmTypeParameter> guard) {
+		if (guard.tryNext(current)) {
+			List<JvmTypeConstraint> constraints = current.getConstraints();
+			for(int i = 0, size = constraints.size(); i < size; i++) {
+				JvmTypeConstraint constraint = constraints.get(i);
+				if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND && constraint.getTypeReference() != null) {
+					JvmTypeReference superType = constraint.getTypeReference();
+					JvmType rawSuperType = superType.getType();
+					if (rawSuperType != null) {
+						if (rawSuperType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+							if (isRawType((JvmTypeParameter) rawSuperType, guard)) {
+								return true;
+							}
+						}
+						if (rawSuperType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+							if (!((JvmGenericType) rawSuperType).getTypeParameters().isEmpty()) {
+								if (superType.eClass() == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE) {
+									JvmParameterizedTypeReference casted = (JvmParameterizedTypeReference) superType;
+									if (casted.getArguments().isEmpty()) {
+										return true;
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -150,7 +206,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public LightweightTypeReference getWrapperTypeIfPrimitive() {
-		if (type instanceof JvmPrimitiveType) {
+		if (isPrimitive()) {
 			Primitives primitives = getOwner().getServices().getPrimitives();
 			JvmType wrapperType = primitives.getWrapperType((JvmPrimitiveType) type);
 			return new ParameterizedTypeReference(getOwner(), wrapperType);
@@ -160,7 +216,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public LightweightTypeReference getPrimitiveIfWrapperType() {
-		if (type instanceof JvmDeclaredType) {
+		if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER && isWrapper()) {
 			Primitives primitives = getOwner().getServices().getPrimitives();
 			JvmType primitiveType = primitives.getPrimitiveTypeIfWrapper((JvmDeclaredType) type);
 			if (primitiveType != null) {
@@ -172,30 +228,80 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public boolean isPrimitive() {
-		return type instanceof JvmPrimitiveType;
+		return type.eClass() == TypesPackage.Literals.JVM_PRIMITIVE_TYPE;
 	}
 	
 	@Override
-	protected boolean isInterfaceType() {
-		if (type instanceof JvmGenericType) {
-			return ((JvmGenericType) type).isInterface();
-		}
-		return false;
+	public boolean isPrimitiveVoid() {
+		return type.eClass() == TypesPackage.Literals.JVM_VOID && !type.eIsProxy();
+	}
+	
+	@Override
+	public boolean isInterfaceType() {
+		return type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isInterface();
 	}
 	
 	@Override
 	public boolean isWrapper() {
-		if (type instanceof JvmDeclaredType || type instanceof JvmTypeParameter) {
-			Primitives primitives = getOwner().getServices().getPrimitives();
-			boolean result = primitives.isWrapperType(type);
-			return result;
+		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+			JvmGenericType casted = (JvmGenericType) type;
+			return isWrapper(casted);
+		} else if (type.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+			return isWrapper(typeParameter, null);
+		}
+		return false;
+	}
+	
+	private boolean isWrapper(JvmTypeParameter typeParameter, @Nullable List<JvmTypeParameter> stack) {
+		for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
+			if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND) {
+				JvmTypeReference upperBound = constraint.getTypeReference();
+				if (upperBound != null) {
+					JvmType upperBoundType = upperBound.getType();
+					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+						return isWrapper((JvmGenericType)upperBoundType);
+					}
+					// guard against recursive deps
+					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+						if (typeParameter == upperBoundType || stack != null && stack.contains(upperBoundType)) {
+							return false;
+						}
+						if (stack == null) {
+							stack = new ArrayList<JvmTypeParameter>(4);
+							stack.add(typeParameter);
+						}
+						stack.add((JvmTypeParameter) upperBoundType);
+						return isWrapper((JvmTypeParameter) upperBoundType, stack);
+					}
+				}
+			}
+		}
+		return false;
+	}
+	private boolean isWrapper(JvmGenericType type) {
+		// all wrapper types are concrete, final top level types
+		if (type.isInterface() || !type.isFinal() || type.getDeclaringType() != null) {
+			return false;
+		}
+		// and all wrapper types are defined in java.lang
+		if ("java.lang".equals(type.getPackageName())) {
+			String simpleName = type.getSimpleName();
+			return "Integer".equals(simpleName) 
+					|| "Boolean".equals(simpleName)
+					|| "Long".equals(simpleName)
+					|| "Double".equals(simpleName)
+					|| "Character".equals(simpleName)
+					|| "Byte".equals(simpleName)
+					|| "Float".equals(simpleName)
+					|| "Short".equals(simpleName)
+					|| "Void".equals(simpleName);
 		}
 		return false;
 	}
 	
 	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
-		// TODO should this be a service?
 		if (type instanceof JvmDeclaredType) {
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
 			if (!superTypes.isEmpty()) {
@@ -238,11 +344,45 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	@Override
 	@Nullable
-	public LightweightTypeReference getSuperType(JvmType rawType) {
-		if (rawType == type)
+	public LightweightTypeReference getSuperType(Class<?> rawType) {
+		if (isType(rawType)) {
 			return this;
-		JvmTypeReference superType = getSuperType(rawType, type, Sets.<JvmType>newHashSetWithExpectedSize(3));
+		}
+		if (isPrimitive() || isPrimitiveVoid() || rawType.isPrimitive() || rawType.isArray()) {
+			return null;
+		}
+		if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER && Modifier.isFinal(rawType.getModifiers())) {
+			return null;
+		}
+		if (Object.class.equals(rawType)) {
+			// TODO: we know java.lang.Object is in the super type list
+			// if it is still a proxy or one of the super types is a proxy,
+			// it's faster to look it up in the resource set
+			// otherwise it's faster to traverse the model directly to the root
+			ResourceSet resourceSet = getOwner().getContextResourceSet();
+			Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(rawType.getName()), true);
+			JvmType type = (JvmType) typeResource.getContents().get(0);
+			if (type == null)
+				return null;
+			return new ParameterizedTypeReference(getOwner(), type);
+		}
+		boolean interfaceType = Modifier.isInterface(rawType.getModifiers());
+		if (isInterfaceType() && !interfaceType) {
+			// only Object can be a super class of an interface
+			return null;
+		}
+		String typeName = rawType.getName();
+		return getSuperTypeByName(typeName, interfaceType);
+	}
+	
+	@Nullable
+	private LightweightTypeReference getSuperTypeByName(String typeName, boolean interfaceType) {
+		JvmTypeReference superType = getSuperTypeByName(typeName, interfaceType, type, new RecursionGuard<JvmType>());
 		if (superType != null) {
+			JvmType rawType = superType.getType();
+			if (isRawType()) {
+				return new ParameterizedTypeReference(getOwner(), rawType);
+			}
 			if (superType instanceof JvmParameterizedTypeReference) {
 				if (((JvmParameterizedTypeReference) superType).getArguments().isEmpty()) {
 					return new ParameterizedTypeReference(getOwner(), rawType);
@@ -253,56 +393,154 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			LightweightTypeReference unresolved = converter.toLightweightReference(plainSuperType);
 			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
 			LightweightTypeReference result = substitutor.substitute(unresolved);
-			if (isRawType()) {
-				result = result.getRawTypeReference();
+			return result;
+		}
+		return null;
+	}
+	
+	@Nullable
+	private JvmTypeReference getSuperTypeByName(String typeName, boolean interfaceType, JvmType thisType, RecursionGuard<JvmType> guard) {
+		EClass thisTypeEClass = thisType.eClass();
+		if (!interfaceType && thisTypeEClass == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) thisType).isInterface()) {
+			return null;
+		}
+		if (thisTypeEClass == TypesPackage.Literals.JVM_VOID || thisTypeEClass == TypesPackage.Literals.JVM_PRIMITIVE_TYPE) {
+			return null;
+		}
+		if (typeName.equals(thisType.getIdentifier()) || !guard.tryNext(thisType)) {
+			return null;
+		}
+		if (thisTypeEClass != TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			if (thisTypeEClass != TypesPackage.Literals.JVM_ARRAY_TYPE) {
+				List<JvmTypeReference> superTypes = ((JvmDeclaredType) thisType).getSuperTypes();
+				for(int i = 0, size = superTypes.size(); i < size; i++) {
+					JvmTypeReference superType = superTypes.get(i);
+					JvmType rawSuperType = superType.getType();
+					if (rawSuperType != null) {
+						if (typeName.equals(rawSuperType.getIdentifier()))
+							return superType;
+						JvmTypeReference result = getSuperTypeByName(typeName, interfaceType, rawSuperType, guard);
+						if (result != null)
+							return result;
+					}
+				}
 			}
+		} else {
+			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) thisType).getConstraints();
+			for(int i = 0, size = constraints.size(); i < size; i++) {
+				JvmTypeConstraint constraint = constraints.get(i);
+				if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND && constraint.getTypeReference() != null) {
+					JvmTypeReference superType = constraint.getTypeReference();
+					JvmType rawSuperType = superType.getType();
+					if (rawSuperType != null) {
+						if (rawSuperType.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER && typeName.equals(rawSuperType.getIdentifier())) {
+							return superType;
+						}
+						JvmTypeReference result = getSuperTypeByName(typeName, interfaceType, rawSuperType, guard);
+						if (result != null)
+							return result;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(JvmType rawType) {
+		if (rawType == type) {
+			return this;
+		}
+		if (isPrimitive() || isPrimitiveVoid()) {
+			return null;
+		}
+		EClass otherEClass = rawType.eClass();
+		if (otherEClass == TypesPackage.Literals.JVM_PRIMITIVE_TYPE || otherEClass == TypesPackage.Literals.JVM_VOID) {
+			return null;
+		}
+		boolean interfaceType = false;
+		if (otherEClass != TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			if (Object.class.getName().equals(rawType.getIdentifier())) {
+				return new ParameterizedTypeReference(getOwner(), rawType);
+			}
+			if (otherEClass != TypesPackage.Literals.JVM_ARRAY_TYPE) {
+				// declared type
+				JvmDeclaredType declaredType = (JvmDeclaredType) rawType;
+				if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER && declaredType.isFinal()) {
+					return null;
+				}
+			} else if (isInterfaceType()) {
+				return null;
+			}
+			if (otherEClass == TypesPackage.Literals.JVM_GENERIC_TYPE && !(interfaceType = ((JvmGenericType) rawType).isInterface()) && isInterfaceType()) {
+				return null;
+			}
+		}
+		JvmTypeReference superType = getSuperType(rawType, interfaceType, type, new RecursionGuard<JvmType>());
+		if (superType != null) {
+			if (isRawType()) {
+				return new ParameterizedTypeReference(getOwner(), rawType);
+			}
+			if (superType instanceof JvmParameterizedTypeReference) {
+				if (((JvmParameterizedTypeReference) superType).getArguments().isEmpty()) {
+					return new ParameterizedTypeReference(getOwner(), rawType);
+				}
+			}
+			JvmParameterizedTypeReference plainSuperType = getServices().getTypeReferences().createTypeRef(rawType);
+			OwnedConverter converter = new OwnedConverter(getOwner());
+			LightweightTypeReference unresolved = converter.toLightweightReference(plainSuperType);
+			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
+			LightweightTypeReference result = substitutor.substitute(unresolved);
 			return result;
 		}
 		return null;
 	}
 
 	@Nullable
-	protected JvmTypeReference getSuperType(JvmType rawType, JvmType thisType, Set<JvmType> seenTypes) {
-		if (thisType == rawType || !seenTypes.add(thisType)) {
+	private JvmTypeReference getSuperType(JvmType rawType, boolean interfaceType, JvmType thisType, RecursionGuard<JvmType> guard) {
+		if (thisType == rawType || !interfaceType && thisType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) thisType).isInterface()) {
 			return null;
 		}
-		if (thisType instanceof JvmGenericType && rawType instanceof JvmGenericType) {
-			if (!"java.lang.Object".equals(rawType.getIdentifier())) {
-				if (((JvmGenericType) thisType).isInterface() && !((JvmGenericType) rawType).isInterface()) {
-					return null;
+		if (!guard.tryNext(thisType)) {
+			return null;
+		}
+		if (thisType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) thisType).getConstraints();
+			for(int i = 0, size = constraints.size(); i < size; i++) {
+				JvmTypeConstraint constraint = constraints.get(i);
+				JvmTypeReference superType = constraint.getTypeReference();
+				if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND && superType != null) {
+					JvmType rawSuperType = superType.getType();
+					if (rawSuperType != null) {
+						if (rawType == rawSuperType) {
+							return superType;
+						}
+						JvmTypeReference result = getSuperType(rawType, interfaceType, rawSuperType, guard);
+						if (result != null)
+							return result;
+					}
 				}
-			} else {
+			}
+		} else if (thisType.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
+			String identifier = rawType.getIdentifier();
+			if (Cloneable.class.getName().equals(identifier)
+					|| Serializable.class.getName().equals(identifier)
+					|| Object.class.getName().equals(identifier)) {
 				return getServices().getTypeReferences().createTypeRef(rawType);
 			}
-		}
-		if (thisType instanceof JvmDeclaredType) {
+		} else if (thisType.eClass() != TypesPackage.Literals.JVM_VOID) {
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) thisType).getSuperTypes();
-			for(JvmTypeReference superType: superTypes) {
-				if (superType.getType() == rawType)
-					return superType;
-				JvmTypeReference result = getSuperType(rawType, superType.getType(), seenTypes);
-				if (result != null)
-					return result;
-			}
-		} else if (thisType instanceof JvmTypeParameter) {
-			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) thisType).getConstraints();
-			for(JvmTypeConstraint constraint: constraints) {
-				if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
-					JvmTypeReference superType = constraint.getTypeReference();
-					if (superType.getType() == rawType) {
+			for(int i = 0, size = superTypes.size(); i < size; i++) {
+				JvmTypeReference superType = superTypes.get(i);
+				JvmType rawSuperType = superType.getType();
+				if (rawSuperType != null) {
+					if (rawType == rawSuperType)
 						return superType;
-					}
-					JvmTypeReference result = getSuperType(rawType, superType.getType(), seenTypes);
+					JvmTypeReference result = getSuperType(rawType, interfaceType, rawSuperType, guard);
 					if (result != null)
 						return result;
 				}
-			}
-		} else if (thisType instanceof JvmArrayType) {
-			String identifier = rawType.getIdentifier();
-			if (Cloneable.class.getCanonicalName().equals(identifier)
-					|| Serializable.class.getCanonicalName().equals(identifier)
-					|| Object.class.getCanonicalName().equals(identifier)) {
-				return getServices().getTypeReferences().createTypeRef(rawType);
 			}
 		}
 		return null;
@@ -312,7 +550,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	public List<LightweightTypeReference> getTypeArguments() {
 		return expose(typeArguments);
 	}
-
+	
 	@Override
 	protected ParameterizedTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, type);
@@ -374,10 +612,8 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 
 	@Override
 	public boolean isType(Class<?> clazz) {
-		if (type != null) {
-			return clazz.getCanonicalName().equals(type.getIdentifier());
-		}
-		return false;
+		return type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER && 
+				clazz.getName().equals(type.getIdentifier());
 	}
 	
 	@Override
