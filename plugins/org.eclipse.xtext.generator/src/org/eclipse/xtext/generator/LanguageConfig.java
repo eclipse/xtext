@@ -191,7 +191,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 					} catch (ClassNotFoundException e) {
 						LOG.error("Couldn't initialize Xcore support. Is it on the classpath?");
 					} catch (Exception e) {
-						LOG.error("Couldn'T initialize Xcore support.", e);
+						LOG.error("Couldn't initialize Xcore support.", e);
 					}
 				}
 			}
