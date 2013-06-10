@@ -40,6 +40,14 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		this.resolved = true;
 	}
 	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_COMPOUND_TYPE_REFERENCE;
+	}
+	
 	@Override
 	public JvmTypeReference toTypeReference() {
 		JvmCompoundTypeReference result = synonym ? getTypesFactory().createJvmSynonymTypeReference() : getTypesFactory().createJvmMultiTypeReference();
@@ -89,11 +97,11 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		// TODO common type?
 		return super.getTypeArguments();
 	}
-	
+
 	@Override
-	protected boolean isRawType(Set<JvmType> seenTypes) {
+	public boolean isRawType() {
 		for(LightweightTypeReference component: expose(components)) {
-			if (component.isRawType(seenTypes))
+			if (component.isRawType())
 				return true;
 		}
 		return false;
@@ -138,6 +146,19 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	@Override
 	@Nullable
 	public LightweightTypeReference getSuperType(JvmType rawType) {
+		if (components == null || components.isEmpty())
+			return null;
+		for(LightweightTypeReference component: components) {
+			LightweightTypeReference result = component.getSuperType(rawType);
+			if (result != null)
+				return result;
+		}
+		return null;
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		if (components == null || components.isEmpty())
 			return null;
 		for(LightweightTypeReference component: components) {
