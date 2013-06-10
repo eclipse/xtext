@@ -7,18 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.resource;
 
-import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
 
+import java.io.IOException;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.resource.DescriptionFlags;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Wrapper;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -36,6 +44,12 @@ public class IndexingTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private DescriptionFlags flags;
+	
+	@Inject
+	private IDerivedStateComputer derivedStateComputer;
+	
+	@Inject
+	private ClassLoader classLoader;
 	
 	@Test public void testIndexing() throws Exception {
 		Iterator<IEObjectDescription> iterator = getExportedObjects(
@@ -107,6 +121,51 @@ public class IndexingTest extends AbstractXtendTestCase {
 //		assertFalse(flags.isStatic(iterator.next()));
 //		assertTrue(flags.isStatic(iterator.next()));
 		assertFalse(iterator.hasNext()); 
+	}
+	
+	@Test public void testResourceDescriptionWithoutGetContentsWithAnnotations() throws Exception {
+		String input = "import com.google.inject.Inject class C%d extends C%d { @Inject def void m(Map<String, String> m) {} }";
+		doTestResourceDescriptionWithoutGetContents(input);
+	}
+	
+	private void doTestResourceDescriptionWithoutGetContents(final String input) throws IOException {
+		XtextResourceSet resourceSet = getResourceSet();
+		new ClasspathTypeProvider(classLoader, resourceSet, null);
+		final Wrapper<Boolean> wrapper = Wrapper.wrap(Boolean.FALSE);
+		for (int i = 0; i < 10; i++) {
+			DerivedStateAwareResource resource = (DerivedStateAwareResource) resourceSet.createResource(URI.createURI("Dummy" + i + ".xtend"));
+			resource.setDerivedStateComputer(new IDerivedStateComputer() {
+				public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
+					if (!preLinkingPhase) {
+						wrapper.set(Boolean.TRUE);
+					}
+					derivedStateComputer.installDerivedState(resource, preLinkingPhase);
+				}
+				
+				public void discardDerivedState(DerivedStateAwareResource resource) {
+					derivedStateComputer.discardDerivedState(resource);
+				}
+			});
+			String actualInput = input;
+			if (i != 0) {
+				actualInput = "import C" + (i+1) + " " + actualInput;
+				actualInput = "import C" + (i-1) + " " + actualInput;
+			}
+			actualInput = String.format(actualInput, i, i+1);
+			resource.load(new StringInputStream(actualInput), null);
+		}
+		for(int i = 0; i < 10; i++) {
+			Resource resource = resourceSet.getResources().get(i);
+			for(IEObjectDescription description: resourceDescriptionManager.getResourceDescription(resource).getExportedObjects()) {
+				description.getEObjectOrProxy();
+			}
+		}
+		assertFalse(wrapper.get());
+	}
+	
+	@Test public void testResourceDescriptionWithoutGetContentsNoAnnotations() throws Exception {
+		String input = "import com.google.inject.Inject class C { def void m(Map<String, String> m) {} }";
+		doTestResourceDescriptionWithoutGetContents(input);
 	}
 	
 	protected Iterator<IEObjectDescription> getExportedObjects(String model) throws Exception {
