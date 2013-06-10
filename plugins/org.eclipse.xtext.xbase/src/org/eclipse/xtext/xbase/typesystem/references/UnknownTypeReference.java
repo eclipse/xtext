@@ -42,6 +42,14 @@ public class UnknownTypeReference extends LightweightTypeReference {
 		this(owner, null);
 	}
 	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_UNKNOWN_TYPE_REFERENCE;
+	}
+	
 	@Override
 	public boolean isUnknown() {
 		return true;

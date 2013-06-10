@@ -27,6 +27,14 @@ public class AnyTypeReference extends LightweightTypeReference {
 	public AnyTypeReference(ITypeReferenceOwner owner) {
 		super(owner);
 	}
+	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_ANY_TYPE_REFERENCE;
+	}
 
 	@Override
 	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {

@@ -19,10 +19,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.IdentifierFunction;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.JavaIdentifierFunction;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.SimpleNameFunction;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.UniqueIdentifierFunction;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
@@ -44,6 +40,14 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	public WildcardTypeReference(ITypeReferenceOwner owner) {
 		super(owner);
 		resolved = true;
+	}
+	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_WILDCARD_TYPE_REFERENCE;
 	}
 	
 	@Override
@@ -171,8 +175,26 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	@Nullable
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		if (isUnbounded()) {
-			if (Object.class.getCanonicalName().equals(rawType.getIdentifier())) {
+			if (Object.class.getName().equals(rawType.getIdentifier())) {
 				return new ParameterizedTypeReference(getOwner(), rawType);
+			}
+			return null;
+		}
+		List<LightweightTypeReference> nonNullUpperBounds = expose(getUpperBounds());
+		for(LightweightTypeReference upperBound: nonNullUpperBounds) {
+			LightweightTypeReference result = upperBound.getSuperType(rawType);
+			if (result != null)
+				return result;
+		}
+		return null;
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(Class<?> rawType) {
+		if (isUnbounded()) {
+			if (Object.class.equals(rawType)) {
+				return internalFindTopLevelType(rawType);
 			}
 			return null;
 		}
