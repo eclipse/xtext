@@ -13,7 +13,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.JavaIdentifierFunction;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
@@ -33,6 +32,14 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	
 	public FunctionTypeReference(ITypeReferenceOwner owner, JvmType type) {
 		super(owner, type);
+	}
+	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_FUNCTION_TYPE_REFERENCE;
 	}
 	
 	@Override

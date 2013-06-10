@@ -50,7 +50,7 @@ public class TypeConformanceResult {
 		return result;
 	}
 
-	private TypeConformanceResult(EnumSet<ConformanceHint> hints) {
+	TypeConformanceResult(EnumSet<ConformanceHint> hints) {
 		this.hints = hints;
 		if (isConformant()) {
 			hints.add(ConformanceHint.SUCCESS);
