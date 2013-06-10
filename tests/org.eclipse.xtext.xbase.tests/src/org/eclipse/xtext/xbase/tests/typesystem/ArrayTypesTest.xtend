@@ -36,6 +36,13 @@ class ArrayTypesTest extends AbstractXbaseTestCase {
 		assertEquals('String[]', arrayType.simpleName)
 	}
 	
+	@Test
+	def void testTryConvertToArray_03() {
+		val typeReference = 'java.util.Collection'.toTypeReference
+		val arrayType = typeReference.tryConvertToArray
+		assertEquals('Object[]', arrayType.simpleName)
+	}
+	
 	protected def LightweightTypeReference toTypeReference(String reference) {
 		val expression = '''null as «reference»'''
 		val castExpression = expression.expression as XCastedExpression

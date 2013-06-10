@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -24,6 +25,8 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -34,7 +37,6 @@ import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgu
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -100,22 +102,27 @@ public class FunctionTypes {
 	public JvmOperation findImplementingOperation(LightweightTypeReference functionType) {
 		// TODO use org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations instead (if fast enough)
 		List<JvmType> rawTypes = functionType.getRawTypes();
-		for(JvmType rawType: rawTypes) {
-			if (rawType instanceof JvmDeclaredType && !((JvmDeclaredType) rawType).isFinal()) {
-				Iterable<JvmOperation> features = Iterables.filter(((JvmDeclaredType)rawType).getAllFeatures(), JvmOperation.class);
-				JvmOperation result = null;
-				for (JvmOperation op : features) {
-					if (isValidFunction(op)) {
-						if (result == null)
-							result = op;
-						else {
-							result = null;
-							break;
+		if (rawTypes.size() == 1) {
+			JvmType rawType = rawTypes.get(0);
+			if (rawType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+				JvmGenericType castedRawType = (JvmGenericType) rawType;
+				if (!castedRawType.isFinal()) {
+					Iterable<JvmFeature> features = castedRawType.getAllFeatures();
+					JvmOperation result = null;
+					for (JvmFeature feature : features) {
+						if (feature.eClass() == TypesPackage.Literals.JVM_OPERATION) {
+							JvmOperation op = (JvmOperation) feature;
+							if (isValidFunction(op)) {
+								if (result == null)
+									result = op;
+								else {
+									return null;
+								}
+							}
 						}
 					}
-				}
-				if (result != null)
 					return result;
+				}
 			}
 		}
 		return null;
@@ -198,13 +205,13 @@ public class FunctionTypes {
 	
 	public FunctionTypeKind getFunctionTypeKind(ParameterizedTypeReference typeReference) {
 		JvmType type = typeReference.getType();
-		if (type instanceof JvmGenericType) {
+		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			JvmDeclaredType outerType = ((JvmGenericType) type).getDeclaringType();
 			if (outerType != null) {
-				if (Procedures.class.getCanonicalName().equals(outerType.getQualifiedName())) {
+				if (Procedures.class.getName().equals(outerType.getIdentifier())) {
 					return FunctionTypeKind.PROCEDURE;
 				}
-				if (Functions.class.getCanonicalName().equals(outerType.getQualifiedName())) {
+				if (Functions.class.getName().equals(outerType.getIdentifier())) {
 					return FunctionTypeKind.FUNCTION;
 				}
 			}
@@ -213,7 +220,7 @@ public class FunctionTypes {
 	}
 
 	/**
-	 * Converts this reference to a {@link FunctionTypeReference} if the referenced type is a SAM type.
+	 * Converts the given reference to a {@link FunctionTypeReference} if the referenced type is a SAM type.
 	 * Returns <code>null</code> if this reference does not point to a valid function type.
 	 * This is the externalized and thereby
 	 * exchangeable implementation of {@link ParameterizedTypeReference#tryConvertToFunctionTypeReference(boolean)}.
@@ -314,11 +321,13 @@ public class FunctionTypes {
 
 	@Nullable
 	protected FunctionTypeReference getAsProcedureOrNull(ParameterizedTypeReference typeReference) {
-		FunctionTypeReference functionType = new FunctionTypeReference(typeReference.getOwner(), typeReference.getType());
+		ITypeReferenceOwner owner = typeReference.getOwner();
+		JvmType type = typeReference.getType();
+		FunctionTypeReference functionType = new FunctionTypeReference(owner, type);
 		if (!tryAssignTypeArguments(typeReference.getTypeArguments(), functionType))
 			return null;
-		JvmType voidType = typeReference.getServices().getTypeReferences().findDeclaredType(Void.TYPE, typeReference.getType());
-		functionType.setReturnType(new ParameterizedTypeReference(typeReference.getOwner(), voidType));
+		JvmType voidType = (JvmType) owner.getContextResourceSet().getEObject(URIHelperConstants.PRIMITIVES_URI.appendFragment("void"), true);
+		functionType.setReturnType(new ParameterizedTypeReference(owner, voidType));
 		return functionType;
 	}
 	

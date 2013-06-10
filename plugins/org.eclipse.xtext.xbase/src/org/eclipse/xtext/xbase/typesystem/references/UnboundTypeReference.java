@@ -85,6 +85,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return expectation.createUnboundTypeReference(expression, typeParameter);
 	}
 	
+	/**
+	 * Subclasses <em>must</em> override this method.
+	 */
+	@Override
+	public int getKind() {
+		return KIND_UNBOUND_TYPE_REFERENCE;
+	}
+	
 	protected UnboundTypeReference(ITypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
 		this(owner, expression, typeParameter, new Object());
 	}
@@ -155,7 +163,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return false;
 	}
 	
-	protected boolean hasSignificantHints(List<LightweightBoundTypeArgument> hints) {
+	public boolean hasSignificantHints(List<LightweightBoundTypeArgument> hints) {
 		return hasSignificantHints(hints, true);
 	}
 	
@@ -185,9 +193,9 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	protected boolean isRawType(Set<JvmType> seenTypes) {
+	public boolean isRawType() {
 		if (internalGetResolvedTo() != null)
-			return resolvedTo.isRawType(seenTypes);
+			return resolvedTo.isRawType();
 		return false;
 	}
 	
@@ -265,6 +273,10 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	
 	public boolean isConformantToConstraints(final LightweightTypeReference typeReference) {
 		List<LightweightBoundTypeArgument> hints = getAllHints();
+		return isConformantToConstraints(typeReference, hints);
+	}
+	
+	public boolean isConformantToConstraints(final LightweightTypeReference typeReference, List<LightweightBoundTypeArgument> hints) {
 		UnboundTypeParameterPreservingSubstitutor unboundSubstitutor = new UnboundTypeParameterPreservingSubstitutor(
 				Collections.singletonMap(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT)), getOwner()) {
 			@Override
@@ -360,7 +372,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Nullable
-	protected LightweightTypeReference internalGetResolvedTo() {
+	public LightweightTypeReference internalGetResolvedTo() {
 		if (resolvedTo != null) {
 			if (!getOwner().isResolved(handle)) {
 				throw new IllegalStateException("owner should know that this one is resolved");
@@ -476,7 +488,23 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	protected boolean isInterfaceType() {
+	public boolean isPrimitive() {
+		if (internalIsResolved()) {
+			return resolvedTo.isPrimitive();
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isPrimitiveVoid() {
+		if (internalIsResolved()) {
+			return resolvedTo.isPrimitiveVoid();
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isInterfaceType() {
 		if (internalIsResolved()) {
 			return resolvedTo.isInterfaceType();
 		}
@@ -517,6 +545,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	@Override
 	@Nullable
 	public LightweightTypeReference getSuperType(JvmType rawType) {
+		if (internalIsResolved())
+			return resolvedTo.getSuperType(rawType);
+		return null;
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		if (internalIsResolved())
 			return resolvedTo.getSuperType(rawType);
 		return null;
