@@ -7,30 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
+import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.expressions.EvaluationContext;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.TextSelection;
+import org.eclipse.ui.ISources;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.junit4.ui.AbstractLinkedEditingIntegrationTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
-import org.eclipse.xtext.ui.refactoring.ui.RefactoringType;
-import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.ui.tests.Activator;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -44,16 +40,10 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 	private static final String TEST_PROJECT = "refactoring.test";
 
 	@Inject
-	private IRenameContextFactory renameContextFactory;
-
-	@Inject
-	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
-
-	@Inject
-	private RenameRefactoringController controller;
-
-	@Inject
 	private RefactoringPreferences refactoringPreferences;
+	
+	@Inject
+	private DefaultRenameElementHandler renameElementHandler;
 
 	private XtextEditor fooEditor;
 	private XtextEditor barEditor;
@@ -131,7 +121,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(fooEditor, barEditor);
 		renameFooToFooBar(fooEditor);
-		assertFalse(fooEditor.isDirty());
+		assertTrue(fooEditor.isDirty());
 		assertTrue(barEditor.isDirty());
 	}
 
@@ -139,7 +129,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(fooEditor, barEditor);
 		renameFooToFooBar(barEditor);
-		assertFalse(fooEditor.isDirty());
+		assertTrue(fooEditor.isDirty());
 		assertTrue(barEditor.isDirty());
 	}
 
@@ -171,7 +161,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(fooEditor);
 		renameFooToFooBar(fooEditor);
-		assertFalse(fooEditor.isDirty());
+		assertTrue(fooEditor.isDirty());
 		assertFalse(barEditor.isDirty());
 	}
 
@@ -179,7 +169,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		assertFalse(refactoringPreferences.isSaveAllBeforeRefactoring());
 		smudge(fooEditor);
 		renameFooToFooBar(barEditor);
-		assertFalse(fooEditor.isDirty());
+		assertTrue(fooEditor.isDirty());
 		assertFalse(barEditor.isDirty());
 	}
 
@@ -253,18 +243,23 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		IXtextDocument document = contextEditor.getDocument();
 		final int offset = document.get().indexOf("foo");
 		contextEditor.selectAndReveal(offset, 3);
-		waitForDisplay();
-		IRenameElementContext context = document.readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
-			public IRenameElementContext exec(XtextResource state) throws Exception {
-				EObject target = eObjectAtOffsetHelper.resolveElementAt(state, offset);
-				return renameContextFactory.createRenameElementContext(target, contextEditor, new TextSelection(offset,
-						3), state);
-			}
-		});
-		controller.initialize(context);
-		waitForDisplay();
-		controller.startRefactoring(RefactoringType.LINKED_EDITING);
-		waitForDisplay();
+		
+		EvaluationContext evaluationContext = new EvaluationContext(null, new Object());
+		evaluationContext.addVariable(ISources.ACTIVE_EDITOR_NAME, contextEditor);
+		ExecutionEvent executionEvent = new ExecutionEvent(null, newHashMap(), null, evaluationContext);
+		renameElementHandler.execute(executionEvent);
+//		syncUtil.totalSync(refactoringPreferences.isSaveAllBeforeRefactoring());
+//		IRenameElementContext context = document.readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
+//			public IRenameElementContext exec(XtextResource state) throws Exception {
+//				EObject target = eObjectAtOffsetHelper.resolveElementAt(state, offset);
+//				return renameContextFactory.createRenameElementContext(target, contextEditor, new TextSelection(offset,
+//						3), state);
+//			}
+//		});
+//		controller.initialize(context);
+//		waitForDisplay();
+//		controller.startRefactoring(RefactoringType.LINKED_EDITING);
+//		waitForDisplay();
 		pressKeys(contextEditor, "fooBar\n");
 		waitForDisplay();
 		waitForReconciler(fooEditor);

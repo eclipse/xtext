@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring.ui;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -38,7 +37,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.refactoring.impl.Messages;
 
 import com.google.inject.Inject;
@@ -111,12 +110,8 @@ public class RenameRefactoringExecuter {
 				} else {
 					if(affectedObjects != null) {
 						for(Object affectedObject: affectedObjects) {
-							if(affectedObject instanceof IFile) {
-								IEditorPart editorWithFileChanged = window.getActivePage().findEditor(new FileEditorInput((IFile) affectedObject));
-								if(editorWithFileChanged != null) {
-									syncUtil.synchronizeEditorWithFile(editorWithFileChanged);
-								}
-							}
+							if(affectedObject instanceof ITextEditor) 
+								((ITextEditor) affectedObject).doSave(new NullProgressMonitor());
 						}
 					}
 				}

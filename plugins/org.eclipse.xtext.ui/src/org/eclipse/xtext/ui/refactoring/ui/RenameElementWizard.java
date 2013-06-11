@@ -112,7 +112,6 @@ public class RenameElementWizard extends RefactoringWizard {
 		@Override
 		protected boolean performFinish() {
 			setNewName();
-			saveHelper.saveEditors(context);
 			return super.performFinish();
 		}
 

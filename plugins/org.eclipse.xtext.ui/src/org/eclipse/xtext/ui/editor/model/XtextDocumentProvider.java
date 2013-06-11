@@ -306,7 +306,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			if (listener != null)
 				info.fDocument.removeDocumentListener(listener);
 			listener = new UnchangedElementListener(info);
-			info.fDocument.addDocumentListener(new UnchangedElementListener(info));
+			info.fDocument.addDocumentListener(listener);
 		}
 	}
 

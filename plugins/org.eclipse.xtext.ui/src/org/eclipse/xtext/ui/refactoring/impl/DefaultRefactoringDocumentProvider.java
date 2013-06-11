@@ -88,8 +88,11 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 				}.syncExec();
 				if (editor != null) {
 					IDocument document = editor.getDocumentProvider().getDocument(fileEditorInput);
-					if (document != null && editor.isDirty())
-						return new EditorDocument(resourceURI, document);
+					if (document != null)
+						if(editor.isDirty())
+							return new EditorDocument(resourceURI, document);
+						else
+							return new SaveEditorDocument(resourceURI, editor, document);
 				}
 				return new FileDocument(resourceURI, file, getEncodingProvider(resourceURI));
 			} else {
@@ -173,10 +176,6 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		}
 	}
 
-	/**
-	 * @depreacted Saving documents during changes causes unpredictable errors when the document is also renamed
-	 */
-	@Deprecated
 	public static class SaveEditorDocument extends EditorDocument {
 
 		private final ITextEditor editor;
@@ -188,10 +187,15 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 
 		@Override
 		public Change createChange(String name, TextEdit textEdit) {
-			DocumentChange documentChange = new DocumentChange(getName(), getDocument());
+			DocumentChange documentChange = new DocumentChange(getName(), getDocument()) {
+				@Override
+				public Object[] getAffectedObjects() {
+					return new Object[] { editor };
+				}
+			};
 			documentChange.setEdit(textEdit);
 			documentChange.setTextType(getURI().fileExtension());
-			return new DisplayChangeWrapper(documentChange, editor);
+			return new DisplayChangeWrapper(documentChange);
 		}
 	}
 

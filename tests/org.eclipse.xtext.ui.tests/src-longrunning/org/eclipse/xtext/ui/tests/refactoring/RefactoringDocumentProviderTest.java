@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.EditorDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.FileDocument;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.SaveEditorDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
@@ -114,17 +115,23 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 	@Test public void testCleanEditorDocument() throws Exception {
 		XtextEditor editor = openEditor(testFile);
 		assertFalse(editor.isDirty());
-		IRefactoringDocument document = createAndCheckDocument(testFile);
-		assertTrue(document instanceof FileDocument);
-		assertEquals(testFile, ((FileDocument) document).getFile());
-		assertEquals(TEST_FILE_CONTENT, document.getOriginalContents());
+		IRefactoringDocument cleanDocument = createAndCheckDocument(testFile);
+		assertTrue(cleanDocument instanceof SaveEditorDocument);
 
-		Change change = document.createChange(CHANGE_NAME, textEdit);
-		assertTrue(change instanceof TextFileChange);
-		assertEquals(CHANGE_NAME, change.getName());
+		IXtextDocument editorDocument = editor.getDocument();
+		assertEquals(editorDocument, ((EditorDocument) cleanDocument).getDocument());
+		assertEquals(TEST_FILE_CONTENT, cleanDocument.getOriginalContents());
 
-		Change undoChange = checkEdit(document, textEdit);
+		Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
+		assertTrue(change instanceof DisplayChangeWrapper);
+		assertEquals(TEST_FILE_NAME + " - " + TEST_PROJECT, change.getName());
+		assertTrue(((DisplayChangeWrapper) change).getDelegate() instanceof DocumentChange);
+
+		Change undoChange = checkEdit(cleanDocument, textEdit);
 		assertNotNull(undoChange);
+		IRefactoringDocument dirtyDocument = createAndCheckDocument(testFile);
+		assertTrue(cleanDocument instanceof EditorDocument);
+		assertEquals(editorDocument, ((EditorDocument) dirtyDocument).getDocument());
 	}
 
 	protected IRefactoringDocument createAndCheckDocument(IFile testFile) {
