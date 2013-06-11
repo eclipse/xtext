@@ -32,6 +32,7 @@ import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
@@ -42,8 +43,8 @@ import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
+import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
@@ -79,7 +80,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 	private IRenamedElementTracker renamedElementTracker;
 
 	@Inject
-	private IDependentElementsCalculator dependentElementsCalculator;
+	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
 	@Inject
 	private IReferenceFinder referenceFinder;
@@ -114,6 +115,8 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 			throw new IllegalArgumentException("Cannot find a rename strategy for "
 					+ notNull(renameElementContext.getTargetElementURI()));
 		String newName = renameStrategy.getOriginalName();
+		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(renameElementContext.getTargetElementURI());
+		IDependentElementsCalculator dependentElementsCalculator =  resourceServiceProvider.get(IDependentElementsCalculator.class);
 		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 				progress.newChild(10));
 		LocalResourceRefactoringUpdateAcceptor updateAcceptor = updateAcceptorProvider.get();
