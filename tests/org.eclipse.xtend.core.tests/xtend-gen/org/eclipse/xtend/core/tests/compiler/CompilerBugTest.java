@@ -18,6 +18,107 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testPreferStaticMethodsOverClassMembers() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import javax.xml.parsers.DocumentBuilderFactory");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("DocumentBuilderFactory.newInstance");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import javax.xml.parsers.DocumentBuilderFactory;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("DocumentBuilderFactory.newInstance();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testPreferlassMembersOverInstanceMethods() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("C.newInstance");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void newInstance() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("C.class.newInstance();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} catch (Throwable _e) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("throw Exceptions.sneakyThrow(_e);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void newInstance() {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug406416_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Factory<T> {");

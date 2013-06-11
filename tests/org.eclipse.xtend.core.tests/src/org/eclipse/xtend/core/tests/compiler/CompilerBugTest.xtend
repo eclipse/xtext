@@ -16,6 +16,55 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testPreferStaticMethodsOverClassMembers() {
+		assertCompilesTo('''
+			import javax.xml.parsers.DocumentBuilderFactory
+			class C {
+				def void m() {
+					DocumentBuilderFactory.newInstance
+				}
+			}
+		''', '''
+			import javax.xml.parsers.DocumentBuilderFactory;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    DocumentBuilderFactory.newInstance();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testPreferlassMembersOverInstanceMethods() {
+		assertCompilesTo('''
+			class C {
+				def void m() {
+					C.newInstance
+				}
+				def void newInstance() {}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    try {
+			      C.class.newInstance();
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			  
+			  public void newInstance() {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug406416_01() {
 		assertCompilesTo('''
 			class Factory<T> {
