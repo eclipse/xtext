@@ -160,7 +160,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 					Change processorChange = wrappedProcessor.createChange(pm);
 					if (processorChange != null) {
 						if (compositeChange == null)
-							compositeChange = new CompositeChange("Changes from participant: " + getName());
+							compositeChange = new FixedCompositeChange("Changes from participant: " + getName());
 						compositeChange.add(processorChange);
 					}
 				}

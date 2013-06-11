@@ -29,6 +29,7 @@ import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.text.edits.TextEditVisitor;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
+import org.eclipse.xtext.ui.refactoring.impl.FixedCompositeChange;
 
 /**
  * Restructures a given source change such that all changes to the same resource are united.
@@ -48,7 +49,7 @@ public class TextChangeCombiner {
 		Map<Object, TextChange> resource2textChange = newLinkedHashMap();
 		List<Change> otherChanges = newArrayList();
 		visitCompositeChange((CompositeChange) masterChange, resource2textChange, otherChanges);
-		CompositeChange compositeChange = new CompositeChange(masterChange.getName());
+		CompositeChange compositeChange = new FixedCompositeChange(masterChange.getName());
 		for (TextChange combinedTextChange : resource2textChange.values()) {
 			if(((MultiTextEdit) combinedTextChange.getEdit()).getChildrenSize() >0)
 				compositeChange.add(combinedTextChange);

@@ -106,7 +106,10 @@ public class SyncUtil {
 	 * Some action on a file might have be too fast, such that the modification stamp is the same for the saved file. As
 	 * a result, the editor's content is not updated. Use this method to explicitly update an editor when you know the
 	 * underlying file has changed.
+	 * 
+	 * @deprecation modifies the undo stack and is thus unusable in most contexts. 
 	 */
+	@Deprecated
 	public void synchronizeEditorWithFile(IEditorPart editor) {
 		if (editor instanceof ITextEditor) {
 			IDocumentProvider documentProvider = ((ITextEditor) editor).getDocumentProvider();

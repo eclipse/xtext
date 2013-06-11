@@ -31,7 +31,6 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.ui.texteditor.IDocumentProviderExtension;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -112,13 +111,11 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	@Test public void testEditorFileRename() throws Exception {
 		XtextEditor editor = openEditor(testFile0);
 		doRename();
-		synchronize(editor);
 		testFile0.refreshLocal(-1, null);
 		waitForAutoBuild();
 		assertEquals(initialModel0.replaceAll("B", "C"), editor.getDocument().get());
 		assertEquals(initialModel1.replaceAll("B", "C"), readFile(testFile1));
 		undoRename();
-		synchronize(editor);
 		assertEquals(initialModel0, editor.getDocument().get());
 		assertEquals(initialModel1, readFile(testFile1));
 	}
@@ -127,11 +124,9 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		XtextEditor editor0 = openEditor(testFile0);
 		XtextEditor editor1 = openEditor(testFile1);
 		doRename();
-		synchronize(editor0, editor1);
 		assertEquals(initialModel0.replaceAll("B", "C"), editor0.getDocument().get());
 		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());
 		undoRename();
-		synchronize(editor0, editor1);
 		assertEquals(initialModel0, editor0.getDocument().get());
 		assertEquals(initialModel1, editor1.getDocument().get());
 	}
@@ -154,11 +149,9 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	@Test public void testFileEditorRename() throws Exception {
 		XtextEditor editor1 = openEditor(testFile1);
 		doRename();
-		synchronize(editor1);
 		assertEquals(initialModel0.replaceAll("B", "C"), readFile(testFile0));
 		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());
 		undoRename();
-		synchronize(editor1);
 		assertEquals(initialModel0, readFile(testFile0));
 		assertEquals(initialModel1, editor1.getDocument().get());
 	}
@@ -281,10 +274,4 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 			}
 		});
 	}
-
-	protected void synchronize(XtextEditor... editors) throws CoreException {
-		for (XtextEditor editor : editors)
-			((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
-	}
-
 }

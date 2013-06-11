@@ -94,7 +94,6 @@ public class DefaultRenameSupport implements IRenameSupport {
 	}
 
 	public void startDirectRefactoring() throws InterruptedException {
-		saveHelper.saveEditors(renameElementContext);
 		RenameRefactoringExecuter renameRefactoringExecuter = executerProvider.get();
 		renameRefactoringExecuter.execute(renameElementContext.getTriggeringEditor(), renameRefactoring);
 	}

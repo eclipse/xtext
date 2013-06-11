@@ -28,6 +28,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.refactoring.impl.FixedCompositeChange;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -90,10 +91,10 @@ public class TextChangeCombinerTest {
 
 	@Test
 	public void testMultipleFileChanges() throws Exception {
-		CompositeChange compositeChange = new CompositeChange("test");
+		FixedCompositeChange compositeChange = new FixedCompositeChange("test");
 		compositeChange.add(createTextFileChange(file0, 1, 1, "foo"));
 		compositeChange.add(createTextFileChange(file0, 2, 1, "bar"));
-		CompositeChange compositeChange1 = new CompositeChange("test");
+		FixedCompositeChange compositeChange1 = new FixedCompositeChange("test");
 		compositeChange.add(compositeChange1);
 		compositeChange1.add(createTextFileChange(file0, 3, 1, "baz"));
 		compositeChange1.add(createTextFileChange(file0, 2, 1, "bar"));
@@ -114,10 +115,10 @@ public class TextChangeCombinerTest {
 	@Test
 	public void testMultipleDocumentChanges() throws Exception {
 		IDocument document = openDocument(file0);
-		CompositeChange compositeChange = new CompositeChange("test");
+		FixedCompositeChange compositeChange = new FixedCompositeChange("test");
 		compositeChange.add(createDocumentChange(document, 1, 1, "foo"));
 		compositeChange.add(createDocumentChange(document, 2, 1, "bar"));
-		CompositeChange compositeChange1 = new CompositeChange("test");
+		FixedCompositeChange compositeChange1 = new FixedCompositeChange("test");
 		compositeChange.add(compositeChange1);
 		compositeChange1.add(createDocumentChange(document, 3, 1, "baz"));
 		compositeChange1.add(createDocumentChange(document, 2, 1, "bar"));
@@ -139,10 +140,10 @@ public class TextChangeCombinerTest {
 	public void testMixedChanges() throws Exception {
 		IFile file1 = IResourcesSetupUtil.createFile(PROJECT + "/file1.txt", MODEL);
 		IDocument document = openDocument(file1);
-		CompositeChange compositeChange = new CompositeChange("test");
+		FixedCompositeChange compositeChange = new FixedCompositeChange("test");
 		compositeChange.add(createDocumentChange(document, 1, 1, "foo"));
 		compositeChange.add(createTextFileChange(file0, 1, 1, "foo"));
-		CompositeChange compositeChange1 = new CompositeChange("test");
+		FixedCompositeChange compositeChange1 = new FixedCompositeChange("test");
 		compositeChange.add(compositeChange1);
 		compositeChange1.add(createDocumentChange(document, 3, 1, "baz"));
 		compositeChange1.add(createTextFileChange(file0, 1, 1, "foo"));
@@ -158,7 +159,7 @@ public class TextChangeCombinerTest {
 
 	@Test
 	public void testEmptyChange() throws Exception {
-		CompositeChange emptyChange = new CompositeChange("test");
+		FixedCompositeChange emptyChange = new FixedCompositeChange("test");
 		assertNull(combiner.combineChanges(emptyChange));
 	}
 

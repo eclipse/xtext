@@ -34,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.ui.refactoring.JdtRenameRefactoringProcessorFactory;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.TextChangeCombiner;
+import org.eclipse.xtext.ui.refactoring.impl.FixedCompositeChange;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
@@ -143,7 +144,7 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		SubMonitor monitor = SubMonitor.convert(pm, jvmElements2jdtProcessors.size() + 1);
-		CompositeChange compositeChange = new CompositeChange(getProcessorName());
+		CompositeChange compositeChange = new FixedCompositeChange(getProcessorName());
 		compositeChange.add(super.createChange(monitor.newChild(1)));
 		for (JavaRenameProcessor processor : jvmElements2jdtProcessors.values())
 			compositeChange.add(processor.createChange(monitor.newChild(1)));
