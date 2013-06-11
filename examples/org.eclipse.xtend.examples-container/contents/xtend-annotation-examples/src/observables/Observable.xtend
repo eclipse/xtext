@@ -21,7 +21,7 @@ import java.lang.annotation.ElementType
  * Adds PropertyChangeSupport to this class and informs all listeners on change.
  */
 @Target(ElementType.TYPE)
-@Active(typeof(ObservableCompilationParticipant))
+@Active(ObservableCompilationParticipant)
 annotation Observable {
 }
 
@@ -51,13 +51,13 @@ class ObservableCompilationParticipant extends AbstractClassProcessor {
 		}
 
 		// generated field to hold listeners, addPropertyChangeListener() and removePropertyChangeListener() 
-		val changeSupportType = typeof(PropertyChangeSupport).newTypeReference
+		val changeSupportType = PropertyChangeSupport.newTypeReference
 		clazz.addField("_propertyChangeSupport") [
 			type = changeSupportType
 			initializer = ['''new «toJavaCode(changeSupportType)»(this)''']
 		]
 
-		val propertyChangeListener = typeof(PropertyChangeListener).newTypeReference
+		val propertyChangeListener = PropertyChangeListener.newTypeReference
 		clazz.addMethod("addPropertyChangeListener") [
 			addParameter("listener", propertyChangeListener)
 			body = ['''this._propertyChangeSupport.addPropertyChangeListener(listener);''']
