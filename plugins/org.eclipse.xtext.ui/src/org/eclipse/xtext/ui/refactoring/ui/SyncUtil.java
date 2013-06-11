@@ -26,9 +26,6 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.texteditor.IDocumentProvider;
-import org.eclipse.ui.texteditor.IDocumentProviderExtension;
-import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -97,27 +94,6 @@ public class SyncUtil {
 							editor.doSave(pm2.newChild(1));
 					}
 					pm2.worked(1);
-				}
-			}
-		}
-	}
-
-	/**
-	 * Some action on a file might have be too fast, such that the modification stamp is the same for the saved file. As
-	 * a result, the editor's content is not updated. Use this method to explicitly update an editor when you know the
-	 * underlying file has changed.
-	 * 
-	 * @deprecation modifies the undo stack and is thus unusable in most contexts. 
-	 */
-	@Deprecated
-	public void synchronizeEditorWithFile(IEditorPart editor) {
-		if (editor instanceof ITextEditor) {
-			IDocumentProvider documentProvider = ((ITextEditor) editor).getDocumentProvider();
-			if (documentProvider instanceof IDocumentProviderExtension) {
-				try {
-					((IDocumentProviderExtension) documentProvider).synchronize(editor.getEditorInput());
-				} catch (CoreException e) {
-					LOG.error("Error synchronizing editor ", e);
 				}
 			}
 		}

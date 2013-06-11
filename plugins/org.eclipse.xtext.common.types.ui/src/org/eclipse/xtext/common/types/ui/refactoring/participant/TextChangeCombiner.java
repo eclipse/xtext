@@ -58,7 +58,7 @@ public class TextChangeCombiner {
 			compositeChange.add(otherChange);
 		if(compositeChange.getChildren().length == 0)
 			return null;
-		return compositeChange;
+		return new DisplayChangeWrapper(compositeChange);
 	}
 
 	protected void visitCompositeChange(CompositeChange sourceChange, Map<Object, TextChange> resource2textChange,
