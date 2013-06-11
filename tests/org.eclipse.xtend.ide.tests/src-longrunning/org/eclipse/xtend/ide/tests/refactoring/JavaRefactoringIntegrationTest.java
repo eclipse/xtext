@@ -31,7 +31,6 @@ import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.ui.texteditor.IDocumentProviderExtension;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.CompositeRefactoringProcessor;
@@ -928,6 +927,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			final XtextEditor editor = openEditorSafely(xtendRef);
 			renameXtendElement(editor, xtendModel.lastIndexOf("XtendClass"), "NewXtendClass");
 			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
+			editor.doSave(new NullProgressMonitor());
 			IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
 			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {");
 		} finally {
@@ -1225,14 +1225,12 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected void assertDocumentContains(XtextEditor editor, String expectedContent) throws CoreException {
-		((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
 		syncUtil.waitForReconciler(editor);
 		String editorContent = editor.getDocument().get();
 		assertTrue("'" + expectedContent + "' not found in \n" + editorContent, editorContent.contains(expectedContent));
 	}
 
 	protected void assertDocumentContainsIgnoreWhitespace(XtextEditor editor, String expectedContent) throws CoreException {
-		((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
 		syncUtil.waitForReconciler(editor);
 		String editorContent = editor.getDocument().get();
 		assertTrue("'" + expectedContent + "' not found in \n" + editorContent, 
