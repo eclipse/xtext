@@ -1056,7 +1056,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			List<LightweightBoundTypeArgument> result) {
 		Object otherHandle = reference.getHandle();
 		if (seenHandles.add(otherHandle)) {
-			addNonRecursiveHints(original, getHints(otherHandle), seenHandles, result);
+			if (isResolved(otherHandle)) {
+				result.addAll(getHints(otherHandle));
+			} else {
+				addNonRecursiveHints(original, getHints(otherHandle), seenHandles, result);
+			}
 		}
 	}
 	
