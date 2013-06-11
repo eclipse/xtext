@@ -902,7 +902,6 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.processWithoutException
 	}
 	
-	
 	@Test
 	def void testErrorModel_59() throws Exception {
 		'''
@@ -912,6 +911,17 @@ class ErrorTest extends AbstractXtendTestCase {
 						var Object x = null
 						x 
 					} + ''
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_60() throws Exception {
+		'''
+			class C {
+				def m() {
+					newArrayList.fold(newHashMap) [a,b | a.put]
 				}
 			}
 		'''.processWithoutException
