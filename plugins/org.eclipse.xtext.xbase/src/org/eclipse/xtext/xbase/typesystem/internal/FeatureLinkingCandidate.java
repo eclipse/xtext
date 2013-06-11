@@ -273,6 +273,17 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return description.isStatic();
 	}
 	
+	/**
+	 * Returns <code>true</code> if the linked receiver could be 
+	 * a possible argument of this feature. Basically it's false if
+	 * this feature is an error feature, a local variable or a if the
+	 * receiver is a type literal that's treated as a static qualifier
+	 * rather than a literal expression.
+	 */
+	protected boolean isSyntacticReceiverPossibleArgument() {
+		return description.isSyntacticReceiverPossibleArgument();
+	}
+	
 	@Override
 	public boolean isTypeLiteral() {
 		return false;
@@ -371,10 +382,18 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				return -1;
 			}
 			if (isStatic() != casted.isStatic()) {
-				if (isStatic()) {
-					return 1;
+				if (isSyntacticReceiverPossibleArgument() == casted.isSyntacticReceiverPossibleArgument()) {
+					if (isStatic()) {
+						return 1;
+					}
+					return -1;
+				} else {
+					if (isStatic() && !isSyntacticReceiverPossibleArgument())
+						return -1;
+					if (casted.isStatic() && !casted.isSyntacticReceiverPossibleArgument()) {
+						return 1;
+					}
 				}
-				return -1;
 			}
 		}
 		if (leftBoxing != rightBoxing) {
