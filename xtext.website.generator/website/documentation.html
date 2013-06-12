@@ -1044,7 +1044,7 @@ def compile(Entity e) '''
 								    
 								<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) '''
-  &laquo;IF e.eContainer != null&raquo;
+  &laquo;IF e.eContainer.fullyQualifiedName != null&raquo;
     package &laquo;e.eContainer.fullyQualifiedName&raquo;;
   &laquo;ENDIF&raquo;
   
@@ -1054,7 +1054,7 @@ def compile(Entity e) '''
 								    
 								<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) ''' 
-  &laquo;IF e.eContainer != null&raquo;
+  &laquo;IF e.eContainer.fullyQualifiedName != null&raquo;
     package &laquo;e.eContainer.fullyQualifiedName&raquo;;
   &laquo;ENDIF&raquo;
   
@@ -1086,7 +1086,7 @@ def compile(Feature f) '''
 								    
 								<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) ''' 
-  &laquo;IF e.eContainer != null&raquo;
+  &laquo;IF e.eContainer.fullyQualifiedName != null&raquo;
     package &laquo;e.eContainer.fullyQualifiedName&raquo;;
   &laquo;ENDIF&raquo;
   
@@ -1133,7 +1133,7 @@ class DomainmodelGenerator implements IGenerator {
   }
 
   def compile(Entity e) ''' 
-    &laquo;IF e.eContainer != null&raquo;
+    &laquo;IF e.eContainer.fullyQualifiedName != null&raquo;
       package &laquo;e.eContainer.fullyQualifiedName&raquo;;
     &laquo;ENDIF&raquo;
     

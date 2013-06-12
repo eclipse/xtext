@@ -1,7 +1,7 @@
 chapter:Xtend_Expressions[Expressions]
 
 In Xtend everything is an expression and has a return type. Statements do not exist. 
-That allows to compose your code in interesting ways. For example, you can have a
+That allows you to compose your code in interesting ways. For example, you can have a
 code[Xtend][try catch] expression on the right hand side of an assignment: 
 code[Xtend][
   val data = try {
@@ -20,7 +20,7 @@ or a ref:templates[template expression].
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xtend_Expressions_Literals[Literals]
 
-A literal denotes a fixed unchangeable value. Literals for ref:stringLiterals[strings], ref:numberLiterals[numbers], ref:booleanLiteral[booleans],
+A literal denotes a fixed, unchangeable value. Literals for ref:stringLiterals[strings], ref:numberLiterals[numbers], ref:booleanLiteral[booleans],
 code[Xtend][null] and ref:typeLiteral[Java types] are supported as well as literals for unmodifiable collection types like lists,
 sets and maps or literals for arrays.
 
@@ -554,7 +554,7 @@ it can point to a method with zero arguments, since empty parentheses are option
 section2:propertyAccess[Property Access]
 
 If there is no field with the given name and also no method with the name and zero parameters
-accessible, a simple name binds to a corresponding Java-Bean getter method if available :
+accessible, a simple name binds to a corresponding Java-Bean getter method if available:
 
 code[Xtend][
   myObj.myProperty // myObj.getMyProperty()  (.. in case myObj.myProperty is not visible.)

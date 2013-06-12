@@ -43,7 +43,7 @@ Here is an examplary Xtend file:
 <a name="packageDecl"></a>
 <h2>Package Declaration</h2>
 <p>
-Package declarations look like in Java. There are two small differences: 
+Package declarations can look like those in Java. Two small, optional differences:
 <ul>
 	<li>
 		An identifier can be escaped with a <span class="inlinecode">^</span> character in case it conflicts with a keyword.
@@ -97,11 +97,10 @@ Xtend supports multiple public top level class declarations per file. Each Xtend
 is compiled to a separate top-level Java class.
 </p>
 <p>
-Abstract classes are defined using the <span class="inlinecode"><span class="keyword">abstract</span></span> modifier as in Java. See also <a href="20-classes-and-functions.html#abstractMethods" title="Go to &quot;Abstract Methods&quot;" >section abstractMethods</a> 
-on abstract methods.
+Abstract classes are defined using the <span class="inlinecode"><span class="keyword">abstract</span></span> modifier as in Java. See also <a href="20-classes-and-functions.html#abstractMethods" title="Go to &quot;Abstract Methods&quot;">abstract methods</a>.
 </p>
 <p>
-Xtend&apos;s approach to inheritance is conceptual the same as in Java. Single inheritance of 
+Xtend&apos;s approach to inheritance is conceptually the same as in Java. Single inheritance of 
 classes as well as implementing multiple interfaces is supported. 
 Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes.
 If no super type is specified, <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html" title="View JavaDoc"><abbr title="java.lang.Object" >Object</abbr></a> is used. 
@@ -215,11 +214,11 @@ exactly the same signature. The only exceptions are dispatch methods, which are 
 </p>
 <p>
 Method declarations start with the keyword <span class="inlinecode"><span class="keyword">def</span></span>.
-The default visibility of a plain method is <span class="inlinecode"><span class="keyword">public</span></span>. You can explicitly declare it as
+The default visibility of a method is <span class="inlinecode"><span class="keyword">public</span></span>. You can explicitly declare it as
 being <span class="inlinecode"><span class="keyword">public</span></span>, <span class="inlinecode"><span class="keyword">protected</span></span>, <span class="inlinecode"><span class="keyword">package</span></span> or <span class="inlinecode"><span class="keyword">private</span></span>.
 </p>
 <p>
-Xtend supports the <span class="inlinecode"><span class="keyword">static</span></span> modifier for methods:
+Xtend supports the <span class="inlinecode"><span class="keyword">static</span></span> modifier for methods and can <a href="20-classes-and-functions.html#inferredReturnTypes" title="Go to &quot;Inferred Return Types&quot;">infer</a> the return type if it is not explicitly given:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -231,7 +230,7 @@ Xtend supports the <span class="inlinecode"><span class="keyword">static</span><
 </div>
 </p>
 <p>
-As in Java, vararg parameters are allowed:
+As in Java, vararg parameters are allowed and accessible as array values in the method body:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -625,7 +624,7 @@ In addition <a href="40-annotations.html#activeAnnotations" title="Go to &quot;A
 Xtend code to Java source code.
 </p>
 <p>
-Please note that it is currently not possible to use nested annotation values in lists. The following notation
+Please note that it is currently not possible to use nested annotation values in lists. This notation
 is not yet supported but will be implemented in a future release: <span class="inlinecode">@Anno(&nbsp;values&nbsp;=&nbsp;#[&nbsp;@Anno(..)&nbsp;]</span>.
 </p>
 <a name="extensionMethods"></a>
@@ -677,7 +676,7 @@ myObject.save<br/>
 </div>
 </p>
 <p>
-There are different ways to make methods available as extensions, which are described in the following.
+There are different ways to make methods available as extensions, which are described in the following sections.
 </p>
 <a name="libraryExtensions"></a>
 <h3>Extensions from the Library</h3>
@@ -769,7 +768,7 @@ The following import declaration
 </div>
 </p>
 <p>
-allows to use its methods like this:
+allows us to use its methods like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">

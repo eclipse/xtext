@@ -107,7 +107,7 @@ ol[
     
     code[Xtend][
     def compile(Entity e) '''
-      «IF e.eContainer != null»
+      «IF e.eContainer.fullyQualifiedName != null»
         package «e.eContainer.fullyQualifiedName»;
       «ENDIF»
       
@@ -120,7 +120,7 @@ ol[
     
     code[Xtend][
     def compile(Entity e) ''' 
-      «IF e.eContainer != null»
+      «IF e.eContainer.fullyQualifiedName != null»
         package «e.eContainer.fullyQualifiedName»;
       «ENDIF»
       
@@ -156,7 +156,7 @@ ol[
     
     code[Xtend][
     def compile(Entity e) ''' 
-      «IF e.eContainer != null»
+      «IF e.eContainer.fullyQualifiedName != null»
         package «e.eContainer.fullyQualifiedName»;
       «ENDIF»
       
@@ -201,7 +201,7 @@ class DomainmodelGenerator implements IGenerator {
   }
 
   def compile(Entity e) ''' 
-    «IF e.eContainer != null»
+    «IF e.eContainer.fullyQualifiedName != null»
       package «e.eContainer.fullyQualifiedName»;
     «ENDIF»
     

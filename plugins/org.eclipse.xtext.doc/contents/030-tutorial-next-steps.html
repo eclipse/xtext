@@ -258,7 +258,7 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
 		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 		&nbsp;&nbsp;<br/>
@@ -274,7 +274,7 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
 		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 		&nbsp;&nbsp;<br/>
@@ -321,7 +321,7 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
 		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 		&nbsp;&nbsp;<br/>
@@ -373,7 +373,7 @@ and see how the compiler will pick up your sample <em>Entities</em> and generate
 &nbsp;&nbsp;}<br/>
 <br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
