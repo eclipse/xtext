@@ -97,7 +97,7 @@ Transition :
   event=\[Event\] '=>' state=\[State\];
   ]
 
-Martin Fowler uses this example throughout his book link[http://martinfowler.com/books.html#dsl][Domain
+Martin Fowler uses this example throughout his book link[http://martinfowler.com/books/dsl.html][Domain
 Specific Languages] to implement external and internal DSLs using
 different technologies. Note, that none of his implementations is nearly as readable and concise as the description in
 Xtext's grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is 
