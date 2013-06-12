@@ -47,7 +47,7 @@ bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
 }<br/>
 ...<br/>
 fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br/>
-fragment&nbsp;=&nbsp;xbase.XbaseGeneratorFragment&nbsp;{}
+fragment&nbsp;=&nbsp;xbase.XbaseGeneratorFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -87,7 +87,13 @@ Using the JVM types model is very simple. First of all, the grammar has to impor
 Thanks to content assist this is easy to spot in the list of proposals.  
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The next step is to actually refer to an imported concept. Let&apos;s define a mapping to available
@@ -100,7 +106,7 @@ Java types for the simple data types in the domain model language. This can be d
 <span class="comment">//&nbsp;simple&nbsp;cross&nbsp;reference&nbsp;to&nbsp;a&nbsp;Java&nbsp;type<br/>
 </span>DataType:<br/>
 &nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name=ID&nbsp;<br/>
-&nbsp;&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[jvmTypes::JvmType|QualifiedName];
+&nbsp;&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[jvmTypes::JvmType|QualifiedName];<br/>
 </p>
 </div>
 </div>
@@ -110,7 +116,13 @@ After regenerating your language, it will be allowed to define a type <span clas
 like this:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">datatype</span>&nbsp;Date&nbsp;mapped-to&nbsp;java.util.Date</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">datatype</span>&nbsp;Date&nbsp;mapped-to&nbsp;java.util.Date<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 These two steps will provide a nice integration into the Eclipse JDT. There is <em>Find References</em> on Java methods, 
@@ -160,7 +172,7 @@ let us start by inheriting from Xbase:
 <div class="incode">
 <p class="code">
 <span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase
+&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
 </p>
 </div>
 </div>
@@ -207,7 +219,7 @@ Entity:<br/>
 &nbsp;<br/>
 Feature:<br/>
 &nbsp;&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;JvmTypeReference<br/>
-;
+;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -291,7 +303,7 @@ and assemble the whole file&apos;s content in a second step.
 &nbsp;&nbsp;&nbsp;&nbsp;ref.serialize(ref.eContainer,&nbsp;result);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result.toString<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -308,7 +320,7 @@ like this:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;org.eclipse.xtext.generator.IGenerator&gt;&nbsp;bindIGenerator()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.example.domainmodel.generator.DomainmodelGenerator.<span class="keyword">class</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -329,7 +341,7 @@ become a Java class and should be usable as such. In the domain model example, y
 <br/>
 <span class="keyword">entity</span>&nbsp;Person&nbsp;{<br/>
 &nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -392,7 +404,7 @@ In the second phase, we add a
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -441,7 +453,13 @@ If you want to refer to <a class="jdoc" href="http://download.eclipse.org/modeli
 to import Xbase first:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/xbase/Xbase"</span>&nbsp;<span class="keyword">as</span>&nbsp;xbase</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/xbase/Xbase"</span>&nbsp;<span class="keyword">as</span>&nbsp;xbase<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Now identify the location in your grammar where you want references to Java types and Xbase expressions to appear
@@ -460,7 +478,7 @@ Operation:<br/>
 &nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
 &nbsp;&nbsp;(params+=FullJvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
 &nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
+&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
 </p>
 </div>
 </div>
@@ -482,7 +500,7 @@ Feature:<br/>
 &nbsp;<br/>
 Property:<br/>
 &nbsp;&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;JvmTypeReference<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -524,7 +542,7 @@ element&apos;s types. In the <a class="jdoc" href="http://download.eclipse.org/m
 <p class="code">
 <span class="keyword">protected</span>&nbsp;Object&nbsp;_doEvaluate(XBlockExpression&nbsp;literal,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;context,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)<br/>
 </p>
 </div>
 </div>
@@ -555,7 +573,7 @@ elements of the original context. Here is an example code snippet how to call th
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;exception<br/>
 </span>&nbsp;&nbsp;}&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getResult();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -654,7 +672,7 @@ In such cases you can use the escaped identifier <span class="inlinecode">^servi
 <p class="code">
 <span class="keyword">terminal</span>&nbsp;ID:&nbsp;<br/>
 &nbsp;&nbsp;<span class="string">&apos;^&apos;</span>?&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1011,7 +1029,8 @@ An integer literal represents an <span class="inlinecode"><span class="keyword">
 </span>077&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;decimal&nbsp;77&nbsp;(*NOT*&nbsp;octal)<br/>
 </span>42L<br/>
 0xbeef#L&nbsp;<span class="comment">//&nbsp;hexadecimal,&nbsp;mind&nbsp;the&nbsp;&apos;#&apos;<br/>
-</span>0xbeef_beef_beef_beef_beef#BI&nbsp;<span class="comment">//&nbsp;BigInteger</span>
+</span>0xbeef_beef_beef_beef_beef#BI&nbsp;<span class="comment">//&nbsp;BigInteger<br/>
+</span>
 </p>
 </div>
 </div>
@@ -1028,7 +1047,8 @@ literals.
 </span>0.42e2&nbsp;&nbsp;<span class="comment">//&nbsp;implicit&nbsp;double<br/>
 </span>0.42e2f&nbsp;<span class="comment">//&nbsp;float<br/>
 </span>4.2f&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;float<br/>
-</span>0.123_456_789_123_456_789_123_456_789e2000bd&nbsp;<span class="comment">//&nbsp;BigDecimal</span>
+</span>0.123_456_789_123_456_789_123_456_789e2000bd&nbsp;<span class="comment">//&nbsp;BigDecimal<br/>
+</span>
 </p>
 </div>
 </div>
@@ -1507,7 +1527,7 @@ initialization of newly created objects. Example:
 <span class="comment">//&nbsp;equivalent&nbsp;to<br/>
 </span><span class="keyword">val</span>&nbsp;person&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person<br/>
 person.firstName&nbsp;=&nbsp;<span class="string">&apos;John&apos;</span><br/>
-person.lastName&nbsp;=&nbsp;<span class="string">&apos;Coltrane&apos;</span>
+person.lastName&nbsp;=&nbsp;<span class="string">&apos;Coltrane&apos;</span><br/>
 </p>
 </div>
 </div>
@@ -1520,7 +1540,13 @@ that operator:
 Given the expression 
 </p>
 <p>
-<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span><br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The compiler first looks for an accessible Java Field called <span class="inlinecode">myProperty</span> on the declared or inferred type of <span class="inlinecode">myObj</span>. If such
@@ -1528,7 +1554,13 @@ a field can be found, the expressions translates to
 the following Java code:
 </p>
 <p>
-<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Remember, in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
@@ -1541,7 +1573,13 @@ return value of the setter method (which is usually of type <span class="inlinec
 As a result the compiler translates to :
 </p>
 <p>
-<span class="inlinecode">myObj.setMyProperty(<span class="string">"foo"</span>)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObj.setMyProperty(<span class="string">"foo"</span>)<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="Xbase_Expressions_FeatureCalls"></a>
 <h4>Feature Calls</h4>
@@ -1557,7 +1595,13 @@ described in <a href="199-xtext-and-java.html#Xbase_Expressions_PropertyAssignme
 That is, for the expression
 </p>
 <p>
-<span class="inlinecode">myObj.myProperty</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObj.myProperty<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 the compiler first looks for an accessible field <span class="inlinecode">myProperty</span> in the type of <span class="inlinecode">myObj</span>. If no such field exists it 
@@ -1574,13 +1618,25 @@ Xbase supports the safe navigation operator <span class="inlinecode">?.</span> t
 Instead of writing 
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 one can write
 </p>
 <p>
-<span class="inlinecode">myRef?.doStuff()</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myRef?.doStuff()<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="Xbase_Expressions_staticFeatureCalls"></a>
 <h5>Static Feature Calls</h5>
@@ -1590,13 +1646,25 @@ in Xbase. To make the static invocation more explicit, the double colon can be u
 The following snippet is fully equivalent to the previous example:
 </p>
 <p>
-<span class="inlinecode">java.util.Collections::emptyList</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+java.util.Collections::emptyList<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Prior to Xbase 2.4.2, this more verbose variant was the only supported syntax to invoke static methods:
 </p>
 <p>
-<span class="inlinecode">java::util::Collections::emptyList</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+java::util::Collections::emptyList<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="Xbase_Expressions_ImplicitThis"></a>
 <h4>Implicit variables 'this' and 'it'</h4>
@@ -1607,13 +1675,20 @@ That is if one of
 <div class="incode">
 <p class="code">
 <span class="keyword">it</span>.myProperty<br/>
-<span class="keyword">this</span>.myProperty
+<span class="keyword">this</span>.myProperty<br/>
 </p>
 </div>
 </div>
 
 is a valid expression
-<span class="inlinecode">myProperty</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myProperty<br/>
+</p>
+</div>
+</div>
+
 is valid as well. It resolves to the same feature as long as there is no local variable <span class="inlinecode">myProperty</span> declared,
 which would have higher precedence. 
 </p>
@@ -1634,11 +1709,25 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 <ul>
 	<li>
 		
-		    <span class="inlinecode"><span class="keyword">new</span>&nbsp;String()</span>
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">new</span>&nbsp;String()<br/>
+		</p>
+		</div>
+		</div>
+		
 	</li>
 	<li>
 		
-		    <span class="inlinecode"><span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()</span>
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()<br/>
+		</p>
+		</div>
+		</div>
+		
 	</li>
 </ul>
 </p>
@@ -1653,38 +1742,74 @@ time can be referred to in the lambda expression&apos;s body. These expressions 
 Lambda expressions are surrounded by square brackets (\<span class="inlinecode">[]</span>):
 </p>
 <p>
-<span class="inlinecode">myList.findFirst([&nbsp;e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>&nbsp;])</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myList.findFirst([&nbsp;e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>&nbsp;])<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 When a function object is expected to be the last parameter of a feature call, you may declare the lambda expression after the parentheses: 
 </p>
 <p>
-<span class="inlinecode">myList.findFirst()&nbsp;[&nbsp;e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>&nbsp;]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myList.findFirst()&nbsp;[&nbsp;e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>&nbsp;]<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Since in Xbase parentheses are optional for method calls, the same can be written as:
 </p>
 <p>
-<span class="inlinecode">myList.findFirst[&nbsp;e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>&nbsp;]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myList.findFirst[&nbsp;e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>&nbsp;]<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 This example can be further simplified since the lambda&apos;s parameter is available as the implicit variable <span class="inlinecode"><span class="keyword">it</span></span>, 
 if the parameter is not declared explicitly: 
 </p>
 <p>
-<span class="inlinecode">myList.findFirst[&nbsp;<span class="keyword">it</span>.name==<span class="keyword">null</span>&nbsp;]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myList.findFirst[&nbsp;<span class="keyword">it</span>.name==<span class="keyword">null</span>&nbsp;]<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Since <span class="inlinecode"><span class="keyword">it</span></span> is implicit, this is the same as:
 </p>
 <p>
-<span class="inlinecode">myList.findFirst[&nbsp;name==<span class="keyword">null</span>&nbsp;]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myList.findFirst[&nbsp;name==<span class="keyword">null</span>&nbsp;]<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Another use case for lambda expressions is to store function objects in variables:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.length&gt;3&nbsp;]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.length&gt;3&nbsp;]<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="Xbase_Expressions_LambdaTypeInference"></a>
 <h5>Typing</h5>
@@ -1695,13 +1820,32 @@ The parameter types can be inferred if the lambda expression is used in a contex
 </p>
 <p>
 For instance, given the following Java method signature:
-<span class="inlinecode"><span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)&nbsp;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 the type of the parameter can be inferred. Which allows users to write:
-<span class="inlinecode">newArrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst[&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+newArrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst[&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;]<br/>
+</p>
+</div>
+</div>
+
 instead of 
-<span class="inlinecode">newArrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst[&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+newArrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst[&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;]<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="Xbase_Expressions_FunctionMapping"></a>
 <h5>Function Mapping</h5>
@@ -1768,7 +1912,7 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-]
+]<br/>
 </p>
 </div>
 </div>
@@ -1782,7 +1926,8 @@ be omitted. Use <span class="inlinecode"><span class="keyword">it</span></span> 
 <div class="incode">
 <p class="code">
 <span class="keyword">val</span>&nbsp;(String&nbsp;s)=&gt;String&nbsp;function&nbsp;=&nbsp;[&nbsp;toUpperCase&nbsp;]&nbsp;<br/>
-&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;| it.toUpperCase]</span>
+&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;| it.toUpperCase]<br/>
+</span>
 </p>
 </div>
 </div>
@@ -1812,7 +1957,7 @@ accessed on the receiver <span class="inlinecode"><span class="keyword">self</sp
 <p class="code">
 <span class="keyword">val</span>&nbsp;AbstractIterator&lt;String&gt;&nbsp;emptyIterator&nbsp;=&nbsp;[<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">self</span>.endOfData<br/>
-]
+]&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -1830,13 +1975,25 @@ evaluates to <span class="inlinecode"><span class="keyword">true</span></span> o
 That means 
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 is the a short hand for
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span><br/>
+</p>
+</div>
+</div>
 </p>
 <a name="Xbase_Expressions_IfTypeInference"></a>
 <h5>Typing</h5>
@@ -1875,7 +2032,7 @@ For a switch expression
 &nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
 &nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1905,7 +2062,7 @@ Example:
 &nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">&apos;a&nbsp;long&nbsp;string.&apos;</span><br/>
 &nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;foo."</span><br/>
 &nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string."</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1924,7 +2081,7 @@ Example:
 &nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
 &nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
 &nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1958,7 +2115,7 @@ case branches types conform to the expected type.
 		&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name<br/>
 		&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name<br/>
 		&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException<br/>
-		}
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -1973,7 +2130,7 @@ case branches types conform to the expected type.
 		&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...<br/>
 		&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...<br/>
 		&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;...<br/>
-		}
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -2006,7 +2163,7 @@ A typical example for using <span class="inlinecode"><span class="keyword">var</
 &nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2021,12 +2178,26 @@ the lambda expression.
 The return type of a variable declaration expression is always <span class="inlinecode"><span class="keyword">void</span></span>. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 Here is an example for an explicitly declared type:
-<span class="inlinecode"><span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<br/>
+</p>
+</div>
+</div>
+
 In such cases, the right hand expression&apos;s type must <a href="199-xtext-and-java.html#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
 </p>
 <p>
 Alternatively the type can be left out and will be inferred from the initialization expression:  
-<span class="inlinecode"><span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;&nbsp;&nbsp;<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="Xbase_Expressions_Blocks"></a>
 <h4>Blocks</h4>
@@ -2048,7 +2219,7 @@ It can optionally be terminated by a semicolon.
 {<br/>
 &nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
 &nbsp;&nbsp;result<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2063,7 +2234,7 @@ It can optionally be terminated by a semicolon.
 &nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2089,7 +2260,7 @@ or <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/l
 		<p class="code">
 		<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
 		&nbsp;&nbsp;doSideEffect(s);<br/>
-		}
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -2101,7 +2272,7 @@ or <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/l
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
-		&nbsp;&nbsp;doSideEffect(s)
+		&nbsp;&nbsp;doSideEffect(s)<br/>
 		</p>
 		</div>
 		</div>
@@ -2125,7 +2296,7 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 		<p class="code">
 		<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{<br/>
 		&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
-		}
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -2135,7 +2306,7 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">while</span>&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;&lt;&nbsp;max&nbsp;)&nbsp;<br/>
-		&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)
+		&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)<br/>
 		</p>
 		</div>
 		</div>
@@ -2159,13 +2330,19 @@ The return type of a do-while loop is <span class="inlinecode"><span class="keyw
 		<p class="code">
 		<span class="keyword">do</span>&nbsp;{<br/>
 		&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
-		}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)
+		}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)<br/>
 		</p>
 		</div>
 		</div>
 	</li>
 	<li>
-		<span class="inlinecode"><span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)</span>
+		<div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)<br/>
+		</p>
+		</div>
+		</div>
 	</li>
 </ul>
 </p>
@@ -2184,7 +2361,7 @@ listOfStrings.map&nbsp;[&nbsp;e&nbsp;|<br/>
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
 &nbsp;&nbsp;e.toUpperCase<br/>
-]
+]<br/>
 </p>
 </div>
 </div>
@@ -2203,7 +2380,7 @@ Like in Java it is possible to throw <a class="jdoc" href="http://download.oracl
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
 &nbsp;&nbsp;...<br/>
-}
+}&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -2227,7 +2404,7 @@ The syntax again is the same known from Java.
 &nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
 </span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -2285,13 +2462,25 @@ bind and invoke <span class="inlinecode">foo(Object)</span>.
 If the last argument of a method call is a lambda expression, it can be appended to the method call. Thus,
 </p>
 <p>
-<span class="inlinecode">foo(42)&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+foo(42)&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;&nbsp;&nbsp;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 will call a Java method with the signature
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Used in combination with the <a href="199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in lambda
@@ -2305,7 +2494,7 @@ objects in a concise builder syntax like in Groovy. Consider you have a set of l
 <p class="code">
 HtmlNode&nbsp;html(Function1&lt;HtmlNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
 HeadNode&nbsp;head(HtmlNode&nbsp;parent,&nbsp;Function1&lt;HeadNode,&nbsp;Void&gt;&nbsp;initializer)<br/>
-...
+...<br/>
 </p>
 </div>
 </div>
@@ -2322,7 +2511,7 @@ html([&nbsp;html&nbsp;| <br/>
 &nbsp;&nbsp;head(html,&nbsp;[&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
 </span>&nbsp;&nbsp;])&nbsp;<br/>
-]&nbsp;)
+]&nbsp;)<br/>
 </p>
 </div>
 </div>
@@ -2336,7 +2525,7 @@ html()&nbsp;[&nbsp;html&nbsp;| <br/>
 &nbsp;&nbsp;html.head()&nbsp;[&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
 </span>&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
-]
+]&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -2350,7 +2539,7 @@ html&nbsp;[&nbsp;<br/>
 &nbsp;&nbsp;head&nbsp;[&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
 </span>&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
-]
+]&nbsp;<br/>
 </p>
 </div>
 </div>

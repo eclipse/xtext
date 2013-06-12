@@ -692,7 +692,7 @@ class MyClass {
 						<section id="packageDecl" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Package Declaration</h2>
 						<p>
-							Package declarations look like in Java. There are two small differences: 
+							Package declarations can look like those in Java. Two small, optional differences:
 							</p>
 							<ul>
 								<li>An identifier can be escaped with a <code class="prettyprint lang-xtend">^</code> character in case it conflicts with a keyword.</li>
@@ -742,11 +742,10 @@ import static java.util.Collections.*</pre>
 							is compiled to a separate top-level Java class.
 						</p>
 						<p>
-							Abstract classes are defined using the <code class="prettyprint lang-xtend">abstract</code> modifier as in Java. See also <a href="#abstractMethods"></a> 
-							on abstract methods.
+							Abstract classes are defined using the <code class="prettyprint lang-xtend">abstract</code> modifier as in Java. See also <a href="#abstractMethods">abstract methods</a>.
 						</p>
 						<p>
-							Xtend's approach to inheritance is conceptual the same as in Java. Single inheritance of 
+							Xtend's approach to inheritance is conceptually the same as in Java. Single inheritance of 
 							classes as well as implementing multiple interfaces is supported. 
 							Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes.
 							If no super type is specified, <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html"><abbr title="java.lang.Object">Object</abbr></a> is used.
@@ -851,11 +850,11 @@ def String first(List&lt;String&gt; elements) {
 						</p>
 						<p>
 							Method declarations start with the keyword <code class="prettyprint lang-xtend">def</code>.
-							The default visibility of a plain method is <code class="prettyprint lang-xtend">public</code>. You can explicitly declare it as
+							The default visibility of a method is <code class="prettyprint lang-xtend">public</code>. You can explicitly declare it as
 							being <code class="prettyprint lang-xtend">public</code>, <code class="prettyprint lang-xtend">protected</code>, <code class="prettyprint lang-xtend">package</code> or <code class="prettyprint lang-xtend">private</code>.
 						</p>
 						<p>
-							Xtend supports the <code class="prettyprint lang-xtend">static</code> modifier for methods:
+							Xtend supports the <code class="prettyprint lang-xtend">static</code> modifier for methods and can <a href="#inferredReturnTypes">infer</a> the return type if it is not explicitly given:
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 def static createInstance() {
@@ -864,7 +863,7 @@ def static createInstance() {
 							<p>
 						</p>
 						<p>
-							As in Java, vararg parameters are allowed:
+							As in Java, vararg parameters are allowed and accessible as array values in the method body:
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 def printAll(String... strings) {
@@ -1225,7 +1224,7 @@ class MyClass {
 							Xtend code to Java source code.
 						</p>
 						<p>
-							Please note that it is currently not possible to use nested annotation values in lists. The following notation
+							Please note that it is currently not possible to use nested annotation values in lists. This notation
 							is not yet supported but will be implemented in a future release: <code class="prettyprint lang-xtend">@Anno( values = #[ @Anno(..) ]</code>.
 						</p>
 						</section>
@@ -1269,7 +1268,7 @@ myObject.save</pre>
 							<p>
 						</p>
 						<p>
-							There are different ways to make methods available as extensions, which are described in the following.
+							There are different ways to make methods available as extensions, which are described in the following sections.
 						</p>
 						<!-- subsection -->
 						<section id="libraryExtensions" style="padding-top: 68px; margin-top: -68px;">
@@ -1342,7 +1341,7 @@ import static extension java.util.Collections.*</pre>
 							<p>
 						</p>
 						<p>
-							allows to use its methods like this:
+							allows us to use its methods like this:
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 new MyClass().singletonList() 
@@ -1472,7 +1471,7 @@ enum MyColor {
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
 							In Xtend everything is an expression and has a return type. Statements do not exist. 
-							That allows to compose your code in interesting ways. For example, you can have a
+							That allows you to compose your code in interesting ways. For example, you can have a
 							<code class="prettyprint lang-xtend">try catch</code> expression on the right hand side of an assignment: 
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
@@ -1494,7 +1493,7 @@ val data = try {
 						<section id="Xtend_Expressions_Literals" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Literals</h2>
 						<p>
-							A literal denotes a fixed unchangeable value. Literals for <a href="#stringLiterals">strings</a>, <a href="#numberLiterals">numbers</a>, <a href="#booleanLiteral">booleans</a>,
+							A literal denotes a fixed, unchangeable value. Literals for <a href="#stringLiterals">strings</a>, <a href="#numberLiterals">numbers</a>, <a href="#booleanLiteral">booleans</a>,
 							<code class="prettyprint lang-xtend">null</code> and <a href="#typeLiteral">Java types</a> are supported as well as literals for unmodifiable collection types like lists,
 							sets and maps or literals for arrays.
 						</p>
@@ -2275,7 +2274,7 @@ var strings = new ArrayList&lt;String&gt; // -&gt; msg is of type ArrayList&lt;S
 						<h3>Property Access</h3>
 						<p>
 							If there is no field with the given name and also no method with the name and zero parameters
-							accessible, a simple name binds to a corresponding Java-Bean getter method if available :
+							accessible, a simple name binds to a corresponding Java-Bean getter method if available:
 						</p>
 						<p>
 							</p>

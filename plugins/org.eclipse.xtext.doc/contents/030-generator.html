@@ -55,7 +55,7 @@ Given the following simple Java class (POJO):
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(Person&nbsp;child)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.children.add(child);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -78,7 +78,7 @@ Person&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -105,7 +105,7 @@ The interpreter will basically do the same as the following <em>main</em> method
 &nbsp;&nbsp;&nbsp;&nbsp;son.setName(<span class="string">"Son"</span>);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;father.addChild(son);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -141,7 +141,7 @@ child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br/>
 &nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Daughter"</span><br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -244,7 +244,7 @@ Workflow&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -439,7 +439,7 @@ constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.c
 &nbsp;&nbsp;@Inject<br/>
 &nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IScopeProvider&nbsp;scopeProvider;<br/>
 <br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -471,7 +471,7 @@ implemented in Java. Here&apos;s an example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IScopeProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -501,7 +501,7 @@ method is :
 <p class="code">
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProvider.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -531,7 +531,7 @@ A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com
 &nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;an&nbsp;instance&nbsp;of&nbsp;{@code&nbsp;T}.&nbsp;Must&nbsp;never&nbsp;return&nbsp;{@code&nbsp;null}.<br/>
 &nbsp;&nbsp;&nbsp;*/</span><br/>
 &nbsp;&nbsp;T&nbsp;get();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -549,7 +549,7 @@ the following binding method.
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;<br/>
 &nbsp;&nbsp;provideIScopeProvider()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -570,7 +570,7 @@ if some global state should be shared in the application:
 <p class="code">
 <span class="keyword">public</span>&nbsp;Provider&lt;IScopeProvider&gt;&nbsp;provideIScopeProvider()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProviderFactory();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -584,7 +584,7 @@ or
 <p class="code">
 <span class="keyword">public</span>&nbsp;IScopeProvider&nbsp;bindIScopeProvider()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProvider();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -603,7 +603,7 @@ name &apos;configure&apos;, has a return type <span class="inlinecode"><span cla
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{<br/>
 &nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
-}
+}&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -626,7 +626,7 @@ method. It could look like this:
 &nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;MyApplication.<span class="keyword">class</span>);<br/>
 &nbsp;&nbsp;application.run();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>

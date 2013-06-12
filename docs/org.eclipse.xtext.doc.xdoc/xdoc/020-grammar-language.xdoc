@@ -458,7 +458,7 @@ code[Xtext][terminal ML_COMMENT  : '/*' -> '*/';]
 
 This is the rule for Java-style comments that begin with code[Xtext][/*] and end with code[Xtext][*/].
 
-section4[Negated Token]
+section4:negatedTokens[Negated Token]
 
 All the tokens explained above can be inverted using a preceding exclamation mark:
 
@@ -511,11 +511,13 @@ terminal STRING  :
 
 section3:eof[EOF - End Of File]
 
-The EOF (End Of File) token may be used to describe that the end of the input stream is a valid situation
+The code[Xtext][EOF] (End Of File) token may be used to describe that the end of the input stream is a valid situation
 at a certain point in a terminal rule. This allows to consume the complete remaining input of a file
 starting with a special delimiter.
 
-code[Xtext][terminal UNCLOSED_COMMENT : '/*' (!EOF)* EOF;]
+code[Xtext][terminal UNCLOSED_STRING : '"' (!'"')* EOF;]
+
+The code[Xtext][EOF] token cannot be ref:negatedTokens[negated].
 
 section2:parser_rules[Parser Rules]
 

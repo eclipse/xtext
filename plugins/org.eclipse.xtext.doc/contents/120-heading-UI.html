@@ -71,7 +71,7 @@ there is a so called <em>binding annotation</em> for each use case. For example,
 &nbsp;&nbsp;binder.bind(ILabelProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(ContentProposalLabelProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.to(MyContentAssistLabelProvider.<span class="keyword">class</span>);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -91,7 +91,7 @@ delegate parameter and use dependency injection for its initialization, e.g.
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;MyLabelProvider(AdapterFactoryLabelProvider&nbsp;delegate)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(delegate);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -124,7 +124,7 @@ idea about the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xt
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;image(State&nbsp;state)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"state.gif"</span>;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -171,7 +171,7 @@ To have a custom description label provider, make sure it is bound in your UI mo
 &nbsp;&nbsp;binder.bind(ILabelProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(ResourceServiceDescriptionLabelProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.to(MyCustomDefaultDescriptionLabelProvider.<span class="keyword">class</span>);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -210,7 +210,7 @@ First we will investigate the generated <span class="inlinecode">Abstract{MyLang
 &nbsp;&nbsp;EObject&nbsp;model,&nbsp;RuleCall&nbsp;ruleCall,&nbsp;<br/>
 &nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;clients&nbsp;may&nbsp;override<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -256,7 +256,7 @@ event with the name <span class="inlinecode">Zonk</span>.
 </span>&nbsp;&nbsp;<span class="comment">//&nbsp;methods&nbsp;check&nbsp;for&nbsp;valid&nbsp;prefixes&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts.<br/>
 </span>&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully.<br/>
 </span>&nbsp;&nbsp;acceptor.accept(createCompletionProposal(proposal,&nbsp;context));<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -281,7 +281,7 @@ to the static <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs
 <div class="incode">
 <p class="code">
 warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());
+&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());<br/>
 </p>
 </div>
 </div>
@@ -318,7 +318,7 @@ the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -372,7 +372,7 @@ The following snippet shows a semantic quick fix for a similar problem.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -463,7 +463,7 @@ This small example yields the text <em>event =&gt; state</em> and allows selecti
 &nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
 ${event:CrossReference(<span class="string">&apos;Transition.event&apos;</span>)}&nbsp;=&gt;<br/>
 &nbsp;&nbsp;${state:CrossReference(<span class="string">&apos;Transition.state&apos;</span>)<br/>
-&lt;/template&gt;
+&lt;/template&gt;<br/>
 </p>
 </div>
 </div>
@@ -506,7 +506,7 @@ For example the following template (taken from another example):
 ${<span class="keyword">public</span>:Enum(<span class="string">&apos;Visibility&apos;</span>)}&nbsp;<span class="keyword">entity</span>&nbsp;${Name}&nbsp;{<br/>
 &nbsp;&nbsp;${cursor}<br/>
 }<br/>
-&lt;/template&gt;
+&lt;/template&gt;<br/>
 </p>
 </div>
 </div>
@@ -578,7 +578,7 @@ of type <span class="inlinecode">Domainmodel</span> in the outline of our domain
 &nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractElement&nbsp;element&nbsp;:&nbsp;domainModel.getElements())&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;createNode(parentNode,&nbsp;element);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -596,7 +596,7 @@ This might be confuse your users a bit. To overcome this shortcoming, you have t
 <span class="comment">//&nbsp;feature&nbsp;nodes&nbsp;are&nbsp;leafs&nbsp;and&nbsp;not&nbsp;expandable<br/>
 </span><span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;_isLeaf(Feature&nbsp;feature)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">true</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -628,7 +628,7 @@ snippet from Xtend2 illustrates how to use it:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"import&nbsp;declarations"</span>,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">false</span>);<br/>
 &nbsp;&nbsp;createEObjectNode(parentNode,&nbsp;xtendFile.getXtendClass());<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -672,7 +672,7 @@ can be used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic
 &nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(149,&nbsp;125,&nbsp;71));<br/>
 &nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -729,7 +729,7 @@ example:
 &nbsp;&nbsp;}<br/>
 <br/>
 &nbsp;&nbsp;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -746,7 +746,7 @@ The contribution must be bound in the <em>MyDslUiModule</em> like this
 &nbsp;&nbsp;&nbsp;&nbsp;.bind(IOutlineContribution.<span class="keyword">class</span>).annotatedWith(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names.named(<span class="string">"FilterOperationsContribution"</span>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.to(FilterOperationsContribution.<span class="keyword">class</span>);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -781,7 +781,7 @@ use such categories:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Integer.MIN_VALUE;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -797,7 +797,7 @@ As always, you have to declare a binding for your custom implementation in your 
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IComparator&gt;&nbsp;<br/>
 &nbsp;&nbsp;bindOutlineFilterAndSorter$IComparator()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MydslOutlineNodeComparator.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -870,7 +870,7 @@ the UI module as in the following example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindILocationInFileProvider()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslLocationInFileProvider.<span class="keyword">class</span>;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -969,7 +969,7 @@ and read like this:
 &nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1026,7 +1026,7 @@ associate styles with them. This may read similar to the following snippet:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1059,7 +1059,7 @@ mentioned sample of a lexical <a class="jdoc" href="http://download.eclipse.org/
 &nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1106,7 +1106,7 @@ is enabled in the fragment section of the MWE workflow of your language, e.g.
 <div class="incode">
 <p class="code">
 <span class="comment">//&nbsp;rename&nbsp;refactoring<br/>
-</span>fragment&nbsp;=&nbsp;refactoring.RefactorElementNameFragment&nbsp;{}
+</span>fragment&nbsp;=&nbsp;refactoring.RefactorElementNameFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>

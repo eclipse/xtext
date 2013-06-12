@@ -1044,7 +1044,7 @@ def compile(Entity e) '''
 								    
 								<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) '''
-  &laquo;IF e.eContainer != null&raquo;
+  &laquo;IF e.eContainer.fullyQualifiedName != null&raquo;
     package &laquo;e.eContainer.fullyQualifiedName&raquo;;
   &laquo;ENDIF&raquo;
   
@@ -1054,7 +1054,7 @@ def compile(Entity e) '''
 								    
 								<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) ''' 
-  &laquo;IF e.eContainer != null&raquo;
+  &laquo;IF e.eContainer.fullyQualifiedName != null&raquo;
     package &laquo;e.eContainer.fullyQualifiedName&raquo;;
   &laquo;ENDIF&raquo;
   
@@ -1086,7 +1086,7 @@ def compile(Feature f) '''
 								    
 								<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) ''' 
-  &laquo;IF e.eContainer != null&raquo;
+  &laquo;IF e.eContainer.fullyQualifiedName != null&raquo;
     package &laquo;e.eContainer.fullyQualifiedName&raquo;;
   &laquo;ENDIF&raquo;
   
@@ -1133,7 +1133,7 @@ class DomainmodelGenerator implements IGenerator {
   }
 
   def compile(Entity e) ''' 
-    &laquo;IF e.eContainer != null&raquo;
+    &laquo;IF e.eContainer.fullyQualifiedName != null&raquo;
       package &laquo;e.eContainer.fullyQualifiedName&raquo;;
     &laquo;ENDIF&raquo;
     
@@ -2539,7 +2539,7 @@ terminal ML_COMMENT  : '/*' -&gt; '*/';</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_35" style="padding-top: 68px; margin-top: -68px;">
+						<section id="negatedTokens" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Negated Token</h5>
 						<p>
 							All the tokens explained above can be inverted using a preceding exclamation mark:
@@ -2631,15 +2631,18 @@ terminal STRING  :
 						<section id="eof" style="padding-top: 68px; margin-top: -68px;">
 						<h4>EOF - End Of File</h4>
 						<p>
-							The EOF (End Of File) token may be used to describe that the end of the input stream is a valid situation
+							The <code class="prettyprint lang-xtext">EOF</code> (End Of File) token may be used to describe that the end of the input stream is a valid situation
 							at a certain point in a terminal rule. This allows to consume the complete remaining input of a file
 							starting with a special delimiter.
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtext linenums">
-terminal UNCLOSED_COMMENT : '/*' (!EOF)* EOF;</pre>
+terminal UNCLOSED_STRING : '"' (!'"')* EOF;</pre>
 							<p>
+						</p>
+						<p>
+							The <code class="prettyprint lang-xtext">EOF</code> token cannot be <a href="#negatedTokens">negated</a>.
 						</p>
 						</section>
 						</section>
@@ -2657,7 +2660,7 @@ terminal UNCLOSED_COMMENT : '/*' (!EOF)* EOF;</pre>
 							assignments are used to derive types and initialize the semantic objects accordingly.
 						</p>
 						<!-- subsection -->
-						<section id="_36" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_35" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Extended Backus-Naur Form Expressions</h4>
 						<p>
 							Not all the expressions that are available in terminal rules can be used in parser rules. Character 
@@ -2870,7 +2873,7 @@ x 0 8 15</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_37" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_36" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Simple Actions</h5>
 						<p>
 							The object to be returned by a parser rule is usually created lazily on the first assignment. Its type is determined from the specified return type
@@ -2934,7 +2937,7 @@ MyRule returns TypeA :
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_38" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_37" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Unassigned Rule Calls</h5>
 						<p>
 							We previously explained, that the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> to be returned is created lazily when the first assignment occurs or 
@@ -3199,7 +3202,7 @@ QualifiedName returns ecore::EString :
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_39" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_38" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Enum Rules</h3>
 						<p>
 							Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters.
@@ -3351,7 +3354,7 @@ Condition:
 							By using the <code class="prettyprint lang-xtext">generate</code> directive, one tells Xtext to derive an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> from the grammar.
 						</p>
 						<!-- subsection -->
-						<section id="_40" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_39" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Type and Package Generation</h3>
 						<p>
 							Xtext creates
@@ -3387,7 +3390,7 @@ Condition:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_41" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_40" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Feature and Type Hierarchy Generation</h3>
 						<p>
 							While walking through the grammar, the algorithm keeps track of a set of the currently possible return types to add features to. 
@@ -3440,7 +3443,7 @@ CommonSuperType:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_42" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_41" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Enum Literal Generation</h3>
 						<p>
 							For each alternative defined in an enum rule, the transformer creates an enum literal, as long as no other literal with the same 
@@ -3456,7 +3459,7 @@ enum MyGeneratedEnum:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_43" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_42" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Feature Normalization</h3>
 						<p>
 							In the next step the generator examines all generated <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html">EClasses</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">(src)</a> and lifts up similar features to super types
@@ -3464,7 +3467,7 @@ enum MyGeneratedEnum:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_44" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_43" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Error Conditions</h3>
 						<p>
 							The following conditions cause an error
@@ -3750,7 +3753,7 @@ child = com.mycompany.Person {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_45" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_44" style="padding-top: 68px; margin-top: -68px;">
 						<h3>General Architecture</h3>
 						<p>
 							A language generator is composed of so called language configurations. 
@@ -3783,7 +3786,7 @@ child = com.mycompany.Person {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_46" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_45" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Configuration</h4>
 						<p>
 							As already explained we use MWE2 from EMFT in order to instantiate, configure and execute this structure of components. 
@@ -3857,7 +3860,7 @@ Workflow {
 						</section>
 						</section>
 						<!-- subsection -->
-						<section id="_47" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_46" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Standard Generator Fragments</h3>
 						<p>
 							In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.
@@ -4093,7 +4096,7 @@ public void configureIScopeProvider(Binder binder) {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_48" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_47" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Obtaining an Injector</h3>
 						<p>
 							In every application wired up with Guice there is usually one point where you initialize an 
@@ -4220,7 +4223,7 @@ public static void main(String[] args) {
 							In Xtext there are basically three different kinds of validation.
 						</p>
 						<!-- subsection -->
-						<section id="_49" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_48" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Automatic Validation</h3>
 						<p>
 							Some implementation aspects (e.g. the grammar, scoping) of a language have an impact on what is required 
@@ -4414,7 +4417,7 @@ public class DomainmodelJavaValidator
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_50" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_49" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Validating Manually</h3>
 						<p>
 							As noted above, Xtext uses EMF's <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html"><abbr title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java">(src)</a> API to register validators. 
@@ -4577,7 +4580,7 @@ public class MyLanguageValidatorTest extends AbstractXtextTests {
 							<p>
 						</p>
 						<!-- subsection -->
-						<section id="_51" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_50" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Declaration of Cross-links</h3>
 						<p>
 							In the grammar a cross-reference is specified using square brackets.
@@ -4613,7 +4616,7 @@ ReferringType :
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_52" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_51" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Default Runtime Behavior (Lazy Linking)</h3>
 						<p>
 							Xtext uses lazy linking by default and we encourage users to stick to this because it provides  
@@ -5201,7 +5204,7 @@ classpathScope{stuff from bin/}
 							<a href="http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html">this blog post</a> .
 						</p>
 						<!-- subsection -->
-						<section id="_53" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_52" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Declarative Scoping</h4>
 						<p>
 							If you have to define scopes for certain contexts, the base class 
@@ -5286,7 +5289,7 @@ IScope scope_State(StateMachine this, EReference ref)</pre>
 							extends <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html"><abbr title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java">(src)</a>.
 						</p>
 						<!-- subsection -->
-						<section id="_54" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_53" style="padding-top: 68px; margin-top: -68px;">
 						<h4><a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a></h4>
 						<p>
 							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html"><abbr title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java">(src)</a> 
@@ -5321,7 +5324,7 @@ FowlerDslQualifiedNameProvider
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_55" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_54" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Importing Namespaces</h4>
 						<p>
 							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html"><abbr title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java">(src)</a> looks up 
@@ -5507,7 +5510,7 @@ MyRule:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_56" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_55" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Roles of the Semantic Model and the Node Model During Serialization</h3>
 						<p>
 							A serialized document represents the state of the semantic model. However, if there is a node model 
@@ -5818,7 +5821,7 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
 							settings and a set of formatting instructions:
 						</p>
 						<!-- subsection -->
-						<section id="_57" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_56" style="padding-top: 68px; margin-top: -68px;">
 						<h3>General FormattingConfig Settings</h3>
 						<p>
 							<code class="prettyprint lang-java">setAutoLinewrap(int)</code> defines the amount of characters after which a line-break should 
@@ -5828,7 +5831,7 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_58" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_57" style="padding-top: 68px; margin-top: -68px;">
 						<h3>FormattingConfig Instructions</h3>
 						<p>
 							Per default, the declarative formatter inserts one white space between two 
@@ -5908,7 +5911,7 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_59" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_58" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Grammar Element Finders</h3>
 						<p>
 							Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought 
@@ -6042,7 +6045,7 @@ public QualifiedNameFragmentProvider implements IFragmentProvider {
 							As Xtext is about textual modeling, it allows to tweak the encoding in various places.
 						</p>
 						<!-- subsection -->
-						<section id="_60" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_59" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Encoding at Language Design Time</h3>
 						<p>
 							The plug-ins created by the <strong>New Xtext Project</strong> wizard are by default encoded in the workspace's standard
@@ -6063,7 +6066,7 @@ Generator {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_61" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_60" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Encoding at Language Runtime</h3>
 						<p>
 							As each language could handle the encoding problem differently, Xtext offers a service here. 
@@ -6114,7 +6117,7 @@ public Class&lt;? extends IEncodingProvider&gt; bindIEncodingProvider() {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_62" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_61" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Encoding of an XtextResource</h3>
 						<p>
 							An <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/resource/XtextResource.html"><abbr title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">(src)</a> uses the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/parser/IEncodingProvider.html"><abbr title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java">(src)</a> 
@@ -6133,7 +6136,7 @@ myXtextResource.save(options);</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_63" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_62" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Encoding in New Model Projects</h3>
 						<p>
 							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.html"><abbr title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment">SimpleProjectWizardFragment</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java">(src)</a> 
@@ -6145,7 +6148,7 @@ myXtextResource.save(options);</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_64" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_63" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Encoding of Xtext Source Code</h3>
 						<p>
 							The source code of the Xtext framework itself is completely encoded in <strong>ISO 8859-1</strong>, which is necessary 
@@ -6515,7 +6518,7 @@ public void fixFeatureName(final Issue issue,
 							<p>
 						</p>
 						<!-- subsection -->
-						<section id="_65" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_64" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Quick Fixes for Linking Errors and Syntax Errors</h3>
 						<p>
 							You can even define quick fixes for linking errors. The issue codes are assigned by the 
@@ -6576,7 +6579,7 @@ public void fixFeatureName(final Issue issue,
 							add it to the <strong>bin.includes</strong> in your <strong>build.properties</strong>.
 						</p>
 						<!-- subsection -->
-						<section id="_66" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_65" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Cross Reference Template Variable Resolver</h3>
 						<p>
 							Xtext comes with a specific template variable resolver called 
@@ -6616,7 +6619,7 @@ ${event:CrossReference('Transition.event')} =&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_67" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_66" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Enumeration Template Variable Resolver</h3>
 						<p>
 							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.html"><abbr title="org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver">EnumTemplateVariableResolver</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java">(src)</a> 
@@ -6687,7 +6690,7 @@ ${public:Enum('Visibility')} entity ${Name} {
 							show how to do fill this stub with life.
 						</p>
 						<!-- subsection -->
-						<section id="_68" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_67" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Influencing the outline structure</h3>
 						<p>
 							Each node the outline tree is an instance of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/outline/IOutlineNode.html"><abbr title="org.eclipse.xtext.ui.editor.outline.IOutlineNode">IOutlineNode</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineNode.java">(src)</a>.
@@ -6771,7 +6774,7 @@ protected void _createChildren(DocumentRootNode parentNode,
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_69" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_68" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Styling the outline</h3>
 						<p>
 							You can also customize the icons and texts for an outline node. By default, Xtext uses the <a href="#labelProvider">label
@@ -6812,7 +6815,7 @@ protected TextStyle getTypeTextStyle() {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_70" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_69" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Filtering actions</h3>
 						<p>
 							Often, you want to allow users to filter the contents of the outline to make it easier to concentrate 
@@ -6879,7 +6882,7 @@ public void configureFilterOperationsContribution(Binder binder) {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_71" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_70" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Sorting actions</h3>
 						<p>
 							Xtext already adds a sorting action to your outline. By default, nodes are sorted lexically by their
@@ -7002,7 +7005,7 @@ public class MyDslUiModule extends AbstractMyDslUiModule {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_72" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_71" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Customizing Available Hyperlinks</h3>
 						<p>
 							The hyperlinks are provided by the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.html"><abbr title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper">HyperlinkHelper</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java">(src)</a>
@@ -7051,7 +7054,7 @@ public class MyDslUiModule extends AbstractMyDslUiModule {
 							<p>
 						</p>
 						<!-- subsection -->
-						<section id="_73" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_72" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Lexical Highlighting</h3>
 						<p>
 							The lexical highlighting can be customized by providing implementations of the interface 
@@ -7107,7 +7110,7 @@ public class DefaultHighlightingConfiguration
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_74" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_73" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Semantic Highlighting</h3>
 						<p>
 							The semantic highlighting stage is executed asynchronously in the background and can be used to calculate
@@ -7230,7 +7233,7 @@ fragment = refactoring.RefactorElementNameFragment {}</pre>
 							should not need any customization. Give it a try.
 						</p>
 						<!-- subsection -->
-						<section id="_75" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_74" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Customizing</h3>
 						<p>
 							The most likely component you want to customize is the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/refactoring/IRenameStrategy.html"><abbr title="org.eclipse.xtext.ui.refactoring.IRenameStrategy">IRenameStrategy</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java">(src)</a>. 
@@ -7264,7 +7267,7 @@ fragment = refactoring.RefactorElementNameFragment {}</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_76" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_75" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Rename Participants</h3>
 						<p>
 							One refactoring can trigger another: When renaming a rule in an Xtext grammar, the returned
@@ -7396,7 +7399,7 @@ datatype Date mapped-to java.util.Date</pre>
 							apply for Java types.
 						</p>
 						<!-- subsection -->
-						<section id="_77" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_76" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Customization Points</h3>
 						<p>
 							There are several customization hooks in the runtime layer of the JVM types and on the editor side as well:
@@ -7669,7 +7672,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 							dealt with a custom implementation in the last section this may lead to problems.
 						</p>
 						<!-- subsection -->
-						<section id="_78" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_77" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Linking and Indexing</h3>
 						<p>
 							As Java elements and your concepts are now represented as JVM model elements, other models can now transparently
@@ -7704,7 +7707,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 							your DSL as part of a Java application.
 						</p>
 						<!-- subsection -->
-						<section id="_79" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_78" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Making Your Grammar Refer To Xbase</h3>
 						<p>
 							If you want to refer to <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html">EClassifiers</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">(src)</a> from the Xbase model, you need
@@ -7775,7 +7778,7 @@ Property:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_80" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_79" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Using the Xbase Interpreter</h3>
 						<p>
 							Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it.  
@@ -7905,7 +7908,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_81" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_80" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Syntax</h5>
 						<p>
 							</p>
@@ -7917,7 +7920,7 @@ terminal ID:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_82" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_81" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8009,7 +8012,7 @@ terminal ID:
 							There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 						</p>
 						<!-- subsection -->
-						<section id="_83" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_82" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8034,7 +8037,7 @@ terminal ID:
 							type arguments.
 						</p>
 						<!-- subsection -->
-						<section id="_84" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_83" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8088,7 +8091,7 @@ terminal ID:
 							For more information on lambda expressions see <a href="#Xbase_Expressions_Lambda"></a>.
 						</p>
 						<!-- subsection -->
-						<section id="_85" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_84" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8175,7 +8178,7 @@ terminal ID:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_86" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_85" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8303,7 +8306,7 @@ terminal ID:
 							The conformance rules for casts are defined in the <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.5">Java Language Specification</a>.
 						</p>
 						<!-- subsection -->
-						<section id="_87" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_86" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8460,7 +8463,7 @@ terminal ID:
 							operators are left-to-right associative. Parentheses can be used to adjust the default precedence and associativity.
 						</p>
 						<!-- subsection -->
-						<section id="_88" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_87" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Short-Circuit Boolean Operators</h5>
 						<p>
 							If the operators <code class="prettyprint lang-xtend">||</code> and <code class="prettyprint lang-xtend">&amp;&amp;</code> are used in a context where the left hand operand is of type boolean, the operation is evaluated
@@ -8474,7 +8477,7 @@ terminal ID:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_89" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_88" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8492,7 +8495,7 @@ terminal ID:
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_90" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_89" style="padding-top: 68px; margin-top: -68px;">
 						<h5>With Operator</h5>
 						<p>
 							The <strong>with</strong> operator <code class="prettyprint lang-xtend">=&gt;</code> executes the <a href="#Xbase_Expressions_Lambda">lambda expression</a> with a single parameter on the right-hand
@@ -8670,7 +8673,7 @@ myProperty</pre>
 							Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java.
 						</p>
 						<!-- subsection -->
-						<section id="_91" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_90" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8843,7 +8846,7 @@ val (String s)=&gt;String function = [ toUpperCase ]
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_92" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_91" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8907,7 +8910,7 @@ if (foo) x else null</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_93" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_92" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -8967,7 +8970,7 @@ switch myString {
 							<p>
 						</p>
 						<!-- subsection -->
-						<section id="_94" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_93" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Type guards</h5>
 						<p>
 							In addition to the case guards one can add a so called <strong>Type Guard</strong> which is syntactically just a <a href="#Xbase_Types_TypeReferences">type reference</a> preceding
@@ -8992,7 +8995,7 @@ switch x {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_95" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_94" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Typing</h5>
 						<p>
 							The return type of a switch expression is computed using the rules defined in the
@@ -9003,7 +9006,7 @@ switch x {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_96" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_95" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -9058,7 +9061,7 @@ switch x : foo.bar.complicated('hello', 42) {
 							the lambda expression.
 						</p>
 						<!-- subsection -->
-						<section id="_97" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_96" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Typing</h5>
 						<p>
 							The return type of a variable declaration expression is always <code class="prettyprint lang-xbase">void</code>. 
@@ -9093,7 +9096,7 @@ var msg = new ArrayList&lt;String&gt; // -&gt; type ArrayList&lt;String&gt;</pre
 							It can optionally be terminated by a semicolon.
 						</p>
 						<!-- subsection -->
-						<section id="_98" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_97" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -9153,7 +9156,7 @@ for (s : myStrings)
 							The return type of a while loop is <code class="prettyprint lang-xbase">void</code>.
 						</p>
 						<!-- subsection -->
-						<section id="_99" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_98" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -9179,7 +9182,7 @@ while ( ( i = i + 1 ) &lt; max )
 							The return type of a do-while loop is <code class="prettyprint lang-xbase">void</code>.
 						</p>
 						<!-- subsection -->
-						<section id="_100" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_99" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Examples</h5>
 						<p>
 							</p>
@@ -9286,7 +9289,7 @@ try {
 							bind and invoke <code class="prettyprint lang-xtend">foo(Object)</code>.
 						</p>
 						<!-- subsection -->
-						<section id="_101" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_100" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Examples</h4>
 						<p>
 							</p>
@@ -10600,7 +10603,7 @@ var anotherString = 'It is possible to embed ${aString} into
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_102" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_101" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Stage 2: Calling the Xtext Parser to Parse GMF Labels</h3>
 						<p>
 							GMF's generated parser for the labels is a bit poor: It will work on attributes only, and will fail for 
@@ -10658,7 +10661,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_103" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_102" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Stage 3: A Popup Xtext Editor (experimental)</h3>
 						<p>
 							<strong>SimplePropertyPopupXtextEditorEditPartOverride</strong> demonstrates how to spawn an Xtext editor to edit a model 
@@ -10719,7 +10722,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 							likely a higher effort.</strong>
 						</p>
 						<!-- subsection -->
-						<section id="_104" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_103" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Update the Plug-in Dependencies and Import Statements</h3>
 						<p>
 							You should update the version constraints of the plug-in dependencies in your manifest files from version 
@@ -10732,7 +10735,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_105" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_104" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Introduction of the Qualified Name</h3>
 						<p>
 							With Xtext 2.0 an object for dealing with qualified names has been introduced: <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/QualifiedName.html"><abbr title="org.eclipse.xtext.naming.QualifiedName">QualifiedName</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">(src)</a>. 
@@ -10759,7 +10762,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_106" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_105" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Changes in the index and in find references</h3>
 						<p>
 							In Xtext 1.0.x the interfaces <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/resource/IResourceDescriptions.html"><abbr title="org.eclipse.xtext.resource.IResourceDescriptions">IResourceDescriptions</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java">(src)</a>, 
@@ -10787,7 +10790,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_107" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_106" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Rewritten Node Model</h3>
 						<p>
 							To reduce memory consumption, the node model has been redesigned in Xtext 2.0. We no longer
@@ -10812,7 +10815,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_108" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_107" style="padding-top: 68px; margin-top: -68px;">
 						<h3>New Outline</h3>
 						<p>
 							The outline view has been completely re-implemented. To use the new one remove the following fragments from
@@ -10838,7 +10841,7 @@ fragment = outline.OutlineTreeProviderFragment {}</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_109" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_108" style="padding-top: 68px; margin-top: -68px;">
 						<h3>AutoEditStrategy</h3>
 						<p>
 							In Xtext 1.0.x your AutoEditStrategy extends the class <strong>DefaultAutoEditStrategy</strong> which implements the
@@ -10882,7 +10885,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_110" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_109" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Other Noteworthy API Changes</h3>
 						<p>
 							The <strong>src</strong> folders are generated once, so existing code will not be overwritten but has to be updated manually.
@@ -10980,7 +10983,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 							causes most likely a higher effort.</strong>
 						</p>
 						<!-- subsection -->
-						<section id="_111" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_110" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Update the Plug-in Dependencies and Import Statements</h3>
 						<p>
 							You should update the constraints from version <strong>0.7.x</strong> to <strong>[1.0.0,2.0.0)</strong> in your manifest files 
@@ -10998,7 +11001,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_112" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_111" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Rename the Packages in the dsl.ui-Plug-in</h3>
 						<p>
 							We changed the naming pattern for artifacts in the <strong>dsl.ui</strong>-plug-in to match the OSGi conventions. 
@@ -11011,7 +11014,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_113" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_112" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Update the Workflow</h3>
 						<p>
 							The <strong>JavaScopingFragment</strong> does no longer exist. It has been superseded by the 
@@ -11045,7 +11048,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_114" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_113" style="padding-top: 68px; margin-top: -68px;">
 						<h3>MANIFEST.MF and plugin.xml</h3>
 						<p>
 							The previous rename package refactoring updated most of the entries in the <strong>MANIFEST.MF</strong> and and some entries in 
@@ -11080,7 +11083,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_115" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_114" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Noteworthy API Changes</h3>
 						<p>
 							The <strong>src</strong> folders are generated once, so existing code will not be overwritten but has to be updated manually. 

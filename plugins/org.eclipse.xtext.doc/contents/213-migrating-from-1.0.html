@@ -138,13 +138,19 @@ your workflow
 <div class="incode">
 <p class="code">
 fragment&nbsp;=&nbsp;outline.TransformerFragment{}<br/>
-fragment&nbsp;=&nbsp;outline.OutlineNodeAdapterFactoryFragment{}
+fragment&nbsp;=&nbsp;outline.OutlineNodeAdapterFactoryFragment{}<br/>
 </p>
 </div>
 </div>
 
 and add 
-<span class="inlinecode">fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 After generating a new class named <em>MyDslOutlineTreeProvider</em> is generated. The API changed completely.
@@ -176,7 +182,7 @@ As a example the configure method could look like this one:
 &nbsp;&nbsp;<span class="keyword">super</span>.configure(acceptor);<br/>
 &nbsp;&nbsp;acceptor.accept(<span class="keyword">new</span>&nbsp;YourAutoEditStrategy(),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IDocument.DEFAULT_CONTENT_TYPE);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -185,13 +191,20 @@ The last thing you have to do is to change the binding of the <em>IAutoEditStrat
 in the <em>MyDslUIModule</em> from
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IAutoEditStrategy&gt;&nbsp;bindIAutoEditStrategy()</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IAutoEditStrategy&gt;&nbsp;bindIAutoEditStrategy()<br/>
+</p>
+</div>
+</div>
+ 
 to 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;AbstractEditStrategyProvider&gt;&nbsp;<br/>
-&nbsp;&nbsp;bindAbstractEditStrategyProvider()&nbsp;{&nbsp;..&nbsp;}
+&nbsp;&nbsp;bindAbstractEditStrategyProvider()&nbsp;{&nbsp;..&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -233,7 +246,14 @@ changes. It is usually only necessary to change your code, if you face any compi
 		      methods to resolve elements. In
 		    Xtext 2.0 these methods aren&apos;t static anymore. For that reason you could create an instance of this class or let 
 		    Guice do the job for you: 
-		    <span class="inlinecode">@Inject&nbsp;<span class="keyword">private</span>&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;</span>
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		@Inject&nbsp;<span class="keyword">private</span>&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;<br/>
+		</p>
+		</div>
+		</div>
+		
 	</li>
 	<li>
 		The method <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/resource/EObjectAtOffsetHelper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.EObjectAtOffsetHelper" >EObjectAtOffsetHelper.resolveElementAt(XtextResource, int, TextLocation)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java" title="View Source Code" >(src)</a> 

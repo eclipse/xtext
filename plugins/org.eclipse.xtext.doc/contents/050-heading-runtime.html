@@ -65,7 +65,7 @@ The only thing you have to do in order to use this factory is to prefix the clas
 &nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.MyDsl"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"MyDsl&nbsp;Editor"</span>&gt;<br/>
 &nbsp;&nbsp;&lt;/editor&gt;<br/>
-&lt;/extension&gt;
+&lt;/extension&gt;<br/>
 </p>
 </div>
 </div>
@@ -148,7 +148,7 @@ Example:
 <div class="incode">
 <p class="code">
 MyRule:<br/>
-&nbsp;&nbsp;({MySubRule}&nbsp;<span class="string">"sub"</span>)?&nbsp;(strVal+=ID&nbsp;intVal+=INT)*;
+&nbsp;&nbsp;({MySubRule}&nbsp;<span class="string">"sub"</span>)?&nbsp;(strVal+=ID&nbsp;intVal+=INT)*;<br/>
 </p>
 </div>
 </div>
@@ -252,7 +252,7 @@ configuration and you are good to go:
 <div class="incode">
 <p class="code">
 fragment&nbsp;=&nbsp;<br/>
-&nbsp;&nbsp;org.eclipse.xtext.generator.validation.JavaValidatorFragment&nbsp;{}
+&nbsp;&nbsp;org.eclipse.xtext.generator.validation.JavaValidatorFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -290,7 +290,7 @@ All in all this is very similar to how JUnit 4 works. Here is an example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -318,7 +318,7 @@ Diagnostic&nbsp;diagnostic&nbsp;=&nbsp;Diagnostician.INSTANCE.validate(myModel);
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br/>
 &nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.WARNING:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<span class="string">"Model&nbsp;has&nbsp;warnings:&nbsp;"</span>,diagnostic);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -369,7 +369,7 @@ Validator:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Only&nbsp;Foos&nbsp;allowed"</span>,&nbsp;element,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE,&nbsp;101);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -406,7 +406,7 @@ JUnit-Test:
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;tester.validate(model).assertError(101);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -496,7 +496,7 @@ In the grammar a cross-reference is specified using square brackets.
 <p class="code">
 CrossReference&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;type=ReferencedEClass&nbsp;(<span class="string">&apos;|&apos;</span>&nbsp;<span class="keyword">terminal</span>=CrossReferenceTerminal)?&nbsp;<span class="string">&apos;]&apos;</span><br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -510,7 +510,7 @@ Example:
 <p class="code">
 ReferringType&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;ref&apos;</span>&nbsp;referencedObject=[Entity|STRING]<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -583,7 +583,7 @@ Example:
 &nbsp;<br/>
 <span class="keyword">state</span>&nbsp;idle<br/>
 &nbsp;&nbsp;nothingImportant&nbsp;=&gt;&nbsp;idle<br/>
-<span class="keyword">end</span>
+<span class="keyword">end</span><br/>
 </p>
 </div>
 </div>
@@ -596,7 +596,7 @@ The grammar rule for transitions looks like this:
 <div class="incode">
 <p class="code">
 Transition&nbsp;:<br/>
-&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];
+&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];<br/>
 </p>
 </div>
 </div>
@@ -635,7 +635,7 @@ contain all target candidates for the given object and cross-reference.
 &nbsp;&nbsp;&nbsp;*/</span><br/>
 &nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br/>
 <br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -733,7 +733,7 @@ Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nb
 &nbsp;&nbsp;manager.getResourceDescription(resource);<br/>
 <span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;eod&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{<br/>
 &nbsp;&nbsp;System.out.println(converter.toString(eod.getQualifiedName()));<br/>
-}
+}&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -761,7 +761,7 @@ If you are running in a Guice enabled scenario, the code looks like this:
 &nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;rspr.getResourceServiceProvider(res.getURI());<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;resourceServiceProvider.getResourceDescriptionManager();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -774,7 +774,7 @@ If you don&apos;t run in a Guice enabled context you will likely have to directl
 <div class="incode">
 <p class="code">
 <span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr&nbsp;=&nbsp;<br/>
-&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;
+&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;<br/>
 </p>
 </div>
 </div>
@@ -815,7 +815,8 @@ Statemachine&nbsp;:<br/>
 &nbsp;&nbsp;(states+=State)+;<br/>
 <br/>
 Import&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importURI=STRING;&nbsp;<span class="comment">//&nbsp;feature&nbsp;must&nbsp;be&nbsp;named&nbsp;importURI</span>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importURI=STRING;&nbsp;<span class="comment">//&nbsp;feature&nbsp;must&nbsp;be&nbsp;named&nbsp;importURI<br/>
+</span>
 </p>
 </div>
 </div>
@@ -916,7 +917,7 @@ IContainer.Manager&nbsp;manager;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -984,7 +985,7 @@ something up, make sure you bind
 <p class="code">
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;StateBasedContainerManager.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -998,7 +999,7 @@ in the runtime module and
 <p class="code">
 <span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1026,7 +1027,7 @@ In this case, your runtime module should define
 <p class="code">
 public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br/>
 &nbsp;&nbsp;return&nbsp;StateBasedContainerManager.class;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1039,7 +1040,7 @@ and the UI module should bind
 <p class="code">
 <span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1072,7 +1073,7 @@ component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br/>
 &nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/further-models"</span><br/>
 <br/>
 &nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1118,7 +1119,7 @@ following example:
 </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1135,7 +1136,7 @@ classpathScope{stuff&nbsp;from&nbsp;bin/}<br/>
 -&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;foo.jar/}<br/>
 -&gt;&nbsp;...<br/>
 -&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;JRE&nbsp;System&nbsp;Library}<br/>
--&gt;&nbsp;NULLSCOPE{}
+-&gt;&nbsp;NULLSCOPE{}<br/>
 </p>
 </div>
 </div>
@@ -1158,7 +1159,7 @@ that in a declarative way. It looks up methods which have either of the followin
 IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br/>
 <br/>
-IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)
+IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br/>
 </p>
 </div>
 </div>
@@ -1250,7 +1251,7 @@ FowlerDslQualifiedNameProvider&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.create((State)t.eContainer()).getName(),&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1284,7 +1285,7 @@ in and its child namespaces. That is why you can write the following in the exam
 <br/>
 <span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1299,7 +1300,7 @@ Of course the declared elements within a package are as well referable by their 
 <span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{}<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1314,7 +1315,7 @@ The following would as well be ok:
 <span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;bar.Foo&nbsp;{}<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1339,7 +1340,7 @@ Simply override the corresponding binding in your runtime module like shown in t
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IValueConverterService&gt;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;bindIValueConverterService()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MySpecialValueConverterService.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1357,7 +1358,7 @@ by means of an annotated method.
 @ValueConverter(rule&nbsp;=&nbsp;<span class="string">"MyRuleName"</span>)<br/>
 <span class="keyword">public</span>&nbsp;IValueConverter&lt;MyDataType&gt;&nbsp;getMyRuleNameConverter()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyValueConverterImplementation();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1446,7 +1447,7 @@ case where is is hardly possible, is shown in the following example:
 <div class="incode">
 <p class="code">
 MyRule:<br/>
-&nbsp;&nbsp;(xval+=ID&nbsp;|&nbsp;yval+=INT)*;
+&nbsp;&nbsp;(xval+=ID&nbsp;|&nbsp;yval+=INT)*;<br/>
 </p>
 </div>
 </div>
@@ -1648,7 +1649,7 @@ PluralRule:<br/>
 &nbsp;&nbsp;<span class="string">&apos;contents:&apos;</span>&nbsp;count=INT&nbsp;Plural;<br/>
 &nbsp;&nbsp;<br/>
 <span class="keyword">terminal</span>&nbsp;Plural:&nbsp;<br/>
-&nbsp;&nbsp;<span class="string">&apos;item&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;items&apos;</span>;
+&nbsp;&nbsp;<span class="string">&apos;item&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;items&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -1699,7 +1700,7 @@ a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io
 &nbsp;&nbsp;<span class="keyword">void</span>&nbsp;flush()&nbsp;<span class="keyword">throws</span>&nbsp;IOException;<br/>
 &nbsp;&nbsp;<span class="keyword">void</span>&nbsp;writeHidden(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value);<br/>
 &nbsp;&nbsp;<span class="keyword">void</span>&nbsp;writeSemantic(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1778,7 +1779,7 @@ the following example:
 &nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1990,7 +1991,7 @@ The following snippet shows how to use qualified names as fragments:
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;fallback.getEObject(fragment);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2055,7 +2056,7 @@ property in the workflow next to your grammar, e.g.
 <p class="code">
 Generator&nbsp;{<br/>
 &nbsp;&nbsp;encoding&nbsp;=<span class="string">"UTF-8"</span><br/>
-&nbsp;&nbsp;...
+&nbsp;&nbsp;...<br/>
 </p>
 </div>
 </div>
@@ -2094,7 +2095,7 @@ override the runtime service only. It is bound in the runtime module using the b
 &nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IEncodingProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(DispatchingProvider.Runtime.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyEncodingProvider.<span class="keyword">class</span>);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2110,7 +2111,7 @@ implementation in both modules:
 @Override<br/>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IEncodingProvider&gt;&nbsp;bindIEncodingProvider()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyEncodingProvider.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2130,7 +2131,7 @@ options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"UTF-8"</sp
 myXtextResource.load(options);<br/>
 <br/>
 options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"ISO-8859-1"</span>);<br/>
-myXtextResource.save(options);
+myXtextResource.save(options);<br/>
 </p>
 </div>
 </div>
