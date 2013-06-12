@@ -163,7 +163,41 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				}
 			}
 		}
+		if (isGetClassOnTypeLiteral()) {
+			if ("class".equals(description.getName().getFirstSegment())) {
+				LightweightTypeReference receiverType = getSyntacticReceiverType();
+				if (receiverType == null) {
+					throw new IllegalStateException();
+				}
+				receiverType = receiverType.getTypeArguments().get(0);
+				String message = String.format("The syntax for type literals is typeof(%s) or %s.", receiverType.getSimpleName(), receiverType.getSimpleName());
+				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+						Severity.ERROR,
+						IssueCodes.UNEXPECTED_INVOCATION_ON_TYPE_LITERAL,
+						message, 
+						getExpression(),
+						XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 
+						-1, 
+						null);
+				result.accept(diagnostic);
+				return false;
+			}
+		}
 		return true;
+	}
+	
+	protected boolean isGetClassOnTypeLiteral() {
+		JvmIdentifiableElement feature = getFeature();
+		if (isGetClass(feature)) {
+			XExpression receiver = getSyntacticReceiver();
+			if (receiver instanceof XAbstractFeatureCall) {
+				IFeatureLinkingCandidate linkingCandidate = getState().getResolvedTypes().getLinkingCandidate((XAbstractFeatureCall) receiver);
+				if (linkingCandidate != null && linkingCandidate.isTypeLiteral()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	protected boolean isInvalidStaticSyntax() {
@@ -627,25 +661,32 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		 *   Number n = 0;
 		 *   Class<? extends Number> c = n.getClass();
 		 */
+		if (isGetClass(feature)) {
+			LightweightTypeReference receiverType = getReceiverType();
+			if (receiverType == null) {
+				throw new IllegalStateException("Cannot determine the receiver's type");
+			}
+			List<JvmType> rawTypes = receiverType.getRawTypes();
+			if (rawTypes.isEmpty()) {
+				return super.getDeclaredType(feature);
+			}
+			ParameterizedTypeReference result = new ParameterizedTypeReference(receiverType.getOwner(), ((JvmOperation) feature).getReturnType().getType());
+			WildcardTypeReference wildcard = new WildcardTypeReference(receiverType.getOwner());
+			wildcard.addUpperBound(new ParameterizedTypeReference(receiverType.getOwner(), rawTypes.get(0)));
+			result.addTypeArgument(wildcard);
+			return result;
+		}
+		return super.getDeclaredType(feature);
+	}
+	
+	protected boolean isGetClass(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmOperation && feature.getSimpleName().equals("getClass")) {
 			JvmOperation getClassOperation = (JvmOperation) feature;
 			if (getClassOperation.getParameters().isEmpty() && "java.lang.Object".equals(getClassOperation.getDeclaringType().getIdentifier())) {
-				LightweightTypeReference receiverType = getReceiverType();
-				if (receiverType == null) {
-					throw new IllegalStateException("Cannot determine the receiver's type");
-				}
-				List<JvmType> rawTypes = receiverType.getRawTypes();
-				if (rawTypes.isEmpty()) {
-					return super.getDeclaredType(feature);
-				}
-				ParameterizedTypeReference result = new ParameterizedTypeReference(receiverType.getOwner(), getClassOperation.getReturnType().getType());
-				WildcardTypeReference wildcard = new WildcardTypeReference(receiverType.getOwner());
-				wildcard.addUpperBound(new ParameterizedTypeReference(receiverType.getOwner(), rawTypes.get(0)));
-				result.addTypeArgument(wildcard);
-				return result;
+				return true;
 			}
 		}
-		return super.getDeclaredType(feature);
+		return false;
 	}
 	
 	public void applyToModel() {
