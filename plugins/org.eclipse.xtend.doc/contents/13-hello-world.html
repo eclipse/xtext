@@ -5,7 +5,7 @@
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
-<link rel="home" href="xtext.html" title="">
+<link rel="home" href="Xtend.html" title="">
 </head>
 <body>
 <a name="GettingStarted"></a>
@@ -20,7 +20,7 @@ In Xtend, that reads as
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -45,7 +45,7 @@ The hello world example is translated to the following Java code:
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -72,14 +72,7 @@ In the upcoming dialog you will find two examples for Xtend:
 		<em>Xtend Introductory Examples</em> contains a couple of example code snippets illustrating certain
 		  aspects and strengths of Xtend. 
 		  For instance it shows how to build an API which allows to write code like this:
-		  <div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		assertEquals(42.km/h,&nbsp;(40_000.m&nbsp;+&nbsp;2.km)&nbsp;/&nbsp;60.min)<br/>
-		</p>
-		</div>
-		</div>
-		
+		  <span class="inlinecode">assertEquals(42.km/h,&nbsp;(40_000.m&nbsp;+&nbsp;2.km)&nbsp;/&nbsp;60.min)</span>
 		  Also the <a href="14-movies.html#moviesExample" title="Go to &quot;The Movies Example&quot;">movies example</a> explained in detail in <a href="14-movies.html#moviesExample" title="Go to &quot;The Movies Example&quot;">the next section</a>
 		  is included there.
 	</li>
@@ -87,14 +80,7 @@ In the upcoming dialog you will find two examples for Xtend:
 		<em>Xtend Solutions For Euler</em> contains solutions to some of the problems you will find at <a href="http://projecteuler.net/">Project Euler</a>.
 		   These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1">Euler Problem 1</a> can be solved
 		   with this expression :
-		   <div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		(1..999).filter[&nbsp;i&nbsp;|&nbsp;i&nbsp;%&nbsp;3&nbsp;==&nbsp;0&nbsp;||&nbsp;i&nbsp;%&nbsp;5&nbsp;==&nbsp;0&nbsp;].reduce[&nbsp;i1,&nbsp;i2&nbsp;|&nbsp;i1&nbsp;+&nbsp;i2&nbsp;]<br/>
-		</p>
-		</div>
-		</div>
-		
+		   <span class="inlinecode">(1..999).filter[&nbsp;i&nbsp;|&nbsp;i&nbsp;%&nbsp;3&nbsp;==&nbsp;0&nbsp;||&nbsp;i&nbsp;%&nbsp;5&nbsp;==&nbsp;0&nbsp;].reduce[&nbsp;i1,&nbsp;i2&nbsp;|&nbsp;i1&nbsp;+&nbsp;i2&nbsp;]</span>
 	</li>
 </ul>
 

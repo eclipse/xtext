@@ -5,7 +5,7 @@
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
-<link rel="home" href="xtext.html" title="">
+<link rel="home" href="Xtend.html" title="">
 </head>
 <body>
 <a name="moviesExample"></a>
@@ -19,13 +19,7 @@ a file with data about movies and doing some analysis on it.
 <p>
 The movie database is a plain text file (data.csv) with data sets describing movies.
 Here is an example data set:
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-Naked&nbsp;Lunch&nbsp;&nbsp;1991&nbsp;&nbsp;6.9&nbsp;&nbsp;16578&nbsp;&nbsp;Biography&nbsp;&nbsp;Comedy&nbsp;&nbsp;Drama&nbsp;&nbsp;Fantasy<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">Naked&nbsp;Lunch&nbsp;&nbsp;1991&nbsp;&nbsp;6.9&nbsp;&nbsp;16578&nbsp;&nbsp;Biography&nbsp;&nbsp;Comedy&nbsp;&nbsp;Drama&nbsp;&nbsp;Fantasy</span>
 </p>
 <p>
 The values are separated by two spaces. The columns are :
@@ -60,7 +54,7 @@ Let us define a data type <span class="inlinecode">Movie</span> representing a d
 &nbsp;&nbsp;<span class="keyword">double</span>&nbsp;rating<br/>
 &nbsp;&nbsp;<span class="keyword">long</span>&nbsp;numberOfVotes<br/>
 &nbsp;&nbsp;Set&lt;String&gt;&nbsp;categories&nbsp;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -109,7 +103,7 @@ called movies with a list of movies. For the initialization we parse the text fi
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.toSet<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;)<br/>
 &nbsp;&nbsp;]<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -126,13 +120,7 @@ such a method. In fact <span class="inlinecode">readLines()</span> is a static m
 as an <a href="20-classes-and-functions.html#extensionImports" title="Go to &quot;Extension Imports&quot;">extension</a>. Extensions allow us to use this readable syntax.
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*</span>
 </p>
 <p>
 <a class="jdoc" href="http://guava-libraries.googlecode.com/svn/tags/release09/javadoc/com/google/common/io/CharStreams.html" title="View JavaDoc"><abbr title="com.google.common.io.CharStreams" ><span class="inlinecode">CharStreams.readLines(Reader)</span></abbr></a> returns a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;String&gt;</span></abbr></a> on 
@@ -151,13 +139,7 @@ returns a string array (<span class="inlinecode">String[]</span>), which Xtend <
 call <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" ><span class="inlinecode">Iterable.iterator()</span></abbr></a> on it.
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator</span>
 </p>
 <p>
 Now we use the iterator to create an instance of <span class="inlinecode">Movie</span> for each String that it yields.
@@ -176,7 +158,7 @@ is invoked on the iterator to consume its remaining values.
 &nbsp;&nbsp;Double.parseDouble(segments.next),&nbsp;<br/>
 &nbsp;&nbsp;Long.parseLong(segments.next),&nbsp;<br/>
 &nbsp;&nbsp;segments.toSet<br/>
-)<br/>
+)
 </p>
 </div>
 </div>
@@ -196,7 +178,7 @@ We use <em>JUnit</em> to make the individual queries executable and to confirm t
 @Test&nbsp;<span class="keyword">def</span>&nbsp;numberOfActionMovies()&nbsp;{<br/>
 &nbsp;&nbsp;assertEquals(828,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;movies.filter[&nbsp;categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -206,35 +188,15 @@ First the movies are <span class="inlinecode">filter</span>ed. The lambda expres
 the entry <span class="inlinecode"><span class="string">&apos;Action&apos;</span></span>. Note that unlike the lambda we used to turn the lines in the file into movies, we 
 have not declared a parameter name this time. 
 We could have written 
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-movies.filter[&nbsp;movie&nbsp;|&nbsp;movie.categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size<br/>
-</p>
-</div>
-</div>
-
+<span class="inlinecode">movies.filter[&nbsp;movie&nbsp;|&nbsp;movie.categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size</span>
 but since we left out the name and the vertical bar the variable is automatically named <span class="inlinecode"><span class="keyword">it</span></span>.
 <span class="inlinecode"><span class="keyword">it</span></span> is an <a href="30-expressions.html#implicitVariables" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a>. It&apos;s uses are similar to the implicit variable <span class="inlinecode"><span class="keyword">this</span></span>.
 We can write either
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-movies.filter[&nbsp;<span class="keyword">it</span>.categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size<br/>
-</p>
-</div>
-</div>
-
+<span class="inlinecode">movies.filter[&nbsp;<span class="keyword">it</span>.categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size</span>
 or even more compact 
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-movies.filter[&nbsp;categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">movies.filter[&nbsp;categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size</span>
 </p>
 <p>
 Eventually we call <span class="inlinecode">size</span> on the resulting iterable which is an extension method, too. It is defined in the utility class 
@@ -249,7 +211,7 @@ Eventually we call <span class="inlinecode">size</span> on the resulting iterabl
 @Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;yearOfBestMovieFrom80s()&nbsp;{<br/>
 &nbsp;&nbsp;assertEquals(1989,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;movies.filter[&nbsp;(1980..1989).contains(year)&nbsp;].sortBy[&nbsp;rating&nbsp;].last.year)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -265,23 +227,11 @@ Since it is sorted in ascending order, we take the last movie from the list and 
 </p>
 <p>
 We could have sorted descending and take the head of the list as well:
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-movies.filter[&nbsp;(1980..1989).contains(year)&nbsp;].sortBy[&nbsp;-rating&nbsp;].head.year<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">movies.filter[&nbsp;(1980..1989).contains(year)&nbsp;].sortBy[&nbsp;-rating&nbsp;].head.year</span>
 </p>
 <p>
 Another possible solution would be to reverse the order of the sorted list:
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-movies.filter[&nbsp;(1980..1989).contains(year)&nbsp;].sortBy[&nbsp;rating&nbsp;].reverseView.head.year<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">movies.filter[&nbsp;(1980..1989).contains(year)&nbsp;].sortBy[&nbsp;rating&nbsp;].reverseView.head.year</span>
 </p>
 <p>
 Note that first sorting and then taking the last or first is slightly more expensive than needed. We could
@@ -301,7 +251,7 @@ The calls to <span class="inlinecode">movie.year</span> as well as <span class="
 @Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;sumOfVotesOfTop2()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">val</span>&nbsp;<span class="keyword">long</span>&nbsp;sum&nbsp;=&nbsp;movies.sortBy[&nbsp;-rating&nbsp;].take(2).map[&nbsp;numberOfVotes&nbsp;].reduce[&nbsp;a,&nbsp;b&nbsp;|&nbsp;a&nbsp;+&nbsp;b&nbsp;]<br/>
 &nbsp;&nbsp;assertEquals(47_229L,&nbsp;sum)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
