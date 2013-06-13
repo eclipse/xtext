@@ -467,13 +467,7 @@ classes in the package <em>org.eclipse.xtext.gmf.glue.editingdomain</em>. To act
 have to add a line 
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XtextNodeModelReconciler.adapt(editingDomain);<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">XtextNodeModelReconciler.adapt(editingDomain);</span>
 </p>
 <p>
 in the method <span class="inlinecode">createEditingDomain()</span> of the generated <em>EntitiesDocumentProvider</em>. To avoid changing the 
@@ -484,7 +478,7 @@ generated code, you can modify the code generation template for that class by se
 <div class="incode">
 <p class="code">
 Dynamic&nbsp;Templates&nbsp;-&gt;&nbsp;<span class="keyword">true</span><br/>
-&nbsp;&nbsp;Template&nbsp;Directory&nbsp;=&nbsp;<span class="string">"org.eclipse.xtext.example.gmf.models/templates"</span><br/>
+&nbsp;&nbsp;Template&nbsp;Directory&nbsp;=&nbsp;<span class="string">"org.eclipse.xtext.example.gmf.models/templates"</span>
 </p>
 </div>
 </div>
@@ -493,13 +487,7 @@ Dynamic&nbsp;Templates&nbsp;-&gt;&nbsp;<span class="keyword">true</span><br/>
 in the <em>GenEditorGenerator</em> and 
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-Required&nbsp;Plugins&nbsp;-&gt;&nbsp;<span class="string">"org.eclipse.xtext.gmf.glue"</span>&nbsp;<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">Required&nbsp;Plugins&nbsp;-&gt;&nbsp;<span class="string">"org.eclipse.xtext.gmf.glue"</span></span>
 </p>
 <p>
 in the <em>GenPlugin</em> element of the gmfgen before generating the diagram editor anew.

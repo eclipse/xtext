@@ -52,7 +52,7 @@ That is, the syntax and the grammar for the language look like this:
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -110,7 +110,7 @@ Entity:<br/>
 &nbsp;<br/>
 Feature:<br/>
 &nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
-;<br/>
+;
 </p>
 </div>
 </div>
@@ -144,7 +144,7 @@ the generated code.
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setAuthor(java.lang.String&nbsp;author)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.author&nbsp;=&nbsp;author;<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -167,7 +167,7 @@ Eclipse environment.
 <span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -195,7 +195,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;}<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -209,14 +209,7 @@ all entities within a resource and trigger code generation for each one.
 		    that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
 		    inject the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> into the generator.
 		    
-		    <div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
-		</p>
-		</div>
-		</div>
-		
+		    <span class="inlinecode">@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider</span>
 		    
 		    This allows to ask for the name of an entity. It is straightforward to convert the name into
 		    a file name:
@@ -230,7 +223,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
 		&nbsp;&nbsp;}<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -245,11 +238,11 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-		&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;<br/>
 		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;{<br/>
+		&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;{<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -265,13 +258,13 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+		&nbsp;&nbsp;«IF&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null»<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;<br/>
+		&nbsp;&nbsp;«ENDIF»<br/>
 		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;{<br/>
+		&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;{<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -281,14 +274,14 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+		&nbsp;&nbsp;«IF&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null»<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;<br/>
+		&nbsp;&nbsp;«ENDIF»<br/>
 		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
+		&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;«IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;»extends&nbsp;«e.superType.fullyQualifiedName»&nbsp;«ENDIF»{<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -306,16 +299,16 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-		&nbsp;&nbsp;private&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;private&nbsp;«f.type.fullyQualifiedName»&nbsp;«f.name»;<br/>
 		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;public&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;get&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;public&nbsp;«f.type.fullyQualifiedName»&nbsp;get«f.name.toFirstUpper»()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;«f.name»;<br/>
 		&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;(&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>f.name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;public&nbsp;void&nbsp;set«f.name.toFirstUpper»(«f.type.fullyQualifiedName»&nbsp;«f.name»)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;this.«f.name»&nbsp;=&nbsp;«f.name»;<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -328,17 +321,17 @@ all entities within a resource and trigger code generation for each one.
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
-		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+		&nbsp;&nbsp;«IF&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null»<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;<br/>
+		&nbsp;&nbsp;«ENDIF»<br/>
 		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f:e.features<span class="string">&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile<span class="string">&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+		&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;«IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;»extends&nbsp;«e.superType.fullyQualifiedName»&nbsp;«ENDIF»{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;«FOR&nbsp;f:e.features»<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«f.compile»<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOR»<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -380,30 +373,30 @@ and see how the compiler will pick up your sample <em>Entities</em> and generate
 &nbsp;&nbsp;}<br/>
 <br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null»<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f:e.features<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;«IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;»extends&nbsp;«e.superType.fullyQualifiedName»&nbsp;«ENDIF»{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOR&nbsp;f:e.features»<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«f.compile»<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOR»<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
 <br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;«f.type.fullyQualifiedName»&nbsp;«f.name»;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;get&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;«f.type.fullyQualifiedName»&nbsp;get«f.name.toFirstUpper»()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;«f.name»;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;(&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>f.name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set«f.name.toFirstUpper»(«f.type.fullyQualifiedName»&nbsp;«f.name»)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.«f.name»&nbsp;=&nbsp;«f.name»;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -448,7 +441,7 @@ write the test case.
 		@InjectWith(DomainmodelInjectorProvider)<br/>
 		@RunWith(XtextRunner)<br/>
 		<span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -479,7 +472,7 @@ write the test case.
 		&nbsp;&nbsp;&nbsp;&nbsp;}"</span>)<br/>
 		&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;entity&nbsp;=&nbsp;model.elements.head&nbsp;<span class="keyword">as</span>&nbsp;Entity<br/>
 		&nbsp;&nbsp;assertSame(entity,&nbsp;entity.features.head.type)<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -515,7 +508,7 @@ of code:
 &nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage$Literals::TYPE__NAME);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -545,7 +538,7 @@ and look for features with equal names.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superEntity&nbsp;=&nbsp;superEntity.getSuperType();<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>

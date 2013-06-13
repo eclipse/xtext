@@ -46,7 +46,7 @@ translated to Java source code. The syntax should look very familiar. Here is an
 &nbsp;&nbsp;&nbsp;&nbsp;zip:&nbsp;String<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;city:&nbsp;String<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -171,7 +171,7 @@ Model:<br/>
 &nbsp;&nbsp;greetings+=Greeting*;<br/>
 &nbsp;&nbsp;<br/>
 Greeting:<br/>
-&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;<br/>
+&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;
 </p>
 </div>
 </div>
@@ -217,8 +217,7 @@ Operation:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>(params+=FullJvmFormalParameter&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?<span class="string">&apos;)&apos;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
-<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
 </p>
 </div>
 </div>
@@ -234,7 +233,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase
 		</p>
 		</div>
 		</div>
@@ -251,7 +250,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<p class="code">
 		Domainmodel:<br/>
 		&nbsp;&nbsp;importSection=XImportSection?<br/>
-		&nbsp;&nbsp;elements+=AbstractElement*;<br/>
+		&nbsp;&nbsp;elements+=AbstractElement*;
 		</p>
 		</div>
 		</div>
@@ -269,7 +268,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		AbstractElement:<br/>
-		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity;<br/>
+		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity;
 		</p>
 		</div>
 		</div>
@@ -284,7 +283,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		PackageDeclaration:<br/>
 		&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name=QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;elements+=AbstractElement*<br/>
-		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
 		</p>
 		</div>
 		</div>
@@ -308,7 +307,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ValidID&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=JvmTypeReference)?&nbsp;<span class="string">&apos;{&apos;</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;features+=Feature*<br/>
-		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
 		</p>
 		</div>
 		</div>
@@ -328,7 +327,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		Feature:<br/>
-		&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation;<br/>
+		&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation;
 		</p>
 		</div>
 		</div>
@@ -342,7 +341,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<div class="incode">
 		<p class="code">
 		Property:<br/>
-		&nbsp;&nbsp;name=ValidID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference;<br/>
+		&nbsp;&nbsp;name=ValidID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference;
 		</p>
 		</div>
 		</div>
@@ -359,7 +358,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>(params+=FullJvmFormalParameter&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?<span class="string">&apos;)&apos;</span><br/>
 		&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-		&nbsp;&nbsp;body=XBlockExpression;<br/>
+		&nbsp;&nbsp;body=XBlockExpression;
 		</p>
 		</div>
 		</div>
@@ -374,7 +373,7 @@ Let&apos;s have a look at what the different grammar constructs mean:
 		<p class="code">
 		{<br/>
 		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"Hello&nbsp;World"</span>&nbsp;+&nbsp;<span class="string">"!"</span><br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -483,7 +482,7 @@ in the src folder. Please replace its contents with the following :
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -501,7 +500,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		<p class="code">
 		<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{
 		</p>
 		</div>
 		</div>
@@ -517,7 +516,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		<div class="incode">
 		<p class="code">
 		acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;&nbsp;<br/>
-		...<br/>
+		...
 		</p>
 		</div>
 		</div>
@@ -533,14 +532,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 	</li>
 	<li>
 		
-		    <div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		).initializeLater&nbsp;[<br/>
-		</p>
-		</div>
-		</div>
-		
+		    <span class="inlinecode">).initializeLater&nbsp;[</span>
 		    The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
 		    and be passed to the <em>acceptor</em>.
 		    The types&apos; features are created in the second phase. The actions in this phase are specified in the lambda
@@ -548,14 +540,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 	</li>
 	<li>
 		
-		    <div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		documentation&nbsp;=&nbsp;element.documentation<br/>
-		</p>
-		</div>
-		</div>
-		
+		    <span class="inlinecode">documentation&nbsp;=&nbsp;element.documentation</span>
 		    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
 		    to an invocation of the method 
 		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#setDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmIdentifiableElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmIdentifiableElement" >JvmIdentifiableElement</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java" title="View Source Code" >(src)</a> element,String documentation)</em>
@@ -570,7 +555,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">if</span>&nbsp;(element.superType&nbsp;!=&nbsp;null)<br/>
-		&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;entity.superType.cloneWithProxies<br/>
+		&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;entity.superType.cloneWithProxies
 		</p>
 		</div>
 		</div>
@@ -593,7 +578,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
 		</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;}<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -612,7 +597,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -632,7 +617,7 @@ for details, especially the <a class="jdoc" href="http://download.eclipse.org/mo
 		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
 		&nbsp;&nbsp;]<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
