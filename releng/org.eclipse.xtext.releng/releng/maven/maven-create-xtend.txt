@@ -1,8 +1,0 @@
-Plain Java
-mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend -DarchetypeArtifactId=xtend-archetype -DarchetypeCatalog=http://build.eclipse.org/common/xtend/maven/
-(optional) mvn -f <artifact.id>/pom.xml eclipse:eclipse
-mvn -f <artifact.id>/pom.xml install
-
-Android
-mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend -DarchetypeArtifactId=xtend-android-archetype -DarchetypeCatalog=http://build.eclipse.org/common/xtend/maven/
-mvn -f <artifact.id>/pom.xml clean package android:emulator-start android:deploy android:run
