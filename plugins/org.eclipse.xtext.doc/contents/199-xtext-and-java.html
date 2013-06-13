@@ -249,39 +249,39 @@ and assemble the whole file&apos;s content in a second step.
 &nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;<span class="keyword">it</span>)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;«val&nbsp;importManager&nbsp;=&nbsp;new&nbsp;ImportManager(true)»&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;«val&nbsp;body&nbsp;=&nbsp;body(importManager)»<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;eContainer&nbsp;!=&nbsp;null»<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«eContainer.fullyQualifiedName»;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">val</span>&nbsp;importManager&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ImportManager(true)<span class="string">&raquo;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">val</span>&nbsp;body&nbsp;=&nbsp;body(importManager)<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;«FOR&nbsp;i:importManager.imports»<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;«i»;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOR»<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;i:importManager.imports<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;&laquo;</span>i<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;«body»<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>body<span class="string">&raquo;<br/>
 &nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;body(Entity&nbsp;<span class="keyword">it</span>,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;superType&nbsp;!=&nbsp;null»<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;«superType.shortName(importManager)»&nbsp;«ENDIF»{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOR&nbsp;f&nbsp;:&nbsp;features»<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«f.compile(importManager)»<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOR»<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;superType&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;&laquo;</span>superType.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f&nbsp;:&nbsp;features<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile(importManager)<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;<span class="keyword">it</span>,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;«type.shortName(importManager)»&nbsp;«name»;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;«type.shortName(importManager)»&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get«name.toFirstUpper»()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;«name»;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get&laquo;</span>name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set«name.toFirstUpper»(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«type.shortName(importManager)»&nbsp;«name»)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.«name»&nbsp;=&nbsp;«name»;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>name.toFirstUpper<span class="string">&raquo;(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span>name<span class="string">&raquo;)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
 &nbsp;&nbsp;<br/>
