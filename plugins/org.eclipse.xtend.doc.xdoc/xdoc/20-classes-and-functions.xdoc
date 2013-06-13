@@ -446,7 +446,7 @@ for the annotation property named code[value]. Annotation
 values that expect arrays can handle single values, too. Value arrays are enclosed in array 
 literals code[Xtend][#\['first', 'second'\]].
 The semantics for annotations are exactly like defined in the 
-link[http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html][Java Language Specification]. 
+link[http://docs.oracle.com/javase/specs/jls/se5.0/html/j3TOC.html][Java Language Specification]. 
 Here is an example:
 
 code[Xtend][
