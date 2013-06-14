@@ -926,7 +926,155 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
-		
+	
+	@Test
+	def void testErrorModel_61() throws Exception {
+		'''
+			class C<T> implements C1<T> {
+				def void m(C1<?> p) {
+					m(this)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_62() throws Exception {
+		'''
+			class C {
+				def void m(C1<?> p) {
+					m(a)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_63() throws Exception {
+		'''
+			class C {
+				def void m(C1<?> p) {
+					m(null as C1<String>)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_64() throws Exception {
+		'''
+			class C<T> implements C1<T> {
+				def void m(C1<T> p) {
+					m(this)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_65() throws Exception {
+		'''
+			class C {
+				def void m(C1<String> p) {
+					m(a)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_66() throws Exception {
+		'''
+			class C {
+				def void m(C1<String> p) {
+					m(null as C1<String>)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_67() throws Exception {
+		'''
+			class C<T> implements C1<T> {
+				def void m(C2<?> p) {
+					m(this)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_68() throws Exception {
+		'''
+			class C<T> implements C1<T> {
+				def void m(C3<?, ?> p) {
+					m(this)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_69() throws Exception {
+		'''
+			class C<T> implements C1<T> {
+				def void m(C4<?, ?> p) {
+					m(this)
+				}
+			}
+			interface C1<A1> extends C2<A1> {}
+			interface C2<A2> extends C3<A2, C2<A2>> {}
+			interface C3<A3, B3> extends C4<A3, C1<A3>> {}
+			interface C4<A4, B4> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_70() throws Exception {
+		'''
+			class C {
+				def void m(C1<?> p) {
+					m(a)
+				}
+			}
+			interface C1<A1> extends C2<C1<C1<A1>>> {}
+			interface C2<A2> {}
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)

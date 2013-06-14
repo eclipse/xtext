@@ -18,6 +18,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	SkipLastCharactersAnnotationCompilerSmokeTest.class,
 	SkipLastCharactersCompilerBugSmokeTest.class,
+	SkipLastCharactersCompilerBug410767SmokeTest.class,
 	SkipLastCharactersCompilerSmokeTest.class,
 	SkipLastCharactersConfiguredCompilerSmokeTest.class,
 	SkipLastCharactersDataCompilerSmokeTest.class,

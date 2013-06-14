@@ -18,6 +18,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	SkipTokensInBetweenAnnotationCompilerSmokeTest.class,
 	SkipTokensInBetweenCompilerBugSmokeTest.class,
+	SkipTokensInBetweenCompilerBug410767SmokeTest.class,
 	SkipTokensInBetweenCompilerSmokeTest.class,
 	SkipTokensInBetweenConfiguredCompilerSmokeTest.class,
 	SkipTokensInBetweenDataCompilerSmokeTest.class,
