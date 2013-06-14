@@ -1741,6 +1741,272 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_61() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> implements C1<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C1<?> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(this)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_62() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C1<?> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(a)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_63() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C1<?> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(null as C1<String>)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_64() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> implements C1<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C1<T> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(this)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_65() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C1<String> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(a)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_66() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C1<String> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(null as C1<String>)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_67() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> implements C1<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C2<?> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(this)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_68() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> implements C1<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C3<?, ?> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(this)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_69() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> implements C1<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C4<?, ?> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(this)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<A1> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> extends C3<A2, C2<A2>> {}");
+    _builder.newLine();
+    _builder.append("interface C3<A3, B3> extends C4<A3, C1<A3>> {}");
+    _builder.newLine();
+    _builder.append("interface C4<A4, B4> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_70() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(C1<?> p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(a)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface C1<A1> extends C2<C1<C1<A1>>> {}");
+    _builder.newLine();
+    _builder.append("interface C2<A2> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

@@ -168,6 +168,11 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public String getUniqueIdentifier() {
+		return component.getUniqueIdentifier() + "[]";
+	}
+	
+	@Override
 	public String getJavaIdentifier() {
 		return component.getJavaIdentifier() + "[]";
 	}

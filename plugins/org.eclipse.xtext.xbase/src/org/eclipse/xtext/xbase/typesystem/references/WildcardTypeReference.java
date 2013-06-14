@@ -19,6 +19,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.IdentifierFunction;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.JavaIdentifierFunction;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.SimpleNameFunction;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.UniqueIdentifierFunction;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
@@ -276,17 +280,22 @@ public class WildcardTypeReference extends LightweightTypeReference {
 
 	@Override
 	public String getSimpleName() {
-		return getAsString(new SimpleNameFunction());
+		return getAsString(SimpleNameFunction.INSTANCE);
 	}
 	
 	@Override
 	public String getIdentifier() {
-		return getAsString(new IdentifierFunction());
+		return getAsString(IdentifierFunction.INSTANCE);
+	}
+	
+	@Override
+	public String getUniqueIdentifier() {
+		return getAsString(UniqueIdentifierFunction.INSTANCE);
 	}
 	
 	@Override
 	public String getJavaIdentifier() {
-		return getAsString(new JavaIdentifierFunction());
+		return getAsString(JavaIdentifierFunction.INSTANCE);
 	}
 	
 	@Override

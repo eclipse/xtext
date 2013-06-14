@@ -54,6 +54,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
 	@Test
 	def testIfExpression_02() {
 		assertCompilesTo('''

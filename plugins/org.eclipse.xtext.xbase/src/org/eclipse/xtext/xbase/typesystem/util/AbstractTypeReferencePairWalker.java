@@ -207,11 +207,13 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 			TypeParameterSubstitutor<?> declaredSubstitutor = createTypeParameterSubstitutor(declaredMapping);
 			Set<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
 			Set<JvmTypeParameter> visited = Sets.newHashSet();
-			for (JvmTypeParameter actualBoundParameter : actualBoundParameters) {
+			outer: for (JvmTypeParameter actualBoundParameter : actualBoundParameters) {
 				if (visited.add(actualBoundParameter)) {
 					LightweightMergedBoundTypeArgument declaredBoundArgument = declaredMapping.get(actualBoundParameter);
 					while(declaredBoundArgument == null && actualBoundParameter != null) {
 						actualBoundParameter = findMappedParameter(actualBoundParameter, actualMapping, visited);
+						if (actualBoundParameter == null)
+							continue outer;
 						declaredBoundArgument = declaredMapping.get(actualBoundParameter);
 					}
 					if (declaredBoundArgument != null) {
@@ -228,8 +230,9 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 							if (reference.getType() != actual.getType() 
 									|| declaredTypeReference.getType() != declaration.getType() 
 									|| !reference.getIdentifier().equals(actual.getIdentifier())
-									|| !declaredTypeReference.getIdentifier().equals(declaration.getIdentifier()))
+									|| !declaredTypeReference.getIdentifier().equals(declaration.getIdentifier())) {
 								outerVisit(declaredTypeReference, actual, declaration, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+							}
 						}
 					}
 				}
@@ -290,8 +293,11 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 
 	private Object origin;
 	
+	private final Set<String> recursionGuard;
+	
 	protected AbstractTypeReferencePairWalker(ITypeReferenceOwner owner) {
 		this.owner = owner;
+		this.recursionGuard = Sets.newHashSetWithExpectedSize(3);
 		parameterizedTypeReferenceTraverser = createParameterizedTypeReferenceTraverser();
 		wildcardTypeReferenceTraverser = createWildcardTypeReferenceTraverser();
 		arrayTypeReferenceTraverser = createArrayTypeReferenceTraverser();
@@ -389,7 +395,20 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	}
 	
 	protected void outerVisit(LightweightTypeReference declaredType, LightweightTypeReference actualType) {
-		declaredType.accept(this, actualType);
+		if (declaredType == actualType)
+			return;
+		String declaredKey = declaredType.getUniqueIdentifier();
+		String actualKey = actualType.getUniqueIdentifier();
+		if (!declaredKey.equals(actualKey)) {
+			final String key = declaredKey + "//" + actualKey;
+			if (recursionGuard.add(key)) {
+				try {
+					declaredType.accept(this, actualType);
+				} finally {
+					recursionGuard.remove(key);
+				}
+			}
+		}
 	}
 
 	public void processPairedReferences(LightweightTypeReference declaredType, LightweightTypeReference actualType) {

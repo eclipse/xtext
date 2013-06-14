@@ -183,6 +183,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		return resolved;
 	}
 	
+	@Override
 	public boolean isSynonym() {
 		return synonym;
 	}
@@ -202,12 +203,17 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public String getSimpleName() {
-		return getAsString(new SimpleNameFunction());
+		return getAsString(SimpleNameFunction.INSTANCE);
 	}
 	
 	@Override
 	public String getIdentifier() {
-		return getAsString(new IdentifierFunction());
+		return getAsString(IdentifierFunction.INSTANCE);
+	}
+
+	@Override
+	public String getUniqueIdentifier() {
+		return getAsString(UniqueIdentifierFunction.INSTANCE);
 	}
 	
 	@Override

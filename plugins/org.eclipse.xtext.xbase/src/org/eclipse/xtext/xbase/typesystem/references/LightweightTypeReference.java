@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -57,6 +58,12 @@ import com.google.common.primitives.Ints;
 public abstract class LightweightTypeReference {
 	
 	public static class IdentifierFunction implements Function<LightweightTypeReference, String> {
+		
+		public static final IdentifierFunction INSTANCE = new IdentifierFunction();
+		
+		private IdentifierFunction() {
+		}
+		
 		public String apply(@Nullable LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
@@ -64,7 +71,27 @@ public abstract class LightweightTypeReference {
 		}
 	}
 	
+	public static class UniqueIdentifierFunction implements Function<LightweightTypeReference, String> {
+		
+		public static final UniqueIdentifierFunction INSTANCE = new UniqueIdentifierFunction();
+		
+		private UniqueIdentifierFunction() {
+		}
+		
+		public String apply(@Nullable LightweightTypeReference reference) {
+			if (reference == null)
+				throw new NullPointerException("reference");
+			return reference.getUniqueIdentifier();
+		}
+	}
+	
 	public static class JavaIdentifierFunction implements Function<LightweightTypeReference, String> {
+		
+		public static final JavaIdentifierFunction INSTANCE = new JavaIdentifierFunction();
+		
+		private JavaIdentifierFunction() {
+		}
+		
 		public String apply(@Nullable LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
@@ -73,6 +100,12 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public static class SimpleNameFunction implements Function<LightweightTypeReference, String> {
+		
+		public static final SimpleNameFunction INSTANCE = new SimpleNameFunction();
+		
+		private SimpleNameFunction() {
+		}
+		
 		public String apply(@Nullable LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
@@ -477,6 +510,28 @@ public abstract class LightweightTypeReference {
 	public abstract String getSimpleName();
 	
 	public abstract String getIdentifier();
+	
+	/**
+	 * Returns an identifier that allows to disambiguate type parameter names that have
+	 * different origins. Rather than just giving the name of the type parameter, it also
+	 * prints the declarator.
+	 */
+	public abstract String getUniqueIdentifier();
+	
+	// consider using a compact, not human-readable form, e.g. using the hashCode of the type
+	protected String getUniqueIdentifier(JvmType type) {
+		String typeIdentifier = type.getIdentifier();
+		if (type instanceof JvmTypeParameter) {
+			JvmIdentifiableElement declarator = (JvmIdentifiableElement) ((JvmTypeParameter) type).getDeclarator();
+			// may happen in unit tests
+			if (declarator != null) {
+				typeIdentifier = typeIdentifier + ":" + declarator.getQualifiedName();
+			} else {
+				typeIdentifier = typeIdentifier + ":";
+			}
+		}
+		return typeIdentifier;
+	}
 	
 	public abstract String getJavaIdentifier();
 	

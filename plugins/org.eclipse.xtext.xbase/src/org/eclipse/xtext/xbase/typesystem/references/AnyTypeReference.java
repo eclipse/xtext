@@ -64,6 +64,11 @@ public class AnyTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public String getUniqueIdentifier() {
+		return "null";
+	}
+	
+	@Override
 	public String getJavaIdentifier() {
 		return "java.lang.Object";
 	}

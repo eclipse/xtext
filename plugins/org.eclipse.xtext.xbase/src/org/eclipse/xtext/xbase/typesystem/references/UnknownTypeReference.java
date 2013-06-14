@@ -90,6 +90,11 @@ public class UnknownTypeReference extends LightweightTypeReference {
 	public String getIdentifier() {
 		return getSimpleName();
 	}
+	
+	@Override
+	public String getUniqueIdentifier() {
+		return getSimpleName();
+	}
 
 	@Override
 	public String getJavaIdentifier() {
