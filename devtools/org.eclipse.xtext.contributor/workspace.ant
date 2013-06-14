@@ -2,7 +2,7 @@
 <!--
 	Headless materialization of Xtext workspace
 
-	Author: Lorenzo Bettini
+	Author: Lorenzo Bettini, Dennis Huebner
 
 	Properties:
 		WORKSPACE  			where workspace will be generated,
@@ -16,77 +16,66 @@
 <project name="worskspace" default="materialize.workspace">
 	<property name="WORKSPACE" location="${user.home}/workspaces/xtext-sources" />
 	<property name="projects.location" location="${WORKSPACE}" />
-	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext"/>
+
+	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext-1134"/>
 	<property name="checkout.location" location="${git.clone.dest}"/>
+
 	<property name="target.platform.dir" value="target.platform" />
 	<property name="target.platform" location="${WORKSPACE}/${target.platform.dir}" />
 	<property name="eclipse.download" value="http://download.eclipse.org" />
 
 	<property name="buckminster.home" location="${user.home}/buckminster" />
-	<property name="b3.home" location="${user.home}/b3" />
-		
+
 	<property name="director.install.dest" location="${user.home}" />
 	<property name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
 
-	<target name="materialize.workspace" depends="install.buckminster.headless,cleanup" >
+	<target name="materialize.workspace" depends="install.buckminster.headless,cleanup">
 		<echo message="output workspace     : ${WORKSPACE}" />
 		<echo message="git clone repository : ${git.clone.dest}" />
-		
-		<antcall target="target.platform.path" />
-		<antcall target="resolve.releng.project" />
+
+		<antcall target="set.target.platform.path" />
+		<antcall target="clone.projects" />
+		<antcall target="import.workspace.settings" />
 		<antcall target="import.api.baseline" />
-		<antcall target="add.baseline" />
-		<antcall target="import.mspec" />
-		<antcall target="resolve.cquery" />
+		<antcall target="set.api.baseline" />
+		<antcall target="import.tp" />
 		<antcall target="perform.build" />
-		
+
 		<echo message=" " />
 		<echo message="Workspace materialized in: ${WORKSPACE}" />
 	</target>
 
-	<target name="target.platform.path" >
-		<run_buckminster 
-			command='setpref targetPlatformPath="${target.platform}"' 
-		/>
+	<target name="set.target.platform.path">
+		<run_buckminster command='setpref targetPlatformPath="${target.platform}"' />
+	</target>
+
+	<target name="clone.projects">
+		<echo message="IMPORTANT: Initial cloning a git repository may took a while." />
+		<run_buckminster command="import ${user.home}/git/org.eclipse.xtext/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
+	<!--	<run_buckminster command="import http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/plain/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
+	-->
+	</target>
+
+	<target name="import.api.baseline">
+		<run_buckminster command='importtargetdefinition "${checkout.location}/releng/org.eclipse.xtext.releng/api-baseline/api-baseline.target"' />
+	</target>
+
+	<target name="set.api.baseline">
+		<run_buckminster command='addbaseline -A "api-baseline"' />
+	</target>
+
+	<target name="import.tp">
+		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
+		<run_buckminster command='import ${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec' />
+	</target>
+
+	<target name="import.workspace.settings">
+		<run_buckminster command='importprefs -F ${checkout.location}/devtools/org.eclipse.xtext.contributor/workspace.epf' />
 	</target>
 	
-	<target name="resolve.releng.project" >
-		<echo message="IMPORTANT: Initial cloning a git repository may took a while." />
-		<run_buckminster 
-			command="import http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" 
-		/>
-	</target>
-
-	<target name="import.api.baseline" >
-		<run_buckminster 
-			command='importtargetdefinition "${checkout.location}/releng/org.eclipse.xtext.releng/api-baseline/api-baseline.target"' 
-		/>
-	</target>
-
-	<target name="add.baseline" >
-		<run_buckminster 
-			command='addbaseline -A "api-baseline"' 
-		/>
-	</target>
-
-	<target name="import.mspec" >
-		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
-		<run_buckminster 
-			command='import ${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec' 
-		/>
-	</target>
-
-	<!--<target name="resolve.cquery" >
-		<run_buckminster 
-			command='resolve file:/Users/dhuebner/git/org.eclipse.xtext/devtools/org.eclipse.xtext.contributor/xtext-contr.cquery' 
-		/>
-	</target>
-	-->
-	<target name="perform.build" >
-		<run_buckminster 
-			command='build' 
-		/>
+	<target name="perform.build">
+		<run_buckminster command='build' />
 	</target>
 
 	<!-- = = = = = = = = = = = = = = = = =
@@ -117,27 +106,8 @@
 			</java>
 		</sequential>
 	</macrodef>
-	
-	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: run_b3_aggregator
-          pass the commandsfile to execute      
-         = = = = = = = = = = = = = = = = = -->
-	<macrodef name="run_b3_aggregator">
-		<attribute name="buildmodel" default="default" />
-		<sequential>
-			<java fork="true" dir="${b3.home}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
-				<classpath>
-					<fileset dir="${b3.home}/plugins">
-						<include name="org.eclipse.equinox.launcher_*.jar" />
-					</fileset>
-				</classpath>
-				<arg line='aggregate' />
-				<arg line='--buildModel "@{buildmodel}"' />
-				<!-- <arg line='-L DEBUG' /> -->
-				<jvmarg line=" -Xms256m -Xmx512m" />
-			</java>
-		</sequential>
-	</macrodef>
+
+
 
 	<target name="cleanup">
 		<delete failonerror="false" includeemptydirs="true">
@@ -166,7 +136,7 @@
 		<antcall target="install.buckminster.headless.internal" />
 	</target>
 
-	<target name="install.buckminster.headless.internal" unless="buckminster.headless.installed" >
+	<target name="install.buckminster.headless.internal" unless="buckminster.headless.installed">
 		<antcall target="install.p2.director" />
 		<echo message="" />
 		<echo message="Installing Buckminster Headless into ${buckminster.home}..." />
@@ -187,33 +157,6 @@
 			<arg line="-i org.eclipse.buckminster.git.headless.feature.feature.group" />
 		</java>
 	</target>
-	
-	<target name="install.b3.headless">
-		<condition property="b3.headless.installed">
-			<available file="${b3.home}/b3" />
-		</condition>
-		<antcall target="install.b3.headless.internal" />
-	</target>
-
-	<target name="install.b3.headless.internal" unless="b3.headless.installed" >
-		<antcall target="install.p2.director" />
-		<echo message="" />
-		<echo message="Installing B3 Headless into ${b3.home}..." />
-		<java fork="true" dir="${director.dir}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
-			<sysproperty key="eclipse.p2.mirrors" value="false" />
-			<classpath>
-				<fileset dir="${director.dir}/plugins">
-					<include name="org.eclipse.equinox.launcher_*.jar" />
-				</fileset>
-			</classpath>
-			<arg line='-data "${director.dir}/workspace"' />
-			<arg line="-r ${eclipse.download}/modeling/emft/b3/headless-4.2" />
-			<arg line='-d "${b3.home}"' />
-			<arg line="-p b3" />
-			<arg line="-i org.eclipse.b3.cli.product" />
-			<arg line="-i org.eclipse.b3.aggregator.engine.feature.feature.group" />
-		</java>
-	</target>
 
 	<target name="install.p2.director">
 		<condition property="p2.director.installed">
@@ -225,11 +168,7 @@
 	<target name="install.p2.director.internal" unless="p2.director.installed">
 		<echo message="" />
 		<echo message="Installing director from ${director.url}..." />
-		<tempfile destdir="${java.io.tmpdir}"
-						          prefix="director-"
-						          suffix=".zip"
-						          property="director.zip"
-						          deleteonexit="true" />
+		<tempfile destdir="${java.io.tmpdir}" prefix="director-" suffix=".zip" property="director.zip" deleteonexit="true" />
 		<get src="${director.url}" dest="${director.zip}" />
 		<unzip src="${director.zip}" dest="${director.install.dest}" />
 		<delete file="${director.zip}" />
