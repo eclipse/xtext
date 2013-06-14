@@ -25,6 +25,10 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.IdentifierFunction;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.JavaIdentifierFunction;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.SimpleNameFunction;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.UniqueIdentifierFunction;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
@@ -344,17 +348,22 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public String getSimpleName() {
-		return getAsString(type.getSimpleName(), new SimpleNameFunction());
+		return getAsString(type.getSimpleName(), SimpleNameFunction.INSTANCE);
 	}
 	
 	@Override
 	public String getIdentifier() {
-		return getAsString(type.getIdentifier(), new IdentifierFunction());
+		return getAsString(type.getIdentifier(), IdentifierFunction.INSTANCE);
 	}
 	
 	@Override
+	public String getUniqueIdentifier() {
+		return getAsString(getUniqueIdentifier(type), UniqueIdentifierFunction.INSTANCE);
+	}
+
+	@Override
 	public String getJavaIdentifier() {
-		return getAsString(type.getIdentifier(), new JavaIdentifierFunction());
+		return getAsString(type.getIdentifier(), JavaIdentifierFunction.INSTANCE);
 	}
 	
 	protected String getAsString(String type, Function<LightweightTypeReference, String> format) {

@@ -406,7 +406,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		List<LightweightTypeReference> typeArguments = ((ParameterizedTypeReference) type).getTypeArguments();
 		if (typeArguments.isEmpty())
 			return typeSimpleName;
-		return typeSimpleName + "<" + Joiner.on(", ").join(Iterables.transform(typeArguments, new LightweightTypeReference.SimpleNameFunction())) + ">";
+		return typeSimpleName + "<" + Joiner.on(", ").join(Iterables.transform(typeArguments, LightweightTypeReference.SimpleNameFunction.INSTANCE)) + ">";
 	}
 
 	protected LightweightTypeReference createTypeReference(JvmType type, ITypeComputationState state) {

@@ -565,6 +565,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public String getUniqueIdentifier() {
+		if (internalIsResolved()) {
+			return resolvedTo.getUniqueIdentifier();
+		}
+		return "Unbound[" + getUniqueIdentifier(typeParameter) + ":" + handle + "]";
+	}
+	
+	@Override
 	public String getJavaIdentifier() {
 		if (internalIsResolved()) {
 			return resolvedTo.getJavaIdentifier();
