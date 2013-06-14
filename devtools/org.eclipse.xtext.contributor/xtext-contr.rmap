@@ -17,7 +17,6 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.uri" value="${git.uri}" />
-			<rm:property key="git.remote.name" value="review" />
 			<rm:property key="git.auto.fetch" value="true" />
 			<rm:uri format="{0},plugins/{1}">
 				<bc:propertyRef key="git.clone.dest" />
@@ -29,7 +28,6 @@
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri" value="${git.uri}"/>
 			<rm:property key="git.auto.fetch" value="true" />
-			<rm:property key="git.remote.name" value="review" />
 			<rm:uri format="{0},features/{1}.feature">
 				<bc:propertyRef key="git.clone.dest" />
 				<bc:propertyRef key="buckminster.component" />
@@ -38,7 +36,6 @@
 		<rm:provider componentTypes="osgi.bundle" readerType="git" mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri" value="${git.uri}" />
-			<rm:property key="git.remote.name" value="review" />
 			<rm:property key="git.auto.fetch" value="true" />
 			<rm:uri format="{0},tests/{1}">
 				<bc:propertyRef key="git.clone.dest" />
@@ -51,7 +48,6 @@
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri" value="${git.uri}"/>
-			<rm:property key="git.remote.name" value="review" />
 			<rm:property key="git.auto.fetch" value="true" />
 			<rm:uri format="{0},devtools/{1}">
 				<bc:propertyRef key="git.clone.dest" />

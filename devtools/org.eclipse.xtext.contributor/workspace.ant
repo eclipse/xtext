@@ -17,7 +17,7 @@
 	<property name="WORKSPACE" location="${user.home}/workspaces/xtext-sources" />
 	<property name="projects.location" location="${WORKSPACE}" />
 
-	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext-1134"/>
+	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext"/>
 	<property name="checkout.location" location="${git.clone.dest}"/>
 
 	<property name="target.platform.dir" value="target.platform" />
@@ -30,16 +30,16 @@
 	<property name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
 
-	<target name="materialize.workspace" depends="install.buckminster.headless,cleanup">
+	<target name="materialize.workspace" depends="install.buckminster.headless">
 		<echo message="output workspace     : ${WORKSPACE}" />
 		<echo message="git clone repository : ${git.clone.dest}" />
 
 		<antcall target="set.target.platform.path" />
 		<antcall target="clone.projects" />
-		<antcall target="import.workspace.settings" />
 		<antcall target="import.api.baseline" />
 		<antcall target="set.api.baseline" />
 		<antcall target="import.tp" />
+		<antcall target="import.workspace.settings" />
 		<antcall target="perform.build" />
 
 		<echo message=" " />
@@ -51,10 +51,10 @@
 	</target>
 
 	<target name="clone.projects">
-		<echo message="IMPORTANT: Initial cloning a git repository may took a while." />
-		<run_buckminster command="import ${user.home}/git/org.eclipse.xtext/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
-	<!--	<run_buckminster command="import http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/plain/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
+		<echo message="IMPORTANT: Initial cloning of a git repository may take a while." />
+<!--		<run_buckminster command="import ${user.home}/git/org.eclipse.xtext/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
 	-->
+		<run_buckminster command="import http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/plain/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
 	</target>
 
 	<target name="import.api.baseline">
@@ -66,7 +66,7 @@
 	</target>
 
 	<target name="import.tp">
-		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
+		<echo message="IMPORTANT: Populating an empty target platform may take a while." />
 		<run_buckminster command='import ${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec' />
 	</target>
 
@@ -106,28 +106,6 @@
 			</java>
 		</sequential>
 	</macrodef>
-
-
-
-	<target name="cleanup">
-		<delete failonerror="false" includeemptydirs="true">
-			<fileset dir="${WORKSPACE}" defaultexcludes="false">
-				<exclude name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
-				<exclude name="**/.metadata/.plugins/*mylyn*/" />
-				<exclude name="**/.metadata/.mylyn/" />
-				<exclude name="**/${target.platform.dir}/" />
-			</fileset>
-		</delete>
-	</target>
-
-	<target name="reset.target-platform">
-		<delete includeemptydirs="true">
-			<fileset dir="${WORKSPACE}" defaultexcludes="false">
-				<include name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
-				<include name="**/${target.platform.dir}/" />
-			</fileset>
-		</delete>
-	</target>
 
 	<target name="install.buckminster.headless">
 		<condition property="buckminster.headless.installed">
