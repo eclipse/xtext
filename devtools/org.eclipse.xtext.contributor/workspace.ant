@@ -17,8 +17,8 @@
 	<property name="WORKSPACE" location="${user.home}/workspaces/xtext-sources" />
 	<property name="projects.location" location="${WORKSPACE}" />
 
-	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext"/>
-	<property name="checkout.location" location="${git.clone.dest}"/>
+	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext" />
+	<property name="checkout.location" location="${git.clone.dest}" />
 
 	<property name="target.platform.dir" value="target.platform" />
 	<property name="target.platform" location="${WORKSPACE}/${target.platform.dir}" />
@@ -30,9 +30,11 @@
 	<property name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
 
-	<target name="materialize.workspace" depends="install.buckminster.headless">
+	<target name="materialize.workspace" depends="install.buckminster.headless,cleanup">
 		<echo message="output workspace     : ${WORKSPACE}" />
 		<echo message="git clone repository : ${git.clone.dest}" />
+
+		<available file="${git.clone.dest}/.git/config" property="existing.repository" />
 
 		<antcall target="set.target.platform.path" />
 		<antcall target="clone.projects" />
@@ -40,7 +42,7 @@
 		<antcall target="set.api.baseline" />
 		<antcall target="import.tp" />
 		<antcall target="import.workspace.settings" />
-		<antcall target="perform.build" />
+		<antcall target="create.git.config" />
 
 		<echo message=" " />
 		<echo message="Workspace materialized in: ${WORKSPACE}" />
@@ -52,7 +54,7 @@
 
 	<target name="clone.projects">
 		<echo message="IMPORTANT: Initial cloning of a git repository may take a while." />
-<!--		<run_buckminster command="import ${user.home}/git/org.eclipse.xtext/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
+		<!--		<run_buckminster command="import ${user.home}/git/org.eclipse.xtext/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
 	-->
 		<run_buckminster command="import http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/plain/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" />
 	</target>
@@ -73,7 +75,7 @@
 	<target name="import.workspace.settings">
 		<run_buckminster command='importprefs -F ${checkout.location}/devtools/org.eclipse.xtext.contributor/workspace.epf' />
 	</target>
-	
+
 	<target name="perform.build">
 		<run_buckminster command='build' />
 	</target>
@@ -132,13 +134,14 @@
 			<arg line="-i org.eclipse.buckminster.cmdline.product" />
 			<arg line="-i org.eclipse.buckminster.core.headless.feature.feature.group" />
 			<arg line="-i org.eclipse.buckminster.pde.headless.feature.feature.group" />
+			<arg line="-i org.eclipse.buckminster.maven.headless.feature.feature.group" />
 			<arg line="-i org.eclipse.buckminster.git.headless.feature.feature.group" />
 		</java>
 	</target>
 
 	<target name="install.p2.director">
 		<condition property="p2.director.installed">
-			<available file="${director.dir}" />
+			<available file="${director.dir}/director" />
 		</condition>
 		<antcall target="install.p2.director.internal" />
 	</target>
@@ -151,5 +154,30 @@
 		<unzip src="${director.zip}" dest="${director.install.dest}" />
 		<delete file="${director.zip}" />
 	</target>
+	
+	<target name="cleanup">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${WORKSPACE}" defaultexcludes="false">
+				<exclude name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
+				<exclude name="**/.metadata/.plugins/*mylyn*/" />
+				<exclude name="**/.metadata/.mylyn/" />
+				<exclude name="**/${target.platform.dir}/" />
+			</fileset>
+		</delete>
+	</target>
+	
+	<target name="create.git.config" unless="existing.repository">
+		<input message="Input your eclipse bugzilla id" addproperty="bugzilla.user" />
+		<antcall target="-do.modify.config" />
+	</target>
 
+	<target name="-do.modify.config" if="bugzilla.user">
+		<loadfile property="user.aware.config" srcFile="gerrit.config">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</loadfile>
+		<echo file="${git.clone.dest}/.git/config">${user.aware.config}</echo>
+		<echo>Modified ${git.clone.dest}/.git/config</echo>
+	</target>
 </project>
