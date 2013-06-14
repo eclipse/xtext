@@ -3,11 +3,4 @@
     <cq:rootRequest name="org.eclipse.xtext.contributor" componentType="buckminster"/>
     <cq:advisorNode namePattern="^.*\.source$" skipComponent="true"/>
     <cq:advisorNode namePattern="^org\.eclipse.*examples.*$" skipComponent="true"/>
-    <cq:advisorNode namePattern="org.eclipse.xtend.typesystem.emf" skipComponent="true"/>
-    <cq:advisorNode namePattern="org.eclipse.xtend" skipComponent="true"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.(?:xtext|xtend|xtend2).*" useMaterialization="false" useTargetPlatform="false"/>
-    <cq:advisorNode namePattern="org.easymock" skipComponent="true"/>
-    <cq:advisorNode namePattern="org.eclipse.draw2d" skipComponent="true"/>
-	<cq:advisorNode namePattern="^org\.eclipse\.swt\..*$" skipComponent="true"/>
-	<cq:advisorNode namePattern="^org\.eclipse\.equinox\.launcher\..*$" skipComponent="true"/>
 </cq:componentQuery>

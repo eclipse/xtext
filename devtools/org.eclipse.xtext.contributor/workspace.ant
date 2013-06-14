@@ -16,7 +16,7 @@
 <project name="worskspace" default="materialize.workspace">
 	<property name="WORKSPACE" location="${user.home}/workspaces/xtext-sources" />
 	<property name="projects.location" location="${WORKSPACE}" />
-	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext-contr"/>
+	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext"/>
 	<property name="checkout.location" location="${git.clone.dest}"/>
 	<property name="target.platform.dir" value="target.platform" />
 	<property name="target.platform" location="${WORKSPACE}/${target.platform.dir}" />
@@ -54,7 +54,7 @@
 	<target name="resolve.releng.project" >
 		<echo message="IMPORTANT: Initial cloning a git repository may took a while." />
 		<run_buckminster 
-			command="import --noimport file:/Users/dhuebner/git/org.eclipse.xtext/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" 
+			command="import http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/devtools/org.eclipse.xtext.contributor/xtext-contr.mspec" 
 		/>
 	</target>
 
@@ -77,12 +77,12 @@
 		/>
 	</target>
 
-	<target name="resolve.cquery" >
+	<!--<target name="resolve.cquery" >
 		<run_buckminster 
 			command='resolve file:/Users/dhuebner/git/org.eclipse.xtext/devtools/org.eclipse.xtext.contributor/xtext-contr.cquery' 
 		/>
 	</target>
-
+	-->
 	<target name="perform.build" >
 		<run_buckminster 
 			command='build' 
