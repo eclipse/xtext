@@ -215,6 +215,9 @@ public class XtextReconciler extends Job implements IReconciler {
 				reconcilingStrategyExtension.initialReconcile();
 			}
 		}
+		if (oldInput != null && newInput != null) {
+			handleDocumentChanged(new DocumentEvent(newInput, 0, oldInput.getLength(), newInput.get()));
+		}
 	}
 
 	private void handleDocumentChanged(DocumentEvent event) {
