@@ -17,7 +17,7 @@
 	<property name="WORKSPACE" location="${user.home}/workspaces/xtext-sources" />
 	<property name="projects.location" location="${WORKSPACE}" />
 
-	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext" />
+	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext-test" />
 	<property name="checkout.location" location="${git.clone.dest}" />
 
 	<property name="target.platform.dir" value="target.platform" />
@@ -76,10 +76,6 @@
 		<run_buckminster command='importprefs -F ${checkout.location}/devtools/org.eclipse.xtext.contributor/workspace.epf' />
 	</target>
 
-	<target name="perform.build">
-		<run_buckminster command='build' />
-	</target>
-
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: run_buckminster
           pass the commandsfile to execute      
@@ -104,7 +100,7 @@
 				<sysproperty key="checkout.location" value="${checkout.location}" />
 				<sysproperty key="eclipse.download" value="${eclipse.download}" />
 				<sysproperty key="ECLIPSE.TARGET.ALIAS" value="Galileo" />
-				<jvmarg line=" -Xms256m -Xmx1024m -XX:MaxPermSize=256M" />
+				<jvmarg line=" -Xmx1536m -XX:MaxPermSize=200M" />
 			</java>
 		</sequential>
 	</macrodef>
