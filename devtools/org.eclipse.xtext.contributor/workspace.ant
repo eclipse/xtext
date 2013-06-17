@@ -30,11 +30,13 @@
 	<property name="director.dir" location="${director.install.dest}/director" />
 	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
 
+	<property name="git.config.file" location="${git.clone.dest}/.git/config" />
+
 	<target name="materialize.workspace" depends="install.buckminster.headless,cleanup">
 		<echo message="output workspace     : ${WORKSPACE}" />
 		<echo message="git clone repository : ${git.clone.dest}" />
 
-		<available file="${git.clone.dest}/.git/config" property="existing.repository" />
+		<available file="${git.config.file}" property="existing.repository" />
 
 		<antcall target="set.target.platform.path" />
 		<antcall target="clone.projects" />
@@ -100,7 +102,7 @@
 				<sysproperty key="checkout.location" value="${checkout.location}" />
 				<sysproperty key="eclipse.download" value="${eclipse.download}" />
 				<sysproperty key="ECLIPSE.TARGET.ALIAS" value="Galileo" />
-				<jvmarg line=" -Xmx1536m -XX:MaxPermSize=200M" />
+				<jvmarg line=" -Xmx1792m -XX:MaxPermSize=200M" />
 			</java>
 		</sequential>
 	</macrodef>
@@ -168,12 +170,12 @@
 	</target>
 
 	<target name="-do.modify.config" if="bugzilla.user">
-		<loadfile property="user.aware.config" srcFile="gerrit.config">
+		<loadfile property="user.aware.config" srcFile="${checkout.location}/devtools/org.eclipse.xtext.contributor/gerrit.config">
 			<filterchain>
 				<expandproperties />
 			</filterchain>
 		</loadfile>
-		<echo file="${git.clone.dest}/.git/config">${user.aware.config}</echo>
-		<echo>Modified ${git.clone.dest}/.git/config</echo>
+		<echo file="${git.config.file}">${user.aware.config}</echo>
+		<echo>Modified ${git.config.file}</echo>
 	</target>
 </project>
