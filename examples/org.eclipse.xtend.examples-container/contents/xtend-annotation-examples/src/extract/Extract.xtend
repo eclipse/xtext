@@ -37,7 +37,7 @@ class ExtractProcessor extends AbstractClassProcessor {
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 		val interfaceType = findInterface(annotatedClass.interfaceName)
 		
-		// add the interface to the list of implmented interfaces
+		// add the interface to the list of implemented interfaces
 		annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[interfaceType.newTypeReference]
 		
 		// add the public methods to the interface
