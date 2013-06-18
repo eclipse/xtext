@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -46,6 +47,52 @@ import com.google.inject.Inject;
  */
 @NonNullByDefault
 public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeResolver implements Cloneable {
+
+	protected static class AbortingScopeProviderAccess extends ScopeProviderAccess {
+		
+		private XAbstractFeatureCall abortOn;
+		
+		private ScopeProviderAccess delegate;
+
+		protected void setAbortOn(XAbstractFeatureCall abortOn) {
+			this.abortOn = abortOn;
+		}
+
+		protected void setDelegate(ScopeProviderAccess scopeProviderAccess) {
+			this.delegate = scopeProviderAccess;
+		}
+
+		@Override
+		@Nullable
+		protected IFeatureLinkingCandidate getKnownFeature(XAbstractFeatureCall featureCall, AbstractTypeComputationState state, ResolvedTypes resolvedTypes) {
+			if (abortOn == featureCall) {
+				return null;
+			}
+			return delegate.getKnownFeature(featureCall, state, resolvedTypes);
+		}
+
+		@Override
+		public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, @Nullable EObject toBeLinked,
+				IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
+			if (expression == abortOn) {
+				IScope scope = session.getScope(expression, reference, types);
+				throw new AbortTypeComputation(scope, types);
+			}
+			return delegate.getCandidateDescriptions(expression, reference, toBeLinked, session, types);
+		}
+		
+		protected static class Factory {
+			@Inject
+			private Provider<AbortingScopeProviderAccess> provider;
+
+			public AbortingScopeProviderAccess create(ScopeProviderAccess delegate, XAbstractFeatureCall abortOn) {
+				AbortingScopeProviderAccess abortingScopeProviderAccess = provider.get();
+				abortingScopeProviderAccess.setAbortOn(abortOn);
+				abortingScopeProviderAccess.setDelegate(delegate);
+				return abortingScopeProviderAccess;
+			}
+		}
+	}
 
 	protected static class AbortTypeComputation extends RuntimeException {
 
@@ -99,6 +146,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	
 	@Inject(optional = true)
 	private XbaseFactory xbaseFactory = XbaseFactory.eINSTANCE;
+
+	@Inject
+	private AbortingScopeProviderAccess.Factory abortingScopeProviderAccessFactory;
 	
 	private EObject root;
 	
@@ -225,26 +275,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	}
 	
 	protected ScopeProviderAccess createAbortingScopeProviderAccess(final XAbstractFeatureCall abortOn) {
-		return new ScopeProviderAccess() {
-			@Override
-			@Nullable
-			protected IFeatureLinkingCandidate getKnownFeature(XAbstractFeatureCall featureCall, AbstractTypeComputationState state, ResolvedTypes resolvedTypes) {
-				if (abortOn == featureCall) {
-					return null;
-				}
-				return scopeProviderAccess.getKnownFeature(featureCall, state, resolvedTypes);
-			}
-			
-			@Override
-			public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, @Nullable EObject toBeLinked,
-					IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
-				if (expression == abortOn) {
-					IScope scope = session.getScope(expression, reference, types);
-					throw new AbortTypeComputation(scope, types);
-				}
-				return scopeProviderAccess.getCandidateDescriptions(expression, reference, toBeLinked, session, types);
-			}
-		};
+		return abortingScopeProviderAccessFactory.create(scopeProviderAccess, abortOn);
 	}
 	
 	protected ITypeComputer createAbortingTypeComputer(final EObject abortOn) {
