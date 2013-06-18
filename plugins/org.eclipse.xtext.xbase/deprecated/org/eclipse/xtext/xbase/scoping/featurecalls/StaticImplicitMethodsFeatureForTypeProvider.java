@@ -57,10 +57,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
+ * use {@link org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypes} instead.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-@Deprecated
+@Deprecated()
 public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticMethodsFeatureForTypeProvider {
 
 	@Singleton
