@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Tutorial
 Bundle-SymbolicName: xtend-examples
-Bundle-Version: 2.4.0.qualifier
+Bundle-Version: 2.4.3.qualifier
 Bundle-Vendor: Eclipse Tools Project
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.3.0",
  org.eclipse.xtend.lib;bundle-version="2.3.0",
