@@ -17,7 +17,7 @@
 	<property name="WORKSPACE" location="${user.home}/workspaces/xtext-sources" />
 	<property name="projects.location" location="${WORKSPACE}" />
 
-	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext-test" />
+	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext" />
 	<property name="checkout.location" location="${git.clone.dest}" />
 
 	<property name="target.platform.dir" value="target.platform" />

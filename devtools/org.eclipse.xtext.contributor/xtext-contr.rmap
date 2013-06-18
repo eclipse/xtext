@@ -42,6 +42,15 @@
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="git" mutable="false">
+			<rm:property key="buckminster.mutable" value="false" />
+			<rm:property key="git.remote.uri" value="${git.uri}" />
+			<rm:property key="git.auto.fetch" value="true" />
+			<rm:uri format="{0},examples/org.eclipse.xtext.xtext.ui.examples/contents/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
 	</rm:searchPath>
 	<rm:searchPath name="contributor">
 		<rm:provider componentTypes="buckminster" readerType="git"
