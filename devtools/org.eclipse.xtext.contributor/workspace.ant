@@ -159,6 +159,8 @@
 				<exclude name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
 				<exclude name="**/.metadata/.plugins/*mylyn*/" />
 				<exclude name="**/.metadata/.mylyn/" />
+				<exclude name="**/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml" />
+				<exclude name="**/.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml" />
 				<exclude name="**/${target.platform.dir}/" />
 			</fileset>
 		</delete>
