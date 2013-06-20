@@ -51,14 +51,6 @@
 				$(this).parent().find('ul').slideToggle();      
 			});
 			$('.has-popover').popover();
-			getTwitters('tweet', { 
-				id: 'xtendlang', 
-				count: 5,
-				includeRT: true,
-				enableLinks: true, 
-				clearContents: true,
-				template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
-			});
 			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
 			po.src = 'https://apis.google.com/js/plusone.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
@@ -112,13 +104,13 @@
 	<div id="page">
   <div class="inner">
     <div class="container clearfix">
-    <h2>Xtend 2.4 Release Notes</h2>
+    <h2>Xtend 2.4.2 Release Notes (June 26th, 2013)</h2>
     <hr>
     <div class="span1">&nbsp;</div>
       <div class="span9">
         <p>
           The team is proud to present a release with 
-          more than <a href="https://bugs.eclipse.org/bugs/buglist.cgi?o5=anywordssubstr&f1=OP&f0=OP&resolution=FIXED&classification=Modeling&classification=Tools&f4=CP&v5=kepler&query_format=advanced&j1=OR&f3=CP&bug_status=RESOLVED&bug_status=VERIFIED&f5=flagtypes.name&component=Backlog&component=Common&component=Core&component=Releng&component=Website&component=Xtext&component=Xtext%20Backlog&product=TMF&product=Xtend&list_id=4768360">300 bug fixes</a> and some ground breaking features.
+          more than <a href="https://bugs.eclipse.org/bugs/buglist.cgi?o5=anywordssubstr&f1=OP&f0=OP&resolution=FIXED&classification=Modeling&classification=Tools&f4=CP&v5=kepler&query_format=advanced&j1=OR&f3=CP&bug_status=RESOLVED&bug_status=VERIFIED&f5=flagtypes.name&component=Backlog&component=Common&component=Core&component=Releng&component=Website&component=Xtext&component=Xtext%20Backlog&product=TMF&product=Xtend&list_id=4768360">450 bug fixes</a> and features.
         </p>
         <h2>Table of contents</h2>
         <ul>
@@ -129,6 +121,7 @@
           	</ul>
           <li><a href="#new_language_features">New Language Features</a>
             <ul>
+            <li><a href="#streamlined">Streamlined Syntax Changes</a>
             <li><a href="#active_annotations">Active Annotations</a>
             <li><a href="#collection_literals">Collection Literals and Array Access</a>
             <li><a href="#extension_values">Extension Values</a>
@@ -178,6 +171,31 @@ mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend \
         <h2>New Language Features</h2>
         <p>
         The following new features have been added to the Xtend language.
+        </p>
+        <h3 id="streamlined" >Streamlined Java syntax</h3>
+        <p>
+        	In 2.4.2 we have introduced new (more Java-like) ways to access nested classes and static members. Also 
+        	type literals can be written by just using the class name.
+        </p>
+        
+        <p>
+        	Here is an example for a static access of the generated methods in Android's ubiquitous R class:
+        </p>
+<pre class="prettyprint lang-xtend linenums">
+R.id.edit_message 
+// previously it was (still supported) :
+R$id::edit_message
+</pre> 
+        <p>
+        	Type literals can now be written even shorter. Let's say you want to filter a list by type:
+        </p>
+<pre class="prettyprint lang-xtend linenums">
+myList.filter(MyType) 
+// where previously you had to write (still supported) :
+myList.filter(typeof(MyType)
+</pre> 
+		<p>
+        	If you use the Java syntax (e.g. <i>MyType.class</i>), you'll get an error marker pointing you to the right syntax.
         </p>
         <h3 id="active_annotations" >Active Annotations (Provisional API)</h3>
       <p>
@@ -410,15 +428,20 @@ for (idx : list.size &gt;.. 0) {
 						</ul>
 					</div>
 					<div class="span6">
-						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/#!/xtendlang" style="color: white;">Xtendlang</a> on Twitter</h3>
-						<br />
-						<div id="tweet">
-							<p>Please wait while my tweets load</p>
-							<p>
-								<a href="http://twitter.com/rem">If you can't wait - check
-									out what I've been twittering</a>
-							</p>
-						</div>
+						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/xtendlang" style="color : white;">@Xtendlang</a> on Twitter</h3>
+						<a class="twitter-timeline" href="https://twitter.com/xtendlang" data-widget-id="346624176666333185"
+						data-chrome="noheader nofooter transparent"
+						data-theme="dark">Tweets by @Xtendlang</a>
+						<script>
+						!function(d,s,id) { 
+							var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+							if(!d.getElementById(id)) { 
+							  js=d.createElement(s);
+							  js.id=id;
+							  js.src=p+"://platform.twitter.com/widgets.js";
+							  fjs.parentNode.insertBefore(js,fjs);
+							}
+						}(document,"script","twitter-wjs");</script>
 					</div>
 				</div>
 			</div>

@@ -50,14 +50,6 @@
 				$(this).parent().find('ul').slideToggle();      
 			});
 			$('.has-popover').popover();
-			getTwitters('tweet', { 
-				id: 'xtext', 
-				count: 5,
-				includeRT: true,
-				enableLinks: true, 
-				clearContents: true,
-				template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
-			});
 			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
 			po.src = 'https://apis.google.com/js/plusone.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
@@ -179,27 +171,27 @@
 						    </tr>
 						    <tr>
 						    	<td style="text-align: center; white-space: nowrap;">
-						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-macosx-cocoa-x86_64.tar.gz&r=1" 
+						    	<a href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-macosx-cocoa-x86_64.tar.gz&r=1" 
 						    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;
-						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-macosx-cocoa.tar.gz&r=1" 
+						    	<a href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-macosx-cocoa.tar.gz&r=1" 
 						    	class="btn btn-primary btn-large"
 						    	style="width:20%;">32 Bit</a></td>
 						    </tr>
 						    <tr>
 						    	<td style="text-align: center; white-space: nowrap;">
-						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-linux-gtk-x86_64.tar.gz&r=1" 
+						    	<a href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-linux-gtk-x86_64.tar.gz&r=1" 
 						    	class="btn btn-primary btn-large"
 						    	style="width: 45%;">Linux 64 Bit</a>&nbsp;
-						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-linux-gtk.tar.gz&r=1" 
+						    	<a href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-linux-gtk.tar.gz&r=1" 
 						    	class="btn btn-primary btn-large"
 						    	style="width:20%;">32 Bit</a></td>
 						    </tr>
 						    <tr>
 						    	<td style="text-align: center; white-space: nowrap;">
-						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-win32-x86_64.zip&r=1"
+						    	<a href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-win32-x86_64.tar.gz&r=1"
 						    	class="btn btn-primary btn-large"
 						    	style="width: 45%;">Windows 64 Bit</a>&nbsp;
-						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-win32.zip&r=1" 
+						    	<a href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-win32.tar.gz&r=1" 
 						    	class="btn btn-primary btn-large"
 						    	style="width:20%;">32 Bit</a></td>
 						    </tr>
@@ -368,15 +360,20 @@
 						</ul>
 					</div>
 					<div class="span6">
-						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/#!/xtext" style="color: white;">Xtext</a> on Twitter</h3>
-						<br />
-						<div id="tweet">
-							<p>Please wait while my tweets load</p>
-							<p>
-								<a href="http://twitter.com/rem">If you can't wait - check
-									out what I've been twittering</a>
-							</p>
-						</div>
+						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/xtext" style="color : white;">@Xtext</a> on Twitter</h3>
+						<a class="twitter-timeline" href="https://twitter.com/xtext" data-widget-id="346625441290928128"
+						data-chrome="noheader nofooter transparent"
+						data-theme="dark">Tweets by @xtext</a>
+						<script>
+						!function(d,s,id) { 
+							var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+							if(!d.getElementById(id)) { 
+							  js=d.createElement(s);
+							  js.id=id;
+							  js.src=p+"://platform.twitter.com/widgets.js";
+							  fjs.parentNode.insertBefore(js,fjs);
+							}
+						}(document,"script","twitter-wjs");</script>
 					</div>
 				</div>
 			</div>

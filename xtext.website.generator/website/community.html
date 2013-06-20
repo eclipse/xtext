@@ -50,14 +50,6 @@
 				$(this).parent().find('ul').slideToggle();      
 			});
 			$('.has-popover').popover();
-			getTwitters('tweet', { 
-				id: 'xtext', 
-				count: 5,
-				includeRT: true,
-				enableLinks: true, 
-				clearContents: true,
-				template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
-			});
 			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
 			po.src = 'https://apis.google.com/js/plusone.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
@@ -393,14 +385,22 @@
   	        <td>Diego Castronuovo (castronu at gmail dot com)</td>
   	    </tr>
   	    <tr>
-  	      <td><a href="http://rtsys.informatik.uni-kiel.de/~kieler">KIELER</a></td>
+  	      <td><a href="link: http://www.informatik.uni-kiel.de/rtsys/kieler/">KIELER</a></td>
   	      <td>an evaluation platform for new methods in model-based software
   	  design (automatic layout, graphic/ textual dynamic views, focus and context,
   	  simulation, codegen,...)</td>
   	      <td>EPL</td>
   	      <td>Language</td>
-  	      <td>1.x</td>
+  	      <td>2.x</td>
   	      <td>Rtsys group, Dep. of Computer Science, Uni Kiel</td>
+  	    </tr>
+  	    <tr>
+  	        <td><a href="http://amishne.github.com/llvm-ir-editor/">LLVM IR SDK</a></td>
+  	        <td>Editors for QVT Core and Relational languages.</td>
+  	        <td>BSD</td>
+  	        <td>Language</td>
+  	        <td>2.3.x</td>
+  	        <td>Alon Mishne</td>
   	    </tr>
   	      <tr>
   	      <td><a href="http://code.google.com/p/llvm4e/">LLVM4e</a></td>
@@ -487,6 +487,14 @@
   	      <td>Language</td>
   	      <td>1.x</td>
   	      <td>Cedric Vidal</td>
+  	    </tr>
+  	    <tr>
+  	        <td><a href="http://wiki.eclipse.org/QVTd">QVTc and QVTr</a></td>
+  	        <td>Editors for QVT Core and Relational languages.</td>
+  	        <td>EPL</td>
+  	        <td>Language</td>
+  	        <td>2.4.x</td>
+  	        <td>Ed Willink</td>
   	    </tr>
   	      <tr>
   	      <td><a href="http://sourceforge.net/projects/rng-eclipse/">RELAX NG for Eclipse</a></td>
@@ -641,6 +649,7 @@
   	        <td>2.0.X</td>
   	        <td>Axel Terfloth, Andreas M&uuml;lder, et al</td>
   	    </tr>
+  	  
   	   <!-- 
   	    <tr>
   	      <td>AMP Agent Modeling Platform</td>
@@ -675,6 +684,7 @@
   	      <td>?</td>
   	      <td>Oisin Hurley</td>
   	    </tr>
+  	    
   	  -->
   	    
   	  </tbody><tfoot></tfoot></table>
@@ -703,15 +713,20 @@
 						</ul>
 					</div>
 					<div class="span6">
-						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/#!/xtext" style="color: white;">Xtext</a> on Twitter</h3>
-						<br />
-						<div id="tweet">
-							<p>Please wait while my tweets load</p>
-							<p>
-								<a href="http://twitter.com/rem">If you can't wait - check
-									out what I've been twittering</a>
-							</p>
-						</div>
+						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/xtext" style="color : white;">@Xtext</a> on Twitter</h3>
+						<a class="twitter-timeline" href="https://twitter.com/xtext" data-widget-id="346625441290928128"
+						data-chrome="noheader nofooter transparent"
+						data-theme="dark">Tweets by @xtext</a>
+						<script>
+						!function(d,s,id) { 
+							var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+							if(!d.getElementById(id)) { 
+							  js=d.createElement(s);
+							  js.id=id;
+							  js.src=p+"://platform.twitter.com/widgets.js";
+							  fjs.parentNode.insertBefore(js,fjs);
+							}
+						}(document,"script","twitter-wjs");</script>
 					</div>
 				</div>
 			</div>

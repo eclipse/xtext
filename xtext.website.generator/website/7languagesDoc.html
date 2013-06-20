@@ -51,14 +51,6 @@
 				$(this).parent().find('ul').slideToggle();      
 			});
 			$('.has-popover').popover();
-			getTwitters('tweet', { 
-				id: 'xtext', 
-				count: 5,
-				includeRT: true,
-				enableLinks: true, 
-				clearContents: true,
-				template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
-			});
 			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
 			po.src = 'https://apis.google.com/js/plusone.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
@@ -796,7 +788,7 @@ Task:
 						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							For each <strong>BuildFile</strong> we create a Java class that extends the library class 
-							<abbr title="org.xtext.builddsl.lib.BuildScript">BuildScript</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.java">(src)</a>. We generate a main method allowing to execute the script as
+							<abbr title="org.xtext.builddsl.lib.BuildScript">BuildScript</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend">(src)</a>. We generate a main method allowing to execute the script as
 							a Java application with command line parameters. The use of <code class="prettyprint lang-java">System.exit</code> allows to return error codes
 							to the caller.
 						</p>
@@ -866,7 +858,7 @@ class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
 							<p>
 						</p>
 						<p>
-							Each <strong>Task</strong> becomes a method in the Java class. A <abbr title="org.xtext.builddsl.lib.DependsOn">@DependsOn</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.java">(src)</a> annotation
+							Each <strong>Task</strong> becomes a method in the Java class. A <abbr title="org.xtext.builddsl.lib.DependsOn">@DependsOn</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.xtend">(src)</a> annotation
 							communicates the dependencies to the runtime. The superclass will scan for such annotations and execute
 							the dependencies in the right order.
 						</p>
@@ -911,7 +903,7 @@ members += file.tasks.map[ task | toMethod(task.methodName, task.newTypeRef(Void
 							<p>
 						</p>
 						<p>
-							Finally, we create a field with the <abbr title="org.xtext.builddsl.lib.Param">@Param</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java">(src)</a> annotation from each <strong>Parameter</strong>. 
+							Finally, we create a field with the <abbr title="org.xtext.builddsl.lib.Param">@Param</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.xtend">(src)</a> annotation from each <strong>Parameter</strong>. 
 							The superclass will make the so marked fields initializable from command line arguments.
 						</p>
 						<p>
@@ -3171,15 +3163,20 @@ class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedTypes {
 						</ul>
 					</div>
 					<div class="span6">
-						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/#!/xtext" style="color: white;">Xtext</a> on Twitter</h3>
-						<br />
-						<div id="tweet">
-							<p>Please wait while my tweets load</p>
-							<p>
-								<a href="http://twitter.com/rem">If you can't wait - check
-									out what I've been twittering</a>
-							</p>
-						</div>
+						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/xtext" style="color : white;">@Xtext</a> on Twitter</h3>
+						<a class="twitter-timeline" href="https://twitter.com/xtext" data-widget-id="346625441290928128"
+						data-chrome="noheader nofooter transparent"
+						data-theme="dark">Tweets by @xtext</a>
+						<script>
+						!function(d,s,id) { 
+							var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+							if(!d.getElementById(id)) { 
+							  js=d.createElement(s);
+							  js.id=id;
+							  js.src=p+"://platform.twitter.com/widgets.js";
+							  fjs.parentNode.insertBefore(js,fjs);
+							}
+						}(document,"script","twitter-wjs");</script>
 					</div>
 				</div>
 			</div>

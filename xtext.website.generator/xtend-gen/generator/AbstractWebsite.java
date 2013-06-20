@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 
 @SuppressWarnings("all")
@@ -273,31 +272,6 @@ public abstract class AbstractWebsite implements Resource {
         _builder.newLine();
       }
     }
-    _builder.append("getTwitters(\'tweet\', { ");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("id: \'");
-    String _twitterID = this.twitterID();
-    _builder.append(_twitterID, "	");
-    _builder.append("\', ");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("count: 5,");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("includeRT: true,");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("enableLinks: true, ");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("clearContents: true,");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("template : \'\"%text%\" - %time% by <a href=\"http://twitter.com/%user_screen_name%/statuses/%id_str%/\">@%user_screen_name%</a><br/><br/>\'");
-    _builder.newLine();
-    _builder.append("});");
-    _builder.newLine();
     _builder.append("var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;");
     _builder.newLine();
     _builder.append("po.src = \'https://apis.google.com/js/plusone.js\';");
@@ -305,10 +279,6 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);");
     _builder.newLine();
     return _builder;
-  }
-  
-  public String twitterID() {
-    return "xtext";
   }
   
   protected boolean isPrettyPrint() {
@@ -492,38 +462,46 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<div class=\"span6\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<h3 style=\"padding-top: 0px; margin-top: 0px;\"><a href=\"https://twitter.com/#!/");
-    String _twitterID = this.twitterID();
-    _builder.append(_twitterID, "					");
-    _builder.append("\" style=\"color: white;\">");
-    String _twitterID_1 = this.twitterID();
-    String _firstUpper = StringExtensions.toFirstUpper(_twitterID_1);
-    _builder.append(_firstUpper, "					");
-    _builder.append("</a> on Twitter</h3>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("<br />");
+    _builder.append("<h3 style=\"padding-top: 0px; margin-top: 0px;\"><a href=\"https://twitter.com/xtext\" style=\"color : white;\">@Xtext</a> on Twitter</h3>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<div id=\"tweet\">");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<p>Please wait while my tweets load</p>");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<p>");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t\t");
-    _builder.append("<a href=\"http://twitter.com/rem\">If you can\'t wait - check");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t\t\t");
-    _builder.append("out what I\'ve been twittering</a>");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("</p>");
+    _builder.append("<a class=\"twitter-timeline\" href=\"https://twitter.com/xtext\" data-widget-id=\"346625441290928128\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("</div>");
+    _builder.append("data-chrome=\"noheader nofooter transparent\"");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("data-theme=\"dark\">Tweets by @xtext</a>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<script>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("!function(d,s,id) { ");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("if(!d.getElementById(id)) { ");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t  ");
+    _builder.append("js=d.createElement(s);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t  ");
+    _builder.append("js.id=id;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t  ");
+    _builder.append("js.src=p+\"://platform.twitter.com/widgets.js\";");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t  ");
+    _builder.append("fjs.parentNode.insertBefore(js,fjs);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("}(document,\"script\",\"twitter-wjs\");</script>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("</div>");

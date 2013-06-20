@@ -9,6 +9,24 @@ public class Download extends AbstractWebsite {
     return "download.html";
   }
   
+  public String getLink(final String platform) {
+    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-" + platform);
+    String _plus_1 = (_plus + ".tar.gz&r=1");
+    return _plus_1;
+  }
+  
+  public final static String OSX_64 = "macosx-cocoa-x86_64";
+  
+  public final static String OSX_32 = "macosx-cocoa";
+  
+  public final static String LINUX_64 = "linux-gtk-x86_64";
+  
+  public final static String LINUX_32 = "linux-gtk";
+  
+  public final static String WIN_64 = "win32-x86_64";
+  
+  public final static String WIN_32 = "win32";
+  
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _headline = this.headline("Download");
@@ -218,14 +236,20 @@ public class Download extends AbstractWebsite {
     _builder.append("<td style=\"text-align: center; white-space: nowrap;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-macosx-cocoa-x86_64.tar.gz&r=1\" ");
-    _builder.newLine();
+    _builder.append("<a href=\"");
+    String _link = this.getLink(Download.OSX_64);
+    _builder.append(_link, "						    	");
+    _builder.append("\" ");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\" style=\"width: 45%;\">OS X 64 Bit</a>&nbsp;");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-macosx-cocoa.tar.gz&r=1\" ");
-    _builder.newLine();
+    _builder.append("<a href=\"");
+    String _link_1 = this.getLink(Download.OSX_32);
+    _builder.append(_link_1, "						    	");
+    _builder.append("\" ");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
     _builder.newLine();
@@ -242,8 +266,11 @@ public class Download extends AbstractWebsite {
     _builder.append("<td style=\"text-align: center; white-space: nowrap;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-linux-gtk-x86_64.tar.gz&r=1\" ");
-    _builder.newLine();
+    _builder.append("<a href=\"");
+    String _link_2 = this.getLink(Download.LINUX_64);
+    _builder.append(_link_2, "						    	");
+    _builder.append("\" ");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
     _builder.newLine();
@@ -251,8 +278,11 @@ public class Download extends AbstractWebsite {
     _builder.append("style=\"width: 45%;\">Linux 64 Bit</a>&nbsp;");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-linux-gtk.tar.gz&r=1\" ");
-    _builder.newLine();
+    _builder.append("<a href=\"");
+    String _link_3 = this.getLink(Download.LINUX_32);
+    _builder.append(_link_3, "						    	");
+    _builder.append("\" ");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
     _builder.newLine();
@@ -269,8 +299,11 @@ public class Download extends AbstractWebsite {
     _builder.append("<td style=\"text-align: center; white-space: nowrap;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-win32-x86_64.zip&r=1\"");
-    _builder.newLine();
+    _builder.append("<a href=\"");
+    String _link_4 = this.getLink(Download.WIN_64);
+    _builder.append(_link_4, "						    	");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
     _builder.newLine();
@@ -278,8 +311,11 @@ public class Download extends AbstractWebsite {
     _builder.append("style=\"width: 45%;\">Windows 64 Bit</a>&nbsp;");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-win32.zip&r=1\" ");
-    _builder.newLine();
+    _builder.append("<a href=\"");
+    String _link_5 = this.getLink(Download.WIN_32);
+    _builder.append(_link_5, "						    	");
+    _builder.append("\" ");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
     _builder.newLine();

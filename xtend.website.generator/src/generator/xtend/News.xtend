@@ -31,8 +31,10 @@ class News extends AbstractXtendWebsite {
 					var div = document.createElement("div");
 					div.appendChild(document.createTextNode(entry.title));
 					container.appendChild(div);
-					var stringEntry = '<div class="row"><div class="span1">&nbsp;</div><div class="span10">'
+					var stringEntry = '<div class="container">'
 									+ '<h2>'+entry.title+' <small>published '+new Date(entry.publishedDate).toDateString()+' by '+ entry.author+'</small></h2>'
+									+ '<hr/>'
+									+ '<div class="span1">&nbsp;</div><div class="span10">'
 			        				+ '<p>' + entry.content+'</p>'
 			        				+ '</div><div class="span1">&nbsp;</div></div>'
 					var html = html + stringEntry

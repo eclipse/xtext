@@ -281,14 +281,22 @@ class Community extends AbstractWebsite {
           <td>Diego Castronuovo (castronu at gmail dot com)</td>
       </tr>
       <tr>
-        <td><a href="http://rtsys.informatik.uni-kiel.de/~kieler">KIELER</a></td>
+        <td><a href="link: http://www.informatik.uni-kiel.de/rtsys/kieler/">KIELER</a></td>
         <td>an evaluation platform for new methods in model-based software
     design (automatic layout, graphic/ textual dynamic views, focus and context,
     simulation, codegen,...)</td>
         <td>EPL</td>
         <td>Language</td>
-        <td>1.x</td>
+        <td>2.x</td>
         <td>Rtsys group, Dep. of Computer Science, Uni Kiel</td>
+      </tr>
+      <tr>
+          <td><a href="http://amishne.github.com/llvm-ir-editor/">LLVM IR SDK</a></td>
+          <td>Editors for QVT Core and Relational languages.</td>
+          <td>BSD</td>
+          <td>Language</td>
+          <td>2.3.x</td>
+          <td>Alon Mishne</td>
       </tr>
         <tr>
         <td><a href="http://code.google.com/p/llvm4e/">LLVM4e</a></td>
@@ -375,6 +383,14 @@ class Community extends AbstractWebsite {
         <td>Language</td>
         <td>1.x</td>
         <td>Cedric Vidal</td>
+      </tr>
+      <tr>
+          <td><a href="http://wiki.eclipse.org/QVTd">QVTc and QVTr</a></td>
+          <td>Editors for QVT Core and Relational languages.</td>
+          <td>EPL</td>
+          <td>Language</td>
+          <td>2.4.x</td>
+          <td>Ed Willink</td>
       </tr>
         <tr>
         <td><a href="http://sourceforge.net/projects/rng-eclipse/">RELAX NG for Eclipse</a></td>
@@ -529,6 +545,7 @@ class Community extends AbstractWebsite {
           <td>2.0.X</td>
           <td>Axel Terfloth, Andreas M&uuml;lder, et al</td>
       </tr>
+
      <!-- 
       <tr>
         <td>AMP Agent Modeling Platform</td>
@@ -563,6 +580,7 @@ class Community extends AbstractWebsite {
         <td>?</td>
         <td>Oisin Hurley</td>
       </tr>
+      
     -->
       
     </tbody><tfoot></tfoot></table>

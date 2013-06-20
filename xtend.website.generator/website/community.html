@@ -50,14 +50,6 @@
 				$(this).parent().find('ul').slideToggle();      
 			});
 			$('.has-popover').popover();
-			getTwitters('tweet', { 
-				id: 'xtendlang', 
-				count: 5,
-				includeRT: true,
-				enableLinks: true, 
-				clearContents: true,
-				template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
-			});
 			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
 			po.src = 'https://apis.google.com/js/plusone.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
@@ -233,15 +225,20 @@
 						</ul>
 					</div>
 					<div class="span6">
-						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/#!/xtendlang" style="color: white;">Xtendlang</a> on Twitter</h3>
-						<br />
-						<div id="tweet">
-							<p>Please wait while my tweets load</p>
-							<p>
-								<a href="http://twitter.com/rem">If you can't wait - check
-									out what I've been twittering</a>
-							</p>
-						</div>
+						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/xtendlang" style="color : white;">@Xtendlang</a> on Twitter</h3>
+						<a class="twitter-timeline" href="https://twitter.com/xtendlang" data-widget-id="346624176666333185"
+						data-chrome="noheader nofooter transparent"
+						data-theme="dark">Tweets by @Xtendlang</a>
+						<script>
+						!function(d,s,id) { 
+							var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+							if(!d.getElementById(id)) { 
+							  js=d.createElement(s);
+							  js.id=id;
+							  js.src=p+"://platform.twitter.com/widgets.js";
+							  fjs.parentNode.insertBefore(js,fjs);
+							}
+						}(document,"script","twitter-wjs");</script>
 					</div>
 				</div>
 			</div>

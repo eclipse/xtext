@@ -50,14 +50,6 @@
 			$('#nav-outline > li > a').live('click', function() {        
 				$(this).parent().find('ul').slideToggle();      
 			});
-			getTwitters('tweet', { 
-				id: 'xtendlang', 
-				count: 5,
-				includeRT: true,
-				enableLinks: true, 
-				clearContents: true,
-				template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
-			});
 			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
 			po.src = 'https://apis.google.com/js/plusone.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
@@ -1201,7 +1193,7 @@ public String label(final Object it) {
 							values that expect arrays can handle single values, too. Value arrays are enclosed in array 
 							literals <code class="prettyprint lang-xtend">#['first', 'second']</code>.
 							The semantics for annotations are exactly like defined in the 
-							<a href="http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html">Java Language Specification</a>. 
+							<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/j3TOC.html">Java Language Specification</a>. 
 							Here is an example:
 						</p>
 						<p>
@@ -3093,7 +3085,7 @@ node Parent{
 						<p>
 							<strong>Active Annotations</strong> allow developers to participate in the translation process of Xtend source code to Java code via library. That's useful in cases where Java requires you to 
 							write a lot of boilerplate manually. For instance, many of the good old design patterns fall into this category. With <strong>Active Annotations</strong> you no longer need to remember how the 
-							<a href="http://en.wikipedia.org/wiki/Visitor_pattern">Visitor</a> or the <a href="http://en.wikipedia.org/wiki/">Observer</a> pattern should be implemented. In Xtend you can implement the expansion 
+							<a href="http://en.wikipedia.org/wiki/Visitor_pattern">Visitor</a> or the <a href="http://en.wikipedia.org/wiki/Observer_pattern">Observer</a> pattern should be implemented. In Xtend you can implement the expansion 
 							of such patterns in a library and let the compiler do the heavy lifting for you.
 						</p>
 						<p>
@@ -3112,7 +3104,7 @@ node Parent{
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-@Active(typeof(ExtractProcessor))
+@Active(ExtractProcessor)
 annotation Extract {}</pre>
 							<p>
 						</p>
@@ -3394,7 +3386,7 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 &lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
   &lt;artifactId&gt;org.eclipse.xtend.standalone&lt;/artifactId&gt;
-  &lt;version&gt;2.4.0&lt;/version&gt;
+  &lt;version&gt;2.4.2&lt;/version&gt;
   &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</pre>
 							<p>
@@ -3418,7 +3410,7 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 class LazyTest {
-  extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(Lazy)
+  extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Lazy)
 
   @Test def void testLazy() {
     '''
@@ -3606,15 +3598,20 @@ public void setName(final String name) {
 						</ul>
 					</div>
 					<div class="span6">
-						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/#!/xtendlang" style="color: white;">Xtendlang</a> on Twitter</h3>
-						<br />
-						<div id="tweet">
-							<p>Please wait while my tweets load</p>
-							<p>
-								<a href="http://twitter.com/rem">If you can't wait - check
-									out what I've been twittering</a>
-							</p>
-						</div>
+						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/xtendlang" style="color : white;">@Xtendlang</a> on Twitter</h3>
+						<a class="twitter-timeline" href="https://twitter.com/xtendlang" data-widget-id="346624176666333185"
+						data-chrome="noheader nofooter transparent"
+						data-theme="dark">Tweets by @Xtendlang</a>
+						<script>
+						!function(d,s,id) { 
+							var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+							if(!d.getElementById(id)) { 
+							  js=d.createElement(s);
+							  js.id=id;
+							  js.src=p+"://platform.twitter.com/widgets.js";
+							  fjs.parentNode.insertBefore(js,fjs);
+							}
+						}(document,"script","twitter-wjs");</script>
 					</div>
 				</div>
 			</div>

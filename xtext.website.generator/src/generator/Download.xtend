@@ -6,6 +6,17 @@ class Download extends AbstractWebsite {
 		"download.html"
 	}
 	
+	def String getLink(String platform) {
+		'http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-'+platform+'.tar.gz&r=1'
+	}
+	
+	public static val OSX_64 = 'macosx-cocoa-x86_64';
+	public static val OSX_32 = 'macosx-cocoa';
+	public static val LINUX_64 = 'linux-gtk-x86_64';
+	public static val LINUX_32 = 'linux-gtk';
+	public static val WIN_64 = 'win32-x86_64';
+	public static val WIN_32 = 'win32';
+	
 	override contents() '''
 		«headline('Download')»
 		<div id="page">
@@ -76,27 +87,27 @@ class Download extends AbstractWebsite {
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-macosx-cocoa-x86_64.tar.gz&r=1" 
+								    	<a href="«getLink(OSX_64)»" 
 								    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-macosx-cocoa.tar.gz&r=1" 
+								    	<a href="«getLink(OSX_32)»" 
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-linux-gtk-x86_64.tar.gz&r=1" 
+								    	<a href="«getLink(LINUX_64)»" 
 								    	class="btn btn-primary btn-large"
 								    	style="width: 45%;">Linux 64 Bit</a>&nbsp;
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-linux-gtk.tar.gz&r=1" 
+								    	<a href="«getLink(LINUX_32)»" 
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-win32-x86_64.zip&r=1"
+								    	<a href="«getLink(WIN_64)»"
 								    	class="btn btn-primary btn-large"
 								    	style="width: 45%;">Windows 64 Bit</a>&nbsp;
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.1-win32.zip&r=1" 
+								    	<a href="«getLink(WIN_32)»" 
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>

@@ -60,10 +60,16 @@ public class News extends AbstractXtendWebsite {
     _builder.append("container.appendChild(div);");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("var stringEntry = \'<div class=\"row\"><div class=\"span1\">&nbsp;</div><div class=\"span10\">\'");
+    _builder.append("var stringEntry = \'<div class=\"container\">\'");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t");
     _builder.append("+ \'<h2>\'+entry.title+\' <small>published \'+new Date(entry.publishedDate).toDateString()+\' by \'+ entry.author+\'</small></h2>\'");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("+ \'<hr/>\'");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("+ \'<div class=\"span1\">&nbsp;</div><div class=\"span10\">\'");
     _builder.newLine();
     _builder.append("\t        \t\t\t\t");
     _builder.append("+ \'<p>\' + entry.content+\'</p>\'");

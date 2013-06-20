@@ -35,7 +35,7 @@ body {
 h2 {
 	font-family: 'Lato', serif;
 	font-weight: normal;
-	color: #005580;
+	color: #383838;
 }
 
 h2 small {
@@ -62,7 +62,7 @@ strong {
 }
 
 #comparison h2 {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #6B6B6B;
 	font-weight: 400;
 	line-height: 1.3em;
@@ -151,7 +151,7 @@ td.code pre {
 	height: auto;
 	border: none;
 	overflow: hidden;
-	background-color: #005580;
+	background-color: rgb(34,34,34);
 	padding-top : 40pt;
 }
 
@@ -190,7 +190,7 @@ td.code pre {
 }
 
 #features h1 {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #6B6B6B;
 	font-weight: 400;
 	line-height: 1.3em;
@@ -201,7 +201,7 @@ td.code pre {
 }
 
 #features h4 {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #6B6B6B;
 	font-weight: 400;
 	line-height: 1.3em;
@@ -213,7 +213,7 @@ td.code pre {
 }
 
 #features p {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #6B6B6B;
 	font-weight: 200;
 	line-height: 1.3em;
@@ -419,7 +419,7 @@ ul.textlist li {
 	width: 100%;
 	font-family: 'Lato', sans-serif;
 	font-size: 12px;
-	color: #c0c2c2;
+	color: #c2c2c2;
 	font-weight: 400;
 }
 
@@ -682,7 +682,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 #extra .inner {
 	color: #fff;
 	border-top: 1px solid #000;
-	font-family: 'Vollkorn', serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;
@@ -848,8 +848,8 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 #page h1 {
-	font-family: 'Vollkorn', serif;
-	color: #005580;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #222222;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;
@@ -858,7 +858,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 .page-heading {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #fff;
 	font-weight: 400;
 	line-height: 1.3em;
@@ -868,8 +868,8 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 #page-heading {
-	font-family: 'Vollkorn', serif;
-	color: #74C0CF;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #222222;
 	text-align: center;
 }
 
@@ -937,7 +937,7 @@ ul.list3 li {
 }
 
 .navbar li {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #6B6B6B;
 	font-weight: 400;
 	line-height: 1.3em;
@@ -949,4 +949,48 @@ section {
 	padding-top: 100px;
 	margin-top: -100px;
 }
+
+.embedded-video {
+	width: 460px;
+	height: 259px;
+	margin-top: 20px;
+	-moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 5px;
+}
+
+@media (min-width: 1200px) {
+  .embedded-video {
+	width : 570px;
+	height : 318px;
+	margin-top:20px;
+  }
+}
+@media (max-width: 979px) {
+  .embedded-video {
+	width: 352px;
+	height: 200px;
+	margin-top: 80px;
+  }
+}
+
+h2.front-title {
+	margin-top: 20px;
+}
+
+@media (min-width: 1200px) {
+  h2.front-title {
+	margin-top:40px;
+  }
+}
+  
+@media (max-width: 979px) {
+  h2.front-title {
+	margin-top: 80px;
+  }
+}
+
+
+
 
