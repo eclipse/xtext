@@ -10,12 +10,9 @@ import org.eclipse.xtext.generator.Naming
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 
-// ******************************************************************************
-// ***  this API can be used by other templates to generate code             ****
-// ***  that has hard references to grammar rules/elements                   ****
-// ******************************************************************************
-
 /**
+ * This API can be used by other templates to generate code
+ * that has hard references to grammar rules/elements 
  * @author Moritz Eysholdt
  */
 class GrammarAccess {
@@ -42,7 +39,7 @@ class GrammarAccess {
 	 * @return the java identifier
 	 */
 	def String toJavaIdentifier(String text, boolean uppercaseFirst) {
-		GrammarAccessUtil::toJavaIdentifier(text, uppercaseFirst)
+		GrammarAccessUtil.toJavaIdentifier(text, uppercaseFirst)
 	}
 		
 	/** 
@@ -63,15 +60,15 @@ class GrammarAccess {
 	 * @return the element's identifier
 	 */
 	def String gaElementIdentifyer(AbstractElement element) {
-		GrammarAccessUtil::getUniqueElementName(element);
+		GrammarAccessUtil.getUniqueElementName(element);
 	}
 	/**
 	 * Returns the full qulified Java class name of a GrammarAccess implementation for a grammar.
-	 * @param grammar 
+	 * @param grammar the grammar
 	 * @return the GrammarAccess' full qualified Java class name
 	 */
 	def String gaFQName(Grammar grammar) {
-		GrammarAccessUtil::getGrammarAccessFQName(grammar, naming)
+		GrammarAccessUtil.getGrammarAccessFQName(grammar, naming)
 	}
 
 	/**
@@ -114,7 +111,7 @@ class GrammarAccess {
 	/**
 	 * Returns the simple class name of a rule's facade. A GrammarAccess implementation has
 	 * a facade for each parser rule, which contains the methods for accessing the rule's elements.
-	 * @param rule
+	 * @param rule ruleName
 	 * @return the simple class name
 	 */	
 	def String gaRuleAccesorClassName(AbstractRule rule) {
@@ -189,7 +186,7 @@ class GrammarAccess {
 	 *
 	 */
 	def String grammarFragmentToStr(EObject ele, String prefix) {
-		GrammarAccessUtil::serialize(ele, prefix);
+		GrammarAccessUtil.serialize(ele, prefix);
 	}
 	
 }

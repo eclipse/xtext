@@ -11,9 +11,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.junit.serializer.SerializerTester;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -42,9 +43,11 @@ public class XtextSerializerTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		new StandaloneSetup().setPlatformUri("../..");
+		StandaloneSetup standaloneSetup = new StandaloneSetup();
+		standaloneSetup.setIgnoreBrokenProjectFiles(true);
+		standaloneSetup.setPlatformUri("../..");
 		with(new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
@@ -61,7 +64,7 @@ public class XtextSerializerTest extends AbstractXtextTests {
 		getInjector().injectMembers(this);
 	}
 
-	public void testDummy() {
+	@Test public void testDummy() {
 	}
 
 	public void _testXtextXtextWithNM() throws Exception {

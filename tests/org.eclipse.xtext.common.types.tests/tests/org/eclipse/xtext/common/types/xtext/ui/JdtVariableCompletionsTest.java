@@ -12,17 +12,18 @@ import static com.google.common.collect.Sets.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JdtVariableCompletionsTest extends TestCase {
+public class JdtVariableCompletionsTest extends Assert {
 
 	private final static class TestableJdtVariableCompletions extends JdtVariableCompletions {
 		
@@ -51,13 +52,12 @@ public class JdtVariableCompletionsTest extends TestCase {
 
 	private TestableJdtVariableCompletions completions;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		this.completions = new TestableJdtVariableCompletions();
 	}
 	
-	public void testGetRawTypeSimpleName() throws Exception {
+	@Test public void testGetRawTypeSimpleName() throws Exception {
 		assertEquals("", completions.getRawTypeSimpleName(""));
 		assertEquals("Map", completions.getRawTypeSimpleName("Map"));
 		assertEquals("List", completions.getRawTypeSimpleName("List<String>"));
@@ -66,17 +66,20 @@ public class JdtVariableCompletionsTest extends TestCase {
 		assertEquals("§52F$%%", completions.getRawTypeSimpleName("§52F$%%"));
 	}
 	
-	public void testGetFirstTypeArgumentSimpleName() throws Exception {
+	@Test public void testGetFirstTypeArgumentSimpleName() throws Exception {
 		assertNull(completions.getFirstTypeArgumentSimpleName(""));
 		assertNull(completions.getFirstTypeArgumentSimpleName("Map"));
 		assertEquals("String", completions.getFirstTypeArgumentSimpleName("List<String>"));
 		assertEquals("String", completions.getFirstTypeArgumentSimpleName("java.util.List<java.lang.String>"));
 		assertEquals("Foo", completions.getFirstTypeArgumentSimpleName("Map<Foo,Bar>"));
 		assertEquals("Foo", completions.getFirstTypeArgumentSimpleName("Map<my.foo.Foo<?>,Bar>"));
+		assertNull(completions.getFirstTypeArgumentSimpleName("Map<my.foo.Foo"));
+		assertNull(completions.getFirstTypeArgumentSimpleName("Map<my.foo.Foo<"));
+		assertEquals("Foo",completions.getFirstTypeArgumentSimpleName("Map<my.foo.Foo<>"));
 		assertNull(completions.getFirstTypeArgumentSimpleName("§52F$%%"));
 	}
 	
-	public void testGetArrayComponentTypeSimpleName() throws Exception {
+	@Test public void testGetArrayComponentTypeSimpleName() throws Exception {
 		assertNull(completions.getArrayComponentTypeSimpleName(""));
 		assertNull(completions.getArrayComponentTypeSimpleName("Map"));
 		assertEquals("String", completions.getArrayComponentTypeSimpleName("String[]"));
@@ -88,7 +91,7 @@ public class JdtVariableCompletionsTest extends TestCase {
 		assertEquals("Foo>", completions.getArrayComponentTypeSimpleName("List<org.stuff.Foo>[]"));
 	}
 	
-	public void testGetVariableProposals() throws Exception {
+	@Test public void testGetVariableProposals() throws Exception {
 		assertContainsProposals(newHashSet("strings"), "String[]");
 		assertContainsProposals(newHashSet("strings2"), "String[]", newHashSet("strings"));
 		assertContainsProposals(newHashSet("foos","myFoos"), "List<foo.bar.MyFoo>");

@@ -9,12 +9,13 @@ package org.eclipse.xtext.util;
 
 import java.lang.reflect.Method;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ReflectionTest extends TestCase {
+public class ReflectionTest extends Assert {
 	
 	private static class MyClass {
 		@SuppressWarnings("unused")
@@ -23,7 +24,7 @@ public class ReflectionTest extends TestCase {
 		}
 	}
 	
-	public void testGetMethodGivesCopy() throws Exception {
+	@Test public void testGetMethodGivesCopy() throws Exception {
 		Class<MyClass> clazz = MyClass.class;
 		Method declaredMethod = clazz.getDeclaredMethod("getString");
 		assertNotNull("declaredMethod", declaredMethod);

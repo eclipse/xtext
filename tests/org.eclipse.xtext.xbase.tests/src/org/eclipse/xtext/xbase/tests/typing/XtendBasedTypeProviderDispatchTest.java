@@ -12,15 +12,15 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtendBasedTypeProviderDispatchTest extends TestCase {
+public class XtendBasedTypeProviderDispatchTest extends Assert {
 	
-	public void testDispatchType() {
+	@Test public void testDispatchType() {
 		XBinaryOperation binaryOperation = XbaseFactory.eINSTANCE.createXBinaryOperation();
 		try {
 			new SomeCustomTypeProviderWithXtend().type(binaryOperation, null, true);
@@ -31,7 +31,7 @@ public class XtendBasedTypeProviderDispatchTest extends TestCase {
 		}
 	}
 	
-	public void testDispatchExpectedType() {
+	@Test public void testDispatchExpectedType() {
 		XMemberFeatureCall featureCall = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
 		try {
 			new SomeCustomTypeProviderWithXtend().expectedType(featureCall, null, 0, true);
@@ -42,7 +42,7 @@ public class XtendBasedTypeProviderDispatchTest extends TestCase {
 		}
 	}
 	
-	public void testDispatchTypeForIdentifiable() {
+	@Test public void testDispatchTypeForIdentifiable() {
 		JvmAnnotationType annotation = TypesFactory.eINSTANCE.createJvmAnnotationType();
 		try {
 			new SomeCustomTypeProviderWithXtend().typeForIdentifiable(annotation, true);

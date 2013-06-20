@@ -16,11 +16,12 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -33,7 +34,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testSimpleSerialization() throws Exception {
+	@Test public void testSimpleSerialization() throws Exception {
 		final String model = "grammar foo with org.eclipse.xtext.common.Terminals\n"
 				+ "generate mm \"http://bar\" as fooMM\n" + "StartRule returns fooMM::T: name=ID;";
 		final String expectedModel = "grammar foo with org.eclipse.xtext.common.Terminals\n\ngenerate "
@@ -52,7 +53,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
 		assertEquals(expectedModel, serializedModel);
 	}
 
-	public void testMetamodelRefSerialization() throws Exception {
+	@Test public void testMetamodelRefSerialization() throws Exception {
 		final String model = "grammar foo with org.eclipse.xtext.common.Terminals\n"
 				+ "import \"http://www.eclipse.org/2008/Xtext\" as xtext\n" + "generate mm \"http://bar\" as fooMM\n"
 				+ "Foo returns fooMM::Foo: name=ID (nameRefs+=NameRef)*;\n"

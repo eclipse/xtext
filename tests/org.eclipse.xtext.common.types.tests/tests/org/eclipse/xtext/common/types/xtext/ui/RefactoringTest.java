@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -21,21 +21,22 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
 import org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.Model;
 import org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.ReferenceHolder;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class RefactoringTest extends AbstractEditorTest {
 
 	private IFile javaFile;
@@ -51,15 +52,15 @@ public class RefactoringTest extends AbstractEditorTest {
 		IRenameSupport.Factory renameSupportFactory;
 
 		@Inject(optional=true)
-		IRenameElementHandler renameElementHandler;
+		IRenameContextFactory renameContextFactory;
 		
 		public boolean hasRefactoring() {
-			return renameSupportFactory != null && renameElementHandler != null;
+			return renameSupportFactory != null && renameContextFactory != null;
 		}
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		closeWelcomePage();
 		closeEditors();
 		javaProject = createJavaProject("RefactoringTest");
@@ -68,7 +69,7 @@ public class RefactoringTest extends AbstractEditorTest {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		closeEditors();
 		javaProject.getProject().delete(true, new NullProgressMonitor());
 		waitForAutoBuild();
@@ -93,27 +94,28 @@ public class RefactoringTest extends AbstractEditorTest {
 		return "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage" + languageNameSuffix;
 	}
 
-	public void testRenameElement() throws Exception {
+	@Test public void testRenameElement() throws Exception {
 		setLanguageConfig(false, false);
 		IRenameSupport renameSupport = createRenameSupportForElement();
 		assertNull(renameSupport);
 	}
 
-	public void testRenameJvmReference() throws Exception {
+	@Test public void testRenameJvmReference() throws Exception {
 		setLanguageConfig(false, false);
 		IRenameSupport renameSupport = createRenameSupportForJvmReference();
 		assertNull(renameSupport);
 	}
 
-	// TODO: disable warning dialog
-//	public void testRenameJavaClass() throws Exception {
-//		setLanguageConfig(false, false);
-//		renameJavaClass();	
-//		assertJavaRefactored();
-//		assertXtextUnchanged();
-//	}
+	@Test
+	@Ignore("TODO: disable warning dialog")
+	public void testRenameJavaClass() throws Exception {
+		setLanguageConfig(false, false);
+		renameJavaClass();	
+		assertJavaRefactored();
+		assertXtextUnchanged();
+	}
 
-	public void testRenameElement_1() throws Exception {
+	@Test public void testRenameElement_1() throws Exception {
 		setLanguageConfig(true, false);
 		IRenameSupport renameSupport = createRenameSupportForElement();
 		assertNotNull(renameSupport);
@@ -123,20 +125,20 @@ public class RefactoringTest extends AbstractEditorTest {
 		assertJavaUnchanged();
 	}
 
-	public void testRenameJvmReference_1() throws Exception {
+	@Test public void testRenameJvmReference_1() throws Exception {
 		setLanguageConfig(true, false);
 		IRenameSupport renameSupport = createRenameSupportForJvmReference();
 		assertNull(renameSupport);
 	}
 
-	public void testRenameJavaClass_1() throws Exception {
+	@Test public void testRenameJavaClass_1() throws Exception {
 		setLanguageConfig(true, false);
 		renameJavaClass();	
 		assertJavaRefactored();
 		assertXtextJvmRefRefactored();
 	}
 
-	public void testRenameElement_2() throws Exception {
+	@Test public void testRenameElement_2() throws Exception {
 		setLanguageConfig(true, true);
 		IRenameSupport renameSupport = createRenameSupportForElement();
 		assertNotNull(renameSupport);
@@ -146,7 +148,7 @@ public class RefactoringTest extends AbstractEditorTest {
 		assertJavaUnchanged();
 	}
 
-	public void testRenameJvmReference_2() throws Exception {
+	@Test public void testRenameJvmReference_2() throws Exception {
 		setLanguageConfig(true, true);
 		IRenameSupport renameSupport = createRenameSupportForJvmReference();
 		assertNotNull(renameSupport);
@@ -156,7 +158,7 @@ public class RefactoringTest extends AbstractEditorTest {
 		assertJavaRefactored();
 	}
 
-	public void testRenameJavaClass_2() throws Exception {
+	@Test public void testRenameJavaClass_2() throws Exception {
 		setLanguageConfig(true, true);
 		renameJavaClass();	
 		assertXtextJvmRefRefactored();
@@ -196,7 +198,7 @@ public class RefactoringTest extends AbstractEditorTest {
 					public IRenameElementContext exec(XtextResource state) throws Exception {
 						Model model = (Model) state.getContents().get(0);
 						JvmType defaultReference = model.getReferenceHolder().get(0).getDefaultReference();
-						return languageServices.renameElementHandler.createRenameElementContext(defaultReference,
+						return languageServices.renameContextFactory.createRenameElementContext(defaultReference,
 								editor, null, state);
 					}
 				});
@@ -213,7 +215,7 @@ public class RefactoringTest extends AbstractEditorTest {
 					public IRenameElementContext exec(XtextResource state) throws Exception {
 						Model model = (Model) state.getContents().get(0);
 						ReferenceHolder referenceHolder = model.getReferenceHolder().get(0);
-						return languageServices.renameElementHandler.createRenameElementContext(referenceHolder,
+						return languageServices.renameContextFactory.createRenameElementContext(referenceHolder,
 								editor, null, state);
 					}
 				});

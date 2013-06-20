@@ -28,10 +28,12 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 
 	private PolymorphicDispatcher<Collection<ExitPoint>> dispatcher = PolymorphicDispatcher.createForSingleTarget("_exitPoints", this);
@@ -53,6 +55,9 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		return dispatcher.invoke(expression);
 	}
 	
+	/**
+	 * @param expression unused in this context but required in dispatch signature 
+	 */
 	protected Collection<ExitPoint> _exitPoints(XExpression expression) {
 		return Collections.emptyList();
 	}

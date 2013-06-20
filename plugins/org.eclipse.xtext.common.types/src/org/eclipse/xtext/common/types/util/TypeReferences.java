@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import static com.google.common.collect.Lists.*;
-
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -17,11 +14,11 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
@@ -29,56 +26,87 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
+@SuppressWarnings("deprecation")
 public class TypeReferences {
-	
-	@SuppressWarnings("unused")
+
 	private final static Logger log = Logger.getLogger(TypeReferences.class);
 
 	@Inject
 	private TypesFactory factory = TypesFactory.eINSTANCE;
-	
+
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
-	
+
 	@Inject
 	private ClassURIHelper uriHelper;
-	
+
 	@Inject
 	private SuperTypeCollector superTypeCollector;
-	
-	public JvmAnyTypeReference createAnyTypeReference(EObject context) {
+
+	/**
+	 * @return a fresh {@link JvmAnyTypeReference} or null if {@link Object} is not on the context's classpath
+	 */
+	public JvmAnyTypeReference createAnyTypeReference(Notifier context) {
+		if (context == null)
+			throw new NullPointerException("context");
 		JvmAnyTypeReference result = factory.createJvmAnyTypeReference();
-		result.setType(findDeclaredType(Object.class, context));
+		final JvmType objectType = findDeclaredType(Object.class, context);
+		if (objectType == null)
+			return null;
+		result.setType(objectType);
 		return result;
 	}
-	
-	public JvmMultiTypeReference createMultiTypeReference(EObject context, JvmTypeReference... references) {
-		 JvmMultiTypeReference result = factory.createJvmMultiTypeReference();
-		 if (references != null && references.length != 0) {
-			 result.getReferences().addAll(Arrays.asList(references));
-		 }
-		 result.setType(findDeclaredType(Object.class, context));
-		 return result;
+
+	/**
+	 * @return a fresh {@link JvmMultiTypeReference} pointing to the given references or null if {@link Object} is not
+	 *         on the context's class path
+	 */
+	public JvmMultiTypeReference createMultiTypeReference(Notifier context, JvmTypeReference... references) {
+		if (context == null)
+			throw new NullPointerException("context");
+		JvmMultiTypeReference result = factory.createJvmMultiTypeReference();
+		if (references != null && references.length != 0) {
+			for (JvmTypeReference reference : references) {
+				result.getReferences().add(createDelegateTypeReference(reference));
+			}
+		}
+		final JvmType findDeclaredType = findDeclaredType(Object.class, context);
+		if (findDeclaredType == null)
+			return null;
+		result.setType(findDeclaredType);
+		return result;
 	}
-	
+
+	/**
+	 * @return a fresh {@link JvmParameterizedTypeReference} for the given {@link JvmType} parameterized with the given
+	 *         typeArgs. This method does not check whether the given type can handle the given type arguments.
+	 */
 	public JvmParameterizedTypeReference createTypeRef(JvmType type, JvmTypeReference... typeArgs) {
+		if (type == null)
+			throw new NullPointerException("type");
 		List<JvmTypeReference> typeReferences = Collections.emptyList();
-		if (typeArgs!=null && typeArgs.length > 0) {
-			typeReferences = newArrayListWithCapacity(typeArgs.length);
+		if (typeArgs != null && typeArgs.length > 0) {
+			typeReferences = Lists.newArrayListWithCapacity(typeArgs.length);
 			for (int i = 0; i < typeArgs.length; i++) {
 				JvmTypeReference jvmTypeReference = typeArgs[i];
-				typeReferences.add(EcoreUtil2.clone(jvmTypeReference));
+				typeReferences.add(EcoreUtil2.cloneIfContained(jvmTypeReference));
 			}
 		}
 		if (type instanceof JvmGenericType) {
@@ -90,7 +118,7 @@ public class TypeReferences {
 			}
 			// Raw type -> create type references to type param
 			if (typeReferences.isEmpty() && !list.isEmpty()) {
-				typeReferences = newArrayListWithCapacity(list.size());
+				typeReferences = Lists.newArrayListWithCapacity(list.size());
 				for (JvmTypeParameter typeParameter : list) {
 					typeReferences.add(createTypeRef(typeParameter));
 				}
@@ -101,6 +129,12 @@ public class TypeReferences {
 		if (!typeReferences.isEmpty())
 			reference.getArguments().addAll(typeReferences);
 		return reference;
+	}
+
+	public JvmDelegateTypeReference createDelegateTypeReference(JvmTypeReference typeRef) {
+		JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
+		delegate.setDelegate(typeRef);
+		return delegate;
 	}
 
 	public JvmTypeReference getArgument(JvmTypeReference left, int index) {
@@ -126,7 +160,7 @@ public class TypeReferences {
 		JvmWildcardTypeReference result = factory.createJvmWildcardTypeReference();
 		return result;
 	}
-	
+
 	public JvmWildcardTypeReference wildCardExtends(JvmTypeReference clone) {
 		JvmWildcardTypeReference result = factory.createJvmWildcardTypeReference();
 		JvmUpperBound upperBound = factory.createJvmUpperBound();
@@ -134,92 +168,118 @@ public class TypeReferences {
 		result.getConstraints().add(upperBound);
 		return result;
 	}
-	
+
 	protected URI toCommonTypesUri(Class<?> clazz) {
 		URI result = uriHelper.getFullURI(clazz);
 		return result;
 	}
 
-	public JvmTypeReference getTypeForName(Class<?> clazz, EObject context, JvmTypeReference... params) {
+	public JvmTypeReference getTypeForName(Class<?> clazz, Notifier context, JvmTypeReference... params) {
 		if (clazz == null)
 			throw new NullPointerException("clazz");
 		JvmType declaredType = findDeclaredType(clazz, context);
 		if (declaredType == null)
-			return null;
+			return getUnknownTypeReference(clazz.getName());
 		JvmParameterizedTypeReference result = createTypeRef(declaredType, params);
 		return result;
 	}
 	
+	protected JvmUnknownTypeReference getUnknownTypeReference(String qualifiedName) {
+		JvmUnknownTypeReference reference = TypesFactory.eINSTANCE.createJvmUnknownTypeReference();
+		reference.setQualifiedName(qualifiedName);
+		return reference;
+	}
+
 	public JvmTypeReference getTypeForName(String typeName, Notifier context, JvmTypeReference... params) {
 		if (typeName == null)
 			throw new NullPointerException("typeName");
 		JvmType declaredType = findDeclaredType(typeName, context);
 		if (declaredType == null)
-			return null;
+			return getUnknownTypeReference(typeName);
 		JvmParameterizedTypeReference result = createTypeRef(declaredType, params);
 		return result;
 	}
-	
+
 	public JvmGenericArrayTypeReference createArrayType(JvmTypeReference componentType) {
 		JvmGenericArrayTypeReference result = factory.createJvmGenericArrayTypeReference();
 		result.setComponentType(EcoreUtil2.cloneIfContained(componentType));
 		return result;
 	}
-	
-	public JvmType findDeclaredType(Class<?> clazz, EObject context) {
-		if (context == null)
-			throw new NullPointerException("context");
-		if (context.eResource() == null)
-			throw new NullPointerException("context must be contained in a resource");
-		final ResourceSet resourceSet = context.eResource().getResourceSet();
-		if (resourceSet == null) {
-			// may be null if the editor was closed too early
-			return null;
-		}
-		// make sure a type provider is configured in the resource set. 
-		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		URI uri = toCommonTypesUri(clazz);
-		JvmType declaredType = (JvmType) resourceSet.getEObject(uri, true);
+
+	/**
+	 * looks up a JVMType corresponding to the given {@link Class}. This method ignores any Jvm types created in non-
+	 * {@link TypeResource} in the given EObject's resourceSet, but goes straight to the Java-layer, using a
+	 * {@link IJvmTypeProvider}.
+	 * 
+	 * @return the JvmType with the same qualified name as the given {@link Class} object, or null if no such JvmType
+	 *         could be found using the context's resourceSet.
+	 */
+	public JvmType findDeclaredType(Class<?> clazz, Notifier context) {
+		if (clazz == null)
+			throw new NullPointerException("clazz");
+		JvmType declaredType = findDeclaredType(clazz.getName(), context);
 		return declaredType;
 	}
-	
+
+	/**
+	 * looks up a JVMType corresponding to the given {@link Class}. This method ignores any Jvm types created in non-
+	 * {@link TypeResource} in the given context's resourceSet, but goes straight to the Java-layer, using a
+	 * {@link IJvmTypeProvider}.
+	 * 
+	 * @return the JvmType with the same qualified name as the given {@link Class} object, or null if no such JvmType
+	 *         could be found using the context's resourceSet.
+	 */
 	public JvmType findDeclaredType(String typeName, Notifier context) {
+		if (typeName == null)
+			throw new NullPointerException("typeName");
 		if (context == null)
 			throw new NullPointerException("context");
 		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
 		if (resourceSet == null)
 			return null;
-//			throw new NullPointerException("context must be contained in a resource");
 		// make sure a type provider is configured in the resource set. 
 		IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		return typeProvider.findTypeByName(typeName);
+		try {
+			final JvmType result = typeProvider.findTypeByName(typeName);
+			return result;
+		} catch (RuntimeException e) {
+			log.info("Couldn't find JvmType for name '" + typeName + "' in context " + context, e);
+			return null;
+		}
 	}
-	
+
 	public boolean is(final JvmTypeReference reference, final Class<?> clazz) {
 		if (isNullOrProxy(reference))
 			return false;
-		final boolean equals = clazz.getCanonicalName().equals(reference.getType().getIdentifier());
-		return equals;
+		boolean result = is(reference.getType(), clazz);
+		return result;
+	}
+	
+	public boolean is(final JvmType type, final Class<?> clazz) {
+		if (type == null)
+			return false;
+		boolean result = clazz.getCanonicalName().equals(type.getIdentifier());
+		return result;
 	}
 
 	public boolean isNullOrProxy(final JvmTypeReference reference) {
-		return reference==null || reference.getType()==null || reference.getType().eIsProxy();
+		return reference == null || reference.getType() == null || reference.getType().eIsProxy();
 	}
-	
+
 	public boolean isInstanceOf(JvmTypeReference reference, Class<?> clazz) {
 		if (isNullOrProxy(reference))
 			return false;
-		if (is(reference,clazz)) {
+		if (is(reference, clazz)) {
 			return true;
 		}
 		Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(reference);
 		for (JvmTypeReference jvmTypeReference : types) {
-			if (is(jvmTypeReference,clazz))
+			if (is(jvmTypeReference, clazz))
 				return true;
 		}
 		return false;
 	}
-	
+
 	public boolean isArray(JvmTypeReference type) {
 		if (isNullOrProxy(type))
 			return false;

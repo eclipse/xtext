@@ -2,35 +2,35 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.purexbase
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.4.3.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
- org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional,
- org.eclipse.emf.mwe2.launch;bundle-version="2.1.0";resolution:=optional,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.4.3";visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.mwe2.launch;bundle-version="2.2.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types,
- org.eclipse.xtext.xbase;bundle-version="2.0.0";visibility:=reexport,
- org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=reexport,
- org.eclipse.xtext.xtend2.lib
+ org.eclipse.xtext.xbase;bundle-version="2.4.3";visibility:=reexport,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.4.3";visibility:=reexport,
+ org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy
 Import-Package: org.apache.commons.logging,
- org.apache.log4j,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext.xtend2.lib
+ org.apache.log4j;version="1.2.15",
+ org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.purexbase,
- org.eclipse.xtext.purexbase.services,
+ org.eclipse.xtext.purexbase.formatting,
+ org.eclipse.xtext.purexbase.jvmmodel,
+ org.eclipse.xtext.purexbase.parser.antlr,
+ org.eclipse.xtext.purexbase.parser.antlr.internal,
  org.eclipse.xtext.purexbase.pureXbase,
  org.eclipse.xtext.purexbase.pureXbase.impl,
  org.eclipse.xtext.purexbase.pureXbase.util,
- org.eclipse.xtext.purexbase.parseTreeConstruction,
- org.eclipse.xtext.purexbase.parser.antlr,
- org.eclipse.xtext.purexbase.parser.antlr.internal,
- org.eclipse.xtext.purexbase.validation
+ org.eclipse.xtext.purexbase.services,
+ org.eclipse.xtext.purexbase.validation,
+ org.eclipse.xtext.purexbase.serializer
+

@@ -8,10 +8,11 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import org.eclipse.xtext.common.types.access.IMirror;
+import org.eclipse.xtext.common.types.access.IMirrorExtension;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IClassMirror extends IMirror {
+public interface IClassMirror extends IMirror, IMirrorExtension {
 
 }

@@ -11,36 +11,40 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  */
-public class DeclarativeValidatorTest extends TestCase {
+public class DeclarativeValidatorTest extends Assert {
 
 	private ValidationTestHelper helper;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		this.helper = new ValidationTestHelper();
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		this.helper = null;
-		super.tearDown();
 	}
 
-	public void testSimpleDispatch() throws Exception {
+	@Test public void testSimpleDispatch() throws Exception {
 		AbstractDeclarativeValidator test = helper.validator();
 		TestChain chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
@@ -49,7 +53,7 @@ public class DeclarativeValidatorTest extends TestCase {
 				EcorePackage.Literals.ECLASS__ABSTRACT);
 	}
 
-	public void testDeeperHierarchyWithOverwrittenJavaMethods() throws Exception {
+	@Test public void testDeeperHierarchyWithOverwrittenJavaMethods() throws Exception {
 		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
 			@Override
 			@Check
@@ -65,9 +69,8 @@ public class DeclarativeValidatorTest extends TestCase {
 	}
 
 	@SuppressWarnings("serial")
-	public void testSkipExpensive() throws Exception {
+	@Test public void testSkipExpensive() throws Exception {
 		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
-			@SuppressWarnings("unused")
 			@Check(CheckType.EXPENSIVE)
 			public void bar(Object x) {
 				error("fooObject", EcorePackage.Literals.ECLASS__EALL_ATTRIBUTES);
@@ -102,9 +105,8 @@ public class DeclarativeValidatorTest extends TestCase {
 				EcorePackage.Literals.ECLASS__EALL_ATTRIBUTES);
 	}
 
-	public void testGuard() throws Exception {
+	@Test public void testGuard() throws Exception {
 		AbstractDeclarativeValidator validator = new AbstractDeclarativeValidator() {
-			@SuppressWarnings("unused")
 			@Check
 			public void guarded(EClass x) {
 				guard("".equals(x.getName()));
@@ -117,7 +119,7 @@ public class DeclarativeValidatorTest extends TestCase {
 	}
 
 	@SuppressWarnings("serial")
-	public void testCheckModeSettedProperly() throws Exception {
+	@Test public void testCheckModeSettedProperly() throws Exception {
 		AbstractDeclarativeValidator test = helper.validator();
 		TestChain chain = helper.chain();
 		try {
@@ -133,7 +135,7 @@ public class DeclarativeValidatorTest extends TestCase {
 		fail("CheckMode with wrong type, should throw an IllegalArgumentException");
 	}
 	
-	public void testAssertThreadLocalState() throws Exception {
+	@Test public void testAssertThreadLocalState() throws Exception {
 		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
 			@Override
 			@Check
@@ -150,7 +152,7 @@ public class DeclarativeValidatorTest extends TestCase {
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
 	}
 	
-	public void testCurrentObjectAndMethod() throws Exception {
+	@Test public void testCurrentObjectAndMethod() throws Exception {
 		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
 			@Override
 			@Check
@@ -167,7 +169,7 @@ public class DeclarativeValidatorTest extends TestCase {
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
 	}
 	
-	public void testContext() throws Exception {
+	@Test public void testContext() throws Exception {
 		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
 			@Override
 			@Check
@@ -181,7 +183,7 @@ public class DeclarativeValidatorTest extends TestCase {
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, singletonMap);
 	}
 	
-	public void testCheckMode() throws Exception {
+	@Test public void testCheckMode() throws Exception {
 		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
 			@Override
 			@Check
@@ -194,10 +196,9 @@ public class DeclarativeValidatorTest extends TestCase {
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, singletonMap);
 	}
 	
-	public void testError() {
+	@Test public void testError() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				error("Error Message", EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 			}
@@ -212,10 +213,9 @@ public class DeclarativeValidatorTest extends TestCase {
 		assertEquals(Diagnostic.ERROR, diag.getSeverity());
 	}
 
-	public void testErrorWithSource() {
+	@Test public void testErrorWithSource() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				error(
 						"Error Message", 
@@ -234,10 +234,9 @@ public class DeclarativeValidatorTest extends TestCase {
 		assertEquals(Diagnostic.ERROR, diag.getSeverity());
 	}
 
-	public void testErrorWithCode() {
+	@Test public void testErrorWithCode() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				error(
 						"Error Message", 
@@ -258,10 +257,9 @@ public class DeclarativeValidatorTest extends TestCase {
 		assertEquals(Diagnostic.ERROR, diag.getSeverity());
 	}
 
-	public void testWarning() {
+	@Test public void testWarning() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				warning("Error Message", EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 			}
@@ -276,10 +274,9 @@ public class DeclarativeValidatorTest extends TestCase {
 		assertEquals(Diagnostic.WARNING, diag.getSeverity());
 	}
 
-	public void testWarningWithSource() {
+	@Test public void testWarningWithSource() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				warning(
 						"Error Message", 
@@ -298,10 +295,9 @@ public class DeclarativeValidatorTest extends TestCase {
 		assertEquals(Diagnostic.WARNING, diag.getSeverity());
 	}
 
-	public void testWarningWithCode() {
+	@Test public void testWarningWithCode() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				warning(
 						"Error Message", 
@@ -320,6 +316,31 @@ public class DeclarativeValidatorTest extends TestCase {
 		assertTrue(diag instanceof FeatureBasedDiagnostic);
 		assertEquals("42", ((FeatureBasedDiagnostic)diag).getIssueCode());
 		assertEquals(Diagnostic.WARNING, diag.getSeverity());
+	}
+	
+	@Test public void testExceptionWhenGivenWrongEObject() {
+		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
+			@Check
+			public void foo(Object x) {
+				warning(
+						"Error Message", 
+						EcorePackage.Literals.EANNOTATION,
+						EcorePackage.Literals.ENAMED_ELEMENT__NAME,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						"42");
+			}
+		};
+		BasicDiagnostic chain = new BasicDiagnostic();
+		Resource r = new ResourceImpl(URI.createURI("http://foo"));
+		EObject x = EcoreFactory.eINSTANCE.createEAttribute();
+		r.getContents().add(x);
+		try {
+			test.validate(x, chain, Collections.emptyMap());
+			fail("expected exception");
+		} catch (IllegalArgumentException e) {
+			// expected
+		}
+		
 	}
 
 }

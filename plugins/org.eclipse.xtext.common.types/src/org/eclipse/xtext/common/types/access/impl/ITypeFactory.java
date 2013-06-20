@@ -11,6 +11,8 @@ import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ITypeFactory<Arg> {
 

@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 
 /**
  *

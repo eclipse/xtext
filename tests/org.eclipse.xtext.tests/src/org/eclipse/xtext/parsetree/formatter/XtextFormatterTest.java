@@ -7,21 +7,37 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 public class XtextFormatterTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		with(XtextStandaloneSetup.class);
+		with(new XtextStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new org.eclipse.xtext.XtextRuntimeModule() {
+					@SuppressWarnings("unused")
+					public Class<? extends ILineSeparatorInformation> bindILineSeparatorInformation() {
+						return FormatterTestLineSeparatorInformation.class;
+					}
+				});
+			}
+		});
+		get(FormatterTestLineSeparatorInformation.class).setLineSeparator("\n");
 	}
 
-	public void testXtextFormatting() throws IOException {
+	@Test public void testXtextFormatting() throws IOException {
 		String path = getClass().getPackage().getName().replace('.', '/');
 		URI u = URI.createURI("classpath:/" + path + "/XtextFormatterMessy.xtext");
 		XtextResourceSet resourceSet = new XtextResourceSet();

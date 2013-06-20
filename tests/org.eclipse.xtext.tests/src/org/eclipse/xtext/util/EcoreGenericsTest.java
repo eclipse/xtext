@@ -7,17 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.xtext.util.genericTest.GenericTestPackage;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class EcoreGenericsTest extends TestCase {
+public class EcoreGenericsTest extends Assert {
 
-	public void testReferenceType() throws Exception {
+	@Test public void testReferenceType() throws Exception {
 		EcoreGenericsUtil ecoreGenericsUtil = new EcoreGenericsUtil();
 		EClassifier referenceType = ecoreGenericsUtil.getReferenceType(GenericTestPackage.Literals.A__SOME_REFERENCE,
 				GenericTestPackage.Literals.D);

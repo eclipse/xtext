@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.grammarAccess;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -17,6 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -30,6 +34,8 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 
+import com.google.common.collect.Maps;
+
 /**
  * A grammar access fragment that handles subpackages of EPackages gracefully. In general, we recommend to avoid
  * nested EPackages if possible.
@@ -41,7 +47,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(GrammarAccessFragment.class);
 
-	private String xmlVersion = "1.0";
+	private String xmlVersion = null;
 
 	@Override
 	protected String getTemplate() {
@@ -50,8 +56,15 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory().addTypeToType(IGrammarAccess.class.getName(),
-				GrammarAccessUtil.getGrammarAccessFQName(grammar, getNaming())).getBindings();
+		BindFactory bindFactory = new BindFactory();
+		// generating this binding for terminals will break existing languages
+		if(!equal("org.eclipse.xtext.common.Terminals", grammar.getName())) {
+			bindFactory
+				.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()");
+		}
+		bindFactory.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar, getNaming()));
+		return bindFactory.getBindings();
+			
 	}
 
 	@Override
@@ -69,17 +82,28 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		ResourceSet set = copy.eResource().getResourceSet();
 
 		// save grammar model
-		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(copy);
-		Resource resource = set.createResource(
-				URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/" + xmiPath),
-				ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		String path;
+		if (xmlVersion == null) {
+			path = GrammarUtil.getClasspathRelativePathToBinGrammar(copy);
+		} else {
+			log.warn("'xmlVersion' has been specified for this "
+					+ GrammarAccessFragment.class.getSimpleName()
+					+ ". Therefore, the grammar is persisted as XMI and not as binary. This can be a performance drawback.");
+			path = GrammarUtil.getClasspathRelativePathToXmi(copy);
+		}
+		URI uri = URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/" + path);
+		Resource resource = set.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		addAllGrammarsToResource(resource, copy, new HashSet<Grammar>());
 		isSaving.set(Boolean.TRUE);
+		Map<String, Object> saveOptions = Maps.newHashMap();
 		if (resource instanceof XMLResource) {
 			((XMLResource) resource).setXMLVersion(getXmlVersion());
+		} else if (resource instanceof BinaryResourceImpl){
+			saveOptions.put(BinaryResourceImpl.OPTION_VERSION, BinaryResourceImpl.BinaryIO.Version.VERSION_1_1);
+			saveOptions.put(BinaryResourceImpl.OPTION_STYLE_DATA_CONVERTER, Boolean.TRUE);
 		}
 		try {
-			resource.save(null);
+			resource.save(saveOptions);
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		} finally {
@@ -118,7 +142,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 			Resource packResource = pack.eResource();
 			if (!packResource.getURI().toString().equals(pack.getNsURI())) {
 				ResourceSet packResourceSet = packResource.getResourceSet();
-				if (packResourceSet != null && packResourceSet.equals(set)) {
+				if (packResourceSet != null) {
 					EPackage topMost = pack;
 					// we need to be aware of empty subpackages
 					while (topMost.getESuperPackage() != null
@@ -130,6 +154,8 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 						else
 							moveSubpackagesToNewResource(topMost, set);
 					}
+					if (!topMost.eResource().getURI().toString().equals(topMost.getNsURI())) 
+						movePackageToNewResource(topMost, set);
 				}
 			}
 		}
@@ -142,15 +168,22 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 				if (sub.getEClassifiers().isEmpty()) {
 					moveSubpackagesToNewResource(sub, set);
 				} else {
-					Resource resource = set.createResource(
-							URI.createURI("___temp___." + FragmentFakingEcoreResourceFactoryImpl.ECORE_SUFFIX),
-							ContentHandler.UNSPECIFIED_CONTENT_TYPE);
-					resource.setURI(URI.createURI(sub.getNsURI()));
-					resource.getContents().add(sub);
+					movePackageToNewResource(sub, set);
 					pack.getESubpackages().remove(i);
 				}
 			}
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void movePackageToNewResource(EPackage pack, ResourceSet set) {
+		Resource resource = set.createResource(
+				URI.createURI("___temp___." + FragmentFakingEcoreResourceFactoryImpl.ECORE_SUFFIX),
+				ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		resource.setURI(URI.createURI(pack.getNsURI()));
+		resource.getContents().add(pack);
 	}
 
 	public void setXmlVersion(String xmlVersion) {
@@ -158,6 +191,6 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	}
 
 	public String getXmlVersion() {
-		return xmlVersion;
+		return xmlVersion == null ? "1.0" : xmlVersion;
 	}
 }

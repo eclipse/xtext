@@ -19,6 +19,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.enumrules.enums.ExistingEnum;
 import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnostic;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,7 +27,7 @@ import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnostic;
 public class GrammarParserTest extends AbstractEnumRulesTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
@@ -38,7 +39,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		}
 	}
 	
-	public void testEnum_01() throws Exception {
+	@Test public void testEnum_01() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/AbstractEnumRulesTest/TestEnum/1'\n" +
@@ -58,7 +59,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals("Value1", value.getLiteral());
 	}
 	
-	public void testEnum_02() throws Exception {
+	@Test public void testEnum_02() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/AbstractEnumRulesTest/TestEnum/2'\n" +
@@ -78,7 +79,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals("Value1", value.getLiteral());
 	}
 	
-	public void testEnum_03() throws Exception {
+	@Test public void testEnum_03() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/AbstractEnumRulesTest/TestEnum/3'\n" +
@@ -98,7 +99,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals("value", value.getLiteral());
 	}
 	
-	public void testEnum_04() throws Exception {
+	@Test public void testEnum_04() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
@@ -126,7 +127,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals(value.getLiteral(), decl.getLiteral().getValue());
 	}
 	
-	public void testEnum_05() throws Exception {
+	@Test public void testEnum_05() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
@@ -154,7 +155,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals("value", decl.getLiteral().getValue());
 	}
 	
-	public void testEnum_06() throws Exception {
+	@Test public void testEnum_06() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/AbstractEnumRulesTest/TestEnum/6'\n" +
@@ -184,7 +185,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals("Value3", value.getLiteral());
 	}
 	
-	public void testEnum_07() throws Exception {
+	@Test public void testEnum_07() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/AbstractEnumRulesTest/TestEnum/7'\n" +
@@ -204,7 +205,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals("Value", value.getLiteral());
 	}
 	
-	public void testEnum_08() throws Exception {
+	@Test public void testEnum_08() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/AbstractEnumRulesTest/TestEnum/8'\n" +
@@ -224,7 +225,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals("Value", value.getLiteral());
 	}
 	
-	public void testEnum_09() throws Exception {
+	@Test public void testEnum_09() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
 			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
@@ -238,7 +239,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals(modelAsString.lastIndexOf("Absent"), offset);
 	}
 	
-	public void testEnum_10() throws Exception {
+	@Test public void testEnum_10() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
 			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
@@ -266,7 +267,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals("SameName", decl.getLiteral().getValue());
 	}
 	
-	public void testEnum_11() throws Exception {
+	@Test public void testEnum_11() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
 			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore' as existing\n" +

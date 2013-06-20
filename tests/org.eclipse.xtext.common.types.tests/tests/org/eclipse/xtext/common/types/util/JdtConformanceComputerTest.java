@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.util;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.tests.JdtBasedModule;
+import org.junit.BeforeClass;
 
 import com.google.inject.Module;
 
@@ -18,6 +19,10 @@ import com.google.inject.Module;
  */
 public class JdtConformanceComputerTest extends AbstractTypeConformanceComputerTest {
 
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
+	
 	@Override
 	protected Module getModule() {
 		return new JdtBasedModule(){

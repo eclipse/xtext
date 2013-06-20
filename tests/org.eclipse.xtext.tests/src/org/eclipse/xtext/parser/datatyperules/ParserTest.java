@@ -15,9 +15,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,7 +32,7 @@ public class ParserTest extends AbstractXtextTests {
 	private EStructuralFeature vectorFeature;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(DatatypeRulesTestLanguageStandaloneSetup.class);
 		EPackage pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
@@ -45,7 +46,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseSimple() throws Exception {
+	@Test public void testParseSimple() throws Exception {
 		String model = "a.b.c.d;";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -58,7 +59,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseSimpleWithSpaces() throws Exception {
+	@Test public void testParseSimpleWithSpaces() throws Exception {
 		String model = " a . b . c . d ;";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -70,7 +71,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseSimpleWithMultipleSpaces() throws Exception {
+	@Test public void testParseSimpleWithMultipleSpaces() throws Exception {
 		String model = "  a  .  b  .  c  .  d  ;";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -82,7 +83,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithFraction() throws Exception {
+	@Test public void testParseWithFraction() throws Exception {
 		String model = "a.b.c.d: 1/2;";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -94,7 +95,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithFractionError() throws Exception {
+	@Test public void testParseWithFractionError() throws Exception {
 		String model = "a.b.c.d: 1/0;";
 		Resource r = getResourceFromStringAndExpect(model, 1);
 		EObject parsedModel = r.getContents().get(0);
@@ -108,7 +109,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithFractionErrorAndSpaces() throws Exception {
+	@Test public void testParseWithFractionErrorAndSpaces() throws Exception {
 		String model = "a.b.c.d:  1 / 0 ; ";
 		Resource r = getResourceFromStringAndExpect(model, 1);
 		EObject parsedModel = r.getContents().get(0);
@@ -122,7 +123,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithFractionErrorAndSyntaxError() throws Exception {
+	@Test public void testParseWithFractionErrorAndSyntaxError() throws Exception {
 		String model = "a.b.c.d: 1/0 ";
 		Resource r = getResourceFromStringAndExpect(model, 2);
 		EObject parsedModel = r.getContents().get(0);
@@ -139,7 +140,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithVector() throws Exception {
+	@Test public void testParseWithVector() throws Exception {
 		String model = "a.b.c.d # (1 2);";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -151,7 +152,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithVectorAndComment() throws Exception {
+	@Test public void testParseWithVectorAndComment() throws Exception {
 		String model = "a.b.c.d # (1/*comment*/2);";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -163,7 +164,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithDots() throws Exception {
+	@Test public void testParseWithDots() throws Exception {
 		String model = "a.b.c.d + . .;";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -175,7 +176,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithDotsAndLinebreak() throws Exception {
+	@Test public void testParseWithDotsAndLinebreak() throws Exception {
 		String model = "a.b.c.d + .\n.;";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -187,7 +188,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithDotsAndComments() throws Exception {
+	@Test public void testParseWithDotsAndComments() throws Exception {
 		String model = "a.b.c.d + ./*comment*/.;";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -199,7 +200,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseWithDoubleDots() throws Exception {
+	@Test public void testParseWithDoubleDots() throws Exception {
 		String model = "a.b.c.d + ..;";
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -211,7 +212,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseErrors_01() throws Exception {
+	@Test public void testParseErrors_01() throws Exception {
 		String model = "a.b.c.d";
 		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, r.getErrors().size());
@@ -225,7 +226,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseErrors_02() throws Exception {
+	@Test public void testParseErrors_02() throws Exception {
 		String model = "a.b.c.";
 		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, r.getErrors().size());
@@ -239,7 +240,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseErrors_03() throws Exception {
+	@Test public void testParseErrors_03() throws Exception {
 		String model = "a.b.c. ;";
 		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, r.getErrors().size());
@@ -253,7 +254,7 @@ public class ParserTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testParseErrors_04() throws Exception {
+	@Test public void testParseErrors_04() throws Exception {
 		String model = "a.b.c";
 		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, r.getErrors().size());

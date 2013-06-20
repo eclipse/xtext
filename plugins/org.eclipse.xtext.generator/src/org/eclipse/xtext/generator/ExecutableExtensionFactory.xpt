@@ -14,6 +14,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import «activatorName»;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -22,12 +24,12 @@ public class «executableExtensionFactory().toSimpleName()» extends AbstractGuice
 
 	@Override
 	protected Bundle getBundle() {
-		return «activatorName».getInstance().getBundle();
+		return «activatorName.toSimpleName()».getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return «activatorName».getInstance().getInjector("«name»");
+		return «activatorName.toSimpleName()».getInstance().getInjector(«activatorName.toSimpleName()».«name.toUpperCase().replaceAll('\\.', '_')»);
 	}
 	
 }

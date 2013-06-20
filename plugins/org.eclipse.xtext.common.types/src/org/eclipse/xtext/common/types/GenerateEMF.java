@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import java.io.File;
+
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
+
+import static java.io.File.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,7 +26,8 @@ public class GenerateEMF {
 		final String projectName = "org.eclipse.xtext.common.types";
 		
 		new StandaloneSetup() {{
-			setPlatformUri("../..");
+			registerProject(new File(".project").getAbsoluteFile());
+			registerProject(new File(".." + separator + "org.eclipse.xtext.common.types.edit" + separator+ ".project"));
 		}};
 		
 		new DirectoryCleaner() {{
@@ -30,7 +35,7 @@ public class GenerateEMF {
 		}}.invoke(null);
 		
 		new DirectoryCleaner() {{
-			setDirectory("../"+projectName+".ui/emf-gen");
+			setDirectory("../"+projectName+".edit/emf-gen");
 		}}.invoke(null);
 		
 		new EcoreGenerator() {{

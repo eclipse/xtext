@@ -12,8 +12,6 @@ import static org.easymock.EasyMock.*;
 
 import java.util.Collections;
 
-import junit.framework.TestCase;
-
 import org.easymock.EasyMock;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -26,12 +24,15 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  * 
  */
-public class TypeHierarchyHelperTest extends TestCase {
+public class TypeHierarchyHelperTest extends Assert {
 
 	private TypeHierarchyHelper helper;
 	private EClassifierInfos infos;
@@ -40,9 +41,8 @@ public class TypeHierarchyHelperTest extends TestCase {
 	private ErrorAcceptor errorAcceptorMock;
 	private GeneratedMetamodel metamodel;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		errorAcceptorMock = createMock(ErrorAcceptor.class);
 		metamodel = XtextFactory.eINSTANCE.createGeneratedMetamodel();
 		Grammar grammar = XtextFactory.eINSTANCE.createGrammar();
@@ -95,7 +95,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 		return feature;
 	}
 
-	public void testSimpeCase01() throws Exception {
+	@Test public void testSimpeCase01() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
@@ -115,7 +115,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
 	}
 
-	public void testSimpeCase02() throws Exception {
+	@Test public void testSimpeCase02() throws Exception {
 		// no uplift for less than two children
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
@@ -131,7 +131,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
 	}
 
-	public void testRecursiveUplift01() throws Exception {
+	@Test public void testRecursiveUplift01() throws Exception {
 		// no uplift for less than two children
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
@@ -162,7 +162,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 		assertEquals(0, e.getEClass().getEStructuralFeatures().size());
 	}
 
-	public void testNikolaus() throws Exception {
+	@Test public void testNikolaus() throws Exception {
 		// no uplift for less than two children
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
@@ -196,7 +196,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 		assertEquals(1, e.getEClass().getEStructuralFeatures().size());
 	}
 
-	public void testImcompatipleFeatures() throws Exception {
+	@Test public void testImcompatipleFeatures() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
@@ -216,7 +216,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
 	}
 
-	public void testReferences() throws Exception {
+	@Test public void testReferences() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
@@ -237,7 +237,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
 	}
 	
-	public void testConfigurationOfLiftedReference() throws Exception {
+	@Test public void testConfigurationOfLiftedReference() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
@@ -263,7 +263,7 @@ public class TypeHierarchyHelperTest extends TestCase {
 		assertTrue(refA.isContainment());
 	}
 
-	public void testDublicateDerivedFeature() throws Exception {
+	@Test public void testDublicateDerivedFeature() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");

@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase;
 
-
-
 /**
- * Use this class to register components to be used within the IDE.
+ * Use this class to register components to be used without the IDE.
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	

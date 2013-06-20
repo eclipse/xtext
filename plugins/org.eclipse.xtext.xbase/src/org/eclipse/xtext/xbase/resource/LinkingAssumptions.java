@@ -16,10 +16,13 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
+@Singleton
 public class LinkingAssumptions {
 
 	public static interface Tracker {

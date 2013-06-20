@@ -7,15 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.splitting;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.generator.parser.antlr.splitting.internal.LexerSpecialStateTransitionSplitter;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LexerSpecialStateTransitionSplitterTest extends TestCase {
+public class LexerSpecialStateTransitionSplitterTest extends Assert {
 
 	private String original = 
 			"public class InternalMyDslLexer extends Lexer {\n" +
@@ -127,20 +129,18 @@ public class LexerSpecialStateTransitionSplitterTest extends TestCase {
 	
 	private LexerSpecialStateTransitionSplitter testMe;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		testMe = new LexerSpecialStateTransitionSplitter(true);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		original = null;
 		transformed = null;
-		super.tearDown();
 	}
 	
-	public void testTransformation() {
+	@Test public void testTransformation() {
 		String actual = testMe.transform(original);
 		assertEquals(transformed, actual);
 	}

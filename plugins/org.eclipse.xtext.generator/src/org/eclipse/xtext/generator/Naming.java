@@ -24,6 +24,44 @@ public class Naming {
 	private String uiBasePackage;
 	private String pathTestProject;
 	private String activatorName;
+	private String grammarId;
+	private String projectNameRt;
+	private String projectNameUi;
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setGrammarId(String grammarId) {
+		this.grammarId = grammarId;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setProjectNameRt(String projectNameRt) {
+		this.projectNameRt = projectNameRt;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String getProjectNameRt() {
+		return projectNameRt;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setProjectNameUi(String projectNameUi) {
+		this.projectNameUi = projectNameUi;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String getProjectNameUi() {
+		return projectNameUi;
+	}
 
 	public void setUiBasePackage(String uiBasePackage) {
 		this.uiBasePackage = uiBasePackage;
@@ -98,6 +136,9 @@ public class Naming {
 	}
 
 	public String basePackageUi(Grammar g) {
+		// for backward compatibility reasons, the uiBasePackage is only used, if also the grammarId has been explicitly set.
+		if (!Strings.isEmpty(uiBasePackage) && (grammarId!=null && grammarId.equals(g.getName())))
+			return this.uiBasePackage;
 		return getNamespace(g) + ".ui";
 	}
 	

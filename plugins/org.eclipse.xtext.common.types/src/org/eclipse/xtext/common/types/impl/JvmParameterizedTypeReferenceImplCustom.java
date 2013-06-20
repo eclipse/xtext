@@ -43,7 +43,7 @@ public class JvmParameterizedTypeReferenceImplCustom extends JvmParameterizedTyp
 			result.append(((InternalEObject) type).eProxyURI());
 			result.append(')');
 		} else {
-			result.append(getIdentifier());
+			result.append(NameConcatHelper.computeFor(this, '$', NameType.TO_STRING));
 		}
 		return result.toString();
 	}

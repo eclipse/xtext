@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,7 +25,7 @@ public class MetamodelTransformationTest extends AbstractXtextTests {
 	private EPackage pack;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		model = "grammar datatypetests with org.eclipse.xtext.common.Terminals\n" +
@@ -46,69 +47,69 @@ public class MetamodelTransformationTest extends AbstractXtextTests {
 		pack = grammar.getMetamodelDeclarations().get(1).getEPackage();
 	}
 
-	public void testSetUp() {
+	@Test public void testSetUp() {
 		assertEquals(2, grammar.getMetamodelDeclarations().size());
 		assertEquals(10, grammar.getRules().size());
 		assertNotNull(pack);
 	}
 
-	public void testRuleStartId() {
+	@Test public void testRuleStartId() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(1);
 		assertNotNull(rule);
 		assertEquals("StartId", rule.getName());
 		assertEquals(EcorePackage.Literals.EINT, rule.getType().getClassifier());
 	}
 
-	public void testRuleRecursiveId() {
+	@Test public void testRuleRecursiveId() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(2);
 		assertNotNull(rule);
 		assertEquals("RecursiveId", rule.getName());
 		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 
-	public void testRuleCalledId() {
+	@Test public void testRuleCalledId() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(3);
 		assertNotNull(rule);
 		assertEquals("CalledId", rule.getName());
 		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 
-	public void testRuleValue() {
+	@Test public void testRuleValue() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(4);
 		assertNotNull(rule);
 		assertEquals("Value", rule.getName());
 		assertEquals(pack.getEClassifier("Value"), rule.getType().getClassifier());
 	}
 	
-	public void testOnlyKeywords() {
+	@Test public void testOnlyKeywords() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(5);
 		assertNotNull(rule);
 		assertEquals("OnlyKeywords", rule.getName());
 		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 	
-	public void testAssignmentWithAlternative() {
+	@Test public void testAssignmentWithAlternative() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(6);
 		assertNotNull(rule);
 		assertEquals("AssignmentWithAlternative", rule.getName());
 		assertEquals(pack.getEClassifier("AssignmentWithAlternative"), rule.getType().getClassifier());
 	}
 	
-	public void testFarbe() {
+	@Test public void testFarbe() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(7);
 		assertNotNull(rule);
 		assertEquals("Farbe", rule.getName());
 		assertEquals(pack.getEClassifier("Farbe"), rule.getType().getClassifier());
 	}
 
-	public void testUnorderedGroupDataType() {
+	@Test public void testUnorderedGroupDataType() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(8);
 		assertNotNull(rule);
 		assertEquals("UnorderedGroupDataType", rule.getName());
 		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 	
-	public void testUnorderedGroupClass() {
+	@Test public void testUnorderedGroupClass() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(9);
 		assertNotNull(rule);
 		assertEquals("UnorderedGroupClass", rule.getName());

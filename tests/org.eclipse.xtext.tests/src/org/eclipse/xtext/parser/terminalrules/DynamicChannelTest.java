@@ -10,9 +10,10 @@ package org.eclipse.xtext.parser.terminalrules;
 import java.io.StringReader;
 import java.util.List;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -42,12 +43,12 @@ public class DynamicChannelTest extends AbstractXtextTests {
 	private final String model = "grammar a with b. c\n/* comment \n*/rulename  returns \nd: name=ID;";
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 	}
 
-	public void testParseSimpleLanguage() throws Exception {
+	@Test public void testParseSimpleLanguage() throws Exception {
 		IParseResult result = getParser().parse(new StringReader(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
@@ -57,7 +58,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 		assertTrue(result.getSyntaxErrors().toString(), Iterables.isEmpty(result.getSyntaxErrors()));
 	}
 
-	public void testNodeModelOfSimpleLanguage() throws Exception {
+	@Test public void testNodeModelOfSimpleLanguage() throws Exception {
 		IParseResult result = getParser().parse(new StringReader(model));
 		List<ILeafNode> leafs = Lists.newArrayList(result.getRootNode().getLeafNodes());
 		assertEquals(23, leafs.size());

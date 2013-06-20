@@ -13,7 +13,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -24,6 +24,7 @@ import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.junit.Test;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -34,12 +35,12 @@ import com.google.common.collect.Multimap;
 public class CommentAssociationTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(CommentAssociationTestLanguageStandaloneSetup.class);
 	}
 
-	public void testCommentAssociation() throws Exception {
+	@Test public void testCommentAssociation() throws Exception {
 		String textModel = "element x // comment post x\n" 
 				+ "// comment pre y\n"
 				+ "element /* comment inside y */ y // comment post y\n" 
@@ -57,7 +58,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		checkComments(multimap, z, "// comment pre z\n");
 	}
 	
-	public void testCommentAssociationAtEndOfFile() throws Exception {
+	@Test public void testCommentAssociationAtEndOfFile() throws Exception {
 		String textModel = "element x // comment post x";
 		Model model = (Model) getModel(textModel);
 		Multimap<EObject, String> multimap = createModel2CommentMap(model);
@@ -79,7 +80,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		return multimap;
 	}
 
-	public void testCommentAssociationWithAction() throws Exception {
+	@Test public void testCommentAssociationWithAction() throws Exception {
 		String textModel = "// comment pre x\n" 
 				+ "element /* comment inside x */ x // comment post x\n"
 				+ "// comment pre y\n" 
@@ -99,7 +100,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		checkComments(multimap, z, "// comment pre z\n");
 	}
 
-	public void testSerializeReplacement() throws Exception {
+	@Test public void testSerializeReplacement() throws Exception {
 		String xBlock = "// comment pre x\n" 
 					+ "element /* comment inside x */ x // comment post x\n";
 		String yBlock = "// comment pre y\n" + "element /* comment inside y */ y // comment post y\n";
@@ -133,7 +134,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		}
 	}
 	
-	public void testCommentsAtEndOfFile() throws Exception {
+	@Test public void testCommentsAtEndOfFile() throws Exception {
 		// the text-model without a trailing LB does not work
 		// since the serializer does not know something about the terminal rules
 //		String textModel = "element x // comment post x";

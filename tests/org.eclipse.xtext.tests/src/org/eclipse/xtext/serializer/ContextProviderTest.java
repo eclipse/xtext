@@ -15,23 +15,24 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.junit.Test;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ContextProviderTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
@@ -57,55 +58,63 @@ public class ContextProviderTest extends AbstractXtextTests {
 				return o1.getFirst().compareTo(o2.getFirst());
 			}
 		});
-		return Join.join("\n", Iterables.transform(result, new Function<Pair<String, List<String>>, String>() {
+		return Joiner.on("\n").join(Iterables.transform(result, new Function<Pair<String, List<String>>, String>() {
 			public String apply(Pair<String, List<String>> from) {
-				return from.getFirst() + " returns " + Join.join(", ", from.getSecond());
+				return from.getFirst() + " returns " + Joiner.on(", ").join(from.getSecond());
 			}
 		}));
 	}
 
+	@Test
 	public void testSimple() throws Exception {
 		String actual = getContexts("Rule: foo=ID;");
 		String expected = "Rule returns Rule";
 		assertEquals(expected, actual);
 	}
 
+	@Test
 	public void testUnassignedAction1() throws Exception {
 		String actual = getContexts("Rule: {Foo};");
 		String expected = "Rule returns Foo";
 		assertEquals(expected, actual);
 	}
 
+	@Test
 	public void testUnassignedAction2() throws Exception {
 		String actual = getContexts("Rule: ('foo' {Foo})? val=ID;");
 		String expected = "Rule returns Foo, Rule";
 		assertEquals(expected, actual);
 	}
 
+	@Test
 	public void testUnassignedAction3() throws Exception {
 		String actual = getContexts("Rule: ('foo' {Foo})?;");
 		String expected = "Rule returns Foo, null";
 		assertEquals(expected, actual);
 	}
 
+	@Test
 	public void testUnassignedAction4() throws Exception {
 		String actual = getContexts("Rule: {Foo} | {Bar};");
 		String expected = "Rule returns Bar, Foo";
 		assertEquals(expected, actual);
 	}
 
+	@Test
 	public void testUnassignedAction5() throws Exception {
 		String actual = getContexts("Rule: {Foo} | {Bar} | val=ID;");
 		String expected = "Rule returns Bar, Foo, Rule";
 		assertEquals(expected, actual);
 	}
 
+	@Test
 	public void testUnassignedAction6() throws Exception {
 		String actual = getContexts("Rule: 'foo' ('foo' {Foo})?;");
 		String expected = "Rule returns Foo, null";
 		assertEquals(expected, actual);
 	}
 
+	@Test
 	public void testUnassignedRuleCall1() throws Exception {
 		String actual = getContexts("Rule: Foo; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -114,6 +123,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testUnassignedRuleCall2() throws Exception {
 		String actual = getContexts("Rule: Foo? val2=ID; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -122,6 +132,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testUnassignedRuleCall3() throws Exception {
 		String actual = getContexts("Rule: Foo?; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -130,6 +141,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testUnassignedRuleCall4() throws Exception {
 		String actual = getContexts("Rule: (Foo 'foo')?; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -138,6 +150,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testUnassignedRuleCall5() throws Exception {
 		String actual = getContexts("Rule: Foo | Bar; Foo: val=ID; Bar: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -147,6 +160,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testUnassignedRuleCall6() throws Exception {
 		String actual = getContexts("Rule: Foo | Bar | val=ID; Foo: val=ID; Bar: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -156,6 +170,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testUnassignedRuleCall7() throws Exception {
 		String actual = getContexts("Rule: Foo | Bar | 'baz'; Foo: val=ID; Bar: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -165,6 +180,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedAction1() throws Exception {
 		String actual = getContexts("Rule: val=ID {Foo.bar=current};");
 		StringBuilder expected = new StringBuilder();
@@ -173,6 +189,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedAction2() throws Exception {
 		String actual = getContexts("Rule: val=ID ({Foo.bar=current} 'x')?;");
 		StringBuilder expected = new StringBuilder();
@@ -181,6 +198,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedAction3() throws Exception {
 		String actual = getContexts("Rule: val=ID ({Foo.bar=current} 'x')*;");
 		StringBuilder expected = new StringBuilder();
@@ -189,6 +207,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedAction4() throws Exception {
 		String actual = getContexts("Rule: val=ID ({Foo.bar=current} 'x')+;");
 		StringBuilder expected = new StringBuilder();
@@ -197,6 +216,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedAction5() throws Exception {
 		String actual = getContexts("Rule: val=ID {Foo.bar=current} 'x' {Baz.bar=current} 'x';");
 		StringBuilder expected = new StringBuilder();
@@ -206,6 +226,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedAction6() throws Exception {
 		String actual = getContexts("Model: {Foo.left=current} (val=ID? | {Foo.left=current});");
 		StringBuilder expected = new StringBuilder();
@@ -215,6 +236,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedRuleCall1() throws Exception {
 		String actual = getContexts("Rule: foo=Foo; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();
@@ -223,6 +245,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
 	public void testAssignedRuleCall2() throws Exception {
 		String actual = getContexts("Rule: 'foo' foo=Foo; Foo: val=ID;");
 		StringBuilder expected = new StringBuilder();

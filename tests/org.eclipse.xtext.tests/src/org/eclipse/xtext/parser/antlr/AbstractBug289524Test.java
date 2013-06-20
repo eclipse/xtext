@@ -7,39 +7,40 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractBug289524Test extends AbstractXtextTests {
 	
-	public void testGetModel_01() throws Exception {
+	@Test public void testGetModel_01() throws Exception {
 		String model = "Model containment C reference C";
 		getModel(model);
 	}
 	
-	public void testGetModel_02() throws Exception {
+	@Test public void testGetModel_02() throws Exception {
 		String model = "Model containment C reference C$C";
 		getModel(model);
 	}
 
-	public void testGetModel_03() throws Exception {
+	@Test public void testGetModel_03() throws Exception {
 		String model = "Model reference C";
 		getModelAndExpect(model, 1);
 	}
 	
-	public void testGetModel_04() throws Exception {
+	@Test public void testGetModel_04() throws Exception {
 		String model = "Model containment C reference C reference C";
 		getModel(model);
 	}
 	
-	public void testGetModel_05() throws Exception {
+	@Test public void testGetModel_05() throws Exception {
 		String model = "Model containment C containment C reference C";
 		getModelAndExpect(model, 0);
 	}
 	
-	public void testGetModel_06() throws Exception {
+	@Test public void testGetModel_06() throws Exception {
 		String model = "Model reference C$C";
 		getModelAndExpect(model, 2);
 	}

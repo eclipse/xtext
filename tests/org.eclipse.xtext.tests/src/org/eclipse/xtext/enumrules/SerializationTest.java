@@ -13,6 +13,7 @@ import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
 import org.eclipse.xtext.enumrules.enums.ExistingEnum;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,7 +25,7 @@ public class SerializationTest extends AbstractEnumRulesTest {
 	private Model model;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(EnumRulesTestLanguageStandaloneSetup.class);
 		resourceSet = get(XtextResourceSet.class);
@@ -35,7 +36,7 @@ public class SerializationTest extends AbstractEnumRulesTest {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		model = null;
 		resource = null;
 		resourceSet = null;
@@ -53,7 +54,7 @@ public class SerializationTest extends AbstractEnumRulesTest {
 		assertEquals("generated SameName", result);
 	}
 	
-	public void testSerialize_02() throws Exception {
+	@Test public void testSerialize_02() throws Exception {
 		model.setExisting(ExistingEnum.DIFFERENT_NAME);
 		String result = serialize(model);
 		assertEquals("existing DifferentLiteral", result);

@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import java.util.Collection;
+
+import com.google.common.collect.ImmutableList;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -20,7 +24,7 @@ public class Primitives {
 		return null;
 	}
 	
-	public static Class<?>[] ALL_PRIMITIVE_TYPES = {
+	public static final Collection<Class<?>> ALL_PRIMITIVE_TYPES = ImmutableList.of(
 		Boolean.TYPE,
 		Integer.TYPE,
 		Float.TYPE,
@@ -30,6 +34,6 @@ public class Primitives {
 		Short.TYPE,
 		Long.TYPE,
 		Void.TYPE
-	};
+	);
 	
 }

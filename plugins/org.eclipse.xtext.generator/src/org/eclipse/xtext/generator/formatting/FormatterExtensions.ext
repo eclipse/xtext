@@ -16,3 +16,9 @@ String formatterName(Grammar this):
 
 private String formatterName(Grammar this, Naming naming):
 	JAVA org.eclipse.xtext.generator.formatting.FormatterFragment.getFormatterName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+
+String grammarAccessName(Grammar this):
+	grammarAccessName(this, getNaming());
+
+private String grammarAccessName(Grammar this, Naming naming):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);

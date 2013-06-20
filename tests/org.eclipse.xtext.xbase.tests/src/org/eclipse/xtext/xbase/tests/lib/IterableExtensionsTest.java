@@ -10,46 +10,96 @@ package org.eclipse.xtext.xbase.tests.lib;
 import static com.google.common.collect.Lists.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.junit.Test;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class IterableExtensionsTest extends TestCase {
+public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<Integer>> {
 
-	public void testFindLast() {
-		List<String> list = Lists.newArrayList("a", "b", "c");
-		String last = IterableExtensions.findLast(list, new Functions.Function1<String, Boolean>() {
-			public Boolean apply(String p) {
-				return true;
-			}
-		});
-		assertEquals("c", last);
+	@Override
+	protected Iterable<Integer>[] testData(Integer... elements) {
+		@SuppressWarnings("unchecked")
+		Iterable<Integer>[] result = new Iterable[] {
+			Lists.newArrayList(elements),
+			Lists.newLinkedList(Lists.newArrayList(elements)),
+			Sets.newLinkedHashSet(Lists.newArrayList(elements)),
+			Sets.newTreeSet(Lists.newArrayList(elements))
+		};
+		return result;
 	}
 	
-	public void testLast() {
-		Set<String> emptySet = Sets.newTreeSet();
-		String last = IterableExtensions.last(emptySet);
-		assertNull(last);
+	@Override
+	protected Iterable<Integer>[] nullableTestData(Integer... elements) {
+		@SuppressWarnings("unchecked")
+		Iterable<Integer>[] result = new Iterable[] {
+			Lists.newArrayList(elements),
+			Lists.newLinkedList(Lists.newArrayList(elements)),
+			Sets.newLinkedHashSet(Lists.newArrayList(elements)),
+//			Sets.newTreeSet(Lists.newArrayList(elements)) null is not allowed
+		};
+		return result;
+	}
+
+	@Override
+	protected Iterable<Integer> dummy() {
+		return Collections.emptyList();
+	}
+
+	@Override
+	protected boolean is(Iterable<Integer> input, Integer... elements) {
+		return Iterables.elementsEqual(input, Lists.newArrayList(elements));
+	}
+
+	@Override
+	protected Iterable<Integer> operator_plus(Iterable<Integer> first, Iterable<Integer> second) {
+		return IterableExtensions.operator_plus(first, second);
+	}
+
+	@Override
+	protected Integer findFirst(Iterable<Integer> input, Function1<Integer, Boolean> filter) {
+		return IterableExtensions.findFirst(input, filter);
+	}
+
+	@Override
+	protected Integer findLast(Iterable<Integer> input, Function1<Integer, Boolean> filter) {
+		return IterableExtensions.findLast(input, filter);
+	}
+
+	@Override
+	protected Integer last(Iterable<Integer> input) {
+		return IterableExtensions.last(input);
+	}
+
+	@Override
+	protected Integer head(Iterable<Integer> input) {
+		return IterableExtensions.head(input);
 	}
 	
-	public void testJoinWithNull() {
+	@Override
+	protected void forEach(Iterable<Integer> input, Procedure2<Integer, Integer> proc) {
+		IterableExtensions.forEach(input, proc);
+	}
+	
+	@Test public void testJoinWithNull() {
 		List<String> list = Lists.newArrayList("a", null, "c");
 		String string = IterableExtensions.join(list, ",");
 		assertEquals("a,null,c", string);
 	}
 	
-	public void testSortBy() throws Exception {
+	@Test public void testSortBy() throws Exception {
 		List<? extends CharSequence> list = newArrayList("foo","bar","baz");
 		List<? extends CharSequence> sorted = IterableExtensions.sortBy(list, new Functions.Function1<CharSequence, String>() {
 			public String apply(CharSequence p) {
@@ -60,14 +110,14 @@ public class IterableExtensionsTest extends TestCase {
 		assertEquals(sorted, newArrayList("bar","baz","foo"));
 	}
 	
-	public void testFilterNull() throws Exception {
+	@Test public void testFilterNull() throws Exception {
 		Iterator<String> iter = IterableExtensions.filterNull(newArrayList("foo", null, "bar")).iterator();
 		assertEquals("foo", iter.next());
 		assertEquals("bar", iter.next());
 		assertFalse(iter.hasNext());
 	}
 	
-	public void testJoinWithBeforeAndAfter() throws Exception {
+	@Test public void testJoinWithBeforeAndAfter() throws Exception {
 		ArrayList<String> list = newArrayList("foo", "bar");
 		ArrayList<String> singletonList = newArrayList("foo");
 		ArrayList<String> emptylist = new ArrayList<String>();
@@ -93,4 +143,6 @@ public class IterableExtensionsTest extends TestCase {
 		assertEquals("<foo", IterableExtensions.join(singletonList, "<", ",", null, function));
 		assertEquals("", IterableExtensions.join(emptylist, "<", ",", null, function));
 	}
+
+	
 }

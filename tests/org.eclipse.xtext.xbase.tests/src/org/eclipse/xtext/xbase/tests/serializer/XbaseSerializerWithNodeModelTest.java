@@ -7,42 +7,33 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.serializer;
 
-import org.eclipse.xtext.junit.serializer.SerializerTester;
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(FunctionTypeRefAwareInjectorProvider.class)
 public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTest {
 	
-	static Injector injector = new XbaseStandaloneSetup() {
-		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(new org.eclipse.xtext.xbase.XbaseRuntimeModule() {
-				@Override
-				public ClassLoader bindClassLoaderToInstance() {
-					return AbstractXbaseTestCase.class.getClassLoader();
-				}
-				
-				@SuppressWarnings("unused")
-				public Class<? extends SerializerTester> bindSerializerTester() {
-					return XFunctionTypeRefAwareSerializerTester.class;
-				}
-			});
-		}
-	}.createInjectorAndDoEMFRegistration();
-
 	@Inject
 	private SerializerTester tester;
 
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
+		assertSerializeable(string);
+	}
+
+	@Override
+	protected void assertEvaluatesToArray(Object[] object, String string) throws Exception {
 		assertSerializeable(string);
 	}
 
@@ -55,10 +46,26 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 		tester.assertSerializeWithNodeModel(expected);
 	}
 
+	@Ignore @Test
 	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		injector.injectMembers(this);
+	public void testReturnExpression_07() throws Exception {
+		super.testReturnExpression_07();
 	}
-
+	
+	@Ignore @Test
+	@Override
+	public void testReturnExpression_08() throws Exception {
+		super.testReturnExpression_08();
+	}
+	
+	@Override
+	@Test @Ignore public void testClosure_32() throws Exception {
+		super.testClosure_32();
+	}
+	
+	@Override
+	@Test @Ignore public void testClosure_31() throws Exception {
+		super.testClosure_31();
+	}
+	
 }

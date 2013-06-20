@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.validation.CompositeEValidator.EValidatorEqualitySupport;
+import org.junit.Test;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -43,7 +44,7 @@ public class CompositeValidatorWithoutEObjectValidatorTest extends AbstractCompo
 	}
 	
 	@Override
-	public void testContentsSize() {
+	@Test public void testContentsSize() {
 		EValidator validator = registry.getEValidator(pack);
 		assertNotNull(validator);
 		assertTrue(validator instanceof CompositeEValidator);

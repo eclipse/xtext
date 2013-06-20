@@ -9,15 +9,20 @@ package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.resource.ILocationInFileProviderExtension;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class JvmLocationInFileProvider extends DefaultLocationInFileProvider {
+@Singleton
+public class JvmLocationInFileProvider extends XbaseLocationInFileProvider {
 
 	@Inject
 	private IJvmModelAssociations jvmAssociations;
@@ -40,6 +45,21 @@ public class JvmLocationInFileProvider extends DefaultLocationInFileProvider {
 	@Override
 	public ITextRegion getSignificantTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
 		return super.getSignificantTextRegion(convertToSource(owner), feature, indexInList);
+	}
+	
+	@NonNullByDefault
+	@Nullable
+	@Override
+	public ITextRegion getTextRegion(EObject object, EStructuralFeature feature, int indexInList,
+			ILocationInFileProviderExtension.RegionDescription query) {
+		return super.getTextRegion(convertToSource(object), feature, indexInList, query);
+	}
+	
+	@NonNullByDefault
+	@Nullable
+	@Override
+	public ITextRegion getTextRegion(EObject object, RegionDescription query) {
+		return super.getTextRegion(convertToSource(object), query);
 	}
 	
 	protected EObject convertToSource(EObject element) {

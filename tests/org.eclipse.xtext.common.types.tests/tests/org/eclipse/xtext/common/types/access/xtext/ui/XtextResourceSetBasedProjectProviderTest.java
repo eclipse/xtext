@@ -12,53 +12,58 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
-
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextResourceSetBasedProjectProviderTest extends TestCase {
+public class XtextResourceSetBasedProjectProviderTest extends Assert {
 
 	private XtextResourceSet resourceSet;
 	private MockJavaProjectProvider mockProjectProvider;
 	private XtextResourceSetBasedProjectProvider projectProvider;
+	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		resourceSet = new XtextResourceSet();
 		mockProjectProvider = new MockJavaProjectProvider();
 		resourceSet.setClasspathURIContext(mockProjectProvider.getJavaProject(null));
 		projectProvider = new XtextResourceSetBasedProjectProvider();
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		mockProjectProvider = null;
 		projectProvider = null;
 		resourceSet = null;
-		super.tearDown();
 	}
 	
-	public void testSetup() {
+	@Test public void testSetup() {
 		assertNotNull(resourceSet.getClasspathURIContext());
 		assertTrue(resourceSet.getClasspathURIContext() instanceof IJavaProject);
 	}
 	
-	public void testGetJavaProject_01() {
+	@Test public void testGetJavaProject_01() {
 		assertNull(projectProvider.getJavaProject(null));
 	}
 	
-	public void testGetJavaProject_02() {
+	@Test public void testGetJavaProject_02() {
 		assertNull(projectProvider.getJavaProject(new ResourceSetImpl()));
 	}
 	
-	public void testGetJavaProject_03() {
+	@Test public void testGetJavaProject_03() {
 		assertNull(projectProvider.getJavaProject(new XtextResourceSet()));
 	}
 	
-	public void testGetJavaProject_04() {
+	@Test public void testGetJavaProject_04() {
 		assertSame(resourceSet.getClasspathURIContext(), projectProvider.getJavaProject(resourceSet));
 	}
 }

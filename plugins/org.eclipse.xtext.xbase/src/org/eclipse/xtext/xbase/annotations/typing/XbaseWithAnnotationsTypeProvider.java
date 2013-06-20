@@ -7,19 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.annotations.typing;
 
-import static com.google.common.collect.Lists.*;
-
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
@@ -29,6 +26,7 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @Singleton
 public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	
@@ -44,17 +42,22 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 			return _expectedType((XAnnotationElementValueBinaryOperation)container, reference, index, rawType);
 		} else if (container instanceof XAnnotationElementValuePair) {
 			return _expectedType((XAnnotationElementValuePair)container, reference, index, rawType);
-		} else if (container instanceof XAnnotationValueArray) {
-			return _expectedType((XAnnotationValueArray)container, reference, index, rawType);
 		} else {
 			return super.expectedType(container, reference, index, rawType);
 		}
 	}
 	
+	/**
+	 * @param index unused but required in dispatch signature 
+	 * @param rawType unused but required in dispatch signature
+	 */
 	protected JvmTypeReference _expectedType(XAnnotation annotation, EReference reference, int index,
 			boolean rawType) {
 		if (reference == XAnnotationsPackage.Literals.XANNOTATION__VALUE) {
-			JvmOperation valueOperation = annotationUtil.findSingleValueAttribute(annotation.getAnnotationType());
+			JvmType annotationType = annotation.getAnnotationType();
+			if (annotationType == null || annotationType.eIsProxy() || !(annotationType instanceof JvmAnnotationType))
+				return null;
+			JvmOperation valueOperation = annotationUtil.findSingleValueAttribute((JvmAnnotationType) annotationType);
 			if (valueOperation==null)
 				return null;
 			return valueOperation.getReturnType();
@@ -62,6 +65,10 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 		return null;
 	}
 	
+	/**
+	 * @param index unused but required in dispatch signature 
+	 * @param rawType unused but required in dispatch signature
+	 */
 	protected JvmTypeReference _expectedType(XAnnotationElementValuePair annotation, EReference reference, int index,
 			boolean rawType) {
 		if (reference == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE) {
@@ -72,6 +79,9 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 		return null;
 	}
 	
+	/**
+	 * @param index unused but required in dispatch signature 
+	 */
 	protected JvmTypeReference _expectedType(XAnnotationElementValueBinaryOperation binaryOp, EReference reference, int index,
 			boolean rawType) {
 		if (reference == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND) {
@@ -79,39 +89,32 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 		}
 		return null;
 	}
-	
-	protected JvmTypeReference _expectedType(XAnnotationValueArray array, EReference reference, int index,
-			boolean rawType) {
-		return getExpectedType(array, rawType);
-	}
-	
+		
 	@Override
 	protected JvmTypeReference type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		if (expression instanceof XAnnotation) {
 			return _type((XAnnotation)expression, rawExpectation, rawType);
 		} else if (expression instanceof XAnnotationElementValueBinaryOperation) {
 			return _type((XAnnotationElementValueBinaryOperation)expression, rawExpectation, rawType);
-		} else if (expression instanceof XAnnotationValueArray) {
-			return _type((XAnnotationValueArray)expression, rawExpectation, rawType);
 		} else {
 			return super.type(expression, rawExpectation, rawType);
 		}
 	}
 
+	/**
+	 * @param rawExpectation unused but required in dispatch signature 
+	 * @param rawType unused but required in dispatch signature
+	 */
 	protected JvmTypeReference _type(XAnnotation annotation, JvmTypeReference rawExpectation, boolean rawType) {
-		return getTypeReferences().createTypeRef(annotation.getAnnotationType());
+		final JvmType annotationType = annotation.getAnnotationType();
+		if (annotationType == null) {
+			return null;
+		}
+		return getTypeReferences().createTypeRef(annotationType);
 	}
 	
 	protected JvmTypeReference _type(XAnnotationElementValueBinaryOperation annotation, JvmTypeReference rawExpectation, boolean rawType) {
 		return getType(annotation.getLeftOperand(), rawExpectation, rawType);
 	}
 	
-	protected JvmTypeReference _type(XAnnotationValueArray annotation, JvmTypeReference rawExpectation, boolean rawType) {
-		List<JvmTypeReference> references = newArrayList();
-		for (XExpression expression : annotation.getValues()) {
-			references.add(getType(expression,rawType));
-		}
-		JvmTypeReference commonType = getCommonType(references);
-		return getTypeReferences().createArrayType(commonType);
-	}
 }

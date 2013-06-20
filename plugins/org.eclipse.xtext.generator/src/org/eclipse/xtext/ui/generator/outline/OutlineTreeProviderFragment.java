@@ -9,11 +9,13 @@
 
 package org.eclipse.xtext.ui.generator.outline;
 
+import static java.util.Collections.*;
+
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.AbstractStubGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGeneratorFragment;
@@ -25,15 +27,19 @@ import org.eclipse.xtext.generator.Naming;
  *
  * @author Jan Koehnlein
  */
-public class OutlineTreeProviderFragment extends AbstractGeneratorFragment {
+public class OutlineTreeProviderFragment extends AbstractStubGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory()
+		if(isGenerateStub())
+			return new BindFactory()
 				.addTypeToType("org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider",
 						getQualifiedName(grammar, getNaming()))
 				.addTypeToType("org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider",
-						getQualifiedName(grammar, getNaming())).getBindings();
+						getQualifiedName(grammar, getNaming()))
+				.getBindings();
+		else 
+			return emptySet();
 	}
 
 	public static String getQualifiedName(Grammar grammar, Naming n) {

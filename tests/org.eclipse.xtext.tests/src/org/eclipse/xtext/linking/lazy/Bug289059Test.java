@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.Bug289059TestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.bug289059Test.Model;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,18 +18,18 @@ import org.eclipse.xtext.linking.bug289059Test.Model;
 public class Bug289059Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug289059TestLanguageStandaloneSetup.class);
 	}
 	
-	public void testModelLinked_01() throws Exception {
+	@Test public void testModelLinked_01() throws Exception {
 		String modelAsText = "model model";
 		Model model = (Model) getModel(modelAsText);
 		assertSame(model, model.getReference());
 	}
 	
-	public void testModelLinked_02() throws Exception {
+	@Test public void testModelLinked_02() throws Exception {
 		String modelAsText = "model enabled model";
 		Model model = (Model) getModel(modelAsText);
 		assertSame(model, model.getReference());

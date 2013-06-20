@@ -102,10 +102,26 @@ public class GenModelAccess {
 	 * @since 2.1
 	 */
 	public static Resource getGenModelResource(String locationInfo, String nsURI, ResourceSet resourceSet) {
-		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(nsURI);
+		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
 		if (genModelURI == null) {
 			if (EcorePackage.eNS_URI.equals(nsURI)) // if we really want to use the registered ecore ...
 				return null;
+			
+			// look into the resource set to find a genpackage for the given URI
+			for (Resource res: resourceSet.getResources()) {
+				
+				// we only look into the first level, as genmodels are usually among the top level elements.
+				// this just to avoid traversing all eobjects in the resource set.
+				for (EObject obj : res.getContents()) {
+					if (obj instanceof GenModel) {
+						for (GenPackage genPackage:((GenModel) obj).getGenPackages()) {
+							if (genPackage.getNSURI().equals(nsURI)) {
+								return genPackage.eResource();
+							}
+						}
+					}
+				}
+			}
 			
 			StringBuilder buf = new StringBuilder();
 			if (locationInfo != null && locationInfo.length() > 0)
@@ -125,6 +141,10 @@ public class GenModelAccess {
 		Resource genModelResource = resourceSet.getResource(genModelURI, true);
 		if (genModelResource == null)
 			throw new RuntimeException("Error loading GenModel " + genModelURI);
+		for(EObject content: genModelResource.getContents()) {
+			if (content instanceof GenModel)
+				((GenModel) content).reconcile();
+		}
 		return genModelResource;
 	}
 

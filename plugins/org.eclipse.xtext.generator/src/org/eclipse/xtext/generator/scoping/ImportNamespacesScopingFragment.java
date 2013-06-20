@@ -26,5 +26,4 @@ public class ImportNamespacesScopingFragment extends AbstractScopingFragment {
 	protected Class<? extends IGlobalScopeProvider> getGlobalScopeProvider() {
 		return DefaultGlobalScopeProvider.class;
 	}
-
 }

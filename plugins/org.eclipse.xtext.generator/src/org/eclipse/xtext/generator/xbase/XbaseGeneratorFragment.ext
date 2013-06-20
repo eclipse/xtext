@@ -15,12 +15,6 @@ String getJvmModelInferrerName(Grammar this) :
     
 private String getJvmModelInferrerName(Grammar this, Naming naming) :
     JAVA org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.getJvmModelInferrerName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
-
-String getJvmRenameStrategyName(Grammar grammar) :
-	getJvmRenameStrategyName(grammar,getNaming());
-	
-String getJvmRenameStrategyName(Grammar grammar, Naming n) :
-	JAVA org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.getJvmRenameStrategyName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
 	
 S() : '«';
 E() : '»';

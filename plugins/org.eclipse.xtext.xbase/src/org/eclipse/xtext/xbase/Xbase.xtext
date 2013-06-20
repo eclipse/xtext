@@ -15,7 +15,7 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :
-	{XAssignment} /* (declaringType=[types::JvmDeclaredType] '::')? */ feature=[types::JvmIdentifiableElement|ValidID] OpSingleAssign value=XAssignment |	
+	{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |	
 	XOrExpression (
 		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
 	)?;
@@ -25,7 +25,7 @@ OpSingleAssign:
 ;
 
 OpMultiAssign:
-	'+=';
+	'+=' | '-=';
 
 XOrExpression returns XExpression:
 	XAndExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr]) rightOperand=XAndExpression)*;
@@ -44,22 +44,31 @@ XEqualityExpression returns XExpression:
 	rightOperand=XRelationalExpression)*;
 
 OpEquality:
-	'==' | '!=';
+	'==' | '!=' | '===' | '!==';
 
 XRelationalExpression returns XExpression:
 	XOtherOperatorExpression
-	(=>({XInstanceOfExpression.expression=current} 'instanceof') type=[types::JvmType|QualifiedName] |
+	(=>({XInstanceOfExpression.expression=current} 'instanceof') type=JvmTypeReference |
 	 =>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
 
 OpCompare:
-	'>=' | '<=' | '>' | '<';
+	'>=' | '<=' | '>' | '<' ;
 
 XOtherOperatorExpression returns XExpression:
 	XAdditiveExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
 	rightOperand=XAdditiveExpression)*;
 
 OpOther:
-	'->' | '..';
+	  '->' 
+	| '..<'
+	| '>' '..'
+	| '..'
+	| '=>' 
+	| '>' (=>('>' '>') | '>') 
+	| '<' (=>('<' '<') | '<')
+	| '<>'
+	| '?:' 
+	| '<=>';
 
 XAdditiveExpression returns XExpression:
 	XMultiplicativeExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
@@ -75,7 +84,7 @@ OpMulti:
 	'*' | '**' | '/' | '%';
 
 XUnaryOperation returns XExpression:
-	{XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XCastedExpression
+	{XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XUnaryOperation
 	| XCastedExpression;
 
 OpUnary:
@@ -87,17 +96,17 @@ XCastedExpression returns XExpression:
 
 XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
-	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifiableElement|ValidID] OpSingleAssign) value=XAssignment
-	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|spreading?="*.")) 
+	(=>({XAssignment.assignable=current} ('.'|explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|explicitStatic?="::")) 
 		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
-		feature=[types::JvmIdentifiableElement|ValidID] (
+		feature=[types::JvmIdentifiableElement|FeatureCallID] (
 			=>explicitOperationCall?='(' 
 				(
 				    memberCallArguments+=XShortClosure
 				  |	memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
 				)? 
 			')')?
-			=>memberCallArguments+=XClosure?
+			memberCallArguments+=XClosure?
 		)*;
 
 XPrimaryExpression returns XExpression:
@@ -116,17 +125,30 @@ XPrimaryExpression returns XExpression:
 	XParenthesizedExpression;
 
 XLiteral returns XExpression:
+	XCollectionLiteral |
 	XClosure |
 	XBooleanLiteral |
-	XIntLiteral |
+	XNumberLiteral |
 	XNullLiteral |
 	XStringLiteral |
 	XTypeLiteral
 ;
 
+XCollectionLiteral:
+	XSetLiteral | XListLiteral
+;
+
+XSetLiteral:
+	{XSetLiteral} '#' '{' (elements+=XExpression (',' elements+=XExpression )*)? '}'
+;
+
+XListLiteral:
+	{XListLiteral} '#' '[' (elements+=XExpression (',' elements+=XExpression )*)? ']'
+;
+
 XClosure returns XExpression:
-	{XClosure} 
-	'[' 
+	=>({XClosure} 
+	'[') 
 		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')? 
 		expression=XExpressionInClosure 
 	']';
@@ -150,7 +172,8 @@ XIfExpression returns XExpression:
 
 XSwitchExpression returns XExpression:
 	{XSwitchExpression}
-	'switch' =>(localVarName=ValidID ':')? switch=XExpression '{'
+	'switch' (=>(localVarName=ValidID ':')? switch=XExpression
+		| =>('(' localVarName=ValidID ':') switch=XExpression ')') '{'
 	(cases+=XCasePart)+
 	('default' ':' default=XExpression )?
 	'}';
@@ -196,7 +219,6 @@ FullJvmFormalParameter returns types::JvmFormalParameter:
 
 XFeatureCall returns XExpression:
 	{XFeatureCall}
-	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
 	feature=[types::JvmIdentifiableElement|IdOrSuper] 
 	(=>explicitOperationCall?='(' 
@@ -205,30 +227,27 @@ XFeatureCall returns XExpression:
 		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
 		)? 
 	')')?
-	=>featureCallArguments+=XClosure?;
+	featureCallArguments+=XClosure?;
 	
-IdOrSuper :
-	ValidID | 'super'
-;
-	
-// This is a workaround since ANTLR will not be able to resolve
-// StaticQualifier: ValidID ('::' ValidID)*; and XFeatureCall: (StaticQualifier '::')? ValidID
-// Make sure to change the value converter if you change the syntax of the StaticQualifier
-StaticQualifier:
-	(ValidID '::')+
+FeatureCallID:
+	ValidID | 'extends' | 'static' | 'import' | 'extension'
 ;
 
+IdOrSuper :
+	FeatureCallID | 'super'
+;
+	
 XConstructorCall returns XExpression:
 	{XConstructorCall}
 	'new' constructor=[types::JvmConstructor|QualifiedName] 
-	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	'(' 
+	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+	(=>'(' 
 		(
 		    arguments+=XShortClosure
 		  |	arguments+=XExpression (',' arguments+=XExpression)*
 		)? 
-	')'
-	=>arguments+=XClosure?;
+	')')?
+	arguments+=XClosure?;
 
 XBooleanLiteral returns XExpression :
 	{XBooleanLiteral} ('false' | isTrue?='true');
@@ -236,14 +255,14 @@ XBooleanLiteral returns XExpression :
 XNullLiteral returns XExpression :
 	{XNullLiteral} 'null';
 
-XIntLiteral returns XExpression :
-	{XIntLiteral} value=INT;
+XNumberLiteral returns XExpression :
+	{XNumberLiteral} value=Number;
 
 XStringLiteral returns XExpression:
 	{XStringLiteral} value=STRING;
 
 XTypeLiteral returns XExpression :
-	{XTypeLiteral} 'typeof' '(' type=[types::JvmType|QualifiedName] ')'
+	{XTypeLiteral} 'typeof' '(' type=[types::JvmType|QualifiedName] (arrayDimensions+=ArrayBrackets)* ')'
 ;
 
 XThrowExpression returns XExpression :
@@ -268,3 +287,29 @@ XCatchClause :
 
 QualifiedName:
   ValidID (=>'.' ValidID)*;
+
+Number hidden():
+	HEX | (INT | DECIMAL) ('.' (INT | DECIMAL))?;
+
+/**
+ * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+ * which makes downstream grammars break on classloading, when a rule is removed.
+ */
+StaticQualifier:
+	(ValidID '::')+
+;
+
+terminal HEX:
+	('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F'|'_')+ 
+	('#' (('b'|'B')('i'|'I') | ('l'|'L')))?;
+	
+terminal INT returns ecore::EInt:
+	'0'..'9' ('0'..'9'|'_')*; 
+
+terminal DECIMAL:
+	INT 
+	(('e'|'E') ('+'|'-')? INT)? 
+	(('b'|'B')('i'|'I'|'d'|'D') | ('l'|'L'|'d'|'D'|'f'|'F'))?;
+	
+	
+

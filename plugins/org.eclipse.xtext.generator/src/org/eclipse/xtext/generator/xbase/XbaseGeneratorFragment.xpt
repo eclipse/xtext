@@ -16,15 +16,14 @@
 «EXTENSION org::eclipse::xtext::generator::xbase::XbaseGeneratorFragment»
 «EXTENSION org::eclipse::xtext::generator::GenModelAccess»
 
-«DEFINE generate(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
+«DEFINE generate(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
 «IF generateXtendInferrer»
 «FILE getJvmModelInferrerName().asPath()+".xtend" SRC-»
 package «getJvmModelInferrerName().toJavaPackage()»
- 
+
 import com.google.inject.Inject
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import «rules.first().type.classifier.javaTypeName(eResource().resourceSet)»
 
@@ -37,73 +36,220 @@ import «rules.first().type.classifier.javaTypeName(eResource().resourceSet)»
 class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 
     /**
-     * conveninence API to build and initialize JvmTypes and their members.
+     * convenience API to build and initialize JVM types and their members.
      */
 	@Inject extension JvmTypesBuilder
 
 	/**
-	 * Is called for each instance of the first argument's type contained in a resource.
+	 * The dispatch method {@code infer} is called for each instance of the
+	 * given element's type that is contained in a resource.
 	 * 
-	 * @param element - the model to create one or more JvmDeclaredTypes from.
-	 * @param acceptor - each created JvmDeclaredType without a container should be passed to the acceptor in order get attached to the
-	 *                   current resource.
-	 * @param isPreLinkingPhase - whether the method is called in a pre linking phase, i.e. when the global index isn't fully updated. You
-	 *        must not rely on linking using the index if iPrelinkingPhase is <code>true</code>
+	 * @param element
+	 *            the model to create one or more
+	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType declared
+	 *            types} from.
+	 * @param acceptor
+	 *            each created
+	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType type}
+	 *            without a container should be passed to the acceptor in order
+	 *            get attached to the current resource. The acceptor's
+	 *            {@link IJvmDeclaredTypeAcceptor#accept(org.eclipse.xtext.common.types.JvmDeclaredType)
+	 *            accept(..)} method takes the constructed empty type for the
+	 *            pre-indexing phase. This one is further initialized in the
+	 *            indexing phase using the closure you pass to the returned
+	 *            {@link org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing#initializeLater(org.eclipse.xtext.xbase.lib.Procedures.Procedure1)
+	 *            initializeLater(..)}.
+	 * @param isPreIndexingPhase
+	 *            whether the method is called in a pre-indexing phase, i.e.
+	 *            when the global index is not yet fully updated. You must not
+	 *            rely on linking using the index if isPreIndexingPhase is
+	 *            <code>true</code>.
 	 */
-   	def dispatch void infer(«rules.first().type.classifier.javaTypeName(eResource().resourceSet).toSimpleName()» element, IAcceptor<JvmDeclaredType> acceptor, boolean isPrelinkingPhase) {
-   		
+   	def dispatch void infer(«rules.first().type.classifier.javaTypeName(eResource().resourceSet).toSimpleName()» element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
    		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
-   		// An example based on the initial hellow world example could look like this:
    		
-//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings") [
-//   			for (greeting : element.greetings) {
-//   				members += greeting.toMethod(greeting.name, greeting.newTypeRef(typeof(String))) [
-//   					it.body ['''
-//   						return "Hello «S()»greeting.name«E()»";
-//   					''']
-//   				]
-//   			}
-//   		])
+   		// An implementation for the initial hello world example could look like this:
+//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings"))
+//   			.initializeLater([
+//   				for (greeting : element.greetings) {
+//   					members += greeting.toMethod("hello" + greeting.name, greeting.newTypeRef(typeof(String))) [
+//   						body = [
+//   							append('''return "Hello «S()»greeting.name«E()»";''')
+//   						]
+//   					]
+//   				}
+//   			])
    	}
 }
-«ENDFILE»
-«ENDIF»
 
-«IF useInferredJvmModel»
-«FILE getJvmRenameStrategyName().asPath() +".java" SRC_UI»
-/*
-«fileHeader()»
-*/
-package «getJvmRenameStrategyName().toJavaPackage()»;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
-
-/**
- * Encapsulates the model changes of a rename refactoring.  
- */
-@SuppressWarnings("restriction")
-public class «getJvmRenameStrategyName().toSimpleName()» extends AbstractJvmModelRenameStrategy {
-
-	@Override
-	protected void setInferredJvmElementName(String name, EObject renamedSourceElement) {
-		/*
-		 * TODO: rename inferred elements as you would in IJvmModelInferrer 
-		 */
-	}
-}
 «ENDFILE»
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
+«DEFINE addToPluginXmlRt(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
 «ENDDEFINE» 
 
 
-«DEFINE addToPluginXmlUi(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
+«DEFINE addToPluginXmlUi(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
+«IF jdtTypeHierarchy-»
+<!-- Type Hierarchy  -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
+			<activeWhen>
+				<reference
+					definitionId="«name».Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler 
+			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"
+			commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy">
+			<activeWhen>
+				<reference
+					definitionId="«name».Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		«IF usesXImportSection-»
+		<handler
+            class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
+           	<activeWhen>
+				<reference
+					definitionId="«name».Editor.opened">
+				</reference>
+			</activeWhen>
+        </handler>
+        «ENDIF-»
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		«IF usesXImportSection-»
+	    <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.xbase.ui.organizeImports"
+                 style="push"
+                 tooltip="Organize Imports">
+                <visibleWhen checkEnabled="false">
+                    <reference
+                        definitionId="«name».Editor.opened">
+                    </reference>
+                </visibleWhen>
+            </command>  
+        </menuContribution>
+        «ENDIF-»
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
+				style="push"
+				tooltip="Open Type Hierarchy">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="«name».Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy"
+				style="push"
+				tooltip="Quick Type Hierarchy">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="«name».Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+«ENDIF-»
+«IF jdtCallHierachy-»
+	<!-- Call Hierachy -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierachyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
+			<activeWhen>
+				<reference
+					definitionId="«name».Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
+				style="push"
+				tooltip="Open Call Hierarchy">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="«name».Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+«ENDIF-»
+	<extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory class="«executableExtensionFactory()»:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
+         adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
+         <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
+      </factory> 
+   </extension>
+   <extension point="org.eclipse.ui.editorActions">
+      <editorContribution targetID="«name»" 
+                          id="«name».ide.rulerActions">
+	     <action
+	             label="Not Used"
+	             class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+	             style="push"
+	             actionID="RulerDoubleClick"
+	             id="«name».doubleClickBreakpointAction"/>
+	  </editorContribution>
+   </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+         targetID="example.rulerContextMenuId"
+         id="«name».ide.RulerPopupActions">
+         <action
+            label="Toggle Breakpoint"
+            class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+            menubarPath="additions"
+            id="«name».ide.rulerContextMenu.toggleBreakpointAction">
+         </action>
+      </viewerContribution>
+   </extension>
+   
+    <!-- Introduce Local Variable Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableHandler"
+			commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable">
+			<activeWhen>
+				<reference
+					definitionId="«name».Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="«name».Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>  
 «ENDDEFINE»
 
 
-«DEFINE addToStandaloneSetup(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
+«DEFINE addToStandaloneSetup(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
 «ENDDEFINE»
 

@@ -7,30 +7,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import static com.google.common.collect.Iterables.*;
+
+import java.util.Set;
+
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 public class Primitives {
 	
 	@Inject
-	private IJvmTypeProvider.Factory typeProviderFactory;
-	
-	@Inject
 	private TypeReferences typeReferences;
-	
-	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
-		this.typeProviderFactory = typeProviderFactory;
-	}
 	
 	public static enum Primitive {
 		Byte,Short,Char,Int,Long,Float,Double,Void, Boolean
@@ -72,7 +76,10 @@ public class Primitives {
 		if (primitive == null || !isPrimitive(primitive)) {
 			return primitive;
 		}
-		return typeReferences.createTypeRef(getWrapperType((JvmPrimitiveType) primitive.getType()));
+		final JvmType wrapperType = getWrapperType((JvmPrimitiveType) primitive.getType());
+		if (wrapperType == null)
+			return primitive;
+		return typeReferences.createTypeRef(wrapperType);
 	}
 	
 	public JvmType getWrapperType(JvmPrimitiveType primitive) {
@@ -99,14 +106,32 @@ public class Primitives {
 				throw new IllegalArgumentException("Not a primitive : "+primitive);
 		}
 	}
+	
+	public JvmType getPrimitiveTypeIfWrapper(JvmDeclaredType type) {
+		if (typeReferences.is(type, Byte.class)) {
+			return typeReferences.findDeclaredType(Byte.TYPE, type);
+		} else if (typeReferences.is(type, Short.class)) {
+			return typeReferences.findDeclaredType(Short.TYPE, type);
+		} else if (typeReferences.is(type, Character.class)) {
+			return typeReferences.findDeclaredType(Character.TYPE, type);
+		} else if (typeReferences.is(type, Integer.class)) {
+			return typeReferences.findDeclaredType(Integer.TYPE, type);
+		} else if (typeReferences.is(type, Long.class)) {
+			return typeReferences.findDeclaredType(Long.TYPE, type);
+		} else if (typeReferences.is(type, Float.class)) {
+			return typeReferences.findDeclaredType(Float.TYPE, type);
+		} else if (typeReferences.is(type, Double.class)) {
+			return typeReferences.findDeclaredType(Double.TYPE, type);
+		} else if (typeReferences.is(type, Boolean.class)) {
+			return typeReferences.findDeclaredType(Boolean.TYPE, type);
+		} else if (typeReferences.is(type, Void.class)) {
+			return typeReferences.findDeclaredType(Void.TYPE, type);
+		}
+		return null;
+	}
 
 	protected JvmType getType(Class<?> class1, Notifier context) {
-		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
-		if (resourceSet==null)
-			// context may be null if the editor was closed too early
-			return null;
-		IJvmTypeProvider provider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		return provider.findTypeByName(class1.getCanonicalName());
+		return typeReferences.findDeclaredType(class1, context);
 	}
 	
 	public boolean isPrimitive(JvmTypeReference type) {
@@ -115,29 +140,98 @@ public class Primitives {
 
 	public boolean isWrapperType(JvmTypeReference type) {
 		JvmTypeReference result = asPrimitiveIfWrapperType(type);
-		return result != type;
+		return result != type && result != null;
 	}
 
-	public JvmTypeReference asPrimitiveIfWrapperType(JvmTypeReference type) {
+	public boolean isWrapperType(JvmType type) {
 		if (typeReferences.is(type, Byte.class)) {
-			return typeReferences.getTypeForName(Byte.TYPE, type.getType());
+			return true;
 		} else if (typeReferences.is(type, Short.class)) {
-			return typeReferences.getTypeForName(Short.TYPE, type.getType());
+			return true;
 		} else if (typeReferences.is(type, Character.class)) {
-			return typeReferences.getTypeForName(Character.TYPE, type.getType());
+			return true;
 		} else if (typeReferences.is(type, Integer.class)) {
-			return typeReferences.getTypeForName(Integer.TYPE, type.getType());
+			return true;
 		} else if (typeReferences.is(type, Long.class)) {
-			return typeReferences.getTypeForName(Long.TYPE, type.getType());
+			return true;
 		} else if (typeReferences.is(type, Float.class)) {
-			return typeReferences.getTypeForName(Float.TYPE, type.getType());
+			return true;
 		} else if (typeReferences.is(type, Double.class)) {
-			return typeReferences.getTypeForName(Double.TYPE, type.getType());
+			return true;
 		} else if (typeReferences.is(type, Boolean.class)) {
-			return typeReferences.getTypeForName(Boolean.TYPE, type.getType());
+			return true;
 		} else if (typeReferences.is(type, Void.class)) {
-			return typeReferences.getTypeForName(Void.TYPE, type.getType());
+			return true;
 		}
-		return type;
+		if (type instanceof JvmTypeParameter) {
+			EList<JvmTypeConstraint> constraints = ((JvmTypeParameter)type).getConstraints();
+			for(JvmUpperBound upperBound: filter(constraints, JvmUpperBound.class)) {
+				JvmTypeReference upperBoundType = upperBound.getTypeReference();
+				if (isWrapperType(upperBoundType))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	public JvmTypeReference asPrimitiveIfWrapperType(JvmTypeReference type) {
+		return new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
+
+			private Set<JvmType> visiting = Sets.newHashSetWithExpectedSize(2);
+			
+			@Override
+			public JvmTypeReference doVisitMultiTypeReference(JvmMultiTypeReference reference) {
+				for(JvmTypeReference ref: reference.getReferences()) {
+					JvmTypeReference refAsPrimitiveIfWrapper = visit(ref);
+					if(refAsPrimitiveIfWrapper != ref)
+						return refAsPrimitiveIfWrapper;
+				}
+				return reference;
+			}
+			
+			@Override
+			public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference type) {
+				if(type.getType() instanceof JvmTypeParameter && visiting.add(type.getType())) {
+					EList<JvmTypeConstraint> constraints = ((JvmTypeParameter)type.getType()).getConstraints();
+					for(JvmUpperBound upperBound: filter(constraints, JvmUpperBound.class)) {
+						JvmTypeReference upperBoundType = upperBound.getTypeReference();
+						JvmTypeReference asPrimitive = visit(upperBoundType);
+						if(asPrimitive != upperBoundType) 
+							return asPrimitive;
+					}
+					return type;
+				} else if (typeReferences.is(type, Byte.class)) {
+					return typeReferences.getTypeForName(Byte.TYPE, type.getType());
+				} else if (typeReferences.is(type, Short.class)) {
+					return typeReferences.getTypeForName(Short.TYPE, type.getType());
+				} else if (typeReferences.is(type, Character.class)) {
+					return typeReferences.getTypeForName(Character.TYPE, type.getType());
+				} else if (typeReferences.is(type, Integer.class)) {
+					return typeReferences.getTypeForName(Integer.TYPE, type.getType());
+				} else if (typeReferences.is(type, Long.class)) {
+					return typeReferences.getTypeForName(Long.TYPE, type.getType());
+				} else if (typeReferences.is(type, Float.class)) {
+					return typeReferences.getTypeForName(Float.TYPE, type.getType());
+				} else if (typeReferences.is(type, Double.class)) {
+					return typeReferences.getTypeForName(Double.TYPE, type.getType());
+				} else if (typeReferences.is(type, Boolean.class)) {
+					return typeReferences.getTypeForName(Boolean.TYPE, type.getType());
+				} else if (typeReferences.is(type, Void.class)) {
+					return typeReferences.getTypeForName(Void.TYPE, type.getType());
+				}
+				return type;
+			}
+			
+			@Override
+			public JvmTypeReference doVisitTypeReference(JvmTypeReference reference) {
+				return reference;
+			}
+			
+			@Override
+			protected JvmTypeReference handleNullReference() {
+				return null;
+			}
+		}.visit(type);
+		
 	}
 }

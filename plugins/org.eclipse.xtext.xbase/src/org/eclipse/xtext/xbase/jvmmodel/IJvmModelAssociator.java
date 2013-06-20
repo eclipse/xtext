@@ -24,4 +24,6 @@ public interface IJvmModelAssociator {
 	void associatePrimary(EObject sourceElement, EObject jvmElement);
 	
 	void associateLogicalContainer(EObject logicalChild, JvmIdentifiableElement logicalContainer);
+	
+	void removeLogicalChildAssociation(JvmIdentifiableElement logicalContainer);
 }

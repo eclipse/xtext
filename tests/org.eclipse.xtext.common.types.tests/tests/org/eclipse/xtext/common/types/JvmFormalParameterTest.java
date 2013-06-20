@@ -7,41 +7,35 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmFormalParameterTest extends TestCase {
+public class JvmFormalParameterTest extends Assert {
 
 	private JvmFormalParameter formalParameter;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		formalParameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
 	}
 	
-	public void testGetIdentifier_01() {
+	@Test public void testGetIdentifier_01() {
 		assertNull(formalParameter.getIdentifier());
 	}
 	
-//	public void testGetIdentifier_02() {
-//		formalParameter.setName("param");
-//		assertNull(formalParameter.getCanonicalName());
-//	}
+	@Test
+	public void testGetIdentifier_02() {
+		formalParameter.setName("param");
+		assertEquals("param", formalParameter.getQualifiedName());
+		assertEquals("param", formalParameter.getSimpleName());
+		assertEquals("param", formalParameter.getIdentifier());
+	}
 	
-//	public void testGetIdentifier_03() {
-//		JvmTypeParameter typeParameter = TypesFactory.eINSTANCE.createJvmTypeParameter();
-//		typeParameter.setName("T");
-//		formalParameter.setName("param");
-//		JvmParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-//		typeReference.setType(typeParameter);
-//		formalParameter.setParameterType(typeReference);
-//		assertEquals("T", formalParameter.getCanonicalName());
-//	}
-	
-	public void testToString_01() {
+	@Test public void testToString_01() {
 		assertNotNull("toString() should not throw NPE and not return null", formalParameter.toString());
 	}
 }

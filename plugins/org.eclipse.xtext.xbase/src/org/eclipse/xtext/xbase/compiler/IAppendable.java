@@ -9,32 +9,63 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
-
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public interface IAppendable {
-
-	IAppendable append(String string);
+	
+	IAppendable append(CharSequence string);
 
 	IAppendable append(JvmType type);
+
+	IAppendable newLine();
 
 	IAppendable increaseIndentation();
 
 	IAppendable decreaseIndentation();
 	
+	/**
+	 * @deprecated imports are handled by external components 
+	 */
+	@Deprecated
 	List<String> getImports();
 
+	/**
+	 * opens a new scope, backed up by a  real Java Scope
+	 */
 	void openScope();
+	
+	/**
+	 * opens a new variable scope, without having a new Java scope.
+	 */
+	void openPseudoScope();
 
 	String declareVariable(Object key, String proposedName);
+	
+	/**
+	 * declares a synthetic variable, where the name is not used in the current or any parent scope.
+	 */
+	String declareSyntheticVariable(Object key, String proposedName);
 
 	String getName(Object key);
 	
+	boolean hasName(Object key);
+	
 	Object getObject(String name);
+	
+	boolean hasObject(String name);
 
 	void closeScope();
+	
+	int length();
+	
+	@Override
+	String toString();
+	
+	String getContent();
 
 }

@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -18,9 +21,8 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 
 	private JvmGenericType genericType;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		genericType = TypesFactory.eINSTANCE.createJvmGenericType();
 	}
 	
@@ -29,21 +31,21 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		return genericType;
 	}
 	
-	public void testIsInstantiateable_01() {
+	@Test public void testIsInstantiateable_01() {
 		assertTrue(genericType.isInstantiateable());
 	}
 
-	public void testIsInstantiateable_02() {
+	@Test public void testIsInstantiateable_02() {
 		genericType.setAbstract(true);
 		assertFalse(genericType.isInstantiateable());
 	}
 	
-	public void testIsInstantiateable_03() {
+	@Test public void testIsInstantiateable_03() {
 		genericType.setInterface(true);
 		assertFalse(genericType.isInstantiateable());
 	}
 	
-	public void testGetExtendedInterfaces_01() {
+	@Test public void testGetExtendedInterfaces_01() {
 		Iterable<JvmTypeReference> interfaces = genericType.getExtendedInterfaces();
 		assertNotNull(interfaces);
 		assertTrue(Iterables.isEmpty(interfaces));
@@ -55,7 +57,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		return result;
 	}
 	
-	public void testGetExtendedInterfaces_02() {
+	@Test public void testGetExtendedInterfaces_02() {
 		JvmGenericType interfaceType = TypesFactory.eINSTANCE.createJvmGenericType();
 		interfaceType.setInterface(true);
 		genericType.getSuperTypes().add(createReferenceTo(interfaceType));
@@ -63,7 +65,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		assertSame(interfaceType, Iterables.getOnlyElement(interfaces).getType());
 	}
 	
-	public void testGetExtendedInterfaces_03() {
+	@Test public void testGetExtendedInterfaces_03() {
 		JvmGenericType firstInterfaceType = TypesFactory.eINSTANCE.createJvmGenericType();
 		JvmGenericType secondInterfaceType = TypesFactory.eINSTANCE.createJvmGenericType();
 		JvmGenericType classType = TypesFactory.eINSTANCE.createJvmGenericType();
@@ -82,7 +84,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		}), Lists.newArrayList(firstInterfaceType, secondInterfaceType)));
 	}
 	
-	public void testGetExtendedInterfaces_04() {
+	@Test public void testGetExtendedInterfaces_04() {
 		Iterable<JvmTypeReference> interfaces = genericType.getExtendedInterfaces();
 		JvmGenericType interfaceType = TypesFactory.eINSTANCE.createJvmGenericType();
 		genericType.getSuperTypes().add(createReferenceTo(interfaceType));
@@ -93,12 +95,12 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		assertSame(interfaceType, Iterables.getOnlyElement(interfaces).getType());
 	}
 	
-	public void testGetExtendedClasses_01() {
+	@Test public void testGetExtendedClasses_01() {
 		JvmTypeReference clazz = genericType.getExtendedClass();
 		assertNull(clazz);
 	}
 	
-	public void testGetExtendedClasses_02() {
+	@Test public void testGetExtendedClasses_02() {
 		JvmGenericType classType = TypesFactory.eINSTANCE.createJvmGenericType();
 		classType.setInterface(false);
 		genericType.getSuperTypes().add(createReferenceTo(classType));
@@ -106,7 +108,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		assertSame(classType, clazz.getType());
 	}
 	
-	public void testGetExtendedClasses_03() {
+	@Test public void testGetExtendedClasses_03() {
 		JvmGenericType firstInterfaceType = TypesFactory.eINSTANCE.createJvmGenericType();
 		JvmGenericType secondInterfaceType = TypesFactory.eINSTANCE.createJvmGenericType();
 		JvmGenericType classType = TypesFactory.eINSTANCE.createJvmGenericType();
@@ -120,7 +122,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		assertSame(classType, clazz.getType());
 	}
 	
-	public void testGetExtendedClasses_04() {
+	@Test public void testGetExtendedClasses_04() {
 		JvmGenericType superType = TypesFactory.eINSTANCE.createJvmGenericType();
 		genericType.getSuperTypes().add(createReferenceTo(superType));
 		assertSame(superType, genericType.getExtendedClass().getType());
@@ -128,7 +130,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		assertNull(genericType.getExtendedClass());
 	}
 	
-	public void testGetDeclaredConstructors_01() {
+	@Test public void testGetDeclaredConstructors_01() {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		JvmField field = TypesFactory.eINSTANCE.createJvmField();
 		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();

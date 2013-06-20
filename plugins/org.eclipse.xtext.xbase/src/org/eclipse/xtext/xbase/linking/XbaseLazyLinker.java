@@ -9,9 +9,13 @@ package org.eclipse.xtext.xbase.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
@@ -27,11 +31,26 @@ public class XbaseLazyLinker extends LazyLinker {
 			featureCall.setImplicitReceiver(null);
 			featureCall.setInvalidFeatureIssueCode(null);
 			featureCall.setImplicitFirstArgument(null);
+			if (featureCall instanceof XFeatureCall) {
+				XFeatureCall casted = (XFeatureCall) featureCall;
+				casted.setTypeLiteral(false);
+				casted.setPackageFragment(false);
+			} else if (featureCall instanceof XMemberFeatureCall) {
+				XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
+				casted.setTypeLiteral(false);
+				casted.setPackageFragment(false);
+				casted.setStaticWithDeclaringType(false);
+			}
 		} else if (obj instanceof JvmSpecializedTypeReference) {
 			((JvmSpecializedTypeReference) obj).setEquivalent(null);
 			if (ref == XtypePackage.Literals.XFUNCTION_TYPE_REF__TYPE) {
 				obj.eUnset(ref);
 			}
+		} else if (obj instanceof XClosure) {
+			// EMF 2.5 does not dive into derived contained things thus we do it explicitly
+			JvmFormalParameter implicitParameter = ((XClosure) obj).getImplicitParameter();
+			if (implicitParameter != null)
+				implicitParameter.setParameterType(null);
 		}
 	}
 

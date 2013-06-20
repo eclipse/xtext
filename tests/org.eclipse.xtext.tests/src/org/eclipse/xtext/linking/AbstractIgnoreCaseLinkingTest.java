@@ -7,24 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractIgnoreCaseLinkingTest extends AbstractXtextTests {
 
-	public void testSimpleModel() throws Exception {
+	@Test public void testSimpleModel() throws Exception {
 		String input = "a A {}";
 		getModel(input);
 	}
 	
-	public void testNestedModel() throws Exception {
+	@Test public void testNestedModel() throws Exception {
 		String input = "a A { b a { c B {} c a {} } }";
 		getModel(input);
 	}
 	
-	public void testUnresolvedLink() throws Exception {
+	@Test public void testUnresolvedLink() throws Exception {
 		String input = "a notFound {}";
 		getModelAndExpect(input, 1);
 	}

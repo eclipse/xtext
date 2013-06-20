@@ -29,154 +29,189 @@ import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 
-	public void testAssignment() throws Exception {
+	@Test public void testAssignment() throws Exception {
 		XAssignment assi = (XAssignment) ((XBlockExpression) expression("{ " + "  var  x = 'hello'" + "  x = null"
 				+ "}")).getExpressions().get(1);
 		assertExpected("java.lang.String", assi.getValue());
 	}
 
-	public void testMemberFeatureCall() throws Exception {
+	@Test public void testMemberFeatureCall() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("'foo'.charAt(null)");
 		assertExpected("int", fc.getMemberCallArguments().get(0));
 		assertExpected("java.lang.String", fc.getMemberCallTarget());
 	}
 
-	public void testBinaryOperationCall_01() throws Exception {
+	@Test public void testBinaryOperationCall_01() throws Exception {
 		XBinaryOperation fc = (XBinaryOperation) expression("new java.util.ArrayList<String>() += ''");
 		assertExpected("java.lang.String", fc.getRightOperand());
 	}
 	
-	public void testBinaryOperationCall_02() throws Exception {
+	@Test public void testBinaryOperationCall_02() throws Exception {
 		XBinaryOperation fc = (XBinaryOperation) expression("new java.util.ArrayList<CharSequence>() += emptyList()");
 		assertExpected("java.lang.Iterable<? extends java.lang.CharSequence>", fc.getRightOperand());
 	}
 	
-	public void testTypeParamInference_01_a() throws Exception {
+	@Test public void testLowerBoundIsNotVoid() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new foo.ClassWithGenericMethod().genericMethod(return null)");
+		assertExpected("java.lang.Object", fc.getExplicitArguments().get(1));
+	}
+	
+	@Test public void testTypeParamInference_01_a() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.String>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.String>", closure);
 	}
 	
-	public void testTypeParamInference_01_b() throws Exception {
+	@Test public void testTypeParamInference_01_b() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1WithExtends([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,? extends java.lang.String>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, ? extends java.lang.String>", closure);
 	}
 	
-	public void testTypeParamInference_01_c() throws Exception {
+	@Test public void testTypeParamInference_01_c() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1WithSuper([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<? extends java.lang.Object & super java.lang.String,java.lang.String>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<? extends java.lang.Object & super java.lang.String, java.lang.String>", closure);
 	}
 	
-	public void testTypeParamInference_01_d() throws Exception {
+	@Test public void testTypeParamInference_01_d() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1WithSuperAndExtends([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<? extends java.lang.Object & super java.lang.String,? extends java.lang.String>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<? extends java.lang.Object & super java.lang.String, ? extends java.lang.String>", closure);
 	}
 	
-	public void testTypeParamInference_02() throws Exception {
-		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|e.length],'foo')");
+	@Test public void testTypeParamInference_02() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([String e|e.length],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Integer>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
 	}
 	
+	@Test public void testTypeParamInference_02_b() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([ e|e.length],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
+	}
+	
+	@Test
 	public void testTypeParamInference_03() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([String e|null],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Object>", closure);
+	}
+	
+	@Test
+	public void testTypeParamInference_03_b() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|null],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-//		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,null>", closure);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,T>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Object>", closure);
 	}
 	
-	public void testTypeParamInference_04() throws Exception {
+	@Test public void testTypeParamInference_04() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var Integer i = new testdata.ClosureClient().invoke1([e|null],'foo') }");
 		XVariableDeclaration var = (XVariableDeclaration) block.getExpressions().get(0);
 		XMemberFeatureCall fc = (XMemberFeatureCall) var.getRight();
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Integer>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
 	}
 	
-	public void testTypeParamInference_05() throws Exception {
+	@Test public void testTypeParamInference_05() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().<CharSequence, Number>invoke1([e|null],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.CharSequence,java.lang.Number>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.CharSequence, java.lang.Number>", closure);
 	}
 	
-	public void testTypeParamInference_06() throws Exception {
+	@Test public void testTypeParamInference_06() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|e],'foo') }");
 		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
 		final XExpression closure = fc.getFeatureCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.String>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.String>", closure);
 	}
 	
+	@Test
 	public void testTypeParamInference_07() throws Exception {
-		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|e.length],'foo') }");
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([ String e|e.length],'foo') }");
 		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
 		final XExpression closure = fc.getFeatureCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Integer>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
 	}
 	
-	public void testTypeParamInference_08() throws Exception {
+	@Test
+	public void testTypeParamInference_07_b() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([ e|e.length],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
+	}
+	
+	@Test public void testTypeParamInference_08() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([String e|null],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Object>", closure);
+	}
+	
+	@Test public void testTypeParamInference_08_b() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|null],'foo') }");
 		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
 		final XExpression closure = fc.getFeatureCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,T>", closure);
-//		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,null>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Object>", closure);
 	}
 	
-	public void testTypeParamInference_09() throws Exception {
+	@Test public void testTypeParamInference_09() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() var Integer i = invoke1([e|null],'foo') }");
 		XVariableDeclaration var = (XVariableDeclaration) block.getExpressions().get(1);
 		XFeatureCall fc = (XFeatureCall) var.getRight();
 		final XExpression closure = fc.getFeatureCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Integer>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
 	}
 	
-	public void testTypeParamInference_10() throws Exception {
+	@Test public void testTypeParamInference_10() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient(); <CharSequence, Number>invoke1([e|null],'foo') }");
 		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
 		final XExpression closure = fc.getFeatureCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.CharSequence,java.lang.Number>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.CharSequence, java.lang.Number>", closure);
 	}
 	
-	public void testVariableDeclaration_0() throws Exception {
+	@Test public void testVariableDeclaration_0() throws Exception {
 		XVariableDeclaration decl = (XVariableDeclaration) ((XBlockExpression) expression("{ " + "  var  x = 'hello'"
 				+ "  null" + "}")).getExpressions().get(0);
 		assertExpected(null, decl.getRight());
 	}
 
-	public void testVariableDeclaration_1() throws Exception {
+	@Test public void testVariableDeclaration_1() throws Exception {
 		XVariableDeclaration decl = (XVariableDeclaration) ((XBlockExpression) expression("{ "
 				+ "  var  java.lang.String x = null" + "  null" + "}")).getExpressions().get(0);
 		assertExpected("java.lang.String", decl.getRight());
 	}
 
-	public void testConstructorCall_00() throws Exception {
+	@Test public void testConstructorCall_00() throws Exception {
 		XConstructorCall decl = (XConstructorCall) expression("new java.lang.String('foo')");
 		assertExpected("java.lang.String", decl.getArguments().get(0));
 	}
 	
-	public void testConstructorCall_01() throws Exception {
+	@Test public void testConstructorCall_01() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var java.util.List<String> list = new java.util.ArrayList() }");
 		XVariableDeclaration variableDeclaration = (XVariableDeclaration) block.getExpressions().get(0);
 		XConstructorCall constructorCall = (XConstructorCall) variableDeclaration.getRight();
 		assertExpected("java.util.List<java.lang.String>", constructorCall);
 	}
 
-	public void testBlockExpression() throws Exception {
+	@Test public void testBlockExpression() throws Exception {
 		XBlockExpression target = (XBlockExpression) expressionWithExpectedType("{ true.toString false.toString null }", "Boolean");
 		assertExpected(null, target.getExpressions().get(0));
 		assertExpected(null, target.getExpressions().get(1));
 		assertExpected("java.lang.Boolean", target.getExpressions().get(2));
 	}
 
-	public void testIfExpression() throws Exception {
+	@Test public void testIfExpression() throws Exception {
 		XIfExpression target = (XIfExpression) expressionWithExpectedType("if (null) null else null", "String");
 
 		assertExpected("boolean", target.getIf()); // if (null) is invalid thus we expect the primitive boolean
@@ -184,34 +219,116 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.String", target.getElse());
 	}
 
-	public void testForLoopExpression_0() throws Exception {
+	@Test public void testForLoopExpression_0() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (java.lang.String x : null) null");
-
-		assertExpected(null, loop.getForExpression());
+		// if the type is null, we use a simple expectation, error is 'null' is not allowed, anyways
+		assertExpected("java.lang.Iterable<? extends java.lang.String>", loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
 	}
 
-	public void testForLoopExpression_1() throws Exception {
+	@Test public void testForLoopExpression_1() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (x : null) null");
-		assertExpected(null, loop.getForExpression());
+		assertExpected("java.lang.Iterable<? extends java.lang.Object>", loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
 	}
+	
+	// testForLoopExpression_2_*:
+	// if the type is not compatible, we keep our expectation to improve the error message
+	@Test public void testForLoopExpression_2_a() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (java.lang.String x : new Object) null");
+		assertExpected("java.lang.Iterable<? extends java.lang.String> | java.lang.String[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_2_b() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (int x : new Object) null");
+		assertExpected("int[] | java.lang.Iterable<? extends java.lang.Integer> | java.lang.Integer[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_2_c() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<? super Integer>) null");
+		assertExpected("double[] | java.lang.Iterable<? extends java.lang.Double> | java.lang.Double[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_2_d() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for(Double d: null as int[])) {}");
+		assertExpected("java.lang.Iterable<? extends java.lang.Double> | double[] | java.lang.Double[]", loop.getForExpression());
+	}
 
-	public void testWhileExpression_0() throws Exception {
+	// testForLoopExpression_3_*:
+	// if the type is compatible, we use that one as expectation
+	@Test public void testForLoopExpression_3_a() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (java.lang.String x : null as String[]) null");
+		assertExpected("java.lang.String[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_3_b() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (int x : 1..2) null");
+		assertExpected("org.eclipse.xtext.xbase.lib.IntegerRange", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_3_c() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (x : 1..2) null");
+		assertExpected("org.eclipse.xtext.xbase.lib.IntegerRange", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_3_d() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (Integer x : 1..2) null");
+		assertExpected("org.eclipse.xtext.xbase.lib.IntegerRange", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_3_e() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (Integer x : null as int[]) null");
+		assertExpected("int[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_3_f() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (java.lang.String x : null as Iterable<String>) null");
+		assertExpected("java.lang.Iterable<java.lang.String>", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_3_g() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (java.lang.String x : null as Iterable<? extends String>) null");
+		assertExpected("java.lang.Iterable<? extends java.lang.String>", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_3_h() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (Object x : null as Iterable<? super Integer>) null");
+		assertExpected("java.lang.Iterable<? extends java.lang.Object & super java.lang.Integer>", loop.getForExpression());
+	}
+	
+	// testForLoopExpression_4_*:
+	// if the expected component type is compatible, the expectation of the for expression is refined to 
+	// to what it actually is
+	@Test public void testForLoopExpression_4_a() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (Object x : null as double[]) null");
+		assertExpected("double[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_b() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as int[]) null");
+		assertExpected("int[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_c() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Integer[]) null");
+		assertExpected("java.lang.Integer[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_d() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<Integer>) null");
+		assertExpected("java.lang.Iterable<java.lang.Integer>", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_e() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<? extends Integer>) null");
+		assertExpected("java.lang.Iterable<? extends java.lang.Integer>", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_f() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for(double d: <Integer>newArrayList) { d.toString }");
+		assertExpected("java.util.ArrayList<java.lang.Integer>", loop.getForExpression());
+	}
+
+	@Test public void testWhileExpression_0() throws Exception {
 		XWhileExpression exp = (XWhileExpression) expression("while (null) null");
 
 		assertExpected("boolean", exp.getPredicate()); // while (null) is invalid thus we expect the primitive boolean
 		assertExpected(null, exp.getBody());
 	}
 
-	public void testWhileExpression_1() throws Exception {
+	@Test public void testWhileExpression_1() throws Exception {
 		XDoWhileExpression exp = (XDoWhileExpression) expression("do null while (null)");
 
 		assertExpected("boolean", exp.getPredicate()); // while (null) is invalid thus we expect the primitive boolean
 		assertExpected(null, exp.getBody());
 	}
 
-	public void testTryCatchExpression() throws Exception {
+	@Test public void testTryCatchExpression() throws Exception {
 		XTryCatchFinallyExpression exp = (XTryCatchFinallyExpression)  
 				expressionWithExpectedType("try null catch (java.lang.Throwable t) null finally null", "String");
 
@@ -222,12 +339,12 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected(null, exp.getFinallyExpression());
 	}
 	
-	public void testThrowExpression() throws Exception {
+	@Test public void testThrowExpression() throws Exception {
 		XThrowExpression exp = (XThrowExpression) expression("throw null");
 		assertExpected("java.lang.Throwable", exp.getExpression());
 	}
 	
-	public void testSwitchExpression_0() throws Exception {
+	@Test public void testSwitchExpression_0() throws Exception {
 		XSwitchExpression exp = (XSwitchExpression) expressionWithExpectedType(
 				"switch null {" +
 				"  java.lang.Boolean case null : null" +
@@ -241,7 +358,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.String", exp.getDefault());
 	}
 	
-	public void testSwitchExpression_1() throws Exception {
+	@Test public void testSwitchExpression_1() throws Exception {
 		XSwitchExpression exp = (XSwitchExpression) expressionWithExpectedType(
 				"switch true {" +
 				"  java.lang.Boolean case null : null" +
@@ -254,7 +371,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.String", exp.getDefault());
 	}
 	
-	public void testCastedExpression() throws Exception {
+	@Test public void testCastedExpression() throws Exception {
 		XCastedExpression expression = (XCastedExpression) expression("null as String");
 		assertExpected(null, expression.getTarget());
 	}
@@ -264,7 +381,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		if (reference == null)
 			assertNull("expected " + expectedExpectedType + " for " + obj + " but was null", expectedExpectedType);
 		else
-			assertEquals("expression yielded unexpected type: " + obj, expectedExpectedType, reference.getIdentifier());
+			assertEquals(String.format("expression '%s' yielded unexpected type.", obj), expectedExpectedType, reference.getIdentifier());
 	}
 	
 	protected XExpression expressionWithExpectedType(String expression, String expectedType) throws Exception {

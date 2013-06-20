@@ -8,7 +8,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage with org.eclipse.xtext.common.Terminals
 
-import "http://www.eclipse.org/2011/tmf/xtext/ecorePerNsURI"
+import "http://www.eclipse.org/2011/tmf/xtext/ecorePerNsURI" // the warning is intentional
 import "http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformPlugin"
 import "http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformResource"
 import "http://www.eclipse.org/emf/2002/Ecore"
@@ -72,6 +72,19 @@ ExtendsPluginEObject:
 		eObjectContainment+=MyEAttribute
 	)?
 ;
+
+Unused_01 returns ExtendsNsURIEObject:
+	{MyNamedElement_01} name = ValidID
+;
+
+Unused_02 returns ExtendsResourceEObject:
+	{MyNamedElement_02} name = ValidID
+;
+
+Unused_03 returns ExtendsPluginEObject:
+	{MyNamedElement_03} name = ValidID
+;
+
 
 ExtendsResourceEObject: 
 	'ExtendsResourceEObject' name=ValidID 

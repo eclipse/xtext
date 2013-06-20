@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
 
@@ -18,7 +19,7 @@ import com.google.inject.Inject;
 public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 
 	private final ClassLoader classLoader;
-
+	
 	@Inject
 	public ClasspathTypeProviderFactory(ClassLoader classLoader) {
 		this.classLoader = classLoader;
@@ -32,10 +33,23 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 	}
 
 	protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-		return new ClasspathTypeProvider(classLoader, resourceSet);
+		return new ClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess());
 	}
 	
-	public ClassLoader getClassLoader() {
+	public ClassLoader getClassLoader(ResourceSet resourceSet) {
+		if (resourceSet instanceof XtextResourceSet) {
+			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;
+			Object ctx = xtextResourceSet.getClasspathURIContext();
+			if (ctx != null) {
+		        if (ctx instanceof Class<?>) {
+		            return ((Class<?>)ctx).getClassLoader();
+		        }
+		        if (!(ctx instanceof ClassLoader)) {
+		        	return ctx.getClass().getClassLoader();
+		        }
+		        return (ClassLoader) ctx;
+			}
+		}
 		return classLoader;
 	}
 	

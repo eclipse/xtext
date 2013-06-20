@@ -20,16 +20,21 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -129,9 +134,18 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			issues.addError("property 'uri' is mandatory for element 'language'.", this);
 		}
 	}
+	
+	private boolean shouldCheckFileExtension = true;
 
 	protected boolean isCheckFileExtension() {
-		return true;
+		return this.shouldCheckFileExtension;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setCheckFileExtension(boolean shouldCheckFileExtension) {
+		this.shouldCheckFileExtension = shouldCheckFileExtension;
 	}
 
 	public void setFileExtensions(String fileExtensions) {
@@ -163,13 +177,25 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		ResourceSet rs = forcedResourceSet != null ? forcedResourceSet : new XtextResourceSet();
 		for (String loadedResource : loadedResources) {
 			URI loadedResourceUri = URI.createURI(loadedResource);
-			Resource res = rs.getResource(loadedResourceUri, true);
 			if(equal(loadedResourceUri.fileExtension(), "ecore")) {
 				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
 				if(resourceServiceProvider == null) {
 					EcoreSupportStandaloneSetup.setup();
 				}
+			} else if (equal(loadedResourceUri.fileExtension(), "xcore")) {
+				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
+				if(resourceServiceProvider == null) {
+					try {
+						Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
+						xcore.getDeclaredMethod("doSetup", new Class[0]).invoke(null);
+					} catch (ClassNotFoundException e) {
+						LOG.error("Couldn't initialize Xcore support. Is it on the classpath?");
+					} catch (Exception e) {
+						LOG.error("Couldn't initialize Xcore support.", e);
+					}
+				}
 			}
+			Resource res = rs.getResource(loadedResourceUri, true);
 			if (res == null || res.getContents().isEmpty())
 				LOG.error("Error loading '" + loadedResource + "'");
 			else if (!res.getErrors().isEmpty())
@@ -186,6 +212,15 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		}
 
 		final Grammar grammar = (Grammar) resource.getContents().get(0);
+		validateGrammar(grammar);
+		this.grammar = grammar;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected void validateGrammar(Grammar grammar) {
+		validateAllImports(grammar);
 		EValidator validator = EValidator.Registry.INSTANCE.getEValidator(XtextPackage.eINSTANCE);
 		if (validator != null) {
 			DiagnosticChain chain = new DiagnosticChain() {
@@ -212,7 +247,30 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			while (iterator.hasNext())
 				validator.validate(iterator.next(), chain, null);
 		}
-		this.grammar = grammar;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected void validateAllImports(Grammar grammar) {
+		for (AbstractMetamodelDeclaration amd : GrammarUtil.allMetamodelDeclarations(grammar))
+			if (amd instanceof ReferencedMetamodel)
+				validateReferencedMetamodel((ReferencedMetamodel) amd);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected void validateReferencedMetamodel(ReferencedMetamodel ref) {
+		if (ref.getEPackage() != null && !ref.getEPackage().eIsProxy())
+			return;
+		EReference eref = XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(ref, eref);
+		String refName = nodes.isEmpty() ? "(unknown)" : NodeModelUtils.getTokenText(nodes.get(0));
+		String grammarName = GrammarUtil.getGrammar(ref).getName();
+		String msg = "The EPackage " + refName + " in grammar " + grammarName + " could not be found. ";
+		msg += "You might want to register that EPackage in your workflow file.";
+		throw new IllegalStateException(msg);
 	}
 
 	/**

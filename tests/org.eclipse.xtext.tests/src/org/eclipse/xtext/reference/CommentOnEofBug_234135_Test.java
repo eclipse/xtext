@@ -12,9 +12,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -24,7 +25,7 @@ import com.google.common.collect.Lists;
  */
 public class CommentOnEofBug_234135_Test extends AbstractXtextTests {
 
-    public void testCommentOnEof() throws Exception {
+    @Test public void testCommentOnEof() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = "//comment";
         List<ILeafNode> leafNodes = Lists.newArrayList(getRootNode(model).getLeafNodes());

@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xbase.impl;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
-
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -28,5 +28,20 @@ public class XUnaryOperationImplCustom extends XUnaryOperationImpl {
 		if (getOperand()!=null)
 			result.add(getOperand());
 		return result;
+	}
+	
+	@Override
+	public EList<XExpression> getActualArguments() {
+		return getActualArguments(getOperand(), ECollections.<XExpression>emptyEList());
+	}
+	
+	@Override
+	public XExpression getActualReceiver() {
+		return getActualReceiver(getOperand());
+	}
+	
+	@Override
+	public boolean isExtension() {
+		return isExtension(getOperand());
 	}
 }

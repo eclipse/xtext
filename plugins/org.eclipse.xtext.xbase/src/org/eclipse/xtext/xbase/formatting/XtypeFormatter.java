@@ -10,12 +10,11 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.JvmParameterizedTypeR
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.XFunctionTypeRefElements;
 
 /**
- * This class contains custom formatting description.
+ * This class is deprecated since it uses Xtext's old formatter architecture.
  * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting on how and when to use it
- * 
- * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
+ * use XbaseFormatter2.xtend
  */
+@Deprecated
 public class XtypeFormatter extends AbstractDeclarativeFormatter {
 
 	@Override
@@ -30,8 +29,8 @@ public class XtypeFormatter extends AbstractDeclarativeFormatter {
 
 	public void configureXFunctionTypeRef(FormattingConfig c, XFunctionTypeRefElements ele) {
 		c.setNoSpace().after(ele.getLeftParenthesisKeyword_0_0());
-		c.setNoSpace().before(ele.getCommaKeyword_0_2_0());
-		c.setNoSpace().before(ele.getLeftParenthesisKeyword_0_0());
+		c.setNoSpace().before(ele.getCommaKeyword_0_1_1_0());
+		c.setNoSpace().before(ele.getRightParenthesisKeyword_0_2());
 	}
 
 	public void configureJvmParameterizedTypeReference(FormattingConfig c, JvmParameterizedTypeReferenceElements ele) {

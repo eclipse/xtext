@@ -42,4 +42,10 @@ public class ClassMirror extends AbstractClassMirror {
 		typeResource.getContents().add(typeFactory.createType(clazz));
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	public boolean isSealed() {
+		return true;
+	}
 }

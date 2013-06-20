@@ -7,21 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.common.types.JvmType;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassMirrorTest extends TestCase implements ITypeFactory<Class<?>> {
+public class ClassMirrorTest extends Assert implements ITypeFactory<Class<?>> {
 
-	public void testCreateClassMirror_01() {
+	@Test public void testCreateClassMirror_01() {
 		ClassMirror mirror = ClassMirror.createClassMirror(String.class, this);
 		assertNotNull(mirror);
 	}
 	
-	public void testCreateClassMirror_02() {
+	@Test public void testCreateClassMirror_02() {
 		try {
 			ClassMirror.createClassMirror(int.class, this);
 			fail("Expected IllegalArgumentException");
@@ -30,7 +30,7 @@ public class ClassMirrorTest extends TestCase implements ITypeFactory<Class<?>> 
 		}
 	}
 	
-	public void testCreateClassMirror_03() {
+	@Test public void testCreateClassMirror_03() {
 		try {
 			ClassMirror.createClassMirror(String[].class, this);
 			fail("Expected IllegalArgumentException");
@@ -39,7 +39,7 @@ public class ClassMirrorTest extends TestCase implements ITypeFactory<Class<?>> 
 		}
 	}
 	
-	public void testCreateClassMirror_04() {
+	@Test public void testCreateClassMirror_04() {
 		try {
 			ClassMirror.createClassMirror(java.util.Map.Entry.class, this);
 			fail("Expected IllegalArgumentException");

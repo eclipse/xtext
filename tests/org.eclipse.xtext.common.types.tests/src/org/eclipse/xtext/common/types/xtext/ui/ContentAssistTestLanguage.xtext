@@ -12,7 +12,9 @@ import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 Model:
   imports+=Import*
-  referenceHolder=ReferenceHolder;
+  generateDirective=GenerateDirective?
+  referenceHolder=ReferenceHolder?
+;
   
 ReferenceHolder:
   (
@@ -21,6 +23,10 @@ ReferenceHolder:
   | 'subtype' subtypeReference=[types::JvmType|FQN]
   )
 ;
+
+GenerateDirective:
+	'generate' typeName=QN
+;
   
 Import:
 	'import' importedNamespace=ImportedFQN
@@ -28,5 +34,6 @@ Import:
 
 ImportedFQN: FQN '.*'?;
 
-FQN: ID ('.' ID)* ('$' ID)*;
+FQN: QN ('$' ID)*;
 
+QN: ID ('.' ID)*;

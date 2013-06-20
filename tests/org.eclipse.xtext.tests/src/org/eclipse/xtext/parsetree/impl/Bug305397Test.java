@@ -7,18 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.impl;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.impl.bug305397.Element;
 import org.eclipse.xtext.parsetree.impl.bug305397.Model;
+import org.junit.Test;
 
 /**
  * @author Sven Effting - Initial contribution and API
  */
 public class Bug305397Test extends AbstractXtextTests {
 	
-	public void testBug() throws Exception {
+	@Test public void testBug() throws Exception {
 		with(new Bug305397StandaloneSetup());
 		Model model = (Model) getModel("   a element \n   element X end\n element Y end \nend");
 		Element outer = model.getElements().get(0);

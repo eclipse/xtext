@@ -8,107 +8,228 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Maps.*;
+import static org.eclipse.xtext.util.Strings.*;
 
-import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
-import org.eclipse.xtext.xbase.XStringLiteral;
-import org.eclipse.xtext.xbase.XTypeLiteral;
-import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.XListLiteral;
+import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.compiler.FileHeaderAdapter;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xtype.XtypeFactory;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 
 /**
- * A set of factory and builder functions, used to create an instance of the Jvm model ({@link TypesPackage}).
+ * A set of factory and builder functions, used to create instances of ({@link TypesPackage}).
+ * 
+ * It's meant to be used from an implementation of {@link IJvmModelInferrer}.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
+@NonNullByDefault
 public class JvmTypesBuilder {
 
+	private static Logger LOG = Logger.getLogger(JvmTypesBuilder.class);
+	
 	@Inject
 	private IJvmModelAssociator associator;
+	
+	@Inject
+	private ILogicalContainerProvider logicalContainerProvider;
 
 	@Inject
 	private TypeReferences references;
-
+	
 	@Inject
 	private IEObjectDocumentationProvider documentationProvider;
-
+	
+	@Inject
+	private TypesFactory typesFactory;
+	
+	@Inject(optional = true)
+	private XtypeFactory xtypesFactory = XtypeFactory.eINSTANCE;
+	
+	@Inject
+	private AnnotationLookup annotationLookup;
+	
+	@Inject 
+	private ConstantExpressionsInterpreter constantExpressionsInterpreter;
+	
+	@Inject
+	private CommonTypeComputationServices commonTypeComputationServices;
+	
+	
+	/**
+	 * Overrides  the default <code>operator_add()</code> to ignore <code>null</code> elements.
+	 */
+	public <T> boolean operator_add(@Nullable EList<? super T> list, @Nullable T element) {
+		if(list != null && element != null)
+			return list.add(element);
+		else
+			return false;
+	}
+	
+	/**
+	 * Overrides  the default <code>operator_add()</code> to ignore <code>null</code> elements.
+	 */
+	public <T> boolean operator_add(@Nullable EList<? super T> list, @Nullable Iterable<? extends T> elements) {
+		boolean result = false;
+		if(list != null && elements != null)
+			for(T element: elements) 
+				result |= operator_add(list, element);
+		return result;
+	}
+	
 	/**
 	 * Sets the given {@link JvmExecutable} as the logical container for the given {@link XExpression}.
-	 * This defines the context and s´the scope for the given expression.
+	 * This defines the context and the scope for the given expression. Also it defines how the given JvmExecutable can be executed.
+	 * For instance {@link org.eclipse.xtext.xbase.compiler.JvmModelGenerator} automatically translates any given {@link XExpression} 
+	 * into corresponding Java source code as the body of the given {@link JvmExecutable}. 
 	 * 
 	 * @param logicalContainer
-	 *            - the {@link JvmExecutable} the expression is associated with. Must not be <code>null</code>.
+	 *            the {@link JvmExecutable} the expression is associated with. Can be <code>null</code> in which case this
+	 *            function does nothing.
 	 * @param expr
-	 *            - the expression. Can be <code>null</code> in which case this function does nothing.
+	 *            the expression. Can be <code>null</code> in which case this function does nothing.
 	 */
-	public void setBody(JvmExecutable logicalContainer, XExpression expr) {
-		if (expr == null)
+	public void setBody(@Nullable JvmExecutable logicalContainer, @Nullable XExpression expr) {
+		if (logicalContainer == null || expr == null)
 			return;
+		removeExistingBody(logicalContainer);
 		associator.associateLogicalContainer(expr, logicalContainer);
 	}
 	
+	public void removeExistingBody(@Nullable JvmMember member) {
+		if(member != null) {
+			// remove old adapters
+			Iterator<Adapter> iterator = member.eAdapters().iterator();
+			while (iterator.hasNext()) {
+				if (iterator.next() instanceof CompilationStrategyAdapter) {
+					iterator.remove();
+				}
+			}
+			associator.removeLogicalChildAssociation(member);
+		}
+	}
+	
+	@Nullable
+	public XExpression getExpression(@Nullable JvmMember member) {
+		if(member != null) {
+			return logicalContainerProvider.getAssociatedExpression(member);
+		}
+		return null;
+	}
+	
+	@Nullable
+	public XExpression getInitializer(@Nullable JvmMember member) {
+		if(member != null) {
+			return logicalContainerProvider.getAssociatedExpression(member);
+		}
+		return null;
+	}
+	
+	@Nullable
+	protected <T extends EObject> T initializeSafely(@Nullable T targetElement, @Nullable Procedure1<? super T> initializer) {
+		if(targetElement != null && initializer != null) {
+			try {
+				initializer.apply(targetElement);
+			} catch (Exception e) {
+				LOG.error("Error initializing JvmElement", e);
+			}
+		}
+		return targetElement;
+	}
+
 	/**
 	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
 	 * implement the {@link JvmExecutable} when it is translated to Java source code.
-	 * @param executable - the operation or constructor to add the method body to.
-	 * @param strategy - the compilation strategy. Must return zero or more Java statements.
+	 * 
+	 * @param executable the operation or constructor to add the method body to. If <code>null</code> this method does nothing.
+	 * @param strategy the compilation strategy. If <code>null</code> this method does nothing.
 	 */
-	public void setBody(JvmExecutable executable, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
-		addCompilationStrategy(executable, strategy);
+	public void setBody(@Nullable JvmExecutable executable, @Nullable Procedures.Procedure1<ITreeAppendable> strategy) {
+		removeExistingBody(executable);
+		setCompilationStrategy(executable, strategy);
 	}
 	
-	public String getDocumentation(EObject source) {
+	/**
+	 * Retrieves the attached documentation for the given source element.
+	 * By default this implementation provides the text of a multi line comment preceding the definition of the given source element.
+	 * 
+	 * @return the documentation of the given source, <code>null</code> if source is <code>null</code> or doesn't have any documentation.
+	 */
+	@Nullable
+	public String getDocumentation(@Nullable EObject source) {
 		if (source == null)
 			return null;
 		if (source instanceof JvmIdentifiableElement) {
@@ -123,30 +244,44 @@ public class JvmTypesBuilder {
 	/**
 	 * Attaches the given documentation to the given jvmElement.
 	 */
-	public void setDocumentation(JvmIdentifiableElement jvmElement, String documentation) {
-		if (documentation == null)
+	public void setDocumentation(@Nullable JvmIdentifiableElement jvmElement, @Nullable String documentation) {
+		if(jvmElement == null || documentation == null)
 			return;
 		DocumentationAdapter documentationAdapter = new DocumentationAdapter();
 		documentationAdapter.setDocumentation(documentation);
 		jvmElement.eAdapters().add(documentationAdapter);
 	}
 
+	/**
+	 * Attaches the given headText to the given {@link JvmDeclaredType}.
+	 */
+	public void setFileHeader(@Nullable JvmDeclaredType jvmDeclaredType, @Nullable String headerText) {
+		if (jvmDeclaredType == null || headerText == null) {
+			return;
+		}
+		FileHeaderAdapter fileHeaderAdapter = (FileHeaderAdapter) EcoreUtil.getAdapter(jvmDeclaredType.eAdapters(),
+				FileHeaderAdapter.class);
+		if (fileHeaderAdapter == null) {
+			fileHeaderAdapter = new FileHeaderAdapter();
+			jvmDeclaredType.eAdapters().add(fileHeaderAdapter);
+		}
+		fileHeaderAdapter.setHeaderText(headerText);
+	}
 
 	/**
 	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
-	 * @param initializer
-	 *            - the initializer to apply on the created class element
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the qualifiedName of the resulting class.
 	 * 
-	 * @return a {@link JvmGenericType} representing a Java class of the given name.
+	 * @return a {@link JvmGenericType} representing a Java class of the given name, <code>null</code> if either parameter is <code>null</code>.
 	 */
-	public JvmGenericType toClass(EObject sourceElement, QualifiedName name, Procedure1<JvmGenericType> initializer) {
-		return toClass(sourceElement, name!=null?name.toString():null, initializer);
+	@Nullable 
+	public JvmGenericType toClass(@Nullable EObject sourceElement, @Nullable QualifiedName name) {
+		return toClass(sourceElement, name!=null ? name.toString() : null, null);
 	}
 	
 	/**
@@ -154,32 +289,57 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
-	 * @param initializer
-	 *            - the initializer to apply on the created class element
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the qualifiedName of the resulting class.
 	 * 
-	 * @return a {@link JvmGenericType} representing a Java class of the given name.
+	 * @return a {@link JvmGenericType} representing a Java class of the given name, <code>null</code> if either parameter is <code>null</code>.
 	 */
-	public JvmGenericType toClass(EObject sourceElement, String name, Procedure1<JvmGenericType> initializer) {
+	@Nullable 
+	public JvmGenericType toClass(@Nullable EObject sourceElement, @Nullable String name) {
+		return toClass(sourceElement, name, null);
+	}
+	
+	/**
+	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the {@link QualifiedName} of the resulting class.
+	 * @param initializer
+	 *            the initializer to apply on the created class element. If <code>null</code>, the class won't be initialized.
+	 * 
+	 * @return a {@link JvmGenericType} representing a Java class of the given name, <code>null</code> 
+	 *            if sourceElement or name are <code>null</code>.
+	 */
+	@Nullable 
+	public JvmGenericType toClass(@Nullable EObject sourceElement, @Nullable QualifiedName name, @Nullable Procedure1<? super JvmGenericType> initializer) {
+		return toClass(sourceElement, name != null ? name.toString() : null, initializer);
+	}
+	
+	/**
+	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the qualified name of the resulting class.
+	 * @param initializer
+	 *            the initializer to apply on the created class element. If <code>null</code>, the class won't be initialized.
+	 * 
+	 * @return a {@link JvmGenericType} representing a Java class of the given name, <code>null</code> 
+	 *            if sourceElement or name are <code>null</code>.
+	 */
+	@Nullable 
+	public JvmGenericType toClass(@Nullable EObject sourceElement, @Nullable String name, @Nullable Procedure1<? super JvmGenericType> initializer) {
 		final JvmGenericType result = createJvmGenericType(sourceElement, name);
 		if (result == null)
 			return null;
-		if(initializer != null) 
-			initializer.apply(result);
-
-		// if no super type add Object
-		if (result.getSuperTypes().isEmpty()) {
-			JvmTypeReference objectType = references.getTypeForName(Object.class, sourceElement);
-			if (objectType != null)
-				result.getSuperTypes().add(objectType);
-		}
-		// if no constructors have been added, add a default constructor
-		if (isEmpty(result.getDeclaredConstructors())) {
-			result.getMembers().add(toConstructor(sourceElement, result.getSimpleName(), null));
-		}
-		return associate(sourceElement, result);
+		associate(sourceElement, result);
+		return initializeSafely(result, initializer);
 	}
 	
 	/**
@@ -187,23 +347,28 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the qualified name of the resulting class.
 	 * @param initializer
-	 *            - the initializer to apply on the created interface declaration.
+	 *            the initializer to apply on the created interface element. If <code>null</code>, the interface won't be initialized.
 	 * 
-	 * @return a {@link JvmGenericType} representing a Java interface of the given name.
+	 * @return a {@link JvmGenericType} representing a Java class of the given name, <code>null</code> 
+	 *            if sourceElement or name are <code>null</code>.
 	 */
-	public JvmGenericType toInterface(EObject sourceElement, String name, Procedure1<JvmGenericType> initializer) {
+	@Nullable 
+	public JvmGenericType toInterface(@Nullable EObject sourceElement, @Nullable String name, @Nullable Procedure1<? super JvmGenericType> initializer) {
 		final JvmGenericType result = createJvmGenericType(sourceElement, name);
 		if (result == null)
 			return null;
 		result.setInterface(true);
-		if(initializer != null) 
-			initializer.apply(result);
+		associate(sourceElement, result);
+		return initializeSafely(result, initializer);
+	}
 
-		return associate(sourceElement, result);
+	@Nullable 
+	public JvmAnnotationType toAnnotationType(@Nullable EObject sourceElement, @Nullable String name) {
+		return toAnnotationType(sourceElement, name, null);
 	}
 	
 	/**
@@ -211,28 +376,27 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the qualified name of the resulting class.
 	 * @param initializer
-	 *            - the initializer to apply on the created annotation
+	 *            the initializer to apply on the created annotation. If <code>null</code>, the annotation won't be initialized.
 	 * 
-	 * @return a {@link JvmAnnotationType} representing a Java annatation of the given name.
+	 * @return a {@link JvmAnnotationType} representing a Java annotation of the given name, <code>null</code> 
+	 *            if sourceElement or name are <code>null</code>.
 	 */
-	public JvmAnnotationType toAnnotationType(EObject sourceElement, String name, Procedure1<JvmAnnotationType> initializer) {
-		if (sourceElement == null)
-			return null;
-		if (name == null)
+	@Nullable 
+	public JvmAnnotationType toAnnotationType(@Nullable EObject sourceElement, @Nullable String name, 
+			@Nullable Procedure1<? super JvmAnnotationType> initializer) {
+		if (sourceElement == null || name == null)
 			return null;
 		Pair<String, String> fullName = splitQualifiedName(name);
-		JvmAnnotationType annotationType = TypesFactory.eINSTANCE.createJvmAnnotationType();
+		JvmAnnotationType annotationType = typesFactory.createJvmAnnotationType();
 		annotationType.setSimpleName(fullName.getSecond());
 		if (fullName.getFirst() != null)
 			annotationType.setPackageName(fullName.getFirst());
-		if(initializer != null) 
-			initializer.apply(annotationType);
-
-		return associate(sourceElement, annotationType);
+		associate(sourceElement, annotationType);
+		return initializeSafely(annotationType, initializer);
 	}
 	
 	/**
@@ -240,37 +404,67 @@ public class JvmTypesBuilder {
 	 * fully qualified using the standard Java notation.
 	 * 
 	 * @param sourceElement
-	 *            - the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
-	 *            - the qualifiedName of the resulting class.
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the qualified name of the resulting enum type.
 	 * @param initializer
-	 *            - the initializer to apply on the created enumeration type
+	 *            the initializer to apply on the created enumeration type. If <code>null</code>, the enum won't be initialized.
 	 * 
-	 * @return a {@link result} representing a Java class of the given name.
+	 * @return a result representing a Java enum type with the given name, <code>null</code> 
+	 *            if sourceElement or name are <code>null</code>.
 	 */
-	public JvmEnumerationType toEnumerationType(EObject sourceElement, String name, Procedure1<JvmEnumerationType> initializer) {
-		if (sourceElement == null)
-			return null;
-		if (name == null)
+	@Nullable 
+	public JvmEnumerationType toEnumerationType(@Nullable EObject sourceElement, @Nullable String name, 
+			@Nullable Procedure1<? super JvmEnumerationType> initializer) {
+		if (sourceElement == null || name == null)
 			return null;
 		Pair<String, String> fullName = splitQualifiedName(name);
-		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
+		JvmEnumerationType result = typesFactory.createJvmEnumerationType();
 		result.setSimpleName(fullName.getSecond());
+		result.setVisibility(JvmVisibility.PUBLIC);
 		if (fullName.getFirst() != null)
 			result.setPackageName(fullName.getFirst());
-		if(initializer != null) 
-			initializer.apply(result);
-
-		return associate(sourceElement, result);
+		associate(sourceElement, result);
+		return initializeSafely(result, initializer);
 	}
-
-	protected JvmGenericType createJvmGenericType(EObject sourceElement, String name) {
-		if (sourceElement == null)
+	
+	/**
+	 * Creates a public enumeration literal, associated to the given sourceElement.
+	 * 
+	 * @param sourceElement
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the simple name of the resulting enumeration literal.
+	 * 
+	 * @return a result representing a Java enumeration literal with the given name, <code>null</code> 
+	 *            if sourceElement or name are <code>null</code>.
+	 */
+	@Nullable 
+	public JvmEnumerationLiteral toEnumerationLiteral(@Nullable EObject sourceElement, @Nullable String name) {
+		return toEnumerationLiteral(sourceElement, name, null);
+	}
+	
+	/**
+	 * Same as {@link #toEnumerationLiteral(EObject, String)} but with an initializer passed as the last argument.
+	 */
+	@Nullable 
+	public JvmEnumerationLiteral toEnumerationLiteral(@Nullable EObject sourceElement, @Nullable String name, 
+			@Nullable Procedure1<? super JvmEnumerationLiteral> initializer) {
+		if (sourceElement == null || name == null)
 			return null;
-		if (name == null)
+		JvmEnumerationLiteral result = typesFactory.createJvmEnumerationLiteral();
+		result.setSimpleName(name);
+		result.setVisibility(JvmVisibility.PUBLIC);
+		associate(sourceElement, result);
+		return initializeSafely(result, initializer);
+	}
+	
+	@Nullable 
+	protected JvmGenericType createJvmGenericType(@Nullable EObject sourceElement, @Nullable String name) {
+		if (sourceElement == null || name == null)
 			return null;
 		Pair<String, String> fullName = splitQualifiedName(name);
-		final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
+		final JvmGenericType result = typesFactory.createJvmGenericType();
 		result.setSimpleName(fullName.getSecond());
 		if (fullName.getFirst() != null)
 			result.setPackageName(fullName.getFirst());
@@ -293,82 +487,195 @@ public class JvmTypesBuilder {
 	/**
 	 * Creates a private field with the given name and the given type associated to the given sourceElement.
 	 * 
-	 * @param sourceElement - the sourceElement the resulting element is associated with.
-	 * @param name - the simple name of the resulting class.
-	 * @param typeRef - the type of the field
+	 * @param sourceElement the sourceElement the resulting element is associated with.
+	 * @param name the simple name of the resulting field.
+	 * @param typeRef the type of the field
 	 * 
 	 * @return a {@link JvmField} representing a Java field with the given simple name and type.
 	 */
-	public JvmField toField(EObject sourceElement, String name, JvmTypeReference typeRef) {
+	@Nullable
+	public JvmField toField(@Nullable EObject sourceElement, @Nullable String name, @Nullable JvmTypeReference typeRef) {
 		return toField(sourceElement, name, typeRef, null);
 	}
 	
-	public JvmField toField(EObject sourceElement, String name, JvmTypeReference typeRef, Procedure1<JvmField> initializer) {
-		JvmField result = TypesFactory.eINSTANCE.createJvmField();
-		result.setSimpleName(nullSaveName(name));
+	/**
+	 * Same as {@link #toField(EObject, String, JvmTypeReference)} but with an initializer passed as the last argument.
+	 */
+	@Nullable	
+	public JvmField toField(@Nullable EObject sourceElement, @Nullable String name, @Nullable JvmTypeReference typeRef, 
+			@Nullable Procedure1<? super JvmField> initializer) {
+		if(sourceElement == null || name == null) 
+			return null;
+		JvmField result = typesFactory.createJvmField();
+		result.setSimpleName(name);
 		result.setVisibility(JvmVisibility.PRIVATE);
 		result.setType(cloneWithProxies(typeRef));
-		if (initializer != null && name != null)
-			initializer.apply(result);
-		return associate(sourceElement, result);
+		associate(sourceElement, result);
+		return initializeSafely(result, initializer);
 	}
-
-	protected String nullSaveName(String name) {
-		return name != null ? name : "<unknown>";
+	
+	/**
+	 * Adds or removes the annotation {@link Extension @Extension} from the given field. If the annotation is
+	 * already present, nothing is done if {@code value} is {@code true}. If it is not present and {@code value}
+	 * is {@code false}, this is a no-op, too. 
+	 * 
+	 * @param field the field that will be processed
+	 * @param sourceElement the context that shall be used to lookup the {@link Extension annotation type}.
+	 * @param value <code>true</code> if the parameter shall be marked as extension, <code>false</code> if it should be unmarked.
+	 */
+	public void setExtension(@Nullable JvmField field, EObject sourceElement, boolean value) {
+		if (field == null)
+			return;
+		internalSetExtension(field, sourceElement, value);
 	}
-
+	
+	/**
+	 * Adds or removes the annotation {@link Extension @Extension} from the given parameter. If the annotation is
+	 * already present, nothing is done if {@code value} is {@code true}. If it is not present and {@code value}
+	 * is {@code false}, this is a no-op, too. 
+	 * 
+	 * @param parameter the parameter that will be processed
+	 * @param sourceElement the context that shall be used to lookup the {@link Extension annotation type}.
+	 * @param value <code>true</code> if the parameter shall be marked as extension, <code>false</code> if it should be unmarked.
+	 */
+	public void setExtension(@Nullable JvmFormalParameter parameter, EObject sourceElement, boolean value) {
+		if (parameter == null)
+			return;
+		internalSetExtension(parameter, sourceElement, value);
+	}
+	
+	protected void internalSetExtension(JvmAnnotationTarget annotationTarget, EObject sourceElement, boolean value) {
+		if (value) {
+			annotationLookup.findOrAddAnnotation(annotationTarget, sourceElement, Extension.class);
+		} else {
+			annotationLookup.removeAnnotation(annotationTarget, Extension.class);
+		}
+	}
+	
 	/**
 	 * Associates a source element with a target element. This association is used for tracing. Navigation, for
 	 * instance, uses this information to find the real declaration of a Jvm element.
 	 * 
 	 * @see IJvmModelAssociator
 	 * @see IJvmModelAssociations
+	 * 
+	 * @return the target for convenience.
 	 */
-	public <T extends JvmIdentifiableElement> T associate(EObject sourceElement, T target) {
-		associator.associatePrimary(sourceElement, target);
+	@Nullable
+	public <T extends EObject> T associate(@Nullable EObject sourceElement, @Nullable T target) {
+		if(sourceElement != null && target != null)
+			associator.associate(sourceElement, target);
 		return target;
 	}
 
 	/**
 	 * Creates a public method with the given name and the given return type and associates it with the given
 	 * sourceElement.
+	 * 
+	 * @param sourceElement 
+	 * 		the sourceElement the method should be associated with.
+	 * @param name
+	 * 		the simple name of the method to be created.
+	 * @param returnType
+	 * 		the return type of the created method.
+	 * @param initializer
+	 *            the initializer to apply on the created method. If <code>null</code>, the method won't be initialized.
+	 * 
+	 * @return a result representing a Java method with the given name, <code>null</code> if sourceElement or name are <code>null</code>.
 	 */
-	public JvmOperation toMethod(EObject sourceElement, String name, JvmTypeReference returnType,
-			Procedure1<JvmOperation> init) {
-		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		result.setSimpleName(nullSaveName(name));
+	@Nullable
+	public JvmOperation toMethod(@Nullable EObject sourceElement, @Nullable String name, @Nullable JvmTypeReference returnType,
+			@Nullable Procedure1<? super JvmOperation> initializer) {
+		if(sourceElement == null || name == null) 
+			return null;
+		JvmOperation result = typesFactory.createJvmOperation();
+		result.setSimpleName(name);
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setReturnType(cloneWithProxies(returnType));
-		if (init != null && name != null)
-			init.apply(result);
+		associate(sourceElement, result);
+		return initializeSafely(result, initializer);
+	}
+	
+	/**
+	 * Produces an inferred type which will be resolved on demand. It should not be attempted to resolve
+	 * this type during the model inference.
+	 * 
+	 * @return an inferred type.
+	 */
+	public JvmTypeReference inferredType() {
+		XComputedTypeReference result = xtypesFactory.createXComputedTypeReference();
+		result.setTypeProvider(new InferredTypeIndicator(null));
+		return result;
+	}
+	
+	/**
+	 * Produces an inferred type which will be resolved on demand. It should not be attempted to resolve
+	 * this type during the model inference.
+	 * 
+	 * @param expression the expression that will be used resolve the type. May not be <code>null</code>.
+	 * @return an inferred type.
+	 */
+	public JvmTypeReference inferredType(XExpression expression) {
+		Preconditions.checkNotNull(expression);
+		XComputedTypeReference result = xtypesFactory.createXComputedTypeReference();
+		result.setTypeProvider(new InferredTypeIndicator(expression));
+		return result;
+	}
+	
+	/**
+	 * shorthand for <code>toGetter(sourceElement, name, name, typeRef)</code>.
+	 */
+	@Nullable
+	public JvmOperation toGetter(@Nullable final EObject sourceElement, @Nullable final String name, @Nullable JvmTypeReference typeRef) {
+		return toGetter(sourceElement, name, name, typeRef);
+	}
+	
+	/**
+	 * Creates a getter method for the given property name and the field name.
+	 * 
+	 * Example: <code>
+	 * public String getPropertyName() {
+	 *   return this.fieldName;
+	 * }
+	 * </code>
+	 * 
+	 * @return a getter method for a JavaBeans property, <code>null</code> if sourceElement or name are <code>null</code>.
+	 */
+	@Nullable
+	public JvmOperation toGetter(@Nullable final EObject sourceElement, @Nullable final String propertyName, @Nullable final String fieldName, @Nullable JvmTypeReference typeRef) {
+		if(sourceElement == null || propertyName == null || fieldName == null) 
+			return null;
+		JvmOperation result = typesFactory.createJvmOperation();
+		result.setVisibility(JvmVisibility.PUBLIC);
+		String prefix = "get";
+		if (typeRef != null && !typeRef.eIsProxy() && !InferredTypeIndicator.isInferred(typeRef) 
+				&& typeRef.getType()!=null 
+				&& !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier())) {
+			prefix = "is";
+		}
+		result.setSimpleName(prefix + Strings.toFirstUpper(propertyName));
+		result.setReturnType(cloneWithProxies(typeRef));
+		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
+			public void apply(@Nullable ITreeAppendable p) {
+				if(p != null) {
+					p = p.trace(sourceElement);
+					p.append("return this.");
+					p.append(fieldName);
+					p.append(";");
+				}
+			}
+		});
 		return associate(sourceElement, result);
 	}
 
 	/**
-	 * Creates a getter method for the given properties name with a simple implementation returning the value of a
-	 * similarly named field.
-	 * 
-	 * Example: <code>
-	 * public String getFoo() {
-	 *   return this.foo;
-	 * }
-	 * </code>
+	 * shorthand for <code>toSetter(sourceElement, name, name, typeRef)</code>
 	 */
-	public JvmOperation toGetter(EObject sourceElement, final String name, JvmTypeReference typeRef) {
-		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("get" + nullSaveName(Strings.toFirstUpper(name)));
-		result.setReturnType(cloneWithProxies(typeRef));
-		if (name != null) {
-			setBody(result, new Functions.Function1<ImportManager, CharSequence>() {
-				public CharSequence apply(ImportManager p) {
-					return "return this." + name + ";";
-				}
-			});
-		}
-		return associate(sourceElement, result);
+	@Nullable
+	public JvmOperation toSetter(@Nullable final EObject sourceElement, @Nullable final String name, @Nullable JvmTypeReference typeRef) {
+		return toSetter(sourceElement, name, name, typeRef);
 	}
-
+	
 	/**
 	 * Creates a setter method for the given properties name with the standard implementation assigning the passed
 	 * parameter to a similarly named field.
@@ -378,29 +685,45 @@ public class JvmTypesBuilder {
 	 *   this.foo = foo;
 	 * }
 	 * </code>
+	 *
+	 * @return a setter method for a JavaBeans property with the given name, <code>null</code> if sourceElement or name are <code>null</code>.
 	 */
-	public JvmOperation toSetter(EObject sourceElement, final String name, JvmTypeReference typeRef) {
-		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
+	@Nullable 
+	public JvmOperation toSetter(@Nullable final EObject sourceElement, @Nullable final String propertyName, @Nullable final String fieldName, @Nullable JvmTypeReference typeRef) {
+		if(sourceElement == null || propertyName == null || fieldName == null) 
+			return null;
+		JvmOperation result = typesFactory.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("set" + nullSaveName(Strings.toFirstUpper(name)));
-		result.getParameters().add(toParameter(sourceElement, nullSaveName(name), cloneWithProxies(typeRef)));
-		if (name != null) {
-			setBody(result, new Functions.Function1<ImportManager, CharSequence>() {
-				public CharSequence apply(ImportManager p) {
-					return "this." + name + " = " + name + ";";
+		result.setReturnType(references.getTypeForName(Void.TYPE,sourceElement));
+		result.setSimpleName("set" + Strings.toFirstUpper(propertyName));
+		result.getParameters().add(toParameter(sourceElement, propertyName, cloneWithProxies(typeRef)));
+		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
+			public void apply(@Nullable ITreeAppendable p) {
+				if(p != null) {
+					p = p.trace(sourceElement);
+					p.append("this.");
+					p.append(fieldName);
+					p.append(" = ");
+					p.append(propertyName);
+					p.append(";");
 				}
-			});
-		}
+			}
+		});
 		return associate(sourceElement, result);
 	}
 
 	/**
 	 * Creates and returns a formal parameter for the given name and type, which is associated to the given source
 	 * element.
+	 * 
+	 * @return a Java parameter given name, <code>null</code> if sourceElement or name are <code>null</code>.
 	 */
-	public JvmFormalParameter toParameter(EObject sourceElement, String name, JvmTypeReference typeRef) {
-		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
-		result.setName(nullSaveName(name));
+	@Nullable 
+	public JvmFormalParameter toParameter(@Nullable EObject sourceElement, @Nullable String name, @Nullable JvmTypeReference typeRef) {
+		if(sourceElement == null || name == null)
+			return null;
+		JvmFormalParameter result = typesFactory.createJvmFormalParameter();
+		result.setName(name);
 		result.setParameterType(cloneWithProxies(typeRef));
 		return associate(sourceElement, result);
 	}
@@ -408,68 +731,234 @@ public class JvmTypesBuilder {
 	/**
 	 * Creates and returns a constructor with the given simple name associated to the given source element. By default
 	 * the constructor will have an empty body and no arguments, hence the Java default constructor.
+	 *
+	 * @param sourceElement 
+	 * 		      the sourceElement the constructor should be associated with.
+	 * @param initializer
+	 *            the initializer to apply on the created constructor. If <code>null</code>, the method won't be initialized.
+	 * 
+	 * @return a result representing a Java constructor with the given name, <code>null</code> if sourceElement is <code>null</code>.
 	 */
-	public JvmConstructor toConstructor(EObject sourceElement, String simpleName, Procedure1<JvmConstructor> init) {
-		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
-		constructor.setSimpleName(nullSaveName(simpleName));
-		setBody(constructor, new Function1<ImportManager, CharSequence>() {
-			public CharSequence apply(ImportManager p) {
-				return "{}";
+	@Nullable 
+	public JvmConstructor toConstructor(@Nullable EObject sourceElement, @Nullable Procedure1<? super JvmConstructor> initializer) {
+		if(sourceElement == null)
+			return null;
+		JvmConstructor constructor = typesFactory.createJvmConstructor();
+		constructor.setVisibility(JvmVisibility.PUBLIC);
+		associate(sourceElement, constructor);
+		return initializeSafely(constructor, initializer);
+	}
+	
+	/**
+	 * Creates a <code>toString()</code> method accumulating the values of all fields.
+	 *
+	 * @return a result representing a Java toString() method, <code>null</code> if sourceElement or declaredType are <code>null</code>.
+	 */
+	@Nullable 
+	public JvmOperation toToStringMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType) {
+		if(sourceElement == null || declaredType == null)
+			return null;
+		JvmOperation result = toMethod(sourceElement, "toString", newTypeRef(sourceElement, String.class), null);
+		if (result == null)
+			return null;
+		JvmType overrideType = references.findDeclaredType(Override.class, sourceElement);
+		if (overrideType != null)
+			result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
+		setBody(result, new Procedure1<ITreeAppendable>() {
+			public void apply(@Nullable ITreeAppendable p) {
+				if (p == null)
+					return;
+				JvmType type = JvmTypesBuilder.this.references.findDeclaredType(ToStringHelper.class, sourceElement);
+				p.append("String result = new ");
+				if (type != null) {
+					p.append(type);
+				} else {
+					p.append(ToStringHelper.class.getName());
+				}
+				p.append("().toString(this);");
+				p.newLine().append("return result;");
 			}
 		});
-		if (init != null && simpleName != null)
-			init.apply(constructor);
-		return associate(sourceElement, constructor);
+		return result;
 	}
+	
+	public @Nullable JvmOperation toHashCodeMethod(@Nullable final EObject sourceElement, final boolean extendsSomethingWithProperHashCode, @Nullable final JvmDeclaredType declaredType) {
+		if (sourceElement == null || declaredType == null)
+			return null;
+		return toHashCodeMethod(sourceElement, extendsSomethingWithProperHashCode, toArray(filter(declaredType.getMembers(), JvmField.class), JvmField.class));
+	}
+	
+	public @Nullable JvmOperation toHashCodeMethod(@Nullable final EObject sourceElement, final boolean extendsSomethingWithProperHashCode, final JvmField ...jvmFields) {
+		if (sourceElement == null)
+			return null;
+		JvmOperation result = toMethod(sourceElement, "hashCode", this.references.getTypeForName(Integer.TYPE, sourceElement), null);
+		if (result == null)
+			return null;
+		result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
+		setBody(result, new Procedure1<ITreeAppendable>() {
+			public void apply(@Nullable ITreeAppendable p) {
+				if (p == null)
+					return;
+				p.append("final int prime = 31;");
+				if (extendsSomethingWithProperHashCode) {
+					p.newLine().append("int result = super.hashCode();");
+				} else{
+					p.newLine().append("int result = 1;");
+				}
+				for (JvmField field : jvmFields) {
+					String typeName = field.getType().getIdentifier();
+					if (Boolean.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + (" + field.getSimpleName() +" ? 1231 : 1237);");
+					} else if (Integer.TYPE.getName().equals(typeName)
+							|| Character.TYPE.getName().equals(typeName)
+							|| Byte.TYPE.getName().equals(typeName)
+							|| Short.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + " + field.getSimpleName() +";");
+					} else if (Long.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + (int) (" + field.getSimpleName() +" ^ (" + field.getSimpleName() + " >>> 32));");
+					} else if (Float.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + Float.floatToIntBits(" + field.getSimpleName() +");");
+					} else if (Double.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + (int) (Double.doubleToLongBits(" + field.getSimpleName() +") ^ (Double.doubleToLongBits(" + field.getSimpleName() + ") >>> 32));");
+					} else {
+						p.newLine().append("result = prime * result + ((" + field.getSimpleName() +"== null) ? 0 : "+field.getSimpleName()+".hashCode());");
+					}
+				}
+				p.newLine().append("return result;");
+			}
+		});
+		return result;
+	}
+	
+	public @Nullable JvmOperation toEqualsMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType, final boolean isDelegateToSuperEquals) {
+		if (sourceElement == null || declaredType == null)
+			return null;
+		return toEqualsMethod(sourceElement, declaredType, isDelegateToSuperEquals, toArray(filter(declaredType.getMembers(), JvmField.class), JvmField.class));
+	}
+	
+	public @Nullable JvmOperation toEqualsMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType, final boolean isDelegateToSuperEquals, final JvmField ...jvmFields) {
+		if (sourceElement == null || declaredType == null)
+			return null;
+		JvmOperation result = toMethod(sourceElement, "equals", references.getTypeForName(Boolean.TYPE, sourceElement), null);
+		if (result == null)
+			return null;
+		result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
+		result.getParameters().add( toParameter(sourceElement, "obj", references.getTypeForName(Object.class, sourceElement)));
+		setBody(result, new Procedure1<ITreeAppendable>() {
+				public void apply(@Nullable ITreeAppendable p) {
+					if (p == null)
+						return;
+					p.append("if (this == obj)").increaseIndentation();
+						p.newLine().append("return true;").decreaseIndentation();
+					p.newLine().append("if (obj == null)").increaseIndentation();
+						p.newLine().append("return false;").decreaseIndentation();
+					p.newLine().append("if (getClass() != obj.getClass())").increaseIndentation();
+						p.newLine().append("return false;").decreaseIndentation();
+					if (isDelegateToSuperEquals) {
+						p.newLine().append("if (!super.equals(obj))").increaseIndentation();
+							p.newLine().append("return false;").decreaseIndentation();
+					}
+					p.newLine().append(declaredType.getSimpleName()+" other = (" + declaredType.getSimpleName() + ") obj;");
+					for (JvmField field : jvmFields) {
+						String typeName = field.getType().getIdentifier();
+						if (Boolean.TYPE.getName().equals(typeName) 
+								|| Integer.TYPE.getName().equals(typeName)
+								|| Long.TYPE.getName().equals(typeName)
+								|| Character.TYPE.getName().equals(typeName)
+								|| Byte.TYPE.getName().equals(typeName)
+								|| Short.TYPE.getName().equals(typeName)) {
+							p.newLine().append("if (other." + field.getSimpleName() +" != " + field.getSimpleName() + ")").increaseIndentation();
+								p.newLine().append("return false;").decreaseIndentation();
+							
+						} else if (Double.TYPE.getName().equals(typeName)) {
+							p.newLine().append("if (Double.doubleToLongBits(other." + field.getSimpleName() +") != Double.doubleToLongBits(" + field.getSimpleName() + "))").increaseIndentation();
+							p.newLine().append("return false;").decreaseIndentation();
+						} else if (Float.TYPE.getName().equals(typeName)) {
+							p.newLine().append("if (Float.floatToIntBits(other." + field.getSimpleName() +") != Float.floatToIntBits(" + field.getSimpleName() + "))").increaseIndentation();
+							p.newLine().append("return false;").decreaseIndentation();
+						} else {
+							p.newLine().append("if (" + field.getSimpleName() +" == null) {").increaseIndentation();
+								p.newLine().append("if (other." + field.getSimpleName() +" != null)").increaseIndentation();
+									p.newLine().append("return false;").decreaseIndentation();
+								p.decreaseIndentation();
+							p.newLine().append("} else if (!"+ field.getSimpleName() +".equals(other."+ field.getSimpleName() +"))").increaseIndentation();
+								p.newLine().append("return false;").decreaseIndentation();
+						}
+					}
+					p.newLine().append("return true;");
+				}
+			});
+		return result;
+	}
+	
 
 	/**
-	 * Creates and returns an annotation of the given annotation type.
+	 * Creates and returns an annotation reference of the given annotation type.
+	 * 
+	 * @see #toAnnotation(EObject, Class, Object)
 	 */
-	public JvmAnnotationReference toAnnotation(EObject sourceElement, Class<?> annotationType) {
+	@Nullable
+	public JvmAnnotationReference toAnnotation(@Nullable EObject sourceElement, @Nullable Class<?> annotationType) {
 		return toAnnotation(sourceElement, annotationType, null);
 	}
 
 	/**
-	 * Creates and returns an annotation of the given annotation type's name.
+	 * Creates and returns an annotation reference of the given annotation type's name.
+	 * 
+	 * @see #toAnnotation(EObject, String, Object)
 	 */
-	public JvmAnnotationReference toAnnotation(EObject sourceElement, String annotationTypeName) {
+	@Nullable 
+	public JvmAnnotationReference toAnnotation(@Nullable EObject sourceElement, @Nullable String annotationTypeName) {
 		return toAnnotation(sourceElement, annotationTypeName, null);
 	}
 
 	/**
-	 * Creates and returns an annotation of the given annotation type's name and the given value.
+	 * Creates and returns an annotation reference of the given annotation type's name and the given value.
 	 * 
 	 * @param sourceElement
-	 *            - the source element to associate the created element with.
+	 *            the source element to associate the created element with.
 	 * @param annotationType
-	 *            - the type of the created annotation.
+	 *            the type of the created annotation reference.
 	 * @param value
-	 *            - the value of the single
+	 *            the value of the annotation reference. Can be <code>null</code> if the reference doesn't have any value.
+	 *            
+	 * @return a result representing an annotation reference to the given annotation type, <code>null<code> if 
+	 * 		sourceElement or annotationType are <code>null</code>.  
 	 */
-	public JvmAnnotationReference toAnnotation(EObject sourceElement, Class<?> annotationType, Object value) {
+	@Nullable
+	public JvmAnnotationReference toAnnotation(@Nullable EObject sourceElement, @Nullable Class<?> annotationType, @Nullable Object value) {
+		if(sourceElement == null || annotationType == null)
+			return null;
 		return toAnnotation(sourceElement, annotationType.getCanonicalName(), value);
 	}
 
 	/**
-	 * Creates and returns an annotation of the given annotation type's name and the given value.
+	 * Creates and returns an annotation reference of the given annotation type's name and the given value.
 	 * 
 	 * @param sourceElement
-	 *            - the source element to associate the created element with.
-	 * @param annotationTypeNAme
-	 *            - the type name of the created annotation.
+	 *            the source element to associate the created element with.
+	 * @param annotationTypeName
+	 *            the type name of the created annotation.
 	 * @param value
-	 *            - the value of the single
+	 *            the value of the annotation reference. Can be <code>null</code> if the reference doesn't have any value.
+	 *            
+	 * @return a result representing an annotation reference to the given annotation type, <code>null<code> if 
+	 * 		sourceElement or annotationType are <code>null</code>.  
 	 */
-	public JvmAnnotationReference toAnnotation(EObject sourceElement, String annotationTypeName, Object value) {
-		JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+	@Nullable 
+	public JvmAnnotationReference toAnnotation(@Nullable EObject sourceElement, @Nullable String annotationTypeName, @Nullable Object value) {
+		JvmAnnotationReference result = typesFactory.createJvmAnnotationReference();
 		JvmType jvmType = references.findDeclaredType(annotationTypeName, sourceElement);
+		if (jvmType == null) {
+			throw new IllegalArgumentException("The type "+annotationTypeName +" is not on the classpath.");
+		}
 		if (!(jvmType instanceof JvmAnnotationType)) {
 			throw new IllegalArgumentException("The given class " + annotationTypeName + " is not an annotation type.");
 		}
 		result.setAnnotation((JvmAnnotationType) jvmType);
 		if (value != null) {
 			if (value instanceof String) {
-				JvmStringAnnotationValue annotationValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+				JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
 				annotationValue.getValues().add((String) value);
 				result.getValues().add(annotationValue);
 			}
@@ -479,28 +968,153 @@ public class JvmTypesBuilder {
 
 	/**
 	 * Creates a clone of the given {@link JvmTypeReference} without resolving any proxies.
+	 * The clone will be associated with the original element by means of {@link JvmModelAssociator associations}.
+	 * 
+	 * @param typeRef the type reference to be cloned.
+	 * @return a clone of typeRef, <code>null</code> if typeRef is <code>null</code> or a {@link JvmUnknownTypeReference} 
+	 *     if there is a problem with the typeRef. 
 	 */
-	public JvmTypeReference cloneWithProxies(JvmTypeReference typeRef) {
+	@Nullable 
+	public JvmTypeReference cloneWithProxies(@Nullable JvmTypeReference typeRef) {
 		if(typeRef == null)
 			return null;
-		if (typeRef instanceof JvmParameterizedTypeReference
-				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
-			throw new IllegalArgumentException("typeref#type was null");
-		return EcoreUtil2.cloneWithProxies(typeRef);
+		if (typeRef instanceof JvmParameterizedTypeReference && !typeRef.eIsProxy()
+				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)) {
+			JvmUnknownTypeReference unknownTypeReference = typesFactory.createJvmUnknownTypeReference();
+			return unknownTypeReference;
+		}
+		return cloneAndAssociate(typeRef);
 	}
 
 	/**
+	 * Creates a clone of the given {@link JvmIdentifiableElement} without resolving any proxies.
+	 * The clone will be associated with the original element by means of {@link JvmModelAssociator associations}.
+	 * 
+ 	 * @param original the element to be cloned.
+	 * @return a clone of original associated with the original, <code>null</code> if original is <code>null</code>. 
+	 */
+	@Nullable 
+	public <T extends JvmIdentifiableElement> T cloneWithProxies(@Nullable T original) {
+		if(original == null)
+			return null;
+		return cloneAndAssociate(original);
+	}
+	
+	/**
+	 * Creates a deep copy of the given object and associates each copied instance with the
+	 * clone. Does not resolve any proxies.
+	 *	
+	 * @param original the root element to be cloned.
+	 * @return a clone of tree rooted in original associated with the original, <code>null</code> if original is <code>null</code>. 
+	 */
+	protected <T extends EObject> T cloneAndAssociate(T original) {
+		EcoreUtil.Copier copier = new EcoreUtil.Copier(false) {
+			private static final long serialVersionUID = 1L;
+
+			@Override@Nullable 
+			protected EObject createCopy(@Nullable EObject eObject) {
+				EObject result = super.createCopy(eObject);
+				if (result != null && eObject != null && !eObject.eIsProxy()) {
+					associator.associatePrimary(eObject, result);
+				}
+				return result;
+			}
+		};
+		@SuppressWarnings("unchecked")
+		T copy = (T) copier.copy(original);
+		copier.copyReferences();
+		return copy;
+	}
+	
+	/**
+	 * Creates a deep copy of the given object and associates each copied instance with the
+	 * clone. Does not resolve any proxies.
+	 *	
+	 * @param original the root element to be cloned.
+	 * @return a clone of tree rooted in original associated with the original, <code>null</code> if original is <code>null</code>. 
+	 */
+	protected <T extends JvmTypeReference> T cloneAndAssociate(T original) {
+		EcoreUtil.Copier copier = new EcoreUtil.Copier(false) {
+			private static final long serialVersionUID = 1L;
+
+			@Override@Nullable 
+			protected EObject createCopy(@Nullable EObject eObject) {
+				EObject result = super.createCopy(eObject);
+				if (result != null && eObject != null && !eObject.eIsProxy()) {
+					associator.associatePrimary(eObject, result);
+				}
+				return result;
+			}
+			@Override
+			public EObject copy(@Nullable EObject eObject) {
+				EObject result = super.copy(eObject);
+				if (result instanceof JvmWildcardTypeReference) {
+					boolean upperBoundSeen = false;
+					for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) result).getConstraints()) {
+						if (constraint instanceof JvmUpperBound) {
+							upperBoundSeen = true;
+							break;
+						}
+					}
+					if (!upperBoundSeen) {
+						// no upper bound found - seems to be an invalid - assume object as upper bound
+						JvmTypeReference object = newObjectReference();
+						JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+						upperBound.setTypeReference(object);
+						((JvmWildcardTypeReference) result).getConstraints().add(0, upperBound);
+					}
+				}
+				return result;
+			}
+		};
+		@SuppressWarnings("unchecked")
+		T copy = (T) copier.copy(original);
+		copier.copyReferences();
+		return copy;
+	}
+	
+	private JvmTypeReference newObjectReference() {
+		URI objectURI = new ClassURIHelper().getFullURI(Object.class);
+		JvmType objectType = typesFactory.createJvmGenericType();
+		((InternalEObject)objectType).eSetProxyURI(objectURI);
+		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
+		result.setType(objectType);
+		return result;
+	}
+	
+	/**
 	 * Attaches the given compile strategy to the given {@link JvmField} such that the compiler knows how to
 	 * initialize the {@link JvmField} when it is translated to Java source code.
-	 * @param field - the field to add the initializer to.
-	 * @param strategy - the compilation strategy. Must return just one valid Java expression.
+	 * 
+	 * @param field the field to add the initializer to. If <code>null</code> this method does nothing. 
+	 * @param strategy the compilation strategy. If <code>null</code> this method does nothing. 
 	 */
-	public void initialization(JvmField field, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
-		addCompilationStrategy(field, strategy);
+	public void setInitializer(@Nullable JvmField field, @Nullable Procedures.Procedure1<ITreeAppendable> strategy) {
+		if (field == null || strategy == null)
+			return;
+		removeExistingBody(field);
+		setCompilationStrategy(field, strategy);
 	}
-
-	protected void addCompilationStrategy(JvmMember member,
-			Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+	
+	/**
+	 * Sets the given {@link JvmField} as the logical container for the given {@link XExpression}.
+	 * This defines the context and the scope for the given expression.
+	 * 
+	 * @param field
+	 *            the {@link JvmField} that is initialized by the expression. If <code>null</code> this method does nothing. 
+	 * @param expr
+	 *            the initialization expression. Can be <code>null</code> in which case this function does nothing.
+	 */
+	public void setInitializer(@Nullable JvmField field, @Nullable XExpression expr) {
+		if (field == null || expr == null)
+			return;
+		removeExistingBody(field);
+		associator.associateLogicalContainer(expr, field);
+	}
+	
+	protected void setCompilationStrategy(@Nullable JvmMember member, @Nullable Procedures.Procedure1<ITreeAppendable> strategy) {
+		if(member == null || strategy == null)
+			return;
 		CompilationStrategyAdapter adapter = new CompilationStrategyAdapter();
 		adapter.setCompilationStrategy(strategy);
 		member.eAdapters().add(adapter);
@@ -510,16 +1124,17 @@ public class JvmTypesBuilder {
 	 * Creates a new {@link JvmTypeReference} pointing to the given class and containing the given type arguments.
 	 * 
 	 * @param ctx
-	 *            - an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
+	 *            an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
 	 *            given clazz.
 	 * @param clazz
-	 *            - the class the type reference shall point to.
+	 *            the class the type reference shall point to.
 	 * @param typeArgs
-	 *            - type arguments
+	 *            type arguments
 	 * 
 	 * @return the newly created {@link JvmTypeReference}
 	 */
-	public JvmTypeReference newTypeRef(EObject ctx, Class<?> clazz, JvmTypeReference... typeArgs) {
+	@Nullable 
+	public JvmTypeReference newTypeRef(@Nullable EObject ctx, @Nullable Class<?> clazz, @Nullable JvmTypeReference... typeArgs) {
 		return references.getTypeForName(clazz, ctx, typeArgs);
 	}
 
@@ -527,44 +1142,77 @@ public class JvmTypesBuilder {
 	 * Creates a new {@link JvmTypeReference} pointing to the given class and containing the given type arguments.
 	 * 
 	 * @param ctx
-	 *            - an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
+	 *            an EMF context, which is used to look up the {@link org.eclipse.xtext.common.types.JvmType} for the
 	 *            given clazz.
 	 * @param typeName
-	 *            - the name of the type the reference shall point to.
+	 *            the name of the type the reference shall point to.
 	 * @param typeArgs
-	 *            - type arguments
+	 *            type arguments
 	 * @return the newly created {@link JvmTypeReference}
 	 */
-	public JvmTypeReference newTypeRef(EObject ctx, String typeName, JvmTypeReference... typeArgs) {
+	@Nullable 
+	public JvmTypeReference newTypeRef(@Nullable EObject ctx, @Nullable String typeName, @Nullable JvmTypeReference... typeArgs) {
 		return references.getTypeForName(typeName, ctx, typeArgs);
+	}
+	
+	/**
+	 * Creates a new {@link JvmTypeReference} pointing to the given class and containing the given type arguments.
+	 * 
+	 * @param type
+	 *            the type the reference shall point to.
+	 * @param typeArgs
+	 *            type arguments
+	 * @return the newly created {@link JvmTypeReference}
+	 */
+	@Nullable 
+	public JvmTypeReference newTypeRef(@Nullable JvmType type, @Nullable JvmTypeReference... typeArgs) {
+		return references.createTypeRef(type, typeArgs);
 	}
 
 	/**
 	 * @return an array type of the given type reference. Add one dimension if the given {@link JvmTypeReference} is
 	 *         already an array.
 	 */
-	public JvmTypeReference addArrayTypeDimension(JvmTypeReference componentType) {
+	@Nullable 
+	public JvmTypeReference addArrayTypeDimension(@Nullable JvmTypeReference componentType) {
 		return references.createArrayType(componentType);
 	}
 
 	/**
-	 * translates {@link XAnnotation}s to {@link JvmAnnotationReference}s and adds them to the given
-	 * {@link JvmAnnotationTarget}
+	 * Translates {@link XAnnotation XAnnotations} to {@link JvmAnnotationReference JvmAnnotationReferences} 
+	 * and adds them to the given {@link JvmAnnotationTarget}.
+	 * 
+	 * @param target the annotation target. If <code>null</code> this method does nothing. 
+	 * @param annotations the annotations. If <code>null</code> this method does nothing. 
 	 */
-	public void translateAnnotationsTo(Iterable<? extends XAnnotation> annotations, JvmAnnotationTarget target) {
+	public void translateAnnotationsTo(@Nullable Iterable<? extends XAnnotation> annotations, @Nullable JvmAnnotationTarget target) {
+		if(annotations == null || target == null) 
+			return;
 		for (XAnnotation anno : annotations) {
 			JvmAnnotationReference annotationReference = getJvmAnnotationReference(anno);
-			target.getAnnotations().add(annotationReference);
+			if(annotationReference != null) {
+				target.getAnnotations().add(annotationReference);
+			}
 		}
 	}
 
-	protected JvmAnnotationReference getJvmAnnotationReference(XAnnotation anno) {
-		JvmAnnotationReference reference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-		final JvmAnnotationType annotation = (JvmAnnotationType) anno.eGet(
+	@Nullable 
+	public JvmAnnotationReference getJvmAnnotationReference(@Nullable XAnnotation anno) {
+		if(anno == null)
+			return null;
+		JvmAnnotationReference reference = typesFactory.createJvmAnnotationReference();
+		final JvmType annotation = (JvmType) anno.eGet(
 				XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
-		reference.setAnnotation(annotation);
+		if (annotation.eIsProxy()) {
+			JvmAnnotationType copiedProxy = TypesFactory.eINSTANCE.createJvmAnnotationType();
+			((InternalEObject)copiedProxy).eSetProxyURI(EcoreUtil.getURI(annotation));
+			reference.setAnnotation(copiedProxy);
+		} else if (annotation instanceof JvmAnnotationType){
+			reference.setAnnotation((JvmAnnotationType) annotation);
+		}
 		for (XAnnotationElementValuePair val : anno.getElementValuePairs()) {
-			JvmAnnotationValue annotationValue = getJvmAnnotationValue(val.getValue());
+			XExpression valueExpression = val.getValue();
+			JvmAnnotationValue annotationValue = toJvmAnnotationValue(valueExpression);
 			if (annotationValue != null) {
 				JvmOperation op = (JvmOperation) val.eGet(
 						XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT, false);
@@ -573,121 +1221,204 @@ public class JvmTypesBuilder {
 			}
 		}
 		if (anno.getValue() != null) {
-			JvmAnnotationValue value = getJvmAnnotationValue(anno.getValue());
+			JvmAnnotationValue value = toJvmAnnotationValue(anno.getValue());
 			if (value != null) {
 				reference.getValues().add(value);
 			}
 		}
+		associate(anno, reference);
 		return reference;
 	}
 
-	protected JvmAnnotationValue getJvmAnnotationValue(XExpression value) {
-		if (value instanceof XAnnotationValueArray) {
-			EList<XExpression> values = ((XAnnotationValueArray) value).getValues();
+	/**
+	 * @since 2.4
+	 */
+	@Nullable 
+	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value, @Nullable JvmTypeReference explicitType, boolean evaluate) {
+		if (value != null) {
+			AnnotationValueTranslator translator = null;
 			JvmAnnotationValue result = null;
-			for (XExpression expr : values) {
-				AnnotationValueTranslator translator = translator(expr);
-				if (translator == null)
-					throw new IllegalArgumentException("expression " + value
-							+ " is not supported in annotation literals");
-				if (result == null) {
-					result = translator.createValue(expr);
+			if (value instanceof XListLiteral) {
+				List<XExpression> elements = ((XListLiteral) value).getElements();
+				if(elements.isEmpty()) {
+					ResourceSet resourceSetOrNull = EcoreUtil2.getResourceSet(value);
+					StandardTypeReferenceOwner typeReferenceOwner = new StandardTypeReferenceOwner(commonTypeComputationServices, resourceSetOrNull);
+					final OwnedConverter ownedConverter = new OwnedConverter(typeReferenceOwner);
+					LightweightTypeReference type = ownedConverter.apply(explicitType);
+					if(type.isArray()) {
+						return createEmptyAnnotationValueArray(((ArrayTypeReference)type).getComponentType());
+					}
 				}
-				translator.appendValue(result, expr);
+				for (XExpression expr : elements) {
+					if(translator == null) 
+						translator = translator(expr, evaluate);
+					if(translator != null) {
+						if(result == null) { 
+							result = translator.createValue(expr);
+							if (result == null) {
+								return null;
+							}
+						}
+						translator.appendValue(result, expr);
+					}
+				}
+			} else {
+				translator = translator(value, evaluate);
+				if(translator != null) {
+					result = translator.createValue(value);
+					if (result == null) {
+						return result;
+					}
+					translator.appendValue(result, value);
+				}
 			}
-			return result;
-		} else if (value != null) {
-			AnnotationValueTranslator translator = translator(value);
-			if (translator == null)
-				throw new IllegalArgumentException("expression " + value + " is not supported in annotation literals");
-			JvmAnnotationValue result = translator.createValue(value);
-			translator.appendValue(result, value);
 			return result;
 		}
 		return null;
 	}
-
-	private Map<EClass, AnnotationValueTranslator> translators = newLinkedHashMap();
-
-	protected AnnotationValueTranslator translator(XExpression obj) {
-		synchronized (translators) {
-			if (translators.isEmpty()) {
-				translators.put(XAnnotationsPackage.Literals.XANNOTATION, new AnnotationValueTranslator() {
-					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
-					}
-
-					public void appendValue(JvmAnnotationValue value, XExpression expr) {
-						JvmAnnotationAnnotationValue annotationValue = (JvmAnnotationAnnotationValue) value;
-						JvmAnnotationReference annotationReference = getJvmAnnotationReference((XAnnotation) expr);
-						annotationValue.getAnnotations().add(annotationReference);
-					}
-				});
-				translators.put(XbasePackage.Literals.XSTRING_LITERAL, new AnnotationValueTranslator() {
-					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
-					}
-
-					public void appendValue(JvmAnnotationValue value, XExpression expr) {
-						JvmStringAnnotationValue annotationValue = (JvmStringAnnotationValue) value;
-						String string = ((XStringLiteral) expr).getValue();
-						annotationValue.getValues().add(string);
-					}
-				});
-				translators.put(XbasePackage.Literals.XBOOLEAN_LITERAL, new AnnotationValueTranslator() {
-					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
-					}
-
-					public void appendValue(JvmAnnotationValue value, XExpression expr) {
-						JvmBooleanAnnotationValue annotationValue = (JvmBooleanAnnotationValue) value;
-						boolean isTrue = ((XBooleanLiteral) expr).isIsTrue();
-						annotationValue.getValues().add(isTrue);
-					}
-				});
-				translators.put(XbasePackage.Literals.XTYPE_LITERAL, new AnnotationValueTranslator() {
-					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
-					}
-
-					public void appendValue(JvmAnnotationValue value, XExpression expr) {
-						JvmTypeAnnotationValue annotationValue = (JvmTypeAnnotationValue) value;
-						final XTypeLiteral literal = (XTypeLiteral) expr;
-						JvmType proxy = (JvmType) literal.eGet(XbasePackage.Literals.XTYPE_LITERAL__TYPE, false);
-						JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE
-								.createJvmParameterizedTypeReference();
-						reference.setType(proxy);
-						annotationValue.getValues().add(reference);
-					}
-				});
-				translators.put(XbasePackage.Literals.XINT_LITERAL, new AnnotationValueTranslator() {
-					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
-					}
-
-					public void appendValue(JvmAnnotationValue value, XExpression expr) {
-						JvmIntAnnotationValue annotationValue = (JvmIntAnnotationValue) value;
-						annotationValue.getValues().add(((XIntLiteral) expr).getValue());
-					}
-				});
-				translators.put(XbasePackage.Literals.XFEATURE_CALL, new AnnotationValueTranslator() {
-					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
-					}
-
-					public void appendValue(JvmAnnotationValue value, XExpression expr) {
-						JvmCustomAnnotationValue annotationValue = (JvmCustomAnnotationValue) value;
-						annotationValue.getValues().add(expr);
-					}
-				});
+	
+	protected JvmAnnotationValue createEmptyAnnotationValueArray(LightweightTypeReference componentType) {
+		if(componentType.isWrapper()) {
+			return createEmptyAnnotationValueArray(componentType.getPrimitiveIfWrapperType());
+		} else {
+			String identifier = componentType.getIdentifier();
+			if(equal("java.lang.String", identifier)) {
+				return typesFactory.createJvmStringAnnotationValue();
+			} else if(componentType.isPrimitive()) {
+				if(equal("boolean", identifier)) 
+					return typesFactory.createJvmBooleanAnnotationValue();
+				else if(equal("byte", identifier)) 
+					return typesFactory.createJvmByteAnnotationValue();
+				else if(equal("short", identifier)) 
+					return typesFactory.createJvmShortAnnotationValue();
+				else if(equal("char", identifier)) 
+					return typesFactory.createJvmCharAnnotationValue();
+				else if(equal("int", identifier)) 
+					return typesFactory.createJvmIntAnnotationValue();
+				else if(equal("long", identifier)) 
+					return typesFactory.createJvmLongAnnotationValue();
+				else if(equal("float", identifier)) 
+					return typesFactory.createJvmFloatAnnotationValue();
+				else if(equal("double", identifier)) 
+					return typesFactory.createJvmDoubleAnnotationValue();
 			}
 		}
-		return translators.get(obj.eClass());
+		return typesFactory.createJvmCustomAnnotationValue();
+	}
+	
+	@Nullable 
+	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value) {
+		return toJvmAnnotationValue(value, false);
+	}
+	
+	@Nullable 
+	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value, boolean evaluate) {
+		return toJvmAnnotationValue(value, null, evaluate);
 	}
 
-	static interface AnnotationValueTranslator {
+	@Nullable 
+	protected AnnotationValueTranslator translator(@Nullable XExpression obj, final boolean evaluate) {
+		if (obj == null)
+			return null;
+		if (obj.eClass() == XAnnotationsPackage.Literals.XANNOTATION) {
+			return new AnnotationValueTranslator() {
+				public JvmAnnotationValue createValue(XExpression expr) {
+					return typesFactory.createJvmAnnotationAnnotationValue();
+				}
+
+				public void appendValue(JvmAnnotationValue value, XExpression expr) {
+					JvmAnnotationAnnotationValue annotationValue = (JvmAnnotationAnnotationValue) value;
+					JvmAnnotationReference annotationReference = getJvmAnnotationReference((XAnnotation) expr);
+					annotationValue.getValues().add(annotationReference);
+				}
+			};
+		} else if (evaluate) {
+			StandardTypeReferenceOwner typeReferenceOwner = new StandardTypeReferenceOwner(commonTypeComputationServices, obj);
+			final OwnedConverter ownedConverter = new OwnedConverter(typeReferenceOwner);
+			return new AnnotationValueTranslator() {
+				
+				LightweightTypeReference expectedType = null;
+				
+				@Nullable
+				public JvmAnnotationValue createValue(XExpression expr) {
+					Object value;
+					try {
+						value = constantExpressionsInterpreter.evaluate(expr, null);
+					} catch (Exception exc) {
+						// ignore
+						return null;
+					}
+					if(value instanceof Boolean) {
+						setExpectedType(Boolean.TYPE, expr);
+						return typesFactory.createJvmBooleanAnnotationValue();
+					} else if(value instanceof Byte) {
+						setExpectedType(Byte.TYPE, expr);
+						return typesFactory.createJvmByteAnnotationValue();
+					} else if(value instanceof Short) {
+						setExpectedType(Short.TYPE, expr);
+						return typesFactory.createJvmShortAnnotationValue();
+					} else if(value instanceof Character) {
+						setExpectedType(Character.TYPE, expr);
+						return typesFactory.createJvmCharAnnotationValue();
+					} else if(value instanceof Integer) {
+						setExpectedType(Integer.TYPE, expr);
+						return typesFactory.createJvmIntAnnotationValue();
+					} else if(value instanceof Long) {
+						setExpectedType(Long.TYPE, expr);
+						return typesFactory.createJvmLongAnnotationValue();
+					} else if(value instanceof Float) {
+						setExpectedType(Float.TYPE, expr);
+						return typesFactory.createJvmFloatAnnotationValue();
+					} else if(value instanceof Double) {
+						setExpectedType(Double.TYPE, expr);
+						return typesFactory.createJvmDoubleAnnotationValue();
+					} else if(value instanceof String) {
+						setExpectedType(String.class, expr);
+						return typesFactory.createJvmStringAnnotationValue();
+					} else 
+						return typesFactory.createJvmCustomAnnotationValue();
+				}
+				
+				protected void setExpectedType(Class<?> expectedJavaType, XExpression expr) {
+					this.expectedType = ownedConverter.apply(newTypeRef(expr, expectedJavaType));
+				}
+
+				public void appendValue(JvmAnnotationValue annotationValue, XExpression expr) {
+					Object value;
+					try {
+						value = constantExpressionsInterpreter.evaluate(expr, expectedType);
+					} catch (Exception exc) {
+						// ignore
+						return;
+					}
+					if (value != null) {
+						EStructuralFeature valueAttribute = annotationValue.eClass().getEStructuralFeature("values");
+						EClassifier valueAttributeType = valueAttribute.getEType();
+						if(valueAttributeType.isInstance(value)) {
+							@SuppressWarnings("unchecked")
+							List<Object> values = (List<Object>) annotationValue.eGet(valueAttribute);
+							values.add(value);
+						}
+					}
+				}
+			};
+		} else {
+			return new AnnotationValueTranslator() {
+				public JvmAnnotationValue createValue(XExpression expr) {
+					return typesFactory.createJvmCustomAnnotationValue();
+				}
+				
+				public void appendValue(JvmAnnotationValue annotationValue, XExpression expr) {
+					((JvmCustomAnnotationValue)annotationValue).getValues().add(expr);
+				}
+			};
+		}
+	}
+	protected interface AnnotationValueTranslator {
+		@Nullable
 		JvmAnnotationValue createValue(XExpression expr);
 
 		void appendValue(JvmAnnotationValue value, XExpression expr);
 	}
+	
 }

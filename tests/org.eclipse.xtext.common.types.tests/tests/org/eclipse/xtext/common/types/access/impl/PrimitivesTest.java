@@ -7,24 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PrimitivesTest extends TestCase {
+public class PrimitivesTest extends Assert {
 
-	public void testForName_01() {
+	@Test public void testForName_01() {
 		for(Class<?> expected: Primitives.ALL_PRIMITIVE_TYPES) {
 			assertSame(expected, Primitives.forName(expected.getName()));
 		}
 	}
 	
-	public void testForName_02() {
+	@Test public void testForName_02() {
 		assertNull(Primitives.forName("unknown"));
 	}
 	
-	public void testAllPrimitiveTypes() {
-		assertEquals(9, Primitives.ALL_PRIMITIVE_TYPES.length);
+	@Test public void testAllPrimitiveTypes() {
+		assertEquals(9, Primitives.ALL_PRIMITIVE_TYPES.size());
 	}
 }

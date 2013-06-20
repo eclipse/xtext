@@ -13,7 +13,7 @@ package org.eclipse.xtext.parser.antlr;
 public class Bug289524ExTest extends AbstractBug289524Test {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(Bug289524ExTestLanguageStandaloneSetup.class);
 	}

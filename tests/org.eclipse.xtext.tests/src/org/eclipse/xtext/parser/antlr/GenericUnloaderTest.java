@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -17,13 +15,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class GenericUnloaderTest extends TestCase {
+public class GenericUnloaderTest extends Assert {
 
-	public void testHandleContentAdapter() throws Exception {
+	@Test public void testHandleContentAdapter() throws Exception {
 		EPackage root = createExample();
 		EContentAdapter eContentAdapter = new EContentAdapter();
 		root.eAdapters().add(eContentAdapter);
@@ -34,8 +34,10 @@ public class GenericUnloaderTest extends TestCase {
 			e.printStackTrace();
 			fail("Unload does not cope with contentAdpaters");
 		}
+		// isEmtpy() does not work in EMF 3.5
+		assertEquals(0, root.eAdapters().size());
 	}
-
+	
 	protected EPackage createExample() {
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		Resource resource = new XMIResourceImpl(URI.createURI("test"));
@@ -46,7 +48,5 @@ public class GenericUnloaderTest extends TestCase {
 		root.getEClassifiers().add(child);
 		return root;
 	}
-	
-	
 	
 }

@@ -14,20 +14,20 @@ import java.util.List;
 
 import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class ReadWriteAccessTest extends TestCase {
+public class ReadWriteAccessTest extends Assert {
 
 	public static class Foo {
 		public String val = "foo";
 	}
 
-	public void testModifyAndRead() throws Exception {
+	@Test public void testModifyAndRead() throws Exception {
 		final Foo foo = new Foo();
 		final AbstractReadWriteAcces<Foo> access = new AbstractReadWriteAcces<Foo>() {
 			@Override

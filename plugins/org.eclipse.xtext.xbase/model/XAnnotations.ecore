@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xAnnotations"
-    nsURI="http://www.eclipse.org/Xtext/Xbase/XAnnotations" nsPrefix="xAnnotations">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xAnnotations" nsURI="http://www.eclipse.org/Xtext/Xbase/XAnnotations"
+    nsPrefix="xAnnotations">
   <eClassifiers xsi:type="ecore:EClass" name="XAnnotation" eSuperTypes="Xbase.ecore#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementValuePairs" upperBound="-1"
         eType="#//XAnnotationElementValuePair" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotationType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmAnnotationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotationType" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XAnnotationElementValuePair">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass Xbase.ecore#//XExpression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XAnnotationElementValueBinaryOperation"
       eSuperTypes="Xbase.ecore#//XExpression">
@@ -23,9 +22,5 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="+"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XAnnotationValueArray" eSuperTypes="Xbase.ecore#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-        eType="ecore:EClass Xbase.ecore#//XExpression" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

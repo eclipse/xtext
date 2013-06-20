@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvid
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import testdata.FieldAccessSub;
 import testdata.VisibilitySubClass;
@@ -27,9 +29,11 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Ignore("Tests obsolete implementation details")
+@SuppressWarnings("deprecation")
 public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeProviderTest {
 	
-	public void testFinalFields() throws Exception {
+	@Test public void testFinalFields() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -48,7 +52,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 //		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	
-	public void testAssignments() throws Exception {
+	@Test public void testAssignments() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -68,7 +72,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	
-	public void testAssignments_01() throws Exception {
+	@Test public void testAssignments_01() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
 		final XAssignmentDescriptionProvider newXAssignmentDescriptionProvider = newXAssignmentDescriptionProvider();
 		final XAssignmentSugarDescriptionProvider newXAssignmentSugarDescriptionProvider = newXAssignmentSugarDescriptionProvider();

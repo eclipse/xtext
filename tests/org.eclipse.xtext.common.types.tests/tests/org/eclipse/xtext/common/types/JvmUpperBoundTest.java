@@ -7,22 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmUpperBoundTest extends TestCase {
+public class JvmUpperBoundTest extends Assert {
 
 	private JvmUpperBound upperBound;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
 	}
 	
-	public void testGetIdentifier_01() {
+	@Test public void testGetIdentifier_01() {
 		assertNull(upperBound.getIdentifier());
 	}
 }

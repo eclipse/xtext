@@ -2,6 +2,7 @@
 package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry;
 
 import com.google.inject.Injector;
 
@@ -17,9 +18,15 @@ public class XbaseStandaloneSetup extends XbaseStandaloneSetupGenerated{
 	
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		new XtypeStandaloneSetup().createInjectorAndDoEMFRegistration();
 		EPackage.Registry.INSTANCE.put(XbasePackage.eINSTANCE.getNsURI(),XbasePackage.eINSTANCE);
 		return super.createInjectorAndDoEMFRegistration();
+	}
+	
+	@Override
+	public void register(Injector injector) {
+		// no equinox registry reading if standalone setup is executed.
+		JvmModelInferrerRegistry.INSTANCE.setUseRegistry(false);
+		super.register(injector);
 	}
 }
 
