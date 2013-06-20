@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
@@ -25,12 +26,26 @@ public class DefaultReferenceDescription implements IReferenceDescription {
 	private URI containerEObjectURI;
 
 	public DefaultReferenceDescription(EObject from, EObject to, EReference eReference, int i, URI containerEObjectURI) {
-		this.sourceEObjectUri = EcoreUtil2.getNormalizedURI(from);
-		this.targetEObjectUri = EcoreUtil2.getNormalizedURI(to);
+		this.sourceEObjectUri = EcoreUtil2.getPlatformResourceOrNormalizedURI(from);
+		this.targetEObjectUri = EcoreUtil2.getPlatformResourceOrNormalizedURI(to);
 		this.eReference = eReference;
 		this.indexInList = i;
 		this.containerEObjectURI = containerEObjectURI;
 	}
+
+	/**
+	 * @since 2.4
+	 */
+	public DefaultReferenceDescription(URI sourceEObjectUri, URI targetEObjectUri, EReference eReference,
+			int indexInList, URI containerEObjectURI) {
+		super();
+		this.sourceEObjectUri = sourceEObjectUri;
+		this.targetEObjectUri = targetEObjectUri;
+		this.eReference = eReference;
+		this.indexInList = indexInList;
+		this.containerEObjectURI = containerEObjectURI;
+	}
+
 
 	public int getIndexInList() {
 		return indexInList;

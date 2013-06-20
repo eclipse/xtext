@@ -10,17 +10,17 @@ package org.eclipse.xtext.parser.antlr;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextTokenStreamTest extends TestCase implements TokenSource {
+public class XtextTokenStreamTest extends Assert implements TokenSource {
 
 	private int tokenCount = 0;
 	
-	public void testConsumeUntilEOF_large() {
+	@Test public void testConsumeUntilEOF_large() {
 		tokenCount = 25000;
 		XtextTokenStream stream = new XtextTokenStream(this, Token.DEFAULT_CHANNEL);
 		while(stream.LA(1) != Token.EOF) {
@@ -29,7 +29,7 @@ public class XtextTokenStreamTest extends TestCase implements TokenSource {
 		}
 	}
 	
-	public void testConsumeUntilEOF_small() {
+	@Test public void testConsumeUntilEOF_small() {
 		tokenCount = 25;
 		XtextTokenStream stream = new XtextTokenStream(this, Token.DEFAULT_CHANNEL);
 		while(stream.LA(1) != Token.EOF) {
@@ -38,38 +38,43 @@ public class XtextTokenStreamTest extends TestCase implements TokenSource {
 		}
 	}
 	
-//	public void test_smallFile_hugeLA() {
-//		doTestLookahead(500, 2500);
-//	}
-//	
-//	public void test_avgFile_largeLA() {
-//		doTestLookahead(50, 25000);
-//	}
-//
-//	public void test_largeFile_largeLA() {
-//		doTestLookahead(50, 2500000);
-//	}
-//	
-//	public void test_largeFile_tinyLA() {
-//		doTestLookahead(2, 2500000);
-//	}
-//	
-//	public void test_largeFile_noLA() {
-//		doTestLookahead(1, 2500000);
-//	}
-//	
-//	protected void doTestLookahead(int lookAhead, int tokenCount) {
-//		this.tokenCount = tokenCount;
-//		XtextTokenStream stream = new XtextTokenStream(this, Token.DEFAULT_CHANNEL);
-//		while(stream.LA(1) != Token.EOF) {
-//			for(int i = 0; i < lookAhead; i++) {
-//				for(int j = i + 1; j < lookAhead; j++) {
-//					stream.LA(j - i);					
-//				}
-//				stream.consume();
-//			}
-//		}
-//	}
+	@Test
+	public void test_smallFile_hugeLA() {
+		doTestLookahead(500, 2500);
+	}
+	
+	@Test
+	public void test_avgFile_largeLA() {
+		doTestLookahead(50, 25000);
+	}
+
+	@Test
+	public void test_largeFile_largeLA() {
+		doTestLookahead(50, 2500000);
+	}
+	
+	@Test
+	public void test_largeFile_tinyLA() {
+		doTestLookahead(2, 2500000);
+	}
+	
+	@Test
+	public void test_largeFile_noLA() {
+		doTestLookahead(1, 2500000);
+	}
+	
+	protected void doTestLookahead(int lookAhead, int tokenCount) {
+		this.tokenCount = tokenCount;
+		XtextTokenStream stream = new XtextTokenStream(this, Token.DEFAULT_CHANNEL);
+		while(stream.LA(1) != Token.EOF) {
+			for(int i = 0; i < lookAhead; i++) {
+				for(int j = i + 1; j < lookAhead; j++) {
+					stream.LA(j - i);					
+				}
+				stream.consume();
+			}
+		}
+	}
 
 	public Token nextToken() {
 		if (tokenCount == 0)

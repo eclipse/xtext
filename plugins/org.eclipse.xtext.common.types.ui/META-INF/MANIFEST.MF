@@ -2,31 +2,32 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.1.0.qualifier
-Bundle-SymbolicName: org.eclipse.xtext.common.types.ui;singleton:=true
-Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.common.types;bundle-version="2.0.0";visibility:=reexport,
+Bundle-Version: 2.4.3.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.common.types.ui
+Require-Bundle: org.eclipse.xtext.common.types;bundle-version="2.4.3";visibility:=reexport,
  org.eclipse.ui,
- org.eclipse.emf.ecore;bundle-version="2.5.0",
- org.eclipse.jdt.core;bundle-version="3.5.0",
- com.google.inject;bundle-version="2.0.0",
- org.eclipse.xtext;bundle-version="2.0.0",
+ org.eclipse.emf.ecore;bundle-version="2.9.0",
+ org.eclipse.jdt.core;bundle-version="3.5.2",
+ com.google.inject;bundle-version="3.0.0",
+ org.eclipse.xtext;bundle-version="2.4.3",
  org.eclipse.core.runtime;bundle-version="3.5.0",
  org.eclipse.core.resources;bundle-version="3.5.0",
- org.eclipse.xtext.ui;bundle-version="2.0.0",
+ org.eclipse.xtext.ui;bundle-version="2.4.3",
  org.eclipse.jdt.ui;bundle-version="3.5.0",
  org.eclipse.search;bundle-version="3.5.1",
- org.eclipse.ltk.ui.refactoring;bundle-version="3.4.101",
- org.eclipse.jdt.core.manipulation;bundle-version="1.3.0"
+ org.eclipse.ltk.ui.refactoring;bundle-version="3.4.0",
+ org.eclipse.jdt.core.manipulation;bundle-version="1.3.0",
+ org.eclipse.xtext.smap;bundle-version="2.4.3";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.common.types.edit;bundle-version="2.4.3";resolution:=optional;visibility:=reexport;x-installation:=greedy,
+ org.eclipse.ui.ide;bundle-version="3.8.0";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.common.types.access.jdt,
- org.eclipse.xtext.common.types.provider,
+ org.eclipse.xtext.common.types.ui.navigation;x-internal:=true,
  org.eclipse.xtext.common.types.ui.notification,
  org.eclipse.xtext.common.types.ui.query,
  org.eclipse.xtext.common.types.ui.refactoring;x-internal:=true,
  org.eclipse.xtext.common.types.ui.refactoring.participant;x-internal:=true,
  org.eclipse.xtext.common.types.util.jdt,
  org.eclipse.xtext.common.types.xtext.ui
-Bundle-Activator: org.eclipse.xtext.common.types.provider.TypesEditPlugin$Implementation
 Bundle-Localization: plugin

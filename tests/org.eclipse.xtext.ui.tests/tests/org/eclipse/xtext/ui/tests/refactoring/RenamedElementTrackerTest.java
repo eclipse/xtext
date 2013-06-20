@@ -14,7 +14,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
@@ -22,27 +22,33 @@ import org.eclipse.xtext.ui.refactoring.impl.RenamedElementTracker;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class RenamedElementTrackerTest extends AbstractXtextTests {
 
 	@Inject 
 	private RefactoringTestLanguageFragmentProvider fragmentProvider;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		setInjector(Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"));
 		getInjector().injectMembers(this);
 		fragmentProvider.setUseNames(true);
 	}
 	
-	public void testResolveElements() throws Exception {
+	@Override
+	public void tearDown() throws Exception {
+		fragmentProvider.setUseNames(false);
+		super.tearDown();
+	}
+	
+	@Test public void testResolveElements() throws Exception {
 		URI resourceURI = URI.createFileURI("testresource.refactoringtestlanguage");
 		String textualModel = "A { B { C { ref A.B } } ref B }";
 		XtextResource resource = getResource(textualModel, resourceURI.toString());

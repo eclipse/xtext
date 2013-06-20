@@ -8,6 +8,7 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -15,7 +16,7 @@ import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 public class RootNodeTest extends AbstractCompositeNodeTest {
 
 	@Override
-	public void testTextOffsetLength() {
+	@Test public void testTextOffsetLength() {
 		RootNode rootNode = createCompositeNode();
 		String completeContent = "completeContent";
 		rootNode.basicSetCompleteContent(completeContent);
@@ -34,7 +35,7 @@ public class RootNodeTest extends AbstractCompositeNodeTest {
 		return new RootNode();
 	}
 	
-	public void testIteratorForEmptyNode() {
+	@Test public void testIteratorForEmptyNode() {
 		RootNode rootNode = createCompositeNode();
 		BidiTreeIterator<AbstractNode> forwardIterator = rootNode.basicIterator();
 		assertTrue(forwardIterator.hasNext());

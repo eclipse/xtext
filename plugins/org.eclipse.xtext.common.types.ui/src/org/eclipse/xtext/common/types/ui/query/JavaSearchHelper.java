@@ -27,6 +27,7 @@ import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -60,6 +61,9 @@ public class JavaSearchHelper {
 
 	@Inject
 	private IDirtyStateManager dirtyStateManager;
+	
+	@Inject
+	private IResourceServiceProvider.Registry serviceProviderRegistry;
 
 	public JavaSearchHelper() {
 		projectToResourceSet = Maps.newHashMap();
@@ -76,7 +80,14 @@ public class JavaSearchHelper {
 		subMonitor.subTask("Find references in EMF resources");
 		try {
 			for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
-				searchIn(uri, resourceDescription);
+				URI resourceURI = resourceDescription.getURI();
+				IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
+				if(resourceServiceProvider != null) {
+					IJavaSearchParticipation javaSearchParticipation = resourceServiceProvider
+							.get(IJavaSearchParticipation.class);
+					if(javaSearchParticipation == null || javaSearchParticipation.canContainJvmReferences(resourceURI))
+						searchIn(uri, resourceDescription);
+				}
 				if (subMonitor.isCanceled()) {
 					return;
 				}

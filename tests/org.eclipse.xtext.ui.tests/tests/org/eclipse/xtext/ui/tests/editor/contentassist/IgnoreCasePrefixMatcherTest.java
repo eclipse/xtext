@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher.IgnoreCase;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,7 +21,7 @@ public class IgnoreCasePrefixMatcherTest extends AbstractPrefixMatcherTest<Prefi
 		return new PrefixMatcher.IgnoreCase();
 	}
 	
-	public void testCamelCaseMismatch() {
+	@Test public void testCamelCaseMismatch() {
 		assertFalse(matcher.isCandidateMatchingPrefix("ExactMatch", "ExMa"));
 		assertFalse(matcher.isCandidateMatchingPrefix("exactMatch", "exM"));
 		assertFalse(matcher.isCandidateMatchingPrefix("eXactMatch", "eXM"));

@@ -149,11 +149,13 @@ public class Validator {
 			public URI apply(MWEDiagnostic from) {
 				Issue issue = (Issue) from.getElement();
 				URI uriToProblem = issue.getUriToProblem();
-				return uriToProblem != null ? uriToProblem.trimFragment() : null;
+				return uriToProblem != null ? uriToProblem.trimFragment() : NullURI;
 			}
 		}));
 		return result;
 	}
+	
+	private final static URI NullURI = URI.createURI("no/uri");
 
 	public static class Disabled extends Validator {
 		@Override

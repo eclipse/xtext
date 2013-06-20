@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cspecExtension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<artifacts>
+		<private name="gwt.sources" base="src-super/" />
+		<private name="gwt.compatible.sources" base="${buckminster.output}/gwt-sources" />
+	</artifacts>
+
+	<actions>
+		<private name="copy.gwt.compatible.sources" actor="ant">
+			<actorProperties>
+				<property key="buildFile" value="gwtBuild.ant" />
+				<property key="targets" value="copy.gwt.compatible.sources" />
+			</actorProperties>
+			<properties>
+				<property key="source.folder" value="${buckminster.home}/../org.eclipse.xtend.lib/src" />
+				<property key="target.folder" value="${buckminster.output}/gwt-sources" />
+			</properties>
+			<products>
+				<private name="gwt.compatible" base="${buckminster.output}/gwt-sources" />
+			</products>
+		</private>
+	</actions>
+
+	<alterGroups>
+		<private name="jar.contents">
+			<attribute name="gwt.sources" />
+			<attribute name="gwt.compatible" />
+		</private>
+	</alterGroups>
+</cspecExtension>

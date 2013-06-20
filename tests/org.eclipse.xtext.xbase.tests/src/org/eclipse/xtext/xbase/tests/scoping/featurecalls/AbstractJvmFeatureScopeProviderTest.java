@@ -40,6 +40,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public abstract class AbstractJvmFeatureScopeProviderTest extends AbstractXbaseTestCase {
 
 	@Inject

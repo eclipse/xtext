@@ -16,6 +16,8 @@ import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainerTest;
+import org.junit.After;
+import org.junit.Test;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -28,15 +30,14 @@ public class StateBasedContainerTest extends ResourceDescriptionsBasedContainerT
 	private boolean simulateEmpty;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		simulateEmpty = false;
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		simulateEmpty = false;
-		super.tearDown();
 	}
 	 
 	@Override
@@ -57,7 +58,7 @@ public class StateBasedContainerTest extends ResourceDescriptionsBasedContainerT
 	}
 	
 	@Override
-	public void testBug352214() {
+	@Test public void testBug352214() {
 		container.getResourceDescriptions(); // initialize uri map
 		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(Collections.<IResourceDescription.Delta>singletonList(
 				new ChangedResourceDescriptionDelta(resourceDescription, null)), null);

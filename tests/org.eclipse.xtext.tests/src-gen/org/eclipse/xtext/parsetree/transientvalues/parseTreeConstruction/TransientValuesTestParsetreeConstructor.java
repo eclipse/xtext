@@ -6,14 +6,13 @@ package org.eclipse.xtext.parsetree.transientvalues.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeConstructor {
+public class TransientValuesTestParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private TransientValuesTestGrammarAccess grammarAccess;

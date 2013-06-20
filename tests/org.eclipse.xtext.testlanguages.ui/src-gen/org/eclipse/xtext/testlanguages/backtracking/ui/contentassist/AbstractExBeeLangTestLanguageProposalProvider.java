@@ -5,7 +5,6 @@ package org.eclipse.xtext.testlanguages.backtracking.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.testlanguages.backtracking.ui.contentassist.BeeLangTestLanguageProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
@@ -15,7 +14,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
  * with a more concrete subtype. 
  */
 @SuppressWarnings("all")
-public class AbstractExBeeLangTestLanguageProposalProvider extends BeeLangTestLanguageProposalProvider {
+public class AbstractExBeeLangTestLanguageProposalProvider extends org.eclipse.xtext.testlanguages.backtracking.ui.contentassist.BeeLangTestLanguageProposalProvider {
 		
     
 	public void complete_DelegateModel(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

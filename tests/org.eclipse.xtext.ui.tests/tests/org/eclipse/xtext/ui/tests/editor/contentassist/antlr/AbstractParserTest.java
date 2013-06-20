@@ -12,7 +12,7 @@ import java.util.Set;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.services.XtextGrammarUiTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -38,7 +39,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	protected XtextGrammarUiTestLanguageGrammarAccess grammarAccess;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new XtextGrammarUiTestLanguageStandaloneSetup() {
 			@Override
@@ -52,24 +53,24 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		grammarAccess = null;
 		super.tearDown();
 	}
 
-	public void testEmptyGrammar() throws RecognitionException {
+	@Test public void testEmptyGrammar() throws RecognitionException {
 		String input = "";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(grammarAccess.getGrammarAccess().getGrammarKeyword_0());
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarKeyword() throws RecognitionException {
+	@Test public void testGrammarKeyword() throws RecognitionException {
 		String input = "grammar";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_0());
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarKeywordAndName_01() throws RecognitionException {
+	@Test public void testGrammarKeywordAndName_01() throws RecognitionException {
 		String input = "grammar org";
 		Set<AbstractElement> expected = Sets.newHashSet(
 				grammarAccess.getGrammarIDAccess().getGroup_1(),
@@ -81,7 +82,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarKeywordAndName_02() throws RecognitionException {
+	@Test public void testGrammarKeywordAndName_02() throws RecognitionException {
 		String input = "grammar org.";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_1_1()
@@ -89,7 +90,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarKeywordAndName_03() throws RecognitionException {
+	@Test public void testGrammarKeywordAndName_03() throws RecognitionException {
 		String input = "grammar org.foo";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getGrammarIDAccess().getGroup_1(),
@@ -101,7 +102,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarWith_01() throws RecognitionException {
+	@Test public void testGrammarWith_01() throws RecognitionException {
 		String input = "grammar org.foo with";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_0()
@@ -109,7 +110,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarWith_02() throws RecognitionException {
+	@Test public void testGrammarWith_02() throws RecognitionException {
 		String input = "grammar with";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_0()
@@ -117,7 +118,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarWithUsed_02() throws RecognitionException {
+	@Test public void testGrammarWithUsed_02() throws RecognitionException {
 		String input = "grammar with org"; // default error recovery simply skips the keyword 'with'
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getGrammarIDAccess().getGroup_1(),
@@ -130,7 +131,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarWithUsed_03() throws RecognitionException {
+	@Test public void testGrammarWithUsed_03() throws RecognitionException {
 		String input = "grammar with org."; // default error recovery simply skips the keyword 'with'
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_1_1()
@@ -138,7 +139,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarWithUsed_04() throws RecognitionException {
+	@Test public void testGrammarWithUsed_04() throws RecognitionException {
 		String input = "grammar with org.foo"; // default error recovery simply skips the keyword 'with'
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getGrammarIDAccess().getGroup_1(),
@@ -150,7 +151,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testGrammarWith_05() throws RecognitionException {
+	@Test public void testGrammarWith_05() throws RecognitionException {
 		String input = "grammar org. with";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_0()
@@ -158,7 +159,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testRule_01() throws RecognitionException {
+	@Test public void testRule_01() throws RecognitionException {
 		String input = "grammar org.^grammar.name ruleName";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getParserRuleAccess().getGroup_1(),
@@ -168,7 +169,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testRule_02() throws RecognitionException {
+	@Test public void testRule_02() throws RecognitionException {
 		String input = "grammar org.^grammar.name ruleName returns";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getTypeRefAccess().getGroup_0(),
@@ -177,7 +178,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 
-	public void testRule_03() throws RecognitionException {
+	@Test public void testRule_03() throws RecognitionException {
 		String input = "grammar org.^grammar.name ruleName returns id";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getTypeRefAccess().getGroup_0(),
@@ -187,7 +188,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 	
-	public void testRule_04() throws RecognitionException {
+	@Test public void testRule_04() throws RecognitionException {
 		String input = "grammar org.^grammar.name ruleName r";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 //				grammarAccess.getTypeRefAccess().getGroup_0(),
@@ -197,7 +198,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		assertFollowers(input, expected);
 	}
 	
-	public void testRuleBody_01() throws RecognitionException {
+	@Test public void testRuleBody_01() throws RecognitionException {
 		String input = "grammar org.name ruleName: foo+=";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getAssignableTerminalAccess().getAlternatives()

@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase.annotations.xAnnotations.util;
 
@@ -95,11 +97,6 @@ public class XAnnotationsAdapterFactory extends AdapterFactoryImpl
 				return createXAnnotationElementValueBinaryOperationAdapter();
 			}
 			@Override
-			public Adapter caseXAnnotationValueArray(XAnnotationValueArray object)
-			{
-				return createXAnnotationValueArrayAdapter();
-			}
-			@Override
 			public Adapter caseXExpression(XExpression object)
 			{
 				return createXExpressionAdapter();
@@ -167,21 +164,6 @@ public class XAnnotationsAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXAnnotationElementValueBinaryOperationAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray <em>XAnnotation Value Array</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray
-	 * @generated
-	 */
-	public Adapter createXAnnotationValueArrayAdapter()
 	{
 		return null;
 	}

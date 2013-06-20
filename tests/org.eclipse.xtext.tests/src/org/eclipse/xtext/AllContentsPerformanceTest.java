@@ -15,8 +15,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,39 +25,39 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 public class AllContentsPerformanceTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 	
 	private static int LOOPS = 50 /* 000 */;
 	
-	public void testDummy() {
+	@Test public void testDummy() {
 		EcorePackage.eINSTANCE.getEAnnotation();
 		XtextPackage.eINSTANCE.getEAnnotations();
 	}
 	
-	public void testEcore() {
+	@Test public void testEcore() {
 		doTest(EcorePackage.eINSTANCE);
 	}
 	
-	public void testEcoreUoW() throws Exception {
+	@Test public void testEcoreUoW() throws Exception {
 		doTestUoW(EcorePackage.eINSTANCE);
 	}
 	
-	public void testXtext() {
+	@Test public void testXtext() {
 		doTest(XtextPackage.eINSTANCE);
 	}
 	
-	public void testXtextUoW() throws Exception {
+	@Test public void testXtextUoW() throws Exception {
 		doTestUoW(XtextPackage.eINSTANCE);
 	}
 	
-	public void testXtextGrammar() {
+	@Test public void testXtextGrammar() {
 		doTest(getGrammarAccess().getGrammar());
 	}
 	
-	public void testXtextGrammarUoW() throws Exception {
+	@Test public void testXtextGrammarUoW() throws Exception {
 		doTestUoW(getGrammarAccess().getGrammar());
 	}
 	

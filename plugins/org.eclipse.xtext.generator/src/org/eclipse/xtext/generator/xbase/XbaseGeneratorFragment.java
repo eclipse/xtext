@@ -7,28 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.xbase;
 
+import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -36,8 +44,15 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.validation.CancelableDiagnostician;
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.SeverityConverter;
+import org.eclipse.xtext.xtext.UsedRulesFinder;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 /**
@@ -51,13 +66,23 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean generateXtendInferrer = true;
 	private boolean useInferredJvmModel = true;
+	private boolean jdtTypeHierarchy = true;
+	private boolean jdtCallHierarchy = true;
 	
 	protected boolean usesXbaseGrammar(Grammar grammar) {
 		return doesUseXbase(grammar);
 	}
 	
 	public static boolean doesUseXbase(Grammar grammar) {
-		if (grammar.getName().equals("org.eclipse.xtext.xbase.Xbase"))
+		return uses(grammar, "org.eclipse.xtext.xbase.Xbase");
+	}
+	
+	public static boolean doesUseXbaseWithAnnotations(Grammar grammar) {
+		return uses(grammar, "org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations");
+	}
+	
+	private static boolean uses(Grammar grammar, String languageID) {
+		if (grammar.getName().equals(languageID))
 			return true;
 		EList<Grammar> usedGrammars = grammar.getUsedGrammars();
 		for (Grammar grammar2 : usedGrammars) {
@@ -68,6 +93,20 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 		return false;
 	}
 	
+	/**
+	 * @since 2.4
+	 */
+	public boolean usesXImportSection(Grammar grammar) {
+		Set<AbstractRule> usedRules = newHashSet();
+		new UsedRulesFinder(usedRules).compute(grammar);
+		return any(usedRules, new Predicate<AbstractRule>() {
+			public boolean apply(AbstractRule rule) {
+				return equal(rule.getName(), "XImportSection") 
+						&& equal(GrammarUtil.getGrammar(rule).getName(), "org.eclipse.xtext.xbase.Xtype");
+			}
+		});
+	}
+	
 	public void setGenerateXtendInferrer(boolean generateXtendInferrer) {
 		this.generateXtendInferrer = generateXtendInferrer;
 	}
@@ -75,13 +114,17 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	public void setUseInferredJvmModel(boolean useInferredJvmModel) {
 		this.useInferredJvmModel = useInferredJvmModel;
 	}
+	
+	public void setJdtTypeHierarchy(boolean jdtTypeHierarchy){
+		this.jdtTypeHierarchy = jdtTypeHierarchy;
+	}
+	
+	public void setJdtCallHierachy(boolean jdtCallHierachy){
+		this.jdtCallHierarchy = jdtCallHierachy;
+	}
 
 	public static String getJvmModelInferrerName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + ".jvmmodel." + GrammarUtil.getName(grammar) + "JvmModelInferrer";
-	}
-
-	public static String getJvmRenameStrategyName(Grammar grammar, Naming naming) {
-		return naming.basePackageUi(grammar) + ".refactoring." + GrammarUtil.getName(grammar) + "RenameStrategy";
 	}
 
 	@Override
@@ -97,59 +140,108 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.XbaseQualifiedNameConverter")
 				.addTypeToType(IQualifiedNameProvider.class.getName(),
 								"org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider")
-				.addTypeToType("org.eclipse.xtext.xbase.typing.ITypeProvider",
-						"org.eclipse.xtext.xbase.typing.XbaseTypeProvider")
 				.addTypeToType(IValueConverterService.class.getName(),
 						"org.eclipse.xtext.xbase.conversion.XbaseValueConverterService")
 				.addConfiguredBinding(
 						"LinkingIScopeProvider",
 						"binder.bind(" + IScopeProvider.class.getName() + ".class).annotatedWith("
 								+ LinkingScopeProviderBinding.class.getName()
-								+ ".class).to(org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider.class)")
+								+ ".class).to(org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider.class)")
+				.addConfiguredBinding(
+						"SerializerIScopeProvider",
+						"binder.bind(" + IScopeProvider.class.getName() + ".class).annotatedWith("
+								+ SerializerScopeProviderBinding.class.getName()
+								+ ".class).to(org.eclipse.xtext.xbase.serializer.SerializerScopeProvider.class)")
+				.addTypeToType("org.eclipse.xtext.xbase.typing.ITypeProvider",
+							"org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider")
 				.addConfiguredBinding(
 						IScopeProvider.class.getName() + "Delegate",
 						"binder.bind("
 								+ IScopeProvider.class.getName()
 								+ ".class).annotatedWith(Names.named("
 								+ AbstractDeclarativeScopeProvider.class.getName()
-								+ ".NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class)")
-				.addTypeToType(IScopeProvider.class.getCanonicalName(),
-						"org.eclipse.xtext.xbase.scoping.XbaseScopeProvider")
+								+ ".NAMED_DELEGATE)).to("+ getImportScopeProvider(grammar)+")")
 				.addTypeToType(ILinker.class.getCanonicalName(),
 						"org.eclipse.xtext.xbase.linking.XbaseLazyLinker")
 				.addTypeToType("org.eclipse.xtext.common.types.util.TypeConformanceComputer",
-								"org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer")
+								"org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeConformanceComputer")
 				.addTypeToType(XtextResource.class.getName(),
-						"org.eclipse.xtext.xbase.resource.XbaseResource")
+						"org.eclipse.xtext.xbase.resource.BatchLinkableResource")
 				.addTypeToTypeEagerSingleton("org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator", 
 						"org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator")
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
-						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider")
+					   "org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider")
 				.addTypeToType(IDerivedStateComputer.class.getCanonicalName(), "org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
 				.addTypeToType(IResourceDescription.Manager.class.getCanonicalName(), DerivedStateAwareResourceDescriptionManager.class.getCanonicalName())
 				.addTypeToType(IGenerator.class.getCanonicalName(), "org.eclipse.xtext.xbase.compiler.JvmModelGenerator")
 				.addTypeToInstance("org.eclipse.xtext.xtype.XtypeFactory", "org.eclipse.xtext.xtype.XtypeFactory.eINSTANCE")
-				.addTypeToType(TypeArgumentContextProvider.class.getCanonicalName(), "org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider");
-		
+				.addTypeToType("org.eclipse.xtext.common.types.util.TypeArgumentContextProvider", "org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvider")
+				.addTypeToType(IStratumBreakpointSupport.class.getName(), "org.eclipse.xtext.xbase.debug.XbaseStratumBreakpointSupport")
+				.addTypeToType(LineSeparatorHarmonizer.class.getCanonicalName(), "org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor")
+				.addTypeToType(IDefaultResourceDescriptionStrategy.class.getCanonicalName(), "org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy")
+				.addTypeToType(SeverityConverter.class.getCanonicalName(), "org.eclipse.xtext.xbase.validation.XbaseSeverityConverter")
+				.addTypeToType(ConfigurableIssueCodesProvider.class.getCanonicalName(),"org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes")
+				.addTypeToType("org.eclipse.xtext.common.types.util.VisibilityService", "org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService")
+				.addTypeToType("org.eclipse.xtext.common.types.util.FeatureOverridesService", "org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService")
+				.addTypeToType(EObjectAtOffsetHelper.class.getCanonicalName(), "org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper")
+				.addTypeToType(CancelableDiagnostician.class.getCanonicalName(), "org.eclipse.xtext.xbase.validation.XbaseDiagnostician")
+				.addTypeToType("org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider",
+						"org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter")
+				;
+		if (doesUseXbaseWithAnnotations(grammar)) {
+			config = config
+					.addTypeToType("org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer",
+							"org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer")
+					.addTypeToType(IScopeProvider.class.getCanonicalName(),
+							"org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider")
+					.addTypeToType("org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider",
+							"org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider")
+					.addTypeToType(ILinkingDiagnosticMessageProvider.class.getCanonicalName(),
+							"org.eclipse.xtext.xbase.annotations.validation.UnresolvedAnnotationTypeAwareMessageProducer");
 			
+		} else {
+			config = config.addTypeToType(IScopeProvider.class.getCanonicalName(),
+					"org.eclipse.xtext.xbase.scoping.XbaseScopeProvider");
+		}
 		if (useInferredJvmModel) {
 			config = config
-				.addTypeToType(ILocationInFileProvider.class.getName(),
-						"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
-				.addTypeToType(EObjectAtOffsetHelper.class.getName(),
-						"org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper")
-				.addTypeToType(IGlobalScopeProvider.class.getName(),
-						"org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider");
+					.addTypeToType(ILocationInFileProvider.class.getName(),
+							"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
+					.addTypeToType(IGlobalScopeProvider.class.getName(),
+							TypesAwareDefaultGlobalScopeProvider.class.getName())
+					.addTypeToType("org.eclipse.xtext.xbase.validation.FeatureNameValidator",
+							"org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator")
+					.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver",
+							"org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver")
+					.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver",
+							"org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver")
+					.addTypeToType(IResourceValidator.class.getCanonicalName(), 
+							"org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator")
+					;
 			if(generateXtendInferrer) {
 				config = config
 					.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
 						getJvmModelInferrerName(grammar, getNaming()));
 			}
+		} else {
+			config = config
+					.addTypeToType(ILocationInFileProvider.class.getName(),
+								"org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider");
+
 		}
 		return config.getBindings();
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	protected String getImportScopeProvider(Grammar grammar) {
+		return (usesXImportSection(grammar))
+			? "org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider.class"
+			: "org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class"; 
+	}
+	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		if (!usesXbaseGrammar(grammar))
@@ -166,25 +258,65 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration", 
 						"org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration")
 				.addTypeToType("org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider", 
-						"org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider");
+						"org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider")
+				.addTypeToType("org.eclipse.xtext.ui.editor.hover.IEObjectHover", 
+						"org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover")
+				.addTypeToType("org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider", 
+						"org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider")
+				.addTypeToType("org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider.CrossRefResolutionConverter",
+						"org.eclipse.xtext.xbase.ui.quickfix.XbaseCrossRefResolutionConverter")
+				.addTypeToTypeEagerSingleton("org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator",
+						"org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator")
+				.addTypeToType("org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper",
+					 	"org.eclipse.xtext.xbase.ui.navigation.TypeLiteralAwareHyperlinkHelper");
 		if (useInferredJvmModel) {
 			// rename refactoring
 			bindFactory = bindFactory
-				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory", 
-						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory")
+				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler", 
+							"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler")
+				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryExecutor", 
+						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator")
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory",
-						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory")
+				.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider", 
+						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameRefactoringProvider")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater",
-						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater")
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
-						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler")
+						"org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater")
+				.addfinalTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory",
+						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameContextFactory")
 				.addTypeToType("org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant.ContextFactory",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory")
 			    .addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
-			    		getJvmRenameStrategyName(grammar, getNaming()));
+			    		"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy")
+				.addTypeToType("org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener", 
+						"org.eclipse.xtext.xbase.ui.jvmmodel.outline.JvmOutlineNodeElementOpener")
+			    .addTypeToType("org.eclipse.xtext.ui.editor.GlobalURIEditorOpener", 
+						"org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener")
+			    .addTypeToType("org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer", 
+						"org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer")
+				.addTypeToType("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation", 
+						"org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.No")
+				// DerivedMemberAwareEditorOpener
+				.addConfiguredBinding("LanguageSpecificURIEditorOpener", "if (org.eclipse.ui.PlatformUI.isWorkbenchRunning()) { \n"+
+						"\t\t\tbinder.bind(org.eclipse.xtext.ui.editor.IURIEditorOpener.class).annotatedWith(org.eclipse.xtext.ui.LanguageSpecific.class)" +
+						".to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n" +
+						"\t\t\tbinder.bind(org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n"+
+						"\t\t}");
 
+		} else {
+			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
+					"org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
+		}
+		if(usesXImportSection(grammar)) {
+			bindFactory
+				.addTypeToType("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver", 
+						"org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver")
+				.addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", 
+						"org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
+		} else {
+			bindFactory
+				.addTypeToType("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes", 
+						"org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection");
 		}
 		return bindFactory.getBindings();
 	}
@@ -193,7 +325,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		if (!usesXbaseGrammar(grammar))
 			return new String[0];
-		return new String[] { "org.eclipse.xtext.xbase", "org.eclipse.xtext.xtend2.lib" };
+		return new String[] { "org.eclipse.xtext.xbase", "org.eclipse.xtext.xbase.lib" };
 	}
 
 	@Override
@@ -210,8 +342,26 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	}
 	
 	@Override
+	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
+		if (usesXbaseGrammar(grammar))
+			super.addToPluginXmlRt(grammar, ctx);
+	}
+	
+	@Override
+	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
+		if (usesXbaseGrammar(grammar))
+			super.addToPluginXmlUi(grammar, ctx);
+	}
+	
+	@Override
+	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
+		if (usesXbaseGrammar(grammar))
+			super.addToStandaloneSetup(grammar, ctx);
+	}
+	
+	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Lists.<Object>newArrayList(useInferredJvmModel, generateXtendInferrer);
+		return Lists.<Object>newArrayList(useInferredJvmModel, generateXtendInferrer, jdtTypeHierarchy, jdtCallHierarchy, usesXImportSection(grammar));
 	}
 	
 	@Override

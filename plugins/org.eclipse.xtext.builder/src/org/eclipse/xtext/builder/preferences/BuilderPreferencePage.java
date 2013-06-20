@@ -20,6 +20,8 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.builder.DerivedResourceCleanerJob;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
+import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
+import org.eclipse.xtext.ui.preferences.PropertyAndPreferencePage;
 
 import com.google.common.collect.MapDifference.ValueDifference;
 import com.google.inject.Inject;
@@ -31,7 +33,7 @@ import com.google.inject.name.Named;
  * @since 2.1
  */
 public class BuilderPreferencePage extends PropertyAndPreferencePage {
-	private BuilderConfigurationBlock builderConfigurationBlock;
+	private OptionsConfigurationBlock builderConfigurationBlock;
 	private EclipseOutputConfigurationProvider configurationProvider;
 	private String languageName;
 	private PreferenceStoreAccessImpl preferenceStoreAccessImpl;

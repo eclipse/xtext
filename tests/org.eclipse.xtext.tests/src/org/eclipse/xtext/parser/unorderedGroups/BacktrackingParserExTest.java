@@ -15,7 +15,7 @@ import org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguageStandal
 public class BacktrackingParserExTest extends AbstractBacktrackingParserTest {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ExBeeLangTestLanguageStandaloneSetup.class);
 	}

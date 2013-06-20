@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl;
 
@@ -33,7 +30,7 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
   {
     try
     {
-      UnorderedGroupsTestFactory theUnorderedGroupsTestFactory = (UnorderedGroupsTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/tests/2010/UnorderedGroupsTest"); 
+      UnorderedGroupsTestFactory theUnorderedGroupsTestFactory = (UnorderedGroupsTestFactory)EPackage.Registry.INSTANCE.getEFactory(UnorderedGroupsTestPackage.eNS_URI);
       if (theUnorderedGroupsTestFactory != null)
       {
         return theUnorderedGroupsTestFactory;

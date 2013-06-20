@@ -79,7 +79,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Lists.<Object> newArrayList(getGeneratorProjectName(grammar), getModelFileExtension(grammar), isPluginProject());
+		return Lists.<Object> newArrayList(getGeneratorProjectName(grammar), getFileExtension(grammar), isPluginProject());
 	}
 
 	private String getGeneratorProjectName(Grammar g) {
@@ -90,13 +90,24 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 				+ " : The property 'generatorProjectName' is mandatory but has not been configured.");
 	}
 
-	public String getModelFileExtension(Grammar g) {
+	/**
+	 * @since 2.4
+	 */
+	public String getFileExtension(Grammar g) {
 		if (modelFileExtension == null) {
 			modelFileExtension = GrammarUtil.getName(g).toLowerCase();
 			if (LOG.isInfoEnabled())
-				LOG.info("No explicit 'modelFileExtension' configured. Using '" + modelFileExtension + "'.");
+				LOG.info("No explicit 'fileExtension' configured. Using '" + modelFileExtension + "'.");
 		}
 		return modelFileExtension;
+	}
+
+	/**
+	 * @deprecated use {@link #getFileExtension(Grammar)} instead
+	 */
+	@Deprecated
+	public String getModelFileExtension(Grammar g) {
+		return getFileExtension(g);
 	}
 
 	/**
@@ -115,12 +126,21 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	 * Sets the file extension used when creating the initial sample model.
 	 *
 	 * @param modelFileExtension
+	 * @since 2.4
 	 */
-	public void setModelFileExtension(String modelFileExtension) {
+	public void setFileExtension(String modelFileExtension) {
 		if (modelFileExtension == null || "".equals(modelFileExtension.trim())) {
 			return;
 		}
 		this.modelFileExtension = modelFileExtension.trim();
+	}
+
+	/**
+	 * @deprecated use {@link #setFileExtension(String)} instead
+	 */
+	@Deprecated
+	public void setModelFileExtension(String modelFileExtension) {
+		setFileExtension(modelFileExtension);
 	}
 
 	public static String getNewProjectTemplateName(Grammar grammar, Naming n) {

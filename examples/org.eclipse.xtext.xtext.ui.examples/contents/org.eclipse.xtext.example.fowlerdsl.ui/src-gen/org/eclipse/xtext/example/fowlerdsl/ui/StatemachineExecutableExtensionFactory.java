@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.xtext.example.fowlerdsl.ui.internal.StatemachineActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class StatemachineExecutableExtensionFactory extends AbstractGuiceAwareEx
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.example.fowlerdsl.ui.internal.StatemachineActivator.getInstance().getBundle();
+		return StatemachineActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.example.fowlerdsl.ui.internal.StatemachineActivator.getInstance().getInjector("org.eclipse.xtext.example.fowlerdsl.Statemachine");
+		return StatemachineActivator.getInstance().getInjector(StatemachineActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_FOWLERDSL_STATEMACHINE);
 	}
 	
 }

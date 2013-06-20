@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.syntacticsequencertest;
 
@@ -142,13 +139,58 @@ public interface SyntacticsequencertestPackage extends EPackage
   int MODEL__X8 = 7;
 
   /**
+   * The feature id for the '<em><b>X9</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X9 = 8;
+
+  /**
+   * The feature id for the '<em><b>X10</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X10 = 9;
+
+  /**
+   * The feature id for the '<em><b>X11</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X11 = 10;
+
+  /**
+   * The feature id for the '<em><b>X12</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X12 = 11;
+
+  /**
+   * The feature id for the '<em><b>X13</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X13 = 12;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 8;
+  int MODEL_FEATURE_COUNT = 13;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -402,14 +444,14 @@ public interface SyntacticsequencertestPackage extends EPackage
   int UNASSIGNED_DATATYPE_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl <em>Ambiguous Transition</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.OptionalSingleTransitionImpl <em>Optional Single Transition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl
-   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAmbiguousTransition()
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.OptionalSingleTransitionImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getOptionalSingleTransition()
    * @generated
    */
-  int AMBIGUOUS_TRANSITION = 9;
+  int OPTIONAL_SINGLE_TRANSITION = 9;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -418,16 +460,246 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int AMBIGUOUS_TRANSITION__VAL = 0;
+  int OPTIONAL_SINGLE_TRANSITION__VAL = 0;
 
   /**
-   * The number of structural features of the '<em>Ambiguous Transition</em>' class.
+   * The number of structural features of the '<em>Optional Single Transition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int AMBIGUOUS_TRANSITION_FEATURE_COUNT = 1;
+  int OPTIONAL_SINGLE_TRANSITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.OptionalManyTransitionImpl <em>Optional Many Transition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.OptionalManyTransitionImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getOptionalManyTransition()
+   * @generated
+   */
+  int OPTIONAL_MANY_TRANSITION = 10;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_MANY_TRANSITION__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Optional Many Transition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_MANY_TRANSITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryManyTransitionImpl <em>Mandatory Many Transition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryManyTransitionImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMandatoryManyTransition()
+   * @generated
+   */
+  int MANDATORY_MANY_TRANSITION = 11;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MANY_TRANSITION__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Mandatory Many Transition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MANY_TRANSITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.AlternativeTransitionImpl <em>Alternative Transition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.AlternativeTransitionImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAlternativeTransition()
+   * @generated
+   */
+  int ALTERNATIVE_TRANSITION = 12;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALTERNATIVE_TRANSITION__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Alternative Transition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALTERNATIVE_TRANSITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl <em>Boolean Values</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBooleanValues()
+   * @generated
+   */
+  int BOOLEAN_VALUES = 13;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_VALUES__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_VALUES__VAL2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_VALUES__VAL3 = 2;
+
+  /**
+   * The number of structural features of the '<em>Boolean Values</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_VALUES_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.LongAlternativeImpl <em>Long Alternative</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.LongAlternativeImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getLongAlternative()
+   * @generated
+   */
+  int LONG_ALTERNATIVE = 14;
+
+  /**
+   * The feature id for the '<em><b>Foo</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__FOO = 0;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__VAL1 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__VAL2 = 2;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__VAL3 = 3;
+
+  /**
+   * The feature id for the '<em><b>Val4</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__VAL4 = 4;
+
+  /**
+   * The feature id for the '<em><b>Val5</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__VAL5 = 5;
+
+  /**
+   * The feature id for the '<em><b>Val6</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__VAL6 = 6;
+
+  /**
+   * The feature id for the '<em><b>Val7</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__VAL7 = 7;
+
+  /**
+   * The feature id for the '<em><b>Val8</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE__VAL8 = 8;
+
+  /**
+   * The number of structural features of the '<em>Long Alternative</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LONG_ALTERNATIVE_FEATURE_COUNT = 9;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
@@ -437,7 +709,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd0()
    * @generated
    */
-  int ADD0 = 10;
+  int ADD0 = 15;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -474,7 +746,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal0()
    * @generated
    */
-  int VAL0 = 11;
+  int VAL0 = 16;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -502,7 +774,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd1()
    * @generated
    */
-  int ADD1 = 12;
+  int ADD1 = 17;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -539,7 +811,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal1()
    * @generated
    */
-  int VAL1 = 13;
+  int VAL1 = 18;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -567,7 +839,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd2()
    * @generated
    */
-  int ADD2 = 14;
+  int ADD2 = 19;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -604,7 +876,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMult2()
    * @generated
    */
-  int MULT2 = 15;
+  int MULT2 = 20;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -641,7 +913,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal2()
    * @generated
    */
-  int VAL2 = 16;
+  int VAL2 = 21;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -759,6 +1031,61 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X8();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX9 <em>X9</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X9</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX9()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X9();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX10 <em>X10</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X10</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX10()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X10();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX11 <em>X11</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X11</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX11()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X11();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX12 <em>X12</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X12</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX12()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X12();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX13 <em>X13</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X13</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX13()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X13();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords <em>Mandatory Keywords</em>}'.
@@ -962,25 +1289,240 @@ public interface SyntacticsequencertestPackage extends EPackage
   EAttribute getUnassignedDatatype_Val();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition <em>Ambiguous Transition</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition <em>Optional Single Transition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Ambiguous Transition</em>'.
-   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition
+   * @return the meta object for class '<em>Optional Single Transition</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition
    * @generated
    */
-  EClass getAmbiguousTransition();
+  EClass getOptionalSingleTransition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition#getVal <em>Val</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Val</em>'.
-   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition#getVal()
-   * @see #getAmbiguousTransition()
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition#getVal()
+   * @see #getOptionalSingleTransition()
    * @generated
    */
-  EAttribute getAmbiguousTransition_Val();
+  EAttribute getOptionalSingleTransition_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition <em>Optional Many Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Optional Many Transition</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition
+   * @generated
+   */
+  EClass getOptionalManyTransition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition#getVal()
+   * @see #getOptionalManyTransition()
+   * @generated
+   */
+  EAttribute getOptionalManyTransition_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition <em>Mandatory Many Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Mandatory Many Transition</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition
+   * @generated
+   */
+  EClass getMandatoryManyTransition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition#getVal()
+   * @see #getMandatoryManyTransition()
+   * @generated
+   */
+  EAttribute getMandatoryManyTransition_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition <em>Alternative Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Alternative Transition</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition
+   * @generated
+   */
+  EClass getAlternativeTransition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition#getVal()
+   * @see #getAlternativeTransition()
+   * @generated
+   */
+  EAttribute getAlternativeTransition_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues <em>Boolean Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Boolean Values</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues
+   * @generated
+   */
+  EClass getBooleanValues();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal1()
+   * @see #getBooleanValues()
+   * @generated
+   */
+  EAttribute getBooleanValues_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal2()
+   * @see #getBooleanValues()
+   * @generated
+   */
+  EAttribute getBooleanValues_Val2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val3</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal3()
+   * @see #getBooleanValues()
+   * @generated
+   */
+  EAttribute getBooleanValues_Val3();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative <em>Long Alternative</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Long Alternative</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative
+   * @generated
+   */
+  EClass getLongAlternative();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getFoo <em>Foo</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Foo</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getFoo()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Foo();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal1()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Val1();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val2</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal2()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Val2();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val3</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal3()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Val3();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal4 <em>Val4</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val4</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal4()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Val4();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal5 <em>Val5</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val5</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal5()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Val5();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal6 <em>Val6</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val6</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal6()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Val6();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal7 <em>Val7</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val7</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal7()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Val7();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal8 <em>Val8</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val8</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal8()
+   * @see #getLongAlternative()
+   * @generated
+   */
+  EAttribute getLongAlternative_Val8();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0 <em>Add0</em>}'.
@@ -1271,6 +1813,46 @@ public interface SyntacticsequencertestPackage extends EPackage
     EReference MODEL__X8 = eINSTANCE.getModel_X8();
 
     /**
+     * The meta object literal for the '<em><b>X9</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X9 = eINSTANCE.getModel_X9();
+
+    /**
+     * The meta object literal for the '<em><b>X10</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X10 = eINSTANCE.getModel_X10();
+
+    /**
+     * The meta object literal for the '<em><b>X11</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X11 = eINSTANCE.getModel_X11();
+
+    /**
+     * The meta object literal for the '<em><b>X12</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X12 = eINSTANCE.getModel_X12();
+
+    /**
+     * The meta object literal for the '<em><b>X13</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X13 = eINSTANCE.getModel_X13();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1439,14 +2021,14 @@ public interface SyntacticsequencertestPackage extends EPackage
     EAttribute UNASSIGNED_DATATYPE__VAL = eINSTANCE.getUnassignedDatatype_Val();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl <em>Ambiguous Transition</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.OptionalSingleTransitionImpl <em>Optional Single Transition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl
-     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAmbiguousTransition()
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.OptionalSingleTransitionImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getOptionalSingleTransition()
      * @generated
      */
-    EClass AMBIGUOUS_TRANSITION = eINSTANCE.getAmbiguousTransition();
+    EClass OPTIONAL_SINGLE_TRANSITION = eINSTANCE.getOptionalSingleTransition();
 
     /**
      * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
@@ -1454,7 +2036,177 @@ public interface SyntacticsequencertestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute AMBIGUOUS_TRANSITION__VAL = eINSTANCE.getAmbiguousTransition_Val();
+    EAttribute OPTIONAL_SINGLE_TRANSITION__VAL = eINSTANCE.getOptionalSingleTransition_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.OptionalManyTransitionImpl <em>Optional Many Transition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.OptionalManyTransitionImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getOptionalManyTransition()
+     * @generated
+     */
+    EClass OPTIONAL_MANY_TRANSITION = eINSTANCE.getOptionalManyTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL_MANY_TRANSITION__VAL = eINSTANCE.getOptionalManyTransition_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryManyTransitionImpl <em>Mandatory Many Transition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryManyTransitionImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMandatoryManyTransition()
+     * @generated
+     */
+    EClass MANDATORY_MANY_TRANSITION = eINSTANCE.getMandatoryManyTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MANDATORY_MANY_TRANSITION__VAL = eINSTANCE.getMandatoryManyTransition_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.AlternativeTransitionImpl <em>Alternative Transition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.AlternativeTransitionImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAlternativeTransition()
+     * @generated
+     */
+    EClass ALTERNATIVE_TRANSITION = eINSTANCE.getAlternativeTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ALTERNATIVE_TRANSITION__VAL = eINSTANCE.getAlternativeTransition_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl <em>Boolean Values</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBooleanValues()
+     * @generated
+     */
+    EClass BOOLEAN_VALUES = eINSTANCE.getBooleanValues();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_VALUES__VAL1 = eINSTANCE.getBooleanValues_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_VALUES__VAL2 = eINSTANCE.getBooleanValues_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_VALUES__VAL3 = eINSTANCE.getBooleanValues_Val3();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.LongAlternativeImpl <em>Long Alternative</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.LongAlternativeImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getLongAlternative()
+     * @generated
+     */
+    EClass LONG_ALTERNATIVE = eINSTANCE.getLongAlternative();
+
+    /**
+     * The meta object literal for the '<em><b>Foo</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__FOO = eINSTANCE.getLongAlternative_Foo();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__VAL1 = eINSTANCE.getLongAlternative_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__VAL2 = eINSTANCE.getLongAlternative_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__VAL3 = eINSTANCE.getLongAlternative_Val3();
+
+    /**
+     * The meta object literal for the '<em><b>Val4</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__VAL4 = eINSTANCE.getLongAlternative_Val4();
+
+    /**
+     * The meta object literal for the '<em><b>Val5</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__VAL5 = eINSTANCE.getLongAlternative_Val5();
+
+    /**
+     * The meta object literal for the '<em><b>Val6</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__VAL6 = eINSTANCE.getLongAlternative_Val6();
+
+    /**
+     * The meta object literal for the '<em><b>Val7</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__VAL7 = eINSTANCE.getLongAlternative_Val7();
+
+    /**
+     * The meta object literal for the '<em><b>Val8</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LONG_ALTERNATIVE__VAL8 = eINSTANCE.getLongAlternative_Val8();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.

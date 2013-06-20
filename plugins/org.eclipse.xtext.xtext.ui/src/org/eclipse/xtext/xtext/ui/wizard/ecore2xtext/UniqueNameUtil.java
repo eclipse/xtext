@@ -12,13 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -65,19 +61,6 @@ public class UniqueNameUtil {
 		if (defaultPackageInfo != null) {
 			element2uniqueName.put(defaultPackageInfo.getEPackage(), null);
 		}
-	}
-
-	public static String importURI(EPackage ePackage) {
-		Resource resource = ePackage.eResource();
-		if (resource != null) {
-			URI uri = resource.getURI();
-			if (uri != null) {
-				if (!Strings.equal(uri.scheme(), URI.createURI(ePackage.getNsURI()).scheme())) {
-					return resource.getURI().toString();
-				}
-			}
-		}
-		return ePackage.getNsURI();
 	}
 
 	public static EClassifier eString() {

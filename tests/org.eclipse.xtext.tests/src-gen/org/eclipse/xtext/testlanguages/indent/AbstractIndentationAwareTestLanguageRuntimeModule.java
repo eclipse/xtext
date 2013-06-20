@@ -70,6 +70,11 @@ public abstract class AbstractIndentationAwareTestLanguageRuntimeModule extends 
 	}
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.testlanguages.indent.services.IndentationAwareTestLanguageGrammarAccess.class;
 	}
@@ -81,12 +86,12 @@ public abstract class AbstractIndentationAwareTestLanguageRuntimeModule extends 
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.testlanguages.indent.serializer.AbstractIndentationAwareTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.testlanguages.indent.serializer.IndentationAwareTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.testlanguages.indent.serializer.AbstractIndentationAwareTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.testlanguages.indent.serializer.IndentationAwareTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

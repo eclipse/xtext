@@ -9,7 +9,6 @@ package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
-import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.Filter;
 
 /**
@@ -56,6 +55,20 @@ public final class TypeMatchFilters {
 		return new IsPublic();
 	}
 	
+	/**
+	 * @since 2.2
+	 */
+	public static boolean isInternalClass(char[] simpleTypeName,
+				char[][] enclosingTypeNames) {
+		if (simpleTypeName[0] == '$')
+			return true;
+		if (enclosingTypeNames.length >= 1) {
+			if (enclosingTypeNames[0][0] == '$')
+				return true;
+		}
+		return false;
+	}
+	
 	public static class All implements ITypesProposalProvider.Filter {
 		
 		private final int searchFor;
@@ -73,6 +86,9 @@ public final class TypeMatchFilters {
 
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
+			if (isInternalClass(simpleTypeName, enclosingTypeNames)) {
+				return false;
+			}
 			return true;
 		}
 		
@@ -181,6 +197,9 @@ public final class TypeMatchFilters {
 	public static class CanInstantiate implements ITypesProposalProvider.Filter {
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
+			if (isInternalClass(simpleTypeName, enclosingTypeNames)) {
+				return false;
+			}
 			return !Flags.isAbstract(modifiers) && !Flags.isInterface(modifiers);
 		}
 		
@@ -191,10 +210,13 @@ public final class TypeMatchFilters {
 			return IJavaSearchConstants.CLASS;
 		}
 	}
-
+	
 	public static class IsPublic implements ITypesProposalProvider.Filter {
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
+			if (isInternalClass(simpleTypeName, enclosingTypeNames)) {
+				return false;
+			}
 			return Flags.isPublic(modifiers);
 		}
 		
@@ -205,4 +227,5 @@ public final class TypeMatchFilters {
 			return IJavaSearchConstants.TYPE;
 		}
 	}
+
 }

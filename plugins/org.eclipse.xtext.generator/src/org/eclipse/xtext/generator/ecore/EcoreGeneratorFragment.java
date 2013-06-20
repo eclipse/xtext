@@ -29,8 +29,10 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenRuntimeVersion;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl;
+import org.eclipse.emf.codegen.merge.java.JControlModel;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
@@ -120,6 +122,8 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 	private String fileExtensions = null;
 
+	private GenRuntimeVersion emfRuntimeVerison;
+
 	{
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("genmodel"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("genmodel",
@@ -131,13 +135,27 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			ResourceSet rs) {
 		URI ecoreFileUri = getEcoreFileUri(grammar, ctx);
 		ecoreFileUri = toPlatformResourceURI(ecoreFileUri);
+		Resource existing = rs.getResource(ecoreFileUri, false);
+		if (existing != null) {
+			existing.unload();
+			rs.getResources().remove(existing);
+		}
 		Resource ecoreFile = rs.createResource(ecoreFileUri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		ecoreFile.getContents().addAll(packs);
 		return ecoreFile;
 	}
 
 	protected void doGenerate(GenModel genModel) {
-		Generator generator = new Generator();
+		Generator generator = new Generator() {
+			@Override
+			public JControlModel getJControlModel() {
+				if (jControlModel == null) {
+				      jControlModel = new JControlModel();
+				      jControlModel.initialize(null, options.mergeRulesURI);
+				}
+				return jControlModel;
+			}
+		};
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
 				new CvsIdFilteringGeneratorAdapterFactoryDescriptor());
 		generator.setInput(genModel);
@@ -557,6 +575,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	protected GenModel getGenModel(ResourceSet rs, Grammar grammar, XpandExecutionContext ctx, List<EPackage> packs) {
 		URI genModelUri = getGenModelUri(grammar, ctx);
 		genModelUri = toPlatformResourceURI(genModelUri);
+		Resource resource = rs.getResource(genModelUri, false);
+		if (resource != null) {
+			resource.unload();
+			rs.getResources().remove(resource);
+		}
 		Resource genModelFile = rs.createResource(genModelUri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		GenModel genModel;
 		if (rs.getURIConverter().exists(genModelUri, null)) {
@@ -586,6 +609,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			genModel.setBundleManifest(true);
 			genModel.setUpdateClasspath(false);
 			genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+			genModel.setRuntimeVersion(emfRuntimeVerison);
 			genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 		}
 		genModelFile.getContents().add(genModel);
@@ -730,6 +754,18 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		this.basePackage = basePackage;
 	}
 
+	/**
+	 * Sets the target EMF runtime version to generate for to the specified value.
+	 * @param emfRuntimeVersion the EMF runtime version.
+	 * @since 2.3
+	 */
+	public void setEmfRuntimeVersion(String emfRuntimeVersion) {
+		this.emfRuntimeVerison = GenRuntimeVersion.get(emfRuntimeVersion);
+		if(this.emfRuntimeVerison == null) {
+			log.warn("Illegal EMF runtime verison " + emfRuntimeVersion + ". Using default version instead.");
+		}
+	}
+	
 	/**
 	 * Sets the target directory for the generated EMF-edit code. Only needed if you want to generate an EMF edit
 	 * plug-in.

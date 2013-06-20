@@ -9,8 +9,9 @@ package org.eclipse.xtext.parser.antlr;
 
 import java.util.Map;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 import com.google.common.collect.ImmutableBiMap;
 
@@ -25,19 +26,19 @@ public abstract class AbstractBug301935Test extends AbstractXtextTests {
 		return false;
 	}
 
-	public void testParseValidInput() throws Exception {
+	@Test public void testParseValidInput() throws Exception {
 		String input = "a b\nc ";
 		assertNotNull(getModel(input));
 	}
 	
-	public void testGetTokenDefMap_01() {
+	@Test public void testGetTokenDefMap_01() {
 		ITokenDefProvider tokenDefProvider = get(ITokenDefProvider.class);
 		Map<Integer, String> map = tokenDefProvider.getTokenDefMap();
 		assertNotNull(String.valueOf(map), map);
 		assertEquals(String.valueOf(map), 5, map.size());
 	}
 	
-	public void testGetTokenDefMap_02() {
+	@Test public void testGetTokenDefMap_02() {
 		ITokenDefProvider tokenDefProvider = get(ITokenDefProvider.class);
 		ImmutableBiMap<Integer, String> tokens = ImmutableBiMap.copyOf(tokenDefProvider.getTokenDefMap());
 		ImmutableBiMap<String,Integer> inverseTokens = tokens.inverse();

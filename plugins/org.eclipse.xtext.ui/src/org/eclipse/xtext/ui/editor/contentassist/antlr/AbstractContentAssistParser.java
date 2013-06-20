@@ -18,6 +18,7 @@ import java.util.List;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.BaseRecognizer;
 import org.antlr.runtime.CharStream;
+import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
@@ -146,6 +147,10 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		return result;
 	}
 	
+	private RecognizerSharedState getParserState(AbstractInternalContentAssistParser parser) {
+		return parser.getInternalRecognizerSharedState();
+	}
+	
 	private Collection<FollowElement> getFollowElements(
 			final AbstractInternalContentAssistParser parser,
 			final AbstractElement elementToParse, 
@@ -155,8 +160,10 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			final boolean[] announcedEofWithLA = new boolean[] { false };
 			final boolean[] consumedSomething = new boolean[] { true };
 			final boolean[] wasRecovering = new boolean[] { false };
+			final RecognizerSharedState parserState = getParserState(parser);
 			ObservableXtextTokenStream stream = (ObservableXtextTokenStream) parser.getTokenStream();
 			stream.setListener(new StreamListener() {
+				
 				public void announceEof(int lookAhead) {
 					if (!wasRecovering[0]) {
 						parser.announceEof(lookAhead);
@@ -191,10 +198,17 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 				}
 			});
 			parser.setRecoveryListener(new AbstractInternalContentAssistParser.RecoveryListener() {
+				
+				private int startedErrorRecoveryAt;
+
 				public void endErrorRecovery() {
+					if (!wasEof[0] && !parserState.failed && startedErrorRecoveryAt == parser.input.index()) {
+						wasRecovering[0] = false;
+					}
 				}
 				
 				public void beginErrorRecovery() {
+					startedErrorRecoveryAt = parser.input.index();
 					wasRecovering[0] = true;
 				}
 			});
@@ -265,8 +279,18 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 
 	private Collection<AbstractElement> getElementsToParse(FollowElement element) {
 		AbstractElement root = element.getGrammarElement();
-		if (root instanceof UnorderedGroup && element.getHandledUnorderedGroupElements().isEmpty())
-			return ((CompoundElement) root).getElements();
+		if (root instanceof UnorderedGroup) {
+			List<AbstractElement> handled = element.getHandledUnorderedGroupElements();
+			if (handled.isEmpty())
+				return ((CompoundElement) root).getElements();
+			List<AbstractElement> result = Lists.newArrayList(root);
+			for(AbstractElement child: ((UnorderedGroup) root).getElements()) {
+				if (!handled.contains(child)) {
+					result.add(child);
+				}
+			}
+			return result;
+		}
 		return getElementsToParse(root);
 	}
 

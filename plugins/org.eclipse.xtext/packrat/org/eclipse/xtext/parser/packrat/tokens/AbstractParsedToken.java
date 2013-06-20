@@ -20,11 +20,6 @@ public abstract class AbstractParsedToken {
 
 	private boolean skipped;
 
-	/**
-	 * @param input
-	 * @param offset
-	 * @param length
-	 */
 	public AbstractParsedToken(int offset, int length) {
 		super();
 		this.setLength(length);

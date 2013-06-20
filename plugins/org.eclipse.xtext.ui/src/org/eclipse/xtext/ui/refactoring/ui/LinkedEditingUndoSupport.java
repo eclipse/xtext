@@ -22,6 +22,8 @@ import org.eclipse.jface.text.IUndoManagerExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
+import com.google.inject.Inject;
+
 /**
  * Reverts document changes when the linked mode is left. 
  * 
@@ -29,13 +31,16 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
  */
 public class LinkedEditingUndoSupport {
 
+	@Inject
+	private SyncUtil syncUtil;
+	
 	private static final Logger LOG = Logger.getLogger(LinkedEditingUndoSupport.class);
 	
 	private IUndoableOperation startingUndoOperation;
 	
 	private XtextEditor editor;
 
-	public LinkedEditingUndoSupport(XtextEditor editor) {
+	public void startRecording(XtextEditor editor) {
 		this.editor = editor;
 		ISourceViewer viewer = editor.getInternalSourceViewer();
 		if (viewer instanceof ITextViewerExtension6) {
@@ -70,6 +75,7 @@ public class LinkedEditingUndoSupport {
 					}
 				}
 			});
+			syncUtil.waitForReconciler(editor);
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
 		}

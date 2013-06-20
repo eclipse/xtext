@@ -18,13 +18,15 @@
 
 «DEFINE generate(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
 «FILE getValidatorName("Abstract").asPath()+".java" SRC_GEN-»
+/*
+«fileHeader()»
+*/
 package «getValidatorName("Abstract").toJavaPackage()»;
  
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import «validatorSuperClassName»;
 «IF !composedChecks.isEmpty-»
 import org.eclipse.xtext.validation.ComposedChecks;
 «ENDIF-»
@@ -32,7 +34,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 «IF !composedChecks.isEmpty-»
 @ComposedChecks(validators= {«FOREACH composedChecks AS validator SEPARATOR ", "-»«validator».class«ENDFOREACH-»})
 «ENDIF-»
-public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSuperClassName.toSimpleName()» {
+public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSuperClassName» {
 
    	«EXPAND Common::getEPackages(packageQNames)-»
 
@@ -40,10 +42,17 @@ public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSup
 «ENDFILE»
 
 «FILE getValidatorName("").asPath()+".java" SRC-»
+/*
+«fileHeader()»
+*/
 package «getValidatorName("").toJavaPackage()»;
- 
 
-public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Abstract").toSimpleName()» {
+/**
+ * Custom validation rules. 
+ *
+ * see http://www.eclipse.org/Xtext/documentation.html#validation
+ */
+public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Abstract")» {
 
 //	@Check
 //	public void checkGreetingStartsWithCapital(Greeting greeting) {
@@ -51,7 +60,6 @@ public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Ab
 //			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
 //		}
 //	}
-
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -62,6 +70,28 @@ public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Ab
 
 
 «DEFINE addToPluginXmlUi(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
+    <!-- marker definitions for «name» -->
+    <extension
+            id="«name.toSimpleName().toLowerCase()».check.fast"
+            name="«name.toSimpleName()» Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="«name.toSimpleName().toLowerCase()».check.normal"
+            name="«name.toSimpleName()» Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="«name.toSimpleName().toLowerCase()».check.expensive"
+            name="«name.toSimpleName()» Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 «ENDDEFINE»
 
 

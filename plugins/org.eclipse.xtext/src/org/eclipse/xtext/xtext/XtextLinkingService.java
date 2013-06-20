@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import static java.util.Collections.*;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.impl.GeneratedMetamodelImpl;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -41,10 +44,14 @@ import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -95,23 +102,41 @@ public class XtextLinkingService extends DefaultLinkingService {
 			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
 			if (grammarName != null) {
 				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
-				for(Resource resource: resourceSet.getResources()) {
-					if (!resource.getContents().isEmpty()) {
-						EObject content = resource.getContents().get(0);
-						if (content instanceof Grammar) {
-							Grammar otherGrammar = (Grammar) content;
-							if (grammarName.equals(otherGrammar.getName()))
-								return Collections.<EObject>singletonList(otherGrammar);
+				List<Resource> resources = resourceSet.getResources();
+				for(int i = 0; i < resources.size(); i++) {
+					Resource resource = resources.get(i);
+					EObject rootElement = null;
+					if (resource instanceof XtextResource) {
+						IParseResult parseResult = ((XtextResource) resource).getParseResult();
+						if (parseResult != null)
+							rootElement = parseResult.getRootASTElement();
+					} else if (!resource.getContents().isEmpty()) {
+						rootElement = resource.getContents().get(0);
+					}
+					if (rootElement instanceof Grammar) {
+						Grammar otherGrammar = (Grammar) rootElement;
+						if (grammarName.equals(otherGrammar.getName())) {
+							if (resource instanceof DerivedStateAwareResource)
+								resource.getContents();
+							return Collections.<EObject>singletonList(otherGrammar);
 						}
 					}
 				}
 				URI classpathURI = URI.createURI(
 						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + "." + fileExtension);
-				URI normalizedURI = resourceSet.getURIConverter().normalize(classpathURI);
+				URI normalizedURI = null;
+				if (resourceSet instanceof XtextResourceSet) {
+					XtextResourceSet set = (XtextResourceSet) resourceSet;
+					normalizedURI = set.getClasspathUriResolver().resolve(set.getClasspathURIContext(), classpathURI);
+				} else {
+					normalizedURI = resourceSet.getURIConverter().normalize(classpathURI);
+				}
 				final Resource resource = resourceSet.getResource(normalizedURI, true);
-				final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
-				if (grammarName.equals(usedGrammar.getName()))
-					return Collections.<EObject>singletonList(usedGrammar);
+				if (!resource.getContents().isEmpty()) {
+					final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
+					if (grammarName.equals(usedGrammar.getName()))
+						return Collections.<EObject>singletonList(usedGrammar);
+				}
 			}
 			return Collections.emptyList();
 		}
@@ -222,6 +247,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 				return null;
 			if (uri.fragment() == null) {
 				Resource resource = resourceSet.getResource(uri, true);
+				if (resource.getContents().isEmpty())
+					return null;
 				EPackage result = (EPackage) resource.getContents().get(0);
 				return result;
 			}
@@ -243,12 +270,20 @@ public class XtextLinkingService extends DefaultLinkingService {
 		final URI uri = URI.createURI(nsURI);
 		if (uri == null || isReferencedByUsedGrammar(generatedMetamodel, nsURI))
 			return Collections.emptyList();
+		EPackage pack = ((GeneratedMetamodelImpl)generatedMetamodel).basicGetEPackage();
+		if (pack != null && !pack.eIsProxy())
+			return singletonList((EObject)pack);
 		final EPackage generatedEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		generatedEPackage.setName(generatedMetamodel.getName());
 		generatedEPackage.setNsPrefix(generatedMetamodel.getName());
 		generatedEPackage.setNsURI(nsURI);
 		final Resource generatedPackageResource = new EcoreResourceFactoryImpl().createResource(uri);
-		generatedMetamodel.eResource().getResourceSet().getResources().add(generatedPackageResource);
+		try {
+			generatedMetamodel.eResource().getResourceSet().getResources().add(generatedPackageResource);
+		} catch (IllegalStateException exception) {
+			generatedPackageResource.setURI(URI.createURI(nsURI+"_"+generatedMetamodel.hashCode()));
+			generatedMetamodel.eResource().getResourceSet().getResources().add(generatedPackageResource);
+		}
 		generatedPackageResource.getContents().add(generatedEPackage);
 		return Collections.<EObject>singletonList(generatedEPackage);
 	}

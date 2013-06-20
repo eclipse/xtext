@@ -31,6 +31,10 @@ import com.google.inject.name.Named;
 public abstract class AbstractInjectableValidator implements EValidator {
 
 	public static final String CURRENT_LANGUAGE_NAME = AbstractInjectableValidator.class.getCanonicalName() + ".currentLanguageName";
+	/**
+	 * @since 2.4
+	 */
+	public static final String ISSUE_SEVERITIES = AbstractInjectableValidator.class.getCanonicalName() + ".issueSeverities";
 
 	@Inject@Named(Constants.LANGUAGE_NAME) 
 	private String languageName;
@@ -85,4 +89,5 @@ public abstract class AbstractInjectableValidator implements EValidator {
 		}
 		return currentLanguage;
 	}
+	
 }

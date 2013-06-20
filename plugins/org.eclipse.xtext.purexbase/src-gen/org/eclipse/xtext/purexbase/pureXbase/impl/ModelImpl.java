@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.purexbase.pureXbase.impl;
 
@@ -19,6 +16,8 @@ import org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage;
 
 import org.eclipse.xtext.xbase.XBlockExpression;
 
+import org.eclipse.xtext.xtype.XImportSection;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Model</b></em>'.
@@ -26,6 +25,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.purexbase.pureXbase.impl.ModelImpl#getImportSection <em>Import Section</em>}</li>
  *   <li>{@link org.eclipse.xtext.purexbase.pureXbase.impl.ModelImpl#getBlock <em>Block</em>}</li>
  * </ul>
  * </p>
@@ -34,6 +34,16 @@ import org.eclipse.xtext.xbase.XBlockExpression;
  */
 public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
+  /**
+   * The cached value of the '{@link #getImportSection() <em>Import Section</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getImportSection()
+   * @generated
+   * @ordered
+   */
+  protected XImportSection importSection;
+
   /**
    * The cached value of the '{@link #getBlock() <em>Block</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -63,6 +73,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected EClass eStaticClass()
   {
     return PureXbasePackage.Literals.MODEL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public XImportSection getImportSection()
+  {
+    return importSection;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetImportSection(XImportSection newImportSection, NotificationChain msgs)
+  {
+    XImportSection oldImportSection = importSection;
+    importSection = newImportSection;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PureXbasePackage.MODEL__IMPORT_SECTION, oldImportSection, newImportSection);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setImportSection(XImportSection newImportSection)
+  {
+    if (newImportSection != importSection)
+    {
+      NotificationChain msgs = null;
+      if (importSection != null)
+        msgs = ((InternalEObject)importSection).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PureXbasePackage.MODEL__IMPORT_SECTION, null, msgs);
+      if (newImportSection != null)
+        msgs = ((InternalEObject)newImportSection).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PureXbasePackage.MODEL__IMPORT_SECTION, null, msgs);
+      msgs = basicSetImportSection(newImportSection, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, PureXbasePackage.MODEL__IMPORT_SECTION, newImportSection, newImportSection));
   }
 
   /**
@@ -123,6 +181,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case PureXbasePackage.MODEL__IMPORT_SECTION:
+        return basicSetImportSection(null, msgs);
       case PureXbasePackage.MODEL__BLOCK:
         return basicSetBlock(null, msgs);
     }
@@ -139,6 +199,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case PureXbasePackage.MODEL__IMPORT_SECTION:
+        return getImportSection();
       case PureXbasePackage.MODEL__BLOCK:
         return getBlock();
     }
@@ -155,6 +217,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case PureXbasePackage.MODEL__IMPORT_SECTION:
+        setImportSection((XImportSection)newValue);
+        return;
       case PureXbasePackage.MODEL__BLOCK:
         setBlock((XBlockExpression)newValue);
         return;
@@ -172,6 +237,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case PureXbasePackage.MODEL__IMPORT_SECTION:
+        setImportSection((XImportSection)null);
+        return;
       case PureXbasePackage.MODEL__BLOCK:
         setBlock((XBlockExpression)null);
         return;
@@ -189,6 +257,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case PureXbasePackage.MODEL__IMPORT_SECTION:
+        return importSection != null;
       case PureXbasePackage.MODEL__BLOCK:
         return block != null;
     }

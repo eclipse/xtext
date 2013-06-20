@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class BacktrackingBug325745TestLanguageFactoryImpl extends EFactoryImpl i
   {
     try
     {
-      BacktrackingBug325745TestLanguageFactory theBacktrackingBug325745TestLanguageFactory = (BacktrackingBug325745TestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/tmf/xtext/backtrackingBug325745TestLanguage"); 
+      BacktrackingBug325745TestLanguageFactory theBacktrackingBug325745TestLanguageFactory = (BacktrackingBug325745TestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(BacktrackingBug325745TestLanguagePackage.eNS_URI);
       if (theBacktrackingBug325745TestLanguageFactory != null)
       {
         return theBacktrackingBug325745TestLanguageFactory;

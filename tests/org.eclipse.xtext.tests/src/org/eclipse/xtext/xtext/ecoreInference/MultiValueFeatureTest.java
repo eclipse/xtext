@@ -13,8 +13,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,12 +23,12 @@ import org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.Mult
 public class MultiValueFeatureTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(MultiValueFeatureTestLanguageStandaloneSetup.class);
 	}
 
-	public void testMetamodel() {
+	@Test public void testMetamodel() {
 		EPackage generated = MultiValueFeatureTestLanguagePackage.eINSTANCE;
 		assertEquals("multiValueFeatureTestLanguage", generated.getName());
 		EClass clazz = (EClass) generated.getEClassifier("Start");
@@ -39,7 +40,7 @@ public class MultiValueFeatureTest extends AbstractXtextTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testModel() throws Exception {
+	@Test public void testModel() throws Exception {
 		String model = "idA idB idA";
 		EObject parsedModel = getModel(model);
 		List<String> values = (List<String>) parsedModel.eGet(parsedModel.eClass().getEStructuralFeature("featureA"));

@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class BestMatchingJvmFeatureScope implements IScope {
 
 	protected final EObject context;

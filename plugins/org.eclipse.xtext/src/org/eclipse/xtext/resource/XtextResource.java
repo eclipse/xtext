@@ -23,10 +23,13 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -60,13 +63,13 @@ public class XtextResource extends ResourceImpl {
 	public static final String OPTION_RESOLVE_ALL = XtextResource.class.getName() + ".RESOLVE_ALL";
 
 	/**
-	 * @deprecated use {@link SaveOptions#configure(Map)} instead.
+	 * @deprecated use {@link SaveOptions#addTo(Map)} instead.
 	 */
 	@Deprecated
 	public static final String OPTION_FORMAT = XtextResource.class.getName() + ".FORMAT";
 
 	/**
-	 * @deprecated use {@link SaveOptions#configure(Map)} instead.
+	 * @deprecated use {@link SaveOptions#addTo(Map)} instead.
 	 */
 	@Deprecated
 	public static final String OPTION_SERIALIZATION_OPTIONS = XtextResource.class.getName() + ".SERIALIZATION_OPTIONS";
@@ -91,6 +94,8 @@ public class XtextResource extends ResourceImpl {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME) 
 	private String languageName;
+	
+	private long modificationStamp = Integer.MIN_VALUE;
 	
 	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
 		
@@ -146,6 +151,7 @@ public class XtextResource extends ResourceImpl {
 		super();
 	}
 
+	@Nullable
 	public IParseResult getParseResult() {
 		return parseResult;
 	}
@@ -282,6 +288,19 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	public EObject getEObject(String uriFragment) {
+		return basicGetEObject(uriFragment);
+	}
+
+	/**
+	 * Resolves a fragment to an {@link EObject}. The returned object is not necessarily
+	 * contained in this resource. It may resolve to a different one, instead.
+	 * The result may be <code>null</code>.
+	 * 
+	 * @see ResourceImpl#getEObject(String)
+	 * @see IFragmentProvider
+	 * @since 2.4
+	 */
+	protected EObject basicGetEObject(@NonNull String uriFragment) {
 		if (fragmentProvider != null) {
 			EObject result = fragmentProvider.getEObject(this, uriFragment, fragmentProviderFallback);
 			return result;
@@ -314,12 +333,12 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	/**
-	 * Creates {@link Diagnostic diagnostics} from {@link SyntaxError syntax errors} in {@link ParseResult}.
+	 * Creates {@link org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostics} from {@link SyntaxErrorMessage syntax errors} in {@link IParseResult}.
 	 * No diagnostics will be created if {@link #isValidationDisabled() validation is disabled} for this
 	 * resource.
 	 * 
 	 * @param parseResult the parse result that provides the syntax errors.
-	 * @return list of {@link Diagnostic}. Never <code>null</code>.
+	 * @return list of {@link org.eclipse.emf.ecore.resource.Resource.Diagnostic}. Never <code>null</code>.
 	 */
 	private List<Diagnostic> createDiagnostics(IParseResult parseResult) {
 		if (validationDisabled)
@@ -410,4 +429,29 @@ public class XtextResource extends ResourceImpl {
 	public String getLanguageName() {
 		return languageName;
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setModificationStamp(long documentModificationStamp) {
+		this.modificationStamp = documentModificationStamp;
+	}
+	
+	/**
+	 * The modification stamp of the document reflected in the current state of this resource.
+	 * Has to be set externally.
+	 *  
+	 * @since 2.4
+	 */
+	public long getModificationStamp() {
+		return modificationStamp;
+	}
+	
 }

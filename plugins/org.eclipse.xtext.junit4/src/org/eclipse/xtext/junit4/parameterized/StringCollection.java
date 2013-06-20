@@ -8,8 +8,11 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 
 /**
+ * This class will be removed in the next release after 2.4.2
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class StringCollection<T extends StringCollection<T>.Item> implements Iterable<T> {
 	public class Item implements Comparable<Item> {
 		protected String escaped = null;

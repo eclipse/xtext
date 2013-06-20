@@ -8,6 +8,7 @@
 package org.eclipse.xtext.junit4;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.validation.CompositeEValidator;
 
 /**
  * 
@@ -55,6 +57,12 @@ public class GlobalRegistries {
 	public static GlobalStateMemento makeCopyOfGlobalState() {
 		GlobalStateMemento memento = new GlobalStateMemento();
 		memento.validatorReg = new HashMap<EPackage, Object>(EValidator.Registry.INSTANCE);
+		for(Map.Entry<EPackage, Object> validatorEntry: memento.validatorReg.entrySet()) {
+			Object existingValue = validatorEntry.getValue();
+			if (existingValue instanceof CompositeEValidator) {
+				validatorEntry.setValue(((CompositeEValidator) existingValue).getCopyAndClearContents());
+			}
+		}
 		memento.epackageReg = new HashMap<String, Object>(EPackage.Registry.INSTANCE);
 		memento.protocolToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap());
 		memento.extensionToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap());

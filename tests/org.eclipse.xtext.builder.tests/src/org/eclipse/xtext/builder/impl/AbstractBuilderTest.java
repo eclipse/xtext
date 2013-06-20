@@ -8,17 +8,19 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.intro.IIntroManager;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -26,32 +28,35 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractBuilderTest extends TestCase implements IResourceDescription.Event.Listener {
+public abstract class AbstractBuilderTest extends Assert implements IResourceDescription.Event.Listener {
 	public final String F_EXT = ".buildertestlanguage";
 	private volatile List<Event> events = Lists.newArrayList();
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		assertEquals(0, countResourcesInIndex());
 		assertEquals(0, root().getProjects().length);
 		if (PlatformUI.isWorkbenchRunning()) {
-			IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
+			final IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
 			if (introManager.getIntro() != null) {
-				introManager.closeIntro(introManager.getIntro());
+				Display.getDefault().asyncExec(new Runnable() {
+					
+					public void run() {
+						introManager.closeIntro(introManager.getIntro());
+					}
+				});
 			}
 		}
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		cleanWorkspace();
 		waitForAutoBuild();
 		events.clear();
 		getBuilderState().removeListener(this);
 		assertEquals(0, countResourcesInIndex());
 		assertEquals(0, root().getProjects().length);
-		super.tearDown();
 	}
 
 	public void descriptionsChanged(Event event) {

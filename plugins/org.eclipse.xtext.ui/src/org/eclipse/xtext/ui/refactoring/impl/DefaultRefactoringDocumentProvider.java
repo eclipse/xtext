@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.IDocument;
@@ -30,7 +31,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
-import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
+import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 import com.google.inject.Inject;
@@ -40,7 +41,7 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.Provider {
+public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.Provider, IChangeRedirector.Aware {
 
 	@Inject(optional = true)
 	private IWorkbench workbench;
@@ -51,52 +52,67 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
 
-	@Inject
-	private RefactoringPreferences preferences;
+	private IChangeRedirector changeRedirector = IChangeRedirector.NULL;
 
 	protected IFileEditorInput getEditorInput(URI resourceURI, StatusWrapper status) {
-		try {
-			IFile file = projectUtil.findFileStorage(resourceURI, true);
-			return new FileEditorInput(file);
-		} catch (IllegalArgumentException e) {
+		IFile file = projectUtil.findFileStorage(resourceURI, true);
+		if (file == null) {
 			status.add(ERROR, "No suitable storage found for resource {0}.", resourceURI);
 			return null;
 		}
+		return new FileEditorInput(file);
 	}
 
 	public IRefactoringDocument get(URI uri, final StatusWrapper status) {
 		URI resourceURI = uri.trimFragment();
 		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
 		if (fileEditorInput != null) {
-			ITextEditor editor = new DisplayRunnableWithResult<ITextEditor>() {
-				@Override
-				protected ITextEditor run() throws Exception {
-					IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-					IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-					IEditorPart editor = activePage.findEditor(fileEditorInput);
-					if (editor instanceof ITextEditor) {
-						if (editor instanceof ITextEditorExtension
-								&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
-							status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
-						return ((ITextEditor) editor);
+			IFile file = fileEditorInput.getFile();
+			IPath redirectedPath = changeRedirector.getRedirectedPath(file.getFullPath());
+			IFile redirectedFile = file.getWorkspace().getRoot().getFile(redirectedPath);
+			if(redirectedFile.equals(file)) {
+				ITextEditor editor = new DisplayRunnableWithResult<ITextEditor>() {
+					@Override
+					protected ITextEditor run() throws Exception {
+						IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+						IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+						IEditorPart editor = activePage.findEditor(fileEditorInput);
+						if (editor instanceof ITextEditor) {
+							if (editor instanceof ITextEditorExtension
+									&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
+								status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
+							return ((ITextEditor) editor);
+						}
+						return null;
 					}
-					return null;
+				}.syncExec();
+				if (editor != null) {
+					IDocument document = editor.getDocumentProvider().getDocument(fileEditorInput);
+					if (document != null)
+						if(editor.isDirty())
+							return new EditorDocument(resourceURI, document);
+						else
+							return new SaveEditorDocument(resourceURI, editor, document);
 				}
-			}.syncExec();
-			if (editor != null) {
-				IDocument document = editor.getDocumentProvider().getDocument(fileEditorInput);
-				if(document != null) {
-					if (preferences.isSaveAllBeforeRefactoring() || !editor.isDirty()) {
-						return new SaveEditorDocument(resourceURI, editor, document);
-					} else {
-						return new EditorDocument(resourceURI, document);
-					}
-				}
+				return new FileDocument(resourceURI, file, getEncodingProvider(resourceURI));
+			} else {
+				return new RedirectedFileDocument(resourceURI, file, redirectedFile, getEncodingProvider(resourceURI));
 			}
-			return new FileDocument(resourceURI, fileEditorInput.getFile(), globalServiceProvider.findService(
-					resourceURI, IEncodingProvider.class));
 		}
 		return null;
+	}
+
+	protected IEncodingProvider getEncodingProvider(URI resourceURI) {
+		return globalServiceProvider.findService(
+				resourceURI, IEncodingProvider.class);
+	}
+
+	public IChangeRedirector getChangeRedirector() {
+		return changeRedirector;
+	}
+	
+	public void setChangeRedirector(IChangeRedirector changeRedirector) {
+		this.changeRedirector  = changeRedirector;
 	}
 
 	public static abstract class AbstractRefactoringDocument implements IRefactoringDocument {
@@ -171,10 +187,15 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 
 		@Override
 		public Change createChange(String name, TextEdit textEdit) {
-			DocumentChange documentChange = new DocumentChange(getName(), getDocument());
+			DocumentChange documentChange = new DocumentChange(getName(), getDocument()) {
+				@Override
+				public Object[] getAffectedObjects() {
+					return new Object[] { editor };
+				}
+			};
 			documentChange.setEdit(textEdit);
 			documentChange.setTextType(getURI().fileExtension());
-			return new DisplayChangeWrapper(documentChange, editor);
+			return new DisplayChangeWrapper(documentChange);
 		}
 	}
 
@@ -225,4 +246,25 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		}
 
 	}
+	
+	public static class RedirectedFileDocument extends FileDocument {
+
+		private IFile redirectedFile;
+
+		public RedirectedFileDocument(URI resourceURI, IFile file, IFile redirectedFile, 
+				IEncodingProvider encodingProvider) {
+			super(resourceURI, file, encodingProvider);
+			this.redirectedFile = redirectedFile;
+		}
+		
+		@Override
+		public Change createChange(String name, TextEdit textEdit) {
+			TextFileChange textFileChange = new TextFileChange(name, redirectedFile);
+			textFileChange.setSaveMode(TextFileChange.FORCE_SAVE);
+			textFileChange.setEdit(textEdit);
+			textFileChange.setTextType(getURI().fileExtension());
+			return textFileChange;
+		}
+	}
+
 }

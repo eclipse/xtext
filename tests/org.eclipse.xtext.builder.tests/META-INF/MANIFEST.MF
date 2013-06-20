@@ -2,27 +2,30 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Builder Tests
 Bundle-SymbolicName: org.eclipse.xtext.builder.tests;singleton:=true
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.4.3.qualifier
 Bundle-Vendor: Eclipse Modeling
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
- org.eclipse.xtext.generator;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.xtext.builder;bundle-version="2.0.0",
- org.eclipse.xtext.util;bundle-version="2.0.0",
- org.eclipse.xtext.ui.junit;bundle-version="2.0.0",
+Require-Bundle: org.eclipse.xtext;bundle-version="2.4.3",
+ org.eclipse.xtext.generator;bundle-version="2.4.3";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.builder;bundle-version="2.4.3",
+ org.eclipse.xtext.util;bundle-version="2.4.3",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.eclipse.xtext.ui;bundle-version="2.0.0",
+ org.eclipse.xtext.ui;bundle-version="2.4.3",
  org.eclipse.ui.editors,
  org.eclipse.ui,
- org.eclipse.jdt.core,
- org.eclipse.xtext.ui.shared;bundle-version="2.0.0",
- org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional,
- org.antlr.runtime,
- org.eclipse.xtext.ecore;bundle-version="2.0.0",
- org.eclipse.ui.ide;bundle-version="3.5.2"
-Import-Package: junit.framework;version="[3.0.0,4.0.0)",
- org.apache.log4j
+ org.eclipse.jdt.core;resolution:=optional,
+ org.eclipse.xtext.ui.shared;bundle-version="2.4.3",
+ org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xtext.ecore;bundle-version="2.4.3",
+ org.eclipse.ui.ide;bundle-version="3.5.2",
+ org.eclipse.xtext.junit4;bundle-version="2.4.3",
+ org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.testlanguages.ui;bundle-version="2.4.3"
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.junit;version="4.5.0",
+ org.junit.runner;version="4.5.0"
 Bundle-Activator: org.eclipse.xtext.builder.tests.Activator
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.builder.tests.builderTestLanguage,
@@ -34,5 +37,6 @@ Export-Package: org.eclipse.xtext.builder.tests.builderTestLanguage,
  org.eclipse.xtext.builder.tests.parser.antlr,
  org.eclipse.xtext.builder.tests.parser.antlr.internal,
  org.eclipse.xtext.builder.tests.validation,
- org.eclipse.xtext.builder.tests.ui.contentassist.antlr
+ org.eclipse.xtext.builder.tests.ui.contentassist.antlr,
+ org.eclipse.xtext.builder.tests.ui.contentassist
 

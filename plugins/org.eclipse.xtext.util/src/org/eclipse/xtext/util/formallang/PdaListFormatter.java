@@ -12,7 +12,7 @@ import java.util.List;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -28,6 +28,13 @@ public class PdaListFormatter<STATE, STACKITEM> implements Function<Pda<STATE, S
 	protected Function<? super STACKITEM, String> stackitemFormatter = new ObjToStrFunction<STACKITEM>();
 
 	protected Function<? super STATE, String> stateFormatter = new ObjToStrFunction<STATE>();
+
+	protected boolean sortFollowers = false;
+
+	public PdaListFormatter<STATE, STACKITEM> sortFollowers() {
+		this.sortFollowers = true;
+		return this;
+	}
 
 	public String apply(Pda<STATE, STACKITEM> pda) {
 		return format(pda);
@@ -73,6 +80,8 @@ public class PdaListFormatter<STATE, STACKITEM> implements Function<Pda<STATE, S
 		List<String> followers = Lists.newArrayList();
 		for (STATE f : followers2)
 			followers.add(title(pda, f));
+		if (sortFollowers)
+			Collections.sort(followers);
 		return title(pda, state) + " -> " + Joiner.on(", ").join(followers);
 	}
 

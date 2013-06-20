@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
@@ -36,7 +36,7 @@ public class XtextRenameStrategyProvider extends DefaultRenameStrategyProvider {
 	private Provider<MetamodelDeclarationRenameStrategy> metamodelDeclarationProvider;
 	
 	@Inject
-	private Provider<ParserRuleRenameStrategy> parserRuleProvider;
+	private Provider<RuleRenameStrategy> ruleProvider;
 	
 	@Override
 	protected IRenameStrategy createRenameStrategy(final EObject targetElement, final IRenameElementContext context) {
@@ -48,8 +48,8 @@ public class XtextRenameStrategyProvider extends DefaultRenameStrategyProvider {
 			}
 
 			@Override
-			public IRenameStrategy caseParserRule(ParserRule parserRule) {
-				return parserRuleProvider.get();
+			public IRenameStrategy caseAbstractRule(AbstractRule rule) {
+				return ruleProvider.get();
 			}
 
 			@Override
@@ -66,7 +66,7 @@ public class XtextRenameStrategyProvider extends DefaultRenameStrategyProvider {
 		}
 	}
 	
-	protected static class ParserRuleRenameStrategy extends DefaultRenameStrategy {
+	protected static class RuleRenameStrategy extends DefaultRenameStrategy {
 	
 		@Override
 		protected EObject setName(URI targetElementURI, String newName, ResourceSet resourceSet) {
@@ -75,9 +75,9 @@ public class XtextRenameStrategyProvider extends DefaultRenameStrategyProvider {
 		}
 
 		protected void renameReturnType(URI targetElementURI, String newName, ResourceSet resourceSet) {
-			ParserRule parserRule = (ParserRule) resourceSet.getEObject(targetElementURI, false);
-			TypeRef parserRuleType = parserRule.getType();
-			if (parserRule.getName().equals(parserRuleType.getClassifier().getName())
+			AbstractRule rule = (AbstractRule) resourceSet.getEObject(targetElementURI, false);
+			TypeRef parserRuleType = rule.getType();
+			if (rule.getName().equals(parserRuleType.getClassifier().getName())
 					&& parserRuleType.getMetamodel() instanceof GeneratedMetamodel) {
 				parserRuleType.getClassifier().setName(newName);
 			}

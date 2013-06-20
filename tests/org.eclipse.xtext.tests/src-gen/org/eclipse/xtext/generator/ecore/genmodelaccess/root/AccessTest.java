@@ -2,11 +2,11 @@ package org.eclipse.xtext.generator.ecore.genmodelaccess.root;
 
 import org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.NestedPackage1Package;
 import org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.NoLiteralsPackage;
-import junit.framework.TestCase;
-import junit.framework.Assert;
+import org.junit.Assert;
+import org.junit.Test;
 
-public abstract class AccessTest extends TestCase {
-	public void testRootPackage() {
+public abstract class AccessTest extends Assert {
+	@Test public void testRootPackage() {
 		Assert.assertNotNull(RootPackage.eINSTANCE);
 		Assert.assertNotNull(RootPackage.Literals.ROOT_CLASS);
 		Assert.assertNotNull(RootPackage.Literals.ROOT_DATA_TYPE);
@@ -20,13 +20,13 @@ public abstract class AccessTest extends TestCase {
 		Assert.assertEquals(1,RootPackage.ROOT_CLASS__REFERENCE1);
 	}
 
-	public void testNestedPackage() {
+	@Test public void testNestedPackage() {
 		Assert.assertNotNull(NestedPackage1Package.eINSTANCE);
 		Assert.assertNotNull(NestedPackage1Package.Literals.NESTED_CLASS1);
 		Assert.assertEquals(0,NestedPackage1Package.NESTED_CLASS1);
 	}
 
-	public void testNoLiteralPackage() {
+	@Test public void testNoLiteralPackage() {
 		Assert.assertNotNull(NoLiteralsPackage.eINSTANCE);
 		Assert.assertFalse(false);
 		Assert.assertNotNull(NoLiteralsPackage.eINSTANCE.getNoLitClass());

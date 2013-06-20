@@ -30,14 +30,15 @@ public class XtextProjectInfo implements IProjectInfo {
 	private boolean createTestProject = false;
 	private IWorkingSet[] workingSets;
 	private IWorkbench workbench;
-	private IPath projectLocation;
+	private IPath projectsRootLocation;
 	private WizardContribution wizardContribution;
 	private boolean createEclipseRuntimeLaunchConfig;
-	
+	private boolean createFeatureProject;
+
 	public boolean isCreateEclipseRuntimeLaunchConfig() {
 		return createEclipseRuntimeLaunchConfig;
 	}
-	
+
 	public void setCreateEclipseRuntimeLaunchConfig(boolean createEclipseRuntimeLaunchConfig) {
 		this.createEclipseRuntimeLaunchConfig = createEclipseRuntimeLaunchConfig;
 	}
@@ -45,11 +46,11 @@ public class XtextProjectInfo implements IProjectInfo {
 	public void setWizardContribution(WizardContribution wizardContribution) {
 		this.wizardContribution = wizardContribution;
 	}
-	
+
 	public WizardContribution getWizardContribution() {
 		return wizardContribution;
 	}
-	
+
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
@@ -64,6 +65,14 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public void setCreateTestProject(boolean createTestProject) {
 		this.createTestProject = createTestProject;
+	}
+
+	public boolean isCreateFeatureProject() {
+		return createFeatureProject;
+	}
+
+	public void setCreateFeatureProject(boolean createFeatureProject) {
+		this.createFeatureProject = createFeatureProject;
 	}
 
 	public String getFileExtension() {
@@ -96,6 +105,10 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public String getTestProjectName() {
 		return getProjectName() + ".tests"; //$NON-NLS-1$
+	}
+
+	public String getFeatureProjectName() {
+		return getProjectName() + ".sdk"; //$NON-NLS-1$;
 	}
 
 	public String getUiProjectName() {
@@ -157,20 +170,31 @@ public class XtextProjectInfo implements IProjectInfo {
 		return workbench;
 	}
 
-	public void setProjectLocation(IPath projectLocation) {
-		this.projectLocation = projectLocation;
+	public void setProjectsRootLocation(IPath projectsRootLocation) {
+		this.projectsRootLocation = projectsRootLocation;
 	}
 
-	public IPath getProjectLocation() {
-		return projectLocation;
+	public IPath getDslProjectLocation() {
+		return projectsRootLocation.append(getProjectName());
 	}
-	
+
 	public IPath getUiProjectLocation() {
-		return projectLocation.removeLastSegments(1).append(getUiProjectName());
+		return projectsRootLocation.append(getUiProjectName());
 	}
 
 	public IPath getTestProjectLocation() {
-		return projectLocation.removeLastSegments(1).append(getTestProjectName());
+		return projectsRootLocation.append(getTestProjectName());
 	}
-	
+
+	public IPath getFeatureProjectLocation() {
+		return projectsRootLocation.append(getFeatureProjectName());
+	}
+
+	/**
+	 * @return Source Folder relative path to the Grammar file
+	 */
+	public String getGrammarFilePath() {
+		return getBasePackagePath() + "/" + getLanguageNameAbbreviation() + ".xtext";
+	}
+
 }

@@ -27,7 +27,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
@@ -66,21 +65,27 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				if (o2.getAssignedGrammarElement() == nodeModelEle)
 					return 1;
 			}
-			if (o1.getAssignedGrammarElement() == null && o1.getAssignedGrammarElement() == null)
+			if (o1.getAssignedGrammarElement() == null && o2.getAssignedGrammarElement() == null)
 				return 0;
 			if (o1.getAssignedGrammarElement() == null)
-				return 1;
-			if (o2.getAssignedGrammarElement() == null)
 				return -1;
+			if (o2.getAssignedGrammarElement() == null)
+				return 1;
 			boolean o1Opt = obj.isOptional(o1.getFeatureID());
 			boolean o2Opt = obj.isOptional(o2.getFeatureID());
-			if (o1Opt && o2Opt)
-				return 0;
-			if (o1Opt)
+			if (o1Opt && !o2Opt)
 				return 1;
-			if (o2Opt)
+			if (o2Opt && !o1Opt)
 				return -1;
-			return 0;
+			int o1Cnt = obj.getValueCount(o1.getFeatureID());
+			int o2Cnt = obj.getValueCount(o2.getFeatureID());
+			if (o1Cnt == 0 && o2Cnt > 0)
+				return 1;
+			if (o2Cnt == 0 && o1Cnt > 0)
+				return -1;
+			int o1id = o1.getOrderID();
+			int o2id = o2.getOrderID();
+			return o1id < o2id ? -1 : o1id > o2id ? 1 : 0;
 		}
 
 	}
@@ -103,7 +108,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			for (EStructuralFeature feature : eObject.eClass().getEAllStructuralFeatures()) {
 				int featureID = eObject.eClass().getFeatureID(feature);
 				if (feature.isMany())
-					switch (transientValueService.isListTransient(eObject, feature)) {
+					switch (transientValues.isListTransient(eObject, feature)) {
 						case NO:
 							List<INode> nodes1 = Lists.newArrayList();
 							List<?> values1 = (List<?>) eObject.eGet(feature);
@@ -117,7 +122,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 							List<?> values2 = (List<?>) eObject.eGet(feature);
 							List<Object> values3 = Lists.newArrayList();
 							for (int i = 0, j = 0; i < values2.size(); i++)
-								if (!transientValueService.isValueInListTransient(eObject, i, feature)) {
+								if (!transientValues.isValueInListTransient(eObject, i, feature)) {
 									Object value = values2.get(i);
 									INode node = nodeProvider.getNodeForMultiValue(feature, i, j++, value);
 									values3.add(value);
@@ -129,7 +134,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 						case YES:
 					}
 				else
-					switch (transientValueService.isValueTransient(eObject, feature)) {
+					switch (transientValues.isValueTransient(eObject, feature)) {
 						case PREFERABLY:
 							optional[featureID] = true;
 							Object value1 = eObject.eGet(feature);
@@ -283,6 +288,20 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			return result;
 		}
 
+		public boolean canEnter(ISemState state) {
+			for (int i = 0; i < nextIndex.length; i++)
+				if (i != state.getFeatureID()) {
+					int count = nextIndex[i];
+					if (count < obj.getValueCount(i)) {
+						if (count == 0 && obj.isOptional(i))
+							continue;
+						if (!state.getAllFollowerFeatures().get(i))
+							return false;
+					}
+				}
+			return true;
+		}
+
 		public int getIndex() {
 			return index;
 		}
@@ -349,6 +368,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 					consumed.add(feature.getName() + "(" + count + ")");
 			}
 			StringBuilder result = new StringBuilder();
+			result.append("State: " + state + "\n");
 			result.append("EObject: " + EmfFormatter.objPath(obj.getEObject()) + "\n");
 			result.append("Remaining Mandatory Values: " + Joiner.on(", ").join(mandatory) + "\n");
 			result.append("Remaining Optional Values: " + Joiner.on(", ").join(optional) + "\n");
@@ -362,13 +382,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	protected IAssignmentFinder assignmentFinder;
 
 	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-
-	@Inject
 	protected ISemanticSequencerNfaProvider nfaProvider;
-
-	@Inject
-	protected ITransientValueService transientValueService;
 
 	@Inject
 	protected TransientValueUtil transientValueUtil;
@@ -399,6 +413,8 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 		TraceItem co = new TraceItem(object);
 		List<TraceItem> trace = new NfaUtil().backtrack(nfa, co, new NfaUtil.BacktrackHandler<ISemState, TraceItem>() {
 			public TraceItem handle(ISemState state, TraceItem previous) {
+				if (!previous.canEnter(state))
+					return null;
 				if (state.getFeature() != null) {
 					return previous.cloneAndConsume(state);
 				} else

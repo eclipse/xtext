@@ -1,0 +1,331 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xbase.ui.quickfix;
+
+import static org.eclipse.xtext.util.Strings.*;
+
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.compiler.IProblem;
+import org.eclipse.jdt.core.search.IJavaSearchConstants;
+import org.eclipse.jdt.core.search.IJavaSearchScope;
+import org.eclipse.jdt.core.search.SearchEngine;
+import org.eclipse.jdt.core.search.SearchPattern;
+import org.eclipse.jdt.core.search.TypeNameRequestor;
+import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
+import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
+import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.util.VisibilityService;
+import org.eclipse.xtext.common.types.xtext.ui.JdtTypeRelevance;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
+import org.eclipse.xtext.ui.editor.quickfix.ISimilarityMatcher;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
+import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
+
+/**
+ * Quickfixes for misspelled or not yet imported Java types.
+ *  
+ * @author Jan Koehnlein - Initial contribution and API
+ */
+public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
+	
+	@Inject
+	private IScopeProvider scopeProvider;
+	
+	@Inject
+	private IImportsConfiguration importsConfiguration;
+
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+
+	@Inject
+	private ISimilarityMatcher similarityMatcher;
+	
+	@Inject
+	private IJavaProjectProvider projectProvider;
+
+	@Inject
+	private TypeReferences typeRefs;
+	
+	@Inject
+	private VisibilityService visibilityService;
+
+	@Inject
+	private JdtTypeRelevance jdtTypeRelevance;
+	
+	@Inject
+	private ReplacingAppendable.Factory appendableFactory;
+	
+	@Inject
+	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
+	
+	@NonNullByDefault
+	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
+			IXtextDocument xtextDocument, XtextResource resource, 
+			EObject referenceOwner, EReference unresolvedReference)
+			throws Exception {
+		String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
+		IScope scope = scopeProvider.getScope(referenceOwner, unresolvedReference);
+		boolean useJavaSearch = isUseJavaSearch(unresolvedReference, issue);;
+		if (useJavaSearch) {
+			JvmDeclaredType jvmType = importsConfiguration.getContextJvmDeclaredType(referenceOwner);
+			IJavaSearchScope javaSearchScope = getJavaSearchScope(referenceOwner);
+			createImportProposals(jvmType, issue, issueString, javaSearchScope, issueResolutionAcceptor);
+			scope = getImportedTypesScope(referenceOwner, issueString, scope, javaSearchScope);
+		}
+		List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
+		Set<String> proposedSolutions = Sets.newHashSet();
+		int addedDescriptions = 0;
+		int checkedDescriptions = 0;
+		for (IEObjectDescription referableElement : scope.getAllElements()) {
+			String solution = qualifiedNameConverter.toString(referableElement.getName());
+			if(!equal(issueString, solution) && proposedSolutions.add(solution)) {
+				if (useJavaSearch || similarityMatcher.isSimilar(issueString, solution)) {
+					addedDescriptions++;
+					createResolution(issue, issueResolutionAcceptor, issueString, referableElement);
+					proposedSolutions.add(solution);
+				} else {
+					discardedDescriptions.add(referableElement);
+				}
+			}
+			checkedDescriptions++;
+			if (checkedDescriptions > 100)
+				break;
+		}
+		if (discardedDescriptions.size() + addedDescriptions <= 5) {
+			for (IEObjectDescription referableElement : discardedDescriptions) {
+				createResolution(issue, issueResolutionAcceptor, issueString, referableElement);
+			}
+		}
+	}
+
+	protected boolean isUseJavaSearch(EReference unresolvedReference, Issue issue) {
+		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(unresolvedReference.getEReferenceType()))
+			return true;
+		if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(unresolvedReference.getEReferenceType()))
+			return true;
+		return false;
+	}
+
+	protected void createResolution(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, String issueString, IEObjectDescription solution) {
+		String replacement = qualifiedNameConverter.toString(solution.getName());
+		String replaceLabel = "Change to '" + replacement + "'";
+		issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel,
+				null, new ReplaceModification(issue, replacement));
+	}
+
+	protected IJavaSearchScope getJavaSearchScope(EObject model) {
+		if (model == null || model.eResource() == null || model.eResource().getResourceSet() == null) {
+			return null;
+		} else {
+			IJavaProject javaProject = projectProvider.getJavaProject(model.eResource().getResourceSet());
+			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
+			return searchScope;
+		}
+	}
+
+	protected IScope getImportedTypesScope(EObject model, final String misspelled, final IScope actualScope,
+			IJavaSearchScope scope) {
+		if (scope == null) {
+			return IScope.NULLSCOPE;
+		}
+		try {
+			final Set<String> visiblePackages = importsConfiguration.getImplicitlyImportedPackages((XtextResource) model.eResource());
+			final Set<String> importedTypes = Sets.newHashSet();
+			final Set<String> seen = Sets.newHashSet();
+			XImportSection importSection = importsConfiguration.getImportSection((XtextResource) model.eResource());
+			if(importSection != null) {
+				parseImportSection(importSection, new IAcceptor<String>() {
+					public void accept(String t) {
+						visiblePackages.add(t);
+					}
+				}, new IAcceptor<String>() {
+					public void accept(String t) {
+						importedTypes.add(t);
+					}
+				});
+			}
+			SearchEngine searchEngine = new SearchEngine();
+			final List<IEObjectDescription> validProposals = Lists.newArrayList();
+			for (String importedType : importedTypes) {
+				if (validProposals.size() <= 5 && seen.add(importedType)) {
+					int dot = importedType.lastIndexOf('.');
+					if (dot != -1) {
+						importedType = importedType.substring(dot + 1);
+					}
+					if (isSimilarTypeName(misspelled, importedType)) {
+						QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(importedType);
+						for (IEObjectDescription element : actualScope.getElements(qualifiedName)) {
+							validProposals.add(new AliasedEObjectDescription(qualifiedName, element));
+							break;
+						}
+					}
+				}
+			}
+			for (String visiblePackage : visiblePackages) {
+				if (validProposals.size() <= 5) {
+					searchEngine.searchAllTypeNames(visiblePackage.toCharArray(), SearchPattern.R_EXACT_MATCH, null,
+							SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, scope, new TypeNameRequestor() {
+								@Override
+								public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
+										char[][] enclosingTypeNames, String path) {
+									StringBuilder typeNameBuilder = new StringBuilder(simpleTypeName.length);
+									for (char[] enclosingType : enclosingTypeNames) {
+										typeNameBuilder.append(enclosingType);
+										typeNameBuilder.append('.');
+									}
+									typeNameBuilder.append(simpleTypeName);
+									String typeName = typeNameBuilder.toString();
+									if (isSimilarTypeName(misspelled, typeName)) {
+										String fqNameAsString = getQualifiedTypeName(packageName, enclosingTypeNames,
+												simpleTypeName);
+										if (seen.add(fqNameAsString)) {
+											QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(
+													typeName);
+											for (IEObjectDescription element : actualScope.getElements(qualifiedName)) {
+												validProposals
+														.add(new AliasedEObjectDescription(qualifiedName, element));
+												break;
+											}
+										}
+									}
+								}
+
+							}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor() {
+								@Override
+								public boolean isCanceled() {
+									return validProposals.size() > 5;
+								}
+							});
+				}
+			}
+			return new SimpleScope(validProposals);
+		} catch (JavaModelException jme) {
+			return IScope.NULLSCOPE;
+		}
+	}
+
+	protected void parseImportSection(XImportSection importSection, IAcceptor<String> visiblePackages,
+			IAcceptor<String> importedTypes) {
+		for (XImportDeclaration importDeclaration : importSection.getImportDeclarations()) {
+			if (!importDeclaration.isStatic()) {
+				if (importDeclaration.getImportedNamespace() != null) {
+					String importedAsString = importDeclaration.getImportedNamespace();
+					if (importDeclaration.isWildcard()) {
+						importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
+						visiblePackages.accept(importedAsString);
+					} else {
+						importedTypes.accept(importedAsString);
+					}
+				} else {
+					importedTypes.accept(importDeclaration.getImportedTypeName());
+				}
+			}
+		}
+	}
+
+	protected boolean isSimilarTypeName(String s0, String s1) {
+		double levenshteinDistance = StringUtils.getLevenshteinDistance(s0, s1);
+		return levenshteinDistance <= 3;
+	}
+
+	protected String getQualifiedTypeName(char[] packageName, char[][] enclosingTypeNames, char[] simpleTypeName) {
+		StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
+		if (packageName.length != 0) {
+			fqName.append(packageName);
+			fqName.append('.');
+		}
+		for (char[] enclosingType : enclosingTypeNames) {
+			fqName.append(enclosingType);
+			fqName.append('.');
+		}
+		fqName.append(simpleTypeName);
+		String fqNameAsString = fqName.toString();
+		return fqNameAsString;
+	}
+
+	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, String typeSimpleName, IJavaSearchScope searchScope,
+			final IssueResolutionAcceptor acceptor) throws JavaModelException {
+		if(contextType != null) {
+			final String wantedTypeName = typeSimpleName.contains("::") 
+				? typeSimpleName.substring(0, typeSimpleName.indexOf("::")) 
+				: typeSimpleName;
+			BasicSearchEngine searchEngine = new BasicSearchEngine();
+			searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
+					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new IRestrictedAccessTypeRequestor() {
+						
+						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
+								String path, AccessRestriction access) {
+							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
+									simpleTypeName);
+							if(access == null || (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())){
+								JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType);
+								if(importType instanceof JvmDeclaredType
+										&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
+									StringBuilder label = new StringBuilder("Import '");
+									label.append(simpleTypeName);
+									label.append("' (");
+									label.append(packageName);
+									if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
+										for(char[] enclosingTypeName: enclosingTypeNames) {
+											label.append(".");
+											label.append(enclosingTypeName);
+										}
+									}
+									label.append(")");
+									acceptor.accept(issue, label.toString(), label.toString(), "impc_obj.gif", new ISemanticModification() {
+										@SuppressWarnings("null")
+										public void apply(EObject element, IModificationContext context) throws Exception {
+											ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
+													element, 0, 0);
+											appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
+											appendable.insertNewImports();
+										}
+									}, jdtTypeRelevance.getRelevance(qualifiedTypeName, wantedTypeName) + 100);
+								}
+							}
+						}
+					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
+		}
+	}
+}

@@ -3,9 +3,19 @@
  */
 package org.eclipse.xtext.xbase.ui;
 
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
+import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
+import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
+
+import com.google.inject.Binder;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -20,5 +30,23 @@ public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiMod
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return XbaseHighlightingConfiguration.class;
 	}
+	
+	@Override
+	public Class<? extends IEObjectHoverDocumentationProvider> bindIEObjectHoverDocumentationProvider(){
+		return XbaseHoverDocumentationProvider.class;
+	}
 
+	public Class<? extends IssueSeveritiesProvider> bindIssueSeverityServiceProvider() {
+		return XbaseIssueSeveritiesProvider.class;
+	}
+	
+	@Override
+	public Class<? extends ILabelProvider> bindILabelProvider() {
+		return XbaseLabelProvider.class;
+	}
+
+	@Override
+	public void configureResourceUIServiceLabelProvider(Binder binder) {
+		binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(XbaseDescriptionLabelProvider.class);
+	}
 }

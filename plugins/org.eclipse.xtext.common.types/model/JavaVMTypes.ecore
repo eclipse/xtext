@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="types"
-    nsURI="http://www.eclipse.org/xtext/common/JavaVMTypes" nsPrefix="types">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="types" nsURI="http://www.eclipse.org/xtext/common/JavaVMTypes"
+    nsPrefix="types">
   <eClassifiers xsi:type="ecore:EClass" name="JvmIdentifiableElement" abstract="true">
     <eOperations name="getIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -30,7 +29,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="JvmVoid" eSuperTypes="#//JvmType"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmComponentType" abstract="true" eSuperTypes="#//JvmType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arrayType" eType="#//JvmArrayType"
-        containment="true" eOpposite="#//JvmArrayType/componentType"/>
+        containment="true" resolveProxies="false" eOpposite="#//JvmArrayType/componentType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmPrimitiveType" eSuperTypes="#//JvmComponentType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -69,9 +68,9 @@
       </eGenericType>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
-        eType="#//JvmTypeReference" containment="true"/>
+        eType="#//JvmTypeReference" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-        eType="#//JvmMember" containment="true" eOpposite="#//JvmMember/declaringType"/>
+        eType="#//JvmMember" containment="true" resolveProxies="false" eOpposite="#//JvmMember/declaringType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -84,11 +83,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeParameterDeclarator" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
-        eType="#//JvmTypeParameter" containment="true" eOpposite="#//JvmTypeParameter/declarator"/>
+        eType="#//JvmTypeParameter" containment="true" resolveProxies="false" eOpposite="#//JvmTypeParameter/declarator"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmConstraintOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
-        eType="#//JvmTypeConstraint" containment="true" eOpposite="#//JvmTypeConstraint/owner"/>
+        eType="#//JvmTypeConstraint" containment="true" resolveProxies="false" eOpposite="#//JvmTypeConstraint/owner"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeConstraint" abstract="true">
     <eOperations name="getIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -102,7 +101,7 @@
       <eParameters name="innerClassDelimiter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeReference" eType="#//JvmTypeReference"
-        containment="true"/>
+        containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//JvmConstraintOwner"
         eOpposite="#//JvmConstraintOwner/constraints"/>
   </eClassifiers>
@@ -130,6 +129,7 @@
       </eGenericType>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeReference" abstract="true">
     <eOperations name="getType" eType="#//JvmType"/>
@@ -169,21 +169,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmParameterizedTypeReference" eSuperTypes="#//JvmTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//JvmTypeReference" containment="true"/>
+        eType="#//JvmTypeReference" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmGenericArrayTypeReference" eSuperTypes="#//JvmTypeReference">
     <eOperations name="getDimensions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eOperations name="getType" eType="#//JvmArrayType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="#//JvmTypeReference"
-        containment="true"/>
+        containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmWildcardTypeReference" eSuperTypes="#//JvmTypeReference #//JvmConstraintOwner"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnyTypeReference" eSuperTypes="#//JvmTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmMultiTypeReference" eSuperTypes="#//JvmCompoundTypeReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmMember" abstract="true" eSuperTypes="#//JvmAnnotationTarget #//JvmIdentifiableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmMember" abstract="true" eSuperTypes="#//JvmAnnotationTarget">
     <eOperations name="internalSetIdentifier">
       <eParameters name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -194,7 +194,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmMember"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmMember">
+    <eOperations name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns &lt;code>true&lt;/code> if the feature is a static field or static operation.&lt;/p>&#xA;&#xA;@since 2.4"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JvmVisibility">
     <eLiterals name="DEFAULT"/>
     <eLiterals name="PRIVATE" value="1"/>
@@ -205,13 +211,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmTypeReference"
-        containment="true"/>
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="volatile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transient" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmExecutable" abstract="true" eSuperTypes="#//JvmFeature #//JvmTypeParameterDeclarator">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//JvmFormalParameter" containment="true"/>
+        eType="#//JvmFormalParameter" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exceptions" upperBound="-1"
-        eType="#//JvmTypeReference" containment="true"/>
+        eType="#//JvmTypeReference" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="varArgs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmConstructor" eSuperTypes="#//JvmExecutable"/>
@@ -220,29 +228,32 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//JvmTypeReference"
-        containment="true"/>
+        containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="defaultValue" eType="#//JvmAnnotationValue"
-        containment="true">
+        containment="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>Returns the default value for the annotation member represented by this JvmOperation instance.&lt;/p>&#xA;&lt;p>Returns null if no default is associated with the member, or if the operation does not represent a declared member of an annotation type.&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchronized" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="native" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmFormalParameter" eSuperTypes="#//JvmIdentifiableElement #//JvmAnnotationTarget">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmFormalParameter" eSuperTypes="#//JvmAnnotationTarget">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" eType="#//JvmTypeReference"
-        containment="true"/>
+        containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationTarget" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationTarget" abstract="true"
+      eSuperTypes="#//JvmIdentifiableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="#//JvmAnnotationReference" containment="true" eOpposite="#//JvmAnnotationReference/target"/>
+        eType="#//JvmAnnotationReference" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//JvmAnnotationType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//JvmAnnotationTarget"
-        eOpposite="#//JvmAnnotationTarget/annotations"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-        eType="#//JvmAnnotationValue" containment="true"/>
+        eType="#//JvmAnnotationValue" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationValue" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -289,11 +300,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-        eType="#//JvmTypeReference" containment="true"/>
+        eType="#//JvmTypeReference" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationAnnotationValue" eSuperTypes="#//JvmAnnotationValue #//JvmAnnotationTarget">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" unique="false"
-        upperBound="-1" eType="#//JvmAnnotationReference" changeable="false" derived="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//JvmAnnotationReference" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmEnumAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" unique="false"
@@ -308,12 +319,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="JvmSpecializedTypeReference" abstract="true"
       eSuperTypes="#//JvmTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="equivalent" eType="#//JvmTypeReference"
-        transient="true" containment="true"/>
+        transient="true" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmSynonymTypeReference" eSuperTypes="#//JvmCompoundTypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmUnknownTypeReference" eSuperTypes="#//JvmTypeReference">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exception" eType="#//Exception"
-        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns the known qualified name of the otherwise unresolveable type. May be &lt;code>null&lt;/code>.&lt;/p>&#xA;&#xA;@since 2.4"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ITypeReferenceVisitor" instanceClassName="org.eclipse.xtext.common.types.util.ITypeReferenceVisitor"
       serializable="false">
@@ -325,13 +340,11 @@
     <eTypeParameters name="Parameter"/>
     <eTypeParameters name="Result"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception"
-      serializable="false"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmCompoundTypeReference" abstract="true"
       eSuperTypes="#//JvmTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-        eType="#//JvmTypeReference" containment="true"/>
+        eType="#//JvmTypeReference" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmCustomAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" unique="false"

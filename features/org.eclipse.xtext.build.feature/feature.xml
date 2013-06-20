@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.build"
       label="Xtext Update Site"
-      version="2.0.0.qualifier"
+      version="2.4.3.qualifier"
       provider-name="%providerName"
       image="eclipse_update_120.jpg">
 
@@ -18,12 +18,37 @@ are made available under the terms of the Eclipse Public License
 v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
-	
+
    <license url="%licenseURL">
       %license
    </license>
+
    <includes
          id="org.eclipse.xtext.sdk"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtend.sdk"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.gwt"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtend.gwt"
+         version="0.0.0"/>
+	
+	<includes
+         id="org.eclipse.xtend.m2e"
+         version="0.0.0"/>
+   
+   <includes
+         id="org.eclipse.xtext.xtend2.sdk"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.xtend2.m2e"
          version="0.0.0"/>
 
 </feature>

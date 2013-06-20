@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase;
 
@@ -9,8 +11,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -198,7 +198,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART__CASE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+	int XCASE_PART__CASE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Then</b></em>' containment reference.
@@ -207,7 +207,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART__THEN = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int XCASE_PART__THEN = 1;
 
 	/**
 	 * The feature id for the '<em><b>Type Guard</b></em>' containment reference.
@@ -216,7 +216,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART__TYPE_GUARD = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
+	int XCASE_PART__TYPE_GUARD = 2;
 
 	/**
 	 * The number of structural features of the '<em>XCase Part</em>' class.
@@ -225,7 +225,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
+	int XCASE_PART_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.
@@ -475,13 +475,13 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Spreading</b></em>' attribute.
+	 * The feature id for the '<em><b>Explicit Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL__SPREADING = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+	int XMEMBER_FEATURE_CALL__EXPLICIT_STATIC = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Null Safe</b></em>' attribute.
@@ -493,13 +493,40 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL__NULL_SAFE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Type Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__TYPE_LITERAL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Static With Declaring Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Package Fragment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>XMember Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 5;
+	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
@@ -584,13 +611,22 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' reference.
+	 * The feature id for the '<em><b>Type Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL__DECLARING_TYPE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XFEATURE_CALL__TYPE_LITERAL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Package Fragment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__PACKAGE_FRAGMENT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>XFeature Call</em>' class.
@@ -599,7 +635,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -713,14 +749,14 @@ public interface XbasePackage extends EPackage
 	int XNULL_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XIntLiteralImpl <em>XInt Literal</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XNumberLiteralImpl <em>XNumber Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.XIntLiteralImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIntLiteral()
+	 * @see org.eclipse.xtext.xbase.impl.XNumberLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXNumberLiteral()
 	 * @generated
 	 */
-	int XINT_LITERAL = 12;
+	int XNUMBER_LITERAL = 12;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -729,16 +765,16 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XINT_LITERAL__VALUE = XEXPRESSION_FEATURE_COUNT + 0;
+	int XNUMBER_LITERAL__VALUE = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>XInt Literal</em>' class.
+	 * The number of structural features of the '<em>XNumber Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XINT_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+	int XNUMBER_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XStringLiteralImpl <em>XString Literal</em>}' class.
@@ -769,6 +805,90 @@ public interface XbasePackage extends EPackage
 	int XSTRING_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XCollectionLiteralImpl <em>XCollection Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XCollectionLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCollectionLiteral()
+	 * @generated
+	 */
+	int XCOLLECTION_LITERAL = 14;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOLLECTION_LITERAL__ELEMENTS = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XCollection Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOLLECTION_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XListLiteralImpl <em>XList Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XListLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXListLiteral()
+	 * @generated
+	 */
+	int XLIST_LITERAL = 15;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XLIST_LITERAL__ELEMENTS = XCOLLECTION_LITERAL__ELEMENTS;
+
+	/**
+	 * The number of structural features of the '<em>XList Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XLIST_LITERAL_FEATURE_COUNT = XCOLLECTION_LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XSetLiteralImpl <em>XSet Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XSetLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSetLiteral()
+	 * @generated
+	 */
+	int XSET_LITERAL = 16;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSET_LITERAL__ELEMENTS = XCOLLECTION_LITERAL__ELEMENTS;
+
+	/**
+	 * The number of structural features of the '<em>XSet Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSET_LITERAL_FEATURE_COUNT = XCOLLECTION_LITERAL_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XClosureImpl <em>XClosure</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -776,7 +896,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXClosure()
 	 * @generated
 	 */
-	int XCLOSURE = 14;
+	int XCLOSURE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Declared Formal Parameters</b></em>' containment reference list.
@@ -831,7 +951,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCastedExpression()
 	 * @generated
 	 */
-	int XCASTED_EXPRESSION = 15;
+	int XCASTED_EXPRESSION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -868,7 +988,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBinaryOperation()
 	 * @generated
 	 */
-	int XBINARY_OPERATION = 16;
+	int XBINARY_OPERATION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -959,7 +1079,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXUnaryOperation()
 	 * @generated
 	 */
-	int XUNARY_OPERATION = 17;
+	int XUNARY_OPERATION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -1041,7 +1161,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXForLoopExpression()
 	 * @generated
 	 */
-	int XFOR_LOOP_EXPRESSION = 18;
+	int XFOR_LOOP_EXPRESSION = 21;
 
 	/**
 	 * The feature id for the '<em><b>For Expression</b></em>' containment reference.
@@ -1087,7 +1207,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAbstractWhileExpression()
 	 * @generated
 	 */
-	int XABSTRACT_WHILE_EXPRESSION = 19;
+	int XABSTRACT_WHILE_EXPRESSION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1124,7 +1244,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXDoWhileExpression()
 	 * @generated
 	 */
-	int XDO_WHILE_EXPRESSION = 20;
+	int XDO_WHILE_EXPRESSION = 23;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1161,7 +1281,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWhileExpression()
 	 * @generated
 	 */
-	int XWHILE_EXPRESSION = 21;
+	int XWHILE_EXPRESSION = 24;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1198,7 +1318,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTypeLiteral()
 	 * @generated
 	 */
-	int XTYPE_LITERAL = 22;
+	int XTYPE_LITERAL = 25;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1210,13 +1330,22 @@ public interface XbasePackage extends EPackage
 	int XTYPE_LITERAL__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Array Dimensions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTYPE_LITERAL__ARRAY_DIMENSIONS = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>XType Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTYPE_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+	int XTYPE_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl <em>XInstance Of Expression</em>}' class.
@@ -1226,10 +1355,10 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXInstanceOfExpression()
 	 * @generated
 	 */
-	int XINSTANCE_OF_EXPRESSION = 23;
+	int XINSTANCE_OF_EXPRESSION = 26;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1263,7 +1392,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXThrowExpression()
 	 * @generated
 	 */
-	int XTHROW_EXPRESSION = 24;
+	int XTHROW_EXPRESSION = 27;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1291,7 +1420,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTryCatchFinallyExpression()
 	 * @generated
 	 */
-	int XTRY_CATCH_FINALLY_EXPRESSION = 25;
+	int XTRY_CATCH_FINALLY_EXPRESSION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1337,7 +1466,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCatchClause()
 	 * @generated
 	 */
-	int XCATCH_CLAUSE = 26;
+	int XCATCH_CLAUSE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1374,7 +1503,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
 	 * @generated
 	 */
-	int XASSIGNMENT = 27;
+	int XASSIGNMENT = 30;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -1449,13 +1578,22 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__VALUE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__EXPLICIT_STATIC = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>XAssignment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl <em>XReturn Expression</em>}' class.
@@ -1465,7 +1603,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXReturnExpression()
 	 * @generated
 	 */
-	int XRETURN_EXPRESSION = 28;
+	int XRETURN_EXPRESSION = 31;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1831,15 +1969,15 @@ public interface XbasePackage extends EPackage
 	EAttribute getXMemberFeatureCall_ExplicitOperationCall();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading <em>Spreading</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitStatic <em>Explicit Static</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Spreading</em>'.
-	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isSpreading()
+	 * @return the meta object for the attribute '<em>Explicit Static</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitStatic()
 	 * @see #getXMemberFeatureCall()
 	 * @generated
 	 */
-	EAttribute getXMemberFeatureCall_Spreading();
+	EAttribute getXMemberFeatureCall_ExplicitStatic();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isNullSafe <em>Null Safe</em>}'.
@@ -1851,6 +1989,39 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXMemberFeatureCall_NullSafe();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral <em>Type Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isTypeLiteral()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_TypeLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isStaticWithDeclaringType <em>Static With Declaring Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static With Declaring Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isStaticWithDeclaringType()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_StaticWithDeclaringType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isPackageFragment <em>Package Fragment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package Fragment</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isPackageFragment()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_PackageFragment();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
@@ -1885,15 +2056,26 @@ public interface XbasePackage extends EPackage
 	EAttribute getXFeatureCall_ExplicitOperationCall();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType <em>Declaring Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral <em>Type Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Declaring Type</em>'.
-	 * @see org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType()
+	 * @return the meta object for the attribute '<em>Type Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral()
 	 * @see #getXFeatureCall()
 	 * @generated
 	 */
-	EReference getXFeatureCall_DeclaringType();
+	EAttribute getXFeatureCall_TypeLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFeatureCall#isPackageFragment <em>Package Fragment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package Fragment</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#isPackageFragment()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXFeatureCall_PackageFragment();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
@@ -1992,25 +2174,25 @@ public interface XbasePackage extends EPackage
 	EClass getXNullLiteral();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XIntLiteral <em>XInt Literal</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XNumberLiteral <em>XNumber Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XInt Literal</em>'.
-	 * @see org.eclipse.xtext.xbase.XIntLiteral
+	 * @return the meta object for class '<em>XNumber Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XNumberLiteral
 	 * @generated
 	 */
-	EClass getXIntLiteral();
+	EClass getXNumberLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XIntLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XNumberLiteral#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.eclipse.xtext.xbase.XIntLiteral#getValue()
-	 * @see #getXIntLiteral()
+	 * @see org.eclipse.xtext.xbase.XNumberLiteral#getValue()
+	 * @see #getXNumberLiteral()
 	 * @generated
 	 */
-	EAttribute getXIntLiteral_Value();
+	EAttribute getXNumberLiteral_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XStringLiteral <em>XString Literal</em>}'.
@@ -2032,6 +2214,47 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXStringLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCollectionLiteral <em>XCollection Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XCollection Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XCollectionLiteral
+	 * @generated
+	 */
+	EClass getXCollectionLiteral();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XCollectionLiteral#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Elements</em>'.
+	 * @see org.eclipse.xtext.xbase.XCollectionLiteral#getElements()
+	 * @see #getXCollectionLiteral()
+	 * @generated
+	 */
+	EReference getXCollectionLiteral_Elements();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XListLiteral <em>XList Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XList Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XListLiteral
+	 * @generated
+	 */
+	EClass getXListLiteral();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XSetLiteral <em>XSet Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XSet Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XSetLiteral
+	 * @generated
+	 */
+	EClass getXSetLiteral();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XClosure <em>XClosure</em>}'.
@@ -2289,6 +2512,17 @@ public interface XbasePackage extends EPackage
 	EReference getXTypeLiteral_Type();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.xbase.XTypeLiteral#getArrayDimensions <em>Array Dimensions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Array Dimensions</em>'.
+	 * @see org.eclipse.xtext.xbase.XTypeLiteral#getArrayDimensions()
+	 * @see #getXTypeLiteral()
+	 * @generated
+	 */
+	EAttribute getXTypeLiteral_ArrayDimensions();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XInstanceOfExpression <em>XInstance Of Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2299,10 +2533,10 @@ public interface XbasePackage extends EPackage
 	EClass getXInstanceOfExpression();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XInstanceOfExpression#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XInstanceOfExpression#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @return the meta object for the containment reference '<em>Type</em>'.
 	 * @see org.eclipse.xtext.xbase.XInstanceOfExpression#getType()
 	 * @see #getXInstanceOfExpression()
 	 * @generated
@@ -2447,6 +2681,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXAssignment_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAssignment#isExplicitStatic <em>Explicit Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Explicit Static</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment#isExplicitStatic()
+	 * @see #getXAssignment()
+	 * @generated
+	 */
+	EAttribute getXAssignment_ExplicitStatic();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XReturnExpression <em>XReturn Expression</em>}'.
@@ -2765,12 +3010,12 @@ public interface XbasePackage extends EPackage
 		EAttribute XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL = eINSTANCE.getXMemberFeatureCall_ExplicitOperationCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Spreading</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Explicit Static</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute XMEMBER_FEATURE_CALL__SPREADING = eINSTANCE.getXMemberFeatureCall_Spreading();
+		EAttribute XMEMBER_FEATURE_CALL__EXPLICIT_STATIC = eINSTANCE.getXMemberFeatureCall_ExplicitStatic();
 
 		/**
 		 * The meta object literal for the '<em><b>Null Safe</b></em>' attribute feature.
@@ -2779,6 +3024,30 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XMEMBER_FEATURE_CALL__NULL_SAFE = eINSTANCE.getXMemberFeatureCall_NullSafe();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__TYPE_LITERAL = eINSTANCE.getXMemberFeatureCall_TypeLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Static With Declaring Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE = eINSTANCE.getXMemberFeatureCall_StaticWithDeclaringType();
+
+		/**
+		 * The meta object literal for the '<em><b>Package Fragment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT = eINSTANCE.getXMemberFeatureCall_PackageFragment();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
@@ -2807,12 +3076,20 @@ public interface XbasePackage extends EPackage
 		EAttribute XFEATURE_CALL__EXPLICIT_OPERATION_CALL = eINSTANCE.getXFeatureCall_ExplicitOperationCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Declaring Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type Literal</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XFEATURE_CALL__DECLARING_TYPE = eINSTANCE.getXFeatureCall_DeclaringType();
+		EAttribute XFEATURE_CALL__TYPE_LITERAL = eINSTANCE.getXFeatureCall_TypeLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Package Fragment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XFEATURE_CALL__PACKAGE_FRAGMENT = eINSTANCE.getXFeatureCall_PackageFragment();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -2893,14 +3170,14 @@ public interface XbasePackage extends EPackage
 		EClass XNULL_LITERAL = eINSTANCE.getXNullLiteral();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XIntLiteralImpl <em>XInt Literal</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XNumberLiteralImpl <em>XNumber Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.XIntLiteralImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIntLiteral()
+		 * @see org.eclipse.xtext.xbase.impl.XNumberLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXNumberLiteral()
 		 * @generated
 		 */
-		EClass XINT_LITERAL = eINSTANCE.getXIntLiteral();
+		EClass XNUMBER_LITERAL = eINSTANCE.getXNumberLiteral();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -2908,7 +3185,7 @@ public interface XbasePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute XINT_LITERAL__VALUE = eINSTANCE.getXIntLiteral_Value();
+		EAttribute XNUMBER_LITERAL__VALUE = eINSTANCE.getXNumberLiteral_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XStringLiteralImpl <em>XString Literal</em>}' class.
@@ -2927,6 +3204,44 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XSTRING_LITERAL__VALUE = eINSTANCE.getXStringLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCollectionLiteralImpl <em>XCollection Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XCollectionLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCollectionLiteral()
+		 * @generated
+		 */
+		EClass XCOLLECTION_LITERAL = eINSTANCE.getXCollectionLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCOLLECTION_LITERAL__ELEMENTS = eINSTANCE.getXCollectionLiteral_Elements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XListLiteralImpl <em>XList Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XListLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXListLiteral()
+		 * @generated
+		 */
+		EClass XLIST_LITERAL = eINSTANCE.getXListLiteral();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XSetLiteralImpl <em>XSet Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XSetLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSetLiteral()
+		 * @generated
+		 */
+		EClass XSET_LITERAL = eINSTANCE.getXSetLiteral();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XClosureImpl <em>XClosure</em>}' class.
@@ -3139,6 +3454,14 @@ public interface XbasePackage extends EPackage
 		EReference XTYPE_LITERAL__TYPE = eINSTANCE.getXTypeLiteral_Type();
 
 		/**
+		 * The meta object literal for the '<em><b>Array Dimensions</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTYPE_LITERAL__ARRAY_DIMENSIONS = eINSTANCE.getXTypeLiteral_ArrayDimensions();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl <em>XInstance Of Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3149,7 +3472,7 @@ public interface XbasePackage extends EPackage
 		EClass XINSTANCE_OF_EXPRESSION = eINSTANCE.getXInstanceOfExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3267,6 +3590,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XASSIGNMENT__VALUE = eINSTANCE.getXAssignment_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Explicit Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XASSIGNMENT__EXPLICIT_STATIC = eINSTANCE.getXAssignment_ExplicitStatic();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl <em>XReturn Expression</em>}' class.

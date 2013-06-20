@@ -10,8 +10,8 @@ package org.eclipse.xtext.builder.preferences;
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
@@ -31,14 +31,14 @@ public class BuilderPreferenceAccess {
 	public static final String PREF_AUTO_BUILDING = "autobuilding"; //$NON-NLS-1$
 
 	public static class Initializer implements IPreferenceStoreInitializer {
-		private OutputConfigurationProvider outputConfigurationProvider;
+		private IOutputConfigurationProvider outputConfigurationProvider;
 
-		public OutputConfigurationProvider getOutputConfigurationProvider() {
+		public IOutputConfigurationProvider getOutputConfigurationProvider() {
 			return outputConfigurationProvider;
 		}
 
 		@Inject
-		public void setOutputConfigurationProvider(OutputConfigurationProvider outputConfigurationProvider) {
+		public void setOutputConfigurationProvider(IOutputConfigurationProvider outputConfigurationProvider) {
 			this.outputConfigurationProvider = outputConfigurationProvider;
 		}
 
@@ -58,13 +58,12 @@ public class BuilderPreferenceAccess {
 				store.setDefault(getKey(configuration, OUTPUT_DESCRIPTION), configuration.getDescription());
 				store.setDefault(getKey(configuration, OUTPUT_DERIVED), configuration.isSetDerivedProperty());
 				store.setDefault(getKey(configuration, OUTPUT_DIRECTORY), configuration.getOutputDirectory());
-				store.setDefault(getKey(configuration, OUTPUT_CREATE_DIRECTORY),
-						configuration.isCreateOutputDirectory());
-				store.setDefault(getKey(configuration, OUTPUT_CLEAN_DIRECTORY),
-						configuration.isCanClearOutputDirectory());
+				store.setDefault(getKey(configuration, OUTPUT_CREATE_DIRECTORY), configuration.isCreateOutputDirectory());
+				store.setDefault(getKey(configuration, OUTPUT_CLEAN_DIRECTORY), configuration.isCanClearOutputDirectory());
 				store.setDefault(getKey(configuration, OUTPUT_OVERRIDE), configuration.isOverrideExistingResources());
-				store.setDefault(getKey(configuration, OUTPUT_CLEANUP_DERIVED),
-						configuration.isCleanUpDerivedResources());
+				store.setDefault(getKey(configuration, OUTPUT_CLEANUP_DERIVED), configuration.isCleanUpDerivedResources());
+				store.setDefault(getKey(configuration, INSTALL_DSL_AS_PRIMARY_SOURCE), configuration.isInstallDslAsPrimarySource());
+				store.setDefault(getKey(configuration, HIDE_LOCAL_SYNTHETIC_VARIABLES), configuration.isHideSyntheticLocalVariables());
 			}
 		}
 

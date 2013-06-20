@@ -12,19 +12,25 @@ import static java.util.Collections.*;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Support for linking assumptions
+ * @deprecated Query the XAbstractFeatureCall directly
  */
+@Deprecated
+@Singleton
 public class FeatureCallToJavaMapping {
 	
 	@Inject
@@ -38,11 +44,14 @@ public class FeatureCallToJavaMapping {
 	}
 	
 	public XExpression getActualReceiver(XAbstractFeatureCall call) {
+		if (call.eResource() instanceof BatchLinkableResource) {
+			return call.getActualReceiver();
+		}
 		return getActualReceiver(call, getFeature(call), getImplicitReceiver(call));
 	}
 
 	public XExpression getActualReceiver(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {
-		if (isStaticJavaFeature(feature)) {
+		if (isStaticJavaFeature(feature) || feature instanceof JvmConstructor) {
 			return null;
 		}
 		if (implicitReceiver!=null)
@@ -66,6 +75,9 @@ public class FeatureCallToJavaMapping {
 	}
 	
 	public List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
+		if (featureCall.eResource() instanceof BatchLinkableResource) {
+			return featureCall.getActualArguments();
+		}
 		return getActualArguments(
 				featureCall, 
 				getFeature(featureCall), 
@@ -78,7 +90,7 @@ public class FeatureCallToJavaMapping {
 			JvmIdentifiableElement feature, 
 			XExpression implicitReceiver, 
 			XExpression implicitFirstArgument) {
-		final List<? extends XExpression> explicitArguments = featureCall.getExplicitArguments();
+		final List<XExpression> explicitArguments = featureCall.getExplicitArguments();
 		if (isStaticJavaFeature(feature)) {
 			if (implicitReceiver == null || explicitArguments.contains(implicitReceiver))
 				return newArrayList(explicitArguments);
@@ -93,11 +105,19 @@ public class FeatureCallToJavaMapping {
 			}
 			return newArrayList(explicitArguments);
 		}
+		if (feature instanceof JvmConstructor) {
+			// this or super call in constructor - don't strip the receiver
+			return explicitArguments;
+		}
 		if (explicitArguments.size()<=1)
 			return emptyList();
 		return newArrayList(explicitArguments.subList(1, explicitArguments.size()));
 	}
 	
+	/**
+	 * @param featureCall may be used by inheritors  
+	 * @param implicitReceiver may be used by inheritors
+	 */
 	public boolean isTargetsMemberSyntaxCall(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {
 		return !isStaticJavaFeature(feature);
 	}

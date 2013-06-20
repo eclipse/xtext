@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.notification;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -23,50 +21,52 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RebuildDependentResourcesTest extends TestCase {
+public class RebuildDependentResourcesTest extends Assert {
 	
 	private static final String extension = ".typesAssistTest";
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		assertEquals(0, countResourcesInIndex());
 		createJavaProjectWithRootSrc("RebuildDependentResourcesTest");
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		root().getProject("RebuildDependentResourcesTest").delete(true, null);
 		waitForAutoBuild();
 		assertEquals(0, countResourcesInIndex());
-		super.tearDown();
 	}
 	
-	public void testValidJavaReference() throws Exception {
+	@Test public void testValidJavaReference() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default ExistingClass");
 		createFile("src/ExistingClass.java", "class ExistingClass {}");
 		waitForAutoBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
-	public void testMissingJavaReference() throws Exception {
+	@Test public void testMissingJavaReference() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default MissingClass");
 		waitForAutoBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 
-	public void testFixedJavaReference_01() throws Exception {
+	@Test public void testFixedJavaReference_01() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default WillBeCreated");
 		waitForAutoBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
@@ -75,7 +75,7 @@ public class RebuildDependentResourcesTest extends TestCase {
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
-	public void testFixedJavaReference_02() throws Exception {
+	@Test public void testFixedJavaReference_02() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default WillBeCreated");
 		IFile javaFile = createFile("src/WillBeCreated.java", "class WillBeCreate {}");
 		waitForAutoBuild();
@@ -85,7 +85,7 @@ public class RebuildDependentResourcesTest extends TestCase {
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
-	public void testFixedJavaReference_03() throws Exception {
+	@Test public void testFixedJavaReference_03() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default pack.WillBeDeleted");
 		waitForAutoBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
@@ -94,7 +94,7 @@ public class RebuildDependentResourcesTest extends TestCase {
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
-	public void testFixedJavaReference_04() throws Exception {
+	@Test public void testFixedJavaReference_04() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default pack.SomeFile$Nested");
 		waitForAutoBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
@@ -105,7 +105,7 @@ public class RebuildDependentResourcesTest extends TestCase {
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
-	public void testBrokenJavaReference_01() throws Exception {
+	@Test public void testBrokenJavaReference_01() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default WillBeDeleted");
 		IFile javaFile = createFile("src/WillBeDeleted.java", "class WillBeDeleted {}");
 		waitForAutoBuild();
@@ -115,7 +115,7 @@ public class RebuildDependentResourcesTest extends TestCase {
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	
-	public void testBrokenJavaReference_02() throws Exception {
+	@Test public void testBrokenJavaReference_02() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default pack.WillBeDeleted");
 		IFile javaFile = createFile("src/pack/WillBeDeleted.java", "package pack; class WillBeDeleted {}");
 		waitForAutoBuild();
@@ -125,8 +125,51 @@ public class RebuildDependentResourcesTest extends TestCase {
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	
+	public void testBrokenJavaReference_03() throws Exception {
+		IFile file = createFile("src/foo"+extension, "default WillBeDeleted");
+		IFile javaFile = createFile("src/WillBeDeleted.java", "class WillBeDeleted {}");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		javaFile.setContents(new StringInputStream(""), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+	}
+	
+	public void testBrokenJavaReference_04() throws Exception {
+		IFile file = createFile("src/foo"+extension, "default pack.WillBeDeleted");
+		IFile javaFile = createFile("src/pack/WillBeDeleted.java", "package pack; class WillBeDeleted {}");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		javaFile.setContents(new StringInputStream(""), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+	}
+	
+	public void testBrokenJavaReference_05() throws Exception {
+		IFile genFile = createFile("src/foo"+extension, "generate WillBeDeleted");
+		waitForAutoBuild();
+		IFile file = createFile("src/bar"+extension, "default WillBeDeleted");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		genFile.setContents(new StringInputStream(""), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+	}
+	
+	public void testBrokenJavaReference_06() throws Exception {
+		IFile genFile = createFile("src/foo"+extension, "generate pack.WillBeDeleted");
+		waitForAutoBuild();
+		IFile file = createFile("src/bar"+extension, "default pack.WillBeDeleted");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		genFile.setContents(new StringInputStream(""), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+	}
+	
 	private IJavaProject createJavaProjectWithRootSrc(String string) throws CoreException {
 		IJavaProject project = createJavaProject(string);
+		addSourceFolder(project, "src-gen");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		return project;
 	}

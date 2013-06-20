@@ -17,7 +17,10 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 /**
  * @author Sebastian Zarnekow
@@ -27,6 +30,8 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	private static final Logger log = Logger.getLogger(AbstractCleaningLinker.class);
 	
 	public void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
+		StoppedTask task = Stopwatches.forTask("installing proxies (AbstractCleaningLinker.linkModel)");
+		task.start();
 		boolean debug = log.isDebugEnabled();
 		long time = System.currentTimeMillis();
 		beforeModelLinked(model, diagnosticsConsumer);
@@ -47,6 +52,7 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 			log.debug("afterModelLinked took: " + (now - time) + "ms");
 			time = now;
 		}
+		task.stop();
 	}
 
 	protected void afterModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
@@ -83,11 +89,12 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	 * @return true, if the parent node could contain cross references to the same semantic element as the given node.
 	 */
 	protected boolean shouldCheckParentNode(INode node) {
-		if (node.getGrammarElement() instanceof AbstractElement) {
-			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
-			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-			if (assignment == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
-				return true;
+		EObject grammarElement = node.getGrammarElement();
+		if (grammarElement instanceof AbstractElement) {
+			ICompositeNode parent = node.getParent();
+			if (parent != null && !parent.hasDirectSemanticElement()) {
+				Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+				return assignment == null;
 			}
 		}
 		return false;

@@ -70,6 +70,11 @@ public abstract class AbstractIgnoreCaseImportsTestLanguageRuntimeModule extends
 	}
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.linking.services.IgnoreCaseImportsTestLanguageGrammarAccess.class;
 	}
@@ -81,12 +86,12 @@ public abstract class AbstractIgnoreCaseImportsTestLanguageRuntimeModule extends
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.linking.serializer.AbstractIgnoreCaseImportsTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.linking.serializer.IgnoreCaseImportsTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.linking.serializer.AbstractIgnoreCaseImportsTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.linking.serializer.IgnoreCaseImportsTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

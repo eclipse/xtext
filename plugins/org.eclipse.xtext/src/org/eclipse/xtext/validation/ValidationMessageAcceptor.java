@@ -28,7 +28,7 @@ public interface ValidationMessageAcceptor {
 	 * @param message the error message. May not be <code>null</code>.
 	 * @param object the object or the feature holder. May not be <code>null</code>.
 	 * @param feature the feature or <code>null</code> if the complete instance should be annotated.
-	 * @param the index of the erroneous value or <code>-1</code> if all values are considered to be invalid. The index is ignored if
+	 * @param index the index of the erroneous value or <code>-1</code> if all values are considered to be invalid. The index is ignored if
 	 *   the feature is null or the feature is a single value feature.
 	 * @param code the optional issue code.
 	 * @param issueData the optional issue data.
@@ -51,7 +51,7 @@ public interface ValidationMessageAcceptor {
 	 * @param message the warning message. May not be <code>null</code>.
 	 * @param object the object or the feature holder. May not be <code>null</code>.
 	 * @param feature the feature or <code>null</code> if the complete instance should be annotated.
-	 * @param the index of the relevant value or <code>-1</code> if all values are considered to be affected. The index is ignored if
+	 * @param index the index of the relevant value or <code>-1</code> if all values are considered to be affected. The index is ignored if
 	 *   the feature is null or the feature is a single value feature.
 	 * @param code the optional issue code.
 	 * @param issueData the optional issue data.
@@ -74,7 +74,7 @@ public interface ValidationMessageAcceptor {
 	 * @param message the info message. May not be <code>null</code>.
 	 * @param object the object or the feature holder. May not be <code>null</code>.
 	 * @param feature the feature or <code>null</code> if the complete instance should be annotated.
-	 * @param the index of the interesting value or <code>-1</code> if all values are considered to be interesting. The index is ignored if
+	 * @param index the index of the interesting value or <code>-1</code> if all values are considered to be interesting. The index is ignored if
 	 *   the feature is null or the feature is a single value feature.
 	 * @param code the optional issue code.
 	 * @param issueData the optional issue data.

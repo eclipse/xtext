@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.ImplementedBy;
@@ -24,8 +23,6 @@ import com.google.inject.ImplementedBy;
 public abstract class AbstractRenameProcessor extends RenameProcessor {
 
 	public abstract boolean initialize(IRenameElementContext renameElementContext);
-
-	public abstract IRenameStrategy getRenameElementStrategy();
 
 	public abstract String getOriginalName();
 

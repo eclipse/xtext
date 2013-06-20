@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.assignments.bug288432Test.impl;
 
@@ -33,7 +30,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
   {
     try
     {
-      Bug288432TestFactory theBug288432TestFactory = (Bug288432TestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/Bug288432Test"); 
+      Bug288432TestFactory theBug288432TestFactory = (Bug288432TestFactory)EPackage.Registry.INSTANCE.getEFactory(Bug288432TestPackage.eNS_URI);
       if (theBug288432TestFactory != null)
       {
         return theBug288432TestFactory;

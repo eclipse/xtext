@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl;
 
@@ -16,6 +13,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguageFactory;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage;
+import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.GenerateDirective;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Import;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Model;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ReferenceHolder;
@@ -41,6 +39,13 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * @generated
    */
   private EClass referenceHolderEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass generateDirectiveEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -140,9 +145,19 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_ReferenceHolder()
+  public EReference getModel_GenerateDirective()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_ReferenceHolder()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -183,6 +198,26 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
   public EReference getReferenceHolder_SubtypeReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGenerateDirective()
+  {
+    return generateDirectiveEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGenerateDirective_TypeName()
+  {
+    return (EAttribute)generateDirectiveEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -237,12 +272,16 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
     // Create classes and their features
     modelEClass = createEClass(MODEL);
     createEReference(modelEClass, MODEL__IMPORTS);
+    createEReference(modelEClass, MODEL__GENERATE_DIRECTIVE);
     createEReference(modelEClass, MODEL__REFERENCE_HOLDER);
 
     referenceHolderEClass = createEClass(REFERENCE_HOLDER);
     createEReference(referenceHolderEClass, REFERENCE_HOLDER__DEFAULT_REFERENCE);
     createEReference(referenceHolderEClass, REFERENCE_HOLDER__CUSTOMIZED_REFERENCE);
     createEReference(referenceHolderEClass, REFERENCE_HOLDER__SUBTYPE_REFERENCE);
+
+    generateDirectiveEClass = createEClass(GENERATE_DIRECTIVE);
+    createEAttribute(generateDirectiveEClass, GENERATE_DIRECTIVE__TYPE_NAME);
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
@@ -284,12 +323,16 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getModel_Imports(), this.getImport(), null, "imports", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_GenerateDirective(), this.getGenerateDirective(), null, "generateDirective", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_ReferenceHolder(), this.getReferenceHolder(), null, "referenceHolder", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(referenceHolderEClass, ReferenceHolder.class, "ReferenceHolder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReferenceHolder_DefaultReference(), theTypesPackage.getJvmType(), null, "defaultReference", null, 0, 1, ReferenceHolder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getReferenceHolder_CustomizedReference(), theTypesPackage.getJvmType(), null, "customizedReference", null, 0, 1, ReferenceHolder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getReferenceHolder_SubtypeReference(), theTypesPackage.getJvmType(), null, "subtypeReference", null, 0, 1, ReferenceHolder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(generateDirectiveEClass, GenerateDirective.class, "GenerateDirective", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getGenerateDirective_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, GenerateDirective.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types;
 
@@ -23,7 +25,7 @@ package org.eclipse.xtext.common.types;
  * @model
  * @generated
  */
-public interface JvmFormalParameter extends JvmIdentifiableElement, JvmAnnotationTarget
+public interface JvmFormalParameter extends JvmAnnotationTarget
 {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -62,7 +64,7 @@ public interface JvmFormalParameter extends JvmIdentifiableElement, JvmAnnotatio
 	 * @return the value of the '<em>Parameter Type</em>' containment reference.
 	 * @see #setParameterType(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmFormalParameter_ParameterType()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getParameterType();

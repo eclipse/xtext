@@ -181,53 +181,58 @@ public abstract class EClassifierInfo {
 				StringBuilder errorMessage) {
 			EStructuralFeature assignedExistingFeature = getEClass().getEStructuralFeature(name);
 			if (assignedExistingFeature != null) {
-				boolean many = assignedExistingFeature.isMany();
-				if (many == isMulti) {
-					if (expectedType instanceof EClass && assignedExistingFeature.getEType() instanceof EClass) {
-						EClass castedExpectedType = (EClass) expectedType;
-						EClass castedExistingType = (EClass) assignedExistingFeature.getEType();
-						boolean result = isAssignableFrom(castedExistingType, castedExpectedType);
-						if (!result) {
-							// TODO check for same name / nsURI pair but different resource uris
-							errorMessage.append("The existing reference '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
-									"The expected type is " + classifierToString(castedExpectedType) + ".");
-							return result;
-						}
-						result &= isContainment == ((EReference) assignedExistingFeature).isContainment();
-						if (!result) {
-							if (isContainment)
-								errorMessage.append("The existing reference '" + name + "' is not a containment reference.");
-							else
-								errorMessage.append("The existing reference '" + name + "' is a containment reference.");
-							return result;
-						}
-						result &= !((EReference) assignedExistingFeature).isContainer();
-						if (!result) {
-							errorMessage.append("The existing reference '" + name + "' is a container reference.");
-							return result;
-						}
-						return result;
-					} else if (expectedType instanceof EDataType && assignedExistingFeature.getEType() instanceof EDataType) {
-						EDataType castedExpectedType = (EDataType) expectedType;
-						EDataType castedExistingType = (EDataType) assignedExistingFeature.getEType();
-						Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(castedExpectedType.getInstanceClass());
-						Class<?> existingInstanceClass = ReflectionUtil.getObjectType(castedExistingType.getInstanceClass());
-						boolean result = castedExistingType.equals(castedExpectedType) || expectedInstanceClass != null && existingInstanceClass != null
-								&& existingInstanceClass.isAssignableFrom(expectedInstanceClass);
-						if (!result) {
-							errorMessage.append("The existing attribute '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
-									"The expected type is " + classifierToString(castedExpectedType) + ".");
-						}
-						return result;
-					} else {
-						String msgPart = " has no type.";
-						if (assignedExistingFeature.getEType() != null)
-							msgPart = " has an incompatible type " + classifierToString(assignedExistingFeature.getEType())+ ". " +
-									"The expected type is " + classifierToString(expectedType) + ".";
-						errorMessage.append("The existing feature '" + name + "'" + msgPart);
-					}
+				if (!assignedExistingFeature.isChangeable()) {
+					errorMessage.append("The existing feature '" + name + "' is not changeable.");
+					return false;
 				} else {
-					errorMessage.append("The existing feature '" + name + "' has a different cardinality.");
+					boolean many = assignedExistingFeature.isMany();
+					if (many == isMulti) {
+						if (expectedType instanceof EClass && assignedExistingFeature.getEType() instanceof EClass) {
+							EClass castedExpectedType = (EClass) expectedType;
+							EClass castedExistingType = (EClass) assignedExistingFeature.getEType();
+							boolean result = isAssignableFrom(castedExistingType, castedExpectedType);
+							if (!result) {
+								// TODO check for same name / nsURI pair but different resource uris
+								errorMessage.append("The existing reference '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
+										"The expected type is " + classifierToString(castedExpectedType) + ".");
+								return result;
+							}
+							result &= isContainment == ((EReference) assignedExistingFeature).isContainment();
+							if (!result) {
+								if (isContainment)
+									errorMessage.append("The existing reference '" + name + "' is not a containment reference.");
+								else
+									errorMessage.append("The existing reference '" + name + "' is a containment reference.");
+								return result;
+							}
+							result &= !((EReference) assignedExistingFeature).isContainer();
+							if (!result) {
+								errorMessage.append("The existing reference '" + name + "' is a container reference.");
+								return result;
+							}
+							return result;
+						} else if (expectedType instanceof EDataType && assignedExistingFeature.getEType() instanceof EDataType) {
+							EDataType castedExpectedType = (EDataType) expectedType;
+							EDataType castedExistingType = (EDataType) assignedExistingFeature.getEType();
+							Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(castedExpectedType.getInstanceClass());
+							Class<?> existingInstanceClass = ReflectionUtil.getObjectType(castedExistingType.getInstanceClass());
+							boolean result = castedExistingType.equals(castedExpectedType) || expectedInstanceClass != null && existingInstanceClass != null
+									&& existingInstanceClass.isAssignableFrom(expectedInstanceClass);
+							if (!result) {
+								errorMessage.append("The existing attribute '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
+										"The expected type is " + classifierToString(castedExpectedType) + ".");
+							}
+							return result;
+						} else {
+							String msgPart = " has no type.";
+							if (assignedExistingFeature.getEType() != null)
+								msgPart = " has an incompatible type " + classifierToString(assignedExistingFeature.getEType())+ ". " +
+										"The expected type is " + classifierToString(expectedType) + ".";
+							errorMessage.append("The existing feature '" + name + "'" + msgPart);
+						}
+					} else {	
+						errorMessage.append("The existing feature '" + name + "' has a different cardinality.");
+					}
 				}
 			} else {
 				errorMessage.append("The type '" + getEClass().getName() + "' does not have a feature '" + name + "'.");
@@ -258,8 +263,9 @@ public abstract class EClassifierInfo {
 				result &= f1Type.isSuperTypeOf(f2Type);
 				result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
 				result &= ((EReference) f1).isContainer() == ((EReference) f2).isContainer();
-			} else
-				result &= f1.getEType().equals(f2.getEType());
+			} else {
+				result &= f1.getEType().equals(EcoreUtil2.getCompatibleType(f1.getEType(), f2.getEType()));
+			}
 			return result;
 		}
 
@@ -337,7 +343,7 @@ public abstract class EClassifierInfo {
 			EClassifier compatibleType = EcoreUtil2.getCompatibleType(existingFeature.getEType(), newFeature.getEType(), grammarElement);
 			if (compatibleType == null)
 				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
-						"Cannot find compatible type for features", grammarElement);
+						"Cannot find compatible type for the feature '" + existingFeature.getName() + "'", grammarElement);
 			
 			if (isGenerated(existingFeature)) {
 				existingFeature.setEType(compatibleType);

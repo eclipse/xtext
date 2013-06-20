@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -108,7 +109,7 @@ public class CompositeEValidator implements EValidator {
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
-				result = result && val.getDelegate().validate(eObject, diagnostics, context);
+				result &= val.getDelegate().validate(eObject, diagnostics, context);
 			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
@@ -123,7 +124,7 @@ public class CompositeEValidator implements EValidator {
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
-				result = result && val.getDelegate().validate(eClass, eObject, diagnostics, context);
+				result &= val.getDelegate().validate(eClass, eObject, diagnostics, context);
 			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
@@ -138,7 +139,7 @@ public class CompositeEValidator implements EValidator {
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
-				result = result && val.getDelegate().validate(eDataType, value, diagnostics, context);
+				result &= val.getDelegate().validate(eDataType, value, diagnostics, context);
 			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
@@ -177,4 +178,20 @@ public class CompositeEValidator implements EValidator {
 		return equalitySupportProvider;
 	}
 
+	/**
+	 * For testing purpose.
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @since 2.4
+	 */
+	public CompositeEValidator getCopyAndClearContents() {
+		CompositeEValidator result = new CompositeEValidator();
+		result.equalitySupportProvider = this.equalitySupportProvider;
+		result.useEObjectValidator = this.useEObjectValidator;
+		if (this.contents != null) {
+			result.contents = Lists.newArrayList(this.contents);
+			this.contents = null;
+		}
+		return result;
+	}
 }

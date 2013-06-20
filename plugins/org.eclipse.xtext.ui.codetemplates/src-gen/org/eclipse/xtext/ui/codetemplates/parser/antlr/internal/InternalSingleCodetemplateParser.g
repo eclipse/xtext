@@ -562,21 +562,32 @@ ruleVariable returns [EObject current=null]
     { 
     newLeafNode(this_WS_8, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_0()); 
     }
-)*
-	otherlv_9=KEYWORD_2
+)*(
+(
+		lv_expectingParameters_9_0=
+	KEYWORD_2
     {
-    	newLeafNode(otherlv_9, grammarAccess.getVariableAccess().getLeftParenthesisKeyword_2_1_4_1());
+        newLeafNode(lv_expectingParameters_9_0, grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0());
     }
-(this_WS_10=RULE_WS
+
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getVariableRule());
+	        }
+       		setWithLastConsumed($current, "expectingParameters", true, "(");
+	    }
+
+)
+)(this_WS_10=RULE_WS
     { 
     newLeafNode(this_WS_10, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_2()); 
     }
-)*(
+)*((
 (
 (
 		lv_parameters_11_1=RULE_STRING
 		{
-			newLeafNode(lv_parameters_11_1, grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0()); 
+			newLeafNode(lv_parameters_11_1, grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -590,7 +601,7 @@ ruleVariable returns [EObject current=null]
 	    }
 
     |		{ 
-	        newCompositeNode(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_0_1()); 
+	        newCompositeNode(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_0_0_1()); 
 	    }
 		lv_parameters_11_2=ruleFQN		{
 	        if ($current==null) {
@@ -609,23 +620,23 @@ ruleVariable returns [EObject current=null]
 )
 )((this_WS_12=RULE_WS
     { 
-    newLeafNode(this_WS_12, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_4_0()); 
+    newLeafNode(this_WS_12, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_1_0()); 
     }
 )*
 	otherlv_13=KEYWORD_4
     {
-    	newLeafNode(otherlv_13, grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_4_1());
+    	newLeafNode(otherlv_13, grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_3_1_1());
     }
 (this_WS_14=RULE_WS
     { 
-    newLeafNode(this_WS_14, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_4_2()); 
+    newLeafNode(this_WS_14, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_1_2()); 
     }
 )*(
 (
 (
 		lv_parameters_15_1=RULE_STRING
 		{
-			newLeafNode(lv_parameters_15_1, grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_4_3_0_0()); 
+			newLeafNode(lv_parameters_15_1, grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_1_3_0_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -639,7 +650,7 @@ ruleVariable returns [EObject current=null]
 	    }
 
     |		{ 
-	        newCompositeNode(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_4_3_0_1()); 
+	        newCompositeNode(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_1_3_0_1()); 
 	    }
 		lv_parameters_15_2=ruleFQN		{
 	        if ($current==null) {
@@ -658,12 +669,12 @@ ruleVariable returns [EObject current=null]
 )
 ))*(this_WS_16=RULE_WS
     { 
-    newLeafNode(this_WS_16, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_5()); 
+    newLeafNode(this_WS_16, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_2()); 
     }
-)*
+)*)?
 	otherlv_17=KEYWORD_3
     {
-    	newLeafNode(otherlv_17, grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_6());
+    	newLeafNode(otherlv_17, grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_4());
     }
 )?))(this_WS_18=RULE_WS
     { 

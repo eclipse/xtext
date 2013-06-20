@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.compare;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.compare.IResourceProvider;
 import org.eclipse.compare.ITypedElement;
 import org.eclipse.compare.structuremergeviewer.ICompareInput;
@@ -22,7 +25,8 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.util.Strings;
 
-import com.google.inject.internal.Lists;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -53,7 +57,6 @@ public class CompareInputResourceProvider implements IResourceProvider {
 		return resource;
 	}
 
-	@SuppressWarnings("restriction")
 	protected IResource getResource(ITypedElement typedElement) {
 		IResource result = null;
 		if (typedElement instanceof IResourceProvider) {
@@ -65,17 +68,29 @@ public class CompareInputResourceProvider implements IResourceProvider {
 			result = getExistingFile(bufferedStorage != null ? bufferedStorage.getFullPath() : Path.EMPTY);
 		}
 		if (result == null) {
-			String[] path = getPath(typedElement, 0);
-			for (int i = 0; i < path.length && result == null; i++) {
-				IProject project = getWorkspaceRoot().getProject(path[i]);
+			IProject projectFromInput = getProjectFromInput();
+			List<String> path = getPath(typedElement);
+			for (int i = 0; i < path.size() && result == null; i++) {
+				IProject project = getWorkspaceRoot().getProject(path.get(i));
+				String subPath = IPath.SEPARATOR + Joiner.on(IPath.SEPARATOR).join(path.subList(i, path.size()));
 				if (project.exists()) {
-					String concatenatedPath = Strings.concat(String.valueOf(IPath.SEPARATOR), Lists.newArrayList(path)
-							.subList(i, path.length));
-					result = getExistingFile(new Path(concatenatedPath));
+					result = getExistingFile(new Path(subPath));
+				} else if (projectFromInput != null) {
+					String pathInProject = IPath.SEPARATOR + projectFromInput.getName() + subPath;
+					result = getExistingFile(new Path(pathInProject));
 				}
 			}
 		}
 		return result;
+	}
+	
+	private IProject getProjectFromInput() {
+		if(this.compareInput instanceof IResourceProvider) {
+			IResource res = ((IResourceProvider)this.compareInput).getResource();
+			if(res != null)
+				return res.getProject();
+		}
+		return null;
 	}
 
 	private IResource getExistingFile(IPath fullPath) {
@@ -89,20 +104,21 @@ public class CompareInputResourceProvider implements IResourceProvider {
 	private IWorkspaceRoot getWorkspaceRoot() {
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
-
-	private String[] getPath(ITypedElement typedElement, int level) {
-		String[] path = null;
-		if (typedElement instanceof IDiffContainer) {
-			IDiffContainer parent = ((IDiffContainer) typedElement).getParent();
-			if (parent != null) {
-				path = getPath(parent, level + 1);
-			}
+	
+	private List<String> getPath(ITypedElement typedElement) {
+		List<String> names = Lists.newArrayList(typedElement.getName());
+		ITypedElement current = typedElement;
+		while (current instanceof IDiffContainer) {
+			names.add(current.getName());
+			current = ((IDiffContainer) current).getParent();
 		}
-		if (path == null) {
-			path = new String[level + 1];
-		}
-		path[(path.length - 1) - level] = typedElement.getName();
-		return path;
+		Collections.reverse(names);
+		List<String> segments = Lists.newArrayList();
+		for (String name : names)
+			if (!Strings.isEmpty(name))
+				for (String seg : name.split("/"))
+					segments.add(seg);
+		return segments;
 	}
 
 }

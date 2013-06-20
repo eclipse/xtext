@@ -22,18 +22,16 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xpand2.XpandExecutionContextImpl;
-import org.eclipse.xpand2.XpandFacade;
-import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xtext.ui.OutputStringImpl;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
+import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -49,27 +47,27 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 			"http://simple/formattertestlanguage", "http://www.w3.org/XML/1998/namespace" });
 
 	private static final List<String> BROKEN_PACKAGE_NS_URIS = Arrays
-			.asList(new String[] { "http://www.eclipse.org/ocl/1.1.0/Ecore" });
+			.asList(new String[] { "http://www.eclipse.org/ocl/1.1.0/Ecore",
+			"http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" /* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=395457 */});
 
 	private static final List<String> WARNING_PACKAGE_NS_URIS = Arrays
 			.asList(new String[] { "http://www.eclipse.org/OCL2/1.0.0/ocl/uml" });
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		XtextStandaloneSetup.doSetup();
+		with(XtextStandaloneSetup.class);
 	}
 
+	@Test
 	public void testExampleEPackages() throws IOException {
 		checkGeneratedGrammarIsValid(EXAMPLE_EPACKAGE_NS_URIS);
 	}
 
-	/*
-	// Smoke test 
+	@Test
 	public void testAllEPackagesFromRegistry() throws IOException {
 		checkGeneratedGrammarIsValid(Lists.newArrayList(EPackage.Registry.INSTANCE.keySet()));
 	}
-	*/
 
 	private void checkGeneratedGrammarIsValid(List<String> ePackageURIs) throws IOException {
 		for (String nsURI : ePackageURIs) {
@@ -80,7 +78,6 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 			if (!addImportedEPackages(ePackage, ePackages)) {
 				System.out.println("...skipping");
 			} else {
-				OutputStringImpl output = new OutputStringImpl();
 				List<EPackageInfo> ePackageInfos = Lists.newArrayList(Iterables.transform(ePackages,
 						new Function<EPackage, EPackageInfo>() {
 							public EPackageInfo apply(EPackage from) {
@@ -90,13 +87,9 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 				xtextProjectInfo.setEPackageInfos(ePackageInfos);
 				String languageName = "org.eclipse.xtext.xtext.ui.tests." + ePackage.getName();
 				xtextProjectInfo.setLanguageName(languageName);
-				XpandExecutionContextImpl executionContext = new XpandExecutionContextImpl(output, null);
-				executionContext.registerMetaModel(new JavaBeansMetaModel());
-				XpandFacade xpandFacade = XpandFacade.create(executionContext);
-				xpandFacade.evaluate2("org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext::grammar",
-						xtextProjectInfo, null);
+
 				String grammarFileName = languageName.replaceAll("\\.", "/") + ".xtext";
-				String xtextGrammar = output.getContent(grammarFileName);
+				String xtextGrammar = createGrammar(xtextProjectInfo).toString();
 				ResourceSet resourceSet = new XtextResourceSet();
 				Resource xtextResource = resourceSet.createResource(URI.createFileURI(grammarFileName));
 				xtextResource.load(new StringInputStream(xtextGrammar), null);
@@ -107,6 +100,10 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 				System.out.println(" ...OK");
 			}
 		}
+	}
+
+	private CharSequence createGrammar(Ecore2XtextProjectInfo xtextProjectInfo) {
+		return new Ecore2XtextGrammarCreator().grammar(xtextProjectInfo);
 	}
 
 	private void checkErrors(EPackage ePackage, Resource xtextResource, String xtextGrammar) {

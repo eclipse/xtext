@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.example.tutorial/src-gen" editDirectory="/org.eclipse.xtext.example.tutorial.edit/src"
+    editorDirectory="/org.eclipse.xtext.example.tutorial.editor/src" modelPluginID="org.eclipse.xtext.example.tutorial"
+    forceOverwrite="true" modelName="Tutorial" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.tutorial.edit"
+    editorPluginID="org.eclipse.xtext.example.tutorial.editor" runtimeVersion="2.9"
+    usedGenPackages="../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+  <genPackages prefix="Tutorial" basePackage="org.eclipse.xtext.example.tutorial"
+      disposableProviderFactory="true" ecorePackage="Tutorial.ecore#/">
+    <genClasses ecoreClass="Tutorial.ecore#//DomainModelFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tutorial.ecore#//DomainModelFile/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tutorial.ecore#//DomainModelFile/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tutorial.ecore#//DomainModelFile/entities"/>
+    </genClasses>
+    <genClasses ecoreClass="Tutorial.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tutorial.ecore#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="Tutorial.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tutorial.ecore#//Entity/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tutorial.ecore#//Entity/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tutorial.ecore#//Entity/features"/>
+    </genClasses>
+    <genClasses ecoreClass="Tutorial.ecore#//Property">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tutorial.ecore#//Property/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tutorial.ecore#//Property/type"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

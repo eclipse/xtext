@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.lexer.ignoreCaseTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class IgnoreCaseTestLanguageFactoryImpl extends EFactoryImpl implements I
   {
     try
     {
-      IgnoreCaseTestLanguageFactory theIgnoreCaseTestLanguageFactory = (IgnoreCaseTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/IgnoreCaseLexerTest"); 
+      IgnoreCaseTestLanguageFactory theIgnoreCaseTestLanguageFactory = (IgnoreCaseTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(IgnoreCaseTestLanguagePackage.eNS_URI);
       if (theIgnoreCaseTestLanguageFactory != null)
       {
         return theIgnoreCaseTestLanguageFactory;

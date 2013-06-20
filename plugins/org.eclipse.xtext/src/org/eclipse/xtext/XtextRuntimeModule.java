@@ -17,13 +17,18 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
+import org.eclipse.xtext.xtext.GrammarResource;
 import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
 import org.eclipse.xtext.xtext.XtextDiagnosticConverter;
 import org.eclipse.xtext.xtext.XtextFormatter;
@@ -132,4 +137,22 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 		return DefaultGlobalScopeProvider.class;
 	}
 	
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return GrammarResource.class;
+	}
+	
+	/**
+	 * @since 2.2
+	 */
+	public Class<? extends IDerivedStateComputer> bindIDerivedStateComputer() {
+		return GrammarResource.LinkingTrigger.class;
+	}
+	
+	/**
+	 * @since 2.2
+	 */
+	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
+		return DerivedStateAwareResourceDescriptionManager.class;
+	}
 }

@@ -15,7 +15,6 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.internal.Activator;
@@ -32,23 +31,35 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 
 	public IPreferenceStore getPreferenceStore() {
 		lazyInitialize();
+		Activator activator = Activator.getDefault();
+		if (activator != null)
+			return new ChainedPreferenceStore(new IPreferenceStore[] {
+					getWritablePreferenceStore(),
+					activator.getPreferenceStore(), 
+					EditorsUI.getPreferenceStore() });
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 				getWritablePreferenceStore(),
-				Activator.getDefault().getPreferenceStore(), 
 				EditorsUI.getPreferenceStore() });
 	}
 
 	public IPreferenceStore getContextPreferenceStore(Object context) {
 		lazyInitialize();
+		// may be null on shutdown
+		Activator activator = Activator.getDefault();
+		if (activator != null)
+			return new ChainedPreferenceStore(new IPreferenceStore[] { 
+					getWritablePreferenceStore(context),
+					activator.getPreferenceStore(),
+					EditorsUI.getPreferenceStore()});
 		return new ChainedPreferenceStore(new IPreferenceStore[] { 
 				getWritablePreferenceStore(context),
-				Activator.getDefault().getPreferenceStore(),
 				EditorsUI.getPreferenceStore()});
 	}
 
+	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore() {
 		lazyInitialize();
-		ScopedPreferenceStore result = new ScopedPreferenceStore(new InstanceScope(), getQualifier());
+		FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(new InstanceScope(), getQualifier());
 		result.setSearchContexts(new IScopeContext[] {
 			new InstanceScope(),
 			new ConfigurationScope()
@@ -56,6 +67,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 		return result;
 	}
 
+	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore(Object context) {
 		lazyInitialize();
 		if (context instanceof IFileEditorInput) {
@@ -63,7 +75,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 		}
 		if (context instanceof IProject) {
 			ProjectScope projectScope = new ProjectScope((IProject) context);
-			ScopedPreferenceStore result = new ScopedPreferenceStore(projectScope, getQualifier());
+			FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(projectScope, getQualifier());
 			result.setSearchContexts(new IScopeContext[] {
 				projectScope,
 				new InstanceScope(),

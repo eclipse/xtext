@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.editor;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +32,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
@@ -46,8 +45,8 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 
@@ -120,8 +119,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 					if (resource == null || resource.getResourceSet() == null)
 						return null;
 					Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());
-					if (monitor.isCanceled())
-						return Collections.emptySet();
+					if (monitor.isCanceled() || !affectedResources.isEmpty())
+						return affectedResources;
 					isReparseRequired[0] = isReparseRequired(resource, event.getFirst());
 					return affectedResources;
 				}
@@ -203,7 +202,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	 * resources which would otherwise cause unexpected conflicts
 	 * (see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=340561">bug 340561</a>).
 	 */
-	private class ClientAwareDirtyResource implements IDirtyResource {
+	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension {
 
 		public String getContents() {
 			return dirtyResource.getContents();
@@ -227,6 +226,10 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		
 		private void discardThisResource() {
 			markEditorClean(currentClient);
+		}
+
+		public URI getNormalizedURI() {
+			return dirtyResource.getNormalizedURI();
 		}
 		
 	}
@@ -258,7 +261,10 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	
 	@Inject(optional=true)
 	private IValidationJobScheduler validationJobScheduler;
-	
+
+	@Inject
+	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+
 	private volatile IDirtyStateEditorSupportClient currentClient;
 	
 	private volatile boolean isDirty;
@@ -391,8 +397,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			return;
 		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && currentClient.isDirty() && dirtyStateManager.manageDirtyState(delegatingClientAwareResource))) {
 			synchronized (dirtyStateManager) {
-				final IResourceDescription newDescription = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
-				if (haveEObjectDescriptionsChanged(newDescription)) {
+				IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
+				final IResourceDescription newDescription = resourceDescriptionManager.getResourceDescription(resource);
+				if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
 					dirtyResource.copyState(newDescription);
 					dirtyStateManager.announceDirtyStateChanged(delegatingClientAwareResource);
 				}
@@ -400,10 +407,22 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		}
 	}
 
+	/**
+	 * @deprecated Use {@link #haveEObjectDescriptionsChanged(IResourceDescription, org.eclipse.xtext.resource.IResourceDescription.Manager)}.
+	 */
+	@Deprecated
 	public boolean haveEObjectDescriptionsChanged(final IResourceDescription newDescription) {
-		return new DefaultResourceDescriptionDelta(dirtyResource.getDescription(), newDescription).haveEObjectDescriptionsChanged();
+		IResourceDescription.Manager resourceDescriptionManager = resourceServiceProviderRegistry.getResourceServiceProvider(newDescription.getURI()).getResourceDescriptionManager();
+		return haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager);
 	}
-	
+
+	/**
+	 * @since 2.3
+	 */
+	public boolean haveEObjectDescriptionsChanged(final IResourceDescription newDescription, IResourceDescription.Manager resourceDescriptionManager) {
+		return resourceDescriptionManager.createDelta(dirtyResource.getDescription(), newDescription).haveEObjectDescriptionsChanged();
+	}
+
 	protected Collection<Resource> collectAffectedResources(XtextResource resource, IResourceDescription.Event event) {
 		List<Resource> result = Lists.newArrayListWithExpectedSize(4);
 		ResourceSet resourceSet = resource.getResourceSet();
@@ -432,10 +451,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	protected boolean isReparseRequired(XtextResource resource, IResourceDescription.Event event) {
 		IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
 		IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
-		for(IResourceDescription.Delta delta: event.getDeltas()) {
-			if (resourceDescriptionManager.isAffected(delta, description)) {
-				return true;
-			}
+		if (resourceDescriptionManager.isAffected(event.getDeltas(), description, resourceDescriptions)) {
+			return true;
 		}
 		if (!isDirty() && !dirtyStateManager.hasContent(resource.getURI())) {
 			IResourceDescription originalDescription = resourceDescriptions.getResourceDescription(resource.getURI());

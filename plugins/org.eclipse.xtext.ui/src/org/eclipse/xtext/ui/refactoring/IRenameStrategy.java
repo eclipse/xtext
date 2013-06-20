@@ -43,7 +43,23 @@ public interface IRenameStrategy {
 
 	@ImplementedBy(DefaultRenameStrategyProvider.class)
 	interface Provider {
-		IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext);
-	}
+		/**
+		 * @return an {@link IRenameStrategy} to rename the given target object 
+		 * 	or null if the element should be skipped (e.g. XtendConstructor)
+		 * @throw {@link NoSuchStrategyException} with a reason when refactoring is forbidden. 
+		 */
+		IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException;
+		
+		/**
+		 * @since 2.4
+		 */
+		class NoSuchStrategyException extends Exception {
+			private static final long serialVersionUID = 5167954119728880001L;
 
+			public NoSuchStrategyException(String message) {
+				super(message);
+			}
+		}
+	}
+	
 }

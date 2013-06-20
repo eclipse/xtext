@@ -10,14 +10,15 @@ package org.eclipse.xtext.resource;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.validation.IResourceValidator;
 
+import com.google.common.annotations.Beta;
 import com.google.inject.ImplementedBy;
 import com.google.inject.ProvidedBy;
-import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -95,10 +96,34 @@ public interface IResourceServiceProvider {
 
 		Map<String, Object> getProtocolToFactoryMap();
 		
-		public static class RegistryProvider implements Provider<Registry> {
+		public static class RegistryProvider implements com.google.inject.Provider<Registry> {
 			public Registry get() {
 				return INSTANCE;
 			}
 		}
+	}
+	
+	/**
+	 * Instances of this interface can be registered in the {@link IResourceServiceProvider.Registry} or via the
+	 * corresponding extension points.
+	 * 
+	 * Please don't use this interface as it is not guaranteed that clients of the Registry request a new
+	 * ResourceServiceProvider for every URI.
+	 * 
+	 * @since 2.4
+	 * @noextend This interface is not intended to be extended by clients.
+	 * @noimplement This interface is not intended to be implemented by clients.
+	 */
+	@Beta
+	interface Provider {
+		/**
+		 * @param uri
+		 *            The uri that the returned ResourceServiceProvider will be responsible for.
+		 * @param contentType
+		 *            A contentType if one is available, null otherwise.
+		 * 
+		 * @return a new or an existing ResourceServiceProvider
+		 */
+		IResourceServiceProvider get(URI uri, String contentType);
 	}
 }

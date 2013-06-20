@@ -13,8 +13,6 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl;
@@ -26,6 +24,9 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.EmfStructureComparator;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
@@ -36,14 +37,14 @@ import com.google.inject.util.Modules;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractEMFBasedPersisterTest extends TestCase {
+public class AbstractEMFBasedPersisterTest extends Assert {
 
 	protected EMFBasedPersister persister;
 	private File tempFile;
 	private List<IResourceDescription> descriptions;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		tempFile = File.createTempFile("foo", "bar");
 		SharedStateModule module = new SharedStateModule();
 		Module m = Modules.override(module).with(new AbstractModule() {
@@ -64,13 +65,13 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 		);
 	}
 	
-	public void testSaveAndReload() throws Exception {
+	@Test public void testSaveAndReload() throws Exception {
 		persister.save(descriptions);
 		List<IResourceDescription> loaded = Lists.newArrayList(persister.load());
 		checkEquals(loaded);
 	}
 	
-	public void testResourceReleased() throws Exception {
+	@Test public void testResourceReleased() throws Exception {
 		persister.save(descriptions);
 		List<IResourceDescription> loaded = Lists.newArrayList(persister.load());
 		for(IResourceDescription description: loaded) {
@@ -79,7 +80,7 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 	}
 	
 	// this test will fail for binary resources ... :-(
-	public void testSaveAndReloadTwice() throws Exception {
+	@Test public void testSaveAndReloadTwice() throws Exception {
 		persister.save(descriptions);
 		List<IResourceDescription> loaded = Lists.newArrayList(persister.load());
 		tempFile.delete();
@@ -122,7 +123,7 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 	public IReferenceDescription createReferenceDescription(int idx) {
 		ReferenceDescriptionImpl result = (ReferenceDescriptionImpl) BuilderStateFactory.eINSTANCE.createReferenceDescription();
 		result.setIndexInList(idx);
-		result.setReference(BuilderStatePackage.eINSTANCE.getEObjectDescription_ResourceDescriptor());
+		result.setReference(BuilderStatePackage.eINSTANCE.getIEObjectDescription_EClass());
 		result.setSourceEObjectUri(URI.createFileURI(idx + "source.uri"));
 		result.setSourceEObjectUri(URI.createFileURI(idx + "target.uri"));
 		return result;
@@ -135,7 +136,7 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=321536
 	 */
-	public void testBug321536() throws Exception {
+	@Test public void testBug321536() throws Exception {
 		ResourceDescriptionImpl result = (ResourceDescriptionImpl) BuilderStateFactory.eINSTANCE.createResourceDescription();
 		URI uri = URI.createURI("copy of model.uri",true);
 		result.setURI(uri);
@@ -145,7 +146,7 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 		assertEquals(uri,uriAfterSave);
 	}
 	
-	public void testReferencesArePersisted() {
+	@Test public void testReferencesArePersisted() {
 		IResourceDescription resourceDescription = createResourceDescription(0);
 		persister.save(singleton(resourceDescription));
 		IResourceDescription loaded = persister.load().iterator().next();

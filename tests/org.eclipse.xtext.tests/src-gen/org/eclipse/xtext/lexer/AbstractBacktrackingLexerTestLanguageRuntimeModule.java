@@ -70,6 +70,11 @@ public abstract class AbstractBacktrackingLexerTestLanguageRuntimeModule extends
 	}
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess.class;
 	}
@@ -81,12 +86,12 @@ public abstract class AbstractBacktrackingLexerTestLanguageRuntimeModule extends
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.lexer.serializer.AbstractBacktrackingLexerTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.lexer.serializer.BacktrackingLexerTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.lexer.serializer.AbstractBacktrackingLexerTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.lexer.serializer.BacktrackingLexerTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

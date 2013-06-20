@@ -7,17 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ecore.EcoreRuntimeModule;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.generic.GenericResourceServiceProvider;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug287941TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -45,21 +44,21 @@ public class Bug287941Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 
-	public void testBug287941_01() throws Exception {
+	@Test public void testBug287941_01() throws Exception {
 		newBuilder().append(
 				"import \"classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestModel.ecore\"\n"
 						+ "select t from Test as t \n" + "	where t. testAttr like \"\"").assertTextAtCursorPosition(
 				"t. testAttr", 3, "testAttr", "testRef");
 	}
 
-	public void testBug287941_02() throws Exception {
+	@Test public void testBug287941_02() throws Exception {
 		newBuilder().append(
 				"import \"classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestModel.ecore\"\n"
 						+ "select t from Test as t \n" + "	where t.testAttr like \"\"").assertTextAtCursorPosition(
 				"t.testAttr", 2, "testAttr", "testRef", ".");
 	}
 	
-	public void testBug309449() throws Exception {
+	@Test public void testBug309449() throws Exception {
 		newBuilder().append(
 				"import \"classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestModel.ecore\"\n"
 			  + "select t from Test as t \n" 
@@ -67,7 +66,4 @@ public class Bug287941Test extends AbstractContentAssistProcessorTest {
 				"like", 0, "<", ">", "<=", ">=", "=", "!=", "like", "notlike", "not", "in");
 	}
 
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(Bug287941Test.class);
-	}
 }

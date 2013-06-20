@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * This class serves as a container for the various procedure types that are used to implement the type of closures in
  * Xbase that do not return any results but a meant to cause side-effects.
@@ -15,7 +17,7 @@ package org.eclipse.xtext.xbase.lib;
  * @see ProcedureExtensions
  * @see Functions
  */
-public interface Procedures {
+@GwtCompatible public interface Procedures {
 
 	/**
 	 * A procedure without any parameters, e.g. a {@link Runnable}.

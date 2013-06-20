@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.featurecalls;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
  */
 public class IdentifiableSimpleNameProvider {
 	
-	public String getSimpleName(JvmIdentifiableElement element) {
+	public @Nullable String getSimpleName(JvmIdentifiableElement element) {
 		if (element == null || element.eIsProxy()) {
 			return null;
 		}
@@ -45,10 +45,6 @@ public class IdentifiableSimpleNameProvider {
 			} else {
 				return null;
 			}
-		}
-		if (element instanceof XCasePart) {
-			XCasePart casePart = (XCasePart) element;
-			return getSimpleName((XSwitchExpression)casePart.eContainer());
 		}
 		return element.getSimpleName();
 	}

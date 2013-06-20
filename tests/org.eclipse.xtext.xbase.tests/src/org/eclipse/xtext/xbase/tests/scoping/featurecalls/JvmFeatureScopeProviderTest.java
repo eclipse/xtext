@@ -19,19 +19,29 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
+import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import testdata.FieldAccess;
 import testdata.FieldAccessSub;
+import testdata.SugarConflict;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Ignore("This class tests obsolete implementation details")
+@SuppressWarnings("deprecation")
 public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProviderTest {
 
-	public void testPublicFieldShadowed_01() throws Exception {
+	@Inject 
+	private XFeatureCallSugarDescriptionProvider sugarDescriptionProvider;
+	
+	@Test public void testPublicFieldShadowed_01() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -49,7 +59,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertTrue(expected.toString(), expected.isEmpty());
 	}
 	
-	public void testPublicFieldShadowed_02() throws Exception {
+	@Test public void testPublicFieldShadowed_02() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -67,7 +77,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertTrue(expected.toString(), expected.isEmpty());
 	}
 
-	public void testPrivateMemberDescriptions() throws Exception {
+	@Test public void testPrivateMemberDescriptions() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -84,7 +94,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertTrue(expected.toString(), expected.isEmpty());
 	}
 	
-	public void testInheritedDescriptions() throws Exception {
+	@Test public void testInheritedDescriptions() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -102,7 +112,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertTrue(expected.toString(), expected.isEmpty());
 	}
 
-	public void testTypeHierarchyLinearization() throws Exception {
+	@Test public void testTypeHierarchyLinearization() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		Iterator<JvmTypeReference> hierarchy = getFeatureProvider().linearizeTypeHierarchy(reference).iterator();
 		assertEquals(FieldAccessSub.class.getCanonicalName(), hierarchy.next().getType().getIdentifier());
@@ -111,4 +121,51 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertFalse(hierarchy.hasNext());
 	}
 	
+	@Test public void testSugarConflict_01() throws Exception {
+		JvmTypeReference reference = getTypeRef(SugarConflict.class.getCanonicalName());
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(sugarDescriptionProvider)));
+		assertSimpleNameFeatureSelected(scope, "foo");
+		assertSimpleNameFeatureSelected(scope, "bar");
+	}
+	
+	@Test public void testSugarConflict_02() throws Exception {
+		JvmTypeReference reference = getTypeRef(SugarConflict.class.getCanonicalName());
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(sugarDescriptionProvider)));
+		assertSelectedFeature(scope, "fooBar", "getFooBar");
+		assertSelectedFeature(scope, "zonk", "getZonk");
+	}
+	
+	@Test public void testSugarConflict_03() throws Exception {
+		JvmTypeReference reference = getTypeRef(SugarConflict.class.getCanonicalName());
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(sugarDescriptionProvider)));
+		assertSelectedFeature(scope, "baz", "baz");
+	}
+
+	protected void assertSelectedFeature(JvmFeatureScope scope, String lookup, String expectedSimpleName) {
+		Iterator<IEObjectDescription> elements = scope.getElements(QualifiedName.create(lookup)).iterator();
+		assertTrue(elements.hasNext());
+		while(elements.hasNext()) {
+			IEObjectDescription element = elements.next();
+			assertTrue(element instanceof JvmFeatureDescription);
+			JvmFeature feature = ((JvmFeatureDescription)element).getJvmFeature();
+			String featureName = feature.getSimpleName();
+			assertEquals(expectedSimpleName, featureName);
+			assertFalse(elements.hasNext());
+		}
+	}
+	
+	protected void assertSimpleNameFeatureSelected(JvmFeatureScope scope, String feature) {
+		Iterator<IEObjectDescription> elements = scope.getElements(QualifiedName.create(feature)).iterator();
+		assertTrue(elements.hasNext());
+		IEObjectDescription element = elements.next();
+		assertTrue(element instanceof JvmFeatureDescription);
+		assertEquals(feature, ((JvmFeatureDescription)element).getJvmFeature().getSimpleName());
+		assertFalse(elements.hasNext());
+	}
 }

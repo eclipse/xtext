@@ -31,4 +31,20 @@ public class XBinaryOperationImplCustom extends XBinaryOperationImpl {
 			result.add(getRightOperand());
 		return result;
 	}
+	
+	@Override
+	public EList<XExpression> getActualArguments() {
+		return getActualArguments(getLeftOperand(), getRightOperand());
+	}
+	
+	@Override
+	public XExpression getActualReceiver() {
+		return getActualReceiver(getLeftOperand());
+	}
+	
+	@Override
+	public boolean isExtension() {
+		return isExtension(getLeftOperand());
+	}
+	
 }

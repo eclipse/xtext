@@ -11,13 +11,27 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
+
+import com.google.common.base.Joiner;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XClosureImplCustom extends XClosureImpl {
 
+	@Override
+	public String toString() {
+		String expressionAsString = Strings.emptyIfNull(expression == null ? null : expression.toString());
+		if (isExplicitSyntax()) {
+			return String.format("[%s | %s ]", Joiner.on(", ").join(getFormalParameters()), expressionAsString);
+		} else {
+			return String.format("[ %s ]", expressionAsString);
+		}
+	}
+	
 	@Override
 	public EList<JvmFormalParameter> getFormalParameters() {
 		EList<JvmFormalParameter> parameters = getDeclaredFormalParameters();
@@ -28,22 +42,26 @@ public class XClosureImplCustom extends XClosureImpl {
 		}
 		return parameters;
 	}
-	
+
 	/**
-	 * The implicit parameter for the short cut syntax [ my-expression-using-it ]
+	 * Sets the closure's expression.
+	 * ATTENTION! Also sets an implicit receiver if {@link #isExplicitSyntax()} wasn't set to true.
+	 * This is based on the assumption that a closure is constructed by the xbase parser and that the syntax is such that
+	 * the explicit parameter list is set before the expression is set.
+	 * 
+	 * Doing it like this is much simpler and also ensures proper notifications.
 	 */
 	@Override
-	public JvmFormalParameter getImplicitParameter() {
-		if (super.getImplicitParameter() == null) {
-			eSetDeliver(false);
-			try {
-				JvmFormalParameter parameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
-				parameter.setName(XbaseScopeProvider.IT.toString());
-				super.setImplicitParameter(parameter);
-			} finally {
-				eSetDeliver(true);
-			}
+	public void setExpression(XExpression newExpression) {
+		super.setExpression(newExpression);
+		/**
+		 * Add the implicit parameter for the short cut syntax [ my-expression-using-it ]
+		 */
+		if (!isExplicitSyntax()) {
+			JvmFormalParameter implicitParameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
+			implicitParameter.setName(IFeatureNames.IT.toString());
+			super.setImplicitParameter(implicitParameter);
 		}
-		return super.getImplicitParameter();
 	}
+	
 }

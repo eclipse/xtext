@@ -19,6 +19,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -32,31 +33,36 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * Allows subclasses to specify invariants in a declarative manner using
- * {@link Check} annotation.
- *
+ * Allows subclasses to specify invariants in a declarative manner using {@link Check} annotation.
+ * 
  * Example:
+ * 
  * <pre>
  * &#064;Check
  * void checkName(ParserRule rule) {
  * 	if (!toFirstUpper(rule.getName()).equals(rule.getName())) {
- * 		warning(&quot;Name should start with a capital.&quot;, XtextPackage.ABSTRACT_RULE__NAME);
+ * 		warning(&quot;Name should start with a capital.&quot;, XtextPackage.Literals.ABSTRACT_RULE__NAME);
  * 	}
  * }
  * </pre>
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  */
-public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator implements ValidationMessageAcceptor {
+public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator implements
+		ValidationMessageAcceptor {
+
+	@Inject
+	private IssueSeveritiesProvider issueSeveritiesProvider;
 
 	private static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
-	
+
 	private static final GuardException guardException = new GuardException();
-	
+
 	public static class StateAccess {
-		
+
 		private AbstractDeclarativeValidator validator;
-		
+
 		private StateAccess(AbstractDeclarativeValidator validator) {
 			this.validator = validator;
 		}
@@ -69,7 +75,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			}
 			return result;
 		}
-		
+
 	}
 
 	static class MethodWrapper {
@@ -107,14 +113,11 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 					state.currentCheckType = annotation.value();
 					method.setAccessible(true);
 					method.invoke(instance, state.currentObject);
-				}
-				catch (IllegalArgumentException e) {
+				} catch (IllegalArgumentException e) {
 					log.error(e.getMessage(), e);
-				}
-				catch (IllegalAccessException e) {
+				} catch (IllegalAccessException e) {
 					log.error(e.getMessage(), e);
-				}
-				catch (InvocationTargetException e) {
+				} catch (InvocationTargetException e) {
 					// ignore GuardException, check is just not evaluated if
 					// guard is false
 					// ignore NullPointerException, as not having to check for
@@ -124,8 +127,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 							&& !(targetException instanceof NullPointerException))
 						Exceptions.throwUncheckedException(targetException);
 				}
-			}
-			finally {
+			} finally {
 				if (wasNull)
 					instance.state.set(null);
 			}
@@ -141,16 +143,16 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	private volatile Set<MethodWrapper> checkMethods = null;
-	
+
 	private ValidationMessageAcceptor messageAcceptor;
 
 	@Inject
 	private Injector injector;
-	
+
 	public void setInjector(Injector injector) {
 		this.injector = injector;
 	}
-	
+
 	public AbstractDeclarativeValidator() {
 		this.state = new ThreadLocal<State>();
 		this.messageAcceptor = this;
@@ -188,8 +190,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			if (AbstractDeclarativeValidator.class.equals(superClass))
 				return null;
 			return superClass;
-		}
-		catch (ClassCastException e) {
+		} catch (ClassCastException e) {
 			return null;
 		}
 	}
@@ -200,10 +201,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		if (!visitedClasses.add(clazz))
 			return;
 		AbstractDeclarativeValidator instanceToUse;
-			instanceToUse = instance;
-			if (instanceToUse == null) {
-				instanceToUse = newInstance(clazz);
-			}
+		instanceToUse = instance;
+		if (instanceToUse == null) {
+			instanceToUse = newInstance(clazz);
+		}
 		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			if (method.getAnnotation(Check.class) != null && method.getParameterTypes().length == 1) {
@@ -262,7 +263,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected CheckMode getCheckMode() {
 		return state.get().checkMode;
 	}
-	
+
 	protected Map<Object, Object> getContext() {
 		return state.get().context;
 	}
@@ -271,7 +272,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected final boolean internalValidate(EClass class1, EObject object, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
 		if (checkMethods == null) {
-			synchronized(this) {
+			synchronized (this) {
 				if (checkMethods == null) {
 					Set<MethodWrapper> checkMethods = Sets.newLinkedHashSet();
 					checkMethods.addAll(collectMethods(getClass()));
@@ -285,7 +286,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		state.chain = diagnostics;
 		state.currentObject = object;
 		state.checkMode = checkMode;
-		state.context=context;
+		state.context = context;
 
 		for (MethodWrapper method : methodsForType.get(object.getClass())) {
 			method.invoke(state);
@@ -293,7 +294,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 		return !state.hasErrors;
 	}
-	
+
 	////////////////////////////
 	// Convenience methods below
 	////////////////////////////
@@ -301,7 +302,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected void info(String message, EStructuralFeature feature) {
 		info(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 	}
-	
+
 	protected void info(String message, EStructuralFeature feature, int index) {
 		info(message, feature, index, null);
 	}
@@ -309,54 +310,84 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected void info(String message, EStructuralFeature feature, int index, String code, String... issueData) {
 		info(message, state.get().currentObject, feature, index, code, issueData);
 	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected void info(String message, EStructuralFeature feature, String code, String... issueData) {
+		info(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code,
+				issueData);
+	}
 	
+	/**
+	 * @since 2.4
+	 */
+	protected void info(String message, EObject source, EStructuralFeature feature) {
+		info(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+	}
+
 	protected void info(String message, EObject source, EStructuralFeature feature, int index) {
 		info(message, source, feature, index, null);
 	}
 	
 	/**
-	 * @since 2.0
+	 * @since 2.4
 	 */
-	protected void info(String message, EStructuralFeature feature, String code, String... issueData) {
-		info(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
-	}
-
-	protected void info(String message, EObject source, EStructuralFeature feature, int index, String code, String... issueData) {
+	protected void info(String message, EObject source, EStructuralFeature feature, int index, String code,
+			String... issueData) {
 		getMessageAcceptor().acceptInfo(message, source, feature, index, code, issueData);
 	}
-	
+
+	/**
+	 * @since 2.4
+	 */
+	protected void info(String message, EObject source, EStructuralFeature feature, String code,
+			String... issueData) {
+		getMessageAcceptor().acceptInfo(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
+	}
+
 	protected void warning(String message, EStructuralFeature feature) {
 		warning(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 	}
-	
+
 	protected void warning(String message, EStructuralFeature feature, int index) {
 		warning(message, feature, index, null);
 	}
 
 	protected void warning(String message, EStructuralFeature feature, String code, String... issueData) {
-		warning(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
+		warning(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code,
+				issueData);
 	}
 
 	protected void warning(String message, EStructuralFeature feature, int index, String code, String... issueData) {
 		warning(message, state.get().currentObject, feature, index, code, issueData);
 	}
-	
+
+	/**
+	 * @since 2.4
+	 */
+	protected void warning(String message, EObject source, EStructuralFeature feature) {
+		warning(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+	}
+
 	protected void warning(String message, EObject source, EStructuralFeature feature, int index) {
 		warning(message, source, feature, index, null);
 	}
 
-	protected void warning(String message, EObject source, EStructuralFeature feature, int index, String code, String... issueData) {
+	protected void warning(String message, EObject source, EStructuralFeature feature, int index, String code,
+			String... issueData) {
 		getMessageAcceptor().acceptWarning(message, source, feature, index, code, issueData);
 	}
-	
+
 	protected void warning(String message, EObject source, EStructuralFeature feature, String code, String... issueData) {
-		getMessageAcceptor().acceptWarning(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
+		getMessageAcceptor().acceptWarning(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+				code, issueData);
 	}
-	
+
 	protected void error(String message, EStructuralFeature feature) {
 		error(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 	}
-	
+
 	protected void error(String message, EStructuralFeature feature, int index) {
 		error(message, feature, index, null);
 	}
@@ -368,19 +399,121 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected void error(String message, EStructuralFeature feature, int index, String code, String... issueData) {
 		error(message, state.get().currentObject, feature, index, code, issueData);
 	}
-	
+
+	/**
+	 * @since 2.4
+	 */
+	protected void error(String message, EObject source, EStructuralFeature feature) {
+		error(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+	}
+
 	protected void error(String message, EObject source, EStructuralFeature feature, int index) {
 		error(message, source, feature, index, null);
 	}
 
 	protected void error(String message, EObject source, EStructuralFeature feature, String code, String... issueData) {
-		getMessageAcceptor().acceptError(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
+		getMessageAcceptor().acceptError(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code,
+				issueData);
 	}
-	
-	protected void error(String message, EObject source, EStructuralFeature feature, int index, String code, String... issueData) {
+
+	protected void error(String message, EObject source, EStructuralFeature feature, int index, String code,
+			String... issueData) {
 		getMessageAcceptor().acceptError(message, source, feature, index, code, issueData);
 	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssueToState(String issueCode, String message, EStructuralFeature feature) {
+		addIssue(message, state.get().currentObject, feature, issueCode, (String[]) null);
+	}
 	
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssue(String message, EObject source, String issueCode) {
+		addIssue(message, source, null, issueCode, (String[]) null);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssue(String message, EObject source, EStructuralFeature feature, String issueCode,
+			String... issueData) {
+		addIssue(message, source, feature, INSIGNIFICANT_INDEX, issueCode, issueData);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssue(String message, EObject source, EStructuralFeature feature, int index, String issueCode,
+			String... issueData) {
+		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
+		if (severity != null) {
+			switch (severity) {
+				case WARNING:
+					getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode, issueData);
+					break;
+				case INFO:
+					getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode, issueData);
+					break;
+				case ERROR:
+					getMessageAcceptor().acceptError(message, source, feature, index, issueCode, issueData);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssue(String message, EObject source, int offset,  int length, String issueCode){
+		addIssue(message, source, offset, length, issueCode, (String[])null);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssue(String message, EObject source, int offset,  int length, String issueCode, String... issueData) {
+		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
+		if (severity != null) {
+			switch (severity) {
+				case WARNING:
+					getMessageAcceptor().acceptWarning(message, source, offset, length, issueCode, issueData);
+					break;
+				case INFO:
+					getMessageAcceptor().acceptInfo(message, source,  offset, length, issueCode, issueData);
+					break;
+				case ERROR:
+					getMessageAcceptor().acceptError(message, source, offset, length, issueCode, issueData);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected boolean isIgnored(String issueCode) {
+		IssueSeverities severities = getIssueSeverities(getContext(), getCurrentObject());
+		return severities.isIgnored(issueCode);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected IssueSeverities getIssueSeverities(Map<Object, Object> context, EObject eObject) {
+		if (context.containsKey(ISSUE_SEVERITIES)) {
+			return (IssueSeverities) context.get(ISSUE_SEVERITIES);
+		}
+		IssueSeverities issueSeverities = issueSeveritiesProvider.getIssueSeverities(eObject.eResource());
+		context.put(ISSUE_SEVERITIES, issueSeverities);
+		return issueSeverities;
+	}
+
 	protected void guard(boolean guardExpression) {
 		if (!guardExpression) {
 			throw guardException;
@@ -394,57 +527,94 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	//////////////////////////////////////////////////////////
 	// Implementation of the Validation message acceptor below
 	//////////////////////////////////////////////////////////
-	
-	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+
+	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code,
+			String... issueData) {
+		checkIsFromCurrentlyCheckedResource(object);
 		this.state.get().hasErrors = true;
 		state.get().chain.add(createDiagnostic(Severity.ERROR, message, object, feature, index, code, issueData));
 	}
-	
-	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+
+	/**
+	 * @since 2.4
+	 */
+	protected void checkIsFromCurrentlyCheckedResource(EObject object) {
+		if (object != null && this.state.get() != null && this.state.get().currentObject != null
+				&& object.eResource() != this.state.get().currentObject.eResource()) {
+			URI uriGiven = null;
+			if (object.eResource() != null)
+				uriGiven = object.eResource().getURI();
+			URI uri = null;
+			if (this.state.get().currentObject.eResource() != null)
+				uri = this.state.get().currentObject.eResource().getURI();
+			throw new IllegalArgumentException(
+					"You can only add issues for EObjects contained in the currently validated resource '" + uri
+							+ "'. But the given EObject was contained in '" + uriGiven + "'");
+		}
+	}
+
+	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code,
+			String... issueData) {
+		checkIsFromCurrentlyCheckedResource(object);
 		state.get().chain.add(createDiagnostic(Severity.WARNING, message, object, feature, index, code, issueData));
 	}
-	
+
 	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
+		checkIsFromCurrentlyCheckedResource(object);
 		state.get().chain.add(createDiagnostic(Severity.INFO, message, object, feature, index, code, issueData));
 	}
-	
+
 	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
+		checkIsFromCurrentlyCheckedResource(object);
 		this.state.get().hasErrors = true;
 		state.get().chain.add(createDiagnostic(Severity.ERROR, message, object, offset, length, code, issueData));
 	}
 
 	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
+		checkIsFromCurrentlyCheckedResource(object);
 		state.get().chain.add(createDiagnostic(Severity.WARNING, message, object, offset, length, code, issueData));
 	}
-	
+
 	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
+		checkIsFromCurrentlyCheckedResource(object);
 		state.get().chain.add(createDiagnostic(Severity.INFO, message, object, offset, length, code, issueData));
 	}
-	
-	protected Diagnostic createDiagnostic(Severity severity, String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
+
+	protected Diagnostic createDiagnostic(Severity severity, String message, EObject object,
+			EStructuralFeature feature, int index, String code, String... issueData) {
 		int diagnosticSeverity = toDiagnosticSeverity(severity);
-		Diagnostic result = new FeatureBasedDiagnostic(diagnosticSeverity, message, object, feature, index, state.get().currentCheckType, code, issueData);
+		Diagnostic result = new FeatureBasedDiagnostic(diagnosticSeverity, message, object, feature, index,
+				state.get().currentCheckType, code, issueData);
 		return result;
 	}
 
-	protected Diagnostic createDiagnostic(Severity severity, String message, EObject object, int offset, int length, String code, String... issueData) {
+	protected Diagnostic createDiagnostic(Severity severity, String message, EObject object, int offset, int length,
+			String code, String... issueData) {
 		int diagnosticSeverity = toDiagnosticSeverity(severity);
-		Diagnostic result = new RangeBasedDiagnostic(diagnosticSeverity, message, object, offset, length, state.get().currentCheckType, code, issueData);
+		Diagnostic result = new RangeBasedDiagnostic(diagnosticSeverity, message, object, offset, length,
+				state.get().currentCheckType, code, issueData);
 		return result;
 	}
-	
+
 	protected int toDiagnosticSeverity(Severity severity) {
 		int diagnosticSeverity = -1;
-		switch(severity) {
-			case ERROR: diagnosticSeverity = Diagnostic.ERROR; break;
-			case WARNING: diagnosticSeverity = Diagnostic.WARNING; break;
-			case INFO: diagnosticSeverity = Diagnostic.INFO; break;
-			default: throw new IllegalArgumentException("Unknow severity " + severity);
+		switch (severity) {
+			case ERROR:
+				diagnosticSeverity = Diagnostic.ERROR;
+				break;
+			case WARNING:
+				diagnosticSeverity = Diagnostic.WARNING;
+				break;
+			case INFO:
+				diagnosticSeverity = Diagnostic.INFO;
+				break;
+			default:
+				throw new IllegalArgumentException("Unknow severity " + severity);
 		}
 		return diagnosticSeverity;
 	}
-	
+
 	public StateAccess setMessageAcceptor(ValidationMessageAcceptor messageAcceptor) {
 		this.messageAcceptor = messageAcceptor;
 		return new StateAccess(this);
@@ -453,5 +623,5 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	public ValidationMessageAcceptor getMessageAcceptor() {
 		return messageAcceptor;
 	}
-	
+
 }

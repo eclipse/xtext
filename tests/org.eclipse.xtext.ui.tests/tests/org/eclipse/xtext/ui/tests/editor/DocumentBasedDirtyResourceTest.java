@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,7 +46,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	private IResourceDescription description;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		uri = URI.createURI("scheme:/foobar.xtext");
@@ -64,7 +65,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		description = this;
 	}
 	
-	public void testConnect_01() {
+	@Test public void testConnect_01() {
 		try {
 			dirtyResource.connect(null);
 			fail("Expected IllegalArgumentException");
@@ -73,7 +74,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testConnect_02() {
+	@Test public void testConnect_02() {
 		dirtyResource.connect(this);
 		try {
 			dirtyResource.connect(getDummyDocument());
@@ -83,12 +84,12 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testConnect_03() {
+	@Test public void testConnect_03() {
 		dirtyResource.connect(this);
 		dirtyResource.connect(this); // no exception
 	}
 	
-	public void testDisconnect_01() {
+	@Test public void testDisconnect_01() {
 		try {
 			dirtyResource.connect(null);
 			fail("Expected IllegalArgumentException");
@@ -97,7 +98,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testDisconnect_02() {
+	@Test public void testDisconnect_02() {
 		try {
 			dirtyResource.disconnect(this);
 			fail("Expected IllegalStateException");
@@ -106,7 +107,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testDisconnect_03() {
+	@Test public void testDisconnect_03() {
 		dirtyResource.connect(this);
 		dirtyResource.disconnect(this);
 		try {
@@ -117,7 +118,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testGetContents_01() {
+	@Test public void testGetContents_01() {
 		try {
 			dirtyResource.getContents();
 			fail("Expected IllegalStateException");
@@ -126,19 +127,19 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testGetContents_02() {
+	@Test public void testGetContents_02() {
 		dirtyResource.connect(this);
 		assertSame(documentContent, dirtyResource.getContents());
 	}
 	
-	public void testGetContents_03() {
+	@Test public void testGetContents_03() {
 		dirtyResource.connect(this);
 		String expectedContent = documentContent;
 		documentContent = null;
 		assertSame(expectedContent, dirtyResource.getContents());
 	}
 	
-	public void testGetURI_01() {
+	@Test public void testGetURI_01() {
 		try {
 			dirtyResource.getURI();
 			fail("Expected IllegalStateException");
@@ -147,12 +148,12 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testGetURI_02() {
+	@Test public void testGetURI_02() {
 		dirtyResource.connect(this);
 		assertEquals(uri, dirtyResource.getURI());
 	}
 	
-	public void testGetDescription_01() {
+	@Test public void testGetDescription_01() {
 		try {
 			dirtyResource.getDescription();
 			fail("Expected IllegalStateException");
@@ -161,13 +162,13 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
-	public void testGetDescription_02() {
+	@Test public void testGetDescription_02() {
 		dirtyResource.connect(this);
 		assertNotSame(this, dirtyResource.getDescription());
 		assertSame(this.getURI(), dirtyResource.getDescription().getURI());
 	}
 	
-	public void testGetDescription_03() {
+	@Test public void testGetDescription_03() {
 		dirtyResource.connect(this);
 		description = null;
 		assertNull(getResourceDescription(resource));
@@ -175,7 +176,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		assertSame(this.getURI(), dirtyResource.getDescription().getURI());
 	}
 	
-	public void testCopyState() {
+	@Test public void testCopyState() {
 		dirtyResource.connect(this);
 		assertSame(documentContent, dirtyResource.getContents());
 		documentContent = "modified";

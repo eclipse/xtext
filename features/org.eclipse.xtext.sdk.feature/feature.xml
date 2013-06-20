@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.sdk"
       label="%featureName"
-      version="2.1.0.qualifier"
+      version="2.4.3.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.xtext"
       image="modeling32.png">
@@ -25,7 +25,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <url>
-      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/"/>
+      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
    </url>
 
    <includes
@@ -65,20 +65,20 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.xtext.xtend2.sdk"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.xtend2.sdk.source"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.xtext.xtext.ui"
          version="0.0.0"/>
 
    <includes
          id="org.eclipse.xtext.xtext.ui.source"
          version="0.0.0"/>
+
+   <requires>
+      <import feature="org.eclipse.xtend.sdk" version="2.4.3" match="equivalent"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common" version="2.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.source" version="2.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.source" version="2.9.0" match="greaterOrEqual"/>
+   </requires>
 
    <plugin
          id="org.eclipse.xtext.junit"
@@ -145,13 +145,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.purexbase.ui.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.log4j.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

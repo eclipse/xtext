@@ -17,7 +17,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -50,7 +51,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 	private String model;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(getSetup());
 		helper = get(IHyperlinkHelper.class);
@@ -68,7 +69,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		resource = null;
 		helper = null;
 		grammar = null;
@@ -77,14 +78,14 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		super.tearDown();
 	}
 
-	public void testSetup() {
+	@Test public void testSetup() {
 		assertTrue(resource.getErrors().isEmpty());
 		assertNull(terminalGrammar.eResource());
 		assertTrue(terminalGrammar.eIsProxy());
 		assertNotNull(helper);
 	}
 
-	public void testCreateHyperlinksByOffset_01() {
+	@Test public void testCreateHyperlinksByOffset_01() {
 		IHyperlink[] links = helper.createHyperlinksByOffset(resource, model.indexOf("common.Terminals"), true);
 		assertNotNull(links);
 		assertEquals(1, links.length);
@@ -94,12 +95,12 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		checkHyperlink((XtextHyperlink) links[0]);
 	}
 	
-	public void testCreateHyperlinksByOffset_02() {
+	@Test public void testCreateHyperlinksByOffset_02() {
 		IHyperlink[] links = helper.createHyperlinksByOffset(resource, model.indexOf("Model") + 1, true);
 		assertNull(links);
 	}
 	
-	public void testCreateHyperlinksByOffset_03() {
+	@Test public void testCreateHyperlinksByOffset_03() {
 		IHyperlink[] links = helper.createHyperlinksByOffset(resource, model.indexOf("terminal ID") + "terminal I".length(), true);
 		assertNotNull(links);
 		assertEquals(2, links.length);
@@ -117,7 +118,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		assertEquals(URI.createURI(EcorePackage.eINSTANCE.getNsURI()).appendFragment("//EString"), hyperLink.getURI());
 	}
 	
-	public void testCreateHyperlinksByOffset_04() {
+	@Test public void testCreateHyperlinksByOffset_04() {
 		IHyperlink[] links = helper.createHyperlinksByOffset(resource, model.indexOf("TRING r"), true);
 		assertNotNull(links);
 		assertEquals(1, links.length);
@@ -130,7 +131,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 				EcoreUtil.getURI(GrammarUtil.findRuleForName(grammar.getUsedGrammars().get(0), "STRING"))), hyperLink.getURI());
 	}
 
-	public void testCreateHyperlinksByOffset_05() {
+	@Test public void testCreateHyperlinksByOffset_05() {
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[ecore::EObject]"), true));
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[ecore::EObject]") + "[ecore::EObject]".length(), true));
 		int idx = model.indexOf("ecore::EObject");
@@ -145,7 +146,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testCreateHyperlinksByOffset_06() {
+	@Test public void testCreateHyperlinksByOffset_06() {
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf(":EObject]"), true));
 		int idx = model.indexOf("EObject]");
 		int length = "EObject".length();
@@ -162,7 +163,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testCreateHyperlinksByOffset_07() {
+	@Test public void testCreateHyperlinksByOffset_07() {
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("Element*") - 1, true));
 		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("lement*"), true);
 		assertNotNull(hyperlinks);
@@ -176,7 +177,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 				EcoreUtil.getURI(GrammarUtil.findRuleForName(grammar, "Element"))), hyperLink.getURI());
 	}
 
-	public void test_Bug281652_should_not_create_links_to_genpackage_classes() {
+	@Test public void test_Bug281652_should_not_create_links_to_genpackage_classes() {
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[Element]"), true));
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("Element]"), true));
 		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("lement]"), true));
@@ -194,10 +195,5 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		assertFalse(terminalGrammar.eIsProxy());
 		assertEquals(terminalGrammar, obj);
 	}
-
-//	public void testGetOpenDeclarationAction() {
-//		OpenDeclarationAction action = helper.getOpenDeclarationAction(resource, model.indexOf("common.Terminals"));
-//		checkHyperlink(action);
-//	}
 
 }

@@ -54,6 +54,7 @@ import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
@@ -138,6 +139,13 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return SimpleLocalScopeProvider.class;
 	}
 	
+	/**
+	 * @since 2.4
+	 */
+	public void configureSerializerIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(SerializerScopeProviderBinding.class).to(IScopeProvider.class);
+	}
+	
 	public void configureLinkingIScopeProvider(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(IScopeProvider.class);
 	}
@@ -218,4 +226,6 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public void configureGenericSemanticSequencer(com.google.inject.Binder binder) {
 		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(BacktrackingSemanticSequencer.class);
 	}
+	
+
 }

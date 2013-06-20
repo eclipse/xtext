@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting.IFormatter;
+import org.eclipse.xtext.formatting.IFormatterExtension;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
@@ -97,7 +98,11 @@ public class Serializer implements ISerializer {
 		}
 
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
-		ITokenStream formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
+		ITokenStream formatterTokenStream;
+		if(formatter instanceof IFormatterExtension)
+			formatterTokenStream = ((IFormatterExtension) formatter).createFormatterStream(obj, null, tokenStream, !options.isFormatting());
+		else 
+			formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
 		EObject context = getContext(obj);
 		ISequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, errors);
 		serialize(obj, context, acceptor, errors);
@@ -127,7 +132,10 @@ public class Serializer implements ISerializer {
 
 	public ReplaceRegion serializeReplacement(EObject obj, SaveOptions options) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
-		String text = serialize(obj);
+		if (node == null) {
+			throw new IllegalStateException("Cannot replace an obj that has no associated node");
+		}
+		String text = serialize(obj, options);
 		return new ReplaceRegion(node.getTotalOffset(), node.getTotalLength(), text);
 	}
 

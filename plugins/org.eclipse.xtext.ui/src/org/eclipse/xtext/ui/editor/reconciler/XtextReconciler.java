@@ -7,11 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.reconciler;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
@@ -21,25 +28,34 @@ import org.eclipse.jface.text.contentassist.ICompletionListener;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ContentAssistantFacade;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.ISourceViewerExtension4;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
 /**
- * Standard JFace Reconcilers, e.g. the MonoReconciler, convert an replace event
- * into a delete and an insert DirtyRegion. This leads to significant overhead,
- * as DRs of different types cannot be merged, and the partial parsing has to be
- * performed for each DR in the queue. We overcome this situation by writing our
- * own reconciler that only creates ReplaceRegions which can always be merged,
- * such that we have to call the partial parser only once.
- *
+ * Reconciling strategy that reconciles an {@link IXtextDocument}'s contents with the model in the underlying
+ * {@link XtextResource}.
+ * 
+ * Standard JFace Reconcilers, e.g. the MonoReconciler, convert an replace event into a delete and an insert
+ * DirtyRegion. This leads to significant overhead, as DRs of different types cannot be merged, and the partial parsing
+ * has to be performed for each DR in the queue. We overcome this situation by writing our own reconciler that only
+ * creates ReplaceRegions which can always be merged, such that we have to call the partial parser only once.
+ * 
  * Additionally, we simplify the reconciler by using the Job API.
- *
- * @author Jan Köhnlein - Initial contribution and API
+ * 
+ * @author Jan Koehnlein - Initial contribution and API
  * @author Michael Clay
  */
 public class XtextReconciler extends Job implements IReconciler {
@@ -52,30 +68,39 @@ public class XtextReconciler extends Job implements IReconciler {
 	private ITextViewer textViewer;
 	private TextInputListener textInputListener;
 	private final DocumentListener documentListener;
-	private ReplaceRegion pendingReplaceRegion;
-	private final Object pendingReplaceRegionLock;
 	private int delay;
 	private IReconcilingStrategy strategy;
+	private boolean initalProcessDone;
+
+	private LinkedBlockingQueue<DocumentEvent> pendingChanges = new LinkedBlockingQueue<DocumentEvent>();
 
 	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {
 
 		private volatile boolean sessionStarted = false;
-		
+
 		public void documentAboutToBeChanged(DocumentEvent event) {
-			
 		}
 
 		public void documentChanged(DocumentEvent event) {
+			if (Display.getCurrent() == null) {
+				log.error("Changes to the document must only be applied from the Display thread to keep them ordered",
+						new Exception());
+			}
 			handleDocumentChanged(event);
 		}
 
 		public void performNecessaryUpdates(Processor processor) {
-			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
-			if (document != null && !paused) {
-				final ReplaceRegion replaceRegionToBeProcessed = getAndResetReplaceRegion();
-				if (replaceRegionToBeProcessed != null) {
-					processor.process(new XtextReconcilerUnitOfWork(replaceRegionToBeProcessed, document));
+			try {
+				if (!pendingChanges.isEmpty()) {
+					processor.process(new IUnitOfWork.Void<XtextResource>() {
+						@Override
+						public void process(XtextResource state) throws Exception {
+							doRun(state, null);
+						}
+					});
 				}
+			} catch (Exception exc) {
+				log.error("Error while forcing reconciliation", exc);
 			}
 			if (sessionStarted && !paused) {
 				pause();
@@ -93,15 +118,13 @@ public class XtextReconciler extends Job implements IReconciler {
 
 		public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
 			// TODO Auto-generated method stub
-			
 		}
 
 	}
 
 	/**
-	 * Reconciles the entire document when the document in the viewer is
-	 * changed. This happens when the document is initially opened, as well as
-	 * after a save-as.
+	 * Reconciles the entire document when the document in the viewer is changed. This happens when the document is
+	 * initially opened, as well as after a save-as.
 	 */
 	protected class TextInputListener implements ITextInputListener {
 		public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
@@ -112,7 +135,7 @@ public class XtextReconciler extends Job implements IReconciler {
 			handleInputDocumentChanged(oldInput, newInput);
 		}
 	}
-	
+
 	@Inject
 	public XtextReconciler(XtextDocumentReconcileStrategy strategy) {
 		super(Messages.XtextReconciler_JobName);
@@ -120,7 +143,6 @@ public class XtextReconciler extends Job implements IReconciler {
 		setSystem(true);
 		isInstalled = false;
 		documentListener = new DocumentListener();
-		pendingReplaceRegionLock = new Object();
 		paused = false;
 		shouldInstallCompletionListener = false;
 		setDelay(500);
@@ -148,6 +170,9 @@ public class XtextReconciler extends Job implements IReconciler {
 				} else {
 					facade.addCompletionListener(documentListener);
 				}
+				if (strategy instanceof ISourceViewerAware) {
+					((ISourceViewerAware) strategy).setSourceViewer((ISourceViewer) textViewer);
+				}
 			}
 			isInstalled = true;
 		}
@@ -162,6 +187,9 @@ public class XtextReconciler extends Job implements IReconciler {
 					ContentAssistantFacade facade = ((ISourceViewerExtension4) textViewer).getContentAssistantFacade();
 					facade.removeCompletionListener(documentListener);
 				}
+				if (textViewer.getDocument() instanceof IXtextDocument) {
+					((IXtextDocument) textViewer.getDocument()).removeXtextDocumentContentObserver(documentListener);
+				}
 			}
 		}
 	}
@@ -175,35 +203,47 @@ public class XtextReconciler extends Job implements IReconciler {
 			shouldInstallCompletionListener = false;
 		}
 		if (oldInput instanceof IXtextDocument) {
-			((IXtextDocument)oldInput).removeXtextDocumentContentObserver(documentListener);
+			((IXtextDocument) oldInput).removeXtextDocumentContentObserver(documentListener);
 		}
 		if (newInput instanceof IXtextDocument) {
 			((IXtextDocument) newInput).addXtextDocumentContentObserver(documentListener);
 			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 			strategy.setDocument(document);
+			if (!initalProcessDone && strategy instanceof IReconcilingStrategyExtension) {
+				initalProcessDone = true;
+				IReconcilingStrategyExtension reconcilingStrategyExtension = (IReconcilingStrategyExtension) strategy;
+				reconcilingStrategyExtension.initialReconcile();
+			}
+		}
+		if (oldInput != null && newInput != null) {
+			handleDocumentChanged(new DocumentEvent(newInput, 0, oldInput.getLength(), newInput.get()));
 		}
 	}
 
 	private void handleDocumentChanged(DocumentEvent event) {
-		if (log.isTraceEnabled()) {
-			log.trace("Reconciler cancelled");
-		}
 		cancel();
-		ReplaceRegion newReplaceRegion = new ReplaceRegion(event.getOffset(), event.getLength(), event.getText());
-		synchronized (pendingReplaceRegionLock) {
-			if (pendingReplaceRegion != null) {
-				pendingReplaceRegion.mergeWith(newReplaceRegion, event.getDocument());
-			}
-			else {
-				pendingReplaceRegion = newReplaceRegion;
-			}
-		}
-		if (log.isTraceEnabled()) {
-			log.trace("Reconciler scheduled with delay: " + delay, new Exception());
-		}
+		if (log.isTraceEnabled())
+			log.trace("Reconciler cancelled");
+		reallyEnqueueEvent(event);
 		schedule(delay);
+		if (log.isTraceEnabled())
+			log.trace("Reconciler scheduled with delay: " + delay);
 	}
-	
+
+	/**
+	 * {@link Display#syncExec(Runnable)} will interrupt the Display thread causing pendingChange.put() to fail. A
+	 * skipped event will break the resource, so we try again until the queue eats it.
+	 * 
+	 * @since 2.4
+	 */
+	private void reallyEnqueueEvent(DocumentEvent event) {
+		try {
+			pendingChanges.put(event);
+		} catch (InterruptedException e) {
+			reallyEnqueueEvent(event);
+		}
+	}
+
 	protected void pause() {
 		paused = true;
 	}
@@ -212,7 +252,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		paused = false;
 		schedule(delay);
 	}
-	
+
 	public void setDelay(int delay) {
 		this.delay = delay;
 	}
@@ -223,39 +263,73 @@ public class XtextReconciler extends Job implements IReconciler {
 	}
 
 	@Override
-	protected IStatus run(IProgressMonitor monitor) {
+	protected IStatus run(final IProgressMonitor monitor) {
 		if (monitor.isCanceled() || paused)
 			return Status.CANCEL_STATUS;
 
 		long start = System.currentTimeMillis();
-		if (log.isDebugEnabled()) {
-			log.debug("Preparing reconciliation."); //$NON-NLS-1$
-		}
-
 		final IXtextDocument document = XtextDocumentUtil.get(textViewer);
-		if (document != null) {
-			final ReplaceRegion replaceRegionToBeProcessed = getAndResetReplaceRegion();
-			if (replaceRegionToBeProcessed != null) {
-				strategy.reconcile(replaceRegionToBeProcessed);
-			}
+		if (document instanceof XtextDocument) {
+			((XtextDocument) document).internalModify(new IUnitOfWork.Void<XtextResource>() {
+				@Override
+				public void process(XtextResource state) throws Exception {
+					doRun(state, monitor);
+				}
+			});
 		}
 		if (log.isDebugEnabled())
 			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start)); //$NON-NLS-1$
 		return Status.OK_STATUS;
 	}
 
-	protected ReplaceRegion getAndResetReplaceRegion() {
-		final ReplaceRegion replaceRegionToBeProcessed;
-		synchronized (pendingReplaceRegionLock) {
-			if (pendingReplaceRegion != null) {
-				replaceRegionToBeProcessed = pendingReplaceRegion;
-			}
-			else {
-				replaceRegionToBeProcessed = null;
-			}
-			pendingReplaceRegion = null;
+	/**
+	 * Not thread safe. Guard access with a transaction on the resource.
+	 * 
+	 * @since 2.4
+	 */
+	private ReconcilerReplaceRegion getMergedReplaceRegion(XtextResource resource) {
+		List<DocumentEvent> events = newArrayListWithExpectedSize(pendingChanges.size());
+		pendingChanges.drainTo(events);
+		if (events.isEmpty())
+			return null;
+		IParseResult parseResult = resource.getParseResult();
+		String resourceText = (parseResult != null) ? parseResult.getRootNode().getText() : "";
+		ReconcilerReplaceRegion.Builder builder = ReconcilerReplaceRegion.builder(resourceText);
+		for (DocumentEvent event : events) {
+			builder.add(event.getOffset(), event.getLength(), event.getText());
 		}
-		return replaceRegionToBeProcessed;
+		ReconcilerReplaceRegion mergedRegion = builder.create();
+		mergedRegion.setModificationStamp(events.get(events.size()-1).getModificationStamp());
+		return mergedRegion;
 	}
 
+	/**
+	 * @deprecated no longer called by the framework. Use {@link #getMergedReplaceRegion(XtextResource)} instead.
+	 */
+	@Deprecated
+	protected ReplaceRegion getAndResetReplaceRegion() {
+		return null;
+	}
+
+	/**
+	 * Must be run with a write lock on the IXtextDocument.
+	 * 
+	 * @since 2.4
+	 */
+	private void doRun(XtextResource state, @Nullable final IProgressMonitor monitor) {
+		if (log.isDebugEnabled()) {
+			log.debug("Preparing reconciliation."); //$NON-NLS-1$
+		}
+		final ReconcilerReplaceRegion replaceRegionToBeProcessed = getMergedReplaceRegion(state);
+		if (replaceRegionToBeProcessed != null) {
+			if (strategy instanceof IReconcilingStrategyExtension) {
+				((IReconcilingStrategyExtension) strategy).setProgressMonitor(monitor != null ? monitor
+						: new NullProgressMonitor());
+			}
+			if (strategy instanceof XtextDocumentReconcileStrategy) {
+				((XtextDocumentReconcileStrategy) strategy).setResource(state);
+			}
+			strategy.reconcile(replaceRegionToBeProcessed);
+		}
+	}
 }

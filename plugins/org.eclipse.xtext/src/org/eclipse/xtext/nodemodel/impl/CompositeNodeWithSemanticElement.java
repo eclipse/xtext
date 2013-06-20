@@ -7,14 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.serialization.DeserializationConversionContext;
+import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext;
+import org.eclipse.xtext.nodemodel.serialization.SerializationUtil;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Mark Christiaens - Serialization support
  * @noextend This class is not intended to be subclassed by clients.
  */
 public class CompositeNodeWithSemanticElement extends CompositeNode implements Adapter {
@@ -55,5 +63,37 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 	public boolean isAdapterForType(Object type) {
 		return type instanceof Class<?> && INode.class.isAssignableFrom((Class<?>)type);
 	}
-	
+
+	@Override
+	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+		super.readData(in, context);
+
+		boolean isNull = in.readBoolean();
+
+		if (!isNull) {
+			int id = SerializationUtil.readInt(in, true);
+
+			semanticElement = context.getSemanticObject(id);
+			semanticElement.eAdapters().add(this);
+		}
+	}
+
+	@Override
+	void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
+		super.write(out, scc);
+
+		boolean isNull = semanticElement == null;
+
+		out.writeBoolean(isNull);
+
+		if (!isNull) {
+			Integer id = scc.getEObjectId(semanticElement);
+			SerializationUtil.writeInt(out, id, true);
+		}
+	}
+
+	@Override
+	NodeType getNodeId() {
+		return NodeType.CompositeNodeWithSemanticElement;
+	}
 }

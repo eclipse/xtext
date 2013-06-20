@@ -10,25 +10,40 @@ package org.eclipse.xtext.ui.editor.model;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CodingErrorAction;
 import java.util.Collections;
+import java.util.Map;
 
 import org.eclipse.core.resources.IEncodedStorage;
+import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.IDocumentPartitioner;
+import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
+import org.eclipse.ui.IURIEditorInput;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -42,16 +57,39 @@ import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 
+import com.google.common.io.Closeables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.ibm.icu.text.MessageFormat;
 
 /**
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
  * @author Michael Clay
  * @author Heiko Behrens
+ * @author Sebastian Zarnekow - Resetting unchanged flag on undo / redo, support for IURIEditorInput
+ * @since 2.4
  */
 public class XtextDocumentProvider extends FileDocumentProvider {
+	
+	/**
+	 * Bundle of all required information to allow {@link java.net.URI} as underlying document content provider.
+	 * @since 2.3
+	 */
+	protected class URIInfo extends ElementInfo {
+
+		/** The flag representing the cached state whether the storage is modifiable. */
+		public boolean isModifiable= false;
+		/** The flag representing the cached state whether the storage is read-only. */
+		public boolean isReadOnly= true;
+		/** The flag representing the need to update the cached flag.  */
+		public boolean updateCache= true;
+
+		public URIInfo(IDocument document, IAnnotationModel model) {
+			super(document, model);
+		}
+	}
+	
 	@Inject
 	private Provider<XtextDocument> documentProvider;
 
@@ -61,7 +99,6 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	@Inject
 	private IResourceValidator resourceValidator;
 
-	// TODO use a provider for objects that depend on issueResolitionProvider+markerUtil when guice2 is available
 	@Inject
 	private IssueResolutionProvider issueResolutionProvider;
 
@@ -76,6 +113,13 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Inject
 	private IEncodingProvider encodingProvider;
+	
+	/**
+	 * @since 2.4
+	 */
+	protected IStorage2UriMapper getStorage2UriMapper() {
+		return storage2UriMapper;
+	}
 
 	@Override
 	protected XtextDocument createEmptyDocument() {
@@ -85,7 +129,15 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Override
 	protected IDocument createDocument(Object element) throws CoreException {
-		IDocument document = super.createDocument(element);
+		IDocument document = null;
+		if (isWorkspaceExternalEditorInput(element)) {
+			document= createEmptyDocument();
+			if (setDocumentContent(document, (IEditorInput) element, Charset.defaultCharset().name())) {
+				setupDocument(element, document);
+			}
+		} else {
+			document = super.createDocument(element);
+		}
 		if (document != null) {
 			IDocumentPartitioner partitioner = documentPartitioner.get();
 			partitioner.connect(document);
@@ -96,6 +148,11 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Override
 	public boolean isDeleted(Object element) {
+		if (isWorkspaceExternalEditorInput(element)) {
+			final IURIEditorInput input = (IURIEditorInput) element;
+			boolean result = !input.exists();
+			return result;
+		}
 		if (element instanceof IFileEditorInput) {
 			final IFileEditorInput input = (IFileEditorInput) element;
 
@@ -112,14 +169,42 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	@Override
 	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput, String encoding)
 			throws CoreException {
-		boolean result = super.setDocumentContent(document, editorInput, encoding);
-		if (result) {
-			XtextDocument xtextDocument = (XtextDocument) document;
-			XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
-			loadResource(xtextResource, xtextDocument.get(), encoding);
-			xtextDocument.setInput(xtextResource);
+		boolean result;
+		if (isWorkspaceExternalEditorInput(editorInput)) {
+			java.net.URI uri= ((IURIEditorInput) editorInput).getURI();
+			try {
+				InputStream contentStream = null;
+				try {
+					contentStream = uri.toURL().openStream();
+					setDocumentContent(document, contentStream, encoding);
+				} finally {
+					try {
+						if (contentStream != null)
+							contentStream.close();
+					} catch (IOException e1) {
+					}
+				}
+			} catch (IOException ex) {
+				String message= (ex.getMessage() != null ? ex.getMessage() : ""); //$NON-NLS-1$
+				IStatus s= new Status(IStatus.ERROR, PlatformUI.PLUGIN_ID, IStatus.OK, message, ex);
+				throw new CoreException(s);
+			} 
+			result = true;
+		} else {
+			result = super.setDocumentContent(document, editorInput, encoding);
 		}
+		if (result) 
+			setDocumentResource((XtextDocument) document, editorInput, encoding);
 		return result;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void setDocumentResource(XtextDocument xtextDocument, IEditorInput editorInput, String encoding) throws CoreException {
+		XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
+		loadResource(xtextResource, xtextDocument.get(), encoding);
+		xtextDocument.setInput(xtextResource);
 	}
 
 	@Override
@@ -150,7 +235,30 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
-		ElementInfo info = super.createElementInfo(element);
+		ElementInfo info;
+		if (isWorkspaceExternalEditorInput(element)) {
+			IDocument document= null;
+			IStatus status= null;
+			try {
+				document= createDocument(element);
+			} catch (CoreException x) {
+				status= x.getStatus();
+				document= createEmptyDocument();
+			}
+
+			info= new URIInfo(document, createAnnotationModel(element));
+			info.fStatus= status;
+		} else {
+			info = super.createElementInfo(element);
+		}
+		registerAnnotationInfoProcessor(info);
+		return info;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void registerAnnotationInfoProcessor(ElementInfo info) {
 		XtextDocument doc = (XtextDocument) info.fDocument;
 		if(info.fModel != null) {
 			AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel,
@@ -158,9 +266,8 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor, CheckMode.FAST_ONLY);
 			doc.setValidationJob(job);
 		}
-		return info;
 	}
-
+	
 	private UnchangedElementListener listener;
 
 	public class UnchangedElementListener implements IDocumentListener {
@@ -199,7 +306,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			if (listener != null)
 				info.fDocument.removeDocumentListener(listener);
 			listener = new UnchangedElementListener(info);
-			info.fDocument.addDocumentListener(new UnchangedElementListener(info));
+			info.fDocument.addDocumentListener(listener);
 		}
 	}
 
@@ -216,6 +323,8 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		if (element instanceof IFileEditorInput) {
 			IFileEditorInput input = (IFileEditorInput) element;
 			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, issueUtil);
+		} else if (element instanceof IURIEditorInput) {
+			return new AnnotationModel();
 		}
 		return super.createAnnotationModel(element);
 	}
@@ -249,15 +358,138 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	
 	@Override
 	public boolean isSynchronized(Object element) {
-		ElementInfo info2 = getElementInfo(element);
-		if (info2 instanceof FileInfo) {
-			FileInfo info = (FileInfo) getElementInfo(element);
+		ElementInfo info = getElementInfo(element);
+		if (info instanceof FileInfo) {
+			FileInfo fileInfo = (FileInfo) getElementInfo(element);
 			long modificationStamp = getModificationStamp(element);
-			if (info.fModificationStamp != modificationStamp) {
+			if (fileInfo.fModificationStamp != modificationStamp) {
 				return false;
 			}
 		}
 		return super.isSynchronized(element);
 	}
+	
+	@Override
+	public boolean isModifiable(Object element) {
+		if (isWorkspaceExternalEditorInput(element)) {
+			URIInfo info= (URIInfo) getElementInfo(element);
+			if (info != null) {
+				if (info.updateCache) {
+					try {
+						updateCache((IURIEditorInput) element);
+					} catch (CoreException x) {
+						handleCoreException(x, "XtextDocumentProvider.isModifiable");
+					}
+				}
+				return info.isModifiable;
+			}
+		}
+		return super.isModifiable(element);
+	}
+	
+	@Override
+	public boolean isReadOnly(Object element) {
+		if (isWorkspaceExternalEditorInput(element)) {
+			URIInfo info= (URIInfo) getElementInfo(element);
+			if (info != null) {
+				if (info.updateCache) {
+					try {
+						updateCache((IURIEditorInput) element);
+					} catch (CoreException x) {
+						handleCoreException(x, "XtextDocumentProvider.isReadOnly");
+					}
+				}
+				return info.isReadOnly;
+			}
+		}
+		return super.isReadOnly(element);
+	}
 
+	/**
+	 * @since 2.3
+	 */
+	protected boolean isWorkspaceExternalEditorInput(Object element) {
+		return element instanceof IURIEditorInput && !(element instanceof IFileEditorInput);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected void updateCache(IURIEditorInput input) throws CoreException {
+		URIInfo info= (URIInfo) getElementInfo(input);
+		if (info != null) {
+			java.net.URI uri= input.getURI();
+			if (uri != null) {
+				boolean readOnly = true;
+				String uriAsString = uri.toString();
+				URI emfURI = URI.createURI(uriAsString);
+				if (emfURI.isFile() && !emfURI.isArchive()) {
+					// TODO: Should we use the resource set somehow to obtain the URIConverter for the file protocol?
+					// see also todo below, but don't run into a stackoverflow ;-)
+					Map<String, ?> attributes = URIConverter.INSTANCE.getAttributes(emfURI, null);
+					readOnly = Boolean.TRUE.equals(attributes.get(URIConverter.ATTRIBUTE_READ_ONLY));
+				}
+				info.isReadOnly=  readOnly;
+				info.isModifiable= !readOnly;
+			}
+			info.updateCache= false;
+		}
+	}
+	
+	@Override
+	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite)
+			throws CoreException {
+		if (isWorkspaceExternalEditorInput(element)) {
+			CharsetEncoder encoder= Charset.defaultCharset().newEncoder();
+			encoder.onMalformedInput(CodingErrorAction.REPLACE);
+			encoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+
+			OutputStream stream = null;
+			try {
+				try {
+					monitor.beginTask("Saving", 2000);
+					byte[] bytes;
+					ByteBuffer byteBuffer= encoder.encode(CharBuffer.wrap(document.get()));
+					if (byteBuffer.hasArray())
+						bytes= byteBuffer.array();
+					else {
+						bytes= new byte[byteBuffer.limit()];
+						byteBuffer.get(bytes);
+					}
+					String uriAsString = ((IURIEditorInput) element).getURI().toString();
+					URI emfURI = URI.createURI(uriAsString);
+					// TODO: see todo above
+					stream = URIConverter.INSTANCE.createOutputStream(emfURI);
+					stream.write(bytes, 0, byteBuffer.limit());
+				} finally {
+					monitor.done();
+				}
+			} catch (CharacterCodingException ex) {
+				String message= MessageFormat.format("Some characters cannot be mapped using \"{0}\" character encoding.\n" +
+						"Either change the encoding or remove the characters which are not supported by the \"{0}\" character encoding.", new Object[]{ Charset.defaultCharset().name() });
+				IStatus s= new Status(IStatus.ERROR, Activator.PLUGIN_ID, 1 /* EditorsUI.CHARSET_MAPPING_FAILED */, message, null);
+				throw new CoreException(s);
+			} catch (IOException e) {
+				String message= "Could not save file.";
+				IStatus s= new Status(IStatus.ERROR, Activator.PLUGIN_ID, IResourceStatus.FAILED_WRITE_LOCAL, message, null);
+				throw new CoreException(s);
+			} finally {
+				Closeables.closeQuietly(stream);
+			}
+			return;
+		}
+		super.doSaveDocument(monitor, element, document, overwrite);
+	}
+
+	@Override
+	protected void doUpdateStateCache(Object element) throws CoreException {
+		if (isWorkspaceExternalEditorInput(element)) {
+			URIInfo info= (URIInfo) getElementInfo(element);
+			if (info != null) {
+				info.updateCache= true;
+				return;
+			}
+		}
+		super.doUpdateStateCache(element);
+	}
 }

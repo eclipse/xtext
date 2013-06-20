@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     try
     {
-      PartialParserTestLanguageFactory thePartialParserTestLanguageFactory = (PartialParserTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://example.xtext.org/PartialParserTestLanguage"); 
+      PartialParserTestLanguageFactory thePartialParserTestLanguageFactory = (PartialParserTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(PartialParserTestLanguagePackage.eNS_URI);
       if (thePartialParserTestLanguageFactory != null)
       {
         return thePartialParserTestLanguageFactory;

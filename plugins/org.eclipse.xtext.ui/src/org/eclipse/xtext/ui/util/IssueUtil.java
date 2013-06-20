@@ -15,14 +15,21 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
+
+import com.google.inject.Inject;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
 public class IssueUtil {
 
+	@Inject(optional=true)
+	private MarkerTypeProvider markerTypeProvider;
+	
 	public Issue createIssue(IMarker marker) {
 		Issue.IssueImpl issue = new Issue.IssueImpl();
 		issue.setMessage(MarkerUtilities.getMessage(marker));
@@ -36,10 +43,20 @@ public class IssueUtil {
 		issue.setUriToProblem(getUriToProblem(marker));
 		issue.setSeverity(getSeverity(marker));
 		
-		issue.setType(MarkerTypes.toCheckType(MarkerUtilities.getMarkerType(marker)));
+		issue.setType(getCheckType(marker));
 		// Note, isSyntaxError is unset, but currently the api does not allow fixing
 		// syntax errors anyway.
 		return issue;
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected CheckType getCheckType(IMarker marker) {
+		String markerType = MarkerUtilities.getMarkerType(marker);
+		if (markerTypeProvider != null)
+			return markerTypeProvider.getCheckType(markerType);
+		return MarkerTypes.toCheckType(markerType);
 	}
 	
 	public Issue getIssueFromAnnotation(Annotation annotation) {

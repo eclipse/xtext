@@ -11,12 +11,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -26,12 +27,12 @@ import com.google.common.collect.Lists;
  */
 public class XtextResourceDescriptionTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup());
 	}
 	
-	public void testComputeEObjectDescriptionsForEmptyFile() throws Exception {
+	@Test public void testComputeEObjectDescriptionsForEmptyFile() throws Exception {
 		Resource res = getResourceAndExpect(new StringInputStream(""),URI.createURI("foo.xtext"),1);
 		Manager manager = get(IResourceDescription.Manager.class);
 		IResourceDescription description = manager.getResourceDescription(res);
@@ -39,7 +40,7 @@ public class XtextResourceDescriptionTest extends AbstractXtextTests {
 		assertTrue(Lists.newArrayList(iterable).isEmpty());
 	}
 	
-	public void testComputeEObjectDescriptionsForUnnamedGrammar() throws Exception {
+	@Test public void testComputeEObjectDescriptionsForUnnamedGrammar() throws Exception {
 		Resource res = getResourceAndExpect(new StringInputStream("grammar "),URI.createURI("foo.xtext"),1);
 		Manager manager = get(IResourceDescription.Manager.class);
 		IResourceDescription description = manager.getResourceDescription(res);
@@ -47,7 +48,7 @@ public class XtextResourceDescriptionTest extends AbstractXtextTests {
 		assertTrue(Lists.newArrayList(iterable).isEmpty());
 	}
 	
-	public void testGetExportedEObjectsErroneousResource() throws Exception {
+	@Test public void testGetExportedEObjectsErroneousResource() throws Exception {
 		Resource res = getResourceAndExpect(new StringInputStream("grammar foo Start : 'main';"),URI.createURI("foo.xtext"),1);
 		Manager manager = get(IResourceDescription.Manager.class);
 		IResourceDescription description = manager.getResourceDescription(res);
@@ -55,7 +56,7 @@ public class XtextResourceDescriptionTest extends AbstractXtextTests {
 		assertTrue(Lists.newArrayList(iterable).size()==2);
 	}
 
-	public void testGetExportedEObjects() throws Exception {
+	@Test public void testGetExportedEObjects() throws Exception {
 		Resource res = getResource(new StringInputStream("grammar foo generate x \"someURI\" Start : 'main';"),URI.createURI("foo.xtext"));
 		Manager manager = get(IResourceDescription.Manager.class);
 		IResourceDescription description = manager.getResourceDescription(res);
@@ -63,7 +64,7 @@ public class XtextResourceDescriptionTest extends AbstractXtextTests {
 		assertTrue(Lists.newArrayList(iterable).size()==3);
 	}
 	
-	public void testBug350695() throws Exception {
+	@Test public void testBug350695() throws Exception {
 		Resource res = getResource(new StringInputStream("grammar org.foo.Zonk generate x \"someURI\" Start : 'main';"), URI.createURI("foo.xtext"));
 		Manager manager = get(IResourceDescription.Manager.class);
 		IResourceDescription description = manager.getResourceDescription(res);

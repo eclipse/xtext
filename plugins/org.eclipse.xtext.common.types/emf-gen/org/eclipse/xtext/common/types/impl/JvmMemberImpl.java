@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -36,7 +38,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements JvmMember
+public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implements JvmMember
 {
 	/**
 	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
@@ -127,17 +129,6 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 	public JvmDeclaredType getDeclaringType()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_MEMBER__DECLARING_TYPE) return null;
-		return (JvmDeclaredType)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmDeclaredType basicGetDeclaringType()
-	{
-		if (eContainerFeatureID() != TypesPackage.JVM_MEMBER__DECLARING_TYPE) return null;
 		return (JvmDeclaredType)eInternalContainer();
 	}
 
@@ -203,6 +194,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSimpleName()
 	{
 		return simpleName;
@@ -226,6 +218,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIdentifier()
 	{
 		return identifier;
@@ -237,30 +230,6 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 	 * @generated
 	 */
 	public void internalSetIdentifier(String identifier)
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getQualifiedName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getQualifiedName(char innerClassDelimiter)
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -328,8 +297,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 		switch (featureID)
 		{
 			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				if (resolve) return getDeclaringType();
-				return basicGetDeclaringType();
+				return getDeclaringType();
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				return getVisibility();
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
@@ -397,7 +365,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 		switch (featureID)
 		{
 			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				return basicGetDeclaringType() != null;
+				return getDeclaringType() != null;
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:

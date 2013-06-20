@@ -14,7 +14,7 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -22,33 +22,15 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
-@SuppressWarnings("restriction")
-public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
-	protected XtypeGrammarAccess grammarAccess;
-	
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-	
-	@Inject
-	protected ITransientValueService transientValues;
-	
-	@Inject
-	@GenericSequencer
-	protected Provider<ISemanticSequencer> genericSequencerProvider;
-	
-	protected ISemanticSequencer genericSequencer;
-	
-	
-	@Override
-	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequencer, sequenceAcceptor, errorAcceptor);
-		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
-	}
+	private XtypeGrammarAccess grammarAccess;
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
@@ -108,6 +90,18 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
+			case XtypePackage.XIMPORT_DECLARATION:
+				if(context == grammarAccess.getXImportDeclarationRule()) {
+					sequence_XImportDeclaration(context, (XImportDeclaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_SECTION:
+				if(context == grammarAccess.getXImportSectionRule()) {
+					sequence_XImportSection(context, (XImportSection) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
@@ -115,9 +109,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
-	 *
-	 * Features:
-	 *    typeReference[1, 1]
 	 */
 	protected void sequence_JvmLowerBound(EObject context, JvmLowerBound semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -127,10 +118,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?)
-	 *
-	 * Features:
-	 *    arguments[0, *]
-	 *    type[1, 1]
 	 */
 	protected void sequence_JvmParameterizedTypeReference(EObject context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -140,10 +127,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (name=ValidID ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | constraints+=JvmLowerBound)?)
-	 *
-	 * Features:
-	 *    constraints[0, *]
-	 *    name[1, 1]
 	 */
 	protected void sequence_JvmTypeParameter(EObject context, JvmTypeParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -153,9 +136,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     componentType=JvmTypeReference_JvmGenericArrayTypeReference_0_1_0_0
-	 *
-	 * Features:
-	 *    componentType[1, 1]
 	 */
 	protected void sequence_JvmTypeReference(EObject context, JvmGenericArrayTypeReference semanticObject) {
 		if(errorAcceptor != null) {
@@ -172,9 +152,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
-	 *
-	 * Features:
-	 *    typeReference[1, 1]
 	 */
 	protected void sequence_JvmUpperBoundAnded(EObject context, JvmUpperBound semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -184,9 +161,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
-	 *
-	 * Features:
-	 *    typeReference[1, 1]
 	 */
 	protected void sequence_JvmUpperBound(EObject context, JvmUpperBound semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -196,9 +170,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     ((constraints+=JvmUpperBound | constraints+=JvmLowerBound)?)
-	 *
-	 * Features:
-	 *    constraints[0, 2]
 	 */
 	protected void sequence_JvmWildcardTypeReference(EObject context, JvmWildcardTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -208,12 +179,30 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     ((paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)? returnType=JvmTypeReference)
-	 *
-	 * Features:
-	 *    paramTypes[0, *]
-	 *    returnType[1, 1]
 	 */
 	protected void sequence_XFunctionTypeRef(EObject context, XFunctionTypeRef semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         (static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName]) | 
+	 *         importedType=[JvmDeclaredType|QualifiedName] | 
+	 *         importedNamespace=QualifiedNameWithWildcard
+	 *     )
+	 */
+	protected void sequence_XImportDeclaration(EObject context, XImportDeclaration semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     importDeclarations+=XImportDeclaration+
+	 */
+	protected void sequence_XImportSection(EObject context, XImportSection semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

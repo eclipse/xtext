@@ -7,31 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmVoidTest extends TestCase {
+public class JvmVoidTest extends Assert {
 
 	private JvmVoid _void;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		_void = TypesFactory.eINSTANCE.createJvmVoid();
 	}
 	
-	public void testGetIdentifier_01() {
+	@Test public void testGetIdentifier_01() {
 		assertEquals("void", _void.getIdentifier());
 	}
 	
-	public void testGetQualifiedName() {
+	@Test public void testGetQualifiedName() {
 		assertEquals("void", _void.getQualifiedName());
 		assertEquals("void", _void.getQualifiedName('$'));
 	}
 	
-	public void testGetSimpleName() {
+	@Test public void testGetSimpleName() {
 		assertEquals("void", _void.getSimpleName());
 	}
 	

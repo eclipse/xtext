@@ -7,31 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmPrimitiveTypeTest extends TestCase {
+public class JvmPrimitiveTypeTest extends Assert {
 
 	private JvmPrimitiveType primitiveType;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 	}
 	
-	public void testGetIdentifier_01() {
+	@Test public void testGetIdentifier_01() {
 		assertNull(primitiveType.getIdentifier());
 	}
 	
-	public void testGetIdentifier_02() {
+	@Test public void testGetIdentifier_02() {
 		primitiveType.setSimpleName("int");
 		assertEquals("int", primitiveType.getIdentifier());
 	}
 	
-	public void testQualifiedName() {
+	@Test public void testQualifiedName() {
 		primitiveType.setSimpleName("int");
 		assertEquals("int", primitiveType.getQualifiedName());
 		assertEquals("int", primitiveType.getQualifiedName('$'));

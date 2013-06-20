@@ -116,6 +116,43 @@ public interface BuilderStatePackage extends EPackage {
 	int RESOURCE_DESCRIPTION_FEATURE_COUNT = 4;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.resource.IEObjectDescription <em>IE Object Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.resource.IEObjectDescription
+	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getIEObjectDescription()
+	 * @generated
+	 */
+	int IE_OBJECT_DESCRIPTION = 4;
+
+	/**
+	 * The feature id for the '<em><b>EClass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IE_OBJECT_DESCRIPTION__ECLASS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IE_OBJECT_DESCRIPTION__NAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>IE Object Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IE_OBJECT_DESCRIPTION_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl <em>EObject Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,40 +163,13 @@ public interface BuilderStatePackage extends EPackage {
 	int EOBJECT_DESCRIPTION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Fragment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT_DESCRIPTION__FRAGMENT = 0;
-
-	/**
 	 * The feature id for the '<em><b>EClass</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION__ECLASS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Resource Descriptor</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR = 2;
-
-	/**
-	 * The feature id for the '<em><b>User Data</b></em>' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT_DESCRIPTION__USER_DATA = 3;
+	int EOBJECT_DESCRIPTION__ECLASS = IE_OBJECT_DESCRIPTION__ECLASS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -168,7 +178,25 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION__NAME = 4;
+	int EOBJECT_DESCRIPTION__NAME = IE_OBJECT_DESCRIPTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Fragment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOBJECT_DESCRIPTION__FRAGMENT = IE_OBJECT_DESCRIPTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>User Data</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOBJECT_DESCRIPTION__USER_DATA = IE_OBJECT_DESCRIPTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>EObject Description</em>' class.
@@ -177,7 +205,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION_FEATURE_COUNT = 5;
+	int EOBJECT_DESCRIPTION_FEATURE_COUNT = IE_OBJECT_DESCRIPTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.builder.builderState.impl.UserDataEntryImpl <em>User Data Entry</em>}' class.
@@ -217,6 +245,61 @@ public interface BuilderStatePackage extends EPackage {
 	int USER_DATA_ENTRY_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.resource.IReferenceDescription <em>IReference Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.resource.IReferenceDescription
+	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getIReferenceDescription()
+	 * @generated
+	 */
+	int IREFERENCE_DESCRIPTION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Source EObject Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IREFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI = 0;
+
+	/**
+	 * The feature id for the '<em><b>Target EObject Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IREFERENCE_DESCRIPTION__TARGET_EOBJECT_URI = 1;
+
+	/**
+	 * The feature id for the '<em><b>Index In List</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IREFERENCE_DESCRIPTION__INDEX_IN_LIST = 2;
+
+	/**
+	 * The feature id for the '<em><b>Container EObject URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IREFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI = 3;
+
+	/**
+	 * The number of structural features of the '<em>IReference Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IREFERENCE_DESCRIPTION_FEATURE_COUNT = 4;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl <em>Reference Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -233,7 +316,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI = 0;
+	int REFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI = IREFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI;
 
 	/**
 	 * The feature id for the '<em><b>Target EObject Uri</b></em>' attribute.
@@ -242,7 +325,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_DESCRIPTION__TARGET_EOBJECT_URI = 1;
+	int REFERENCE_DESCRIPTION__TARGET_EOBJECT_URI = IREFERENCE_DESCRIPTION__TARGET_EOBJECT_URI;
 
 	/**
 	 * The feature id for the '<em><b>Index In List</b></em>' attribute.
@@ -251,16 +334,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_DESCRIPTION__INDEX_IN_LIST = 2;
-
-	/**
-	 * The feature id for the '<em><b>External Form Of EReference</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE = 3;
+	int REFERENCE_DESCRIPTION__INDEX_IN_LIST = IREFERENCE_DESCRIPTION__INDEX_IN_LIST;
 
 	/**
 	 * The feature id for the '<em><b>Container EObject URI</b></em>' attribute.
@@ -269,7 +343,16 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI = 4;
+	int REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI = IREFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI;
+
+	/**
+	 * The feature id for the '<em><b>External Form Of EReference</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE = IREFERENCE_DESCRIPTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Reference Description</em>' class.
@@ -278,7 +361,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_DESCRIPTION_FEATURE_COUNT = 5;
+	int REFERENCE_DESCRIPTION_FEATURE_COUNT = IREFERENCE_DESCRIPTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '<em>EURI</em>' data type.
@@ -288,7 +371,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getEURI()
 	 * @generated
 	 */
-	int EURI = 4;
+	int EURI = 6;
 
 
 	/**
@@ -298,7 +381,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getEStringArray()
 	 * @generated
 	 */
-	int ESTRING_ARRAY = 5;
+	int ESTRING_ARRAY = 7;
 
 
 	/**
@@ -309,7 +392,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getQualifiedName()
 	 * @generated
 	 */
-	int QUALIFIED_NAME = 6;
+	int QUALIFIED_NAME = 8;
 
 
 	/**
@@ -368,66 +451,32 @@ public interface BuilderStatePackage extends EPackage {
 	EReference getResourceDescription_ReferenceDescriptions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IEObjectDescription <em>EObject Description</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.builder.builderState.EObjectDescription <em>EObject Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>EObject Description</em>'.
-	 * @see org.eclipse.xtext.resource.IEObjectDescription
-	 * @model instanceClass="org.eclipse.xtext.resource.IEObjectDescription"
+	 * @see org.eclipse.xtext.builder.builderState.EObjectDescription
 	 * @generated
 	 */
 	EClass getEObjectDescription();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IEObjectDescription#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.resource.IEObjectDescription#getName()
-	 * @see #getEObjectDescription()
-	 * @generated
-	 */
-	EAttribute getEObjectDescription_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IEObjectDescription#getFragment <em>Fragment</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.builderState.EObjectDescription#getFragment <em>Fragment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Fragment</em>'.
-	 * @see org.eclipse.xtext.resource.IEObjectDescription#getFragment()
+	 * @see org.eclipse.xtext.builder.builderState.EObjectDescription#getFragment()
 	 * @see #getEObjectDescription()
 	 * @generated
 	 */
 	EAttribute getEObjectDescription_Fragment();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.resource.IEObjectDescription#getEClass <em>EClass</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>EClass</em>'.
-	 * @see org.eclipse.xtext.resource.IEObjectDescription#getEClass()
-	 * @see #getEObjectDescription()
-	 * @generated
-	 */
-	EReference getEObjectDescription_EClass();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.resource.IEObjectDescription#getResourceDescriptor <em>Resource Descriptor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Resource Descriptor</em>'.
-	 * @see org.eclipse.xtext.resource.IEObjectDescription#getResourceDescriptor()
-	 * @see #getEObjectDescription()
-	 * @generated
-	 */
-	EReference getEObjectDescription_ResourceDescriptor();
-
-	/**
-	 * Returns the meta object for the map '{@link org.eclipse.xtext.resource.IEObjectDescription#getUserData <em>User Data</em>}'.
+	 * Returns the meta object for the map '{@link org.eclipse.xtext.builder.builderState.EObjectDescription#getUserData <em>User Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>User Data</em>'.
-	 * @see org.eclipse.xtext.resource.IEObjectDescription#getUserData()
+	 * @see org.eclipse.xtext.builder.builderState.EObjectDescription#getUserData()
 	 * @see #getEObjectDescription()
 	 * @generated
 	 */
@@ -468,15 +517,69 @@ public interface BuilderStatePackage extends EPackage {
 	EAttribute getUserDataEntry_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IReferenceDescription <em>Reference Description</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.builder.builderState.ReferenceDescription <em>Reference Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Reference Description</em>'.
+	 * @see org.eclipse.xtext.builder.builderState.ReferenceDescription
+	 * @generated
+	 */
+	EClass getReferenceDescription();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.builderState.ReferenceDescription#getExternalFormOfEReference <em>External Form Of EReference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>External Form Of EReference</em>'.
+	 * @see org.eclipse.xtext.builder.builderState.ReferenceDescription#getExternalFormOfEReference()
+	 * @see #getReferenceDescription()
+	 * @generated
+	 */
+	EAttribute getReferenceDescription_ExternalFormOfEReference();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IEObjectDescription <em>IE Object Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>IE Object Description</em>'.
+	 * @see org.eclipse.xtext.resource.IEObjectDescription
+	 * @model instanceClass="org.eclipse.xtext.resource.IEObjectDescription"
+	 * @generated
+	 */
+	EClass getIEObjectDescription();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.resource.IEObjectDescription#getEClass <em>EClass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EClass</em>'.
+	 * @see org.eclipse.xtext.resource.IEObjectDescription#getEClass()
+	 * @see #getIEObjectDescription()
+	 * @generated
+	 */
+	EReference getIEObjectDescription_EClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IEObjectDescription#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.resource.IEObjectDescription#getName()
+	 * @see #getIEObjectDescription()
+	 * @generated
+	 */
+	EAttribute getIEObjectDescription_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IReferenceDescription <em>IReference Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>IReference Description</em>'.
 	 * @see org.eclipse.xtext.resource.IReferenceDescription
 	 * @model instanceClass="org.eclipse.xtext.resource.IReferenceDescription"
 	 * @generated
 	 */
-	EClass getReferenceDescription();
+	EClass getIReferenceDescription();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IReferenceDescription#getSourceEObjectUri <em>Source EObject Uri</em>}'.
@@ -484,10 +587,10 @@ public interface BuilderStatePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Source EObject Uri</em>'.
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getSourceEObjectUri()
-	 * @see #getReferenceDescription()
+	 * @see #getIReferenceDescription()
 	 * @generated
 	 */
-	EAttribute getReferenceDescription_SourceEObjectUri();
+	EAttribute getIReferenceDescription_SourceEObjectUri();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IReferenceDescription#getTargetEObjectUri <em>Target EObject Uri</em>}'.
@@ -495,10 +598,10 @@ public interface BuilderStatePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Target EObject Uri</em>'.
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getTargetEObjectUri()
-	 * @see #getReferenceDescription()
+	 * @see #getIReferenceDescription()
 	 * @generated
 	 */
-	EAttribute getReferenceDescription_TargetEObjectUri();
+	EAttribute getIReferenceDescription_TargetEObjectUri();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IReferenceDescription#getIndexInList <em>Index In List</em>}'.
@@ -506,21 +609,10 @@ public interface BuilderStatePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index In List</em>'.
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getIndexInList()
-	 * @see #getReferenceDescription()
+	 * @see #getIReferenceDescription()
 	 * @generated
 	 */
-	EAttribute getReferenceDescription_IndexInList();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IReferenceDescription#getExternalFormOfEReference <em>External Form Of EReference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>External Form Of EReference</em>'.
-	 * @see org.eclipse.xtext.resource.IReferenceDescription#getExternalFormOfEReference()
-	 * @see #getReferenceDescription()
-	 * @generated
-	 */
-	EAttribute getReferenceDescription_ExternalFormOfEReference();
+	EAttribute getIReferenceDescription_IndexInList();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IReferenceDescription#getContainerEObjectURI <em>Container EObject URI</em>}'.
@@ -528,10 +620,10 @@ public interface BuilderStatePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Container EObject URI</em>'.
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getContainerEObjectURI()
-	 * @see #getReferenceDescription()
+	 * @see #getIReferenceDescription()
 	 * @generated
 	 */
-	EAttribute getReferenceDescription_ContainerEObjectURI();
+	EAttribute getIReferenceDescription_ContainerEObjectURI();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>EURI</em>}'.
@@ -640,36 +732,12 @@ public interface BuilderStatePackage extends EPackage {
 		EClass EOBJECT_DESCRIPTION = eINSTANCE.getEObjectDescription();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EOBJECT_DESCRIPTION__NAME = eINSTANCE.getEObjectDescription_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Fragment</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute EOBJECT_DESCRIPTION__FRAGMENT = eINSTANCE.getEObjectDescription_Fragment();
-
-		/**
-		 * The meta object literal for the '<em><b>EClass</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EOBJECT_DESCRIPTION__ECLASS = eINSTANCE.getEObjectDescription_EClass();
-
-		/**
-		 * The meta object literal for the '<em><b>Resource Descriptor</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR = eINSTANCE.getEObjectDescription_ResourceDescriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>User Data</b></em>' map feature.
@@ -716,30 +784,6 @@ public interface BuilderStatePackage extends EPackage {
 		EClass REFERENCE_DESCRIPTION = eINSTANCE.getReferenceDescription();
 
 		/**
-		 * The meta object literal for the '<em><b>Source EObject Uri</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute REFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI = eINSTANCE.getReferenceDescription_SourceEObjectUri();
-
-		/**
-		 * The meta object literal for the '<em><b>Target EObject Uri</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute REFERENCE_DESCRIPTION__TARGET_EOBJECT_URI = eINSTANCE.getReferenceDescription_TargetEObjectUri();
-
-		/**
-		 * The meta object literal for the '<em><b>Index In List</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute REFERENCE_DESCRIPTION__INDEX_IN_LIST = eINSTANCE.getReferenceDescription_IndexInList();
-
-		/**
 		 * The meta object literal for the '<em><b>External Form Of EReference</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -748,12 +792,72 @@ public interface BuilderStatePackage extends EPackage {
 		EAttribute REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE = eINSTANCE.getReferenceDescription_ExternalFormOfEReference();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.resource.IEObjectDescription <em>IE Object Description</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.resource.IEObjectDescription
+		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getIEObjectDescription()
+		 * @generated
+		 */
+		EClass IE_OBJECT_DESCRIPTION = eINSTANCE.getIEObjectDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>EClass</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IE_OBJECT_DESCRIPTION__ECLASS = eINSTANCE.getIEObjectDescription_EClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IE_OBJECT_DESCRIPTION__NAME = eINSTANCE.getIEObjectDescription_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.resource.IReferenceDescription <em>IReference Description</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.resource.IReferenceDescription
+		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getIReferenceDescription()
+		 * @generated
+		 */
+		EClass IREFERENCE_DESCRIPTION = eINSTANCE.getIReferenceDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Source EObject Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IREFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI = eINSTANCE.getIReferenceDescription_SourceEObjectUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Target EObject Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IREFERENCE_DESCRIPTION__TARGET_EOBJECT_URI = eINSTANCE.getIReferenceDescription_TargetEObjectUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Index In List</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IREFERENCE_DESCRIPTION__INDEX_IN_LIST = eINSTANCE.getIReferenceDescription_IndexInList();
+
+		/**
 		 * The meta object literal for the '<em><b>Container EObject URI</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI = eINSTANCE.getReferenceDescription_ContainerEObjectURI();
+		EAttribute IREFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI = eINSTANCE.getIReferenceDescription_ContainerEObjectURI();
 
 		/**
 		 * The meta object literal for the '<em>EURI</em>' data type.

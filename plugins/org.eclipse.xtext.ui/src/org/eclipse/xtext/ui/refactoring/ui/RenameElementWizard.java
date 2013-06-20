@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
@@ -29,15 +31,21 @@ import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 public class RenameElementWizard extends RefactoringWizard {
 
 	private AbstractRenameProcessor renameProcessor;
+	
+	private SaveHelper saveHelper;
 
-	public RenameElementWizard(ProcessorBasedRefactoring refactoring) {
+	private IRenameElementContext context;
+
+	public RenameElementWizard(ProcessorBasedRefactoring refactoring, SaveHelper saveHelper, IRenameElementContext context) {
 		super(refactoring, DIALOG_BASED_USER_INTERFACE);
+		this.saveHelper = saveHelper;
+		this.context = context;
 		renameProcessor = (AbstractRenameProcessor) refactoring.getProcessor();
 	}
 
 	@Override
 	protected void addUserInputPages() {
-		addPage(new UserInputPage(getRenameProcessor()));
+		addPage(new UserInputPage(getRenameProcessor(), saveHelper, context));
 	}
 
 	protected AbstractRenameProcessor getRenameProcessor() {
@@ -49,10 +57,14 @@ public class RenameElementWizard extends RefactoringWizard {
 		private final AbstractRenameProcessor renameProcessor;
 		private Text nameField;
 		private String currentName;
+		private SaveHelper saveHelper;
+		private IRenameElementContext context;
 
-		public UserInputPage(AbstractRenameProcessor renameProcessor) {
+		public UserInputPage(AbstractRenameProcessor renameProcessor, SaveHelper saveHelper, IRenameElementContext context) {
 			super("RenameElementResourceRefactoringInputPage"); //$NON-NLS-1$
 			this.renameProcessor = renameProcessor;
+			this.saveHelper = saveHelper;
+			this.context = context;
 			currentName = renameProcessor.getNewName() != null ? renameProcessor.getNewName()
 					: renameProcessor.getOriginalName();
 		}
@@ -76,7 +88,7 @@ public class RenameElementWizard extends RefactoringWizard {
 				}
 			});
 			nameField.selectAll();
-			setPageComplete(renameProcessor.validateNewName(currentName));
+			validatePage();
 			setControl(composite);
 		}
 
@@ -92,6 +104,9 @@ public class RenameElementWizard extends RefactoringWizard {
 			String text = nameField.getText();
 			RefactoringStatus status = renameProcessor.validateNewName(text);
 			setPageComplete(status);
+			if(equal(renameProcessor.getOriginalName(), text)) {
+				setPageComplete(false);
+			}
 		}
 
 		@Override

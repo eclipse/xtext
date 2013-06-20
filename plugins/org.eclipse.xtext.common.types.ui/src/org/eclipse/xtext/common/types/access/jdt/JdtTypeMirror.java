@@ -31,7 +31,7 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 		this.mirroredType = type;
 		this.typeFactory = typeFactory;
 	}
-
+	
 	public void initialize(TypeResource typeResource) {
 		typeResource.getContents().add(typeFactory.createType(mirroredType));
 		this.typeResource = typeResource;
@@ -89,4 +89,10 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 		// ignore
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	public boolean isSealed() {
+		return mirroredType.isReadOnly();
+	}
 }

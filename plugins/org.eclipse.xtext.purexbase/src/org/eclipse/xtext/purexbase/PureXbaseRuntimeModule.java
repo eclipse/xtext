@@ -3,10 +3,10 @@
  */
 package org.eclipse.xtext.purexbase;
 
-
 /**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
  */
-public class PureXbaseRuntimeModule extends org.eclipse.xtext.purexbase.AbstractPureXbaseRuntimeModule {
-	
+public class PureXbaseRuntimeModule extends AbstractPureXbaseRuntimeModule {
+
 }

@@ -11,8 +11,8 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
-@SuppressWarnings("restriction")
-public class AbstractUnassignedTextTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractUnassignedTextTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected UnassignedTextTestLanguageGrammarAccess grammarAccess;
 	
@@ -40,36 +40,70 @@ public class AbstractUnassignedTextTestLanguageSyntacticSequencer extends Abstra
 		return "";
 	}
 	
+	/**
+	 * terminal CaseInsensitiveKeyword: 
+	 * 	('k'|'K')('e'|'E')('y'|'Y')('w'|'W')('o'|'O')('r'|'R')('d'|'D');
+	 */
 	protected String getCaseInsensitiveKeywordToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "keyword";
 	}
+	
+	/**
+	 * Datatype returns ecore::EString:
+	 * 	'str' | INT | Datatype2;
+	 */
 	protected String getDatatypeToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "str";
 	}
+	
+	/**
+	 * terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+	 */
 	protected String getIDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "";
 	}
+	
+	/**
+	 * terminal INT returns ecore::EInt: ('0'..'9')+;
+	 */
 	protected String getINTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "";
 	}
+	
+	/**
+	 * terminal Multi:
+	 * 	'a' 'b'? 'c'+ 'd'* ('e' | 'f') (('g'|'h') | 'i'+) Multi2 '0'..'9' '0'..'9'+;
+	 */
 	protected String getMultiToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "acegj";
 	}
+	
+	/**
+	 * terminal Plural:
+	 * 	'item' | 'items';
+	 */
 	protected String getPluralToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "item";
 	}
+	
+	/**
+	 * terminal STRING	: 
+	 * 			'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
+	 * 			"'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
+	 * 		;
+	 */
 	protected String getSTRINGToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);

@@ -16,19 +16,23 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
-
-import com.google.common.collect.Lists;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import testdata.VisibilitySubClass;
 import testdata.VisibilitySuperType;
+
+import com.google.common.collect.Lists;
 
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Ignore("This class tests obsolete implementation details")
+@SuppressWarnings("deprecation")
 public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFeatureScopeProviderTest {
 	
-	public void testNoContext() throws Exception {
+	@Test public void testNoContext() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
 		DefaultJvmFeatureDescriptionProvider defaultProvider = createDefaultJvmFeatureDescriptionProvider();
 		XFeatureCallSugarDescriptionProvider descProvider = createXFeatureCallSugaringJvmFeatureDescriptionProvider();
@@ -62,7 +66,7 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	
-	public void testSubclassContext() throws Exception {
+	@Test public void testSubclassContext() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
 		
 		DefaultJvmFeatureDescriptionProvider defaultProvider = createDefaultJvmFeatureDescriptionProvider();
@@ -95,7 +99,7 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	
-	public void testPrivateContext() throws Exception {
+	@Test public void testPrivateContext() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
 		JvmTypeReference superType = getTypeRef(VisibilitySuperType.class.getCanonicalName());
 		

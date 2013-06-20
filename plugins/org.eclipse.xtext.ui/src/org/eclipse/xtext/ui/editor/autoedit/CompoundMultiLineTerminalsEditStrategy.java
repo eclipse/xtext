@@ -59,6 +59,14 @@ public class CompoundMultiLineTerminalsEditStrategy extends AbstractEditStrategy
 		return and(leftTerminal, null, rightTerminal);
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	public CompoundMultiLineTerminalsEditStrategy and(MultiLineTerminalsEditStrategy strategy) {
+		strategies.add(strategy);
+		return this;
+	}
+
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {

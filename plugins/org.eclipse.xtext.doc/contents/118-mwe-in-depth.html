@@ -5,7 +5,7 @@
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
-<link rel="home" href="index.html" title="">
+<link rel="home" href="xtext.html" title="">
 </head>
 <body>
 <a name="MWE2"></a>
@@ -35,7 +35,7 @@ module that does nothing but print a message to standard out. The
 second module is assembled of three components that read an Ecore 
 file, transform the contained classifier-names to upper-case and 
 serialize the resource back to a new file. The last example uses 
-the life-cycle methods of the <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr> 
+the life-cycle methods of the <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> 
 to print the execution time of the workflow.
 </p>
 <a name="MWE2HelloWorld"></a>
@@ -52,7 +52,7 @@ snippet:
 <br/>
 SayHello&nbsp;{<br/>
 &nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -95,7 +95,7 @@ of the class <span class="inlinecode">SayHello</span> looks straight forward:
 <br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -104,7 +104,7 @@ of the class <span class="inlinecode">SayHello</span> looks straight forward:
 It looks like a simple POJO and that&apos;s the philosophy behind MWE2. 
 It is easily possible to assemble completely independent objects in 
 a declarative manner. To make the workflow executable with the 
-<abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr>, the component 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java" title="View Source Code" >(src)</a>, the component 
 <span class="inlinecode">SayHello</span> must be nested in a root 
 workflow:
 </p>
@@ -115,16 +115,16 @@ workflow:
 <span class="keyword">module</span>&nbsp;HelloWorld&nbsp;<br/>
 <br/>
 Workflow&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
+&nbsp;&nbsp;}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
-The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr> 
+The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> 
 is implicitly imported in MWE2 modules to make the the modules more 
 concise. The execution result of this workflow will be revealed 
 after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as 
@@ -136,7 +136,7 @@ after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as
 <h3>A Simple Transformation</h3>
 <p>
 The following workflow solves the exemplary task to rename every 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> in an <em>*.ecore</em> file.
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> in an <em>*.ecore</em> file.
 It consists of three components that read, modify and write the model file:
 </p>
 <p>
@@ -163,7 +163,7 @@ own components even for minor operations to automate a process.
 </p>
 <p>
 The <span class="inlinecode">ResourceReader</span> simply reads the file with the given 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> and stores it in a so called
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a> and stores it in a so called
 <em>slot</em> of the workflow context. A slot can be understood as a dictionary or map-entry.
 </p>
 <p>
@@ -178,21 +178,21 @@ The <span class="inlinecode">ResourceReader</span> simply reads the file with th
 &nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(fileURI,&nbsp;<span class="keyword">true</span>);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);<br/>
 &nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;<br/>
 &nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
 The actual transformer takes the model from the slot and modifies it. It simply iterates the content
-of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> and sets its name. 
+of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> and sets its name. 
 </p>
 <p>
 <div class="literallayout">
@@ -220,7 +220,7 @@ of the resource, identifies each <a class="jdoc" href="http://download.eclipse.o
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isToLowerCase()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;toLowerCase;<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -228,7 +228,7 @@ of the resource, identifies each <a class="jdoc" href="http://download.eclipse.o
 <p>
 After the model has been modified it should be written to a new file. That&apos;s what the 
 <span class="inlinecode">ResourceWriter</span> does. It actually takes the resource from the given <em>slot</em> and saves it with
-the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a>:
+the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a>:
 </p>
 <p>
 <div class="literallayout">
@@ -254,13 +254,13 @@ the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/em
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
-Last but not least, the common supertype for those components looks like this:
+Last but not least, the common super type for those components looks like this:
 </p>
 <p>
 <div class="literallayout">
@@ -275,10 +275,10 @@ Last but not least, the common supertype for those components looks like this:
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getSlot()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;slot;<br/>
 &nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -338,7 +338,7 @@ Workflow&nbsp;{<br/>
 &nbsp;&nbsp;component&nbsp;=&nbsp;StopWatch:&nbsp;stopWatch&nbsp;{}<br/>
 &nbsp;&nbsp;component&nbsp;=&nbsp;@OtherWorkflow&nbsp;{}<br/>
 &nbsp;&nbsp;component&nbsp;=&nbsp;stopWatch<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -360,7 +360,7 @@ manner.
 	</li>
 	<li>
 		Components are mapped to plain vanilla <em>Java objects</em>. Arbitrary <span class="inlinecode">setABC(..)</span> and <span class="inlinecode">addXYZ(..)</span> methods 
-				are used to configure them.
+		    are used to configure them.
 	</li>
 </ul>
 </p>
@@ -380,7 +380,7 @@ SampleClass&nbsp;{<br/>
 &nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
 &nbsp;&nbsp;multiValue&nbsp;=&nbsp;ArrayList&nbsp;{}<br/>
 &nbsp;&nbsp;child&nbsp;=&nbsp;{}<br/>
-}&nbsp;<br/>
+}
 </p>
 </div>
 </div>
@@ -397,7 +397,7 @@ SampleClass&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSingleValue(String&nbsp;value)&nbsp;{..}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addMultiValue(List&lt;?&gt;&nbsp;value)&nbsp;{..}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(SampleClass&nbsp;value)&nbsp;{..}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -458,7 +458,7 @@ Let&apos;s create a second module <span class="inlinecode">com.mycompany.Second<
 <br/>
 SampleClass&nbsp;{<br/>
 &nbsp;&nbsp;child&nbsp;=&nbsp;@Example&nbsp;{}<br/>
-}&nbsp;
+}
 </p>
 </div>
 </div>
@@ -519,7 +519,7 @@ second built in type is boolean via the familiar literals <span class="inlinecod
 <br/>
 SampleClass&nbsp;{<br/>
 &nbsp;&nbsp;child&nbsp;=&nbsp;childInstance<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -588,7 +588,7 @@ if we reuse <span class="inlinecode">org.mycompany.Example</span> in another mod
 @Example&nbsp;{<br/>
 &nbsp;&nbsp;mandatory&nbsp;=&nbsp;<span class="string">"mandatoryValue"</span><br/>
 &nbsp;&nbsp;optional&nbsp;=&nbsp;newMandatory<br/>
-}&nbsp;
+}
 </p>
 </div>
 </div>
@@ -603,8 +603,8 @@ without a default value.
 <p>
 It is not only possible to define mandatory properties for MWE2 
 modules but for classes as well. Therefore MWE2 ships with the 
-<abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
-<abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr>, the module validation will fail if no value was assigned
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a>, the module validation will fail if no value was assigned
 to that feature.
 </p>
 <a name="MWE2NamedComponents"></a>
@@ -647,7 +647,7 @@ methods respectively. In many cases its quite hard to come up with
 yet another name for the very same concept which leads to the situation
 where the properties itself have the very same name as the component&apos;s
 feature. To avoid the overall repetition of assignments, MWE2 offers
-the possibility to use the <span class="inlinecode"><span class="keyword">auto-inject</span></span> modifier on the component 
+the possibility to use the <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span> modifier on the component 
 literal:
 </p>
 <p>
@@ -658,7 +658,7 @@ literal:
 <br/>
 <span class="keyword">var</span>&nbsp;child&nbsp;=&nbsp;SampleClass&nbsp;{}<br/>
 <br/>
-SampleClass&nbsp;<span class="keyword">auto-inject</span>&nbsp;{<br/>
+SampleClass&nbsp;<span class="keyword">auto</span>-<span class="keyword">inject</span>&nbsp;{<br/>
 }
 </p>
 </div>
@@ -671,7 +671,7 @@ useful for highly configurable workflows that expose dozens of optional
 parameters each of which can be assigned to one or more components.
 </p>
 <p>
-The <span class="inlinecode"><span class="keyword">auto-inject</span></span> modifier can be used for a subset of the available
+The <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span> modifier can be used for a subset of the available
 features as well. It will suppressed for the explicitly set values
 of a component.        
 </p>
@@ -712,7 +712,7 @@ by a &apos;.&apos; dot.
 <div class="incode">
 <p class="code">
 Name:&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;<br/>
-ID:&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;&nbsp;
+ID:&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;
 </p>
 </div>
 </div>
@@ -745,13 +745,7 @@ or module. MWE2 can handle relative imports in case one uses the
 wildcard notation:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?&nbsp;&nbsp;&nbsp;<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?</span>
 </p>
 <a name="MWE2PropertySyntax"></a>
 <h3>Property</h3>
@@ -811,7 +805,7 @@ and any assignment that is defined after the named component can refer
 to this identifier and thereby exactly point to the instantiated object.
 </p>
 <p>
-The next option for a component is <span class="inlinecode"><span class="keyword">auto-inject</span></span>. If this modifier
+The next option for a component is <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span>. If this modifier
 is set on a component, any available feature of the component that has
 the same name as a property or previously created named component will
 be automatically assigned.
@@ -848,7 +842,7 @@ several parts.
 <p class="code">
 <span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;value&apos;</span><br/>
 <span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">&apos;It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into<br/>
-&nbsp;a&nbsp;multi-line&nbsp;string&apos;</span><br/>
+&nbsp;a&nbsp;multi-line&nbsp;string&apos;</span>
 </p>
 </div>
 </div>

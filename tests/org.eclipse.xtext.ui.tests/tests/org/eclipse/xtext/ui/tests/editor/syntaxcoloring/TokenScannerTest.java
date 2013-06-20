@@ -9,22 +9,22 @@ package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TokenScanner;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class TokenScannerTest extends TestCase {
+public class TokenScannerTest extends Assert {
 
-	public void testFullRange() throws Exception {
+	@Test public void testFullRange() throws Exception {
 		TokenScanner scanner = getTokenScanner(3, 4, 3, 2);
 		scanner.setRange(null, 0, 12);
 
@@ -43,7 +43,7 @@ public class TokenScannerTest extends TestCase {
 		assertEquals(Token.EOF, scanner.nextToken());
 	}
 	
-	public void testBeginning() throws Exception {
+	@Test public void testBeginning() throws Exception {
 		TokenScanner scanner = getTokenScanner(3, 4, 3, 2);
 		scanner.setRange(null, 0, 7);
 		
@@ -56,7 +56,7 @@ public class TokenScannerTest extends TestCase {
 		assertEquals(Token.EOF, scanner.nextToken());
 	}
 	
-	public void testMidRange() throws Exception {
+	@Test public void testMidRange() throws Exception {
 		TokenScanner scanner = getTokenScanner(3, 4, 3, 2);
 		scanner.setRange(null, 3, 7);
 		
@@ -69,7 +69,7 @@ public class TokenScannerTest extends TestCase {
 		assertEquals(Token.EOF, scanner.nextToken());
 	}
 	
-	public void testTrailingRange() throws Exception {
+	@Test public void testTrailingRange() throws Exception {
 		TokenScanner scanner = getTokenScanner(3, 4, 3, 2);
 		scanner.setRange(null, 7, 5);
 		

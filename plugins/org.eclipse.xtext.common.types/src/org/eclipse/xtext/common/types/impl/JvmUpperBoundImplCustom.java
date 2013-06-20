@@ -34,4 +34,11 @@ public class JvmUpperBoundImplCustom extends JvmUpperBoundImpl {
 			return EXTENDS + super.getQualifiedName(innerClassDelimiter);
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		if (typeReference != null)
+			return EXTENDS + super.toString();
+		return eClass().getName();
+	}
 }

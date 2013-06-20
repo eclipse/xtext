@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -41,7 +42,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 	private int created;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		helper = new NamesAreUniqueValidationHelper() {
 			@Override 
@@ -55,7 +56,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		expected = Lists.newArrayList();
 	}
 	
-	public void testCancel_01() {
+	@Test public void testCancel_01() {
 		maxCallCount = 1;
 		helper.checkUniqueNames(
 				Scopes.scopedElementsFor(ImmutableList.of(
@@ -66,7 +67,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertEquals(maxCallCount, callCount);
 	}
 	
-	public void testCancel_02() {
+	@Test public void testCancel_02() {
 		maxCallCount = 0;
 		helper.checkUniqueNames(
 				Scopes.scopedElementsFor(ImmutableList.of(
@@ -77,7 +78,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertEquals(2, callCount);
 	}
 	
-	public void testCancel_03() {
+	@Test public void testCancel_03() {
 		maxCallCount = 0;
 		helper.checkUniqueNames(
 				Scopes.scopedElementsFor(ImmutableList.of(
@@ -88,7 +89,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertEquals(0, callCount);
 	}
 	
-	public void testCreatedErrors_01() {
+	@Test public void testCreatedErrors_01() {
 		maxCallCount = 0;
 		ImmutableList<EClass> classes = ImmutableList.of(
 				createEClass(),
@@ -105,7 +106,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertTrue(expected.isEmpty());
 	}
 	
-	public void testCreatedErrors_02() {
+	@Test public void testCreatedErrors_02() {
 		maxCallCount = 0;
 		ImmutableList<EClassifier> classifiers = ImmutableList.of(
 				createEClass(),
@@ -122,7 +123,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertTrue(expected.isEmpty());
 	}
 	
-	public void testCreatedErrors_03() {
+	@Test public void testCreatedErrors_03() {
 		maxCallCount = 0;
 		ImmutableList<ENamedElement> elements = ImmutableList.of(
 				createEClass(),
@@ -140,7 +141,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertTrue(expected.isEmpty());
 	}
 	
-	public void testCreatedErrors_04() {
+	@Test public void testCreatedErrors_04() {
 		maxCallCount = 0;
 		ImmutableList<ENamedElement> elements = ImmutableList.of(
 				createEClass(),
@@ -159,7 +160,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertTrue(expected.isEmpty());
 	}
 	
-	public void testCreatedErrors_05() {
+	@Test public void testCreatedErrors_05() {
 		maxCallCount = 0;
 		ImmutableList<ENamedElement> elements = ImmutableList.of(
 				createEPackage(),
@@ -178,7 +179,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertTrue(expected.isEmpty());
 	}
 	
-	public void testCreatedErrors_06() {
+	@Test public void testCreatedErrors_06() {
 		maxCallCount = 1;
 		ImmutableList<ENamedElement> elements = ImmutableList.of(
 				createEPackage(),
@@ -194,7 +195,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertEquals(1, callCount);
 	}
 	
-	public void testCreatedErrors_07() {
+	@Test public void testCreatedErrors_07() {
 		maxCallCount = 0;
 		ImmutableList<ENamedElement> elements = ImmutableList.of(
 				createEPackage(),
@@ -213,7 +214,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertTrue(expected.isEmpty());
 	}
 	
-	public void testErrorMessage_01() {
+	@Test public void testErrorMessage_01() {
 		EClass eClass = createEClass();
 		eClass.setName("EClassName");
 		IEObjectDescription description = EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass);
@@ -221,7 +222,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertEquals("Duplicate EClassifier 'EClassName'", errorMessage);
 	}
 	
-	public void testErrorMessage_02() {
+	@Test public void testErrorMessage_02() {
 		EClass eClass = createEClass();
 		eClass.setName("EClassName");
 		IEObjectDescription description = EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass);
@@ -229,7 +230,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertEquals("Duplicate EClass 'EClassName'", errorMessage);
 	}
 	
-	public void testErrorMessage_03() {
+	@Test public void testErrorMessage_03() {
 		EClass eClass = createEClass();
 		eClass.setName("EClassName");
 		EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
@@ -240,7 +241,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		assertEquals("Duplicate EAttribute 'Attribute' in EClass 'EClassName'", errorMessage);
 	}
 	
-	public void testErrorMessage_04() {
+	@Test public void testErrorMessage_04() {
 		EClass eClass = createEClass();
 		eClass.setName("EClassName");
 		EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();

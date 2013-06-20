@@ -15,11 +15,47 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 
+import com.google.common.collect.AbstractIterator;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resource.Factory {
 
+	/**
+	 * An iterator over all permutations of a given name that are not equal to the original name.
+	 * In other words, the iterator yields these values for the input {@code java.lang.String}:
+	 * <ol>
+	 * <li>{@code java.lang$String}</li>
+	 * <li>{@code java$lang$String}</li>
+	 * </ol>
+	 * 
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 * @since 2.4
+	 */
+	protected static class ClassNameVariants extends AbstractIterator<String> {
+
+		private StringBuilder buffer;
+		private int index;
+
+		public ClassNameVariants(String initial) {
+			buffer = new StringBuilder(initial);
+			index = buffer.length();
+		}
+		
+		@Override
+		protected String computeNext() {
+			int newIndex = buffer.lastIndexOf(".", index);
+			if (newIndex == -1)
+				return endOfData();
+			index = newIndex - 1;
+			buffer.setCharAt(newIndex, '$');
+			return buffer.toString();
+		}
+		
+	}
+	
 	private final ResourceSet resourceSet;
 	
 	private final PrimitiveTypeFactory primitiveTypeFactory;
@@ -40,6 +76,15 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 	}
 
 	public abstract JvmType findTypeByName(String name);
+	
+	protected boolean isBinaryNestedTypeDelimiter(String name, boolean binaryNestedTypeDelimiter) {
+		return binaryNestedTypeDelimiter || name.indexOf('$') >= 0 || name.indexOf('.') < 0;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public abstract JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter);
 
 	public TypeResource createResource(URI uri) {
 		TypeResource result = doCreateResource(uri);

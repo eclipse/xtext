@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.builder.builderState.EObjectDescription;
+import org.eclipse.xtext.builder.builderState.ReferenceDescription;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -57,6 +59,20 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * @generated
 	 */
 	private EClass referenceDescriptionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ieObjectDescriptionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iReferenceDescriptionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -199,15 +215,6 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEObjectDescription_Name() {
-		return (EAttribute)eObjectDescriptionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getEObjectDescription_Fragment() {
 		return (EAttribute)eObjectDescriptionEClass.getEStructuralFeatures().get(0);
 	}
@@ -217,26 +224,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEObjectDescription_EClass() {
-		return (EReference)eObjectDescriptionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEObjectDescription_ResourceDescriptor() {
-		return (EReference)eObjectDescriptionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getEObjectDescription_UserData() {
-		return (EReference)eObjectDescriptionEClass.getEStructuralFeatures().get(3);
+		return (EReference)eObjectDescriptionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -280,7 +269,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getReferenceDescription_SourceEObjectUri() {
+	public EAttribute getReferenceDescription_ExternalFormOfEReference() {
 		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -289,8 +278,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getReferenceDescription_TargetEObjectUri() {
-		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(1);
+	public EClass getIEObjectDescription() {
+		return ieObjectDescriptionEClass;
 	}
 
 	/**
@@ -298,8 +287,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getReferenceDescription_IndexInList() {
-		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(2);
+	public EReference getIEObjectDescription_EClass() {
+		return (EReference)ieObjectDescriptionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -307,8 +296,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getReferenceDescription_ExternalFormOfEReference() {
-		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(3);
+	public EAttribute getIEObjectDescription_Name() {
+		return (EAttribute)ieObjectDescriptionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -316,8 +305,44 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getReferenceDescription_ContainerEObjectURI() {
-		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(4);
+	public EClass getIReferenceDescription() {
+		return iReferenceDescriptionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIReferenceDescription_SourceEObjectUri() {
+		return (EAttribute)iReferenceDescriptionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIReferenceDescription_TargetEObjectUri() {
+		return (EAttribute)iReferenceDescriptionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIReferenceDescription_IndexInList() {
+		return (EAttribute)iReferenceDescriptionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIReferenceDescription_ContainerEObjectURI() {
+		return (EAttribute)iReferenceDescriptionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -383,21 +408,24 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 
 		eObjectDescriptionEClass = createEClass(EOBJECT_DESCRIPTION);
 		createEAttribute(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__FRAGMENT);
-		createEReference(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__ECLASS);
-		createEReference(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR);
 		createEReference(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__USER_DATA);
-		createEAttribute(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__NAME);
 
 		userDataEntryEClass = createEClass(USER_DATA_ENTRY);
 		createEAttribute(userDataEntryEClass, USER_DATA_ENTRY__KEY);
 		createEAttribute(userDataEntryEClass, USER_DATA_ENTRY__VALUE);
 
 		referenceDescriptionEClass = createEClass(REFERENCE_DESCRIPTION);
-		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI);
-		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__TARGET_EOBJECT_URI);
-		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__INDEX_IN_LIST);
 		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE);
-		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI);
+
+		ieObjectDescriptionEClass = createEClass(IE_OBJECT_DESCRIPTION);
+		createEReference(ieObjectDescriptionEClass, IE_OBJECT_DESCRIPTION__ECLASS);
+		createEAttribute(ieObjectDescriptionEClass, IE_OBJECT_DESCRIPTION__NAME);
+
+		iReferenceDescriptionEClass = createEClass(IREFERENCE_DESCRIPTION);
+		createEAttribute(iReferenceDescriptionEClass, IREFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI);
+		createEAttribute(iReferenceDescriptionEClass, IREFERENCE_DESCRIPTION__TARGET_EOBJECT_URI);
+		createEAttribute(iReferenceDescriptionEClass, IREFERENCE_DESCRIPTION__INDEX_IN_LIST);
+		createEAttribute(iReferenceDescriptionEClass, IREFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI);
 
 		// Create data types
 		euriEDataType = createEDataType(EURI);
@@ -433,55 +461,60 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		eObjectDescriptionEClass.getESuperTypes().add(this.getIEObjectDescription());
+		referenceDescriptionEClass.getESuperTypes().add(this.getIReferenceDescription());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceDescriptionEClass, IResourceDescription.class, "ResourceDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResourceDescription_URI(), this.getEURI(), "URI", null, 1, 1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getResourceDescription_ExportedObjects(), this.getEObjectDescription(), this.getEObjectDescription_ResourceDescriptor(), "exportedObjects", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getResourceDescription_ReferenceDescriptions(), this.getReferenceDescription(), null, "referenceDescriptions", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResourceDescription_ExportedObjects(), this.getIEObjectDescription(), null, "exportedObjects", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResourceDescription_ReferenceDescriptions(), this.getIReferenceDescription(), null, "referenceDescriptions", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourceDescription_ImportedNames(), this.getQualifiedName(), "importedNames", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(resourceDescriptionEClass, ecorePackage.getEBoolean(), "isEmpty", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		EOperation op = addEOperation(resourceDescriptionEClass, this.getEObjectDescription(), "getExportedObjectsByType", 0, -1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(resourceDescriptionEClass, this.getIEObjectDescription(), "getExportedObjectsByType", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEClass(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(resourceDescriptionEClass, this.getEObjectDescription(), "getExportedObjects", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(resourceDescriptionEClass, this.getIEObjectDescription(), "getExportedObjects", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEClass(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getQualifiedName(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "ignoreCase", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(resourceDescriptionEClass, this.getEObjectDescription(), "getExportedObjectsByObject", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(resourceDescriptionEClass, this.getIEObjectDescription(), "getExportedObjectsByObject", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "object", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(eObjectDescriptionEClass, IEObjectDescription.class, "EObjectDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEObjectDescription_Fragment(), ecorePackage.getEString(), "fragment", null, 1, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEObjectDescription_EClass(), ecorePackage.getEClass(), null, "eClass", null, 1, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEObjectDescription_ResourceDescriptor(), this.getResourceDescription(), this.getResourceDescription_ExportedObjects(), "resourceDescriptor", null, 0, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEObjectDescription_UserData(), this.getUserDataEntry(), null, "userData", null, 0, -1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEObjectDescription_Name(), this.getQualifiedName(), "name", null, 0, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(eObjectDescriptionEClass, this.getEURI(), "getEObjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(eObjectDescriptionEClass, ecorePackage.getEObject(), "getEObjectOrProxy", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(eObjectDescriptionEClass, ecorePackage.getEString(), "getUserData", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(eObjectDescriptionEClass, this.getEStringArray(), "getUserDataKeys", 0, 1, IS_UNIQUE, !IS_ORDERED);
-
-		addEOperation(eObjectDescriptionEClass, this.getQualifiedName(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEClass(eObjectDescriptionEClass, EObjectDescription.class, "EObjectDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEObjectDescription_Fragment(), ecorePackage.getEString(), "fragment", null, 1, 1, EObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEObjectDescription_UserData(), this.getUserDataEntry(), null, "userData", null, 0, -1, EObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(userDataEntryEClass, Map.Entry.class, "UserDataEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUserDataEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUserDataEntry_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(referenceDescriptionEClass, IReferenceDescription.class, "ReferenceDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getReferenceDescription_SourceEObjectUri(), this.getEURI(), "sourceEObjectUri", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getReferenceDescription_TargetEObjectUri(), this.getEURI(), "targetEObjectUri", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getReferenceDescription_IndexInList(), ecorePackage.getEInt(), "indexInList", "-1", 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getReferenceDescription_ExternalFormOfEReference(), ecorePackage.getEString(), "externalFormOfEReference", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getReferenceDescription_ContainerEObjectURI(), this.getEURI(), "containerEObjectURI", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(referenceDescriptionEClass, ReferenceDescription.class, "ReferenceDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getReferenceDescription_ExternalFormOfEReference(), ecorePackage.getEString(), "externalFormOfEReference", null, 0, 1, ReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ieObjectDescriptionEClass, IEObjectDescription.class, "IEObjectDescription", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIEObjectDescription_EClass(), ecorePackage.getEClass(), null, "eClass", null, 1, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIEObjectDescription_Name(), this.getQualifiedName(), "name", null, 0, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(ieObjectDescriptionEClass, this.getEURI(), "getEObjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(ieObjectDescriptionEClass, ecorePackage.getEObject(), "getEObjectOrProxy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(ieObjectDescriptionEClass, ecorePackage.getEString(), "getUserData", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(ieObjectDescriptionEClass, this.getEStringArray(), "getUserDataKeys", 0, 1, IS_UNIQUE, !IS_ORDERED);
+
+		addEOperation(ieObjectDescriptionEClass, this.getQualifiedName(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(iReferenceDescriptionEClass, IReferenceDescription.class, "IReferenceDescription", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIReferenceDescription_SourceEObjectUri(), this.getEURI(), "sourceEObjectUri", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIReferenceDescription_TargetEObjectUri(), this.getEURI(), "targetEObjectUri", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIReferenceDescription_IndexInList(), ecorePackage.getEInt(), "indexInList", "-1", 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIReferenceDescription_ContainerEObjectURI(), this.getEURI(), "containerEObjectURI", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(euriEDataType, URI.class, "EURI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

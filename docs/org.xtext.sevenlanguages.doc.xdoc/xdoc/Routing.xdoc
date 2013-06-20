@@ -1,0 +1,203 @@
+chapter:httpRouting[Http Routing Language]
+
+This is a little language that lets you dispatch incoming HTTP requests.
+
+img[images/httprouting_screenshot.png][][][]
+
+section:routing_solution[Overview]
+
+For server-side web development one needs to match any incoming HTTP requests to some handling code. A request
+is defined by a HTTP method (i.e. GET, POST, etc.), a URL and maybe some other data (headers, parameters,
+etc.). In the Java world there are many different solutions to this problem. Java Servlets come with an external 
+configuration (web.xml), where you configure what servlet should be called for which URLs. JAX-RS (JSR-311) uses 
+annotations to match incoming URLs and other frameworks have their own external DSLs for that.
+
+The HTTP routing language explained in this section uses an approach very similar to the one from the
+link[http://playframework.org][Play framework]. You basically declare a list of URL patterns and explain
+what to do for each case. In contrast to Play! which heavily relies on static methods, you can also declare
+so called dependencies which are translated to fields annotated with code[@Inject]. So this DSL plays
+nicely with dependency injection and especially with the ref:guice[Guice modules DSL].
+
+code[routing][
+inject GuessTheNumber controller
+
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
+]
+
+As you can see, you can have named variable placeholders in the URL and use them in the code[routing][do]-part.
+There also is a code[routing][when]-part which allows to specify an additional condition using the request object
+as well as any parameters:
+
+code[routing][
+inject GuessTheNumber controller
+
+GET /guess/:theGuess
+  when !controller.isValidGuess(theGuess)
+  do controller.handleWrongRange(theGuess)
+
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
+]
+
+section:routing_running[Running the Example]
+
+The example project's name is e[org.xtext.httprouting.examples] and includes a simple but runnable number
+guessing game. Just start the server (an embedded Jetty) by running code[framework.StartServer] as a
+Java Application. Then point your browser to the URL link[http://localhost:8080/guess][http://localhost:8080/guess].
+
+section:routing_grammar[Grammar]
+
+The Routing DSL extends e[org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations] to make use of expressions
+predefined by link[http://www.eclipse.org/Xtext/#xbase][Xbase] plus support for Annotations.
+code[Xtext][
+grammar org.xtext.httprouting.Route 
+  with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
+
+generate route "http://www.xtext.org/httprouting/Route"
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+
+Model :
+	importSection=XImportSection?
+	declarations+=AbstractDeclaration*;
+
+AbstractDeclaration :
+	Dependency | Route;
+
+Dependency :
+	'inject' annotations+=XAnnotation? type=JvmTypeReference name=ID;
+
+Route :
+	requestType=RequestType url=URL 
+	('when' condition=XExpression)? 
+	'do' call=XExpression;
+
+enum RequestType :
+	GET | POST | PUT | DELETE | HEAD;
+
+/**
+ * matches URLs like 
+ * 	'/foo/bar.html' or 
+ * 	'/customer/:customerID/save'
+ */
+URL :
+	{URL} 
+	( '/' | ('/' (QualifiedName | variables+=Variable))* 
+	('/' variables+=Variable wildcard?='*')?);
+
+Variable :
+	':' name=ID;
+]
+
+There should not be any surprises if you know the grammar language: A e[Model] consists of
+an e[XImportSection] followed by any number of e[Dependencies] and e[Routes]. A e[Route] starts with a e[RequestType],
+i.e. HTTP method, followed by a e[URL] pattern. Then an optional when-clause can be specified followed by
+a mandatory do-clause.
+
+section:routing_inferrer[Translation to Java]
+
+In codeRef[org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer] you can see that a Java class 
+extending the class codeRef[javax.servlet.http.HttpServlet] is derived.
+First the e[Dependencies] are translated to Java fields. This is almost a one-to-one mapping.
+
+code[Xtend][
+// translate the dependencies to fields annotated with @Inject
+for (field : model.declarations.filter(typeof(Dependency))) {
+  members += field.toField(field.name, field.type) \[
+    annotations += field.toAnnotation(typeof(Inject))
+    field.annotations.translateAnnotationsTo(it)
+  \]
+}
+]
+
+Next up a field for the e[URL] patterns is generated and a method for the used expressions, such giving them
+a proper scope and context.
+
+code[Xtend][
+// declare fields for the URL regexp, a method for each when-part 
+// and of course the call part of a route
+for (route : model.routes.filter\[ url != null \]) {
+  members += route.toRoutePatternField
+  if (route.condition != null)
+    members += route.toRouteConditionMethod
+  members += route.toRouteCallMethod
+}
+]
+
+Note that the code in a model inferrer has to be very defensive, because it is called for any kind of
+broken models. You just cannot assume that the URL is set although it is mandatory in the grammar, because
+the user might have written syntactically incorrect code.
+
+Next up the handler methods from codeRef[javax.servlet.http.HttpServlet] are implemented such that they
+dispatch according the URL patterns and when-clauses. Here is a translated example:
+
+table[
+  tr[
+    td[DSL]
+    td[code[routing][
+import com.acme.GuessTheNumber
+
+inject GuessTheNumber controller
+
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
+    ]]]
+  tr[
+    td[Java]
+    td[code[Java][
+@SuppressWarnings("serial")
+public class NumberGuessing extends HttpServlet {
+  @Inject
+  private GuessTheNumber controller;
+  
+  private static Pattern _pattern2 = Pattern.compile("/guess/(\\w+)");
+  
+  public void _doGet2(final HttpServletRequest request, 
+                      final HttpServletResponse response, 
+                      final String theGuess) {
+    this.controller.handleGuess(theGuess);
+  }
+  
+  @Override
+  public void doGet(final HttpServletRequest request, 
+                    final HttpServletResponse response) {
+    String url =  request.getRequestURL().toString();
+    {
+      java.util.regex.Matcher _matcher = _pattern2.matcher(url);
+      if (_matcher.find()) {
+        String theGuess = _matcher.group(1);
+        _doGet2(request, response, theGuess);
+      }
+    }
+  }
+}]]]
+]
+
+As you can see the expression code[Xtend][controller.handleGuess(theGuess)] is put into a method with
+three parameters. This is done in the following method from codeRef[org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer]:
+
+code[Xtend][
+  /**
+   * Creates a method for the route's target call.
+   * Gives scope and live to the expression.
+   */
+  def protected toRouteCallMethod(Route route) {
+    route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void::TYPE)) \[
+      parameters += route.toParameter("request",  
+          route.newTypeRef(HTTP_REQUEST))
+      parameters += route.toParameter("response", 
+          route.newTypeRef(HTTP_RESPONSE))
+      for (variable : route.url.variables) {
+        parameters += variable.toParameter(variable.name, 
+          route.newTypeRef(typeof(String)))
+      }
+      body = route.call
+    \]
+  }
+]
+
+Just because of that code you can now refer to the local variables code[request], code[response], and
+code[theGuess]. Also it defines that the expected type is code[Xtend][void] so you are not allowed to
+write thing like code[return 42]. 
+

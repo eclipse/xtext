@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xtype.impl;
 
@@ -27,6 +29,8 @@ import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypeFactory;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -51,6 +55,20 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	 * @generated
 	 */
 	private EClass xComputedTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xImportSectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xImportDeclarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -208,6 +226,76 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXImportSection()
+	{
+		return xImportSectionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXImportSection_ImportDeclarations()
+	{
+		return (EReference)xImportSectionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXImportDeclaration()
+	{
+		return xImportDeclarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXImportDeclaration_Extension()
+	{
+		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXImportDeclaration_Static()
+	{
+		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXImportDeclaration_ImportedType()
+	{
+		return (EReference)xImportDeclarationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXImportDeclaration_ImportedNamespace()
+	{
+		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getIJvmTypeReferenceProvider()
 	{
 		return iJvmTypeReferenceProviderEDataType;
@@ -251,6 +339,15 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 
 		xComputedTypeReferenceEClass = createEClass(XCOMPUTED_TYPE_REFERENCE);
 		createEAttribute(xComputedTypeReferenceEClass, XCOMPUTED_TYPE_REFERENCE__TYPE_PROVIDER);
+
+		xImportSectionEClass = createEClass(XIMPORT_SECTION);
+		createEReference(xImportSectionEClass, XIMPORT_SECTION__IMPORT_DECLARATIONS);
+
+		xImportDeclarationEClass = createEClass(XIMPORT_DECLARATION);
+		createEAttribute(xImportDeclarationEClass, XIMPORT_DECLARATION__EXTENSION);
+		createEAttribute(xImportDeclarationEClass, XIMPORT_DECLARATION__STATIC);
+		createEReference(xImportDeclarationEClass, XIMPORT_DECLARATION__IMPORTED_TYPE);
+		createEAttribute(xImportDeclarationEClass, XIMPORT_DECLARATION__IMPORTED_NAMESPACE);
 
 		// Create data types
 		iJvmTypeReferenceProviderEDataType = createEDataType(IJVM_TYPE_REFERENCE_PROVIDER);
@@ -300,6 +397,19 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 
 		initEClass(xComputedTypeReferenceEClass, XComputedTypeReference.class, "XComputedTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXComputedTypeReference_TypeProvider(), this.getIJvmTypeReferenceProvider(), "typeProvider", null, 0, 1, XComputedTypeReference.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xImportSectionEClass, XImportSection.class, "XImportSection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXImportSection_ImportDeclarations(), this.getXImportDeclaration(), null, "importDeclarations", null, 0, -1, XImportSection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xImportDeclarationEClass, XImportDeclaration.class, "XImportDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getXImportDeclaration_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXImportDeclaration_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, XImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXImportDeclaration_ImportedType(), theTypesPackage.getJvmDeclaredType(), null, "importedType", null, 0, 1, XImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXImportDeclaration_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, XImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(xImportDeclarationEClass, ecorePackage.getEBoolean(), "isWildcard", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(xImportDeclarationEClass, ecorePackage.getEString(), "getImportedTypeName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iJvmTypeReferenceProviderEDataType, IJvmTypeReferenceProvider.class, "IJvmTypeReferenceProvider", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

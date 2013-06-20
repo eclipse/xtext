@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xtype;
 
@@ -42,6 +44,24 @@ public interface XtypeFactory extends EFactory
 	 * @generated
 	 */
 	XComputedTypeReference createXComputedTypeReference();
+
+	/**
+	 * Returns a new object of class '<em>XImport Section</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XImport Section</em>'.
+	 * @generated
+	 */
+	XImportSection createXImportSection();
+
+	/**
+	 * Returns a new object of class '<em>XImport Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XImport Declaration</em>'.
+	 * @generated
+	 */
+	XImportDeclaration createXImportDeclaration();
 
 	/**
 	 * Returns the package supported by this factory.

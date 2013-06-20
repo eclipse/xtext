@@ -19,7 +19,10 @@ var runtimeProject = "../${projectName}"
 
 Workflow {
 	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/../.."
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xtext.ui.tests/src/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.ecore"
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xtext.ui.tests/src/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.genmodel"
 	} 
 	
 	component = DirectoryCleaner {
@@ -34,7 +37,9 @@ Workflow {
 		
 		language = { 
 			uri="classpath:/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.xtext"
-			fragment = ecore.EcoreGeneratorFragment {}
+			fragment = ecore.EcoreGeneratorFragment {
+				emfRuntimeVersion = "2.9"
+			}
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment {} 

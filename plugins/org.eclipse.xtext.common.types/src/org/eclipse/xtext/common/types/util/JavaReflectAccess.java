@@ -86,11 +86,11 @@ public class JavaReflectAccess {
 	/**
 	 * @return the {@link Constructor} corresponding to the given {@link JvmConstructor} or <code>null</code>.
 	 */
-	public Constructor<?> getConstructor(JvmConstructor operation) {
-		Class<?> declaringType = getRawType(operation.getDeclaringType());
+	public Constructor<?> getConstructor(JvmConstructor constructor) {
+		Class<?> declaringType = getRawType(constructor.getDeclaringType());
 		if (declaringType == null)
 			return null;
-		Class<?>[] paramTypes = getParamTypes(operation);
+		Class<?>[] paramTypes = getParamTypes(constructor);
 		try {
 			return declaringType.getDeclaredConstructor(paramTypes);
 		} catch (Exception e) {

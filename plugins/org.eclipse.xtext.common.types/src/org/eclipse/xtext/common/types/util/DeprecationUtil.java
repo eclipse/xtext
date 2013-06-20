@@ -19,7 +19,8 @@ public class DeprecationUtil {
 		for (JvmAnnotationReference ref : jvmAnnotationTarget.getAnnotations()) {
 			if (ref != null && !ref.eIsProxy()) {
 				JvmAnnotationType annotation = ref.getAnnotation();
-				return annotation != null && !annotation.eIsProxy() && isDeprecated(annotation);
+				if(annotation != null && !annotation.eIsProxy() && isDeprecated(annotation))
+					return true;
 			}
 		}
 		return false;

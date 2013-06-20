@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
@@ -111,7 +112,11 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 			resourceSize = 0;
 		} else {
 			final EObject root = resource.getContents().get(0);
-			resourceSize = NodeModelUtils.getNode(root).getTotalLength();
+			ICompositeNode rootNode = NodeModelUtils.getNode(root);
+			if (rootNode == null) {
+				throw new IllegalStateException("Cannot find root node in resource " + resource.getURI());
+			}
+			resourceSize = rootNode.getTotalLength();
 		}
 		recording = true;
 	}

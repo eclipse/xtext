@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.purexbase.pureXbase.impl;
 
@@ -33,7 +30,7 @@ public class PureXbaseFactoryImpl extends EFactoryImpl implements PureXbaseFacto
   {
     try
     {
-      PureXbaseFactory thePureXbaseFactory = (PureXbaseFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/purexbase/PureXbase"); 
+      PureXbaseFactory thePureXbaseFactory = (PureXbaseFactory)EPackage.Registry.INSTANCE.getEFactory(PureXbasePackage.eNS_URI);
       if (thePureXbaseFactory != null)
       {
         return thePureXbaseFactory;
@@ -68,8 +65,6 @@ public class PureXbaseFactoryImpl extends EFactoryImpl implements PureXbaseFacto
     switch (eClass.getClassifierID())
     {
       case PureXbasePackage.MODEL: return createModel();
-      case PureXbasePackage.IMPORT: return createImport();
-      case PureXbasePackage.SPECIAL_BLOCK_EXPRESSION: return createSpecialBlockExpression();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -84,28 +79,6 @@ public class PureXbaseFactoryImpl extends EFactoryImpl implements PureXbaseFacto
   {
     ModelImpl model = new ModelImpl();
     return model;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Import createImport()
-  {
-    ImportImpl import_ = new ImportImpl();
-    return import_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SpecialBlockExpression createSpecialBlockExpression()
-  {
-    SpecialBlockExpressionImpl specialBlockExpression = new SpecialBlockExpressionImpl();
-    return specialBlockExpression;
   }
 
   /**

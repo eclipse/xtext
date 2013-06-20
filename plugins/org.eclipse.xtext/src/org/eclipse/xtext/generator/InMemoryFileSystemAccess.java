@@ -9,27 +9,130 @@ package org.eclipse.xtext.generator;
 
 import static com.google.common.collect.Maps.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.util.RuntimeIOException;
+import org.eclipse.xtext.util.StringInputStream;
+
+import com.google.common.io.ByteStreams;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Moritz Eysholdt
  * @since 2.0
  */
-public class InMemoryFileSystemAccess extends AbstractFileSystemAccess {
-	
-	private Map<String, CharSequence> files = newHashMap();
+public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
+
+	private Map<String, Object> files = newTreeMap(); // the TreeMap sorts all files by name
 
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) {
-		files.put(outputConfigName+fileName, contents);
+		files.put(getFileName(fileName, outputConfigName), postProcess(fileName, outputConfigName, contents));
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected String getFileName(String fileName, String outputConfigName) {
+		return outputConfigName+fileName;
 	}
 
 	@Override
 	public void deleteFile(String fileName, String outputConfigName) {
-		files.remove(outputConfigName+fileName);
+		files.remove(getFileName(fileName, outputConfigName));
 	}
-	
-	public Map<String, CharSequence> getFiles() {
+
+	/**
+	 * @since 2.4
+	 */
+	public Map<String, CharSequence> getTextFiles() {
+		Map<String, CharSequence> result = newLinkedHashMap();
+		for (Map.Entry<String, Object> e : files.entrySet())
+			if (e.getValue() instanceof CharSequence)
+				result.put(e.getKey(), ((CharSequence) e.getValue()));
+		return result;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public Map<String, byte[]> getBinaryFiles() {
+		Map<String, byte[]> result = newLinkedHashMap();
+		for (Map.Entry<String, Object> e : files.entrySet())
+			if (e.getValue() instanceof byte[])
+				result.put(e.getKey(), ((byte[]) e.getValue()));
+		return result;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public Map<String, Object> getAllFiles() {
 		return files;
 	}
-	
+
+	/**
+	 * use {@link #getTextFiles()} or {@link #getAllFiles()}.
+	 */
+	@Deprecated
+	public Map<String, CharSequence> getFiles() {
+		return getTextFiles();
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public URI getURI(String fileName, String outputConfiguration) {
+		return URI.createURI("memory:/" + outputConfiguration + "/" + fileName);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void generateFile(String fileName, String outputCfgName, InputStream content) {
+		try {
+			try {
+				byte[] byteArray = ByteStreams.toByteArray(content);
+				files.put(fileName, byteArray);
+			} finally {
+				content.close();
+			}
+		} catch (IOException e) {
+			throw new RuntimeIOException(e);
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		String name = getFileName(fileName, outputCfgName);
+		Object contents = files.get(name);
+		if (contents == null)
+			throw new RuntimeIOException("File not found: " + name);
+		if (contents instanceof byte[])
+			return new ByteArrayInputStream((byte[]) contents);
+		if (contents instanceof CharSequence)
+			return new StringInputStream(contents.toString());
+		throw new RuntimeIOException("Unknown File Data Type: " + contents.getClass() + " File: " + name);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		String name = getFileName(fileName, outputCfgName);
+		Object contents = files.get(name);
+		if (contents == null)
+			throw new RuntimeIOException("File not found: " + name);
+		if (contents instanceof CharSequence)
+			return (CharSequence) contents;
+		if (contents instanceof byte[])
+			throw new RuntimeIOException("Can not read a binary file using readTextFile(). File: " + name);
+		throw new RuntimeIOException("Unknown File Data Type: " + contents.getClass() + " File: " + name);
+	}
+
 }

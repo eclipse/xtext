@@ -12,6 +12,7 @@ import java.util.AbstractList;
 import java.util.List;
 import java.util.RandomAccess;
 
+import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.Iterables;
 
 /**
@@ -24,7 +25,7 @@ import com.google.common.collect.Iterables;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
-public class Conversions {
+@GwtIncompatible("reflection") public class Conversions {
 
 	/**
 	 * Wraps {@code object} in a list if and only if {@code object} is an array. Works for primitive and
@@ -35,6 +36,7 @@ public class Conversions {
 	 * @return a list if the given object was an array. Otherwise the unmodified given object. May return
 	 *         <code>null</code> if the object was <code>null</code>.
 	 */
+	@Pure
 	public static Object doWrapArray(Object object) {
 		if (object == null)
 			return null;
@@ -60,6 +62,7 @@ public class Conversions {
 	 * @return the previously wrapped array if the given value represents such. Otherwise returns the value unmodified.
 	 *         May return <code>null</code> if the value was <code>null</code>.
 	 */
+	@Pure
 	public static Object unwrapArray(Object value) {
 		return unwrapArray(value, Object.class);
 	}
@@ -77,6 +80,7 @@ public class Conversions {
 	 * @throws ArrayStoreException
 	 *             if the expected runtime {@code componentType} does not match the actual runtime component type.
 	 */
+	@Pure
 	public static Object unwrapArray(Object value, Class<?> componentType) {
 		if (value instanceof WrappedArray<?>) {
 			Object result = ((WrappedArray<?>) value).internalToArray();
@@ -246,6 +250,7 @@ public class Conversions {
 		 *            object to fail.
 		 * @return the wrapped array. Never <code>null</code>.
 		 */
+		@Pure
 		public static WrappedPrimitiveArray create(Object array) {
 			return new WrappedPrimitiveArray(array);
 		}

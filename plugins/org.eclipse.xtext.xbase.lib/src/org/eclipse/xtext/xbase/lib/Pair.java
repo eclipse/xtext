@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+import com.google.common.base.Objects;
+
 /**
  * An immutable pair of {@link #getKey() key} and {@link #getValue() value}. A pair is considered to be
  * {@link #equals(Object) equal} to another pair if both the key and the value are equal.
@@ -17,10 +20,26 @@ package org.eclipse.xtext.xbase.lib;
  *            the value-type of the pair.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public final class Pair<K, V> {
+@GwtCompatible public final class Pair<K, V> {
 
 	private final K k;
 	private final V v;
+	
+	/**
+	 * Creates a new instance with the given key and value.
+	 * May be used instead of the constructor for convenience reasons.
+	 * 
+	 * @param k
+	 *            the key. May be <code>null</code>.
+	 * @param v
+	 *            the value. May be <code>null</code>.
+	 * @return a newly created pair. Never <code>null</code>.
+	 * @since 2.3
+	 */
+	@Pure
+	public static <K, V> Pair<K, V> of(K k, V v) {
+		return new Pair<K, V>(k, v);
+	}
 
 	/**
 	 * Creates a new instance with the given key and value.
@@ -31,6 +50,7 @@ public final class Pair<K, V> {
 	 *            the value. May be <code>null</code>.
 	 * 
 	 */
+	@Pure
 	public Pair(K k, V v) {
 		this.k = k;
 		this.v = v;
@@ -41,6 +61,7 @@ public final class Pair<K, V> {
 	 * 
 	 * @return the key.
 	 */
+	@Pure
 	public K getKey() {
 		return k;
 	}
@@ -50,6 +71,7 @@ public final class Pair<K, V> {
 	 * 
 	 * @return the value.
 	 */
+	@Pure
 	public V getValue() {
 		return v;
 	}
@@ -61,7 +83,7 @@ public final class Pair<K, V> {
 		if (!(o instanceof Pair))
 			return false;
 		Pair<?, ?> e = (Pair<?, ?>) o;
-		return ObjectExtensions.operator_equals(k, e.getKey()) && ObjectExtensions.operator_equals(v, e.getValue());
+		return Objects.equal(k, e.getKey()) && Objects.equal(v, e.getValue());
 	}
 
 	@Override

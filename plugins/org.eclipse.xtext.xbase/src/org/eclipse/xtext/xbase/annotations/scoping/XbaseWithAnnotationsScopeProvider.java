@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -32,20 +33,24 @@ import com.google.common.base.Function;
  * on how and when to use it 
  *
  */
+@SuppressWarnings("deprecation")
 public class XbaseWithAnnotationsScopeProvider extends XbaseScopeProvider {
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT) {
 			XAnnotation annotation = EcoreUtil2.getContainerOfType(context, XAnnotation.class);
-			JvmAnnotationType annotationType = annotation.getAnnotationType();
-			Iterable<JvmFeature> features = annotationType.getAllFeatures();
-			Iterable<IEObjectDescription> descriptions = transform(features, new Function<JvmFeature, IEObjectDescription>() {
-				public IEObjectDescription apply(JvmFeature from) {
-					return EObjectDescription.create(QualifiedName.create(from.getSimpleName()), from);
-				}
-			});
-			return MapBasedScope.createScope(IScope.NULLSCOPE, descriptions);
+			JvmType annotationType = annotation.getAnnotationType();
+			if (annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType) {
+				Iterable<JvmFeature> features = ((JvmAnnotationType) annotationType).getAllFeatures();
+				Iterable<IEObjectDescription> descriptions = transform(features, new Function<JvmFeature, IEObjectDescription>() {
+					public IEObjectDescription apply(JvmFeature from) {
+						return EObjectDescription.create(QualifiedName.create(from.getSimpleName()), from);
+					}
+				});
+				return MapBasedScope.createScope(IScope.NULLSCOPE, descriptions);
+			}
+			return IScope.NULLSCOPE;
 		}
 		return super.getScope(context, reference);
 	}

@@ -206,6 +206,15 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		// don't call super, since it would do a plain vanilla
 		// System.err.println(msg);
 	}
+	
+	/**
+	 * @since 2.3
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public RecognizerSharedState getInternalRecognizerSharedState() {
+		return state;
+	}
 
 	protected abstract Grammar getGrammar();
 

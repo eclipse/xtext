@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
@@ -34,7 +31,7 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
   {
     try
     {
-      CsvalidationtestFactory theCsvalidationtestFactory = (CsvalidationtestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/csvalidationtest"); 
+      CsvalidationtestFactory theCsvalidationtestFactory = (CsvalidationtestFactory)EPackage.Registry.INSTANCE.getEFactory(CsvalidationtestPackage.eNS_URI);
       if (theCsvalidationtestFactory != null)
       {
         return theCsvalidationtestFactory;

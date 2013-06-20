@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.impl;
 
@@ -41,7 +38,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
   {
     try
     {
-      DomainModelTestFactory theDomainModelTestFactory = (DomainModelTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/DomainModelTestLanguage"); 
+      DomainModelTestFactory theDomainModelTestFactory = (DomainModelTestFactory)EPackage.Registry.INSTANCE.getEFactory(DomainModelTestPackage.eNS_URI);
       if (theDomainModelTestFactory != null)
       {
         return theDomainModelTestFactory;

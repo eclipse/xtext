@@ -1,13 +1,13 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +19,8 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType <em>Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral <em>Type Literal</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,29 +73,55 @@ public interface XFeatureCall extends XAbstractFeatureCall
 	void setExplicitOperationCall(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Declaring Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Type Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Declaring Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Type Literal</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Declaring Type</em>' reference.
-	 * @see #setDeclaringType(JvmDeclaredType)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXFeatureCall_DeclaringType()
-	 * @model
+	 * @return the value of the '<em>Type Literal</em>' attribute.
+	 * @see #setTypeLiteral(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXFeatureCall_TypeLiteral()
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
-	JvmDeclaredType getDeclaringType();
+	boolean isTypeLiteral();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType <em>Declaring Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral <em>Type Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Declaring Type</em>' reference.
-	 * @see #getDeclaringType()
+	 * @param value the new value of the '<em>Type Literal</em>' attribute.
+	 * @see #isTypeLiteral()
 	 * @generated
 	 */
-	void setDeclaringType(JvmDeclaredType value);
+	void setTypeLiteral(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Package Fragment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Package Fragment</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Package Fragment</em>' attribute.
+	 * @see #setPackageFragment(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXFeatureCall_PackageFragment()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	boolean isPackageFragment();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XFeatureCall#isPackageFragment <em>Package Fragment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Package Fragment</em>' attribute.
+	 * @see #isPackageFragment()
+	 * @generated
+	 */
+	void setPackageFragment(boolean value);
 
 } // XFeatureCall

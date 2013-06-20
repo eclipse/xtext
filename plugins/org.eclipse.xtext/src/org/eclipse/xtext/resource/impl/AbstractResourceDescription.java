@@ -53,10 +53,11 @@ public abstract class AbstractResourceDescription implements IResourceDescriptio
 	}
 
 	protected URI getNormalizedURI(Resource resource) {
-		if (resource.getResourceSet() != null)
-			return resource.getResourceSet().getURIConverter().normalize(resource.getURI());
+		URI uri = resource.getURI();
+		if (uri != null && !uri.isPlatform() && resource.getResourceSet() != null)
+			return resource.getResourceSet().getURIConverter().normalize(uri);
 		else
-			return resource.getURI();
+			return uri;
 	}
 	
 }

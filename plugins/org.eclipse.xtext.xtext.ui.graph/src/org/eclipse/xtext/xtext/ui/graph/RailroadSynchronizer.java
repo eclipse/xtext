@@ -37,27 +37,25 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 
 	@Inject
 	private RailroadView view;
-	
-	@Inject 
-	private Xtext2RailroadTransformer transformer;
-	
-	@Inject 
-	private RailroadSelectionLinker selectionLinker;
-	
-	private IXtextDocument lastActiveDocument;
 
-	private Font font;
+	@Inject
+	private Xtext2RailroadTransformer transformer;
+
+	@Inject
+	private RailroadSelectionLinker selectionLinker;
+
+	private IXtextDocument lastActiveDocument;
 
 	public void start(IWorkbenchPartSite site) {
 		updateView(site.getPage().getActiveEditor());
 		site.getWorkbenchWindow().getPartService().addPartListener(this);
 	}
-	
+
 	public void stop(IWorkbenchPartSite site) {
 		site.getWorkbenchWindow().getPartService().removePartListener(this);
 		lastActiveDocument = null;
 	}
-	
+
 	public void partActivated(IWorkbenchPart part) {
 		updateView(part);
 	}
@@ -110,7 +108,13 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 		view.setContents(createFigure(resource));
 	}
 
+	/**
+	 * Deprecated because never used. Will be removed in 3.0.0
+	 * 
+	 * @return <code>null</code>
+	 */
+	@Deprecated
 	public Font getFont() {
-		return font;
+		return null;
 	}
 }

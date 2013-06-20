@@ -20,6 +20,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -36,10 +37,10 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  */
 public class AstSelectionProvider {
-	public final String SELECT_ENCLOSING = "org.eclipse.xtext.ui.editor.select.enclosing"; //$NON-NLS-1$
-	public final String SELECT_NEXT = "org.eclipse.xtext.ui.editor.select.next"; //$NON-NLS-1$
-	public final String SELECT_PREVIOUS = "org.eclipse.xtext.ui.editor.select.previous"; //$NON-NLS-1$
-	public final String SELECT_LAST = "org.eclipse.xtext.ui.editor.select.last"; //$NON-NLS-1$
+	public static final String SELECT_ENCLOSING = "org.eclipse.xtext.ui.editor.select.enclosing"; //$NON-NLS-1$
+	public static final String SELECT_NEXT = "org.eclipse.xtext.ui.editor.select.next"; //$NON-NLS-1$
+	public static final String SELECT_PREVIOUS = "org.eclipse.xtext.ui.editor.select.previous"; //$NON-NLS-1$
+	public static final String SELECT_LAST = "org.eclipse.xtext.ui.editor.select.last"; //$NON-NLS-1$
 	
 	@Inject
 	private ILocationInFileProvider locationProvider;
@@ -63,17 +64,20 @@ public class AstSelectionProvider {
 	public ITextRegion selectEnclosing(XtextResource resource, ITextRegion currentEditorSelection) {
 		Pair<EObject, EObject> currentlySelected = getSelectedAstElements(resource, currentEditorSelection);
 		if (currentlySelected == null) {
-			ICompositeNode rootNode = resource.getParseResult().getRootNode();
-			int offset = getSelectionOffset(rootNode, currentEditorSelection);
-			INode node = findLeafNodeAtOffset(rootNode, offset);
-			ITextRegion fineGrainedRegion = computeInitialFineGrainedSelection(node, currentEditorSelection);
-			if (fineGrainedRegion != null) {
-				selectionHistory.clear();
-				register(currentEditorSelection);
-				return register(fineGrainedRegion);
+			IParseResult parseResult = resource.getParseResult();
+			if (parseResult != null) {
+				ICompositeNode rootNode = parseResult.getRootNode();
+				int offset = getSelectionOffset(rootNode, currentEditorSelection);
+				INode node = findLeafNodeAtOffset(rootNode, offset);
+				ITextRegion fineGrainedRegion = computeInitialFineGrainedSelection(node, currentEditorSelection);
+				if (fineGrainedRegion != null) {
+					selectionHistory.clear();
+					register(currentEditorSelection);
+					return register(fineGrainedRegion);
+				}
+				EObject eObject = findSemanticObjectFor(node);
+				return register(getTextRegion(eObject));
 			}
-			EObject eObject = findSemanticObjectFor(node);
-			return register(getTextRegion(eObject));
 		} else {
 			EObject first = currentlySelected.getFirst();
 			if (first.eContainer() != null) {
@@ -183,9 +187,13 @@ public class AstSelectionProvider {
 	}
 
 	protected EObject getEObjectAtOffset(XtextResource resource, ITextRegion currentEditorSelection) {
-		ICompositeNode rootNode = resource.getParseResult().getRootNode();
-		INode nodeAtOffset = findLeafNodeAtOffset(rootNode, currentEditorSelection.getOffset());
-		return findSemanticObjectFor(nodeAtOffset);
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult != null) {
+			ICompositeNode rootNode = parseResult.getRootNode();
+			INode nodeAtOffset = findLeafNodeAtOffset(rootNode, currentEditorSelection.getOffset());
+			return findSemanticObjectFor(nodeAtOffset);
+		}
+		return null;
 	}
 
 	public void initialize(XtextEditor xtextEditor) {
@@ -251,7 +259,10 @@ public class AstSelectionProvider {
 	protected ITextRegion getTextRegion(EObject eObject) {
 		if (eObject == null)
 			return null;
-		ICompositeNode rootNode = ((XtextResource)eObject.eResource()).getParseResult().getRootNode();
+		IParseResult parseResult = ((XtextResource)eObject.eResource()).getParseResult();
+		if (parseResult == null)
+			return null;
+		ICompositeNode rootNode = parseResult.getRootNode();
 		Map<ILeafNode, EObject> comments = commentAssociater.associateCommentsWithSemanticEObjects(eObject, singleton(rootNode));
 		final ITextRegion result = locationProvider.getFullTextRegion(eObject);
 		int start = result.getOffset();

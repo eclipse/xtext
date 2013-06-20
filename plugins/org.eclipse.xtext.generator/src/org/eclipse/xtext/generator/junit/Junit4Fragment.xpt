@@ -64,30 +64,37 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import com.google.inject.Injector;
 
 public class «qualifiedInjectorProviderName().toSimpleName()» implements IInjectorProvider, IRegistryConfigurator {
-	protected GlobalStateMemento globalStateMemento;
+	
+    protected GlobalStateMemento stateBeforeInjectorCreation;
+	protected GlobalStateMemento stateAfterInjectorCreation;
 	protected Injector injector;
 
 	static {
 		GlobalRegistries.initializeDefaults();
 	}
-	
-	public Injector getInjector() {
+
+	public Injector getInjector()
+	{
 		if (injector == null) {
-			this.injector = new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
+			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+			this.injector = internalCreateInjector();
+			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		}
 		return injector;
 	}
 	
+	protected Injector internalCreateInjector() {
+	    return new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
+	}
+
 	public void restoreRegistry() {
-		globalStateMemento.restoreGlobalState();
+		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
 	public void setupRegistry() {
-		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
-		if (injector != null)
-			new «setup().toSimpleName()»().register(injector);
+		getInjector();
+		stateAfterInjectorCreation.restoreGlobalState();
 	}
-	
 }
 «ENDFILE»
 
@@ -116,5 +123,7 @@ public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInje
 «DEFINE addToPluginXmlRt(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»
 
 «DEFINE addToPluginXmlUi(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlTests(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»

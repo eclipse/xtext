@@ -9,14 +9,14 @@ package org.eclipse.xtext.ui.tests.editor.quickfix;
 
 import org.eclipse.xtext.ui.editor.quickfix.ISimilarityMatcher;
 import org.eclipse.xtext.ui.editor.quickfix.ISimilarityMatcher.Default;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author svenefftinge - Initial contribution and API
  */
-public class DefaultSimilarityMatcherTest extends TestCase {
-	public void testSimilar() throws Exception {
+public class DefaultSimilarityMatcherTest extends Assert {
+	@Test public void testSimilar() throws Exception {
 		Default matcher = new ISimilarityMatcher.Default();
 		assertTrue(matcher.isSimilar("foo", "foo"));
 		assertTrue(matcher.isSimilar("fio", "foo"));

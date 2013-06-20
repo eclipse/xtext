@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.locationprovidertest.impl;
 
@@ -33,7 +30,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
   {
     try
     {
-      LocationprovidertestFactory theLocationprovidertestFactory = (LocationprovidertestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/locationProviderTestLaguage"); 
+      LocationprovidertestFactory theLocationprovidertestFactory = (LocationprovidertestFactory)EPackage.Registry.INSTANCE.getEFactory(LocationprovidertestPackage.eNS_URI);
       if (theLocationprovidertestFactory != null)
       {
         return theLocationprovidertestFactory;

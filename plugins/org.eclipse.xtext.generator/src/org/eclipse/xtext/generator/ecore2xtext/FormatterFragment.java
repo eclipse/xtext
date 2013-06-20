@@ -8,6 +8,8 @@
 package org.eclipse.xtext.generator.ecore2xtext;
 
 /**
+ * Fragment that'll produce the initial formatter for the infered syntax.
+ * See also {@code FormatterFragment.xpt}.
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class FormatterFragment extends org.eclipse.xtext.generator.formatting.FormatterFragment {

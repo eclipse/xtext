@@ -178,9 +178,15 @@ public class XtextLinker extends Linker {
 
 	@Override
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
-		if (model instanceof Grammar) {
+		discardGeneratedPackages(model);
+		super.beforeModelLinked(model, diagnosticsConsumer);
+		cache.getOrCreate(model.eResource()).ignoreNotifications();
+	}
+
+	void discardGeneratedPackages(EObject root) {
+		if (root instanceof Grammar) {
 			// unload generated metamodels as they will be recreated during linking 
-			for (AbstractMetamodelDeclaration metamodelDeclaration : ((Grammar) model).getMetamodelDeclarations()) {
+			for (AbstractMetamodelDeclaration metamodelDeclaration : ((Grammar) root).getMetamodelDeclarations()) {
 				if (metamodelDeclaration instanceof GeneratedMetamodel) {
 					EPackage ePackage = ((GeneratedMetamodel) metamodelDeclaration).getEPackage();
 					if (ePackage != null) {
@@ -197,8 +203,6 @@ public class XtextLinker extends Linker {
 				}
 			}
 		}
-		super.beforeModelLinked(model, diagnosticsConsumer);
-		cache.getOrCreate(model.eResource()).ignoreNotifications();
 	}
 	
 	@Override

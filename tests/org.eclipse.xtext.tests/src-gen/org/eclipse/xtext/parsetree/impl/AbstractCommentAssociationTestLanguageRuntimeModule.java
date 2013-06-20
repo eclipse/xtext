@@ -70,6 +70,11 @@ public abstract class AbstractCommentAssociationTestLanguageRuntimeModule extend
 	}
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageGrammarAccess.class;
 	}
@@ -81,12 +86,12 @@ public abstract class AbstractCommentAssociationTestLanguageRuntimeModule extend
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parsetree.impl.serializer.AbstractCommentAssociationTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parsetree.impl.serializer.CommentAssociationTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parsetree.impl.serializer.AbstractCommentAssociationTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parsetree.impl.serializer.CommentAssociationTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

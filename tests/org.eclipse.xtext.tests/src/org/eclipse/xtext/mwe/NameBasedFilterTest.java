@@ -8,19 +8,19 @@
 package org.eclipse.xtext.mwe;
 
 import org.eclipse.emf.common.util.URI;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NameBasedFilterTest extends TestCase {
+public class NameBasedFilterTest extends Assert {
 
-	public void testNullUri() {
+	@Test public void testNullUri() {
 		assertFalse(new NameBasedFilter().matches(null));
 	}
 	
-	public void testByFileExtension() {
+	@Test public void testByFileExtension() {
 		NameBasedFilter filter = new NameBasedFilter();
 		filter.setExtension("foo");
 		URI match = URI.createFileURI("path/to/myFile.foo");
@@ -29,7 +29,7 @@ public class NameBasedFilterTest extends TestCase {
 		assertFalse(filter.matches(mismatch));
 	}
 	
-	public void testNoCriteria() {
+	@Test public void testNoCriteria() {
 		NameBasedFilter filter = new NameBasedFilter();
 		URI match = URI.createFileURI("path/to/myFile.foo");
 		assertTrue(filter.matches(match));
@@ -37,7 +37,7 @@ public class NameBasedFilterTest extends TestCase {
 		assertTrue(filter.matches(match));
 	}
 	
-	public void testByRegularExpression() {
+	@Test public void testByRegularExpression() {
 		NameBasedFilter filter = new NameBasedFilter();
 		filter.setRegularExpression("ile\\.fo");
 		URI match = URI.createFileURI("path/to/myFile.foo");
@@ -46,7 +46,7 @@ public class NameBasedFilterTest extends TestCase {
 		assertFalse(filter.matches(mismatch));
 	}
 	
-	public void testByExtensionAndRegExpr() {
+	@Test public void testByExtensionAndRegExpr() {
 		NameBasedFilter filter = new NameBasedFilter();
 		filter.setRegularExpression("ath");
 		filter.setExtension("foo");

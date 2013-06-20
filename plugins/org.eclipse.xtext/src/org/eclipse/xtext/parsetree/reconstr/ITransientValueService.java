@@ -19,12 +19,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 public interface ITransientValueService {
 
 	/**
-	 * For features with isMany() == true, isMixedList() has to return true when isTransient should be called for each
+	 * For features with isMany() == true, isCheckElementsIndividually() has to return true when isTransient should be called for each
 	 * element of the list instead of once for the whole list.
 	 * 
-	 * @param owner
-	 * @param feature
-	 * @return
+	 * @param owner the feature holder
+	 * @param feature the multi value feature
+	 * @return <code>true</code> if all values should be checked individually for their transient state. 
 	 */
 	boolean isCheckElementsIndividually(EObject owner, EStructuralFeature feature);
 
@@ -46,8 +46,8 @@ public interface ITransientValueService {
 	 * 
 	 * @param owner
 	 *            The EObject holding the feature's value
-	 * @param feature
-	 * @param index
+	 * @param feature the to-be-checked feature
+	 * @param index the index in the list for multi value features
 	 * @return true, if the feature's value(s) should NOT be serialized
 	 */
 	boolean isTransient(EObject owner, EStructuralFeature feature, int index);

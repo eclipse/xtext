@@ -24,13 +24,25 @@ import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class EObjectAtOffsetHelper {
 
+	/**
+	 * @return the declared or the referenced element next to the offset
+	 */
 	public EObject resolveElementAt(XtextResource resource, int offset) {
-		return internalResolveElementAt(resource, offset, true);
+		return internalResolveElementAt(resource, offset, false);
 	}
 
+	/**
+	 * @return the declared element next to the offset
+	 * @since 2.3
+	 */
+	public EObject resolveContainedElementAt(XtextResource resource, int offset) {
+		return internalResolveElementAt(resource, offset, true);
+	}
+	
 	/**
 	 * @return the cross referenced EObject under, right or left to the cursor (in that order) or
 	 *         <code>null</code> if there is no cross referenced object next to the offset.
@@ -47,7 +59,7 @@ public class EObjectAtOffsetHelper {
 	 */
 	public INode getCrossReferenceNode(XtextResource resource, ITextRegion region) {
 		IParseResult parseResult = resource.getParseResult();
-		if (parseResult != null && parseResult.getRootNode() != null) {
+		if (parseResult != null) {
 			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), region.getOffset());
 			INode crossRefNode = findCrossReferenceNode(leaf);
 			// if not a cross reference position and the cursor is at the beginning of a node try the previous one.
@@ -73,9 +85,7 @@ public class EObjectAtOffsetHelper {
 	}
 
 	/**
-	 * 
-	 * @param a
-	 *            node (possibly null)
+	 * @param node a node (possibly null)
 	 * @return if the given node is part of a cross reference this method returns the node pointing to the
 	 *         {@link CrossReference} <code>null</code> if the passed node was a null reference or if the passed node is
 	 *         not part of a cross reference.
@@ -103,11 +113,13 @@ public class EObjectAtOffsetHelper {
 	}
 
 	protected EObject internalResolveElementAt(XtextResource resource, int offset, boolean containment) {
-		EObject crossRef = resolveCrossReferencedElementAt(resource, offset);
-		if (crossRef != null)
-			return crossRef;
+		if(!containment) {
+			EObject crossRef = resolveCrossReferencedElementAt(resource, offset);
+			if (crossRef != null)
+				return crossRef;
+		}
 		IParseResult parseResult = resource.getParseResult();
-		if (parseResult != null && parseResult.getRootNode() != null) {
+		if (parseResult != null) {
 			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
 			if (leaf != null && leaf.isHidden() && leaf.getOffset() == offset) {
 				leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);
@@ -121,21 +133,23 @@ public class EObjectAtOffsetHelper {
 
 	protected EObject resolveCrossReferencedElement(INode node) {
 		EObject referenceOwner = NodeModelUtils.findActualSemanticObjectFor(node);
-		EReference crossReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(),
-				referenceOwner.eClass());
-		if (!crossReference.isMany()) {
-			return (EObject) referenceOwner.eGet(crossReference);
-		} else {
-			List<?> listValue = (List<?>) referenceOwner.eGet(crossReference);
-			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(referenceOwner, crossReference);
-			int currentIndex = 0;
-			for (INode nodeForFeature : nodesForFeature) {
-				if (currentIndex >= listValue.size())
-					return null;
-				if (nodeForFeature.getTotalOffset() <= node.getTotalOffset()
-						&& nodeForFeature.getTotalEndOffset() >= node.getTotalEndOffset())
-					return (EObject) listValue.get(currentIndex);
-				currentIndex++;
+		if (referenceOwner != null) {
+			EReference crossReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(),
+					referenceOwner.eClass());
+			if (!crossReference.isMany()) {
+				return (EObject) referenceOwner.eGet(crossReference);
+			} else {
+				List<?> listValue = (List<?>) referenceOwner.eGet(crossReference);
+				List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(referenceOwner, crossReference);
+				int currentIndex = 0;
+				for (INode nodeForFeature : nodesForFeature) {
+					if (currentIndex >= listValue.size())
+						return null;
+					if (nodeForFeature.getTotalOffset() <= node.getTotalOffset()
+							&& nodeForFeature.getTotalEndOffset() >= node.getTotalEndOffset())
+						return (EObject) listValue.get(currentIndex);
+					currentIndex++;
+				}
 			}
 		}
 		return null;

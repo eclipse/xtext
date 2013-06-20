@@ -1,0 +1,101 @@
+chapter:Installation[Installation]
+
+Xtend requires Eclipse 3.5.2 or higher and a Java SDK 5 or higher. The recommended Eclipse version
+is 3.8 or better to benefit even more from the IDE integration. The easiest way to install the
+SDK is via link[http://marketplace.eclipse.org/content/eclipse-xtend][Eclipse Marketplace]. 
+But there is also a complete Eclipse distribution link[http://www.eclipse.org/xtend/index.html#download][available for download
+at http://xtend-lang.org].
+
+If you do not want to use the Eclipse plug-in, you can compile Xtend code using the 
+Maven plug-in.
+
+section:MavenSupport[Maven Support]
+
+The runtime library as well as a plug-in to run the compiler in a Maven build can be be obtained from
+the Maven Central Repository: link[http://repo.maven.apache.org/maven2][http://repo.maven.apache.org/maven2].
+
+Here is the XML for the repository location:
+code[
+<repositories>
+  <repository>
+    <id>xtend</id>
+    <url>http://repo.maven.apache.org/maven2</url>
+  </repository>
+</repositories>
+<pluginRepositories>
+  <pluginRepository>
+    <id>xtend</id>
+    <url>http://repo.maven.apache.org/maven2</url>
+  </pluginRepository>
+</pluginRepositories>
+]
+
+Here is the pom.xml snippet for the dependency to the library:
+
+code[
+<dependency>
+  <groupId>org.eclipse.xtend</groupId>
+  <artifactId>org.eclipse.xtend.lib</artifactId>
+  <version>2.4.2</version>
+</dependency>
+]
+
+Last but not least, this is the pom for the Xtend compiler plug-in:
+
+code[
+<plugin>
+  <groupId>org.eclipse.xtend</groupId>
+  <artifactId>xtend-maven-plugin</artifactId>
+  <version>2.4.2</version>
+  <executions>
+    <execution>
+      <goals>
+        <goal>compile</goal>
+        <!-- <goal>testCompile</goal> -->
+      </goals>
+      <!-- optionally you can configure a different target folder -->
+      <!--
+      <configuration>
+        <outputDirectory>xtend-gen</outputDirectory>
+      </configuration>
+      -->
+    </execution>
+  </executions>
+</plugin>
+]
+
+As you see the e[outputDirectory] can be specified to match the default of the Eclipse plug-in (e[xtend-gen]).
+Of course you can also change the configuration in Eclipse to match the Maven default (e[generated-sources]).
+To do so right-click on the project and select e[Properties] or if you prefer a global setting choose e[Eclipse->Preferences].
+In the category e[Xtend/Compiler] enter the directory name (see screenshot). It is interpreted as a
+relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+
+img[images/configure-compiler-in-eclipse.png][Configuring the compiler in Eclipse][][]
+
+section:library[The Runtime Library]
+
+The compiler requires a small runtime library e[org.eclipse.xtend.lib] on the class path, which provides useful extensions
+to existing classes and interfaces from the JDK. Many 
+features of Xtend are not baked into the language itself but provided via this library. 
+It is available from a ref:MavenSupport[Maven repository] and via p2
+update site if you do Eclipse plug-in development.
+ 
+The library provides means to create collections in a readable way:
+
+code[Xtend][
+  val myList = newArrayList(1, 2, 3)
+  val mySet = newHashSet(4, 5, 6)
+  val myMap = newHashMap(1 -> 'one', 2 -> 'two', 3 -> 'three')
+] 
+
+It also extends the collection types with a lot of very useful functions.
+One example is the ubiquitous code[map] function:
+
+code[Xtend][
+  val listOfNames = listOfPersons.map\[ name \]
+]
+
+Operators to concatenate collections or to do arithmetics with types like codeRef[java.math.BigDecimal] are also available.
+
+You might want to have a look at the link[http://xtend-lang.org/api/2.4.0/index.html][JavaDoc] to learn about the
+other useful APIs that are part of the library.

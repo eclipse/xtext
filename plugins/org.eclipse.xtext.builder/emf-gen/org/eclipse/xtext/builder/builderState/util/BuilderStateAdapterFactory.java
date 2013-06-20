@@ -13,6 +13,8 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.builder.builderState.EObjectDescription;
+import org.eclipse.xtext.builder.builderState.ReferenceDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -78,7 +80,7 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 				return createResourceDescriptionAdapter();
 			}
 			@Override
-			public Adapter caseEObjectDescription(IEObjectDescription object) {
+			public Adapter caseEObjectDescription(EObjectDescription object) {
 				return createEObjectDescriptionAdapter();
 			}
 			@Override
@@ -86,8 +88,16 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 				return createUserDataEntryAdapter();
 			}
 			@Override
-			public Adapter caseReferenceDescription(IReferenceDescription object) {
+			public Adapter caseReferenceDescription(ReferenceDescription object) {
 				return createReferenceDescriptionAdapter();
+			}
+			@Override
+			public Adapter caseIEObjectDescription(IEObjectDescription object) {
+				return createIEObjectDescriptionAdapter();
+			}
+			@Override
+			public Adapter caseIReferenceDescription(IReferenceDescription object) {
+				return createIReferenceDescriptionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -124,13 +134,13 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IEObjectDescription <em>EObject Description</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.builder.builderState.EObjectDescription <em>EObject Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.resource.IEObjectDescription
+	 * @see org.eclipse.xtext.builder.builderState.EObjectDescription
 	 * @generated
 	 */
 	public Adapter createEObjectDescriptionAdapter() {
@@ -152,7 +162,35 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IReferenceDescription <em>Reference Description</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.builder.builderState.ReferenceDescription <em>Reference Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.builder.builderState.ReferenceDescription
+	 * @generated
+	 */
+	public Adapter createReferenceDescriptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IEObjectDescription <em>IE Object Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.resource.IEObjectDescription
+	 * @generated
+	 */
+	public Adapter createIEObjectDescriptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IReferenceDescription <em>IReference Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -161,7 +199,7 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	 * @see org.eclipse.xtext.resource.IReferenceDescription
 	 * @generated
 	 */
-	public Adapter createReferenceDescriptionAdapter() {
+	public Adapter createIReferenceDescriptionAdapter() {
 		return null;
 	}
 

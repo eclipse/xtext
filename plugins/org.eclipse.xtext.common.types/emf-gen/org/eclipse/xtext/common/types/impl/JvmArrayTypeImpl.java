@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -32,7 +34,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayType
+public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmArrayType
 {
 	/**
 	 * <!-- begin-user-doc -->
@@ -61,17 +63,6 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 	 * @generated
 	 */
 	public JvmComponentType getComponentType()
-	{
-		if (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE) return null;
-		return (JvmComponentType)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmComponentType basicGetComponentType()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE) return null;
 		return (JvmComponentType)eInternalContainer();
@@ -184,8 +175,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 		switch (featureID)
 		{
 			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
-				if (resolve) return getComponentType();
-				return basicGetComponentType();
+				return getComponentType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -235,7 +225,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayTy
 		switch (featureID)
 		{
 			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
-				return basicGetComponentType() != null;
+				return getComponentType() != null;
 		}
 		return super.eIsSet(featureID);
 	}

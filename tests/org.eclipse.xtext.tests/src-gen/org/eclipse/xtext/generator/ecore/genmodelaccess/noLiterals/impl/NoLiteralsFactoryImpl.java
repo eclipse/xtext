@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.impl;
 
@@ -34,7 +31,7 @@ public class NoLiteralsFactoryImpl extends EFactoryImpl implements NoLiteralsFac
 	{
 		try
 		{
-			NoLiteralsFactory theNoLiteralsFactory = (NoLiteralsFactory)EPackage.Registry.INSTANCE.getEFactory("http://xtext.org/genmodeltest-noliterals-v1.0"); 
+			NoLiteralsFactory theNoLiteralsFactory = (NoLiteralsFactory)EPackage.Registry.INSTANCE.getEFactory(NoLiteralsPackage.eNS_URI);
 			if (theNoLiteralsFactory != null)
 			{
 				return theNoLiteralsFactory;

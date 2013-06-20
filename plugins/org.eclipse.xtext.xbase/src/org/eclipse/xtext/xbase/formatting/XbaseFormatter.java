@@ -32,17 +32,16 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XWhileExpressionEleme
 import com.google.inject.Inject;
 
 /**
- * This class contains custom formatting description.
+ * This class is deprecated since it uses Xtext's old formatter architecture.
  * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting on how and when to use it
- * 
- * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
+ * use XbaseFormatter2.xtend
  */
+@Deprecated()
 public class XbaseFormatter extends AbstractDeclarativeFormatter {
 
 	@Inject
 	private XtypeFormatter xtypeFormatter;
-
+	
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
 		configure(c, (XbaseGrammarAccess) getGrammarAccess());
@@ -78,10 +77,11 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	}
 
 	public void configureXMemberFeatureCall(FormattingConfig c, XMemberFeatureCallElements ele) {
-		c.setNoSpace().around(ele.getFullStopKeyword_1_0_0_0_1());
+		c.setNoSpace().around(ele.getFullStopKeyword_1_0_0_0_1_0());
+		c.setNoSpace().around(ele.getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0());
 		c.setNoSpace().around(ele.getFullStopKeyword_1_1_0_0_1_0());
 		c.setNoSpace().around(ele.getNullSafeAssignment_1_1_0_0_1_1());
-		c.setNoSpace().around(ele.getSpreadingAssignment_1_1_0_0_1_2());
+		c.setNoSpace().around(ele.getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0());
 		c.setNoSpace().around(ele.getLessThanSignKeyword_1_1_1_0());
 		c.setNoSpace().before(ele.getCommaKeyword_1_1_1_2_0());
 		c.setNoSpace().around(ele.getGreaterThanSignKeyword_1_1_1_3());
@@ -91,9 +91,9 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	}
 
 	public void configureXClosure(FormattingConfig c, XClosureElements ele) {
-		c.setNoSpace().after(ele.getLeftSquareBracketKeyword_1());
-		c.setNoSpace().before(ele.getCommaKeyword_2_0_0_1_0());
-		c.setNoSpace().before(ele.getRightSquareBracketKeyword_4());
+		c.setNoSpace().after(ele.getLeftSquareBracketKeyword_0_0_1());
+		c.setNoSpace().before(ele.getCommaKeyword_1_0_0_1_0());
+		c.setNoSpace().before(ele.getRightSquareBracketKeyword_3());
 	}
 
 	public void configureXShortClosure(FormattingConfig c, XShortClosureElements ele) {
@@ -117,16 +117,17 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	}
 
 	public void configureXSwitchExpression(FormattingConfig c, XSwitchExpressionElements ele) {
-		c.setNoSpace().around(ele.getColonKeyword_2_0_1());
-		c.setNoLinewrap().before(ele.getLeftCurlyBracketKeyword_4());
-		c.setLinewrap().after(ele.getLeftCurlyBracketKeyword_4());
-		c.setIndentationIncrement().after(ele.getLeftCurlyBracketKeyword_4());
-		c.setNoSpace().before(ele.getColonKeyword_6_1());
-		c.setIndentationIncrement().before(ele.getDefaultAssignment_6_2());
-		c.setLinewrap().around(ele.getDefaultAssignment_6_2());
-		c.setIndentationDecrement().after(ele.getDefaultAssignment_6_2());
-		c.setLinewrap().before(ele.getRightCurlyBracketKeyword_7());
-		c.setIndentationDecrement().before(ele.getRightCurlyBracketKeyword_7());
+		c.setNoSpace().around(ele.getColonKeyword_2_0_0_0_1());
+		c.setNoSpace().around(ele.getColonKeyword_2_1_0_0_2());
+		c.setNoLinewrap().before(ele.getLeftCurlyBracketKeyword_3());
+		c.setLinewrap().after(ele.getLeftCurlyBracketKeyword_3());
+		c.setIndentationIncrement().after(ele.getLeftCurlyBracketKeyword_3());
+		c.setNoSpace().before(ele.getColonKeyword_5_1());
+		c.setIndentationIncrement().before(ele.getDefaultAssignment_5_2());
+		c.setLinewrap().around(ele.getDefaultAssignment_5_2());
+		c.setIndentationDecrement().after(ele.getDefaultAssignment_5_2());
+		c.setLinewrap().before(ele.getRightCurlyBracketKeyword_6());
+		c.setIndentationDecrement().before(ele.getRightCurlyBracketKeyword_6());
 	}
 
 	public void configureXCasePart(FormattingConfig c, XCasePartElements ele) {
@@ -173,26 +174,27 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	}
 
 	public void configureXFeatureCall(FormattingConfig c, XFeatureCallElements ele) {
-		c.setNoSpace().around(ele.getLessThanSignKeyword_2_0());
-		c.setNoSpace().before(ele.getCommaKeyword_2_2_0());
-		c.setNoSpace().around(ele.getGreaterThanSignKeyword_2_3());
-		c.setNoSpace().around(ele.getExplicitOperationCallAssignment_4_0());
-		c.setNoSpace().before(ele.getCommaKeyword_2_2_0());
-		c.setNoSpace().before(ele.getRightParenthesisKeyword_4_2());
+		c.setNoSpace().around(ele.getLessThanSignKeyword_1_0());
+		c.setNoSpace().before(ele.getCommaKeyword_1_2_0());
+		c.setNoSpace().around(ele.getGreaterThanSignKeyword_1_3());
+		c.setNoSpace().around(ele.getExplicitOperationCallAssignment_3_0());
+		c.setNoSpace().before(ele.getCommaKeyword_3_1_1_1_0());
+		c.setNoSpace().before(ele.getRightParenthesisKeyword_3_2());
 	}
 
 	public void configureXConstructorCall(FormattingConfig c, XConstructorCallElements ele) {
 		c.setNoSpace().around(ele.getLessThanSignKeyword_3_0());
 		c.setNoSpace().before(ele.getCommaKeyword_3_2_0());
 		c.setNoSpace().around(ele.getGreaterThanSignKeyword_3_3());
-		c.setNoSpace().around(ele.getLeftParenthesisKeyword_4());
-		c.setNoSpace().before(ele.getCommaKeyword_5_1_1_0());
-		c.setNoSpace().before(ele.getRightParenthesisKeyword_6());
+		c.setNoSpace().around(ele.getLeftParenthesisKeyword_4_0());
+		c.setNoSpace().before(ele.getCommaKeyword_4_1_1_1_0());
+		c.setNoSpace().before(ele.getRightParenthesisKeyword_4_2());
 	}
 
 	public void configureXTypeLiteral(FormattingConfig c, XTypeLiteralElements ele) {
 		c.setNoSpace().around(ele.getLeftParenthesisKeyword_2());
-		c.setNoSpace().around(ele.getRightParenthesisKeyword_4());
+		c.setNoSpace().around(ele.getArrayDimensionsArrayBracketsParserRuleCall_4_0());
+		c.setNoSpace().around(ele.getRightParenthesisKeyword_5());
 	}
 
 	public void configureXTryCatchFinallyExpression(FormattingConfig c, XTryCatchFinallyExpressionElements ele) {

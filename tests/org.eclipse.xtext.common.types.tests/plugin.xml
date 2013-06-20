@@ -147,7 +147,23 @@
     </extension>
 
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage"
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.compiler.preferencePage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_ContentAssistTestLanguage"/>
+        </page>
+    </extension>
+    <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring" 
        class = "org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.RefactoringTestLanguagePackage"
@@ -429,7 +445,7 @@
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -590,7 +606,7 @@
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -612,5 +628,14 @@
          </command>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2"
+	        class="org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_RefactoringTestLanguage2"/>
+	    </page>
+	</extension>
 
 </plugin>

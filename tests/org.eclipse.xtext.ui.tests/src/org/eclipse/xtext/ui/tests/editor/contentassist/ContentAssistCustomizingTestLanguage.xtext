@@ -15,7 +15,7 @@ Model :
 ;
 
 Type:
-	name=FQN ('extends' superType=TypeRef)? ';'
+	(name=FQN|name='FQN') ('extends' superType=TypeRef)? ';'
 ;
 
 TypeRef:

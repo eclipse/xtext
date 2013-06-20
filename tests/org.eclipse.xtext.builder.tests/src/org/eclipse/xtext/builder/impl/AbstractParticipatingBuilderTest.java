@@ -28,7 +28,7 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	private OperationCanceledException cancelWith;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		IXtextBuilderParticipant instance = Activator.getInstance()
 				.getInjector("org.eclipse.xtext.builder.tests.BuilderTestLanguage")
@@ -38,7 +38,7 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		participant.setDelegate(null);
 		participant = null;
 		reset();

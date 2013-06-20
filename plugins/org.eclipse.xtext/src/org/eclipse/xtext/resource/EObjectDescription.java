@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
@@ -64,10 +65,12 @@ public class EObjectDescription extends AbstractEObjectDescription {
 	}
 	
 	protected URI normalize(EObject element, URI uri) {
-		if (element!=null && element.eResource()!=null && element.eResource().getResourceSet() != null)
-			return element.eResource().getResourceSet().getURIConverter().normalize(uri);
-		else
-			return uri;
+		if (uri != null && !uri.isPlatform() && element != null && element.eResource() != null) {
+			ResourceSet resourceSet = element.eResource().getResourceSet();
+			if (resourceSet != null)
+				return resourceSet.getURIConverter().normalize(uri);
+		}
+		return uri;
 	}
 
 	public QualifiedName getName() {

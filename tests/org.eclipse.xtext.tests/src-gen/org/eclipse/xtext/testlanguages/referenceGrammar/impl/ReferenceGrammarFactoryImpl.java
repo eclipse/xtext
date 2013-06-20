@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar.impl;
 
@@ -33,7 +30,7 @@ public class ReferenceGrammarFactoryImpl extends EFactoryImpl implements Referen
   {
     try
     {
-      ReferenceGrammarFactory theReferenceGrammarFactory = (ReferenceGrammarFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/reference/ReferenceGrammar"); 
+      ReferenceGrammarFactory theReferenceGrammarFactory = (ReferenceGrammarFactory)EPackage.Registry.INSTANCE.getEFactory(ReferenceGrammarPackage.eNS_URI);
       if (theReferenceGrammarFactory != null)
       {
         return theReferenceGrammarFactory;

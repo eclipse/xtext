@@ -16,12 +16,13 @@ import java.util.List;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting.IFormatter;
+import org.eclipse.xtext.formatting.IFormatterExtension;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream;
-import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 
 import com.google.inject.Inject;
@@ -52,7 +53,11 @@ public class Serializer implements ISerializer {
 				throw new IConcreteSyntaxValidator.InvalidConcreteSyntaxException(
 						"These errors need to be fixed before the model can be serialized.", diagnostics);
 		}
-		ITokenStream formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
+		ITokenStream formatterTokenStream;
+		if(formatter instanceof IFormatterExtension)
+			formatterTokenStream = ((IFormatterExtension) formatter).createFormatterStream(obj, null, tokenStream, !options.isFormatting());
+		else 
+			formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
 		TreeConstructionReport report = parseTreeReconstructor.serializeSubtree(obj, formatterTokenStream);
 		formatterTokenStream.flush();
 		return report;

@@ -60,7 +60,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	}
 
 	/**
-	 * For testing. Uses a {@link IResourceScopeCache.NullImpl}.
+	 * For testing. Uses a {@link org.eclipse.xtext.util.IResourceScopeCache.NullImpl}.
 	 */
 	public DefaultResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		this(resource, strategy, new IResourceScopeCache.NullImpl());
@@ -140,7 +140,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 
 	protected Map<EObject, IEObjectDescription> createEObject2ExportedEObjectsMap(
 			Iterable<IEObjectDescription> exportedObjects) {
-		Map<EObject, IEObjectDescription> uri2exportedEObjects = Maps.newHashMap();
+		Map<EObject, IEObjectDescription> uri2exportedEObjects = Maps.newIdentityHashMap();
 		for (IEObjectDescription eObjectDescription : exportedObjects) {
 			uri2exportedEObjects.put(eObjectDescription.getEObjectOrProxy(), eObjectDescription);
 		}
@@ -173,5 +173,10 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 				return lookup;
 			}
 		});
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + getClass().getSimpleName() + " uri=" + getURI() + "]";
 	}
 }

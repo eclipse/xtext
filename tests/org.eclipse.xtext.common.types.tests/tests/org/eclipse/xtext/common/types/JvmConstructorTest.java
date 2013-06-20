@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.junit.Before;
+import org.junit.Test;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -14,9 +17,8 @@ public class JvmConstructorTest extends JvmExecutableTest {
 
 	private JvmConstructor constructor;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 	}
 	
@@ -31,7 +33,7 @@ public class JvmConstructorTest extends JvmExecutableTest {
 	}
 	
 	@Override
-	public void testGetQualifiedName_02() {
+	@Test public void testGetQualifiedName_02() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.setSimpleName("DoesNotExist");
 		outerType.getMembers().add(getObjectUnderTest());
@@ -40,7 +42,7 @@ public class JvmConstructorTest extends JvmExecutableTest {
 	}
 	
 	@Override
-	public void testGetQualifiedName_03() {
+	@Test public void testGetQualifiedName_03() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.setSimpleName("DoesNotExist");
 		outerType.setPackageName("java.lang");
@@ -50,7 +52,7 @@ public class JvmConstructorTest extends JvmExecutableTest {
 	}
 	
 	@Override
-	public void testGetQualifiedName_04() {
+	@Test public void testGetQualifiedName_04() {
 		JvmGenericType outerOuterType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerOuterType.setSimpleName("DoesNotExist");
 		outerOuterType.setPackageName("java.lang");
@@ -63,7 +65,7 @@ public class JvmConstructorTest extends JvmExecutableTest {
 	}
 	
 	@Override
-	public void testGetQualifiedNameWithDelimiter_02() {
+	@Test public void testGetQualifiedNameWithDelimiter_02() {
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
 		type.setSimpleName("DoesNotExist");
 		type.getMembers().add(getObjectUnderTest());
@@ -72,7 +74,7 @@ public class JvmConstructorTest extends JvmExecutableTest {
 	}
 	
 	@Override
-	public void testGetQualifiedNameWithDelimiter_03() {
+	@Test public void testGetQualifiedNameWithDelimiter_03() {
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
 		type.setSimpleName("DoesNotExist");
 		type.setPackageName("java.lang");
@@ -82,7 +84,7 @@ public class JvmConstructorTest extends JvmExecutableTest {
 	}
 	
 	@Override
-	public void testGetQualifiedNameWithDelimiter_04() {
+	@Test public void testGetQualifiedNameWithDelimiter_04() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.setSimpleName("DoesNotExist");
 		outerType.setPackageName("java.lang");

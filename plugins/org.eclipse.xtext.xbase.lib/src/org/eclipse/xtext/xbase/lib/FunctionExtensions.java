@@ -7,7 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
-import org.eclipse.xtext.xbase.lib.Functions.*;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.lib.Functions.Function3;
+import org.eclipse.xtext.xbase.lib.Functions.Function4;
+import org.eclipse.xtext.xbase.lib.Functions.Function5;
+import org.eclipse.xtext.xbase.lib.Functions.Function6;
+
+import com.google.common.annotations.GwtCompatible;
 
 /**
  * This is an extension library for {@link Functions functions}, e.g. closures.
@@ -15,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.Functions.*;
  * @author Sven Efftinge - Initial contribution and API
  * @see Functions
  */
-public class FunctionExtensions {
+@GwtCompatible public class FunctionExtensions {
 
 	/**
 	 * Curries a function that takes one argument.
@@ -26,6 +34,7 @@ public class FunctionExtensions {
 	 *            the fixed argument.
 	 * @return a function that takes no arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, RESULT> Function0<RESULT> curry(final Function1<? super P1, ? extends RESULT> function, final P1 argument) {
 		if (function == null)
 			throw new NullPointerException("function");
@@ -45,6 +54,7 @@ public class FunctionExtensions {
 	 *            the fixed first argument of {@code function}.
 	 * @return a function that takes one argument. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, RESULT> Function1<P2, RESULT> curry(final Function2<? super P1, ? super P2, ? extends RESULT> function,
 			final P1 argument) {
 		if (function == null)
@@ -65,6 +75,7 @@ public class FunctionExtensions {
 	 *            the fixed first argument of {@code function}.
 	 * @return a function that takes two arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, P3, RESULT> Function2<P2, P3, RESULT> curry(final Function3<? super P1, ? super P2, ? super P3, ? extends RESULT> function,
 			final P1 argument) {
 		if (function == null)
@@ -85,6 +96,7 @@ public class FunctionExtensions {
 	 *            the fixed first argument of {@code function}.
 	 * @return a function that takes three arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, P3, P4, RESULT> Function3<P2, P3, P4, RESULT> curry(
 			final Function4<? super P1, ? super P2, ? super P3, ? super P4, ? extends RESULT> function, final P1 argument) {
 		if (function == null)
@@ -105,6 +117,7 @@ public class FunctionExtensions {
 	 *            the fixed first argument of {@code function}.
 	 * @return a function that takes four arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, P3, P4, P5, RESULT> Function4<P2, P3, P4, P5, RESULT> curry(
 			final Function5<? super P1, ? super P2, ? super P3, ? super P4, ? super P5, ? extends RESULT> function, final P1 argument) {
 		if (function == null)
@@ -125,6 +138,7 @@ public class FunctionExtensions {
 	 *            the fixed first argument of {@code function}.
 	 * @return a function that takes five arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, P3, P4, P5, P6, RESULT> Function5<P2, P3, P4, P5, P6, RESULT> curry(
 			final Function6<? super P1, ? super P2, ? super P3, ? super P4, ? super P5, ? super P6, ? extends RESULT> function, final P1 argument) {
 		if (function == null)

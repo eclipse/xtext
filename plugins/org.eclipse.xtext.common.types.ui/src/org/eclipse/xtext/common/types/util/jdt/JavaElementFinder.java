@@ -39,9 +39,23 @@ public class JavaElementFinder implements IJavaElementFinder {
 	private IJavaProjectProvider projectProvider;
 	
 	public IJavaElement findElementFor(JvmIdentifiableElement element) {
+		return internalFindElementFor(element, false);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public IJavaElement findExactElementFor(JvmIdentifiableElement element) {
+		return internalFindElementFor(element, true);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected IJavaElement internalFindElementFor(JvmIdentifiableElement element, boolean isExactMatchOnly) {
 		if (element == null || element.eResource() == null)
 			return null;
-		Implementation implementation = new Implementation(projectProvider.getJavaProject(element.eResource().getResourceSet()));
+		Implementation implementation = new Implementation(projectProvider.getJavaProject(element.eResource().getResourceSet()), isExactMatchOnly);
 		IJavaElement result = implementation.doSwitch(element);
 		return result;
 	}
@@ -54,11 +68,25 @@ public class JavaElementFinder implements IJavaElementFinder {
 		return projectProvider;
 	}
 
+	/**
+	 * 
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 * @noextend This class is not intended to be subclassed by clients.
+	 */
 	public static class Implementation extends TypesSwitch<IJavaElement> {
 		private final IJavaProject javaProject;
+		private final boolean isExactMatchOnly;
 
-		public Implementation(IJavaProject javaProject) {
+		/**
+		 * @since 2.3
+		 */
+		public Implementation(IJavaProject javaProject, boolean isExactMatchOnly) {
 			this.javaProject = javaProject;
+			this.isExactMatchOnly = isExactMatchOnly;
+		}
+		
+		public Implementation(IJavaProject javaProject) {
+			this(javaProject, false);
 		}
 
 		@Override
@@ -73,6 +101,13 @@ public class JavaElementFinder implements IJavaElementFinder {
 		
 		@Override
 		public IJavaElement caseJvmMember(JvmMember object) {
+			return isExactMatchOnly ? null : getDeclaringTypeElement(object);
+		}
+		
+		/**
+		 * @since 2.3
+		 */
+		public IJavaElement getDeclaringTypeElement(JvmMember object) {
 			if (object.getDeclaringType() != null) {
 				IJavaElement typeElement = doSwitch(object.getDeclaringType());
 				return typeElement;
@@ -82,19 +117,19 @@ public class JavaElementFinder implements IJavaElementFinder {
 		
 		@Override
 		public IJavaElement caseJvmField(JvmField object) {
-			IJavaElement parent = caseJvmMember(object);
+			IJavaElement parent = getDeclaringTypeElement(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				IField result = type.getField(object.getSimpleName());
 				if (result != null)
 					return result;
 			}
-			return parent;
+			return (isExactMatchOnly) ? null : parent;
 		}
 		
 		@Override
 		public IJavaElement caseJvmOperation(JvmOperation object) {
-			IJavaElement parent = caseJvmMember(object);
+			IJavaElement parent = getDeclaringTypeElement(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				try {
@@ -109,10 +144,10 @@ public class JavaElementFinder implements IJavaElementFinder {
 					}
 				}
 				catch (JavaModelException e) {
-					return parent;
+					return (isExactMatchOnly) ? null : parent;
 				}
 			}
-			return parent;
+			return (isExactMatchOnly) ? null : parent;
 		}
 
 		private boolean doParametersMatch(JvmExecutable object, IMethod method, IType declaringType)
@@ -125,8 +160,18 @@ public class JavaElementFinder implements IJavaElementFinder {
 				String parameterType = parameterTypes[i];
 				String readable = toQualifiedRawTypeName(parameterType, declaringType);
 				String qualifiedParameterType = formalParameter.getParameterType().getType().getQualifiedName('.');
-				if (!readable.equals(qualifiedParameterType))
-					match = false;
+				if (!readable.equals(qualifiedParameterType)) {
+					// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=387576
+					if (qualifiedParameterType.endsWith("$") && qualifiedParameterType.startsWith(readable)) {
+						for(int c = readable.length(); c < qualifiedParameterType.length() && match; c++) {
+							if (qualifiedParameterType.charAt(c) != '$') {
+								match = false;
+							}
+						}
+					} else {
+						match = false;
+					}
+				}
 			}
 			return match;
 		}
@@ -169,7 +214,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 		
 		@Override
 		public IJavaElement caseJvmConstructor(JvmConstructor object) {
-			IJavaElement parent = caseJvmMember(object);
+			IJavaElement parent = getDeclaringTypeElement(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				try {
@@ -182,10 +227,10 @@ public class JavaElementFinder implements IJavaElementFinder {
 					}
 				}
 				catch (JavaModelException e) {
-					return parent;
+					return (isExactMatchOnly) ? null : parent;
 				}
 			}
-			return parent;
+			return (isExactMatchOnly) ? null : parent;
 		}
 		
 		@Override

@@ -16,6 +16,7 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -33,6 +34,17 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptor<ITex
 
 	public void accept(int offset, int length, ITextRegion significantRegion) {
 		IRegion position = getLineRegion(offset, length);
+		try {
+			if (xtextDocument != null && significantRegion != null) {
+				int firstLine = xtextDocument.getLineOfOffset(significantRegion.getOffset());
+				int lastLine = xtextDocument.getLineOfOffset(significantRegion.getOffset()+significantRegion.getLength());
+				if (firstLine != lastLine) {
+					int endOffset = xtextDocument.getLineOffset(firstLine)+xtextDocument.getLineLength(firstLine);
+					significantRegion = new TextRegion(significantRegion.getOffset(), endOffset - significantRegion.getOffset());
+				}
+			}
+		} catch (BadLocationException e) {
+		}
 		FoldedPosition foldingRegion = newFoldedPosition(position, significantRegion);
 		if (foldingRegion != null) {
 			result.add(foldingRegion);

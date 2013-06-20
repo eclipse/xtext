@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /*
  * This class should not rely on field injection since it is intended to be used
@@ -41,6 +42,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class RawTypeHelper implements IRawTypeHelper {
 
 	private final RawTypeImplementation typeImplementation;
@@ -96,10 +98,6 @@ public class RawTypeHelper implements IRawTypeHelper {
 			for(JvmType rawComponentType: rawComponentTypes) {
 				if (!rawComponentType.eIsProxy() && rawComponentType instanceof JvmComponentType) {
 					JvmArrayType arrayType = ((JvmComponentType) rawComponentType).getArrayType();
-					if (arrayType == null) {
-						arrayType = factory.createJvmArrayType();
-						arrayType.setComponentType((JvmComponentType) rawComponentType);
-					}
 					result.add(arrayType);
 				}
 			}
@@ -247,7 +245,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 					if (constraint instanceof JvmUpperBound) {
 						JvmTypeReference rawType = visit(constraint.getTypeReference(), resource);
 						if (result == null) {
-							if (rawType.eContainer() != null) {
+							if (rawType != null && rawType.eContainer() != null) {
 								JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
 								delegate.setDelegate(rawType);
 								rawType = delegate;

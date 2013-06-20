@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase.impl;
 
@@ -26,6 +28,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getAssignable <em>Assignable</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#isExplicitStatic <em>Explicit Static</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,6 +55,26 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * @ordered
 	 */
 	protected XExpression value;
+
+	/**
+	 * The default value of the '{@link #isExplicitStatic() <em>Explicit Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXPLICIT_STATIC_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExplicitStatic() <em>Explicit Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean explicitStatic = EXPLICIT_STATIC_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,6 +198,29 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExplicitStatic()
+	{
+		return explicitStatic;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExplicitStatic(boolean newExplicitStatic)
+	{
+		boolean oldExplicitStatic = explicitStatic;
+		explicitStatic = newExplicitStatic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XASSIGNMENT__EXPLICIT_STATIC, oldExplicitStatic, explicitStatic));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -202,6 +248,8 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 				return getAssignable();
 			case XbasePackage.XASSIGNMENT__VALUE:
 				return getValue();
+			case XbasePackage.XASSIGNMENT__EXPLICIT_STATIC:
+				return isExplicitStatic();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -221,6 +269,9 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 				return;
 			case XbasePackage.XASSIGNMENT__VALUE:
 				setValue((XExpression)newValue);
+				return;
+			case XbasePackage.XASSIGNMENT__EXPLICIT_STATIC:
+				setExplicitStatic((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -242,6 +293,9 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 			case XbasePackage.XASSIGNMENT__VALUE:
 				setValue((XExpression)null);
 				return;
+			case XbasePackage.XASSIGNMENT__EXPLICIT_STATIC:
+				setExplicitStatic(EXPLICIT_STATIC_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -260,8 +314,27 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 				return assignable != null;
 			case XbasePackage.XASSIGNMENT__VALUE:
 				return value != null;
+			case XbasePackage.XASSIGNMENT__EXPLICIT_STATIC:
+				return explicitStatic != EXPLICIT_STATIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (explicitStatic: ");
+		result.append(explicitStatic);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XAssignmentImpl

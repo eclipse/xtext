@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xtype.impl;
 
@@ -34,7 +36,7 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	{
 		try
 		{
-			XtypeFactory theXtypeFactory = (XtypeFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/xbase/Xtype"); 
+			XtypeFactory theXtypeFactory = (XtypeFactory)EPackage.Registry.INSTANCE.getEFactory(XtypePackage.eNS_URI);
 			if (theXtypeFactory != null)
 			{
 				return theXtypeFactory;
@@ -70,6 +72,8 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 		{
 			case XtypePackage.XFUNCTION_TYPE_REF: return createXFunctionTypeRef();
 			case XtypePackage.XCOMPUTED_TYPE_REFERENCE: return createXComputedTypeReference();
+			case XtypePackage.XIMPORT_SECTION: return createXImportSection();
+			case XtypePackage.XIMPORT_DECLARATION: return createXImportDeclaration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -123,8 +127,30 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	 */
 	public XComputedTypeReference createXComputedTypeReference()
 	{
-		XComputedTypeReferenceImpl xComputedTypeReference = new XComputedTypeReferenceImpl();
+		XComputedTypeReferenceImplCustom xComputedTypeReference = new XComputedTypeReferenceImplCustom();
 		return xComputedTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XImportSection createXImportSection()
+	{
+		XImportSectionImpl xImportSection = new XImportSectionImpl();
+		return xImportSection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XImportDeclaration createXImportDeclaration()
+	{
+		XImportDeclarationImplCustom xImportDeclaration = new XImportDeclarationImplCustom();
+		return xImportDeclaration;
 	}
 
 	/**

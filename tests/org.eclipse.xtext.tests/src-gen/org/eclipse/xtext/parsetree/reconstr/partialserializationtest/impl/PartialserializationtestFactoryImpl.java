@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.partialserializationtest.impl;
 
@@ -33,7 +30,7 @@ public class PartialserializationtestFactoryImpl extends EFactoryImpl implements
   {
     try
     {
-      PartialserializationtestFactory thePartialserializationtestFactory = (PartialserializationtestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/partialserializationtest"); 
+      PartialserializationtestFactory thePartialserializationtestFactory = (PartialserializationtestFactory)EPackage.Registry.INSTANCE.getEFactory(PartialserializationtestPackage.eNS_URI);
       if (thePartialserializationtestFactory != null)
       {
         return thePartialserializationtestFactory;

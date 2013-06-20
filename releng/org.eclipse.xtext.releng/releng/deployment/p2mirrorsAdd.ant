@@ -1,0 +1,59 @@
+<project name="deployment" default="addMirrorsUrl">
+	<target name="addMirrorsUrl">
+
+		<property name="deployment.repository_root" location="${user.dir}" />
+		<property name="deployment.url_prefix_cut" location="/home/data/httpd/download.eclipse.org" />
+		
+		<path id="deployment.working_dir" location="${deployment.repository_root}" />
+		
+
+		<echo>Working in : ${deployment.repository_root}</echo>
+
+		<available file="${deployment.repository_root}/artifacts.jar" property="deployment.has_artifacts_jar" />
+		<fail unless="deployment.has_artifacts_jar" message="artifacts.jar does not exist in ${deployment.repository_root}" />
+
+		<condition property="deployment.prefix_matches">
+			<contains string="${deployment.repository_root}" substring="${deployment.url_prefix_cut}" />
+		</condition>
+
+		<fail message="Start script from within ${deployment.url_prefix_cut} or it subfolders." unless="deployment.prefix_matches" />
+
+		<!-- 
+			Cut mirrored root URL. For eclipse it's /home/data/httpd/download.eclipse.org 
+			so mirrors url maps from /home/data/httpd/download.eclipse.org/PATH to http://www.eclipse.org/downloads/download.php?file=PATH
+		-->
+		<pathconvert property="deployment.download_area_relative_path" refid="deployment.working_dir" setonempty="false">
+			<map from="${deployment.url_prefix_cut}" to="" />
+		</pathconvert>
+
+		<property name="deployment.mirrorsUrl" value="http://www.eclipse.org/downloads/download.php?file=/${deployment.download_area_relative_path}&amp;format=xml" />
+		<antcall target="performXslTransformation">
+			<param name="deployment.repository_root" value="${deployment.repository_root}" />
+			<param name="deployment.mirrorsUrl" value="${deployment.mirrorsUrl}" />
+		</antcall>
+
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: performXslTransformation                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="performXslTransformation">
+		<echo>Append p2.mirrorsURL property = "${deployment.mirrorsUrl}" to the artifacts.jar</echo>
+		<echo>For repository ${deployment.repository_root}</echo>
+		<unjar src="${deployment.repository_root}/artifacts.jar" dest="${deployment.repository_root}/" />
+		<move file="${deployment.repository_root}/artifacts.xml" tofile="${deployment.repository_root}/artifacts.xml.original" />
+		<xslt style="${ant.file}/../p2MirrorsUrl.xsl" in="${deployment.repository_root}/artifacts.xml.original" out="${deployment.repository_root}/artifacts.xml">
+			<classpath location="${user.home}/.ant/lib/ant-trax-1.7.0.jar" />
+			<param name="mirrorsURL" expression="${deployment.mirrorsUrl}" />
+		</xslt>
+
+		<zip destfile="${deployment.repository_root}/artifacts.jar" filesonly="true" basedir="${deployment.repository_root}" includes="artifacts.xml" />
+
+		<delete verbose="true">
+			<fileset dir="${deployment.repository_root}">
+				<include name="artifacts.xml" />
+				<include name="artifacts.xml.original" />
+			</fileset>
+		</delete>
+	</target>
+</project>

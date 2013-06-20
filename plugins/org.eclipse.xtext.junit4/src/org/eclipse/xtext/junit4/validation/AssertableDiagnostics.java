@@ -67,7 +67,10 @@ public class AssertableDiagnostics {
 
 	}
 
-	protected static class Pred implements DiagnosticPredicate {
+	/**
+	 * @since 2.3
+	 */
+	public static class Pred implements DiagnosticPredicate {
 		protected String issueCode;
 		protected String msg;
 		protected Integer severity;
@@ -109,15 +112,15 @@ public class AssertableDiagnostics {
 		}
 	}
 
-	public static Pred diagnostic(int severity, String issueCode, String messageFragment) {
+	public static Pred diagnostic(Integer severity, String issueCode, String messageFragment) {
 		return new Pred(severity, null, issueCode, messageFragment);
 	}
 
-	public static Pred diagnostic(int severity, int code, String messageFragment) {
+	public static Pred diagnostic(Integer severity, Integer code, String messageFragment) {
 		return new Pred(severity, code, null, messageFragment);
 	}
 
-	public static Pred diagnostic(int severity, int code, String issueCode, String messageFragment) {
+	public static Pred diagnostic(Integer severity, Integer code, String issueCode, String messageFragment) {
 		return new Pred(severity, code, issueCode, messageFragment);
 	}
 

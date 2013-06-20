@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -15,6 +16,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
+import com.google.common.collect.Iterables;
+
 /**
  * A scope implemented using a {@link Map} used for efficient lookup of ordinary named 
  * {@link org.eclipse.xtext.resource.EObjectDescription EObjectDescriptions}. 
@@ -22,10 +25,11 @@ import org.eclipse.xtext.scoping.IScope;
  * This implementation assumes, that the keys of the {@link Map} correspond to the keys of the contained {@link org.eclipse.xtext.resource.EObjectDescription}.
  * Additionally it assumes, that those keys are equal to <code>description.getName().toLowerCase()</code>.
  * 
- * When looking up elements using {@link ISelector.SelectByName} this implementation looks up the the elements from the map, hence are much 
+ * When looking up elements using {@link #getElements(QualifiedName)} this implementation looks up the the elements from the map, hence are much 
  * more efficient for many {@link IEObjectDescription}s.  
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class MapBasedScope extends AbstractScope {
 
@@ -46,6 +50,19 @@ public class MapBasedScope extends AbstractScope {
 			return parent;
 		}
 		return new MapBasedScope(parent, map, ignoreCase);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public static IScope createScope(IScope parent, Collection<IEObjectDescription> descriptions) {
+		if (descriptions.size() == 1) {
+			IEObjectDescription description = Iterables.getOnlyElement(descriptions);
+			return new MapBasedScope(parent, Collections.singletonMap(description.getName(), description), false); 
+		} else if (descriptions.isEmpty()) {
+			return parent;
+		}
+		return createScope(parent, descriptions, false);
 	}
 	
 	public static IScope createScope(IScope parent, Iterable<IEObjectDescription> descriptions) {

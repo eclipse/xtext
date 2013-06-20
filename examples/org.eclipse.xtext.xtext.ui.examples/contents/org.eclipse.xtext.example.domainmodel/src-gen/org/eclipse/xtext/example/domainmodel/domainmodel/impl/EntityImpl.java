@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.domainmodel.domainmodel.impl;
 
@@ -33,7 +30,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.impl.EntityImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.impl.EntityImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.impl.EntityImpl#getFeatures <em>Features</em>}</li>
  * </ul>
@@ -43,26 +39,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
  */
 public class EntityImpl extends AbstractElementImpl implements Entity
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -102,29 +78,6 @@ public class EntityImpl extends AbstractElementImpl implements Entity
   protected EClass eStaticClass()
   {
     return DomainmodelPackage.Literals.ENTITY;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DomainmodelPackage.ENTITY__NAME, oldName, name));
   }
 
   /**
@@ -217,8 +170,6 @@ public class EntityImpl extends AbstractElementImpl implements Entity
   {
     switch (featureID)
     {
-      case DomainmodelPackage.ENTITY__NAME:
-        return getName();
       case DomainmodelPackage.ENTITY__SUPER_TYPE:
         return getSuperType();
       case DomainmodelPackage.ENTITY__FEATURES:
@@ -238,9 +189,6 @@ public class EntityImpl extends AbstractElementImpl implements Entity
   {
     switch (featureID)
     {
-      case DomainmodelPackage.ENTITY__NAME:
-        setName((String)newValue);
-        return;
       case DomainmodelPackage.ENTITY__SUPER_TYPE:
         setSuperType((JvmParameterizedTypeReference)newValue);
         return;
@@ -262,9 +210,6 @@ public class EntityImpl extends AbstractElementImpl implements Entity
   {
     switch (featureID)
     {
-      case DomainmodelPackage.ENTITY__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case DomainmodelPackage.ENTITY__SUPER_TYPE:
         setSuperType((JvmParameterizedTypeReference)null);
         return;
@@ -285,31 +230,12 @@ public class EntityImpl extends AbstractElementImpl implements Entity
   {
     switch (featureID)
     {
-      case DomainmodelPackage.ENTITY__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case DomainmodelPackage.ENTITY__SUPER_TYPE:
         return superType != null;
       case DomainmodelPackage.ENTITY__FEATURES:
         return features != null && !features.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //EntityImpl

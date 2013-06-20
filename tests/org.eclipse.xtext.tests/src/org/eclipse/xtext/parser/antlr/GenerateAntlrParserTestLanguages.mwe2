@@ -66,5 +66,9 @@ Workflow {
 				ignoreCase = true
 			}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug378967TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 	}
 }

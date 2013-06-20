@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtype.impl;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -23,8 +25,12 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xtype.util.XtypeReferenceVisitor;
+import org.eclipse.xtext.xtype.util.XtypeReferenceVisitorWithParameter;
 
 import com.google.common.collect.Lists;
 
@@ -34,6 +40,23 @@ import com.google.common.collect.Lists;
  * 	{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference}
  */
 public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
+	
+	@Override
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor) {
+		if (visitor instanceof XtypeReferenceVisitor) {
+			return ((XtypeReferenceVisitor<Result>) visitor).doVisitFunctionTypeReference(this);
+		}
+		return super.accept(visitor);
+	}
+	
+	@Override
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter, Result> visitor,
+			Parameter parameter) {
+		if (visitor instanceof XtypeReferenceVisitorWithParameter) {
+			return ((XtypeReferenceVisitorWithParameter<Parameter, Result>) visitor).doVisitFunctionTypeReference(this, parameter);
+		}
+		return super.accept(visitor, parameter);
+	}
 	
 	// TODO should we update the type as soon as the number of argument types changes?  
 	@Override
@@ -118,8 +141,6 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 		TypesFactory typesFactory = TypesFactory.eINSTANCE;
 		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
 		result.setType(rawType);
-		EList<JvmTypeReference> superTypesWithObject = ((JvmDeclaredType) rawType).getSuperTypes();
-		JvmTypeReference objectReference = superTypesWithObject.get(0);
 		for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
 			if (!(paramType instanceof JvmWildcardTypeReference)) {
 				JvmWildcardTypeReference paramWildcard = typesFactory.createJvmWildcardTypeReference();
@@ -133,9 +154,8 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 					lowerBound.setTypeReference(wrapped);
 				}
 				JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
-				JvmDelegateTypeReference objectDelegate = typesFactory.createJvmDelegateTypeReference();
-				objectDelegate.setDelegate(objectReference);
-				upperBound.setTypeReference(objectDelegate);
+				JvmTypeReference objectReference = getJavaLangObjectTypeRef(rawType, typesFactory);
+				upperBound.setTypeReference(objectReference);
 			
 				paramWildcard.getConstraints().add(upperBound);
 				paramWildcard.getConstraints().add(lowerBound);
@@ -169,6 +189,25 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 			}
 		}
 		return result;
+	}
+
+	private final static URI javaLangObjectURI = URI.createURI("java:/Objects/java.lang.Object#java.lang.Object");
+	
+	protected JvmTypeReference getJavaLangObjectTypeRef(JvmType rawType, TypesFactory typesFactory) {
+		ResourceSet rs = EcoreUtil2.getResourceSet(rawType);
+		JvmParameterizedTypeReference refToObject = typesFactory.createJvmParameterizedTypeReference();
+		if (rs != null) {
+			EObject javaLangObject = rs.getEObject(javaLangObjectURI, true);
+			if (javaLangObject instanceof JvmType) {
+				JvmType objectDeclaration = (JvmType) javaLangObject;
+				refToObject.setType(objectDeclaration);
+				return refToObject;
+			}
+		}
+		JvmGenericType proxy = typesFactory.createJvmGenericType();
+		((InternalEObject)proxy).eSetProxyURI(javaLangObjectURI);
+		refToObject.setType(proxy);
+		return refToObject;
 	}
 	
 	public JvmTypeReference wrapIfNecessary(JvmTypeReference reference) {
@@ -276,8 +315,16 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(eClass().getName());
-		result.append(": ");
-		result.append(getIdentifier());
+		result.append(": (");
+		for (int i = 0;i< getParamTypes().size();i++) {
+			JvmTypeReference reference = getParamTypes().get(i);
+			result.append(reference.toString());
+			if (i<getParamTypes().size()-1)
+				result.append(", ");
+		}
+		result.append(")=>");
+		if (getReturnType()!=null)
+			result.append(getReturnType().toString());
 		return result.toString();
 	}
 }

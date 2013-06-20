@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-
-import junit.framework.Test;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -19,10 +15,6 @@ public class Bug348427Scenario1_1Test extends AbstractBug348427Test {
 	@Override
 	protected String getScenario() {
 		return "1.1";
-	}
-
-	public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(Bug348427Scenario1_1Test.class);
 	}
 
 }

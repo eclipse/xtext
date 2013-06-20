@@ -47,6 +47,7 @@ public interface IReferableElementsUnloader {
 			// => first calculate all fragments, then proxify elements starting form root.
 			List<Pair<EObject, URI>> elementsToUnload = newArrayList();
 			elementsToUnload.add(Tuples.create(root, EcoreUtil.getURI(root)));
+			root.eAdapters().clear();
 			for (Iterator<EObject> i = EcoreUtil.getAllProperContents(root, false); i.hasNext();) {
 				EObject element = i.next();
 				elementsToUnload.add(Tuples.create(element, EcoreUtil.getURI(element)));

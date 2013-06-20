@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
+import java.util.BitSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -24,6 +25,8 @@ import com.google.inject.ImplementedBy;
 public interface ISemanticSequencerNfaProvider {
 
 	public interface ISemState {
+		BitSet getAllFollowerFeatures();
+
 		AbstractElement getAssignedGrammarElement();
 
 		EStructuralFeature getFeature();
@@ -31,6 +34,8 @@ public interface ISemanticSequencerNfaProvider {
 		int getFeatureID();
 
 		List<ISemState> getFollowers();
+
+		int getOrderID();
 
 		List<AbstractElement> getToBeValidatedAssignedElements();
 	}

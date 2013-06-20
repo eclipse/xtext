@@ -39,7 +39,7 @@ public class SaveOptions {
 	 * map-entries to {@link org.eclipse.emf.ecore.resource.Resource#save(Map)} 
 	 * and converts them to semantically equal {@link SaveOptions}. 
 	 * 
-	 * @param the options-map or <code>null</code> if none.
+	 * @param saveOptions the options-map or <code>null</code> if none.
 	 * @return the options to use. Will never return <code>null</code>.
 	 */
 	@SuppressWarnings("deprecation")

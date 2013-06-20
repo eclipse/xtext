@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.antlr.bug289524Test.impl;
 
@@ -33,7 +30,7 @@ public class Bug289524TestFactoryImpl extends EFactoryImpl implements Bug289524T
   {
     try
     {
-      Bug289524TestFactory theBug289524TestFactory = (Bug289524TestFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/Bug289524TestLanguage"); 
+      Bug289524TestFactory theBug289524TestFactory = (Bug289524TestFactory)EPackage.Registry.INSTANCE.getEFactory(Bug289524TestPackage.eNS_URI);
       if (theBug289524TestFactory != null)
       {
         return theBug289524TestFactory;

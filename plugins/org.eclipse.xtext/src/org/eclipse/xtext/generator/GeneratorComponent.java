@@ -12,6 +12,7 @@ import static com.google.common.collect.Maps.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -19,6 +20,7 @@ import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
 import org.eclipse.xtext.ISetup;
 
+import com.google.common.base.Function;
 import com.google.inject.Injector;
 
 /**
@@ -128,6 +130,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 
 	protected IFileSystemAccess getConfiguredFileSystemAccess() {
 		final JavaIoFileSystemAccess configuredFileSystemAccess = injector.getInstance(JavaIoFileSystemAccess.class);
+		configuredFileSystemAccess.setOutputConfigurations(getOutputConfigurations());
 		for (Entry<String, String> outs : outlets.entrySet()) {
 			configuredFileSystemAccess.setOutputPath(outs.getKey(), outs.getValue());
 		}
@@ -136,6 +139,20 @@ public class GeneratorComponent implements IWorkflowComponent {
 
 	public void postInvoke() {
 		
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected Map<String, OutputConfiguration> getOutputConfigurations() {
+		IOutputConfigurationProvider outputConfigurationProvider = injector
+				.getInstance(IOutputConfigurationProvider.class);
+		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations();
+		return uniqueIndex(configurations, new Function<OutputConfiguration, String>() {
+			public String apply(OutputConfiguration from) {
+				return from.getName();
+			}
+		});
 	}
 	
 }

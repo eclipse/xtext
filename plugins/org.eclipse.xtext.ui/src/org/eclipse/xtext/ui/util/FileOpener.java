@@ -40,12 +40,20 @@ public class FileOpener {
 	}
 
 	/**
+	 * <p>
+	 * Opens the file in the corresponding default editor (asynchronous execution).<br>
+	 * Does nothing if <code>file</code> is <code>null</code>
+	 * </p>
+	 * 
 	 * @param shell
 	 *            the parent shell. May not be <code>null</code>
 	 * @param file
-	 *            that should be selected. May not be <code>null</code>.
+	 *            that should be selected.
 	 */
 	public void openFileToEdit(final Shell shell, final IFile file) {
+		if (file == null) {
+			return;
+		}
 		shell.getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				final IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();

@@ -21,6 +21,7 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ILineDiffInfo;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
+
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -107,9 +108,11 @@ public abstract class AbstractProblemHover extends AbstractHover {
 	protected boolean isHandled(Annotation annotation) {
 		return null != annotation
 				&& !annotation.isMarkedDeleted()
-				&& (markerAnnotationAccess.isSubtype(annotation.getType(),"org.eclipse.ui.workbench.texteditor.error") 
+				&& (markerAnnotationAccess.isSubtype(annotation.getType(), "org.eclipse.ui.workbench.texteditor.error") 
 						|| markerAnnotationAccess.isSubtype(annotation.getType(), "org.eclipse.ui.workbench.texteditor.warning")
-						|| markerAnnotationAccess.isSubtype(annotation.getType(), "org.eclipse.ui.workbench.texteditor.bookmark"));
+						|| markerAnnotationAccess.isSubtype(annotation.getType(), "org.eclipse.ui.workbench.texteditor.info")
+						|| markerAnnotationAccess.isSubtype(annotation.getType(), "org.eclipse.ui.workbench.texteditor.bookmark")
+						|| markerAnnotationAccess.isSubtype(annotation.getType(), "org.eclipse.ui.workbench.texteditor.spelling"));
 	}
 
 }

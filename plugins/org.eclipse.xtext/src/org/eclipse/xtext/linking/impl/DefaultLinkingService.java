@@ -102,7 +102,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 
 	/**
 	 * @return the first element returned from the injected {@link IScopeProvider} which matches the text of the passed
-	 *         {@link LeafNode}
+	 *         {@link INode node}
 	 */
 	public List<EObject> getLinkedObjects(EObject context, EReference ref, INode node)
 			throws IllegalNodeException {
@@ -115,7 +115,6 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			if (logger.isDebugEnabled()) {
 				logger.debug("before getLinkedObjects: node: '" + crossRefString + "'");
 			}
-				
 			final IScope scope = getScope(context, ref);
 			QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
 			IEObjectDescription eObjectDescription = scope.getSingleElement(qualifiedLinkName);

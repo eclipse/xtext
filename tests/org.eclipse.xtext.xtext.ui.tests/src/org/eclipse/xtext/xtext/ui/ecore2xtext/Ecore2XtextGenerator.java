@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -23,14 +27,13 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.xpand2.XpandExecutionContextImpl;
-import org.eclipse.xpand2.XpandFacade;
-import org.eclipse.xpand2.output.Outlet;
-import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
+import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextDslProjectContributor;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
+
+import com.google.common.io.Files;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -77,31 +80,23 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 	}
 
 	@Override
-	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
+	protected void invokeInternal(final WorkflowContext ctx, ProgressMonitor monitor, final Issues issues) {
 		createXtextProjectInfo(issues);
-		XpandExecutionContextImpl executionContext = initializeExecutionContext(issues);
-		if (issues.hasErrors()) {
-			return;
-		}
-		XpandFacade xpandFacade = XpandFacade.create(executionContext);
-		xpandFacade.evaluate2("org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext::grammar",
-				xtextProjectInfo, null);
-		Outlet outlet = executionContext.getOutput().getOutlet(null);
-		log.info("Written " + outlet.getFilesWrittenAndClosed() + " files");
+		Ecore2XtextDslProjectContributor contributor = new Ecore2XtextDslProjectContributor(xtextProjectInfo);
+		contributor.createGrammarFile(new IFileCreator() {
 
-	}
+			public IFile writeToFile(CharSequence chars, String fileName) {
+				try {
+					Files.write(chars, new File(genPath, fileName), Charset.defaultCharset());
+				} catch (IOException e) {
+					String message = "Can't create grammar file";
+					log.error(message);
+					issues.addError(Ecore2XtextGenerator.this, message, this, e, null);
+				}
+				return null;
+			}
+		});
 
-	private XpandExecutionContextImpl initializeExecutionContext(Issues issues) {
-		OutputImpl output = new OutputImpl();
-		Outlet outlet = new Outlet();
-		outlet.setAppend(false);
-		outlet.setFileEncoding(System.getProperty("file.encoding"));
-		outlet.setOverwrite(true);
-		outlet.setPath(genPath);
-		output.addOutlet(outlet);
-		XpandExecutionContextImpl executionContext = new XpandExecutionContextImpl(output, null);
-		executionContext.registerMetaModel(new JavaBeansMetaModel());
-		return executionContext;
 	}
 
 	private void createXtextProjectInfo(Issues issues) {

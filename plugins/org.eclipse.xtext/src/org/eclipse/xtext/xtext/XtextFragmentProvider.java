@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Singleton;
 
@@ -26,25 +29,25 @@ public class XtextFragmentProvider implements IFragmentProvider {
 		if (!fragment.startsWith(PREFIX))
 			return fallback.getEObject(fragment);
 		String fragmentWithoutPrefix = fragment.substring(PREFIX.length());
-		String[] splitted = fragmentWithoutPrefix.split("/");
-		if (splitted.length == 0) {
+		List<String> splitted = Strings.split(fragmentWithoutPrefix, '/');
+		if (splitted.isEmpty()) {
 			return fallback.getEObject(fragment);
 		}
-		String firstPart = splitted[0];
+		String firstPart = splitted.get(0);
 		Grammar grammar = null;
 		for(EObject content: resource.getContents()) {
 			if (content instanceof Grammar) {
 				Grammar g = (Grammar) content;
 				if (firstPart.equals(g.getName())) {
 					grammar = g;
-					if (splitted.length == 1)
+					if (splitted.size() == 1)
 						return grammar;
 					break;
 				}
 			}
 		}
-		if (splitted.length == 2) {
-			return GrammarUtil.findRuleForName(grammar, splitted[1]);
+		if (splitted.size() == 2) {
+			return GrammarUtil.findRuleForName(grammar, splitted.get(1));
 		} else {
 			return fallback.getEObject(fragment);
 		}
@@ -59,7 +62,7 @@ public class XtextFragmentProvider implements IFragmentProvider {
 		return fallback.getFragment(obj);
 	}
 
-	private static final String PREFIX = "XtextFragmentProvider::";
+	private static final String PREFIX = "XtextFragmentProvider_";
 	
 	public String caseGrammar(Grammar obj) {
 		return PREFIX + obj.getName();

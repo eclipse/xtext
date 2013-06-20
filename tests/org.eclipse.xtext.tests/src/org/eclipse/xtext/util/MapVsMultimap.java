@@ -10,7 +10,10 @@ package org.eclipse.xtext.util;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -18,7 +21,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MapVsMultimap extends TestCase {
+public class MapVsMultimap extends Assert {
 
 	private int valuesPerBatch = 0;
 	private int batches = 500000;
@@ -28,9 +31,8 @@ public class MapVsMultimap extends TestCase {
 	private Map<String, String> map;
 	
 	@SuppressWarnings("unchecked")
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		allElements = Lists.newArrayList();
 		for(int batch = 0; batch < batches; batch++) {
 			char c = 'A';
@@ -69,15 +71,14 @@ public class MapVsMultimap extends TestCase {
 		}
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		map = null;
 		multimap = null;
 		allElements = null;
-		super.tearDown();
 	}
 	
-	public void testHashMultiMap() {
+	@Test public void testHashMultiMap() {
 		for(int i = 0; i < iterations; i++) {
 			for(int j = 0; j< allElements.size(); j++) {
 				String s = allElements.get(j);
@@ -96,7 +97,7 @@ public class MapVsMultimap extends TestCase {
 		}
 	}
 	
-	public void testHashMap() {
+	@Test public void testHashMap() {
 		for(int i = 0; i < iterations; i++) {
 			for(String s: allElements) {
 				map.get(s);

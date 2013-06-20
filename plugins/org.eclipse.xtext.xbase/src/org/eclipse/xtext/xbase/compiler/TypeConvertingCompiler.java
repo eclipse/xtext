@@ -11,30 +11,37 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typing.Closures;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
+@SuppressWarnings("deprecation")
 public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	@Inject
@@ -51,37 +58,41 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	 */
 
 	@Override
-	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
+	protected final void internalToJavaExpression(final XExpression obj, final ITreeAppendable appendable) {
 		JvmTypeReference expectedType = getTypeProvider().getExpectedType(obj);
+		
 		internalToConvertedExpression(obj, appendable, expectedType);
 	}
-	
+
 	@Override
-	protected void internalToConvertedExpression(final XExpression obj, final IAppendable appendable,
-			JvmTypeReference toBeConvertedTo) {
+	protected final void internalToConvertedExpression(final XExpression obj, ITreeAppendable appendable,
+			@Nullable JvmTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {
-			JvmTypeReference actualType = getTypeProvider().getType(obj);
+			JvmTypeReference actualType = getType(obj);
 			if (!EcoreUtil.equals(toBeConvertedTo, actualType)) {
 				doConversion(toBeConvertedTo, actualType, appendable, obj, new Later() {
-					@Override
-					public void exec() {
-						String finalVariable = appendable.getName(Tuples.create("Convertable", obj));
-						if (finalVariable != null)
-							appendable.append(finalVariable);
-						else
-							TypeConvertingCompiler.super.internalToJavaExpression(obj, appendable);
+					public void exec(ITreeAppendable appendable) {
+						appendable = appendable.trace(obj, true);
+						internalToConvertedExpression(obj, appendable);
 					}
 				});
 				return;
 			}
 		}
+		final ITreeAppendable trace = appendable.trace(obj, true);
+		internalToConvertedExpression(obj, trace);
+	}
+
+	protected void internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable) {
 		super.internalToJavaExpression(obj, appendable);
 	}
 
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
-			final IAppendable appendable, XExpression context, final Later expression) {
-		if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
-			convertPrimitiveToWrapper(getPrimitives().asWrapperTypeIfPrimitive(right), appendable, expression);
+			final ITreeAppendable appendable, XExpression context, final Later expression) {
+		if(getPrimitives().isPrimitive(left) && !getPrimitives().isPrimitive(right)) {
+			convertWrapperToPrimitive(right, getPrimitives().asPrimitiveIfWrapperType(right), context, appendable, expression);
+		} else if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
+			convertPrimitiveToWrapper(right, getPrimitives().asWrapperTypeIfPrimitive(right), context, appendable, expression);
 		} else if (right instanceof JvmMultiTypeReference) {
 			convertMultiType(left, (JvmMultiTypeReference) right, context, appendable, expression);
 		} else if (right instanceof JvmDelegateTypeReference) {
@@ -90,12 +101,12 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			convertArrayToList(left, appendable, context, expression);
 		} else if (isList(right) && getTypeReferences().isArray(left)) {
 			convertListToArray(left, appendable, context, expression);
-		} else if (isFunction(right)) {
+		} else if (isFunction(right) || (isFunction(left) && closures.findImplementingOperation(right, context.eResource()) != null)) {
 			convertFunctionType(left, right, appendable, expression, context);
-		} else if (isProcedure(right)) {
+		} else if (isProcedure(right) || (isProcedure(left) && closures.findImplementingOperation(right, context.eResource()) != null)) {
 			convertFunctionType(left, right, appendable, expression, context);
 		} else {
-			expression.exec();
+			expression.exec(appendable);
 		}
 	}
 	
@@ -108,16 +119,17 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 	
 	protected boolean identifierStartWith(JvmTypeReference typeReference, String prefix) {
-		if (typeReference == null || typeReference.getType() == null)
+		JvmType type = typeReference.getType();
+		if (type == null)
 			return false;
-		String identifier = typeReference.getType().getIdentifier();
+		String identifier = type.getIdentifier();
 		if (identifier != null)
 			return identifier.startsWith(prefix);
 		return false;
 	}
 
 	protected void convertMultiType(JvmTypeReference expectation, JvmMultiTypeReference multiType, XExpression context,
-			IAppendable b, Later expression) {
+			ITreeAppendable b, Later expression) {
 		JvmTypeReference castTo = null;
 		for(JvmTypeReference candidate: multiType.getReferences()) {
 			if (getTypeConformanceComputer().isConformant(expectation, candidate, true)) {
@@ -130,26 +142,40 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			serialize(castTo, context, b, true, false);
 			b.append(")");
 		}
-		expression.exec();
+		expression.exec(b);
 		if (castTo != null) {
 			b.append(")");
 		}
 	}
 
 	protected void convertFunctionType(final JvmTypeReference expectedType, final JvmTypeReference functionType,
-			final IAppendable appendable, final Later expression, XExpression context) {
+			final ITreeAppendable appendable, final Later expression, XExpression context) {
 //		JvmTypeReference resolvedLeft = closures.getResolvedExpectedType(expectedType, functionType);
-		if (expectedType == null || expectedType.getIdentifier().equals(Object.class.getName())
-				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())) {
-			expression.exec();
+		if (expectedType.getIdentifier().equals(Object.class.getName())
+				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())
+				|| ((expectedType instanceof JvmSynonymTypeReference) 
+					&& Iterables.any(((JvmSynonymTypeReference)expectedType).getReferences(), new Predicate<JvmTypeReference>() {
+						public boolean apply(@Nullable JvmTypeReference ref) {
+							return EcoreUtil.equals(ref.getType(), functionType.getType());
+						}
+					}))) {
+			// same raw type but different type parameters
+			// at this point we know that we are compatible so we have to convince the Java compiler about that ;-)
+			if (!getTypeConformanceComputer().isConformant(expectedType, functionType)) {
+				// insert a cast
+				appendable.append("(");
+				serialize(expectedType, context, appendable);
+				appendable.append(")");
+			}
+			expression.exec(appendable);
 			return;
 		}
 		JvmOperation operation = closures.findImplementingOperation(expectedType, context.eResource());
 		if (operation == null) {
 			throw new IllegalStateException("expected type " + expectedType + " not mappable from " + functionType);
 		}
-		JvmDeclaredType declaringType = operation.getDeclaringType();
-		final JvmParameterizedTypeReference typeReferenceWithPlaceHolder = getTypeReferences().createTypeRef(declaringType);
+		JvmType declaringType = (expectedType instanceof JvmParameterizedTypeReference) ? expectedType.getType() : operation.getDeclaringType();
+		final JvmTypeReference typeReferenceWithPlaceHolder = getTypeReferences().createTypeRef(declaringType);
 		ITypeArgumentContext typeArgumentContext = contextProvider.getTypeArgumentContext(
 				new TypeArgumentContextProvider.AbstractRequest() {
 					@Override
@@ -168,17 +194,17 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				});
 		JvmTypeReference resolvedExpectedType = typeArgumentContext.resolve(typeReferenceWithPlaceHolder); 
 		appendable.append("new ");
-		serialize(resolvedExpectedType, null, appendable, true, false);
+		serialize(resolvedExpectedType, context, appendable, true, false);
 		appendable.append("() {");
 		appendable.increaseIndentation().increaseIndentation();
-		appendable.append("\npublic ");
-		serialize(typeArgumentContext.resolve(operation.getReturnType()), null, appendable, true, false);
+		appendable.newLine().append("public ");
+		serialize(typeArgumentContext.resolve(operation.getReturnType()), context, appendable, true, false);
 		appendable.append(" ").append(operation.getSimpleName()).append("(");
 		EList<JvmFormalParameter> params = operation.getParameters();
 		for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
 			JvmFormalParameter p = iterator.next();
 			final String name = p.getName();
-			serialize(typeArgumentContext.resolve(p.getParameterType()), null, appendable, true, false);
+			serialize(typeArgumentContext.resolve(p.getParameterType()), context, appendable, false, false);
 			appendable.append(" ").append(name);
 			if (iterator.hasNext())
 				appendable.append(",");
@@ -186,11 +212,14 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append(") {");
 		appendable.increaseIndentation();
 		if (!getTypeReferences().is(operation.getReturnType(), Void.TYPE))
-			appendable.append("\nreturn ");
+			appendable.newLine().append("return ");
 		else
-			appendable.append("\n");
-		expression.exec();
-		appendable.append(".apply(");
+			appendable.newLine();
+		expression.exec(appendable);
+		appendable.append(".");
+		JvmOperation actualOperation = closures.findImplementingOperation(functionType, context.eResource());
+		appendable.append(actualOperation.getSimpleName());
+		appendable.append("(");
 		for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
 			JvmFormalParameter p = iterator.next();
 			final String name = p.getName();
@@ -200,14 +229,14 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		}
 		appendable.append(");");
 		appendable.decreaseIndentation();
-		appendable.append("\n}");
+		appendable.newLine().append("}");
 		appendable.decreaseIndentation().decreaseIndentation();
-		appendable.append("\n}");
+		appendable.newLine().append("}");
 	}
 
 	protected void convertListToArray(
 			final JvmTypeReference arrayTypeReference, 
-			final IAppendable appendable,
+			final ITreeAppendable appendable,
 			XExpression context,
 			final Later expression) {
 		appendable.append("((");
@@ -216,14 +245,14 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		JvmTypeReference conversions = getTypeReferences().getTypeForName(Conversions.class, context);
 		serialize(conversions, context, appendable);
 		appendable.append(".unwrapArray(");
-		expression.exec();
+		expression.exec(appendable);
 		JvmGenericArrayTypeReference rawTypeArrayReference = (JvmGenericArrayTypeReference) rawTypeHelper.getRawTypeReference(arrayTypeReference, context.eResource());
 		appendable.append(", ");
 		serialize(rawTypeArrayReference.getComponentType(), context, appendable);
 		appendable.append(".class))");
 	}
 
-	protected void convertArrayToList(final JvmTypeReference left, final IAppendable appendable, XExpression context,
+	protected void convertArrayToList(final JvmTypeReference left, final ITreeAppendable appendable, XExpression context,
 			final Later expression) {
 		appendable.append("((");
 		serialize(left, context, appendable);
@@ -231,16 +260,41 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		JvmTypeReference conversions = getTypeReferences().getTypeForName(Conversions.class, context);
 		serialize(conversions, context, appendable);
 		appendable.append(".doWrapArray(");
-		expression.exec();
+		expression.exec(appendable);
 		appendable.append("))");
 	}
 
-	protected void convertPrimitiveToWrapper(final JvmTypeReference wrapper, final IAppendable appendable,
+	/**
+	 * @param primitive unused in this context but useful for inheritors 
+	 */
+	protected void convertPrimitiveToWrapper(
+			final JvmTypeReference primitive, 
+			final JvmTypeReference wrapper, 
+			XExpression context, 
+			final ITreeAppendable appendable,
 			final Later expression) {
-		appendable.append("((");
-		serialize(wrapper, null, appendable);
+		serialize(wrapper, context, appendable);
+		appendable.append(".");
+		appendable.append("valueOf(");
+		expression.exec(appendable);
 		appendable.append(")");
-		expression.exec();
+	}
+
+	/**
+	 * @param wrapper unused in this context but useful for inheritors 
+	 */
+	protected void convertWrapperToPrimitive(
+			final JvmTypeReference wrapper, 
+			final JvmTypeReference primitive, 
+			XExpression context, 
+			final ITreeAppendable appendable,
+			final Later expression) {
+		appendable.append("(");
+		expression.exec(appendable);
+		appendable.append(")");
+		appendable.append(".");
+		serialize(primitive, context, appendable);
+		appendable.append("Value(");
 		appendable.append(")");
 	}
 

@@ -70,6 +70,11 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeModule extends
 	}
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess.class;
 	}
@@ -81,12 +86,12 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeModule extends
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.xtext.ecoreInference.serializer.AbstractMultiValueFeatureTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.xtext.ecoreInference.serializer.MultiValueFeatureTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.xtext.ecoreInference.serializer.AbstractMultiValueFeatureTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.xtext.ecoreInference.serializer.MultiValueFeatureTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

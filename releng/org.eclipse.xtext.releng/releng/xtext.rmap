@@ -2,17 +2,16 @@
 <rmap xmlns="http://www.eclipse.org/buckminster/RMap-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
 	<property key="checkout.location" value="${workspace.root}/org.eclipse.xtext.git" />
-
+	
 	<locator pattern="^org\.eclipse\.xtext\.releng(?:\..+)?$" searchPathRef="releng" />
 	<locator pattern="^org\.eclipse\.xtext\.example(?:\..*)?$" searchPathRef="xtext.examples" />
 	<locator pattern="^org\.eclipse\.xtext\.gmf\.glue$" searchPathRef="xtext.examples" />
+	<locator pattern="^org\.eclipse\.xtext\.xtext\.ui\.examples\-container$" searchPathRef="bucky.examples.container" />
 	<locator pattern="^org\.eclipse\.xtext\.xtext\.ui\.examples$" searchPathRef="xtext.examples.container" />
-	<locator pattern="^org\.eclipse\.xtext\.xtend2\.ui\.examples$" searchPathRef="xtext.examples.container" />
 	<locator pattern="^org\.eclipse\.xtext(?:\..*)?$" searchPathRef="xtext" />
 	
-	<locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse.test" />
-	<locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse.test" />
-
+	<redirect href="xtend.rmap" pattern="^org\.eclipse\.(?:xtend|xtend2)(?:\..+)?$"/>
+	
 	<searchPath name="xtext">
 		<provider componentTypes="osgi.bundle" readerType="local" mutable="false">
 			<uri format="{0}/plugins/{1}">
@@ -51,6 +50,13 @@
 			</uri>
 		</provider>
 	</searchPath>
+	<searchPath name="bucky.examples.container">
+		<provider componentTypes="buckminster" readerType="local" mutable="false">
+			<uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples">
+				<bc:propertyRef key="checkout.location" />
+			</uri>
+		</provider>
+	</searchPath>
 
 	<searchPath name="releng">
 		<provider componentTypes="buckminster" readerType="local" mutable="false">
@@ -61,16 +67,4 @@
 		</provider>
 	</searchPath>
 
-	<searchPath name="eclipse.test">
-		<provider componentTypes="osgi.bundle" readerType="cvs" source="true" mutable="false">
-			<uri format=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,{0}">
-				<bc:propertyRef key="buckminster.component" />
-			</uri>
-		</provider>
-		<provider componentTypes="eclipse.feature" readerType="cvs" source="true" mutable="false">
-			<uri format=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,{0}-feature">
-				<bc:propertyRef key="buckminster.component" />
-			</uri>
-		</provider>
-	</searchPath>
 </rmap>

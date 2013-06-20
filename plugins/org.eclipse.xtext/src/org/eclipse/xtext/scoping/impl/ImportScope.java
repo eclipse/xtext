@@ -62,7 +62,7 @@ public class ImportScope extends AbstractScope {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + normalizers + getAllLocalElements() + " -> " + getParent();
+		return getClass().getSimpleName() + normalizers + " imports from " + importFrom + " for type "+type.getName();
 	}
 
 	@Override
@@ -154,8 +154,11 @@ public class ImportScope extends AbstractScope {
 				for (IEObjectDescription resolvedElement : resolvedElements) {
 					if (resolvedQualifiedName == null)
 						resolvedQualifiedName = resolvedName;
-					else if (!resolvedQualifiedName.equals(resolvedName))
-						return emptyList();
+					else if (!resolvedQualifiedName.equals(resolvedName)) {
+						if (result.get(0).getEObjectOrProxy() != resolvedElement.getEObjectOrProxy()) {
+							return emptyList();
+						}
+					}
 					QualifiedName alias = normalizer.deresolve(resolvedElement.getName());
 					if (alias == null)
 						throw new IllegalStateException("Couldn't deresolve " + resolvedElement.getName()

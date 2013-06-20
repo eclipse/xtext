@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.AssertionFailedException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
@@ -23,6 +24,7 @@ import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.util.ITextRegion;
@@ -42,9 +44,17 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
+	
+	/**
+	 * @since 2.4
+	 */
+	@Inject
+	private ITokenTypeToPartitionTypeMapperExtension tokenTypeToPartitionTypeMapperExtension;
 
+	@Deprecated
 	public DefaultFoldingRegionProvider(ILocationInFileProvider locationInFileProvider) {
 		this.locationInFileProvider = locationInFileProvider;
+		this.tokenTypeToPartitionTypeMapperExtension = new TerminalsTokenTypeToPartitionMapper();
 	}
 
 	@Inject
@@ -114,7 +124,7 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 			ITypedRegion[] typedRegions = xtextDocument.computePartitioning(
 					IDocumentExtension3.DEFAULT_PARTITIONING, 0, xtextDocument.getLength(), false);
 			for (ITypedRegion typedRegion : typedRegions) {
-				if (TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION.equals(typedRegion.getType())) {
+				if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(typedRegion.getType())) {
 					int offset = typedRegion.getOffset();
 					int length = typedRegion.getLength();
 					Matcher matcher = getTextPatternInComment().matcher(xtextDocument.get(offset, length));
@@ -129,6 +139,9 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		} catch (BadLocationException e) {
 			log.error(e, e);
 		} catch (BadPartitioningException e) {
+			log.error(e, e);
+		} catch (AssertionFailedException e) {
+			// partioning failed
 			log.error(e, e);
 		}
 	}

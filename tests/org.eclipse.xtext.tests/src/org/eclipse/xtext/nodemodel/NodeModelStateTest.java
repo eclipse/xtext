@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,7 +28,7 @@ public class NodeModelStateTest extends AbstractXtextTests {
 	private String model;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		model = "// comment before root\n" +
@@ -46,131 +46,131 @@ public class NodeModelStateTest extends AbstractXtextTests {
 		kindNode = kindLeaf.getParent();
 	}
 
-	public void testRootGetOffset() {
+	@Test public void testRootGetOffset() {
 		assertEquals(model.indexOf("spielplatz"), rootNode.getOffset());
 	}
 
-	public void testRootGetTotalOffset() {
+	@Test public void testRootGetTotalOffset() {
 		assertEquals(0, rootNode.getTotalOffset());
 	}
 
-	public void testRootGetLength() {
+	@Test public void testRootGetLength() {
 		assertEquals(model.indexOf('}') - model.indexOf("spielplatz") + 1, rootNode.getLength());
 	}
 
-	public void testRootGetTotalLength() {
+	@Test public void testRootGetTotalLength() {
 		assertEquals(model.length(), rootNode.getTotalLength());
 	}
 
-	public void testRootGetLine() {
+	@Test public void testRootGetLine() {
 		assertEquals(3, rootNode.getStartLine());
 	}
 
-	public void testRootGetTotalLine() {
+	@Test public void testRootGetTotalLine() {
 		assertEquals(1, rootNode.getTotalStartLine());
 	}
 
-	public void testRootEndLine() {
+	@Test public void testRootEndLine() {
 		assertEquals(8, rootNode.getEndLine());
 	}
 
-	public void testRootTotalEndLine() {
+	@Test public void testRootTotalEndLine() {
 		assertEquals(10, rootNode.getTotalEndLine());
 	}
 
-	public void testCompositeGetOffset() {
+	@Test public void testCompositeGetOffset() {
 		assertEquals(model.indexOf("kind"), kindNode.getOffset());
 	}
 
-	public void testCompositeGetTotalOffset() {
+	@Test public void testCompositeGetTotalOffset() {
 		assertEquals(model.indexOf("{") + 1, kindNode.getTotalOffset());
 	}
 
-	public void testCompositeGetLength() {
+	@Test public void testCompositeGetLength() {
 		assertEquals(model.indexOf(')') - model.indexOf("kind") + 1, kindNode.getLength());
 	}
 
-	public void testCompositeGetTotalLength() {
+	@Test public void testCompositeGetTotalLength() {
 		assertEquals(model.indexOf(')') - model.indexOf("{"), kindNode.getTotalLength());
 	}
 
-	public void testCompositeGetLine() {
+	@Test public void testCompositeGetLine() {
 		assertEquals(5, kindNode.getStartLine());
 	}
 
-	public void testCompositeGetTotalLine() {
+	@Test public void testCompositeGetTotalLine() {
 		assertEquals(3, kindNode.getTotalStartLine());
 	}
 
-	public void testCompositeEndLine() {
+	@Test public void testCompositeEndLine() {
 		assertEquals(6, kindNode.getEndLine());
 	}
 
-	public void testCompositeTotalEndLine() {
+	@Test public void testCompositeTotalEndLine() {
 		assertEquals(6, kindNode.getTotalEndLine());
 	}
 
-	public void testLeafGetOffset() {
+	@Test public void testLeafGetOffset() {
 		assertEquals(model.indexOf("kind"), kindLeaf.getOffset());
 	}
 
-	public void testLeafGetTotalOffset() {
+	@Test public void testLeafGetTotalOffset() {
 		assertEquals(model.indexOf("kind"), kindLeaf.getOffset());
 	}
 
-	public void testLeafGetLength() {
+	@Test public void testLeafGetLength() {
 		assertEquals("kind".length(), kindLeaf.getLength());
 	}
 
-	public void testLeafGetTotalLength() {
+	@Test public void testLeafGetTotalLength() {
 		assertEquals("kind".length(), kindLeaf.getLength());
 	}
 
-	public void testLeafGetLine() {
+	@Test public void testLeafGetLine() {
 		assertEquals(5, kindLeaf.getStartLine());
 	}
 
-	public void testLeafGetTotalLine() {
+	@Test public void testLeafGetTotalLine() {
 		assertEquals(5, kindLeaf.getTotalStartLine());
 	}
 
-	public void testLeafEndLine() {
+	@Test public void testLeafEndLine() {
 		assertEquals(5, kindLeaf.getEndLine());
 	}
 
-	public void testLeafTotalEndLine() {
+	@Test public void testLeafTotalEndLine() {
 		assertEquals(5, kindLeaf.getTotalEndLine());
 	}
 
-	public void testHiddenLeafGetOffset() {
+	@Test public void testHiddenLeafGetOffset() {
 		assertEquals(model.indexOf("kind") + "kind".length(), hiddenLeaf.getOffset());
 	}
 
-	public void testHiddenLeafGetTotalOffset() {
+	@Test public void testHiddenLeafGetTotalOffset() {
 		assertEquals(model.indexOf("kind") + "kind".length(), hiddenLeaf.getOffset());
 	}
 
-	public void testHiddenLeafGetLength() {
+	@Test public void testHiddenLeafGetLength() {
 		assertEquals(" ".length(), hiddenLeaf.getLength());
 	}
 
-	public void testHiddenLeafGetTotalLength() {
+	@Test public void testHiddenLeafGetTotalLength() {
 		assertEquals(" ".length(), hiddenLeaf.getLength());
 	}
 
-	public void testHiddenLeafGetLine() {
+	@Test public void testHiddenLeafGetLine() {
 		assertEquals(5, hiddenLeaf.getStartLine());
 	}
 
-	public void testHiddenLeafGetTotalLine() {
+	@Test public void testHiddenLeafGetTotalLine() {
 		assertEquals(5, hiddenLeaf.getTotalStartLine());
 	}
 
-	public void testHiddenLeafEndLine() {
+	@Test public void testHiddenLeafEndLine() {
 		assertEquals(5, hiddenLeaf.getEndLine());
 	}
 
-	public void testHiddenLeafTotalEndLine() {
+	@Test public void testHiddenLeafTotalEndLine() {
 		assertEquals(5, kindLeaf.getTotalEndLine());
 	}
 

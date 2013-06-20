@@ -170,6 +170,10 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		whitespaceRule = rule;
 	}
 	
+	/**
+	 * @deprecated use {@link FormattingConfig2} instead
+	 */
+	@Deprecated
 	public FormattingConfig(IGrammarAccess grammarAccess, IHiddenTokenHelper hiddenTokenHelper,
 			IIndentationInformation indentInfo) {
 		super(grammarAccess, hiddenTokenHelper);

@@ -15,12 +15,21 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
@@ -38,10 +47,15 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Anton Kosyakov - Added registering of a context menu
  */
 public class OutlinePage extends ContentOutlinePage implements ISourceViewerAware {
 
+	private static final String MENU_ID = "org.eclipse.xtext.ui.outline";
+
 	private static final Logger LOG = Logger.getLogger(OutlinePage.class);
+
+	private static final String CONTEXT_MENU_ID = "OutlinePageContextMenu";
 
 	@Inject
 	private OutlineNodeLabelProvider labelProvider;
@@ -51,6 +65,9 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 
 	@Inject
 	private IOutlineTreeProvider treeProvider;
+
+	@Inject
+	private OutlineFilterAndSorter filterAndSorter;
 
 	@Inject
 	private IOutlineContribution.Composite contribution;
@@ -73,13 +90,35 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		configureModelListener();
 		configureActions();
 		refreshJob.setOutlinePage(this);
+		configureContextMenu();
 	}
 
 	protected void configureTree() {
 		TreeViewer treeViewer = getTreeViewer();
 		treeViewer.setLabelProvider(labelProvider);
 		treeViewer.setContentProvider(contentProvider);
+		contentProvider.setFilterAndSorter(filterAndSorter);
 		treeViewer.setUseHashlookup(true);
+		// access EMF's image registry now, since it needs a UI-thread.
+		ExtendedImageRegistry.getInstance();
+		if(treeProvider instanceof BackgroundOutlineTreeProvider) {
+			new Job("Initializing outline") {
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
+					initializeTreeContent();
+					return Status.OK_STATUS;
+				}
+				
+			}.schedule();
+		} else {
+			initializeTreeContent();
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void initializeTreeContent() {
 		List<IOutlineNode> initiallyExpandedNodes = xtextDocument
 				.readOnly(new IUnitOfWork<List<IOutlineNode>, XtextResource>() {
 					public List<IOutlineNode> exec(XtextResource resource) throws Exception {
@@ -128,11 +167,27 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		contribution.register(this);
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	protected void configureContextMenu() {
+		MenuManager menuManager = new MenuManager(CONTEXT_MENU_ID, CONTEXT_MENU_ID);
+		menuManager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+		menuManager.setRemoveAllWhenShown(true);
+		
+		Menu contextMenu = menuManager.createContextMenu(getTreeViewer().getTree());
+		getTreeViewer().getTree().setMenu(contextMenu);
+		getSite().registerContextMenu(MENU_ID, menuManager, getTreeViewer());
+	}
+	
 	@Override
 	public void dispose() {
 		contribution.deregister(this);
 		sourceViewer.removeTextInputListener(textInputListener);
-		xtextDocument.removeModelListener(modelListener);
+		if (modelListener != null) {
+			xtextDocument.removeModelListener(modelListener);
+			modelListener = null;
+		}
 		contentProvider.dispose();
 		super.dispose();
 	}
@@ -152,10 +207,10 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		textInputListener = new ITextInputListener() {
 			public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 				try {
-					if (xtextDocument != null)
+					if (xtextDocument != null && modelListener != null)
 						xtextDocument.removeModelListener(modelListener);
 					xtextDocument = XtextDocumentUtil.get(newInput);
-					if (xtextDocument != null) {
+					if (xtextDocument != null && modelListener != null) {
 						xtextDocument.addModelListener(modelListener);
 						scheduleRefresh();
 					}
@@ -194,6 +249,13 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 
 	public IOutlineTreeProvider getTreeProvider() {
 		return treeProvider;
+	}
+
+	/**
+	 * @since 2.2
+	 */
+	public OutlineFilterAndSorter getFilterAndSorter() {
+		return filterAndSorter;
 	}
 
 	protected void refreshViewer(final IOutlineNode rootNode, final Collection<IOutlineNode> nodesToBeExpanded,

@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.unorderedGroups;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,7 +22,7 @@ public class SerializerTest extends AbstractXtextTests {
 	private UnorderedSerialization serializableInstance;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(SimpleUnorderedGroupsTestLanguageStandaloneSetup.class);
 		model = UnorderedGroupsTestLanguageFactory.eINSTANCE.createModel();
@@ -29,57 +30,57 @@ public class SerializerTest extends AbstractXtextTests {
 		model.setSerialized(serializableInstance);
 	}
 	
-	public void testNoValueAssigned() {
+	@Test public void testNoValueAssigned() {
 		String serialized = serialize(model);
 		assertEquals("serialization 1", serialized);
 	}
 	
-	public void testSerialize_1_A() {
+	@Test public void testSerialize_1_A() {
 		serializableInstance.setFirst(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 a", serialized);
 	}
 	
-	public void testSerialize_1_B() {
+	@Test public void testSerialize_1_B() {
 		serializableInstance.setSecond(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 b", serialized);
 	}
 	
-	public void testSerialize_1_C() {
+	@Test public void testSerialize_1_C() {
 		serializableInstance.setThird(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 c", serialized);
 	}
 	
-	public void testSerialize_1_D() {
+	@Test public void testSerialize_1_D() {
 		serializableInstance.setForth(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 d", serialized);
 	}
 	
-	public void testSerialize_1_A_B() {
+	@Test public void testSerialize_1_A_B() {
 		serializableInstance.setFirst(true);
 		serializableInstance.setSecond(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 a b", serialized);
 	}
 	
-	public void testSerialize_1_A_C() {
+	@Test public void testSerialize_1_A_C() {
 		serializableInstance.setFirst(true);
 		serializableInstance.setThird(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 a c", serialized);
 	}
 	
-	public void testSerialize_1_A_D() {
+	@Test public void testSerialize_1_A_D() {
 		serializableInstance.setFirst(true);
 		serializableInstance.setForth(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 a d", serialized);
 	}
 	
-	public void testSerialize_1_A_B_C() {
+	@Test public void testSerialize_1_A_B_C() {
 		serializableInstance.setFirst(true);
 		serializableInstance.setSecond(true);
 		serializableInstance.setThird(true);
@@ -87,7 +88,7 @@ public class SerializerTest extends AbstractXtextTests {
 		assertEquals("serialization 1 a b c", serialized);
 	}
 	
-	public void testSerialize_1_A_B_D() {
+	@Test public void testSerialize_1_A_B_D() {
 		serializableInstance.setFirst(true);
 		serializableInstance.setSecond(true);
 		serializableInstance.setForth(true);
@@ -95,7 +96,7 @@ public class SerializerTest extends AbstractXtextTests {
 		assertEquals("serialization 1 a b d", serialized);
 	}
 	
-	public void testSerialize_1_A_B_C_D() {
+	@Test public void testSerialize_1_A_B_C_D() {
 		serializableInstance.setFirst(true);
 		serializableInstance.setSecond(true);
 		serializableInstance.setThird(true);
@@ -104,7 +105,7 @@ public class SerializerTest extends AbstractXtextTests {
 		assertEquals("serialization 1 a b c d", serialized);
 	}
 	
-	public void testSerialize_1_B_C_D() {
+	@Test public void testSerialize_1_B_C_D() {
 		serializableInstance.setSecond(true);
 		serializableInstance.setThird(true);
 		serializableInstance.setForth(true);
@@ -112,35 +113,35 @@ public class SerializerTest extends AbstractXtextTests {
 		assertEquals("serialization 1 b c d", serialized);
 	}
 	
-	public void testSerialize_1_B_C() {
+	@Test public void testSerialize_1_B_C() {
 		serializableInstance.setSecond(true);
 		serializableInstance.setThird(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 b c", serialized);
 	}
 	
-	public void testSerialize_1_B_D() {
+	@Test public void testSerialize_1_B_D() {
 		serializableInstance.setSecond(true);
 		serializableInstance.setForth(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 b d", serialized);
 	}
 
-	public void testSerialize_1_C_D() {
+	@Test public void testSerialize_1_C_D() {
 		serializableInstance.setThird(true);
 		serializableInstance.setForth(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 1 c d", serialized);
 	}
 	
-	public void testSerialize_2_A_B() {
+	@Test public void testSerialize_2_A_B() {
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.getSecondAsList().add("b");
 		String serialized = serialize(model);
 		assertEquals("serialization 2 a b", serialized);
 	}
 
-	public void testSerialize_2_A_B_A_B() {
+	@Test public void testSerialize_2_A_B_A_B() {
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.getSecondAsList().add("b");
@@ -149,7 +150,7 @@ public class SerializerTest extends AbstractXtextTests {
 		assertEquals("serialization 2 a b a b", serialized);
 	}
 	
-	public void testSerialize_2_A_B_A_B_A_B() {
+	@Test public void testSerialize_2_A_B_A_B_A_B() {
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.getFirstAsList().add("a");
@@ -160,14 +161,14 @@ public class SerializerTest extends AbstractXtextTests {
 		assertEquals("serialization 2 a b a b a b", serialized);
 	}
 	
-	public void testSerialize_3_A_B() {
+	@Test public void testSerialize_3_A_B() {
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.setSecond(true);
 		String serialized = serialize(model);
 		assertEquals("serialization 3 a b", serialized);
 	}
 	
-	public void testSerialize_3_A_A_B() {
+	@Test public void testSerialize_3_A_A_B() {
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.setSecond(true);
@@ -175,7 +176,7 @@ public class SerializerTest extends AbstractXtextTests {
 		assertEquals("serialization 3 a a b", serialized);
 	}
 	
-	public void testSerialize_3_A_A_A_B() {
+	@Test public void testSerialize_3_A_A_A_B() {
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.getFirstAsList().add("a");
 		serializableInstance.getFirstAsList().add("a");

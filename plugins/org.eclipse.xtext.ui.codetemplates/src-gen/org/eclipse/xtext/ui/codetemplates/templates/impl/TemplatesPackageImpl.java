@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates.impl;
 
@@ -313,9 +310,19 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVariable_Parameters()
+  public EAttribute getVariable_ExpectingParameters()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getVariable_Parameters()
+  {
+    return (EAttribute)variableEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -408,6 +415,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
     variableEClass = createEClass(VARIABLE);
     createEAttribute(variableEClass, VARIABLE__NAME);
     createEAttribute(variableEClass, VARIABLE__TYPE);
+    createEAttribute(variableEClass, VARIABLE__EXPECTING_PARAMETERS);
     createEAttribute(variableEClass, VARIABLE__PARAMETERS);
 
     literalEClass = createEClass(LITERAL);
@@ -475,6 +483,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
     initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVariable_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariable_Type(), theEcorePackage.getEString(), "type", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVariable_ExpectingParameters(), theEcorePackage.getEBoolean(), "expectingParameters", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariable_Parameters(), theEcorePackage.getEString(), "parameters", null, 0, -1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

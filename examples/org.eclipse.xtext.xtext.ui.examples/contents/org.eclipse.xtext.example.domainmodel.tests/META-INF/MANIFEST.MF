@@ -10,12 +10,22 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.core.runtime,
  org.eclipse.xtext,
  org.eclipse.xtext.junit4,
- org.eclipse.xtext.ui.junit,
- org.junit4,
- org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional,
+ org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.common.types;bundle-version="2.0.0",
  org.eclipse.xtext.xbase.junit;bundle-version="2.0.0",
- org.eclipse.xtext.xbase;bundle-version="2.0.0"
-Import-Package: org.apache.log4j,
- org.apache.commons.logging
+ org.eclipse.xtext.xbase;bundle-version="2.0.0",
+ org.hamcrest.core;bundle-version="1.1.0",
+ org.eclipse.xtext.common.types.ui;bundle-version="2.4.3",
+ org.eclipse.jdt.core;bundle-version="3.5.2"
+Import-Package: org.apache.commons.logging,
+ org.apache.log4j;version="1.2.15",
+ org.junit;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Activator: org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator
+Export-Package: org.eclipse.xtext.example.domainmodel

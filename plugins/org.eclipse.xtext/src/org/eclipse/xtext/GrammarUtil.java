@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -50,6 +51,13 @@ public class GrammarUtil {
 
 	public static String getClasspathRelativePathToXmi(Grammar grammar) {
 		return getLanguageId(grammar).replace('.', '/') + ".xmi";
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static String getClasspathRelativePathToBinGrammar(Grammar grammar) {
+		return getLanguageId(grammar).replace('.', '/') + ".xtextbin";
 	}
 
 	public static String getLanguageId(Grammar g) {
@@ -412,12 +420,10 @@ public class GrammarUtil {
 
 	// TODO replace me by compiled grammar model
 	public static EReference getReference(CrossReference ref, EClass referenceOwner) {
-		final List<EReference> references = referenceOwner.getEAllReferences();
 		final String feature = GrammarUtil.containingAssignment(ref).getFeature();
-		for (EReference reference : references) {
-			if (!reference.isContainment() && reference.getName().equals(feature))
-				return reference;
-		}
+		EStructuralFeature result = referenceOwner.getEStructuralFeature(feature);
+		if (result instanceof EReference && !((EReference) result).isContainment())
+			return (EReference) result;
 		return null;
 	}
 	

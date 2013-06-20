@@ -18,17 +18,26 @@ public class IssueCodes {
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xbase.validation.IssueCodes.";
 
 	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
+	public static final String ANNOTATIONS_ILLEGAL_ATTRIBUTE = ISSUE_CODE_PREFIX + "no_illegal_value";
 	public static final String ANNOTATIONS_NO_VALUE_ATTRIBUTE = ISSUE_CODE_PREFIX + "no_attribute_value";
 	public static final String ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION = ISSUE_CODE_PREFIX + "missing_attribute_definition";
-	public static final String ASSIGNMENT_TARGET_IS_NOT_WRITEABLE = ISSUE_CODE_PREFIX + "assignment_target_is_not_writeable";
 	public static final String ASSIGNMENT_TO_FINAL = ISSUE_CODE_PREFIX + "assignment_to_final";
+	public static final String CIRCULAR_CONSTRUCTOR_INVOCATION = ISSUE_CODE_PREFIX + "circular_constructor_invocation";
 	public static final String FEATURE_NOT_VISIBLE = ISSUE_CODE_PREFIX + "invisible_feature";
 	public static final String FIELD_ACCESS_WITH_PARENTHESES = ISSUE_CODE_PREFIX + "field_access_with_parentheses";
+	public static final String ILLEGAL_FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "illegal_forward_reference";
+	public static final String ILLEGAL_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "illegal_class_instantiation";
+	/**
+	 * This feature code indicates a type incompatibility of a method return type.
+	 * Those include conflicts between an implementing method and its super declaration or between dispatch methods.
+	 */
 	public static final String INCOMPATIBLE_RETURN_TYPE = ISSUE_CODE_PREFIX + "incomptible_return_type";
 	public static final String INCOMPATIBLE_TYPES = ISSUE_CODE_PREFIX + "incompatible_types";
 	public static final String INSTANCE_ACCESS_TO_STATIC_MEMBER = ISSUE_CODE_PREFIX + "instance_access_to_static_member";
 	public static final String INVALID_ARGUMENT_TYPES = ISSUE_CODE_PREFIX + "invalid_argument_types";
 	public static final String INVALID_CAST = ISSUE_CODE_PREFIX + "invalid_cast";
+	public static final String INVALID_CONSTRUCTOR_INVOCATION = ISSUE_CODE_PREFIX + "invalid_constructor_invocation";
+	public static final String INVALID_CONSTRUCTOR_ARGUMENT = ISSUE_CODE_PREFIX + "invalid_constructor_argument";
 	public static final String INVALID_EARLY_EXIT = ISSUE_CODE_PREFIX + "invalid_early_exit";
 	public static final String INVALID_GENERIC_ARGUMENT_TYPES = ISSUE_CODE_PREFIX + "invalid_generic_argument_types";
 	public static final String INVALID_INNER_EXPRESSION = ISSUE_CODE_PREFIX + "invalid_inner_expression";
@@ -48,13 +57,41 @@ public class IssueCodes {
 	public static final String STATIC_ACCESS_TO_INSTANCE_MEMBER = ISSUE_CODE_PREFIX	+ "static_access_to_instance_member";
 	public static final String TOO_LITTLE_TYPE_INFORMATION = ISSUE_CODE_PREFIX + "too_little_type_information";
 	public static final String TOO_MANY_PARAMS_IN_CLOSURE = ISSUE_CODE_PREFIX + "too_many_params_in_closure";
+	public static final String UNEXPECTED_INVOCATION_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "unexpected_invocation_on_type_literal";
+	public static final String UNHANDLED_EXCEPTION = ISSUE_CODE_PREFIX + "unhandled_exception";
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
-	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";
 	public static final String VARIABLE_NAME_SHADOWING = ISSUE_CODE_PREFIX + "variable_name_shadowing";
-	public static final String SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK = ISSUE_CODE_PREFIX + "side_effect_free_expression_in_block";
+	public static final String VARIABLE_NAME_DISALLOWED = ISSUE_CODE_PREFIX + "variable_name_disallowed";
 	public static final String NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive";
+	public static final String NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive_valued_feature";
+	public static final String PRIMITIVE_COMPARED_TO_NULL = ISSUE_CODE_PREFIX	+ "primitive_compared_to_null";
+	/*
+	 * See findbugs pattern EC_NULL_ARG:
+	 * 
+	 * This method calls equals(Object), passing a null value as the argument. According to the contract of the equals() method, this call should always return false.
+	 */
+	public static final String EQUALS_WITH_NULL = ISSUE_CODE_PREFIX	+ "equals_with_null";
 	public static final String NOT_INSTANTIABLE = ISSUE_CODE_PREFIX + "not_instantiable";
+	public static final String UNUSED_LOCAL_VARIABLE = ISSUE_CODE_PREFIX + "unused_local_variable";
+	public static final String INVALID_IDENTIFIER = ISSUE_CODE_PREFIX + "invalid_identifier";
+	public static final String INVALID_NUMBER_FORMAT = ISSUE_CODE_PREFIX + "invalidNumberFormat";
+	public static final String FIELD_ALREADY_INITIALIZED = ISSUE_CODE_PREFIX + "field_already_initialized";
+	public static final String INVALID_TYPE = ISSUE_CODE_PREFIX + "invalid_type";
 	
+	public static final String IMPORT_DUPLICATE = ISSUE_CODE_PREFIX + "import_duplicate";
+	public static final String IMPORT_UNUSED = ISSUE_CODE_PREFIX + "import_unsued";
+	public static final String IMPORT_COLLISION = ISSUE_CODE_PREFIX + "import_collision";
+	public static final String IMPORT_CONFLICT = ISSUE_CODE_PREFIX + "import_conflict";
+	public static final String IMPORT_WILDCARD_DEPRECATED = ISSUE_CODE_PREFIX + "import_wildcard_deprecated";
+	
+	public static final String FORBIDDEN_REFERENCE = ISSUE_CODE_PREFIX	+ "forbidden_reference";
+	public static final String DISCOURAGED_REFERENCE = ISSUE_CODE_PREFIX	+ "discouraged_reference";
+	
+	public static final String RAW_TYPE = ISSUE_CODE_PREFIX	+ "raw_type";
+	public static final String TYPE_BOUNDS_MISSMATCH = ISSUE_CODE_PREFIX + "type_bounds_missmatch";
+	public static final String TYPE_PARAMETER_FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "type_parameter_forward_reference";
+	public static final String INVALID_TYPE_PARAMETER_BOUNDS = ISSUE_CODE_PREFIX + "invalid_type_parameter_bounds";
+
 	
 	// list is not necessarily complete
 	// list is sorted from least important issue to worst issue
@@ -63,15 +100,12 @@ public class IssueCodes {
 			LOCAL_VAR_ACCESS_WITH_PARENTHESES,
 			METHOD_ACCESS_WITHOUT_PARENTHESES,
 			INVALID_MUTABLE_VARIABLE_ACCESS,
-			ASSIGNMENT_TARGET_IS_NOT_WRITEABLE,
 			INSTANCE_ACCESS_TO_STATIC_MEMBER,
 			INVALID_GENERIC_ARGUMENT_TYPES,
 			INVALID_NUMBER_OF_TYPE_ARGUMENTS,
 			INVALID_ARGUMENT_TYPES,
 			INVALID_NUMBER_OF_ARGUMENTS
 	);
-
-
 	
 	public static int compareIssueCodes(String left, String right) {
 		if (left.equals(right))
@@ -98,7 +132,6 @@ public class IssueCodes {
 		}
 		return 0;
 	}
-	
 	
 	private IssueCodes() {
 	}

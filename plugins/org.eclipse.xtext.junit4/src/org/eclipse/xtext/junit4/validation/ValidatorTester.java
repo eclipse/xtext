@@ -18,8 +18,10 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
 import org.eclipse.xtext.validation.AbstractInjectableValidator;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Key;
+import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 
 /**
@@ -37,7 +39,8 @@ public class ValidatorTester<T extends AbstractDeclarativeValidator> extends Abs
 			injector.getInstance(Key.get(String.class, Names.named(Constants.LANGUAGE_NAME))));
 	}
 	
-	public ValidatorTester(T validator, EValidatorRegistrar registrar, final String languageName) {
+	@Inject
+	public ValidatorTester(T validator, EValidatorRegistrar registrar, @Named(Constants.LANGUAGE_NAME) final String languageName) {
 		this.validator = validator;
 		EValidator.Registry originalRegistry = registrar.getRegistry();
 		EValidatorRegistryImpl newRegistry = new EValidatorRegistryImpl();

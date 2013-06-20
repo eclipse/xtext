@@ -13,6 +13,7 @@ import static com.google.common.collect.Sets.*;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
@@ -46,6 +47,8 @@ import com.google.inject.Provider;
 @Deprecated
 public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticipant {
 
+	private final static Logger logger = Logger.getLogger(JavaProjectBasedBuilderParticipant.class);
+	
 	@Inject
 	private IGenerator generator;
 
@@ -85,7 +88,11 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			if (delta.getNew() == null) {
 				handleDeletion(delta, context, fileSystemAccess);
 			} else {
-				handleChangedContents(delta, context, fileSystemAccess);
+				try {
+					handleChangedContents(delta, context, fileSystemAccess);
+				} catch (Exception e) {
+					logger.error("Error during compilation of '"+delta.getUri()+"'.", e);
+				}
 			}
 			for (String removeFile : oldFiles) {
 				fileSystemAccess.deleteFile(removeFile);

@@ -13,36 +13,16 @@ import org.eclipse.xtext.parser.unorderedGroups.services.BacktrackingBug325745Te
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
-@SuppressWarnings("restriction")
-public class AbstractBacktrackingBug325745TestLanguageSemanticSequencer extends AbstractSemanticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
-	protected BacktrackingBug325745TestLanguageGrammarAccess grammarAccess;
-	
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-	
-	@Inject
-	protected ITransientValueService transientValues;
-	
-	@Inject
-	@GenericSequencer
-	protected Provider<ISemanticSequencer> genericSequencerProvider;
-	
-	protected ISemanticSequencer genericSequencer;
-	
-	
-	@Override
-	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequencer, sequenceAcceptor, errorAcceptor);
-		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
-	}
+	private BacktrackingBug325745TestLanguageGrammarAccess grammarAccess;
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BacktrackingBug325745TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
@@ -83,10 +63,6 @@ public class AbstractBacktrackingBug325745TestLanguageSemanticSequencer extends 
 	/**
 	 * Constraint:
 	 *     (baseType=ID defaultValue=STRING?)
-	 *
-	 * Features:
-	 *    baseType[1, 1]
-	 *    defaultValue[0, 1]
 	 */
 	protected void sequence_DataType(EObject context, DataType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -96,11 +72,6 @@ public class AbstractBacktrackingBug325745TestLanguageSemanticSequencer extends 
 	/**
 	 * Constraint:
 	 *     (name=ID dataType=DataType? expression=Expression)
-	 *
-	 * Features:
-	 *    name[1, 1]
-	 *    dataType[0, 1]
-	 *    expression[1, 1]
 	 */
 	protected void sequence_Element(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -110,11 +81,6 @@ public class AbstractBacktrackingBug325745TestLanguageSemanticSequencer extends 
 	/**
 	 * Constraint:
 	 *     (prefix=STRING? terms+=SimpleTerm* postfix=STRING?)
-	 *
-	 * Features:
-	 *    prefix[0, 1]
-	 *    terms[0, *]
-	 *    postfix[0, 1]
 	 */
 	protected void sequence_Expression(EObject context, Expression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -124,9 +90,6 @@ public class AbstractBacktrackingBug325745TestLanguageSemanticSequencer extends 
 	/**
 	 * Constraint:
 	 *     fields+=Element+
-	 *
-	 * Features:
-	 *    fields[1, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -136,22 +99,6 @@ public class AbstractBacktrackingBug325745TestLanguageSemanticSequencer extends 
 	/**
 	 * Constraint:
 	 *     ((lineCount=INT charCount=INT? charSet=ID?) | refChar=ID)
-	 *
-	 * Features:
-	 *    lineCount[0, 1]
-	 *         MANDATORY_IF_SET charCount
-	 *         MANDATORY_IF_SET charSet
-	 *         EXCLUDE_IF_SET refChar
-	 *    charCount[0, 1]
-	 *         EXCLUDE_IF_UNSET lineCount
-	 *         EXCLUDE_IF_SET refChar
-	 *    charSet[0, 1]
-	 *         EXCLUDE_IF_UNSET lineCount
-	 *         EXCLUDE_IF_SET refChar
-	 *    refChar[0, 1]
-	 *         EXCLUDE_IF_SET lineCount
-	 *         EXCLUDE_IF_SET charCount
-	 *         EXCLUDE_IF_SET charSet
 	 */
 	protected void sequence_SimpleTerm(EObject context, SimpleTerm semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

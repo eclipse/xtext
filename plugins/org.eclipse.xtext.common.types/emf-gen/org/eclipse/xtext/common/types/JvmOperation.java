@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types;
 
@@ -19,6 +21,10 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#getDefaultValue <em>Default Value</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isSynchronized <em>Synchronized</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isNative <em>Native</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  * </ul>
  * </p>
  *
@@ -117,7 +123,7 @@ public interface JvmOperation extends JvmExecutable
 	 * @return the value of the '<em>Return Type</em>' containment reference.
 	 * @see #setReturnType(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_ReturnType()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getReturnType();
@@ -143,7 +149,7 @@ public interface JvmOperation extends JvmExecutable
 	 * @return the value of the '<em>Default Value</em>' containment reference.
 	 * @see #setDefaultValue(JvmAnnotationValue)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_DefaultValue()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmAnnotationValue getDefaultValue();
@@ -157,5 +163,117 @@ public interface JvmOperation extends JvmExecutable
 	 * @generated
 	 */
 	void setDefaultValue(JvmAnnotationValue value);
+
+	/**
+	 * Returns the value of the '<em><b>Synchronized</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Synchronized</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Synchronized</em>' attribute.
+	 * @see #setSynchronized(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_Synchronized()
+	 * @model
+	 * @generated
+	 * @since 2.4
+	 */
+	boolean isSynchronized();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmOperation#isSynchronized <em>Synchronized</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Synchronized</em>' attribute.
+	 * @see #isSynchronized()
+	 * @generated
+	 * @since 2.4
+	 */
+	void setSynchronized(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Default</em>' attribute.
+	 * @see #setDefault(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_Default()
+	 * @model
+	 * @generated
+	 * @since 2.4
+	 */
+	boolean isDefault();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmOperation#isDefault <em>Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default</em>' attribute.
+	 * @see #isDefault()
+	 * @generated
+	 * @since 2.4
+	 */
+	void setDefault(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Native</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Native</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Native</em>' attribute.
+	 * @see #setNative(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_Native()
+	 * @model
+	 * @generated
+	 * @since 2.4
+	 */
+	boolean isNative();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmOperation#isNative <em>Native</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Native</em>' attribute.
+	 * @see #isNative()
+	 * @generated
+	 * @since 2.4
+	 */
+	void setNative(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Strict Floating Point</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Strict Floating Point</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Strict Floating Point</em>' attribute.
+	 * @see #setStrictFloatingPoint(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_StrictFloatingPoint()
+	 * @model
+	 * @generated
+	 * @since 2.4
+	 */
+	boolean isStrictFloatingPoint();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmOperation#isStrictFloatingPoint <em>Strict Floating Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Strict Floating Point</em>' attribute.
+	 * @see #isStrictFloatingPoint()
+	 * @generated
+	 * @since 2.4
+	 */
+	void setStrictFloatingPoint(boolean value);
 
 } // JvmOperation

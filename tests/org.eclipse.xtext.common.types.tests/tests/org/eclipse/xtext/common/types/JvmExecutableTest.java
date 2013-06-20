@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.junit.Test;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -17,26 +19,26 @@ public abstract class JvmExecutableTest extends JvmFeatureTest {
 	
 	protected abstract String getSimpleName();
 	
-	public void testGetIdentifier_02() {
+	@Test public void testGetIdentifier_02() {
 		getObjectUnderTest().internalSetIdentifier("java.lang.DoesNotExist." + getSimpleName() + "()");
 		assertEquals("java.lang.DoesNotExist." + getSimpleName() + "()", getObjectUnderTest().getIdentifier());
 		assertNull(getObjectUnderTest().getSimpleName());
 		assertNull(getObjectUnderTest().getQualifiedName());
 	}
 	
-	public void testGetIdentifier_03() {
+	@Test public void testGetIdentifier_03() {
 		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
 		outerType.getMembers().add(getObjectUnderTest());
 		getObjectUnderTest().internalSetIdentifier("java.lang.DoesNotExist." + getSimpleName() + "()");
 		assertEquals("java.lang.DoesNotExist." + getSimpleName() + "()", getObjectUnderTest().getIdentifier());
 	}
 	
-	public void testGetIdentifier_04() {
+	@Test public void testGetIdentifier_04() {
 		getObjectUnderTest().setSimpleName(getSimpleName());
 		assertEquals(getSimpleName() + "()", getObjectUnderTest().getIdentifier());
 	}
 	
-	public void testGetIdentifier_05() {
+	@Test public void testGetIdentifier_05() {
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
 		type.internalSetIdentifier("java.lang.DoesNotExist");
 		type.getMembers().add(getObjectUnderTest());
@@ -44,7 +46,7 @@ public abstract class JvmExecutableTest extends JvmFeatureTest {
 		assertEquals("java.lang.DoesNotExist." + getSimpleName() + "()", getObjectUnderTest().getIdentifier());
 	}
 	
-	public void testGetIdentifier_06() {
+	@Test public void testGetIdentifier_06() {
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
 		type.setPackageName("java.lang");
 		type.setSimpleName("DoesNotExist");

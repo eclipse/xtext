@@ -38,11 +38,12 @@ public class QuickfixCrossrefTestLanguageParser extends AbstractContentAssistPar
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getElementAccess().getGroup(), "rule__Element__Group__0");
-					put(grammarAccess.getElementAccess().getGroup_3(), "rule__Element__Group_3__0");
+					put(grammarAccess.getElementAccess().getGroup_4(), "rule__Element__Group_4__0");
 					put(grammarAccess.getMainAccess().getElementsAssignment(), "rule__Main__ElementsAssignment");
-					put(grammarAccess.getElementAccess().getNameAssignment_0(), "rule__Element__NameAssignment_0");
-					put(grammarAccess.getElementAccess().getContainedAssignment_2(), "rule__Element__ContainedAssignment_2");
-					put(grammarAccess.getElementAccess().getReferencedAssignment_3_1(), "rule__Element__ReferencedAssignment_3_1");
+					put(grammarAccess.getElementAccess().getDocAssignment_0(), "rule__Element__DocAssignment_0");
+					put(grammarAccess.getElementAccess().getNameAssignment_1(), "rule__Element__NameAssignment_1");
+					put(grammarAccess.getElementAccess().getContainedAssignment_3(), "rule__Element__ContainedAssignment_3");
+					put(grammarAccess.getElementAccess().getReferencedAssignment_4_1(), "rule__Element__ReferencedAssignment_4_1");
 				}
 			};
 		}

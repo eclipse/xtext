@@ -16,9 +16,11 @@ import java.util.regex.Pattern;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting.IFormatter;
+import org.eclipse.xtext.formatting.IFormatterExtension;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
@@ -75,7 +77,16 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 		String indent = getIndentation(root, offset);
 		TokenStringBuffer buf = new TokenStringBuffer();
 		ITokenStream out = offset == 0 ? buf : new FilterFirstWhitespaceStream(buf);
-		ITokenStream fmt = formatter.createFormatterStream(indent, out, false);
+		ITokenStream fmt;
+		if (formatter instanceof IFormatterExtension) {
+			EObject semanticElement = NodeModelUtils.findActualSemanticObjectFor(root);
+			if (semanticElement != null)
+				fmt = ((IFormatterExtension) formatter).createFormatterStream(semanticElement, indent, out, false);
+			else
+				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380406
+				return new FormattedRegion(root.getOffset(), root.getLength(), root.getText());
+		} else
+			fmt = formatter.createFormatterStream(indent, out, false);
 		try {
 			ITextRegion range = nodeModelStreamer.feedTokenStream(fmt, root, offset, length);
 			return new FormattedRegion(range.getOffset(), range.getLength(), buf.toString());
@@ -99,13 +110,13 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 		}
 
 		// go backwards until first linewrap
-		Pattern p = Pattern.compile("\\n([ \\t]*)");
+		Pattern p = Pattern.compile("(\\n|\\r)([ \\t]*)");
 		for (int i = r.size() - 1; i >= 0; i--) {
 			Matcher m = p.matcher(r.get(i).getText());
 			if (m.find()) {
-				String ind = m.group(1);
+				String ind = m.group(2);
 				while (m.find())
-					ind = m.group(1);
+					ind = m.group(2);
 				return ind;
 			}
 		}

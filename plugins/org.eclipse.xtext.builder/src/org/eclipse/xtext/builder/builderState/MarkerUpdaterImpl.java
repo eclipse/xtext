@@ -15,69 +15,92 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.validation.IResourceUIValidatorExtension;
+import org.eclipse.xtext.ui.validation.MarkerEraser;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.CheckMode;
 
-import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
+ * {@link IMarkerUpdater} that handles {@link CheckMode#NORMAL_AND_FAST} marker for all changed resources.
+ * 
+ * The implementation delegates to the language specific {@link IResourceUIValidatorExtension validator} if
+ * available.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
+ * @author Dennis Huebner
  */
 public class MarkerUpdaterImpl implements IMarkerUpdater {
+
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
 	@Inject
 	private IStorage2UriMapper mapper;
 
-	public void updateMarker(ResourceSet resourceSet, ImmutableList<Delta> resourceDescriptionDeltas,
-			IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources,
-				resourceDescriptionDeltas.size());
+	/**
+	 * {@inheritDoc}
+	 */
+	public void updateMarkers(Delta delta, @Nullable ResourceSet resourceSet, IProgressMonitor monitor) {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources, 1);
 		subMonitor.subTask(Messages.MarkerUpdaterImpl_ValidateResources);
-		for (Delta delta : resourceDescriptionDeltas) {
-			if (subMonitor.isCanceled())
-				throw new OperationCanceledException();
-			SubMonitor child = subMonitor.newChild(1);
-			if (delta.getNew() != null) {
-				URI uri = delta.getNew().getURI();
-				Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(uri);
-				child.setWorkRemaining(3);
-				for (Pair<IStorage, IProject> pair : storages) {
-					child.setWorkRemaining(3);
-					if (pair.getFirst() instanceof IFile) {
-						IResourceUIValidatorExtension resourceUIValidatorExtension = getResourceUIValidatorExtension(uri);
-						resourceUIValidatorExtension.updateValidationMarkers((IFile) pair.getFirst(),
-								resourceSet.getResource(uri, true), CheckMode.NORMAL_AND_FAST, child.newChild(2));
+
+		if (subMonitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
+		processDelta(delta, resourceSet, subMonitor.newChild(1));
+	}
+
+	private void processDelta(Delta delta, @Nullable ResourceSet resourceSet, SubMonitor childMonitor) {
+		URI uri = delta.getUri();
+		IResourceUIValidatorExtension validatorExtension = getResourceUIValidatorExtension(uri);
+		CheckMode normalAndFastMode = CheckMode.NORMAL_AND_FAST;
+
+		for (Pair<IStorage, IProject> pair : mapper.getStorages(uri)) {
+			if (pair.getFirst() instanceof IFile) {
+				IFile file = (IFile) pair.getFirst();
+				if (validatorExtension != null) {
+					if (delta.getNew() != null) {
+						if (resourceSet == null)
+							throw new IllegalArgumentException("resourceSet may not be null for changed resources.");
+						validatorExtension.updateValidationMarkers(file, resourceSet.getResource(uri, true),
+								normalAndFastMode, childMonitor);
 					} else {
-						child.worked(1);
+						validatorExtension.deleteValidationMarkers(file, normalAndFastMode, childMonitor);
 					}
+				} else {
+					// Clean up orphaned marker (no IResourceUIValidatorExtension registered)
+					fallBackDeleteMarker(file, normalAndFastMode, childMonitor);
 				}
-			} else {
-				Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(delta.getOld().getURI());
-				for (Pair<IStorage, IProject> pair : storages) {
-					if (pair.getFirst() instanceof IFile) {
-						IResourceUIValidatorExtension resourceUIValidatorExtension = getResourceUIValidatorExtension(delta
-								.getOld().getURI());
-						resourceUIValidatorExtension.deleteValidationMarkers((IFile) pair.getFirst(),
-								CheckMode.NORMAL_AND_FAST, child);
-					}
-				}
-				subMonitor.worked(1);
 			}
 		}
 	}
 
+	private void fallBackDeleteMarker(IFile file, CheckMode checkMode, IProgressMonitor monitor) {
+		MarkerEraser markerEraser = new MarkerEraser();
+		markerEraser.deleteValidationMarkers(file, checkMode, monitor);
+	}
+
+	/**
+	 * Searches for a {@link IResourceUIValidatorExtension} implementation in
+	 * {@link org.eclipse.xtext.resource.IResourceServiceProvider.Registry}<br>
+	 * 
+	 * @return {@link IResourceUIValidatorExtension} for the given {@link URI} or <code>null</code> if not found.
+	 * @see org.eclipse.xtext.resource.IResourceServiceProvider.Registry#getResourceServiceProvider(URI)
+	 * @see IResourceServiceProvider#get(Class)
+	 */
 	protected IResourceUIValidatorExtension getResourceUIValidatorExtension(URI uri) {
 		IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
-		IResourceUIValidatorExtension resourceUIValidatorExtension = provider.get(IResourceUIValidatorExtension.class);
-		return resourceUIValidatorExtension;
+		if (provider != null) {
+			return provider.get(IResourceUIValidatorExtension.class);
+		}
+		return null;
 	}
 
 }

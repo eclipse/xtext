@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import static com.google.common.collect.Lists.*;
+import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.RuntimeIOException;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * 
@@ -24,7 +27,10 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
+@Singleton
 public class DerivedStateAwareResourceDescriptionManager extends DefaultResourceDescriptionManager {
+	
+	private final static Logger log = Logger.getLogger(DerivedStateAwareResourceDescriptionManager.class);
 	
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
@@ -33,6 +39,13 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 	protected IResourceDescription internalGetResourceDescription(final Resource resource,
 			IDefaultResourceDescriptionStrategy strategy) {
 		DerivedStateAwareResource res = (DerivedStateAwareResource) resource;
+		if (!res.isLoaded()) {
+			try {
+				res.load(res.getResourceSet().getLoadOptions());
+			} catch (IOException e) {
+				throw new RuntimeIOException(e);
+			}
+		}
 		boolean isInitialized = res.fullyInitialized || res.isInitializing;
 		try {
 			if (!isInitialized) {
@@ -41,12 +54,16 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 			}
 			IResourceDescription description = createResourceDescription(resource, strategy);
 			if (!isInitialized) {
-				// make sure the eobject descriptions are being built.
-				newArrayList(description.getExportedObjects());
+				// eager initialize
+				for (IEObjectDescription desc : description.getExportedObjects()) {
+					desc.getEObjectURI();
+				}
 			}
 			return description;
 		} finally {
 			if (!isInitialized) {
+				if (log.isDebugEnabled())
+					log.debug("Discarding inferred state for "+resource.getURI());
 				res.discardDerivedState();
 				res.eSetDeliver(true);
 			}

@@ -743,6 +743,12 @@ ruleExtendsPluginEObject returns [EObject current=null]
 
 
 
+
+
+
+
+
+
 // Entry rule entryRuleExtendsResourceEObject
 entryRuleExtendsResourceEObject returns [EObject current=null] 
 	:

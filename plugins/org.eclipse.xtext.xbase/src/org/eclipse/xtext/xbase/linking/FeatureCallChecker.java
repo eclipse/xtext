@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -33,6 +32,7 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeConformanceResult;
 import org.eclipse.xtext.common.types.util.TypeConformanceResult.Kind;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
@@ -76,6 +76,7 @@ import com.google.inject.Provider;
  * 
  * @author Sven Efftinge
  */
+@SuppressWarnings("deprecation")
 public class FeatureCallChecker {
 
 	private PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("_case", 4, 4,
@@ -170,7 +171,7 @@ public class FeatureCallChecker {
 				identifiable = (JvmIdentifiableElement) EcoreUtil.resolve(identifiable, context);
 			String issueCode;
 			if (identifiable.eIsProxy())
-				issueCode = UNRESOLVABLE_PROXY;
+				issueCode = Diagnostic.LINKING_DIAGNOSTIC;
 			else if (!validatedDescription.isValid()) {
 				if (Strings.isEmpty(validatedDescription.getIssueCode()))
 					issueCode = FEATURE_NOT_VISIBLE;
@@ -247,10 +248,22 @@ public class FeatureCallChecker {
 		}
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param description the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(Object input, Object context, EReference ref, IValidatedEObjectDescription description) {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmConstructor input, XConstructorCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		List<XExpression> arguments = context.getArguments();
@@ -265,6 +278,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XBinaryOperation context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		final int irrelevantArguments = jvmFeatureDescription.getNumberOfIrrelevantArguments();
@@ -293,8 +312,20 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XAssignment context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
+		if (!jvmFeatureDescription.isValidStaticState()) {
+			if (input.isStatic())
+				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+			else
+				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
+		}
 		final int irrelevantArguments = jvmFeatureDescription.getNumberOfIrrelevantArguments();
 		if (input.getParameters().size() != (1 + irrelevantArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
@@ -309,15 +340,30 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmField input, XAssignment context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (input.isFinal())
-			return ASSIGNMENT_TARGET_IS_NOT_WRITEABLE;
-		if (input.isStatic())
-			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+		if (!jvmFeatureDescription.isValidStaticState()) {
+			if (input.isStatic())
+				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+			else
+				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
+		}
+		// TODO: validate if the field is from the current class or a superclass
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmField input, XMemberFeatureCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (!context.getMemberCallArguments().isEmpty())
@@ -329,6 +375,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 	
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param description the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmIdentifiableElement input, XFeatureCall context, EReference ref,
 			LocalVarDescription description) {
 		if (context.isExplicitOperationCallOrBuilderSyntax())
@@ -336,42 +388,77 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param reference the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmField input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (context.getDeclaringType() == null) {
-			if (input.isStatic() && jvmFeatureDescription.getImplicitReceiver() != null)
+		if (!jvmFeatureDescription.isValidStaticState()) {
+			if (input.isStatic())
 				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
-		} else {
-			if (!input.isStatic())
+			else
 				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
 		if (context.isExplicitOperationCallOrBuilderSyntax())
 			return FIELD_ACCESS_WITH_PARENTHESES;
-			
+
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XMemberFeatureCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (input.isStatic()
-				&& input.getParameters().size() == context.getMemberCallArguments().size()) {
-			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
-		} else {
-			return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
-					context.getMemberCallArguments());
+		if (!jvmFeatureDescription.isValidStaticState()) {
+			if (input.isStatic())
+				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+			else
+				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
+		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(),
+				jvmFeatureDescription);
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param reference the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (context.getDeclaringType() != null) {
+		if (!jvmFeatureDescription.isValidStaticState()) {
 			if (!input.isStatic())
 				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
-		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
-				context.getFeatureCallArguments());
+		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(),
+				jvmFeatureDescription);
+	}
+	
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param reference the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
+	protected String _case(JvmConstructor input, XFeatureCall context, EReference reference,
+			JvmFeatureDescription jvmFeatureDescription) {
+		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription);
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param reference the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XUnaryOperation context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (input.getParameters().size() != 1)
@@ -387,14 +474,14 @@ public class FeatureCallChecker {
 		return null;
 	}
 
-	protected String checkJvmOperation(JvmOperation operation, XAbstractFeatureCall featureCall,
-			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription, EList<XExpression> arguments) {
+	protected String checkJvmOperation(JvmExecutable executable, XAbstractFeatureCall featureCall,
+			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription) {
 		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
 				featureCall, 
-				operation,
+				executable,
 				jvmFeatureDescription.getImplicitReceiver(),
 				jvmFeatureDescription.getImplicitArgument());
-		if (!isValidNumberOfArguments(operation, actualArguments))
+		if (!isValidNumberOfArguments(executable, actualArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (!isExplicitOperationCall && !isSugaredMethodInvocationWithoutParanthesis(jvmFeatureDescription))
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
@@ -402,7 +489,7 @@ public class FeatureCallChecker {
 			return METHOD_ACCESS_WITHOUT_PARENTHESES;
 		}
 		if (!featureCall.getTypeArguments().isEmpty() // raw type or type inference
-				&& operation.getTypeParameters().size() != featureCall.getTypeArguments().size())
+				&& executable.getTypeParameters().size() != featureCall.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
 		return null;
 	}

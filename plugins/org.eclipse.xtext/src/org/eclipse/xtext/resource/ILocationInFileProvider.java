@@ -18,6 +18,8 @@ import com.google.inject.ImplementedBy;
  * Delivers {@link ITextRegion}s for model elements or feature settings. The significant text is the part of the text
  * identifying the element, e.g. its name, as opposed to the full region which is the full text representing the
  * element.
+ * In addition to this service, the extension interface {@link ILocationInFileProviderExtension} allows to query 
+ * for the region that is spanned by an {@link EObject} including its comments.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein - Distinguish significant and full region

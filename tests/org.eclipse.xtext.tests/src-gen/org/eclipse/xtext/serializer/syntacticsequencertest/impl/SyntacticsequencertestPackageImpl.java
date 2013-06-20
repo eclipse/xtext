@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.syntacticsequencertest.impl;
 
@@ -16,15 +13,20 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add2;
-import org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral;
+import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
+import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Mult2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.OptionalManyTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.OptionalSingleTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestFactory;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
@@ -109,7 +111,42 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass ambiguousTransitionEClass = null;
+  private EClass optionalSingleTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass optionalManyTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass mandatoryManyTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass alternativeTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass booleanValuesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass longAlternativeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -321,6 +358,56 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getModel_X9()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X10()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X11()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(10);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X12()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(11);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X13()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(12);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getMandatoryKeywords()
   {
     return mandatoryKeywordsEClass;
@@ -511,9 +598,9 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAmbiguousTransition()
+  public EClass getOptionalSingleTransition()
   {
-    return ambiguousTransitionEClass;
+    return optionalSingleTransitionEClass;
   }
 
   /**
@@ -521,9 +608,209 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAmbiguousTransition_Val()
+  public EAttribute getOptionalSingleTransition_Val()
   {
-    return (EAttribute)ambiguousTransitionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)optionalSingleTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOptionalManyTransition()
+  {
+    return optionalManyTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOptionalManyTransition_Val()
+  {
+    return (EAttribute)optionalManyTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMandatoryManyTransition()
+  {
+    return mandatoryManyTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMandatoryManyTransition_Val()
+  {
+    return (EAttribute)mandatoryManyTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAlternativeTransition()
+  {
+    return alternativeTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAlternativeTransition_Val()
+  {
+    return (EAttribute)alternativeTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBooleanValues()
+  {
+    return booleanValuesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBooleanValues_Val1()
+  {
+    return (EAttribute)booleanValuesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBooleanValues_Val2()
+  {
+    return (EAttribute)booleanValuesEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBooleanValues_Val3()
+  {
+    return (EAttribute)booleanValuesEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLongAlternative()
+  {
+    return longAlternativeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Foo()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val1()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val2()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val3()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val4()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val5()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val6()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val7()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val8()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(8);
   }
 
   /**
@@ -745,6 +1032,11 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEReference(modelEClass, MODEL__X6);
     createEReference(modelEClass, MODEL__X7);
     createEReference(modelEClass, MODEL__X8);
+    createEReference(modelEClass, MODEL__X9);
+    createEReference(modelEClass, MODEL__X10);
+    createEReference(modelEClass, MODEL__X11);
+    createEReference(modelEClass, MODEL__X12);
+    createEReference(modelEClass, MODEL__X13);
 
     mandatoryKeywordsEClass = createEClass(MANDATORY_KEYWORDS);
     createEAttribute(mandatoryKeywordsEClass, MANDATORY_KEYWORDS__VAL1);
@@ -773,8 +1065,33 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     unassignedDatatypeEClass = createEClass(UNASSIGNED_DATATYPE);
     createEAttribute(unassignedDatatypeEClass, UNASSIGNED_DATATYPE__VAL);
 
-    ambiguousTransitionEClass = createEClass(AMBIGUOUS_TRANSITION);
-    createEAttribute(ambiguousTransitionEClass, AMBIGUOUS_TRANSITION__VAL);
+    optionalSingleTransitionEClass = createEClass(OPTIONAL_SINGLE_TRANSITION);
+    createEAttribute(optionalSingleTransitionEClass, OPTIONAL_SINGLE_TRANSITION__VAL);
+
+    optionalManyTransitionEClass = createEClass(OPTIONAL_MANY_TRANSITION);
+    createEAttribute(optionalManyTransitionEClass, OPTIONAL_MANY_TRANSITION__VAL);
+
+    mandatoryManyTransitionEClass = createEClass(MANDATORY_MANY_TRANSITION);
+    createEAttribute(mandatoryManyTransitionEClass, MANDATORY_MANY_TRANSITION__VAL);
+
+    alternativeTransitionEClass = createEClass(ALTERNATIVE_TRANSITION);
+    createEAttribute(alternativeTransitionEClass, ALTERNATIVE_TRANSITION__VAL);
+
+    booleanValuesEClass = createEClass(BOOLEAN_VALUES);
+    createEAttribute(booleanValuesEClass, BOOLEAN_VALUES__VAL1);
+    createEAttribute(booleanValuesEClass, BOOLEAN_VALUES__VAL2);
+    createEAttribute(booleanValuesEClass, BOOLEAN_VALUES__VAL3);
+
+    longAlternativeEClass = createEClass(LONG_ALTERNATIVE);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__FOO);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL1);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL2);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL3);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL4);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL5);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL6);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL7);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL8);
 
     add0EClass = createEClass(ADD0);
     createEReference(add0EClass, ADD0__LEFT);
@@ -851,7 +1168,12 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEReference(getModel_X5(), this.getSingleCrossReference(), null, "x5", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X6(), this.getBooleanAlternative(), null, "x6", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X7(), this.getUnassignedDatatype(), null, "x7", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_X8(), this.getAmbiguousTransition(), null, "x8", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X8(), this.getOptionalSingleTransition(), null, "x8", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X9(), this.getOptionalManyTransition(), null, "x9", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X10(), this.getMandatoryManyTransition(), null, "x10", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X11(), this.getAlternativeTransition(), null, "x11", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X12(), this.getBooleanValues(), null, "x12", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X13(), this.getLongAlternative(), null, "x13", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mandatoryKeywordsEClass, MandatoryKeywords.class, "MandatoryKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMandatoryKeywords_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, MandatoryKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -880,8 +1202,33 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEClass(unassignedDatatypeEClass, UnassignedDatatype.class, "UnassignedDatatype", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnassignedDatatype_Val(), theEcorePackage.getEString(), "val", null, 0, 1, UnassignedDatatype.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(ambiguousTransitionEClass, AmbiguousTransition.class, "AmbiguousTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAmbiguousTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, AmbiguousTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(optionalSingleTransitionEClass, OptionalSingleTransition.class, "OptionalSingleTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOptionalSingleTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, OptionalSingleTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(optionalManyTransitionEClass, OptionalManyTransition.class, "OptionalManyTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOptionalManyTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, OptionalManyTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(mandatoryManyTransitionEClass, MandatoryManyTransition.class, "MandatoryManyTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMandatoryManyTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, MandatoryManyTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(alternativeTransitionEClass, AlternativeTransition.class, "AlternativeTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAlternativeTransition_Val(), theEcorePackage.getEString(), "val", null, 0, 1, AlternativeTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(booleanValuesEClass, BooleanValues.class, "BooleanValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBooleanValues_Val1(), theEcorePackage.getEBoolean(), "val1", null, 0, 1, BooleanValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBooleanValues_Val2(), theEcorePackage.getEBoolean(), "val2", null, 0, 1, BooleanValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBooleanValues_Val3(), theEcorePackage.getEBoolean(), "val3", null, 0, 1, BooleanValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(longAlternativeEClass, LongAlternative.class, "LongAlternative", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLongAlternative_Foo(), theEcorePackage.getEString(), "foo", null, 0, 1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val1(), theEcorePackage.getEString(), "val1", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val2(), theEcorePackage.getEString(), "val2", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val3(), theEcorePackage.getEString(), "val3", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val4(), theEcorePackage.getEString(), "val4", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val5(), theEcorePackage.getEString(), "val5", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val6(), theEcorePackage.getEString(), "val6", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val7(), theEcorePackage.getEString(), "val7", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val8(), theEcorePackage.getEString(), "val8", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(add0EClass, Add0.class, "Add0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd0_Left(), this.getExp0(), null, "left", null, 0, 1, Add0.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

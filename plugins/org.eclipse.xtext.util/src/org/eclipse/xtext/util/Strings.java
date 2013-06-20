@@ -34,8 +34,7 @@ public class Strings {
 	}
 
 	public static String notNull(Object o) {
-		String string = String.valueOf(o);
-		return string == null ? "null" : string;
+		return String.valueOf(o);
 	}
 
 	public static String emptyIfNull(String s) {
@@ -84,7 +83,7 @@ public class Strings {
 	}
 
 	public static String toFirstUpper(String s) {
-		if (s == null || s.length() == 0)
+		if (s == null || s.length() == 0 || Character.isUpperCase(s.charAt(0)))
 			return s;
 		if (s.length() == 1)
 			return s.toUpperCase();
@@ -100,7 +99,7 @@ public class Strings {
 	}
 
 	public static String toFirstLower(String s) {
-		if (s == null || s.length() == 0)
+		if (s == null || s.length() == 0 || Character.isLowerCase(s.charAt(0)))
 			return s;
 		if (s.length() == 1)
 			return s.toLowerCase();
@@ -272,35 +271,117 @@ public class Strings {
 	/**
 	 * Copied from {@link java.util.Properties}
 	 */
+	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+			'F' };
+
+	/**
+	 * Copied from {@link java.util.Properties}
+	 */
 	public static char toHex(int nibble) {
 		return hexDigit[(nibble & 0xF)];
 	}
 
 	/**
-	 * Copied from {@link java.util.Properties}
-	 */
-	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
-			'F' };
-
-	/**
+	 * Splits a string around matches of the given delimiter string.
+	 * <p>
+	 * This method works similar to {@link String#split(String)} but does not treat the delimiter
+	 * as a regular expression. This makes it perform better in most cases where this feature is not
+	 * necessary. Furthermore this implies that trailing empty segments will not be part of the
+	 * result.
+	 * <p>
+	 * For delimiters of length 1 it is preferred to use {@link #split(String, char)} instead.
+	 * 
 	 * @param value
+	 *            the string to split
 	 * @param delimiter
-	 * @return
+	 *            the delimiting string (e.g. "::")
+	 * 
+	 * @return the list of strings computed by splitting the string around matches of the given delimiter
+	 * without trailing empty segments. Never <code>null</code> and the list does not contain any <code>null</code> values.
+	 * 
+	 * @throws NullPointerException
+	 *             If the {@code value} or {@code delimiter} is {@code null}
 	 */
 	public static List<String> split(String value, String delimiter) {
 		List<String> result = new ArrayList<String>();
 		int lastIndex = 0;
 		int index = value.indexOf(delimiter, lastIndex);
+		int pendingEmptyStrings = 0;
 		while (index != -1) {
-			result.add(value.substring(lastIndex, index));
+			String addMe = value.substring(lastIndex, index);
+			if (addMe.length() == 0)
+				pendingEmptyStrings++;
+			else {
+				while(pendingEmptyStrings > 0) {
+					result.add("");
+					pendingEmptyStrings--;
+				}
+				result.add(addMe);
+			}
 			lastIndex = index + delimiter.length();
 			index = value.indexOf(delimiter, lastIndex);
 		}
-		result.add(value.substring(lastIndex));
+		if (lastIndex != value.length()) {
+			while(pendingEmptyStrings > 0) {
+				result.add("");
+				pendingEmptyStrings--;
+			}
+			result.add(value.substring(lastIndex));
+		}
 		return result;
 	}
 
-	public static char SEPARATOR = ':';
+	/**
+	 * Splits a string around matches of the given delimiter character.
+	 * <p>
+	 * This method works similar to {@link String#split(String)} but does not treat the delimiter
+	 * as a regular expression. This makes it perform better in most cases where this feature is not
+	 * necessary. Furthermore this implies that trailing empty segments will not be part of the
+	 * result.
+	 * 
+	 * @param value
+	 *            the string to split
+	 * @param delimiter
+	 *            the delimiting character (e.g. '.' or ':')
+	 * 
+	 * @return the list of strings computed by splitting the string around matches of the given delimiter
+	 * without trailing empty segments. Never <code>null</code> and the list does not contain any <code>null</code> values.
+	 * 
+	 * @throws NullPointerException
+	 *             If the {@code value} is {@code null}
+	 * @see String#split(String)
+	 * @since 2.3
+	 */
+	public static List<String> split(String value, char delimiter) {
+		List<String> result = new ArrayList<String>();
+		int lastIndex = 0;
+		int index = value.indexOf(delimiter, lastIndex);
+		int pendingEmptyStrings = 0;
+		while (index != -1) {
+			String addMe = value.substring(lastIndex, index);
+			if (addMe.length() == 0)
+				pendingEmptyStrings++;
+			else {
+				while(pendingEmptyStrings > 0) {
+					result.add("");
+					pendingEmptyStrings--;
+				}
+				result.add(addMe);
+			}
+			lastIndex = index + 1;
+			index = value.indexOf(delimiter, lastIndex);
+		}
+		if (lastIndex != value.length()) {
+			while(pendingEmptyStrings > 0) {
+				result.add("");
+				pendingEmptyStrings--;
+			}
+			result.add(value.substring(lastIndex));
+		}
+		return result;
+	}
+
+	public static final char SEPARATOR = ':';
 
 	/**
 	 * @param strings array of strings, may not be <code>null</code> and may not contain any <code>null</code> values.
@@ -348,6 +429,33 @@ public class Strings {
 	
 	private static final char[] separator = System.getProperty("line.separator").toCharArray();
 
+	/**
+	 * Counts the number of line breaks. Assumes {@code '\r'}, {@code '\n'} or {@code '\r\n'} to be valid line breaks.
+	 * @since 2.3
+	 */
+	public static int countLineBreaks(CharSequence text) {
+		int result = 0;
+		char ch;
+		int length= text.length();
+		for (int i= 0; i < length; i++) {
+			ch= text.charAt(i);
+			if (ch == '\r') {
+				result++;
+				if (i + 1 < length) {
+					if (text.charAt(i + 1) == '\n') {
+						i++;
+					}
+				}
+			} else if (ch == '\n') {
+				result++;
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Counts the number of lines where {@link #separator} is assumed to be a valid line break.
+	 */
 	public static int countLines(String text) {
 		return countLines(text, separator);
 	}

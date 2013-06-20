@@ -8,13 +8,14 @@
 package org.eclipse.xtext.validation;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.validation.IAssignmentQuantityAllocator.IQuantities;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxConstraint;
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.IConcreteSyntaxDiagnostic;
 import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestFactory;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
@@ -25,7 +26,7 @@ public class AssignmentAllocatorTest extends AbstractXtextTests {
 	private static CsvalidationtestFactory f = CsvalidationtestFactory.eINSTANCE;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ConcreteSyntaxValidationTestLanguageStandaloneSetup.class);
 		allocator = getInjector().getInstance(IAssignmentQuantityAllocator.class);
@@ -42,7 +43,7 @@ public class AssignmentAllocatorTest extends AbstractXtextTests {
 		return q.toString();
 	}
 
-	public void testTransient() {
+	@Test public void testTransient() {
 		TransientSerializeables1 ts = f.createTransientSerializeables1();
 		assertEquals("((val1:0 enum1:0)? (val2:0 int1:0)?)", getAllocation(ts));
 

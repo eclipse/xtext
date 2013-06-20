@@ -6,14 +6,13 @@ package org.eclipse.xtext.generator.parser.antlr.splitting.parseTreeConstruction
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpressionsGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class SimpleExpressionsParsetreeConstructor extends AbstractParseTreeConstructor {
+public class SimpleExpressionsParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private SimpleExpressionsGrammarAccess grammarAccess;

@@ -19,8 +19,8 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -39,7 +39,7 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 
 		StringBuilder msg = new StringBuilder();
 		msg.append("State '" + toName + "' may not follow '" + fromName + "'.\n");
-		msg.append("Valid followers are: " + Join.join(", ", targets));
+		msg.append("Valid followers are: " + Joiner.on(", ").join(targets));
 
 		return new SerializationDiagnostic(INVALID_FOLLOWING_ABSORBER, semanticObject, context, msg.toString());
 	}

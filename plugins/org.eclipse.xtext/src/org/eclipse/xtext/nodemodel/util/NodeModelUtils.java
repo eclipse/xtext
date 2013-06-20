@@ -14,6 +14,8 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -28,12 +30,19 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 
 import com.google.common.collect.Lists;
 
 /**
  * The NodeModelUtils are a collection of useful methods when dealing with the node model directly. They encapsulate the
  * default construction semantics of the node model as it is created by the parser.
+ * 
+ * This API is quite low level and internal functionality of the framework relies on the implemened contracts.
+ * Clients should rather use the language specific APIs that provide almost the same functionality, e.g.
+ * {@link ILocationInFileProvider} and {@link EObjectAtOffsetHelper} if they want to to access the region
+ * of a {@link EObject semantic object}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -53,7 +62,8 @@ public class NodeModelUtils {
 	 * @param leafNodeOffset the offset that is covered by the searched node.
 	 * @return the leaf node at the given offset or <code>null</code>.
 	 */
-	public static ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
+	@Nullable
+	public static ILeafNode findLeafNodeAtOffset(@NonNull INode node, int leafNodeOffset) {
 		INode localNode = node;
 		while(!(localNode instanceof AbstractNode)) {
 			localNode = localNode.getParent();
@@ -104,10 +114,12 @@ public class NodeModelUtils {
 	/**
 	 * Returns the node that is directly associated with the given object by means of an EMF-Adapter.
 	 * 
+	 * @param object the semantic object whose direct node should be provided.
 	 * @return the node that is directly associated with the given object.
 	 * @see NodeModelUtils#findActualNodeFor(EObject)
 	 */
-	public static ICompositeNode getNode(EObject object) {
+	@Nullable
+	public static ICompositeNode getNode(@Nullable EObject object) {
 		if (object == null)
 			return null;
 		List<Adapter> adapters = object.eAdapters();
@@ -124,6 +136,7 @@ public class NodeModelUtils {
 	 * 
 	 * @return the list of nodes that were used to assign values to the given feature for the given object.
 	 */
+	@NonNull
 	public static List<INode> findNodesForFeature(EObject semanticObject, EStructuralFeature structuralFeature) {
 		ICompositeNode node = findActualNodeFor(semanticObject);
 		if (node != null) {
@@ -178,12 +191,27 @@ public class NodeModelUtils {
 	}
 
 	/**
-	 * Returns the node that covers all assigned values of the given object. It handles the semantics of {@link Action
-	 * actions} and {@link RuleCall unassigned rule calls}.
+	 * <p>Returns the node that covers all assigned values of the given object. It handles the semantics of {@link Action
+	 * actions} and {@link RuleCall unassigned rule calls}. The returned node will include unassigned surrounding leafs,
+	 * e.g. if you use something like {@code Parenthesized expressions} redundant parentheses will be part of the returned node.</p>
+	 * <p>Consider the following simple expression (a number literal): 
+	 * <pre>
+	 *   ((1))
+	 * </pre>
+	 * Assuming it was parsed from a grammar like this:
+	 * <pre>
+	 * Expression: Number | Parentheses;
+	 * Parentheses: '(' Expression ')';
+	 * Number: value=INT
+	 * </pre>
+	 * The actual node for the only semantic object that was produced from the input {@code ((1))} is the root node 
+	 * even though the minimal node would be the one with the text {@code 1}.
 	 * 
+	 * @param semanticObject the semantic object whose node should be provided.
 	 * @return the node that covers all assigned values of the given object.
 	 */
-	public static ICompositeNode findActualNodeFor(EObject semanticObject) {
+	@Nullable
+	public static ICompositeNode findActualNodeFor(@Nullable EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
 		if (node != null) {
 			while (GrammarUtil.containingAssignment(node.getGrammarElement()) == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
@@ -200,19 +228,21 @@ public class NodeModelUtils {
 	 * 
 	 * @return the semantic object that is really associated with the actual container node of the given node.
 	 */
-	public static EObject findActualSemanticObjectFor(INode node) {
+	@Nullable
+	public static EObject findActualSemanticObjectFor(@Nullable INode node) {
 		if (node == null)
 			return null;
 		if (node.hasDirectSemanticElement())
 			return node.getSemanticElement();
 		EObject grammarElement = node.getGrammarElement();
+		ICompositeNode parent = node.getParent();
 		if (grammarElement == null)
-			return findActualSemanticObjectFor(node.getParent());
+			return findActualSemanticObjectFor(parent);
 		Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
 		if (assignment != null) {
-			if (node.getParent().hasDirectSemanticElement())
-				return findActualSemanticObjectFor(node.getParent());
-			INode sibling = node.getParent().getFirstChild();
+			if (parent.hasDirectSemanticElement())
+				return findActualSemanticObjectFor(parent);
+			INode sibling = parent.getFirstChild();
 			while(sibling != node) {
 				EObject siblingGrammarElement = sibling.getGrammarElement();
 				if (siblingGrammarElement != null && GrammarUtil.containingAssignment(siblingGrammarElement) == null) {
@@ -226,10 +256,11 @@ public class NodeModelUtils {
 			if (result != null)
 				return result;
 		}
-		return findActualSemanticObjectFor(node.getParent());
+		return findActualSemanticObjectFor(parent);
 	}
 
-	private static EObject findActualSemanticObjectInChildren(INode node, EObject grammarElement) {
+	@Nullable
+	private static EObject findActualSemanticObjectInChildren(@NonNull INode node, @Nullable EObject grammarElement) {
 		if (node.hasDirectSemanticElement())
 			return node.getSemanticElement();
 		AbstractRule rule = null;

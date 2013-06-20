@@ -7,12 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@ImplementedBy(IIndentationInformation.Default.class)
 public interface IIndentationInformation {
 	/**
 	 * returns the string used to indent a line one level
 	 */
 	String getIndentString();
+	
+	/**
+	 * @since 2.2
+	 */
+	class Default implements IIndentationInformation{
+		public String getIndentString() {
+			return "\t";
+		}
+	}
 }

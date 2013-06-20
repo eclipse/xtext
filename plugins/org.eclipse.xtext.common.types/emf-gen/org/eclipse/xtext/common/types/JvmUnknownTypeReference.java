@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types;
 
@@ -14,7 +16,7 @@ package org.eclipse.xtext.common.types;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference#getException <em>Exception</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference#getQualifiedName <em>Qualified Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,29 +30,31 @@ package org.eclipse.xtext.common.types;
 public interface JvmUnknownTypeReference extends JvmTypeReference
 {
 	/**
-	 * Returns the value of the '<em><b>Exception</b></em>' attribute.
+	 * Returns the value of the '<em><b>Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Exception</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Exception</em>' attribute.
-	 * @see #setException(Exception)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmUnknownTypeReference_Exception()
-	 * @model dataType="org.eclipse.xtext.common.types.Exception" transient="true"
+	 * <!-- begin-model-doc -->
+	 * <p>Returns the known qualified name of the otherwise unresolveable type. May be <code>null</code>.</p>
+	 * 
+	 * @since 2.4
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Qualified Name</em>' attribute.
+	 * @see #setQualifiedName(String)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmUnknownTypeReference_QualifiedName()
+	 * @model transient="true"
 	 * @generated
 	 */
-	Exception getException();
+	String getQualifiedName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference#getException <em>Exception</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference#getQualifiedName <em>Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Exception</em>' attribute.
-	 * @see #getException()
+	 * @param value the new value of the '<em>Qualified Name</em>' attribute.
+	 * @see #getQualifiedName()
 	 * @generated
+	 * @since 2.4
 	 */
-	void setException(Exception value);
+	void setQualifiedName(String value);
 
 } // JvmUnknownTypeReference

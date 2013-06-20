@@ -32,6 +32,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -42,9 +43,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.MapMaker;
 
@@ -92,13 +97,17 @@ public class EcoreUtil2 extends EcoreUtil {
 		return previous;
 	}
 
+	/**
+	 * Returns the closest {@link EObject#eContainer() container object} of the requested type. If the given object is
+	 * an instance of the requested type, then the object itself will be returned. If no container object is of the
+	 * requested type, then {@code null} will be returned.
+	 */
+	@Nullable
+	public static <T extends EObject> T getContainerOfType(@Nullable EObject ele, @NonNull Class<T> type) {
+		for (EObject e = ele; e != null; e = e.eContainer())
+			if (type.isInstance(e))
+				return type.cast(e);
 
-	@SuppressWarnings("unchecked")
-	public static <T extends EObject> T getContainerOfType(EObject ele, Class<T> type) {
-		if (type.isAssignableFrom(ele.getClass()))
-			return (T) ele;
-		if (ele.eContainer() != null)
-			return getContainerOfType(ele.eContainer(), type);
 		return null;
 	}
 	
@@ -117,10 +126,11 @@ public class EcoreUtil2 extends EcoreUtil {
 	/**
 	 * A generified facade to {@link EcoreUtil#copy(EObject)}.
 	 * Note that since EMF 2.6 {@link EcoreUtil#copy(EObject)} is already generic.
+	 * @deprecated use {@link EcoreUtil#copy(EObject)} instead.
 	 */
-	@SuppressWarnings("unchecked")
+	@Deprecated
 	public static <T extends EObject> T clone(T eObject) {
-		return (T) EcoreUtil.copy(eObject);
+		return EcoreUtil.copy(eObject);
 	}
 	
 	/**
@@ -128,6 +138,8 @@ public class EcoreUtil2 extends EcoreUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T cloneWithProxies(T original) {
+		if (original == null)
+			return original;
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false);
 		T copy = (T) copier.copy(original);
 		copier.copyReferences();
@@ -138,7 +150,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	 * only clones the element if it is contained in another {@link EObject} or another {@link Resource}
 	 */
 	public static <T extends EObject> T cloneIfContained(T eObject) {
-		if (eObject.eContainer()!=null || eObject.eResource()!=null)
+		if (eObject != null && (eObject.eContainer()!=null || eObject.eResource()!=null))
 			return clone(eObject);
 		return eObject;
 	}
@@ -307,18 +319,12 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 	
 	public static EClassifier getCompatibleType(EClassifier typeA, EClassifier typeB) {
-		if (typeA.equals(typeB))
-			return typeA;
-		// no common type for simple datatypes available
-		if (!(typeA instanceof EClass && typeB instanceof EClass))
-			return null;
-
-		List<EClass> sortedCandidates = getSortedCommonCompatibleTypeCandidates((EClass) typeA, (EClass) typeB);
-		for (EClass candidate : sortedCandidates)
-			if (isCommonCompatibleType(candidate, sortedCandidates))
-				return candidate;
-
-		return EcorePackage.Literals.EOBJECT;
+		EClassifier result = getCompatibleType(typeA, typeB, null);
+		if (result != null)
+			return result;
+		if (typeA instanceof EClass && typeB instanceof EClass)
+			return EcorePackage.Literals.EOBJECT;
+		return null;
 	}
 	
 	/**
@@ -327,6 +333,17 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static EClassifier getCompatibleType(EClassifier typeA, EClassifier typeB, EObject grammarContext) {
 		if (typeA.equals(typeB))
 			return typeA;
+		if (typeA instanceof EDataType && typeB instanceof EDataType) {
+			Class<?> instanceClassA = typeA.getInstanceClass();
+			Class<?> instanceClassB = typeB.getInstanceClass();
+			if (instanceClassA != null && instanceClassB != null) {
+				if (instanceClassA.isAssignableFrom(instanceClassB))
+					return typeA;
+				if (instanceClassB.isAssignableFrom(instanceClassA))
+					return typeB;
+			}
+		}
+		
 		// no common type for simple datatypes available
 		if (!(typeA instanceof EClass && typeB instanceof EClass))
 			return null;
@@ -395,8 +412,14 @@ public class EcoreUtil2 extends EcoreUtil {
 		return Collections.unmodifiableSet(allSuperTypes);
 	}
 
-	public static boolean isAssignableFrom(EClass target, EClass candidate) {
-		return (candidate != null && (target == EcorePackage.Literals.EOBJECT || target.isSuperTypeOf(candidate)));
+	/**
+	 * Returns whether the given super type is the same as, or a super type of, some other class.
+	 * @param superType the super type
+	 * @param candidate the subtype
+	 * @return whether the super type is the same as, or a super type of, some other class.
+	 */
+	public static boolean isAssignableFrom(EClass superType, EClass candidate) {
+		return (candidate != null && (superType == EcorePackage.Literals.EOBJECT || superType.isSuperTypeOf(candidate)));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -415,6 +438,9 @@ public class EcoreUtil2 extends EcoreUtil {
 	 * resource factory and the physical resource exists.
 	 */
 	public static boolean isValidUri(Resource resource, URI uri) {
+		if (uri == null || uri.isEmpty()) {
+			return false;
+		}
 		URI newURI = getResolvedImportUri(resource, uri);
 		try {
 			ResourceSet resourceSet = resource.getResourceSet();
@@ -439,7 +465,7 @@ public class EcoreUtil2 extends EcoreUtil {
 
 	private static URI getResolvedImportUri(Resource context, URI uri) {
 		URI contextURI = context.getURI();
-		if (contextURI.isHierarchical() && !contextURI.isRelative() && uri.isRelative()) {
+		if (contextURI.isHierarchical() && !contextURI.isRelative() && (uri.isRelative() && !uri.isEmpty())) {
 			uri = uri.resolve(contextURI);
 		}
 		return uri;
@@ -506,7 +532,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		}
 	}
 
-	private final static String delim = "«";
+	private final static char delim = '«';
 
 	/**
 	 * creates an external form of the given EReference. Use
@@ -540,8 +566,8 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static EReference getEReferenceFromExternalForm(EPackage.Registry registry, String externalForm) {
 		if (externalForm == null)
 			return null;
-		String[] split = externalForm.split(delim);
-		if (split.length != 3) {
+		List<String> split = Strings.split(externalForm, delim);
+		if (split.size() != 3) {
 			URI uri = URI.createURI(externalForm);
 			URI packURI = uri.trimFragment();
 			EPackage ePackage = registry.getEPackage(packURI.toString());
@@ -550,13 +576,13 @@ public class EcoreUtil2 extends EcoreUtil {
 			EReference result = (EReference) ePackage.eResource().getEObject(uri.fragment());
 			return result;
 		}
-		EPackage ePackage = registry.getEPackage(split[0]);
+		EPackage ePackage = registry.getEPackage(split.get(0));
 		if (ePackage == null)
 			return null;
-		EClass clazz = (EClass) ePackage.getEClassifier(split[1]);
+		EClass clazz = (EClass) ePackage.getEClassifier(split.get(1));
 		if (clazz == null)
 			return null;
-		return (EReference) clazz.getEStructuralFeature(Integer.valueOf(split[2]));
+		return (EReference) clazz.getEStructuralFeature(Integer.valueOf(split.get(2)));
 	}
 
 	public static boolean hasSameURI(EObject o0, EObject o1) {
@@ -568,6 +594,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			return getNormalizedURI(eObject.eResource());
 		return URIConverter.INSTANCE.normalize(EcoreUtil.getURI(eObject).trimFragment());
 	}
+	
 	
 	public static URI getNormalizedURI(EObject eObject) {
 		URI rawURI = EcoreUtil.getURI(eObject);
@@ -585,5 +612,88 @@ public class EcoreUtil2 extends EcoreUtil {
 		} else {
 			return URIConverter.INSTANCE.normalize(resource.getURI());
 		}
+	}
+	
+	/**
+	 * @return the eobject's URI in the normalized form or as is if it is a platform:/resource URI.
+	 * @since 2.4
+	 */
+	public static URI getPlatformResourceOrNormalizedURI(EObject eObject) {
+		URI rawURI = EcoreUtil.getURI(eObject);
+		if (rawURI.isPlatformResource()) {
+			return rawURI;
+		}
+		Resource resource = eObject.eResource();
+		if(resource != null && resource.getResourceSet() != null) {
+			return resource.getResourceSet().getURIConverter().normalize(rawURI);
+		} else {
+			return URIConverter.INSTANCE.normalize(rawURI);
+		}
+	}
+	/**
+	 * @return the resources uri in the normalized form or as is if it is a platform:/resource URI.
+	 * @since 2.4
+	 */
+	public static URI getPlatformResourceOrNormalizedURI(Resource resource) {
+		URI rawURI = resource.getURI();
+		if (rawURI.isPlatformResource()) {
+			return rawURI;
+		}
+		if(resource.getResourceSet() != null) {
+			return resource.getResourceSet().getURIConverter().normalize(rawURI);
+		} else {
+			return URIConverter.INSTANCE.normalize(rawURI);
+		}
+	}
+	
+	/**
+	 * A better performing alternative to the {@link org.eclipse.emf.ecore.util.EcoreUtil.CrossReferencer}.
+	 * 
+	 * @since 2.4
+	 */
+	@SuppressWarnings("unchecked")
+	public static void findCrossReferences(EObject rootElement, Set<? extends EObject> targets, ElementReferenceAcceptor acceptor) {
+		for(EReference ref: rootElement.eClass().getEAllReferences()) {
+			if(rootElement.eIsSet(ref)) {
+				if(ref.isContainment()) {
+					Object content = rootElement.eGet(ref, false);
+					if(ref.isMany()) {
+						InternalEList<EObject> contentList = (InternalEList<EObject>) content;
+						for(int i=0; i<contentList.size(); ++i) {
+							EObject childElement = contentList.basicGet(i);
+							if(!childElement.eIsProxy())
+								findCrossReferences(childElement, targets, acceptor);
+						}
+					} else {
+						EObject childElement = (EObject) content;
+						if(!childElement.eIsProxy())
+							findCrossReferences(childElement, targets, acceptor);
+					}
+				} else if (!ref.isContainer()) {
+					Object value = rootElement.eGet(ref, false);
+					if(ref.isMany()) {
+						InternalEList<EObject> values = (InternalEList<EObject>) value;
+						for(int i=0; i< values.size(); ++i) {
+							EObject refElement = values.get(i);
+							if(targets.contains(refElement)) {
+								acceptor.accept(rootElement, refElement, ref, i);
+							}
+						}
+					} else {
+						EObject refElement = (EObject) value;
+						if(targets.contains(refElement)) {
+							acceptor.accept(rootElement, refElement, ref, -1);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static interface ElementReferenceAcceptor {
+		void accept(EObject referrer, EObject referenced, EReference reference, int index);
 	}
 }

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.linking.lazy;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -111,15 +110,17 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	private void installProxies(EObject obj, IDiagnosticProducer producer,
 			Multimap<EStructuralFeature.Setting, INode> settingsToLink, ICompositeNode parentNode) {
-		Iterator<INode> iterator = parentNode.getChildren().iterator();
-		while(iterator.hasNext()) {
-			INode node = iterator.next();
-			if (node.getGrammarElement() instanceof CrossReference && !Iterables.isEmpty(node.getLeafNodes())) {
-				CrossReference ref = (CrossReference) node.getGrammarElement();
+		final EClass eClass = obj.eClass();
+		if (eClass.getEAllReferences().size() - eClass.getEAllContainments().size() == 0)
+			return;
+
+		for (INode node = parentNode.getFirstChild(); node != null; node = node.getNextSibling()) {
+			EObject grammarElement = node.getGrammarElement();
+			if (grammarElement instanceof CrossReference && hasLeafNodes(node)) {
 				producer.setNode(node);
-				final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
+				final EReference eRef = GrammarUtil.getReference((CrossReference) grammarElement, eClass);
 				if (eRef == null) {
-					throw new IllegalStateException("Couldn't find EReference for crossreference " + ref);
+					throw new IllegalStateException("Couldn't find EReference for crossreference " + grammarElement);
 				}
 				if (!eRef.isResolveProxies() /*|| eRef.getEOpposite() != null see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486*/) {
 					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
@@ -132,6 +133,13 @@ public class LazyLinker extends AbstractCleaningLinker {
 		if (shouldCheckParentNode(parentNode)) {
 			installProxies(obj, producer, settingsToLink, parentNode.getParent());
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected boolean hasLeafNodes(INode node) {
+		return !Iterables.isEmpty(node.getLeafNodes());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -264,4 +272,10 @@ public class LazyLinker extends AbstractCleaningLinker {
 		return grammarAccess;
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	protected OnChangeEvictingCache getCache() {
+		return cache;
+	}
 }

@@ -20,7 +20,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.ui.codetemplates.scoping.CodetemplatesScopeProvider;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplates;
-import org.eclipse.xtext.ui.codetemplates.ui.preferences.SyntheticResourceProvider;
+import org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplateResourceProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -35,7 +35,7 @@ public class SyntheticResourceAwareScopeProvider extends CodetemplatesScopeProvi
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	public IScope scope_Codetemplates_language(Codetemplates templates, EReference reference) {
-		if (SyntheticResourceProvider.SYNTHETIC_SCHEME.equals(templates.eResource().getURI().scheme())) {
+		if (TemplateResourceProvider.SYNTHETIC_SCHEME.equals(templates.eResource().getURI().scheme())) {
 			ResourceSet resourceSet = templates.eResource().getResourceSet();
 			List<Grammar> grammars = Lists.newArrayListWithExpectedSize(1);
 			for(Resource resource: resourceSet.getResources()) {

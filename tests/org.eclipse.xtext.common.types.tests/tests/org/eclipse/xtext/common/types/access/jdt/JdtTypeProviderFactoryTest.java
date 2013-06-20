@@ -9,28 +9,33 @@ package org.eclipse.xtext.common.types.access.jdt;
 
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JdtTypeProviderFactoryTest extends TestCase {
+public class JdtTypeProviderFactoryTest extends Assert {
 
 	private MockJavaProjectProvider projectProvider;
 	private JdtTypeProviderFactory factory;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
+
+	@Before
+	public void setUp() throws Exception {
 		projectProvider = new MockJavaProjectProvider();
 		factory = new JdtTypeProviderFactory(projectProvider);
 	}
 	
-	public void testCreateTypeProvider_01() {
+	@Test public void testCreateTypeProvider_01() {
 		try {
 			factory.createTypeProvider();
 			fail("Expected UnsupportedOperationException");
@@ -39,26 +44,26 @@ public class JdtTypeProviderFactoryTest extends TestCase {
 		}
 	}
 	
-	public void testCreateTypeProvider_02() {
+	@Test public void testCreateTypeProvider_02() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		IJdtTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
 		assertNotNull(typeProvider);
 		assertEquals(resourceSet, typeProvider.getResourceSet());
 	}
 	
-	public void testCreateTypeProvider_03() {
+	@Test public void testCreateTypeProvider_03() {
 		IJdtTypeProvider typeProvider = factory.createTypeProvider(new ResourceSetImpl());
 		ResourceSet resourceSet = typeProvider.getResourceSet();
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
 		assertEquals(typeProvider, map.get(URIHelperConstants.PROTOCOL));
 	}
 	
-	public void testFindTypeProvider_01() {
+	@Test public void testFindTypeProvider_01() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		assertNull(factory.findTypeProvider(resourceSet));
 	}
 	
-	public void testFindTypeProvider_02() {
+	@Test public void testFindTypeProvider_02() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		IJdtTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
 		assertSame(typeProvider, factory.findTypeProvider(resourceSet));

@@ -16,29 +16,30 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RegisteredGenmodelTest extends TestCase {
+public class RegisteredGenmodelTest extends Assert {
 
 	private IExtensionRegistry registry;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		registry = Platform.getExtensionRegistry();
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		registry = null;
-		super.tearDown();
 	}
 	
-	public void testCanResolveGenmodelURIs() {
+	@Ignore @Test public void testCanResolveGenmodelURIs() {
 		String declaringPlugin = "org.eclipse.emf.ecore";
 		String pointId = "generated_package";
 		IExtensionPoint point = registry.getExtensionPoint(declaringPlugin + "." + pointId);
@@ -53,7 +54,7 @@ public class RegisteredGenmodelTest extends TestCase {
 					URI uri = URI.createURI(uriAsString);
 					boolean exists = URIConverter.INSTANCE.exists(uri, Collections.emptyMap());
 					if (!exists) {
-//							fail(uriAsString + " does not exist");
+							fail(uriAsString + " does not exist");
 					}
 				}
 			}

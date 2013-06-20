@@ -15,11 +15,13 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -45,7 +47,7 @@ public class ResourceSetGlobalScopeProvider extends AbstractGlobalScopeProvider 
 		final ResourceSet resourceSet = resource.getResourceSet();
 		if (resourceSet instanceof ResourceSetReferencingResourceSet) {
 			ResourceSetReferencingResourceSet set = (ResourceSetReferencingResourceSet) resourceSet;
-			Iterable<ResourceSet> referencedSets = Iterables.reverse(set.getReferencedResourceSets());
+			Iterable<ResourceSet> referencedSets = Lists.reverse(set.getReferencedResourceSets());
 			for (ResourceSet referencedSet : referencedSets) {
 				parent = createScopeWithQualifiedNames(parent, resource, filter, referencedSet, type, ignoreCase);
 			}

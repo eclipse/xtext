@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.impl;
 
@@ -33,7 +30,7 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
   {
     try
     {
-      EcoreReferenceFactory theEcoreReferenceFactory = (EcoreReferenceFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2011/tmf/xtext/ecoreReference"); 
+      EcoreReferenceFactory theEcoreReferenceFactory = (EcoreReferenceFactory)EPackage.Registry.INSTANCE.getEFactory(EcoreReferencePackage.eNS_URI);
       if (theEcoreReferenceFactory != null)
       {
         return theEcoreReferenceFactory;
@@ -68,6 +65,9 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
     switch (eClass.getClassifierID())
     {
       case EcoreReferencePackage.MODEL: return createModel();
+      case EcoreReferencePackage.MY_NAMED_ELEMENT_01: return createMyNamedElement_01();
+      case EcoreReferencePackage.MY_NAMED_ELEMENT_02: return createMyNamedElement_02();
+      case EcoreReferencePackage.MY_NAMED_ELEMENT_03: return createMyNamedElement_03();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -82,6 +82,39 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
   {
     ModelImpl model = new ModelImpl();
     return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MyNamedElement_01 createMyNamedElement_01()
+  {
+    MyNamedElement_01Impl myNamedElement_01 = new MyNamedElement_01Impl();
+    return myNamedElement_01;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MyNamedElement_02 createMyNamedElement_02()
+  {
+    MyNamedElement_02Impl myNamedElement_02 = new MyNamedElement_02Impl();
+    return myNamedElement_02;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MyNamedElement_03 createMyNamedElement_03()
+  {
+    MyNamedElement_03Impl myNamedElement_03 = new MyNamedElement_03Impl();
+    return myNamedElement_03;
   }
 
   /**

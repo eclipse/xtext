@@ -39,6 +39,30 @@ public class JvmSpecializedTypeReferenceImplCustom extends JvmSpecializedTypeRef
 	}
 	
 	@Override
+	public String getIdentifier() {
+		JvmTypeReference equivalent = getEquivalent();
+		if (equivalent != null)
+			return equivalent.getIdentifier();
+		return super.getIdentifier();
+	}
+
+	@Override
+	public String getQualifiedName(char innerClassDelimiter) {
+		JvmTypeReference equivalent = getEquivalent();
+		if (equivalent != null)
+			return equivalent.getQualifiedName(innerClassDelimiter);
+		return super.getQualifiedName(innerClassDelimiter);
+	}
+	
+	@Override
+	public String getSimpleName() {
+		JvmTypeReference equivalent = getEquivalent();
+		if (equivalent != null)
+			return equivalent.getSimpleName();
+		return super.getSimpleName();
+	}
+	
+	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(eClass().getName());
 		result.append(": ");

@@ -10,16 +10,15 @@ package org.eclipse.xtext.ui.containers;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJarEntryResource;
@@ -30,7 +29,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Lists;
@@ -76,51 +75,8 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 			if (!isAccessibleXtextProject(javaProject.getProject())) {
 				return Collections.emptyList();
 			}
-			final List<URI> uris = Lists.newArrayList();
-			if (root.isArchive() || root.isExternal()) {
-				try {
-					new PackageFragmentRootWalker<Void>() {
-						@Override
-						protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
-							URI uri = getUri(jarEntry);
-							if (uri != null) {
-								uris.add(uri);	
-							}
-							return null;
-						}
-					}.traverse(root, false);
-					return uris;
-				} catch (JavaModelException e) {
-					if (!e.isDoesNotExist())
-						log.error(e.getMessage(), e);
-					return Collections.emptyList();
-				}
-			} else {
-				try {
-					IResource resource = root.getResource();
-					if (resource != null) {
-						IProject project = resource.getProject();
-						if (isAccessibleXtextProject(project)) {
-							resource.accept(new IResourceVisitor() {
-								public boolean visit(IResource resource) throws CoreException {
-									if (resource instanceof IStorage) {
-										URI uri = getUri((IStorage) resource);
-										if (uri != null) {
-											uris.add(uri);	
-										}
-										return false;
-									}
-									return true;
-								}
-							});
-						}
-					}
-					return uris;
-				} catch (CoreException e) {
-					log.error(e.getMessage(), e);
-					return Collections.emptyList();
-				}
-			}
+			Map<URI, IStorage> entries = ((IStorage2UriMapperJdtExtensions)super.getMapper()).getAllEntries(root);
+			return entries.keySet();
 		}
 		return Collections.emptyList();
 	}

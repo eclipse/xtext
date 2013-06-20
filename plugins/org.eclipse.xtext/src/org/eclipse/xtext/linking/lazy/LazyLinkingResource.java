@@ -33,6 +33,7 @@ import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
 import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.nodemodel.INode;
@@ -46,10 +47,17 @@ import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill
  */
 public class LazyLinkingResource extends XtextResource {
 
-	private static final Logger log = Logger.getLogger(LazyLinkingResource.class);
+	private static Logger log = Logger.getLogger(LazyLinkingResource.class);
+	
+	/**
+	 * The cache key for a Set of uri fragments that cannot be resolved. 
+	 * @since 2.4
+	 */
+	public static final String UNRESOLVEABLE_PROXIES_KEY = "UNRESOLVEABLE_PROXIES";
 
 	@Inject
 	private ILinkingService linkingService;
@@ -59,6 +67,9 @@ public class LazyLinkingResource extends XtextResource {
 
 	@Inject
 	private ILinkingDiagnosticMessageProvider diagnosticMessageProvider;
+	
+	@Inject
+	private ILinkingDiagnosticMessageProvider.Extended linkingDiagnosticMessageProvider;
 
 	@Inject
 	private LinkingHelper linkingHelper;
@@ -85,8 +96,7 @@ public class LazyLinkingResource extends XtextResource {
 	 * resolves any lazy cross references in this resource, adding Issues for unresolvable elements to this resource.
 	 * This resource might still contain resolvable proxies after this method has been called.
 	 * 
-	 * @param a
-	 *            {@link CancelIndicator} can be used to stop the resolution.
+	 * @param mon a {@link CancelIndicator} can be used to stop the resolution.
 	 */
 	public void resolveLazyCrossReferences(final CancelIndicator mon) {
 		final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
@@ -108,7 +118,9 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected void resolveLazyCrossReference(InternalEObject source, EStructuralFeature crossRef) {
-		if (crossRef.isDerived())
+		if (crossRef.isDerived() 
+				|| (crossRef instanceof EReference && !((EReference)crossRef).isResolveProxies())
+				|| crossRef.isTransient())
 			return;
 		if (crossRef.isMany()) {
 			@SuppressWarnings("unchecked")
@@ -160,46 +172,7 @@ public class LazyLinkingResource extends XtextResource {
 		try {
 			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
 				Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
-				try {
-					if (!resolving.add(triple))
-						return handleCyclicResolution(triple);
-					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this,
-							new Provider<Set<String>>() {
-								public Set<String> get() {
-									return Sets.newHashSet();
-								}
-							});
-					if (unresolveableProxies.contains(uriFragment))
-						return null;
-					EReference reference = triple.getSecond();
-					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
-							triple.getThird());
-					if (linkedObjects.isEmpty()) {
-						if (isUnresolveableProxyCacheable(triple))
-							unresolveableProxies.add(uriFragment);
-						createAndAddDiagnostic(triple);
-						return null;
-					}
-					if (linkedObjects.size() > 1)
-						throw new IllegalStateException("linkingService returned more than one object for fragment "
-								+ uriFragment);
-					EObject result = linkedObjects.get(0);
-					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
-						log.error("An element of type " + result.getClass().getName()
-								+ " is not assignable to the reference " + reference.getEContainingClass().getName()
-								+ "." + reference.getName());
-						if (isUnresolveableProxyCacheable(triple))
-							unresolveableProxies.add(uriFragment);
-						createAndAddDiagnostic(triple);
-						return null;
-					}
-					// remove previously added error markers, since everything should be fine now
-					unresolveableProxies.remove(uriFragment);
-					removeDiagnostic(triple);
-					return result;
-				} finally {
-					resolving.remove(triple);
-				}
+				return getEObject(uriFragment, triple);
 			}
 		} catch (RuntimeException e) {
 			getErrors().add(new ExceptionDiagnostic(e));
@@ -209,6 +182,54 @@ public class LazyLinkingResource extends XtextResource {
 			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected EObject getEObject(String uriFragment, Triple<EObject, EReference, INode> triple) throws AssertionError {
+		try {
+			if (!resolving.add(triple))
+				return handleCyclicResolution(triple);
+			Set<String> unresolveableProxies = getUnresolvableURIFragments();
+			if (unresolveableProxies.contains(uriFragment))
+				return null;
+			EReference reference = triple.getSecond();
+			List<EObject> linkedObjects = getLinkingService().getLinkedObjects(
+					triple.getFirst(), 
+					reference,
+					triple.getThird());
+
+			if (linkedObjects.isEmpty()) {
+				if (isUnresolveableProxyCacheable(triple))
+					unresolveableProxies.add(uriFragment);
+				createAndAddDiagnostic(triple);
+				return null;
+			}
+			if (linkedObjects.size() > 1)
+				throw new IllegalStateException("linkingService returned more than one object for fragment "
+						+ uriFragment);
+			EObject result = linkedObjects.get(0);
+			if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
+				log.error("An element of type " + result.getClass().getName()
+						+ " is not assignable to the reference " + reference.getEContainingClass().getName()
+						+ "." + reference.getName());
+				if (isUnresolveableProxyCacheable(triple))
+					unresolveableProxies.add(uriFragment);
+				createAndAddDiagnostic(triple);
+				return null;
+			}
+
+			// remove previously added error markers, since everything should be fine now
+			unresolveableProxies.remove(uriFragment);
+			removeDiagnostic(triple);
+			return result;
+		} catch (IllegalNodeException ex) {
+			createAndAddDiagnostic(triple, ex);
+			return null;
+		} finally {
+			resolving.remove(triple);
+		}
 	}
 
 	/**
@@ -275,8 +296,27 @@ public class LazyLinkingResource extends XtextResource {
 				list.add(diagnostic);
 		}
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected void createAndAddDiagnostic(Triple<EObject, EReference, INode> triple, IllegalNodeException ex) {
+		if (isValidationDisabled())
+			return;
+		ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticMessageContext(triple);
+		DiagnosticMessage message = linkingDiagnosticMessageProvider.getIllegalNodeMessage(context, ex);
+		if (message != null) {
+			List<Diagnostic> list = getDiagnosticList(message);
+			Diagnostic diagnostic = createDiagnostic(triple, message);
+			if (!list.contains(diagnostic))
+				list.add(diagnostic);
+		}
+	}
 
 	protected void removeDiagnostic(Triple<EObject, EReference, INode> triple) {
+		// return early if there's nothing to remove
+		if (getErrors().isEmpty() && getWarnings().isEmpty())
+			return;
 		DiagnosticMessage message = createDiagnosticMessage(triple);
 		List<Diagnostic> list = getDiagnosticList(message);
 		if (!list.isEmpty()) {
@@ -353,5 +393,31 @@ public class LazyLinkingResource extends XtextResource {
 
 	public void setLinkingHelper(LinkingHelper linkingHelper) {
 		this.linkingHelper = linkingHelper;
+	}
+
+	/**
+	 * Marks the given proxy as unresolvable. Further attempts to resolve it by means of {@link #getEObject(String)}
+	 * will yield <code>null</code>.
+	 * @since 2.4
+	 */
+	public void markUnresolvable(EObject referenced) {
+		if (!referenced.eIsProxy()) {
+			throw new IllegalArgumentException("Cannot mark an instance as unresolvable if it is already resolved");
+		}
+		URI proxyURI = ((InternalEObject)referenced).eProxyURI();
+		getUnresolvableURIFragments().add(proxyURI.fragment());
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected Set<String> getUnresolvableURIFragments() {
+		Set<String> unresolveableProxies = getCache().get(UNRESOLVEABLE_PROXIES_KEY, this,
+				new Provider<Set<String>>() {
+					public Set<String> get() {
+						return Sets.newHashSet();
+					}
+				});
+		return unresolveableProxies;
 	}
 }

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types;
 
 import org.eclipse.xtext.common.types.impl.JvmEnumerationTypeImpl;
+import org.junit.Before;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,9 +17,8 @@ public class JvmEnumerationTypeTest extends JvmDeclaredTypeTest {
 
 	private JvmEnumerationTypeImpl enumerationType;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		enumerationType = (JvmEnumerationTypeImpl) TypesFactory.eINSTANCE.createJvmEnumerationType();
 	}
 	

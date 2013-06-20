@@ -30,7 +30,11 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
@@ -38,12 +42,14 @@ import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.DispatchingProvider;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.eclipse.xtext.ui.containers.ContainerStateProvider;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
 import org.eclipse.xtext.ui.editor.PresentationDamager;
+import org.eclipse.xtext.ui.editor.SmartCaretPreferenceInitializer;
 import org.eclipse.xtext.ui.editor.WorkspaceEncodingProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
@@ -58,6 +64,7 @@ import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
+import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreWhitespaceInformationProvider;
 import org.eclipse.xtext.ui.editor.hover.DefaultCompositeHover;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
@@ -89,8 +96,11 @@ import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
+import org.eclipse.xtext.ui.preferences.EclipsePreferencesProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.validation.LanguageAwareMarkerTypeProvider;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -129,9 +139,23 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends IImageHelper> bindIImageHelper() {
 		return PluginImageHelper.class;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends IImageDescriptorHelper> bindIImageDescriptorHelper() {
+		return PluginImageHelper.class;
+	}
 
 	public Class<? extends IIndentationInformation> bindIIndentationInformation() {
 		return PreferenceStoreIndentationInformation.class;
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public Class<? extends IWhitespaceInformationProvider> bindIWhitespaceInformationProvider() {
+		return PreferenceStoreWhitespaceInformationProvider.class;
 	}
 
 	public IPreferenceStore bindIPreferenceStore() {
@@ -326,7 +350,36 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public void configureIResourceDescriptionsLiveScope(Binder binder) {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedResourceDescriptions.class);
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public Class<? extends MarkerTypeProvider> bindMarkerTypeProvider() {
+		return LanguageAwareMarkerTypeProvider.class;
+	}
 
+	/**
+	 * @since 2.4
+	 */
+	public void configureSmartCaretPreferenceInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$
+				.to(SmartCaretPreferenceInitializer.class);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
+		return EclipsePreferencesProvider.class;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends ITraceURIConverter> bindITraceURIConverter() {
+		return DefaultTraceURIConverter.class;
+	}
+	
 }
 
 

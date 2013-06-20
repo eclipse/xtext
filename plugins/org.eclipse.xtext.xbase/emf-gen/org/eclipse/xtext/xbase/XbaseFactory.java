@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase;
 
@@ -116,13 +118,13 @@ public interface XbaseFactory extends EFactory
 	XNullLiteral createXNullLiteral();
 
 	/**
-	 * Returns a new object of class '<em>XInt Literal</em>'.
+	 * Returns a new object of class '<em>XNumber Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XInt Literal</em>'.
+	 * @return a new object of class '<em>XNumber Literal</em>'.
 	 * @generated
 	 */
-	XIntLiteral createXIntLiteral();
+	XNumberLiteral createXNumberLiteral();
 
 	/**
 	 * Returns a new object of class '<em>XString Literal</em>'.
@@ -132,6 +134,24 @@ public interface XbaseFactory extends EFactory
 	 * @generated
 	 */
 	XStringLiteral createXStringLiteral();
+
+	/**
+	 * Returns a new object of class '<em>XList Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XList Literal</em>'.
+	 * @generated
+	 */
+	XListLiteral createXListLiteral();
+
+	/**
+	 * Returns a new object of class '<em>XSet Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XSet Literal</em>'.
+	 * @generated
+	 */
+	XSetLiteral createXSetLiteral();
 
 	/**
 	 * Returns a new object of class '<em>XClosure</em>'.

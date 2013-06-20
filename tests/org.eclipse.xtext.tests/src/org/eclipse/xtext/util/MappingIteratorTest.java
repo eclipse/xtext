@@ -10,7 +10,8 @@ package org.eclipse.xtext.util;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
@@ -18,25 +19,25 @@ import com.google.common.collect.Iterators;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MappingIteratorTest extends TestCase implements Function<String, String> {
+public class MappingIteratorTest extends Assert implements Function<String, String> {
 
 	public String apply(String param) {
 		return param + "->" + param;
 	}
 	
-	public void testEmptyIter() {
+	@Test public void testEmptyIter() {
 		Iterator<String> iter = createMappingIterator(new String[]{});
 		assertFalse(iter.hasNext());
 	}
 	
-	public void testSingleElementIter() {
+	@Test public void testSingleElementIter() {
 		Iterator<String> iter = createMappingIterator("a");
 		assertTrue(iter.hasNext());
 		assertEquals("a->a", iter.next());
 		assertFalse(iter.hasNext());
 	}
 	
-	public void testMultiElementIter() {
+	@Test public void testMultiElementIter() {
 		Iterator<String> iter = createMappingIterator("a", "b", "c");
 		assertEquals("a->a", iter.next());
 		assertEquals("b->b", iter.next());
@@ -44,7 +45,7 @@ public class MappingIteratorTest extends TestCase implements Function<String, St
 		assertFalse(iter.hasNext());
 	}
 	
-	public void testNullIter() {
+	@Test public void testNullIter() {
 		try {
 			Iterators.transform(null, this);
 			fail("NPE expected");
@@ -53,7 +54,7 @@ public class MappingIteratorTest extends TestCase implements Function<String, St
 		}
 	}
 	
-	public void testNullFunction() {
+	@Test public void testNullFunction() {
 		try {
 			Iterators.transform(createMappingIterator("a"), null);
 		} catch(NullPointerException e) {

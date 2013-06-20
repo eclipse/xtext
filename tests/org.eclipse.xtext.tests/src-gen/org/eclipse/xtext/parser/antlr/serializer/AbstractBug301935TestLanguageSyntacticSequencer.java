@@ -11,8 +11,8 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
-@SuppressWarnings("restriction")
-public class AbstractBug301935TestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractBug301935TestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected Bug301935TestLanguageGrammarAccess grammarAccess;
 	
@@ -30,11 +30,19 @@ public class AbstractBug301935TestLanguageSyntacticSequencer extends AbstractSyn
 		return "";
 	}
 	
+	/**
+	 * NL:
+	 * 	WS* ('\r'? '\n') WS*;
+	 */
 	protected String getNLToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "\n";
 	}
+	
+	/**
+	 * terminal WS			: (' '|'\t')+;
+	 */
 	protected String getWSToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);

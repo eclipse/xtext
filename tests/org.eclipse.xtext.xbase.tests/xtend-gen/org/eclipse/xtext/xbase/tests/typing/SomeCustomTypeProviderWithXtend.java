@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.tests.typing;
 
 import com.google.inject.Singleton;
+import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -22,15 +23,19 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -41,10 +46,9 @@ import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvid
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypeProvider {
   protected JvmTypeReference _type(final XBinaryOperation binaryOperation, final JvmTypeReference rawExpectation, final boolean rawType) {
     JvmTypeReference _xifexpression = null;
@@ -82,6 +86,12 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
   public JvmTypeReference type(final XExpression binaryOperation, final JvmTypeReference rawExpectation, final boolean rawType) {
     if (binaryOperation instanceof XBinaryOperation) {
       return _type((XBinaryOperation)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XFeatureCall) {
+      return _type((XFeatureCall)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XListLiteral) {
+      return _type((XListLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XSetLiteral) {
+      return _type((XSetLiteral)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAbstractFeatureCall) {
       return _type((XAbstractFeatureCall)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAbstractWhileExpression) {
@@ -102,10 +112,10 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _type((XIfExpression)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XInstanceOfExpression) {
       return _type((XInstanceOfExpression)binaryOperation, rawExpectation, rawType);
-    } else if (binaryOperation instanceof XIntLiteral) {
-      return _type((XIntLiteral)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XNullLiteral) {
       return _type((XNullLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XNumberLiteral) {
+      return _type((XNumberLiteral)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XReturnExpression) {
       return _type((XReturnExpression)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XStringLiteral) {
@@ -124,10 +134,11 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _type((XAnnotation)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAnnotationElementValueBinaryOperation) {
       return _type((XAnnotationElementValueBinaryOperation)binaryOperation, rawExpectation, rawType);
-    } else if (binaryOperation instanceof XAnnotationValueArray) {
-      return _type((XAnnotationValueArray)binaryOperation, rawExpectation, rawType);
-    } else {
+    } else if (binaryOperation != null) {
       return _type(binaryOperation, rawExpectation, rawType);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(binaryOperation, rawExpectation, rawType).toString());
     }
   }
   
@@ -144,12 +155,12 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _expectedType((XAbstractWhileExpression)assignment, reference, index, rawType);
     } else if (assignment instanceof XBlockExpression) {
       return _expectedType((XBlockExpression)assignment, reference, index, rawType);
-    } else if (assignment instanceof XCasePart) {
-      return _expectedType((XCasePart)assignment, reference, index, rawType);
     } else if (assignment instanceof XCastedExpression) {
       return _expectedType((XCastedExpression)assignment, reference, index, rawType);
     } else if (assignment instanceof XClosure) {
       return _expectedType((XClosure)assignment, reference, index, rawType);
+    } else if (assignment instanceof XCollectionLiteral) {
+      return _expectedType((XCollectionLiteral)assignment, reference, index, rawType);
     } else if (assignment instanceof XConstructorCall) {
       return _expectedType((XConstructorCall)assignment, reference, index, rawType);
     } else if (assignment instanceof XForLoopExpression) {
@@ -170,40 +181,44 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _expectedType((XAnnotation)assignment, reference, index, rawType);
     } else if (assignment instanceof XAnnotationElementValueBinaryOperation) {
       return _expectedType((XAnnotationElementValueBinaryOperation)assignment, reference, index, rawType);
-    } else if (assignment instanceof XAnnotationValueArray) {
-      return _expectedType((XAnnotationValueArray)assignment, reference, index, rawType);
+    } else if (assignment instanceof XCasePart) {
+      return _expectedType((XCasePart)assignment, reference, index, rawType);
     } else if (assignment instanceof XCatchClause) {
       return _expectedType((XCatchClause)assignment, reference, index, rawType);
     } else if (assignment instanceof XAnnotationElementValuePair) {
       return _expectedType((XAnnotationElementValuePair)assignment, reference, index, rawType);
-    } else {
+    } else if (assignment != null) {
       return _expectedType(assignment, reference, index, rawType);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(assignment, reference, index, rawType).toString());
     }
   }
   
   public JvmTypeReference typeForIdentifiable(final JvmIdentifiableElement constructor, final boolean rawType) {
     if (constructor instanceof JvmConstructor) {
       return _typeForIdentifiable((JvmConstructor)constructor, rawType);
-    } else if (constructor instanceof JvmGenericType) {
-      return _typeForIdentifiable((JvmGenericType)constructor, rawType);
     } else if (constructor instanceof JvmOperation) {
       return _typeForIdentifiable((JvmOperation)constructor, rawType);
-    } else if (constructor instanceof JvmDeclaredType) {
-      return _typeForIdentifiable((JvmDeclaredType)constructor, rawType);
     } else if (constructor instanceof JvmField) {
       return _typeForIdentifiable((JvmField)constructor, rawType);
+    } else if (constructor instanceof JvmGenericType) {
+      return _typeForIdentifiable((JvmGenericType)constructor, rawType);
+    } else if (constructor instanceof JvmDeclaredType) {
+      return _typeForIdentifiable((JvmDeclaredType)constructor, rawType);
     } else if (constructor instanceof JvmFormalParameter) {
       return _typeForIdentifiable((JvmFormalParameter)constructor, rawType);
     } else if (constructor instanceof JvmType) {
       return _typeForIdentifiable((JvmType)constructor, rawType);
-    } else if (constructor instanceof XCasePart) {
-      return _typeForIdentifiable((XCasePart)constructor, rawType);
     } else if (constructor instanceof XSwitchExpression) {
       return _typeForIdentifiable((XSwitchExpression)constructor, rawType);
     } else if (constructor instanceof XVariableDeclaration) {
       return _typeForIdentifiable((XVariableDeclaration)constructor, rawType);
-    } else {
+    } else if (constructor != null) {
       return _typeForIdentifiable(constructor, rawType);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(constructor, rawType).toString());
     }
   }
 }

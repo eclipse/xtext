@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<feature id="org.eclipse.xtend.sdk" version="0.0.0">
+      <category name="xtend${package.qualifier}"/>
+   </feature>
+   <category-def name="xtend${package.qualifier}" label="Xtend${package.qualifier}">
+      <description>
+	Xtend is a statically-typed programming language which is tightly integrated
+	with and runs on the Java Virtual Machine. 
+      </description>
+   </category-def>
+</site>

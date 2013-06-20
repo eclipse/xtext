@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * A cache implementation that stores its values in the scope of a resource.
@@ -35,6 +37,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Singleton
 public class OnChangeEvictingCache implements IResourceScopeCache {
 	
 	private static final Logger log = Logger.getLogger(OnChangeEvictingCache.class);
@@ -67,13 +70,16 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			return provider.get();
 		}
 		CacheAdapter adapter = getOrCreate(resource);
-		T element = adapter.<T>get(key);
+		T element = adapter.<T>internalGet(key);
 		if (element==null) {
 			element = provider.get();
 			cacheMiss(adapter);
 			adapter.set(key, element);
 		} else {
 			cacheHit(adapter);
+		}
+		if (element == CacheAdapter.NULL) {
+			return null;
 		}
 		return element;
 	}
@@ -171,14 +177,14 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		
 		private static final Object NULL = new Object();
 		
-		private Map<Object, Object> values = new ConcurrentHashMap<Object, Object>(500);
+		private final Map<Object, Object> values = new ConcurrentHashMap<Object, Object>(500);
 
-		private Collection<Listener> listeners = Sets.newLinkedHashSet();
+		private final Collection<Listener> listeners = Sets.newLinkedHashSet();
 		
 		@Deprecated
 		private volatile boolean ignoreNotifications = false;
 		
-		private volatile int ignoreNotificationCounter = 0;
+		private final AtomicInteger ignoreNotificationCounter = new AtomicInteger(0);
 		
 		private volatile boolean empty = true;
 		
@@ -205,8 +211,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		 * @since 2.1
 		 */
 		public void listenToNotifications() {
-			ignoreNotificationCounter--;
-			if (ignoreNotificationCounter < 0) {
+			if (ignoreNotificationCounter.decrementAndGet() < 0) {
 				throw new IllegalStateException("ignoreNotificationCounter may not be less than zero");
 			}
 		}
@@ -215,7 +220,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		 * @since 2.1
 		 */
 		public void ignoreNotifications() {
-			ignoreNotificationCounter++;
+			ignoreNotificationCounter.incrementAndGet();
 		}
 
 		/**
@@ -233,10 +238,15 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		}
 		
 		@SuppressWarnings("unchecked")
-		public <T> T get(Object name) {
+		private <T> T internalGet(Object name) {
 			if (empty)
 				return null;
-			T result = (T) this.values.get(name);
+			return (T) this.values.get(name);
+			
+		}
+		
+		public <T> T get(Object name) {
+			T result = internalGet(name);
 			if (result != NULL)
 				return result;
 			return null;
@@ -253,7 +263,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
-			if (ignoreNotificationCounter == 0 && !ignoreNotifications && isSemanticStateChange(notification)) {
+			if (ignoreNotificationCounter.get() == 0 && !ignoreNotifications && isSemanticStateChange(notification)) {
 				clearValues();
 				Iterator<Listener> iter = listeners.iterator();
 				while(iter.hasNext()) {
@@ -296,7 +306,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		}
 
 		public boolean isIgnoreNotifications() {
-			return ignoreNotificationCounter > 0 || ignoreNotifications;
+			return ignoreNotificationCounter.get() > 0 || ignoreNotifications;
 		}
 		
 		private IgnoreValuesMemento ignoreNewValues() {

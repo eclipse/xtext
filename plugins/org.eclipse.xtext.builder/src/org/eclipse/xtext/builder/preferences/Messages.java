@@ -19,6 +19,8 @@ public class Messages extends NLS {
 	public static String BuilderConfigurationBlock_BuildJob_TitleBuildAll_TaskName;
 	public static String BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName;
 	public static String BuilderConfigurationBlock_GeneralSection_Label;
+	public static String BuilderConfigurationBlock_hideSyntheticLocalVariables;
+	public static String BuilderConfigurationBlock_InstallDslAsPrimarySource;
 	public static String BuilderConfigurationBlock_SettingsChanged_ProjectBuild;
 	public static String BuilderConfigurationBlock_SettingsChanged_Title;
 	public static String BuilderConfigurationBlock_SettingsChanged_WorkspaceBuild;
@@ -30,15 +32,7 @@ public class Messages extends NLS {
 	public static String OutputConfigurationPage_CreatesDerivedResources;
 	public static String OutputConfigurationPage_Directory;
 	public static String OutputConfigurationPage_OverrideExistingResources;
-	public static String ProjectDirectoryFieldEditor_OutputDirectory;
-
-	public static String PropertyAndPreferencePage_useworkspacesettings_change;
-	public static String PropertyAndPreferencePage_showprojectspecificsettings_label;
-	public static String PropertyAndPreferencePage_useprojectsettings_label;
-
-	public static String ProjectSelectionDialog_title;
-	public static String ProjectSelectionDialog_desciption;
-	public static String ProjectSelectionDialog_filter;
+	
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

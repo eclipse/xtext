@@ -1,36 +1,51 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.generator.serializer;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaFile;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencer;
+import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
+import org.eclipse.xtext.nodemodel.BidiIterable;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class AbstractSyntacticSequencer extends GeneratedFile {
@@ -38,39 +53,43 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   private Grammar grammar;
   
   @Inject
+  @Extension
   private GrammarAccess grammarAccess;
   
   @Inject
-  private SyntacticSequencer sequencer;
-  
-  @Inject
+  @Extension
   private SyntacticSequencerUtil util;
   
-  public String getQualifiedName(final Grammar grammar) {
-    String _name = this.getName(grammar, "Abstract", "SyntacticSequencer");
-    return _name;
-  }
-  
-  public CharSequence getFileContents() {
+  public CharSequence getFileContents(final GenFileName filename) {
     String _xblockexpression = null;
     {
-      String _packageName = this.getPackageName();
+      String _packageName = filename.getPackageName();
       JavaFile _javaFile = new JavaFile(_packageName);
       final JavaFile file = _javaFile;
       file.imported(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer.class);
-      file.imported(org.eclipse.xtext.RuleCall.class);
-      file.imported(org.eclipse.xtext.nodemodel.INode.class);
-      file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition.class);
-      file.imported(com.google.inject.Inject.class);
-      file.imported(org.eclipse.xtext.IGrammarAccess.class);
-      file.imported(org.eclipse.emf.ecore.EObject.class);
-      file.imported(java.util.List.class);
-      file.imported(org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias.class);
+      file.imported(RuleCall.class);
+      file.imported(INode.class);
+      file.imported(ISynTransition.class);
+      file.imported(Inject.class);
+      file.imported(IGrammarAccess.class);
+      file.imported(EObject.class);
+      file.imported(List.class);
+      file.imported(AbstractElementAlias.class);
+      String _xifexpression = null;
+      boolean _isAbstract = filename.isAbstract();
+      if (_isAbstract) {
+        _xifexpression = "abstract ";
+      } else {
+        _xifexpression = "";
+      }
+      final String _abstract = _xifexpression;
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("@SuppressWarnings(\"restriction\")");
+      _builder.append("@SuppressWarnings(\"all\")");
       _builder.newLine();
-      _builder.append("public class ");
-      String _simpleName = this.getSimpleName();
+      _builder.append("public ");
+      _builder.append(_abstract, "");
+      _builder.append("class ");
+      String _simpleName = filename.getSimpleName();
       _builder.append(_simpleName, "");
       _builder.append(" extends AbstractSyntacticSequencer {");
       _builder.newLineIfNotEmpty();
@@ -132,16 +151,22 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      StringConcatenation _genGetUnassignedRuleCallTokens = this.genGetUnassignedRuleCallTokens(file);
+      CharSequence _genGetUnassignedRuleCallTokens = this.genGetUnassignedRuleCallTokens(file);
       _builder.append(_genGetUnassignedRuleCallTokens, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       {
         List<AbstractRule> _unassignedCalledTokenRules = this.unassignedCalledTokenRules();
+        boolean _hasElements = false;
         for(final AbstractRule rule : _unassignedCalledTokenRules) {
+          if (!_hasElements) {
+            _hasElements = true;
+          } else {
+            _builder.appendImmediate("\n", "	");
+          }
           _builder.append("\t");
-          StringConcatenation _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule);
+          CharSequence _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule);
           _builder.append(_genGetUnassignedRuleCallToken, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -149,7 +174,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      StringConcatenation _genEmitUnassignedTokens = this.genEmitUnassignedTokens(file);
+      CharSequence _genEmitUnassignedTokens = this.genEmitUnassignedTokens(file);
       _builder.append(_genEmitUnassignedTokens, "	");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -178,7 +203,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           String _first_2 = group_2.getFirst();
           _builder.append(_first_2, "	");
           _builder.append("(EObject semanticObject, ");
-          String _imported_3 = file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable.class);
+          String _imported_3 = file.imported(ISynNavigable.class);
           _builder.append(_imported_3, "	");
           _builder.append(" transition, List<INode> nodes) {");
           _builder.newLineIfNotEmpty();
@@ -196,7 +221,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      file.setBody(_string);
+      file.body = _string;
       String _string_1 = file.toString();
       _xblockexpression = (_string_1);
     }
@@ -208,29 +233,19 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     {
       List<AbstractRule> _allRules = GrammarUtil.allRules(this.grammar);
       final Function1<AbstractRule,Boolean> _function = new Function1<AbstractRule,Boolean>() {
-          public Boolean apply(final AbstractRule e) {
-            boolean _isEObjectRule = GrammarUtil.isEObjectRule(e);
-            return ((Boolean)_isEObjectRule);
+          public Boolean apply(final AbstractRule it) {
+            boolean _isEObjectRule = GrammarUtil.isEObjectRule(it);
+            return Boolean.valueOf(_isEObjectRule);
           }
         };
-      Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_allRules, _function);
-      final Iterable<AbstractRule> rules = _filter;
+      final Iterable<AbstractRule> rules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
       final Function1<AbstractRule,Iterable<RuleCall>> _function_1 = new Function1<AbstractRule,Iterable<RuleCall>>() {
           public Iterable<RuleCall> apply(final AbstractRule r) {
             List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(r);
             final Function1<RuleCall,Boolean> _function = new Function1<RuleCall,Boolean>() {
                 public Boolean apply(final RuleCall e) {
-                  boolean _operator_and = false;
-                  boolean _isAssigned = GrammarUtil.isAssigned(e);
-                  boolean _operator_not = BooleanExtensions.operator_not(_isAssigned);
-                  if (!_operator_not) {
-                    _operator_and = false;
-                  } else {
-                    boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(e);
-                    boolean _operator_not_1 = BooleanExtensions.operator_not(_isEObjectRuleCall);
-                    _operator_and = BooleanExtensions.operator_and(_operator_not, _operator_not_1);
-                  }
-                  return ((Boolean)_operator_and);
+                  boolean _isUnassignedRuleCall = AbstractSyntacticSequencer.this.isUnassignedRuleCall(e);
+                  return Boolean.valueOf(_isUnassignedRuleCall);
                 }
               };
             Iterable<RuleCall> _filter = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
@@ -238,35 +253,49 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           }
         };
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
-      Iterable<RuleCall> _flatten = IterableExtensions.<RuleCall>flatten(_map);
-      final Iterable<RuleCall> calls = _flatten;
+      final Iterable<RuleCall> calls = Iterables.<RuleCall>concat(_map);
       final Function1<RuleCall,AbstractRule> _function_2 = new Function1<RuleCall,AbstractRule>() {
-          public AbstractRule apply(final RuleCall e) {
-            AbstractRule _rule = e.getRule();
+          public AbstractRule apply(final RuleCall it) {
+            AbstractRule _rule = it.getRule();
             return _rule;
           }
         };
       Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(calls, _function_2);
       Set<AbstractRule> _set = IterableExtensions.<AbstractRule>toSet(_map_1);
-      final Function2<AbstractRule,AbstractRule,Integer> _function_3 = new Function2<AbstractRule,AbstractRule,Integer>() {
-          public Integer apply(final AbstractRule r1 , final AbstractRule r2) {
-            String _name = r1.getName();
-            String _name_1 = r2.getName();
-            int _compareTo = _name.compareTo(_name_1);
-            return _compareTo;
+      final Function1<AbstractRule,String> _function_3 = new Function1<AbstractRule,String>() {
+          public String apply(final AbstractRule it) {
+            String _name = it.getName();
+            return _name;
           }
         };
-      List<AbstractRule> _sort = IterableExtensions.<AbstractRule>sort(_set, new Comparator<AbstractRule>() {
-          public int compare(AbstractRule o1,AbstractRule o2) {
-            return _function_3.apply(o1,o2);
-          }
-      });
-      _xblockexpression = (_sort);
+      List<AbstractRule> _sortBy = IterableExtensions.<AbstractRule, String>sortBy(_set, _function_3);
+      _xblockexpression = (_sortBy);
     }
     return _xblockexpression;
   }
   
-  public StringConcatenation unassignedCalledTokenRuleName(final AbstractRule rule) {
+  public boolean isUnassignedRuleCall(final RuleCall c) {
+    boolean _xblockexpression = false;
+    {
+      boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(c);
+      if (_isEObjectRuleCall) {
+        return false;
+      }
+      final Assignment ass = GrammarUtil.containingAssignment(c);
+      boolean _or = false;
+      boolean _equals = Objects.equal(ass, null);
+      if (_equals) {
+        _or = true;
+      } else {
+        boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(ass);
+        _or = (_equals || _isBooleanAssignment);
+      }
+      _xblockexpression = (_or);
+    }
+    return _xblockexpression;
+  }
+  
+  public CharSequence unassignedCalledTokenRuleName(final AbstractRule rule) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("get");
     String _name = rule.getName();
@@ -277,74 +306,73 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   
   public String defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
     String _switchResult = null;
-    final AbstractElement ele_1 = ele;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       boolean _add = visited.add(ele);
-      boolean _operator_not = BooleanExtensions.operator_not(_add);
-      if (_operator_not) {
-        matched=true;
+      boolean _not = (!_add);
+      if (_not) {
+        _matched=true;
         _switchResult = "";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(ele);
       if (_isOptionalCardinality) {
-        matched=true;
+        _matched=true;
         _switchResult = "";
       }
     }
-    if (!matched) {
-      if (ele_1 instanceof Alternatives) {
-        final Alternatives ele_2 = (Alternatives) ele_1;
-        matched=true;
-        EList<AbstractElement> _elements = ele_2.getElements();
+    if (!_matched) {
+      if (ele instanceof Alternatives) {
+        final Alternatives _alternatives = (Alternatives)ele;
+        _matched=true;
+        EList<AbstractElement> _elements = _alternatives.getElements();
         AbstractElement _head = IterableExtensions.<AbstractElement>head(_elements);
         String _defaultValue = this.defaultValue(_head, visited);
         _switchResult = _defaultValue;
       }
     }
-    if (!matched) {
-      if (ele_1 instanceof Group) {
-        final Group ele_3 = (Group) ele_1;
-        matched=true;
-        EList<AbstractElement> _elements_1 = ele_3.getElements();
+    if (!_matched) {
+      if (ele instanceof Group) {
+        final Group _group = (Group)ele;
+        _matched=true;
+        EList<AbstractElement> _elements = _group.getElements();
         final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
             public String apply(final AbstractElement e) {
               String _defaultValue = AbstractSyntacticSequencer.this.defaultValue(e, visited);
               return _defaultValue;
             }
           };
-        List<String> _map = ListExtensions.<AbstractElement, String>map(_elements_1, _function);
+        List<String> _map = ListExtensions.<AbstractElement, String>map(_elements, _function);
         String _join = IterableExtensions.join(_map);
         _switchResult = _join;
       }
     }
-    if (!matched) {
-      if (ele_1 instanceof Keyword) {
-        final Keyword ele_4 = (Keyword) ele_1;
-        matched=true;
-        String _value = ele_4.getValue();
+    if (!_matched) {
+      if (ele instanceof Keyword) {
+        final Keyword _keyword = (Keyword)ele;
+        _matched=true;
+        String _value = _keyword.getValue();
         _switchResult = _value;
       }
     }
-    if (!matched) {
-      if (ele_1 instanceof RuleCall) {
-        final RuleCall ele_5 = (RuleCall) ele_1;
-        matched=true;
-        AbstractRule _rule = ele_5.getRule();
+    if (!_matched) {
+      if (ele instanceof RuleCall) {
+        final RuleCall _ruleCall = (RuleCall)ele;
+        _matched=true;
+        AbstractRule _rule = _ruleCall.getRule();
         AbstractElement _alternatives = _rule.getAlternatives();
-        String _defaultValue_1 = this.defaultValue(_alternatives, visited);
-        _switchResult = _defaultValue_1;
+        String _defaultValue = this.defaultValue(_alternatives, visited);
+        _switchResult = _defaultValue;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       _switchResult = "";
     }
     return _switchResult;
   }
   
-  public StringConcatenation genGetUnassignedRuleCallTokens(final JavaFile file) {
+  public CharSequence genGetUnassignedRuleCallTokens(final JavaFile file) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
     _builder.newLine();
@@ -358,10 +386,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       for(final AbstractRule rule : _unassignedCalledTokenRules) {
         _builder.append("\t");
         {
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
-          int _i = i = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_i), ((Integer)1));
-          if (_operator_greaterThan) {
+          int _plus = (i + 1);
+          int _i = i = _plus;
+          boolean _greaterThan = (_i > 1);
+          if (_greaterThan) {
             _builder.append("else ");
           }
         }
@@ -373,7 +401,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("return ");
-        StringConcatenation _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
+        CharSequence _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
         _builder.append(_unassignedCalledTokenRuleName, "		");
         _builder.append("(semanticObject, ruleCall, node);");
         _builder.newLineIfNotEmpty();
@@ -387,10 +415,70 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _builder;
   }
   
-  public StringConcatenation genGetUnassignedRuleCallToken(final JavaFile file, final AbstractRule rule) {
+  public String textWithoutComments(final INode node) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (node instanceof ILeafNode) {
+        final ILeafNode _iLeafNode = (ILeafNode)node;
+        boolean _or = false;
+        boolean _isHidden = _iLeafNode.isHidden();
+        boolean _not = (!_isHidden);
+        if (_not) {
+          _or = true;
+        } else {
+          String _text = _iLeafNode.getText();
+          String _trim = _text.trim();
+          int _length = _trim.length();
+          boolean _equals = (_length == 0);
+          _or = (_not || _equals);
+        }
+        if (_or) {
+          _matched=true;
+          String _text_1 = _iLeafNode.getText();
+          _switchResult = _text_1;
+        }
+      }
+    }
+    if (!_matched) {
+      if (node instanceof ICompositeNode) {
+        final ICompositeNode _iCompositeNode = (ICompositeNode)node;
+        _matched=true;
+        BidiIterable<INode> _children = _iCompositeNode.getChildren();
+        final Function1<INode,String> _function = new Function1<INode,String>() {
+            public String apply(final INode it) {
+              String _textWithoutComments = AbstractSyntacticSequencer.this.textWithoutComments(it);
+              return _textWithoutComments;
+            }
+          };
+        Iterable<String> _map = IterableExtensions.<INode, String>map(_children, _function);
+        String _join = IterableExtensions.join(_map);
+        _switchResult = _join;
+      }
+    }
+    if (!_matched) {
+      _switchResult = "";
+    }
+    return _switchResult;
+  }
+  
+  public CharSequence genGetUnassignedRuleCallToken(final JavaFile file, final AbstractRule rule) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* ");
+    ICompositeNode _node = NodeModelUtils.getNode(rule);
+    String _textWithoutComments = this.textWithoutComments(_node);
+    String _trim = _textWithoutComments.trim();
+    String _replace = _trim.replace("\n", "\n* ");
+    _builder.append(_replace, " ");
+    _builder.newLineIfNotEmpty();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
     _builder.append("protected String ");
-    StringConcatenation _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
+    CharSequence _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
     _builder.append(_unassignedCalledTokenRuleName, "");
     _builder.append("(EObject semanticObject, RuleCall ruleCall, INode node) {");
     _builder.newLineIfNotEmpty();
@@ -414,7 +502,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _builder;
   }
   
-  public StringConcatenation genEmitUnassignedTokens(final JavaFile file) {
+  public CharSequence genEmitUnassignedTokens(final JavaFile file) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
     _builder.newLine();
@@ -440,10 +528,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       for(final Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
         _builder.append("\t\t");
         {
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
-          int _i = i = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_i), ((Integer)1));
-          if (_operator_greaterThan) {
+          int _plus = (i + 1);
+          int _i = i = _plus;
+          boolean _greaterThan = (_i > 1);
+          if (_greaterThan) {
             _builder.append("else ");
           }
         }
@@ -463,8 +551,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     }
     _builder.append("\t\t");
     {
-      boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
-      if (_operator_greaterThan_1) {
+      boolean _greaterThan_1 = (i > 0);
+      if (_greaterThan_1) {
         _builder.append("else ");
       }
     }

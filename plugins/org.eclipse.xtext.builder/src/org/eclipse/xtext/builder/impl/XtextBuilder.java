@@ -30,6 +30,8 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -58,7 +60,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private RegistryBuilderParticipant participant;
-	
+
 	@Inject
 	private QueuedBuildData queuedBuildData;
 
@@ -70,7 +72,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		long startTime = System.currentTimeMillis();
+		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
+			task.start();
 			if (monitor != null) {
 				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
 				monitor = new ProgressMonitorWrapper(monitor) {
@@ -103,8 +107,25 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			if (monitor != null)
 				monitor.done();
 			log.info("Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms");
+			task.stop();
 		}
 		return getProject().getReferencedProjects();
+	}
+
+	private String getKindAsString(int kind) {
+		if (kind == FULL_BUILD) {
+			return "FULL";
+		}
+		if (kind == CLEAN_BUILD) {
+			return "CLEAN";
+		}
+		if (kind == INCREMENTAL_BUILD) {
+			return "INCREMENTAL";
+		}
+		if (kind == AUTO_BUILD) {
+			return "AUTO";
+		}
+		return "UNKOWN:" + kind;
 	}
 
 	/**
@@ -113,7 +134,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 *        reported and that the operation cannot be cancelled.
 	 */
 	protected void incrementalBuild(IResourceDelta delta, final IProgressMonitor monitor) throws CoreException {
-		final SubMonitor progress = SubMonitor.convert(monitor, Messages.XtextBuilder_CollectingResources, 2);
+		final SubMonitor progress = SubMonitor.convert(monitor, Messages.XtextBuilder_CollectingResources, 10);
 		progress.subTask(Messages.XtextBuilder_CollectingResources);
 
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
@@ -137,8 +158,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		delta.accept(visitor);
 		if (progress.isCanceled())
 			throw new OperationCanceledException();
-		progress.worked(1);
-		doBuild(toBeBuilt, progress.newChild(1), BuildType.INCREMENTAL);
+		progress.worked(2);
+		doBuild(toBeBuilt, progress.newChild(8), BuildType.INCREMENTAL);
 	}
 
 	/**
@@ -147,8 +168,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 *        reported and that the operation cannot be cancelled.
 	 */
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor, BuildType type) throws CoreException {
+		// return early if there's nothing to do.
+		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
+		// and would be expensive to create.
+		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData).isEmpty())
+			return;
+		
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		if (resourceSet instanceof ResourceSetImpl) {
@@ -159,6 +185,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		if (participant != null) {
 			participant.build(new BuildContext(this, resourceSet, deltas, type),
 					progress.newChild(1));
+			getProject().getWorkspace().checkpoint(false);
 		} else {
 			progress.worked(1);
 		}
@@ -173,14 +200,14 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 *        reported and that the operation cannot be cancelled.
 	 */
 	protected void fullBuild(final IProgressMonitor monitor, boolean isRecoveryBuild) throws CoreException {
-		SubMonitor progress = SubMonitor.convert(monitor, 2);
+		SubMonitor progress = SubMonitor.convert(monitor, 10);
 
 		IProject project = getProject();
 		ToBeBuilt toBeBuilt = 
 			isRecoveryBuild
-				? toBeBuiltComputer.updateProjectNewResourcesOnly(project, progress.newChild(1)) 
-				: toBeBuiltComputer.updateProject(project, progress.newChild(1));
-		doBuild(toBeBuilt, progress.newChild(1), 
+				? toBeBuiltComputer.updateProjectNewResourcesOnly(project, progress.newChild(2)) 
+				: toBeBuiltComputer.updateProject(project, progress.newChild(2));
+		doBuild(toBeBuilt, progress.newChild(8), 
 			isRecoveryBuild 
 				? BuildType.RECOVERY 
 				: BuildType.FULL);
@@ -199,10 +226,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 */
 	@Override
 	protected void clean(IProgressMonitor monitor) throws CoreException {
-		SubMonitor progress = SubMonitor.convert(monitor, 2);
+		SubMonitor progress = SubMonitor.convert(monitor, 10);
 		try {
-			ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject(getProject(), progress.newChild(1));
-			doClean(toBeBuilt, progress.newChild(1));
+			ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject(getProject(), progress.newChild(2));
+			doClean(toBeBuilt, progress.newChild(8));
 		} finally {
 			if (monitor != null)
 				monitor.done();
@@ -227,4 +254,5 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			progress.worked(1);
 		}
 	}
+	
 }

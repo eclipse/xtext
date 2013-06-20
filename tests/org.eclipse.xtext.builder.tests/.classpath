@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="src-gen"/>
+	<classpathentry kind="src" path="src-longrunning"/>
+	<classpathentry kind="src" path="src-no-jdt"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

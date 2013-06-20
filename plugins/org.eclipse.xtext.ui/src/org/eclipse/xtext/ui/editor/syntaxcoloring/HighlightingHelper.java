@@ -57,13 +57,22 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 
 	public void install(XtextEditor editor, XtextSourceViewer sourceViewer) {
 		fEditor= editor;
-		fSourceViewer= sourceViewer;
 		if (fEditor != null) {
-			fConfiguration= editor.getXtextSourceViewerConfiguration();
+			install(editor.getXtextSourceViewerConfiguration(), sourceViewer) ;
+		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public void install(XtextSourceViewerConfiguration configuration, XtextSourceViewer sourceViewer) {
+		fSourceViewer= sourceViewer;
+		fConfiguration= configuration;
+		if(sourceViewer != null && configuration != null){
 			fPresentationReconciler= (XtextPresentationReconciler) fConfiguration.getPresentationReconciler(sourceViewer);
 		} else {
-			fConfiguration= null;
-			fPresentationReconciler= null;
+			fPresentationReconciler = null;
+			fConfiguration = null;
 		}
 		preferenceStore = getPreferenceStoreAccessor().getPreferenceStore();
 		preferenceStore.addPropertyChangeListener(this);
@@ -77,7 +86,7 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 		fPresenter= getPresenterProvider().get();
 		fPresenter.install(fSourceViewer, fPresentationReconciler);
 
-		if (fEditor != null) {
+		if (fSourceViewer.getDocument() != null) {
 			fReconciler= reconcilerProvider.get();
 			fReconciler.install(fEditor, fSourceViewer, fPresenter);
 		}
@@ -148,4 +157,5 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 			fReconciler.refresh();
 		}
 	}
+
 }

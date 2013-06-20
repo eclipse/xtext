@@ -33,8 +33,10 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 			ITextRegion location = locationInFileProvider.getSignificantTextRegion(obj);
 			if (location != null) {
 				ICompositeNode rootNode = NodeModelUtils.getNode(EcoreUtil.getRootContainer(obj));
-				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, location.getOffset());
-				return getLocationForNode(leafNode);
+				if (rootNode != null) {
+					ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, location.getOffset());
+					return getLocationForNode(leafNode);
+				}
 			} else {
 				return super.getLocationData(obj.eContainer(), null, index);
 			}

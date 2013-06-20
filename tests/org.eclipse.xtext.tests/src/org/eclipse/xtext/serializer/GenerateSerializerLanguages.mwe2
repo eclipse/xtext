@@ -14,7 +14,6 @@ import org.eclipse.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
-var generateDotDiagram = true
 //var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
 Workflow {
 	bean = StandaloneSetup {
@@ -32,27 +31,21 @@ Workflow {
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext"
 			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {
-				//generateDebugData = true
-			}
 		}
 
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext"
-			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {
-				// generateDebugData = true
+			fragment = @ TestLanguagesFragments auto-inject {
+				srcGenOnly = false
 			}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/ContextFinderTestLanguage.xtext"
 			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.xtext"
 			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {}
 		}
 	}
 }

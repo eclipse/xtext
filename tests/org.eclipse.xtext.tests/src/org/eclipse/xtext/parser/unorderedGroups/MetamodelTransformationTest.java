@@ -14,8 +14,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,12 +24,12 @@ import org.eclipse.xtext.resource.XtextResource;
 public class MetamodelTransformationTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 	
-	public void testBooleanAssignments() throws Exception {
+	@Test public void testBooleanAssignments() throws Exception {
 		EClass clazz = getModel("a?='keyword' & b?='keyword'");
 		assertNotNull(clazz.getEStructuralFeature("a"));
 		EStructuralFeature feature = clazz.getEStructuralFeature("b");
@@ -36,7 +37,7 @@ public class MetamodelTransformationTest extends AbstractXtextTests {
 		assertFalse(feature.isMany());
 	}
 	
-	public void testSimpleAssignments() throws Exception {
+	@Test public void testSimpleAssignments() throws Exception {
 		EClass clazz = getModel("a='keyword' & b='keyword'");
 		assertNotNull(clazz.getEStructuralFeature("a"));
 		EStructuralFeature feature = clazz.getEStructuralFeature("b");
@@ -44,7 +45,7 @@ public class MetamodelTransformationTest extends AbstractXtextTests {
 		assertFalse(feature.isMany());
 	}
 	
-	public void testMultiValueAssignments() throws Exception {
+	@Test public void testMultiValueAssignments() throws Exception {
 		EClass clazz = getModel("a+='keyword' & a+='keyword'");
 		EStructuralFeature feature = clazz.getEStructuralFeature("a");
 		assertSame(EcorePackage.Literals.ESTRING, feature.getEType());

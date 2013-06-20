@@ -8,13 +8,12 @@
 package org.eclipse.xtext.resource.impl;
 
 import java.util.Iterator;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.util.Arrays;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
 /**
@@ -89,9 +88,8 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		String[] newKeys = newObj.getUserDataKeys();
 		if (oldKeys.length != newKeys.length)
 			return false;
-		Set<String> newKeySet = ImmutableSet.of(newKeys);
 		for (String key : oldKeys) {
-			if (!newKeySet.contains(key))
+			if (!Arrays.contains(newKeys, key))
 				return false;
 			String oldValue = oldObj.getUserData(key);
 			String newValue = newObj.getUserData(key);

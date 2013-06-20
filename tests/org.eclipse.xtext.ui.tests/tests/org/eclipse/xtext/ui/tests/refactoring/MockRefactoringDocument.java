@@ -17,7 +17,6 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 
-@SuppressWarnings("restriction")
 public class MockRefactoringDocument implements IRefactoringDocument {
 
 	public static class Provider implements IRefactoringDocument.Provider {

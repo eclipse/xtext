@@ -14,8 +14,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -40,6 +38,10 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.tests.ClasspathBasedModule;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -52,7 +54,8 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeArgumentContextProviderTest extends TestCase {
+@SuppressWarnings("deprecation")
+public class TypeArgumentContextProviderTest extends Assert {
 
 	public static class ExposedTypeArgumentContextProvider extends TypeArgumentContextProvider {
 		@Override
@@ -78,9 +81,8 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	@Inject
 	private TypesFactory factory;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		Injector injector = createInjector();
 		injector.injectMembers(this);
 		resource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
@@ -93,21 +95,20 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		return injector;
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		resourceSet = null;
 		resource = null;
 		contextProvider = null;
 		typeProvider = null;
 		typeReferences = null;
 		factory = null;
-		super.tearDown();
 	}
 	
 	/*
 	 * <T> foo(T t) { foo(CharSequence) }
 	 */
-	public void testParameterContext_SingleParamPlain() {
+	@Test public void testParameterContext_SingleParamPlain() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		JvmTypeReference paramType = createTypeRef(typeParameter);
@@ -126,7 +127,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<T> t) { foo(Iterable<? extends CharSequence>) }
 	 */
-	public void testParameterContext_SingleParamExtends() {
+	@Test public void testParameterContext_SingleParamExtends() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
@@ -144,7 +145,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<IterableT>> t) { foo(Iterable<Iterable<? extends CharSequence>>) }
 	 */
-	public void testParameterContext_SingleParamNestedExtends() {
+	@Test public void testParameterContext_SingleParamNestedExtends() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(Iterable.class, createTypeRef(typeParameter))));
@@ -155,9 +156,9 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	}
 
 	/*
-	 * <T> foo(Iterable<IterableT>> t) { foo(Iterable<Iterable<? extends CharSequence>>) }
+	 * <T> foo(Iterable<T> t) { foo(Iterable<Iterable<? extends CharSequence>>) }
 	 */
-	public void testParameterContext_SingleParamIterableExtends() {
+	@Test public void testParameterContext_SingleParamIterableExtends() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
@@ -175,7 +176,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<T> t) { foo(Iterable<? super CharSequence>) }
 	 */
-	public void testParameterContext_SingleParamSuper() {
+	@Test public void testParameterContext_SingleParamSuper() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
@@ -193,7 +194,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<IterableT>> t) { foo(Iterable<Iterable<? super CharSequence>>) }
 	 */
-	public void testParameterContext_SingleParamNestedSuper() {
+	@Test public void testParameterContext_SingleParamNestedSuper() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation,	createTypeRef(Iterable.class, createTypeRef(Iterable.class, createTypeRef(typeParameter))));
@@ -204,9 +205,9 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	}
 
 	/*
-	 * <T> foo(Iterable<IterableT>> t) { foo(Iterable<Iterable<? extends CharSequence>>) }
+	 * <T> foo(Iterable<T> t) { foo(Iterable<Iterable<? super CharSequence>>) }
 	 */
-	public void testParameterContext_SingleParamIterableSuper() {
+	@Test public void testParameterContext_SingleParamIterableSuper() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
@@ -220,7 +221,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, T t2) { foo(CharSequence, CharSequence) }
 	 */
-	public void testParameterContext_TwoEqualParams() {
+	@Test public void testParameterContext_TwoEqualParams() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -234,7 +235,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, T t2) { foo(CharSequence, String) }
 	 */
-	public void testParameterContext_TwoInheritingParams() {
+	@Test public void testParameterContext_TwoInheritingParams() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -249,7 +250,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, T t2) { foo(String, CharSequence) }
 	 */
-	public void testParameterContext_TwoInheritingParamsReverse() {
+	@Test public void testParameterContext_TwoInheritingParamsReverse() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -264,7 +265,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T, T2 extends T> foo(T t, T2 t) { foo(CharSequence, null) }
 	 */
-	public void testParameterContext_MissingSecondArgument() {
+	@Test public void testParameterContext_MissingSecondArgument() {
 		JvmOperation operation = operation();
 		JvmTypeParameter firstTypeParameter = typeParameterFor(operation);
 		JvmTypeParameter secondTypeParameter = typeParameterFor(operation);
@@ -282,7 +283,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, Iterable<T> it) { foo(String, Iterable<String>) }
 	 */
-	public void testParameterContext_ExactIterable() {
+	@Test public void testParameterContext_ExactIterable() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -297,7 +298,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, Iterable<T> it) { foo(String, Iterable<CharSequence>) }
 	 */
-	public void testParameterContext_ExactIterableMatch() {
+	@Test public void testParameterContext_ExactIterableMatch() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -312,7 +313,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, Iterable<T> it) { foo(CharSequence, Iterable<String>) }
 	 */
-	public void testParameterContext_ExactIterableMismatch() {
+	@Test public void testParameterContext_ExactIterableMismatch() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -327,7 +328,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<T> t, Iterable<T> it) { foo(Iterable<CharSequence>, Iterable<String>) }
 	 */
-	public void testParameterContext_TwoExactIterableMismatch() {
+	@Test public void testParameterContext_TwoExactIterableMismatch() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
@@ -342,7 +343,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<T> t, Iterable<T> it) { foo(Iterable<String>, Iterable<CharSequence>) }
 	 */
-	public void testParameterContext_TwoExactIterableMismatch_FirstWins() {
+	@Test public void testParameterContext_TwoExactIterableMismatch_FirstWins() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
@@ -362,7 +363,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<T> t, Iterable<T> t) { foo(Iterable<? extends CharSequence>, Iterable<? extends CharSequence>) }
 	 */
-	public void testParameterContext_TwoExtendIterables() {
+	@Test public void testParameterContext_TwoExtendIterables() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, createTypeRef(typeParameter)));
@@ -383,7 +384,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, Iterable<T> it) { foo(String, Iterable<? extends CharSequence>) } // invalid but should be CharSequence
 	 */
-	public void testParameterContext_UpperIterableMismatch() {
+	@Test public void testParameterContext_UpperIterableMismatch() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -405,7 +406,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, Iterable<? extends T> it) { foo(CharSequence, Iterable<String>) }
 	 */
-	public void testParameterContext_UpperIterableMatch() {
+	@Test public void testParameterContext_UpperIterableMatch() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -426,7 +427,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, Iterable<? super T> it) { foo(CharSequence, Iterable<String>) } // invalid but should be CharSequence
 	 */
-	public void testParameterContext_LowerIterableMismatch() {
+	@Test public void testParameterContext_LowerIterableMismatch() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -447,7 +448,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(T t, Iterable<? super T> it) { foo(String, Iterable<CharSequence>) }
 	 */
-	public void testParameterContext_LowerIterableMatch() {
+	@Test public void testParameterContext_LowerIterableMatch() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));
@@ -468,7 +469,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<? super T> it, Iterable<? super T> it2) { foo(Iterable<String>, Iterable<CharSequence>) }
 	 */
-	public void testParameterContext_TwoLowerIterableMatch() {
+	@Test public void testParameterContext_TwoLowerIterableMatch() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, wildCardSuper(createTypeRef(typeParameter))));
@@ -483,7 +484,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<? super T> it, Iterable<? super T> it2) { foo(Iterable<CharSequence>, Iterable<String>) }
 	 */
-	public void testParameterContext_TwoLowerIterableMatch_Reverse() {
+	@Test public void testParameterContext_TwoLowerIterableMatch_Reverse() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(Iterable.class, wildCardSuper(createTypeRef(typeParameter))));
@@ -498,7 +499,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/*
 	 * <T> foo(Iterable<T> iterable, Iterable<? super T> function)
 	 */
-	public void testParameterContext_forEach_01() {
+	@Test public void testParameterContext_forEach_01() {
 //		List<? extends String> strings = null;
 //		Functions.Function1<String, Void> fun = null;
 //		IterableExtensions.forEach(strings, null);
@@ -525,13 +526,13 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
 		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
 		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
-		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String, ? extends java.lang.Object>", lowerBound.getIdentifier());
 	}
 	
 	/*
 	 * <T> foo(Iterable<T> iterable, Iterable<? super T> function)
 	 */
-	public void testParameterContext_forEach_02() {
+	@Test public void testParameterContext_forEach_02() {
 //		List<? extends String> strings = null;
 //		Functions.Function1<String, Void> fun = null;
 //		IterableExtensions.forEach(strings, null);
@@ -557,13 +558,13 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
 		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
 		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
-		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String, ? extends java.lang.Object>", lowerBound.getIdentifier());
 	}
 	
 	/*
 	 * <T> foo(Iterable<T> iterable, Iterable<? super T> function)
 	 */
-	public void testParameterContext_forEach_03() {
+	@Test public void testParameterContext_forEach_03() {
 //		List<? extends String> strings = null;
 //		Functions.Function1<String, Void> fun = null;
 //		IterableExtensions.forEach(strings, null);
@@ -591,10 +592,12 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
 		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
 		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
-		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String, ? extends java.lang.Object>", lowerBound.getIdentifier());
 	}
 	
 	protected JvmTypeReference createTypeRef(JvmType type, JvmTypeReference... argumentTypes) {
+		if (type == null)
+			throw new NullPointerException("type");
 		if (type instanceof JvmTypeParameter) {
 			if (((JvmTypeParameter) type).getConstraints().isEmpty()) {
 				JvmUpperBound upperBound = factory.createJvmUpperBound();
@@ -658,7 +661,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/**
 	 * test case: "Iterable<? extends String> = newArrayList();"
 	 */
-	public void testInferredMethodContext_00() throws Exception {
+	@Test public void testInferredMethodContext_00() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		JvmParameterizedTypeReference lists = typeRefs.typeReference(Lists.class.getCanonicalName()).create();
 		final JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
@@ -692,7 +695,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/**
 	 * test case: "val x = singleton("foo");"
 	 */
-	public void testInferredMethodContext_01() throws Exception {
+	@Test public void testInferredMethodContext_01() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		JvmParameterizedTypeReference lists = typeRefs.typeReference(Collections.class.getCanonicalName()).create();
 		final JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
@@ -723,12 +726,12 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	/**
 	 * test case: "val Object x = getLast(newArrayList("foo"));"
 	 */
-	public void testInferredMethodContext_02() throws Exception {
+	@Test public void testInferredMethodContext_02() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		JvmParameterizedTypeReference lists = typeRefs.typeReference(Iterables.class.getCanonicalName()).create();
 		final JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
 			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("getLast");
+				return input.getSimpleName().equals("getLast") && input.getParameters().size() == 1;
 			}
 		});
 		final JvmTypeReference actualArg = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.String").create();
@@ -765,12 +768,12 @@ public class TypeArgumentContextProviderTest extends TestCase {
 	 * test case: ''foo,bar,baz'.split(',').getFirst()"
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=347656
 	 */
-	public void testInferredMethodContext_03() throws Exception {
+	@Test public void testInferredMethodContext_03() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		JvmParameterizedTypeReference lists = typeRefs.typeReference(Iterables.class.getCanonicalName()).create();
 		final JvmOperation operation = find(((JvmDeclaredType)lists.getType()).getDeclaredOperations(), new Predicate<JvmOperation>(){
 			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("getLast");
+				return input.getSimpleName().equals("getLast") && input.getParameters().size() == 1;
 			}
 		});
 		final JvmGenericArrayTypeReference actualArg = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
@@ -820,7 +823,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		assertEquals("java.lang.String", boundArgumentWithoutExpectation.getIdentifier());
 	}
 	
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference reference = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.CharSequence").create();
 		ITypeArgumentContext typeArgumentContext = contextProvider.getTypeArgumentContext(
@@ -829,7 +832,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		assertTrue(EcoreUtil.equals(((JvmParameterizedTypeReference)reference).getArguments().get(0), argument));
 	}
 	
-	public void testPrimitive() throws Exception {
+	@Test public void testPrimitive() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference primitiveRef = typeRefs.typeReference("int").create();
 		ITypeArgumentContext typeArgumentContext = contextProvider.getTypeArgumentContext(
@@ -839,7 +842,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		assertNull(String.valueOf(argument), argument);
 	}
 	
-	public void testTransitive() throws Exception {
+	@Test public void testTransitive() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference stringList = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.String").create();
 		ITypeArgumentContext stringListContext = contextProvider.getTypeArgumentContext(
@@ -848,20 +851,20 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		JvmGenericType collection = (JvmGenericType) typeProvider.findTypeByName(Collection.class.getCanonicalName());
 		JvmTypeParameter collectionTypeParam = collection.getTypeParameters().get(0);
 		JvmTypeReference boundCollectionTypeArgument = stringListContext.getBoundArgument(collectionTypeParam);
-		assertEquals("JvmWildcardTypeReference: ? extends java.lang.String", boundCollectionTypeArgument.toString());
+		assertEquals("? extends java.lang.String", boundCollectionTypeArgument.getIdentifier());
 		
 		JvmGenericType iterable = (JvmGenericType) typeProvider.findTypeByName(Iterable.class.getCanonicalName());
 		JvmTypeParameter iterableTypeParam = iterable.getTypeParameters().get(0);
 		JvmTypeReference boundIterableTypeArgument = stringListContext.getBoundArgument(iterableTypeParam);
-		assertEquals("JvmWildcardTypeReference: ? extends java.lang.String", boundIterableTypeArgument.toString());
+		assertEquals("? extends java.lang.String", boundIterableTypeArgument.getIdentifier());
 		
 		JvmOperation iterator = (JvmOperation) iterable.getMembers().get(0);
 		JvmTypeReference iteratorReturnType = iterator.getReturnType();
 		JvmTypeReference boundIteratorTypeArgument = stringListContext.resolve(iteratorReturnType);
-		assertEquals("JvmParameterizedTypeReference: java.util.Iterator<? extends java.lang.String>", boundIteratorTypeArgument.toString());
+		assertEquals("java.util.Iterator<? extends java.lang.String>", boundIteratorTypeArgument.getIdentifier());
 	}
 	
-	public void testResolve_0() throws Exception {
+	@Test public void testResolve_0() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").wildCardExtends("java.lang.CharSequence").create();
 		ITypeArgumentContext context = contextProvider.getTypeArgumentContext(
@@ -873,7 +876,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		assertEquals("java.lang.CharSequence",context.getUpperBound(get.getReturnType(), resourceSet).getIdentifier());
 	}
 	
-	public void testResolve_1() throws Exception {
+	@Test public void testResolve_1() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").wildCardSuper("java.lang.CharSequence").create();
 		ITypeArgumentContext context = contextProvider.getTypeArgumentContext(
@@ -886,7 +889,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		assertEquals("java.lang.Object",context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
 	}
 	
-	public void testResolve_WithUnResolved() throws Exception {
+	@Test public void testResolve_WithUnResolved() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").create();
 		ITypeArgumentContext context = contextProvider.getTypeArgumentContext(
@@ -906,7 +909,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 //		assertEquals("E", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
 	}
 	
-	public void testResolveDeeplyNested_Extends() throws Exception {
+	@Test public void testResolveDeeplyNested_Extends() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference reference = typeRefs
 			.typeReference("java.util.ArrayList")
@@ -919,11 +922,11 @@ public class TypeArgumentContextProviderTest extends TestCase {
 //		ArrayList<? extends Map<? super String, ? extends Number>> list = Lists.newArrayList();
 //		Map<? super String, ? extends Number> map = list.get(1);
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-		assertEquals("? extends java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
+		assertEquals("java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
+		assertEquals("? extends java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
 	}
 	
-	public void testResolveDeeplyNested_ExtendsWithInvalidExpectation() throws Exception {
+	@Test public void testResolveDeeplyNested_ExtendsWithInvalidExpectation() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference reference = typeRefs
 			.typeReference("java.util.ArrayList")
@@ -945,11 +948,11 @@ public class TypeArgumentContextProviderTest extends TestCase {
 //		ArrayList<? extends Map<? super String, ? extends Number>> list = Lists.newArrayList();
 //		Map<? super String, ? extends Number> map = list.get(1);
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-		assertEquals("? extends java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
+		assertEquals("java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
+		assertEquals("? extends java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
 	}
 	
-	public void testResolveDeeplyNested_Super() throws Exception {
+	@Test public void testResolveDeeplyNested_Super() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference reference = typeRefs
 			.typeReference("java.util.ArrayList")
@@ -963,10 +966,10 @@ public class TypeArgumentContextProviderTest extends TestCase {
 //		Object object = list.get(1);
 		JvmOperation get = findOperation("java.util.List", "get(int)");
 		assertEquals("java.lang.Object", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-		assertEquals("? super java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
+		assertEquals("? super java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
 	}
 	
-	public void testResolveDeeplyNested_SuperWithInvalidExpectation() throws Exception {
+	@Test public void testResolveDeeplyNested_SuperWithInvalidExpectation() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmTypeReference reference = typeRefs
 			.typeReference("java.util.ArrayList")
@@ -989,10 +992,10 @@ public class TypeArgumentContextProviderTest extends TestCase {
 //		Object object = list.get(1);
 		JvmOperation get = findOperation("java.util.List", "get(int)");
 		assertEquals("java.lang.Object", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-		assertEquals("? super java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
+		assertEquals("? super java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
 	}
 	
-	public void testIterableWildcard_01() throws Exception {
+	@Test public void testIterableWildcard_01() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmParameterizedTypeReference iterableWildcard = typeRefs.typeReference("java.lang.Iterable").create();
 		assertEquals("java.lang.Iterable", iterableWildcard.getIdentifier());
@@ -1006,7 +1009,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		assertEquals("null", typeArgumentContext.getLowerBound(wildcard).getIdentifier());
 	}
 	
-	public void testIterableWildcard_02() throws Exception {
+	@Test public void testIterableWildcard_02() throws Exception {
 		JvmTypeReferences typeRefs = new JvmTypeReferences(TypesFactory.eINSTANCE, typeProvider);
 		final JvmParameterizedTypeReference iterableWildcard = typeRefs.typeReference("java.lang.Iterable").wildCard().create();
 		assertEquals("java.lang.Iterable<? extends java.lang.Object>", iterableWildcard.getIdentifier());
@@ -1018,7 +1021,7 @@ public class TypeArgumentContextProviderTest extends TestCase {
 		assertEquals("null", typeArgumentContext.getLowerBound(wildcard).getIdentifier());
 	}
 	
-	public void testIterableMultitype() {
+	@Test public void testIterableMultitype() {
 		JvmOperation operation = operation();
 		JvmTypeParameter typeParameter = typeParameterFor(operation);
 		parameterFor(operation, createTypeRef(typeParameter));

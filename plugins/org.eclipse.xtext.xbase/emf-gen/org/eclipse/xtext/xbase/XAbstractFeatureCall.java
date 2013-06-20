@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase;
 
@@ -78,11 +80,11 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Implicit Receiver</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Implicit Receiver</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns the implicit receiver of the feature call if any. Otherwise <code>null</code>.
+	 * May not be used during linking.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Implicit Receiver</em>' containment reference.
 	 * @see #setImplicitReceiver(XExpression)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ImplicitReceiver()
@@ -104,11 +106,10 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Invalid Feature Issue Code</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * @deprecated Will be removed shortly
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Invalid Feature Issue Code</em>' attribute.
 	 * @see #setInvalidFeatureIssueCode(String)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_InvalidFeatureIssueCode()
@@ -130,11 +131,10 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Valid Feature</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Valid Feature</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * @deprecated Will be removed shortly
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Valid Feature</em>' attribute.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ValidFeature()
 	 * @model transient="true" changeable="false" derived="true"
@@ -145,11 +145,11 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Implicit First Argument</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Implicit First Argument</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns the implicit first argument of the feature call if any. Otherwise <code>null</code>.
+	 * May not be used during linking.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Implicit First Argument</em>' containment reference.
 	 * @see #setImplicitFirstArgument(XExpression)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ImplicitFirstArgument()
@@ -179,6 +179,9 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * @deprecated Will be removed shortly
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
@@ -191,5 +194,77 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @generated
 	 */
 	boolean isExplicitOperationCallOrBuilderSyntax();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Returns the actual receiver of the feature call. The decision will be made according
+	 * to the linking of the feature. May not be used during linking itself.
+	 * <p/>
+	 * <p>Static features, constructor calls (this, super), references to local variables 
+	 * or parameters will return <code>null</code>.</p>
+	 * 
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	XExpression getActualReceiver();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Returns the actual arguments of the feature call. The decision will be made according
+	 * to the linking of the feature. May not be used during linking itself.
+	 * <p/>
+	 * <p>References to local variables, fields 
+	 * or parameters will return an empty list. The result is never <code>null</code>.</p>
+	 * 
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<XExpression> getActualArguments();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns <code>true</code> if the featuer call links to a static field or a static 
+	 * operation. Otherwise <code>false</code>. May not be used during linking.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isStatic();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns <code>true</code> if the feature was made available by an extension. 
+	 * Otherwise <code>false</code>. May not be used during linking.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isExtension();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isPackageFragment();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isTypeLiteral();
 
 } // XAbstractFeatureCall

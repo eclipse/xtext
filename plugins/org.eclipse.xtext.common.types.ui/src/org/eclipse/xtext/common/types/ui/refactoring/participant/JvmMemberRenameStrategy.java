@@ -17,9 +17,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -28,18 +30,20 @@ import com.google.inject.BindingAnnotation;
 import com.google.inject.Inject;
 
 /**
+ * Renames a JVM element in a {@link TypeResource} and updates all references to it.
+ *  
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JvmMemberRenameStrategy implements IRenameStrategy {
 	
 	protected URI targetMemberOriginalURI;
 	protected URI targetMemberNewURI;
 	protected String originalName;
 
-	public JvmMemberRenameStrategy(JvmMember targetMember) {
+	public boolean initialize(JvmMember targetMember, IRenameElementContext context) {
 		targetMemberOriginalURI = EcoreUtil.getURI(targetMember);
 		originalName = targetMember.getSimpleName();
+		return true;
 	}
 
 	public void applyDeclarationChange(final String newName, ResourceSet resourceSet) {
@@ -52,18 +56,36 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 	}
 
 	protected JvmMember setName(URI targetURI, ResourceSet resourceSet, final String newName) {
-		JvmMember member = (JvmMember) resourceSet.getEObject(targetURI, true);
-		member.internalSetIdentifier(null);
+		final JvmMember member = (JvmMember) resourceSet.getEObject(targetURI, true);
+		/*
+		 * This seems to be the only location in Xtext code where a JVM element is changed!
+		 */
+		// clear all cached identifiers of contained members
+		for(JvmMember containedMember: EcoreUtil2.eAllOfType(member, JvmMember.class)) 
+			containedMember.internalSetIdentifier(null);
 		member.setSimpleName(newName);
-		if (member instanceof JvmGenericType && ((InternalEObject) member).eDirectResource() != null) {
+		if (member instanceof JvmDeclaredType && ((InternalEObject) member).eDirectResource() != null) {
 			Resource typeResource = member.eResource();
 			if (typeResource instanceof TypeResource) {
+				// rename the resource
 				String originalURI = typeResource.getURI().toString();
-				int lastIndexOf = Math.max(originalURI.lastIndexOf('.'), originalURI.lastIndexOf('/') + 1);
+				int lastIndexOf = Math.max(originalURI.lastIndexOf('.'), originalURI.lastIndexOf('/')) + 1;
 				URI typeResourceNewURI = URI.createURI(originalURI.substring(0, lastIndexOf) + newName);
 				typeResource.setURI(typeResourceNewURI);
 				// disconnect the mirrored IJavaElement as it is invalid now
-				((TypeResource) typeResource).setMirror(null);
+				((TypeResource) typeResource).setMirror(new AbstractClassMirror() {
+					public boolean isSealed() {
+						return false;
+					}
+					
+					public void initialize(TypeResource typeResource) {
+					}
+					
+					@Override
+					protected String getTypeName() {
+						return member.getIdentifier();
+					}
+				});
 			}
 		}
 		return member;
@@ -82,6 +104,9 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 	}
 	
 	public static class Provider implements IRenameStrategy.Provider {
+		@Inject
+		private com.google.inject.Provider<JvmMemberRenameStrategy> guiceStartegyProvider;
+		
 		@Retention(RetentionPolicy.RUNTIME)
 		@BindingAnnotation
 		public @interface Delegate {
@@ -90,9 +115,12 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 		@Inject(optional=true)@Delegate
 		private IRenameStrategy.Provider delegate;
 
-		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) {
-			if(targetEObject instanceof JvmMember) 
-				return new JvmMemberRenameStrategy((JvmMember) targetEObject);
+		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException {
+			if(targetEObject instanceof JvmMember) {
+				JvmMemberRenameStrategy jvmMemberRenameStrategy = guiceStartegyProvider.get();
+				jvmMemberRenameStrategy.initialize((JvmMember) targetEObject, renameElementContext);
+				return jvmMemberRenameStrategy;
+			}
 			return delegate == null ? null : delegate.get(targetEObject, renameElementContext);
 		}
 	}

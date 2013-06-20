@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug288760TestLanguage"
-    nsURI="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288760TestLanguage"
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug288760TestLanguage" nsURI="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288760TestLanguage"
     nsPrefix="bug288760TestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="WorkflowElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

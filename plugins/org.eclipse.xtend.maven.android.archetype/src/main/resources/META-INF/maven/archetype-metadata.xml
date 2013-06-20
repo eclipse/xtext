@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+	name="xtend.android-sample"
+	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<requiredProperties>
+		<requiredProperty key="sdk_path">
+			<defaultValue>/opt/local/android-sdk-macosx</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="platform_version">
+			<defaultValue>4.2.2</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="avd_name">
+			<defaultValue>Android_2.1</defaultValue>
+		</requiredProperty>
+	</requiredProperties>
+	<fileSets>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>res/values-sw600dp</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>res/layout</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>res/values</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>res/values-sw720dp-land</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>res/menu</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>gen</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src</directory>
+			<includes>
+				<include>**/*.xtend</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>libs</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>res/drawable-xhdpi</directory>
+			<includes>
+				<include>**/*.png</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>res/drawable-hdpi</directory>
+			<includes>
+				<include>**/*.png</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>res/drawable-xxhdpi</directory>
+			<includes>
+				<include>**/*.png</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>res/drawable-mdpi</directory>
+			<includes>
+				<include>**/*.png</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>.settings</directory>
+			<includes>
+				<include>**/*.prefs</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory></directory>
+			<includes>
+				<include>.classpath</include>
+				<include>.project</include>
+				<include>AndroidManifest.xml</include>
+				<include>proguard-project.txt</include>
+				<include>project.properties</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory></directory>
+			<includes>
+				<include>ic_launcher-web.png</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>

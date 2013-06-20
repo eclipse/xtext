@@ -35,6 +35,11 @@ public abstract class AbstractRefactoringTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.ui.tests.refactoring.services.RefactoringTestLanguageGrammarAccess.class;
 	}

@@ -1,0 +1,7 @@
+grammar org.eclipse.xtext.resource.LiveContainerTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate liveContainerTestLanguage "http://www.xtext.org/LiveContainerTestLanguage"
+
+Model:
+	name=ID
+;

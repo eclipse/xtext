@@ -1,0 +1,18 @@
+module GenerateSpec
+
+import org.eclipse.emf.mwe.utils.*
+
+var targetDir = "../../xtend.website.generator/website/documentation/2.4.2"
+var modelPath = "xdoc"
+
+Workflow {
+	component = @workflow.XDocGenerator { 
+		// or define search scope explicitly
+		modelPath = modelPath
+		targetDir = targetDir
+		document = "Xtend User Guide"
+		pdfLatex = "/usr/texbin/pdflatex"
+		release = true
+	}
+
+}

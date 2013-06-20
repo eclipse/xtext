@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.lazy.bug311337.Model;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -16,12 +17,12 @@ import org.eclipse.xtext.linking.lazy.bug311337.Model;
 public class Bug311337Test extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new Bug311337TestLanguageStandaloneSetup());
 	}
 	
-	public void testNoCyclicLinkingException() throws Exception {
+	@Test public void testNoCyclicLinkingException() throws Exception {
 		Model model = (Model) getModel(
 			"/************************************/\n"+
 			"(def) local :\n"+

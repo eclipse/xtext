@@ -34,7 +34,6 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
-import com.google.inject.internal.Nullable;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -52,8 +51,16 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	@Inject
 	private IStorage2UriMapper mapper;
 	
-	@Inject @Nullable
+	@Inject(optional=true) 
+	//@Nullable
 	private IWorkbench workbench;
+	
+	/**
+	 * @since 2.2
+	 */
+	public IEditorPart open(URI uri, Object context, boolean select) {
+		return open(uri, select);
+	}
 	
 	public IEditorPart open(URI uri, boolean select) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri.trimFragment());

@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.junit.Before;
+import org.junit.Test;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -14,9 +17,8 @@ public class JvmFieldTest extends JvmFeatureTest {
 
 	private JvmField field;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		field = TypesFactory.eINSTANCE.createJvmField();
 	}
 	
@@ -25,12 +27,12 @@ public class JvmFieldTest extends JvmFeatureTest {
 		return field;
 	}
 	
-	public void testGetIdentifier_02() {
+	@Test public void testGetIdentifier_02() {
 		field.internalSetIdentifier("java.lang.DoesNotExist.fieldName");
 		assertEquals("java.lang.DoesNotExist.fieldName", field.getIdentifier());
 	}
 	
-	public void testGetIdentifier_03() {
+	@Test public void testGetIdentifier_03() {
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
 		type.internalSetIdentifier("java.lang.DoesNotExist");
 		type.getMembers().add(field);
@@ -38,7 +40,7 @@ public class JvmFieldTest extends JvmFeatureTest {
 		assertEquals("java.lang.DoesNotExist.fieldName", field.getIdentifier());
 	}
 	
-	public void testGetIdentifier_04() {
+	@Test public void testGetIdentifier_04() {
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
 		type.setSimpleName("SimpleName");
 		type.setPackageName("java.lang");

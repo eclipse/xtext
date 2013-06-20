@@ -28,14 +28,14 @@ public interface ICharSequenceWithOffset extends CharSequence {
 	/**
 	 * Increments the offset by the given amount. Can be used to decrement
 	 * the offset.
-	 * @param amount
+	 * @param amount the number of offset that should be shifted.
 	 */
 	void incOffset(int amount);
 
 	/**
 	 * Random access to modify the offset. Can be set independently from the
 	 * length of the char sequence.
-	 * @param offset
+	 * @param offset the new offset.
 	 */
 	void setOffset(int offset);
 	

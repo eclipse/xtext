@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -42,7 +44,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmTypeParameterImpl extends JvmComponentTypeImpl implements JvmTypeParameter
+public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements JvmTypeParameter
 {
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
@@ -104,7 +106,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImpl implements JvmTyp
 	{
 		if (constraints == null)
 		{
-			constraints = new EObjectContainmentWithInverseEList.Resolving<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_TYPE_PARAMETER__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
+			constraints = new EObjectContainmentWithInverseEList<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_TYPE_PARAMETER__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
 		}
 		return constraints;
 	}
@@ -138,17 +140,6 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImpl implements JvmTyp
 	 * @generated
 	 */
 	public JvmTypeParameterDeclarator getDeclarator()
-	{
-		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR) return null;
-		return (JvmTypeParameterDeclarator)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeParameterDeclarator basicGetDeclarator()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR) return null;
 		return (JvmTypeParameterDeclarator)eInternalContainer();
@@ -258,8 +249,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImpl implements JvmTyp
 			case TypesPackage.JVM_TYPE_PARAMETER__NAME:
 				return getName();
 			case TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR:
-				if (resolve) return getDeclarator();
-				return basicGetDeclarator();
+				return getDeclarator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -327,7 +317,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImpl implements JvmTyp
 			case TypesPackage.JVM_TYPE_PARAMETER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR:
-				return basicGetDeclarator() != null;
+				return getDeclarator() != null;
 		}
 		return super.eIsSet(featureID);
 	}

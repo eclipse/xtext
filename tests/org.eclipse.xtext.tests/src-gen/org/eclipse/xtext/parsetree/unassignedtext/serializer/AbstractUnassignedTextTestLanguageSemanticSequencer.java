@@ -14,38 +14,18 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
-@SuppressWarnings("restriction")
-public class AbstractUnassignedTextTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
-	protected UnassignedTextTestLanguageGrammarAccess grammarAccess;
-	
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-	
-	@Inject
-	protected ITransientValueService transientValues;
-	
-	@Inject
-	@GenericSequencer
-	protected Provider<ISemanticSequencer> genericSequencerProvider;
-	
-	protected ISemanticSequencer genericSequencer;
-	
-	
-	@Override
-	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequencer, sequenceAcceptor, errorAcceptor);
-		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
-	}
+	private UnassignedTextTestLanguageGrammarAccess grammarAccess;
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == UnassignedtextPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
@@ -91,9 +71,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=INT
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_CaseInsensitiveKeywordRule(EObject context, CaseInsensitiveKeywordRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -110,9 +87,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=ID
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_CommonTerminalsRule(EObject context, CommonTerminalsRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -129,9 +103,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=INT
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_DatatypeRule(EObject context, DatatypeRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -148,9 +119,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     val=INT
-	 *
-	 * Features:
-	 *    val[1, 1]
 	 */
 	protected void sequence_MultiRule(EObject context, MultiRule semanticObject) {
 		if(errorAcceptor != null) {
@@ -167,9 +135,6 @@ public class AbstractUnassignedTextTestLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     count=INT
-	 *
-	 * Features:
-	 *    count[1, 1]
 	 */
 	protected void sequence_PluralRule(EObject context, PluralRule semanticObject) {
 		if(errorAcceptor != null) {

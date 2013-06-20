@@ -73,8 +73,10 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 	}
 
 	public void accept(IReferenceDescription referenceDescription) {
-		matchingReferences.add(referenceDescription);
-		fireEvent(new ReferenceSearchResultEvents.Added(this, referenceDescription));
+		if(query.getFilter().apply(referenceDescription)) {
+			matchingReferences.add(referenceDescription);
+			fireEvent(new ReferenceSearchResultEvents.Added(this, referenceDescription));
+		}
 	}
 
 	public List<IReferenceDescription> getMatchingReferences() {

@@ -1,59 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.xtext.releng"
-	componentType="buckminster" version="1.0.0.qualifier">
-	<cs:dependencies>
-		<!-- Third party -->
-		<cs:dependency name="com.google.collect" componentType="osgi.bundle"/>
-        <cs:dependency name="com.google.collect.source" componentType="osgi.bundle"/>
-        <cs:dependency name="com.google.inject" componentType="osgi.bundle"/>
-        <cs:dependency name="com.google.inject.source" componentType="osgi.bundle"/>
+<?xml version="1.0" encoding="UTF-8"?><cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.xtext.releng" componentType="buckminster" version="1.0.0.qualifier">
+    <cs:dependencies>
+        <cs:dependency name="com.google.guava" componentType="osgi.bundle"/>
+        <cs:dependency name="com.google.guava.source" componentType="osgi.bundle"/>
+        <cs:dependency name="com.google.inject" componentType="osgi.bundle" versionDesignator="3.0.0"/>
+        <cs:dependency name="com.google.inject.source" componentType="osgi.bundle" versionDesignator="3.0.0"/>
+        <cs:dependency name="javax.inject" componentType="osgi.bundle"/>
+        <cs:dependency name="javax.inject.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.apache.ant" componentType="osgi.bundle" versionDesignator="1.8.0"/>
+        <cs:dependency name="org.apache.commons.lang" componentType="osgi.bundle"/>
+        <cs:dependency name="org.apache.commons.lang.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.log4j" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.log4j.source" componentType="osgi.bundle"/>
-		<cs:dependency name="org.aopalliance" componentType="osgi.bundle" />
-		<cs:dependency name="org.easymock" componentType="osgi.bundle" />
-		<cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle" />
-		
-		<!-- Eclipse platform and projects -->
-		<cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature" />
-		<cs:dependency name="org.eclipse.emf.ecore.editor" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.jdt.junit" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.jdt.junit4.runtime" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.pde.core" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.pde.ui" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.pde.junit.runtime" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.debug.ui" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.platform" componentType="eclipse.feature" />
-		<cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.5.0" />
-		<cs:dependency name="org.junit" componentType="osgi.bundle"  versionDesignator="[3.8.0,4.0.0)" />
-
-		<!-- Friends of Xtext -->
-		<cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.emf.mwe.core" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.emf.mwe2.runtime" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.emf.mwe2.lib" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.xpand" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.xtend" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.xtend.typesystem.emf" componentType="osgi.bundle" />
-	</cs:dependencies>
-	<cs:actions>
-		<cs:public name="create.javadoc" actor="ant">
-			<cs:actorProperties>
-				<cs:property key="buildFile" value="javadoc.ant" />
-				<cs:property key="targets" value="create.javadoc" />
-			</cs:actorProperties>
-			<cs:properties>
-				<cs:property key="checkoutLocation" value="${checkout.location}" />
-				<cs:property key="output" value="${buckminster.output}/javadoc/" />
-				<cs:property key="targetPlatform" value="${targetPlatformPath}" />
-			</cs:properties>
-		</cs:public>
-		<cs:public name="setup.promoter" actor="ant">
-			<cs:actorProperties>
-				<cs:property key="buildFile" value="promoter.ant" />
-				<cs:property key="targets" value="-setup.promoter" />
-			</cs:actorProperties>
-			<cs:products alias="output" base="${buckminster.output}/promoter/" />
-		</cs:public>
-	</cs:actions>
+        <cs:dependency name="org.easymock" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.debug.ui" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.emf.common" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.emf.common.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.emf.ecore" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.emf.ecore.editor" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.emf.ecore.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.emf.mwe.core" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.emf.mwe2.lib" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.emf.mwe2.runtime" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.jdt.annotation" componentType="osgi.bundle" versionDesignator="1.0.0"/>
+        <cs:dependency name="org.eclipse.jdt.core.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.jdt.junit" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.jdt.junit4.runtime" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.m2e.core" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.pde.core" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.pde.junit.runtime" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.pde.ui" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.rcp" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.xpand" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.xtend" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.xtend.typesystem.emf" componentType="osgi.bundle"/>
+        <cs:dependency name="org.junit" componentType="osgi.bundle" versionDesignator="[4.7.0,5.0.0)"/>
+        <cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.8.0"/>
+        <cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="[3.2.0,4.0.0)"/>
+        <cs:dependency name="org.objectweb.asm.source" componentType="osgi.bundle" versionDesignator="[3.2.0,4.0.0)"/>
+    </cs:dependencies>
+    <cs:actions>
+        <cs:public name="create.javadoc" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="javadoc.ant"/>
+                <cs:property key="targets" value="create.javadoc"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="checkoutLocation" value="${checkout.location}"/>
+                <cs:property key="output" value="${buckminster.output}/javadoc/"/>
+                <cs:property key="targetPlatform" value="${targetPlatformPath}"/>
+                <cs:property key="xtend.checkoutLocation" value="${xtend.checkout.location}"/>
+            </cs:properties>
+        </cs:public>
+        <cs:public name="setup.promoter" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="promoter.ant"/>
+                <cs:property key="targets" value="-setup.promoter"/>
+            </cs:actorProperties>
+            <cs:products alias="output" base="${buckminster.output}/promoter/"/>
+        </cs:public>
+    </cs:actions>
 </cs:cspec>

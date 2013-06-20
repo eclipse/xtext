@@ -16,7 +16,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
-import com.google.inject.internal.Nullable;
+import com.google.inject.Injector;
 
 /**
  * An {@link IResourceServiceProvider} for non-Xtext resources. 
@@ -27,7 +27,7 @@ import com.google.inject.internal.Nullable;
 public class GenericResourceServiceProvider implements IResourceServiceProvider {
 
 	@Inject
-	@Nullable
+//	@Nullable
 	private IContainer.Manager containerManager;
 	
 	public IContainer.Manager getContainerManager() {
@@ -42,7 +42,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	}
 
 	@Inject
-	@Nullable
+//	@Nullable
 	private IResourceValidator resourceValidator = IResourceValidator.NULL;
 
 	public IResourceValidator getResourceValidator() {
@@ -63,7 +63,10 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 		return encodingProvider;
 	}
 	
+	@Inject
+	private Injector injector;
+	
 	public <T> T get(Class<T> t) {
-		return null;
+		return injector.getInstance(t);
 	}
 }

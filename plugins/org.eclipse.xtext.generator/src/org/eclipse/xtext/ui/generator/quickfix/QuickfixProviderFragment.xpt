@@ -15,13 +15,29 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::ui::generator::quickfix::QuickfixProviderFragment»
 
-«DEFINE generate FOR Grammar»
-«FILE getQuickfixProviderName().asPath()+".java" SRC_UI»
+«DEFINE generate(Boolean generateStub, Boolean generateXtendStub, String superClassName) FOR Grammar»
+	«IF generateStub»
+		«IF generateXtendStub»
+			«EXPAND xtendQuickfixProvider(superClassName)»
+		«ELSE»
+			«EXPAND javaQuickfixProvider(superClassName)»
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE javaQuickfixProvider(String superClassName) FOR Grammar»
+«FILE getQuickfixProviderName().asPath()+".java" SRC_UI-»
+/*
+«fileHeader()»
+*/
 package «getQuickfixProviderName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
-
-public class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixProvider {
+/**
+ * Custom quickfixes.
+ *
+ * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
+ */
+public class «getQuickfixProviderName().toSimpleName()» extends «superClassName» {
 
 //	@Fix(MyJavaValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -38,17 +54,69 @@ public class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixP
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt FOR Grammar-»«ENDDEFINE»
 
+«DEFINE xtendQuickfixProvider(String superClassName) FOR Grammar»
+«FILE getQuickfixProviderName().asPath()+".xtend" SRC_UI-»
+/*
+«fileHeader()»
+*/
+package «getQuickfixProviderName().toJavaPackage()»
 
-«DEFINE addToPluginXmlUi FOR Grammar-»
-   <!-- quickfix marker resolution generator -->
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
-   </extension>
+//import org.eclipse.xtext.ui.editor.quickfix.Fix
+//import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
+//import org.eclipse.xtext.validation.Issue
+
+/**
+ * Custom quickfixes.
+ *
+ * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
+ */
+class «getQuickfixProviderName().toSimpleName()» extends «superClassName» {
+
+//	@Fix(MyDslValidator::INVALID_NAME)
+//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
+//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
+//			context |
+//			val xtextDocument = context.xtextDocument
+//			val firstLetter = xtextDocument.get(issue.offset, 1)
+//			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
+//		]
+//	}
+}
+«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar-»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub, String superClassName) FOR Grammar-»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub, String superClassName) FOR Grammar-»
+    <!-- quickfix marker resolution generator for «name» -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="«getNaming().basePackageUi(this)».«name.toSimpleName().toLowerCase()».check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="«getNaming().basePackageUi(this)».«name.toSimpleName().toLowerCase()».check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="«getNaming().basePackageUi(this)».«name.toSimpleName().toLowerCase()».check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
+«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub, String superClassName) FOR Grammar-»«ENDDEFINE»

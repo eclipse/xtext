@@ -6,12 +6,13 @@
 	 <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
-            extensions="xtext,xtext2"
-            id="org.eclipse.xtext.Xtext"
-            name="%Xtext_Editor">
+              class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="true"
+              extensions="xtext,xtext2"
+              icon="icons/editor.gif"
+              id="org.eclipse.xtext.Xtext"
+              name="%Xtext_Editor">
         </editor>
     </extension>
     <extension
@@ -161,7 +162,7 @@
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
 			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
-			icon="icons/editor.gif"
+			icon="icons/new_xproj.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
 			name="%Xtext_Project"
 			project="true">
@@ -172,7 +173,7 @@
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
 			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
-			icon="icons/editor.gif"
+			icon="icons/new_xproj.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			name="%Xtext_Project_From_Ecore"
 			project="true">
@@ -180,268 +181,150 @@
             	%NewXtext_Project_From_Ecore.description
          	</description>
 		</wizard>
+		<wizard
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.projectwiz.releng"
+			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.releng.NewRelengProjectWizard"
+			icon="icons/new_xproj.gif"
+			id="org.eclipse.xtext.xtext.ui.wizard.releng.NewRelengProjectWizard"
+			name="%Xtext_Releng_Project"
+			project="true">
+			<description>
+            	%NewXtext_Releng_Project.description
+         	</description>
+		</wizard>
+  <category
+        id="org.eclipse.xtext.projectwiz.releng"
+        name="%Xtext_Wizard_Releng_Category"
+        parentCategory="org.eclipse.xtext.projectwiz">
+  </category>
 	</extension>
 	
-	<extension
-         point="org.eclipse.xtext.xtext.ui.wizardContribution">
-      <generatorConfiguration name="Use Stable API only">
-         <MweSnippet>
-<![CDATA[
-	bean = StandaloneSetup {
-	    scanClassPath = true
-		platformUri = "${runtimeProject}/.."
-		// registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-        // registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
-        // registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-        // registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
-        
-	}
-
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen"
-	}
-
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}.ui/src-gen"
-	}
-
-	component = Generator {
-		pathRtProject = runtimeProject
-		pathUiProject = "${runtimeProject}.ui"
-		pathTestProject = "${runtimeProject}.tests"
-		projectNameRt = projectName
-		projectNameUi = "${projectName}.ui"
-		language = {
-			uri = grammarURI
-			fileExtensions = file.extensions
-
-			// Java API to access grammar elements (required by several other fragments)
-			fragment = grammarAccess.GrammarAccessFragment {}
-
-			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {
-			}
-
-			// the serialization component
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
-
-			// a custom ResourceFactory for use with EMF 
-			fragment = resourceFactory.ResourceFactoryFragment {
-				fileExtensions = file.extensions
-			}
-
-			// The antlr parser generator fragment.
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
-			//  options = {
-			//		backtrack = true
-			//	}
-			}
-			
-			// java-based API for validation 
-			fragment = validation.JavaValidatorFragment {
-				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-			}
-
-			// scoping and exporting API
-			// fragment = scoping.ImportURIScopingFragment {}
-			// fragment = exporting.SimpleNamesFragment {}
-
-			// scoping and exporting API 
-			fragment = scoping.ImportNamespacesScopingFragment {}
-			fragment = exporting.QualifiedNamesFragment {}
-			fragment = builder.BuilderIntegrationFragment {}
-
-			// generator API
-			fragment = generator.GeneratorFragment {
-				generateMwe = true
-				generateJavaMain = true
-			}
-			
-			// formatter API 
-			fragment = formatting.FormatterFragment {}
-
-			// labeling API 
-			fragment = labeling.LabelProviderFragment {}
-
-			// outline API 
-			fragment = outline.OutlineTreeProviderFragment {}
-			fragment = outline.QuickOutlineFragment {}
-
-			// quickfix API 
-			fragment = quickfix.QuickfixProviderFragment {}
-
-			// content assist API  
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			
-			// generates a more lightweight Antlr parser and lexer tailored for content assist  
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
-
-			// generates junit test support classes into Generator#pathTestProject
-			fragment = junit.Junit4Fragment {}
-
-			// project wizard (optional) 
-			// fragment = projectWizard.SimpleProjectWizardFragment {
-			// 		generatorProjectName = "${projectName}"
-			//		modelFileExtension = file.extensions
-			// }
-
-			// provides the necessary bindings for java types integration
-			fragment = types.TypesGeneratorFragment {}
-
-			// generates the required bindings only if the grammar inherits from Xbase
-			fragment = xbase.XbaseGeneratorFragment {}
-			
-			// provides a preference page for template proposals 
-			fragment = templates.CodetemplatesGeneratorFragment {}
-
-			// rename refactoring
-            // fragment = refactoring.RefactorElementNameFragment {}
-
-            // provides a compare view
-            // fragment = compare.CompareFragment {
-            //    fileExtensions = file.extensions
-            // }
-
-            // Serializer 2.0
-            // fragment = serializer.SerializerFragment {}
-		}
-	}]]>
-         </MweSnippet>
-      </generatorConfiguration>
-   </extension>
-
+	
    <extension
          point="org.eclipse.xtext.xtext.ui.wizardContribution">
-      <generatorConfiguration name="Use Experimental 2.0 Features (Compare,Refactoring and new Serializer)">
+      <generatorConfiguration name="Use Latest API" sortKey="1">
         <MweSnippet>
 <![CDATA[
-    bean = StandaloneSetup {
-        scanClassPath = true
-        platformUri = "${runtimeProject}/.."
-        // The following two lines ca be removed, if Xbase is not used.
-        registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-        registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-    }
+bean = StandaloneSetup {
+	scanClassPath = true
+	platformUri = "${runtimeProject}/.."
+	// The following two lines can be removed, if Xbase is not used.
+	registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
+	registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+}
 
-    component = DirectoryCleaner {
-        directory = "${runtimeProject}/src-gen"
-    }
+component = DirectoryCleaner {
+	directory = "${runtimeProject}/src-gen"
+}
 
-    component = DirectoryCleaner {
-        directory = "${runtimeProject}.ui/src-gen"
-    }
+component = DirectoryCleaner {
+	directory = "${runtimeProject}.ui/src-gen"
+}
 
-    component = Generator {
-        pathRtProject = runtimeProject
-        pathUiProject = "${runtimeProject}.ui"
-        pathTestProject = "${runtimeProject}.tests"
-        projectNameRt = projectName
-        projectNameUi = "${projectName}.ui"
-        language = {
-            uri = grammarURI
-            fileExtensions = file.extensions
+component = DirectoryCleaner {
+	directory = "${runtimeProject}.tests/src-gen"
+}
 
-            // Java API to access grammar elements (required by several other fragments)
-            fragment = grammarAccess.GrammarAccessFragment {}
+component = Generator {
+	pathRtProject = runtimeProject
+	pathUiProject = "${runtimeProject}.ui"
+	pathTestProject = "${runtimeProject}.tests"
+	projectNameRt = projectName
+	projectNameUi = "${projectName}.ui"
+	language = auto-inject {
+		uri = grammarURI
 
-            // generates Java API for the generated EPackages
-            fragment = ecore.EcoreGeneratorFragment {
-            // referencedGenModels = "
-            //  platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,
-            //  platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel
-            // "
-            }
+		// Java API to access grammar elements (required by several other fragments)
+		fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 
-            // Serializer 2.0
-            fragment = serializer.SerializerFragment {
-            	generateStub = false
-            }
-            
-            // the serialization component (1.0)
-            // fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+		// generates Java API for the generated EPackages
+		fragment = ecore.EcoreGeneratorFragment auto-inject {
+		// referencedGenModels = "
+		//  platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,
+		//  platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel
+		// "
+		}
 
-            // a custom ResourceFactory for use with EMF
-            fragment = resourceFactory.ResourceFactoryFragment {
-                fileExtensions = file.extensions
-            }
+		// the old serialization component
+		// fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}    
 
-            // The antlr parser generator fragment.
-            fragment = parser.antlr.XtextAntlrGeneratorFragment {
-            //  options = {
-            //      backtrack = true
-            //  }
-            }
+		// serializer 2.0
+		fragment = serializer.SerializerFragment auto-inject {
+			generateStub = false
+		}
 
-            // java-based API for validation
-            fragment = validation.JavaValidatorFragment {
-            //    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-            //    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-            }
+		// a custom ResourceFactory for use with EMF
+		fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
 
-            // scoping and exporting API
-            // fragment = scoping.ImportURIScopingFragment {}
-            // fragment = exporting.SimpleNamesFragment {}
+		// The antlr parser generator fragment.
+		fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+		//  options = {
+		//      backtrack = true
+		//  }
+		}
 
-            // scoping and exporting API
-            fragment = scoping.ImportNamespacesScopingFragment {}
-            fragment = exporting.QualifiedNamesFragment {}
-            fragment = builder.BuilderIntegrationFragment {}
+		// Xtend-based API for validation
+		fragment = validation.ValidatorFragment auto-inject {
+		//    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
+		//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+		}
 
-            // generator API
-            fragment = generator.GeneratorFragment {
-                generateMwe = false
-                generateJavaMain = false
-            }
+		// old scoping and exporting API
+		// fragment = scoping.ImportURIScopingFragment auto-inject {}
+		// fragment = exporting.SimpleNamesFragment auto-inject {}
 
-            // formatter API
-            fragment = formatting.FormatterFragment {}
+		// scoping and exporting API
+		fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
+		fragment = exporting.QualifiedNamesFragment auto-inject {}
+		fragment = builder.BuilderIntegrationFragment auto-inject {}
 
-            // labeling API
-            fragment = labeling.LabelProviderFragment {}
+		// generator API
+		fragment = generator.GeneratorFragment auto-inject {}
 
-            // outline API
-            fragment = outline.OutlineTreeProviderFragment {}
-            fragment = outline.QuickOutlineFragment {}
+		// formatter API
+		fragment = formatting.FormatterFragment auto-inject {}
 
-            // quickfix API
-            fragment = quickfix.QuickfixProviderFragment {}
+		// labeling API
+		fragment = labeling.LabelProviderFragment auto-inject {}
 
-            // content assist API
-            fragment = contentAssist.JavaBasedContentAssistFragment {}
+		// outline API
+		fragment = outline.OutlineTreeProviderFragment auto-inject {}
+		fragment = outline.QuickOutlineFragment auto-inject {}
 
-            // generates a more lightweight Antlr parser and lexer tailored for content assist
-            fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
+		// quickfix API
+		fragment = quickfix.QuickfixProviderFragment auto-inject {}
 
-            // generates junit test support classes into Generator#pathTestProject
-            fragment = junit.Junit4Fragment {}
+		// content assist API
+		fragment = contentAssist.ContentAssistFragment auto-inject {}
 
-            // project wizard (optional)
-            // fragment = projectWizard.SimpleProjectWizardFragment {
-            //      generatorProjectName = "${projectName}"
-            //      modelFileExtension = file.extensions
-            // }
+		// generates a more lightweight Antlr parser and lexer tailored for content assist
+		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
 
-            // provides the necessary bindings for java types integration
-            fragment = types.TypesGeneratorFragment {}
+		// generates junit test support classes into Generator#pathTestProject
+		fragment = junit.Junit4Fragment auto-inject {}
 
-            // generates the required bindings only if the grammar inherits from Xbase
-            fragment = xbase.XbaseGeneratorFragment {}
+		// project wizard (optional)
+		// fragment = projectWizard.SimpleProjectWizardFragment auto-inject {
+		//      generatorProjectName = "${projectName}"
+		// }
 
-            // provides a preference page for template proposals
-            fragment = templates.CodetemplatesGeneratorFragment {}
+		// rename refactoring
+		fragment = refactoring.RefactorElementNameFragment auto-inject {}
 
-            // rename refactoring
-            fragment = refactoring.RefactorElementNameFragment {}
+		// provides the necessary bindings for java types integration
+		fragment = types.TypesGeneratorFragment auto-inject {}
 
-            // provides a compare view
-            fragment = compare.CompareFragment {
-                 fileExtensions = file.extensions
-            }
+		// generates the required bindings only if the grammar inherits from Xbase
+		fragment = xbase.XbaseGeneratorFragment auto-inject {}
 
-        }
-    }]]>
-         </MweSnippet>
+		// provides a preference page for template proposals
+		fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
+
+		// provides a compare view
+		fragment = compare.CompareFragment auto-inject {}
+	}
+}]]>
+		</MweSnippet>
       </generatorConfiguration>
    </extension>
    <extension
@@ -540,7 +423,7 @@
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -588,6 +471,57 @@
              </with>
           </enablement>
        </renameParticipant>
+    </extension>
+
+    <!-- marker definitions for org.eclipse.xtext.Xtext -->
+    <extension
+            id="xtext.check.fast"
+            name="%Grammar_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="xtext.check.normal"
+            name="%Grammar_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="xtext.check.expensive"
+            name="%Grammar_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
+    <!-- quickfix marker resolution generator for org.eclipse.xtext.Xtext -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.xtext.ui.xtext.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.xtext.ui.xtext.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.xtext.ui.xtext.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
     </extension>
 
 </plugin>

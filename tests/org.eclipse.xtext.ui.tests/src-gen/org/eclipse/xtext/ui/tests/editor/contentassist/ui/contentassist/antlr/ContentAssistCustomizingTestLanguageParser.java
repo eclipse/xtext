@@ -37,12 +37,14 @@ public class ContentAssistCustomizingTestLanguageParser extends AbstractContentA
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getTypeAccess().getAlternatives_0(), "rule__Type__Alternatives_0");
 					put(grammarAccess.getTypeAccess().getGroup(), "rule__Type__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup_1(), "rule__Type__Group_1__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
 					put(grammarAccess.getModelAccess().getTypesAssignment(), "rule__Model__TypesAssignment");
-					put(grammarAccess.getTypeAccess().getNameAssignment_0(), "rule__Type__NameAssignment_0");
+					put(grammarAccess.getTypeAccess().getNameAssignment_0_0(), "rule__Type__NameAssignment_0_0");
+					put(grammarAccess.getTypeAccess().getNameAssignment_0_1(), "rule__Type__NameAssignment_0_1");
 					put(grammarAccess.getTypeAccess().getSuperTypeAssignment_1_1(), "rule__Type__SuperTypeAssignment_1_1");
 					put(grammarAccess.getTypeRefAccess().getTypeAssignment(), "rule__TypeRef__TypeAssignment");
 				}

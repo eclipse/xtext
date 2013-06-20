@@ -41,6 +41,8 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	 * A cache for the contained descriptions.
 	 */
 	private Map<URI, IResourceDescription> uriToDescription;
+	
+	private boolean uriToDescriptionCacheEnabled = true;
 
 	public ResourceDescriptionsBasedContainer(IResourceDescriptions descriptions) {
 		this.descriptions = descriptions;
@@ -78,7 +80,23 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 		return getUriToDescription().size();
 	}
 	
+	/**
+	 * @since 2.3
+	 */
+	public void setUriToDescriptionCacheEnabled(boolean enabled) {
+		this.uriToDescriptionCacheEnabled = enabled;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public boolean isUriToDescriptionCacheEnabled() {
+		return this.uriToDescriptionCacheEnabled;
+	}
+	
 	protected Map<URI, IResourceDescription> getUriToDescription() {
+		if (!uriToDescriptionCacheEnabled)
+			return doGetUriToDescription();
 		Map<URI, IResourceDescription> result = uriToDescription;
 		if (result == null) {
 			result = doGetUriToDescription();

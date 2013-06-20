@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xtype;
 
@@ -164,6 +166,89 @@ public interface XtypePackage extends EPackage
 	int XCOMPUTED_TYPE_REFERENCE_FEATURE_COUNT = TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XImportSectionImpl <em>XImport Section</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtype.impl.XImportSectionImpl
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXImportSection()
+	 * @generated
+	 */
+	int XIMPORT_SECTION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Import Declarations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPORT_SECTION__IMPORT_DECLARATIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>XImport Section</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPORT_SECTION_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XImportDeclarationImpl <em>XImport Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtype.impl.XImportDeclarationImpl
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXImportDeclaration()
+	 * @generated
+	 */
+	int XIMPORT_DECLARATION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPORT_DECLARATION__EXTENSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPORT_DECLARATION__STATIC = 1;
+
+	/**
+	 * The feature id for the '<em><b>Imported Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPORT_DECLARATION__IMPORTED_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPORT_DECLARATION__IMPORTED_NAMESPACE = 3;
+
+	/**
+	 * The number of structural features of the '<em>XImport Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIMPORT_DECLARATION_FEATURE_COUNT = 4;
+
+	/**
 	 * The meta object id for the '<em>IJvm Type Reference Provider</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -171,7 +256,7 @@ public interface XtypePackage extends EPackage
 	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getIJvmTypeReferenceProvider()
 	 * @generated
 	 */
-	int IJVM_TYPE_REFERENCE_PROVIDER = 2;
+	int IJVM_TYPE_REFERENCE_PROVIDER = 4;
 
 
 	/**
@@ -248,6 +333,81 @@ public interface XtypePackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXComputedTypeReference_TypeProvider();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XImportSection <em>XImport Section</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XImport Section</em>'.
+	 * @see org.eclipse.xtext.xtype.XImportSection
+	 * @generated
+	 */
+	EClass getXImportSection();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.XImportSection#getImportDeclarations <em>Import Declarations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Import Declarations</em>'.
+	 * @see org.eclipse.xtext.xtype.XImportSection#getImportDeclarations()
+	 * @see #getXImportSection()
+	 * @generated
+	 */
+	EReference getXImportSection_ImportDeclarations();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XImportDeclaration <em>XImport Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XImport Declaration</em>'.
+	 * @see org.eclipse.xtext.xtype.XImportDeclaration
+	 * @generated
+	 */
+	EClass getXImportDeclaration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtype.XImportDeclaration#isExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.eclipse.xtext.xtype.XImportDeclaration#isExtension()
+	 * @see #getXImportDeclaration()
+	 * @generated
+	 */
+	EAttribute getXImportDeclaration_Extension();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtype.XImportDeclaration#isStatic <em>Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static</em>'.
+	 * @see org.eclipse.xtext.xtype.XImportDeclaration#isStatic()
+	 * @see #getXImportDeclaration()
+	 * @generated
+	 */
+	EAttribute getXImportDeclaration_Static();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtype.XImportDeclaration#getImportedType <em>Imported Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Imported Type</em>'.
+	 * @see org.eclipse.xtext.xtype.XImportDeclaration#getImportedType()
+	 * @see #getXImportDeclaration()
+	 * @generated
+	 */
+	EReference getXImportDeclaration_ImportedType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtype.XImportDeclaration#getImportedNamespace <em>Imported Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+	 * @see org.eclipse.xtext.xtype.XImportDeclaration#getImportedNamespace()
+	 * @see #getXImportDeclaration()
+	 * @generated
+	 */
+	EAttribute getXImportDeclaration_ImportedNamespace();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider <em>IJvm Type Reference Provider</em>}'.
@@ -342,6 +502,66 @@ public interface XtypePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XCOMPUTED_TYPE_REFERENCE__TYPE_PROVIDER = eINSTANCE.getXComputedTypeReference_TypeProvider();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XImportSectionImpl <em>XImport Section</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtype.impl.XImportSectionImpl
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXImportSection()
+		 * @generated
+		 */
+		EClass XIMPORT_SECTION = eINSTANCE.getXImportSection();
+
+		/**
+		 * The meta object literal for the '<em><b>Import Declarations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XIMPORT_SECTION__IMPORT_DECLARATIONS = eINSTANCE.getXImportSection_ImportDeclarations();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XImportDeclarationImpl <em>XImport Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtype.impl.XImportDeclarationImpl
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXImportDeclaration()
+		 * @generated
+		 */
+		EClass XIMPORT_DECLARATION = eINSTANCE.getXImportDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XIMPORT_DECLARATION__EXTENSION = eINSTANCE.getXImportDeclaration_Extension();
+
+		/**
+		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XIMPORT_DECLARATION__STATIC = eINSTANCE.getXImportDeclaration_Static();
+
+		/**
+		 * The meta object literal for the '<em><b>Imported Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XIMPORT_DECLARATION__IMPORTED_TYPE = eINSTANCE.getXImportDeclaration_ImportedType();
+
+		/**
+		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XIMPORT_DECLARATION__IMPORTED_NAMESPACE = eINSTANCE.getXImportDeclaration_ImportedNamespace();
 
 		/**
 		 * The meta object literal for the '<em>IJvm Type Reference Provider</em>' data type.

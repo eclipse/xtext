@@ -7,52 +7,53 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassFinderTest extends TestCase {
+public class ClassFinderTest extends Assert {
 
 	private ClassFinder classFinder;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		classFinder = new ClassFinder(getClass().getClassLoader());
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		classFinder = null;
-		super.tearDown();
 	}
 	
-	public void testVoid() throws ClassNotFoundException {
+	@Test public void testVoid() throws ClassNotFoundException {
 		assertSame(Void.TYPE, classFinder.forName("void"));
 	}
 	
-	public void testInt() throws ClassNotFoundException {
+	@Test public void testInt() throws ClassNotFoundException {
 		assertSame(Integer.TYPE, classFinder.forName("int"));
 	}
 	
-	public void testIntArray_01() throws ClassNotFoundException {
+	@Test public void testIntArray_01() throws ClassNotFoundException {
 		assertSame(int[].class, classFinder.forName("int[]"));
 	}
 	
-	public void testIntArray_02() throws ClassNotFoundException {
+	@Test public void testIntArray_02() throws ClassNotFoundException {
 		assertSame(int[].class, classFinder.forName(int[].class.getName()));
 	}
 	
-	public void testObject() throws ClassNotFoundException {
+	@Test public void testObject() throws ClassNotFoundException {
 		assertSame(Object.class, classFinder.forName("java.lang.Object"));
 	}
 	
-	public void testObjectArray_01() throws ClassNotFoundException {
+	@Test public void testObjectArray_01() throws ClassNotFoundException {
 		assertSame(Object[].class, classFinder.forName("java.lang.Object[]"));
 	}
 	
-	public void testObjectArray_02() throws ClassNotFoundException {
+	@Test public void testObjectArray_02() throws ClassNotFoundException {
 		assertSame(Object[].class, classFinder.forName(Object[].class.getName()));
 	}
 	

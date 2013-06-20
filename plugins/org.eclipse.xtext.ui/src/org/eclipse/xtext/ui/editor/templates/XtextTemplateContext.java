@@ -67,6 +67,21 @@ public class XtextTemplateContext extends DocumentTemplateContext {
 
 		return buffer;
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public TemplateBuffer evaluateForDisplay(Template template) throws BadLocationException, TemplateException {
+		if (!canEvaluate(template))
+			return null;
+		
+		TemplateTranslator translator= new TemplateTranslator();
+		TemplateBuffer buffer= translator.translate(template);
+		
+		getContextType().resolve(buffer, this);
+		
+		return buffer;
+	}
 
 	protected TemplateTranslator createTemplateTranslator() {
 		try {

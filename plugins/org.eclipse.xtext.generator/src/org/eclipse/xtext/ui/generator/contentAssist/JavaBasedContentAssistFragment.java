@@ -11,10 +11,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.AbstractInheritingGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGeneratorFragment;
@@ -24,9 +25,7 @@ import org.eclipse.xtext.generator.IGeneratorFragment;
  *
  * @author Jan Koehnlein
  */
-public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
-
-	private boolean inherit = true;
+public class JavaBasedContentAssistFragment extends AbstractInheritingGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
@@ -53,25 +52,55 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	}
 
 	@Override
+	public String[] getExportedPackagesUi(Grammar grammar) {
+		return new String[] { getNaming().packageName(getProposalProviderClassName(grammar)) };
+	}
+	
+	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.<Object>singletonList(inherit);
+		return Collections.<Object>singletonList(getSuperClassName(grammar));
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected String getSuperClassName(Grammar grammar) {
+		Grammar superGrammar = getSuperGrammar(grammar);
+		if(isInheritImplementation() && superGrammar != null)
+			return getProposalProviderClassName(superGrammar);
+		else 
+			return "org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider";
+			
 	}
 
 	/**
 	 * Decide whether to inherit content assist from the super language.
 	 *
 	 * @param inherit
+	 * @deprecated use {@link #setInheritImplementation(boolean)} instead
 	 */
+	@Deprecated
 	public void setInherit(boolean inherit) {
-		this.inherit = inherit;
+		this.setInheritImplementation(inherit);
 	}
 
+	/**
+	 * @deprecated use {@link #isInheritImplementation()} instead
+	 */
+	@Deprecated
 	public boolean isInherit() {
-		return inherit;
+		return isInheritImplementation();
 	}
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public static String getClassName(EObject eObject) {
+		return eObject.eClass().getName();
 	}
 }

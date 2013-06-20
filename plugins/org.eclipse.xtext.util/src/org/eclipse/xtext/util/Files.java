@@ -9,6 +9,7 @@
 package org.eclipse.xtext.util;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -44,10 +45,14 @@ public class Files {
 				try {
 					copy.createNewFile();
 					FileOutputStream fwr = new FileOutputStream(copy);
-					byte[] buff = new byte[1024];
-					int read;
-					while ((read = is.read(buff)) != -1) {
-						fwr.write(buff, 0, read);
+					try {
+						byte[] buff = new byte[1024];
+						int read;
+						while ((read = is.read(buff)) != -1) {
+							fwr.write(buff, 0, read);
+						}
+					} finally {
+						fwr.close();
 					}
 					log.debug("Copied " + copy);
 				} catch (IOException e) {
@@ -80,7 +85,7 @@ public class Files {
 		for (int j = 0; j < contents.length; j++) {
 			final File file = contents[j];
 			if (file.isDirectory()) {
-				if (!cleanFolder(file, myFilter, continueOnError, false) && !continueOnError)
+				if (!cleanFolder(file, myFilter, continueOnError, true) && !continueOnError)
 					return false;
 			} else {
 				if (!file.delete()) {
@@ -91,7 +96,7 @@ public class Files {
 			}
 		}
 		if (deleteParentFolder) {
-			if (!parentFolder.delete()) {
+			if (parentFolder.list().length==0 && !parentFolder.delete()) {
 				log.error("Couldn't delete " + parentFolder.getAbsolutePath());
 				return false;
 			}
@@ -125,6 +130,28 @@ public class Files {
 		}
 	}
 
+	
+	/**
+	 * @since 2.3
+	 */
+	public static byte[] readStreamIntoByteArray(InputStream inputStream) {
+		try {
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+	
+			int nRead;
+			byte[] data = new byte[16384];
+	
+				while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+				  buffer.write(data, 0, nRead);
+				}
+	
+			buffer.flush();
+	
+			return buffer.toByteArray();
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
 	public static String readStreamIntoString(InputStream inputStream) {
 		if (inputStream==null)
 			throw new NullPointerException("inputStream");

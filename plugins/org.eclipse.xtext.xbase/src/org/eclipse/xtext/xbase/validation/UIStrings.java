@@ -11,13 +11,22 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -32,6 +41,7 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class UIStrings {
 
 	@Inject
@@ -40,9 +50,20 @@ public class UIStrings {
 	@Inject
 	private FeatureCallToJavaMapping featureCallToJavaMapping;
 	
+	@Inject
+	private LazyURIEncoder lazyURIEncoder;
+	
+	public String signature(JvmExecutable executable) {
+		StringBuilder b = new StringBuilder(executable.getSimpleName());
+		b.append(parameters(executable));
+		if(executable instanceof JvmOperation) 
+			b.append(" : ").append(((JvmOperation) executable).getReturnType().getSimpleName());
+		return b.toString();
+	}
+	
 	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {
-			return "(" + parameterTypes(((JvmExecutable)element).getParameters()) + ")";
+			return "(" + parameterTypes(((JvmExecutable)element).getParameters(), ((JvmExecutable)element).isVarArgs()) + ")";
 		}
 		return "";
 	}
@@ -100,15 +121,40 @@ public class UIStrings {
 			if (needsSeparator)
 				buffer.append(", ");
 			needsSeparator = true;
-			if(typeRef != null) {
-				if (typeRef instanceof JvmAnyTypeReference)
-					buffer.append("Object");
-				else
-					buffer.append(typeRef.getSimpleName());
-			} else 
-				buffer.append("[null]");
+			buffer.append(referenceToString(typeRef, "[null]"));
 		}
 		return buffer.toString();
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public String referenceToString(JvmTypeReference typeRef, String defaultLabel) {
+		if(typeRef != null) {
+			if (typeRef instanceof JvmAnyTypeReference)
+				return "Object";
+			else {
+				JvmType type = typeRef.getType();
+				if (type != null && type.eIsProxy() && typeRef.eResource() != null) {
+					URI proxyURI = EcoreUtil.getURI(type);
+					String fragment = proxyURI.fragment();
+					if (lazyURIEncoder.isCrossLinkFragment(typeRef.eResource(), fragment)) {
+						Triple<EObject, EReference, INode> decoded = lazyURIEncoder.decode(typeRef.eResource(), fragment);
+						INode node = decoded.getThird();
+						if (node != null) {
+							String text = node.getRootNode().getText();
+							String result = text.substring(node.getOffset(), node.getLength() + node.getOffset());
+							return result;
+						} else {
+							return defaultLabel;
+						}
+					}
+				} else {
+					return typeRef.getSimpleName();
+				}
+			}
+		}
+		return defaultLabel;
 	}
 
 	protected String expressionTypes(Iterable<XExpression> expressions) {
@@ -119,7 +165,7 @@ public class UIStrings {
 		}));
 	}
 
-	protected String parameterTypes(Iterable<JvmFormalParameter> parameters) {
+	protected String parameterTypes(Iterable<JvmFormalParameter> parameters, @SuppressWarnings("unused") boolean isVarArgs) {
 		return referencesToString(transform(parameters, new Function<JvmFormalParameter, JvmTypeReference>() {
 			public JvmTypeReference apply(JvmFormalParameter from) {
 				return from.getParameterType();

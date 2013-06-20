@@ -38,5 +38,18 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/resource/LocationProviderTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/resource/LiveContainerTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/resource/LiveContainerBuilderIntegerationTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+			fragment = generator.builder.BuilderIntegrationFragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/resource/Bug385636TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 	}
 }

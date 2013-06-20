@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl;
 
@@ -34,7 +31,7 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
   {
     try
     {
-      HiddentokenmergertestFactory theHiddentokenmergertestFactory = (HiddentokenmergertestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger"); 
+      HiddentokenmergertestFactory theHiddentokenmergertestFactory = (HiddentokenmergertestFactory)EPackage.Registry.INSTANCE.getEFactory(HiddentokenmergertestPackage.eNS_URI);
       if (theHiddentokenmergertestFactory != null)
       {
         return theHiddentokenmergertestFactory;

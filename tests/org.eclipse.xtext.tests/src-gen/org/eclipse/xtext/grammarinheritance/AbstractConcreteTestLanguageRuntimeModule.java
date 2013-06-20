@@ -70,6 +70,11 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 	}
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.class;
 	}
@@ -81,12 +86,12 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.grammarinheritance.serializer.AbstractConcreteTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.grammarinheritance.serializer.ConcreteTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.grammarinheritance.serializer.AbstractConcreteTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.grammarinheritance.serializer.ConcreteTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

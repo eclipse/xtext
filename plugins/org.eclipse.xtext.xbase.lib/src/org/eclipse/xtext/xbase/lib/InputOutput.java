@@ -7,13 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * Utilities to print information to the console.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class InputOutput {
+@GwtCompatible public class InputOutput {
 
+	/**
+	 * Prints a newline to standard out, by delegating directly to <code>System.out.println()</code>
+	 * @since 2.3
+	 */
+	public static void println() {
+		System.out.println();
+	}
 	/**
 	 * Prints the given {@code object} to {@link System#out System.out} and terminate the line. Useful to log partial
 	 * expressions to trap errors, e.g. the following is possible: <code>println(1 + println(2)) + 3</code>

@@ -7,12 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.serialization.DeserializationConversionContext;
+import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext;
+import org.eclipse.xtext.nodemodel.serialization.SerializationUtil;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Mark Christiaens - Serialization support
  * @noextend This class is not intended to be subclassed by clients.
  */
 public class LeafNode extends AbstractNode implements ILeafNode {
@@ -56,4 +63,22 @@ public class LeafNode extends AbstractNode implements ILeafNode {
 		return Collections.<ILeafNode>singletonList(this);
 	}
 
+	@Override 
+	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+		super.readData(in, context);
+		
+		totalLength = SerializationUtil.readInt(in, true);   
+	}
+	
+	@Override
+	void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
+		super.write(out, scc);
+		
+		SerializationUtil.writeInt (out, totalLength, true); 
+	}
+
+	@Override
+	NodeType getNodeId() {
+		return NodeType.LeafNode;
+	}
 }

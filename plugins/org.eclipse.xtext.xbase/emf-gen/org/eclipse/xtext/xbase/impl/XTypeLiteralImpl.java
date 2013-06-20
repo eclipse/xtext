@@ -1,16 +1,24 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.common.types.JvmType;
 
@@ -25,6 +33,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl#getArrayDimensions <em>Array Dimensions</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +50,16 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 	 * @ordered
 	 */
 	protected JvmType type;
+
+	/**
+	 * The cached value of the '{@link #getArrayDimensions() <em>Array Dimensions</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArrayDimensions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> arrayDimensions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -111,6 +130,20 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getArrayDimensions()
+	{
+		if (arrayDimensions == null)
+		{
+			arrayDimensions = new EDataTypeEList<String>(String.class, this, XbasePackage.XTYPE_LITERAL__ARRAY_DIMENSIONS);
+		}
+		return arrayDimensions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
@@ -119,6 +152,8 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 			case XbasePackage.XTYPE_LITERAL__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case XbasePackage.XTYPE_LITERAL__ARRAY_DIMENSIONS:
+				return getArrayDimensions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -128,6 +163,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
@@ -135,6 +171,10 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 		{
 			case XbasePackage.XTYPE_LITERAL__TYPE:
 				setType((JvmType)newValue);
+				return;
+			case XbasePackage.XTYPE_LITERAL__ARRAY_DIMENSIONS:
+				getArrayDimensions().clear();
+				getArrayDimensions().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -153,6 +193,9 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 			case XbasePackage.XTYPE_LITERAL__TYPE:
 				setType((JvmType)null);
 				return;
+			case XbasePackage.XTYPE_LITERAL__ARRAY_DIMENSIONS:
+				getArrayDimensions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -169,8 +212,27 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 		{
 			case XbasePackage.XTYPE_LITERAL__TYPE:
 				return type != null;
+			case XbasePackage.XTYPE_LITERAL__ARRAY_DIMENSIONS:
+				return arrayDimensions != null && !arrayDimensions.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (arrayDimensions: ");
+		result.append(arrayDimensions);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XTypeLiteralImpl

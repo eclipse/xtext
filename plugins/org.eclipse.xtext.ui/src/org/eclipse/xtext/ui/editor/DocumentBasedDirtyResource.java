@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -19,11 +20,12 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IResourceDescription> {
+public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension, Provider<IResourceDescription> {
 	
 	private IXtextDocument document;
 	private IResourceDescription description;
 	private String content;
+	private URI normalizedUri;
 	
 	public void connect(IXtextDocument document) {
 		if (document == null)
@@ -37,6 +39,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IRes
 			@Override
 			public void process(XtextResource resource) {
 				if (resource != null) {
+					DocumentBasedDirtyResource.this.normalizedUri = EcoreUtil2.getNormalizedURI(resource);
 					initiallyProcessResource(resource);
 				}
 			}
@@ -89,9 +92,12 @@ public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IRes
 		return result;
 	}
 	
-	public synchronized void copyState(IResourceDescription original) {
-		description = new StatefulResourceDescription(original, this);
-		content = getUnderlyingDocument().get();
+	public void copyState(IResourceDescription original) {
+		StatefulResourceDescription copy = new StatefulResourceDescription(original, this);
+		synchronized(this) {
+			description = copy;
+			content = getUnderlyingDocument().get();
+		}
 	}
 	
 	public IXtextDocument getUnderlyingDocument() {
@@ -130,6 +136,13 @@ public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IRes
 		if (document == null)
 			throw new IllegalStateException("Cannot use getActualContents if this dirty resource is not connected to a document");
 		return document.get();
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public URI getNormalizedURI() {
+		return normalizedUri;
 	}
 
 }

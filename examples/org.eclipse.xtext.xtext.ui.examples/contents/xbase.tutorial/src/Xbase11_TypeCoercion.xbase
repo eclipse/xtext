@@ -18,22 +18,18 @@ i
 'string'.length.toString
 // 6 (String)
 
-/*
- * Arrays are automatically coerced to Lists.
- */
  
 'string'.toCharArray
 // [C@388e28 (char[])
 
-val java.util.List<Character> l = 'string'.toCharArray
-// [s, t, r, i, n, g] (void)
-
-/*
- * Again this works also in a receiver context.
- */
-
 'string'.toCharArray.get(3)
 // i (Character)
+
+/*
+ * Arrays are automatically coerced to Lists.
+ */
+val java.util.List<Character> l = 'string'.toCharArray
+// [s, t, r, i, n, g] (void)
 
 /*
  * Closure Coercion
@@ -41,4 +37,7 @@ val java.util.List<Character> l = 'string'.toCharArray
  * one method in addition to the ones inherited from java.lang.Object
  */
 val java.util.Comparator<String> comparator = [a,b| a.length.compareTo(b.length)]
+comparator.compare('1', ' 2')
+// -1 (int)
+
 

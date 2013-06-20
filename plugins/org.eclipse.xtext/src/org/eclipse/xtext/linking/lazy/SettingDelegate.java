@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
- * Delegating implementation of an {@link EStructuralFeature.Setting} to be independent
+ * Delegating implementation of an {@link org.eclipse.emf.ecore.EStructuralFeature.Setting} to be independent
  * of other's {@code hashCode()} and {@code equals(Object)} implementation.
  * The criteria is here: The settings's eObject and eStructuralFeature have to be equal.
  * 

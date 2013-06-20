@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.ignoreCaseLinkingTest.impl;
 
@@ -33,7 +30,7 @@ public class IgnoreCaseLinkingTestFactoryImpl extends EFactoryImpl implements Ig
   {
     try
     {
-      IgnoreCaseLinkingTestFactory theIgnoreCaseLinkingTestFactory = (IgnoreCaseLinkingTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/ignoreCaseLinkingTestLanguage"); 
+      IgnoreCaseLinkingTestFactory theIgnoreCaseLinkingTestFactory = (IgnoreCaseLinkingTestFactory)EPackage.Registry.INSTANCE.getEFactory(IgnoreCaseLinkingTestPackage.eNS_URI);
       if (theIgnoreCaseLinkingTestFactory != null)
       {
         return theIgnoreCaseLinkingTestFactory;

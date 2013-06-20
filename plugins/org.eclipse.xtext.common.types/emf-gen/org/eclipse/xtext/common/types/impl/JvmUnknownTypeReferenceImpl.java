@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -21,7 +23,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl#getException <em>Exception</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl#getQualifiedName <em>Qualified Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,24 +32,24 @@ import org.eclipse.xtext.common.types.TypesPackage;
 public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom implements JvmUnknownTypeReference
 {
 	/**
-	 * The default value of the '{@link #getException() <em>Exception</em>}' attribute.
+	 * The default value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getException()
+	 * @see #getQualifiedName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Exception EXCEPTION_EDEFAULT = null;
+	protected static final String QUALIFIED_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getException() <em>Exception</em>}' attribute.
+	 * The cached value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getException()
+	 * @see #getQualifiedName()
 	 * @generated
 	 * @ordered
 	 */
-	protected Exception exception = EXCEPTION_EDEFAULT;
+	protected String qualifiedName = QUALIFIED_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,9 +77,10 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Exception getException()
+	@Override
+	public String getQualifiedName()
 	{
-		return exception;
+		return qualifiedName;
 	}
 
 	/**
@@ -85,12 +88,12 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setException(Exception newException)
+	public void setQualifiedName(String newQualifiedName)
 	{
-		Exception oldException = exception;
-		exception = newException;
+		String oldQualifiedName = qualifiedName;
+		qualifiedName = newQualifiedName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION, oldException, exception));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME, oldQualifiedName, qualifiedName));
 	}
 
 	/**
@@ -103,8 +106,8 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION:
-				return getException();
+			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME:
+				return getQualifiedName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,8 +122,8 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION:
-				setException((Exception)newValue);
+			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME:
+				setQualifiedName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,8 +139,8 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION:
-				setException(EXCEPTION_EDEFAULT);
+			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME:
+				setQualifiedName(QUALIFIED_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -153,8 +156,8 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION:
-				return EXCEPTION_EDEFAULT == null ? exception != null : !EXCEPTION_EDEFAULT.equals(exception);
+			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME:
+				return QUALIFIED_NAME_EDEFAULT == null ? qualifiedName != null : !QUALIFIED_NAME_EDEFAULT.equals(qualifiedName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -170,8 +173,8 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (exception: ");
-		result.append(exception);
+		result.append(" (qualifiedName: ");
+		result.append(qualifiedName);
 		result.append(')');
 		return result.toString();
 	}

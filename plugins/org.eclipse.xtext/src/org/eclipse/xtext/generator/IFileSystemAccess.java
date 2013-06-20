@@ -16,14 +16,14 @@ public interface IFileSystemAccess {
 	
 	/**
 	 * @param fileName using '/' as file separator
-	 * @param contents
+	 * @param contents the to-be-written contents.
 	 */
 	public void generateFile(String fileName, CharSequence contents);
 	
 	/**
 	 * @param fileName using '/' as file separator
-	 * @param the name of the output configuration
-	 * @param contents
+	 * @param outputConfigurationName the name of the output configuration
+	 * @param contents the to-be-written contents.
 	 */
 	public void generateFile(String fileName, String outputConfigurationName, CharSequence contents);
 	

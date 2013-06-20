@@ -9,6 +9,8 @@ package org.eclipse.xtext.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,11 +18,11 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 public interface ILinker {
 
 	/**
-	 * sets cross references in the passed {@link EObject} and its {@link EObject#eAllContents()},
-	 * using the information available (usually using the {@link AbstractNode} model associated via {@link NodeAdapter})
+	 * Sets cross references in the passed {@link EObject} and its {@link EObject#eAllContents() contents},
+	 * using the information available (usually using the {@link INode} model associated via {@link NodeModelUtils})
 	 * 
-	 * @param model
-	 * @param diagnosticsConsumer
+	 * @param model the root model of a resource
+	 * @param diagnosticsConsumer the consumer of linking diagnostics
 	 */
 	void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
 

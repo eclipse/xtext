@@ -30,7 +30,7 @@ public class FeatureBasedDiagnostic extends AbstractValidationDiagnostic {
 		super(severity, message, source, checkType, issueCode, issueData);
 		if (feature != null && source != null) {
 			if (source.eClass().getEStructuralFeature(feature.getName()) != feature) {
-				throw new IllegalArgumentException("EClass '" + source.eClass().getName() + "' does not expose a feature '" + feature.getName() + "'");
+				throw new IllegalArgumentException("The sources EClass '" + source.eClass().getName() + "' does not expose the feature '" + feature.getEContainingClass().getName() + "." + feature.getName() + "'");
 			}
 		}
 		this.feature = feature;

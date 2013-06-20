@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ISelectable;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
@@ -98,6 +99,11 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 
 	public void setContext(Notifier ctx) {
 		this.resourceSet = EcoreUtil2.getResourceSet(ctx);
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + getClass().getSimpleName() + "\n  " + Joiner.on("\n  ").join(getAllResourceDescriptions()) + "\n]";
 	}
 
 }

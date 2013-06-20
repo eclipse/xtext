@@ -52,7 +52,8 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 					contents = state.getContents();
 				}
 				URI resourceURI = input.getEObjectURI().trimFragment();
-				return contents.contains(resourceURI);
+				final boolean contains = contents.contains(resourceURI);
+				return contains;
 			}
 		});
 	}
@@ -123,6 +124,14 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		if (state.getContents().isEmpty())
 			return emptyList();
 		return super.getExportedObjects(type, qualifiedName, ignoreCase);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public String toString() {
+		return "["+getClass().getSimpleName()+"] "+ state;
 	}
 
 }

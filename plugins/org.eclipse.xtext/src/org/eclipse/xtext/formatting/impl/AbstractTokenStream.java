@@ -18,6 +18,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStreamExtension;
  */
 public abstract class AbstractTokenStream implements ITokenStreamExtension {
 
+	
 	public void flush() throws IOException {
 	}
 
@@ -32,4 +33,5 @@ public abstract class AbstractTokenStream implements ITokenStreamExtension {
 	 */
 	public void init(ParserRule startRule) {
 	}
+	
 }

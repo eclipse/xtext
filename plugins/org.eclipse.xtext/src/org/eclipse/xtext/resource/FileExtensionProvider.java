@@ -13,11 +13,13 @@ import org.eclipse.xtext.Constants;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class FileExtensionProvider {
 
 	private Set<String> fileExtensions;

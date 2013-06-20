@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -30,6 +32,10 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#getDefaultValue <em>Default Value</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isSynchronized <em>Synchronized</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isNative <em>Native</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  * </ul>
  * </p>
  *
@@ -116,6 +122,86 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 * @ordered
 	 */
 	protected JvmAnnotationValue defaultValue;
+
+	/**
+	 * The default value of the '{@link #isSynchronized() <em>Synchronized</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSynchronized()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SYNCHRONIZED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isSynchronized() <em>Synchronized</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSynchronized()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean synchronized_ = SYNCHRONIZED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isDefault() <em>Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DEFAULT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDefault() <em>Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean default_ = DEFAULT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isNative() <em>Native</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNative()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean NATIVE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isNative() <em>Native</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNative()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean native_ = NATIVE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isStrictFloatingPoint() <em>Strict Floating Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStrictFloatingPoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STRICT_FLOATING_POINT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStrictFloatingPoint() <em>Strict Floating Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStrictFloatingPoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean strictFloatingPoint = STRICT_FLOATING_POINT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -214,33 +300,6 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 */
 	public JvmTypeReference getReturnType()
 	{
-		if (returnType != null && returnType.eIsProxy())
-		{
-			InternalEObject oldReturnType = (InternalEObject)returnType;
-			returnType = (JvmTypeReference)eResolveProxy(oldReturnType);
-			if (returnType != oldReturnType)
-			{
-				InternalEObject newReturnType = (InternalEObject)returnType;
-				NotificationChain msgs = oldReturnType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__RETURN_TYPE, null, null);
-				if (newReturnType.eInternalContainer() == null)
-				{
-					msgs = newReturnType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__RETURN_TYPE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_OPERATION__RETURN_TYPE, oldReturnType, returnType));
-			}
-		}
-		return returnType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeReference basicGetReturnType()
-	{
 		return returnType;
 	}
 
@@ -289,33 +348,6 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 */
 	public JvmAnnotationValue getDefaultValue()
 	{
-		if (defaultValue != null && defaultValue.eIsProxy())
-		{
-			InternalEObject oldDefaultValue = (InternalEObject)defaultValue;
-			defaultValue = (JvmAnnotationValue)eResolveProxy(oldDefaultValue);
-			if (defaultValue != oldDefaultValue)
-			{
-				InternalEObject newDefaultValue = (InternalEObject)defaultValue;
-				NotificationChain msgs = oldDefaultValue.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__DEFAULT_VALUE, null, null);
-				if (newDefaultValue.eInternalContainer() == null)
-				{
-					msgs = newDefaultValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__DEFAULT_VALUE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_OPERATION__DEFAULT_VALUE, oldDefaultValue, defaultValue));
-			}
-		}
-		return defaultValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmAnnotationValue basicGetDefaultValue()
-	{
 		return defaultValue;
 	}
 
@@ -362,6 +394,98 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isSynchronized()
+	{
+		return synchronized_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSynchronized(boolean newSynchronized)
+	{
+		boolean oldSynchronized = synchronized_;
+		synchronized_ = newSynchronized;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_OPERATION__SYNCHRONIZED, oldSynchronized, synchronized_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isDefault()
+	{
+		return default_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefault(boolean newDefault)
+	{
+		boolean oldDefault = default_;
+		default_ = newDefault;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_OPERATION__DEFAULT, oldDefault, default_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isNative()
+	{
+		return native_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNative(boolean newNative)
+	{
+		boolean oldNative = native_;
+		native_ = newNative;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_OPERATION__NATIVE, oldNative, native_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isStrictFloatingPoint()
+	{
+		return strictFloatingPoint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStrictFloatingPoint(boolean newStrictFloatingPoint)
+	{
+		boolean oldStrictFloatingPoint = strictFloatingPoint;
+		strictFloatingPoint = newStrictFloatingPoint;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_OPERATION__STRICT_FLOATING_POINT, oldStrictFloatingPoint, strictFloatingPoint));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -392,11 +516,17 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 			case TypesPackage.JVM_OPERATION__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
-				if (resolve) return getReturnType();
-				return basicGetReturnType();
+				return getReturnType();
 			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
-				if (resolve) return getDefaultValue();
-				return basicGetDefaultValue();
+				return getDefaultValue();
+			case TypesPackage.JVM_OPERATION__SYNCHRONIZED:
+				return isSynchronized();
+			case TypesPackage.JVM_OPERATION__DEFAULT:
+				return isDefault();
+			case TypesPackage.JVM_OPERATION__NATIVE:
+				return isNative();
+			case TypesPackage.JVM_OPERATION__STRICT_FLOATING_POINT:
+				return isStrictFloatingPoint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -425,6 +555,18 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 				return;
 			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
 				setDefaultValue((JvmAnnotationValue)newValue);
+				return;
+			case TypesPackage.JVM_OPERATION__SYNCHRONIZED:
+				setSynchronized((Boolean)newValue);
+				return;
+			case TypesPackage.JVM_OPERATION__DEFAULT:
+				setDefault((Boolean)newValue);
+				return;
+			case TypesPackage.JVM_OPERATION__NATIVE:
+				setNative((Boolean)newValue);
+				return;
+			case TypesPackage.JVM_OPERATION__STRICT_FLOATING_POINT:
+				setStrictFloatingPoint((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -455,6 +597,18 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
 				setDefaultValue((JvmAnnotationValue)null);
 				return;
+			case TypesPackage.JVM_OPERATION__SYNCHRONIZED:
+				setSynchronized(SYNCHRONIZED_EDEFAULT);
+				return;
+			case TypesPackage.JVM_OPERATION__DEFAULT:
+				setDefault(DEFAULT_EDEFAULT);
+				return;
+			case TypesPackage.JVM_OPERATION__NATIVE:
+				setNative(NATIVE_EDEFAULT);
+				return;
+			case TypesPackage.JVM_OPERATION__STRICT_FLOATING_POINT:
+				setStrictFloatingPoint(STRICT_FLOATING_POINT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -479,6 +633,14 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 				return returnType != null;
 			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
 				return defaultValue != null;
+			case TypesPackage.JVM_OPERATION__SYNCHRONIZED:
+				return synchronized_ != SYNCHRONIZED_EDEFAULT;
+			case TypesPackage.JVM_OPERATION__DEFAULT:
+				return default_ != DEFAULT_EDEFAULT;
+			case TypesPackage.JVM_OPERATION__NATIVE:
+				return native_ != NATIVE_EDEFAULT;
+			case TypesPackage.JVM_OPERATION__STRICT_FLOATING_POINT:
+				return strictFloatingPoint != STRICT_FLOATING_POINT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -500,6 +662,14 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 		result.append(final_);
 		result.append(", abstract: ");
 		result.append(abstract_);
+		result.append(", synchronized: ");
+		result.append(synchronized_);
+		result.append(", default: ");
+		result.append(default_);
+		result.append(", native: ");
+		result.append(native_);
+		result.append(", strictFloatingPoint: ");
+		result.append(strictFloatingPoint);
 		result.append(')');
 		return result.toString();
 	}

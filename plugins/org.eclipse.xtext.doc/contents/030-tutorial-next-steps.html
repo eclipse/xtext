@@ -5,19 +5,19 @@
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
-<link rel="home" href="index.html" title="">
+<link rel="home" href="xtext.html" title="">
 </head>
 <body>
 <a name="DomainmodelNextSteps"></a>
 <h1>15 Minutes Tutorial - Extended</h1>
 <p>
-After you&apos;ve developed you first own DSL, the question arises, how the behavior and the semantics of
+After you have developed you first own DSL, the question arises, how the behavior and the semantics of
 the language can be customized. Therefore a couple of mini-tutorials are available, that illustrate common
 use cases when crafting an own DSL.
 </p>
 <p>
 These lessons are independent from each other. Each of them will be based on the language that
-was build in the first <a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough" title="Go to &quot;15 Minutes Tutorial&quot;">domain model tutorial</a>.
+was build in the first <a href="020-domainmodel-step-by-step.html#DomainModelWalkThrough" title="Go to &quot;15 Minutes Tutorial&quot;">domain model tutorial</a>.
 </p>
 <p>
 That is, the syntax and the grammar for the language look like this:
@@ -27,32 +27,32 @@ That is, the syntax and the grammar for the language look like this:
 <div class="incode">
 <p class="code">
 <span class="keyword">package</span>&nbsp;java.lang&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;String<br/>
+&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;String<br/>
 }<br/>
 <br/>
 <span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;java.lang.*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;java.lang.*<br/>
+&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;}<br/>
+}
 </p>
 </div>
 </div>
@@ -61,7 +61,7 @@ That is, the syntax and the grammar for the language look like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 <br/>
 <span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span><br/>
@@ -110,7 +110,7 @@ Entity:<br/>
 &nbsp;<br/>
 Feature:<br/>
 &nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
-;<br/>
+;
 </p>
 </div>
 </div>
@@ -123,9 +123,9 @@ runtime project of your language. Let&apos;s dive into Xtend and see how you can
 with Eclipse.
 </p>
 <p>
-In this lesson you&apos;ll generate Java Beans for entities that are defined in the domain model DSL. For
+In this lesson you will generate Java Beans for entities that are defined in the domain model DSL. For
 each <em>Entity</em>, a Java class is generated and each <em>Feature</em> will lead to a private field in that class and
-public getters and setters. For the sake of simplicity, we&apos;ll use fully qualified names for all over
+public getters and setters. For the sake of simplicity, we will use fully qualified names all over
 the generated code.
 </p>
 <p>
@@ -135,22 +135,22 @@ the generated code.
 <span class="keyword">package</span>&nbsp;my.company.blog;<br/>
 <br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;java.lang.String&nbsp;author;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;java.lang.String&nbsp;getAuthor()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;author;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setAuthor(java.lang.String&nbsp;author)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.author&nbsp;=&nbsp;author;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;java.lang.String&nbsp;author;<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;java.lang.String&nbsp;getAuthor()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;author;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setAuthor(java.lang.String&nbsp;author)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.author&nbsp;=&nbsp;author;<br/>
+&nbsp;&nbsp;}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
-First of all, locate the file <em>DomainmodelGenerator.xtend</em> in the package <em>org.eclipse.xtext.example.generator</em>.
+First of all, locate the file <em>DomainmodelGenerator.xtend</em> in the package <em>org.example.domainmodel.generator</em>.
 This Xtend class is used to generate code for your models in the standalone scenario and in the interactive
 Eclipse environment.
 </p>
@@ -158,57 +158,72 @@ Eclipse environment.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;org.eclipse.xtext.example.generator<br/>
+<span class="keyword">package</span>&nbsp;org.example.domainmodel.generator<br/>
 <br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.resource.Resource<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IFileSystemAccess<br/>
 <br/>
 <span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+&nbsp;&nbsp;}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
-Let&apos;s make the implementation more meaningful and start the implementation. The strategy is, to find
-all entities with a resource and trigger code generation for each one.
+Let&apos;s make the implementation more meaningful and start writing the code generator. The strategy is to find
+all entities within a resource and trigger code generation for each one.
 </p>
 <p>
 <ol>
 	<li>
 		
-				First of all, you&apos;ll have to filter the contents of the resource down to the defined entities. Therefore
-				we need to iterate a resource with all it&apos;s deeply nested elements.
-				
-				Xtend ships with a utility that simplifies this greatly. The class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xtend2/lib/ResourceExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xtend2.lib.ResourceExtensions" >ResourceExtensions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xtend2.lib/src/org/eclipse/xtext/xtend2/lib/ResourceExtensions.java" title="View Source Code" >(src)</a>
-				provides the useful function <span class="inlinecode">allContentsIterable()</span> which we want to import as a static
-				extension.
-				
-				<div class="literallayout">
+		    First of all, you will have to filter the contents of the resource down to the defined entities. Therefore
+		    we need to iterate a resource with all its deeply nested elements. This can be achieved with the method
+		    <span class="inlinecode">getAllContents()</span>. To use the resulting <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/TreeIterator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.TreeIterator" >TreeIterator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java" title="View Source Code" >(src)</a> in
+		    a for loop, we use the extension method <span class="inlinecode">toIterable()</span> from the built-in library class
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions" >IteratorExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>.
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.xtend2.lib.ResourceExtensions.*<br/>
-		<br/>
 		<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
-		..<br/>
-		}<br/>
+		&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(Entity))&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;}<br/>
+		}
 		</p>
 		</div>
 		</div>
 		
-				
-				Afterwards we can iterate all the objects and filter them by their type to find all <em>Entities</em>.
-				
-				<div class="literallayout">
+	</li>
+	<li>
+		
+		    Now let&apos;s answer the question, how we determine the file name of the Java class, that each <em>Entity</em>
+		    should yield. This information should be derived from the qualified name of the <em>Entity</em> since
+		    Java enforces this pattern. The qualified name itself has to be obtained from a special service
+		    that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
+		    inject the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> into the generator.
+		    
+		    <span class="inlinecode">@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider</span>
+		    
+		    This allows to ask for the name of an entity. It is straightforward to convert the name into
+		    a file name:
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		}<br/>
+		&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(Entity))&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
+		&nbsp;&nbsp;}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -216,34 +231,18 @@ all entities with a resource and trigger code generation for each one.
 	</li>
 	<li>
 		
-				Now let&apos;s answer the question, how we determine the file name of the Java class, that each <em>Entity</em>
-				should yield. This information should be derived from the qualified name of the <em>Entity</em> since
-				Java enforces this pattern. The qualified name itself has to be obtained from a special service
-				that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
-				inject the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> into the generator.
-				
-				<div class="literallayout">
+		    The next step is to write the actual template code for an entity. For now, the function <span class="inlinecode">Entity.compile</span>
+		    does not exist, but it is easy to create it:
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider<br/>
-		</p>
-		</div>
-		</div>
-		
-				
-				This allows to ask for the name of an entity. It is straight forward to convert the name into
-				a file name:
-				
-				<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		}<br/>
+		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+		&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;{<br/>
+		&nbsp;&nbsp;}<br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -251,18 +250,38 @@ all entities with a resource and trigger code generation for each one.
 	</li>
 	<li>
 		
-				The next step is to write the actual template code for an entity. For now, the function <span class="inlinecode">Entity.compile</span>
-				does not exist, but it&apos;s easy to create it:
-				
-				<div class="literallayout">
+		    This small template is basically the first shot at a Java-Beans generator. However, it is currently
+		    rather incomplete and will fail, if the <em>Entity</em> is not contained in a package. A small modification
+		    fixes this. The <span class="inlinecode"><span class="keyword">package</span></span>-declaration has to be wrapped in an <span class="inlinecode"><span class="keyword">IF</span></span> expression:
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		&apos;</span><span class="string">&apos;&apos;</span><br/>
+		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+		&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;{<br/>
+		&nbsp;&nbsp;}<br/>
+		&apos;&apos;&apos;</span>
+		</p>
+		</div>
+		</div>
+		    Let&apos;s handle the <em>superType</em> of an <em>Entity</em> gracefully, too by using another <span class="inlinecode"><span class="keyword">IF</span></span> expression:
+		    
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+		&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
+		&nbsp;&nbsp;}<br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -270,88 +289,49 @@ all entities with a resource and trigger code generation for each one.
 	</li>
 	<li>
 		
-				This small template is basically the first shot at a Java Beans generator. However, it&apos;s currently
-				rather incomplete and will fail, if the <em>Entity</em> is not contained in a package. A small modification
-				fixes this. The <span class="inlinecode"><span class="keyword">package</span></span>-declaration has to be wrapped in an <span class="inlinecode"><span class="keyword">IF</span></span> expression:
-				
-				<div class="literallayout">
+		    Even though the template will compile the <em>Entities</em> without any complains, it still lacks support
+		    for the Java properties, that each of the declared features should yield.
+		    
+		    For that purpose, you have to create another Xtend function that compiles a single feature
+		    to the respective Java code.
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		&apos;</span><span class="string">&apos;&apos;</span><br/>
-		</p>
-		</div>
-		</div>
-				Let&apos;s handle the <em>superType</em> of an <em>Entity</em> gracefully, too by using another <span class="inlinecode"><span class="keyword">IF</span></span> expression:
-				
-				<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		&apos;</span><span class="string">&apos;&apos;</span><br/>
+		<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+		&nbsp;&nbsp;private&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;public&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;get&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;(&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>f.name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;}<br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
 		
-	</li>
-	<li>
-		
-				Even though the template will compile the <em>Entities</em> without any complains, it still lacks support
-				for the Java properties, that each of the declared features should yield.
-				
-				For that purpose, you&apos;d have to create another Xtend function that compiles a single feature
-				to the respective Java code.
-				
-				<div class="literallayout">
+		    
+		    As you can see, there is nothing fancy about this one. Last but not least, we have to make sure
+		    that the function is actually used.
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;get&laquo;f.name.toFirstUpper&raquo;()&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;f.name&raquo;;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;f.name.toFirstUpper&raquo;(&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;f.name&raquo;&nbsp;=&nbsp;&laquo;f.name&raquo;;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		&apos;</span><span class="string">&apos;&apos;</span><br/>
-		</p>
-		</div>
-		</div>
-		
-				
-				As you can see, there&apos;s nothing fancy about this one. Last but not least, we have to make sure
-				that the function is actually used.
-				
-				<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f:e.features&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.compile&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		&apos;</span><span class="string">&apos;&apos;</span><br/>
+		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+		&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+		&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f:e.features<span class="string">&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile<span class="string">&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+		&nbsp;&nbsp;}<br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -369,98 +349,99 @@ and see how the compiler will pick up your sample <em>Entities</em> and generate
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;org.eclipse.xtext.example.generator<br/>
+<span class="keyword">package</span>&nbsp;org.example.domainmodel.generator<br/>
 <br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.resource.Resource<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IFileSystemAccess<br/>
-<br/>
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.xtend2.lib.ResourceExtensions.*<br/>
-<br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.*<br/>
-<br/>
+<span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Entity<br/>
+<span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Feature<br/>
 <span class="keyword">import</span>&nbsp;org.eclipse.xtext.naming.IQualifiedNameProvider<br/>
 <br/>
 <span class="keyword">import</span>&nbsp;com.google.inject.Inject<br/>
 <br/>
 <span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(Entity))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer.fullyQualifiedName&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f:e.features<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;get&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f:e.features&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.compile&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;get&laquo;f.name.toFirstUpper&raquo;()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;f.name&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;f.name.toFirstUpper&raquo;(&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;f.name&raquo;&nbsp;=&nbsp;&laquo;f.name&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
-}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;(&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>f.name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
 If you want to play around with Xtend, you can try to use the Xtend tutorial which can be materialized
-into your workspace. Simply choose <em>New -&gt; Example -&gt; Xtend Tutorial</em> and have a look at Xtend&apos;s features.
+into your workspace. Simply choose <em>New -&gt; Example -&gt; Xtend Examples -&gt; Xtend Introductory
+Examples</em> and have a look at Xtend&apos;s features.
 As a small exercise, you could implement support for the <em>many</em> attribute of a <em>Feature</em> or enforce
 naming conventions, e.g. field names should start with an underscore.
 </p>
 <a name="TutorialUnitTests"></a>
 <h2>Unit Testing the Language</h2>
 <p>
-Automated tests are crucial for the maintainability and the quality of a software product. That&apos;s why
+Automated tests are crucial for the maintainability and the quality of a software product. That is why
 it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
-a test project for that purpose. It simplifies the setup procedure both for the eclipse agnostic tests and the ui
+a test project for that purpose. It simplifies the setup procedure both for the Eclipse agnostic tests and the UI
 tests for Junit4.
 </p>
 <p>
 This tutorial is about testing the parser and the linker for the <em>Domainmodel</em>. It leverages Xtend to
-write the testcase.
+write the test case.
 </p>
 <p>
 <ol>
 	<li>
 		
-				First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test
-				plugin, and select <em>New -&gt; Xtend Class</em> from the context menu. Provide a meaningful name and
-				enter the package before you hit finish.
-				
-				The core of the test infrastructure is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/XtextRunner.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.XtextRunner" >XtextRunner</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/XtextRunner.java" title="View Source Code" >(src)</a> and
-				the language specific <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/IInjectorProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.IInjectorProvider" >IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a>. Both have to be provided
-				by means of class annotations:  
+		    First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test
+		    plugin, and select <em>New -&gt; Xtend Class</em> from the context menu. Provide a meaningful name and
+		    enter the package before you hit finish.
+		    
+		    The core of the test infrastructure is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/junit4/XtextRunner.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.XtextRunner" >XtextRunner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java" title="View Source Code" >(src)</a> and
+		    the language specific <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/junit4/IInjectorProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.IInjectorProvider" >IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a>. Both have to be provided
+		    by means of class annotations:  
 		 
-				<div class="literallayout">
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@InjectWith(<span class="keyword">typeof</span>(DomainmodelInjectorProvider))<br/>
-		@RunWith(<span class="keyword">typeof</span>(XtextRunner))<br/>
+		<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.XtextRunner<br/>
+		<span class="keyword">import</span>&nbsp;org.example.domainmodel.DomainmodelInjectorProvider<br/>
+		<br/>
+		@InjectWith(DomainmodelInjectorProvider)<br/>
+		@RunWith(XtextRunner)<br/>
 		<span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -468,26 +449,30 @@ write the testcase.
 	</li>
 	<li>
 		
-				The actual test case is pretty straight forward with Xtend. The utility class 
-				<em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into a
-				<em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of
-				<abbr title="junit.framework.Assert" >Assert</abbr> leads to concise a readable test cases.
-				
-				<div class="literallayout">
+		    The actual test case is pretty straight forward with Xtend. The utility class 
+		    <em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into a
+		    <em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of
+		    <a class="jdoc" href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html" title="View JavaDoc"><abbr title="org.junit.Assert" >Assert</abbr></a> leads to concise and readable test cases.
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@Inject<br/>
+		<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.util.ParseHelper<br/>
+		<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.junit.Assert.*<br/>
+		<br/>
+		...<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
 		ParseHelper&lt;Domainmodel&gt;&nbsp;parser<br/>
 		<br/>
 		@Test&nbsp;<br/>
 		<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;parseDomainmodel()&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;model&nbsp;=&nbsp;parser.parse(<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"entity&nbsp;MyEntity&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;MyEntity<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}"</span>)<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;entity&nbsp;=&nbsp;model.elements.head&nbsp;<span class="keyword">as</span>&nbsp;Entity<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;assertSame(entity,&nbsp;entity.features.head.type)<br/>
-		}<br/>
+		&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;model&nbsp;=&nbsp;parser.parse(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"entity&nbsp;MyEntity&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;MyEntity<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}"</span>)<br/>
+		&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;entity&nbsp;=&nbsp;model.elements.head&nbsp;<span class="keyword">as</span>&nbsp;Entity<br/>
+		&nbsp;&nbsp;assertSame(entity,&nbsp;entity.features.head.type)<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -495,8 +480,7 @@ write the testcase.
 	</li>
 	<li>
 		
-				After saving the Xtend file, it is time to run the test. Please locate the generated java class
-				in the <em>xtend-gen</em> folder and select <em>Run As -&gt; JUnit Test</em> from the context menu.
+		    After saving the Xtend file, it is time to run the test. Select <em>Run As -&gt; JUnit Test</em> from the editor&apos;s context menu.
 	</li>
 </ol>
 </p>
@@ -510,7 +494,7 @@ that the name of an <em>Entity</em> starts with an upper-case letter and that al
 across the inheritance relationship of an <em>Entity</em>.
 </p>
 <p>
-Try to locate the class <em>DomainmodelJavaValidator</em> in the package <em>org.eclipse.xtext.example.validation</em>.
+Try to locate the class <em>DomainmodelValidator</em> in the package <em>org.eclipse.xtext.example.validation</em>.
 It can be found in the language plug-in. Defining the constraint itself is only a matter of a few lines
 of code:
 </p>
@@ -519,18 +503,18 @@ of code:
 <div class="incode">
 <p class="code">
 @Check<br/>
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkNameStartsWithCapital(Entity&nbsp;entity)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(entity.getName().charAt(0)))&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.TYPE__NAME);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;checkNameStartsWithCapital(Entity&nbsp;entity)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character::isUpperCase(entity.getName().charAt(0)))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage$Literals::TYPE__NAME);<br/>
+&nbsp;&nbsp;}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
-Any name for the method will do. The important thing is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>
+Any name for the method will do. The important thing is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>
 annotation that advises the framework to use the method as a validation rule. If the name starts with
 a lower case letter, a warning will be attached to the name of the <em>Entity</em>.
 </p>
@@ -543,19 +527,18 @@ and look for features with equal names.
 <div class="incode">
 <p class="code">
 @Check<br/>
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFeatureNameIsUnique(Feature&nbsp;f)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;superEntity&nbsp;=&nbsp;((Entity)&nbsp;f.eContainer()).getSuperType();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(superEntity&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(Feature&nbsp;other:&nbsp;superEntity.getFeatures())&nbsp;{<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFeatureNameIsUnique(Feature&nbsp;f)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;superEntity&nbsp;=&nbsp;(f.eContainer()&nbsp;<span class="keyword">as</span>&nbsp;Entity).getSuperType();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(superEntity&nbsp;!=&nbsp;null)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(other&nbsp;:&nbsp;superEntity.getFeatures())&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(f.getName().equals(other.getName()))&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Feature&nbsp;names&nbsp;have&nbsp;to&nbsp;be&nbsp;unique"</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.FEATURE__NAME);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Feature&nbsp;names&nbsp;have&nbsp;to&nbsp;be&nbsp;unique"</span>,&nbsp;DomainmodelPackage$Literals::FEATURE__NAME);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superEntity&nbsp;=&nbsp;superEntity.getSuperType();<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>

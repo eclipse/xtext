@@ -8,7 +8,6 @@
 package org.eclipse.xtext.example.domainmodel.ui.outline;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.ui.PluginImageHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -43,10 +42,6 @@ public class FilterOperationsContribution extends AbstractFilterOutlineContribut
 		action.setText("Hide operations");
 		action.setDescription("Hide operations");
 		action.setToolTipText("Hide operations");
-		action.setImageDescriptor(getImageDescriptor("icons/Operation.gif"));
-	}
-
-	protected ImageDescriptor getImageDescriptor(String imagePath) {
-		return ImageDescriptor.createFromImage(imageHelper.getImage("Operation.gif"));
+		action.setImageDescriptor(imageHelper.getImageDescriptor("Operation.gif"));
 	}
 }

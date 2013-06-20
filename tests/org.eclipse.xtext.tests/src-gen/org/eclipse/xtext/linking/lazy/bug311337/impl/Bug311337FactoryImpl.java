@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.bug311337.impl;
 
@@ -33,7 +30,7 @@ public class Bug311337FactoryImpl extends EFactoryImpl implements Bug311337Facto
   {
     try
     {
-      Bug311337Factory theBug311337Factory = (Bug311337Factory)EPackage.Registry.INSTANCE.getEFactory("http://xtext.org/testlanguages/bug311337"); 
+      Bug311337Factory theBug311337Factory = (Bug311337Factory)EPackage.Registry.INSTANCE.getEFactory(Bug311337Package.eNS_URI);
       if (theBug311337Factory != null)
       {
         return theBug311337Factory;

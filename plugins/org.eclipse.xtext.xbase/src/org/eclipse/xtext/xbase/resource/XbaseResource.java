@@ -127,9 +127,11 @@ public class XbaseResource extends DerivedStateAwareResource {
 		AssumptionState state = assumptionState.get();
 		try {
 			if (state.proxyToAssumption.put(proxy, candidate) != null)
-				throw new AssertionError("there is already another assumption about the given proxy. " +
-						"Please make sure that you don't use AbstractFeatureCall#getFeature in the type inference or" +
-						"in your scoping implementation but AbstractTypeProvider#getFeature instead.");
+				throw new AssertionError("There is already another assumption about the given proxy. " +
+						"Please make sure that you don't use XAbstractFeatureCall#getFeature in the type inference or " +
+						"in your scoping implementation but AbstractTypeProvider#getFeature instead.\n" +
+						"You may want to look out for invocations of XAbstractFeatureCall#getFeature in the " +
+						"stack trace to spot the misbehaving implementation.");
 			if (featureCall != null) {
 				state.featureCallToReceiverAssumption.put(featureCall, implicitReceiver);
 				state.featureCallToFirstArgumentAssumption.put(featureCall, implicitFirstArgument);
@@ -186,6 +188,16 @@ public class XbaseResource extends DerivedStateAwareResource {
 		return resolvedResult;
 	}
 	
+	/**
+	 * This one is currently implemented as a no-op.
+	 * 
+	 * Intentional implementation would return the resolved instance without changing the owner of the reference. Only single-valued references
+	 * are currently supported.
+	 * 
+	 * @param proxy the proxy which should be resolved with tracking.
+	 * @param owner the owner of the proxy.
+	 * @param reference the cross reference.
+	 */
 	protected JvmIdentifiableElement trackResolution(JvmIdentifiableElement proxy, XExpression owner, EReference reference) {
 		return (JvmIdentifiableElement) owner.eGet(reference);
 //		Tracker tracker = trackAssumptions();

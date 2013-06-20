@@ -70,6 +70,11 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeModule extends Defa
 	}
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess.class;
 	}
@@ -81,12 +86,12 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeModule extends Defa
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.metamodelreferencing.tests.serializer.AbstractMetamodelRefTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.metamodelreferencing.tests.serializer.MetamodelRefTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.metamodelreferencing.tests.serializer.AbstractMetamodelRefTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.metamodelreferencing.tests.serializer.MetamodelRefTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

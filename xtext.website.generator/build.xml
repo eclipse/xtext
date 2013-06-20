@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     Copies the contents of website to the website repository                                                                
+     ====================================================================== -->
+<project name="deploy" default="default">
+
+    <target name="default" description="description">
+		<copy todir="../../xtext-website">
+			<fileset dir="website">
+			</fileset>
+		</copy> 
+    </target>
+
+	
+</project>

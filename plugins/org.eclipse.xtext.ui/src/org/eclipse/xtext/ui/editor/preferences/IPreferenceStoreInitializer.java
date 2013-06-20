@@ -22,10 +22,9 @@ import com.google.inject.TypeLiteral;
  */
 public interface IPreferenceStoreInitializer {
 	/**
-	 * 
+	 * Initialize preference values with the given {@link IPreferenceStoreAccess}
 	 */
 	public void initialize(IPreferenceStoreAccess access);
-	
 	
 	/**
 	 * a composite initialize calling all registered {@link IPreferenceStoreInitializer}s

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
@@ -26,8 +27,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.util.Strings;
+import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
@@ -43,7 +45,14 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		return result;
 	}
 	
-	public void testSimple() throws Exception {
+	private EDataType createEDataType(String name, Class<?> instanceClass) {
+		EDataType result = EcoreFactory.eINSTANCE.createEDataType();
+		result.setName(name);
+		result.setInstanceClass(instanceClass);
+		return result;
+	}
+	
+	@Test public void testSimple() throws Exception {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource foo = rs.createResource(URI.createURI("foo.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
@@ -54,7 +63,7 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertEquals(true, EcoreUtil2.isValidUri(ePackage, URI.createURI("bar.xmi")));
 	}
 
-	public void testEPackageURI() throws Exception {
+	@Test public void testEPackageURI() throws Exception {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource foo = rs.createResource(URI.createURI("foo.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
@@ -63,7 +72,7 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertEquals(true, EcoreUtil2.isValidUri(ePackage, URI.createURI(EcorePackage.eNS_URI)));
 	}
 	
-	public void testClone() throws Exception {
+	@Test public void testClone() throws Exception {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION,
 				new XMIResourceFactoryImpl());
 		EPackage.Registry.INSTANCE.put(EcorePackage.eINSTANCE.getNsURI(), EcorePackage.eINSTANCE);
@@ -100,7 +109,7 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertSame(b.getESuperTypes().get(0),a);
 	}
 
-	public void testCommonCompatibleType01() {
+	@Test public void testCommonCompatibleType01() {
 		EClass a = createEClass("a");
 		EClass b = createEClass("b");
 		EClass c = createEClass("c");
@@ -123,7 +132,7 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertSame(EOBJECT, EcoreUtil2.getCompatibleType(b, c));
 	}
 
-	public void testCommonCompatibleType02() {
+	@Test public void testCommonCompatibleType02() {
 		EClass a = createEClass("a");
 		EClass b = createEClass("b");
 		EClass c = createEClass("c");
@@ -144,7 +153,55 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertSame(a, EcoreUtil2.getCompatibleType(d, e));
 	}
 	
-	public void testGetAllSuperTypesWithCycle() {
+	@Test public void testGetCompatibleType_01() {
+		EDataType aString = createEDataType("a", String.class);
+		EDataType anotherString = createEDataType("b", String.class);
+		
+		assertSame(aString, EcoreUtil2.getCompatibleType(aString, anotherString, null));
+		assertSame(anotherString, EcoreUtil2.getCompatibleType(anotherString, aString, null));
+	}
+	
+	@Test public void testGetCompatibleType_02() {
+		EDataType aString = createEDataType("a", String.class);
+		EDataType anObject = createEDataType("b", Object.class);
+		
+		assertSame(anObject, EcoreUtil2.getCompatibleType(aString, anObject, null));
+		assertSame(anObject, EcoreUtil2.getCompatibleType(anObject, aString, null));
+	}
+	
+	@Test public void testGetCompatibleType_03() {
+		EDataType aCharSequence = createEDataType("a", CharSequence.class);
+		EDataType anAppendable = createEDataType("b", Appendable.class);
+		
+		assertSame(null, EcoreUtil2.getCompatibleType(aCharSequence, anAppendable, null));
+		assertSame(null, EcoreUtil2.getCompatibleType(anAppendable, aCharSequence, null));
+	}
+	
+	@Test public void testGetCompatibleType_04() {
+		EDataType aString = createEDataType("a", String.class);
+		EDataType anotherString = createEDataType("b", String.class);
+		
+		assertSame(aString, EcoreUtil2.getCompatibleType(aString, anotherString));
+		assertSame(anotherString, EcoreUtil2.getCompatibleType(anotherString, aString));
+	}
+	
+	@Test public void testGetCompatibleType_05() {
+		EDataType aString = createEDataType("a", String.class);
+		EDataType anObject = createEDataType("b", Object.class);
+		
+		assertSame(anObject, EcoreUtil2.getCompatibleType(aString, anObject));
+		assertSame(anObject, EcoreUtil2.getCompatibleType(anObject, aString));
+	}
+	
+	@Test public void testGetCompatibleType_06() {
+		EDataType aCharSequence = createEDataType("a", CharSequence.class);
+		EDataType anAppendable = createEDataType("b", Appendable.class);
+		
+		assertSame(null, EcoreUtil2.getCompatibleType(aCharSequence, anAppendable));
+		assertSame(null, EcoreUtil2.getCompatibleType(anAppendable, aCharSequence));
+	}
+	
+	@Test public void testGetAllSuperTypesWithCycle() {
 		EClass a = createEClass("a");
 		EClass b = createEClass("b");
 		b.getESuperTypes().add(a);
@@ -159,7 +216,7 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertTrue(EcoreUtil2.getAllSuperTypes(b).contains(b));
 	}
 	
-	public void testGetAllReferencedObjects() {
+	@Test public void testGetAllReferencedObjects() {
 		EClass a = createEClass("a");
 		EClass b = createEClass("b");
 		
@@ -184,7 +241,7 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		objA.eSet(ref, objB);
 	}
 	
-	public void testExternalFormOfEReference() throws Exception {
+	@Test public void testExternalFormOfEReference() throws Exception {
 		Registry registry = EPackage.Registry.INSTANCE;
 		Set<String> uris = Sets.newHashSet(registry.keySet());
 		for (String string : uris) {
@@ -204,20 +261,26 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 	/**
 	 * This test assumes that an EPackage with indexed references is no longer available.
 	 */
-	public void testExternalFormOfEReferenceNoNPE() throws Exception {
+	@Test public void testExternalFormOfEReferenceNoNPE() throws Exception {
 		EReference reference = EcorePackage.Literals.EATTRIBUTE__EATTRIBUTE_TYPE;
 		URI uri = EcoreUtil.getURI(reference);
 		String externalForm = uri.toString();
 		EReference foundReference = EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, externalForm);
 		assertSame(reference, foundReference);
-		String brokenExternalFrom = Strings.toFirstUpper(externalForm);
+		String brokenExternalFrom = makeInvalid(externalForm);
 		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenExternalFrom));
 		String shortExternalForm = EcoreUtil2.toExternalForm(reference);
 		foundReference = EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, shortExternalForm);
 		assertSame(reference, foundReference);
-		String brokenShortExternalFrom = Strings.toFirstUpper(shortExternalForm);
+		String brokenShortExternalFrom = makeInvalid(shortExternalForm);
 		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenShortExternalFrom));
 		brokenShortExternalFrom = shortExternalForm.replace('A', 'a');
 		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenShortExternalFrom));
+	}
+
+	protected String makeInvalid(String externalForm) {
+		// this used to be Strings.toFirstUpper but the spec does not impose case sensitivity constraints on the scheme
+		// so Ed decided to change that. In that sense, we now use another scheme instead of http:// which is xhttp://
+		return 'x' + externalForm;
 	}
 }

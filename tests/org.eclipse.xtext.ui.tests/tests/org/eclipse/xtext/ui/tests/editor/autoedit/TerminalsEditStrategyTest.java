@@ -7,19 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.autoedit;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractTerminalsEditStrategy;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class TerminalsEditStrategyTest extends TestCase {
+public class TerminalsEditStrategyTest extends Assert {
 	
 	static class TerminalsStrategy extends AbstractTerminalsEditStrategy {
 
@@ -42,13 +42,13 @@ public class TerminalsEditStrategyTest extends TestCase {
 		}
 	}
 	
-	public void testFindStartTerminal() throws Exception {
+	@Test public void testFindStartTerminal() throws Exception {
 		TerminalsStrategy strategy = new TerminalsStrategy("(", ")");
 		assertNull(strategy.findStartTerminal(new Document("(()())"),6));
 		assertEquals(0,strategy.findStartTerminal(new Document("(()())"),5).getOffset());
 	}
 
-	public void testFindStopTerminal() throws Exception {
+	@Test public void testFindStopTerminal() throws Exception {
 		TerminalsStrategy strategy = new TerminalsStrategy("(", ")");
 		assertNull(strategy.findStopTerminal(new Document("(()())"),0));
 		assertEquals(5,strategy.findStopTerminal(new Document("(()())"),1).getOffset());

@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xbase.impl;
 
@@ -34,8 +36,11 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#getMemberCallTarget <em>Member Call Target</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#getMemberCallArguments <em>Member Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isSpreading <em>Spreading</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isExplicitStatic <em>Explicit Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isNullSafe <em>Null Safe</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isTypeLiteral <em>Type Literal</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,24 +89,24 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	protected boolean explicitOperationCall = EXPLICIT_OPERATION_CALL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isSpreading() <em>Spreading</em>}' attribute.
+	 * The default value of the '{@link #isExplicitStatic() <em>Explicit Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isSpreading()
+	 * @see #isExplicitStatic()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean SPREADING_EDEFAULT = false;
+	protected static final boolean EXPLICIT_STATIC_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isSpreading() <em>Spreading</em>}' attribute.
+	 * The cached value of the '{@link #isExplicitStatic() <em>Explicit Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isSpreading()
+	 * @see #isExplicitStatic()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean spreading = SPREADING_EDEFAULT;
+	protected boolean explicitStatic = EXPLICIT_STATIC_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isNullSafe() <em>Null Safe</em>}' attribute.
@@ -122,6 +127,66 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * @ordered
 	 */
 	protected boolean nullSafe = NULL_SAFE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isTypeLiteral() <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTypeLiteral()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TYPE_LITERAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTypeLiteral() <em>Type Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTypeLiteral()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean typeLiteral = TYPE_LITERAL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isStaticWithDeclaringType() <em>Static With Declaring Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStaticWithDeclaringType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATIC_WITH_DECLARING_TYPE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStaticWithDeclaringType() <em>Static With Declaring Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStaticWithDeclaringType()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean staticWithDeclaringType = STATIC_WITH_DECLARING_TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isPackageFragment() <em>Package Fragment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPackageFragment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean PACKAGE_FRAGMENT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isPackageFragment() <em>Package Fragment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPackageFragment()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean packageFragment = PACKAGE_FRAGMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -234,9 +299,9 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isSpreading()
+	public boolean isExplicitStatic()
 	{
-		return spreading;
+		return explicitStatic;
 	}
 
 	/**
@@ -244,12 +309,12 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSpreading(boolean newSpreading)
+	public void setExplicitStatic(boolean newExplicitStatic)
 	{
-		boolean oldSpreading = spreading;
-		spreading = newSpreading;
+		boolean oldExplicitStatic = explicitStatic;
+		explicitStatic = newExplicitStatic;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__SPREADING, oldSpreading, spreading));
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_STATIC, oldExplicitStatic, explicitStatic));
 	}
 
 	/**
@@ -273,6 +338,75 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 		nullSafe = newNullSafe;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE, oldNullSafe, nullSafe));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isTypeLiteral()
+	{
+		return typeLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeLiteral(boolean newTypeLiteral)
+	{
+		boolean oldTypeLiteral = typeLiteral;
+		typeLiteral = newTypeLiteral;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL, oldTypeLiteral, typeLiteral));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isStaticWithDeclaringType()
+	{
+		return staticWithDeclaringType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStaticWithDeclaringType(boolean newStaticWithDeclaringType)
+	{
+		boolean oldStaticWithDeclaringType = staticWithDeclaringType;
+		staticWithDeclaringType = newStaticWithDeclaringType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE, oldStaticWithDeclaringType, staticWithDeclaringType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isPackageFragment()
+	{
+		return packageFragment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPackageFragment(boolean newPackageFragment)
+	{
+		boolean oldPackageFragment = packageFragment;
+		packageFragment = newPackageFragment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT, oldPackageFragment, packageFragment));
 	}
 
 	/**
@@ -309,10 +443,16 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return getMemberCallArguments();
 			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				return isExplicitOperationCall();
-			case XbasePackage.XMEMBER_FEATURE_CALL__SPREADING:
-				return isSpreading();
+			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_STATIC:
+				return isExplicitStatic();
 			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
 				return isNullSafe();
+			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
+				return isTypeLiteral();
+			case XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE:
+				return isStaticWithDeclaringType();
+			case XbasePackage.XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT:
+				return isPackageFragment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -338,11 +478,20 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				setExplicitOperationCall((Boolean)newValue);
 				return;
-			case XbasePackage.XMEMBER_FEATURE_CALL__SPREADING:
-				setSpreading((Boolean)newValue);
+			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_STATIC:
+				setExplicitStatic((Boolean)newValue);
 				return;
 			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
 				setNullSafe((Boolean)newValue);
+				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
+				setTypeLiteral((Boolean)newValue);
+				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE:
+				setStaticWithDeclaringType((Boolean)newValue);
+				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT:
+				setPackageFragment((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -367,11 +516,20 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				setExplicitOperationCall(EXPLICIT_OPERATION_CALL_EDEFAULT);
 				return;
-			case XbasePackage.XMEMBER_FEATURE_CALL__SPREADING:
-				setSpreading(SPREADING_EDEFAULT);
+			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_STATIC:
+				setExplicitStatic(EXPLICIT_STATIC_EDEFAULT);
 				return;
 			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
 				setNullSafe(NULL_SAFE_EDEFAULT);
+				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
+				setTypeLiteral(TYPE_LITERAL_EDEFAULT);
+				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE:
+				setStaticWithDeclaringType(STATIC_WITH_DECLARING_TYPE_EDEFAULT);
+				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT:
+				setPackageFragment(PACKAGE_FRAGMENT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -393,10 +551,16 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return memberCallArguments != null && !memberCallArguments.isEmpty();
 			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				return explicitOperationCall != EXPLICIT_OPERATION_CALL_EDEFAULT;
-			case XbasePackage.XMEMBER_FEATURE_CALL__SPREADING:
-				return spreading != SPREADING_EDEFAULT;
+			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_STATIC:
+				return explicitStatic != EXPLICIT_STATIC_EDEFAULT;
 			case XbasePackage.XMEMBER_FEATURE_CALL__NULL_SAFE:
 				return nullSafe != NULL_SAFE_EDEFAULT;
+			case XbasePackage.XMEMBER_FEATURE_CALL__TYPE_LITERAL:
+				return typeLiteral != TYPE_LITERAL_EDEFAULT;
+			case XbasePackage.XMEMBER_FEATURE_CALL__STATIC_WITH_DECLARING_TYPE:
+				return staticWithDeclaringType != STATIC_WITH_DECLARING_TYPE_EDEFAULT;
+			case XbasePackage.XMEMBER_FEATURE_CALL__PACKAGE_FRAGMENT:
+				return packageFragment != PACKAGE_FRAGMENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -414,10 +578,16 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (explicitOperationCall: ");
 		result.append(explicitOperationCall);
-		result.append(", spreading: ");
-		result.append(spreading);
+		result.append(", explicitStatic: ");
+		result.append(explicitStatic);
 		result.append(", nullSafe: ");
 		result.append(nullSafe);
+		result.append(", typeLiteral: ");
+		result.append(typeLiteral);
+		result.append(", staticWithDeclaringType: ");
+		result.append(staticWithDeclaringType);
+		result.append(", packageFragment: ");
+		result.append(packageFragment);
 		result.append(')');
 		return result.toString();
 	}

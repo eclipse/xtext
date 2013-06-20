@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.domainmodel.domainmodel.util;
 
@@ -88,11 +85,6 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
         return createAbstractElementAdapter();
       }
       @Override
-      public Adapter caseImport(Import object)
-      {
-        return createImportAdapter();
-      }
-      @Override
       public Adapter casePackageDeclaration(PackageDeclaration object)
       {
         return createPackageDeclarationAdapter();
@@ -165,21 +157,6 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAbstractElementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.domainmodel.Import <em>Import</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.domainmodel.Import
-   * @generated
-   */
-  public Adapter createImportAdapter()
   {
     return null;
   }

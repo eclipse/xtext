@@ -5,6 +5,7 @@ package org.eclipse.xtext.ui.codetemplates.ui;
 
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -17,8 +18,6 @@ import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleTemplateTokenDef
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingConfiguration;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TokenToAttributeMapper;
 import org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.ISyntheticResourceProvider;
-import org.eclipse.xtext.ui.codetemplates.ui.preferences.SyntheticResourceProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
 import org.eclipse.xtext.ui.codetemplates.ui.scoping.SyntheticResourceAwareScopeProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.validation.TemplateValidator;
@@ -67,10 +66,6 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 		return SyntheticResourceAwareScopeProvider.class;
 	}
 	
-	public Class<? extends ISyntheticResourceProvider> bindSyntheticResourceProvider() {
-		return SyntheticResourceProvider.class;
-	}
-	
 	public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
 		return SemanticHighlighter.class;
 	}
@@ -102,6 +97,10 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 	@Override
 	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 		return SimpleResourceSetProvider.class;
+	}
+	
+	public Class<? extends ITraceForStorageProvider> bindITraceInformation() {
+		return ITraceForStorageProvider.Null.class;
 	}
 
 	@Override

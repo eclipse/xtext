@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.domainmodel.domainmodel.impl;
 
@@ -33,7 +30,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
   {
     try
     {
-      DomainmodelFactory theDomainmodelFactory = (DomainmodelFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/example/Domainmodel"); 
+      DomainmodelFactory theDomainmodelFactory = (DomainmodelFactory)EPackage.Registry.INSTANCE.getEFactory(DomainmodelPackage.eNS_URI);
       if (theDomainmodelFactory != null)
       {
         return theDomainmodelFactory;
@@ -69,7 +66,6 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
     {
       case DomainmodelPackage.DOMAIN_MODEL: return createDomainModel();
       case DomainmodelPackage.ABSTRACT_ELEMENT: return createAbstractElement();
-      case DomainmodelPackage.IMPORT: return createImport();
       case DomainmodelPackage.PACKAGE_DECLARATION: return createPackageDeclaration();
       case DomainmodelPackage.ENTITY: return createEntity();
       case DomainmodelPackage.FEATURE: return createFeature();
@@ -100,17 +96,6 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
     return abstractElement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Import createImport()
-  {
-    ImportImpl import_ = new ImportImpl();
-    return import_;
   }
 
   /**

@@ -9,8 +9,9 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 
 import java.util.List;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IFilter;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Model;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -33,7 +35,7 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 	private OutlineFilterAndSorter filterAndSorter;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
 		with(new ISetup() {
@@ -43,13 +45,13 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 		});
 		Model model = OutlineTestFactory.eINSTANCE.createModel();
 		nodes = Lists.newArrayList();
-		nodes.add(new EObjectNode(model, null, null, "one", true));
-		nodes.add(new EObjectNode(model, null, null, "two", true));
-		nodes.add(new EObjectNode(model, null, null, "three", true));
+		nodes.add(new EObjectNode(model, null, (ImageDescriptor) null, "one", true));
+		nodes.add(new EObjectNode(model, null, (ImageDescriptor) null, "two", true));
+		nodes.add(new EObjectNode(model, null, (ImageDescriptor) null, "three", true));
 		filterAndSorter = new OutlineFilterAndSorter();
 	}
 
-	public void testFilter() throws Exception{
+	@Test public void testFilter() throws Exception{
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two", "three");
 		TestFilter testFilter = new TestFilter("three");
 		filterAndSorter.addFilter(testFilter);
@@ -58,7 +60,7 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two");
 	}
 
-	public void testSort() throws Exception {
+	@Test public void testSort() throws Exception {
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two", "three");
 		TestComparator testComparator = new TestComparator();
 		filterAndSorter.setComparator(testComparator);
@@ -67,7 +69,7 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "two", "three", "one");
 	}
 
-	public void testFilterAndSort() {
+	@Test public void testFilterAndSort() {
 		TestComparator testComparator = new TestComparator();
 		TestFilter testFilter = new TestFilter("three");
 		filterAndSorter.setComparator(testComparator);
@@ -81,7 +83,7 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two");
 	}
 	
-	public void testMulitpleFilters() {
+	@Test public void testMulitpleFilters() {
 		TestFilter testFilter0 = new TestFilter("three");
 		filterAndSorter.addFilter(testFilter0);
 		TestFilter testFilter1 = new TestFilter("one");

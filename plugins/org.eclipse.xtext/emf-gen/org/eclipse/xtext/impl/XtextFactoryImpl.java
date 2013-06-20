@@ -31,7 +31,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 	 */
 	public static XtextFactory init() {
 		try {
-			XtextFactory theXtextFactory = (XtextFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/Xtext"); 
+			XtextFactory theXtextFactory = (XtextFactory)EPackage.Registry.INSTANCE.getEFactory(XtextPackage.eNS_URI);
 			if (theXtextFactory != null) {
 				return theXtextFactory;
 			}
@@ -364,7 +364,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
+	 * @deprecated the package should not be accessed statically.
 	 * @generated
 	 */
 	@Deprecated

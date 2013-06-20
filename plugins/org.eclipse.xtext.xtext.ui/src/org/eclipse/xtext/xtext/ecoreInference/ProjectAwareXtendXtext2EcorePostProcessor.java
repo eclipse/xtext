@@ -32,7 +32,6 @@ import org.eclipse.emf.mwe.core.resources.ResourceLoaderImpl;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtend.expression.Resource;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 
@@ -42,26 +41,21 @@ import com.google.common.collect.Lists;
  * <code>XtendXtext2EcorePostProcessor</code> specialization which enables the xtend post processing file to refer to
  * classes and resources which are available from the classpath of the containing {@link IJavaProject}.
  * 
- * @author Michael Clay
- * @author Knut Wannheden
+ * @author szarnekow
+ * @author Dennis Huebner
  */
+@SuppressWarnings("restriction")
 public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcorePostProcessor implements
 		IResourceChangeListener {
 
 	private static final Logger logger = Logger.getLogger(ProjectAwareXtendXtext2EcorePostProcessor.class);
-	
-	private Resource xtendFile;
+
 	private ResourceLoader resourceLoader;
 
 	@Override
-	protected synchronized Resource loadXtendFile(GeneratedMetamodel metamodel) {
-		if (xtendFile == null) {
-			xtendFile = super.loadXtendFile(metamodel);
-			if (xtendFile != null) {
-				ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
-			}
-		}
-		return xtendFile;
+	protected void fireXtendFileLoaded() {
+		super.fireXtendFileLoaded();
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
 	}
 
 	@Override
@@ -82,8 +76,7 @@ public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcoreP
 				resourceLoader = new ResourceLoaderImpl(classLoader);
 				return resourceLoader;
 			}
-		}
-		catch (CoreException e) {
+		} catch (CoreException e) {
 			logger.error("Error creating execution context for java project '" + grammarFile.getProject().getName()
 					+ "'", e);
 		}
@@ -114,10 +107,8 @@ public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcoreP
 					urls.add(url);
 				}
 			}
-		}
-		catch (MalformedURLException e) {
-			logger.error(
-					"Error creating class loader for java project '" + javaProject.getProject().getName() + "'", e);
+		} catch (MalformedURLException e) {
+			logger.error("Error creating class loader for java project '" + javaProject.getProject().getName() + "'", e);
 		}
 		return new URLClassLoader(urls.toArray(new URL[urls.size()]), getClass().getClassLoader());
 	}
@@ -132,8 +123,8 @@ public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcoreP
 				case IClasspathEntry.CPE_SOURCE:
 					path = entry.getOutputLocation();
 					if (path != null) {
-						url = new URL(URI.createPlatformResourceURI(
-								path.addTrailingSeparator().toString(), true).toString());
+						url = new URL(URI.createPlatformResourceURI(path.addTrailingSeparator().toString(), true)
+								.toString());
 						result.add(url);
 					}
 					break;
@@ -145,7 +136,7 @@ public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcoreP
 	}
 
 	public synchronized void resourceChanged(IResourceChangeEvent event) {
-		xtendFile = null;
+		super.clearCachedXtendFile();
 		resourceLoader = null;
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 	}

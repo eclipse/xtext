@@ -12,7 +12,7 @@ import java.util.Set;
 import org.eclipse.jface.text.TypedRegion;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextUiModule;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
+import org.junit.Test;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
@@ -34,7 +35,7 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 	private Set<TypedRegion> expectedRegions;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup() {
 			@Override
@@ -45,7 +46,7 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		expectedRegions = Sets.newLinkedHashSet();
 	}
 
-	public void testNullPointerOnInvalidReturnKeyword() throws Exception {
+	@Test public void testNullPointerOnInvalidReturnKeyword() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"import 'http://www.eclipse.org/emf/2002/Ecore'\n" +
@@ -58,7 +59,7 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		});
 	}
 	
-	public void testHighlightGrammar() {
+	@Test public void testHighlightGrammar() {
 		String testGrammar = "grammar org.xtext.example.mydsl1.MyDsl with org.eclipse.xtext.common.Terminals\n" + 
 			"\n" + 
 			"generate myDsl \"http://www.xtext.org/example/mydsl1/MyDsl\"\n" + 
@@ -80,6 +81,8 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		expect(testGrammar.indexOf("Zonk"), "Zonk".length(), SemanticHighlightingConfiguration.TYPE_REFERENCE_ID);
 		expect(testGrammar.indexOf("Model"), "Model".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 		expect(testGrammar.indexOf("Greeting:"), "Greeting".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
+		expect(testGrammar.indexOf("name"), "name".length(), SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID);
+		expect(testGrammar.lastIndexOf("name"), "name".length(), SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID);
 		expect(testGrammar.indexOf("Identifier:"), "Identifier".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 		expect(testGrammar.indexOf("Unused:"), "Unused".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 		highlight(testGrammar);

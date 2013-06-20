@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -18,6 +20,7 @@ import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension2;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension3;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
@@ -45,8 +48,17 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Michael Clay
  * @author Christoph Kulla - Added support for hovers
+ * @author Holger Schill - Resolve proxies against context for hover
  */
-public class ConfigurableCompletionProposal implements Comparable<ConfigurableCompletionProposal>, ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension3, ICompletionProposalExtension4, ICompletionProposalExtension5, ICompletionProposalExtension6 {
+public class ConfigurableCompletionProposal implements 
+		Comparable<ConfigurableCompletionProposal>, 
+		ICompletionProposal,
+		ICompletionProposalExtension,
+		ICompletionProposalExtension2, 
+		ICompletionProposalExtension3, 
+		ICompletionProposalExtension4, 
+		ICompletionProposalExtension5, 
+		ICompletionProposalExtension6 {
 
 	private static final Logger log = Logger.getLogger(ConfigurableCompletionProposal.class);
 	
@@ -123,6 +135,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	 * @see ICompletionProposal#apply(IDocument)
 	 */
 	public void apply(IDocument document) {
+		String original = document.get();
 		try {
 			if (getTextApplier() == null) {
 				document.replace(getReplacementOffset(), getReplacementLength(), getReplacementString());
@@ -131,11 +144,12 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 			}
 			if (linkedMode)
 				setUpLinkedMode(document);
-		} catch (BadLocationException x) {
-			// ignore
+		} catch (Exception exc) {
+			log.error("Error applying completion proposal", exc);
+			document.set(original);
 		}
 	}
-
+	
 	/*
 	 * @see ICompletionProposal#getSelection(IDocument)
 	 */
@@ -211,9 +225,11 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	private boolean linkedMode;
 	private ITextViewer viewer;
 	private char[] exitChars;
+	private char[] triggerChars;
 	private PrefixMatcher matcher;
 	private int replaceContextLength;
 	private int priority;
+	private Resource contextResource;
 	
 	public boolean isAutoInsertable() {
 		return autoInsertable;
@@ -274,6 +290,12 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	public void setAdditionalProposalInfo(Object additionalProposalInfo) {
 		this.additionalProposalInfo = additionalProposalInfo;
 	}
+	/**
+	 * @since 2.4
+	 */
+	public void setProposalContextResource(Resource contextResource){
+		this.contextResource = contextResource;
+	}
 
 	public int getSelectionStart() {
 		return selectionStart;
@@ -297,6 +319,13 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		this.exitChars = exitChars;
 	}
 	
+	/**
+	 * @since 2.2
+	 */
+	protected boolean isLinkedMode() {
+		return linkedMode;
+	}
+	
 	public void apply(ITextViewer viewer, char trigger, int stateMask, int offset) {
 		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
 		boolean replaceRight = (stateMask & SWT.CTRL) != 0;
@@ -304,6 +333,44 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 			setReplacementLength(getReplaceContextLength());
 		}
 		apply(viewer.getDocument());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void apply(IDocument document, char trigger, int offset) {
+		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
+		apply(viewer.getDocument());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public boolean isValidFor(IDocument document, int offset) {
+		return validate(document, offset, null);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public int getContextInformationPosition() {
+		if (getContextInformation() == null)
+			return -1;
+		return getReplacementOffset() + getCursorPosition();
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public char[] getTriggerCharacters() {
+		return triggerChars;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setTriggerCharacters(char[] triggerChars) {
+		this.triggerChars = triggerChars;
 	}
 	
 	private Point rememberedSelection;
@@ -371,6 +438,11 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		this.priority = priority;
 	}
 
+	/**
+	 * Returns the priority of the proposal. The bigger the returned int value, the 
+	 * higher is the precedence of the proposal. Proposals with higher priority will
+	 * be listed above proposals with lower priority.
+	 */
 	public int getPriority() {
 		return priority;
 	}
@@ -482,6 +554,9 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 				}
 			}
 			if (eObject != null) {
+				if(eObject.eIsProxy()){
+					eObject = EcoreUtil.resolve(eObject, contextResource);
+				}
 				return hover.getHoverInfo(eObject, viewer, null);
 			}
 		}
@@ -490,6 +565,6 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	
 	@Override
 	public String toString() {
-		return "Proposal: " + getDisplayString().toString();
+		return "Proposal: " + getDisplayString();
 	}
 }

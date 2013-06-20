@@ -11,38 +11,18 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
-@SuppressWarnings("restriction")
-public class AbstractAbstractTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractAbstractTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
-	protected AbstractTestLanguageGrammarAccess grammarAccess;
-	
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-	
-	@Inject
-	protected ITransientValueService transientValues;
-	
-	@Inject
-	@GenericSequencer
-	protected Provider<ISemanticSequencer> genericSequencerProvider;
-	
-	protected ISemanticSequencer genericSequencer;
-	
-	
-	@Override
-	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequencer, sequenceAcceptor, errorAcceptor);
-		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
-	}
+	private AbstractTestLanguageGrammarAccess grammarAccess;
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AmetamodelPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
@@ -81,9 +61,6 @@ public class AbstractAbstractTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     elements+=ExtendableParserRule*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_AbstractCallExtendedParserRule(EObject context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -93,9 +70,6 @@ public class AbstractAbstractTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     elements+=OverridableParserRule*
-	 *
-	 * Features:
-	 *    elements[0, *]
 	 */
 	protected void sequence_AbstractCallOverridenParserRule(EObject context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -105,9 +79,6 @@ public class AbstractAbstractTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_ExtendableParserRule(EObject context, AType semanticObject) {
 		if(errorAcceptor != null) {
@@ -124,9 +95,6 @@ public class AbstractAbstractTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_InheritedParserRule(EObject context, AType semanticObject) {
 		if(errorAcceptor != null) {
@@ -143,9 +111,6 @@ public class AbstractAbstractTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     name=STRING
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_OverridableParserRule2(EObject context, AType semanticObject) {
 		if(errorAcceptor != null) {
@@ -162,9 +127,6 @@ public class AbstractAbstractTestLanguageSemanticSequencer extends AbstractSeman
 	/**
 	 * Constraint:
 	 *     name=ID
-	 *
-	 * Features:
-	 *    name[1, 1]
 	 */
 	protected void sequence_OverridableParserRule(EObject context, AType semanticObject) {
 		if(errorAcceptor != null) {

@@ -19,6 +19,7 @@ var file.extensions = "xtext,xtext2"
 
 Workflow {
 	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/../.."
 	}
 

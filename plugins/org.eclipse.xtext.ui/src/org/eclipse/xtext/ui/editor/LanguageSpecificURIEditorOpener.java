@@ -75,6 +75,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next().getFirst();
+				// TODO we should create a JarEntryEditorInput if storage is a NonJavaResource from jdt to match the editor input used when double clicking on the same resource in a jar.
 				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage)
 						: new XtextReadonlyEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
@@ -94,26 +95,40 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 			final int indexInList, final boolean select) {
 		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
-			if (uri.fragment() != null) {
-				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-					@Override
-					public void process(XtextResource resource) throws Exception {
-						if (resource != null) {
-							EObject object = resource.getEObject(uri.fragment());
-							if (object != null) {
-								ITextRegion location = (crossReference != null) ? locationProvider
-										.getSignificantTextRegion(object, crossReference, indexInList)
-										: locationProvider.getSignificantTextRegion(object);
-								if (select) {
-									xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
-								} else {
-									xtextEditor.reveal(location.getOffset(), location.getLength());
-								}
+			xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+				@Override
+				public void process(XtextResource resource) throws Exception {
+					if (resource != null) {
+						EObject object = findEObjectByURI(uri, resource);
+						if (object != null) {
+							ITextRegion location = (crossReference != null) ? locationProvider
+									.getSignificantTextRegion(object, crossReference, indexInList)
+									: locationProvider.getSignificantTextRegion(object);
+							if (select) {
+								xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+							} else {
+								xtextEditor.reveal(location.getOffset(), location.getLength());
 							}
 						}
 					}
-				});
+				}
+			});
+		}
+	}
+
+	
+	/**
+	 * @since 2.2
+	 */
+	protected EObject findEObjectByURI(final URI uri, XtextResource resource) {
+		if (uri.fragment() != null){
+			try {
+				EObject result = resource.getEObject(uri.fragment());
+				return result;
+			} catch (WrappedException e){
+				logger.error("Error while resolving EObject with URI '" + uri + "'" , e.getCause());
 			}
 		}
+		return null;
 	}
 }

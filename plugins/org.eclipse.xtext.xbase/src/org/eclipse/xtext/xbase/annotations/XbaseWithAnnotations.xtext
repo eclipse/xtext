@@ -32,23 +32,23 @@ XAnnotationElementValueStringConcatenation returns xbase::XExpression :
 
 XAnnotationElementValue returns xbase::XExpression :
 	XAnnotation |
-	XAnnotationValueArray |
+	XListLiteral |
 	XStringLiteral |
 	XBooleanLiteral |
-	XIntLiteral |
+	XNumberLiteral |
 	XTypeLiteral |
-	XAnnotationValueFieldReference |
+	XAnnotationValueMemberFieldReference |
 	'(' XAnnotationElementValueStringConcatenation ')'
+;
+
+XAnnotationValueMemberFieldReference returns xbase::XExpression :
+	XAnnotationValueFieldReference (
+		{xbase::XMemberFeatureCall.memberCallTarget=current} ("."|explicitStatic?="::")
+		feature=[types::JvmIdentifiableElement|IdOrSuper] 
+	)*
 ;
 
 XAnnotationValueFieldReference returns xbase::XExpression :
 	{xbase::XFeatureCall} 
-	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
 	feature=[types::JvmIdentifiableElement|IdOrSuper] 
 ;
-
-XAnnotationValueArray returns xbase::XExpression :
-	{XAnnotationValueArray} 
-	'{' values+=XAnnotationElementValue (',' values+=XAnnotationElementValue)* '}'
-;
-

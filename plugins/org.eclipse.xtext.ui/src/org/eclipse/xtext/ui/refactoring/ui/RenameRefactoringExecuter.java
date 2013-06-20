@@ -16,6 +16,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.IJobManager;
@@ -34,7 +35,9 @@ import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.refactoring.impl.Messages;
 
 import com.google.inject.Inject;
@@ -47,6 +50,9 @@ public class RenameRefactoringExecuter {
 
 	@Inject
 	private IWorkspace workspace;
+	
+	@Inject
+	private SyncUtil syncUtil;
 
 	private static final Logger LOG = Logger.getLogger(RenameRefactoringExecuter.class);
 
@@ -66,6 +72,7 @@ public class RenameRefactoringExecuter {
 	public void execute(IEditorPart editor, ProcessorBasedRefactoring refactoring) throws InterruptedException {
 		Assert.isTrue(Display.getCurrent() != null);
 		IWorkbenchWindow window = editor.getSite().getWorkbenchWindow();
+		IWorkbench workbench = window.getWorkbench();
 		Shell shell = editor.getSite().getShell();
 		if (!isApplicable(shell, refactoring))
 			return;
@@ -90,6 +97,7 @@ public class RenameRefactoringExecuter {
 			window.run(false, true, new WorkbenchRunnableAdapter(checkConditionsRunnable, rule, true));
 			PerformChangeOperation performChangeOperation = checkConditionsRunnable.getPerformChangeOperation();
 			if (performChangeOperation != null) {
+				Object[] affectedObjects = performChangeOperation.getChange().getAffectedObjects();
 				window.run(false, false, new WorkbenchRunnableAdapter(performChangeOperation, rule, true));
 				RefactoringStatus validationStatus = performChangeOperation.getValidationStatus();
 				if (validationStatus != null && validationStatus.hasFatalError()) {
@@ -99,6 +107,13 @@ public class RenameRefactoringExecuter {
 							Messages.format("Cannot execute refactoring",
 									validationStatus.getMessageMatchingSeverity(RefactoringStatus.FATAL))); 
 					return;
+				} else {
+					if(affectedObjects != null) {
+						for(Object affectedObject: affectedObjects) {
+							if(affectedObject instanceof ITextEditor) 
+								((ITextEditor) affectedObject).doSave(new NullProgressMonitor());
+						}
+					}
 				}
 			}
 		} catch (InvocationTargetException e) {
@@ -107,6 +122,8 @@ public class RenameRefactoringExecuter {
 			manager.endRule(rule);
 			refactoring.setValidationContext(null);
 		}
+		syncUtil.yieldToQueuedDisplayJobs(new NullProgressMonitor());
+		syncUtil.reconcileAllEditors(workbench, false, new NullProgressMonitor());
 	}
 
 	private void showFatalErrorMessage(Shell parent, String message) {

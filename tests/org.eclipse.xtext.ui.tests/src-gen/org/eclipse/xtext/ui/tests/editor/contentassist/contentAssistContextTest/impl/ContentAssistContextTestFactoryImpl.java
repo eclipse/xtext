@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.impl;
 
@@ -33,7 +30,7 @@ public class ContentAssistContextTestFactoryImpl extends EFactoryImpl implements
   {
     try
     {
-      ContentAssistContextTestFactory theContentAssistContextTestFactory = (ContentAssistContextTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest"); 
+      ContentAssistContextTestFactory theContentAssistContextTestFactory = (ContentAssistContextTestFactory)EPackage.Registry.INSTANCE.getEFactory(ContentAssistContextTestPackage.eNS_URI);
       if (theContentAssistContextTestFactory != null)
       {
         return theContentAssistContextTestFactory;

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.serializer.sequencer;
 
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -22,9 +21,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 public class TransientValueService implements ITransientValueService {
 
 	protected boolean defaultValueIsSerializeable(EStructuralFeature feature) {
-		// TODO: this needs a generic implementation
 		if (feature instanceof EAttribute) {
-			return feature.getEType() == EcorePackage.eINSTANCE.getEInt() || feature.getEType() instanceof EEnum;
+			if (feature.getEType() == EcorePackage.eINSTANCE.getEString() && feature.getDefaultValue() == null)
+				return false;
+			return true;
 		}
 		return false;
 	}

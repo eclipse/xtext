@@ -7,22 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmLongAnnotationValueTest extends TestCase {
+public class JvmLongAnnotationValueTest extends Assert {
 
 	private JvmLongAnnotationValue longAnnotationValue;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		longAnnotationValue = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
 	}	
 	
-	public void testMultiValue() {
+	@Test public void testMultiValue() {
 		longAnnotationValue.getValues().add(1l);
 		longAnnotationValue.getValues().add(1l);
 		assertEquals(2, longAnnotationValue.getValues().size());

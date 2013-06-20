@@ -12,49 +12,62 @@ package org.eclipse.xtext.generator;
  * @since 2.1
  */
 public class OutputConfiguration {
-	
+
 	/**
 	 * a unique name identifying this outlet configuration.
 	 */
 	private String name;
-	
+
 	/**
 	 * a description to be shown in the UI.
 	 */
 	private String description;
-	
+
 	/**
 	 * the project relative path to the output directory
 	 */
 	private String outputDirectory;
-	
+
 	/**
 	 * whether the output directory should be created if t doesn't already exist.
 	 */
 	private boolean createOutputDirectory;
-	
+
 	/**
 	 * whether derived resources should be deleted on clean.
 	 */
 	private boolean cleanUpDerivedResources = true;
-	
+
 	/**
 	 * whether existing resources should be overridden.
 	 */
 	private boolean overrideExistingResources = true;
-	
+
 	/**
-	 * whether the resources should be flagged as 'derived'
-	 * <b>Only used if the underlying file system implementation supports such a property</b>
+	 * whether the resources should be flagged as 'derived' <b>Only used if the underlying file system implementation
+	 * supports such a property</b>
 	 */
 	private boolean setDerivedProperty = true;
-	
+
 	/**
-	 * whether the whole outputDirectory can be cleared.
-	 * This is usually used in a CLEAN build.
+	 * whether the whole outputDirectory can be cleared. This is usually used in a CLEAN build.
 	 */
 	private boolean canClearOutputDirectory = false;
-	
+
+	/**
+	 * whether the DSL files should be registered as primary source files for debugging in the generated
+	 * Java-class-files. If false, the Java source is registered as primary source and the DSL files are registered as
+	 * secondary source via JSR-045 (SMAP).
+	 */
+	private boolean installDslAsPrimarySource = false;
+
+	/**
+	 * whether debug information should be removed from the class files for synthetic local variables. Synthetic
+	 * variables are the ones that have not been declared in the DSL but have been introduced by the compiler. This flag
+	 * is only used when {@link #isInstallDslAsPrimarySource()} is true.
+	 */
+	private boolean hideSyntheticLocalVariables = true;
+
 	public OutputConfiguration(String name) {
 		super();
 		this.name = name;
@@ -103,21 +116,49 @@ public class OutputConfiguration {
 	public void setSetDerivedProperty(boolean setDerivedProperty) {
 		this.setDerivedProperty = setDerivedProperty;
 	}
-	
+
 	public boolean isCreateOutputDirectory() {
 		return createOutputDirectory;
 	}
-	
+
 	public void setCreateOutputDirectory(boolean createOutputDirectory) {
 		this.createOutputDirectory = createOutputDirectory;
 	}
-	
+
 	public boolean isCanClearOutputDirectory() {
 		return canClearOutputDirectory;
 	}
-	
+
 	public void setCanClearOutputDirectory(boolean canClearOutputDirectory) {
 		this.canClearOutputDirectory = canClearOutputDirectory;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public boolean isInstallDslAsPrimarySource() {
+		return installDslAsPrimarySource;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void setInstallDslAsPrimarySource(boolean installDslAsPrimarySource) {
+		this.installDslAsPrimarySource = installDslAsPrimarySource;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public boolean isHideSyntheticLocalVariables() {
+		return hideSyntheticLocalVariables;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void setHideSyntheticLocalVariables(boolean hideSyntheticLocalVariables) {
+		this.hideSyntheticLocalVariables = hideSyntheticLocalVariables;
 	}
 
 	@Override
@@ -144,5 +185,5 @@ public class OutputConfiguration {
 			return false;
 		return true;
 	}
-	
+
 }

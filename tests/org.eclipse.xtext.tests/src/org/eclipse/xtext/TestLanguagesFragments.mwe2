@@ -11,14 +11,16 @@ var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var memoize = false
-var generateDotDiagram = false
+var generateDebugData = false
 var graphvizCommand = ""
 var srcGenOnly=true
+var emfRuntimeVersion = "2.9"
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment {
 		options = auto-inject {}
 	}
+	fragment = parser.antlr.DebugAntlrGeneratorFragment {}
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
 	}

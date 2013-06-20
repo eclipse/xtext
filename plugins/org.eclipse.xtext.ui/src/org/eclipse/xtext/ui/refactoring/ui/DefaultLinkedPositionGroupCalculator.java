@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.refactoring.ui;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collections;
@@ -33,7 +34,6 @@ import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
@@ -43,9 +43,9 @@ import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.IAcceptor;
@@ -82,36 +82,41 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 	private IDependentElementsCalculator dependentElementsCalculator;
 
 	@Inject
-	private RefactoringReferenceQueryDataFactory queryDataFactory;
-
-	@Inject
 	private IReferenceFinder referenceFinder;
 
 	@Inject
 	private IReferenceUpdater referenceUpdater;
 
 	@Inject
-	private Provider<LocalResourceRefactoringUpdateAcceptor> udpateAcceptorProvider;
+	private Provider<LocalResourceRefactoringUpdateAcceptor> updateAcceptorProvider;
 
 	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
 			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		XtextEditor editor = (XtextEditor) renameElementContext.getTriggeringEditor();
 		IProject project = projectUtil.getProject(renameElementContext.getContextResourceURI());
+		if (project == null)
+			throw new IllegalStateException("Could not determine project for context resource "
+					+ renameElementContext.getContextResourceURI());
 		ResourceSet resourceSet = resourceSetProvider.get(project);
 		EObject targetElement = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
 		if (targetElement == null)
 			throw new IllegalStateException("Target element could not be loaded");
 		IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
 				IRenameStrategy.Provider.class);
-		IRenameStrategy renameStrategy = strategyProvider.get(targetElement, renameElementContext);
-		if (renameStrategy == null)
+		IRenameStrategy renameStrategy = null;
+		try {
+			renameStrategy = strategyProvider.get(targetElement, renameElementContext);
+		} catch(NoSuchStrategyException exc) {
+			// handle in next line
+		}
+		if(renameStrategy == null) 
 			throw new IllegalArgumentException("Cannot find a rename strategy for "
 					+ notNull(renameElementContext.getTargetElementURI()));
 		String newName = renameStrategy.getOriginalName();
 		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 				progress.newChild(10));
-		LocalResourceRefactoringUpdateAcceptor updateAcceptor = udpateAcceptorProvider.get();
+		LocalResourceRefactoringUpdateAcceptor updateAcceptor = updateAcceptorProvider.get();
 		updateAcceptor.setLocalResourceURI(renameElementContext.getContextResourceURI());
 		renameStrategy.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
 		Map<URI, URI> original2newEObjectURI = renamedElementTracker.renameAndTrack(
@@ -119,20 +124,15 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 				newName, resourceSet, renameStrategy, progress.newChild(10));
 		ElementRenameArguments elementRenameArguments = new ElementRenameArguments(
 				renameElementContext.getTargetElementURI(), newName, renameStrategy, original2newEObjectURI);
-		IQueryData queryData = queryDataFactory.create(elementRenameArguments);
 		final List<IReferenceDescription> referenceDescriptions = newArrayList();
 		IAcceptor<IReferenceDescription> referenceAcceptor = new IAcceptor<IReferenceDescription>() {
 			public void accept(IReferenceDescription referenceDescription) {
 				referenceDescriptions.add(referenceDescription);
 			}
 		};
-		if (renameElementContext.getTargetElementURI().trimFragment()
-				.equals(renameElementContext.getContextResourceURI()))
-			referenceFinder.findLocalReferences(queryData, new SimpleLocalResourceAccess(resourceSet),
-					referenceAcceptor, progress.newChild(60));
-		else
-			referenceFinder.findIndexedReferences(queryData, renameElementContext.getContextResourceURI(),
-					referenceAcceptor, progress.newChild(60));
+		referenceFinder.findReferences(elementRenameArguments.getRenamedElementURIs(),
+				singleton(renameElementContext.getContextResourceURI()), new SimpleLocalResourceAccess(resourceSet),
+				referenceAcceptor, progress.newChild(60));
 		referenceUpdater.createReferenceUpdates(elementRenameArguments, referenceDescriptions, updateAcceptor,
 				progress.newChild(10));
 		List<ReplaceEdit> textEdits = updateAcceptor.getTextEdits();

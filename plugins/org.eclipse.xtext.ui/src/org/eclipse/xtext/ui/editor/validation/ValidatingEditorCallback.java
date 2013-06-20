@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.validation;
 
 import org.eclipse.xtext.ui.editor.AbstractDirtyStateAwareEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 
@@ -24,6 +25,9 @@ public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallb
 	
 	@Inject 
 	private MarkerCreator markerCreator;
+	
+	@Inject
+	private MarkerTypeProvider markerTypeProvider;
 
 	@Override
 	public void afterCreatePartControl(XtextEditor editor) {
@@ -44,7 +48,7 @@ public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallb
 	}
 
 	private ValidationJob newValidationJob(XtextEditor editor) {
-		MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(editor.getResource(),markerCreator);
+		MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(editor.getResource(), markerCreator, markerTypeProvider);
 		ValidationJob validationJob = new ValidationJob(resourceValidator, editor.getDocument(), markerIssueProcessor, CheckMode.NORMAL_AND_FAST);
 		return validationJob;
 	}

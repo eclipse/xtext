@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class UnassignedRuleCallTestLanguageFactoryImpl extends EFactoryImpl impl
   {
     try
     {
-      UnassignedRuleCallTestLanguageFactory theUnassignedRuleCallTestLanguageFactory = (UnassignedRuleCallTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/UnassignedRuleCallTest"); 
+      UnassignedRuleCallTestLanguageFactory theUnassignedRuleCallTestLanguageFactory = (UnassignedRuleCallTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(UnassignedRuleCallTestLanguagePackage.eNS_URI);
       if (theUnassignedRuleCallTestLanguageFactory != null)
       {
         return theUnassignedRuleCallTestLanguageFactory;

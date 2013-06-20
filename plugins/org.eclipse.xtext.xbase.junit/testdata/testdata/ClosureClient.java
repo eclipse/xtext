@@ -79,6 +79,14 @@ public class ClosureClient {
 		runnable.run();
 	}
 	
+	/**
+	 * @since 2.3
+	 */
+	public String useProcedureForCharSequence(Procedures.Procedure1<CharSequence> proc) {
+		proc.apply(null);
+		return "done";
+	}
+	
 	public Runnable asRunnable(final Procedures.Procedure0 procedure) {
 		return new Runnable() {
 			public void run() {
@@ -102,6 +110,27 @@ public class ClosureClient {
 			}
 			
 		};
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String concatStrings(Functions.Function0<String>... functions) {
+		StringBuilder result = new StringBuilder("varArgs:");
+		for(Functions.Function0<String> function: functions) {
+			result.append(function.apply());
+		}
+		return result.toString();
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public String concatStrings(Functions.Function0<String> function1, Functions.Function0<String> function2) {
+		StringBuilder result = new StringBuilder("twoArgs:");
+		result.append(function1.apply());
+		result.append(function2.apply());
+		return result.toString();
 	}
 	
 }

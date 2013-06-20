@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.util.List;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -21,40 +19,42 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class ProfilerAbstractBuilderTest extends TestCase implements IResourceDescription.Event.Listener {
+public abstract class ProfilerAbstractBuilderTest extends Assert implements IResourceDescription.Event.Listener {
 	private static final String F_EXT = ".buildertestlanguage";
 	private volatile List<Event> events = Lists.newArrayList();
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		assertEquals(0, countResourcesInIndex());
 		assertEquals(0, root().getProjects().length);
-		super.setUp();
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		cleanWorkspace();
 		waitForAutoBuild();
 		events.clear();
 		getBuilderState().removeListener(this);
-		super.tearDown();
 	}
 	
-	public void testIncrementalBuildWithBigLibraryFile() throws Exception {
+	@Test public void testIncrementalBuildWithBigLibraryFile() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -78,7 +78,7 @@ public abstract class ProfilerAbstractBuilderTest extends TestCase implements IR
 		}
 	}
 	
-	public void testFullBuildBigProject() throws Exception {
+	@Test public void testFullBuildBigProject() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -98,7 +98,7 @@ public abstract class ProfilerAbstractBuilderTest extends TestCase implements IR
 		logAndReset("Auto build", timer);
 	}
 	
-	public void testFullBuildBigProjectWithRefeernceToJar() throws Exception {
+	@Test public void testFullBuildBigProjectWithRefeernceToJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -125,7 +125,7 @@ public abstract class ProfilerAbstractBuilderTest extends TestCase implements IR
 		assertEquals(0,iMarkers.length);
 	}
 	
-	public void testFullBuildBigProjectWithLinkingErrors() throws Exception {
+	@Test public void testFullBuildBigProjectWithLinkingErrors() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -147,7 +147,7 @@ public abstract class ProfilerAbstractBuilderTest extends TestCase implements IR
 		assertEquals(NUM_FILES-1,iMarkers.length);
 	}
 	
-	public void testFullBuildBigProjectWithSyntaxErrors() throws Exception {
+	@Test public void testFullBuildBigProjectWithSyntaxErrors() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -169,7 +169,7 @@ public abstract class ProfilerAbstractBuilderTest extends TestCase implements IR
 		assertEquals(NUM_FILES-1,iMarkers.length);
 	}
 
-	public void testLotsOfFiles() throws Exception {
+	@Test public void testLotsOfFiles() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");

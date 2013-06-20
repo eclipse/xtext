@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.index.indexTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
   {
     try
     {
-      IndexTestLanguageFactory theIndexTestLanguageFactory = (IndexTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/indexTestLanguage"); 
+      IndexTestLanguageFactory theIndexTestLanguageFactory = (IndexTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(IndexTestLanguagePackage.eNS_URI);
       if (theIndexTestLanguageFactory != null)
       {
         return theIndexTestLanguageFactory;

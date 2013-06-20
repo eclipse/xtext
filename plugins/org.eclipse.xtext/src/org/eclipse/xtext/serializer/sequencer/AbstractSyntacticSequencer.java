@@ -14,7 +14,9 @@ import java.util.Stack;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -70,8 +72,12 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			this.stack = new RuleCallStack();
 		}
 
-		protected INode getLastNode() {
+		public INode getLastNode() {
 			return lastNode;
+		}
+
+		public RuleCallStack getStack() {
+			return stack;
 		}
 
 		protected void setLastNode(INode lastNode) {
@@ -167,6 +173,11 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		delegate.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		navigateToAbsorber(kw, node);
+		delegate.acceptAssignedCrossRefKeyword(kw, token, value, index, node);
+	}
+
 	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index,
 			ILeafNode node) {
 		navigateToAbsorber(terminalRC, node);
@@ -175,6 +186,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
 		navigateToAbsorber(datatypeRC, node);
+		if (token == null)
+			token = getUnassignedRuleCallToken(datatypeRC, node);
 		delegate.acceptAssignedDatatype(datatypeRC, token, value, index, node);
 	}
 
@@ -183,18 +196,15 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		delegate.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
-	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
-		navigateToAbsorber(keyword, node);
-		delegate.acceptAssignedKeyword(keyword, token, value, index, node);
-	}
-
-	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		navigateToAbsorber(keyword, node);
 		delegate.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
 	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
 		navigateToAbsorber(terminalRC, node);
+		if (token == null)
+			token = getUnassignedRuleCallToken(terminalRC, node);
 		delegate.acceptAssignedTerminal(terminalRC, token, value, index, node);
 	}
 
@@ -230,11 +240,6 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 				acceptNode(next);
 			}
 		}
-	}
-
-	protected ISynNavigable getLastNavigableState() {
-		ISynFollowerOwner state = contexts.peek().lastState;
-		return state instanceof ISynNavigable ? (ISynNavigable) state : null;
 	}
 
 	protected void acceptNodes(ISynNavigable fromState, List<INode> nodes) {
@@ -349,6 +354,11 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return result != null ? result : node;
 	}
 
+	protected ISynNavigable getLastNavigableState() {
+		ISynFollowerOwner state = contexts.peek().lastState;
+		return state instanceof ISynNavigable ? (ISynNavigable) state : null;
+	}
+
 	protected List<INode> getNodesFor(List<INode> nodes, AbstractElementAlias ele) {
 		if (nodes == null)
 			return null;
@@ -365,12 +375,15 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return tokenUtil.serializeNode(node);
 	}
 
-	protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
-		return getUnassignedRuleCallToken(contexts.peek().semanticObject, ruleCall, node);
-	}
-
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		return "";
+	}
+
+	protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
+		Assignment ass = GrammarUtil.containingAssignment(ruleCall);
+		if (ass != null && !GrammarUtil.isBooleanAssignment(ass))
+			throw new IllegalStateException("RuleCall is invalid; Can not determine token.");
+		return getUnassignedRuleCallToken(contexts.peek().semanticObject, ruleCall, node);
 	}
 
 	public void init(EObject context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
@@ -385,10 +398,12 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
 		contexts.pop();
+		delegate.leaveAssignedAction(action, semanticChild);
 	}
 
 	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 		contexts.pop();
+		delegate.leaveAssignedParserRuleCall(rc, semanticChild);
 	}
 
 	protected void navigateToAbsorber(AbstractElement ele, INode node) {

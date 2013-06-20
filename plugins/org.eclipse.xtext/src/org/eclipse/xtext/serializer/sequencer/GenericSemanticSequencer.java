@@ -31,7 +31,6 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstra
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.RelationalDependencyType;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
@@ -418,9 +417,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	protected ICrossReferenceSerializer crossRefSerializer;
 
 	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-
-	@Inject
 	protected IEnumLiteralSerializer enumLiteralSerializer;
 
 	@Inject
@@ -484,6 +480,14 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 						GrammarUtil.containingCrossReference(enumRC), target3, node3, errorAcceptor);
 				sequenceAcceptor.acceptAssignedCrossRefEnum(enumRC, token3, target3, index, node3);
 				return true;
+			case ASSIGNED_CROSSREF_KEYWORD:
+				Keyword kw0 = constr.getKeyword();
+				ILeafNode node0 = (ILeafNode) node;
+				EObject target0 = (EObject) value;
+				String token0 = crossRefSerializer.serializeCrossRef(semanticObj,
+						GrammarUtil.containingCrossReference(kw0), target0, node0, errorAcceptor);
+				sequenceAcceptor.acceptAssignedCrossRefKeyword(kw0, token0, target0, index, node0);
+				return true;
 			case ASSIGNED_DATATYPE_RULE_CALL:
 				RuleCall datatypeRC1 = constr.getRuleCall();
 				ICompositeNode node4 = (ICompositeNode) node;
@@ -507,20 +511,10 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				return true;
 			case ASSIGNED_KEYWORD:
 				Keyword keyword = constr.getKeyword();
-				String value3 = (String) value;
 				ILeafNode node7 = (ILeafNode) node;
-				String token7 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword, value3, node7,
+				String token7 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword, value, node7,
 						errorAcceptor);
-				sequenceAcceptor.acceptAssignedKeyword(keyword, token7, value3, index, node7);
-				return true;
-			case ASSIGNED_BOOLEAN_KEYWORD:
-				Keyword keyword1 = constr.getKeyword();
-				Boolean value4 = (Boolean) value;
-				ILeafNode node8 = (ILeafNode) node;
-				String token71 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword1, value4, node8,
-						errorAcceptor);
-				sequenceAcceptor
-						.acceptAssignedKeyword(keyword1, token71, value4 == null ? false : value4, index, node8);
+				sequenceAcceptor.acceptAssignedKeyword(keyword, token7, value, index, node7);
 				return true;
 			case ALTERNATIVE:
 			case GROUP:
@@ -565,12 +559,12 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
 			case ASSIGNED_DATATYPE_RULE_CALL:
 			case ASSIGNED_ENUM_RULE_CALL:
 			case ASSIGNED_KEYWORD:
 			case ASSIGNED_PARSER_RULE_CALL:
 			case ASSIGNED_TERMINAL_RULE_CALL:
-			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[element.getAssignmentID()];
 				if (f2a == null)
 					return true;
@@ -594,7 +588,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
 		Feature2Assignment[] values = createValues(semanticObject, constraint, nodes);
-//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
+		//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
 		//				System.out.println("Values (Disambiguated): " + f2aToStr(constraint.getBody(), values));
 		if (constraint.getBody() != null) {
 			Quantity quant = new Quantity(constraint.getBody(), createUnambiguousAllocation(constraint.getBody(),
@@ -662,12 +656,12 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
 			case ASSIGNED_DATATYPE_RULE_CALL:
 			case ASSIGNED_ENUM_RULE_CALL:
 			case ASSIGNED_KEYWORD:
 			case ASSIGNED_PARSER_RULE_CALL:
 			case ASSIGNED_TERMINAL_RULE_CALL:
-			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[constraint.getAssignmentID()];
 				if (f2a == null)
 					return Collections.emptyList();

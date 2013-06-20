@@ -301,12 +301,12 @@ public class SequenceFeeder {
 		}
 	}
 
-	// TODO: test boolean assignments with terminal- and datatype rules.
 	protected void acceptKeyword(Assignment ass, Keyword keyword, Object value, String token, int index, ILeafNode node) {
-		if (GrammarUtil.isBooleanAssignment(ass))
-			sequenceAcceptor.acceptAssignedKeyword(keyword, token, Boolean.TRUE.equals(value), index, node);
+		CrossReference crossRef = GrammarUtil.containingCrossReference(keyword);
+		if (crossRef != null)
+			sequenceAcceptor.acceptAssignedCrossRefKeyword(keyword, token, (EObject) value, index, node);
 		else
-			sequenceAcceptor.acceptAssignedKeyword(keyword, token, value.toString(), index, node);
+			sequenceAcceptor.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
 	protected void acceptRuleCall(RuleCall rc, Object value, String token, int index, INode node) {
@@ -439,18 +439,24 @@ public class SequenceFeeder {
 	}
 
 	protected String getToken(Keyword keyword, Object value, ILeafNode node) {
+		CrossReference crossRef = GrammarUtil.containingCrossReference(keyword);
+		if (crossRef != null)
+			return provider.crossRefSerializer.serializeCrossRef(semanticObject, crossRef, (EObject) value, node,
+					errorAcceptor);
 		return provider.keywordSerializer.serializeAssignedKeyword(semanticObject, keyword, value, node, errorAcceptor);
 	}
 
 	protected String getToken(RuleCall rc, Object value, INode node) {
 		CrossReference crossRef = GrammarUtil.containingCrossReference(rc);
+		Assignment assignment = GrammarUtil.containingAssignment(rc);
 		if (crossRef != null)
 			return provider.crossRefSerializer.serializeCrossRef(semanticObject, crossRef, (EObject) value, node,
 					errorAcceptor);
-		else if (GrammarUtil.isEObjectRuleCall(rc))
+		else if (GrammarUtil.isEObjectRuleCall(rc) || GrammarUtil.isBooleanAssignment(assignment))
 			return null;
 		else if (GrammarUtil.isEnumRuleCall(rc))
-			return provider.enumLiteralSerializer.serializeAssignedEnumLiteral(semanticObject, rc, value, node, errorAcceptor);
+			return provider.enumLiteralSerializer.serializeAssignedEnumLiteral(semanticObject, rc, value, node,
+					errorAcceptor);
 		else
 			return provider.valueSerializer.serializeAssignedValue(semanticObject, rc, value, node, errorAcceptor);
 	}

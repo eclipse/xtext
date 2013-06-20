@@ -27,15 +27,19 @@ public class DefaultCompositeHover extends AbstractCompositeHover  {
 
 	@Inject 
 	protected AnnotationWithQuickFixesHover annotationHover;
-	
+
+	/**
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
 	@Inject
-	protected DispatchingEObjectTextHover htmlHover;
+	protected IEObjectHover htmlHover;
 	
 	@Override
 	protected List<ITextHover> createHovers() {
 		List<ITextHover> list = new ArrayList<ITextHover>();
 		list.add (annotationHover);
-		list.add (htmlHover);
+		if(htmlHover instanceof ITextHover)
+			list.add ((ITextHover) htmlHover);
 		return list;
 	}
 

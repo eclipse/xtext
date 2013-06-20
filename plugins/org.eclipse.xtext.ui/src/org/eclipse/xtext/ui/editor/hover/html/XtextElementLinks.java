@@ -89,74 +89,7 @@ public class XtextElementLinks {
 	public static final String XTEXTDOC_VIEW_SCHEME= "eclipse-xtext-doc-view"; //$NON-NLS-1$
 	
 	public LocationListener createLocationListener(final ILinkHandler handler) {
-		return new LocationAdapter() {
-			@Override
-			public void changing(LocationEvent event) {
-				String loc= event.location;
-
-				if ("about:blank".equals(loc)) { //$NON-NLS-1$
-					/*
-					 * Using the Browser.setText API triggers a location change to "about:blank".
-					 * remove this code once https://bugs.eclipse.org/bugs/show_bug.cgi?id=130314 is fixed
-					 */
-					//input set with setText
-					handler.handleTextSet();
-					return;
-				}
-
-				event.doit= false;
-
-				if (loc.startsWith("about:")) { //$NON-NLS-1$
-					// Relative links should be handled via head > base tag.
-					// If no base is available, links just won't work.
-					return;
-				}
-
-				URI uri;
-				try {
-					uri= new URI(loc);
-				} catch (URISyntaxException e) {
-					// try it with a file (workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=237903 ):
-					File file= new File(loc);
-					if (! file.exists()) {
-						log.warn("Could not handle location"+loc.toString(), e);
-						return;
-					}
-					uri= file.toURI();
-					loc= uri.toASCIIString();
-				}
-
-				String scheme= uri.getScheme();
-				if (XtextElementLinks.XTEXTDOC_VIEW_SCHEME.equals(scheme)) {
-					org.eclipse.emf.common.util.URI linkTarget= parseURI(uri);
-					if (linkTarget == null)
-						return;
-
-					handler.handleXtextdocViewLink(linkTarget);
-				} else if (XtextElementLinks.XTEXTDOC_SCHEME.equals(scheme)) {
-					org.eclipse.emf.common.util.URI linkTarget= parseURI(uri);
-					if (linkTarget == null)
-						return;
-
-					handler.handleInlineXtextdocLink(linkTarget);
-				} else if (XtextElementLinks.OPEN_LINK_SCHEME.equals(scheme)) {
-					org.eclipse.emf.common.util.URI linkTarget= parseURI(uri);
-					if (linkTarget == null)
-						return;
-
-					handler.handleDeclarationLink(linkTarget);
-				} else {
-					try {
-						if (handler.handleExternalLink(new URL(loc), event.display))
-							return;
-
-						event.doit= true;
-					} catch (MalformedURLException e) {
-						log.warn("Could not handle location"+loc.toString(), e);
-					}
-				}
-			}
-		};
+		return new XtextLinkAdapter(handler);
 	}
 
 	public String createLink (EObject o) {
@@ -190,6 +123,89 @@ public class XtextElementLinks {
 
 	private org.eclipse.emf.common.util.URI createURI(EObject o) {
 		return o.eResource().getURI().appendFragment(o.eResource().getURIFragment(o));
+	}
+	/**
+	 * @since 2.3
+	 */
+	protected class XtextLinkAdapter extends LocationAdapter {
+		protected ILinkHandler handler;
+
+		protected XtextLinkAdapter(ILinkHandler handler) {
+			this.handler = handler;
+		}
+		
+		@Override
+		public void changing(LocationEvent event) {
+			String loc= event.location;
+			URI uri = initURI(event);
+			if(uri == null)
+				return;
+			String scheme= uri.getScheme();
+			if (XtextElementLinks.XTEXTDOC_VIEW_SCHEME.equals(scheme)) {
+				org.eclipse.emf.common.util.URI linkTarget= parseURI(uri);
+				if (linkTarget == null)
+					return;
+
+				handler.handleXtextdocViewLink(linkTarget);
+			} else if (XtextElementLinks.XTEXTDOC_SCHEME.equals(scheme)) {
+				org.eclipse.emf.common.util.URI linkTarget= parseURI(uri);
+				if (linkTarget == null)
+					return;
+
+				handler.handleInlineXtextdocLink(linkTarget);
+			} else if (XtextElementLinks.OPEN_LINK_SCHEME.equals(scheme)) {
+				org.eclipse.emf.common.util.URI linkTarget= parseURI(uri);
+				if (linkTarget == null)
+					return;
+
+				handler.handleDeclarationLink(linkTarget);
+			} else {
+				try {
+					if (handler.handleExternalLink(new URL(loc), event.display))
+						return;
+
+					event.doit= true;
+				} catch (MalformedURLException e) {
+					log.warn("Could not handle location"+loc, e);
+				}
+			}
+		}
+		
+		protected URI initURI(LocationEvent event){
+			String loc= event.location;
+			if ("about:blank".equals(loc)) { //$NON-NLS-1$
+				/*
+				 * Using the Browser.setText API triggers a location change to "about:blank".
+				 * remove this code once https://bugs.eclipse.org/bugs/show_bug.cgi?id=130314 is fixed
+				 */
+				//input set with setText
+				handler.handleTextSet();
+				return null;
+			}
+
+			event.doit= false;
+
+			if (loc.startsWith("about:")) { //$NON-NLS-1$
+				// Relative links should be handled via head > base tag.
+				// If no base is available, links just won't work.
+				return null;
+			}
+
+			URI uri;
+			try {
+				uri= new URI(loc);
+			} catch (URISyntaxException e) {
+				// try it with a file (workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=237903 ):
+				File file= new File(loc);
+				if (! file.exists()) {
+					log.warn("Could not handle location"+loc, e);
+					return null;
+				}
+				uri= file.toURI();
+			}
+			return uri;
+
+		}
 	}
 	
 }

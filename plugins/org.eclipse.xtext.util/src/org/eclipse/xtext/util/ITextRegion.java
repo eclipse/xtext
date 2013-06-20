@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+
 /**
+ * Represents a range in a stream of characters.
  * @author Jan Koehnlein - Initial contribution and API
  */
+@NonNullByDefault
 public interface ITextRegion {
 	int getOffset();
 
@@ -21,27 +25,5 @@ public interface ITextRegion {
 	
 	boolean contains(int offset);
 
-	static ITextRegion EMPTY_REGION = new ITextRegion() {
-
-		public int getOffset() {
-			return 0;
-		}
-
-		public int getLength() {
-			return 0;
-		}
-
-		public ITextRegion merge(ITextRegion region) {
-			return region;
-		}
-
-		public boolean contains(ITextRegion other) {
-			return false;
-		}
-
-		public boolean contains(int offset) {
-			return false;
-		}
-		
-	};
+	static ITextRegion EMPTY_REGION = ITextRegionWithLineInformation.EMPTY_REGION;
 }

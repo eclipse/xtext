@@ -11,22 +11,22 @@ package org.eclipse.xtext.ui.tests.label;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultEObjectLabelProviderTest extends TestCase {
+public class DefaultEObjectLabelProviderTest extends Assert {
 
 	private static final String DEFAULT_TEXT = "default";
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		final List<String> calls = new ArrayList<String>();
 		@SuppressWarnings("unused")
 		DefaultEObjectLabelProvider lp = new DefaultEObjectLabelProvider(null) {
@@ -65,7 +65,7 @@ public class DefaultEObjectLabelProviderTest extends TestCase {
 		assertTrue(calls.size() == 2);
 	}
 
-	public void testGetStyledText() throws Exception {
+	@Test public void testGetStyledText() throws Exception {
 		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 
 			@SuppressWarnings("unused")
@@ -80,7 +80,7 @@ public class DefaultEObjectLabelProviderTest extends TestCase {
 		assertEquals("testCreateStyledString", styledText.getString());
 	}
 
-	public void testGetStyledTextFallbackText() throws Exception {
+	@Test public void testGetStyledTextFallbackText() throws Exception {
 		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider();
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName("testCreateStyledString");
@@ -88,7 +88,7 @@ public class DefaultEObjectLabelProviderTest extends TestCase {
 		assertEquals("testCreateStyledString", styledText.getString());
 	}
 
-	public void testGetStyledTextWithExistingTextLabel() throws Exception {
+	@Test public void testGetStyledTextWithExistingTextLabel() throws Exception {
 		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 			@SuppressWarnings("unused")
 			public String text(ParserRule parserRule) {
@@ -101,7 +101,7 @@ public class DefaultEObjectLabelProviderTest extends TestCase {
 		assertEquals("testCreateStyledStringWithTextLabel", styledText.getString());
 	}
 
-	public void testGetTextWithExistingStyledStringLabel() throws Exception {
+	@Test public void testGetTextWithExistingStyledStringLabel() throws Exception {
 		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 			@SuppressWarnings("unused")
 			public StyledString text(ParserRule parserRule) {
@@ -114,7 +114,7 @@ public class DefaultEObjectLabelProviderTest extends TestCase {
 		assertEquals("testGetTextWithStyledStringLabel", defaultLabelProvider.getText(parserRule));
 	}
 
-	public void testGetNullSafeDefaultText() throws Exception {
+	@Test public void testGetNullSafeDefaultText() throws Exception {
 		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 			@SuppressWarnings("unused")
 			public StyledString text(ParserRule parserRule) {
@@ -131,7 +131,7 @@ public class DefaultEObjectLabelProviderTest extends TestCase {
 		assertEquals(DEFAULT_TEXT, styledText.getString());
 	}
 
-	public void testErrorHandling() throws Exception {
+	@Test public void testErrorHandling() throws Exception {
 		final List<Object> calls = new ArrayList<Object>();
 		@SuppressWarnings("unused")
 		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {

@@ -7,16 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -36,7 +35,7 @@ public class ContentAssistGrammarContentAssistTest extends AbstractContentAssist
 		};
 	}
 	
-	public void testCompleteAbstractRuleCall() throws Exception {
+	@Test public void testCompleteAbstractRuleCall() throws Exception {
 		newBuilder()
 			.appendNl("abstract rules")
 			.appendNl("R1 ();")
@@ -50,7 +49,7 @@ public class ContentAssistGrammarContentAssistTest extends AbstractContentAssist
 	/**
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269593
      */
-    public void testCompleteAbstractRuleCallWithSpace() throws Exception {
+    @Test public void testCompleteAbstractRuleCallWithSpace() throws Exception {
         newBuilder()
         .appendNl("abstract rules")
         .appendNl("R1 ();")
@@ -60,7 +59,4 @@ public class ContentAssistGrammarContentAssistTest extends AbstractContentAssist
         );
     }
 
-    public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(ContentAssistGrammarContentAssistTest.class);
-	}
 }

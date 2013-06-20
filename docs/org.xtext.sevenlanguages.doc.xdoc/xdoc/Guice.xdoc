@@ -1,0 +1,295 @@
+chapter:guice[DSL for Guice]
+
+The Guice DSL is a little language that lets you define Guice modules in a readable and declarative way. 
+
+img[images/guicemodules_screenshot.png][][][]
+
+section:guice_solution[Overview]
+
+Guice is a great dependency injection container, which uses Java types and annotations to declare and 
+refer to injection points. You could for instance have the following field:
+
+code[Java][
+@Inject
+@Named("properties") Map<String,String> properties;
+]
+
+A module is used to tell the framework what instance to inject into such injection points.
+For that, Guice comes with a fluent interface API written in Java and a couple of tricks (e.g. TypeLiteral) to
+make the configuration as readable and maintainable as possible.
+
+You could for instance declare the following module:
+
+code[Java][
+public class MyModule implements Module {
+  @Override
+  public void configure(Binder binder) {
+    Map<String,String> properties = Maps.newHashMap();
+    properties.put("debugLevel", "info");
+    
+    binder.bind(new TypeLiteral<Map<String,String>>(){})
+      .annotatedWith(Names.named("properties"))
+      .toInstance(properties);
+  }
+}
+]
+
+The big advantage of using Java over an external text or XML file is that you can leverage
+the IDE and the type checking. We want to have that. The downside is that you have to trick (i.e. 
+codeRef[com.google.inject.TypeLiteral]) a lot in
+order to have an agreeable syntax. Also since the configuration is 'hidden' in a method implementation and not
+really declarative you cannot validate a Guice module at compile time.
+
+The Guice DSL described in this section lets you describe the module above like this:
+
+code[guice][
+  MyModule {
+    @Named("properties") Map<String,String> 
+      to-instance newHashMap('debugLevel' -> 'info')
+  }
+]
+
+This not only uses the exact same syntax one uses in any injection points, but also opens up all kinds
+of possibilities for static analysis. Usually the instantiation of a Guice injector at runtime takes quite some time,
+because then all the very helpful validation is done. A language like the one described in this section could
+do all theses analysis at compile time, that way speeding up start up of the whole application significantly. 
+
+section:guice_running[Running the Example]
+
+In the example located in the project e[org.xtext.guicemodules.examples] two modules are declared, one
+for a possible runtime scenario and one for a test scenario (yes, you sometimes want a module for tests).
+
+code[guice][
+import com.acme.*
+import com.acme.impl.*
+
+com.acme.RuntimeModule {
+  bind DataProvider to FileDataProvider
+  bind @DataFile String to-instance 'my-data.txt'
+}
+
+com.acme.TestModule mixin RuntimeModule {
+  bind DataProvider to-instance \[| 'dummy-data' \]
+  bind LoggingService to BufferedLoggingService
+}
+]
+
+You can see the two modules in action by running code[com.acme.Main] from the context menu as a 
+e[Java application] or as a e[JUnit test].  
+
+section:guice_grammar[Grammar]
+
+The grammar is less than 30 lines long. It allows declaring any number of imports using the import mechanism
+already described for the ref:scripting_grammar[scripting language]. A module can 'mixin' any number of other modules, which allows
+to reuse existing modules but override keys with different bindings. The mixin feature is described as a 
+cross reference to another code[ModuleAST]. Cross references are covered in detail in the link[http://www.eclipse.org/Xtext/documentation.html#cross_reference][Xtext documentation].
+
+The language allows binding keys to other keys and to instances. Other concepts like binding to providers
+is something you could do, but would not help in getting the idea across. Everybody is encouraged to fork
+this first prototype and build something really useful ;-)
+
+Instead of extending code[org.eclipse.xtext.xbase.Xbase] the grammar code[org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations]
+is extended which adds full support for annotations. You just have to refer to the rule code[XAnnotation]
+as it is done in the rule code[KeyAST]. Btw. it is sometimes a good idea to suffix (or prefix) the AST
+node types to avoid confusion when working with a library where concepts are named similarly.
+
+code[Xtext][
+grammar org.xtext.guicemodules.GuiceModules 
+   with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
+ 
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+generate guiceModules "http://www.xtext.org/guicemodules/GuiceModules"
+  
+ModulesAST :
+	importSection=XImportSection?
+	modules+=ModuleAST*;
+
+ModuleAST :
+	name=QualifiedName ('mixin' mixins+=\[ModuleAST|QualifiedName\] 
+	  (',' mixins+=\[ModuleAST|QualifiedName\])*)? 
+	'{'
+		bindings+=BindingAST*
+	'}'
+;
+
+BindingAST:
+	'bind' from=KeyAST 
+	('to' to=KeyAST | 'to-instance' toInstance=XExpression)?;
+
+KeyAST:
+	annotation=XAnnotation? type=JvmTypeReference;
+
+]
+
+section:guice_inferrer[Translation to Java]
+
+A module is mapped to a single java class. The 'mixin' modules are not translated to Java inheritance
+but to a delegation approach. Here is how a simple module declaration with a single mixed-in module is
+translated.
+
+table[
+  tr[
+    td[DSL]
+    td[code[guice][
+MyModule mixin OtherModule { 
+}]]]
+  tr[
+    td[Java]
+    td[code[Java][
+public class MyModule implements Module {
+
+  private OtherModule otherModule = new OtherModule();
+
+  public void configure(final Binder binder) {
+    configure(binder, new HashSet<com.google.inject.Key<?>>());
+  }
+
+  public void configure(final Binder bind, 
+      final Set<Key<? extends Object>> usedKeys) {
+    try {
+      testModule.configure(bind, usedKeys);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+}
+]]]]
+
+As you can see, the language simply leverages the nice code[equals]/code[hashCode] implementation 
+of Guice's codeRef[com.google.inject.Key] to implement the override semantics of mixed-in modules.
+
+The corresponding parts in codeRef[org.xtext.guicemodules.jvmmodel.GuiceModulesJvmModelInferrer] are:
+
+code[Xtend][
+acceptor.accept(module.toClass(module.fullyQualifiedName))
+  .initializeLater \[
+...      
+  // declare a field for each mixed-in module
+  for (mixin : module.mixins) {
+    if (!mixin.eIsProxy)
+      members += mixin.toField( mixin.simpleName, 
+          newTypeRef(mixin.fullyQualifiedName.toString)) \[
+        setInitializer \[
+          append('''new «mixin.name»()''')
+        \]
+      \]
+  }
+  
+  // and later when declaring the configure method
+  members+= module.toMethod("configure", voidType.createTypeRef) \[
+    documentation = 'Registers bindings for keys not present in ...'
+    parameters += module.toParameter("bind", binderType.createTypeRef)
+    parameters += module.toParameter("usedKeys", setType.createTypeRef( 
+        keyType.createTypeRef(wildCard)))
+    body = \[append('''
+      try {
+        ...some other code
+        «FOR mix : module.mixins»
+          «mix.simpleName».configure(bind, usedKeys);
+        «ENDFOR»
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    ''')\]
+  \]
+]
+
+Expressions are used in code[to-instance] bindings and as always they need a proper scope to live in.
+The simplest way is to declare a private method for each expression.
+
+code[Xtend][
+for (binding : module.bindings) {
+  // if it's a toInstance binding, create a synthetic
+  // method to give the expression a proper scope
+  if (binding.toInstance != null) {
+    members += binding.toMethod(binding.syntheticToInstanceName, 
+        binding.from.type) \[
+      visibility = JvmVisibility::PRIVATE
+      body = binding.toInstance
+    \]
+  } 
+...
+]
+
+In order to obtain instances of annotations as required by Guice's codeRef[com.google.inject.Binder],
+we declare dummy fields for annotated types and use reflection to get corresponding instances.
+
+table[
+  tr[
+    td[DSL]
+    td[code[guice][
+com.acme.RuntimeModule {
+  bind @DataFile String to-instance 'my-data.txt'
+}]]]
+  tr[
+    td[Java]
+    td[code[Java][
+// declaration of dummy field with annotation
+@DataFile
+private String _from0;
+  
+// and later the following code is used to get the key
+  Key<java.lang.String> key = 
+      Key.get(new TypeLiteral<String>(){}, 
+          getClass().getDeclaredField("_from0").getAnnotations()\[0\]);
+  ]]]
+]
+
+The two sections in the model inferrer responsible for this are:
+
+code[Xtend][
+for (binding : module.bindings) {
+...
+  // if a key has an annotation, declare a field so we can use that 
+  // annotation via reflection later.
+  if (binding.to?.annotation != null) {
+    members += binding.toField(binding.to.syntheticName, binding.to.type) \[
+      newHashSet(binding.to.annotation).translateAnnotationsTo(it)
+      visibility = JvmVisibility::PRIVATE
+    \]
+  }
+  if (binding.from.annotation != null) {
+    members += binding.toField(binding.from.syntheticName, 
+        binding.from.type) \[
+      newHashSet(binding.from.annotation).translateAnnotationsTo(it)
+      visibility = JvmVisibility::PRIVATE
+    \]
+  }
+}
+
+// and the following method
+def guiceKey(KeyAST it) '''
+  Key.get(new TypeLiteral<«type.identifier»>(){}«
+  IF annotation != null
+  », getClass().getDeclaredField("«syntheticName»").getAnnotations()\[0\]«
+  ENDIF»)'''
+]
+
+That is basically it. The rest should hopefully be self-explanatory.
+
+section:guice_validation[Validation]
+
+One of the sweet spots for a Guice modules DSL is the ability to do a lot of the validation usually done
+at runtime during compile time. Since this is just an example it just scratches the surface. There is
+just a single compiler check validating whether any used annotation is itself annotated with 
+code[BindingAnnotation].
+
+This is the relevant code from codeRef[org.xtext.guicemodules.validation.GuiceModulesValidator]:
+
+code[Xtend][
+  @Check def checkAnnotationIsBindingAnnotation(XAnnotation it) {
+    switch type : annotationType {
+      JvmAnnotationType: 
+        if(!type.annotations.exists\[ 
+            annotation.is(typeof(BindingAnnotation)) 
+           \])
+		  error("The annotation is not annotated with @BindingAnnotation", 
+		  XANNOTATION__ANNOTATION_TYPE)
+    }
+  }
+]
+
+It would be really cool to leverage the full information, which is available and analyze the dependencies
+transitively so you get feedback while you type for any unfulfilled dependencies. Also using all the
+information to compile a ready to use codeRef[com.google.inject.Injector] instead of a module seems 
+interesting.

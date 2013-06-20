@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.Grammar;
@@ -422,7 +422,7 @@ public class XpectParameterProviderTest
 	@Test
 	public void xpectMLOffsetParameter2()
 	{
-		String model = "/* XPECT offsetMeth at fo!o -->  exp \n*/ Bar: val='foo';";
+		String model = "/* XPECT offsetMeth at fo|o -->  exp \n*/ Bar: val='foo';";
 		Assert.assertEquals(
 		    "offsetMeth(myOffset='l='fo!o';\\n ', myOffset=157, offset=' \\n*/ !Bar: ', offset=145, resource)",
 		    params(model));

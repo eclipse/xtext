@@ -1,0 +1,281 @@
+chapter:builddsl[Build Language]
+
+Build tools like Ant or link[http://www.gradle.org/][Gradle] decompose the build process into a set of tasks. A task can 
+stand for a compilation step, copying some files, bundling, running tests etc. The order of execution is calculated from 
+the dependencies of the defined tasks.
+
+img[images/builddsl_screenshot.png][][][]
+
+This build language combines the declarative approach of defining tasks and dependencies with the full power of a 
+modern expression language. It is a bit similar to Gradle but statically typed and with very good IDE support.
+
+section:builddsl_solution[Overview]
+
+The above screenshot shows an exemplary build script. A script has a couple of parameters. The 
+tasks define dependencies to other tasks. What happens if the task is executed is defined in a block
+within curly braces.   
+
+A build script can be run from the command line, assigning values to the parameters in the syntax
+code[myscript --<paramName> <value>]. 
+
+We have put most functionality of the language in the runtime library: Detecting the order of execution,
+parsing parameters, etc. The language itself focusses on the structural parts, and leaves the actions
+to Xbase. With this approach, it has proven beneficial to allow additional library methods to be added
+via the extension method mechanism. So we do not ship a library of tasks as e.g. Ant does. 
+
+section:builddsl_running[Running the Example]
+
+In the runtime workspace, open the e[BuildExample.build] in the editor. The example project comes with 
+some sample java code to compile in the e[example-project] folder. Choose e[Run as > Build Task] from the context
+menu of any task to execute it.  
+
+section:builddsl_grammar[Grammar]
+
+The grammar of the DSL is once again quite slim:
+ 
+code[Xtext][
+grammar org.xtext.builddsl.BuildDSL with org.eclipse.xtext.xbase.Xbase
+
+generate build "http://www.xtext.org/builddsl"
+
+BuildFile:
+	("package" name=QualifiedName)?
+	importSection=XImportSection?
+	declarations+=Declaration*;
+
+Declaration:
+	Task | Parameter;
+
+Parameter:
+	'param' type=JvmTypeReference? name=ValidID ('=' init=XExpression)?;
+
+Task:
+	'task' name=ValidID 
+	('depends' depends+=\[Task|ValidID\] (',' depends+=\[Task|ValidID\])*)?
+	action=XBlockExpression;
+]
+
+A e[BuildFile] starts with a e[package] declaration. The generated Java class will be located in this
+namespace. The next part is an e[importSection]. Since version 2.4, Xbase includes extensive tooling
+to validate and organize import statements. To make this available in your language, you just have to include
+an e[XImportSection] as in this example. The imports are followed by the e[Declarations].
+A e[Declaration] can be a e[Task] or a e[Parameter]. A e[Parameter] can declare a type and an initialization
+expression. e[Tasks] define dependencies on other tasks by means of an Xtext cross-reference. They also
+contain an action, which is a codeRef[org.eclipse.xtext.xbase.XBlockExpression] from Xbase, thus everthing 
+is possible within a task.
+
+section:builddsl_inferrer[Translation to Java]
+
+For each e[BuildFile] we create a Java class that extends the library class 
+codeRef[org.xtext.builddsl.lib.BuildScript]. We generate a main method allowing to execute the script as
+a Java application with command line parameters. The use of code[Java][System.exit] allows to return error codes
+to the caller.  
+
+table[
+tr[td[DSL]td[code[builddsl][
+package sample
+]]]
+
+tr[td[Java]td[code[Java][
+package sample;
+...
+public class SimpleBuild extends BuildScript {
+...
+  public static void main(final String... args) {
+    SimpleBuild script = new SimpleBuild();
+    if (script.showHelp(args)) {
+      System.exit(HELP);
+    }
+    System.exit(script.doBuild(args));
+  }
+...
+}]]]
+]
+
+The respective inferrer code looks like this:
+code[Xtend][
+class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
+
+  @Inject extension JvmTypesBuilder
+  @Inject ITypeProvider typeProvider
+
+  def dispatch void infer(BuildFile file, 
+                          IJvmDeclaredTypeAcceptor acceptor, 
+                          boolean isPreIndexingPhase) {
+    val fqn = file.javaClassName
+    val scriptName = Strings::lastToken(fqn, ".")
+    acceptor.accept(file.toClass(fqn)).initializeLater \[
+      superTypes += file.newTypeRef(typeof(BuildScript))
+...      
+      val stringArray = 
+          file.newTypeRef(typeof(String)).addArrayTypeDimension
+      members += file.toMethod("main", file.newTypeRef(Void::TYPE)) \[
+        parameters += toParameter("args", stringArray)
+        varArgs = true
+        static = true
+        body = \[ append('''
+          «scriptName» script = new «scriptName»();
+          if (script.showHelp(args)) {
+            System.exit(HELP);
+          }
+          System.exit(script.doBuild(args));
+        ''') \]
+      \]
+    \]
+...]
+
+
+Each e[Task] becomes a method in the Java class. A codeRef[org.xtext.builddsl.lib.DependsOn] annotation
+communicates the dependencies to the runtime. The superclass will scan for such annotations and execute
+the dependencies in the right order.
+
+table[
+tr[td[DSL]td[code[builddsl][
+task print depends prepare {
+  print(name)
+}]]]
+tr[td[Java]td[code[Java][
+@DependsOn("prepare")
+protected void print() {
+  InputOutput.<String>print(this.name);
+}
+]]]
+]
+
+The annotation part may be interesting, so here is the snippet from the inferrer:
+ 
+code[Xtend][
+// a method for the actual task body
+members += file.tasks.map\[ task | toMethod(task.methodName, task.newTypeRef(Void::TYPE)) \[
+  visibility = JvmVisibility::PROTECTED
+  annotations += task.toAnnotation(typeof(DependsOn)) => \[
+    values += createJvmStringAnnotationValue => \[
+      values += task.depends.map\[name\]
+    \]
+  \]
+  body = task.action
+\]\]
+]
+
+Finally, we create a field with the codeRef[org.xtext.builddsl.lib.Param] annotation from each e[Parameter]. 
+The superclass will make the so marked fields initializable from command line arguments. 
+
+table[
+tr[td[DSL]td[code[builddsl][
+param name = 'World'
+]]]
+tr[td[Java]td[code[Java][
+@Param
+public String name = "World";
+]]]
+]
+
+The type can be skipped. If there is an initialization expression, the parameter's type is inferred from the 
+initialization expression. If that one is missing, too, codeRef[java.lang.String] 
+is assumed. The Elvis-operator e[?:] comes handy for this use case. The different sources are tried to find the
+best type for the field. In the inferrer, this looks like:
+
+code[Xtend][
+@Inject ITypeProvider typeProvider
+...
+val type = declaredParameter.type 
+	?: declaredParameter?.init?.inferredType
+	?: file.newTypeRef(typeof(String))
+]
+
+section:builddsl_validation[Validation]
+
+When e[Tasks] are depending on each other, cycles will break the computation of the execution order.
+There is a check for this constraint in the validator codeRef[org.xtext.builddsl.validation.BuildDSLValidator]:
+
+code[Xtend][
+class BuildDSLValidator extends XbaseJavaValidator {
+...
+  @Check
+  def void checkNoRecursiveDependencies(Task task) {
+    task.findDependentTasks \[ cycle |
+      if (cycle.size == 1) {
+        error('''The task '«task.name»' cannot depend on itself.''', 
+            cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
+      } else {
+        error('''There is a cyclic dependency that involves tasks «
+                cycle.map\[name\].join(", ")»''', 
+              cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
+      }
+    \]
+  }
+...]  
+
+section:builddsl_imports[Imports]
+
+By using the e[XImportSection] form Xbase, the language automatically supports the notion of e[plain imports],
+e[static imports] and e[static extension imports]. While the first two work as in Java, a static extension
+import puts the static methods of the specified calls on the extension scope, such that it can be called
+as if it were a method on the first argument. See the ref:xtend_extension[Xtend primer] for a more detailed
+description.
+
+We ship some predefined extension classes to enhance the Java classes codeRef[java.io.File]
+and codeRef[java.lang.Class]. These are always put onto the extension scope by a customized 
+codeRef[org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedTypes]:
+
+code[Xtend][
+class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedTypes {
+	/**
+	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
+	 */
+	override protected getExtensionClasses() {
+		(super.getExtensionClasses() + #\[typeof(FileExtensions), typeof(ClassExtensions)\])
+			.toList
+	}
+}
+]
+
+As always, such an implementation has to be bound in the codeRef[org.xtext.builddsl.BuildDSLRuntimeModule]:
+
+code[Java][
+public class BuildDSLRuntimeModule 
+    extends org.xtext.builddsl.AbstractBuildDSLRuntimeModule {
+...
+  public Class<? extends ImplicitlyImportedTypes> 
+      bindImplicitlyImportedTypes() {
+    return BuildDSLImplicitlyImportedTypes.class;
+  }
+}
+] 
+
+section:builddsl_library[Operator Overloading]
+
+As we expect a build language to deal with files and directories a lot, we have extended the syntax 
+around these in the codeRef[org.xtext.builddsl.lib.FileExtensions]. We leverage the fact that Xbase 
+allows to overload operators by means of library extensions. The following examples show how to avoid 
+the noisy constructor calls to codeRef[java.io.File]:
+
+table[
+tr[td[DSL]td[code[builddsl][
+val dir = 'someDir'.file
+val file = dir / 'fileName.txt'
+val theSameFile = 'someDir' / 'fileName.txt'
+]]]
+tr[td[Java]td[code[Java][
+final File dir = FileExtensions.file("someDir");
+final File file = FileExtensions.operator_divide(dir, "fileName.txt");
+final File theSameFile = FileExtensions.operator_divide(
+    "someDir", 
+    "fileName.txt");
+]]]
+]
+
+The compiler replaces operators with method calls to methods named code[Xtend][operator_<operatorName>()].
+These have to be callable on the left operand, i.e. be a method of the left operands type or be added
+as an extension to the left operand type. In this case, we use the latter approach, since codeRef[java.io.File]
+as well as codeRef[java.lang.String] are sealed types. To learn more about operators and operator overloading
+please consult the link[http://www.eclipse.org/Xtext/documentation.html#Xbase_Expressions_Operators][Xtext documentation].
+
+section:builddsl_launch[Run as... Integration]
+
+To facilitate executing build scripts from within Java, we have extended Eclipse's launch support. The
+respective classes are codeRef[org.xtext.builddsl.ui.launch.BuildDSLLaunchDelegate],
+codeRef[org.xtext.builddsl.ui.launch.BuildDSLLaunchShortcut] and 
+codeRef[org.xtext.builddsl.ui.launch.BuildDSLLaunchTabGroup]. Describing all the details would be a bit
+lengthy but it is quite straightforward if you are familiar with the launching API.   
+

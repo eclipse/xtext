@@ -20,4 +20,11 @@ public interface IGenerator {
 	 * @param fsa - file system access to be used to generate files
 	 */
 	public void doGenerate(Resource input, IFileSystemAccess fsa);
+	
+	/**
+	 * @since 2.4
+	 */
+	public static class NullGenerator implements IGenerator {
+		public void doGenerate(Resource input, IFileSystemAccess fsa) {}
+	}
 }

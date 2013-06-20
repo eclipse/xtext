@@ -11,14 +11,12 @@ package org.eclipse.xtext.nodemodel;
 import java.util.Iterator;
 
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 public class LengthOffsetLineTest extends AbstractXtextTests {
 
-	public void testOffset() throws Exception {
+	@Test public void testOffset() throws Exception {
 		String model = "element foo;\nelement bar;";
 		ICompositeNode node = getRootNode(model);
 		Iterator<ILeafNode> iter = node.getLeafNodes().iterator();
@@ -33,7 +31,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 		assertEquals(24,iter.next().getTotalOffset());
 	}
 
-	public void testOffset2() throws Exception {
+	@Test public void testOffset2() throws Exception {
 		String model = "element foo;\nelement bar;";
 		ICompositeNode node = getRootNode(model);
 		Iterator<INode> iter = node.getChildren().iterator();
@@ -42,7 +40,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 		assertFalse(iter.hasNext());
 	}
 
-	public void testLineForLeafnodes() throws Exception {
+	@Test public void testLineForLeafnodes() throws Exception {
 		String model = "element foo;\nelement bar;";
 		ICompositeNode node = getRootNode(model);
 		Iterator<ILeafNode> iter = node.getLeafNodes().iterator();
@@ -58,7 +56,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 		assertFalse(iter.hasNext());
 	}
 
-	public void testLineForCompositeNodes() throws Exception {
+	@Test public void testLineForCompositeNodes() throws Exception {
 		String model = "element foo;\nelement bar;\nelement bar;\nelement bar;";
 		ICompositeNode node = getRootNode(model);
 		Iterator<INode> iter = node.getChildren().iterator();
@@ -72,7 +70,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 	}
 
 
-	public void testErrors1() throws Exception {
+	@Test public void testErrors1() throws Exception {
 		String model = "element # ;";
 		ICompositeNode node = getRootNodeAndExpect(model, 1);
 		assertEquals(model, node.getText());
@@ -89,7 +87,7 @@ public class LengthOffsetLineTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(DummyTestLanguageStandaloneSetup.class);
 	}

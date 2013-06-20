@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.label;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
+import org.junit.Assert;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -22,9 +21,9 @@ import com.google.inject.Module;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class LabelProviderInjectionTest extends TestCase {
+public class LabelProviderInjectionTest extends Assert {
 
-	public void testLabelProviderInjection() throws Exception {
+	@org.junit.Test public void testLabelProviderInjection() throws Exception {
 		Module module = new Module() {
 			public void configure(Binder binder) {
 				binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(LabelProvider.class);
@@ -36,7 +35,8 @@ public class LabelProviderInjectionTest extends TestCase {
 	}
 	
 	static class Test {
-		@Inject@ResourceServiceDescriptionLabelProvider
+		@Inject
+		@ResourceServiceDescriptionLabelProvider
 		ILabelProvider labelProvider;
 	}
 }

@@ -7,12 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+
+@NonNullByDefault
 public class TextRegion implements ITextRegion {
 	private final int offset;
 
 	private final int length;
 
 	public TextRegion(int offset, int length) {
+		if (offset < 0)
+			throw new IllegalArgumentException("offset " + offset + " is < 0");
+		if (length < 0)
+			throw new IllegalArgumentException("length " + length + " is < 0");
 		this.offset = offset;
 		this.length = length;
 	}
@@ -26,8 +34,10 @@ public class TextRegion implements ITextRegion {
 	}
 
 	public ITextRegion merge(ITextRegion other) {
-		if (other == EMPTY_REGION)
+		if (contains(other))
 			return this;
+		if (other.contains(this))
+			return other;
 		int newOffset = Math.min(offset, other.getOffset());
 		int newLength = Math.max(offset + length, other.getOffset() + other.getLength()) - newOffset;
 		return new TextRegion(newOffset, newLength);
@@ -42,7 +52,7 @@ public class TextRegion implements ITextRegion {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(@Nullable Object obj) {
 		return obj instanceof ITextRegion && ((ITextRegion)obj).getOffset() == offset && ((ITextRegion)obj).getLength() ==length;
 	}
 	

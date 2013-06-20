@@ -6,14 +6,13 @@ package org.eclipse.xtext.parser.unorderedGroups.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.SimpleUnorderedGroupsTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class SimpleUnorderedGroupsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class SimpleUnorderedGroupsTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private SimpleUnorderedGroupsTestLanguageGrammarAccess grammarAccess;

@@ -1,14 +1,16 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.xtype.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+
+import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -28,7 +30,7 @@ import org.eclipse.xtext.xtype.*;
  * @see org.eclipse.xtext.xtype.XtypePackage
  * @generated
  */
-public class XtypeSwitch<T>
+public class XtypeSwitch<T> extends Switch<T>
 {
 	/**
 	 * The cached model package
@@ -53,15 +55,17 @@ public class XtypeSwitch<T>
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @parameter ePackage the package in question.
+	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject)
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage)
 	{
-		return doSwitch(theEObject.eClass(), theEObject);
+		return ePackage == modelPackage;
 	}
 
 	/**
@@ -71,29 +75,7 @@ public class XtypeSwitch<T>
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject)
-	{
-		if (theEClass.eContainer() == modelPackage)
-		{
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else
-		{
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
-	}
-
-	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+	@Override
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
 		switch (classifierID)
@@ -113,6 +95,20 @@ public class XtypeSwitch<T>
 				T result = caseXComputedTypeReference(xComputedTypeReference);
 				if (result == null) result = caseJvmSpecializedTypeReference(xComputedTypeReference);
 				if (result == null) result = caseJvmTypeReference(xComputedTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtypePackage.XIMPORT_SECTION:
+			{
+				XImportSection xImportSection = (XImportSection)theEObject;
+				T result = caseXImportSection(xImportSection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtypePackage.XIMPORT_DECLARATION:
+			{
+				XImportDeclaration xImportDeclaration = (XImportDeclaration)theEObject;
+				T result = caseXImportDeclaration(xImportDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -148,6 +144,38 @@ public class XtypeSwitch<T>
 	 * @generated
 	 */
 	public T caseXComputedTypeReference(XComputedTypeReference object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XImport Section</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XImport Section</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXImportSection(XImportSection object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XImport Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XImport Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXImportDeclaration(XImportDeclaration object)
 	{
 		return null;
 	}
@@ -195,6 +223,7 @@ public class XtypeSwitch<T>
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
+	@Override
 	public T defaultCase(EObject object)
 	{
 		return null;

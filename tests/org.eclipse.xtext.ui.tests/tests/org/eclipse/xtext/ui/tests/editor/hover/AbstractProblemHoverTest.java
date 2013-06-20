@@ -16,18 +16,19 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.AbstractProblemHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.junit.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
@@ -43,7 +44,7 @@ public class AbstractProblemHoverTest extends AbstractEditorTest {
 	private MockHover hover;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		modelAsText = "stuff mystuff\nstuff yourstuff refs _mystuff// Comment";
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
@@ -63,7 +64,7 @@ public class AbstractProblemHoverTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		editor.close(false);
 	}
@@ -73,7 +74,7 @@ public class AbstractProblemHoverTest extends AbstractEditorTest {
 		return "org.eclipse.xtext.ui.tests.TestLanguage";
 	}
 
-	public void testAnnotations () {	
+	@Test public void testAnnotations () {	
 		assertEquals (0, hover.getAnnotations(0,0).size());
 		assertEquals (0, hover.getAnnotations(1,34).size());
 		assertEquals (1, hover.getAnnotations(1,35).size());

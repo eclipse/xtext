@@ -1,0 +1,198 @@
+chapter:moviesExample[The Movies Example]
+
+The movies example is included in the example project e[Xtend Introductory Examples] (src/examples6/Movies.xtend) and is about reading
+a file with data about movies and doing some analysis on it.
+
+section[The Data]
+
+The movie database is a plain text file (data.csv) with data sets describing movies.
+Here is an example data set:
+code[
+Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy
+]
+
+The values are separated by two spaces. The columns are :
+ol[
+  item[title]
+  item[year]
+  item[rating]
+  item[numberOfVotes]
+  item[categories]
+]
+ 
+Let us define a data type code[Movie] representing a data set:
+
+code[Xtend][
+@Data class Movie {
+  String title
+  int year
+  double rating
+  long numberOfVotes
+  Set<String> categories 
+}
+]
+
+A movie is a POJO with a strongly typed field for each column in the data sets. The ref:dataAnnotation[@Data]
+annotation will turn the class into an immutable value class, that is it will get 
+ul[
+  item[a getter-method for each field,]
+  item[a code[hashCode()]/code[equals()] implementation,]
+  item[implementation of code[Object.toString(),]]
+  item[a constructor accepting values for all fields in the declared order.]
+]
+
+section[Parsing The Data]
+
+Let us now add another class to the same file and initialize a field
+called movies with a list of movies. For the initialization we parse the text file and turn the data records into code[Movie]s:
+
+code[Xtend][
+import java.io.FileReader
+import java.util.Set
+import static extension com.google.common.io.CharStreams.*
+
+class Movies {
+  
+  val movies = new FileReader('data.csv').readLines.map \[ line |
+    val segments = line.split('  ').iterator
+    return new Movie(
+      segments.next, 
+      Integer.parseInt(segments.next), 
+      Double.parseDouble(segments.next), 
+      Long.parseLong(segments.next), 
+      segments.toSet
+    )
+  \]
+}
+]
+
+A ref:fields[field's type] can be inferred from the expression on the right hand-side. 
+That is called local type inference and is supported everywhere in Xtend.
+We want the field to be final, so we declare it as a value using the keyword code[Xtend][val].
+
+The initialization on the right hand side first creates a new codeRef[java.io.FileReader].
+Then the method code[readLines()] is invoked on that instance. But if you have a look at code[FileReader] you will not find
+such a method. In fact code[readLines()] is a static method from Google Guava's codeRef[com.google.common.io.CharStreams] which was imported 
+as an ref:extensionImports[extension]. Extensions allow us to use this readable syntax.
+
+code[Xtend][
+import static extension com.google.common.io.CharStreams.*
+]
+
+codeRef[com.google.common.io.CharStreams][code[CharStreams.readLines(Reader)]] returns a codeRef[java.util.List][code[List<String>]] on 
+which we call another extension method code[map].
+This one is defined in the runtime library (codeRef[org.eclipse.xtext.xbase.lib.ListExtensions][ListExtensions.map(...)]) and is automatically imported and
+therefore available on all lists. The code[map] extension expects a function as a parameter.
+It basically invokes that function for each value in the list and returns another list containing the results of the function invocations. Actually
+this mapping is performed lazily so if you never access the values of the result list, the mapping function is never executed.
+
+Function objects are created using ref:lambdas[lambda expressions] (the code in squared brackets).
+Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using 
+two whitespace characters as the separator. On the result of the split operation, the method code[iterator()] is invoked. 
+As you might know codeRef[java.lang.String][String.split(String)]
+returns a string array (code[String\[\]]), which Xtend ref:conversionRules[auto-converts to a list] when we 
+call codeRef[java.lang.Iterable][code[Iterable.iterator()]] on it.
+
+code[Xtend][
+val segments = line.split('  ').iterator
+]
+
+Now we use the iterator to create an instance of code[Movie] for each String that it yields.
+The data type conversion (e.g. code[String] to code[Xtend][int]) is done by calling ref:staticAccess[static methods] from the wrapper types. 
+The rest of the codeRef[java.lang.Iterable] is turned into a set of categories. Therefore, the extension method 
+codeRef[org.eclipse.xtext.xbase.lib.IteratorExtensions][code[IteratorExtensions.toSet(Iterator<T>)]]
+is invoked on the iterator to consume its remaining values.
+
+code[Xtend][
+return new Movie (
+  segments.next, 
+  Integer.parseInt(segments.next), 
+  Double.parseDouble(segments.next), 
+  Long.parseLong(segments.next), 
+  segments.toSet
+)
+]
+
+section[Answering Some Questions]
+
+Now that we have parsed the text file into a code[List<Movie>], we are ready to execute some queries against it.
+We use e[JUnit] to make the individual queries executable and to confirm their results.
+
+section2[Question 1 : What Is The Number Of Action Movies?]
+
+code[Xtend][
+  @Test def numberOfActionMovies() {
+    assertEquals(828, 
+      movies.filter\[ categories.contains('Action') \].size)
+  }
+]
+
+First the movies are code[filter]ed. The lambda expression checks whether the current movie's categories contain 
+the entry code[Xtend]['Action']. Note that unlike the lambda we used to turn the lines in the file into movies, we 
+have not declared a parameter name this time. 
+We could have written 
+code[Xtend][
+  movies.filter\[ movie | movie.categories.contains('Action') \].size
+]
+but since we left out the name and the vertical bar the variable is automatically named code[Xtend][it].
+code[Xtend][it] is an ref:implicitVariables[implicit variable]. It's uses are similar to the implicit variable code[Xtend][this].
+We can write either
+
+code[Xtend][
+  movies.filter\[ it.categories.contains('Action') \].size
+]
+or even more compact 
+code[Xtend][
+  movies.filter\[ categories.contains('Action') \].size
+]
+
+Eventually we call code[size] on the resulting iterable which is an extension method, too. It is defined in the utility class 
+codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions].
+
+section2[Question 2 : What Is The Year The Best Movie From The 80's Was Released?]
+
+code[Xtend][
+  @Test def void yearOfBestMovieFrom80s() {
+    assertEquals(1989, 
+      movies.filter\[ (1980..1989).contains(year) \].sortBy\[ rating \].last.year)
+  }
+]
+
+Here we code[filter] for all movies whose year is included in the range from 1980 to 1989 (the 80's).
+The code[..] operator is again an extension defined in codeRef[org.eclipse.xtext.xbase.lib.IntegerExtensions] and returns an instance of codeRef[org.eclipse.xtext.xbase.lib.IntegerRange].
+Operator overloading is explained in ref:operators[section].
+
+The resulting iterable is sorted (codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions][code[IterableExtensions.sortBy]]) by the code[rating] of the movies. 
+Since it is sorted in ascending order, we take the last movie from the list and return its code[year]. 
+
+We could have sorted descending and take the head of the list as well:
+code[Xtend][
+  movies.filter\[ (1980..1989).contains(year) \].sortBy\[ -rating \].head.year
+]
+
+Another possible solution would be to reverse the order of the sorted list:
+code[Xtend][
+  movies.filter\[ (1980..1989).contains(year) \].sortBy\[ rating \].reverseView.head.year
+]
+
+Note that first sorting and then taking the last or first is slightly more expensive than needed. We could
+have used the method code[reduce] instead to find the best movie which would be more efficient. Maybe
+you want to try it on your own?
+
+The calls to code[movie.year] as well as code[movie.categories] in the previous example in fact access the corresponding 
+ref:propertyAccess[getter methods].
+
+section2[Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?]
+
+code[Xtend][
+  @Test def void sumOfVotesOfTop2() {
+    val long sum = movies.sortBy\[ -rating \].take(2).map\[ numberOfVotes \].reduce\[ a, b | a + b \]
+    assertEquals(47_229L, sum)
+  }
+]
+
+First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their code[numberOfVotes] using the code[map] function. 
+Now we have a codeRef[java.util.List][code[List<Long>]] which can be reduced to a single codeRef[java.lang.Long] by adding the values.
+
+You could also use code[reduce] instead of code[map] and code[reduce]. Do you know how?
+

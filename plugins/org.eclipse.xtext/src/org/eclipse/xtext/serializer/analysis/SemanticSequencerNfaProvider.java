@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
+import java.util.BitSet;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -21,7 +22,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynAbsorberNfaAdapter;
@@ -36,6 +40,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -56,10 +61,6 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			this.stop = stops;
 		}
 
-		public ISemState getStop() {
-			return stop;
-		}
-
 		public List<ISemState> getFollowers(ISemState node) {
 			return node.getFollowers();
 		}
@@ -68,21 +69,33 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			return start;
 		}
 
+		public ISemState getStop() {
+			return stop;
+		}
+
 	}
 
 	protected static class SemState implements ISemState {
 
+		protected BitSet allFollowerFeatures;
 		protected AbstractElement assignedGrammarElement;
-		protected EStructuralFeature feature;
-		protected int featureID = -1;
-		protected List<ISemState> followers;
-		protected EClass type;
 		protected List<AbstractElement> contentValidationNeeded;
+		protected EStructuralFeature feature;
+		protected int featureID = -2;
+		protected List<ISemState> followers;
+		protected int orderID = 0;
+		protected EClass type;
 
 		public SemState(EClass type, AbstractElement assignedGrammarElement) {
 			super();
 			this.type = type;
 			this.assignedGrammarElement = assignedGrammarElement;
+		}
+
+		public BitSet getAllFollowerFeatures() {
+			if (allFollowerFeatures == null)
+				allFollowerFeatures = new BitSet();
+			return allFollowerFeatures;
 		}
 
 		public AbstractElement getAssignedGrammarElement() {
@@ -96,13 +109,17 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		}
 
 		public int getFeatureID() {
-			if (featureID < 0)
-				featureID = type.getFeatureID(getFeature());
+			if (featureID < -1)
+				featureID = getFeature() != null ? type.getFeatureID(getFeature()) : -1;
 			return featureID;
 		}
 
 		public List<ISemState> getFollowers() {
 			return followers == null ? Collections.<ISemState> emptyList() : followers;
+		}
+
+		public int getOrderID() {
+			return orderID;
 		}
 
 		public List<AbstractElement> getToBeValidatedAssignedElements() {
@@ -135,14 +152,40 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	}
 
+	protected Map<AbstractElement, Integer> elementIDCache;
+
+	@Inject
+	protected IGrammarAccess grammar;
+
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
 
-	protected Map<Pair<EObject, EClass>, Nfa<ISemState>> cache = Maps.newHashMap();
+	protected Map<Pair<EObject, EClass>, Nfa<ISemState>> resultCache = Maps.newHashMap();
+
+	protected boolean addAll(BitSet to, BitSet bits) {
+		BitSet cpy = new BitSet();
+		cpy.or(to);
+		cpy.or(bits);
+		if (cpy.equals(to))
+			return false;
+		to.or(bits);
+		return true;
+	}
+
+	protected int getElementID(AbstractElement ele) {
+		if (elementIDCache == null) {
+			elementIDCache = Maps.newHashMap();
+			int counter = 0;
+			for (ParserRule pr : GrammarUtil.allParserRules(grammar.getGrammar()))
+				for (AbstractElement e : EcoreUtil2.getAllContentsOfType(pr, AbstractElement.class))
+					elementIDCache.put(e, counter++);
+		}
+		return elementIDCache.get(ele);
+	}
 
 	public Nfa<ISemState> getNFA(EObject context, EClass type) {
 		Pair<EObject, EClass> key = Tuples.create(context, type);
-		Nfa<ISemState> nfa = cache.get(key);
+		Nfa<ISemState> nfa = resultCache.get(key);
 		if (nfa != null)
 			return nfa;
 		NfaUtil util = new NfaUtil();
@@ -151,10 +194,50 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		Map<ISynAbsorberState, Integer> distanceMap = util.distanceToFinalStateMap(synNfa);
 		nfa = util.create(util.sort(synNfa, distanceMap), new SemStateFactory());
 		//		util.sortInplace(nfa, distanceMap);
-		initContentValidationNeeded(type, nfa);
+		if (type != null)
+			initContentValidationNeeded(type, nfa);
+		initRemainingFeatures(nfa.getStop(), util.inverse(nfa), Sets.<ISemState> newHashSet());
+		initOrderIDs(nfa);
 		//		System.out.println(new NfaFormatter().format(nfa));
-		cache.put(key, nfa);
+		resultCache.put(key, nfa);
 		return nfa;
+	}
+
+	protected void initContentValidationNeeded(EClass clazz, Nfa<ISemState> nfa) {
+		Multimap<EStructuralFeature, AbstractElement> assignments = HashMultimap.create();
+		Set<ISemState> states = new NfaUtil().collect(nfa);
+		for (ISemState state : states)
+			if (state.getFeature() != null)
+				assignments.put(state.getFeature(), state.getAssignedGrammarElement());
+		boolean[] validationNeeded = new boolean[clazz.getFeatureCount()];
+		for (EStructuralFeature feature : clazz.getEAllStructuralFeatures())
+			validationNeeded[clazz.getFeatureID(feature)] = isContentValidationNeeded(assignments.get(feature));
+		for (ISemState state : states)
+			if (state.getFeature() != null && validationNeeded[state.getFeatureID()])
+				((SemState) state).contentValidationNeeded = Lists.newArrayList(assignments.get(state.getFeature()));
+			else
+				((SemState) state).contentValidationNeeded = Collections.emptyList();
+	}
+
+	protected void initOrderIDs(Nfa<ISemState> nfa) {
+		for (ISemState state : new NfaUtil().collect(nfa))
+			if (state.getAssignedGrammarElement() != null)
+				((SemState) state).orderID = getElementID(state.getAssignedGrammarElement());
+	}
+
+	protected void initRemainingFeatures(ISemState state, Nfa<ISemState> inverseNfa, Set<ISemState> visited) {
+		BitSet features = state.getAllFollowerFeatures();
+		if (state.getFeature() != null) {
+			BitSet f = new BitSet();
+			f.or(features);
+			f.set(state.getFeatureID());
+			features = f;
+		}
+		for (ISemState follower : inverseNfa.getFollowers(state)) {
+			if (!addAll(follower.getAllFollowerFeatures(), features) && !visited.add(follower))
+				continue;
+			initRemainingFeatures(follower, inverseNfa, visited);
+		}
 	}
 
 	protected boolean isContentValidationNeeded(Collection<AbstractElement> ass) {
@@ -176,21 +259,5 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			}
 		}
 		return false;
-	}
-
-	protected void initContentValidationNeeded(EClass clazz, Nfa<ISemState> nfa) {
-		Multimap<EStructuralFeature, AbstractElement> assignments = HashMultimap.create();
-		Set<ISemState> states = new NfaUtil().collect(nfa);
-		for (ISemState state : states)
-			if (state.getFeature() != null)
-				assignments.put(state.getFeature(), state.getAssignedGrammarElement());
-		boolean[] validationNeeded = new boolean[clazz.getFeatureCount()];
-		for (EStructuralFeature feature : clazz.getEAllStructuralFeatures())
-			validationNeeded[clazz.getFeatureID(feature)] = isContentValidationNeeded(assignments.get(feature));
-		for (ISemState state : states)
-			if (state.getFeature() != null && validationNeeded[state.getFeatureID()])
-				((SemState) state).contentValidationNeeded = Lists.newArrayList(assignments.get(state.getFeature()));
-			else
-				((SemState) state).contentValidationNeeded = Collections.emptyList();
 	}
 }
