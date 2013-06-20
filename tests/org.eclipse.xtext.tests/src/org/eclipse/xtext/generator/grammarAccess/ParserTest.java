@@ -16,7 +16,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AModel;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AsubpackagePackage;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.emptyPackage.subsubpackage.SubsubpackagePackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,14 +25,14 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public class ParserTest extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		EPackage.Registry.INSTANCE.put(AsubpackagePackage.eNS_URI, AsubpackagePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(SubsubpackagePackage.eNS_URI, SubsubpackagePackage.eINSTANCE);
 		with(GrammarAccessTestLanguageStandaloneSetup.class);
 	}
 	
-	public void testInstantiate() throws Exception {
+	@Test public void testInstantiate() throws Exception {
 		String modelAsText = "foo bar";
 		AModel model = (AModel) getModel(modelAsText);
 		assertEquals(2, model.getElements().size());
@@ -39,7 +40,7 @@ public class ParserTest extends AbstractXtextTests {
 		assertEquals(SubsubpackagePackage.Literals.ANOTHER_TYPE, model.getElements().get(1).eClass());
 	}
 	
-	public void testUriFormat() throws Exception {
+	@Test public void testUriFormat() throws Exception {
 		URI uri = EcoreUtil.getURI(SubsubpackagePackage.Literals.ANOTHER_TYPE);
 		assertTrue(AsubpackagePackage.eNS_URI.equals(uri.trimFragment().toString()));
 		ResourceSet set = new ResourceSetImpl();
@@ -47,7 +48,7 @@ public class ParserTest extends AbstractXtextTests {
 		assertSame(SubsubpackagePackage.Literals.ANOTHER_TYPE, eObject);
 	}
 	
-	public void testUriFormat2() throws Exception {
+	@Test public void testUriFormat2() throws Exception {
 		URI uri = EcoreUtil.getURI(AsubpackagePackage.Literals.ATYPE);
 		assertTrue(AsubpackagePackage.eNS_URI.equals(uri.trimFragment().toString()));
 		ResourceSet set = new ResourceSetImpl();

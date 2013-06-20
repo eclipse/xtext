@@ -15,11 +15,11 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.xtext.junit4.ui.AbstractWorkbenchTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.junit.editor.AbstractWorkbenchTest;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -42,7 +42,6 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 		file.create(new StringInputStream(model), true, null);
 		file.refreshLocal(IResource.DEPTH_ONE, null);
 		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
-		xtextEditor.getDocument().set(model);
 		return xtextEditor;
 	}
 

@@ -10,31 +10,42 @@ package org.eclipse.xtext.logging;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 import org.apache.log4j.spi.LoggingEvent;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.osgi.framework.Bundle;
 
 /**
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
+ * @author Knut Wannheden - Refactored handling when used in non OSGi environment
  */
 public class EclipseLogAppender extends AppenderSkeleton {
 
-	private static final String ORG_APACHE_LOG4J = "org.apache.log4j";
-	private ILog log = null;
+	private static final String LOG4J_BUNDLE_NAME = "org.apache.log4j";
 
-	private synchronized ILog getLog(String loggerName) {
-		if (log == null) {
-			final String version = "1.2.15";
-			Bundle[] bundles = Platform.getBundles(ORG_APACHE_LOG4J,version);
-			if (bundles==null || bundles.length==0)
-			      throw new IllegalStateException("Host bundle "+ORG_APACHE_LOG4J+" "+version+" not found! If you run outside Eclipse, you might want to remove the jar org.eclipse.xtext.logging*.jar from your classpath.");
-			log = Platform.getLog(bundles[0]);
+	// this logger will NOT log to this appender (see log4j.properties)
+	private static final Logger LOGGER = Logger.getLogger(EclipseLogAppender.class);
+
+	private boolean initialized;
+	private ILog log;
+
+	private synchronized void ensureInitialized() {
+		if (!initialized) {
+			if (!Platform.isRunning()) {
+				LOGGER.warn("You appear to be running outside Eclipse; you might want to remove the jar org.eclipse.xtext.logging*.jar from your classpath and supply your own log4j.properties.");
+			} else {
+				log = Platform.getLog(Platform.getBundle(LOG4J_BUNDLE_NAME));
+			}
+			initialized = true;
 		}
+	}
+
+	private ILog getLog() {
+		ensureInitialized();
 		return log;
 	}
 
@@ -42,33 +53,28 @@ public class EclipseLogAppender extends AppenderSkeleton {
 	protected void append(LoggingEvent event) {
 		if (isDoLog(event.getLevel())) {
 			String logString = layout.format(event);
-			String loggerName = event.getLoggerName();
 
-			ILog myLog = getLog(loggerName);
+			ILog myLog = getLog();
 			if (myLog != null) {
+				String loggerName = event.getLoggerName();
 				int severity = mapLevel(event.getLevel());
 				final Throwable throwable = event.getThrowableInformation() != null ? event.getThrowableInformation()
 						.getThrowable() : null;
 				IStatus status = createStatus(severity, loggerName, logString, throwable);
-				myLog.log(status);
-			}
-			else {
-				System.out
-						.println("No Eclipse Log configured (you need to add a org.eclipse.xtext.logging.loggermap extension to your plugin.xml). Log message was: "
-								+ logString);
+				getLog().log(status);
+			} else {
+				// nothing to do (message should be logged to stdout by default appender)
 			}
 		}
 	}
 
 	private boolean isDoLog(Level level) {
-		return log!=null && (level.toInt() >= Priority.WARN_INT);
+		return level.toInt() >= Priority.WARN_INT;
 	}
 
 	private int mapLevel(Level level) {
 		switch (level.toInt()) {
 			case Priority.DEBUG_INT:
-				return IStatus.INFO;
-
 			case Priority.INFO_INT:
 				return IStatus.INFO;
 
@@ -76,8 +82,6 @@ public class EclipseLogAppender extends AppenderSkeleton {
 				return IStatus.WARNING;
 
 			case Priority.ERROR_INT:
-				return IStatus.ERROR;
-
 			case Priority.FATAL_INT:
 				return IStatus.ERROR;
 
@@ -87,7 +91,7 @@ public class EclipseLogAppender extends AppenderSkeleton {
 	}
 
 	private IStatus createStatus(int severity, String loggerName, String message, Throwable throwable) {
-		return new Status(severity, ORG_APACHE_LOG4J, message, throwable);
+		return new Status(severity, LOG4J_BUNDLE_NAME, message, throwable);
 	}
 
 	public void close() {

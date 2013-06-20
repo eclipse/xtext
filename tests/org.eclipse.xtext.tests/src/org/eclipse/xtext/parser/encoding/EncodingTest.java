@@ -19,8 +19,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -36,7 +37,7 @@ public class EncodingTest extends AbstractXtextTests {
 	private Map<String, String> utfOptions;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(EncodingTestLanguageStandaloneSetup.class);
 		model = "Öclüpß Mödelüng Främwörk";
@@ -47,7 +48,7 @@ public class EncodingTest extends AbstractXtextTests {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		model = null;
 		utfBytes = null;
 		isoBytes = null;
@@ -56,17 +57,17 @@ public class EncodingTest extends AbstractXtextTests {
 		super.tearDown();
 	}
 	
-	public void testDefaultEncoding() throws Exception {
+	@Test public void testDefaultEncoding() throws Exception {
 		XtextResource resource = createXtextResource();
 		assertEquals(Charset.defaultCharset().name(), resource.getEncoding());
 	}
 	
-	public void testSetup() {
+	@Test public void testSetup() {
 		assertFalse(Arrays.equals(utfBytes, isoBytes));
 		assertTrue(Charset.defaultCharset().name().equals(UTF_8) || Charset.defaultCharset().name().equals(ISO_8859_1));
 	}
 	
-	public void testUtfBytesWithIsoOptions() throws Exception {
+	@Test public void testUtfBytesWithIsoOptions() throws Exception {
 		XtextResource resource = createXtextResource();
 		try {
 			resource.load(new ByteArrayInputStream(utfBytes), isoOptions);
@@ -82,7 +83,7 @@ public class EncodingTest extends AbstractXtextTests {
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
 	
-	public void testIsoBytesWithUtfOptions() throws Exception {
+	@Test public void testIsoBytesWithUtfOptions() throws Exception {
 		XtextResource resource = createXtextResource();
 		try {
 			resource.load(new ByteArrayInputStream(isoBytes), utfOptions);
@@ -98,7 +99,7 @@ public class EncodingTest extends AbstractXtextTests {
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
 	
-	public void testIsoEncoding() throws Exception {
+	@Test public void testIsoEncoding() throws Exception {
 		XtextResource resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(isoBytes), isoOptions);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
@@ -106,7 +107,7 @@ public class EncodingTest extends AbstractXtextTests {
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
 	
-	public void testUtfEncoding() throws Exception {
+	@Test public void testUtfEncoding() throws Exception {
 		XtextResource resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(utfBytes), utfOptions);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
@@ -114,7 +115,7 @@ public class EncodingTest extends AbstractXtextTests {
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
 	
-	public void testSaveIsoToIso() throws Exception {
+	@Test public void testSaveIsoToIso() throws Exception {
 		XtextResource resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(isoBytes), isoOptions);
 		ByteArrayOutputStream isoSaveStream = new ByteArrayOutputStream();
@@ -124,7 +125,7 @@ public class EncodingTest extends AbstractXtextTests {
 		assertTrue(Arrays.equals(isoBytes, savedIsoBytes));
 	}
 	
-	public void testSaveUtfToUtf() throws Exception {
+	@Test public void testSaveUtfToUtf() throws Exception {
 		XtextResource resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(utfBytes), utfOptions);
 		ByteArrayOutputStream utfSaveStream = new ByteArrayOutputStream();
@@ -134,7 +135,7 @@ public class EncodingTest extends AbstractXtextTests {
 		assertTrue(Arrays.equals(utfBytes, savedUtfBytes));
 	}
 	
-	public void testSaveUtfToIso() throws Exception {
+	@Test public void testSaveUtfToIso() throws Exception {
 		XtextResource resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(utfBytes), utfOptions);
 		ByteArrayOutputStream isoSaveStream = new ByteArrayOutputStream();
@@ -144,7 +145,7 @@ public class EncodingTest extends AbstractXtextTests {
 		assertTrue(Arrays.equals(isoBytes, savedIsoBytes));
 	}
 	
-	public void testSaveIsoToUtf() throws Exception {
+	@Test public void testSaveIsoToUtf() throws Exception {
 		XtextResource resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(isoBytes), isoOptions);
 		ByteArrayOutputStream utfSaveStream = new ByteArrayOutputStream();

@@ -26,8 +26,11 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 
 /**
+ * This class will be removed in the next release after 2.4.2
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class ExpectationCollection extends StringCollection<ExpectationItem> {
 	public class ExpectationItem extends StringCollection<ExpectationItem>.Item {
 		protected boolean negated;

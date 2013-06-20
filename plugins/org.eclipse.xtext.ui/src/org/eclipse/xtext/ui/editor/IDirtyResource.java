@@ -38,5 +38,15 @@ public interface IDirtyResource {
 	 * @return the URI of the resource, never <code>null</code>.
 	 */
 	URI getURI();
-	
+
+	/**
+	 * An extension interface for {@link IDirtyResource}
+	 * @since 2.4
+	 */
+	interface NormalizedURISupportExtension extends IDirtyResource {
+		/**
+		 * @return the normalized URI of the resource, never <code>null</code>.
+		 */
+		URI getNormalizedURI();
+	}
 }

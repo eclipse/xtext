@@ -15,59 +15,59 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.resource.IFragmentProvider;
-
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeResourceTest extends TestCase implements IMirror {
+public class TypeResourceTest extends Assert implements IMirror {
 
 	private boolean initializeCalled;
 	private EObject expectedObject;
 	private String expectedFragment;
 	private URI expectedURI;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		initializeCalled = false;
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		expectedFragment = null;
 		expectedObject = null;
 		expectedURI = null;
-		super.tearDown();
 	}
 	
-	public void testConstructor_01() {
+	@Test public void testConstructor_01() {
 		TypeResource resource = new TypeResource();
 		assertNull("uri", resource.getURI());
 		assertNull("mirror", resource.getMirror());
 	}
 	
-	public void testConstructor_02() {
+	@Test public void testConstructor_02() {
 		URI uri = URI.createURI("myURI");
 		TypeResource resource = new TypeResource(uri);
 		assertEquals(uri, resource.getURI());
 		assertNull("mirror", resource.getMirror());
 	}
 	
-	public void testLoad_01() throws IOException {
+	@Test public void testLoad_01() throws IOException {
 		TypeResource resource = createResource();
 		resource.load(null);
 		assertTrue(initializeCalled);
 	}
 	
-	public void testLoad_02() throws IOException {
+	@Test public void testLoad_02() throws IOException {
 		TypeResource resource = createResource();
 		resource.load(null, null);
 		assertTrue(initializeCalled);
 	}
 	
-	public void testSave_01() throws IOException {
+	@Test public void testSave_01() throws IOException {
 		TypeResource resource = createResource();
 		resource.load(null, null);
 		try {
@@ -78,7 +78,7 @@ public class TypeResourceTest extends TestCase implements IMirror {
 		}
 	}
 	
-	public void testSave_02() throws IOException {
+	@Test public void testSave_02() throws IOException {
 		TypeResource resource = createResource();
 		resource.load(null, null);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -92,14 +92,14 @@ public class TypeResourceTest extends TestCase implements IMirror {
 		}
 	}
 	
-	public void testGetURIFragment_01() {
+	@Test public void testGetURIFragment_01() {
 		TypeResource resource = createResource();
 		expectedFragment = "Foobar";
 		expectedObject = TypesFactory.eINSTANCE.createJvmVoid();
 		assertEquals(expectedFragment, resource.getURIFragment(expectedObject));
 	}
 	
-	public void testGetEObject_01() {
+	@Test public void testGetEObject_01() {
 		TypeResource resource = createResource();
 		expectedFragment = "Foobar";
 		expectedObject = TypesFactory.eINSTANCE.createJvmVoid();

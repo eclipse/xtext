@@ -8,12 +8,13 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -34,69 +35,69 @@ public abstract class AbstractBug348427Test extends AbstractContentAssistProcess
 		};
 	}
 	
-	public void testEmptyDocument() throws Exception {
+	@Test public void testEmptyDocument() throws Exception {
 		super.newBuilder().assertText(
 				"1.1", "1.2", "1.3", "1.4",  
 				"2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8");
 	}
 	
-	public void testExpectName() throws Exception {
+	@Test public void testExpectName() throws Exception {
 		newBuilder().assertText("Name");
 	}
 	
-	public void testExpectColon() throws Exception {
+	@Test public void testExpectColon() throws Exception {
 		newBuilder().append("Name ").assertText(":");
 	}
 	
-	public void testDontProposeNext_1() throws Exception {
+	@Test public void testDontProposeNext_1() throws Exception {
 		newBuilder().append("Name : ").assertText("a", "b", "bool");
 	}
 	
-	public void testDontProposeNext_2() throws Exception {
+	@Test public void testDontProposeNext_2() throws Exception {
 		newBuilder().append("Name : bool keyword ").assertText("a", "b");
 	}
 	
-	public void testExpectChildKeyword_1() throws Exception {
+	@Test public void testExpectChildKeyword_1() throws Exception {
 		newBuilder().append("Name : a ").assertText("child1", "child2", "child3");
 	}
 	
-	public void testExpectChildKeyword_2() throws Exception {
+	@Test public void testExpectChildKeyword_2() throws Exception {
 		newBuilder().append("Name : b ").assertText("child1", "child2", "child3");
 	}
 	
-	public void testExpectChildKeyword_3() throws Exception {
+	@Test public void testExpectChildKeyword_3() throws Exception {
 		newBuilder().append("Name : bool keyword a ").assertText("child1", "child2", "child3");
 	}
 	
-	public void testExpectChildKeyword_4() throws Exception {
+	@Test public void testExpectChildKeyword_4() throws Exception {
 		newBuilder().append("Name : bool keyword b ").assertText("child1", "child2", "child3");
 	}
 	
-	public void testExpectEndKeyword_1() throws Exception {
+	@Test public void testExpectEndKeyword_1() throws Exception {
 		newBuilder().append("Name : a child1 ").assertText("end");
 	}
 	
-	public void testExpectEndKeyword_2() throws Exception {
+	@Test public void testExpectEndKeyword_2() throws Exception {
 		newBuilder().append("Name : b child2 ").assertText("end");
 	}
 	
-	public void testExpectEndKeyword_3() throws Exception {
+	@Test public void testExpectEndKeyword_3() throws Exception {
 		newBuilder().append("Name : bool keyword a child3 ").assertText("end");
 	}
 	
-	public void testExpectedKeyword() throws Exception {
+	@Test public void testExpectedKeyword() throws Exception {
 		newBuilder().append("Name : bool ").assertText("keyword");
 	}
 	
-	public void testExpectNextKeyword_1() throws Exception {
+	@Test public void testExpectNextKeyword_1() throws Exception {
 		newBuilder().append("Name : a child1 end ").assertText("next");
 	}
 	
-	public void testExpectNextKeyword_2() throws Exception {
+	@Test public void testExpectNextKeyword_2() throws Exception {
 		newBuilder().append("Name : b child2 end ").assertText("next");
 	}
 	
-	public void testExpectNextKeyword_3() throws Exception {
+	@Test public void testExpectNextKeyword_3() throws Exception {
 		newBuilder().append("Name : bool keyword a child3 end ").assertText("next");
 	}
 	

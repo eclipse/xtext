@@ -7,71 +7,108 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
-import java.util.Collections;
+import static com.google.common.collect.Maps.*;
+import static java.util.Collections.*;
+
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.SimpleCache;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
  */
-@Singleton
-public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChangeListener {
-
-	private ResourceFactoryRegistryImpl resourceFactoryRegistry;
-
-	public Storage2UriMapperImpl() {
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
-		final ResourceSet resourceSet = new ResourceSetImpl();
-		resourceFactoryRegistry = new ResourceFactoryRegistryImpl() {
-			@Override
-			protected URIConverter getURIConverter() {
-				return resourceSet.getURIConverter();
-			}
-
-			@Override
-			protected Map<?, ?> getContentDescriptionOptions() {
-				return resourceSet.getLoadOptions();
-			}
-		};
-		resourceFactoryRegistry.getProtocolToFactoryMap().putAll(
-				Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap());
-		resourceFactoryRegistry.getExtensionToFactoryMap().putAll(
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap());
-		resourceFactoryRegistry.getContentTypeToFactoryMap().putAll(
-				Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap());
-
-		resourceFactoryRegistry.getExtensionToFactoryMap().remove(Resource.Factory.Registry.DEFAULT_EXTENSION);
-		resourceFactoryRegistry.getContentTypeToFactoryMap().remove(
-				Resource.Factory.Registry.DEFAULT_CONTENT_TYPE_IDENTIFIER);
-
-		resourceSet.setResourceFactoryRegistry(resourceFactoryRegistry);
+@Singleton public class Storage2UriMapperImpl implements IStorage2UriMapper {
+	
+	private final static Logger log = Logger.getLogger(Storage2UriMapperImpl.class);
+	
+	@Inject private IResourceServiceProvider.Registry resourceServiceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
+	@Inject private UriValidator uriValidator;
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setUriValidator(UriValidator uriValidator) {
+		this.uriValidator = uriValidator;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Map<URI, IStorage> getAllEntries(IContainer container) {
+		final Map<URI,IStorage> result = newLinkedHashMap();
+		try {
+			container.accept(new IResourceVisitor() {
+				public boolean visit(IResource resource) throws CoreException {
+					if (resource instanceof IFile) {
+						final IFile storage = (IFile) resource;
+						URI uri = getUri(storage);
+						if (uri != null)
+							result.put(uri, storage);
+					}
+					if (resource instanceof IFolder) {
+						return isHandled((IFolder)resource);
+					}
+					return true;
+				}
+			});
+		} catch (CoreException e) {
+			log.error(e.getMessage(), e);
+		}
+		return result;
+	}
+	
+	/**
+	 * Return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
+	 * Defaults to <code>true</code> for all folders.
+	 * @return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
+	 * @since 2.4
+	 */
+	protected boolean isHandled(IFolder folder) {
+		return true;
 	}
 
 	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
-		synchronized (cache) {
-			return cache.get(uri);
+		if (!uri.isPlatformResource()) {
+			// support storage lookup by absolute file URI as it is possibly resolved by importURI references
+			if (uri.isFile()) {
+				IPath path = new Path(uri.toFileString());
+				if (path.isAbsolute()) {
+					IFile file = getWorkspaceRoot().getFileForLocation(path);
+					return getStorages(file);
+				}
+			}
+			return emptySet();
 		}
+		IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
+		return getStorages(file);
+	}
+
+	private Iterable<Pair<IStorage, IProject>> getStorages(IFile file) {
+		if (file == null || !file.isAccessible()) {
+			return emptySet();
+		}
+		return singleton(Tuples.<IStorage,IProject>create(file, file.getProject()));
 	}
 
 	protected IWorkspaceRoot getWorkspaceRoot() {
@@ -79,8 +116,10 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 	}
 
 	public final URI getUri(IStorage storage) {
+		if (!uriValidator.isPossiblyManaged(storage))
+			return null;
 		URI uri = internalGetUri(storage);
-		if (uri!=null && isValidUri(uri,storage))
+		if (uri != null && isValidUri(uri,storage))
 			return uri;
 		return null;
 	}
@@ -92,36 +131,14 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 		return null;
 	}
 	
-	@Inject
-	private UriValidator uriValidator;
 
 	public boolean isValidUri(URI uri, IStorage storage) {
 		boolean valid = uriValidator.isValid(uri, storage);
 		return valid;
 	}
 	
-	
-	private final SimpleCache<URI, Iterable<Pair<IStorage, IProject>>> cache = new SimpleCache<URI, Iterable<Pair<IStorage, IProject>>>(new Function<URI, Iterable<Pair<IStorage, IProject>>>() {
-		public Iterable<Pair<IStorage, IProject>> apply(URI uri) {
-			if (uri.isPlatformResource()) {
-				Path path = new Path(uri.toPlatformString(true));
-				IFile file = getWorkspaceRoot().getFile(path);
-				if (isValidStorageFor(uri, file))
-					return Collections.singleton(Tuples.<IStorage, IProject>create(file, file.getProject()));
-			}
-			return Collections.emptyList();
-		}
-	});
-
-	protected boolean isValidStorageFor(URI uri, IStorage storage) {
-		// subclasses may override
-		return true;
+	@Deprecated public void resourceChanged(IResourceChangeEvent event) {
+		log.warn("Storage2UriMapperImpl.resourceChanged(IResourceChangeEvent) is deprecated and does nothing.");
 	}
 	
-	public void resourceChanged(IResourceChangeEvent event) {
-		synchronized (cache) {
-			cache.clear();
-		}
-	}
-
 }

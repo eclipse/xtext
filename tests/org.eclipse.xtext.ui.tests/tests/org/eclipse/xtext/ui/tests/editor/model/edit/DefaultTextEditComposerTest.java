@@ -21,12 +21,13 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
@@ -36,7 +37,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 	private ITextEditComposer composer;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup());
 		composer = get(ITextEditComposer.class);
@@ -47,7 +48,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 				+ "Foo: 'foo' | 'bar' | 'baz'; " + "Bar: foo=Foo; ");
 	}
 
-	public void testProtocol() throws Exception {
+	@Test public void testProtocol() throws Exception {
 		Resource res = getResource(newTestGrammar());
 		assertNull(composer.endRecording());
 		composer.beginRecording(res);
@@ -61,7 +62,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertNull(composer.endRecording());
 	}
 
-	public void testRemoveRootObject() throws Exception {
+	@Test public void testRemoveRootObject() throws Exception {
 		Resource res = getResource(newTestGrammar());
 
 		composer.beginRecording(res);
@@ -71,7 +72,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertEquals("", ((ReplaceEdit) edit).getText());
 	}
 
-	public void testReplaceRootObject() throws Exception {
+	@Test public void testReplaceRootObject() throws Exception {
 		Resource res = getResource(newTestGrammar());
 
 		composer.beginRecording(res);
@@ -84,7 +85,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertMatches(grammar, edit);
 	}
 
-	public void testObjectAddition() throws Exception {
+	@Test public void testObjectAddition() throws Exception {
 		Resource res = getResource(newTestGrammar());
 
 		composer.beginRecording(res);
@@ -99,7 +100,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertMatches(alternatives, edit);
 	}
 
-	public void testObjectRemoval() throws Exception {
+	@Test public void testObjectRemoval() throws Exception {
 		Resource res = getResource(newTestGrammar());
 
 		composer.beginRecording(res);
@@ -113,7 +114,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 	}
 
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=292349 */
-	public void testObjectModificationAndRemoval() throws Exception {
+	@Test public void testObjectModificationAndRemoval() throws Exception {
 		Resource res = getResource(newTestGrammar());
 
 		composer.beginRecording(res);
@@ -128,7 +129,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertMatches(alternatives, edit);
 	}
 
-	public void testObjectReplacement() throws Exception {
+	@Test public void testObjectReplacement() throws Exception {
 		Resource res = getResource(newTestGrammar());
 
 		composer.beginRecording(res);
@@ -142,7 +143,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertMatches(rule, edit);
 	}
 
-	public void testMultiEdit() throws Exception {
+	@Test public void testMultiEdit() throws Exception {
 		Resource res = getResource(newTestGrammar());
 
 		composer.beginRecording(res);

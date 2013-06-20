@@ -11,23 +11,26 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TailWriterTest extends TestCase {
+public class TailWriterTest extends Assert {
 
 	private StringWriter writer;
 	private BufferedWriter buff;
 
-	@Override
-	protected void setUp() {
+	@Before
+	public void setUp() {
 		writer = new StringWriter();
 	}
 
-	@Override
-	protected void tearDown() {
+	@After
+	public void tearDown() {
 		writer = null;
 		buff = null;
 	}
@@ -45,33 +48,33 @@ public class TailWriterTest extends TestCase {
 		assertEquals(s, writer.getBuffer().toString());
 	}
 
-	public void testSuppressNothing() throws IOException {
+	@Test public void testSuppressNothing() throws IOException {
 		initWriter(0);
 		String s = "foo\nbar\n";
 		write(s);
 		check(s);
 	}
 
-	public void testSuppressNegative() throws Exception {
+	@Test public void testSuppressNegative() throws Exception {
 		initWriter(-1);
 		String s = "foo\nbar\n";
 		write(s);
 		check(s);
 	}
 
-	public void testSuppressOne() throws Exception {
+	@Test public void testSuppressOne() throws Exception {
 		initWriter(1);
 		write("foo\nbar\n");
 		check("bar\n");
 	}
 
-	public void testSuppressTwo() throws Exception {
+	@Test public void testSuppressTwo() throws Exception {
 		initWriter(2);
 		write("foo\nbar\nzonk\n");
 		check("zonk\n");
 	}
 
-	public void testSuppressAll() throws Exception {
+	@Test public void testSuppressAll() throws Exception {
 		initWriter(4);
 		write("foo\nbar\nzonk\n");
 		check("");

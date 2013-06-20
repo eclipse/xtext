@@ -10,22 +10,17 @@ package org.eclipse.xtext.builder.preferences;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.layout.PixelConverter;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.osgi.util.TextProcessor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
@@ -33,8 +28,8 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.generator.OutputConfiguration;
-
-import com.google.common.collect.Sets;
+import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
+import org.eclipse.xtext.ui.preferences.ScrolledPageContent;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -47,32 +42,32 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 
 	public BuilderConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
 			EclipseOutputConfigurationProvider configurationProvider, IWorkbenchPreferenceContainer container) {
-		super(project, getKeys(project, configurationProvider), preferenceStore, container);
+		super(project, preferenceStore, container);
 		this.configurationProvider = configurationProvider;
 	}
 
-	private static String[] getKeys(IProject project, EclipseOutputConfigurationProvider configurationProvider) {
-		Set<String> keys = Sets.newHashSet(BuilderPreferenceAccess.PREF_AUTO_BUILDING, OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
-		Set<OutputConfiguration> outputConfigurations = configurationProvider.getOutputConfigurations(project);
-		for (OutputConfiguration outputConfiguration : outputConfigurations) {
-			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
-					EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY));
-			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
-					EclipseOutputConfigurationProvider.OUTPUT_CREATE_DIRECTORY));
-			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
-					EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY));
-			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
-					EclipseOutputConfigurationProvider.OUTPUT_OVERRIDE));
-			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
-					EclipseOutputConfigurationProvider.OUTPUT_DERIVED));
-			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
-					EclipseOutputConfigurationProvider.OUTPUT_CLEANUP_DERIVED));
-		}
-		return keys.toArray(new String[] {});
-	}
+//	private static String[] getKeys(IProject project, EclipseOutputConfigurationProvider configurationProvider) {
+//		Set<String> keys = Sets.newHashSet(BuilderPreferenceAccess.PREF_AUTO_BUILDING, OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
+//		Set<OutputConfiguration> outputConfigurations = configurationProvider.getOutputConfigurations(project);
+//		for (OutputConfiguration outputConfiguration : outputConfigurations) {
+//			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
+//					EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY));
+//			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
+//					EclipseOutputConfigurationProvider.OUTPUT_CREATE_DIRECTORY));
+//			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
+//					EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY));
+//			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
+//					EclipseOutputConfigurationProvider.OUTPUT_OVERRIDE));
+//			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
+//					EclipseOutputConfigurationProvider.OUTPUT_DERIVED));
+//			keys.add(BuilderPreferenceAccess.getKey(outputConfiguration,
+//					EclipseOutputConfigurationProvider.OUTPUT_CLEANUP_DERIVED));
+//		}
+//		return keys.toArray(new String[] {});
+//	}
 
 	@Override
-	protected Control createContents(Composite parent) {
+	protected Control doCreateContents(Composite parent) {
 		PixelConverter pixelConverter = new PixelConverter(parent);
 		setShell(parent.getShell());
 		Composite mainComp = new Composite(parent, SWT.NONE);
@@ -136,7 +131,24 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CleanDirectory,
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY), trueFalseValues, 0);
+			final Button installAsPrimaryButton = addCheckBox(othersComposite, Messages.BuilderConfigurationBlock_InstallDslAsPrimarySource,
+					BuilderPreferenceAccess.getKey(outputConfiguration,
+							EclipseOutputConfigurationProvider.INSTALL_DSL_AS_PRIMARY_SOURCE), trueFalseValues, 0);
+			final Button hideLocalButton = addCheckBox(othersComposite, Messages.BuilderConfigurationBlock_hideSyntheticLocalVariables,
+					BuilderPreferenceAccess.getKey(outputConfiguration,
+							EclipseOutputConfigurationProvider.HIDE_LOCAL_SYNTHETIC_VARIABLES), trueFalseValues, 0);
+			hideLocalButton.setEnabled(installAsPrimaryButton.getSelection());
+			installAsPrimaryButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					hideLocalButton.setEnabled(installAsPrimaryButton.getSelection());
+				}
+			});
+			GridData hideLocalButtonData = new GridData();
+			hideLocalButtonData.horizontalIndent = 32;
+			hideLocalButton.setLayoutData(hideLocalButtonData);
 		}
+		registerKey(OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
 		IDialogSettings section = Activator.getDefault().getDialogSettings().getSection(SETTINGS_SECTION_NAME);
 		restoreSectionExpansionStates(section);
 		return pageContent;
@@ -167,71 +179,10 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 
 	@Override
 	protected Job getBuildJob(IProject project) {
-		Job buildJob = new BuildJob(Messages.BuilderConfigurationBlock_BuildJob_Title0, project);
+		Job buildJob = new OptionsConfigurationBlock.BuildJob(Messages.BuilderConfigurationBlock_BuildJob_Title0, project);
 		buildJob.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
 		buildJob.setUser(true);
 		return buildJob;
-	}
-
-	private static final class BuildJob extends Job {
-		private final IProject project;
-
-		private BuildJob(String name, IProject project) {
-			super(name);
-			this.project = project;
-		}
-
-		public boolean isCoveredBy(BuildJob other) {
-			if (other.project == null) {
-				return true;
-			}
-			return project != null && project.equals(other.project);
-		}
-
-		@Override
-		protected IStatus run(IProgressMonitor monitor) {
-			synchronized (getClass()) {
-				if (monitor.isCanceled()) {
-					return Status.CANCEL_STATUS;
-				}
-				Job[] buildJobs = Job.getJobManager().find(ResourcesPlugin.FAMILY_MANUAL_BUILD);
-				for (int i = 0; i < buildJobs.length; i++) {
-					if (buildJobs[i] != this && buildJobs[i] instanceof BuildJob) {
-						BuildJob job = (BuildJob) buildJobs[i];
-						if (job.isCoveredBy(this)) {
-							buildJobs[i].cancel();
-						}
-					}
-				}
-			}
-			try {
-				if (project != null) {
-					monitor.beginTask(String.format(
-							Messages.BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName,
-							TextProcessor.process(project.getName(), ":.")), //$NON-NLS-2$
-							2);
-					project.build(IncrementalProjectBuilder.FULL_BUILD, new SubProgressMonitor(monitor, 1));
-					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
-							new SubProgressMonitor(monitor, 1));
-				} else {
-					monitor.beginTask(Messages.BuilderConfigurationBlock_BuildJob_TitleBuildAll_TaskName, 2);
-					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD,
-							new SubProgressMonitor(monitor, 2));
-				}
-			} catch (CoreException e) {
-				return e.getStatus();
-			} catch (OperationCanceledException e) {
-				return Status.CANCEL_STATUS;
-			} finally {
-				monitor.done();
-			}
-			return Status.OK_STATUS;
-		}
-
-		@Override
-		public boolean belongsTo(Object family) {
-			return ResourcesPlugin.FAMILY_MANUAL_BUILD == family;
-		}
 	}
 
 }

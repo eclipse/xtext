@@ -7,35 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
-import java.io.InputStream;
 import java.util.Collections;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.builder.IXtextBuilderParticipant;
-import org.eclipse.xtext.builder.tests.Activator;
-import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
-
-import com.google.inject.Injector;
+import org.junit.Test;
 
 /**
  * @author Holger Schill - Initial contribution and API
  */
 public class Bug355821Test extends AbstractParticipatingBuilderTest {
 	
-	public void testBuildIsInvokedOnlyOnceWhenManifestChanges() throws Exception {
+	@Test public void testBuildIsInvokedOnlyOnceWhenManifestChanges() throws Exception {
 		IProject fooProject = createPluginProject("Foo");
 		waitForAutoBuild();
 		

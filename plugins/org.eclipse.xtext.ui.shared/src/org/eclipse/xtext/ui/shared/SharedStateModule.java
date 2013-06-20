@@ -11,13 +11,20 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.trace.StorageAwareTrace;
+import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Binder;
@@ -31,6 +38,27 @@ public class SharedStateModule extends AbstractGenericModule {
 
 	public Provider<IStorage2UriMapper> provideIStorage2UriMapper() {
 		return Access.getIStorage2UriMapper();
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Provider<IStorage2UriMapperJdtExtensions> provideIStorage2UriMapperJdtExtensions() {
+		return Access.getIStorage2UriMapperJdtExtensions();
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Provider<StorageAwareTrace> provideStorageAwareTrace() {
+		return Access.provider(StorageAwareTrace.class);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Provider<DefaultTraceURIConverter> provideDefaultTraceURIConverter() {
+		return Access.provider(DefaultTraceURIConverter.class);
 	}
 
 	public Provider<IStateChangeEventBroker> provideIStateChangeEventBroker() {
@@ -47,6 +75,20 @@ public class SharedStateModule extends AbstractGenericModule {
 
 	public Provider<IURIEditorOpener> provideIURIEditorOpener() {
 		return Access.getIURIEditorOpener();
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public Class<? extends IDerivedResourceMarkers> bindDerivedResourceMarkers() {
+		return DerivedResourceMarkers.class;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public Class<? extends ITraceForStorageProvider> bindITraceInformation() {
+		return TraceForStorageProvider.class;
 	}
 	
 	/**
@@ -68,7 +110,7 @@ public class SharedStateModule extends AbstractGenericModule {
 		if (PlatformUI.isWorkbenchRunning()) {
 			binder.bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
 				public IWorkbench get() {
-					return PlatformUI.getWorkbench();
+					return (PlatformUI.isWorkbenchRunning()) ? PlatformUI.getWorkbench() : null;
 				}
 			});
 		}

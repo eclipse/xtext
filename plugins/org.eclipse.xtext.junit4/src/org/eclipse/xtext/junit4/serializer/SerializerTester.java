@@ -14,20 +14,18 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.formatting.IFormatter;
-import org.eclipse.xtext.junit4.serializer.AssertNodeModelAcceptor;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.acceptor.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.StringBufferSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.WhitespaceAddingSequenceAcceptor;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ContextFinder;
@@ -53,12 +51,6 @@ public class SerializerTester {
 	protected ContextFinder contextFinder;
 
 	@Inject
-	protected IFormatter formatter;
-
-	@Inject
-	protected IGrammarAccess grammar;
-
-	@Inject
 	protected Provider<IHiddenTokenSequencer> hiddenTokenSequencerProvider;
 
 	@Inject
@@ -68,64 +60,109 @@ public class SerializerTester {
 	protected Provider<ISemanticSequencer> semanticSequencerProvider;
 
 	@Inject
-	protected ISerializer serializer;
-
-	@Inject
 	protected Provider<ISyntacticSequencer> syntacticSequencerProvider;
 
 	@Inject
 	protected ValidationTestHelper validationHelper;
 
-	public void assertSerializeWithNodeModel(EObject semanticObject) {
-		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
-		ISemanticSequencer semantic = semanticSequencerProvider.get();
-		ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
-		IHiddenTokenSequencer hidden = hiddenTokenSequencerProvider.get();
-		ISequenceAcceptor result = new StringBufferSequenceAcceptor();
-		semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
-		EObject context = getContext(semanticObject);
-		syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);
-		hidden.init(context, semanticObject, new AssertNodeModelAcceptor(result), errors);
-		semantic.createSequence(context, semanticObject);
-		Assert.assertEquals(getTextFromNodeModel(semanticObject), result.toString());
-	}
-
-	public void assertSerializeWithNodeModel(String semanticModel) throws Exception {
-		EObject semanticObject = parseHelper.parse(semanticModel);
-		validationHelper.assertNoErrors(semanticObject);
-		assertSerializeWithNodeModel(semanticObject);
-	}
-
-	public void assertSerializeWithoutNodeModel(EObject semanticObject) throws Exception {
-		EObject parsed;
-		if (semanticObject.eResource().getContents().contains(semanticObject)) {
-			List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
-			String serialized = serializer.serialize(semanticObject);
-			parsed = parseHelper.parse(serialized, semanticObject.eResource().getResourceSet());
-			reattachNodes(nodes);
-		} else {
-			INode oldNode = NodeModelUtils.getNode(semanticObject);
-			String oldtext = oldNode.getRootNode().getText();
-			String oldURI = semanticObject.eResource().getURIFragment(semanticObject);
-			List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
-			String serialized = serializer.serialize(semanticObject);
-			String newtext = oldtext.substring(0, oldNode.getOffset()) + serialized
-					+ oldtext.substring(oldNode.getOffset() + oldNode.getLength());
-			EObject newmodel = parseHelper.parse(newtext, semanticObject.eResource().getResourceSet());
-			parsed = newmodel.eResource().getEObject(oldURI);
-			reattachNodes(nodes);
-		}
-		EcoreUtil.resolveAll(parsed);
-		Assert.assertTrue(parsed.eResource().getErrors().toString(), parsed.eResource().getErrors().isEmpty());
+	/**
+	 * @since 2.3
+	 */
+	protected void assertEqualWithEmfFormatter(EObject semanticObject, EObject parsed) {
 		String expected = EmfFormatter.objToStr(semanticObject);
 		String actual = EmfFormatter.objToStr(parsed);
 		Assert.assertEquals(expected, actual);
 	}
 
-	public void assertSerializeWithoutNodeModel(String semanticModel) throws Exception {
-		EObject semanticObject = parseHelper.parse(semanticModel);
-		validationHelper.assertNoErrors(semanticObject);
+	/**
+	 * @since 2.3
+	 */
+	public void assertSerializable(EObject semanticObject) {
+		assertSerializeWithNodeModel(semanticObject);
 		assertSerializeWithoutNodeModel(semanticObject);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public void assertSerializable(String semanticObject) {
+		assertSerializeWithNodeModel(semanticObject);
+		assertSerializeWithoutNodeModel(semanticObject);
+	}
+
+	public void assertSerializeWithNodeModel(EObject semanticObject) {
+		String expected = getTextFromNodeModel(semanticObject);
+		String actual = serializeWithNodeModel(semanticObject);
+		Assert.assertEquals(expected, actual);
+	}
+
+	public void assertSerializeWithNodeModel(String semanticModel) {
+		try {
+			EObject semanticObject = parseHelper.parse(semanticModel);
+			validationHelper.assertNoErrors(semanticObject);
+			assertSerializeWithNodeModel(semanticObject);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void assertSerializeWithoutNodeModel(EObject semanticObject) {
+		try {
+			EObject parsed;
+			if (semanticObject.eResource().getContents().contains(semanticObject)) {
+				List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
+				String serialized = serializeWithoutNodeModel(semanticObject);
+				parsed = parseHelper.parse(serialized, semanticObject.eResource().getResourceSet());
+				reattachNodes(nodes);
+			} else {
+				INode oldNode = NodeModelUtils.getNode(semanticObject);
+				String oldtext = oldNode.getRootNode().getText();
+				String oldURI = semanticObject.eResource().getURIFragment(semanticObject);
+				List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
+				String serialized = serializeWithoutNodeModel(semanticObject);
+				String newtext = oldtext.substring(0, oldNode.getOffset()) + serialized
+						+ oldtext.substring(oldNode.getOffset() + oldNode.getLength());
+				EObject newmodel = parseHelper.parse(newtext, semanticObject.eResource().getResourceSet());
+				parsed = newmodel.eResource().getEObject(oldURI);
+				reattachNodes(nodes);
+			}
+			EcoreUtil.resolveAll(parsed);
+			Assert.assertTrue(parsed.eResource().getErrors().toString(), parsed.eResource().getErrors().isEmpty());
+			parsed.eResource().getResourceSet().getResources().remove(parsed.eResource());
+			assertEqualWithEmfFormatter(semanticObject, parsed);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void assertSerializeWithoutNodeModel(String semanticModel) {
+		EObject semanticObject;
+		try {
+			semanticObject = parseHelper.parse(semanticModel);
+			validationHelper.assertNoErrors(semanticObject);
+			assertSerializeWithoutNodeModel(semanticObject);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	protected List<Pair<EObject, ICompositeNode>> detachNodeModel(EObject eObject) {
+		EcoreUtil.resolveAll(eObject);
+		List<Pair<EObject, ICompositeNode>> result = Lists.newArrayList();
+		Iterator<Object> iterator = EcoreUtil.getAllContents(eObject.eResource(), false);
+		while (iterator.hasNext()) {
+			EObject object = (EObject) iterator.next();
+			Iterator<Adapter> adapters = object.eAdapters().iterator();
+			while (adapters.hasNext()) {
+				Adapter adapter = adapters.next();
+				if (adapter instanceof ICompositeNode) {
+					adapters.remove();
+					result.add(Tuples.create(object, (ICompositeNode) adapter));
+					break;
+				}
+			}
+		}
+		return result;
 	}
 
 	protected EObject getContext(EObject semanticObject) {
@@ -149,43 +186,55 @@ public class SerializerTester {
 		return node.getText();
 	}
 
-	//	protected void removeNodeModel(EObject eObject) {
-	//		Iterator<Object> iterator = EcoreUtil.getAllContents(eObject.eResource(), false);
-	//		while (iterator.hasNext()) {
-	//			EObject object = (EObject) iterator.next();
-	//			Iterator<Adapter> adapters = object.eAdapters().iterator();
-	//			while (adapters.hasNext()) {
-	//				Adapter adapter = adapters.next();
-	//				if (adapter instanceof ICompositeNode) {
-	//					adapters.remove();
-	//					break;
-	//				}
-	//			}
-	//		}
-	//	}
-
-	protected List<Pair<EObject, ICompositeNode>> detachNodeModel(EObject eObject) {
-		EcoreUtil.resolveAll(eObject);
-		List<Pair<EObject, ICompositeNode>> result = Lists.newArrayList();
-		Iterator<Object> iterator = EcoreUtil.getAllContents(eObject.eResource(), false);
-		while (iterator.hasNext()) {
-			EObject object = (EObject) iterator.next();
-			Iterator<Adapter> adapters = object.eAdapters().iterator();
-			while (adapters.hasNext()) {
-				Adapter adapter = adapters.next();
-				if (adapter instanceof ICompositeNode) {
-					adapters.remove();
-					result.add(Tuples.create(object, (ICompositeNode) adapter));
-					break;
-				}
-			}
-		}
-		return result;
-	}
-
 	protected void reattachNodes(List<Pair<EObject, ICompositeNode>> nodes) {
 		for (Pair<EObject, ICompositeNode> pair : nodes)
 			pair.getFirst().eAdapters().add((Adapter) pair.getSecond());
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected String serialize(EObject semanticObject, DelegatingSequenceAcceptor... acceptors) {
+		ISequenceAcceptor debug = null;
+		try {
+			ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
+			ISemanticSequencer semantic = semanticSequencerProvider.get();
+			ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
+			IHiddenTokenSequencer hidden = hiddenTokenSequencerProvider.get();
+			ISequenceAcceptor result = new StringBufferSequenceAcceptor();
+			ISequenceAcceptor out = result;
+			for (DelegatingSequenceAcceptor delegate : acceptors) {
+				delegate.setDelegate(out);
+				out = delegate;
+			}
+			out = debug = new DebugSequenceAcceptor(out);
+			semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
+			EObject context = getContext(semanticObject);
+			syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);
+			hidden.init(context, semanticObject, out, errors);
+			semantic.createSequence(context, semanticObject);
+			return result.toString();
+		} catch (Exception t) {
+			if (debug != null) {
+				System.out.println("Serializer debug output:");
+				System.out.println(debug.toString());
+			}
+			throw new RuntimeException(t);
+		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected String serializeWithNodeModel(EObject semanticObject) {
+		return serialize(semanticObject, new AssertStructureAcceptor(), new AssertNodeModelAcceptor());
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected String serializeWithoutNodeModel(EObject semanticObject) {
+		return serialize(semanticObject, new WhitespaceAddingSequenceAcceptor(), new AssertStructureAcceptor());
 	}
 
 }

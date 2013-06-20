@@ -18,8 +18,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
+import org.eclipse.xtext.ui.editor.findrefs.ResourceAccess;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
@@ -29,6 +31,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Finds all references to renamed elements and dispatches to the {@link IReferenceUpdater} of the referring languages
@@ -43,16 +46,19 @@ public class ReferenceUpdaterDispatcher {
 
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-
+	
 	@Inject
-	private RefactoringReferenceQueryDataFactory queryDataFactory;
-
+	private Provider<ResourceAccess> resourceAccessProvider;
+	
 	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
+		ResourceAccess resourceAccess = resourceAccessProvider.get();
+		resourceAccess.registerResourceSet(resourceSet);
+		
 		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = createFindReferenceAcceptor(updateAcceptor);
-		IReferenceFinder.IQueryData referenceQueryData = queryDataFactory.create(elementRenameArguments);
-		referenceFinder.findAllReferences(referenceQueryData, new SimpleLocalResourceAccess(resourceSet),
+		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), 
+				resourceAccess,
 				referenceDescriptionAcceptor, progress.newChild(2));
 		Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
 				.getReferenceUpdater2ReferenceDescriptions();

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.testlanguages.backtracking.ui.contentassist.BeeLangTest
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.Modules2;

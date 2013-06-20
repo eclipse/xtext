@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.refactoring.participant;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import static org.eclipse.emf.ecore.util.EcoreUtil.*;
+
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -20,24 +19,31 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JdtRenameParticipantContext extends IRenameElementContext.Impl {
 
 	private IJavaElement renamedJavaElement;
+	
+	/**
+	 * @since 2.4
+	 */
+	private JdtRenameParticipant participant;
 
-	public JdtRenameParticipantContext(JvmMember renamedJvmMember, IJavaElement referencedJavaElement) {
-		super(getURI(renamedJvmMember), renamedJvmMember.eClass());
-		this.renamedJavaElement = referencedJavaElement;
-	}
-
-	public JdtRenameParticipantContext(URI renamedJvmMemberURI, EClass renamedJvmMemberEClass,
+	public JdtRenameParticipantContext(JdtRenameParticipant participant, 
+			JvmMember renamedJvmMember, 
 			IJavaElement referencedJavaElement) {
-		super(renamedJvmMemberURI, renamedJvmMemberEClass);
+		super(getURI(renamedJvmMember), renamedJvmMember.eClass());
+		this.participant = participant;
 		this.renamedJavaElement = referencedJavaElement;
 	}
 
 	public IJavaElement getRenamedJavaElement() {
 		return renamedJavaElement;
 	}
-
+	
+	/**
+	 * @since 2.4
+	 */
+	public JdtRenameParticipant getJdtRenameParticipant() {
+		return participant;
+	}
 }

@@ -39,7 +39,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbenchPropertyPage;
 import org.eclipse.ui.dialogs.PreferencesUtil;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.internal.Activator;
 
 import com.google.inject.Inject;
@@ -208,15 +207,16 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		super.addField(editor);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void handleUseProjectSettings() {
 		boolean isUseProjectSettings = useProjectSettingsButton.getSelection();
 		link.setEnabled(!isUseProjectSettings);
 		if (!isUseProjectSettings) {
-			((ScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] { new InstanceScope(),
+			((FixedScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] { new InstanceScope(),
 					new ConfigurationScope() });
 		}
 		else {
-			((ScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] {
+			((FixedScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] {
 					new ProjectScope(currentProject()), new InstanceScope(), new ConfigurationScope() });
 		}
 		updateFieldEditors(isUseProjectSettings);

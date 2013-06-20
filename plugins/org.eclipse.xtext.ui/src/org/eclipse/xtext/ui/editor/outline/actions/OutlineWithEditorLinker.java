@@ -24,9 +24,12 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -45,6 +48,9 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 
 	protected OutlinePage outlinePage;
 	
+	@Inject
+	private OutlineNodeElementOpener elementOpener;
+	
 	protected class TreeListener implements ISelectionChangedListener, IDoubleClickListener {
 		public void selectionChanged(SelectionChangedEvent event) {
 			if (isLinkingEnabled && isOutlineViewActive())
@@ -53,6 +59,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 
 		public void doubleClick(DoubleClickEvent event) {
 			selectInTextEditor(event.getSelection());
+			textViewer.getTextWidget().setFocus();
 		}
 	}
 
@@ -106,16 +113,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 
 	protected void selectInTextEditor(ISelection selection) {
 		IOutlineNode selectedOutlineNode = getSelectedOutlineNode(selection);
-		if (selectedOutlineNode != null) {
-			ITextRegion textRegion = selectedOutlineNode.getSignificantTextRegion();
-			if (textRegion != null) {
-				int offset = textRegion.getOffset();
-				int length = textRegion.getLength();
-				textViewer.setRangeIndication(offset, length, true);
-				textViewer.revealRange(offset, length);
-				textViewer.setSelectedRange(offset, length);
-			}
-		}
+		elementOpener.open(selectedOutlineNode, textViewer);
 	}
 
 	protected void selectInTreeView(ISelection selection) {
@@ -163,7 +161,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
-		if(event.getProperty() == LinkWithEditorOutlineContribution.PREFERENCE_KEY) {
+		if(LinkWithEditorOutlineContribution.PREFERENCE_KEY.equals(event.getProperty())) {
 			setLinkingEnabled(Boolean.parseBoolean(event.getNewValue().toString()));
 		}
 	}

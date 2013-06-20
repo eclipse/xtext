@@ -54,7 +54,17 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 		public boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException {
 			if (doc.getLength() <= offset)
 				return true;
-			boolean result = !Character.isJavaIdentifierStart(doc.getChar(offset));
+			char charAtOffset = doc.getChar(offset);
+			boolean result = !(
+					Character.isJavaIdentifierStart(charAtOffset)
+					|| Character.isDigit(charAtOffset)
+					|| charAtOffset == '!'
+					|| charAtOffset == '-'
+					|| charAtOffset == '('
+					|| charAtOffset == '{'
+					|| charAtOffset == '['
+					|| charAtOffset == '\''
+					|| charAtOffset == '\"');
 			return result;
 		}
 	};

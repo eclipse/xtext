@@ -22,7 +22,7 @@ public abstract class AbstractPartialParsingPointerTest extends AbstractPartialP
 	protected PartialParsingPointers calculatePartialParsingPointers(String model, int changeRegionStart,
 			int changeRegionSize) throws Exception {
 		IParseResult parseResult = getParseResult(model);
-		PartialParsingPointers partialParsingPointers = partialParser.calculatePartialParsingPointers(parseResult,
+		PartialParsingPointers partialParsingPointers = getPartialParser().calculatePartialParsingPointers(parseResult,
 				changeRegionStart, changeRegionSize);
 		return partialParsingPointers;
 	}

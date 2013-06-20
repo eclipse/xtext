@@ -11,6 +11,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import org.eclipse.core.resources.IContainer;
@@ -20,8 +21,10 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.xtext.generator.AbstractFileSystemAccess;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Inject;
@@ -32,10 +35,11 @@ import com.google.inject.Inject;
  * @deprecated use {@link EclipseResourceFileSystemAccess2} instead
  */
 @Deprecated
-public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
+public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess2 {
 
 	@Inject
 	private IWorkspaceRoot root;
+	
 	private IAcceptor<String> newFileAcceptor;
 
 	public void setRoot(IWorkspaceRoot root) {
@@ -53,12 +57,11 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 	}
 	
 	public void generateFile(String fileName, String slot, CharSequence contents) {
-		String outletPath = getPathes().get(slot);
-		IFile file = root.getFile(new Path(outletPath + "/" + fileName));
+		IFile file = getFile(fileName, slot);
 		try {
 			createFolder(file.getParent());
 			final String defaultCharset = file.getCharset();
-			String newContentAsString = contents.toString();
+			String newContentAsString = postProcess(fileName, slot, contents).toString();
 			if (file.exists()) {
 				boolean contentChanged = false;
 				BufferedInputStream oldContent = null;
@@ -101,6 +104,14 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 		}
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	protected IFile getFile(String fileName, String slot) {
+		String outletPath = getPathes().get(slot);
+		return root.getFile(new Path(outletPath + "/" + fileName));
+	}
+
 	protected void createFolder(IContainer parent) throws CoreException {
 		if(!parent.exists()) {
 			if(!(parent instanceof IFolder)) 
@@ -112,5 +123,35 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 
 	public void setNewFileAcceptor(IAcceptor<String> newFileAcceptor) {
 		this.newFileAcceptor = newFileAcceptor;
+	}
+	
+	/**
+	 * We cannot use the storage to URI mapper here, as it only works for Xtext based languages 
+	 * @since 2.3
+	 */
+	public URI getURI(String fileName, String outputConfiguration) {
+		IFile file = getFile(fileName, outputConfiguration);
+		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void generateFile(String fileName, String outputCfgName, InputStream content) throws RuntimeIOException {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		throw new UnsupportedOperationException();
 	}
 }

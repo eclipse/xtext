@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
 import java.util.Collection;
 
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
 import com.google.common.base.Function;
@@ -21,18 +22,25 @@ import com.google.common.collect.Lists;
 public class Ecore2XtextProjectCreator extends XtextProjectCreator {
 
 	@Override
-	protected String getDslProjectTemplateName() {
-		return "org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2XtextDslProject::main";
+	protected IProjectFactoryContributor createDslProjectContributor() {
+		Ecore2XtextDslProjectContributor contributor = new Ecore2XtextDslProjectContributor(getXtextProjectInfo());
+		contributor.setModelFolder(getModelFolderName());
+		return contributor;
 	}
-	
+
 	@Override
 	protected Collection<String> getAdditionalRequiredBundles() {
-		Ecore2XtextProjectInfo ecore2xtextProjectInfo = (Ecore2XtextProjectInfo) getXtextProjectInfo();
-		return Lists.newArrayList(Iterables.transform(ecore2xtextProjectInfo.getEPackageInfos(), new Function<EPackageInfo, String>() {
-			public String apply(EPackageInfo from) {
-				return from.getBundleID();
-			}
-		}));
+		Ecore2XtextProjectInfo ecore2xtextProjectInfo = getXtextProjectInfo();
+		return Lists.newArrayList(Iterables.transform(ecore2xtextProjectInfo.getEPackageInfos(),
+				new Function<EPackageInfo, String>() {
+					public String apply(EPackageInfo from) {
+						return from.getBundleID();
+					}
+				}));
 	}
-	
+
+	@Override
+	protected Ecore2XtextProjectInfo getXtextProjectInfo() {
+		return (Ecore2XtextProjectInfo) super.getXtextProjectInfo();
+	}
 }

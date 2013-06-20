@@ -42,16 +42,18 @@ public class EvaluatedTemplate implements IProjectedContent {
 		int lastOffset = 0;
 		for(TemplatePart part: body.getParts()) {
 			ICompositeNode node = NodeModelUtils.getNode(part);
-			mappedOffsetHints.add(Tuples.create(buffer.length(), node.getTotalOffset()));
-			lastOffset = node.getTotalOffset() + node.getTotalLength();
-			original.append(node.getText());
-			if (part instanceof Literal) {
-				buffer.append(((Literal) part).getValue());
-			} else if (part instanceof Dollar) {
-				buffer.append("$");
-			} else if (part instanceof Variable) {
-				if (((Variable) part).getName() != null) {
-					buffer.append(((Variable) part).getName());
+			if (node != null) {
+				mappedOffsetHints.add(Tuples.create(buffer.length(), node.getTotalOffset()));
+				lastOffset = node.getTotalOffset() + node.getTotalLength();
+				original.append(node.getText());
+				if (part instanceof Literal) {
+					buffer.append(((Literal) part).getValue());
+				} else if (part instanceof Dollar) {
+					buffer.append("$");
+				} else if (part instanceof Variable) {
+					if (((Variable) part).getName() != null) {
+						buffer.append(((Variable) part).getName());
+					}
 				}
 			}
 		}

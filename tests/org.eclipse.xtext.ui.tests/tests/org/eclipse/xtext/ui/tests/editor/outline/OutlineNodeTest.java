@@ -8,8 +8,9 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Element;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Model;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestPackage;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 import com.google.inject.Injector;
 
@@ -35,7 +37,7 @@ public class OutlineNodeTest extends AbstractXtextTests {
 	private Element child0Element;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
 		with(new ISetup() {
@@ -48,42 +50,42 @@ public class OutlineNodeTest extends AbstractXtextTests {
 		child0Element = parentElement.getChildren().get(0);
 	}
 
-	public void testParentChildOpposites() {
-		EObjectNode parentNode = new EObjectNode(parentElement, null, null, "parent", false);
-		EObjectNode childNode = new EObjectNode(child0Element, parentNode, null, "child", false);
+	@Test public void testParentChildOpposites() {
+		EObjectNode parentNode = new EObjectNode(parentElement, null, (ImageDescriptor) null, "parent", false);
+		EObjectNode childNode = new EObjectNode(child0Element, parentNode, (ImageDescriptor) null, "child", false);
 		assertEquals(childNode.getParent(), parentNode);
 		assertTrue(parentNode.getChildren().contains(childNode));
 	}
 
-	public void testAddChildToLeafNode() {
-		EObjectNode parentNode = new EObjectNode(parentElement, null, null, "parent", true);
+	@Test public void testAddChildToLeafNode() {
+		EObjectNode parentNode = new EObjectNode(parentElement, null, (ImageDescriptor) null, "parent", true);
 		assertFalse(parentNode.hasChildren());
 		assertTrue(parentNode.getChildren().isEmpty());
-		EObjectNode childNode = new EObjectNode(child0Element, parentNode, null, "child", false);
+		EObjectNode childNode = new EObjectNode(child0Element, parentNode, (ImageDescriptor) null, "child", false);
 		assertTrue(parentNode.hasChildren());
 		assertTrue(parentNode.getChildren().contains(childNode));
 	}
 
-	public void testMethodsDelegateToParent() {
+	@Test public void testMethodsDelegateToParent() {
 		DocumentRootNode rootNode = createRootNode();
-		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, (ImageDescriptor) null, "parent", false);
 		assertNotNull(parentNode.getDocument());
 		assertNotNull(parentNode.getTreeProvider());
 		assertEquals(rootNode.getDocument(), parentNode.getDocument());
 		assertEquals(rootNode.getTreeProvider(), parentNode.getTreeProvider());
 	}
 
-	public void testCreateChildrenLazily() {
+	@Test public void testCreateChildrenLazily() {
 		DocumentRootNode rootNode = createRootNode();
-		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, (ImageDescriptor) null, "parent", false);
 		assertFalse(parentNode.getChildren().isEmpty());
 	}
 
-	public void testStateAccess() {
+	@Test public void testStateAccess() {
 		DocumentRootNode rootNode = createRootNode();
-		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, (ImageDescriptor) null, "parent", false);
 		EStructuralFeatureNode featureNode = new EStructuralFeatureNode(parentElement,
-				OutlineTestPackage.Literals.ELEMENT__XREFS, parentNode, null, "eClassifiers", true);
+				OutlineTestPackage.Literals.ELEMENT__XREFS, parentNode, (ImageDescriptor) null, "eClassifiers", true);
 		IUnitOfWork<Boolean, EObject> work = new IUnitOfWork<Boolean, EObject>() {
 			public Boolean exec(EObject state) throws Exception {
 				return state != null;
@@ -94,9 +96,9 @@ public class OutlineNodeTest extends AbstractXtextTests {
 		assertTrue(featureNode.readOnly(work));
 	}
 	
-	public void testEqualsNotImplemented() throws Exception {
-		EObjectNode node0 = new EObjectNode(parentElement, null, null, "parent", false);
-		EObjectNode node1 = new EObjectNode(parentElement, null, null, "parent", false);
+	@Test public void testEqualsNotImplemented() throws Exception {
+		EObjectNode node0 = new EObjectNode(parentElement, null, (ImageDescriptor) null, "parent", false);
+		EObjectNode node1 = new EObjectNode(parentElement, null, (ImageDescriptor) null, "parent", false);
 		assertNotSame(node0, node1);
 	}
 
@@ -105,10 +107,10 @@ public class OutlineNodeTest extends AbstractXtextTests {
 		document.setInput(resource);
 		IOutlineTreeStructureProvider treeStructureProvider = new IOutlineTreeStructureProvider() {
 			public void createChildren(IOutlineNode parentNode, EObject modelElement) {
-				new EObjectNode(child0Element, parentNode, null, "child", false);
+				new EObjectNode(child0Element, parentNode, (ImageDescriptor) null, "child", false);
 			}
 		};
-		DocumentRootNode rootNode = new DocumentRootNode(null, "root", document, treeStructureProvider);
+		DocumentRootNode rootNode = new DocumentRootNode((ImageDescriptor) null, "root", document, treeStructureProvider);
 		return rootNode;
 	}
 

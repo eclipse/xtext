@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreAdapterFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.junit.Test;
 
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
@@ -25,7 +26,7 @@ import com.google.common.collect.Iterables;
 public class CompositeNodeTest extends AbstractCompositeNodeTest {
 
 	@Override
-	public void testTextOffsetLength() {
+	@Test public void testTextOffsetLength() {
 		RootNode root = new RootNode();
 		String completeContent = " completeContent ";
 		root.basicSetCompleteContent(completeContent);
@@ -48,7 +49,7 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 		assertEquals(completeContent.trim().length(), composite.getTotalLength());
 	}
 	
-	public void testGetTotalOffsetWithoutChildren() {
+	@Test public void testGetTotalOffsetWithoutChildren() {
 		RootNode rootNode = new RootNode();
 		rootNode.basicSetCompleteContent("my string");
 		LeafNode leafNode = new LeafNode();
@@ -84,7 +85,7 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 		assertEquals(3, thirdGrandChild.getOffset());		
 	}
 	
-	public void testGetLeafNodes_01() {
+	@Test public void testGetLeafNodes_01() {
 		RootNode rootNode = new RootNode();
 		rootNode.basicSetCompleteContent("my string");
 		CompositeNode first = new CompositeNode();
@@ -134,7 +135,7 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 		return new CompositeNodeWithSemanticElement();
 	}
 	
-	public void testIsAdapterForType() {
+	@Test public void testIsAdapterForType() {
 		EObject object = EcoreFactory.eINSTANCE.createEObject();
 		CompositeNodeWithSemanticElement node = createCompositeNode();
 		object.eAdapters().add(node);

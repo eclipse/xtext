@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -42,12 +43,23 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 		URI uri = storageToUriMapper.getUri(storage);
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = createResource(resourceSet, uri);
-		resource.setValidationDisabled(true);
+		resource.setValidationDisabled(isValidationDisabled(storage));
 		return resource;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	protected boolean isValidationDisabled(IStorage storage) {
+		if (storage instanceof IJarEntryResource) {
+			return true;
+		}
+		return super.isValidationDisabled(storage);
 	}
 
 	@Override
-	protected ResourceSet getResourceSet(IStorage storage) {
+	protected ResourceSet getResourceSet(@Nullable IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			IPackageFragmentRoot root = ((IJarEntryResource) storage).getPackageFragmentRoot();
 			if (root != null) {

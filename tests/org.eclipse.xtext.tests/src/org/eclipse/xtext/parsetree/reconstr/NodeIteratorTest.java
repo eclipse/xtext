@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
@@ -16,18 +14,20 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class NodeIteratorTest extends TestCase {
+public class NodeIteratorTest extends Assert {
 
 	private static final int NUM_NODES = 11;
 	private INode[] nodes;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		NodeModelBuilder builder = new NodeModelBuilder();
 		nodes = new INode[NUM_NODES];
 		nodes[0] = new CompositeNode();
@@ -54,19 +54,19 @@ public class NodeIteratorTest extends TestCase {
 		builder.addChild((ICompositeNode)nodes[0], (AbstractNode)nodes[10]);
 	}
 
-	public void testForward() throws Exception {
+	@Test public void testForward() throws Exception {
 		for (int i = 0; i < NUM_NODES; ++i) {
 			checkAscending(i);
 		}
 	}
 
-	public void testBackward() throws Exception {
+	@Test public void testBackward() throws Exception {
 		for (int i = 0; i < NUM_NODES; ++i) {
 			checkDescending(i);
 		}
 	}
 
-	public void testPruneComposite() throws Exception {
+	@Test public void testPruneComposite() throws Exception {
 		NodeIterator nodeIterator = new NodeIterator(nodes[3]);
 		nodeIterator.prune();
 		assertEquals(nodes[6], nodeIterator.next());
@@ -75,7 +75,7 @@ public class NodeIteratorTest extends TestCase {
 		assertEquals(nodes[2], nodeIterator.previous());
 	}
 	
-	public void testPruneLeaf() throws Exception {
+	@Test public void testPruneLeaf() throws Exception {
 		// pruning a leaf should not have any effect
 		NodeIterator nodeIterator = new NodeIterator(nodes[8]);
 		nodeIterator.prune();

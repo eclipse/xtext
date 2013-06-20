@@ -27,6 +27,7 @@ import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
@@ -79,7 +80,22 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Inject
 	private Provider<ITextHover> textHoverProvider;
-	
+
+	private IEditorPart  editor;
+
+	/**
+	 * @since 2.4
+	 */
+	public IEditorPart getEditor() {
+		return editor;
+	}
+	/**
+	 * @since 2.4
+	 */
+	public void setEditor(IEditorPart editor) {
+		this.editor = editor;
+	}
+
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
 		IAnnotationHover hover = annotationHoverProvider.get();

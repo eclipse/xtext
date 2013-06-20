@@ -8,8 +8,9 @@
 package org.eclipse.xtext.lexer;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.lexer.backtrackingTestLanguage.Model;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,12 +18,12 @@ import org.eclipse.xtext.lexer.backtrackingTestLanguage.Model;
 public class Bug282355Test extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(BacktrackingLexerTestLanguageStandaloneSetup.class);
 	}
 
-	public void testBug282355_01() throws Exception {
+	@Test public void testBug282355_01() throws Exception {
 		Resource resource = getResourceFromString("Abc Efg Xb");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -34,7 +35,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(0, model.getYcs().size());
 	}
 
-	public void testBug282355_02() throws Exception {
+	@Test public void testBug282355_02() throws Exception {
 		Resource resource = getResourceFromString("Xb");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -46,7 +47,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(0, model.getYcs().size());
 	}
 	
-	public void testBug282355_03() throws Exception {
+	@Test public void testBug282355_03() throws Exception {
 		Resource resource = getResourceFromString("Ab");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -58,7 +59,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(0, model.getYcs().size());
 	}
 	
-	public void testBug282355_04() throws Exception {
+	@Test public void testBug282355_04() throws Exception {
 		Resource resource = getResourceFromString("Abc Efg Ab Xb");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -70,7 +71,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(0, model.getYcs().size());
 	}
 	
-	public void testBug282355_05() throws Exception {
+	@Test public void testBug282355_05() throws Exception {
 		Resource resource = getResourceFromString("AbcEfgAbXb");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -82,7 +83,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(0, model.getYcs().size());
 	}
 	
-	public void testParse_Yc_01() throws Exception {
+	@Test public void testParse_Yc_01() throws Exception {
 		Resource resource = getResourceFromString("Abc Efg Yc");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -94,7 +95,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(1, model.getYcs().size());
 	}
 	
-	public void testParse_Yc_02() throws Exception {
+	@Test public void testParse_Yc_02() throws Exception {
 		Resource resource = getResourceFromString("YcYc");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -106,7 +107,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(2, model.getYcs().size());
 	}
 	
-	public void testParse_YcAA() throws Exception {
+	@Test public void testParse_YcAA() throws Exception {
 		Resource resource = getResourceFromString("YcAA");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -118,7 +119,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(1, model.getYcs().size());
 	}
 	
-	public void testParse_YA() throws Exception {
+	@Test public void testParse_YA() throws Exception {
 		Resource resource = getResourceFromString("YA");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);
@@ -130,7 +131,7 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(0, model.getYcs().size());
 	}
 	
-	public void testParse_A() throws Exception {
+	@Test public void testParse_A() throws Exception {
 		Resource resource = getResourceFromString("A");
 		assertTrue(resource.getErrors().isEmpty());
 		Model model = (Model) resource.getContents().get(0);

@@ -91,6 +91,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			Image image = getImage(objectOrProxy);
 			result = createCompletionProposal(proposal, displayString, image, contentAssistContext);
 			if (result instanceof ConfigurableCompletionProposal) {
+				((ConfigurableCompletionProposal) result).setProposalContextResource(contentAssistContext.getResource());
 				((ConfigurableCompletionProposal) result).setAdditionalProposalInfo(objectOrProxy);
 				((ConfigurableCompletionProposal) result).setHover(hover);
 			}

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,7 +22,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		return new RuleWithoutInstantiationInspector(this);
 	}
 	
-	public void testDatatypes() throws Exception {
+	@Test public void testDatatypes() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -32,7 +33,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 
-	public void testAssignment_01() throws Exception {
+	@Test public void testAssignment_01() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -43,7 +44,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
-	public void testAssignment_02() throws Exception {
+	@Test public void testAssignment_02() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -54,7 +55,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
-	public void testAssignment_03() throws Exception {
+	@Test public void testAssignment_03() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -67,7 +68,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(message, message.contains("{X}"));
 	}
 	
-	public void testAssignment_04() throws Exception {
+	@Test public void testAssignment_04() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample' as x\n" +
 				"Model returns x::Model: x=X;\n" +
@@ -80,7 +81,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(message, message.contains("{x::X}"));
 	}
 	
-	public void testAssignment_05() throws Exception {
+	@Test public void testAssignment_05() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -91,7 +92,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
-	public void testAssignment_06() throws Exception {
+	@Test public void testAssignment_06() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -104,7 +105,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(message, message.contains("{X}"));
 	}
 	
-	public void testIgnoreFirstRule_01() throws Exception {
+	@Test public void testIgnoreFirstRule_01() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"X : (x+='x')*;";
@@ -114,7 +115,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
-	public void testIgnoreFirstRule_02() throws Exception {
+	@Test public void testIgnoreFirstRule_02() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"X : 'keyword' (x+='x')*;";
@@ -124,7 +125,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
-	public void testAction_01() throws Exception {
+	@Test public void testAction_01() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -135,7 +136,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
-	public void testAction_02() throws Exception {
+	@Test public void testAction_02() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -146,7 +147,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertEquals(warnings.toString(), 1, warnings.size());
 	}
 	
-	public void testRuleCall_01() throws Exception {
+	@Test public void testRuleCall_01() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -158,7 +159,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
-	public void testRuleCall_02() throws Exception {
+	@Test public void testRuleCall_02() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -170,7 +171,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertEquals(warnings.toString(), 1, warnings.size());
 	}
 	
-	public void testRuleCall_03() throws Exception {
+	@Test public void testRuleCall_03() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -181,7 +182,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
-	public void testUnorderedGroup_01() throws Exception {
+	@Test public void testUnorderedGroup_01() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -192,7 +193,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertEquals(warnings.toString(), 1, warnings.size());
 	}
 	
-	public void testUnorderedGroup_02() throws Exception {
+	@Test public void testUnorderedGroup_02() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -203,7 +204,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertEquals(warnings.toString(), 0, warnings.size());
 	}
 	
-	public void testUnorderedGroup_03() throws Exception {
+	@Test public void testUnorderedGroup_03() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -214,7 +215,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertEquals(warnings.toString(), 1, warnings.size());
 	}
 	
-	public void testUnorderedGroup_04() throws Exception {
+	@Test public void testUnorderedGroup_04() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
@@ -225,7 +226,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertEquals(warnings.toString(), 0, warnings.size());
 	}
 	
-	public void testBug_287735_01() throws Exception {
+	@Test public void testBug_287735_01() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +

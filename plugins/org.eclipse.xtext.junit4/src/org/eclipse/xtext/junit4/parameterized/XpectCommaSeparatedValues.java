@@ -28,8 +28,17 @@ import org.junit.ComparisonFailure;
 import com.google.common.base.Function;
 
 /**
+ * use org.xpect.runner.Xpect from www.xpect-tests.org instead. In Xpect, test methods don't have return values anymore.
+ * Instead, the test expectation is passed in as method parameter. To handle a method with a CommaSeparatedValues
+ * expectation you can use a method declaration such as
+ * 
+ * <code> @Xpect public void scope(@CommaSeparatedValuesExpectation ICommaSeparatedValuesExpectation expectation) { } </code>
+ * 
+ * This class will be removed in the next release after 2.4.2
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @TestExpectationValidator(validator = CSVResultValidator.class)

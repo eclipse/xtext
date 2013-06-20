@@ -197,7 +197,6 @@ public abstract class CheckBoxGroupFieldEditor extends FieldEditor {
 	@Override
 	protected void doStore() {
 		if (result == null) {
-			getPreferenceStore().setToDefault(getPreferenceName());
 			return;
 		}
 		getPreferenceStore().setValue(getPreferenceName(), result);

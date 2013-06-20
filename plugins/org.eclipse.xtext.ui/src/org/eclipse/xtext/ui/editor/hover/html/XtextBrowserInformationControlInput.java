@@ -19,7 +19,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 /**
  * Browser input for XtextHtmlHover.
  * 
- * @since 3.4
+ * @since 2.3
  */
 
 // Clone from JavadocBrowserInformationControlInput. Following changes have been made:
@@ -27,7 +27,6 @@ import org.eclipse.jface.viewers.ILabelProvider;
 // - Removed fLeadingImageWidth, leading images are not yet supported by the XtextHtmlHover
 // - getInputName requires an labelProvider to retrieve the EObjects name. 
 
-@SuppressWarnings("restriction")
 public class XtextBrowserInformationControlInput extends BrowserInformationControlInput {
 
 	private final EObject fElement;
@@ -55,6 +54,14 @@ public class XtextBrowserInformationControlInput extends BrowserInformationContr
 		fLabelProvider = labelProvider;
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public int getLeadingImageWidth() {
+		return 16;
+	}
+	
 	public EObject getElement() {
 		return fElement;
 	}
@@ -66,7 +73,7 @@ public class XtextBrowserInformationControlInput extends BrowserInformationContr
 
 	@Override
 	public Object getInputElement() {
-		return fElement == null ? fHtml : fElement;
+		return fElement;
 	}
 
 	@Override

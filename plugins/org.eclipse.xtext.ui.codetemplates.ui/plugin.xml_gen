@@ -33,12 +33,42 @@
                     definitionId="org.eclipse.xtext.ui.codetemplates.Codetemplates.Editor.opened">
             </reference>
          </activeWhen>
-      </handler>
+      	</handler>
+      	<!-- copy qualified name -->
+        <handler
+            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+            <activeWhen>
+				<reference definitionId="org.eclipse.xtext.ui.codetemplates.Codetemplates.Editor.opened" />
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+            <activeWhen>
+            	<and>
+            		<reference definitionId="org.eclipse.xtext.ui.codetemplates.Codetemplates.XtextEditor.opened" />
+	                <iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+            </activeWhen>
+        </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
         <definition id="org.eclipse.xtext.ui.codetemplates.Codetemplates.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.codetemplates.Codetemplates" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+        <definition id="org.eclipse.xtext.ui.codetemplates.Codetemplates.XtextEditor.opened">
+            <and>
+                <reference definitionId="isXtextEditorActive"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
                         value="org.eclipse.xtext.ui.codetemplates.Codetemplates" 
@@ -71,6 +101,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.codetemplates.Codetemplates"
+            name="Codetemplates">
+            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_Codetemplates"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.codetemplates.ui.keyword_Codetemplates"
@@ -82,6 +125,19 @@
             description="Trigger expensive validation"
             id="org.eclipse.xtext.ui.codetemplates.Codetemplates.validate"
             name="Validate">
+      </command>
+      <!-- copy qualified name -->
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -97,6 +153,36 @@
                 </reference>
             </visibleWhen>
          </command>  
+         </menuContribution>
+         <!-- copy qualified name -->
+         <menuContribution locationURI="popup:#TextEditorContext?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+         		style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.codetemplates.Codetemplates.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="menu:edit?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            	style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.codetemplates.Codetemplates.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+				style="push" tooltip="Copy Qualified Name">
+         		<visibleWhen checkEnabled="false">
+	            	<and>
+	            		<reference definitionId="org.eclipse.xtext.ui.codetemplates.Codetemplates.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
          </menuContribution>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -138,6 +224,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.ui.codetemplates.Codetemplates -->
+    <extension
+            id="codetemplates.check.fast"
+            name="Codetemplates Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="codetemplates.check.normal"
+            name="Codetemplates Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="codetemplates.check.expensive"
+            name="Codetemplates Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -172,13 +280,34 @@
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
-   </extension>
+    <!-- quickfix marker resolution generator for org.eclipse.xtext.ui.codetemplates.Codetemplates -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.ui.codetemplates.ui.codetemplates.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.ui.codetemplates.ui.codetemplates.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.ui.codetemplates.ui.codetemplates.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
 
     <extension
             point="org.eclipse.ui.editors">
@@ -210,12 +339,42 @@
                     definitionId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.Editor.opened">
             </reference>
          </activeWhen>
-      </handler>
+      	</handler>
+      	<!-- copy qualified name -->
+        <handler
+            class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+            <activeWhen>
+				<reference definitionId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.Editor.opened" />
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+            <activeWhen>
+            	<and>
+            		<reference definitionId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.XtextEditor.opened" />
+	                <iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+            </activeWhen>
+        </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
         <definition id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+        <definition id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.XtextEditor.opened">
+            <and>
+                <reference definitionId="isXtextEditorActive"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
                         value="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate" 
@@ -248,6 +407,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate"
+            name="SingleCodetemplate">
+            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_SingleCodetemplate"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.codetemplates.ui.keyword_SingleCodetemplate"
@@ -259,6 +431,19 @@
             description="Trigger expensive validation"
             id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.validate"
             name="Validate">
+      </command>
+      <!-- copy qualified name -->
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -274,6 +459,36 @@
                 </reference>
             </visibleWhen>
          </command>  
+         </menuContribution>
+         <!-- copy qualified name -->
+         <menuContribution locationURI="popup:#TextEditorContext?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+         		style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="menu:edit?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            	style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+				style="push" tooltip="Copy Qualified Name">
+         		<visibleWhen checkEnabled="false">
+	            	<and>
+	            		<reference definitionId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
          </menuContribution>
     </extension>
     <extension point="org.eclipse.ui.menus">

@@ -19,14 +19,13 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.xtext.ui.MarkerTypes;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.ImmutableList;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class AddMarkersOperation extends WorkspaceModifyOperation {
 
@@ -40,16 +39,34 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 
 	private MarkerCreator markerCreator;
 
+	private final MarkerTypeProvider markerTypeProvider;
+
+	/**
+	 * @deprecated use {@link AddMarkersOperation#AddMarkersOperation(IResource, List, Set, boolean, MarkerCreator, MarkerTypeProvider)} instead
+	 */
 	@Deprecated
 	public AddMarkersOperation(IResource resource, List<Issue> issues, String markerId,
 			boolean deleteMarkers, MarkerCreator markerCreator) {
 		this(resource, issues, Collections.singleton(markerId), deleteMarkers, markerCreator);
 	}
 	
+	/**
+	 * @deprecated use {@link AddMarkersOperation#AddMarkersOperation(IResource, List, Set, boolean, MarkerCreator, MarkerTypeProvider)} instead
+	 */
+	@Deprecated
 	public AddMarkersOperation(IResource resource, List<Issue> issues, Set<String> markerIds,
 			boolean deleteMarkers, MarkerCreator markerCreator) {
+		this(resource, issues, markerIds, deleteMarkers, markerCreator, new MarkerTypeProvider());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public AddMarkersOperation(IResource resource, List<Issue> issues, Set<String> markerIds,
+			boolean deleteMarkers, MarkerCreator markerCreator, MarkerTypeProvider markerTypeProvider) {
 		super(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource));
 		this.issues = issues;
+		this.markerTypeProvider = markerTypeProvider;
 		this.markerIds = ImmutableList.copyOf(markerIds);
 		this.resource = resource;
 		this.deleteMarkers = deleteMarkers;
@@ -78,7 +95,7 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 			return;
 		if (deleteMarkers) {
 			for(String markerId: getMarkerIds()) {
-				resource.deleteMarkers(markerId, false, IResource.DEPTH_INFINITE);	
+				resource.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);	
 			}
 		}
 		if (!issues.isEmpty()) {
@@ -86,7 +103,7 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 			for (Issue issue : issues) {
 				if (monitor.isCanceled())
 					return;
-				markerCreator.createMarker(issue, resource, MarkerTypes.forCheckType(issue.getType()));
+				markerCreator.createMarker(issue, resource, markerTypeProvider.getMarkerType(issue));
 			}
 		}
 	}

@@ -18,12 +18,14 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplate;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplates;
+import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
 import org.eclipse.xtext.ui.codetemplates.templates.Variable;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
 import org.eclipse.xtext.ui.codetemplates.ui.resolvers.IInspectableTemplateVariableResolver;
 import org.eclipse.xtext.ui.codetemplates.ui.resolvers.InspectableTemplateVariableResolverRegistry;
 import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesJavaValidator;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.common.collect.Iterators;
@@ -44,28 +46,37 @@ public class TemplateValidator extends CodetemplatesJavaValidator {
 	public void checkParameters(Variable variable) {
 		Codetemplate template = EcoreUtil2.getContainerOfType(variable, Codetemplate.class);
 		Codetemplates templates = EcoreUtil2.getContainerOfType(template, Codetemplates.class);
-		Grammar language = templates.getLanguage();
-		AbstractRule rule = template.getContext();
-		ContextTypeIdHelper helper = languageRegistry.getContextTypeIdHelper(language); 
-		if (helper != null && rule != null && !rule.eIsProxy() && rule instanceof ParserRule) {
-			String contextTypeId = helper.getId(rule);
-			ContextTypeRegistry contextTypeRegistry = languageRegistry.getContextTypeRegistry(language);
-			TemplateContextType contextType = contextTypeRegistry.getContextType(contextTypeId);
-			if (contextType != null) {
-				Iterator<TemplateVariableResolver> resolvers = Iterators.filter(contextType.resolvers(), TemplateVariableResolver.class);
-				String type = variable.getType();
-				if (type == null)
-					type = variable.getName();
-				while(resolvers.hasNext()) {
-					final TemplateVariableResolver resolver = resolvers.next();
-					if (resolver.getType().equals(type)) {
-						IInspectableTemplateVariableResolver inspectableResolver = registry.toInspectableResolver(resolver);
-						if (inspectableResolver != null) {
-							inspectableResolver.validateParameters(variable, this);
+		if (templates != null && template != null) {
+			Grammar language = templates.getLanguage();
+			AbstractRule rule = template.getContext();
+			ContextTypeIdHelper helper = languageRegistry.getContextTypeIdHelper(language); 
+			if (helper != null && rule != null && !rule.eIsProxy() && rule instanceof ParserRule) {
+				String contextTypeId = helper.getId(rule);
+				ContextTypeRegistry contextTypeRegistry = languageRegistry.getContextTypeRegistry(language);
+				TemplateContextType contextType = contextTypeRegistry.getContextType(contextTypeId);
+				if (contextType != null) {
+					Iterator<TemplateVariableResolver> resolvers = Iterators.filter(contextType.resolvers(), TemplateVariableResolver.class);
+					String type = variable.getType();
+					if (type == null)
+						type = variable.getName();
+					while(resolvers.hasNext()) {
+						final TemplateVariableResolver resolver = resolvers.next();
+						if (resolver.getType().equals(type)) {
+							IInspectableTemplateVariableResolver inspectableResolver = registry.toInspectableResolver(resolver);
+							if (inspectableResolver != null) {
+								inspectableResolver.validateParameters(variable, this);
+							}
 						}
 					}
 				}
 			}
+		}
+	}
+	
+	@Check
+	public void checkNameIsNotEmpty(Codetemplate template) {
+		if (Strings.isEmpty(template.getName())) {
+			error("Template name cannot be empty.", TemplatesPackage.Literals.CODETEMPLATE__NAME);
 		}
 	}
 	

@@ -2,37 +2,38 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.4.3.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates;singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.generator;resolution:=optional,
- de.itemis.xtext.antlr;resolution:=optional,
- org.apache.commons.logging;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional,
- org.eclipse.emf.mwe2.launch;bundle-version="2.1.0";resolution:=optional,
- com.ibm.icu;resolution:=optional,
+ org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
+ de.itemis.xtext.antlr;resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.mwe2.launch;bundle-version="2.2.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime
-Import-Package: org.apache.log4j
+Import-Package: com.ibm.icu.text;version="4.0.0";resolution:=optional,
+ org.apache.commons.logging,
+ org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtext.ui.codetemplates,
- org.eclipse.xtext.ui.codetemplates.conversion,
- org.eclipse.xtext.ui.codetemplates.formatting,
- org.eclipse.xtext.ui.codetemplates.generator,
- org.eclipse.xtext.ui.codetemplates.lexer,
- org.eclipse.xtext.ui.codetemplates.parseTreeConstruction,
- org.eclipse.xtext.ui.codetemplates.parser.antlr,
- org.eclipse.xtext.ui.codetemplates.parser.antlr.internal,
- org.eclipse.xtext.ui.codetemplates.parser.antlr.lexer,
- org.eclipse.xtext.ui.codetemplates.scoping,
- org.eclipse.xtext.ui.codetemplates.services,
- org.eclipse.xtext.ui.codetemplates.templates,
- org.eclipse.xtext.ui.codetemplates.templates.impl,
- org.eclipse.xtext.ui.codetemplates.templates.util,
- org.eclipse.xtext.ui.codetemplates.validation
+Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
+ org.eclipse.xtext.ui.codetemplates.conversion;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.formatting;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.generator;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.lexer;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
+ org.eclipse.xtext.ui.codetemplates.parseTreeConstruction;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.parser;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.parser.antlr;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.parser.antlr.internal;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.parser.antlr.lexer;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.scoping;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
+ org.eclipse.xtext.ui.codetemplates.services;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
+ org.eclipse.xtext.ui.codetemplates.templates;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
+ org.eclipse.xtext.ui.codetemplates.templates.impl;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.templates.util;x-internal:=true,
+ org.eclipse.xtext.ui.codetemplates.validation;x-friends:="org.eclipse.xtext.ui.codetemplates.ui"
 

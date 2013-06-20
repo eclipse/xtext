@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JvmMemberRenameProcessor extends RenameElementProcessor {
 	
 	@Override

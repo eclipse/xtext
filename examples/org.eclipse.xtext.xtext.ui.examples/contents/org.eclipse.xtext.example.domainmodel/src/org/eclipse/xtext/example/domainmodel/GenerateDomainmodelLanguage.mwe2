@@ -20,7 +20,6 @@ Workflow {
 
 	bean = StandaloneSetup {
 		scanClassPath  = true
-		platformUri = "${runtimeProject}/.."
 		registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
@@ -53,10 +52,12 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// Generate java classes for Ecore models
-			fragment = ecore.EcoreGeneratorFragment {}
+			fragment = ecore.EcoreGeneratorFragment {
+				emfRuntimeVersion = "2.9"
+			}
 
 			// the serialization component
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = serializer.SerializerFragment {}
 
 			// a custom ResourceFactory for use with EMF 
 			fragment = resourceFactory.ResourceFactoryFragment {
@@ -100,9 +101,7 @@ Workflow {
 			fragment = quickfix.QuickfixProviderFragment {}
 			
 			// rename refactoring
-			fragment = refactoring.RefactorElementNameFragment {
-				useJdtRefactoring = true
-			}
+			fragment = refactoring.RefactorElementNameFragment {}
 			
 			// provides a compare view
 			fragment = compare.CompareFragment {

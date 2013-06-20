@@ -14,6 +14,7 @@ import java.util.Map;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.SynchronousBundleListener;
 
@@ -26,7 +27,7 @@ import com.google.inject.name.Named;
  * @author Sebastian Zarnekow
  */
 @Singleton
-public class PluginImageHelper implements IImageHelper, SynchronousBundleListener {
+public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, SynchronousBundleListener {
 	private Map<ImageDescriptor, Image> registry = Maps.newHashMapWithExpectedSize(10);
 
 	@Inject
@@ -107,6 +108,36 @@ public class PluginImageHelper implements IImageHelper, SynchronousBundleListene
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public ImageDescriptor getImageDescriptor(String imageName) {
+		String imgname = imageName == null ? defaultImage : imageName;
+		if (imgname != null) {
+			URL imgUrl = getPlugin().getBundle().getEntry(getPathSuffix() + imgname);
+			if (imgUrl != null) {
+				return ImageDescriptor.createFromURL(imgUrl);
+			}
+			if (!imgname.equals(notFound)) {
+				return getImageDescriptor(notFound);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public ImageDescriptor getImageDescriptor(Image image) {
+		for(Map.Entry<ImageDescriptor, Image> entry : registry.entrySet()) {
+			if(entry.getValue().equals(image))
+				return entry.getKey();
+		}
+		ImageDescriptor newDescriptor = ImageDescriptor.createFromImage(image);
+		registry.put(newDescriptor, image);
+		return newDescriptor;
 	}
 
 	public void setPathSuffix(String pathSuffix) {

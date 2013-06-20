@@ -82,8 +82,8 @@
 
 	<target name="publish.build">
 		<fail message="build.root property must be defined" unless="build.root" />
-		<property file="${publisher.properties.file.name}" />
-		<property name="property.file.location" location="${build.root}/archive/${promoter.properties.file.name}" />
+		<property file="${build.root}/${publisher.properties.file.name}" />
+		<property name="property.file.location" location="${build.root}/${promoter.properties.file.name}" />
 		<property name="property.load.prefix" value="saved." />
 
 		<antcall target="publish.build.stage.2" inheritall="true" />
@@ -118,6 +118,8 @@
 			</syspropertyset>
 			<arg value="-data" />
 			<arg value="${publisher.workspace}" />
+			<arg value="-configuration" />
+			<arg value="${publisher.workspace}/configuration" />
 			<arg value="-application" />
 			<arg value="org.eclipse.ant.core.antRunner" />
 			<arg value="-buildfile" />
@@ -152,8 +154,8 @@
 				</not>
 			</condition>
 		</fail>
-		<property file="${publisher.properties.file.name}" />
 		<fail message="build.root property must be defined" unless="build.root" />
+		<property file="${build.root}/${publisher.properties.file.name}" />
 		<fail message="downloads.area property must be defined" unless="downloads.area" />
 
 		<!-- defaults -->
@@ -162,9 +164,9 @@
 		<property name="tests.base" value="test.results" />
 		<property name="javadoc.base" value="javadoc" />
 
-		<property name="packages.directory" location="${build.root}/archive/${packages.base}" />
-		<property name="testresults.directory" location="${build.root}/archive/${tests.base}" />
-		<property name="javadoc.directory" location="${build.root}/archive/${javadoc.base}" />
+		<property name="packages.directory" location="${build.root}/${packages.base}" />
+		<property name="testresults.directory" location="${build.root}/${tests.base}" />
+		<property name="javadoc.directory" location="${build.root}/${javadoc.base}" />
 
 		<property name="build.drop.directory" location="${downloads.area}/downloads/drops/${version}/${saved.build.id}" />
 		<available file="${build.drop.directory}" type="dir" property="alreadyPromoted" />
@@ -173,16 +175,14 @@
 	</target>
 
 	<target name="publish" unless="alreadyPromoted">
+
+		<echo>Remove old  nightly builds</echo>
+		<antcall target="-cleanup.nightly">
+			<param name="working_dir" value="${downloads.area}/downloads/drops/${version}/" />
+		</antcall>
+
 		<!-- will fail if already exists -->
 		<mkdir dir="${build.drop.directory}" />
-
-		<echo>Remove existing nightly builds</echo>
-		<delete verbose="true">
-			<fileset dir="${downloads.area}/downloads/drops/${version}/">
-				<type type="dir" />
-				<include name="N*" />
-			</fileset>
-		</delete>
 
 		<!-- copy zip packages -->
 		<copy todir="${build.drop.directory}">
@@ -196,8 +196,9 @@
 		</checksum>
 
 		<!-- copy testresults -->
+		<echo>TODO copy test reports from the corresponding Xtext-test build</echo>
 		<mkdir dir="${build.drop.directory}/testresults" />
-		<copy todir="${build.drop.directory}/testresults">
+		<copy failonerror="false" todir="${build.drop.directory}/testresults">
 			<fileset dir="${testresults.directory}">
 				<filename name="**/*.xml" />
 			</fileset>
@@ -207,6 +208,9 @@
 		<condition property="build.stable" value="true">
 			<matches string="${saved.build.id}" pattern="[S|R](d)*" />
 		</condition>
+
+		<!-- strip the micro version and anything following it -->
+		<buckminster.substitute value="${version}" pattern="^(\d+\.\d+)\.\d+.*$" replacement="$$1" property="base.version" />
 
 		<antcall target="-publish.javadoc" inheritall="true" />
 
@@ -222,25 +226,71 @@
 			<reference refid="drop.resources" torefid="change.group.owner.resources" />
 		</antcall>
 
-		<!-- strip the micro version and anything following it -->
-		<buckminster.substitute value="${version}" pattern="^(\d+\.\d+)\.\d+.*$" replacement="$$1" property="base.version" />
 
 		<!-- setup composite.repository.base appropriate to the build type -->
 		<condition property="composite.repository.base" value="nightly/head">
 			<matches pattern="^N" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="interim/head">
-			<matches pattern="^I" string="${saved.build.id}" />
-		</condition>
 		<condition property="composite.repository.base" value="milestones/head/${saved.build.id}">
-			<matches pattern="^[MS]" string="${saved.build.id}" />
+			<matches pattern="^[IMS]" string="${saved.build.id}" />
 		</condition>
 		<condition property="composite.repository.base" value="releases/head/${saved.build.id}">
 			<matches pattern="^R" string="${saved.build.id}" />
 		</condition>
 
 		<antcall target="-publish.build.repository" inheritall="true" />
+		<!-- add mirrors url stable only -->
+		<antcall target="-addMirrorsURL" inheritall="true" />
 	</target>
+
+	<target name="-addMirrorsURL" if="build.stable">
+		<ant antfile="${ant.file}/../deployment/p2mirrorsAdd.ant" target="addMirrorsUrl" dir="${downloads.area}/updates/${composite.repository.base}">
+			<property name="deployment.repository_root" value="${downloads.area}/updates/${composite.repository.base}" />
+		</ant>
+	</target>
+
+	<target name="-cleanup.nightly" if="working_dir">
+		<property name="delete_pattern" value="N*" />
+		<property name="keep_count" value="4" />
+		<echo>Keep ${keep_count} most recent builds</echo>
+
+		<!-- add newest (sorted by name) folderst to keep.dirs.res_id resources collection -->
+		<resources id="keep.dirs.res_id">
+			<last count="${keep_count}">
+				<sort>
+					<dirset dir="${working_dir}" includes="${delete_pattern}" />
+					<name />
+				</sort>
+			</last>
+		</resources>
+
+		<!-- keep only last segment (flatten),
+				convert to comma separated string with trailing slash (regexpmapper)
+				 N201101012335/,N201101012336/-->
+		<pathconvert property="keep.dirs.paths" pathsep="," refid="keep.dirs.res_id">
+			<chainedmapper>
+				<flattenmapper />
+				<regexpmapper from="^(.*)$$" to="\1/" />
+			</chainedmapper>
+		</pathconvert>
+		<echo>Excluded from cleanup: ${keep.dirs.paths}</echo>
+
+		<condition property="hasFoldersToKeep" value="true">
+			<not>
+				<equals arg1="${keep.dirs.paths}" arg2="" />
+			</not>
+		</condition>
+		<antcall target="-doDelete" inheritall="true" inheritrefs="true" />
+	</target>
+
+	<!-- recursive delete folders -->
+	<target name="-doDelete" if="hasFoldersToKeep">
+		<echo>Deleting all ${delete_pattern} but: ${keep.dirs.paths}</echo>
+		<delete includeemptydirs="true">
+			<fileset dir="${working_dir}" includes="${delete_pattern}/" excludes="${keep.dirs.paths}" />
+		</delete>
+	</target>
+
 
 	<target name="-publish.build.repository" if="composite.repository.base">
 
@@ -252,7 +302,7 @@
 		 -->
 		<property name="build.repository.directory" location="${composite.repository.directory}" />
 
-		<deltree dir="${build.repository.directory}" />
+		<delete dir="${build.repository.directory}" />
 
 		<unzip dest="${build.repository.directory}">
 			<fileset dir="${packages.directory}">
@@ -281,10 +331,10 @@
 		</antcall>
 	</target>
 
-	<target name="-publish.javadoc" if="build.stable">
+	<target name="-publish.javadoc" if="build.stable" unless="skip.javadoc">
 		<!-- copy javadoc -->
 		<echo>Unzipping javadoc</echo>
-		<unzip dest="${downloads.area}/javadoc/${version}" overwrite="true">
+		<unzip dest="${downloads.area}/javadoc/${base.version}" overwrite="true" >
 			<fileset dir="${javadoc.directory}">
 				<filename name="javadoc.zip" />
 			</fileset>

@@ -15,11 +15,12 @@ import org.easymock.EasyMock;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xtext.ecoreInference.ErrorAcceptor;
 import org.eclipse.xtext.xtext.ecoreInference.TransformationErrorCode;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -33,7 +34,7 @@ public class MetamodelTransformationErrorTest extends AbstractXtextTests {
 	private Grammar grammar;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		model = "grammar datatypetests with org.eclipse.xtext.common.Terminals\n" +
@@ -52,14 +53,14 @@ public class MetamodelTransformationErrorTest extends AbstractXtextTests {
 		transformer.setErrorAcceptor(errorAcceptor);
 	}
 
-	public void testSetUp() {
+	@Test public void testSetUp() {
 		assertNotNull(resource);
 		assertNotNull(transformer);
 		assertNotNull(errorAcceptor);
 		assertEquals(2, resource.getErrors().size());
 	}
 
-	public void testErrorMessages() throws Exception {
+	@Test public void testErrorMessages() throws Exception {
 		errorAcceptor.acceptError(same(TransformationErrorCode.InvalidDatatypeRule), (String) anyObject(), same(grammar.getRules().get(3)));
 		errorAcceptor.acceptError(same(TransformationErrorCode.InvalidDatatypeRule), (String) anyObject(), same(grammar.getRules().get(4)));
 		transform();

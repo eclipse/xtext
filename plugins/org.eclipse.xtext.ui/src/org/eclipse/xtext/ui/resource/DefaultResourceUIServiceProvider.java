@@ -21,12 +21,11 @@ import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider {
+public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider, IResourceUIServiceProviderExtension {
 
 	private IResourceServiceProvider delegate;
 	
@@ -82,6 +81,13 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		}
 		return false;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public boolean canBuild(URI uri, IStorage storage) {
+		return canHandle(uri, storage);
+	}
 
 	/**
 	 * @since 2.1
@@ -123,10 +129,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		return get(IReferenceUpdater.class);
 	}
 	
-	@Inject
-	private Injector injector;
-	
 	public <T> T get(Class<T> t) {
-		return injector.getInstance(t);
+		return delegate.get(t);
 	}
 }

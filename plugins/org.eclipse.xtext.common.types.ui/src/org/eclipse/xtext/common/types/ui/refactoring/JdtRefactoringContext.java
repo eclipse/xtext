@@ -9,8 +9,6 @@ package org.eclipse.xtext.common.types.ui.refactoring;
 
 import static org.eclipse.xtext.EcoreUtil2.*;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.viewers.ISelection;
@@ -19,29 +17,31 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 /**
- * A {@link IRenameElementContext} that triggers a JDT rename refactoring.
+ * A {@link IRenameElementContext} for a JDT rename refactoring.
+ * 
+ * Used when triggering a JDT refactoring from a reference to a JVM element in an Xtext -based language.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JdtRefactoringContext extends IRenameElementContext.Impl {
 
-	private List<IJavaElement> javaElements;
+	private IJavaElement javaElement;
 	private final boolean isRealJvmElement;
 
-	public JdtRefactoringContext(EObject targetJvmElement, List<IJavaElement> javaElements,
-			IEditorPart editor, ISelection selection, XtextResource contextResource, boolean isRealJvmMember) {
-		super(getNormalizedURI(targetJvmElement), targetJvmElement.eClass(), editor, selection,
-				getNormalizedURI(contextResource));
-		this.javaElements = javaElements;
+	public JdtRefactoringContext(EObject targetJvmElement, IJavaElement javaElement, IEditorPart editor,
+			ISelection selection, XtextResource contextResource, boolean isRealJvmMember) {
+		super(getPlatformResourceOrNormalizedURI(targetJvmElement), targetJvmElement.eClass(), editor, selection,
+				getPlatformResourceOrNormalizedURI(contextResource));
+		this.javaElement = javaElement;
 		this.isRealJvmElement = isRealJvmMember;
 	}
 
-	public List<IJavaElement> getJavaElements() {
-		return javaElements;
+	public IJavaElement getJavaElement() {
+		return javaElement;
 	}
-	
+
 	public boolean isRealJvmElement() {
 		return isRealJvmElement;
 	}
+	
 }

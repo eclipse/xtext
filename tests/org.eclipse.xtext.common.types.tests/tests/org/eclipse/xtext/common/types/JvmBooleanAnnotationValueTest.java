@@ -7,22 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmBooleanAnnotationValueTest extends TestCase {
+public class JvmBooleanAnnotationValueTest extends Assert {
 
 	private JvmBooleanAnnotationValue booleanAnnotationValue;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		booleanAnnotationValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
 	}	
 	
-	public void testMultiValue() {
+	@Test public void testMultiValue() {
 		booleanAnnotationValue.getValues().add(true);
 		booleanAnnotationValue.getValues().add(true);
 		assertEquals(2, booleanAnnotationValue.getValues().size());

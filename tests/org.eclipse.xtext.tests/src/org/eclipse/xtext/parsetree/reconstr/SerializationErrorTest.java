@@ -11,7 +11,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent;
@@ -20,6 +20,7 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoOptions;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 public class SerializationErrorTest extends AbstractXtextTests {
 	
@@ -30,7 +31,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(SerializationErrorTestLanguageStandaloneSetup.class);
 	}
@@ -51,7 +52,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		return r;
 	}
 
-	public void testMissingElement() throws Exception {
+	@Test public void testMissingElement() throws Exception {
 		Model m = (Model) getModel("tworequired a b");
 		// System.out.println(EmfFormatter.objToStr(m));
 		((TwoRequired) m.getTest()).setOne(null);
@@ -63,7 +64,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		assertTrue(r.toString(), r.toString().contains("TwoRequired.one is not set"));
 	}
 
-	public void testValueConverterError() throws Exception {
+	@Test public void testValueConverterError() throws Exception {
 		Model m = (Model) getModel("tworequired a b");
 		((TwoRequired) m.getTest()).setOne("|nv4l|d");
 		TreeConstructionReport r = ser(m);
@@ -71,7 +72,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		assertTrue(r.toString(), r.toString().contains("invalid characters"));
 	}
 
-	public void testElementTooMuch() throws Exception {
+	@Test public void testElementTooMuch() throws Exception {
 		Model m = (Model) getModel("twooptions one a");
 		// System.out.println(EmfFormatter.objToStr(m));
 		((TwoOptions) m.getTest()).setTwo("b");
@@ -90,7 +91,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 
 	}
 
-	public void testDeep() throws Exception {
+	@Test public void testDeep() throws Exception {
 		Model m = (Model) getModel("{ twooptions one a { twooptions one a { twooptions one a }}}");
 		// System.out.println(EmfFormatter.objToStr(m));
 		Indent i = ((Indent) m.getTest()).getIndent().get(0).getIndent().get(0);

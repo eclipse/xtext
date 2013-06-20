@@ -11,8 +11,6 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -21,19 +19,25 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ConcurrentAccessTest extends TestCase {
+public class ConcurrentAccessTest extends Assert {
 
 	private Resource resource;
 
@@ -41,9 +45,8 @@ public class ConcurrentAccessTest extends TestCase {
 		new StandaloneSetup();
 	}
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resource = new XtextResource(URI.createFileURI("something.ecore"));
 		resourceSet.getResources().add(resource);
@@ -75,19 +78,18 @@ public class ConcurrentAccessTest extends TestCase {
 		}
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		resource = null;
-		super.tearDown();
 	}
 	
-	public void testDummy() {
+	@Test public void testDummy() {
 		assertEquals(1, resource.getResourceSet().getResources().size());
 		EcoreUtil.resolveAll(resource);
 		assertEquals(101, resource.getResourceSet().getResources().size());
 	}
 	
-	public void testResolveSingleThreaded() {
+	@Test public void testResolveSingleThreaded() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResources().add(resource);
 		assertEquals(1, resourceSet.getResources().size());
@@ -105,7 +107,7 @@ public class ConcurrentAccessTest extends TestCase {
 		assertEquals(101, resourceSet.getResources().size());
 	}
 	
-	public void testMultiThreaded() throws InterruptedException {
+	@Ignore @Test public void testMultiThreaded() throws InterruptedException {
 		ResourceSet resourceSet = new XtextResourceSet();
 		resourceSet.getResources().add(resource);
 		boolean wasOk = resolveAllSupertypesMultithreaded((EPackage) resource.getContents().get(0));
@@ -114,7 +116,7 @@ public class ConcurrentAccessTest extends TestCase {
 		assertFalse("unresolvedProxy", wasOk);
 	}
 	
-	public void testMultiThreadedSynchronized() throws InterruptedException {
+	@Test public void testMultiThreadedSynchronized() throws InterruptedException {
 		ResourceSet resourceSet = new SynchronizedXtextResourceSet();
 		resourceSet.getResources().add(resource);
 		boolean wasOk = resolveAllSupertypesMultithreaded((EPackage) resource.getContents().get(0));
@@ -122,7 +124,7 @@ public class ConcurrentAccessTest extends TestCase {
 		assertTrue("unresolvedProxy", wasOk);
 	}
 	
-	public void testMultiThreadedUnitOfWork() throws InterruptedException {
+	@Ignore @Test public void testMultiThreadedUnitOfWork() throws InterruptedException {
 		ResourceSet resourceSet = new XtextResourceSet();
 		resourceSet.getResources().add(resource);
 		boolean wasOk = resolveAllSupertypesStateAccess((EPackage) resource.getContents().get(0));
@@ -131,12 +133,80 @@ public class ConcurrentAccessTest extends TestCase {
 		assertFalse("unresolvedProxy", wasOk);
 	}
 	
-	public void testMultiThreadedSynchronizedUnitOfWork() throws InterruptedException {
+	@Test public void testMultiThreadedSynchronizedUnitOfWork() throws InterruptedException {
 		ResourceSet resourceSet = new SynchronizedXtextResourceSet();
 		resourceSet.getResources().add(resource);
 		boolean wasOk = resolveAllSupertypesStateAccess((EPackage) resource.getContents().get(0));
 		assertEquals(101, resourceSet.getResources().size());
 		assertTrue("unresolvedProxy", wasOk);
+	}
+	
+	@Ignore @Test public void testMultiThreadedListAccess() throws InterruptedException {
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		final List<Resource> resources = resourceSet.getResources();
+		List<List<Resource>> resourcesToAdd = Lists.newArrayList();
+		for(int i = 0; i < 5; i++) {
+			List<Resource> threadList = Lists.newArrayList();
+			for(int j = 0; j < 500; j++) {
+				threadList.add((new ResourceImpl(URI.createURI("file:/" + i + "_" + j + ".xmi"))));
+			}
+			resourcesToAdd.add(threadList);
+		}
+		List<Thread> threads = Lists.newArrayList();
+		for (int i = 0; i < 5; i++) {
+			final List<Resource> addUs = resourcesToAdd.get(i);
+			threads.add(new Thread() {
+				@Override
+				public void run() {
+					for(Resource addMe: addUs) {
+						resources.add(addMe);
+					}
+				}
+			});
+		}
+		for (Thread thread : threads) {
+			thread.start();
+		}
+
+		for (Thread thread : threads) {
+			thread.join();
+		}
+		assertEquals(2500, resources.size());
+		assertEquals(2500, resourceSet.getURIResourceMap().size());
+	}
+	
+	@Test public void testMultiThreadedSynchronizedListAccess() throws InterruptedException {
+		XtextResourceSet resourceSet = new SynchronizedXtextResourceSet();
+		final List<Resource> resources = resourceSet.getResources();
+		List<List<Resource>> resourcesToAdd = Lists.newArrayList();
+		for(int i = 0; i < 5; i++) {
+			List<Resource> threadList = Lists.newArrayList();
+			for(int j = 0; j < 500; j++) {
+				threadList.add((new ResourceImpl(URI.createURI("file:/" + i + "_" + j + ".xmi"))));
+			}
+			resourcesToAdd.add(threadList);
+		}
+		List<Thread> threads = Lists.newArrayList();
+		for (int i = 0; i < 5; i++) {
+			final List<Resource> addUs = resourcesToAdd.get(i);
+			threads.add(new Thread() {
+				@Override
+				public void run() {
+					for(Resource addMe: addUs) {
+						resources.add(addMe);
+					}
+				}
+			});
+		}
+		for (Thread thread : threads) {
+			thread.start();
+		}
+
+		for (Thread thread : threads) {
+			thread.join();
+		}
+		assertEquals(2500, resources.size());
+		assertEquals(2500, resourceSet.getURIResourceMap().size());
 	}
 
 	/**

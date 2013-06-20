@@ -18,9 +18,9 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**
- * This property tester checks if there is a workflow file associated with the currently selected Xtext grammar file.
+ * This property tester checks if there is a Ecore2XtextDslProjectContributor file associated with the currently selected Xtext grammar file.
  * 
- * A workflow is considered being associated with a grammar file if:
+ * A Ecore2XtextDslProjectContributor is considered being associated with a grammar file if:
  * <ul>
  * <li>It resides in the same folder as the Xtext grammar file</li>
  * <li>Its name is Generate&lt;Name of Grammar&gt;.mwe</li>

@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.ILogListener;
@@ -17,13 +17,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Test;
 
 /**
  * A test for the Xtext editor.
@@ -34,7 +35,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 public class SimpleEditorTest extends AbstractEditorTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		// listen to CoreLog use RuntimeLog to hear more
@@ -49,12 +50,12 @@ public class SimpleEditorTest extends AbstractEditorTest {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		super.tearDown();
 	}
 
-	public void testOpenBlankFile() throws Exception {
+	@Test public void testOpenBlankFile() throws Exception {
 		IFile file = createFile("foo/x.testlanguage", "");
 		XtextEditor openedEditor = openEditor(file);
 		assertNotNull(openedEditor);
@@ -70,13 +71,13 @@ public class SimpleEditorTest extends AbstractEditorTest {
 		openedEditor.close(false);
 	}
 	
-	public void testOpenFileWithWrongFileExtension() throws Exception {
+	@Test public void testOpenFileWithWrongFileExtension() throws Exception {
 		IFile file = createFile("foo/y.unkownextension", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
 		XtextEditor openEditor = openEditor(file);
 		assertNotNull(openEditor);
 	}
 
-	public void testOpenFileReadModifyRead() throws Exception {
+	@Test public void testOpenFileReadModifyRead() throws Exception {
 		IFile file = createFile("foo/y.testlanguage", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
 		XtextEditor openEditor = openEditor(file);
 		assertNotNull(openEditor);
@@ -110,7 +111,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 		openEditor.close(true);
 	}
 
-	public void testOpenFileReadModifyReadSecond() throws Exception {
+	@Test public void testOpenFileReadModifyReadSecond() throws Exception {
 		IFile file = createFile("foo/z.testlanguage", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
 		XtextEditor openEditor = openEditor(file);
 		assertNotNull(openEditor);

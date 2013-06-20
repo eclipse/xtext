@@ -10,9 +10,13 @@ package org.eclipse.xtext.ui.editor.reconciler;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITypedRegion;
+import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 
 /**
- * @author Jan Köhnlein - Initial contribution and API
+ * Legacy class; should not be used any longer. Clients should use an {@link org.eclipse.xtext.util.ReplaceRegion}
+ * instead. TODO: deprecate as soon as the {@link ContentFormatterFactory}'s API can be changed.
+ * 
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReplaceRegion implements ITypedRegion {
 

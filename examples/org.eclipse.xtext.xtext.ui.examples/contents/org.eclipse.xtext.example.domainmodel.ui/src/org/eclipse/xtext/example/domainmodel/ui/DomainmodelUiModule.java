@@ -3,15 +3,20 @@
  */
 package org.eclipse.xtext.example.domainmodel.ui;
 
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener;
 import org.eclipse.xtext.example.domainmodel.ui.autoedit.FantasticEditStrategyProvider;
 import org.eclipse.xtext.example.domainmodel.ui.linking.DomainmodelLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.example.domainmodel.ui.navigation.DomainmodelHyperlinkHelper;
 import org.eclipse.xtext.example.domainmodel.ui.outline.FilterOperationsContribution;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.ui.LanguageSpecific;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -43,4 +48,12 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 		binder.bind(IOutlineContribution.class).annotatedWith(Names.named("FilterOperationsContribution")).to(FilterOperationsContribution.class);
 	} 
 
+	@Override
+	public void configureLanguageSpecificURIEditorOpener(Binder binder) {
+		if (PlatformUI.isWorkbenchRunning()) {
+			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class)
+					.to(DerivedMemberAwareEditorOpener.class);
+			binder.bind(IDerivedMemberAwareEditorOpener.class).to(DerivedMemberAwareEditorOpener.class);
+		}
+	}
 }

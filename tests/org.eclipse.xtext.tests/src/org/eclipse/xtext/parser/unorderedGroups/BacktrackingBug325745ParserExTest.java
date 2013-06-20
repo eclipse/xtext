@@ -13,7 +13,7 @@ package org.eclipse.xtext.parser.unorderedGroups;
 public class BacktrackingBug325745ParserExTest extends AbstractBacktrackingBug325745ParserTest {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ExBacktrackingBug325745TestLanguageStandaloneSetup.class);
 	}

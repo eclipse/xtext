@@ -13,5 +13,6 @@ Main :
 	elements+=Element*;
 
 Element:
+    (doc=STRING)?
 	name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}'
 ;

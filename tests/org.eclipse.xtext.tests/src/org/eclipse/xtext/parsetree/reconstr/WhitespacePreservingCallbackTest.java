@@ -1,56 +1,56 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.parser.IAstFactory;
+import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.junit.Test;
 
 public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(ComplexReconstrTestLanguageStandaloneSetup.class);
 	}
 
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		check("a");
 	}
 
-	public void testHiddenInBetween() throws Exception {
+	@Test public void testHiddenInBetween() throws Exception {
 		check("a \t /* foo bar */ + b");
 	}
 
+	@Test
+	public void testFail1() throws Exception {
+		IAstFactory f = getASTFactory();
+		failsWith(f.create(ComplexrewritetestPackage.Literals.ADD), XtextSerializationException.class);
+	}
 
-//	FIXME: Make this test work again
+	@Test
+	public void testFail2() throws Exception {
+		IAstFactory f = getASTFactory();
+		EObject add = f.create(ComplexrewritetestPackage.Literals.ADD);
 
-//	public void testFail1() throws Exception {
-//		IAstFactory f = getASTFactory();
-//		failsWith(f.create("Add"), XtextSerializationException.class);
-//	}
+		// one operand INVALID
+		EObject atom1 = f.create(ComplexrewritetestPackage.Literals.ATOM);
+		f.set(atom1, "name", "x", null, null);
+		f.add(add, "addOperands", atom1, null, null);
+		failsWith(add, XtextSerializationException.class);
 
-//	FIXME: Make this test work again
+		// two operands VALID
+		EObject atom2 = f.create(ComplexrewritetestPackage.Literals.ATOM);
+		f.set(atom2, "name", "x", null, null);
+		f.add(add, "addOperands", atom2, null, null);
+		assertNotNull(serialize(add));
 
-//	public void testFail2() throws Exception {
-//		IAstFactory f = getASTFactory();
-//		EObject add = f.create("Add");
-//
-//		// one operand INVALID
-//		EObject atom1 = f.create("Atom");
-//		f.set(atom1, "name", "x");
-//		f.add(add, "addOperands", atom1);
-//		failsWith(add, XtextSerializationException.class);
-//
-//		// two operands VALID
-//		EObject atom2 = f.create("Atom");
-//		f.set(atom2, "name", "x");
-//		f.add(add, "addOperands", atom2);
-//		assertNotNull(serialize(add));
-//
-//		// three operands INVALID
-//		EObject atom3 = f.create("Atom");
-//		f.set(atom3, "name", "x");
-//		f.add(add, "addOperands", atom3);
-//		failsWith(add, XtextSerializationException.class);
-//	}
+		// three operands INVALID
+		EObject atom3 = f.create(ComplexrewritetestPackage.Literals.ATOM);
+		f.set(atom3, "name", "x", null, null);
+		f.add(add, "addOperands", atom3, null, null);
+		failsWith(add, XtextSerializationException.class);
+	}
 
 	private void check(String m1) throws Exception {
 		assertEquals(m1, parseAndSerialize(m1));
@@ -61,7 +61,6 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 		return getSerializer().serialize(result, SaveOptions.defaultOptions());
 	}
 
-	@SuppressWarnings("unused")
 	private void failsWith(EObject o, Class<? extends RuntimeException> clazz) {
 		try {
 			get(Serializer.class).serialize(o);

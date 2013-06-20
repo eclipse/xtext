@@ -7,17 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel;
 
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.example.domainmodel.valueconverter.DomainmodelValueConverterService;
 
 /**
  * used to register components to be used within the IDE.
  */
 public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
-	
-	@Override
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-		return DomainmodelValueConverterService.class;
-	}
 	
 }

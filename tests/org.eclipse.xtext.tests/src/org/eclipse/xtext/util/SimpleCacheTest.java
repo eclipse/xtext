@@ -7,14 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SimpleCacheTest extends TestCase implements Function<String, String>{
+public class SimpleCacheTest extends Assert implements Function<String, String>{
 
 	private SimpleCache<String, String> cache;
 
@@ -22,8 +24,8 @@ public class SimpleCacheTest extends TestCase implements Function<String, String
 
 	private int callCount;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		this.cache = new SimpleCache<String, String>(this);
 		expectedParam = null;
 		callCount = 0;
@@ -35,11 +37,11 @@ public class SimpleCacheTest extends TestCase implements Function<String, String
 		return param + param;
 	}
 
-	public void testInitial() {
+	@Test public void testInitial() {
 		assertEquals(0, cache.getSize());
 	}
 
-	public void testGet() {
+	@Test public void testGet() {
 		expectedParam = new String("param"); // is not interned
 		String cached = cache.get(expectedParam);
 		assertEquals("paramparam", cached);
@@ -50,7 +52,7 @@ public class SimpleCacheTest extends TestCase implements Function<String, String
 		assertEquals(1, cache.getSize());
 	}
 
-	public void testDiscard() {
+	@Test public void testDiscard() {
 		String first = new String("first"); // is not interned
 		expectedParam = first;
 		cache.get(expectedParam);
@@ -63,7 +65,7 @@ public class SimpleCacheTest extends TestCase implements Function<String, String
 		assertFalse(cache.hasCachedValue(expectedParam));
 	}
 
-	public void testClear() {
+	@Test public void testClear() {
 		expectedParam = new String("param"); // is not interned
 		cache.get(expectedParam);
 		assertEquals(1, cache.getSize());

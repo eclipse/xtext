@@ -1526,6 +1526,12 @@
             label="Bug304681TestLanguage"/>
     </extension>
     <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug304681TestLanguage"
+            label="Bug304681TestLanguage"/>
+    </extension>
+    <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
@@ -2015,6 +2021,726 @@
         <resourceServiceProvider
             class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug332217TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="bug332217testlanguage">
+        </resourceServiceProvider>
+    </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/ui/common/tests/2011/bug348427TestLanguage" 
+       class = "org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.Bug348427TestLanguagePackage"
+       genModel = "org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="bug348427testlanguage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage"
+            name="Bug348427TestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage"
+            name="Bug348427TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348427TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348427TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348427TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348427TestLanguage"
+            label="Bug348427TestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="bug348427testlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="bug348427testlanguage">
+        </resourceServiceProvider>
+    </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/ui/common/tests/2011/bug348199TestLanguage" 
+       class = "org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.Bug348199TestLanguagePackage"
+       genModel = "org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="bug348199testlanguage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage"
+            name="Bug348199TestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage"
+            name="Bug348199TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348199TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348199TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348199TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348199TestLanguage"
+            label="Bug348199TestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="bug348199testlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="bug348199testlanguage">
+        </resourceServiceProvider>
+    </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/ui/common/tests/2011/bug360834TestLanguage" 
+       class = "org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Bug360834TestLanguagePackage"
+       genModel = "org/eclipse/xtext/ui/tests/editor/contentassist/Bug360834TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="bug360834testlanguage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage"
+            name="Bug360834TestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage"
+            name="Bug360834TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug360834TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug360834TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug360834TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug360834TestLanguage"
+            label="Bug360834TestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="bug360834testlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="bug360834testlanguage">
+        </resourceServiceProvider>
+    </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/ui/common/tests/2011/bug347012TestLanguage" 
+       class = "org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.Bug347012TestLanguagePackage"
+       genModel = "org/eclipse/xtext/ui/tests/editor/contentassist/Bug347012TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="bug347012testlanguage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage"
+            name="Bug347012TestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage"
+            name="Bug347012TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug347012TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug347012TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug347012TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug347012TestLanguage"
+            label="Bug347012TestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="bug347012testlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="bug347012testlanguage">
+        </resourceServiceProvider>
+    </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/ui/common/tests/2012/bug381381TestLanguage" 
+       class = "org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage.Bug381381TestLanguagePackage"
+       genModel = "org/eclipse/xtext/ui/tests/editor/contentassist/Bug381381TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="bug381381testlanguage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage"
+            name="Bug381381TestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage"
+            name="Bug381381TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug381381TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug381381TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug381381TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug381381TestLanguage"
+            label="Bug381381TestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="bug381381testlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="bug381381testlanguage">
         </resourceServiceProvider>
     </extension>
 
@@ -4180,6 +4906,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.ui.tests.TestLanguage -->
+    <extension
+            id="testlanguage.check.fast"
+            name="TestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="testlanguage.check.normal"
+            name="TestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="testlanguage.check.expensive"
+            name="TestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -4326,6 +5074,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.ui.tests.FoldingTestLanguage -->
+    <extension
+            id="foldingtestlanguage.check.fast"
+            name="FoldingTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="foldingtestlanguage.check.normal"
+            name="FoldingTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="foldingtestlanguage.check.expensive"
+            name="FoldingTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -4472,6 +5242,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage -->
+    <extension
+            id="bmtestlanguage.check.fast"
+            name="BmTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="bmtestlanguage.check.normal"
+            name="BmTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="bmtestlanguage.check.expensive"
+            name="BmTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -4618,14 +5410,57 @@
     </extension>
 
 
-   <!-- quickfix marker resolution generator -->
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
-   </extension>
-   
+    <!-- marker definitions for org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage -->
+    <extension
+            id="quickfixcrossreftestlanguage.check.fast"
+            name="QuickfixCrossrefTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="quickfixcrossreftestlanguage.check.normal"
+            name="QuickfixCrossrefTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="quickfixcrossreftestlanguage.check.expensive"
+            name="QuickfixCrossrefTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
+    <!-- quickfix marker resolution generator for org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.ui.tests.quickfixcrossreftestlanguage.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.ui.tests.quickfixcrossreftestlanguage.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.ui.tests.quickfixcrossreftestlanguage.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
+
       <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -4635,8 +5470,8 @@
             class="org.eclipse.xtext.ui.tests.editor.mpe.MultiPageEditor"
             id="org.eclipse.xtext.ui.tests.mpe.MultiPageEditor">
       </editor>
-   </extension>
-   
+    </extension>
+
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/xtext/refactoringTestLanguage" 
@@ -4644,6 +5479,8 @@
        genModel = "org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.genmodel" /> 
 	
   </extension>
+
+
 
     <extension
             point="org.eclipse.ui.editors">
@@ -4780,10 +5617,32 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage -->
+    <extension
+            id="refactoringtestlanguage.check.fast"
+            name="RefactoringTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="refactoringtestlanguage.check.normal"
+            name="RefactoringTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="refactoringtestlanguage.check.expensive"
+            name="RefactoringTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtext.ui.tests.refactoring.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="org.eclipse.xtext.ui.tests.refactoring.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -4805,6 +5664,15 @@
          </command>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"
+	        class="org.eclipse.xtext.ui.tests.refactoring.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_RefactoringTestLanguage"/>
+	    </page>
+	</extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -4951,10 +5819,32 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage -->
+    <extension
+            id="referringtestlanguage.check.fast"
+            name="ReferringTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="referringtestlanguage.check.normal"
+            name="ReferringTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="referringtestlanguage.check.expensive"
+            name="ReferringTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -4976,6 +5866,158 @@
          </command>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage"
+	        class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_ReferringTestLanguage"/>
+	    </page>
+	</extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/ui/common/tests/2009/bug377311TestLanguage" 
+       class = "org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.Bug377311Package"
+       genModel = "org/eclipse/xtext/ui/tests/editor/contentassist/Bug377311TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="bug377311testlanguage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage"
+            name="Bug377311TestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage"
+            name="Bug377311TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug377311TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug377311TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug377311TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug377311TestLanguage"
+            label="Bug377311TestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="bug377311testlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="bug377311testlanguage">
+        </resourceServiceProvider>
+    </extension>
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser

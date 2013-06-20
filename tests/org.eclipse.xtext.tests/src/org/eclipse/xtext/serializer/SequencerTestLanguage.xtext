@@ -10,6 +10,8 @@ grammar org.eclipse.xtext.serializer.SequencerTestLanguage with org.eclipse.xtex
 
 generate sequencertest "http://www.eclipse.org/2009/tmf/xtext/sequencertestlanguage"
 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
 Model:
 	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
 	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 |
@@ -18,7 +20,7 @@ Model:
 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference |
 	x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
 	x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional |
-	x26=UnorderedGroupBoolean;
+	x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble;
 
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -143,3 +145,12 @@ UnorderedGroupOptional:
 
 UnorderedGroupBoolean:
 	'#26' {UnorderedGroupBoolean} (val1?='kw1'?  & val2?='kw2'? & val3?='kw3'?);
+	
+Complex1:
+	'#27' {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? (("kw3" val3+=ID) | ("kw4" val4+=ID) | ("kw5" val5+=ID) | ("kw6" val6+=ID))*;	
+	
+OptionalDouble:
+	"#28" double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?;
+	
+DOUBLE returns ecore::EDouble:
+	INT ("." INT)?;

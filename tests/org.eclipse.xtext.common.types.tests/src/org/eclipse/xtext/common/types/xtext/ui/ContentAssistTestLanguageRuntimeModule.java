@@ -3,9 +3,15 @@
  */
 package org.eclipse.xtext.common.types.xtext.ui;
 
+import org.eclipse.xtext.common.types.xtext.ui.generator.ContentAssistTestLanguageGenerator;
+import org.eclipse.xtext.generator.IGenerator;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class ContentAssistTestLanguageRuntimeModule extends org.eclipse.xtext.common.types.xtext.ui.AbstractContentAssistTestLanguageRuntimeModule {
 
+	public Class<? extends IGenerator> bindIGenerator() {
+		return ContentAssistTestLanguageGenerator.class;
+	}
 }

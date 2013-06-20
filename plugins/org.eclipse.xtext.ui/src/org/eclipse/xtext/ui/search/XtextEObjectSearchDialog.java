@@ -50,7 +50,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Knut Wannheden
  */
-@SuppressWarnings("restriction")
 public class XtextEObjectSearchDialog extends ListDialog {
 
 	protected Text searchControl;
@@ -299,6 +298,8 @@ public class XtextEObjectSearchDialog extends ListDialog {
 					if (getTableViewer() != null) {
 						getTableViewer().setItemCount(matches.size());
 						getTableViewer().setInput(matches);
+						if (getTableViewer().getSelection().isEmpty() && matches.size() > 0) 
+							getTableViewer().getTable().select(0);
 					}
 					searchStatusLabel
 							.setText((isFinished) ? "" : Messages.XtextEObjectSearchDialog_StatusMessageSearching); //$NON-NLS-1$

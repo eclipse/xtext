@@ -7,22 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmLowerBoundTest extends TestCase {
+public class JvmLowerBoundTest extends Assert {
 
 	private JvmLowerBound lowerBound;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		lowerBound = TypesFactory.eINSTANCE.createJvmLowerBound();
 	}
 	
-	public void testGetIdentifier_01() {
+	@Test public void testGetIdentifier_01() {
 		assertNull(lowerBound.getIdentifier());
 	}
 }

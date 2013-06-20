@@ -61,7 +61,10 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 			for(String id: ids) {
 				result = merge(result, getAttribute(id));
 			}
-			attributes.put(mergedIds, result);
+			if (result != null)
+				attributes.put(mergedIds, result);
+			else
+				attributes.remove(mergedIds);
 		}
 		return result;
 	}
@@ -69,6 +72,8 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 	private TextAttribute merge(TextAttribute first, TextAttribute second) {
 		if (first == null)
 			return second;
+		if (second == null)
+			return first;
 		int style = first.getStyle() | second.getStyle();
 		Color fgColor = second.getForeground();
 		if (fgColor == null)

@@ -28,6 +28,7 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
+import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
@@ -77,8 +78,15 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		return stateAccess.readOnly(work);
 	}
+	
+	private final static IUnitOfWork.Void<XtextResource> noWork = new IUnitOfWork.Void<XtextResource>() {
+		@Override
+		public void process(XtextResource state) throws Exception {}
+	};
 
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
+		// do a dummy read only, to make sure any scheduled changes get applied.
+		readOnly(noWork);
 		IUnitOfWork<T, XtextResource> reconcilingUnitOfWork = new ReconcilingUnitOfWork<T>(work, this, composer);
 		return internalModify(reconcilingUnitOfWork);
 	}
@@ -115,7 +123,11 @@ public class XtextDocument extends Document implements IXtextDocument {
 	protected void notifyModelListeners(XtextResource res) {
 		Object[] listeners = modelListeners.getListeners();
 		for (int i = 0; i < listeners.length; i++) {
-			((IXtextModelListener) listeners[i]).modelChanged(res);
+			try {
+				((IXtextModelListener) listeners[i]).modelChanged(res);
+			} catch(Exception exc) {
+				log.error("Error in IXtextModelListener", exc);
+			}
 		}
 	}
 
@@ -150,8 +162,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 		protected void beforeReadOnly(XtextResource res, IUnitOfWork<?, XtextResource> work) {
 			if (log.isDebugEnabled())
 				log.debug("read - " + Thread.currentThread().getName());
-			// don't updateContent on reentrant read lock request
-			if (rwLock.getReadLockCount() == 1)
+			// Don't updateContent on write lock request. Reentrant read doesn't matter as 
+			// updateContentBeforeRead() is cheap when the pending event queue is swept
+			if (getReadHoldCount() == 1 && getWriteHoldCount() == 0)
 				updateContentBeforeRead();
 		}
 
@@ -169,7 +182,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 		@Override
 		protected void afterModify(XtextResource res, Object result, IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
-			notifyModelListeners(resource);
+			if(!(work instanceof ReconcilingUnitOfWork))
+				notifyModelListeners(resource);
 		}
 
 		@Override
@@ -178,7 +192,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 				if (validationJob!=null) {
 					validationJob.cancel();
 				}
-				return super.modify(work);
+				Object state = getState();
+				if (state instanceof ISynchronizable<?>) {
+					synchronized (((ISynchronizable<?>) state).getLock()) {
+						return super.modify(work);
+					}
+				} else {
+					return super.modify(work);
+				}
 			} catch (RuntimeException e) {
 				try {
 					XtextResource state = getState();
@@ -188,25 +209,26 @@ public class XtextDocument extends Document implements IXtextDocument {
 				}
 				throw e;
 			} finally {
-				checkAndUpdateAnnotations();
+				if(!(work instanceof ReconcilingUnitOfWork))
+					checkAndUpdateAnnotations();
+			}
+		}
+		
+		/**
+		 * @since 2.4
+		 */
+		@Override
+		public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
+			Object state = getState();
+			if (state instanceof ISynchronizable<?>) {
+				synchronized (((ISynchronizable<?>) state).getLock()) {
+					return super.readOnly(work);
+				}
+			} else {
+				return super.readOnly(work);
 			}
 		}
 
-		public <T> T process(IUnitOfWork<T, XtextResource> transaction) {
-			if (transaction != null) {
-				readLock.unlock();
-				writeLock.lock();
-				try {
-					if (log.isDebugEnabled())
-						log.debug("process - " + Thread.currentThread().getName());
-					return modify(transaction);
-				} finally {
-					readLock.lock();
-					writeLock.unlock();
-				}
-			}
-			return null;
-		}
 	}
 
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
@@ -331,5 +353,4 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public Iterable<ILexerTokenRegion> getTokens() {
 		return tokenSource.getTokenInfos();
 	}
-
 }

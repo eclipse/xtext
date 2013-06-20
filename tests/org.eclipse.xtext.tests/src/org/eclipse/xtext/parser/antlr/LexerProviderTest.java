@@ -7,15 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
-import junit.framework.TestCase;
-
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.RecognitionException;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LexerProviderTest extends TestCase {
+public class LexerProviderTest extends Assert {
 
 	public static class MyLexer extends Lexer {
 
@@ -40,34 +42,32 @@ public class LexerProviderTest extends TestCase {
 
 	private LexerProvider<MyLexer> provider;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		this.provider = new LexerProvider<MyLexer>(MyLexer.class);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		this.provider = null;
-		super.tearDown();
 	}
 	
-	public void testResultNotNull() {
+	@Test public void testResultNotNull() {
 		Lexer lexer = provider.get();
 		assertNotNull("lexer", lexer);
 	}
 	
-	public void testResultIsMyLexer() {
+	@Test public void testResultIsMyLexer() {
 		Lexer lexer = provider.get();
 		assertTrue("lexer instanceof MyLexer", lexer instanceof MyLexer);
 	}
 	
-	public void testResultIsInitialized() {
+	@Test public void testResultIsInitialized() {
 		MyLexer lexer = provider.get();
 		assertTrue("lexer.initialized", lexer.initialized);
 	}
 	
-	public void testSetup() {
+	@Test public void testSetup() {
 		assertTrue("MyLexer(null).initialized", new MyLexer(null).initialized);
 		assertFalse("MyLexer().initialized", new MyLexer().initialized);
 	}

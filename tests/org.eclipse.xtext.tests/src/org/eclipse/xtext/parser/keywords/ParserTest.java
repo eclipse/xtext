@@ -11,10 +11,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,7 +33,7 @@ public class ParserTest extends AbstractXtextTests {
 	private EStructuralFeature eighth;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(KeywordsTestLanguageStandaloneSetup.class);
 		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
@@ -55,49 +56,49 @@ public class ParserTest extends AbstractXtextTests {
 		assertTrue(value);
 	}
 
-	public void testFooBar() throws Exception {
+	@Test public void testFooBar() throws Exception {
 		XtextResource resource = helper.getResourceFromString("foo\\bar");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, first);
 	}
 
-	public void testFoo() throws Exception {
+	@Test public void testFoo() throws Exception {
 		XtextResource resource = helper.getResourceFromString("foo\\");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, second);
 	}
 
-	public void testBar() throws Exception {
+	@Test public void testBar() throws Exception {
 		XtextResource resource = helper.getResourceFromString("\\bar");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, third);
 	}
 
-	public void testBackslash() throws Exception {
+	@Test public void testBackslash() throws Exception {
 		XtextResource resource = helper.getResourceFromString("\\");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, forth);
 	}
 
-	public void testFifth() throws Exception {
+	@Test public void testFifth() throws Exception {
 		XtextResource resource = helper.getResourceFromString("\"a\"");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, fifth);
 	}
 	
-	public void testSixth() throws Exception {
+	@Test public void testSixth() throws Exception {
 		XtextResource resource = helper.getResourceFromString("'b'");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, sixth);
 	}
 	
-	public void testSeventh() throws Exception {
+	@Test public void testSeventh() throws Exception {
 		XtextResource resource = helper.getResourceFromString("'c'");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, seventh);
 	}
 	
-	public void testEighth() throws Exception {
+	@Test public void testEighth() throws Exception {
 		XtextResource resource = helper.getResourceFromString("\"d\"");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, eighth);

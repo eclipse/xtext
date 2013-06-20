@@ -15,7 +15,6 @@ import java.util.Map;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
@@ -41,7 +40,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	public NewXtextProjectWizard(IProjectCreator projectCreator) {
 		super(projectCreator);
 		setWindowTitle(Messages.NewXtextProjectWizard_WindowTitle);
-		setDefaultPageImageDescriptor(Activator.getImageDescriptor("icons/wizban/newxprj_wiz.png")); //$NON-NLS-1$
+		setDefaultPageImageDescriptor(Activator.getImageDescriptor("icons/wizban/newxprj_wiz.gif")); //$NON-NLS-1$
 	}
 
 	@Override
@@ -55,13 +54,14 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = createProjectInfo();
 		projectInfo.setCreateTestProject(true);
+		projectInfo.setCreateFeatureProject(mainPage.isCreateFeatureProject());
 		projectInfo.setFileExtension(mainPage.getFileExtensions());
 		projectInfo.setLanguageName(mainPage.getLanguageName());
 		projectInfo.setProjectName(mainPage.getProjectName());
 		projectInfo.setWorkingSets(mainPage.getSelectedWorkingSets());
 		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
 		projectInfo.setWizardContribution(contributions.get(mainPage.getGeneratorConfig()));
-		projectInfo.setProjectLocation(new Path(mainPage.getLocationURI().getPath()));
+		projectInfo.setProjectsRootLocation(mainPage.getLocationPath());
 		projectInfo.setWorkbench(getWorkbench());
 		projectInfo.setCreateEclipseRuntimeLaunchConfig(!existsEclipseRuntimeLaunchConfig());
 		String encoding = null;

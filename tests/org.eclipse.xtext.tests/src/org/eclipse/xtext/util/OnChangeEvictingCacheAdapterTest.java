@@ -7,23 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.util.OnChangeEvictingCache.CacheAdapter;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class OnChangeEvictingCacheAdapterTest extends TestCase {
+public class OnChangeEvictingCacheAdapterTest extends Assert {
 	String key = "foo";
 	String value = "bar";
 	
-	public void testAdapterIsCleared() throws Exception {
+	@Test public void testAdapterIsCleared() throws Exception {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
 		EClass eClass = factory.createEClass();
 		Resource resource = new ResourceImpl();

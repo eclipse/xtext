@@ -7,14 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
-import org.eclipse.core.resources.IProject;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -47,56 +42,40 @@ public class ContentAssistInBlockAsSecondWithoutParenTest extends ContentAssistI
 	}
 	
 	@Override
-	public void testEmptyInput() throws Exception {
+	@Test public void testEmptyInput() throws Exception {
 		newBuilder().assertText(expect(getKeywordsAndStatics(), VARIABLE_DECL, CAST_INSTANCEOF));
 	}
 	
 	@Override
-	public void testOnStringLiteral_30() throws Exception {
+	@Test public void testOnStringLiteral_30() throws Exception {
 		newBuilder().append("('')").assertText(expect(getKeywordsAndStatics(), VARIABLE_DECL, CAST_INSTANCEOF));
 	}
 	
 	@Override
-	public void testOnStringLiteral_32() throws Exception {
+	@Test public void testOnStringLiteral_32() throws Exception {
 		newBuilder().append("(''.toString)").assertText(expect(getKeywordsAndStatics(), VARIABLE_DECL, CAST_INSTANCEOF));
 	}
 	
 	@Override
-	public void testAfterBinaryOperation_03() throws Exception {
+	@Test public void testAfterBinaryOperation_03() throws Exception {
 		newBuilder().append("(''+'')").assertText(expect(getKeywordsAndStatics(), VARIABLE_DECL, CAST_INSTANCEOF));
 	}
 	
 	@Override
-	public void testAfterBinaryOperation_05() throws Exception {
+	@Test public void testAfterBinaryOperation_05() throws Exception {
 		newBuilder().append("((''+''))").assertText(expect(getKeywordsAndStatics(), VARIABLE_DECL, CAST_INSTANCEOF));
 	}
-	
+
+	@Ignore("TODO implement me")
 	@Override
-	public void testOnStringLiteral_31() throws Exception {
+	@Test public void testOnStringLiteral_31() throws Exception {
 		newBuilder().append("('').").assertText();
 	}
 	
+	@Ignore("TODO implement me")	
 	@Override
-	public void testAfterBinaryOperation_04() throws Exception {
+	@Test public void testAfterBinaryOperation_04() throws Exception {
 		newBuilder().append("(''+'').").assertText();
 	}
 	
-	public static Test suite() {
-		return new TestSetup(new TestSuite(ContentAssistInBlockAsSecondWithoutParenTest.class)) {
-			private IProject project;
-
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
-				
-			}
-			
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
-	}
 }

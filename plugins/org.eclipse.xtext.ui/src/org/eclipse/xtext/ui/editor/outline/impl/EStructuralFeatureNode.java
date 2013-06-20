@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
@@ -25,9 +26,23 @@ public class EStructuralFeatureNode extends AbstractOutlineNode {
 
 	private EStructuralFeature feature;
 
+	/**
+	 * A {@link BackgroundOutlineTreeProvider} must use
+	 * {@link #EStructuralFeatureNode(EObject, EStructuralFeature, IOutlineNode, ImageDescriptor, Object, boolean)} instead.
+	 */
 	public EStructuralFeatureNode(EObject owner, EStructuralFeature feature, IOutlineNode parent, Image image, Object text,
 			boolean isLeaf) {
 		super(parent, image, text, isLeaf);
+		this.ownerURI = EcoreUtil.getURI(owner);
+		this.feature = feature;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public EStructuralFeatureNode(EObject owner, EStructuralFeature feature, IOutlineNode parent, ImageDescriptor imageDescriptor, Object text,
+			boolean isLeaf) {
+		super(parent, imageDescriptor, text, isLeaf);
 		this.ownerURI = EcoreUtil.getURI(owner);
 		this.feature = feature;
 	}

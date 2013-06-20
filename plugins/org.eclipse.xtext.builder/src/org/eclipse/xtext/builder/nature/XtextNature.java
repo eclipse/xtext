@@ -11,8 +11,10 @@ import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
+import org.eclipse.xtext.ui.MarkerTypes;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,10 +34,10 @@ public class XtextNature implements IProjectNature {
 		}
 
 		ICommand[] newCommands = new ICommand[commands.length + 1];
-		System.arraycopy(commands, 0, newCommands, 0, commands.length);
+		System.arraycopy(commands, 0, newCommands, 1, commands.length);
 		ICommand command = desc.newCommand();
 		command.setBuilderName(XtextBuilder.BUILDER_ID);
-		newCommands[newCommands.length - 1] = command;
+		newCommands[0] = command;
 		desc.setBuildSpec(newCommands);
 		project.setDescription(desc, null);
 	}
@@ -51,6 +53,7 @@ public class XtextNature implements IProjectNature {
 						commands.length - i - 1);
 				description.setBuildSpec(newCommands);
 				project.setDescription(description, null);			
+				project.deleteMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
 				return;
 			}
 		}

@@ -14,6 +14,7 @@ var uiProject = "${runtimeProject}.ui"
 
 Workflow { 
     bean = StandaloneSetup {
+    	ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/.."
 		scanClassPath = true
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel"
@@ -31,6 +32,7 @@ Workflow {
 	component = Generator {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
+		pathTestProject = "../../tests/${projectName}.tests"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		language = {
@@ -41,7 +43,9 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {}
+			fragment = ecore.EcoreGeneratorFragment {
+				emfRuntimeVersion = "2.9"
+			}
 
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
@@ -107,7 +111,8 @@ Workflow {
 				antlrParam = "${uiProject}/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer"
 			}
 			
-			fragment = generator.CodetemplatesGeneratorFragment {}
+			fragment = templates.CodetemplatesGeneratorFragment {}
+			fragment = junit.Junit4Fragment {}
 		}
 		language = {
 			uri = singleTemplateGrammarURI
@@ -161,6 +166,7 @@ Workflow {
 				antlrParam = "-lib"
 				antlrParam = "${uiProject}/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer"
 			}
+			fragment = junit.Junit4Fragment {}
 		}
 	}
 }

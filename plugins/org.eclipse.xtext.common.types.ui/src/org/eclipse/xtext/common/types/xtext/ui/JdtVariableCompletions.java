@@ -34,7 +34,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-@SuppressWarnings("restriction")
 public class JdtVariableCompletions {
 	
 	public interface CompletionDataAcceptor {
@@ -53,6 +52,13 @@ public class JdtVariableCompletions {
 
 	public void getVariableProposals(EObject ctx, EReference refToTypeRef, VariableType varType, Set<String> notAllowedNames, CompletionDataAcceptor acceptor) {
 		String typeName = getTextUnderReference(ctx, refToTypeRef);
+		internalGetVariableProposals(typeName, ctx, varType, notAllowedNames, acceptor);
+	}
+	/**
+	 * @since 2.3
+	 */
+	public void getVariableProposals(String typeName, EObject ctx, VariableType varType,
+			Set<String> notAllowedNames, CompletionDataAcceptor acceptor){
 		internalGetVariableProposals(typeName, ctx, varType, notAllowedNames, acceptor);
 	}
 
@@ -116,16 +122,20 @@ public class JdtVariableCompletions {
 	protected String getFirstTypeArgumentSimpleName(String typeName) {
 		final int idxOfFirstBracket = typeName.indexOf(leftTypeArgParen());
 		if (idxOfFirstBracket != -1) {
-			int index = typeName.indexOf(rightTypeArgParen(), idxOfFirstBracket+1);
-			int idx1 = typeName.indexOf(typeArgSeparator(), idxOfFirstBracket+1);
+			final int afterFirstBracket = idxOfFirstBracket+1;
+			int index = typeName.indexOf(rightTypeArgParen(), afterFirstBracket);
+			if (index == -1)
+				return null;
+			int idx1 = typeName.indexOf(typeArgSeparator(), afterFirstBracket);
 			if (idx1 != -1 && idx1 < index) {
 				index = idx1;
 			}
-			int idx2 = typeName.indexOf(leftTypeArgParen(), idxOfFirstBracket+1);
+			int idx2 = typeName.indexOf(leftTypeArgParen(), afterFirstBracket);
 			if (idx2 != -1 && idx2 < index) {
 				index = idx2;
 			}
-			String firstInnerType = getSimpleName(typeName.substring(idxOfFirstBracket+1, index));
+			final String substring = typeName.substring(afterFirstBracket, index);
+			String firstInnerType = getSimpleName(substring);
 			return firstInnerType;
 		}
 		return null;
@@ -170,7 +180,7 @@ public class JdtVariableCompletions {
 			if (ctx != null && ctx.eResource() != null && ctx.eResource().getResourceSet() != null)
 				javaProject = javaProjectProvider.getJavaProject(ctx.eResource().getResourceSet());
 			return NamingConventions.suggestVariableNames(getVariableKind(varType),
-					NamingConventions.BK_TYPE_NAME, simpleTypeName, javaProject, isPlural?1:0, excludedNames.toArray(new String[0]), false);
+					NamingConventions.BK_TYPE_NAME, simpleTypeName, javaProject, isPlural?1:0, excludedNames.toArray(new String[excludedNames.size()]), false);
 		}
 		return new String[0];
 	}

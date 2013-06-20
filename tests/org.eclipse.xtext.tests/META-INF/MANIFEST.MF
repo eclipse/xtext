@@ -1,26 +1,31 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Generator Tests
+Bundle-Name: Xtext Tests
 Bundle-SymbolicName: org.eclipse.xtext.tests;singleton:=true
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.4.3.qualifier
 Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
- org.eclipse.xtext.generator;bundle-version="2.0.0",
- org.junit;bundle-version="[3.0.0,4.0.0)",
+Require-Bundle: org.eclipse.xtext;bundle-version="2.4.3",
+ org.eclipse.xtext.generator;bundle-version="2.4.3",
  org.easymock;bundle-version="2.3.0",
- org.eclipse.xtext.junit;bundle-version="2.0.0",
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0",
- org.eclipse.xtext.util;bundle-version="2.0.0",
+ org.eclipse.xtext.util;bundle-version="2.4.3",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- com.ibm.icu,
- org.eclipse.xtext.ecore;bundle-version="2.0.0",
- org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.xtext.testlanguages;bundle-version="2.0.0",
- org.antlr.runtime
+ org.eclipse.xtext.ecore;bundle-version="2.4.3",
+ org.eclipse.emf.mwe2.launch;bundle-version="2.2.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.testlanguages;bundle-version="2.4.3",
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xtext.junit4;bundle-version="2.4.3",
+ org.hamcrest.core;bundle-version="1.1.0",
+ org.eclipse.core.runtime;bundle-version="3.5.0",
+ org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy
 Bundle-ClassPath: lib/simple.jar,.
-Import-Package: org.apache.log4j
+Import-Package: com.ibm.icu.text;version="4.0.0",
+ org.apache.log4j;version="1.2.15",
+ org.junit;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0"
 Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.generator.ecore.services,
  org.eclipse.xtext.generator.ecore.superPackage,
@@ -409,5 +414,24 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.metamodelreferencing.tests.ecoreReference,
  org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.impl,
  org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.util,
- org.eclipse.xtext.metamodelreferencing.tests.serializer
+ org.eclipse.xtext.metamodelreferencing.tests.serializer,
+ org.eclipse.xtext.linking.serializer,
+ org.eclipse.xtext.linking.scoping,
+ org.eclipse.xtext.linking.lazy.serializer,
+ org.eclipse.xtext.linking.bug362902,
+ org.eclipse.xtext.linking.bug362902.impl,
+ org.eclipse.xtext.linking.bug362902.util,
+ org.eclipse.xtext.parser.antlr.serializer,
+ org.eclipse.xtext.parser.antlr.bug378967Test,
+ org.eclipse.xtext.parser.antlr.bug378967Test.impl,
+ org.eclipse.xtext.parser.antlr.bug378967Test.util,
+ org.eclipse.xtext.resource.liveContainerTestLanguage,
+ org.eclipse.xtext.resource.liveContainerTestLanguage.impl,
+ org.eclipse.xtext.resource.liveContainerTestLanguage.util,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.impl,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.util,
+ org.eclipse.xtext.resource.bug385636,
+ org.eclipse.xtext.resource.bug385636.impl,
+ org.eclipse.xtext.resource.bug385636.util
 

@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -18,6 +16,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
@@ -25,36 +26,35 @@ import com.google.common.collect.Iterables;
  * @author Sven Efftinge - Initial contribution and API
  * @author Holger Schill - Contribution to Bug 309764
  */
-public class ScopeTest extends TestCase {
+public class ScopeTest extends Assert {
 
 	private AbstractScope scope;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		scope = getEcoreClassifiersScope();
 	}
 
-	public void testContentByEObject_existent() throws Exception {
+	@Test public void testContentByEObject_existent() throws Exception {
 		assertNotNull(scope.getSingleElement(EcorePackage.eINSTANCE.getEAnnotation()));
 	}
 
-	public void testContentByEObject_nonExistent() throws Exception {
+	@Test public void testContentByEObject_nonExistent() throws Exception {
 		assertNull(scope.getSingleElement(EcorePackage.eINSTANCE.getEAnnotation_Contents()));
 	}
 
-	public void testContentByEObject_withProxy() throws Exception {
+	@Test public void testContentByEObject_withProxy() throws Exception {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		((InternalEObject) eClass).eSetProxyURI(EcoreUtil.getURI(EcorePackage.eINSTANCE.getEAnnotation()));
 		assertNotNull(scope.getSingleElement(eClass));
 	}
 
-	public void testContentByName_existent() throws Exception {
+	@Test public void testContentByName_existent() throws Exception {
 		QualifiedName qualifiedName = QualifiedName.create(EcorePackage.eINSTANCE.getEAnnotation().getName());
 		assertEquals(qualifiedName, scope.getSingleElement(qualifiedName).getName());
 	}
 
-	public void testContentByName_nonExistent() throws Exception {
+	@Test public void testContentByName_nonExistent() throws Exception {
 		assertNull(scope.getSingleElement(QualifiedName.create("unknown_name")));
 	}
 

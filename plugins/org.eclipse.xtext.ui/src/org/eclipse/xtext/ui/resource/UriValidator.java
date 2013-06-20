@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.resource;
 
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
@@ -19,7 +20,7 @@ import com.google.inject.Inject;
 public class UriValidator {
 	
 	@Inject
-	private IResourceServiceProvider.Registry registry;
+	private IResourceServiceProvider.Registry registry = IResourceServiceProvider.Registry.INSTANCE;
 
 	public boolean isValid(URI uri, IStorage storage) {
 		if (uri==null)
@@ -34,5 +35,42 @@ public class UriValidator {
 		}
 		return false;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public boolean canBuild(URI uri, IStorage storage) {
+		if (uri == null)
+			return false;
+		IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(uri);
+		if (resourceServiceProvider != null) {
+			if (resourceServiceProvider instanceof IResourceUIServiceProviderExtension) {
+				return ((IResourceUIServiceProviderExtension) resourceServiceProvider).canBuild(uri, storage);
+			} else if (resourceServiceProvider instanceof IResourceUIServiceProvider) {
+				return ((IResourceUIServiceProvider) resourceServiceProvider).canHandle(uri, storage);
+			} else {
+				return resourceServiceProvider.canHandle(uri);
+			}
+		}
+		return false;
+	}
 
+	/**
+	 * @return whether there's possibly an {@link IResourceServiceProvider} for the given storage
+	 * @since 2.4
+	 */
+	public boolean isPossiblyManaged(IStorage storage) {
+		if (!registry.getContentTypeToFactoryMap().isEmpty())
+			return true;
+		String name = storage.getName();
+		if (name == null) {
+			return true;
+		}
+		name = URI.encodeSegment(name, true); 
+		int index = name.lastIndexOf('.');
+		if (index == -1) {
+			return true;
+		}
+		return registry.getExtensionToFactoryMap().containsKey(name.substring(index + 1));
+	}
 }

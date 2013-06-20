@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xtext.ui.graph.tests;
 
 import static com.google.common.collect.Maps.*;
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.Map;

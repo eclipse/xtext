@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.datatyperules;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,7 +24,7 @@ public class PartialParserTest extends AbstractXtextTests {
 	private IParseResult parseResult;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(DatatypeRulesTestLanguageStandaloneSetup.class);
 		model = "a.b.c.d: 123;\n" +
@@ -32,11 +33,11 @@ public class PartialParserTest extends AbstractXtextTests {
 		parseResult = resource.getParseResult();
 	}
 	
-	public void testSetUp() {
+	@Test public void testSetUp() {
 		assertTrue(resource.getErrors().isEmpty());
 	}
 	
-	public void testInsertSlashInFirstNode() throws Exception {
+	@Test public void testInsertSlashInFirstNode() throws Exception {
 		IParseResult parseResult = resource.getParser().reparse(this.parseResult, new ReplaceRegion(model.indexOf('3'), 0, "/"));
 		assertFalse(parseResult.hasSyntaxErrors());
 		assertEquals(0, parseResult.getRootNode().getTotalOffset());
@@ -47,7 +48,7 @@ public class PartialParserTest extends AbstractXtextTests {
 		EmfAssert.assertEObjectsEqual(getModel(newModel), resource.getParseResult().getRootASTElement());
 	}
 	
-	public void testInsertSlashInSecondNode() throws Exception {
+	@Test public void testInsertSlashInSecondNode() throws Exception {
 		IParseResult parseResult = resource.getParser().reparse(this.parseResult, new ReplaceRegion(model.indexOf('6'), 0, "/"));
 		assertFalse(parseResult.hasSyntaxErrors());
 		assertEquals(0, parseResult.getRootNode().getTotalOffset());

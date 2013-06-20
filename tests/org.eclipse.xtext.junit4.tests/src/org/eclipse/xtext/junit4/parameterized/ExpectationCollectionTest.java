@@ -2,7 +2,7 @@ package org.eclipse.xtext.junit4.parameterized;
 
 import java.util.List;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.eclipse.xtext.junit4.parameterized.ExpectationCollection;
 import org.eclipse.xtext.junit4.parameterized.ExpectationCollection.ExpectationItem;

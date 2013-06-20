@@ -15,4 +15,110 @@
             uriExtension="___xbase">
         </resourceServiceProvider>
     </extension>
+    <extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="%OpenTypeHierarchyCommand_description"
+			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
+			name="%OpenTypeHierarchyCommand_name">
+		</command>
+		<command
+			description="%OpenCallHierarchyCommand_description"
+			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
+			name="%OpenCallHierarchyCommand_name">
+		</command>
+	</extension>
+	<extension
+		point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="F4"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
+		</key>
+		<key
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+T"
+			commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy">
+		</key>
+		<key
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="CTRL+ALT+H"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
+		</key>
+	</extension>
+	<extension point="org.eclipse.search.searchResultViewPages">
+    	<viewPage
+          class="org.eclipse.jdt.internal.ui.search.JavaSearchResultPage"
+          icon="icons/searchpage.gif"
+          id="org.eclipse.jdt.ui.java_search_result"
+          searchResultClass="org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.CompositeSearchResult">
+    	</viewPage>
+ 	</extension>
+ 	
+   <!-- extract local variable refactoring -->
+   <extension point="org.eclipse.ui.commands">
+      <command
+              id="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+              name="%ExtractLocalVariableRefactoring_name"
+              description="%ExtractLocalVariableRefactoring_description">
+      </command>
+      <command
+            id="org.eclipse.xtext.xbase.ui.organizeImports"
+            name="Organize Imports">
+            description="Organize Imports"
+      </command>
+   </extension>
+    
+   <extension point="org.eclipse.ui.bindings">
+        <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+O"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports"/>
+        <key 
+            sequence="M2+M3+L"
+            commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
+        <key
+            sequence="COMMAND+ALT+L"
+            commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="carbon"/>
+        <key
+      	    sequence="M2+M3+L"
+      	    commandId=""
+      	    schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+      	    contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      	    platform="carbon"/>
+      	<key 
+      		sequence="SHIFT+ALT+L"
+      		commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+      		schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+      		contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      		platform="win32"/>
+        <key
+            sequence="M2+M3+L"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="win32"/>
+        <key
+            sequence="SHIFT+ALT+L"
+            commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="gtk"/>
+        <key
+            sequence="M2+M3+L"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="gtk"/>
+    </extension>
+	
 </plugin>

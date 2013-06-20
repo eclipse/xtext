@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.example.tutorial.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.example.tutorial.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.example.tutorial,
+ org.eclipse.xtext.example.tutorial.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.junit4,
+ org.junit;bundle-version="4.5.0",
+ org.eclipse.ui.workbench;resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.3.0",
+ org.eclipse.jdt.annotation;bundle-version="1.0.0",
+ org.eclipse.xtext.xbase.junit;bundle-version="2.3.0",
+ org.eclipse.jdt.core
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.apache.commons.logging,
+ org.junit;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.hamcrest.core
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Activator: org.eclipse.xtext.example.tutorial.ui.internal.TutorialActivator
+Export-Package: org.eclipse.xtext.example.tutorial

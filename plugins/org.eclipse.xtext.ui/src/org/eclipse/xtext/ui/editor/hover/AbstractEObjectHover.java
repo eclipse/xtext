@@ -17,6 +17,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -48,8 +49,14 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
 		if(xtextDocument == null) 
 			return null;
+		//TODO this is being called on change in the UI-thread. Not a good idea to do such expensive stuff.
+		// returning the region on a per token basis would be better.
 		return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
 			public IRegion exec(XtextResource state) throws Exception {
+				// resource can be null e.g. read only zip/jar entry
+				if (state == null) {
+					return null;
+				}
 				Pair<EObject, IRegion> element = getXtextElementAt(state, offset);
 				if (element != null) {
 					return element.getSecond();
@@ -68,6 +75,10 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 			return null;
 		return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
 			public Object exec(XtextResource state) throws Exception {
+				// resource can be null e.g. read only zip/jar entry
+				if (state == null) {
+					return null;
+				}
 				Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
 				if (element != null && element.getFirst() != null) {
 					return getHoverInfo(element.getFirst(), textViewer, hoverRegion);
@@ -95,11 +106,16 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		EObject crossLinkedEObject = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
 		if (crossLinkedEObject != null) {
 			if (!crossLinkedEObject.eIsProxy()) {
-				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-				if(leafNode.isHidden() && leafNode.getOffset() == offset) {
-					leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset - 1);
+				IParseResult parseResult = resource.getParseResult();
+				if (parseResult != null) {
+					ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
+					if(leafNode != null && leafNode.isHidden() && leafNode.getOffset() == offset) {
+						leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);
+					}
+					if (leafNode != null) {
+						return Tuples.create(crossLinkedEObject, (IRegion) new Region(leafNode.getOffset(), leafNode.getLength()));
+					}
 				}
-				return Tuples.create(crossLinkedEObject, (IRegion) new Region(leafNode.getOffset(), leafNode.getLength()));
 			}
 		} else {
 			EObject o = eObjectAtOffsetHelper.resolveElementAt(resource, offset);

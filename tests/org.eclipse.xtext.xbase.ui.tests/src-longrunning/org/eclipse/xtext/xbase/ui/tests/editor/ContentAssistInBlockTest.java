@@ -7,13 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.io.InputStream;
-
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -22,12 +18,14 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 import com.google.inject.Injector;
 
@@ -53,13 +51,25 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 
 	private IProject demandCreateProject;
 	
+	private static IProject staticProject;
+	
+	@BeforeClass
+	public static void createTestProject() throws Exception {
+		staticProject = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
+	}
+	
+	@AfterClass
+	public static void deleteTestProject() throws Exception {
+		deleteProject(staticProject);
+	}
+	
 	@Override
 	protected Injector getInjector() {
 		return XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		if (demandCreateProject != null)
 			deleteProject(demandCreateProject);
 		super.tearDown();
@@ -97,22 +107,4 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 		return result;
 	}
 	
-	public static Test suite() {
-		return new TestSetup(new TestSuite(ContentAssistInBlockTest.class)) {
-			private IProject project;
-
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
-				
-			}
-			
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
-	}
 }

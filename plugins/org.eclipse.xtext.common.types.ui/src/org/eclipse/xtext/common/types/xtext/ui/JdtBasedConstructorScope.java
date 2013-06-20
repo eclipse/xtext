@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchMatch;
@@ -42,7 +43,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JdtBasedConstructorScope extends AbstractConstructorScope {
 
 	private static final Logger logger = Logger.getLogger(JdtBasedConstructorScope.class);
@@ -66,6 +66,8 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 					if (element instanceof IMethod) {
 						IMethod constructor = (IMethod) element;
 						allScopedElements.add(createScopedElement(constructor));	
+					} else if (element instanceof IType) {
+						allScopedElements.add(createScopedElement((IType)element));
 					}
 				}
 			};
@@ -83,6 +85,13 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 	
 	public IEObjectDescription createScopedElement(IMethod constructor) {
 		return new LazyConstructorDescription(constructor, getTypeProvider().getTypeUriHelper(), getQualifiedNameConverter());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public IEObjectDescription createScopedElement(IType type) {
+		return new LazyDefaultConstructorDescription(type, getTypeProvider().getTypeUriHelper(), getQualifiedNameConverter());
 	}
 	
 	public void collectContents(IJavaSearchScope searchScope, SearchRequestor searchRequestor) throws CoreException {
@@ -116,7 +125,7 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 
 		public QualifiedName getQualifiedName() {
 			if (qualifiedName == null)
-				qualifiedName = converter.toQualifiedName(constructor.getDeclaringType().getFullyQualifiedName());
+				qualifiedName = converter.toQualifiedName(constructor.getDeclaringType().getFullyQualifiedName('.'));
 			return qualifiedName;
 		}
 
@@ -145,6 +154,64 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 		
 		protected URI computeURI() {
 			return uriHelper.getFullURI(constructor);
+		}
+		
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public static class LazyDefaultConstructorDescription extends AbstractEObjectDescription {
+
+		private final IType type;
+		private final TypeURIHelper uriHelper;
+		private final IQualifiedNameConverter converter;
+		private QualifiedName qualifiedName = null;
+		private JvmConstructor proxy = null;
+		private URI uri = null;
+
+		protected LazyDefaultConstructorDescription(IType type, TypeURIHelper uriHelper, IQualifiedNameConverter converter) {
+			this.type = type;
+			this.uriHelper = uriHelper;
+			this.converter = converter;
+		}
+		
+		public QualifiedName getName() {
+			return getQualifiedName();
+		}
+
+		public QualifiedName getQualifiedName() {
+			if (qualifiedName == null)
+				qualifiedName = converter.toQualifiedName(type.getFullyQualifiedName('.'));
+			return qualifiedName;
+		}
+
+		public JvmConstructor getEObjectOrProxy() {
+			if (proxy == null) {
+				proxy = createProxy();
+			}
+			return proxy;
+		}
+
+		public URI getEObjectURI() {
+			if (uri == null)
+				uri = computeURI();
+			return uri;
+		}
+
+		public EClass getEClass() {
+			return TypesPackage.Literals.JVM_CONSTRUCTOR;
+		}
+
+		protected JvmConstructor createProxy() {
+			InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmConstructor();
+			proxy.eSetProxyURI(getEObjectURI());
+			return (JvmConstructor) proxy;
+		}
+		
+		protected URI computeURI() {
+			String typeURI = uriHelper.getFullURI(type).toString();
+			return URI.createURI(typeURI + '.' + type.getElementName() + "()");
 		}
 		
 	}

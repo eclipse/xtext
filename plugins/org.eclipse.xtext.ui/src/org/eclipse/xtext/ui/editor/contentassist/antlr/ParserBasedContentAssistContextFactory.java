@@ -151,13 +151,13 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected ContentAssistContext[] doCreateContexts(int offset) throws BadLocationException {
 			initializeFromViewerAndResource(offset);
 			
-			if (datatypeNode != lastCompleteNode) {
+			if (!datatypeNode.equals(lastCompleteNode)) {
 				handleLastCompleteNodeAsPartOfDatatypeNode();
 			}
 
 			// 2nd context: we assume, that the current token is incomplete and try to calculate
 			// any valid grammar element by removing the current token and using it as prefix
-			if (datatypeNode == lastCompleteNode && completionOffset != lastCompleteNode.getOffset()) {
+			if (datatypeNode.equals(lastCompleteNode) && completionOffset != lastCompleteNode.getOffset()) {
 				handleLastCompleteNodeIsAtEndOfDatatypeNode();
 			}
 
@@ -306,7 +306,6 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			EObject currentGrammarElement = currentParserNode.getGrammarElement();
 			AbstractRule currentRule = getRule(currentGrammarElement);
 			for (AbstractElement grammarElement : followElements) {
-				EObject loopGrammarElement = currentGrammarElement;
 				AbstractRule rule = currentRule;
 				ICompositeNode loopParserNode = currentParserNode;
 				EObject loopLastGrammarElement = lastCompleteNode.getGrammarElement();
@@ -315,7 +314,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 					loopParserNode = loopParserNode.getParent();
 					while (loopParserNode.getGrammarElement() == null && loopParserNode.getParent() != null)
 						loopParserNode = loopParserNode.getParent();
-					loopGrammarElement = loopParserNode.getGrammarElement();
+					EObject loopGrammarElement = loopParserNode.getGrammarElement();
 					rule = getRule(loopGrammarElement);
 				}
 				EObject context = loopParserNode.getSemanticElement();
@@ -362,9 +361,27 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 								EObject container = abstractElement.eContainer();
 								if (container instanceof Group) {
 									Group group = (Group) container;
-									if (group.getElements().get(group.getElements().size() - 1) == abstractElement) {
+									int idx = group.getElements().indexOf(abstractElement);
+									if (idx == group.getElements().size() - 1) {
 										if (!currentState.contains(group) && GrammarUtil.isMultipleCardinality(group)) {
 											calculator.doSwitch(group);
+										}
+									} else if (idx < group.getElements().size() - 1 && "?".equals(abstractElement.getCardinality())) { // loops are fine
+										AbstractElement nextElement = group.getElements().get(idx + 1);
+										if (!currentState.contains(nextElement)) {
+											calculator.doSwitch(nextElement);
+										}
+									}
+								}
+							} else if (isAlternativeWithEmptyPath(abstractElement)) {
+								EObject container = abstractElement.eContainer();
+								if (container instanceof Group) {
+									Group group = (Group) container;
+									int idx = group.getElements().indexOf(abstractElement);
+									if (!currentState.contains(group) && idx != group.getElements().size() - 1) {
+										AbstractElement next = group.getElements().get(idx + 1);
+										if (!currentState.contains(next)) {
+											calculator.doSwitch(next);
 										}
 									}
 								}
@@ -391,6 +408,17 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			}
 		}
 
+		private boolean isAlternativeWithEmptyPath(AbstractElement abstractElement) {
+			if (abstractElement instanceof Alternatives) {
+				Alternatives alternatives = (Alternatives) abstractElement;
+				for(AbstractElement path: alternatives.getElements()) {
+					if (GrammarUtil.isOptionalCardinality(path))
+						return true;
+				}
+			}
+			return false;
+		}
+
 		public INode getContainingDatatypeRuleNode(INode node) {
 			INode result = node;
 			EObject grammarElement = result.getGrammarElement();
@@ -403,6 +431,13 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				}
 			}
 			return result;
+		}
+
+		/**
+		 * @since 2.4
+		 */
+		protected int getCompletionOffset(){
+			return completionOffset;
 		}
 
 		public ContentAssistContext.Builder doCreateContext(

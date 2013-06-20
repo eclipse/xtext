@@ -12,13 +12,15 @@ Require-Bundle: org.eclipse.xtext.example.fowlerdsl;visibility:=reexport,
  org.eclipse.xtext.ui.shared,
  org.eclipse.ui,
  org.eclipse.xtext.builder,
- org.antlr.runtime,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare
-Import-Package: org.apache.log4j,
+Import-Package: org.apache.log4j;version="1.2.15",
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example.fowlerdsl.ui.contentassist.antlr,
- org.eclipse.xtext.example.fowlerdsl.ui.internal
+ org.eclipse.xtext.example.fowlerdsl.ui.internal,
+ org.eclipse.xtext.example.fowlerdsl.ui.contentassist,
+ org.eclipse.xtext.example.fowlerdsl.ui.quickfix
 Bundle-Activator: org.eclipse.xtext.example.fowlerdsl.ui.internal.StatemachineActivator

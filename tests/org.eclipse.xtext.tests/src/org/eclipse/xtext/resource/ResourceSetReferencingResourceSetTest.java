@@ -7,21 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ResourceSetReferencingResourceSetTest extends TestCase {
+public class ResourceSetReferencingResourceSetTest extends Assert {
 	
-	public void testSimple() throws Exception {
+	@Test public void testSimple() throws Exception {
 		ResourceSetReferencingResourceSetImpl set1 = new ResourceSetReferencingResourceSetImpl();
 		Resource resource = getResource("foo1","foo2");
 		set1.getResources().add(resource);
@@ -40,7 +40,7 @@ public class ResourceSetReferencingResourceSetTest extends TestCase {
 		
 	}
 	
-	public void testNotTranitive() throws Exception {
+	@Test public void testNotTranitive() throws Exception {
 		ResourceSetReferencingResourceSetImpl set1 = new ResourceSetReferencingResourceSetImpl();
 		Resource resource = getResource("foo1","foo3");
 		set1.getResources().add(resource);
@@ -58,7 +58,7 @@ public class ResourceSetReferencingResourceSetTest extends TestCase {
 		assertTrue(((InternalEObject)eClass).eIsProxy());
 	}
 	
-	public void testShadowing() throws Exception {
+	@Test public void testShadowing() throws Exception {
 		ResourceSetReferencingResourceSetImpl set1 = new ResourceSetReferencingResourceSetImpl();
 		Resource resource = getResource("foo1","foo2");
 		set1.getResources().add(resource);

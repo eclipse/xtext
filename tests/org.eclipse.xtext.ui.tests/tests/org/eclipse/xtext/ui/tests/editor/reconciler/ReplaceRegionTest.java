@@ -7,29 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.reconciler;
 
-import junit.framework.TestCase;
-
 import org.eclipse.xtext.ui.editor.reconciler.ReplaceRegion;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class ReplaceRegionTest extends TestCase {
+public class ReplaceRegionTest extends Assert {
 
 	private ReplaceRegion mergedReplace;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see junit.framework.TestCase#setUp()
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		mergedReplace = null;
 	}
 
-	public void testNonOverlappingLeftContinuousRegions() {
+	@Test public void testNonOverlappingLeftContinuousRegions() {
 		String document = "0123456789";
 		document = checkReplace(document, new ReplaceRegion(8, 1, "ab"));
 		assertEquals("01234567ab9", document);
@@ -70,7 +65,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(6, mergedReplace.getLength());
 	}
 
-	public void testNonOverlappingLeftNonContinuousRegions() {
+	@Test public void testNonOverlappingLeftNonContinuousRegions() {
 		String document = "0123456789";
 		document = checkReplace(document, new ReplaceRegion(9, 1, "ab"));
 		assertEquals("012345678ab", document);
@@ -97,7 +92,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(8, mergedReplace.getLength());
 	}
 
-	public void testDeleteInsertNonContiguousRegion() throws Exception {
+	@Test public void testDeleteInsertNonContiguousRegion() throws Exception {
 		String document = "0123456789";
 		document = checkReplace(document, new ReplaceRegion(4, 2, "abc"));
 		assertEquals("0123abc6789", document);
@@ -131,7 +126,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(8, mergedReplace.getLength());
 	}
 
-	public void testNonOverlappingRightContinuousRegions() {
+	@Test public void testNonOverlappingRightContinuousRegions() {
 		String document = "0123456789";
 		document = checkReplace(document, new ReplaceRegion(1, 1, "ab"));
 		assertEquals("0ab23456789", document);
@@ -172,7 +167,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(6, mergedReplace.getLength());
 	}
 
-	public void testNonOverlappingRightNonContinuousRegions() {
+	@Test public void testNonOverlappingRightNonContinuousRegions() {
 		String document = "0123456789";
 		document = checkReplace(document, new ReplaceRegion(1, 1, "ab"));
 		assertEquals("0ab23456789", document);
@@ -199,7 +194,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(8, mergedReplace.getLength());
 	}
 
-	public void testMergeOverlappingRegionsLeft() throws Exception {
+	@Test public void testMergeOverlappingRegionsLeft() throws Exception {
 		String document = "0123456789";
 		document = checkReplace(document, new ReplaceRegion(4, 2, "abc"));
 		assertEquals("0123abc6789", document);
@@ -226,7 +221,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(5, mergedReplace.getLength());
 	}
 
-	public void testMergeOverlappingRegionsRight() throws Exception {
+	@Test public void testMergeOverlappingRegionsRight() throws Exception {
 		String document = "0123456789";
 		document = checkReplace(document, new ReplaceRegion(4, 2, "abc"));
 		assertEquals("0123abc6789", document);
@@ -253,7 +248,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(5, mergedReplace.getLength());
 	}
 
-	public void testMultiAppend() throws Exception {
+	@Test public void testMultiAppend() throws Exception {
 		String document = "a";
 		document = checkReplace(document, new ReplaceRegion(1, 0, "b"));
 		assertEquals("ab", document);
@@ -264,7 +259,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals("bc", mergedReplace.getText());
 	}
 
-	public void testMultiPrepend() throws Exception {
+	@Test public void testMultiPrepend() throws Exception {
 		String document = "a";
 		document = checkReplace(document, new ReplaceRegion(0, 0, "b"));
 		assertEquals("ba", document);
@@ -275,7 +270,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(0, mergedReplace.getLength());
 	}
 
-	public void testMultiDeleteHead() throws Exception {
+	@Test public void testMultiDeleteHead() throws Exception {
 		String document = "abc";
 		document = checkReplace(document, new ReplaceRegion(0, 1, ""));
 		assertEquals("bc", document);
@@ -286,7 +281,7 @@ public class ReplaceRegionTest extends TestCase {
 		assertEquals(2, mergedReplace.getLength());
 	}
 	
-	public void testMultiDeleteTail() throws Exception {
+	@Test public void testMultiDeleteTail() throws Exception {
 		String document = "abc";
 		document = checkReplace(document, new ReplaceRegion(2, 1, ""));
 		assertEquals("ab", document);

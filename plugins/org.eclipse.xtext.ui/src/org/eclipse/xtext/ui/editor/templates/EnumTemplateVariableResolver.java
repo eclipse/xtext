@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jface.text.templates.TemplateVariable;
+import org.eclipse.xtext.Grammar;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -30,8 +31,10 @@ public class EnumTemplateVariableResolver extends
 			XtextTemplateContext castedContext) {
 		String enumerationName = (String) variable.getVariableType()
 				.getParams().iterator().next();
-		EEnum enumeration = (EEnum) getEClassifierForGrammar(enumerationName,
-				getGrammar(castedContext));
+		Grammar grammar = getGrammar(castedContext);
+		if (grammar == null)
+			return Collections.emptyList();
+		EEnum enumeration = (EEnum) getEClassifierForGrammar(enumerationName, grammar);
 		if (enumeration == null) {
 			return Collections.emptyList();
 		}

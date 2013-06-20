@@ -23,8 +23,8 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 	xxx yyy zzz
 	---	*/
 	
-	// XPECT select1 from fo!o to b!az --> o='val' bar='val1' b
-	// XPECT select2 from fo!o to b!az --> o='val' bar='val1' b
+	// XPECT select1 from fo|o to b|az --> o='val' bar='val1' b
+	// XPECT select2 from fo|o to b|az --> o='val' bar='val1' b
 
 Root:
 	foo='val' bar='val1' baz='xxx'

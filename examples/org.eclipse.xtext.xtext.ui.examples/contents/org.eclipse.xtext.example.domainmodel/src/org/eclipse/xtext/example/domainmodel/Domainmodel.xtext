@@ -10,13 +10,11 @@ grammar org.eclipse.xtext.example.domainmodel.Domainmodel with org.eclipse.xtext
 generate domainmodel "http://www.xtext.org/example/Domainmodel"
 
 DomainModel:
+	importSection=XImportSection?
 	elements+=AbstractElement*;
-
+	
 AbstractElement:
-	PackageDeclaration | Entity | Import;
-
-Import:
-	'import' importedNamespace=QualifiedNameWithWildCard;
+	PackageDeclaration | Entity;
 
 PackageDeclaration:
 	'package' name=QualifiedName '{'
@@ -35,8 +33,5 @@ Property:
 	name=ValidID ':' type=JvmTypeReference;
 
 Operation:
-	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' ':' type=JvmTypeReference 
+	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' (':' type=JvmTypeReference)? 
 		body=XBlockExpression;
-
-QualifiedNameWithWildCard :
-	QualifiedName  ('.' '*')?;

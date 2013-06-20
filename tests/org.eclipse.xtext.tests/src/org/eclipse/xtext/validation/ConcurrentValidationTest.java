@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import junit.framework.AssertionFailedError;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,18 +21,18 @@ public class ConcurrentValidationTest extends AbstractXtextTests {
 	private ValidationTestHelper helper;
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		helper = null;
 		super.tearDown();
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		helper = new ValidationTestHelper();
 	}
 
-	public void testConcurrentValidation() {
+	@Test public void testConcurrentValidation() {
 		AbstractDeclarativeValidator validator = new ValidationTestHelper.TestValidator() {
 			@Override
 			protected void foo(EStructuralFeature x) {
@@ -77,7 +76,7 @@ public class ConcurrentValidationTest extends AbstractXtextTests {
 
 		private final AbstractDeclarativeValidator validator;
 		private IllegalStateException lastEx;
-		private AssertionFailedError lastError;
+		private AssertionError lastError;
 
 		private PoorMansValidationJob(AbstractDeclarativeValidator validator) {
 			this.validator = validator;
@@ -90,7 +89,7 @@ public class ConcurrentValidationTest extends AbstractXtextTests {
 				helper.assertMatch(diagnostics, EcorePackage.Literals.ENAMED_ELEMENT__NAME, EcorePackage.Literals.ECLASS__ABSTRACT);
 			} catch(IllegalStateException e) {
 				lastEx = e;
-			} catch(AssertionFailedError error) {
+			} catch(AssertionError error) {
 				lastError = error;
 			}
 		}

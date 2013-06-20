@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.purexbase.ui
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.4.3.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
@@ -12,13 +12,24 @@ Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
  org.eclipse.xtext.ui.shared,
  org.eclipse.ui,
  org.eclipse.xtext.builder,
- org.antlr.runtime,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.xbase.ui,
- org.eclipse.jdt.core
-Import-Package: org.apache.log4j,
- org.apache.commons.logging
+ org.eclipse.jdt.core,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.apache.commons.logging,
+ org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtext.purexbase.ui.contentassist.antlr,
- org.eclipse.xtext.purexbase.ui.internal
+Export-Package: org.eclipse.xtext.purexbase.ui,
+ org.eclipse.xtext.purexbase.ui.autoedit,
+ org.eclipse.xtext.purexbase.ui.contentassist,
+ org.eclipse.xtext.purexbase.ui.contentassist.antlr,
+ org.eclipse.xtext.purexbase.ui.contentassist.antlr.internal,
+ org.eclipse.xtext.purexbase.ui.folding,
+ org.eclipse.xtext.purexbase.ui.internal,
+ org.eclipse.xtext.purexbase.ui.labeling,
+ org.eclipse.xtext.purexbase.ui.outline,
+ org.eclipse.xtext.purexbase.ui.quickfix
 Bundle-Activator: org.eclipse.xtext.purexbase.ui.internal.PureXbaseActivator

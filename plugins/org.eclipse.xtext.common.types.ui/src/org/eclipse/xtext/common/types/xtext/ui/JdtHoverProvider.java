@@ -26,7 +26,6 @@ import com.google.inject.Inject;
  * @author Christoph Kulla - Initial contribution and API
  * @author Sven Efftinge
  */
-@SuppressWarnings("restriction")
 public class JdtHoverProvider implements IEObjectHoverProvider {
 
 	@Inject
@@ -38,7 +37,7 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 		if (eObject instanceof JvmIdentifiableElement) {
 			JvmIdentifiableElement jvmIdentifiableElement = (JvmIdentifiableElement) eObject;
 			IJavaElement javaElement = javaElementFinder.findElementFor(jvmIdentifiableElement);
-			if (javaElement!=null) {
+			if (javaElement!=null && javaElement.exists()) {
 				javadocHover.setJavaElement(javaElement);
 				final Object hoverInfo2 = javadocHover.getHoverInfo2(viewer, region);
 				return new IInformationControlCreatorProvider() {
@@ -57,11 +56,14 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 		return null;
 	}
 	
-	static class JavadocHoverWrapper extends JavadocHover {
+	/**
+	 * @since 2.3
+	 */
+	public static class JavadocHoverWrapper extends JavadocHover {
 
-		IJavaElement currentElement;
+		private IJavaElement currentElement;
 		
-		void setJavaElement (IJavaElement element) {
+		public void setJavaElement (IJavaElement element) {
 			currentElement = element;
 		}
 		

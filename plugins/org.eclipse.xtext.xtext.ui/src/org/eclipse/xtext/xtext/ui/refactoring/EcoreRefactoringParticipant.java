@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.ui.refactoring;
 
 import static java.util.Collections.*;
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 			TypeRef returnType = ((ParserRule) originalTarget).getType();
 			if (returnType != null && returnType.getClassifier() != null
 					&& !Strings.isEmpty(returnType.getClassifier().getName())
+					&& equal(((ParserRule) originalTarget).getName(), returnType.getClassifier().getName())
 					&& returnType.getClassifier().eClass() != null && returnType.getClassifier().getEPackage() != null
 					&& !Strings.isEmpty(returnType.getClassifier().getEPackage().getNsURI())) {
 				String packageNsURI = returnType.getClassifier().getEPackage().getNsURI();

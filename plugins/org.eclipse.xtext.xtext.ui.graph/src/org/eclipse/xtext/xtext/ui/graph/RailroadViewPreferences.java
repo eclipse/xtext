@@ -27,6 +27,7 @@ public class RailroadViewPreferences extends AbstractPreferenceInitializer {
 	
 	public static final String LINK_WITH_EDITOR_KEY = "linkWithEditor";
 
+	@SuppressWarnings("deprecation")
 	public RailroadViewPreferences() {
 		preferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), "Xtext Grammar View");
 	}

@@ -14,6 +14,8 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.core.Flags;
+import org.eclipse.jdt.internal.ui.JavaPlugin;
+import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -38,7 +40,9 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -50,7 +54,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCreator implements RepeatedContentAssistProcessor.ModeAware {
 
 	private int mode;
@@ -151,6 +154,11 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 							} else {
 								((ConfigurableCompletionProposal) result).setImage(computeImage((JvmFeature)eObjectOrProxy));
 							}
+						}
+					} 
+					else if (from instanceof LocalVarDescription && !from.getQualifiedName().equals(XbaseScopeProvider.THIS)){
+						if (result instanceof ConfigurableCompletionProposal) {
+							((ConfigurableCompletionProposal) result).setImage(JavaPlugin.getImageDescriptorRegistry().get(JavaPluginImages.DESC_OBJS_LOCAL_VARIABLE));
 						}
 					}
 					return result;
@@ -292,7 +300,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 			if (declaringType instanceof JvmEnumerationType)
 				flags |= Flags.AccEnum;
 			return computeFieldImage(interfaceOrAnnotation, flags, decorator);
-		}
+		} 
 		return null;
 	}
 

@@ -53,8 +53,13 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 /**
+ * use org.xpect.runner.XpectRunner from www.xpect-tests.org instead.
+ * 
+ * This class will be removed in the next release after 2.4.2
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 
 	protected static class MethodWithExpectation {
@@ -216,10 +221,6 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 			ParameterSetRunner runner = injectorProvider.getInjector().getInstance(ParameterSetRunner.class);
 			runner.init(this, title, method, params, expectation, ignore);
 			parameterSets.add(runner);
-		}
-
-		public void acceptTestClass(Class<?> t) {
-			Assert.assertEquals(clazz, t);
 		}
 
 		protected void collectParameters() {

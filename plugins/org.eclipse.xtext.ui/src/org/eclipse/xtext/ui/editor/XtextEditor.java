@@ -33,6 +33,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension3;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.TextUtilities;
@@ -81,17 +82,19 @@ import org.eclipse.ui.texteditor.TextNavigationAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.model.CommonWordIterator;
 import org.eclipse.xtext.ui.editor.model.DocumentCharacterIterator;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
@@ -112,6 +115,20 @@ import com.google.inject.name.Named;
 public class XtextEditor extends TextEditor {
 	public static final String ERROR_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.error";
 	public static final String WARNING_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.warning";
+	/**
+	 * @since 2.3
+	 */
+	public static final String INFO_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.info";
+
+	/**
+	 * @since 2.2
+	 */
+	public static final String KEY_BINDING_SCOPE = "org.eclipse.xtext.ui.editor.XtextEditor.KEY_BINDING_SCOPE";
+
+	/**
+	 * @since 2.2
+	 */
+	public static final String DEFAULT_KEY_BINDING_SCOPE = "org.eclipse.xtext.ui.XtextEditorScope";
 
 	private static final Logger log = Logger.getLogger(XtextEditor.class);
 
@@ -148,6 +165,17 @@ public class XtextEditor extends TextEditor {
 	
 	@Inject
 	private TextAttributeProvider textAttributeProvider;
+	
+	/**
+	 * @since 2.4
+	 */
+	@Inject
+	private ITokenTypeToPartitionTypeMapperExtension tokenTypeToPartitionTypeMapperExtension;
+
+	@Inject 
+	private IImageHelper imageHelper;
+	
+	private String keyBindingScope;
 
 	private ISelectionChangedListener selectionChangedListener;
 
@@ -160,6 +188,7 @@ public class XtextEditor extends TextEditor {
 	};
 
 	private String languageName;
+	
 
 	public XtextEditor() {
 		if (log.isDebugEnabled())
@@ -177,6 +206,19 @@ public class XtextEditor extends TextEditor {
 
 	public String getLanguageName() {
 		return languageName;
+	}
+
+	/**
+	 * Note: Not injected directly into field as {@link #initializeKeyBindingScopes()} is called by constructor.
+	 * 
+	 * @since 2.2
+	 */
+	@Inject(optional = true)
+	public void setKeyBindingScope(@Named(KEY_BINDING_SCOPE) String scope) {
+		if (scope != null) {
+			this.keyBindingScope = scope;
+			initializeKeyBindingScopes();
+		}
 	}
 
 	@Override
@@ -202,6 +244,8 @@ public class XtextEditor extends TextEditor {
 
 		// source viewer setup
 		setSourceViewerConfiguration(sourceViewerConfiguration);
+
+		sourceViewerConfiguration.setEditor(this);
 
 		setPreferenceStore(preferenceStoreAccess.getContextPreferenceStore(input));
 
@@ -243,11 +287,11 @@ public class XtextEditor extends TextEditor {
 	}
 	
 	/**
-	 * Set key binding scope. Needed to make F3 work properly.
+	 * Set key binding scope. Required for custom key bindings (e.g. F3).
 	 */
 	@Override
 	protected void initializeKeyBindingScopes() {
-		setKeyBindingScopes(new String[] { "org.eclipse.xtext.ui.XtextEditorScope" }); //$NON-NLS-1$
+		setKeyBindingScopes(new String[] { keyBindingScope != null ? keyBindingScope : DEFAULT_KEY_BINDING_SCOPE });
 	}
 
 	public IResource getResource() {
@@ -268,7 +312,8 @@ public class XtextEditor extends TextEditor {
 	}
 
 	private IContentOutlinePage getContentOutlinePage() {
-		if (outlinePage == null) {
+		// don't create outline page if the editor was already disposed
+		if (outlinePage == null && getSourceViewer() != null) {
 			outlinePage = createOutlinePage();
 		}
 		return outlinePage;
@@ -432,8 +477,14 @@ public class XtextEditor extends TextEditor {
 	protected ProjectionSupport installProjectionSupport(ProjectionViewer projectionViewer) {
 		ProjectionSupport projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(),
 				getSharedColors());
+<<<<<<< HEAD
 		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE); 
 		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE); 
+=======
+		projectionSupport.addSummarizableAnnotationType(INFO_ANNOTATION_TYPE);
+		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE);
+		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE);
+>>>>>>> 7e3b443d2790a0d563fc78dbecd55fb3e86145e5
 		projectionSupport.setAnnotationPainterDrawingStrategy(projectionAnnotationDrawingStrategy);
 		projectionSupport.install();
 		return projectionSupport;
@@ -582,7 +633,7 @@ public class XtextEditor extends TextEditor {
 		IEditorRegistry editorRegistry = PlatformUI.getWorkbench().getEditorRegistry();
 		IEditorDescriptor editorDesc = editorRegistry.findEditor(getSite().getId());
 		ImageDescriptor imageDesc = editorDesc != null ? editorDesc.getImageDescriptor() : null;
-		return imageDesc != null ? imageDesc.createImage() : super.getDefaultImage();
+		return imageDesc != null ? imageHelper.getImage(imageDesc) : super.getDefaultImage();
 	}
 
 	/*
@@ -771,13 +822,12 @@ public class XtextEditor extends TextEditor {
 		 */
 		@Override
 		public void run() {
-			// TODO preferences
 			// Check whether we are in a java code partition and the preference is enabled
-			//			final IPreferenceStore store= getPreferenceStore();
-			//			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
-			//				super.run();
-			//				return;
-			//			}
+			final IPreferenceStore store= getPreferenceStore();
+			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
+				super.run();
+				return;
+			}
 
 			final ISourceViewer viewer = getSourceViewer();
 			final IDocument document = viewer.getDocument();
@@ -988,13 +1038,12 @@ public class XtextEditor extends TextEditor {
 		 */
 		@Override
 		public void run() {
-			// TODO preferences
 			// Check whether we are in a java code partition and the preference is enabled
-			//			final IPreferenceStore store= getPreferenceStore();
-			//			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
-			//				super.run();
-			//				return;
-			//			}
+			final IPreferenceStore store= getPreferenceStore();
+			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
+				super.run();
+				return;
+			}
 
 			final ISourceViewer viewer = getSourceViewer();
 			final IDocument document = viewer.getDocument();
@@ -1223,6 +1272,7 @@ public class XtextEditor extends TextEditor {
 				// Should not happen
 			}
 
+<<<<<<< HEAD
 			int index = super.getLineStartPosition(document, line, length, offset);
 			if (type.equals(TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION)
 					|| type.equals(TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION)) {
@@ -1242,10 +1292,66 @@ public class XtextEditor extends TextEditor {
 					do {
 						++index;
 					} while (index < length && Character.isWhitespace(line.charAt(index)));
+=======
+			int lineStartPosition = super.getLineStartPosition(document, line, length, offset);
+			if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(type)
+					|| tokenTypeToPartitionTypeMapperExtension.isSingleLineComment(type)) {
+				try {
+					IRegion lineInformation = document.getLineInformationOfOffset(offset);
+					int offsetInLine = offset - lineInformation.getOffset();
+					return getCommentLineStartPosition(line, length, offsetInLine, lineStartPosition);
+				} catch(BadLocationException e) {
+					// Should not happen
+				}
+			} 
+			if (type.equals(IDocument.DEFAULT_CONTENT_TYPE)) {
+				if (isStartOfSingleLineComment(line, length, lineStartPosition) && !isStartOfMultiLineComment(line, length, lineStartPosition)) {
+					return getTextStartPosition(line, length, lineStartPosition + 1);
+>>>>>>> 7e3b443d2790a0d563fc78dbecd55fb3e86145e5
 				}
 			}
-			return index;
+			return lineStartPosition;
 		}
+
+		private int getCommentLineStartPosition(final String line, final int length, int offsetInLine, int lineStartPosition) {
+			if (isMiddleOfMultiLineComment(line, length, lineStartPosition)) {
+				return getTextStartPosition(line, length, lineStartPosition);
+			} 
+			if (isStartOfMultiLineComment(line, length, lineStartPosition)) {
+				int textStartPosition = getTextStartPosition(line, length, lineStartPosition + 2);
+				if (offsetInLine <= textStartPosition) {
+					return lineStartPosition;
+				}
+				return lineStartPosition < textStartPosition ? textStartPosition : lineStartPosition;
+			} 
+			if (isStartOfSingleLineComment(line, length, lineStartPosition)) {
+				return getTextStartPosition(line, length, lineStartPosition + 1);
+			}
+			return lineStartPosition;
+		}
+
+		private boolean isStartOfSingleLineComment(final String line, final int length, int index) {
+			return index < length - 1 && line.charAt(index) == '/'
+					&& (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*');
+		}
+
+		private boolean isStartOfMultiLineComment(final String line, final int length, int index) {
+			return index < length - 2 && line.charAt(index) == '/'
+					&& (line.charAt(index + 1) == '*' && line.charAt(index + 2) == '*');
+		}
+
+		private boolean isMiddleOfMultiLineComment(final String line, final int length, int index) {
+			return index < length - 1 && line.charAt(index) == '*' && line.charAt(index + 1) != '/';
+		}
+
+		private int getTextStartPosition(final String line, final int length, int index) {
+			int textStartPosition = index;
+			do {
+				++textStartPosition;
+			} while (textStartPosition < length && Character.isWhitespace(line.charAt(textStartPosition)));
+			return textStartPosition;
+		}
+		
 	}
 
 }

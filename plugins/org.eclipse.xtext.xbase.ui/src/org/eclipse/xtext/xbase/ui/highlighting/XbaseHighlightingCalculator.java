@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
@@ -40,11 +42,14 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.google.common.collect.Maps;
@@ -73,8 +78,10 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	private BitSet idLengthsToHighlight;
 
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		if (resource == null || resource.getParseResult() == null
-				|| resource.getParseResult().getRootASTElement() == null)
+		if (resource == null)
+			return;
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult == null || parseResult.getRootASTElement() == null)
 			return;
 		if (highlightedIdentifiers == null) {
 			highlightedIdentifiers = initializeHighlightedIdentifiers();
@@ -83,9 +90,14 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				idLengthsToHighlight.set(s.length());
 			}
 		}
+		//TODO remove this check when the typesystem works without a java project
+		if (resource.isValidationDisabled()) {
+			highlightSpecialIdentifiers(acceptor, parseResult.getRootNode());
+			return;
+		}
 		doProvideHighlightingFor(resource, acceptor);
 	}
-
+	
 	/**
 	 * <p>
 	 * Actual implementation of the semantic highlighting calculation. It is ensured, that the given resource is not
@@ -101,20 +113,29 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	 *            the acceptor. Is never <code>null</code>.
 	 */
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		ICompositeNode node = resource.getParseResult().getRootNode();
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult == null)
+			throw new IllegalStateException("resource#parseResult may not be null");
+		ICompositeNode node = parseResult.getRootNode();
 		highlightSpecialIdentifiers(acceptor, node);
 		searchAndHighlightElements(resource, acceptor);
 	}
 
 	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		TreeIterator<EObject> iterator = resource.getAllContents();
+		TreeIterator<EObject> iterator = EcoreUtil2.eAll(resource.getParseResult().getRootASTElement());
 		while (iterator.hasNext()) {
 			EObject object = iterator.next();
 			if (object instanceof XAbstractFeatureCall) {
+				if (((XAbstractFeatureCall) object).isPackageFragment()) {
+					iterator.prune();
+					continue;
+				}
 				computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
 			}
 			// Handle XAnnotation in a special way because we want the @ highlighted too
-			if (object instanceof XAnnotation) {
+			if (object instanceof XNumberLiteral) {
+				highlightNumberLiterals((XNumberLiteral) object, acceptor);
+			} if (object instanceof XAnnotation) {
 				highlightAnnotation((XAnnotation) object, acceptor);
 			} else {
 				computeReferencedJvmTypeHighlighting(acceptor, object);
@@ -139,8 +160,9 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 
 	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
 			EReference reference, EObject resolvedReferencedObject) {
-		if(resolvedReferencedObject instanceof JvmAnnotationType)
+		if(resolvedReferencedObject instanceof JvmAnnotationType){
 			highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.ANNOTATION);
+		}
 	}
 
 	protected void computeFeatureCallHighlighting(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor) {
@@ -158,19 +180,41 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				if (jvmOperation.isStatic())
 					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 			}
-			if (featureCall instanceof XMemberFeatureCall || (featureCall instanceof XAssignment && ((XAssignment)featureCall).getValue() != null)){
+			XExpression implicitReceiver = featureCall.getImplicitReceiver();
+			if (featureCall instanceof  XMemberFeatureCall){
+				XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if(featureCall.getImplicitReceiver() != null || ((JvmOperation) feature).isStatic()){
-						highlightFeatureCall(featureCall, acceptor, 
+					if(((JvmOperation) feature).isStatic() && !casted.isStaticWithDeclaringType()){
+							highlightFeatureCall(featureCall, acceptor, 
 								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 					}
+					if(implicitReceiver != null){
+							highlightFeatureCall(featureCall, acceptor, 
+								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+					}
+				}
+			}
+			if((featureCall instanceof XAssignment && ((XAssignment)featureCall).getValue() != null)){
+				if(!feature.eIsProxy() && feature instanceof JvmOperation){
+					if(implicitReceiver instanceof XMemberFeatureCall){
+						if(((XMemberFeatureCall) implicitReceiver).getFeature() instanceof JvmField)
+							highlightFeatureCall(featureCall, acceptor, 
+									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+					}
+				}
+			}
+			if (featureCall instanceof XFeatureCall){
+				if(!feature.eIsProxy() && feature instanceof JvmOperation){
+					if((implicitReceiver != null && ((JvmOperation) feature).isStatic()))
+							highlightFeatureCall(featureCall, acceptor, 
+									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 				}
 			}
 			if (featureCall instanceof XFeatureCall || featureCall instanceof XAssignment) {
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
 					if(featureCall.getImplicitFirstArgument() != null){
 						highlightFeatureCall(featureCall, acceptor, 
-								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION_WITH_IMPLICIT_ARGUMENT);
+								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 					}
 				}
 			}
@@ -180,17 +224,33 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		}
 	}
 
-	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor,String id) {
-		highlightObjectAtFeature(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, id);
+	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor, String id) {
+		if (featureCall.isTypeLiteral()) {
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(featureCall);
+			highlightNode(node, id, acceptor);
+		} else {
+			highlightObjectAtFeature(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, id);
+		}
 	}
 	
 	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
-		JvmAnnotationType annotationType = annotation.getAnnotationType();
-		if (annotationType != null && !annotationType.eIsProxy()) {
-			ICompositeNode node = NodeModelUtils.findActualNodeFor(annotation);
-			acceptor.addPosition(node.getOffset(), node.getLength(), XbaseHighlightingConfiguration.ANNOTATION);
+		JvmType annotationType = annotation.getAnnotationType();
+		if (annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType) {
+			ICompositeNode xannotationNode = NodeModelUtils.findActualNodeFor(annotation);
+			if (xannotationNode != null) {
+				ILeafNode firstLeafNode = NodeModelUtils.findLeafNodeAtOffset(xannotationNode, xannotationNode.getOffset() );
+				if(firstLeafNode != null)
+					highlightNode(firstLeafNode, XbaseHighlightingConfiguration.ANNOTATION, acceptor);
+			}
+			highlightObjectAtFeature(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, XbaseHighlightingConfiguration.ANNOTATION);
 		}
 	}
+	
+	protected void highlightNumberLiterals(XNumberLiteral literal, IHighlightedPositionAcceptor acceptor) {
+		ICompositeNode node = NodeModelUtils.findActualNodeFor(literal);
+		acceptor.addPosition(node.getOffset(), node.getLength(), DefaultHighlightingConfiguration.NUMBER_ID);
+	}
+	
 
 	protected void highlightSpecialIdentifiers(IHighlightedPositionAcceptor acceptor, ICompositeNode root) {
 		TerminalRule idRule = grammarAccess.getIDRule();
@@ -235,9 +295,9 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	 * Highlights an object at the position of the given {@link EStructuralFeature}
 	 */
 	protected void highlightObjectAtFeature(IHighlightedPositionAcceptor acceptor, EObject object, EStructuralFeature feature, String id) {
-		List<INode> childs = NodeModelUtils.findNodesForFeature(object, feature);
-		if (childs.size() > 0)
-			highlightNode(childs.get(0), id, acceptor);
+		List<INode> children = NodeModelUtils.findNodesForFeature(object, feature);
+		if (children.size() > 0)
+			highlightNode(children.get(0), id, acceptor);
 	}
 	
 	/**

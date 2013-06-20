@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug286935TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -34,13 +33,13 @@ public class Bug286935Test extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
-	public void testBug286935_01() throws Exception {
+	@Test public void testBug286935_01() throws Exception {
     	newBuilder()
     		.append("init cond")
     		.assertText("cond", "\"Label\"");
     }
     
-    public void testBug286935_02() throws Exception {
+    @Test public void testBug286935_02() throws Exception {
     	newBuilder()
     		.append("init cond ")
     		.assertText("state", 
@@ -49,7 +48,4 @@ public class Bug286935Test extends AbstractContentAssistProcessorTest {
     				"final");
     }
 
-    public static Test suite() {
-		return AbstractContentAssistProcessorTest.suite(Bug286935Test.class);
-	}
 }

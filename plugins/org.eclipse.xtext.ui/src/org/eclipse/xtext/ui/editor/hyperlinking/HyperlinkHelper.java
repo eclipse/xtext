@@ -80,9 +80,21 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 			return;
 		EObject crossLinkedEObject = eObjectAtOffsetHelper.getCrossReferencedElement(crossRefNode);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
-			Region region = new Region(crossRefNode.getOffset(), crossRefNode.getLength());
-			createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
+			createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 		}
+	}
+
+	/**
+	 * Produces hyperlinks for the given {@code node} which is associated with a cross reference
+	 * that points to the referenced {@code target}.
+	 * 
+	 * @see #createHyperlinksTo(XtextResource, Region, EObject, IHyperlinkAcceptor)
+	 * 
+	 * @since 2.4
+	 */
+	protected void createHyperlinksTo(XtextResource resource, INode node, EObject target, IHyperlinkAcceptor acceptor) {
+		Region region = new Region(node.getOffset(), node.getLength());
+		createHyperlinksTo(resource, region, target, acceptor);
 	}
 	
 	/**
@@ -97,11 +109,14 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		return getParentNodeWithCrossReference(startNode.getParent());
 	}
 	
-	public void createHyperlinksTo(XtextResource from, Region region, EObject to, IHyperlinkAcceptor acceptor) {
+	/**
+	 * Produces hyperlinks for the given {@code region} that point to the referenced {@code target}.
+	 */
+	public void createHyperlinksTo(XtextResource from, Region region, EObject target, IHyperlinkAcceptor acceptor) {
 		final URIConverter uriConverter = from.getResourceSet().getURIConverter();
-		final String hyperlinkText = labelProvider.getText(to);
-		final URI uri = EcoreUtil.getURI(to);
-		final URI normalized = uriConverter.normalize(uri);
+		final String hyperlinkText = labelProvider.getText(target);
+		final URI uri = EcoreUtil.getURI(target);
+		final URI normalized = uri.isPlatformResource() ? uri : uriConverter.normalize(uri);
 
 		XtextHyperlink result = hyperlinkProvider.get();
 		result.setHyperlinkRegion(region);

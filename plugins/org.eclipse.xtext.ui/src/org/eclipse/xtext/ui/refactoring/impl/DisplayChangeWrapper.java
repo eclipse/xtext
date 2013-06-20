@@ -20,8 +20,6 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChange;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChangeGroup;
 import org.eclipse.text.edits.TextEditGroup;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
@@ -36,21 +34,26 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 public class DisplayChangeWrapper extends TextEditBasedChange {
 
 	private Change delegate;
-	
-	private ITextEditor editorToSave;
 
+	/**
+	 * @deprecated Saving editors cause unpredictable errors in combination with resource rename changes
+	 */
+	@Deprecated
 	public DisplayChangeWrapper(TextEditBasedChange delegate, ITextEditor editorToSave) {
 		this((Change) delegate, editorToSave);
 	}
 
-	public DisplayChangeWrapper(TextEditBasedChange delegate) {
-		this((Change) delegate, null);
+	public DisplayChangeWrapper(Change delegate) {
+		super(delegate.getName());
+		this.delegate = delegate;
 	}
 
+	/**
+	 * @deprecated Saving editors cause unpredictable errors in combination with resource rename changes
+	 */
+	@Deprecated
 	protected DisplayChangeWrapper(Change delegate, ITextEditor editorToSave) {
-		super(delegate.getName());
-		this.editorToSave = editorToSave;
-		this.delegate = delegate;
+		this(delegate);
 	}
 
 	public Change getDelegate() {
@@ -129,15 +132,11 @@ public class DisplayChangeWrapper extends TextEditBasedChange {
 		Change undoChange = new DisplayRunnableWithResult<Change>() {
 			@Override
 			protected Change run() throws Exception {
-				return delegate.perform(monitor.newChild(1));
+				Change result = delegate.perform(monitor.newChild(1));
+				return result;
 			}
 		}.syncExec();
-		DisplayChangeWrapper undoWrap = new DisplayChangeWrapper(undoChange, editorToSave);
-		if(editorToSave != null) {
-			IEditorInput editorInput = editorToSave.getEditorInput();
-			IDocumentProvider documentProvider = editorToSave.getDocumentProvider();
-			documentProvider.saveDocument(monitor.newChild(1), editorInput, documentProvider.getDocument(editorInput), true);
-		}
+		DisplayChangeWrapper undoWrap = new DisplayChangeWrapper(undoChange);
 		return undoWrap;
 	}
 

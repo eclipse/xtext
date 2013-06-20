@@ -17,6 +17,7 @@ var runtimeProject = "../${projectName}"
 
 Workflow {
 	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/../.."
 	} 
 	
@@ -104,6 +105,10 @@ Workflow {
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug347012TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = { 
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug381381TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
@@ -205,6 +210,10 @@ Workflow {
 				fragment = exporting.QualifiedNamesFragment {}
 				fragment = refactoring.RefactorElementNameFragment {}
 			}
+		}
+		language = {
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug377311TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 	}
 }

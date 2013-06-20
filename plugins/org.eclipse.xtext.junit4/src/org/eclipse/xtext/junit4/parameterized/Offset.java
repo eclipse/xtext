@@ -24,8 +24,17 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 /**
+ * use org.xpect.xtext.lib.setup.ThisOffset or org.xpect.parameter.ParameterParser with token rule OFFSET from
+ * www.xpect-tests.org instead. ThisOffset is an annotation that can be used for method parameters. ParameterParser is a
+ * an annotation to define syntax for test-parameters that can be specified in the DSL file (example: XPECT myTestMethod
+ * myparam1 myparam2). The method parameter type can be any of the following types int, INode, EObject,
+ * ICrossEReferenceAndEObject, IEAttributeAndEObject, IEReferenceAndEObject, IEStructuralFeatureAndEObject, etc.
+ * 
+ * This class will be removed in the next release after 2.4.2
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class Offset {
 	protected int offset;
 	protected XtextResource resource;

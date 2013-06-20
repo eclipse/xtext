@@ -76,13 +76,14 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 				prev.setLength(newLength);
 				mergePositions(i, exclusiveEndOffset, prev.getTimestamp(), prev.internalGetIds());
 				if (prev.getLength() == 0) {
-					getPositions().remove(i - 1);
+					if (prev != getPositions().remove(i - 1))
+						throw new IllegalStateException("removed position is not 'prev'");
 				}
 			}
-			if (prev.getLength() != 0)
+			if (prev.getLength() != 0) {
 				i++;
-			prev = next;
-			
+			}
+			prev = getPositions().get(i - 1);
 		}
 	}
 	
@@ -94,20 +95,8 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 		while(i < getPositions().size()) {
 			LightweightPosition next = getPositions().get(i);
 			if (next.getOffset() >= exclusiveEndOffset) {
-				if (prev != null) {
-					int prevEnd = prev.getOffset() + prev.getLength();
-					if (prevEnd != exclusiveEndOffset) {
-						if (newPositions == null)
-							newPositions = Lists.newArrayListWithExpectedSize(4);
-						newPositions.add(new LightweightPosition(prevEnd, exclusiveEndOffset - prevEnd, timestamp, ids));
-					}
-				}
-				int newPosSize = newPositions != null ? newPositions.size() : 0;
-				if (newPosSize != 0)
-					getPositions().addAll(i, newPositions);
-				if (i + newPosSize != listIdx) {
-					Collections.sort(getPositions().subList(listIdx, i + newPosSize));
-				}
+				newPositions = addPendingPosition(prev, exclusiveEndOffset, timestamp, ids, newPositions);
+				partialSortPositions(listIdx, exclusiveEndOffset, i, newPositions);
 				return;
 			}
 			if (prev != null) {
@@ -131,20 +120,37 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 			i++;
 			prev = next;
 		}
-		if (prev != null) {
-			int prevEnd = prev.getOffset() + prev.getLength();
-			if (prevEnd < exclusiveEndOffset) {
-				if (newPositions == null)
-					newPositions = Lists.newArrayListWithExpectedSize(4);
-				newPositions.add(new LightweightPosition(prevEnd, exclusiveEndOffset - prevEnd, timestamp, ids));
+		newPositions = addPendingPosition(prev, exclusiveEndOffset, timestamp, ids, newPositions);
+		partialSortPositions(listIdx, exclusiveEndOffset, i, newPositions);
+	}
+
+	private void partialSortPositions(int listIdx, int exclusiveEndOffset, int insertionIndex,
+			List<LightweightPosition> addedPositions) {
+		int newPosSize = addedPositions != null ? addedPositions.size() : 0;
+		if (newPosSize != 0)
+			getPositions().addAll(insertionIndex, addedPositions);
+		if (insertionIndex + newPosSize != listIdx) {
+			int endIdx = insertionIndex + newPosSize;
+			while(endIdx < getPositions().size() && getPositions().get(endIdx).getOffset() == exclusiveEndOffset) {
+				endIdx++;
+			}
+			Collections.sort(getPositions().subList(listIdx, endIdx));
+		}
+	}
+
+	private List<LightweightPosition> addPendingPosition(LightweightPosition pending, int expectedEndOffset,
+			int timestamp, IntToStringArray[] ids, List<LightweightPosition> result) {
+		if (pending != null) {
+			int prevEnd = pending.getOffset() + pending.getLength();
+			if (prevEnd < expectedEndOffset) {
+				LightweightPosition position = new LightweightPosition(prevEnd, expectedEndOffset - prevEnd, timestamp, ids);
+				if (result == null)
+					result = Collections.singletonList(position);
+				else
+					result.add(position);
 			}
 		}
-		int newPosSize = newPositions != null ? newPositions.size() : 0;
-		if (newPosSize != 0)
-			getPositions().addAll(i, newPositions);
-		if (i - 1 + newPosSize != listIdx) {
-			Collections.sort(getPositions().subList(listIdx, i + newPosSize));
-		}
+		return result;
 	}
 
 	public List<LightweightPosition> getPositions() {

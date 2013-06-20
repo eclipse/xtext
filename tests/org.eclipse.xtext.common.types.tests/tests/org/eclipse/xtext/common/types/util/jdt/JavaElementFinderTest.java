@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaElement;
@@ -21,20 +19,29 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
+import org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JavaElementFinderTest extends TestCase {
+public class JavaElementFinderTest extends Assert {
 
 	private ResourceSet resourceSet;
 	private JdtTypeProvider typeProvider;
 	private MockJavaProjectProvider projectProvider;
 	private JavaElementFinder elementFinder;
+	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		resourceSet = new ResourceSetImpl();
 		projectProvider = new MockJavaProjectProvider();
 		projectProvider.setUseSource(true);
@@ -43,39 +50,50 @@ public class JavaElementFinderTest extends TestCase {
 		elementFinder.setProjectProvider(projectProvider);
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		resourceSet = null;
 		typeProvider = null;
 		elementFinder = null;
-		super.tearDown();
 	}
 	
-	public void testListContainsAll() throws Exception {
+	@Test public void testListContainsAll() throws Exception {
 		doTestFindMethod(List.class, "containsAll", 1);
 	}
 	
-	public void testListToArray() throws Exception {
+	@Test public void testListToArray() throws Exception {
 		doTestFindMethod(List.class, "toArray", 0);
 		doTestFindMethod(List.class, "toArray", 1);
 	}
 
-	public void testArraysAsList() throws Exception {
+	@Test public void testArraysAsList() throws Exception {
 		doTestFindMethod(Arrays.class, "asList", 1);
 	}
 	
-	public void testCollectionsSort() throws Exception {
+	@Test public void testCollectionsSort() throws Exception {
 		doTestFindMethod(Collections.class, "sort", 1);
 		doTestFindMethod(Collections.class, "sort", 2);
 	}
 	
-	public void testCollectionsBinarySearch() throws Exception {
+	@Test public void testCollectionsBinarySearch() throws Exception {
 		doTestFindMethod(Collections.class, "binarySearch", 2);
 		doTestFindMethod(Collections.class, "binarySearch", 3);
 	}
 	
-	public void testCollectionsReverse() throws Exception {
+	@Test public void testCollectionsReverse() throws Exception {
 		doTestFindMethod(Collections.class, "reverse", 1);
+	}
+	
+	@Test public void testTypeParamEndsWithDollar_01() throws Exception {
+		doTestFindMethod(TypeParamEndsWithDollar.class, "function1", 1);
+	}
+	
+	@Test public void testTypeParamEndsWithDollar_02() throws Exception {
+		doTestFindMethod(TypeParamEndsWithDollar.class, "function2", 2);
+	}
+	
+	@Test public void testTypeParamEndsWithDollar_03() throws Exception {
+		doTestFindMethod(TypeParamEndsWithDollar.class, "function3", 1);
 	}
 
 	protected void doTestFindMethod(Class<?> declaringType, String methodName, int numberOfParameters) {

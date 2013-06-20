@@ -29,24 +29,22 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JvmRenameRefactoringProvider extends DefaultRenameRefactoringProvider {
 
 	@Override
 	public ProcessorBasedRefactoring getRenameRefactoring(IRenameElementContext renameElementContext) {
 		if (renameElementContext instanceof JdtRefactoringContext) {
-			for (IJavaElement javaElement : ((JdtRefactoringContext) renameElementContext).getJavaElements()) {
-				if (isJavaSource(javaElement)) {
-					try {
-						RenameJavaElementDescriptor renameDescriptor = createRenameDescriptor(javaElement,
-								javaElement.getElementName());
-						return (ProcessorBasedRefactoring) renameDescriptor.createRefactoring(new RefactoringStatus());
-					} catch (Exception exc) {
-						throw new WrappedException(exc);
-					}
+			IJavaElement javaElement = ((JdtRefactoringContext) renameElementContext).getJavaElement();
+			if (isJavaSource(javaElement)) {
+				try {
+					RenameJavaElementDescriptor renameDescriptor = createRenameDescriptor(javaElement,
+							javaElement.getElementName());
+					return (ProcessorBasedRefactoring) renameDescriptor.createRefactoring(new RefactoringStatus());
+				} catch (Exception exc) {
+					throw new WrappedException(exc);
 				}
 			}
-		} 
+		}
 		return super.getRenameRefactoring(renameElementContext);
 	}
 

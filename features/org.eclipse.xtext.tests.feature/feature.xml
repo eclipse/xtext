@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.tests"
       label="%featureName"
-      version="2.1.0.qualifier"
+      version="2.4.3.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -23,7 +23,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.sdk" version="2.1.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.sdk" version="2.4.3" match="equivalent"/>
    </requires>
 
    <plugin
@@ -39,19 +39,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.eclipse.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.ant.optional.junit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"/>
 
    <plugin
          id="org.eclipse.xtext.testlanguages"
@@ -138,21 +125,14 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.xtend2.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtend2.ui.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.xtext.purexbase.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.example.domainmodel.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"

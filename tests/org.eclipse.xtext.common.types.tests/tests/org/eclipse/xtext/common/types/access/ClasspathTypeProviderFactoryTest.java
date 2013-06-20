@@ -9,58 +9,58 @@ package org.eclipse.xtext.common.types.access;
 
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClasspathTypeProviderFactoryTest extends TestCase {
+public class ClasspathTypeProviderFactoryTest extends Assert {
 
 	private ClasspathTypeProviderFactory factory;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		factory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
 	}
 	
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		factory = null;
-		super.tearDown();
 	}
 	
-	public void testCreateTypeProvider_01() {
+	@Test public void testCreateTypeProvider_01() {
 		ClasspathTypeProvider typeProvider = factory.createTypeProvider();
 		assertNotNull(typeProvider);
 		assertNotNull(typeProvider.getResourceSet());
 	}
 	
-	public void testCreateTypeProvider_02() {
+	@Test public void testCreateTypeProvider_02() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		ClasspathTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
 		assertNotNull(typeProvider);
 		assertEquals(resourceSet, typeProvider.getResourceSet());
 	}
 	
-	public void testCreateTypeProvider_03() {
+	@Test public void testCreateTypeProvider_03() {
 		ClasspathTypeProvider typeProvider = factory.createTypeProvider();
 		ResourceSet resourceSet = typeProvider.getResourceSet();
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
 		assertEquals(typeProvider, map.get(URIHelperConstants.PROTOCOL));
 	}
 	
-	public void testFindTypeProvider_01() {
+	@Test public void testFindTypeProvider_01() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		assertNull(factory.findTypeProvider(resourceSet));
 	}
 	
-	public void testFindTypeProvider_02() {
+	@Test public void testFindTypeProvider_02() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		ClasspathTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
 		assertSame(typeProvider, factory.findTypeProvider(resourceSet));

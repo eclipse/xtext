@@ -2,35 +2,36 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Core UI Tests
 Bundle-SymbolicName: org.eclipse.xtext.ui.tests;singleton:=true
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.4.3.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.ui;bundle-version="2.0.0",
+Require-Bundle: org.eclipse.xtext.ui;bundle-version="2.4.3",
  org.eclipse.core.filesystem;bundle-version="1.2.0",
  org.eclipse.ui.workbench.texteditor;bundle-version="3.4.0",
  org.eclipse.ui.ide;bundle-version="3.4.0",
- org.eclipse.xtext.generator;bundle-version="2.0.0",
- org.eclipse.jdt.core;bundle-version="3.4.0",
+ org.eclipse.xtext.generator;bundle-version="2.4.3",
+ org.eclipse.jdt.core;bundle-version="3.5.2",
  org.eclipse.jdt.launching;bundle-version="3.4.0",
- org.eclipse.xtext;bundle-version="2.0.0",
- org.eclipse.xtext.junit;bundle-version="2.0.0",
- de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.xtext.ui.junit;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.xtext.util;bundle-version="2.0.0",
+ org.eclipse.xtext;bundle-version="2.4.3",
+ org.eclipse.xtext.junit4;bundle-version="2.4.3",
+ de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.util;bundle-version="2.4.3",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.eclipse.ui.editors,
  org.eclipse.ui,
- org.eclipse.xtext.builder;bundle-version="2.0.0",
- org.eclipse.xtext.ui.shared;bundle-version="2.0.0",
- org.eclipse.xtext.ui.ecore;bundle-version="2.0.0",
- org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.xtext.testlanguages.ui;bundle-version="2.0.0",
- org.antlr.runtime
+ org.eclipse.xtext.builder;bundle-version="2.4.3",
+ org.eclipse.xtext.ui.shared;bundle-version="2.4.3",
+ org.eclipse.xtext.ui.ecore;bundle-version="2.4.3",
+ org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.testlanguages.ui;bundle-version="2.4.3",
+ org.antlr.runtime,
+ org.junit;bundle-version="4.5.0";resolution:=optional,
+ org.eclipse.core.expressions;bundle-version="3.4.0"
 Bundle-Activator: org.eclipse.xtext.ui.tests.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
-Import-Package: junit.framework;version="[3.0.0,4.0.0)",
- org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.junit;version="4.5.0"
 Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.bracketmatching,
  org.eclipse.xtext.ui.tests.editor.contentassist,
@@ -215,5 +216,25 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.util,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.impl,
- org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.util
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.util,
+ org.eclipse.xtext.ui.tests.ui.contentassist,
+ org.eclipse.xtext.ui.tests.linking.ui.contentassist,
+ org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist,
+ org.eclipse.xtext.ui.tests.editor.outline.scoping,
+ org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist,
+ org.eclipse.xtext.ui.tests.parser.keywords.ui.contentassist,
+ org.eclipse.xtext.ui.tests.testlanguages.ui.contentassist,
+ org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist,
+ org.eclipse.xtext.ui.tests.enumrules.ui.contentassist,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.contentassist,
+ org.eclipse.xtext.ui.tests.quickfix.ui.contentassist,
+ org.eclipse.xtext.ui.tests.refactoring.scoping,
+ org.eclipse.xtext.ui.tests.refactoring.ui.contentassist,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug377311,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.util,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage.util,
+ org.eclipse.xtext.ui.tests.quickfix.ui.quickfix
 

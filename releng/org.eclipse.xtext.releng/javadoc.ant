@@ -3,22 +3,40 @@
 
 		<property name="projectName" value="Xtext" />
 
-		<!-- workspace defaults -->
+		<!-- workspace default properties -->
 		<property name="output" value="./javadoc" />
 		<property name="checkoutLocation" value="../.." />
 		<property name="targetPlatform" value="${eclipse.home}" />
 
 		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
-
+		<condition property="build.stable" value="yes">
+				<matches string="${build.id}" pattern="[S|R](d)*" />
+		</condition>
+		<condition property="generate.javadoc" value="yes">
+			<or>
+				<istrue value="${build.stable}"/>
+				<istrue value="${force.javadoc}"/>
+			</or>
+		</condition>
 
 		<echo message="Source code location ${sourcesLocation}" />
 		<echo message="Javadoc output location ${output}" />
 		<echo message="Target platform path ${targetPlatform}" />
 
+		<echo message="Build id ${build.id}" />
+		<echo message="Build stable? ${build.stable}" />
+		<echo message="Force javadoc generation? ${force.javadoc}" />
+		<echo message="Skip javadoc generation? ${skip.javadoc}" />
+		<antcall target="-generate.javadoc" inheritall="true" />
+	</target>
+
+	<target name="-generate.javadoc" if="generate.javadoc" unless="skip.javadoc">
+
 		<!-- Define classpath -->
 		<path id="javadoc-classpath">
 			<fileset dir="${targetPlatform}">
 				<include name="**/*.jar" />
+				<exclude name="**/*.source*.jar" />
 			</fileset>
 		</path>
 
@@ -26,11 +44,15 @@
 		<delete dir="${output}" />
 		<mkdir dir="${output}" />
 
-		<javadoc destdir="${output}" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" Verbose="no" windowtitle="${projectName} Documentation">
+		<javadoc destdir="${output}" use="false" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" Verbose="no" windowtitle="${projectName} Documentation">
 			<fileset dir="${sourcesLocation}" defaultexcludes="true">
-				<include name="**/*.java" />
+				<include name="**/org.eclipse.xtext*/**/org/eclipse/xtext/**/*.java" />
+				<exclude name="**/org.eclipse.xtend.standalone.maven/**" />
+				<!--
 				<exclude name="**/testdata/**" />
 				<exclude name="**/packrat/**" />
+				<exclude name="**/antlr/internal/**" />
+				-->
 			</fileset>
 
 			<tag name="generated" description="EMF generated code" />
@@ -42,6 +64,7 @@
 			<tag name="noreference" description="This method is not intended to be referenced by clients." />
 			<tag name="nooverride" description="This method is not intended to be extended (re-implement with a call to the overridden parent) or re-implemented (with no call to the overridden parent) by clients." />
 		</javadoc>
+		
 		<!-- Compress the output javadoc in a zip file -->
 		<zip destfile="${output}/javadoc.zip" basedir="${output}">
 			<exclude name="*.zip" />

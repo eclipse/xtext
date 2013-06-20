@@ -124,4 +124,35 @@
 		 <projectDescriptor name="org.eclipse.xtext.example.xbase.tutorial" contentURI="contents/xbase.tutorial.zip" description="A hands-on tutorial to learn the Xbase expression language."/>
 	  </example>
    </extension>
+   
+   <!-- ========= org.eclipse.xtext.example.tutorial ========= -->
+<!--	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewTutorialExampleWizard" 
+			name="%XtextTutorial_name" 
+			class="org.eclipse.xtext.xtext.ui.examples.ExternalEditorAwareExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%XtextTutorial_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewTutorialExampleWizard" 
+			name="%XtextTutorial_name" 
+			class="org.eclipse.xtext.xtext.ui.examples.ExternalEditorAwareExampleInstallerWizard" 
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%XtextTutorial_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.xtext.examples.NewTutorialExampleWizard" pageImage="icons/genproject.gif">
+		 <fileToOpen location="org.eclipse.xtext.example.tutorial/src/org/eclipse/xtext/example/tutorial/Tutorial.xtext"/>
+		 <fileToOpen location="org.eclipse.xtext.example.tutorial/Tutorial.pdf"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.tutorial" contentURI="contents/org.eclipse.xtext.example.tutorial.zip" description="The tutorial description, a scaffolded grammar and solutions"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.tutorial.tests" contentURI="contents/org.eclipse.xtext.example.tutorial.tests.zip" description="A test suite and some utilities to test drive the APIs."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.tutorial.ui" contentURI="contents/org.eclipse.xtext.example.tutorial.ui.zip" description="A smart editor for the language."/>
+	  </example>
+	</extension> -->  
 </plugin>

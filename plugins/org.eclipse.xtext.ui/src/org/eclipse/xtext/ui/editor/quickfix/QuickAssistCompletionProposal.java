@@ -43,6 +43,13 @@ public class QuickAssistCompletionProposal implements ICompletionProposal, IComp
 	public String getDisplayString() {
 		return resolution.getLabel();
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public int getRelevance() {
+		return resolution.getRelevance();
+	}
 
 	public Image getImage() {
 		return image;

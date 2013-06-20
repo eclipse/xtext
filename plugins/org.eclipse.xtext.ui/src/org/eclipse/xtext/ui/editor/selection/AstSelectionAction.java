@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.selection;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.ITextRegion;
@@ -48,8 +49,11 @@ public abstract class AstSelectionAction extends Action {
 		return new IUnitOfWork<ITextRegion, XtextResource>() {
 			public ITextRegion exec(XtextResource xtextResource) throws Exception {
 				ITextRegion result = selection;
-				if (xtextResource.getParseResult() != null && xtextResource.getParseResult().getRootNode() != null) {
-					result = internalSelect(xtextResource, selection);
+				if (xtextResource != null) {
+					IParseResult parseResult = xtextResource.getParseResult();
+					if (parseResult != null) {
+						result = internalSelect(xtextResource, selection);
+					}
 				}
 				return result;
 			}

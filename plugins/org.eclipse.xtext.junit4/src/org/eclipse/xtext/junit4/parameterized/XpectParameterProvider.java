@@ -40,9 +40,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 /**
+ * This class will be removed in the next release after 2.4.2
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+@Deprecated
 public class XpectParameterProvider implements IParameterProvider {
 
 	protected static class AssignedProduction extends StringProduction {
@@ -196,7 +198,7 @@ public class XpectParameterProvider implements IParameterProvider {
 	protected Iterable<Object> convertValue(XtextResource res, INode ctx, int offset, Token token, String value) {
 		switch (token) {
 			case OFFSET:
-				int add = value.indexOf('!');
+				int add = value.indexOf('|');
 				if (add >= 0)
 					value = value.substring(0, add) + value.substring(add + 1);
 				else

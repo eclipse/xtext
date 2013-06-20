@@ -11,28 +11,29 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.IAcceptor;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("deprecation")
-public class EclipseResourceFileSystemAccessTest extends TestCase {
+public class EclipseResourceFileSystemAccessTest extends Assert {
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
 	}
 
-	public void testDirsAreCreated() throws Exception {
+	@Test public void testDirsAreCreated() throws Exception {
 		IProject project = IResourcesSetupUtil.createProject("test");
 		EclipseResourceFileSystemAccess fileSystemAccess = new EclipseResourceFileSystemAccess();
 		fileSystemAccess.setRoot(ResourcesPlugin.getWorkspace().getRoot());

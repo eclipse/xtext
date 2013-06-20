@@ -11,13 +11,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -30,7 +28,7 @@ import com.google.inject.Inject;
  * @author Michael Clay - Initial contribution and API
  * @since 2.1
  */
-public class DefaultResourceUIValidatorExtension implements IResourceUIValidatorExtension {
+public class DefaultResourceUIValidatorExtension extends MarkerEraser implements IResourceUIValidatorExtension {
 	private final static Logger log = Logger.getLogger(DefaultResourceUIValidatorExtension.class);
 
 	@Inject
@@ -38,6 +36,9 @@ public class DefaultResourceUIValidatorExtension implements IResourceUIValidator
 
 	@Inject
 	private MarkerCreator markerCreator;
+	
+	@Inject
+	private MarkerTypeProvider markerTypeProvider;
 
 	public void updateValidationMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) {
 		if (shouldProcess(file)) {
@@ -45,18 +46,12 @@ public class DefaultResourceUIValidatorExtension implements IResourceUIValidator
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void deleteValidationMarkers(IFile file, CheckMode checkMode, IProgressMonitor monitor) {
-		if (shouldProcess(file)) {
-			try {
-				deleteMarkers(file, checkMode, monitor);
-			} catch (CoreException ex) {
-				log.error(ex.getMessage(), ex);
-			}
-		}
-	}
-
-	protected boolean shouldProcess(IFile file) {
-		return file.isAccessible() && file.getProject().isAccessible() && !file.getProject().isHidden();
+		super.deleteValidationMarkers(file, checkMode, monitor);
 	}
 
 	protected void addMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) {
@@ -76,13 +71,8 @@ public class DefaultResourceUIValidatorExtension implements IResourceUIValidator
 
 	protected void createMarkers(IFile file, List<Issue> list, IProgressMonitor monitor) throws CoreException {
 		for (Issue issue : list) {
-			markerCreator.createMarker(issue, file, MarkerTypes.forCheckType(issue.getType()));
+			markerCreator.createMarker(issue, file, markerTypeProvider.getMarkerType(issue));
 		}
-	}
-
-	protected void deleteMarkers(IFile file, CheckMode checkMode, IProgressMonitor monitor) throws CoreException {
-		file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
-		file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, IResource.DEPTH_ZERO);
 	}
 
 	protected CancelIndicator getCancelIndicator(final IProgressMonitor monitor) {

@@ -15,7 +15,9 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
+import org.junit.Test;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
@@ -28,7 +30,7 @@ public class ReaderTest extends AbstractReaderTest {
 		return new SlotEntry();
 	}
 	
-	public void testLoadOne() throws Exception {
+	@Test public void testLoadOne() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -45,7 +47,7 @@ public class ReaderTest extends AbstractReaderTest {
 		assertEquals("Person", ((Entity) ctx.get("model")).getName());
 	}
 
-	public void testLoadTwo() throws Exception {
+	@Test public void testLoadTwo() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -75,7 +77,7 @@ public class ReaderTest extends AbstractReaderTest {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testLoadAll() throws Exception {
+	@Test public void testLoadAll() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
@@ -90,7 +92,7 @@ public class ReaderTest extends AbstractReaderTest {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void testShadowingPathes() throws Exception {
+	@Test public void testShadowingPathes() throws Exception {
 		Reader reader = getReader();
 		reader.addPath(pathTo("shadowingtest/folder 1"));
 		reader.addPath(pathTo("shadowingtest/folder 2"));
@@ -146,5 +148,13 @@ public class ReaderTest extends AbstractReaderTest {
 		assertEquals(bool1, ent3.getProperties().get(1).getType());
 		assertEquals(ent3,ent3.getProperties().get(2).getType());
 		
+	}
+	
+	protected Predicate<EObject> getPredicate(final String uriContains) {
+		return new Predicate<EObject>() {
+			public boolean apply(EObject input) {
+				return input.eResource().getURI().toString().contains("folder%20"+uriContains);
+			}
+		};
 	}
 }

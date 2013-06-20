@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.ui"
       label="%featureName"
-      version="2.1.0.qualifier"
+      version="2.4.3.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -23,7 +23,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.1.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.4.3" match="equivalent"/>
    </requires>
 
    <plugin
@@ -39,12 +39,20 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.common.types.shared"
          download-size="0"
          install-size="0"
          version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.common.types.shared.jdt38"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
          unpack="false"/>
 
    <plugin
@@ -67,12 +75,19 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ui.codetemplates.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
+   <plugin
+         id="org.eclipse.xtext.common.types.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

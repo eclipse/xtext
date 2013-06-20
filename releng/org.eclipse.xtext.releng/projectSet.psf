@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.bootstrapdoc"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtend.build.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.core"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtend.core.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.doc"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.doc.xdoc"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,examples/org.eclipse.xtend.examples"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,examples/org.eclipse.xtend.examples-container"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtend.gwt.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.ide"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtend.ide.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtend.ide.tests.data"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.lib"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.lib.gwt"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.lib.maven"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.m2e"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtend.m2e.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.macro"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.macro.lang"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtend.macro.lang.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.macro.lang.ui"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.maven"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.maven.plugin"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtend.sdk.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.standalone.maven"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtend.tests.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend2.lib"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.build.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.builder"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.builder.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.common.types"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.common.types.edit"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.common.types.shared"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.common.types.shared.jdt38"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.common.types.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.common.types.ui"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.compatibility.galileo"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.doc"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,docs/org.eclipse.xtext.doc.xdoc"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.docs.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.ecore"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.examples.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.generator"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.gwt.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.junit"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.junit4"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.junit4.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.logging"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.purexbase"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.purexbase.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.purexbase.ui"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.runtime.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.sdk.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.smap"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.testlanguages"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.testlanguages.ui"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.tests.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.ui"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.ui.codetemplates"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.ui.codetemplates.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.ui.codetemplates.ui"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.ui.ecore"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.ui.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.ui.junit"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.ui.shared"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.ui.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.util"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.xbase"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.xbase.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.xbase.junit"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.xbase.lib"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.xbase.lib.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.xbase.lib.gwt"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.xbase.lib.maven"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.xbase.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.xbase.ui"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.xbase.ui.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.xtend2.m2e.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.xtend2.sdk.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.xtext.ui"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,examples/org.eclipse.xtext.xtext.ui.examples"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtext.xtext.ui.feature"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtext.xtext.ui.graph"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.xtext.ui.graph.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtext.xtext.ui.tests"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,docs/org.xtext.sevenlanguages.doc.xdoc"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,xtend.website.generator"/>
+<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,xtext.website.generator"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1355935547929_4" label="examples &amp; doc &amp; website" name="examples &amp; doc &amp; website">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.doc" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/xtext.website.generator" type="4"/>
+<item elementID="=org.eclipse.xtend.examples-container" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=xtend.website.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.xtext.sevenlanguages.doc.xdoc" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.doc.xdoc" type="4"/>
+<item elementID="=org.eclipse.xtend.doc.xdoc" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.examples" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.bootstrapdoc" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.doc" type="4"/>
+<item elementID="=org.eclipse.xtext.xtext.ui.examples-container" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1355935277831_3" label="features" name="features">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.sdk.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.tests.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.build.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.gwt.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.m2e.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.tests.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.sdk.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.xtext.ui.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.gwt.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.docs.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.xtend2.m2e.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.xtend2.sdk.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.runtime.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.ui.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.examples.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.build.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.xbase.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.xbase.lib.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1355935122052_1" label="plugins" name="plugins">
+<item elementID="=org.eclipse.xtext.common.types" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xbase.lib.maven" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xtext.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.util" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.maven.plugin" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.common.types.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xbase" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.logging" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.lib" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.ide" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.junit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xbase.lib.gwt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.macro" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.macro.lang.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.ecore" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.junit4" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.macro.lang" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.common.types.shared" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.codetemplates.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.shared" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend2.lib" type="4"/>
+<item elementID="=org.eclipse.xtext.smap" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.lib.maven" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xbase.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.lib.gwt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.standalone.maven" type="4"/>
+<item elementID="=org.eclipse.xtext.purexbase" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.codetemplates" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ecore" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xbase.lib" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.junit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.maven" type="4"/>
+<item elementID="=org.eclipse.xtext.compatibility.galileo" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.common.types.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.builder" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.purexbase.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.m2e" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.common.types.shared.jdt38" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xbase.junit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xtext.ui.graph" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1355935178466_2" label="tests" name="tests">
+<item elementID="=org.eclipse.xtext.common.types.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.purexbase.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xbase.ui.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.macro.lang.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.ide.tests.data" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xbase.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.testlanguages.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.testlanguages" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.ide.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.codetemplates.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xtext.ui.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.junit4.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.builder.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.core.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xtext.ui.graph.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+</psf>

@@ -9,6 +9,7 @@ package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,42 +22,42 @@ public class LeafNodeTest extends AbstractNodeTest {
 	}
 
 	@Override
-	public void testGetText_Default() {
+	@Test public void testGetText_Default() {
 		ICompositeNode rootNode = builder.newRootNode("my input!");
 		ILeafNode leafNode = builder.newLeafNode(3, 5, null, false, null, rootNode);
 		assertEquals("input", leafNode.getText());
 	}
 
 	@Override
-	public void testGetText_Empty() {
+	@Test public void testGetText_Empty() {
 		ICompositeNode rootNode = builder.newRootNode("my input");
 		ILeafNode leafNode = builder.newLeafNode(0, 0, null, false, null, rootNode);
 		assertEquals("", leafNode.getText());
 	}
 
 	@Override
-	public void testTotalOffset() {
+	@Test public void testTotalOffset() {
 		ICompositeNode rootNode = builder.newRootNode("my input");
 		ILeafNode leafNode = builder.newLeafNode(3, 5, null, false, null, rootNode);
 		assertEquals(3, leafNode.getTotalOffset());
 	}
 
 	@Override
-	public void testTotalEndOffset() {
+	@Test public void testTotalEndOffset() {
 		ICompositeNode rootNode = builder.newRootNode("my input");
 		ILeafNode leafNode = builder.newLeafNode(3, 5, null, false, null, rootNode);
 		assertEquals(8, leafNode.getTotalEndOffset());
 	}
 
 	@Override
-	public void testTotalLength() {
+	@Test public void testTotalLength() {
 		ICompositeNode rootNode = builder.newRootNode("my input");
 		ILeafNode leafNode = builder.newLeafNode(3, 5, null, false, null, rootNode);
 		assertEquals(5, leafNode.getTotalLength());
 	}
 
 	@Override
-	public void testGetGrammarElement() {
+	@Test public void testGetGrammarElement() {
 		LeafNode leafNode = createNode();
 		EObject grammarElement = EcoreFactory.eINSTANCE.createEObject();
 		leafNode.basicSetGrammarElement(grammarElement);
@@ -64,7 +65,7 @@ public class LeafNodeTest extends AbstractNodeTest {
 	}
 
 	@Override
-	public void testGetSyntaxErrorMessage() {
+	@Test public void testGetSyntaxErrorMessage() {
 		LeafNode leafNode = createNode();
 		SyntaxErrorMessage errorMessage = new SyntaxErrorMessage("message", null);
 		leafNode.basicSetSyntaxErrorMessage(errorMessage);
@@ -72,7 +73,7 @@ public class LeafNodeTest extends AbstractNodeTest {
 	}
 
 	@Override
-	public void testGetSemanticElement() {
+	@Test public void testGetSemanticElement() {
 		ICompositeNode rootNode = builder.newRootNode("input");
 		ICompositeNode parent = builder.newCompositeNode(null, 0, rootNode);
 		EObject semanticElement = EcoreFactory.eINSTANCE.createEObject();

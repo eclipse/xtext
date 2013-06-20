@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProviderExtension;
 import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.validation.Issue;
 
@@ -133,7 +134,12 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 			}
 			if (isSet(issue.getOffset()) && isSet(issue.getLength()) && issue.getMessage() != null) {
 				String type = lookup.getAnnotationType(EValidator.MARKER, getMarkerSeverity(issue.getSeverity()));
-				boolean isQuickfixable = issueResolutionProvider.hasResolutionFor(issue.getCode());
+				boolean isQuickfixable = false;
+				if (issueResolutionProvider instanceof IssueResolutionProviderExtension) {
+					isQuickfixable = ((IssueResolutionProviderExtension)issueResolutionProvider).hasResolutionFor(issue);
+				} else {
+					isQuickfixable = issueResolutionProvider.hasResolutionFor(issue.getCode());
+				}
 				Annotation annotation = new XtextAnnotation(type, false, xtextDocument, issue, isQuickfixable);
 				if (issue.getOffset() < 0 || issue.getLength() < 0) {
 					LOG.error("Invalid annotation position offset=" + issue.getOffset() + " length = "
@@ -159,8 +165,9 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 				return IMarker.SEVERITY_WARNING;
 			case INFO:
 				return IMarker.SEVERITY_INFO;
+			default:
+				throw new IllegalArgumentException();
 		}
-		throw new IllegalArgumentException();
 	}
 
 	protected void updateMarkerAnnotations(IProgressMonitor monitor) {
@@ -218,7 +225,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 	}
 
 	protected boolean isRelevantAnnotationType(String type) {
-		return type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE);
+		return type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE) || type.equals(XtextEditor.INFO_ANNOTATION_TYPE);
 	}
 
 	public void modelChanged(IAnnotationModel model) {

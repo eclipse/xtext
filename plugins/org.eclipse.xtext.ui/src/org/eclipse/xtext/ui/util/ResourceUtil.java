@@ -10,7 +10,9 @@ package org.eclipse.xtext.ui.util;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -20,6 +22,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 
+import com.google.common.base.Preconditions;
+
 /**
  * Copied from org.eclipse.emf.workspace.util.WorkspaceSynchronizer to avoid dependencies to EMFT.
  * 
@@ -27,6 +31,18 @@ import org.eclipse.emf.ecore.resource.URIConverter;
  */
 public class ResourceUtil {
 
+	/**
+	 * @return the handle to the member container of the given project or the project itself
+	 * @since 2.4
+	 */
+	public static IContainer getContainer(IProject project, String path) {
+		Preconditions.checkNotNull(project, "parameter 'project' must not be null");
+		Preconditions.checkNotNull(path, "parameter 'path' must not be null");
+		if (".".equals(path) || "./".equals(path) || "".equals(path)) {
+			return project;
+		}
+		return project.getFolder(path);
+	}
 	/**
 	 * Obtains the workspace file corresponding to the specified resource, if it has a platform-resource URI. Note that
 	 * the resulting file, if not <code>null</code>, may nonetheless not actually exist (as the file is just a handle).

@@ -21,12 +21,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -39,7 +40,7 @@ public class InjectableValidatorTest extends AbstractXtextTests {
 	private Map<Object, Object> context;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
 		languageSpecificValidator = get(LanguageSpecificValidator.class);
@@ -48,7 +49,7 @@ public class InjectableValidatorTest extends AbstractXtextTests {
 		context = newHashMap();
 	}
 
-	public void testCorrectResource() throws Exception {
+	@Test public void testCorrectResource() throws Exception {
 		Main main = LangATestLanguageFactory.eINSTANCE.createMain();
 		xtextResource.getContents().add(main);
 		assertFalse(languageSpecificValidator.validate(main, new BasicDiagnostic(), null));
@@ -61,7 +62,7 @@ public class InjectableValidatorTest extends AbstractXtextTests {
 		assertNull(context.get(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME));		
 	}
 	
-	public void testArbitraryEPackage() throws Exception {
+	@Test public void testArbitraryEPackage() throws Exception {
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		xtextResource.getContents().add(ePackage);
 		assertFalse(languageSpecificValidator.validate(ePackage, new BasicDiagnostic(), null));
@@ -74,7 +75,7 @@ public class InjectableValidatorTest extends AbstractXtextTests {
 		assertNull(context.get(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME));		
 	}
 	
-	public void testWrongResource() throws Exception {
+	@Test public void testWrongResource() throws Exception {
 		Main main = LangATestLanguageFactory.eINSTANCE.createMain();
 		XMIResource xmiResource = new XMIResourceImpl();
 		xmiResource.getContents().add(main);

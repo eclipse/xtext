@@ -141,4 +141,5 @@ public class AttributedPosition extends Position {
 	public TextAttribute getHighlighting() {
 		return attribute;
 	}
+
 }

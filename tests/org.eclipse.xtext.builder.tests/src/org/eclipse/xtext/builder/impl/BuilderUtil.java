@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static junit.framework.Assert.*;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.Set;

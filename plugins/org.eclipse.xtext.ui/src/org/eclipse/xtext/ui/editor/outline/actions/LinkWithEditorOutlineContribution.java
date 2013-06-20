@@ -39,6 +39,11 @@ public class LinkWithEditorOutlineContribution extends AbstractToggleOutlineCont
 	}
 
 	@Override
+	protected boolean getPreferenceDefaultValue() {
+		return true;
+	}
+
+	@Override
 	protected void stateChanged(boolean newState) {
 	}
 

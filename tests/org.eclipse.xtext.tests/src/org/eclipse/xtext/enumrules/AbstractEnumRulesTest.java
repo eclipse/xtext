@@ -9,7 +9,7 @@ package org.eclipse.xtext.enumrules;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.enumrules.enums.EnumsPackage;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,7 +17,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public abstract class AbstractEnumRulesTest extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		EnumsPackage pack = EnumsPackage.eINSTANCE;
 		EPackage.Registry.INSTANCE.put(pack.getNsURI(), pack);

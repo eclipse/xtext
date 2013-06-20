@@ -10,7 +10,8 @@ package org.eclipse.xtext.resource;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -26,7 +27,7 @@ public class DerivedStateAwareResourceTest extends AbstractXtextTests {
 		}
 	}
 
-	public void testInitialization() throws Exception {
+	@Test public void testInitialization() throws Exception {
 		TestedResource resource = new TestedResource();
 		assertTrue(resource.getContents().isEmpty());
 		resource.setDerivedStateComputer(new IDerivedStateComputer() {

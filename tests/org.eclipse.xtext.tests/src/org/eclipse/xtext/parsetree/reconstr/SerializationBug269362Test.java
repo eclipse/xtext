@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.Model;
 import org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.SerializationBug269362TestLanguageFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,7 +24,7 @@ public class SerializationBug269362Test extends AbstractXtextTests {
 	private Model model;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(SerializationBug269362TestLanguageStandaloneSetup.class);
 		resourceSet = get(XtextResourceSet.class);
@@ -34,7 +35,7 @@ public class SerializationBug269362Test extends AbstractXtextTests {
 		resource.getContents().add(model);
 	}
 
-	public void testSerialize_01() throws Exception {
+	@Test public void testSerialize_01() throws Exception {
 		model.setBar("bar");
 		model.setFoo("foo");
 		String result = serialize(model);

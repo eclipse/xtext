@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.impl.javasupport;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -17,6 +16,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace.ProjectOrder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -38,13 +38,11 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.resource.JarEntryLocator;
-import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
+import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
-import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -63,6 +61,12 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	
 	@Inject
 	private IJdtHelper jdtHelper;
+	
+	@Inject
+	private UriValidator uriValidator; 
+	
+	@Inject
+	private Storage2UriMapperJavaImpl storage2UriMapperJavaImpl;
 	
 	@Singleton
 	public static class ModificationStampCache {
@@ -88,81 +92,44 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		if (javaProject.exists()) {
 			IPackageFragmentRoot[] roots = javaProject.getPackageFragmentRoots();
 			progress.setWorkRemaining(roots.length);
-			final Set<String> previouslyBuilt = Sets.newHashSet();
-			final Set<String> subsequentlyBuilt = Sets.newHashSet();
-			final JarEntryLocator locator = new JarEntryLocator();
+			final Map<String, Long> updated = Maps.newHashMap();
+			ProjectOrder orderedProjects = ResourcesPlugin.getWorkspace().computeProjectOrder(ResourcesPlugin.getWorkspace().getRoot().getProjects());
 			for (final IPackageFragmentRoot root : roots) {
 				if (progress.isCanceled())
 					return toBeBuilt;
-				if (shouldHandle(root)) {
-					try {
-						final Map<String, Long> updated = Maps.newHashMap();
-						new PackageFragmentRootWalker<Boolean>() {
-							@Override
-							protected Boolean handle(IJarEntryResource jarEntry, TraversalState state) {
-								URI uri = locator.getURI(root, jarEntry, state);
-								if (isValid(uri, jarEntry)) {
-									if (wasFragmentRootAlreadyProcessed(uri))
-										return Boolean.TRUE; // abort traversal
-									if (log.isDebugEnabled())
-										log.debug("Scheduling: " + project.getName() + " - " + uri);
-									toBeBuilt.getToBeDeleted().add(uri);
-									toBeBuilt.getToBeUpdated().add(uri);
-								}
-								return null;
-							}
-							
-							protected boolean wasFragmentRootAlreadyProcessed(URI uri) {
-								Iterable<Pair<IStorage, IProject>> storages = getMapper().getStorages(uri);
-								for(Pair<IStorage, IProject> pair: storages) {
-									IProject otherProject = pair.getSecond();
-									if (!pair.getSecond().equals(project)) {
-										if (previouslyBuilt.contains(otherProject.getName()))
-											return true;
-										if (!subsequentlyBuilt.contains(otherProject.getName())) {
-											boolean process = XtextProjectHelper.hasNature(otherProject);
-											String otherName = otherProject.getName();
-											if (!process) {
-												process = otherProject.isAccessible() && otherProject.isHidden();
-												if (process) {
-													Long previousStamp = modificationStampCache.projectToModificationStamp.get(otherName);
-													if (previousStamp == null || otherProject.getModificationStamp() > previousStamp.longValue()) {
-														process = false;
-														updated.put(otherName, otherProject.getModificationStamp());
-													}
-												}
-											}
-											if (process) {
-												ProjectOrder projectOrder = project.getWorkspace().computeProjectOrder(new IProject[] {project, otherProject});
-												if (!projectOrder.hasCycles) {
-													if (otherProject.equals(projectOrder.projects[0])) {
-														previouslyBuilt.add(otherName);
-														return true; 
-													} else {
-														subsequentlyBuilt.add(otherName);
-													}
-												} else {
-													subsequentlyBuilt.add(otherName);
-												}
-											}
-										}
-									}
-								}
-								return false;
-							}
-						}.traverse(root,true);
-						synchronized (modificationStampCache) {
-							modificationStampCache.projectToModificationStamp.putAll(updated);
+				if (shouldHandle(root) && !isBuiltByUpstream(root, project, orderedProjects.projects)) {
+					Map<URI, IStorage> rootData = storage2UriMapperJavaImpl.getAllEntries(root);
+					for (Map.Entry<URI, IStorage> e : rootData.entrySet())
+						if (uriValidator.canBuild(e.getKey(), e.getValue())) {
+							toBeBuilt.getToBeDeleted().add(e.getKey());
+							toBeBuilt.getToBeUpdated().add(e.getKey());
 						}
-					} catch (JavaModelException ex) {
-						if (!ex.isDoesNotExist())
-							log.error(ex.getMessage(), ex);
-					}
 				}
 				progress.worked(1);
 			}
+			synchronized (modificationStampCache) {
+				modificationStampCache.projectToModificationStamp.putAll(updated);
+			}
 		}
 		return toBeBuilt;
+	}
+	
+	protected boolean isBuiltByUpstream(IPackageFragmentRoot root, IProject project, IProject[] projectsInCorrectBuildOrder) {
+		for (IProject p : projectsInCorrectBuildOrder) {
+			if (p.equals(project))
+				return false;
+			if (XtextProjectHelper.hasNature(p)) {
+				IJavaProject javaProject = JavaCore.create(p);
+				if (javaProject.exists()) {
+					if (javaProject.isOnClasspath(root)) {
+						if (log.isTraceEnabled())
+							log.trace("Build of project '"+project.getName()+"' skips indexing classpath entry '"+root.getPath()+"' because it already indexed by "+javaProject.getElementName());
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -182,22 +149,22 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 
 	@Override
 	public boolean removeStorage(IProgressMonitor monitor, ToBeBuilt toBeBuilt, IStorage storage) {
-		if (!isHandled(storage))
-			return true;
-		URI uri = getUri(storage);
-		if (uri != null) {
-			toBeBuilt.getToBeDeleted().add(uri);
+		if (storage instanceof IFile && JavaCore.isJavaLikeFileName(storage.getFullPath().lastSegment())) {
+			IJavaElement element = JavaCore.create(((IFile)storage).getParent());
+			String fileName = storage.getFullPath().lastSegment();
+			String typeName = fileName.substring(0, fileName.lastIndexOf('.'));
+			if (element instanceof IPackageFragmentRoot) {
+				queueJavaChange(typeName);
+			} else if (element instanceof IPackageFragment) {
+				IPackageFragment packageFragment = (IPackageFragment) element;
+				queueJavaChange(packageFragment.getElementName() + "." + typeName);
+			}
 		} else {
-			if (storage instanceof IFile && JavaCore.isJavaLikeFileName(storage.getFullPath().lastSegment())) {
-				IJavaElement element = JavaCore.create(((IFile)storage).getParent());
-				String fileName = storage.getFullPath().lastSegment();
-				String typeName = fileName.substring(0, fileName.lastIndexOf('.'));
-				if (element instanceof IPackageFragmentRoot) {
-					queueJavaChange(typeName);
-				} else if (element instanceof IPackageFragment) {
-					IPackageFragment packageFragment = (IPackageFragment) element;
-					queueJavaChange(packageFragment.getElementName() + "." + typeName);
-				}
+			if (!isHandled(storage))
+				return true;
+			URI uri = getUri(storage);
+			if (uri != null) {
+				toBeBuilt.getToBeDeleted().add(uri);
 			}
 		}
 		return true;
@@ -209,9 +176,11 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		Delta delta = new ChangedResourceDescriptionDelta(oldDescription, null);
 		queuedBuildData.queueChanges(Collections.singleton(delta));
 	}
-	
+
 	@Override
 	protected boolean isHandled(IStorage resource) {
+		if (!uriValidator.isPossiblyManaged(resource))
+			return false;
 		return (resource instanceof IJarEntryResource) || super.isHandled(resource);
 	}
 	

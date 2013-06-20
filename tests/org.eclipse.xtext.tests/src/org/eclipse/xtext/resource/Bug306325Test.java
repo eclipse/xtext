@@ -16,11 +16,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.encoding.EncodingTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.encoding.encodingTest.Model;
 import org.eclipse.xtext.parser.encoding.encodingTest.Word;
 import org.eclipse.xtext.util.ITextRegion;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -28,12 +29,12 @@ import org.eclipse.xtext.util.ITextRegion;
 public class Bug306325Test extends AbstractXtextTests {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(EncodingTestLanguageStandaloneSetup.class);
 	}
 
-	public void testLocationInUtf8EncodedFile() throws Exception {
+	@Test public void testLocationInUtf8EncodedFile() throws Exception {
 		performTestWithEncoding("UTF-8");
 		performTestWithEncoding("UTF-16");
 		performTestWithEncoding("ISO-8859-1");

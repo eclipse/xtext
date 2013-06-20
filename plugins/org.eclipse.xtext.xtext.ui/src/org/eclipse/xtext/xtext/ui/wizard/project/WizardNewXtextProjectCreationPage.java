@@ -10,7 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
-import java.util.ArrayList;
+import static com.google.common.collect.Lists.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -32,6 +34,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 /**
  * The main page of the Xtext project wizard.
@@ -45,7 +50,8 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	private final IStructuredSelection selection;
 	private Text extensionsField;
 	private Combo generatorConfigurationField;
-	
+	private Button createFeatureProject;
+
 	/**
 	 * Constructs a new WizardNewXtextProjectCreationPage.
 	 * 
@@ -79,8 +85,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	protected String[] getWorkingSetIdents() {
-		return new String[] { 
-				"org.eclipse.jdt.ui.JavaWorkingSetPage", //$NON-NLS-1$
+		return new String[] { "org.eclipse.jdt.ui.JavaWorkingSetPage", //$NON-NLS-1$
 				"org.eclipse.pde.ui.pluginWorkingSet", //$NON-NLS-1$
 				"org.eclipse.ui.resourceWorkingSetPage" //$NON-NLS-1$
 		};
@@ -93,7 +98,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	 *            the name of the DSL
 	 */
 	protected void setDefaults(String projectSuffix) {
-		languageNameField.setText("org.xtext.example." + projectSuffix+".MyDsl"); //$NON-NLS-1$
+		languageNameField.setText("org.xtext.example." + projectSuffix + ".MyDsl"); //$NON-NLS-1$
 		extensionsField.setText(projectSuffix);
 
 		fillMweSnippet();
@@ -103,9 +108,13 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	protected void fillMweSnippet() {
 		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
 
-		List<String> names = new ArrayList<String>(contributions.keySet());
-
-		Collections.sort(names);
+		List<WizardContribution> contrib = newArrayList(contributions.values());
+		Collections.sort(contrib);
+		List<String> names = newArrayList(Iterables.transform(contrib, new Function<WizardContribution, String>() {
+			public String apply(WizardContribution input) {
+				return input.getName();
+			}
+		}));
 		if (generatorConfigurationField != null) {
 			generatorConfigurationField.setItems(names.toArray(new String[names.size()]));
 			generatorConfigurationField.select(indexOfDefault(names));
@@ -120,7 +129,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	protected String getDefaultConfigName() {
 		return "Standard";
 	}
-	
+
 	/**
 	 * Find the next available (default) DSL name
 	 */
@@ -203,17 +212,19 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	protected void createProjectLayoutGroup(Composite parent) {
-		if (WizardContribution.getFromRegistry().size() > 1) {
-			Group layoutGroup = new Group(parent, SWT.NONE);
-			layoutGroup.setFont(parent.getFont());
-			layoutGroup.setText(Messages.WizardNewXtextProjectCreationPage_LabelLayout);
-			layoutGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-			layoutGroup.setLayout(new GridLayout(1, false));
-	
-			Composite composite = new Composite(layoutGroup, SWT.NONE);
-			composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-			composite.setLayout(new GridLayout(2, false));
+		boolean showGeneratorConfigCombo = WizardContribution.getFromRegistry().size() > 1;
 
+		Group layoutGroup = new Group(parent, SWT.NONE);
+		layoutGroup.setFont(parent.getFont());
+		layoutGroup.setText(Messages.WizardNewXtextProjectCreationPage_LabelLayout);
+		layoutGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		layoutGroup.setLayout(new GridLayout(1, false));
+
+		Composite composite = new Composite(layoutGroup, SWT.NONE);
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		composite.setLayout(new GridLayout(showGeneratorConfigCombo ? 2 : 1, false));
+
+		if (showGeneratorConfigCombo) {
 			Label generatorConfigLabel = new Label(composite, SWT.NONE);
 			generatorConfigLabel.setText(Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration);
 
@@ -223,6 +234,14 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			generatorConfigurationField.setLayoutData(data);
 			generatorConfigurationField.setFont(parent.getFont());
 		}
+
+		createFeatureProject = new Button(composite, SWT.CHECK);
+		createFeatureProject.setText(Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel);
+		GridData featureGD = new GridData(SWT.FILL, SWT.CENTER, true, false);
+		featureGD.horizontalSpan = 1;
+		createFeatureProject.setLayoutData(featureGD);
+		createFeatureProject.setSelection(true);
+
 	}
 
 	/**
@@ -237,8 +256,12 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	public String getGeneratorConfig() {
-		if (generatorConfigurationField==null)
+		if (generatorConfigurationField == null)
 			return WizardContribution.getFromRegistry().values().iterator().next().getName();
 		return generatorConfigurationField.getItems()[generatorConfigurationField.getSelectionIndex()];
+	}
+
+	public boolean isCreateFeatureProject() {
+		return createFeatureProject.getSelection();
 	}
 }

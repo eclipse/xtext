@@ -25,11 +25,13 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringCrossReferenceSerializer.RefTextEvaluator;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.Multimap;
@@ -48,8 +50,11 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	@Inject
 	private ITransientValueService transientValueService;
 
+	/**
+	 * @since 2.4 Replaces the obsolete CrossReferenceSerializerFacade
+	 */
 	@Inject
-	private CrossReferenceSerializerFacade crossReferenceSerializerFacade;
+	private RefactoringCrossReferenceSerializer crossReferenceSerializer;
 
 	@Override
 	protected void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
@@ -65,13 +70,24 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 				updateAcceptor.getRefactoringStatus().add(ERROR, "Resource {0} is not an XtextResource.",
 						referringResource.getURI(), resourceSet);
 			} else {
-				((XtextResource) referringResource).getCache().clear(referringResource);
-				for (IReferenceDescription referenceDescription : resource2references.get(referringResourceURI)) {
-					createReferenceUpdate(referenceDescription, referringResourceURI, elementRenameArguments,
-							resourceSet, updateAcceptor);
-				}
+				Iterable<IReferenceDescription> referenceDescriptions = resource2references.get(referringResourceURI);
+				processReferringResource(referringResource, referenceDescriptions, elementRenameArguments,
+						updateAcceptor);
 			}
 			progress.worked(1);
+		}
+	}
+
+	/**
+	 * Override this method for pre- or post-processing hooks.
+	 */
+	protected void processReferringResource(Resource referringResource,
+			Iterable<IReferenceDescription> referenceDescriptions, ElementRenameArguments elementRenameArguments,
+			IRefactoringUpdateAcceptor updateAcceptor) {
+		((XtextResource) referringResource).getCache().clear(referringResource);
+		for (IReferenceDescription referenceDescription : referenceDescriptions) {
+			createReferenceUpdate(referenceDescription, referringResource.getURI(), elementRenameArguments,
+					referringResource.getResourceSet(), updateAcceptor);
 		}
 	}
 
@@ -94,15 +110,43 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 					indexInList);
 			CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
 			if (crossReference != null) {
-				String newReferenceText = crossReferenceSerializerFacade.serializeCrossRef(referringElement,
-						crossReference, newTargetElement, referenceTextRegion, updateAcceptor.getRefactoringStatus());
-				if (newReferenceText != null) {
-					// TODO: add import hook
-					TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
-							referenceTextRegion.getLength(), newReferenceText);
-					updateAcceptor.accept(referringResourceURI, referenceEdit);
-				}
+				RefTextEvaluator refTextComparator = getRefTextEvaluator(referringElement, referringResourceURI, reference,
+						indexInList, newTargetElement);
+				String newReferenceText = crossReferenceSerializer.getCrossRefText(referringElement,
+						crossReference, newTargetElement, refTextComparator, referenceTextRegion, updateAcceptor.getRefactoringStatus());
+				createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference, 
+						referringResourceURI, updateAcceptor);
 			}
+		}
+	}
+	
+	/**
+	 * The result is used to determine the best new link text in case of multiple possibilities.
+	 * By default, the shortest text is chosen.
+	 * 
+	 * @since 2.4
+	 */
+	protected RefTextEvaluator getRefTextEvaluator(EObject referringElement, URI referringResourceURI, EReference reference,
+			int indexInList, EObject newTargetElement) {
+		// by default choose the shortest text
+		return new RefTextEvaluator() {
+			public boolean isValid(IEObjectDescription target) {
+				return true;
+			}
+			
+			public boolean isBetterThan(String newText, String currentText) {
+				return newText.length() < currentText.length();
+			}
+		};
+	}
+
+	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText,
+			EObject referringElement, EObject newTargetElement, EReference reference, 
+			URI referringResourceURI, IRefactoringUpdateAcceptor updateAcceptor) {
+		if (newReferenceText != null) {
+			TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
+					referenceTextRegion.getLength(), newReferenceText);
+			updateAcceptor.accept(referringResourceURI, referenceEdit);
 		}
 	}
 
@@ -117,6 +161,14 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 			}
 		}
 		return null;
+	}
+
+	protected ILocationInFileProvider getLocationInFileProvider() {
+		return locationInFileProvider;
+	}
+
+	protected ITransientValueService getTransientValueService() {
+		return transientValueService;
 	}
 
 }

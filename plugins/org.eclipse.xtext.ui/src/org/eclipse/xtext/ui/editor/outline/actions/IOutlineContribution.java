@@ -24,7 +24,6 @@ import com.google.inject.Binding;
 import com.google.inject.BindingAnnotation;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
 /**
@@ -51,7 +50,6 @@ public interface IOutlineContribution extends IPreferenceStoreInitializer {
 
 	void deregister(OutlinePage outlinePage);
 	
-	@Singleton
 	class Composite implements IOutlineContribution {
 		
 		private List<IOutlineContribution> contributions;

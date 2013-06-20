@@ -11,16 +11,17 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.AbstractTwoContextsTestLanguageProposalProvider;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Guice;
@@ -32,7 +33,7 @@ import com.google.inject.Injector;
  */
 public class TwoContextsContentAssistTest extends AbstractXtextTests {
 
-	public void testTwoContexts() throws Exception {
+	@Test public void testTwoContexts() throws Exception {
     	newBuilder(getGrammarSetup()).append("Foo; FooBar; Bar refersTo Foo").assertText(";", "Foo", "FooBar");
     }
 

@@ -12,10 +12,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
+import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -23,7 +25,7 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class GrammarUtilTest extends AbstractXtextTests {
 
-	public void testAllMetamodelDeclarations_01() throws Exception {
+	@Test public void testAllMetamodelDeclarations_01() throws Exception {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar foo with org.eclipse.xtext.common.Terminals " +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
@@ -48,7 +50,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
 		assertEquals("http://3", decl.getEPackage().getNsURI());
 	}
 
-	public void testAllMetamodelDeclarations_02() throws Exception {
+	@Test public void testAllMetamodelDeclarations_02() throws Exception {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar foo with org.eclipse.xtext.common.Terminals " +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as bar " +
@@ -80,7 +82,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
 		assertSame(decls.get(1), abstractRule.getType().getMetamodel());
 	}
 	
-	public void testAllMetamodelDeclarations_03() throws Exception {
+	@Test public void testAllMetamodelDeclarations_03() throws Exception {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar foo with org.eclipse.xtext.common.Terminals " +
 				"generate g 'http://3' as bar " +
@@ -113,14 +115,14 @@ public class GrammarUtilTest extends AbstractXtextTests {
 		assertSame(decls.get(0), abstractRule.getType().getMetamodel());
 	}
 
-	public void testGetReference() throws Exception {
+	@Test public void testGetReference() throws Exception {
 		with(LangATestLanguageStandaloneSetup.class);
 		XtextResource resource = getResourceFromStringAndExpect("type A extends B", 1);
 
 		Assignment asExtends = get(LangATestLanguageGrammarAccess.class).getTypeAccess().getExtendsAssignment_2_1();
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
-		EObject model = getModel(resource);
-		EObject typeA = (EObject) invokeWithXtend("types.first()", model);
+		Main model = (Main) getModel(resource);
+		EObject typeA = model.getTypes().get(0);
 		EReference ref = GrammarUtil.getReference(xref, typeA.eClass());
 		assertNotNull(ref);
 		assertEquals("extends", ref.getName());

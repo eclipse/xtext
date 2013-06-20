@@ -8,8 +8,7 @@
 package org.eclipse.xtext.ui.codetemplates.ui.preferences;
 
 import org.eclipse.jface.dialogs.IDialogSettings;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.HighlightingHelper;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.SourceViewerHandleFactory;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 
 import com.google.inject.Inject;
 
@@ -22,10 +21,7 @@ public class TemplatesLanguageConfiguration {
 	private IDialogSettings dialogSettings;
 	
 	@Inject
-	private SourceViewerHandleFactory sourceViewerHandleFactory;
-	
-	@Inject
-	private HighlightingHelper highlightingHelper;
+	private EmbeddedEditorFactory editorFactory;
 	
 	public IDialogSettings getDialogSettings() {
 		return dialogSettings;
@@ -35,20 +31,11 @@ public class TemplatesLanguageConfiguration {
 		this.dialogSettings = dialogSettings;
 	}
 
-	public SourceViewerHandleFactory getSourceViewerHandleFactory() {
-		return sourceViewerHandleFactory;
+	public EmbeddedEditorFactory getEmbeddedEditorFactory() {
+		return editorFactory;
 	}
 
-	public void setSourceViewerHandleFactory(SourceViewerHandleFactory sourceViewerHandleFactory) {
-		this.sourceViewerHandleFactory = sourceViewerHandleFactory;
+	public void setEmbeddedEditorFactory(EmbeddedEditorFactory factory) {
+		this.editorFactory = factory;
 	}
-
-	public HighlightingHelper getHighlightingHelper() {
-		return highlightingHelper;
-	}
-
-	public void setHighlightingHelper(HighlightingHelper highlightingHelper) {
-		this.highlightingHelper = highlightingHelper;
-	}
-
 }

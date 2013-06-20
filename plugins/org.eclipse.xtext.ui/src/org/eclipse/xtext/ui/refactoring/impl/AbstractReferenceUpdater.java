@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
@@ -136,10 +137,17 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 			Collection<IReferenceDescription> values, StatusWrapper status, IProgressMonitor monitor) {
 		List<IReferenceDescription> unresolvedDescriptions = null;
 		for (IReferenceDescription referenceDescription : values) {
-			EObject sourceEObject = resourceSet.getEObject(referenceDescription.getSourceEObjectUri(), false);
+			EObject sourceEObject = resourceSet.getEObject(referenceDescription.getSourceEObjectUri(), true);
 			if (sourceEObject == null) {
 				handleCannotLoadReferringElement(referenceDescription, status);
 			} else {
+				// this should not be necessary. see https://bugs.eclipse.org/bugs/show_bug.cgi?id=385408 
+				if(sourceEObject.eIsProxy()) {
+					sourceEObject = EcoreUtil.resolve(sourceEObject, sourceEObject.eResource());
+					if(sourceEObject.eIsProxy()) {
+						handleCannotLoadReferringElement(referenceDescription, status);
+					}
+				}
 				EObject resolvedReference = resolveReference(sourceEObject, referenceDescription);
 				if (resolvedReference == null || resolvedReference.eIsProxy())
 					handleCannotResolveExistingReference(sourceEObject, referenceDescription, status);

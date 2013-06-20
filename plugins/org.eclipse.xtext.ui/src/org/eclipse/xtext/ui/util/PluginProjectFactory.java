@@ -98,7 +98,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 		content.append("Bundle-ManifestVersion: 2\n");
 		content.append("Bundle-Name: " + projectName + "\n");
 		content.append("Bundle-Vendor: My Company\n");
-		content.append("Bundle-Version: 1.0.0\n");
+		content.append("Bundle-Version: 1.0.0.qualifier\n");
 		content.append("Bundle-SymbolicName: " + projectName + "; singleton:=true\n");
 		if (null != activatorClassName) {
 			content.append("Bundle-Activator: " + activatorClassName + "\n");

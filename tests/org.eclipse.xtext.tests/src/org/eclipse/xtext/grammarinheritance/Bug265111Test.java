@@ -10,7 +10,8 @@ package org.eclipse.xtext.grammarinheritance;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,12 +19,12 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public class Bug265111Test extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testParseGrammar() throws Exception {
+	@Test public void testParseGrammar() throws Exception {
 		String grammar = "grammar test with org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage\n" +
 				"generate test 'http://test'\n" +
 				"Root: A | Model;" +

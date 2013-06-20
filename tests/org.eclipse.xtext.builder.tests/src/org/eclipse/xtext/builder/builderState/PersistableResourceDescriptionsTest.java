@@ -24,14 +24,15 @@ import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.shared.internal.SharedModule;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -44,7 +45,6 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	private static final String FILE_EXT = ".buildertestlanguage";
 	private Injector builderInjector;
@@ -95,7 +95,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		builderInjector = null;
 		fileSystem = Maps.newHashMap();
@@ -103,14 +103,14 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		builderState = null;
 	}
 
-	public void testSimpleAdd() throws Exception {
+	@Test public void testSimpleAdd() throws Exception {
 		addToFileSystem("foo", "namespace foo { object A }");
 		Map<URI, Delta> reload = update(uris("foo"), null);
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("foo")).getNew());
 	}
 
-	public void testMultipleAdd() throws Exception {
+	@Test public void testMultipleAdd() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
 		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // update
@@ -120,7 +120,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNotNull(reload.get(uri("foo")).getNew());
 	}
 
-	public void testUpdate() throws Exception {
+	@Test public void testUpdate() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
 		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // add
@@ -137,7 +137,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNotNull(reload.get(uri("foo")).getNew());
 	}
 
-	public void testUpdate_1() throws Exception {
+	@Test public void testUpdate_1() throws Exception {
 		addToFileSystem("foo", "namespace foo { object A }");
 		addToFileSystem("bar", "namespace bar { object B references foo.A}");
 		addToFileSystem("baz", "namespace baz { object C references bar.B}");
@@ -158,7 +158,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNull(reload.get(uri("baz")));
 	}
 
-	public void testUpdate_2() throws Exception {
+	@Test public void testUpdate_2() throws Exception {
 		addToFileSystem("foo", "namespace foo { object A }");
 		addToFileSystem("bar", "namespace bar { object B references foo.A}");
 		addToFileSystem("baz", "namespace baz { object C references bar.B}");
@@ -180,7 +180,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNull(reload.get(uri("baz")));
 	}
 
-	public void testDelete() throws Exception {
+	@Test public void testDelete() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
 		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // add
@@ -196,7 +196,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNotNull(reload.get(uri("foo")).getNew());
 	}
 
-	public void testDelete_1() throws Exception {
+	@Test public void testDelete_1() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
 		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // add
@@ -211,7 +211,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNull(reload.get(uri("foo")).getNew());
 	}
 
-	public void testUpdateNoChange() throws Exception {
+	@Test public void testUpdateNoChange() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
 		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // add
@@ -226,7 +226,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNotNull(reload.get(uri("bar")).getNew());
 	}
 
-	public void testSave() throws Exception {
+	@Test public void testSave() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
 		update(uris("foo", "bar"), null);
@@ -236,7 +236,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertEquals(2, persister.descriptions.size());
 	}
 	
-	public void testLoad() throws Exception {
+	@Test public void testLoad() throws Exception {
 		URI uri1 = URI.createFileURI("1.uri");
 		URI uri2 = URI.createFileURI("2.uri");
 		URI uri3 = URI.createFileURI("3.uri");

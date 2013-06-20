@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -15,12 +16,12 @@ import org.eclipse.jface.viewers.StructuredSelection;
 public class FilterContributionTest extends AbstractOutlineWorkbenchTest {
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		setFiltering(false);
 	}
 	
-	public void testFilterOutline() {
+	@Test public void testFilterOutline() {
 		treeViewer.expandAll();
 		setFiltering(false);
 		assertEquals(1, treeViewer.getTree().getItemCount());
@@ -42,7 +43,7 @@ public class FilterContributionTest extends AbstractOutlineWorkbenchTest {
 		assertSame(twoNode, treeViewer.getTree().getItem(0).getItem(0).getItem(0));
 	}
 	
-	public void testFilteringPreservesExpansionAndSelection() throws Exception {
+	@Test public void testFilteringPreservesExpansionAndSelection() throws Exception {
 		treeViewer.setExpandedElements(new Object[] {modelNode});
 		treeViewer.setSelection(new StructuredSelection(oneNode));
 		setFiltering(true);

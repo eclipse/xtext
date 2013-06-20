@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ExternalPackageFragmentRoot;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState;
 
@@ -23,85 +22,14 @@ import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JarEntryLocator {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(JarEntryLocator.class);
 	
-	public URI getURI(final IJarEntryResource jarEntry) {
-		final IPackageFragmentRoot root = jarEntry.getPackageFragmentRoot();
-		if (root.isArchive()) {
-			URI jarURI = JarEntryURIHelper.getUriForPackageFragmentRoot(root);
-			URI storageURI = URI.createURI(jarEntry.getFullPath().toString());
-			return createJarURI(root.isArchive(), jarURI, storageURI);
-		} else if (root.isExternal()) {
-			if (root instanceof ExternalPackageFragmentRoot) {
-				try {
-					return new PackageFragmentRootWalker<URI>() {
-						@Override
-						protected URI handle(IJarEntryResource current, TraversalState state) {
-							if (current.equals(jarEntry)) {
-								return getURI(root, current, state);	
-							}
-							return null;
-						}
-					}.traverse(root, true);
-				} catch(JavaModelException ex) {
-					if (!ex.isDoesNotExist())
-						log.error(ex.getMessage(), ex);
-				}
-			} else {
-				throw new IllegalStateException("Unexpeced root type: " + root.getClass().getName());
-			}
-		}
-		return null;
-	}
-	
-	public IJarEntryResource getJarEntry(final URI uri, final IPackageFragmentRoot root) {
-		try {
-			try {
-				if (root.isArchive()) {
-					if (!uri.isArchive())
-						return null;
-					final String path = uri.devicePath().substring(uri.authority().length());
-					return new PackageFragmentRootWalker<IJarEntryResource>() {
-						@Override
-						protected IJarEntryResource handle(IJarEntryResource jarEntry, TraversalState state) {
-							if (jarEntry.getFullPath().toString().equals(path))
-								return jarEntry;
-							return null;
-						}
-					}.traverse(root, true);
-				} else if (root instanceof ExternalPackageFragmentRoot) {
-					if (!uri.isPlatformResource())
-						return null;
-					IResource resource = ((ExternalPackageFragmentRoot) root).resource();
-					IPath uriAsPath = new Path(uri.toPlatformString(true));
-					IPath absolutePath = resource.getFullPath(); // external folder link
-					if (absolutePath.isPrefixOf(uriAsPath)) {
-						return new PackageFragmentRootWalker<IJarEntryResource>() {
-							@Override
-							protected IJarEntryResource handle(IJarEntryResource jarEntry, TraversalState state) {
-								URI entryURI = getURI(root, jarEntry, state);
-								if (entryURI.equals(uri))
-									return jarEntry;
-								return null;
-							}
-						}.traverse(root, true);
-					}
-				} else {
-					throw new IllegalStateException("Unexpeced root type: " + root.getClass().getName());
-				}
-			} catch(JavaModelException ex) {
-				if (!ex.isDoesNotExist())
-					log.error(ex.getMessage(), ex);
-			}
-		} catch(NullPointerException e) {
-			log.error(e.getMessage(), e);
-		}
-		return null;
-	}
-
+	/**
+	 * @return a URI for the given jarEntry, can be <code>null</code>.
+	 */
 	public URI getURI(IPackageFragmentRoot root, IJarEntryResource jarEntry, TraversalState state) {
 		if (root.isArchive()) {
 			URI jarURI = JarEntryURIHelper.getUriForPackageFragmentRoot(root);

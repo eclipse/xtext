@@ -16,22 +16,22 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess;
-import org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
+import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
@@ -58,15 +58,9 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 	@Inject
 	private IReferenceFinder referenceFinder;
 	
-	@Inject 
-	private FindReferenceQueryDataFactory queryDataFactory;
-	
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
 	
-	@Inject 
-	private EditorResourceAccess editorResourceAccess;
-
 	protected void addOccurrenceAnnotation(String type, IDocument document, ITextRegion textRegion,
 			Map<Annotation, Position> annotationMap) {
 		try {
@@ -83,46 +77,61 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 	public Map<Annotation, Position> createAnnotationMap(XtextEditor editor, final ITextSelection selection,
 			final SubMonitor monitor) {
 		final IXtextDocument document = editor.getDocument();
-		return document.readOnly(new IUnitOfWork<Map<Annotation, Position>, XtextResource>() {
-			public Map<Annotation, Position> exec(final XtextResource resource) throws Exception {
-				EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, (selection).getOffset());
-				if (target != null) {
-					monitor.setWorkRemaining(100);
-					final List<IReferenceDescription> references = newArrayList();
-					IQueryData queryData = queryDataFactory.createQueryData(target, resource.getURI());
-					IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
-						public void accept(IReferenceDescription reference) {
-							if (resource.getURI().equals(reference.getSourceEObjectUri().trimFragment()))
-								references.add(reference);
+		if(document != null) {
+			return document.readOnly(new IUnitOfWork<Map<Annotation, Position>, XtextResource>() {
+				public Map<Annotation, Position> exec(final XtextResource resource) throws Exception {
+					if(resource != null) {
+						EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, (selection).getOffset());
+						if (target != null && ! target.eIsProxy()) {
+							monitor.setWorkRemaining(100);
+							final List<IReferenceDescription> references = newArrayList();
+							IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
+								public void accept(IReferenceDescription reference) {
+									references.add(reference);
+								}
+							};
+							SimpleLocalResourceAccess localResourceAccess = new SimpleLocalResourceAccess(resource.getResourceSet());
+							referenceFinder.findReferences(getTargetURIs(target), 
+									singleton(resource.getURI()), localResourceAccess, acceptor, monitor.newChild(40));
+							if (monitor.isCanceled())
+								return emptyMap();
+							Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
+							if (target.eResource() == resource) {
+								if (!references.isEmpty() || canBeReferencedLocally(target)) {
+									ITextRegion declarationRegion = locationInFileProvider.getSignificantTextRegion(target);
+									addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
+								}
+							}
+							monitor.worked(5);
+							for (IReferenceDescription reference : references) {
+								try {
+									EObject source = resource.getEObject(reference.getSourceEObjectUri().fragment());
+									if (source != null && reference.getEReference() != null) { // prevent exception for outdated data
+										ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(source,
+												reference.getEReference(), reference.getIndexInList());
+										addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
+									}
+								} catch(Exception exc) {
+									// outdated index information. Ignore
+								}
+							}
+							monitor.worked(15);
+							return result;
 						}
-					};
-					if (target.eResource() == resource) {
-						referenceFinder.findLocalReferences(queryData, editorResourceAccess, acceptor, monitor.newChild(40));
-					} else {
-						referenceFinder.findIndexedReferences(queryData, queryData.getLocalContextResourceURI(), acceptor, monitor.newChild(40));
 					}
-					if (monitor.isCanceled())
-						return emptyMap();
-					Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
-					if (target.eResource() == resource) {
-						if (!references.isEmpty() || canBeReferencedLocally(target)) {
-							ITextRegion declarationRegion = locationInFileProvider.getSignificantTextRegion(target);
-							addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
-						}
-					}
-					monitor.worked(5);
-					for (IReferenceDescription reference : references) {
-						EObject source = resource.getEObject(reference.getSourceEObjectUri().fragment());
-						ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(source,
-								reference.getEReference(), reference.getIndexInList());
-						addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
-					}
-					monitor.worked(15);
-					return result;
+					return emptyMap();
 				}
-				return emptyMap();
-			}
-		});
+			});
+		} else {
+			return emptyMap();
+		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected Iterable<URI> getTargetURIs(EObject target) {
+		return singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(target));
 	}
 	
 	/**

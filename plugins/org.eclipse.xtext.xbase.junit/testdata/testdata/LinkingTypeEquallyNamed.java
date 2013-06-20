@@ -7,6 +7,7 @@
  *******************************************************************************/
 package testdata;
 
+@SuppressWarnings("unused")
 public class LinkingTypeEquallyNamed {
 
 	protected String protectedField;

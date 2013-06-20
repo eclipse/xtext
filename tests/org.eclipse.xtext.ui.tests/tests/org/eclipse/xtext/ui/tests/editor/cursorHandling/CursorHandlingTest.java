@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.cursorHandling;
 
+import org.eclipse.xtext.junit4.ui.AbstractCursorHandlingTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.cursorHandling.AbstractCursorHandlingTest;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,13 +26,13 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 		return "bmtestlanguage";
 	}
 	
-	public void testToLineStart_01() throws Exception {
+	@Test public void testToLineStart_01() throws Exception {
 		XtextEditor editor = openEditor("  begin en|d");
 		toLineStart(editor);
 		assertState("  |begin end", editor);
 	}
 	
-	public void testToLineStartInSlComment_01() throws Exception {
+	@Test public void testToLineStartInSlComment_01() throws Exception {
 		XtextEditor editor = openEditor("  // begin en|d");
 		toLineStart(editor);
 		assertState("  // |begin end", editor);
@@ -41,7 +42,7 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 		assertState("  // |begin end", editor);
 	}
 	
-	public void testToLineStartInSlComment_02() throws Exception {
+	@Test public void testToLineStartInSlComment_02() throws Exception {
 		XtextEditor editor = openEditor("// begin en|d");
 		toLineStart(editor);
 		assertState("// |begin end", editor);
@@ -51,7 +52,7 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 		assertState("// |begin end", editor);
 	}
 	
-	public void testToLineStartInMlComment_01() throws Exception {
+	@Test public void testToLineStartInMlComment_01() throws Exception {
 		XtextEditor editor = openEditor("  /* begin en|d */");
 		toLineStart(editor);
 		assertState("  /* |begin end */", editor);
@@ -61,7 +62,7 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 		assertState("  /* |begin end */", editor);
 	}
 	
-	public void testToLineStartInMlComment_02() throws Exception {
+	@Test public void testToLineStartInMlComment_02() throws Exception {
 		XtextEditor editor = openEditor("/* begin en|d */");
 		toLineStart(editor);
 		assertState("/* |begin end */", editor);
@@ -71,7 +72,7 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 		assertState("/* |begin end */", editor);
 	}
 	
-	public void testToLineStartInMlComment_03() throws Exception {
+	@Test public void testToLineStartInMlComment_03() throws Exception {
 		XtextEditor editor = openEditor(
 				"  /* \n" +
 				"   * begin en|d\n" +
@@ -93,7 +94,41 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 				"   */", editor);
 	}
 	
-	public void testNavigateLeft_01() throws Exception {
+	@Test public void testToLineStartInMlComment_04() throws Exception { 
+		XtextEditor editor = openEditor("  /** beg|in\n" + 
+				"*/");
+		toLineStart(editor);
+		assertState("  /** |begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("  |/** begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("|  /** begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("  |/** begin\n" +
+				"*/", editor);
+	}
+	
+	@Test public void testToLineStartInMlComment_05() throws Exception { 
+		XtextEditor editor = openEditor("\n\n  /** beg|in\n" + 
+				"*/");
+		toLineStart(editor);
+		assertState("\n\n  /** |begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("\n\n  |/** begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("\n\n|  /** begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("\n\n  |/** begin\n" +
+				"*/", editor);
+	}
+	
+	@Test public void testNavigateLeft_01() throws Exception {
 		XtextEditor editor = openEditor(" CamelCaseWo|rd ");
 		navigateLeft(editor);
 		assertState(" CamelCase|Word ", editor);
@@ -105,7 +140,7 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 		assertState("| CamelCaseWord ", editor);
 	}
 	
-	public void testNavigateLeft_02() throws Exception {
+	@Test public void testNavigateLeft_02() throws Exception {
 		XtextEditor editor = openEditor("  \n two |words ");
 		navigateLeft(editor);
 		assertState("  \n |two words ", editor);
@@ -117,7 +152,7 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 		assertState("|  \n two words ", editor);
 	}
 	
-	public void testNavigateRight_01() throws Exception {
+	@Test public void testNavigateRight_01() throws Exception {
 		XtextEditor editor = openEditor(" Ca|melCaseWord ");
 		navigateRight(editor);
 		assertState(" Camel|CaseWord ", editor);
@@ -129,7 +164,7 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 		assertState(" CamelCaseWord |", editor);
 	}
 	
-	public void testNavigateRight_02() throws Exception {
+	@Test public void testNavigateRight_02() throws Exception {
 		XtextEditor editor = openEditor("|  \n two words ");
 		navigateRight(editor);
 		assertState("  |\n two words ", editor);

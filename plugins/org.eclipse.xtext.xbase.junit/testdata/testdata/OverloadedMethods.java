@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("unused")
 public class OverloadedMethods<V> {
 
 	public int usedConstructor = 0; 
@@ -56,6 +57,13 @@ public class OverloadedMethods<V> {
 		return "overloaded(List,List)";
 	}
 	
+	/**
+	 * @since 2.4
+	 */
+	public <T> String overloaded(Object object, Object otherObject) {
+		return "overloaded(Object,Object)";
+	}
+	
 	public <T> String overloaded(Iterable<? extends T> iterable, Iterable<? extends T> otherIterable) {
 		return "overloaded(Iterable,Iterable)";
 	}
@@ -78,6 +86,64 @@ public class OverloadedMethods<V> {
 	
 	public <T> String overloaded3(List<T> list, List<T> otherList) {
 		return "overloaded(List,List)";
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public static <T1> int overloadedTypeParameters(String s) { return 1; }
+	/**
+	 * @since 2.3
+	 */
+	public static <T1, T2> long overloadedTypeParameters(Object o) { return 1L; }
+	
+	/**
+	 * @since 2.3
+	 */
+	public static long overloadedVarArgs(Object o1, Object o2) { return 1L; }
+
+	/**
+	 * @since 2.3
+	 */
+	public static int overloadedVarArgs(String... s) { return s.length; }
+	
+	/**
+	 * @since 2.4
+	 */
+	public static <K> String addAllOverloaded(Collection<? super K> collection, Iterable<K> elements) {
+		return OverloadedMethods.addAllExtends(collection, elements);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static <K> String addAllOverloaded(Iterable<K> elements, Collection<? super K> collection) {
+		return addAllExtends(collection, elements);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static <K> boolean addAllOverloaded(Collection<? super K> collection, Collection<K> elements) {
+		return collection.addAll(elements);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static <K> String addAllSuperExtends(Collection<? super K> collection, Iterable<? extends K> elements) {
+		return OverloadedMethods.addAllExtends(collection, elements);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static <K> Collection<K> addAllSuperExtends2(Collection<? super K> collection, Iterable<? extends K> elements) {
+		return null;
+	}
+	
+	private static  <T> String addAllExtends(Collection<T> collection, Iterable<? extends T> elements) {
+		return "addAll(Collection,Iterable)";
 	}
 	
 }

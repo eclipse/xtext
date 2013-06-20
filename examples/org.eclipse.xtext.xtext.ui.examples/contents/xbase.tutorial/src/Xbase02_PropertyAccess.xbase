@@ -1,4 +1,4 @@
-import helper.*
+import helper.Person
 /*
  * Xbase comes with sugared accessor syntax for getter and setter 
  * methods
@@ -15,15 +15,13 @@ person.forename +' '+ person.name
 // Jimi Hendrix (String)
 
 
+// static features can be accessed using ::
+java.util.Collections::singleton("So lonely") 
+System::err.println()
 
-
-
-
-
-
-
-
-
+// but the dot works, too
+java.util.Collections.singleton("Lonely, lonely ...") 
+System.err.println()
 
 
 

@@ -8,8 +8,10 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
+import org.eclipse.xtext.linking.langATestLanguage.Main;
+import org.junit.Test;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -17,14 +19,14 @@ import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 public class ResourceTests extends AbstractXtextTests {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
 	}
 
-	public void testFragmentsWorkInBothDirections() throws Exception {
-		EObject model = getModel("type A extends B type B extends A");
-		EObject typeA1 = (EObject) invokeWithXtend("types.first()", model);
+	@Test public void testFragmentsWorkInBothDirections() throws Exception {
+		Main model = (Main) getModel("type A extends B type B extends A");
+		EObject typeA1 = model.getTypes().get(0);
 		EObject typeA2 = model.eResource().getEObject(model.eResource().getURIFragment(typeA1));
 		assertEquals(typeA1, typeA2);
 	}

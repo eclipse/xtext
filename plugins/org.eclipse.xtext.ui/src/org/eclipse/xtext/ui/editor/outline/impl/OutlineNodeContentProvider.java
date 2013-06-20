@@ -12,8 +12,6 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
-import com.google.inject.Inject;
-
 /**
  * The JFace/SWT content provider. The tree of visible IOutlineNodes has already been pre-computed.
  * 
@@ -21,9 +19,14 @@ import com.google.inject.Inject;
  */
 public class OutlineNodeContentProvider implements ITreeContentProvider {
 
-	@Inject
 	private OutlineFilterAndSorter filterSorter;
 
+	/**
+	 * @since 2.2
+	 */
+	public void setFilterAndSorter(OutlineFilterAndSorter filterSorter) {
+		this.filterSorter = filterSorter;
+	}
 	
 	public void dispose() {
 	}

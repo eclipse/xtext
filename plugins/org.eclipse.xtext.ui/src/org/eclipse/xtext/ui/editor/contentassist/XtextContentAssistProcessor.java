@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.contentassist;
 import java.util.Arrays;
 
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.ContextInformationValidator;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -101,7 +100,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 	}
 
 	public IContextInformationValidator getContextInformationValidator() {
-		return new ContextInformationValidator(this);
+		return new SmartInformationAwareContextInformationValidator(this);
 	}
 
 	public String getErrorMessage() {
