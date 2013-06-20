@@ -11,13 +11,16 @@
 							default: ${user.home}/buckminster
 							if not installed, it will be automatically installed
 		git.clone.dest		where Xtext sources are (or will be) cloned
-							${user.home}/git/org.eclipse.xtext
+							${user.home}/git/org.eclipse.xtext on windows C:\git\org.eclipse.xtext
 -->
 <project name="worskspace" default="materialize.workspace">
 	<property name="WORKSPACE" location="${user.home}/workspaces/xtext-sources" />
 	<property name="projects.location" location="${WORKSPACE}" />
-
-	<property name="git.clone.dest" location="${user.home}/git/org.eclipse.xtext" />
+	<!-- Windows Maximum Path Length Limitation issue-->
+	<condition property="git.root" value="/git" else="${user.home}/git">
+		<os family="windows" />
+	</condition>
+	<property name="git.clone.dest" location="${git.root}/org.eclipse.xtext" />
 	<property name="checkout.location" location="${git.clone.dest}" />
 
 	<property name="target.platform.dir" value="target.platform" />
@@ -71,11 +74,11 @@
 
 	<target name="import.tp">
 		<echo message="IMPORTANT: Populating an empty target platform may take a while." />
-		<run_buckminster command='import ${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec' />
+		<run_buckminster command='import "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec"' />
 	</target>
 
 	<target name="import.workspace.settings">
-		<run_buckminster command='importprefs -F ${checkout.location}/devtools/org.eclipse.xtext.contributor/workspace.epf' />
+		<run_buckminster command='importprefs -F "${checkout.location}/devtools/org.eclipse.xtext.contributor/workspace.epf"' />
 	</target>
 
 	<!-- = = = = = = = = = = = = = = = = =
@@ -152,7 +155,7 @@
 		<unzip src="${director.zip}" dest="${director.install.dest}" />
 		<delete file="${director.zip}" />
 	</target>
-	
+
 	<target name="cleanup">
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${WORKSPACE}" defaultexcludes="false">
@@ -165,7 +168,7 @@
 			</fileset>
 		</delete>
 	</target>
-	
+
 	<target name="create.git.config" unless="existing.repository">
 		<input message="Input your eclipse bugzilla id" addproperty="bugzilla.user" />
 		<antcall target="-do.modify.config" />

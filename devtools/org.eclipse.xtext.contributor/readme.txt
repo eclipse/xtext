@@ -1,4 +1,6 @@
-How to use.
+Detailed informations can be found here http://wiki.eclipse.org/Xtext/Contributor_Guide
+
+Simple "How to use":
 
 1. Run the ant script located here http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/plain/devtools/org.eclipse.xtext.contributor/workspace.ant 
 	Unix console: wget -N http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/plain/devtools/org.eclipse.xtext.contributor/workspace.ant; ant -f workspace.ant
