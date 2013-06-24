@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -23,8 +24,10 @@ public class XpectJavaModelFactory {
 
 	public XpectJavaModel createJavaModel(Class<?> clazz) {
 		XtextResourceSet rs = new XtextResourceSet();
-		rs.setClasspathURIContext(clazz.getClassLoader());
+		ClassLoader classLoader = clazz.getClassLoader();
+		rs.setClasspathURIContext(classLoader);
 		rs.setClasspathUriResolver(new ClassloaderClasspathUriResolver());
+		new ClasspathTypeProvider(classLoader, rs, null);
 		JvmTypeReference typeReference = typeReferences.getTypeForName(clazz, rs);
 		return createJavaModel(rs, (JvmDeclaredType) typeReference.getType());
 	}
