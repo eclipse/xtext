@@ -8,11 +8,13 @@
 package org.xpect.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.xpect.ui.highlighting.XpectTokenDefProvider;
 import org.xpect.ui.highlighting.XpectTokenToAttributeMapper;
+import org.xpect.ui.scoping.ClasspathOrJdtBasedSimpleTypeScopeProvider;
 import org.xpect.ui.util.UIJavaReflectAccess;
 import org.xpect.util.IJavaReflectAccess;
 
@@ -22,6 +24,7 @@ import com.google.inject.name.Names;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XpectUiModule extends org.xpect.ui.AbstractXpectUiModule {
 	public XpectUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -38,6 +41,11 @@ public class XpectUiModule extends org.xpect.ui.AbstractXpectUiModule {
 
 	public Class<? extends IJavaReflectAccess> bindJavaReflectAccess() {
 		return UIJavaReflectAccess.class;
+	}
+
+	@Override
+	public Class<? extends AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
+		return ClasspathOrJdtBasedSimpleTypeScopeProvider.class;
 	}
 
 }

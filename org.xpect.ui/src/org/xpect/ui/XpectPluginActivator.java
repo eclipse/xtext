@@ -13,6 +13,8 @@ import org.xpect.registry.ILanguageInfo;
 import org.xpect.ui.internal.XpectActivator;
 import org.xpect.ui.registry.ExtensionRegistryReader;
 import org.xpect.ui.registry.UILanugageRegistry;
+import org.xpect.ui.util.UIFileForClassProvider;
+import org.xpect.util.IFileForClassProvider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -25,9 +27,12 @@ public class XpectPluginActivator extends XpectActivator {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+
 		UILanugageRegistry lanugageRegistry = new UILanugageRegistry();
 		((DelegatingLanguageRegistry) ILanguageInfo.Registry.INSTANCE).setDelegate(lanugageRegistry);
 		new ExtensionRegistryReader(lanugageRegistry).readRegistry();
+
+		((IFileForClassProvider.Delegate) IFileForClassProvider.INSTANCE).setDelegate(new UIFileForClassProvider());
 	}
 
 }

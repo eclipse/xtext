@@ -15,8 +15,10 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeMirror;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.xpect.util.IJavaReflectAccess;
 
 @SuppressWarnings("restriction")
@@ -81,15 +83,13 @@ public class UIJavaReflectAccess implements IJavaReflectAccess {
 		}
 	}
 
-	public Class<?> getRawType(JvmType jvmType) {
-		if (jvmType == null || jvmType.eIsProxy())
-			return null;
-		if (!(jvmType.eResource() instanceof TypeResource))
-			return null;
-		IMirror typeMirror = ((TypeResource) jvmType.eResource()).getMirror();
-		if (!(typeMirror instanceof JdtTypeMirror))
-			return null;
-		IType mirroredType = ((JdtTypeMirror) typeMirror).getMirroredType();
+	private Bundle getBundle(ClassMirror mirror) {
+		Class<?> mirroredClass = mirror.getMirroredClass();
+		return FrameworkUtil.getBundle(mirroredClass);
+	}
+
+	private Bundle getBundle(JdtTypeMirror mirror) {
+		IType mirroredType = mirror.getMirroredType();
 		IPackageFragmentRoot fragmentRoot = getPackageFragmentRoot(mirroredType);
 		if (fragmentRoot == null || fragmentRoot.getPath() == null)
 			return null;
@@ -103,7 +103,22 @@ public class UIJavaReflectAccess implements IJavaReflectAccess {
 			return null;
 		if (bundleName == null)
 			return null;
-		Bundle bundle = Platform.getBundle(bundleName);
+		return Platform.getBundle(bundleName);
+	}
+
+	public Class<?> getRawType(JvmType jvmType) {
+		if (jvmType == null || jvmType.eIsProxy())
+			return null;
+		if (!(jvmType.eResource() instanceof TypeResource))
+			return null;
+		IMirror typeMirror = ((TypeResource) jvmType.eResource()).getMirror();
+		Bundle bundle = null;
+		if (typeMirror instanceof JdtTypeMirror)
+			bundle = getBundle((JdtTypeMirror) typeMirror);
+		if (typeMirror instanceof ClassMirror)
+			bundle = getBundle((ClassMirror) typeMirror);
+		if (bundle == null)
+			return null;
 		String className = jvmType.getQualifiedName();
 		try {
 			return bundle.loadClass(className);

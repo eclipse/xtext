@@ -13,14 +13,13 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.xpect.runner.XpectTestFiles.XpectTestFileCollector;
 import org.xpect.util.DotClasspath;
+import org.xpect.util.IFileForClassProvider;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -127,31 +126,26 @@ public @interface XpectTestFiles {
 		}
 
 		protected File getOwningJavaClassFolder(Class<?> clazz) {
-			URL resource = clazz.getClassLoader().getResource(clazz.getName().replace(".", "/") + ".class");
-			try {
-				File classFile = new File(resource.toURI());
-				File current = classFile.getParentFile();
-				File dotClasspathFile = null;
-				while (current != null && !(dotClasspathFile = new File(current + "/.classpath")).exists())
-					current = current.getParentFile();
-				if (dotClasspathFile == null)
-					return classFile.getParentFile();
-				DotClasspath cp = new DotClasspath(dotClasspathFile);
-				File project = dotClasspathFile.getParentFile();
-				File output = new File(project + "/" + cp.getOutput());
-				if (!output.isDirectory() || !classFile.toString().startsWith(output.toString()))
-					return classFile.getParentFile();
-				URI classFileInClasspath = URI.createURI(output.toURI().relativize(classFile.toURI()).toString());
-				File javaFileInClasspath = new File(classFileInClasspath.trimFileExtension().appendFileExtension("java").toString());
-				for (String path : cp.getSources()) {
-					File result = new File(project + "/" + path + "/" + javaFileInClasspath);
-					if (result.isFile())
-						return result.getParentFile();
-				}
+			File classFile = IFileForClassProvider.INSTANCE.getFile(clazz);
+			File current = classFile.getParentFile();
+			File dotClasspathFile = null;
+			while (current != null && !(dotClasspathFile = new File(current + "/.classpath")).exists())
+				current = current.getParentFile();
+			if (dotClasspathFile == null)
 				return classFile.getParentFile();
-			} catch (URISyntaxException e) {
-				throw new RuntimeException(e);
+			DotClasspath cp = new DotClasspath(dotClasspathFile);
+			File project = dotClasspathFile.getParentFile();
+			File output = new File(project + "/" + cp.getOutput());
+			if (!output.isDirectory() || !classFile.toString().startsWith(output.toString()))
+				return classFile.getParentFile();
+			URI classFileInClasspath = URI.createURI(output.toURI().relativize(classFile.toURI()).toString());
+			File javaFileInClasspath = new File(classFileInClasspath.trimFileExtension().appendFileExtension("java").toString());
+			for (String path : cp.getSources()) {
+				File result = new File(project + "/" + path + "/" + javaFileInClasspath);
+				if (result.isFile())
+					return result.getParentFile();
 			}
+			return classFile.getParentFile();
 		}
 
 		public String getTitle(URI uri) {
