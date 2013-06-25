@@ -31,6 +31,7 @@ import org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
@@ -178,6 +179,10 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 	private void testSequence(String inModel, String outModel) throws Exception {
 		EObject inObj = getModel(inModel);
+		testSequence(inObj, outModel);
+	}
+
+	private void testSequence(EObject inObj, String outModel) throws Exception {
 		EObject outObj = getModel(outModel);
 		EObject context = nmSequencer.findContexts(inObj, true, null).iterator().next();
 		Acceptor actual = new Acceptor();
@@ -286,6 +291,20 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	}
 
 	@Test
+	public void testBooleanAlternative_c() throws Exception {
+		Model model = (Model) getModel("#6 kw2");
+		model.getX6().getBool().setIsTrue(false);
+		testSequence(model, "#6 kw1");
+	}
+
+	@Test
+	public void testBooleanAlternative_d() throws Exception {
+		Model model = (Model) getModel("#6 kw1");
+		model.getX6().getBool().setIsTrue(true);
+		testSequence(model, "#6 kw2");
+	}
+
+	@Test
 	public void testUnassignedDatatype() throws Exception {
 		testSequence("#7 foo kw1", "#7 foo matched 1");
 	}
@@ -324,32 +343,32 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	public void testBooleanDatatype() throws Exception {
 		testSequence("#12 foo", "#12 foomatched");
 	}
-	
+
 	@Test
 	public void testLongAlternative1() throws Exception {
 		testSequence("#13 x0 kw1 x1a kw1 x1b!");
 	}
-	
+
 	@Test
 	public void testLongAlternative2() throws Exception {
 		testSequence("#13 x0 kw8 x8a kw8 x8b!");
 	}
-	
+
 	@Test
 	public void testLongAlternative3() throws Exception {
 		testSequence("#13 x0 kw1 x1 kw2 x2 kw3 x3 kw4 x4 kw5 x5 kw6 x6 kw7 x7 kw8 x8!");
 	}
-	
+
 	@Test
 	public void testLongAlternative4() throws Exception {
 		testSequence("#13 x0 kw8 x8 kw7 x7 kw6 x6 kw5 x5 kw4 x4 kw3 x3 kw2 x2 kw1 x1!");
 	}
-	
+
 	@Test
 	public void testLongAlternative5() throws Exception {
 		testSequence("#13 x0 kw1 kw2 kw3 kw4 kw5 kw6 kw7 kw8!");
 	}
-	
+
 	@Test
 	public void testLongAlternative6() throws Exception {
 		testSequence("#13 x0 kw8 kw7 kw6 kw5 kw4 kw3 kw2 kw1!");
