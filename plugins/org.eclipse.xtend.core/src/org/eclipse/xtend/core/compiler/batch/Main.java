@@ -39,6 +39,8 @@ public class Main {
 				xtendBatchCompiler.setTempDirectory(arguments.next().trim());
 			} else if ("-encoding".equals(argument.trim())) {
 				xtendBatchCompiler.setFileEncoding(arguments.next().trim());
+			} else if ("-useCurrentClassLoader".equals(argument.trim())) {
+				xtendBatchCompiler.setUseCurrentClassLoaderAsParent(true);
 			} else {
 				xtendBatchCompiler.setSourcePath(argument);
 			}
@@ -55,6 +57,7 @@ public class Main {
 		System.out.println("-tp <path>                 Temp directory to hold generated stubs and classes");
 		System.out.println("-cp <path>                 Specify where to find user class files");
 		System.out.println("-encoding <encoding>       Specify character encoding used by source files");
+		System.out.println("-useCurrentClassLoader	   Use current classloader as parent classloader");
 	}
 
 }
