@@ -289,6 +289,8 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		public boolean canEnter(ISemState state) {
+			if (state.isBooleanAssignment() && !Boolean.TRUE.equals(obj.getValue(state, state.getFeatureID())))
+				return false;
 			for (int i = 0; i < nextIndex.length; i++)
 				if (i != state.getFeatureID()) {
 					int count = nextIndex[i];

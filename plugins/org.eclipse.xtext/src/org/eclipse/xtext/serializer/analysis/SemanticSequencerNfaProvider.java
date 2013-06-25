@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
@@ -85,6 +86,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		protected List<ISemState> followers;
 		protected int orderID = 0;
 		protected EClass type;
+		protected Boolean booleanAssignment;
 
 		public SemState(EClass type, AbstractElement assignedGrammarElement) {
 			super();
@@ -131,6 +133,14 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			if (assignedGrammarElement == null)
 				return "(null)";
 			return new GrammarElementTitleSwitch().showQualified().showAssignments().apply(assignedGrammarElement);
+		}
+
+		public boolean isBooleanAssignment() {
+			if (booleanAssignment == null) {
+				Assignment assignment = GrammarUtil.containingAssignment(assignedGrammarElement);
+				booleanAssignment = assignment != null && GrammarUtil.isBooleanAssignment(assignment);
+			}
+			return booleanAssignment;
 		}
 	}
 

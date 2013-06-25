@@ -38,6 +38,8 @@ public interface ISemanticSequencerNfaProvider {
 		int getOrderID();
 
 		List<AbstractElement> getToBeValidatedAssignedElements();
+		
+		boolean isBooleanAssignment();
 	}
 
 	Nfa<ISemState> getNFA(EObject context, EClass type);
