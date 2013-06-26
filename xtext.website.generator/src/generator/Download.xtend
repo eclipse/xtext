@@ -7,7 +7,7 @@ class Download extends AbstractWebsite {
 	}
 	
 	def String getLink(String platform) {
-		'http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-'+platform+'.tar.gz&r=1'
+		'http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-R-'+platform+'.tar.gz&r=1'
 	}
 	
 	public static val OSX_64 = 'macosx-cocoa-x86_64';
