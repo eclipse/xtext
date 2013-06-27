@@ -1,5 +1,6 @@
 package generator;
 
+import com.google.common.base.Objects;
 import generator.AbstractWebsite;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
@@ -10,9 +11,29 @@ public class Download extends AbstractWebsite {
   }
   
   public String getLink(final String platform) {
-    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-" + platform);
-    String _plus_1 = (_plus + ".tar.gz&r=1");
-    return _plus_1;
+    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-R-" + platform);
+    String _fileExtension = this.fileExtension(platform);
+    String _plus_1 = (_plus + _fileExtension);
+    String _plus_2 = (_plus_1 + "&r=1");
+    return _plus_2;
+  }
+  
+  public String fileExtension(final String platform) {
+    String _xifexpression = null;
+    boolean _or = false;
+    boolean _equals = Objects.equal(platform, Download.WIN_32);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _equals_1 = Objects.equal(platform, Download.WIN_64);
+      _or = (_equals || _equals_1);
+    }
+    if (_or) {
+      _xifexpression = ".zip";
+    } else {
+      _xifexpression = ".tar.gz";
+    }
+    return _xifexpression;
   }
   
   public final static String OSX_64 = "macosx-cocoa-x86_64";
@@ -95,19 +116,19 @@ public class Download extends AbstractWebsite {
     _builder.append("<td style=\"text-align: center;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("<a  ");
+    _builder.append("<a");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("rel=\"popover\" ");
+    _builder.append("rel=\"popover\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\" ");
+    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("data-original-title=\"Right-click and \'Copy Link\'\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/\" ");
+    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("class=\"has-popover btn btn-primary btn-large\"");
@@ -128,16 +149,16 @@ public class Download extends AbstractWebsite {
     _builder.append("<a");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t  ");
-    _builder.append("rel=\"popover\" ");
+    _builder.append("rel=\"popover\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\" ");
+    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-original-title=\"Right-click and \'Copy Link\'\" ");
+    _builder.append("data-original-title=\"Right-click and \'Copy Link\'\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t  ");
-    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/\" ");
+    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("class=\"has-popover btn btn-primary btn-large\"");
@@ -158,16 +179,16 @@ public class Download extends AbstractWebsite {
     _builder.append("<a");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t");
-    _builder.append("rel=\"popover\" ");
+    _builder.append("rel=\"popover\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\" ");
+    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-original-title=\"Right-click and \'Copy Link\'\" ");
+    _builder.append("data-original-title=\"Right-click and \'Copy Link\'\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t");
-    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/\" ");
+    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("class=\"has-popover btn btn-primary btn-large\"");
@@ -239,7 +260,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<a href=\"");
     String _link = this.getLink(Download.OSX_64);
     _builder.append(_link, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\" style=\"width: 45%;\">OS X 64 Bit</a>&nbsp;");
@@ -248,7 +269,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<a href=\"");
     String _link_1 = this.getLink(Download.OSX_32);
     _builder.append(_link_1, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -269,7 +290,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<a href=\"");
     String _link_2 = this.getLink(Download.LINUX_64);
     _builder.append(_link_2, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -281,7 +302,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<a href=\"");
     String _link_3 = this.getLink(Download.LINUX_32);
     _builder.append(_link_3, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -314,7 +335,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<a href=\"");
     String _link_5 = this.getLink(Download.WIN_32);
     _builder.append(_link_5, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -365,7 +386,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("<strong>  Eclipse Xtext is implemented in Java, so you must have a ");
+    _builder.append("<strong>  Eclipse Xtext is implemented in Java, so you must have a");
     _builder.newLine();
     _builder.append("\t\t        ");
     _builder.append("<a href=\"http://www.oracle.com/technetwork/java/index.html\">Java");
@@ -413,10 +434,10 @@ public class Download extends AbstractWebsite {
     _builder.append("<li>Download the distribution from above that matches your OS.</li>");
     _builder.newLine();
     _builder.append("\t\t        ");
-    _builder.append("<li>Unzip the archive into the directory of your choice. ");
+    _builder.append("<li>Unzip the archive into the directory of your choice.");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("<strong>  Windows Users should choose a directory close to the root since the zip contains a ");
+    _builder.append("<strong>  Windows Users should choose a directory close to the root since the zip contains a");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("deeply nested folder structure. The maximum path length on windows may not exceed 256 characters.");
@@ -458,7 +479,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("If you have an Eclipse running : ");
+    _builder.append("If you have an Eclipse running :");
     _builder.newLine();
     _builder.append("\t\t    ");
     _builder.append("</p>");
@@ -467,10 +488,10 @@ public class Download extends AbstractWebsite {
     _builder.append("<ul>");
     _builder.newLine();
     _builder.append("\t\t        ");
-    _builder.append("<li>  ");
+    _builder.append("<li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t    ");
-    _builder.append("Choose ");
+    _builder.append("Choose");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("<strong>  Help -&gt; Install New Software...");
@@ -491,7 +512,7 @@ public class Download extends AbstractWebsite {
     _builder.append("</li>");
     _builder.newLine();
     _builder.append("\t\t        ");
-    _builder.append("<li>Select the <i>Xtext SDK</i> from the category <i>Xtext {version}</i> and ");
+    _builder.append("<li>Select the <i>Xtext SDK</i> from the category <i>Xtext {version}</i> and");
     _builder.newLine();
     _builder.append("\t\t        ");
     _builder.append("complete the wizard by clicking the <i>Next</i> button until you can click <i>Finish</i>.");
@@ -500,7 +521,7 @@ public class Download extends AbstractWebsite {
     _builder.append("</li>");
     _builder.newLine();
     _builder.append("\t\t        ");
-    _builder.append("<li>  ");
+    _builder.append("<li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t    ");
     _builder.append("After a quick download and a restart of Eclipse, Xtext is ready to use.");
@@ -515,13 +536,13 @@ public class Download extends AbstractWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on ");
+    _builder.append("Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid ");
+    _builder.append("the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("this, you can manually install the feature ");
+    _builder.append("this, you can manually install the feature");
     _builder.newLine();
     _builder.append("\t\t      ");
     _builder.append("<strong>  Xtext Antlr-2.0.0");
@@ -533,7 +554,7 @@ public class Download extends AbstractWebsite {
     _builder.append("(");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("<a href=\"http://download.itemis.de/updates/\">http://download.itemis.de/updates/</a>). ");
+    _builder.append("<a href=\"http://download.itemis.de/updates/\">http://download.itemis.de/updates/</a>).");
     _builder.newLine();
     _builder.append("\t\t      ");
     _builder.append("The general installation procedures are not affected by this issue.");
@@ -596,7 +617,7 @@ public class Download extends AbstractWebsite {
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t    ");
     StringConcatenation _builder_3 = new StringConcatenation();
-    _builder_3.append("<p>Software systems built from open source components requires manpower that understands the internal dependencies of ");
+    _builder_3.append("<p>Software systems built from open source components requires manpower that understands the internal dependencies of");
     _builder_3.newLine();
     _builder_3.append("these components and can quickly and efficiently eliminate problems, should an error occur. </p>");
     _builder_3.newLine();
@@ -611,7 +632,7 @@ public class Download extends AbstractWebsite {
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t    ");
     StringConcatenation _builder_4 = new StringConcatenation();
-    _builder_4.append("<p>If you instead prefer a downloadable updatesite or an SDK zip, ");
+    _builder_4.append("<p>If you instead prefer a downloadable updatesite or an SDK zip,");
     _builder_4.newLine();
     _builder_4.append("please have a look at the following site : <a href=\"http://www.eclipse.org/modeling/tmf/downloads/\">http://www.eclipse.org/modeling/tmf/downloads/</a></p>");
     _builder_4.newLine();

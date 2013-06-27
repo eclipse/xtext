@@ -5,22 +5,29 @@ class Download extends AbstractXtendWebsite {
 	override path() {
 		"download.html"
 	}
-	
+
 	override protected isPrettyPrint() {
 		true
 	}
-	
+
 	def String getLink(String platform) {
-		'http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-R-'+platform+'.tar.gz&r=1'
+		'http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-R-' + platform + platform.fileExtension+'&r=1'
 	}
-	
+
+	def String fileExtension(String platform) {
+		if(platform == WIN_32||platform==WIN_64)
+			".zip"
+		else
+			".tar.gz"
+	}
+
 	public static val OSX_64 = 'macosx-cocoa-x86_64';
 	public static val OSX_32 = 'macosx-cocoa';
 	public static val LINUX_64 = 'linux-gtk-x86_64';
 	public static val LINUX_32 = 'linux-gtk';
 	public static val WIN_64 = 'win32-x86_64';
 	public static val WIN_32 = 'win32';
-	
+
 	override contents() '''
 		«headline('Download')»
 		<div id="page">
@@ -44,31 +51,31 @@ class Download extends AbstractXtendWebsite {
 							    </tr>
 							    <tr>
 							    	<td style="text-align: center;">
-							    	<a  
-							    	rel="popover" 
-							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+							    	<a
+							    	rel="popover"
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
 							    	data-original-title="Right-click and 'Copy Link'"
-							    	href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" 
+							    	href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"
 							    	class="has-popover btn btn-primary btn-large"
 							    	style="width: 70%;">Latest Release</a></td>
 							    </tr>
 							    <tr>
 									<td style="text-align: center;">
 									<a
-									  rel="popover" 
-							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
-							    	data-original-title="Right-click and 'Copy Link'" 
-									  href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" 
+									  rel="popover"
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
+							    	data-original-title="Right-click and 'Copy Link'"
+									  href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/"
 							    	class="has-popover btn btn-primary btn-large"
 							    	style="width: 70%;">Latest Milestone</a></td>
 							    </tr>
 							    <tr>
 									<td style="text-align: center;">
 									<a
-										rel="popover" 
-							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
-							    	data-original-title="Right-click and 'Copy Link'" 
-										href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/" 
+										rel="popover"
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
+							    	data-original-title="Right-click and 'Copy Link'"
+										href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"
 							    	class="has-popover btn btn-primary btn-large"
 							    	style="width: 70%;">Bleeding Edge!</a></td>
 							    </tr>
@@ -91,18 +98,18 @@ class Download extends AbstractXtendWebsite {
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="«getLink(OSX_64)»" 
+								    	<a href="«getLink(OSX_64)»"
 								    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;
-								    	<a href="«getLink(OSX_32)»" 
+								    	<a href="«getLink(OSX_32)»"
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="«getLink(LINUX_64)»" 
+								    	<a href="«getLink(LINUX_64)»"
 								    	class="btn btn-primary btn-large"
 								    	style="width: 45%;">Linux 64 Bit</a>&nbsp;
-								    	<a href="«getLink(LINUX_32)»" 
+								    	<a href="«getLink(LINUX_32)»"
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>
@@ -111,7 +118,7 @@ class Download extends AbstractXtendWebsite {
 								    	<a href="«getLink(WIN_64)»"
 								    	class="btn btn-primary btn-large"
 								    	style="width: 45%;">Windows 64 Bit</a>&nbsp;
-								    	<a href="«getLink(WIN_32)»" 
+								    	<a href="«getLink(WIN_32)»"
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>
@@ -139,7 +146,7 @@ class Download extends AbstractXtendWebsite {
 							<h2 style="padding-top: 15px;">Install From Update Site</h2>
 							<p>
 								If you already have an Eclipse running you should install the <i>"Xtend SDK"</i>-Feature from one of the update sites listed above. To do so
-								within Eclipse choose <i>Help -&gt; Install New Software...</i>. In the upcoming dialog you should paste one of the update site URLS into the 
+								within Eclipse choose <i>Help -&gt; Install New Software...</i>. In the upcoming dialog you should paste one of the update site URLS into the
 								field named <i>Work with</i>. Now search for the feature <e>Xtend SDK</e>, select it and click <i>Next</i> and on the next page <i>Finish</i>.
 							</p>
 							<img src="images/screenshot-installation.png" class="image_between_p"/>
@@ -154,7 +161,7 @@ class Download extends AbstractXtendWebsite {
 								the Maven Central Repository: <a href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a>.
 							</p>
 							<p>
-								You can create a readily configured project using 
+								You can create a readily configured project using
 								<pre class="prettyprint lang-xml linenums">
 		mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend -DarchetypeArtifactId=xtend-archetype
 								</pre>
@@ -219,14 +226,14 @@ class Download extends AbstractXtendWebsite {
 							<p>
 								<img src="images/java-perspective.png" style="float : right; margin-left:10px;"/>
 								When you've started Eclipse for the first time, you should see an empty workspace. Switch to the 'Java perspective'
-								if you are not already in it. Xtend integrates with Java, so you need to create a Java project to get started. In the menu choose 
+								if you are not already in it. Xtend integrates with Java, so you need to create a Java project to get started. In the menu choose
 								<i>File -> New -> Java Project</i>. In the upcoming dialog choose any project name you want (e.g. <i>my.project</i>).
-								After clicking <i>Finish</i> Eclipse will create a fresh project with an empty source folder named <i>'/src'</i>. 
+								After clicking <i>Finish</i> Eclipse will create a fresh project with an empty source folder named <i>'/src'</i>.
 							</p>
 							<h3>A first class</h3>
 							<img src="images/menu new xtend class.png" class="image_between_p"/>
 							<p>
-								To create your first Xtend class select the source folder and press the right mouse button. You should find the entry 
+								To create your first Xtend class select the source folder and press the right mouse button. You should find the entry
 								<i>Xtend class</i> in the category <i>New &gt;</i>. If you don't see it you might not be in the Java perspective or you need to reset the perspective. To do so right click
 								on the perspective icon on the top right and choose <i>reset</i>.
 							</p>
@@ -253,7 +260,7 @@ class Download extends AbstractXtendWebsite {
 							</p>
 							<img src="images/run as java application.png" class="image_between_p"/>
 							<p>
-								<a href="documentation.html#GettingStarted">Click here for the next steps and more examples.</a> 
+								<a href="documentation.html#GettingStarted">Click here for the next steps and more examples.</a>
 							</p>
 					</section>
 				  </div>
@@ -262,5 +269,5 @@ class Download extends AbstractXtendWebsite {
 			</div>
 		</div>
 	'''
-	
+
 }
