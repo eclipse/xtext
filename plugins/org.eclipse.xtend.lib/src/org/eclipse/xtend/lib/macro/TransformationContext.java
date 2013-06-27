@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro;
 
+import org.eclipse.xtend.lib.macro.services.FileSystemAccess;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.Tracability;
 import org.eclipse.xtend.lib.macro.services.TypeLookup;
@@ -15,7 +16,7 @@ import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import com.google.common.annotations.Beta;
 
 /**
- * Services provided during transformation phase 
+ * Services provided during transformation phase
  * 
  * @author Sven Efftinge
  * 
@@ -23,6 +24,6 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface TransformationContext extends Tracability, ProblemSupport,
-		TypeReferenceProvider, TypeLookup {
+		TypeReferenceProvider, TypeLookup, FileSystemAccess {
 
 }

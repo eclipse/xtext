@@ -1375,7 +1375,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
           Assert.assertEquals("field_A_B_C", _simpleName);
         }
       };
-    this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);
+    this.assertProcessing(
+      this.THREE_ANNOTATIONS, _mappedTo, _function);
   }
   
   @Test
@@ -1406,7 +1407,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
           Assert.assertEquals("field2_A_B_C", _simpleName_1);
         }
       };
-    this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);
+    this.assertProcessing(
+      this.THREE_ANNOTATIONS, _mappedTo, _function);
   }
   
   @Test
@@ -1424,7 +1426,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
           Assert.assertNotNull(myClass);
         }
       };
-    this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);
+    this.assertProcessing(
+      this.THREE_ANNOTATIONS, _mappedTo, _function);
   }
   
   public abstract void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);

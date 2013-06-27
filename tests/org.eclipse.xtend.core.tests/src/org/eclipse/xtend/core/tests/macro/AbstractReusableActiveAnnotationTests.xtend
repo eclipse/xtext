@@ -7,7 +7,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
-	
+
 	@Test def void testChangeJavaDoc() {
 		assertProcessing(
 			'myannotation/ChangeDocAnnotation.xtend' -> '''
@@ -18,7 +18,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-
+				
 				@Active(typeof(ChangeDocProcessor))
 				annotation ChangeDoc{ }
 				class ChangeDocProcessor extends AbstractClassProcessor {
@@ -40,10 +40,10 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
-			assertEquals("make me lower case!",clazz.docComment)
+			assertEquals("make me lower case!", clazz.docComment)
 		]
 	}
-	
+
 	@Test def void testAddConstructor() {
 		assertProcessing(
 			'myannotation/AddConstructorAnnotation.xtend' -> '''
@@ -54,7 +54,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-
+				
 				@Active(typeof(AddConstructorProcessor))
 				annotation AddConstructor{ }
 				class AddConstructorProcessor extends AbstractClassProcessor {
@@ -90,7 +90,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-
+				
 				@Active(typeof(AddConstructorProcessor))
 				annotation AddConstructor{ }
 				class AddConstructorProcessor extends AbstractClassProcessor {
@@ -115,7 +115,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertTrue(clazz.declaredConstructors.head.parameters.isEmpty)
 		]
 	}
-	
+
 	@Test def void testSwapExpressions() {
 		assertProcessing(
 			'myannotation/SwapAnnotation.xtend' -> '''
@@ -126,7 +126,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
-
+				
 				@Active(typeof(SwapProcessor))
 				annotation Swap{ }
 				class SwapProcessor implements TransformationParticipant<MutableMethodDeclaration> {
@@ -156,6 +156,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			// no compile errors
 		]
 	}
+
 	@Test def void testSwapExpressions_01() {
 		assertProcessing(
 			'myannotation/SwapAnnotation.xtend' -> '''
@@ -166,7 +167,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
-
+				
 				@Active(typeof(SwapProcessor))
 				annotation Swap{ }
 				class SwapProcessor implements TransformationParticipant<MutableFieldDeclaration> {
@@ -192,6 +193,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			// no compile errors
 		]
 	}
+
 	@Test def void testSimpleModification() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''
@@ -202,7 +204,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-
+				
 				@Active(typeof(AbstractProcessor))
 				annotation Abstract { }
 				class AbstractProcessor implements TransformationParticipant<MutableClassDeclaration> {
@@ -228,7 +230,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertTrue(clazz.isAbstract)
 		]
 	}
-	
+
 	@Test def void testParameterAnnotation() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''
@@ -239,7 +241,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
-
+				
 				@Active(typeof(ParamProcessor))
 				annotation Param { }
 				class ParamProcessor implements TransformationParticipant<MutableParameterDeclaration> {
@@ -265,7 +267,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertTrue(clazz.declaredMethods.head.parameters.forall[simpleName.endsWith('foo')])
 		]
 	}
-	
+
 	@Test def void testSetDocumentation() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''
@@ -276,7 +278,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-
+				
 				@Active(typeof(AbstractProcessor))
 				annotation Abstract { }
 				class AbstractProcessor implements TransformationParticipant<MutableClassDeclaration> {
@@ -302,10 +304,10 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
-			assertEquals('Hello World',clazz.docComment)
+			assertEquals('Hello World', clazz.docComment)
 		]
 	}
-	
+
 	@Test def void testAddAnnotationValue() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''
@@ -316,7 +318,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget
-
+				
 				@Active(typeof(AddAnnotationProcessor))
 				annotation AddAnnotation { }
 				class AddAnnotationProcessor implements TransformationParticipant<MutableAnnotationTarget> {
@@ -354,16 +356,17 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
-			val annotation = clazz.findAnnotation(typeReferenceProvider.newTypeReference('myannotation.MyAnnotation').type)
-			assertEquals(#['foo','bar','baz'],annotation.getValue('value'))
-			assertEquals('foo',annotation.getValue('singleValue'))
-			assertEquals(#[true,false,true],annotation.getValue('booleans'))
-			assertEquals(true,annotation.getValue('singleBoolean'))
-			assertEquals(#[1,2,3],annotation.getValue('numbers'))
-			assertEquals(1,annotation.getValue('singleNumber'))
+			val annotation = clazz.findAnnotation(
+				typeReferenceProvider.newTypeReference('myannotation.MyAnnotation').type)
+			assertEquals(#['foo', 'bar', 'baz'], annotation.getValue('value'))
+			assertEquals('foo', annotation.getValue('singleValue'))
+			assertEquals(#[true, false, true], annotation.getValue('booleans'))
+			assertEquals(true, annotation.getValue('singleBoolean'))
+			assertEquals(#[1, 2, 3], annotation.getValue('numbers'))
+			assertEquals(1, annotation.getValue('singleNumber'))
 		]
 	}
-	
+
 	@Test def void testCreateTypeFromUsage() {
 		assertProcessing(
 			'myannotation/SomeAnnotation.xtend' -> '''
@@ -408,7 +411,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertTrue(typeLookup.findClass('myusercode.DoesNotExist').simpleName == 'DoesNotExist')
 		]
 	}
-	
+
 	@Test def void testPropertyAnnotation() {
 		assertProcessing(
 			'myannotation/PropertyAnnotation.xtend' -> "
@@ -461,7 +464,6 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val getter = clazz.declaredMethods.head
 			assertEquals('getMyField', getter.simpleName)
 			assertEquals('String', getter.returnType.toString)
-			
 			val setter = clazz.findMethod('setMyField', getter.returnType)
 			assertEquals('setMyField', setter.simpleName)
 			assertEquals('void', setter.returnType.toString)
@@ -469,7 +471,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals('String', setter.parameters.head.type.toString)
 		]
 	}
-	
+
 	@Test def void testThrowsAndTypeParam() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''
@@ -480,7 +482,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
-
+				
 				@Active(typeof(ThrowsAndTypeParamProcessor))
 				annotation ThrowsAndTypeParam { }
 				class ThrowsAndTypeParamProcessor implements TransformationParticipant<MutableMethodDeclaration> {
@@ -513,7 +515,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(1, method.exceptions.size)
 		]
 	}
-	
+
 	@Test def void testValidation() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''
@@ -525,7 +527,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
-
+				
 				@Active(typeof(ValidatedProcessor))
 				annotation Validated { }
 				class ValidatedProcessor implements TransformationParticipant<MutableNamedElement> {
@@ -560,7 +562,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals('warning', problemSupport.getProblems(method).head.message)
 		]
 	}
-	
+
 	@Test def void testIntroduceNewTypes() {
 		assertProcessing(
 			'myannotation/NewTypesAddingAnnotation.xtend' -> '''
@@ -571,7 +573,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
 				import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
 				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
-
+				
 				@Active(typeof(NewTypesAddingAnnotationProcessor))
 				annotation NewTypesAddingAnnotation { }
 				class NewTypesAddingAnnotationProcessor implements RegisterGlobalsParticipant<ClassDeclaration> {
@@ -601,6 +603,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertNotNull(typeLookup.findAnnotationType('myusercode.MyClassAnnotation'))
 		]
 	}
+
 	@Test def void testIntroduceNewTypeAndWorkWithIt() {
 		assertProcessing(
 			'myannotation/NewTypesAddingAnnotation.xtend' -> '''
@@ -614,7 +617,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
-
+				
 				@Active(typeof(NewTypesAddingAnnotationProcessor))
 				annotation NewTypesAddingAnnotation { }
 				class NewTypesAddingAnnotationProcessor implements RegisterGlobalsParticipant<ClassDeclaration>, TransformationParticipant<MutableClassDeclaration> {
@@ -648,14 +651,14 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(declaredClass.qualifiedName, clazz.extendedClass.type.qualifiedName)
 		]
 	}
-	
+
 	val THREE_ANNOTATIONS = 'three.xtend' -> '''
 		import java.util.List
 		import org.eclipse.xtend.lib.macro.Active
 		import org.eclipse.xtend.lib.macro.TransformationContext
 		import org.eclipse.xtend.lib.macro.TransformationParticipant
 		import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
-
+		
 		@Active(typeof(Aprocessor))
 		annotation _A {}
 		class Aprocessor implements TransformationParticipant<MutableNamedElement> {
@@ -683,9 +686,10 @@ abstract class AbstractReusableActiveAnnotationTests {
 			override num() { '_C' }
 		}
 	'''
-	
+
 	@Test def void testDeterministicExecutionOrder_01() {
-		assertProcessing(THREE_ANNOTATIONS,
+		assertProcessing(
+			THREE_ANNOTATIONS,
 			'MyClass.xtend' -> '''
 				class MyClass {
 					@_A @_B @_C String field
@@ -693,13 +697,15 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val myClass = typeLookup.findClass('MyClass')
-			assertEquals('field_A_B_C',myClass.declaredFields.head.simpleName)
+			assertEquals('field_A_B_C', myClass.declaredFields.head.simpleName)
 		]
 	}
-	
+
 	@Test def void testDeterministicExecutionOrder_02() {
+
 		// annotation processors are called in the order their annotations first occur in the file
-		assertProcessing(THREE_ANNOTATIONS,
+		assertProcessing(
+			THREE_ANNOTATIONS,
 			'MyClass.xtend' -> '''
 				class MyClass {
 					@_A @_B @_C String field1
@@ -708,14 +714,16 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val myClass = typeLookup.findClass('MyClass')
-			assertEquals('field1_A_B_C',myClass.declaredFields.head.simpleName)
-			assertEquals('field2_A_B_C',myClass.declaredFields.get(1).simpleName)
+			assertEquals('field1_A_B_C', myClass.declaredFields.head.simpleName)
+			assertEquals('field2_A_B_C', myClass.declaredFields.get(1).simpleName)
 		]
 	}
-	
+
 	@Test def void testDeterministicExecutionOrder_03() {
+
 		// annotation processors are called in the order their annotations first occur in the file
-		assertProcessing(THREE_ANNOTATIONS,
+		assertProcessing(
+			THREE_ANNOTATIONS,
 			'MyClass.xtend' -> '''
 				@_A @_B @_C class MyClass {
 				}
@@ -725,6 +733,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertNotNull(myClass)
 		]
 	}
-	
-	def void assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnitImpl)=>void expectations)
+
+	def void assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile,
+		(CompilationUnitImpl)=>void expectations)
 }

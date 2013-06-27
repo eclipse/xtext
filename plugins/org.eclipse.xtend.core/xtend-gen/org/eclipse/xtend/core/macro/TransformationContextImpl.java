@@ -23,6 +23,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.services.FolderHandle;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
@@ -79,6 +80,24 @@ public class TransformationContextImpl implements TransformationContext {
     return _switchResult;
   }
   
+  public FolderHandle getSourceFolder() {
+    CompilationUnitImpl _unit = this.getUnit();
+    FolderHandle _sourceFolder = _unit.getSourceFolder();
+    return _sourceFolder;
+  }
+  
+  public FolderHandle getRootFolder() {
+    CompilationUnitImpl _unit = this.getUnit();
+    FolderHandle _rootFolder = _unit.getRootFolder();
+    return _rootFolder;
+  }
+  
+  public FolderHandle getTargetFolder() {
+    CompilationUnitImpl _unit = this.getUnit();
+    FolderHandle _targetFolder = _unit.getTargetFolder();
+    return _targetFolder;
+  }
+  
   public boolean isSource(final NamedElement element) {
     return (element instanceof XtendNamedElementImpl<?>);
   }
@@ -88,7 +107,8 @@ public class TransformationContextImpl implements TransformationContext {
     if (_isSource) {
       EObject _delegate = ((XtendNamedElementImpl<?>) source).getDelegate();
       Set<EObject> _jvmElements = this.associations.getJvmElements(_delegate);
-      Iterable<JvmIdentifiableElement> _filter = Iterables.<JvmIdentifiableElement>filter(_jvmElements, JvmIdentifiableElement.class);
+      Iterable<JvmIdentifiableElement> _filter = Iterables.<JvmIdentifiableElement>filter(_jvmElements, 
+        JvmIdentifiableElement.class);
       final JvmIdentifiableElement derivedElement = IterableExtensions.<JvmIdentifiableElement>head(_filter);
       boolean _notEquals = (!Objects.equal(derivedElement, null));
       if (_notEquals) {
