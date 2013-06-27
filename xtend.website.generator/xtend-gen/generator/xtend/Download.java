@@ -1,5 +1,6 @@
 package generator.xtend;
 
+import com.google.common.base.Objects;
 import generator.xtend.AbstractXtendWebsite;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
@@ -14,9 +15,29 @@ public class Download extends AbstractXtendWebsite {
   }
   
   public String getLink(final String platform) {
-    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-" + platform);
-    String _plus_1 = (_plus + ".tar.gz&r=1");
-    return _plus_1;
+    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-R-" + platform);
+    String _fileExtension = this.fileExtension(platform);
+    String _plus_1 = (_plus + _fileExtension);
+    String _plus_2 = (_plus_1 + "&r=1");
+    return _plus_2;
+  }
+  
+  public String fileExtension(final String platform) {
+    String _xifexpression = null;
+    boolean _or = false;
+    boolean _equals = Objects.equal(platform, Download.WIN_32);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _equals_1 = Objects.equal(platform, Download.WIN_64);
+      _or = (_equals || _equals_1);
+    }
+    if (_or) {
+      _xifexpression = ".zip";
+    } else {
+      _xifexpression = ".tar.gz";
+    }
+    return _xifexpression;
   }
   
   public final static String OSX_64 = "macosx-cocoa-x86_64";
@@ -99,19 +120,19 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<td style=\"text-align: center;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("<a  ");
+    _builder.append("<a");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("rel=\"popover\" ");
+    _builder.append("rel=\"popover\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\" ");
+    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("data-original-title=\"Right-click and \'Copy Link\'\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/\" ");
+    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("class=\"has-popover btn btn-primary btn-large\"");
@@ -132,16 +153,16 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<a");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t  ");
-    _builder.append("rel=\"popover\" ");
+    _builder.append("rel=\"popover\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\" ");
+    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-original-title=\"Right-click and \'Copy Link\'\" ");
+    _builder.append("data-original-title=\"Right-click and \'Copy Link\'\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t  ");
-    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/\" ");
+    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("class=\"has-popover btn btn-primary btn-large\"");
@@ -162,16 +183,16 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<a");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t");
-    _builder.append("rel=\"popover\" ");
+    _builder.append("rel=\"popover\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\" ");
+    _builder.append("data-content=\"This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
-    _builder.append("data-original-title=\"Right-click and \'Copy Link\'\" ");
+    _builder.append("data-original-title=\"Right-click and \'Copy Link\'\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t");
-    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/\" ");
+    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("class=\"has-popover btn btn-primary btn-large\"");
@@ -243,7 +264,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<a href=\"");
     String _link = this.getLink(Download.OSX_64);
     _builder.append(_link, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\" style=\"width: 45%;\">OS X 64 Bit</a>&nbsp;");
@@ -252,7 +273,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<a href=\"");
     String _link_1 = this.getLink(Download.OSX_32);
     _builder.append(_link_1, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -273,7 +294,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<a href=\"");
     String _link_2 = this.getLink(Download.LINUX_64);
     _builder.append(_link_2, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -285,7 +306,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<a href=\"");
     String _link_3 = this.getLink(Download.LINUX_32);
     _builder.append(_link_3, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -318,7 +339,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<a href=\"");
     String _link_5 = this.getLink(Download.WIN_32);
     _builder.append(_link_5, "						    	");
-    _builder.append("\" ");
+    _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -402,7 +423,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("If you already have an Eclipse running you should install the <i>\"Xtend SDK\"</i>-Feature from one of the update sites listed above. To do so");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("within Eclipse choose <i>Help -&gt; Install New Software...</i>. In the upcoming dialog you should paste one of the update site URLS into the ");
+    _builder.append("within Eclipse choose <i>Help -&gt; Install New Software...</i>. In the upcoming dialog you should paste one of the update site URLS into the");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("field named <i>Work with</i>. Now search for the feature <e>Xtend SDK</e>, select it and click <i>Next</i> and on the next page <i>Finish</i>.");
@@ -447,7 +468,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("You can create a readily configured project using ");
+    _builder.append("You can create a readily configured project using");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("<pre class=\"prettyprint lang-xml linenums\">");
@@ -637,13 +658,13 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("When you\'ve started Eclipse for the first time, you should see an empty workspace. Switch to the \'Java perspective\'");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("if you are not already in it. Xtend integrates with Java, so you need to create a Java project to get started. In the menu choose ");
+    _builder.append("if you are not already in it. Xtend integrates with Java, so you need to create a Java project to get started. In the menu choose");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("<i>File -> New -> Java Project</i>. In the upcoming dialog choose any project name you want (e.g. <i>my.project</i>).");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("After clicking <i>Finish</i> Eclipse will create a fresh project with an empty source folder named <i>\'/src\'</i>. ");
+    _builder.append("After clicking <i>Finish</i> Eclipse will create a fresh project with an empty source folder named <i>\'/src\'</i>.");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("</p>");
@@ -658,7 +679,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("To create your first Xtend class select the source folder and press the right mouse button. You should find the entry ");
+    _builder.append("To create your first Xtend class select the source folder and press the right mouse button. You should find the entry");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("<i>Xtend class</i> in the category <i>New &gt;</i>. If you don\'t see it you might not be in the Java perspective or you need to reset the perspective. To do so right click");
@@ -739,7 +760,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("<a href=\"documentation.html#GettingStarted\">Click here for the next steps and more examples.</a> ");
+    _builder.append("<a href=\"documentation.html#GettingStarted\">Click here for the next steps and more examples.</a>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("</p>");
