@@ -8,6 +8,41 @@ import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
 
+	@Test def void testRemoveAnnotation() {
+		assertProcessing(
+			'myannotation/RemoveAnnotation.xtend' -> '''
+				package myannotation
+				
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(typeof(RemoveAnnotationProcessor))
+				annotation RemoveAnnotation{ }
+				class RemoveAnnotationProcessor extends AbstractClassProcessor {
+				
+					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+						clazz.findAnnotation(RemoveAnnotation.newTypeReference.type).remove
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				/**
+				 * MAKE ME LOWER CASE!
+				 */
+				@myannotation.RemoveAnnotation class MyClass {
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertEquals(0, clazz.annotations.size)
+		]
+	}
+
 	@Test def void testChangeJavaDoc() {
 		assertProcessing(
 			'myannotation/ChangeDocAnnotation.xtend' -> '''

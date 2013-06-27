@@ -34,6 +34,70 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public abstract class AbstractReusableActiveAnnotationTests {
   @Test
+  public void testRemoveAnnotation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(RemoveAnnotationProcessor))");
+    _builder.newLine();
+    _builder.append("annotation RemoveAnnotation{ }");
+    _builder.newLine();
+    _builder.append("class RemoveAnnotationProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("clazz.findAnnotation(RemoveAnnotation.newTypeReference.type).remove");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/RemoveAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* MAKE ME LOWER CASE!");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.RemoveAnnotation class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
+          Iterable<? extends MutableAnnotationReference> _annotations = clazz.getAnnotations();
+          int _size = IterableExtensions.size(_annotations);
+          Assert.assertEquals(0, _size);
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testChangeJavaDoc() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");

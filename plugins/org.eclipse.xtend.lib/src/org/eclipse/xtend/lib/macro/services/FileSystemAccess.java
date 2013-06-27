@@ -29,9 +29,9 @@ public interface FileSystemAccess {
 	FolderHandle getSourceFolder();
 
 	/**
-	 * Returns the source folder handle.
+	 * Returns the target folder handle.
 	 * 
-	 * @return the source folder handle
+	 * @return the target folder handle
 	 * @see FolderHandle
 	 */
 	FolderHandle getTargetFolder();
