@@ -59,6 +59,25 @@ class XtendClassFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
+	@Test def formatConstructor4() {
+		assertFormatted('''
+			package foo
+
+			class bar {
+				new(
+					String p1,
+					String p2,
+					String p3,
+					String p4,
+					String p5
+				) {
+				}
+			}
+		''')	
+	}
+	
+	
+	
 	@Test def formatField01() {
 		assertFormatted([
 		],'''
@@ -256,6 +275,23 @@ class XtendClassFormatterTest extends AbstractXtendFormatterTest {
 				def baz(String p1, String p2, String p3, String p4, String p5, String p6,
 					String p7, String p8, String p9, String p10, String p11, String p12,
 					String p13, String p14) {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatMethod4() {
+		assertFormatted('''
+			package foo
+
+			class bar {
+				def baz(
+					String p1,
+					String p2,
+					String p3,
+					String p4,
+					String p5
+				) {
 				}
 			}
 		''')	
