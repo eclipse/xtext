@@ -13,15 +13,10 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface MutableNamedElement extends NamedElement {
+public interface MutableNamedElement extends NamedElement, MutableElement {
 	
 	/**
 	 * @param simpleName the simple name of this element
 	 */
 	void setSimpleName(String simpleName);
-	
-	/**
-	 * Removes this element from its container and renders it invalid.
-	 */
-	public void remove();
 }
