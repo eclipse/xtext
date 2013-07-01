@@ -114,6 +114,43 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   }
   
   @Test
+  public void formatConstructor4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p1,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p2,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p3,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p4,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p5");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(") {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
   public void formatField01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
         public void apply(final MapBasedPreferenceValues it) {
@@ -487,6 +524,43 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("String p13, String p14) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatMethod4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p1,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p2,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p3,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p4,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p5");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(") {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

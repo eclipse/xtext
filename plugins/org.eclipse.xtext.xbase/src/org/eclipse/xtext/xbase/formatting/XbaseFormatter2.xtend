@@ -54,16 +54,59 @@ class XbaseFormatter2 extends AbstractFormatter {
 
 	def protected dispatch void format(XCollectionLiteral literal, FormattableDocument document) {
 		document += literal.nodeForKeyword('#').append[noSpace]
-		var node = literal.nodeForKeyword("[") ?: literal.nodeForKeyword("{")
-		for (value : literal.elements) {
-			document += node.append[if (value == literal.elements.head) noSpace else oneSpace]
-			value.format(document)
-			node = value.nodeForEObject.immediatelyFollowingKeyword(",")
-			document += node.prepend[noSpace]
-		}
-		node = literal.nodeForKeyword("]") ?: literal.nodeForKeyword("}")
-		document += (node).prepend[noSpace]
+		val open = literal.nodeForKeyword("[") ?: literal.nodeForKeyword("{")
+		val close = literal.nodeForKeyword("]") ?: literal.nodeForKeyword("}")
+		formatCommaSeparatedList(literal.elements, open, close, document) 
 	}
+
+	def protected formatCommaSeparatedList(Collection<? extends EObject> elements, INode open, INode close,
+		FormattableDocument format) {
+		if (close?.hiddenLeafsBefore?.newLines > 0) {
+			var INode comma = null
+			if (elements.empty)
+				format += open.append[noSpace]
+			else
+				for (elem : elements) {
+					if (elem == elements.head)
+						format += open.append[newLine; increaseIndentation]
+					else if (comma != null)
+						format += comma.append[newLine]
+					if (elem == elements.last)
+						format += elem.nodeForEObject.append[newLine; decreaseIndentation]
+					elem.format(format)
+					comma = elem.nodeForEObject.immediatelyFollowingKeyword(",")
+					format += comma.prepend[noSpace]
+				}
+		} else {
+			var INode comma = null
+			var indented = false
+			for (elem : elements) {
+				if (format.fitsIntoLine(elem)) {
+					if (comma == null)
+						format += open.append[noSpace]
+					else
+						format += comma.append[oneSpace]
+				} else {
+					val n = if (comma == null) open else comma
+					format += n.append[newLine]
+					if (!indented)
+						format += n.append[increaseIndentation]
+					indented = true
+				}
+				elem.format(format)
+				comma = elem.nodeForEObject.immediatelyFollowingKeyword(",")
+				format += comma.prepend[noSpace]
+			}
+			if (elements.size > 0) {
+				val last = elements.last.nodeForEObject
+				format += last.append[noSpace]
+				if (indented)
+					format += last.append[decreaseIndentation]
+			} else
+				format += open.append[noSpace]
+		}
+	}
+
 
 	def protected dispatch void format(XAnnotation ann, FormattableDocument document) {
 		ann.nodeForKeyword("@") => [document += append[noSpace]]

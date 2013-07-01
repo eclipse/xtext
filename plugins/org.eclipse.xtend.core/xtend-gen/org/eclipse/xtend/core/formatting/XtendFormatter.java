@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.formatting;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -712,182 +711,9 @@ public class XtendFormatter extends XbaseFormatter2 {
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(close, _function_3);
     format.operator_add(_append_2);
     EList<XtendParameter> _parameters = func.getParameters();
-    this.formatMemberParameter(_parameters, open, close, format);
+    this.formatCommaSeparatedList(_parameters, open, close, format);
     XExpression _expression = func.getExpression();
     this.format(_expression, format);
-  }
-  
-  protected void formatMemberParameter(final Collection<XtendParameter> parameters, final INode open, final INode close, final FormattableDocument format) {
-    HiddenLeafs _hiddenLeafsBefore = null;
-    if (close!=null) {
-      _hiddenLeafsBefore=this._hiddenLeafAccess.getHiddenLeafsBefore(close);
-    }
-    int _newLines = 0;
-    if (_hiddenLeafsBefore!=null) {
-      _newLines=_hiddenLeafsBefore.getNewLines();
-    }
-    boolean _greaterThan = (_newLines > 0);
-    if (_greaterThan) {
-      INode comma = null;
-      boolean _isEmpty = parameters.isEmpty();
-      if (_isEmpty) {
-        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              it.noSpace();
-            }
-          };
-        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(open, _function);
-        format.operator_add(_append);
-      } else {
-        for (final XtendParameter param : parameters) {
-          {
-            XtendParameter _head = IterableExtensions.<XtendParameter>head(parameters);
-            boolean _equals = Objects.equal(param, _head);
-            if (_equals) {
-              final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-                  public void apply(final FormattingDataInit it) {
-                    it.newLine();
-                    it.increaseIndentation();
-                  }
-                };
-              Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(open, _function_1);
-              format.operator_add(_append_1);
-            } else {
-              boolean _notEquals = (!Objects.equal(comma, null));
-              if (_notEquals) {
-                final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-                    public void apply(final FormattingDataInit it) {
-                      it.newLine();
-                    }
-                  };
-                Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(comma, _function_2);
-                format.operator_add(_append_2);
-              }
-            }
-            XtendParameter _last = IterableExtensions.<XtendParameter>last(parameters);
-            boolean _equals_1 = Objects.equal(param, _last);
-            if (_equals_1) {
-              INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(param);
-              final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-                  public void apply(final FormattingDataInit it) {
-                    it.newLine();
-                    it.decreaseIndentation();
-                  }
-                };
-              Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(_nodeForEObject, _function_3);
-              format.operator_add(_append_3);
-            }
-            this.format(param, format);
-            INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(param);
-            ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject_1, ",");
-            comma = _immediatelyFollowingKeyword;
-            final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
-                public void apply(final FormattingDataInit it) {
-                  it.noSpace();
-                }
-              };
-            Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(comma, _function_4);
-            format.operator_add(_prepend);
-          }
-        }
-      }
-    } else {
-      INode comma_1 = null;
-      boolean indented = false;
-      for (final XtendParameter param_1 : parameters) {
-        {
-          boolean _fitsIntoLine = this.fitsIntoLine(format, param_1);
-          if (_fitsIntoLine) {
-            boolean _equals = Objects.equal(comma_1, null);
-            if (_equals) {
-              final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-                  public void apply(final FormattingDataInit it) {
-                    it.noSpace();
-                  }
-                };
-              Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(open, _function_1);
-              format.operator_add(_append_1);
-            } else {
-              final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-                  public void apply(final FormattingDataInit it) {
-                    it.oneSpace();
-                  }
-                };
-              Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(comma_1, _function_2);
-              format.operator_add(_append_2);
-            }
-          } else {
-            INode _xifexpression = null;
-            boolean _equals_1 = Objects.equal(comma_1, null);
-            if (_equals_1) {
-              _xifexpression = open;
-            } else {
-              _xifexpression = comma_1;
-            }
-            final INode n = _xifexpression;
-            final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-                public void apply(final FormattingDataInit it) {
-                  it.newLine();
-                }
-              };
-            Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(n, _function_3);
-            format.operator_add(_append_3);
-            boolean _not = (!indented);
-            if (_not) {
-              final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
-                  public void apply(final FormattingDataInit it) {
-                    it.increaseIndentation();
-                  }
-                };
-              Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_4 = this._formattingDataFactory.append(n, _function_4);
-              format.operator_add(_append_4);
-            }
-            indented = true;
-          }
-          this.format(param_1, format);
-          INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(param_1);
-          ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject, ",");
-          comma_1 = _immediatelyFollowingKeyword;
-          final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
-              public void apply(final FormattingDataInit it) {
-                it.noSpace();
-              }
-            };
-          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(comma_1, _function_5);
-          format.operator_add(_prepend);
-        }
-      }
-      int _size = parameters.size();
-      boolean _greaterThan_1 = (_size > 0);
-      if (_greaterThan_1) {
-        XtendParameter _last = IterableExtensions.<XtendParameter>last(parameters);
-        final INode last = this._nodeModelAccess.nodeForEObject(_last);
-        final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              it.noSpace();
-            }
-          };
-        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(last, _function_1);
-        format.operator_add(_append_1);
-        if (indented) {
-          final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-              public void apply(final FormattingDataInit it) {
-                it.decreaseIndentation();
-              }
-            };
-          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(last, _function_2);
-          format.operator_add(_append_2);
-        }
-      } else {
-        final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              it.noSpace();
-            }
-          };
-        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(open, _function_3);
-        format.operator_add(_append_3);
-      }
-    }
   }
   
   protected void _format(final XtendFunction func, final FormattableDocument format) {
@@ -968,7 +794,7 @@ public class XtendFormatter extends XbaseFormatter2 {
       format.operator_add(_append_2);
     }
     EList<XtendParameter> _parameters = func.getParameters();
-    this.formatMemberParameter(_parameters, open, close, format);
+    this.formatCommaSeparatedList(_parameters, open, close, format);
     JvmTypeReference _returnType = func.getReturnType();
     this.format(_returnType, format);
     XExpression _expression_1 = func.getExpression();

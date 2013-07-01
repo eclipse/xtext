@@ -1964,4 +1964,39 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
+  
+  @Test
+  public void formatListLiteral1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#[12, 13, 14]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("#[12,     13  ,\t14\t\t]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatListLiteral3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#[");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("12,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("13,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("14");
+    _builder.newLine();
+    _builder.append("]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("#[12,     13  ,\t14\t\t");
+    _builder_1.newLine();
+    _builder_1.append("]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
 }

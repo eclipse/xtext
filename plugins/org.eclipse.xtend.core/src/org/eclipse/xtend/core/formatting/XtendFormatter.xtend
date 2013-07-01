@@ -8,19 +8,22 @@
 package org.eclipse.xtend.core.formatting
 
 import com.google.inject.Inject
-import java.util.Collection
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.xtend.RichString
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.eclipse.xtend.core.xtend.XtendEnum
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
-import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.preferences.PreferenceKey
 import org.eclipse.xtext.xbase.formatting.FormattableDocument
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory
@@ -34,11 +37,6 @@ import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtext.common.types.JvmTypeParameter
-import java.util.List
-import org.eclipse.xtend.core.xtend.XtendAnnotationType
-import org.eclipse.xtend.core.xtend.XtendEnum
 
 @SuppressWarnings("restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -216,57 +214,9 @@ public class XtendFormatter extends XbaseFormatter2 {
 		val open = func.nodeForKeyword("(")
 		val close = func.nodeForKeyword(")")
 		format += close.append[cfg(bracesInNewLine)]
-		formatMemberParameter(func.parameters, open, close, format)
+		formatCommaSeparatedList(func.parameters, open, close, format)
 
 		func.expression.format(format)
-	}
-
-	def protected formatMemberParameter(Collection<XtendParameter> parameters, INode open, INode close,
-		FormattableDocument format) {
-		if (close?.hiddenLeafsBefore?.newLines > 0) {
-			var INode comma = null
-			if (parameters.empty)
-				format += open.append[noSpace]
-			else
-				for (param : parameters) {
-					if (param == parameters.head)
-						format += open.append[newLine; increaseIndentation]
-					else if (comma != null)
-						format += comma.append[newLine]
-					if (param == parameters.last)
-						format += param.nodeForEObject.append[newLine; decreaseIndentation]
-					param.format(format)
-					comma = param.nodeForEObject.immediatelyFollowingKeyword(",")
-					format += comma.prepend[noSpace]
-				}
-		} else {
-			var INode comma = null
-			var indented = false
-			for (param : parameters) {
-				if (format.fitsIntoLine(param)) {
-					if (comma == null)
-						format += open.append[noSpace]
-					else
-						format += comma.append[oneSpace]
-				} else {
-					val n = if (comma == null) open else comma
-					format += n.append[newLine]
-					if (!indented)
-						format += n.append[increaseIndentation]
-					indented = true
-				}
-				param.format(format)
-				comma = param.nodeForEObject.immediatelyFollowingKeyword(",")
-				format += comma.prepend[noSpace]
-			}
-			if (parameters.size > 0) {
-				val last = parameters.last.nodeForEObject
-				format += last.append[noSpace]
-				if (indented)
-					format += last.append[decreaseIndentation]
-			} else
-				format += open.append[noSpace]
-		}
 	}
 
 	def protected dispatch void format(XtendFunction func, FormattableDocument format) {
@@ -287,7 +237,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 		format += open.prepend[noSpace]
 		if(func.expression != null)
 			format += close.append[cfg(bracesInNewLine)]
-		formatMemberParameter(func.parameters, open, close, format)
+		formatCommaSeparatedList(func.parameters, open, close, format)
 		func.returnType.format(format)
 		func.expression.format(format)
 	}
