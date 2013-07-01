@@ -1119,6 +1119,25 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
+	@Test def formatListLiteral1() {
+		assertFormattedExpression('''
+			#[12, 13, 14]
+		''', '''
+			#[12,     13  ,	14		]
+		''')	
+	}
 	
+	@Test def formatListLiteral3() {
+		assertFormattedExpression('''
+			#[
+				12,
+				13,
+				14
+			]
+		''', '''
+			#[12,     13  ,	14		
+			]
+		''')	
+	}
 	
 }
