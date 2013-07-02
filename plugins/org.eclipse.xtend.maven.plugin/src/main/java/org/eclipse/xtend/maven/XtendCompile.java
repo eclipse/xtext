@@ -12,10 +12,12 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
+import org.eclipse.xtend.maven.macro.fsaccess.MavenFileSystemAccessImpl;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * Goal which compiles Xtend sources.
@@ -41,6 +43,9 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 	 */
 	private String tempDirectory;
 
+	@Inject
+	private MavenFileSystemAccessImpl fileSystemAccess;
+
 	@Override
 	protected void internalExecute() throws MojoExecutionException {
 		final String defaultValue = project.getBasedir() + "/src/main/generated-sources/xtend";
@@ -61,9 +66,11 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 		List<String> compileSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		String classPath = concat(File.pathSeparator, getClassPath());
 		project.addCompileSourceRoot(outputDirectory);
+		fileSystemAccess.setTargetDirectory(outputDirectory);
 		compile(xtend2BatchCompiler, classPath, compileSourceRoots, outputDirectory);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected List<String> getClassPath() {
 		Set<String> classPath = Sets.newLinkedHashSet();
 		classPath.add(project.getBuild().getSourceDirectory());
