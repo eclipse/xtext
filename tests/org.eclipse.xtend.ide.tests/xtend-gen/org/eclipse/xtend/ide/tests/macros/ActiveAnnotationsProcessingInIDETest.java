@@ -59,7 +59,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,7 +77,6 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   }
   
   @Test
-  @Ignore
   public void testDocumetationProvider() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package annotation");

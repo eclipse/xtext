@@ -31,7 +31,6 @@ import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.After
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -54,7 +53,6 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	}
 
 	@Test
-	@Ignore
 	def void testDocumetationProvider() {
 		assertProcessing(
 			'annotation/ChangeDoc.xtend' -> '''

@@ -11,6 +11,7 @@ import static org.eclipse.xtext.xbase.ui.hover.HoverLinkHelper.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
 
 import com.google.common.collect.Lists;
@@ -45,7 +47,7 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("deprecation")
 public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProvider {
-	
+
 	@Inject
 	private IXtendJvmAssociations associations;
 
@@ -63,17 +65,19 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 
 	@Override
 	protected void addAnnotations(EObject object) {
-		if(object instanceof XtendAnnotationTarget){
-			for(XAnnotation annotation : ((XtendAnnotationTarget) object).getAnnotations()){
+		if (object instanceof XtendAnnotationTarget) {
+			for (XAnnotation annotation : ((XtendAnnotationTarget) object).getAnnotations()) {
 				JvmType annotationType = annotation.getAnnotationType();
-				if(annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType) {
+				if (annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType) {
 					buffer.append("@");
-					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(annotationType), annotation.getAnnotationType().getSimpleName()));
+					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME,
+							EcoreUtil.getURI(annotationType), annotation.getAnnotationType().getSimpleName()));
 					EList<XAnnotationElementValuePair> elementValuePairs = annotation.getElementValuePairs();
-					if(elementValuePairs.size() > 0){
+					if (elementValuePairs.size() > 0) {
 						buffer.append("(");
-						List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(annotation, XAnnotationsPackage.eINSTANCE.getXAnnotation_ElementValuePairs());
-						if(findNodesForFeature.size() > 0)
+						List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(annotation,
+								XAnnotationsPackage.eINSTANCE.getXAnnotation_ElementValuePairs());
+						if (findNodesForFeature.size() > 0)
 							buffer.append(findNodesForFeature.get(0).getText());
 						buffer.append(")");
 					}
@@ -84,7 +88,7 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 			super.addAnnotations(object);
 		}
 	}
-	
+
 	@Override
 	protected void handleSuperMethodReferences(EObject context) {
 		if (context instanceof XtendFunction) {
@@ -100,17 +104,17 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 			}
 		}
 	}
-	
+
 	@Override
 	protected List<String> initParameterNames() {
 		List<String> result = super.initParameterNames();
-		if(context instanceof XtendFunction){
-			for(XtendParameter param : ((XtendFunction) context).getParameters()){
+		if (context instanceof XtendFunction) {
+			for (XtendParameter param : ((XtendFunction) context).getParameters()) {
 				result.add(param.getName());
 			}
 		}
-		if(context instanceof XtendConstructor){
-			for(XtendParameter param : ((XtendConstructor) context).getParameters()){
+		if (context instanceof XtendConstructor) {
+			for (XtendParameter param : ((XtendConstructor) context).getParameters()) {
 				result.add(param.getName());
 			}
 		}
@@ -118,34 +122,59 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 	}
 
 	@Override
-	protected Map<String,URI> initExceptionNamesToURI() {
-		Map<String,URI> result = super.initExceptionNamesToURI();
-		if(context instanceof XtendFunction){
-			for(JvmTypeReference exception : ((XtendFunction) context).getExceptions()){
+	protected Map<String, URI> initExceptionNamesToURI() {
+		Map<String, URI> result = super.initExceptionNamesToURI();
+		if (context instanceof XtendFunction) {
+			for (JvmTypeReference exception : ((XtendFunction) context).getExceptions()) {
 				result.put(exception.getSimpleName(), EcoreUtil.getURI(exception.getType()));
 			}
 		}
-		if(context instanceof XtendConstructor){
-			for(JvmTypeReference exception : ((XtendConstructor) context).getExceptions()){
+		if (context instanceof XtendConstructor) {
+			for (JvmTypeReference exception : ((XtendConstructor) context).getExceptions()) {
 				result.put(exception.getSimpleName(), EcoreUtil.getURI(exception.getType()));
 			}
 		}
 		return result;
 	}
-	
+
 	@Override
 	protected List<EObject> getFilteredDerivedElements(EObject o, EClass type) {
 		List<EObject> filteredDerivedElements = super.getFilteredDerivedElements(o, type);
-		if(filteredDerivedElements.size() > 1)
+		if (filteredDerivedElements.size() > 1)
 			return filteredDerivedElements;
 		return Lists.newArrayList();
 	}
-	
+
 	@Override
 	protected List<EObject> getFilteredSourceElements(EObject o, EClass type) {
 		List<EObject> filteredSourceElements = super.getFilteredSourceElements(o, type);
-		if(filteredSourceElements.size() > 1)
+		if (filteredSourceElements.size() > 1)
 			return filteredSourceElements;
 		return Lists.newArrayList();
 	}
+
+	@Override
+	protected String resolveDocumentation(EObject sourceElement) {
+		Set<EObject> jvmElements = associations.getJvmElements(sourceElement);
+		if (jvmElements == null) {
+			return super.resolveDocumentation(sourceElement);
+		}
+		for (EObject jvmElement : jvmElements) {
+			String documentation = resolveDocumentationForJvmElement(jvmElement);
+			if (documentation != null) {
+				return documentation;
+			}
+		}
+		return super.resolveDocumentation(sourceElement);
+	}
+
+	protected String resolveDocumentationForJvmElement(EObject jvmElement) {
+		String documentation = documentationProvider.getDocumentation(jvmElement);
+		if (documentation != null) {
+			return documentation;
+		}
+		DocumentationAdapter adapter = getDocumentationAdapter(jvmElement);
+		return adapter == null ? null : adapter.getDocumentation();
+	}
+
 }
