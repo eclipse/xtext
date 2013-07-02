@@ -16,7 +16,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface MutableAnnotationReference extends AnnotationReference {
+public interface MutableAnnotationReference extends AnnotationReference, MutableElement {
 	
 	/**
 	 * Sets the annotation property of the given name
