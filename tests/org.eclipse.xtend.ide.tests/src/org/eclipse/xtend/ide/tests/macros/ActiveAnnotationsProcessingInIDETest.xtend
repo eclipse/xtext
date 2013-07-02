@@ -36,7 +36,6 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.core.macro.fsaccess.IOUtils.*
-import org.junit.Ignore
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -51,12 +50,11 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	}
 
 	@Test
-	@Ignore
 	def void testDocumetationProvider() {
 		assertProcessing(
 			'annotation/ChangeDoc.xtend' -> '''
 				package annotation
-
+				
 				import java.util.List
 				import org.eclipse.xtend.lib.macro.Active
 				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
@@ -139,23 +137,27 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 				}
 			''') [
 			val xtendClass = xtendFile.xtendTypes.filter(XtendClass).head
-			assertEquals('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.toString, xtendClass.documentation)
-			
+			assertEquals(
+				'''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.
+					toString, xtendClass.documentation)
 			val objectField = xtendClass.members.filter(XtendField).filter[name.equals("object")].head
-			assertEquals('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.toString, objectField.documentation)
-			
+			assertEquals(
+				'''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.
+					toString, objectField.documentation)
 			val objectField2 = xtendClass.members.filter(XtendField).filter[name.equals("object2")].head
 			assertEquals('''Comment'''.toString, objectField2.documentation)
-			
 			val constructor = xtendClass.members.filter(XtendConstructor).filter[parameters.empty].head
-			assertEquals('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.toString, constructor.documentation)
-			
+			assertEquals(
+				'''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.
+					toString, constructor.documentation)
 			val constructor2 = xtendClass.members.filter(XtendConstructor).filter[parameters.size == 2].head
-			assertEquals('''Comment<dl><dt>Parameters:</dt><dd><b>object</b> </dd><dd><b>object2</b> </dd></dl>'''.toString, constructor2.documentation)
-			
+			assertEquals(
+				'''Comment<dl><dt>Parameters:</dt><dd><b>object</b> </dd><dd><b>object2</b> </dd></dl>'''.toString,
+				constructor2.documentation)
 			val opFunction = xtendClass.members.filter(XtendFunction).filter[name.equals("op")].head
-			assertEquals('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.toString, opFunction.documentation)
-			
+			assertEquals(
+				'''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.
+					toString, opFunction.documentation)
 			val op2Function = xtendClass.members.filter(XtendFunction).filter[name.equals("op2")].head
 			assertEquals('''Comment'''.toString, op2Function.documentation)
 		]
