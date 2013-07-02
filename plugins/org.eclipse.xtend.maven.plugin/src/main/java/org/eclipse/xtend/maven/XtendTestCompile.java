@@ -12,10 +12,12 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
+import org.eclipse.xtend.maven.macro.fsaccess.MavenFileSystemAccessImpl;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * Goal which compiles Xtend2 test sources.
@@ -41,6 +43,9 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 	 */
 	private String testTempDirectory;
 
+	@Inject
+	private MavenFileSystemAccessImpl fileSystemAccess;
+
 	@Override
 	protected void internalExecute() throws MojoExecutionException {
 		final String defaultValue = project.getBasedir() + "/src/test/generated-sources/xtend";
@@ -61,9 +66,11 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 		List<String> testCompileSourceRoots = Lists.newArrayList(project.getTestCompileSourceRoots());
 		String testClassPath = concat(File.pathSeparator, getTestClassPath());
 		project.addTestCompileSourceRoot(testOutputDirectory);
+		fileSystemAccess.setTargetDirectory(testOutputDirectory);
 		compile(xtend2BatchCompiler, testClassPath, testCompileSourceRoots, testOutputDirectory);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected List<String> getTestClassPath() {
 		Set<String> classPath = Sets.newLinkedHashSet();
 		classPath.add(project.getBuild().getTestSourceDirectory());

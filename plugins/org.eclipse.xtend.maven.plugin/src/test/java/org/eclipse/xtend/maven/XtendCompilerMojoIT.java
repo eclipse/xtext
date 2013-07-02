@@ -2,6 +2,8 @@ package org.eclipse.xtend.maven;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import junit.framework.Assert;
 
@@ -16,6 +18,29 @@ public class XtendCompilerMojoIT {
 	private static String ROOT = "/it/compile";
 
 	@Test
+	public void testFileSystemAccess() throws Exception {
+		deleteFileIfExist("myusercode/UserCode.css");
+		deleteFileIfExist("com/itemis/myusercode/UserCode2.css");
+
+		Verifier annotationVerifier = newVerifier(ROOT + "/filesystemaccess");
+		annotationVerifier.setDebug(true);
+		annotationVerifier.executeGoal("install");
+		annotationVerifier.verifyErrorFreeLog();
+
+		Verifier clientVerifier = newVerifier(ROOT + "/filesystemaccess-client");
+		clientVerifier.setDebug(true);
+		clientVerifier.executeGoal("compile");
+		clientVerifier.verifyErrorFreeLog();
+	}
+
+	private void deleteFileIfExist(String path) throws URISyntaxException {
+		URL userCodeURL = getClass().getResource(ROOT + "/filesystemaccess-client/src/main/java/" + path);
+		if (userCodeURL != null) {
+			new File(userCodeURL.toURI()).delete();
+		}
+	}
+
+	@Test
 	public void projectWithMultipleSourceDirectories() throws Exception {
 		verifyErrorFreeLog(ROOT + "/multisources");
 	}
@@ -28,10 +53,10 @@ public class XtendCompilerMojoIT {
 	@Test
 	public void encoding() throws Exception {
 		Verifier verifier = newVerifier(ROOT + "/encoding");
-		
+
 		String xtendDir = verifier.getBasedir() + "/src/main/java";
 		assertFileContainsUTF16(verifier, xtendDir + "/test/XtendA.xtend", "Mühlheim-Kärlicher Bürger");
-		
+
 		verifier.setDebug(true);
 		verifier.executeGoal("test");
 		verifier.verifyErrorFreeLog();

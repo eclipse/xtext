@@ -88,6 +88,7 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessSPI
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -140,6 +141,8 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject JvmTypeExtensions typeExtensions;
+
+	@Inject FileSystemAccessSPI fileSystemAccess
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -477,6 +480,18 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def Object evaluate(XExpression expression) {
 		return interpreter.evaluate(expression, null)
+	}
+	
+	def getSourceFolder() {
+		fileSystemAccess.getSourceFolder(this)
+	}
+	
+	def getRootFolder() {
+		fileSystemAccess.getRootFolder(this)
+	}
+	
+	def getTargetFolder() {
+		fileSystemAccess.getTargetFolder(this)
 	}
 	
 }
