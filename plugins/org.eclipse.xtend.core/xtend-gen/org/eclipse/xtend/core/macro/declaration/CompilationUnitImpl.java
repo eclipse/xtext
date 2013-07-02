@@ -56,6 +56,7 @@ import org.eclipse.xtend.core.macro.declaration.XtendMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
+import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessSPI;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -84,6 +85,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend.lib.macro.services.FolderHandle;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -235,6 +237,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Inject
   private JvmTypeExtensions typeExtensions;
+  
+  @Inject
+  private FileSystemAccessSPI fileSystemAccess;
   
   private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
     public ProblemSupport apply() {
@@ -1122,5 +1127,20 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Object evaluate(final XExpression expression) {
     return this.interpreter.evaluate(expression, null);
+  }
+  
+  public FolderHandle getSourceFolder() {
+    FolderHandle _sourceFolder = this.fileSystemAccess.getSourceFolder(this);
+    return _sourceFolder;
+  }
+  
+  public FolderHandle getRootFolder() {
+    FolderHandle _rootFolder = this.fileSystemAccess.getRootFolder(this);
+    return _rootFolder;
+  }
+  
+  public FolderHandle getTargetFolder() {
+    FolderHandle _targetFolder = this.fileSystemAccess.getTargetFolder(this);
+    return _targetFolder;
   }
 }

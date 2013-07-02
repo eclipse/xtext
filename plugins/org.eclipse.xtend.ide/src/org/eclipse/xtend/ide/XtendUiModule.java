@@ -12,6 +12,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
+import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessSPI;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
@@ -49,6 +50,7 @@ import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
+import org.eclipse.xtend.ide.macro.fsaccess.EclipseFileSystemAccessImpl;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
@@ -415,5 +417,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends ICompletionProposalComparator> bindICompletionProposalComparator() {
 		return OperatorAwareComparator.class;
+	}
+	
+	public Class<? extends FileSystemAccessSPI> bindFileSystemAccessPSI() {
+		return EclipseFileSystemAccessImpl.class;
 	}
 }
