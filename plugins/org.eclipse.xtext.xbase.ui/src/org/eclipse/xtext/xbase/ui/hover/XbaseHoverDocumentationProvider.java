@@ -84,7 +84,7 @@ import com.google.inject.Inject;
  * @author Holger Schill - Initial contribution and API
  * @since 2.3
  */
-public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentationProvider{
+public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentationProvider {
 	protected static final String BLOCK_TAG_START = "<dl>"; //$NON-NLS-1$
 	protected static final String BLOCK_TAG_END = "</dl>"; //$NON-NLS-1$
 	protected static final String BlOCK_TAG_ENTRY_START = "<dd>"; //$NON-NLS-1$
@@ -107,7 +107,8 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	protected JvmModelGenerator jvmModelGenerator;
 	@Inject
 	private XbaseDeclarativeHoverSignatureProvider hoverSignatureProvider;
-	@Inject IGeneratorConfigProvider generatorConfigProvider;
+	@Inject
+	IGeneratorConfigProvider generatorConfigProvider;
 
 	protected StringBuffer buffer;
 	protected int fLiteralContent;
@@ -117,13 +118,13 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	public String getDocumentation(EObject object) {
 		return computeDocumentation(object) + getDerivedOrOriginalDeclarationInformation(object);
 	}
-	
-	public String computeDocumentation(EObject object){
+
+	public String computeDocumentation(EObject object) {
 		buffer = new StringBuffer();
 		context = object;
 		fLiteralContent = 0;
 		List<String> parameterNames = initParameterNames();
-		Map<String,URI> exceptionNamesToURI = initExceptionNamesToURI();
+		Map<String, URI> exceptionNamesToURI = initExceptionNamesToURI();
 		addAnnotations(object);
 		getDocumentationWithPrefix(object);
 		Javadoc javadoc = getJavaDoc();
@@ -166,13 +167,13 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 			} else if (TagElement.TAG_EXCEPTION.equals(tagName) || TagElement.TAG_THROWS.equals(tagName)) {
 				exceptions.add(tag);
 				@SuppressWarnings("unchecked")
-				List<? extends ASTNode> fragments= tag.fragments();
+				List<? extends ASTNode> fragments = tag.fragments();
 				if (fragments.size() > 0) {
-					Object first= fragments.get(0);
+					Object first = fragments.get(0);
 					if (first instanceof Name) {
-						String name= ASTNodes.getSimpleNameIdentifier((Name) first);
-						if (exceptionNamesToURI.containsKey(name) ) {
-							exceptionNamesToURI.put(name,null);
+						String name = ASTNodes.getSimpleNameIdentifier((Name) first);
+						if (exceptionNamesToURI.containsKey(name)) {
+							exceptionNamesToURI.put(name, null);
 						}
 					}
 				}
@@ -208,7 +209,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 				&& (parameterNames.size() > 0 || exceptionNamesToURI.size() > 0)) {
 			handleSuperMethodReferences(object);
 			buffer.append(BLOCK_TAG_START);
-			handleParameters(object, parameters,parameterNames);
+			handleParameters(object, parameters, parameterNames);
 			handleReturnTag(returnTag);
 			handleExceptionTags(exceptions, exceptionNamesToURI);
 			handleBlockTags("Since:", since);
@@ -226,10 +227,10 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		context = null;
 		return result;
 	}
-	
-	public String getDerivedOrOriginalDeclarationInformation(EObject object){
+
+	public String getDerivedOrOriginalDeclarationInformation(EObject object) {
 		String derivedInformation = getDerivedElementInformation(object);
-		if(derivedInformation != null && derivedInformation.length() > 0)
+		if (derivedInformation != null && derivedInformation.length() > 0)
 			return getDerivedElementInformation(object);
 		return getOriginalDeclarationInformation(object);
 	}
@@ -244,8 +245,8 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		return result;
 	}
 
-	protected Map<String,URI> initExceptionNamesToURI() {
-		Map<String,URI> result = Maps.newHashMap();
+	protected Map<String, URI> initExceptionNamesToURI() {
+		Map<String, URI> result = Maps.newHashMap();
 		if (context instanceof JvmExecutable) {
 			for (JvmTypeReference exception : ((JvmExecutable) context).getExceptions()) {
 				result.put(exception.getSimpleName(), EcoreUtil.getURI(exception.getType()));
@@ -262,8 +263,9 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 				EList<JvmAnnotationReference> annotations = ((JvmAnnotationTarget) associatedElement).getAnnotations();
 				for (JvmAnnotationReference annotationReference : annotations) {
 					buffer.append("@");
-					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(annotationReference.getAnnotation()),
-							annotationReference.getAnnotation().getSimpleName()));
+					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil
+							.getURI(annotationReference.getAnnotation()), annotationReference.getAnnotation()
+							.getSimpleName()));
 					if (annotationReference.getValues().size() > 0) {
 						buffer.append("(");
 						for (JvmAnnotationValue value : annotationReference.getValues()) {
@@ -285,19 +287,10 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	protected void getDocumentationWithPrefix(EObject object) {
 		String startTag = "/**";
 		String endTag = "*/";
-		ILineSeparatorInformation lineSeparatorInformation = whitespaceInformationProvider.getLineSeparatorInformation(EcoreUtil.getURI(object));
+		ILineSeparatorInformation lineSeparatorInformation = whitespaceInformationProvider
+				.getLineSeparatorInformation(EcoreUtil.getURI(object));
 		String lineBreak = lineSeparatorInformation.getLineSeparator();
-		String documentation = documentationProvider.getDocumentation(object);
-		if (documentation == null) {
-			DocumentationAdapter adapter = (DocumentationAdapter) EcoreUtil.getAdapter(object.eAdapters(),
-					DocumentationAdapter.class);
-			if (adapter != null)
-				documentation = adapter.getDocumentation();
-			EObject primarySourceElement = associations.getPrimarySourceElement(object);
-			if (primarySourceElement != null)
-				documentation = documentationProvider.getDocumentation(primarySourceElement);
-		}
-
+		String documentation = resolveDocumentation(object);
 		if (documentation != null && documentation.length() > 0) {
 			BufferedReader reader = new BufferedReader(new StringReader(documentation));
 			StringBuilder builder = new StringBuilder(startTag + lineBreak);
@@ -313,6 +306,23 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 			}
 			rawJavaDoc = builder.toString();
 		}
+	}
+
+	protected String resolveDocumentation(EObject object) {
+		String documentation = documentationProvider.getDocumentation(object);
+		if (documentation == null) {
+			DocumentationAdapter adapter = getDocumentationAdapter(object);
+			if (adapter != null)
+				documentation = adapter.getDocumentation();
+			EObject primarySourceElement = associations.getPrimarySourceElement(object);
+			if (primarySourceElement != null)
+				documentation = documentationProvider.getDocumentation(primarySourceElement);
+		}
+		return documentation;
+	}
+
+	protected DocumentationAdapter getDocumentationAdapter(EObject object) {
+		return (DocumentationAdapter) EcoreUtil.getAdapter(object.eAdapters(), DocumentationAdapter.class);
 	}
 
 	protected void handleSuperMethodReferences(EObject context) {
@@ -379,15 +389,17 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		int hashIndex = firstFragment.indexOf("#");
 		if (hashIndex != -1) {
 			JvmDeclaredType resolvedDeclarator = getResolvedDeclarator(firstFragment.substring(0, hashIndex));
-			if (resolvedDeclarator!= null && !resolvedDeclarator.eIsProxy()) {
+			if (resolvedDeclarator != null && !resolvedDeclarator.eIsProxy()) {
 				String signature = firstFragment.substring(hashIndex + 1);
 				int indexOfOpenBracket = signature.indexOf("(");
 				int indexOfClosingBracket = signature.indexOf(")");
-				String simpleNameOfFeature = indexOfOpenBracket != -1 ? signature.substring(0, indexOfOpenBracket) : signature;
+				String simpleNameOfFeature = indexOfOpenBracket != -1 ? signature.substring(0, indexOfOpenBracket)
+						: signature;
 				Iterable<JvmFeature> possibleCandidates = resolvedDeclarator.findAllFeaturesByName(simpleNameOfFeature);
 				List<String> parameterNames = null;
 				if (indexOfOpenBracket != -1 && indexOfClosingBracket != -1) {
-					parameterNames = Strings.split(signature.substring(indexOfOpenBracket + 1, indexOfClosingBracket), ",");
+					parameterNames = Strings.split(signature.substring(indexOfOpenBracket + 1, indexOfClosingBracket),
+							",");
 				}
 				Iterator<JvmFeature> featureIterator = possibleCandidates.iterator();
 				while (elementURI == null && featureIterator.hasNext()) {
@@ -403,8 +415,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 						} else if (parameters.size() == parameterNames.size()) {
 							valid = true;
 							for (int i = 0; (i < parameterNames.size() && valid); i++) {
-								URI parameterTypeURI = EcoreUtil
-										.getURI(parameters.get(i).getParameterType().getType());
+								URI parameterTypeURI = EcoreUtil.getURI(parameters.get(i).getParameterType().getType());
 								IEObjectDescription expectedParameter = scopeProvider.getScope(context,
 										new HoverReference(TypesPackage.Literals.JVM_TYPE)).getSingleElement(
 										qualifiedNameConverter.toQualifiedName(parameterNames.get(i)));
@@ -427,14 +438,14 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 				elementURI = singleElement.getEObjectURI();
 		}
 		String label = "";
-		if(fragments.size() > 1){
-			for(int i = 1 ; i < fragments.size() ; i++){
+		if (fragments.size() > 1) {
+			for (int i = 1; i < fragments.size(); i++) {
 				String portentialLabel = fragments.get(i).toString();
-				if(portentialLabel.trim().length() > 0)
-				label += portentialLabel;
+				if (portentialLabel.trim().length() > 0)
+					label += portentialLabel;
 			}
 		}
-		if(label.length() == 0)
+		if (label.length() == 0)
 			label = firstFragment;
 		if (elementURI == null)
 			buffer.append(label);
@@ -511,18 +522,19 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 			handleThrowsTag(tag);
 			buffer.append(BlOCK_TAG_ENTRY_END);
 		}
-		for (int i= 0; i < exceptionNamesToURI.size(); i++) {
-			String name= Lists.newArrayList(exceptionNamesToURI.keySet()).get(i);
+		for (int i = 0; i < exceptionNamesToURI.size(); i++) {
+			String name = Lists.newArrayList(exceptionNamesToURI.keySet()).get(i);
 			if (name != null && exceptionNamesToURI.get(name) != null) {
 				buffer.append(BlOCK_TAG_ENTRY_START);
-				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, exceptionNamesToURI.get(name), name));
+				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, exceptionNamesToURI.get(name),
+						name));
 				buffer.append(BlOCK_TAG_ENTRY_END);
 			}
 		}
 	}
-	
+
 	private boolean containsOnlyNull(Collection<?> list) {
-		for (Iterator<?> iter= list.iterator(); iter.hasNext(); ) {
+		for (Iterator<?> iter = list.iterator(); iter.hasNext();) {
 			if (iter.next() != null)
 				return false;
 		}
@@ -611,8 +623,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 			@SuppressWarnings("unchecked")
 			List<ASTNode> fragments = node.fragments();
 			handleContentElements(fragments, true);
-		}
-		else if (handleInheritDoc(node)) {
+		} else if (handleInheritDoc(node)) {
 			// handled
 		} else if (handleDocRoot(node)) {
 			// handled
@@ -684,9 +695,9 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 			handleParamTag(tag);
 			buffer.append(BlOCK_TAG_ENTRY_END);
 		}
-		
-		for (int i= 0; i < parameterNames.size(); i++) {
-			String name= parameterNames.get(i);
+
+		for (int i = 0; i < parameterNames.size(); i++) {
+			String name = parameterNames.get(i);
 			if (name != null) {
 				buffer.append(BlOCK_TAG_ENTRY_START);
 				buffer.append(PARAM_NAME_START);
@@ -780,64 +791,67 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		}
 		return null;
 	}
-	
+
 	protected String getDerivedElementInformation(EObject o) {
 		StringBuffer buf = new StringBuffer();
 		List<EObject> jvmElements = getFilteredDerivedElements(o, TypesPackage.Literals.JVM_MEMBER);
-		if(jvmElements.size() > 0){
+		if (jvmElements.size() > 0) {
 			buf.append("<dt>Derived element:</dt>");
 
-			for(EObject jvmElement : jvmElements){
-					buf.append("<dd>");
-					buf.append(computeLinkToElement(jvmElement));	
-					buf.append("</dd>");
+			for (EObject jvmElement : jvmElements) {
+				buf.append("<dd>");
+				buf.append(computeLinkToElement(jvmElement));
+				buf.append("</dd>");
 			}
 		}
 		return buf.toString();
 	}
-	
-	protected String getOriginalDeclarationInformation(EObject o){
+
+	protected String getOriginalDeclarationInformation(EObject o) {
 		StringBuffer buf = new StringBuffer();
 		List<EObject> sourceElements = getFilteredSourceElements(o, null);
-		if(sourceElements.size() > 0){
+		if (sourceElements.size() > 0) {
 			buf.append("<dt>Original declaration:</dt>");
-			for(EObject sourceElement: sourceElements){
+			for (EObject sourceElement : sourceElements) {
 				buf.append("<dd>");
-				buf.append(computeLinkToElement(sourceElement));	
+				buf.append(computeLinkToElement(sourceElement));
 				buf.append("</dd>");
-			} 
+			}
 		}
 		return buf.toString();
 	}
-	
+
 	protected List<EObject> getFilteredDerivedElements(EObject o, final EClass type) {
-		List<EObject> jvmElements = Lists.newArrayList(Iterables.filter(associations.getJvmElements(o), new Predicate<EObject>() {
-			public boolean apply(EObject input) {
-				if(input instanceof JvmConstructor && ((JvmConstructor) input).getParameters().size() == 0)
-					return false;
-				if(type == null)
-					return true;
-				return EcoreUtil2.isAssignableFrom(type, input.eClass());
-			}
-		}));
+		List<EObject> jvmElements = Lists.newArrayList(Iterables.filter(associations.getJvmElements(o),
+				new Predicate<EObject>() {
+					public boolean apply(EObject input) {
+						if (input instanceof JvmConstructor && ((JvmConstructor) input).getParameters().size() == 0)
+							return false;
+						if (type == null)
+							return true;
+						return EcoreUtil2.isAssignableFrom(type, input.eClass());
+					}
+				}));
 		return jvmElements;
 	}
-	
-	protected List<EObject> getFilteredSourceElements(EObject o, final EClass type){
-		List<EObject> sourceElements = Lists.newArrayList(Iterables.filter(associations.getSourceElements(o), new Predicate<EObject>() {
-			public boolean apply(EObject input) {
-				if(type == null)
-					return true;
-				return EcoreUtil2.isAssignableFrom(type, input.eClass());
-			}
-		}));
+
+	protected List<EObject> getFilteredSourceElements(EObject o, final EClass type) {
+		List<EObject> sourceElements = Lists.newArrayList(Iterables.filter(associations.getSourceElements(o),
+				new Predicate<EObject>() {
+					public boolean apply(EObject input) {
+						if (type == null)
+							return true;
+						return EcoreUtil2.isAssignableFrom(type, input.eClass());
+					}
+				}));
 		return sourceElements;
 	}
-	
+
 	private String computeLinkToElement(EObject jvmElement) {
 		String imageURL = hoverSignatureProvider.getImageTag(jvmElement);
 		String signature = hoverSignatureProvider.getDerivedOrSourceSignature(jvmElement);
-		return imageURL + createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(jvmElement), signature);
+		return imageURL
+				+ createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(jvmElement), signature);
 	}
 
 }
