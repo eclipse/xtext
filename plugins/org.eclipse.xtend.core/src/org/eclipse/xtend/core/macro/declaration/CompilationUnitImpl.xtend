@@ -15,6 +15,7 @@ import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
+import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessImpl
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
@@ -140,6 +141,8 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject JvmTypeExtensions typeExtensions;
+
+	@Inject FileSystemAccessImpl fileSystemAccess
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -477,6 +480,18 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def Object evaluate(XExpression expression) {
 		return interpreter.evaluate(expression, null)
+	}
+	
+	def getSourceFolder() {
+		fileSystemAccess.getSourceFolder(this)
+	}
+	
+	def getRootFolder() {
+		fileSystemAccess.getRootFolder(this)
+	}
+	
+	def getTargetFolder() {
+		fileSystemAccess.getTargetFolder(this)
 	}
 	
 }
