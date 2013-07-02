@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import com.google.common.collect.ImmutableList
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
@@ -16,6 +17,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeElementDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableElement
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
@@ -46,16 +48,12 @@ import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
+import org.eclipse.emf.ecore.EObject
 
-abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractElementImpl<T> implements MutableNamedElement {
-	
-	override getSimpleName() {
-		delegate.simpleName
-	}
+abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
 	override remove() {
 		if (delegate.eContainer == null)
@@ -65,9 +63,18 @@ abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends Abs
 			throw new IllegalStateException("Couldn't remove "+delegate.toString)
 	}
 	
+}
+
+abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends JvmElementImpl<T> implements MutableNamedElement {
+	
+	override getSimpleName() {
+		delegate.simpleName
+	}
+	
 	override toString() {
 		class.name+"["+simpleName+"]"
 	}
+	
 }
 
 abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> implements MutableAnnotationTarget {
@@ -652,7 +659,7 @@ class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<J
 	
 }
 
-class JvmAnnotationReferenceImpl extends AbstractElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
+class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
 	
 	override getAnnotationTypeDeclaration() {
 		compilationUnit.toTypeDeclaration(delegate.annotation) as AnnotationTypeDeclaration
