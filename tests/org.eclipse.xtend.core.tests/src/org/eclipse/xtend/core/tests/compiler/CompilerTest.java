@@ -3403,4 +3403,20 @@ public class CompilerTest extends AbstractXtendTestCase {
 		assertNotNull("Example code does not compile to java", javaCode);
 	}
 
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=411973
+	 */
+	@Test
+	public void testBug411973() throws Exception {
+		String code = "package bug411973 class Bug {val ()=>String init new() { this([|\"Hello World!\"]) }"
+				+ "new(()=>String init) { this.init = init } @Override override toString() { init.apply } }";
+		Class<?> javaCode = compileJavaCode("bug411973.Bug", code);
+		assertNotNull("Example code does not compile to java", javaCode);
+
+		Constructor<?> constructor = javaCode.getDeclaredConstructor();
+		Object newInstance = constructor.newInstance();
+		Method toString = javaCode.getDeclaredMethod("toString");
+		assertEquals("Hello World!", toString.invoke(newInstance));
+	}
+
 }
