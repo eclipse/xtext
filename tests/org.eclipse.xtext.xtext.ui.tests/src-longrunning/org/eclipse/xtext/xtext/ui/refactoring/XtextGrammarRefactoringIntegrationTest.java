@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.adaptor.EclipseStarter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -29,7 +30,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.osgi.framework.internal.core.FrameworkProperties;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
@@ -49,6 +49,7 @@ import org.eclipse.xtext.xtext.ui.Activator;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -85,8 +86,8 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		FrameworkProperties.setProperty(EcoreRefactoringParticipant.ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION,
-				"false");
+		EclipseStarter.setInitialProperties(ImmutableMap.of(
+				EcoreRefactoringParticipant.ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION, "false"));
 		project = createProject(TEST_PROJECT);
 		IJavaProject javaProject = makeJavaProject(project);
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
@@ -145,7 +146,8 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		grammarResource.unload();
 	}
 
-	@Test public void testRefactorXtextGrammarWithoutGeneratedClassifier() throws Exception {
+	@Test
+	public void testRefactorXtextGrammarWithoutGeneratedClassifier() throws Exception {
 		waitForAutoBuild();
 		final XtextEditor editor = openEditor(grammaFile);
 		doRefactoring(editor);
@@ -155,7 +157,8 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		checkConsistenceOfGrammar(editor);
 	}
 
-	@Test public void testRefactorXtextGrammarWithGeneratedClassifier() throws Exception {
+	@Test
+	public void testRefactorXtextGrammarWithGeneratedClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		Resource ecoreResource = createEcoreModel(rs, ecoreURI, initialModelRoot);
 		final EClass greetingClass = getGreetingClass(ecoreResource);
@@ -177,7 +180,8 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		assertEquals(REFACTOREDCLASSIFIERNAME, eType.getName());
 	}
 
-	@Test public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
+	@Test
+	public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
 		Resource ecoreModelResource = createEcoreModel(rs, ecoreURI, initialModelRoot);
@@ -216,12 +220,12 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		EClassifier eType = greetingReference.getEType();
 		assertFalse(eType.eIsProxy());
 		assertEquals(REFACTOREDCLASSIFIERNAME, eType.getName());
-		
+
 		refToGreetingResource.load(null);
 		EReference externalReferenceToGreeting = getReferenceoGreeting(refToGreetingResource, eType);
 		assertFalse(externalReferenceToGreeting.getEType().eIsProxy());
 		assertEquals(REFACTOREDCLASSIFIERNAME, externalReferenceToGreeting.getEType().getName());
-		
+
 	}
 
 	private EReference getReferenceoGreeting(Resource ecoreResource, final EClassifier classifier) {
@@ -289,8 +293,8 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
-		FrameworkProperties.setProperty(EcoreRefactoringParticipant.ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION,
-				"true");
+		EclipseStarter.setInitialProperties(ImmutableMap.of(
+				EcoreRefactoringParticipant.ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION, "true"));
 	}
 
 	@Override
