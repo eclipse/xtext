@@ -349,6 +349,76 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingMemberWithAssigmentExplicitThis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.bar| = 0L");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertResolutionLabels = _create.assertResolutionLabels("Create method \'setBar(long)\'", "Create field \'bar\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("this.bar = 0L");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def setBar(long l) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create method \'setBar(long)\'", _builder_1);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("long bar");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def foo() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("this.bar = 0L");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertModelAfterQuickfix.assertModelAfterQuickfix("Create field \'bar\'", _builder_2);
+  }
+  
+  @Test
   public void missingMemberExplicitThis() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
