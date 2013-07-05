@@ -201,6 +201,40 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test
+	def void missingMemberWithAssigmentExplicitThis() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					this.bar| = 0L
+				}
+			}
+		''')
+		.assertResolutionLabels("Create method 'setBar(long)'", "Create field 'bar'")
+		.assertModelAfterQuickfix("Create method 'setBar(long)'", '''
+			class Foo {
+				def foo() {
+					this.bar = 0L
+				}
+				
+				def setBar(long l) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create field 'bar'", '''
+			class Foo {
+				
+				long bar
+				
+				def foo() {
+					this.bar = 0L
+				}
+			}
+		''')
+	}
+	
 	@Test 
 	def void missingMemberExplicitThis() {
 		create('Foo.xtend', '''
@@ -1276,6 +1310,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				
 			}
 		''')
-	} 
+	}
+
 }
 
