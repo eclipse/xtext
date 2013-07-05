@@ -127,8 +127,11 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					
 				} else if (call instanceof XAssignment) {
 					newSetterQuickfix(issue, issueResolutionAcceptor, newMemberName, call);
-					if(((XAssignment) call).getAssignable() == null) {
+					XAssignment assigment = (XAssignment) call;
+					if(assigment.getAssignable() == null) {
 						newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+					} else if (isThis(assigment)) {
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 					}
 				}
@@ -148,6 +151,16 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		if(referenceOwner instanceof XConstructorCall) {
 			newConstructorQuickfix(issue, issueResolutionAcceptor, (XConstructorCall) referenceOwner);
 		}
+	}
+
+	protected boolean isThis(XAssignment assigment) {
+		XExpression assignable = assigment.getAssignable();
+		if (!(assignable instanceof XAbstractFeatureCall)) {
+			return false;
+		}
+		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) assignable;
+		return featureCall.getFeature() instanceof JvmDeclaredType
+				&& !featureCall.isExplicitOperationCallOrBuilderSyntax() && !featureCall.isTypeLiteral();
 	}
 
 	protected String getAccessorMethodName(String prefix, String fieldName) {
