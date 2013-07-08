@@ -137,8 +137,8 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 	protected void findCandidateTypes(final JvmDeclaredType contextType, final String typeSimpleName,
 			IJavaSearchScope searchScope, final IAcceptor<JvmDeclaredType> acceptor) throws JavaModelException {
 		BasicSearchEngine searchEngine = new BasicSearchEngine();
-		searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, typeSimpleName.toCharArray(),
-				SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope,
+		searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, typeSimpleName.toCharArray(),
+				SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, IJavaSearchConstants.TYPE, searchScope,
 				new IRestrictedAccessTypeRequestor() {
 					public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path, AccessRestriction access) {
