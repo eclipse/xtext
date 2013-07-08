@@ -67,7 +67,7 @@ public class QueuedBuildData {
 		boolean associatedWithProject = false;
 		for(Pair<IStorage, IProject> pair: iterable) {
 			IProject project = pair.getSecond();
-			if (XtextProjectHelper.hasNature(project)) {
+			if (XtextProjectHelper.hasNature(project) && XtextProjectHelper.hasBuilder(project)) {
 				String projectName = project.getName();
 				LinkedList<URI> list = projectNameToChangedResource.get(projectName);
 				if (list == null) {
