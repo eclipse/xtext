@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.xtext.util.Strings;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterProvider;
 import org.xpect.util.IRegion;
@@ -20,6 +19,7 @@ import org.xpect.util.Region;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -55,8 +55,8 @@ public class AbstractExpectation implements IParsedParameterProvider {
 		if (getLength() < 0)
 			return "";
 		String substring = document.substring(getOffset(), getOffset() + getLength());
-		String indentation = region.getIndentation();
-		if (indentation != null) {
+		if (region instanceof IMultiLineExpectationRegion) {
+			String indentation = ((IMultiLineExpectationRegion) region).getIndentation();
 			String[] lines = substring.split("\\n");
 			String newLines[] = new String[lines.length];
 			for (int i = 0; i < lines.length; i++)
@@ -82,15 +82,45 @@ public class AbstractExpectation implements IParsedParameterProvider {
 		return Collections.<IRegion> singletonList(new Region(getOffset(), getLength()));
 	}
 
+	protected String findValidSeparator(String value, String suggestedSeparator) {
+		if (!value.contains(suggestedSeparator))
+			return suggestedSeparator;
+		final String chars = "-~=+*%#$&";
+		for (int i = 3; i < 80; i++) {
+			for (int c = 0; i < chars.length(); c++) {
+				String separator = Strings.repeat(String.valueOf(chars.charAt(c)), i);
+				if (!value.contains(separator))
+					return separator;
+			}
+		}
+		throw new IllegalStateException();
+	}
+
 	protected String replaceInDocument(String value) {
-		String indented;
-		String indentation = region.getIndentation();
-		if (!Strings.isEmpty(indentation))
-			indented = indentation + value.replace("\n", "\n" + indentation);
-		else
-			indented = value;
-		String before = document.substring(0, getOffset());
-		String after = document.substring(getOffset() + getLength(), document.length());
-		return before + indented + after;
+		if (region instanceof IMultiLineExpectationRegion) {
+			IMultiLineExpectationRegion mlRegion = (IMultiLineExpectationRegion) region;
+			String indentation = mlRegion.getIndentation();
+			String separator = findValidSeparator(value, mlRegion.getSeparator());
+			int sepOpening = mlRegion.getOpeningSeparatorOffset();
+			int sepClosing = mlRegion.getClosingSeparatorOffset();
+			String beforeSeparator = document.substring(0, sepOpening);
+			String betweenSeparatorAndExpectation = document.substring(sepOpening + mlRegion.getSeparator().length(), mlRegion.getOffset());
+			String betweenExpectationAndSeparator = document.substring(mlRegion.getOffset() + mlRegion.getLength(), sepClosing);
+			String afterSeparator = document.substring(sepClosing + mlRegion.getSeparator().length());
+			String indented = indentation + value.replace("\n", "\n" + indentation);
+			StringBuilder builder = new StringBuilder();
+			builder.append(beforeSeparator);
+			builder.append(separator);
+			builder.append(betweenSeparatorAndExpectation);
+			builder.append(indented);
+			builder.append(betweenExpectationAndSeparator);
+			builder.append(separator);
+			builder.append(afterSeparator);
+			return builder.toString();
+		} else {
+			String before = document.substring(0, getOffset());
+			String after = document.substring(getOffset() + getLength(), document.length());
+			return before + value + after;
+		}
 	}
 }
