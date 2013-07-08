@@ -92,20 +92,7 @@ public class BuildScheduler {
 	}
 
 	protected boolean isBuildable(IProject project) {
-		return XtextProjectHelper.hasNature(project) && isBuildEnabled(project);
-	}
-
-	private boolean isBuildEnabled(IProject project) {
-		try {
-			for (ICommand command : project.getDescription().getBuildSpec()) {
-				if (XtextBuilder.BUILDER_ID.equals(command.getBuilderName())) {
-					return true;
-				}
-			}
-		} catch (CoreException e) {
-			log.error("Can't build due to an exception.", e);
-		}
-		return false;
+		return XtextProjectHelper.hasNature(project) && XtextProjectHelper.hasBuilder(project);
 	}
 
 	protected class BuildJob extends Job {

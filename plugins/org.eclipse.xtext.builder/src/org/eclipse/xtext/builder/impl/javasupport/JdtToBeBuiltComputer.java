@@ -118,7 +118,7 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		for (IProject p : projectsInCorrectBuildOrder) {
 			if (p.equals(project))
 				return false;
-			if (XtextProjectHelper.hasNature(p)) {
+			if (XtextProjectHelper.hasNature(p) && XtextProjectHelper.hasBuilder(p)) {
 				IJavaProject javaProject = JavaCore.create(p);
 				if (javaProject.exists()) {
 					if (javaProject.isOnClasspath(root)) {

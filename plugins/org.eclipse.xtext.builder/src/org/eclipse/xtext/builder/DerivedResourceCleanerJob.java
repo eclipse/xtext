@@ -118,7 +118,7 @@ public class DerivedResourceCleanerJob extends Job {
 	}
 
 	protected boolean shouldBeProcessed(IProject project) {
-		return XtextProjectHelper.hasNature(project) && (folderNameToClean == null || project.getFolder(folderNameToClean).exists());
+		return XtextProjectHelper.hasNature(project) && XtextProjectHelper.hasBuilder(project) && (folderNameToClean == null || project.getFolder(folderNameToClean).exists());
 	}
 
 }
