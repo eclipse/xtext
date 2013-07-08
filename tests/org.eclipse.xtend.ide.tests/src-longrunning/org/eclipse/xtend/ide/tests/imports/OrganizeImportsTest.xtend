@@ -237,4 +237,21 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=412487
+	@Test def testDontChangeDanglingFeatureCalls() {
+		'''
+			class Foo {
+				def foo() {
+					field.x
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def foo() {
+					field.x
+				}
+			}
+		''')
+	}
 }
