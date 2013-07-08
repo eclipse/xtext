@@ -36,9 +36,6 @@ import com.google.inject.Inject;
 public class ConflictResolver {
 
 	@Inject
-	private IJvmModelAssociations associations;
-	
-	@Inject
 	private IImportsConfiguration config;
 	
 	@Inject
