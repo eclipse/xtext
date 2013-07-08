@@ -153,7 +153,7 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 	}
 	
 	protected boolean isAccessibleXtextProject(IProject p) {
-		return p != null && XtextProjectHelper.hasNature(p);
+		return p != null && XtextProjectHelper.hasNature(p) && XtextProjectHelper.hasBuilder(p);
 	}
 	
 	protected IWorkspaceRoot getWorkspaceRoot() {

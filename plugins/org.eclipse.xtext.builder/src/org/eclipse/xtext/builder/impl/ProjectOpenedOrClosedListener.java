@@ -95,7 +95,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 								}
 								if ((delta.getKind() & IResourceDelta.CHANGED) != 0 && project.isOpen()) {
 									if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {	
-										if ((delta.findMember(new Path(".project")) != null)  && XtextProjectHelper.hasNature(project))
+										if ((delta.findMember(new Path(".project")) != null)  
+												&& XtextProjectHelper.hasNature(project) && XtextProjectHelper.hasBuilder(project))
 											toUpdate.add(project);
 										else if(!XtextProjectHelper.hasNature(project)){
 											scheduleRemoveProjectJob(project);
