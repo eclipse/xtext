@@ -8,9 +8,12 @@
 package org.xpect.ui.junit;
 
 import org.eclipse.compare.CompareUI;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.internal.junit.model.TestElement;
 import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jface.action.Action;
+import org.xpect.ui.util.FileUtil;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -18,11 +21,13 @@ import org.eclipse.jface.action.Action;
 @SuppressWarnings("restriction")
 class CompareAction extends Action {
 
-	private ITestElement ctx;
+	private final ITestElement ctx;
+	private final URI uri;
 
-	public CompareAction(ITestElement ctx) {
+	public CompareAction(ITestElement ctx, URI uri) {
 		super();
 		this.ctx = ctx;
+		this.uri = uri;
 		setText("Compare");
 		setToolTipText("Compare test expecation with actual test result.");
 	}
@@ -34,7 +39,8 @@ class CompareAction extends Action {
 
 	@Override
 	public void run() {
-		FailureCompareEditorInput inp = new FailureCompareEditorInput(ctx);
+		IFile iFile = uri == null ? null : FileUtil.findFileInWorkspace(uri);
+		FailureCompareEditorInput inp = new FailureCompareEditorInput(ctx, iFile);
 		CompareUI.openCompareEditor(inp);
 	}
 }

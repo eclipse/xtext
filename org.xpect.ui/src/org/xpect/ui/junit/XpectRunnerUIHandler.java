@@ -10,7 +10,6 @@ package org.xpect.ui.junit;
 import java.util.Collections;
 import java.util.Map;
 
-import org.eclipse.compare.CompareUI;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.internal.junit.model.TestElement;
 import org.eclipse.jdt.junit.model.ITestCaseElement;
@@ -35,13 +34,14 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 	private IURIEditorOpener globalOpener;
 
 	public boolean contextMenuAboutToShow(ViewPart part, ITestElement ctx, IMenuManager menu) {
-		CompareAction compareAction = new CompareAction(ctx);
-		if (compareAction.isEnabled())
-			menu.add(compareAction);
 		Map<String, String> parsed = parse(ctx);
 		String file = parsed.get("file");
+		URI uri = file == null ? null : URI.createURI(file);
+		CompareAction compareAction = new CompareAction(ctx, uri);
+		if (compareAction.isEnabled())
+			menu.add(compareAction);
 		if (file != null)
-			menu.add(new OpenFileAction(globalOpener, URI.createURI(file), "Go to XPECT", "Show XPECT statement in the Xpect file editor."));
+			menu.add(new OpenFileAction(globalOpener, uri, "Go to XPECT", "Show XPECT statement in the Xpect file editor."));
 		String method = parsed.get("method");
 		if (method != null)
 			menu.add(new OpenJavaMethodAction(ctx, method, "Go to Method", "Show Java Method declaration"));
@@ -57,15 +57,15 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 	}
 
 	public boolean handleDoubleClick(ViewPart part, ITestElement ctx) {
-		if (ctx instanceof TestElement && ((TestElement) ctx).isComparisonFailure()) {
-			FailureCompareEditorInput inp = new FailureCompareEditorInput(ctx);
-			CompareUI.openCompareEditor(inp);
-			return true;
-		}
 		Map<String, String> parsed = parse(ctx);
 		String file = parsed.get("file");
+		URI uri = file == null ? null : URI.createURI(file);
+		if (ctx instanceof TestElement && ((TestElement) ctx).isComparisonFailure()) {
+			new CompareAction(ctx, uri).run();
+			return true;
+		}
 		if (file != null) {
-			new OpenFileAction(globalOpener, URI.createURI(file), "foo", "bar").run();
+			new OpenFileAction(globalOpener, uri, "foo", "bar").run();
 			return true;
 		}
 		return false;
