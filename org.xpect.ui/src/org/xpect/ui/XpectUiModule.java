@@ -14,7 +14,7 @@ import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.xpect.ui.highlighting.XpectTokenDefProvider;
 import org.xpect.ui.highlighting.XpectTokenToAttributeMapper;
-import org.xpect.ui.scoping.ClasspathOrJdtBasedSimpleTypeScopeProvider;
+import org.xpect.ui.scoping.ClasspathOrJdtBasedTypeScopeProvider;
 import org.xpect.ui.util.UIJavaReflectAccess;
 import org.xpect.util.IJavaReflectAccess;
 
@@ -45,7 +45,7 @@ public class XpectUiModule extends org.xpect.ui.AbstractXpectUiModule {
 
 	@Override
 	public Class<? extends AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
-		return ClasspathOrJdtBasedSimpleTypeScopeProvider.class;
+		return ClasspathOrJdtBasedTypeScopeProvider.class;
 	}
 
 }

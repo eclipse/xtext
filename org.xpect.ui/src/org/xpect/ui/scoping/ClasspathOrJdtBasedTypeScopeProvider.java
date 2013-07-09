@@ -1,6 +1,5 @@
 package org.xpect.ui.scoping;
 
-import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
@@ -18,10 +17,10 @@ import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
-public class ClasspathOrJdtBasedSimpleTypeScopeProvider extends AbstractTypeScopeProvider {
+public class ClasspathOrJdtBasedTypeScopeProvider extends AbstractTypeScopeProvider {
 
 	@Inject
-	private ClasspathTypeProviderFactory typeProviderFactory;
+	private ClasspathOrJdtBasedTypeScopeProviderFactory typeProviderFactory;
 
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
@@ -45,12 +44,8 @@ public class ClasspathOrJdtBasedSimpleTypeScopeProvider extends AbstractTypeScop
 		throw new IllegalStateException();
 	}
 
-	public void setTypeProviderFactory(ClasspathTypeProviderFactory typeProviderFactory) {
-		this.typeProviderFactory = typeProviderFactory;
-	}
-
 	@Override
-	public ClasspathTypeProviderFactory getTypeProviderFactory() {
+	public IJvmTypeProvider.Factory getTypeProviderFactory() {
 		return typeProviderFactory;
 	}
 
