@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.validation;
 
 import java.util.Map;
 
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
@@ -29,6 +28,13 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider {
+	public static final String JDT_CORE_PLUGIN_ID = "org.eclipse.jdt.core"; //$NON-NLS-1$
+	/* Constants are copied from org.eclipse.jdt.core.JavaCore to solve the dependency to jdt.core*/
+	public static final String COMPILER_PB_DISCOURAGED_REFERENCE = JDT_CORE_PLUGIN_ID + ".compiler.problem.discouragedReference"; //$NON-NLS-1$
+	public static final String COMPILER_PB_FORBIDDEN_REFERENCE = JDT_CORE_PLUGIN_ID + ".compiler.problem.forbiddenReference"; //$NON-NLS-1$
+	public static final String COMPILER_PB_UNNECESSARY_TYPE_CHECK = JDT_CORE_PLUGIN_ID + ".compiler.problem.unnecessaryTypeCheck"; //$NON-NLS-1$
+	public static final String COMPILER_PB_UNUSED_IMPORT = JDT_CORE_PLUGIN_ID + ".compiler.problem.unusedImport"; //$NON-NLS-1$
+	public static final String COMPILER_PB_UNUSED_LOCAL = JDT_CORE_PLUGIN_ID + ".compiler.problem.unusedLocal"; //$NON-NLS-1$
 
 	private Map<String, PreferenceKey> issueCodes;
 
@@ -48,14 +54,14 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(create(IssueCodes.UNHANDLED_EXCEPTION, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.EQUALS_WITH_NULL, SeverityConverter.SEVERITY_IGNORE));
 
-		iAcceptor.accept(createDelegate(IssueCodes.FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE));
-		iAcceptor.accept(createDelegate(IssueCodes.DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE));
+		iAcceptor.accept(createDelegate(IssueCodes.FORBIDDEN_REFERENCE, COMPILER_PB_FORBIDDEN_REFERENCE));
+		iAcceptor.accept(createDelegate(IssueCodes.DISCOURAGED_REFERENCE, COMPILER_PB_DISCOURAGED_REFERENCE));
 		iAcceptor.accept(create(IssueCodes.IMPORT_WILDCARD_DEPRECATED, SeverityConverter.SEVERITY_WARNING));
 
-		iAcceptor.accept(createDelegate(IssueCodes.OBSOLETE_INSTANCEOF, JavaCore.COMPILER_PB_UNNECESSARY_TYPE_CHECK));
-		iAcceptor.accept(createDelegate(IssueCodes.OBSOLETE_CAST, JavaCore.COMPILER_PB_UNNECESSARY_TYPE_CHECK));
-		iAcceptor.accept(createDelegate(IssueCodes.IMPORT_UNUSED, JavaCore.COMPILER_PB_UNUSED_IMPORT));
-		iAcceptor.accept(createDelegate(IssueCodes.UNUSED_LOCAL_VARIABLE, JavaCore.COMPILER_PB_UNUSED_LOCAL));
+		iAcceptor.accept(createDelegate(IssueCodes.OBSOLETE_INSTANCEOF, COMPILER_PB_UNNECESSARY_TYPE_CHECK));
+		iAcceptor.accept(createDelegate(IssueCodes.OBSOLETE_CAST, COMPILER_PB_UNNECESSARY_TYPE_CHECK));
+		iAcceptor.accept(createDelegate(IssueCodes.IMPORT_UNUSED, COMPILER_PB_UNUSED_IMPORT));
+		iAcceptor.accept(createDelegate(IssueCodes.UNUSED_LOCAL_VARIABLE, COMPILER_PB_UNUSED_LOCAL));
 		iAcceptor.accept(create(IssueCodes.IMPORT_DUPLICATE, SeverityConverter.SEVERITY_WARNING));
 	}
 
