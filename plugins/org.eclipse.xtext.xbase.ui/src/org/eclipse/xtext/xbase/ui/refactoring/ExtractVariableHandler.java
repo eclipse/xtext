@@ -54,7 +54,7 @@ public class ExtractVariableHandler extends AbstractHandler {
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				final IXtextDocument document = editor.getDocument();
-				document.modify(new IUnitOfWork.Void<XtextResource>() {
+				document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
 						XExpression expression = expressionUtil.findSelectedExpression(resource, selection);

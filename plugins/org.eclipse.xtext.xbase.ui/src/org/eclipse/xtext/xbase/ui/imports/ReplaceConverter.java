@@ -31,10 +31,15 @@ public class ReplaceConverter {
 	}
 	
 	public int getReplaceLengthDelta(List<ReplaceRegion> changes) {
+		return getReplaceLengthDelta(changes, 0);
+	}
+
+	public int getReplaceLengthDelta(List<ReplaceRegion> changes, int caretPosition) {
 		int delta = 0;
 		if(changes != null && !changes.isEmpty()) {
 			for(ReplaceRegion change: changes) {
-				delta += change.getText().length() - change.getLength();
+				if(change.getEndOffset() < caretPosition)
+					delta += change.getText().length() - change.getLength();
 			}
 		}
 		return delta;
