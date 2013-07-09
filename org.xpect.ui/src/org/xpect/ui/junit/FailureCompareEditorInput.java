@@ -18,6 +18,7 @@ import org.eclipse.compare.IModificationDate;
 import org.eclipse.compare.IStreamContentAccessor;
 import org.eclipse.compare.ITypedElement;
 import org.eclipse.compare.ResourceNode;
+import org.eclipse.compare.internal.ICompareUIConstants;
 import org.eclipse.compare.structuremergeviewer.DiffNode;
 import org.eclipse.compare.structuremergeviewer.Differencer;
 import org.eclipse.core.resources.IFile;
@@ -103,6 +104,7 @@ public class FailureCompareEditorInput extends CompareEditorInput {
 		configuration.setLeftLabel("Expected Test Result" + (file != null ? " - " + file.getName() : ""));
 		configuration.setRightLabel("Actual Test Result");
 		configuration.setAncestorLabel("File on Disk");
+		configuration.setProperty(ICompareUIConstants.PROP_ANCESTOR_VISIBLE, Boolean.TRUE);
 		return configuration;
 	}
 
