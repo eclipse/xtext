@@ -70,6 +70,8 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 		EList<T> result = new BasicEList<T>();
 		for (XjmSetup setup : getSetups()) {
 			IXpectSetup instance = setup.getInstance();
+			if (instance == null || instance.getEnvironments() == null)
+				continue;
 			if (instance.getEnvironments().contains(env) && clazz.isInstance(instance))
 				result.add((T) instance);
 		}
