@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.validation;
 
 import java.util.List;
 
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
@@ -22,11 +21,13 @@ import org.eclipse.xtext.validation.SeverityConverter;
 public class XbaseSeverityConverter extends SeverityConverter {
 
 	private static final char DEFAULT_SEVERITY_SEPARATOR = ':';
+	
+
 
 	@Override
 	public Severity stringToSeverity(final String severityAsString) {
 		String valueToConvert = severityAsString;
-		if (severityAsString.startsWith(JavaCore.PLUGIN_ID)) {
+		if (severityAsString.startsWith(XbaseConfigurableIssueCodes.JDT_CORE_PLUGIN_ID)) {
 			valueToConvert = delegatedValue(decodeDelegationKey(severityAsString));
 		}
 		return super.stringToSeverity(valueToConvert);
@@ -35,7 +36,7 @@ public class XbaseSeverityConverter extends SeverityConverter {
 	/**
 	 * 
 	 * @param pair
-	 *            holds first=delegationKey, second=defaultValue. delegationKey starts with {@link JavaCore#PLUGIN_ID}
+	 *            holds first=delegationKey, second=defaultValue. delegationKey starts with {@link XbaseConfigurableIssueCodes#JDT_CORE_PLUGIN_ID}
 	 * @return resolved delegated value
 	 */
 	protected String delegatedValue(Pair<String, String> pair) {
