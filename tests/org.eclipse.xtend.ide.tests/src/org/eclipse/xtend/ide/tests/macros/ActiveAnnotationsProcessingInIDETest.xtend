@@ -13,15 +13,14 @@ import java.util.jar.Manifest
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests
 import org.eclipse.xtend.core.xtend.XtendClass
-import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -97,73 +96,18 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 				@ChangeDoc
 				class UserClass {
 				
-					/** 
-						* Comment
-						*/
-					@ChangeDoc
-					private Object object
-				
-					/** 
-					* Comment
-					*/
-					private Object object2
-				
-					/** 
-					* Comment
-					*/
-					@ChangeDoc
-					new() {
-						this(new Object, new Object)
-					}
-				
-					/** 
-					* Comment
-					*/
-					new(Object object, Object object2) {
-						this.object = object
-						this.object2 = object2
-					}
-				
-					/** 
-					* Comment
-					*/
-					@ChangeDoc
-					def op() {
-					}
-				
-					/** 
-					* Comment
-					*/
-					def op2() {
-					}
+					private UserClass object
 				
 				}
 			''') [
 			val xtendClass = xtendFile.xtendTypes.filter(XtendClass).head
-			assertEquals(
-				'''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.
-					toString, xtendClass.documentation)
-			val objectField = xtendClass.members.filter(XtendField).filter[name.equals("object")].head
-			assertEquals(
-				'''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.
-					toString, objectField.documentation)
-			val objectField2 = xtendClass.members.filter(XtendField).filter[name.equals("object2")].head
-			assertEquals('''Comment'''.toString, objectField2.documentation)
-			val constructor = xtendClass.members.filter(XtendConstructor).filter[parameters.empty].head
-			assertEquals(
-				'''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.
-					toString, constructor.documentation)
-			val constructor2 = xtendClass.members.filter(XtendConstructor).filter[parameters.size == 2].head
-			assertEquals(
-				'''Comment<dl><dt>Parameters:</dt><dd><b>object</b> </dd><dd><b>object2</b> </dd></dl>'''.toString,
-				constructor2.documentation)
-			val opFunction = xtendClass.members.filter(XtendFunction).filter[name.equals("op")].head
-			assertEquals(
-				'''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!'''.
-					toString, opFunction.documentation)
-			val op2Function = xtendClass.members.filter(XtendFunction).filter[name.equals("op2")].head
-			assertEquals('''Comment'''.toString, op2Function.documentation)
+			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Comment''', xtendClass)
+			assertDocumentation('''Hello World!''', xtendClass.members.filter(XtendField).filter[name.equals("object")].head.type.type)
 		]
+	}
+	
+	def assertDocumentation(CharSequence charSequence, EObject sourceElement) {
+		assertEquals(charSequence.toString, sourceElement.documentation)
 	}
 
 	@Test def void testFileSystemAccess() {

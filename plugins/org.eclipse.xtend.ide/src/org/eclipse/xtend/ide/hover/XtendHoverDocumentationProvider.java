@@ -11,7 +11,6 @@ import static org.eclipse.xtext.xbase.ui.hover.HoverLinkHelper.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -151,21 +150,6 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 		if (filteredSourceElements.size() > 1)
 			return filteredSourceElements;
 		return Lists.newArrayList();
-	}
-
-	@Override
-	protected String resolveDocumentation(EObject sourceElement) {
-		Set<EObject> jvmElements = associations.getJvmElements(sourceElement);
-		if (jvmElements == null) {
-			return super.resolveDocumentation(sourceElement);
-		}
-		for (EObject jvmElement : jvmElements) {
-			String documentation = resolveDocumentationForJvmElement(jvmElement);
-			if (documentation != null) {
-				return documentation;
-			}
-		}
-		return super.resolveDocumentation(sourceElement);
 	}
 
 	protected String resolveDocumentationForJvmElement(EObject jvmElement) {
