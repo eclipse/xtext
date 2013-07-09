@@ -45,7 +45,11 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		}
 		return sb.toString();
 	}
-
+	
+	protected int getIndentationLevel() {
+		return indentationlevel;
+	}
+	
 	@Override
 	public String toString() {
 		return builder.toString();

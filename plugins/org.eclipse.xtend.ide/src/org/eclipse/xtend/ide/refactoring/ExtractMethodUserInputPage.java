@@ -12,7 +12,6 @@ import static org.eclipse.xtext.util.Strings.*;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.internal.corext.refactoring.ParameterInfo;
 import org.eclipse.jdt.internal.ui.refactoring.ChangeParametersControl;
 import org.eclipse.jdt.internal.ui.refactoring.IParameterListChangeListener;

@@ -58,7 +58,7 @@ public class ExtractMethodHandler extends AbstractHandler {
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				final IXtextDocument document = editor.getDocument();
-				document.modify(new IUnitOfWork.Void<XtextResource>() {
+				document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
 						List<XExpression> expressions = expressionUtil.findSelectedSiblingExpressions(resource,
@@ -68,9 +68,11 @@ public class ExtractMethodHandler extends AbstractHandler {
 							if (extractMethodRefactoring.initialize(document, expressions)) {
 								updateSelection(editor, expressions);
 								ExtractMethodWizard wizard = wizardFactory.create(extractMethodRefactoring);
-								RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
-										wizard);
-								openOperation.run(editor.getSite().getShell(), "Extract Method");
+								if(wizard != null) {
+									RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
+											wizard);
+									openOperation.run(editor.getSite().getShell(), "Extract Method");
+								}
 							}
 						}
 					}

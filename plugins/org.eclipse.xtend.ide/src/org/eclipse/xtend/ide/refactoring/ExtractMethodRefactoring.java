@@ -17,7 +17,6 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
@@ -34,9 +33,6 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.DocumentChange;
 import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.text.edits.InsertEdit;
-import org.eclipse.text.edits.MultiTextEdit;
-import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -48,8 +44,8 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
@@ -64,11 +60,19 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.ui.document.DocumentRewriter;
+import org.eclipse.xtext.xbase.ui.document.DocumentRewriter.Section;
+import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
-import org.eclipse.xtext.xbase.ui.refactoring.IndentationUtil;
 import org.eclipse.xtext.xbase.ui.refactoring.NewFeatureNameUtil;
-import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
@@ -79,7 +83,6 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class ExtractMethodRefactoring extends Refactoring {
 
 	public static final Logger LOG = Logger.getLogger(ExtractMethodRefactoring.class);
@@ -91,13 +94,10 @@ public class ExtractMethodRefactoring extends Refactoring {
 	private ILocationInFileProvider locationInFileProvider;
 	
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
 	
 	@Inject
-	private TypeConformanceComputer typeConformance;
-	
-	@Inject
-	private TypeSerializationUtil typeUtil;
+	private CommonTypeComputationServices typeComputationServices;
 	
 	@Inject
 	private ExpressionUtil expressionUtil;
@@ -106,11 +106,16 @@ public class ExtractMethodRefactoring extends Refactoring {
 	private NewFeatureNameUtil nameUtil;
 	
 	@Inject
-	private IndentationUtil indentationUtil;
+	private IXtendJvmAssociations associations;
+	
+	@Inject 
+	private DocumentRewriter.Factory rewriterFactory;
 
 	@Inject
-	private IXtendJvmAssociations associations;
-
+	private ReplaceConverter replaceConverter;
+	
+	@Inject
+	private XtypeTypeReferenceSerializer typeReferenceSerializer;
 	
 	private IDocument document;
 
@@ -137,7 +142,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 
 	private XtendFunction originalMethod;
 
-	private MultiTextEdit textEdit;
+	private TextEdit textEdit;
 
 	private List<String> localFeatureNames = newArrayList();
 	
@@ -145,9 +150,11 @@ public class ExtractMethodRefactoring extends Refactoring {
 
 	private XExpression returnExpression;
 	
-	private JvmTypeReference returnType;
+	private LightweightTypeReference returnType;
 	
 	private Set<JvmTypeParameter> neededTypeParameters = newHashSet();
+
+	private DocumentRewriter rewriter;
 	
 
 	public boolean initialize(IXtextDocument document, List<XExpression> expressions) {
@@ -167,7 +174,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 		XExpression successorExpression = expressionUtil
 				.findSuccessorExpressionForVariableDeclaration(lastExpression);
 		nameUtil.setFeatureScopeContext(successorExpression);
-		indentationUtil.initialize(document, resourceURI);
+		rewriter = rewriterFactory.create(document, (XtextResource) firstExpression.eResource());
 		return true;
 	}
 
@@ -231,47 +238,54 @@ public class ExtractMethodRefactoring extends Refactoring {
 	}
 
 	public String getMethodSignature() {
-		StringBuilder builder = new StringBuilder("def ");
+		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
+		appendMethodSignature(appendable);
+		return appendable.toString();
+	}
+	
+	protected void appendMethodSignature(IAppendable appendable) {
 		if (visibility != JvmVisibility.PUBLIC)
-			builder.append(getVisibility().getName().toLowerCase()).append(" ");
+			appendable.append(getVisibility().getName().toLowerCase()).append(" ");
+		appendable.append("def ");
 		if (isStatic)
-			builder.append("static ");
+			appendable.append("static ");
 		if(!neededTypeParameters.isEmpty()) {
-			builder.append("<");
+			appendable.append("<");
 			boolean isFirst = true;
 			for(JvmTypeParameter typeParameter: associations.getDirectlyInferredOperation(originalMethod).getTypeParameters()) {
 				if(neededTypeParameters.contains(typeParameter)) {
 					if(!isFirst)
-						builder.append(", ");
+						appendable.append(", ");
 					isFirst = false;
-					builder.append(typeUtil.serialize(typeParameter, firstExpression));
+					appendable.append(typeParameter);
 				}
 			}
-			builder.append("> ");
+			appendable.append("> ");
 		}
 		if (isExplicitlyDeclareReturnType) {
-			builder.append(typeUtil.serialize(returnType, firstExpression)).append(" ");
+			typeReferenceSerializer.serialize(returnType.toTypeReference(), firstExpression, appendable);
+			appendable.append(" ");
 		}
-		builder.append(methodName).append("(");
+		appendable.append(methodName).append("(");
 		boolean isFirst = true;
 		for (ParameterInfo parameterInfo : getParameterInfos()) {
 			if (!isFirst)
-				builder.append(", ");
+				appendable.append(", ");
 			isFirst = false;
-			builder.append(parameterInfo.getOldTypeName()).append(" ").append(parameterInfo.getNewName());
+			appendable.append(parameterInfo.getOldTypeName()).append(" ").append(parameterInfo.getNewName());
 		}
-		builder.append(")");
-		return builder.toString();
+		appendable.append(")");
 	}
 
 	@Override
 	public RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws CoreException,
 			OperationCanceledException {
 		StatusWrapper status = statusProvider.get();
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(firstExpression);
 		try {
 			Set<String> calledExternalFeatureNames = newHashSet();
-			returnType = calculateReturnType();
-			if (!equal("void", typeUtil.serialize(returnType, firstExpression)))
+			returnType = calculateReturnType(resolvedTypes);
+			if (!equal("void", returnType.getIdentifier()))
 				returnExpression = lastExpression;
 			boolean isReturnAllowed = isEndOfOriginalMethod(); 
 			for (EObject element : EcoreUtil2.eAllContents(originalMethod.getExpression())) {
@@ -279,7 +293,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 				if (element instanceof XFeatureCall) {
 					XFeatureCall featureCall = (XFeatureCall) element;
 					JvmIdentifiableElement feature = featureCall.getFeature();
-					JvmTypeReference featureType = typeProvider.getType(featureCall);
+					LightweightTypeReference featureType = resolvedTypes.getActualType(featureCall);
 					boolean isLocalFeature = EcoreUtil.isAncestor(expressions, feature);
 					if (!isLocalFeature && isLocalExpression) {
 						// call-out
@@ -287,7 +301,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 							if (!calledExternalFeatureNames.contains(feature.getSimpleName())) {
 								calledExternalFeatureNames.add(feature.getSimpleName());
 								parameterInfos.add(
-										new ParameterInfo(typeUtil.serialize(featureType, firstExpression), 
+										new ParameterInfo(featureType.getIdentifier(), 
 										feature.getSimpleName(), 
 										parameterInfos.size()));
 							}
@@ -336,9 +350,13 @@ public class ExtractMethodRefactoring extends Refactoring {
 			status.merge(validateParameters());
 			
 			ITextRegion expressionsRegion = getExpressionsRegion();
-			textEdit = new MultiTextEdit();
-			textEdit.addChild(createMethodCallEdit(expressionsRegion));
-			textEdit.addChild(createMethodDeclarationEdit(expressionsRegion));
+			ITextRegion predecessorRegion = locationInFileProvider.getFullTextRegion(originalMethod);
+			
+			Section expressionSection = rewriter.newSection(expressionsRegion.getOffset(), expressionsRegion.getLength());
+			Section declarationSection = rewriter.newSection(predecessorRegion.getOffset() + predecessorRegion.getLength(), 0);
+			createMethodCallEdit(expressionSection, expressionsRegion);
+			createMethodDeclarationEdit(declarationSection, expressionSection.getBaseIndentationLevel(), expressionsRegion);
+			textEdit = replaceConverter.convertToTextEdit(rewriter.getChanges());
 		} catch (Exception exc) {
 			handleException(exc, status);
 		}
@@ -357,13 +375,16 @@ public class ExtractMethodRefactoring extends Refactoring {
 		status.add(FATAL, "Error during refactoring: {0}", exc, LOG);
 	}
 
-	protected JvmTypeReference calculateReturnType() {
-		List<JvmTypeReference> returnTypes = newArrayList();
+	protected LightweightTypeReference calculateReturnType(IResolvedTypes resolvedTypes) {
+		List<LightweightTypeReference> returnTypes = newArrayList();
 		for(XExpression expression: expressions) {
-			returnTypes.add(typeProvider.getCommonReturnType(expression, expression == lastExpression));
+			LightweightTypeReference expressionReturnType = resolvedTypes.getReturnType(expression);
+			if(expressionReturnType != null)
+				returnTypes.add(expressionReturnType);
 		}		
-		returnTypes.add(typeProvider.getType(lastExpression));
-		return typeConformance.getCommonSuperType(returnTypes);
+		returnTypes.add(resolvedTypes.getActualType(lastExpression));
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(typeComputationServices, xtendClass);
+		return typeComputationServices.getTypeConformanceComputer().getCommonSuperType(returnTypes, owner);
 	}
 
 	protected ITextRegion getExpressionsRegion() {
@@ -373,31 +394,26 @@ public class ExtractMethodRefactoring extends Refactoring {
 				+ lastRegion.getLength() - firstRegion.getOffset());
 		return expressionRegion;
 	}
-
-	protected TextEdit createMethodDeclarationEdit(ITextRegion expressionsRegion) throws BadLocationException {
+	
+	protected void createMethodDeclarationEdit(DocumentRewriter.Section declarationSection, int expressionIndentLevel, ITextRegion expressionsRegion) throws BadLocationException {
 		String expressionsAsString = getExtractedMethodBody(expressionsRegion);
-		ITextRegion predecessorRegion = locationInFileProvider.getFullTextRegion(originalMethod);
-		int methodIndentLevel = indentationUtil.getIndentationLevelAtOffset(predecessorRegion.getOffset());
-		int expressionIndentLevel = indentationUtil.getIndentationLevelAtOffset(
-				locationInFileProvider.getFullTextRegion(firstExpression).getOffset());
-		StringBuilder declaration = new StringBuilder()
-				.append(indentationUtil.getLineSeparator())
-				.append(indentationUtil.getLineSeparator())
-				.append(indentationUtil.indent(methodIndentLevel))
-				.append(getMethodSignature())
+		declarationSection
+				.newLine()
+				.newLine();
+		appendMethodSignature(declarationSection);
+		declarationSection
 				.append(" {")
-				.append(indentationUtil.getLineSeparator())
-				.append(indentationUtil.indent(methodIndentLevel + 1))
-				.append(expressionsAsString.replaceAll(
-						Pattern.quote(indentationUtil.getLineSeparator()) + indentationUtil.indent(expressionIndentLevel),
-						indentationUtil.getLineSeparator() + indentationUtil.indent(methodIndentLevel + 1)));
+				.increaseIndentation()
+				.newLine();
+		declarationSection.append(expressionsAsString, Math.min(0, -expressionIndentLevel));
 		if (isNeedsReturnExpression())
-			declaration.append(indentationUtil.getLineSeparator()).append(indentationUtil.indent(methodIndentLevel + 1))
-					.append(((XFeatureCall) returnExpression).getFeature().getSimpleName());
-		declaration.append(indentationUtil.getLineSeparator()).append(indentationUtil.indent(methodIndentLevel))
-				.append("}");
-
-		return new InsertEdit(predecessorRegion.getOffset() + predecessorRegion.getLength(), declaration.toString());
+			declarationSection
+				.newLine()
+				.append(((XFeatureCall) returnExpression).getFeature().getSimpleName());
+		declarationSection
+			.decreaseIndentation()
+			.newLine()
+			.append("}");
 	}
 
 	protected String getExtractedMethodBody(ITextRegion expressionsRegion) throws BadLocationException {
@@ -442,15 +458,14 @@ public class ExtractMethodRefactoring extends Refactoring {
 		return expressionsAsString;
 	}
 
-	protected ReplaceEdit createMethodCallEdit(ITextRegion expressionRegion) throws BadLocationException {
-		StringBuilder builder = new StringBuilder();
+	protected void createMethodCallEdit(DocumentRewriter.Section methodCallSection, ITextRegion expressionRegion) throws BadLocationException {
 		if (isNeedsReturnExpression()) {
 			JvmIdentifiableElement returnFeature = ((XFeatureCall) returnExpression).getFeature();
 			if (isFinalFeature(returnFeature))
-				builder.append("val ");
+				methodCallSection.append("val ");
 			else
-				builder.append("var ");
-			builder.append(returnFeature.getSimpleName()).append(" = ");
+				methodCallSection.append("var ");
+			methodCallSection.append(returnFeature.getSimpleName()).append(" = ");
 		}
 		boolean needsSurroundingParentheses = false;
 		if(firstExpression.eContainer() instanceof XMemberFeatureCall) {
@@ -458,22 +473,21 @@ public class ExtractMethodRefactoring extends Refactoring {
 				String expressionExpanded = document.get(expressionRegion.getOffset()-1, expressionRegion.getLength() + 2);
 				if(!expressionExpanded.startsWith("(") || !expressionExpanded.endsWith(")")) {
 					needsSurroundingParentheses = true;
-					builder.append("(");
+					methodCallSection.append("(");
 				}
 			}
 		}
-		builder.append(methodName).append("(");
+		methodCallSection.append(methodName).append("(");
 		boolean isFirst = true;
 		for (ParameterInfo parameterInfo : getParameterInfos()) {
 			if (!isFirst)
-				builder.append(", ");
+				methodCallSection.append(", ");
 			isFirst = false;
-			builder.append(parameterInfo.getOldName());
+			methodCallSection.append(parameterInfo.getOldName());
 		}
-		builder.append(")");
+		methodCallSection.append(")");
 		if(needsSurroundingParentheses)
-			builder.append(")");
-		return new ReplaceEdit(expressionRegion.getOffset(), expressionRegion.getLength(), builder.toString());
+			methodCallSection.append(")");
 	}
 
 	protected boolean isEndOfOriginalMethod() {
