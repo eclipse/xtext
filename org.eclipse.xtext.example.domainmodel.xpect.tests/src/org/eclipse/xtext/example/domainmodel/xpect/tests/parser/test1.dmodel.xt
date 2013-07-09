@@ -13,7 +13,7 @@ DomainModel {
     PackageDeclaration {
       name = 'pkg1'
       elements = [
-        Entity {adsfoo
+        Entity {
           name = 'MyEntity'
           superType = JvmParameterizedTypeReference {
             type -> JvmGenericType test2.dmodel#/1
