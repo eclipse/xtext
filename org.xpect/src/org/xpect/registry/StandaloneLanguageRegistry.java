@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
@@ -197,6 +198,8 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 		}
 	}
 
+	private static final Logger LOG = Logger.getLogger(StandaloneLanguageRegistry.class);
+
 	private static boolean running = false;
 
 	private Map<String, ILanguageInfo> ext2language;
@@ -204,13 +207,33 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 	private Map<String, ILanguageInfo> name2language;
 
 	public StandaloneLanguageRegistry() {
+		try {
+			init();
+		} catch (Throwable e) {
+			LOG.error(e);
+		}
+	}
+
+	public ILanguageInfo getLanguageByFileExtension(String fileExtension) {
+		return ext2language.get(fileExtension);
+	}
+
+	public ILanguageInfo getLanguageByName(String name) {
+		return name2language.get(name);
+	}
+
+	public Collection<ILanguageInfo> getLanguages() {
+		return name2language.values();
+	}
+
+	protected void init() {
+		ext2language = Maps.newHashMap();
+		name2language = Maps.newHashMap();
 		if (EcorePlugin.IS_ECLIPSE_RUNNING)
 			throw new IllegalStateException("This class can only run in standalone mode (no OSGi, no Eclipse)");
 		if (running)
 			throw new IllegalStateException("I want to be a singleton!");
 		running = true;
-		ext2language = Maps.newHashMap();
-		name2language = Maps.newHashMap();
 		List<ExtensionInfo> extensionInfos = new StandalonePluginXMLParser().parse();
 		Multimap<String, EMFExtensionParserInfo> uiName2ExtParser = HashMultimap.create();
 		Multimap<String, EditorInfo> uiName2Editor = HashMultimap.create();
@@ -236,18 +259,6 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 					ext2language.put(ext, info);
 			}
 		}
-	}
-
-	public ILanguageInfo getLanguageByFileExtension(String fileExtension) {
-		return ext2language.get(fileExtension);
-	}
-
-	public ILanguageInfo getLanguageByName(String name) {
-		return name2language.get(name);
-	}
-
-	public Collection<ILanguageInfo> getLanguages() {
-		return name2language.values();
 	}
 
 	protected ILanguageInfo registerEFactoryWithInjector(String uiName, Collection<EditorInfo> editors,
