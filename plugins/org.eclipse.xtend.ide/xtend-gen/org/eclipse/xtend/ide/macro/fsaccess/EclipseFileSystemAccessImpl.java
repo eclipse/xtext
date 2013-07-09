@@ -137,7 +137,10 @@ public class EclipseFileSystemAccessImpl extends AbstractFileSystemAccessImpl {
         if (_head!=null) {
           _path=_head.getPath();
         }
-        IPath _removeFirstSegments = _path.removeFirstSegments(1);
+        IPath _removeFirstSegments = null;
+        if (_path!=null) {
+          _removeFirstSegments=_path.removeFirstSegments(1);
+        }
         _xblockexpression = (_removeFirstSegments);
       }
       return _xblockexpression;

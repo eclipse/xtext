@@ -61,7 +61,7 @@ class EclipseFileSystemAccessImpl extends AbstractFileSystemAccessImpl {
 		}
 		javaProject.getResolvedClasspath(true).filter [
 			entryKind == IClasspathEntry.CPE_SOURCE && path.isPrefixOf(filePath)
-		].head?.path.removeFirstSegments(1)
+		].head?.path?.removeFirstSegments(1)
 	}
 
 	def getOutputConfig(IFile it) {
