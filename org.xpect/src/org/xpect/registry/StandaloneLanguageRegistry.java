@@ -210,7 +210,7 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 		try {
 			init();
 		} catch (Throwable e) {
-			LOG.error(e);
+			LOG.error("Error initalizing language registry", e);
 		}
 	}
 
@@ -287,6 +287,10 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 
 	protected void registerEPackage(EMFGeneratedPackageInfo info) {
 		EPackage.Registry.INSTANCE.put(info.getUri(), new EPackageDescriptorImpl(info));
-		EcorePlugin.getEPackageNsURIToGenModelLocationMap().put(info.getUri(), URI.createURI(info.getGenModel()));
+		if (info.getGenModel() != null)
+			EcorePlugin.getEPackageNsURIToGenModelLocationMap().put(info.getUri(), URI.createURI(info.getGenModel()));
+		else {
+			LOG.warn("No GenModel found for EPackage " + info.getUri());
+		}
 	}
 }
