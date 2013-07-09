@@ -30,18 +30,17 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.fsaccess.IOUtils;
 import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtend.lib.macro.services.FileHandle;
 import org.eclipse.xtend.lib.macro.services.FolderHandle;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
@@ -162,111 +161,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("/** ");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("* Comment");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("*/");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("@ChangeDoc");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("private Object object");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("/** ");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("* Comment");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("*/");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("private Object object2");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("/** ");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("* Comment");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("*/");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("@ChangeDoc");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("new() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("this(new Object, new Object)");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("/** ");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("* Comment");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("*/");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("new(Object object, Object object2) {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("this.object = object");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("this.object2 = object2");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("/** ");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("* Comment");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("*/");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("@ChangeDoc");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def op() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("/** ");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("* Comment");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("*/");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def op2() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
+    _builder_1.append("private UserClass object");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("}");
@@ -279,10 +174,10 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
           Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
           final XtendClass xtendClass = IterableExtensions.<XtendClass>head(_filter);
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
-          String _string = _builder.toString();
-          String _documentation = ActiveAnnotationsProcessingInIDETest.this.documentationProvider.getDocumentation(xtendClass);
-          Assert.assertEquals(_string, _documentation);
+          _builder.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Comment");
+          ActiveAnnotationsProcessingInIDETest.this.assertDocumentation(_builder, xtendClass);
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Hello World!");
           EList<XtendMember> _members = xtendClass.getMembers();
           Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members, XtendField.class);
           final Function1<XtendField,Boolean> _function = new Function1<XtendField,Boolean>() {
@@ -293,96 +188,19 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
               }
             };
           Iterable<XtendField> _filter_2 = IterableExtensions.<XtendField>filter(_filter_1, _function);
-          final XtendField objectField = IterableExtensions.<XtendField>head(_filter_2);
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
-          String _string_1 = _builder_1.toString();
-          String _documentation_1 = ActiveAnnotationsProcessingInIDETest.this.documentationProvider.getDocumentation(objectField);
-          Assert.assertEquals(_string_1, _documentation_1);
-          EList<XtendMember> _members_1 = xtendClass.getMembers();
-          Iterable<XtendField> _filter_3 = Iterables.<XtendField>filter(_members_1, XtendField.class);
-          final Function1<XtendField,Boolean> _function_1 = new Function1<XtendField,Boolean>() {
-              public Boolean apply(final XtendField it) {
-                String _name = it.getName();
-                boolean _equals = _name.equals("object2");
-                return Boolean.valueOf(_equals);
-              }
-            };
-          Iterable<XtendField> _filter_4 = IterableExtensions.<XtendField>filter(_filter_3, _function_1);
-          final XtendField objectField2 = IterableExtensions.<XtendField>head(_filter_4);
-          StringConcatenation _builder_2 = new StringConcatenation();
-          _builder_2.append("Comment");
-          String _string_2 = _builder_2.toString();
-          String _documentation_2 = ActiveAnnotationsProcessingInIDETest.this.documentationProvider.getDocumentation(objectField2);
-          Assert.assertEquals(_string_2, _documentation_2);
-          EList<XtendMember> _members_2 = xtendClass.getMembers();
-          Iterable<XtendConstructor> _filter_5 = Iterables.<XtendConstructor>filter(_members_2, XtendConstructor.class);
-          final Function1<XtendConstructor,Boolean> _function_2 = new Function1<XtendConstructor,Boolean>() {
-              public Boolean apply(final XtendConstructor it) {
-                EList<XtendParameter> _parameters = it.getParameters();
-                boolean _isEmpty = _parameters.isEmpty();
-                return Boolean.valueOf(_isEmpty);
-              }
-            };
-          Iterable<XtendConstructor> _filter_6 = IterableExtensions.<XtendConstructor>filter(_filter_5, _function_2);
-          final XtendConstructor constructor = IterableExtensions.<XtendConstructor>head(_filter_6);
-          StringConcatenation _builder_3 = new StringConcatenation();
-          _builder_3.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
-          String _string_3 = _builder_3.toString();
-          String _documentation_3 = ActiveAnnotationsProcessingInIDETest.this.documentationProvider.getDocumentation(constructor);
-          Assert.assertEquals(_string_3, _documentation_3);
-          EList<XtendMember> _members_3 = xtendClass.getMembers();
-          Iterable<XtendConstructor> _filter_7 = Iterables.<XtendConstructor>filter(_members_3, XtendConstructor.class);
-          final Function1<XtendConstructor,Boolean> _function_3 = new Function1<XtendConstructor,Boolean>() {
-              public Boolean apply(final XtendConstructor it) {
-                EList<XtendParameter> _parameters = it.getParameters();
-                int _size = _parameters.size();
-                boolean _equals = (_size == 2);
-                return Boolean.valueOf(_equals);
-              }
-            };
-          Iterable<XtendConstructor> _filter_8 = IterableExtensions.<XtendConstructor>filter(_filter_7, _function_3);
-          final XtendConstructor constructor2 = IterableExtensions.<XtendConstructor>head(_filter_8);
-          StringConcatenation _builder_4 = new StringConcatenation();
-          _builder_4.append("Comment<dl><dt>Parameters:</dt><dd><b>object</b> </dd><dd><b>object2</b> </dd></dl>");
-          String _string_4 = _builder_4.toString();
-          String _documentation_4 = ActiveAnnotationsProcessingInIDETest.this.documentationProvider.getDocumentation(constructor2);
-          Assert.assertEquals(_string_4, _documentation_4);
-          EList<XtendMember> _members_4 = xtendClass.getMembers();
-          Iterable<XtendFunction> _filter_9 = Iterables.<XtendFunction>filter(_members_4, XtendFunction.class);
-          final Function1<XtendFunction,Boolean> _function_4 = new Function1<XtendFunction,Boolean>() {
-              public Boolean apply(final XtendFunction it) {
-                String _name = it.getName();
-                boolean _equals = _name.equals("op");
-                return Boolean.valueOf(_equals);
-              }
-            };
-          Iterable<XtendFunction> _filter_10 = IterableExtensions.<XtendFunction>filter(_filter_9, _function_4);
-          final XtendFunction opFunction = IterableExtensions.<XtendFunction>head(_filter_10);
-          StringConcatenation _builder_5 = new StringConcatenation();
-          _builder_5.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
-          String _string_5 = _builder_5.toString();
-          String _documentation_5 = ActiveAnnotationsProcessingInIDETest.this.documentationProvider.getDocumentation(opFunction);
-          Assert.assertEquals(_string_5, _documentation_5);
-          EList<XtendMember> _members_5 = xtendClass.getMembers();
-          Iterable<XtendFunction> _filter_11 = Iterables.<XtendFunction>filter(_members_5, XtendFunction.class);
-          final Function1<XtendFunction,Boolean> _function_5 = new Function1<XtendFunction,Boolean>() {
-              public Boolean apply(final XtendFunction it) {
-                String _name = it.getName();
-                boolean _equals = _name.equals("op2");
-                return Boolean.valueOf(_equals);
-              }
-            };
-          Iterable<XtendFunction> _filter_12 = IterableExtensions.<XtendFunction>filter(_filter_11, _function_5);
-          final XtendFunction op2Function = IterableExtensions.<XtendFunction>head(_filter_12);
-          StringConcatenation _builder_6 = new StringConcatenation();
-          _builder_6.append("Comment");
-          String _string_6 = _builder_6.toString();
-          String _documentation_6 = ActiveAnnotationsProcessingInIDETest.this.documentationProvider.getDocumentation(op2Function);
-          Assert.assertEquals(_string_6, _documentation_6);
+          XtendField _head = IterableExtensions.<XtendField>head(_filter_2);
+          JvmTypeReference _type = _head.getType();
+          JvmType _type_1 = _type.getType();
+          ActiveAnnotationsProcessingInIDETest.this.assertDocumentation(_builder_1, _type_1);
         }
       };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  public void assertDocumentation(final CharSequence charSequence, final EObject sourceElement) {
+    String _string = charSequence.toString();
+    String _documentation = this.documentationProvider.getDocumentation(sourceElement);
+    Assert.assertEquals(_string, _documentation);
   }
   
   @Test
