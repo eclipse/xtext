@@ -39,7 +39,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo() {
 					bar()
 				}
-			
+				
 				def bar() {
 					val x = 1
 				}
@@ -59,7 +59,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def static foo() {
 					bar()
 				}
-			
+				
 				def static bar() {
 					val x = 1
 				}
@@ -81,7 +81,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 					val x = 1
 					bar(x)
 				}
-			
+				
 				def bar(int x) {
 					val y = x
 				}
@@ -103,7 +103,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 					var x = bar()
 					val y = x
 				}
-			
+				
 				def int bar() {
 					var x = 1
 					x
@@ -126,7 +126,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 					val x = bar()
 					val y = x
 				}
-			
+				
 				def int bar() {
 					val x = 1
 					x
@@ -153,7 +153,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo(int i) {
 					bar(i)
 				}
-			
+				
 				def Object bar(int i) {
 					switch i {
 						case 0: return 0
@@ -188,7 +188,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 					}
 					bar(i)
 				}
-			
+				
 				def String bar(int i) {
 					switch i {
 						case 2: return ''
@@ -211,7 +211,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo(String baz) {
 					newArrayList(baz).map(bar())
 				}
-			
+				
 				def (String)=>String bar() {
 					[toFirstUpper]
 				}
@@ -231,7 +231,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo(String baz) {
 					newArrayList(baz).map(bar())
 				}
-			
+				
 				def (String)=>String bar() {
 					[x|x.toFirstUpper]
 				}
@@ -251,7 +251,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo(String baz) {
 					newArrayList(baz).map(bar())
 				}
-			
+				
 				def (String)=>String bar() {
 					[String it|toFirstUpper]
 				}
@@ -271,7 +271,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo(String baz) {
 					newArrayList(baz).map(bar())
 				}
-			
+				
 				def (String)=>String bar() {
 					[String it|toFirstUpper]
 				}
@@ -294,7 +294,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo(int shrinkMe, int expandMe) {
 					bar(shrinkMe, expandMe)
 				}
-			
+				
 				def bar(int s, int expandMeMore) {
 					s + expandMeMore - s-  expandMeMore
 				}
@@ -317,7 +317,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo(int i, int j) {
 					bar(i, j)
 				}
-			
+				
 				def bar(int j, int i) {
 					j-i
 				}
@@ -338,7 +338,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def <T> foo() {
 					bar()
 				}
-			
+				
 				def <T> bar() {
 					<T>newArrayList
 				}
@@ -365,7 +365,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 					else
 						<U>newArrayList
 				}
-			
+				
 				def <T> bar() {
 					<T>newArrayList
 				}
@@ -389,7 +389,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def <T, U> foo() {
 					bar()
 				}
-			
+				
 				def <T, U> bar() {
 					if(true) 
 						<T>newArrayList
