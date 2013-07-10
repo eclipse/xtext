@@ -307,6 +307,22 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class X { static String foo def static meth() { foo = '' } }");
 		helper.assertNoErrors(clazz);
 	}
+	
+	@Test public void testXAssignmentField5() throws Exception {
+		XtendClass clazz = clazz("class X { static String foo def meth() { X::foo = '' } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	@Test public void testXAssignmentField6() throws Exception {
+		XtendClass clazz = clazz("class X { static String foo def meth() { X.foo = '' } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	@Test public void testXAssignmentField7() throws Exception {
+		XtendClass clazz = clazz("class X { static String foo def meth() { (new X).foo = '' } }");
+		helper.assertError(clazz, XbasePackage.Literals.XASSIGNMENT,
+				org.eclipse.xtext.xbase.validation.IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
 
 	@Test public void testXFeatureCallOperation1() throws Exception {
 		XtendClass clazz = clazz("class X { def setFoo(String x) {} def meth() { setFoo('') } }");
@@ -373,6 +389,25 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testXAssignmentOperation4() throws Exception {
 		XtendClass clazz = clazz("class X { def static setFoo(String x) {} def static meth() { foo = '' } }");
 		helper.assertNoErrors(clazz);
+	}
+
+	@Test
+	public void testXAssignmentOperation5() throws Exception {
+		XtendClass clazz = clazz("class X { def static setFoo(String x) {} def meth() { X::foo = '' } }");
+		helper.assertNoErrors(clazz);
+	}
+
+	@Test
+	public void testXAssignmentOperation6() throws Exception {
+		XtendClass clazz = clazz("class X { def static setFoo(String x) {} def meth() { X.foo = '' } }");
+		helper.assertNoErrors(clazz);
+	}
+
+	@Test
+	public void testXAssignmentOperation7() throws Exception {
+		XtendClass clazz = clazz("class X { def static setFoo(String x) {} def meth() { (new X).foo = '' } }");
+		helper.assertError(clazz, XbasePackage.Literals.XASSIGNMENT,
+				org.eclipse.xtext.xbase.validation.IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
 	@Test public void testXMemberFeatureCallImportedMemberExtension1() throws Exception {

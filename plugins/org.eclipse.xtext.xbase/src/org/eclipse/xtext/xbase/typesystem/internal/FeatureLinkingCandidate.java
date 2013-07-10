@@ -212,7 +212,18 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		if (featureCall instanceof XMemberFeatureCall) {
 			return ((XMemberFeatureCall) featureCall).isStaticWithDeclaringType();
 		}
+		if (featureCall instanceof XAssignment) {
+			return isStaticWithDeclaringType((XAssignment) featureCall);
+		}
 		return false;
+	}
+
+	protected boolean isStaticWithDeclaringType(XAssignment assignment) {
+		return assignment.isStatic() && isTypeLiteral(assignment.getAssignable());
+	}
+
+	protected boolean isTypeLiteral(XExpression expression) {
+		return expression instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) expression).isTypeLiteral();
 	}
 
 	protected boolean isExplicitOperationCallOrBuilderSyntax() {
@@ -260,11 +271,15 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			return true;
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall instanceof XAssignment) {
-			return ((XAssignment) featureCall).getAssignable() != null;
+			return isInstanceAccessSyntax((XAssignment) featureCall);
 		}
 		return featureCall instanceof XMemberFeatureCall;
 	}
-	
+
+	protected boolean isInstanceAccessSyntax(XAssignment assigment) {
+		return assigment.getAssignable() != null || assigment.isExplicitStatic();
+	}
+
 	protected List<XExpression> createArgumentList(XExpression head, List<XExpression> tail) {
 		// TODO investigate in optimized List impls like HEAD, syntacticArguments
 		List<XExpression> result = Lists.newArrayListWithExpectedSize(tail.size() + 1);
