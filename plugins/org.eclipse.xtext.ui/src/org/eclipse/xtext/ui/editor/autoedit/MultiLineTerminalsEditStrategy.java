@@ -60,18 +60,18 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 		String[] lineDelimiters = document.getLegalLineDelimiters();
 		int delimiterIndex = TextUtilities.startsWith(lineDelimiters, originalText);
 		if (delimiterIndex != -1) {
-			IRegion startTerminal = findStartTerminal(document, command.offset);
+			IRegion startTerminal = findStartTerminal_v2(document, command.offset);
 			if (startTerminal == null)
 				return;
-			IRegion stopTerminal = findStopTerminal(document, command.offset);
+			IRegion stopTerminal = findStopTerminal_v2(document, command.offset);
 			// check whether this is our stop terminal
 			if (stopTerminal != null) {
 				IRegion previousStart = startTerminal;
 				IRegion previousStop = stopTerminal;
 				while(stopTerminal != null && previousStart != null && previousStop != null) {
-					previousStart = findStartTerminal(document, previousStart.getOffset() - 1);
+					previousStart = findStartTerminal_v2(document, previousStart.getOffset() - 1);
 					if (previousStart != null) {
-						previousStop = findStopTerminal(document, previousStop.getOffset() + 1);
+						previousStop = findStopTerminal_v2(document, previousStop.getOffset() + 1);
 						if (previousStop == null) {
 							stopTerminal = null;
 						}

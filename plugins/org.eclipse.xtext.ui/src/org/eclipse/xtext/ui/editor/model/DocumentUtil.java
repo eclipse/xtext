@@ -41,6 +41,32 @@ public class DocumentUtil {
 		return null;
 	}
 	
+	/**
+	 * searches backwards for the given string within the same partition type
+	 * @return the region of the match or <code>null</code> if no match were found
+	 * @since 2.4
+	 */
+	public IRegion searchBackwardsInSamePartition(String toFind, String documentText, IDocument document, int endOffset) throws BadLocationException {
+		if (endOffset < 0) {
+			return null;
+		}
+		ITypedRegion partition = document.getPartition(endOffset);
+		String text = documentText.substring(0, endOffset);
+		int indexOf = preProcessSearchString(text).lastIndexOf(toFind);
+		while (indexOf >= 0) {
+			ITypedRegion partition2 = document.getPartition(indexOf);
+			if (partition2.getType().equals(partition.getType())) {
+				return new Region(indexOf, toFind.length());
+			}
+			indexOf = preProcessSearchString(text.substring(0, partition2.getOffset())).lastIndexOf(toFind);
+		}
+		String trimmed = toFind.trim();
+		if (trimmed.length() > 0 && trimmed.length() != toFind.length()) {
+			return searchBackwardsInSamePartition(trimmed, documentText, document, endOffset);
+		}
+		return null;
+	}
+	
 	protected String preProcessSearchString(String string) {
 		return string;
 	}
@@ -75,6 +101,45 @@ public class DocumentUtil {
 		String trimmed = toFind.trim();
 		if (trimmed.length() > 0 && trimmed.length() != toFind.length()) {
 			return searchInSamePartition(trimmed, document, startOffset);
+		}
+		return null;
+	}
+	
+	/**
+	 * searches for the given string within the same partition type
+	 * 
+	 * @return the region of the match or <code>null</code> if no match were found
+	 * @since 2.4
+	 */
+	public IRegion searchInSamePartition(String toFind, String documentText, IDocument document, int startOffset)
+			throws BadLocationException {
+		if (startOffset >= document.getLength()) {
+			return null;
+		}
+		ITypedRegion partition = document.getPartition(startOffset);
+		int ignoredPrefix = startOffset;
+		int subtractMe = 0;
+		while (toFind.length() > subtractMe && Character.isWhitespace(toFind.charAt(subtractMe)))
+			subtractMe++;
+		ignoredPrefix = Math.max(ignoredPrefix - subtractMe, 0);
+		int indexOf = preProcessSearchString(documentText.substring(ignoredPrefix)).indexOf(toFind);
+		if (indexOf != -1) {
+			indexOf += ignoredPrefix;
+		}
+		while (indexOf >= 0 && indexOf < document.getLength()) {
+			ITypedRegion partition2 = document.getPartition(indexOf);
+			if (partition2.getType().equals(partition.getType())) {
+				return new Region(indexOf, toFind.length());
+			}
+			ignoredPrefix = partition2.getOffset() + partition2.getLength();
+			indexOf = preProcessSearchString(documentText.substring(ignoredPrefix)).indexOf(toFind);
+			if (indexOf != -1) {
+				indexOf += ignoredPrefix;
+			}
+		}
+		String trimmed = toFind.trim();
+		if (trimmed.length() > 0 && trimmed.length() != toFind.length()) {
+			return searchInSamePartition(trimmed, documentText, document, startOffset);
 		}
 		return null;
 	}
