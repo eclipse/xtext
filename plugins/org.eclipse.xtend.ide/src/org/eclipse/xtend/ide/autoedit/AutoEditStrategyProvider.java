@@ -91,6 +91,19 @@ public class AutoEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 				return null;
 			return result;
 		}
+		
+		@Override
+		protected IRegion findStartTerminal_v2(IDocument document, int offset) throws BadLocationException {
+			IRegion result = super.findStartTerminal_v2(document, offset);
+			if (result == null) {
+				return result;
+			}
+			String textBetween = document.get(result.getOffset() + result.getLength(), offset - (result.getOffset() + result.getLength()));
+			if (textBetween.trim().length() != 0) {
+				return null;
+			}
+			return result;
+		}
 
 		@Override
 		protected boolean atEndOfLineInput(IDocument document, int offset) throws BadLocationException {

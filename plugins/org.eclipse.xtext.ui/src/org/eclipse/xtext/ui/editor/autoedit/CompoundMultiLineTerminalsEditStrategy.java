@@ -78,7 +78,7 @@ public class CompoundMultiLineTerminalsEditStrategy extends AbstractEditStrategy
 			MultiLineTerminalsEditStrategy bestStrategy = null;
 			IRegion bestStart = null;
 			for(MultiLineTerminalsEditStrategy strategy: strategies) {
-				IRegion candidate = strategy.findStartTerminal(document, command.offset);
+				IRegion candidate = strategy.findStartTerminal_v2(document, command.offset);
 				if (candidate != null) {
 					if (bestStart == null || bestStart.getOffset() < candidate.getOffset()) {
 						bestStrategy = strategy;
