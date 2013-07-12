@@ -33,21 +33,41 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 		private IIndentationInformation indentationInformation;
 		
 		public MultiLineTerminalsEditStrategy newInstance(String leftTerminal, String indentationString, String rightTerminal) {
-			indentationString = indentationString == null ? indentationInformation.getIndentString()
-					: indentationString;
-			MultiLineTerminalsEditStrategy strategy = new MultiLineTerminalsEditStrategy(leftTerminal, indentationString, rightTerminal);
+			return newInstance(leftTerminal, indentationString, rightTerminal, true);
+		}
+		
+		/**
+		 * @since 2.4
+		 */
+		public MultiLineTerminalsEditStrategy newInstance(String leftTerminal, String indentationString, String rightTerminal, boolean nested) {
+			indentationString = indentationString == null ? indentationInformation.getIndentString() : indentationString;
+			MultiLineTerminalsEditStrategy strategy = new MultiLineTerminalsEditStrategy(leftTerminal, indentationString, rightTerminal, nested);
 			injector.injectMembers(strategy);
 			return strategy;
 		}
+		
 	}
 
 	@SuppressWarnings("unused")
 	private final static Logger log = Logger.getLogger(MultiLineTerminalsEditStrategy.class);
+	
+	/**
+	 * <p>Whether the pair of terminals can be nested or not.</p> 
+	 */
+	private final boolean nested;
 
-	private String indentationString;
+	private final String indentationString;
 
 	public MultiLineTerminalsEditStrategy(String leftTerminal, String indentationString, String rightTerminal) {
+		this(leftTerminal, indentationString, rightTerminal, true);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public MultiLineTerminalsEditStrategy(String leftTerminal, String indentationString, String rightTerminal, boolean nested) {
 		super(leftTerminal,rightTerminal);
+		this.nested = nested;
 		this.indentationString = indentationString;
 	}
 
@@ -65,11 +85,11 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 				return;
 			IRegion stopTerminal = findStopTerminal_v2(document, command.offset);
 			// check whether this is our stop terminal
-			if (stopTerminal != null) {
+			if (stopTerminal != null && nested) {
 				IRegion previousStart = startTerminal;
 				IRegion previousStop = stopTerminal;
 				while(stopTerminal != null && previousStart != null && previousStop != null) {
-					previousStart = findStartTerminal_v2(document, previousStart.getOffset() - 1);
+					previousStart = findStartTerminal_v2(document, previousStart.getOffset());
 					if (previousStart != null) {
 						previousStop = findStopTerminal_v2(document, previousStop.getOffset() + 1);
 						if (previousStop == null) {

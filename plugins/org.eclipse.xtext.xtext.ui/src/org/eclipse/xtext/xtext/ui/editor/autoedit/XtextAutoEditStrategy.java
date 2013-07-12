@@ -47,7 +47,7 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 	}
 
 	protected MultiLineTerminalsEditStrategy createColonSemicolonStrategy() {
-		MultiLineTerminalsEditStrategy configure = multiLineTerminals.newInstance(":", null, ";");
+		MultiLineTerminalsEditStrategy configure = multiLineTerminals.newInstance(":", null, ";", false);
 		// the following is a cheap but working hack, which replaces any double colons '::' by whitespace '  ' temporarily.
 		configure.setDocumentUtil(new DocumentUtil() {
 			@Override
