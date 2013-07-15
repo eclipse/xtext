@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -54,6 +55,9 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
+import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -110,6 +114,8 @@ public class XtendBatchCompiler {
 	private IEncodingProvider.Runtime encodingProvider;
 	@Inject
 	private IResourceDescription.Manager resourceDescriptionManager;
+	@Inject
+	private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
 
 	protected Writer outputWriter;
 	protected Writer errorWriter;
@@ -243,9 +249,24 @@ public class XtendBatchCompiler {
 	public void setFileEncoding(String encoding) {
 		this.fileEncoding = encoding;
 	}
+	
+	public void configureWorkspace() {
+		Path source = new Path(new File(sourcePath).getAbsolutePath());
+		Path target = new Path(new File(outputPath).getAbsolutePath());
+		Path commonRoot = source;
+		while (!target.startsWith(commonRoot)) {
+			commonRoot = commonRoot.getParent();
+		}
+		WorkspaceConfig workspaceConfig = new WorkspaceConfig(commonRoot.getParent().toString());
+		ProjectConfig projectConfig = new ProjectConfig(commonRoot.getLastSegment());
+		projectConfig.addSourceFolderMapping(source.relativize(commonRoot).toString(), target.relativize(commonRoot).toString());
+		workspaceConfig.addProjectConfig(projectConfig);
+		workspaceConfigProvider.setWorkspaceConfig(workspaceConfig);
+	}
 
 	public boolean compile() {
 		try {
+			configureWorkspace();
 			ResourceSet resourceSet = resourceSetProvider.get();
 			File classDirectory = createTempDir("classes");
 			// install a type provider without index lookup for the first phase

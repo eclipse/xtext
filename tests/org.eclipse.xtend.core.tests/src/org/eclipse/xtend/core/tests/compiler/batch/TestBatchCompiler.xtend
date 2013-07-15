@@ -9,17 +9,21 @@ package org.eclipse.xtend.core.tests.compiler.batch
 
 import com.google.inject.Inject
 import java.io.File
+import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtend.lib.macro.file.FileLocations
+import org.eclipse.xtend.lib.macro.file.FileSystemSupport
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
+import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
-import org.junit.Test
-import org.junit.Before
-import org.junit.After
-import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 
 /**
  * Batch compiler tests.
@@ -31,7 +35,9 @@ class TestBatchCompiler {
 
 	@Inject
 	XtendBatchCompiler batchCompiler
-
+	
+	@Inject RuntimeWorkspaceConfigProvider workspaceConfigProvider
+	
     static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result"
     static String OUTPUT_DIRECTORY = "./test-result"
     static String XTEND_SRC_DIRECTORY = "./batch-compiler-data/test data"
@@ -61,6 +67,19 @@ class TestBatchCompiler {
        if (new File(TEMP_DIRECTORY_WITH_SPACES).exists) {
            cleanFolder(new File(TEMP_DIRECTORY_WITH_SPACES), null, true, true)
        }
+	}
+	
+	@Test def void testWorkspaceConfig() {
+		batchCompiler.configureWorkspace();
+		val config = workspaceConfigProvider.get
+		assertEquals(new File('..').canonicalFile.absolutePath, config.absoluteFileSystemPath)
+		val project = config.projects.values.head
+		val projectPath = "/"+new File(".").canonicalFile.name
+		assertEquals(projectPath, project.rootPath.toString)
+		val src = project.sourceFolderMappings.keySet.head
+		assertEquals(projectPath+"/batch-compiler-data/test data",src.toString)
+		val target = project.sourceFolderMappings.get(src)
+		assertEquals(projectPath+"/test-result",target.toString)
 	}
 
     @Test

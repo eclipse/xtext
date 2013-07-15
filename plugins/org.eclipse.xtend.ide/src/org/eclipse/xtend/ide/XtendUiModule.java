@@ -12,7 +12,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
-import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessSPI;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
@@ -50,7 +49,6 @@ import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
-import org.eclipse.xtend.ide.macro.fsaccess.EclipseFileSystemAccessImpl;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
@@ -64,6 +62,7 @@ import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider;
 import org.eclipse.xtend.ide.validator.preferences.XtendValidatorConfigurationBlock;
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
@@ -112,10 +111,13 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.editor.XbaseResourceForEditorInputFactory;
+import org.eclipse.xtext.xbase.ui.file.EclipseFileSystemSupportImpl;
+import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
 import org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes;
@@ -419,7 +421,12 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return OperatorAwareComparator.class;
 	}
 	
-	public Class<? extends FileSystemAccessSPI> bindFileSystemAccessPSI() {
-		return EclipseFileSystemAccessImpl.class;
+	public Class<? extends MutableFileSystemSupport> bindFileSystemSupport() {
+		return EclipseFileSystemSupportImpl.class;
 	}
+	
+	public void configureWorkspaceConfigContribution(Binder binder) {
+		binder.bind(WorkspaceConfig.class).toProvider(EclipseWorkspaceConfigProvider.class);
+	}
+	
 }
