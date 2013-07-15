@@ -11,6 +11,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 import static java.util.Collections.emptyMap;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
@@ -35,6 +36,9 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
@@ -57,10 +61,37 @@ public class CompilationTestHelper {
 
 	@Inject private Provider<InMemoryFileSystemAccess> fileSystemAccessProvider;
 	
+	@Inject private RuntimeWorkspaceConfigProvider configProvider;
+	
 	public void setJavaCompilerClassPath(Class<?> ...classes) {
 		javaCompiler.clearClassPath();
 		for (Class<?> clazz : classes) {
 			javaCompiler.addClassPathOfClass(clazz);
+		}
+	}
+	
+	public void configureFreshWorkspace() {
+		File tempDir = createFreshTempDir();
+		WorkspaceConfig config = new WorkspaceConfig(tempDir.getAbsolutePath());
+		ProjectConfig projectConfig = new ProjectConfig("myProject");
+		projectConfig.addSourceFolderMapping("src", "xtend-gen");
+		config.addProjectConfig(projectConfig);
+		configProvider.setWorkspaceConfig(config); 
+	}
+	
+	protected File createFreshTempDir() {
+		File tempDir;
+		try {
+			tempDir = File.createTempFile("temp", Long.toString(System.nanoTime()));
+			if (!tempDir.delete()) {
+				throw new IllegalStateException("couldn't delete temp file.");
+			}
+			if (!tempDir.mkdir()) {
+				throw new IllegalStateException("couldn't create temp dir.");
+			}
+			return tempDir;
+		} catch (IOException e) {
+			throw new AssertionError(e);
 		}
 	}
 	
@@ -114,10 +145,16 @@ public class CompilationTestHelper {
 	 */
 	@SuppressWarnings("unchecked")
 	public void compile(CharSequence source, IAcceptor<Result> acceptor) throws IOException {
-		String fileName = "MyFile."+extensionProvider.getPrimaryFileExtension();
+		String fileName = getSourceFolderPath()+"MyFile."+extensionProvider.getPrimaryFileExtension();
 		compile(resourceSet(new Pair<String, CharSequence>(fileName, source)), acceptor);
 	}
 	
+	protected String getSourceFolderPath() {
+		Map<String, ProjectConfig> projects = configProvider.get().getProjects();
+		ProjectConfig next = projects.values().iterator().next();
+		return next.getSourceFolderMappings().keySet().iterator().next().toString()+"/";
+	}
+
 	/**
 	 * Parses, validates and compiles the given source. Calls the given acceptor for each
 	 * resource which is generated from the source.
