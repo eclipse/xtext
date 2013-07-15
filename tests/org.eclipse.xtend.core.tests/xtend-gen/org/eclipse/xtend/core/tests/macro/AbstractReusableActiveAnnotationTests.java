@@ -1342,6 +1342,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
   private final Pair<String,String> THREE_ANNOTATIONS = new Function0<Pair<String,String>>() {
     public Pair<String,String> apply() {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package myannotation");
+      _builder.newLine();
+      _builder.newLine();
       _builder.append("import java.util.List");
       _builder.newLine();
       _builder.append("import org.eclipse.xtend.lib.macro.Active");
@@ -1413,7 +1416,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      Pair<String,String> _mappedTo = Pair.<String, String>of("three.xtend", _builder.toString());
+      Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/three.xtend", _builder.toString());
       return _mappedTo;
     }
   }.apply();
@@ -1421,6 +1424,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
   @Test
   public void testDeterministicExecutionOrder_01() {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import myannotation.*");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("class MyClass {");
     _builder.newLine();
     _builder.append("\t");
@@ -1446,6 +1452,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
   @Test
   public void testDeterministicExecutionOrder_02() {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import myannotation.*");
+    _builder.newLine();
     _builder.append("class MyClass {");
     _builder.newLine();
     _builder.append("\t");
@@ -1478,6 +1486,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
   @Test
   public void testDeterministicExecutionOrder_03() {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import myannotation.*");
+    _builder.newLine();
     _builder.append("@_A @_B @_C class MyClass {");
     _builder.newLine();
     _builder.append("}");
@@ -1495,4 +1505,50 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   public abstract void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);
+  
+  @Test
+  public void testFileSystemSupport_01() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/FileSystemSupportTest.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\t\n\t\t\t\t@Active(FileSystemUsingProcessor)\n\t\t\t\tannotation FileSystemSupportTest { }\n\t\t\t\t\n\t\t\t\tclass FileSystemUsingProcessor extends AbstractClassProcessor {\n\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tval path = annotatedClass.compilationUnit.filePath\n\t\t\t\t\t\tannotatedClass.docComment = \'\'\'\n\t\t\t\t\t\t\tPath \'\u00ABpath.toString\u00BB\' {\n\t\t\t\t\t\t\t\texists: \u00ABpath.exists\u00BB\n\t\t\t\t\t\t\t\tisFolder: \u00ABpath.isFolder\u00BB\n\t\t\t\t\t\t\t\tisFile: \u00ABpath.isFile\u00BB\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tsourceFolder : \u00ABpath.sourceFolder\u00BB\n\t\t\t\t\t\t\ttargetFolder : \u00ABpath.targetFolder\u00BB\n\t\t\t\t\t\t\tprojectFolder: \u00ABpath.projectFolder\u00BB\n\t\t\t\t\t\t\'\'\'\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t}\n\t\t\t");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myusercode");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@myannotation.FileSystemSupportTest");
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration declaredClass = _typeLookup.findClass("myusercode.MyClass");
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Path \'/userProject/src/myusercode/UserCode.xtend\' {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("exists: true");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("isFolder: false");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("isFile: true");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("sourceFolder : /userProject/src");
+        _builder.newLine();
+        _builder.append("targetFolder : /userProject/xtend-gen");
+        _builder.newLine();
+        _builder.append("projectFolder: /userProject");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _docComment = declaredClass.getDocComment();
+        Assert.assertEquals(_string, _docComment);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
 }

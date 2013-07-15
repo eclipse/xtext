@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
@@ -11,6 +18,7 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtend.lib.macro.file.Path
 
 class TransformationContextImpl implements TransformationContext {
 
@@ -30,18 +38,6 @@ class TransformationContextImpl implements TransformationContext {
 			default:
 				false
 		}
-	}
-
-	override getSourceFolder() {
-		unit.sourceFolder
-	}
-
-	override getRootFolder() {
-		unit.rootFolder
-	}
-
-	override getTargetFolder() {
-		unit.targetFolder
 	}
 
 	override isSource(NamedElement element) {
@@ -173,5 +169,49 @@ class TransformationContextImpl implements TransformationContext {
 	override findTypeGlobally(String typeName) {
 		unit.typeLookup.findTypeGlobally(typeName)
 	}
-
+	
+	override exists(Path path) {
+		unit.fileSystemSupport.exists(path)
+	}
+	
+	override getCharset(Path path) {
+		unit.fileSystemSupport.getCharset(path)
+	}
+	
+	override getChildren(Path path) {
+		unit.fileSystemSupport.getChildren(path)
+	}
+	
+	override getContents(Path path) {
+		unit.fileSystemSupport.getContents(path)
+	}
+	
+	override getContentsAsStream(Path path) {
+		unit.fileSystemSupport.getContentsAsStream(path)
+	}
+	
+	override getLastModification(Path path) {
+		unit.fileSystemSupport.getLastModification(path)
+	}
+	
+	override getProjectFolder(Path path) {
+		unit.fileLocations.getProjectFolder(path)
+	}
+	
+	override getSourceFolder(Path path) {
+		unit.fileLocations.getSourceFolder(path)
+	}
+	
+	override getTargetFolder(Path sourceFolder) {
+		unit.fileLocations.getTargetFolder(sourceFolder)
+	}
+	
+	override isFile(Path path) {
+		unit.fileSystemSupport.isFile(path)
+	}
+	
+	override isFolder(Path path) {
+		unit.fileSystemSupport.isFolder(path)
+	}
+	
 }

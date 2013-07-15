@@ -1518,6 +1518,14 @@ public class JvmModelGenerator implements IGenerator {
       String _simpleName = _operation_1.getSimpleName();
       appendable.append(_simpleName);
       appendable.append(" = ");
+    } else {
+      EObject _eContainer = it.eContainer();
+      EList<JvmAnnotationValue> _values = ((JvmAnnotationReference) _eContainer).getValues();
+      int _size = _values.size();
+      boolean _greaterThan = (_size > 1);
+      if (_greaterThan) {
+        appendable.append("value = ");
+      }
     }
     this.toJavaLiteral(it, appendable, config);
   }

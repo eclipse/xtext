@@ -9,5 +9,6 @@ Export-Package: org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
  org.eclipse.xtend.lib.macro.declaration,
  org.eclipse.xtend.lib.macro.expression,
+ org.eclipse.xtend.lib.macro.file,
  org.eclipse.xtend.lib.macro.services
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.4.3";visibility:=reexport

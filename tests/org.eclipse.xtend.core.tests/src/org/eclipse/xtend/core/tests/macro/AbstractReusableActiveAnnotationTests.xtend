@@ -1,6 +1,9 @@
 package org.eclipse.xtend.core.tests.macro
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
@@ -401,7 +404,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(1, annotation.getValue('singleNumber'))
 		]
 	}
-
+	
 	@Test def void testCreateTypeFromUsage() {
 		assertProcessing(
 			'myannotation/SomeAnnotation.xtend' -> '''
@@ -687,7 +690,9 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 
-	val THREE_ANNOTATIONS = 'three.xtend' -> '''
+	val THREE_ANNOTATIONS = 'myannotation/three.xtend' -> '''
+		package myannotation
+		
 		import java.util.List
 		import org.eclipse.xtend.lib.macro.Active
 		import org.eclipse.xtend.lib.macro.TransformationContext
@@ -726,6 +731,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 		assertProcessing(
 			THREE_ANNOTATIONS,
 			'MyClass.xtend' -> '''
+				import myannotation.*
+				
 				class MyClass {
 					@_A @_B @_C String field
 				}
@@ -742,6 +749,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 		assertProcessing(
 			THREE_ANNOTATIONS,
 			'MyClass.xtend' -> '''
+				import myannotation.*
 				class MyClass {
 					@_A @_B @_C String field1
 					@_C @_B @_A String field2
@@ -760,6 +768,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 		assertProcessing(
 			THREE_ANNOTATIONS,
 			'MyClass.xtend' -> '''
+				import myannotation.*
 				@_A @_B @_C class MyClass {
 				}
 			'''
@@ -771,4 +780,82 @@ abstract class AbstractReusableActiveAnnotationTests {
 
 	def void assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile,
 		(CompilationUnitImpl)=>void expectations)
+		
+	@Test def void testFileSystemSupport_01() {
+
+		assertProcessing(
+			'myannotation/FileSystemSupportTest.xtend' -> "
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				
+				@Active(FileSystemUsingProcessor)
+				annotation FileSystemSupportTest { }
+				
+				class FileSystemUsingProcessor extends AbstractClassProcessor {
+	
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						val path = annotatedClass.compilationUnit.filePath
+						annotatedClass.docComment = '''
+							Path '«path.toString»' {
+								exists: «path.exists»
+								isFolder: «path.isFolder»
+								isFile: «path.isFile»
+							}
+							sourceFolder : «path.sourceFolder»
+							targetFolder : «path.targetFolder»
+							projectFolder: «path.projectFolder»
+						'''
+					}
+					
+				}
+			",
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.FileSystemSupportTest
+				class MyClass {
+				}
+			'''
+		) [
+			val declaredClass = typeLookup.findClass('myusercode.MyClass')
+			assertEquals('''
+				Path '/userProject/src/myusercode/UserCode.xtend' {
+					exists: true
+					isFolder: false
+					isFile: true
+				}
+				sourceFolder : /userProject/src
+				targetFolder : /userProject/xtend-gen
+				projectFolder: /userProject
+			'''.toString, declaredClass.docComment)
+		]
+	}
 }
+
+class FileSystemUsingProcessor extends AbstractClassProcessor {
+	
+	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+		val path = annotatedClass.compilationUnit.filePath
+		annotatedClass.docComment = '''
+			Path "«path.toString»" {
+				exists: «path.exists»
+				isFolder: «path.isFolder»
+				isFile: «path.isFile»
+			}
+			sourceFolder : «path.sourceFolder»
+			targetFolder : «path.targetFolder»
+			projectFolder: «path.projectFolder»
+		'''
+	}
+	
+}
+

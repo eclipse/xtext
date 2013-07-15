@@ -24,7 +24,11 @@ import com.google.common.annotations.Beta;
  *  <ul>
  *  	<li>Phase 1: Register Globals {@link RegisterGlobalsParticipant}</li>
  *  	<li>Phase 2: Transformation {@link TransformationParticipant}</li>
+ *  	<li>Phase 3: Generate Code {@link CodeGenerationParticipant}</li>
  *  </ul>
+ *  
+ *  Note, that in the IDE phase one and two are executed in the editor as you type, while phase 3 (code generation) only gets executed when 
+ *  the editor's contents gets saved to disk.
  * 
  * @author Sven Efftinge
  */

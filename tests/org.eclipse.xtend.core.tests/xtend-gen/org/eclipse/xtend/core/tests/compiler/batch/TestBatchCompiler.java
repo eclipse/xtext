@@ -10,14 +10,22 @@ package org.eclipse.xtend.core.tests.compiler.batch;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
+import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -34,6 +42,9 @@ import org.junit.runner.RunWith;
 public class TestBatchCompiler {
   @Inject
   private XtendBatchCompiler batchCompiler;
+  
+  @Inject
+  private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
   
   private static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result";
   
@@ -86,6 +97,42 @@ public class TestBatchCompiler {
         File _file_5 = new File(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES);
         Files.cleanFolder(_file_5, null, true, true);
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWorkspaceConfig() {
+    try {
+      this.batchCompiler.configureWorkspace();
+      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      File _file = new File("..");
+      File _canonicalFile = _file.getCanonicalFile();
+      String _absolutePath = _canonicalFile.getAbsolutePath();
+      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
+      Assert.assertEquals(_absolutePath, _absoluteFileSystemPath);
+      Map<String,ProjectConfig> _projects = config.getProjects();
+      Collection<ProjectConfig> _values = _projects.values();
+      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      File _file_1 = new File(".");
+      File _canonicalFile_1 = _file_1.getCanonicalFile();
+      String _name = _canonicalFile_1.getName();
+      final String projectPath = ("/" + _name);
+      Path _rootPath = project.getRootPath();
+      String _string = _rootPath.toString();
+      Assert.assertEquals(projectPath, _string);
+      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Set<Path> _keySet = _sourceFolderMappings.keySet();
+      final Path src = IterableExtensions.<Path>head(_keySet);
+      String _plus = (projectPath + "/batch-compiler-data/test data");
+      String _string_1 = src.toString();
+      Assert.assertEquals(_plus, _string_1);
+      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      final Path target = _sourceFolderMappings_1.get(src);
+      String _plus_1 = (projectPath + "/test-result");
+      String _string_2 = target.toString();
+      Assert.assertEquals(_plus_1, _string_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
