@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro;
 
+import org.eclipse.xtend.lib.macro.file.FileLocations;
+import org.eclipse.xtend.lib.macro.file.FileSystemSupport;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -17,7 +20,7 @@ import com.google.common.annotations.Beta;
  * @see RegisterGlobalsParticipant
  */
 @Beta
-public interface RegisterGlobalsContext {
+public interface RegisterGlobalsContext extends FileSystemSupport, FileLocations {
 	
 	/**
 	 * Registers and creates an empty Java class with given qualified name

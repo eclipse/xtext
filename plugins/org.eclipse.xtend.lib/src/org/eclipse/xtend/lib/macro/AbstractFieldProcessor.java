@@ -13,12 +13,27 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
 
+import com.google.common.annotations.Beta;
+
 /**
- * A convenient base class to process active annotations for classes.
+ * A convenient base class to process active annotations for fields.
  * 
  * @author Sven Efftinge
  */
-public class AbstractFieldProcessor implements RegisterGlobalsParticipant<FieldDeclaration>, TransformationParticipant<MutableFieldDeclaration>{
+@Beta
+public class AbstractFieldProcessor implements RegisterGlobalsParticipant<FieldDeclaration>, TransformationParticipant<MutableFieldDeclaration>, CodeGenerationParticipant<FieldDeclaration>{
+	
+	public void doRegisterGlobals(List<? extends FieldDeclaration> annotatedFields, RegisterGlobalsContext context) {
+		for (FieldDeclaration annotatedField : annotatedFields) {
+			doRegisterGlobals(annotatedField, context);
+		}
+	}
+	
+	/**
+	 * @param annotatedField a source field annotated with the annotation this processor is responsible for.
+	 * @param context
+	 */
+	public void doRegisterGlobals(FieldDeclaration annotatedField, RegisterGlobalsContext context) {}
 
 	public void doTransform(List<? extends MutableFieldDeclaration> annotatedfields, @Extension TransformationContext context) {
 		for (MutableFieldDeclaration annotatedField : annotatedfields) {
@@ -32,16 +47,18 @@ public class AbstractFieldProcessor implements RegisterGlobalsParticipant<FieldD
 	 */
 	public void doTransform(MutableFieldDeclaration annotatedField, @Extension TransformationContext context) {}
 
-	public void doRegisterGlobals(List<? extends FieldDeclaration> annotatedClasses, RegisterGlobalsContext context) {
-		for (FieldDeclaration annotatedField : annotatedClasses) {
-			doRegisterGlobals(annotatedField, context);
+	public void doGenerateCode(List<? extends FieldDeclaration> annotatedFields, @Extension CodeGenerationContext context) {
+		for (FieldDeclaration annotatedField : annotatedFields) {
+			doGenerateCode(annotatedField, context);
 		}
 	}
-
+	
 	/**
-	 * @param annotatedField a source field annotated with the annotation this processor is responsible for.
+	 * Called during code generation. 
+	 * 
+	 * @param annotatedField a source element annotated with the annotation this processor is responsible for.
 	 * @param context
+	 * @see CodeGenerationParticipant#doGenerateCode(List, CodeGenerationContext)
 	 */
-	public void doRegisterGlobals(FieldDeclaration annotatedField, RegisterGlobalsContext context) {}
-
+	public void doGenerateCode(FieldDeclaration annotatedField, @Extension CodeGenerationContext context) {}
 }

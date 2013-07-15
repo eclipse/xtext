@@ -8,22 +8,18 @@
 package org.eclipse.xtend.lib.macro;
 
 import org.eclipse.xtend.lib.macro.file.FileLocations;
-import org.eclipse.xtend.lib.macro.file.FileSystemSupport;
-import org.eclipse.xtend.lib.macro.services.ProblemSupport;
-import org.eclipse.xtend.lib.macro.services.Tracability;
-import org.eclipse.xtend.lib.macro.services.TypeLookup;
-import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 
 import com.google.common.annotations.Beta;
 
 /**
- * Services provided during transformation phase
+ * Provides services for the code generation phase.
+ * 
+ * @see CodeGenerationParticipant
  * 
  * @author Sven Efftinge
- * 
- * @see TransformationParticipant
  */
 @Beta
-public interface TransformationContext extends Tracability, ProblemSupport, TypeReferenceProvider, TypeLookup, FileSystemSupport, FileLocations {
+public interface CodeGenerationContext extends MutableFileSystemSupport, FileLocations {
 
 }

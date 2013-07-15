@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+import org.eclipse.xtend.lib.macro.file.Path;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -32,5 +34,14 @@ public interface CompilationUnit extends AnnotationTarget {
 	 * @return the source view of the <code>TypeDeclaration</code>s directly contained in the compilation unit.
 	 */
 	Iterable<? extends TypeDeclaration> getSourceTypeDeclarations();
+	
+	/**
+	 * Returns the file handle for the given compilation unit.
+	 * 
+	 * @param compilationUnit the compilation unit
+	 * @return the file handle for the given compilation unit.
+	 * @see Path
+	 */
+	Path getFilePath();
 	
 }
