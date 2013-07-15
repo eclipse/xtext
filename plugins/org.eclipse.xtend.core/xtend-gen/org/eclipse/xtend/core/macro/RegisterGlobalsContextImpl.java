@@ -1,13 +1,24 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.io.InputStream;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
+import org.eclipse.xtend.lib.macro.file.FileLocations;
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
+import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -157,5 +168,82 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     } else {
       return Pair.<String, String>of(null, string);
     }
+  }
+  
+  public boolean exists(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    boolean _exists = _fileSystemSupport.exists(path);
+    return _exists;
+  }
+  
+  public String getCharset(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    String _charset = _fileSystemSupport.getCharset(path);
+    return _charset;
+  }
+  
+  public Iterable<? extends Path> getChildren(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    Iterable<? extends Path> _children = _fileSystemSupport.getChildren(path);
+    return _children;
+  }
+  
+  public CharSequence getContents(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    CharSequence _contents = _fileSystemSupport.getContents(path);
+    return _contents;
+  }
+  
+  public InputStream getContentsAsStream(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    InputStream _contentsAsStream = _fileSystemSupport.getContentsAsStream(path);
+    return _contentsAsStream;
+  }
+  
+  public long getLastModification(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    long _lastModification = _fileSystemSupport.getLastModification(path);
+    return _lastModification;
+  }
+  
+  public Path getProjectFolder(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    FileLocations _fileLocations = _compilationUnit.getFileLocations();
+    Path _projectFolder = _fileLocations.getProjectFolder(path);
+    return _projectFolder;
+  }
+  
+  public Path getSourceFolder(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    FileLocations _fileLocations = _compilationUnit.getFileLocations();
+    Path _sourceFolder = _fileLocations.getSourceFolder(path);
+    return _sourceFolder;
+  }
+  
+  public Path getTargetFolder(final Path sourceFolder) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    FileLocations _fileLocations = _compilationUnit.getFileLocations();
+    Path _targetFolder = _fileLocations.getTargetFolder(sourceFolder);
+    return _targetFolder;
+  }
+  
+  public boolean isFile(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    boolean _isFile = _fileSystemSupport.isFile(path);
+    return _isFile;
+  }
+  
+  public boolean isFolder(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    boolean _isFolder = _fileSystemSupport.isFolder(path);
+    return _isFolder;
   }
 }

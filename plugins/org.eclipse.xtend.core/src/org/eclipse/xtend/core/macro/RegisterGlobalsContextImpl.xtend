@@ -1,7 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.macro
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
@@ -87,5 +95,48 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 		}
 	}
 	
+
+	override exists(Path path) {
+		compilationUnit.fileSystemSupport.exists(path)
+	}
 	
+	override getCharset(Path path) {
+		compilationUnit.fileSystemSupport.getCharset(path)
+	}
+	
+	override getChildren(Path path) {
+		compilationUnit.fileSystemSupport.getChildren(path)
+	}
+	
+	override getContents(Path path) {
+		compilationUnit.fileSystemSupport.getContents(path)
+	}
+	
+	override getContentsAsStream(Path path) {
+		compilationUnit.fileSystemSupport.getContentsAsStream(path)
+	}
+	
+	override getLastModification(Path path) {
+		compilationUnit.fileSystemSupport.getLastModification(path)
+	}
+	
+	override getProjectFolder(Path path) {
+		compilationUnit.fileLocations.getProjectFolder(path)
+	}
+	
+	override getSourceFolder(Path path) {
+		compilationUnit.fileLocations.getSourceFolder(path)
+	}
+	
+	override getTargetFolder(Path sourceFolder) {
+		compilationUnit.fileLocations.getTargetFolder(sourceFolder)
+	}
+	
+	override isFile(Path path) {
+		compilationUnit.fileSystemSupport.isFile(path)
+	}
+	
+	override isFolder(Path path) {
+		compilationUnit.fileSystemSupport.isFolder(path)
+	}	
 }

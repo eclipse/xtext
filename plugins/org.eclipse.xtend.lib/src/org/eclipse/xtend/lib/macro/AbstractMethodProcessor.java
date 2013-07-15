@@ -13,12 +13,27 @@ import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
 
+import com.google.common.annotations.Beta;
+
 /**
- * A convenient base class to process active method annotations.
+ * A convenient base class to process active annotations for methods.
  * 
  * @author Sven Efftinge
  */
-public class AbstractMethodProcessor implements RegisterGlobalsParticipant<MethodDeclaration>, TransformationParticipant<MutableMethodDeclaration>{
+@Beta
+public class AbstractMethodProcessor implements RegisterGlobalsParticipant<MethodDeclaration>, TransformationParticipant<MutableMethodDeclaration>, CodeGenerationParticipant<MethodDeclaration> {
+	
+	public void doRegisterGlobals(List<? extends MethodDeclaration> annotatedMethods, RegisterGlobalsContext context) {
+		for (MethodDeclaration annotatedMethod : annotatedMethods) {
+			doRegisterGlobals(annotatedMethod, context);
+		}
+	}
+	
+	/**
+	 * @param annotatedMethod a source method annotated with the annotation this processor is responsible for.
+	 * @param context
+	 */
+	public void doRegisterGlobals(MethodDeclaration annotatedMethod, RegisterGlobalsContext context) {}
 
 	public void doTransform(List<? extends MutableMethodDeclaration> annotatedMethods, @Extension TransformationContext context) {
 		for (MutableMethodDeclaration annotatedMethod : annotatedMethods) {
@@ -32,16 +47,15 @@ public class AbstractMethodProcessor implements RegisterGlobalsParticipant<Metho
 	 */
 	public void doTransform(MutableMethodDeclaration annotatedMethod, @Extension TransformationContext context) {}
 
-	public void doRegisterGlobals(List<? extends MethodDeclaration> annotatedMethods, RegisterGlobalsContext context) {
+	public void doGenerateCode(List<? extends MethodDeclaration> annotatedMethods, @Extension CodeGenerationContext context) {
 		for (MethodDeclaration annotatedMethod : annotatedMethods) {
-			doRegisterGlobals(annotatedMethod, context);
+			doGenerateCode(annotatedMethod, context);
 		}
 	}
-
+	
 	/**
 	 * @param annotatedMethod a source method annotated with the annotation this processor is responsible for.
 	 * @param context
 	 */
-	public void doRegisterGlobals(MethodDeclaration annotatedMethod, RegisterGlobalsContext context) {}
-
+	public void doGenerateCode(MethodDeclaration annotatedMethod, @Extension CodeGenerationContext context) {}
 }

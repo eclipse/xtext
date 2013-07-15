@@ -48,6 +48,7 @@ public class XtendCompilerTester {
 	
 	public void assertCompilesTo(CharSequence source, final CharSequence expected) {
 		try {
+			compilationTestHelper.configureFreshWorkspace();
 			compilationTestHelper.assertCompilesTo(source, expected);
 		} catch (IOException e) {
 			Exceptions.sneakyThrow(e);
@@ -56,6 +57,7 @@ public class XtendCompilerTester {
 
 	public void compile(CharSequence source, final IAcceptor<CompilationResult> acceptor) {
 		try {
+			compilationTestHelper.configureFreshWorkspace();
 			compilationTestHelper.compile(source, new IAcceptor<CompilationTestHelper.Result>() {
 				public void accept(final Result t) {
 					acceptor.accept(new CompilationResult() {

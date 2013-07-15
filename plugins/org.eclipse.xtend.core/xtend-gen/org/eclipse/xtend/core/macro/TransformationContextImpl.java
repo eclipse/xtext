@@ -1,8 +1,16 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -23,7 +31,9 @@ import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtend.lib.macro.services.FolderHandle;
+import org.eclipse.xtend.lib.macro.file.FileLocations;
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
+import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
@@ -78,24 +88,6 @@ public class TransformationContextImpl implements TransformationContext {
       _switchResult = false;
     }
     return _switchResult;
-  }
-  
-  public FolderHandle getSourceFolder() {
-    CompilationUnitImpl _unit = this.getUnit();
-    FolderHandle _sourceFolder = _unit.getSourceFolder();
-    return _sourceFolder;
-  }
-  
-  public FolderHandle getRootFolder() {
-    CompilationUnitImpl _unit = this.getUnit();
-    FolderHandle _rootFolder = _unit.getRootFolder();
-    return _rootFolder;
-  }
-  
-  public FolderHandle getTargetFolder() {
-    CompilationUnitImpl _unit = this.getUnit();
-    FolderHandle _targetFolder = _unit.getTargetFolder();
-    return _targetFolder;
   }
   
   public boolean isSource(final NamedElement element) {
@@ -318,5 +310,82 @@ public class TransformationContextImpl implements TransformationContext {
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();
     Type _findTypeGlobally = _typeLookup.findTypeGlobally(typeName);
     return _findTypeGlobally;
+  }
+  
+  public boolean exists(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    boolean _exists = _fileSystemSupport.exists(path);
+    return _exists;
+  }
+  
+  public String getCharset(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    String _charset = _fileSystemSupport.getCharset(path);
+    return _charset;
+  }
+  
+  public Iterable<? extends Path> getChildren(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    Iterable<? extends Path> _children = _fileSystemSupport.getChildren(path);
+    return _children;
+  }
+  
+  public CharSequence getContents(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    CharSequence _contents = _fileSystemSupport.getContents(path);
+    return _contents;
+  }
+  
+  public InputStream getContentsAsStream(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    InputStream _contentsAsStream = _fileSystemSupport.getContentsAsStream(path);
+    return _contentsAsStream;
+  }
+  
+  public long getLastModification(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    long _lastModification = _fileSystemSupport.getLastModification(path);
+    return _lastModification;
+  }
+  
+  public Path getProjectFolder(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    FileLocations _fileLocations = _unit.getFileLocations();
+    Path _projectFolder = _fileLocations.getProjectFolder(path);
+    return _projectFolder;
+  }
+  
+  public Path getSourceFolder(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    FileLocations _fileLocations = _unit.getFileLocations();
+    Path _sourceFolder = _fileLocations.getSourceFolder(path);
+    return _sourceFolder;
+  }
+  
+  public Path getTargetFolder(final Path sourceFolder) {
+    CompilationUnitImpl _unit = this.getUnit();
+    FileLocations _fileLocations = _unit.getFileLocations();
+    Path _targetFolder = _fileLocations.getTargetFolder(sourceFolder);
+    return _targetFolder;
+  }
+  
+  public boolean isFile(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    boolean _isFile = _fileSystemSupport.isFile(path);
+    return _isFile;
+  }
+  
+  public boolean isFolder(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    boolean _isFolder = _fileSystemSupport.isFolder(path);
+    return _isFolder;
   }
 }

@@ -4,14 +4,13 @@ import com.google.common.io.CharStreams
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.BufferedInputStream
-import java.io.BufferedWriter
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.InputStreamReader
-import java.io.OutputStreamWriter
 import java.util.jar.Manifest
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
+import org.eclipse.core.resources.IMarker
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.IJavaProject
@@ -34,7 +33,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static org.eclipse.xtend.core.macro.fsaccess.IOUtils.*
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
@@ -52,7 +50,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	}
 
 	@Test
-	def void testDocumetationProvider() {
+	def void testDocumentationProvider() {
 		assertProcessing(
 			'annotation/ChangeDoc.xtend' -> '''
 				package annotation
@@ -110,98 +108,6 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		assertEquals(charSequence.toString, sourceElement.documentation)
 	}
 
-	@Test def void testFileSystemAccess() {
-		val userCodeContent = '''
-			package myusercode
-			
-			@myannotation.MyAnnotation
-			class MyClass {
-			}
-		'''
-		assertProcessing(
-			'myannotation/MyAnnotation.xtend' -> '''
-				package myannotation
-				
-				import org.eclipse.xtend.lib.macro.Active
-				import org.eclipse.xtend.lib.macro.TransformationContext
-				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
-				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-				
-				@Active(typeof(MyAnnotationProcessor))
-				annotation MyAnnotation{ }
-				class MyAnnotationProcessor extends AbstractClassProcessor {
-					
-					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
-					}
-					
-				}
-			''',
-			'myusercode/UserCode.xtend' -> userCodeContent
-		) [
-			assertNotNull(sourceFolder)
-			assertTrue(sourceFolder.exists)
-			assertEquals("src", sourceFolder.name)
-			assertTrue(sourceFolder.path.endsWith("/userProject/src"))
-			assertNotNull(targetFolder)
-			assertTrue(targetFolder.exists)
-			assertEquals("xtend-gen", targetFolder.name)
-			assertTrue(targetFolder.path.endsWith("/userProject/xtend-gen"))
-			assertNotNull(rootFolder)
-			assertTrue(rootFolder.exists)
-			assertEquals("userProject", rootFolder.name)
-			assertTrue(rootFolder.path.endsWith("/userProject"))
-			val myusercodeFolder = sourceFolder.getFolder("myusercode")
-			assertNotNull(myusercodeFolder)
-			assertTrue(myusercodeFolder.exists)
-			assertEquals("myusercode", myusercodeFolder.name)
-			assertTrue(myusercodeFolder.path.endsWith("/userProject/src/myusercode"))
-			try {
-				sourceFolder.getFolder("myusercode/UserCode.xtend")
-				fail
-			} catch (IllegalStateException e) {
-				assertTrue(e.message.contains("/userProject/src/myusercode/UserCode.xtend"))
-			}
-			val userCodeFile = sourceFolder.getFile("myusercode/UserCode.xtend")
-			assertNotNull(userCodeFile)
-			assertTrue(userCodeFile.exists)
-			assertEquals("UserCode.xtend", userCodeFile.name)
-			assertTrue(userCodeFile.path.endsWith("/userProject/src/myusercode/UserCode.xtend"))
-			try {
-				sourceFolder.getFile("myusercode")
-				fail
-			} catch (IllegalStateException e) {
-				assertTrue(e.message.contains("/userProject/src/myusercode"))
-			}
-			assertEquals(userCodeContent, userCodeFile.contents)
-			userCodeFile.read[assertEquals(userCodeContent, CharStreams.toString(new InputStreamReader(it)))]
-			val userCodeCss = sourceFolder.getFile("myusercode/UserCode.css")
-			assertNotNull(userCodeCss)
-			assertFalse(userCodeCss.exists)
-			assertEquals("UserCode.css", userCodeCss.name)
-			assertTrue(userCodeCss.path.endsWith("/userProject/src/myusercode/UserCode.css"))
-			val helloWorldCssClassDeclaration = ".helloWorldCssClass {}"
-			userCodeCss.writeContents[helloWorldCssClassDeclaration as CharSequence]
-			val userCodeCss2 = sourceFolder.getFile("myusercode/UserCode.css")
-			assertNotNull(userCodeCss2)
-			assertTrue(userCodeCss2.exists)
-			assertEquals(helloWorldCssClassDeclaration, userCodeCss2.contents)
-			val userCode2Css = sourceFolder.getFile("com/itemis/myusercode/UserCode2.css")
-			assertNotNull(userCode2Css)
-			assertFalse(userCode2Css.exists)
-			assertEquals("UserCode2.css", userCode2Css.name)
-			assertTrue(userCode2Css.path.endsWith("/userProject/src/com/itemis/myusercode/UserCode2.css"))
-			userCode2Css.write [
-				tryWith([|new BufferedWriter(new OutputStreamWriter(it))]) [
-					write(helloWorldCssClassDeclaration)
-				]
-			]
-			val userCode2Css2 = sourceFolder.getFile("com/itemis/myusercode/UserCode2.css")
-			assertNotNull(userCode2Css2)
-			assertTrue(userCode2Css2.exists)
-			assertEquals(helloWorldCssClassDeclaration, userCode2Css2.contents)
-		]
-	}
-
 	@Inject XtextResourceSetProvider resourceSetProvider
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 
@@ -220,7 +126,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 
 	override assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile,
 		(CompilationUnitImpl)=>void expectations) {
-		macroProject = JavaCore::create(createPluginProject("macroProject"))
+		macroProject = JavaCore.create(createPluginProject("macroProject"))
 		macroProject.newSource(macroFile.key, macroFile.value.toString)
 		val lidx = macroFile.key.lastIndexOf('/')
 		if (lidx != -1) {
@@ -229,12 +135,21 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		}
 		userProject = JavaCore::create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit4", "macroProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		sourceFile = userProject.newSource(clientFile.key, clientFile.value.toString)
 		waitForAutoBuild()
-
+		
+		val markers = macroProject.project.findMarkers(IMarker.PROBLEM,true,-1).filter[getAttribute(IMarker.SEVERITY) == IMarker.SEVERITY_ERROR]
+		assertEquals(markers.map['file'+resource.fullPath.lastSegment+" - "+getAttribute(IMarker.MESSAGE)].join(","), 0, markers.length)
+		
+		val markers2 = userProject.project.findMarkers(IMarker.PROBLEM,true,-1).filter[getAttribute(IMarker.SEVERITY) == IMarker.SEVERITY_ERROR]
+		val buffer = new StringBuilder()
+		markers2.map[resource].toSet.filter(IFile).map[CharStreams.copy([|new InputStreamReader(it.contents)], buffer)]
+		println(buffer)
+		assertEquals(markers2.map['file'+resource.fullPath.lastSegment+" - "+getAttribute(IMarker.MESSAGE)].join(","), 0, markers2.length)
+		
 		val resourceSet = resourceSetProvider.get(userProject.project)
-		val resource = resourceSet.getResource(URI::createPlatformResourceURI(sourceFile.fullPath.toString, true), true)
+		val resource = resourceSet.getResource(URI.createPlatformResourceURI(sourceFile.fullPath.toString, true), true)
 		val unit = compilationUnitProvider.get
 		unit.xtendFile = resource.contents.filter(typeof(XtendFile)).head
 		expectations.apply(unit)

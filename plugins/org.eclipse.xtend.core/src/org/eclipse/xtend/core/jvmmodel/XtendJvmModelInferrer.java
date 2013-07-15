@@ -17,13 +17,12 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
-import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -66,13 +65,11 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -196,19 +193,19 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			}
 		}
 		
-		List<? extends ActiveAnnotationContext> list = null;
+		ActiveAnnotationContexts contexts = null;
 		try {
-			list = contextProvider.computeContext(xtendFile);
+			contexts = contextProvider.computeContext(xtendFile);
 		} catch (Throwable t) {
-			handleProcessingError(xtendFile, null, t);
-			list = newArrayList();
+			logger.error("Couldn't create annotation contexts", t);
+			return;
 		}
-		for (ActiveAnnotationContext ctx : list) {
+		
+		for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
 			try {
 				annotationProcessor.indexingPhase(ctx, acceptor, CancelIndicator.NullImpl);
 			} catch (Throwable t) {
-				handleProcessingError(xtendFile, ctx, t);
-				list = newArrayList();
+				ctx.handleProcessingError(xtendFile.eResource(), t);
 			}
 		}
 		
@@ -216,39 +213,16 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			for (Runnable runnable : doLater) {
 				runnable.run();
 			}
-			for (ActiveAnnotationContext ctx : list) {
+			for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
 				try {
 					annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
 				} catch (Throwable t) {
-					handleProcessingError(xtendFile, ctx, t);
-					list = newArrayList();
+					ctx.handleProcessingError(xtendFile.eResource(), t);
 				}
 			}
 		}
 	}
 	
-	protected void handleProcessingError(XtendFile xtendFile, ActiveAnnotationContext ctx, Throwable t) {
-		if (t instanceof VirtualMachineError)
-			throw (VirtualMachineError) t;
-		EList<Diagnostic> errors = xtendFile.eResource().getErrors();
-		String msg = "Error during annotation processing :" + t.toString() + " (see error log for details)";
-		if (ctx != null) {
-			List<? extends EObject> sourceElements = ctx.getAnnotatedSourceElements();
-			for (EObject target : sourceElements) {
-				if (target instanceof XtendAnnotationTarget) {
-					EList<XAnnotation> annotations = ((XtendAnnotationTarget) target).getAnnotations();
-					errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, annotations.isEmpty() ? target : annotations.get(0), null, -1, null));
-				} else {
-					errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, -1, null));
-				}
-			}
-			logger.error("Error processing " + xtendFile.eResource().getURI() + " with processor " + ctx.getProcessorInstance().toString(), t);
-		} else {
-			errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, xtendFile, null, -1, null));
-			logger.error("Error processing " + xtendFile.eResource().getURI(), t);
-		}
-	}
-
 	protected void setNameAndAssociate(XtendFile file, XtendTypeDeclaration xtendType, JvmDeclaredType javaType) {
 		javaType.setPackageName(file.getPackage());
 		javaType.setSimpleName(xtendType.getName());

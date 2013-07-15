@@ -1,23 +1,26 @@
 package org.eclipse.xtend.ide.tests.macros;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.io.CharStreams;
+import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.BufferedInputStream;
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -27,7 +30,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.fsaccess.IOUtils;
 import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -36,8 +38,6 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
-import org.eclipse.xtend.lib.macro.services.FileHandle;
-import org.eclipse.xtend.lib.macro.services.FolderHandle;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -76,7 +77,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   }
   
   @Test
-  public void testDocumetationProvider() {
+  public void testDocumentationProvider() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package annotation");
     _builder.newLine();
@@ -203,220 +204,6 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     Assert.assertEquals(_string, _documentation);
   }
   
-  @Test
-  public void testFileSystemAccess() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package myusercode");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("@myannotation.MyAnnotation");
-    _builder.newLine();
-    _builder.append("class MyClass {");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    final String userCodeContent = _builder.toString();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package myannotation");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.lib.macro.Active");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.lib.macro.TransformationContext");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("@Active(typeof(MyAnnotationProcessor))");
-    _builder_1.newLine();
-    _builder_1.append("annotation MyAnnotation{ }");
-    _builder_1.newLine();
-    _builder_1.append("class MyAnnotationProcessor extends AbstractClassProcessor {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder_1.toString());
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", userCodeContent);
-    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-      public void apply(final CompilationUnitImpl it) {
-        FolderHandle _sourceFolder = it.getSourceFolder();
-        Assert.assertNotNull(_sourceFolder);
-        FolderHandle _sourceFolder_1 = it.getSourceFolder();
-        boolean _exists = _sourceFolder_1.exists();
-        Assert.assertTrue(_exists);
-        FolderHandle _sourceFolder_2 = it.getSourceFolder();
-        String _name = _sourceFolder_2.getName();
-        Assert.assertEquals("src", _name);
-        FolderHandle _sourceFolder_3 = it.getSourceFolder();
-        String _path = _sourceFolder_3.getPath();
-        boolean _endsWith = _path.endsWith("/userProject/src");
-        Assert.assertTrue(_endsWith);
-        FolderHandle _targetFolder = it.getTargetFolder();
-        Assert.assertNotNull(_targetFolder);
-        FolderHandle _targetFolder_1 = it.getTargetFolder();
-        boolean _exists_1 = _targetFolder_1.exists();
-        Assert.assertTrue(_exists_1);
-        FolderHandle _targetFolder_2 = it.getTargetFolder();
-        String _name_1 = _targetFolder_2.getName();
-        Assert.assertEquals("xtend-gen", _name_1);
-        FolderHandle _targetFolder_3 = it.getTargetFolder();
-        String _path_1 = _targetFolder_3.getPath();
-        boolean _endsWith_1 = _path_1.endsWith("/userProject/xtend-gen");
-        Assert.assertTrue(_endsWith_1);
-        FolderHandle _rootFolder = it.getRootFolder();
-        Assert.assertNotNull(_rootFolder);
-        FolderHandle _rootFolder_1 = it.getRootFolder();
-        boolean _exists_2 = _rootFolder_1.exists();
-        Assert.assertTrue(_exists_2);
-        FolderHandle _rootFolder_2 = it.getRootFolder();
-        String _name_2 = _rootFolder_2.getName();
-        Assert.assertEquals("userProject", _name_2);
-        FolderHandle _rootFolder_3 = it.getRootFolder();
-        String _path_2 = _rootFolder_3.getPath();
-        boolean _endsWith_2 = _path_2.endsWith("/userProject");
-        Assert.assertTrue(_endsWith_2);
-        FolderHandle _sourceFolder_4 = it.getSourceFolder();
-        final FolderHandle myusercodeFolder = _sourceFolder_4.getFolder("myusercode");
-        Assert.assertNotNull(myusercodeFolder);
-        boolean _exists_3 = myusercodeFolder.exists();
-        Assert.assertTrue(_exists_3);
-        String _name_3 = myusercodeFolder.getName();
-        Assert.assertEquals("myusercode", _name_3);
-        String _path_3 = myusercodeFolder.getPath();
-        boolean _endsWith_3 = _path_3.endsWith("/userProject/src/myusercode");
-        Assert.assertTrue(_endsWith_3);
-        try {
-          FolderHandle _sourceFolder_5 = it.getSourceFolder();
-          _sourceFolder_5.getFolder("myusercode/UserCode.xtend");
-          Assert.fail();
-        } catch (final Throwable _t) {
-          if (_t instanceof IllegalStateException) {
-            final IllegalStateException e = (IllegalStateException)_t;
-            String _message = e.getMessage();
-            boolean _contains = _message.contains("/userProject/src/myusercode/UserCode.xtend");
-            Assert.assertTrue(_contains);
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-        FolderHandle _sourceFolder_6 = it.getSourceFolder();
-        final FileHandle userCodeFile = _sourceFolder_6.getFile("myusercode/UserCode.xtend");
-        Assert.assertNotNull(userCodeFile);
-        boolean _exists_4 = userCodeFile.exists();
-        Assert.assertTrue(_exists_4);
-        String _name_4 = userCodeFile.getName();
-        Assert.assertEquals("UserCode.xtend", _name_4);
-        String _path_4 = userCodeFile.getPath();
-        boolean _endsWith_4 = _path_4.endsWith("/userProject/src/myusercode/UserCode.xtend");
-        Assert.assertTrue(_endsWith_4);
-        try {
-          FolderHandle _sourceFolder_7 = it.getSourceFolder();
-          _sourceFolder_7.getFile("myusercode");
-          Assert.fail();
-        } catch (final Throwable _t_1) {
-          if (_t_1 instanceof IllegalStateException) {
-            final IllegalStateException e_1 = (IllegalStateException)_t_1;
-            String _message_1 = e_1.getMessage();
-            boolean _contains_1 = _message_1.contains("/userProject/src/myusercode");
-            Assert.assertTrue(_contains_1);
-          } else {
-            throw Exceptions.sneakyThrow(_t_1);
-          }
-        }
-        String _contents = userCodeFile.getContents();
-        Assert.assertEquals(userCodeContent, _contents);
-        final Procedure1<InputStream> _function = new Procedure1<InputStream>() {
-          public void apply(final InputStream it) {
-            try {
-              InputStreamReader _inputStreamReader = new InputStreamReader(it);
-              String _string = CharStreams.toString(_inputStreamReader);
-              Assert.assertEquals(userCodeContent, _string);
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
-          }
-        };
-        userCodeFile.read(_function);
-        FolderHandle _sourceFolder_8 = it.getSourceFolder();
-        final FileHandle userCodeCss = _sourceFolder_8.getFile("myusercode/UserCode.css");
-        Assert.assertNotNull(userCodeCss);
-        boolean _exists_5 = userCodeCss.exists();
-        Assert.assertFalse(_exists_5);
-        String _name_5 = userCodeCss.getName();
-        Assert.assertEquals("UserCode.css", _name_5);
-        String _path_5 = userCodeCss.getPath();
-        boolean _endsWith_5 = _path_5.endsWith("/userProject/src/myusercode/UserCode.css");
-        Assert.assertTrue(_endsWith_5);
-        final String helloWorldCssClassDeclaration = ".helloWorldCssClass {}";
-        final Function1<FileHandle,CharSequence> _function_1 = new Function1<FileHandle,CharSequence>() {
-          public CharSequence apply(final FileHandle it) {
-            return ((CharSequence) helloWorldCssClassDeclaration);
-          }
-        };
-        userCodeCss.writeContents(_function_1);
-        FolderHandle _sourceFolder_9 = it.getSourceFolder();
-        final FileHandle userCodeCss2 = _sourceFolder_9.getFile("myusercode/UserCode.css");
-        Assert.assertNotNull(userCodeCss2);
-        boolean _exists_6 = userCodeCss2.exists();
-        Assert.assertTrue(_exists_6);
-        String _contents_1 = userCodeCss2.getContents();
-        Assert.assertEquals(helloWorldCssClassDeclaration, _contents_1);
-        FolderHandle _sourceFolder_10 = it.getSourceFolder();
-        final FileHandle userCode2Css = _sourceFolder_10.getFile("com/itemis/myusercode/UserCode2.css");
-        Assert.assertNotNull(userCode2Css);
-        boolean _exists_7 = userCode2Css.exists();
-        Assert.assertFalse(_exists_7);
-        String _name_6 = userCode2Css.getName();
-        Assert.assertEquals("UserCode2.css", _name_6);
-        String _path_6 = userCode2Css.getPath();
-        boolean _endsWith_6 = _path_6.endsWith("/userProject/src/com/itemis/myusercode/UserCode2.css");
-        Assert.assertTrue(_endsWith_6);
-        final Procedure1<OutputStream> _function_2 = new Procedure1<OutputStream>() {
-          public void apply(final OutputStream it) {
-            final Function0<BufferedWriter> _function = new Function0<BufferedWriter>() {
-              public BufferedWriter apply() {
-                OutputStreamWriter _outputStreamWriter = new OutputStreamWriter(it);
-                BufferedWriter _bufferedWriter = new BufferedWriter(_outputStreamWriter);
-                return _bufferedWriter;
-              }
-            };
-            final Procedure1<BufferedWriter> _function_1 = new Procedure1<BufferedWriter>() {
-              public void apply(final BufferedWriter it) {
-                try {
-                  it.write(helloWorldCssClassDeclaration);
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
-                }
-              }
-            };
-            IOUtils.<BufferedWriter>tryWith(_function, _function_1);
-          }
-        };
-        userCode2Css.write(_function_2);
-        FolderHandle _sourceFolder_11 = it.getSourceFolder();
-        final FileHandle userCode2Css2 = _sourceFolder_11.getFile("com/itemis/myusercode/UserCode2.css");
-        Assert.assertNotNull(userCode2Css2);
-        boolean _exists_8 = userCode2Css2.exists();
-        Assert.assertTrue(_exists_8);
-        String _contents_2 = userCode2Css2.getContents();
-        Assert.assertEquals(helloWorldCssClassDeclaration, _contents_2);
-      }
-    };
-    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
-  }
-  
   @Inject
   private XtextResourceSetProvider resourceSetProvider;
   
@@ -465,7 +252,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         this.addExportedPackage(this.macroProject, packageName);
       }
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-        "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit4", "macroProject");
+        "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       IJavaProject _create_1 = JavaCore.create(_createPluginProject_1);
       this.userProject = _create_1;
       String _key_3 = clientFile.getKey();
@@ -474,16 +261,120 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       IFile _newSource = this.newSource(this.userProject, _key_3, _string_1);
       this.sourceFile = _newSource;
       IResourcesSetupUtil.waitForAutoBuild();
-      IProject _project = this.userProject.getProject();
-      final ResourceSet resourceSet = this.resourceSetProvider.get(_project);
+      IProject _project = this.macroProject.getProject();
+      int _minus_1 = (-1);
+      IMarker[] _findMarkers = _project.findMarkers(IMarker.PROBLEM, true, _minus_1);
+      final Function1<IMarker,Boolean> _function = new Function1<IMarker,Boolean>() {
+        public Boolean apply(final IMarker it) {
+          try {
+            Object _attribute = it.getAttribute(IMarker.SEVERITY);
+            boolean _equals = Objects.equal(_attribute, Integer.valueOf(IMarker.SEVERITY_ERROR));
+            return Boolean.valueOf(_equals);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      final Iterable<IMarker> markers = IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers)), _function);
+      final Function1<IMarker,String> _function_1 = new Function1<IMarker,String>() {
+        public String apply(final IMarker it) {
+          try {
+            IResource _resource = it.getResource();
+            IPath _fullPath = _resource.getFullPath();
+            String _lastSegment = _fullPath.lastSegment();
+            String _plus = ("file" + _lastSegment);
+            String _plus_1 = (_plus + " - ");
+            Object _attribute = it.getAttribute(IMarker.MESSAGE);
+            String _plus_2 = (_plus_1 + _attribute);
+            return _plus_2;
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      Iterable<String> _map = IterableExtensions.<IMarker, String>map(markers, _function_1);
+      String _join = IterableExtensions.join(_map, ",");
+      int _length = ((Object[])Conversions.unwrapArray(markers, Object.class)).length;
+      Assert.assertEquals(_join, 0, _length);
+      IProject _project_1 = this.userProject.getProject();
+      int _minus_2 = (-1);
+      IMarker[] _findMarkers_1 = _project_1.findMarkers(IMarker.PROBLEM, true, _minus_2);
+      final Function1<IMarker,Boolean> _function_2 = new Function1<IMarker,Boolean>() {
+        public Boolean apply(final IMarker it) {
+          try {
+            Object _attribute = it.getAttribute(IMarker.SEVERITY);
+            boolean _equals = Objects.equal(_attribute, Integer.valueOf(IMarker.SEVERITY_ERROR));
+            return Boolean.valueOf(_equals);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      final Iterable<IMarker> markers2 = IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers_1)), _function_2);
+      StringBuilder _stringBuilder = new StringBuilder();
+      final StringBuilder buffer = _stringBuilder;
+      final Function1<IMarker,IResource> _function_3 = new Function1<IMarker,IResource>() {
+        public IResource apply(final IMarker it) {
+          IResource _resource = it.getResource();
+          return _resource;
+        }
+      };
+      Iterable<IResource> _map_1 = IterableExtensions.<IMarker, IResource>map(markers2, _function_3);
+      Set<IResource> _set = IterableExtensions.<IResource>toSet(_map_1);
+      Iterable<IFile> _filter = Iterables.<IFile>filter(_set, IFile.class);
+      final Function1<IFile,Long> _function_4 = new Function1<IFile,Long>() {
+        public Long apply(final IFile it) {
+          try {
+            final InputSupplier<InputStreamReader> _function = new InputSupplier<InputStreamReader>() {
+              public InputStreamReader getInput() throws IOException {
+                try {
+                  InputStream _contents = it.getContents();
+                  InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
+                  return _inputStreamReader;
+                } catch (Throwable _e) {
+                  throw Exceptions.sneakyThrow(_e);
+                }
+              }
+            };
+            long _copy = CharStreams.<InputStreamReader>copy(_function, buffer);
+            return Long.valueOf(_copy);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      /* IterableExtensions.<IFile, Long>map(_filter, _function_4); */
+      InputOutput.<StringBuilder>println(buffer);
+      final Function1<IMarker,String> _function_5 = new Function1<IMarker,String>() {
+        public String apply(final IMarker it) {
+          try {
+            IResource _resource = it.getResource();
+            IPath _fullPath = _resource.getFullPath();
+            String _lastSegment = _fullPath.lastSegment();
+            String _plus = ("file" + _lastSegment);
+            String _plus_1 = (_plus + " - ");
+            Object _attribute = it.getAttribute(IMarker.MESSAGE);
+            String _plus_2 = (_plus_1 + _attribute);
+            return _plus_2;
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      Iterable<String> _map_2 = IterableExtensions.<IMarker, String>map(markers2, _function_5);
+      String _join_1 = IterableExtensions.join(_map_2, ",");
+      int _length_1 = ((Object[])Conversions.unwrapArray(markers2, Object.class)).length;
+      Assert.assertEquals(_join_1, 0, _length_1);
+      IProject _project_2 = this.userProject.getProject();
+      final ResourceSet resourceSet = this.resourceSetProvider.get(_project_2);
       IPath _fullPath = this.sourceFile.getFullPath();
       String _string_2 = _fullPath.toString();
       URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string_2, true);
       final Resource resource = resourceSet.getResource(_createPlatformResourceURI, true);
       final CompilationUnitImpl unit = this.compilationUnitProvider.get();
       EList<EObject> _contents = resource.getContents();
-      Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
-      XtendFile _head = IterableExtensions.<XtendFile>head(_filter);
+      Iterable<XtendFile> _filter_1 = Iterables.<XtendFile>filter(_contents, XtendFile.class);
+      XtendFile _head = IterableExtensions.<XtendFile>head(_filter_1);
       unit.setXtendFile(_head);
       expectations.apply(unit);
     } catch (Throwable _e) {

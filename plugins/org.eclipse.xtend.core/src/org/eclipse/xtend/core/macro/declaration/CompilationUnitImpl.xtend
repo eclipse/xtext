@@ -9,13 +9,13 @@ package org.eclipse.xtend.core.macro.declaration
 
 import com.google.common.collect.ImmutableList
 import com.google.inject.Inject
+import com.google.inject.Provider
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
-import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessSPI
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
@@ -42,6 +42,9 @@ import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.expression.Expression
+import org.eclipse.xtend.lib.macro.file.FileLocations
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
+import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
@@ -82,6 +85,7 @@ import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
@@ -140,7 +144,9 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject JvmTypeExtensions typeExtensions;
 
-	@Inject FileSystemAccessSPI fileSystemAccess
+	@Inject MutableFileSystemSupport fileSystemSupport
+	@Inject FileLocations fileLocations
+	@Inject Provider<WorkspaceConfig> workspaceConfigProvider
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -171,6 +177,29 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def getTypeExtensions() {
 		typeExtensions
+	}
+	
+	def MutableFileSystemSupport getFileSystemSupport() {
+		fileSystemSupport
+	}
+	
+	def FileLocations getFileLocations() {
+		fileLocations
+	}
+	
+	override Path getFilePath() {
+		val uri = xtendFile.eResource.URI
+		if (uri.platform) {
+			return new Path(uri.toPlatformString(false))
+		}
+		if (uri.file) {
+			val workspacePath = new Path(workspaceConfigProvider.get.absoluteFileSystemPath)
+			val filePath = workspacePath.relativize('/'+uri.path);
+			if (filePath != null) {
+				return new Path('/'+filePath.toString)
+			}
+		}
+		return new Path(uri.path);
 	}
 	
 	def void setXtendFile(XtendFile xtendFile) {
@@ -483,18 +512,6 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def Object evaluate(XExpression expression) {
 		return interpreter.evaluate(expression, null)
-	}
-	
-	def getSourceFolder() {
-		fileSystemAccess.getSourceFolder(this)
-	}
-	
-	def getRootFolder() {
-		fileSystemAccess.getRootFolder(this)
-	}
-	
-	def getTargetFolder() {
-		fileSystemAccess.getTargetFolder(this)
 	}
 	
 }

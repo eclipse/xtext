@@ -32,7 +32,7 @@ public class MavenFileSystemAccessImpl extends AbstractFileSystemAccessImpl {
 	}
 
 	public FolderHandle doGetRootFolder(CompilationUnitImpl impl) {
-		MavenProject manenProject = getManenProject(impl);
+		MavenProject manenProject = getMavenProject(impl);
 		if (manenProject == null) {
 			return null;
 		}
@@ -82,7 +82,7 @@ public class MavenFileSystemAccessImpl extends AbstractFileSystemAccessImpl {
 		return true;
 	}
 
-	private MavenProject getManenProject(CompilationUnitImpl impl) {
+	private MavenProject getMavenProject(CompilationUnitImpl impl) {
 		return MavenProjectAdapter.get(impl.getXtendFile().eResource().getResourceSet());
 	}
 

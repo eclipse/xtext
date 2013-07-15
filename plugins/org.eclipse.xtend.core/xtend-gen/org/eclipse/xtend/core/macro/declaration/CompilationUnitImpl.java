@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,6 @@ import org.eclipse.xtend.core.macro.declaration.XtendMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
-import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessSPI;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -85,7 +85,9 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
-import org.eclipse.xtend.lib.macro.services.FolderHandle;
+import org.eclipse.xtend.lib.macro.file.FileLocations;
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
+import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -128,6 +130,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -235,7 +238,13 @@ public class CompilationUnitImpl implements CompilationUnit {
   private JvmTypeExtensions typeExtensions;
   
   @Inject
-  private FileSystemAccessSPI fileSystemAccess;
+  private MutableFileSystemSupport fileSystemSupport;
+  
+  @Inject
+  private FileLocations fileLocations;
+  
+  @Inject
+  private Provider<WorkspaceConfig> workspaceConfigProvider;
   
   private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
     public ProblemSupport apply() {
@@ -301,6 +310,46 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public JvmTypeExtensions getTypeExtensions() {
     return this.typeExtensions;
+  }
+  
+  public MutableFileSystemSupport getFileSystemSupport() {
+    return this.fileSystemSupport;
+  }
+  
+  public FileLocations getFileLocations() {
+    return this.fileLocations;
+  }
+  
+  public Path getFilePath() {
+    XtendFile _xtendFile = this.getXtendFile();
+    Resource _eResource = _xtendFile.eResource();
+    final URI uri = _eResource.getURI();
+    boolean _isPlatform = uri.isPlatform();
+    if (_isPlatform) {
+      String _platformString = uri.toPlatformString(false);
+      Path _path = new Path(_platformString);
+      return _path;
+    }
+    boolean _isFile = uri.isFile();
+    if (_isFile) {
+      WorkspaceConfig _get = this.workspaceConfigProvider.get();
+      String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
+      Path _path_1 = new Path(_absoluteFileSystemPath);
+      final Path workspacePath = _path_1;
+      String _path_2 = uri.path();
+      String _plus = ("/" + _path_2);
+      final Path filePath = workspacePath.relativize(_plus);
+      boolean _notEquals = (!Objects.equal(filePath, null));
+      if (_notEquals) {
+        String _string = filePath.toString();
+        String _plus_1 = ("/" + _string);
+        Path _path_3 = new Path(_plus_1);
+        return _path_3;
+      }
+    }
+    String _path_4 = uri.path();
+    Path _path_5 = new Path(_path_4);
+    return _path_5;
   }
   
   public void setXtendFile(final XtendFile xtendFile) {
@@ -1128,20 +1177,5 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Object evaluate(final XExpression expression) {
     return this.interpreter.evaluate(expression, null);
-  }
-  
-  public FolderHandle getSourceFolder() {
-    FolderHandle _sourceFolder = this.fileSystemAccess.getSourceFolder(this);
-    return _sourceFolder;
-  }
-  
-  public FolderHandle getRootFolder() {
-    FolderHandle _rootFolder = this.fileSystemAccess.getRootFolder(this);
-    return _rootFolder;
-  }
-  
-  public FolderHandle getTargetFolder() {
-    FolderHandle _targetFolder = this.fileSystemAccess.getTargetFolder(this);
-    return _targetFolder;
   }
 }

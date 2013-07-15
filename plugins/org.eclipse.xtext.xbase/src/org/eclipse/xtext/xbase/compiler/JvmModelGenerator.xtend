@@ -700,7 +700,9 @@ class JvmModelGenerator implements IGenerator {
 		if (operation != null) {
 			appendable.append(operation.simpleName)
 			appendable.append(" = ")
-		} 
+		} else if ((eContainer as JvmAnnotationReference).values.size > 1) { // more than one value
+			appendable.append("value = ")
+		}
 		toJavaLiteral(appendable, config)
 	}
 		
