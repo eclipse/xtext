@@ -9,6 +9,7 @@ package org.xpect.ui.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.compare.CompareConfiguration;
@@ -28,6 +29,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.internal.junit.model.TestElement;
 import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -104,7 +106,7 @@ public class FailureCompareEditorInput extends CompareEditorInput {
 		configuration.setLeftLabel("Expected Test Result" + (file != null ? " - " + file.getName() : ""));
 		configuration.setRightLabel("Actual Test Result");
 		configuration.setAncestorLabel("File on Disk");
-		configuration.setProperty(ICompareUIConstants.PROP_ANCESTOR_VISIBLE, Boolean.TRUE);
+		configuration.setProperty(ICompareUIConstants.PROP_ANCESTOR_VISIBLE, Boolean.FALSE);
 		return configuration;
 	}
 
@@ -126,9 +128,20 @@ public class FailureCompareEditorInput extends CompareEditorInput {
 
 	protected Object prepareInput(IProgressMonitor pm) {
 		TestElement te = (TestElement) testElement;
-		ITypedElement ancestor = null;
-		if (file != null)
+		ResourceNode ancestor = null;
+		if (file != null) {
 			ancestor = new ResourceNode(file);
+			if (!Strings.isEmpty(te.getExpected()))
+				try {
+					String original = new String(ancestor.getContent(), file.getCharset());
+					if (!te.getExpected().equals(original))
+						getCompareConfiguration().setProperty(ICompareUIConstants.PROP_ANCESTOR_VISIBLE, Boolean.TRUE);
+				} catch (UnsupportedEncodingException e) {
+					LOG.error(e.getMessage(), e);
+				} catch (CoreException e) {
+					LOG.error(e.getMessage(), e);
+				}
+		}
 		CompareItem left = new EditableCompareItem("Left", te.getExpected(), file);
 		CompareItem right = new CompareItem("Right", te.getActual());
 		return new DiffNode(null, Differencer.CHANGE | Differencer.DIRECTION_MASK, ancestor, left, right);
