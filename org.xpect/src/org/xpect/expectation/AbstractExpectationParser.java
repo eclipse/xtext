@@ -71,7 +71,7 @@ public class AbstractExpectationParser {
 		int slStart = param.indexOf("-->");
 		if (slStart >= 0) {
 			slStart += "-->".length();
-			if (Character.isWhitespace(document.charAt(slStart)))
+			if (Character.isWhitespace(param.charAt(slStart)))
 				slStart++;
 			int start = paramStart + slStart;
 			return new SingleLineExpectationRegion(start, paramEnd - start);
