@@ -35,8 +35,8 @@ import org.xpect.parameter.IParameterParser.IMultiParameterParser;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterParser.MultiParameterParser;
 import org.xpect.parameter.ParameterParser.ParameterParserImpl;
-import org.xpect.util.IRegion;
-import org.xpect.util.Region;
+import org.xpect.text.IRegion;
+import org.xpect.text.Region;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

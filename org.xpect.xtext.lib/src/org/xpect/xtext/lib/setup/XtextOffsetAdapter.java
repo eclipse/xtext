@@ -28,7 +28,7 @@ import org.xpect.parameter.AbstractOffsetProvider;
 import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterProvider;
-import org.xpect.util.IRegion;
+import org.xpect.text.IRegion;
 
 import com.google.common.collect.Sets;
 

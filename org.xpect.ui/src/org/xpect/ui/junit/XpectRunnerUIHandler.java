@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.internal.junit.model.TestElement;
 import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jdt.junit.model.ITestSuiteElement;
@@ -27,7 +26,6 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XpectRunnerUIHandler implements IRunnerUIHandler {
 
 	@Inject
@@ -37,15 +35,19 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 		Map<String, String> parsed = parse(ctx);
 		String file = parsed.get("file");
 		URI uri = file == null ? null : URI.createURI(file);
-		CompareAction compareAction = new CompareAction(ctx, uri);
+		CompareAction compareAction = new CompareAction(ctx);
 		if (compareAction.isEnabled())
 			menu.add(compareAction);
-		if (file != null)
-			menu.add(new OpenFileAction(globalOpener, uri, "Go to XPECT", "Show XPECT statement in the Xpect file editor."));
+		if (file != null) {
+			if (uri.hasFragment())
+				menu.add(new OpenFileAction(globalOpener, uri, "Go to XPECT", "Show XPECT statement in the Xpect file editor."));
+			else
+				menu.add(new OpenFileAction(globalOpener, uri, "Go to File", "Open file in the Xpect editor."));
+		}
 		String method = parsed.get("method");
 		if (method != null)
 			menu.add(new OpenJavaMethodAction(ctx, method, "Go to Method", "Show Java Method declaration"));
-		return true;
+		return false;
 	}
 
 	protected Map<String, String> parse(ITestElement element) {
@@ -57,13 +59,14 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 	}
 
 	public boolean handleDoubleClick(ViewPart part, ITestElement ctx) {
+		CompareAction compareAction = new CompareAction(ctx);
+		if (compareAction.isEnabled()) {
+			compareAction.run();
+			return true;
+		}
 		Map<String, String> parsed = parse(ctx);
 		String file = parsed.get("file");
 		URI uri = file == null ? null : URI.createURI(file);
-		if (ctx instanceof TestElement && ((TestElement) ctx).isComparisonFailure()) {
-			new CompareAction(ctx, uri).run();
-			return true;
-		}
 		if (file != null) {
 			new OpenFileAction(globalOpener, uri, "foo", "bar").run();
 			return true;

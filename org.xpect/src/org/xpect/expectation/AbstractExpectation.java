@@ -14,8 +14,8 @@ import java.util.Map;
 
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterProvider;
-import org.xpect.util.IRegion;
-import org.xpect.util.Region;
+import org.xpect.text.IRegion;
+import org.xpect.text.Region;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;

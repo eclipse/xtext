@@ -27,8 +27,8 @@ import org.xpect.XpectInvocation;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterProvider;
 import org.xpect.registry.DefaultBinding;
+import org.xpect.text.IRegion;
 import org.xpect.ui.util.XpectFileAccess;
-import org.xpect.util.IRegion;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;

@@ -10,6 +10,8 @@ package org.xpect.ui.junit;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.compare.CompareConfiguration;
@@ -26,10 +28,15 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jdt.internal.junit.model.TestElement;
-import org.eclipse.jdt.junit.model.ITestElement;
+import org.eclipse.jdt.junit.model.ITestCaseElement;
+import org.eclipse.jdt.junit.model.ITestElement.FailureTrace;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Exceptions;
+import org.xpect.text.IReplacement;
+import org.xpect.text.Text;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -111,40 +118,65 @@ public class FailureCompareEditorInput extends CompareEditorInput {
 	}
 
 	private IFile file;
-	private ITestElement testElement;
+	private Collection<ITestCaseElement> testElements;
 
-	public FailureCompareEditorInput(ITestElement testElement, IFile file) {
+	public FailureCompareEditorInput(IFile file, Collection<ITestCaseElement> testElements) {
 		super(createConfiguration(file));
-		this.testElement = testElement;
+		Preconditions.checkNotNull(file);
+		Preconditions.checkArgument(testElements.size() > 0);
+		this.testElements = testElements;
 		this.file = file;
 	}
 
 	@Override
 	public String getTitle() {
-		if (file != null)
-			return file.getName();
-		return super.getTitle();
+		return file.getName();
 	}
 
 	protected Object prepareInput(IProgressMonitor pm) {
-		TestElement te = (TestElement) testElement;
-		ResourceNode ancestor = null;
-		if (file != null) {
-			ancestor = new ResourceNode(file);
-			if (!Strings.isEmpty(te.getExpected()))
-				try {
-					String original = new String(ancestor.getContent(), file.getCharset());
-					if (!te.getExpected().equals(original))
-						getCompareConfiguration().setProperty(ICompareUIConstants.PROP_ANCESTOR_VISIBLE, Boolean.TRUE);
-				} catch (UnsupportedEncodingException e) {
-					LOG.error(e.getMessage(), e);
-				} catch (CoreException e) {
-					LOG.error(e.getMessage(), e);
+		try {
+			ResourceNode ancestor = new ResourceNode(file);
+			String ancestorContent = getContent(ancestor);
+			String leftContent, rightContent;
+			if (testElements.size() == 1) {
+				FailureTrace trace = testElements.iterator().next().getFailureTrace();
+				leftContent = trace.getExpected();
+				rightContent = trace.getActual();
+			} else {
+				List<IReplacement> expectations = Lists.newArrayList();
+				List<IReplacement> actuals = Lists.newArrayList();
+				Text ancestorText = new Text(ancestorContent);
+				for (ITestCaseElement t : testElements) {
+					IReplacement expected = ancestorText.replacementTo(t.getFailureTrace().getExpected());
+					IReplacement actual = ancestorText.replacementTo(t.getFailureTrace().getActual());
+					if (expected != null)
+						expectations.add(expected);
+					if (actual != null)
+						actuals.add(actual);
 				}
+				leftContent = ancestorText.with(expectations);
+				rightContent = ancestorText.with(actuals);
+			}
+			if (!leftContent.equals(ancestorContent))
+				getCompareConfiguration().setProperty(ICompareUIConstants.PROP_ANCESTOR_VISIBLE, Boolean.TRUE);
+			CompareItem left = new EditableCompareItem("Left", leftContent, file);
+			CompareItem right = new CompareItem("Right", rightContent);
+			return new DiffNode(null, Differencer.CHANGE | Differencer.DIRECTION_MASK, ancestor, left, right);
+		} catch (Throwable t) {
+			LOG.error(t.getMessage(), t);
+			Exceptions.throwUncheckedException(t);
+			return null;
 		}
-		CompareItem left = new EditableCompareItem("Left", te.getExpected(), file);
-		CompareItem right = new CompareItem("Right", te.getActual());
-		return new DiffNode(null, Differencer.CHANGE | Differencer.DIRECTION_MASK, ancestor, left, right);
+	}
+
+	private String getContent(ResourceNode ancestor) {
+		try {
+			return new String(ancestor.getContent(), file.getCharset());
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		} catch (CoreException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

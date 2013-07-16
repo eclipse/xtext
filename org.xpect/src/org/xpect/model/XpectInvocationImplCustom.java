@@ -19,8 +19,8 @@ import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterProvider;
 import org.xpect.registry.ILanguageInfo;
+import org.xpect.text.IRegion;
 import org.xpect.util.IJavaReflectAccess;
-import org.xpect.util.IRegion;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;

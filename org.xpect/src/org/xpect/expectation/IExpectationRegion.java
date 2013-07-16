@@ -1,6 +1,6 @@
 package org.xpect.expectation;
 
-import org.xpect.util.IRegion;
+import org.xpect.text.IRegion;
 
 /**
  * 

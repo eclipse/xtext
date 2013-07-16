@@ -9,6 +9,7 @@ package org.xpect.runner;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -32,8 +33,10 @@ import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.setup.SetupInitializer;
 import org.xpect.util.IssueVisualizer;
+import org.xpect.util.TestDataUtil;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -70,7 +73,7 @@ public class XpectFileRunner {
 	}
 
 	protected Description createDescription() {
-		String title = runner.getUriProvider().getTitle(getUri());
+		String title = getFullName();
 		if (error == null) {
 			Description result = Description.createSuiteDescription(title);
 			for (AbstractTestRunner child : getChildren())
@@ -79,6 +82,15 @@ public class XpectFileRunner {
 		} else {
 			return Description.createTestDescription(runner.getTestClass().getJavaClass(), title);
 		}
+	}
+
+	private String getFullName() {
+		Map<String, String> result = Maps.newLinkedHashMap();
+		result.put("title", runner.getUriProvider().getTitle(getUri()));
+		result.put("file", getUri().toString());
+		Class<?> javaClass = xpectFile.getTest().getTestClassOrSuite().getTestOrSuite().getJavaClass();
+		result.put("class", javaClass.getName());
+		return TestDataUtil.encode(result);
 	}
 
 	protected ISetupInitializer<Object> createSetupInitializer() {

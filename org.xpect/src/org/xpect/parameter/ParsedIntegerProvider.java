@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
-import org.xpect.util.IRegion;
+import org.xpect.text.IRegion;
 
 public class ParsedIntegerProvider extends IntegerProvider implements IParsedParameterProvider {
 

@@ -10,7 +10,7 @@ package org.xpect.expectation;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.xpect.XpectInvocation;
-import org.xpect.util.Region;
+import org.xpect.text.Region;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

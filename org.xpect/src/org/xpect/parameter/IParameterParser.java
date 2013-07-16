@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 import java.util.List;
 
 import org.xpect.XpectInvocation;
-import org.xpect.util.IRegion;
+import org.xpect.text.IRegion;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
