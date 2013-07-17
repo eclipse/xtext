@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
@@ -43,6 +44,11 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
   public IAppendable build(final IAppendable appendable) {
     IAppendable _xblockexpression = null;
     {
+      boolean _isOverrideFlag = this.isOverrideFlag();
+      if (_isOverrideFlag) {
+        IAppendable _append = appendable.append("@Override");
+        _append.newLine();
+      }
       JvmVisibility _visibility = this.getVisibility();
       this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
       boolean _isAbstractFlag = this.isAbstractFlag();
@@ -53,14 +59,16 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
       if (_isStaticFlag) {
         appendable.append("static ");
       }
+      List<JvmTypeParameter> _typeParameters = this.getTypeParameters();
+      IAppendable _appendTypeParameters = this.appendTypeParameters(appendable, _typeParameters);
       JvmTypeReference _returnType = this.getReturnType();
-      IAppendable _appendType = this.appendType(appendable, _returnType, "void");
-      IAppendable _append = _appendType.append(" ");
+      IAppendable _appendType = this.appendType(_appendTypeParameters, _returnType, "void");
+      IAppendable _append_1 = _appendType.append(" ");
       String _methodName = this.getMethodName();
-      IAppendable _append_1 = _append.append(_methodName);
-      List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
-      IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
-      this.appendDefaultBody(_appendParameters, ";");
+      IAppendable _append_2 = _append_1.append(_methodName);
+      IAppendable _appendParameters = this.appendParameters(_append_2);
+      IAppendable _appendThrowsClause = this.appendThrowsClause(_appendParameters);
+      this.appendBody(_appendThrowsClause, ";");
       boolean _isAbstractFlag_1 = this.isAbstractFlag();
       if (_isAbstractFlag_1) {
         appendable.append(";");
