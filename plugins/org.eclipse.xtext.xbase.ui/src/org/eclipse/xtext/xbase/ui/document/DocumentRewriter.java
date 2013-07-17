@@ -162,12 +162,18 @@ public class DocumentRewriter {
 			documentRewriter.getImportManager().appendType(type, builder);
 		}
 
+		public int getTotalOffset() {
+			return whitespaceHelper.getTotalOffset();
+		}
+		
+		public int getTotalLength() {
+			return whitespaceHelper.getTotalLength();
+		}
+		
 		public boolean isOverlap(Section other) {
-			return (whitespaceHelper.getTotalOffset() < other.whitespaceHelper.getTotalOffset()
-					+ other.whitespaceHelper.getTotalLength()
-					&& whitespaceHelper.getTotalOffset() + whitespaceHelper.getTotalLength() > other.whitespaceHelper
-							.getTotalOffset())
-							|| whitespaceHelper.getTotalOffset() == other.whitespaceHelper.getTotalOffset();
+			return getTotalOffset() == other.getTotalOffset() 
+					|| (getTotalOffset() < other.getTotalOffset() + other.getTotalLength()
+						&& getTotalOffset() + getTotalLength() > other.getTotalOffset());
 		}
 
 		public int getBaseIndentationLevel() {
@@ -177,15 +183,15 @@ public class DocumentRewriter {
 		public void append(CharSequence content, int indentationDelta) {
 			if (indentationDelta < 0)
 				append(content.toString().replaceAll(
-						Pattern.quote(getLineSeparator() + indentString(-indentationDelta)), getLineSeparator()));
+						Pattern.quote(getLineSeparator() + createIndentString(-indentationDelta)), getLineSeparator()));
 			else if (indentationDelta > 0)
 				append(content.toString().replaceAll(Pattern.quote(getLineSeparator()),
-						getLineSeparator() + indentString(indentationDelta)));
+						getLineSeparator() + createIndentString(indentationDelta)));
 			else
 				append(content);
 		}
 
-		protected String indentString(int indentLevel) {
+		protected String createIndentString(int indentLevel) {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < getIndentationLevel(); i++) {
 				sb.append(indentString);
@@ -283,5 +289,13 @@ public class DocumentRewriter {
 			LOG.error("Error calculating indentation at offset", e);
 		}
 		return 0;
+	}
+	
+	public String getLineSeparator() {
+		return lineSeparator;
+	}
+	
+	public String getIndentString() {
+		return indentString;
 	}
 }

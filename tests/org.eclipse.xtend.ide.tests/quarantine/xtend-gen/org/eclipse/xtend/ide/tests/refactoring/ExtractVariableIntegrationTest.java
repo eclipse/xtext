@@ -262,6 +262,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Date");
     _builder.newLine();
+    _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
@@ -277,6 +278,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Date");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
