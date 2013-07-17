@@ -131,6 +131,7 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 	def void testTypeName() throws Exception {
 		'''
 			import java.util.Date
+			
 			class Foo {
 				def bar() {
 					$new Date()$
@@ -138,6 +139,7 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 			}
 		'''.assertAfterExtract('''
 			import java.util.Date
+			
 			class Foo {
 				def bar() {
 					val date = new Date()
