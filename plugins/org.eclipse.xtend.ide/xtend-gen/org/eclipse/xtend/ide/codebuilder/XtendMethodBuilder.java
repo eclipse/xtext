@@ -15,6 +15,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
@@ -51,13 +52,22 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
   public IAppendable build(final IAppendable appendable) {
     IAppendable _xblockexpression = null;
     {
-      IAppendable _append = appendable.append("def ");
+      String _xifexpression = null;
+      boolean _isOverrideFlag = this.isOverrideFlag();
+      if (_isOverrideFlag) {
+        _xifexpression = "override ";
+      } else {
+        _xifexpression = "def ";
+      }
+      IAppendable _append = appendable.append(_xifexpression);
       JvmVisibility _visibility = this.getVisibility();
       this.appendVisibility(_append, _visibility, JvmVisibility.PUBLIC);
       boolean _isStaticFlag = this.isStaticFlag();
       if (_isStaticFlag) {
         appendable.append("static ");
       }
+      List<JvmTypeParameter> _typeParameters = this.getTypeParameters();
+      this.appendTypeParameters(appendable, _typeParameters);
       boolean _isAbstractFlag = this.isAbstractFlag();
       if (_isAbstractFlag) {
         JvmTypeReference _returnType = this.getReturnType();
@@ -66,10 +76,10 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
       }
       String _methodName = this.getMethodName();
       IAppendable _append_1 = appendable.append(_methodName);
-      List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
-      IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
-      IAppendable _appendDefaultBody = this.appendDefaultBody(_appendParameters, "");
-      _xblockexpression = (_appendDefaultBody);
+      IAppendable _appendParameters = this.appendParameters(_append_1);
+      IAppendable _appendThrowsClause = this.appendThrowsClause(_appendParameters);
+      IAppendable _appendBody = this.appendBody(_appendThrowsClause, "");
+      _xblockexpression = (_appendBody);
     }
     return _xblockexpression;
   }

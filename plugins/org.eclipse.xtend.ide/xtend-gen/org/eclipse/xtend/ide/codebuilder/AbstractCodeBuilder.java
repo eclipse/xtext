@@ -9,27 +9,25 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
-import org.eclipse.xtend.ide.codebuilder.VariableNameAcceptor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
-import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
-import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
@@ -77,10 +75,6 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   public void setContext(final EObject context) {
     this._context = context;
   }
-  
-  @Inject
-  @Extension
-  private JdtVariableCompletions _jdtVariableCompletions;
   
   @Inject
   @Extension
@@ -191,45 +185,42 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     return _xblockexpression;
   }
   
-  protected abstract TypeReferenceSerializer getTypeReferenceSerializer();
-  
-  protected IAppendable appendParameters(final IAppendable appendable, final List<JvmTypeReference> parameterTypes) {
+  protected IAppendable appendTypeParameters(final IAppendable appendable, final List<JvmTypeParameter> typeParameters) {
     IAppendable _xblockexpression = null;
     {
-      final Iterator<JvmTypeReference> iterator = parameterTypes.iterator();
-      appendable.append("(");
-      final HashSet<String> notAllowed = CollectionLiterals.<String>newHashSet();
+      final Iterator<JvmTypeParameter> iterator = typeParameters.iterator();
       boolean _hasNext = iterator.hasNext();
-      boolean _while = _hasNext;
-      while (_while) {
-        {
-          final JvmTypeReference typeRef = iterator.next();
-          boolean _notEquals = (!Objects.equal(typeRef, null));
-          if (_notEquals) {
-            this.appendType(appendable, typeRef, "Object");
-            appendable.append(" ");
-            VariableNameAcceptor _variableNameAcceptor = new VariableNameAcceptor(notAllowed);
-            final VariableNameAcceptor acceptor = _variableNameAcceptor;
-            String _identifierOrObject = this.getIdentifierOrObject(typeRef);
-            EObject _context = this.getContext();
-            this._jdtVariableCompletions.getVariableProposals(_identifierOrObject, _context, 
-              VariableType.PARAMETER, notAllowed, acceptor);
-            String _variableName = acceptor.getVariableName();
-            appendable.append(_variableName);
+      if (_hasNext) {
+        appendable.append("<");
+        boolean _dowhile = false;
+        do {
+          {
+            final JvmTypeParameter typeParameter = iterator.next();
+            boolean _notEquals = (!Objects.equal(typeParameter, null));
+            if (_notEquals) {
+              String _name = typeParameter.getName();
+              appendable.append(_name);
+              EList<JvmTypeConstraint> _constraints = typeParameter.getConstraints();
+              boolean _notEquals_1 = (!Objects.equal(_constraints, null));
+              if (_notEquals_1) {
+              }
+            }
+            boolean _hasNext_1 = iterator.hasNext();
+            if (_hasNext_1) {
+              appendable.append(",");
+            }
           }
           boolean _hasNext_1 = iterator.hasNext();
-          if (_hasNext_1) {
-            appendable.append(", ");
-          }
-        }
-        boolean _hasNext_1 = iterator.hasNext();
-        _while = _hasNext_1;
+          _dowhile = _hasNext_1;
+        } while(_dowhile);
+        appendable.append("> ");
       }
-      IAppendable _append = appendable.append(")");
-      _xblockexpression = (_append);
+      _xblockexpression = (appendable);
     }
     return _xblockexpression;
   }
+  
+  protected abstract TypeReferenceSerializer getTypeReferenceSerializer();
   
   protected String getIdentifierOrObject(final JvmTypeReference typeReference) {
     String _switchResult = null;

@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.codebuilder
 
 import com.google.inject.Inject
-import java.util.List
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmTypeReference
@@ -21,32 +20,14 @@ import static org.eclipse.xtext.common.types.JvmVisibility.*
 /**
  * @author Jan Koehnlein
  */
-abstract class AbstractMethodBuilder extends AbstractCodeBuilder {
+abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
 	
 	@Property String methodName
 	@Property JvmTypeReference returnType
-	@Property List<JvmTypeReference> parameterTypes = emptyList
 	@Property boolean staticFlag
 	@Property boolean abstractFlag
+	@Property boolean overrideFlag
 
-	def protected appendDefaultBody(IAppendable appendable, String statementSeparator) {
-		if(!abstractFlag) 
-			appendable.append(' {').increaseIndentation.newLine
-				.append('throw new UnsupportedOperationException("TODO: auto-generated method stub")')
-				.append(statementSeparator)
-				.decreaseIndentation.newLine
-				.append('}')
-		appendable
-	}
-	
-	override getImage() {
-		switch visibility {
-			case PRIVATE: 'methpri_obj.gif'
-			case PROTECTED: 'methpro_obj.gif'
-			case PUBLIC: 'methpub_obj.gif'
-			default: 'methdef_obj.gif'
-		}
-	}
 }
 
 class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Xtend {
@@ -64,15 +45,17 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.X
 	}
 	
 	override build(IAppendable appendable) {
-		appendable.append('def ')
+		appendable.append(if(overrideFlag) 'override ' else 'def ')
 			.appendVisibility(visibility, PUBLIC)
 		if(staticFlag)
 			appendable.append('static ')
+		appendable.appendTypeParameters(typeParameters)
 		if(abstractFlag)
 			appendable.appendType(returnType, "void").append(' ')
 		appendable.append(methodName)
-			.appendParameters(parameterTypes)
-			.appendDefaultBody('')
+			.appendParameters()
+			.appendThrowsClause()
+			.appendBody('')
 	}
 
 	override getInsertOffset() {
@@ -101,6 +84,8 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Ja
 	}
 	
 	override build(IAppendable appendable) {
+		if(overrideFlag)
+			appendable.append("@Override").newLine 
 		appendable
 			.appendVisibility(visibility, DEFAULT)
 		if(abstractFlag)
@@ -108,10 +93,12 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Ja
 		if(staticFlag)
 			appendable.append('static ')
 		appendable
+			.appendTypeParameters(typeParameters)
 			.appendType(returnType, "void").append(' ')
 			.append(methodName)
-			.appendParameters(parameterTypes)
-			.appendDefaultBody(';')
+			.appendParameters()
+			.appendThrowsClause()
+			.appendBody(';')
 		if(abstractFlag)
 			appendable.append(';')
 		appendable
