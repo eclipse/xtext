@@ -8,10 +8,8 @@
 package org.eclipse.xtend.ide.codebuilder
 
 import com.google.inject.Inject
-import java.util.List
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
@@ -21,25 +19,9 @@ import static org.eclipse.xtext.common.types.JvmVisibility.*
 /**
  * @author Jan Koehnlein
  */
-abstract class AbstractConstructorBuilder extends AbstractCodeBuilder {
-	
-	@Property List<JvmTypeReference> parameterTypes = emptyList
-
-	def protected appendDefaultBody(IAppendable appendable, String statementSeparator) {
-		appendable.append('throw new UnsupportedOperationException("TODO: auto-generated method stub")')
-			.append(statementSeparator)
-	}
-	
-	override getImage() {
-		switch visibility {
-			case PRIVATE: 'methpri_obj.gif'
-			case PROTECTED: 'methpro_obj.gif'
-			case PUBLIC: 'methpub_obj.gif'
-			default: 'methdef_obj.gif'
-		}
-	}
+abstract class AbstractConstructorBuilder extends AbstractExecutableBuilder {
 }
-
+ 
 class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject XtypeTypeReferenceSerializer typeRefSerializer
@@ -54,11 +36,9 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 		appendable
 			.appendVisibility(visibility, PUBLIC)
 			.append('new')
-			.appendParameters(parameterTypes)
-			.append(' {').increaseIndentation.newLine
-			.appendDefaultBody('')
-			.decreaseIndentation.newLine
-			.append('}')
+			.appendParameters()
+			.appendThrowsClause()
+			.appendBody('')
 	}
 
 	override getInsertOffset() {
@@ -86,11 +66,9 @@ class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICode
 		appendable
 			.appendVisibility(visibility, PUBLIC)
 			.append(owner.simpleName)
-			.appendParameters(parameterTypes)
-			.append(' {').increaseIndentation.newLine
-			.appendDefaultBody(';')
-			.decreaseIndentation.newLine
-			.append('}')
+			.appendParameters()
+			.appendThrowsClause()
+			.appendBody(';')
 	}
 
 	override getIType() {

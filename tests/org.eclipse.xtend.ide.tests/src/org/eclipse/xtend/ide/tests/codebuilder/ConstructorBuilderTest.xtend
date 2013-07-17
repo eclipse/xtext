@@ -14,7 +14,7 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 	@Inject extension TypeReferences
 	
 	@Test
-	def testXtendMethod() {
+	def testXtendConstructor() {
 		(createConstructorBuilder(xtendClass) => [
 			context = xtendClass
 			visibility = JvmVisibility::PROTECTED
@@ -26,7 +26,7 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 	}
 	
 	@Test
-	def testJavaMethod() {
+	def testJavaConstructor() {
 		(createConstructorBuilder(javaClass) => [
 			context = javaClass
 			visibility = JvmVisibility::PRIVATE
@@ -36,4 +36,79 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 			  «DEFAULT_BODY»;
 			}''') 
 	}
+	
+	@Test
+	def testXtendParameterNames() {
+		(createConstructorBuilder(xtendClass) => [
+			context = xtendClass
+			visibility = JvmVisibility::PROTECTED
+			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef, javaClass.createTypeRef)
+			parameterNames = #['bar','foo']
+		]).assertBuilds('''
+			protected new(Foo bar, Bar foo) {
+			  «DEFAULT_BODY»
+			}''')
+	}
+	
+	@Test
+	def testJavaParameterNames() {
+		(createConstructorBuilder(javaClass) => [
+			context = javaClass
+			visibility = JvmVisibility::PRIVATE
+			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef, javaClass.createTypeRef)
+			parameterNames = #['bar','foo']
+		]).assertBuilds('''
+			private Bar(Foo bar, Bar foo) {
+			  «DEFAULT_BODY»;
+			}''') 
+	}
+	
+	@Test
+	def testXtendExceptions() {
+		(createConstructorBuilder(xtendClass) => [
+			context = xtendClass
+			exceptions = #[ Exception.getTypeForName(xtendClass), RuntimeException.getTypeForName(xtendClass)]
+		]).assertBuilds('''
+			new() throws Exception, RuntimeException {
+			  «DEFAULT_BODY»
+			}''')
+		
+	}
+	
+	@Test
+	def testJavaException() {
+		(createConstructorBuilder(javaClass) => [
+			context = javaClass
+			exceptions = #[ Exception.getTypeForName(javaClass), RuntimeException.getTypeForName(javaClass)]
+		]).assertBuilds('''
+			Bar() throws Exception, RuntimeException {
+			  «DEFAULT_BODY»;
+			}''')
+	}
+	
+	@Test
+	def testXtendCustomBody() {
+		(createConstructorBuilder(xtendClass) => [
+			context = xtendClass
+			body = 'return'
+		]).assertBuilds('''
+			new() {
+			  return
+			}''')
+		
+	}
+	
+	@Test
+	def testJavaCustomBody() {
+		(createConstructorBuilder(javaClass) => [
+			context = javaClass
+			body = 'return'
+		]).assertBuilds('''
+			Bar() {
+			  return;
+			}''')
+	}
+	
+	
+	
 }
