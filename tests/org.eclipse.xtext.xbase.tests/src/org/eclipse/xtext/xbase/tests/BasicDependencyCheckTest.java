@@ -17,7 +17,7 @@ import org.junit.Test;
 public class BasicDependencyCheckTest {
 
 	/**
-	 * Check that org.eclipse.xtext.xbase do not depend on org.eclipse.jdt.core
+	 * Check that org.eclipse.xtext.xbase doesn't depend on org.eclipse.jdt.core
 	 * see Bug [364082] Optional dependency to JDT from xbase core bundle
 	 */
 	@Test
