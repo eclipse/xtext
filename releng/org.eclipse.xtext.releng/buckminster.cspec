@@ -12,7 +12,6 @@
         <cs:dependency name="org.apache.commons.lang.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.log4j" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.log4j.source" componentType="osgi.bundle"/>
-        <cs:dependency name="org.easymock" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.debug.ui" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.emf.common" componentType="osgi.bundle"/>
