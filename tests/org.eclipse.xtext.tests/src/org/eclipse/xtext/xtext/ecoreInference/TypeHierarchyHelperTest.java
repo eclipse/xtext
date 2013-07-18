@@ -8,14 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
-import static org.easymock.EasyMock.*;
-
 import java.util.Collections;
 
-import org.easymock.EasyMock;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -38,12 +36,20 @@ public class TypeHierarchyHelperTest extends Assert {
 	private EClassifierInfos infos;
 	private EDataType INT;
 	private EDataType STRING;
-	private ErrorAcceptor errorAcceptorMock;
+	private FailOnErrorAcceptor errorAcceptorMock;
 	private GeneratedMetamodel metamodel;
+
+	private final class FailOnErrorAcceptor implements ErrorAcceptor {
+
+		public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
+			fail("Should not be called");
+		}
+
+	}
 
 	@Before
 	public void setUp() throws Exception {
-		errorAcceptorMock = createMock(ErrorAcceptor.class);
+		errorAcceptorMock = new FailOnErrorAcceptor();
 		metamodel = XtextFactory.eINSTANCE.createGeneratedMetamodel();
 		Grammar grammar = XtextFactory.eINSTANCE.createGrammar();
 		grammar.getMetamodelDeclarations().add(metamodel);
@@ -56,22 +62,21 @@ public class TypeHierarchyHelperTest extends Assert {
 		pack.setNsPrefix("myPrefix");
 		metamodel.setEPackage(pack);
 	}
-	
+
 	private void liftUpFeatures() throws Exception {
 		initializeHelper();
 		helper.liftUpFeaturesRecursively();
-		EasyMock.verify(errorAcceptorMock);
 	}
 
 	private void initializeHelper() {
-		EasyMock.replay(errorAcceptorMock);
 		helper = new TypeHierarchyHelper(null, infos, errorAcceptorMock);
 	}
 
 	private EClassInfo addClass(String name, boolean isGenerated) {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName(name);
-		EClassInfo info = (EClassInfo) EClassifierInfo.createEClassInfo(eClass, isGenerated, Collections.<String>emptySet(), GrammarUtil.getGrammar(metamodel));
+		EClassInfo info = (EClassInfo) EClassifierInfo.createEClassInfo(eClass, isGenerated,
+				Collections.<String> emptySet(), GrammarUtil.getGrammar(metamodel));
 		infos.addInfo(metamodel, name, info);
 		return info;
 	}
@@ -95,7 +100,8 @@ public class TypeHierarchyHelperTest extends Assert {
 		return feature;
 	}
 
-	@Test public void testSimpeCase01() throws Exception {
+	@Test
+	public void testSimpeCase01() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
@@ -115,7 +121,8 @@ public class TypeHierarchyHelperTest extends Assert {
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
 	}
 
-	@Test public void testSimpeCase02() throws Exception {
+	@Test
+	public void testSimpeCase02() throws Exception {
 		// no uplift for less than two children
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
@@ -131,7 +138,8 @@ public class TypeHierarchyHelperTest extends Assert {
 		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
 	}
 
-	@Test public void testRecursiveUplift01() throws Exception {
+	@Test
+	public void testRecursiveUplift01() throws Exception {
 		// no uplift for less than two children
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
@@ -162,7 +170,8 @@ public class TypeHierarchyHelperTest extends Assert {
 		assertEquals(0, e.getEClass().getEStructuralFeatures().size());
 	}
 
-	@Test public void testNikolaus() throws Exception {
+	@Test
+	public void testNikolaus() throws Exception {
 		// no uplift for less than two children
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
@@ -196,7 +205,8 @@ public class TypeHierarchyHelperTest extends Assert {
 		assertEquals(1, e.getEClass().getEStructuralFeatures().size());
 	}
 
-	@Test public void testImcompatipleFeatures() throws Exception {
+	@Test
+	public void testImcompatipleFeatures() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
@@ -216,7 +226,8 @@ public class TypeHierarchyHelperTest extends Assert {
 		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
 	}
 
-	@Test public void testReferences() throws Exception {
+	@Test
+	public void testReferences() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
@@ -236,34 +247,36 @@ public class TypeHierarchyHelperTest extends Assert {
 		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
 	}
-	
-	@Test public void testConfigurationOfLiftedReference() throws Exception {
+
+	@Test
+	public void testConfigurationOfLiftedReference() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
-		
+
 		b.addSupertype(a);
 		c.addSupertype(a);
 		EReference refB = addReference(b, a, "ref");
 		refB.setContainment(true);
 		EReference refC = addReference(c, a, "ref");
 		refC.setContainment(true);
-		
+
 		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
-		
+
 		liftUpFeatures();
-		
+
 		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
-		
+
 		EReference refA = (EReference) a.getEClass().getEStructuralFeatures().get(0);
 		assertTrue(refA.isContainment());
 	}
 
-	@Test public void testDublicateDerivedFeature() throws Exception {
+	@Test
+	public void testDublicateDerivedFeature() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
 		EClassInfo c = addClass("c");
@@ -271,11 +284,11 @@ public class TypeHierarchyHelperTest extends Assert {
 		c.addSupertype(b);
 		addAttribute(a, INT, "f");
 		addAttribute(c, INT, "f");
-		
+
 		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
-		
+
 		initializeHelper();
 		helper.removeDuplicateDerivedFeatures();
 
