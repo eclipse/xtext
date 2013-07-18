@@ -19,7 +19,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/main/generated</source>
+								<source>src/main/java2</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -31,7 +31,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/test/generated</source>
+								<source>src/test/java2</source>
 							</sources>
 						</configuration>
 					</execution>

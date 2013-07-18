@@ -25,7 +25,7 @@ class MyAnnotationProcessor extends AbstractClassProcessor {
 		assertTrue(sourceFolder.path.endsWith("/it/compile/filesystemaccess-client/src/main/java"))
 
 		assertNotNull("targetfolder is set", targetFolder)
-		assertTrue("targetfolder exists", targetFolder.exists)
+		//assertTrue("targetfolder exists", targetFolder.exists)
 		assertEquals("targetfolder name is 'xtend'","xtend", targetFolder.name)
 		assertTrue(targetFolder.path.endsWith("/it/compile/filesystemaccess-client/src/main/generated-sources/xtend"))
 
