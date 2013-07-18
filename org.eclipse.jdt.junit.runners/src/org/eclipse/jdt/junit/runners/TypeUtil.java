@@ -61,14 +61,17 @@ public class TypeUtil {
 	}
 
 	public static IType findType(ITestElement element) {
-		String className;
+		String className = null;
 		if (element instanceof ITestCaseElement)
 			className = ((ITestCaseElement) element).getTestClassName();
 		else if (element instanceof ITestSuiteElement)
 			className = ((ITestSuiteElement) element).getSuiteTypeName();
-		else
-			return null;
-		return findType(element.getTestRunSession().getLaunchedProject(), className);
+		IType type = null;
+		if (className != null)
+			type = findType(element.getTestRunSession().getLaunchedProject(), className);
+		if (type == null && element.getParentContainer() instanceof ITestElement)
+			return findType((ITestElement) element.getParentContainer());
+		return type;
 	}
 
 	// copied from
@@ -80,35 +83,36 @@ public class TypeUtil {
 		final String dottedName = className.replace('$', '.'); // for nested
 																// classes...
 		try {
-//			PlatformUI.getWorkbench().getProgressService().busyCursorWhile(new IRunnableWithProgress() {
-//				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-//					try {
-						if (project != null) {
-							result[0] = internalFindType(project, dottedName, new HashSet<IJavaProject>(), new NullProgressMonitor());
-						}
-						if (result[0] == null) {
-							int lastDot = dottedName.lastIndexOf('.');
-							TypeNameMatchRequestor nameMatchRequestor = new TypeNameMatchRequestor() {
-								@Override
-								public void acceptTypeNameMatch(TypeNameMatch match) {
-									result[0] = match.getType();
-								}
-							};
-							new SearchEngine().searchAllTypeNames(lastDot >= 0 ? dottedName.substring(0, lastDot).toCharArray() : null,
-									SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE,
-									(lastDot >= 0 ? dottedName.substring(lastDot + 1) : dottedName).toCharArray(),
-									SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, IJavaSearchConstants.TYPE,
-									SearchEngine.createWorkspaceScope(), nameMatchRequestor,
-									IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
-						}
-//					} catch (JavaModelException e) {
-//						throw new InvocationTargetException(e);
-//					}
-//				}
-//			});
-//		} catch (InvocationTargetException e) {
-//			JUnitPlugin.log(e);
-//		} catch (InterruptedException e) {
+			// PlatformUI.getWorkbench().getProgressService().busyCursorWhile(new
+			// IRunnableWithProgress() {
+			// public void run(IProgressMonitor monitor) throws
+			// InvocationTargetException, InterruptedException {
+			// try {
+			if (project != null) {
+				result[0] = internalFindType(project, dottedName, new HashSet<IJavaProject>(), new NullProgressMonitor());
+			}
+			if (result[0] == null) {
+				int lastDot = dottedName.lastIndexOf('.');
+				TypeNameMatchRequestor nameMatchRequestor = new TypeNameMatchRequestor() {
+					@Override
+					public void acceptTypeNameMatch(TypeNameMatch match) {
+						result[0] = match.getType();
+					}
+				};
+				new SearchEngine().searchAllTypeNames(lastDot >= 0 ? dottedName.substring(0, lastDot).toCharArray() : null,
+						SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, (lastDot >= 0 ? dottedName.substring(lastDot + 1)
+								: dottedName).toCharArray(), SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE,
+						IJavaSearchConstants.TYPE, SearchEngine.createWorkspaceScope(), nameMatchRequestor,
+						IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
+			}
+			// } catch (JavaModelException e) {
+			// throw new InvocationTargetException(e);
+			// }
+			// }
+			// });
+			// } catch (InvocationTargetException e) {
+			// JUnitPlugin.log(e);
+			// } catch (InterruptedException e) {
 			// user cancelled
 		} catch (JavaModelException e) {
 			JUnitPlugin.log(e);
