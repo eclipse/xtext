@@ -1,0 +1,45 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.generator.DMGeneratorTest END_SETUP */
+
+/*
+Test the full generated code
+XPECT generated ---
+package pkg1;
+
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+
+@SuppressWarnings("all")
+public class MyEntity {
+  public MyEntity() {
+  }
+  
+  public MyEntity(final Procedure1<MyEntity> initializer) {
+    initializer.apply(this);
+  }
+  
+  private String name;
+  
+  public String getName() {
+    return this.name;
+  }
+  
+  public void setName(final String name) {
+    this.name = name;
+  }
+  
+  @Override
+  public String toString() {
+    String result = new ToStringHelper().toString(this);
+    return result;
+  }
+}
+----
+*/
+ 
+package pkg1 {
+	entity MyEntity {
+		name:String
+	}
+}
+
+

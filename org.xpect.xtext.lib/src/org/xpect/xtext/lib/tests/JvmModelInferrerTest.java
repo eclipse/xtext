@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.tests;
 
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
@@ -26,10 +23,8 @@ import org.xpect.runner.XpectRunner;
 import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.xpect.xtext.lib.util.InMemoryFileSystemAccessFormatter;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -67,32 +62,7 @@ public class JvmModelInferrerTest {
 	private SignatureGenerator jvmSignatureGenerator;
 
 	protected String formatFiles(InMemoryFileSystemAccess fsa, String fileName) {
-		Map<String, CharSequence> files = fsa.getFiles();
-		if (fileName != null) {
-			Map<String, CharSequence> filtered = Maps.newHashMap();
-			for (Map.Entry<String, CharSequence> e : files.entrySet()) {
-				if (e.getKey().endsWith(fileName))
-					filtered.put(e.getKey(), e.getValue());
-			}
-			files = filtered;
-		}
-		if (files.isEmpty())
-			return "(no jvm model has been generated)";
-		else if (files.size() == 1)
-			return files.values().iterator().next().toString().trim();
-		else {
-			List<String> result = Lists.newArrayList();
-			for (Map.Entry<String, CharSequence> e : files.entrySet()) {
-				StringBuilder buf = new StringBuilder();
-				buf.append("-- ");
-				buf.append(e.getKey());
-				buf.append(" --\n  ");
-				buf.append(e.getValue().toString().trim().replace("\n", "\n  "));
-				buf.append("\n-- / --");
-				result.add(buf.toString());
-			}
-			return Joiner.on("\n").join(result);
-		}
+		return new InMemoryFileSystemAccessFormatter().includeOnlyFileNamesEndingWith(fileName).apply(fsa);
 	}
 
 	public JvmModelGenerator getJvmModelGenerator() {

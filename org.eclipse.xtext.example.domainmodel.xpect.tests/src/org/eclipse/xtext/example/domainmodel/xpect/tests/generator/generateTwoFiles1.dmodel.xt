@@ -1,0 +1,87 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.generator.DMGeneratorTest END_SETUP */
+
+/*
+
+
+test generating MyEntity1.java
+XPECT generated file MyEntity1.java ---
+  package pkg1;
+  
+  import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+  import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+  
+  @SuppressWarnings("all")
+  public class MyEntity1 {
+    public MyEntity1() {
+    }
+    
+    public MyEntity1(final Procedure1<MyEntity1> initializer) {
+      initializer.apply(this);
+    }
+    
+    private String name;
+    
+    public String getName() {
+      return this.name;
+    }
+    
+    public void setName(final String name) {
+      this.name = name;
+    }
+    
+    @Override
+    public String toString() {
+      String result = new ToStringHelper().toString(this);
+      return result;
+    }
+  }
+---
+
+
+test generating MyEntity2.java
+XPECT generated file MyEntity2.java ---
+  package pkg1;
+  
+  import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+  import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+  
+  @SuppressWarnings("all")
+  public class MyEntity2 {
+    public MyEntity2() {
+    }
+    
+    public MyEntity2(final Procedure1<MyEntity2> initializer) {
+      initializer.apply(this);
+    }
+    
+    private String id;
+    
+    public String getId() {
+      return this.id;
+    }
+    
+    public void setId(final String id) {
+      this.id = id;
+    }
+    
+    @Override
+    public String toString() {
+      String result = new ToStringHelper().toString(this);
+      return result;
+    }
+  }
+---
+
+
+*/
+ 
+package pkg1 {
+	entity MyEntity1 {
+		name:String
+	}
+	entity MyEntity2 {
+		id:String
+	}
+}
+
+
