@@ -19,19 +19,19 @@ annotation MyAnnotation {
 class MyAnnotationProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
-		assertNotNull(sourceFolder)
-		assertTrue(sourceFolder.exists)
-		assertEquals("java", sourceFolder.name)
+		assertNotNull("srcfolder is set", sourceFolder)
+		assertTrue("srcfolder exists", sourceFolder.exists)
+		assertEquals("srcfolder name is 'java'", "java", sourceFolder.name)
 		assertTrue(sourceFolder.path.endsWith("/it/compile/filesystemaccess-client/src/main/java"))
 
-		assertNotNull(targetFolder)
-		assertTrue(targetFolder.exists)
-		assertEquals("xtend", targetFolder.name)
+		assertNotNull("targetfolder is set", targetFolder)
+		assertTrue("targetfolder exists", targetFolder.exists)
+		assertEquals("targetfolder name is 'xtend'","xtend", targetFolder.name)
 		assertTrue(targetFolder.path.endsWith("/it/compile/filesystemaccess-client/src/main/generated-sources/xtend"))
 
-		assertNotNull(rootFolder)
-		assertTrue(rootFolder.exists)
-		assertEquals("filesystemaccess-client", rootFolder.name)
+		assertNotNull("rootFolder is set", rootFolder)
+		assertTrue("rootFolder exists", rootFolder.exists)
+		assertEquals("rootFolder name is 'filesystemaccess-client'", "filesystemaccess-client", rootFolder.name)
 		assertTrue(rootFolder.path.endsWith("/it/compile/filesystemaccess-client"))
 
 		val myusercodeFolder = sourceFolder.getFolder("myusercode")
@@ -78,7 +78,7 @@ class MyAnnotationProcessor extends AbstractClassProcessor {
 		assertTrue(
 			userCodeCss.path.endsWith("/it/compile/filesystemaccess-client/src/main/java/myusercode/UserCode.css"))
 		val helloWorldCssClassDeclaration = ".helloWorldCssClass {}"
-		userCodeCss.writeContents [helloWorldCssClassDeclaration as CharSequence]
+		userCodeCss.writeContents[helloWorldCssClassDeclaration as CharSequence]
 
 		val userCodeCss2 = sourceFolder.getFile("myusercode/UserCode.css")
 		assertNotNull(userCodeCss2)

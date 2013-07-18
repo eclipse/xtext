@@ -11,14 +11,15 @@ import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class XtendCompilerMojoIT {
 
 	private static String ROOT = "/it/compile";
 
-	@Test
-	public void testFileSystemAccess() throws Exception {
+	@Test @Ignore
+	public void fileSystemAccess() throws Exception {
 		deleteFileIfExist("myusercode/UserCode.css");
 		deleteFileIfExist("com/itemis/myusercode/UserCode2.css");
 
