@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.EnumSet;
+import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -15,12 +16,24 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 import com.google.inject.Inject;
 
 /**
+ * The {@link SynonymTypesProvider} allows to define automatic conversion rules
+ * for specific types. 
+ * 
+ * By default, {@link Iterable iterables} are compatible to arrays, arrays are compatible to {@link List},
+ * and boxing / unboxing semantics are applied.
+ * 
+ * Clients who specialize this service, should announce synonym types by means of
+ * {@link #announceSynonym(LightweightTypeReference, ConformanceHint, Acceptor)} or
+ * {@link #announceSynonym(LightweightTypeReference, EnumSet, Acceptor)}.
+ * 
+ * @see ArrayTypes
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class SynonymTypesProvider {
@@ -28,6 +41,12 @@ public class SynonymTypesProvider {
 	@Inject
 	private TypeReferences typeReferences;
 
+	/**
+	 * Clients of the {@link SynonymTypesProvider} may use a custom acceptor
+	 * to handle the available synonym types.
+	 * 
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
 	@NonNullByDefault
 	public static abstract class Acceptor {
 		/**
@@ -52,14 +71,21 @@ public class SynonymTypesProvider {
 			if (!acceptor.accept(type.getPrimitiveIfWrapperType(), ConformanceHint.UNBOXING)) {
 				return;
 			}
+			// a wrapper type is never an array or list
+			return;
 		} else if (type.isPrimitive()) {
 			if (!acceptor.accept(type.getWrapperTypeIfPrimitive(), ConformanceHint.BOXING)) {
 				return;
 			}
+			// a primitive type is never an array or list
+			return;
 		}
 		addArrayAndListSynonyms(type, acceptor);
 	}
 
+	/**
+	 * @param type never a primitive or a wrapper type
+	 */
 	@NonNullByDefault
 	protected void addArrayAndListSynonyms(LightweightTypeReference type, Acceptor acceptor) {
 		if (type.isArray()) {
@@ -79,12 +105,12 @@ public class SynonymTypesProvider {
 					}
 				}
 			}
-		} else if (type instanceof ParameterizedTypeReference) {
+		} else {
 			ArrayTypeReference arrayType = type.tryConvertToArray();
 			if (arrayType != null) {
 				LightweightTypeReference componentType = arrayType.getComponentType();
-				if (componentType.isWrapper()) {
-					LightweightTypeReference primitiveComponentType = componentType.getPrimitiveIfWrapperType();
+				LightweightTypeReference primitiveComponentType = componentType.getPrimitiveIfWrapperType();
+				if (primitiveComponentType != componentType) {
 					ArrayTypeReference primitiveArray = new ArrayTypeReference(type.getOwner(), primitiveComponentType);
 					if (!acceptor.accept(primitiveArray, EnumSet.of(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNBOXING))) {
 						return;
@@ -95,6 +121,20 @@ public class SynonymTypesProvider {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Announce a synonym type with the given conformance hint.
+	 */
+	protected final boolean announceSynonym(LightweightTypeReference synonym, ConformanceHint hint, Acceptor acceptor) {
+		return acceptor.accept(synonym, hint);
+	}
+	
+	/**
+	 * Announce a synonym type with the given conformance hints.
+	 */
+	protected final boolean announceSynonym(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints, Acceptor acceptor) {
+		return acceptor.accept(synonym, hints);
 	}
 	
 }

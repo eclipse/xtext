@@ -59,26 +59,13 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	}
 	
 	public TypeConformanceResult isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument argument) {
-		int flags = ALLOW_RAW_TYPE_CONVERSION;
-		if (argument.allowPrimitiveConversion) {
-			flags |= ALLOW_BOXING_UNBOXING;
-		}
-		if (argument.allowPrimitiveWidening) {
-			flags |= ALLOW_PRIMITIVE_WIDENING;
-		}
-		if (argument.allowSynonyms) {
-			flags |= ALLOW_SYNONYMS;
-		}
-		if (argument.rawType) {
-			flags |= RAW_TYPE;
-		}
-		if (argument.asTypeArgument) {
-			flags |= AS_TYPE_ARGUMENT;
-		}
-		if (argument.unboundComputationAddsHints) {
-			flags |= UNBOUND_COMPUTATION_ADDS_HINTS;
-		}
+		int flags = toFlags(argument);
 		int result = isConformant(left, right, flags);
+		EnumSet<ConformanceHint> resultFlags = toResult(result);
+		return new TypeConformanceResult(resultFlags);
+	}
+
+	protected EnumSet<ConformanceHint> toResult(int result) {
 		EnumSet<ConformanceHint> resultFlags = EnumSet.noneOf(ConformanceHint.class);
 		if ((result & SUCCESS) != 0) {
 			resultFlags.add(ConformanceHint.SUCCESS);
@@ -109,7 +96,30 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		if ((result & SYNONYM) != 0) {
 			resultFlags.add(ConformanceHint.SYNONYM);
 		}
-		return new TypeConformanceResult(resultFlags);
+		return resultFlags;
+	}
+
+	protected int toFlags(TypeConformanceComputationArgument argument) {
+		int flags = ALLOW_RAW_TYPE_CONVERSION;
+		if (argument.allowPrimitiveConversion) {
+			flags |= ALLOW_BOXING_UNBOXING;
+		}
+		if (argument.allowPrimitiveWidening) {
+			flags |= ALLOW_PRIMITIVE_WIDENING;
+		}
+		if (argument.allowSynonyms) {
+			flags |= ALLOW_SYNONYMS;
+		}
+		if (argument.rawType) {
+			flags |= RAW_TYPE;
+		}
+		if (argument.asTypeArgument) {
+			flags |= AS_TYPE_ARGUMENT;
+		}
+		if (argument.unboundComputationAddsHints) {
+			flags |= UNBOUND_COMPUTATION_ADDS_HINTS;
+		}
+		return flags;
 	}
 	
 	@Override
