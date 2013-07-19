@@ -127,6 +127,9 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	def boolean doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
 		return lhs.isAssignableFrom(rhs)
 	}
+}
+
+abstract class CommonAssignabilityTest extends AbstractAssignabilityTest {
 	
 	@Test 
 	def void testPrimitiveConversion_00() {
@@ -798,7 +801,7 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 /**
  * @author Sebastian Zarnekow
  */
-class AssignabilityTest extends AbstractAssignabilityTest {
+class AssignabilityTest extends CommonAssignabilityTest {
 	
 	override doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
 		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(false, false, true, true, false, true))
@@ -1183,7 +1186,7 @@ class OldAPIAssignabilityTest extends AssignabilityTest {
 /**
  * @author Sebastian Zarnekow
  */
-class RawAssignabilityTest extends AbstractAssignabilityTest {
+class RawAssignabilityTest extends CommonAssignabilityTest {
 	
 	override boolean doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
 		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true, false, true))
@@ -1529,6 +1532,21 @@ class RawAssignabilityTest extends AbstractAssignabilityTest {
 	override void testStringIsNotComparableInteger() {
 		"java.lang.Comparable<? extends Integer>".isAssignableFrom("String")
 		"java.lang.Comparable<Integer>".isAssignableFrom("String")
+	}
+	
+}
+
+@InjectWith(RuntimeInjectorProviderWithCustomSynonyms)
+class AssignabilityWithCustomSynonymsTest extends AbstractAssignabilityTest {
+	
+	@Test 
+	def void testBigIntegerIsBigDecimal() {
+		"java.math.BigDecimal".isAssignableFrom("java.math.BigInteger")
+	}
+	
+	@Test 
+	def void testIterableBigIntegerIsNotIterableBigDecimal() {
+		"Iterable<java.math.BigDecimal>".isNotAssignableFrom("Iterable<java.math.BigInteger>")
 	}
 	
 }
