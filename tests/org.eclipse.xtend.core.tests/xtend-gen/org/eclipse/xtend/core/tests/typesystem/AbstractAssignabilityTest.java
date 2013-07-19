@@ -433,6 +433,22 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   }
   
   @Test
+  public void testIterableToArrayType_03() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("int[]", "T extends Integer");
+    this.isAssignableFrom(_mappedTo, "Iterable<T>");
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("int[]", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_1, "Iterable<? extends T>");
+  }
+  
+  @Test
+  public void testIterableToArrayType_04() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("Integer[]", "T extends Integer");
+    this.isAssignableFrom(_mappedTo, "Iterable<T>");
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("Integer[]", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_1, "Iterable<? extends T>");
+  }
+  
+  @Test
   public void testListToArrayType_01() {
     this.isAssignableFrom("int[]", "java.util.List<Integer>");
     this.isAssignableFrom("int[]", "java.util.List<? extends Integer>");

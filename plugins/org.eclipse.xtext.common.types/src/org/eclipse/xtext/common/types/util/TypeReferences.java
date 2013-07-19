@@ -30,7 +30,6 @@ import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
@@ -258,7 +257,11 @@ public class TypeReferences {
 	public boolean is(final JvmType type, final Class<?> clazz) {
 		if (type == null)
 			return false;
-		boolean result = clazz.getCanonicalName().equals(type.getIdentifier());
+		String className = clazz.getName();
+		if (className.charAt(0) == '[') {
+			className = clazz.getCanonicalName();
+		}
+		boolean result = className.equals(type.getIdentifier());
 		return result;
 	}
 

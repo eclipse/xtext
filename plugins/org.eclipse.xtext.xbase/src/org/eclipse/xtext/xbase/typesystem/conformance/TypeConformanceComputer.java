@@ -265,7 +265,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 					result = getTypeParametersForSupertype(all, rawType, owner, types);
 					for(LightweightTypeReference alreadyCollected: referencesWithSameDistance) {
 						if ((isConformant(result, alreadyCollected,
-								TypeConformanceComputer.RAW_TYPE | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0) {
+								RawTypeConformanceComputer.RAW_TYPE | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0) {
 							classSeen = classSeen || isClass(rawType);
 							continue outer;
 						}
@@ -410,7 +410,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		List<LightweightTypeReference> result = Lists.newArrayList();
 		for(LightweightTypeReference type: types) {
 			if (!(type.isAny()))
-				result.add(getWrapperTypeIfPrimitive(type));
+				result.add(type.getWrapperTypeIfPrimitive());
 		}
 		return result;
 	}
@@ -637,7 +637,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		for (int i = 0; i < types.size(); i++) {
 			LightweightTypeReference other = types.get(i);
 			if (result != other) {
-				// if we stumble accross unbound references without any hints, assume they are compatible and add respective hints
+				// if we stumble across unbound references without any hints, assume they are compatible and add respective hints
 				int conformance = isConformant(result, other, ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | UNBOUND_COMPUTATION_ADDS_HINTS | ALLOW_RAW_TYPE_CONVERSION);
 				if ((conformance & SUCCESS) != 0) {
 					boolean resultIsFunctionType = result instanceof FunctionTypeReference;

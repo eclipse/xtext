@@ -287,6 +287,18 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	}
 	
 	@Test
+	def void testIterableToArrayType_03() {
+		("int[]"->"T extends Integer").isAssignableFrom("Iterable<T>")
+		("int[]"->"T extends Integer").isAssignableFrom("Iterable<? extends T>")
+	}
+	
+	@Test
+	def void testIterableToArrayType_04() {
+		("Integer[]"->"T extends Integer").isAssignableFrom("Iterable<T>")
+		("Integer[]"->"T extends Integer").isAssignableFrom("Iterable<? extends T>")
+	}
+	
+	@Test
 	def void testListToArrayType_01() {
 		"int[]".isAssignableFrom("java.util.List<Integer>")
 		"int[]".isAssignableFrom("java.util.List<? extends Integer>")

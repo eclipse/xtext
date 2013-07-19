@@ -13,20 +13,14 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
+import org.eclipse.xtext.xbase.typesystem.internal.util.WrapperTypeLookup;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -35,7 +29,6 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
-import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
@@ -168,11 +161,11 @@ public class RawTypeConformanceComputer {
 					UnboundTypeReference castedLeft = (UnboundTypeReference) left;
 					LightweightTypeReference resolvedLeft = castedLeft.internalGetResolvedTo();
 					if (resolvedLeft != null) {
-						return doIsConformant(resolvedLeft, right, flags);
+						return doIsConformant(resolvedLeft, castedRight, flags);
 					}
-					return doIsConformant((UnboundTypeReference) left, (UnboundTypeReference) right, flags);
+					return doIsConformant((UnboundTypeReference) left, castedRight, flags);
 				} else {
-					return doIsConformant(left, (UnboundTypeReference) right, flags);
+					return doIsConformant(left, castedRight, flags);
 				}
 			}
 			case KIND_COMPOUND_TYPE_REFERENCE: {
@@ -186,6 +179,7 @@ public class RawTypeConformanceComputer {
 					}
 					return flags;
 				}
+				// missing break is intentional
 			}
 			default: switch(left.getKind()) {
 				case KIND_UNKNOWN_TYPE_REFERENCE: {
@@ -313,7 +307,7 @@ public class RawTypeConformanceComputer {
 				if (arguments.isEmpty()) { // type argument is bound to Object
 					return flags | SUCCESS | DEMAND_CONVERSION;
 				}
-				LightweightTypeReference componentType = getWrapperTypeIfPrimitive(right.getComponentType());
+				LightweightTypeReference componentType = right.getComponentType().getWrapperTypeIfPrimitive();
 				int result = doIsConformant(arguments.get(0).getInvariantBoundSubstitute(), componentType, flags);
 				if ((result & SUCCESS) != 0) {
 					return result | DEMAND_CONVERSION;
@@ -334,7 +328,7 @@ public class RawTypeConformanceComputer {
 		if ((flags & AS_TYPE_ARGUMENT) == 0 && (flags & ALLOW_SYNONYMS) != 0) {
 			ArrayTypeReference rightAsArray = right.tryConvertToArray();
 			if (rightAsArray != null) {
-				LightweightTypeReference leftComponent = getWrapperTypeIfPrimitive(left.getComponentType());
+				LightweightTypeReference leftComponent = left.getComponentType().getWrapperTypeIfPrimitive();
 				LightweightTypeReference rightComponent = rightAsArray.getComponentType();
 				int result = doIsConformant(leftComponent, rightComponent, flags & ~(ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS));
 				if ((result & SUCCESS) != 0) {
@@ -415,7 +409,7 @@ public class RawTypeConformanceComputer {
 			return flags;
 		}
 		boolean doesNotHaveSignificantHints = false;
-		if (right.canResolveTo(left) || (flags & AS_TYPE_ARGUMENT) != 0 && (doesNotHaveSignificantHints = !right.hasSignificantHints())) {
+		if (((flags & RAW_TYPE) == 0) && (right.canResolveTo(left) || (flags & AS_TYPE_ARGUMENT) != 0 && (doesNotHaveSignificantHints = !right.hasSignificantHints()))) {
 			if ((flags & UNBOUND_COMPUTATION_ADDS_HINTS) != 0 && doesNotHaveSignificantHints) {
 				right.acceptHint(left, BoundTypeArgumentSource.INFERRED_LATER, left, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 			}
@@ -611,9 +605,9 @@ public class RawTypeConformanceComputer {
 			return flags;
 		}
 		if ((flags & (ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING)) != 0) {
-			Primitive leftPrimitiveKind = getPrimitiveKind(left);
+			Primitive leftPrimitiveKind = left.getPrimitiveKind();
 			if (leftPrimitiveKind != null) {
-				Primitive rightPrimitiveKind = getPrimitiveKind(right);
+				Primitive rightPrimitiveKind = right.getPrimitiveKind();
 				if (rightPrimitiveKind != null) {
 					if ((flags & ALLOW_PRIMITIVE_WIDENING) != 0) {
 						if (isWideningConversion(leftPrimitiveKind, rightPrimitiveKind)) {
@@ -621,7 +615,7 @@ public class RawTypeConformanceComputer {
 						}
 					}
 				} else if ((flags & ALLOW_BOXING_UNBOXING) != 0) {
-					rightPrimitiveKind = getPrimitiveKindFromWrapper(right);
+					rightPrimitiveKind = right.getPrimitiveKindIfWrapperType();
 					if (rightPrimitiveKind != null) {
 						if (rightPrimitiveKind == leftPrimitiveKind || isWideningConversion(leftPrimitiveKind, rightPrimitiveKind)) {
 							return flags | SUCCESS | UNBOXING;
@@ -631,7 +625,7 @@ public class RawTypeConformanceComputer {
 				if (!(right.getType().eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER))
 					return flags;
 			} else if ((flags & ALLOW_BOXING_UNBOXING) != 0) {
-				Primitive rightPrimitiveKind = getPrimitiveKind(right);
+				Primitive rightPrimitiveKind = right.getPrimitiveKind();
 				if (rightPrimitiveKind != null) {
 					if (left.isType(Object.class)) {
 						return flags | SUCCESS | BOXING;
@@ -639,7 +633,7 @@ public class RawTypeConformanceComputer {
 					if (left.isType(String.class)) {
 						return flags;
 					}
-					LightweightTypeReference wrapper = getWrapperType(right, rightPrimitiveKind);
+					LightweightTypeReference wrapper = WrapperTypeLookup.getWrapperType(right, rightPrimitiveKind);
 					int result = doIsConformant(left, (ParameterizedTypeReference) wrapper, flags);
 					if ((result & SUCCESS) != 0)
 						return result | BOXING;
@@ -758,143 +752,6 @@ public class RawTypeConformanceComputer {
 			default :
 				return false;
 		}
-	}
-	
-	protected LightweightTypeReference getWrapperTypeIfPrimitive(LightweightTypeReference type) {
-		Primitive primitiveKind = getPrimitiveKind(type);
-		return getWrapperType(type, primitiveKind);
-	}
-
-	protected LightweightTypeReference getWrapperType(LightweightTypeReference type, Primitive primitiveKind) {
-		if (primitiveKind != null) {
-			switch(primitiveKind) {
-				case Boolean:
-					return findTopLevelType(type, "java.lang.Boolean");
-				case Byte:
-					return findTopLevelType(type, "java.lang.Byte");
-				case Char:
-					return findTopLevelType(type, "java.lang.Character");
-				case Double:
-					return findTopLevelType(type, "java.lang.Double");
-				case Float:
-					return findTopLevelType(type, "java.lang.Float");
-				case Int:
-					return findTopLevelType(type, "java.lang.Integer");
-				case Long:
-					return findTopLevelType(type, "java.lang.Long");
-				case Short:
-					return findTopLevelType(type, "java.lang.Short");
-				case Void:
-					return findTopLevelType(type, "java.lang.Void");
-			}
-		}
-		return type;
-	}
-
-	private LightweightTypeReference findTopLevelType(LightweightTypeReference typeReference, String typeName) {
-		ITypeReferenceOwner owner = typeReference.getOwner();
-		ResourceSet resourceSet = owner.getContextResourceSet();
-		Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(typeName), true);
-		JvmType type = (JvmType) typeResource.getContents().get(0);
-		if (type == null)
-			return typeReference;
-		return new ParameterizedTypeReference(owner, type);
-	}
-
-	protected Primitive getPrimitiveKind(LightweightTypeReference reference) {
-		if (reference.getKind() != KIND_PARAMETERIZED_TYPE_REFERENCE) {
-			return null;
-		}
-		JvmType type = ((ParameterizedTypeReference)reference).getType();
-		if (type.eIsProxy())
-			return null;
-		if (type.eClass() == TypesPackage.Literals.JVM_PRIMITIVE_TYPE) {
-			String name = type.getSimpleName();
-			if ("boolean".equals(name)) {
-				return Primitive.Boolean;
-			} else if ("int".equals(name)) {
-				return Primitive.Int;
-			} else if ("long".equals(name)) {
-				return Primitive.Long;
-			} else if ("double".equals(name)) {
-				return Primitive.Double;
-			} else if ("char".equals(name)) {
-				return Primitive.Char;
-			} else if ("byte".equals(name)) {
-				return Primitive.Byte;
-			} else if ("short".equals(name)) {
-				return Primitive.Short;
-			} else if ("float".equals(name)) {
-				return Primitive.Float;
-			}
-		} else if (type.eClass() == TypesPackage.Literals.JVM_VOID) {
-			return Primitive.Void;
-		}
-		return null;
-	}
-	
-	protected Primitive getPrimitiveKindFromWrapper(LightweightTypeReference reference) {
-		if (reference.getKind() != KIND_PARAMETERIZED_TYPE_REFERENCE) {
-			return null;
-		}
-		JvmType type = ((ParameterizedTypeReference)reference).getType();
-		return getPrimitiveKindFromWrapper(type, null);
-	}
-
-	private Primitive getPrimitiveKindFromWrapper(JvmType type, RecursionGuard<JvmType> guard) {
-		if (type.eIsProxy())
-			return null;
-		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
-			String name = type.getIdentifier();
-			if ("java.lang.Boolean".equals(name)) {
-				return Primitive.Boolean;
-			} else if ("java.lang.Integer".equals(name)) {
-				return Primitive.Int;
-			} else if ("java.lang.Long".equals(name)) {
-				return Primitive.Long;
-			} else if ("java.lang.Double".equals(name)) {
-				return Primitive.Double;
-			} else if ("java.lang.Character".equals(name)) {
-				return Primitive.Char;
-			} else if ("java.lang.Byte".equals(name)) {
-				return Primitive.Byte;
-			} else if ("java.lang.Short".equals(name)) {
-				return Primitive.Short;
-			} else if ("java.lang.Float".equals(name)) {
-				return Primitive.Float;
-			} else if ("java.lang.Void".equals(name)) {
-				return Primitive.Void;
-			}
-		}
-		if (type.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
-			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
-			for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
-				if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND) {
-					JvmTypeReference upperBound = constraint.getTypeReference();
-					if (upperBound != null) {
-						JvmType upperBoundType = upperBound.getType();
-						if (upperBoundType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
-							return getPrimitiveKindFromWrapper(upperBoundType, null);
-						}
-						if (typeParameter == upperBoundType) {
-							return null;
-						}
-						// guard against recursive deps
-						if (upperBoundType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
-							if (guard == null) {
-								guard = new RecursionGuard<JvmType>();
-								guard.tryNext(typeParameter);
-							}
-							if (guard.tryNext(upperBoundType)) {
-								return getPrimitiveKindFromWrapper(upperBoundType, guard);
-							}
-							return null;
-						}
-					}
-				}
-			}
-		}
-		return null;
 	}
 	
 	/**

@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
@@ -241,6 +242,16 @@ public abstract class LightweightTypeReference {
 	
 	public LightweightTypeReference getPrimitiveIfWrapperType() {
 		return this;
+	}
+	
+	@Nullable
+	public Primitives.Primitive getPrimitiveKind() {
+		return null;
+	}
+	
+	@Nullable
+	public Primitives.Primitive getPrimitiveKindIfWrapperType() {
+		return null;
 	}
 	
 	public List<JvmType> getRawTypes() {
