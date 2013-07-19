@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
@@ -493,6 +494,24 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			return resolvedTo.isPrimitive();
 		}
 		return false;
+	}
+	
+	@Override
+	@Nullable
+	public Primitive getPrimitiveKind() {
+		if (internalIsResolved()) {
+			return resolvedTo.getPrimitiveKind();
+		}
+		return null;
+	}
+	
+	@Override
+	@Nullable
+	public Primitive getPrimitiveKindIfWrapperType() {
+		if (internalIsResolved()) {
+			return resolvedTo.getPrimitiveKindIfWrapperType();
+		}
+		return null;
 	}
 	
 	@Override

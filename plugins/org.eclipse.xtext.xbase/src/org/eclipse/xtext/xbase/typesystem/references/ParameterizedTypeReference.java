@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.io.Serializable;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -31,7 +29,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
-import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
+import org.eclipse.xtext.xbase.typesystem.internal.util.WrapperTypeLookup;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
@@ -206,29 +205,161 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public LightweightTypeReference getWrapperTypeIfPrimitive() {
-		if (isPrimitive()) {
-			Primitives primitives = getOwner().getServices().getPrimitives();
-			JvmType wrapperType = primitives.getWrapperType((JvmPrimitiveType) type);
-			return new ParameterizedTypeReference(getOwner(), wrapperType);
-		}
-		return this;
+		Primitive primitiveKind = getPrimitiveKind();
+		if (primitiveKind == null)
+			return this;
+		LightweightTypeReference result = WrapperTypeLookup.getWrapperType(this, primitiveKind);
+		if (result == null)
+			return this;
+		return result;
 	}
 	
 	@Override
 	public LightweightTypeReference getPrimitiveIfWrapperType() {
-		if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER && isWrapper()) {
-			Primitives primitives = getOwner().getServices().getPrimitives();
-			JvmType primitiveType = primitives.getPrimitiveTypeIfWrapper((JvmDeclaredType) type);
-			if (primitiveType != null) {
-				return new ParameterizedTypeReference(getOwner(), primitiveType);
+		if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			Primitive primitive = getPrimitiveKindIfWrapperType();
+			if (primitive != null) {
+				switch(primitive) {
+					case Boolean:
+						return findPrimitive("boolean");
+					case Byte:
+						return findPrimitive("byte");
+					case Char:
+						return findPrimitive("char");
+					case Double:
+						return findPrimitive("double");
+					case Float:
+						return findPrimitive("float");
+					case Int:
+						return findPrimitive("int");
+					case Long:
+						return findPrimitive("long");
+					case Short:
+						return findPrimitive("short");
+					case Void:
+						return findPrimitive("void");
+					default:
+						throw new IllegalStateException("Unknown primitive kind " + primitive);
+				}
 			}
 		}
 		return this;
 	}
 	
+	private LightweightTypeReference findPrimitive(String primitive) {
+		JvmType result = (JvmType) getOwner().getContextResourceSet().getEObject(URIHelperConstants.PRIMITIVES_URI.appendFragment(primitive), true);
+		if (result != null) {
+			return new ParameterizedTypeReference(getOwner(), result);
+		}
+		throw new IllegalStateException("Cannot find primitive type: " + primitive);
+	}
+
 	@Override
 	public boolean isPrimitive() {
 		return type.eClass() == TypesPackage.Literals.JVM_PRIMITIVE_TYPE;
+	}
+	
+	@Override
+	@Nullable
+	public Primitive getPrimitiveKind() {
+		if (type.eIsProxy())
+			return null;
+		if (type.eClass() == TypesPackage.Literals.JVM_PRIMITIVE_TYPE) {
+			String name = type.getSimpleName();
+			if ("boolean".equals(name)) {
+				return Primitive.Boolean;
+			} else if ("int".equals(name)) {
+				return Primitive.Int;
+			} else if ("long".equals(name)) {
+				return Primitive.Long;
+			} else if ("double".equals(name)) {
+				return Primitive.Double;
+			} else if ("char".equals(name)) {
+				return Primitive.Char;
+			} else if ("byte".equals(name)) {
+				return Primitive.Byte;
+			} else if ("short".equals(name)) {
+				return Primitive.Short;
+			} else if ("float".equals(name)) {
+				return Primitive.Float;
+			}
+		} else if (type.eClass() == TypesPackage.Literals.JVM_VOID) {
+			return Primitive.Void;
+		}
+		return null;
+	}
+	
+	@Override
+	@Nullable
+	public Primitive getPrimitiveKindIfWrapperType() {
+		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+			JvmGenericType casted = (JvmGenericType) type;
+			return getPrimitiveKind(casted);
+		} else if (type.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+			return getPrimitiveKind(typeParameter, null);
+		}
+		return null;
+	}
+	
+	@Nullable
+	private Primitive getPrimitiveKind(JvmTypeParameter type, @Nullable RecursionGuard<JvmTypeParameter> guard) {
+		if (type.eIsProxy())
+			return null;
+		for(JvmTypeConstraint constraint: type.getConstraints()) {
+			if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND) {
+				JvmTypeReference upperBound = constraint.getTypeReference();
+				if (upperBound != null) {
+					JvmType upperBoundType = upperBound.getType();
+					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+						return getPrimitiveKind((JvmGenericType) upperBoundType);
+					}
+					if (type == upperBoundType) {
+						return null;
+					}
+					// guard against recursive deps
+					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+						JvmTypeParameter upperBoundTypeParameter = (JvmTypeParameter) upperBoundType;
+						if (guard == null) {
+							guard = new RecursionGuard<JvmTypeParameter>();
+							guard.tryNext(type);
+						}
+						if (guard.tryNext(upperBoundTypeParameter)) {
+							return getPrimitiveKind(upperBoundTypeParameter, guard);
+						}
+						return null;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	@Nullable
+	private Primitive getPrimitiveKind(JvmGenericType type) {
+		if (type.eIsProxy())
+			return null;
+		String name = type.getIdentifier();
+		if ("java.lang.Boolean".equals(name)) {
+			return Primitive.Boolean;
+		} else if ("java.lang.Integer".equals(name)) {
+			return Primitive.Int;
+		} else if ("java.lang.Long".equals(name)) {
+			return Primitive.Long;
+		} else if ("java.lang.Double".equals(name)) {
+			return Primitive.Double;
+		} else if ("java.lang.Character".equals(name)) {
+			return Primitive.Char;
+		} else if ("java.lang.Byte".equals(name)) {
+			return Primitive.Byte;
+		} else if ("java.lang.Short".equals(name)) {
+			return Primitive.Short;
+		} else if ("java.lang.Float".equals(name)) {
+			return Primitive.Float;
+		} else if ("java.lang.Void".equals(name)) {
+			return Primitive.Void;
+		}
+		return null;
 	}
 	
 	@Override
@@ -280,24 +411,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return false;
 	}
 	private boolean isWrapper(JvmGenericType type) {
-		// all wrapper types are concrete, final top level types
-		if (type.isInterface() || !type.isFinal() || type.getDeclaringType() != null) {
-			return false;
-		}
-		// and all wrapper types are defined in java.lang
-		if ("java.lang".equals(type.getPackageName())) {
-			String simpleName = type.getSimpleName();
-			return "Integer".equals(simpleName) 
-					|| "Boolean".equals(simpleName)
-					|| "Long".equals(simpleName)
-					|| "Double".equals(simpleName)
-					|| "Character".equals(simpleName)
-					|| "Byte".equals(simpleName)
-					|| "Float".equals(simpleName)
-					|| "Short".equals(simpleName)
-					|| "Void".equals(simpleName);
-		}
-		return false;
+		return getPrimitiveKind(type) != null;
 	}
 	
 	@Override
