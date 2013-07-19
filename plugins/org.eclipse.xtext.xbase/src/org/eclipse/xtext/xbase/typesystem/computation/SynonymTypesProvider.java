@@ -30,7 +30,9 @@ import com.google.inject.Inject;
  * 
  * Clients who specialize this service, should announce synonym types by means of
  * {@link #announceSynonym(LightweightTypeReference, ConformanceHint, Acceptor)} or
- * {@link #announceSynonym(LightweightTypeReference, EnumSet, Acceptor)}.
+ * {@link #announceSynonym(LightweightTypeReference, EnumSet, Acceptor)}. 
+ * {@link #collectCustomSynonymTypes(LightweightTypeReference, Acceptor)} should be implemented
+ * to announce custom synonyms. Implementations should respect the acceptor return values.
  * 
  * @see ArrayTypes
  * 
@@ -71,23 +73,36 @@ public class SynonymTypesProvider {
 			if (!acceptor.accept(type.getPrimitiveIfWrapperType(), ConformanceHint.UNBOXING)) {
 				return;
 			}
-			// a wrapper type is never an array or list
+			// a primitive type is never an array or list
+			collectCustomSynonymTypes(type, acceptor);
 			return;
 		} else if (type.isPrimitive()) {
 			if (!acceptor.accept(type.getWrapperTypeIfPrimitive(), ConformanceHint.BOXING)) {
 				return;
 			}
 			// a primitive type is never an array or list
+			collectCustomSynonymTypes(type, acceptor);
 			return;
 		}
-		addArrayAndListSynonyms(type, acceptor);
+		if (addArrayAndListSynonyms(type, acceptor)) {
+			collectCustomSynonymTypes(type, acceptor);
+		}
+	}
+
+	/**
+	 * This is the hook to announce more synonym types.
+	 * @param type the original type
+	 * @param acceptor the acceptor to announce the synonyms
+	 */
+	protected boolean collectCustomSynonymTypes(LightweightTypeReference type, Acceptor acceptor) {
+		return true;
 	}
 
 	/**
 	 * @param type never a primitive or a wrapper type
 	 */
 	@NonNullByDefault
-	protected void addArrayAndListSynonyms(LightweightTypeReference type, Acceptor acceptor) {
+	protected boolean addArrayAndListSynonyms(LightweightTypeReference type, Acceptor acceptor) {
 		if (type.isArray()) {
 			LightweightTypeReference listType = type.tryConvertToListType();
 			if (listType != null) {
@@ -97,11 +112,11 @@ public class SynonymTypesProvider {
 				}
 				if (componentType.isPrimitive()) {
 					if (!acceptor.accept(listType, EnumSet.of(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.BOXING))) {
-						return;
+						return false;
 					}
 				} else {
 					if (!acceptor.accept(listType, ConformanceHint.DEMAND_CONVERSION)) {
-						return;
+						return false;
 					}
 				}
 			}
@@ -113,14 +128,15 @@ public class SynonymTypesProvider {
 				if (primitiveComponentType != componentType) {
 					ArrayTypeReference primitiveArray = new ArrayTypeReference(type.getOwner(), primitiveComponentType);
 					if (!acceptor.accept(primitiveArray, EnumSet.of(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNBOXING))) {
-						return;
+						return false;
 					}
 				}
 				if (!acceptor.accept(arrayType, ConformanceHint.DEMAND_CONVERSION)) {
-					return;
+					return false;
 				}
 			}
 		}
+		return true;
 	}
 	
 	/**

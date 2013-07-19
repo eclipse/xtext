@@ -132,10 +132,13 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 				if (left.isRawType() != right.isRawType()) {
 					result |= RAW_TYPE_CONVERSION;
 				}
+			} else {
+				return isSynonymConformant(result, left, right, flags);
 			}
 			return result;
 		}
-		return doIsConformant(left, right, flags);
+		int result = doIsConformant(left, right, flags);
+		return isSynonymConformant(result, left, right, flags);
 	}
 	
 	@Override

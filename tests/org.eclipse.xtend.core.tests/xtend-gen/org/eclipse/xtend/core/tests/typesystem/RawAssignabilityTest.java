@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import java.util.EnumSet;
-import org.eclipse.xtend.core.tests.typesystem.AbstractAssignabilityTest;
+import org.eclipse.xtend.core.tests.typesystem.CommonAssignabilityTest;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class RawAssignabilityTest extends AbstractAssignabilityTest {
+public class RawAssignabilityTest extends CommonAssignabilityTest {
   public boolean doIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
     TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(true, false, true, true, false, true);
     final TypeConformanceResult result = lhs.internalIsAssignableFrom(rhs, _typeConformanceComputationArgument);

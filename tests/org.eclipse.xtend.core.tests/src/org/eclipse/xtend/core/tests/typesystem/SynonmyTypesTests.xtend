@@ -9,9 +9,10 @@ package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Test
 
 /**
@@ -115,4 +116,14 @@ class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
 		("T" -> 'V extends Integer, T extends Iterable<V>').hasSynonyms("V[]", "int[]")
 	}
 	
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@InjectWith(RuntimeInjectorProviderWithCustomSynonyms)
+class CustomSynonmyTypesTest extends SynonmyTypesTest {
+	@Test def void testBigIntegerToBigDecimal() {
+		"java.math.BigInteger".hasSynonyms("BigDecimal")
+	}
 }

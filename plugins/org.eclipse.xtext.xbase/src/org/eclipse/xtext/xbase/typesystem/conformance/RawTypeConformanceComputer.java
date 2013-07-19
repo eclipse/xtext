@@ -11,13 +11,16 @@ import static org.eclipse.xtext.xbase.typesystem.references.LightweightTypeRefer
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
+import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.util.WrapperTypeLookup;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -32,6 +35,7 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -140,10 +144,74 @@ public class RawTypeConformanceComputer {
 	 */
 	public final static int SYNONYM = RAW_TYPE_CONVERSION << 1;
 
-	public int isConformant(LightweightTypeReference left, LightweightTypeReference right, int flags) {
+	private SynonymTypesProvider synonymTypesProvider;
+	/**
+	 * This is to avoid unnecessary expensive, redundant conversion in case the default
+	 * synonym types are used.
+	 */
+	private boolean useCustomSynonymTypes = false;
+	
+	@Inject
+	public void setSynonymTypesProvider(SynonymTypesProvider synonymTypesProvider) {
+		this.synonymTypesProvider = synonymTypesProvider;
+		useCustomSynonymTypes = !synonymTypesProvider.getClass().equals(SynonymTypesProvider.class); 
+	}
+
+	public int isConformant(final LightweightTypeReference left, LightweightTypeReference right, final int flags) {
 		if (left == right && left != null) // TODO handle null
 			return flags | SUCCESS;
-		return doIsConformant(left, right, flags);
+		int result = doIsConformant(left, right, flags);
+		return isSynonymConformant(result, left, right, flags);
+	}
+
+	protected int isSynonymConformant(int originalConformance, final LightweightTypeReference left, LightweightTypeReference right, final int flags) {
+		if (useCustomSynonymTypes && (originalConformance & SUCCESS) == 0 && (flags & ALLOW_SYNONYMS) != 0) {
+			final int[] resultFromSynonyms = new int[] { originalConformance };
+			synonymTypesProvider.collectSynonymTypes(right, new SynonymTypesProvider.Acceptor() {
+				@Override
+				protected boolean accept(@NonNull LightweightTypeReference synonym, @NonNull EnumSet<ConformanceHint> hints) {
+					if (!(hints.contains(ConformanceHint.BOXING) || hints.contains(ConformanceHint.UNBOXING))) {
+						int synonymResult = isConformant(left, synonym, flags & ~ALLOW_SYNONYMS);
+						if ((synonymResult & SUCCESS) != 0) {
+							resultFromSynonyms[0] = synonymResult | toSynonymResult(hints);
+							return false;
+						}
+					}
+					return true;
+				}
+			});
+			return resultFromSynonyms[0];
+		}
+		return originalConformance;
+	}
+	
+	protected int toSynonymResult(EnumSet<ConformanceHint> hints) {
+		int result = SYNONYM;
+		if (hints.contains(ConformanceHint.SUCCESS)) {
+			result |= SUCCESS;
+		}
+		if (hints.contains(ConformanceHint.DEMAND_CONVERSION)) {
+			result |= DEMAND_CONVERSION;
+		}
+		if (hints.contains(ConformanceHint.SUBTYPE)) {
+			result |= SUBTYPE;
+		}
+		if (hints.contains(ConformanceHint.PRIMITIVE_WIDENING)) {
+			result |= PRIMITIVE_WIDENING;
+		}
+		if (hints.contains(ConformanceHint.UNBOXING)) {
+			result |= UNBOXING;
+		}
+		if (hints.contains(ConformanceHint.BOXING)) {
+			result |= BOXING;
+		}
+		if (hints.contains(ConformanceHint.RAWTYPE_CONVERSION)) {
+			result |= RAW_TYPE_CONVERSION;
+		}
+		if (hints.contains(ConformanceHint.RAW)) {
+			result |= RAW_TYPE;
+		}
+		return result;
 	}
 	
 	protected int doIsConformant(LightweightTypeReference left, LightweightTypeReference right, int flags) {
