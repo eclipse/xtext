@@ -216,31 +216,29 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public LightweightTypeReference getPrimitiveIfWrapperType() {
-		if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER) {
-			Primitive primitive = getPrimitiveKindIfWrapperType();
-			if (primitive != null) {
-				switch(primitive) {
-					case Boolean:
-						return findPrimitive("boolean");
-					case Byte:
-						return findPrimitive("byte");
-					case Char:
-						return findPrimitive("char");
-					case Double:
-						return findPrimitive("double");
-					case Float:
-						return findPrimitive("float");
-					case Int:
-						return findPrimitive("int");
-					case Long:
-						return findPrimitive("long");
-					case Short:
-						return findPrimitive("short");
-					case Void:
-						return findPrimitive("void");
-					default:
-						throw new IllegalStateException("Unknown primitive kind " + primitive);
-				}
+		Primitive primitive = getPrimitiveKindIfWrapperType();
+		if (primitive != null) {
+			switch(primitive) {
+				case Boolean:
+					return findPrimitive("boolean");
+				case Byte:
+					return findPrimitive("byte");
+				case Char:
+					return findPrimitive("char");
+				case Double:
+					return findPrimitive("double");
+				case Float:
+					return findPrimitive("float");
+				case Int:
+					return findPrimitive("int");
+				case Long:
+					return findPrimitive("long");
+				case Short:
+					return findPrimitive("short");
+				case Void:
+					return findPrimitive("void");
+				default:
+					throw new IllegalStateException("Unknown primitive kind " + primitive);
 			}
 		}
 		return this;
