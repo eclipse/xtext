@@ -14,6 +14,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -22,6 +23,7 @@ import org.xpect.util.DotClasspath;
 import org.xpect.util.IFileForClassProvider;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 /**
@@ -42,7 +44,7 @@ public @interface XpectTestFiles {
 	}
 
 	public static enum FileRoot {
-		CLASS, PROJECT
+		CLASS, CURRENT, PROJECT
 	}
 
 	public static class XpectTestFileCollector implements IXpectURIProvider {
@@ -69,6 +71,29 @@ public @interface XpectTestFiles {
 			this.ctx = ctx;
 		}
 
+		protected List<URI> collectFiles(Collection<File> directories, Predicate<File> shouldCollect) {
+			List<URI> result = Lists.newArrayList();
+			for (File directory : directories) {
+				if (!directory.isDirectory())
+					throw new RuntimeException("Directory not found: " + directory);
+				collectFiles(directory, result, shouldCollect);
+			}
+			return result;
+		}
+
+		protected List<URI> collectFiles(Collection<File> directories, String... files) {
+			List<URI> result = Lists.newArrayList();
+			for (File directory : directories) {
+				for (String file : files) {
+					File f = new File(directory + "/" + file);
+					if (!f.exists())
+						throw new RuntimeException("File not found: " + file);
+					result.add(createURI(f));
+				}
+			}
+			return result;
+		}
+
 		protected void collectFiles(File dir, List<URI> result, Predicate<File> shouldCollect) {
 			for (File child : dir.listFiles()) {
 				if (shouldCollect.apply(child))
@@ -78,26 +103,7 @@ public @interface XpectTestFiles {
 			}
 		}
 
-		protected List<URI> collectFiles(File directory, Predicate<File> shouldCollect) {
-			if (!directory.isDirectory())
-				throw new RuntimeException("Directory not found: " + directory);
-			List<URI> result = Lists.newArrayList();
-			collectFiles(directory, result, shouldCollect);
-			return result;
-		}
-
-		protected List<URI> collectFiles(File base, String... files) {
-			List<URI> result = Lists.newArrayList();
-			for (String file : files) {
-				File f = new File(base + "/" + file);
-				if (!f.exists())
-					throw new RuntimeException("File not found: " + file);
-				result.add(createURI(f));
-			}
-			return result;
-		}
-
-		protected List<URI> collectFilesWithExt(File directory, String... fileExtensions) {
+		protected List<URI> collectFilesWithExt(Collection<File> directory, String... fileExtensions) {
 			return collectFiles(directory, new FilePredicate(fileExtensions));
 		}
 
@@ -107,45 +113,50 @@ public @interface XpectTestFiles {
 
 		public Collection<URI> getAllURIs() {
 			List<URI> result = Lists.newArrayList();
-			result.addAll(collectFilesWithExt(getBaseDir(), ctx.fileExtensions()));
-			result.addAll(collectFiles(getBaseDir(), ctx.files()));
+			result.addAll(collectFilesWithExt(getBaseDirs(), ctx.fileExtensions()));
+			result.addAll(collectFiles(getBaseDirs(), ctx.files()));
 			return result;
 		}
 
-		protected File getBaseDir() {
+		protected Collection<File> getBaseDirs() {
 			switch (ctx.relativeTo()) {
+			case CURRENT:
+				return Collections.singletonList(new File(ctx.baseDir()));
 			case CLASS:
-				File base = getOwningJavaClassFolder(owner);
-				if (ctx.baseDir() != null && !"".equals(ctx.baseDir()))
-					return new File(base + "/" + ctx.baseDir());
-				else
-					return base;
+				Collection<File> bases = getPackageFragmentsSourceFolders(owner);
+				if (!Strings.isNullOrEmpty(ctx.baseDir())) {
+					List<File> result = Lists.newArrayList();
+					for (File b : bases)
+						result.add(new File(b + "/" + ctx.baseDir()));
+				} else
+					return bases;
 			case PROJECT:
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		protected File getOwningJavaClassFolder(Class<?> clazz) {
+		protected Collection<File> getPackageFragmentsSourceFolders(Class<?> clazz) {
 			File classFile = IFileForClassProvider.INSTANCE.getFile(clazz);
 			File current = classFile.getParentFile();
 			File dotClasspathFile = null;
 			while (current != null && !(dotClasspathFile = new File(current + "/.classpath")).exists())
 				current = current.getParentFile();
 			if (dotClasspathFile == null)
-				return classFile.getParentFile();
+				return Collections.emptyList();
 			DotClasspath cp = new DotClasspath(dotClasspathFile);
 			File project = dotClasspathFile.getParentFile();
 			File output = new File(project + "/" + cp.getOutput());
 			if (!output.isDirectory() || !classFile.toString().startsWith(output.toString()))
-				return classFile.getParentFile();
+				return Collections.emptyList();
 			URI classFileInClasspath = URI.createURI(output.toURI().relativize(classFile.toURI()).toString());
-			File javaFileInClasspath = new File(classFileInClasspath.trimFileExtension().appendFileExtension("java").toString());
+			File packagePathInClasspath = new File(classFileInClasspath.trimSegments(1).toString());
+			List<File> files = Lists.newArrayList();
 			for (String path : cp.getSources()) {
-				File result = new File(project + "/" + path + "/" + javaFileInClasspath);
-				if (result.isFile())
-					return result.getParentFile();
+				File result = new File(project + "/" + path + "/" + packagePathInClasspath);
+				if (result.isDirectory())
+					files.add(result);
 			}
-			return classFile.getParentFile();
+			return files;
 		}
 
 		public String getTitle(URI uri) {
