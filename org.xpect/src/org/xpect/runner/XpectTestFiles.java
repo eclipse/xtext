@@ -119,20 +119,13 @@ public @interface XpectTestFiles {
 		}
 
 		protected Collection<File> getBaseDirs() {
-			switch (ctx.relativeTo()) {
-			case CURRENT:
-				return Collections.singletonList(new File(ctx.baseDir()));
-			case CLASS:
-				Collection<File> bases = getPackageFragmentsSourceFolders(owner);
-				if (!Strings.isNullOrEmpty(ctx.baseDir())) {
-					List<File> result = Lists.newArrayList();
-					for (File b : bases)
-						result.add(new File(b + "/" + ctx.baseDir()));
-				} else
-					return bases;
-			case PROJECT:
-			}
-			throw new UnsupportedOperationException();
+			Collection<File> roots = getRoots();
+			if (Strings.isNullOrEmpty(ctx.baseDir()))
+				return roots;
+			List<File> result = Lists.newArrayList();
+			for (File root : roots)
+				result.add(new File(root + "/" + ctx.baseDir()));
+			return result;
 		}
 
 		protected Collection<File> getPackageFragmentsSourceFolders(Class<?> clazz) {
@@ -157,6 +150,29 @@ public @interface XpectTestFiles {
 					files.add(result);
 			}
 			return files;
+		}
+
+		protected File getProjectRootFolder(Class<?> clazz) {
+			File classFile = IFileForClassProvider.INSTANCE.getFile(clazz);
+			File current = classFile.getParentFile();
+			while (current != null) {
+				if (new File(current + "/.project").exists())
+					return current;
+				current = current.getParentFile();
+			}
+			throw new IllegalStateException("not .project file found in containing folder of " + classFile);
+		}
+
+		protected Collection<File> getRoots() {
+			switch (ctx.relativeTo()) {
+			case CURRENT:
+				return Collections.singletonList(new File("."));
+			case CLASS:
+				return getPackageFragmentsSourceFolders(owner);
+			case PROJECT:
+				return Collections.singletonList(getProjectRootFolder(owner));
+			}
+			throw new UnsupportedOperationException();
 		}
 
 		public String getTitle(URI uri) {
