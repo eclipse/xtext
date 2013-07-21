@@ -68,7 +68,7 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 
 	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput, IContentType contentType, IEditorDescriptor editorDescriptor) {
 		IFile file = getFile(editorInput);
-		if (hasFavoriteEditor(file))
+		if (file == null || hasFavoriteEditor(file))
 			return editorDescriptor;
 		XpectContentType type = contentTypeHelper.getContentType(file);
 		switch (type) {
@@ -87,6 +87,8 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 
 	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
 		IFile file = getFile(editorInput);
+		if (file == null)
+			return editorDescriptors;
 		XpectContentType type = contentTypeHelper.getContentType(file);
 		switch (type) {
 		case XPECT:
