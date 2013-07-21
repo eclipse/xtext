@@ -1,0 +1,18 @@
+// XPECT_SETUP org.eclipse.xtext.example.arithmetics.xpect.tests.ArithmeticsXtextTests END_SETUP
+
+module foo
+
+
+def const: 1;
+
+def foo:
+	// XPECT linkedName --> foo.const
+	4 + const;
+	
+def bar:
+	// XPECT warnings --> "Expression could be normalized to constant '3'" at "1 + 2"
+	1 + 2;
+	
+def bar:
+	// XPECT errors --> "Division by zero detected." at "0"
+	const / 0;

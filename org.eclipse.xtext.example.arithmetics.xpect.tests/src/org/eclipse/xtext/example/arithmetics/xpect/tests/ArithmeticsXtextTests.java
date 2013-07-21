@@ -1,4 +1,4 @@
-package org.eclipse.xtext.example.arithmetics.xpect.tests.linking;
+package org.eclipse.xtext.example.arithmetics.xpect.tests;
 
 import org.junit.runner.RunWith;
 import org.xpect.runner.XpectRunner;

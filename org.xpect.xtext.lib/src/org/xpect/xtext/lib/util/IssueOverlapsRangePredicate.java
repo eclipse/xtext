@@ -33,7 +33,8 @@ public class IssueOverlapsRangePredicate implements Predicate<Issue> {
 	public IssueOverlapsRangePredicate(XtextResource resource, int offset, Severity severity) {
 		this.document = resource.getParseResult().getRootNode().getText();
 		this.start = this.document.lastIndexOf('\n', offset);
-		this.end = this.document.indexOf('\n', offset);
+		int endIndex = this.document.indexOf('\n', offset);
+		this.end = endIndex >= 0 ? endIndex : this.document.length();
 		this.severity = severity;
 	}
 
