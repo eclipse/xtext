@@ -21,18 +21,21 @@ import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
+import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaMethodBuilder;
+import org.eclipse.xtend.ide.codebuilder.JavaParameterBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendMethodBuilder;
+import org.eclipse.xtend.ide.codebuilder.XtendParameterBuilder;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
@@ -74,6 +77,9 @@ public class CodeBuilderFactory {
   private Provider<XtendMethodBuilder> xtendMethodBuilderProvider;
   
   @Inject
+  private Provider<XtendParameterBuilder> xtendParameterBuilderProvider;
+  
+  @Inject
   private Provider<JavaClassBuilder> javaClassBuilderProvider;
   
   @Inject
@@ -90,6 +96,9 @@ public class CodeBuilderFactory {
   
   @Inject
   private Provider<JavaMethodBuilder> javaMethodBuilderProvider;
+  
+  @Inject
+  private Provider<JavaParameterBuilder> javaParameterBuilderProvider;
   
   public AbstractClassBuilder createClassBuilder(final JvmDeclaredType owner) {
     AbstractClassBuilder _xblockexpression = null;
@@ -204,6 +213,26 @@ public class CodeBuilderFactory {
         _xifexpression = _get_1;
       }
       final AbstractMethodBuilder builder = _xifexpression;
+      builder.setOwner(owner);
+      builder.setOwnerSource(ownerSource);
+      _xblockexpression = (builder);
+    }
+    return _xblockexpression;
+  }
+  
+  public AbstractParameterBuilder createParameterBuilder(final JvmDeclaredType owner) {
+    AbstractParameterBuilder _xblockexpression = null;
+    {
+      final Object ownerSource = this.getSource(owner);
+      AbstractParameterBuilder _xifexpression = null;
+      if ((ownerSource instanceof XtendTypeDeclaration)) {
+        XtendParameterBuilder _get = this.xtendParameterBuilderProvider.get();
+        _xifexpression = _get;
+      } else {
+        JavaParameterBuilder _get_1 = this.javaParameterBuilderProvider.get();
+        _xifexpression = _get_1;
+      }
+      final AbstractParameterBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
       _xblockexpression = (builder);

@@ -7,33 +7,24 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.inject.Inject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
 @SuppressWarnings("all")
 public class JavaConstructorBuilder extends AbstractConstructorBuilder implements Java {
-  @Inject
-  private TypeReferenceSerializer typeRefSerializer;
-  
-  protected TypeReferenceSerializer getTypeReferenceSerializer() {
-    return this.typeRefSerializer;
-  }
-  
-  public IAppendable build(final IAppendable appendable) {
+  public ISourceAppender build(final ISourceAppender appendable) {
     JvmVisibility _visibility = this.getVisibility();
-    IAppendable _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
+    ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
     JvmDeclaredType _owner = this.getOwner();
     String _simpleName = _owner.getSimpleName();
-    IAppendable _append = _appendVisibility.append(_simpleName);
-    IAppendable _appendParameters = this.appendParameters(_append);
-    IAppendable _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-    IAppendable _appendBody = this.appendBody(_appendThrowsClause, ";");
+    ISourceAppender _append = _appendVisibility.append(_simpleName);
+    ISourceAppender _appendParameters = this.appendParameters(_append);
+    ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
+    ISourceAppender _appendBody = this.appendBody(_appendThrowsClause, ";");
     return _appendBody;
   }
   

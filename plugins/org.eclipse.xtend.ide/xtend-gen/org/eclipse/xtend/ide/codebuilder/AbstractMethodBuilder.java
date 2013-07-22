@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.xtend.ide.codebuilder.AbstractExecutableBuilder;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Jan Koehnlein
@@ -25,13 +25,13 @@ public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
     this._methodName = methodName;
   }
   
-  private JvmTypeReference _returnType;
+  private LightweightTypeReference _returnType;
   
-  public JvmTypeReference getReturnType() {
+  public LightweightTypeReference getReturnType() {
     return this._returnType;
   }
   
-  public void setReturnType(final JvmTypeReference returnType) {
+  public void setReturnType(final LightweightTypeReference returnType) {
     this._returnType = returnType;
   }
   

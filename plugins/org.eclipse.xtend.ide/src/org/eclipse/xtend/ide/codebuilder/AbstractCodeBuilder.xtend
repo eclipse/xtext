@@ -19,9 +19,13 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
-import org.eclipse.xtext.xbase.compiler.IAppendable
+import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.common.types.JvmUpperBound
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 
 /** 
  * @author Jan Koehnlein
@@ -36,6 +40,8 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 	
 	@Inject extension IJavaElementFinder
 	
+	@Inject CommonTypeComputationServices services
+	
 	override isValid() {
 		val javaElement = owner.findElementFor
 		return (javaElement == null || !javaElement.readOnly) 
@@ -48,7 +54,7 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 		appendable.toString
 	}
 	
-	def protected appendVisibility(IAppendable appendable, JvmVisibility visibility, JvmVisibility skippableDefault) {
+	def protected appendVisibility(ISourceAppender appendable, JvmVisibility visibility, JvmVisibility skippableDefault) {
 		appendable.append(
 			switch visibility {
 				case skippableDefault: ''
@@ -59,25 +65,33 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 			})
 	}
 
-	def protected appendType(IAppendable appendable, JvmTypeReference typeRef, String surrogate) {
+	def protected appendType(ISourceAppender appendable, LightweightTypeReference typeRef, String surrogate) {
 		if (typeRef == null) {
 			appendable.append(surrogate)
 		} else {
-			typeReferenceSerializer.serialize(typeRef, context, appendable)
+			appendable.append(typeRef)
 		}
 		appendable
 	}
 	
-	def protected appendTypeParameters(IAppendable appendable, List<JvmTypeParameter> typeParameters) {
+	def protected appendTypeParameters(ISourceAppender appendable, List<JvmTypeParameter> typeParameters) {
 		val iterator = typeParameters.iterator
 		if(iterator.hasNext()) {
 			appendable.append("<")
 			do {
 				val typeParameter = iterator.next()
-				if (typeParameter != null) {
-					appendable.append(typeParameter.name)
-					if(typeParameter.constraints != null) {
-						// TODO
+				appendable.append(typeParameter.name)
+				val upperBounds = typeParameter.constraints.filter(JvmUpperBound).filter[typeReference.identifier != 'java.lang.Object']
+				if(!upperBounds.empty) {
+					appendable.append(" extends ");
+					var isFirst = true
+					val owner = new StandardTypeReferenceOwner(services, context)
+					val converter = new OwnedConverter(owner) 
+					for(upperBound: upperBounds) {
+						if(!isFirst)
+							appendable.append(" & ")
+						isFirst = false
+						appendable.appendType(converter.apply(upperBound.typeReference), "Object")
 					}
 				}
 				if (iterator.hasNext())
@@ -87,8 +101,6 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 		}
 		appendable
 	}
-	
-	def protected TypeReferenceSerializer getTypeReferenceSerializer()
 	
 	def protected getIdentifierOrObject(JvmTypeReference typeReference) {
 		switch(typeReference) {

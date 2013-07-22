@@ -8,20 +8,15 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JavaFieldBuilder extends AbstractFieldBuilder implements Java {
-  @Inject
-  private TypeReferenceSerializer typeRefSerializer;
-  
   public boolean isValid() {
     boolean _and = false;
     boolean _and_1 = false;
@@ -36,19 +31,15 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements Java {
     if (!_and_1) {
       _and = false;
     } else {
-      JvmTypeReference _fieldType = this.getFieldType();
+      LightweightTypeReference _fieldType = this.getFieldType();
       boolean _notEquals_1 = (!Objects.equal(_fieldType, null));
       _and = (_and_1 && _notEquals_1);
     }
     return _and;
   }
   
-  protected TypeReferenceSerializer getTypeReferenceSerializer() {
-    return this.typeRefSerializer;
-  }
-  
-  public IAppendable build(final IAppendable appendable) {
-    IAppendable _xblockexpression = null;
+  public ISourceAppender build(final ISourceAppender appendable) {
+    ISourceAppender _xblockexpression = null;
     {
       JvmVisibility _visibility = this.getVisibility();
       this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
@@ -56,12 +47,12 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements Java {
       if (_isStaticFlag) {
         appendable.append("static ");
       }
-      JvmTypeReference _fieldType = this.getFieldType();
-      IAppendable _appendType = this.appendType(appendable, _fieldType, "Object");
-      IAppendable _append = _appendType.append(" ");
+      LightweightTypeReference _fieldType = this.getFieldType();
+      ISourceAppender _appendType = this.appendType(appendable, _fieldType, "Object");
+      ISourceAppender _append = _appendType.append(" ");
       String _fieldName = this.getFieldName();
-      IAppendable _append_1 = _append.append(_fieldName);
-      IAppendable _append_2 = _append_1.append(";");
+      ISourceAppender _append_1 = _append.append(_fieldName);
+      ISourceAppender _append_2 = _append_1.append(";");
       _xblockexpression = (_append_2);
     }
     return _xblockexpression;

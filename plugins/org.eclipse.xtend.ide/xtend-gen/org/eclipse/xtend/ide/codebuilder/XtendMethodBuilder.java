@@ -16,18 +16,13 @@ import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
-  @Inject
-  private XtypeTypeReferenceSerializer typeRefSerializer;
-  
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
@@ -45,12 +40,8 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
     return _and;
   }
   
-  protected TypeReferenceSerializer getTypeReferenceSerializer() {
-    return this.typeRefSerializer;
-  }
-  
-  public IAppendable build(final IAppendable appendable) {
-    IAppendable _xblockexpression = null;
+  public ISourceAppender build(final ISourceAppender appendable) {
+    ISourceAppender _xblockexpression = null;
     {
       String _xifexpression = null;
       boolean _isOverrideFlag = this.isOverrideFlag();
@@ -59,7 +50,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
       } else {
         _xifexpression = "def ";
       }
-      IAppendable _append = appendable.append(_xifexpression);
+      ISourceAppender _append = appendable.append(_xifexpression);
       JvmVisibility _visibility = this.getVisibility();
       this.appendVisibility(_append, _visibility, JvmVisibility.PUBLIC);
       boolean _isStaticFlag = this.isStaticFlag();
@@ -70,15 +61,15 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
       this.appendTypeParameters(appendable, _typeParameters);
       boolean _isAbstractFlag = this.isAbstractFlag();
       if (_isAbstractFlag) {
-        JvmTypeReference _returnType = this.getReturnType();
-        IAppendable _appendType = this.appendType(appendable, _returnType, "void");
+        LightweightTypeReference _returnType = this.getReturnType();
+        ISourceAppender _appendType = this.appendType(appendable, _returnType, "void");
         _appendType.append(" ");
       }
       String _methodName = this.getMethodName();
-      IAppendable _append_1 = appendable.append(_methodName);
-      IAppendable _appendParameters = this.appendParameters(_append_1);
-      IAppendable _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-      IAppendable _appendBody = this.appendBody(_appendThrowsClause, "");
+      ISourceAppender _append_1 = appendable.append(_methodName);
+      ISourceAppender _appendParameters = this.appendParameters(_append_1);
+      ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
+      ISourceAppender _appendBody = this.appendBody(_appendThrowsClause, "");
       _xblockexpression = (_appendBody);
     }
     return _xblockexpression;

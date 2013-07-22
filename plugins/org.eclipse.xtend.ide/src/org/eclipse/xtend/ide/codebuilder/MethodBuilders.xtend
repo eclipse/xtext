@@ -10,10 +10,8 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.xbase.compiler.IAppendable
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.ISourceAppender
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
 
@@ -23,28 +21,21 @@ import static org.eclipse.xtext.common.types.JvmVisibility.*
 abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
 	
 	@Property String methodName
-	@Property JvmTypeReference returnType
+	@Property LightweightTypeReference returnType
 	@Property boolean staticFlag
 	@Property boolean abstractFlag
 	@Property boolean overrideFlag
-
 }
 
 class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Xtend {
 	
-	@Inject XtypeTypeReferenceSerializer typeRefSerializer
-
 	@Inject extension InsertionOffsets
 
 	override isValid() {
 		super.isValid() && methodName != null
 	}
 	
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable.append(if(overrideFlag) 'override ' else 'def ')
 			.appendVisibility(visibility, PUBLIC)
 		if(staticFlag)
@@ -73,17 +64,11 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.X
 
 class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Java {
 	
-	@Inject TypeReferenceSerializer typeRefSerializer
-
 	override isValid() {
 		super.isValid() && methodName != null
 	}
 	
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		if(overrideFlag)
 			appendable.append("@Override").newLine 
 		appendable
@@ -108,3 +93,4 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Ja
 		ownerSource as IType
 	}
 }
+

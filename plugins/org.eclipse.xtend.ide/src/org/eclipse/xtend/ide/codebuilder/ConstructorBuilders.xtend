@@ -10,9 +10,7 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtext.xbase.compiler.IAppendable
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.ISourceAppender
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
 
@@ -24,15 +22,9 @@ abstract class AbstractConstructorBuilder extends AbstractExecutableBuilder {
  
 class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Xtend {
 	
-	@Inject XtypeTypeReferenceSerializer typeRefSerializer
-
 	@Inject extension InsertionOffsets
 
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable
 			.appendVisibility(visibility, PUBLIC)
 			.append('new')
@@ -56,13 +48,7 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 
 class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Java {
 	
-	@Inject TypeReferenceSerializer typeRefSerializer
-
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable
 			.appendVisibility(visibility, PUBLIC)
 			.append(owner.simpleName)

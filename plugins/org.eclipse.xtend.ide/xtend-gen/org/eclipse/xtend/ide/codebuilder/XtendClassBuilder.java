@@ -8,16 +8,11 @@ import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class XtendClassBuilder extends AbstractClassBuilder implements Xtend {
-  @Inject
-  private XtypeTypeReferenceSerializer typeRefSerializer;
-  
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
@@ -43,17 +38,13 @@ public class XtendClassBuilder extends AbstractClassBuilder implements Xtend {
     return _and;
   }
   
-  protected TypeReferenceSerializer getTypeReferenceSerializer() {
-    return this.typeRefSerializer;
-  }
-  
-  public IAppendable build(final IAppendable appendable) {
-    IAppendable _append = appendable.append("class ");
+  public ISourceAppender build(final ISourceAppender appendable) {
+    ISourceAppender _append = appendable.append("class ");
     String _className = this.getClassName();
-    IAppendable _append_1 = _append.append(_className);
-    IAppendable _append_2 = _append_1.append(" {");
-    IAppendable _newLine = _append_2.newLine();
-    IAppendable _append_3 = _newLine.append("}");
+    ISourceAppender _append_1 = _append.append(_className);
+    ISourceAppender _append_2 = _append_1.append(" {");
+    ISourceAppender _newLine = _append_2.newLine();
+    ISourceAppender _append_3 = _newLine.append("}");
     return _append_3;
   }
   

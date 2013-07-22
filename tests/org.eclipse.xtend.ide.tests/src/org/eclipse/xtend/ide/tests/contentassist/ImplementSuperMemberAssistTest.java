@@ -52,6 +52,11 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 		newBuilder().append("class Foo extends Thread { currentT").assertText("");
 	}
 	
+	@Test public void testMethodTypeParameter() throws Exception {
+		newBuilder().append("class Foo <T> { def <U extends T> foo() {} } class Bar extends Foo<CharSequence>{ foo").assertText(
+				"\n" + indent + "\n" + indent + "override <U extends CharSequence> foo() {\n" + indent + indent + "super.<U>foo()\n" + indent +"}");
+	}
+	
 	@Test public void testVarArgsMethod_01() throws Exception {
 		newBuilder().append("class A { def <T> Iterable<T> x(T... args) {} } class B extends A { x").assertText(
 				"\n" + indent + "\n" + indent + "override <T> x(T... args) {\n" +
@@ -68,7 +73,7 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	
 	@Test public void testVarArgsConstructor_01() throws Exception {
 		newBuilder().append("class A { new(Class<?>... c) {} } class B extends A { ne").assertText(
-				"\n" + indent + "\n" + indent + "new(Class<? extends Object>... c) {\n" + // should be Class<?>
+				"\n" + indent + "\n" + indent + "new(Class<?>... c) {\n" + // should be Class<?>
 				indent + indent + "super(c)\n" +
 				indent + "}", 
 				"new");

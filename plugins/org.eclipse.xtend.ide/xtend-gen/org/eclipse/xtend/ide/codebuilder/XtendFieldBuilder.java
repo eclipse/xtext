@@ -14,18 +14,13 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
-  @Inject
-  private XtypeTypeReferenceSerializer typeRefSerializer;
-  
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
@@ -43,12 +38,8 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
     return _and;
   }
   
-  protected TypeReferenceSerializer getTypeReferenceSerializer() {
-    return this.typeRefSerializer;
-  }
-  
-  public IAppendable build(final IAppendable appendable) {
-    IAppendable _xblockexpression = null;
+  public ISourceAppender build(final ISourceAppender appendable) {
+    ISourceAppender _xblockexpression = null;
     {
       JvmVisibility _visibility = this.getVisibility();
       this.appendVisibility(appendable, _visibility, JvmVisibility.PRIVATE);
@@ -56,11 +47,11 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
       if (_isStaticFlag) {
         appendable.append("static ");
       }
-      JvmTypeReference _fieldType = this.getFieldType();
-      IAppendable _appendType = this.appendType(appendable, _fieldType, "Object");
-      IAppendable _append = _appendType.append(" ");
+      LightweightTypeReference _fieldType = this.getFieldType();
+      ISourceAppender _appendType = this.appendType(appendable, _fieldType, "Object");
+      ISourceAppender _append = _appendType.append(" ");
       String _fieldName = this.getFieldName();
-      IAppendable _append_1 = _append.append(_fieldName);
+      ISourceAppender _append_1 = _append.append(_fieldName);
       _xblockexpression = (_append_1);
     }
     return _xblockexpression;

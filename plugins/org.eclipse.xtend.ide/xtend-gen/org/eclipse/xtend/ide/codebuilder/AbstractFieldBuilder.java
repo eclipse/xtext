@@ -9,8 +9,8 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Jan Koehnlein
@@ -27,13 +27,13 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
     this._fieldName = fieldName;
   }
   
-  private JvmTypeReference _fieldType;
+  private LightweightTypeReference _fieldType;
   
-  public JvmTypeReference getFieldType() {
+  public LightweightTypeReference getFieldType() {
     return this._fieldType;
   }
   
-  public void setFieldType(final JvmTypeReference fieldType) {
+  public void setFieldType(final LightweightTypeReference fieldType) {
     this._fieldType = fieldType;
   }
   

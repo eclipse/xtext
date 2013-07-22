@@ -4,9 +4,7 @@ import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.xbase.compiler.IAppendable
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.ISourceAppender
 
 abstract class AbstractInterfaceBuilder extends AbstractCodeBuilder {
 	
@@ -20,19 +18,13 @@ abstract class AbstractInterfaceBuilder extends AbstractCodeBuilder {
 
 class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements ICodeBuilder.Xtend {
 	
-	@Inject XtypeTypeReferenceSerializer typeRefSerializer
-
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
 		super.valid && interfaceName != null && visibility == JvmVisibility.PUBLIC  
 	}	
 
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable.append('interface ').append(interfaceName).append(' {')
 			.newLine.append('}')
 	}
@@ -52,17 +44,11 @@ class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements ICodeBui
 
 class JavaInterfaceBuilder extends AbstractInterfaceBuilder implements ICodeBuilder.Java {
 	
-	@Inject TypeReferenceSerializer typeRefSerializer
-
 	override isValid() {
 		super.valid && interfaceName != null  
 	}	
 
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable.appendVisibility(visibility, JvmVisibility.DEFAULT)
 			.append('interface ').append(interfaceName).append(' {')
 			.newLine.append('}')

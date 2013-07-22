@@ -29,15 +29,11 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -62,7 +58,13 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.quickfix.ILinkingIssueQuickfixProvider;
 
@@ -71,27 +73,23 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 @NonNullByDefault
 public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
-
+	
+	@Inject 
+	private CommonTypeComputationServices services;
+	
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
 
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
-
-	@Inject
-	private TypeReferences typeRefs;
 
 	@Inject
 	private Primitives primitives;
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
-	
-	@Inject
-	private TypeResolver typeResolver;
 	
 	@Inject 
 	private OperatorMapping operatorMapping;
@@ -172,30 +170,30 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 	
 	@Nullable
-	protected JvmTypeReference getNewMemberType(XAbstractFeatureCall call) {
+	protected LightweightTypeReference getNewMemberType(XAbstractFeatureCall call) {
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(call);
 		if(call instanceof XAssignment) {
 			XExpression value = ((XAssignment) call).getValue();
-			return typeResolver.resolveType(call, typeProvider.getType(value));
+			return resolvedTypes.getActualType(value);
 		} else {
-			JvmTypeReference expectedType = typeProvider.getExpectedType(call);
-			return (expectedType != null) ? typeResolver.resolveType(call, expectedType) : null;
+			return resolvedTypes.getExpectedType(call);
 		}
 	}
 	
 	@Nullable
-	protected JvmTypeReference getReceiverType(XAbstractFeatureCall featureCall) {
+	protected LightweightTypeReference getReceiverType(XAbstractFeatureCall featureCall) {
 		XExpression actualReceiver = featureCall.getActualReceiver();
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, featureCall);
 		if(actualReceiver == null) {
-			return typeRefs.createTypeRef(getCallersType(featureCall));
+			return new ParameterizedTypeReference(owner, getCallersType(featureCall));
 		} else if (actualReceiver instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) actualReceiver).isTypeLiteral()) {
 			JvmType type = (JvmType) ((XAbstractFeatureCall) actualReceiver).getFeature();
-			JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			reference.setType(type);
+			ParameterizedTypeReference reference = new ParameterizedTypeReference(owner, type);
 			return reference;
 		} else {
-			JvmTypeReference typeRef = typeProvider.getType(actualReceiver);
+			LightweightTypeReference typeRef = typeResolver.resolveTypes(featureCall).getActualType(actualReceiver);
 			if(typeRef != null && typeRef.getType() instanceof JvmDeclaredType)
-				return typeResolver.resolveType(featureCall, typeRef);
+				return typeRef;
 		}
 		return null;
 	}
@@ -223,7 +221,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	
 	protected void newLocalVariableQuickfix(final String variableName, XAbstractFeatureCall call, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
-		JvmTypeReference variableType = getNewMemberType(call);
+		LightweightTypeReference variableType = getNewMemberType(call);
 		final StringBuilderBasedAppendable localVarDescriptionBuilder = new StringBuilderBasedAppendable();
 		localVarDescriptionBuilder.append("...").newLine();
 		final String defaultValueLiteral = getDefaultValueLiteral(variableType);
@@ -254,17 +252,17 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected void newMethodQuickfixes(String newMemberName, XAbstractFeatureCall call, 
 			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		JvmDeclaredType callersType = getCallersType(call);
-		JvmTypeReference receiverType = getReceiverType(call);
-		JvmTypeReference returnType = getNewMemberType(call);
+		LightweightTypeReference receiverType = getReceiverType(call);
+		LightweightTypeReference returnType = getNewMemberType(call);
 		if(callersType == null || receiverType == null)
 			return;
-		List<JvmTypeReference> argumentTypes = getResolvedArgumentTypes(call, call.getActualArguments());
+		List<LightweightTypeReference> argumentTypes = getResolvedArgumentTypes(call, call.getActualArguments());
 		newMethodQuickfixes(receiverType, newMemberName, returnType, argumentTypes, call, callersType, issue,
 				issueResolutionAcceptor);
 	}
 
-	protected void newMethodQuickfixes(JvmTypeReference containerType, String name, @Nullable JvmTypeReference returnType,
-		List<JvmTypeReference> argumentTypes, XAbstractFeatureCall call, JvmDeclaredType callersType,
+	protected void newMethodQuickfixes(LightweightTypeReference containerType, String name, @Nullable LightweightTypeReference returnType,
+		List<LightweightTypeReference> argumentTypes, XAbstractFeatureCall call, JvmDeclaredType callersType,
 		final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		boolean isLocal = callersType == containerType.getType();
 		boolean isStatic = isStaticAccess(call);
@@ -279,19 +277,20 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			newMethodQuickfix(declaredType, name, returnType, argumentTypes, isStatic, isAbstract, false, isLocal, call, issue, issueResolutionAcceptor);
 		}
 		if(!isLocal && !isStatic) {
-			List<JvmTypeReference> extensionMethodParameterTypes = newArrayList(argumentTypes);
+			List<LightweightTypeReference> extensionMethodParameterTypes = newArrayList(argumentTypes);
 			extensionMethodParameterTypes.add(0, containerType);
 			newMethodQuickfix(callersType, name, returnType, extensionMethodParameterTypes, false, isAbstract, true, true, call, issue, issueResolutionAcceptor);
 		}
 	}
 	
-	protected void newMethodQuickfix(JvmDeclaredType containerType, String name, @Nullable JvmTypeReference returnType,
-		List<JvmTypeReference> parameterTypes, boolean isStatic, boolean isAbstract, boolean isExtension, boolean isLocal, XAbstractFeatureCall call, 
+	protected void newMethodQuickfix(JvmDeclaredType containerType, String name, @Nullable LightweightTypeReference returnType,
+		List<LightweightTypeReference> parameterTypes, boolean isStatic, boolean isAbstract, boolean isExtension, boolean isLocal, XAbstractFeatureCall call, 
 		final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		AbstractMethodBuilder methodBuilder = codeBuilderFactory.createMethodBuilder(containerType);
 		methodBuilder.setMethodName(name);
 		methodBuilder.setReturnType(returnType);
-		methodBuilder.setParameterTypes(parameterTypes);
+		for(LightweightTypeReference parameterType: parameterTypes) 
+			methodBuilder.newParameterBuilder().setType(parameterType);
 		methodBuilder.setContext(call);
 		methodBuilder.setVisibility(JvmVisibility.PUBLIC);
 		methodBuilder.setStaticFlag(isStatic);
@@ -303,7 +302,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			label.append("extension ");
 		label.append("method '").append(name).append("(");
 		boolean isFirst = true;
-		for(JvmTypeReference parameterType: parameterTypes) {
+		for(LightweightTypeReference parameterType: parameterTypes) {
 			if(!isFirst) 
 				label.append(", ");
 			isFirst = false;
@@ -323,11 +322,11 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected void newGetterQuickfixes(String name, XAbstractFeatureCall call, 
 			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		JvmDeclaredType callersType = getCallersType(call);
-		JvmTypeReference receiverType = getReceiverType(call);
-		JvmTypeReference fieldType = getNewMemberType(call);
+		LightweightTypeReference receiverType = getReceiverType(call);
+		LightweightTypeReference fieldType = getNewMemberType(call);
 		if(callersType != null && receiverType != null) {
 			newMethodQuickfixes(receiverType, getAccessorMethodName("get", name), 
-					fieldType, Collections.<JvmTypeReference>emptyList(), call, 
+					fieldType, Collections.<LightweightTypeReference>emptyList(), call, 
 					callersType, issue, issueResolutionAcceptor);
 		}
 	}
@@ -335,13 +334,13 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected void newFieldQuickfix(String name, XAbstractFeatureCall call, 
 			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		JvmDeclaredType callersType = getCallersType(call);
-		JvmTypeReference receiverType = getReceiverType(call);
-		JvmTypeReference fieldType = getNewMemberType(call);
+		LightweightTypeReference receiverType = getReceiverType(call);
+		LightweightTypeReference fieldType = getNewMemberType(call);
 		if(callersType != null && receiverType != null && callersType == receiverType.getType()) 
 			newFieldQuickfix(callersType, name, fieldType, isStaticAccess(call), call, issue, issueResolutionAcceptor);
 	}
 
-	protected void newFieldQuickfix(JvmDeclaredType containerType, String name, @Nullable JvmTypeReference fieldType,
+	protected void newFieldQuickfix(JvmDeclaredType containerType, String name, @Nullable LightweightTypeReference fieldType,
 			boolean isStatic, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		AbstractFieldBuilder fieldBuilder = codeBuilderFactory.createFieldBuilder(containerType);
 		fieldBuilder.setFieldName(name);
@@ -371,9 +370,11 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected void newConstructorQuickfix(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			JvmDeclaredType ownerType, XExpression call, List<XExpression> arguments) {
 		if(ownerType != null) {
+			List<LightweightTypeReference> parameterTypes = getResolvedArgumentTypes(call, arguments);
 			AbstractConstructorBuilder constructorBuilder = codeBuilderFactory.createConstructorBuilder(ownerType);
 			constructorBuilder.setContext(call);
-			constructorBuilder.setParameterTypes(getResolvedArgumentTypes(call, arguments));
+			for(LightweightTypeReference parameterType: parameterTypes) 
+				constructorBuilder.newParameterBuilder().setType(parameterType);
 			constructorBuilder.setVisibility(JvmVisibility.PUBLIC);
 			StringBuffer label = new StringBuffer("Create constructor '");
 			if(constructorBuilder.getOwnerSource() instanceof XtendClass)
@@ -382,7 +383,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 				label.append(ownerType.getSimpleName());
 			label.append("(");
 			boolean isFirst = true;
-			for(JvmTypeReference parameterType: constructorBuilder.getParameterTypes()) {
+			for(LightweightTypeReference parameterType: parameterTypes) {
 				if(!isFirst) 
 					label.append(", ");
 				isFirst = false;
@@ -415,8 +416,8 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	protected String getDefaultValueLiteral(@Nullable JvmTypeReference type) {
-		if (type != null && primitives.isPrimitive(type)) {
+	protected String getDefaultValueLiteral(@Nullable LightweightTypeReference type) {
+		if (type != null && type.isPrimitive()) {
 			Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) type.getType());
 			if (primitiveKind == Primitive.Boolean)
 				return "false";
@@ -426,13 +427,14 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		return "null";
 	}
 
-	protected List<JvmTypeReference> getResolvedArgumentTypes(EObject context, List<XExpression> arguments) {
-		List<JvmTypeReference> argumentTypes = newArrayList();
+	protected List<LightweightTypeReference> getResolvedArgumentTypes(EObject context, List<XExpression> arguments) {
+		List<LightweightTypeReference> argumentTypes = newArrayList();
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(context);
 		for(XExpression argument: arguments) {
-			JvmTypeReference argumentType = typeProvider.getType(argument);
-			JvmTypeReference resolved = typeResolver.resolveType(context, argumentType);
-			if(resolved == null) { 
-				argumentTypes.add(typeRefs.getTypeForName(Object.class, context));
+			LightweightTypeReference resolved = resolvedTypes.getActualType(argument);
+			if(resolved == null) {
+				StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
+				argumentTypes.add(new ParameterizedTypeReference(owner, services.getTypeReferences().findDeclaredType(Object.class, context)));
 			} else {
 				argumentTypes.add(resolved);
 			}

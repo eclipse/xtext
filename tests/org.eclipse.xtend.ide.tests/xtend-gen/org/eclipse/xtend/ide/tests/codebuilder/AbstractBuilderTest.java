@@ -3,6 +3,7 @@ package org.eclipse.xtend.ide.tests.codebuilder;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -21,6 +22,10 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
@@ -38,6 +43,9 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private TypeReferences _typeReferences;
+  
+  @Inject
+  private CommonTypeComputationServices services;
   
   private JvmDeclaredType xtendClass;
   
@@ -92,6 +100,19 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected LightweightTypeReference createTypeRef(final JvmType type) {
+    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, type);
+    ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_standardTypeReferenceOwner, type);
+    return _parameterizedTypeReference;
+  }
+  
+  protected LightweightTypeReference createTypeRef(final Class<? extends Object> clazz, final EObject context) {
+    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, context);
+    JvmType _findDeclaredType = this._typeReferences.findDeclaredType(clazz, context);
+    ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_standardTypeReferenceOwner, _findDeclaredType);
+    return _parameterizedTypeReference;
   }
   
   protected void assertBuilds(final ICodeBuilder builder, final String expectedCode) {

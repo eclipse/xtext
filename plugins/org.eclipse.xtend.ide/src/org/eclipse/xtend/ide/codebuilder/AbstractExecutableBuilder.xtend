@@ -7,11 +7,12 @@ import java.util.List
 import java.util.Set
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.swt.graphics.Image
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions
-import org.eclipse.xtext.xbase.compiler.IAppendable
-import static org.eclipse.xtext.common.types.JvmVisibility.*
 import org.eclipse.xtext.common.types.JvmTypeParameter
+import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions
+import org.eclipse.xtext.xbase.compiler.ISourceAppender
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+
+import static org.eclipse.xtext.common.types.JvmVisibility.*
 
 /**
  * @author Jan Koehnlein
@@ -19,14 +20,15 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 
 	@Inject extension JdtVariableCompletions
+	@Inject extension CodeBuilderFactory 
 
-	@Property List<String> parameterNames = emptyList
-	@Property List<JvmTypeReference> parameterTypes = emptyList
-	@Property List<JvmTypeReference> exceptions = emptyList
+	@Property List<AbstractParameterBuilder> parameterBuilders = emptyList
+	@Property List<LightweightTypeReference> exceptions = emptyList
 	@Property List<JvmTypeParameter> typeParameters = emptyList
 	@Property String body
+	@Property boolean varArgsFlag
 
-	def appendBody(IAppendable appendable, String statementSeparator) {
+	def appendBody(ISourceAppender appendable, String statementSeparator) {
 		appendable.append(' {').increaseIndentation.newLine.append(body ?: defaultBody).append(statementSeparator).
 			decreaseIndentation.newLine.append('}')
 	}
@@ -35,33 +37,36 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 		'throw new UnsupportedOperationException("TODO: auto-generated method stub")'
 	}
 
-	def protected appendParameters(IAppendable appendable) {
-		if (!parameterNames.empty && parameterNames.size != parameterTypes.size)
-			throw new IllegalStateException("Number of parameter names and types must match")
-		appendable.append("(")
-		val notAllowed = <String>newHashSet()
+	def newParameterBuilder() {
+		if(parameterBuilders.empty)
+			parameterBuilders = newArrayList
+		val builder = createParameterBuilder(owner)
+		builder.context = context
+		parameterBuilders.add(builder)
+		builder
+	}
 
-		for (i : 0 ..< parameterTypes.size) {
-			val typeRef = parameterTypes.get(i)
-			if (typeRef != null) {
-				appendable.appendType(typeRef, "Object")
-				appendable.append(" ")
-				if (parameterNames.empty) {
-					val acceptor = new VariableNameAcceptor(notAllowed)
-					getVariableProposals(typeRef.identifierOrObject, context,
-						JdtVariableCompletions.VariableType.PARAMETER, notAllowed, acceptor)
-					appendable.append(acceptor.getVariableName())
-				} else {
-					appendable.append(parameterNames.get(i))
-				}
+	def protected appendParameters(ISourceAppender appendable) {
+		appendable.append("(")
+		val notAllowed = newHashSet
+		if(!parameterBuilders.isEmpty)
+			parameterBuilders.last.varArgsFlag = varArgsFlag
+		for (i : 0 ..< parameterBuilders.size) {
+			val parameterBuilder = parameterBuilders.get(i)
+			val acceptor = new VariableNameAcceptor(notAllowed)
+			if(parameterBuilder.name == null) {
+				getVariableProposals(parameterBuilder.type.identifier, context,
+					JdtVariableCompletions.VariableType.PARAMETER, notAllowed, acceptor)
+				parameterBuilder.name = acceptor.variableName
 			}
-			if (i != parameterTypes.size - 1)
+			parameterBuilder.build(appendable)
+			if (i != parameterBuilders.size - 1)
 				appendable.append(", ")
 		}
 		appendable.append(")")
 	}
 
-	def protected appendThrowsClause(IAppendable appendable) {
+	def protected appendThrowsClause(ISourceAppender appendable) {
 		val iterator = exceptions.iterator
 		if (iterator.hasNext()) {
 			appendable.append(" throws ")
@@ -84,6 +89,13 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 			case PUBLIC: 'methpub_obj.gif'
 			default: 'methdef_obj.gif'
 		}
+	}
+	
+	override isValid() {
+		parameterBuilders.forall[isValid]
+		 && !exceptions.contains(null)
+		 && !typeParameters.contains(null)
+		 && super.isValid
 	}
 
 }
@@ -110,3 +122,5 @@ class VariableNameAcceptor implements JdtVariableCompletions.CompletionDataAccep
 		return ""
 	}
 }
+
+

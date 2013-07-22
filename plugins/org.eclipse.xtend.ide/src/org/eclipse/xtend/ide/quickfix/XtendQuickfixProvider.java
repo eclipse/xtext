@@ -39,7 +39,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -56,7 +55,6 @@ import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
@@ -74,10 +72,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	private static final Logger logger = Logger.getLogger(XtendQuickfixProvider.class);
 	
 	@Inject	private ReplacingAppendable.Factory appendableFactory;
-	
-	@Inject	private XtypeTypeReferenceSerializer typeRefSerializer;
-	
-	@Inject	private TypeReferences typeRefs;
 	
 	@Inject private XtendGrammarAccess grammarAccess;
 	
@@ -280,8 +274,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 								else
 									appendable.append(", ");
 								for(int i = 0; i < exceptions.size(); i++) {
-									typeRefSerializer.serialize(typeRefs.createTypeRef(exceptions.get(i)), 
-											xtendFunction, appendable);
+									// TODO type ref?
+									appendable.append(exceptions.get(i));
 									if (i != exceptions.size() - 1) {
 										appendable.append(", ");
 									}
@@ -341,20 +335,15 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 											.decreaseIndentation()
 											.newLine();
 									for(JvmType exceptionType: exceptions) {
-										appendable.append("} catch (");
-										typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType),
-												childThrowingException, appendable);
-										appendable.append(" ").openScope();
-										String exceptionVar = appendable.declareVariable(exceptionType, "exc");
-										appendable.append(exceptionVar)
-												.append(") {")
-												.increaseIndentation()
-													.newLine()
-													.append("throw new RuntimeException(\"auto-generated try/catch\", " + exceptionVar + ")")
-												.decreaseIndentation()
-												.newLine().closeScope();
+										appendable
+											.append("} catch (")
+										// TODO type ref?
+											.append(exceptionType).append(" exc) {").increaseIndentation()
+												.newLine()
+												.append("throw new RuntimeException(\"auto-generated try/catch\", exc)").decreaseIndentation()
+											.newLine();
 									}
-									appendable.append("}").closeScope();
+									appendable.append("}");
 									appendable.commitChanges();
 								}
 							}
