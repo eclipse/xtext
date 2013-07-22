@@ -11,16 +11,19 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @NonNullByDefault
-public interface IAppendable {
+public interface IAppendable extends ISourceAppender {
 	
 	IAppendable append(CharSequence string);
 
 	IAppendable append(JvmType type);
+
+	IAppendable append(LightweightTypeReference typeRef);
 
 	IAppendable newLine();
 

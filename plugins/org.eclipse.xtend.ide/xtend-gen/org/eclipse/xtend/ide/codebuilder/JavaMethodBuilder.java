@@ -8,22 +8,17 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
-  @Inject
-  private TypeReferenceSerializer typeRefSerializer;
-  
   public boolean isValid() {
     boolean _and = false;
     boolean _isValid = super.isValid();
@@ -37,16 +32,12 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
     return _and;
   }
   
-  protected TypeReferenceSerializer getTypeReferenceSerializer() {
-    return this.typeRefSerializer;
-  }
-  
-  public IAppendable build(final IAppendable appendable) {
-    IAppendable _xblockexpression = null;
+  public ISourceAppender build(final ISourceAppender appendable) {
+    ISourceAppender _xblockexpression = null;
     {
       boolean _isOverrideFlag = this.isOverrideFlag();
       if (_isOverrideFlag) {
-        IAppendable _append = appendable.append("@Override");
+        ISourceAppender _append = appendable.append("@Override");
         _append.newLine();
       }
       JvmVisibility _visibility = this.getVisibility();
@@ -60,14 +51,14 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
         appendable.append("static ");
       }
       List<JvmTypeParameter> _typeParameters = this.getTypeParameters();
-      IAppendable _appendTypeParameters = this.appendTypeParameters(appendable, _typeParameters);
-      JvmTypeReference _returnType = this.getReturnType();
-      IAppendable _appendType = this.appendType(_appendTypeParameters, _returnType, "void");
-      IAppendable _append_1 = _appendType.append(" ");
+      ISourceAppender _appendTypeParameters = this.appendTypeParameters(appendable, _typeParameters);
+      LightweightTypeReference _returnType = this.getReturnType();
+      ISourceAppender _appendType = this.appendType(_appendTypeParameters, _returnType, "void");
+      ISourceAppender _append_1 = _appendType.append(" ");
       String _methodName = this.getMethodName();
-      IAppendable _append_2 = _append_1.append(_methodName);
-      IAppendable _appendParameters = this.appendParameters(_append_2);
-      IAppendable _appendThrowsClause = this.appendThrowsClause(_appendParameters);
+      ISourceAppender _append_2 = _append_1.append(_methodName);
+      ISourceAppender _appendParameters = this.appendParameters(_append_2);
+      ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
       this.appendBody(_appendThrowsClause, ";");
       boolean _isAbstractFlag_1 = this.isAbstractFlag();
       if (_isAbstractFlag_1) {

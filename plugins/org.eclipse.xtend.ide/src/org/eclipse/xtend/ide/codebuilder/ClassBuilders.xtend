@@ -4,9 +4,7 @@ import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.xbase.compiler.IAppendable
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.ISourceAppender
 
 abstract class AbstractClassBuilder extends AbstractCodeBuilder {
 	
@@ -20,19 +18,13 @@ abstract class AbstractClassBuilder extends AbstractCodeBuilder {
 
 class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xtend {
 	
-	@Inject XtypeTypeReferenceSerializer typeRefSerializer
-
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
 		super.valid && className != null && visibility == JvmVisibility.PUBLIC  
 	}	
 
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable.append('class ').append(className).append(' {')
 			.newLine.append('}')
 	}
@@ -52,17 +44,11 @@ class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xte
 
 class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Java {
 	
-	@Inject TypeReferenceSerializer typeRefSerializer
-
 	override isValid() {
 		super.valid && className != null  
 	}	
 
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable.appendVisibility(visibility, JvmVisibility.DEFAULT)
 			.append('class ').append(className).append(' {')
 			.newLine.append('}')

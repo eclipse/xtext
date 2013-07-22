@@ -2,23 +2,20 @@ package org.eclipse.xtend.ide.tests.codebuilder;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.Collections;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
+import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -26,10 +23,6 @@ public class MethodBuilderTest extends AbstractBuilderTest {
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
-  @Inject
-  @Extension
-  private TypeReferences _typeReferences;
   
   @Inject
   @Extension
@@ -45,15 +38,17 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           it.setContext(_xtendClass);
           it.setMethodName("foo");
           JvmDeclaredType _xtendClass_1 = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
+          LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(_xtendClass_1);
           it.setReturnType(_createTypeRef);
           it.setVisibility(JvmVisibility.PUBLIC);
+          AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
           JvmDeclaredType _xtendClass_2 = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef_1 = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_2);
+          LightweightTypeReference _createTypeRef_1 = MethodBuilderTest.this.createTypeRef(_xtendClass_2);
+          _newParameterBuilder.setType(_createTypeRef_1);
+          AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
           JvmDeclaredType _xtendClass_3 = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef_2 = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_3);
-          ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_createTypeRef_1, _createTypeRef_2);
-          it.setParameterTypes(_newArrayList);
+          LightweightTypeReference _createTypeRef_2 = MethodBuilderTest.this.createTypeRef(_xtendClass_3);
+          _newParameterBuilder_1.setType(_createTypeRef_2);
         }
       };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -77,15 +72,17 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           it.setContext(_javaClass);
           it.setMethodName("bar");
           JvmDeclaredType _javaClass_1 = MethodBuilderTest.this.getJavaClass();
-          JvmParameterizedTypeReference _createTypeRef = MethodBuilderTest.this._typeReferences.createTypeRef(_javaClass_1);
+          LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(_javaClass_1);
           it.setReturnType(_createTypeRef);
           it.setVisibility(JvmVisibility.PUBLIC);
+          AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
           JvmDeclaredType _javaClass_2 = MethodBuilderTest.this.getJavaClass();
-          JvmParameterizedTypeReference _createTypeRef_1 = MethodBuilderTest.this._typeReferences.createTypeRef(_javaClass_2);
+          LightweightTypeReference _createTypeRef_1 = MethodBuilderTest.this.createTypeRef(_javaClass_2);
+          _newParameterBuilder.setType(_createTypeRef_1);
+          AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
           JvmDeclaredType _javaClass_3 = MethodBuilderTest.this.getJavaClass();
-          JvmParameterizedTypeReference _createTypeRef_2 = MethodBuilderTest.this._typeReferences.createTypeRef(_javaClass_3);
-          ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_createTypeRef_1, _createTypeRef_2);
-          it.setParameterTypes(_newArrayList);
+          LightweightTypeReference _createTypeRef_2 = MethodBuilderTest.this.createTypeRef(_javaClass_3);
+          _newParameterBuilder_1.setType(_createTypeRef_2);
         }
       };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -110,14 +107,14 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           it.setContext(_xtendClass);
           it.setMethodName("foo");
           JvmDeclaredType _xtendClass_1 = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
+          LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(_xtendClass_1);
           it.setReturnType(_createTypeRef);
           it.setVisibility(JvmVisibility.PROTECTED);
           it.setStaticFlag(true);
+          AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
           JvmDeclaredType _xtendClass_2 = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef_1 = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_2);
-          ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_createTypeRef_1);
-          it.setParameterTypes(_newArrayList);
+          LightweightTypeReference _createTypeRef_1 = MethodBuilderTest.this.createTypeRef(_xtendClass_2);
+          _newParameterBuilder.setType(_createTypeRef_1);
         }
       };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -141,14 +138,14 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           it.setContext(_javaClass);
           it.setMethodName("bar");
           JvmDeclaredType _javaClass_1 = MethodBuilderTest.this.getJavaClass();
-          JvmParameterizedTypeReference _createTypeRef = MethodBuilderTest.this._typeReferences.createTypeRef(_javaClass_1);
+          LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(_javaClass_1);
           it.setReturnType(_createTypeRef);
           it.setVisibility(JvmVisibility.PRIVATE);
           it.setStaticFlag(true);
+          AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
           JvmDeclaredType _javaClass_2 = MethodBuilderTest.this.getJavaClass();
-          JvmParameterizedTypeReference _createTypeRef_1 = MethodBuilderTest.this._typeReferences.createTypeRef(_javaClass_2);
-          ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_createTypeRef_1);
-          it.setParameterTypes(_newArrayList);
+          LightweightTypeReference _createTypeRef_1 = MethodBuilderTest.this.createTypeRef(_javaClass_2);
+          _newParameterBuilder.setType(_createTypeRef_1);
         }
       };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -268,10 +265,10 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           it.setContext(_xtendClass);
           it.setMethodName("foo");
           JvmDeclaredType _xtendClass_1 = MethodBuilderTest.this.getXtendClass();
-          JvmTypeReference _typeForName = MethodBuilderTest.this._typeReferences.getTypeForName(Exception.class, _xtendClass_1);
+          LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(Exception.class, _xtendClass_1);
           JvmDeclaredType _xtendClass_2 = MethodBuilderTest.this.getXtendClass();
-          JvmTypeReference _typeForName_1 = MethodBuilderTest.this._typeReferences.getTypeForName(RuntimeException.class, _xtendClass_2);
-          it.setExceptions(Collections.<JvmTypeReference>unmodifiableList(Lists.<JvmTypeReference>newArrayList(_typeForName, _typeForName_1)));
+          LightweightTypeReference _createTypeRef_1 = MethodBuilderTest.this.createTypeRef(RuntimeException.class, _xtendClass_2);
+          it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
         }
       };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -295,10 +292,10 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           it.setContext(_javaClass);
           it.setMethodName("foo");
           JvmDeclaredType _javaClass_1 = MethodBuilderTest.this.getJavaClass();
-          JvmTypeReference _typeForName = MethodBuilderTest.this._typeReferences.getTypeForName(Exception.class, _javaClass_1);
+          LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(Exception.class, _javaClass_1);
           JvmDeclaredType _javaClass_2 = MethodBuilderTest.this.getJavaClass();
-          JvmTypeReference _typeForName_1 = MethodBuilderTest.this._typeReferences.getTypeForName(RuntimeException.class, _javaClass_2);
-          it.setExceptions(Collections.<JvmTypeReference>unmodifiableList(Lists.<JvmTypeReference>newArrayList(_typeForName, _typeForName_1)));
+          LightweightTypeReference _createTypeRef_1 = MethodBuilderTest.this.createTypeRef(RuntimeException.class, _javaClass_2);
+          it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
         }
       };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -322,13 +319,26 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
           it.setContext(_xtendClass);
           it.setMethodName("foo");
-          it.setParameterNames(Collections.<String>unmodifiableList(Lists.<String>newArrayList("bar", "baz")));
-          JvmDeclaredType _xtendClass_1 = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
-          JvmDeclaredType _xtendClass_2 = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef_1 = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_2);
-          ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_createTypeRef, _createTypeRef_1);
-          it.setParameterTypes(_newArrayList);
+          AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
+          final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
+              public void apply(final AbstractParameterBuilder it) {
+                it.setName("bar");
+                JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
+                LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(_xtendClass);
+                it.setType(_createTypeRef);
+              }
+            };
+          ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function);
+          AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
+          final Procedure1<AbstractParameterBuilder> _function_1 = new Procedure1<AbstractParameterBuilder>() {
+              public void apply(final AbstractParameterBuilder it) {
+                it.setName("baz");
+                JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
+                LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(_xtendClass);
+                it.setType(_createTypeRef);
+              }
+            };
+          ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder_1, _function_1);
         }
       };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -351,13 +361,26 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
           it.setContext(_javaClass);
           it.setMethodName("foo");
-          it.setParameterNames(Collections.<String>unmodifiableList(Lists.<String>newArrayList("bar", "baz")));
-          JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass);
-          JvmDeclaredType _xtendClass_1 = MethodBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef_1 = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
-          ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_createTypeRef, _createTypeRef_1);
-          it.setParameterTypes(_newArrayList);
+          AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
+          final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
+              public void apply(final AbstractParameterBuilder it) {
+                it.setName("bar");
+                JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
+                LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(_xtendClass);
+                it.setType(_createTypeRef);
+              }
+            };
+          ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function);
+          AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
+          final Procedure1<AbstractParameterBuilder> _function_1 = new Procedure1<AbstractParameterBuilder>() {
+              public void apply(final AbstractParameterBuilder it) {
+                it.setName("baz");
+                JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
+                LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(_xtendClass);
+                it.setType(_createTypeRef);
+              }
+            };
+          ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder_1, _function_1);
         }
       };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);

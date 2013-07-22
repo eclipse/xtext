@@ -26,7 +26,7 @@ import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.xbase.compiler.AbstractStringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.AbstractStringBuilderBasedSourceAppender;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.ui.contentassist.WhitespaceHelper;
 
@@ -112,7 +112,7 @@ public class DocumentRewriter {
 		}
 	}
 
-	public static class Section extends AbstractStringBuilderBasedAppendable {
+	public static class Section extends AbstractStringBuilderBasedSourceAppender {
 
 		private WhitespaceHelper whitespaceHelper;
 
@@ -124,7 +124,7 @@ public class DocumentRewriter {
 
 		protected Section(DocumentRewriter documentEditor, int initialIndentationLevel, String indentString,
 				String lineSeparator, WhitespaceHelper whitespaceHelper) {
-			super(indentString, lineSeparator);
+			super(indentString, lineSeparator, false);
 			this.documentRewriter = documentEditor;
 			this.baseIndentationLevel = initialIndentationLevel;
 			this.whitespaceHelper = whitespaceHelper;
@@ -150,11 +150,6 @@ public class DocumentRewriter {
 
 		public ReplaceRegion getChange() {
 			return new ReplaceRegion(whitespaceHelper.getTotalOffset(), whitespaceHelper.getTotalLength(), toString());
-		}
-
-		@Override
-		public List<String> getImports() {
-			throw new UnsupportedOperationException();
 		}
 
 		@Override

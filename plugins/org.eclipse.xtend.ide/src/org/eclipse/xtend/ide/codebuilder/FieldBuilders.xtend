@@ -10,10 +10,8 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.xbase.compiler.IAppendable
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.ISourceAppender
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
 
@@ -23,7 +21,7 @@ import static org.eclipse.xtext.common.types.JvmVisibility.*
 abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 	
 	@Property String fieldName
-	@Property JvmTypeReference fieldType
+	@Property LightweightTypeReference fieldType
 	@Property boolean staticFlag
 	
 	override getImage() {
@@ -38,19 +36,13 @@ abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 
 class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xtend {
 	
-	@Inject XtypeTypeReferenceSerializer typeRefSerializer
-
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
 		super.isValid() && fieldName != null
 	}
 	
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable.appendVisibility(visibility, PRIVATE)
 		if(staticFlag)
 			appendable.append('static ')
@@ -72,17 +64,11 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xte
 
 class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
 	
-	@Inject TypeReferenceSerializer typeRefSerializer
-
 	override isValid() {
 		super.isValid() && fieldName != null && fieldType != null
 	}
 	
-	override protected getTypeReferenceSerializer() {
-		typeRefSerializer
-	}
-	
-	override build(IAppendable appendable) {
+	override build(ISourceAppender appendable) {
 		appendable.appendVisibility(visibility, DEFAULT)
 		if(staticFlag)
 			appendable.append('static ')

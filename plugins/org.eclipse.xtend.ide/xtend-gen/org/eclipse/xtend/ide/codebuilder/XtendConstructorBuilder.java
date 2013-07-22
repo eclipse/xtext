@@ -14,31 +14,22 @@ import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class XtendConstructorBuilder extends AbstractConstructorBuilder implements Xtend {
   @Inject
-  private XtypeTypeReferenceSerializer typeRefSerializer;
-  
-  @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
   
-  protected TypeReferenceSerializer getTypeReferenceSerializer() {
-    return this.typeRefSerializer;
-  }
-  
-  public IAppendable build(final IAppendable appendable) {
+  public ISourceAppender build(final ISourceAppender appendable) {
     JvmVisibility _visibility = this.getVisibility();
-    IAppendable _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
-    IAppendable _append = _appendVisibility.append("new");
-    IAppendable _appendParameters = this.appendParameters(_append);
-    IAppendable _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-    IAppendable _appendBody = this.appendBody(_appendThrowsClause, "");
+    ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
+    ISourceAppender _append = _appendVisibility.append("new");
+    ISourceAppender _appendParameters = this.appendParameters(_append);
+    ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
+    ISourceAppender _appendBody = this.appendBody(_appendThrowsClause, "");
     return _appendBody;
   }
   

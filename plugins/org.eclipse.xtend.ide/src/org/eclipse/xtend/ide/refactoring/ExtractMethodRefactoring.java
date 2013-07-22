@@ -60,9 +60,8 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
@@ -113,9 +112,6 @@ public class ExtractMethodRefactoring extends Refactoring {
 
 	@Inject
 	private ReplaceConverter replaceConverter;
-	
-	@Inject
-	private XtypeTypeReferenceSerializer typeReferenceSerializer;
 	
 	private IDocument document;
 
@@ -243,7 +239,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 		return appendable.toString();
 	}
 	
-	protected void appendMethodSignature(IAppendable appendable) {
+	protected void appendMethodSignature(ISourceAppender appendable) {
 		if (visibility != JvmVisibility.PUBLIC)
 			appendable.append(getVisibility().getName().toLowerCase()).append(" ");
 		appendable.append("def ");
@@ -263,8 +259,9 @@ public class ExtractMethodRefactoring extends Refactoring {
 			appendable.append("> ");
 		}
 		if (isExplicitlyDeclareReturnType) {
-			typeReferenceSerializer.serialize(returnType.toTypeReference(), firstExpression, appendable);
-			appendable.append(" ");
+			appendable
+				.append(returnType)
+				.append(" ");
 		}
 		appendable.append(methodName).append("(");
 		boolean isFirst = true;

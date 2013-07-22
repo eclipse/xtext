@@ -7,9 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.text.edits.TextEdit;
@@ -19,9 +17,10 @@ import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
@@ -29,13 +28,15 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.document.DocumentRewriter;
 import org.eclipse.xtext.xbase.ui.document.DocumentRewriter.Factory;
 import org.eclipse.xtext.xbase.ui.document.DocumentRewriter.Section;
@@ -58,11 +59,11 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
   
   @Inject
   @Extension
-  private TypeReferences _typeReferences;
+  private CommonTypeComputationServices services;
   
   @Inject
   @Extension
-  private TypeReferenceSerializer _typeReferenceSerializer;
+  private TypesFactory _typesFactory;
   
   @Test
   public void testSectionOverlap() {
@@ -265,10 +266,9 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         public void apply(final DocumentRewriter it, final XtextResource r) {
           int _indexOf = model.indexOf("foo");
           final Section beforeFoo = it.newSection(_indexOf, 0);
-          JvmTypeReference _typeForName = DocumentRewriterTest.this._typeReferences.getTypeForName(Serializable.class, r);
-          EList<EObject> _contents = r.getContents();
-          EObject _head = IterableExtensions.<EObject>head(_contents);
-          DocumentRewriterTest.this._typeReferenceSerializer.serialize(_typeForName, _head, beforeFoo);
+          TypeReferences _typeReferences = DocumentRewriterTest.this.services.getTypeReferences();
+          JvmType _findDeclaredType = _typeReferences.findDeclaredType(Serializable.class, r);
+          beforeFoo.append(_findDeclaredType);
           beforeFoo.append(" ");
         }
       };
@@ -316,14 +316,19 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
           final Section beforeFoo = it.newSection(_indexOf, 0);
           int _indexOf_1 = model.indexOf("bar");
           final Section beforeBar = it.newSection(_indexOf_1, 0);
-          JvmTypeReference _typeForName = DocumentRewriterTest.this._typeReferences.getTypeForName(List.class, r);
-          EList<EObject> _contents = r.getContents();
-          EObject _head = IterableExtensions.<EObject>head(_contents);
-          DocumentRewriterTest.this._typeReferenceSerializer.serialize(_typeForName, _head, beforeFoo);
-          JvmTypeReference _typeForName_1 = DocumentRewriterTest.this._typeReferences.getTypeForName(File.class, r);
-          EList<EObject> _contents_1 = r.getContents();
-          EObject _head_1 = IterableExtensions.<EObject>head(_contents_1);
-          DocumentRewriterTest.this._typeReferenceSerializer.serialize(_typeForName_1, _head_1, beforeBar);
+          StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(DocumentRewriterTest.this.services, r);
+          final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
+          OwnedConverter _ownedConverter = new OwnedConverter(owner);
+          final OwnedConverter converter = _ownedConverter;
+          TypeReferences _typeReferences = DocumentRewriterTest.this.services.getTypeReferences();
+          JvmWildcardTypeReference _createJvmWildcardTypeReference = DocumentRewriterTest.this._typesFactory.createJvmWildcardTypeReference();
+          final JvmTypeReference list = _typeReferences.getTypeForName(List.class, r, _createJvmWildcardTypeReference);
+          LightweightTypeReference _apply = converter.apply(list);
+          beforeFoo.append(_apply);
+          TypeReferences _typeReferences_1 = DocumentRewriterTest.this.services.getTypeReferences();
+          JvmTypeReference _typeForName = _typeReferences_1.getTypeForName(File.class, r);
+          LightweightTypeReference _apply_1 = converter.apply(_typeForName);
+          beforeBar.append(_apply_1);
           beforeFoo.append(" ");
           beforeBar.append(" ");
         }
@@ -378,18 +383,22 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
           final Section beforeFoo = it.newSection(_indexOf, 0);
           int _indexOf_1 = model.indexOf("bar");
           final Section beforeBar = it.newSection(_indexOf_1, 0);
-          JvmType _findDeclaredType = DocumentRewriterTest.this._typeReferences.findDeclaredType(String.class, r);
-          JvmParameterizedTypeReference _createTypeRef = DocumentRewriterTest.this._typeReferences.createTypeRef(_findDeclaredType);
-          JvmTypeReference _typeForName = DocumentRewriterTest.this._typeReferences.getTypeForName(List.class, r, _createTypeRef);
-          EList<EObject> _contents = r.getContents();
-          EObject _head = IterableExtensions.<EObject>head(_contents);
-          DocumentRewriterTest.this._typeReferenceSerializer.serialize(_typeForName, _head, beforeFoo);
-          JvmType _findDeclaredType_1 = DocumentRewriterTest.this._typeReferences.findDeclaredType(File.class, r);
-          JvmParameterizedTypeReference _createTypeRef_1 = DocumentRewriterTest.this._typeReferences.createTypeRef(_findDeclaredType_1);
-          JvmTypeReference _typeForName_1 = DocumentRewriterTest.this._typeReferences.getTypeForName(List.class, r, _createTypeRef_1);
-          EList<EObject> _contents_1 = r.getContents();
-          EObject _head_1 = IterableExtensions.<EObject>head(_contents_1);
-          DocumentRewriterTest.this._typeReferenceSerializer.serialize(_typeForName_1, _head_1, beforeBar);
+          StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(DocumentRewriterTest.this.services, r);
+          final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
+          OwnedConverter _ownedConverter = new OwnedConverter(owner);
+          final OwnedConverter converter = _ownedConverter;
+          TypeReferences _typeReferences = DocumentRewriterTest.this.services.getTypeReferences();
+          TypeReferences _typeReferences_1 = DocumentRewriterTest.this.services.getTypeReferences();
+          JvmTypeReference _typeForName = _typeReferences_1.getTypeForName(String.class, r);
+          JvmTypeReference _typeForName_1 = _typeReferences.getTypeForName(List.class, r, _typeForName);
+          LightweightTypeReference _apply = converter.apply(_typeForName_1);
+          beforeFoo.append(_apply);
+          TypeReferences _typeReferences_2 = DocumentRewriterTest.this.services.getTypeReferences();
+          TypeReferences _typeReferences_3 = DocumentRewriterTest.this.services.getTypeReferences();
+          JvmTypeReference _typeForName_2 = _typeReferences_3.getTypeForName(File.class, r);
+          JvmTypeReference _typeForName_3 = _typeReferences_2.getTypeForName(List.class, r, _typeForName_2);
+          LightweightTypeReference _apply_1 = converter.apply(_typeForName_3);
+          beforeBar.append(_apply_1);
           beforeFoo.append(" ");
           beforeBar.append(" ");
         }

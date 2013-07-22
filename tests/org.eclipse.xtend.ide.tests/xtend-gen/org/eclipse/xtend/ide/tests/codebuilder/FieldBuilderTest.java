@@ -5,12 +5,11 @@ import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -18,10 +17,6 @@ public class FieldBuilderTest extends AbstractBuilderTest {
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
-  @Inject
-  @Extension
-  private TypeReferences _typeReferences;
   
   @Test
   public void testXtendField() {
@@ -33,7 +28,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
           it.setContext(_xtendClass);
           it.setFieldName("foo");
           JvmDeclaredType _xtendClass_1 = FieldBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef = FieldBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
+          LightweightTypeReference _createTypeRef = FieldBuilderTest.this.createTypeRef(_xtendClass_1);
           it.setFieldType(_createTypeRef);
         }
       };
@@ -51,7 +46,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
           it.setContext(_xtendClass);
           it.setFieldName("foo");
           JvmDeclaredType _xtendClass_1 = FieldBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef = FieldBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
+          LightweightTypeReference _createTypeRef = FieldBuilderTest.this.createTypeRef(_xtendClass_1);
           it.setFieldType(_createTypeRef);
           it.setVisibility(JvmVisibility.PUBLIC);
         }
@@ -70,7 +65,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
           it.setContext(_xtendClass);
           it.setFieldName("foo");
           JvmDeclaredType _xtendClass_1 = FieldBuilderTest.this.getXtendClass();
-          JvmParameterizedTypeReference _createTypeRef = FieldBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
+          LightweightTypeReference _createTypeRef = FieldBuilderTest.this.createTypeRef(_xtendClass_1);
           it.setFieldType(_createTypeRef);
           it.setVisibility(JvmVisibility.PROTECTED);
           it.setStaticFlag(true);
@@ -90,7 +85,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
           it.setContext(_javaClass);
           it.setFieldName("bar");
           JvmDeclaredType _javaClass_1 = FieldBuilderTest.this.getJavaClass();
-          JvmParameterizedTypeReference _createTypeRef = FieldBuilderTest.this._typeReferences.createTypeRef(_javaClass_1);
+          LightweightTypeReference _createTypeRef = FieldBuilderTest.this.createTypeRef(_javaClass_1);
           it.setFieldType(_createTypeRef);
         }
       };
@@ -108,7 +103,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
           it.setContext(_javaClass);
           it.setFieldName("bar");
           JvmDeclaredType _javaClass_1 = FieldBuilderTest.this.getJavaClass();
-          JvmParameterizedTypeReference _createTypeRef = FieldBuilderTest.this._typeReferences.createTypeRef(_javaClass_1);
+          LightweightTypeReference _createTypeRef = FieldBuilderTest.this.createTypeRef(_javaClass_1);
           it.setFieldType(_createTypeRef);
           it.setVisibility(JvmVisibility.PUBLIC);
         }
@@ -127,7 +122,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
           it.setContext(_javaClass);
           it.setFieldName("bar");
           JvmDeclaredType _javaClass_1 = FieldBuilderTest.this.getJavaClass();
-          JvmParameterizedTypeReference _createTypeRef = FieldBuilderTest.this._typeReferences.createTypeRef(_javaClass_1);
+          LightweightTypeReference _createTypeRef = FieldBuilderTest.this.createTypeRef(_javaClass_1);
           it.setFieldType(_createTypeRef);
           it.setVisibility(JvmVisibility.PROTECTED);
           it.setStaticFlag(true);

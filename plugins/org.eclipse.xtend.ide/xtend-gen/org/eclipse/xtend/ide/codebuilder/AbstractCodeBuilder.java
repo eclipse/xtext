@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
@@ -23,12 +24,19 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
  * @author Jan Koehnlein
@@ -80,6 +88,9 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   @Extension
   private IJavaElementFinder _iJavaElementFinder;
   
+  @Inject
+  private CommonTypeComputationServices services;
+  
   public boolean isValid() {
     JvmDeclaredType _owner = this.getOwner();
     final IJavaElement javaElement = this._iJavaElementFinder.findElementFor(_owner);
@@ -126,8 +137,8 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
       IAppendable _append = appendable.append("...");
       IAppendable _newLine = _append.newLine();
-      IAppendable _build = this.build(_newLine);
-      IAppendable _newLine_1 = _build.newLine();
+      ISourceAppender _build = this.build(_newLine);
+      ISourceAppender _newLine_1 = _build.newLine();
       _newLine_1.append("...");
       String _string = appendable.toString();
       _xblockexpression = (_string);
@@ -135,7 +146,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     return _xblockexpression;
   }
   
-  protected IAppendable appendVisibility(final IAppendable appendable, final JvmVisibility visibility, final JvmVisibility skippableDefault) {
+  protected ISourceAppender appendVisibility(final ISourceAppender appendable, final JvmVisibility visibility, final JvmVisibility skippableDefault) {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
@@ -165,28 +176,26 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     if (!_matched) {
       _switchResult = "";
     }
-    IAppendable _append = appendable.append(_switchResult);
+    ISourceAppender _append = appendable.append(_switchResult);
     return _append;
   }
   
-  protected IAppendable appendType(final IAppendable appendable, final JvmTypeReference typeRef, final String surrogate) {
-    IAppendable _xblockexpression = null;
+  protected ISourceAppender appendType(final ISourceAppender appendable, final LightweightTypeReference typeRef, final String surrogate) {
+    ISourceAppender _xblockexpression = null;
     {
       boolean _equals = Objects.equal(typeRef, null);
       if (_equals) {
         appendable.append(surrogate);
       } else {
-        TypeReferenceSerializer _typeReferenceSerializer = this.getTypeReferenceSerializer();
-        EObject _context = this.getContext();
-        _typeReferenceSerializer.serialize(typeRef, _context, appendable);
+        appendable.append(typeRef);
       }
       _xblockexpression = (appendable);
     }
     return _xblockexpression;
   }
   
-  protected IAppendable appendTypeParameters(final IAppendable appendable, final List<JvmTypeParameter> typeParameters) {
-    IAppendable _xblockexpression = null;
+  protected ISourceAppender appendTypeParameters(final ISourceAppender appendable, final List<JvmTypeParameter> typeParameters) {
+    ISourceAppender _xblockexpression = null;
     {
       final Iterator<JvmTypeParameter> iterator = typeParameters.iterator();
       boolean _hasNext = iterator.hasNext();
@@ -196,13 +205,40 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
         do {
           {
             final JvmTypeParameter typeParameter = iterator.next();
-            boolean _notEquals = (!Objects.equal(typeParameter, null));
-            if (_notEquals) {
-              String _name = typeParameter.getName();
-              appendable.append(_name);
-              EList<JvmTypeConstraint> _constraints = typeParameter.getConstraints();
-              boolean _notEquals_1 = (!Objects.equal(_constraints, null));
-              if (_notEquals_1) {
+            String _name = typeParameter.getName();
+            appendable.append(_name);
+            EList<JvmTypeConstraint> _constraints = typeParameter.getConstraints();
+            Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
+            final Function1<JvmUpperBound,Boolean> _function = new Function1<JvmUpperBound,Boolean>() {
+                public Boolean apply(final JvmUpperBound it) {
+                  JvmTypeReference _typeReference = it.getTypeReference();
+                  String _identifier = _typeReference.getIdentifier();
+                  boolean _notEquals = (!Objects.equal(_identifier, "java.lang.Object"));
+                  return Boolean.valueOf(_notEquals);
+                }
+              };
+            final Iterable<JvmUpperBound> upperBounds = IterableExtensions.<JvmUpperBound>filter(_filter, _function);
+            boolean _isEmpty = IterableExtensions.isEmpty(upperBounds);
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              appendable.append(" extends ");
+              boolean isFirst = true;
+              EObject _context = this.getContext();
+              StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _context);
+              final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
+              OwnedConverter _ownedConverter = new OwnedConverter(owner);
+              final OwnedConverter converter = _ownedConverter;
+              for (final JvmUpperBound upperBound : upperBounds) {
+                {
+                  boolean _not_1 = (!isFirst);
+                  if (_not_1) {
+                    appendable.append(" & ");
+                  }
+                  isFirst = false;
+                  JvmTypeReference _typeReference = upperBound.getTypeReference();
+                  LightweightTypeReference _apply = converter.apply(_typeReference);
+                  this.appendType(appendable, _apply, "Object");
+                }
               }
             }
             boolean _hasNext_1 = iterator.hasNext();
@@ -219,8 +255,6 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     }
     return _xblockexpression;
   }
-  
-  protected abstract TypeReferenceSerializer getTypeReferenceSerializer();
   
   protected String getIdentifierOrObject(final JvmTypeReference typeReference) {
     String _switchResult = null;

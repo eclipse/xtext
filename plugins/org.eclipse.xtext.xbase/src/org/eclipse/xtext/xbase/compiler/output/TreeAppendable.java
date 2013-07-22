@@ -33,6 +33,8 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -82,7 +84,6 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		 * @param string the visited {@link String}
 		 * @return the original string or a new one.
 		 */
-		@SuppressWarnings("null") // this is necessary due to a bug in JDT nullness stuff
 		protected String visit(@NonNull String string) {
 			return string;
 		}
@@ -96,7 +97,8 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	private final ITraceURIConverter traceURIConverter;
 	private boolean closed = false;
 	private boolean useForDebugging = false;
-
+	private LightweightTypeReferenceSerializer lightweightTypeReferenceSerializer;
+	
 	public TreeAppendable(ImportManager importManager, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source,
 			String indentation, String lineSeparator) {
 		this(new SharedAppendableState(indentation, lineSeparator, importManager), converter, locationProvider, jvmModelAssociations, source);
@@ -119,6 +121,15 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		this.children = Lists.newArrayList();
 		this.locationData = sourceLocations;
 		this.useForDebugging = useForDebugging;
+		this.lightweightTypeReferenceSerializer = createLightweightTypeReferenceSerializer();
+	}
+	
+	protected LightweightTypeReferenceSerializer createLightweightTypeReferenceSerializer() {
+		return new LightweightTypeReferenceSerializer(this);
+	}
+	
+	public boolean isJava() {
+		return true;
 	}
 	
 	public ITraceURIConverter getTraceURIConverter() {
@@ -297,6 +308,11 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	public TreeAppendable append(JvmType type) {
 		closeLastChild();
 		state.appendType(type, this);
+		return this;
+	}
+	
+	public TreeAppendable append(LightweightTypeReference typeRef) {
+		typeRef.accept(lightweightTypeReferenceSerializer);
 		return this;
 	}
 	

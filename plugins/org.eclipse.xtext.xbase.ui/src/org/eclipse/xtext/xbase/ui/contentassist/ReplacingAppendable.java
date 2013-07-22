@@ -26,7 +26,7 @@ import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.xbase.compiler.AbstractStringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.AbstractStringBuilderBasedSourceAppender;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
@@ -40,7 +40,7 @@ import com.google.inject.Provider;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ReplacingAppendable extends AbstractStringBuilderBasedAppendable {
+public class ReplacingAppendable extends AbstractStringBuilderBasedSourceAppender {
 
 	private static final Logger LOG = Logger.getLogger(ReplacingAppendable.class);
 
@@ -129,7 +129,7 @@ public class ReplacingAppendable extends AbstractStringBuilderBasedAppendable {
 	
 	public ReplacingAppendable(RewritableImportSection importSection, String lineSeparator, String indentString, IXtextDocument document,
 			WhitespaceHelper whitespaceHelper, ReplaceConverter replaceConverter) {
-		super(indentString, lineSeparator);
+		super(indentString, lineSeparator, false);
 		this.importSection = importSection;
 		this.document = document;
 		this.whitespaceHelper = whitespaceHelper;
@@ -209,11 +209,6 @@ public class ReplacingAppendable extends AbstractStringBuilderBasedAppendable {
 		return '.';
 	}
 
-	@Override
-	public @NonNull List<String> getImports() {
-		throw new UnsupportedOperationException("getImports() not implemented for ReplacingAppendable");
-	}
-	
 	public RewritableImportSection getImportSection() {
 		return importSection;
 	}

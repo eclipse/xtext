@@ -34,8 +34,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -67,9 +66,6 @@ public class ExtractVariableRefactoring extends Refactoring {
 	
 	@Inject 
 	private IBatchTypeResolver typeResolver;
-	
-	@Inject 
-	private XtypeTypeReferenceSerializer typeReferenceSerializer;
 	
 	@Inject
 	private DocumentRewriter.Factory rewriterFactory;
@@ -202,7 +198,7 @@ public class ExtractVariableRefactoring extends Refactoring {
 		status.add(FATAL, "Error during refactoring: {0}", exc, LOG);
 	}
 
-	protected void appendDeclaration(IAppendable section, ITextRegion expressionRegion) throws BadLocationException {
+	protected void appendDeclaration(ISourceAppender section, ITextRegion expressionRegion) throws BadLocationException {
 		section
 			.append((isFinal) ? "val" : "var")
 			.append(" ")
@@ -223,7 +219,7 @@ public class ExtractVariableRefactoring extends Refactoring {
 						section.append(", ");
 					isFirst = false;
 					LightweightTypeReference parameterType = types.getActualType(parameter);
-					typeReferenceSerializer.serialize(parameterType.toTypeReference(), expression, section);
+					section.append(parameterType);
 					section
 						.append(" ")
 						.append(parameter.getIdentifier());

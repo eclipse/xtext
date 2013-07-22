@@ -21,6 +21,7 @@ public class StringBuilderBasedAppendable extends AbstractStringBuilderBasedAppe
 	public StringBuilderBasedAppendable(ImportManager typeSerializer, String indentation, String lineSeparator) {
 		super(indentation, lineSeparator);
 		this.importManager = typeSerializer;
+		
 	}
 
 	public StringBuilderBasedAppendable(ImportManager typeSerializer) {
@@ -36,6 +37,7 @@ public class StringBuilderBasedAppendable extends AbstractStringBuilderBasedAppe
 		importManager.appendType(type, builder);
 	}
 
+	@Deprecated
 	@Override
 	public List<String> getImports() {
 		return importManager.getImports();

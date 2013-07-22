@@ -3,14 +3,11 @@ package org.eclipse.xtend.ide.tests.codebuilder
 import com.google.inject.Inject
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.common.types.util.TypeReferences
 import org.junit.Test
 
 class FieldBuilderTest extends AbstractBuilderTest {
 	
 	@Inject extension CodeBuilderFactory 
-	
-	@Inject extension TypeReferences
 	
 	@Test
 	def testXtendField() {

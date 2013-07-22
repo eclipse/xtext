@@ -2,23 +2,29 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
+import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
+import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.codebuilder.VariableNameAcceptor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Jan Koehnlein
@@ -29,48 +35,37 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   @Extension
   private JdtVariableCompletions _jdtVariableCompletions;
   
-  private List<String> _parameterNames = new Function0<List<String>>() {
-    public List<String> apply() {
-      List<String> _emptyList = CollectionLiterals.<String>emptyList();
+  @Inject
+  @Extension
+  private CodeBuilderFactory _codeBuilderFactory;
+  
+  private List<AbstractParameterBuilder> _parameterBuilders = new Function0<List<AbstractParameterBuilder>>() {
+    public List<AbstractParameterBuilder> apply() {
+      List<AbstractParameterBuilder> _emptyList = CollectionLiterals.<AbstractParameterBuilder>emptyList();
       return _emptyList;
     }
   }.apply();
   
-  public List<String> getParameterNames() {
-    return this._parameterNames;
+  public List<AbstractParameterBuilder> getParameterBuilders() {
+    return this._parameterBuilders;
   }
   
-  public void setParameterNames(final List<String> parameterNames) {
-    this._parameterNames = parameterNames;
+  public void setParameterBuilders(final List<AbstractParameterBuilder> parameterBuilders) {
+    this._parameterBuilders = parameterBuilders;
   }
   
-  private List<JvmTypeReference> _parameterTypes = new Function0<List<JvmTypeReference>>() {
-    public List<JvmTypeReference> apply() {
-      List<JvmTypeReference> _emptyList = CollectionLiterals.<JvmTypeReference>emptyList();
+  private List<LightweightTypeReference> _exceptions = new Function0<List<LightweightTypeReference>>() {
+    public List<LightweightTypeReference> apply() {
+      List<LightweightTypeReference> _emptyList = CollectionLiterals.<LightweightTypeReference>emptyList();
       return _emptyList;
     }
   }.apply();
   
-  public List<JvmTypeReference> getParameterTypes() {
-    return this._parameterTypes;
-  }
-  
-  public void setParameterTypes(final List<JvmTypeReference> parameterTypes) {
-    this._parameterTypes = parameterTypes;
-  }
-  
-  private List<JvmTypeReference> _exceptions = new Function0<List<JvmTypeReference>>() {
-    public List<JvmTypeReference> apply() {
-      List<JvmTypeReference> _emptyList = CollectionLiterals.<JvmTypeReference>emptyList();
-      return _emptyList;
-    }
-  }.apply();
-  
-  public List<JvmTypeReference> getExceptions() {
+  public List<LightweightTypeReference> getExceptions() {
     return this._exceptions;
   }
   
-  public void setExceptions(final List<JvmTypeReference> exceptions) {
+  public void setExceptions(final List<LightweightTypeReference> exceptions) {
     this._exceptions = exceptions;
   }
   
@@ -99,10 +94,20 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     this._body = body;
   }
   
-  public IAppendable appendBody(final IAppendable appendable, final String statementSeparator) {
-    IAppendable _append = appendable.append(" {");
-    IAppendable _increaseIndentation = _append.increaseIndentation();
-    IAppendable _newLine = _increaseIndentation.newLine();
+  private boolean _varArgsFlag;
+  
+  public boolean isVarArgsFlag() {
+    return this._varArgsFlag;
+  }
+  
+  public void setVarArgsFlag(final boolean varArgsFlag) {
+    this._varArgsFlag = varArgsFlag;
+  }
+  
+  public ISourceAppender appendBody(final ISourceAppender appendable, final String statementSeparator) {
+    ISourceAppender _append = appendable.append(" {");
+    ISourceAppender _increaseIndentation = _append.increaseIndentation();
+    ISourceAppender _newLine = _increaseIndentation.newLine();
     String _elvis = null;
     String _body = this.getBody();
     if (_body != null) {
@@ -111,11 +116,11 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       String _defaultBody = this.defaultBody();
       _elvis = ObjectExtensions.<String>operator_elvis(_body, _defaultBody);
     }
-    IAppendable _append_1 = _newLine.append(_elvis);
-    IAppendable _append_2 = _append_1.append(statementSeparator);
-    IAppendable _decreaseIndentation = _append_2.decreaseIndentation();
-    IAppendable _newLine_1 = _decreaseIndentation.newLine();
-    IAppendable _append_3 = _newLine_1.append("}");
+    ISourceAppender _append_1 = _newLine.append(_elvis);
+    ISourceAppender _append_2 = _append_1.append(statementSeparator);
+    ISourceAppender _decreaseIndentation = _append_2.decreaseIndentation();
+    ISourceAppender _newLine_1 = _decreaseIndentation.newLine();
+    ISourceAppender _append_3 = _newLine_1.append("}");
     return _append_3;
   }
   
@@ -123,84 +128,88 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     return "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
   }
   
-  protected IAppendable appendParameters(final IAppendable appendable) {
-    IAppendable _xblockexpression = null;
+  public AbstractParameterBuilder newParameterBuilder() {
+    AbstractParameterBuilder _xblockexpression = null;
     {
-      boolean _and = false;
-      List<String> _parameterNames = this.getParameterNames();
-      boolean _isEmpty = _parameterNames.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (!_not) {
-        _and = false;
-      } else {
-        List<String> _parameterNames_1 = this.getParameterNames();
-        int _size = _parameterNames_1.size();
-        List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
-        int _size_1 = _parameterTypes.size();
-        boolean _notEquals = (_size != _size_1);
-        _and = (_not && _notEquals);
+      List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
+      boolean _isEmpty = _parameterBuilders.isEmpty();
+      if (_isEmpty) {
+        ArrayList<AbstractParameterBuilder> _newArrayList = CollectionLiterals.<AbstractParameterBuilder>newArrayList();
+        this.setParameterBuilders(_newArrayList);
       }
-      if (_and) {
-        IllegalStateException _illegalStateException = new IllegalStateException("Number of parameter names and types must match");
-        throw _illegalStateException;
-      }
+      JvmDeclaredType _owner = this.getOwner();
+      final AbstractParameterBuilder builder = this._codeBuilderFactory.createParameterBuilder(_owner);
+      EObject _context = this.getContext();
+      builder.setContext(_context);
+      List<AbstractParameterBuilder> _parameterBuilders_1 = this.getParameterBuilders();
+      _parameterBuilders_1.add(builder);
+      _xblockexpression = (builder);
+    }
+    return _xblockexpression;
+  }
+  
+  protected ISourceAppender appendParameters(final ISourceAppender appendable) {
+    ISourceAppender _xblockexpression = null;
+    {
       appendable.append("(");
       final HashSet<String> notAllowed = CollectionLiterals.<String>newHashSet();
-      List<JvmTypeReference> _parameterTypes_1 = this.getParameterTypes();
-      int _size_2 = _parameterTypes_1.size();
-      ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size_2, true);
+      List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
+      boolean _isEmpty = _parameterBuilders.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        List<AbstractParameterBuilder> _parameterBuilders_1 = this.getParameterBuilders();
+        AbstractParameterBuilder _last = IterableExtensions.<AbstractParameterBuilder>last(_parameterBuilders_1);
+        boolean _isVarArgsFlag = this.isVarArgsFlag();
+        _last.setVarArgsFlag(_isVarArgsFlag);
+      }
+      List<AbstractParameterBuilder> _parameterBuilders_2 = this.getParameterBuilders();
+      int _size = _parameterBuilders_2.size();
+      ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
       for (final Integer i : _doubleDotLessThan) {
         {
-          List<JvmTypeReference> _parameterTypes_2 = this.getParameterTypes();
-          final JvmTypeReference typeRef = _parameterTypes_2.get((i).intValue());
-          boolean _notEquals_1 = (!Objects.equal(typeRef, null));
-          if (_notEquals_1) {
-            this.appendType(appendable, typeRef, "Object");
-            appendable.append(" ");
-            List<String> _parameterNames_2 = this.getParameterNames();
-            boolean _isEmpty_1 = _parameterNames_2.isEmpty();
-            if (_isEmpty_1) {
-              VariableNameAcceptor _variableNameAcceptor = new VariableNameAcceptor(notAllowed);
-              final VariableNameAcceptor acceptor = _variableNameAcceptor;
-              String _identifierOrObject = this.getIdentifierOrObject(typeRef);
-              EObject _context = this.getContext();
-              this._jdtVariableCompletions.getVariableProposals(_identifierOrObject, _context, 
-                VariableType.PARAMETER, notAllowed, acceptor);
-              String _variableName = acceptor.getVariableName();
-              appendable.append(_variableName);
-            } else {
-              List<String> _parameterNames_3 = this.getParameterNames();
-              String _get = _parameterNames_3.get((i).intValue());
-              appendable.append(_get);
-            }
+          List<AbstractParameterBuilder> _parameterBuilders_3 = this.getParameterBuilders();
+          final AbstractParameterBuilder parameterBuilder = _parameterBuilders_3.get((i).intValue());
+          VariableNameAcceptor _variableNameAcceptor = new VariableNameAcceptor(notAllowed);
+          final VariableNameAcceptor acceptor = _variableNameAcceptor;
+          String _name = parameterBuilder.getName();
+          boolean _equals = Objects.equal(_name, null);
+          if (_equals) {
+            LightweightTypeReference _type = parameterBuilder.getType();
+            String _identifier = _type.getIdentifier();
+            EObject _context = this.getContext();
+            this._jdtVariableCompletions.getVariableProposals(_identifier, _context, 
+              VariableType.PARAMETER, notAllowed, acceptor);
+            String _variableName = acceptor.getVariableName();
+            parameterBuilder.setName(_variableName);
           }
-          List<JvmTypeReference> _parameterTypes_3 = this.getParameterTypes();
-          int _size_3 = _parameterTypes_3.size();
-          int _minus = (_size_3 - 1);
-          boolean _notEquals_2 = ((i).intValue() != _minus);
-          if (_notEquals_2) {
+          parameterBuilder.build(appendable);
+          List<AbstractParameterBuilder> _parameterBuilders_4 = this.getParameterBuilders();
+          int _size_1 = _parameterBuilders_4.size();
+          int _minus = (_size_1 - 1);
+          boolean _notEquals = ((i).intValue() != _minus);
+          if (_notEquals) {
             appendable.append(", ");
           }
         }
       }
-      IAppendable _append = appendable.append(")");
+      ISourceAppender _append = appendable.append(")");
       _xblockexpression = (_append);
     }
     return _xblockexpression;
   }
   
-  protected IAppendable appendThrowsClause(final IAppendable appendable) {
-    IAppendable _xblockexpression = null;
+  protected ISourceAppender appendThrowsClause(final ISourceAppender appendable) {
+    ISourceAppender _xblockexpression = null;
     {
-      List<JvmTypeReference> _exceptions = this.getExceptions();
-      final Iterator<JvmTypeReference> iterator = _exceptions.iterator();
+      List<LightweightTypeReference> _exceptions = this.getExceptions();
+      final Iterator<LightweightTypeReference> iterator = _exceptions.iterator();
       boolean _hasNext = iterator.hasNext();
       if (_hasNext) {
         appendable.append(" throws ");
         boolean _dowhile = false;
         do {
           {
-            final JvmTypeReference typeRef = iterator.next();
+            final LightweightTypeReference typeRef = iterator.next();
             boolean _notEquals = (!Objects.equal(typeRef, null));
             if (_notEquals) {
               this.appendType(appendable, typeRef, "Exception");
@@ -246,5 +255,42 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       _switchResult = "methdef_obj.gif";
     }
     return _switchResult;
+  }
+  
+  public boolean isValid() {
+    boolean _and = false;
+    boolean _and_1 = false;
+    boolean _and_2 = false;
+    List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
+    final Function1<AbstractParameterBuilder,Boolean> _function = new Function1<AbstractParameterBuilder,Boolean>() {
+        public Boolean apply(final AbstractParameterBuilder it) {
+          boolean _isValid = it.isValid();
+          return Boolean.valueOf(_isValid);
+        }
+      };
+    boolean _forall = IterableExtensions.<AbstractParameterBuilder>forall(_parameterBuilders, _function);
+    if (!_forall) {
+      _and_2 = false;
+    } else {
+      List<LightweightTypeReference> _exceptions = this.getExceptions();
+      boolean _contains = _exceptions.contains(null);
+      boolean _not = (!_contains);
+      _and_2 = (_forall && _not);
+    }
+    if (!_and_2) {
+      _and_1 = false;
+    } else {
+      List<JvmTypeParameter> _typeParameters = this.getTypeParameters();
+      boolean _contains_1 = _typeParameters.contains(null);
+      boolean _not_1 = (!_contains_1);
+      _and_1 = (_and_2 && _not_1);
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      boolean _isValid = super.isValid();
+      _and = (_and_1 && _isValid);
+    }
+    return _and;
   }
 }
