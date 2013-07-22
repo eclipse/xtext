@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
 
 @NonNullByDefault
 public abstract class AbstractStringBuilderBasedAppendable implements IAppendable {
@@ -21,11 +23,38 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 	private String indentation = "  ";
 	private String lineSeparator = "\n";
 	
+	private LightweightTypeReferenceSerializer lightweightTypeReferenceSerializer;
+	
+	public AbstractStringBuilderBasedAppendable(String indentation, String lineSeparator) {
+		this.indentation = indentation;
+		this.lineSeparator = lineSeparator;
+		this.lightweightTypeReferenceSerializer = createLightweightTypeReferenceSerializer();
+		openScope();
+	}
+
+	public AbstractStringBuilderBasedAppendable() {
+		this.lightweightTypeReferenceSerializer = createLightweightTypeReferenceSerializer();
+		openScope();
+	}
+	
+	public boolean isJava() {
+		return true;
+	}
+
 	public IAppendable append(JvmType type) {
 		appendType(type, builder);
 		return this;
 	}
 
+	public IAppendable append(LightweightTypeReference typeRef) {
+		typeRef.accept(lightweightTypeReferenceSerializer);
+		return this;
+	}
+
+	protected LightweightTypeReferenceSerializer createLightweightTypeReferenceSerializer() {
+		return new LightweightTypeReferenceSerializer(this);
+	}
+	
 	public IAppendable append(CharSequence string) {
 		String replaced = string.toString().replace(lineSeparator, getIndentationString());
 		builder.append(replaced);
@@ -81,16 +110,6 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		this.scopes = scopes;
 	}
 
-	public AbstractStringBuilderBasedAppendable(String indentation, String lineSeparator) {
-		this.indentation = indentation;
-		this.lineSeparator = lineSeparator;
-		openScope();
-	}
-
-	public AbstractStringBuilderBasedAppendable() {
-		openScope();
-	}
-
 	public void openScope() {
 		scopes.openScope(false);
 	}
@@ -113,6 +132,7 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 
 	protected abstract void appendType(final JvmType type, StringBuilder builder);
 	
+	@Deprecated
 	public abstract List<String> getImports();
 
 	public String getName(Object key) {
