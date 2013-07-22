@@ -15,12 +15,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.junit.Test;
 
@@ -32,6 +36,9 @@ import com.google.inject.Provider;
  */
 public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 
+	@Inject 
+	private CommonTypeComputationServices services;
+	
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
 
@@ -39,19 +46,16 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 	private Provider<XtextDocument> documentProvider;
 	
 	@Inject
-	private TypeReferences typeReferences;
-	
-	@Inject
-	private TypeReferenceSerializer typeRefSerializer;
-	
-	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 	
 	@Inject 
 	private WorkbenchTestHelper testHelper;
 	
+	@Inject 
+	private TypesFactory typesFactory; 
+	
 	@Test public void testImports_0() throws Exception {
-		final XtextDocument document = insertField("package test class Foo {|}", "foo", List.class);
+		final XtextDocument document = insertListField("package test class Foo {|}", "foo");
 		assertEqualsIgnoreWhitespace("package test\n" +
 				"\n" +
 				"import java.util.List\n" +
@@ -60,24 +64,24 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testImports_1() throws Exception {
-		final XtextDocument document = insertField(" \n" +
-				"\t class Foo {|}", "foo", List.class);
+		final XtextDocument document = insertListField(" \n" +
+				"\t class Foo {|}", "foo");
 		assertEqualsIgnoreWhitespace("import java.util.List\n" +
 				"\n" +
 				"class Foo {List<?> foo}", document.get());
 	}
 
 	@Test public void testImports_2() throws Exception {
-		final XtextDocument document = insertField("class Foo {|}", "foo", List.class);
+		final XtextDocument document = insertListField("class Foo {|}", "foo");
 		assertEqualsIgnoreWhitespace("import java.util.List\n" +
 				"\n" +
 				"class Foo {List<?> foo}", document.get());
 	}
 
 	@Test public void testImports_3() throws Exception {
-		final XtextDocument document = insertField("package test\n" +
+		final XtextDocument document = insertListField("package test\n" +
 				"import java.util.Date \n" +
-				"\tclass Foo {|}", "foo", List.class);
+				"\tclass Foo {|}", "foo");
 		assertEqualsIgnoreWhitespace("package test\n" +
 				"import java.util.Date\n" +
 				"import java.util.List\n" +
@@ -86,11 +90,11 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testImports_4() throws Exception {
-		final XtextDocument document = insertField("package test\n" +
+		final XtextDocument document = insertListField("package test\n" +
 				"/**\n" +
 				"*/\n" +
 				"\n" + 
-				"class Foo {|}", "foo", List.class);
+				"class Foo {|}", "foo");
 		assertEqualsIgnoreWhitespace("package test\n" +
 				"\n" +
 				"import java.util.List\n" +
@@ -102,7 +106,7 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test public void testImports_5() throws Exception {
-		final XtextDocument document = insertField("import static java.util.List.* class Foo {|}", "foo", List.class);
+		final XtextDocument document = insertListField("import static java.util.List.* class Foo {|}", "foo");
 		assertEqualsIgnoreWhitespace("import static java.util.List.*\n" +
 				"import java.util.List\n" +
 				"\n" +
@@ -110,11 +114,11 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testImports_10() throws Exception {
-		final XtextDocument document = insertField("package test import java.util.List class Foo {|}", "foo", List.class);
+		final XtextDocument document = insertListField("package test import java.util.List class Foo {|}", "foo");
 		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {List<?> foo}", document.get());
 	}
 
-	protected XtextDocument insertField(final String model, final String fieldName, final Class<?> fieldType)
+	protected XtextDocument insertListField(final String model, final String fieldName)
 			throws Exception {
 		final int cursorPosition = model.indexOf('|');
 		String actualModel = model.replace("|", " ");
@@ -128,8 +132,11 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 			@Override
 			public void process(XtextResource state) throws Exception {
 				ReplacingAppendable a = appendableFactory.get(document, context, cursorPosition, 1, 0, false);
-				typeRefSerializer.serialize(typeReferences.getTypeForName(fieldType, context), context, a);
-				a.append(" ").append(a.declareVariable(new Object(), fieldName));
+				ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
+				OwnedConverter converter = new OwnedConverter(owner);
+				LightweightTypeReference typeRef = converter.apply(services.getTypeReferences().getTypeForName(List.class, context, typesFactory.createJvmWildcardTypeReference()));
+				a.append(typeRef);
+				a.append(" ").append(fieldName);
 				a.commitChanges();
 			}
 		});

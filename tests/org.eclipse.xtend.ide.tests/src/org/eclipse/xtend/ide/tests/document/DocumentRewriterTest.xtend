@@ -10,15 +10,17 @@ import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.editor.model.XtextDocument
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.ui.document.DocumentRewriter
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter
 import org.junit.Test
+import org.eclipse.xtext.common.types.TypesFactory
 
 class DocumentRewriterTest extends AbstractXtendUITestCase {
 
@@ -28,9 +30,9 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 	
 	@Inject extension ReplaceConverter 
 
-	@Inject extension TypeReferences
+	@Inject extension CommonTypeComputationServices services
 	
-	@Inject extension TypeReferenceSerializer
+	@Inject extension TypesFactory
 	
 	@Test
 	def void testSectionOverlap() {
@@ -114,8 +116,7 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 		model
 			.rewrite [ DocumentRewriter it, XtextResource r |
 				val beforeFoo = newSection(model.indexOf('foo'), 0)
-				getTypeForName(Serializable, r)
-					.serialize(r.contents.head, beforeFoo)
+				beforeFoo.append(typeReferences.findDeclaredType(Serializable, r))
 				beforeFoo.append(' ') 
 
 			]
@@ -145,8 +146,11 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 			.rewrite [ DocumentRewriter it, XtextResource r |
 				val beforeFoo = newSection(model.indexOf('foo'), 0)
 				val beforeBar = newSection(model.indexOf('bar'), 0)
-				getTypeForName(List, r).serialize(r.contents.head, beforeFoo)
-				getTypeForName(File, r).serialize(r.contents.head, beforeBar) 
+				val owner = new StandardTypeReferenceOwner(services, r)
+				val converter = new OwnedConverter(owner)
+				val list = typeReferences.getTypeForName(List, r, createJvmWildcardTypeReference)
+				beforeFoo.append(converter.apply(list))
+				beforeBar.append(converter.apply(typeReferences.getTypeForName(File, r)))
 				beforeFoo.append(' ') 
 				beforeBar.append(' ')
 
@@ -179,10 +183,10 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 			.rewrite [ DocumentRewriter it, XtextResource r |
 				val beforeFoo = newSection(model.indexOf('foo'), 0)
 				val beforeBar = newSection(model.indexOf('bar'), 0)
-				getTypeForName(List, r, createTypeRef(findDeclaredType(String, r)))
-					.serialize(r.contents.head, beforeFoo)
-				getTypeForName(List, r, createTypeRef(findDeclaredType(File, r)))
-					.serialize(r.contents.head, beforeBar) 
+				val owner = new StandardTypeReferenceOwner(services, r)
+				val converter = new OwnedConverter(owner)
+				beforeFoo.append(converter.apply(typeReferences.getTypeForName(List, r, typeReferences.getTypeForName(String, r))))
+				beforeBar.append(converter.apply(typeReferences.getTypeForName(List, r, typeReferences.getTypeForName(File, r))))
 				beforeFoo.append(' ') 
 				beforeBar.append(' ')
 			]

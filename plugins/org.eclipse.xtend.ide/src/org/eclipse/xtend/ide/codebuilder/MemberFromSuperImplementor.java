@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -62,15 +63,17 @@ public class MemberFromSuperImplementor {
 	@Inject
 	private AnnotationLookup annotationLookup;
 	
+	@Inject
+	private SuperMemberOverrideHelper helper;
 
 	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation,
-			IAppendable appendable) {
-		appendExecutable(overrider, overriddenOperation, appendable);
+			ISourceAppender appendable) {
+		helper.appendOverrideFunction(overrider, overriddenOperation, appendable);
 	}
 
 	public void appendConstructorFromSuper(final XtendClass overrider, JvmConstructor superConstructor,
-			IAppendable appendable) {
-		appendExecutable(overrider, superConstructor, appendable);
+			ISourceAppender appendable) {
+		helper.appendConstructorFromSuper(overrider, superConstructor, appendable);
 	}
 
 	protected void appendExecutable(final XtendClass overrider, JvmExecutable executableFromSuper,

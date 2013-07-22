@@ -12,7 +12,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
 /**
  * Common interface to generate Java or Xtend code into an {@link IAppendable}.
@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 @NonNullByDefault
 public interface ICodeBuilder {
 
-	IAppendable build(IAppendable appendable);
+	ISourceAppender build(ISourceAppender appendable);
 
 	String getPreview();
 	

@@ -2,17 +2,13 @@ package org.eclipse.xtend.ide.tests.codebuilder
 
 import com.google.inject.Inject
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.junit.Test
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.TypesFactory
+import org.junit.Test
 
 class MethodBuilderTest extends AbstractBuilderTest {
 	
 	@Inject extension CodeBuilderFactory 
-	
-	@Inject extension TypeReferences
 	
 	@Inject extension TypesFactory
 	
@@ -23,7 +19,8 @@ class MethodBuilderTest extends AbstractBuilderTest {
 			methodName = 'foo'
 			returnType = xtendClass.createTypeRef
 			visibility = JvmVisibility::PUBLIC
-			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef, xtendClass.createTypeRef)
+			newParameterBuilder.type = xtendClass.createTypeRef
+			newParameterBuilder.type = xtendClass.createTypeRef
 		]).assertBuilds('''
 			def foo(Foo foo, Foo foo2) {
 			  «DEFAULT_BODY»
@@ -37,7 +34,8 @@ class MethodBuilderTest extends AbstractBuilderTest {
 			methodName = 'bar'
 			returnType = javaClass.createTypeRef
 			visibility = JvmVisibility::PUBLIC
-			parameterTypes = <JvmTypeReference>newArrayList(javaClass.createTypeRef, javaClass.createTypeRef)
+			newParameterBuilder.type = javaClass.createTypeRef
+			newParameterBuilder.type = javaClass.createTypeRef
 		]).assertBuilds('''
 			public Bar bar(Bar bar, Bar bar2) {
 			  «DEFAULT_BODY»;
@@ -52,7 +50,7 @@ class MethodBuilderTest extends AbstractBuilderTest {
 			returnType = xtendClass.createTypeRef
 			visibility = JvmVisibility::PROTECTED
 			staticFlag = true
-			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef)
+			newParameterBuilder.type =  xtendClass.createTypeRef
 		]).assertBuilds('''
 			def protected static foo(Foo foo) {
 			  «DEFAULT_BODY»
@@ -67,7 +65,7 @@ class MethodBuilderTest extends AbstractBuilderTest {
 			returnType = javaClass.createTypeRef
 			visibility = JvmVisibility::PRIVATE
 			staticFlag = true
-			parameterTypes = <JvmTypeReference>newArrayList(javaClass.createTypeRef)
+			newParameterBuilder.type = javaClass.createTypeRef
 		]).assertBuilds('''
 			private static Bar bar(Bar bar) {
 			  «DEFAULT_BODY»;
@@ -130,7 +128,7 @@ class MethodBuilderTest extends AbstractBuilderTest {
 		(createMethodBuilder(xtendClass) => [
 			context = xtendClass
 			methodName = 'foo'
-			exceptions = #[ Exception.getTypeForName(xtendClass), RuntimeException.getTypeForName(xtendClass)]
+			exceptions = #[ Exception.createTypeRef(xtendClass), RuntimeException.createTypeRef(xtendClass)]
 		]).assertBuilds('''
 			def foo() throws Exception, RuntimeException {
 			  «DEFAULT_BODY»
@@ -143,7 +141,7 @@ class MethodBuilderTest extends AbstractBuilderTest {
 		(createMethodBuilder(javaClass) => [
 			context = javaClass
 			methodName = 'foo'
-			exceptions = #[ Exception.getTypeForName(javaClass), RuntimeException.getTypeForName(javaClass)]
+			exceptions = #[ Exception.createTypeRef(javaClass), RuntimeException.createTypeRef(javaClass)]
 		]).assertBuilds('''
 			void foo() throws Exception, RuntimeException {
 			  «DEFAULT_BODY»;
@@ -155,8 +153,14 @@ class MethodBuilderTest extends AbstractBuilderTest {
 		(createMethodBuilder(xtendClass) => [
 			context = xtendClass
 			methodName = 'foo'
-			parameterNames = #['bar', 'baz']
-			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef, xtendClass.createTypeRef)
+			newParameterBuilder => [
+				name = 'bar'
+				type = xtendClass.createTypeRef
+			]
+			newParameterBuilder => [
+				name = 'baz'
+				type = xtendClass.createTypeRef
+			]
 		]).assertBuilds('''
 			def foo(Foo bar, Foo baz) {
 			  «DEFAULT_BODY»
@@ -169,8 +173,14 @@ class MethodBuilderTest extends AbstractBuilderTest {
 		(createMethodBuilder(javaClass) => [
 			context = javaClass
 			methodName = 'foo'
-			parameterNames = #['bar', 'baz']
-			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef, xtendClass.createTypeRef)
+			newParameterBuilder => [
+				name = 'bar'
+				type = xtendClass.createTypeRef
+			]
+			newParameterBuilder => [
+				name = 'baz'
+				type = xtendClass.createTypeRef
+			]
 		]).assertBuilds('''
 			void foo(Foo bar, Foo baz) {
 			  «DEFAULT_BODY»;

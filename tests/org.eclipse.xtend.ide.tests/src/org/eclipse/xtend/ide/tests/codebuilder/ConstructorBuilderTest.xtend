@@ -2,23 +2,20 @@ package org.eclipse.xtend.ide.tests.codebuilder
 
 import com.google.inject.Inject
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.junit.Test
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.common.types.JvmTypeReference
+import org.junit.Test
 
 class ConstructorBuilderTest extends AbstractBuilderTest {
 	
 	@Inject extension CodeBuilderFactory 
-	
-	@Inject extension TypeReferences
 	
 	@Test
 	def testXtendConstructor() {
 		(createConstructorBuilder(xtendClass) => [
 			context = xtendClass
 			visibility = JvmVisibility::PROTECTED
-			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef, xtendClass.createTypeRef)
+			newParameterBuilder.type = xtendClass.createTypeRef
+			newParameterBuilder.type = xtendClass.createTypeRef
 		]).assertBuilds('''
 			protected new(Foo foo, Foo foo2) {
 			  «DEFAULT_BODY»
@@ -30,7 +27,8 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 		(createConstructorBuilder(javaClass) => [
 			context = javaClass
 			visibility = JvmVisibility::PRIVATE
-			parameterTypes = <JvmTypeReference>newArrayList(javaClass.createTypeRef, javaClass.createTypeRef)
+			newParameterBuilder.type = javaClass.createTypeRef
+			newParameterBuilder.type = javaClass.createTypeRef
 		]).assertBuilds('''
 			private Bar(Bar bar, Bar bar2) {
 			  «DEFAULT_BODY»;
@@ -42,8 +40,14 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 		(createConstructorBuilder(xtendClass) => [
 			context = xtendClass
 			visibility = JvmVisibility::PROTECTED
-			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef, javaClass.createTypeRef)
-			parameterNames = #['bar','foo']
+			newParameterBuilder => [
+				type = xtendClass.createTypeRef
+				name = 'bar'
+			]
+			newParameterBuilder => [
+				type = javaClass.createTypeRef
+				name = 'foo'
+			]
 		]).assertBuilds('''
 			protected new(Foo bar, Bar foo) {
 			  «DEFAULT_BODY»
@@ -55,8 +59,14 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 		(createConstructorBuilder(javaClass) => [
 			context = javaClass
 			visibility = JvmVisibility::PRIVATE
-			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef, javaClass.createTypeRef)
-			parameterNames = #['bar','foo']
+			newParameterBuilder => [
+				type = xtendClass.createTypeRef
+				name = 'bar'
+			]
+			newParameterBuilder => [
+				type = javaClass.createTypeRef
+				name = 'foo'
+			]
 		]).assertBuilds('''
 			private Bar(Foo bar, Bar foo) {
 			  «DEFAULT_BODY»;
@@ -67,7 +77,7 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 	def testXtendExceptions() {
 		(createConstructorBuilder(xtendClass) => [
 			context = xtendClass
-			exceptions = #[ Exception.getTypeForName(xtendClass), RuntimeException.getTypeForName(xtendClass)]
+			exceptions = #[ Exception.createTypeRef(xtendClass), RuntimeException.createTypeRef(xtendClass)]
 		]).assertBuilds('''
 			new() throws Exception, RuntimeException {
 			  «DEFAULT_BODY»
@@ -79,7 +89,7 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 	def testJavaException() {
 		(createConstructorBuilder(javaClass) => [
 			context = javaClass
-			exceptions = #[ Exception.getTypeForName(javaClass), RuntimeException.getTypeForName(javaClass)]
+			exceptions = #[ Exception.createTypeRef(javaClass), RuntimeException.createTypeRef(javaClass)]
 		]).assertBuilds('''
 			Bar() throws Exception, RuntimeException {
 			  «DEFAULT_BODY»;
@@ -108,7 +118,4 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 			  return;
 			}''')
 	}
-	
-	
-	
 }

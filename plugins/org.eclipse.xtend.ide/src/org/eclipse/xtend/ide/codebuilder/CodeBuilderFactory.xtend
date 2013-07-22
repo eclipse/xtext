@@ -35,6 +35,7 @@ class CodeBuilderFactory {
 	@Inject Provider<XtendFieldBuilder> xtendFieldBuilderProvider
 	@Inject Provider<XtendConstructorBuilder> xtendConstructorBuilderProvider
 	@Inject Provider<XtendMethodBuilder> xtendMethodBuilderProvider
+	@Inject Provider<XtendParameterBuilder> xtendParameterBuilderProvider
 	
 	@Inject Provider<JavaClassBuilder> javaClassBuilderProvider
 	@Inject Provider<JavaInterfaceBuilder> javaInterfaceBuilderProvider
@@ -42,6 +43,7 @@ class CodeBuilderFactory {
 	@Inject Provider<JavaFieldBuilder> javaFieldBuilderProvider
 	@Inject Provider<JavaConstructorBuilder> javaConstructorBuilderProvider
 	@Inject Provider<JavaMethodBuilder> javaMethodBuilderProvider
+	@Inject Provider<JavaParameterBuilder> javaParameterBuilderProvider
 	
 	def createClassBuilder(JvmDeclaredType owner) {
 		val ownerSource = owner.source
@@ -110,6 +112,18 @@ class CodeBuilderFactory {
 				xtendMethodBuilderProvider.get
 			else
 				javaMethodBuilderProvider.get
+		builder.owner = owner
+		builder.ownerSource = ownerSource
+		builder
+	}
+	
+	def createParameterBuilder(JvmDeclaredType owner) {
+		val ownerSource = owner.source
+		val builder = 
+			if(ownerSource instanceof XtendTypeDeclaration) 
+				xtendParameterBuilderProvider.get
+			else
+				javaParameterBuilderProvider.get
 		builder.owner = owner
 		builder.ownerSource = ownerSource
 		builder
