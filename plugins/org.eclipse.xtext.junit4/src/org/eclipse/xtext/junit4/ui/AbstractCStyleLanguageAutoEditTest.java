@@ -427,6 +427,17 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		pressKey(editor, '\n');
 		assertState("{{foo}\n\t|{bar}\n}", editor);
 	}
+	
+	@Test
+	public void testCurlyBracesBlock_19() throws Exception {
+		XtextEditor editor = openEditor("{{|");
+		pressKey(editor, '\n');
+		assertState("{{\n\t|\n}", editor);
+		pressKey(editor, '\n');
+		assertState("{{\n\t\n\t|\n\t}\n}", editor);
+		pressKey(editor, '\n');
+		assertState("{{\n\t\n\t\n\t|\n\t}\n}", editor);
+	}
 
 	@Test public void testCurlyBracesWithSelection_1() throws Exception {
 		XtextEditor editor = openEditor("{|foo}");
