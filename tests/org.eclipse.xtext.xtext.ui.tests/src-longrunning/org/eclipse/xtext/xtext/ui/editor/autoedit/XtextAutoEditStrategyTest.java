@@ -242,6 +242,39 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				editor);
 	}
 	
+	@Test public void testBug412779() throws Exception {
+		XtextEditor editor = openEditor(
+				"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xbase\n" +
+				"\n" +
+				"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n" +
+				"\n" +
+				"A:\n" +
+				"\n" +
+				"B:|");
+		pressKey(editor, '\n');
+		assertState(
+				"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xbase\n" +
+				"\n" +
+				"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n" +
+				"\n" +
+				"A:\n" +
+				"\n" +
+				"B:\n" +
+				"\t|\n" +
+				";" , editor);
+		pressKey(editor, '\n');
+		assertState(
+				"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xbase\n" +
+				"\n" +
+				"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n" +
+				"\n" +
+				"A:\n" +
+				"\n" +
+				"B:\n" +
+				"\t\n" +
+				"\t|\n" +
+				";" , editor);
+	}
 
 	@Override
 	public void setUp() throws Exception {
