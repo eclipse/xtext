@@ -586,8 +586,13 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 			}
 
 			TypedPosition previous = (TypedPosition) category[category.length - 1];
-			if (previous.includes(offset))
+			if (previous.includes(offset)) {
 				return new TypedRegion(previous.getOffset(), previous.getLength(), previous.getType());
+			}
+			
+			if (isOpenSingleLineCommentPartition(previous, offset)) {
+				return new TypedRegion(previous.getOffset(), previous.getLength() + 1, previous.getType());
+			}
 
 			int endOffset = previous.getOffset() + previous.getLength();
 			return new TypedRegion(endOffset, fDocument.getLength() - endOffset, IDocument.DEFAULT_CONTENT_TYPE);
@@ -597,6 +602,21 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 		}
 
 		return new TypedRegion(0, fDocument.getLength(), IDocument.DEFAULT_CONTENT_TYPE);
+	}
+
+	private boolean isOpenSingleLineCommentPartition(TypedPosition position, int offset) throws BadLocationException {
+		if (position.isDeleted()) {
+			return false;
+		}
+		int endOffset = position.getOffset() + position.getLength();
+		if (offset != endOffset) {
+			return false;
+		}
+		if (!TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION.equals(position.getType())) {
+			return false;
+		}
+		int line = fDocument.getLineOfOffset(offset - 1);
+		return fDocument.getLineDelimiter(line) == null;
 	}
 
 	/*
