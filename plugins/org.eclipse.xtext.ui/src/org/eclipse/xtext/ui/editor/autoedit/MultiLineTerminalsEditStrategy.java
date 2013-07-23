@@ -73,12 +73,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
-		if (command.length != 0)
-			return;
-		String originalText = command.text;
-		String[] lineDelimiters = document.getLegalLineDelimiters();
-		int delimiterIndex = TextUtilities.startsWith(lineDelimiters, originalText);
-		if (delimiterIndex != -1) {
+		if (isLineDelimiter(document, command)) {
 			IRegion startTerminal = findStartTerminal(document, command.offset);
 			if (startTerminal == null)
 				return;
@@ -121,6 +116,16 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 				return;
 			}
 		}
+	}
+
+	private boolean isLineDelimiter(IDocument document, DocumentCommand command) {
+		if (command.length != 0) {
+			return false;
+		}
+		String originalText = command.text;
+		String[] lineDelimiters = document.getLegalLineDelimiters();
+		int delimiterIndex = TextUtilities.startsWith(lineDelimiters, originalText);
+		return delimiterIndex != -1 && originalText.trim().isEmpty();
 	}
 
 	/**
