@@ -91,15 +91,14 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 			int opening = count(getLeftTerminal(), documentContent);
 			int closing = count(getRightTerminal(), documentContent);
 			int occurences = opening + closing;
-			if (occurences % 2 == 0
-					&& (command.text.length() - command.length + documentContent.length() >= getLeftTerminal().length())) {
+			if (occurences % 2 == 0) {
 				command.caretOffset = command.offset + command.text.length();
 				command.text = command.text + getRightTerminal();
 				command.shiftsCaret = false;
 			}
 		}
 	}
-
+	
 	protected boolean isInsertClosingTerminal(IDocument document, int i) {
 		try {
 			return strategy.isInsertClosingBracket(document, i);
