@@ -106,7 +106,9 @@ public class RewritableImportSection {
 	private Set<String> implicitlyImportedPackages;
 
 	private IValueConverter<String> nameValueConverter;
-
+	
+	private ITextRegion importRegion;
+	
 	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, 
 			XImportSection originalImportSection, String lineSeparator, ImportSectionRegionUtil regionUtil,
 			IValueConverter<String> nameConverter) {
@@ -115,6 +117,7 @@ public class RewritableImportSection {
 		this.regionUtil = regionUtil;
 		this.nameValueConverter = nameConverter;
 		this.implicitlyImportedPackages = importsConfiguration.getImplicitlyImportedPackages(resource);
+		this.importRegion = regionUtil.computeRegion(resource);
 		if (originalImportSection != null) {
 			for (XImportDeclaration originalImportDeclaration : originalImportSection.getImportDeclarations()) {
 				this.originalImportDeclarations.add(originalImportDeclaration);
@@ -250,10 +253,9 @@ public class RewritableImportSection {
 			allImportDeclarations.addAll(addedImportDeclarations);
 			allImportDeclarations.removeAll(removedImportDeclarations);
 			String newImportSection = serializeImports(allImportDeclarations);
-			ITextRegion region = regionUtil.computeRegion(resource);
-			region = regionUtil.addLeadingWhitespace(region, resource);
-			region = regionUtil.addTrailingWhitespace(region, resource);
-			return singletonList(new ReplaceRegion(region, newImportSection));
+			importRegion = regionUtil.addLeadingWhitespace(importRegion, resource);
+			importRegion = regionUtil.addTrailingWhitespace(importRegion, resource);
+			return singletonList(new ReplaceRegion(importRegion, newImportSection));
 		} else {
 			for(XImportDeclaration removedImportDeclaration: removedImportDeclarations) {
 				ICompositeNode node = NodeModelUtils.findActualNodeFor(removedImportDeclaration);
@@ -283,15 +285,14 @@ public class RewritableImportSection {
 		StringBuilder importDeclarationsToAppend = getImportDeclarationsToAppend();
 		if(importDeclarationsToAppend.length() ==0) 
 			return;
-		ITextRegion region = regionUtil.computeRegion(resource);
-		region = regionUtil.addLeadingWhitespace(region, resource);
-		region = regionUtil.addTrailingSingleWhitespace(region, lineSeparator, resource);
-		int insertOffset = region.getOffset() + region.getLength();
+		importRegion = regionUtil.addLeadingWhitespace(importRegion, resource);
+		importRegion = regionUtil.addTrailingSingleWhitespace(importRegion, lineSeparator, resource);
+		int insertOffset = importRegion.getOffset() + importRegion.getLength();
 		if (insertOffset != 0 && originalImportDeclarations.isEmpty())
 			importDeclarationsToAppend.insert(0, lineSeparator);
 		importDeclarationsToAppend.append(lineSeparator);
-		int insertLength = -region.getLength();
-		insertLength += regionUtil.addTrailingWhitespace(region, resource).getLength();
+		int insertLength = -importRegion.getLength();
+		insertLength += regionUtil.addTrailingWhitespace(importRegion, resource).getLength();
 		ReplaceRegion appendDeclarations = new ReplaceRegion(new TextRegion(insertOffset, insertLength), importDeclarationsToAppend.toString());
 		acceptor.accept(appendDeclarations);
 	}
@@ -352,7 +353,6 @@ public class RewritableImportSection {
 	}
 
 	protected boolean needsPreceedingBlankLine() {
-		ITextRegion importRegion = regionUtil.computeRegion(resource);
 		return regionUtil.addLeadingWhitespace(importRegion, resource).getOffset() != 0;
 	}
 
