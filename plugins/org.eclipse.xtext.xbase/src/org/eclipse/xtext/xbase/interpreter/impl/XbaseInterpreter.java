@@ -83,7 +83,10 @@ import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
@@ -349,14 +352,18 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object _doEvaluate(XSetLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
-		LightweightTypeReference type = typeResolver.resolveTypes(literal).getActualType(literal);
-		if(type.isType(Map.class)) {
+		if(isType(literal, Map.class)) {
 			Map<Object, Object> map = newHashMap();
 			for(XExpression element: literal.getElements()) {
 				if (indicator.isCanceled())
 					throw new InterpreterCanceledException();
-				map.put(internalEvaluate(((XBinaryOperation)element).getLeftOperand(), context, indicator),
-					internalEvaluate(((XBinaryOperation)element).getRightOperand(), context, indicator));
+				if (expressionHelper.isOperatorFromExtension(element, OperatorMapping.MAPPED_TO, ObjectExtensions.class)) {
+					map.put(internalEvaluate(((XBinaryOperation)element).getLeftOperand(), context, indicator),
+							internalEvaluate(((XBinaryOperation)element).getRightOperand(), context, indicator));
+				} else if (isType(element, Pair.class)) {
+					Pair<?, ?> pair = (Pair<?, ?>) internalEvaluate(element, context, indicator);
+					map.put(pair == null ? null : pair.getKey(), pair == null ? null : pair.getValue());
+				}
 			}
 			return Collections.unmodifiableMap(map);
 		} else {
@@ -368,6 +375,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			}
 			return Collections.unmodifiableSet(set);
 		}
+	}
+
+	protected boolean isType(XExpression element, Class<?> clazz) {
+		return resolveType(element, clazz) != null;
+	}
+
+	protected LightweightTypeReference resolveType(XExpression element, Class<?> clazz) {
+		LightweightTypeReference elementType = typeResolver.resolveTypes(element).getActualType(element);
+		return elementType != null && elementType.isType(clazz) ? elementType : null;
 	}
 
 	protected Object _doEvaluate(XClosure closure, IEvaluationContext context, CancelIndicator indicator) {
