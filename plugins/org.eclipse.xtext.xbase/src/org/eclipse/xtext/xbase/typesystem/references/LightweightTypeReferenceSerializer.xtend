@@ -31,7 +31,10 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 			appender.append('(')
 			appendCommaSeparated(reference.parameterTypes)
 			appender.append(')=>')
-			reference.returnType.accept(this)			
+			if(reference.returnType == null) 
+				appender.append('void')
+			else
+				reference.returnType.accept(this)			
 		}
 	}
 
