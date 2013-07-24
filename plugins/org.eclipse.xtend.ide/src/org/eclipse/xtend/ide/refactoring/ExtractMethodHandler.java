@@ -68,11 +68,9 @@ public class ExtractMethodHandler extends AbstractHandler {
 							if (extractMethodRefactoring.initialize(document, expressions)) {
 								updateSelection(editor, expressions);
 								ExtractMethodWizard wizard = wizardFactory.create(extractMethodRefactoring);
-								if(wizard != null) {
-									RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
-											wizard);
-									openOperation.run(editor.getSite().getShell(), "Extract Method");
-								}
+								RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
+										wizard);
+								openOperation.run(editor.getSite().getShell(), "Extract Method");
 							}
 						}
 					}
