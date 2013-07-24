@@ -3397,6 +3397,27 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(map, "#{null->null}");
 	}
 	
+	@Test
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=412642
+	public void testMapLiteral_6() throws Exception {
+		HashMap<Object, Object> map = newHashMap();
+		map.put("Apple", new Integer(1));
+		assertEvaluatesTo(map, "{\n" +
+									"val pair = 'Apple' -> 1\n" +
+									"#{pair}\n" +
+								"} ");
+	}
+
+	@Test
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=412642
+	public void testMapLiteral_7() throws Exception {
+		HashMap<Object, Object> map = newHashMap();
+		map.put("Apple", new Integer(1));
+		assertEvaluatesTo(map, "{\n" +
+									"#{ if (true) 'Apple' -> 1 else 'Banana' -> 2 }" +
+								"} ");
+	}
+	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		Object result = invokeXbaseExpression(string);
 		assertEquals(object, result);
