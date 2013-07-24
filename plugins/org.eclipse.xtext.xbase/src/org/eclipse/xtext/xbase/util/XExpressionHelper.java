@@ -161,6 +161,10 @@ public class XExpressionHelper {
 		return false;
 	}
 
+	public boolean isOperatorFromExtension(XExpression expression, QualifiedName operatorSymbol, Class<?> definingExtensionClass) {
+		return expression instanceof XAbstractFeatureCall && isOperatorFromExtension((XAbstractFeatureCall) expression, operatorSymbol, definingExtensionClass);
+	}
+
 	public boolean isOperatorFromExtension(XAbstractFeatureCall featureCall, QualifiedName operatorSymbol, Class<?> definingExtensionClass) {
 		if(!equal(featureCall.getConcreteSyntaxFeatureName(), operatorSymbol.getLastSegment()))
 			return false;
