@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.wizards;
 
+import java.io.ByteArrayInputStream;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
@@ -17,9 +18,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.CompilationUnit;
+import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
+import org.eclipse.jdt.internal.core.PackageFragment;
+import org.eclipse.jdt.internal.corext.codemanipulation.StubUtility;
 import org.eclipse.jdt.internal.ui.dialogs.StatusInfo;
 import org.eclipse.jdt.ui.wizards.NewTypeWizardPage;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -37,6 +43,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Anton Kosyakov - https://bugs.eclipse.org/bugs/show_bug.cgi?id=379220
  */
 public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPage {
 
@@ -61,8 +68,37 @@ public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPag
 
 	protected abstract String getElementCreationErrorMessage();
 
-	protected abstract int createXtendElement(IProgressMonitor monitor, IFile xtendFile, String indentation,
-			String lineSeperator);
+	protected int createXtendElement(IProgressMonitor monitor, IFile xtendFile, String indentation, String lineSeparator) {
+		int size = 0;
+		try {
+			String content = createContent(monitor, xtendFile, indentation, lineSeparator);
+			size = content.length();
+			xtendFile.create(new ByteArrayInputStream(content.getBytes()), true, monitor);
+			setResource(xtendFile);
+		} catch (CoreException e) {
+			displayError(getElementCreationErrorMessage(), e.getMessage());
+		}
+		return size;
+	}
+
+	private String createContent(IProgressMonitor monitor, IFile xtendFile, String indentation, String lineSeparator) throws CoreException {
+		ICompilationUnit compilationUnit = getCompilationUnitStub();
+		String fileComment = getFileComment(compilationUnit, lineSeparator);
+		String typeComment = getTypeComment(compilationUnit, lineSeparator);
+		
+		String typeContent = getTypeContent(indentation, lineSeparator);
+		String packageDeclaration = getPackageDeclaration(lineSeparator);
+		return StubUtility.getCompilationUnitContent(compilationUnit, packageDeclaration, fileComment, typeComment, typeContent, lineSeparator);
+	}
+
+	protected abstract String getPackageDeclaration(String lineSeparator);
+
+	protected abstract String getTypeContent(String indentation, String lineSeparator);
+
+	private ICompilationUnit getCompilationUnitStub() {
+		String compilationUnitName = getCompilationUnitName(getTypeName());
+		return new CompilationUnit((PackageFragment) getPackageFragment(), compilationUnitName, DefaultWorkingCopyOwner.PRIMARY);
+	}
 
 	protected Composite createCommonControls(Composite parent) {
 		initializeDialogUnits(parent);
