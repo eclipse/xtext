@@ -131,7 +131,7 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 		document.modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
-				ReplacingAppendable a = appendableFactory.get(document, context, cursorPosition, 1, 0, false);
+				ReplacingAppendable a = appendableFactory.create(document, state, cursorPosition, 1);
 				ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
 				OwnedConverter converter = new OwnedConverter(owner);
 				LightweightTypeReference typeRef = converter.apply(services.getTypeReferences().getTypeForName(List.class, context, typesFactory.createJvmWildcardTypeReference()));

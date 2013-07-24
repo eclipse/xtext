@@ -24,8 +24,9 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable
-
+import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * Creates quickfixes using {@link ICodeBuilder}s.
@@ -72,7 +73,10 @@ class CodeBuilderQuickfix {
 			val document = xtextEditor.getDocument();
 			var offset = builder.insertOffset
 
-			val appendable = appendableFactory.get(document, xtendClass, offset, 0, builder.indentationLevel, true)
+			val appendable = appendableFactory.create(document, xtendClass.eResource as XtextResource, offset, 0, new OptionalParameters => [
+				baseIndentationLevel = builder.indentationLevel
+				ensureEmptyLinesAround = true
+			])
 			builder.build(appendable)
 			appendable.commitChanges
 			xtextEditor.setHighlightRange(offset + 1, appendable.length, true)

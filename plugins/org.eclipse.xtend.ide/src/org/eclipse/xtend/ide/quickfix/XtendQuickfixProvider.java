@@ -56,6 +56,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
+import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
 import com.google.common.collect.Lists;
@@ -193,8 +194,11 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
-							ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(), clazz,
-									insertionOffsets.getNewConstructorInsertOffset(null, clazz), 0, 1, true);
+							ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) clazz.eResource(),
+									insertionOffsets.getNewConstructorInsertOffset(null, clazz), 0, new OptionalParameters() {{ 
+										ensureEmptyLinesAround = true;
+										baseIndentationLevel = 1;	
+									}});
 							EObject constructor = clazz.eResource().getResourceSet().getEObject(constructorURI, true);
 							if (constructor instanceof JvmConstructor) {
 								superMemberImplementor.appendConstructorFromSuper(clazz, (JvmConstructor) constructor,
@@ -215,8 +219,11 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
 							IXtextDocument document = context.getXtextDocument();
-							ReplacingAppendable appendable = appendableFactory.get(document, clazz,
-									insertionOffsets.getNewMethodInsertOffset(null, clazz), 0, 1, true);
+							ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
+									insertionOffsets.getNewMethodInsertOffset(null, clazz), 0, new OptionalParameters() {{ 
+										ensureEmptyLinesAround = true;
+										baseIndentationLevel = 1;	
+									}});
 							boolean isFirst = true;
 							for (String operationUriAsString : issue.getData()) {
 								URI operationURI = URI.createURI(operationUriAsString);
@@ -264,8 +271,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 										throw new IllegalStateException("expressionNode may not be null");
 									insertPosition = expressionNode.getOffset();
 								}
-								ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
-										xtendFunction, insertPosition, 0);
+								ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
+										(XtextResource) xtendFunction.eResource(), insertPosition, 0);
 								if (xtendFunction.getExpression() == null) 
 									appendable.append(" ");
 								EList<JvmTypeReference> thrownExceptions = xtendFunction.getExceptions();
@@ -321,9 +328,9 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 									ICompositeNode toBeSurroundedNode = NodeModelUtils.findActualNodeFor(toBeSurrounded);
 									if (toBeSurroundedNode == null)
 										throw new IllegalStateException("toBeSurroundedNode may not be null");
-									ReplacingAppendable appendable = appendableFactory.get(
+									ReplacingAppendable appendable = appendableFactory.create(
 											context.getXtextDocument(),
-											childThrowingException, 
+											(XtextResource) childThrowingException.eResource(), 
 											toBeSurroundedNode.getOffset(),
 											toBeSurroundedNode.getLength());
 									appendable
@@ -412,7 +419,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					offset = leafNode.getOffset();
 				}
 			}
-			ReplacingAppendable appendable = appendableFactory.get(document, clazz,
+			ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
 					offset, 0);
 			appendable.append("abstract ");
 			appendable.commitChanges();

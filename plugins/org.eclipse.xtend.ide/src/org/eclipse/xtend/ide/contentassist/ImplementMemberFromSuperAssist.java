@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -47,6 +48,8 @@ import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.xbase.ui.contentassist.ImportOrganizingProposal;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
+import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender;
+import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 
@@ -150,8 +153,11 @@ public class ImplementMemberFromSuperAssist {
 
 	protected ICompletionProposal createOverrideMethodProposal(XtendClass model, JvmExecutable overridden,
 			final ContentAssistContext context, IProposalConflictHelper conflictHelper) {
-		ReplacingAppendable appendable = appendableFactory.get(context.getDocument(), model, context.getReplaceRegion()
-				.getOffset(), context.getReplaceRegion().getLength(), 1, true);
+		ReplacingAppendable appendable = appendableFactory.create(context.getDocument(), (XtextResource) model.eResource(), context.getReplaceRegion()
+				.getOffset(), context.getReplaceRegion().getLength(), new OptionalParameters() {{ 
+					ensureEmptyLinesAround = true;
+					baseIndentationLevel = 1;	
+				}});
 		final String simpleName;
 		if (overridden instanceof JvmOperation) {
 			implementor.appendOverrideFunction(model, (JvmOperation) overridden, appendable);

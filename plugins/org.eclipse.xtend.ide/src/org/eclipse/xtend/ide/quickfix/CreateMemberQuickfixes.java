@@ -66,6 +66,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
+import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.quickfix.ILinkingIssueQuickfixProvider;
 
 import com.google.inject.Inject;
@@ -237,8 +238,10 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 								int offset = getFirstOffsetOfKeyword(xtendMember, "{");
 								IXtextDocument xtextDocument = context.getXtextDocument();
 								if (offset != -1 && xtextDocument != null) {
-									final ReplacingAppendable appendable = appendableFactory.get(xtextDocument,
-											element, offset, 0, 1, false);
+									final ReplacingAppendable appendable = appendableFactory.create(xtextDocument,
+											(XtextResource) element.eResource(), offset, 0, new OptionalParameters() {{ 
+												baseIndentationLevel = 1;	
+											}});
 									appendable.increaseIndentation().newLine().append("val ").append(variableName).append(" = ")
 											.append(defaultValueLiteral);
 									appendable.commitChanges();
