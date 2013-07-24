@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IAnnotatable;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -30,6 +31,7 @@ import org.eclipse.xtend.ide.codebuilder.JavaFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaMethodBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -45,6 +47,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable.Factory;
+import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 
 /**
  * Creates quickfixes using {@link ICodeBuilder}s.
@@ -135,8 +138,17 @@ public class CodeBuilderQuickfix {
           final XtextEditor xtextEditor = ((XtextEditor) editor);
           final IXtextDocument document = xtextEditor.getDocument();
           int offset = builder.getInsertOffset();
-          int _indentationLevel = builder.getIndentationLevel();
-          final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.get(document, xtendClass, offset, 0, _indentationLevel, true);
+          Resource _eResource = xtendClass.eResource();
+          OptionalParameters _optionalParameters = new OptionalParameters();
+          final Procedure1<OptionalParameters> _function = new Procedure1<OptionalParameters>() {
+              public void apply(final OptionalParameters it) {
+                int _indentationLevel = builder.getIndentationLevel();
+                it.baseIndentationLevel = _indentationLevel;
+                it.ensureEmptyLinesAround = true;
+              }
+            };
+          OptionalParameters _doubleArrow = ObjectExtensions.<OptionalParameters>operator_doubleArrow(_optionalParameters, _function);
+          final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.create(document, ((XtextResource) _eResource), offset, 0, _doubleArrow);
           builder.build(appendable);
           appendable.commitChanges();
           int _plus = (offset + 1);
