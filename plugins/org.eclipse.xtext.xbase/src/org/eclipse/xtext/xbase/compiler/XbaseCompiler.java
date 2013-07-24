@@ -67,7 +67,9 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
@@ -79,6 +81,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
@@ -93,6 +96,9 @@ import com.google.inject.Inject;
  */
 @NonNullByDefault
 public class XbaseCompiler extends FeatureCallCompiler {
+	
+	@Inject 
+	private XExpressionHelper expressionHelper;
 	
 	@Inject 
 	private IEarlyExitComputer earlyExitComputer;
@@ -116,13 +122,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaStatement(final XSetLiteral literal, ITreeAppendable b, boolean isReferenced) {
-		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
-		if(literalType != null && literalType.isType(Map.class)) {
+		LightweightTypeReference literalType = resolveType(literal, Map.class);
+		if(literalType != null) {
 			if(isReferenced)
 				declareSyntheticVariable(literal, b);
 			for(XExpression element: literal.getElements()) {
-				internalToJavaStatement(((XBinaryOperation) element).getLeftOperand(), b, true);
-				internalToJavaStatement(((XBinaryOperation) element).getRightOperand(), b, true);
+				if (expressionHelper.isOperatorFromExtension(element, OperatorMapping.MAPPED_TO, ObjectExtensions.class)) {
+					XBinaryOperation binaryOperation = (XBinaryOperation) element;
+					internalToJavaStatement(binaryOperation.getLeftOperand(), b, true);
+					internalToJavaStatement(binaryOperation.getRightOperand(), b, true);
+				} else if (isType(element, Pair.class)) {
+					internalToJavaStatement(element, b, true);
+				}
 			}
 			LightweightTypeReference keyType = literalType.getTypeArguments().get(0);
 			LightweightTypeReference valueType = literalType.getTypeArguments().get(1);
@@ -139,11 +150,26 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append(">newHashMap()").append(";").newLine();
 
 			for(XExpression element: literal.getElements())  {
-				b.append(tempMapName).append(".put(");
-				internalToJavaExpression(((XBinaryOperation) element).getLeftOperand(), b);
-				b.append(", ");
-				internalToJavaExpression(((XBinaryOperation) element).getRightOperand(), b);
-				b.append(");").newLine();
+				if (expressionHelper.isOperatorFromExtension(element, OperatorMapping.MAPPED_TO, ObjectExtensions.class)) {
+					XBinaryOperation binaryOperation = (XBinaryOperation) element;
+					b.append(tempMapName).append(".put(");
+					internalToJavaExpression(binaryOperation.getLeftOperand(), b);
+					b.append(", ");
+					internalToJavaExpression(binaryOperation.getRightOperand(), b);
+					b.append(");").newLine();
+				} else if (isType(element, Pair.class)) {
+					b.append(tempMapName).append(".put(");
+					internalToJavaExpression(element, b);
+					b.append(" == null ? null : ");
+					internalToJavaExpression(element, b);
+					b.append(".getKey()");
+					b.append(", ");
+					internalToJavaExpression(element, b);
+					b.append(" == null ? null : ");
+					internalToJavaExpression(element, b);
+					b.append(".getValue()");
+					b.append(");").newLine();
+				}
 			}
 			if(isReferenced) 
 				b.append(getVarName(literal, b)).append(" = ");
@@ -157,6 +183,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			for(XExpression element: literal.getElements()) 
 				internalToJavaStatement(element, b, true);
 		}
+	}
+
+	protected boolean isType(XExpression element, Class<?> clazz) {
+		return resolveType(element, clazz) != null;
+	}
+
+	protected LightweightTypeReference resolveType(XExpression element, Class<?> clazz) {
+		LightweightTypeReference elementType = batchTypeResolver.resolveTypes(element).getActualType(element);
+		return elementType != null && elementType.isType(clazz) ? elementType : null;
 	}
 	
 	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {
