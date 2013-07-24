@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.refactoring;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
@@ -16,6 +17,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -124,6 +126,8 @@ public class ExtractMethodRefactoring extends Refactoring {
 	private boolean isStatic;
 	
 	private List<ParameterInfo> parameterInfos = newArrayList();
+	
+	private Map<ParameterInfo, LightweightTypeReference> parameter2type = newHashMap(); 
 	
 	private boolean isExplicitlyDeclareReturnType;
 
@@ -269,7 +273,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 			if (!isFirst)
 				appendable.append(", ");
 			isFirst = false;
-			appendable.append(parameterInfo.getOldTypeName()).append(" ").append(parameterInfo.getNewName());
+			appendable.append(parameter2type.get(parameterInfo)).append(" ").append(parameterInfo.getNewName());
 		}
 		appendable.append(")");
 	}
@@ -297,10 +301,11 @@ public class ExtractMethodRefactoring extends Refactoring {
 						if (feature instanceof JvmFormalParameter || feature instanceof XVariableDeclaration) {
 							if (!calledExternalFeatureNames.contains(feature.getSimpleName())) {
 								calledExternalFeatureNames.add(feature.getSimpleName());
-								parameterInfos.add(
-										new ParameterInfo(featureType.getIdentifier(), 
+								ParameterInfo parameterInfo = new ParameterInfo(featureType.getIdentifier(), 
 										feature.getSimpleName(), 
-										parameterInfos.size()));
+										parameterInfos.size());
+								parameterInfos.add(parameterInfo);
+								parameter2type.put(parameterInfo, featureType);
 							}
 							externalFeatureCalls.put(feature.getSimpleName(), featureCall);
 						}
