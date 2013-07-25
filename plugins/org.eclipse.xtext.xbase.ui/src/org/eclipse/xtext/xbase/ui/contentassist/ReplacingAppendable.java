@@ -52,15 +52,6 @@ public class ReplacingAppendable extends DocumentSourceAppender {
 		return insertNewImports();
 	}
 	
-//	public int commitChanges(int offset, int length) throws BadLocationException {
-//		int actualOffset = Math.min(whitespaceHelper.getTotalOffset(), offset);
-//		int endOffset = Math.max(whitespaceHelper.getTotalOffset() + whitespaceHelper.getTotalLength(), offset + length);
-//		int actualLength = endOffset - actualOffset;
-//		getDocument().replace(actualOffset, actualLength, toString());
-//		int shiftCursorBy = insertNewImports();
-//		return shiftCursorBy;
-//	}
-
 	public int insertNewImports() throws BadLocationException {
 		List<ReplaceRegion> importChanges = getImportSection().rewrite();
 		int lengthDelta = 0;
