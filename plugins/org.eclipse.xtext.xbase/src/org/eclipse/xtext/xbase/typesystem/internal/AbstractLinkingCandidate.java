@@ -28,6 +28,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -127,7 +129,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	private final ExpressionTypeComputationState state;
 	private final Expression expression;
-	private List<LightweightTypeReference> typeArguments;
+	protected List<LightweightTypeReference> typeArguments;
 	protected IFeatureCallArguments arguments;
 	
 	protected AbstractLinkingCandidate(Expression expression, ExpressionTypeComputationState state) {
@@ -207,7 +209,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	public List<LightweightTypeReference> getTypeArguments() {
 		if (typeArguments == null) {
 			List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
-			if (typeParameters.isEmpty()) {
+			if (typeParameters.isEmpty() || getTypeParameterMapping().isEmpty()) {
 				typeArguments = Collections.emptyList();
 			} else {
 				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(typeParameters.size());
@@ -318,7 +320,19 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			}
 			// TODO enhance with expectation
 			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType).getUpperBoundSubstitute();
-			deferredBindTypeArgument(expectation, substitutedFeatureType);
+			if (!expectation.isNoTypeExpectation()) {
+				deferredBindTypeArgument(expectation, substitutedFeatureType);
+				LightweightTypeReference expectedType = expectation.getExpectedType();
+				if (expectedType != null && getSyntacticTypeArguments().isEmpty() && !substitutedFeatureType.isRawType() && !getDeclaredTypeParameters().isEmpty()) {
+					if (!expectedType.isAssignableFrom(substitutedFeatureType, new TypeConformanceComputationArgument())) {
+						LightweightTypeReference rawFeatureType = substitutedFeatureType.getRawTypeReference();
+						if (expectedType.isAssignableFrom(rawFeatureType)) {
+							substitutedFeatureType = rawFeatureType;
+							getTypeParameterMapping().clear();
+						}
+					}
+				}
+			}
 			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED);
 		}
 		state.getStackedResolvedTypes().mergeIntoParent();

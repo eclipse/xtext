@@ -428,12 +428,11 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("Constructor types loose track to the constructor call")
 	public void testConstructorCall_05() throws Exception {
 		assertTrace( 
 				"\nArrayList<String> _arrayList = new ArrayList<S#trin#g>(5);\n" +
 				"return _arrayList;", 
-				"new java.util.ArrayList<S#tri#ng>(5)");
+				"new java.util.ArrayList<#String#>(5)");
 	}
 	
 	@Test
