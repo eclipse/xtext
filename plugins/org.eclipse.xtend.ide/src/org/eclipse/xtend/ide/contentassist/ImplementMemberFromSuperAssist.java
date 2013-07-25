@@ -48,7 +48,6 @@ import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.xbase.ui.contentassist.ImportOrganizingProposal;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
-import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.validation.UIStrings;
