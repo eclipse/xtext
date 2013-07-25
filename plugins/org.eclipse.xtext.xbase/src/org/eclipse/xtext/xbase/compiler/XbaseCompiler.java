@@ -1124,15 +1124,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(" ");
 		String variableName = b.declareSyntheticVariable(closure, "_function");
 		b.append(variableName).append(" = ");
-		_toJavaStatement(closure, b, type).append(";").decreaseIndentation();
+		toAnonymousClass(closure, b, type).append(";");
 	}
 
-	protected ITreeAppendable _toJavaStatement(final XClosure closure, final ITreeAppendable b, JvmTypeReference type) {
+	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b, JvmTypeReference type) {
 		b.append("new ");
 		// TODO parameters in type arguments are safe to be a wildcard
 		serialize(type, closure, b, false, false, true, false);
 		b.append("() {");
-		b.increaseIndentation().increaseIndentation();
+		b.increaseIndentation();
 		try {
 			b.openScope();
 			JvmOperation operation = findImplementingOperation(type, closure);
@@ -1257,7 +1257,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (b.hasName(closure)) {
 			b.trace(closure, false).append(getVarName(closure, b));
 		} else {
-			_toJavaStatement(closure, b.trace(closure, false), getType(closure));
+			toAnonymousClass(closure, b.trace(closure, false), getType(closure));
 		}
 	}
 	

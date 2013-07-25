@@ -445,11 +445,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public void foo(final Function1<? super String,? extends String> func) {
 			    final Function1<String,String> _function = new Function1<String,String>() {
-			        public String apply(final String it) {
-			          String _apply = this.apply(it);
-			          return _apply;
-			        }
-			      };
+			      public String apply(final String it) {
+			        String _apply = this.apply(it);
+			        return _apply;
+			      }
+			    };
 			    this.foo(_function);
 			  }
 			}
@@ -470,10 +470,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public void foo(final Procedure0 func) {
 			    final Procedure0 _function = new Procedure0() {
-			        public void apply() {
-			          this.apply();
-			        }
-			      };
+			      public void apply() {
+			        this.apply();
+			      }
+			    };
 			    this.foo(_function);
 			  }
 			}
@@ -506,24 +506,24 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> iter) {
 			    final AbstractIterator<T> _function = new AbstractIterator<T>() {
-			        @Override
-			        protected T computeNext() {
-			          boolean _hasNext = iter.hasNext();
-			          boolean _while = _hasNext;
-			          while (_while) {
-			            {
-			              final T elem = iter.next();
-			              boolean _notEquals = (!Objects.equal(elem, null));
-			              if (_notEquals) {
-			                return elem;
-			              }
+			      @Override
+			      protected T computeNext() {
+			        boolean _hasNext = iter.hasNext();
+			        boolean _while = _hasNext;
+			        while (_while) {
+			          {
+			            final T elem = iter.next();
+			            boolean _notEquals = (!Objects.equal(elem, null));
+			            if (_notEquals) {
+			              return elem;
 			            }
-			            boolean _hasNext_1 = iter.hasNext();
-			            _while = _hasNext_1;
 			          }
-			          return this.endOfData();
+			          boolean _hasNext_1 = iter.hasNext();
+			          _while = _hasNext_1;
 			        }
-			      };
+			        return this.endOfData();
+			      }
+			    };
 			    final AbstractIterator<T> result = _function;
 			    return result;
 			  }
@@ -551,18 +551,18 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public AbstractIterator<String> skipNulls() {
 			    final AbstractIterator<String> _function = new AbstractIterator<String>() {
-			        @Override
-			        protected String computeNext() {
-			          String _xblockexpression = null;
-			          {
-			            Foo.this.toString();
-			            Foo.super.toString();
-			            String _string = this.toString();
-			            _xblockexpression = (_string);
-			          }
-			          return _xblockexpression;
+			      @Override
+			      protected String computeNext() {
+			        String _xblockexpression = null;
+			        {
+			          Foo.this.toString();
+			          Foo.super.toString();
+			          String _string = this.toString();
+			          _xblockexpression = (_string);
 			        }
-			      };
+			        return _xblockexpression;
+			      }
+			    };
 			    final AbstractIterator<String> result = _function;
 			    return result;
 			  }
@@ -593,25 +593,25 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> iter) {
 			    final AbstractIterator<T> _function = new AbstractIterator<T>() {
-			        @Override
-			        protected T computeNext() {
-			          T _elvis = null;
-			          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
-			              public Boolean apply(final T it) {
-			                boolean _tripleNotEquals = (it != null);
-			                return Boolean.valueOf(_tripleNotEquals);
-			              }
-			            };
-			          T _findFirst = IteratorExtensions.<T>findFirst(iter, _function);
-			          if (_findFirst != null) {
-			            _elvis = _findFirst;
-			          } else {
-			            T _endOfData = this.endOfData();
-			            _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+			      @Override
+			      protected T computeNext() {
+			        T _elvis = null;
+			        final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+			          public Boolean apply(final T it) {
+			            boolean _tripleNotEquals = (it != null);
+			            return Boolean.valueOf(_tripleNotEquals);
 			          }
-			          return _elvis;
+			        };
+			        T _findFirst = IteratorExtensions.<T>findFirst(iter, _function);
+			        if (_findFirst != null) {
+			          _elvis = _findFirst;
+			        } else {
+			          T _endOfData = this.endOfData();
+			          _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
 			        }
-			      };
+			        return _elvis;
+			      }
+			    };
 			    final AbstractIterator<T> result = _function;
 			    return result;
 			  }
@@ -646,25 +646,25 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				public class FindFirstOnIt {
 				  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> it) {
 				    final AbstractIterator<T> _function = new AbstractIterator<T>() {
-				        @Override
-				        protected T computeNext() {
-				          T _elvis = null;
-				          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
-				              public Boolean apply(final T it) {
-				                boolean _notEquals = (!Objects.equal(it, null));
-				                return Boolean.valueOf(_notEquals);
-				              }
-				            };
-				          T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
-				          if (_findFirst != null) {
-				            _elvis = _findFirst;
-				          } else {
-				            T _endOfData = this.endOfData();
-				            _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+				      @Override
+				      protected T computeNext() {
+				        T _elvis = null;
+				        final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+				          public Boolean apply(final T it) {
+				            boolean _notEquals = (!Objects.equal(it, null));
+				            return Boolean.valueOf(_notEquals);
 				          }
-				          return _elvis;
+				        };
+				        T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
+				        if (_findFirst != null) {
+				          _elvis = _findFirst;
+				        } else {
+				          T _endOfData = this.endOfData();
+				          _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
 				        }
-				      };
+				        return _elvis;
+				      }
+				    };
 				    final AbstractIterator<T> result = _function;
 				    return result;
 				  }
@@ -703,10 +703,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class A {
 			  public Procedure0 m() {
 			    final Procedure0 _function = new Procedure0() {
-			        public void apply() {
-			          System.out.println("");
-			        }
-			      };
+			      public void apply() {
+			        System.out.println("");
+			      }
+			    };
 			    return _function;
 			  }
 			}
@@ -728,11 +728,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class A {
 			  public Function0<String> m() {
 			    final Function0<String> _function = new Function0<String>() {
-			        public String apply() {
-			          String _println = InputOutput.<String>println("");
-			          return _println;
-			        }
-			      };
+			      public String apply() {
+			        String _println = InputOutput.<String>println("");
+			        return _println;
+			      }
+			    };
 			    return _function;
 			  }
 			}
@@ -818,21 +818,21 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  private final URI uri = new Function0<URI>() {
 			    public URI apply() {
 			      final Function0<URI> _function = new Function0<URI>() {
-			          public URI apply() {
-			            try {
-			              URI _uRI = new URI("");
-			              return _uRI;
-			            } catch (Throwable _e) {
-			              throw Exceptions.sneakyThrow(_e);
-			            }
+			        public URI apply() {
+			          try {
+			            URI _uRI = new URI("");
+			            return _uRI;
+			          } catch (Throwable _e) {
+			            throw Exceptions.sneakyThrow(_e);
 			          }
-			        };
+			        }
+			      };
 			      final Function1<Exception,IllegalArgumentException> _function_1 = new Function1<Exception,IllegalArgumentException>() {
-			          public IllegalArgumentException apply(final Exception it) {
-			            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(it);
-			            return _illegalArgumentException;
-			          }
-			        };
+			        public IllegalArgumentException apply(final Exception it) {
+			          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(it);
+			          return _illegalArgumentException;
+			        }
+			      };
 			      URI _propagate = Throwables.<URI>propagate(_function, _function_1);
 			      return _propagate;
 			    }
@@ -1132,10 +1132,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      if (Objects.equal(_switchValue,null)) {
 			        _matched=true;
 			        final Function1<Object,Object> _function = new Function1<Object,Object>() {
-			            public Object apply(final Object it) {
-			              return it;
-			            }
-			          };
+			          public Object apply(final Object it) {
+			            return it;
+			          }
+			        };
 			        _switchResult = _function;
 			      }
 			    }
@@ -1143,10 +1143,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      if (Objects.equal(_switchValue,null)) {
 			        _matched=true;
 			        final Function1<Integer,Integer> _function_1 = new Function1<Integer,Integer>() {
-			            public Integer apply(final Integer it) {
-			              return it;
-			            }
-			          };
+			          public Integer apply(final Integer it) {
+			            return it;
+			          }
+			        };
 			        _switchResult = _function_1;
 			      }
 			    }
@@ -1239,16 +1239,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    try {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("file1.ext");
 			      final Function1<String,File> _function = new Function1<String,File>() {
-			          public File apply(final String f) {
-			            try {
-			              File _file = new File(f);
-			              File _canonicalFile = _file.getCanonicalFile();
-			              return _canonicalFile;
-			            } catch (Throwable _e) {
-			              throw Exceptions.sneakyThrow(_e);
-			            }
+			        public File apply(final String f) {
+			          try {
+			            File _file = new File(f);
+			            File _canonicalFile = _file.getCanonicalFile();
+			            return _canonicalFile;
+			          } catch (Throwable _e) {
+			            throw Exceptions.sneakyThrow(_e);
 			          }
-			        };
+			        }
+			      };
 			      List<File> _map = ListExtensions.<String, File>map(_newArrayList, _function);
 			      _xtrycatchfinallyexpression = _map;
 			    } catch (final Throwable _t) {
@@ -1290,15 +1290,15 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Map<Object,String> bar() {
 			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
 			    final Function1<String,Object> _function = new Function1<String,Object>() {
-			        public Object apply(final String it) {
-			          try {
-			            Object _foo = Foo.this.getFoo(it);
-			            return _foo;
-			          } catch (Throwable _e) {
-			            throw Exceptions.sneakyThrow(_e);
-			          }
+			      public Object apply(final String it) {
+			        try {
+			          Object _foo = Foo.this.getFoo(it);
+			          return _foo;
+			        } catch (Throwable _e) {
+			          throw Exceptions.sneakyThrow(_e);
 			        }
-			      };
+			      }
+			    };
 			    Map<Object,String> _map = IterableExtensions.<Object, String>toMap(_newArrayList, _function);
 			    return _map;
 			  }
@@ -2372,16 +2372,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    String _xblockexpression = null;
 			    {
 			      final Function1<String,String> _function = new Function1<String,String>() {
-			          public String apply(final String it) {
-			            final Function1<String,String> _function = new Function1<String,String>() {
-			                public String apply(final String it) {
-			                  return it;
-			                }
-			              };
-			            String _apply = _function.apply(it);
-			            return _apply;
-			          }
-			        };
+			        public String apply(final String it) {
+			          final Function1<String,String> _function = new Function1<String,String>() {
+			            public String apply(final String it) {
+			              return it;
+			            }
+			          };
+			          String _apply = _function.apply(it);
+			          return _apply;
+			        }
+			      };
 			      final Function1<? super String,? extends String> function = _function;
 			      String _apply = function.apply("foo");
 			      _xblockexpression = (_apply);
@@ -2407,17 +2407,17 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class X {
 			  public String foo() {
 			    final Function0<String> _function = new Function0<String>() {
-			        public String apply() {
-			          final Function0<String> _function = new Function0<String>() {
-			              public String apply() {
-			                String _string = X.super.toString();
-			                return _string;
-			              }
-			            };
-			          String _apply = _function.apply();
-			          return _apply;
-			        }
-			      };
+			      public String apply() {
+			        final Function0<String> _function = new Function0<String>() {
+			          public String apply() {
+			            String _string = X.super.toString();
+			            return _string;
+			          }
+			        };
+			        String _apply = _function.apply();
+			        return _apply;
+			      }
+			    };
 			    String _apply = _function.apply();
 			    return _apply;
 			  }
@@ -2623,11 +2623,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        if (_greaterThan) {
 			          _matched=true;
 			          final Procedure1<String> _function = new Procedure1<String>() {
-			              public void apply(final String break_) {
-			                String _plus = (break_ + continue_);
-			                _plus.toString();
-			              }
-			            };
+			            public void apply(final String break_) {
+			              String _plus = (break_ + continue_);
+			              _plus.toString();
+			            }
+			          };
 			          IterableExtensions.<String>forEach(synchronized_, _function);
 			        }
 			      }
@@ -2654,11 +2654,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				public class FindFirstOnIt {
 				  public <T extends Object> T useExtension(final Iterable<T> it) {
 				    final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
-				        public Boolean apply(final T it) {
-				          boolean _tripleNotEquals = (it != null);
-				          return Boolean.valueOf(_tripleNotEquals);
-				        }
-				      };
+				      public Boolean apply(final T it) {
+				        boolean _tripleNotEquals = (it != null);
+				        return Boolean.valueOf(_tripleNotEquals);
+				      }
+				    };
 				    T _findFirst = IterableExtensions.<T>findFirst(it, _function);
 				    return _findFirst;
 				  }
@@ -2711,14 +2711,14 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				public class MyClass implements ReturnTypeUsesTypeParameter {
 				  public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {
 				    final Inner<LocalName> _function = new Inner<LocalName>() {
-				        public void useProcedure(final Procedure1<? super LocalName> it) {
-				          if (true) {
-				            if (it!=null) {
-				              it.apply(param);
-				            }
+				      public void useProcedure(final Procedure1<? super LocalName> it) {
+				        if (true) {
+				          if (it!=null) {
+				            it.apply(param);
 				          }
 				        }
-				      };
+				      }
+				    };
 				    return _function;
 				  }
 				}
