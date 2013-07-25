@@ -19,11 +19,11 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		'''.compilesTo('''
 			final com.google.common.collect.AbstractIterator<String> _function = new com.google.common.collect.AbstractIterator<String>() {
-			    @Override
-			    protected String computeNext() {
-			      return this.endOfData();
-			    }
-			  };
+			  @Override
+			  protected String computeNext() {
+			    return this.endOfData();
+			  }
+			};
 			com.google.common.collect.AbstractIterator<String> iter = _function;
 			return iter;
 		''')
@@ -120,9 +120,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			new Thread [| ]
 		'''.compilesTo('''
 			final Runnable _function = new Runnable() {
-			    public void run() {
-			    }
-			  };
+			  public void run() {
+			  }
+			};
 			Thread _thread = new Thread(_function);
 			return _thread;
 		''')

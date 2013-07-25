@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.typesystem.references
 
 import java.util.List
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
+import org.eclipse.jdt.annotation.NonNull
 
 class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 	
@@ -11,20 +12,20 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 		this.appender = appender
 	}
 	
-	override protected doVisitAnyTypeReference(AnyTypeReference reference) {
+	override protected doVisitAnyTypeReference(@NonNull AnyTypeReference reference) {
 		reference.toJavaType.accept(this)
 	}
 	
-	override protected doVisitArrayTypeReference(ArrayTypeReference reference) {
+	override protected doVisitArrayTypeReference(@NonNull ArrayTypeReference reference) {
 		reference.componentType.accept(this)
 		appender.append('[]')
 	}
 	
-	override protected doVisitCompoundTypeReference(CompoundTypeReference reference) {
+	override protected doVisitCompoundTypeReference(@NonNull CompoundTypeReference reference) {
 		reference.toJavaType.accept(this)
 	}
 	
-	override protected doVisitFunctionTypeReference(FunctionTypeReference reference) {
+	override protected doVisitFunctionTypeReference(@NonNull FunctionTypeReference reference) {
 		if(appender.isJava) {
 			reference.doVisitParameterizedTypeReference
 		} else {
@@ -38,7 +39,7 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 		}
 	}
 
-	override protected doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
+	override protected doVisitParameterizedTypeReference(@NonNull ParameterizedTypeReference reference) {
 		appender.append(reference.type)
 		if(!reference.typeArguments.empty) {
 			appender.append('<')
@@ -47,15 +48,15 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 		}
 	}
 	
-	override protected doVisitUnboundTypeReference(UnboundTypeReference reference) {
+	override protected doVisitUnboundTypeReference(@NonNull UnboundTypeReference reference) {
 		reference.toJavaType.accept(this)
 	}
 	
-	override protected doVisitUnknownTypeReference(UnknownTypeReference reference) {
+	override protected doVisitUnknownTypeReference(@NonNull UnknownTypeReference reference) {
 		appender.append(reference.simpleName) 
 	}
 	
-	override protected doVisitWildcardTypeReference(WildcardTypeReference reference) {
+	override protected doVisitWildcardTypeReference(@NonNull WildcardTypeReference reference) {
 		appender.append('?')
 		if(reference.lowerBound != null) {
 			appender.append(" super ")
@@ -75,7 +76,7 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 		}
 	}
 	
-	def protected appendCommaSeparated(List<LightweightTypeReference> references) {
+	def protected appendCommaSeparated(@NonNull List<LightweightTypeReference> references) {
 		var isFirst = true 
 		for(reference: references) {
 			if(!isFirst)
