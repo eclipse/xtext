@@ -18,6 +18,8 @@ import static org.eclipse.xtext.common.types.JvmVisibility.*
  * @author Jan Koehnlein
  */
 abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
+	
+	public static val DEFAULT_BODY = 'throw new UnsupportedOperationException("TODO: auto-generated method stub")'
 
 	@Inject extension JdtVariableCompletions
 	@Inject extension CodeBuilderFactory 
@@ -34,7 +36,7 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 	}
 
 	def protected String defaultBody() {
-		'throw new UnsupportedOperationException("TODO: auto-generated method stub")'
+		DEFAULT_BODY		
 	}
 
 	def newParameterBuilder() {

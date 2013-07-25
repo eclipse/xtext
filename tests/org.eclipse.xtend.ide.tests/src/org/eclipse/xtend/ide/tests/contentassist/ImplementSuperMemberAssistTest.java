@@ -10,7 +10,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
+import org.eclipse.xtend.ide.codebuilder.AbstractExecutableBuilder;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
@@ -142,7 +142,7 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 
 	protected String getOverridingFunctionCode(String signature) {
 		return "\n" + indent + "\n" + indent + "override " + signature + " {\n" + indent
-				+ indent + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent + "}";
+				+ indent + AbstractExecutableBuilder.DEFAULT_BODY + "\n" + indent + "}";
 	}
 
 }
