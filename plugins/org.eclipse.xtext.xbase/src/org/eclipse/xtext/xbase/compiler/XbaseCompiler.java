@@ -805,9 +805,35 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
 				ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? constructorCallAppendable.trace(locationWithNewKeyword) : constructorCallAppendable;
 				appendableWithNewKeyword.append("new ");
-				JvmTypeReference producedType = getType(expr);
-				serialize(producedType, expr, appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0), false, false, true, false);
-				
+				List<LightweightTypeReference> typeArguments = batchTypeResolver.resolveTypes(expr).getActualTypeArguments(expr);
+				ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
+				typeAppendable.append(expr.getConstructor().getDeclaringType());
+				boolean hasTypeArguments = !typeArguments.isEmpty();
+				List<JvmTypeReference> explicitTypeArguments = expr.getTypeArguments();
+				if (hasTypeArguments) {
+					for(LightweightTypeReference typeArgument: typeArguments) {
+						if (typeArgument.isWildcard()) {
+							// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
+							hasTypeArguments = false;
+							// diamond operator would work in later versions
+						}
+					}
+					
+				}
+				if (hasTypeArguments) {
+					typeAppendable.append("<");
+					for(int i = 0; i < typeArguments.size(); i++) {
+						if (i != 0) {
+							typeAppendable.append(", ");
+						}
+						if (explicitTypeArguments.isEmpty()) {
+							typeAppendable.append(typeArguments.get(i));
+						} else {
+							typeAppendable.trace(explicitTypeArguments.get(i), false).append(typeArguments.get(i));
+						}
+					}
+					typeAppendable.append(">");
+				}
 				constructorCallAppendable.append("(");
 				appendArguments(expr.getArguments(), constructorCallAppendable);
 				constructorCallAppendable.append(")");

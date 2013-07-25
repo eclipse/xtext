@@ -604,7 +604,59 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(3);
 		assertEquals("_init_"+xtendFunction.getName(), privateInitializer.getSimpleName());
 		assertEquals(JvmVisibility.PRIVATE, privateInitializer.getVisibility());
+//		This used to be a bogus assertion since Iterable<CharSequence> is not assignable from ArrayList<String>
+//		assertEquals("java.util.ArrayList<java.lang.String>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals("java.util.ArrayList<java.lang.CharSequence>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
+	}
+	
+	@Test public void testInferredFunction_05() throws Exception {
+		XtendFile xtendFile = file("class Foo { def Iterable<? extends CharSequence> create result: newArrayList(s) newList(String s) {} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
+		EList<JvmMember> jvmMembers = inferredType.getMembers();
+		assertEquals(4, jvmMembers.size());
+		JvmMember jvmMember = jvmMembers.get(1);
+		assertTrue(jvmMember instanceof JvmOperation);
+		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
+		assertEquals(xtendFunction.getName(), jvmMember.getSimpleName());
+		assertEquals(JvmVisibility.PUBLIC, jvmMember.getVisibility());
+		assertEquals("java.lang.Iterable<? extends java.lang.CharSequence>", ((JvmOperation) jvmMember).getReturnType().getIdentifier());
+		
+		JvmField cacheVar = (JvmField) jvmMembers.get(2);
+		assertEquals("_createCache_" + xtendFunction.getName(), cacheVar.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, cacheVar.getVisibility());
+		assertEquals("java.util.HashMap<java.util.ArrayList<? extends java.lang.Object>, java.lang.Iterable<? extends java.lang.CharSequence>>", cacheVar.getType().getIdentifier());
+		
+		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(3);
+		assertEquals("_init_"+xtendFunction.getName(), privateInitializer.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, privateInitializer.getVisibility());
 		assertEquals("java.util.ArrayList<java.lang.String>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
+	}
+	
+	@Test public void testInferredFunction_06() throws Exception {
+		XtendFile xtendFile = file("class Foo { def Iterable<? super CharSequence> create result: newArrayList(s) newList(String s) {} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
+		EList<JvmMember> jvmMembers = inferredType.getMembers();
+		assertEquals(4, jvmMembers.size());
+		JvmMember jvmMember = jvmMembers.get(1);
+		assertTrue(jvmMember instanceof JvmOperation);
+		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
+		assertEquals(xtendFunction.getName(), jvmMember.getSimpleName());
+		assertEquals(JvmVisibility.PUBLIC, jvmMember.getVisibility());
+		assertEquals("java.lang.Iterable<? extends java.lang.Object & super java.lang.CharSequence>", ((JvmOperation) jvmMember).getReturnType().getIdentifier());
+		
+		JvmField cacheVar = (JvmField) jvmMembers.get(2);
+		assertEquals("_createCache_" + xtendFunction.getName(), cacheVar.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, cacheVar.getVisibility());
+		assertEquals("java.util.HashMap<java.util.ArrayList<? extends java.lang.Object>, java.lang.Iterable<? extends java.lang.Object & super java.lang.CharSequence>>", cacheVar.getType().getIdentifier());
+		
+		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(3);
+		assertEquals("_init_"+xtendFunction.getName(), privateInitializer.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, privateInitializer.getVisibility());
+		assertEquals("java.util.ArrayList<java.lang.CharSequence>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
 		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
 	}
 

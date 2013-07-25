@@ -97,6 +97,17 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 					}
 				}
 			}
+			@Override
+			protected void doVisitWildcardTypeReference(WildcardTypeReference reference, ArrayTypeReference declaration) {
+				LightweightTypeReference lowerBound = reference.getLowerBound();
+				if (lowerBound != null) {
+					outerVisit(declaration, lowerBound);
+				} else {
+					for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
+						outerVisit(declaration, upperBound);	
+					}
+				}
+			}
 		};
 	}
 	

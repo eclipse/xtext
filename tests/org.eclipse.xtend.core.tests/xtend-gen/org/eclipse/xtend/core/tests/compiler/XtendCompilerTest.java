@@ -4124,7 +4124,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public HashMap<String,Serializable> foo() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("HashMap<String,Serializable> _hashMap = new HashMap<String,Serializable>();");
+    _builder_1.append("HashMap<String,Serializable> _hashMap = new HashMap<String, Serializable>();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return _hashMap;");
