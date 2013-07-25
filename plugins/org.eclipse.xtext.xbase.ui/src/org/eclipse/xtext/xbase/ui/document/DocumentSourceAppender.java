@@ -7,17 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.document;
 
+import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.xbase.compiler.SourceAppenderBase;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.ui.contentassist.WhitespaceHelper;
 
 import com.google.inject.Inject;
@@ -26,7 +35,7 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DocumentSourceAppender extends SourceAppenderBase {
+public class DocumentSourceAppender implements ISourceAppender {
 
 	public abstract static class Factory<T extends DocumentSourceAppender> {
 		
@@ -42,7 +51,7 @@ public class DocumentSourceAppender extends SourceAppenderBase {
 		private RewritableImportSection.Factory rewritableImportSectionFactory;
 
 		protected abstract T newInstance(IXtextDocument document, RewritableImportSection rewritableImportSection, WhitespaceHelper whitespaceHelper,
-				String indentString, String lineSeparator, int baseIndentationLevel); 
+				String indentString, String lineSeparator, int baseIndentationLevel, boolean isJava); 
 		
 		public T create(IXtextDocument document, XtextResource resource, int offset, int length) {
 			return create(document, resource, offset, length, new OptionalParameters());
@@ -56,7 +65,7 @@ public class DocumentSourceAppender extends SourceAppenderBase {
 			WhitespaceHelper whitespaceHelper = whitespaceHelperProvider.get();
 			whitespaceHelper.initialize(document, offset, length, params.ensureEmptyLinesAround);
 			T appendable = newInstance(document, importSection, whitespaceHelper,
-					indentString, lineSeparator, baseIndentationLevel);
+					indentString, lineSeparator, baseIndentationLevel, params.isJava);
 			return appendable;
 		}
 		
@@ -93,12 +102,28 @@ public class DocumentSourceAppender extends SourceAppenderBase {
 		}
 		
 		public static class OptionalParameters {
+			public boolean isJava;
 			public boolean ensureEmptyLinesAround;
 			public int baseIndentationLevel = -1;
 			public RewritableImportSection importSection;
 		}
 	}
 	
+	
+	private int baseIndentLevel = 0;
+
+	private String indentString = "  ";
+	
+	private String lineSeparator = "\n";
+	
+	private LightweightTypeReferenceSerializer lightweightTypeReferenceSerializer;
+	
+	private boolean isJava;
+
+	private StringBuilder builder = new StringBuilder(8 * 1024);
+	
+	private int currentIndentLevel = 0;
+
 	private final IXtextDocument document;
 	
 	private final WhitespaceHelper whitespaceHelper;
@@ -106,30 +131,148 @@ public class DocumentSourceAppender extends SourceAppenderBase {
 	private final RewritableImportSection importSection;
 	
 	public DocumentSourceAppender(IXtextDocument document, RewritableImportSection importSection, WhitespaceHelper whitespaceHelper, 
-			String indentString, String lineSeparator, int baseIndentationLevel) {
-		super(baseIndentationLevel, indentString, lineSeparator, false);
+			String indentString, String lineSeparator, int baseIndentationLevel, boolean isJava) {
+		this.baseIndentLevel = baseIndentationLevel;
+		this.indentString = indentString;
+		this.currentIndentLevel = baseIndentationLevel;
+		this.lineSeparator = lineSeparator;
+		this.lightweightTypeReferenceSerializer = createLightweightTypeReferenceSerializer();
+		this.isJava = isJava;
 		this.document = document;
 		this.importSection = importSection;
 		this.whitespaceHelper = whitespaceHelper;
 	}
 	
-	@Override
-	protected JvmDeclaredType getImportedType(String simpleName) {
-		return importSection.getImportedType(simpleName);
+	protected LightweightTypeReferenceSerializer createLightweightTypeReferenceSerializer() {
+		return new LightweightTypeReferenceSerializer(this);
 	}
 
-	@Override
-	protected boolean addImport(JvmDeclaredType type) {
-		return importSection.addImport(type);
+	public int getBaseIndentLevel() {
+		return baseIndentLevel;
+	}
+
+	protected int getCurrentIndentLevel() {
+		return currentIndentLevel;
+	}
+
+	protected CharSequence getIndentationString() {
+		StringBuilder sb = new StringBuilder(10);
+		sb.append(lineSeparator);
+		for (int i = 0; i < currentIndentLevel; i++) {
+			sb.append(indentString);
+		}
+		return sb.toString();
+	}
+
+	protected String getLineSeparator() {
+		return lineSeparator;
+	}
+
+	public boolean isJava() {
+		return isJava;
+	}
+
+	public IXtextDocument getDocument() {
+		return document;
+	}
+
+	public RewritableImportSection getImportSection() {
+		return importSection;
+	}
+
+	public ISourceAppender append(JvmType type) {
+		appendType(type, builder);
+		return this;
+	}
+
+	public void appendType(final @NonNull JvmType type, @NonNull StringBuilder builder) {
+		if (type instanceof JvmPrimitiveType || type instanceof JvmVoid || type instanceof JvmTypeParameter) {
+			builder.append(type.getQualifiedName(getInnerTypeSeparator()));
+		} else if (type instanceof JvmArrayType) {
+			appendType(((JvmArrayType) type).getComponentType(), builder);
+			builder.append("[]");
+		} else {
+			final String qualifiedName = type.getQualifiedName(getInnerTypeSeparator());
+			final String simpleName = type.getSimpleName();
+			JvmDeclaredType importedType = importSection.getImportedType(simpleName);
+			if (importedType == type) {
+				builder.append(simpleName);
+			} else if (importedType == null) {
+				importSection.addImport((JvmDeclaredType) type);
+				builder.append(simpleName);
+			} else {
+				builder.append(qualifiedName);
+			}
+		}
+	}
+	
+	protected char getInnerTypeSeparator() {
+		return '.';
+	}
+
+	public ISourceAppender append(LightweightTypeReference typeRef) {
+		typeRef.accept(lightweightTypeReferenceSerializer);
+		return this;
+	}
+
+	public void append(CharSequence content, int indentationDelta) {
+		if (indentationDelta < 0)
+			append(content.toString().replaceAll(
+					Pattern.quote(getLineSeparator() + indentString(-indentationDelta)), getLineSeparator()));
+		else if (indentationDelta > 0)
+			append(content.toString().replaceAll(Pattern.quote(getLineSeparator()),
+					getLineSeparator() + indentString(indentationDelta)));
+		else
+			append(content);
+	}
+
+	protected String indentString(int indentLevel) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < indentLevel; i++) {
+			sb.append(indentString);
+		}
+		return sb.toString();
+	}
+
+	public ISourceAppender append(CharSequence string) {
+		String replaced = string.toString().replace(lineSeparator, getIndentationString());
+		builder.append(replaced);
+		return this;
+	}
+	
+	public ISourceAppender newLine() {
+		builder.append(getIndentationString());
+		return this;
+	}
+
+	public ISourceAppender increaseIndentation() {
+		currentIndentLevel++;
+		return this;
+	}
+
+	public ISourceAppender decreaseIndentation() {
+		if (currentIndentLevel == 0)
+			throw new IllegalStateException("Can't reduce indentation level. It's already zero.");
+		currentIndentLevel--;
+		return this;
+	}	
+
+	public int length() {
+		return builder.length();
 	}
 	
 	@Override
+	@NonNull
+	public String toString() {
+		return builder.toString();
+	}
+
 	@NonNull
 	public String getCode() {
 		StringBuilder builder = new StringBuilder();
 		if (whitespaceHelper.getPrefix() != null)
 			builder.append(whitespaceHelper.getPrefix().replace(getLineSeparator(), getIndentationString()));
-		builder.append(super.toString());
+		builder.append(toString());
 		if (whitespaceHelper.getSuffix() != null)
 			builder.append(whitespaceHelper.getSuffix().replace(getLineSeparator(), getIndentationString()));
 		return builder.toString();
@@ -142,16 +285,8 @@ public class DocumentSourceAppender extends SourceAppenderBase {
 	public int getTotalOffset() {
 		return whitespaceHelper.getTotalOffset();
 	}
-	
+
 	public int getTotalLength() {
 		return whitespaceHelper.getTotalLength();
-	}
-	
-	public IXtextDocument getDocument() {
-		return document;
-	}
-	
-	public RewritableImportSection getImportSection() {
-		return importSection;
 	}
 }

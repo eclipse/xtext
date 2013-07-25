@@ -33,16 +33,16 @@ public class ReplacingAppendable extends DocumentSourceAppender {
 		
 		@Override
 		protected ReplacingAppendable newInstance(IXtextDocument document, RewritableImportSection importSection, WhitespaceHelper whitespaceHelper,
-				String indentString, String lineSeparator, int baseIndentationLevel) {
-			return new ReplacingAppendable(document, importSection, whitespaceHelper, indentString, lineSeparator, baseIndentationLevel, replaceConverter);
+				String indentString, String lineSeparator, int baseIndentationLevel, boolean isJava) {
+			return new ReplacingAppendable(document, importSection, whitespaceHelper, indentString, lineSeparator, baseIndentationLevel, isJava, replaceConverter);
 		}
 	}
 
 	private ReplaceConverter replaceConverter;
 	
 	protected ReplacingAppendable(IXtextDocument document, RewritableImportSection importSection, WhitespaceHelper whitespaceHelper,
-			String indentString, String lineSeparator, int baseIndentationLevel, ReplaceConverter replaceConverter) {
-		super(document, importSection, whitespaceHelper, indentString, lineSeparator, baseIndentationLevel);
+			String indentString, String lineSeparator, int baseIndentationLevel, boolean isJava, ReplaceConverter replaceConverter) {
+		super(document, importSection, whitespaceHelper, indentString, lineSeparator, baseIndentationLevel, isJava);
 		this.replaceConverter = replaceConverter;
 	}
 	
