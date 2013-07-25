@@ -16,8 +16,10 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -79,6 +81,32 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 			return true;
 		}
 	}
+	
+	protected class DeferredWildcardTypeReferenceTraverser extends WildcardTypeReferenceTraverser {
+		@Override
+		public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+				WildcardTypeReference declaration) {
+			if (declaration.getLowerBound() == null) {
+				if (!reference.internalIsResolved()) {
+					List<LightweightTypeReference> upperBounds = declaration.getUpperBounds();
+					for(LightweightTypeReference upperBound: upperBounds) {
+						if (!upperBound.isResolved() || !reference.canResolveTo(upperBound)) {
+							super.doVisitUnboundTypeReference(reference, declaration);
+							return;
+						}
+					}
+					reference.tryResolve();
+					if (reference.internalIsResolved()) {
+						outerVisit(reference, declaration);
+					} else {
+						addHint(reference, declaration);
+					}
+					return;
+				}
+			}
+			super.doVisitUnboundTypeReference(reference, declaration);
+		}
+	}
 
 	public ExpectationTypeParameterHintCollector(ITypeReferenceOwner owner) {
 		super(owner);
@@ -88,6 +116,11 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 	protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
 		return new UnboundTypeParameterPreservingSubstitutor(mapping, getOwner());
+	}
+	
+	@Override
+	protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
+		return new DeferredWildcardTypeReferenceTraverser();
 	}
 	
 	@Override
