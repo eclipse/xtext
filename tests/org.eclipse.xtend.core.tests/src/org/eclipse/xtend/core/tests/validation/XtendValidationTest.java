@@ -1995,5 +1995,39 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "}");
 		helper.assertError(file, XFEATURE_CALL, INCOMPATIBLE_TYPES);
 	}
+	
+	@Test
+	public void testBug413680_0() throws Exception {
+		XtendFile file = file(
+			"class B extends A {" +
+				"def static hello() {}" +
+			"}" +
+			"class A {" +
+				"def static hello() {}" +
+			"}");
+		helper.assertNoErrors(file);
+	}
+	
+	@Test
+	public void testBug413680_1() throws Exception {
+		XtendFile file = file(
+			"class B extends A {" +
+				"override static hello() {}" +
+			"}" +
+			"class A {" +
+				"def static hello() {}" +
+			"}");
+		helper.assertError(file, XTEND_FUNCTION, OBSOLETE_OVERRIDE, "shadows the method");
+	}
+	
+	@Test
+	public void testBug413680_2() throws Exception {
+		XtendFile file = file(
+			"class B extends A {" +
+				"override static hello() {}" +
+			"}" +
+			"class A {}");
+		helper.assertError(file, XTEND_FUNCTION, OBSOLETE_OVERRIDE, "must override a superclass method");
+	}
 
 }

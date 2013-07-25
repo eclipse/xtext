@@ -709,9 +709,18 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (exceptionMismatch != null) {
 			createExceptionMismatchError(resolved, function, exceptionMismatch);
 		}
-		if (!overrideProblems && !function.isOverride())
-			error("The method " + resolved.getSimpleSignature() +" of type "+resolved.getDeclaration().getDeclaringType().getSimpleName()+" must use override keyword since it actually overrides a supertype method.", function,
+		if (!overrideProblems && !function.isOverride() && !function.isStatic()) {
+			error("The method " + resolved.getSimpleSignature() + " of type " + resolved.getDeclaration().getDeclaringType().getSimpleName() +
+					" must use override keyword since it actually overrides a supertype method.", function,
 					XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
+		} 
+		if (!overrideProblems && function.isOverride() && function.isStatic()) {
+			for(IResolvedOperation inherited: allInherited) {
+				error("The method " + resolved.getSimpleSignature() + " of type " + resolved.getDeclaration().getDeclaringType().getSimpleName() + 
+					" shadows the method " + resolved.getSimpleSignature() + " of type " + inherited.getDeclaration().getDeclaringType().getSimpleName() + 
+					", but does not override it.", function, XTEND_FUNCTION__NAME, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+			}
+		}
 	}
 	
 	protected void createExceptionMismatchError(IResolvedOperation operation, XtendFunction function,
