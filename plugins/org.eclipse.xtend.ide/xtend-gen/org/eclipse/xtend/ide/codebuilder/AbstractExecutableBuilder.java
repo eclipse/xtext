@@ -31,6 +31,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
+  public final static String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
+  
   @Inject
   @Extension
   private JdtVariableCompletions _jdtVariableCompletions;
@@ -125,7 +127,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   }
   
   protected String defaultBody() {
-    return "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
+    return AbstractExecutableBuilder.DEFAULT_BODY;
   }
   
   public AbstractParameterBuilder newParameterBuilder() {

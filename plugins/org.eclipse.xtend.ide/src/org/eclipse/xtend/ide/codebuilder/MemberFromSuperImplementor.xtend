@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor
 
-class SuperMemberOverrideHelper {
+class MemberFromSuperImplementor {
 	
 	@Inject IXtendJvmAssociations associations
 

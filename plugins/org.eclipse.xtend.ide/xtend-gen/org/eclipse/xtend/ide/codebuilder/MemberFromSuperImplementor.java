@@ -46,7 +46,7 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 
 @SuppressWarnings("all")
-public class SuperMemberOverrideHelper {
+public class MemberFromSuperImplementor {
   @Inject
   private IXtendJvmAssociations associations;
   
@@ -84,13 +84,13 @@ public class SuperMemberOverrideHelper {
           public JvmTypeParameter apply(final JvmTypeParameter it) {
             JvmTypeParameter _xblockexpression = null;
             {
-              final JvmTypeParameter typeParameter = SuperMemberOverrideHelper.this.typesFactory.createJvmTypeParameter();
+              final JvmTypeParameter typeParameter = MemberFromSuperImplementor.this.typesFactory.createJvmTypeParameter();
               String _name = it.getName();
               typeParameter.setName(_name);
               EList<JvmTypeConstraint> _constraints = it.getConstraints();
               for (final JvmTypeConstraint constraint : _constraints) {
                 if ((constraint instanceof JvmUpperBound)) {
-                  final JvmUpperBound upperBound = SuperMemberOverrideHelper.this.typesFactory.createJvmUpperBound();
+                  final JvmUpperBound upperBound = MemberFromSuperImplementor.this.typesFactory.createJvmUpperBound();
                   JvmTypeReference _typeReference = constraint.getTypeReference();
                   LightweightTypeReference _substitute = substitutor.substitute(_typeReference);
                   JvmTypeReference _typeReference_1 = _substitute.toTypeReference();
@@ -99,7 +99,7 @@ public class SuperMemberOverrideHelper {
                   _constraints_1.add(upperBound);
                 } else {
                   if ((constraint instanceof JvmLowerBound)) {
-                    final JvmLowerBound upperBound_1 = SuperMemberOverrideHelper.this.typesFactory.createJvmLowerBound();
+                    final JvmLowerBound upperBound_1 = MemberFromSuperImplementor.this.typesFactory.createJvmLowerBound();
                     JvmTypeReference _typeReference_2 = constraint.getTypeReference();
                     LightweightTypeReference _substitute_1 = substitutor.substitute(_typeReference_2);
                     JvmTypeReference _typeReference_3 = _substitute_1.toTypeReference();
@@ -210,7 +210,7 @@ public class SuperMemberOverrideHelper {
           JvmTypeReference _parameterType = _get.getParameterType();
           LightweightTypeReference _substitute = substitutor.substitute(_parameterType);
           parameterBuilder.setType(_substitute);
-          JvmAnnotationReference _findAnnotation = SuperMemberOverrideHelper.this.annotationLookup.findAnnotation(it, Extension.class);
+          JvmAnnotationReference _findAnnotation = MemberFromSuperImplementor.this.annotationLookup.findAnnotation(it, Extension.class);
           boolean _notEquals = (!Objects.equal(_findAnnotation, null));
           parameterBuilder.setExtensionFlag(_notEquals);
         }
