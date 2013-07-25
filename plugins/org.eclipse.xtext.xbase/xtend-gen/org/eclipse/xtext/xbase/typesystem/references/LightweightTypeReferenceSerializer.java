@@ -51,7 +51,13 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
       this.appendCommaSeparated(_parameterTypes);
       this.appender.append(")=>");
       LightweightTypeReference _returnType = reference.getReturnType();
-      _returnType.accept(this);
+      boolean _equals = Objects.equal(_returnType, null);
+      if (_equals) {
+        this.appender.append("void");
+      } else {
+        LightweightTypeReference _returnType_1 = reference.getReturnType();
+        _returnType_1.accept(this);
+      }
     }
   }
   
