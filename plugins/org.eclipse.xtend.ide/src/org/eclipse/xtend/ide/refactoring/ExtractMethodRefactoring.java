@@ -357,7 +357,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 			Section expressionSection = rewriter.newSection(expressionsRegion.getOffset(), expressionsRegion.getLength());
 			Section declarationSection = rewriter.newSection(predecessorRegion.getOffset() + predecessorRegion.getLength(), 0);
 			createMethodCallEdit(expressionSection, expressionsRegion);
-			createMethodDeclarationEdit(declarationSection, expressionSection.getBaseIndentationLevel(), expressionsRegion);
+			createMethodDeclarationEdit(declarationSection, expressionSection.getBaseIndentLevel(), expressionsRegion);
 			textEdit = replaceConverter.convertToTextEdit(rewriter.getChanges());
 		} catch (Exception exc) {
 			handleException(exc, status);
