@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -142,7 +144,13 @@ public class BoundTypeArgumentMerger {
 			return false;
 		}
 		switch(variance) {
-			case INVARIANT: return candidate.isAssignableFrom(type, new TypeConformanceComputationArgument(false, true, true, true, false, false));
+			case INVARIANT: {
+				TypeConformanceResult result = candidate.internalIsAssignableFrom(type, new TypeConformanceComputationArgument(false, true, true, true, false, false));
+				if (result.isConformant() && !result.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION)) {
+					return true;
+				}
+				return false;
+			}
 			case OUT: return type.isAssignableFrom(candidate, new TypeConformanceComputationArgument());
 			case IN: return candidate.isAssignableFrom(type, new TypeConformanceComputationArgument());
 			default: throw new IllegalStateException("Unknown variance info: " + variance);

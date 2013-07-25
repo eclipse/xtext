@@ -1850,7 +1850,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar {
 			  public HashMap<String,Serializable> foo() {
-			    HashMap<String,Serializable> _hashMap = new HashMap<String,Serializable>();
+			    HashMap<String,Serializable> _hashMap = new HashMap<String, Serializable>();
 			    return _hashMap;
 			  }
 			}
