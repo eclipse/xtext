@@ -135,8 +135,9 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return reset.append(document.get());
 	}
 
-	public void expectContent(String expectation){
+	public ContentAssistProcessorTestBuilder expectContent(String expectation){
 		Assert.assertEquals(expectation, getModel());
+		return this;
 	}
 
 	public ContentAssistProcessorTestBuilder assertCount(int completionProposalCount) throws Exception {
@@ -241,6 +242,18 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		}
 	}
 
+	public ContentAssistProcessorTestBuilder assertCursorIsAfter(String text) {
+		Assert.assertTrue("cursor should be after '" + text + "' but it's after " + model.substring(0, getCursorPosition()), 
+				model.substring(getCursorPosition() - text.length()).startsWith(text));
+		return this;
+	}
+	
+	public ContentAssistProcessorTestBuilder assertCursorIsBefore(String text) {
+		Assert.assertTrue("cursor should be before '" + text + "' but it's before " + model.substring(getCursorPosition()), 
+				model.substring(getCursorPosition()).startsWith(text));
+		return this;
+	}
+	
 	protected String getModel() {
 		return this.model == null ? "":model;
 	}
