@@ -44,14 +44,14 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public MyEntity test() {
 			    MyEntity _myEntity = new MyEntity();
 			    final Procedure1<MyEntity> _function = new Procedure1<MyEntity>() {
-			        public void apply(final MyEntity it) {
-			          Matcher<MyEntity> _nullValue = Test.<MyEntity>nullValue();
-			          Assert.<MyEntity>assertThat(it, _nullValue);
-			          String _name = it.getName();
-			          Matcher<String> _is = Is.<String>is("");
-			          Assert.<String>assertThat(_name, _is);
-			        }
-			      };
+			      public void apply(final MyEntity it) {
+			        Matcher<MyEntity> _nullValue = Test.<MyEntity>nullValue();
+			        Assert.<MyEntity>assertThat(it, _nullValue);
+			        String _name = it.getName();
+			        Matcher<String> _is = Is.<String>is("");
+			        Assert.<String>assertThat(_name, _is);
+			      }
+			    };
 			    MyEntity _doubleArrow = ObjectExtensions.<MyEntity>operator_doubleArrow(_myEntity, _function);
 			    return _doubleArrow;
 			  }
@@ -91,14 +91,14 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public static StringBuilder m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Test<Serializable> _test = new Test<Serializable>();
-			          Long _long = new Long(0);
-			          _test.m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Test<Serializable> _test = new Test<Serializable>();
+			        Long _long = new Long(0);
+			        _test.m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			    return _doubleArrow;
 			  }
@@ -134,13 +134,13 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public StringBuilder m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Long _long = new Long(0);
-			          Test.this.<Serializable>m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Long _long = new Long(0);
+			        Test.this.<Serializable>m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			    return _doubleArrow;
 			  }
@@ -176,13 +176,13 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public StringBuilder m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Long _long = new Long(0);
-			          Test.this.<Serializable>m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Long _long = new Long(0);
+			        Test.this.<Serializable>m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			    return _doubleArrow;
 			  }
@@ -218,13 +218,13 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public StringBuilder m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Long _long = new Long(0);
-			          Test.this.<Serializable>m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Long _long = new Long(0);
+			        Test.this.<Serializable>m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			    return _doubleArrow;
 			  }
@@ -263,13 +263,13 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Long _long = new Long(0);
-			          Test.this.<Serializable>m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Long _long = new Long(0);
+			        Test.this.<Serializable>m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
 			  }
 			}
@@ -304,13 +304,13 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public StringBuilder m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Long _long = new Long(0);
-			          Test.<Serializable>m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Long _long = new Long(0);
+			        Test.<Serializable>m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			    return _doubleArrow;
 			  }
@@ -346,13 +346,13 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public static StringBuilder m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Long _long = new Long(0);
-			          Test.<Serializable>m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Long _long = new Long(0);
+			        Test.<Serializable>m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			    return _doubleArrow;
 			  }
@@ -391,14 +391,14 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Test _test = new Test();
-			          Long _long = new Long(0);
-			          _test.<Serializable>m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Test _test = new Test();
+			        Long _long = new Long(0);
+			        _test.<Serializable>m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
 			  }
 			}
@@ -436,14 +436,14 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Test<Serializable> _test = new Test<Serializable>();
-			          Long _long = new Long(0);
-			          _test.m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Test<Serializable> _test = new Test<Serializable>();
+			        Long _long = new Long(0);
+			        _test.m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
 			  }
 			}
@@ -481,13 +481,13 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          Long _long = new Long(0);
-			          Test.<Serializable>m(it, _long);
-			          int _length = it.length();
-			          InputOutput.<Integer>println(Integer.valueOf(_length));
-			        }
-			      };
+			      public void apply(final StringBuilder it) {
+			        Long _long = new Long(0);
+			        Test.<Serializable>m(it, _long);
+			        int _length = it.length();
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			      }
+			    };
 			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
 			  }
 			}
