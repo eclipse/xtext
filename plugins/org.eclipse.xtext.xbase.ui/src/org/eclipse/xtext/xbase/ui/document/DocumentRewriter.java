@@ -57,14 +57,14 @@ public class DocumentRewriter {
 			@Override
 			protected Section newInstance(IXtextDocument document, RewritableImportSection importSection,  
 					WhitespaceHelper whitespaceHelper,
-					String indentString, String lineSeparator, int baseIndentationLevel) {
-				return new Section(document, importSection, whitespaceHelper, indentString, lineSeparator, baseIndentationLevel);
+					String indentString, String lineSeparator, int baseIndentationLevel, boolean isJava) {
+				return new Section(document, importSection, whitespaceHelper, indentString, lineSeparator, baseIndentationLevel, isJava);
 			}
 		}
 		
 		public Section(IXtextDocument document, RewritableImportSection importSection, WhitespaceHelper whitespaceHelper, String indentString,
-				String lineSeparator, int baseIndentationLevel) {
-			super(document, importSection, whitespaceHelper, indentString, lineSeparator, baseIndentationLevel);
+				String lineSeparator, int baseIndentationLevel, boolean isJava) {
+			super(document, importSection, whitespaceHelper, indentString, lineSeparator, baseIndentationLevel, isJava);
 		}
 
 		public boolean isOverlap(Section other) {

@@ -1,18 +1,22 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.xbase.compiler.SourceAppenderBase;
+import java.util.List;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xbase.compiler.AbstractStringBuilderBasedAppendable;
 
 @SuppressWarnings("all")
-public class TestAppender extends SourceAppenderBase {
-  private JvmDeclaredType dummy;
-  
-  protected JvmDeclaredType getImportedType(final String simpleName) {
-    return this.dummy;
+public class TestAppender extends AbstractStringBuilderBasedAppendable {
+  public TestAppender(final boolean isJava) {
+    super("\t", "\n", isJava);
   }
   
-  public TestAppender(final int baseIndentationLevel, final String indentation, final String lineSeparator, final boolean isJava, final JvmDeclaredType dummy) {
-    super(baseIndentationLevel, indentation, lineSeparator, isJava);
-    this.dummy = dummy;
+  protected void appendType(final JvmType type, final StringBuilder builder) {
+    String _identifier = type.getIdentifier();
+    builder.append(_identifier);
+  }
+  
+  public List<String> getImports() {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw _unsupportedOperationException;
   }
 }

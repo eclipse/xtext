@@ -22,23 +22,26 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 	private int indentationlevel = 0;
 	private String indentation = "  ";
 	private String lineSeparator = "\n";
+	private boolean isJava;
 	
 	private LightweightTypeReferenceSerializer lightweightTypeReferenceSerializer;
 	
-	public AbstractStringBuilderBasedAppendable(String indentation, String lineSeparator) {
+	public AbstractStringBuilderBasedAppendable(String indentation, String lineSeparator, boolean isJava) {
 		this.indentation = indentation;
 		this.lineSeparator = lineSeparator;
+		this.isJava = isJava;
 		this.lightweightTypeReferenceSerializer = createLightweightTypeReferenceSerializer();
 		openScope();
 	}
 
-	public AbstractStringBuilderBasedAppendable() {
+	public AbstractStringBuilderBasedAppendable(boolean isJava) {
+		this.isJava = isJava;
 		this.lightweightTypeReferenceSerializer = createLightweightTypeReferenceSerializer();
 		openScope();
 	}
 	
 	public boolean isJava() {
-		return true;
+		return isJava;
 	}
 
 	public IAppendable append(JvmType type) {
