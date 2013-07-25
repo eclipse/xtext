@@ -36,9 +36,9 @@ class CompilerBug405825Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main() {
 			    final Bound<Number> _function = new Bound<Number>() {
-			        public void method(final Number it) {
-			        }
-			      };
+			      public void method(final Number it) {
+			      }
+			    };
 			    Test.test(_function);
 			  }
 			}
@@ -67,9 +67,9 @@ class CompilerBug405825Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main() {
 			    final Bound<Integer> _function = new Bound<Integer>() {
-			        public void method(final Integer it) {
-			        }
-			      };
+			      public void method(final Integer it) {
+			      }
+			    };
 			    Test.test(_function);
 			  }
 			}
@@ -99,9 +99,9 @@ class CompilerBug405825Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main() {
 			    final Sub<Number> _function = new Sub<Number>() {
-			        public void method(final Number it) {
-			        }
-			      };
+			      public void method(final Number it) {
+			      }
+			    };
 			    Test.test(_function);
 			  }
 			}

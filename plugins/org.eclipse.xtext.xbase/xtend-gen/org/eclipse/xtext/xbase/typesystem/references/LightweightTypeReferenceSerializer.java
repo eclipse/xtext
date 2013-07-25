@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import com.google.common.base.Objects;
 import java.util.List;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -25,23 +26,23 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     this.appender = appender;
   }
   
-  protected void doVisitAnyTypeReference(final AnyTypeReference reference) {
+  protected void doVisitAnyTypeReference(@NonNull final AnyTypeReference reference) {
     LightweightTypeReference _javaType = reference.toJavaType();
     _javaType.accept(this);
   }
   
-  protected void doVisitArrayTypeReference(final ArrayTypeReference reference) {
+  protected void doVisitArrayTypeReference(@NonNull final ArrayTypeReference reference) {
     LightweightTypeReference _componentType = reference.getComponentType();
     _componentType.accept(this);
     this.appender.append("[]");
   }
   
-  protected void doVisitCompoundTypeReference(final CompoundTypeReference reference) {
+  protected void doVisitCompoundTypeReference(@NonNull final CompoundTypeReference reference) {
     LightweightTypeReference _javaType = reference.toJavaType();
     _javaType.accept(this);
   }
   
-  protected void doVisitFunctionTypeReference(final FunctionTypeReference reference) {
+  protected void doVisitFunctionTypeReference(@NonNull final FunctionTypeReference reference) {
     boolean _isJava = this.appender.isJava();
     if (_isJava) {
       this.doVisitParameterizedTypeReference(reference);
@@ -61,7 +62,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     }
   }
   
-  protected void doVisitParameterizedTypeReference(final ParameterizedTypeReference reference) {
+  protected void doVisitParameterizedTypeReference(@NonNull final ParameterizedTypeReference reference) {
     JvmType _type = reference.getType();
     this.appender.append(_type);
     List<LightweightTypeReference> _typeArguments = reference.getTypeArguments();
@@ -75,17 +76,17 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     }
   }
   
-  protected void doVisitUnboundTypeReference(final UnboundTypeReference reference) {
+  protected void doVisitUnboundTypeReference(@NonNull final UnboundTypeReference reference) {
     LightweightTypeReference _javaType = reference.toJavaType();
     _javaType.accept(this);
   }
   
-  protected void doVisitUnknownTypeReference(final UnknownTypeReference reference) {
+  protected void doVisitUnknownTypeReference(@NonNull final UnknownTypeReference reference) {
     String _simpleName = reference.getSimpleName();
     this.appender.append(_simpleName);
   }
   
-  protected void doVisitWildcardTypeReference(final WildcardTypeReference reference) {
+  protected void doVisitWildcardTypeReference(@NonNull final WildcardTypeReference reference) {
     this.appender.append("?");
     LightweightTypeReference _lowerBound = reference.getLowerBound();
     boolean _notEquals = (!Objects.equal(_lowerBound, null));
@@ -122,7 +123,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     }
   }
   
-  protected void appendCommaSeparated(final List<LightweightTypeReference> references) {
+  protected void appendCommaSeparated(@NonNull final List<LightweightTypeReference> references) {
     boolean isFirst = true;
     for (final LightweightTypeReference reference : references) {
       {

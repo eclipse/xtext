@@ -43,21 +43,21 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    IntegerRange _upTo = new IntegerRange(1, 1);
 			    for (@Extension final Integer j : _upTo) {
 			      final Function1<Object,Object> _function = new Function1<Object,Object>() {
-			          public Object apply(@Extension final Object o) {
-			            Object _xtrycatchfinallyexpression = null;
-			            try {
+			        public Object apply(@Extension final Object o) {
+			          Object _xtrycatchfinallyexpression = null;
+			          try {
+			            _xtrycatchfinallyexpression = null;
+			          } catch (final Throwable _t) {
+			            if (_t instanceof Throwable) {
+			              @Extension final Throwable t = (Throwable)_t;
 			              _xtrycatchfinallyexpression = null;
-			            } catch (final Throwable _t) {
-			              if (_t instanceof Throwable) {
-			                @Extension final Throwable t = (Throwable)_t;
-			                _xtrycatchfinallyexpression = null;
-			              } else {
-			                throw Exceptions.sneakyThrow(_t);
-			              }
+			            } else {
+			              throw Exceptions.sneakyThrow(_t);
 			            }
-			            return _xtrycatchfinallyexpression;
 			          }
-			        };
+			          return _xtrycatchfinallyexpression;
+			        }
+			      };
 			      _function.apply(null);
 			    }
 			  }
@@ -513,10 +513,10 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				  public void m(final int it) {
 				    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
 				    final Procedure1<String> _function = new Procedure1<String>() {
-				        public void apply(@Extension final String s) {
-				          s.substring(it);
-				        }
-				      };
+				      public void apply(@Extension final String s) {
+				        s.substring(it);
+				      }
+				    };
 				    IterableExtensions.<String>forEach(_newArrayList, _function);
 				  }
 				}
@@ -632,10 +632,10 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			  public ArrayList<String> m3() {
 			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar");
 			    final Procedure1<ArrayList<String>> _function = new Procedure1<ArrayList<String>>() {
-			        public void apply(final ArrayList<String> it) {
-			          C.this.<String>at(((String[])Conversions.unwrapArray(it, String.class)), 2);
-			        }
-			      };
+			      public void apply(final ArrayList<String> it) {
+			        C.this.<String>at(((String[])Conversions.unwrapArray(it, String.class)), 2);
+			      }
+			    };
 			    ArrayList<String> _doubleArrow = ObjectExtensions.<ArrayList<String>>operator_doubleArrow(_newArrayList, _function);
 			    return _doubleArrow;
 			  }

@@ -124,10 +124,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  
 			  public void build(final Factory<String> f) {
 			    final Procedure1<T> _function = new Procedure1<T>() {
-			        public void apply(final T it) {
-			          Factory.this.<String, Factory<String>>buildChild(f);
-			        }
-			      };
+			      public void apply(final T it) {
+			        Factory.this.<String, Factory<String>>buildChild(f);
+			      }
+			    };
 			    this.fill(_function);
 			  }
 			}
@@ -153,11 +153,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public C() {
 			    final Function1<Integer,String> _function = new Function1<Integer,String>() {
-			        public String apply(final Integer it) {
-			          String _string = it.toString();
-			          return _string;
-			        }
-			      };
+			      public String apply(final Integer it) {
+			        String _string = it.toString();
+			        return _string;
+			      }
+			    };
 			    List<String> _map = ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(1, 2, 3)), _function);
 			    _map.toString();
 			  }
@@ -197,16 +197,16 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  
 			  public void m(final Iterable<JvmTypeReference> refs, final ITreeAppendable it) {
 			    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-			        public void apply(final LoopParams it) {
-			        }
-			      };
+			      public void apply(final LoopParams it) {
+			      }
+			    };
 			    final Procedure2<JvmTypeReference,ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
-			        public void apply(final JvmTypeReference it, final ITreeAppendable app) {
-			          ITreeAppendable _trace = app.trace(it);
-			          JvmType _type = it.getType();
-			          _trace.append(_type);
-			        }
-			      };
+			      public void apply(final JvmTypeReference it, final ITreeAppendable app) {
+			        ITreeAppendable _trace = app.trace(it);
+			        JvmType _type = it.getType();
+			        _trace.append(_type);
+			      }
+			    };
 			    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(it, refs, _function, _function_1);
 			  }
 			}
@@ -360,12 +360,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    StringBuilder _xblockexpression = null;
 			    {
 			      final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			          public void apply(final StringBuilder it) {
-			            List<CharSequence> _children = C.this.getChildren();
-			            _children.add(it);
-			            it.append("");
-			          }
-			        };
+			        public void apply(final StringBuilder it) {
+			          List<CharSequence> _children = C.this.getChildren();
+			          _children.add(it);
+			          it.append("");
+			        }
+			      };
 			      final StringBuilder result = ObjectExtensions.<StringBuilder>operator_doubleArrow(((StringBuilder) null), _function);
 			      _xblockexpression = (result);
 			    }
@@ -910,17 +910,17 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m(final Iterable<String> iterable) {
 			    final Function1<String,String> _function = new Function1<String,String>() {
-			        public String apply(final String it) {
-			          return it;
-			        }
-			      };
+			      public String apply(final String it) {
+			        return it;
+			      }
+			    };
 			    Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);
 			    final Function1<String,Integer> _function_1 = new Function1<String,Integer>() {
-			        public Integer apply(final String it) {
-			          int _hashCode = it.hashCode();
-			          return Integer.valueOf(_hashCode);
-			        }
-			      };
+			      public Integer apply(final String it) {
+			        int _hashCode = it.hashCode();
+			        return Integer.valueOf(_hashCode);
+			      }
+			    };
 			    IterableExtensions.sortBy(_flatMap, _function_1);
 			  }
 			  
@@ -950,18 +950,18 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m(final Iterable<String> iterable) {
 			    final Function1<String,String> _function = new Function1<String,String>() {
-			        public String apply(final String it) {
-			          String _upperCase = it.toUpperCase();
-			          return _upperCase;
-			        }
-			      };
+			      public String apply(final String it) {
+			        String _upperCase = it.toUpperCase();
+			        return _upperCase;
+			      }
+			    };
 			    Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);
 			    final Function1<String,Integer> _function_1 = new Function1<String,Integer>() {
-			        public Integer apply(final String it) {
-			          int _length = it.length();
-			          return Integer.valueOf(_length);
-			        }
-			      };
+			      public Integer apply(final String it) {
+			        int _length = it.length();
+			        return Integer.valueOf(_length);
+			      }
+			    };
 			    IterableExtensions.sortBy(_flatMap, _function_1);
 			  }
 			  
@@ -995,12 +995,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void putAll(final Map<? extends K,? extends V> t) {
 			    Set<? extends Entry<? extends K,? extends V>> _entrySet = t.entrySet();
 			    final Procedure1<Entry<? extends K,? extends V>> _function = new Procedure1<Entry<? extends K,? extends V>>() {
-			        public void apply(final Entry<? extends K,? extends V> it) {
-			          K _key = it.getKey();
-			          V _value = it.getValue();
-			          MyMap.this.put(_key, _value);
-			        }
-			      };
+			      public void apply(final Entry<? extends K,? extends V> it) {
+			        K _key = it.getKey();
+			        V _value = it.getValue();
+			        MyMap.this.put(_key, _value);
+			      }
+			    };
 			    IterableExtensions.forEach(_entrySet, _function);
 			  }
 			}
@@ -1701,10 +1701,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C<T extends Object> {
 			  public T m() {
 			    final Function1<T,T> _function = new Function1<T,T>() {
-			        public T apply(final T x) {
-			          return x;
-			        }
-			      };
+			      public T apply(final T x) {
+			        return x;
+			      }
+			    };
 			    T _apply = _function.apply(null);
 			    return _apply;
 			  }
@@ -1726,10 +1726,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public <T extends Object> T m() {
 			    final Function1<T,T> _function = new Function1<T,T>() {
-			        public T apply(final T x) {
-			          return x;
-			        }
-			      };
+			      public T apply(final T x) {
+			        return x;
+			      }
+			    };
 			    T _apply = _function.apply(null);
 			    return _apply;
 			  }
@@ -1754,17 +1754,17 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  protected L() {
 			    Object _object = new Object();
 			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			        public void apply(final Object it) {
-			          boolean _and = false;
-			          boolean _add = L.this.add(((E) it));
-			          if (!_add) {
-			            _and = false;
-			          } else {
-			            boolean _remove = L.this.remove(it);
-			            _and = (_add && _remove);
-			          }
+			      public void apply(final Object it) {
+			        boolean _and = false;
+			        boolean _add = L.this.add(((E) it));
+			        if (!_add) {
+			          _and = false;
+			        } else {
+			          boolean _remove = L.this.remove(it);
+			          _and = (_add && _remove);
 			        }
-			      };
+			      }
+			    };
 			    ObjectExtensions.<Object>operator_doubleArrow(_object, _function);
 			  }
 			}
@@ -1787,17 +1787,17 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public abstract class L<E extends Object> extends AbstractList<E> {
 			  protected L(final E e) {
 			    final Procedure1<E> _function = new Procedure1<E>() {
-			        public void apply(final E it) {
-			          boolean _and = false;
-			          boolean _add = L.this.add(it);
-			          if (!_add) {
-			            _and = false;
-			          } else {
-			            boolean _remove = L.this.remove(it);
-			            _and = (_add && _remove);
-			          }
+			      public void apply(final E it) {
+			        boolean _and = false;
+			        boolean _add = L.this.add(it);
+			        if (!_add) {
+			          _and = false;
+			        } else {
+			          boolean _remove = L.this.remove(it);
+			          _and = (_add && _remove);
 			        }
-			      };
+			      }
+			    };
 			    ObjectExtensions.<E>operator_doubleArrow(e, _function);
 			  }
 			}
