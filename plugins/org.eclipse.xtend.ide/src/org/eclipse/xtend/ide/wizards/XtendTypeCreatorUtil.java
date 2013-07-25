@@ -10,34 +10,67 @@ package org.eclipse.xtend.ide.wizards;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Anton Kosyakov - https://bugs.eclipse.org/bugs/show_bug.cgi?id=379220
  */
 public class XtendTypeCreatorUtil {
-	public static String createClass(String typeName, IPackageFragment packageFragment, String superClass,
-			@SuppressWarnings("rawtypes") List superInterfaces, String indentation, String lineSeparator,
-			IProgressMonitor monitor) throws CoreException {
+
+	public static String createPackageDeclaration(String typeName, IPackageFragment packageFragment, String lineSeparator) {
 		StringBuffer sb = new StringBuffer();
 		if(packageFragment.getElementName() != null && !packageFragment.getElementName().equals("")){
 			sb.append("package ");
 			sb.append(packageFragment.getElementName());
+		}
+		return sb.toString();
+	}
+
+	public static String createPackageDeclaration(String typeName, IPackageFragment packageFragment, String superClass, 
+			@SuppressWarnings("rawtypes") List superInterfaces, String lineSeparator) {
+		StringBuffer sb = new StringBuffer();
+		if(packageFragment.getElementName() != null && !packageFragment.getElementName().equals("")){
+			sb.append("package ");
+			sb.append(packageFragment.getElementName());
+		}
+		int size = superInterfaces.size();
+		if(size > 0 || !superClass.equals("java.lang.Object")) {
 			sb.append(lineSeparator);
 			sb.append(lineSeparator);
 		}
 		if(!Strings.isEmpty(superClass) && !superClass.equals("java.lang.Object")) {
-			addImport(sb, superClass, lineSeparator);
+			addImport(sb, superClass, size != 0 ? lineSeparator : null);
 		}
-		for (Object object : superInterfaces) {
-			addImport(sb, object, lineSeparator);
+		for (int index = 0; index < size; index++) {
+			Object superInterface = superInterfaces.get(index);
+			addImport(sb, superInterface, index + 1 != size ? lineSeparator : null);
 		}
-		if(superInterfaces.size() > 0 || !superClass.equals("java.lang.Object")) {
+		return sb.toString();
+	}
+
+	public static String createPackageDeclaration(String typeName, IPackageFragment packageFragment, @SuppressWarnings("rawtypes") List superInterfaces, String lineSeparator) {
+		StringBuffer sb = new StringBuffer();
+		if(packageFragment.getElementName() != null && !packageFragment.getElementName().equals("")){
+			sb.append("package ");
+			sb.append(packageFragment.getElementName());
+		}
+		int size = superInterfaces.size();
+		if(size > 0) {
+			sb.append(lineSeparator);
 			sb.append(lineSeparator);
 		}
+		for (int index = 0; index < size; index++) {
+			Object superInterface = superInterfaces.get(index);
+			addImport(sb, superInterface, index + 1 != size ? lineSeparator : null);
+		}
+		return sb.toString();
+	}
+
+	public static String createClassContent(String typeName, String superClass, 
+			@SuppressWarnings("rawtypes") List superInterfaces, String indentation, String lineSeparator) {
+		StringBuffer sb = new StringBuffer();
 		sb.append("class ");
 		sb.append(typeName);
 		if(!Strings.isEmpty(superClass) && !superClass.equals("java.lang.Object")) {
@@ -62,22 +95,8 @@ public class XtendTypeCreatorUtil {
 		return sb.toString();
 	}
 
-	public static String createInterface(String typeName, IPackageFragment packageFragment,
-			@SuppressWarnings("rawtypes") List superInterfaces, String indentation, String lineSeparator,
-			IProgressMonitor monitor) throws CoreException {
+	public static String createInterfaceContent(String typeName, @SuppressWarnings("rawtypes") List superInterfaces, String indentation, String lineSeparator) {
 		StringBuffer sb = new StringBuffer();
-		if(packageFragment.getElementName() != null && !packageFragment.getElementName().equals("")){
-			sb.append("package ");
-			sb.append(packageFragment.getElementName());
-			sb.append(lineSeparator);
-			sb.append(lineSeparator);
-		}
-		for (Object object : superInterfaces) {
-			addImport(sb, object, lineSeparator);
-		}
-		if(superInterfaces.size() > 0) {
-			sb.append(lineSeparator);
-		}
 		sb.append("interface ");
 		sb.append(typeName);
 		@SuppressWarnings("rawtypes")
@@ -98,15 +117,8 @@ public class XtendTypeCreatorUtil {
 		return sb.toString();
 	}
 
-	public static String createEnum(String typeName, IPackageFragment packageFragment, String indentation,
-			String lineSeparator, IProgressMonitor monitor) {
+	public static String createEnumContent(String typeName, String indentation, String lineSeparator) {
 		StringBuffer sb = new StringBuffer();
-		if(packageFragment.getElementName() != null && !packageFragment.getElementName().equals("")){
-			sb.append("package ");
-			sb.append(packageFragment.getElementName());
-			sb.append(lineSeparator);
-			sb.append(lineSeparator);
-		}
 		sb.append("enum ");
 		sb.append(typeName);
 		sb.append(" {");
@@ -116,16 +128,9 @@ public class XtendTypeCreatorUtil {
 		sb.append("}");
 		return sb.toString();
 	}
-
-	public static String createAnnotation(String typeName, IPackageFragment packageFragment, String indentation,
-			String lineSeparator, IProgressMonitor monitor) {
+	
+	public static String createAnnotationContent(String typeName, String indentation, String lineSeparator) {
 		StringBuffer sb = new StringBuffer();
-		if(packageFragment.getElementName() != null && !packageFragment.getElementName().equals("")){
-			sb.append("package ");
-			sb.append(packageFragment.getElementName());
-			sb.append(lineSeparator);
-			sb.append(lineSeparator);
-		}
 		sb.append("annotation ");
 		sb.append(typeName);
 		sb.append(" {");
@@ -143,11 +148,14 @@ public class XtendTypeCreatorUtil {
 	private static void addImport(StringBuffer sb, Object object, String lineSeparator) {
 		sb.append("import ");
 		sb.append(removeGenerics(object));
-		sb.append(lineSeparator);
+		if (lineSeparator != null) {
+			sb.append(lineSeparator);
+		}
 	}
 
 	private static String removeGenerics(Object object) {
 		String ret = object.toString().replaceAll("<.*>$", "");
 		return ret;
 	}
+	
 }
