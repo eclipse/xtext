@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.typesystem.references
 
-import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import java.util.List
+import org.eclipse.xtext.xbase.compiler.ISourceAppender
 
 class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 	

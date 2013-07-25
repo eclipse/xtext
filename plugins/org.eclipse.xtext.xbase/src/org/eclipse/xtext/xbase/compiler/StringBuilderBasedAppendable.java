@@ -18,14 +18,15 @@ public class StringBuilderBasedAppendable extends AbstractStringBuilderBasedAppe
 
 	private ImportManager importManager;
 
-	public StringBuilderBasedAppendable(ImportManager typeSerializer, String indentation, String lineSeparator) {
-		super(indentation, lineSeparator);
-		this.importManager = typeSerializer;
+	public StringBuilderBasedAppendable(ImportManager importManager, String indentation, String lineSeparator) {
+		super(indentation, lineSeparator, true);
+		this.importManager = importManager;
 		
 	}
 
-	public StringBuilderBasedAppendable(ImportManager typeSerializer) {
-		this.importManager = typeSerializer;
+	public StringBuilderBasedAppendable(ImportManager importManager) {
+		super(true);
+		this.importManager = importManager;
 	}
 
 	public StringBuilderBasedAppendable() {
