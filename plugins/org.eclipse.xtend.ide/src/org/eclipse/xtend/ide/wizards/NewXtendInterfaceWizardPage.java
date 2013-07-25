@@ -7,16 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.wizards;
 
-import java.io.ByteArrayInputStream;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.swt.widgets.Composite;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Anton Kosyakov - https://bugs.eclipse.org/bugs/show_bug.cgi?id=379220
  */
 public class NewXtendInterfaceWizardPage extends AbstractNewXtendElementWizardPage {
 
@@ -39,28 +35,18 @@ public class NewXtendInterfaceWizardPage extends AbstractNewXtendElementWizardPa
 	}
 
 	@Override
-	protected int createXtendElement(IProgressMonitor monitor, IFile xtendFile, String indentation, String lineSperator) {
-		int size = 0;
-		try {
-			String contents = XtendTypeCreatorUtil.createInterface(
-					getTypeName(),
-					getPackageFragment(),
-					getSuperInterfaces(),
-					indentation,
-					lineSperator,
-					monitor);
-			size = contents.length();
-			xtendFile.create(new ByteArrayInputStream(contents.getBytes()), true, monitor);
-			setResource(xtendFile);
-		} catch (CoreException e) {
-			displayError(Messages.ERROR_CREATING_INTERFACE, e.getMessage());
-		}
-		return size;
+	protected String getElementCreationErrorMessage() {
+		return Messages.ERROR_CREATING_INTERFACE;
 	}
 
 	@Override
-	protected String getElementCreationErrorMessage() {
-		return Messages.ERROR_CREATING_INTERFACE;
+	protected String getPackageDeclaration(String lineSeparator) {
+		return XtendTypeCreatorUtil.createPackageDeclaration(getTypeName(), getPackageFragment(), getSuperInterfaces(), lineSeparator);
+	}
+
+	@Override
+	protected String getTypeContent(String indentation, String lineSeparator) {
+		return XtendTypeCreatorUtil.createInterfaceContent(getTypeName(), getSuperInterfaces(), indentation, lineSeparator);
 	}
 
 }

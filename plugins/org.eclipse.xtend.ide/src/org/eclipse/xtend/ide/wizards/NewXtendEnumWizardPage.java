@@ -7,16 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.wizards;
 
-import java.io.ByteArrayInputStream;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.swt.widgets.Composite;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Anton Kosyakov - https://bugs.eclipse.org/bugs/show_bug.cgi?id=379220
  */
 public class NewXtendEnumWizardPage extends AbstractNewXtendElementWizardPage {
 
@@ -37,27 +33,18 @@ public class NewXtendEnumWizardPage extends AbstractNewXtendElementWizardPage {
 	}
 
 	@Override
-	protected int createXtendElement(IProgressMonitor monitor, IFile xtendFile, String indentation, String lineSperator) {
-		int size = 0;
-		try {
-			String contents = XtendTypeCreatorUtil.createEnum(
-					getTypeName(),
-					getPackageFragment(),
-					indentation,
-					lineSperator,
-					monitor);
-			size = contents.length();
-			xtendFile.create(new ByteArrayInputStream(contents.getBytes()), true, monitor);
-			setResource(xtendFile);
-		} catch (CoreException e) {
-			displayError(Messages.ERROR_CREATING_ENUM, e.getMessage());
-		}
-		return size;
+	protected String getElementCreationErrorMessage() {
+		return Messages.ERROR_CREATING_ENUM;
 	}
 
 	@Override
-	protected String getElementCreationErrorMessage() {
-		return Messages.ERROR_CREATING_ENUM;
+	protected String getPackageDeclaration(String lineSeparator) {
+		return XtendTypeCreatorUtil.createPackageDeclaration(getTypeName(), getPackageFragment(), lineSeparator);
+	}
+
+	@Override
+	protected String getTypeContent(String indentation, String lineSeparator) {
+		return XtendTypeCreatorUtil.createEnumContent(getTypeName(), indentation, lineSeparator);
 	}
 
 }
