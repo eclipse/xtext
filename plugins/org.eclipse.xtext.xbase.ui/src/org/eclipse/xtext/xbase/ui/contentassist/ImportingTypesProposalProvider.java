@@ -178,7 +178,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				}
 				textEdit.apply(document);
 				
-				int cursorPosition = proposal.getCursorPosition() + replaceConverter.getReplaceLengthDelta(importChanges);
+				int cursorPosition = proposal.getCursorPosition() + replaceConverter.getReplaceLengthDelta(importChanges, proposal.getReplacementOffset());
 				proposal.setCursorPosition(cursorPosition);
 				int newCursorLine = document.getLineOfOffset(cursorPosition);
 
