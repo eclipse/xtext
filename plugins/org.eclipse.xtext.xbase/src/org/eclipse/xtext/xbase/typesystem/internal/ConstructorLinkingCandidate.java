@@ -25,6 +25,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -54,6 +56,22 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	@Override
 	protected List<XExpression> getArguments() {
 		return getConstructorCall().getArguments();
+	}
+	
+	@Override
+	protected LightweightTypeReference deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
+		LightweightTypeReference result = super.deferredBindTypeArgument(expectation, type);
+		LightweightTypeReference expectedType = expectation.getExpectedType();
+		if (expectedType != null && getSyntacticTypeArguments().isEmpty() && !result.isRawType() && !getDeclaredTypeParameters().isEmpty()) {
+			if (!expectedType.isAssignableFrom(result, new TypeConformanceComputationArgument())) {
+				LightweightTypeReference rawFeatureType = result.getRawTypeReference();
+				if (expectedType.isAssignableFrom(rawFeatureType)) {
+					result = rawFeatureType;
+					getTypeParameterMapping().clear();
+				}
+			}
+		}
+		return result;
 	}
 	
 	@Override
