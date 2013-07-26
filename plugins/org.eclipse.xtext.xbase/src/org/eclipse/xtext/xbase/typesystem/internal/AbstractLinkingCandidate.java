@@ -321,17 +321,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			// TODO enhance with expectation
 			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType).getUpperBoundSubstitute();
 			if (!expectation.isNoTypeExpectation()) {
-				deferredBindTypeArgument(expectation, substitutedFeatureType);
-				LightweightTypeReference expectedType = expectation.getExpectedType();
-				if (expectedType != null && getSyntacticTypeArguments().isEmpty() && !substitutedFeatureType.isRawType() && !getDeclaredTypeParameters().isEmpty()) {
-					if (!expectedType.isAssignableFrom(substitutedFeatureType, new TypeConformanceComputationArgument())) {
-						LightweightTypeReference rawFeatureType = substitutedFeatureType.getRawTypeReference();
-						if (expectedType.isAssignableFrom(rawFeatureType)) {
-							substitutedFeatureType = rawFeatureType;
-							getTypeParameterMapping().clear();
-						}
-					}
-				}
+				substitutedFeatureType = deferredBindTypeArgument(expectation, substitutedFeatureType);
 			}
 			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED);
 		}
@@ -342,7 +332,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		computeArgumentTypes();
 	}
 	
-	protected void deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
+	protected LightweightTypeReference deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
 			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(state.getReferenceOwner()) {
@@ -382,6 +372,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			};
 			collector.processPairedReferences(expectedType, type);
 		}
+		return type;
 	}
 	
 	/*

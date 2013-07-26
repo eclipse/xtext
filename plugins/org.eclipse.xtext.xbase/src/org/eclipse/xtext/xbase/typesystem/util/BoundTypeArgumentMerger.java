@@ -139,7 +139,9 @@ public class BoundTypeArgumentMerger {
 		if (allArguments.size() == 1 && !candidate.isWildcard()) {
 			LightweightBoundTypeArgument singleArgument = allArguments.get(0);
 			if (VarianceInfo.OUT.equals(singleArgument.getActualVariance()) && singleArgument.getActualVariance().equals(singleArgument.getDeclaredVariance())) {
-				return candidate.isAssignableFrom(singleArgument.getTypeReference(), new TypeConformanceComputationArgument());
+				LightweightTypeReference singleReference = singleArgument.getTypeReference();
+				if (singleReference.isResolved())
+					return candidate.isAssignableFrom(singleReference, new TypeConformanceComputationArgument());
 			}
 		}
 		LightweightMergedBoundTypeArgument merged = merge(allArguments, candidate.getOwner());
