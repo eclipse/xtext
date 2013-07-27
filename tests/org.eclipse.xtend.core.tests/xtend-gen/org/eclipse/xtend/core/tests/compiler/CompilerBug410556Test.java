@@ -17,6 +17,44 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBug410556Test extends AbstractXtendCompilerTest {
   @Test
+  public void testConstructorTypeParameter_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new bug413824.ConstructorTypeParameter(\'\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import bug413824.ConstructorTypeParameter;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("new ConstructorTypeParameter(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void test_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class BugTypeInference<T> {");
