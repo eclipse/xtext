@@ -15,6 +15,26 @@ import org.junit.Test
 class CompilerBug410556Test extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testConstructorTypeParameter_01() {
+		assertCompilesTo('''
+			class C {
+				def void m() {
+					new bug413824.ConstructorTypeParameter('')
+				}
+			}
+		''', '''
+			import bug413824.ConstructorTypeParameter;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    new ConstructorTypeParameter("");
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def test_01() {
 		assertCompilesTo('''
 			class BugTypeInference<T> {
