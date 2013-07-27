@@ -44,7 +44,45 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("new ConstructorTypeParameter(\"\");");
+    _builder_1.append("new <String>ConstructorTypeParameter(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testConstructorTypeParameter_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Integer i, String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new bug413824.ConstructorAndClassTypeParameter(i, s)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import bug413824.ConstructorAndClassTypeParameter;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final Integer i, final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("new <String>ConstructorAndClassTypeParameter<Integer>(i, s);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

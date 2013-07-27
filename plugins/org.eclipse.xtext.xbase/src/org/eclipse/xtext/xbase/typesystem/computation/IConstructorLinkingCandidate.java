@@ -33,7 +33,7 @@ public interface IConstructorLinkingCandidate extends ILinkingCandidate {
 
 	/**
 	 * The resolved type arguments. If the constructor itself defines type parameters,
-	 * their resolved representation is appended to the list of type arguments.
+	 * their resolved representation is prepended to the list of type arguments.
 	 * Consider the following type:
 	 * 
 	 * <pre>
@@ -43,7 +43,7 @@ public interface IConstructorLinkingCandidate extends ILinkingCandidate {
 	 * </pre>
 	 * 
 	 * An invocation of the constructor {@code C} will return three type arguments, the bound
-	 * values of for {@code T}, {@code V} and {@code P}.
+	 * values of for {@code P}, {@code T} and {@code V}.
 	 */
 	List<LightweightTypeReference> getTypeArguments();
 }
