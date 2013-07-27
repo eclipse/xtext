@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -807,13 +808,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? constructorCallAppendable.trace(locationWithNewKeyword) : constructorCallAppendable;
 				appendableWithNewKeyword.append("new ");
 				List<LightweightTypeReference> typeArguments = batchTypeResolver.resolveTypes(expr).getActualTypeArguments(expr);
-				ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
-				JvmDeclaredType declaringType = expr.getConstructor().getDeclaringType();
-				typeAppendable.append(declaringType);
-				boolean hasTypeArguments = declaringType instanceof JvmTypeParameterDeclarator && !((JvmTypeParameterDeclarator) declaringType).getTypeParameters().isEmpty() && 
-						!typeArguments.isEmpty();
+				JvmConstructor constructor = expr.getConstructor();
+				JvmDeclaredType declaringType = constructor.getDeclaringType();
+				List<JvmTypeParameter> typeParameters = declaringType instanceof JvmTypeParameterDeclarator 
+						? ((JvmTypeParameterDeclarator) declaringType).getTypeParameters() 
+						: Collections.<JvmTypeParameter>emptyList(); 
+				List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
+				boolean hasTypeArguments = !typeArguments.isEmpty() && (typeParameters.size() + constructorTypeParameters.size() == typeArguments.size());
 				List<JvmTypeReference> explicitTypeArguments = expr.getTypeArguments();
+				List<LightweightTypeReference> constructorTypeArguments = Collections.emptyList();
 				if (hasTypeArguments) {
+					constructorTypeArguments = typeArguments.subList(0, constructorTypeParameters.size());
+					typeArguments = typeArguments.subList(constructorTypeParameters.size(), typeArguments.size());
+					hasTypeArguments = !typeArguments.isEmpty();
 					for(LightweightTypeReference typeArgument: typeArguments) {
 						if (typeArgument.isWildcard()) {
 							// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
@@ -822,8 +829,28 @@ public class XbaseCompiler extends FeatureCallCompiler {
 							// diamond operator would work in later versions
 						}
 					}
-					
+					for(LightweightTypeReference typeArgument: constructorTypeArguments) {
+						if (typeArgument.isWildcard()) {
+							// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
+							constructorTypeArguments = Collections.emptyList();
+							break;
+							// diamond operator would work in later versions
+						}
+					}
 				}
+				
+				if (!constructorTypeArguments.isEmpty()) {
+					appendableWithNewKeyword.append("<");
+					for(int i = 0; i < constructorTypeArguments.size(); i++) {
+						if (i != 0) {
+							appendableWithNewKeyword.append(", ");
+						}
+						appendableWithNewKeyword.append(constructorTypeArguments.get(i));
+					}
+					appendableWithNewKeyword.append(">");
+				}
+				ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
+				typeAppendable.append(declaringType);
 				if (hasTypeArguments) {
 					typeAppendable.append("<");
 					for(int i = 0; i < typeArguments.size(); i++) {
