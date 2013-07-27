@@ -28,7 +28,27 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
-			    new ConstructorTypeParameter("");
+			    new <String>ConstructorTypeParameter("");
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testConstructorTypeParameter_02() {
+		assertCompilesTo('''
+			class C {
+				def void m(Integer i, String s) {
+					new bug413824.ConstructorAndClassTypeParameter(i, s)
+				}
+			}
+		''', '''
+			import bug413824.ConstructorAndClassTypeParameter;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Integer i, final String s) {
+			    new <String>ConstructorAndClassTypeParameter<Integer>(i, s);
 			  }
 			}
 		''')
