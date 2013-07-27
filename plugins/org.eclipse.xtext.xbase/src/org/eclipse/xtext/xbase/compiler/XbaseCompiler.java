@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.generator.trace.ILocationData;
@@ -807,14 +808,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				appendableWithNewKeyword.append("new ");
 				List<LightweightTypeReference> typeArguments = batchTypeResolver.resolveTypes(expr).getActualTypeArguments(expr);
 				ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
-				typeAppendable.append(expr.getConstructor().getDeclaringType());
-				boolean hasTypeArguments = !typeArguments.isEmpty();
+				JvmDeclaredType declaringType = expr.getConstructor().getDeclaringType();
+				typeAppendable.append(declaringType);
+				boolean hasTypeArguments = declaringType instanceof JvmTypeParameterDeclarator && !((JvmTypeParameterDeclarator) declaringType).getTypeParameters().isEmpty() && 
+						!typeArguments.isEmpty();
 				List<JvmTypeReference> explicitTypeArguments = expr.getTypeArguments();
 				if (hasTypeArguments) {
 					for(LightweightTypeReference typeArgument: typeArguments) {
 						if (typeArgument.isWildcard()) {
 							// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
 							hasTypeArguments = false;
+							break;
 							// diamond operator would work in later versions
 						}
 					}
