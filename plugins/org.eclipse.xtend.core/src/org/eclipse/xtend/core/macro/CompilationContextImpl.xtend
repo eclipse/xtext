@@ -5,7 +5,6 @@ import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 
@@ -16,13 +15,11 @@ class CompilationContextImpl implements CompilationStrategy.CompilationContext {
 	ITreeAppendable appendable
 	ImportManager importManager
 	CompilationUnitImpl compilationUnit
-	TypeReferenceSerializer typeRefSerializer
 
-	new(ITreeAppendable appendable, CompilationUnitImpl compilationUnit, TypeReferenceSerializer typeRefSerializer) {
+	new(ITreeAppendable appendable, CompilationUnitImpl compilationUnit) {
 		this.appendable = appendable
 		this.importManager = getImportManager(appendable)
 		this.compilationUnit = compilationUnit
-		this.typeRefSerializer = typeRefSerializer
 	}
 
 	def ImportManager getImportManager(ITreeAppendable appendable) {
@@ -35,8 +32,8 @@ class CompilationContextImpl implements CompilationStrategy.CompilationContext {
 			} else {
 				new StringBuilderBasedAppendable()
 			}
-		val typeRef = compilationUnit.toJvmTypeReference(typeref)
-		typeRefSerializer.serialize(typeRef, compilationUnit.xtendFile, appendable)
+		val typeRef = compilationUnit.toLightweightTypeReference(typeref)
+		appendable.append(typeRef)
 		return appendable.toString
 	}
 

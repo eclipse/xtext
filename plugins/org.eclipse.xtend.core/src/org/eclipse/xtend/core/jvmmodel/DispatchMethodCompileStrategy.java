@@ -24,7 +24,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
@@ -41,9 +40,6 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 	@Inject
 	private TypeReferences typeReferences;
 
-	@Inject
-	private TypeReferenceSerializer typeReferenceSerializer;
-	
 	@Inject
 	private TreeAppendableUtil treeAppendableUtil;
 	
@@ -184,9 +180,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			LightweightTypeReference type1 = converter.toLightweightReference(p1.getParameterType());
 			LightweightTypeReference type2 = converter.toLightweightReference(p2.getParameterType());
 			if (!type2.isAssignableFrom(type1, new TypeConformanceComputationArgument(true, false, true, true, false, false))) {
-				a.append("(");
-				typeReferenceSerializer.serialize(type2.getWrapperTypeIfPrimitive().toTypeReference(), dispatchOperation, a);
-				a.append(")");
+				a.append("(").append(type2.getWrapperTypeIfPrimitive()).append(")");
 			}
 			if (typeReferences.is(p2.getParameterType(), Void.class)) {
 				a.append("null");
