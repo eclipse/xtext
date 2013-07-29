@@ -3569,6 +3569,45 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test(timeout = 10000)
+	def void testBug412853 () {
+		'''
+			class Bug {
+				def dispatch bug(A a) { 1 }
+				def dispatch bug(B b) { 1 }
+			}
+			
+			interface Element<T> {}
+			class AbstractElement<T> implements Element<T> {}
+			class A extends AbstractElement<A> implements Element<A> {}
+			class B implements Element<B> {}
+		'''.assertCompilesTo('''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  protected int _bug(final A a) {
+			    return 1;
+			  }
+			  
+			  protected int _bug(final B b) {
+			    return 1;
+			  }
+			  
+			  public int bug(final Element<? extends Object> a) {
+			    if (a instanceof A) {
+			      return _bug((A)a);
+			    } else if (a instanceof B) {
+			      return _bug((B)a);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(a).toString());
+			    }
+			  }
+			}
+		''')
+	}
 
 }
 
