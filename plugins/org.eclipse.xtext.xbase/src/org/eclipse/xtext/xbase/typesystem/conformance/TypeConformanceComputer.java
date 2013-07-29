@@ -545,20 +545,12 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			types.set(i, type);
 			addIdentifier(type, allNames, allBoundNames);
 		}
-		if (allNames.size() == 1)
+		if (allNames.size() == 1) {
 			return types.get(0);
-		if (types.size() == initiallyRequested.size()) {
-			boolean containsAll = true;
-			for(LightweightTypeReference initialRequest: initiallyRequested) {
-				if (!allNames.contains(getIdentifier(initialRequest))) {
-					containsAll = false;
-					break;
-				}
-			}
-			// recursive request - return object wildcard
-			if (containsAll) {
-				return createObjectWildcardReference(owner);
-			}
+		}
+		// recursive request - return object wildcard
+		if (isRecursiveRequest(types, allNames, initiallyRequested)) {
+			return createObjectWildcardReference(owner);
 		}
 		LightweightTypeReference superType = getCommonSuperType(types, owner);
 		if (superType instanceof WildcardTypeReference)
@@ -576,6 +568,18 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		WildcardTypeReference result = new WildcardTypeReference(owner);
 		result.addUpperBound(superType.copyInto(owner));
 		return result;
+	}
+
+	protected boolean isRecursiveRequest(List<LightweightTypeReference> types, Set<String> allNames, List<LightweightTypeReference> initiallyRequested) {
+		if (types.size() < initiallyRequested.size()) {
+			return false;
+		}
+		for(LightweightTypeReference initialRequest: initiallyRequested) {
+			if (!allNames.contains(getIdentifier(initialRequest))) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	private void addIdentifier(LightweightTypeReference type, Set<String> allNames, Set<String> allBoundNames) {
