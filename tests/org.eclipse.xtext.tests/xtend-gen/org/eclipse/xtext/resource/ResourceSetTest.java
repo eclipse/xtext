@@ -14,11 +14,11 @@ public class ResourceSetTest extends AbstractResourceSetTest {
   protected ResourceSetImpl createEmptyResourceSet() {
     ResourceSetImpl _resourceSetImpl = new ResourceSetImpl();
     final Procedure1<ResourceSetImpl> _function = new Procedure1<ResourceSetImpl>() {
-        public void apply(final ResourceSetImpl it) {
-          HashMap<URI,Resource> _newHashMap = CollectionLiterals.<URI, Resource>newHashMap();
-          it.setURIResourceMap(_newHashMap);
-        }
-      };
+      public void apply(final ResourceSetImpl it) {
+        HashMap<URI,Resource> _newHashMap = CollectionLiterals.<URI, Resource>newHashMap();
+        it.setURIResourceMap(_newHashMap);
+      }
+    };
     return ObjectExtensions.<ResourceSetImpl>operator_doubleArrow(_resourceSetImpl, _function);
   }
 }

@@ -12,9 +12,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatField01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -29,9 +29,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatField02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -49,9 +49,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldInit01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -66,9 +66,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldInit02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -86,9 +86,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldVal() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -103,9 +103,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldFinal() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -120,9 +120,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldPublicFinal() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -137,9 +137,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldStatic02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -154,9 +154,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldStatic03() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -171,9 +171,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldStaticVal() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -188,9 +188,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldStaticFinal() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -205,9 +205,9 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatFieldPublicStaticFinal() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface bar {");
     _builder.newLine();
@@ -222,10 +222,10 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethod01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -243,10 +243,10 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethod02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -266,10 +266,10 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethod03() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -289,10 +289,10 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethod04() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();

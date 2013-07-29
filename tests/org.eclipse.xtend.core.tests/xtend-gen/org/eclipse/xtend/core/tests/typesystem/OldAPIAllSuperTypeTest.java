@@ -70,11 +70,11 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
       final Set<JvmTypeReference> computedSuperTypes = this.superTypeCollector.collectSuperTypes(subtype);
       final Set<String> expectedSupertypesAsSet = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(superTypes)));
       final Function1<JvmTypeReference,String> _function = new Function1<JvmTypeReference,String>() {
-          public String apply(final JvmTypeReference it) {
-            String _simpleName = it.getSimpleName();
-            return _simpleName;
-          }
-        };
+        public String apply(final JvmTypeReference it) {
+          String _simpleName = it.getSimpleName();
+          return _simpleName;
+        }
+      };
       Iterable<String> _map = IterableExtensions.<JvmTypeReference, String>map(computedSuperTypes, _function);
       final Set<String> actualSupertypesAsSet = IterableExtensions.<String>toSet(_map);
       Assert.assertEquals(expectedSupertypesAsSet, ((Object) actualSupertypesAsSet));

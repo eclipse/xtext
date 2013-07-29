@@ -116,11 +116,11 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     {
       Collection<EPackageInfo> _ePackageInfos = this.projectInfo.getEPackageInfos();
       final Function1<EPackageInfo,String> _function = new Function1<EPackageInfo,String>() {
-          public String apply(final EPackageInfo it) {
-            String _ePackageJavaFQN = it.getEPackageJavaFQN();
-            return _ePackageJavaFQN;
-          }
-        };
+        public String apply(final EPackageInfo it) {
+          String _ePackageJavaFQN = it.getEPackageJavaFQN();
+          return _ePackageJavaFQN;
+        }
+      };
       Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos, _function);
       Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map);
       for(final String ePackageInfo : _filterNull) {
@@ -134,12 +134,12 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     {
       Collection<EPackageInfo> _ePackageInfos_1 = this.projectInfo.getEPackageInfos();
       final Function1<EPackageInfo,String> _function_1 = new Function1<EPackageInfo,String>() {
-          public String apply(final EPackageInfo it) {
-            URI _genmodelURI = it.getGenmodelURI();
-            String _string = _genmodelURI.toString();
-            return _string;
-          }
-        };
+        public String apply(final EPackageInfo it) {
+          URI _genmodelURI = it.getGenmodelURI();
+          String _string = _genmodelURI.toString();
+          return _string;
+        }
+      };
       Iterable<String> _map_1 = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos_1, _function_1);
       Set<String> _set = IterableExtensions.<String>toSet(_map_1);
       for(final String genmodelURI : _set) {

@@ -112,21 +112,21 @@ public abstract class AbstractXtendFormatterTest {
   
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     final Procedure1<AssertingFormatterData> _function = new Procedure1<AssertingFormatterData>() {
-        public void apply(final AssertingFormatterData it) {
-          MapBasedPreferenceValues _config = it.getConfig();
-          AbstractXtendFormatterTest.this.put(_config, BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
-          boolean _notEquals = (!Objects.equal(cfg, null));
-          if (_notEquals) {
-            MapBasedPreferenceValues _config_1 = it.getConfig();
-            cfg.apply(_config_1);
-          }
-          it.setExpectation(expectation);
-          it.setToBeFormatted(toBeFormatted);
-          it.setPrefix(prefix);
-          it.setPostfix(postfix);
-          it.setAllowErrors(allowErrors);
+      public void apply(final AssertingFormatterData it) {
+        MapBasedPreferenceValues _config = it.getConfig();
+        AbstractXtendFormatterTest.this.put(_config, BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+        boolean _notEquals = (!Objects.equal(cfg, null));
+        if (_notEquals) {
+          MapBasedPreferenceValues _config_1 = it.getConfig();
+          cfg.apply(_config_1);
         }
-      };
+        it.setExpectation(expectation);
+        it.setToBeFormatted(toBeFormatted);
+        it.setPrefix(prefix);
+        it.setPostfix(postfix);
+        it.setAllowErrors(allowErrors);
+      }
+    };
     this.tester.assertFormatted(_function);
   }
   

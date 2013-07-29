@@ -36,11 +36,11 @@ public class SiteSpexCreator implements IProjectFactoryContributor {
     {
       List<IFile> _testLaunchers = this.projectInfo.getTestLaunchers();
       final Function1<IFile,IProject> _function = new Function1<IFile,IProject>() {
-          public IProject apply(final IFile it) {
-            IProject _project = it.getProject();
-            return _project;
-          }
-        };
+        public IProject apply(final IFile it) {
+          IProject _project = it.getProject();
+          return _project;
+        }
+      };
       List<IProject> _map = ListExtensions.<IFile, IProject>map(_testLaunchers, _function);
       for(final IProject testProject : _map) {
         _builder.append("\t\t");

@@ -39,15 +39,15 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
     JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
     IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-        public void apply(final JvmGenericType it) {
-          String _documentation = TutorialJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
-          TutorialJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
-          EList<Property> _features = entity.getFeatures();
-          for (final Property feature : _features) {
-            TutorialJvmModelInferrer.this.addJavaBeansProperty(it, feature);
-          }
+      public void apply(final JvmGenericType it) {
+        String _documentation = TutorialJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
+        TutorialJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
+        EList<Property> _features = entity.getFeatures();
+        for (final Property feature : _features) {
+          TutorialJvmModelInferrer.this.addJavaBeansProperty(it, feature);
         }
-      };
+      }
+    };
     _accept.initializeLater(_function);
   }
   
@@ -61,11 +61,11 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
       String _name = property.getName();
       JvmTypeReference _type = property.getType();
       final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
-          public void apply(final JvmField it) {
-            String _documentation = TutorialJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(property);
-            TutorialJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
-          }
-        };
+        public void apply(final JvmField it) {
+          String _documentation = TutorialJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(property);
+          TutorialJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
+        }
+      };
       JvmField _field = this._jvmTypesBuilder.toField(property, _name, _type, _function);
       this._jvmTypesBuilder.<JvmField>operator_add(_members, _field);
       EList<JvmMember> _members_1 = javaClass.getMembers();

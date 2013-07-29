@@ -29,12 +29,12 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
       project.open(null);
       final IFile file = project.getFile("Hello.txt");
       final InputStream _function = new InputStream() {
-          @Override
-          public int read() throws IOException {
-            int _minus = (-1);
-            return _minus;
-          }
-        };
+        @Override
+        public int read() throws IOException {
+          int _minus = (-1);
+          return _minus;
+        }
+      };
       file.create(_function, true, null);
       boolean _isValidationDisabled = this.isValidationDisabled(file);
       Assert.assertTrue(_isValidationDisabled);
@@ -49,12 +49,12 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
       final IProject project = AbstractXbaseUITestCase.createPluginProject("my.plugin.project");
       final IFile file = project.getFile("Hello.txt");
       final InputStream _function = new InputStream() {
-          @Override
-          public int read() throws IOException {
-            int _minus = (-1);
-            return _minus;
-          }
-        };
+        @Override
+        public int read() throws IOException {
+          int _minus = (-1);
+          return _minus;
+        }
+      };
       file.create(_function, true, null);
       boolean _isValidationDisabled = this.isValidationDisabled(file);
       Assert.assertFalse(_isValidationDisabled);

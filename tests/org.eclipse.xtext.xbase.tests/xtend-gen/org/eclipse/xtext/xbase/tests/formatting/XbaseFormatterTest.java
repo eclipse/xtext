@@ -342,10 +342,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatIf1SL1() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (true) println(\"foo\")");
     _builder.newLine();
@@ -355,10 +355,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatIf1SL2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if(true) println(\"foo\")");
     _builder.newLine();
@@ -368,10 +368,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatIf1ML1() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (true)");
     _builder.newLine();
@@ -384,10 +384,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatIf1ML2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if(true)");
     _builder.newLine();
@@ -525,10 +525,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatIfElse3() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (true)");
     _builder.newLine();
@@ -647,10 +647,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatFor2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("for (i : 1 .. 2) {");
     _builder.newLine();
@@ -665,10 +665,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatFor3() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("for (i : 1 .. 2)");
     _builder.newLine();
@@ -685,10 +685,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatWhile11() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("while (true)");
     _builder.newLine();
@@ -701,10 +701,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatWhile12() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("while(true)");
     _builder.newLine();
@@ -717,10 +717,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatWhile2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("while (true) {");
     _builder.newLine();
@@ -735,10 +735,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatWhile21() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("while (true)");
     _builder.newLine();
@@ -755,10 +755,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatDoWhile11() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("do");
     _builder.newLine();
@@ -773,10 +773,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatDoWhile12() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("do");
     _builder.newLine();
@@ -791,10 +791,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatDoWhile2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("do {");
     _builder.newLine();
@@ -809,10 +809,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatDoWhile3() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("do");
     _builder.newLine();
@@ -831,10 +831,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchSL() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
     _builder.newLine();
@@ -844,10 +844,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchSL1() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
     _builder.newLine();
@@ -857,10 +857,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchDefaultSL() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' { case \'y\': println(\'y\') default: println(\'z\') }");
     _builder.newLine();
@@ -870,10 +870,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchDefaultSL1() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' { case \'y\': println(\'y\') default: println(\'z\') }");
     _builder.newLine();
@@ -883,10 +883,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchCaseSL1() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\'");
     _builder.newLine();
@@ -930,10 +930,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchCaseDefaultSL1() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\'");
     _builder.newLine();
@@ -1097,10 +1097,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchMLBlock() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' {");
     _builder.newLine();
@@ -1133,10 +1133,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchDefaultMLBlock() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' {");
     _builder.newLine();
@@ -1178,10 +1178,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatSwitchMLBlock1() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\'");
     _builder.newLine();
@@ -1749,10 +1749,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatTryCatchExpression11() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("try");
     _builder.newLine();
@@ -1770,10 +1770,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatTryCatchExpression12() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("try");
     _builder.newLine();
@@ -1836,10 +1836,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatTryCatchFinallyExpression2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("try {");
     _builder.newLine();
@@ -1867,10 +1867,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatTryCatchFinallyExpression3() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XbaseFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("try");
     _builder.newLine();

@@ -25,11 +25,11 @@ public class NoJdtTestLanguageGenerator implements IGenerator {
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterator<Greeting> _filter = Iterators.<Greeting>filter(_allContents, Greeting.class);
     final Function1<Greeting,String> _function = new Function1<Greeting,String>() {
-        public String apply(final Greeting it) {
-          String _name = it.getName();
-          return _name;
-        }
-      };
+      public String apply(final Greeting it) {
+        String _name = it.getName();
+        return _name;
+      }
+    };
     Iterator<String> _map = IteratorExtensions.<Greeting, String>map(_filter, _function);
     String _join = IteratorExtensions.join(_map, ", ");
     String _plus = ("People to greet: " + _join);

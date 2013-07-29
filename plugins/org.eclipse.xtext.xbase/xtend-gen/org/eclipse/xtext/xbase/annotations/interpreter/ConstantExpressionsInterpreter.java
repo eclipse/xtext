@@ -164,11 +164,11 @@ public class ConstantExpressionsInterpreter {
         {
           EList<XExpression> _elements = _xListLiteral.getElements();
           final Function1<XExpression,Object> _function = new Function1<XExpression,Object>() {
-              public Object apply(final XExpression it) {
-                Object _evaluate = ConstantExpressionsInterpreter.this.evaluate(it, null);
-                return _evaluate;
-              }
-            };
+            public Object apply(final XExpression it) {
+              Object _evaluate = ConstantExpressionsInterpreter.this.evaluate(it, null);
+              return _evaluate;
+            }
+          };
           final List<Object> results = ListExtensions.<XExpression, Object>map(_elements, _function);
           Object[] _switchResult_1 = null;
           Object _head = IterableExtensions.<Object>head(results);

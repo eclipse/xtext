@@ -44,21 +44,21 @@ public class BasicExpressions {
   public void collections() {
     final ArrayList<String> list = CollectionLiterals.<String>newArrayList("Hello", "World");
     final Function1<String,String> _function = new Function1<String,String>() {
-        public String apply(final String it) {
-          String _upperCase = it.toUpperCase();
-          return _upperCase;
-        }
-      };
+      public String apply(final String it) {
+        String _upperCase = it.toUpperCase();
+        return _upperCase;
+      }
+    };
     List<String> _map = ListExtensions.<String, String>map(list, _function);
     String _head = IterableExtensions.<String>head(_map);
     Assert.assertEquals("HELLO", _head);
     final HashSet<Integer> set = CollectionLiterals.<Integer>newHashSet(Integer.valueOf(1), Integer.valueOf(3), Integer.valueOf(5));
     final Function1<Integer,Boolean> _function_1 = new Function1<Integer,Boolean>() {
-        public Boolean apply(final Integer it) {
-          boolean _greaterEqualsThan = ((it).intValue() >= 3);
-          return Boolean.valueOf(_greaterEqualsThan);
-        }
-      };
+      public Boolean apply(final Integer it) {
+        boolean _greaterEqualsThan = ((it).intValue() >= 3);
+        return Boolean.valueOf(_greaterEqualsThan);
+      }
+    };
     Iterable<Integer> _filter = IterableExtensions.<Integer>filter(set, _function_1);
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(2, _size);

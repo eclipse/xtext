@@ -265,11 +265,11 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     boolean _and_2 = false;
     List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
     final Function1<AbstractParameterBuilder,Boolean> _function = new Function1<AbstractParameterBuilder,Boolean>() {
-        public Boolean apply(final AbstractParameterBuilder it) {
-          boolean _isValid = it.isValid();
-          return Boolean.valueOf(_isValid);
-        }
-      };
+      public Boolean apply(final AbstractParameterBuilder it) {
+        boolean _isValid = it.isValid();
+        return Boolean.valueOf(_isValid);
+      }
+    };
     boolean _forall = IterableExtensions.<AbstractParameterBuilder>forall(_parameterBuilders, _function);
     if (!_forall) {
       _and_2 = false;

@@ -29,12 +29,12 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
     T _delegate = this.getDelegate();
     EList<XAnnotation> _annotations = _delegate.getAnnotations();
     final Function1<XAnnotation,AnnotationReference> _function = new Function1<XAnnotation,AnnotationReference>() {
-        public AnnotationReference apply(final XAnnotation it) {
-          CompilationUnitImpl _compilationUnit = XtendAnnotationTargetImpl.this.getCompilationUnit();
-          AnnotationReference _annotationReference = _compilationUnit.toAnnotationReference(it);
-          return _annotationReference;
-        }
-      };
+      public AnnotationReference apply(final XAnnotation it) {
+        CompilationUnitImpl _compilationUnit = XtendAnnotationTargetImpl.this.getCompilationUnit();
+        AnnotationReference _annotationReference = _compilationUnit.toAnnotationReference(it);
+        return _annotationReference;
+      }
+    };
     List<AnnotationReference> _map = ListExtensions.<XAnnotation, AnnotationReference>map(_annotations, _function);
     ImmutableList<AnnotationReference> _copyOf = ImmutableList.<AnnotationReference>copyOf(_map);
     return _copyOf;
@@ -43,12 +43,12 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
   public AnnotationReference findAnnotation(final Type annotationType) {
     Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
     final Function1<AnnotationReference,Boolean> _function = new Function1<AnnotationReference,Boolean>() {
-        public Boolean apply(final AnnotationReference it) {
-          AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
-          boolean _equals = Objects.equal(_annotationTypeDeclaration, annotationType);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final AnnotationReference it) {
+        AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
+        boolean _equals = Objects.equal(_annotationTypeDeclaration, annotationType);
+        return Boolean.valueOf(_equals);
+      }
+    };
     AnnotationReference _findFirst = IterableExtensions.findFirst(_annotations, _function);
     return _findFirst;
   }

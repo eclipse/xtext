@@ -233,41 +233,41 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     {
       List<AbstractRule> _allRules = GrammarUtil.allRules(this.grammar);
       final Function1<AbstractRule,Boolean> _function = new Function1<AbstractRule,Boolean>() {
-          public Boolean apply(final AbstractRule it) {
-            boolean _isEObjectRule = GrammarUtil.isEObjectRule(it);
-            return Boolean.valueOf(_isEObjectRule);
-          }
-        };
+        public Boolean apply(final AbstractRule it) {
+          boolean _isEObjectRule = GrammarUtil.isEObjectRule(it);
+          return Boolean.valueOf(_isEObjectRule);
+        }
+      };
       final Iterable<AbstractRule> rules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
       final Function1<AbstractRule,Iterable<RuleCall>> _function_1 = new Function1<AbstractRule,Iterable<RuleCall>>() {
-          public Iterable<RuleCall> apply(final AbstractRule r) {
-            List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(r);
-            final Function1<RuleCall,Boolean> _function = new Function1<RuleCall,Boolean>() {
-                public Boolean apply(final RuleCall e) {
-                  boolean _isUnassignedRuleCall = AbstractSyntacticSequencer.this.isUnassignedRuleCall(e);
-                  return Boolean.valueOf(_isUnassignedRuleCall);
-                }
-              };
-            Iterable<RuleCall> _filter = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
-            return _filter;
-          }
-        };
+        public Iterable<RuleCall> apply(final AbstractRule r) {
+          List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(r);
+          final Function1<RuleCall,Boolean> _function = new Function1<RuleCall,Boolean>() {
+            public Boolean apply(final RuleCall e) {
+              boolean _isUnassignedRuleCall = AbstractSyntacticSequencer.this.isUnassignedRuleCall(e);
+              return Boolean.valueOf(_isUnassignedRuleCall);
+            }
+          };
+          Iterable<RuleCall> _filter = IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
+          return _filter;
+        }
+      };
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
       final Iterable<RuleCall> calls = Iterables.<RuleCall>concat(_map);
       final Function1<RuleCall,AbstractRule> _function_2 = new Function1<RuleCall,AbstractRule>() {
-          public AbstractRule apply(final RuleCall it) {
-            AbstractRule _rule = it.getRule();
-            return _rule;
-          }
-        };
+        public AbstractRule apply(final RuleCall it) {
+          AbstractRule _rule = it.getRule();
+          return _rule;
+        }
+      };
       Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(calls, _function_2);
       Set<AbstractRule> _set = IterableExtensions.<AbstractRule>toSet(_map_1);
       final Function1<AbstractRule,String> _function_3 = new Function1<AbstractRule,String>() {
-          public String apply(final AbstractRule it) {
-            String _name = it.getName();
-            return _name;
-          }
-        };
+        public String apply(final AbstractRule it) {
+          String _name = it.getName();
+          return _name;
+        }
+      };
       List<AbstractRule> _sortBy = IterableExtensions.<AbstractRule, String>sortBy(_set, _function_3);
       _xblockexpression = (_sortBy);
     }
@@ -338,11 +338,11 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _matched=true;
         EList<AbstractElement> _elements = _group.getElements();
         final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
-            public String apply(final AbstractElement e) {
-              String _defaultValue = AbstractSyntacticSequencer.this.defaultValue(e, visited);
-              return _defaultValue;
-            }
-          };
+          public String apply(final AbstractElement e) {
+            String _defaultValue = AbstractSyntacticSequencer.this.defaultValue(e, visited);
+            return _defaultValue;
+          }
+        };
         List<String> _map = ListExtensions.<AbstractElement, String>map(_elements, _function);
         String _join = IterableExtensions.join(_map);
         _switchResult = _join;
@@ -446,11 +446,11 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _matched=true;
         BidiIterable<INode> _children = _iCompositeNode.getChildren();
         final Function1<INode,String> _function = new Function1<INode,String>() {
-            public String apply(final INode it) {
-              String _textWithoutComments = AbstractSyntacticSequencer.this.textWithoutComments(it);
-              return _textWithoutComments;
-            }
-          };
+          public String apply(final INode it) {
+            String _textWithoutComments = AbstractSyntacticSequencer.this.textWithoutComments(it);
+            return _textWithoutComments;
+          }
+        };
         Iterable<String> _map = IterableExtensions.<INode, String>map(_children, _function);
         String _join = IterableExtensions.join(_map);
         _switchResult = _join;

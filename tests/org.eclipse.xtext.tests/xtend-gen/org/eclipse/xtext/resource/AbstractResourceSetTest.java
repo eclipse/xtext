@@ -18,17 +18,17 @@ public abstract class AbstractResourceSetTest {
   public void testDemandLoadedResourcesAreInMap() {
     final ResourceSetImpl rs = this.createEmptyResourceSet();
     final Factory _function = new Factory() {
-        public Resource createResource(final URI uri) {
-          NullResource _xblockexpression = null;
-          {
-            NullResource _nullResource = new NullResource();
-            final NullResource result = _nullResource;
-            result.setURI(uri);
-            _xblockexpression = (result);
-          }
-          return _xblockexpression;
+      public Resource createResource(final URI uri) {
+        NullResource _xblockexpression = null;
+        {
+          NullResource _nullResource = new NullResource();
+          final NullResource result = _nullResource;
+          result.setURI(uri);
+          _xblockexpression = (result);
         }
-      };
+        return _xblockexpression;
+      }
+    };
     final Factory nullFactory = _function;
     Registry _resourceFactoryRegistry = rs.getResourceFactoryRegistry();
     Map<String,Object> _extensionToFactoryMap = _resourceFactoryRegistry.getExtensionToFactoryMap();

@@ -77,13 +77,13 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       JvmConstructor _inferredConstructor = this.associations.getInferredConstructor(fooClass);
       ArrayList<EObject> _newArrayList = CollectionLiterals.<EObject>newArrayList(fooFunction, _inferredType, _inferredConstructor);
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
-          public void apply(final EObject it) {
-            String _string = it.toString();
-            URI _uRI = EcoreUtil.getURI(it);
-            boolean _contains = Iterables.contains(dependentElementURIs, _uRI);
-            Assert.assertTrue(_string, _contains);
-          }
-        };
+        public void apply(final EObject it) {
+          String _string = it.toString();
+          URI _uRI = EcoreUtil.getURI(it);
+          boolean _contains = Iterables.contains(dependentElementURIs, _uRI);
+          Assert.assertTrue(_string, _contains);
+        }
+      };
       IterableExtensions.<EObject>forEach(_newArrayList, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -125,21 +125,21 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       EList<JvmMember> _members_2 = _inferredType.getMembers();
       Iterable<EObject> _plus = Iterables.<EObject>concat(_members_1, _members_2);
       final Predicate<EObject> _function = new Predicate<EObject>() {
-          public boolean apply(final EObject it) {
-            boolean _not = (!(it instanceof JvmConstructor));
-            return _not;
-          }
-        };
+        public boolean apply(final EObject it) {
+          boolean _not = (!(it instanceof JvmConstructor));
+          return _not;
+        }
+      };
       Iterable<EObject> _filter = Iterables.<EObject>filter(_plus, _function);
       List<EObject> _list = IterableExtensions.<EObject>toList(_filter);
       final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
-          public void apply(final EObject it) {
-            String _string = it.toString();
-            URI _uRI = EcoreUtil.getURI(it);
-            boolean _contains = Iterables.contains(dependentElementURIs, _uRI);
-            Assert.assertTrue(_string, _contains);
-          }
-        };
+        public void apply(final EObject it) {
+          String _string = it.toString();
+          URI _uRI = EcoreUtil.getURI(it);
+          boolean _contains = Iterables.contains(dependentElementURIs, _uRI);
+          Assert.assertTrue(_string, _contains);
+        }
+      };
       IterableExtensions.<EObject>forEach(_list, _function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

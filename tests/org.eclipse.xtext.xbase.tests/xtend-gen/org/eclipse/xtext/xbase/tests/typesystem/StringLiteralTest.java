@@ -52,16 +52,16 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
     XStringLiteral _head = IterableExtensions.<XStringLiteral>head(featureCalls);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
     final Procedure2<XStringLiteral,Integer> _function = new Procedure2<XStringLiteral,Integer>() {
-        public void apply(final XStringLiteral featureCall, final Integer index) {
-          final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for literal at ");
-          _builder.append(index, "");
-          String _get = types[(index).intValue()];
-          String _simpleName = type.getSimpleName();
-          Assert.assertEquals(_builder.toString(), _get, _simpleName);
-        }
-      };
+      public void apply(final XStringLiteral featureCall, final Integer index) {
+        final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("failed for literal at ");
+        _builder.append(index, "");
+        Object _get = types[(index).intValue()];
+        String _simpleName = type.getSimpleName();
+        Assert.assertEquals(_builder.toString(), _get, _simpleName);
+      }
+    };
     IterableExtensions.<XStringLiteral>forEach(featureCalls, _function);
   }
   
@@ -72,12 +72,12 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
       Iterator<XStringLiteral> _filter = Iterators.<XStringLiteral>filter(_eAll, XStringLiteral.class);
       final List<XStringLiteral> featureCalls = IteratorExtensions.<XStringLiteral>toList(_filter);
       final Function1<XStringLiteral,Integer> _function = new Function1<XStringLiteral,Integer>() {
-          public Integer apply(final XStringLiteral it) {
-            ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
-            int _offset = _findActualNodeFor.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
+        public Integer apply(final XStringLiteral it) {
+          ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
+          int _offset = _findActualNodeFor.getOffset();
+          return Integer.valueOf(_offset);
+        }
+      };
       return IterableExtensions.<XStringLiteral, Integer>sortBy(featureCalls, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

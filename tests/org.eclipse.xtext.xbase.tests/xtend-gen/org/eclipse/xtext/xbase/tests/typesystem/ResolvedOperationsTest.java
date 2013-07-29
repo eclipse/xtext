@@ -82,12 +82,12 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     final Procedure1<IResolvedOperation> _function = new Procedure1<IResolvedOperation>() {
-        public void apply(final IResolvedOperation it) {
-          JvmOperation _declaration = it.getDeclaration();
-          boolean _isAbstract = _declaration.isAbstract();
-          Assert.assertFalse(_isAbstract);
-        }
-      };
+      public void apply(final IResolvedOperation it) {
+        JvmOperation _declaration = it.getDeclaration();
+        boolean _isAbstract = _declaration.isAbstract();
+        Assert.assertFalse(_isAbstract);
+      }
+    };
     IterableExtensions.<IResolvedOperation>forEach(all, _function);
   }
   
@@ -98,12 +98,12 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
-        public Boolean apply(final IResolvedOperation it) {
-          JvmOperation _declaration = it.getDeclaration();
-          boolean _isAbstract = _declaration.isAbstract();
-          return Boolean.valueOf(_isAbstract);
-        }
-      };
+      public Boolean apply(final IResolvedOperation it) {
+        JvmOperation _declaration = it.getDeclaration();
+        boolean _isAbstract = _declaration.isAbstract();
+        return Boolean.valueOf(_isAbstract);
+      }
+    };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
     final IResolvedOperation iterator = Iterables.<IResolvedOperation>getOnlyElement(_filter);
     JvmOperation _declaration = iterator.getDeclaration();
@@ -119,24 +119,24 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     Assert.assertFalse(_isEmpty);
     String _string = all.toString();
     final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
-        public Boolean apply(final IResolvedOperation it) {
-          JvmOperation _declaration = it.getDeclaration();
-          boolean _isAbstract = _declaration.isAbstract();
-          return Boolean.valueOf(_isAbstract);
-        }
-      };
+      public Boolean apply(final IResolvedOperation it) {
+        JvmOperation _declaration = it.getDeclaration();
+        boolean _isAbstract = _declaration.isAbstract();
+        return Boolean.valueOf(_isAbstract);
+      }
+    };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(_string, 2, _size);
     String _string_1 = all.toString();
     int _plus = (1 + 6);
     final Function1<IResolvedOperation,Boolean> _function_1 = new Function1<IResolvedOperation,Boolean>() {
-        public Boolean apply(final IResolvedOperation it) {
-          JvmOperation _declaration = it.getDeclaration();
-          boolean _isFinal = _declaration.isFinal();
-          return Boolean.valueOf(_isFinal);
-        }
-      };
+      public Boolean apply(final IResolvedOperation it) {
+        JvmOperation _declaration = it.getDeclaration();
+        boolean _isFinal = _declaration.isFinal();
+        return Boolean.valueOf(_isFinal);
+      }
+    };
     Iterable<IResolvedOperation> _filter_1 = IterableExtensions.<IResolvedOperation>filter(all, _function_1);
     int _size_1 = IterableExtensions.size(_filter_1);
     Assert.assertEquals(_string_1, _plus, _size_1);
@@ -154,23 +154,23 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     String _string = all.toString();
     int _plus = (1 + 1);
     final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
-        public Boolean apply(final IResolvedOperation it) {
-          JvmOperation _declaration = it.getDeclaration();
-          boolean _isAbstract = _declaration.isAbstract();
-          return Boolean.valueOf(_isAbstract);
-        }
-      };
+      public Boolean apply(final IResolvedOperation it) {
+        JvmOperation _declaration = it.getDeclaration();
+        boolean _isAbstract = _declaration.isAbstract();
+        return Boolean.valueOf(_isAbstract);
+      }
+    };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(_string, _plus, _size);
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
     final Function1<IResolvedOperation,Boolean> _function_1 = new Function1<IResolvedOperation,Boolean>() {
-        public Boolean apply(final IResolvedOperation it) {
-          JvmOperation _declaration = it.getDeclaration();
-          boolean _isAbstract = _declaration.isAbstract();
-          return Boolean.valueOf(_isAbstract);
-        }
-      };
+      public Boolean apply(final IResolvedOperation it) {
+        JvmOperation _declaration = it.getDeclaration();
+        boolean _isAbstract = _declaration.isAbstract();
+        return Boolean.valueOf(_isAbstract);
+      }
+    };
     Iterable<IResolvedOperation> _filter_1 = IterableExtensions.<IResolvedOperation>filter(declared, _function_1);
     int _size_1 = IterableExtensions.size(_filter_1);
     Assert.assertEquals(1, _size_1);
@@ -187,36 +187,36 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     Assert.assertEquals(2, _size_1);
     List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
     final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
-        public void apply(final IResolvedConstructor it) {
-          JvmConstructor _declaration = it.getDeclaration();
-          EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-          int _size = _parameters.size();
-          final int _switchValue = _size;
-          boolean _matched = false;
-          if (!_matched) {
-            if (Objects.equal(_switchValue,1)) {
-              _matched=true;
-              String _resolvedSignature = it.getResolvedSignature();
-              Assert.assertEquals("SoftReference(T)", _resolvedSignature);
-              String _resolvedErasureSignature = it.getResolvedErasureSignature();
-              Assert.assertEquals("SoftReference(java.lang.Object)", _resolvedErasureSignature);
-            }
-          }
-          if (!_matched) {
-            if (Objects.equal(_switchValue,2)) {
-              _matched=true;
-              String _resolvedSignature_1 = it.getResolvedSignature();
-              Assert.assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", _resolvedSignature_1);
-              String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
-              Assert.assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
-            }
-          }
-          if (!_matched) {
-            String _plus = ("Unexpected constructor: " + it);
-            Assert.fail(_plus);
+      public void apply(final IResolvedConstructor it) {
+        JvmConstructor _declaration = it.getDeclaration();
+        EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+        int _size = _parameters.size();
+        final int _switchValue = _size;
+        boolean _matched = false;
+        if (!_matched) {
+          if (Objects.equal(_switchValue,1)) {
+            _matched=true;
+            String _resolvedSignature = it.getResolvedSignature();
+            Assert.assertEquals("SoftReference(T)", _resolvedSignature);
+            String _resolvedErasureSignature = it.getResolvedErasureSignature();
+            Assert.assertEquals("SoftReference(java.lang.Object)", _resolvedErasureSignature);
           }
         }
-      };
+        if (!_matched) {
+          if (Objects.equal(_switchValue,2)) {
+            _matched=true;
+            String _resolvedSignature_1 = it.getResolvedSignature();
+            Assert.assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", _resolvedSignature_1);
+            String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
+            Assert.assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
+          }
+        }
+        if (!_matched) {
+          String _plus = ("Unexpected constructor: " + it);
+          Assert.fail(_plus);
+        }
+      }
+    };
     IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
   }
   
@@ -231,36 +231,36 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     Assert.assertEquals(2, _size_1);
     List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
     final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
-        public void apply(final IResolvedConstructor it) {
-          JvmConstructor _declaration = it.getDeclaration();
-          EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-          int _size = _parameters.size();
-          final int _switchValue = _size;
-          boolean _matched = false;
-          if (!_matched) {
-            if (Objects.equal(_switchValue,1)) {
-              _matched=true;
-              String _resolvedSignature = it.getResolvedSignature();
-              Assert.assertEquals("SoftReference(java.lang.String)", _resolvedSignature);
-              String _resolvedErasureSignature = it.getResolvedErasureSignature();
-              Assert.assertEquals("SoftReference(java.lang.String)", _resolvedErasureSignature);
-            }
-          }
-          if (!_matched) {
-            if (Objects.equal(_switchValue,2)) {
-              _matched=true;
-              String _resolvedSignature_1 = it.getResolvedSignature();
-              Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", _resolvedSignature_1);
-              String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
-              Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
-            }
-          }
-          if (!_matched) {
-            String _plus = ("Unexpected constructor: " + it);
-            Assert.fail(_plus);
+      public void apply(final IResolvedConstructor it) {
+        JvmConstructor _declaration = it.getDeclaration();
+        EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+        int _size = _parameters.size();
+        final int _switchValue = _size;
+        boolean _matched = false;
+        if (!_matched) {
+          if (Objects.equal(_switchValue,1)) {
+            _matched=true;
+            String _resolvedSignature = it.getResolvedSignature();
+            Assert.assertEquals("SoftReference(java.lang.String)", _resolvedSignature);
+            String _resolvedErasureSignature = it.getResolvedErasureSignature();
+            Assert.assertEquals("SoftReference(java.lang.String)", _resolvedErasureSignature);
           }
         }
-      };
+        if (!_matched) {
+          if (Objects.equal(_switchValue,2)) {
+            _matched=true;
+            String _resolvedSignature_1 = it.getResolvedSignature();
+            Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", _resolvedSignature_1);
+            String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
+            Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
+          }
+        }
+        if (!_matched) {
+          String _plus = ("Unexpected constructor: " + it);
+          Assert.fail(_plus);
+        }
+      }
+    };
     IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
   }
 }

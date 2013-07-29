@@ -26,17 +26,17 @@ public abstract class AbstractOldAPIFeatureCallTypeTest extends AbstractFeatureC
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XAbstractFeatureCall> featureCalls = this.findFeatureCalls(expressionWithQualifiedNames);
     final Procedure2<XAbstractFeatureCall,Integer> _function = new Procedure2<XAbstractFeatureCall,Integer>() {
-        public void apply(final XAbstractFeatureCall featureCall, final Integer index) {
-          ITypeProvider _typeProvider = AbstractOldAPIFeatureCallTypeTest.this.getTypeProvider();
-          final JvmTypeReference type = _typeProvider.getType(featureCall);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for feature call at ");
-          _builder.append(index, "");
-          String _get = types[(index).intValue()];
-          String _simpleName = type.getSimpleName();
-          Assert.assertEquals(_builder.toString(), _get, _simpleName);
-        }
-      };
+      public void apply(final XAbstractFeatureCall featureCall, final Integer index) {
+        ITypeProvider _typeProvider = AbstractOldAPIFeatureCallTypeTest.this.getTypeProvider();
+        final JvmTypeReference type = _typeProvider.getType(featureCall);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("failed for feature call at ");
+        _builder.append(index, "");
+        Object _get = types[(index).intValue()];
+        String _simpleName = type.getSimpleName();
+        Assert.assertEquals(_builder.toString(), _get, _simpleName);
+      }
+    };
     IterableExtensions.<XAbstractFeatureCall>forEach(featureCalls, _function);
   }
   

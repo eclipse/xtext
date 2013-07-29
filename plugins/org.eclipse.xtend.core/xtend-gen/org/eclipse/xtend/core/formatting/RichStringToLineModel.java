@@ -313,19 +313,19 @@ public class RichStringToLineModel extends ForLoopOnce {
         int _minus = (_length_1 - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function2<Boolean,Integer,Boolean> _function = new Function2<Boolean,Integer,Boolean>() {
-            public Boolean apply(final Boolean v, final Integer i) {
-              boolean _or = false;
-              if ((v).booleanValue()) {
-                _or = true;
-              } else {
-                char _charAt = text.charAt((i).intValue());
-                boolean _isWhitespace = Character.isWhitespace(_charAt);
-                boolean _not = (!_isWhitespace);
-                _or = ((v).booleanValue() || _not);
-              }
-              return Boolean.valueOf(_or);
+          public Boolean apply(final Boolean v, final Integer i) {
+            boolean _or = false;
+            if ((v).booleanValue()) {
+              _or = true;
+            } else {
+              char _charAt = text.charAt((i).intValue());
+              boolean _isWhitespace = Character.isWhitespace(_charAt);
+              boolean _not = (!_isWhitespace);
+              _or = ((v).booleanValue() || _not);
             }
-          };
+            return Boolean.valueOf(_or);
+          }
+        };
         Boolean _fold = IterableExtensions.<Integer, Boolean>fold(_upTo, Boolean.valueOf(false), _function);
         _and = (_greaterThan && (_fold).booleanValue());
       }

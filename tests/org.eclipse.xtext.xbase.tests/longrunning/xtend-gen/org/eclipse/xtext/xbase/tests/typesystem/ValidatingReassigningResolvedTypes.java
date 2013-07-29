@@ -101,25 +101,25 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
   protected List<LightweightBoundTypeArgument> getHints(final Object handle) {
     final List<LightweightBoundTypeArgument> result = super.getHints(handle);
     final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
-        public void apply(final LightweightBoundTypeArgument it) {
-          boolean _and = false;
-          LightweightTypeReference _typeReference = it.getTypeReference();
-          boolean _notEquals = (!Objects.equal(_typeReference, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            LightweightTypeReference _typeReference_1 = it.getTypeReference();
-            ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
-            boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
-            boolean _not = (!_isOwnedBy);
-            _and = (_notEquals && _not);
-          }
-          if (_and) {
-            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
-            throw _illegalArgumentException;
-          }
+      public void apply(final LightweightBoundTypeArgument it) {
+        boolean _and = false;
+        LightweightTypeReference _typeReference = it.getTypeReference();
+        boolean _notEquals = (!Objects.equal(_typeReference, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          LightweightTypeReference _typeReference_1 = it.getTypeReference();
+          ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
+          boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
+          boolean _not = (!_isOwnedBy);
+          _and = (_notEquals && _not);
         }
-      };
+        if (_and) {
+          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
+          throw _illegalArgumentException;
+        }
+      }
+    };
     IterableExtensions.<LightweightBoundTypeArgument>forEach(result, _function);
     return result;
   }
@@ -150,25 +150,25 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
   public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
     final List<LightweightBoundTypeArgument> result = super.getAllHints(handle);
     final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
-        public void apply(final LightweightBoundTypeArgument it) {
-          boolean _and = false;
-          LightweightTypeReference _typeReference = it.getTypeReference();
-          boolean _notEquals = (!Objects.equal(_typeReference, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            LightweightTypeReference _typeReference_1 = it.getTypeReference();
-            ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
-            boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
-            boolean _not = (!_isOwnedBy);
-            _and = (_notEquals && _not);
-          }
-          if (_and) {
-            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("hint is not owned by this resolved types");
-            throw _illegalArgumentException;
-          }
+      public void apply(final LightweightBoundTypeArgument it) {
+        boolean _and = false;
+        LightweightTypeReference _typeReference = it.getTypeReference();
+        boolean _notEquals = (!Objects.equal(_typeReference, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          LightweightTypeReference _typeReference_1 = it.getTypeReference();
+          ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
+          boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
+          boolean _not = (!_isOwnedBy);
+          _and = (_notEquals && _not);
         }
-      };
+        if (_and) {
+          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("hint is not owned by this resolved types");
+          throw _illegalArgumentException;
+        }
+      }
+    };
     IterableExtensions.<LightweightBoundTypeArgument>forEach(result, _function);
     return result;
   }
@@ -249,16 +249,16 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
   
   public LightweightTypeReference getMergedType(final List<LightweightTypeReference> types) {
     final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
-        public void apply(final LightweightTypeReference it) {
-          ITypeReferenceOwner _owner = it.getOwner();
-          boolean _isOwnedBy = it.isOwnedBy(_owner);
-          boolean _not = (!_isOwnedBy);
-          if (_not) {
-            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-            throw _illegalArgumentException;
-          }
+      public void apply(final LightweightTypeReference it) {
+        ITypeReferenceOwner _owner = it.getOwner();
+        boolean _isOwnedBy = it.isOwnedBy(_owner);
+        boolean _not = (!_isOwnedBy);
+        if (_not) {
+          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
+          throw _illegalArgumentException;
         }
-      };
+      }
+    };
     IterableExtensions.<LightweightTypeReference>forEach(types, _function);
     final LightweightTypeReference result = super.getMergedType(types);
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
@@ -273,16 +273,16 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
   
   public TypeData mergeTypeData(final XExpression expression, final Collection<TypeData> allValues, final boolean returnType, final boolean nullIfEmpty) {
     final Procedure1<TypeData> _function = new Procedure1<TypeData>() {
-        public void apply(final TypeData it) {
-          ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
-          boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
-          boolean _not = (!_isOwnedBy);
-          if (_not) {
-            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-            throw _illegalArgumentException;
-          }
+      public void apply(final TypeData it) {
+        ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
+        boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
+        boolean _not = (!_isOwnedBy);
+        if (_not) {
+          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
+          throw _illegalArgumentException;
         }
-      };
+      }
+    };
     IterableExtensions.<TypeData>forEach(allValues, _function);
     final TypeData result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty);
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();

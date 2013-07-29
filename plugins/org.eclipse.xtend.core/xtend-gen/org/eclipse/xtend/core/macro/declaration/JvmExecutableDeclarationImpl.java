@@ -37,12 +37,12 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     T _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
-        public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
-          CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-          MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-          return _typeParameterDeclaration;
-        }
-      };
+      public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
+        CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
+        MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
+        return _typeParameterDeclaration;
+      }
+    };
     List<MutableTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
     return _map;
   }
@@ -57,12 +57,12 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     T _delegate = this.getDelegate();
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
     final Function1<JvmFormalParameter,MutableParameterDeclaration> _function = new Function1<JvmFormalParameter,MutableParameterDeclaration>() {
-        public MutableParameterDeclaration apply(final JvmFormalParameter it) {
-          CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-          MutableParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
-          return _parameterDeclaration;
-        }
-      };
+      public MutableParameterDeclaration apply(final JvmFormalParameter it) {
+        CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
+        MutableParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
+        return _parameterDeclaration;
+      }
+    };
     List<MutableParameterDeclaration> _map = ListExtensions.<JvmFormalParameter, MutableParameterDeclaration>map(_parameters, _function);
     return _map;
   }
@@ -71,12 +71,12 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
-        public TypeReference apply(final JvmTypeReference it) {
-          CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-          return _typeReference;
-        }
-      };
+      public TypeReference apply(final JvmTypeReference it) {
+        CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
+        TypeReference _typeReference = _compilationUnit.toTypeReference(it);
+        return _typeReference;
+      }
+    };
     List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
     return _map;
   }

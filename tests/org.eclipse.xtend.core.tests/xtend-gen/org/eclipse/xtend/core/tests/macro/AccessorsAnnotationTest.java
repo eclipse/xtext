@@ -32,24 +32,24 @@ public class AccessorsAnnotationTest extends AbstractActiveAnnotationTest {
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-        public void accept(final CompilationResult it) {
-          final TransformationContext ctx = it.getTransformationContext();
-          final MutableClassDeclaration classA = ctx.findClass("A");
-          MutableMethodDeclaration _findMethod = classA.findMethod("getField");
-          Visibility _visibility = _findMethod.getVisibility();
-          Assert.assertEquals(Visibility.PUBLIC, _visibility);
-          TypeReference _string = ctx.getString();
-          MutableMethodDeclaration _findMethod_1 = classA.findMethod("setField", _string);
-          Visibility _visibility_1 = _findMethod_1.getVisibility();
-          Assert.assertEquals(Visibility.PUBLIC, _visibility_1);
-          MutableMethodDeclaration _findMethod_2 = classA.findMethod("getFinalField");
-          Visibility _visibility_2 = _findMethod_2.getVisibility();
-          Assert.assertEquals(Visibility.PUBLIC, _visibility_2);
-          TypeReference _string_1 = ctx.getString();
-          MutableMethodDeclaration _findMethod_3 = classA.findMethod("setFinalField", _string_1);
-          Assert.assertNull(_findMethod_3);
-        }
-      };
+      public void accept(final CompilationResult it) {
+        final TransformationContext ctx = it.getTransformationContext();
+        final MutableClassDeclaration classA = ctx.findClass("A");
+        MutableMethodDeclaration _findMethod = classA.findMethod("getField");
+        Visibility _visibility = _findMethod.getVisibility();
+        Assert.assertEquals(Visibility.PUBLIC, _visibility);
+        TypeReference _string = ctx.getString();
+        MutableMethodDeclaration _findMethod_1 = classA.findMethod("setField", _string);
+        Visibility _visibility_1 = _findMethod_1.getVisibility();
+        Assert.assertEquals(Visibility.PUBLIC, _visibility_1);
+        MutableMethodDeclaration _findMethod_2 = classA.findMethod("getFinalField");
+        Visibility _visibility_2 = _findMethod_2.getVisibility();
+        Assert.assertEquals(Visibility.PUBLIC, _visibility_2);
+        TypeReference _string_1 = ctx.getString();
+        MutableMethodDeclaration _findMethod_3 = classA.findMethod("setFinalField", _string_1);
+        Assert.assertNull(_findMethod_3);
+      }
+    };
     this._xtendCompilerTester.compile(_builder, _function);
   }
   
@@ -76,21 +76,21 @@ public class AccessorsAnnotationTest extends AbstractActiveAnnotationTest {
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-        public void accept(final CompilationResult it) {
-          final TransformationContext ctx = it.getTransformationContext();
-          final MutableClassDeclaration classA = ctx.findClass("A");
-          MutableMethodDeclaration _findMethod = classA.findMethod("getField");
-          Visibility _visibility = _findMethod.getVisibility();
-          Assert.assertEquals(Visibility.PRIVATE, _visibility);
-          TypeReference _string = ctx.getString();
-          MutableMethodDeclaration _findMethod_1 = classA.findMethod("setField", _string);
-          Visibility _visibility_1 = _findMethod_1.getVisibility();
-          Assert.assertEquals(Visibility.PUBLIC, _visibility_1);
-          Iterable<? extends MutableMethodDeclaration> _declaredMethods = classA.getDeclaredMethods();
-          int _size = IterableExtensions.size(_declaredMethods);
-          Assert.assertEquals(2, _size);
-        }
-      };
+      public void accept(final CompilationResult it) {
+        final TransformationContext ctx = it.getTransformationContext();
+        final MutableClassDeclaration classA = ctx.findClass("A");
+        MutableMethodDeclaration _findMethod = classA.findMethod("getField");
+        Visibility _visibility = _findMethod.getVisibility();
+        Assert.assertEquals(Visibility.PRIVATE, _visibility);
+        TypeReference _string = ctx.getString();
+        MutableMethodDeclaration _findMethod_1 = classA.findMethod("setField", _string);
+        Visibility _visibility_1 = _findMethod_1.getVisibility();
+        Assert.assertEquals(Visibility.PUBLIC, _visibility_1);
+        Iterable<? extends MutableMethodDeclaration> _declaredMethods = classA.getDeclaredMethods();
+        int _size = IterableExtensions.size(_declaredMethods);
+        Assert.assertEquals(2, _size);
+      }
+    };
     this._xtendCompilerTester.compile(_builder, _function);
   }
 }

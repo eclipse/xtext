@@ -83,20 +83,20 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         Assert.assertNotNull(mappedTypes);
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
         final Function1<LightweightBoundTypeArgument,String> _function = new Function1<LightweightBoundTypeArgument,String>() {
-            public String apply(final LightweightBoundTypeArgument it) {
-              StringConcatenation _builder = new StringConcatenation();
-              LightweightTypeReference _typeReference = it.getTypeReference();
-              _builder.append(_typeReference, "");
-              _builder.append("(");
-              VarianceInfo _declaredVariance = it.getDeclaredVariance();
-              _builder.append(_declaredVariance, "");
-              _builder.append("/");
-              VarianceInfo _actualVariance = it.getActualVariance();
-              _builder.append(_actualVariance, "");
-              _builder.append(")");
-              return _builder.toString();
-            }
-          };
+          public String apply(final LightweightBoundTypeArgument it) {
+            StringConcatenation _builder = new StringConcatenation();
+            LightweightTypeReference _typeReference = it.getTypeReference();
+            _builder.append(_typeReference, "");
+            _builder.append("(");
+            VarianceInfo _declaredVariance = it.getDeclaredVariance();
+            _builder.append(_declaredVariance, "");
+            _builder.append("/");
+            VarianceInfo _actualVariance = it.getActualVariance();
+            _builder.append(_actualVariance, "");
+            _builder.append(")");
+            return _builder.toString();
+          }
+        };
         List<String> _map = ListExtensions.<LightweightBoundTypeArgument, String>map(mappingData, _function);
         String _string = _map.toString();
         int _size = ((List<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mappedTypes)).size();
@@ -104,15 +104,15 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         Assert.assertEquals(_string, _size, _size_1);
         List<Triple<String,VarianceInfo,VarianceInfo>> _list = IterableExtensions.<Triple<String,VarianceInfo,VarianceInfo>>toList(((Iterable<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mappedTypes)));
         final Function1<LightweightBoundTypeArgument,Triple<String,VarianceInfo,VarianceInfo>> _function_1 = new Function1<LightweightBoundTypeArgument,Triple<String,VarianceInfo,VarianceInfo>>() {
-            public Triple<String,VarianceInfo,VarianceInfo> apply(final LightweightBoundTypeArgument it) {
-              LightweightTypeReference _typeReference = it.getTypeReference();
-              String _string = _typeReference.toString();
-              VarianceInfo _declaredVariance = it.getDeclaredVariance();
-              VarianceInfo _actualVariance = it.getActualVariance();
-              Triple<String,VarianceInfo,VarianceInfo> _create = Tuples.<String, VarianceInfo, VarianceInfo>create(_string, _declaredVariance, _actualVariance);
-              return _create;
-            }
-          };
+          public Triple<String,VarianceInfo,VarianceInfo> apply(final LightweightBoundTypeArgument it) {
+            LightweightTypeReference _typeReference = it.getTypeReference();
+            String _string = _typeReference.toString();
+            VarianceInfo _declaredVariance = it.getDeclaredVariance();
+            VarianceInfo _actualVariance = it.getActualVariance();
+            Triple<String,VarianceInfo,VarianceInfo> _create = Tuples.<String, VarianceInfo, VarianceInfo>create(_string, _declaredVariance, _actualVariance);
+            return _create;
+          }
+        };
         List<Triple<String,VarianceInfo,VarianceInfo>> _map_1 = ListExtensions.<LightweightBoundTypeArgument, Triple<String,VarianceInfo,VarianceInfo>>map(mappingData, _function_1);
         List<Triple<String,VarianceInfo,VarianceInfo>> _list_1 = IterableExtensions.<Triple<String,VarianceInfo,VarianceInfo>>toList(_map_1);
         Assert.assertEquals(_list, _list_1);
@@ -127,11 +127,11 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
       _builder.append(" in ");
       Set<JvmTypeParameter> _keySet = mapping.keySet();
       final Function1<JvmTypeParameter,String> _function_2 = new Function1<JvmTypeParameter,String>() {
-          public String apply(final JvmTypeParameter it) {
-            String _simpleName = it.getSimpleName();
-            return _simpleName;
-          }
-        };
+        public String apply(final JvmTypeParameter it) {
+          String _simpleName = it.getSimpleName();
+          return _simpleName;
+        }
+      };
       Iterable<String> _map_2 = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function_2);
       _builder.append(_map_2, "");
       String _string_1 = _builder.toString();
@@ -148,11 +148,11 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
       if (_equals) {
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
         final Function1<LightweightBoundTypeArgument,Object> _function = new Function1<LightweightBoundTypeArgument,Object>() {
-            public Object apply(final LightweightBoundTypeArgument it) {
-              Object _origin = it.getOrigin();
-              return _origin;
-            }
-          };
+          public Object apply(final LightweightBoundTypeArgument it) {
+            Object _origin = it.getOrigin();
+            return _origin;
+          }
+        };
         List<Object> _map = ListExtensions.<LightweightBoundTypeArgument, Object>map(mappingData, _function);
         Set<Object> _set = IterableExtensions.<Object>toSet(_map);
         int _size = _set.size();
@@ -180,10 +180,10 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         }
         _builder.append(" void method(");
         final Function1<String,String> _function = new Function1<String,String>() {
-            public String apply(final String it) {
-              return it;
-            }
-          };
+          public String apply(final String it) {
+            return it;
+          }
+        };
         String _join = IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(alternatingTypeReferences)), null, " p, ", " p", _function);
         _builder.append(_join, "");
         _builder.append(") {}");

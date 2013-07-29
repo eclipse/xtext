@@ -143,22 +143,22 @@ public class TestBatchCompiler {
     String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
     File _file = new File(_plus);
     final FilenameFilter _function = new FilenameFilter() {
-        public boolean accept(final File dir, final String name) {
-          boolean _endsWith = name.endsWith(".java");
-          return _endsWith;
-        }
-      };
+      public boolean accept(final File dir, final String name) {
+        boolean _endsWith = name.endsWith(".java");
+        return _endsWith;
+      }
+    };
     String[] _list = _file.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(7, _size);
     String _plus_1 = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
     File _file_1 = new File(_plus_1);
     final FilenameFilter _function_1 = new FilenameFilter() {
-        public boolean accept(final File dir, final String name) {
-          boolean _endsWith = name.endsWith("._trace");
-          return _endsWith;
-        }
-      };
+      public boolean accept(final File dir, final String name) {
+        boolean _endsWith = name.endsWith("._trace");
+        return _endsWith;
+      }
+    };
     String[] _list_1 = _file_1.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
     Assert.assertEquals(7, _size_1);
@@ -171,22 +171,22 @@ public class TestBatchCompiler {
     String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
     File _file = new File(_plus);
     final FilenameFilter _function = new FilenameFilter() {
-        public boolean accept(final File dir, final String name) {
-          boolean _endsWith = name.endsWith(".java");
-          return _endsWith;
-        }
-      };
+      public boolean accept(final File dir, final String name) {
+        boolean _endsWith = name.endsWith(".java");
+        return _endsWith;
+      }
+    };
     String[] _list = _file.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(7, _size);
     String _plus_1 = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
     File _file_1 = new File(_plus_1);
     final FilenameFilter _function_1 = new FilenameFilter() {
-        public boolean accept(final File dir, final String name) {
-          boolean _endsWith = name.endsWith("._trace");
-          return _endsWith;
-        }
-      };
+      public boolean accept(final File dir, final String name) {
+        boolean _endsWith = name.endsWith("._trace");
+        return _endsWith;
+      }
+    };
     String[] _list_1 = _file_1.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
     Assert.assertEquals(0, _size_1);

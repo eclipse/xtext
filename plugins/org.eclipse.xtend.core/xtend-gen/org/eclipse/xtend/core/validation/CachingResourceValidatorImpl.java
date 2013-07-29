@@ -22,30 +22,30 @@ public class CachingResourceValidatorImpl extends ResourceValidatorImpl {
   public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) {
     try {
       final Provider<List<Issue>> _function = new Provider<List<Issue>>() {
-          public List<Issue> get() {
-            List<Issue> _xblockexpression = null;
-            {
-              final List<Issue> result = CachingResourceValidatorImpl.super.validate(resource, mode, mon);
-              List<Issue> _xifexpression = null;
-              boolean _and = false;
-              boolean _notEquals = (!Objects.equal(mon, null));
-              if (!_notEquals) {
-                _and = false;
-              } else {
-                boolean _isCanceled = mon.isCanceled();
-                _and = (_notEquals && _isCanceled);
-              }
-              if (_and) {
-                OperationCanceledException _operationCanceledException = new OperationCanceledException();
-                throw _operationCanceledException;
-              } else {
-                _xifexpression = result;
-              }
-              _xblockexpression = (_xifexpression);
+        public List<Issue> get() {
+          List<Issue> _xblockexpression = null;
+          {
+            final List<Issue> result = CachingResourceValidatorImpl.super.validate(resource, mode, mon);
+            List<Issue> _xifexpression = null;
+            boolean _and = false;
+            boolean _notEquals = (!Objects.equal(mon, null));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              boolean _isCanceled = mon.isCanceled();
+              _and = (_notEquals && _isCanceled);
             }
-            return _xblockexpression;
+            if (_and) {
+              OperationCanceledException _operationCanceledException = new OperationCanceledException();
+              throw _operationCanceledException;
+            } else {
+              _xifexpression = result;
+            }
+            _xblockexpression = (_xifexpression);
           }
-        };
+          return _xblockexpression;
+        }
+      };
       return this.cache.<List<Issue>>get(mode, resource, _function);
     } catch (final Throwable _t) {
       if (_t instanceof OperationCanceledException) {

@@ -76,11 +76,11 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         TreeIterator<Object> _allContents = EcoreUtil.<Object>getAllContents(eobject, true);
         Iterator<XExpression> _filter = Iterators.<XExpression>filter(_allContents, XExpression.class);
         final Function1<XExpression,LightweightTypeReference> _function = new Function1<XExpression,LightweightTypeReference>() {
-            public LightweightTypeReference apply(final XExpression it) {
-              LightweightTypeReference _actualType = types.getActualType(it);
-              return _actualType;
-            }
-          };
+          public LightweightTypeReference apply(final XExpression it) {
+            LightweightTypeReference _actualType = types.getActualType(it);
+            return _actualType;
+          }
+        };
         Iterator<LightweightTypeReference> _map = IteratorExtensions.<XExpression, LightweightTypeReference>map(_filter, _function);
         final Iterable<LightweightTypeReference> actualTypes = IteratorExtensions.<LightweightTypeReference>toIterable(_map);
         for (final LightweightTypeReference typeRef : actualTypes) {
@@ -88,35 +88,35 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           if (_notEquals) {
             JvmType _type = typeRef.getType();
             final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
-                public Boolean apply(final String it) {
-                  QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
-                  QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                  boolean _add = result.add(_lowerCase);
-                  return Boolean.valueOf(_add);
-                }
-              };
+              public Boolean apply(final String it) {
+                QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
+                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                boolean _add = result.add(_lowerCase);
+                return Boolean.valueOf(_add);
+              }
+            };
             this.registerAllTypes(_type, _function_1);
           }
         }
         TreeIterator<Object> _allContents_1 = EcoreUtil.<Object>getAllContents(eobject, true);
         Iterator<JvmIdentifiableElement> _filter_1 = Iterators.<JvmIdentifiableElement>filter(_allContents_1, JvmIdentifiableElement.class);
         final Function1<JvmIdentifiableElement,LightweightTypeReference> _function_2 = new Function1<JvmIdentifiableElement,LightweightTypeReference>() {
-            public LightweightTypeReference apply(final JvmIdentifiableElement it) {
-              LightweightTypeReference _xifexpression = null;
-              boolean _or = false;
-              boolean _not = (!(it instanceof JvmType));
-              if (_not) {
-                _or = true;
-              } else {
-                _or = (_not || (it instanceof JvmDeclaredType));
-              }
-              if (_or) {
-                LightweightTypeReference _actualType = types.getActualType(it);
-                _xifexpression = _actualType;
-              }
-              return _xifexpression;
+          public LightweightTypeReference apply(final JvmIdentifiableElement it) {
+            LightweightTypeReference _xifexpression = null;
+            boolean _or = false;
+            boolean _not = (!(it instanceof JvmType));
+            if (_not) {
+              _or = true;
+            } else {
+              _or = (_not || (it instanceof JvmDeclaredType));
             }
-          };
+            if (_or) {
+              LightweightTypeReference _actualType = types.getActualType(it);
+              _xifexpression = _actualType;
+            }
+            return _xifexpression;
+          }
+        };
         Iterator<LightweightTypeReference> _map_1 = IteratorExtensions.<JvmIdentifiableElement, LightweightTypeReference>map(_filter_1, _function_2);
         final Iterable<LightweightTypeReference> typesOfIdentifiables = IteratorExtensions.<LightweightTypeReference>toIterable(_map_1);
         for (final LightweightTypeReference typeRef_1 : typesOfIdentifiables) {
@@ -124,26 +124,26 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           if (_notEquals_1) {
             JvmType _type_1 = typeRef_1.getType();
             final Function1<String,Boolean> _function_3 = new Function1<String,Boolean>() {
-                public Boolean apply(final String it) {
-                  QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
-                  QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                  boolean _add = result.add(_lowerCase);
-                  return Boolean.valueOf(_add);
-                }
-              };
+              public Boolean apply(final String it) {
+                QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
+                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                boolean _add = result.add(_lowerCase);
+                return Boolean.valueOf(_add);
+              }
+            };
             this.registerAllTypes(_type_1, _function_3);
           }
         }
       }
     }
     final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
-        public Boolean apply(final QualifiedName it) {
-          String _lastSegment = it.getLastSegment();
-          boolean _contains = XtendResourceDescription.primitivesFilter.contains(_lastSegment);
-          boolean _not = (!_contains);
-          return Boolean.valueOf(_not);
-        }
-      };
+      public Boolean apply(final QualifiedName it) {
+        String _lastSegment = it.getLastSegment();
+        boolean _contains = XtendResourceDescription.primitivesFilter.contains(_lastSegment);
+        boolean _not = (!_contains);
+        return Boolean.valueOf(_not);
+      }
+    };
     Iterable<QualifiedName> _filter = IterableExtensions.<QualifiedName>filter(result, _function);
     return IterableExtensions.<QualifiedName>toSet(_filter);
   }
@@ -174,14 +174,14 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           this.registerAllTypes(_type, acceptor);
           Iterable<JvmTypeReference> _extendedInterfaces = _jvmGenericType.getExtendedInterfaces();
           final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
-              public void apply(final JvmTypeReference it) {
-                JvmType _type = null;
-                if (it!=null) {
-                  _type=it.getType();
-                }
-                XtendResourceDescription.this.registerAllTypes(_type, acceptor);
+            public void apply(final JvmTypeReference it) {
+              JvmType _type = null;
+              if (it!=null) {
+                _type=it.getType();
               }
-            };
+              XtendResourceDescription.this.registerAllTypes(_type, acceptor);
+            }
+          };
           IterableExtensions.<JvmTypeReference>forEach(_extendedInterfaces, _function);
         }
       }

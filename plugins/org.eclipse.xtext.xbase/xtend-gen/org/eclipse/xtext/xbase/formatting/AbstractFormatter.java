@@ -76,17 +76,17 @@ public abstract class AbstractFormatter implements IBasicFormatter {
         _xifexpression = edits;
       } else {
         final Function1<TextReplacement,Boolean> _function = new Function1<TextReplacement,Boolean>() {
-            public Boolean apply(final TextReplacement it) {
-              int _offset = it.getOffset();
-              int _offset_1 = it.getOffset();
-              int _length = it.getLength();
-              int _plus = (_offset_1 + _length);
-              String _substring = doc.substring(_offset, _plus);
-              String _text = it.getText();
-              boolean _notEquals = (!Objects.equal(_substring, _text));
-              return Boolean.valueOf(_notEquals);
-            }
-          };
+          public Boolean apply(final TextReplacement it) {
+            int _offset = it.getOffset();
+            int _offset_1 = it.getOffset();
+            int _length = it.getLength();
+            int _plus = (_offset_1 + _length);
+            String _substring = doc.substring(_offset, _plus);
+            String _text = it.getText();
+            boolean _notEquals = (!Objects.equal(_substring, _text));
+            return Boolean.valueOf(_notEquals);
+          }
+        };
         Iterable<TextReplacement> _filter = IterableExtensions.<TextReplacement>filter(edits, _function);
         List<TextReplacement> _list = IterableExtensions.<TextReplacement>toList(_filter);
         _xifexpression = _list;

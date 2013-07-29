@@ -56,33 +56,33 @@ public class ExtractTest {
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-        public void accept(final CompilationResult it) {
-          @Extension
-          final TransformationContext ctx = it.getTransformationContext();
-          final MutableInterfaceDeclaration interf = ctx.findInterface("MyClassInterface");
-          final MutableClassDeclaration clazz = ctx.findClass("MyClass");
-          List<TypeReference> _implementedInterfaces = clazz.getImplementedInterfaces();
-          TypeReference _head = IterableExtensions.<TypeReference>head(_implementedInterfaces);
-          Type _type = _head.getType();
-          Assert.assertEquals(_type, interf);
-          Iterable<? extends MutableMethodDeclaration> _declaredMethods = interf.getDeclaredMethods();
-          MutableMethodDeclaration _head_1 = IterableExtensions.head(_declaredMethods);
-          final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-              public void apply(final MutableMethodDeclaration it) {
-                String _simpleName = it.getSimpleName();
-                Assert.assertEquals("doStuff", _simpleName);
-                TypeReference _string = ctx.getString();
-                TypeReference _returnType = it.getReturnType();
-                Assert.assertEquals(_string, _returnType);
-                TypeReference _newTypeReference = ctx.newTypeReference(IllegalArgumentException.class);
-                List<TypeReference> _exceptions = it.getExceptions();
-                TypeReference _head = IterableExtensions.<TypeReference>head(_exceptions);
-                Assert.assertEquals(_newTypeReference, _head);
-              }
-            };
-          ObjectExtensions.<MutableMethodDeclaration>operator_doubleArrow(_head_1, _function);
-        }
-      };
+      public void accept(final CompilationResult it) {
+        @Extension
+        final TransformationContext ctx = it.getTransformationContext();
+        final MutableInterfaceDeclaration interf = ctx.findInterface("MyClassInterface");
+        final MutableClassDeclaration clazz = ctx.findClass("MyClass");
+        List<TypeReference> _implementedInterfaces = clazz.getImplementedInterfaces();
+        TypeReference _head = IterableExtensions.<TypeReference>head(_implementedInterfaces);
+        Type _type = _head.getType();
+        Assert.assertEquals(_type, interf);
+        Iterable<? extends MutableMethodDeclaration> _declaredMethods = interf.getDeclaredMethods();
+        MutableMethodDeclaration _head_1 = IterableExtensions.head(_declaredMethods);
+        final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          public void apply(final MutableMethodDeclaration it) {
+            String _simpleName = it.getSimpleName();
+            Assert.assertEquals("doStuff", _simpleName);
+            TypeReference _string = ctx.getString();
+            TypeReference _returnType = it.getReturnType();
+            Assert.assertEquals(_string, _returnType);
+            TypeReference _newTypeReference = ctx.newTypeReference(IllegalArgumentException.class);
+            List<TypeReference> _exceptions = it.getExceptions();
+            TypeReference _head = IterableExtensions.<TypeReference>head(_exceptions);
+            Assert.assertEquals(_newTypeReference, _head);
+          }
+        };
+        ObjectExtensions.<MutableMethodDeclaration>operator_doubleArrow(_head_1, _function);
+      }
+    };
     this.compilerTester.compile(_builder, _function);
   }
 }

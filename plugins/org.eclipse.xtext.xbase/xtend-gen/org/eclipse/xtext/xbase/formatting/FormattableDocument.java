@@ -74,7 +74,7 @@ public class FormattableDocument {
   public FormattableDocument(final FormattingPreferenceValues cfg, final String document) {
     this._cfg = cfg;
     this._document = document;
-    TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer,FormattingData>();
+    TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer, FormattingData>();
     this._formattings = _treeMap;
   }
   
@@ -84,7 +84,7 @@ public class FormattableDocument {
     String _document = fmt.getDocument();
     this._document = _document;
     TreeMap<Integer,FormattingData> _formattings = fmt.getFormattings();
-    TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer,FormattingData>(_formattings);
+    TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer, FormattingData>(_formattings);
     this._formattings = _treeMap;
   }
   
@@ -269,40 +269,40 @@ public class FormattableDocument {
       IntegerRange _upTo = new IntegerRange(0, 5);
       int _offset = data1.getOffset();
       final Function2<Integer,Integer,Integer> _function = new Function2<Integer,Integer,Integer>() {
-          public Integer apply(final Integer last, final Integer i) {
-            int _xifexpression = (int) 0;
-            boolean _greaterThan = ((last).intValue() > 0);
-            if (_greaterThan) {
-              String _document = FormattableDocument.this.getDocument();
-              int _minus = ((last).intValue() - 1);
-              int _lastIndexOf = _document.lastIndexOf("\n", _minus);
-              _xifexpression = _lastIndexOf;
-            } else {
-              int _minus_1 = (-1);
-              _xifexpression = _minus_1;
-            }
-            return Integer.valueOf(_xifexpression);
+        public Integer apply(final Integer last, final Integer i) {
+          int _xifexpression = (int) 0;
+          boolean _greaterThan = ((last).intValue() > 0);
+          if (_greaterThan) {
+            String _document = FormattableDocument.this.getDocument();
+            int _minus = ((last).intValue() - 1);
+            int _lastIndexOf = _document.lastIndexOf("\n", _minus);
+            _xifexpression = _lastIndexOf;
+          } else {
+            int _minus_1 = (-1);
+            _xifexpression = _minus_1;
           }
-        };
+          return Integer.valueOf(_xifexpression);
+        }
+      };
       final Integer back = IterableExtensions.<Integer, Integer>fold(_upTo, Integer.valueOf(_offset), _function);
       IntegerRange _upTo_1 = new IntegerRange(0, 5);
       int _offset_1 = data1.getOffset();
       final Function2<Integer,Integer,Integer> _function_1 = new Function2<Integer,Integer,Integer>() {
-          public Integer apply(final Integer last, final Integer i) {
-            int _xifexpression = (int) 0;
-            boolean _greaterThan = ((last).intValue() > 0);
-            if (_greaterThan) {
-              String _document = FormattableDocument.this.getDocument();
-              int _plus = ((last).intValue() + 1);
-              int _indexOf = _document.indexOf("\n", _plus);
-              _xifexpression = _indexOf;
-            } else {
-              int _minus = (-1);
-              _xifexpression = _minus;
-            }
-            return Integer.valueOf(_xifexpression);
+        public Integer apply(final Integer last, final Integer i) {
+          int _xifexpression = (int) 0;
+          boolean _greaterThan = ((last).intValue() > 0);
+          if (_greaterThan) {
+            String _document = FormattableDocument.this.getDocument();
+            int _plus = ((last).intValue() + 1);
+            int _indexOf = _document.indexOf("\n", _plus);
+            _xifexpression = _indexOf;
+          } else {
+            int _minus = (-1);
+            _xifexpression = _minus;
           }
-        };
+          return Integer.valueOf(_xifexpression);
+        }
+      };
       final Integer forward = IterableExtensions.<Integer, Integer>fold(_upTo_1, Integer.valueOf(_offset_1), _function_1);
       Integer _xifexpression = null;
       boolean _greaterEqualsThan = ((back).intValue() >= 0);
@@ -399,10 +399,10 @@ public class FormattableDocument {
     boolean _notEquals = (!Objects.equal(data, null));
     if (_notEquals) {
       final Procedure1<FormattingData> _function = new Procedure1<FormattingData>() {
-          public void apply(final FormattingData it) {
-            FormattableDocument.this.addFormatting(it);
-          }
-        };
+        public void apply(final FormattingData it) {
+          FormattableDocument.this.addFormatting(it);
+        }
+      };
       IterableExtensions.<FormattingData>forEach(data, _function);
     }
   }
@@ -521,10 +521,10 @@ public class FormattableDocument {
       StringBuilder _stringBuilder = new StringBuilder();
       final StringBuilder newDocument = _stringBuilder;
       final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
-          public Integer apply(final TextReplacement it) {
-            return Integer.valueOf(offset);
-          }
-        };
+        public Integer apply(final TextReplacement it) {
+          return Integer.valueOf(offset);
+        }
+      };
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
         {
@@ -555,12 +555,12 @@ public class FormattableDocument {
     int _minus = (_length - 1);
     IntegerRange _upTo = new IntegerRange(0, _minus);
     final Function1<Integer,Boolean> _function = new Function1<Integer,Boolean>() {
-        public Boolean apply(final Integer it) {
-          char _charAt = doc.charAt((it).intValue());
-          boolean _isWhitespace = Character.isWhitespace(_charAt);
-          return Boolean.valueOf(_isWhitespace);
-        }
-      };
+      public Boolean apply(final Integer it) {
+        char _charAt = doc.charAt((it).intValue());
+        boolean _isWhitespace = Character.isWhitespace(_charAt);
+        return Boolean.valueOf(_isWhitespace);
+      }
+    };
     boolean _forall = IterableExtensions.<Integer>forall(_upTo, _function);
     return _forall;
   }
@@ -728,10 +728,10 @@ public class FormattableDocument {
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function1<Integer,String> _function = new Function1<Integer,String>() {
-            public String apply(final Integer it) {
-              return indent;
-            }
-          };
+          public String apply(final Integer it) {
+            return indent;
+          }
+        };
         Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
         String _join = IterableExtensions.join(_map);
         _xblockexpression = (_join);
@@ -761,10 +761,10 @@ public class FormattableDocument {
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function1<Integer,String> _function = new Function1<Integer,String>() {
-            public String apply(final Integer it) {
-              return sep;
-            }
-          };
+          public String apply(final Integer it) {
+            return sep;
+          }
+        };
         Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
         String _join = IterableExtensions.join(_map);
         _xblockexpression = (_join);

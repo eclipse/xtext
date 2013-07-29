@@ -20,29 +20,29 @@ public class ObservableExample {
   public static void main(final String[] args) {
     ObservableBean _observableBean = new ObservableBean();
     final Procedure1<ObservableBean> _function = new Procedure1<ObservableBean>() {
-        public void apply(final ObservableBean it) {
-          final PropertyChangeListener _function = new PropertyChangeListener() {
-              public void propertyChange(final PropertyChangeEvent it) {
-                StringConcatenation _builder = new StringConcatenation();
-                _builder.append("property ");
-                String _propertyName = it.getPropertyName();
-                _builder.append(_propertyName, "");
-                _builder.append(" changed from ");
-                Object _oldValue = it.getOldValue();
-                _builder.append(_oldValue, "");
-                _builder.append(" to ");
-                Object _newValue = it.getNewValue();
-                _builder.append(_newValue, "");
-                InputOutput.<String>println(_builder.toString());
-              }
-            };
-          it.addPropertyChangeListener(_function);
-          it.setFirstName("Max");
-          it.setLastName("Mustermann");
-          it.setFirstName("John");
-          it.setLastName("Doe");
-        }
-      };
+      public void apply(final ObservableBean it) {
+        final PropertyChangeListener _function = new PropertyChangeListener() {
+          public void propertyChange(final PropertyChangeEvent it) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("property ");
+            String _propertyName = it.getPropertyName();
+            _builder.append(_propertyName, "");
+            _builder.append(" changed from ");
+            Object _oldValue = it.getOldValue();
+            _builder.append(_oldValue, "");
+            _builder.append(" to ");
+            Object _newValue = it.getNewValue();
+            _builder.append(_newValue, "");
+            InputOutput.<String>println(_builder.toString());
+          }
+        };
+        it.addPropertyChangeListener(_function);
+        it.setFirstName("Max");
+        it.setLastName("Mustermann");
+        it.setFirstName("John");
+        it.setLastName("Doe");
+      }
+    };
     ObjectExtensions.<ObservableBean>operator_doubleArrow(_observableBean, _function);
   }
 }

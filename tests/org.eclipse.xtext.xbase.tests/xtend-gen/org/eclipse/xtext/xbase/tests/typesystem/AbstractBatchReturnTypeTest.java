@@ -88,16 +88,16 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
   public Iterable<Diagnostic> linkingAndSyntaxErrors(final Resource resource) {
     EList<Diagnostic> _errors = resource.getErrors();
     final Function1<Diagnostic,Boolean> _function = new Function1<Diagnostic,Boolean>() {
-        public Boolean apply(final Diagnostic it) {
-          boolean _or = false;
-          if ((it instanceof XtextSyntaxDiagnostic)) {
-            _or = true;
-          } else {
-            _or = ((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic));
-          }
-          return Boolean.valueOf(_or);
+      public Boolean apply(final Diagnostic it) {
+        boolean _or = false;
+        if ((it instanceof XtextSyntaxDiagnostic)) {
+          _or = true;
+        } else {
+          _or = ((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic));
         }
-      };
+        return Boolean.valueOf(_or);
+      }
+    };
     Iterable<Diagnostic> _filter = IterableExtensions.<Diagnostic>filter(_errors, _function);
     return _filter;
   }
@@ -142,23 +142,23 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     if (!_matched) {
       EList<EObject> _eContents = expression.eContents();
       final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
-          public Boolean apply(final EObject content) {
-            boolean _switchResult = false;
-            boolean _matched = false;
-            if (!_matched) {
-              if (content instanceof XExpression) {
-                final XExpression _xExpression = (XExpression)content;
-                _matched=true;
-                boolean _hasReturnExpression = AbstractBatchReturnTypeTest.this.hasReturnExpression(_xExpression);
-                _switchResult = _hasReturnExpression;
-              }
+        public Boolean apply(final EObject content) {
+          boolean _switchResult = false;
+          boolean _matched = false;
+          if (!_matched) {
+            if (content instanceof XExpression) {
+              final XExpression _xExpression = (XExpression)content;
+              _matched=true;
+              boolean _hasReturnExpression = AbstractBatchReturnTypeTest.this.hasReturnExpression(_xExpression);
+              _switchResult = _hasReturnExpression;
             }
-            if (!_matched) {
-              _switchResult = false;
-            }
-            return Boolean.valueOf(_switchResult);
           }
-        };
+          if (!_matched) {
+            _switchResult = false;
+          }
+          return Boolean.valueOf(_switchResult);
+        }
+      };
       boolean _exists = IterableExtensions.<EObject>exists(_eContents, _function);
       _switchResult = _exists;
     }
@@ -178,11 +178,11 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     _builder.append(_simpleName, "");
     List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
     final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
-        public String apply(final LightweightTypeReference it) {
-          String _simpleName = it.getSimpleName();
-          return _simpleName;
-        }
-      };
+      public String apply(final LightweightTypeReference it) {
+        String _simpleName = it.getSimpleName();
+        return _simpleName;
+      }
+    };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments, "<", ", ", ">", _function);
     _builder.append(_join, "");
     return _builder.toString();

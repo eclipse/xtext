@@ -35,17 +35,17 @@ public class FileAsserts {
     file.refreshLocal(IResource.DEPTH_ZERO, null);
     final String fileContents = this._workbenchTestHelper.getContents(file);
     final Procedure1<String> _function = new Procedure1<String>() {
-        public void apply(final String expectation) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Substring \'");
-          _builder.append(expectation, "");
-          _builder.append("\' not found in \'");
-          _builder.append(fileContents, "");
-          _builder.append("\' ");
-          boolean _contains = fileContents.contains(expectation);
-          Assert.assertTrue(_builder.toString(), _contains);
-        }
-      };
+      public void apply(final String expectation) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Substring \'");
+        _builder.append(expectation, "");
+        _builder.append("\' not found in \'");
+        _builder.append(fileContents, "");
+        _builder.append("\' ");
+        boolean _contains = fileContents.contains(expectation);
+        Assert.assertTrue(_builder.toString(), _contains);
+      }
+    };
     IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedContents)), _function);
   }
 }

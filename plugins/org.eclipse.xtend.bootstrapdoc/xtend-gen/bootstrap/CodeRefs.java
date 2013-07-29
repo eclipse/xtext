@@ -55,27 +55,27 @@ public class CodeRefs {
         _and = false;
       } else {
         final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
-            public Boolean apply(final String it) {
-              boolean _xblockexpression = false;
-              {
-                String _identifier = null;
-                if (element!=null) {
-                  _identifier=element.getIdentifier();
-                }
-                final String identifier = _identifier;
-                boolean _and = false;
-                boolean _notEquals = (!Objects.equal(identifier, null));
-                if (!_notEquals) {
-                  _and = false;
-                } else {
-                  boolean _startsWith = identifier.startsWith(it);
-                  _and = (_notEquals && _startsWith);
-                }
-                _xblockexpression = (_and);
+          public Boolean apply(final String it) {
+            boolean _xblockexpression = false;
+            {
+              String _identifier = null;
+              if (element!=null) {
+                _identifier=element.getIdentifier();
               }
-              return Boolean.valueOf(_xblockexpression);
+              final String identifier = _identifier;
+              boolean _and = false;
+              boolean _notEquals = (!Objects.equal(identifier, null));
+              if (!_notEquals) {
+                _and = false;
+              } else {
+                boolean _startsWith = identifier.startsWith(it);
+                _and = (_notEquals && _startsWith);
+              }
+              _xblockexpression = (_and);
             }
-          };
+            return Boolean.valueOf(_xblockexpression);
+          }
+        };
         boolean _exists = IterableExtensions.<String>exists(CodeRefs.NO_JAVADOC_PACKAGE_PREFIXES, _function);
         boolean _not = (!_exists);
         _and = (_isNullOrEmpty && _not);
@@ -116,12 +116,12 @@ public class CodeRefs {
         _and = false;
       } else {
         final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
-            public Boolean apply(final String it) {
-              String _identifier = element.getIdentifier();
-              boolean _startsWith = _identifier.startsWith(it);
-              return Boolean.valueOf(_startsWith);
-            }
-          };
+          public Boolean apply(final String it) {
+            String _identifier = element.getIdentifier();
+            boolean _startsWith = _identifier.startsWith(it);
+            return Boolean.valueOf(_startsWith);
+          }
+        };
         boolean _exists = IterableExtensions.<String>exists(CodeRefs.NO_SOURCE_PACKAGE_PREFIXES, _function);
         boolean _not = (!_exists);
         _and = (_and_1 && _not);

@@ -36,20 +36,20 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
       JvmGenericType _delegate = this.getDelegate();
       EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
       final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
-          public Boolean apply(final JvmTypeReference it) {
-            JvmType _type = it.getType();
-            boolean _isInterface = ((JvmGenericType) _type).isInterface();
-            return Boolean.valueOf(_isInterface);
-          }
-        };
+        public Boolean apply(final JvmTypeReference it) {
+          JvmType _type = it.getType();
+          boolean _isInterface = ((JvmGenericType) _type).isInterface();
+          return Boolean.valueOf(_isInterface);
+        }
+      };
       final Iterable<JvmTypeReference> filtered = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
       final Function1<JvmTypeReference,TypeReference> _function_1 = new Function1<JvmTypeReference,TypeReference>() {
-          public TypeReference apply(final JvmTypeReference it) {
-            CompilationUnitImpl _compilationUnit = JvmInterfaceDeclarationImpl.this.getCompilationUnit();
-            TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-            return _typeReference;
-          }
-        };
+        public TypeReference apply(final JvmTypeReference it) {
+          CompilationUnitImpl _compilationUnit = JvmInterfaceDeclarationImpl.this.getCompilationUnit();
+          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
+          return _typeReference;
+        }
+      };
       Iterable<TypeReference> _map = IterableExtensions.<JvmTypeReference, TypeReference>map(filtered, _function_1);
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
       _xblockexpression = (_list);
@@ -81,12 +81,12 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
-        public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
-          CompilationUnitImpl _compilationUnit = JvmInterfaceDeclarationImpl.this.getCompilationUnit();
-          MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-          return _typeParameterDeclaration;
-        }
-      };
+      public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
+        CompilationUnitImpl _compilationUnit = JvmInterfaceDeclarationImpl.this.getCompilationUnit();
+        MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
+        return _typeParameterDeclaration;
+      }
+    };
     List<MutableTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
     return _map;
   }

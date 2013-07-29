@@ -34,11 +34,11 @@ public class LoopExtensions {
     ObjectExtensions.<T>operator_doubleArrow(_head, procedure);
     Iterable<T> _tail = IterableExtensions.<T>tail(elements);
     final Procedure1<T> _function = new Procedure1<T>() {
-        public void apply(final T it) {
-          params.appendSeparator(appendable);
-          ObjectExtensions.<T>operator_doubleArrow(it, procedure);
-        }
-      };
+      public void apply(final T it) {
+        params.appendSeparator(appendable);
+        ObjectExtensions.<T>operator_doubleArrow(it, procedure);
+      }
+    };
     IterableExtensions.<T>forEach(_tail, _function);
     params.appendSuffix(appendable);
   }
@@ -54,12 +54,12 @@ public class LoopExtensions {
       ObjectExtensions.<T>operator_doubleArrow(_head, procedure);
     } else {
       final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-          public void apply(final LoopParams it) {
-            it.setPrefix("{ ");
-            it.setSeparator(", ");
-            it.setSuffix(" }");
-          }
-        };
+        public void apply(final LoopParams it) {
+          it.setPrefix("{ ");
+          it.setSeparator(", ");
+          it.setSuffix(" }");
+        }
+      };
       this.<T>forEach(appendable, elements, _function, procedure);
     }
   }

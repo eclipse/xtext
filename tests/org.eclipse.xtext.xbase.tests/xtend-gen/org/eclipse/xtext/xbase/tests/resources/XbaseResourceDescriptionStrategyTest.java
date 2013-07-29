@@ -48,18 +48,18 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     interfaceType.setSimpleName("MyType");
     final ArrayList<IEObjectDescription> list = CollectionLiterals.<IEObjectDescription>newArrayList();
     final IAcceptor<IEObjectDescription> _function = new IAcceptor<IEObjectDescription>() {
-        public void accept(final IEObjectDescription it) {
-          list.add(it);
-        }
-      };
+      public void accept(final IEObjectDescription it) {
+        list.add(it);
+      }
+    };
     this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
-        public Boolean apply(final IEObjectDescription it) {
-          String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
-          boolean _equals = Objects.equal("true", _userData);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final IEObjectDescription it) {
+        String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
+        boolean _equals = Objects.equal("true", _userData);
+        return Boolean.valueOf(_equals);
+      }
+    };
     boolean _exists = IterableExtensions.<IEObjectDescription>exists(list, _function_1);
     Assert.assertTrue(_exists);
   }
@@ -72,18 +72,18 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     interfaceType.setSimpleName("MyType");
     final ArrayList<IEObjectDescription> list = CollectionLiterals.<IEObjectDescription>newArrayList();
     final IAcceptor<IEObjectDescription> _function = new IAcceptor<IEObjectDescription>() {
-        public void accept(final IEObjectDescription it) {
-          list.add(it);
-        }
-      };
+      public void accept(final IEObjectDescription it) {
+        list.add(it);
+      }
+    };
     this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
-        public Boolean apply(final IEObjectDescription it) {
-          String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
-          boolean _equals = Objects.equal("true", _userData);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final IEObjectDescription it) {
+        String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
+        boolean _equals = Objects.equal("true", _userData);
+        return Boolean.valueOf(_equals);
+      }
+    };
     boolean _exists = IterableExtensions.<IEObjectDescription>exists(list, _function_1);
     Assert.assertFalse(_exists);
   }
@@ -96,12 +96,12 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(resource);
       Iterable<IReferenceDescription> _referenceDescriptions = description.getReferenceDescriptions();
       final Function1<IReferenceDescription,String> _function = new Function1<IReferenceDescription,String>() {
-          public String apply(final IReferenceDescription it) {
-            URI _targetEObjectUri = it.getTargetEObjectUri();
-            String _string = _targetEObjectUri.toString();
-            return _string;
-          }
-        };
+        public String apply(final IReferenceDescription it) {
+          URI _targetEObjectUri = it.getTargetEObjectUri();
+          String _string = _targetEObjectUri.toString();
+          return _string;
+        }
+      };
       Iterable<String> _map = IterableExtensions.<IReferenceDescription, String>map(_referenceDescriptions, _function);
       final Set<String> referenceDescriptions = IterableExtensions.<String>toSet(_map);
       int _size = referenceDescriptions.size();

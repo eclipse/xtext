@@ -33,10 +33,10 @@ public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
   private Function1<? super XExpression,? extends Boolean> _predicate = new Function0<Function1<? super XExpression,? extends Boolean>>() {
     public Function1<? super XExpression,? extends Boolean> apply() {
       final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
-          public Boolean apply(final XExpression it) {
-            return Boolean.valueOf((it instanceof XNullLiteral));
-          }
-        };
+        public Boolean apply(final XExpression it) {
+          return Boolean.valueOf((it instanceof XNullLiteral));
+        }
+      };
       return _function;
     }
   }.apply();

@@ -122,111 +122,111 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       Iterator<XExpression> _filter = Iterators.<XExpression>filter(_eAll, XExpression.class);
       final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
-          public Boolean apply(final XExpression it) {
-            boolean _switchResult = false;
-            boolean _matched = false;
-            if (!_matched) {
-              if (it instanceof XAbstractFeatureCall) {
-                final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)it;
-                _matched=true;
-                boolean _and = false;
-                boolean _and_1 = false;
-                boolean _isTypeLiteral = _xAbstractFeatureCall.isTypeLiteral();
-                boolean _not = (!_isTypeLiteral);
-                if (!_not) {
-                  _and_1 = false;
-                } else {
-                  boolean _isPackageFragment = _xAbstractFeatureCall.isPackageFragment();
-                  boolean _not_1 = (!_isPackageFragment);
-                  _and_1 = (_not && _not_1);
-                }
-                if (!_and_1) {
-                  _and = false;
-                } else {
-                  boolean _or = false;
-                  EList<JvmTypeReference> _typeArguments = _xAbstractFeatureCall.getTypeArguments();
-                  boolean _isEmpty = _typeArguments.isEmpty();
-                  boolean _not_2 = (!_isEmpty);
-                  if (_not_2) {
-                    _or = true;
-                  } else {
-                    boolean _switchResult_1 = false;
-                    JvmIdentifiableElement _feature = _xAbstractFeatureCall.getFeature();
-                    final JvmIdentifiableElement feature = _feature;
-                    boolean _matched_1 = false;
-                    if (!_matched_1) {
-                      if (feature instanceof JvmTypeParameterDeclarator) {
-                        final JvmTypeParameterDeclarator _jvmTypeParameterDeclarator = (JvmTypeParameterDeclarator)feature;
-                        _matched_1=true;
-                        EList<JvmTypeParameter> _typeParameters = ((JvmTypeParameterDeclarator)_jvmTypeParameterDeclarator).getTypeParameters();
-                        boolean _isEmpty_1 = _typeParameters.isEmpty();
-                        boolean _not_3 = (!_isEmpty_1);
-                        _switchResult_1 = _not_3;
-                      }
-                    }
-                    if (!_matched_1) {
-                      _switchResult_1 = false;
-                    }
-                    _or = (_not_2 || _switchResult_1);
-                  }
-                  _and = (_and_1 && _or);
-                }
-                _switchResult = _and;
+        public Boolean apply(final XExpression it) {
+          boolean _switchResult = false;
+          boolean _matched = false;
+          if (!_matched) {
+            if (it instanceof XAbstractFeatureCall) {
+              final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)it;
+              _matched=true;
+              boolean _and = false;
+              boolean _and_1 = false;
+              boolean _isTypeLiteral = _xAbstractFeatureCall.isTypeLiteral();
+              boolean _not = (!_isTypeLiteral);
+              if (!_not) {
+                _and_1 = false;
+              } else {
+                boolean _isPackageFragment = _xAbstractFeatureCall.isPackageFragment();
+                boolean _not_1 = (!_isPackageFragment);
+                _and_1 = (_not && _not_1);
               }
-            }
-            if (!_matched) {
-              if (it instanceof XConstructorCall) {
-                final XConstructorCall _xConstructorCall = (XConstructorCall)it;
-                _matched=true;
+              if (!_and_1) {
+                _and = false;
+              } else {
                 boolean _or = false;
-                EList<JvmTypeReference> _typeArguments = _xConstructorCall.getTypeArguments();
+                EList<JvmTypeReference> _typeArguments = _xAbstractFeatureCall.getTypeArguments();
                 boolean _isEmpty = _typeArguments.isEmpty();
-                boolean _not = (!_isEmpty);
-                if (_not) {
+                boolean _not_2 = (!_isEmpty);
+                if (_not_2) {
                   _or = true;
                 } else {
-                  JvmConstructor _constructor = _xConstructorCall.getConstructor();
-                  JvmDeclaredType _declaringType = _constructor.getDeclaringType();
-                  EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) _declaringType).getTypeParameters();
-                  boolean _isEmpty_1 = _typeParameters.isEmpty();
-                  boolean _not_1 = (!_isEmpty_1);
-                  _or = (_not || _not_1);
+                  boolean _switchResult_1 = false;
+                  JvmIdentifiableElement _feature = _xAbstractFeatureCall.getFeature();
+                  final JvmIdentifiableElement feature = _feature;
+                  boolean _matched_1 = false;
+                  if (!_matched_1) {
+                    if (feature instanceof JvmTypeParameterDeclarator) {
+                      final JvmTypeParameterDeclarator _jvmTypeParameterDeclarator = (JvmTypeParameterDeclarator)feature;
+                      _matched_1=true;
+                      EList<JvmTypeParameter> _typeParameters = ((JvmTypeParameterDeclarator)_jvmTypeParameterDeclarator).getTypeParameters();
+                      boolean _isEmpty_1 = _typeParameters.isEmpty();
+                      boolean _not_3 = (!_isEmpty_1);
+                      _switchResult_1 = _not_3;
+                    }
+                  }
+                  if (!_matched_1) {
+                    _switchResult_1 = false;
+                  }
+                  _or = (_not_2 || _switchResult_1);
                 }
-                _switchResult = _or;
+                _and = (_and_1 && _or);
               }
+              _switchResult = _and;
             }
-            if (!_matched) {
-              _switchResult = false;
-            }
-            return Boolean.valueOf(_switchResult);
           }
-        };
+          if (!_matched) {
+            if (it instanceof XConstructorCall) {
+              final XConstructorCall _xConstructorCall = (XConstructorCall)it;
+              _matched=true;
+              boolean _or = false;
+              EList<JvmTypeReference> _typeArguments = _xConstructorCall.getTypeArguments();
+              boolean _isEmpty = _typeArguments.isEmpty();
+              boolean _not = (!_isEmpty);
+              if (_not) {
+                _or = true;
+              } else {
+                JvmConstructor _constructor = _xConstructorCall.getConstructor();
+                JvmDeclaredType _declaringType = _constructor.getDeclaringType();
+                EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) _declaringType).getTypeParameters();
+                boolean _isEmpty_1 = _typeParameters.isEmpty();
+                boolean _not_1 = (!_isEmpty_1);
+                _or = (_not || _not_1);
+              }
+              _switchResult = _or;
+            }
+          }
+          if (!_matched) {
+            _switchResult = false;
+          }
+          return Boolean.valueOf(_switchResult);
+        }
+      };
       Iterator<XExpression> _filter_1 = IteratorExtensions.<XExpression>filter(_filter, _function);
       final List<XExpression> result = IteratorExtensions.<XExpression>toList(_filter_1);
       final Function1<XExpression,Integer> _function_1 = new Function1<XExpression,Integer>() {
-          public Integer apply(final XExpression it) {
-            EReference _switchResult = null;
-            boolean _matched = false;
-            if (!_matched) {
-              if (it instanceof XAbstractFeatureCall) {
-                final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)it;
-                _matched=true;
-                _switchResult = Literals.XABSTRACT_FEATURE_CALL__FEATURE;
-              }
+        public Integer apply(final XExpression it) {
+          EReference _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (it instanceof XAbstractFeatureCall) {
+              final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)it;
+              _matched=true;
+              _switchResult = Literals.XABSTRACT_FEATURE_CALL__FEATURE;
             }
-            if (!_matched) {
-              if (it instanceof XConstructorCall) {
-                final XConstructorCall _xConstructorCall = (XConstructorCall)it;
-                _matched=true;
-                _switchResult = Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
-              }
-            }
-            final EReference structuralFeature = _switchResult;
-            List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, structuralFeature);
-            INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-            return Integer.valueOf(_head.getOffset());
           }
-        };
+          if (!_matched) {
+            if (it instanceof XConstructorCall) {
+              final XConstructorCall _xConstructorCall = (XConstructorCall)it;
+              _matched=true;
+              _switchResult = Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
+            }
+          }
+          final EReference structuralFeature = _switchResult;
+          List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, structuralFeature);
+          INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
+          return Integer.valueOf(_head.getOffset());
+        }
+      };
       return IterableExtensions.<XExpression, Integer>sortBy(result, _function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

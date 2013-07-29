@@ -69,33 +69,33 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   @Test
   public void testInference() {
     final IJvmModelInferrer _function = new IJvmModelInferrer() {
-        public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
-          final JvmGenericType firstType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
-          final JvmGenericType secondType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
-          Resource _eResource = secondType.eResource();
-          Assert.assertNull(_eResource);
-          IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);
-          final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-              public void apply(final JvmGenericType it) {
-                it.setAbstract(true);
-                Resource _eResource = firstType.eResource();
-                Assert.assertNotNull(_eResource);
-                Resource _eResource_1 = secondType.eResource();
-                Assert.assertNotNull(_eResource_1);
-              }
-            };
-          _accept.initializeLater(_function);
-          IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(secondType);
-          final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
-              public void apply(final JvmGenericType it) {
-                it.setAbstract(true);
-                Resource _eResource = firstType.eResource();
-                Assert.assertNotNull(_eResource);
-              }
-            };
-          _accept_1.initializeLater(_function_1);
-        }
-      };
+      public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
+        final JvmGenericType firstType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
+        final JvmGenericType secondType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
+        Resource _eResource = secondType.eResource();
+        Assert.assertNull(_eResource);
+        IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);
+        final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            it.setAbstract(true);
+            Resource _eResource = firstType.eResource();
+            Assert.assertNotNull(_eResource);
+            Resource _eResource_1 = secondType.eResource();
+            Assert.assertNotNull(_eResource_1);
+          }
+        };
+        _accept.initializeLater(_function);
+        IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(secondType);
+        final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            it.setAbstract(true);
+            Resource _eResource = firstType.eResource();
+            Assert.assertNotNull(_eResource);
+          }
+        };
+        _accept_1.initializeLater(_function_1);
+      }
+    };
     this.assoc.setInferrer(_function);
     this.resource.setDerivedStateComputer(null);
     URI _createURI = URI.createURI("foo.txt");
@@ -139,73 +139,73 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   @Test
   public void testInference_2() {
     final IJvmModelInferrer _function = new IJvmModelInferrer() {
-        public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
-          final JvmGenericType firstType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
-          final JvmGenericType secondType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
-          Resource _eResource = secondType.eResource();
-          Assert.assertNull(_eResource);
-          IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);
-          final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-              public void apply(final JvmGenericType it) {
-                it.setAbstract(true);
-                Resource _eResource = firstType.eResource();
-                Assert.assertNotNull(_eResource);
-                Resource _eResource_1 = secondType.eResource();
-                Assert.assertNotNull(_eResource_1);
-              }
-            };
-          _accept.initializeLater(_function);
-          IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(secondType);
-          final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
-              public void apply(final JvmGenericType it) {
-                it.setAbstract(true);
-                Resource _eResource = firstType.eResource();
-                Assert.assertNotNull(_eResource);
-              }
-            };
-          _accept_1.initializeLater(_function_1);
-        }
-      };
+      public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
+        final JvmGenericType firstType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
+        final JvmGenericType secondType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
+        Resource _eResource = secondType.eResource();
+        Assert.assertNull(_eResource);
+        IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);
+        final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            it.setAbstract(true);
+            Resource _eResource = firstType.eResource();
+            Assert.assertNotNull(_eResource);
+            Resource _eResource_1 = secondType.eResource();
+            Assert.assertNotNull(_eResource_1);
+          }
+        };
+        _accept.initializeLater(_function);
+        IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(secondType);
+        final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            it.setAbstract(true);
+            Resource _eResource = firstType.eResource();
+            Assert.assertNotNull(_eResource);
+          }
+        };
+        _accept_1.initializeLater(_function_1);
+      }
+    };
     this.assoc.setInferrer(_function);
     final IJvmModelInferrer _function_1 = new IJvmModelInferrer() {
-        public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
-          Resource _eResource = obj.eResource();
-          EList<EObject> _contents = _eResource.getContents();
-          int _size = _contents.size();
-          Assert.assertEquals(3, _size);
-          final JvmGenericType anotherType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.AnotherOne");
-          IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(anotherType);
-          final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-              public void apply(final JvmGenericType it) {
-                it.setAbstract(true);
-                Resource _eResource = it.eResource();
-                EList<EObject> _contents = _eResource.getContents();
-                Iterable<JvmGenericType> _filter = Iterables.<JvmGenericType>filter(_contents, JvmGenericType.class);
-                final Function1<JvmGenericType,Boolean> _function = new Function1<JvmGenericType,Boolean>() {
-                    public Boolean apply(final JvmGenericType it) {
-                      String _identifier = it.getIdentifier();
-                      boolean _equals = Objects.equal(_identifier, "foo.Bar");
-                      return Boolean.valueOf(_equals);
-                    }
-                  };
-                JvmGenericType _findFirst = IterableExtensions.<JvmGenericType>findFirst(_filter, _function);
-                final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
-                    public void apply(final JvmGenericType bar) {
-                      EList<JvmTypeReference> _superTypes = bar.getSuperTypes();
-                      JvmTypeReference _newTypeRef = JvmModelAssociaterTest.this._jvmTypesBuilder.newTypeRef(it);
-                      JvmModelAssociaterTest.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
-                    }
-                  };
-                ObjectExtensions.<JvmGenericType>operator_doubleArrow(_findFirst, _function_1);
+      public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
+        Resource _eResource = obj.eResource();
+        EList<EObject> _contents = _eResource.getContents();
+        int _size = _contents.size();
+        Assert.assertEquals(3, _size);
+        final JvmGenericType anotherType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.AnotherOne");
+        IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(anotherType);
+        final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            it.setAbstract(true);
+            Resource _eResource = it.eResource();
+            EList<EObject> _contents = _eResource.getContents();
+            Iterable<JvmGenericType> _filter = Iterables.<JvmGenericType>filter(_contents, JvmGenericType.class);
+            final Function1<JvmGenericType,Boolean> _function = new Function1<JvmGenericType,Boolean>() {
+              public Boolean apply(final JvmGenericType it) {
+                String _identifier = it.getIdentifier();
+                boolean _equals = Objects.equal(_identifier, "foo.Bar");
+                return Boolean.valueOf(_equals);
               }
             };
-          _accept.initializeLater(_function);
-          Resource _eResource_1 = obj.eResource();
-          EList<EObject> _contents_1 = _eResource_1.getContents();
-          int _size_1 = _contents_1.size();
-          Assert.assertEquals(4, _size_1);
-        }
-      };
+            JvmGenericType _findFirst = IterableExtensions.<JvmGenericType>findFirst(_filter, _function);
+            final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+              public void apply(final JvmGenericType bar) {
+                EList<JvmTypeReference> _superTypes = bar.getSuperTypes();
+                JvmTypeReference _newTypeRef = JvmModelAssociaterTest.this._jvmTypesBuilder.newTypeRef(it);
+                JvmModelAssociaterTest.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
+              }
+            };
+            ObjectExtensions.<JvmGenericType>operator_doubleArrow(_findFirst, _function_1);
+          }
+        };
+        _accept.initializeLater(_function);
+        Resource _eResource_1 = obj.eResource();
+        EList<EObject> _contents_1 = _eResource_1.getContents();
+        int _size_1 = _contents_1.size();
+        Assert.assertEquals(4, _size_1);
+      }
+    };
     JvmModelInferrerRegistry.INSTANCE.register("txt", _function_1);
     try {
       this.resource.setDerivedStateComputer(null);
@@ -260,10 +260,10 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
       List<? extends IJvmModelInferrer> _modelInferrer = JvmModelInferrerRegistry.INSTANCE.getModelInferrer("txt");
       final Set<? extends IJvmModelInferrer> allInferrers = IterableExtensions.toSet(_modelInferrer);
       final Procedure1<IJvmModelInferrer> _function_2 = new Procedure1<IJvmModelInferrer>() {
-          public void apply(final IJvmModelInferrer it) {
-            JvmModelInferrerRegistry.INSTANCE.deregister("txt", it);
-          }
-        };
+        public void apply(final IJvmModelInferrer it) {
+          JvmModelInferrerRegistry.INSTANCE.deregister("txt", it);
+        }
+      };
       IterableExtensions.forEach(allInferrers, _function_2);
     }
   }

@@ -117,20 +117,20 @@ public class EclipseFileSystemAccessImpl extends AbstractFileSystemAccessImpl {
         IJavaProject _javaProject = this.getJavaProject(it);
         IClasspathEntry[] _resolvedClasspath = _javaProject.getResolvedClasspath(true);
         final Function1<IClasspathEntry,Boolean> _function = new Function1<IClasspathEntry,Boolean>() {
-            public Boolean apply(final IClasspathEntry it) {
-              boolean _and = false;
-              int _entryKind = it.getEntryKind();
-              boolean _equals = (_entryKind == IClasspathEntry.CPE_SOURCE);
-              if (!_equals) {
-                _and = false;
-              } else {
-                IPath _path = it.getPath();
-                boolean _isPrefixOf = _path.isPrefixOf(filePath);
-                _and = (_equals && _isPrefixOf);
-              }
-              return Boolean.valueOf(_and);
+          public Boolean apply(final IClasspathEntry it) {
+            boolean _and = false;
+            int _entryKind = it.getEntryKind();
+            boolean _equals = (_entryKind == IClasspathEntry.CPE_SOURCE);
+            if (!_equals) {
+              _and = false;
+            } else {
+              IPath _path = it.getPath();
+              boolean _isPrefixOf = _path.isPrefixOf(filePath);
+              _and = (_equals && _isPrefixOf);
             }
-          };
+            return Boolean.valueOf(_and);
+          }
+        };
         Iterable<IClasspathEntry> _filter = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(_resolvedClasspath)), _function);
         IClasspathEntry _head = IterableExtensions.<IClasspathEntry>head(_filter);
         IPath _path = null;
@@ -159,11 +159,11 @@ public class EclipseFileSystemAccessImpl extends AbstractFileSystemAccessImpl {
   public IFile getFile(final CompilationUnitImpl it) {
     Iterable<Pair<IStorage,IProject>> _storages = this.getStorages(it);
     final Function1<Pair<IStorage,IProject>,IStorage> _function = new Function1<Pair<IStorage,IProject>,IStorage>() {
-        public IStorage apply(final Pair<IStorage,IProject> it) {
-          IStorage _first = it.getFirst();
-          return _first;
-        }
-      };
+      public IStorage apply(final Pair<IStorage,IProject> it) {
+        IStorage _first = it.getFirst();
+        return _first;
+      }
+    };
     Iterable<IStorage> _map = IterableExtensions.<Pair<IStorage,IProject>, IStorage>map(_storages, _function);
     Iterable<IFile> _filter = Iterables.<IFile>filter(_map, IFile.class);
     IFile _head = IterableExtensions.<IFile>head(_filter);

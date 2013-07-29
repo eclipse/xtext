@@ -64,38 +64,38 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       ResourceSet _unLoadedResourceSet_1 = this.compiler.unLoadedResourceSet(clientFile);
       final XtextResourceSet resourceSet = ((XtextResourceSet) _unLoadedResourceSet_1);
       final IAcceptor<Result> _function = new IAcceptor<Result>() {
-          public void accept(final Result result) {
-            Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
-            ClassLoader _classLoader = _class.getClassLoader();
-            final Function1<String,Class<? extends Object>> _function = new Function1<String,Class<? extends Object>>() {
-                public Class<? extends Object> apply(final String it) {
-                  Class<? extends Object> _compiledClass = result.getCompiledClass(it);
-                  return _compiledClass;
-                }
-              };
-            DelegatingClassloader _delegatingClassloader = new DelegatingClassloader(_classLoader, _function);
-            final DelegatingClassloader classLoader = _delegatingClassloader;
-            resourceSet.setClasspathURIContext(classLoader);
-            ActiveAnnotationsRuntimeTest.this.processorProvider.setClassLoader(classLoader);
-          }
-        };
+        public void accept(final Result result) {
+          Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
+          ClassLoader _classLoader = _class.getClassLoader();
+          final Function1<String,Class<? extends Object>> _function = new Function1<String,Class<? extends Object>>() {
+            public Class<? extends Object> apply(final String it) {
+              Class<? extends Object> _compiledClass = result.getCompiledClass(it);
+              return _compiledClass;
+            }
+          };
+          DelegatingClassloader _delegatingClassloader = new DelegatingClassloader(_classLoader, _function);
+          final DelegatingClassloader classLoader = _delegatingClassloader;
+          resourceSet.setClasspathURIContext(classLoader);
+          ActiveAnnotationsRuntimeTest.this.processorProvider.setClassLoader(classLoader);
+        }
+      };
       this.compiler.compile(macroResourceSet, _function);
       EList<Resource> _resources = resourceSet.getResources();
       final Resource singleResource = IterableExtensions.<Resource>head(_resources);
       final IAcceptor<Result> _function_1 = new IAcceptor<Result>() {
-          public void accept(final Result it) {
-            final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
-            EList<EObject> _contents = singleResource.getContents();
-            Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
-            final XtendFile xtendFile = IterableExtensions.<XtendFile>head(_filter);
-            ActiveAnnotationsRuntimeTest.this.validationTestHelper.assertNoErrors(xtendFile);
-            unit.setXtendFile(xtendFile);
-            expectations.apply(unit);
-            EList<Diagnostic> _errors = singleResource.getErrors();
-            boolean _isEmpty = _errors.isEmpty();
-            Assert.assertTrue(_isEmpty);
-          }
-        };
+        public void accept(final Result it) {
+          final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
+          EList<EObject> _contents = singleResource.getContents();
+          Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
+          final XtendFile xtendFile = IterableExtensions.<XtendFile>head(_filter);
+          ActiveAnnotationsRuntimeTest.this.validationTestHelper.assertNoErrors(xtendFile);
+          unit.setXtendFile(xtendFile);
+          expectations.apply(unit);
+          EList<Diagnostic> _errors = singleResource.getErrors();
+          boolean _isEmpty = _errors.isEmpty();
+          Assert.assertTrue(_isEmpty);
+        }
+      };
       this.compiler.compile(resourceSet, _function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

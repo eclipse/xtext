@@ -29,28 +29,28 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
     {
       final IScope scope = super.getScope(context, reference);
       final Predicate<IEObjectDescription> _function = new Predicate<IEObjectDescription>() {
-          public boolean apply(final IEObjectDescription it) {
-            boolean _and = false;
-            boolean _and_1 = false;
-            boolean _notEquals = (!Objects.equal(it, null));
-            if (!_notEquals) {
-              _and_1 = false;
-            } else {
-              QualifiedName _name = it.getName();
-              boolean _notEquals_1 = (!Objects.equal(_name, null));
-              _and_1 = (_notEquals && _notEquals_1);
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              QualifiedName _name_1 = it.getName();
-              int _segmentCount = _name_1.getSegmentCount();
-              boolean _equals = (_segmentCount == 1);
-              _and = (_and_1 && _equals);
-            }
-            return _and;
+        public boolean apply(final IEObjectDescription it) {
+          boolean _and = false;
+          boolean _and_1 = false;
+          boolean _notEquals = (!Objects.equal(it, null));
+          if (!_notEquals) {
+            _and_1 = false;
+          } else {
+            QualifiedName _name = it.getName();
+            boolean _notEquals_1 = (!Objects.equal(_name, null));
+            _and_1 = (_notEquals && _notEquals_1);
           }
-        };
+          if (!_and_1) {
+            _and = false;
+          } else {
+            QualifiedName _name_1 = it.getName();
+            int _segmentCount = _name_1.getSegmentCount();
+            boolean _equals = (_segmentCount == 1);
+            _and = (_and_1 && _equals);
+          }
+          return _and;
+        }
+      };
       FilteringScope _filteringScope = new FilteringScope(scope, _function);
       _xblockexpression = (_filteringScope);
     }

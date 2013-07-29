@@ -81,39 +81,39 @@ public class MemberFromSuperImplementor {
       final ArrayList<JvmTypeParameter> typeParameters = CollectionLiterals.<JvmTypeParameter>newArrayList();
       EList<JvmTypeParameter> _typeParameters_1 = overriddenOperation.getTypeParameters();
       final Function1<JvmTypeParameter,JvmTypeParameter> _function = new Function1<JvmTypeParameter,JvmTypeParameter>() {
-          public JvmTypeParameter apply(final JvmTypeParameter it) {
-            JvmTypeParameter _xblockexpression = null;
-            {
-              final JvmTypeParameter typeParameter = MemberFromSuperImplementor.this.typesFactory.createJvmTypeParameter();
-              String _name = it.getName();
-              typeParameter.setName(_name);
-              EList<JvmTypeConstraint> _constraints = it.getConstraints();
-              for (final JvmTypeConstraint constraint : _constraints) {
-                if ((constraint instanceof JvmUpperBound)) {
-                  final JvmUpperBound upperBound = MemberFromSuperImplementor.this.typesFactory.createJvmUpperBound();
-                  JvmTypeReference _typeReference = constraint.getTypeReference();
-                  LightweightTypeReference _substitute = substitutor.substitute(_typeReference);
-                  JvmTypeReference _typeReference_1 = _substitute.toTypeReference();
-                  upperBound.setTypeReference(_typeReference_1);
-                  EList<JvmTypeConstraint> _constraints_1 = typeParameter.getConstraints();
-                  _constraints_1.add(upperBound);
-                } else {
-                  if ((constraint instanceof JvmLowerBound)) {
-                    final JvmLowerBound upperBound_1 = MemberFromSuperImplementor.this.typesFactory.createJvmLowerBound();
-                    JvmTypeReference _typeReference_2 = constraint.getTypeReference();
-                    LightweightTypeReference _substitute_1 = substitutor.substitute(_typeReference_2);
-                    JvmTypeReference _typeReference_3 = _substitute_1.toTypeReference();
-                    upperBound_1.setTypeReference(_typeReference_3);
-                    EList<JvmTypeConstraint> _constraints_2 = typeParameter.getConstraints();
-                    _constraints_2.add(upperBound_1);
-                  }
+        public JvmTypeParameter apply(final JvmTypeParameter it) {
+          JvmTypeParameter _xblockexpression = null;
+          {
+            final JvmTypeParameter typeParameter = MemberFromSuperImplementor.this.typesFactory.createJvmTypeParameter();
+            String _name = it.getName();
+            typeParameter.setName(_name);
+            EList<JvmTypeConstraint> _constraints = it.getConstraints();
+            for (final JvmTypeConstraint constraint : _constraints) {
+              if ((constraint instanceof JvmUpperBound)) {
+                final JvmUpperBound upperBound = MemberFromSuperImplementor.this.typesFactory.createJvmUpperBound();
+                JvmTypeReference _typeReference = constraint.getTypeReference();
+                LightweightTypeReference _substitute = substitutor.substitute(_typeReference);
+                JvmTypeReference _typeReference_1 = _substitute.toTypeReference();
+                upperBound.setTypeReference(_typeReference_1);
+                EList<JvmTypeConstraint> _constraints_1 = typeParameter.getConstraints();
+                _constraints_1.add(upperBound);
+              } else {
+                if ((constraint instanceof JvmLowerBound)) {
+                  final JvmLowerBound upperBound_1 = MemberFromSuperImplementor.this.typesFactory.createJvmLowerBound();
+                  JvmTypeReference _typeReference_2 = constraint.getTypeReference();
+                  LightweightTypeReference _substitute_1 = substitutor.substitute(_typeReference_2);
+                  JvmTypeReference _typeReference_3 = _substitute_1.toTypeReference();
+                  upperBound_1.setTypeReference(_typeReference_3);
+                  EList<JvmTypeConstraint> _constraints_2 = typeParameter.getConstraints();
+                  _constraints_2.add(upperBound_1);
                 }
               }
-              _xblockexpression = (typeParameter);
             }
-            return _xblockexpression;
+            _xblockexpression = (typeParameter);
           }
-        };
+          return _xblockexpression;
+        }
+      };
       List<JvmTypeParameter> _map = ListExtensions.<JvmTypeParameter, JvmTypeParameter>map(_typeParameters_1, _function);
       typeParameters.addAll(_map);
       methodBuilder.setTypeParameters(typeParameters);
@@ -145,11 +145,11 @@ public class MemberFromSuperImplementor {
       _builder.append("(");
       EList<JvmFormalParameter> _parameters = overriddenOperation.getParameters();
       final Function1<JvmFormalParameter,String> _function_1 = new Function1<JvmFormalParameter,String>() {
-          public String apply(final JvmFormalParameter it) {
-            String _simpleName = it.getSimpleName();
-            return _simpleName;
-          }
-        };
+        public String apply(final JvmFormalParameter it) {
+          String _simpleName = it.getSimpleName();
+          return _simpleName;
+        }
+      };
       List<String> _map_1 = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function_1);
       String _join = IterableExtensions.join(_map_1, ", ");
       _builder.append(_join, "");
@@ -177,11 +177,11 @@ public class MemberFromSuperImplementor {
       _builder.append("super(");
       EList<JvmFormalParameter> _parameters_1 = superConstructor.getParameters();
       final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
-          public String apply(final JvmFormalParameter it) {
-            String _simpleName = it.getSimpleName();
-            return _simpleName;
-          }
-        };
+        public String apply(final JvmFormalParameter it) {
+          String _simpleName = it.getSimpleName();
+          return _simpleName;
+        }
+      };
       List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters_1, _function);
       String _join = IterableExtensions.join(_map, ", ");
       _builder.append(_join, "");
@@ -201,30 +201,30 @@ public class MemberFromSuperImplementor {
     builder.setVisibility(_visibility);
     EList<JvmFormalParameter> _parameters = overridden.getParameters();
     final Procedure2<JvmFormalParameter,Integer> _function = new Procedure2<JvmFormalParameter,Integer>() {
-        public void apply(final JvmFormalParameter it, final Integer index) {
-          final AbstractParameterBuilder parameterBuilder = builder.newParameterBuilder();
-          String _simpleName = it.getSimpleName();
-          parameterBuilder.setName(_simpleName);
-          EList<JvmFormalParameter> _parameters = overridden.getParameters();
-          JvmFormalParameter _get = _parameters.get((index).intValue());
-          JvmTypeReference _parameterType = _get.getParameterType();
-          LightweightTypeReference _substitute = substitutor.substitute(_parameterType);
-          parameterBuilder.setType(_substitute);
-          JvmAnnotationReference _findAnnotation = MemberFromSuperImplementor.this.annotationLookup.findAnnotation(it, Extension.class);
-          boolean _notEquals = (!Objects.equal(_findAnnotation, null));
-          parameterBuilder.setExtensionFlag(_notEquals);
-        }
-      };
+      public void apply(final JvmFormalParameter it, final Integer index) {
+        final AbstractParameterBuilder parameterBuilder = builder.newParameterBuilder();
+        String _simpleName = it.getSimpleName();
+        parameterBuilder.setName(_simpleName);
+        EList<JvmFormalParameter> _parameters = overridden.getParameters();
+        JvmFormalParameter _get = _parameters.get((index).intValue());
+        JvmTypeReference _parameterType = _get.getParameterType();
+        LightweightTypeReference _substitute = substitutor.substitute(_parameterType);
+        parameterBuilder.setType(_substitute);
+        JvmAnnotationReference _findAnnotation = MemberFromSuperImplementor.this.annotationLookup.findAnnotation(it, Extension.class);
+        boolean _notEquals = (!Objects.equal(_findAnnotation, null));
+        parameterBuilder.setExtensionFlag(_notEquals);
+      }
+    };
     IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function);
     boolean _isVarArgs = overridden.isVarArgs();
     builder.setVarArgsFlag(_isVarArgs);
     EList<JvmTypeReference> _exceptions = overridden.getExceptions();
     final Function1<JvmTypeReference,LightweightTypeReference> _function_1 = new Function1<JvmTypeReference,LightweightTypeReference>() {
-        public LightweightTypeReference apply(final JvmTypeReference it) {
-          LightweightTypeReference _substitute = substitutor.substitute(it);
-          return _substitute;
-        }
-      };
+      public LightweightTypeReference apply(final JvmTypeReference it) {
+        LightweightTypeReference _substitute = substitutor.substitute(it);
+        return _substitute;
+      }
+    };
     List<LightweightTypeReference> _map = ListExtensions.<JvmTypeReference, LightweightTypeReference>map(_exceptions, _function_1);
     builder.setExceptions(_map);
   }
@@ -239,11 +239,11 @@ public class MemberFromSuperImplementor {
       if ((jvmOverrider instanceof JvmGenericType)) {
         EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) jvmOverrider).getTypeParameters();
         final Procedure1<JvmTypeParameter> _function = new Procedure1<JvmTypeParameter>() {
-            public void apply(final JvmTypeParameter it) {
-              ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(owner, it);
-              lightweightOverrider.addTypeArgument(_parameterizedTypeReference);
-            }
-          };
+          public void apply(final JvmTypeParameter it) {
+            ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(owner, it);
+            lightweightOverrider.addTypeArgument(_parameterizedTypeReference);
+          }
+        };
         IterableExtensions.<JvmTypeParameter>forEach(_typeParameters, _function);
       }
       DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();

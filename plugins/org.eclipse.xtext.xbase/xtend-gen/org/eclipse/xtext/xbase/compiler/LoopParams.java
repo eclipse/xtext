@@ -35,33 +35,33 @@ public class LoopParams {
   
   public Function1<? super ITreeAppendable,? extends ITreeAppendable> setPrefix(final String prefix) {
     final Function1<ITreeAppendable,ITreeAppendable> _function = new Function1<ITreeAppendable,ITreeAppendable>() {
-        public ITreeAppendable apply(final ITreeAppendable it) {
-          ITreeAppendable _append = it.append(prefix);
-          return _append;
-        }
-      };
+      public ITreeAppendable apply(final ITreeAppendable it) {
+        ITreeAppendable _append = it.append(prefix);
+        return _append;
+      }
+    };
     Function1<? super ITreeAppendable,? extends ITreeAppendable> _prefix = this.prefix = _function;
     return _prefix;
   }
   
   public Function1<? super ITreeAppendable,? extends ITreeAppendable> setSeparator(final String separator) {
     final Function1<ITreeAppendable,ITreeAppendable> _function = new Function1<ITreeAppendable,ITreeAppendable>() {
-        public ITreeAppendable apply(final ITreeAppendable it) {
-          ITreeAppendable _append = it.append(separator);
-          return _append;
-        }
-      };
+      public ITreeAppendable apply(final ITreeAppendable it) {
+        ITreeAppendable _append = it.append(separator);
+        return _append;
+      }
+    };
     Function1<? super ITreeAppendable,? extends ITreeAppendable> _separator = this.separator = _function;
     return _separator;
   }
   
   public Function1<? super ITreeAppendable,? extends ITreeAppendable> setSuffix(final String suffix) {
     final Function1<ITreeAppendable,ITreeAppendable> _function = new Function1<ITreeAppendable,ITreeAppendable>() {
-        public ITreeAppendable apply(final ITreeAppendable it) {
-          ITreeAppendable _append = it.append(suffix);
-          return _append;
-        }
-      };
+      public ITreeAppendable apply(final ITreeAppendable it) {
+        ITreeAppendable _append = it.append(suffix);
+        return _append;
+      }
+    };
     Function1<? super ITreeAppendable,? extends ITreeAppendable> _suffix = this.suffix = _function;
     return _suffix;
   }

@@ -94,12 +94,12 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       Iterable<QualifiedName> _importedNames = description.getImportedNames();
       final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
-          public Boolean apply(final QualifiedName it) {
-            String _lastSegment = it.getLastSegment();
-            boolean _contains = ImportedNamesTest.this.primitives.contains(_lastSegment);
-            return Boolean.valueOf(_contains);
-          }
-        };
+        public Boolean apply(final QualifiedName it) {
+          String _lastSegment = it.getLastSegment();
+          boolean _contains = ImportedNamesTest.this.primitives.contains(_lastSegment);
+          return Boolean.valueOf(_contains);
+        }
+      };
       boolean _exists = IterableExtensions.<QualifiedName>exists(_importedNames, _function);
       Assert.assertFalse(_exists);
     } catch (Throwable _e) {

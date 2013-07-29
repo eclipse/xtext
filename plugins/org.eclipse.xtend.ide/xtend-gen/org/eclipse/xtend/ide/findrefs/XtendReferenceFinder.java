@@ -40,19 +40,19 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
   
   public void findReferences(final Set<URI> targetURIs, final IResourceDescription resourceDescription, final IAcceptor<IReferenceDescription> acceptor, final IProgressMonitor monitor, final ILocalResourceAccess localResourceAccess) {
     final Function1<URI,URI> _function = new Function1<URI,URI>() {
-        public URI apply(final URI it) {
-          URI _trimFragment = it.trimFragment();
-          return _trimFragment;
-        }
-      };
+      public URI apply(final URI it) {
+        URI _trimFragment = it.trimFragment();
+        return _trimFragment;
+      }
+    };
     Iterable<URI> _map = IterableExtensions.<URI, URI>map(targetURIs, _function);
     final Function1<URI,Boolean> _function_1 = new Function1<URI,Boolean>() {
-        public Boolean apply(final URI it) {
-          URI _uRI = resourceDescription.getURI();
-          boolean _equals = Objects.equal(it, _uRI);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final URI it) {
+        URI _uRI = resourceDescription.getURI();
+        boolean _equals = Objects.equal(it, _uRI);
+        return Boolean.valueOf(_equals);
+      }
+    };
     boolean _exists = IterableExtensions.<URI>exists(_map, _function_1);
     if (_exists) {
       return;
@@ -60,51 +60,51 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     final HashSet<QualifiedName> names = CollectionLiterals.<QualifiedName>newHashSet();
     for (final URI uri : targetURIs) {
       final IUnitOfWork<Boolean,ResourceSet> _function_2 = new IUnitOfWork<Boolean,ResourceSet>() {
-          public Boolean exec(final ResourceSet it) throws Exception {
-            Boolean _xblockexpression = null;
-            {
-              EObject _eObject = it.getEObject(uri, true);
-              final JvmType obj = EcoreUtil2.<JvmType>getContainerOfType(_eObject, JvmType.class);
-              Boolean _xifexpression = null;
-              boolean _notEquals = (!Objects.equal(obj, null));
-              if (_notEquals) {
-                String _identifier = obj.getIdentifier();
-                QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
-                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                boolean _add = names.add(_lowerCase);
-                _xifexpression = Boolean.valueOf(_add);
-              }
-              _xblockexpression = (_xifexpression);
+        public Boolean exec(final ResourceSet it) throws Exception {
+          Boolean _xblockexpression = null;
+          {
+            EObject _eObject = it.getEObject(uri, true);
+            final JvmType obj = EcoreUtil2.<JvmType>getContainerOfType(_eObject, JvmType.class);
+            Boolean _xifexpression = null;
+            boolean _notEquals = (!Objects.equal(obj, null));
+            if (_notEquals) {
+              String _identifier = obj.getIdentifier();
+              QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
+              QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+              boolean _add = names.add(_lowerCase);
+              _xifexpression = Boolean.valueOf(_add);
             }
-            return _xblockexpression;
+            _xblockexpression = (_xifexpression);
           }
-        };
+          return _xblockexpression;
+        }
+      };
       localResourceAccess.<Boolean>readOnly(uri, _function_2);
     }
     Iterable<QualifiedName> _importedNames = resourceDescription.getImportedNames();
     final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
     final Function1<QualifiedName,Boolean> _function_3 = new Function1<QualifiedName,Boolean>() {
-        public Boolean apply(final QualifiedName it) {
-          boolean _contains = importedNames.contains(it);
-          return Boolean.valueOf(_contains);
-        }
-      };
+      public Boolean apply(final QualifiedName it) {
+        boolean _contains = importedNames.contains(it);
+        return Boolean.valueOf(_contains);
+      }
+    };
     boolean _exists_1 = IterableExtensions.<QualifiedName>exists(names, _function_3);
     if (_exists_1) {
       URI _uRI = resourceDescription.getURI();
       final IUnitOfWork<Object,ResourceSet> _function_4 = new IUnitOfWork<Object,ResourceSet>() {
-          public Object exec(final ResourceSet resourceSet) throws Exception {
-            URI _uRI = resourceDescription.getURI();
-            Resource _resource = resourceSet.getResource(_uRI, true);
-            final IAcceptor<IReferenceDescription> _function = new IAcceptor<IReferenceDescription>() {
-                public void accept(final IReferenceDescription it) {
-                  acceptor.accept(it);
-                }
-              };
-            XtendReferenceFinder.this.findLocalReferencesInResource(targetURIs, _resource, _function);
-            return null;
-          }
-        };
+        public Object exec(final ResourceSet resourceSet) throws Exception {
+          URI _uRI = resourceDescription.getURI();
+          Resource _resource = resourceSet.getResource(_uRI, true);
+          final IAcceptor<IReferenceDescription> _function = new IAcceptor<IReferenceDescription>() {
+            public void accept(final IReferenceDescription it) {
+              acceptor.accept(it);
+            }
+          };
+          XtendReferenceFinder.this.findLocalReferencesInResource(targetURIs, _resource, _function);
+          return null;
+        }
+      };
       localResourceAccess.<Object>readOnly(_uRI, _function_4);
     }
   }

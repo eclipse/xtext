@@ -143,11 +143,11 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       }
       TypeReferences _typeReferences_1 = this.compilationUnit.getTypeReferences();
       final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
-          public JvmTypeReference apply(final TypeReference it) {
-            JvmTypeReference _jvmTypeReference = TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
-            return _jvmTypeReference;
-          }
-        };
+        public JvmTypeReference apply(final TypeReference it) {
+          JvmTypeReference _jvmTypeReference = TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
+          return _jvmTypeReference;
+        }
+      };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
       JvmParameterizedTypeReference _createTypeRef = _typeReferences_1.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
       TypeReference _typeReference = this.compilationUnit.toTypeReference(_createTypeRef);
@@ -274,11 +274,11 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       }
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
-          public JvmTypeReference apply(final TypeReference it) {
-            JvmTypeReference _jvmTypeReference = TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
-            return _jvmTypeReference;
-          }
-        };
+        public JvmTypeReference apply(final TypeReference it) {
+          JvmTypeReference _jvmTypeReference = TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
+          return _jvmTypeReference;
+        }
+      };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
       JvmParameterizedTypeReference _createTypeRef = _typeReferences.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
       TypeReference _typeReference = this.compilationUnit.toTypeReference(_createTypeRef);

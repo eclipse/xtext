@@ -70,12 +70,12 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
     LightweightTypeReference _delegate = this.getDelegate();
     List<LightweightTypeReference> _typeArguments = _delegate.getTypeArguments();
     final Function1<LightweightTypeReference,TypeReference> _function = new Function1<LightweightTypeReference,TypeReference>() {
-        public TypeReference apply(final LightweightTypeReference it) {
-          CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
-          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-          return _typeReference;
-        }
-      };
+      public TypeReference apply(final LightweightTypeReference it) {
+        CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
+        TypeReference _typeReference = _compilationUnit.toTypeReference(it);
+        return _typeReference;
+      }
+    };
     List<TypeReference> _map = ListExtensions.<LightweightTypeReference, TypeReference>map(_typeArguments, _function);
     return _map;
   }

@@ -67,13 +67,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     XAnnotation _delegate_2 = this.getDelegate();
     EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
     final Function1<XAnnotationElementValuePair,Boolean> _function = new Function1<XAnnotationElementValuePair,Boolean>() {
-        public Boolean apply(final XAnnotationElementValuePair it) {
-          JvmOperation _element = it.getElement();
-          String _simpleName = _element.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, property);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final XAnnotationElementValuePair it) {
+        JvmOperation _element = it.getElement();
+        String _simpleName = _element.getSimpleName();
+        boolean _equals = Objects.equal(_simpleName, property);
+        return Boolean.valueOf(_equals);
+      }
+    };
     XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
     XExpression _value_2 = null;
     if (_findFirst!=null) {
@@ -108,13 +108,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     XAnnotation _delegate_2 = this.getDelegate();
     EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
     final Function1<XAnnotationElementValuePair,Boolean> _function = new Function1<XAnnotationElementValuePair,Boolean>() {
-        public Boolean apply(final XAnnotationElementValuePair it) {
-          JvmOperation _element = it.getElement();
-          String _simpleName = _element.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, property);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final XAnnotationElementValuePair it) {
+        JvmOperation _element = it.getElement();
+        String _simpleName = _element.getSimpleName();
+        boolean _equals = Objects.equal(_simpleName, property);
+        return Boolean.valueOf(_equals);
+      }
+    };
     XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
     XExpression _value_2 = null;
     if (_findFirst!=null) {

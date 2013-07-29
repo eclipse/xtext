@@ -83,24 +83,24 @@ public class ProblemSupportImpl implements ProblemSupport {
     Iterable<Diagnostic> _plus = Iterables.<Diagnostic>concat(_errors, _warnings);
     final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(_plus, EObjectDiagnosticImpl.class);
     final Function1<EObjectDiagnosticImpl,Boolean> _function = new Function1<EObjectDiagnosticImpl,Boolean>() {
-        public Boolean apply(final EObjectDiagnosticImpl diag) {
-          EObject _problematicObject = diag.getProblematicObject();
-          EObject _value = resAndObj.getValue();
-          boolean _equals = Objects.equal(_problematicObject, _value);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final EObjectDiagnosticImpl diag) {
+        EObject _problematicObject = diag.getProblematicObject();
+        EObject _value = resAndObj.getValue();
+        boolean _equals = Objects.equal(_problematicObject, _value);
+        return Boolean.valueOf(_equals);
+      }
+    };
     Iterable<EObjectDiagnosticImpl> _filter = IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function);
     final Function1<EObjectDiagnosticImpl,Problem> _function_1 = new Function1<EObjectDiagnosticImpl,Problem>() {
-        public Problem apply(final EObjectDiagnosticImpl diag) {
-          String _code = diag.getCode();
-          String _message = diag.getMessage();
-          Severity _severity = diag.getSeverity();
-          org.eclipse.xtend.lib.macro.services.Problem.Severity _translateSeverity = ProblemSupportImpl.this.translateSeverity(_severity);
-          ProblemImpl _problemImpl = new ProblemImpl(_code, _message, _translateSeverity);
-          return ((Problem) _problemImpl);
-        }
-      };
+      public Problem apply(final EObjectDiagnosticImpl diag) {
+        String _code = diag.getCode();
+        String _message = diag.getMessage();
+        Severity _severity = diag.getSeverity();
+        org.eclipse.xtend.lib.macro.services.Problem.Severity _translateSeverity = ProblemSupportImpl.this.translateSeverity(_severity);
+        ProblemImpl _problemImpl = new ProblemImpl(_code, _message, _translateSeverity);
+        return ((Problem) _problemImpl);
+      }
+    };
     final Iterable<Problem> result = IterableExtensions.<EObjectDiagnosticImpl, Problem>map(_filter, _function_1);
     return IterableExtensions.<Problem>toList(result);
   }

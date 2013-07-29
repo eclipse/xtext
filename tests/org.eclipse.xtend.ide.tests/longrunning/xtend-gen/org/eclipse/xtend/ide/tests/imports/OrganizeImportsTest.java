@@ -39,11 +39,11 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       StringBuilder _stringBuilder = new StringBuilder(model);
       final StringBuilder builder = _stringBuilder;
       final Function1<ReplaceRegion,Integer> _function = new Function1<ReplaceRegion,Integer>() {
-          public Integer apply(final ReplaceRegion it) {
-            int _offset = it.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
+        public Integer apply(final ReplaceRegion it) {
+          int _offset = it.getOffset();
+          return Integer.valueOf(_offset);
+        }
+      };
       List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
       List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(_sortBy);
       for (final ReplaceRegion it : _reverse) {

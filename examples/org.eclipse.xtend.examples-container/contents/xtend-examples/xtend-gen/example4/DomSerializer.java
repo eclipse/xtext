@@ -72,11 +72,11 @@ public class DomSerializer {
     ArrayList<Node> _contents = n.getContents();
     if (_contents!=null) {
       final Function1<Node,CharSequence> _function = new Function1<Node,CharSequence>() {
-          public CharSequence apply(final Node it) {
-            CharSequence _text = DomSerializer.this.toText(it);
-            return _text;
-          }
-        };
+        public CharSequence apply(final Node it) {
+          CharSequence _text = DomSerializer.this.toText(it);
+          return _text;
+        }
+      };
       _map=ListExtensions.<Node, CharSequence>map(_contents, _function);
     }
     if (_map!=null) {

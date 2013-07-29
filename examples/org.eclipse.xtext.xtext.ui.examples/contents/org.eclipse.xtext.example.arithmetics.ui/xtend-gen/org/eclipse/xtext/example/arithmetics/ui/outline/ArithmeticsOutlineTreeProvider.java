@@ -24,10 +24,10 @@ public class ArithmeticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
     EList<EObject> _eContents = module.eContents();
     Iterable<Definition> _filter = Iterables.<Definition>filter(_eContents, Definition.class);
     final Procedure1<Definition> _function = new Procedure1<Definition>() {
-        public void apply(final Definition it) {
-          ArithmeticsOutlineTreeProvider.this.createNode(parentNode, it);
-        }
-      };
+      public void apply(final Definition it) {
+        ArithmeticsOutlineTreeProvider.this.createNode(parentNode, it);
+      }
+    };
     IterableExtensions.<Definition>forEach(_filter, _function);
   }
   

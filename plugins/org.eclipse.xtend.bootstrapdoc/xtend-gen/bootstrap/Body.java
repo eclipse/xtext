@@ -33,12 +33,12 @@ public class Body {
     {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(rootSection);
       final Function1<AbstractSection,Boolean> _function = new Function1<AbstractSection,Boolean>() {
-          public Boolean apply(final AbstractSection it) {
-            boolean _isTargetRootElement = Body.this._targetPaths.isTargetRootElement(it);
-            boolean _not = (!_isTargetRootElement);
-            return Boolean.valueOf(_not);
-          }
-        };
+        public Boolean apply(final AbstractSection it) {
+          boolean _isTargetRootElement = Body.this._targetPaths.isTargetRootElement(it);
+          boolean _not = (!_isTargetRootElement);
+          return Boolean.valueOf(_not);
+        }
+      };
       Iterable<? extends AbstractSection> _filter = IterableExtensions.filter(_sections, _function);
       for(final AbstractSection chapter : _filter) {
         _builder.append("\t");

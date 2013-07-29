@@ -64,60 +64,60 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
     final Procedure2<XClosure,Integer> _function = new Procedure2<XClosure,Integer>() {
-        public void apply(final XClosure closure, final Integer index) {
-          final LightweightTypeReference closureType = resolvedTypes.getActualType(closure);
-          final Callable<Object> _function = new Callable<Object>() {
-              public Object call() throws Exception {
-                StringConcatenation _builder = new StringConcatenation();
-                _builder.append("failed for closure at ");
-                _builder.append(index, "");
-                _builder.append(": ");
-                _builder.append(closureType, "");
-                Assert.assertTrue(_builder.toString(), (closureType instanceof FunctionTypeReference));
-                return null;
-              }
-            };
-          BatchClosureTypeTest.this.collector.checkSucceeds(_function);
-          final Callable<Object> _function_1 = new Callable<Object>() {
-              public Object call() throws Exception {
-                StringConcatenation _builder = new StringConcatenation();
-                _builder.append("failed for closure at ");
-                _builder.append(index, "");
-                String _get = types[(index).intValue()];
-                String _simpleName = closureType.getSimpleName();
-                Assert.assertEquals(_builder.toString(), _get, _simpleName);
-                return null;
-              }
-            };
-          BatchClosureTypeTest.this.collector.checkSucceeds(_function_1);
-          result.add(closureType);
-        }
-      };
+      public void apply(final XClosure closure, final Integer index) {
+        final LightweightTypeReference closureType = resolvedTypes.getActualType(closure);
+        final Callable<Object> _function = new Callable<Object>() {
+          public Object call() throws Exception {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("failed for closure at ");
+            _builder.append(index, "");
+            _builder.append(": ");
+            _builder.append(closureType, "");
+            Assert.assertTrue(_builder.toString(), (closureType instanceof FunctionTypeReference));
+            return null;
+          }
+        };
+        BatchClosureTypeTest.this.collector.checkSucceeds(_function);
+        final Callable<Object> _function_1 = new Callable<Object>() {
+          public Object call() throws Exception {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("failed for closure at ");
+            _builder.append(index, "");
+            Object _get = types[(index).intValue()];
+            String _simpleName = closureType.getSimpleName();
+            Assert.assertEquals(_builder.toString(), _get, _simpleName);
+            return null;
+          }
+        };
+        BatchClosureTypeTest.this.collector.checkSucceeds(_function_1);
+        result.add(closureType);
+      }
+    };
     IterableExtensions.<XClosure>forEach(closures, _function);
     return result;
   }
   
   public void withEquivalents(final List<Object> references, final String... types) {
     final Procedure2<Object,Integer> _function = new Procedure2<Object,Integer>() {
-        public void apply(final Object reference, final Integer index) {
-          final Callable<Object> _function = new Callable<Object>() {
-              public Object call() throws Exception {
-                Assert.assertTrue((reference instanceof FunctionTypeReference));
-                return null;
-              }
-            };
-          BatchClosureTypeTest.this.collector.checkSucceeds(_function);
-          final Callable<Object> _function_1 = new Callable<Object>() {
-              public Object call() throws Exception {
-                String _get = types[(index).intValue()];
-                String _equivalent = BatchClosureTypeTest.this.getEquivalent(((FunctionTypeReference) reference));
-                Assert.assertEquals(_get, _equivalent);
-                return null;
-              }
-            };
-          BatchClosureTypeTest.this.collector.checkSucceeds(_function_1);
-        }
-      };
+      public void apply(final Object reference, final Integer index) {
+        final Callable<Object> _function = new Callable<Object>() {
+          public Object call() throws Exception {
+            Assert.assertTrue((reference instanceof FunctionTypeReference));
+            return null;
+          }
+        };
+        BatchClosureTypeTest.this.collector.checkSucceeds(_function);
+        final Callable<Object> _function_1 = new Callable<Object>() {
+          public Object call() throws Exception {
+            Object _get = types[(index).intValue()];
+            String _equivalent = BatchClosureTypeTest.this.getEquivalent(((FunctionTypeReference) reference));
+            Assert.assertEquals(_get, _equivalent);
+            return null;
+          }
+        };
+        BatchClosureTypeTest.this.collector.checkSucceeds(_function_1);
+      }
+    };
     IterableExtensions.<Object>forEach(references, _function);
   }
   
@@ -135,11 +135,11 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
-        public String apply(final LightweightTypeReference it) {
-          String _simpleName = it.getSimpleName();
-          return _simpleName;
-        }
-      };
+      public String apply(final LightweightTypeReference it) {
+        String _simpleName = it.getSimpleName();
+        return _simpleName;
+      }
+    };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);
     _builder.append(_join, "");
     _builder.append(">");

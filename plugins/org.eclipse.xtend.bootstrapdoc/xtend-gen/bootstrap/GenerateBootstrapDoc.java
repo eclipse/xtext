@@ -122,40 +122,40 @@ public class GenerateBootstrapDoc {
     final TreeIterator<Object> iter = EcoreUtil.<Object>getAllContents(_resourceSet, true);
     Iterator<ImageRef> _filter = Iterators.<ImageRef>filter(iter, ImageRef.class);
     final Procedure1<ImageRef> _function = new Procedure1<ImageRef>() {
-        public void apply(final ImageRef it) {
-          try {
-            String _path = it.getPath();
-            File _file = new File(sourceDir, _path);
-            final File source = _file;
-            boolean _exists = source.exists();
-            boolean _not = (!_exists);
-            if (_not) {
-              String _canonicalPath = source.getCanonicalPath();
-              String _plus = ("Referenced Image " + _canonicalPath);
-              String _plus_1 = (_plus + " does not exist in ");
-              Resource _eResource = it.eResource();
-              URI _uRI = _eResource.getURI();
-              String _lastSegment = _uRI.lastSegment();
-              String _plus_2 = (_plus_1 + _lastSegment);
-              String _plus_3 = (_plus_2 + " line ");
-              ICompositeNode _node = NodeModelUtils.getNode(it);
-              int _startLine = _node.getStartLine();
-              String _plus_4 = (_plus_3 + Integer.valueOf(_startLine));
-              IllegalStateException _illegalStateException = new IllegalStateException(_plus_4);
-              throw _illegalStateException;
-            }
-            String _path_1 = it.getPath();
-            File _file_1 = new File(targetDir, _path_1);
-            final File target = _file_1;
-            String _canonicalPath_1 = target.getCanonicalPath();
-            InputOutput.<String>println(_canonicalPath_1);
-            InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(source);
-            Files.copy(_newInputStreamSupplier, target);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
+      public void apply(final ImageRef it) {
+        try {
+          String _path = it.getPath();
+          File _file = new File(sourceDir, _path);
+          final File source = _file;
+          boolean _exists = source.exists();
+          boolean _not = (!_exists);
+          if (_not) {
+            String _canonicalPath = source.getCanonicalPath();
+            String _plus = ("Referenced Image " + _canonicalPath);
+            String _plus_1 = (_plus + " does not exist in ");
+            Resource _eResource = it.eResource();
+            URI _uRI = _eResource.getURI();
+            String _lastSegment = _uRI.lastSegment();
+            String _plus_2 = (_plus_1 + _lastSegment);
+            String _plus_3 = (_plus_2 + " line ");
+            ICompositeNode _node = NodeModelUtils.getNode(it);
+            int _startLine = _node.getStartLine();
+            String _plus_4 = (_plus_3 + Integer.valueOf(_startLine));
+            IllegalStateException _illegalStateException = new IllegalStateException(_plus_4);
+            throw _illegalStateException;
           }
+          String _path_1 = it.getPath();
+          File _file_1 = new File(targetDir, _path_1);
+          final File target = _file_1;
+          String _canonicalPath_1 = target.getCanonicalPath();
+          InputOutput.<String>println(_canonicalPath_1);
+          InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(source);
+          Files.copy(_newInputStreamSupplier, target);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      };
+      }
+    };
     IteratorExtensions.<ImageRef>forEach(_filter, _function);
   }
   
@@ -164,12 +164,12 @@ public class GenerateBootstrapDoc {
     PathTraverser _pathTraverser = new PathTraverser();
     List<String> _singletonList = Collections.<String>singletonList("../org.eclipse.xtend.doc.xdoc/xdoc");
     final Predicate<URI> _function = new Predicate<URI>() {
-        public boolean apply(final URI it) {
-          String _fileExtension = it.fileExtension();
-          boolean _equals = Objects.equal(_fileExtension, "xdoc");
-          return _equals;
-        }
-      };
+      public boolean apply(final URI it) {
+        String _fileExtension = it.fileExtension();
+        boolean _equals = Objects.equal(_fileExtension, "xdoc");
+        return _equals;
+      }
+    };
     Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(_singletonList, _function);
     final Collection<URI> uris = _resolvePathes.values();
     for (final URI uri : uris) {
@@ -182,29 +182,29 @@ public class GenerateBootstrapDoc {
     EcoreUtil2.resolveAll(rs);
     EList<Resource> _resources = rs.getResources();
     final Function1<Resource,List<Issue>> _function_1 = new Function1<Resource,List<Issue>>() {
-        public List<Issue> apply(final Resource it) {
-          List<Issue> _validate = GenerateBootstrapDoc.this.validator.validate(it, CheckMode.ALL, null);
-          return _validate;
-        }
-      };
+      public List<Issue> apply(final Resource it) {
+        List<Issue> _validate = GenerateBootstrapDoc.this.validator.validate(it, CheckMode.ALL, null);
+        return _validate;
+      }
+    };
     List<List<Issue>> _map = ListExtensions.<Resource, List<Issue>>map(_resources, _function_1);
     final Iterable<Issue> issues = Iterables.<Issue>concat(_map);
     final Function1<Issue,Boolean> _function_2 = new Function1<Issue,Boolean>() {
-        public Boolean apply(final Issue i) {
-          Severity _severity = i.getSeverity();
-          boolean _equals = Objects.equal(_severity, Severity.ERROR);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final Issue i) {
+        Severity _severity = i.getSeverity();
+        boolean _equals = Objects.equal(_severity, Severity.ERROR);
+        return Boolean.valueOf(_equals);
+      }
+    };
     boolean _exists = IterableExtensions.<Issue>exists(issues, _function_2);
     if (_exists) {
       final Function1<Issue,String> _function_3 = new Function1<Issue,String>() {
-          public String apply(final Issue it) {
-            String _string = it.toString();
-            String _plus = ("\n\t" + _string);
-            return _plus;
-          }
-        };
+        public String apply(final Issue it) {
+          String _string = it.toString();
+          String _plus = ("\n\t" + _string);
+          return _plus;
+        }
+      };
       Iterable<String> _map_1 = IterableExtensions.<Issue, String>map(issues, _function_3);
       String _join = IterableExtensions.join(_map_1);
       IllegalStateException _illegalStateException = new IllegalStateException(_join);
@@ -214,11 +214,11 @@ public class GenerateBootstrapDoc {
       boolean _not = (!_isEmpty);
       if (_not) {
         final Function1<Issue,String> _function_4 = new Function1<Issue,String>() {
-            public String apply(final Issue it) {
-              String _string = it.toString();
-              return _string;
-            }
-          };
+          public String apply(final Issue it) {
+            String _string = it.toString();
+            return _string;
+          }
+        };
         Iterable<String> _map_2 = IterableExtensions.<Issue, String>map(issues, _function_4);
         String _join_1 = IterableExtensions.join(_map_2, "\n");
         InputOutput.<String>println(_join_1);

@@ -28,17 +28,17 @@ public class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-        public void accept(final CompilationResult it) {
-          final Class<? extends Object> clazz = it.getCompiledClass();
-          final Constructor<? extends Object>[] constr = clazz.getDeclaredConstructors();
-          int _length = constr.length;
-          Assert.assertEquals(1, _length);
-          Constructor<? extends Object> _head = IterableExtensions.<Constructor<? extends Object>>head(((Iterable<Constructor<? extends Object>>)Conversions.doWrapArray(constr)));
-          Class<? extends Object>[] _parameterTypes = _head.getParameterTypes();
-          int _length_1 = _parameterTypes.length;
-          Assert.assertEquals(1, _length_1);
-        }
-      };
+      public void accept(final CompilationResult it) {
+        final Class<? extends Object> clazz = it.getCompiledClass();
+        final Constructor<? extends Object>[] constr = clazz.getDeclaredConstructors();
+        int _length = constr.length;
+        Assert.assertEquals(1, _length);
+        Constructor<? extends Object> _head = IterableExtensions.<Constructor<? extends Object>>head(((Iterable<Constructor<? extends Object>>)Conversions.doWrapArray(constr)));
+        Class<? extends Object>[] _parameterTypes = _head.getParameterTypes();
+        int _length_1 = _parameterTypes.length;
+        Assert.assertEquals(1, _length_1);
+      }
+    };
     this._xtendCompilerTester.compile(_builder, _function);
   }
 }

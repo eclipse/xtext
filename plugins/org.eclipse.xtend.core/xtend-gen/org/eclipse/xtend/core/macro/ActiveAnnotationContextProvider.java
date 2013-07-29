@@ -78,52 +78,52 @@ public class ActiveAnnotationContextProvider {
         try {
           Resource _eResource = file.eResource();
           final Provider<List<ActiveAnnotationContext>> _function = new Provider<List<ActiveAnnotationContext>>() {
-              public List<ActiveAnnotationContext> get() {
-                final Map<JvmAnnotationType,ActiveAnnotationContext> annotatedElements = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
-                final CompilationUnitImpl compilationUnit = ActiveAnnotationContextProvider.this.compilationUnitProvider.get();
-                compilationUnit.setXtendFile(file);
-                final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
-                    public void accept(final Pair<JvmAnnotationType,XAnnotation> it) {
-                      JvmAnnotationType _key = it.getKey();
-                      boolean _containsKey = annotatedElements.containsKey(_key);
-                      boolean _not = (!_containsKey);
-                      if (_not) {
-                        ActiveAnnotationContext _activeAnnotationContext = new ActiveAnnotationContext();
-                        final ActiveAnnotationContext fa = _activeAnnotationContext;
-                        fa.setCompilationUnit(compilationUnit);
-                        JvmAnnotationType _key_1 = it.getKey();
-                        final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
-                        final Object processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
-                        boolean _notEquals = (!Objects.equal(processorInstance, null));
-                        if (_notEquals) {
-                          fa.setProcessorInstance(processorInstance);
-                        } else {
-                          Resource _eResource = file.eResource();
-                          EList<Diagnostic> _errors = _eResource.getErrors();
-                          String _identifier = processorType.getIdentifier();
-                          String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
-                          String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
-                          int _minus = (-1);
-                          EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
-                            IssueCodes.PROCESSING_ERROR, _plus_1, file, null, _minus, null);
-                          _errors.add(_eObjectDiagnosticImpl);
-                        }
-                        JvmAnnotationType _key_2 = it.getKey();
-                        annotatedElements.put(_key_2, fa);
-                      }
-                      JvmAnnotationType _key_3 = it.getKey();
-                      ActiveAnnotationContext _get = annotatedElements.get(_key_3);
-                      List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
-                      XAnnotation _value = it.getValue();
-                      XtendAnnotationTarget _annotatedTarget = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getAnnotatedTarget(_value);
-                      _annotatedSourceElements.add(_annotatedTarget);
+            public List<ActiveAnnotationContext> get() {
+              final Map<JvmAnnotationType,ActiveAnnotationContext> annotatedElements = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
+              final CompilationUnitImpl compilationUnit = ActiveAnnotationContextProvider.this.compilationUnitProvider.get();
+              compilationUnit.setXtendFile(file);
+              final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
+                public void accept(final Pair<JvmAnnotationType,XAnnotation> it) {
+                  JvmAnnotationType _key = it.getKey();
+                  boolean _containsKey = annotatedElements.containsKey(_key);
+                  boolean _not = (!_containsKey);
+                  if (_not) {
+                    ActiveAnnotationContext _activeAnnotationContext = new ActiveAnnotationContext();
+                    final ActiveAnnotationContext fa = _activeAnnotationContext;
+                    fa.setCompilationUnit(compilationUnit);
+                    JvmAnnotationType _key_1 = it.getKey();
+                    final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
+                    final Object processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
+                    boolean _notEquals = (!Objects.equal(processorInstance, null));
+                    if (_notEquals) {
+                      fa.setProcessorInstance(processorInstance);
+                    } else {
+                      Resource _eResource = file.eResource();
+                      EList<Diagnostic> _errors = _eResource.getErrors();
+                      String _identifier = processorType.getIdentifier();
+                      String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
+                      String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
+                      int _minus = (-1);
+                      EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
+                        IssueCodes.PROCESSING_ERROR, _plus_1, file, null, _minus, null);
+                      _errors.add(_eObjectDiagnosticImpl);
                     }
-                  };
-                ActiveAnnotationContextProvider.this.searchAnnotatedElements(file, _function);
-                Collection<ActiveAnnotationContext> _values = annotatedElements.values();
-                return IterableExtensions.<ActiveAnnotationContext>toList(_values);
-              }
-            };
+                    JvmAnnotationType _key_2 = it.getKey();
+                    annotatedElements.put(_key_2, fa);
+                  }
+                  JvmAnnotationType _key_3 = it.getKey();
+                  ActiveAnnotationContext _get = annotatedElements.get(_key_3);
+                  List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
+                  XAnnotation _value = it.getValue();
+                  XtendAnnotationTarget _annotatedTarget = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getAnnotatedTarget(_value);
+                  _annotatedSourceElements.add(_annotatedTarget);
+                }
+              };
+              ActiveAnnotationContextProvider.this.searchAnnotatedElements(file, _function);
+              Collection<ActiveAnnotationContext> _values = annotatedElements.values();
+              return IterableExtensions.<ActiveAnnotationContext>toList(_values);
+            }
+          };
           List<ActiveAnnotationContext> _get = this.cache.<List<ActiveAnnotationContext>>get("annotation context", _eResource, _function);
           _xtrycatchfinallyexpression = _get;
         } catch (final Throwable _t) {
@@ -170,10 +170,10 @@ public class ActiveAnnotationContextProvider {
         _matched=true;
         EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
         final Procedure1<XtendTypeDeclaration> _function = new Procedure1<XtendTypeDeclaration>() {
-            public void apply(final XtendTypeDeclaration it) {
-              ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
-            }
-          };
+          public void apply(final XtendTypeDeclaration it) {
+            ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+          }
+        };
         IterableExtensions.<XtendTypeDeclaration>forEach(_xtendTypes, _function);
       }
     }
@@ -184,10 +184,10 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(_xtendClass, acceptor);
         EList<XtendMember> _members = _xtendClass.getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
-            public void apply(final XtendMember it) {
-              ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
-            }
-          };
+          public void apply(final XtendMember it) {
+            ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+          }
+        };
         IterableExtensions.<XtendMember>forEach(_members, _function);
       }
     }
@@ -198,10 +198,10 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(_xtendInterface, acceptor);
         EList<XtendMember> _members = _xtendInterface.getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
-            public void apply(final XtendMember it) {
-              ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
-            }
-          };
+          public void apply(final XtendMember it) {
+            ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+          }
+        };
         IterableExtensions.<XtendMember>forEach(_members, _function);
       }
     }
@@ -212,10 +212,10 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(_xtendEnum, acceptor);
         EList<XtendMember> _members = _xtendEnum.getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
-            public void apply(final XtendMember it) {
-              ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
-            }
-          };
+          public void apply(final XtendMember it) {
+            ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+          }
+        };
         IterableExtensions.<XtendMember>forEach(_members, _function);
       }
     }
@@ -226,10 +226,10 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(_xtendFunction, acceptor);
         EList<XtendParameter> _parameters = _xtendFunction.getParameters();
         final Procedure1<XtendParameter> _function = new Procedure1<XtendParameter>() {
-            public void apply(final XtendParameter it) {
-              ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
-            }
-          };
+          public void apply(final XtendParameter it) {
+            ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+          }
+        };
         IterableExtensions.<XtendParameter>forEach(_parameters, _function);
       }
     }
@@ -240,10 +240,10 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(_xtendConstructor, acceptor);
         EList<XtendParameter> _parameters = _xtendConstructor.getParameters();
         final Procedure1<XtendParameter> _function = new Procedure1<XtendParameter>() {
-            public void apply(final XtendParameter it) {
-              ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
-            }
-          };
+          public void apply(final XtendParameter it) {
+            ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+          }
+        };
         IterableExtensions.<XtendParameter>forEach(_parameters, _function);
       }
     }
@@ -259,11 +259,11 @@ public class ActiveAnnotationContextProvider {
   private void registerMacroAnnotations(final XtendAnnotationTarget candidate, final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> acceptor) {
     EList<XAnnotation> _annotations = candidate.getAnnotations();
     final Function1<XAnnotation,Boolean> _function = new Function1<XAnnotation,Boolean>() {
-        public Boolean apply(final XAnnotation it) {
-          boolean _isProcessed = ActiveAnnotationContextProvider.this._xAnnotationExtensions.isProcessed(it);
-          return Boolean.valueOf(_isProcessed);
-        }
-      };
+      public Boolean apply(final XAnnotation it) {
+        boolean _isProcessed = ActiveAnnotationContextProvider.this._xAnnotationExtensions.isProcessed(it);
+        return Boolean.valueOf(_isProcessed);
+      }
+    };
     Iterable<XAnnotation> _filter = IterableExtensions.<XAnnotation>filter(_annotations, _function);
     for (final XAnnotation annotation : _filter) {
       {

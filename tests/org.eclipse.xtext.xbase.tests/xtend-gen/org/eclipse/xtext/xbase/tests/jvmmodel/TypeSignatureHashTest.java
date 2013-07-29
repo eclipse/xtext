@@ -53,18 +53,18 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     final EObject eObject = EcoreFactory.eINSTANCE.createEObject();
     final JvmGenericType bar = this._jvmTypesBuilder.toClass(eObject, "Bar");
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-        public void apply(final JvmGenericType it) {
-          EList<JvmMember> _members = it.getMembers();
-          TypeSignatureHashTest.this._jvmTypesBuilder.<JvmGenericType>operator_add(_members, bar);
-        }
-      };
+      public void apply(final JvmGenericType it) {
+        EList<JvmMember> _members = it.getMembers();
+        TypeSignatureHashTest.this._jvmTypesBuilder.<JvmGenericType>operator_add(_members, bar);
+      }
+    };
     final JvmGenericType foo = this._jvmTypesBuilder.toClass(eObject, "Foo", _function);
     final String hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(foo);
     EList<JvmMember> _members = bar.getMembers();
     final Procedure1<JvmConstructor> _function_1 = new Procedure1<JvmConstructor>() {
-        public void apply(final JvmConstructor it) {
-        }
-      };
+      public void apply(final JvmConstructor it) {
+      }
+    };
     JvmConstructor _constructor = this._jvmTypesBuilder.toConstructor(eObject, _function_1);
     this._jvmTypesBuilder.<JvmConstructor>operator_add(_members, _constructor);
     String _hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(foo);

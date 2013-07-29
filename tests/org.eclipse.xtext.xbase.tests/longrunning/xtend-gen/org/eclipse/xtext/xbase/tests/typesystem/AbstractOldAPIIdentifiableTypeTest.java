@@ -26,17 +26,17 @@ public abstract class AbstractOldAPIIdentifiableTypeTest extends AbstractIdentif
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<JvmIdentifiableElement> identifiables = this.findIdentifiables(expressionWithQualifiedNames);
     final Procedure2<JvmIdentifiableElement,Integer> _function = new Procedure2<JvmIdentifiableElement,Integer>() {
-        public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
-          ITypeProvider _typeProvider = AbstractOldAPIIdentifiableTypeTest.this.getTypeProvider();
-          final JvmTypeReference type = _typeProvider.getTypeForIdentifiable(identifiable);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for identifiable at ");
-          _builder.append(index, "");
-          String _get = types[(index).intValue()];
-          String _simpleName = type.getSimpleName();
-          Assert.assertEquals(_builder.toString(), _get, _simpleName);
-        }
-      };
+      public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
+        ITypeProvider _typeProvider = AbstractOldAPIIdentifiableTypeTest.this.getTypeProvider();
+        final JvmTypeReference type = _typeProvider.getTypeForIdentifiable(identifiable);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("failed for identifiable at ");
+        _builder.append(index, "");
+        Object _get = types[(index).intValue()];
+        String _simpleName = type.getSimpleName();
+        Assert.assertEquals(_builder.toString(), _get, _simpleName);
+      }
+    };
     IterableExtensions.<JvmIdentifiableElement>forEach(identifiables, _function);
   }
   

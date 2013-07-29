@@ -23,13 +23,13 @@ public class ClassBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(_xtendClass);
     final Procedure1<AbstractClassBuilder> _function = new Procedure1<AbstractClassBuilder>() {
-        public void apply(final AbstractClassBuilder it) {
-          JvmDeclaredType _xtendClass = ClassBuilderTest.this.getXtendClass();
-          it.setContext(_xtendClass);
-          it.setClassName("Bar");
-          it.setVisibility(JvmVisibility.PUBLIC);
-        }
-      };
+      public void apply(final AbstractClassBuilder it) {
+        JvmDeclaredType _xtendClass = ClassBuilderTest.this.getXtendClass();
+        it.setContext(_xtendClass);
+        it.setClassName("Bar");
+        it.setVisibility(JvmVisibility.PUBLIC);
+      }
+    };
     AbstractClassBuilder _doubleArrow = ObjectExtensions.<AbstractClassBuilder>operator_doubleArrow(_createClassBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Bar {");
@@ -43,13 +43,13 @@ public class ClassBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(_javaClass);
     final Procedure1<AbstractClassBuilder> _function = new Procedure1<AbstractClassBuilder>() {
-        public void apply(final AbstractClassBuilder it) {
-          JvmDeclaredType _javaClass = ClassBuilderTest.this.getJavaClass();
-          it.setContext(_javaClass);
-          it.setClassName("Bar");
-          it.setVisibility(JvmVisibility.PUBLIC);
-        }
-      };
+      public void apply(final AbstractClassBuilder it) {
+        JvmDeclaredType _javaClass = ClassBuilderTest.this.getJavaClass();
+        it.setContext(_javaClass);
+        it.setClassName("Bar");
+        it.setVisibility(JvmVisibility.PUBLIC);
+      }
+    };
     AbstractClassBuilder _doubleArrow = ObjectExtensions.<AbstractClassBuilder>operator_doubleArrow(_createClassBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class Bar {");

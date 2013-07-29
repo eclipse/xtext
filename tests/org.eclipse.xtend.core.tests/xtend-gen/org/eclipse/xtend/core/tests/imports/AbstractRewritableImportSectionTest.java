@@ -326,11 +326,11 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     final StringBuilder builder = _stringBuilder;
     final List<ReplaceRegion> changes = section.rewrite();
     final Function1<ReplaceRegion,Integer> _function = new Function1<ReplaceRegion,Integer>() {
-        public Integer apply(final ReplaceRegion it) {
-          int _offset = it.getOffset();
-          return Integer.valueOf(_offset);
-        }
-      };
+      public Integer apply(final ReplaceRegion it) {
+        int _offset = it.getOffset();
+        return Integer.valueOf(_offset);
+      }
+    };
     List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
     List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(_sortBy);
     for (final ReplaceRegion it : _reverse) {

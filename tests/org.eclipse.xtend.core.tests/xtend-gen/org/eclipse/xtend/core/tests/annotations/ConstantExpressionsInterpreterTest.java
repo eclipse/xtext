@@ -75,7 +75,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       XAnnotation _head = IterableExtensions.<XAnnotation>head(_annotations);
       XExpression _value = _head.getValue();
       Object _evaluate = this.interpreter.evaluate(_value, null);
-      String _get = ((String[]) _evaluate)[1];
+      Object _get = ((String[]) _evaluate)[1];
       Assert.assertEquals("bar", _get);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -90,7 +90,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       XAnnotation _head = IterableExtensions.<XAnnotation>head(_annotations);
       XExpression _value = _head.getValue();
       Object _evaluate = this.interpreter.evaluate(_value, null);
-      String _get = ((String[]) _evaluate)[1];
+      Object _get = ((String[]) _evaluate)[1];
       Assert.assertEquals("bar", _get);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

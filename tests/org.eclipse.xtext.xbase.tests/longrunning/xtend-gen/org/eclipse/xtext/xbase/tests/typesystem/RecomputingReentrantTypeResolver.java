@@ -112,11 +112,11 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<XExpression> _keySet_3 = secondRun.keySet();
     Assert.assertEquals(_builder_1.toString(), ((Object) _keySet_2), _keySet_3);
     final Procedure2<XExpression,ILinkingCandidate> _function = new Procedure2<XExpression,ILinkingCandidate>() {
-        public void apply(final XExpression expression, final ILinkingCandidate firstLinkingData) {
-          final ILinkingCandidate secondLinkingData = secondRun.get(expression);
-          RecomputingReentrantTypeResolver.this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
-        }
-      };
+      public void apply(final XExpression expression, final ILinkingCandidate firstLinkingData) {
+        final ILinkingCandidate secondLinkingData = secondRun.get(expression);
+        RecomputingReentrantTypeResolver.this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
+      }
+    };
     MapExtensions.<XExpression, ILinkingCandidate>forEach(firstRun, _function);
     return result;
   }
@@ -336,18 +336,18 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   public void assertEqualReferences(final String message, final List<LightweightTypeReference> left, final List<LightweightTypeReference> right) {
     final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
-        public String apply(final LightweightTypeReference it) {
-          String _string = it.toString();
-          return _string;
-        }
-      };
+      public String apply(final LightweightTypeReference it) {
+        String _string = it.toString();
+        return _string;
+      }
+    };
     List<String> _map = ListExtensions.<LightweightTypeReference, String>map(left, _function);
     final Function1<LightweightTypeReference,String> _function_1 = new Function1<LightweightTypeReference,String>() {
-        public String apply(final LightweightTypeReference it) {
-          String _string = it.toString();
-          return _string;
-        }
-      };
+      public String apply(final LightweightTypeReference it) {
+        String _string = it.toString();
+        return _string;
+      }
+    };
     List<String> _map_1 = ListExtensions.<LightweightTypeReference, String>map(right, _function_1);
     Assert.assertEquals(message, ((Object) _map), _map_1);
   }
@@ -394,18 +394,18 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<JvmTypeParameter> _keySet_1 = right.keySet();
     Assert.assertEquals(_builder_1.toString(), ((Object) _keySet), _keySet_1);
     final Procedure2<JvmTypeParameter,LightweightMergedBoundTypeArgument> _function = new Procedure2<JvmTypeParameter,LightweightMergedBoundTypeArgument>() {
-        public void apply(final JvmTypeParameter typeParam, final LightweightMergedBoundTypeArgument leftData) {
-          final LightweightMergedBoundTypeArgument rightData = right.get(typeParam);
-          VarianceInfo _variance = leftData.getVariance();
-          VarianceInfo _variance_1 = rightData.getVariance();
-          Assert.assertEquals(_variance, _variance_1);
-          LightweightTypeReference _typeReference = leftData.getTypeReference();
-          String _simpleName = _typeReference.getSimpleName();
-          LightweightTypeReference _typeReference_1 = rightData.getTypeReference();
-          String _simpleName_1 = _typeReference_1.getSimpleName();
-          Assert.assertEquals(_simpleName, _simpleName_1);
-        }
-      };
+      public void apply(final JvmTypeParameter typeParam, final LightweightMergedBoundTypeArgument leftData) {
+        final LightweightMergedBoundTypeArgument rightData = right.get(typeParam);
+        VarianceInfo _variance = leftData.getVariance();
+        VarianceInfo _variance_1 = rightData.getVariance();
+        Assert.assertEquals(_variance, _variance_1);
+        LightweightTypeReference _typeReference = leftData.getTypeReference();
+        String _simpleName = _typeReference.getSimpleName();
+        LightweightTypeReference _typeReference_1 = rightData.getTypeReference();
+        String _simpleName_1 = _typeReference_1.getSimpleName();
+        Assert.assertEquals(_simpleName, _simpleName_1);
+      }
+    };
     MapExtensions.<JvmTypeParameter, LightweightMergedBoundTypeArgument>forEach(left, _function);
   }
   

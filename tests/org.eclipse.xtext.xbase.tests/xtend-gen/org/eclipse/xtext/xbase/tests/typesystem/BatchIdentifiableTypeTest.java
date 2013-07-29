@@ -44,17 +44,17 @@ public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
     JvmIdentifiableElement _head = IterableExtensions.<JvmIdentifiableElement>head(identifiables);
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
     final Procedure2<JvmIdentifiableElement,Integer> _function = new Procedure2<JvmIdentifiableElement,Integer>() {
-        public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
-          final LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
-          Assert.assertNotNull(type);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for identifiable at ");
-          _builder.append(index, "");
-          String _get = types[(index).intValue()];
-          String _simpleName = type.getSimpleName();
-          Assert.assertEquals(_builder.toString(), _get, _simpleName);
-        }
-      };
+      public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
+        final LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
+        Assert.assertNotNull(type);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("failed for identifiable at ");
+        _builder.append(index, "");
+        Object _get = types[(index).intValue()];
+        String _simpleName = type.getSimpleName();
+        Assert.assertEquals(_builder.toString(), _get, _simpleName);
+      }
+    };
     IterableExtensions.<JvmIdentifiableElement>forEach(identifiables, _function);
   }
 }

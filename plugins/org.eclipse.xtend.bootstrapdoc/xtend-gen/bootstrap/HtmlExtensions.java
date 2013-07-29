@@ -157,10 +157,10 @@ public class HtmlExtensions {
     } else {
       ArtificialIds _artificialIds = new ArtificialIds();
       final Procedure1<ArtificialIds> _function = new Procedure1<ArtificialIds>() {
-          public void apply(final ArtificialIds it) {
-            adapters.add(it);
-          }
-        };
+        public void apply(final ArtificialIds it) {
+          adapters.add(it);
+        }
+      };
       ArtificialIds _doubleArrow = ObjectExtensions.<ArtificialIds>operator_doubleArrow(_artificialIds, _function);
       _elvis = ObjectExtensions.<ArtificialIds>operator_elvis(_head, _doubleArrow);
     }
@@ -228,11 +228,11 @@ public class HtmlExtensions {
   
   protected CharSequence _toHtml(final List<EObject> it, final ParagraphState state) {
     final Function1<EObject,CharSequence> _function = new Function1<EObject,CharSequence>() {
-        public CharSequence apply(final EObject it) {
-          CharSequence _html = HtmlExtensions.this.toHtml(it, state);
-          return _html;
-        }
-      };
+      public CharSequence apply(final EObject it) {
+        CharSequence _html = HtmlExtensions.this.toHtml(it, state);
+        return _html;
+      }
+    };
     List<CharSequence> _map = ListExtensions.<EObject, CharSequence>map(it, _function);
     String _join = IterableExtensions.join(_map);
     return _join;

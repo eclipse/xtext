@@ -60,16 +60,16 @@ public class HiddenLeafs {
   public int getLenght() {
     List<LeafInfo> _leafs = this.getLeafs();
     final Function2<Integer,LeafInfo,Integer> _function = new Function2<Integer,LeafInfo,Integer>() {
-        public Integer apply(final Integer x, final LeafInfo i) {
-          ILeafNode _node = i.getNode();
-          int _length = 0;
-          if (_node!=null) {
-            _length=_node.getLength();
-          }
-          int _plus = ((x).intValue() + _length);
-          return Integer.valueOf(_plus);
+      public Integer apply(final Integer x, final LeafInfo i) {
+        ILeafNode _node = i.getNode();
+        int _length = 0;
+        if (_node!=null) {
+          _length=_node.getLength();
         }
-      };
+        int _plus = ((x).intValue() + _length);
+        return Integer.valueOf(_plus);
+      }
+    };
     Integer _fold = IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
     return (_fold).intValue();
   }
@@ -77,12 +77,12 @@ public class HiddenLeafs {
   public int getNewLines() {
     List<LeafInfo> _leafs = this.getLeafs();
     final Function2<Integer,LeafInfo,Integer> _function = new Function2<Integer,LeafInfo,Integer>() {
-        public Integer apply(final Integer x, final LeafInfo i) {
-          int _newLines = i.getNewLines();
-          int _plus = ((x).intValue() + _newLines);
-          return Integer.valueOf(_plus);
-        }
-      };
+      public Integer apply(final Integer x, final LeafInfo i) {
+        int _newLines = i.getNewLines();
+        int _plus = ((x).intValue() + _newLines);
+        return Integer.valueOf(_plus);
+      }
+    };
     Integer _fold = IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
     return (_fold).intValue();
   }
@@ -91,12 +91,12 @@ public class HiddenLeafs {
     List<LeafInfo> _leafs = this.getLeafs();
     Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);
     final Function2<Integer,CommentInfo,Integer> _function = new Function2<Integer,CommentInfo,Integer>() {
-        public Integer apply(final Integer x, final CommentInfo i) {
-          int _newLines = i.getNewLines();
-          int _plus = ((x).intValue() + _newLines);
-          return Integer.valueOf(_plus);
-        }
-      };
+      public Integer apply(final Integer x, final CommentInfo i) {
+        int _newLines = i.getNewLines();
+        int _plus = ((x).intValue() + _newLines);
+        return Integer.valueOf(_plus);
+      }
+    };
     Integer _fold = IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);
     return (_fold).intValue();
   }

@@ -19,11 +19,11 @@ public class Case_6 {
   protected List<? extends Object> _transform(final EPackage packageDecl) {
     EList<EObject> _eContents = packageDecl.eContents();
     final Function1<EObject,Object> _function = new Function1<EObject,Object>() {
-        public Object apply(final EObject e) {
-          Object _transform = Case_6.this.transform(((EStructuralFeature) e));
-          return _transform;
-        }
-      };
+      public Object apply(final EObject e) {
+        Object _transform = Case_6.this.transform(((EStructuralFeature) e));
+        return _transform;
+      }
+    };
     List<Object> _map = ListExtensions.<EObject, Object>map(_eContents, _function);
     return _map;
   }
@@ -41,11 +41,11 @@ public class Case_6 {
   protected List<? extends Object> _transform(final EClass model) {
     EList<ETypeParameter> _eTypeParameters = model.getETypeParameters();
     final Function1<ETypeParameter,Object> _function = new Function1<ETypeParameter,Object>() {
-        public Object apply(final ETypeParameter e) {
-          Object _transform = Case_6.this.transform(e);
-          return _transform;
-        }
-      };
+      public Object apply(final ETypeParameter e) {
+        Object _transform = Case_6.this.transform(e);
+        return _transform;
+      }
+    };
     List<Object> _map = ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
     return _map;
   }

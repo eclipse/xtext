@@ -63,11 +63,11 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     XtendConstructor _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter,Boolean> _function = new Function1<XtendParameter,Boolean>() {
-        public Boolean apply(final XtendParameter it) {
-          boolean _isVarArgs = XtendConstructorDeclarationImpl.this.isVarArgs();
-          return Boolean.valueOf(_isVarArgs);
-        }
-      };
+      public Boolean apply(final XtendParameter it) {
+        boolean _isVarArgs = XtendConstructorDeclarationImpl.this.isVarArgs();
+        return Boolean.valueOf(_isVarArgs);
+      }
+    };
     boolean _exists = IterableExtensions.<XtendParameter>exists(_parameters, _function);
     return _exists;
   }
@@ -76,12 +76,12 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     XtendConstructor _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
-        public TypeReference apply(final JvmTypeReference it) {
-          CompilationUnitImpl _compilationUnit = XtendConstructorDeclarationImpl.this.getCompilationUnit();
-          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-          return _typeReference;
-        }
-      };
+      public TypeReference apply(final JvmTypeReference it) {
+        CompilationUnitImpl _compilationUnit = XtendConstructorDeclarationImpl.this.getCompilationUnit();
+        TypeReference _typeReference = _compilationUnit.toTypeReference(it);
+        return _typeReference;
+      }
+    };
     List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
     return _map;
   }
@@ -90,12 +90,12 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     XtendConstructor _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter,XtendParameterDeclarationImpl> _function = new Function1<XtendParameter,XtendParameterDeclarationImpl>() {
-        public XtendParameterDeclarationImpl apply(final XtendParameter it) {
-          CompilationUnitImpl _compilationUnit = XtendConstructorDeclarationImpl.this.getCompilationUnit();
-          XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(it);
-          return _xtendParameterDeclaration;
-        }
-      };
+      public XtendParameterDeclarationImpl apply(final XtendParameter it) {
+        CompilationUnitImpl _compilationUnit = XtendConstructorDeclarationImpl.this.getCompilationUnit();
+        XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(it);
+        return _xtendParameterDeclaration;
+      }
+    };
     List<XtendParameterDeclarationImpl> _map = ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(_parameters, _function);
     return _map;
   }

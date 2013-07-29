@@ -26,17 +26,17 @@ public abstract class AbstractOldAPIConstructorCallTypeTest extends AbstractCons
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XConstructorCall> featureCalls = this.findConstructorCalls(expressionWithQualifiedNames);
     final Procedure2<XConstructorCall,Integer> _function = new Procedure2<XConstructorCall,Integer>() {
-        public void apply(final XConstructorCall featureCall, final Integer index) {
-          ITypeProvider _typeProvider = AbstractOldAPIConstructorCallTypeTest.this.getTypeProvider();
-          final JvmTypeReference type = _typeProvider.getType(featureCall);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for constructor call at ");
-          _builder.append(index, "");
-          String _get = types[(index).intValue()];
-          String _simpleName = type.getSimpleName();
-          Assert.assertEquals(_builder.toString(), _get, _simpleName);
-        }
-      };
+      public void apply(final XConstructorCall featureCall, final Integer index) {
+        ITypeProvider _typeProvider = AbstractOldAPIConstructorCallTypeTest.this.getTypeProvider();
+        final JvmTypeReference type = _typeProvider.getType(featureCall);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("failed for constructor call at ");
+        _builder.append(index, "");
+        Object _get = types[(index).intValue()];
+        String _simpleName = type.getSimpleName();
+        Assert.assertEquals(_builder.toString(), _get, _simpleName);
+      }
+    };
     IterableExtensions.<XConstructorCall>forEach(featureCalls, _function);
   }
   

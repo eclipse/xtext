@@ -42,21 +42,21 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
     JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name);
     IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-        public void apply(final JvmGenericType it) {
-          EList<JvmMember> _members = it.getMembers();
-          JvmTypeReference _inferredType = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.inferredType();
-          final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-              public void apply(final JvmOperation it) {
-                EList<JvmTypeReference> _exceptions = it.getExceptions();
-                JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Throwable.class);
-                PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _newTypeRef);
-                PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, e);
-              }
-            };
-          JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "myMethod", _inferredType, _function);
-          PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
-        }
-      };
+      public void apply(final JvmGenericType it) {
+        EList<JvmMember> _members = it.getMembers();
+        JvmTypeReference _inferredType = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.inferredType();
+        final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+          public void apply(final JvmOperation it) {
+            EList<JvmTypeReference> _exceptions = it.getExceptions();
+            JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Throwable.class);
+            PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _newTypeRef);
+            PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, e);
+          }
+        };
+        JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "myMethod", _inferredType, _function);
+        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
+      }
+    };
     _accept.initializeLater(_function);
   }
   

@@ -65,13 +65,13 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
       Iterator<XConstructorCall> _filter = Iterators.<XConstructorCall>filter(_eAll, XConstructorCall.class);
       final List<XConstructorCall> closures = IteratorExtensions.<XConstructorCall>toList(_filter);
       final Function1<XConstructorCall,Integer> _function = new Function1<XConstructorCall,Integer>() {
-          public Integer apply(final XConstructorCall it) {
-            List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
-            INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-            int _offset = _head.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
+        public Integer apply(final XConstructorCall it) {
+          List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+          INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
+          int _offset = _head.getOffset();
+          return Integer.valueOf(_offset);
+        }
+      };
       return IterableExtensions.<XConstructorCall, Integer>sortBy(closures, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

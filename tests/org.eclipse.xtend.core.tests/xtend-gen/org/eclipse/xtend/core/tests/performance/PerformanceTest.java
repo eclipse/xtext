@@ -316,11 +316,11 @@ public class PerformanceTest extends AbstractXtendTestCase {
       final List<String> files = CollectionLiterals.<String>newArrayList();
       Collection<? extends CharSequence> _values = map.values();
       final Function1<CharSequence,String> _function = new Function1<CharSequence,String>() {
-          public String apply(final CharSequence it) {
-            String _string = it.toString();
-            return _string;
-          }
-        };
+        public String apply(final CharSequence it) {
+          String _string = it.toString();
+          return _string;
+        }
+      };
       Iterable<String> _map = IterableExtensions.map(_values, _function);
       Iterables.<String>addAll(files, _map);
       GeneratorConfig _generatorConfig = new GeneratorConfig();

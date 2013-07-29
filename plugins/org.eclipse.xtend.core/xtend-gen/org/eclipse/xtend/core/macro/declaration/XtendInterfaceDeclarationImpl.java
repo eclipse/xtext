@@ -27,12 +27,12 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
     XtendInterface _delegate = this.getDelegate();
     EList<JvmTypeReference> _extends = _delegate.getExtends();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
-        public TypeReference apply(final JvmTypeReference it) {
-          CompilationUnitImpl _compilationUnit = XtendInterfaceDeclarationImpl.this.getCompilationUnit();
-          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-          return _typeReference;
-        }
-      };
+      public TypeReference apply(final JvmTypeReference it) {
+        CompilationUnitImpl _compilationUnit = XtendInterfaceDeclarationImpl.this.getCompilationUnit();
+        TypeReference _typeReference = _compilationUnit.toTypeReference(it);
+        return _typeReference;
+      }
+    };
     List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_extends, _function);
     return _map;
   }
@@ -41,12 +41,12 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
     XtendInterface _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl>() {
-        public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
-          CompilationUnitImpl _compilationUnit = XtendInterfaceDeclarationImpl.this.getCompilationUnit();
-          XtendTypeParameterDeclarationImpl _xtendTypeParameterDeclaration = _compilationUnit.toXtendTypeParameterDeclaration(it);
-          return _xtendTypeParameterDeclaration;
-        }
-      };
+      public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
+        CompilationUnitImpl _compilationUnit = XtendInterfaceDeclarationImpl.this.getCompilationUnit();
+        XtendTypeParameterDeclarationImpl _xtendTypeParameterDeclaration = _compilationUnit.toXtendTypeParameterDeclaration(it);
+        return _xtendTypeParameterDeclaration;
+      }
+    };
     List<XtendTypeParameterDeclarationImpl> _map = ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
     return _map;
   }

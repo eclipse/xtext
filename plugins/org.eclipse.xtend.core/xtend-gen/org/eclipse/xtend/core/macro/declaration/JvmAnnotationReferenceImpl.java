@@ -48,27 +48,27 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values = _delegate.getValues();
     final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
-        public Boolean apply(final JvmAnnotationValue it) {
-          boolean _or = false;
-          String _valueName = it.getValueName();
-          boolean _equals = Objects.equal(_valueName, property);
-          if (_equals) {
-            _or = true;
+      public Boolean apply(final JvmAnnotationValue it) {
+        boolean _or = false;
+        String _valueName = it.getValueName();
+        boolean _equals = Objects.equal(_valueName, property);
+        if (_equals) {
+          _or = true;
+        } else {
+          boolean _and = false;
+          String _valueName_1 = it.getValueName();
+          boolean _equals_1 = Objects.equal(_valueName_1, null);
+          if (!_equals_1) {
+            _and = false;
           } else {
-            boolean _and = false;
-            String _valueName_1 = it.getValueName();
-            boolean _equals_1 = Objects.equal(_valueName_1, null);
-            if (!_equals_1) {
-              _and = false;
-            } else {
-              boolean _equals_2 = Objects.equal(property, "value");
-              _and = (_equals_1 && _equals_2);
-            }
-            _or = (_equals || _and);
+            boolean _equals_2 = Objects.equal(property, "value");
+            _and = (_equals_1 && _equals_2);
           }
-          return Boolean.valueOf(_or);
+          _or = (_equals || _and);
         }
-      };
+        return Boolean.valueOf(_or);
+      }
+    };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
     boolean _notEquals = (!Objects.equal(annotationValue, null));
     if (_notEquals) {
@@ -79,12 +79,12 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     JvmAnnotationType _annotation = _delegate_1.getAnnotation();
     Iterable<JvmOperation> _declaredOperations = _annotation.getDeclaredOperations();
     final Function1<JvmOperation,Boolean> _function_1 = new Function1<JvmOperation,Boolean>() {
-        public Boolean apply(final JvmOperation it) {
-          String _simpleName = it.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, property);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final JvmOperation it) {
+        String _simpleName = it.getSimpleName();
+        boolean _equals = Objects.equal(_simpleName, property);
+        return Boolean.valueOf(_equals);
+      }
+    };
     final JvmOperation op = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
     boolean _and = false;
     boolean _notEquals_1 = (!Objects.equal(op, null));
@@ -149,13 +149,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values = _delegate.getValues();
     final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
-        public Boolean apply(final JvmAnnotationValue it) {
-          JvmOperation _operation = it.getOperation();
-          String _simpleName = _operation.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, name);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final JvmAnnotationValue it) {
+        JvmOperation _operation = it.getOperation();
+        String _simpleName = _operation.getSimpleName();
+        boolean _equals = Objects.equal(_simpleName, name);
+        return Boolean.valueOf(_equals);
+      }
+    };
     final JvmAnnotationValue found = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
     boolean _notEquals = (!Objects.equal(found, null));
     if (_notEquals) {
@@ -172,12 +172,12 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final JvmAnnotationType jvmAnnoType = ((JvmAnnotationTypeDeclarationImpl) _annotationTypeDeclaration).getDelegate();
     Iterable<JvmOperation> _declaredOperations = jvmAnnoType.getDeclaredOperations();
     final Function1<JvmOperation,Boolean> _function = new Function1<JvmOperation,Boolean>() {
-        public Boolean apply(final JvmOperation it) {
-          String _simpleName = it.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, name);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final JvmOperation it) {
+        String _simpleName = it.getSimpleName();
+        boolean _equals = Objects.equal(_simpleName, name);
+        return Boolean.valueOf(_equals);
+      }
+    };
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
     boolean _equals = Objects.equal(jvmOperation, null);
     if (_equals) {

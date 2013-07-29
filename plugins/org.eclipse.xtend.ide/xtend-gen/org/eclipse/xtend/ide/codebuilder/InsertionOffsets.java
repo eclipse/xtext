@@ -118,12 +118,12 @@ public class InsertionOffsets {
       final ICompositeNode classNode = NodeModelUtils.findActualNodeFor(ownerType);
       Iterable<ILeafNode> _leafNodes = classNode.getLeafNodes();
       final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
-          public Boolean apply(final ILeafNode it) {
-            String _text = it.getText();
-            boolean _equals = Objects.equal(_text, "{");
-            return Boolean.valueOf(_equals);
-          }
-        };
+        public Boolean apply(final ILeafNode it) {
+          String _text = it.getText();
+          boolean _equals = Objects.equal(_text, "{");
+          return Boolean.valueOf(_equals);
+        }
+      };
       final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(_leafNodes, _function);
       int _xifexpression = (int) 0;
       boolean _notEquals = (!Objects.equal(openingBraceNode, null));

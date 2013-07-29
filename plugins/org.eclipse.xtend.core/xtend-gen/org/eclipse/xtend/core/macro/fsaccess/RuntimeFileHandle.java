@@ -36,32 +36,32 @@ public class RuntimeFileHandle extends RuntimeResourceHandle implements FileHand
   
   public void read(final Procedure1<InputStream> function) {
     final Function0<FileInputStream> _function = new Function0<FileInputStream>() {
-        public FileInputStream apply() {
-          try {
-            InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(RuntimeFileHandle.this.file);
-            FileInputStream _input = _newInputStreamSupplier.getInput();
-            return _input;
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      public FileInputStream apply() {
+        try {
+          InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(RuntimeFileHandle.this.file);
+          FileInputStream _input = _newInputStreamSupplier.getInput();
+          return _input;
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      };
+      }
+    };
     IOUtils.<InputStream>tryWith(_function, function);
   }
   
   public void write(final Procedure1<OutputStream> function) {
     final Function0<FileOutputStream> _function = new Function0<FileOutputStream>() {
-        public FileOutputStream apply() {
-          try {
-            File _ensureFileCreated = RuntimeFileHandle.this.ensureFileCreated();
-            OutputSupplier<FileOutputStream> _newOutputStreamSupplier = Files.newOutputStreamSupplier(_ensureFileCreated);
-            FileOutputStream _output = _newOutputStreamSupplier.getOutput();
-            return _output;
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      public FileOutputStream apply() {
+        try {
+          File _ensureFileCreated = RuntimeFileHandle.this.ensureFileCreated();
+          OutputSupplier<FileOutputStream> _newOutputStreamSupplier = Files.newOutputStreamSupplier(_ensureFileCreated);
+          FileOutputStream _output = _newOutputStreamSupplier.getOutput();
+          return _output;
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      };
+      }
+    };
     IOUtils.<OutputStream>tryWith(_function, function);
   }
   

@@ -67,10 +67,10 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
       }
       _builder.append(" void method(");
       final Function1<String,String> _function = new Function1<String,String>() {
-          public String apply(final String it) {
-            return it;
-          }
-        };
+        public String apply(final String it) {
+          return it;
+        }
+      };
       String _join = IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(alternatingTypeReferences)), null, " p, ", " p", _function);
       _builder.append(_join, "");
       _builder.append(") {}");
@@ -120,11 +120,11 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
     _builder.append(" in ");
     Set<JvmTypeParameter> _keySet = mapping.keySet();
     final Function1<JvmTypeParameter,String> _function = new Function1<JvmTypeParameter,String>() {
-        public String apply(final JvmTypeParameter it) {
-          String _simpleName = it.getSimpleName();
-          return _simpleName;
-        }
-      };
+      public String apply(final JvmTypeParameter it) {
+        String _simpleName = it.getSimpleName();
+        return _simpleName;
+      }
+    };
     Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function);
     _builder.append(_map, "");
     String _string = _builder.toString();

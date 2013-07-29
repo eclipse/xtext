@@ -68,16 +68,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   public Iterable<Diagnostic> getLinkingAndSyntaxErrors(final Resource resource) {
     EList<Diagnostic> _errors = resource.getErrors();
     final Function1<Diagnostic,Boolean> _function = new Function1<Diagnostic,Boolean>() {
-        public Boolean apply(final Diagnostic it) {
-          boolean _or = false;
-          if ((it instanceof XtextSyntaxDiagnostic)) {
-            _or = true;
-          } else {
-            _or = ((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic));
-          }
-          return Boolean.valueOf(_or);
+      public Boolean apply(final Diagnostic it) {
+        boolean _or = false;
+        if ((it instanceof XtextSyntaxDiagnostic)) {
+          _or = true;
+        } else {
+          _or = ((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic));
         }
-      };
+        return Boolean.valueOf(_or);
+      }
+    };
     Iterable<Diagnostic> _filter = IterableExtensions.<Diagnostic>filter(_errors, _function);
     return _filter;
   }

@@ -35,13 +35,13 @@ public class VariableNameAcceptor implements CompletionDataAcceptor {
   public String getVariableName() {
     final ArrayList<String> candidates = Lists.<String>newArrayList(this.variableNames);
     final Comparator<String> _function = new Comparator<String>() {
-        public int compare(final String left, final String right) {
-          int _length = left.length();
-          int _length_1 = right.length();
-          int _minus = (_length - _length_1);
-          return _minus;
-        }
-      };
+      public int compare(final String left, final String right) {
+        int _length = left.length();
+        int _length_1 = right.length();
+        int _minus = (_length - _length_1);
+        return _minus;
+      }
+    };
     Collections.<String>sort(candidates, _function);
     int _size = candidates.size();
     boolean _greaterThan = (_size > 0);

@@ -99,13 +99,13 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
       final LightweightTypeReference primary = _xifexpression;
       final HashSet<String> actualSynonyms = CollectionLiterals.<String>newHashSet();
       final Acceptor _function = new Acceptor() {
-          @Override
-          protected boolean accept(final LightweightTypeReference type, final EnumSet<ConformanceHint> conformance) {
-            String _simpleName = type.getSimpleName();
-            boolean _add = actualSynonyms.add(_simpleName);
-            return _add;
-          }
-        };
+        @Override
+        protected boolean accept(final LightweightTypeReference type, final EnumSet<ConformanceHint> conformance) {
+          String _simpleName = type.getSimpleName();
+          boolean _add = actualSynonyms.add(_simpleName);
+          return _add;
+        }
+      };
       this._synonymTypesProvider.collectSynonymTypes(primary, _function);
       String _string_1 = actualSynonyms.toString();
       int _length = expectedSynonyms.length;

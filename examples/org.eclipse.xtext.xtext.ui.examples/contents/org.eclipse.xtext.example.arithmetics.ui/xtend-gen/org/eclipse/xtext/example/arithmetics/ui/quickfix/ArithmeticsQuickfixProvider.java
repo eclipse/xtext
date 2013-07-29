@@ -27,13 +27,13 @@ public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
     String _plus_1 = ("Replace expression with \'" + string);
     String _plus_2 = (_plus_1 + "\'");
     final IModification _function = new IModification() {
-        public void apply(final IModificationContext it) throws Exception {
-          IXtextDocument _xtextDocument = it.getXtextDocument();
-          Integer _offset = issue.getOffset();
-          Integer _length = issue.getLength();
-          _xtextDocument.replace((_offset).intValue(), (_length).intValue(), string);
-        }
-      };
+      public void apply(final IModificationContext it) throws Exception {
+        IXtextDocument _xtextDocument = it.getXtextDocument();
+        Integer _offset = issue.getOffset();
+        Integer _length = issue.getLength();
+        _xtextDocument.replace((_offset).intValue(), (_length).intValue(), string);
+      }
+    };
     acceptor.accept(issue, _plus, _plus_2, "upcase.png", _function);
   }
 }

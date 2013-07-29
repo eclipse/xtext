@@ -97,11 +97,11 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmFormalParameter> _parameters = operation.getParameters();
       final Function1<JvmFormalParameter,JvmTypeReference> _function = new Function1<JvmFormalParameter,JvmTypeReference>() {
-          public JvmTypeReference apply(final JvmFormalParameter it) {
-            JvmTypeReference _parameterType = it.getParameterType();
-            return _parameterType;
-          }
-        };
+        public JvmTypeReference apply(final JvmFormalParameter it) {
+          JvmTypeReference _parameterType = it.getParameterType();
+          return _parameterType;
+        }
+      };
       List<JvmTypeReference> _map = ListExtensions.<JvmFormalParameter, JvmTypeReference>map(_parameters, _function);
       ArrayList<JvmTypeReference> _arrayList = new ArrayList<JvmTypeReference>(_map);
       final ArrayList<JvmTypeReference> typeReferences = _arrayList;

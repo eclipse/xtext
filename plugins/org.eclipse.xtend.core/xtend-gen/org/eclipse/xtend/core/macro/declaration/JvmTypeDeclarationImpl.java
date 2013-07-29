@@ -47,12 +47,12 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     T _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     final Function1<JvmMember,MutableMemberDeclaration> _function = new Function1<JvmMember,MutableMemberDeclaration>() {
-        public MutableMemberDeclaration apply(final JvmMember it) {
-          CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
-          MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(it);
-          return _memberDeclaration;
-        }
-      };
+      public MutableMemberDeclaration apply(final JvmMember it) {
+        CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
+        MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(it);
+        return _memberDeclaration;
+      }
+    };
     List<MutableMemberDeclaration> _map = ListExtensions.<JvmMember, MutableMemberDeclaration>map(_members, _function);
     ImmutableList<MutableMemberDeclaration> _copyOf = ImmutableList.<MutableMemberDeclaration>copyOf(_map);
     return _copyOf;
@@ -89,13 +89,13 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     EList<JvmMember> _members = _delegate.getMembers();
     Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
     final Function1<JvmConstructor,Boolean> _function = new Function1<JvmConstructor,Boolean>() {
-        public Boolean apply(final JvmConstructor it) {
-          CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
-          JvmTypeExtensions _typeExtensions = _compilationUnit.getTypeExtensions();
-          boolean _isSingleSyntheticDefaultConstructor = _typeExtensions.isSingleSyntheticDefaultConstructor(it);
-          return Boolean.valueOf(_isSingleSyntheticDefaultConstructor);
-        }
-      };
+      public Boolean apply(final JvmConstructor it) {
+        CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
+        JvmTypeExtensions _typeExtensions = _compilationUnit.getTypeExtensions();
+        boolean _isSingleSyntheticDefaultConstructor = _typeExtensions.isSingleSyntheticDefaultConstructor(it);
+        return Boolean.valueOf(_isSingleSyntheticDefaultConstructor);
+      }
+    };
     final JvmConstructor constructor = IterableExtensions.<JvmConstructor>findFirst(_filter, _function);
     boolean _notEquals = (!Objects.equal(constructor, null));
     if (_notEquals) {
@@ -152,21 +152,21 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public MutableConstructorDeclaration findConstructor(final TypeReference... parameterTypes) {
     Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
     final Function1<MutableConstructorDeclaration,Boolean> _function = new Function1<MutableConstructorDeclaration,Boolean>() {
-        public Boolean apply(final MutableConstructorDeclaration constructor) {
-          List<MutableParameterDeclaration> _parameters = constructor.getParameters();
-          final Function1<MutableParameterDeclaration,TypeReference> _function = new Function1<MutableParameterDeclaration,TypeReference>() {
-              public TypeReference apply(final MutableParameterDeclaration it) {
-                TypeReference _type = it.getType();
-                return _type;
-              }
-            };
-          List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
-          List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-          List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-          boolean _equals = Objects.equal(_list, _list_1);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final MutableConstructorDeclaration constructor) {
+        List<MutableParameterDeclaration> _parameters = constructor.getParameters();
+        final Function1<MutableParameterDeclaration,TypeReference> _function = new Function1<MutableParameterDeclaration,TypeReference>() {
+          public TypeReference apply(final MutableParameterDeclaration it) {
+            TypeReference _type = it.getType();
+            return _type;
+          }
+        };
+        List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
+        List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
+        List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
+        boolean _equals = Objects.equal(_list, _list_1);
+        return Boolean.valueOf(_equals);
+      }
+    };
     MutableConstructorDeclaration _findFirst = IterableExtensions.findFirst(_declaredConstructors, _function);
     return _findFirst;
   }
@@ -174,12 +174,12 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public MutableFieldDeclaration findField(final String name) {
     Iterable<? extends MutableFieldDeclaration> _declaredFields = this.getDeclaredFields();
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
-        public Boolean apply(final MutableFieldDeclaration field) {
-          String _simpleName = field.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, name);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final MutableFieldDeclaration field) {
+        String _simpleName = field.getSimpleName();
+        boolean _equals = Objects.equal(_simpleName, name);
+        return Boolean.valueOf(_equals);
+      }
+    };
     MutableFieldDeclaration _findFirst = IterableExtensions.findFirst(_declaredFields, _function);
     return _findFirst;
   }
@@ -187,29 +187,29 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public MutableMethodDeclaration findMethod(final String name, final TypeReference... parameterTypes) {
     Iterable<? extends MutableMethodDeclaration> _declaredMethods = this.getDeclaredMethods();
     final Function1<MutableMethodDeclaration,Boolean> _function = new Function1<MutableMethodDeclaration,Boolean>() {
-        public Boolean apply(final MutableMethodDeclaration method) {
-          boolean _and = false;
-          String _simpleName = method.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, name);
-          if (!_equals) {
-            _and = false;
-          } else {
-            List<MutableParameterDeclaration> _parameters = method.getParameters();
-            final Function1<MutableParameterDeclaration,TypeReference> _function = new Function1<MutableParameterDeclaration,TypeReference>() {
-                public TypeReference apply(final MutableParameterDeclaration it) {
-                  TypeReference _type = it.getType();
-                  return _type;
-                }
-              };
-            List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
-            List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-            List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-            boolean _equals_1 = Objects.equal(_list, _list_1);
-            _and = (_equals && _equals_1);
-          }
-          return Boolean.valueOf(_and);
+      public Boolean apply(final MutableMethodDeclaration method) {
+        boolean _and = false;
+        String _simpleName = method.getSimpleName();
+        boolean _equals = Objects.equal(_simpleName, name);
+        if (!_equals) {
+          _and = false;
+        } else {
+          List<MutableParameterDeclaration> _parameters = method.getParameters();
+          final Function1<MutableParameterDeclaration,TypeReference> _function = new Function1<MutableParameterDeclaration,TypeReference>() {
+            public TypeReference apply(final MutableParameterDeclaration it) {
+              TypeReference _type = it.getType();
+              return _type;
+            }
+          };
+          List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
+          List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
+          List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
+          boolean _equals_1 = Objects.equal(_list, _list_1);
+          _and = (_equals && _equals_1);
         }
-      };
+        return Boolean.valueOf(_and);
+      }
+    };
     MutableMethodDeclaration _findFirst = IterableExtensions.findFirst(_declaredMethods, _function);
     return _findFirst;
   }

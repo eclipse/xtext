@@ -13,9 +13,9 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatPublic() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public enum Bar {");
     _builder.newLine();
@@ -27,9 +27,9 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatLiteral01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum Bar {");
     _builder.newLine();
@@ -44,9 +44,9 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatLiteral02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum Bar {");
     _builder.newLine();
@@ -67,10 +67,10 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatLiteral03() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XtendEnumFormatterTest.this.put(it, XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals, Integer.valueOf(1));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XtendEnumFormatterTest.this.put(it, XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals, Integer.valueOf(1));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum Bar {");
     _builder.newLine();
@@ -93,10 +93,10 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatBraces_01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XtendEnumFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XtendEnumFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -111,10 +111,10 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatBraces_02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-        public void apply(final MapBasedPreferenceValues it) {
-          XtendEnumFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-        }
-      };
+      public void apply(final MapBasedPreferenceValues it) {
+        XtendEnumFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+      }
+    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();

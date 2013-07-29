@@ -45,11 +45,11 @@ public class OrganizeImportsTest {
       StringBuilder _stringBuilder = new StringBuilder(model);
       final StringBuilder builder = _stringBuilder;
       final Function1<ReplaceRegion,Integer> _function = new Function1<ReplaceRegion,Integer>() {
-          public Integer apply(final ReplaceRegion it) {
-            int _offset = it.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
+        public Integer apply(final ReplaceRegion it) {
+          int _offset = it.getOffset();
+          return Integer.valueOf(_offset);
+        }
+      };
       final List<ReplaceRegion> sortedChanges = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
       ReplaceRegion lastChange = null;
       for (final ReplaceRegion it : sortedChanges) {

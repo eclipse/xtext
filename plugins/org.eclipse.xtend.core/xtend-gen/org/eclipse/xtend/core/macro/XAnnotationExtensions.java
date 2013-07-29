@@ -195,35 +195,35 @@ public class XAnnotationExtensions {
   public JvmType getProcessorType(final JvmAnnotationType it) {
     EList<JvmAnnotationReference> _annotations = it.getAnnotations();
     final Function1<JvmAnnotationReference,Boolean> _function = new Function1<JvmAnnotationReference,Boolean>() {
-        public Boolean apply(final JvmAnnotationReference it) {
-          JvmAnnotationType _annotation = it.getAnnotation();
-          String _identifier = null;
-          if (_annotation!=null) {
-            _identifier=_annotation.getIdentifier();
-          }
-          String _name = Active.class.getName();
-          boolean _equals = Objects.equal(_identifier, _name);
-          return Boolean.valueOf(_equals);
+      public Boolean apply(final JvmAnnotationReference it) {
+        JvmAnnotationType _annotation = it.getAnnotation();
+        String _identifier = null;
+        if (_annotation!=null) {
+          _identifier=_annotation.getIdentifier();
         }
-      };
+        String _name = Active.class.getName();
+        boolean _equals = Objects.equal(_identifier, _name);
+        return Boolean.valueOf(_equals);
+      }
+    };
     final JvmAnnotationReference activeAnnotation = IterableExtensions.<JvmAnnotationReference>findFirst(_annotations, _function);
     EList<JvmAnnotationValue> _values = activeAnnotation.getValues();
     final Function1<JvmAnnotationValue,Boolean> _function_1 = new Function1<JvmAnnotationValue,Boolean>() {
-        public Boolean apply(final JvmAnnotationValue it) {
-          boolean _or = false;
-          JvmOperation _operation = it.getOperation();
-          boolean _equals = Objects.equal(_operation, null);
-          if (_equals) {
-            _or = true;
-          } else {
-            JvmOperation _operation_1 = it.getOperation();
-            String _simpleName = _operation_1.getSimpleName();
-            boolean _equals_1 = Objects.equal(_simpleName, "value");
-            _or = (_equals || _equals_1);
-          }
-          return Boolean.valueOf(_or);
+      public Boolean apply(final JvmAnnotationValue it) {
+        boolean _or = false;
+        JvmOperation _operation = it.getOperation();
+        boolean _equals = Objects.equal(_operation, null);
+        if (_equals) {
+          _or = true;
+        } else {
+          JvmOperation _operation_1 = it.getOperation();
+          String _simpleName = _operation_1.getSimpleName();
+          boolean _equals_1 = Objects.equal(_simpleName, "value");
+          _or = (_equals || _equals_1);
         }
-      };
+        return Boolean.valueOf(_or);
+      }
+    };
     final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_1);
     boolean _matched = false;
     if (!_matched) {

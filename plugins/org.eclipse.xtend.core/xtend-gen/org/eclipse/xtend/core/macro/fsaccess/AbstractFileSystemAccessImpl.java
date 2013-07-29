@@ -11,11 +11,11 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 public abstract class AbstractFileSystemAccessImpl implements FileSystemAccessSPI {
   public final FolderHandle getSourceFolder(final CompilationUnitImpl it) {
     final Function0<FolderHandle> _function = new Function0<FolderHandle>() {
-        public FolderHandle apply() {
-          FolderHandle _doGetSourceFolder = AbstractFileSystemAccessImpl.this.doGetSourceFolder(it);
-          return _doGetSourceFolder;
-        }
-      };
+      public FolderHandle apply() {
+        FolderHandle _doGetSourceFolder = AbstractFileSystemAccessImpl.this.doGetSourceFolder(it);
+        return _doGetSourceFolder;
+      }
+    };
     FolderHandle _folder = this.getFolder(_function, "source");
     return _folder;
   }
@@ -24,11 +24,11 @@ public abstract class AbstractFileSystemAccessImpl implements FileSystemAccessSP
   
   public final FolderHandle getRootFolder(final CompilationUnitImpl it) {
     final Function0<FolderHandle> _function = new Function0<FolderHandle>() {
-        public FolderHandle apply() {
-          FolderHandle _doGetRootFolder = AbstractFileSystemAccessImpl.this.doGetRootFolder(it);
-          return _doGetRootFolder;
-        }
-      };
+      public FolderHandle apply() {
+        FolderHandle _doGetRootFolder = AbstractFileSystemAccessImpl.this.doGetRootFolder(it);
+        return _doGetRootFolder;
+      }
+    };
     FolderHandle _folder = this.getFolder(_function, "root");
     return _folder;
   }
@@ -37,11 +37,11 @@ public abstract class AbstractFileSystemAccessImpl implements FileSystemAccessSP
   
   public final FolderHandle getTargetFolder(final CompilationUnitImpl it) {
     final Function0<FolderHandle> _function = new Function0<FolderHandle>() {
-        public FolderHandle apply() {
-          FolderHandle _doGetTargetFolder = AbstractFileSystemAccessImpl.this.doGetTargetFolder(it);
-          return _doGetTargetFolder;
-        }
-      };
+      public FolderHandle apply() {
+        FolderHandle _doGetTargetFolder = AbstractFileSystemAccessImpl.this.doGetTargetFolder(it);
+        return _doGetTargetFolder;
+      }
+    };
     FolderHandle _folder = this.getFolder(_function, "target");
     return _folder;
   }

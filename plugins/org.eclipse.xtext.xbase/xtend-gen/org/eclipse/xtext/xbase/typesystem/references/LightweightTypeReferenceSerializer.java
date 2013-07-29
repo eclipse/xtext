@@ -97,12 +97,12 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     } else {
       List<LightweightTypeReference> _upperBounds = reference.getUpperBounds();
       final Function1<LightweightTypeReference,Boolean> _function = new Function1<LightweightTypeReference,Boolean>() {
-          public Boolean apply(final LightweightTypeReference it) {
-            String _identifier = it.getIdentifier();
-            boolean _notEquals = (!Objects.equal("java.lang.Object", _identifier));
-            return Boolean.valueOf(_notEquals);
-          }
-        };
+        public Boolean apply(final LightweightTypeReference it) {
+          String _identifier = it.getIdentifier();
+          boolean _notEquals = (!Objects.equal("java.lang.Object", _identifier));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
       final Iterable<LightweightTypeReference> relevantUpperBounds = IterableExtensions.<LightweightTypeReference>filter(_upperBounds, _function);
       boolean _isEmpty = IterableExtensions.isEmpty(relevantUpperBounds);
       boolean _not = (!_isEmpty);

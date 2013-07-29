@@ -55,73 +55,73 @@ public class EclipseFileHandle extends EclipseResourceHandle implements FileHand
   
   public void read(final Procedure1<InputStream> function) {
     final Function0<InputStream> _function = new Function0<InputStream>() {
-        public InputStream apply() {
-          try {
-            IFile _file = EclipseFileHandle.this.getFile();
-            InputStream _contents = _file.getContents();
-            return _contents;
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      public InputStream apply() {
+        try {
+          IFile _file = EclipseFileHandle.this.getFile();
+          InputStream _contents = _file.getContents();
+          return _contents;
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      };
+      }
+    };
     IOUtils.<InputStream>tryWith(_function, function);
   }
   
   public void writeContents(final Function1<FileHandle,CharSequence> function) {
     final Procedure1<OutputStream> _function = new Procedure1<OutputStream>() {
-        public void apply(final OutputStream outputStream) {
-          try {
-            CharSequence _apply = function.apply(EclipseFileHandle.this);
-            final OutputSupplier<BufferedWriter> _function = new OutputSupplier<BufferedWriter>() {
-                public BufferedWriter getOutput() throws IOException {
-                  OutputStreamWriter _outputStreamWriter = new OutputStreamWriter(outputStream);
-                  BufferedWriter _bufferedWriter = new BufferedWriter(_outputStreamWriter);
-                  return _bufferedWriter;
-                }
-              };
-            CharStreams.<BufferedWriter>write(_apply, _function);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      public void apply(final OutputStream outputStream) {
+        try {
+          CharSequence _apply = function.apply(EclipseFileHandle.this);
+          final OutputSupplier<BufferedWriter> _function = new OutputSupplier<BufferedWriter>() {
+            public BufferedWriter getOutput() throws IOException {
+              OutputStreamWriter _outputStreamWriter = new OutputStreamWriter(outputStream);
+              BufferedWriter _bufferedWriter = new BufferedWriter(_outputStreamWriter);
+              return _bufferedWriter;
+            }
+          };
+          CharStreams.<BufferedWriter>write(_apply, _function);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      };
+      }
+    };
     this.write(_function);
   }
   
   public void write(final Procedure1<OutputStream> function) {
     final Function0<ByteArrayOutputStream> _function = new Function0<ByteArrayOutputStream>() {
-        public ByteArrayOutputStream apply() {
-          ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
-          return _byteArrayOutputStream;
-        }
-      };
+      public ByteArrayOutputStream apply() {
+        ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
+        return _byteArrayOutputStream;
+      }
+    };
     final Procedure1<ByteArrayOutputStream> _function_1 = new Procedure1<ByteArrayOutputStream>() {
-        public void apply(final ByteArrayOutputStream it) {
-          function.apply(it);
-          final Function0<BufferedInputStream> _function = new Function0<BufferedInputStream>() {
-              public BufferedInputStream apply() {
-                byte[] _byteArray = it.toByteArray();
-                ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-                BufferedInputStream _bufferedInputStream = new BufferedInputStream(_byteArrayInputStream);
-                return _bufferedInputStream;
-              }
-            };
-          final Procedure1<BufferedInputStream> _function_1 = new Procedure1<BufferedInputStream>() {
-              public void apply(final BufferedInputStream it) {
-                try {
-                  IFile _file = EclipseFileHandle.this.getFile();
-                  IFile _ensureCreated = EclipseFileHandle.this.ensureCreated(_file);
-                  NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                  _ensureCreated.setContents(it, true, true, _nullProgressMonitor);
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
-                }
-              }
-            };
-          IOUtils.<BufferedInputStream>tryWith(_function, _function_1);
-        }
-      };
+      public void apply(final ByteArrayOutputStream it) {
+        function.apply(it);
+        final Function0<BufferedInputStream> _function = new Function0<BufferedInputStream>() {
+          public BufferedInputStream apply() {
+            byte[] _byteArray = it.toByteArray();
+            ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
+            BufferedInputStream _bufferedInputStream = new BufferedInputStream(_byteArrayInputStream);
+            return _bufferedInputStream;
+          }
+        };
+        final Procedure1<BufferedInputStream> _function_1 = new Procedure1<BufferedInputStream>() {
+          public void apply(final BufferedInputStream it) {
+            try {
+              IFile _file = EclipseFileHandle.this.getFile();
+              IFile _ensureCreated = EclipseFileHandle.this.ensureCreated(_file);
+              NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+              _ensureCreated.setContents(it, true, true, _nullProgressMonitor);
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        };
+        IOUtils.<BufferedInputStream>tryWith(_function, _function_1);
+      }
+    };
     IOUtils.<ByteArrayOutputStream>tryWith(_function, _function_1);
   }
   

@@ -61,91 +61,91 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       final XExpression xExpression = this.expression(expression, false);
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       final Function1<EObject,EObject> _function = new Function1<EObject,EObject>() {
-          public EObject apply(final EObject it) {
-            EObject _switchResult = null;
-            boolean _matched = false;
-            if (!_matched) {
-              if (it instanceof XClosure) {
-                final XClosure _xClosure = (XClosure)it;
-                _matched=true;
-                JvmFormalParameter _implicitParameter = _xClosure.getImplicitParameter();
-                _switchResult = _implicitParameter;
-              }
+        public EObject apply(final EObject it) {
+          EObject _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (it instanceof XClosure) {
+              final XClosure _xClosure = (XClosure)it;
+              _matched=true;
+              JvmFormalParameter _implicitParameter = _xClosure.getImplicitParameter();
+              _switchResult = _implicitParameter;
             }
-            if (!_matched) {
-              _switchResult = it;
-            }
-            return _switchResult;
           }
-        };
+          if (!_matched) {
+            _switchResult = it;
+          }
+          return _switchResult;
+        }
+      };
       Iterator<EObject> _map = IteratorExtensions.<EObject, EObject>map(_eAll, _function);
       Set<EObject> _set = IteratorExtensions.<EObject>toSet(_map);
       final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
-          public Boolean apply(final EObject it) {
-            boolean _and = false;
-            boolean _notEquals = (!Objects.equal(it, null));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              boolean _switchResult = false;
-              boolean _matched = false;
-              if (!_matched) {
-                if (it instanceof XVariableDeclaration) {
-                  final XVariableDeclaration _xVariableDeclaration = (XVariableDeclaration)it;
-                  _matched=true;
-                  _switchResult = true;
-                }
+        public Boolean apply(final EObject it) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            boolean _switchResult = false;
+            boolean _matched = false;
+            if (!_matched) {
+              if (it instanceof XVariableDeclaration) {
+                final XVariableDeclaration _xVariableDeclaration = (XVariableDeclaration)it;
+                _matched=true;
+                _switchResult = true;
               }
-              if (!_matched) {
-                if (it instanceof JvmFormalParameter) {
-                  final JvmFormalParameter _jvmFormalParameter = (JvmFormalParameter)it;
-                  _matched=true;
-                  _switchResult = true;
-                }
-              }
-              if (!_matched) {
-                if (it instanceof XSwitchExpression) {
-                  final XSwitchExpression _xSwitchExpression = (XSwitchExpression)it;
-                  String _localVarName = _xSwitchExpression.getLocalVarName();
-                  boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
-                  if (_notEquals_1) {
-                    _matched=true;
-                    _switchResult = true;
-                  }
-                }
-              }
-              if (!_matched) {
-                _switchResult = false;
-              }
-              _and = (_notEquals && _switchResult);
             }
-            return Boolean.valueOf(_and);
+            if (!_matched) {
+              if (it instanceof JvmFormalParameter) {
+                final JvmFormalParameter _jvmFormalParameter = (JvmFormalParameter)it;
+                _matched=true;
+                _switchResult = true;
+              }
+            }
+            if (!_matched) {
+              if (it instanceof XSwitchExpression) {
+                final XSwitchExpression _xSwitchExpression = (XSwitchExpression)it;
+                String _localVarName = _xSwitchExpression.getLocalVarName();
+                boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
+                if (_notEquals_1) {
+                  _matched=true;
+                  _switchResult = true;
+                }
+              }
+            }
+            if (!_matched) {
+              _switchResult = false;
+            }
+            _and = (_notEquals && _switchResult);
           }
-        };
+          return Boolean.valueOf(_and);
+        }
+      };
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_set, _function_1);
       Iterable<JvmIdentifiableElement> _filter_1 = Iterables.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
       final List<JvmIdentifiableElement> identifiables = IterableExtensions.<JvmIdentifiableElement>toList(_filter_1);
       final Function1<JvmIdentifiableElement,Integer> _function_2 = new Function1<JvmIdentifiableElement,Integer>() {
-          public Integer apply(final JvmIdentifiableElement it) {
-            int _xblockexpression = (int) 0;
-            {
-              final ICompositeNode node = NodeModelUtils.findActualNodeFor(it);
-              int _xifexpression = (int) 0;
-              boolean _notEquals = (!Objects.equal(node, null));
-              if (_notEquals) {
-                int _offset = node.getOffset();
-                _xifexpression = _offset;
-              } else {
-                EObject _eContainer = it.eContainer();
-                ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_eContainer);
-                int _offset_1 = _findActualNodeFor.getOffset();
-                _xifexpression = _offset_1;
-              }
-              _xblockexpression = (_xifexpression);
+        public Integer apply(final JvmIdentifiableElement it) {
+          int _xblockexpression = (int) 0;
+          {
+            final ICompositeNode node = NodeModelUtils.findActualNodeFor(it);
+            int _xifexpression = (int) 0;
+            boolean _notEquals = (!Objects.equal(node, null));
+            if (_notEquals) {
+              int _offset = node.getOffset();
+              _xifexpression = _offset;
+            } else {
+              EObject _eContainer = it.eContainer();
+              ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_eContainer);
+              int _offset_1 = _findActualNodeFor.getOffset();
+              _xifexpression = _offset_1;
             }
-            return Integer.valueOf(_xblockexpression);
+            _xblockexpression = (_xifexpression);
           }
-        };
+          return Integer.valueOf(_xblockexpression);
+        }
+      };
       return IterableExtensions.<JvmIdentifiableElement, Integer>sortBy(identifiables, _function_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

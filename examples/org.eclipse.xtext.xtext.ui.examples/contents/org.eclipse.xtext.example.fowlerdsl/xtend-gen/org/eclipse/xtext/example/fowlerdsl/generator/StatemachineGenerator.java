@@ -250,12 +250,12 @@ public class StatemachineGenerator implements IGenerator {
     _builder.append("\'. Possible events are [");
     EList<Transition> _transitions = state.getTransitions();
     final Function1<Transition,String> _function = new Function1<Transition,String>() {
-        public String apply(final Transition t) {
-          Event _event = t.getEvent();
-          String _name = _event.getName();
-          return _name;
-        }
-      };
+      public String apply(final Transition t) {
+        Event _event = t.getEvent();
+        String _name = _event.getName();
+        return _name;
+      }
+    };
     List<String> _map = ListExtensions.<Transition, String>map(_transitions, _function);
     String _join = IterableExtensions.join(_map, ", ");
     _builder.append(_join, "	");

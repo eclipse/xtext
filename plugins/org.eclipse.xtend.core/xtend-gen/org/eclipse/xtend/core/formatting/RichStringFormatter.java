@@ -186,28 +186,28 @@ public class RichStringFormatter {
           final int length = (_indentLength_1 - _rootIndentLenght_2);
           List<Chunk> _chunks_1 = line.getChunks();
           final Function1<Chunk,CharSequence> _function = new Function1<Chunk,CharSequence>() {
-              public CharSequence apply(final Chunk chunk) {
-                CharSequence _switchResult = null;
-                boolean _matched = false;
-                if (!_matched) {
-                  if (chunk instanceof SemanticWhitespace) {
-                    final SemanticWhitespace _semanticWhitespace = (SemanticWhitespace)chunk;
-                    _matched=true;
-                    CharSequence _text = _semanticWhitespace.getText();
-                    _switchResult = _text;
-                  }
+            public CharSequence apply(final Chunk chunk) {
+              CharSequence _switchResult = null;
+              boolean _matched = false;
+              if (!_matched) {
+                if (chunk instanceof SemanticWhitespace) {
+                  final SemanticWhitespace _semanticWhitespace = (SemanticWhitespace)chunk;
+                  _matched=true;
+                  CharSequence _text = _semanticWhitespace.getText();
+                  _switchResult = _text;
                 }
-                if (!_matched) {
-                  if (chunk instanceof TemplateWhitespace) {
-                    final TemplateWhitespace _templateWhitespace = (TemplateWhitespace)chunk;
-                    _matched=true;
-                    String _indentation = doc.getIndentation(1);
-                    _switchResult = _indentation;
-                  }
-                }
-                return _switchResult;
               }
-            };
+              if (!_matched) {
+                if (chunk instanceof TemplateWhitespace) {
+                  final TemplateWhitespace _templateWhitespace = (TemplateWhitespace)chunk;
+                  _matched=true;
+                  String _indentation = doc.getIndentation(1);
+                  _switchResult = _indentation;
+                }
+              }
+              return _switchResult;
+            }
+          };
           List<CharSequence> _map = ListExtensions.<Chunk, CharSequence>map(_chunks_1, _function);
           final String text = IterableExtensions.join(_map);
           RuntimeException _xifexpression_6 = null;
@@ -241,12 +241,12 @@ public class RichStringFormatter {
       }
       BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
       final Function1<INode,Boolean> _function = new Function1<INode,Boolean>() {
-          public Boolean apply(final INode it) {
-            SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
-            boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
-            return Boolean.valueOf(_notEquals);
-          }
-        };
+        public Boolean apply(final INode it) {
+          SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
+          boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
       boolean _exists = IterableExtensions.<INode>exists(_asTreeIterable, _function);
       _xblockexpression = (_exists);
     }
@@ -269,10 +269,10 @@ public class RichStringFormatter {
   protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final XExpression expr) {
     INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(expr);
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForEObject, _function);
     doc.operator_add(_surround);
     formatter.apply(expr, doc);
@@ -281,23 +281,23 @@ public class RichStringFormatter {
   protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichStringIf expr) {
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "IF");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.oneSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function, _function_1);
     doc.operator_add(_surround);
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, Literals.RICH_STRING_ELSE_IF__IF);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForFeature, _function_2);
     doc.operator_add(_append);
     XExpression _if = expr.getIf();
@@ -310,20 +310,20 @@ public class RichStringFormatter {
     }
     ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, "ELSE");
     final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formattingDataFactory.surround(_nodeForKeyword_1, _function_3);
     doc.operator_add(_surround_1);
     XExpression _else = expr.getElse();
     this.fmt(formatter, doc, _else);
     ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(expr, "ENDIF");
     final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formattingDataFactory.surround(_nodeForKeyword_2, _function_4);
     doc.operator_add(_surround_2);
   }
@@ -331,23 +331,23 @@ public class RichStringFormatter {
   protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichStringElseIf expr) {
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "ELSEIF");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.oneSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function, _function_1);
     doc.operator_add(_surround);
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, Literals.RICH_STRING_ELSE_IF__IF);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForFeature, _function_2);
     doc.operator_add(_append);
     XExpression _if = expr.getIf();
@@ -357,28 +357,28 @@ public class RichStringFormatter {
   protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichStringForLoop expr) {
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "FOR");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.oneSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function, _function_1);
     doc.operator_add(_surround);
     ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, ":");
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.oneSpace();
+      }
+    };
     final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.oneSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formattingDataFactory.surround(_nodeForKeyword_1, _function_2, _function_3);
     doc.operator_add(_surround_1);
     JvmFormalParameter _declaredParam = expr.getDeclaredParam();
@@ -389,48 +389,48 @@ public class RichStringFormatter {
     this.fmt(formatter, doc, _eachExpression);
     ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(expr, "BEFORE");
     final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.oneSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formattingDataFactory.surround(_nodeForKeyword_2, _function_4);
     doc.operator_add(_surround_2);
     XExpression _before = expr.getBefore();
     formatter.apply(_before, doc);
     ILeafNode _nodeForKeyword_3 = this._nodeModelAccess.nodeForKeyword(expr, "SEPARATOR");
     final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.oneSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_3 = this._formattingDataFactory.surround(_nodeForKeyword_3, _function_5);
     doc.operator_add(_surround_3);
     XExpression _separator = expr.getSeparator();
     formatter.apply(_separator, doc);
     ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(expr, "AFTER");
     final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.oneSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_4 = this._formattingDataFactory.surround(_nodeForKeyword_4, _function_6);
     doc.operator_add(_surround_4);
     XExpression _after = expr.getAfter();
     formatter.apply(_after, doc);
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION);
     final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(_nodeForFeature, _function_7);
     doc.operator_add(_prepend);
     ILeafNode _nodeForKeyword_5 = this._nodeModelAccess.nodeForKeyword(expr, "ENDFOR");
     final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_5 = this._formattingDataFactory.surround(_nodeForKeyword_5, _function_8);
     doc.operator_add(_surround_5);
   }

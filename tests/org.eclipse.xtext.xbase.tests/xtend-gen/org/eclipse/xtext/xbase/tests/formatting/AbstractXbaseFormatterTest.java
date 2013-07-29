@@ -65,16 +65,16 @@ public abstract class AbstractXbaseFormatterTest {
   
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     final Procedure1<AssertingFormatterData> _function = new Procedure1<AssertingFormatterData>() {
-        public void apply(final AssertingFormatterData it) {
-          MapBasedPreferenceValues _config = it.getConfig();
-          AbstractXbaseFormatterTest.this.initConfig(_config, cfg);
-          it.setExpectation(expectation);
-          it.setToBeFormatted(toBeFormatted);
-          it.setPrefix(prefix);
-          it.setPostfix(postfix);
-          it.setAllowErrors(allowErrors);
-        }
-      };
+      public void apply(final AssertingFormatterData it) {
+        MapBasedPreferenceValues _config = it.getConfig();
+        AbstractXbaseFormatterTest.this.initConfig(_config, cfg);
+        it.setExpectation(expectation);
+        it.setToBeFormatted(toBeFormatted);
+        it.setPrefix(prefix);
+        it.setPostfix(postfix);
+        it.setAllowErrors(allowErrors);
+      }
+    };
     this.tester.assertFormatted(_function);
   }
   

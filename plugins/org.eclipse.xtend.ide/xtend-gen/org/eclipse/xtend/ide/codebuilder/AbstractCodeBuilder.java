@@ -210,13 +210,13 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
             EList<JvmTypeConstraint> _constraints = typeParameter.getConstraints();
             Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
             final Function1<JvmUpperBound,Boolean> _function = new Function1<JvmUpperBound,Boolean>() {
-                public Boolean apply(final JvmUpperBound it) {
-                  JvmTypeReference _typeReference = it.getTypeReference();
-                  String _identifier = _typeReference.getIdentifier();
-                  boolean _notEquals = (!Objects.equal(_identifier, "java.lang.Object"));
-                  return Boolean.valueOf(_notEquals);
-                }
-              };
+              public Boolean apply(final JvmUpperBound it) {
+                JvmTypeReference _typeReference = it.getTypeReference();
+                String _identifier = _typeReference.getIdentifier();
+                boolean _notEquals = (!Objects.equal(_identifier, "java.lang.Object"));
+                return Boolean.valueOf(_notEquals);
+              }
+            };
             final Iterable<JvmUpperBound> upperBounds = IterableExtensions.<JvmUpperBound>filter(_filter, _function);
             boolean _isEmpty = IterableExtensions.isEmpty(upperBounds);
             boolean _not = (!_isEmpty);

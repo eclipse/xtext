@@ -793,11 +793,11 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
     XtendFunction _firstMethod = this.firstMethod(targetFile);
     Iterable<JvmOperation> _allDispatchOperations = this.dispatchRenameSupport.getAllDispatchOperations(_firstMethod);
     final Function1<JvmOperation,String> _function = new Function1<JvmOperation,String>() {
-        public String apply(final JvmOperation it) {
-          String _signature = DispatchRenameSupportTest.this.signature(it);
-          return _signature;
-        }
-      };
+      public String apply(final JvmOperation it) {
+        String _signature = DispatchRenameSupportTest.this.signature(it);
+        return _signature;
+      }
+    };
     final Iterable<String> dispatchOperations = IterableExtensions.<JvmOperation, String>map(_allDispatchOperations, _function);
     for (final String signature : signatures) {
       String _plus = (signature + " not found. Only got ");

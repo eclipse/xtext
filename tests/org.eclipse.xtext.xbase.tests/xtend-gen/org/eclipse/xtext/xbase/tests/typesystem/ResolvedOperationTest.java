@@ -250,39 +250,39 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   protected void withDetails(final IResolvedOperation operation, final OverrideCheckDetails... details) {
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          final IOverrideCheckResult checkResult = operation.isOverridingOrImplementing(it);
-          final EnumSet<OverrideCheckDetails> actual = checkResult.getDetails();
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Failed: ");
-          _builder.append(actual, "");
-          _builder.append(".containsAll(");
-          List<OverrideCheckDetails> _list = IterableExtensions.<OverrideCheckDetails>toList(((Iterable<OverrideCheckDetails>)Conversions.doWrapArray(details)));
-          _builder.append(_list, "");
-          _builder.append(")");
-          boolean _containsAll = actual.containsAll(((Collection<? extends Object>)Conversions.doWrapArray(details)));
-          Assert.assertTrue(_builder.toString(), _containsAll);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        final IOverrideCheckResult checkResult = operation.isOverridingOrImplementing(it);
+        final EnumSet<OverrideCheckDetails> actual = checkResult.getDetails();
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Failed: ");
+        _builder.append(actual, "");
+        _builder.append(".containsAll(");
+        List<OverrideCheckDetails> _list = IterableExtensions.<OverrideCheckDetails>toList(((Iterable<OverrideCheckDetails>)Conversions.doWrapArray(details)));
+        _builder.append(_list, "");
+        _builder.append(")");
+        boolean _containsAll = actual.containsAll(((Collection<? extends Object>)Conversions.doWrapArray(details)));
+        Assert.assertTrue(_builder.toString(), _containsAll);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function);
   }
   
   protected void withDetail(final IResolvedOperation operation, final OverrideCheckDetails detail) {
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          final IOverrideCheckResult checkResult = operation.isOverridingOrImplementing(it);
-          final EnumSet<OverrideCheckDetails> actual = checkResult.getDetails();
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Failed: ");
-          _builder.append(actual, "");
-          _builder.append(".contains(");
-          _builder.append(detail, "");
-          _builder.append(")");
-          boolean _contains = actual.contains(detail);
-          Assert.assertTrue(_builder.toString(), _contains);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        final IOverrideCheckResult checkResult = operation.isOverridingOrImplementing(it);
+        final EnumSet<OverrideCheckDetails> actual = checkResult.getDetails();
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Failed: ");
+        _builder.append(actual, "");
+        _builder.append(".contains(");
+        _builder.append(detail, "");
+        _builder.append(")");
+        boolean _contains = actual.contains(detail);
+        Assert.assertTrue(_builder.toString(), _contains);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function);
   }
   
@@ -385,24 +385,24 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   public void testOverrideMethodResolution_14() {
     IResolvedOperation _operation = this.toOperation("(null as testdata.MethodOverrides4).m10()");
     final Procedure1<IResolvedOperation> _function = new Procedure1<IResolvedOperation>() {
-        public void apply(final IResolvedOperation it) {
-          List<JvmOperation> _overriddenAndImplementedMethodCandidates = it.getOverriddenAndImplementedMethodCandidates();
-          final JvmOperation candidate = IterableExtensions.<JvmOperation>head(_overriddenAndImplementedMethodCandidates);
-          EList<JvmTypeParameter> _typeParameters = candidate.getTypeParameters();
-          int _size = _typeParameters.size();
-          Assert.assertEquals(1, _size);
-          JvmOperation _declaration = it.getDeclaration();
-          EList<JvmTypeParameter> _typeParameters_1 = _declaration.getTypeParameters();
-          int _size_1 = _typeParameters_1.size();
-          Assert.assertEquals(1, _size_1);
-          JvmOperation _declaration_1 = it.getDeclaration();
-          EList<JvmTypeParameter> _typeParameters_2 = _declaration_1.getTypeParameters();
-          _typeParameters_2.clear();
-          IResolvedOperation _has = ResolvedOperationTest.this.has(it, 1);
-          IResolvedOperation _candidatesAndOverrides = ResolvedOperationTest.this.candidatesAndOverrides(_has, 0);
-          ResolvedOperationTest.this.withDetail(_candidatesAndOverrides, OverrideCheckDetails.TYPE_PARAMETER_MISMATCH);
-        }
-      };
+      public void apply(final IResolvedOperation it) {
+        List<JvmOperation> _overriddenAndImplementedMethodCandidates = it.getOverriddenAndImplementedMethodCandidates();
+        final JvmOperation candidate = IterableExtensions.<JvmOperation>head(_overriddenAndImplementedMethodCandidates);
+        EList<JvmTypeParameter> _typeParameters = candidate.getTypeParameters();
+        int _size = _typeParameters.size();
+        Assert.assertEquals(1, _size);
+        JvmOperation _declaration = it.getDeclaration();
+        EList<JvmTypeParameter> _typeParameters_1 = _declaration.getTypeParameters();
+        int _size_1 = _typeParameters_1.size();
+        Assert.assertEquals(1, _size_1);
+        JvmOperation _declaration_1 = it.getDeclaration();
+        EList<JvmTypeParameter> _typeParameters_2 = _declaration_1.getTypeParameters();
+        _typeParameters_2.clear();
+        IResolvedOperation _has = ResolvedOperationTest.this.has(it, 1);
+        IResolvedOperation _candidatesAndOverrides = ResolvedOperationTest.this.candidatesAndOverrides(_has, 0);
+        ResolvedOperationTest.this.withDetail(_candidatesAndOverrides, OverrideCheckDetails.TYPE_PARAMETER_MISMATCH);
+      }
+    };
     ObjectExtensions.<IResolvedOperation>operator_doubleArrow(_operation, _function);
   }
   
@@ -410,21 +410,21 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   public void testOverrideMethodResolution_15() {
     IResolvedOperation _operation = this.toOperation("(null as overrides.ConcreteForCharSequence).method");
     final Procedure1<IResolvedOperation> _function = new Procedure1<IResolvedOperation>() {
-        public void apply(final IResolvedOperation it) {
-          List<JvmOperation> _overriddenAndImplementedMethodCandidates = it.getOverriddenAndImplementedMethodCandidates();
-          final JvmOperation candidate = IterableExtensions.<JvmOperation>head(_overriddenAndImplementedMethodCandidates);
-          EList<JvmTypeParameter> _typeParameters = candidate.getTypeParameters();
-          int _size = _typeParameters.size();
-          Assert.assertEquals(2, _size);
-          JvmOperation _declaration = it.getDeclaration();
-          EList<JvmTypeParameter> _typeParameters_1 = _declaration.getTypeParameters();
-          int _size_1 = _typeParameters_1.size();
-          Assert.assertEquals(2, _size_1);
-          IResolvedOperation _has = ResolvedOperationTest.this.has(it, 1);
-          IResolvedOperation _candidatesAndOverrides = ResolvedOperationTest.this.candidatesAndOverrides(_has, 1);
-          ResolvedOperationTest.this.withDetails(_candidatesAndOverrides, OverrideCheckDetails.IMPLEMENTATION);
-        }
-      };
+      public void apply(final IResolvedOperation it) {
+        List<JvmOperation> _overriddenAndImplementedMethodCandidates = it.getOverriddenAndImplementedMethodCandidates();
+        final JvmOperation candidate = IterableExtensions.<JvmOperation>head(_overriddenAndImplementedMethodCandidates);
+        EList<JvmTypeParameter> _typeParameters = candidate.getTypeParameters();
+        int _size = _typeParameters.size();
+        Assert.assertEquals(2, _size);
+        JvmOperation _declaration = it.getDeclaration();
+        EList<JvmTypeParameter> _typeParameters_1 = _declaration.getTypeParameters();
+        int _size_1 = _typeParameters_1.size();
+        Assert.assertEquals(2, _size_1);
+        IResolvedOperation _has = ResolvedOperationTest.this.has(it, 1);
+        IResolvedOperation _candidatesAndOverrides = ResolvedOperationTest.this.candidatesAndOverrides(_has, 1);
+        ResolvedOperationTest.this.withDetails(_candidatesAndOverrides, OverrideCheckDetails.IMPLEMENTATION);
+      }
+    };
     ObjectExtensions.<IResolvedOperation>operator_doubleArrow(_operation, _function);
   }
   
@@ -567,10 +567,10 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     _declaration.setVisibility(JvmVisibility.PROTECTED);
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PUBLIC);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PUBLIC);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function);
     IResolvedOperation _has = this.has(operation, 1);
     IResolvedOperation _candidatesAndOverrides = this.candidatesAndOverrides(_has, 1);
@@ -584,10 +584,10 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     _declaration.setVisibility(JvmVisibility.PROTECTED);
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.DEFAULT);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.DEFAULT);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function);
     IResolvedOperation _has = this.has(operation, 1);
     IResolvedOperation _candidatesAndOverrides = this.candidatesAndOverrides(_has, 1);
@@ -599,19 +599,19 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).withArray(null)");
     JvmOperation _declaration = operation.getDeclaration();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PUBLIC);
-          it.setStatic(true);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PUBLIC);
+        it.setStatic(true);
+      }
+    };
     ObjectExtensions.<JvmOperation>operator_doubleArrow(_declaration, _function);
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-          it.setStatic(true);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+        it.setStatic(true);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function_1);
     IResolvedOperation _has = this.has(operation, 1);
     IResolvedOperation _candidatesAndOverrides = this.candidatesAndOverrides(_has, 1);
@@ -623,18 +623,18 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).withVarArgs(null)");
     JvmOperation _declaration = operation.getDeclaration();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-          it.setStatic(true);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+        it.setStatic(true);
+      }
+    };
     ObjectExtensions.<JvmOperation>operator_doubleArrow(_declaration, _function);
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function_1);
     IResolvedOperation _has = this.has(operation, 1);
     IResolvedOperation _candidatesAndOverrides = this.candidatesAndOverrides(_has, 0);
@@ -646,17 +646,17 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).sameErasure1(null)");
     JvmOperation _declaration = operation.getDeclaration();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+      }
+    };
     ObjectExtensions.<JvmOperation>operator_doubleArrow(_declaration, _function);
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function_1);
     IResolvedOperation _has = this.has(operation, 1);
     IResolvedOperation _candidatesAndOverrides = this.candidatesAndOverrides(_has, 0);
@@ -668,17 +668,17 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).sameErasure2(null)");
     JvmOperation _declaration = operation.getDeclaration();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+      }
+    };
     ObjectExtensions.<JvmOperation>operator_doubleArrow(_declaration, _function);
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function_1);
     IResolvedOperation _has = this.has(operation, 1);
     IResolvedOperation _candidatesAndOverrides = this.candidatesAndOverrides(_has, 0);
@@ -690,17 +690,17 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).sameErasure3");
     JvmOperation _declaration = operation.getDeclaration();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+      }
+    };
     ObjectExtensions.<JvmOperation>operator_doubleArrow(_declaration, _function);
     List<JvmOperation> _overriddenAndImplementedMethodCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
-        public void apply(final JvmOperation it) {
-          it.setVisibility(JvmVisibility.PROTECTED);
-        }
-      };
+      public void apply(final JvmOperation it) {
+        it.setVisibility(JvmVisibility.PROTECTED);
+      }
+    };
     IterableExtensions.<JvmOperation>forEach(_overriddenAndImplementedMethodCandidates, _function_1);
     IResolvedOperation _has = this.has(operation, 1);
     IResolvedOperation _candidatesAndOverrides = this.candidatesAndOverrides(_has, 0);

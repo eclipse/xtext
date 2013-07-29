@@ -23,13 +23,13 @@ public class AnnotationBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(_xtendClass);
     final Procedure1<AbstractAnnotationBuilder> _function = new Procedure1<AbstractAnnotationBuilder>() {
-        public void apply(final AbstractAnnotationBuilder it) {
-          JvmDeclaredType _xtendClass = AnnotationBuilderTest.this.getXtendClass();
-          it.setContext(_xtendClass);
-          it.setAnnotationName("Bar");
-          it.setVisibility(JvmVisibility.PUBLIC);
-        }
-      };
+      public void apply(final AbstractAnnotationBuilder it) {
+        JvmDeclaredType _xtendClass = AnnotationBuilderTest.this.getXtendClass();
+        it.setContext(_xtendClass);
+        it.setAnnotationName("Bar");
+        it.setVisibility(JvmVisibility.PUBLIC);
+      }
+    };
     AbstractAnnotationBuilder _doubleArrow = ObjectExtensions.<AbstractAnnotationBuilder>operator_doubleArrow(_createAnnotationBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("annotation Bar {");
@@ -43,13 +43,13 @@ public class AnnotationBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(_javaClass);
     final Procedure1<AbstractAnnotationBuilder> _function = new Procedure1<AbstractAnnotationBuilder>() {
-        public void apply(final AbstractAnnotationBuilder it) {
-          JvmDeclaredType _javaClass = AnnotationBuilderTest.this.getJavaClass();
-          it.setContext(_javaClass);
-          it.setAnnotationName("Bar");
-          it.setVisibility(JvmVisibility.PUBLIC);
-        }
-      };
+      public void apply(final AbstractAnnotationBuilder it) {
+        JvmDeclaredType _javaClass = AnnotationBuilderTest.this.getJavaClass();
+        it.setContext(_javaClass);
+        it.setAnnotationName("Bar");
+        it.setVisibility(JvmVisibility.PUBLIC);
+      }
+    };
     AbstractAnnotationBuilder _doubleArrow = ObjectExtensions.<AbstractAnnotationBuilder>operator_doubleArrow(_createAnnotationBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public @interface Bar {");

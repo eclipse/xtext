@@ -189,11 +189,11 @@ public class FormatterTester {
       StringBuilder _stringBuilder = new StringBuilder();
       final StringBuilder newDocument = _stringBuilder;
       final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
-          public Integer apply(final TextReplacement it) {
-            int _offset = it.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
+        public Integer apply(final TextReplacement it) {
+          int _offset = it.getOffset();
+          return Integer.valueOf(_offset);
+        }
+      };
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
         {
@@ -224,11 +224,11 @@ public class FormatterTester {
       StringBuilder _stringBuilder = new StringBuilder();
       final StringBuilder debugTrace = _stringBuilder;
       final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
-          public Integer apply(final TextReplacement it) {
-            int _offset = it.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
+        public Integer apply(final TextReplacement it) {
+          int _offset = it.getOffset();
+          return Integer.valueOf(_offset);
+        }
+      };
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
         {
@@ -267,11 +267,11 @@ public class FormatterTester {
     ArrayList<TextReplacement> _xblockexpression = null;
     {
       final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
-          public Integer apply(final TextReplacement it) {
-            int _offset = it.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
+        public Integer apply(final TextReplacement it) {
+          int _offset = it.getOffset();
+          return Integer.valueOf(_offset);
+        }
+      };
       Iterable<Integer> _map = IterableExtensions.<TextReplacement, Integer>map(edits, _function);
       final Set<Integer> offsets = IterableExtensions.<Integer>toSet(_map);
       final ArrayList<TextReplacement> result = CollectionLiterals.<TextReplacement>newArrayList();

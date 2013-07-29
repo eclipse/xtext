@@ -56,25 +56,25 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
     int _size_1 = actualTypeArguments.size();
     Assert.assertEquals(_size, _size_1);
     final Procedure2<String,Integer> _function = new Procedure2<String,Integer>() {
-        public void apply(final String typeArgument, final Integer i) {
-          StringConcatenation _builder = new StringConcatenation();
-          String _join = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(typeArguments)), ", ");
-          _builder.append(_join, "");
-          _builder.append(" vs ");
-          final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
-              public String apply(final LightweightTypeReference it) {
-                String _simpleName = it.getSimpleName();
-                return _simpleName;
-              }
-            };
-          List<String> _map = ListExtensions.<LightweightTypeReference, String>map(actualTypeArguments, _function);
-          String _join_1 = IterableExtensions.join(_map, ", ");
-          _builder.append(_join_1, "");
-          LightweightTypeReference _get = actualTypeArguments.get((i).intValue());
-          String _simpleName = _get.getSimpleName();
-          Assert.assertEquals(_builder.toString(), typeArgument, _simpleName);
-        }
-      };
+      public void apply(final String typeArgument, final Integer i) {
+        StringConcatenation _builder = new StringConcatenation();
+        String _join = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(typeArguments)), ", ");
+        _builder.append(_join, "");
+        _builder.append(" vs ");
+        final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+          public String apply(final LightweightTypeReference it) {
+            String _simpleName = it.getSimpleName();
+            return _simpleName;
+          }
+        };
+        List<String> _map = ListExtensions.<LightweightTypeReference, String>map(actualTypeArguments, _function);
+        String _join_1 = IterableExtensions.join(_map, ", ");
+        _builder.append(_join_1, "");
+        LightweightTypeReference _get = actualTypeArguments.get((i).intValue());
+        String _simpleName = _get.getSimpleName();
+        Assert.assertEquals(_builder.toString(), typeArgument, _simpleName);
+      }
+    };
     IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(typeArguments)), _function);
   }
   

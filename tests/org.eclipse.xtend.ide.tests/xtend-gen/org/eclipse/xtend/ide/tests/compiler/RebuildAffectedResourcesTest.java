@@ -299,12 +299,12 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
     Map<String,NumbersForTask> _allNumbers = Stopwatches.allNumbers();
     Set<Entry<String,NumbersForTask>> _entrySet = _allNumbers.entrySet();
     final Function1<Entry<String,NumbersForTask>,Boolean> _function = new Function1<Entry<String,NumbersForTask>,Boolean>() {
-        public Boolean apply(final Entry<String,NumbersForTask> it) {
-          String _key = it.getKey();
-          boolean _equals = Objects.equal(_key, "XtextBuilder.build");
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final Entry<String,NumbersForTask> it) {
+        String _key = it.getKey();
+        boolean _equals = Objects.equal(_key, "XtextBuilder.build");
+        return Boolean.valueOf(_equals);
+      }
+    };
     Iterable<Entry<String,NumbersForTask>> _filter = IterableExtensions.<Entry<String,NumbersForTask>>filter(_entrySet, _function);
     final Entry<String,NumbersForTask> builderEntry = IterableExtensions.<Entry<String,NumbersForTask>>head(_filter);
     boolean _equals = Objects.equal(builderEntry, null);
@@ -341,11 +341,11 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       String _plus_2 = (_plus_1 + _fullPath);
       String _plus_3 = (_plus_2 + " but found ");
       final Function1<IMarker,String> _function = new Function1<IMarker,String>() {
-          public String apply(final IMarker it) {
-            String _message = MarkerUtilities.getMessage(it);
-            return _message;
-          }
-        };
+        public String apply(final IMarker it) {
+          String _message = MarkerUtilities.getMessage(it);
+          return _message;
+        }
+      };
       List<String> _map = ListExtensions.<IMarker, String>map(((List<IMarker>)Conversions.doWrapArray(findMarkers)), _function);
       String _join = IterableExtensions.join(_map, ",");
       String _plus_4 = (_plus_3 + _join);

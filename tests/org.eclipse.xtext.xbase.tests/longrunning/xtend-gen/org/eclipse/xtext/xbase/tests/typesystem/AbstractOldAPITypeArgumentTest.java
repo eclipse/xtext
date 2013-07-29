@@ -101,24 +101,24 @@ public abstract class AbstractOldAPITypeArgumentTest extends AbstractTypeArgumen
     final ITypeArgumentContext typeArgumentContext = _typeArgumentContextProvider.getTypeArgumentContext(_featureCallRequest);
     final ArrayList<JvmTypeReference> actualTypeArguments = CollectionLiterals.<JvmTypeReference>newArrayList();
     final Procedure1<JvmTypeParameter> _function = new Procedure1<JvmTypeParameter>() {
-        public void apply(final JvmTypeParameter it) {
-          JvmTypeReference _boundArgument = typeArgumentContext.getBoundArgument(it);
-          actualTypeArguments.add(_boundArgument);
-        }
-      };
+      public void apply(final JvmTypeParameter it) {
+        JvmTypeReference _boundArgument = typeArgumentContext.getBoundArgument(it);
+        actualTypeArguments.add(_boundArgument);
+      }
+    };
     IterableExtensions.<JvmTypeParameter>forEach(typeParameters, _function);
     this.assertTypeArguments(typeArguments, actualTypeArguments);
   }
   
   public void assertTypeArguments(final String[] typeArguments, final List<JvmTypeReference> actualTypeArguments) {
     final Procedure2<String,Integer> _function = new Procedure2<String,Integer>() {
-        public void apply(final String typeArgument, final Integer i) {
-          final JvmTypeReference actualTypeArgument = actualTypeArguments.get((i).intValue());
-          Assert.assertNotNull(typeArgument, actualTypeArgument);
-          String _simpleName = actualTypeArgument.getSimpleName();
-          Assert.assertEquals(typeArgument, _simpleName);
-        }
-      };
+      public void apply(final String typeArgument, final Integer i) {
+        final JvmTypeReference actualTypeArgument = actualTypeArguments.get((i).intValue());
+        Assert.assertNotNull(typeArgument, actualTypeArgument);
+        String _simpleName = actualTypeArgument.getSimpleName();
+        Assert.assertEquals(typeArgument, _simpleName);
+      }
+    };
     IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(typeArguments)), _function);
   }
   

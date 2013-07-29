@@ -34,12 +34,12 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     IResourceDescriptions _delegate = this.getDelegate();
     Iterable<IResourceDescription> _allResourceDescriptions = _delegate.getAllResourceDescriptions();
     final Function1<IResourceDescription,Boolean> _function = new Function1<IResourceDescription,Boolean>() {
-        public Boolean apply(final IResourceDescription it) {
-          URI _uRI = it.getURI();
-          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_uRI);
-          return Boolean.valueOf(_isContainedUri);
-        }
-      };
+      public Boolean apply(final IResourceDescription it) {
+        URI _uRI = it.getURI();
+        boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_uRI);
+        return Boolean.valueOf(_isContainedUri);
+      }
+    };
     Iterable<IResourceDescription> _filter = IterableExtensions.<IResourceDescription>filter(_allResourceDescriptions, _function);
     return _filter;
   }
@@ -77,12 +77,12 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     IResourceDescriptions _delegate = this.getDelegate();
     Iterable<IEObjectDescription> _exportedObjects = _delegate.getExportedObjects();
     final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
-        public Boolean apply(final IEObjectDescription it) {
-          URI _eObjectURI = it.getEObjectURI();
-          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
-          return Boolean.valueOf(_isContainedUri);
-        }
-      };
+      public Boolean apply(final IEObjectDescription it) {
+        URI _eObjectURI = it.getEObjectURI();
+        boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
+        return Boolean.valueOf(_isContainedUri);
+      }
+    };
     Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjects, _function);
     return _filter;
   }
@@ -91,12 +91,12 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     IResourceDescriptions _delegate = this.getDelegate();
     Iterable<IEObjectDescription> _exportedObjects = _delegate.getExportedObjects(type, name, ignoreCase);
     final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
-        public Boolean apply(final IEObjectDescription it) {
-          URI _eObjectURI = it.getEObjectURI();
-          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
-          return Boolean.valueOf(_isContainedUri);
-        }
-      };
+      public Boolean apply(final IEObjectDescription it) {
+        URI _eObjectURI = it.getEObjectURI();
+        boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
+        return Boolean.valueOf(_isContainedUri);
+      }
+    };
     Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjects, _function);
     return _filter;
   }
@@ -105,12 +105,12 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     IResourceDescriptions _delegate = this.getDelegate();
     Iterable<IEObjectDescription> _exportedObjectsByObject = _delegate.getExportedObjectsByObject(object);
     final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
-        public Boolean apply(final IEObjectDescription it) {
-          URI _eObjectURI = it.getEObjectURI();
-          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
-          return Boolean.valueOf(_isContainedUri);
-        }
-      };
+      public Boolean apply(final IEObjectDescription it) {
+        URI _eObjectURI = it.getEObjectURI();
+        boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
+        return Boolean.valueOf(_isContainedUri);
+      }
+    };
     Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjectsByObject, _function);
     return _filter;
   }
@@ -119,12 +119,12 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     IResourceDescriptions _delegate = this.getDelegate();
     Iterable<IEObjectDescription> _exportedObjectsByType = _delegate.getExportedObjectsByType(type);
     final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
-        public Boolean apply(final IEObjectDescription it) {
-          URI _eObjectURI = it.getEObjectURI();
-          boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
-          return Boolean.valueOf(_isContainedUri);
-        }
-      };
+      public Boolean apply(final IEObjectDescription it) {
+        URI _eObjectURI = it.getEObjectURI();
+        boolean _isContainedUri = FilteringResourceDescriptions.this.isContainedUri(_eObjectURI);
+        return Boolean.valueOf(_isContainedUri);
+      }
+    };
     Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_exportedObjectsByType, _function);
     return _filter;
   }

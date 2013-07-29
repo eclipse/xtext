@@ -78,13 +78,13 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public <T extends ENamedElement> List<T> sortByName(final Iterable<T> iterable) {
     final Comparator<T> _function = new Comparator<T>() {
-        public int compare(final T p1, final T p2) {
-          String _name = p1.getName();
-          String _name_1 = p2.getName();
-          int _compareTo = _name.compareTo(_name_1);
-          return _compareTo;
-        }
-      };
+      public int compare(final T p1, final T p2) {
+        String _name = p1.getName();
+        String _name_1 = p2.getName();
+        int _compareTo = _name.compareTo(_name_1);
+        return _compareTo;
+      }
+    };
     List<T> _sort = IterableExtensions.<T>sort(iterable, _function);
     return _sort;
   }
@@ -92,20 +92,20 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public Iterable<EPackage> getAccessedPackages() {
     Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
-        public Boolean apply(final IConstraint e) {
-          EClass _type = e.getType();
-          boolean _notEquals = (!Objects.equal(_type, null));
-          return Boolean.valueOf(_notEquals);
-        }
-      };
+      public Boolean apply(final IConstraint e) {
+        EClass _type = e.getType();
+        boolean _notEquals = (!Objects.equal(_type, null));
+        return Boolean.valueOf(_notEquals);
+      }
+    };
     Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_grammarConstraints, _function);
     final Function1<IConstraint,EPackage> _function_1 = new Function1<IConstraint,EPackage>() {
-        public EPackage apply(final IConstraint e) {
-          EClass _type = e.getType();
-          EPackage _ePackage = _type.getEPackage();
-          return _ePackage;
-        }
-      };
+      public EPackage apply(final IConstraint e) {
+        EClass _type = e.getType();
+        EPackage _ePackage = _type.getEPackage();
+        return _ePackage;
+      }
+    };
     Iterable<EPackage> _map = IterableExtensions.<IConstraint, EPackage>map(_filter, _function_1);
     Set<EPackage> _set = IterableExtensions.<EPackage>toSet(_map);
     List<EPackage> _sortByName = this.<EPackage>sortByName(_set);
@@ -115,26 +115,26 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public Iterable<EClass> getAccessedClasses(final EPackage pkg) {
     Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,EClass> _function = new Function1<IConstraint,EClass>() {
-        public EClass apply(final IConstraint e) {
-          EClass _type = e.getType();
-          return _type;
-        }
-      };
+      public EClass apply(final IConstraint e) {
+        EClass _type = e.getType();
+        return _type;
+      }
+    };
     Iterable<EClass> _map = IterableExtensions.<IConstraint, EClass>map(_grammarConstraints, _function);
     final Function1<EClass,Boolean> _function_1 = new Function1<EClass,Boolean>() {
-        public Boolean apply(final EClass e) {
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(e, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            EPackage _ePackage = e.getEPackage();
-            boolean _equals = Objects.equal(_ePackage, pkg);
-            _and = (_notEquals && _equals);
-          }
-          return Boolean.valueOf(_and);
+      public Boolean apply(final EClass e) {
+        boolean _and = false;
+        boolean _notEquals = (!Objects.equal(e, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          EPackage _ePackage = e.getEPackage();
+          boolean _equals = Objects.equal(_ePackage, pkg);
+          _and = (_notEquals && _equals);
         }
-      };
+        return Boolean.valueOf(_and);
+      }
+    };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
     Set<EClass> _set = IterableExtensions.<EClass>toSet(_filter);
     List<EClass> _sortByName = this.<EClass>sortByName(_set);
@@ -168,11 +168,11 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       final Collection<IConstraint> superConstraints = this.sequencerUtil.getGrammarConstraints(_superGrammar);
       String _xifexpression = null;
       final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
-          public Boolean apply(final IConstraint it) {
-            boolean _contains = superConstraints.contains(it);
-            return Boolean.valueOf(_contains);
-          }
-        };
+        public Boolean apply(final IConstraint it) {
+          boolean _contains = superConstraints.contains(it);
+          return Boolean.valueOf(_contains);
+        }
+      };
       boolean _exists = IterableExtensions.<IConstraint>exists(localConstraints, _function);
       if (_exists) {
         GenFileName _semanticSequencer = this.names.getSemanticSequencer();
@@ -227,28 +227,28 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.newLine();
       _builder.append("\t");
       final Function1<IConstraint,Boolean> _function_1 = new Function1<IConstraint,Boolean>() {
-          public Boolean apply(final IConstraint e) {
-            boolean _and = false;
-            EClass _type = e.getType();
-            boolean _notEquals = (!Objects.equal(_type, null));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              boolean _contains = superConstraints.contains(e);
-              boolean _not = (!_contains);
-              _and = (_notEquals && _not);
-            }
-            return Boolean.valueOf(_and);
+        public Boolean apply(final IConstraint e) {
+          boolean _and = false;
+          EClass _type = e.getType();
+          boolean _notEquals = (!Objects.equal(_type, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            boolean _contains = superConstraints.contains(e);
+            boolean _not = (!_contains);
+            _and = (_notEquals && _not);
           }
-        };
+          return Boolean.valueOf(_and);
+        }
+      };
       Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(localConstraints, _function_1);
       List<IConstraint> _sort = IterableExtensions.<IConstraint>sort(_filter);
       final Function1<IConstraint,CharSequence> _function_2 = new Function1<IConstraint,CharSequence>() {
-          public CharSequence apply(final IConstraint e) {
-            CharSequence _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(file, e);
-            return _genMethodSequence;
-          }
-        };
+        public CharSequence apply(final IConstraint e) {
+          CharSequence _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(file, e);
+          return _genMethodSequence;
+        }
+      };
       String _join = IterableExtensions.<IConstraint>join(_sort, "\n\n", _function_2);
       _builder.append(_join, "	");
       _builder.newLineIfNotEmpty();
@@ -284,11 +284,11 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     Grammar _superGrammar = this.sequencerUtil.getSuperGrammar(this.grammar);
     Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(_superGrammar);
     final Function1<IConstraint,Pair<IConstraint,IConstraint>> _function = new Function1<IConstraint,Pair<IConstraint,IConstraint>>() {
-        public Pair<IConstraint,IConstraint> apply(final IConstraint it) {
-          Pair<IConstraint,IConstraint> _mappedTo = Pair.<IConstraint, IConstraint>of(it, it);
-          return _mappedTo;
-        }
-      };
+      public Pair<IConstraint,IConstraint> apply(final IConstraint it) {
+        Pair<IConstraint,IConstraint> _mappedTo = Pair.<IConstraint, IConstraint>of(it, it);
+        return _mappedTo;
+      }
+    };
     Iterable<Pair<IConstraint,IConstraint>> _map = IterableExtensions.<IConstraint, Pair<IConstraint,IConstraint>>map(_grammarConstraints, _function);
     final Map<IConstraint,IConstraint> superConstraints = this.<IConstraint, IConstraint>toMap(_map);
     _builder.newLineIfNotEmpty();
@@ -331,12 +331,12 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               Map<IConstraint,List<EObject>> _accessedConstraints = this.getAccessedConstraints(type);
               Set<Entry<IConstraint,List<EObject>>> _entrySet = _accessedConstraints.entrySet();
               final Function1<Entry<IConstraint,List<EObject>>,String> _function_1 = new Function1<Entry<IConstraint,List<EObject>>,String>() {
-                  public String apply(final Entry<IConstraint,List<EObject>> e) {
-                    IConstraint _key = e.getKey();
-                    String _name = _key.getName();
-                    return _name;
-                  }
-                };
+                public String apply(final Entry<IConstraint,List<EObject>> e) {
+                  IConstraint _key = e.getKey();
+                  String _name = _key.getName();
+                  return _name;
+                }
+              };
               List<Entry<IConstraint,List<EObject>>> _sortBy = IterableExtensions.<Entry<IConstraint,List<EObject>>, String>sortBy(_entrySet, _function_1);
               for(final Entry<IConstraint,List<EObject>> ctx : _sortBy) {
                 _builder.append("\t");
@@ -354,11 +354,11 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 {
                   List<EObject> _value = ctx.getValue();
                   final Function1<EObject,String> _function_2 = new Function1<EObject,String>() {
-                      public String apply(final EObject e) {
-                        String _contextName = AbstractSemanticSequencer.this.ctx2name.getContextName(e);
-                        return _contextName;
-                      }
-                    };
+                    public String apply(final EObject e) {
+                      String _contextName = AbstractSemanticSequencer.this.ctx2name.getContextName(e);
+                      return _contextName;
+                    }
+                  };
                   List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_2);
                   boolean _hasElements = false;
                   for(final EObject c : _sortBy_1) {
@@ -492,11 +492,11 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         {
           IFeatureInfo[] _features = c.getFeatures();
           final Function1<IFeatureInfo,Boolean> _function = new Function1<IFeatureInfo,Boolean>() {
-              public Boolean apply(final IFeatureInfo e) {
-                boolean _notEquals = (!Objects.equal(e, null));
-                return Boolean.valueOf(_notEquals);
-              }
-            };
+            public Boolean apply(final IFeatureInfo e) {
+              boolean _notEquals = (!Objects.equal(e, null));
+              return Boolean.valueOf(_notEquals);
+            }
+          };
           Iterable<IFeatureInfo> _filter = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features)), _function);
           for(final IFeatureInfo f : _filter) {
             _builder.append("\t");
@@ -556,19 +556,19 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             IConstraintElement _body_4 = c.getBody();
             List<IConstraintElement> _children = _body_4.getChildren();
             final Function1<IConstraintElement,Boolean> _function_1 = new Function1<IConstraintElement,Boolean>() {
-                public Boolean apply(final IConstraintElement e) {
-                  IFeatureInfo _featureInfo = e.getFeatureInfo();
-                  boolean _notEquals = (!Objects.equal(_featureInfo, null));
-                  return Boolean.valueOf(_notEquals);
-                }
-              };
+              public Boolean apply(final IConstraintElement e) {
+                IFeatureInfo _featureInfo = e.getFeatureInfo();
+                boolean _notEquals = (!Objects.equal(_featureInfo, null));
+                return Boolean.valueOf(_notEquals);
+              }
+            };
             Iterable<IConstraintElement> _filter_1 = IterableExtensions.<IConstraintElement>filter(_children, _function_1);
             final Function1<IConstraintElement,IFeatureInfo> _function_2 = new Function1<IConstraintElement,IFeatureInfo>() {
-                public IFeatureInfo apply(final IConstraintElement e) {
-                  IFeatureInfo _featureInfo = e.getFeatureInfo();
-                  return _featureInfo;
-                }
-              };
+              public IFeatureInfo apply(final IConstraintElement e) {
+                IFeatureInfo _featureInfo = e.getFeatureInfo();
+                return _featureInfo;
+              }
+            };
             Iterable<IFeatureInfo> _map = IterableExtensions.<IConstraintElement, IFeatureInfo>map(_filter_1, _function_2);
             _xifexpression_1 = _map;
           }

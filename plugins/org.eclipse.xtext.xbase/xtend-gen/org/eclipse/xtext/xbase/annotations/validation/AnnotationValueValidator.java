@@ -77,11 +77,11 @@ public class AnnotationValueValidator {
     if (allowNesting) {
       EList<XExpression> _elements = expression.getElements();
       final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
-          public Boolean apply(final XExpression it) {
-            boolean _isValidAnnotationValue = AnnotationValueValidator.this.isValidAnnotationValue(it, false);
-            return Boolean.valueOf(_isValidAnnotationValue);
-          }
-        };
+        public Boolean apply(final XExpression it) {
+          boolean _isValidAnnotationValue = AnnotationValueValidator.this.isValidAnnotationValue(it, false);
+          return Boolean.valueOf(_isValidAnnotationValue);
+        }
+      };
       return IterableExtensions.<XExpression>forall(_elements, _function);
     }
     return false;

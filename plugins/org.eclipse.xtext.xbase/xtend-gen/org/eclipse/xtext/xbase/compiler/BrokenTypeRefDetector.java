@@ -47,11 +47,11 @@ public class BrokenTypeRefDetector extends InheritanceAware<Boolean> {
     } else {
       EList<JvmTypeReference> _references = it.getReferences();
       final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
-          public Boolean apply(final JvmTypeReference it) {
-            Boolean _visit = BrokenTypeRefDetector.this.visit(it);
-            return _visit;
-          }
-        };
+        public Boolean apply(final JvmTypeReference it) {
+          Boolean _visit = BrokenTypeRefDetector.this.visit(it);
+          return _visit;
+        }
+      };
       boolean _exists = IterableExtensions.<JvmTypeReference>exists(_references, _function);
       _or = ((_doVisitTypeReference).booleanValue() || _exists);
     }
@@ -66,11 +66,11 @@ public class BrokenTypeRefDetector extends InheritanceAware<Boolean> {
     } else {
       EList<JvmTypeReference> _arguments = it.getArguments();
       final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
-          public Boolean apply(final JvmTypeReference it) {
-            Boolean _visit = BrokenTypeRefDetector.this.visit(it);
-            return _visit;
-          }
-        };
+        public Boolean apply(final JvmTypeReference it) {
+          Boolean _visit = BrokenTypeRefDetector.this.visit(it);
+          return _visit;
+        }
+      };
       boolean _exists = IterableExtensions.<JvmTypeReference>exists(_arguments, _function);
       _or = ((_doVisitTypeReference).booleanValue() || _exists);
     }
@@ -80,12 +80,12 @@ public class BrokenTypeRefDetector extends InheritanceAware<Boolean> {
   public Boolean doVisitWildcardTypeReference(final JvmWildcardTypeReference it) {
     EList<JvmTypeConstraint> _constraints = it.getConstraints();
     final Function1<JvmTypeConstraint,Boolean> _function = new Function1<JvmTypeConstraint,Boolean>() {
-        public Boolean apply(final JvmTypeConstraint it) {
-          JvmTypeReference _typeReference = it.getTypeReference();
-          Boolean _visit = BrokenTypeRefDetector.this.visit(_typeReference);
-          return _visit;
-        }
-      };
+      public Boolean apply(final JvmTypeConstraint it) {
+        JvmTypeReference _typeReference = it.getTypeReference();
+        Boolean _visit = BrokenTypeRefDetector.this.visit(_typeReference);
+        return _visit;
+      }
+    };
     boolean _exists = IterableExtensions.<JvmTypeConstraint>exists(_constraints, _function);
     return Boolean.valueOf(_exists);
   }

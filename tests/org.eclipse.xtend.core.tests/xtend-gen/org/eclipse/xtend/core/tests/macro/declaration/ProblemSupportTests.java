@@ -39,28 +39,28 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-        public void apply(final CompilationUnitImpl it) {
-          ProblemSupport _problemSupport = it.getProblemSupport();
-          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
-          TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
-          _problemSupport.addError(_head, "error on source");
-          XtendFile _xtendFile = it.getXtendFile();
-          Resource _eResource = _xtendFile.eResource();
-          EList<Diagnostic> _errors = _eResource.getErrors();
-          Diagnostic _head_1 = IterableExtensions.<Diagnostic>head(_errors);
-          String _message = _head_1.getMessage();
-          Assert.assertEquals("error on source", _message);
-          XtendFile _xtendFile_1 = it.getXtendFile();
-          EList<XtendTypeDeclaration> _xtendTypes = _xtendFile_1.getXtendTypes();
-          XtendTypeDeclaration _head_2 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-          XtendFile _xtendFile_2 = it.getXtendFile();
-          Resource _eResource_1 = _xtendFile_2.eResource();
-          EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
-          Diagnostic _head_3 = IterableExtensions.<Diagnostic>head(_errors_1);
-          EObject _problematicObject = ((EObjectDiagnosticImpl) _head_3).getProblematicObject();
-          Assert.assertEquals(_head_2, _problematicObject);
-        }
-      };
+      public void apply(final CompilationUnitImpl it) {
+        ProblemSupport _problemSupport = it.getProblemSupport();
+        Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+        TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
+        _problemSupport.addError(_head, "error on source");
+        XtendFile _xtendFile = it.getXtendFile();
+        Resource _eResource = _xtendFile.eResource();
+        EList<Diagnostic> _errors = _eResource.getErrors();
+        Diagnostic _head_1 = IterableExtensions.<Diagnostic>head(_errors);
+        String _message = _head_1.getMessage();
+        Assert.assertEquals("error on source", _message);
+        XtendFile _xtendFile_1 = it.getXtendFile();
+        EList<XtendTypeDeclaration> _xtendTypes = _xtendFile_1.getXtendTypes();
+        XtendTypeDeclaration _head_2 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+        XtendFile _xtendFile_2 = it.getXtendFile();
+        Resource _eResource_1 = _xtendFile_2.eResource();
+        EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
+        Diagnostic _head_3 = IterableExtensions.<Diagnostic>head(_errors_1);
+        EObject _problematicObject = ((EObjectDiagnosticImpl) _head_3).getProblematicObject();
+        Assert.assertEquals(_head_2, _problematicObject);
+      }
+    };
     this.asCompilationUnit(_validFile, _function);
   }
   
@@ -76,28 +76,28 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-        public void apply(final CompilationUnitImpl it) {
-          TypeLookupImpl _typeLookup = it.getTypeLookup();
-          final MutableClassDeclaration derived = _typeLookup.findClass("MyClass");
-          ProblemSupport _problemSupport = it.getProblemSupport();
-          _problemSupport.addError(derived, "error on derived element");
-          XtendFile _xtendFile = it.getXtendFile();
-          Resource _eResource = _xtendFile.eResource();
-          EList<Diagnostic> _errors = _eResource.getErrors();
-          Diagnostic _head = IterableExtensions.<Diagnostic>head(_errors);
-          String _message = _head.getMessage();
-          Assert.assertEquals("error on derived element", _message);
-          XtendFile _xtendFile_1 = it.getXtendFile();
-          EList<XtendTypeDeclaration> _xtendTypes = _xtendFile_1.getXtendTypes();
-          XtendTypeDeclaration _head_1 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-          XtendFile _xtendFile_2 = it.getXtendFile();
-          Resource _eResource_1 = _xtendFile_2.eResource();
-          EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
-          Diagnostic _head_2 = IterableExtensions.<Diagnostic>head(_errors_1);
-          EObject _problematicObject = ((EObjectDiagnosticImpl) _head_2).getProblematicObject();
-          Assert.assertEquals(_head_1, _problematicObject);
-        }
-      };
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration derived = _typeLookup.findClass("MyClass");
+        ProblemSupport _problemSupport = it.getProblemSupport();
+        _problemSupport.addError(derived, "error on derived element");
+        XtendFile _xtendFile = it.getXtendFile();
+        Resource _eResource = _xtendFile.eResource();
+        EList<Diagnostic> _errors = _eResource.getErrors();
+        Diagnostic _head = IterableExtensions.<Diagnostic>head(_errors);
+        String _message = _head.getMessage();
+        Assert.assertEquals("error on derived element", _message);
+        XtendFile _xtendFile_1 = it.getXtendFile();
+        EList<XtendTypeDeclaration> _xtendTypes = _xtendFile_1.getXtendTypes();
+        XtendTypeDeclaration _head_1 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+        XtendFile _xtendFile_2 = it.getXtendFile();
+        Resource _eResource_1 = _xtendFile_2.eResource();
+        EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
+        Diagnostic _head_2 = IterableExtensions.<Diagnostic>head(_errors_1);
+        EObject _problematicObject = ((EObjectDiagnosticImpl) _head_2).getProblematicObject();
+        Assert.assertEquals(_head_1, _problematicObject);
+      }
+    };
     this.asCompilationUnit(_validFile, _function);
   }
   

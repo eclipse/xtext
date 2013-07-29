@@ -72,19 +72,19 @@ public class AnnotationProcessor {
               CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
               registerGlobalsCtx.setCompilationUnit(_compilationUnit);
               final Runnable _function = new Runnable() {
-                  public void run() {
-                    List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-                    final Function1<XtendAnnotationTarget,MemberDeclaration> _function = new Function1<XtendAnnotationTarget,MemberDeclaration>() {
-                        public MemberDeclaration apply(final XtendAnnotationTarget it) {
-                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-                          return _xtendMemberDeclaration;
-                        }
-                      };
-                    List<MemberDeclaration> _map = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function);
-                    _registerGlobalsParticipant.doRegisterGlobals(_map, registerGlobalsCtx);
-                  }
-                };
+                public void run() {
+                  List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+                  final Function1<XtendAnnotationTarget,MemberDeclaration> _function = new Function1<XtendAnnotationTarget,MemberDeclaration>() {
+                    public MemberDeclaration apply(final XtendAnnotationTarget it) {
+                      CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                      MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                      return _xtendMemberDeclaration;
+                    }
+                  };
+                  List<MemberDeclaration> _map = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function);
+                  _registerGlobalsParticipant.doRegisterGlobals(_map, registerGlobalsCtx);
+                }
+              };
               Object _runWithCancelIndiciator = this.runWithCancelIndiciator(ctx, monitor, _function);
               _xblockexpression_1 = (_runWithCancelIndiciator);
             }
@@ -121,38 +121,38 @@ public class AnnotationProcessor {
               CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
               modifyCtx.setUnit(_compilationUnit);
               final Runnable _function = new Runnable() {
-                  public void run() {
-                    List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-                    final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
-                        public MutableNamedElement apply(final XtendAnnotationTarget it) {
-                          Declaration _switchResult = null;
-                          boolean _matched = false;
-                          if (!_matched) {
-                            if (it instanceof XtendMember) {
-                              final XtendMember _xtendMember = (XtendMember)it;
-                              _matched=true;
-                              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                              MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(_xtendMember);
-                              _switchResult = _xtendMemberDeclaration;
-                            }
-                          }
-                          if (!_matched) {
-                            if (it instanceof XtendParameter) {
-                              final XtendParameter _xtendParameter = (XtendParameter)it;
-                              _matched=true;
-                              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                              XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(_xtendParameter);
-                              _switchResult = _xtendParameterDeclaration;
-                            }
-                          }
-                          final Declaration xtendMember = _switchResult;
-                          return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
+                public void run() {
+                  List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+                  final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
+                    public MutableNamedElement apply(final XtendAnnotationTarget it) {
+                      Declaration _switchResult = null;
+                      boolean _matched = false;
+                      if (!_matched) {
+                        if (it instanceof XtendMember) {
+                          final XtendMember _xtendMember = (XtendMember)it;
+                          _matched=true;
+                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                          MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(_xtendMember);
+                          _switchResult = _xtendMemberDeclaration;
                         }
-                      };
-                    final List<MutableNamedElement> map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
-                    _transformationParticipant.doTransform(map, modifyCtx);
-                  }
-                };
+                      }
+                      if (!_matched) {
+                        if (it instanceof XtendParameter) {
+                          final XtendParameter _xtendParameter = (XtendParameter)it;
+                          _matched=true;
+                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                          XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(_xtendParameter);
+                          _switchResult = _xtendParameterDeclaration;
+                        }
+                      }
+                      final Declaration xtendMember = _switchResult;
+                      return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
+                    }
+                  };
+                  final List<MutableNamedElement> map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
+                  _transformationParticipant.doTransform(map, modifyCtx);
+                }
+              };
               Object _runWithCancelIndiciator = this.runWithCancelIndiciator(ctx, monitor, _function);
               _xblockexpression_1 = (_runWithCancelIndiciator);
             }
@@ -178,30 +178,30 @@ public class AnnotationProcessor {
       AtomicBoolean _atomicBoolean = new AtomicBoolean(false);
       final AtomicBoolean isFinished = _atomicBoolean;
       final Runnable _function = new Runnable() {
-          public void run() {
-            try {
-              boolean _get = isFinished.get();
-              boolean _not = (!_get);
-              boolean _while = _not;
-              while (_while) {
-                {
-                  boolean _isCanceled = cancelIndicator.isCanceled();
-                  if (_isCanceled) {
-                    CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                    _compilationUnit.setCanceled(true);
-                    return;
-                  }
-                  Thread.sleep(100);
+        public void run() {
+          try {
+            boolean _get = isFinished.get();
+            boolean _not = (!_get);
+            boolean _while = _not;
+            while (_while) {
+              {
+                boolean _isCanceled = cancelIndicator.isCanceled();
+                if (_isCanceled) {
+                  CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                  _compilationUnit.setCanceled(true);
+                  return;
                 }
-                boolean _get_1 = isFinished.get();
-                boolean _not_1 = (!_get_1);
-                _while = _not_1;
+                Thread.sleep(100);
               }
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
+              boolean _get_1 = isFinished.get();
+              boolean _not_1 = (!_get_1);
+              _while = _not_1;
             }
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
-        };
+        }
+      };
       Thread _thread = new Thread(_function);
       _thread.start();
       Object _xtrycatchfinallyexpression = null;

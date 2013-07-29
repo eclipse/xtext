@@ -74,16 +74,16 @@ public class XbaseEditorInputRedirector {
               final IPath relative = _fullPath_2.removeFirstSegments(_segmentCount);
               IPackageFragmentRoot[] _packageFragmentRoots = project.getPackageFragmentRoots();
               final Function1<IPackageFragmentRoot,Boolean> _function = new Function1<IPackageFragmentRoot,Boolean>() {
-                  public Boolean apply(final IPackageFragmentRoot it) {
-                    try {
-                      int _kind = it.getKind();
-                      boolean _equals = (_kind == IPackageFragmentRoot.K_SOURCE);
-                      return Boolean.valueOf(_equals);
-                    } catch (Throwable _e) {
-                      throw Exceptions.sneakyThrow(_e);
-                    }
+                public Boolean apply(final IPackageFragmentRoot it) {
+                  try {
+                    int _kind = it.getKind();
+                    boolean _equals = (_kind == IPackageFragmentRoot.K_SOURCE);
+                    return Boolean.valueOf(_equals);
+                  } catch (Throwable _e) {
+                    throw Exceptions.sneakyThrow(_e);
                   }
-                };
+                }
+              };
               Iterable<IPackageFragmentRoot> _filter = IterableExtensions.<IPackageFragmentRoot>filter(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_packageFragmentRoots)), _function);
               for (final IPackageFragmentRoot source : _filter) {
                 {
@@ -102,12 +102,12 @@ public class XbaseEditorInputRedirector {
             }
             IClasspathEntry[] _rawClasspath = project.getRawClasspath();
             final Function1<IClasspathEntry,Boolean> _function_1 = new Function1<IClasspathEntry,Boolean>() {
-                public Boolean apply(final IClasspathEntry it) {
-                  int _entryKind = it.getEntryKind();
-                  boolean _equals = (_entryKind == IClasspathEntry.CPE_SOURCE);
-                  return Boolean.valueOf(_equals);
-                }
-              };
+              public Boolean apply(final IClasspathEntry it) {
+                int _entryKind = it.getEntryKind();
+                boolean _equals = (_entryKind == IClasspathEntry.CPE_SOURCE);
+                return Boolean.valueOf(_equals);
+              }
+            };
             Iterable<IClasspathEntry> _filter_1 = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(_rawClasspath)), _function_1);
             for (final IClasspathEntry sourceFolder : _filter_1) {
               boolean _and = false;
