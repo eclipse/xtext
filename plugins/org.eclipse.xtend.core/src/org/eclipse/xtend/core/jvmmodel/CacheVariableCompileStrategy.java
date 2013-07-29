@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.jvmmodel;
 
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -21,14 +20,10 @@ public class CacheVariableCompileStrategy implements Procedures.Procedure1<ITree
 	@Inject
 	private TypeReferences typeReferences;
 
-	@Inject
-	private TypeReferenceSerializer typeReferenceSerializer;
-
 	private XtendFunction context;
 
 	public void apply(ITreeAppendable builder) {
-		typeReferenceSerializer.serialize(typeReferences.getTypeForName(CollectionLiterals.class, context),
-				context, builder);
+		builder.append(typeReferences.findDeclaredType(CollectionLiterals.class, context));
 		builder.append(".newHashMap()");
 	}
 

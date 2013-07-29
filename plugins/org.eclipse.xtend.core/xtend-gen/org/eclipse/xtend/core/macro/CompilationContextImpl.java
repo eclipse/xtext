@@ -2,18 +2,16 @@ package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class CompilationContextImpl implements CompilationContext {
@@ -31,14 +29,11 @@ public class CompilationContextImpl implements CompilationContext {
   
   private CompilationUnitImpl compilationUnit;
   
-  private TypeReferenceSerializer typeRefSerializer;
-  
-  public CompilationContextImpl(final ITreeAppendable appendable, final CompilationUnitImpl compilationUnit, final TypeReferenceSerializer typeRefSerializer) {
+  public CompilationContextImpl(final ITreeAppendable appendable, final CompilationUnitImpl compilationUnit) {
     this.appendable = appendable;
     ImportManager _importManager = this.getImportManager(appendable);
     this.importManager = _importManager;
     this.compilationUnit = compilationUnit;
-    this.typeRefSerializer = typeRefSerializer;
   }
   
   public ImportManager getImportManager(final ITreeAppendable appendable) {
@@ -65,9 +60,8 @@ public class CompilationContextImpl implements CompilationContext {
       _xifexpression = _stringBuilderBasedAppendable_1;
     }
     final StringBuilderBasedAppendable appendable = _xifexpression;
-    final JvmTypeReference typeRef = this.compilationUnit.toJvmTypeReference(typeref);
-    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    this.typeRefSerializer.serialize(typeRef, _xtendFile, appendable);
+    final LightweightTypeReference typeRef = this.compilationUnit.toLightweightTypeReference(typeref);
+    appendable.append(typeRef);
     return appendable.toString();
   }
 }

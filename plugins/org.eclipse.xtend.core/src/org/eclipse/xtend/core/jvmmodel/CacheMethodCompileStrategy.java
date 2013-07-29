@@ -17,15 +17,19 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
@@ -35,16 +39,16 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 	private TypeReferences typeReferences;
 
 	@Inject
-	private ITypeProvider typeProvider;
-
-	@Inject
-	private TypeReferenceSerializer typeReferenceSerializer;
+	private IBatchTypeResolver typeResolver;
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 
 	@Inject
 	private XbaseCompiler compiler;
+	
+	@Inject 
+	private CommonTypeComputationServices services;
 	
 	private CreateExtensionInfo createExtensionInfo;
 
@@ -62,16 +66,15 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		JvmOperation cacheMethod = (JvmOperation) logicalContainerProvider
 				.getLogicalContainer(createExtensionInfo.getCreateExpression());
 		JvmDeclaredType containerType = cacheMethod.getDeclaringType();
-		JvmTypeReference listType = typeReferences.getTypeForName(ArrayList.class, containerType);
-		JvmTypeReference collectonLiterals = typeReferences.getTypeForName(CollectionLiterals.class,
-				containerType);
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(containerType);
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, containerType);
+		ParameterizedTypeReference listType = new ParameterizedTypeReference(owner, typeReferences.findDeclaredType(ArrayList.class, containerType));
+		JvmType collectonLiterals = typeReferences.findDeclaredType(CollectionLiterals.class, containerType);
+
 		String cacheVarName = cacheField.getSimpleName();
 		String cacheKeyVarName = appendable.declareSyntheticVariable("CacheKey", "_cacheKey");
-		appendable.append("final ");
-		typeReferenceSerializer.serialize(listType, containerType, appendable);
-		appendable.append(cacheKeyVarName).append(" = ");
-		typeReferenceSerializer.serialize(collectonLiterals, containerType, appendable);
-		appendable.append(".newArrayList(");
+		appendable.append("final ").append(listType).append(" ").append(cacheKeyVarName)
+			.append(" = ").append(collectonLiterals).append(".newArrayList(");
 		EList<JvmFormalParameter> list = cacheMethod.getParameters();
 		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
 			JvmFormalParameter jvmFormalParameter = iterator.next();
@@ -82,9 +85,8 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		}
 		appendable.append(");");
 		// declare result variable
-		JvmTypeReference returnType = typeProvider.getType(createExtensionInfo.getCreateExpression());
-		appendable.newLine().append("final ");
-		typeReferenceSerializer.serialize(returnType, containerType, appendable);
+		LightweightTypeReference returnType = resolvedTypes.getActualType(createExtensionInfo.getCreateExpression());
+		appendable.newLine().append("final ").append(returnType);
 		String resultVarName = "_result";
 		appendable.append(" ").append(resultVarName).append(";");
 		// open synchronize block

@@ -74,13 +74,12 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -107,9 +106,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject 
 	private IBatchTypeResolver batchTypeResolver;
-	
-	@Inject
-	private CommonTypeComputationServices services;
 	
 	@SuppressWarnings("deprecation")
 	@Inject
@@ -145,12 +141,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.newLine();
 			serialize(literalType.toTypeReference(), literal, b);
 			b.append(" ").append(tempMapName).append(" = ");
-			b.append(mapsClass).append(".<");
-			getTypeReferenceSerializer().serialize(keyType.toTypeReference(), literal, b);
-			b.append(", ");
-			getTypeReferenceSerializer().serialize(valueType.toTypeReference(), literal, b);
-			b.append(">newHashMap()").append(";").newLine();
-
+			b.append(mapsClass).append(".<").append(keyType).append(", ").append(valueType).append(">newHashMap()").append(";").newLine();
 			for(XExpression element: literal.getElements())  {
 				if (expressionHelper.isOperatorFromExtension(element, OperatorMapping.MAPPED_TO, ObjectExtensions.class)) {
 					XBinaryOperation binaryOperation = (XBinaryOperation) element;
@@ -176,11 +167,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if(isReferenced) 
 				b.append(getVarName(literal, b)).append(" = ");
 			JvmType collectionsClass = getTypeReferences().findDeclaredType(Collections.class, literal);
-			b.append(collectionsClass).append(".<");
-			getTypeReferenceSerializer().serialize(keyType.toTypeReference(), literal, b);
-			b.append(", ");
-			getTypeReferenceSerializer().serialize(valueType.toTypeReference(), literal, b);
-			b.append(">unmodifiableMap(").append(tempMapName).append(");");
+			b.append(collectionsClass)
+				.append(".<").append(keyType).append(", ").append(valueType)
+				.append(">unmodifiableMap(").append(tempMapName).append(");");
 		} else {
 			for(XExpression element: literal.getElements()) 
 				internalToJavaStatement(element, b, true);
@@ -222,9 +211,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				}
 			}
 			if (!skipTypeName) {
-				b.append("new ");
-				getTypeReferenceSerializer().serialize(literalType.toTypeReference(), literal, b);
-				b.append(" ");
+				b.append("new ")
+					.append(literalType)
+					.append(" ");
 			}
 			if (literal.getElements().isEmpty()) {
 				b.append("{}");
@@ -256,33 +245,24 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void appendImmutableCollectionExpression(XCollectionLiteral literal,
 			ITreeAppendable b, String collectionsMethod, Class<?> guavaHelper, String guavaHelperMethod) {
 		LightweightTypeReference collectionElementType = getCollectionElementType(literal);
-		if(collectionElementType != null) {
-			JvmTypeReference collectionsClass = getTypeReferences().getTypeForName(Collections.class, literal);
-			JvmTypeReference guavaClass = getTypeReferences().getTypeForName(guavaHelper, literal);
-			getTypeReferenceSerializer().serialize(collectionsClass, literal, b);
-			b.append(".<");
-			getTypeReferenceSerializer().serialize(collectionElementType.toTypeReference(), literal, b);
-			b.append(">").append(collectionsMethod).append("(");
-			getTypeReferenceSerializer().serialize(guavaClass, literal, b);
-			b.append(".<");
-			getTypeReferenceSerializer().serialize(collectionElementType.toTypeReference(), literal, b);
-			b.append(">").append(guavaHelperMethod).append("(");
-			boolean isFirst = true;
-			for(XExpression element: literal.getElements())  {
-				if(!isFirst)
-					b.append(", ");
-				isFirst = false;
-				if(element instanceof XNullLiteral) {
-					b.append("(");
-					getTypeReferenceSerializer().serialize(collectionElementType.toTypeReference(), literal, b);
-					b.append(")");
-				}
-				internalToJavaExpression(element, b);
+		ITypeReferenceOwner owner = collectionElementType.getOwner();
+		JvmType collectionsClass = getTypeReferences().findDeclaredType(Collections.class, literal);
+		ParameterizedTypeReference guavaClass = new ParameterizedTypeReference(owner, getTypeReferences().findDeclaredType(guavaHelper, literal));
+		b.append(collectionsClass)
+			.append(".<").append(collectionElementType).append(">").append(collectionsMethod).append("(")
+			.append(guavaClass).append(".<").append(collectionElementType).append(">").append(guavaHelperMethod).append("(");
+		boolean isFirst = true;
+		for(XExpression element: literal.getElements())  {
+			if(!isFirst)
+				b.append(", ");
+			isFirst = false;
+			if(element instanceof XNullLiteral) {
+				b.append("(").append(collectionElementType).append(")");
 			}
-			b.append("))");
-			return;
+			internalToJavaExpression(element, b);
 		}
-		b.trace(literal, false).append(getVarName(literal, b));
+		b.append("))");
+		return;
 	}
 	
 	protected boolean canUseArrayInitializer(XListLiteral literal, ITreeAppendable appendable) {
@@ -379,8 +359,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			throw new IllegalStateException("expected type " + expectedType + " not mappable from " + functionType);
 		}
 		appendable.append("new ");
-		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context.eResource().getResourceSet());
-		LightweightTypeReference lightweightExpectedType = new OwnedConverter(owner).toLightweightReference(expectedType);
+		LightweightTypeReference lightweightExpectedType = new OwnedConverter(newTypeReferenceOwner(context))
+			.toLightweightReference(expectedType);
 		FunctionTypeReference functionTypeReference = lightweightExpectedType.tryConvertToFunctionTypeReference(false);
 		if (functionTypeReference == null)
 			throw new IllegalStateException("Expected type does not seem to be a SAM type");
@@ -1255,10 +1235,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	@Nullable
 	protected JvmOperation findImplementingOperation(JvmTypeReference closureType, EObject context) {
-		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
-		OwnedConverter converter = new OwnedConverter(owner);
-		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
-		return services.getFunctionTypes().findImplementingOperation(lightweightTypeReference);
+		LightweightTypeReference lightweightTypeReference = new OwnedConverter(newTypeReferenceOwner(context)).toLightweightReference(closureType);
+		return getTypeComputationServices().getFunctionTypes().findImplementingOperation(lightweightTypeReference);
 	}
 	
 	private final static String REASSIGNED_THIS_IN_LAMBDA = "!reassigned_this_for_lambda!";
@@ -1293,8 +1271,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected JvmTypeReference getClosureOperationParameterType(JvmTypeReference closureType, JvmOperation operation, int i) {
-		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, operation.eResource().getResourceSet());
-		OwnedConverter converter = new OwnedConverter(owner);
+		ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
+		OwnedConverter converter = new OwnedConverter(newTypeReferenceOwner(operation));
 		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
 		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getParameters().get(i).getParameterType());
@@ -1302,7 +1280,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected JvmTypeReference getClosureOperationReturnType(JvmTypeReference closureType, JvmOperation operation) {
-		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, operation.eResource().getResourceSet());
+		ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
 		OwnedConverter converter = new OwnedConverter(owner);
 		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
