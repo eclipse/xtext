@@ -4641,7 +4641,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public StringBuilder aBuilder(final String x) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(x);");
+    _builder_1.append("final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(x);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final StringBuilder _result;");

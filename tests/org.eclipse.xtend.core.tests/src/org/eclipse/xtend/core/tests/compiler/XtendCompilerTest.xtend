@@ -2074,7 +2074,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar {
 			  public StringBuilder aBuilder(final String x) {
-			    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(x);
+			    final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(x);
 			    final StringBuilder _result;
 			    synchronized (_createCache_aBuilder) {
 			      if (_createCache_aBuilder.containsKey(_cacheKey)) {

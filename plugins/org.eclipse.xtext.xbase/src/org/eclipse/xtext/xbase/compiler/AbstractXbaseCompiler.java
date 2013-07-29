@@ -21,8 +21,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -41,10 +43,17 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
@@ -65,21 +74,16 @@ public abstract class AbstractXbaseCompiler {
 	@Inject
 	private TypeReferenceSerializer referenceSerializer;
 	
+	public TypeReferenceSerializer getTypeReferenceSerializer() {
+		return referenceSerializer;
+	}
+	
 	@Inject
 	private JavaKeywords javaUtils;
-	
-	protected TypeReferences getTypeReferences() {
-		return typeReferences;
-	}
-	
-	/**
-	 * Public for testing purpose.
-	 * @noreference This method is not intended to be referenced by clients.
-	 */
-	public void setTypeReferences(TypeReferences typeReferences) {
-		this.typeReferences = typeReferences;
-	}
 
+	@Inject
+	private CommonTypeComputationServices services;
+	
 	@Inject
 	private ITypeProvider typeProvider;
 
@@ -87,6 +91,13 @@ public abstract class AbstractXbaseCompiler {
 		return typeProvider;
 	}
 	
+	@Inject 
+	private IBatchTypeResolver typeResolver;
+
+	protected IBatchTypeResolver getTypeResolver() {
+		return typeResolver;
+	}
+
 	@Inject
 	private IEarlyExitComputer exitComputer;
 	
@@ -103,6 +114,30 @@ public abstract class AbstractXbaseCompiler {
 		return primitives;
 	}
 
+	protected TypeReferences getTypeReferences() {
+		return typeReferences;
+	}
+	
+	protected CommonTypeComputationServices getTypeComputationServices() {
+		return services;
+	}
+	
+	protected ITypeReferenceOwner newTypeReferenceOwner(EObject context) {
+		return new StandardTypeReferenceOwner(services, context);
+	}
+	
+	protected LightweightTypeReference toLightweight(JvmTypeReference reference, EObject context) {
+		return new OwnedConverter(newTypeReferenceOwner(context)).apply(reference);
+	}
+	
+	/**
+	 * @deprecated not called anywhere. 
+	 */
+	@Deprecated
+	public void setTypeReferences(TypeReferences typeReferences) {
+		this.typeReferences = typeReferences;
+	}
+	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable appendable, JvmTypeReference expectedReturnType) {
 		compile(obj, appendable, expectedReturnType, null);
 		return appendable;

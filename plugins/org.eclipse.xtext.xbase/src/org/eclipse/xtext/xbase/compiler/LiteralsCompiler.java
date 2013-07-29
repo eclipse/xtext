@@ -33,9 +33,6 @@ import com.google.inject.Inject;
 public class LiteralsCompiler extends TypeConvertingCompiler {
 
 	@Inject
-	private TypeReferenceSerializer referenceSerializer;	
-
-	@Inject
 	private NumberLiterals numberLiterals;
 	
 	@Override
@@ -229,7 +226,4 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 		return super.isVariableDeclarationRequired(expr,b);
 	}
 	
-	protected TypeReferenceSerializer getTypeReferenceSerializer() {
-		return referenceSerializer;
-	}
 }

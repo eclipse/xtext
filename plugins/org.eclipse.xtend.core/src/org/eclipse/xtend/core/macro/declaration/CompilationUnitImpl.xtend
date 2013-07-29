@@ -15,6 +15,7 @@ import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
+import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessSPI
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
@@ -81,14 +82,12 @@ import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.core.macro.fsaccess.FileSystemAccessSPI
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -135,7 +134,6 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject CommonTypeComputationServices services;
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
-	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject IXtendJvmAssociations associations
 	@Inject ConstantExpressionsInterpreter interpreter
 	@Inject IEObjectDocumentationProvider documentationProvider
@@ -413,6 +411,11 @@ class CompilationUnitImpl implements CompilationUnit {
 		return (typeRef as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference
 	}
 	
+	def LightweightTypeReference toLightweightTypeReference(TypeReference typeRef) {
+		checkCanceled
+		return (typeRef as TypeReferenceImpl).lightWeightTypeReference
+	}
+	
 	def Expression toExpression(XExpression delegate) {
 		getOrCreate(delegate) [
 			new ExpressionImpl => [
@@ -425,14 +428,14 @@ class CompilationUnitImpl implements CompilationUnit {
 	def void setCompilationStrategy(JvmExecutable executable, CompilationStrategy compilationStrategy) {
 		checkCanceled
 		typesBuilder.setBody(executable) [
-			val context = new CompilationContextImpl(it, this, typeRefSerializer)
+			val context = new CompilationContextImpl(it, this)
 			it.append(compilationStrategy.compile(context))
 		]
 	}
 	def void setCompilationStrategy(JvmField field, CompilationStrategy compilationStrategy) {
 		checkCanceled
 		typesBuilder.setInitializer(field) [
-			val context = new CompilationContextImpl(it, this, typeRefSerializer)
+			val context = new CompilationContextImpl(it, this)
 			it.append(compilationStrategy.compile(context))
 		]
 	}

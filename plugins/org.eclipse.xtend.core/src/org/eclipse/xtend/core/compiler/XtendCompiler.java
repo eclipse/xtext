@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.collect.Lists;
@@ -213,8 +214,8 @@ public class XtendCompiler extends XbaseCompiler {
 			}
 			debugAppendable.newLine();
 			debugAppendable.append("for(final ");
-			JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(parameter);
-			serialize(paramType, parameter, debugAppendable);
+			LightweightTypeReference paramType = getTypeResolver().resolveTypes(parameter).getActualType(parameter);
+			debugAppendable.append(paramType);
 			debugAppendable.append(" ");
 			String loopParam = debugAppendable.declareVariable(parameter, parameter.getName());
 			debugAppendable.append(loopParam);
