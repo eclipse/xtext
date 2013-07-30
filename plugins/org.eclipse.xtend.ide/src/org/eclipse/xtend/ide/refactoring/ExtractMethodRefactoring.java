@@ -370,7 +370,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 		DocumentChange change = new DocumentChange("Extract Method", document);
 		change.setEdit(textEdit);
 		change.setTextType(resourceURI.fileExtension());
-		return new DisplayChangeWrapper(change);
+		return DisplayChangeWrapper.wrap(change);
 	}
 
 	protected void handleException(Exception exc, StatusWrapper status) {
