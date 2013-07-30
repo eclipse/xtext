@@ -191,7 +191,7 @@ public class ExtractVariableRefactoring extends Refactoring {
 		DocumentChange change = new DocumentChange("Extract local variable", document);
 		change.setEdit(textEdit);
 		change.setTextType(resourceURI.fileExtension());
-		return new DisplayChangeWrapper(change);
+		return DisplayChangeWrapper.wrap(change);
 	}
 
 	protected void handleException(Exception exc, StatusWrapper status) {

@@ -157,7 +157,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			DocumentChange documentChange = new DocumentChange(getName(), document);
 			documentChange.setEdit(textEdit);
 			documentChange.setTextType(getURI().fileExtension());
-			return new DisplayChangeWrapper(documentChange);
+			return DisplayChangeWrapper.wrap(documentChange);
 		}
 
 		protected String getName() {
@@ -195,7 +195,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			};
 			documentChange.setEdit(textEdit);
 			documentChange.setTextType(getURI().fileExtension());
-			return new DisplayChangeWrapper(documentChange);
+			return DisplayChangeWrapper.wrap(documentChange);
 		}
 	}
 

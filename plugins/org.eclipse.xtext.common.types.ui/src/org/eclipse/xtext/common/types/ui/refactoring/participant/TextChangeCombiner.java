@@ -52,13 +52,13 @@ public class TextChangeCombiner {
 		CompositeChange compositeChange = new FixedCompositeChange(masterChange.getName());
 		for (TextChange combinedTextChange : resource2textChange.values()) {
 			if(((MultiTextEdit) combinedTextChange.getEdit()).getChildrenSize() >0)
-				compositeChange.add(combinedTextChange);
+				compositeChange.add(DisplayChangeWrapper.wrap(combinedTextChange));
 		}
 		for(Change otherChange: otherChanges) 
-			compositeChange.add(otherChange);
+			compositeChange.add(DisplayChangeWrapper.wrap(otherChange));
 		if(compositeChange.getChildren().length == 0)
 			return null;
-		return new DisplayChangeWrapper(compositeChange);
+		return compositeChange;
 	}
 
 	protected void visitCompositeChange(CompositeChange sourceChange, Map<Object, TextChange> resource2textChange,
@@ -69,8 +69,8 @@ public class TextChangeCombiner {
 	}
 
 	protected void visitChange(Change sourceChange, Map<Object, TextChange> resource2textChange, List<Change> otherChanges) {
-		if (sourceChange instanceof DisplayChangeWrapper)
-			visitChange(((DisplayChangeWrapper) sourceChange).getDelegate(), resource2textChange, otherChanges);
+		if (sourceChange instanceof DisplayChangeWrapper.Wrapper)
+			visitChange(((DisplayChangeWrapper.Wrapper) sourceChange).getDelegate(), resource2textChange, otherChanges);
 		else if (sourceChange instanceof CompositeChange) {
 			visitCompositeChange((CompositeChange) sourceChange, resource2textChange, otherChanges);
 		} else if (sourceChange instanceof TextChange) {
@@ -93,7 +93,8 @@ public class TextChangeCombiner {
 			}
 		} else {
 			CompositeChange parent = (CompositeChange) sourceChange.getParent();
-			parent.remove(sourceChange);
+			if(parent != null)
+				parent.remove(sourceChange);
 			otherChanges.add(sourceChange);
 		}
 	}
