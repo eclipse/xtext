@@ -482,6 +482,15 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameMethodCall_Getters_2() throws Exception {
+		String xtendModel = "class XtendClass { def getFoo(String x) {} def bar() { ''.foo ''.getFoo ''.getFoo() getFoo('') } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("getFoo"), "getBaz");
+		assertDocumentContains(editor, xtendModel.replace("getFoo", "getBaz").replace("foo", "baz"));
+	}
+
+	@Test
 	public void testRenameMethodCall_BooleanIs_0() throws Exception {
 		String xtendModel = "class XtendClass { def isFoo() {false} def bar() { foo isFoo isFoo() } }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);

@@ -144,7 +144,8 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 			String propertyName = Strings.toFirstLower(feature.getSimpleName().substring(3));
 			return new SingletonScope(EObjectDescription.create(propertyName, feature), IScope.NULLSCOPE);
 		}
-		if (call.isExplicitOperationCallOrBuilderSyntax() || ((JvmExecutable) feature).getParameters().size() >= 1) {
+		if (call.isExplicitOperationCallOrBuilderSyntax() || ((JvmExecutable) feature).getParameters().size() > 1
+				|| (!call.isExtension() && ((JvmExecutable) feature).getParameters().size() == 1)) {
 			return new SingletonScope(EObjectDescription.create(name, feature), IScope.NULLSCOPE);
 		}
 		if (feature.getSimpleName().startsWith("get") || feature.getSimpleName().startsWith("is")) {
