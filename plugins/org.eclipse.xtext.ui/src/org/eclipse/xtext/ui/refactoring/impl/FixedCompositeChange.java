@@ -16,7 +16,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 
 /**
- * A fixed version of {@link CompositeChange}, retruning affectedObjects even if one of the children returns
+ * A fixed version of {@link CompositeChange}, returning affectedObjects even if one of the children returns
  * <code>null</code> for them.
  * See <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=410438">bug 410438</a>.
  * 
