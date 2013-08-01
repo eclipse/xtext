@@ -183,9 +183,21 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 	
 	@Override
 	protected boolean isResolvedTypeParameter(JvmTypeParameter typeParameter) {
-		return getResolvedTypeParameters().contains(typeParameter);
+		if (getResolvedTypeParameters().contains(typeParameter)) {
+			return true;
+		}
+		return isResolvedTypeParameter(getContextType(), typeParameter);
 	}
 	
+	protected boolean isResolvedTypeParameter(LightweightTypeReference typeReference, JvmTypeParameter typeParameter) {
+		for (LightweightTypeReference typeArgument : typeReference.getTypeArguments()) {
+			if (typeArgument.getType().equals(typeParameter) || isResolvedTypeParameter(typeArgument, typeParameter)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	protected abstract BottomResolvedOperation getBottom();
 	
 	protected OverrideTester getOverrideTester() {

@@ -34,6 +34,7 @@ import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider;
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider;
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback;
 import org.eclipse.xtend.ide.editor.XtendSourceViewerConfiguration;
+import org.eclipse.xtend.ide.editor.copyqualifiedname.XtendCopyQualifiedNameService;
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
 import org.eclipse.xtend.ide.findrefs.XtendReferenceFinder;
 import org.eclipse.xtend.ide.formatting.FormatterFactory;
@@ -83,6 +84,7 @@ import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
@@ -421,5 +423,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends FileSystemAccessSPI> bindFileSystemAccessPSI() {
 		return EclipseFileSystemAccessImpl.class;
+	}
+	
+	@Override
+	public Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
+		return XtendCopyQualifiedNameService.class;
 	}
 }

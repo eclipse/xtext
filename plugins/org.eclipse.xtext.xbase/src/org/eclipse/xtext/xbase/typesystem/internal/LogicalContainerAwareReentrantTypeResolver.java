@@ -260,7 +260,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmTypeReference superType = getExtendedClass(type);
 		if (superType != null) {
 			LightweightTypeReference lightweightSuperType = resolvedTypes.getConverter().toLightweightReference(superType);
-			childResolvedTypes.reassignType(superType.getType(), lightweightSuperType);
+			childResolvedTypes.reassignTypeWithoutMerge(superType.getType(), lightweightSuperType);
 			/* 
 			 * We use reassignType to make sure that the following works:
 			 *
@@ -273,7 +273,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		JvmParameterizedTypeReference thisType = getServices().getTypeReferences().createTypeRef(type);
 		LightweightTypeReference lightweightThisType = resolvedTypes.getConverter().toLightweightReference(thisType);
-		childResolvedTypes.reassignType(type, lightweightThisType);
+		childResolvedTypes.reassignTypeWithoutMerge(type, lightweightThisType);
 		
 		List<JvmMember> members = type.getMembers();
 		int size = members.size();
