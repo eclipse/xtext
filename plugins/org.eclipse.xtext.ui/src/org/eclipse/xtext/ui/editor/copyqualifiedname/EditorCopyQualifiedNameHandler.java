@@ -37,11 +37,16 @@ public class EditorCopyQualifiedNameHandler extends AbstractCopyQualifiedNameHan
 		return activeXtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
 
 			public String exec(XtextResource xTextResource) throws Exception {
+				EObject context = getContext(selection, xTextResource);
 				EObject selectedElement = getSelectedName(selection, xTextResource);
-				return getQualifiedName(selectedElement);
+				return getQualifiedName(selectedElement, context);
 			}
 
 		});
+	}
+
+	private EObject getContext(final ITextSelection selection, XtextResource xTextResource) {
+		return eObjectAtOffsetHelper.resolveContainedElementAt(xTextResource, selection.getOffset());
 	}
 
 	private EObject getSelectedName(final ITextSelection selection, XtextResource xTextResource) {

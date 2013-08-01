@@ -2596,4 +2596,22 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertEquals("it", ((XAbstractFeatureCall) seventh.getImplicitFirstArgument()).getFeature().getSimpleName());
 	}
 	
+	@Test public void testTypeOfSuper() throws Exception {
+		String classAsString = 
+			"import static extension org.eclipse.xtext.GrammarUtil.*\n" +
+			"class Foo extends java.util.ArrayList<String> {" +
+			"	def m() {\n" + 
+			"		super.add(null)\n" + 
+			"	}\n" +
+			"}";
+		XtendClass clazz = clazz(classAsString);
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		XExpression body = function.getExpression();
+		XBlockExpression block = (XBlockExpression) body;
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(0);
+		XFeatureCall superCall = (XFeatureCall) featureCall.getMemberCallTarget();
+		JvmTypeReference type = typeProvider.getType(superCall);
+		assertEquals("java.util.ArrayList<java.lang.String>", type.getIdentifier());
+	}
+	
 }
