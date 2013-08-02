@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -52,7 +53,7 @@ import com.google.common.base.Joiner;
  */
 public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	/**
-	 * @author dhuebner - Initial contribution and API
+	 * @author Dennis Hübner - Initial contribution and API
 	 */
 	private final class MockedXtext2EcorePostProcessor implements IXtext2EcorePostProcessor {
 		private int called = 0;
@@ -1975,5 +1976,22 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 				.createURI("classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext"),
 				true);
 		assertTrue(Joiner.on("\n").join(resource.getErrors()), resource.getErrors().isEmpty());
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=413171
+	@Test
+	public void testBug413171_01() throws Exception {
+		Grammar grammar = (Grammar) getModel(readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_01.xtext.txt"));
+		AbstractRule parserRule = grammar.getRules().get(2);
+		EClassifier classifier = parserRule.getType().getClassifier();
+		assertTrue(parserRule.getName(), classifier instanceof EDataType);
+	}
+	
+	@Test
+	public void testBug413171_02() throws Exception {
+		Grammar grammar = (Grammar) getModel(readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_02.xtext.txt"));
+		AbstractRule parserRule = grammar.getRules().get(2);
+		EClassifier classifier = parserRule.getType().getClassifier();
+		assertTrue(parserRule.getName(), classifier instanceof EDataType);
 	}
 }
