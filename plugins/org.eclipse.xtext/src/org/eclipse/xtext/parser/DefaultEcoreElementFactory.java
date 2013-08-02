@@ -71,6 +71,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			final Object tokenValue = e.getValue();
 			checkNullForPrimitiveFeatures(structuralFeature, tokenValue, node);
 			object.eSet(structuralFeature, tokenValue);
+			throw e;
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {
