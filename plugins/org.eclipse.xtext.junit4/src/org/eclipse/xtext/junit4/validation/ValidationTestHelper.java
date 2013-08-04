@@ -115,24 +115,16 @@ public class ValidationTestHelper {
 	 */
 	public void assertIssue(final EObject model, final EClass objectType, final String code, final Severity severity,
 			final String... messageParts) {
-		final List<Issue> validate = validate(model);
-		Iterable<Issue> matchingErrors = Iterables.filter(validate, new Predicate<Issue>() {
-			public boolean apply(Issue input) {
-				if (Strings.equal(input.getCode(), code) && input.getSeverity()==severity) {
-					EObject object = model.eResource().getResourceSet().getEObject(input.getUriToProblem(), true);
-					if (objectType.isInstance(object)) {
-						for (String messagePart : messageParts) {
-							if (!input.getMessage().toLowerCase().contains(messagePart.toLowerCase())) {
-								return false;
-							}
-						}
-						return true;
-					}
-				}
-				return false;
-			}
-		});
-		if (Iterables.isEmpty(matchingErrors)) {
+		assertIssue(model, objectType, code, -1, -1, severity, messageParts);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void assertIssue(final EObject model, final EClass objectType, final String code, final int offset, final int length,  final Severity severity,
+			final String... messageParts) {
+		final Iterable<Issue> validate = matchIssues(model, objectType, code, offset, length, severity, validate(model), messageParts);
+		if (Iterables.isEmpty(validate)) {
 			StringBuilder message = new StringBuilder("Expected ")
 				.append(severity)
 				.append(" '")
@@ -144,6 +136,60 @@ public class ValidationTestHelper {
 			assertEquals(Joiner.on('\n').join(messageParts), message.toString());
 			fail(message.toString());
 		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void assertNoIssues(final EObject model, final EClass objectType, final String code, final Severity severity,
+			final String... messageParts) {
+		assertNoIssues(model, objectType, code, -1, -1, severity, messageParts);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void assertNoIssues(final EObject model, final EClass objectType, final String code, final int offset, final int length,  final Severity severity,
+			final String... messageParts) {
+		final Iterable<Issue> validate = matchIssues(model, objectType, code, offset, length, severity, validate(model), messageParts);
+		if (!Iterables.isEmpty(validate)) {
+			StringBuilder message = new StringBuilder("Expected no ")
+				.append(severity)
+				.append(" '")
+				.append(code)
+				.append("' on ")
+				.append(objectType.getName())
+				.append(" but got\n");
+			getIssuesAsString(model, validate, message);
+			assertEquals(Joiner.on('\n').join(messageParts), message.toString());
+			fail(message.toString());
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected Iterable<Issue> matchIssues(final EObject model, final EClass objectType, final String code,
+			final int offset, final int length, final Severity severity, final List<Issue> validate,
+			final String... messageParts) {
+		return Iterables.filter(validate, new Predicate<Issue>() {
+			public boolean apply(Issue input) {
+				if (Strings.equal(input.getCode(), code) && input.getSeverity()==severity) {
+					if ((offset < 0 || offset == input.getOffset()) && (length < 0 || length == input.getLength())) {
+						EObject object = model.eResource().getResourceSet().getEObject(input.getUriToProblem(), true);
+						if (objectType.isInstance(object)) {
+							for (String messagePart : messageParts) {
+								if (!input.getMessage().toLowerCase().contains(messagePart.toLowerCase())) {
+									return false;
+								}
+							}
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+		});
 	}
 
 	/**
@@ -167,6 +213,22 @@ public class ValidationTestHelper {
 	public void assertWarning(final EObject model, final EClass objectType, final String code,
 			final String... messageParts) {
 		assertIssue(model, objectType, code, Severity.WARNING, messageParts);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void assertNoWarnings(final EObject model, final EClass objectType, final String code,
+			final String... messageParts) {
+		assertNoIssues(model, objectType, code, Severity.WARNING, messageParts);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void assertWarning(final EObject model, final EClass objectType, final String code, int offset, int length, 
+			final String... messageParts) {
+		assertIssue(model, objectType, code, offset, length, Severity.WARNING, messageParts);
 	}
 
 }
