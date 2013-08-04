@@ -440,4 +440,46 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		helper.assertError(expression, XbasePackage.Literals.XFEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable<Object>", "Object[]", "String", "first", "argument");
 	}
 	
+	@Test
+	public void testJavaStyleTypeCast() throws Exception {
+		XExpression expression = expression("{ val y = \"blabla\" val x = (String) y }");
+		helper.assertWarning(expression, XFEATURE_CALL, JAVA_STYLE_TYPE_CAST, -1, "(String)".length());
+	}
+	
+	@Test
+	public void testJavaStyleTypeCast_2() throws Exception {
+		XExpression expression = expression("{ val y = \"blabla\" val x = ((String)) y }");
+		helper.assertWarning(expression, XFEATURE_CALL, JAVA_STYLE_TYPE_CAST,  -1, "((String))".length());
+	}
+	
+	@Test
+	public void testJavaStyleTypeCast_3() throws Exception {
+		XExpression expression = expression("{ val y = \"blabla\" val x = ((java.lang.String)) y }");
+		helper.assertWarning(expression, XMEMBER_FEATURE_CALL, JAVA_STYLE_TYPE_CAST,  -1, "((java.lang.String))".length());
+	}
+	
+	@Test
+	public void testJavaStyleTypeCast_4() throws Exception {
+		XExpression expression = expression("{ val y = \"blabla\" val x = (String); y }");
+		helper.assertNoWarnings(expression, XFEATURE_CALL, JAVA_STYLE_TYPE_CAST);
+	}
+	
+	@Test
+	public void testJavaStyleTypeCast_5() throws Exception {
+		XExpression expression = expression("{ val y = \"blabla\" val x = (\"blabla\" + String) y }");
+		helper.assertNoWarnings(expression, XFEATURE_CALL, JAVA_STYLE_TYPE_CAST);
+	}
+	
+	@Test
+	public void testJavaStyleTypeCast_6() throws Exception {
+		XExpression expression = expression("{ val y = \"blabla\" val x = ((String) y) }");
+		helper.assertNoWarnings(expression, XFEATURE_CALL, JAVA_STYLE_TYPE_CAST);
+	}
+	
+	@Test
+	public void testJavaStyleTypeCast_7() throws Exception {
+		XExpression expression = expression("{ val x = (String) }");
+		helper.assertNoWarnings(expression, XFEATURE_CALL, JAVA_STYLE_TYPE_CAST);
+	}
+	
 }
