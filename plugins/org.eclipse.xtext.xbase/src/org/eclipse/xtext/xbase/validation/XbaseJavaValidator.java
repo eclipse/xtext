@@ -51,6 +51,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
+import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -92,6 +93,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
@@ -130,6 +132,9 @@ import com.google.inject.Inject;
  */
 @ComposedChecks(validators = { EarlyExitValidator.class })
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
+	
+	@Inject
+	private XbaseGrammarAccess grammarAccess;
 
 	@Inject
 	private XExpressionHelper expressionHelper;
@@ -1213,4 +1218,86 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected XExpressionHelper getExpressionHelper() {
 		return expressionHelper;
 	}
+	
+	@Check
+	public void checkNoJavaStyleTypeCasting(XBlockExpression blockExpression) {
+		if(isIgnored(JAVA_STYLE_TYPE_CAST)) {
+			return;
+		}
+		if (blockExpression.getExpressions().size() <= 1) {
+			return;
+		}
+		ICompositeNode node = NodeModelUtils.getNode(blockExpression);
+		if (node == null) {
+			return;
+		}
+		INode expressionNode = null;
+		for (INode child : node.getChildren()) {
+			if (isSemicolon(child)) {
+				expressionNode = null;
+			} else if (isXExpressionInsideBlock(child)) {
+				if (expressionNode != null) {
+					checkNoJavaStyleTypeCasting(expressionNode);
+				}
+				expressionNode = child;
+			}
+		}
+	}
+
+	protected boolean isXExpressionInsideBlock(INode child) {
+		return child.getGrammarElement() == grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0()
+				|| child.getGrammarElement() == grammarAccess.getXExpressionInClosureAccess().getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0();
+	}
+
+	protected boolean isSemicolon(INode child) {
+		return child.getGrammarElement() == grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()
+				|| child.getGrammarElement() == grammarAccess.getXExpressionInClosureAccess().getSemicolonKeyword_1_1();
+	}
+
+	protected void checkNoJavaStyleTypeCasting(INode node) {
+		BidiTreeIterator<INode> iterator = node.getAsTreeIterable().reverse().iterator();
+		ILeafNode child = getFirstLeafNode(iterator);
+		if (child != null && child.getGrammarElement() == grammarAccess.getXParenthesizedExpressionAccess().getRightParenthesisKeyword_2()) {
+			INode expressionNode = getNode(iterator, grammarAccess.getXParenthesizedExpressionAccess().getXExpressionParserRuleCall_1());
+			EObject semanticObject = NodeModelUtils.findActualSemanticObjectFor(expressionNode);
+			if (semanticObject instanceof XFeatureCall || semanticObject instanceof XMemberFeatureCall) {
+				XAbstractFeatureCall featureCall = (XAbstractFeatureCall) semanticObject;
+				if (featureCall.isTypeLiteral()) {
+					ICompositeNode parenthesizedNode = child.getParent();
+					addIssue("Use 'as' keyword for type casting.", featureCall, parenthesizedNode.getOffset(), parenthesizedNode.getLength(), JAVA_STYLE_TYPE_CAST);
+				}
+			}
+		}
+	}
+
+	protected INode getNode(BidiTreeIterator<INode> iterator, EObject... grammarElements) {
+		while (iterator.hasNext()) {
+			INode node = iterator.next();
+			EObject grammarElement = node.getGrammarElement();
+			for (EObject expectedGrammarElement : grammarElements) {
+				if (grammarElement == expectedGrammarElement) {
+					return node;
+				}
+			}
+		}
+		return null;
+	}
+
+	protected ILeafNode getFirstLeafNode(BidiTreeIterator<INode> iterator) {
+		while(iterator.hasNext()) {
+			INode child = iterator.next();
+			if (isHidden(child)) {
+				continue;
+			}
+			if (child instanceof ILeafNode) {
+				return (ILeafNode) child;
+			}
+		}
+		return null;
+	}
+
+	protected boolean isHidden(INode child) {
+		return child instanceof ILeafNode && ((ILeafNode) child).isHidden();
+	}
+	
 }
