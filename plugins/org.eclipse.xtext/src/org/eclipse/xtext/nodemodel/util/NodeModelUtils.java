@@ -319,7 +319,7 @@ public class NodeModelUtils {
 		}
 		if (node instanceof ICompositeNode) {
 			if (node.getGrammarElement() != null)
-				result.append(new GrammarElementTitleSwitch().doSwitch(node.getGrammarElement()));
+				result.append(new GrammarElementTitleSwitch().showAssignments().doSwitch(node.getGrammarElement()));
 			else
 				result.append("(unknown)");
 			String newPrefix = prefix + "  ";
@@ -339,7 +339,7 @@ public class NodeModelUtils {
 			if (((ILeafNode) node).isHidden())
 				result.append("hidden ");
 			if (node.getGrammarElement() != null)
-				result.append(new GrammarElementTitleSwitch().doSwitch(node.getGrammarElement()));
+				result.append(new GrammarElementTitleSwitch().showAssignments().doSwitch(node.getGrammarElement()));
 			else
 				result.append("(unknown)");
 			result.append(" => '");
