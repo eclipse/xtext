@@ -1,9 +1,13 @@
 package org.eclipse.xtend.maven;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.RuntimeIOException;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -23,9 +27,14 @@ public class MavenTraceURIConverter extends DefaultTraceURIConverter {
 		for (String rootString : roots) {
 			if (!rootString.endsWith("/"))
 				rootString += "/";
-			URI root = URI.createFileURI(rootString);
-			if (isPrefix(root, uri))
-				return uri.deresolve(root);
+			URI root = null;
+			try {
+				root = URI.createFileURI(new File(rootString).getCanonicalPath());
+				if (isPrefix(root, uri))
+					return uri.deresolve(root);
+			} catch (IOException e) {
+				throw new RuntimeIOException(e);
+			}
 		}
 		throw new RuntimeException("Could not find source folder for '" + uri + "'. Folders:"
 				+ Lists.newArrayList(roots));
