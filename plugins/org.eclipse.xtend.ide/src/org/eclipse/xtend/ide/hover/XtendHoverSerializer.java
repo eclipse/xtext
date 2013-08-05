@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.util.XbaseSwitch;
  */
 public class XtendHoverSerializer implements IFeatureNames {
 
-	private static final String STATICDELIMITER = "::";
 	private static final String SEPARATOR = ", ";
 	private static final String DELIMITER = ".";
 
@@ -42,12 +41,14 @@ public class XtendHoverSerializer implements IFeatureNames {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) object;
 			JvmIdentifiableElement feature = featureCall.getFeature();
 			if (feature != null && !feature.eIsProxy()) {
-				if (featureCall instanceof XMemberFeatureCall && feature instanceof JvmOperation) {
+				// Static extensions which are no expliciteOperationCalls
+				if (featureCall instanceof XMemberFeatureCall && feature instanceof JvmOperation && !((XMemberFeatureCall) featureCall).isExplicitOperationCall()) {
 					JvmOperation jvmOperation = (JvmOperation) feature;
 					if (jvmOperation.isStatic()) {
 						return stringBuilder.append(getStaticCallDesugaredVersion(featureCall, jvmOperation)).toString();
 					}
 				}
+				// Static calls with implicit receiver or implicit first argument
 				if (featureCall.getImplicitReceiver() != null || featureCall.getImplicitFirstArgument() != null) {
 					if (featureCall.isStatic()) {
 						return stringBuilder.append(getStaticCallDesugaredVersion(featureCall, (JvmMember) feature)).toString();
@@ -77,7 +78,7 @@ public class XtendHoverSerializer implements IFeatureNames {
 			JvmMember jvmMember) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(jvmMember.getDeclaringType().getSimpleName());
-		stringBuilder.append(STATICDELIMITER);
+		stringBuilder.append(DELIMITER);
 		stringBuilder.append(jvmMember.getSimpleName());
 		stringBuilder.append(computeArguments(featureCall));
 		return stringBuilder.toString();

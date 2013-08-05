@@ -607,7 +607,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     EList<XExpression> _expressions = block.getExpressions();
     final XExpression call = _expressions.get(0);
     String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("IterableExtensions::head(new ArrayList<String>())", _computeUnsugaredExpression);
+    Assert.assertEquals("IterableExtensions.head(new ArrayList<String>())", _computeUnsugaredExpression);
   }
   
   @Test
@@ -733,7 +733,104 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     EList<XExpression> _expressions = block.getExpressions();
     final XExpression call = _expressions.get(0);
     String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("Extension::setZonk(it, s + s + s)", _computeUnsugaredExpression);
+    Assert.assertEquals("Extension.setZonk(it, s + s + s)", _computeUnsugaredExpression);
+  }
+  
+  @Test
+  public void testBug414204() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package testpackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def stuff(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Bar.doStaticStuff()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void doStaticStuff(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+    EList<XtendMember> _members = _head.getMembers();
+    XtendMember _get = _members.get(0);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("", _computeUnsugaredExpression);
+  }
+  
+  @Test
+  public void testBug414204_1() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package testpackage");
+    _builder.newLine();
+    _builder.append("import static testpackage.Bar.*");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def stuff(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("doStaticStuff()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void doStaticStuff(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+    EList<XtendMember> _members = _head.getMembers();
+    XtendMember _get = _members.get(0);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("", _computeUnsugaredExpression);
   }
   
   @Test
@@ -817,7 +914,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     EList<XExpression> _expressions_1 = block.getExpressions();
     final XExpression call2 = _expressions_1.get(1);
     String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("String::valueOf(it)", _computeUnsugaredExpression);
+    Assert.assertEquals("String.valueOf(it)", _computeUnsugaredExpression);
     String _computeUnsugaredExpression_1 = this.serializer.computeUnsugaredExpression(call2);
     Assert.assertEquals("", _computeUnsugaredExpression_1);
   }
