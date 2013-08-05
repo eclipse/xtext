@@ -104,11 +104,8 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 							ITextRegion location = (crossReference != null) ? locationProvider
 									.getSignificantTextRegion(object, crossReference, indexInList)
 									: locationProvider.getSignificantTextRegion(object);
-							if (select) {
+							if (select)
 								xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
-							} else {
-								xtextEditor.reveal(location.getOffset(), location.getLength());
-							}
 						}
 					}
 				}
