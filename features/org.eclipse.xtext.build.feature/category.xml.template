@@ -9,6 +9,9 @@
    <feature id="org.eclipse.xtext.runtime" version="0.0.0">
       <category name="xtext"/>
    </feature>
+   <feature id="org.eclipse.xtext.redist" version="0.0.0">
+      <category name="xtext"/>
+   </feature>
    <feature id="org.eclipse.xtext.sdk" version="0.0.0">
       <category name="xtext"/>
    </feature>

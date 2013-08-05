@@ -34,6 +34,10 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <includes
          id="org.eclipse.xtext.gwt"
          version="0.0.0"/>
+         
+   <includes
+         id="org.eclipse.xtext.redist"
+         version="0.0.0"/>
 
    <includes
          id="org.eclipse.xtend.gwt"
