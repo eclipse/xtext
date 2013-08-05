@@ -151,8 +151,12 @@ public class CompilationTestHelper {
 	
 	protected String getSourceFolderPath() {
 		Map<String, ProjectConfig> projects = configProvider.get().getProjects();
-		ProjectConfig next = projects.values().iterator().next();
-		return next.getSourceFolderMappings().keySet().iterator().next().toString()+"/";
+		if (!projects.isEmpty()) {
+			ProjectConfig next = projects.values().iterator().next();
+			if (!next.getSourceFolderMappings().isEmpty())
+				return next.getSourceFolderMappings().keySet().iterator().next().toString()+"/";
+		}
+		return "/";
 	}
 
 	/**
