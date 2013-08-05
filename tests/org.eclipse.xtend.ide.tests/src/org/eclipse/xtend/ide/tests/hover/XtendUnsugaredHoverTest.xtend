@@ -294,7 +294,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
-		assertEquals("IterableExtensions::head(new ArrayList<String>())", serializer.computeUnsugaredExpression(call))
+		assertEquals("IterableExtensions.head(new ArrayList<String>())", serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
@@ -354,7 +354,53 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
-		assertEquals("Extension::setZonk(it, s + s + s)", serializer.computeUnsugaredExpression(call))
+		assertEquals("Extension.setZonk(it, s + s + s)", serializer.computeUnsugaredExpression(call))
+	}
+	
+	@Test
+	def testBug414204() throws Exception {
+		val xtendFile = testHelper.xtendFile(FILEPATH, '''
+		package testpackage
+		
+		class Foo {
+			def stuff(){
+				Bar.doStaticStuff()
+			}
+		}
+		class Bar {
+			def static void doStaticStuff(){
+				
+			}
+		}
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(0) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("", serializer.computeUnsugaredExpression(call))
+	}
+	
+	@Test
+	def testBug414204_1() throws Exception {
+		val xtendFile = testHelper.xtendFile(FILEPATH, '''
+		package testpackage
+		import static testpackage.Bar.*
+		class Foo {
+			def stuff(){
+				doStaticStuff()
+			}
+		}
+		class Bar {
+			def static void doStaticStuff(){
+				
+			}
+		}
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(0) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("", serializer.computeUnsugaredExpression(call))
 	}
 
 	@Test
@@ -394,7 +440,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		val call2 = block.expressions.get(1)
-		assertEquals("String::valueOf(it)", serializer.computeUnsugaredExpression(call))
+		assertEquals("String.valueOf(it)", serializer.computeUnsugaredExpression(call))
 		assertEquals("", serializer.computeUnsugaredExpression(call2))
 	}
 
