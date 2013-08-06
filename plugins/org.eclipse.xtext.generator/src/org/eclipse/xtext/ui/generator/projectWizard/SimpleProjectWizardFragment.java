@@ -31,14 +31,16 @@ import com.google.common.collect.Lists;
 /**
  * An {@link IGeneratorFragment} to generate a simple project wizard.
  *
+ * @deprecated after version 2.4.3; not migrated to Xtend, still generates an Xpand template
  * @author Sven Efftinge - Initial contribution and API
  * @author Knut Wannheden
  */
+@Deprecated
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	private static final Logger LOG = Logger.getLogger(SimpleProjectWizardFragment.class);
 
-	private String generatorProjectName;
+	private String generatorProjectName; 
 	private String modelFileExtension;
 	private boolean pluginProject = true;
 
