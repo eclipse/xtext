@@ -343,9 +343,10 @@ public class Xtext2EcoreTransformer {
 							EEnumLiteral existing = returnType.getEEnumLiteral(text);
 							if (existing == null) {
 								literal = EcoreFactory.eINSTANCE.createEEnumLiteral();
+								int index = returnType.getELiterals().size();
 								returnType.getELiterals().add(literal);
 								literal.setName(text);
-								literal.setValue(decls.indexOf(decl));
+								literal.setValue(index);
 								if (decl.getLiteral() != null) {
 									literal.setLiteral(decl.getLiteral().getValue());
 								} else {
