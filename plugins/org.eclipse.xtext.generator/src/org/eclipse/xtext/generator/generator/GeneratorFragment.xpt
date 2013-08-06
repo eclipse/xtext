@@ -149,7 +149,7 @@ public class Main {
 			System.err.println("Aborting: no path to EMF resource provided!");
 			return;
 		}
-		Injector injector = new «setupImpl()»().createInjectorAndDoEMFRegistration();
+		Injector injector = new «setup()»().createInjectorAndDoEMFRegistration();
 		Main main = injector.getInstance(Main.class);
 		main.runGenerator(args[0]);
 	}
@@ -215,7 +215,7 @@ class Main {
 			System::err.println('Aborting: no path to EMF resource provided!')
 			return
 		}
-		val injector = new «setupImpl()»().createInjectorAndDoEMFRegistration
+		val injector = new «setup()»().createInjectorAndDoEMFRegistration
 		val main = injector.getInstance(typeof(Main))
 		main.runGenerator(args.get(0))
 	}
