@@ -32,6 +32,19 @@ public class GeneratorComponent implements IWorkflowComponent {
 	private List<String> slotNames = newArrayList();
 	private Map<String,String> outlets = newHashMap();
 
+	/**
+	 * @since 2.4
+	 */
+	protected List<String> getSlotNames() {
+		return slotNames;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected Map<String, String> getOutlets() {
+		return outlets;
+	}
 	
 	/**
 	 * registering an {@link ISetup}, which causes the execution of {@link ISetup#createInjectorAndDoEMFRegistration()}
@@ -56,8 +69,6 @@ public class GeneratorComponent implements IWorkflowComponent {
 	}
 
 	public void preInvoke() {
-		if (slotNames.isEmpty())
-			throw new IllegalStateException("no 'slot' has been configured.");
 		if (injector == null)
 			throw new IllegalStateException("no Injector has been configured. Use 'register' with an ISetup or 'injector' directly.");
 		if (outlets.isEmpty())
