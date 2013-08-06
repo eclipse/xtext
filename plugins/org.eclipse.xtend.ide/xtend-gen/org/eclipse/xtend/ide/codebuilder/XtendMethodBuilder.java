@@ -68,9 +68,13 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
       String _methodName = this.getMethodName();
       ISourceAppender _append_1 = appendable.append(_methodName);
       ISourceAppender _appendParameters = this.appendParameters(_append_1);
-      ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-      ISourceAppender _appendBody = this.appendBody(_appendThrowsClause, "");
-      _xblockexpression = (_appendBody);
+      this.appendThrowsClause(_appendParameters);
+      boolean _isAbstractFlag_1 = this.isAbstractFlag();
+      boolean _not = (!_isAbstractFlag_1);
+      if (_not) {
+        this.appendBody(appendable, "");
+      }
+      _xblockexpression = (appendable);
     }
     return _xblockexpression;
   }

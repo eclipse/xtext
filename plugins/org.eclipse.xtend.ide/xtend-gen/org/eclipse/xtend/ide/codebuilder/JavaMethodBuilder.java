@@ -58,11 +58,12 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
       String _methodName = this.getMethodName();
       ISourceAppender _append_2 = _append_1.append(_methodName);
       ISourceAppender _appendParameters = this.appendParameters(_append_2);
-      ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-      this.appendBody(_appendThrowsClause, ";");
+      this.appendThrowsClause(_appendParameters);
       boolean _isAbstractFlag_1 = this.isAbstractFlag();
       if (_isAbstractFlag_1) {
         appendable.append(";");
+      } else {
+        this.appendBody(appendable, ";");
       }
       _xblockexpression = (appendable);
     }

@@ -98,6 +98,27 @@ class MethodBuilderTest extends AbstractBuilderTest {
 	}
 	
 	@Test
+	def testXtendAbstractBody() {
+		(createMethodBuilder(xtendClass) => [
+			context = xtendClass
+			abstractFlag = true
+			methodName = 'foo'
+		]).assertBuilds('''
+			def foo()''')
+		
+	}
+	
+	@Test
+	def testJavaAbstractBody() {
+		(createMethodBuilder(javaClass) => [
+			context = javaClass
+			abstractFlag = true
+			methodName = 'foo'			
+		]).assertBuilds('''
+			abstract void foo();''')
+	}
+	
+	@Test
 	def testXtendOverrride() {
 		(createMethodBuilder(xtendClass) => [
 			context = xtendClass
@@ -212,4 +233,16 @@ class MethodBuilderTest extends AbstractBuilderTest {
 			}''')
 	}
 	
+	
+	@Test
+	def void testSetContextOnParameters() {
+		createMethodBuilder(xtendClass) => [
+			val builder = newParameterBuilder
+			assertNull(builder.context)
+			context = xtendClass
+			assertEquals(xtendClass, builder.context)
+		]
+	}
+
+
 }
