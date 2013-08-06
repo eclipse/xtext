@@ -58,8 +58,8 @@ public class EMFBasedPersister implements PersistedStateProvider {
 	private IPath cachedPath;
 	
 	public Iterable<IResourceDescription> load() {
+		File location = getBuilderStateLocation();
 		try {
-			File location = getBuilderStateLocation();
 			if (location != null && location.exists()) {
 				try {
 					Resource resource = createResource();
@@ -88,7 +88,7 @@ public class EMFBasedPersister implements PersistedStateProvider {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error while loading persistable builder state. Triggering a full build.", e);
+			log.error("Error while loading persistable builder state from '"+location+"'. Triggering a full build.", e);
 			scheduleRecoveryBuild();
 			throw new WrappedException(e);
 		} finally {
