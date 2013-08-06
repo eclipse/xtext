@@ -1,22 +1,22 @@
 package org.eclipse.xtend.ide.tests.codebuilder
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 class AbstractBuilderTest extends AbstractXtendUITestCase {
 	

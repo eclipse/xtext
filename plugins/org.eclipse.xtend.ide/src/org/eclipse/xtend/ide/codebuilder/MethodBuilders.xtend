@@ -46,7 +46,9 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.X
 		appendable.append(methodName)
 			.appendParameters()
 			.appendThrowsClause()
-			.appendBody('')
+		if(!abstractFlag)
+			appendable.appendBody('')
+		appendable
 	}
 
 	override getInsertOffset() {
@@ -83,9 +85,10 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Ja
 			.append(methodName)
 			.appendParameters()
 			.appendThrowsClause()
-			.appendBody(';')
 		if(abstractFlag)
 			appendable.append(';')
+		else
+			appendable.appendBody(';')
 		appendable
 	}
 

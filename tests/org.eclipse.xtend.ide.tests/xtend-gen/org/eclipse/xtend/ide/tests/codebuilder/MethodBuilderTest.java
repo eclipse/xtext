@@ -3,6 +3,7 @@ package org.eclipse.xtend.ide.tests.codebuilder;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.Collections;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -203,6 +205,42 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("return;");
     _builder.newLine();
     _builder.append("}");
+    this.assertBuilds(_doubleArrow, _builder.toString());
+  }
+  
+  @Test
+  public void testXtendAbstractBody() {
+    JvmDeclaredType _xtendClass = this.getXtendClass();
+    AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
+    final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      public void apply(final AbstractMethodBuilder it) {
+        JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
+        it.setContext(_xtendClass);
+        it.setAbstractFlag(true);
+        it.setMethodName("foo");
+      }
+    };
+    AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("def void foo()");
+    this.assertBuilds(_doubleArrow, _builder.toString());
+  }
+  
+  @Test
+  public void testJavaAbstractBody() {
+    JvmDeclaredType _javaClass = this.getJavaClass();
+    AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
+    final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      public void apply(final AbstractMethodBuilder it) {
+        JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
+        it.setContext(_javaClass);
+        it.setAbstractFlag(true);
+        it.setMethodName("foo");
+      }
+    };
+    AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("abstract void foo();");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
   
@@ -468,5 +506,24 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
+  }
+  
+  @Test
+  public void testSetContextOnParameters() {
+    JvmDeclaredType _xtendClass = this.getXtendClass();
+    AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
+    final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      public void apply(final AbstractMethodBuilder it) {
+        final AbstractParameterBuilder builder = it.newParameterBuilder();
+        EObject _context = builder.getContext();
+        Assert.assertNull(_context);
+        JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
+        it.setContext(_xtendClass);
+        JvmDeclaredType _xtendClass_1 = MethodBuilderTest.this.getXtendClass();
+        EObject _context_1 = builder.getContext();
+        Assert.assertEquals(_xtendClass_1, _context_1);
+      }
+    };
+    ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
   }
 }

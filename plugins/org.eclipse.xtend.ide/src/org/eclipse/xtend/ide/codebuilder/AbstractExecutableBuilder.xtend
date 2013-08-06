@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import org.eclipse.emf.ecore.EObject
 
 /**
  * @author Jan Koehnlein
@@ -37,6 +38,11 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 
 	def protected String defaultBody() {
 		DEFAULT_BODY		
+	}
+
+	override setContext(EObject ctx) {
+		super.setContext(ctx)
+		parameterBuilders.forEach[context = ctx]
 	}
 
 	def newParameterBuilder() {

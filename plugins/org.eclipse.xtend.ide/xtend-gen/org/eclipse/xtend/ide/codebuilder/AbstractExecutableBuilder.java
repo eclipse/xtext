@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -128,6 +129,17 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   
   protected String defaultBody() {
     return AbstractExecutableBuilder.DEFAULT_BODY;
+  }
+  
+  public void setContext(final EObject ctx) {
+    super.setContext(ctx);
+    List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
+    final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
+      public void apply(final AbstractParameterBuilder it) {
+        it.setContext(ctx);
+      }
+    };
+    IterableExtensions.<AbstractParameterBuilder>forEach(_parameterBuilders, _function);
   }
   
   public AbstractParameterBuilder newParameterBuilder() {
