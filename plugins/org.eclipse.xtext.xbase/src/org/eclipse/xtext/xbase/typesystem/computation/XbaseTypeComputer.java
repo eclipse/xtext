@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -453,7 +454,12 @@ public class XbaseTypeComputer implements ITypeComputer {
 				expectation.acceptActualType(commonListType, ConformanceHint.UNCHECKED);
 			} else {
 				ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), listType);
-				unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, listType.getTypeParameters().get(0)));
+				if (elementTypeExpectation != null) {
+					unboundCollectionType.addTypeArgument(elementTypeExpectation);
+				} else {
+					UnboundTypeReference unbound = expectation.createUnboundTypeReference(literal, listType.getTypeParameters().get(0));
+					unboundCollectionType.addTypeArgument(unbound);
+				}
 				expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
 			}
 		}
@@ -491,7 +497,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 					expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
 				} else {
 					ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), setType);
-					unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, setType.getTypeParameters().get(0)));
+					if (elementTypeExpectation != null) {
+						unboundCollectionType.addTypeArgument(elementTypeExpectation);
+					} else {
+						unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, setType.getTypeParameters().get(0)));
+					}
 					expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
 				}
 			}
@@ -500,8 +510,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 
 	private List<LightweightTypeReference> computeCollectionTypeCandidates(XCollectionLiteral literal, JvmGenericType collectionType,
 			LightweightTypeReference elementTypeExpectation, ITypeComputationState state) {
-		List<LightweightTypeReference> elementTypes = newArrayList();
 		if(!literal.getElements().isEmpty()) {
+			List<LightweightTypeReference> elementTypes = newArrayList();
 			for(XExpression element: literal.getElements()) {
 				ITypeComputationResult elementType = state.withExpectation(elementTypeExpectation).computeTypes(element);
 				LightweightTypeReference actualType = elementType.getActualExpressionType();
@@ -511,8 +521,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 					elementTypes.add(collectionTypeCandidate);
 				}
 			}
+			return elementTypes;
 		}
-		return elementTypes;
+		return Collections.emptyList();
 	}
 	
 	protected void _computeTypes(XClosure object, ITypeComputationState state) {
@@ -540,7 +551,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		 * 
 		 * {
 		 *   val o = '' as Object
-		 *   m('' as Object) // calls 1
+		 *   m(o) // calls 1
 		 *   o.substring(1) // valid, too - compiler could insert the cast back to String
 		 * }
 		 */
