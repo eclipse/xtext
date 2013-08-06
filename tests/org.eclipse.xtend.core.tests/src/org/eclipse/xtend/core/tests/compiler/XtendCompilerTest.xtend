@@ -3608,6 +3608,74 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=412363
+	 */
+	@Test
+	def void testEmptyCollectionLiterals() {
+		'''
+			import java.util.List
+			import java.util.Set
+			
+			class EmptyCollections {
+			  
+			  def emptyList() {
+			    val List<String> result = #[];  // Erroneous type error here
+			    result;
+			  }
+			  
+			  def List<String> emptyList2 () {
+			    #[]  // Erroneous type error here
+			  }
+			  
+			  def emptySet() {
+			    val Set<String> result = #{};  // Erroneous type error here
+			    result;
+			  }
+			  
+			  def Set<String> emptySet2 () {
+			    #{} // Erroneous type error here
+			  }
+			  
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.collect.Lists;
+			import com.google.common.collect.Sets;
+			import java.util.Collections;
+			import java.util.List;
+			import java.util.Set;
+			
+			@SuppressWarnings("all")
+			public class EmptyCollections {
+			  public List<String> emptyList() {
+			    List<String> _xblockexpression = null;
+			    {
+			      final List<String> result = Collections.<String>unmodifiableList(Lists.<String>newArrayList());
+			      _xblockexpression = (result);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public List<String> emptyList2() {
+			    return Collections.<String>unmodifiableList(Lists.<String>newArrayList());
+			  }
+			  
+			  public Set<String> emptySet() {
+			    Set<String> _xblockexpression = null;
+			    {
+			      final Set<String> result = Collections.<String>unmodifiableSet(Sets.<String>newHashSet());
+			      _xblockexpression = (result);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public Set<String> emptySet2() {
+			    return Collections.<String>unmodifiableSet(Sets.<String>newHashSet());
+			  }
+			}
+		''')
+	}
 
 }
 
