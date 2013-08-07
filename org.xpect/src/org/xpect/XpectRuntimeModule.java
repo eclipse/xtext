@@ -8,7 +8,10 @@
 package org.xpect;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
+import org.xpect.services.NullResourceDescriptions;
 import org.xpect.services.XpectValueConverter;
 
 import com.google.inject.Binder;
@@ -26,6 +29,16 @@ public class XpectRuntimeModule extends AbstractXpectRuntimeModule {
 
 	public void configureEObjectValidator(Binder binder) {
 		binder.bind(Boolean.class).annotatedWith(Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(Boolean.FALSE);
+	}
+
+	public void configureIResourceDescriptions(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class).to(NullResourceDescriptions.class);
+	}
+
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class)
+				.annotatedWith(com.google.inject.name.Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE))
+				.to(NullResourceDescriptions.class);
 	}
 
 }
