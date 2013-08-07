@@ -266,7 +266,9 @@ public class XtendBatchCompiler {
 
 	public boolean compile() {
 		try {
-			configureWorkspace();
+			if (workspaceConfigProvider.getWorkspaceConfig() == null) {
+				configureWorkspace();
+			}
 			ResourceSet resourceSet = resourceSetProvider.get();
 			File classDirectory = createTempDir("classes");
 			// install a type provider without index lookup for the first phase
