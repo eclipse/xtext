@@ -7,6 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.reconciler;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 
@@ -17,7 +23,8 @@ import org.eclipse.xtext.util.ReplaceRegion;
 public class ReconcilerReplaceRegion extends ReplaceRegion implements IRegion {
 
 	private long modificationStamp;
-
+	private List<DocumentEvent> events;
+	
 	public ReconcilerReplaceRegion(int offset, int length, String text) {
 		super(offset, length, text);
 	}
@@ -28,6 +35,22 @@ public class ReconcilerReplaceRegion extends ReplaceRegion implements IRegion {
 
 	public void setModificationStamp(long docModificationStampAfter) {
 		this.modificationStamp = docModificationStampAfter;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void addDocumentEvent(DocumentEvent event) {
+		if(events == null)
+			events = newArrayList();
+		events.add(event);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public List<DocumentEvent> getDocumentEvents() {
+		return (events == null) ? Collections.<DocumentEvent>emptyList() : events;
 	}
 	
 	@Override
