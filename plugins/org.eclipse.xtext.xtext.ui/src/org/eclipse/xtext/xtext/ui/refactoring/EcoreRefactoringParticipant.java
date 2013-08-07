@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.osgi.framework.internal.core.FrameworkProperties;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
@@ -43,8 +42,13 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 
 	/**
 	 * Option-flag to disable warnings in this participant
+	 * @deprecated use {{@link #setDisableWarning(boolean)} instead
 	 */
+	@Deprecated
 	public static final String ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION = "org.eclipse.xtext.xtext.ui.refactoring.EcoreRefactoringParticipant.show.warning.option";
+
+
+	private static boolean isDisableWarning;
 
 	
 	@Inject
@@ -78,8 +82,7 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 				} else {
 					EObject classifierProxy = EcoreFactory.eINSTANCE.create(returnType.getClassifier().eClass());
 					((InternalEObject) classifierProxy).eSetProxyURI(platformResourceURI);
-					String optionFlag = FrameworkProperties.getProperty(ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION, "true");
-					if(optionFlag == null || "true".equalsIgnoreCase(optionFlag))
+					if(!isDisableWarning)
 						getStatus().add(WARNING, 
 								"Renaming EClass '{0}' in ecore file. Please rerun the Ecore generator.", returnType.getClassifier());
 					
@@ -101,6 +104,14 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * For tests only: The warning dialog will block the test on the server 
+	 * @noref
+	 */
+	public static void setDisableWarning(boolean isDisableWarning) {
+		EcoreRefactoringParticipant.isDisableWarning = isDisableWarning;
 	}
 
 }
