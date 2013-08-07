@@ -1,1 +1,29 @@
 * text=auto
+
+*.java text
+*.xtend text
+*.xtext text
+*.mwe2 text
+*.xpt text
+*.ext text
+*.ecore text
+*.genmodel text
+*.xml text
+*.MF text
+*.target text
+*.xml_gen text
+*.properties text
+*.mappings text
+*.html text
+*.ini text
+*.classpath text
+*.launch text
+*.gitattributes text
+
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.bmp binary
+*.jar binary
+*._trace binary
+*.xtextbin binary
