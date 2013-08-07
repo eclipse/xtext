@@ -311,6 +311,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	}
 
 	/**
+	 * @deprecated Moved to {@link XtextReconcilerDebugger} 
 	 * @noreference 
 	 * @since 2.4
 	 */

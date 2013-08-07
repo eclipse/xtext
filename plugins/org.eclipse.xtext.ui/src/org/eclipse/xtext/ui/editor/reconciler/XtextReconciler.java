@@ -71,7 +71,10 @@ public class XtextReconciler extends Job implements IReconciler {
 	private int delay;
 	private IReconcilingStrategy strategy;
 	private boolean initalProcessDone;
-
+	
+	@Inject
+	private XtextReconcilerDebugger debugger;
+	
 	private LinkedBlockingQueue<DocumentEvent> pendingChanges = new LinkedBlockingQueue<DocumentEvent>();
 
 	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {
@@ -82,10 +85,6 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 
 		public void documentChanged(DocumentEvent event) {
-			if (Display.getCurrent() == null) {
-				log.error("Changes to the document must only be applied from the Display thread to keep them ordered",
-						new Exception());
-			}
 			handleDocumentChanged(event);
 		}
 
@@ -221,6 +220,10 @@ public class XtextReconciler extends Job implements IReconciler {
 	}
 
 	private void handleDocumentChanged(DocumentEvent event) {
+		if (Display.getCurrent() == null) {
+			log.error("Changes to the document must only be applied from the Display thread to keep them ordered",
+					new Exception());
+		}
 		cancel();
 		if (log.isTraceEnabled())
 			log.trace("Reconciler cancelled");
@@ -300,6 +303,10 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 		ReconcilerReplaceRegion mergedRegion = builder.create();
 		mergedRegion.setModificationStamp(events.get(events.size()-1).getModificationStamp());
+		if(log.isDebugEnabled()) {
+			for(DocumentEvent event: events)
+				mergedRegion.addDocumentEvent(event);
+		}
 		return mergedRegion;
 	}
 
@@ -330,6 +337,11 @@ public class XtextReconciler extends Job implements IReconciler {
 				((XtextDocumentReconcileStrategy) strategy).setResource(state);
 			}
 			strategy.reconcile(replaceRegionToBeProcessed);
+			if (log.isDebugEnabled()) { 
+				debugger.assertModelInSyncWithDocument(replaceRegionToBeProcessed.getDocumentEvents().get(0).getDocument(), 
+						state, replaceRegionToBeProcessed);
+				debugger.assertResouceParsedCorrectly(state, replaceRegionToBeProcessed);
+			}
 		}
 	}
 }
