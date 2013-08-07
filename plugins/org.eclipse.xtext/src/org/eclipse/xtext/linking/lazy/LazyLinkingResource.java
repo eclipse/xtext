@@ -117,11 +117,25 @@ public class LazyLinkingResource extends XtextResource {
 		}
 	}
 
+	/**
+	 * If the given {@code crossRef} may hold lazy linking proxies, they are attempted to be resolved. 
+	 * @since 2.4
+	 * @see #isPotentialLazyCrossReference(EStructuralFeature)
+	 * @see #doResolveLazyCrossReference(InternalEObject, EStructuralFeature)
+	 */
 	protected void resolveLazyCrossReference(InternalEObject source, EStructuralFeature crossRef) {
-		if (crossRef.isDerived() 
-				|| (crossRef instanceof EReference && !((EReference)crossRef).isResolveProxies())
-				|| crossRef.isTransient())
-			return;
+		if (isPotentialLazyCrossReference(crossRef)) {
+			doResolveLazyCrossReference(source, crossRef);
+		}
+	}
+
+	/**
+	 * Ensures that all the lazy proxy values that are referenced by {@code crossRef} are replaced
+	 * by non-lazy proxies or resolved instances.
+	 * 
+	 * @since 2.4
+	 */
+	protected void doResolveLazyCrossReference(InternalEObject source, EStructuralFeature crossRef) {
 		if (crossRef.isMany()) {
 			@SuppressWarnings("unchecked")
 			InternalEList<EObject> list = (InternalEList<EObject>) source.eGet(crossRef);
@@ -165,6 +179,19 @@ public class LazyLinkingResource extends XtextResource {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Return <code>true</code> if the given feature may hold a proxy that has to be resolved.
+	 * 
+	 * This is supposed to be an internal hook which allows to resolve proxies even in cases
+	 * where EMF prohibits proxies, e.g. in case of opposite references.
+	 * 
+	 * @since 2.4
+	 */
+	protected boolean isPotentialLazyCrossReference(EStructuralFeature feature) {
+		return !feature.isDerived() && !feature.isTransient() 
+				&& feature instanceof EReference && ((EReference)feature).isResolveProxies();
 	}
 
 	@Override
