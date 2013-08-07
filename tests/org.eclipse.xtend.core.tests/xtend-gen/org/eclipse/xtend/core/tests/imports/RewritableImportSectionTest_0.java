@@ -11,7 +11,7 @@ public class RewritableImportSectionTest_0 extends AbstractRewritableImportSecti
     _builder.newLine();
     _builder.newLine();
     {
-      for(final Class<? extends Object> type : types) {
+      for(final Class<?> type : types) {
         _builder.append("import ");
         String _canonicalName = type.getCanonicalName();
         _builder.append(_canonicalName, "");
