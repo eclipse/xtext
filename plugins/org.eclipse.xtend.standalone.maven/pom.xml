@@ -17,24 +17,7 @@
 		<juno-url>http://download.eclipse.org/eclipse/updates/3.8</juno-url>
 		<orbit-url>http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/</orbit-url>
 		<emf-url>http://download.eclipse.org/modeling/emf/emf/updates/nightly</emf-url>
-		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest</xtext-url>
-		<mirroring.phase>prepare-package</mirroring.phase>
-		<skipMirroring>false</skipMirroring>
 	</properties>
-	<profiles>
-		<profile>
-			<id>mirror</id>
-			<activation>
-				<property>
-					<name>skipMirroring</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<properties>
-				<mirroring.phase>never</mirroring.phase>
-			</properties>
-		</profile>
-	</profiles>
 	<build>
 		<plugins>
 			<plugin>

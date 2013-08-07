@@ -8,9 +8,11 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.file.Path
 
-import static org.eclipse.xtend.core.macro.fsaccess.IOUtils.*
 import static org.junit.Assert.*
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+import org.eclipse.xtend.lib.macro.CodeGenerationContext
 
 @Active(typeof(MyAnnotationProcessor))
 annotation MyAnnotation {
@@ -19,47 +21,46 @@ annotation MyAnnotation {
 class MyAnnotationProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
-		assertNotNull("srcfolder is set", sourceFolder)
-		assertTrue("srcfolder exists", sourceFolder.exists)
-		assertEquals("srcfolder name is 'java'", "java", sourceFolder.name)
-		assertTrue(sourceFolder.path.endsWith("/it/compile/filesystemaccess-client/src/main/java"))
+		val Path cuPath = clazz.compilationUnit.filePath
+		assertNotNull("projectFolder is set", cuPath.projectFolder)
+		assertTrue("projectFolder exists", cuPath.projectFolder.exists)
+		assertEquals("projectFolder name is 'filesystemaccess-client'", "filesystemaccess-client",
+			cuPath.projectFolder.lastSegment)
+		assertTrue(
+			"projectFolder should end with /filesystemaccess-client but was: " + cuPath.projectFolder.toString,
+			cuPath.projectFolder.toString.endsWith("/filesystemaccess-client"))
+		
+		println(cuPath)
+		
+		val cuSrcFolder = cuPath.sourceFolder
+		assertNotNull("srcfolder is set", cuSrcFolder)
+		assertTrue("srcfolder exists", cuSrcFolder.exists)
+		assertEquals("srcfolder name is 'java'", "java", cuSrcFolder.lastSegment)
+		assertTrue("srcfolder should end with /filesystemaccess-client/src/main/java but was: "+cuSrcFolder.toString, cuSrcFolder.toString.endsWith("/filesystemaccess-client/src/main/java"))
 
-		assertNotNull("targetfolder is set", targetFolder)
+		assertNotNull("targetfolder is set", cuSrcFolder.targetFolder)
 		//assertTrue("targetfolder exists", targetFolder.exists)
-		assertEquals("targetfolder name is 'xtend'","xtend", targetFolder.name)
-		assertTrue(targetFolder.path.endsWith("/it/compile/filesystemaccess-client/src/main/generated-sources/xtend"))
+		assertEquals("targetfolder name is 'xtend'","xtend", cuSrcFolder.targetFolder.lastSegment)
+		assertTrue(cuSrcFolder.targetFolder.toString.endsWith("/filesystemaccess-client/src/main/generated-sources/xtend"))
 
-		assertNotNull("rootFolder is set", rootFolder)
-		assertTrue("rootFolder exists", rootFolder.exists)
-		assertEquals("rootFolder name is 'filesystemaccess-client'", "filesystemaccess-client", rootFolder.name)
-		assertTrue(rootFolder.path.endsWith("/it/compile/filesystemaccess-client"))
 
-		val myusercodeFolder = sourceFolder.getFolder("myusercode")
-		assertNotNull(myusercodeFolder)
+		val myusercodeFolder = cuSrcFolder.append("myusercode")
 		assertTrue(myusercodeFolder.exists)
-		assertEquals("myusercode", myusercodeFolder.name)
-		assertTrue(myusercodeFolder.path.endsWith("/it/compile/filesystemaccess-client/src/main/java/myusercode"))
+		assertTrue(myusercodeFolder.folder)
+		assertFalse(myusercodeFolder.file)
+		assertEquals("myusercode", myusercodeFolder.lastSegment)
+		assertTrue(myusercodeFolder.toString.endsWith("/filesystemaccess-client/src/main/java/myusercode"))
 
-		try {
-			sourceFolder.getFolder("myusercode/UserCode.xtend")
-			fail
-		} catch (IllegalStateException e) {
-			assertTrue(e.message.contains("/it/compile/filesystemaccess-client/src/main/java/myusercode/UserCode.xtend"))
-		}
-
-		val userCodeFile = sourceFolder.getFile("myusercode/UserCode.xtend")
+		val userCodeFile = cuSrcFolder.append("myusercode").append("UserCode.xtend")
 		assertNotNull(userCodeFile)
 		assertTrue(userCodeFile.exists)
-		assertEquals("UserCode.xtend", userCodeFile.name)
+		assertFalse(userCodeFile.folder)
+		assertTrue(userCodeFile.file)
+		assertEquals("UserCode.xtend", userCodeFile.lastSegment)
 		assertTrue(
-			userCodeFile.path.endsWith("/it/compile/filesystemaccess-client/src/main/java/myusercode/UserCode.xtend"))
+			userCodeFile.toString.endsWith("/filesystemaccess-client/src/main/java/myusercode/UserCode.xtend"))
 
-		try {
-			sourceFolder.getFile("myusercode")
-			fail
-		} catch (IllegalStateException e) {
-			assertTrue(e.message.contains("/it/compile/filesystemaccess-client/src/main/java/myusercode"))
-		}
+		
 
 		val userCodeContent = '''
 			package myusercode
@@ -69,39 +70,46 @@ class MyAnnotationProcessor extends AbstractClassProcessor {
 			}
 		'''
 		assertEquals(userCodeContent, userCodeFile.contents)
-		userCodeFile.read[assertEquals(userCodeContent, CharStreams.toString(new InputStreamReader(it)))]
+		
+		//FIXME userCodeFile.read[assertEquals(userCodeContent, CharStreams.toString(new InputStreamReader(it)))]
 
-		val userCodeCss = sourceFolder.getFile("myusercode/UserCode.css")
-		assertNotNull(userCodeCss)
-		assertFalse(userCodeCss.exists)
-		assertEquals("UserCode.css", userCodeCss.name)
-		assertTrue(
-			userCodeCss.path.endsWith("/it/compile/filesystemaccess-client/src/main/java/myusercode/UserCode.css"))
-		val helloWorldCssClassDeclaration = ".helloWorldCssClass {}"
-		userCodeCss.writeContents[helloWorldCssClassDeclaration as CharSequence]
-
-		val userCodeCss2 = sourceFolder.getFile("myusercode/UserCode.css")
-		assertNotNull(userCodeCss2)
-		assertTrue(userCodeCss2.exists)
-		assertEquals(helloWorldCssClassDeclaration, userCodeCss2.contents)
-
-		val userCode2Css = sourceFolder.getFile("com/itemis/myusercode/UserCode2.css")
-		assertNotNull(userCode2Css)
-		assertFalse(userCode2Css.exists)
-		assertEquals("UserCode2.css", userCode2Css.name)
-		assertTrue(
-			userCode2Css.path.endsWith(
-				"/it/compile/filesystemaccess-client/src/main/java/com/itemis/myusercode/UserCode2.css"))
-		userCode2Css.write [
-			tryWith([|new BufferedWriter(new OutputStreamWriter(it))]) [
-				write(helloWorldCssClassDeclaration)
-			]
-		]
-
-		val userCode2Css2 = sourceFolder.getFile("com/itemis/myusercode/UserCode2.css")
-		assertNotNull(userCode2Css2)
-		assertTrue(userCode2Css2.exists)
-		assertEquals(helloWorldCssClassDeclaration, userCode2Css2.contents)
 	}
 
+	override doGenerateCode(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
+		val cuSrcFolder = annotatedClass.compilationUnit.filePath.sourceFolder
+		val userCodeCss = cuSrcFolder.append("myusercode").append("UserCode.css")
+		
+		assertNotNull(userCodeCss)
+		assertFalse(userCodeCss.exists)
+		assertEquals("UserCode.css", userCodeCss.lastSegment)
+		assertTrue(
+			userCodeCss.toString.endsWith("/filesystemaccess-client/src/main/java/myusercode/UserCode.css"))
+		val helloWorldCssClassDeclaration = ".helloWorldCssClass {}"
+		userCodeCss.setContents(helloWorldCssClassDeclaration as CharSequence)
+
+//		val userCodeCss2 = cuSrcFolder.append("myusercode").append("UserCode.css")
+//		assertNotNull(userCodeCss2)
+//		assertTrue(userCodeCss2.exists)
+//		assertEquals(helloWorldCssClassDeclaration, userCodeCss2.contents)
+//
+//		val userCode2Css = cuSrcFolder.append("com").append("itemis").append("myusercode").append("UserCode2.css")
+//		assertNotNull(userCode2Css)
+//		assertFalse(userCode2Css.exists)
+//		assertEquals("UserCode2.css", userCode2Css.lastSegment)
+//		assertTrue(
+//			userCode2Css.toString.endsWith(
+//				"/filesystemaccess-client/src/main/java/com/itemis/myusercode/UserCode2.css"))
+		
+//		userCode2Css.write [
+//			tryWith([|new BufferedWriter(new OutputStreamWriter(it))]) [
+//				write(helloWorldCssClassDeclaration)
+//			]
+//		]
+
+//		val userCode2Css2 = cuSrcFolder.append("com").append("itemis").append("myusercode").append("UserCode2.css")
+//		assertNotNull(userCode2Css2)
+//		assertTrue(userCode2Css2.exists)
+//		assertEquals(helloWorldCssClassDeclaration, userCode2Css2.contents)
+	}
+	
 }

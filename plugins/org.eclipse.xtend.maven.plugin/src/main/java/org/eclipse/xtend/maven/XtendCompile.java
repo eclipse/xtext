@@ -12,12 +12,11 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
-import org.eclipse.xtend.maven.macro.fsaccess.MavenFileSystemAccessImpl;
+import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 
 /**
  * Goal which compiles Xtend sources.
@@ -43,16 +42,14 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 	 */
 	private String tempDirectory;
 
-	@Inject
-	private MavenFileSystemAccessImpl fileSystemAccess;
-
 	@Override
 	protected void internalExecute() throws MojoExecutionException {
 		final String defaultValue = project.getBasedir() + "/src/main/generated-sources/xtend";
 		getLog().debug("Output directory '" + outputDirectory + "'");
 		getLog().debug("Default directory '" + defaultValue + "'");
+		// IF output is not explicitly set try to read xtend prefs from eclipse .settings folder
 		if (defaultValue.equals(outputDirectory)) {
-			determinateOutputDirectory(project.getBuild().getSourceDirectory(), new Procedure1<String>() {
+			readXtendEclipseSetting(project.getBuild().getSourceDirectory(), new Procedure1<String>() {
 				public void apply(String xtendOutputDir) {
 					outputDirectory = xtendOutputDir;
 					getLog().info("Using Xtend output directory '" + outputDirectory + "'");
@@ -65,9 +62,13 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 	private void compileSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> compileSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		String classPath = concat(File.pathSeparator, getClassPath());
-		project.addCompileSourceRoot(outputDirectory);
-		fileSystemAccess.setTargetDirectory(outputDirectory);
-		compile(xtend2BatchCompiler, classPath, compileSourceRoots, outputDirectory);
+		String absoluteOutputDirectory = outputDirectory;
+		Path path = new Path(absoluteOutputDirectory);
+		if (!path.isAbsolute()) {
+			absoluteOutputDirectory = new Path(project.getBasedir().getAbsolutePath()).getAbsolutePath(path).toString();
+		}
+		project.addCompileSourceRoot(absoluteOutputDirectory);
+		compile(xtend2BatchCompiler, classPath, compileSourceRoots, absoluteOutputDirectory);
 	}
 
 	@SuppressWarnings("deprecation")

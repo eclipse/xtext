@@ -25,11 +25,11 @@ public class MavenTraceURIConverter extends DefaultTraceURIConverter {
 	protected URI deresolve(MavenProject project, URI uri) {
 		Iterable<String> roots = Iterables.concat(project.getCompileSourceRoots(), project.getTestCompileSourceRoots());
 		for (String rootString : roots) {
-			if (!rootString.endsWith("/"))
-				rootString += "/";
 			URI root = null;
 			try {
-				root = URI.createFileURI(new File(rootString).getCanonicalPath());
+				String canonicalPath = new File(rootString).getCanonicalPath();
+				canonicalPath += "/";
+				root = URI.createFileURI(canonicalPath);
 				if (isPrefix(root, uri))
 					return uri.deresolve(root);
 			} catch (IOException e) {

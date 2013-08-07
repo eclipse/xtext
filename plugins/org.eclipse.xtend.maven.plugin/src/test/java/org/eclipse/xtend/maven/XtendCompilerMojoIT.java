@@ -147,9 +147,9 @@ public class XtendCompilerMojoIT {
 
 	private void verifyErrorFreeLog(String pathToTestProject, String goal) throws IOException, VerificationException {
 		Verifier verifier = newVerifier(pathToTestProject);
+		verifier.setDebug(true);
 		verifier.executeGoal(goal);
 		verifier.verifyErrorFreeLog();
-		verifier.setDebug(true);
 		verifier.resetStreams();
 	}
 

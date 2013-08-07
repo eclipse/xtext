@@ -12,12 +12,11 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
-import org.eclipse.xtend.maven.macro.fsaccess.MavenFileSystemAccessImpl;
+import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 
 /**
  * Goal which compiles Xtend2 test sources.
@@ -43,8 +42,7 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 	 */
 	private String testTempDirectory;
 
-	@Inject
-	private MavenFileSystemAccessImpl fileSystemAccess;
+	
 
 	@Override
 	protected void internalExecute() throws MojoExecutionException {
@@ -52,7 +50,7 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 		getLog().debug("Output directory '" + testOutputDirectory + "'");
 		getLog().debug("Default directory '" + defaultValue + "'");
 		if (defaultValue.equals(testOutputDirectory)) {
-			determinateOutputDirectory(project.getBuild().getTestSourceDirectory(), new Procedure1<String>() {
+			readXtendEclipseSetting(project.getBuild().getTestSourceDirectory(), new Procedure1<String>() {
 				public void apply(String xtendOutputDir) {
 					testOutputDirectory = xtendOutputDir;
 					getLog().info("Using Xtend output directory '" + testOutputDirectory + "'");
@@ -65,9 +63,13 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 	protected void compileTestSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> testCompileSourceRoots = Lists.newArrayList(project.getTestCompileSourceRoots());
 		String testClassPath = concat(File.pathSeparator, getTestClassPath());
-		project.addTestCompileSourceRoot(testOutputDirectory);
-		fileSystemAccess.setTargetDirectory(testOutputDirectory);
-		compile(xtend2BatchCompiler, testClassPath, testCompileSourceRoots, testOutputDirectory);
+		String absoluteOutputDirectory = testOutputDirectory;
+		Path path = new Path(absoluteOutputDirectory);
+		if (!path.isAbsolute()) {
+			absoluteOutputDirectory = new Path(project.getBasedir().getAbsolutePath()).getAbsolutePath(path).toString();
+		}
+		project.addTestCompileSourceRoot(absoluteOutputDirectory);
+		compile(xtend2BatchCompiler, testClassPath, testCompileSourceRoots, absoluteOutputDirectory);
 	}
 
 	@SuppressWarnings("deprecation")

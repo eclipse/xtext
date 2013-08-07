@@ -16,12 +16,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
+import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.xbase.file.ProjectConfig;
+import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
@@ -66,6 +71,9 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 */
 	private String propertiesFileLocation;
 
+	@Inject
+	private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
+
 	protected XtendBatchCompiler createXtendBatchCompiler() {
 		Injector injector = new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration();
 		XtendBatchCompiler instance = injector.getInstance(XtendBatchCompiler.class);
@@ -74,6 +82,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 
 	protected void compile(XtendBatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
 			String outputPath) throws MojoExecutionException {
+		configureWorkspace(sourceDirectories, outputPath);
 		xtend2BatchCompiler.setResourceSetProvider(new MavenProjectResourceSetProvider(project));
 		Iterable<String> filtered = filter(sourceDirectories, FILE_EXISTS);
 		if (Iterables.isEmpty(filtered)) {
@@ -102,6 +111,36 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		}
 	}
 
+	private void configureWorkspace(List<String> sourceDirectories, String outputPath) throws MojoExecutionException {
+		WorkspaceConfig workspaceConfig = new WorkspaceConfig(project.getBasedir().getParentFile().getAbsolutePath());
+		ProjectConfig projectConfig = new ProjectConfig(project.getBasedir().getName());
+
+		Path absoluteRootPath = new Path(project.getBasedir().getAbsolutePath());
+		System.out.println("relativize"+outputPath);
+		System.out.println(absoluteRootPath);
+		Path relativizedTarget = new Path(outputPath).relativize(absoluteRootPath);
+		if (relativizedTarget == null) {
+			throw new MojoExecutionException("Output path '" + outputPath
+					+ "' have to be a child of the project folder '" + absoluteRootPath + "'");
+		}
+		for (String source : sourceDirectories) {
+			Path relativizedSrc = new Path(source).relativize(absoluteRootPath);
+			if (relativizedSrc == null) {
+				throw new MojoExecutionException("Source folder " + source
+						+ " have to be a child of the project folder " + absoluteRootPath);
+			}
+			projectConfig.addSourceFolderMapping(relativizedSrc.toString(), relativizedTarget.toString());
+		}
+		workspaceConfig.addProjectConfig(projectConfig);
+		workspaceConfigProvider.setWorkspaceConfig(workspaceConfig);
+		System.out.println("WS config root: " + workspaceConfig.getAbsoluteFileSystemPath());
+		System.out.println("Project name: " + projectConfig.getName());
+		System.out.println("Project root path: " + projectConfig.getRootPath());
+		for (Entry<Path, Path> entry : projectConfig.getSourceFolderMappings().entrySet()) {
+			System.out.println("Source path: " + entry.getKey() + " -> " + entry.getValue());
+		}
+	}
+
 	protected abstract String getTempDirectory();
 
 	protected void addDependencies(Set<String> classPath, List<Artifact> dependencies) {
@@ -110,7 +149,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		}
 	}
 
-	protected void determinateOutputDirectory(String sourceDirectory, Procedure1<String> fieldSetter) {
+	protected void readXtendEclipseSetting(String sourceDirectory, Procedure1<String> fieldSetter) {
 		if (propertiesFileLocation != null) {
 			File f = new File(propertiesFileLocation);
 			if (f.canRead()) {
@@ -134,7 +173,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 					getLog().warn(e);
 				}
 			} else {
-				getLog().info("Can't load Xtend properties:" + propertiesFileLocation);
+				getLog().info("Can't find Xtend properties under " + propertiesFileLocation + ", maven defaults are used.");
 			}
 		}
 	}
