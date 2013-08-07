@@ -79,7 +79,18 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void aggregation() throws Exception {
-		verifyErrorFreeLog(ROOT + "/aggregation");
+		Verifier verifier = newVerifier(ROOT + "/aggregation");
+		verifier.setDebug(true);
+		verifier.executeGoal("test");
+		verifier.verifyErrorFreeLog();
+		//https://bugs.eclipse.org/bugs/show_bug.cgi?id=409759
+		String outputdir = verifier.getBasedir() + "/relativeoutput-module/";
+
+		verifier.assertFilePresent(outputdir + "src/main/generated-sources/xtend/test/XtendA.java");
+		verifier.assertFilePresent(outputdir + "src/main/generated-sources/xtend/test/XtendC.java");
+
+		verifier.assertFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendA.java");
+		verifier.assertFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendC.java");
 	}
 
 	@Test
@@ -156,8 +167,8 @@ public class XtendCompilerMojoIT {
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		//		verifier.setDebugJvm(true);
-		//		verifier.setForkJvm(false);
+		// verifier.setDebugJvm(true);
+		// verifier.setForkJvm(false);
 		return verifier;
 	}
 
