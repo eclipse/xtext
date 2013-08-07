@@ -12,7 +12,7 @@
 <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/pde-junit"/>
 <booleanAttribute key="default" value="true"/>
 <booleanAttribute key="includeOptional" value="true"/>
-<stringAttribute key="location" value="${workspace_loc}/../junit-org.eclipse.xtend.ide.tests-fast-xtend-workspace"/>
+<stringAttribute key="location" value="${workspace_loc}/../junit-org.eclipse.xtend.ide.tests-fast-quarantine-workspace"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/org.eclipse.xtend.ide.tests/xtend-gen"/>
 </listAttribute>
