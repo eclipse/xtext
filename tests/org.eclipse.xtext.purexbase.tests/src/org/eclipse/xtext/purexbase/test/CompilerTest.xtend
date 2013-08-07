@@ -282,27 +282,27 @@ class CompilerTest {
 			    {
 			      final String x = "Hello ";
 			      final Function1<String,String> _function = new Function1<String,String>() {
-			          public String apply(final String e) {
-			            String _plus = (x + e);
-			            return _plus;
-			          }
-			        };
+			        public String apply(final String e) {
+			          String _plus = (x + e);
+			          return _plus;
+			        }
+			      };
 			      final Function1<String,String> f = _function;
 			      f.apply("World!");
 			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b", "c");
 			      final Function1<String,String> _function_1 = new Function1<String,String>() {
-			          public String apply(final String e) {
-			            String _upperCase = e.toUpperCase();
-			            return _upperCase;
-			          }
-			        };
+			        public String apply(final String e) {
+			          String _upperCase = e.toUpperCase();
+			          return _upperCase;
+			        }
+			      };
 			      /* ListExtensions.<String, String>map(list, _function_1); */
 			      final Function1<String,String> _function_2 = new Function1<String,String>() {
-			          public String apply(final String e) {
-			            String _upperCase = e.toUpperCase();
-			            return _upperCase;
-			          }
-			        };
+			        public String apply(final String e) {
+			          String _upperCase = e.toUpperCase();
+			          return _upperCase;
+			        }
+			      };
 			      final Function1<? super String,? extends String> f2 = _function_2;
 			      String _apply = f2.apply("simsalabim");
 			      _xblockexpression = (_apply);
@@ -623,41 +623,41 @@ class CompilerTest {
 			      Rectangle _rectangle_1 = new Rectangle(6, 8);
 			      final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
 			      final Function1<Shape,String> _function = new Function1<Shape,String>() {
-			          public String apply(final Shape shape) {
-			            String _switchResult = null;
-			            boolean _matched = false;
-			            if (!_matched) {
-			              if (shape instanceof Circle) {
-			                final Circle _circle = (Circle)shape;
+			        public String apply(final Shape shape) {
+			          String _switchResult = null;
+			          boolean _matched = false;
+			          if (!_matched) {
+			            if (shape instanceof Circle) {
+			              final Circle _circle = (Circle)shape;
+			              _matched=true;
+			              String _plus = ("a circle : diameter=" + Integer.valueOf(_circle.diameter));
+			              _switchResult = _plus;
+			            }
+			          }
+			          if (!_matched) {
+			            if (shape instanceof Rectangle) {
+			              final Rectangle _rectangle = (Rectangle)shape;
+			              boolean _equals = (_rectangle.height == _rectangle.width);
+			              if (_equals) {
 			                _matched=true;
-			                String _plus = ("a circle : diameter=" + Integer.valueOf(_circle.diameter));
+			                String _plus = ("a square : size=" + Integer.valueOf(_rectangle.width));
 			                _switchResult = _plus;
 			              }
 			            }
-			            if (!_matched) {
-			              if (shape instanceof Rectangle) {
-			                final Rectangle _rectangle = (Rectangle)shape;
-			                boolean _equals = (_rectangle.height == _rectangle.width);
-			                if (_equals) {
-			                  _matched=true;
-			                  String _plus = ("a square : size=" + Integer.valueOf(_rectangle.width));
-			                  _switchResult = _plus;
-			                }
-			              }
-			            }
-			            if (!_matched) {
-			              if (shape instanceof Rectangle) {
-			                final Rectangle _rectangle = (Rectangle)shape;
-			                _matched=true;
-			                String _plus = ("a rectangle : width=" + Integer.valueOf(_rectangle.width));
-			                String _plus_1 = (_plus + ", height=");
-			                String _plus_2 = (_plus_1 + Integer.valueOf(_rectangle.height));
-			                _switchResult = _plus_2;
-			              }
-			            }
-			            return _switchResult;
 			          }
-			        };
+			          if (!_matched) {
+			            if (shape instanceof Rectangle) {
+			              final Rectangle _rectangle = (Rectangle)shape;
+			              _matched=true;
+			              String _plus = ("a rectangle : width=" + Integer.valueOf(_rectangle.width));
+			              String _plus_1 = (_plus + ", height=");
+			              String _plus_2 = (_plus_1 + Integer.valueOf(_rectangle.height));
+			              _switchResult = _plus_2;
+			            }
+			          }
+			          return _switchResult;
+			        }
+			      };
 			      List<String> _map = ListExtensions.<Shape, String>map(list2, _function);
 			      _xblockexpression = (_map);
 			    }
@@ -731,13 +731,13 @@ class CompilerTest {
 			    char[] _charArray = "string".toCharArray();
 			    /* _charArray[3]; */
 			    final Comparator<String> _function = new Comparator<String>() {
-			        public int compare(final String a, final String b) {
-			          int _length = a.length();
-			          int _length_1 = b.length();
-			          int _compareTo = Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));
-			          return _compareTo;
-			        }
-			      };
+			      public int compare(final String a, final String b) {
+			        int _length = a.length();
+			        int _length_1 = b.length();
+			        int _compareTo = Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));
+			        return _compareTo;
+			      }
+			    };
 			    final Comparator<String> comparator = _function;
 			  }
 			}
