@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.reconciler.XtextReconcilerDebugger;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -310,6 +311,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	}
 
 	/**
+	 * @deprecated Moved to {@link XtextReconcilerDebugger} 
 	 * @noreference 
 	 * @since 2.4
 	 */

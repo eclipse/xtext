@@ -58,7 +58,7 @@ public class ReplaceRegion {
 	
 	@Override
 	public String toString() {
-		return "replace region [" + offset + " / length: " + length + "]";
+		return "replace region [" + offset + " / length: " + length + "] '" + text + "'";
 	}
 
 }

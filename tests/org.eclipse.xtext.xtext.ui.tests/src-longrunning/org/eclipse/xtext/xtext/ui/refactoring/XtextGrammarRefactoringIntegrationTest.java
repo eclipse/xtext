@@ -14,7 +14,6 @@ import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.adaptor.EclipseStarter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -49,7 +48,6 @@ import org.eclipse.xtext.xtext.ui.Activator;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -86,8 +84,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		EclipseStarter.setInitialProperties(ImmutableMap.of(
-				EcoreRefactoringParticipant.ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION, "false"));
+		EcoreRefactoringParticipant.setDisableWarning(true);
 		project = createProject(TEST_PROJECT);
 		IJavaProject javaProject = makeJavaProject(project);
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
@@ -274,8 +271,11 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		waitForAutoBuild();
 		assertEquals(REFACTOREDCLASSIFIERNAME, editor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
 			public String exec(XtextResource state) throws Exception {
-				return SimpleAttributeResolver.NAME_RESOLVER.apply(state.getEObject(greetingParserRuleUri.fragment()
-						.replaceFirst(CLASSIFIERNAME, REFACTOREDCLASSIFIERNAME)));
+				String renamedRuleFragment = greetingParserRuleUri.fragment()
+						.replaceFirst(CLASSIFIERNAME, REFACTOREDCLASSIFIERNAME);
+				EObject renamedRule = state.getEObject(renamedRuleFragment);
+				assertNotNull(renamedRule);
+				return SimpleAttributeResolver.NAME_RESOLVER.apply(renamedRule);
 			}
 		}));
 		editor.getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>() {
@@ -293,8 +293,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
-		EclipseStarter.setInitialProperties(ImmutableMap.of(
-				EcoreRefactoringParticipant.ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION, "true"));
+		EcoreRefactoringParticipant.setDisableWarning(false);
 	}
 
 	@Override
