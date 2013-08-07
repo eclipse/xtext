@@ -116,8 +116,6 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		ProjectConfig projectConfig = new ProjectConfig(project.getBasedir().getName());
 
 		Path absoluteRootPath = new Path(project.getBasedir().getAbsolutePath());
-		System.out.println("relativize"+outputPath);
-		System.out.println(absoluteRootPath);
 		Path relativizedTarget = new Path(outputPath).relativize(absoluteRootPath);
 		if (relativizedTarget == null) {
 			throw new MojoExecutionException("Output path '" + outputPath
@@ -133,11 +131,13 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		}
 		workspaceConfig.addProjectConfig(projectConfig);
 		workspaceConfigProvider.setWorkspaceConfig(workspaceConfig);
-		System.out.println("WS config root: " + workspaceConfig.getAbsoluteFileSystemPath());
-		System.out.println("Project name: " + projectConfig.getName());
-		System.out.println("Project root path: " + projectConfig.getRootPath());
-		for (Entry<Path, Path> entry : projectConfig.getSourceFolderMappings().entrySet()) {
-			System.out.println("Source path: " + entry.getKey() + " -> " + entry.getValue());
+		if (getLog().isDebugEnabled()) {
+			getLog().debug("WS config root: " + workspaceConfig.getAbsoluteFileSystemPath());
+			getLog().debug("Project name: " + projectConfig.getName());
+			getLog().debug("Project root path: " + projectConfig.getRootPath());
+			for (Entry<Path, Path> entry : projectConfig.getSourceFolderMappings().entrySet()) {
+				getLog().debug("Source path: " + entry.getKey() + " -> " + entry.getValue());
+			}
 		}
 	}
 
@@ -173,7 +173,8 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 					getLog().warn(e);
 				}
 			} else {
-				getLog().info("Can't find Xtend properties under " + propertiesFileLocation + ", maven defaults are used.");
+				getLog().info(
+						"Can't find Xtend properties under " + propertiesFileLocation + ", maven defaults are used.");
 			}
 		}
 	}
