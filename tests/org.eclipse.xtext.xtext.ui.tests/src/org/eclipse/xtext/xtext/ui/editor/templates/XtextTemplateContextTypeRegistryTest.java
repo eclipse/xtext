@@ -22,6 +22,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XtextTemplateContextTypeRegistryTest extends AbstractXtextTests implements Provider<XtextTemplateContextType>{
 
 	private XtextGrammarAccess grammarAccess;
