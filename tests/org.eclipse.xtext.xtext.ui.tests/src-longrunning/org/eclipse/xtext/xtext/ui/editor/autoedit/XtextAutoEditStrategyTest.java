@@ -110,6 +110,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				";", editor);
 	}
 	
+	@Override
 	@Test public void testBug335634_04() throws Exception {
 		XtextEditor editor = openEditor(
 				"// ML_COMMENT PATTERN: '/ *' '/'* ( !('*' '/') !'*' '/' '*' !'/')* '*'+ '/'\n" + 
