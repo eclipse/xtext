@@ -82,6 +82,7 @@ import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
@@ -142,11 +143,13 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject ConstantExpressionsInterpreter interpreter
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
-	@Inject JvmTypeExtensions typeExtensions;
+	@Inject JvmTypeExtensions typeExtensions
 
 	@Inject MutableFileSystemSupport fileSystemSupport
 	@Inject FileLocations fileLocations
 	@Inject Provider<WorkspaceConfig> workspaceConfigProvider
+	
+	@Inject extension IWhitespaceInformationProvider 
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -458,9 +461,21 @@ class CompilationUnitImpl implements CompilationUnit {
 		checkCanceled
 		typesBuilder.setBody(executable) [
 			val context = new CompilationContextImpl(it, this)
-			it.append(compilationStrategy.compile(context))
+			it.append(compilationStrategy.compile(context).trimTrailingLinebreak(executable))
 		]
 	}
+	
+	protected def trimTrailingLinebreak(CharSequence sequence, EObject context) {
+		val lineBreak = context?.eResource?.URI?.lineSeparatorInformation?.lineSeparator
+		if(sequence != null 
+			&& lineBreak != null 
+			&& sequence.length >= lineBreak.length
+			&& lineBreak.equals(sequence.subSequence(sequence.length - lineBreak.length, sequence.length)))
+			sequence.subSequence(0, sequence.length - lineBreak.length)
+		else 
+			sequence
+	} 
+	
 	def void setCompilationStrategy(JvmField field, CompilationStrategy compilationStrategy) {
 		checkCanceled
 		typesBuilder.setInitializer(field) [
