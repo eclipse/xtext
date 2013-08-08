@@ -8,7 +8,7 @@ import org.apache.maven.plugin.logging.Log;
 
 /**
  * @author Michael Clay
- * @author Morutz Eysholdt
+ * @author Moritz Eysholdt
  */
 public class MavenLog4JConfigurator {
 
@@ -16,7 +16,11 @@ public class MavenLog4JConfigurator {
 
 	public void configureLog4j(Log log) {
 		if (!Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
-			Logger.getRootLogger().setLevel(LOG4J_DEFAULT_LOG_LEVEL);
+			try {
+				Logger.getRootLogger().setLevel(LOG4J_DEFAULT_LOG_LEVEL);
+			} catch (NoSuchMethodError e) {
+				// see http://bugzilla.slf4j.org/show_bug.cgi?id=279
+			}
 			Logger.getRootLogger().addAppender(createMojoLogAppender(log));
 		} else {
 			configureLog4j(log, "org.eclipse.xtext");
@@ -27,7 +31,11 @@ public class MavenLog4JConfigurator {
 	protected void configureLog4j(Log log, String name) {
 		Logger logger = Logger.getLogger(name);
 		logger.setAdditivity(false);
-		logger.setLevel(LOG4J_DEFAULT_LOG_LEVEL);
+		try {
+			logger.setLevel(LOG4J_DEFAULT_LOG_LEVEL);
+		} catch (NoSuchMethodError e) {
+			// see http://bugzilla.slf4j.org/show_bug.cgi?id=279
+		}
 		logger.removeAllAppenders();
 		logger.addAppender(createMojoLogAppender(log));
 	}
