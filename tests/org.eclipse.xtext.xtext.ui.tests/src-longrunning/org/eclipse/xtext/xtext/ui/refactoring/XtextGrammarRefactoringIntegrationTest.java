@@ -69,7 +69,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	private static final String ECORE_FILE = TEST_PROJECT + "/src/org/xtext/example/mydsl/" + "MyDsl.ecore";
 	private static final String CLASSIFIERNAME = "Greeting";
 	private String grammar;
-	private IFile grammaFile;
+	private IFile grammarFile;
 	private URI ecoreURI;
 	private URI grammarUri;
 	private EPackage initialModelRoot;
@@ -95,7 +95,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 				+ "*; "
 				+ CLASSIFIERNAME
 				+ ": 'Hello' name=ID '!'; terminal ID : '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; terminal WS: (' '|'\t'|'\r'|'\n')+;";
-		grammaFile = IResourcesSetupUtil.createFile(GRAMMAR_FILE, grammar);
+		grammarFile = IResourcesSetupUtil.createFile(GRAMMAR_FILE, grammar);
 		grammarUri = URI.createPlatformResourceURI(GRAMMAR_FILE, true);
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
 		initialModelRoot = eInstance.createEPackage();
@@ -146,7 +146,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	@Test
 	public void testRefactorXtextGrammarWithoutGeneratedClassifier() throws Exception {
 		waitForAutoBuild();
-		final XtextEditor editor = openEditor(grammaFile);
+		final XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
 		waitForReconciler(editor);
 		waitForDisplay();
@@ -164,7 +164,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		String greetingRefFragment = EcoreUtil.getURI(greetingRef).fragment();
 		ecoreResource.unload();
 		waitForAutoBuild();
-		final XtextEditor editor = openEditor(grammaFile);
+		final XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
 		waitForAutoBuild();
 		checkConsistenceOfGrammar(editor);
@@ -206,13 +206,15 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		refToGreetingResource.unload();
 		ecoreModelResource.unload();
 		waitForDisplay();
-		XtextEditor editor = openEditor(grammaFile);
+		XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
 		waitForAutoBuild();
 		checkConsistenceOfGrammar(editor);
 		ecoreModelResource.load(null);
-		assertEquals(REFACTOREDCLASSIFIERNAME, SimpleAttributeResolver.NAME_RESOLVER.apply(ecoreModelResource
-				.getEObject(greetingClassFragment.replaceFirst(CLASSIFIERNAME, REFACTOREDCLASSIFIERNAME))));
+		String renamedGreetingClassFragment = greetingClassFragment.replaceFirst(CLASSIFIERNAME, REFACTOREDCLASSIFIERNAME);
+		EObject renamedGreetingClass = ecoreModelResource.getEObject(renamedGreetingClassFragment);
+		assertNotNull(renamedGreetingClass);
+		assertEquals(REFACTOREDCLASSIFIERNAME, SimpleAttributeResolver.NAME_RESOLVER.apply(renamedGreetingClass));
 		EReference greetingReference = (EReference) ecoreModelResource.getEObject(greetingRefFragment);
 		EClassifier eType = greetingReference.getEType();
 		assertFalse(eType.eIsProxy());
