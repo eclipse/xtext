@@ -24,22 +24,41 @@ import org.eclipse.xtext.xbase.ui.file.EclipseProjectConfig;
 @SuppressWarnings("all")
 public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
   @Inject
-  private IWorkspaceRoot workspaceRoot;
+  private IWorkspaceRoot _workspaceRoot;
+  
+  public IWorkspaceRoot getWorkspaceRoot() {
+    return this._workspaceRoot;
+  }
+  
+  public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
+    this._workspaceRoot = workspaceRoot;
+  }
   
   @Inject
-  private EclipseOutputConfigurationProvider configurationProvider;
+  private EclipseOutputConfigurationProvider _configurationProvider;
+  
+  public EclipseOutputConfigurationProvider getConfigurationProvider() {
+    return this._configurationProvider;
+  }
+  
+  public void setConfigurationProvider(final EclipseOutputConfigurationProvider configurationProvider) {
+    this._configurationProvider = configurationProvider;
+  }
   
   public WorkspaceConfig get() {
-    IPath _location = this.workspaceRoot.getLocation();
+    IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
+    IPath _location = _workspaceRoot.getLocation();
     final String wsRoot = _location.toString();
     WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRoot);
     final WorkspaceConfig result = _workspaceConfig;
-    IProject[] _projects = this.workspaceRoot.getProjects();
+    IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot();
+    IProject[] _projects = _workspaceRoot_1.getProjects();
     final Procedure1<IProject> _function = new Procedure1<IProject>() {
       public void apply(final IProject it) {
         Map<String,ProjectConfig> _projects = result.getProjects();
         String _name = it.getName();
-        EclipseProjectConfig _eclipseProjectConfig = new EclipseProjectConfig(it, EclipseWorkspaceConfigProvider.this.configurationProvider);
+        EclipseOutputConfigurationProvider _configurationProvider = EclipseWorkspaceConfigProvider.this.getConfigurationProvider();
+        EclipseProjectConfig _eclipseProjectConfig = new EclipseProjectConfig(it, _configurationProvider);
         _projects.put(_name, _eclipseProjectConfig);
       }
     };

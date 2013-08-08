@@ -21,9 +21,9 @@ import org.eclipse.core.resources.IWorkspaceRoot
 
 class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
 	
-	@Inject IWorkspaceRoot workspaceRoot
+	@Property @Inject IWorkspaceRoot workspaceRoot
 	
-	@Inject EclipseOutputConfigurationProvider configurationProvider
+	@Property @Inject EclipseOutputConfigurationProvider configurationProvider
 	
 	override get() {
 		val wsRoot = workspaceRoot.location.toString
@@ -52,11 +52,11 @@ class EclipseProjectConfig extends ProjectConfig {
 		if (map.empty) {
 			val config = configurationProvider.getOutputConfigurations(project).head
 			val jp  = JavaCore.create(project)
-			for (root : jp.allPackageFragmentRoots) {
+			for (root : jp.packageFragmentRoots) {
 				if (root.kind == IPackageFragmentRoot.K_SOURCE && root.underlyingResource != null) {
 					val container = root.underlyingResource as IContainer
-					val target = container.parent.findMember(config.outputDirectory)
-					if (!container.equals(target)) {
+					val target = container.parent.getFolder(new org.eclipse.core.runtime.Path(config.outputDirectory))
+					if (container != target) {
 						map.put(new Path(container.fullPath.toString), new Path(target.fullPath.toString))
 					}
 				}
