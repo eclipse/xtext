@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.xtend.lib,
  org.junit;bundle-version="4.5.0",
  org.eclipse.xtend.standalone;bundle-version="2.4.3"
 Export-Package: extract,
+ i18n,
  lazy,
  observables
 
