@@ -10,9 +10,11 @@ package org.eclipse.xtend.core.scoping;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -28,16 +30,19 @@ import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -61,6 +66,9 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	
 	@Inject
 	private IResourceScopeCache resourceScopeCache;
+	
+	@Inject
+	private CompilerPhases compilerPhases;
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
@@ -193,7 +201,18 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 					QualifiedName qualifiedImportedNamespace = qualifiedNameConverter.toQualifiedName(importedNamespace);
 					wildcardImports.add(AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(qualifiedImportedNamespace, true, false));
 				} else {
-					JvmDeclaredType importedType = importDeclaration.getImportedType();
+					JvmDeclaredType importedType = null;
+					if (compilerPhases.isIndexing(importSection)) {
+						EObject proxy = (EObject) importDeclaration.eGet(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, false);
+						if (proxy.eIsProxy()) {
+							URI uri = ((InternalEObject)proxy).eProxyURI();
+							importedType = (JvmDeclaredType) importSection.eResource().getResourceSet().getEObject(uri, true);
+						} else {
+							importedType = (JvmDeclaredType) proxy;
+						}
+					} else {
+						importedType = importDeclaration.getImportedType();
+					}
 					if (!importedType.eIsProxy()) {
 						if (concreteImports == null || importedNames == null /* to make JDT happy */) {
 							concreteImports = Lists.newArrayListWithCapacity(10);
