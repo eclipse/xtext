@@ -111,18 +111,10 @@ class XAnnotationExtensions {
 	}
 	
 	def tryFindAnnotationType(XAnnotation it) {
-		switch proxy : it.eGet(XANNOTATION__ANNOTATION_TYPE) {
+		switch proxy : it.eGet(XANNOTATION__ANNOTATION_TYPE, false) {
 			EObject case proxy.eIsProxy: {
 				val uri = (proxy as InternalEObject).eProxyURI
-				// TODO get these services from the resource service provider to make sure they are the ones used in Xtend
-				if (encoder.isCrossLinkFragment(eResource, uri.fragment)) {
-					val triple = encoder.decode(eResource, uri.fragment)
-					val candidates = linkingService.getLinkedObjects(triple.first, triple.second, triple.third)
-					if (!candidates.isEmpty) {
-						return (candidates.head as JvmAnnotationType)
-					}
-				}
-				return null
+				return eResource.resourceSet.getEObject(uri, true) as JvmAnnotationType
 			}
 			JvmAnnotationType : {
 				return proxy

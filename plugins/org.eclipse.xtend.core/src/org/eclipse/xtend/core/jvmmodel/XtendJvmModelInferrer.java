@@ -81,6 +81,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -197,6 +198,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			}
 		}
 		ActiveAnnotationContexts contexts = null;
+		BatchLinkableResource resource = (BatchLinkableResource)xtendFile.eResource();
 		try {
 			compilerPhases.setIndexing(xtendFile, true);
 			try {
@@ -215,6 +217,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			}
 		} finally {
 			compilerPhases.setIndexing(xtendFile, false);
+			resource.getCache().clear(resource);
 		}
 		
 		if (!preIndexingPhase) {

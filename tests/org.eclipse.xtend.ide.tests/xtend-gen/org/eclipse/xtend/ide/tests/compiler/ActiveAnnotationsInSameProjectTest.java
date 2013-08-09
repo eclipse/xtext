@@ -394,6 +394,80 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
     }
   }
   
+  @Test
+  public void testPropertyOfTypeInSameProject() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class TypeA {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.workbenchTestHelper.createFile("mypack/TypeA.xtend", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package otherpack;");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import mypack.TypeA;");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Client {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("@Property TypeA myTypeA");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void setMyTypeA(TypeA myType) {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("_myTypeA = myType");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final IFile type2 = this.workbenchTestHelper.createFile("otherpack/Client.xtend", _builder_1.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package otherpack;");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import mypack.TypeA;");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("class Client {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("@Property TypeA myTypeA");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def void setMyTypeA(TypeA myType) {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t");
+      _builder_2.append("_myTypeA = myType");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
+      type2.setContents(_stringInputStream, true, true, null);
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public void assertNoErrorsInWorkspace() {
     try {
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -285,7 +286,7 @@ public class XAnnotationExtensions {
   
   public JvmAnnotationType tryFindAnnotationType(final XAnnotation it) {
     JvmAnnotationType _switchResult = null;
-    Object _eGet = it.eGet(Literals.XANNOTATION__ANNOTATION_TYPE);
+    Object _eGet = it.eGet(Literals.XANNOTATION__ANNOTATION_TYPE, false);
     final Object proxy = _eGet;
     boolean _matched = false;
     if (!_matched) {
@@ -296,24 +297,9 @@ public class XAnnotationExtensions {
           _matched=true;
           final URI uri = ((InternalEObject) _eObject).eProxyURI();
           Resource _eResource = it.eResource();
-          String _fragment = uri.fragment();
-          boolean _isCrossLinkFragment = this.encoder.isCrossLinkFragment(_eResource, _fragment);
-          if (_isCrossLinkFragment) {
-            Resource _eResource_1 = it.eResource();
-            String _fragment_1 = uri.fragment();
-            final Triple<EObject,EReference,INode> triple = this.encoder.decode(_eResource_1, _fragment_1);
-            EObject _first = triple.getFirst();
-            EReference _second = triple.getSecond();
-            INode _third = triple.getThird();
-            final List<EObject> candidates = this.linkingService.getLinkedObjects(_first, _second, _third);
-            boolean _isEmpty = candidates.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              EObject _head = IterableExtensions.<EObject>head(candidates);
-              return ((JvmAnnotationType) _head);
-            }
-          }
-          return null;
+          ResourceSet _resourceSet = _eResource.getResourceSet();
+          EObject _eObject_1 = _resourceSet.getEObject(uri, true);
+          return ((JvmAnnotationType) _eObject_1);
         }
       }
     }

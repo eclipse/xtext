@@ -215,6 +215,45 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 		type1.assertHasErrors("same project")
 	}
 	
+	@Test def void testPropertyOfTypeInSameProject() {
+		workbenchTestHelper.createFile('mypack/TypeA.xtend', '''
+			package mypack
+			
+			class TypeA {
+			}
+		''')
+		val type2 = workbenchTestHelper.createFile('otherpack/Client.xtend', '''
+			package otherpack;
+			
+			import mypack.TypeA;
+			
+			class Client {
+				@Property TypeA myTypeA
+				
+				def void setMyTypeA(TypeA myType) {
+					_myTypeA = myType
+				}
+			}
+		''')
+		waitForAutoBuild()
+		assertNoErrorsInWorkspace
+		type2.setContents(new StringInputStream('''
+			package otherpack;
+			
+			import mypack.TypeA;
+			
+			class Client {
+				@Property TypeA myTypeA
+				
+				def void setMyTypeA(TypeA myType) {
+					_myTypeA = myType
+				}
+			}
+		'''),true,true, null)
+		waitForAutoBuild()
+		assertNoErrorsInWorkspace
+	}
+	
 	def void assertNoErrorsInWorkspace() {
 		val findMarkers = ResourcesPlugin.workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
 		for (iMarker : findMarkers) {
