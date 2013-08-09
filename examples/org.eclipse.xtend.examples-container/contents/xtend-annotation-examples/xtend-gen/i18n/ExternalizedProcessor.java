@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -203,7 +202,6 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
   }
   
   public void doGenerateCode(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
-    InputOutput.<String>println("Hello");
     for (final ClassDeclaration clazz : annotatedSourceElements) {
       {
         CompilationUnit _compilationUnit = clazz.getCompilationUnit();
