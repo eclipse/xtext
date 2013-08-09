@@ -298,6 +298,10 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
+	/**
+	 * Primitive {@code void}, {@link AnyTypeReference any} and {@link UnknownTypeReference unknown}
+	 * types are not valid hints for {@link UnboundTypeReference#acceptHint(LightweightBoundTypeArgument) unbound references}.
+	 */
 	public boolean isValidHint() {
 		return !isAny() && !isPrimitiveVoid();
 	}

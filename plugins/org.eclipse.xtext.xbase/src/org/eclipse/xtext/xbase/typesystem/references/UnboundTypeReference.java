@@ -44,6 +44,9 @@ import com.google.common.collect.Lists;
  * </code>
  * where {@code x} has the inferred type {@code ArrayList<Unbound[E]>}.
  * 
+ * Unbound types may be enhanced with {@link #acceptHint(LightweightBoundTypeArgument) hints} to
+ * allow the type inferrer to find the most suitable type.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
@@ -677,6 +680,36 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		acceptHint(new LightweightBoundTypeArgument(null, null, variance, null, null));		
 	}
 
+	/**
+	 * <p>Attach a resolution hint to this unbound type reference.</p>
+	 * <p>
+	 * Only {@link #isValidHint() valid} hints can be accepted. The given source indicates the
+	 * quality of this hint. The {@link VarianceInfo variances} indicate how the hint was used and
+	 * how it was expected to be used. A hint from a co-variant location may not have the same impact
+	 * for a contra-variant usage as a contra-variant hint. Consider a return type of a method</p>
+	 * <p>
+	 * <code>
+	 *   &lt;T&gt; Collection&lt;? extends T&gt; m(..) { }
+	 * </code>
+	 * </p>
+	 * and its usage
+	 * <p>
+	 * <code>
+	 *   Collection&lt;? super CharSequence&gt; variable = m(..)
+	 * </code>
+	 * </p>
+	 * <p>
+	 * The hint that stems from the variable declaration may not be very useful since the variances
+	 * are not compatible. Nevertheless, it can be accepted to produce better error messages.</p>
+	 * 
+	 * @param hint the reference that provides the hint.
+	 * @param source the source of this hint, e.g. an inferred hint, or an expectation.
+	 * @param origin the object that produced the hint. Only for debugging purpose to trace the origin of a hint.
+	 * @param expectedVariance the expected variance, e.g. where this unbound type reference is used.
+	 * @param actualVariance how the hint is used.
+	 * 
+	 * @see LightweightTypeReference#isValidHint()
+	 */
 	public void acceptHint(
 			LightweightTypeReference hint, BoundTypeArgumentSource source, Object origin,
 			VarianceInfo expectedVariance, VarianceInfo actualVariance) {
