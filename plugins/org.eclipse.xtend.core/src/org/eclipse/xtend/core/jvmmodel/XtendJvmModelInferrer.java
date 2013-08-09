@@ -68,6 +68,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -136,6 +137,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject
 	private ActiveAnnotationContextProvider contextProvider;
+	
+	@Inject
+	private CompilerPhases compilerPhases;
 
 	public void infer(@Nullable EObject object, final @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(object instanceof XtendFile))
@@ -192,21 +196,25 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 				}
 			}
 		}
-		
 		ActiveAnnotationContexts contexts = null;
 		try {
-			contexts = contextProvider.computeContext(xtendFile);
-		} catch (Throwable t) {
-			logger.error("Couldn't create annotation contexts", t);
-			return;
-		}
-		
-		for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
+			compilerPhases.setIndexing(xtendFile, true);
 			try {
-				annotationProcessor.indexingPhase(ctx, acceptor, CancelIndicator.NullImpl);
+				contexts = contextProvider.computeContext(xtendFile);
 			} catch (Throwable t) {
-				ctx.handleProcessingError(xtendFile.eResource(), t);
+				logger.error("Couldn't create annotation contexts", t);
+				return;
 			}
+			
+			for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
+				try {
+					annotationProcessor.indexingPhase(ctx, acceptor, CancelIndicator.NullImpl);
+				} catch (Throwable t) {
+					ctx.handleProcessingError(xtendFile.eResource(), t);
+				}
+			}
+		} finally {
+			compilerPhases.setIndexing(xtendFile, false);
 		}
 		
 		if (!preIndexingPhase) {

@@ -11,17 +11,27 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
+import org.eclipse.xtext.resource.CompilerPhases
 
 class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	
 	@Inject IJavaProjectProvider projectProvider
+	@Inject CompilerPhases compilerPhases
 	
+	/**
+	 * In the builder we use the Java representation for any upstream resources, so we filter them out here.
+	 * And if we are in the indexing phase, we don't even want to see the local resources.
+	 */
 	override getResourceDescriptions(ResourceSet resourceSet) {
 		val result = super.getResourceDescriptions(resourceSet)
 		switch result {
 			CurrentDescriptions.ResourceSetAware : {
 				switch d:result.delegate {
 					CurrentDescriptions : {
+						// during indexing we don't want to see any local xtend files.
+						if (compilerPhases.isIndexing(resourceSet)) {
+							return new IResourceDescriptions.NullImpl();
+						}
 						return new FilteringResourceDescriptions(result, projectProvider.getJavaProject(resourceSet))
 					}
 				}

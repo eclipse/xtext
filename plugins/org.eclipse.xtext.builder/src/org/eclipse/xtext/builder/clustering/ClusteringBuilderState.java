@@ -38,6 +38,7 @@ import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperationExc
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadResult;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IndexingOrderer;
@@ -83,6 +84,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     
     @Inject
     private IndexingOrderer indexingOrderer;
+    
+    @Inject
+	private CompilerPhases compilerPhases;
 
     /**
      * Actually do the build.
@@ -317,6 +321,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         IProject currentProject = getBuiltProject(buildData);
         LoadOperation loadOperation = null;
         try {
+        	compilerPhases.setIndexing(resourceSet, true);
             loadOperation = globalIndexResourceLoader.create(resourceSet, currentProject);
             loadOperation.load(toBeUpdated);
 
@@ -375,6 +380,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 subMonitor.worked(1);
             }
         } finally {
+        	compilerPhases.setIndexing(resourceSet, false);
             if(loadOperation != null) loadOperation.cancel();
         }
     }

@@ -42,6 +42,7 @@ class TestBatchCompiler {
     static String OUTPUT_DIRECTORY = "./test-result"
     static String XTEND_SRC_DIRECTORY = "./batch-compiler-data/test data"
     static String BUG396747_SRC_DIRECTORY = "./batch-compiler-data/bug396747"
+    static String BUG410594_SRC_DIRECTORY = "./batch-compiler-data/bug410594"
     static String TEMP_DIRECTORY = "./test-temp-dir"
     static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
 
@@ -107,6 +108,19 @@ class TestBatchCompiler {
 	def void bug396747() {
 		batchCompiler.sourcePath = BUG396747_SRC_DIRECTORY
 		assertTrue("Compiling empty file pass", batchCompiler.compile)
+	}
+	
+	@Test
+	def void bug410594() {
+		batchCompiler.sourcePath = BUG410594_SRC_DIRECTORY
+		assertTrue("Compiling empty file pass", batchCompiler.compile)
+	}
+	
+	@Test
+	def void testActiveAnnotatons1() {
+		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations1"
+		assertTrue("Compiling empty file pass", batchCompiler.compile)
+		assertEquals(3, new File(OUTPUT_DIRECTORY + "/mypackage").list[dir, name|name.endsWith(".java")].size)
 	}
 	
 	@Test

@@ -7,7 +7,9 @@ import org.eclipse.xtend.ide.builder.FilteringResourceDescriptions;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescriptions.NullImpl;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 @SuppressWarnings("all")
@@ -15,6 +17,13 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
   @Inject
   private IJavaProjectProvider projectProvider;
   
+  @Inject
+  private CompilerPhases compilerPhases;
+  
+  /**
+   * In the builder we use the Java representation for any upstream resources, so we filter them out here.
+   * And if we are in the indexing phase, we don't even want to see the local resources.
+   */
   public IResourceDescriptions getResourceDescriptions(final ResourceSet resourceSet) {
     final IResourceDescriptions result = super.getResourceDescriptions(resourceSet);
     boolean _matched = false;
@@ -29,6 +38,11 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
           if (d instanceof CurrentDescriptions) {
             final CurrentDescriptions _currentDescriptions = (CurrentDescriptions)d;
             _matched_1=true;
+            boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
+            if (_isIndexing) {
+              NullImpl _nullImpl = new NullImpl();
+              return _nullImpl;
+            }
             IJavaProject _javaProject = this.projectProvider.getJavaProject(resourceSet);
             FilteringResourceDescriptions _filteringResourceDescriptions = new FilteringResourceDescriptions(_resourceSetAware, _javaProject);
             return _filteringResourceDescriptions;

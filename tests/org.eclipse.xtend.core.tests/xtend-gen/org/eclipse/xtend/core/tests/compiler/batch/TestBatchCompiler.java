@@ -54,6 +54,8 @@ public class TestBatchCompiler {
   
   private static String BUG396747_SRC_DIRECTORY = "./batch-compiler-data/bug396747";
   
+  private static String BUG410594_SRC_DIRECTORY = "./batch-compiler-data/bug410594";
+  
   private static String TEMP_DIRECTORY = "./test-temp-dir";
   
   private static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir";
@@ -173,6 +175,31 @@ public class TestBatchCompiler {
     this.batchCompiler.setSourcePath(TestBatchCompiler.BUG396747_SRC_DIRECTORY);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue("Compiling empty file pass", _compile);
+  }
+  
+  @Test
+  public void bug410594() {
+    this.batchCompiler.setSourcePath(TestBatchCompiler.BUG410594_SRC_DIRECTORY);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue("Compiling empty file pass", _compile);
+  }
+  
+  @Test
+  public void testActiveAnnotatons1() {
+    this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations1");
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue("Compiling empty file pass", _compile);
+    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage");
+    File _file = new File(_plus);
+    final FilenameFilter _function = new FilenameFilter() {
+      public boolean accept(final File dir, final String name) {
+        boolean _endsWith = name.endsWith(".java");
+        return _endsWith;
+      }
+    };
+    String[] _list = _file.list(_function);
+    int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
+    Assert.assertEquals(3, _size);
   }
   
   @Test

@@ -33,6 +33,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
+import org.eclipse.xtend.core.macro.XAnnotationExtensions;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
@@ -97,6 +99,7 @@ import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
@@ -176,6 +179,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	@Inject private XAnnotationExtensions annotationExtensions;
 
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Map<Class<?>, ElementType> targetInfos;
@@ -1534,6 +1539,16 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	protected void checkModifiers(XtendAnnotationType annotation) {
 		annotationTypeModifierValidator.checkModifiers(annotation, "annotation type " + annotation.getName());
+	}
+	
+	@Check
+	protected void checkAnnotationInSameProject(XAnnotation annotation) {
+		if (annotationExtensions.isProcessed(annotation)) {
+			ActiveAnnotationContexts annotationContexts = ActiveAnnotationContexts.find(annotation.eResource());
+			if (!annotationContexts.getContexts().containsKey(annotation.getAnnotationType())) {
+				error("The referenced active annotation cannot be used from within the same project.",XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, -1, ACTIVE_ANNOTAION_IN_SAME_CONTAINER);
+			}
+		}
 	}
 
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -50,6 +52,13 @@ public class IndexedJvmTypeAccess {
 
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+	
+	@Inject
+	private CompilerPhases compilerPhases;
+	
+	public boolean isIndexingPhase(Notifier notifier) {
+		return compilerPhases.isIndexing(notifier);
+	}
 	
 	/**
 	 * Locate and resolve a {@link JvmType} in the context of the given resource set. It'll try to

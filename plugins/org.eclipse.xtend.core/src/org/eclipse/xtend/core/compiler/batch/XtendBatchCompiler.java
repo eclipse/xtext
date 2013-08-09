@@ -42,6 +42,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -116,6 +117,8 @@ public class XtendBatchCompiler {
 	private IResourceDescription.Manager resourceDescriptionManager;
 	@Inject
 	private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
+	@Inject
+	private CompilerPhases compilerPhases;
 
 	protected Writer outputWriter;
 	protected Writer errorWriter;
@@ -271,12 +274,17 @@ public class XtendBatchCompiler {
 			}
 			ResourceSet resourceSet = resourceSetProvider.get();
 			File classDirectory = createTempDir("classes");
-			// install a type provider without index lookup for the first phase
-			installJvmTypeProvider(resourceSet, classDirectory, true);
-			loadXtendFiles(resourceSet);
-			File sourceDirectory = createStubs(resourceSet);
-			if (!preCompileStubs(sourceDirectory, classDirectory)) {
-				log.debug("Compilation of stubs and existing Java code had errors. This is expected and usually is not a probblem.");
+			try {
+				compilerPhases.setIndexing(resourceSet, true);
+				// install a type provider without index lookup for the first phase
+				installJvmTypeProvider(resourceSet, classDirectory, true);
+				loadXtendFiles(resourceSet);
+				File sourceDirectory = createStubs(resourceSet);
+				if (!preCompileStubs(sourceDirectory, classDirectory)) {
+					log.debug("Compilation of stubs and existing Java code had errors. This is expected and usually is not a probblem.");
+				}
+			} finally {
+				compilerPhases.setIndexing(resourceSet, false);
 			}
 			// install a fresh type provider for the second phase, so we clear all previously cached classes and misses.
 			installJvmTypeProvider(resourceSet, classDirectory, false);

@@ -9,6 +9,8 @@ package org.eclipse.xtext.common.types.access.jdt;
 
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -27,6 +29,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.impl.JvmTypeImpl;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -36,8 +39,10 @@ import org.eclipse.xtext.util.Strings;
  */
 public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtTypeProvider {
 	
+	private final static Logger LOG = Logger.getLogger(JdtTypeProvider.class);
+
 	private static final String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0);
-	
+
 	private final IJavaProject javaProject;
 
 	private final TypeURIHelper typeUriHelper;
@@ -122,12 +127,15 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 		return signature;
 	}
-	
+
 	@Nullable
 	private JvmType findObjectType(@NonNull String signature, @NonNull URI resourceURI) {
 		TypeResource resource = getLoadedResourceForJavaURI(resourceURI);
 		JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource);
 		if (result != null || resource != null) {
+			if (result != null && !canLink(result.getQualifiedName())) {
+				return null;
+			}
 			return result;
 		}
 		try {
@@ -198,7 +206,31 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			packageName = topLevelType.substring(0, lastDot);
 		}
 		IType type = javaProject.findType(packageName, typeName /*, workingCopyOwner */);
+		if (!canLink(type.getFullyQualifiedName())) {
+			return null;
+		}
 		return type;
+	}
+	
+	private boolean canLink(String typeName) {
+		if (typeName != null) {
+			// during indexing we don't see project local types.
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=410594
+			try {
+				IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
+				if (indexedJvmTypeAccess != null 
+						&& indexedJvmTypeAccess.isIndexingPhase(getResourceSet())) {
+					IType type = javaProject.findType(typeName);
+					if (type != null) {
+						IResource underlyingResource = type.getUnderlyingResource();
+						return underlyingResource==null || !javaProject.getProject().contains(underlyingResource);
+					}
+				}
+			} catch (JavaModelException e) {
+				LOG.error(e.getMessage(), e);
+			}
+		}
+		return true;
 	}
 
 	private JvmType findObjectTypeInIndex(@NonNull String signature, @NonNull URI resourceURI) {

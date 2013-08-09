@@ -10,10 +10,13 @@ package org.eclipse.xtend.ide.tests;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.Set;
+import java.util.jar.Manifest;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -46,9 +49,11 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.junit.Assert;
 
+import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -224,6 +229,23 @@ public class WorkbenchTestHelper extends Assert {
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
 		JavaProjectSetupUtil.addJre15ClasspathEntry(javaProject);
 		return result;
+	}
+	
+	public static void addExportedPackages(IProject project, String ... exportedPackages) throws Exception{
+		IFile manifest = project.getFile("META-INF/MANIFEST.MF");
+		Manifest mf = new Manifest(manifest.getContents());
+		String value = mf.getMainAttributes().getValue("Export-Package");
+		for (String exported : exportedPackages) {
+			if (value == null) {
+				value = exported;
+			} else {
+				value += ","+exported;
+			}
+		}
+		mf.getMainAttributes().putValue("Export-Package", value);
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		mf.write(stream);
+		manifest.setContents(new ByteArrayInputStream(stream.toByteArray()), true, true, null);
 	}
 
 	public static void deleteProject(IProject project) throws CoreException {
