@@ -26,7 +26,6 @@ public class ObservableBean {
     String _oldValue = this.firstName;
     this.firstName = firstName;
     _propertyChangeSupport.firePropertyChange("firstName", _oldValue, firstName);
-    
   }
   
   public String getLastName() {
@@ -37,7 +36,6 @@ public class ObservableBean {
     String _oldValue = this.lastName;
     this.lastName = lastName;
     _propertyChangeSupport.firePropertyChange("lastName", _oldValue, lastName);
-    
   }
   
   private PropertyChangeSupport _propertyChangeSupport = new PropertyChangeSupport(this);

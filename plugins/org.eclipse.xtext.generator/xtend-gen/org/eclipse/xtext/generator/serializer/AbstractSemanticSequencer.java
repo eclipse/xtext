@@ -338,7 +338,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 }
               };
               List<Entry<IConstraint,List<EObject>>> _sortBy = IterableExtensions.<Entry<IConstraint,List<EObject>>, String>sortBy(_entrySet, _function_1);
-              for(final Entry<IConstraint,List<EObject>> ctx : _sortBy) {
+              for(final Entry<IConstraint, List<EObject>> ctx : _sortBy) {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("\t");

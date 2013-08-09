@@ -25,7 +25,6 @@ public class LazyExample {
     if (foo==null)
       foo = _initfoo();
     return foo;
-    
   }
   
   private Integer _initanother() {
@@ -39,6 +38,5 @@ public class LazyExample {
     if (another==null)
       another = _initanother();
     return another;
-    
   }
 }

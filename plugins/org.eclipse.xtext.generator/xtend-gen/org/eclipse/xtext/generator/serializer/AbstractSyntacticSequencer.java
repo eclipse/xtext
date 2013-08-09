@@ -103,7 +103,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLineIfNotEmpty();
       {
         List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(final Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
+        for(final Pair<String, AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
           _builder.append("\t");
           _builder.append("protected ");
           String _imported_1 = file.imported("org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias");
@@ -132,7 +132,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLineIfNotEmpty();
       {
         List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_1 = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(final Pair<String,AbstractElementAlias> group_1 : _allAmbiguousTransitionsBySyntax_1) {
+        for(final Pair<String, AbstractElementAlias> group_1 : _allAmbiguousTransitionsBySyntax_1) {
           _builder.append("\t\t");
           _builder.append("match_");
           String _first_1 = group_1.getFirst();
@@ -180,7 +180,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       {
         List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_2 = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(final Pair<String,AbstractElementAlias> group_2 : _allAmbiguousTransitionsBySyntax_2) {
+        for(final Pair<String, AbstractElementAlias> group_2 : _allAmbiguousTransitionsBySyntax_2) {
           _builder.append("\t");
           _builder.append("/**");
           _builder.newLine();
@@ -525,7 +525,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     {
       List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
-      for(final Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
+      for(final Pair<String, AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
         _builder.append("\t\t");
         {
           int _plus = (i + 1);
