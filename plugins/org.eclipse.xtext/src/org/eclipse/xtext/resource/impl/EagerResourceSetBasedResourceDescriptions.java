@@ -46,7 +46,8 @@ public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundS
 
 	@Inject
 	private IResourceServiceProvider.Registry registry;
-	public ResourceSet resourceSet;
+	
+	private ResourceSet resourceSet;
 	
 	private Descriptions getDescriptions(ResourceSet rs) {
 		for (Adapter a : rs.eAdapters()) {
