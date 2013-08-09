@@ -1,11 +1,8 @@
 package org.eclipse.xtend.ide.builder;
 
-import com.google.common.base.Objects;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -24,10 +21,10 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return this._delegate;
   }
   
-  private final IJavaProject _project;
+  private final Function1<? super URI,? extends Boolean> _filter;
   
-  public IJavaProject getProject() {
-    return this._project;
+  public Function1<? super URI,? extends Boolean> getFilter() {
+    return this._filter;
   }
   
   public Iterable<IResourceDescription> getAllResourceDescriptions() {
@@ -54,23 +51,8 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
   }
   
   private boolean isContainedUri(final URI uri) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(uri, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      int _segmentCount = uri.segmentCount();
-      boolean _lessThan = (_segmentCount < 2);
-      _or = (_equals || _lessThan);
-    }
-    if (_or) {
-      return false;
-    }
-    String _segment = uri.segment(1);
-    IJavaProject _project = this.getProject();
-    IProject _project_1 = _project.getProject();
-    String _name = _project_1.getName();
-    return Objects.equal(_segment, _name);
+    Function1<? super URI,? extends Boolean> _filter = this.getFilter();
+    return (_filter.apply(uri)).booleanValue();
   }
   
   public Iterable<IEObjectDescription> getExportedObjects() {
@@ -135,10 +117,10 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return _isEmpty;
   }
   
-  public FilteringResourceDescriptions(final IResourceDescriptions delegate, final IJavaProject project) {
+  public FilteringResourceDescriptions(final IResourceDescriptions delegate, final Function1<? super URI,? extends Boolean> filter) {
     super();
     this._delegate = delegate;
-    this._project = project;
+    this._filter = filter;
   }
   
   @Override
@@ -146,7 +128,7 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((_delegate== null) ? 0 : _delegate.hashCode());
-    result = prime * result + ((_project== null) ? 0 : _project.hashCode());
+    result = prime * result + ((_filter== null) ? 0 : _filter.hashCode());
     return result;
   }
   
@@ -164,10 +146,10 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
         return false;
     } else if (!_delegate.equals(other._delegate))
       return false;
-    if (_project == null) {
-      if (other._project != null)
+    if (_filter == null) {
+      if (other._filter != null)
         return false;
-    } else if (!_project.equals(other._project))
+    } else if (!_filter.equals(other._filter))
       return false;
     return true;
   }

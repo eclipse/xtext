@@ -1,6 +1,9 @@
 package org.eclipse.xtend.ide.builder;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtend.ide.builder.FilteringResourceDescriptions;
@@ -11,6 +14,7 @@ import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptions.NullImpl;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 @SuppressWarnings("all")
 public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
@@ -26,6 +30,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
    */
   public IResourceDescriptions getResourceDescriptions(final ResourceSet resourceSet) {
     final IResourceDescriptions result = super.getResourceDescriptions(resourceSet);
+    final IJavaProject project = this.projectProvider.getJavaProject(resourceSet);
     boolean _matched = false;
     if (!_matched) {
       if (result instanceof ResourceSetAware) {
@@ -43,13 +48,58 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
               NullImpl _nullImpl = new NullImpl();
               return _nullImpl;
             }
-            IJavaProject _javaProject = this.projectProvider.getJavaProject(resourceSet);
-            FilteringResourceDescriptions _filteringResourceDescriptions = new FilteringResourceDescriptions(_resourceSetAware, _javaProject);
+            final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
+              public Boolean apply(final URI uri) {
+                boolean _or = false;
+                boolean _equals = Objects.equal(uri, null);
+                if (_equals) {
+                  _or = true;
+                } else {
+                  int _segmentCount = uri.segmentCount();
+                  boolean _lessThan = (_segmentCount < 2);
+                  _or = (_equals || _lessThan);
+                }
+                if (_or) {
+                  return Boolean.valueOf(false);
+                }
+                String _segment = uri.segment(1);
+                IProject _project = project.getProject();
+                String _name = _project.getName();
+                return Boolean.valueOf(Objects.equal(_segment, _name));
+              }
+            };
+            FilteringResourceDescriptions _filteringResourceDescriptions = new FilteringResourceDescriptions(_resourceSetAware, _function);
             return _filteringResourceDescriptions;
           }
         }
       }
     }
-    return result;
+    boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
+    if (_isIndexing) {
+      final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
+        public Boolean apply(final URI uri) {
+          boolean _or = false;
+          boolean _equals = Objects.equal(uri, null);
+          if (_equals) {
+            _or = true;
+          } else {
+            int _segmentCount = uri.segmentCount();
+            boolean _lessThan = (_segmentCount < 2);
+            _or = (_equals || _lessThan);
+          }
+          if (_or) {
+            return Boolean.valueOf(false);
+          }
+          String _segment = uri.segment(1);
+          IProject _project = project.getProject();
+          String _name = _project.getName();
+          return Boolean.valueOf((!Objects.equal(_segment, _name)));
+        }
+      };
+      FilteringResourceDescriptions _filteringResourceDescriptions = new FilteringResourceDescriptions(result, _function);
+      return _filteringResourceDescriptions;
+    } else {
+      return result;
+    }
   }
 }

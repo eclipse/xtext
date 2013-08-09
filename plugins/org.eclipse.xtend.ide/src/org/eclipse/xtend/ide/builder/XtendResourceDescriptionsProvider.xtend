@@ -5,13 +5,12 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
-import org.eclipse.xtext.resource.CompilerPhases
 
 class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	
@@ -24,27 +23,44 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	 */
 	override getResourceDescriptions(ResourceSet resourceSet) {
 		val result = super.getResourceDescriptions(resourceSet)
+		val project = projectProvider.getJavaProject(resourceSet)
 		switch result {
 			CurrentDescriptions.ResourceSetAware : {
 				switch d:result.delegate {
+					// in the builder we don't want to see any non-local xtend files.
 					CurrentDescriptions : {
-						// during indexing we don't want to see any local xtend files.
+						// during indexing we don't want to see any local xtend files either.
 						if (compilerPhases.isIndexing(resourceSet)) {
 							return new IResourceDescriptions.NullImpl();
 						}
-						return new FilteringResourceDescriptions(result, projectProvider.getJavaProject(resourceSet))
+						return new FilteringResourceDescriptions(result, [ uri |
+							// we expect platform://resource URIs here, where the second segment denotes the project's name.
+							if (uri == null || uri.segmentCount<2)
+								return false
+							return uri.segment(1) == project.project.name
+						])
 					}
 				}
 			}
 		}
-		return result
+		if (compilerPhases.isIndexing(resourceSet)) {
+			// during indexing we don't want to see any local xtend files
+			return new FilteringResourceDescriptions(result, [ uri |
+				// we expect platform://resource URIs here, where the second segment denotes the project's name.
+				if (uri == null || uri.segmentCount<2)
+					return false
+				return uri.segment(1) != project.project.name
+			])
+		} else {
+			return result
+		}
 	}
 }
 
 @Data class FilteringResourceDescriptions implements IResourceDescriptions {
 	
 	IResourceDescriptions delegate
-	IJavaProject project
+	(URI)=>boolean filter
 	
 	override getAllResourceDescriptions() {
 		delegate.allResourceDescriptions.filter[isContainedUri(URI)]
@@ -58,10 +74,7 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	}
 	
 	def private boolean isContainedUri(URI uri) {
-		// we expect platform://resource URIs here, where the second segment denotes the project's name.
-		if (uri == null || uri.segmentCount<2)
-			return false
-		return uri.segment(1) == project.project.name
+		return filter.apply(uri)
 	}
 	
 	override getExportedObjects() {
