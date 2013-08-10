@@ -44,13 +44,13 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 	@Inject private IStorage2UriMapper storage2UriMapper;
 
 	public WorkingCopyOwner getWorkingCopyOwner(final IJavaProject javaProject, final ResourceSet resourceset) {
-		final IResourceDescriptions descriptions = descriptionsProvider.getResourceDescriptions(resourceset);
 		return new WorkingCopyOwner() {
 			@Override
 			public String findSource(String typeName, String packageName) {
 				if (packageName.startsWith("java"))
 					return super.findSource(typeName, packageName);
 				QualifiedName qn = toQualifiedName(packageName, typeName);
+				final IResourceDescriptions descriptions = descriptionsProvider.getResourceDescriptions(resourceset);
 				Iterator<IEObjectDescription> exportedObjects = descriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, qn, false).iterator();
 				while (exportedObjects.hasNext()) {
 					final IEObjectDescription candidate = exportedObjects.next();
