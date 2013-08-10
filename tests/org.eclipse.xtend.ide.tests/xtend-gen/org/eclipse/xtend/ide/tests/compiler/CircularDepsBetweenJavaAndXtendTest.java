@@ -1,6 +1,7 @@
 package org.eclipse.xtend.ide.tests.compiler;
 
 import com.google.inject.Inject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -86,6 +87,67 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       this.workbenchTestHelper.createFile("XtendClass.xtend", _builder_1.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJavaSignatureDependsOnXtend() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package test;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public interface FooProvider {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public Foo get();");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.workbenchTestHelper.createFile("test/FooProvider.java", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package test");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@Data class Foo {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.workbenchTestHelper.createFile("test/Foo.xtend", _builder_1.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package test");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import test.FooProvider");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("@SuppressWarnings(\"all\")");
+      _builder_2.newLine();
+      _builder_2.append("class FooUser {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def void doStuff(FooProvider provider) {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t");
+      _builder_2.append("val foo = provider.get");
+      _builder_2.newLine();
+      _builder_2.append("\t\t");
+      _builder_2.append("foo.toString");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      final IFile file = this.workbenchTestHelper.createFile("test/FooUser.xtend", _builder_2.toString());
+      IResourcesSetupUtil.fullBuild();
+      IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      int _length = _findMarkers.length;
+      Assert.assertEquals(0, _length);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

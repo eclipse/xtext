@@ -53,6 +53,38 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 		assertNoErrorsInWorkspace
 	}
 	
+	@Test def void testJavaSignatureDependsOnXtend() {
+		workbenchTestHelper.createFile('test/FooProvider.java', '''
+			package test;
+
+			public interface FooProvider {
+				public Foo get();
+			}
+		''')
+		workbenchTestHelper.createFile('test/Foo.xtend', '''
+			package test
+			
+			@Data class Foo {
+			}
+		''')
+		val file = workbenchTestHelper.createFile('test/FooUser.xtend', '''
+			package test
+			
+			import test.FooProvider
+			
+			@SuppressWarnings("all")
+			class FooUser {
+				
+				def void doStuff(FooProvider provider) {
+					val foo = provider.get
+					foo.toString
+				}
+			}
+		''')
+		fullBuild
+		assertEquals(0,file.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
+	}
+	
 	def void assertNoErrorsInWorkspace() {
 		val findMarkers = ResourcesPlugin::workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
 		for (iMarker : findMarkers) {
