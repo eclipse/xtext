@@ -135,65 +135,45 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final ArrayList<Object> it) {
           int _size = it.size();
           Assert.assertEquals(4, _size);
-          final Function1<Object,Boolean> _function = new Function1<Object,Boolean>() {
-            public Boolean apply(final Object it) {
-              boolean _and = false;
-              if (!(it instanceof IField)) {
-                _and = false;
-              } else {
-                String _elementName = ((IField) it).getElementName();
-                boolean _equals = Objects.equal(_elementName, "x");
-                _and = ((it instanceof IField) && _equals);
-              }
-              return Boolean.valueOf(_and);
+          Iterable<IField> _filter = Iterables.<IField>filter(it, IField.class);
+          final Function1<IField,Boolean> _function = new Function1<IField,Boolean>() {
+            public Boolean apply(final IField it) {
+              String _elementName = it.getElementName();
+              boolean _equals = Objects.equal(_elementName, "x");
+              return Boolean.valueOf(_equals);
             }
           };
-          boolean _exists = IterableExtensions.<Object>exists(it, _function);
+          boolean _exists = IterableExtensions.<IField>exists(_filter, _function);
           Assert.assertTrue(_exists);
-          final Function1<Object,Boolean> _function_1 = new Function1<Object,Boolean>() {
-            public Boolean apply(final Object it) {
-              boolean _and = false;
-              if (!(it instanceof IMethod)) {
-                _and = false;
-              } else {
-                String _elementName = ((IMethod) it).getElementName();
-                boolean _equals = Objects.equal(_elementName, "foo");
-                _and = ((it instanceof IMethod) && _equals);
-              }
-              return Boolean.valueOf(_and);
+          Iterable<IMethod> _filter_1 = Iterables.<IMethod>filter(it, IMethod.class);
+          final Function1<IMethod,Boolean> _function_1 = new Function1<IMethod,Boolean>() {
+            public Boolean apply(final IMethod it) {
+              String _elementName = it.getElementName();
+              boolean _equals = Objects.equal(_elementName, "foo");
+              return Boolean.valueOf(_equals);
             }
           };
-          boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
+          boolean _exists_1 = IterableExtensions.<IMethod>exists(_filter_1, _function_1);
           Assert.assertTrue(_exists_1);
-          final Function1<Object,Boolean> _function_2 = new Function1<Object,Boolean>() {
-            public Boolean apply(final Object it) {
-              boolean _and = false;
-              if (!(it instanceof IMethod)) {
-                _and = false;
-              } else {
-                String _elementName = ((IMethod) it).getElementName();
-                boolean _equals = Objects.equal(_elementName, "bar");
-                _and = ((it instanceof IMethod) && _equals);
-              }
-              return Boolean.valueOf(_and);
+          Iterable<IMethod> _filter_2 = Iterables.<IMethod>filter(it, IMethod.class);
+          final Function1<IMethod,Boolean> _function_2 = new Function1<IMethod,Boolean>() {
+            public Boolean apply(final IMethod it) {
+              String _elementName = it.getElementName();
+              boolean _equals = Objects.equal(_elementName, "bar");
+              return Boolean.valueOf(_equals);
             }
           };
-          boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_2);
+          boolean _exists_2 = IterableExtensions.<IMethod>exists(_filter_2, _function_2);
           Assert.assertTrue(_exists_2);
-          final Function1<Object,Boolean> _function_3 = new Function1<Object,Boolean>() {
-            public Boolean apply(final Object it) {
-              boolean _and = false;
-              if (!(it instanceof IMethod)) {
-                _and = false;
-              } else {
-                String _elementName = ((IMethod) it).getElementName();
-                boolean _equals = Objects.equal(_elementName, "baz");
-                _and = ((it instanceof IMethod) && _equals);
-              }
-              return Boolean.valueOf(_and);
+          Iterable<IMethod> _filter_3 = Iterables.<IMethod>filter(it, IMethod.class);
+          final Function1<IMethod,Boolean> _function_3 = new Function1<IMethod,Boolean>() {
+            public Boolean apply(final IMethod it) {
+              String _elementName = it.getElementName();
+              boolean _equals = Objects.equal(_elementName, "baz");
+              return Boolean.valueOf(_equals);
             }
           };
-          boolean _exists_3 = IterableExtensions.<Object>exists(it, _function_3);
+          boolean _exists_3 = IterableExtensions.<IMethod>exists(_filter_3, _function_3);
           Assert.assertTrue(_exists_3);
         }
       };

@@ -68,10 +68,10 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 		val constructor = type.getMethod("Xtend", newArrayList)
 		findReferences(type, constructor) => [
 			assertEquals(4, size)
-			assertTrue(exists[it instanceof IField && (it as IField).elementName == 'x'])
-			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == 'foo'])
-			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == 'bar'])
-			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == 'baz'])
+			assertTrue(filter(IField).exists[elementName == 'x'])
+			assertTrue(filter(IMethod).exists[elementName == 'foo'])
+			assertTrue(filter(IMethod).exists[elementName == 'bar'])
+			assertTrue(filter(IMethod).exists[elementName == 'baz'])
 		]
 	}
 

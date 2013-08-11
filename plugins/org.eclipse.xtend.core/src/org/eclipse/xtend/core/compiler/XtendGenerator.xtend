@@ -28,6 +28,8 @@ class XtendGenerator extends JvmModelGenerator {
 	
 	def void callMacroProcessors(Resource input) {
 		val ctxs = ActiveAnnotationContexts.find(input);
+		if (ctxs == null)
+			return;
 		for (context : ctxs.contexts.values) {
 			try {
 				switch processor : context.processorInstance {

@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.compiler;
 
+import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,10 @@ public class XtendGenerator extends JvmModelGenerator {
   
   public void callMacroProcessors(final Resource input) {
     final ActiveAnnotationContexts ctxs = ActiveAnnotationContexts.find(input);
+    boolean _equals = Objects.equal(ctxs, null);
+    if (_equals) {
+      return;
+    }
     Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = ctxs.getContexts();
     Collection<ActiveAnnotationContext> _values = _contexts.values();
     for (final ActiveAnnotationContext context : _values) {
