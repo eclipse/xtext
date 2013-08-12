@@ -36,6 +36,7 @@ public class IssueCodes {
 	public static final String INSTANCE_ACCESS_TO_STATIC_MEMBER = ISSUE_CODE_PREFIX + "instance_access_to_static_member";
 	public static final String INVALID_ARGUMENT_TYPES = ISSUE_CODE_PREFIX + "invalid_argument_types";
 	public static final String INVALID_CAST = ISSUE_CODE_PREFIX + "invalid_cast";
+	public static final String JAVA_STYLE_TYPE_CAST = ISSUE_CODE_PREFIX + "java_style_type_cast";
 	public static final String INVALID_CONSTRUCTOR_INVOCATION = ISSUE_CODE_PREFIX + "invalid_constructor_invocation";
 	public static final String INVALID_CONSTRUCTOR_ARGUMENT = ISSUE_CODE_PREFIX + "invalid_constructor_argument";
 	public static final String INVALID_EARLY_EXIT = ISSUE_CODE_PREFIX + "invalid_early_exit";
