@@ -10,11 +10,17 @@ import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
 import org.eclipse.ui.texteditor.MarkerUtilities
+import org.junit.Before
+import org.junit.After
 
 class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 
 	@Inject 
 	private WorkbenchTestHelper workbenchTestHelper;
+	
+	@Before @After def void cleanUp() {
+		workbenchTestHelper.tearDown
+	}
 	
 	@Test def void testBug388575() {
 		workbenchTestHelper.createFile('JavaInterface.java', '''
