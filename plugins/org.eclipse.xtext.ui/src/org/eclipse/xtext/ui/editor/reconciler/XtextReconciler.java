@@ -40,6 +40,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.util.DiffUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -77,6 +78,20 @@ public class XtextReconciler extends Job implements IReconciler {
 	
 	private LinkedBlockingQueue<DocumentEvent> pendingChanges = new LinkedBlockingQueue<DocumentEvent>();
 
+	/**
+	 * A special {@link DocumentEvent} that signals that an editors input has been replaced.
+	 * 
+	 * @author Jan Koehnlein - Initial contribution and API
+	 * @since 2.4
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noreference This class is not intended to be referenced by clients.
+	 */
+	protected class InputChangedDocumentEvent extends DocumentEvent {
+		public InputChangedDocumentEvent(IDocument oldInput, IDocument newInput) {
+			super(newInput, 0, oldInput.getLength(), newInput.get());
+		}
+	}
+	
 	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {
 
 		private volatile boolean sessionStarted = false;
@@ -116,7 +131,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 
 		public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
-			// TODO Auto-generated method stub
+			// do nothing
 		}
 
 	}
@@ -215,7 +230,7 @@ public class XtextReconciler extends Job implements IReconciler {
 			}
 		}
 		if (oldInput != null && newInput != null) {
-			handleDocumentChanged(new DocumentEvent(newInput, 0, oldInput.getLength(), newInput.get()));
+			handleDocumentChanged(new InputChangedDocumentEvent(oldInput, newInput));
 		}
 	}
 
@@ -299,7 +314,16 @@ public class XtextReconciler extends Job implements IReconciler {
 		String resourceText = (parseResult != null) ? parseResult.getRootNode().getText() : "";
 		ReconcilerReplaceRegion.Builder builder = ReconcilerReplaceRegion.builder(resourceText);
 		for (DocumentEvent event : events) {
-			builder.add(event.getOffset(), event.getLength(), event.getText());
+//			if (event instanceof InputChangedDocumentEvent) {
+//				builder = ReconcilerReplaceRegion.builder(resourceText);
+//				if(!resourceText.equals(event.getText())) {
+//					if(log.isDebugEnabled())
+//						log.debug("Resource text is not up-to-date:\n" + DiffUtil.diff(resourceText,event.getText()));
+//					builder.add(0, resourceText.length(), event.getText());
+//				}
+//			} else {
+				builder.add(event.getOffset(), event.getLength(), event.getText());
+//			}
 		}
 		ReconcilerReplaceRegion mergedRegion = builder.create();
 		mergedRegion.setModificationStamp(events.get(events.size()-1).getModificationStamp());
