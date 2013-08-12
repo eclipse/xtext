@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.EList;
@@ -39,6 +40,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -50,8 +52,9 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JdtReferenceFinder;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -71,8 +74,9 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
   @Extension
   private JvmModelFindReferenceHandler _jvmModelFindReferenceHandler;
   
-  @AfterClass
-  public static void cleanup() {
+  @Before
+  @After
+  public void cleanup() {
     try {
       IResourcesSetupUtil.cleanWorkspace();
     } catch (Throwable _e) {
@@ -83,7 +87,11 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
   @Test
   public void testFindClassRef() {
     try {
-      this._workbenchTestHelper.createFile("Xtend.xtend", "class Xtend {}");
+      XtextBuilder.wasRunning = false;
+      XtextBuilder.messages.clear();
+      IFile _createFile = this._workbenchTestHelper.createFile("Xtend.xtend", "class Xtend {}");
+      boolean _exists = _createFile.exists();
+      Assert.assertTrue(_exists);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("public class JavaRef {");
       _builder.newLine();
@@ -124,13 +132,26 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      this._workbenchTestHelper.createFile("JavaRef.java", _string);
+      IFile _createFile_1 = this._workbenchTestHelper.createFile("JavaRef.java", _string);
+      boolean _exists_1 = _createFile_1.exists();
+      Assert.assertTrue(_exists_1);
       IResourcesSetupUtil.waitForAutoBuild();
+      String _plus = ("Builder wasn\'t running : " + XtextBuilder.messages);
+      Assert.assertTrue(_plus, XtextBuilder.wasRunning);
+      String _plus_1 = ("Builder is still running : " + XtextBuilder.messages);
+      Assert.assertFalse(_plus_1, XtextBuilder.isRunning);
       IProject _project = this._workbenchTestHelper.getProject();
-      final IResource file = _project.findMember("/xtend-gen/Xtend.java");
-      Assert.assertNotNull("Not even the file was there.", file);
+      IResource _findMember = _project.findMember("/src/Xtend.xtend");
+      Assert.assertNotNull("Couldn\'t find \'src/Xtend.xtend\'.", _findMember);
       IProject _project_1 = this._workbenchTestHelper.getProject();
-      IJavaProject _create = JavaCore.create(_project_1);
+      IResource _findMember_1 = _project_1.findMember("/src/JavaRef.java");
+      Assert.assertNotNull("Couldn\'t find \'src/JavaRef.java\'.", _findMember_1);
+      String _plus_2 = ("Couldn\'t find \'xtend-gen/Xtend.java\'. Builder info : " + XtextBuilder.messages);
+      IProject _project_2 = this._workbenchTestHelper.getProject();
+      IResource _findMember_2 = _project_2.findMember("/xtend-gen/Xtend.java");
+      Assert.assertNotNull(_plus_2, _findMember_2);
+      IProject _project_3 = this._workbenchTestHelper.getProject();
+      IJavaProject _create = JavaCore.create(_project_3);
       IType type = _create.findType("Xtend");
       Assert.assertNotNull("Couldn\'t find type \'Xtend\'.", type);
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();

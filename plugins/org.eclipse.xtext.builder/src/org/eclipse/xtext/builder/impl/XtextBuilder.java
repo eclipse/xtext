@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -67,6 +70,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
 	}
+	
+	public static boolean isRunning = false;
+	public static boolean wasRunning = false;
+	public static List<String> messages = newArrayList();
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -74,6 +81,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		long startTime = System.currentTimeMillis();
 		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
+			isRunning = true;
 			task.start();
 			if (monitor != null) {
 				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
@@ -86,15 +94,19 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			}
 			SubMonitor progress = SubMonitor.convert(monitor, 1);
 			if (kind == FULL_BUILD) {
+				messages.add("Doing Full Build");
 				fullBuild(progress.newChild(1), IBuildFlag.RECOVERY_BUILD.isSet(args));
 			} else {
 				IResourceDelta delta = getDelta(getProject());
 				if (delta == null || isOpened(delta)) {
+					messages.add("Doing Full Build 2");
 					fullBuild(progress.newChild(1), IBuildFlag.RECOVERY_BUILD.isSet(args));
 				} else {
+					messages.add("Doing Incremental Build "+delta);
 					incrementalBuild(delta, progress.newChild(1));
 				}
 			}
+			wasRunning = true;
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
 			throw e;
@@ -108,6 +120,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				monitor.done();
 			log.info("Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms");
 			task.stop();
+			isRunning = false;
 		}
 		return getProject().getReferencedProjects();
 	}

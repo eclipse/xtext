@@ -25,10 +25,12 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JdtReferenceFinder
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler
-import org.junit.AfterClass
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.eclipse.xtext.builder.impl.XtextBuilder
 
 class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
@@ -40,13 +42,15 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
 	@Inject extension JvmModelFindReferenceHandler 
 	
-	@AfterClass def static cleanup() {
+	@Before @After def cleanup() {
 		cleanWorkspace
 	}
 	
 	@Test def void testFindClassRef() {
-		createFile("Xtend.xtend", "class Xtend {}")
-		createFile("JavaRef.java", '''
+		XtextBuilder.wasRunning = false
+		XtextBuilder.messages.clear
+		assertTrue(createFile("Xtend.xtend", "class Xtend {}").exists)
+		assertTrue(createFile("JavaRef.java", '''
 			public class JavaRef {
 				private Xtend x;
 				
@@ -62,10 +66,13 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 					Xtend y;
 				}
 			}
-		'''.toString)
+		'''.toString).exists)
 		waitForAutoBuild
-		val file = project.findMember("/xtend-gen/Xtend.java")
-		assertNotNull("Not even the file was there.", file)
+		assertTrue("Builder wasn't running : "+XtextBuilder.messages,XtextBuilder.wasRunning)
+		assertFalse("Builder is still running : "+XtextBuilder.messages, XtextBuilder.isRunning)
+		assertNotNull("Couldn't find 'src/Xtend.xtend'.", project.findMember("/src/Xtend.xtend"))
+		assertNotNull("Couldn't find 'src/JavaRef.java'.", project.findMember("/src/JavaRef.java"))
+		assertNotNull("Couldn't find 'xtend-gen/Xtend.java'. Builder info : "+XtextBuilder.messages, project.findMember("/xtend-gen/Xtend.java"))
 		var IType type = JavaCore.create(project).findType("Xtend")
 		assertNotNull("Couldn't find type 'Xtend'.", type)
 		val constructor = type.getMethod("Xtend", newArrayList)
