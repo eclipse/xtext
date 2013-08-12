@@ -127,7 +127,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       IResourcesSetupUtil.waitForAutoBuild();
       IProject _project = this._workbenchTestHelper.getProject();
       IJavaProject _create = JavaCore.create(_project);
-      final IType type = _create.findType("Xtend");
+      IType type = _create.findType("Xtend");
+      Assert.assertNotNull("Couldn\'t find type \'Xtend\'.", type);
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
       final IMethod constructor = type.getMethod("Xtend", ((String[])Conversions.unwrapArray(_newArrayList, String.class)));
       ArrayList<Object> _findReferences = this.findReferences(type, constructor);
