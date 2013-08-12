@@ -35,7 +35,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
@@ -207,13 +206,11 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 						if (proxy.eIsProxy()) {
 							URI uri = ((InternalEObject)proxy).eProxyURI();
 							importedType = (JvmDeclaredType) importSection.eResource().getResourceSet().getEObject(uri, true);
-						} else {
-							importedType = (JvmDeclaredType) proxy;
-						}
+						} 
 					} else {
 						importedType = importDeclaration.getImportedType();
 					}
-					if (!importedType.eIsProxy()) {
+					if (importedType != null && !importedType.eIsProxy()) {
 						if (concreteImports == null || importedNames == null /* to make JDT happy */) {
 							concreteImports = Lists.newArrayListWithCapacity(10);
 							importedNames = Lists.newArrayListWithCapacity(10);
