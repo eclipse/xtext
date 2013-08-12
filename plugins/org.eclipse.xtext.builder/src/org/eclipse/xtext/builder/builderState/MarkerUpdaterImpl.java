@@ -48,8 +48,10 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	 * {@inheritDoc}
 	 */
 	public void updateMarkers(Delta delta, @Nullable ResourceSet resourceSet, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources, 1);
-		subMonitor.subTask(Messages.MarkerUpdaterImpl_ValidateResources);
+		String lastSegment = delta.getUri().lastSegment();
+		String message = Messages.MarkerUpdaterImpl_Validate + " " + (lastSegment==null?"resource":lastSegment);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, message, 1);
+		subMonitor.subTask(message);
 
 		if (subMonitor.isCanceled()) {
 			throw new OperationCanceledException();
