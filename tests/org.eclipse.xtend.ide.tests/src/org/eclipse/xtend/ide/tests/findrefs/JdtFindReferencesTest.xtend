@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.tests.findrefs
 
 import com.google.inject.Inject
-import org.apache.log4j.Logger
 import org.eclipse.jdt.core.IField
 import org.eclipse.jdt.core.IJavaElement
 import org.eclipse.jdt.core.IMethod
@@ -65,7 +64,9 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			}
 		'''.toString)
 		waitForAutoBuild
-		var IType type = JavaCore::create(project).findType("Xtend")
+		val file = project.findMember("/xtend-gen/Xtend.java")
+		assertNotNull("Not even the file was there.", file)
+		var IType type = JavaCore.create(project).findType("Xtend")
 		assertNotNull("Couldn't find type 'Xtend'.", type)
 		val constructor = type.getMethod("Xtend", newArrayList)
 		findReferences(type, constructor) => [
