@@ -49,7 +49,6 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
-
 		Composite programmingProblems = createSection("Potential programming problems", composite, nColumns);
 		fillPotentialProgrammingProblemsSection(new ComboBoxBuilder(this, programmingProblems, defaultIndent));
 
@@ -73,6 +72,7 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		comboBoxBuilder.addComboBox(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "Null safe call of primitive valued feature:");
 		comboBoxBuilder.addComboBox(IssueCodes.EQUALS_WITH_NULL, "Equals comparison with 'null':");
 		comboBoxBuilder.addComboBox(IssueCodes.UNHANDLED_EXCEPTION, "Unhandled checked exceptions:");
+		comboBoxBuilder.addComboBox(IssueCodes.JAVA_STYLE_TYPE_CAST, "Type cast with Java syntax:");
 	}
 
 	protected void fillRestrictedApiSection(ComboBoxBuilder comboBoxBuilder) {
