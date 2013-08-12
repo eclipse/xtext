@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.Set;
 import java.util.jar.Manifest;
@@ -25,6 +26,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
@@ -36,9 +38,11 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
@@ -49,11 +53,8 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.junit.Assert;
 
-import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -91,28 +92,35 @@ public class WorkbenchTestHelper extends Assert {
 
 	public void tearDown() throws Exception {
 		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
-		for (IFile file : getFiles()) {
-			try {
-				file.delete(true, null);
-			} catch (Exception exc) {
-				throw new RuntimeException(exc);
-			}
-		}
-		getFiles().clear();
-		IFolder binFolder = getProject(false).getFolder("bin");
-		if (binFolder.exists()) {
-			for (IResource binMember : binFolder.members()) {
-				try {
-					binMember.delete(IResource.DEPTH_INFINITE, null);
-				} catch (Exception exc) {
-					throw new RuntimeException(exc);
+		new WorkspaceModifyOperation() {
+			
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+					InterruptedException {
+				for (IFile file : getFiles()) {
+					try {
+						file.delete(true, null);
+					} catch (Exception exc) {
+						throw new RuntimeException(exc);
+					}
+				}
+				getFiles().clear();
+				IFolder binFolder = getProject(false).getFolder("bin");
+				if (binFolder.exists()) {
+					for (IResource binMember : binFolder.members()) {
+						try {
+							binMember.delete(IResource.DEPTH_INFINITE, null);
+						} catch (Exception exc) {
+							throw new RuntimeException(exc);
+						}
+					}
+				}
+				if (isLazyCreatedProject) {
+					deleteProject(getProject(false));
+					isLazyCreatedProject = false;
 				}
 			}
-		}
-		if (isLazyCreatedProject) {
-			deleteProject(getProject(false));
-			isLazyCreatedProject = false;
-		}
+		}.run(null);
 	}
 
 	public Set<IFile> getFiles() {
