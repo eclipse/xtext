@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.core.IField;
@@ -43,6 +44,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -55,6 +57,13 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class JdtFindReferencesTest extends AbstractXtendUITestCase {
+  private final static Logger LOG = new Function0<Logger>() {
+    public Logger apply() {
+      Logger _logger = Logger.getLogger(JdtFindReferencesTest.class);
+      return _logger;
+    }
+  }.apply();
+  
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
@@ -125,9 +134,43 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       String _string = _builder.toString();
       this._workbenchTestHelper.createFile("JavaRef.java", _string);
       IResourcesSetupUtil.waitForAutoBuild();
-      IProject _project = this._workbenchTestHelper.getProject();
-      IJavaProject _create = JavaCore.create(_project);
-      final IType type = _create.findType("Xtend");
+      final long now = System.currentTimeMillis();
+      IType type = null;
+      boolean _and = false;
+      boolean _equals = Objects.equal(type, null);
+      if (!_equals) {
+        _and = false;
+      } else {
+        long _currentTimeMillis = System.currentTimeMillis();
+        long _minus = (_currentTimeMillis - 10000);
+        boolean _greaterThan = (now > _minus);
+        _and = (_equals && _greaterThan);
+      }
+      boolean _while = _and;
+      while (_while) {
+        {
+          IProject _project = this._workbenchTestHelper.getProject();
+          IJavaProject _create = JavaCore.create(_project);
+          IType _findType = _create.findType("Xtend");
+          type = _findType;
+          boolean _equals_1 = Objects.equal(type, null);
+          if (_equals_1) {
+            JdtFindReferencesTest.LOG.error("Type wasn\'t there.");
+          }
+        }
+        boolean _and_1 = false;
+        boolean _equals_1 = Objects.equal(type, null);
+        if (!_equals_1) {
+          _and_1 = false;
+        } else {
+          long _currentTimeMillis_1 = System.currentTimeMillis();
+          long _minus_1 = (_currentTimeMillis_1 - 10000);
+          boolean _greaterThan_1 = (now > _minus_1);
+          _and_1 = (_equals_1 && _greaterThan_1);
+        }
+        _while = _and_1;
+      }
+      Assert.assertNotNull("Couldn\'t find type \'Xtend\'.", type);
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
       final IMethod constructor = type.getMethod("Xtend", ((String[])Conversions.unwrapArray(_newArrayList, String.class)));
       ArrayList<Object> _findReferences = this.findReferences(type, constructor);

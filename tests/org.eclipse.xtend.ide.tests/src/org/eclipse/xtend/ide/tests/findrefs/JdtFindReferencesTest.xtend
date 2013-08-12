@@ -29,8 +29,11 @@ import org.junit.AfterClass
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.apache.log4j.Logger
 
 class JdtFindReferencesTest extends AbstractXtendUITestCase {
+	
+	val static LOG = Logger.getLogger(JdtFindReferencesTest)
 	
 	@Inject extension WorkbenchTestHelper
 
@@ -64,7 +67,17 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			}
 		'''.toString)
 		waitForAutoBuild
-		val IType type = JavaCore::create(project).findType("Xtend")
+		val now = System.currentTimeMillis
+		var IType type = null
+		// on Galileo the type sometimes cannot be found.
+		// maybe there was no build, but maybe the 'waitForAutoBuild' doesn't work well.
+		while (type == null && now > System.currentTimeMillis-10000) {
+			type = JavaCore::create(project).findType("Xtend")
+			if (type == null) {
+				LOG.error("Type wasn't there.")
+			}
+		}
+		assertNotNull("Couldn't find type 'Xtend'.", type)
 		val constructor = type.getMethod("Xtend", newArrayList)
 		findReferences(type, constructor) => [
 			assertEquals(4, size)
@@ -74,7 +87,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			assertTrue(filter(IMethod).exists[elementName == 'baz'])
 		]
 	}
-
+	
 	@Test def void testFindMethodRef() {
 		createFile("Xtend.xtend", "class Xtend { def foo() { 0 }}")
 		createFile("JavaRef.java", '''
