@@ -61,6 +61,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalPostProcesso
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
+import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
+import org.eclipse.xtext.ui.editor.copyqualifiedname.DefaultCopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
@@ -378,6 +380,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 */
 	public Class<? extends ITraceURIConverter> bindITraceURIConverter() {
 		return DefaultTraceURIConverter.class;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
+		return DefaultCopyQualifiedNameService.class;
 	}
 	
 }

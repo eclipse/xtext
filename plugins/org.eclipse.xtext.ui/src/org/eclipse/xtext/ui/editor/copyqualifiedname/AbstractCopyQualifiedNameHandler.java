@@ -10,11 +10,7 @@ package org.eclipse.xtext.ui.editor.copyqualifiedname;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Inject;
@@ -36,38 +32,26 @@ public abstract class AbstractCopyQualifiedNameHandler extends AbstractHandler {
 	protected abstract String getQualifiedName(ExecutionEvent event);
 
 	protected String getQualifiedName(EObject selectedElement) {
-		if (selectedElement.eIsProxy()) {
+		CopyQualifiedNameService copyQualifiedNameService = getCopyQualifiedNameService(selectedElement);
+		if (copyQualifiedNameService == null) {
 			return null;
 		}
-		QualifiedName fullyQualifiedName = getFullyQualifiedName(selectedElement);
-		return toString(selectedElement, fullyQualifiedName);
+		return copyQualifiedNameService.getQualifiedName(selectedElement, null);
 	}
 
-	private QualifiedName getFullyQualifiedName(EObject selectedElement) {
+	protected String getQualifiedName(EObject selectedElement, EObject context) {
+		CopyQualifiedNameService copyQualifiedNameService = getCopyQualifiedNameService(selectedElement);
+		if (copyQualifiedNameService == null) {
+			return null;
+		}
+		return copyQualifiedNameService.getQualifiedName(selectedElement, context);
+	}
+
+	protected CopyQualifiedNameService getCopyQualifiedNameService(EObject selectedElement) {
 		if (selectedElement == null) {
 			return null;
 		}
-		return getQualifiedNameProvider(selectedElement).getFullyQualifiedName(selectedElement);
-	}
-
-	private String toString(EObject selectedElement, QualifiedName fullyQualifiedName) {
-		if (fullyQualifiedName == null) {
-			return null;
-		}
-		return getQualifiedNameConverter(selectedElement).toString(fullyQualifiedName);
-	}
-
-	private IQualifiedNameProvider getQualifiedNameProvider(EObject selectedElement) {
-		return getService(selectedElement, IQualifiedNameProvider.class);
-	}
-
-	private IQualifiedNameConverter getQualifiedNameConverter(EObject selectedElement) {
-		return getService(selectedElement, IQualifiedNameConverter.class);
-	}
-
-	private <T> T getService(EObject selectedElement, Class<T> serviceClass) {
-		URI uri = selectedElement.eResource().getURI();
-		return registry.getResourceServiceProvider(uri).get(serviceClass);
+		return registry.getResourceServiceProvider(selectedElement.eResource().getURI()).get(CopyQualifiedNameService.class);
 	}
 
 }
