@@ -25,7 +25,8 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JdtReferenceFinder
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler
-import org.junit.AfterClass
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
@@ -40,13 +41,13 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
 	@Inject extension JvmModelFindReferenceHandler 
 	
-	@AfterClass def static cleanup() {
-		cleanWorkspace
+	@Before @After def cleanup() {
+		_workbenchTestHelper.tearDown
 	}
 	
 	@Test def void testFindClassRef() {
-		createFile("Xtend.xtend", "class Xtend {}")
-		createFile("JavaRef.java", '''
+		assertTrue(createFile("Xtend.xtend", "class Xtend { }").exists)
+		assertTrue(createFile("JavaRef.java", '''
 			public class JavaRef {
 				private Xtend x;
 				
@@ -62,12 +63,18 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 					Xtend y;
 				}
 			}
-		'''.toString)
-		waitForAutoBuild
-		val file = project.findMember("/xtend-gen/Xtend.java")
-		assertNotNull("Not even the file was there.", file)
+		'''.toString).exists)
+		waitForAutoBuild;
+		assertNotNull("Couldn't find 'src/Xtend.xtend'.", project.findMember("/src/Xtend.xtend"))
+		assertNotNull("Couldn't find 'src/JavaRef.java'.", project.findMember("/src/JavaRef.java"))
+		val member = project.findMember("/xtend-gen/Xtend.java")
+		if (member == null) {
+			assertNotNull("Couldn't find 'xtend-gen/Xtend.java'.", member)
+		}
 		var IType type = JavaCore.create(project).findType("Xtend")
-		assertNotNull("Couldn't find type 'Xtend'.", type)
+		if (type == null) {
+			assertNotNull("Couldn't find type 'Xtend'.", type)
+		}
 		val constructor = type.getMethod("Xtend", newArrayList)
 		findReferences(type, constructor) => [
 			assertEquals(4, size)
