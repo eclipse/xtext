@@ -125,9 +125,43 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       String _string = _builder.toString();
       this._workbenchTestHelper.createFile("JavaRef.java", _string);
       IResourcesSetupUtil.waitForAutoBuild();
-      IProject _project = this._workbenchTestHelper.getProject();
-      IJavaProject _create = JavaCore.create(_project);
-      final IType type = _create.findType("Xtend");
+      final long now = System.currentTimeMillis();
+      IType type = null;
+      boolean _and = false;
+      boolean _equals = Objects.equal(type, null);
+      if (!_equals) {
+        _and = false;
+      } else {
+        long _currentTimeMillis = System.currentTimeMillis();
+        long _minus = (_currentTimeMillis - 1000);
+        boolean _greaterThan = (now > _minus);
+        _and = (_equals && _greaterThan);
+      }
+      boolean _while = _and;
+      while (_while) {
+        {
+          IProject _project = this._workbenchTestHelper.getProject();
+          IJavaProject _create = JavaCore.create(_project);
+          IType _findType = _create.findType("Xtend");
+          type = _findType;
+          boolean _equals_1 = Objects.equal(type, null);
+          if (_equals_1) {
+            System.err.println("Type wasn\'t there.");
+          }
+        }
+        boolean _and_1 = false;
+        boolean _equals_1 = Objects.equal(type, null);
+        if (!_equals_1) {
+          _and_1 = false;
+        } else {
+          long _currentTimeMillis_1 = System.currentTimeMillis();
+          long _minus_1 = (_currentTimeMillis_1 - 1000);
+          boolean _greaterThan_1 = (now > _minus_1);
+          _and_1 = (_equals_1 && _greaterThan_1);
+        }
+        _while = _and_1;
+      }
+      Assert.assertNotNull("Couldn\'t find type \'Xtend\'.", type);
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
       final IMethod constructor = type.getMethod("Xtend", ((String[])Conversions.unwrapArray(_newArrayList, String.class)));
       ArrayList<Object> _findReferences = this.findReferences(type, constructor);

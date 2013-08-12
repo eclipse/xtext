@@ -64,7 +64,17 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			}
 		'''.toString)
 		waitForAutoBuild
-		val IType type = JavaCore::create(project).findType("Xtend")
+		val now = System.currentTimeMillis
+		var IType type = null
+		// on Galileo the type sometimes cannot be found.
+		// maybe there was no build, but maybe the 'waitForAutoBuild' doesn't work well.
+		while (type == null && now > System.currentTimeMillis-1000) {
+			type = JavaCore::create(project).findType("Xtend")
+			if (type == null) {
+				System.err.println("Type wasn't there.")
+			}
+		}
+		assertNotNull("Couldn't find type 'Xtend'.", type)
 		val constructor = type.getMethod("Xtend", newArrayList)
 		findReferences(type, constructor) => [
 			assertEquals(4, size)
