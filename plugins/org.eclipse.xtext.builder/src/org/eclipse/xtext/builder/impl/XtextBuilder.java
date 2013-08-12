@@ -67,7 +67,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
 	}
-
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
