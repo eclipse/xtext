@@ -41,8 +41,8 @@ public @interface LinesExpectation {
 
 		private final LinesExpectation annotation;
 
-		public LinesExpectationImpl(LinesExpectation annotation, String document, IExpectationRegion region) {
-			super(document, region);
+		public LinesExpectationImpl(LinesExpectation annotation, ITargetSyntaxSupport targetSyntax, IExpectationRegion region) {
+			super(targetSyntax, region);
 			this.annotation = annotation;
 		}
 
@@ -102,7 +102,6 @@ public @interface LinesExpectation {
 	}
 
 	public class LinesExpectationParser extends AbstractExpectationParser implements ISingleParameterParser {
-
 		private final LinesExpectation annotation;
 
 		public LinesExpectationParser(LinesExpectation cfg) {
@@ -116,11 +115,28 @@ public @interface LinesExpectation {
 
 		public IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IExpectationRegion region = claimRegion(invocation, paramIndex);
-			if (region != null) {
-				String document = invocation.getFile().getDocument();
-				return new LinesExpectationImpl(annotation, document, region);
-			}
+			if (region != null)
+				return new LinesExpectationProvider(annotation, region);
 			return null;
+		}
+	}
+
+	public class LinesExpectationProvider extends AbstractExpectationProvider<ILinesExpectation> {
+
+		private final LinesExpectation annotation;
+
+		public LinesExpectationProvider(LinesExpectation cfg, IExpectationRegion region) {
+			super(region);
+			this.annotation = cfg;
+		}
+
+		@Override
+		protected ILinesExpectation createExpectation(ITargetSyntaxSupport targetSyntax) {
+			return new LinesExpectationImpl(annotation, targetSyntax, getClaimedRegion());
+		}
+
+		public LinesExpectation getAnnotation() {
+			return annotation;
 		}
 
 	}

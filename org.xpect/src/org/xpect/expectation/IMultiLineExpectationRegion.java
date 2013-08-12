@@ -7,9 +7,5 @@ package org.xpect.expectation;
 public interface IMultiLineExpectationRegion extends IExpectationRegion {
 	String getIndentation();
 
-	String getSeparator();
-
-	int getOpeningSeparatorOffset();
-
 	int getClosingSeparatorOffset();
 }

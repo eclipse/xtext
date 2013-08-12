@@ -17,6 +17,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry;
 import org.xpect.Environment;
+import org.xpect.expectation.ITargetSyntaxSupport;
 import org.xpect.parameter.ParameterProvider;
 import org.xpect.parameter.XpectParameterAdapter;
 import org.xpect.setup.AbstractXpectSetup;
@@ -63,6 +64,7 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 		Injector injector = frameworkCtx.getInjector();
 		injector.injectMembers(frameworkCtx.getTestInstance());
 		XtextResource res = loadThisResource(injector, frameworkCtx, userCtx);
+		frameworkCtx.installParameterValue(ITargetSyntaxSupport.Annotation.class, new ParameterProvider(new XtextTargetSyntaxSupport(res)));
 		frameworkCtx.installParameterValue(ThisResource.class, new ParameterProvider(res));
 		frameworkCtx.installParameterValue(ThisOffset.class, new ThisOffsetProvider(frameworkCtx.getXpectInvocation(), res));
 		if (!res.getContents().isEmpty())

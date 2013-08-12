@@ -1,6 +1,7 @@
 package org.xpect.text;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
@@ -16,52 +17,26 @@ import com.google.common.collect.Sets;
  */
 public class Text {
 
-	private final String text;
+	private final CharSequence text;
 
-	public Text(String text) {
+	public Text(CharSequence text) {
 		super();
-		if (Strings.isEmpty(text))
+		if (text == null || text.length() == 0)
 			throw new NullPointerException();
 		this.text = text;
 	}
 
-	public String with(IPatch patch) {
-		List<IReplacement> replacements = Lists.newArrayList();
-		Stack<IPatch> patches = new Stack<IPatch>();
-		patches.push(patch);
-		while (!patches.isEmpty()) {
-			IPatch p = patches.pop();
-			for (IChange c : p.getChanges())
-				if (c instanceof IPatch)
-					patches.push((IPatch) c);
-				else if (c instanceof IReplacement)
-					replacements.add((IReplacement) c);
-		}
-		return with(replacements);
-	}
-
-	public String with(Collection<IReplacement> replacements) {
-		if (replacements.isEmpty())
-			return text;
-		Set<IReplacement> sortedReplacements = Sets.newTreeSet(new RegionOffsetComparator());
-		for (IReplacement rep : replacements)
-			if (!sortedReplacements.add(rep))
-				throw new IllegalStateException("Multiple replacements for same offset");
-		int last = 0;
+	public String findIndentation(int offset) {
+		int nl = text.toString().lastIndexOf("\n", offset);
+		if (nl < 0)
+			nl = 0;
 		StringBuilder result = new StringBuilder();
-		for (IReplacement rep : sortedReplacements) {
-			if (rep.getOffset() < last)
-				throw new IllegalStateException("Overlapping replacements");
-			result.append(text.substring(last, rep.getOffset()));
-			result.append(rep.getReplacement());
-			last = rep.getOffset() + rep.getLength();
-		}
-		if (last < text.length())
-			result.append(text.substring(last));
+		for (int i = nl + 1; i < text.length() && Character.isWhitespace(text.charAt(i)) && text.charAt(i) != '\n'; i++)
+			result.append(text.charAt(i));
 		return result.toString();
 	}
 
-	public String getText() {
+	public CharSequence getText() {
 		return text;
 	}
 
@@ -84,6 +59,47 @@ public class Text {
 		int endIndex = other.length() - suffix + 1;
 		String replacement = prefix < endIndex ? other.substring(prefix, endIndex) : "";
 		return new Replacement(prefix, length, replacement);
+	}
+
+	public String with(Collection<IReplacement> replacements) {
+		if (replacements.isEmpty())
+			return text.toString();
+		Set<IReplacement> sortedReplacements = Sets.newTreeSet(new RegionOffsetComparator());
+		for (IReplacement rep : replacements)
+			if (!sortedReplacements.add(rep))
+				throw new IllegalStateException("Multiple replacements for same offset");
+		int last = 0;
+		StringBuilder result = new StringBuilder();
+		for (IReplacement rep : sortedReplacements) {
+			if (rep.getOffset() < last)
+				throw new IllegalStateException("Overlapping replacements");
+			result.append(text.toString().substring(last, rep.getOffset()));
+			result.append(rep.getReplacement());
+			last = rep.getOffset() + rep.getLength();
+		}
+		if (last < text.length())
+			result.append(text.toString().substring(last));
+		return result.toString();
+	}
+
+	public String with(IChange change) {
+		if (change instanceof IPatch) {
+			List<IReplacement> replacements = Lists.newArrayList();
+			Stack<IPatch> patches = new Stack<IPatch>();
+			patches.push((IPatch) change);
+			while (!patches.isEmpty()) {
+				IPatch p = patches.pop();
+				for (IChange c : p.getChanges())
+					if (c instanceof IPatch)
+						patches.push((IPatch) c);
+					else if (c instanceof IReplacement)
+						replacements.add((IReplacement) c);
+			}
+			return with(replacements);
+		} else if (change instanceof IReplacement) {
+			return with(Collections.singleton((IReplacement) change));
+		}
+		throw new IllegalStateException();
 	}
 
 }

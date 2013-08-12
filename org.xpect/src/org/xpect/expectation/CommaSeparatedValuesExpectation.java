@@ -38,8 +38,9 @@ public @interface CommaSeparatedValuesExpectation {
 	public class CommaSeparatedValuesExpectationImpl extends AbstractExpectation implements ICommaSeparatedValuesExpectation {
 		private final CommaSeparatedValuesExpectation annotation;
 
-		public CommaSeparatedValuesExpectationImpl(CommaSeparatedValuesExpectation annotation, String document, IExpectationRegion region) {
-			super(document, region);
+		public CommaSeparatedValuesExpectationImpl(CommaSeparatedValuesExpectation annotation, ITargetSyntaxSupport syntax,
+				IExpectationRegion region) {
+			super(syntax, region);
 			this.annotation = annotation;
 		}
 
@@ -149,7 +150,6 @@ public @interface CommaSeparatedValuesExpectation {
 	}
 
 	public class CommaSeparatedValuesExpectationParser extends AbstractExpectationParser implements ISingleParameterParser {
-
 		private final CommaSeparatedValuesExpectation annotation;
 
 		public CommaSeparatedValuesExpectationParser(CommaSeparatedValuesExpectation cfg) {
@@ -163,13 +163,28 @@ public @interface CommaSeparatedValuesExpectation {
 
 		public IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IExpectationRegion region = claimRegion(invocation, paramIndex);
-			if (region != null) {
-				String document = invocation.getFile().getDocument();
-				return new CommaSeparatedValuesExpectationImpl(annotation, document, region);
-			}
+			if (region != null)
+				return new CommaSeparatedValuesExpectationProvider(annotation, region);
 			return null;
 		}
+	}
 
+	public class CommaSeparatedValuesExpectationProvider extends AbstractExpectationProvider<ICommaSeparatedValuesExpectation> {
+		private final CommaSeparatedValuesExpectation annotation;
+
+		public CommaSeparatedValuesExpectationProvider(CommaSeparatedValuesExpectation annotation, IExpectationRegion region) {
+			super(region);
+			this.annotation = annotation;
+		}
+
+		@Override
+		protected ICommaSeparatedValuesExpectation createExpectation(ITargetSyntaxSupport targetSyntax) {
+			return new CommaSeparatedValuesExpectationImpl(annotation, targetSyntax, getClaimedRegion());
+		}
+
+		public CommaSeparatedValuesExpectation getAnnotation() {
+			return annotation;
+		}
 	}
 
 	boolean caseSensitive() default true;

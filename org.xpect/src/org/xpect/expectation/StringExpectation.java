@@ -33,8 +33,8 @@ public @interface StringExpectation {
 
 		private final StringExpectation annotation;
 
-		public StringExpectationImpl(StringExpectation annotation, String document, IExpectationRegion region) {
-			super(document, region);
+		public StringExpectationImpl(StringExpectation annotation, ITargetSyntaxSupport targetSyntax, IExpectationRegion region) {
+			super(targetSyntax, region);
 			this.annotation = annotation;
 		}
 
@@ -65,7 +65,6 @@ public @interface StringExpectation {
 	}
 
 	public class StringExpectationParser extends AbstractExpectationParser implements ISingleParameterParser {
-
 		private final StringExpectation annotation;
 
 		public StringExpectationParser(StringExpectation cfg) {
@@ -79,13 +78,29 @@ public @interface StringExpectation {
 
 		public IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IExpectationRegion region = claimRegion(invocation, paramIndex);
-			if (region != null) {
-				String document = invocation.getFile().getDocument();
-				return new StringExpectationImpl(annotation, document, region);
-			}
+			if (region != null)
+				return new StringExpectationProvider(annotation, region);
 			return null;
 		}
+	}
 
+	public class StringExpectationProvider extends AbstractExpectationProvider<IStringExpectation> {
+
+		private final StringExpectation annotation;
+
+		public StringExpectationProvider(StringExpectation cfg, IExpectationRegion region) {
+			super(region);
+			this.annotation = cfg;
+		}
+
+		@Override
+		protected IStringExpectation createExpectation(ITargetSyntaxSupport targetSyntax) {
+			return new StringExpectationImpl(annotation, targetSyntax, getClaimedRegion());
+		}
+
+		public StringExpectation getAnnotation() {
+			return annotation;
+		}
 	}
 
 	boolean caseSensitive() default true;
