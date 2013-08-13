@@ -8,9 +8,13 @@
 package org.xpect.ui.junit;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement;
+import org.eclipse.jdt.junit.model.ITestSuiteElement;
 import org.eclipse.jdt.junit.runners.IRunnerUIHandler;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.viewers.StyledCellLabelProvider;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.xpect.ui.util.TestDataUIUtil;
@@ -44,6 +48,26 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 		return false;
 	}
 
+	public String getSimpleLabel(ViewPart part, ITestElement element) {
+		return null;
+	}
+
+	public StyledString getStyledLabel(ViewPart part, ITestElement element, int layout) {
+		String label;
+		if (element instanceof ITestCaseElement)
+			label = ((ITestCaseElement) element).getTestMethodName();
+		else if (element instanceof ITestSuiteElement)
+			label = ((ITestSuiteElement) element).getSuiteTypeName();
+		else
+			label = "(unknown element type)";
+		int colon = label.indexOf(':');
+		if (colon >= 0) {
+			StyledString title = new StyledString(label.substring(0, colon));
+			return StyledCellLabelProvider.styleDecoratedString(label, StyledString.QUALIFIER_STYLER, title);
+		}
+		return new StyledString(label);
+	}
+
 	public boolean handleDoubleClick(ViewPart part, ITestElement ctx) {
 		CompareAction compareAction = new CompareAction(ctx);
 		if (compareAction.isEnabled()) {
@@ -58,16 +82,4 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 		}
 		return false;
 	}
-
-	public String getSimpleLabel(ViewPart part, ITestElement element) {
-		return null;
-		// if(element instanceof ITestCaseElement)
-		// return ((ITestCaseElement))
-		// Map<String, String> parsed = parse(element);
-		// String title = parsed.get("title");
-		// if (!Strings.isEmpty(title))
-		// return title;
-		// return "unknown type:" + element.getClass();
-	}
-
 }

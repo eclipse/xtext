@@ -50,7 +50,7 @@ public class OpenJavaMethodAction extends Action {
 	@Override
 	public void run() {
 		try {
-			IType type = TypeUtil.findType(element.getJavaProject(), element.getMethod());
+			IType type = TypeUtil.findType(element.getJavaProject(), element.getClazz());
 			if (type != null) {
 				IMethod iMethod;
 				iMethod = findMethod(type, element.getMethod());
