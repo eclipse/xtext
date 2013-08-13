@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-SymbolicName: org.xpect;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.apache.log4j;bundle-version="1.2.0";visibility:=reexport,
- org.junit;bundle-version="4.0.0";visibility:=reexport,
+ org.junit;bundle-version="4.11.0";visibility:=reexport,
  org.antlr.runtime;bundle-version="3.2.0",
  org.eclipse.xtext;bundle-version="2.4.0";visibility:=reexport,
  org.eclipse.xtext.util;bundle-version="2.4.0";visibility:=reexport,
