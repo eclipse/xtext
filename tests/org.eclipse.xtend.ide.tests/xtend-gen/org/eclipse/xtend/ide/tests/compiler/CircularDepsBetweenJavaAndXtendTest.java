@@ -156,7 +156,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile file = this.workbenchTestHelper.createFile("test/FooUser.xtend", _builder_2.toString());
-      IResourcesSetupUtil.fullBuild();
+      IResourcesSetupUtil.waitForAutoBuild();
       IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       int _length = _findMarkers.length;
       Assert.assertEquals(0, _length);

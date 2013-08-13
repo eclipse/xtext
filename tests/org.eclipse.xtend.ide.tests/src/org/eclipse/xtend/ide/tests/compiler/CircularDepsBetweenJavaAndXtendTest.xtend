@@ -87,8 +87,7 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-//		waitForAutoBuild
-		fullBuild
+		waitForAutoBuild
 		assertEquals(0,file.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
 	}
 	

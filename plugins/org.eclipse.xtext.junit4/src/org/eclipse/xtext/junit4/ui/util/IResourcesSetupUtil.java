@@ -254,8 +254,6 @@ public class IResourcesSetupUtil {
 				wasInterrupted = true;
 			}
 		} while (wasInterrupted);
-		// Added wait for auto build, since somehow not doing this causes race condition problems...
-		waitForAutoBuild();
 	}
 	
 	public static void cleanBuild() throws CoreException {
