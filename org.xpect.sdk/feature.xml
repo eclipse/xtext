@@ -4,15 +4,15 @@
       label="Xpect SDK Feature "
       version="0.1.0.qualifier">
 
+   <includes
+         id="org.xpect.sdk.source"
+         version="0.0.0"/>
+
    <requires>
       <import feature="org.eclipse.xtext.runtime" version="2.3.1.v201208210947"/>
       <import feature="org.eclipse.xtext.xbase" version="2.3.1.v201208210947"/>
       <import plugin="org.eclipse.jdt.junit.runners" version="0.1.0"/>
    </requires>
-   
-   <includes
-         id="org.xpect.sdk.source"
-         version="0.0.0"/>
 
    <plugin
          id="org.xpect"
@@ -30,6 +30,20 @@
 
    <plugin
          id="org.xpect.xtext.lib"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.junit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.hamcrest.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
