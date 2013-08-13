@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 
 /**
  * A resource set that is capable of resolving classpath URIs.
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
  * 
  * @author Jan Köhnlein
  * @author Sven Efftinge
+ * @author Sebastian Zarnekow - Default registration of {@link XtextPlatformResourceURIHandler}
  */
 public class XtextResourceSet extends ResourceSetImpl {
 	
@@ -127,7 +129,22 @@ public class XtextResourceSet extends ResourceSetImpl {
     public XtextResourceSet() {
     	setURIResourceMap(new HashMap<URI,Resource>());
 		resources = createResourceList();
+		
+		initializeDefaultLoadOptions();
     }
+
+    /**
+     * Adds a {@link XtextPlatformResourceURIHandler} to the default load
+     * options of this resource set.
+     * 
+     * Clients who don't want this behavior can override this method.
+     * 
+     * @since 2.4
+     */
+	protected void initializeDefaultLoadOptions() {
+		Map<Object, Object> defaultLoadOptions = getLoadOptions();
+		defaultLoadOptions.put(XMLResource.OPTION_URI_HANDLER, new XtextPlatformResourceURIHandler());
+	}
 
 	/**
 	 * Create the concrete list that will contain the resources. 

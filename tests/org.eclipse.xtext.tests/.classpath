@@ -6,6 +6,7 @@
 	<classpathentry kind="src" path="emf-gen"/>
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="xtend-gen"/>
+	<classpathentry kind="src" path="suites"/>
 	<classpathentry exported="true" kind="lib" path="lib/simple.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
