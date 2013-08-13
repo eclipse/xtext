@@ -7,14 +7,15 @@
  */
 package org.eclipse.xtend.core.macro;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
@@ -22,22 +23,19 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Sven Efftinge
  */
 @SuppressWarnings("all")
 public class ActiveAnnotationContext {
-  private final static Logger LOG = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(ActiveAnnotationContext.class);
-      return _logger;
-    }
-  }.apply();
-  
   private final List<XtendAnnotationTarget> _annotatedSourceElements = new Function0<List<XtendAnnotationTarget>>() {
     public List<XtendAnnotationTarget> apply() {
       ArrayList<XtendAnnotationTarget> _newArrayList = CollectionLiterals.<XtendAnnotationTarget>newArrayList();
@@ -74,9 +72,8 @@ public class ActiveAnnotationContext {
       if ((t instanceof VirtualMachineError)) {
         throw t;
       }
+      final String msg = this.getMessageWithStackTrace(t);
       final EList<Diagnostic> errors = resource.getErrors();
-      String _plus = ("Error during annotation processing :" + t);
-      final String msg = (_plus + " (see error log for details)");
       final List<? extends EObject> sourceElements = this.getAnnotatedSourceElements();
       for (final EObject target : sourceElements) {
         boolean _matched = false;
@@ -104,14 +101,60 @@ public class ActiveAnnotationContext {
           errors.add(_eObjectDiagnosticImpl);
         }
       }
-      URI _uRI = resource.getURI();
-      String _plus_1 = ("Error processing " + _uRI);
-      String _plus_2 = (_plus_1 + " with processor ");
-      Object _processorInstance = this.getProcessorInstance();
-      String _plus_3 = (_plus_2 + _processorInstance);
-      ActiveAnnotationContext.LOG.error(_plus_3, t);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public String getMessageWithStackTrace(final Throwable t) {
+    final Function1<Throwable,String> _function = new Function1<Throwable,String>() {
+      public String apply(final Throwable it) {
+        String _xblockexpression = null;
+        {
+          StringWriter _stringWriter = new StringWriter();
+          final Procedure1<StringWriter> _function = new Procedure1<StringWriter>() {
+            public void apply(final StringWriter it) {
+              PrintWriter _printWriter = new PrintWriter(it);
+              final Procedure1<PrintWriter> _function = new Procedure1<PrintWriter>() {
+                public void apply(final PrintWriter it) {
+                  it.println("Error during annotation processing:");
+                  t.printStackTrace(it);
+                  it.flush();
+                }
+              };
+              ObjectExtensions.<PrintWriter>operator_doubleArrow(_printWriter, _function);
+            }
+          };
+          final StringWriter writer = ObjectExtensions.<StringWriter>operator_doubleArrow(_stringWriter, _function);
+          String _string = writer.toString();
+          _xblockexpression = (_string);
+        }
+        return _xblockexpression;
+      }
+    };
+    String _messageWithReducedStackTrace = this.getMessageWithReducedStackTrace(t, _function);
+    return _messageWithReducedStackTrace;
+  }
+  
+  public String getMessageWithReducedStackTrace(final Throwable t, final Function1<? super Throwable,? extends String> getMessage) {
+    final StackTraceElement[] stackTrace = t.getStackTrace();
+    final ArrayList<StackTraceElement> reducedStackTrace = CollectionLiterals.<StackTraceElement>newArrayList();
+    for (final StackTraceElement it : stackTrace) {
+      {
+        String _className = it.getClassName();
+        String _name = AnnotationProcessor.class.getName();
+        boolean _contains = _className.contains(_name);
+        if (_contains) {
+          try {
+            t.setStackTrace(((StackTraceElement[])Conversions.unwrapArray(reducedStackTrace, StackTraceElement.class)));
+            return getMessage.apply(t);
+          } finally {
+            t.setStackTrace(stackTrace);
+          }
+        }
+        reducedStackTrace.add(it);
+      }
+    }
+    return getMessage.apply(t);
   }
 }
