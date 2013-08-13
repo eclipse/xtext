@@ -108,15 +108,15 @@ public class XtLanguageSpecificURIEditorOpener implements IURIEditorOpener {
 	protected EObject findEObjectByURI(final URI uri, XtextResource resource) {
 		if (uri.fragment() != null) {
 			try {
-				EObject result = resource.getEObject(uri.fragment());
-				return result;
-			} catch (Exception e) {
-			}
-			try {
 				XtextResource xpectResource = XpectFileAccess.getXpectResource(resource);
 				EObject result = xpectResource.getEObject(uri.fragment());
 				return result;
 			} catch (WrappedException e) {
+			}
+			try {
+				EObject result = resource.getEObject(uri.fragment());
+				return result;
+			} catch (Exception e) {
 			}
 		}
 		return null;
