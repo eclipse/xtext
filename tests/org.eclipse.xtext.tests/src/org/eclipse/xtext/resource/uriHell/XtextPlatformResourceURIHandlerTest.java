@@ -55,4 +55,20 @@ public class XtextPlatformResourceURIHandlerTest extends Assert {
 		assertEquals(relativeTo, resolved);
 	}
 	
+	@Test
+	public void testSourceToSourceResolution() {
+		URI baseURI = URI.createURI("platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.ecore");
+		URI relativeTo = URI.createURI("platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/tests/MyModel.ecore");
+		
+		uriHandler.setBaseURI(baseURI);
+		URI relativeURI = uriHandler.deresolve(relativeTo);
+		assertEquals("../../../../../org.eclipse.xtext.tests/src/org/eclipse/xtext/tests/MyModel.ecore", relativeURI.toString());
+		
+		URI packagedBaseURI = URI.createURI("platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.ecore");
+		URI packagedReferencedURI = URI.createURI("platform:/resource/org.eclipse.xtext.tests/org/eclipse/xtext/tests/MyModel.ecore");
+		uriHandler.setBaseURI(packagedBaseURI);
+		URI resolved = uriHandler.resolve(relativeURI);
+		assertEquals(packagedReferencedURI.toString(), resolved.toString());
+	}
+	
 }
