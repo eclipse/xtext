@@ -52,13 +52,20 @@ public class TestSessionLabelProviderCustom extends LabelProvider implements ISt
 	}
 
 	public StyledString getStyledText(Object element) {
-		String label = getSimpleLabel(element);
-		if (label == null) {
-			return new StyledString(element.toString());
-		}
-		StyledString text = new StyledString(label);
-
 		ITestElement testElement = (ITestElement) element;
+		IRunnerUIHandler handler = RunnerUIHandlerRegistry.getHandler(testElement);
+		StyledString text = null;
+		if (handler != null)
+			text = handler.getStyledLabel(fTestRunnerPart, testElement, fLayoutMode);
+		if (text == null) {
+			String label = getSimpleLabel(element);
+			if (label == null) {
+				return new StyledString(element.toString());
+			}
+			text = new StyledString(label);
+		}
+		String label = text.getString();
+
 		if (fLayoutMode == TestRunnerViewPart.LAYOUT_HIERARCHICAL) {
 			if (testElement.getParentContainer() instanceof ITestRunSession) {
 				String testKindDisplayName = fTestRunnerPart.getTestKindDisplayName();

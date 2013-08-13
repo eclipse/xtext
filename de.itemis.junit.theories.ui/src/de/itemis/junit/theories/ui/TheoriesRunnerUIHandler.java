@@ -8,6 +8,7 @@ import org.eclipse.jdt.junit.model.ITestSuiteElement;
 import org.eclipse.jdt.junit.runners.IRunnerUIHandler;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.ui.part.ViewPart;
 
 @SuppressWarnings("restriction")
@@ -41,6 +42,11 @@ public class TheoriesRunnerUIHandler implements IRunnerUIHandler {
 		if (element instanceof ITestSuiteElement)
 			return ((ITestSuiteElement) element).getSuiteTypeName();
 		return "unknown";
+	}
+
+	@Override
+	public StyledString getStyledLabel(ViewPart part, ITestElement element, int layout) {
+		return null;
 	}
 
 }
