@@ -191,9 +191,9 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		expected.append("  hidden WS returns EString: => ' '\n");
 		expected.append("  'generate' => 'generate'\n");
 		expected.append("  hidden WS returns EString: => ' '\n");
-		expected.append("  ID => 'foo'\n");
+		expected.append("  name=ID => 'foo'\n");
 		expected.append("  hidden WS returns EString: => ' '\n");
-		expected.append("  [EPackage] => ''bar''\n");
+		expected.append("  ePackage=[EPackage] => ''bar''\n");
 		expected.append("}");
 		assertEquals(expected.toString(), actual);
 	}
@@ -207,11 +207,11 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		expected.append("  hidden WS returns EString: => ' '\n");
 		expected.append("  'generate' => 'generate'\n");
 		expected.append("  hidden WS returns EString: => ' '\n");
-		expected.append("  ID => 'foo'\n");
+		expected.append("  name=ID => 'foo'\n");
 		expected.append("  hidden WS returns EString: => ' '\n");
 		expected.append("  ID returns EString: => 'x' SyntaxError: [org.eclipse.xtext.diagnostics.Diagnostic.Syntax] extraneous input 'x' expecting RULE_STRING\n");
 		expected.append("  hidden WS returns EString: => ' '\n");
-		expected.append("  [EPackage] => ''bar''\n");
+		expected.append("  ePackage=[EPackage] => ''bar''\n");
 		expected.append("}");
 		assertEquals(expected.toString(), actual);
 	}
@@ -223,7 +223,7 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		StringBuilder expected = new StringBuilder();
 		expected.append("Grammar: {\n");
 		expected.append("  'grammar' => 'grammar'\n");
-		expected.append("  GrammarID {\n");
+		expected.append("  name=GrammarID {\n");
 		expected.append("    hidden WS returns EString: => ' '\n");
 		expected.append("    INT returns EInt: => '1' SyntaxError: [org.eclipse.xtext.diagnostics.Diagnostic.Syntax] mismatched input '1' expecting RULE_ID\n");
 		expected.append("    hidden WS returns EString: => ' '\n");
