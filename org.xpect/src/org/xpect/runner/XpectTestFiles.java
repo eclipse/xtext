@@ -175,12 +175,13 @@ public @interface XpectTestFiles {
 			throw new UnsupportedOperationException();
 		}
 
-		public String getTitle(URI uri) {
-			return uri.lastSegment();
-		}
-
 		public URI resolveURI(URI base, String newURI) {
 			return URI.createURI(newURI).resolve(base);
+		}
+
+		public URI deresolveToProject(URI uri) {
+			URI projectURI = URI.createFileURI(getProjectRootFolder(owner).toString() + "/");
+			return uri.deresolve(projectURI);
 		}
 
 	}

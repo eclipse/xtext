@@ -113,6 +113,8 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 
 	protected IParameterProvider collectProposedParameter(int paramIndex, List<IParameterProvider> candidates) {
 		Class<?> expectedType = getParameterType(paramIndex);
+		if (expectedType == null)
+			return null;
 		for (IParameterProvider tp : candidates)
 			if (tp.canProvide(expectedType))
 				return tp;

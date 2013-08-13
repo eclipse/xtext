@@ -14,18 +14,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.xpect.XjmMethod;
+import org.junit.runner.Description;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
 import org.xpect.model.XpectInvocationImplCustom;
 import org.xpect.parameter.IParameterProvider;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
-import org.xpect.util.TestDataUtil;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -62,6 +61,13 @@ public class XpectTestRunner extends AbstractTestRunner {
 		return result;
 	}
 
+	public Description createDescription() {
+		Class<?> javaClass = getMethod().getTest().getJavaClass();
+		URI uri = getUriRunner().getRunner().getUriProvider().deresolveToProject(EcoreUtil.getURI(invocation));
+		String name = getUriRunner().getRunner().getUniqueName(getTitle());
+		return Description.createTestDescription(javaClass.getName() + ":" + uri, name);
+	}
+
 	protected Object[] createParameterValues(List<IParameterProvider> proposedParameters,
 			Map<Class<? extends Annotation>, IParameterProvider> setupValues) {
 		XjmXpectMethod method = getMethod();
@@ -72,16 +78,6 @@ public class XpectTestRunner extends AbstractTestRunner {
 				params[i] = proposedParameters.get(i).get(expectedTypes[i], setupValues);
 		}
 		return params;
-	}
-
-	protected String getFullName() {
-		Map<String, String> result = Maps.newLinkedHashMap();
-		result.put("title", getUriRunner().getRunner().getUniqueName(getTitle()));
-		XjmMethod method = getMethod();
-		if (method != null && !method.eIsProxy())
-			result.put("method", method.getName());
-		result.put("file", EcoreUtil.getURI(invocation).toString());
-		return TestDataUtil.encode(result);
 	}
 
 	public XpectInvocation getInvocation() {

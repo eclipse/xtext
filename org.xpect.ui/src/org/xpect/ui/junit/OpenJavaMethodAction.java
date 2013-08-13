@@ -10,12 +10,12 @@ package org.xpect.ui.junit;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jdt.junit.runners.TypeUtil;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.PartInitException;
+import org.xpect.ui.util.TestDataUIUtil.TestElementInfo;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -24,14 +24,11 @@ import org.eclipse.ui.PartInitException;
  */
 public class OpenJavaMethodAction extends Action {
 
-	private ITestElement element;
+	private TestElementInfo element;
 
-	private String method;
-
-	public OpenJavaMethodAction(ITestElement element, String method, String text, String toolTipText) {
+	public OpenJavaMethodAction(TestElementInfo element, String text, String toolTipText) {
 		super();
 		this.element = element;
-		this.method = method;
 		setText(text);
 		setToolTipText(toolTipText);
 	}
@@ -53,10 +50,10 @@ public class OpenJavaMethodAction extends Action {
 	@Override
 	public void run() {
 		try {
-			IType type = TypeUtil.findType(element);
+			IType type = TypeUtil.findType(element.getJavaProject(), element.getMethod());
 			if (type != null) {
 				IMethod iMethod;
-				iMethod = findMethod(type, method);
+				iMethod = findMethod(type, element.getMethod());
 				if (iMethod == null)
 					MessageDialog.openError(null, "Java Element not found", "Java Element not found");
 				else

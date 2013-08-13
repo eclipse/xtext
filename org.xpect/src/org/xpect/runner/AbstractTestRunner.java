@@ -28,18 +28,13 @@ public abstract class AbstractTestRunner {
 		this.uriRunner = uriRunner;
 	}
 
-	public Description createDescription() {
-		Class<?> javaClass = getMethod().getTest().getJavaClass();
-		return Description.createTestDescription(javaClass, getFullName());
-	}
+	public abstract Description createDescription();
 
 	public Description getDescription() {
 		if (this.description == null)
 			this.description = createDescription();
 		return description;
 	}
-
-	protected abstract String getFullName();
 
 	public abstract XjmMethod getMethod();
 

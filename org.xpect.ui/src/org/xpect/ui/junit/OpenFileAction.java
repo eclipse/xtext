@@ -10,7 +10,6 @@ package org.xpect.ui.junit;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
-import org.xpect.ui.util.FileUtil;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -41,8 +40,7 @@ public class OpenFileAction extends Action {
 
 	@Override
 	public void run() {
-		URI platformURI = FileUtil.findURLInWorkspace(uri);
-		editorOpener.open(platformURI, true);
+		editorOpener.open(uri, true);
 	}
 
 }

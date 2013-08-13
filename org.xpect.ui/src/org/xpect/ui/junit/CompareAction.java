@@ -9,22 +9,18 @@ package org.xpect.ui.junit;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.compare.CompareUI;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jdt.junit.model.ITestElement.FailureTrace;
 import org.eclipse.jdt.junit.model.ITestSuiteElement;
 import org.eclipse.jface.action.Action;
-import org.xpect.ui.util.FileUtil;
 import org.xpect.ui.util.TestDataUIUtil;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 /**
@@ -49,25 +45,15 @@ class CompareAction extends Action {
 				collectITestElements(child, result);
 	}
 
-	private IFile findFileInWorkspace(URI uri, Map<URI, IFile> cache) {
-		URI u = uri.trimFragment();
-		IFile file = cache.get(u);
-		if (file == null)
-			cache.put(u, file = FileUtil.findFileInWorkspace(u));
-		return file;
-	}
-
 	private Multimap<IFile, ITestCaseElement> getComparableFiles(ITestElement root) {
 		List<ITestCaseElement> elements = Lists.newArrayList();
-		Map<URI, IFile> cache = Maps.newHashMap();
 		Multimap<IFile, ITestCaseElement> result = LinkedHashMultimap.create();
 		collectITestElements(root, elements);
 		for (ITestCaseElement ele : elements)
 			if (isComparable(ele)) {
-				String file = TestDataUIUtil.parse(ele).get("file");
+				IFile file = TestDataUIUtil.parse(ele).getFile();
 				if (file != null) {
-					IFile iFile = findFileInWorkspace(URI.createURI(file), cache);
-					result.put(iFile, ele);
+					result.put(file, ele);
 				}
 			}
 		return result;

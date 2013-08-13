@@ -20,5 +20,5 @@ public interface IXpectURIProvider {
 
 	URI resolveURI(URI base, String newURI);
 
-	String getTitle(URI uri);
+	URI deresolveToProject(URI uri);
 }

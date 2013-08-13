@@ -8,16 +8,13 @@
 package org.xpect.runner;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 
-import org.xpect.XjmMethod;
+import org.junit.runner.Description;
 import org.xpect.XjmTestMethod;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
-import org.xpect.util.TestDataUtil;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -32,13 +29,10 @@ public class TestRunner extends AbstractTestRunner {
 		this.method = method;
 	}
 
-	protected String getFullName() {
-		Map<String, String> result = Maps.newLinkedHashMap();
-		result.put("title", getUriRunner().getRunner().getUniqueName(getTitle()));
-		XjmMethod method = getMethod();
-		if (method != null && !method.eIsProxy())
-			result.put("method", method.getName());
-		return TestDataUtil.encode(result);
+	public Description createDescription() {
+		Class<?> javaClass = getMethod().getTest().getJavaClass();
+		String title = getUriRunner().getRunner().getUniqueName(getTitle());
+		return Description.createTestDescription(javaClass, title);
 	}
 
 	public XjmTestMethod getMethod() {
