@@ -142,8 +142,8 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	protected StyledString convertToStyledString(Object text) {
 		if (text instanceof StyledString) {
 			return (StyledString) text;
-		} else if (text instanceof String) {
-			return new StyledString((String) text);
+		} else if (text != null) {
+			return new StyledString(text.toString());
 		}
 		return null;
 	}
@@ -169,8 +169,8 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	protected String convertToString(Object text) {
 		if (text instanceof StyledString) {
 			return ((StyledString) text).getString();
-		} else if (text instanceof String) {
-			return (String) text;
+		} else if (text != null) {
+			return text.toString();
 		}
 		return null;
 	}
