@@ -25,10 +25,11 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -52,8 +53,6 @@ public class JavaElementDelegate implements IAdaptable {
 
 	private IEditorPart editor;
 	private IResource resource;
-	private IFileEditorInput editorInput;
-
 	@Inject
 	private IDerivedResourceMarkers derivedResourceMarkers;
 
@@ -61,20 +60,21 @@ public class JavaElementDelegate implements IAdaptable {
 	private FileExtensionProvider fileExtensionProvider;
 	
 	@Inject
-	private IQualifiedNameProvider nameProvider;
-	
-	@Inject
 	private IJvmModelAssociations associations;
 	
 	@Inject
 	private IJavaElementFinder elementFinder;
+	@Inject
+	private IWorkbench workbench;
 
 	public void initializeWith(IEditorPart editorInput) {
 		this.editor = editorInput;
 	}
 
 	public void initializeWith(IFileEditorInput editorInput) {
-		this.editorInput = editorInput;
+		this.resource = editorInput.getFile();
+		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
+		this.editor = activePage != null ? activePage.findEditor(editorInput) : null;
 	}
 
 	public void initializeWith(IResource resource) {
@@ -83,22 +83,14 @@ public class JavaElementDelegate implements IAdaptable {
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (IJavaElement.class.equals(adapter)) {
-			if (editorInput != null) {
-				IFile file = editorInput.getFile();
-				if (fileExtensionProvider.isValid(file.getFileExtension())) {
-					return getJavaElementForResource(file);
-				}
-			} else if (editor != null) {
-//				IJavaElement javaFile = getJavaElementForEditor(editor);
-//				if (javaFile != null) {
+			if (editor != null) {
 				IJavaElement javaMethod = getJavaElementForXtextEditor(editor);
-				if (javaMethod != null)
+				if (javaMethod != null) {
 					return javaMethod;
-//					return javaFile;
-			} else if (resource != null) {
-				if (fileExtensionProvider.isValid(resource.getFileExtension())) {
-					return getJavaElementForResource(resource);
 				}
+			}
+			if (resource != null && fileExtensionProvider.isValid(resource.getFileExtension())) {
+				return getJavaElementForResource(resource);
 			}
 		}
 		return null;
