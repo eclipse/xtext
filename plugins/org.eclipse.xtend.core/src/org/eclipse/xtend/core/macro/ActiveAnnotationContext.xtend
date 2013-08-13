@@ -9,9 +9,10 @@ package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.util.List
 import java.util.Map
-import org.apache.log4j.Logger
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
@@ -38,8 +39,6 @@ import org.eclipse.xtext.xbase.lib.Pair
  */
 class ActiveAnnotationContext {
 	
-	static val LOG = Logger.getLogger(ActiveAnnotationContext)
-	
 	@Property val List<XtendAnnotationTarget> annotatedSourceElements = newArrayList()
 	@Property Object processorInstance
 	@Property CompilationUnitImpl compilationUnit
@@ -47,8 +46,8 @@ class ActiveAnnotationContext {
 	def void handleProcessingError(Resource resource, Throwable t) {
 		if (t instanceof VirtualMachineError)
 			throw t;
+		val msg = t.messageWithStackTrace
 		val errors = resource.errors
-		val msg = "Error during annotation processing :" + t + " (see error log for details)";
 		val List<? extends EObject> sourceElements = getAnnotatedSourceElements();
 		for (EObject target : sourceElements) {
 			switch target {
@@ -61,8 +60,38 @@ class ActiveAnnotationContext {
 				}
 			}
 		}
-		LOG.error("Error processing " + resource.URI + " with processor " + processorInstance, t)
 	}
+	
+	def getMessageWithStackTrace(Throwable t) {
+		t.getMessageWithReducedStackTrace [
+			val writer = new StringWriter => [
+				new PrintWriter(it) => [
+					println("Error during annotation processing:")
+					t.printStackTrace(it)
+					flush
+				]
+			]
+			writer.toString
+		]
+	}
+
+	def getMessageWithReducedStackTrace(Throwable t, (Throwable)=>String getMessage) {
+		val stackTrace = t.stackTrace
+		val reducedStackTrace = <StackTraceElement>newArrayList
+		for (it : stackTrace) {
+			if (className.contains(AnnotationProcessor.name)) {
+				try {
+					t.stackTrace = reducedStackTrace
+					return getMessage.apply(t)
+				} finally {
+					t.stackTrace = stackTrace
+				}
+			}
+			reducedStackTrace.add(it)
+		}
+		return getMessage.apply(t)
+	}
+	
 }
 
 class ActiveAnnotationContexts extends AdapterImpl {
