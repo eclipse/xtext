@@ -111,7 +111,7 @@ public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «d
 	// Labels and icons can be computed like this:
 	
 //	String text(IEObjectDescription ele) {
-//	   return ele.getName().toString()
+//	   return ele.getName().toString();
 //	}
 //	 
 //  String image(IEObjectDescription ele) {
@@ -140,7 +140,7 @@ class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descript
 	// Labels and icons can be computed like this:
 	
 //	override text(IEObjectDescription ele) {
-//		ele.name.toString()
+//		ele.name.toString
 //	}
 //	 
 //	override image(IEObjectDescription ele) {
