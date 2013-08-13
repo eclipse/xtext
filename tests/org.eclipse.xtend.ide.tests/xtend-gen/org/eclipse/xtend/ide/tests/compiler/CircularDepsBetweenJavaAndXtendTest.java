@@ -13,13 +13,25 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
+  
+  @Before
+  @After
+  public void cleanUp() {
+    try {
+      this.workbenchTestHelper.tearDown();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
   
   @Test
   public void testBug388575() {
@@ -144,7 +156,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile file = this.workbenchTestHelper.createFile("test/FooUser.xtend", _builder_2.toString());
-      IResourcesSetupUtil.fullBuild();
+      IResourcesSetupUtil.waitForAutoBuild();
       IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       int _length = _findMarkers.length;
       Assert.assertEquals(0, _length);
