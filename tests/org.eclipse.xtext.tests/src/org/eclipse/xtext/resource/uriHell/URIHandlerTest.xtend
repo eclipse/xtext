@@ -204,12 +204,6 @@ class FilesInSameProjectTest extends AbstractURIHandlerWithEcoreTest {
 	override getPackagedReferencedURI() {
 		return URI.createURI('platform:/resource/projectName/org/other/Second.ecore')
 	}
-	
-	@Test(expected=UnexpectedResourcesException)
-	override void testLoadResourceWithPackagedURIs() {
-		super.testLoadResourceWithPackagedURIs
-	}
-	
 }
 
 /**
@@ -233,10 +227,6 @@ class FilesInDifferentProjectSourceFoldersTest extends AbstractURIHandlerWithEco
 		return URI.createURI('platform:/resource/other/org/other/Second.ecore')
 	}
 	
-	@Test(expected=UnexpectedResourcesException)
-	override void testLoadResourceWithPackagedURIs() {
-		super.testLoadResourceWithPackagedURIs
-	}
 }
 
 /**

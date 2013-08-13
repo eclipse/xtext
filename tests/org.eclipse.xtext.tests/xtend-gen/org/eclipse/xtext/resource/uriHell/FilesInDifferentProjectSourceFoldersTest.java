@@ -9,8 +9,6 @@ package org.eclipse.xtext.resource.uriHell;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.uriHell.AbstractURIHandlerWithEcoreTest;
-import org.eclipse.xtext.resource.uriHell.UnexpectedResourcesException;
-import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,10 +29,5 @@ public class FilesInDifferentProjectSourceFoldersTest extends AbstractURIHandler
   
   public URI getPackagedReferencedURI() {
     return URI.createURI("platform:/resource/other/org/other/Second.ecore");
-  }
-  
-  @Test(expected = UnexpectedResourcesException.class)
-  public void testLoadResourceWithPackagedURIs() {
-    super.testLoadResourceWithPackagedURIs();
   }
 }

@@ -34,6 +34,20 @@ public class XtextPlatformResourceURIHandler extends URIHandlerImpl {
 					URI newResult = baseURI.trimSegments(baseURI.segmentCount() - 1).appendSegments(segments);
 					newResult = newResult.appendFragment(result.fragment());
 					return newResult;
+				} else {
+					if (result.segmentCount() > 2) {
+						// we found something which apparently looks like a platform:/resource URI
+						// so let's double check that the first project name does not look like an
+						// Xtext source folder name
+						String secondSegment = result.segment(1);
+						String thirdSegment = result.segment(2);
+						if (isXtextSourceFolderName(secondSegment) && !isXtextSourceFolderName(thirdSegment) && !"model".equals(thirdSegment)) {
+							String[] fixedSegments = result.segments();
+							fixedSegments[1] = baseURI.segment(1);
+							URI newResult = URI.createHierarchicalURI(result.scheme(), result.authority(), result.device(), fixedSegments, result.query(), result.fragment());
+							return newResult;
+						}
+					}
 				}
 			} else if (ClasspathUriUtil.isClasspathUri(baseURI)) {
 				if (ClasspathUriUtil.isClasspathUri(result) && "..".equals(result.segment(0))) {
@@ -70,8 +84,27 @@ public class XtextPlatformResourceURIHandler extends URIHandlerImpl {
 	protected String[] getRelevantPlatformSegments(URI uri) {
 		List<String> resultSegments = uri.segmentsList();
 		for(int i = 0, size = resultSegments.size(); i < size; i++) {
-			if (!"..".equals(resultSegments.get(i))) {
-				if (i != 0) {
+			String segment = resultSegments.get(i);
+			if (!"..".equals(segment)) {
+				if (i == 0) {
+					// this is a good situation to skip xtext source folder names
+					// since the produced URI was invalid anyway we can try 
+					// to fix it
+					if (isXtextSourceFolderName(segment)) {
+						i++;
+					} else if (i < size - 1) {
+						String nextSegment = resultSegments.get(i + 1);
+						if (isXtextSourceFolderName(nextSegment)) {
+							String[] segments = new String[size - i - 1];
+							segments[0] = segment;
+							for(int j = i + 2, k = 1; j < size; j++, k++) {
+								segments[k] = resultSegments.get(j);
+							}
+							return segments; 
+						}
+					}
+				}
+				if (i != 0 && i != size) {
 					String[] segments = new String[size - i];
 					for(int j = i, k = 0; j < size; j++, k++) {
 						segments[k] = resultSegments.get(j);
@@ -84,6 +117,10 @@ public class XtextPlatformResourceURIHandler extends URIHandlerImpl {
 			}
 		}
 		return uri.segments();
+	}
+
+	protected boolean isXtextSourceFolderName(String segment) {
+		return "src".equals(segment) || "src-gen".equals(segment);
 	}
 	
 }
