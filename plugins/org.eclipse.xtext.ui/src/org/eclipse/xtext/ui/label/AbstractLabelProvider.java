@@ -14,6 +14,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 
@@ -142,7 +143,9 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	protected StyledString convertToStyledString(Object text) {
 		if (text instanceof StyledString) {
 			return (StyledString) text;
-		} else if (text instanceof String) {
+		} else if (text instanceof QualifiedName) {
+			return new StyledString(text.toString());
+		} else if(text instanceof String){
 			return new StyledString((String) text);
 		}
 		return null;
@@ -169,7 +172,9 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	protected String convertToString(Object text) {
 		if (text instanceof StyledString) {
 			return ((StyledString) text).getString();
-		} else if (text instanceof String) {
+		} else if (text instanceof QualifiedName) {
+			return text.toString();
+		} else if(text instanceof String){
 			return (String) text;
 		}
 		return null;
