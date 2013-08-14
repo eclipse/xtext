@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment;
+import org.eclipse.xtext.generator.ecore.EMFGeneratorFragment;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -101,6 +101,7 @@ public class GenModelAccess {
 	/**
 	 * @since 2.1
 	 */
+	@SuppressWarnings("deprecation")
 	public static Resource getGenModelResource(String locationInfo, String nsURI, ResourceSet resourceSet) {
 		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
 		if (genModelURI == null) {
@@ -129,7 +130,8 @@ public class GenModelAccess {
 			else 
 				locationInfo = "";
 			buf.append("Could not find a GenModel for EPackage '").append(nsURI).append("'").append(locationInfo).append("\n");
-			buf.append("If the missing GenModel has been generated via " + EcoreGeneratorFragment.class.getSimpleName());
+			buf.append("If the missing GenModel has been generated via " + EMFGeneratorFragment.class.getSimpleName() + " or " + 
+					org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment.class.getSimpleName());
 			buf.append(" make sure to run it first in the workflow.\n");
 			buf.append("If you have a *.genmodel-file, make sure to register it via StandaloneSetup.registerGenModelFile(String)");
 			throw new RuntimeException(buf.toString());
