@@ -24,6 +24,9 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 import org.eclipse.core.runtime.Path
+import org.eclipse.jdt.core.JavaCore
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
+import org.eclipse.jdt.core.IJavaProject
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -252,6 +255,32 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 		'''),true,true, null)
 		waitForAutoBuild()
 		assertNoErrorsInWorkspace
+	}
+
+	@Test def void testActiveAnnotationInSameProjectInJar() {
+		val project = JavaCore.create(
+			WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, "com.google.inject",
+				"org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib"))
+		val jarFile = project.copyFile("Bug414992.jar", "Bug414992.jar")
+		JavaProjectSetupUtil.addJarToClasspath(project, jarFile)
+		workbenchTestHelper.createFile('mypack/Client.xtend',
+			'''
+				package mypack
+
+				import myannotation.Bug414992
+
+				@Bug414992 class Client {
+				}
+			''')
+		waitForAutoBuild()
+		assertNoErrorsInWorkspace
+	}
+
+	def IFile copyFile(IJavaProject javaProject, String srcFile, String destFile) {
+		val file = javaProject.getProject().getFile(destFile);
+		val inputStream = ActiveAnnotationsInSameProjectTest.getResourceAsStream(srcFile);
+		file.create(inputStream, IResource.FORCE, null);
+		return file;
 	}
 	
 	def void assertNoErrorsInWorkspace() {

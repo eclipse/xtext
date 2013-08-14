@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.tests.compiler;
 
 import com.google.inject.Inject;
+import java.io.InputStream;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -18,12 +19,15 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -463,6 +467,45 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       type2.setContents(_stringInputStream, true, true, null);
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testActiveAnnotationInSameProjectInJar() {
+    try {
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, "com.google.inject", 
+        "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib");
+      final IJavaProject project = JavaCore.create(_createPluginProject);
+      final IFile jarFile = this.copyFile(project, "Bug414992.jar", "Bug414992.jar");
+      JavaProjectSetupUtil.addJarToClasspath(project, jarFile);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import myannotation.Bug414992");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Bug414992 class Client {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.workbenchTestHelper.createFile("mypack/Client.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public IFile copyFile(final IJavaProject javaProject, final String srcFile, final String destFile) {
+    try {
+      IProject _project = javaProject.getProject();
+      final IFile file = _project.getFile(destFile);
+      final InputStream inputStream = ActiveAnnotationsInSameProjectTest.class.getResourceAsStream(srcFile);
+      file.create(inputStream, IResource.FORCE, null);
+      return file;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
