@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.resource.IShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
@@ -34,7 +35,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescriptionChangeEventSource implements IResourceDescriptions {
+public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescriptionChangeEventSource implements IResourceDescriptions, IShadowedResourceDescriptions {
 
 	private final IDirtyStateManager dirtyStateManager;
 	private final IBuilderState globalDescriptions;
@@ -168,5 +169,15 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 		if (dirtyStateManager.hasContent(resourceURI))
 			return dirtyStateManager.getExportedObjectsByObject(object);
 		return globalDescriptions.getExportedObjectsByObject(object);
+	}
+
+	public boolean isShadowed(EClass type, QualifiedName name, boolean ignoreCase) {
+		Iterable<IEObjectDescription> persistentDescriptions = globalDescriptions.getExportedObjects(type, name, ignoreCase);
+		for (IEObjectDescription desc : persistentDescriptions) {
+			if (dirtyStateManager.hasContent(desc.getEObjectURI().trimFragment())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
