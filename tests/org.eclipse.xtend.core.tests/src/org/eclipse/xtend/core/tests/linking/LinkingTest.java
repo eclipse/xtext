@@ -2598,7 +2598,6 @@ public class LinkingTest extends AbstractXtendTestCase {
 	
 	@Test public void testTypeOfSuper() throws Exception {
 		String classAsString = 
-			"import static extension org.eclipse.xtext.GrammarUtil.*\n" +
 			"class Foo extends java.util.ArrayList<String> {" +
 			"	def m() {\n" + 
 			"		super.add(null)\n" + 
