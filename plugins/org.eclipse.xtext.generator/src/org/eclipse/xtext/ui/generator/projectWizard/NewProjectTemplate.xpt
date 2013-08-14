@@ -21,7 +21,6 @@
 
 «OP()»DEFINE main FOR «projectInfoClassName().toSimpleName()»«CL()»
 «OP()»EXPAND model FOR this«CL()»
-«OP()»EXPAND workflow FOR this«CL()»
 «OP()»ENDDEFINE«CL()»
 
 «OP()»DEFINE model FOR «projectInfoClassName().toSimpleName()»«CL()»
@@ -30,19 +29,6 @@
  * This is an example model
  */
 Hello Xtext!
-«OP()»ENDFILE«CL()»
-«OP()»ENDDEFINE«CL()»
-
-«OP()»DEFINE workflow FOR «projectInfoClassName().toSimpleName()»«CL()»
-«OP()»FILE "src/Generator.mwe2"-«CL()»
-module Generator
-
-var targetDir = "src-gen"
-var modelPath = "src/model"
-
-Workflow {
-	component = @workflow.«getName()»Generator auto-inject {}
-}
 «OP()»ENDFILE«CL()»
 «OP()»ENDDEFINE«CL()»
 «ENDFILE»
