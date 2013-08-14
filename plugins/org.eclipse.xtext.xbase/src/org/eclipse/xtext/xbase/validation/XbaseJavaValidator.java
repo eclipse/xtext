@@ -16,7 +16,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -108,7 +107,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNonNullResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -144,9 +142,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
-	
-	@Inject
-	private JvmExceptions jvmExceptions;
 	
 	@Inject
 	private NumberLiterals numberLiterals;
@@ -733,7 +728,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		checkCast(casePart.getTypeGuard(), typeGuard, targetTypeRef);
 	}
 
-	@SuppressWarnings("null")
 	@Check
 	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
 		LightweightTypeReference leftType = getActualType(instanceOfExpression.getExpression());
@@ -834,29 +828,36 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkConstructorArgumentsAreValid(XFeatureCall featureCall) {
 		JvmIdentifiableElement feature = featureCall.getFeature();
 		if (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor) {
+			JvmType containerType = EcoreUtil2.getContainerOfType(logicalContainerProvider.getNearestLogicalContainer(featureCall), JvmType.class);
 			for(XExpression argument: featureCall.getFeatureCallArguments()) {
-				checkIsValidConstructorArgument(argument);
+				checkIsValidConstructorArgument(argument, containerType);
 			}
 		}
 	}
 	
-	protected void checkIsValidConstructorArgument(XExpression argument) {
-		Iterator<EObject> iterator = EcoreUtil2.eAll(argument);
+	protected void checkIsValidConstructorArgument(XExpression argument, JvmType containerType) {
+		TreeIterator<EObject> iterator = EcoreUtil2.eAll(argument);
 		while(iterator.hasNext()) {
 			EObject partOfArgumentExpression = iterator.next();
-			if (partOfArgumentExpression instanceof XFeatureCall) {
-				JvmIdentifiableElement feature = ((XFeatureCall) partOfArgumentExpression).getFeature();
-				if (feature != null && !feature.eIsProxy()) {
-					if (feature instanceof JvmField) {
-						if (!((JvmField) feature).isStatic())
-							error("Cannot refer to an instance field " + feature.getSimpleName() + " while explicitly invoking a constructor", 
-									partOfArgumentExpression, null, INVALID_CONSTRUCTOR_ARGUMENT);
-					} else if (feature instanceof JvmOperation) {
-						if (!((JvmOperation) feature).isStatic())
-							error("Cannot refer to an instance method while explicitly invoking a constructor", 
-									partOfArgumentExpression, null, INVALID_CONSTRUCTOR_ARGUMENT);	
+			if (partOfArgumentExpression instanceof XFeatureCall || partOfArgumentExpression instanceof XMemberFeatureCall) {				
+				XAbstractFeatureCall featureCall = (XAbstractFeatureCall) partOfArgumentExpression;
+				XExpression actualReceiver = featureCall.getActualReceiver();
+				if(actualReceiver instanceof XAbstractFeatureCall && ((XFeatureCall)actualReceiver).getFeature() == containerType) {
+					JvmIdentifiableElement feature = featureCall.getFeature();
+					if (feature != null && !feature.eIsProxy()) {
+						if (feature instanceof JvmField) {
+							if (!((JvmField) feature).isStatic())
+								error("Cannot refer to an instance field " + feature.getSimpleName() + " while explicitly invoking a constructor", 
+										partOfArgumentExpression, null, INVALID_CONSTRUCTOR_ARGUMENT);
+						} else if (feature instanceof JvmOperation) {
+							if (!((JvmOperation) feature).isStatic())
+								error("Cannot refer to an instance method while explicitly invoking a constructor", 
+										partOfArgumentExpression, null, INVALID_CONSTRUCTOR_ARGUMENT);	
+						}
 					}
 				}
+			} else if(partOfArgumentExpression instanceof XClosure) {
+				iterator.prune();
 			}
 		}
 	}
