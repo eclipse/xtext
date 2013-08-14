@@ -3672,4 +3672,52 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testBug409251() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bar implements java.io.Serializable {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.io.Serializable");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar implements Serializable {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug409251_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo ;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bar implements java.io.Serializable {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo ;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.io.Serializable");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar implements Serializable {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
 }

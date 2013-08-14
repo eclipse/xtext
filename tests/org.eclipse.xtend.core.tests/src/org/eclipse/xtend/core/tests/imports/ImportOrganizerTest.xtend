@@ -1929,4 +1929,36 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test def testBug409251() {
+		'''
+			package foo;
+
+			class Bar implements java.io.Serializable {
+			}
+		'''.assertIsOrganizedTo('''
+			package foo;
+			
+			import java.io.Serializable
+
+			class Bar implements Serializable {
+			}
+		''')
+	} 
+	
+	@Test def testBug409251_1() {
+		'''
+			package foo ;
+
+			class Bar implements java.io.Serializable {
+			}
+		'''.assertIsOrganizedTo('''
+			package foo ;
+			
+			import java.io.Serializable
+
+			class Bar implements Serializable {
+			}
+		''')
+	} 
 }

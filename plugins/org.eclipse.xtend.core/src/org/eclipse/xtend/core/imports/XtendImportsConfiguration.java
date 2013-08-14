@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -99,8 +100,16 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 		if(xtendFile != null) {
 			if(!isEmpty(xtendFile.getPackage())) {
 				List<INode> nodes = NodeModelUtils.findNodesForFeature(xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE);
-				if(!nodes.isEmpty())
-					return nodes.get(nodes.size()-1).getTotalEndOffset();
+				if(!nodes.isEmpty()) {
+					INode lastNode = nodes.get(nodes.size()-1);
+					INode nextSibling = lastNode.getNextSibling();
+					while(nextSibling instanceof ILeafNode && ((ILeafNode)nextSibling).isHidden())
+						nextSibling = nextSibling.getNextSibling();
+					if(nextSibling != null && ";".equals(nextSibling.getText()))
+						return nextSibling.getOffset() + 1;
+					else
+						return lastNode.getTotalEndOffset();
+				}
 			}
 		}
 		return 0;
