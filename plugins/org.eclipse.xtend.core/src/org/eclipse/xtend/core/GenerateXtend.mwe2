@@ -63,6 +63,7 @@ Workflow {
 		pathUiProject = uiProjectPath
 		projectNameRt = projectName
 		projectNameUi = uiProjectName
+		encoding = "ISO-8859-1"
 		naming = {
 			uiBasePackage = "org.eclipse.xtend.ide"
 			grammarId = "org.eclipse.xtend.core.Xtend"
