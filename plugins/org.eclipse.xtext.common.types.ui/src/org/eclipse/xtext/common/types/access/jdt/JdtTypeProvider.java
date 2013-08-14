@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
-import org.eclipse.xtext.common.types.impl.JvmTypeImpl;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -223,7 +223,18 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 					IType type = javaProject.findType(typeName);
 					if (type != null) {
 						IResource underlyingResource = type.getUnderlyingResource();
-						return underlyingResource==null || !javaProject.getProject().contains(underlyingResource);
+						if (underlyingResource == null) {
+							return true;
+						}
+						for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots()) {
+							if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
+								IResource srcUnderlyingResource = root.getUnderlyingResource();
+								if (srcUnderlyingResource != null && srcUnderlyingResource.contains(underlyingResource)) {
+									return false;
+								}
+							}
+						}
+						return true;
 					}
 				}
 			} catch (JavaModelException e) {
