@@ -39,7 +39,7 @@ public class ImportOrganizingProposal extends ConfigurableCompletionProposal {
 	@Override
 	public void apply(IDocument document) {
 		try {
-			int shiftOffsetBy = appendable.commitChanges();
+			int shiftOffsetBy = appendable.commitChanges(getReplacementOffset(), getReplacementLength());
 			setSelectionStart(getSelectionStart() + shiftOffsetBy);
 			setCursorPosition(getCursorPosition() + shiftOffsetBy);
 			if (isLinkedMode()) {

@@ -48,6 +48,15 @@ public class ReplacingAppendable extends DocumentSourceAppender {
 	
 	public int commitChanges() throws BadLocationException {
 		ReplaceRegion change = getChange();
+		return commitChanges(change);
+	}
+	
+	public int commitChanges(int offset, int length) throws BadLocationException {
+		ReplaceRegion change = getChange(offset, length);
+		return commitChanges(change);
+	}
+
+	protected int commitChanges(ReplaceRegion change) throws BadLocationException {
 		getDocument().replace(change.getOffset(), change.getLength(), change.getText());
 		return insertNewImports();
 	}
