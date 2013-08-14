@@ -282,6 +282,12 @@ public class DocumentSourceAppender implements ISourceAppender {
 		return new ReplaceRegion(whitespaceHelper.getTotalOffset(), whitespaceHelper.getTotalLength(), getCode());
 	}
 
+	public ReplaceRegion getChange(int offset, int length) {
+		int actualOffset = Math.min(whitespaceHelper.getTotalOffset(), offset);
+		int endOffset = Math.max(whitespaceHelper.getTotalOffset() + whitespaceHelper.getTotalLength(), offset + length);
+		return new ReplaceRegion(actualOffset, endOffset - actualOffset, getCode());
+	}
+
 	public int getTotalOffset() {
 		return whitespaceHelper.getTotalOffset();
 	}
