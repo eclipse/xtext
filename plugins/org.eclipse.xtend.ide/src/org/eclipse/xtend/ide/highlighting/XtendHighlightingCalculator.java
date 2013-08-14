@@ -25,6 +25,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -75,6 +77,9 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	private Provider<DefaultIndentationHandler> indentationHandlerProvider;
 
 	private Set<Keyword> contextualKeywords;
+	
+	@Inject
+	private XtendGrammarAccess xtendGrammarAccess;
 
 	@Inject
 	protected void setXtendGrammarAccess(IGrammarAccess grammarAccess) {
@@ -84,6 +89,11 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		contextualKeywords = builder.build();
 	}
 
+	@Override
+	protected TerminalRule getIDRule() {
+		return xtendGrammarAccess.getIDRule();
+	}
+	
 	protected void collectKeywordsFromRule(IGrammarAccess grammarAccess, String ruleName, ImmutableSet.Builder<Keyword> builder) {
 		AbstractRule rule = GrammarUtil.findRuleForName(grammarAccess.getGrammar(), ruleName);
 		if (!(rule instanceof TerminalRule)) { // if someone decides to override ValidID with a terminal rule

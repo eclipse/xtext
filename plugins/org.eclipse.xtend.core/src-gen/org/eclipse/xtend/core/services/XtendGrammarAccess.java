@@ -2376,6 +2376,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	private RichStringForLoopElements pRichStringForLoop;
 	private RichStringIfElements pRichStringIf;
 	private RichStringElseIfElements pRichStringElseIf;
+	private TerminalRule tID;
+	private TerminalRule tHEX_DIGIT;
+	private TerminalRule tUNICODE_ESCAPE;
 	private TerminalRule tRICH_TEXT;
 	private TerminalRule tRICH_TEXT_START;
 	private TerminalRule tRICH_TEXT_END;
@@ -2383,6 +2386,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	private TerminalRule tCOMMENT_RICH_TEXT_INBETWEEN;
 	private TerminalRule tCOMMENT_RICH_TEXT_END;
 	private TerminalRule tIN_RICH_STRING;
+	private TerminalRule tIDENTIFIER_START;
+	private TerminalRule tIDENTIFIER_PART;
+	private TerminalRule tIDENTIFIER_PART_IMPL;
 	
 	private final Grammar grammar;
 
@@ -2725,6 +2731,24 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getRichStringElseIfAccess().getRule();
 	}
 
+	//terminal ID:
+	//	"^"? (IDENTIFIER_START | UNICODE_ESCAPE) (IDENTIFIER_PART | UNICODE_ESCAPE)*;
+	public TerminalRule getIDRule() {
+		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+	} 
+
+	//terminal fragment HEX_DIGIT:
+	//	"0".."9" | "a".."f" | "A".."F";
+	public TerminalRule getHEX_DIGITRule() {
+		return (tHEX_DIGIT != null) ? tHEX_DIGIT : (tHEX_DIGIT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX_DIGIT"));
+	} 
+
+	//terminal fragment UNICODE_ESCAPE:
+	//	"\\" "u" (HEX_DIGIT (HEX_DIGIT (HEX_DIGIT HEX_DIGIT?)?)?)?;
+	public TerminalRule getUNICODE_ESCAPERule() {
+		return (tUNICODE_ESCAPE != null) ? tUNICODE_ESCAPE : (tUNICODE_ESCAPE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "UNICODE_ESCAPE"));
+	} 
+
 	//terminal RICH_TEXT:
 	//	"\'\'\'" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF);
 	public TerminalRule getRICH_TEXTRule() {
@@ -2765,6 +2789,61 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	"\'\'" !("«" | "\'") | "\'" !("«" | "\'") | !("«" | "\'");
 	public TerminalRule getIN_RICH_STRINGRule() {
 		return (tIN_RICH_STRING != null) ? tIN_RICH_STRING : (tIN_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IN_RICH_STRING"));
+	} 
+
+	//terminal fragment IDENTIFIER_START:
+	//	"$" | "A".."Z" | "_" | "a".."z" | "¢".."¥" | "ª" | "µ" | "º" | "À".."Ö" | "Ø".."ö" | "ø".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?" | "?" | "?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?" |
+	//	"?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?" | "?".."?" | "?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?" | "?".."?" | "?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" |
+	//	"?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?"
+	//	| "?".."?" | "?".."?" | "?".."?" | "?" | "?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?" | "?" | "?".."?" | "?" | "?" | "?".."?" |
+	//	"?" | "?".."?" | "?" | "?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?"
+	//	| "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" |
+	//	"?".."?" | "?".."?" | "?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?";
+	public TerminalRule getIDENTIFIER_STARTRule() {
+		return (tIDENTIFIER_START != null) ? tIDENTIFIER_START : (tIDENTIFIER_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_START"));
+	} 
+
+	//terminal fragment IDENTIFIER_PART:
+	//	IDENTIFIER_START | IDENTIFIER_PART_IMPL;
+	public TerminalRule getIDENTIFIER_PARTRule() {
+		return (tIDENTIFIER_PART != null) ? tIDENTIFIER_PART : (tIDENTIFIER_PART = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_PART"));
+	} 
+
+	//terminal fragment IDENTIFIER_PART_IMPL:
+	//	" ".."\b" | "".."" | "0".."9" | "".."Ÿ" | "­" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?" | "?".."?" |
+	//	"?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?" | "?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" |
+	//	"?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" |
+	//	"?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?";
+	public TerminalRule getIDENTIFIER_PART_IMPLRule() {
+		return (tIDENTIFIER_PART_IMPL != null) ? tIDENTIFIER_PART_IMPL : (tIDENTIFIER_PART_IMPL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_PART_IMPL"));
 	} 
 
 	//XAnnotation:
@@ -3379,6 +3458,19 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getNumberAccess().getRule();
 	}
 
+	/// **
+	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+	// * which makes downstream grammars break on classloading, when a rule is removed.
+	// * / StaticQualifier:
+	//	(ValidID "::")+;
+	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
+		return gaXbaseWithAnnotations.getStaticQualifierAccess();
+	}
+	
+	public ParserRule getStaticQualifierRule() {
+		return getStaticQualifierAccess().getRule();
+	}
+
 	//terminal HEX:
 	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F" | "_")+ ("#" (("b" | "B") ("i" | "I") | ("l" | "L")))?;
 	public TerminalRule getHEXRule() {
@@ -3529,12 +3621,6 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getXImportDeclarationRule() {
 		return getXImportDeclarationAccess().getRule();
 	}
-
-	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "$" | "_") ("a".."z" | "A".."Z" | "$" | "_" | "0".."9")*;
-	public TerminalRule getIDRule() {
-		return gaXbaseWithAnnotations.getIDRule();
-	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |

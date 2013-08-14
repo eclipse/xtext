@@ -14,6 +14,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
@@ -57,6 +58,8 @@ public class LinkingHelper {
 				return convertMe;
 			Object result = valueConverter.toValue(convertMe, ruleName, node);
 			return result != null ? result.toString() : null;
+		} catch (ValueConverterWithValueException ex) {
+			return String.valueOf(ex.getValue());
 		} catch (ValueConverterException ex) {
 			throw new IllegalNodeException(node, ex);
 		}
