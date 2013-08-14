@@ -25,6 +25,39 @@ public class LexingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITokenDefProvider tokenDefProvider;
 
+	@Test public void testIdentifier_01() throws Exception {
+		assertLexing("String", pair("String","RULE_ID"));
+		assertLexing("String", pair("String","RULE_ID"));
+	}
+	@Test public void testIdentifier_void() throws Exception {
+		assertLexing("void", pair("void","RULE_ID"));
+		assertLexing("void", pair("void","RULE_ID"));
+	}
+	@Test public void testIdentifier_02() throws Exception {
+		assertLexing("i3", pair("i3","RULE_ID"));
+		assertLexing("^i3", pair("^i3","RULE_ID"));
+	}
+	@Test public void testIdentifier_03() throws Exception {
+		assertLexing("\u03b1\u03c1\u03b5\u03c4\u03b7", pair("\u03b1\u03c1\u03b5\u03c4\u03b7","RULE_ID"));
+		assertLexing("^\u03b1\u03c1\u03b5\u03c4\u03b7", pair("^\u03b1\u03c1\u03b5\u03c4\u03b7","RULE_ID"));
+	}
+	@Test public void testIdentifier_04() throws Exception {
+		assertLexing("MAX_VALUE", pair("MAX_VALUE","RULE_ID"));
+		assertLexing("^MAX_VALUE", pair("^MAX_VALUE","RULE_ID"));
+	}
+	@Test public void testIdentifier_05() throws Exception {
+		assertLexing("isLetterOrDigit", pair("isLetterOrDigit","RULE_ID"));
+		assertLexing("^isLetterOrDigit", pair("^isLetterOrDigit","RULE_ID"));
+	}
+	@Test public void testIdentifier_06() throws Exception {
+		assertLexing("\\u0060", pair("\\u0060","RULE_ID"));
+		assertLexing("^\\u0060", pair("^\\u0060","RULE_ID"));
+	}
+	@Test public void testIdentifier_07() throws Exception {
+		assertLexing("\\u006f\\u006F", pair("\\u006f\\u006F","RULE_ID"));
+		assertLexing("^\\u006f\\u006F", pair("^\\u006f\\u006F","RULE_ID"));
+	}
+	
 	@Test public void testRichString() throws Exception {
 		assertLexing("''' foo bar '''", pair("''' foo bar '''","RULE_RICH_TEXT"));
 		assertLexing("''' foo bar «", pair("''' foo bar «","RULE_RICH_TEXT_START"));
