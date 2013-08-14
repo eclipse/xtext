@@ -9,6 +9,8 @@
 package org.eclipse.xtext.ui.editor.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -30,6 +32,7 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork;
@@ -57,7 +60,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	private XtextResource resource = null;
-	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
+	private final List<IXtextModelListener> modelListeners = new ArrayList<IXtextModelListener>();
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
 
 	public void setInput(XtextResource resource) {
@@ -112,7 +115,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public void addModelListener(IXtextModelListener listener) {
 		Assert.isNotNull(listener);
-		modelListeners.add(listener);
+		if (modelListeners.contains(listener))
+			return;
+		if (listener instanceof DirtyStateEditorSupport) {
+			modelListeners.add(0,listener);
+		} else {
+			modelListeners.add(listener);
+		}
 	}
 
 	public void removeModelListener(IXtextModelListener listener) {
@@ -121,10 +130,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	protected void notifyModelListeners(XtextResource res) {
-		Object[] listeners = modelListeners.getListeners();
-		for (int i = 0; i < listeners.length; i++) {
+		for (IXtextModelListener listener : modelListeners){
 			try {
-				((IXtextModelListener) listeners[i]).modelChanged(res);
+				listener.modelChanged(res);
 			} catch(Exception exc) {
 				log.error("Error in IXtextModelListener", exc);
 			}
