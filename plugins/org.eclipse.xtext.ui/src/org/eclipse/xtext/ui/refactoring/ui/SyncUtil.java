@@ -90,7 +90,7 @@ public class SyncUtil {
 					if (editor != null) {
 						if (editor instanceof XtextEditor)
 							waitForReconciler((XtextEditor) editor);
-						if (saveAll)
+						if (editor.isDirty() && saveAll)
 							editor.doSave(pm2.newChild(1));
 					}
 					pm2.worked(1);
