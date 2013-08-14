@@ -679,10 +679,12 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private List<Object> getParameters(Grammar grammar, XpandExecutionContext ctx) {
 		try {
-			String projectRoot = new File(ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath()).getCanonicalPath();
-			String genmodelURI = getGenModelUri(grammar, ctx).path();
-			if (genmodelURI.startsWith(projectRoot)) {
-				String genModelPath = genmodelURI.substring(projectRoot.length());
+			File projectRootFile = new File(ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath());
+			String projectRoot = projectRootFile.getCanonicalPath();
+			URI genmodelURI = getGenModelUri(grammar, ctx);
+			if (genmodelURI.toFileString().startsWith(projectRoot)) {
+				URI relative = genmodelURI.deresolve(URI.createFileURI(projectRoot).appendSegment(""));
+				String genModelPath = relative.toString();
 				return Lists.<Object>newArrayList(getBasePackage(grammar), genModelPath);
 			}
 			throw new ConfigurationException("Invalid configuration of genmodel location: " + genmodelURI + "  and project root: " + projectRoot);
