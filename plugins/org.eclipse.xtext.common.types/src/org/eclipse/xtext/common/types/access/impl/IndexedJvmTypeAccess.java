@@ -31,6 +31,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.Strings;
 
@@ -73,6 +74,10 @@ public class IndexedJvmTypeAccess {
 	 * @return the located instance. May be <code>null</code>.
 	 */
 	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet) {
+		return getIndexedJvmType(javaObjectURI, resourceSet, false);
+	}
+	
+	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet, boolean throwShadowedException) {
 		if (resourceSet != null) {
 			URI withoutFragment = javaObjectURI.trimFragment();
 			if (resourceSet instanceof ResourceSetImpl) {
@@ -88,12 +93,16 @@ public class IndexedJvmTypeAccess {
 			String fqn = withoutFragment.segment(withoutFragment.segmentCount() - 1);
 			List<String> fqnSegments = Strings.split(fqn, '.');
 			QualifiedName qualifiedName = QualifiedName.create(fqnSegments);
-			return getIndexedJvmType(qualifiedName, javaObjectURI.fragment(), resourceSet);
+			return getIndexedJvmType(qualifiedName, javaObjectURI.fragment(), resourceSet, throwShadowedException);
 		}
 		return null;
 	}
 	
 	public EObject getIndexedJvmType(QualifiedName qualifiedName, String fragment, ResourceSet resourceSet) {
+		return getIndexedJvmType(qualifiedName, fragment, resourceSet, false);
+	}
+	
+	public EObject getIndexedJvmType(QualifiedName qualifiedName, String fragment, ResourceSet resourceSet, boolean throwShadowedException) {
 		if (resourceSet != null) {
 			IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(resourceSet);
 			Iterable<IEObjectDescription> candidates = descriptions.getExportedObjects(TypesPackage.Literals.JVM_TYPE, qualifiedName, false);
@@ -111,6 +120,11 @@ public class IndexedJvmTypeAccess {
 							return result;
 					} else
 						return typeProxy;
+				}
+			}
+			if (throwShadowedException && descriptions instanceof IShadowedResourceDescriptions) {
+				if (((IShadowedResourceDescriptions) descriptions).isShadowed(TypesPackage.Literals.JVM_TYPE, qualifiedName, false)) {
+					throw new ShadowedTypeException("The type '"+qualifiedName+"' is locally shadowed.");
 				}
 			}
 		}
@@ -181,5 +195,14 @@ public class IndexedJvmTypeAccess {
 			return null;
 		return component.getArrayType();
 	}
-	
+
+	@SuppressWarnings("serial")
+	public static class ShadowedTypeException extends RuntimeException {
+		public ShadowedTypeException() {
+			super();
+		}
+		public ShadowedTypeException(String message) {
+			super(message);
+		}
+	}
 }

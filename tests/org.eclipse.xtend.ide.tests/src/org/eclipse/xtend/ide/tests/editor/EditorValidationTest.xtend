@@ -12,12 +12,11 @@ import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.After
 import org.junit.Test
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
-import org.eclipse.xtext.validation.ResourceValidatorImpl
-import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.validation.CheckMode
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -58,6 +57,47 @@ class EditorValidationTest extends AbstractXtendUITestCase {
 		editor.document.set('')
 		editor.waitForReconciler()
 		editor.document.set(content)
+		editor.waitForReconciler()
+		editor.document.readOnly [
+			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
+			assertTrue(issues.toString,issues.empty)
+			return null
+		]
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415052
+	 */
+	@Test def void testLinkingOfEnum2() {
+		val contentWithoutBar = '''
+			import static Foo.*
+				
+			@SuppressWarnings("all")
+			class SomeClass {
+				def foo() {
+					val Foo x = A
+					return x
+				}
+			}
+		'''
+		val bar = '''
+			enum Foo {
+				A, B, C
+			}
+		'''
+		val file = createFile("SomeClass.xtend",contentWithoutBar+bar)
+		waitForBuild(null)
+		assertEquals(0, file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length)
+		
+		val editor = openEditor(file)
+		editor.document.set(contentWithoutBar)
+		editor.waitForReconciler()
+		editor.document.readOnly [
+			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
+			assertEquals(issues.toString,3,issues.length)
+			return null
+		]
+		editor.document.set(contentWithoutBar+bar)
 		editor.waitForReconciler()
 		editor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
