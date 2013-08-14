@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.ShadowedTypeException;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.util.Strings;
 
@@ -131,18 +132,22 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	@Nullable
 	private JvmType findObjectType(@NonNull String signature, @NonNull URI resourceURI) {
 		TypeResource resource = getLoadedResourceForJavaURI(resourceURI);
-		JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource);
-		if (result != null || resource != null) {
-			if (result != null && !canLink(result.getQualifiedName())) {
+		try {
+			JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource);
+			if (result != null || resource != null) {
+				if (result != null && !canLink(result.getQualifiedName())) {
+					return null;
+				}
+				return result;
+			}
+			try {
+				return findObjectTypeInJavaProject(signature, resourceURI);
+			} catch (JavaModelException e) {
+				return null;
+			} catch (NullPointerException e) { // JDT throws NPEs see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369391
 				return null;
 			}
-			return result;
-		}
-		try {
-			return findObjectTypeInJavaProject(signature, resourceURI);
-		} catch (JavaModelException e) {
-			return null;
-		} catch (NullPointerException e) { // JDT throws NPEs see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369391
+		} catch (ShadowedTypeException e) {
 			return null;
 		}
 	}
@@ -248,7 +253,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 		if (indexedJvmTypeAccess != null) {
 			URI proxyURI = resourceURI.appendFragment(typeUriHelper.getFragment(signature));
-			EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
+			EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet(), true);
 			if (candidate instanceof JvmType) {
 				return (JvmType) candidate;
 			}

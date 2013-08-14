@@ -24,6 +24,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.After;
@@ -121,6 +122,96 @@ public class EditorValidationTest extends AbstractXtendUITestCase {
         }
       };
       _document_2.<Object>readOnly(_function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415052
+   */
+  @Test
+  public void testLinkingOfEnum2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static Foo.*");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("@SuppressWarnings(\"all\")");
+      _builder.newLine();
+      _builder.append("class SomeClass {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val Foo x = A");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return x");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String contentWithoutBar = _builder.toString();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("enum Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("A, B, C");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final String bar = _builder_1.toString();
+      String _plus = (contentWithoutBar + bar);
+      final IFile file = this.helper.createFile("SomeClass.xtend", _plus);
+      this._syncUtil.waitForBuild(null);
+      IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      int _length = _findMarkers.length;
+      Assert.assertEquals(0, _length);
+      final XtextEditor editor = this.helper.openEditor(file);
+      IXtextDocument _document = editor.getDocument();
+      _document.set(contentWithoutBar);
+      this._syncUtil.waitForReconciler(editor);
+      IXtextDocument _document_1 = editor.getDocument();
+      final IUnitOfWork<Object,XtextResource> _function = new IUnitOfWork<Object,XtextResource>() {
+        public Object exec(final XtextResource it) throws Exception {
+          final CancelIndicator _function = new CancelIndicator() {
+            public boolean isCanceled() {
+              return false;
+            }
+          };
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          String _string = issues.toString();
+          int _length = ((Object[])Conversions.unwrapArray(issues, Object.class)).length;
+          Assert.assertEquals(_string, 3, _length);
+          return null;
+        }
+      };
+      _document_1.<Object>readOnly(_function);
+      IXtextDocument _document_2 = editor.getDocument();
+      String _plus_1 = (contentWithoutBar + bar);
+      _document_2.set(_plus_1);
+      this._syncUtil.waitForReconciler(editor);
+      IXtextDocument _document_3 = editor.getDocument();
+      final IUnitOfWork<Object,XtextResource> _function_1 = new IUnitOfWork<Object,XtextResource>() {
+        public Object exec(final XtextResource it) throws Exception {
+          final CancelIndicator _function = new CancelIndicator() {
+            public boolean isCanceled() {
+              return false;
+            }
+          };
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          String _string = issues.toString();
+          boolean _isEmpty = issues.isEmpty();
+          Assert.assertTrue(_string, _isEmpty);
+          return null;
+        }
+      };
+      _document_3.<Object>readOnly(_function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
