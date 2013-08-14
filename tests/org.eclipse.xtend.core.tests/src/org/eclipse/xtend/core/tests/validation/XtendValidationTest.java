@@ -329,6 +329,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz.getMembers().get(0), XFEATURE_CALL, INVALID_CONSTRUCTOR_ARGUMENT);
 	}
 	
+	@Test public void testConstructorArgumentIsValid_12() throws Exception {
+		XtendClass clazz = clazz("class Z extends Exception { new() { super([|''].apply) } }");
+		helper.assertNoErrors(clazz);
+	}
+	
 	@Test public void testConstructorDuplicate() throws Exception {
 		XtendClass clazz = clazz("class K { new(Object o) {} new(Object o) {} }");
 		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);

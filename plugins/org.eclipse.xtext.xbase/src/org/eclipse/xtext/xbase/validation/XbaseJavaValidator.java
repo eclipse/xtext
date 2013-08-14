@@ -16,7 +16,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -106,7 +105,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNonNullResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -139,9 +137,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
-	
-	@Inject
-	private JvmExceptions jvmExceptions;
 	
 	@Inject
 	private NumberLiterals numberLiterals;
@@ -728,7 +723,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		checkCast(casePart.getTypeGuard(), typeGuard, targetTypeRef);
 	}
 
-	@SuppressWarnings("null")
 	@Check
 	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
 		LightweightTypeReference leftType = getActualType(instanceOfExpression.getExpression());
@@ -836,7 +830,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 	
 	protected void checkIsValidConstructorArgument(XExpression argument) {
-		Iterator<EObject> iterator = EcoreUtil2.eAll(argument);
+		TreeIterator<EObject> iterator = EcoreUtil2.eAll(argument);
 		while(iterator.hasNext()) {
 			EObject partOfArgumentExpression = iterator.next();
 			if (partOfArgumentExpression instanceof XFeatureCall) {
@@ -852,6 +846,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 									partOfArgumentExpression, null, INVALID_CONSTRUCTOR_ARGUMENT);	
 					}
 				}
+			} else if(partOfArgumentExpression instanceof XClosure) {
+				iterator.prune();
 			}
 		}
 	}
