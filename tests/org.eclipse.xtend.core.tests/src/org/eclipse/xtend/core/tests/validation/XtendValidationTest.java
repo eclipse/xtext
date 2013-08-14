@@ -329,6 +329,26 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz.getMembers().get(0), XFEATURE_CALL, INVALID_CONSTRUCTOR_ARGUMENT);
 	}
 	
+	@Test public void testConstructorArgumentIsValid_12() throws Exception {
+		XtendClass clazz = clazz("class Foo extends Exception { new(java.util.List<Object> foo) { super(foo.map[toString].join) } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	@Test public void testConstructorArgumentIsValid_13() throws Exception {
+		XtendClass clazz = clazz("class Foo extends Exception { new(Object it) { super(toString) } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	@Test public void testConstructorArgumentIsValid_14() throws Exception {
+		XtendClass clazz = clazz("class Foo extends Exception { new(Object obj) { super(toString) } }");
+		helper.assertError(clazz.getMembers().get(0), XFEATURE_CALL, INVALID_CONSTRUCTOR_ARGUMENT);
+	}
+	
+	@Test public void testConstructorArgumentIsValid_15() throws Exception {
+		XtendClass clazz = clazz("class Foo extends Exception { new(Object it) { super(this.toString) } }");
+		helper.assertError(clazz.getMembers().get(0), XMEMBER_FEATURE_CALL, INVALID_CONSTRUCTOR_ARGUMENT);
+	}
+	
 	@Test public void testConstructorDuplicate() throws Exception {
 		XtendClass clazz = clazz("class K { new(Object o) {} new(Object o) {} }");
 		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
