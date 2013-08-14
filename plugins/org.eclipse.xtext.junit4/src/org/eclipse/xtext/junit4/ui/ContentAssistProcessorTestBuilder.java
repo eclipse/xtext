@@ -12,15 +12,19 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension2;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.ISetup;
@@ -101,6 +105,52 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return clone(model, this.cursorPosition -= times);
 	}
 	
+	public ContentAssistProcessorTestBuilder appendAndApplyProposal(String model) throws Exception {
+		return appendAndApplyProposal(model, cursorPosition);
+	}
+	
+	public ContentAssistProcessorTestBuilder appendAndApplyProposal(String model, String proposal) throws Exception {
+		return appendAndApplyProposal(model, cursorPosition, proposal);
+	}
+	
+	public ContentAssistProcessorTestBuilder appendAndApplyProposal(String model, int position) throws Exception {
+		return appendAndApplyProposal(model, position, null);
+	}
+	
+	public ContentAssistProcessorTestBuilder appendAndApplyProposal(String model, int position, String proposalString) throws Exception {
+		IXtextDocument document = getDocument(getModel());
+		Shell shell = new Shell();
+		try {
+			XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
+			ISourceViewer sourceViewer = getSourceViewer(shell, document, configuration);
+			ICompletionProposal[] proposals = computeCompletionProposals(document, position, shell);
+			ICompletionProposal proposal = findProposal(proposalString, proposals);
+			return appendAndApplyProposal(proposal, sourceViewer, model, position);
+		} finally {
+			shell.dispose();
+		}
+	}
+
+	protected ContentAssistProcessorTestBuilder appendAndApplyProposal(ICompletionProposal proposal, ISourceViewer sourceViewer, String model, int position)
+			throws Exception {
+		IDocument document = sourceViewer.getDocument();
+		int offset = position;
+		if (model != null) {
+			document.set(getModel() + model);
+			offset += model.length();
+		}
+		if (proposal instanceof ICompletionProposalExtension2) {
+			ICompletionProposalExtension2 proposalExtension2 = (ICompletionProposalExtension2) proposal;
+			proposalExtension2.apply(sourceViewer, (char) 0, SWT.NONE, offset);	
+		} else if (proposal instanceof ICompletionProposalExtension) {
+			ICompletionProposalExtension proposalExtension = (ICompletionProposalExtension) proposal;
+			proposalExtension.apply(document, (char) 0, offset);	
+		} else  {
+			proposal.apply(document);
+		}
+		return reset().append(document.get());
+	}
+	
 	public ContentAssistProcessorTestBuilder applyProposal() throws Exception {
 		return applyProposal(cursorPosition);
 	}
@@ -114,25 +164,37 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 	
 	public ContentAssistProcessorTestBuilder applyProposal(int position, String proposalString) throws Exception {
-		ICompletionProposal[] proposals = computeCompletionProposals(getModel(), position);
-		ICompletionProposal proposal = proposals[0];
+		IXtextDocument document = getDocument(getModel());
+		Shell shell = new Shell();
+		try {
+			ICompletionProposal[] proposals = computeCompletionProposals(document, position, shell);
+			ICompletionProposal proposal = findProposal(proposalString, proposals);
+			return applyProposal(proposal, document);
+		} finally {
+			shell.dispose();
+		}
+	}
+
+	protected ICompletionProposal findProposal(String proposalString, ICompletionProposal[] proposals) {
 		if (proposalString != null) {
-			for(ICompletionProposal candidate: proposals) {
+			for (ICompletionProposal candidate : proposals) {
 				if (proposalString.equals(getProposedText(candidate))) {
-					proposal = candidate;
-					break;
+					return candidate;
 				}
 			}
 		}
-		return applyProposal(proposal);
+		return proposals[0];
 	}
 
 	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal) throws Exception {
-		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(Strings.emptyIfNull(model)));
-		IXtextDocument document = getDocument(xtextResource, model);
+		IXtextDocument document = getDocument(model);
+		return applyProposal(proposal, document);
+	}
+
+	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal, IXtextDocument document)
+			throws Exception {
 		proposal.apply(document);
-		ContentAssistProcessorTestBuilder reset = reset();
-		return reset.append(document.get());
+		return reset().append(document.get());
 	}
 
 	public ContentAssistProcessorTestBuilder expectContent(String expectation){
@@ -304,23 +366,41 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	public ICompletionProposal[] computeCompletionProposals(final String currentModelToParse, int cursorPosition)
 			throws Exception {
-		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(currentModelToParse));
-		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
-		
-		XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
+		final IXtextDocument xtextDocument = getDocument(currentModelToParse);
+		return computeCompletionProposals(xtextDocument, cursorPosition);
+	}
+
+	protected ICompletionProposal[] computeCompletionProposals(final IXtextDocument xtextDocument, int cursorPosition)
+			throws BadLocationException {
 		Shell shell = new Shell();
 		try {
-			ISourceViewer sourceViewer = getSourceViewer(shell, xtextDocument, configuration);
-			IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
-			String contentType = xtextDocument.getContentType(cursorPosition);
-			IContentAssistProcessor processor = contentAssistant.getContentAssistProcessor(contentType);
-			if (processor != null) {
-				return processor.computeCompletionProposals(sourceViewer, cursorPosition);
-			}
-			return new ICompletionProposal[0];
+			return computeCompletionProposals(xtextDocument, cursorPosition, shell);
 		} finally {
 			shell.dispose();
 		}
+	}
+
+	protected ICompletionProposal[] computeCompletionProposals(final IXtextDocument xtextDocument, int cursorPosition,
+			Shell shell) throws BadLocationException {
+		XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
+		ISourceViewer sourceViewer = getSourceViewer(shell, xtextDocument, configuration);
+		return computeCompletionProposals(xtextDocument, cursorPosition, configuration, sourceViewer);
+	}
+
+	protected ICompletionProposal[] computeCompletionProposals(final IXtextDocument xtextDocument, int cursorPosition,
+			XtextSourceViewerConfiguration configuration, ISourceViewer sourceViewer) throws BadLocationException {
+		IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
+		String contentType = xtextDocument.getContentType(cursorPosition);
+		IContentAssistProcessor processor = contentAssistant.getContentAssistProcessor(contentType);
+		if (processor != null) {
+			return processor.computeCompletionProposals(sourceViewer, cursorPosition);
+		}
+		return new ICompletionProposal[0];
+	}
+
+	protected IXtextDocument getDocument(final String currentModelToParse) {
+		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(Strings.emptyIfNull(currentModelToParse)));
+		return getDocument(xtextResource, currentModelToParse);
 	}
 
 	protected ISourceViewer getSourceViewer(Shell shell, final IXtextDocument xtextDocument,
