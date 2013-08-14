@@ -27,6 +27,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
@@ -73,8 +74,11 @@ public class JavaElementDelegate implements IAdaptable {
 
 	public void initializeWith(IFileEditorInput editorInput) {
 		this.resource = editorInput.getFile();
-		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
-		this.editor = activePage != null ? activePage.findEditor(editorInput) : null;
+		IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+		if (activeWorkbenchWindow != null) {
+			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+			this.editor = activePage != null ? activePage.findEditor(editorInput) : null;
+		}
 	}
 
 	public void initializeWith(IResource resource) {
