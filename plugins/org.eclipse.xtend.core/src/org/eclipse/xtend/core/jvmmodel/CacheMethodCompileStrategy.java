@@ -34,7 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
-@SuppressWarnings("deprecation")
 public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAppendable> {
 	@Inject
 	private TypeReferences typeReferences;
