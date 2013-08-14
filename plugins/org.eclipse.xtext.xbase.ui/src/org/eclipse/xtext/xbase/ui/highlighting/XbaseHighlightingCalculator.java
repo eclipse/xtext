@@ -253,12 +253,16 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	
 
 	protected void highlightSpecialIdentifiers(IHighlightedPositionAcceptor acceptor, ICompositeNode root) {
-		TerminalRule idRule = grammarAccess.getIDRule();
+		TerminalRule idRule = getIDRule();
 		for (ILeafNode leaf : root.getLeafNodes()) {
 			if (!leaf.isHidden()) {
 				highlightSpecialIdentifiers(leaf, acceptor, idRule);
 			}
 		}
+	}
+
+	protected TerminalRule getIDRule() {
+		return grammarAccess.getIDRule();
 	}
 
 	protected void highlightSpecialIdentifiers(ILeafNode leafNode, IHighlightedPositionAcceptor acceptor,
