@@ -78,6 +78,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public static final String PLUGIN_UI = "PLUGIN_UI";
 	public static final String SRC = "SRC";
 	public static final String SRC_GEN = "SRC_GEN";
+	/**
+	 * @since 2.4
+	 */
+	public static final String MODEL = "MODEL";
 	public static final String PLUGIN_RT = "PLUGIN";
 
 	private Naming naming = new Naming();
@@ -204,7 +208,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public void setSrcGenPath(String srcGenPath) {
 		this.srcGenPath = srcGenPath;
 	}
-
+	
 	private XpandExecutionContext createExecutionContext() {
 		// configure outlets
 		OutputImpl output = new OutputImpl();
@@ -212,6 +216,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_RT, false, getPathRtProject()));
 		output.addOutlet(createOutlet(false, getEncoding(), SRC, false, getPathRtProject() + getSrcPath()));
 		output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN, true, getPathRtProject() + getSrcGenPath()));
+		output.addOutlet(createOutlet(false, getEncoding(), MODEL, false, getPathRtProject() + "/model"));
 		if (getPathUiProject() != null) {
 			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_UI, false, getPathUiProject()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_UI, false, getPathUiProject() + getSrcPath()));
