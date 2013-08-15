@@ -15,27 +15,43 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticProducer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
 
+import com.google.inject.Inject;
+
 /**
  * Optimized lazy linker implementation for Xtend. It's based on the {@link LinkingProxyAwareResource}.
+ * 
+ * It also validates the concrete syntax of the cross link text.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class Linker extends XbaseLazyLinker {
 
+	@Inject
+	private IValueConverterService valueConverterService;
+	
 	/**
 	 * Xtend does not use the grammar pattern where the cross reference is defined 
 	 * in a rule that did not instantiate the object.
@@ -86,12 +102,13 @@ public class Linker extends XbaseLazyLinker {
 		for (INode node = parentNode.getFirstChild(); node != null; node = node.getNextSibling()) {
 			EObject grammarElement = node.getGrammarElement();
 			if (grammarElement instanceof CrossReference && hasLeafNodes(node)) {
+				CrossReference xref = (CrossReference) grammarElement;
 				producer.setNode(node);
-				final EReference eRef = GrammarUtil.getReference((CrossReference) grammarElement, eClass);
+				final EReference eRef = GrammarUtil.getReference(xref, eClass);
 				if (eRef == null) {
 					throw new IllegalStateException("Couldn't find EReference for crossreference " + grammarElement);
 				}
-				createAndSetProxy(state, obj, node, eRef);
+				createAndSetProxy(state, obj, node, eRef, xref, producer);
 			}
 		}
 	}
@@ -107,8 +124,8 @@ public class Linker extends XbaseLazyLinker {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void createAndSetProxy(LinkingProxyAwareResource state, EObject obj, INode node, EReference eRef) {
-		final EObject proxy = createProxy(state, obj, node, eRef);
+	protected void createAndSetProxy(LinkingProxyAwareResource state, EObject obj, INode node, EReference eRef, CrossReference xref, IDiagnosticProducer diagnosticProducer) {
+		final EObject proxy = createProxy(state, obj, node, eRef, xref, diagnosticProducer);
 		// TODO eDeliver could be set to false, here
 		if (eRef.isMany()) {
 			((InternalEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
@@ -117,12 +134,25 @@ public class Linker extends XbaseLazyLinker {
 		}
 	}
 	
-	protected EObject createProxy(LinkingProxyAwareResource resource, EObject obj, INode node, EReference eRef) {
+	protected EObject createProxy(LinkingProxyAwareResource resource, EObject obj, INode node, EReference eRef, CrossReference xref, IDiagnosticProducer diagnosticProducer) {
 		final URI uri = resource.getURI();
 		final URI encodedLink = uri.appendFragment("|" + resource.registerEncodedURI(obj, eRef, node));
 		EClass referenceType = getProxyType(eRef.getEReferenceType());
 		final EObject proxy = EcoreUtil.create(referenceType);
 		((InternalEObject) proxy).eSetProxyURI(encodedLink);
+		
+		AbstractElement terminal = xref.getTerminal();
+		if (!(terminal instanceof RuleCall)) { 
+			throw new IllegalArgumentException(String.valueOf(xref));
+		}
+		AbstractRule rule = ((RuleCall) terminal).getRule();
+		try {
+			String tokenText = NodeModelUtils.getTokenText(node);
+			valueConverterService.toValue(tokenText, rule.getName(), node);
+		} catch(ValueConverterException e) {
+			diagnosticProducer.addDiagnostic(new DiagnosticMessage(e.getMessage(), Severity.ERROR, Diagnostic.SYNTAX_DIAGNOSTIC, Strings.EMPTY_ARRAY));
+		}
+		
 		return proxy;
 	}
 	

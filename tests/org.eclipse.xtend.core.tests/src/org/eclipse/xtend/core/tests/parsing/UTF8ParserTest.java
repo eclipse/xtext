@@ -11,7 +11,6 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -20,15 +19,11 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class UTF8ParserTest extends AbstractXtendTestCase {
 	
-	@Inject private IXtendJvmAssociations associations; 
-
 	@Override
 	protected XtendFile file(String string, boolean validate) throws Exception {
 		XtextResourceSet set = getResourceSet();
