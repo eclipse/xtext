@@ -236,14 +236,6 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					i++;
 				if (ruleNames.length > 2)
 					throw new IllegalArgumentException("The following lines assume that we have at most two rules to call.");
-				int lastGrammarElement = parser.getGrammarElements().size() - 1;
-				if (parser.getGrammarElements().get(lastGrammarElement) != elementToParse)
-					throw new IllegalStateException("Stack of grammar elements seems to be corrupt.");
-				parser.getGrammarElements().remove(lastGrammarElement);
-				int lastLocalTrace = parser.getLocalTrace().size() - 1;
-				if (lastLocalTrace != -1) {
-					parser.getLocalTrace().remove(lastLocalTrace);
-				}
 			}
 			return result;
 		}

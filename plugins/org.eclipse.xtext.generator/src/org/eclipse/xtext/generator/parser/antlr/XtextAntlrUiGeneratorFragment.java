@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
+import static org.eclipse.xtext.util.Files.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,6 +31,7 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
@@ -39,6 +42,28 @@ import com.google.common.collect.Collections2;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragment {
+	
+	private boolean removeBacktrackingGuards = false;
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setRemoveBacktrackingGuards(boolean removeBacktrackingGuards) {
+		this.removeBacktrackingGuards = removeBacktrackingGuards;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void removeBacktrackingGuardsIfEnabled(String absoluteGrammarFileName) {
+		if (removeBacktrackingGuards) {
+			String javaFile = absoluteGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix());
+			String content = readFileIntoString(javaFile);
+			BacktrackingGuardRemover remover = new BacktrackingGuardRemover(content);
+			String newContent = remover.transform();
+			writeStringIntoFile(javaFile, newContent);
+		}
+	}
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
@@ -51,6 +76,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName);
 		splitParserAndLexerIfEnabled(absoluteGrammarFileName);
 		suppressWarnings(absoluteGrammarFileName);
+		removeBacktrackingGuardsIfEnabled(absoluteGrammarFileName);
 	}
 
 	@Override
