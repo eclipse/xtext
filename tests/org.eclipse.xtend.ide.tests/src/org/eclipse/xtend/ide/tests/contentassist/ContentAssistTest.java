@@ -193,15 +193,8 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	
 	@Override
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		final String prefix = "class Name { def _operation() {";
+		final String prefix = getPrefix();
 		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(getInjector(), this) {
-			@Override
-			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition,
-					String... expectedText) throws Exception {
-				append("\n}\n}");
-				return super.assertTextAtCursorPosition(cursorPosition, expectedText);
-			}
-			
 			@Override
 			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(String cursorPosition, int offset,
 					String... expectedText) throws Exception {
@@ -213,9 +206,16 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 					String... expectedText) throws Exception {
 				return assertTextAtCursorPosition(getModel().indexOf(cursorPosition, prefix.length()), expectedText);
 			}
-			
 		};
-		return builder.appendNl(prefix);
+		return builder.appendNl(prefix).appendPostFix(getPostFix());
+	}
+
+	protected String getPostFix() {
+		return "\n}\n}";
+	}
+	
+	protected String getPrefix() {
+		return "class Name { def _operation() {";
 	}
 	
 	protected static final String PROJECT_NAME = "ContentAssistTestProject";
