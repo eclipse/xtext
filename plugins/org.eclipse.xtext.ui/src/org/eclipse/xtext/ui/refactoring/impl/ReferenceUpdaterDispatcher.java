@@ -124,8 +124,11 @@ public class ReferenceUpdaterDispatcher {
 		}
 
 		protected IReferenceUpdater getReferenceUpdater(URI sourceResourceURI) {
+			//TODO Why do we cache the IReferenceUpdater here?
 			IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry
 					.getResourceServiceProvider(sourceResourceURI);
+			if (resourceServiceProvider == null)
+				return null;
 			IReferenceUpdater referenceUpdater = provider2updater.get(resourceServiceProvider);
 			if (referenceUpdater == null) {
 				referenceUpdater = resourceServiceProvider.get(OptionalReferenceUpdaterProxy.class).get();

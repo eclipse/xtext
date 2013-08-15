@@ -209,6 +209,8 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			return null;
 		URI uri = uriMapper.getUri((IStorage) res);
 		IResourceServiceProvider provider = providerRegistry.getResourceServiceProvider(uri);
+		if (provider == null)
+			return null;
 		IResourceSetProvider resourceSetProvider = provider.get(IResourceSetProvider.class);
 		ResourceSet set = resourceSetProvider.get(res.getProject());
 		Resource resource = set.getResource(uri, true);
