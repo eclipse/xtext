@@ -70,25 +70,39 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 	
 	public void _toJavaExpression(XStringLiteral expr, ITreeAppendable b) {
-		JvmTypeReference type = getType(expr);
+		toJavaExpression(expr, b, true);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void toJavaExpression(XStringLiteral literal, ITreeAppendable appendable, boolean useUnicodeEscapes) {
+		JvmTypeReference type = getType(literal);
 		if (getTypeReferences().is(type, Character.TYPE)) {
-			String javaString = Strings.convertToJavaString(expr.getValue());
-			b.append("'").append(javaString).append("'");
+			String javaString = Strings.convertToJavaString(literal.getValue(), useUnicodeEscapes);
+			appendable.append("'").append(javaString).append("'");
 		} else if (getTypeReferences().is(type, Character.class)) {
-			String javaString = Strings.convertToJavaString(expr.getValue());
-			b.append("Character.valueOf('").append(javaString).append("')");
+			String javaString = Strings.convertToJavaString(literal.getValue(), useUnicodeEscapes);
+			appendable.append("Character.valueOf('").append(javaString).append("')");
 		} else {
-			String javaString = Strings.convertToJavaString(expr.getValue());
-			b.append("\"").append(javaString).append("\"");
+			String javaString = Strings.convertToJavaString(literal.getValue(), useUnicodeEscapes);
+			appendable.append("\"").append(javaString).append("\"");
 		}
 	}
 	
 	public void _toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
+		toJavaStatement(expr, b, isReferenced, true);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced, final boolean useUnicodeEscapes) {
 		generateComment(new Later() {
 			public void exec(ITreeAppendable appendable) {
-				String javaString = Strings.convertToJavaString(expr.getValue());
 				// we have to escape closing comments in string literals
-				javaString = javaString.replace("*/", "* /");
+				String escapedClosingComments = expr.getValue().replace("*/", "* /");
+				String javaString = Strings.convertToJavaString(escapedClosingComments, useUnicodeEscapes);
 				appendable.append("\"").append(javaString).append("\"");
 			}
 		}, b, isReferenced);

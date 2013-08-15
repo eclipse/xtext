@@ -76,7 +76,6 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
-import static org.eclipse.xtext.util.Strings.*
 
 /**
  * A generator implementation that processes the 
@@ -579,11 +578,18 @@ class JvmModelGenerator implements IGenerator {
 		appendable.append('{').increaseIndentation.newLine
 			.append('throw new Error("Unresolved compilation problems:"')
 		appendable.increaseIndentation
-		errors.forEach[appendable.newLine.append('+ "\\n').append(convertToJavaString(message)).append('"')]
+		errors.forEach[appendable.newLine.append('+ "\\n').append(doConvertToJavaString(message)).append('"')]
 		appendable.append(');').decreaseIndentation.decreaseIndentation.newLine
 		    .append('}')
 	}
 	
+	/**
+	 * Convert a given input string to a Java string. Non-ascii characters will
+	 * be replaced by a unicode escape sequence by default.
+	 */
+	protected def doConvertToJavaString(String input) {
+		Strings.convertToJavaString(input, true)
+	}
 	
 	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
         val fileHeaderAdapter = it.eAdapters.filter(FileHeaderAdapter).head
@@ -752,13 +758,13 @@ class JvmModelGenerator implements IGenerator {
 	
 	def dispatch void toJavaLiteral(JvmCharAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
-			appendable.append("'" + Strings.convertToJavaString(toString, true) + "'")			
+			appendable.append("'" + doConvertToJavaString(toString) + "'")
 		])
 	}
 		
 	def dispatch void toJavaLiteral(JvmStringAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
-			appendable.append('"' + Strings.convertToJavaString(toString, true) + '"')			
+			appendable.append('"' + doConvertToJavaString(toString) + '"')
 		])
 	}
 		
@@ -818,7 +824,6 @@ class JvmModelGenerator implements IGenerator {
 			name
 		}
 	}
-	
 	
 	def dispatch Iterable<JvmMember> getMembersToBeCompiled(JvmEnumerationType type) {
 		val syntheticEnumMethods = #{ type.identifier + "." + 'valueOf(java.lang.String)', type.identifier + "." + 'values()' }
