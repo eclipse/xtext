@@ -134,7 +134,7 @@ public class JavaIDValueConverter extends IDValueConverter {
 			if (result.length() != 0)
 				throw new ValueConverterWithValueException("Illegal character in identifier '" + result + "' (" + identifier + ")", node, result, null);
 			else
-				throw new ValueConverterException("Illegal character in identifier '" + identifier + "'", node, null);
+				throw new ValueConverterWithValueException("Illegal character in identifier '" + identifier + "'", node, null, null);
 		}
 		return result;
 	}

@@ -1075,6 +1075,30 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.processWithoutException
 	}
 	
+	@Test
+	def void testErrorModel_71() throws Exception {
+		'''
+			import java.util.Map
+			class C {
+				def <A> Map<A, Expression<A>> then(Expression<A> expr) {}
+				def <A extends Number & Comparable<?>> Map<A, NumberExpression<A>> then(NumberExpression<A> expr) {}
+				
+				def void m() {
+					val NumberPath<Long> = null
+					val y = then(count)
+					println(y)
+				}
+			}
+			
+			class NumberPath<T extends Number & Comparable<?>> extends NumberExpression<T> {}
+			class NumberExpression<T extends Number & Comparable<?>> extends ComparableExpressionBase<T> {}
+			class ComparableExpressionBase<T extends Comparable<?>> extends SimpleExpression<T> {}
+			class SimpleExpression<T> extends ExpressionBase<T> {}
+			class ExpressionBase<T> implements Expression<T> {}
+			interface Expression<T> {}
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)

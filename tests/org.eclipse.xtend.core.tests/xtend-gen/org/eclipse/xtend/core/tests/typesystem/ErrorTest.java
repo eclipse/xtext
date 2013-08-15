@@ -2007,6 +2007,54 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_71() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Map");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <A> Map<A, Expression<A>> then(Expression<A> expr) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <A extends Number & Comparable<?>> Map<A, NumberExpression<A>> then(NumberExpression<A> expr) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val NumberPath<Long> = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val y = then(count)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(y)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class NumberPath<T extends Number & Comparable<?>> extends NumberExpression<T> {}");
+    _builder.newLine();
+    _builder.append("class NumberExpression<T extends Number & Comparable<?>> extends ComparableExpressionBase<T> {}");
+    _builder.newLine();
+    _builder.append("class ComparableExpressionBase<T extends Comparable<?>> extends SimpleExpression<T> {}");
+    _builder.newLine();
+    _builder.append("class SimpleExpression<T> extends ExpressionBase<T> {}");
+    _builder.newLine();
+    _builder.append("class ExpressionBase<T> implements Expression<T> {}");
+    _builder.newLine();
+    _builder.append("interface Expression<T> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
