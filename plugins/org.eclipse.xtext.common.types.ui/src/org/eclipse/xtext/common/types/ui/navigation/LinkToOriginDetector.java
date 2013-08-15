@@ -97,6 +97,8 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 									URI resourceURI = source.getAbsoluteResourceURI();
 									if (resourceURI != null) {
 										IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
+										if (serviceProvider == null)
+											return null;
 										LinkToOriginProvider provider = serviceProvider.get(LinkToOriginProvider.class);
 										LinkToOrigin hyperlink = provider.createLinkToOrigin(source, selectedWord, selectedMember, compilationUnit, result);
 										if (hyperlink != null) {
