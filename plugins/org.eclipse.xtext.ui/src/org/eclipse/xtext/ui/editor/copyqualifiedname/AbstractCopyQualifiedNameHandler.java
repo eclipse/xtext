@@ -51,7 +51,11 @@ public abstract class AbstractCopyQualifiedNameHandler extends AbstractHandler {
 		if (selectedElement == null) {
 			return null;
 		}
-		return registry.getResourceServiceProvider(selectedElement.eResource().getURI()).get(CopyQualifiedNameService.class);
+		IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(selectedElement.eResource().getURI());
+		if (resourceServiceProvider == null) {
+			return null;
+		}
+		return resourceServiceProvider.get(CopyQualifiedNameService.class);
 	}
 
 }
