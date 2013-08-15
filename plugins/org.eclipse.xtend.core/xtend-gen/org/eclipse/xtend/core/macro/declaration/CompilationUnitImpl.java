@@ -128,6 +128,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -144,6 +145,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -209,6 +211,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       throw _cancellationException;
     }
   }
+  
+  @Inject
+  private CompilerPhases compilerPhases;
   
   private XtendFile _xtendFile;
   
@@ -364,8 +369,15 @@ public class CompilationUnitImpl implements CompilationUnit {
     Resource _eResource = xtendFile.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _resourceSet);
-    OwnedConverter _ownedConverter = new OwnedConverter(_standardTypeReferenceOwner);
-    this.typeRefConverter = _ownedConverter;
+    final StandardTypeReferenceOwner standardTypeReferenceOwner = _standardTypeReferenceOwner;
+    boolean _isIndexing = this.compilerPhases.isIndexing(xtendFile);
+    if (_isIndexing) {
+      IndexingOwnedConverter _indexingOwnedConverter = new IndexingOwnedConverter(standardTypeReferenceOwner);
+      this.typeRefConverter = _indexingOwnedConverter;
+    } else {
+      OwnedConverter _ownedConverter = new OwnedConverter(standardTypeReferenceOwner);
+      this.typeRefConverter = _ownedConverter;
+    }
   }
   
   private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN,? extends OUT> provider) {

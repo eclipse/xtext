@@ -136,7 +136,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 
 	@Override
 	public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-		JvmType type = reference.getType();
+		JvmType type = getType(reference);
 		if (type == null || type.eIsProxy()) {
 			List<INode> nodes = NodeModelUtils.findNodesForFeature(reference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 			if (nodes.isEmpty()) {
@@ -168,6 +168,10 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 			result.addTypeArgument(visit(argument).getWrapperTypeIfPrimitive());
 		}
 		return result;
+	}
+
+	protected JvmType getType(JvmParameterizedTypeReference reference) {
+		return reference.getType();
 	}
 	
 	@Override
