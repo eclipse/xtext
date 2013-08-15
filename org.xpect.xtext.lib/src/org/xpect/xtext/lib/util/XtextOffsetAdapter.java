@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.xtext.lib.setup;
+package org.xpect.xtext.lib.util;
 
 import java.lang.annotation.Annotation;
 import java.util.Collections;
@@ -29,6 +29,7 @@ import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterProvider;
 import org.xpect.text.IRegion;
+import org.xpect.xtext.lib.setup.ThisResource;
 
 import com.google.common.collect.Sets;
 

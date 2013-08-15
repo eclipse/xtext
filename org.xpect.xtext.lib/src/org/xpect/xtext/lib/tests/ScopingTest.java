@@ -22,8 +22,8 @@ import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
 import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisOffset;
-import org.xpect.xtext.lib.setup.XtextOffsetAdapter.ICrossEReferenceAndEObject;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.xpect.xtext.lib.util.XtextOffsetAdapter.ICrossEReferenceAndEObject;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

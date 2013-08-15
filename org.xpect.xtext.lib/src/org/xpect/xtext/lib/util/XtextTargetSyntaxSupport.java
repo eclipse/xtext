@@ -1,4 +1,4 @@
-package org.xpect.xtext.lib.setup;
+package org.xpect.xtext.lib.util;
 
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -7,7 +7,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.expectation.ITargetSyntaxSupport;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
-import org.xpect.xtext.lib.util.GrammarAnalyzer;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.CommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.MLCommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.SLCommentRule;

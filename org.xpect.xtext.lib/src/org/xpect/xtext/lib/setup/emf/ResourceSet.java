@@ -5,19 +5,31 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.xtext.lib.setup;
+package org.xpect.xtext.lib.setup.emf;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ISetupFile {
-	URI getURI(IFileSetupContext ctx);
+public class ResourceSet {
+	private List<ResourceFactory> factories = Lists.newArrayList();
 
-	InputStream createInputStream(IFileSetupContext ctx) throws IOException;
+	public void add(ResourceFactory file) {
+		factories.add(file);
+	}
+
+	public List<ResourceFactory> getFactories() {
+		return factories;
+	}
+
+	public boolean hasThisFile() {
+		for (ResourceFactory fact : factories)
+			if (fact instanceof ThisFile)
+				return true;
+		return false;
+	}
+
 }

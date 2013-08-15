@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.xpect.setup;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.xpect.Environment;
 import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
@@ -38,6 +42,8 @@ public interface IXpectRunnerSetup<T, K, V, X> extends IXpectSetup {
 
 		void installParameterValue(Class<? extends Annotation> key, IParameterProvider provider);
 
+		<T> T getParameterValue(Class<? extends Annotation> key, Class<T> type);
+
 		Injector getInjector(URI uri);
 
 		IXpectURIProvider getURIProvider();
@@ -47,6 +53,10 @@ public interface IXpectRunnerSetup<T, K, V, X> extends IXpectSetup {
 		XpectFile getXpectFile();
 
 		Injector getInjector();
+
+		Resource load(ResourceSet resourceSet, URI uri, InputStream input) throws IOException;
+
+		URI resolve(String uri);
 	}
 
 	public interface ITestSetupContext extends IFileSetupContext {

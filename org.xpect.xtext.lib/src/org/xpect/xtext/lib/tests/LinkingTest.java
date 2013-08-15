@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.tests;
 
-import junit.framework.Assert;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -18,6 +16,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.xpect.expectation.IStringExpectation;
 import org.xpect.expectation.StringExpectation;
@@ -26,8 +25,8 @@ import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
 import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisOffset;
-import org.xpect.xtext.lib.setup.XtextOffsetAdapter.ICrossEReferenceAndEObject;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.xpect.xtext.lib.util.XtextOffsetAdapter.ICrossEReferenceAndEObject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

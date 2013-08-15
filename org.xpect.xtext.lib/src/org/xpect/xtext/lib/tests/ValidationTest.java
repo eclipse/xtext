@@ -28,6 +28,7 @@ import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisOffset;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.TestingResourceValidator;
 import org.xpect.xtext.lib.util.IssueFormatter;
 import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
@@ -36,7 +37,7 @@ import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @RunWith(XpectRunner.class)
-@XpectSetup({ XtextStandaloneSetup.class, ValidationTestModuleSetup.class })
+@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class, ValidationTestModuleSetup.class })
 public class ValidationTest {
 
 	@Xpect

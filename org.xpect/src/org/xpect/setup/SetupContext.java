@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.xpect.setup;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +17,9 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.xpect.Environment;
 import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
@@ -38,13 +43,13 @@ public class SetupContext implements ITestSetupContext {
 
 	private Collection<URI> allFiles;
 
-	// private List<List<ITypedProvider>> allParameters;
+	private Environment environment;
+
+	private Map<String, Injector> ext2Injector = Maps.newHashMap();
 
 	private XjmMethod method;
 
 	private Map<Class<? extends Annotation>, IParameterProvider> paramValues;
-
-	// private List<ITypedProvider> proposedParameters;
 
 	private Class<?> testClass;
 
@@ -62,22 +67,49 @@ public class SetupContext implements ITestSetupContext {
 
 	private XpectInvocation xpectInvocation;
 
+	private XpectJavaModel xpectJavaModel;
+
 	public Collection<URI> getAllFiles() {
 		return allFiles;
 	}
 
-	// public List<List<ITypedProvider>> getAllParameters() {
-	// return allParameters;
-	// }
-	//
-	// @Override
-	// public Collection<ITypedProvider> getAllParameterValues(int
-	// parameterIndex) {
-	// return allParameters.get(parameterIndex);
-	// }
+	public Environment getEnvironment() {
+		return environment;
+	}
+
+	public Injector getInjector() {
+		return getInjector(xpectFile.eResource().getURI());
+	}
+
+	public Injector getInjector(URI uri) {
+		String ext = new URIDelegationHandler().getOriginalFileExtension(uri.lastSegment());
+		Injector injector = ext2Injector.get(ext);
+		if (injector != null)
+			return injector;
+		ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(ext);
+		if (info == null)
+			throw new IllegalStateException("No Xtext language configuration found for file extension '" + ext + "'.");
+		EList<IXpectGuiceModuleSetup> moduleSetups = xpectJavaModel.getSetups(IXpectGuiceModuleSetup.class, getEnvironment());
+		injector = info.getInjector();
+		if (!moduleSetups.isEmpty()) {
+			List<Module> modules = Lists.newArrayList();
+			for (IXpectGuiceModuleSetup moduleSetup : moduleSetups)
+				modules.add(injector.getInstance(moduleSetup.getModule()));
+			injector = info.getInjector(modules.toArray(new Module[modules.size()]));
+		}
+		ext2Injector.put(ext, injector);
+		return injector;
+	}
 
 	public XjmMethod getMethod() {
 		return method;
+	}
+
+	public <T> T getParameterValue(Class<? extends Annotation> key, Class<T> type) {
+		IParameterProvider provider = paramValues.get(key);
+		if (provider == null)
+			return null;
+		return provider.get(type, paramValues);
 	}
 
 	public Map<Class<? extends Annotation>, IParameterProvider> getParamValues() {
@@ -85,15 +117,6 @@ public class SetupContext implements ITestSetupContext {
 			return Collections.emptyMap();
 		return paramValues;
 	}
-
-	// public List<ITypedProvider> getProposedParameters() {
-	// return proposedParameters;
-	// }
-	//
-	// @Override
-	// public ITypedProvider getProposedParameterValue(int parameterIndex) {
-	// return proposedParameters.get(parameterIndex);
-	// }
 
 	public Class<?> getTestClass() {
 		return testClass;
@@ -127,33 +150,43 @@ public class SetupContext implements ITestSetupContext {
 		return xpectInvocation;
 	}
 
+	public XpectJavaModel getXpectJavaModel() {
+		return xpectJavaModel;
+	}
+
 	public void installParameterValue(Class<? extends Annotation> key, IParameterProvider provider) {
 		if (paramValues == null)
 			paramValues = Maps.newLinkedHashMap();
 		paramValues.put(key, provider);
 	}
 
+	public Resource load(ResourceSet resourceSet, URI uri, InputStream input) throws IOException {
+		Resource resource = getInjector(uri).getInstance(IResourceFactory.class).createResource(uri);
+		resourceSet.getResources().add(resource);
+		try {
+			resource.load(input, null);
+		} finally {
+			if (input != null)
+				input.close();
+		}
+		return resource;
+	}
+
+	public URI resolve(String uri) {
+		return getURIProvider().resolveURI(getXpectFile().eResource().getURI(), uri);
+	}
+
 	public void setAllFiles(Collection<URI> allFiles) {
 		this.allFiles = allFiles;
 	}
 
-	// public void setAllParameters(List<List<ITypedProvider>> allParameters) {
-	// this.allParameters = allParameters;
-	// }
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
 
 	public void setMethod(XjmMethod method) {
 		this.method = method;
 	}
-
-	// @Override
-	// public void setParameterValue(int parameterIndex, ITypedProvider value) {
-	// proposedParameters.set(parameterIndex, value);
-	// }
-
-	// public void setProposedParameters(List<ITypedProvider>
-	// proposedParameters) {
-	// this.proposedParameters = proposedParameters;
-	// }
 
 	public void setTestClass(Class<?> testClass) {
 		this.testClass = testClass;
@@ -187,50 +220,7 @@ public class SetupContext implements ITestSetupContext {
 		this.xpectInvocation = xpectInvocation;
 	}
 
-	private Map<String, Injector> ext2Injector = Maps.newHashMap();
-
-	public Injector getInjector(URI uri) {
-		String ext = new URIDelegationHandler().getOriginalFileExtension(uri.lastSegment());
-		Injector injector = ext2Injector.get(ext);
-		if (injector != null)
-			return injector;
-		ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(ext);
-		if (info == null)
-			throw new IllegalStateException("No Xtext language configuration found for file extension '" + ext + "'.");
-		EList<IXpectGuiceModuleSetup> moduleSetups = xpectJavaModel.getSetups(IXpectGuiceModuleSetup.class, getEnvironment());
-		injector = info.getInjector();
-		if (!moduleSetups.isEmpty()) {
-			List<Module> modules = Lists.newArrayList();
-			for (IXpectGuiceModuleSetup moduleSetup : moduleSetups)
-				modules.add(injector.getInstance(moduleSetup.getModule()));
-			injector = info.getInjector(modules.toArray(new Module[modules.size()]));
-		}
-		ext2Injector.put(ext, injector);
-		return injector;
-	}
-
-	private XpectJavaModel xpectJavaModel;
-
-	public XpectJavaModel getXpectJavaModel() {
-		return xpectJavaModel;
-	}
-
 	public void setXpectJavaModel(XpectJavaModel xpectJavaModel) {
 		this.xpectJavaModel = xpectJavaModel;
 	}
-
-	private Environment environment;
-
-	public Environment getEnvironment() {
-		return environment;
-	}
-
-	public void setEnvironment(Environment environment) {
-		this.environment = environment;
-	}
-
-	public Injector getInjector() {
-		return getInjector(xpectFile.eResource().getURI());
-	}
-
 }
