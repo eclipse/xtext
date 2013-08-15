@@ -329,6 +329,17 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	public void completeXBlockExpression_Expressions(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.completeXBlockExpression_Expressions(model, assignment, context, acceptor);
+		completeWithinBlock(model, context, acceptor);
+	}
+	
+	@Override
+	public void completeXExpressionInClosure_Expressions(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeXExpressionInClosure_Expressions(model, assignment, context, acceptor);
+		completeWithinBlock(model, context, acceptor);
+	}
+
+	protected void completeWithinBlock(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (!(model instanceof XBlockExpression)) {
 			EObject local = model;
 			while(!(local.eContainer() instanceof XBlockExpression)) {
