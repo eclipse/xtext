@@ -10,7 +10,7 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -105,7 +105,7 @@ public class EObjectConsumer implements IEObjectConsumer {
 	}
 
 	public Map<EStructuralFeature, Integer> getUnconsumed() {
-		Map<EStructuralFeature, Integer> feature2FeatureId = new HashMap<EStructuralFeature, Integer>();
+		Map<EStructuralFeature, Integer> feature2FeatureId = new LinkedHashMap<EStructuralFeature, Integer>();
 		EList<EStructuralFeature> features = described.eClass().getEAllStructuralFeatures();
 		for (int id = 0; id < features.size(); id++) {
 			if (nextFeatureId[id] > -1)
