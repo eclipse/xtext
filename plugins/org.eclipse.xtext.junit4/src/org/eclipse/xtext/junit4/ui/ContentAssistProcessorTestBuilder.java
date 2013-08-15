@@ -56,6 +56,7 @@ import com.google.inject.Injector;
 public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	private String model;
+	private String postFix;
 	private int cursorPosition;
 	private Injector injector;
 	private final ResourceLoadHelper loadHelper;
@@ -90,6 +91,10 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	public ContentAssistProcessorTestBuilder append(String model) throws Exception {
 		return clone(getModel()+model, cursorPosition+model.length());
+	}
+	
+	public ContentAssistProcessorTestBuilder appendPostFix(String postFix) throws Exception {
+		return cloneWithPostFix(this.postFix==null?postFix:this.postFix+postFix);
 	}
 
 	public ContentAssistProcessorTestBuilder appendNl(String model) throws Exception {
@@ -211,7 +216,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 	
 	public ProposalTester assertProposal(String expectedText) throws Exception {
-		String currentModelToParse = getModel();
+		String currentModelToParse = getFullTextToBeParsed();
 
 		ICompletionProposal[] proposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
@@ -240,7 +245,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition, String... expectedText)
 			throws Exception {
 
-		String currentModelToParse = getModel();
+		String currentModelToParse = getFullTextToBeParsed();
 
 		ICompletionProposal[] computeCompletionProposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
@@ -319,6 +324,10 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	protected String getModel() {
 		return this.model == null ? "":model;
 	}
+	
+	protected String getFullTextToBeParsed() {
+		return getModel()+(this.postFix== null ? "":postFix);
+	}
 
 	public List<String> toString(ICompletionProposal[] proposals) {
 		if (proposals == null)
@@ -346,7 +355,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	public ContentAssistProcessorTestBuilder assertCountAtCursorPosition(int completionProposalCount, int cursorPosition)
 			throws Exception {
 
-		String currentModelToParse = getModel();
+		String currentModelToParse = getFullTextToBeParsed();
 
 		ICompletionProposal[] computeCompletionProposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
@@ -413,15 +422,15 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 
 	public ICompletionProposal[] computeCompletionProposals(int cursorPosition) throws Exception {
-		return computeCompletionProposals(getModel(), cursorPosition);
+		return computeCompletionProposals(getFullTextToBeParsed(), cursorPosition);
 	}
 	
 	public ICompletionProposal[] computeCompletionProposals(String cursorPosition) throws Exception {
-		return computeCompletionProposals(getModel(), getModel().indexOf(cursorPosition));
+		return computeCompletionProposals(getFullTextToBeParsed(), getModel().indexOf(cursorPosition));
 	}
 	
 	public ICompletionProposal[] computeCompletionProposals() throws Exception {
-		return computeCompletionProposals(getModel(), cursorPosition);
+		return computeCompletionProposals(getFullTextToBeParsed(), cursorPosition);
 	}
 
 	@Override
@@ -469,6 +478,15 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		ContentAssistProcessorTestBuilder builder = (ContentAssistProcessorTestBuilder) clone();
 		builder.model = model;
 		builder.cursorPosition = offset;
+		builder.postFix = this.postFix;
+		return builder;
+	}
+	
+	protected ContentAssistProcessorTestBuilder cloneWithPostFix(String postFix) throws Exception {
+		ContentAssistProcessorTestBuilder builder = (ContentAssistProcessorTestBuilder) clone();
+		builder.model = this.model;
+		builder.cursorPosition = this.cursorPosition;
+		builder.postFix = postFix;
 		return builder;
 	}
 
