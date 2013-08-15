@@ -156,6 +156,9 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				|| ((expectedType instanceof JvmSynonymTypeReference) 
 					&& Iterables.any(((JvmSynonymTypeReference)expectedType).getReferences(), new Predicate<JvmTypeReference>() {
 						public boolean apply(@Nullable JvmTypeReference ref) {
+							if (ref == null) {
+								throw new IllegalArgumentException();
+							}
 							return EcoreUtil.equals(ref.getType(), functionType.getType());
 						}
 					}))) {

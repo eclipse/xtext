@@ -492,6 +492,8 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	
 	
 	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
 	 * @since 2.4
 	 */
 	public void dump() {
@@ -500,6 +502,8 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	}
 	
 	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
 	 * @since 2.4
 	 */
 	protected void dump(String indent) {

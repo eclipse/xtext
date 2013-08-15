@@ -25,6 +25,7 @@ import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -92,5 +93,15 @@ public class XtendGenerator extends JvmModelGenerator {
         }
       }
     }
+  }
+  
+  /**
+   * Convert a given input string to a Java string.
+   * 
+   * Unicode escaping is handled by the {@link UnicodeAwarePostProcessor}.
+   */
+  public String doConvertToJavaString(final String input) {
+    String _convertToJavaString = Strings.convertToJavaString(input, false);
+    return _convertToJavaString;
   }
 }

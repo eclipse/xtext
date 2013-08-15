@@ -1216,8 +1216,8 @@ public class JvmModelGenerator implements IGenerator {
           ITreeAppendable _newLine = appendable.newLine();
           ITreeAppendable _append = _newLine.append("+ \"\\n");
           String _message = it.getMessage();
-          String _convertToJavaString = Strings.convertToJavaString(_message);
-          ITreeAppendable _append_1 = _append.append(_convertToJavaString);
+          String _doConvertToJavaString = JvmModelGenerator.this.doConvertToJavaString(_message);
+          ITreeAppendable _append_1 = _append.append(_doConvertToJavaString);
           _append_1.append("\"");
         }
       };
@@ -1230,6 +1230,15 @@ public class JvmModelGenerator implements IGenerator {
       _xblockexpression = (_append_2);
     }
     return _xblockexpression;
+  }
+  
+  /**
+   * Convert a given input string to a Java string. Non-ascii characters will
+   * be replaced by a unicode escape sequence by default.
+   */
+  protected String doConvertToJavaString(final String input) {
+    String _convertToJavaString = Strings.convertToJavaString(input, true);
+    return _convertToJavaString;
   }
   
   public void generateFileHeader(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
@@ -1661,8 +1670,8 @@ public class JvmModelGenerator implements IGenerator {
     final Procedure1<Character> _function = new Procedure1<Character>() {
       public void apply(final Character it) {
         String _string = it.toString();
-        String _convertToJavaString = Strings.convertToJavaString(_string, true);
-        String _plus = ("\'" + _convertToJavaString);
+        String _doConvertToJavaString = JvmModelGenerator.this.doConvertToJavaString(_string);
+        String _plus = ("\'" + _doConvertToJavaString);
         String _plus_1 = (_plus + "\'");
         appendable.append(_plus_1);
       }
@@ -1675,8 +1684,8 @@ public class JvmModelGenerator implements IGenerator {
     final Procedure1<String> _function = new Procedure1<String>() {
       public void apply(final String it) {
         String _string = it.toString();
-        String _convertToJavaString = Strings.convertToJavaString(_string, true);
-        String _plus = ("\"" + _convertToJavaString);
+        String _doConvertToJavaString = JvmModelGenerator.this.doConvertToJavaString(_string);
+        String _plus = ("\"" + _doConvertToJavaString);
         String _plus_1 = (_plus + "\"");
         appendable.append(_plus_1);
       }

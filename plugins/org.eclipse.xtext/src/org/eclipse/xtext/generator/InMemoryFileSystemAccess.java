@@ -28,9 +28,38 @@ import com.google.common.io.ByteStreams;
 public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
 
 	private Map<String, Object> files = newTreeMap(); // the TreeMap sorts all files by name
-
+	
+	private String textFileEnconding;
+	
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) {
-		files.put(getFileName(fileName, outputConfigName), postProcess(fileName, outputConfigName, contents));
+		String encoding = getTextFileEncoding();
+		if (encoding != null)
+			contents = postProcess(fileName, outputConfigName, contents, encoding);
+		else
+			contents = postProcess(fileName, outputConfigName, contents);
+		files.put(getFileName(fileName, outputConfigName), contents);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public String getTextFileEncoding() {
+		return textFileEnconding;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setTextFileEnconding(String textFileEnconding) {
+		this.textFileEnconding = textFileEnconding;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Override
+	public void setPostProcessor(IFilePostProcessor postProcessor) {
+		super.setPostProcessor(postProcessor);
 	}
 
 	/**

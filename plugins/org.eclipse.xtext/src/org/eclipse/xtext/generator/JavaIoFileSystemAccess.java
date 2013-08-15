@@ -81,7 +81,7 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 			String encoding = getEncoding(getURI(fileName, outputConfigName));
 			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoding);
 			try {
-				writer.append(postProcess(fileName, outputConfigName, contents));
+				writer.append(postProcess(fileName, outputConfigName, contents, encoding));
 				if (writeTrace)
 					generateTrace(fileName, outputConfigName, contents);
 			} finally {

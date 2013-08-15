@@ -180,6 +180,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return resolveType(element, clazz) != null;
 	}
 
+	@Nullable
 	protected LightweightTypeReference resolveType(XExpression element, Class<?> clazz) {
 		LightweightTypeReference elementType = batchTypeResolver.resolveTypes(element).getActualType(element);
 		return elementType != null && elementType.isType(clazz) ? elementType : null;
