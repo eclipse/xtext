@@ -225,10 +225,18 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 
 	protected void restoreStackSize(int stackSize) {
-		if (state.backtracking == 0) {
+		if (!isBacktracking()) {
 			removeUnexpectedElements();
 			this.stackSize = stackSize;
 		}
+	}
+
+	
+	/**
+	 * @since 2.4
+	 */
+	protected boolean isBacktracking() {
+		return state.backtracking != 0;
 	}
 	
 	protected abstract class StreamAdapter implements ObservableXtextTokenStream.StreamListener {
@@ -363,7 +371,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		return new StreamAdapter() {
 
 			public void announceEof(int lookAhead) {
-				if (!state.errorRecovery && !mismatch && (state.backtracking == 0 || marked)) {
+				if (!state.errorRecovery && !mismatch && (!isBacktracking() || marked)) {
 					AbstractElement current = getCurrentGrammarElement();
 					if (current != null) {
 						if (marked)
