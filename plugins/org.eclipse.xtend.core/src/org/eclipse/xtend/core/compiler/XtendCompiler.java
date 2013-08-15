@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
+import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -125,7 +126,7 @@ public class XtendCompiler extends XbaseCompiler {
 			currentAppendable.newLine();
 			currentAppendable.append(variableName);
 			currentAppendable.append(".append(\"");
-			currentAppendable.append(Strings.convertToJavaString(text.toString()));
+			currentAppendable.append(Strings.convertToJavaString(text.toString(), false));
 			currentAppendable.append("\");");
 		}
 
@@ -215,7 +216,11 @@ public class XtendCompiler extends XbaseCompiler {
 			debugAppendable.newLine();
 			debugAppendable.append("for(final ");
 			LightweightTypeReference paramType = getTypeResolver().resolveTypes(parameter).getActualType(parameter);
-			debugAppendable.append(paramType);
+			if (paramType != null) {
+				debugAppendable.append(paramType);
+			} else {
+				debugAppendable.append("Object");
+			}
 			debugAppendable.append(" ");
 			String loopParam = debugAppendable.declareVariable(parameter, parameter.getName());
 			debugAppendable.append(loopParam);
@@ -413,5 +418,25 @@ public class XtendCompiler extends XbaseCompiler {
 			return canUseArrayInitializerImpl(literal, appendable);
 		}
 		return super.canUseArrayInitializer(literal, appendable);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Specialized since unicode escapes are handled in the {@link UnicodeAwarePostProcessor}.
+	 */
+	@Override
+	public void _toJavaExpression(XStringLiteral expr, ITreeAppendable b) {
+		toJavaExpression(expr, b, false);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Specialized since unicode escapes are handled in the {@link UnicodeAwarePostProcessor}.
+	 */
+	@Override
+	public void _toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
+		toJavaStatement(expr, b, isReferenced, false);
 	}
 }

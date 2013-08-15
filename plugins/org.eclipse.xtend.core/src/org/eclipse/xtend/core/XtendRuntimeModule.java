@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtend.core;
 
+import org.eclipse.xtend.core.compiler.UnicodeAwarePostProcessor;
 import org.eclipse.xtend.core.compiler.XtendCompiler;
 import org.eclipse.xtend.core.compiler.XtendGenerator;
 import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
@@ -33,7 +34,6 @@ import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
-import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.linking.ILinker;
@@ -123,10 +123,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendScopeProvider.class;
 	}
 
-	public Class<? extends IFilePostProcessor> bindPostProcessor() {
-		return TraceAwarePostProcessor.class;
-	}
-	
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XtendLocationInFileProvider.class;
@@ -166,6 +162,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
 		return XtendCompiler.class;
+	}
+	
+	public Class<? extends TraceAwarePostProcessor> bindTraceAwarePostProcessor() {
+		return UnicodeAwarePostProcessor.class;
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.lib.macro.CodeGenerationParticipant
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 
 /**
@@ -46,6 +47,15 @@ class XtendGenerator extends JvmModelGenerator {
 				context.handleProcessingError(input, t)
 			}
 		}
+	}
+	
+	/**
+	 * Convert a given input string to a Java string.
+	 * 
+	 * Unicode escaping is handled by the {@link UnicodeAwarePostProcessor}.
+	 */
+	override doConvertToJavaString(String input) {
+		Strings.convertToJavaString(input, false)
 	}
 	
 }
