@@ -116,13 +116,15 @@ public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinde
 		subMonitor.setWorkRemaining(size(indexData.getAllResourceDescriptions()));
 		for (IResourceDescription resourceDescription : indexData.getAllResourceDescriptions()) {
 			IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceDescription.getURI());
-			IReferenceFinder referenceFinder = serviceProvider.get(IReferenceFinder.class);
-			if (referenceFinder instanceof IReferenceFinderExtension1) {
-				IReferenceFinderExtension1 extension1 = (IReferenceFinderExtension1) referenceFinder;
-				extension1.findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1), localResourceAccess);
-			} else {
-				// don't use the language specific reference finder here for backwards compatibility reasons
-				findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1), localResourceAccess);
+			if (serviceProvider != null) {
+				IReferenceFinder referenceFinder = serviceProvider.get(IReferenceFinder.class);
+				if (referenceFinder instanceof IReferenceFinderExtension1) {
+					IReferenceFinderExtension1 extension1 = (IReferenceFinderExtension1) referenceFinder;
+					extension1.findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1), localResourceAccess);
+				} else {
+					// don't use the language specific reference finder here for backwards compatibility reasons
+					findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor, subMonitor.newChild(1), localResourceAccess);
+				}
 			}
 		}
 	}
