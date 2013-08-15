@@ -162,12 +162,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 
 		IFile file = getFile(fileName, outputName);
 		IFile traceFile = getTraceFile(file);
-		CharSequence postProcessedContent = postProcess(fileName, outputName, contents);
-		String contentsAsString = postProcessedContent.toString();
 		try {
+			String encoding = getEncoding(file);
+			CharSequence postProcessedContent = postProcess(fileName, outputName, contents, encoding);
+			String contentsAsString = postProcessedContent.toString();
 			if (file.exists()) {
 				if (outputConfig.isOverrideExistingResources()) {
-					StringInputStream newContent = getInputStream(contentsAsString, getEncoding(file));
+					StringInputStream newContent = getInputStream(contentsAsString, encoding);
 					if (hasContentsChanged(file, newContent)) {
 						// reset to offset zero allows to reuse internal byte[]
 						// no need to convert the string twice
@@ -186,7 +187,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 				}
 			} else {
 				ensureParentExists(file);
-				file.create(getInputStream(contentsAsString, getEncoding(file)), true, monitor);
+				file.create(getInputStream(contentsAsString, encoding), true, monitor);
 				if (outputConfig.isSetDerivedProperty()) {
 					setDerived(file, true);
 				}

@@ -61,7 +61,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess2 {
 		try {
 			createFolder(file.getParent());
 			final String defaultCharset = file.getCharset();
-			String newContentAsString = postProcess(fileName, slot, contents).toString();
+			String newContentAsString = postProcess(fileName, slot, contents, defaultCharset).toString();
 			if (file.exists()) {
 				boolean contentChanged = false;
 				BufferedInputStream oldContent = null;
