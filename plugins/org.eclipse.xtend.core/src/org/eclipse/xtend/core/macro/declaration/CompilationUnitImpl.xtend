@@ -83,6 +83,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
+import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
@@ -93,6 +94,7 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -134,6 +136,8 @@ class CompilationUnitImpl implements CompilationUnit {
 		if (canceled)
 			throw new CancellationException("compilation was canceled.")
 	}
+	
+	@Inject CompilerPhases compilerPhases;
 
 	@Property XtendFile xtendFile
 	@Inject CommonTypeComputationServices services;
@@ -207,8 +211,12 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def void setXtendFile(XtendFile xtendFile) {
 		this._xtendFile = xtendFile
-		this.typeRefConverter = new OwnedConverter(
-			new StandardTypeReferenceOwner(services, xtendFile.eResource.resourceSet))
+		val standardTypeReferenceOwner = new StandardTypeReferenceOwner(services, xtendFile.eResource.resourceSet)
+		if (compilerPhases.isIndexing(xtendFile)) {
+			this.typeRefConverter = new IndexingOwnedConverter(standardTypeReferenceOwner)	
+		} else {
+			this.typeRefConverter = new OwnedConverter(standardTypeReferenceOwner)
+		}
 	}
 
 	def private <IN extends EObject, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
