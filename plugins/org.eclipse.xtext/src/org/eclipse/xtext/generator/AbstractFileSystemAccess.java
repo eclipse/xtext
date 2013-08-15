@@ -9,6 +9,7 @@ package org.eclipse.xtext.generator;
 
 import static com.google.common.collect.Maps.*;
 
+import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -100,9 +101,23 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 	}
 
 	/**
+	 * @since 2.4
+	 */
+	protected CharSequence postProcess(String fileName, String outputConfiguration, CharSequence content, String charset) {
+		if (postProcessor instanceof IFilePostProcessorExtension) {
+			return ((IFilePostProcessorExtension)postProcessor).postProcess(getURI(fileName, outputConfiguration), content, Charset.forName(charset));
+		} else
+			return postProcess(fileName, outputConfiguration, content);
+	}
+	
+	/**
 	 * @since 2.3
 	 */
 	public URI getURI(String fileName) {
 		return getURI(fileName, DEFAULT_OUTPUT);
+	}
+	
+	void setPostProcessor(IFilePostProcessor postProcessor) {
+		this.postProcessor = postProcessor;
 	}
 }
