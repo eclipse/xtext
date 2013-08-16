@@ -80,6 +80,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -248,7 +249,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		LightweightTypeReference collectionElementType = getCollectionElementType(literal);
 		ITypeReferenceOwner owner = collectionElementType.getOwner();
 		JvmType collectionsClass = getTypeReferences().findDeclaredType(Collections.class, literal);
-		ParameterizedTypeReference guavaClass = new ParameterizedTypeReference(owner, getTypeReferences().findDeclaredType(guavaHelper, literal));
+		JvmType guavaHelperType = getTypeReferences().findDeclaredType(guavaHelper, literal);
+		LightweightTypeReference guavaClass = guavaHelperType == null ? new UnknownTypeReference(owner, guavaHelper.getName()) :new ParameterizedTypeReference(owner, guavaHelperType);
 		b.append(collectionsClass)
 			.append(".<").append(collectionElementType).append(">").append(collectionsMethod).append("(")
 			.append(guavaClass).append(".<").append(collectionElementType).append(">").append(guavaHelperMethod).append("(");
