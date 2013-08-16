@@ -41,6 +41,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
+import static com.google.common.collect.Lists.*;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
@@ -115,22 +117,30 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public void addModelListener(IXtextModelListener listener) {
 		Assert.isNotNull(listener);
-		if (modelListeners.contains(listener))
-			return;
-		if (listener instanceof DirtyStateEditorSupport) {
-			modelListeners.add(0,listener);
-		} else {
-			modelListeners.add(listener);
+		synchronized (modelListeners) {
+			if (modelListeners.contains(listener))
+				return;
+			if (listener instanceof DirtyStateEditorSupport) {
+				modelListeners.add(0,listener);
+			} else {
+				modelListeners.add(listener);
+			}
 		}
 	}
 
 	public void removeModelListener(IXtextModelListener listener) {
 		Assert.isNotNull(listener);
-		modelListeners.remove(listener);
+		synchronized (modelListeners) {
+			modelListeners.remove(listener);
+		}
 	}
 
 	protected void notifyModelListeners(XtextResource res) {
-		for (IXtextModelListener listener : modelListeners){
+		List<IXtextModelListener> modelListenersCopy;
+		synchronized (modelListeners) {
+			modelListenersCopy = newArrayList(modelListeners);
+		}
+		for (IXtextModelListener listener : modelListenersCopy){
 			try {
 				listener.modelChanged(res);
 			} catch(Exception exc) {
