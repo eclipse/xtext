@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
-import java.util.List;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
@@ -20,6 +17,9 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * 
+ * TODO - remove Adapter interface, it's not used.
  */
 public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 
@@ -35,7 +35,6 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 	public void initialize(TypeResource typeResource) {
 		typeResource.getContents().add(typeFactory.createType(mirroredType));
 		this.typeResource = typeResource;
-		typeResource.getResourceSet().eAdapters().add(this);
 	}
 
 	@Override
@@ -48,11 +47,7 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 	}
 
 	protected void unloadResource() {
-		if (typeResource.getResourceSet() != null)
-			typeResource.getResourceSet().eAdapters().remove(this);
 		typeResource.unload();
-		if (typeResource.getResourceSet() != null)
-			typeResource.getResourceSet().getResources().remove(typeResource);
 		mirroredType = null;
 	}
 
@@ -65,24 +60,7 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 	}
 
 	public void notifyChanged(Notification notification) {
-		if (notification.isTouch())
-			return;
-		switch(notification.getEventType()) {
-			case Notification.REMOVE:
-				if (notification.getOldValue() == typeResource) {
-					unloadResource();
-					ResourceSet resourceSet = (ResourceSet) notification.getNotifier();
-					resourceSet.eAdapters().remove(this);
-				}
-				break;
-			case Notification.REMOVE_MANY:
-				if (((List<?>) notification.getOldValue()).contains(typeResource)) {
-					unloadResource();
-					ResourceSet resourceSet = (ResourceSet) notification.getNotifier();
-					resourceSet.eAdapters().remove(this);
-				}
-				break;
-		}
+		// ignore
 	}
 
 	public void setTarget(Notifier notifier) {
