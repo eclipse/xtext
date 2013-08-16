@@ -20,6 +20,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,13 +29,21 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
+  @After
+  public void tearDown() {
+    try {
+      IResourcesSetupUtil.cleanWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   @Test
-  public void testResolvingCrossReference() {
+  public void testResolvingJvmParameterizedTypeReference() {
     try {
       final IProject annoProject = WorkbenchTestHelper.createPluginProject("annotation.project", "com.google.inject", 
         "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.core");
       WorkbenchTestHelper.addExportedPackages(annoProject, "myannotation");
-      WorkbenchTestHelper.addExportedPackages(annoProject, "mypackage");
       Path _path = new Path("/annotation.project/src/myannotation/MyAnnotation.xtend");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package myannotation");
@@ -97,47 +106,246 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder.append("}");
       _builder.newLine();
       IResourcesSetupUtil.createFile(_path, _builder.toString());
-      Path _path_1 = new Path("/annotation.project/src/mypackage/SuperClass.java");
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
+      WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib", 
+        "org.eclipse.xtext.xbase.lib", "annotation.project");
+      Path _path_1 = new Path("/client.project/src/mypackage/MyClient.xtend");
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("package mypackage;");
+      _builder_1.append("package mypackage");
       _builder_1.newLine();
       _builder_1.newLine();
-      _builder_1.append("public class SuperClass {");
+      _builder_1.append("import myannotation.MyAnnotation");
       _builder_1.newLine();
+      _builder_1.append("import java.util.ArrayList");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@MyAnnotation");
+      _builder_1.newLine();
+      _builder_1.append("class MyClient extends ArrayList<Object> {");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
       IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testResolvingXFunctionTypeRef() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Assert.assertNotNull(type)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(1, type.actualTypeArguments.size)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(\"? extends java.util.ArrayList<java.lang.String>\", type.actualTypeArguments.head.name)");
+    _builder.newLine();
+    this.testResolvingXFunctionTypeRef("=>java.util.ArrayList<String>", _builder.toString());
+  }
+  
+  @Test
+  public void testResolvingXFunctionTypeRef_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Assert.assertNotNull(type)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(1, type.actualTypeArguments.size)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(\"? extends java.lang.Void\", type.actualTypeArguments.head.name)");
+    _builder.newLine();
+    this.testResolvingXFunctionTypeRef("=>void", _builder.toString());
+  }
+  
+  @Test
+  public void testResolvingXFunctionTypeRef_3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Assert.assertNotNull(type)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(2, type.actualTypeArguments.size)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(\"? super java.lang.Integer\", type.actualTypeArguments.head.name)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(\"? extends java.lang.Void\", type.actualTypeArguments.tail.head.name)");
+    _builder.newLine();
+    this.testResolvingXFunctionTypeRef("(int)=>void", _builder.toString());
+  }
+  
+  @Test
+  public void testResolvingXFunctionTypeRef_4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Assert.assertNotNull(type)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(1, type.actualTypeArguments.size)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(\"? extends java.lang.Integer[]\", type.actualTypeArguments.head.name)");
+    _builder.newLine();
+    this.testResolvingXFunctionTypeRef("()=>Integer[]", _builder.toString());
+  }
+  
+  @Test
+  public void testResolvingXFunctionTypeRef_5() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Assert.assertNotNull(type)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(1, type.actualTypeArguments.size)");
+    _builder.newLine();
+    _builder.append("Assert.assertEquals(\"? extends org.eclipse.xtext.xbase.lib.Functions$Function0<? extends java.util.Map<java.lang.String, java.lang.Boolean>>\", type.actualTypeArguments.head.name)");
+    _builder.newLine();
+    this.testResolvingXFunctionTypeRef("=>=>java.util.Map<String, Boolean>", _builder.toString());
+  }
+  
+  public void testResolvingXFunctionTypeRef(final String functionType, final String expectations) {
+    try {
+      final IProject annoProject = WorkbenchTestHelper.createPluginProject("annotation.project", "com.google.inject", 
+        "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.core", "org.junit");
+      WorkbenchTestHelper.addExportedPackages(annoProject, "myannotation");
+      Path _path = new Path("/annotation.project/src/myannotation/MyAnnotation.xtend");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package myannotation");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import org.eclipse.emf.ecore.EObject");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.core.macro.declaration.XtendFieldDeclarationImpl");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtext.common.types.JvmParameterizedTypeReference");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtext.common.types.JvmTypeReference");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtext.xtype.XFunctionTypeRef");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl");
+      _builder.newLine();
+      _builder.append("import org.junit.Assert");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import static org.eclipse.xtext.common.types.TypesPackage.Literals.*");
+      _builder.newLine();
+      _builder.append("import static org.eclipse.xtext.xtype.XtypePackage.Literals.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Active(MyAnnotationProcessor)");
+      _builder.newLine();
+      _builder.append("annotation MyAnnotation {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class MyAnnotationProcessor extends AbstractClassProcessor {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val declaredField = annotatedClass.declaredFields.head");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val returnType = ((declaredField as XtendFieldDeclarationImpl).delegate.type as XFunctionTypeRefImpl).returnType");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("returnType.assertProxies(\"Before\")");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val type = declaredField.type");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append(expectations, "		");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("returnType.assertProxies(\"After\")");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch void assertProxies(JvmParameterizedTypeReference it, String message) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val type = eGet(JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, false) as EObject");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Assert.assertTrue(message + \": Type should be a proxy: \" + it.class.name + \".\", type == null || type.eIsProxy)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch void assertProxies(XFunctionTypeRef it, String message) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val type = eGet(XFUNCTION_TYPE_REF__TYPE, false) as EObject");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Assert.assertTrue(message + \": Type should be a proxy: \" + it.class.name + \".\", type == null || type.eIsProxy)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch void assertProxies(JvmGenericArrayTypeReference it, String message) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("componentType.assertProxies(message)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch void assertProxies(JvmTypeReference it, String message) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("throw new UnsupportedOperationException");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      IResourcesSetupUtil.createFile(_path, _builder.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
       WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtext.xbase.lib", "annotation.project");
-      Path _path_2 = new Path("/client.project/src/mypackage/SuperClass.java");
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("package mypackage;");
-      _builder_2.newLine();
-      _builder_2.newLine();
-      _builder_2.append("public class SuperClass {");
-      _builder_2.newLine();
-      _builder_2.newLine();
-      _builder_2.append("}");
-      _builder_2.newLine();
-      IResourcesSetupUtil.createFile(_path_2, _builder_2.toString());
-      Path _path_3 = new Path("/client.project/src/mypackage/MyClient.xtend");
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("package mypackage");
-      _builder_3.newLine();
-      _builder_3.newLine();
-      _builder_3.append("import myannotation.MyAnnotation");
-      _builder_3.newLine();
-      _builder_3.newLine();
-      _builder_3.append("@MyAnnotation");
-      _builder_3.newLine();
-      _builder_3.append("class MyClient extends SuperClass {");
-      _builder_3.newLine();
-      _builder_3.append("}");
-      _builder_3.newLine();
-      IResourcesSetupUtil.createFile(_path_3, _builder_3.toString());
+      Path _path_1 = new Path("/client.project/src/mypackage/MyClient.xtend");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mypackage");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import myannotation.MyAnnotation");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@MyAnnotation");
+      _builder_1.newLine();
+      _builder_1.append("class MyClient {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("var ");
+      _builder_1.append(functionType, "	");
+      _builder_1.append(" function");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {

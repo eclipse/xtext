@@ -170,7 +170,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		return result;
 	}
 
-	protected JvmType getType(JvmParameterizedTypeReference reference) {
+	protected JvmType getType(JvmTypeReference reference) {
 		return reference.getType();
 	}
 	
