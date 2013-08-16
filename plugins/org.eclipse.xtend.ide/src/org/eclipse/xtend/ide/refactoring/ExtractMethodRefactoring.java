@@ -286,7 +286,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 		try {
 			Set<String> calledExternalFeatureNames = newHashSet();
 			returnType = calculateReturnType(resolvedTypes);
-			if (!equal("void", returnType.getIdentifier()))
+			if (returnType != null && !equal("void", returnType.getIdentifier()))
 				returnExpression = lastExpression;
 			boolean isReturnAllowed = isEndOfOriginalMethod(); 
 			for (EObject element : EcoreUtil2.eAllContents(originalMethod.getExpression())) {
