@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.access.impl.ClassURIHelper
 import org.eclipse.xtext.xbase.lib.Functions
 import org.eclipse.xtext.xbase.lib.Procedures
 
@@ -38,11 +39,7 @@ class XFunctionTypeRefs {
 	}
 
 	def static computeTypeUri(Class<?> topLevelClass) {
-		topLevelClass.buildURI.createURI
-	}
-
-	def static String buildURI(Class<?> topLevelClass) {
-		'''java:/Objects/«topLevelClass.canonicalName»#«topLevelClass.canonicalName»'''
+		new ClassURIHelper().getFullURI(topLevelClass)
 	}
 
 	def static JvmTypeReference wrapIfNecessary(JvmTypeReference reference, JvmType type) {
