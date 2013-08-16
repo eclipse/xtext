@@ -42,9 +42,11 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	private final Set<String> names = Sets.newHashSet();
 	private final IXpectURIProvider uriProvider;
 	private final Injector xpectInjector;
+	public static ClassLoader testClassloader = null;
 
 	public XpectRunner(Class<?> testClass) throws InitializationError {
 		super(testClass);
+		testClassloader = testClass.getClassLoader();
 		this.uriProvider = findUriProvider(testClass);
 		this.xpectInjector = findXpectInjector();
 		this.xpectJavaModel = this.xpectInjector.getInstance(XpectJavaModelFactory.class).createJavaModel(testClass);

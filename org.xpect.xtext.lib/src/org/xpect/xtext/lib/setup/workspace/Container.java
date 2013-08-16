@@ -26,4 +26,21 @@ public class Container<C extends IContainer> extends Resource<C> {
 		return memberFactories;
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T extends IResourceFactory<?, ?>> List<T> getMembers(Class<T> type) {
+		List<T> result = Lists.newArrayList();
+		for (IResourceFactory<?, ? super C> member : memberFactories)
+			if (type.isInstance(member))
+				result.add((T) member);
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends IResourceFactory<?, ?>> T getMember(Class<T> type) {
+		for (IResourceFactory<?, ? super C> member : memberFactories)
+			if (type.isInstance(member))
+				return (T) member;
+		return null;
+	}
+
 }

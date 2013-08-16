@@ -17,6 +17,8 @@ import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeMirror;
+import org.eclipse.xtext.common.types.util.JavaReflectAccess;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.xpect.util.IJavaReflectAccess;
@@ -109,6 +111,12 @@ public class UIJavaReflectAccess implements IJavaReflectAccess {
 	public Class<?> getRawType(JvmType jvmType) {
 		if (jvmType == null || jvmType.eIsProxy())
 			return null;
+		XtextResourceSet resourceSet = (XtextResourceSet) jvmType.eResource().getResourceSet();
+		if (resourceSet.getClasspathURIContext() instanceof ClassLoader) {
+			JavaReflectAccess access = new JavaReflectAccess();
+			access.setClassLoader((ClassLoader) resourceSet.getClasspathURIContext());
+			return access.getRawType(jvmType);
+		}
 		if (!(jvmType.eResource() instanceof TypeResource))
 			return null;
 		IMirror typeMirror = ((TypeResource) jvmType.eResource()).getMirror();

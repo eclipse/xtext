@@ -14,18 +14,22 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
+import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.xpect.XpectFile;
 import org.xpect.registry.ILanguageInfo;
+import org.xpect.runner.XpectRunner;
 
 import com.google.inject.Injector;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XpectFileAccess {
 
 	private static class XpectResourceAdapter extends AdapterImpl {
@@ -35,7 +39,6 @@ public class XpectFileAccess {
 			super();
 			this.resource = resource;
 		}
-
 	}
 
 	protected static ResourceSet cloneResourceSet(ResourceSet rs) {
@@ -43,7 +46,11 @@ public class XpectFileAccess {
 		result.setPackageRegistry(rs.getPackageRegistry());
 		result.setResourceFactoryRegistry(rs.getResourceFactoryRegistry());
 		result.setURIConverter(rs.getURIConverter());
-		if (rs instanceof XtextResourceSet) {
+		if (XpectRunner.testClassloader != null) {
+			result.setClasspathURIContext(XpectRunner.testClassloader);
+			result.setClasspathUriResolver(new ClassloaderClasspathUriResolver());
+			new ClasspathTypeProviderFactory(XpectRunner.testClassloader).createTypeProvider(result);
+		} else if (rs instanceof XtextResourceSet) {
 			XtextResourceSet xrs = (XtextResourceSet) rs;
 			result.setClasspathURIContext(xrs.getClasspathURIContext());
 			result.setClasspathUriResolver(xrs.getClasspathUriResolver());

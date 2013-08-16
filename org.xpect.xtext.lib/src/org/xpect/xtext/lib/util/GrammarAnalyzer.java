@@ -3,6 +3,7 @@ package org.xpect.xtext.lib.util;
 import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Grammar;
@@ -10,11 +11,15 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.NegatedToken;
+import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UntilToken;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.common.collect.Lists;
 
+@SuppressWarnings("restriction")
 public class GrammarAnalyzer {
 
 	// be aware, that syntactically one TerminalRule can declare multiple
@@ -50,7 +55,11 @@ public class GrammarAnalyzer {
 		}
 	}
 
+	public enum XtextLanguageKind {
+		GENRAL, JAVA, XBASE
+	}
 	private List<CommentRule> commentRules;
+
 	private final Grammar grammar;
 
 	public GrammarAnalyzer(Grammar grammar) {
@@ -112,6 +121,26 @@ public class GrammarAnalyzer {
 						collectCommentRules(rule.getAlternatives(), this.commentRules);
 		}
 		return this.commentRules;
+	}
+
+	public XtextLanguageKind getLanguageKind() {
+		List<Grammar> grammars = Lists.newArrayList(grammar);
+		grammars.addAll(GrammarUtil.allUsedGrammars(grammar));
+		boolean xbase = false;
+		boolean java = false;
+		for (Grammar g : grammars)
+			for (AbstractMetamodelDeclaration decl : g.getMetamodelDeclarations())
+				if (decl instanceof ReferencedMetamodel) {
+					if (decl.getEPackage().getNsURI().equals(XbasePackage.eNS_URI))
+						xbase = true;
+					else if (decl.getEPackage().getNsURI().equals(TypesPackage.eNS_URI))
+						java = true;
+				}
+		if (xbase)
+			return XtextLanguageKind.XBASE;
+		if (java)
+			return XtextLanguageKind.JAVA;
+		return XtextLanguageKind.GENRAL;
 	}
 
 }

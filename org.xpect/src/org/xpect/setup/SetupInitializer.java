@@ -22,6 +22,7 @@ import org.xpect.Component;
 import org.xpect.IntLiteral;
 import org.xpect.StringLiteral;
 import org.xpect.Value;
+import org.xpect.runner.XpectRunner;
 
 import com.google.common.base.Joiner;
 
@@ -47,7 +48,7 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 	}
 
 	protected Object create(Component val) {
-		Class<?> type = new JavaReflectAccess().getRawType(val.getComponentClass());
+		Class<?> type = jra.getRawType(val.getComponentClass());
 		try {
 			Object[] params = new Object[val.getParameters().size()];
 			for (int i = 0; i < val.getParameters().size(); i++)
@@ -143,6 +144,7 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 	}
 
 	public void initialize(T object) {
+		jra.setClassLoader(XpectRunner.testClassloader);
 		if (rootInstance != null)
 			initialize(object, rootInstance);
 	}

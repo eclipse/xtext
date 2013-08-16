@@ -21,6 +21,7 @@ import org.xpect.runner.XpectRunner;
 import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -30,7 +31,7 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @RunWith(XpectRunner.class)
-@XpectSetup(XtextStandaloneSetup.class)
+@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
 public class ResourceDescriptionTest {
 
 	protected static class EObjectDescriptionToStringMapper implements Function<IEObjectDescription, String> {

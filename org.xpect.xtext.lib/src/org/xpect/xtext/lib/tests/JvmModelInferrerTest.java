@@ -23,6 +23,7 @@ import org.xpect.runner.XpectRunner;
 import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 import org.xpect.xtext.lib.util.InMemoryFileSystemAccessFormatter;
 
 import com.google.inject.Inject;
@@ -32,7 +33,7 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("restriction")
 @RunWith(XpectRunner.class)
-@XpectSetup(XtextStandaloneSetup.class)
+@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
 public class JvmModelInferrerTest {
 
 	public static class SignatureGenerator extends JvmModelGenerator {

@@ -12,9 +12,10 @@ import org.xpect.runner.XpectRunner;
 import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisOffset;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 
 @RunWith(XpectRunner.class)
-@XpectSetup(XtextStandaloneSetup.class)
+@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
 public class InterpreterTest {
 
 	@Xpect

@@ -15,7 +15,8 @@ package pkg1 {
 		// XPECT scope at int --> int, String, java.lang.String, boolean, !foooobar, !innnnteger, ...
 		id:int
 		
-		// XPECT errors --> "Couldn't resolve reference to JvmType 'integer'." at "integer"
-		id:integer
+		// the character % is not valid syntax
+		// XPECT errors --> "extraneous input '%' expecting '}'" at "%"
+		%
 	}
 }

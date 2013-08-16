@@ -1,4 +1,4 @@
-package org.eclipse.xtext.example.arithmetics.xpect.tests;
+package org.eclipse.xtext.example.arithmetics.xpect.tests.suite;
 
 import org.junit.runner.RunWith;
 import org.xpect.runner.XpectRunner;

@@ -4,6 +4,14 @@ XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.linking.DMLinkingT
 		ThisFile {}
 		File "test2.dmodel" {}
 	}
+	Workspace {
+		JavaProject {
+			SrcFolder "src" {
+			 	ThisFile {}
+				File "test2.dmodel" {}
+			} 	
+		}
+	}
 END_SETUP 
 */
 
