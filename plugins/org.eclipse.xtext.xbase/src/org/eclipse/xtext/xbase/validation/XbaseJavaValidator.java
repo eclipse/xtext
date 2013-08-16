@@ -842,7 +842,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (partOfArgumentExpression instanceof XFeatureCall || partOfArgumentExpression instanceof XMemberFeatureCall) {				
 				XAbstractFeatureCall featureCall = (XAbstractFeatureCall) partOfArgumentExpression;
 				XExpression actualReceiver = featureCall.getActualReceiver();
-				if(actualReceiver instanceof XAbstractFeatureCall && ((XFeatureCall)actualReceiver).getFeature() == containerType) {
+				if(actualReceiver instanceof XFeatureCall && ((XFeatureCall)actualReceiver).getFeature() == containerType) {
 					JvmIdentifiableElement feature = featureCall.getFeature();
 					if (feature != null && !feature.eIsProxy()) {
 						if (feature instanceof JvmField) {
