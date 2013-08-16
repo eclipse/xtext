@@ -63,8 +63,8 @@ public class XtendCompilerMojoIT {
 
 		String gen = verifier.getBasedir() + "/src/main/generated-sources/xtend/test/XtendA.java";
 		assertFileContainsUTF16(verifier, gen, "Mühlheim-Kärlicher Bürger");
-		assertFileContainsUTF16(verifier, gen, "_builder.append(\"m\\u00F6chte meine \");");
-		assertFileContainsUTF16(verifier, gen, "_builder.append(\"t\\u00FCr \\u00F6len\", \"\");");
+		assertFileContainsUTF16(verifier, gen, "_builder.append(\"möchte meine \");");
+		assertFileContainsUTF16(verifier, gen, "_builder.append(\"tür ölen\", \"\");");
 	}
 
 	@Test
@@ -177,7 +177,7 @@ public class XtendCompilerMojoIT {
 		try {
 			String content = FileUtils.fileRead(new File(file), "UTF-16");
 			if (!content.contains(contained)) {
-				Assert.fail("Content of " + file + " does not contain " + contained);
+				Assert.fail("Content of " + file + " does not contain " + contained + " but: " + content);
 			}
 		} catch (IOException e) {
 			Assert.fail(e.getMessage());
