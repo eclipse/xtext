@@ -44,7 +44,7 @@ import com.google.common.collect.Collections2;
 public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragment {
 	
 	private boolean removeBacktrackingGuards = false;
-	private int lookaheadTreshold = Integer.MAX_VALUE;
+	private int lookaheadThreshold = Integer.MAX_VALUE;
 	
 	/**
 	 * @since 2.4
@@ -57,8 +57,8 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	/**
 	 * @since 2.4
 	 */
-	public void setLookaheadTreshold(String lookaheadTreshold) {
-		this.lookaheadTreshold = Integer.parseInt(lookaheadTreshold);
+	public void setLookaheadThreshold(String lookaheadThreshold) {
+		this.lookaheadThreshold = Integer.parseInt(lookaheadThreshold);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 		if (removeBacktrackingGuards) {
 			String javaFile = absoluteGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix());
 			String content = readFileIntoString(javaFile);
-			BacktrackingGuardRemover remover = new BacktrackingGuardRemover(content, lookaheadTreshold);
+			BacktrackingGuardRemover remover = new BacktrackingGuardRemover(content, lookaheadThreshold);
 			String newContent = remover.transform();
 			writeStringIntoFile(javaFile, newContent);
 		}
