@@ -143,6 +143,15 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		this.localTrace = new ArrayList<EObject>();
 		this.followElements = new LinkedHashSet<FollowElement>();
 	}
+	
+	/**
+	 * When experiencing slow content assist, try to reduce the threshold.
+	 * 
+	 * @since 2.4
+	 */
+	protected int getLookaheadThreshold() {
+		return Integer.MAX_VALUE;
+	}
 
 	public void before(EObject grammarElement) {
 		if (input.size() == input.index()) {
@@ -376,10 +385,12 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 					if (current != null) {
 						if (marked)
 							lookAhead+=lookAheadAddOn;
-						followElements.add(createFollowElement(current, lookAhead));
+						if (lookAhead <= getLookaheadThreshold())
+							followElements.add(createFollowElement(current, lookAhead));
 					}
 				}
 			}
+
 		};
 	}
 
