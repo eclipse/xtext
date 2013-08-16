@@ -91,10 +91,10 @@ import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -212,11 +212,15 @@ class CompilationUnitImpl implements CompilationUnit {
 	def void setXtendFile(XtendFile xtendFile) {
 		this._xtendFile = xtendFile
 		val standardTypeReferenceOwner = new StandardTypeReferenceOwner(services, xtendFile.eResource.resourceSet)
-		if (compilerPhases.isIndexing(xtendFile)) {
+		if (indexing) {
 			this.typeRefConverter = new IndexingOwnedConverter(standardTypeReferenceOwner)	
 		} else {
 			this.typeRefConverter = new OwnedConverter(standardTypeReferenceOwner)
 		}
+	}
+	
+	def isIndexing() {
+		compilerPhases.isIndexing(xtendFile)
 	}
 
 	def private <IN extends EObject, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
