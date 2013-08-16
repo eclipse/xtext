@@ -101,7 +101,7 @@ Workflow {
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
 				removeBacktrackingGuards = true
-				lookaheadTreshold = '5'
+				lookaheadThreshold = '5'
 				options = auto-inject {}
 			}
 			fragment = refactoring.RefactorElementNameFragment {
