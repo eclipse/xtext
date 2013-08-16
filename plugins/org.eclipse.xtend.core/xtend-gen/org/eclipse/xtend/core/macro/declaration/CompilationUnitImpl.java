@@ -370,7 +370,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     ResourceSet _resourceSet = _eResource.getResourceSet();
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _resourceSet);
     final StandardTypeReferenceOwner standardTypeReferenceOwner = _standardTypeReferenceOwner;
-    boolean _isIndexing = this.compilerPhases.isIndexing(xtendFile);
+    boolean _isIndexing = this.isIndexing();
     if (_isIndexing) {
       IndexingOwnedConverter _indexingOwnedConverter = new IndexingOwnedConverter(standardTypeReferenceOwner);
       this.typeRefConverter = _indexingOwnedConverter;
@@ -378,6 +378,12 @@ public class CompilationUnitImpl implements CompilationUnit {
       OwnedConverter _ownedConverter = new OwnedConverter(standardTypeReferenceOwner);
       this.typeRefConverter = _ownedConverter;
     }
+  }
+  
+  public boolean isIndexing() {
+    XtendFile _xtendFile = this.getXtendFile();
+    boolean _isIndexing = this.compilerPhases.isIndexing(_xtendFile);
+    return _isIndexing;
   }
   
   private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN,? extends OUT> provider) {

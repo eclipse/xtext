@@ -84,6 +84,68 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 		waitForAutoBuild
 		assertNoErrorsInWorkspace
 	}
+	
+	@Test def void testResolvingXtendAnnotationReference() {
+		val annoProject = WorkbenchTestHelper.createPluginProject("annotation.project", "com.google.inject",
+			"org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.core", "org.junit");
+		WorkbenchTestHelper.addExportedPackages(annoProject, "myannotation")
+
+		createFile(new Path('/annotation.project/src/myannotation/MyAnnotation.xtend'),
+			'''
+				package myannotation
+
+				import org.eclipse.emf.ecore.EObject
+				import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+				import org.junit.Assert
+				
+				import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+				}
+				
+				class MyAnnotationProcessor extends AbstractClassProcessor {
+				
+					override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
+						val annotation = annotatedClass.annotations.head
+						val delegate = (annotation as XtendAnnotationReferenceImpl).delegate
+						delegate.assertProxies("Before")
+						Assert.assertNotNull(annotation.annotationTypeDeclaration)
+						delegate.assertProxies("After")
+					}
+				
+					def void assertProxies(XAnnotation it, String message) {
+						val type = eGet(XANNOTATION__ANNOTATION_TYPE, false) as EObject
+						Assert.assertTrue(message + ": Type should be a proxy: " + it.class.name + ".", type == null || type.eIsProxy)
+					}
+				
+				}
+			''')
+		waitForAutoBuild
+		assertNoErrorsInWorkspace
+
+		WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib",
+			"org.eclipse.xtext.xbase.lib", "annotation.project")
+
+		createFile(new Path('/client.project/src/mypackage/MyClient.xtend'),
+			'''
+				package mypackage
+
+				import myannotation.MyAnnotation
+				
+				@MyAnnotation
+				@Deprecated
+				class MyClient {
+				}
+			''')
+		waitForAutoBuild
+		assertNoErrorsInWorkspace
+	}
 
 	@Test def void testResolvingXFunctionTypeRef() {
 		"=>java.util.ArrayList<String>".testResolvingXFunctionTypeRef('''

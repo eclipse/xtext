@@ -9,6 +9,11 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -21,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -28,8 +34,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> implements AnnotationReference {
   public AnnotationTypeDeclaration getAnnotationTypeDeclaration() {
     AnnotationTypeDeclaration _switchResult = null;
-    XAnnotation _delegate = this.getDelegate();
-    JvmType _annotationType = _delegate.getAnnotationType();
+    JvmType _annotationType = this.getAnnotationType();
     final JvmType type = _annotationType;
     boolean _matched = false;
     if (!_matched) {
@@ -45,6 +50,48 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       _switchResult = null;
     }
     return _switchResult;
+  }
+  
+  public JvmType getAnnotationType() {
+    JvmType _xblockexpression = null;
+    {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      boolean _isIndexing = _compilationUnit.isIndexing();
+      boolean _not = (!_isIndexing);
+      if (_not) {
+        XAnnotation _delegate = this.getDelegate();
+        return _delegate.getAnnotationType();
+      }
+      JvmType _switchResult = null;
+      XAnnotation _delegate_1 = this.getDelegate();
+      Object _eGet = _delegate_1.eGet(Literals.XANNOTATION__ANNOTATION_TYPE, false);
+      final Object proxy = _eGet;
+      boolean _matched = false;
+      if (!_matched) {
+        if (proxy instanceof EObject) {
+          final EObject _eObject = (EObject)proxy;
+          boolean _eIsProxy = _eObject.eIsProxy();
+          if (_eIsProxy) {
+            _matched=true;
+            final URI uri = ((InternalEObject) _eObject).eProxyURI();
+            XAnnotation _delegate_2 = this.getDelegate();
+            Resource _eResource = _delegate_2.eResource();
+            ResourceSet _resourceSet = _eResource.getResourceSet();
+            EObject _eObject_1 = _resourceSet.getEObject(uri, true);
+            return ((JvmType) _eObject_1);
+          }
+        }
+      }
+      if (!_matched) {
+        if (proxy instanceof JvmType) {
+          final JvmType _jvmType = (JvmType)proxy;
+          _matched=true;
+          _switchResult = _jvmType;
+        }
+      }
+      _xblockexpression = (_switchResult);
+    }
+    return _xblockexpression;
   }
   
   public Expression getExpression(final String property) {

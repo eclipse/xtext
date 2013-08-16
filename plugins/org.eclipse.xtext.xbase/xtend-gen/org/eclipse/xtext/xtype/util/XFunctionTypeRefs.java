@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -62,20 +63,9 @@ public class XFunctionTypeRefs {
   }
   
   public static URI computeTypeUri(final Class<? extends Object> topLevelClass) {
-    String _buildURI = XFunctionTypeRefs.buildURI(topLevelClass);
-    URI _createURI = URI.createURI(_buildURI);
-    return _createURI;
-  }
-  
-  public static String buildURI(final Class<? extends Object> topLevelClass) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("java:/Objects/");
-    String _canonicalName = topLevelClass.getCanonicalName();
-    _builder.append(_canonicalName, "");
-    _builder.append("#");
-    String _canonicalName_1 = topLevelClass.getCanonicalName();
-    _builder.append(_canonicalName_1, "");
-    return _builder.toString();
+    ClassURIHelper _classURIHelper = new ClassURIHelper();
+    URI _fullURI = _classURIHelper.getFullURI(topLevelClass);
+    return _fullURI;
   }
   
   public static JvmTypeReference wrapIfNecessary(final JvmTypeReference reference, final JvmType type) {

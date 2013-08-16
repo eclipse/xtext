@@ -135,6 +135,113 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
   }
   
   @Test
+  public void testResolvingXtendAnnotationReference() {
+    try {
+      final IProject annoProject = WorkbenchTestHelper.createPluginProject("annotation.project", "com.google.inject", 
+        "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.core", "org.junit");
+      WorkbenchTestHelper.addExportedPackages(annoProject, "myannotation");
+      Path _path = new Path("/annotation.project/src/myannotation/MyAnnotation.xtend");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package myannotation");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import org.eclipse.emf.ecore.EObject");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation");
+      _builder.newLine();
+      _builder.append("import org.junit.Assert");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Active(MyAnnotationProcessor)");
+      _builder.newLine();
+      _builder.append("annotation MyAnnotation {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class MyAnnotationProcessor extends AbstractClassProcessor {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val annotation = annotatedClass.annotations.head");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val delegate = (annotation as XtendAnnotationReferenceImpl).delegate");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("delegate.assertProxies(\"Before\")");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Assert.assertNotNull(annotation.annotationTypeDeclaration)");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("delegate.assertProxies(\"After\")");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void assertProxies(XAnnotation it, String message) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val type = eGet(XANNOTATION__ANNOTATION_TYPE, false) as EObject");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Assert.assertTrue(message + \": Type should be a proxy: \" + it.class.name + \".\", type == null || type.eIsProxy)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      IResourcesSetupUtil.createFile(_path, _builder.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
+      WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib", 
+        "org.eclipse.xtext.xbase.lib", "annotation.project");
+      Path _path_1 = new Path("/client.project/src/mypackage/MyClient.xtend");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mypackage");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import myannotation.MyAnnotation");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@MyAnnotation");
+      _builder_1.newLine();
+      _builder_1.append("@Deprecated");
+      _builder_1.newLine();
+      _builder_1.append("class MyClient {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testResolvingXFunctionTypeRef() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Assert.assertNotNull(type)");

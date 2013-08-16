@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro.declaration
 
 import com.google.common.collect.ImmutableList
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
@@ -43,9 +44,12 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+
+import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*
 
 abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> {
 	
@@ -439,9 +443,24 @@ class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParam
 class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> implements AnnotationReference {
 	
 	override getAnnotationTypeDeclaration() {
-		switch type: delegate.annotationType {
+		switch type: getAnnotationType() {
 			JvmAnnotationType: compilationUnit.toTypeDeclaration(type) as AnnotationTypeDeclaration
 			default: null
+		}
+	}
+	
+	def getAnnotationType() {
+		if (!compilationUnit.indexing) {
+			return delegate.annotationType	
+		}
+		switch proxy : delegate.eGet(XANNOTATION__ANNOTATION_TYPE, false) {
+			EObject case proxy.eIsProxy: {
+				val uri = (proxy as InternalEObject).eProxyURI
+				return delegate.eResource.resourceSet.getEObject(uri, true) as JvmType
+			}
+			JvmType: {
+				proxy
+			}
 		}
 	}
 	
