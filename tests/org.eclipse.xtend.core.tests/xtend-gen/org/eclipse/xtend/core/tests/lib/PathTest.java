@@ -171,4 +171,18 @@ public class PathTest {
     Path _relativize_2 = _path_6.relativize("/bar");
     Assert.assertNull(_relativize_2);
   }
+  
+  @Test
+  public void testRelativizeBothDirections() {
+    Path _path = new Path("/hubba/bubba");
+    final Path base = _path;
+    Path _path_1 = new Path("/hubba/bubba/bar");
+    final Path child = _path_1;
+    Path _path_2 = new Path("bar");
+    Path _relativize = base.relativize(child);
+    Assert.assertEquals(_path_2, _relativize);
+    Path _path_3 = new Path("bar");
+    Path _relativize_1 = child.relativize(base);
+    Assert.assertEquals(_path_3, _relativize_1);
+  }
 }
