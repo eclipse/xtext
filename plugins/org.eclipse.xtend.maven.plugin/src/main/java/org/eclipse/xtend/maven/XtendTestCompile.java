@@ -12,7 +12,6 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
-import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.collect.Lists;
@@ -42,8 +41,6 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 	 */
 	private String testTempDirectory;
 
-	
-
 	@Override
 	protected void internalExecute() throws MojoExecutionException {
 		final String defaultValue = project.getBasedir() + "/src/test/generated-sources/xtend";
@@ -57,19 +54,15 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 				}
 			});
 		}
+		testOutputDirectory = resolveToBaseDir(testOutputDirectory);
 		compileTestSources(xtendBatchCompilerProvider.get());
 	}
 
 	protected void compileTestSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> testCompileSourceRoots = Lists.newArrayList(project.getTestCompileSourceRoots());
 		String testClassPath = concat(File.pathSeparator, getTestClassPath());
-		String absoluteOutputDirectory = testOutputDirectory;
-		Path path = new Path(absoluteOutputDirectory);
-		if (!path.isAbsolute()) {
-			absoluteOutputDirectory = new Path(project.getBasedir().getAbsolutePath()).getAbsolutePath(path).toString();
-		}
-		project.addTestCompileSourceRoot(absoluteOutputDirectory);
-		compile(xtend2BatchCompiler, testClassPath, testCompileSourceRoots, absoluteOutputDirectory);
+		project.addTestCompileSourceRoot(testOutputDirectory);
+		compile(xtend2BatchCompiler, testClassPath, testCompileSourceRoots, testOutputDirectory);
 	}
 
 	@SuppressWarnings("deprecation")

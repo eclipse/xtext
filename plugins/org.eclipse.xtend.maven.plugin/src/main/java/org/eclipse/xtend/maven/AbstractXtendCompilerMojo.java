@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -114,20 +115,19 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	private void configureWorkspace(List<String> sourceDirectories, String outputPath) throws MojoExecutionException {
 		WorkspaceConfig workspaceConfig = new WorkspaceConfig(project.getBasedir().getParentFile().getAbsolutePath());
 		ProjectConfig projectConfig = new ProjectConfig(project.getBasedir().getName());
-
-		Path absoluteRootPath = new Path(project.getBasedir().getAbsolutePath());
-		Path relativizedTarget = new Path(outputPath).relativize(absoluteRootPath);
-		if (relativizedTarget == null) {
+		URI absoluteRootPath = project.getBasedir().getAbsoluteFile().toURI();
+		URI relativizedTarget = absoluteRootPath.relativize(new File(outputPath).toURI());
+		if (relativizedTarget.isAbsolute()) {
 			throw new MojoExecutionException("Output path '" + outputPath
 					+ "' have to be a child of the project folder '" + absoluteRootPath + "'");
 		}
 		for (String source : sourceDirectories) {
-			Path relativizedSrc = new Path(source).relativize(absoluteRootPath);
-			if (relativizedSrc == null) {
+			URI relativizedSrc = absoluteRootPath.relativize(new File(source).toURI());
+			if (relativizedSrc.isAbsolute()) {
 				throw new MojoExecutionException("Source folder " + source
 						+ " have to be a child of the project folder " + absoluteRootPath);
 			}
-			projectConfig.addSourceFolderMapping(relativizedSrc.toString(), relativizedTarget.toString());
+			projectConfig.addSourceFolderMapping(relativizedSrc.getPath(), relativizedTarget.getPath());
 		}
 		workspaceConfig.addProjectConfig(projectConfig);
 		workspaceConfigProvider.setWorkspaceConfig(workspaceConfig);
@@ -177,5 +177,13 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 						"Can't find Xtend properties under " + propertiesFileLocation + ", maven defaults are used.");
 			}
 		}
+	}
+
+	protected String resolveToBaseDir(final String directory) throws MojoExecutionException {
+		File outDir = new File(directory);
+		if (!outDir.isAbsolute()) {
+			outDir = new File(project.getBasedir(), directory);
+		}
+		return outDir.getAbsolutePath();
 	}
 }
