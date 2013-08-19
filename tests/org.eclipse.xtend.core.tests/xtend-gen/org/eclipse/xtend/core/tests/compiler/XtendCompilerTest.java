@@ -2163,8 +2163,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   @Test
   public void testItShadowing_02() {
     final String tquotes = "\'\'\'";
-    final String lt = "\u00AB";
-    final String rt = "\u00BB";
+    final String lt = "«";
+    final String rt = "»";
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo<T> {");
     _builder.newLine();

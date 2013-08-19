@@ -116,14 +116,14 @@ public class RichStringToLineModel extends ForLoopOnce {
       }
     }
     if (!_matched) {
-      boolean _startsWith_1 = t.startsWith("\u00BB\u00BB");
+      boolean _startsWith_1 = t.startsWith("»»");
       if (_startsWith_1) {
         _matched=true;
         _switchResult = 2;
       }
     }
     if (!_matched) {
-      boolean _startsWith_2 = t.startsWith("\u00BB");
+      boolean _startsWith_2 = t.startsWith("»");
       if (_startsWith_2) {
         _matched=true;
         _switchResult = 1;
@@ -148,14 +148,14 @@ public class RichStringToLineModel extends ForLoopOnce {
       }
     }
     if (!_matched) {
-      boolean _endsWith_1 = t.endsWith("\u00AB\u00AB");
+      boolean _endsWith_1 = t.endsWith("««");
       if (_endsWith_1) {
         _matched=true;
         _switchResult = 2;
       }
     }
     if (!_matched) {
-      boolean _endsWith_2 = t.endsWith("\u00AB");
+      boolean _endsWith_2 = t.endsWith("«");
       if (_endsWith_2) {
         _matched=true;
         _switchResult = 1;

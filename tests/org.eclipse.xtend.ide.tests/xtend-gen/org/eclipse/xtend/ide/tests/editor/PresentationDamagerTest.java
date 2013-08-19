@@ -105,7 +105,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
   @Test
   public void testRichString_8() {
     try {
-      IRegion _check = this.check("text \'\'\'rich\ntext\'\'\' text", 11, 1, "\u00ABtext\u00BB");
+      IRegion _check = this.check("text \'\'\'rich\ntext\'\'\' text", 11, 1, "«text»");
       this.assertEquals(5, 20, _check);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -115,7 +115,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
   @Test
   public void testRichString_9() {
     try {
-      IRegion _check = this.check("text\'\'\'rich\ntext\'\'\' text", 10, 1, "\u00ABtext\u00BB");
+      IRegion _check = this.check("text\'\'\'rich\ntext\'\'\' text", 10, 1, "«text»");
       this.assertEquals(4, 20, _check);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
