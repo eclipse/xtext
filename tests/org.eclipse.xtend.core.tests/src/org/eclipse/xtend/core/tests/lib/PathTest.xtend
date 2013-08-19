@@ -77,4 +77,11 @@ class PathTest {
 		}
 		assertNull(new Path("/foo").relativize("/bar"))
 	}
+	
+	@Test def void testRelativizeBothDirections() {
+		val base = new Path("/hubba/bubba")
+		val child = new Path("/hubba/bubba/bar")
+		assertEquals(new Path("bar"), base.relativize(child))
+		assertEquals(new Path("bar"), child.relativize(base))
+	}
 }
