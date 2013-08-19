@@ -22,11 +22,15 @@ public class BacktrackingGuardRemover {
 	}
 
 	public String transform() {
-		String result = content.replace("extends AbstractInternalContentAssistParser {", "extends AbstractInternalContentAssistParser {\n"
-				+ "    protected boolean isBacktracking() { return false; }\n"
+		String result = content.replace(
+				"extends AbstractInternalContentAssistParser {", 
+				"extends AbstractInternalContentAssistParser {\n"
+				+ "    @Override protected boolean isBacktracking() { return false; }\n"
+				+ "    @Override public void announceMark(int marker) { /* do nothing */ }\n"
 				// since we get much more information now, we can set a treshold, for which follow elements we are interested.
 				// This might have to be fine tuned, depending on the grammar
-				+ "    protected int getLookaheadThreshold() { return "+lookaheadTreshold+"; }");
+				+ "    @Override protected int getLookaheadThreshold() { return "+lookaheadTreshold+"; }"
+				);
 		return result.replace("if ( state.backtracking==0 ) {", "if (! isBacktracking() ) {");
 	}
 
