@@ -130,17 +130,24 @@ public @interface XpectTestFiles {
 
 		protected Collection<File> getPackageFragmentsSourceFolders(Class<?> clazz) {
 			File classFile = IFileForClassProvider.INSTANCE.getFile(clazz);
-			File current = classFile.getParentFile();
+			File packageRootFolder = classFile.getParentFile();
+			int segments = clazz.getPackage().getName().split("\\.").length;
+			for (int i = 0; i < segments; i++) {
+				packageRootFolder = packageRootFolder.getParentFile();
+				if (packageRootFolder == null)
+					throw new RuntimeException("Could not determine package root for " + clazz);
+			}
+			File current = packageRootFolder;
 			File dotClasspathFile = null;
 			while (current != null && !(dotClasspathFile = new File(current + "/.classpath")).exists())
 				current = current.getParentFile();
 			if (dotClasspathFile == null)
-				return Collections.emptyList();
+				return Collections.singletonList(classFile.getParentFile());
 			DotClasspath cp = new DotClasspath(dotClasspathFile);
 			File project = dotClasspathFile.getParentFile();
 			File output = new File(project + "/" + cp.getOutput());
-			if (!output.isDirectory() || !classFile.toString().startsWith(output.toString()))
-				return Collections.emptyList();
+			if (!packageRootFolder.equals(output))
+				return Collections.singletonList(classFile.getParentFile());
 			URI classFileInClasspath = URI.createURI(output.toURI().relativize(classFile.toURI()).toString());
 			File packagePathInClasspath = new File(classFileInClasspath.trimSegments(1).toString());
 			List<File> files = Lists.newArrayList();
