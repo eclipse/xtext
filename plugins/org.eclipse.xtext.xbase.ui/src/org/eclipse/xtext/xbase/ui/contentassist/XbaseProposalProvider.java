@@ -3,6 +3,8 @@
 */
 package org.eclipse.xtext.xbase.ui.contentassist;
 
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -44,11 +47,16 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -121,6 +129,83 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	public XbaseReferenceProposalCreator getXbaseCrossReferenceProposalCreator() {
 		return (XbaseReferenceProposalCreator) super.getCrossReferenceProposalCreator();
+	}
+	
+	@Override
+	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// we install a caching scope provider so scopes won't be computed multiple times.
+		IScopeProvider scopeProvider = super.getScopeProvider();
+		try {
+			this.cachingProvider = new CachingXbaseScopeProvider((XbaseScopeProvider)scopeProvider);
+			this.getCrossReferenceProposalCreator().setScopeProvider(cachingProvider);
+			super.createProposals(context, acceptor);
+		} finally {
+			this.cachingProvider = null;
+			this.getCrossReferenceProposalCreator().setScopeProvider(scopeProvider);
+		}
+	}
+	
+	private CachingXbaseScopeProvider cachingProvider = null;
+	
+	@Override
+	public XbaseScopeProvider getScopeProvider() {
+		if (cachingProvider != null)
+			return cachingProvider;
+		return (XbaseScopeProvider) super.getScopeProvider();
+	}
+	
+	private static class CachingXbaseScopeProvider extends XbaseScopeProvider {
+		private XbaseScopeProvider delegate;
+		private Map<Pair<EObject,EReference>, IScope> getScopeCache = newHashMap();
+		private Map<Triple<XExpression,XExpression,EReference>, IScope> createFeatureCallScopeForReceiverCache = newHashMap();
+
+		public CachingXbaseScopeProvider(XbaseScopeProvider delegate) {
+			this.delegate = delegate;
+		}
+		
+		@Override
+		public IScope createSimpleFeatureCallScope(EObject context, EReference reference, Resource resource,
+				boolean includeCurrentBlock, int idx) {
+			// No caching, since this is not called multiples times.
+			return delegate.createSimpleFeatureCallScope(context, reference, resource, includeCurrentBlock, idx);
+		}
+		
+		@Override
+		public IScope createFeatureCallScopeForReceiver(XExpression context, XExpression receiver, EReference reference) {
+			Triple<XExpression,XExpression,EReference> key = Tuples.create(context, receiver, reference);
+			if (createFeatureCallScopeForReceiverCache.containsKey(key)) {
+				return createFeatureCallScopeForReceiverCache.get(key);
+			} else {
+				IScope result = delegate.createFeatureCallScopeForReceiver(context, receiver, reference);
+				result = new SimpleScope(IScope.NULLSCOPE, newArrayList(result.getAllElements()));
+				createFeatureCallScopeForReceiverCache.put(key, result);
+				return result;
+			}
+		}
+		
+		@Override
+		public IScope getScope(EObject context, EReference reference) {
+			Pair<EObject,EReference> key = Tuples.create(context, reference);
+			if (getScopeCache.containsKey(key)) {
+				return getScopeCache.get(key);
+			} else {
+				IScope result = delegate.getScope(context, reference);
+				result = new SimpleScope(IScope.NULLSCOPE, newArrayList(result.getAllElements()));
+				getScopeCache.put(key, result);
+				return result;
+			}
+		}
+
+		@Override
+		public IScopeProvider getDelegate() {
+			return delegate.getDelegate();
+		}
+
+		@Override
+		public boolean isFeatureCallScope(EReference reference) {
+			return delegate.isFeatureCallScope(reference);
+		}
+		
 	}
 	
 	public static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
@@ -250,11 +335,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 
 	protected boolean isKeywordWorthyToPropose(Keyword keyword) {
 		return keyword.getValue().length() > 1 && Character.isLetter(keyword.getValue().charAt(0));
-	}
-	
-	@Override
-	public XbaseScopeProvider getScopeProvider() {
-		return (XbaseScopeProvider) super.getScopeProvider();
 	}
 	
 	@Override
