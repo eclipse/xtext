@@ -7,15 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.resource;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
@@ -138,5 +143,17 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		}
 		if (monitor == null || !monitor.isCanceled())
 			super.resolveLazyCrossReferences(monitor);
+	}
+	
+	@Override
+	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
+		if (!isValidationDisabled()) {
+			DiagnosticMessage message = new DiagnosticMessage("Cyclic linking detected : " + getReferences(triple, resolving), Severity.ERROR, "cyclic-resolution");
+			List<Diagnostic> list = getDiagnosticList(message);
+			Diagnostic diagnostic = createDiagnostic(triple, message);
+			if (!list.contains(diagnostic))
+				list.add(diagnostic);
+		}
+		return null;
 	}
 }

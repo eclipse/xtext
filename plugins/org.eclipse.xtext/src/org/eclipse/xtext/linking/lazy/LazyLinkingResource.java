@@ -90,7 +90,10 @@ public class LazyLinkingResource extends XtextResource {
 			EcoreUtil.resolveAll(this);
 	}
 
-	private LinkedHashSet<Triple<EObject, EReference, INode>> resolving = Sets.newLinkedHashSet();
+	/**
+	 * @since 2.4
+	 */
+	protected LinkedHashSet<Triple<EObject, EReference, INode>> resolving = Sets.newLinkedHashSet();
 
 	/**
 	 * resolves any lazy cross references in this resource, adding Issues for unresolvable elements to this resource.
