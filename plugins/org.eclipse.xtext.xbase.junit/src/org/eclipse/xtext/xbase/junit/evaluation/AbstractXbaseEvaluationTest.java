@@ -944,6 +944,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(false, "new Object===new Object");
 	}
 	
+	@Test public void testIdentityEquals_2() throws Exception {
+		assertEvaluatesTo(true, "130L===130L");
+	}
+	
+	@Test public void testIdentityNotEquals_0() throws Exception {
+		assertEvaluatesTo(false, "130L!==130L");
+	}
+	
 	@Test public void testSpaceship_0() throws Exception {
 		assertEvaluatesTo(1, "2<=>1");
 	}
