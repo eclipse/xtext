@@ -28,6 +28,7 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
@@ -146,7 +147,10 @@ public class JavaElementDelegate implements IAdaptable {
 		if (elements.isEmpty()) {
 			return findAssociatedJvmElement(element.eContainer());
 		}
-		return (JvmIdentifiableElement) elements.iterator().next();
+		EObject next = elements.iterator().next();
+		if (next instanceof JvmIdentifiableElement)
+			return (JvmIdentifiableElement) next;
+		return EcoreUtil2.getContainerOfType(next, JvmIdentifiableElement.class);
 	}
 
 	protected EObject findCommonContainer(EObject prevObj, EObject nextObj) {
