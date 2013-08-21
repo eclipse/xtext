@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -54,10 +55,22 @@ public abstract class AbstractResourceDescription implements IResourceDescriptio
 
 	protected URI getNormalizedURI(Resource resource) {
 		URI uri = resource.getURI();
-		if (uri != null && !uri.isPlatform() && resource.getResourceSet() != null)
-			return resource.getResourceSet().getURIConverter().normalize(uri);
-		else
-			return uri;
+		URIConverter uriConverter = resource.getResourceSet()!=null?resource.getResourceSet().getURIConverter():null;
+		if (uri != null && uriConverter != null) {
+			if (!uri.isPlatform()) {
+				return uriConverter.normalize(uri);
+			}
+			// This is a fix for resources which have been loaded using a platform:/plugin URI
+			// This happens when one resource has absolute references using a platform:/plugin uri and the corresponding
+			// ResourceDescriptionManager resolves references in the first phase, i.e. during EObjectDecription computation.
+			// EMF's GenModelResourceDescriptionStrategy does so as it needs to call GenModel.reconcile() eagerly.
+			if (uri.isPlatformPlugin()) {
+				URI resourceURI = uri.replacePrefix(URI.createURI("platform:/plugin/"), URI.createURI("platform:/resource/"));
+				if (uriConverter.normalize(uri).equals(uriConverter.normalize(resourceURI)))
+					return resourceURI;
+			}
+		}
+		return uri;
 	}
 	
 }
