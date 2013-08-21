@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -345,25 +346,17 @@ public class CompilationUnitImpl implements CompilationUnit {
     boolean _isFile = uri.isFile();
     if (_isFile) {
       WorkspaceConfig _get = this.workspaceConfigProvider.get();
-      final String workspacePath = _get.getAbsoluteFileSystemPath();
-      final String absolutefilePath = uri.path();
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _equals = Objects.equal(workspacePath, null);
-      if (_equals) {
-        _or_1 = true;
-      } else {
-        boolean _equals_1 = Objects.equal(absolutefilePath, null);
-        _or_1 = (_equals || _equals_1);
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        boolean _startsWith = absolutefilePath.startsWith(workspacePath);
-        boolean _not = (!_startsWith);
-        _or = (_or_1 || _not);
-      }
-      if (_or) {
+      String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
+      File _file = new File(_absoluteFileSystemPath);
+      java.net.URI _uRI = _file.toURI();
+      final String workspacePath = _uRI.getPath();
+      String _fileString = uri.toFileString();
+      File _file_1 = new File(_fileString);
+      java.net.URI _uRI_1 = _file_1.toURI();
+      final String absolutefilePath = _uRI_1.getPath();
+      boolean _startsWith = absolutefilePath.startsWith(workspacePath);
+      boolean _not = (!_startsWith);
+      if (_not) {
         String _plus = ("Couldn\'t determine file path. The file (\'" + absolutefilePath);
         String _plus_1 = (_plus + "\') doesn\'t seem to be contained in the workspace (\'");
         String _plus_2 = (_plus_1 + workspacePath);
