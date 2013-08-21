@@ -345,23 +345,18 @@ public class CompilationUnitImpl implements CompilationUnit {
     boolean _isFile = uri.isFile();
     if (_isFile) {
       WorkspaceConfig _get = this.workspaceConfigProvider.get();
-      String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
-      Path _path_1 = new Path(_absoluteFileSystemPath);
-      final Path workspacePath = _path_1;
-      String _path_2 = uri.path();
-      String _plus = ("/" + _path_2);
-      final Path filePath = workspacePath.relativize(_plus);
-      boolean _notEquals = (!Objects.equal(filePath, null));
-      if (_notEquals) {
-        String _string = filePath.toString();
-        String _plus_1 = ("/" + _string);
-        Path _path_3 = new Path(_plus_1);
-        return _path_3;
-      }
+      final String workspacePath = _get.getAbsoluteFileSystemPath();
+      String _path_1 = uri.path();
+      int _length = workspacePath.length();
+      final String filePath = _path_1.substring(_length);
+      String _string = filePath.toString();
+      String _plus = ("/" + _string);
+      Path _path_2 = new Path(_plus);
+      return _path_2;
     }
-    String _path_4 = uri.path();
-    Path _path_5 = new Path(_path_4);
-    return _path_5;
+    String _path_3 = uri.path();
+    Path _path_4 = new Path(_path_3);
+    return _path_4;
   }
   
   public void setXtendFile(final XtendFile xtendFile) {

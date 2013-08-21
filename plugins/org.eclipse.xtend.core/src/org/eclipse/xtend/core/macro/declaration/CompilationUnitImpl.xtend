@@ -95,6 +95,7 @@ import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import java.io.File
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -200,11 +201,9 @@ class CompilationUnitImpl implements CompilationUnit {
 			return new Path(uri.toPlatformString(false))
 		}
 		if (uri.file) {
-			val workspacePath = new Path(workspaceConfigProvider.get.absoluteFileSystemPath)
-			val filePath = workspacePath.relativize('/'+uri.path);
-			if (filePath != null) {
-				return new Path('/'+filePath.toString)
-			}
+			val workspacePath = workspaceConfigProvider.get.absoluteFileSystemPath
+			val filePath = uri.path.substring(workspacePath.length)
+			return new Path('/'+filePath.toString)
 		}
 		return new Path(uri.path);
 	}
