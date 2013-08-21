@@ -1,0 +1,84 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+package org.eclipse.xtext.xbase.ui.contentassist;
+
+import com.google.common.base.Objects;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.editor.contentassist.ContentProposalPriorities;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
+import org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+@SuppressWarnings("all")
+public class XbaseContentProposalPriorities extends ContentProposalPriorities {
+  public void adjustCrossReferencePriority(final ICompletionProposal proposal, final String prefix) {
+    boolean _matched = false;
+    if (!_matched) {
+      if (proposal instanceof ConfigurableCompletionProposal) {
+        final ConfigurableCompletionProposal _configurableCompletionProposal = (ConfigurableCompletionProposal)proposal;
+        _matched=true;
+        Object _additionalData = _configurableCompletionProposal.getAdditionalData(XbaseProposalProvider.DESCRIPTION_KEY);
+        final Object desc = _additionalData;
+        boolean _matched_1 = false;
+        if (!_matched_1) {
+          if (desc instanceof JvmFeatureDescription) {
+            final JvmFeatureDescription _jvmFeatureDescription = (JvmFeatureDescription)desc;
+            _matched_1=true;
+            JvmFeature _jvmFeature = _jvmFeatureDescription.getJvmFeature();
+            final JvmFeature feature = _jvmFeature;
+            boolean _matched_2 = false;
+            if (!_matched_2) {
+              if (feature instanceof JvmField) {
+                final JvmField _jvmField = (JvmField)feature;
+                _matched_2=true;
+                this.adjustPriority(_configurableCompletionProposal, prefix, 550);
+                return;
+              }
+            }
+            if (!_matched_2) {
+              if (feature instanceof JvmExecutable) {
+                final JvmExecutable _jvmExecutable = (JvmExecutable)feature;
+                _matched_2=true;
+                this.adjustPriority(_configurableCompletionProposal, prefix, 520);
+                return;
+              }
+            }
+          }
+        }
+        if (!_matched_1) {
+          if (desc instanceof LocalVarDescription) {
+            final LocalVarDescription _localVarDescription = (LocalVarDescription)desc;
+            boolean _and = false;
+            String _replacementString = _configurableCompletionProposal.getReplacementString();
+            boolean _notEquals = (!Objects.equal(_replacementString, "this"));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              String _replacementString_1 = _configurableCompletionProposal.getReplacementString();
+              boolean _notEquals_1 = (!Objects.equal(_replacementString_1, "super"));
+              _and = (_notEquals && _notEquals_1);
+            }
+            if (_and) {
+              _matched_1=true;
+              this.adjustPriority(_configurableCompletionProposal, prefix, 570);
+              return;
+            }
+          }
+        }
+      }
+    }
+    super.adjustCrossReferencePriority(proposal, prefix);
+  }
+}

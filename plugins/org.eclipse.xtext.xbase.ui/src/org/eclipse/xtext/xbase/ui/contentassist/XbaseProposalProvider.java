@@ -6,6 +6,7 @@ package org.eclipse.xtext.xbase.ui.contentassist;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider.*;
 
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,11 @@ import com.google.inject.Inject;
 public class XbaseProposalProvider extends AbstractXbaseProposalProvider implements RepeatedContentAssistProcessor.ModeAware {
 	
 	private final static Logger log = Logger.getLogger(XbaseProposalProvider.class);
+	
+	/**
+	 * the user data key used to store the IEObjectDescription in the {@link ConfigurableCompletionProposal#setAdditionalData(String, Object)}
+	 */
+	public final static String DESCRIPTION_KEY = "xbase.description";
 	
 	@Inject
 	private ITypesProposalProvider typeProposalProvider;
@@ -660,6 +666,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
 					if (result instanceof ConfigurableCompletionProposal) {
 						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
+						casted.setAdditionalData(DESCRIPTION_KEY, myCandidate);
 						casted.setAdditionalProposalInfo(objectOrProxy);
 						casted.setHover(getHover());
 						int offset = casted.getReplacementOffset() + proposal.length();
