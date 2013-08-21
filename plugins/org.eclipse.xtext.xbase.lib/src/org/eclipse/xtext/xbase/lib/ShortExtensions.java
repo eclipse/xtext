@@ -200,6 +200,21 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  a short.
+	 * @param b  a double.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 === $2)")
+	public static boolean operator_tripleEquals(short a, double b) {
+		return a == b;
+	}
+	
+	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
 	 * @param a  a short.
@@ -365,6 +380,21 @@ import com.google.common.annotations.GwtCompatible;
 	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(short a, float b) {
 		return Math.pow(a, b);
+	}
+	
+	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  a short.
+	 * @param b  a float.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 === $2)")
+	public static boolean operator_tripleEquals(short a, float b) {
+		return a == b;
 	}
 	
 	/**
@@ -536,6 +566,21 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  a short.
+	 * @param b  a long.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 === $2)")
+	public static boolean operator_tripleEquals(short a, long b) {
+		return a == b;
+	}
+	
+	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
 	 * @param a  a short.
@@ -701,6 +746,21 @@ import com.google.common.annotations.GwtCompatible;
 	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(short a, int b) {
 		return Math.pow(a, b);
+	}
+	
+	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  a short.
+	 * @param b  an integer.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 === $2)")
+	public static boolean operator_tripleEquals(short a, int b) {
+		return a == b;
 	}
 	
 	/**
@@ -872,6 +932,21 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  a short.
+	 * @param b  a character.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 === $2)")
+	public static boolean operator_tripleEquals(short a, char b) {
+		return a == b;
+	}
+	
+	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
 	 * @param a  a short.
@@ -1037,6 +1112,21 @@ import com.google.common.annotations.GwtCompatible;
 	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(short a, short b) {
 		return Math.pow(a, b);
+	}
+	
+	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  a short.
+	 * @param b  a short.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 === $2)")
+	public static boolean operator_tripleEquals(short a, short b) {
+		return a == b;
 	}
 	
 	/**
@@ -1207,7 +1297,28 @@ import com.google.common.annotations.GwtCompatible;
 		return Math.pow(a, b);
 	}
 	
+	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  a short.
+	 * @param b  a byte.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 === $2)")
+	public static boolean operator_tripleEquals(short a, byte b) {
+		return a == b;
+	}
+	
 	// END generated code
+
+
+
+
+
+
 
 
 
