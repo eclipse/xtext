@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist;
 
+import static com.google.common.collect.Maps.*;
+
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -84,6 +88,28 @@ public class ConfigurableCompletionProposal implements
 	private IReplacementTextApplier textApplier;
 	
 	private IEObjectHover hover;
+	
+	private Map<String,Object> additionalData;
+	
+	/**
+	 * Used to store arbitrary data as a protocol between two or more clients unknown to this class.
+	 * 
+	 * @since 2.4
+	 */
+	public void setAdditionalData(String key, Object additionalData) {
+		if (this.additionalData == null)
+			this.additionalData = newHashMap();
+		this.additionalData.put(key, additionalData);
+	}
+	
+	/**
+	 * Used to store arbitrary data as a protocol between two or more clients unknown to this class.
+	 * 
+	 * @since 2.4
+	 */
+	public Object getAdditionalData(String key) {
+		return additionalData != null ? additionalData.get(key) : null;
+	}
 	
 	public interface IReplacementTextApplier {
 		void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException;
