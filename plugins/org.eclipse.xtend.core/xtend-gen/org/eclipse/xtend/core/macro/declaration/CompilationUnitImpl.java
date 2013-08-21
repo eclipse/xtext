@@ -345,23 +345,42 @@ public class CompilationUnitImpl implements CompilationUnit {
     boolean _isFile = uri.isFile();
     if (_isFile) {
       WorkspaceConfig _get = this.workspaceConfigProvider.get();
-      String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
-      Path _path_1 = new Path(_absoluteFileSystemPath);
-      final Path workspacePath = _path_1;
-      String _path_2 = uri.path();
-      String _plus = ("/" + _path_2);
-      final Path filePath = workspacePath.relativize(_plus);
-      boolean _notEquals = (!Objects.equal(filePath, null));
-      if (_notEquals) {
-        String _string = filePath.toString();
-        String _plus_1 = ("/" + _string);
-        Path _path_3 = new Path(_plus_1);
-        return _path_3;
+      final String workspacePath = _get.getAbsoluteFileSystemPath();
+      final String absolutefilePath = uri.path();
+      boolean _or = false;
+      boolean _or_1 = false;
+      boolean _equals = Objects.equal(workspacePath, null);
+      if (_equals) {
+        _or_1 = true;
+      } else {
+        boolean _equals_1 = Objects.equal(absolutefilePath, null);
+        _or_1 = (_equals || _equals_1);
       }
+      if (_or_1) {
+        _or = true;
+      } else {
+        boolean _startsWith = absolutefilePath.startsWith(workspacePath);
+        boolean _not = (!_startsWith);
+        _or = (_or_1 || _not);
+      }
+      if (_or) {
+        String _plus = ("Couldn\'t determine file path. The file (\'" + absolutefilePath);
+        String _plus_1 = (_plus + "\') doesn\'t seem to be contained in the workspace (\'");
+        String _plus_2 = (_plus_1 + workspacePath);
+        String _plus_3 = (_plus_2 + "\')");
+        IllegalStateException _illegalStateException = new IllegalStateException(_plus_3);
+        throw _illegalStateException;
+      }
+      int _length = workspacePath.length();
+      final String filePath = absolutefilePath.substring(_length);
+      String _string = filePath.toString();
+      String _plus_4 = ("/" + _string);
+      Path _path_1 = new Path(_plus_4);
+      return _path_1;
     }
-    String _path_4 = uri.path();
-    Path _path_5 = new Path(_path_4);
-    return _path_5;
+    String _path_2 = uri.path();
+    Path _path_3 = new Path(_path_2);
+    return _path_3;
   }
   
   public void setXtendFile(final XtendFile xtendFile) {

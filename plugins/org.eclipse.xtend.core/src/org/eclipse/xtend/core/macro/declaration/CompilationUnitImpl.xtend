@@ -200,11 +200,13 @@ class CompilationUnitImpl implements CompilationUnit {
 			return new Path(uri.toPlatformString(false))
 		}
 		if (uri.file) {
-			val workspacePath = new Path(workspaceConfigProvider.get.absoluteFileSystemPath)
-			val filePath = workspacePath.relativize('/'+uri.path);
-			if (filePath != null) {
-				return new Path('/'+filePath.toString)
+			val workspacePath = workspaceConfigProvider.get.absoluteFileSystemPath
+			val absolutefilePath = uri.path
+			if (workspacePath == null || absolutefilePath == null || !absolutefilePath.startsWith(workspacePath)) {
+				throw new IllegalStateException("Couldn't determine file path. The file ('"+absolutefilePath+"') doesn't seem to be contained in the workspace ('"+workspacePath+"')")
 			}
+			val filePath = absolutefilePath.substring(workspacePath.length)
+			return new Path('/'+filePath.toString)
 		}
 		return new Path(uri.path);
 	}
