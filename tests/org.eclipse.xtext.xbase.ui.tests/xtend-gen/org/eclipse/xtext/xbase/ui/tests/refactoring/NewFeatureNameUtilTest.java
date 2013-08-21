@@ -79,7 +79,7 @@ public class NewFeatureNameUtilTest extends AbstractXbaseTestCase {
   @Test
   public void testInvalidNameSyntax() {
     this.assertInvalidName("%", RefactoringStatus.FATAL, "character");
-    this.assertInvalidName("g\u00FCrkenbr\u00F6d", RefactoringStatus.FATAL, "character");
+    this.assertInvalidName("gürkenbröd", RefactoringStatus.FATAL, "character");
     this.assertInvalidName("&", RefactoringStatus.FATAL, "character");
   }
   

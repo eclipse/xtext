@@ -954,11 +954,11 @@ public class XtendFileGenerator {
   }
   
   public String GO() {
-    return "\u00AB";
+    return "«";
   }
   
   public String GC() {
-    return "\u00BB";
+    return "»";
   }
   
   public Map<String,? extends CharSequence> getDependencies() {

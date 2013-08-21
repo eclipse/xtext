@@ -4307,9 +4307,9 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def method() ");
-    _builder.append("\'\'\'\u00AB", "	");
+    _builder.append("\'\'\'«", "	");
     _builder.append("logSomething");
-    _builder.append("\u00BB\'\'\'", "	");
+    _builder.append("»\'\'\'", "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("def void logSomething() {println(\"zonk\")}");

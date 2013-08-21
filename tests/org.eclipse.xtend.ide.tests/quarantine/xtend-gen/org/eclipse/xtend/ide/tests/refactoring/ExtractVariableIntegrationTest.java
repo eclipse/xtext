@@ -216,7 +216,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def getFoo(String x)\u00A0{");
+    _builder.append("def getFoo(String x) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("x");
@@ -244,7 +244,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("def getFoo(String x)\u00A0{");
+    _builder_1.append("def getFoo(String x) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("x");

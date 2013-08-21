@@ -132,8 +132,8 @@ public abstract class AbstractXtendFormatterTest {
   
   protected String decode(final CharSequence seq) {
     String _string = seq.toString();
-    String _replace = _string.replace("<<", "\u00AB");
-    String _replace_1 = _replace.replace(">>", "\u00BB");
+    String _replace = _string.replace("<<", "«");
+    String _replace_1 = _replace.replace(">>", "»");
     String _replace_2 = _replace_1.replace("```", "\'\'\'");
     return _replace_2;
   }
