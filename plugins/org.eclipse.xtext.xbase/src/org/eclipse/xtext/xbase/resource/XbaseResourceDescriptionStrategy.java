@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.resource;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -14,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -38,6 +40,7 @@ public class XbaseResourceDescriptionStrategy extends DefaultResourceDescription
 
 	public static final String SIGNATURE_HASH_KEY = "sig";
 	public static final String IS_INTERFACE = "interface";
+	public static final String TYPE_PARAMETERS = "typeParameters";
 	
 	@Inject
 	private JvmDeclaredTypeSignatureHashProvider hashProvider;
@@ -81,6 +84,18 @@ public class XbaseResourceDescriptionStrategy extends DefaultResourceDescription
 			JvmGenericType genericType = (JvmGenericType) eObject;
 			if (genericType.isInterface())
 				userData.put(IS_INTERFACE, Boolean.TRUE.toString());
+			if (!genericType.getTypeParameters().isEmpty()) {
+				String result = "<";
+				for (Iterator<JvmTypeParameter> iterator = genericType.getTypeParameters().iterator(); iterator.hasNext();) {
+					JvmTypeParameter type = iterator.next();
+					result += type.getSimpleName();
+					if (iterator.hasNext()) {
+						result += ",";
+					}
+				}
+				result +=">";
+				userData.put(TYPE_PARAMETERS, result);
+			}
 		}
 	}
 	
