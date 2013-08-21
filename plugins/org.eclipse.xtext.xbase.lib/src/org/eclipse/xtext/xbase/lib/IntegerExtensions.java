@@ -408,6 +408,36 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a double.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 == $2)")
+	public static boolean operator_tripleEquals(int a, double b) {
+		return a == b;
+	}
+	
+	/**
+	 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a double.
+	 * @return   <code>a != b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 != $2)")
+	public static boolean operator_tripleNotEquals(int a, double b) {
+		return a != b;
+	}
+	
+	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
 	 * @param a  an integer.
@@ -573,6 +603,36 @@ import com.google.common.annotations.GwtCompatible;
 	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, float b) {
 		return Math.pow(a, b);
+	}
+	
+	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a float.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 == $2)")
+	public static boolean operator_tripleEquals(int a, float b) {
+		return a == b;
+	}
+	
+	/**
+	 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a float.
+	 * @return   <code>a != b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 != $2)")
+	public static boolean operator_tripleNotEquals(int a, float b) {
+		return a != b;
 	}
 	
 	/**
@@ -744,6 +804,36 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a long.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 == $2)")
+	public static boolean operator_tripleEquals(int a, long b) {
+		return a == b;
+	}
+	
+	/**
+	 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a long.
+	 * @return   <code>a != b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 != $2)")
+	public static boolean operator_tripleNotEquals(int a, long b) {
+		return a != b;
+	}
+	
+	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
 	 * @param a  an integer.
@@ -909,6 +999,36 @@ import com.google.common.annotations.GwtCompatible;
 	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, int b) {
 		return Math.pow(a, b);
+	}
+	
+	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  an integer.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 == $2)")
+	public static boolean operator_tripleEquals(int a, int b) {
+		return a == b;
+	}
+	
+	/**
+	 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  an integer.
+	 * @return   <code>a != b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 != $2)")
+	public static boolean operator_tripleNotEquals(int a, int b) {
+		return a != b;
 	}
 	
 	/**
@@ -1080,6 +1200,36 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a character.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 == $2)")
+	public static boolean operator_tripleEquals(int a, char b) {
+		return a == b;
+	}
+	
+	/**
+	 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a character.
+	 * @return   <code>a != b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 != $2)")
+	public static boolean operator_tripleNotEquals(int a, char b) {
+		return a != b;
+	}
+	
+	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
 	 * @param a  an integer.
@@ -1245,6 +1395,36 @@ import com.google.common.annotations.GwtCompatible;
 	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, short b) {
 		return Math.pow(a, b);
+	}
+	
+	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a short.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 == $2)")
+	public static boolean operator_tripleEquals(int a, short b) {
+		return a == b;
+	}
+	
+	/**
+	 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a short.
+	 * @return   <code>a != b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 != $2)")
+	public static boolean operator_tripleNotEquals(int a, short b) {
+		return a != b;
 	}
 	
 	/**
@@ -1415,7 +1595,45 @@ import com.google.common.annotations.GwtCompatible;
 		return Math.pow(a, b);
 	}
 	
+	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a byte.
+	 * @return   <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 == $2)")
+	public static boolean operator_tripleEquals(int a, byte b) {
+		return a == b;
+	}
+	
+	/**
+	 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
+	 * operator.
+	 * 
+	 * @param a  an integer.
+	 * @param b  a byte.
+	 * @return   <code>a != b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("($1 != $2)")
+	public static boolean operator_tripleNotEquals(int a, byte b) {
+		return a != b;
+	}
+	
 	// END generated code
+
+
+
+
+
+
+
+
 
 
 

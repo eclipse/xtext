@@ -128,6 +128,36 @@ class ArithmeticExtensionGenerator {
 			return Math.pow(a, b);
 		}
 		
+		/**
+		 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+		 * operator.
+		 * 
+		 * @param a  «op1.article» «op1.wrapperType.toFirstLower».
+		 * @param b  «op2.article» «op2.wrapperType.toFirstLower».
+		 * @return   <code>a == b</code>
+		 * @since 2.4
+		 */
+		@Pure
+		@Inline("($1 == $2)")
+		public static boolean «TRIPLE_EQUALS.methodName»(«op1» a, «op2» b) {
+			return a == b;
+		}
+		
+		/**
+		 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
+		 * operator.
+		 * 
+		 * @param a  «op1.article» «op1.wrapperType.toFirstLower».
+		 * @param b  «op2.article» «op2.wrapperType.toFirstLower».
+		 * @return   <code>a != b</code>
+		 * @since 2.4
+		 */
+		@Pure
+		@Inline("($1 != $2)")
+		public static boolean «TRIPLE_NOT_EQUALS.methodName»(«op1» a, «op2» b) {
+			return a != b;
+		}
+		
 	'''
 	
 	/**

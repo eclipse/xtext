@@ -84,7 +84,7 @@ import com.google.common.base.Objects;
 	}
 	
 	/**
-	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>!=</code>
+	 * The <code>identity not equals</code> operator. This is the equivalent to Java's <code>!=</code>
 	 * operator.
 	 * 
 	 * @param a
