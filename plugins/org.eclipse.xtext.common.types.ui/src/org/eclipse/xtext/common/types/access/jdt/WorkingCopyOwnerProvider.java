@@ -102,7 +102,13 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 				result.append("class ");
 			}
 		}
-		result.append(typeName).append("{}");
+		result.append(typeName);
+		// see org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy.TYPE_PARAMETERS
+		String typeParameters = next.getUserData("typeParameters");
+		if (typeParameters != null) {
+			result.append(typeParameters);
+		}
+		result.append("{}");
 		return result.toString();
 	}
 

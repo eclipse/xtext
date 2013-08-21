@@ -33,6 +33,78 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
     }
   }
   
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=400191
+   */
+  @Test
+  public void testBug400191() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public interface JavaInterface<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("T berechneWert();");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.workbenchTestHelper.createFile("JavaInterface.java", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class XtendImpl<T> implements JavaInterface<T> {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("override T berechneWert() {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("return null");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.workbenchTestHelper.createFile("XtendImpl.xtend", _builder_1.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("public class JavaImpl<T> extends XtendImpl<T> {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("public static final JavaImpl<String> XYZ = new JavaImpl<String>();");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("public static <T> void aendert(JavaInterface<T> arg) {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.workbenchTestHelper.createFile("JavaImpl.java", _builder_2.toString());
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("class XtendClient {");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("def void doit() {");
+      _builder_3.newLine();
+      _builder_3.append("\t\t");
+      _builder_3.append("JavaImpl.XYZ.berechneWert()");
+      _builder_3.newLine();
+      _builder_3.append("\t\t");
+      _builder_3.append("JavaImpl.aendert(JavaImpl.XYZ)");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("}");
+      _builder_3.newLine();
+      _builder_3.append("}");
+      _builder_3.newLine();
+      this.workbenchTestHelper.createFile("XtendClient.xtend", _builder_3.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   @Test
   public void testBug388575() {
     try {

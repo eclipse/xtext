@@ -22,6 +22,42 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 		workbenchTestHelper.tearDown
 	}
 	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=400191
+	 */
+	@Test def void testBug400191() {
+		workbenchTestHelper.createFile('JavaInterface.java', '''
+			public interface JavaInterface<T> {
+				T berechneWert();
+			}
+		''')
+		workbenchTestHelper.createFile('XtendImpl.xtend', '''
+			class XtendImpl<T> implements JavaInterface<T> {
+				override T berechneWert() {
+					return null
+				}
+			}
+		''')
+		workbenchTestHelper.createFile('JavaImpl.java', '''
+			public class JavaImpl<T> extends XtendImpl<T> {
+				public static final JavaImpl<String> XYZ = new JavaImpl<String>();
+				
+				public static <T> void aendert(JavaInterface<T> arg) {
+				}
+			}
+		''')
+		workbenchTestHelper.createFile('XtendClient.xtend', '''
+			class XtendClient {
+				def void doit() {
+					JavaImpl.XYZ.berechneWert()
+					JavaImpl.aendert(JavaImpl.XYZ)
+				}
+			}
+		''')
+		waitForAutoBuild()
+		assertNoErrorsInWorkspace
+	}
+	
 	@Test def void testBug388575() {
 		workbenchTestHelper.createFile('JavaInterface.java', '''
 			public interface JavaInterface {

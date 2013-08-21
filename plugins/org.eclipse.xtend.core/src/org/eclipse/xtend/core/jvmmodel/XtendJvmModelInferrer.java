@@ -163,8 +163,10 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					});
 				}
 			} else if (declaration instanceof XtendClass) {
+				XtendClass xtendClass = (XtendClass) declaration;
 				final JvmGenericType javaType = typesFactory.createJvmGenericType();
 				setNameAndAssociate(xtendFile, declaration, javaType);
+				copyTypeParameters(xtendClass.getTypeParameters(), javaType);
 				acceptor.accept(javaType);
 				if (!preIndexingPhase) {
 					doLater.add(new Runnable() {
@@ -174,8 +176,10 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					});
 				}
 			} else if (declaration instanceof XtendInterface) {
+				XtendInterface xtendInterface = (XtendInterface) declaration;
 				final JvmGenericType javaType = typesFactory.createJvmGenericType();
 				setNameAndAssociate(xtendFile, declaration, javaType);
+				copyTypeParameters(xtendInterface.getTypeParameters(), javaType);
 				acceptor.accept(javaType);
 				if (!preIndexingPhase) {
 					doLater.add(new Runnable() {
@@ -303,7 +307,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (JvmTypeReference intf : source.getImplements()) {
 			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
 		}
-		copyAndFixTypeParameters(source.getTypeParameters(), inferredJvmType);
+		fixTypeParameters(inferredJvmType);
 		if (!isDataObject)
 			addDefaultConstructor(source, inferredJvmType);
 		
@@ -331,7 +335,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (JvmTypeReference intf : source.getExtends()) {
 			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
 		}
-		copyAndFixTypeParameters(source.getTypeParameters(), inferredJvmType);
+		fixTypeParameters(inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendField
 					|| (member instanceof XtendFunction && ((XtendFunction) member).getName() != null)) {
@@ -466,23 +470,33 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	protected void copyAndFixTypeParameters(List<JvmTypeParameter> typeParameters, JvmTypeParameterDeclarator target) {
+		copyTypeParameters(typeParameters, target);
+		fixTypeParameters(target);
+	}
+	
+	protected void copyTypeParameters(List<JvmTypeParameter> typeParameters, JvmTypeParameterDeclarator target) {
 		for (JvmTypeParameter typeParameter : typeParameters) {
 			final JvmTypeParameter clonedTypeParameter = jvmTypesBuilder.cloneWithProxies(typeParameter);
 			if (clonedTypeParameter != null) {
 				target.getTypeParameters().add(clonedTypeParameter);
-				boolean upperBoundSeen = false;
-				for (JvmTypeConstraint constraint : clonedTypeParameter.getConstraints()) {
-					if (constraint instanceof JvmUpperBound) {
-						upperBoundSeen = true;
-						break;
-					}
-				}
-				if (!upperBoundSeen) {
-					JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
-					upperBound.setTypeReference(typeReferences.getTypeForName(Object.class, typeParameter));
-					clonedTypeParameter.getConstraints().add(upperBound);
-				}
 				associator.associate(typeParameter, clonedTypeParameter);
+			}
+		}
+	}
+	
+	protected void fixTypeParameters(JvmTypeParameterDeclarator target) {
+		for (JvmTypeParameter typeParameter : target.getTypeParameters()) {
+			boolean upperBoundSeen = false;
+			for (JvmTypeConstraint constraint : typeParameter.getConstraints()) {
+				if (constraint instanceof JvmUpperBound) {
+					upperBoundSeen = true;
+					break;
+				}
+			}
+			if (!upperBoundSeen) {
+				JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+				upperBound.setTypeReference(typeReferences.getTypeForName(Object.class, target));
+				typeParameter.getConstraints().add(upperBound);
 			}
 		}
 	}
