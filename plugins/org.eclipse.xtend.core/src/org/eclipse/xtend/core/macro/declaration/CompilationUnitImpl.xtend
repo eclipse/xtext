@@ -95,6 +95,7 @@ import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import java.io.File
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -200,9 +201,9 @@ class CompilationUnitImpl implements CompilationUnit {
 			return new Path(uri.toPlatformString(false))
 		}
 		if (uri.file) {
-			val workspacePath = workspaceConfigProvider.get.absoluteFileSystemPath
-			val absolutefilePath = uri.path
-			if (workspacePath == null || absolutefilePath == null || !absolutefilePath.startsWith(workspacePath)) {
+			val workspacePath = new File(workspaceConfigProvider.get.absoluteFileSystemPath).toURI.path
+			val absolutefilePath = new File(uri.toFileString).toURI.path
+			if (!absolutefilePath.startsWith(workspacePath)) {
 				throw new IllegalStateException("Couldn't determine file path. The file ('"+absolutefilePath+"') doesn't seem to be contained in the workspace ('"+workspacePath+"')")
 			}
 			val filePath = absolutefilePath.substring(workspacePath.length)
