@@ -12,6 +12,10 @@ public class SrcFolder extends Container<IFolder> implements IResourceFactory<IF
 
 	private final String name;
 
+	public SrcFolder() {
+		this("src");
+	}
+
 	public SrcFolder(String name) {
 		super();
 		this.name = name;
