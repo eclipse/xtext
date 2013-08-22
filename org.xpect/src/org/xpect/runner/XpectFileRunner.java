@@ -8,6 +8,8 @@
 package org.xpect.runner;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -20,6 +22,11 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.junit.ComparisonFailure;
 import org.junit.runner.Description;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.NoTestsRemainException;
+import org.junit.runner.manipulation.Sortable;
+import org.junit.runner.manipulation.Sorter;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XjmMethod;
@@ -38,7 +45,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XpectFileRunner {
+public class XpectFileRunner implements Filterable, Sortable {
 	private List<AbstractTestRunner> children;
 	private Description description;
 	private Throwable error;
@@ -81,11 +88,6 @@ public class XpectFileRunner {
 		}
 	}
 
-	protected String getFullName() {
-		URI deresolved = runner.getUriProvider().deresolveToProject(getUri());
-		return deresolved.lastSegment() + ": " + deresolved.trimSegments(1).toString();
-	}
-
 	protected ISetupInitializer<Object> createSetupInitializer() {
 		return new SetupInitializer<Object>(xpectFile.getTest());
 	}
@@ -96,6 +98,15 @@ public class XpectFileRunner {
 
 	protected AbstractTestRunner createTestRunner(XpectInvocation invocation) {
 		return new XpectTestRunner(this, invocation);
+	}
+
+	public void filter(Filter filter) throws NoTestsRemainException {
+		List<AbstractTestRunner> filtered = Lists.newArrayList();
+		for (AbstractTestRunner child : getChildren())
+			if (filter.shouldRun(child.getDescription()))
+				filtered.add(child);
+		this.description = null;
+		this.children = filtered;
 	}
 
 	protected List<AbstractTestRunner> getChildren() {
@@ -112,6 +123,11 @@ public class XpectFileRunner {
 
 	public Throwable getError() {
 		return error;
+	}
+
+	protected String getFullName() {
+		URI deresolved = runner.getUriProvider().deresolveToProject(getUri());
+		return deresolved.lastSegment() + ": " + deresolved.trimSegments(1).toString();
 	}
 
 	public XpectRunner getRunner() {
@@ -181,6 +197,15 @@ public class XpectFileRunner {
 				}
 			}
 		}
+	}
+
+	public void sort(final Sorter sorter) {
+		this.description = null;
+		Collections.sort(getChildren(), new Comparator<AbstractTestRunner>() {
+			public int compare(AbstractTestRunner o1, AbstractTestRunner o2) {
+				return sorter.compare(o1.getDescription(), o2.getDescription());
+			}
+		});
 	}
 
 }
