@@ -9,9 +9,7 @@ package org.xpect.runner;
 
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.xpect.XjmMethod;
 import org.xpect.XpectInvocation;
-import org.xpect.XpectPackage;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -24,23 +22,7 @@ public class XpectTestTitleProvider implements IXpectTestTitleProvider {
 		String title = findTitle(document, node.getOffset());
 		if (title != null && title.startsWith("XPECT"))
 			title = null;
-		String method = findMethodName(invocation);
-		if (title != null && method != null)
-			return method + ": " + title;
-		if (title != null)
-			return title;
-		if (method != null)
-			return method;
-		return "(error)";
-	}
-
-	protected String findMethodName(XpectInvocation invocation) {
-		XjmMethod method = invocation.getMethod();
-		if (method != null)
-			return method.getName();
-		for (INode n : NodeModelUtils.findNodesForFeature(invocation, XpectPackage.Literals.XPECT_INVOCATION__METHOD))
-			return NodeModelUtils.getTokenText(n);
-		return null;
+		return title;
 	}
 
 	protected String findTitle(String document, int offset) {

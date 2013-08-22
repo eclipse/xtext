@@ -7,10 +7,13 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectConstants;
+import org.xpect.XpectPackage;
 import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterParser;
 import org.xpect.parameter.IParameterParser.IClaimedRegion;
@@ -126,22 +129,6 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 		return null;
 	}
 
-	protected Class<?> getParameterType(int paramIndex) {
-		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
-		IJavaReflectAccess reflectAccess = injector.getInstance(IJavaReflectAccess.class);
-		XjmXpectMethod xpectMethod = getMethod();
-		if (xpectMethod == null)
-			return null;
-		JvmOperation jvmMethod = xpectMethod.getJvmMethod();
-		if (jvmMethod == null || jvmMethod.eIsProxy())
-			return null;
-		JvmTypeReference parameterType = jvmMethod.getParameters().get(paramIndex).getParameterType();
-		if (parameterType == null || parameterType.eIsProxy() || parameterType.getType() == null)
-			return null;
-		Class<?> expectedType = reflectAccess.getRawType(parameterType.getType());
-		return expectedType;
-	}
-
 	protected List<IParameterProvider> collectProposedParameters(List<List<IParsedParameterProvider>> allParams) {
 		XjmXpectMethod xpectMethod = getMethod();
 		if (xpectMethod == null)
@@ -159,6 +146,25 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	}
 
 	@Override
+	public String getId() {
+		if (this.id == null)
+			((XpectFileImplCustom) this.getFile()).initalizeInvocationsIDs();
+		return super.getId();
+	}
+
+	@Override
+	public String getMethodName() {
+		XjmXpectMethod method = basicGetMethod();
+		return method != null && !method.eIsProxy() ? method.getName() : getMethodNameFromNodeModel();
+	}
+
+	protected String getMethodNameFromNodeModel() {
+		for (INode node : NodeModelUtils.findNodesForFeature(this, XpectPackage.Literals.XPECT_INVOCATION__METHOD))
+			return NodeModelUtils.getTokenText(node);
+		return null;
+	}
+
+	@Override
 	public EList<IParameterProvider> getParameters() {
 		if (this.parameters == null) {
 			List<IClaimedRegion> claimedRegions = collectClaimedRegions();
@@ -169,8 +175,29 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 		return super.getParameters();
 	}
 
+	protected Class<?> getParameterType(int paramIndex) {
+		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
+		IJavaReflectAccess reflectAccess = injector.getInstance(IJavaReflectAccess.class);
+		XjmXpectMethod xpectMethod = getMethod();
+		if (xpectMethod == null)
+			return null;
+		JvmOperation jvmMethod = xpectMethod.getJvmMethod();
+		if (jvmMethod == null || jvmMethod.eIsProxy())
+			return null;
+		JvmTypeReference parameterType = jvmMethod.getParameters().get(paramIndex).getParameterType();
+		if (parameterType == null || parameterType.eIsProxy() || parameterType.getType() == null)
+			return null;
+		Class<?> expectedType = reflectAccess.getRawType(parameterType.getType());
+		return expectedType;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	public void setMethod(XjmXpectMethod newMethod) {
+		((XpectFileImplCustom) getFile()).unsetInvocationIDs();
 		this.parameters = null;
 		super.setMethod(newMethod);
 	}

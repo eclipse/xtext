@@ -8,10 +8,12 @@
 package org.xpect;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.xpect.services.NullResourceDescriptions;
+import org.xpect.services.XpectFragmentProvider;
 import org.xpect.services.XpectValueConverter;
 
 import com.google.inject.Binder;
@@ -21,6 +23,11 @@ import com.google.inject.name.Names;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XpectRuntimeModule extends AbstractXpectRuntimeModule {
+
+	@Override
+	public Class<? extends IFragmentProvider> bindIFragmentProvider() {
+		return XpectFragmentProvider.class;
+	}
 
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {

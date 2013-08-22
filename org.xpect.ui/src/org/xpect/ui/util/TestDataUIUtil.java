@@ -67,21 +67,37 @@ public class TestDataUIUtil {
 		String project = result.javaProject.getProject().getName();
 		if (element instanceof ITestCaseElement) {
 			ITestCaseElement tce = (ITestCaseElement) element;
-			String name = tce.getTestClassName();
-			if (name.contains(":")) {
-				int colon = name.indexOf(':');
-				result.clazz = name.substring(0, colon).trim();
-				URI uri = URI.createURI(name.substring(colon + 1).trim());
+			result.clazz = tce.getTestClassName();
+			String methodName = tce.getTestMethodName();
+			if (methodName.contains("~")) {
+				int colon = methodName.indexOf(':');
+				String description;
+				URI uri;
+				if (colon >= 0) {
+					description = methodName.substring(colon + 1).trim();
+					uri = URI.createURI(methodName.substring(0, colon).trim());
+				} else {
+					description = null;
+					uri = URI.createURI(methodName);
+				}
 				URI base = URI.createPlatformResourceURI(project + "/", true);
 				result.uri = uri.resolve(base);
 				result.file = findFile(element, uri.trimFragment().toString());
+				String name = uri.fragment();
+				int tilde = name.indexOf('~');
+				if (tilde >= 0)
+					name = name.substring(0, tilde);
+				if (description != null)
+					result.title = name + ": " + description;
+				else
+					result.title = name;
 			} else {
-				result.clazz = name;
+				result.title = tce.getTestMethodName();
 			}
-			result.title = tce.getTestMethodName();
 		} else if (element instanceof ITestSuiteElement) {
 			ITestSuiteElement tse = (ITestSuiteElement) element;
 			String name = tse.getSuiteTypeName();
+			result.title = tse.getSuiteTypeName();
 			if (name.contains(":")) {
 				int colon = name.indexOf(':');
 				String filename = name.substring(0, colon).trim();

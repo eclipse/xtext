@@ -64,8 +64,11 @@ public class XpectTestRunner extends AbstractTestRunner {
 	public Description createDescription() {
 		Class<?> javaClass = getMethod().getTest().getJavaClass();
 		URI uri = getUriRunner().getRunner().getUriProvider().deresolveToProject(EcoreUtil.getURI(invocation));
-		String name = getUriRunner().getRunner().getUniqueName(getTitle());
-		return Description.createTestDescription(javaClass.getName() + ":" + uri, name);
+		String title = getTitle();
+		if (title != null)
+			return Description.createTestDescription(javaClass, uri.toString() + ": " + title);
+		else
+			return Description.createTestDescription(javaClass, uri.toString());
 	}
 
 	protected Object[] createParameterValues(List<IParameterProvider> proposedParameters,

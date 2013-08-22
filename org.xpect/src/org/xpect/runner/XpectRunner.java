@@ -9,7 +9,6 @@ package org.xpect.runner;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -28,7 +27,6 @@ import org.xpect.util.AnnotationUtil;
 import org.xpect.util.XpectJavaModelFactory;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.inject.Injector;
 
 /**
@@ -39,7 +37,6 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	private List<XpectFileRunner> children;
 	private Collection<URI> files;
 	private final XpectJavaModel xpectJavaModel;
-	private final Set<String> names = Sets.newHashSet();
 	private final IXpectURIProvider uriProvider;
 	private final Injector xpectInjector;
 	public static ClassLoader testClassloader = null;
@@ -124,34 +121,6 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		if (files == null)
 			files = uriProvider.getAllURIs();
 		return files;
-	}
-
-	// public XpectFrameworkMethod getFrameworkMethod(JvmOperation op) throws
-	// InitializationError {
-	// if (op == null)
-	// throw new NullPointerException("operation is null.");
-	// if (op.eIsProxy())
-	// throw new NullPointerException("operation is an unresolved proxy.");
-	// String key = op.getQualifiedName();
-	// XpectFrameworkMethod result = methods.get(key);
-	// if (result == null)
-	// methods.put(key, result = createCrameworkMethod(op));
-	// return result;
-	// }
-
-	public String getUniqueName(String proposal) {
-		if (!names.contains(proposal)) {
-			names.add(proposal);
-			return proposal;
-		}
-		for (int i = 1; i < Integer.MAX_VALUE; i++) {
-			String candidate = proposal + "#" + i;
-			if (!names.contains(candidate)) {
-				names.add(candidate);
-				return candidate;
-			}
-		}
-		return proposal;
 	}
 
 	public IXpectURIProvider getUriProvider() {

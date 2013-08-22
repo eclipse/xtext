@@ -8,9 +8,7 @@
 package org.xpect.ui.junit;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement;
-import org.eclipse.jdt.junit.model.ITestSuiteElement;
 import org.eclipse.jdt.junit.runners.IRunnerUIHandler;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
@@ -53,13 +51,7 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 	}
 
 	public StyledString getStyledLabel(ViewPart part, ITestElement element, int layout) {
-		String label;
-		if (element instanceof ITestCaseElement)
-			label = ((ITestCaseElement) element).getTestMethodName();
-		else if (element instanceof ITestSuiteElement)
-			label = ((ITestSuiteElement) element).getSuiteTypeName();
-		else
-			label = "(unknown element type)";
+		String label = TestDataUIUtil.parse(element).getTitle();
 		int colon = label.indexOf(':');
 		if (colon >= 0) {
 			StyledString title = new StyledString(label.substring(0, colon));
