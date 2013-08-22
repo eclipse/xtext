@@ -47,6 +47,8 @@ public class TypeUtil {
 
 	public static String findRunner(IType testClass) {
 		IAnnotation annotation = testClass.getAnnotation(RunWith.class.getSimpleName());
+		if (annotation == null || !annotation.exists())
+			annotation = testClass.getAnnotation(RunWith.class.getName());
 		if (annotation != null && annotation.exists()) {
 			try {
 				for (IMemberValuePair pair : annotation.getMemberValuePairs())
