@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -54,7 +55,6 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
-import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -107,7 +107,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			throws Exception {
 		String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 		IScope scope = scopeProvider.getScope(referenceOwner, unresolvedReference);
-		boolean useJavaSearch = isUseJavaSearch(unresolvedReference, issue);;
+		boolean useJavaSearch = isUseJavaSearch(unresolvedReference, issue);
 		if (useJavaSearch) {
 			JvmDeclaredType jvmType = importsConfiguration.getContextJvmDeclaredType(referenceOwner);
 			IJavaSearchScope javaSearchScope = getJavaSearchScope(referenceOwner);
@@ -203,42 +203,46 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 					}
 				}
 			}
-			for (String visiblePackage : visiblePackages) {
-				if (validProposals.size() <= 5) {
-					searchEngine.searchAllTypeNames(visiblePackage.toCharArray(), SearchPattern.R_EXACT_MATCH, null,
-							SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, scope, new TypeNameRequestor() {
-								@Override
-								public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
-										char[][] enclosingTypeNames, String path) {
-									StringBuilder typeNameBuilder = new StringBuilder(simpleTypeName.length);
-									for (char[] enclosingType : enclosingTypeNames) {
-										typeNameBuilder.append(enclosingType);
-										typeNameBuilder.append('.');
-									}
-									typeNameBuilder.append(simpleTypeName);
-									String typeName = typeNameBuilder.toString();
-									if (isSimilarTypeName(misspelled, typeName)) {
-										String fqNameAsString = getQualifiedTypeName(packageName, enclosingTypeNames,
-												simpleTypeName);
-										if (seen.add(fqNameAsString)) {
-											QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(
-													typeName);
-											for (IEObjectDescription element : actualScope.getElements(qualifiedName)) {
-												validProposals
-														.add(new AliasedEObjectDescription(qualifiedName, element));
-												break;
+			try {
+				for (String visiblePackage : visiblePackages) {
+					if (validProposals.size() <= 5) {
+						searchEngine.searchAllTypeNames(visiblePackage.toCharArray(), SearchPattern.R_EXACT_MATCH, null,
+								SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, scope, new TypeNameRequestor() {
+									@Override
+									public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
+											char[][] enclosingTypeNames, String path) {
+										StringBuilder typeNameBuilder = new StringBuilder(simpleTypeName.length);
+										for (char[] enclosingType : enclosingTypeNames) {
+											typeNameBuilder.append(enclosingType);
+											typeNameBuilder.append('.');
+										}
+										typeNameBuilder.append(simpleTypeName);
+										String typeName = typeNameBuilder.toString();
+										if (isSimilarTypeName(misspelled, typeName)) {
+											String fqNameAsString = getQualifiedTypeName(packageName, enclosingTypeNames,
+													simpleTypeName);
+											if (seen.add(fqNameAsString)) {
+												QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(
+														typeName);
+												for (IEObjectDescription element : actualScope.getElements(qualifiedName)) {
+													validProposals
+															.add(new AliasedEObjectDescription(qualifiedName, element));
+													break;
+												}
 											}
 										}
 									}
-								}
-
-							}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor() {
-								@Override
-								public boolean isCanceled() {
-									return validProposals.size() > 5;
-								}
-							});
+		
+								}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor() {
+									@Override
+									public boolean isCanceled() {
+										return validProposals.size() > 5;
+									}
+								});
+					}
 				}
+			} catch(OperationCanceledException exc) {
+				// enough proposals
 			}
 			return new SimpleScope(validProposals);
 		} catch (JavaModelException jme) {
