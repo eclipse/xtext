@@ -11,10 +11,11 @@ import org.xpect.runner.XpectTestFiles
 import org.xpect.setup.XpectSetup
 import org.xpect.xtext.lib.setup.ThisModel
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup
+import org.xpect.xtext.lib.setup.XtextWorkspaceSetup
 import org.xpect.xtext.lib.util.EObjectFormatter
 
 @RunWith(typeof(XpectRunner))
-@XpectSetup(typeof(XtextStandaloneSetup))
+@XpectSetup(#[typeof(XtextStandaloneSetup), typeof(XtextWorkspaceSetup)])
 @XpectTestFiles(fileExtensions="xt")
 class ParserTest {
 

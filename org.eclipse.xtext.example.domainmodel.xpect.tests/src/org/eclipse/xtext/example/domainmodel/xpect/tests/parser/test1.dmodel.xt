@@ -4,6 +4,14 @@
 		ThisFile {}
 		File "test2.dmodel" {}
 	}
+	Workspace {
+		JavaProject {
+			SrcFolder {
+				ThisFile {}
+				File "test2.dmodel" {}
+			}
+		}
+	}
 END_SETUP */
 
 
