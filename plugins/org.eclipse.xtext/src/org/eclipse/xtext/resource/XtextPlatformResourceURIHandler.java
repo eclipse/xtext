@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 
 /**
@@ -24,9 +25,19 @@ import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
  */
 public class XtextPlatformResourceURIHandler extends URIHandlerImpl {
 	
+	private ResourceSet resourceSet;
+
+	public void setResourceSet(ResourceSet resourceSet) {
+		this.resourceSet = resourceSet;
+	}
+
+	public ResourceSet getResourceSet() {
+		return resourceSet;
+	}
+
 	@Override
 	public URI resolve(URI uri) {
-		if (resolve && uri.isRelative() && uri.hasRelativePath()) {
+		if (resolve && uri.isRelative() && uri.hasRelativePath() && !resourceSet.getPackageRegistry().containsKey(uri.trimFragment().toString())) {
 			URI result = uri.resolve(baseURI);
 			if (baseURI.isPlatform()) {
 				if (result.isPlatform() && !(result.isPlatformPlugin() || result.isPlatformResource())) {

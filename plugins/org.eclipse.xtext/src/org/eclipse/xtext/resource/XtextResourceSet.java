@@ -143,7 +143,9 @@ public class XtextResourceSet extends ResourceSetImpl {
      */
 	protected void initializeDefaultLoadOptions() {
 		Map<Object, Object> defaultLoadOptions = getLoadOptions();
-		defaultLoadOptions.put(XMLResource.OPTION_URI_HANDLER, new XtextPlatformResourceURIHandler());
+		XtextPlatformResourceURIHandler uriHandler = new XtextPlatformResourceURIHandler();
+		uriHandler.setResourceSet(this);
+		defaultLoadOptions.put(XMLResource.OPTION_URI_HANDLER, uriHandler);
 	}
 
 	/**
