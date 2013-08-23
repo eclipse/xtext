@@ -502,7 +502,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val getter = clazz.declaredMethods.head
 			assertEquals('getMyField', getter.simpleName)
 			assertEquals('String', getter.returnType.toString)
-			val setter = clazz.findMethod('setMyField', getter.returnType)
+			val setter = clazz.findDeclaredMethod('setMyField', getter.returnType)
 			assertEquals('setMyField', setter.simpleName)
 			assertEquals('void', setter.returnType.toString)
 			assertEquals('myField', setter.parameters.head.simpleName)

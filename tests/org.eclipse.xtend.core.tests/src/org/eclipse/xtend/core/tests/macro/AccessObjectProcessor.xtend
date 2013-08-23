@@ -31,7 +31,7 @@ class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
 		'''.compile [
 			val ctx = transformationContext
 			val classA = ctx.findClass('A')
-			assertNotNull(classA.findMethod('getField'))
+			assertNotNull(classA.findDeclaredMethod('getField'))
 			val classPA = ctx.findClass('PA')
 			assertNotNull(classPA.implementedInterfaces.findFirst[type == ctx.newTypeReference(typeof(Serializable)).type])
 			val classGA = ctx.findClass('GA')
@@ -50,7 +50,7 @@ class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
 		'''.compile [
 			val ctx = transformationContext
 			val classA = ctx.findClass('my.pack.A')
-			assertNotNull(classA.findMethod('getField'))
+			assertNotNull(classA.findDeclaredMethod('getField'))
 			val classPA = ctx.findClass('my.pack.PA')
 			assertNotNull(classPA.implementedInterfaces.findFirst[type == ctx.newTypeReference(typeof(Serializable)).type])
 			val classGA = ctx.findClass('my.pack.GA')

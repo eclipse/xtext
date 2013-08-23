@@ -199,15 +199,15 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		return mutableMethodDeclaration
 	}
 	
-	override findConstructor(TypeReference... parameterTypes) {
+	override findDeclaredConstructor(TypeReference... parameterTypes) {
 		declaredConstructors.findFirst[constructor | constructor.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
-	override findField(String name) {
+	override findDeclaredField(String name) {
 		declaredFields.findFirst[field | field.simpleName == name]
 	}
 	
-	override findMethod(String name, TypeReference... parameterTypes) {
+	override findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		declaredMethods.findFirst[method | method.simpleName == name && method.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
@@ -351,11 +351,11 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		delegate.superTypes.addAll(superInterfaces.filter(TypeReferenceImpl).map[delegate.toJavaCompliantTypeReference])
 	}
 
-	override findField(String name) {
+	override findDeclaredField(String name) {
 		declaredMembers.filter(MutableFieldDeclaration).findFirst[it.simpleName == name]
 	}
 	
-	override findMethod(String name, TypeReference[] parameterTypes) {
+	override findDeclaredMethod(String name, TypeReference[] parameterTypes) {
 		declaredMembers.filter(MutableMethodDeclaration).findFirst[
 			it.simpleName == name 
 			&& it.parameters.map[type].toList == parameterTypes.toList
