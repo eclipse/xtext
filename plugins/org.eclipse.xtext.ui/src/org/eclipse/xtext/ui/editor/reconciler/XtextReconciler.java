@@ -308,7 +308,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	private ReconcilerReplaceRegion getMergedReplaceRegion(XtextResource resource) {
 		List<DocumentEvent> events = newArrayListWithExpectedSize(pendingChanges.size());
 		pendingChanges.drainTo(events);
-		if (events.isEmpty())
+		if (events.isEmpty() || resource == null)
 			return null;
 		IParseResult parseResult = resource.getParseResult();
 		String resourceText = (parseResult != null) ? parseResult.getRootNode().getText() : "";
