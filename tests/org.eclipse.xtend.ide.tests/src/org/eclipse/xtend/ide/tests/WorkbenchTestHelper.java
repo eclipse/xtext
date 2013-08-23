@@ -278,7 +278,7 @@ public class WorkbenchTestHelper extends Assert {
 		return null;
 	}
 
-	protected IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
+	public IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
 		return workbench.getActiveWorkbenchWindow().getActivePage().openEditor(new FileEditorInput(file), editorId);
 	}
 

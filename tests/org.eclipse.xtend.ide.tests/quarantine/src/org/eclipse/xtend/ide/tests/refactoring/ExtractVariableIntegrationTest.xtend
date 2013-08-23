@@ -109,7 +109,7 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 					$getFoo('bar')$
 				}
 				
-				def getFoo(String x) {
+				def getFoo(String x) {
 					x
 				}
 			}
@@ -120,7 +120,7 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 					foo
 				}
 				
-				def getFoo(String x) {
+				def getFoo(String x) {
 					x
 				}
 			}
@@ -256,7 +256,7 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 				val selection = util.findSelectedExpression(it, textSelection)
 				val refactoring = refactoringProvider.get()
 				refactoring.final = isFinal
-				refactoring.initialize(editor.document, selection)
+				refactoring.initialize(editor, selection)
 				val status = refactoring.checkAllConditions(new NullProgressMonitor)
 				assertTrue(status.toString, status.OK)
 				refactoring.createChange(new NullProgressMonitor).perform(new NullProgressMonitor)

@@ -50,7 +50,7 @@ public class ExtractMethodHandler extends AbstractHandler {
 
 	@Inject
 	private ExtractMethodWizard.Factory wizardFactory;
-
+	
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			syncUtil.totalSync(false);
@@ -65,7 +65,7 @@ public class ExtractMethodHandler extends AbstractHandler {
 								selection);
 						if (!expressions.isEmpty()) {
 							ExtractMethodRefactoring extractMethodRefactoring = refactoringProvider.get();
-							if (extractMethodRefactoring.initialize(document, expressions)) {
+							if (extractMethodRefactoring.initialize(editor, expressions, true)) {
 								updateSelection(editor, expressions);
 								ExtractMethodWizard wizard = wizardFactory.create(extractMethodRefactoring);
 								RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
