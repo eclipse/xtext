@@ -3,6 +3,7 @@
 
 	<cs:dependencies>
 		<cs:dependency name="org.eclipse.xtext.compatibility.galileo" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.xtext.language-generator" componentType="osgi.bundle" filter="(WITH.MWE2=true)" />
 		<cs:dependency name="org.eclipse.xtend.examples-container" componentType="buckminster" />
 		<cs:dependency name="org.eclipse.xtext.xtext.ui.examples-container" componentType="buckminster" />
 	</cs:dependencies>

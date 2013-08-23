@@ -5,15 +5,27 @@
   <rm:property key="xpand_mwe.download" value="${eclipse.download}"/>
   <rm:property key="xpand.p2.repository" value="${eclipse.download}/modeling/m2t/xpand/updates/releases"/>
   <rm:property key="mwe.p2.repository" value="${xpand_mwe.download}/modeling/emft/mwe/updates/nightly"/>
+  <rm:property key="mwe2launcher.p2.repository" value="${xpand_mwe.download}/modeling/tmf/xtext/updates/composite/latest"/>
   <rm:property key="gef.p2.repository" value="${eclipse.download}/tools/gef/updates/releases"/>
   <rm:property key="maven.p2.repository" value="${eclipse.download}/technology/m2e/releases/1.0/1.0.0.20110606-1526/"/>
   <rm:property key="maven.repository.uri" value="http://repo.maven.apache.org/maven2"/>
   
   <rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit"/>
+  <rm:property key="antlr_gen.p2.repository" value="http://download.itemis.de/updates/releases/2.0.0"/>
   <rm:property key="jdt_annotation.p2.repository" value="${eclipse.download}/eclipse/updates/3.8"/>
 
   <rm:locator pattern="^org\.eclipse\.xtext\.releng$" searchPathRef="local.releng"/>
   <rm:locator pattern="^org\.eclipse\.emf\.(?:mwe2\.runtime|mwe2\.lib|mwe)(?:\..+)?$" searchPathRef="mwe"/>
+  
+  <rm:locator pattern="^org\.eclipse\.emf\.mwe2\.launch$" searchPathRef="mwe2-gen"/>
+  <rm:locator pattern="^org\.eclipse\.emf\.mwe2\.language$" searchPathRef="mwe2-gen"/>
+  <rm:locator pattern="^org\.eclipse\.xtext$" searchPathRef="mwe2-gen"/>
+  <rm:locator pattern="^org\.eclipse\.xtext\.common\.types$" searchPathRef="mwe2-gen"/>
+  <rm:locator pattern="^org\.eclipse\.xtend\.lib$" searchPathRef="mwe2-gen"/>
+  <rm:locator pattern="^org\.eclipse\.xtext\.util$" searchPathRef="mwe2-gen"/>
+  <rm:locator pattern="^de\.itemis\.xtext\.antlr(?:\..+)?$" searchPathRef="mwe2-gen"/>
+  <rm:locator pattern="^org\.antlr\.generator(?:\..+)?$" searchPathRef="mwe2-gen"/>
+    
   <rm:locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.(?:xpand|xtend)(?:\..+)?$" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.apache(?:\..+)?$" searchPathRef="orbit" failOnError="false"/>
@@ -34,6 +46,7 @@
   <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="maven"/>
   <rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator pattern="org.eclipse.jdt.annotation" searchPathRef="jdt.annotation"/>
+  
   <rm:locator searchPathRef="platform"/>
   <rm:searchPath name="google-maven">
     <rm:provider xsi:type="maven:MavenProvider" componentTypes="maven,osgi.bundle" readerType="maven2">
@@ -64,6 +77,7 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
+
   <rm:searchPath name="xpand">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
@@ -88,6 +102,22 @@
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="orbit.p2.repository"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="mwe2-gen">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false" resolutionFilter="(WITH.MWE2=true)" >
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="antlr_gen.p2.repository"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="mwe2launcher.p2.repository"/>
       </rm:uri>
     </rm:provider>
   </rm:searchPath>

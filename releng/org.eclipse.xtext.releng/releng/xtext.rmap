@@ -31,6 +31,12 @@
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
+		<provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<uri format="{0}/devtools/{1}">
+				<bc:propertyRef key="checkout.location" />
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+		</provider>
 	</searchPath>
 
 	<searchPath name="xtext.examples">

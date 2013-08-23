@@ -44,6 +44,7 @@
 		<exec executable="${buckminster.home}/buckminster">
 			<arg value="-Declipse.p2.mirrors=false" />
 			<arg value="-Dbuild.root=${build.root}" />
+			<arg value="-DWITH.MWE2=true" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-DtargetPlatformPath=${build.root}/target.platform" />
 			<arg value="-Dxtend.checkout.location=${xtend.checkout.location}" />
