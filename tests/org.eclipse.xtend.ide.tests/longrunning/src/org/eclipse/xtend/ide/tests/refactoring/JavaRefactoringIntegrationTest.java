@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
@@ -21,7 +19,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.corext.refactoring.rename.JavaRenameProcessor;
 import org.eclipse.jdt.ui.refactoring.RenameSupport;
 import org.eclipse.jface.text.TextSelection;
@@ -586,7 +583,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		fileAsserts.assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
 	}
 
-	@Ignore("TODO")
 	@Test
 	public void testRenameXtendDispatchMethod_1() throws Exception {
 		String superModel = "class Super { def dispatch foo(Integer x) {} }";
@@ -606,7 +602,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		fileAsserts.assertFileContains(subClass, subModel.replace("foo", "baz"));
 	}
 
-	@Ignore("TODO")
 	@Test
 	public void testRenameXtendDispatchMethod_2() throws Exception {
 		String superModel = "class Super { def dispatch foo(Integer x) {} }";
@@ -855,7 +850,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(javaClass, "JavaClass extends NewXtendClass");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -869,7 +864,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileExists("src/NewXtendClass.xtend");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -883,7 +878,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileExists("src/NewXtendClass.xtend");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -900,7 +895,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {}");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -917,7 +912,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {}");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -934,7 +929,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -952,7 +947,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -968,7 +963,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(javaClass, "JavaClass implements NewXtendInterface");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendInterface.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -985,7 +980,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(newXtendInterface, "interface NewXtendInterface {}");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendInterface.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -1001,7 +996,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(javaClass, "{ NewXtendEnum e; }");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendEnum.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -1018,7 +1013,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(newXtendInterface, "enum NewXtendEnum { FOO, BAR }");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendEnum.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -1034,7 +1029,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(javaClass, "@NewXtendAnnotation public class JavaClass {}");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendAnnotation.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -1051,7 +1046,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(newXtendInterface, "annotation NewXtendAnnotation {}");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendAnnotation.xtend").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 
@@ -1126,7 +1121,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 	
@@ -1142,7 +1137,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 	
@@ -1158,7 +1153,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension.*",  "class XtendRef { def bar() { foo('') } }");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 	
@@ -1174,7 +1169,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			fileAsserts.assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			waitForAutoBuild();
+			syncUtil.waitForBuild(null);
 		}
 	}
 	
@@ -1245,20 +1240,18 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected void assertDocumentContains(XtextEditor editor, String expectedContent) throws CoreException {
-		syncUtil.waitForReconciler(editor);
 		String editorContent = editor.getDocument().get();
 		assertTrue("'" + expectedContent + "' not found in \n" + editorContent, editorContent.contains(expectedContent));
 	}
 
 	protected void assertDocumentContainsIgnoreWhitespace(XtextEditor editor, String expectedContent) throws CoreException {
-		syncUtil.waitForReconciler(editor);
 		String editorContent = editor.getDocument().get();
 		assertTrue("'" + expectedContent + "' not found in \n" + editorContent, 
 				editorContent.replaceAll("\\s*", " ").contains(expectedContent.replaceAll("\\s*",  " ")));
 	}
 
 	protected XtextEditor openEditorSafely(IFile file) throws Exception {
-		waitForAutoBuild();
+		syncUtil.waitForBuild(null);
 		syncUtil.yieldToQueuedDisplayJobs(null);
 		XtextEditor editor = testHelper.openEditor(file);
 		syncUtil.waitForReconciler(editor);
@@ -1272,8 +1265,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 	
 	protected void renameXtendElement(final XtextEditor editor, final int offset, final String newName, final int allowedSeverity) throws Exception {
-		waitForAutoBuild();
-		syncUtil.yieldToQueuedDisplayJobs(null);
+		syncUtil.totalSync(false);
 		new WorkspaceModifyOperation() {
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
@@ -1285,9 +1277,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 				change.perform(new NullProgressMonitor());
 			}
 		}.run(new NullProgressMonitor());
-		waitForAutoBuild();
+		syncUtil.totalSync(false);
 		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
-		syncUtil.yieldToQueuedDisplayJobs(null);
 	}
 
 	protected void renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
@@ -1295,8 +1286,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected RefactoringStatus renameXtendElementWithError(final XtextEditor editor, final int offset, String newName) throws Exception {
-		waitForAutoBuild();
-		syncUtil.yieldToQueuedDisplayJobs(null);
+		syncUtil.totalSync(false);
 		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
 		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
 		assertFalse("Expected an error", status.isOK());
@@ -1330,32 +1320,33 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	protected void renameJavaElement(IType javaElement, String newName) throws CoreException, InterruptedException,
 			InvocationTargetException {
-		waitForAutoBuild();
+		syncUtil.totalSync(false);
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-		waitForAutoBuild();
+		syncUtil.totalSync(false);
 		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
 	}
 
 	protected void renameJavaElement(IMethod javaElement, String newName) throws CoreException, InterruptedException,
 			InvocationTargetException {
-		waitForAutoBuild();
+		syncUtil.totalSync(false);
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-		waitForAutoBuild();
+		syncUtil.totalSync(false);
 		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
 	}
 
 	protected void renameJavaElement(IField javaElement, String newName) throws CoreException, InterruptedException,
 			InvocationTargetException {
+		syncUtil.totalSync(false);
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-		waitForAutoBuild();
+		syncUtil.totalSync(false);
 		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
 	}
 
-	protected IType findJavaType(String typeName) throws JavaModelException {
-		waitForAutoBuild();
+	protected IType findJavaType(String typeName) throws Exception {
+		syncUtil.totalSync(false);
 		IJavaProject javaProject = JavaCore.create(testHelper.getProject());
 		IType javaClass = javaProject.findType(typeName);
 		return javaClass;

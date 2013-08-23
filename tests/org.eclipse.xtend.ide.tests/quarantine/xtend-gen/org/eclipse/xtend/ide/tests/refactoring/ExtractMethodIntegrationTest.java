@@ -1106,8 +1106,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
               TextSelection _textSelection = new TextSelection(_indexOf, _minus_1);
               final List<XExpression> selection = ExtractMethodIntegrationTest.this.util.findSelectedSiblingExpressions(it, _textSelection);
               final ExtractMethodRefactoring refactoring = ExtractMethodIntegrationTest.this.refactoringProvider.get();
-              IXtextDocument _document = editor.getDocument();
-              refactoring.initialize(_document, selection);
+              refactoring.initialize(editor, selection, true);
               refactoring.setMethodName("bar");
               NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
               RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);
@@ -1163,8 +1162,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
               TextSelection _textSelection = new TextSelection(_indexOf, _minus_1);
               final List<XExpression> selection = ExtractMethodIntegrationTest.this.util.findSelectedSiblingExpressions(it, _textSelection);
               final ExtractMethodRefactoring refactoring = ExtractMethodIntegrationTest.this.refactoringProvider.get();
-              IXtextDocument _document = editor.getDocument();
-              refactoring.initialize(_document, selection);
+              refactoring.initialize(editor, selection, true);
               refactoring.setMethodName("bar");
               NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
               final RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);

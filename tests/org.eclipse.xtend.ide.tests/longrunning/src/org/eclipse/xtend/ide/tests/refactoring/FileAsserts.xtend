@@ -13,9 +13,14 @@ class FileAsserts {
 	
 	def assertFileExists(String fileName) throws Exception {
 		val file = project.findMember(fileName)
-		assertTrue(file instanceof IFile)
-		assertTrue(file.exists())
+		assertTrue(fileName + ' is not an IFile', file instanceof IFile)
+		assertTrue('File ' + fileName + ' doesn\'t exist', file.exists())
 		file as IFile
+	}
+
+	def assertFileDoesntExists(String fileName) throws Exception {
+		val file = project.findMember(fileName)
+		assertNull(file)
 	}
 
 	def assertFileContains(IFile file, String... expectedContents) throws Exception {

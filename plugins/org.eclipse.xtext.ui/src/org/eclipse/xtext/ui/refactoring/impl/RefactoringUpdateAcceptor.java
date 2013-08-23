@@ -75,7 +75,7 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 				+ document2change.keySet().size());
 		if(document2change.isEmpty() && document2textEdits.isEmpty())
 			return null;
-		CompositeChange compositeChange = new FixedCompositeChange(name);
+		CompositeChange compositeChange = new CompositeChange(name);
 		for (IRefactoringDocument document : document2textEdits.keySet()) {
 			Iterable<TextEdit> textEdits = document2textEdits.get(document);
 			MultiTextEdit multiTextEdit = new MultiTextEdit();
@@ -88,7 +88,7 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 		}
 		for (IRefactoringDocument document : document2change.keySet()) {
 			Iterable<Change> documentChanges = document2change.get(document);
-			CompositeChange documentCompositeChange = new FixedCompositeChange(name);
+			CompositeChange documentCompositeChange = new CompositeChange(name);
 			documentCompositeChange.addAll(Iterables.toArray(documentChanges, Change.class));
 			compositeChange.add(documentCompositeChange);
 			progress.worked(1);

@@ -23,12 +23,21 @@ public class FileAsserts {
     {
       IProject _project = this._workbenchTestHelper.getProject();
       final IResource file = _project.findMember(fileName);
-      Assert.assertTrue((file instanceof IFile));
+      String _plus = (fileName + " is not an IFile");
+      Assert.assertTrue(_plus, (file instanceof IFile));
+      String _plus_1 = ("File " + fileName);
+      String _plus_2 = (_plus_1 + " doesn\'t exist");
       boolean _exists = file.exists();
-      Assert.assertTrue(_exists);
+      Assert.assertTrue(_plus_2, _exists);
       _xblockexpression = (((IFile) file));
     }
     return _xblockexpression;
+  }
+  
+  public void assertFileDoesntExists(final String fileName) throws Exception {
+    IProject _project = this._workbenchTestHelper.getProject();
+    final IResource file = _project.findMember(fileName);
+    Assert.assertNull(file);
   }
   
   public void assertFileContains(final IFile file, final String... expectedContents) throws Exception {

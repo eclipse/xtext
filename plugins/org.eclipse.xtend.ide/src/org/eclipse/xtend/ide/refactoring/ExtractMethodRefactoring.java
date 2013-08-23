@@ -36,6 +36,7 @@ import org.eclipse.ltk.core.refactoring.DocumentChange;
 import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -48,8 +49,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
+import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -115,7 +118,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 	@Inject
 	private ReplaceConverter replaceConverter;
 	
-	private IDocument document;
+	private IXtextDocument document;
 
 	private List<XExpression> expressions;
 
@@ -155,14 +158,19 @@ public class ExtractMethodRefactoring extends Refactoring {
 	private Set<JvmTypeParameter> neededTypeParameters = newHashSet();
 
 	private DocumentRewriter rewriter;
-	
 
-	public boolean initialize(IXtextDocument document, List<XExpression> expressions) {
-		if(expressions.isEmpty() || document == null)
+	private XtextEditor editor;
+
+	private boolean doSave;
+	
+	public boolean initialize(XtextEditor editor, List<XExpression> expressions, boolean doSave) {
+		if(expressions.isEmpty() || editor.getDocument() == null)
 			return false;
-		this.document = document;
+		this.document = editor.getDocument();
+		this.doSave = doSave;
+		this.editor = editor;
 		this.expressions = expressions;
-		this.firstExpression = expressions.get(0);
+		this.firstExpression = expressions.get(0); 
 		this.lastExpression = expressions.get(expressions.size()-1);
 		this.resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(firstExpression).trimFragment();
 		this.xtendClass = EcoreUtil2.getContainerOfType(firstExpression, XtendClass.class);
@@ -367,10 +375,10 @@ public class ExtractMethodRefactoring extends Refactoring {
 
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		DocumentChange change = new DocumentChange("Extract Method", document);
+		EditorDocumentChange change = new EditorDocumentChange("Extract Method", editor, doSave);
 		change.setEdit(textEdit);
 		change.setTextType(resourceURI.fileExtension());
-		return DisplayChangeWrapper.wrap(change);
+		return change;
 	}
 
 	protected void handleException(Exception exc, StatusWrapper status) {

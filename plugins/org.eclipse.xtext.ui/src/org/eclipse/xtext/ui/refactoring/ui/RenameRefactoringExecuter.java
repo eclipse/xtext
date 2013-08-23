@@ -37,7 +37,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.refactoring.impl.Messages;
 
 import com.google.inject.Inject;
@@ -97,7 +96,6 @@ public class RenameRefactoringExecuter {
 			window.run(false, true, new WorkbenchRunnableAdapter(checkConditionsRunnable, rule, true));
 			PerformChangeOperation performChangeOperation = checkConditionsRunnable.getPerformChangeOperation();
 			if (performChangeOperation != null) {
-				Object[] affectedObjects = performChangeOperation.getChange().getAffectedObjects();
 				window.run(false, false, new WorkbenchRunnableAdapter(performChangeOperation, rule, true));
 				RefactoringStatus validationStatus = performChangeOperation.getValidationStatus();
 				if (validationStatus != null && validationStatus.hasFatalError()) {
@@ -107,13 +105,6 @@ public class RenameRefactoringExecuter {
 							Messages.format("Cannot execute refactoring",
 									validationStatus.getMessageMatchingSeverity(RefactoringStatus.FATAL))); 
 					return;
-				} else {
-					if(affectedObjects != null) {
-						for(Object affectedObject: affectedObjects) {
-							if(affectedObject instanceof ITextEditor) 
-								((ITextEditor) affectedObject).doSave(new NullProgressMonitor());
-						}
-					}
 				}
 			}
 		} catch (InvocationTargetException e) {

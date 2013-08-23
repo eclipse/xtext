@@ -216,7 +216,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def getFoo(String x) {");
+    _builder.append("def getFoo(String x) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("x");
@@ -244,7 +244,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("def getFoo(String x) {");
+    _builder_1.append("def getFoo(String x) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("x");
@@ -512,8 +512,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
               final XExpression selection = ExtractVariableIntegrationTest.this.util.findSelectedExpression(it, textSelection);
               final ExtractVariableRefactoring refactoring = ExtractVariableIntegrationTest.this.refactoringProvider.get();
               refactoring.setFinal(isFinal);
-              IXtextDocument _document = editor.getDocument();
-              refactoring.initialize(_document, selection);
+              refactoring.initialize(editor, selection);
               NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
               final RefactoringStatus status = refactoring.checkAllConditions(_nullProgressMonitor);
               String _string = status.toString();
