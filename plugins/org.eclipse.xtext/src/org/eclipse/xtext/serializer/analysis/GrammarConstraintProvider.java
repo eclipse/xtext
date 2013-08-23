@@ -465,20 +465,20 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (!(obj instanceof ConstraintElement))
 				return false;
 			ConstraintElement ce = (ConstraintElement) obj;
-			if (getElementURI().equals(ce.getElementURI())) {
-				if (children == null && ce.children == null)
-					return true;
-				if (children == null || ce.children == null)
-					return false;
-				else if (getType() == ConstraintElementType.ALTERNATIVE && children.size() == ce.children.size()) {
+			switch (type) {
+				case ALTERNATIVE: {
+					if (children == null || ce.children == null || children.size() != ce.children.size())
+						return false;
 					for (IConstraintElement child : children)
 						if (!ce.containsChild(child))
 							return false;
 					return true;
-				} else
+				}
+				case GROUP:
 					return children.equals(ce.children);
+				default:
+					return getElementURI().equals(ce.getElementURI());
 			}
-			return false;
 		}
 
 		protected IConstraintElement findCommonContainer(List<IConstraintElement> elements) {
@@ -644,11 +644,24 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		@Override
 		public int hashCode() {
-			return getElementURI().hashCode();
-			//			int result = element != null ? element.hashCode() : 0;
-			//			//			if (children != null)
-			//			//				result += 7 * children.hashCode();
-			//			return result;
+			switch (type) {
+				case ALTERNATIVE: {
+					// has code must be independent of children's order
+					int result = 0;
+					for (IConstraintElement child : children)
+						result += child.hashCode();
+					return result;
+				}
+				case GROUP: {
+					// has code must depend of children's order
+					int result = 0;
+					for (int i = 0; i < children.size(); i++)
+						result += children.get(i).hashCode() + i;
+					return result;
+				}
+				default:
+					return getElementURI().hashCode();
+			}
 		}
 
 		public boolean isCardinalityOneAmongAssignments(List<IConstraintElement> assignments) {
