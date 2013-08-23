@@ -96,6 +96,6 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 	}
 	
 	def MutableMethodDeclaration tryAddMethod(MutableClassDeclaration it, String name, (MutableMethodDeclaration)=>void initializer) {
-		findMethod(name) ?: addMethod(name, initializer)
+		findDeclaredMethod(name) ?: addMethod(name, initializer)
 	}
 }
