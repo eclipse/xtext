@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -102,10 +103,13 @@ public class RenameElementWizard extends RefactoringWizard {
 
 		protected final void validatePage() {
 			String text = nameField.getText();
-			RefactoringStatus status = renameProcessor.validateNewName(text);
-			setPageComplete(status);
-			if(equal(renameProcessor.getOriginalName(), text)) {
+			if(Strings.isEmpty(text)) {
 				setPageComplete(false);
+			} else {
+				RefactoringStatus status = renameProcessor.validateNewName(text);
+				setPageComplete(status);
+				if(equal(renameProcessor.getOriginalName(), text)) 
+					setPageComplete(false);
 			}
 		}
 
