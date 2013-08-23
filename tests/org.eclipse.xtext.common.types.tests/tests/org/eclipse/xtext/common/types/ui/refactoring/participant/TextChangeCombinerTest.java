@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
-import org.eclipse.ltk.core.refactoring.DocumentChange;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChange;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.MultiTextEdit;
@@ -26,9 +25,10 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
-import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
+import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -78,12 +78,13 @@ public class TextChangeCombinerTest {
 
 	@Test
 	public void testSingleDocumentChange() throws Exception {
-		IDocument document = openDocument(file0);
-		Change docChange = createDocumentChange(document, 1, 1, "foo");
+		ITextEditor editor = openInEditor(file0);
+		Change docChange = createEditorDocumentChange(editor, 1, 1, "foo");
 		Change combined = combiner.combineChanges(docChange);
 		assertEquals(docChange, combined);
 		assertTextType(combined);
 		Change undo = combined.perform(new NullProgressMonitor());
+		IDocument document = getDocument(editor);
 		assertEquals(MODEL.replace("1", "foo"), document.get());
 		undo.perform(new NullProgressMonitor());
 		assertEquals(MODEL, document.get());
@@ -114,23 +115,21 @@ public class TextChangeCombinerTest {
 
 	@Test
 	public void testMultipleDocumentChanges() throws Exception {
-		IDocument document = openDocument(file0);
+		ITextEditor editor = openInEditor(file0);
 		CompositeChange compositeChange = new CompositeChange("test");
-		compositeChange.add(createDocumentChange(document, 1, 1, "foo"));
-		compositeChange.add(createDocumentChange(document, 2, 1, "bar"));
+		compositeChange.add(createEditorDocumentChange(editor, 1, 1, "foo"));
+		compositeChange.add(createEditorDocumentChange(editor, 2, 1, "bar"));
 		CompositeChange compositeChange1 = new CompositeChange("test");
 		compositeChange.add(compositeChange1);
-		compositeChange1.add(createDocumentChange(document, 3, 1, "baz"));
-		compositeChange1.add(createDocumentChange(document, 2, 1, "bar"));
-		compositeChange1.add(createMultiDocumentChange(document, 1, 1, "foo", 4, 1, "foo"));
+		compositeChange1.add(createEditorDocumentChange(editor, 3, 1, "baz"));
+		compositeChange1.add(createEditorDocumentChange(editor, 2, 1, "bar"));
+		compositeChange1.add(createMultiEditorDocumentChange(editor, 1, 1, "foo", 4, 1, "foo"));
 		Change combined = combiner.combineChanges(compositeChange);
 		assertTrue(combined instanceof CompositeChange);
 		assertEquals(1, ((CompositeChange) combined).getChildren().length);
-		Change combinedChild = ((CompositeChange) combined).getChildren()[0];
-		assertTrue(combinedChild instanceof DisplayChangeWrapper.Wrapper);
-		Change delegate = ((DisplayChangeWrapper.Wrapper) combinedChild).getDelegate();
-		assertTextType(delegate);
+		assertTrue(((CompositeChange)combined).getChildren()[0] instanceof EditorDocumentChange);
 		Change undo = combined.perform(new NullProgressMonitor());
+		IDocument document = getDocument(editor);
 		assertEquals(MODEL.replace("1234", "foobarbazfoo"), document.get());
 		undo.perform(new NullProgressMonitor());
 		assertEquals(MODEL, document.get());
@@ -139,21 +138,22 @@ public class TextChangeCombinerTest {
 	@Test
 	public void testMixedChanges() throws Exception {
 		IFile file1 = IResourcesSetupUtil.createFile(PROJECT + "/file1.txt", MODEL);
-		IDocument document = openDocument(file1);
+		ITextEditor editor1 = openInEditor(file1);
 		CompositeChange compositeChange = new CompositeChange("test");
-		compositeChange.add(createDocumentChange(document, 1, 1, "foo"));
+		compositeChange.add(createEditorDocumentChange(editor1, 1, 1, "foo"));
 		compositeChange.add(createTextFileChange(file0, 1, 1, "foo"));
 		CompositeChange compositeChange1 = new CompositeChange("test");
 		compositeChange.add(compositeChange1);
-		compositeChange1.add(createDocumentChange(document, 3, 1, "baz"));
+		compositeChange1.add(createEditorDocumentChange(editor1, 3, 1, "baz"));
 		compositeChange1.add(createTextFileChange(file0, 1, 1, "foo"));
 		compositeChange1.add(createTextFileChange(file0, 3, 1, "baz"));
 		Change combined = combiner.combineChanges(compositeChange);
 		Change undo = combined.perform(new NullProgressMonitor());
-		assertEquals(MODEL.replace("123", "foo2baz"), document.get());
+		IDocument document1 = getDocument(editor1);
+		assertEquals(MODEL.replace("123", "foo2baz"), document1.get());
 		assertEquals(MODEL.replace("123", "foo2baz"), getContents(file0));
 		undo.perform(new NullProgressMonitor());
-		assertEquals(MODEL, document.get());
+		assertEquals(MODEL, document1.get());
 		assertEquals(MODEL, getContents(file0));
 	}
 
@@ -174,14 +174,17 @@ public class TextChangeCombinerTest {
 		}
 	}
 
-	protected IDocument openDocument(IFile file) throws PartInitException {
+	protected ITextEditor openInEditor(IFile file) throws PartInitException {
 		FileEditorInput fileEditorInput = new FileEditorInput(file);
 		AbstractTextEditor editor = (AbstractTextEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 				.getActivePage().openEditor(fileEditorInput, "org.eclipse.ui.DefaultTextEditor");
-		IDocumentProvider documentProvider = editor.getDocumentProvider();
-		return documentProvider.getDocument(fileEditorInput);
+		return editor;
 	}
 
+	protected IDocument getDocument(ITextEditor editor) {
+		return editor.getDocumentProvider().getDocument(editor.getEditorInput());
+	}
+	
 	protected Change createTextFileChange(IFile file, int offset, int length, String replacement) {
 		ReplaceEdit edit = new ReplaceEdit(offset, length, replacement);
 		TextFileChange textFileChange = new TextFileChange("text change", file);
@@ -210,19 +213,19 @@ public class TextChangeCombinerTest {
 		return multiTextEdit;
 	}
 
-	protected Change createDocumentChange(IDocument document, int offset, int length, String replacement) {
+	protected Change createEditorDocumentChange(ITextEditor editor, int offset, int length, String replacement) {
 		ReplaceEdit edit = new ReplaceEdit(offset, length, replacement);
-		DocumentChange documentChange = new DocumentChange("document change", document);
+		EditorDocumentChange documentChange = new EditorDocumentChange("document change", editor, false);
 		documentChange.setEdit(edit);
 		documentChange.setTextType(TEXT_TYPE);
 		return documentChange;
 	}
 
-	protected Change createMultiDocumentChange(IDocument document, int offset0, int length0, String replacement0,
+	protected Change createMultiEditorDocumentChange(ITextEditor editor, int offset0, int length0, String replacement0,
 			int offset1, int length1, String replacement1) {
 		MultiTextEdit multiTextEdit = createMultiTextEdit(offset0, length0, replacement0, offset1, length1,
 				replacement1);
-		DocumentChange documentChange = new DocumentChange("text change", document);
+		EditorDocumentChange documentChange = new EditorDocumentChange("document change", editor, false);
 		documentChange.setEdit(multiTextEdit);
 		documentChange.setTextType(TEXT_TYPE);
 		return documentChange;
