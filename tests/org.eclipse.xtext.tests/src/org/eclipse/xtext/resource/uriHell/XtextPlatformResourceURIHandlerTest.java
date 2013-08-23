@@ -8,6 +8,9 @@
 package org.eclipse.xtext.resource.uriHell;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.XtextPlatformResourceURIHandler;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,6 +26,7 @@ public class XtextPlatformResourceURIHandlerTest extends Assert {
 	@Before
 	public void setUp() {
 		uriHandler = new XtextPlatformResourceURIHandler();
+		uriHandler.setResourceSet(new ResourceSetImpl());
 	}
 	
 	@Test
@@ -69,6 +73,19 @@ public class XtextPlatformResourceURIHandlerTest extends Assert {
 		uriHandler.setBaseURI(packagedBaseURI);
 		URI resolved = uriHandler.resolve(relativeURI);
 		assertEquals(packagedReferencedURI.toString(), resolved.toString());
+	}
+	
+	@Test
+	public void testDontDeresolvePackageNamesEvenThoughTheyLookLikeRelativeURIs() {
+		EPackageRegistryImpl registry = new EPackageRegistryImpl(uriHandler.getResourceSet().getPackageRegistry());
+		uriHandler.getResourceSet().setPackageRegistry(registry);
+		registry.put("foo.bar", EcorePackage.eINSTANCE);
+
+		uriHandler.setBaseURI(URI.createURI("platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.ecore"));
+		assertEquals("foo.bar", uriHandler.resolve(URI.createURI("foo.bar")).toString());
+		assertEquals("/foo.bar", uriHandler.resolve(URI.createURI("/foo.bar")).toString());
+		assertEquals("foo.bar#/baz", uriHandler.resolve(URI.createURI("foo.bar#/baz")).toString());
+		assertEquals("/foo.bar#/baz", uriHandler.resolve(URI.createURI("/foo.bar#/baz")).toString());
 	}
 	
 }
