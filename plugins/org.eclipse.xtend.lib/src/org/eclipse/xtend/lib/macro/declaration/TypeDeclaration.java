@@ -56,18 +56,18 @@ public interface TypeDeclaration extends Type, MemberDeclaration {
 	 * @param name of the feature
 	 * @return the declared field with the given name or <code>null</code> of no such field exists.
 	 */
-	FieldDeclaration findField(String name);
+	FieldDeclaration findDeclaredField(String name);
 	
 	/**
 	 * @param name of the method
 	 * @param parameterTypes - the types of the method
 	 * @return the declared method with the given name and the specified parameter types or <code>null</code> if no such method exists.
 	 */
-	MethodDeclaration findMethod(String name, TypeReference... parameterTypes);
+	MethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes);
 	
 	/**
 	 * @param parameterTypes - the parameter types of the constructor
 	 * @return the declared constructor with the exact same parameter types or <code>null</code> if no such constructors exists.
 	 */
-	ConstructorDeclaration findConstructor(TypeReference... parameterTypes);
+	ConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes);
 }
