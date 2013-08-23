@@ -574,6 +574,131 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test 
+	def void missingMemberStaticOperationContext() {
+		create('Foo.xtend', '''
+			class Foo {
+				def static foo() {
+					bar|
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create local variable 'bar'", "Create static method 'bar()'", "Create static method 'getBar()'", "Create static field 'bar'")
+		.assertModelAfterQuickfix("Create static method 'getBar()'", '''
+			class Foo {
+				def static foo() {
+					bar
+				}
+				
+				def static getBar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'bar()'", '''
+			class Foo {
+				def static foo() {
+					bar
+				}
+				
+				def static bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static field 'bar'", '''
+			class Foo {
+				
+				static Object bar
+				
+				def static foo() {
+					bar
+				}
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMemberStaticFieldContext() {
+		create('Foo.xtend', '''
+			class Foo {
+				static Object foo = bar|
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create static method 'bar()'", "Create static method 'getBar()'", "Create static field 'bar'")
+		.assertModelAfterQuickfix("Create static method 'getBar()'", '''
+			class Foo {
+				static Object foo = bar
+				
+				def static getBar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'bar()'", '''
+			class Foo {
+				static Object foo = bar
+				
+				def static bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static field 'bar'", '''
+			class Foo {
+				static Object foo = bar
+				
+				static Object bar
+				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMemberFieldContext() {
+		create('Foo.xtend', '''
+			class Foo {
+				Object foo = bar|
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'bar()'", "Create method 'getBar()'", "Create field 'bar'")
+		.assertModelAfterQuickfix("Create method 'getBar()'", '''
+			class Foo {
+				Object foo = bar
+				
+				def getBar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create method 'bar()'", '''
+			class Foo {
+				Object foo = bar
+				
+				def bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create field 'bar'", '''
+			class Foo {
+				Object foo = bar
+				
+				Object bar
+				
+			}
+		''')
+	}
+	
 	@Test
 	def void missingConstructorSameClass() {
 		create('Foo.xtend', '''
