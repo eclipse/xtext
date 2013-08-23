@@ -149,7 +149,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     return mutableMethodDeclaration;
   }
   
-  public MutableConstructorDeclaration findConstructor(final TypeReference... parameterTypes) {
+  public MutableConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
     final Function1<MutableConstructorDeclaration,Boolean> _function = new Function1<MutableConstructorDeclaration,Boolean>() {
       public Boolean apply(final MutableConstructorDeclaration constructor) {
@@ -171,7 +171,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     return _findFirst;
   }
   
-  public MutableFieldDeclaration findField(final String name) {
+  public MutableFieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends MutableFieldDeclaration> _declaredFields = this.getDeclaredFields();
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
       public Boolean apply(final MutableFieldDeclaration field) {
@@ -184,7 +184,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     return _findFirst;
   }
   
-  public MutableMethodDeclaration findMethod(final String name, final TypeReference... parameterTypes) {
+  public MutableMethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     Iterable<? extends MutableMethodDeclaration> _declaredMethods = this.getDeclaredMethods();
     final Function1<MutableMethodDeclaration,Boolean> _function = new Function1<MutableMethodDeclaration,Boolean>() {
       public Boolean apply(final MutableMethodDeclaration method) {

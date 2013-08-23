@@ -82,12 +82,12 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
   
   public MutableMethodDeclaration tryAddMethod(final MutableTypeDeclaration it, final String name, final Procedure1<? super MutableMethodDeclaration> initializer) {
     MutableMethodDeclaration _elvis = null;
-    MutableMethodDeclaration _findMethod = it.findMethod(name);
-    if (_findMethod != null) {
-      _elvis = _findMethod;
+    MutableMethodDeclaration _findDeclaredMethod = it.findDeclaredMethod(name);
+    if (_findDeclaredMethod != null) {
+      _elvis = _findDeclaredMethod;
     } else {
       MutableMethodDeclaration _addMethod = it.addMethod(name, (Procedure1<MutableMethodDeclaration>)initializer);
-      _elvis = ObjectExtensions.<MutableMethodDeclaration>operator_elvis(_findMethod, _addMethod);
+      _elvis = ObjectExtensions.<MutableMethodDeclaration>operator_elvis(_findDeclaredMethod, _addMethod);
     }
     return _elvis;
   }

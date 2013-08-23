@@ -46,8 +46,8 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
       public void accept(final CompilationResult it) {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableClassDeclaration classA = ctx.findClass("A");
-        MutableMethodDeclaration _findMethod = classA.findMethod("getField");
-        Assert.assertNotNull(_findMethod);
+        MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
+        Assert.assertNotNull(_findDeclaredMethod);
         final MutableClassDeclaration classPA = ctx.findClass("PA");
         List<TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function = new Function1<TypeReference,Boolean>() {
@@ -100,8 +100,8 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
       public void accept(final CompilationResult it) {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableClassDeclaration classA = ctx.findClass("my.pack.A");
-        MutableMethodDeclaration _findMethod = classA.findMethod("getField");
-        Assert.assertNotNull(_findMethod);
+        MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
+        Assert.assertNotNull(_findDeclaredMethod);
         final MutableClassDeclaration classPA = ctx.findClass("my.pack.PA");
         List<TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function = new Function1<TypeReference,Boolean>() {

@@ -935,7 +935,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         String _string = _returnType.toString();
         Assert.assertEquals("String", _string);
         TypeReference _returnType_1 = getter.getReturnType();
-        final MutableMethodDeclaration setter = clazz.findMethod("setMyField", _returnType_1);
+        final MutableMethodDeclaration setter = clazz.findDeclaredMethod("setMyField", _returnType_1);
         String _simpleName_1 = setter.getSimpleName();
         Assert.assertEquals("setMyField", _simpleName_1);
         TypeReference _returnType_2 = setter.getReturnType();

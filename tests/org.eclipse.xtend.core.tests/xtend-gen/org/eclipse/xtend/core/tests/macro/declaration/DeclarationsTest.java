@@ -456,7 +456,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           }
         };
         genClazz.addMethod("newMethod", _function);
-        final MutableMethodDeclaration mutableMethod = genClazz.findMethod("newMethod");
+        final MutableMethodDeclaration mutableMethod = genClazz.findDeclaredMethod("newMethod");
         Iterable<? extends MutableMethodDeclaration> _declaredMethods = genClazz.getDeclaredMethods();
         Object _get = ((Object[])Conversions.unwrapArray(_declaredMethods, Object.class))[1];
         Assert.assertSame(mutableMethod, _get);

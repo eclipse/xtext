@@ -31,11 +31,11 @@ public interface MutableTypeDeclaration extends MutableMemberDeclaration, TypeDe
 	
 	Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces();
 	
-	MutableFieldDeclaration findField(String name);
+	MutableFieldDeclaration findDeclaredField(String name);
 
-	MutableMethodDeclaration findMethod(String name, TypeReference... parameterTypes);
+	MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes);
 
-	MutableConstructorDeclaration findConstructor(TypeReference... parameterTypes);
+	MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes);
 	
 	/**
 	 * Adds a new field with the given name. 

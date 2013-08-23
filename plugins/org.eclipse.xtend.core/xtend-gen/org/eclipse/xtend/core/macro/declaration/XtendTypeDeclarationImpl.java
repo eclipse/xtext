@@ -100,7 +100,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
   
-  public ConstructorDeclaration findConstructor(final TypeReference... parameterTypes) {
+  public ConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
     final Function1<ConstructorDeclaration,Boolean> _function = new Function1<ConstructorDeclaration,Boolean>() {
       public Boolean apply(final ConstructorDeclaration constructor) {
@@ -122,7 +122,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return _findFirst;
   }
   
-  public FieldDeclaration findField(final String name) {
+  public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
     final Function1<FieldDeclaration,Boolean> _function = new Function1<FieldDeclaration,Boolean>() {
       public Boolean apply(final FieldDeclaration field) {
@@ -135,7 +135,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return _findFirst;
   }
   
-  public MethodDeclaration findMethod(final String name, final TypeReference... parameterTypes) {
+  public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
     final Function1<MethodDeclaration,Boolean> _function = new Function1<MethodDeclaration,Boolean>() {
       public Boolean apply(final MethodDeclaration method) {

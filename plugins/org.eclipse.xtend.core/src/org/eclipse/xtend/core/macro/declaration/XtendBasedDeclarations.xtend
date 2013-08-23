@@ -119,15 +119,15 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 		return thisTypeRef.isAssignableFrom(thatTypeRef);
 	}
 	
-	override findConstructor(TypeReference... parameterTypes) {
+	override findDeclaredConstructor(TypeReference... parameterTypes) {
 		declaredConstructors.findFirst[constructor | constructor.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
-	override findField(String name) {
+	override findDeclaredField(String name) {
 		declaredFields.findFirst[field | field.simpleName == name]
 	}
 	
-	override findMethod(String name, TypeReference... parameterTypes) {
+	override findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		declaredMethods.findFirst[method | method.simpleName == name && method.parameters.map[type].toList == parameterTypes.toList]
 	}
 	

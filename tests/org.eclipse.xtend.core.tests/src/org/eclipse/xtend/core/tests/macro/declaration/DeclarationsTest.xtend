@@ -190,7 +190,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 				''']
 			]
 			
-			val mutableMethod = genClazz.findMethod('newMethod')
+			val mutableMethod = genClazz.findDeclaredMethod('newMethod')
 			assertSame(mutableMethod, genClazz.declaredMethods.get(1))
 			assertEquals('String', mutableMethod.returnType.toString)
 			assertEquals(Visibility::PRIVATE, mutableMethod.visibility)

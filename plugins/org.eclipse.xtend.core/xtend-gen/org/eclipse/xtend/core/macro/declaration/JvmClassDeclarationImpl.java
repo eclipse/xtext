@@ -242,7 +242,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     Iterables.<JvmTypeReference>addAll(_superTypes_2, _map);
   }
   
-  public MutableFieldDeclaration findField(final String name) {
+  public MutableFieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends MutableMemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     Iterable<MutableFieldDeclaration> _filter = Iterables.<MutableFieldDeclaration>filter(_declaredMembers, MutableFieldDeclaration.class);
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
@@ -256,7 +256,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return _findFirst;
   }
   
-  public MutableMethodDeclaration findMethod(final String name, final TypeReference[] parameterTypes) {
+  public MutableMethodDeclaration findDeclaredMethod(final String name, final TypeReference[] parameterTypes) {
     Iterable<? extends MutableMemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_declaredMembers, MutableMethodDeclaration.class);
     final Function1<MutableMethodDeclaration,Boolean> _function = new Function1<MutableMethodDeclaration,Boolean>() {

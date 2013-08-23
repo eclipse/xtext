@@ -23,10 +23,10 @@ class AccessorsAnnotationTest extends AbstractActiveAnnotationTest {
 		'''.compile [
 			val ctx = transformationContext
 			val classA = ctx.findClass('A')
-			assertEquals(Visibility::PUBLIC, classA.findMethod('getField').visibility)
-			assertEquals(Visibility::PUBLIC, classA.findMethod('setField', ctx.string).visibility)
-			assertEquals(Visibility::PUBLIC, classA.findMethod('getFinalField').visibility)
-			assertNull(classA.findMethod('setFinalField', ctx.string))
+			assertEquals(Visibility::PUBLIC, classA.findDeclaredMethod('getField').visibility)
+			assertEquals(Visibility::PUBLIC, classA.findDeclaredMethod('setField', ctx.string).visibility)
+			assertEquals(Visibility::PUBLIC, classA.findDeclaredMethod('getFinalField').visibility)
+			assertNull(classA.findDeclaredMethod('setFinalField', ctx.string))
 		]
 	}
 	
@@ -43,8 +43,8 @@ class AccessorsAnnotationTest extends AbstractActiveAnnotationTest {
 		'''.compile [
 			val ctx = transformationContext
 			val classA = ctx.findClass('A')
-			assertEquals(Visibility::PRIVATE, classA.findMethod('getField').visibility)
-			assertEquals(Visibility::PUBLIC, classA.findMethod('setField', ctx.string).visibility)
+			assertEquals(Visibility::PRIVATE, classA.findDeclaredMethod('getField').visibility)
+			assertEquals(Visibility::PUBLIC, classA.findDeclaredMethod('setField', ctx.string).visibility)
 			assertEquals(2, classA.declaredMethods.size)
 		]
 	}
@@ -82,6 +82,6 @@ class AccessorsProcessor implements TransformationParticipant<MutableFieldDeclar
 	}
 
 	def MutableMethodDeclaration tryAddMethod(MutableTypeDeclaration it, String name, (MutableMethodDeclaration)=>void initializer) {
-		findMethod(name) ?: addMethod(name, initializer)
+		findDeclaredMethod(name) ?: addMethod(name, initializer)
 	}
 }
