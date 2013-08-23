@@ -33,6 +33,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Inject;
 
 /**
+ * This class does everything I know to put the IDE into a consistent state before refactoring.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class SyncUtil {

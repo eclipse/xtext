@@ -19,7 +19,6 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -52,9 +51,6 @@ public class RefactoringCrossReferenceSerializer {
 
 	@Inject
 	private LinkingHelper linkingHelper;
-
-	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
 
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;

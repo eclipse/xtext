@@ -15,10 +15,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.ltk.core.refactoring.DocumentChange;
 import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
@@ -26,8 +24,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
+import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -73,7 +72,7 @@ public class ExtractVariableRefactoring extends Refactoring {
 	@Inject 
 	private ReplaceConverter replaceConverter;
 	
-	private IDocument document;
+	private IXtextDocument document;
 
 	private XExpression expression;
 
@@ -89,8 +88,11 @@ public class ExtractVariableRefactoring extends Refactoring {
 
 	private DocumentRewriter rewriter;
 
-	public boolean initialize(IXtextDocument document, XExpression expression) {
-		this.document = document;
+	private XtextEditor editor;
+
+	public boolean initialize(XtextEditor editor, XExpression expression) {
+		this.editor = editor;
+		this.document = editor.getDocument();
 		this.expression = expression;
 		resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(expression).trimFragment();
 		successor = expressionUtil.findSuccessorExpressionForVariableDeclaration(expression);
@@ -188,10 +190,10 @@ public class ExtractVariableRefactoring extends Refactoring {
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		TextEdit textEdit = replaceConverter.convertToTextEdit(rewriter.getChanges());
-		DocumentChange change = new DocumentChange("Extract local variable", document);
+		EditorDocumentChange change = new EditorDocumentChange("Extract local variable", editor, false);
 		change.setEdit(textEdit);
 		change.setTextType(resourceURI.fileExtension());
-		return DisplayChangeWrapper.wrap(change);
+		return change;
 	}
 
 	protected void handleException(Exception exc, StatusWrapper status) {

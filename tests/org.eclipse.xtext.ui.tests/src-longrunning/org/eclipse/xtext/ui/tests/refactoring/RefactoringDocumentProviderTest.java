@@ -27,8 +27,8 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.EditorDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.FileDocument;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.SaveEditorDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
+import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.tests.Activator;
@@ -101,9 +101,10 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		assertEquals(TEST_FILE_CONTENT, cleanDocument.getOriginalContents());
 
 		Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
-		assertTrue(change instanceof DisplayChangeWrapper.Wrapper);
+		assertTrue(change instanceof EditorDocumentChange);
 		assertEquals(TEST_FILE_NAME + " - " + TEST_PROJECT, change.getName());
-		assertTrue(((DisplayChangeWrapper.Wrapper) change).getDelegate() instanceof DocumentChange);
+		assertEquals(editor, ((EditorDocumentChange) change).getEditor());
+		assertFalse(((EditorDocumentChange) change).isDoSave());
 
 		Change undoChange = checkEdit(cleanDocument, textEdit);
 		assertNotNull(undoChange);
@@ -116,16 +117,17 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		XtextEditor editor = openEditor(testFile);
 		assertFalse(editor.isDirty());
 		IRefactoringDocument cleanDocument = createAndCheckDocument(testFile);
-		assertTrue(cleanDocument instanceof SaveEditorDocument);
+		assertTrue(cleanDocument instanceof EditorDocument);
 
 		IXtextDocument editorDocument = editor.getDocument();
 		assertEquals(editorDocument, ((EditorDocument) cleanDocument).getDocument());
 		assertEquals(TEST_FILE_CONTENT, cleanDocument.getOriginalContents());
 
 		Change change = cleanDocument.createChange(CHANGE_NAME, textEdit);
-		assertTrue(change instanceof DisplayChangeWrapper.Wrapper);
+		assertTrue(change instanceof EditorDocumentChange);
 		assertEquals(TEST_FILE_NAME + " - " + TEST_PROJECT, change.getName());
-		assertTrue(((DisplayChangeWrapper.Wrapper) change).getDelegate() instanceof DocumentChange);
+		assertEquals(editor, ((EditorDocumentChange)change).getEditor());
+		assertTrue(((EditorDocumentChange) change).isDoSave());
 
 		Change undoChange = checkEdit(cleanDocument, textEdit);
 		assertNotNull(undoChange);

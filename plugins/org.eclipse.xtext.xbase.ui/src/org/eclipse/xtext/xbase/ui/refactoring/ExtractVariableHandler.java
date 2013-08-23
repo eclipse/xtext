@@ -60,7 +60,7 @@ public class ExtractVariableHandler extends AbstractHandler {
 						XExpression expression = expressionUtil.findSelectedExpression(resource, selection);
 						if(expression != null) {
 							ExtractVariableRefactoring introduceVariableRefactoring = refactoringProvider.get();
-							if(introduceVariableRefactoring.initialize(document, expression)) {
+							if(introduceVariableRefactoring.initialize(editor, expression)) {
 								ITextRegion region = locationInFileProvider.getFullTextRegion(expression);
 								editor.selectAndReveal(region.getOffset(), region.getLength());
 								ExtractVariableWizard wizard = new ExtractVariableWizard(introduceVariableRefactoring);

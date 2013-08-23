@@ -33,11 +33,15 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
+import org.eclipse.xtext.ui.refactoring.ui.SaveHelper;
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -66,6 +70,12 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	@Inject
 	private StatusWrapper status;
+	
+	@Inject 
+	private SyncUtil syncUtil;
+	
+	@Inject
+	private RefactoringPreferences preferences;
 
 	private List<RenameProcessor> wrappedProcessors;
 
@@ -75,7 +85,10 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	protected boolean initialize(Object originalTargetElement) {
 		try {
 			wrappedProcessors = getRenameProcessors(originalTargetElement);
-			return wrappedProcessors != null;
+			if(wrappedProcessors != null) {
+				syncUtil.totalSync(preferences.isSaveAllBeforeRefactoring());
+				return true;
+			}	
 		} catch (Exception exc) {
 			status.add(ERROR, "Error initializing refactoring participant.", exc, LOG);
 		}
@@ -160,7 +173,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 					Change processorChange = wrappedProcessor.createChange(pm);
 					if (processorChange != null) {
 						if (compositeChange == null)
-							compositeChange = new FixedCompositeChange("Changes from participant: " + getName());
+							compositeChange = new CompositeChange("Changes from participant: " + getName());
 						compositeChange.add(processorChange);
 					}
 				}

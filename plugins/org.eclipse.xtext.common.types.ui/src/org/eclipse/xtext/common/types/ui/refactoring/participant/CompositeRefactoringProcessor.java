@@ -26,7 +26,6 @@ import org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
-import org.eclipse.xtext.ui.refactoring.impl.FixedCompositeChange;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.Inject;
@@ -137,7 +136,7 @@ public class CompositeRefactoringProcessor extends AbstractRenameProcessor {
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		SubMonitor monitor = SubMonitor.convert(pm, processors.size());
-		CompositeChange compositeChange = new FixedCompositeChange(getProcessorName());
+		CompositeChange compositeChange = new CompositeChange(getProcessorName());
 		for (RefactoringProcessor processor : processors)
 			compositeChange.add(processor.createChange(monitor.newChild(1)));
 		return textChangeCombiner.combineChanges(compositeChange);

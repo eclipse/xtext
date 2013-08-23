@@ -9,27 +9,27 @@ package org.eclipse.xtext.common.types.ui.refactoring.participant;
 
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
+import static com.google.common.collect.Sets.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.refactoring.CompilationUnitChange;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
-import org.eclipse.ltk.core.refactoring.DocumentChange;
 import org.eclipse.ltk.core.refactoring.TextChange;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.text.edits.TextEditVisitor;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
-import org.eclipse.xtext.ui.refactoring.impl.FixedCompositeChange;
+import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 
 /**
  * Restructures a given source change such that all changes to the same resource are united.
@@ -48,11 +48,18 @@ public class TextChangeCombiner {
 			return masterChange;
 		Map<Object, TextChange> resource2textChange = newLinkedHashMap();
 		List<Change> otherChanges = newArrayList();
-		visitCompositeChange((CompositeChange) masterChange, resource2textChange, otherChanges);
-		CompositeChange compositeChange = new FixedCompositeChange(masterChange.getName());
+		Set<IEditorPart> editorsToSave = newHashSet();
+		visitCompositeChange((CompositeChange) masterChange, resource2textChange, otherChanges, editorsToSave);
+		CompositeChange compositeChange = new FilteringCompositeChange(masterChange.getName());
 		for (TextChange combinedTextChange : resource2textChange.values()) {
-			if(((MultiTextEdit) combinedTextChange.getEdit()).getChildrenSize() >0)
-				compositeChange.add(DisplayChangeWrapper.wrap(combinedTextChange));
+			if(((MultiTextEdit) combinedTextChange.getEdit()).getChildrenSize() >0) {
+				if(combinedTextChange instanceof EditorDocumentChange) {
+					((EditorDocumentChange) combinedTextChange).setDoSave(editorsToSave.contains(((EditorDocumentChange) combinedTextChange).getEditor()));
+					compositeChange.add(combinedTextChange);
+				}
+				else
+					compositeChange.add(DisplayChangeWrapper.wrap(combinedTextChange));
+			}
 		}
 		for(Change otherChange: otherChanges) 
 			compositeChange.add(DisplayChangeWrapper.wrap(otherChange));
@@ -62,18 +69,20 @@ public class TextChangeCombiner {
 	}
 
 	protected void visitCompositeChange(CompositeChange sourceChange, Map<Object, TextChange> resource2textChange,
-			List<Change> otherChanges) {
+			List<Change> otherChanges, Set<IEditorPart> editorsToSave) {
 		for (Change sourceSubChange : sourceChange.getChildren()) {
-			visitChange(sourceSubChange, resource2textChange, otherChanges);
+			visitChange(sourceSubChange, resource2textChange, otherChanges, editorsToSave);
 		}
 	}
 
-	protected void visitChange(Change sourceChange, Map<Object, TextChange> resource2textChange, List<Change> otherChanges) {
-		if (sourceChange instanceof DisplayChangeWrapper.Wrapper)
-			visitChange(((DisplayChangeWrapper.Wrapper) sourceChange).getDelegate(), resource2textChange, otherChanges);
+	protected void visitChange(Change sourceChange, Map<Object, TextChange> resource2textChange, List<Change> otherChanges, Set<IEditorPart> editorsToSave) {
+		if (sourceChange instanceof DisplayChangeWrapper.Wrapper) 
+			visitChange(((DisplayChangeWrapper.Wrapper) sourceChange).getDelegate(), resource2textChange, otherChanges, editorsToSave);
 		else if (sourceChange instanceof CompositeChange) {
-			visitCompositeChange((CompositeChange) sourceChange, resource2textChange, otherChanges);
+			visitCompositeChange((CompositeChange) sourceChange, resource2textChange, otherChanges, editorsToSave);
 		} else if (sourceChange instanceof TextChange) {
+			if (sourceChange instanceof EditorDocumentChange) 
+				editorsToSave.add(((EditorDocumentChange) sourceChange).getEditor());
 			Object key = getKey((TextChange) sourceChange);
 			if (key != null) {
 				TextChange textChange = resource2textChange.get(key);
@@ -118,12 +127,8 @@ public class TextChangeCombiner {
 			return ((CompilationUnitChange) change).getCompilationUnit();
 		else if (change instanceof TextFileChange)
 			return ((TextFileChange) change).getFile();
-		else if (change instanceof DocumentChange) {
-			try {
-				return ((DocumentChange) change).getCurrentDocument(new NullProgressMonitor());
-			} catch (CoreException e) {
-				LOG.error("Error getting document for change.", e);
-			}
+		else if (change instanceof EditorDocumentChange) {
+			return ((EditorDocumentChange) change).getEditor();
 		} else {
 			LOG.error("Unhandled TextChange type: " + change.getClass().getName());
 		}
@@ -136,8 +141,8 @@ public class TextChangeCombiner {
 			change = new CompilationUnitChange("Combined CompilationUnitChange", (ICompilationUnit) key);
 		else if (key instanceof IFile)
 			change = new TextFileChange("Combined TextFileChange", (IFile) key);
-		else if (key instanceof IDocument)
-			change = new DocumentChange("Combined DocumentChange", (IDocument) key);
+		else if (key instanceof ITextEditor)
+			change = new EditorDocumentChange("Combined DocumentChange", (ITextEditor) key, false);
 		else
 			LOG.error("Error creating change for " + key.getClass().getName());
 		if(change != null) {
