@@ -2,7 +2,6 @@
 <psf version="2.0">
 <provider id="org.eclipse.egit.core.GitProvider">
 <project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.bootstrapdoc"/>
-<project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,features/org.eclipse.xtend.build.feature"/>
 <project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.core"/>
 <project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,tests/org.eclipse.xtend.core.tests"/>
 <project reference="1.0,ssh://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git,master,plugins/org.eclipse.xtend.doc"/>
@@ -108,7 +107,6 @@
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1355935277831_3" label="features" name="features">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.sdk.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.tests.feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.build.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.gwt.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.m2e.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.tests.feature" type="4"/>
