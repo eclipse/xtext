@@ -90,7 +90,6 @@ public class FailureCompareEditorInput extends CompareEditorInput {
 		}
 
 		public ITypedElement replace(ITypedElement dest, ITypedElement src) {
-			System.out.println("public ITypedElement replace(ITypedElement dest, ITypedElement src)");
 			return null;
 		}
 

@@ -111,7 +111,6 @@ public class AbstractExpectationParser {
 				int expectationStart = paramEnd + 1;
 				int expectationEnd = document.lastIndexOf('\n', closingSepStart);
 				String indentation = new Text(document).findIndentation(indentationPrefix, expectationStart);
-				System.out.println(indentation);
 				return new MultiLineExpectationRegion(document, expectationStart, expectationEnd - expectationStart, indentation,
 						separator, (openingSeparatorEnd + 1) - separator.length(), closingSepStart);
 			}
