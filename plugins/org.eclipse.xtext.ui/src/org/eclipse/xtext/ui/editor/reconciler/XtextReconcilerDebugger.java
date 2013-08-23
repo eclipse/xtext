@@ -66,7 +66,7 @@ public class XtextReconcilerDebugger {
 												+ "\n\nSee log for details.");
 							}
 							
-						};
+						}.syncExec();
 					} else {
 						System.out.println("Model and document are in sync");
 					}
