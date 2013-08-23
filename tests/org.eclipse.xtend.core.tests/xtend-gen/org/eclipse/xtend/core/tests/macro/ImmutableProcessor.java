@@ -200,12 +200,12 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
   
   public MutableMethodDeclaration tryAddMethod(final MutableClassDeclaration it, final String name, final Procedure1<? super MutableMethodDeclaration> initializer) {
     MutableMethodDeclaration _elvis = null;
-    MutableMethodDeclaration _findMethod = it.findDeclaredMethod(name);
-    if (_findMethod != null) {
-      _elvis = _findMethod;
+    MutableMethodDeclaration _findDeclaredMethod = it.findDeclaredMethod(name);
+    if (_findDeclaredMethod != null) {
+      _elvis = _findDeclaredMethod;
     } else {
       MutableMethodDeclaration _addMethod = it.addMethod(name, (Procedure1<MutableMethodDeclaration>)initializer);
-      _elvis = ObjectExtensions.<MutableMethodDeclaration>operator_elvis(_findMethod, _addMethod);
+      _elvis = ObjectExtensions.<MutableMethodDeclaration>operator_elvis(_findDeclaredMethod, _addMethod);
     }
     return _elvis;
   }
