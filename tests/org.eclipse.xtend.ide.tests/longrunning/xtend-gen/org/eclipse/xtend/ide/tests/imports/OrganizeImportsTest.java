@@ -28,12 +28,16 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   private WorkbenchTestHelper _workbenchTestHelper;
   
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
+    this.assertIsOrganizedTo(model, "Foo", expected);
+  }
+  
+  protected void assertIsOrganizedTo(final CharSequence model, final String fileName, final CharSequence expected) {
     try {
       String _string = expected.toString();
       boolean _contains = _string.contains("$");
       Assert.assertFalse(_contains);
       String _string_1 = model.toString();
-      final XtendFile xtendFile = this._workbenchTestHelper.xtendFile("Foo", _string_1);
+      final XtendFile xtendFile = this._workbenchTestHelper.xtendFile(fileName, _string_1);
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       StringBuilder _stringBuilder = new StringBuilder(model);
@@ -474,5 +478,64 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testKeepRequiredStaticExtensionImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package repro");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import static extension repro.B.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("A.ext");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void ext(Class<?> c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package repro");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import static extension repro.B.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void m() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("A.ext");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("class B {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def static void ext(Class<?> c) {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
 }

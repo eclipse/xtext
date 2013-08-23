@@ -449,7 +449,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 	def testBug380361_2() throws Exception {
 		val xtendFile = testHelper.xtendFile(FILEPATH, '''
 		package testpackage
-		import static extension Baz.*
+		import static extension testpackage.Baz.*
 		class Foo {
 			String fieldInFoo
 			extension Extension
@@ -469,7 +469,6 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 			public static String staticFieldInBaz
 		}
 		'''.toString)
-		waitForAutoBuild
 		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(2) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)

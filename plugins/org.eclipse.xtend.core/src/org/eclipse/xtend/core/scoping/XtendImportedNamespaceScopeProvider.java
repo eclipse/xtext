@@ -33,6 +33,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
+import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
@@ -77,7 +78,11 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				Resource resource = context.eResource();
 				IJvmTypeProvider typeProvider = typeScopeProvider.getTypeProvider(resource.getResourceSet());
 				AbstractTypeScope typeScope = typeScopeProvider.createTypeScope(typeProvider, null);
-				return new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
+				RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
+				//TODO this scope doesn't support binary syntax for inner types. It should be a KnownTypes scope which doesn't allow simple names
+				// Unfortunately I cannot use a RecordingTypeScope as a parent as it is not compatible...
+				IScope scope = SelectableBasedScope.createScope(recordingTypeScope, getAllDescriptions(resource), reference.getEReferenceType(), false);
+				return scope;
 			}
 			final XtendFile xtendFile = getXtendFile(context);
 			final Resource resource = xtendFile.eResource();

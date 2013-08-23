@@ -924,7 +924,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package testpackage");
     _builder.newLine();
-    _builder.append("import static extension Baz.*");
+    _builder.append("import static extension testpackage.Baz.*");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -972,7 +972,6 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);

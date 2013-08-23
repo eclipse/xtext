@@ -177,7 +177,7 @@ public class TypeUsageCollector {
 				}
 				if (!featureCall.isExplicitStatic()) {
 					XExpression target = featureCall.getMemberCallTarget();
-					if (!isTypeLiteral(target)) {
+					if (!isTypeLiteral(target) || featureCall.isExtension()) {
 						collectStaticImportsFrom((XAbstractFeatureCall) next);
 					}
 				} 
