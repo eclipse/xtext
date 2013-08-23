@@ -32,6 +32,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.AbstractCleaningLinker;
@@ -118,9 +119,12 @@ public class LazyLinker extends AbstractCleaningLinker {
 			EObject grammarElement = node.getGrammarElement();
 			if (grammarElement instanceof CrossReference && hasLeafNodes(node)) {
 				producer.setNode(node);
-				final EReference eRef = GrammarUtil.getReference((CrossReference) grammarElement, eClass);
+				CrossReference crossReference = (CrossReference) grammarElement;
+				final EReference eRef = GrammarUtil.getReference(crossReference, eClass);
 				if (eRef == null) {
-					throw new IllegalStateException("Couldn't find EReference for crossreference " + grammarElement);
+					ParserRule parserRule = GrammarUtil.containingParserRule(crossReference);
+					final String feature = GrammarUtil.containingAssignment(crossReference).getFeature();
+					throw new IllegalStateException("Couldn't find EReference for crossreference '"+eClass.getName()+"::"+feature+"' in parser rule '"+parserRule.getName()+"'.");
 				}
 				if (!eRef.isResolveProxies() /*|| eRef.getEOpposite() != null see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486*/) {
 					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
