@@ -27,8 +27,11 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -118,7 +121,8 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					
 				} else if(call instanceof XFeatureCall) {
 					if(!call.isExplicitOperationCallOrBuilderSyntax()) {
-						newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+						if(logicalContainerProvider.getNearestLogicalContainer(call) instanceof JvmExecutable)
+							newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					}
@@ -167,7 +171,17 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 
 	protected boolean isStaticAccess(XAbstractFeatureCall call) {
-		return call instanceof XMemberFeatureCall && ((XMemberFeatureCall)call).isExplicitStatic(); 
+		return call instanceof XMemberFeatureCall && ((XMemberFeatureCall)call).isExplicitStatic()
+				|| isStatic(logicalContainerProvider.getNearestLogicalContainer(call)); 
+	}
+	
+	protected boolean isStatic(JvmIdentifiableElement element) {
+		if(element instanceof JvmOperation)
+			return ((JvmOperation) element).isStatic();
+		else if(element instanceof JvmField)
+			return ((JvmField) element).isStatic();
+		else 
+			return false;
 	}
 	
 	@Nullable
