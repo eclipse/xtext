@@ -96,7 +96,7 @@ public class AbstractExpectation {
 					if (first == '\t')
 						insideIndentation += first;
 					else
-						insideIndentation += first + first + first + first;
+						insideIndentation += "" + first + first + first + first;
 				}
 				String indented = insideIndentation + value.replace("\n", "\n" + insideIndentation);
 				StringBuilder builder = new StringBuilder();
