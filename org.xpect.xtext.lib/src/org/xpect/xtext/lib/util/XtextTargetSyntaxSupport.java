@@ -7,6 +7,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.expectation.ITargetSyntaxSupport;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
+import org.xpect.text.Text;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.CommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.MLCommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.SLCommentRule;
@@ -49,23 +50,35 @@ public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
 
 	protected IReplacement convertToMultiLine(ILeafNode leaf, SLCommentRule slRule, IReplacement replacement) {
 		MLCommentRule mlRule = getFirstMLCommentRule();
-		if (mlRule == null)
-			return replacement;
-		String text = leaf.getText();
-		int end = text.length();
-		while (text.charAt(end - 1) == '\n' || text.charAt(end - 1) == '\r')
-			end--;
-		int offsetInLeaf = replacement.getOffset() - leaf.getOffset();
-		StringBuilder newText = new StringBuilder();
-		newText.append(mlRule.getStart());
-		newText.append(text.substring(slRule.getStart().length(), offsetInLeaf));
-		newText.append(replacement.getReplacement());
-		int beginIndex = offsetInLeaf + replacement.getLength();
-		if (beginIndex < end)
-			newText.append(text.substring(beginIndex, end));
-		newText.append(" ");
-		newText.append(mlRule.getEnd());
-		return new Replacement(leaf.getOffset(), end, newText.toString());
+		if (mlRule != null) {
+			String text = leaf.getText();
+			int end = text.length();
+			while (text.charAt(end - 1) == '\n' || text.charAt(end - 1) == '\r')
+				end--;
+			int offsetInLeaf = replacement.getOffset() - leaf.getOffset();
+			StringBuilder newText = new StringBuilder();
+			newText.append(mlRule.getStart());
+			newText.append(text.substring(slRule.getStart().length(), offsetInLeaf));
+			newText.append(replacement.getReplacement());
+			int beginIndex = offsetInLeaf + replacement.getLength();
+			if (beginIndex < end)
+				newText.append(text.substring(beginIndex, end));
+			newText.append(" ");
+			newText.append(mlRule.getEnd());
+			return new Replacement(leaf.getOffset(), end, newText.toString());
+		} else {
+			String document = leaf.getRootNode().getText();
+			StringBuilder postIndentaiton = new StringBuilder();
+			String text = leaf.getText();
+			int i = slRule.getStart().length();
+			while (i < text.length() && Character.isWhitespace(text.charAt(i)))
+				postIndentaiton.append(text.charAt(i++));
+			String indentation = new Text(document).findIndentation(leaf.getOffset());
+			String oldIndentation = "\n" + indentation;
+			String newIndentation = "\n" + indentation + slRule.getStart() + postIndentaiton;
+			String newText = replacement.getReplacement().replace(oldIndentation, newIndentation);
+			return new Replacement(replacement.getOffset(), replacement.getLength(), newText);
+		}
 	}
 
 	protected MLCommentRule getFirstMLCommentRule() {

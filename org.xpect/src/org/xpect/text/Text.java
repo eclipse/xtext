@@ -36,6 +36,21 @@ public class Text {
 		return result.toString();
 	}
 
+	public String findIndentation(String prefix, int offset) {
+		prefix = trimRight(prefix);
+		int nl = text.toString().lastIndexOf("\n", offset);
+		if (nl < 0)
+			nl = 0;
+		StringBuilder result = new StringBuilder();
+		if (text.subSequence(nl + 1, nl + 1 + prefix.length()).toString().equals(prefix)) {
+			result.append(prefix);
+			nl += prefix.length();
+		}
+		for (int i = nl + 1; i < text.length() && Character.isWhitespace(text.charAt(i)) && text.charAt(i) != '\n'; i++)
+			result.append(text.charAt(i));
+		return result.toString();
+	}
+
 	public CharSequence getText() {
 		return text;
 	}
@@ -59,6 +74,13 @@ public class Text {
 		int endIndex = other.length() - suffix + 1;
 		String replacement = prefix < endIndex ? other.substring(prefix, endIndex) : "";
 		return new Replacement(prefix, length, replacement);
+	}
+
+	protected String trimRight(String str) {
+		int i = str.length() - 1;
+		while (i >= 0 && Character.isWhitespace(str.charAt(i)))
+			i--;
+		return str.substring(0, i + 1);
 	}
 
 	public String with(Collection<IReplacement> replacements) {
