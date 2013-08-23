@@ -159,6 +159,10 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/enumrules/MultiRuleEnumTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.xtext"
