@@ -14,8 +14,13 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 	@Inject extension WorkbenchTestHelper
 	
 	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected) {
+		assertIsOrganizedTo(model, "Foo", expected)
+	}
+	
+	def protected assertIsOrganizedTo(CharSequence model, String fileName, CharSequence expected) {
 		assertFalse (expected.toString.contains("$"))
-		val xtendFile = xtendFile("Foo", model.toString)
+		val xtendFile = xtendFile(fileName, model.toString)
+		
 		val changes = importOrganizer.getOrganizedImportChanges(xtendFile.eResource as XtextResource)
 		val builder = new StringBuilder(model)
 		for(it: changes.sortBy[offset].reverse)
@@ -251,6 +256,38 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 				def foo() {
 					field.x
 				}
+			}
+		''')
+	}
+	
+	
+	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=410752
+	@Test def testKeepRequiredStaticExtensionImport() {
+		'''
+			package repro
+
+			import static extension repro.B.*
+			
+			class A {
+				def void m() {
+					A.ext
+				}
+			}
+			class B {
+				def static void ext(Class<?> c) {}
+			}
+		'''.assertIsOrganizedTo("repro/Foo", '''
+			package repro
+
+			import static extension repro.B.*
+			
+			class A {
+				def void m() {
+					A.ext
+				}
+			}
+			class B {
+				def static void ext(Class<?> c) {}
 			}
 		''')
 	}
