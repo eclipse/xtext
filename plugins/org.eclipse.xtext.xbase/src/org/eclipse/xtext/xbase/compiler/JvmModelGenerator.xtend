@@ -594,7 +594,7 @@ class JvmModelGenerator implements IGenerator {
 	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
         val fileHeaderAdapter = it.eAdapters.filter(FileHeaderAdapter).head
         if(!fileHeaderAdapter?.headerText.nullOrEmpty) {
-		generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource), appendable, config)
+			generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource), appendable, config)
         }
     }
 
@@ -645,13 +645,13 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 
-	def getImportManager(ITreeAppendable appendable){
-			val stateField = appendable.getClass.getDeclaredField("state")
-			stateField.setAccessible(true)
-			val stateValue = stateField.get(appendable)
-			val importManagerField = stateValue.getClass.getDeclaredField("importManager")
-			importManagerField.setAccessible(true)
-			importManagerField.get(stateValue) as ImportManager
+	def getImportManager(ITreeAppendable appendable) {
+		val stateField = appendable.getClass.getDeclaredField("state")
+		stateField.setAccessible(true)
+		val stateValue = stateField.get(appendable)
+		val importManagerField = stateValue.getClass.getDeclaredField("importManager")
+		importManagerField.setAccessible(true)
+		importManagerField.get(stateValue) as ImportManager
 	}
 
 	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable, GeneratorConfig config) {
