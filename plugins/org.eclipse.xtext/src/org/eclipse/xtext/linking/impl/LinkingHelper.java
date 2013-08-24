@@ -59,7 +59,8 @@ public class LinkingHelper {
 			Object result = valueConverter.toValue(convertMe, ruleName, node);
 			return result != null ? result.toString() : null;
 		} catch (ValueConverterWithValueException ex) {
-			return String.valueOf(ex.getValue());
+			Object result = ex.getValue();
+			return result != null ? result.toString() : null;
 		} catch (ValueConverterException ex) {
 			throw new IllegalNodeException(node, ex);
 		}
