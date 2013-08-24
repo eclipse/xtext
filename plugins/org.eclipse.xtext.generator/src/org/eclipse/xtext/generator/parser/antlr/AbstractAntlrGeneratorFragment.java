@@ -76,6 +76,13 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		String[] result = antlrParams.toArray(new String[antlrParams.size()]);
 		return result;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected String getEncoding(XpandExecutionContext xpt, String outlet) {
+		return xpt.getOutput().getOutlet(outlet).getFileEncoding();
+	}
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {

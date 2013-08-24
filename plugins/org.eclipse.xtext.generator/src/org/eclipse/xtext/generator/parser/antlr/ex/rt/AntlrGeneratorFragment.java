@@ -56,6 +56,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		KeywordHelper helper = new KeywordHelper(grammar, getOptions().isIgnoreCase());
 		super.generate(grammar, ctx);
 		final String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
+		final String encoding = getEncoding(ctx, Generator.SRC_GEN);
 		final String lexerBaseFileName = srcGenPath+"/"+getFragmentHelper().getLexerGrammarFileName(grammar).replace('.', '/');
 		String libPath = lexerBaseFileName;
 		libPath = libPath.substring(0, libPath.lastIndexOf('/'));
@@ -65,11 +66,11 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		addAntlrParam(absoluteParserFileName.substring(0, absoluteParserFileName.lastIndexOf('/')));
 		String[] lexerAntlrParams = getAntlrParams();
 		lexerAntlrParams[lexerAntlrParams.length - 1] = absoluteLexerFileName.substring(0, absoluteLexerFileName.lastIndexOf('/'));
-		getAntlrTool().runWithParams(absoluteLexerFileName, lexerAntlrParams);
+		getAntlrTool().runWithEncodingAndParams(absoluteLexerFileName, encoding, lexerAntlrParams);
 		cleanupLexerTokensFile(lexerBaseFileName);
 		addAntlrParam("-lib");
 		addAntlrParam(libPath);
-		getAntlrTool().runWithParams(absoluteParserFileName, getAntlrParams());
+		getAntlrTool().runWithEncodingAndParams(absoluteParserFileName, encoding, getAntlrParams());
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteParserFileName);
 		splitParserAndLexerIfEnabled(absoluteLexerFileName, absoluteParserFileName);
 		suppressWarnings(absoluteLexerFileName, absoluteParserFileName);
