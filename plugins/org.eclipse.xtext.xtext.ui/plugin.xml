@@ -235,6 +235,7 @@ component = Generator {
 	pathTestProject = "${runtimeProject}.tests"
 	projectNameRt = projectName
 	projectNameUi = "${projectName}.ui"
+	encoding = encoding
 	language = auto-inject {
 		uri = grammarURI
 

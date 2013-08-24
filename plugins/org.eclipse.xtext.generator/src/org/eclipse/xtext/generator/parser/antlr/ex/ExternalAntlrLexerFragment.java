@@ -80,10 +80,15 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 		generateTo = srcGenPath + "/" + generateTo.replace('.', '/');
 		addAntlrParam("-fo");
 		addAntlrParam(generateTo);
-		getAntlrTool().runWithParams(grammarFile, getAntlrParams());
+		final String encoding = getEncoding(ctx, srcGen);
+		getAntlrTool().runWithEncodingAndParams(grammarFile, encoding, getAntlrParams());
 
 		String javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+".java";
 		suppressWarningsImpl(javaFile);
+	}
+	
+	private String getEncoding(XpandExecutionContext xpt, String outlet) {
+		return xpt.getOutput().getOutlet(outlet).getFileEncoding();
 	}
 
 	protected void suppressWarningsImpl(String javaFile) {

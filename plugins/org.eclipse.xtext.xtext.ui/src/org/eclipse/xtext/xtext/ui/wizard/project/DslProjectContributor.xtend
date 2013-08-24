@@ -22,7 +22,7 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 	}
 	
 	override contributeFiles(IProject project, IFileCreator creator) {
-		creator.writeToFile(workflow, sourceRoot+"/"+ projectInfo.basePackagePath + "/Generate" + projectInfo.languageNameAbbreviation+".mwe2")
+		creator.writeToFile(workflow(project.defaultCharset), sourceRoot+"/"+ projectInfo.basePackagePath + "/Generate" + projectInfo.languageNameAbbreviation+".mwe2")
 		creator.writeToFile(grammar, sourceRoot+"/"+ projectInfo.grammarFilePath)
 		creator.writeToFile(wfLaunchConfig,".launch/Generate Language Infrastructure (" + projectInfo.projectName + ").launch")
 		if (projectInfo.createEclipseRuntimeLaunchConfig) {
@@ -30,7 +30,7 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 		}
 	}
 	
-	def private workflow() {
+	def private workflow(String encoding) {
 		'''
 		module «(projectInfo.basePackagePath+"/Generate"+projectInfo.languageNameAbbreviation).replaceAll("/", ".")»
 
@@ -43,6 +43,7 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 		var projectName = "«projectInfo.projectName»"
 		var runtimeProject = "../${projectName}"
 		var generateXtendStub = true
+		var encoding = "«encoding»"
 		
 		Workflow {
 		    «projectInfo.wizardContribution.mweSnippet»

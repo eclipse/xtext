@@ -3,6 +3,7 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor;
 import org.eclipse.xtext.xtext.ui.wizard.project.WizardContribution;
@@ -28,33 +29,38 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
   }
   
   public void contributeFiles(final IProject project, final IFileCreator creator) {
-    CharSequence _workflow = this.workflow();
-    String _plus = (this.sourceRoot + "/");
-    String _basePackagePath = this.projectInfo.getBasePackagePath();
-    String _plus_1 = (_plus + _basePackagePath);
-    String _plus_2 = (_plus_1 + "/Generate");
-    String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
-    String _plus_3 = (_plus_2 + _languageNameAbbreviation);
-    String _plus_4 = (_plus_3 + ".mwe2");
-    creator.writeToFile(_workflow, _plus_4);
-    CharSequence _grammar = this.grammar();
-    String _plus_5 = (this.sourceRoot + "/");
-    String _grammarFilePath = this.projectInfo.getGrammarFilePath();
-    String _plus_6 = (_plus_5 + _grammarFilePath);
-    creator.writeToFile(_grammar, _plus_6);
-    CharSequence _wfLaunchConfig = this.wfLaunchConfig();
-    String _projectName = this.projectInfo.getProjectName();
-    String _plus_7 = (".launch/Generate Language Infrastructure (" + _projectName);
-    String _plus_8 = (_plus_7 + ").launch");
-    creator.writeToFile(_wfLaunchConfig, _plus_8);
-    boolean _isCreateEclipseRuntimeLaunchConfig = this.projectInfo.isCreateEclipseRuntimeLaunchConfig();
-    if (_isCreateEclipseRuntimeLaunchConfig) {
-      CharSequence _launchConfig = this.launchConfig();
-      creator.writeToFile(_launchConfig, ".launch/Launch Runtime Eclipse.launch");
+    try {
+      String _defaultCharset = project.getDefaultCharset();
+      CharSequence _workflow = this.workflow(_defaultCharset);
+      String _plus = (this.sourceRoot + "/");
+      String _basePackagePath = this.projectInfo.getBasePackagePath();
+      String _plus_1 = (_plus + _basePackagePath);
+      String _plus_2 = (_plus_1 + "/Generate");
+      String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
+      String _plus_3 = (_plus_2 + _languageNameAbbreviation);
+      String _plus_4 = (_plus_3 + ".mwe2");
+      creator.writeToFile(_workflow, _plus_4);
+      CharSequence _grammar = this.grammar();
+      String _plus_5 = (this.sourceRoot + "/");
+      String _grammarFilePath = this.projectInfo.getGrammarFilePath();
+      String _plus_6 = (_plus_5 + _grammarFilePath);
+      creator.writeToFile(_grammar, _plus_6);
+      CharSequence _wfLaunchConfig = this.wfLaunchConfig();
+      String _projectName = this.projectInfo.getProjectName();
+      String _plus_7 = (".launch/Generate Language Infrastructure (" + _projectName);
+      String _plus_8 = (_plus_7 + ").launch");
+      creator.writeToFile(_wfLaunchConfig, _plus_8);
+      boolean _isCreateEclipseRuntimeLaunchConfig = this.projectInfo.isCreateEclipseRuntimeLaunchConfig();
+      if (_isCreateEclipseRuntimeLaunchConfig) {
+        CharSequence _launchConfig = this.launchConfig();
+        creator.writeToFile(_launchConfig, ".launch/Launch Runtime Eclipse.launch");
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  private CharSequence workflow() {
+  private CharSequence workflow(final String encoding) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("module ");
     String _basePackagePath = this.projectInfo.getBasePackagePath();
@@ -94,6 +100,10 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     _builder.newLine();
     _builder.append("var generateXtendStub = true");
     _builder.newLine();
+    _builder.append("var encoding = \"");
+    _builder.append(encoding, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("Workflow {");
     _builder.newLine();
