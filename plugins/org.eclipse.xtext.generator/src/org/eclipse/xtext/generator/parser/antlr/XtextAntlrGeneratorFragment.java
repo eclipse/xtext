@@ -40,10 +40,11 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
 		String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
+		final String encoding = getEncoding(ctx, Generator.SRC_GEN);
 		String absoluteGrammarFileName = srcGenPath+"/"+getGrammarFileName(grammar, getNaming()).replace('.', '/')+".g";
 		addAntlrParam("-fo");
 		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')));
-		getAntlrTool().runWithParams(absoluteGrammarFileName, getAntlrParams());
+		getAntlrTool().runWithEncodingAndParams(absoluteGrammarFileName, encoding, getAntlrParams());
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName);
 		splitParserAndLexerIfEnabled(absoluteGrammarFileName);
 		suppressWarnings(absoluteGrammarFileName);
