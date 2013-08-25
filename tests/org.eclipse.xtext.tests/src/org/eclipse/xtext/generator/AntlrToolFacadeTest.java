@@ -23,6 +23,11 @@ import com.google.common.base.Charsets;
 public class AntlrToolFacadeTest extends Assert {
 	
 	public static class TestableToolFacade extends AntlrToolFacade {
+		
+		TestableToolFacade() {
+			setLoader(AntlrToolFacadeTest.class.getClassLoader());
+		}
+		
 		@Override
 		protected String getToolRunnerClassName() {
 			return AntlrToolFacadeTest.MODE.getToolRunnerClassName();
