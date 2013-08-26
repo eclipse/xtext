@@ -2721,5 +2721,63 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=415849
+	 */
+	@Test def void testBug415849() {
+		'''
+			public class Bug {
+				String text
+				def handleEvent(Bug e) {
+					e?.text == this?.text
+				}
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.base.Objects;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  private String text;
+			  
+			  public boolean handleEvent(final Bug e) {
+			    String _text = null;
+			    if (e!=null) {
+			      _text=e.text;
+			    }
+			    String _text_1 = null;
+			    if (this!=null) {
+			      _text_1=this.text;
+			    }
+			    boolean _equals = Objects.equal(_text, _text_1);
+			    return _equals;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug415849_1() {
+		'''
+			public class Bug {
+				String text
+				def handleEvent(Bug e) {
+					e?.text
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Bug {
+			  private String text;
+			  
+			  public String handleEvent(final Bug e) {
+			    String _text = null;
+			    if (e!=null) {
+			      _text=e.text;
+			    }
+			    return _text;
+			  }
+			}
+		''')
+	}
 
 }

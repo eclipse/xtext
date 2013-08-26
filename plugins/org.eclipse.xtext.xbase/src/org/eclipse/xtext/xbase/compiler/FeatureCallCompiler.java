@@ -314,11 +314,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 	
 	protected boolean isVariableDeclarationRequired(XMemberFeatureCall expr, @SuppressWarnings("unused") ITreeAppendable b) {
-		JvmIdentifiableElement feature = expr.getFeature();
-		if (!(feature instanceof JvmField || feature instanceof JvmFormalParameter)) {
-			return expr.isNullSafe();
-		}
-		return false;
+		return expr.isNullSafe();
 	}
 	
 	@Override
