@@ -23,4 +23,23 @@ public class XbaseCommentFormatterTest extends AbstractXbaseFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
+  
+  @Test
+  public void commentAfterForExpression1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for (f : #[])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if (1 < 2) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// foo");
+    _builder.newLine();
+    _builder.append("var lastOffset = \"\"");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
 }

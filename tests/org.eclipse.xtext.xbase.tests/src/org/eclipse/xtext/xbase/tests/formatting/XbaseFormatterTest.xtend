@@ -733,6 +733,12 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')
 	}
 	
+	@Test def formatConstructorCallClosure() {
+		assertFormattedExpression('''
+			new Thread[|println("foo")]
+		''')
+	}
+	
 	@Test def formatConstructorCallNoParams() {
 		assertFormattedExpression('''
 			val v1 = new ArrayList()

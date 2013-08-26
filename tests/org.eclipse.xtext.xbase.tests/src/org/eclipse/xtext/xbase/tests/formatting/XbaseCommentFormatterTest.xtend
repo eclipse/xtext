@@ -14,4 +14,15 @@ class XbaseCommentFormatterTest extends AbstractXbaseFormatterTest {
 			println("end")
 		''')
 	}
+	
+	@Test def commentAfterForExpression1() {
+		assertFormattedExpression('''
+			for (f : #[])
+				if (1 < 2) {
+				}
+
+			// foo
+			var lastOffset = ""
+		''')
+	}
 }

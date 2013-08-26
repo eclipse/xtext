@@ -1317,6 +1317,14 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
+  public void formatConstructorCallClosure() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("new Thread[|println(\"foo\")]");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
   public void formatConstructorCallNoParams() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val v1 = new ArrayList()");

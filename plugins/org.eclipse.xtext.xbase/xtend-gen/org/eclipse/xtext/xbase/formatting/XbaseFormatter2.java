@@ -67,6 +67,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XConstructorCallElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XFeatureCallElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallElements;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -889,16 +890,25 @@ public class XbaseFormatter2 extends AbstractFormatter {
         final EObject grammarElement = _firstChild.getGrammarElement();
         XClosure _xifexpression_1 = null;
         boolean _or = false;
+        boolean _or_1 = false;
         XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
         RuleCall _memberCallArgumentsXClosureParserRuleCall_1_1_4_0 = _xMemberFeatureCallAccess.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0();
         boolean _equals = Objects.equal(grammarElement, _memberCallArgumentsXClosureParserRuleCall_1_1_4_0);
         if (_equals) {
-          _or = true;
+          _or_1 = true;
         } else {
           XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
           RuleCall _featureCallArgumentsXClosureParserRuleCall_4_0 = _xFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_4_0();
           boolean _equals_1 = Objects.equal(grammarElement, _featureCallArgumentsXClosureParserRuleCall_4_0);
-          _or = (_equals || _equals_1);
+          _or_1 = (_equals || _equals_1);
+        }
+        if (_or_1) {
+          _or = true;
+        } else {
+          XConstructorCallElements _xConstructorCallAccess = this._xbaseGrammarAccess.getXConstructorCallAccess();
+          RuleCall _argumentsXClosureParserRuleCall_5_0 = _xConstructorCallAccess.getArgumentsXClosureParserRuleCall_5_0();
+          boolean _equals_2 = Objects.equal(grammarElement, _argumentsXClosureParserRuleCall_5_0);
+          _or = (_or_1 || _equals_2);
         }
         if (_or) {
           XExpression _last_2 = IterableExtensions.<XExpression>last(params);
@@ -3130,13 +3140,18 @@ public class XbaseFormatter2 extends AbstractFormatter {
       format.operator_add(_append);
       INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
       last = _nodeForFeature;
-      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.noSpace();
-        }
-      };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(last, _function_1);
-      format.operator_add(_prepend);
+      EList<JvmFormalParameter> _declaredFormalParameters = expr.getDeclaredFormalParameters();
+      boolean _isEmpty = _declaredFormalParameters.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(last, _function_1);
+        format.operator_add(_prepend);
+      }
     }
     boolean indented = false;
     for (final XExpression c : children) {
@@ -3157,8 +3172,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
           Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(last, _function_2);
           format.operator_add(_append_1);
         } else {
-          boolean _not = (!indented);
-          if (_not) {
+          boolean _not_1 = (!indented);
+          if (_not_1) {
             indented = true;
             final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {

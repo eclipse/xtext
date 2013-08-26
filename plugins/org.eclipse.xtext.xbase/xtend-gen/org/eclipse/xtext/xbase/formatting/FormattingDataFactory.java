@@ -368,7 +368,14 @@ public class FormattingDataFactory {
                   if (_equals_2) {
                     _xifexpression_3 = "";
                   } else {
-                    _xifexpression_3 = " ";
+                    String _xifexpression_4 = null;
+                    boolean _containsComment = leafs.containsComment();
+                    if (_containsComment) {
+                      _xifexpression_4 = null;
+                    } else {
+                      _xifexpression_4 = " ";
+                    }
+                    _xifexpression_3 = _xifexpression_4;
                   }
                   WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_3, _length_1, increaseIndentationChange, decreaseIndentationChange, _xifexpression_2, _xifexpression_3);
                   result.add(_whitespaceData_1);
@@ -385,34 +392,34 @@ public class FormattingDataFactory {
                   if (_and_4) {
                     int _offset_5 = _whitespaceInfo.getOffset();
                     int _length_2 = _whitespaceInfo.getLength();
-                    RuntimeException _xifexpression_4 = null;
+                    RuntimeException _xifexpression_5 = null;
                     if (trace) {
                       RuntimeException _runtimeException_2 = new RuntimeException();
-                      _xifexpression_4 = _runtimeException_2;
+                      _xifexpression_5 = _runtimeException_2;
                     }
-                    NewLineData _newLineData = new NewLineData(_offset_5, _length_2, increaseIndentationChange, decreaseIndentationChange, _xifexpression_4, newLines);
+                    NewLineData _newLineData = new NewLineData(_offset_5, _length_2, increaseIndentationChange, decreaseIndentationChange, _xifexpression_5, newLines);
                     result.add(_newLineData);
                   } else {
                     int _offset_6 = _whitespaceInfo.getOffset();
                     int _length_3 = _whitespaceInfo.getLength();
-                    int _xifexpression_5 = (int) 0;
-                    if (equalIndentationChange) {
-                      _xifexpression_5 = 0;
-                    } else {
-                      _xifexpression_5 = increaseIndentationChange;
-                    }
                     int _xifexpression_6 = (int) 0;
                     if (equalIndentationChange) {
                       _xifexpression_6 = 0;
                     } else {
-                      _xifexpression_6 = decreaseIndentationChange;
+                      _xifexpression_6 = increaseIndentationChange;
                     }
-                    RuntimeException _xifexpression_7 = null;
+                    int _xifexpression_7 = (int) 0;
+                    if (equalIndentationChange) {
+                      _xifexpression_7 = 0;
+                    } else {
+                      _xifexpression_7 = decreaseIndentationChange;
+                    }
+                    RuntimeException _xifexpression_8 = null;
                     if (trace) {
                       RuntimeException _runtimeException_3 = new RuntimeException();
-                      _xifexpression_7 = _runtimeException_3;
+                      _xifexpression_8 = _runtimeException_3;
                     }
-                    NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, _xifexpression_5, _xifexpression_6, _xifexpression_7, newLines);
+                    NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, _xifexpression_6, _xifexpression_7, _xifexpression_8, newLines);
                     result.add(_newLineData_1);
                   }
                 }
@@ -440,22 +447,22 @@ public class FormattingDataFactory {
                 if (_and_5) {
                   int _offset_7 = _whitespaceInfo.getOffset();
                   int _length_4 = _whitespaceInfo.getLength();
-                  RuntimeException _xifexpression_8 = null;
+                  RuntimeException _xifexpression_9 = null;
                   if (trace) {
                     RuntimeException _runtimeException_4 = new RuntimeException();
-                    _xifexpression_8 = _runtimeException_4;
+                    _xifexpression_9 = _runtimeException_4;
                   }
-                  NewLineData _newLineData_2 = new NewLineData(_offset_7, _length_4, increaseIndentationChange, decreaseIndentationChange, _xifexpression_8, newLines_1);
+                  NewLineData _newLineData_2 = new NewLineData(_offset_7, _length_4, increaseIndentationChange, decreaseIndentationChange, _xifexpression_9, newLines_1);
                   result.add(_newLineData_2);
                 } else {
                   int _offset_8 = _whitespaceInfo.getOffset();
                   int _length_5 = _whitespaceInfo.getLength();
-                  RuntimeException _xifexpression_9 = null;
+                  RuntimeException _xifexpression_10 = null;
                   if (trace) {
                     RuntimeException _runtimeException_5 = new RuntimeException();
-                    _xifexpression_9 = _runtimeException_5;
+                    _xifexpression_10 = _runtimeException_5;
                   }
-                  NewLineData _newLineData_3 = new NewLineData(_offset_8, _length_5, 0, 0, _xifexpression_9, newLines_1);
+                  NewLineData _newLineData_3 = new NewLineData(_offset_8, _length_5, 0, 0, _xifexpression_10, newLines_1);
                   result.add(_newLineData_3);
                 }
               }
