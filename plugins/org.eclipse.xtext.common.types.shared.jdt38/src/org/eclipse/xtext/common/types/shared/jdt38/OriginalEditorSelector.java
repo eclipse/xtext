@@ -173,7 +173,8 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 		String ext = name.substring(index + 1).toLowerCase();
 		if (!ext.equals("class") && !ext.equals("java"))
 			return null;
-		final IType[] foundType = new IType[1];
+		final IType[] foundLocalType = new IType[1];
+		final IType[] foundLibraryType = new IType[1];
 		try {
 			new SearchEngine().searchAllTypeNames(null, 0, // match all package names
 					typeName.toCharArray(), SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, // and all type names,
@@ -182,14 +183,19 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 					new TypeNameMatchRequestor() {
 						@Override
 						public void acceptTypeNameMatch(TypeNameMatch match) {
-							foundType[0] = match.getType();
+							if (match.getPackageFragmentRoot().isArchive())
+								foundLibraryType[0] = match.getType();
+							else
+								foundLocalType[0] = match.getType();
 						}
 					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, // wait for the jdt index to be ready
 					new NullProgressMonitor());
 		} catch (JavaModelException e) {
 			logger.error(e);
 		}
-		return foundType[0];
+		if (foundLocalType[0] != null)
+			return foundLocalType[0];
+		return foundLibraryType[0];
 	}
 
 	protected IEditorDescriptor getXtextEditor(URI uri) {
