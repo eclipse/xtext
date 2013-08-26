@@ -6263,4 +6263,135 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=415849
+   */
+  @Test
+  public void testBug415849() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Bug {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String text");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def handleEvent(Bug e) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("e?.text == this?.text");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bug {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private String text;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public boolean handleEvent(final Bug e) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _text = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (e!=null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_text=e.text;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _text_1 = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (this!=null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_text_1=this.text;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("boolean _equals = Objects.equal(_text, _text_1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _equals;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug415849_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Bug {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String text");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def handleEvent(Bug e) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("e?.text");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bug {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private String text;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String handleEvent(final Bug e) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _text = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (e!=null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_text=e.text;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _text;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }
