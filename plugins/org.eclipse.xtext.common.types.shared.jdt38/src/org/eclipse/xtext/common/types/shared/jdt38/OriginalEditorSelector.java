@@ -193,9 +193,10 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 		} catch (JavaModelException e) {
 			logger.error(e);
 		}
-		if (foundLocalType[0] != null)
-			return foundLocalType[0];
-		return foundLibraryType[0];
+		if (decisions.isJavaStackTraceHyperlink())
+			return foundLocalType[0] != null ? foundLocalType[0] : foundLibraryType[0];
+		else
+			return foundLibraryType[0] != null ? foundLibraryType[0] : foundLocalType[0];
 	}
 
 	protected IEditorDescriptor getXtextEditor(URI uri) {

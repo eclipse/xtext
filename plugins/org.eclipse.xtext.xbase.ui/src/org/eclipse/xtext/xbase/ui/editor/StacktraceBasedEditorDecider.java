@@ -118,6 +118,19 @@ public class StacktraceBasedEditorDecider {
 		}
 		return false;
 	}
+	
+	public boolean isJavaStackTraceHyperlink() {
+		StackTraceElement[] trace = new Exception().getStackTrace();
+		for (StackTraceElement element : trace) {
+			if (isJavaStackTraceHyperlink(element))
+				return true;
+		}
+		return false;
+	}
+
+	protected boolean isJavaStackTraceHyperlink(StackTraceElement ele) {
+		return "org.eclipse.jdt.internal.debug.ui.console.JavaStackTraceHyperlink".equals(ele.getClassName());
+	}
 
 	public boolean isJDIModelPresentationGetEditorID(StackTraceElement element) {
 		return "org.eclipse.jdt.internal.debug.ui.JDIModelPresentation".equals(element.getClassName())
