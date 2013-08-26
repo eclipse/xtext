@@ -275,7 +275,10 @@ class XbaseFormatter2 extends AbstractFormatter {
 	def protected XClosure builder(List<XExpression> params) {
 		if (params.last != null){
 			val grammarElement = (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement
-			if(grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 || grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0)
+			if(grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 || 
+				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||
+				grammarElement == XConstructorCallAccess.argumentsXClosureParserRuleCall_5_0
+			)
 				params.last as XClosure
 		}
 	}
@@ -881,7 +884,8 @@ class XbaseFormatter2 extends AbstractFormatter {
 		if (expr.explicitSyntax) {
 			format += open.append[noSpace]
 			last = expr.nodeForFeature(XCLOSURE__EXPLICIT_SYNTAX)
-			format += last.prepend[noSpace]
+			if(!expr.declaredFormalParameters.empty)
+				format += last.prepend[noSpace]
 		}
 		var indented = false
 		for (c : children) {

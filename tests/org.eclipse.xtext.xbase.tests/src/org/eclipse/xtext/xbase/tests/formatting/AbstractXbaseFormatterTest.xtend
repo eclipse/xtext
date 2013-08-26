@@ -39,12 +39,16 @@ abstract class AbstractXbaseFormatterTest {
 		CharSequence toBeFormatted, boolean allowErrors) {
 		assertFormatted(
 			cfg,
-			expectation.toString.trim.replace("\n", "\n\t"),
-			toBeFormatted.toString.trim.replace("\n", "\n\t"),
+			expectation.toString.trim.indent("\t"),
+			toBeFormatted.toString.trim.indent("\t"),
 			"{\n\t",
 			"\n}",
 			allowErrors
 		)
+	}
+
+	def protected String indent(String string, String indent) {
+		string.split("\\r?\\n").map[if(it == "") it else indent + it].join("\n")
 	}
 
 	def assertFormatted((MapBasedPreferenceValues)=>void cfg, CharSequence expectation) {
