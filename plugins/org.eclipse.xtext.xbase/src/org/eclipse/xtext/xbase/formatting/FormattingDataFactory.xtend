@@ -122,7 +122,7 @@ class FormattingDataFactory {
 				WhitespaceInfo: {
 					val equalIndentationChange = increaseIndentationChange == decreaseIndentationChange * -1
 					if (leaf.trailingComment?.trailing && !leaf.trailingComment?.multiline) {
-						val space = if (leaf.offset == 0) "" else " "
+						val space = if (leaf.offset == 0) "" else if(maxNewLines == 0) null else " "
 						result += new WhitespaceData(leaf.offset, leaf.length, 0 , 0, if (trace) new RuntimeException(), space)
 					} else if (!applied) {
 						var newLines = Math.min(Math.max(leafs.newLines, minNewLines), maxNewLines)

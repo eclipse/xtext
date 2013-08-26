@@ -42,4 +42,12 @@ public class XbaseCommentFormatterTest extends AbstractXbaseFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
+  
+  @Test
+  public void commentAfterForExpression3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ll = #[].map(e|e.toString) // error here");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
 }
