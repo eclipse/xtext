@@ -133,7 +133,7 @@ class FormattingDataFactory {
 							newLines = newLines - 1
 						if (!leaf.leadingComment?.endsWithNewLine && newLines == 0)
 							result += new WhitespaceData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange,
-								if (trace) new RuntimeException(), if (leaf.offset == 0) "" else " ")
+								if (trace) new RuntimeException(), if (leaf.offset == 0) "" else if(leafs.containsComment) null else " ")
 						else
 							if(equalIndentationChange && leafs.leafs.last != leaf)
 								result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)

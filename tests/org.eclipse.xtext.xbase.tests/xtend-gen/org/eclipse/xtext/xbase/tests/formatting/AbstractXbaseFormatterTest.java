@@ -2,12 +2,17 @@ package org.eclipse.xtext.xbase.tests.formatting;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.formatting.XbaseFormatterTestInjectorProvider;
 import org.junit.runner.RunWith;
@@ -42,13 +47,33 @@ public abstract class AbstractXbaseFormatterTest {
   public void assertFormattedExpression(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final boolean allowErrors) {
     String _string = expectation.toString();
     String _trim = _string.trim();
-    String _replace = _trim.replace("\n", "\n\t");
+    String _indent = this.indent(_trim, "\t");
     String _string_1 = toBeFormatted.toString();
     String _trim_1 = _string_1.trim();
-    String _replace_1 = _trim_1.replace("\n", "\n\t");
-    this.assertFormatted(cfg, _replace, _replace_1, 
+    String _indent_1 = this.indent(_trim_1, "\t");
+    this.assertFormatted(cfg, _indent, _indent_1, 
       "{\n\t", 
       "\n}", allowErrors);
+  }
+  
+  protected String indent(final String string, final String indent) {
+    String[] _split = string.split("\\r?\\n");
+    final Function1<String,String> _function = new Function1<String,String>() {
+      public String apply(final String it) {
+        String _xifexpression = null;
+        boolean _equals = Objects.equal(it, "");
+        if (_equals) {
+          _xifexpression = it;
+        } else {
+          String _plus = (indent + it);
+          _xifexpression = _plus;
+        }
+        return _xifexpression;
+      }
+    };
+    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_split)), _function);
+    String _join = IterableExtensions.join(_map, "\n");
+    return _join;
   }
   
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation) {
