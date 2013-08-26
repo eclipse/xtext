@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import com.google.common.collect.ImmutableList
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
@@ -51,8 +52,6 @@ import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.common.types.JvmUpperBound
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -669,7 +668,7 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	}
 	
 	override setUpperBounds(Iterable<? extends TypeReference> upperBounds) {
-		delegate.constraints.removeAll(delegate.constraints.filter(JvmUpperBound))
+		delegate.constraints.clear
 		for (upper : upperBounds) {
 			val typeRef = compilationUnit.toJvmTypeReference(upper)
 			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
