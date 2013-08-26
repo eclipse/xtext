@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
@@ -103,19 +101,16 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {
     JvmTypeParameter _delegate = this.getDelegate();
     EList<JvmTypeConstraint> _constraints = _delegate.getConstraints();
-    JvmTypeParameter _delegate_1 = this.getDelegate();
-    EList<JvmTypeConstraint> _constraints_1 = _delegate_1.getConstraints();
-    Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints_1, JvmUpperBound.class);
-    CollectionExtensions.<JvmTypeConstraint>removeAll(_constraints, _filter);
+    _constraints.clear();
     for (final TypeReference upper : upperBounds) {
       {
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
         final JvmTypeReference typeRef = _compilationUnit.toJvmTypeReference(upper);
         final JvmUpperBound jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
         jvmUpperBound.setTypeReference(typeRef);
-        JvmTypeParameter _delegate_2 = this.getDelegate();
-        EList<JvmTypeConstraint> _constraints_2 = _delegate_2.getConstraints();
-        _constraints_2.add(jvmUpperBound);
+        JvmTypeParameter _delegate_1 = this.getDelegate();
+        EList<JvmTypeConstraint> _constraints_1 = _delegate_1.getConstraints();
+        _constraints_1.add(jvmUpperBound);
       }
     }
   }
