@@ -16,12 +16,14 @@ import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -77,7 +79,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     }
   }
   
-  public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
+  public Iterable<MutableTypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
@@ -114,5 +116,25 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     String _plus_1 = (_plus + "\' cannot declare any constructors.");
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus_1);
     throw _unsupportedOperationException;
+  }
+  
+  public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
+    final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
+    param.setName(name);
+    JvmGenericType _delegate = this.getDelegate();
+    EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
+    _typeParameters.add(param);
+    for (final TypeReference upper : upperBounds) {
+      {
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        final JvmTypeReference typeRef = _compilationUnit.toJvmTypeReference(upper);
+        final JvmUpperBound jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
+        jvmUpperBound.setTypeReference(typeRef);
+        EList<JvmTypeConstraint> _constraints = param.getConstraints();
+        _constraints.add(jvmUpperBound);
+      }
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    return _compilationUnit.toTypeParameterDeclaration(param);
   }
 }

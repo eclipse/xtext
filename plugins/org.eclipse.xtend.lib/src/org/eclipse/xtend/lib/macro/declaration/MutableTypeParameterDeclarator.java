@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import com.google.common.annotations.Beta;
 
 /**
@@ -16,7 +14,7 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface MutableTypeParameterDeclarator extends MutableMemberDeclaration, TypeParameterDeclarator {
-	public List<MutableTypeParameterDeclaration> getTypeParameters();
+	public Iterable<MutableTypeParameterDeclaration> getTypeParameters();
 
 	/**
 	 * Creates and adds a new {@link MutableTypeParameterDeclaration} to this declarator.

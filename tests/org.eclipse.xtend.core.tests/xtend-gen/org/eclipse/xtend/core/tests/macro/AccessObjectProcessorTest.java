@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.base.Objects;
 import java.io.Serializable;
-import java.util.List;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester.CompilationResult;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -49,7 +48,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
         Assert.assertNotNull(_findDeclaredMethod);
         final MutableClassDeclaration classPA = ctx.findClass("PA");
-        List<TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
+        Iterable<TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function = new Function1<TypeReference,Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
@@ -62,7 +61,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         TypeReference _findFirst = IterableExtensions.<TypeReference>findFirst(_implementedInterfaces, _function);
         Assert.assertNotNull(_findFirst);
         final MutableClassDeclaration classGA = ctx.findClass("GA");
-        List<TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
+        Iterable<TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function_1 = new Function1<TypeReference,Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
@@ -103,7 +102,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
         Assert.assertNotNull(_findDeclaredMethod);
         final MutableClassDeclaration classPA = ctx.findClass("my.pack.PA");
-        List<TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
+        Iterable<TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function = new Function1<TypeReference,Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
@@ -116,7 +115,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         TypeReference _findFirst = IterableExtensions.<TypeReference>findFirst(_implementedInterfaces, _function);
         Assert.assertNotNull(_findFirst);
         final MutableClassDeclaration classGA = ctx.findClass("my.pack.GA");
-        List<TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
+        Iterable<TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function_1 = new Function1<TypeReference,Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();

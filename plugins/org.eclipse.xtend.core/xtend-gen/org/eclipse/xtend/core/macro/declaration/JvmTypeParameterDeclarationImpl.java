@@ -8,8 +8,10 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
@@ -21,7 +23,12 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
@@ -47,16 +54,14 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
       return;
     }
     JvmTypeParameter _delegate_1 = this.getDelegate();
-    EObject _eContainer_1 = _delegate_1.eContainer();
-    EList<EObject> _eContents = _eContainer_1.eContents();
+    EcoreUtil.remove(_delegate_1);
     JvmTypeParameter _delegate_2 = this.getDelegate();
-    _eContents.remove(_delegate_2);
-    JvmTypeParameter _delegate_3 = this.getDelegate();
-    EObject _eContainer_2 = _delegate_3.eContainer();
-    boolean _notEquals = (!Objects.equal(_eContainer_2, null));
+    EObject _eContainer_1 = _delegate_2.eContainer();
+    boolean _notEquals = (!Objects.equal(_eContainer_1, null));
     if (_notEquals) {
-      JvmTypeParameter _delegate_4 = this.getDelegate();
-      String _plus = ("Couldn\'t remove " + _delegate_4);
+      JvmTypeParameter _delegate_3 = this.getDelegate();
+      String _string = _delegate_3.toString();
+      String _plus = ("Couldn\'t remove " + _string);
       IllegalStateException _illegalStateException = new IllegalStateException(_plus);
       throw _illegalStateException;
     }
@@ -93,5 +98,25 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     JvmTypeParameter _delegate = this.getDelegate();
     String _identifier = _delegate.getIdentifier();
     return _identifier;
+  }
+  
+  public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {
+    JvmTypeParameter _delegate = this.getDelegate();
+    EList<JvmTypeConstraint> _constraints = _delegate.getConstraints();
+    JvmTypeParameter _delegate_1 = this.getDelegate();
+    EList<JvmTypeConstraint> _constraints_1 = _delegate_1.getConstraints();
+    Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints_1, JvmUpperBound.class);
+    CollectionExtensions.<JvmTypeConstraint>removeAll(_constraints, _filter);
+    for (final TypeReference upper : upperBounds) {
+      {
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        final JvmTypeReference typeRef = _compilationUnit.toJvmTypeReference(upper);
+        final JvmUpperBound jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
+        jvmUpperBound.setTypeReference(typeRef);
+        JvmTypeParameter _delegate_2 = this.getDelegate();
+        EList<JvmTypeConstraint> _constraints_2 = _delegate_2.getConstraints();
+        _constraints_2.add(jvmUpperBound);
+      }
+    }
   }
 }
