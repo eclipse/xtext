@@ -4,12 +4,219 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
 import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
+	
+	@Test def void testModifyTypeParameters() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+				}
+				
+				class MyAnnotationProcessor implements TransformationParticipant<MutableTypeParameterDeclarator> {
+				
+					override doTransform(List<? extends MutableTypeParameterDeclarator> annotatedTargetElements,
+						extension TransformationContext context) {
+						for (annotatedTargetElement : annotatedTargetElements) {
+							doTransform(annotatedTargetElement, context)
+						}
+					}
+				
+					def doTransform(MutableTypeParameterDeclarator it, extension TransformationContext context) {
+						if (typeParameters.size != 0) {
+							throw new IllegalStateException("Before: typeParameters.size != 0")
+						}
+						addTypeParameter("T", String.newTypeReference)
+						if (typeParameters.size != 1) {
+							throw new IllegalStateException("After: typeParameters.size != 1")
+						}
+						val typeParameter = typeParameters.head
+						if (!typeParameter.simpleName.equals("T")) {
+							throw new IllegalStateException("After: expected type name: 'T', actual type name: '" + typeParameter.simpleName + "'")
+						}
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.MyAnnotation
+				
+				@MyAnnotation
+				class MyClass {
+				
+					@MyAnnotation
+					new() {
+					}
+				
+				}
+				
+				@MyAnnotation
+				interface MyInterface {
+				
+					@MyAnnotation
+					abstract def void foo();
+				
+				}
+			'''
+		) [
+			val (MutableTypeParameterDeclarator)=>void assertMyAnnotationChanges = [
+				assertEquals(1, typeParameters.size)
+			
+				val typeParameter = typeParameters.head
+				assertEquals("T", typeParameter.simpleName)
+				assertEquals(1, typeParameter.upperBounds.size)
+				assertEquals("java.lang.String", typeParameter.upperBounds.head.name)
+			]
+			
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertMyAnnotationChanges.apply(clazz)
+			assertMyAnnotationChanges.apply(clazz.declaredConstructors.head)
+			
+			val myInterface = typeLookup.findInterface('myusercode.MyInterface')
+			assertMyAnnotationChanges.apply(myInterface)
+			assertMyAnnotationChanges.apply(myInterface.declaredMethods.head)
+		]
+	}
+	
+	@Test def void testRemoveTypeParameters() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+				}
+				
+				class MyAnnotationProcessor implements TransformationParticipant<MutableTypeParameterDeclarator> {
+				
+					override doTransform(List<? extends MutableTypeParameterDeclarator> annotatedTargetElements,
+						extension TransformationContext context) {
+						for (annotatedTargetElement : annotatedTargetElements) {
+							doTransform(annotatedTargetElement, context)
+						}
+					}
+				
+					def doTransform(MutableTypeParameterDeclarator it, extension TransformationContext context) {
+						typeParameters.head.remove
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.MyAnnotation
+				
+				@MyAnnotation
+				class MyClass<T extends String> {
+				}
+				
+				@MyAnnotation
+				interface MyInterface<T extends String> {
+				
+					@MyAnnotation
+					abstract def <T extends String> void foo();
+				
+				}
+			'''
+		) [
+			val (MutableTypeParameterDeclarator)=>void assertMyAnnotationChanges = [
+				assertEquals(0, typeParameters.size)
+			]
+			
+			assertMyAnnotationChanges.apply(typeLookup.findClass('myusercode.MyClass'))
+			
+			val myInterface = typeLookup.findInterface('myusercode.MyInterface')
+			assertMyAnnotationChanges.apply(myInterface)
+			assertMyAnnotationChanges.apply(myInterface.declaredMethods.head)
+		]
+	}
+	
+	@Test def void testSetUpperBoundsForMutableTypeParameterDeclaration() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+				}
+				
+				class MyAnnotationProcessor implements TransformationParticipant<MutableTypeParameterDeclarator> {
+				
+					override doTransform(List<? extends MutableTypeParameterDeclarator> annotatedTargetElements,
+						extension TransformationContext context) {
+						for (annotatedTargetElement : annotatedTargetElements) {
+							doTransform(annotatedTargetElement, context)
+						}
+					}
+				
+					def doTransform(MutableTypeParameterDeclarator it, extension TransformationContext context) {
+						typeParameters.head.upperBounds = #[String.newTypeReference]
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.MyAnnotation
+				
+				@MyAnnotation
+				class MyClass<T extends CharSequence> {
+				}
+				
+				@MyAnnotation
+				interface MyInterface<T extends CharSequence> {
+				
+					@MyAnnotation
+					abstract def <T extends CharSequence> void foo();
+				
+				}
+			'''
+		) [
+			val (MutableTypeParameterDeclarator)=>void assertMyAnnotationChanges = [
+				assertEquals(1, typeParameters.size)
+				
+				val typeParameter = typeParameters.head
+				assertEquals(1, typeParameter.upperBounds.size)
+				assertEquals("java.lang.String", typeParameter.upperBounds.head.name)
+			]
+			
+			assertMyAnnotationChanges.apply(typeLookup.findClass('myusercode.MyClass'))
+			
+			val myInterface = typeLookup.findInterface('myusercode.MyInterface')
+			assertMyAnnotationChanges.apply(myInterface)
+			assertMyAnnotationChanges.apply(myInterface.declaredMethods.head)
+		]
+	}
 
 	@Test def void testRemoveAnnotation() {
 		assertProcessing(

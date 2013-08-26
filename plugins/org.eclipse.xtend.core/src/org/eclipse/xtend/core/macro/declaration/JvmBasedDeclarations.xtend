@@ -52,6 +52,7 @@ import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmUpperBound
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -270,6 +271,19 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
 		throw new UnsupportedOperationException("The interface '"+simpleName+"' cannot declare any constructors.")
 	}
+	
+	override addTypeParameter(String name, TypeReference... upperBounds) {
+		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
+		param.name = name
+		delegate.typeParameters.add(param)
+		for (upper : upperBounds) {
+			val typeRef = compilationUnit.toJvmTypeReference(upper)
+			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
+			jvmUpperBound.setTypeReference(typeRef)
+			param.constraints.add(jvmUpperBound)
+		}
+		return compilationUnit.toTypeParameterDeclaration(param)
+	}
 
 }
 
@@ -360,6 +374,19 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 			it.simpleName == name 
 			&& it.parameters.map[type].toList == parameterTypes.toList
 		]
+	}
+	
+	override addTypeParameter(String name, TypeReference... upperBounds) {
+		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
+		param.name = name
+		delegate.typeParameters.add(param)
+		for (upper : upperBounds) {
+			val typeRef = compilationUnit.toJvmTypeReference(upper)
+			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
+			jvmUpperBound.setTypeReference(typeRef)
+			param.constraints.add(jvmUpperBound)
+		}
+		return compilationUnit.toTypeParameterDeclaration(param)
 	}
 	
 }
@@ -612,9 +639,9 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	override remove() {
 		if (delegate.eContainer == null)
 			return;
-		delegate.eContainer.eContents.remove(delegate)
+		EcoreUtil.remove(delegate)
 		if (delegate.eContainer != null)
-			throw new IllegalStateException("Couldn't remove "+delegate)
+			throw new IllegalStateException("Couldn't remove "+delegate.toString)
 	}
 	
 	override isAssignableFrom(Type otherType) {
@@ -639,6 +666,16 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	
 	override getQualifiedName() {
 		delegate.identifier
+	}
+	
+	override setUpperBounds(Iterable<? extends TypeReference> upperBounds) {
+		delegate.constraints.removeAll(delegate.constraints.filter(JvmUpperBound))
+		for (upper : upperBounds) {
+			val typeRef = compilationUnit.toJvmTypeReference(upper)
+			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
+			jvmUpperBound.setTypeReference(typeRef)
+			delegate.constraints.add(jvmUpperBound)
+		}
 	}
 	
 }
