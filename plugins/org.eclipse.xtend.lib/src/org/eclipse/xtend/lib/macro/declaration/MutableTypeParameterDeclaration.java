@@ -15,4 +15,10 @@ import com.google.common.annotations.Beta;
 @Beta
 public interface MutableTypeParameterDeclaration extends MutableDeclaration, TypeParameterDeclaration {
 	public MutableTypeParameterDeclarator getTypeParameterDeclarator();
+
+	/**
+	 * @param upperBounds - the upper bounds
+	 */
+	public void setUpperBounds(Iterable<? extends TypeReference> upperBounds);
+
 }

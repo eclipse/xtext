@@ -11,7 +11,7 @@ package org.eclipse.xtend.lib.macro.declaration;
  * 
  * @author Sven Efftinge
  */
-public interface MutableInterfaceDeclaration extends MutableTypeDeclaration, InterfaceDeclaration {
+public interface MutableInterfaceDeclaration extends MutableTypeParameterDeclarator, MutableTypeDeclaration, InterfaceDeclaration {
 
 	/**
 	 * @param isStrictFloatingPoint

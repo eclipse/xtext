@@ -14,7 +14,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface MutableClassDeclaration extends MutableTypeDeclaration, ClassDeclaration {
+public interface MutableClassDeclaration extends MutableTypeParameterDeclarator, MutableTypeDeclaration, ClassDeclaration {
 	
 	/**
 	 * @param isFinal 
