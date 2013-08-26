@@ -47,7 +47,7 @@
 			<arg value="-DWITH.MWE2=true" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-DtargetPlatformPath=${build.root}/target.platform" />
-			<arg value="-Dxtend.checkout.location=${xtend.checkout.location}" />
+			<arg value="-Dxtend.checkout.location=${checkout.location}" />
 			<arg value="-Dxtext.checkout.location=${checkout.location}" />
 			<arg value="-Dreleng.project.location=${releng.project.location}" />
 			<arg value="-DgenerateSourceReferences=true" />
@@ -77,7 +77,7 @@
 	          Use this target if any TP dependencies are changed                    
 	         - - - - - - - - - - - - - - - - - -->
 	<target name="reset.target-platform">
-		<delete dir="${build.root}" includeemptydirs="true" verbose="false" includes="**/target.platform/" />
+		<delete dir="${build.root}" includeemptydirs="true" verbose="false" defaultexcludes="false" includes="**/target.platform/" />
 	</target>
 
 </project>
