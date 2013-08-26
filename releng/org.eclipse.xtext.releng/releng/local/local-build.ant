@@ -50,11 +50,12 @@
 			<arg value="-Dxtend.checkout.location=${xtend.checkout.location}" />
 			<arg value="-Dxtext.checkout.location=${checkout.location}" />
 			<arg value="-Dreleng.project.location=${releng.project.location}" />
+			<arg value="-DgenerateSourceReferences=true" />
 			<arg value="-DECLIPSE.TARGET.ALIAS=${ECLIPSE.TARGET.ALIAS}" />
 			<arg line="-data ${build.root}/buckminster.workspace" />
 			<arg line="-configuration ${build.root}/configuration" />
 			<arg line="--displaystacktrace" />
-			<arg line="--loglevel INFO" />
+			<arg line="--loglevel DEBUG" />
 			<arg line="-S '${commands.file}'" />
 			<arg line="-vmargs -Xmx1g" />
 		</exec>
