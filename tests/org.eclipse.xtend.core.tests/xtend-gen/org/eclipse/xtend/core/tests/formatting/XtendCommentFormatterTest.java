@@ -286,4 +286,30 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
+  
+  @Test
+  public void formatMLCommentBeforeStatement22() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class AATest {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* genColumns");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
 }

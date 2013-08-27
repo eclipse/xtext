@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
@@ -7,19 +8,19 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 @Data
 @SuppressWarnings("all")
 public class NewLineData extends FormattingData {
-  private final int _newLines;
+  private final Integer _newLines;
   
-  public int getNewLines() {
+  public Integer getNewLines() {
     return this._newLines;
   }
   
   public boolean isEmpty() {
-    int _newLines = this.getNewLines();
-    boolean _equals = (_newLines == 0);
+    Integer _newLines = this.getNewLines();
+    boolean _equals = Objects.equal(_newLines, null);
     return _equals;
   }
   
-  public NewLineData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace, final int newLines) {
+  public NewLineData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace, final Integer newLines) {
     super(offset, length, increaseIndentationChange, decreaseIndentationChange, trace);
     this._newLines = newLines;
   }
@@ -28,7 +29,7 @@ public class NewLineData extends FormattingData {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + _newLines;
+    result = prime * result + ((_newLines== null) ? 0 : _newLines.hashCode());
     return result;
   }
   
@@ -43,7 +44,10 @@ public class NewLineData extends FormattingData {
     if (!super.equals(obj))
       return false;
     NewLineData other = (NewLineData) obj;
-    if (other._newLines != _newLines)
+    if (_newLines == null) {
+      if (other._newLines != null)
+        return false;
+    } else if (!_newLines.equals(other._newLines))
       return false;
     return true;
   }

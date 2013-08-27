@@ -52,28 +52,49 @@ public class FormattingDataFactory {
   protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final Void key, final FormattingDataInit it) {
     final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
       public Iterable<FormattingData> apply(final FormattableDocument doc) {
+        Integer _elvis = null;
+        if (it.newLines != null) {
+          _elvis = it.newLines;
+        } else {
+          _elvis = ObjectExtensions.<Integer>operator_elvis(it.newLines, Integer.valueOf(0));
+        }
+        final int newLines2 = (_elvis).intValue();
+        boolean _or = false;
         boolean _and = false;
-        int _newLinesInComments = leafs.getNewLinesInComments();
-        boolean _equals = (_newLinesInComments == 0);
+        boolean _equals = Objects.equal(it.space, null);
         if (!_equals) {
           _and = false;
         } else {
-          boolean _or = false;
-          boolean _equals_1 = (it.newLines == 0);
-          if (_equals_1) {
-            _or = true;
-          } else {
-            boolean _equals_2 = Objects.equal(it.space, "");
-            _or = (_equals_1 || _equals_2);
-          }
-          _and = (_equals && _or);
+          boolean _equals_1 = Objects.equal(it.newLines, null);
+          _and = (_equals && _equals_1);
         }
         if (_and) {
+          _or = true;
+        } else {
+          boolean _and_1 = false;
+          int _newLinesInComments = leafs.getNewLinesInComments();
+          boolean _equals_2 = (_newLinesInComments == 0);
+          if (!_equals_2) {
+            _and_1 = false;
+          } else {
+            boolean _or_1 = false;
+            boolean _equals_3 = (newLines2 == 0);
+            if (_equals_3) {
+              _or_1 = true;
+            } else {
+              boolean _equals_4 = Objects.equal(it.space, "");
+              _or_1 = (_equals_3 || _equals_4);
+            }
+            _and_1 = (_equals_2 && _or_1);
+          }
+          _or = (_and || _and_1);
+        }
+        if (_or) {
           boolean _isDebugConflicts = doc.isDebugConflicts();
           return FormattingDataFactory.this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
         } else {
           boolean _isDebugConflicts_1 = doc.isDebugConflicts();
-          return FormattingDataFactory.this.newNewLineData(leafs, it.newLines, it.newLines, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts_1);
+          return FormattingDataFactory.this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts_1);
         }
       }
     };
@@ -404,7 +425,7 @@ public class FormattingDataFactory {
                       RuntimeException _runtimeException_2 = new RuntimeException();
                       _xifexpression_6 = _runtimeException_2;
                     }
-                    NewLineData _newLineData = new NewLineData(_offset_5, _length_2, increaseIndentationChange, decreaseIndentationChange, _xifexpression_6, newLines);
+                    NewLineData _newLineData = new NewLineData(_offset_5, _length_2, increaseIndentationChange, decreaseIndentationChange, _xifexpression_6, Integer.valueOf(newLines));
                     result.add(_newLineData);
                   } else {
                     int _offset_6 = _whitespaceInfo.getOffset();
@@ -426,7 +447,7 @@ public class FormattingDataFactory {
                       RuntimeException _runtimeException_3 = new RuntimeException();
                       _xifexpression_9 = _runtimeException_3;
                     }
-                    NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, _xifexpression_7, _xifexpression_8, _xifexpression_9, newLines);
+                    NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, _xifexpression_7, _xifexpression_8, _xifexpression_9, Integer.valueOf(newLines));
                     result.add(_newLineData_1);
                   }
                 }
@@ -459,7 +480,7 @@ public class FormattingDataFactory {
                     RuntimeException _runtimeException_4 = new RuntimeException();
                     _xifexpression_10 = _runtimeException_4;
                   }
-                  NewLineData _newLineData_2 = new NewLineData(_offset_7, _length_4, increaseIndentationChange, decreaseIndentationChange, _xifexpression_10, newLines_1);
+                  NewLineData _newLineData_2 = new NewLineData(_offset_7, _length_4, increaseIndentationChange, decreaseIndentationChange, _xifexpression_10, Integer.valueOf(newLines_1));
                   result.add(_newLineData_2);
                 } else {
                   int _offset_8 = _whitespaceInfo.getOffset();
@@ -469,7 +490,7 @@ public class FormattingDataFactory {
                     RuntimeException _runtimeException_5 = new RuntimeException();
                     _xifexpression_11 = _runtimeException_5;
                   }
-                  NewLineData _newLineData_3 = new NewLineData(_offset_8, _length_5, 0, 0, _xifexpression_11, newLines_1);
+                  NewLineData _newLineData_3 = new NewLineData(_offset_8, _length_5, 0, 0, _xifexpression_11, Integer.valueOf(newLines_1));
                   result.add(_newLineData_3);
                 }
               }

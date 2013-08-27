@@ -226,7 +226,7 @@ public class FormattableDocument {
               int _offset = _newLineData.getOffset();
               int _length = _newLineData.getLength();
               Throwable _trace = _newLineData.getTrace();
-              int _newLines = _newLineData.getNewLines();
+              Integer _newLines = _newLineData.getNewLines();
               NewLineData _newLineData_1 = new NewLineData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _newLines);
               _switchResult = _newLineData_1;
             }
@@ -485,8 +485,8 @@ public class FormattableDocument {
                   _xifexpression = indentation;
                 }
                 final int computedIndentation = _xifexpression;
-                int _newLines = _newLineData.getNewLines();
-                String _wrap = this.getWrap(_newLines);
+                Integer _newLines = _newLineData.getNewLines();
+                String _wrap = this.getWrap((_newLines).intValue());
                 String _indentation = this.getIndentation(computedIndentation);
                 final String replacement = (_wrap + _indentation);
                 int _offset_3 = _newLineData.getOffset();

@@ -7,7 +7,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class FormattingDataInit {
   public String space = null;
   
-  public int newLines = 0;
+  public Integer newLines = null;
   
   public int increaseIndentationChange = 0;
   
@@ -20,7 +20,7 @@ public class FormattingDataInit {
   }
   
   public void newLine() {
-    this.newLines = 1;
+    this.newLines = Integer.valueOf(1);
   }
   
   public void noSpace() {

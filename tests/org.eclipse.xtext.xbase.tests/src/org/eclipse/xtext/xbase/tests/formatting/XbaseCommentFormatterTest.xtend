@@ -25,7 +25,7 @@ class XbaseCommentFormatterTest extends AbstractXbaseFormatterTest {
 			var lastOffset = ""
 		''')
 	}
-
+	
 	@Test def commentAfterForExpression3() {
 		assertFormattedExpression('''
 			val ll = #[].map(e|e.toString) // error here

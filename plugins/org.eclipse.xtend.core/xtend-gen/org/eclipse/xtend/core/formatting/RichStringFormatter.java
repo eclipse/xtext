@@ -163,7 +163,7 @@ public class RichStringFormatter {
             RuntimeException _runtimeException = new RuntimeException();
             _xifexpression_4 = _runtimeException;
           }
-          NewLineData _newLineData = new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, _xifexpression_4, 0);
+          NewLineData _newLineData = new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, _xifexpression_4, Integer.valueOf(0));
           doc.operator_add(_newLineData);
         } else {
           RuntimeException _xifexpression_5 = null;
@@ -172,7 +172,7 @@ public class RichStringFormatter {
             RuntimeException _runtimeException_1 = new RuntimeException();
             _xifexpression_5 = _runtimeException_1;
           }
-          NewLineData _newLineData_1 = new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, _xifexpression_5, 1);
+          NewLineData _newLineData_1 = new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, _xifexpression_5, Integer.valueOf(1));
           doc.operator_add(_newLineData_1);
         }
         List<Chunk> _chunks = line.getChunks();
