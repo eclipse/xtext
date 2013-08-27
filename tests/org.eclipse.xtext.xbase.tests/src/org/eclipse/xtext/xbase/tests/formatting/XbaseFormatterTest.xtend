@@ -106,6 +106,12 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
+	@Test def formatClosuresEmptyParam() {
+		assertFormattedExpression('''
+			val Iterable<Object> x = [|#[].iterator]
+		''')	
+	}
+	
 	@Test def formatClosuresMultiLine() {
 		assertFormattedExpression('''
 			val x = newArrayList("A", "b")
