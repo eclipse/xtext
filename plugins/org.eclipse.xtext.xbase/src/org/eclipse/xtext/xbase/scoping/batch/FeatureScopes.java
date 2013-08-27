@@ -324,6 +324,7 @@ public class FeatureScopes implements IFeatureNames {
 		}
 		IScope result = parent;
 		if (firstArgument == null) {
+			result = createDynamicExtensionsScope(THIS, featureCall, session, resolvedTypes, result);
 			result = createDynamicExtensionsScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
 		} else {
