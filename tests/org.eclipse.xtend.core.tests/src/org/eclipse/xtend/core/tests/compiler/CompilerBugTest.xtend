@@ -16,6 +16,83 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def void test412083() {
+		assertCompilesTo('''
+			class Bug {
+				def bar(extension Foo foo) {
+					foo(1)
+				}
+			}
+			
+			class Foo {
+				def foo(Bug bug, int i) {}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public Object bar(@Extension final Foo foo) {
+			    Object _foo = foo.foo(this, 1);
+			    return _foo;
+			  }
+			}
+		''')
+	}
+	@Test
+	def void test412083_01() {
+		assertCompilesTo('''
+			class Bug {
+				extension Foo foo
+				def bar() {
+					foo(1)
+				}
+			}
+			
+			class Foo {
+				def foo(Bug bug, int i) {}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  @Extension
+			  private Foo foo;
+			  
+			  public Object bar() {
+			    Object _foo = this.foo.foo(this, 1);
+			    return _foo;
+			  }
+			}
+		''')
+	}
+	@Test
+	def void test412083_02() {
+		assertCompilesTo('''
+			class Bug {
+				
+				def bar() {
+					foo(1)
+				}
+				def foo(Bug bug, int i) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public Object bar() {
+			    Object _foo = this.foo(this, 1);
+			    return _foo;
+			  }
+			  
+			  public Object foo(final Bug bug, final int i) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testPreferStaticMethodsOverClassMembers() {
 		assertCompilesTo('''
 			import javax.xml.parsers.DocumentBuilderFactory
