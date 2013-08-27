@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
@@ -183,7 +184,8 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 					new TypeNameMatchRequestor() {
 						@Override
 						public void acceptTypeNameMatch(TypeNameMatch match) {
-							if (match.getPackageFragmentRoot().isArchive())
+							IPackageFragmentRoot fragmentRoot = match.getPackageFragmentRoot();
+							if (fragmentRoot.isArchive() || fragmentRoot.isExternal())
 								foundLibraryType[0] = match.getType();
 							else
 								foundLocalType[0] = match.getType();
