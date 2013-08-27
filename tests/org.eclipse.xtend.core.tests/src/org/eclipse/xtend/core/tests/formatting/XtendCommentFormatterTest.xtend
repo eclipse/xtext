@@ -182,4 +182,17 @@ class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 			}
 		''')	
 	}
+	
+	@Test def formatMLCommentBeforeStatement22() {
+		assertFormatted('''
+			class AATest {
+			
+				/**
+				 * genColumns
+				 */
+				def foo() {
+				}
+			}
+		''')	
+	}
 }
