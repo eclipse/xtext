@@ -40,13 +40,10 @@ public interface MutableExecutableDeclaration extends MutableTypeParameterDeclar
 	/**
 	 * Sets the given {@link CompilationStrategy} as the body.
 	 * 
-	 * If this {@link MutableExecutableDeclaration} has already set another expression or compilation strategy the old one will be detached and returned.
+	 * If this {@link MutableExecutableDeclaration} has already set another expression or compilation strategy the old one will be detached.
 	 * 
-	 * If the given expression is already assigned to another {@link MutableExecutableDeclaration} or {@link MutableFieldDeclaration}
-	 * it will be automatically detached from it.
-	 * 
-	 * @param compilationStrategy the compilation startegy
-	 * 
+	 * @param compilationStrategy the compilation strategy, must not be <code>null</code>
+	 * @exception IllegalArgumentException if <code>compilationStrategy</code> is <code>null</code>
 	 */
 	void setBody(CompilationStrategy compilationStrategy);
 	
@@ -54,15 +51,17 @@ public interface MutableExecutableDeclaration extends MutableTypeParameterDeclar
 	 * Sets the declared exceptions.
 	 * 
 	 * @param exceptions the declared exceptions
+	 * @exception IllegalArgumentException if the <code>exceptions</code> is <code>null</code> or contains <code>null</code>
 	 */
 	void setExceptions(TypeReference... exceptions);
 	
 	/**
 	 * Adds a parameter
 	 * 
-	 * @param name the name of the parameter, must not be <code>null</code>
+	 * @param name the name of the parameter, must be a valid java identifier
 	 * @param type the type of the parameter, must not be <code>null</code>
 	 * @return the created parameter
+	 * @exception IllegalArgumentException if the name is not a valid java identifier or the type is <code>null</code>
 	 */
 	MutableParameterDeclaration addParameter(String name, TypeReference type);
 }

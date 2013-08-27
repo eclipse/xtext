@@ -38,6 +38,7 @@ public interface RegisterGlobalsContext extends FileSystemSupport, FileLocations
 	 * 
 	 * @param qualifiedName
 	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
+	 * @exception IllegalArgumentException if the <code>qualifiedName</code> is not a valid qualified name
 	 */
 	void registerClass(String qualifiedName) throws IllegalArgumentException ;
 	
@@ -57,6 +58,7 @@ public interface RegisterGlobalsContext extends FileSystemSupport, FileLocations
 	 * 
 	 * @param qualifiedName
 	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
+	 * @exception IllegalArgumentException if the <code>qualifiedName</code> is not a valid qualified name
 	 */
 	void registerInterface(String qualifiedName) throws IllegalArgumentException ;
 	
@@ -76,6 +78,7 @@ public interface RegisterGlobalsContext extends FileSystemSupport, FileLocations
 	 * 
 	 * @param qualifiedName
 	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
+	 * @exception IllegalArgumentException if the <code>qualifiedName</code> is not a valid qualified name
 	 */
 	void registerAnnotationType(String qualifiedName) throws IllegalArgumentException ;
 	
@@ -95,6 +98,7 @@ public interface RegisterGlobalsContext extends FileSystemSupport, FileLocations
 	 * 
 	 * @param qualifiedName
 	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
+	 * @exception IllegalArgumentException if the <code>qualifiedName</code> is not a valid qualified name
 	 */
 	void registerEnumerationType(String qualifiedName) throws IllegalArgumentException ;
 }

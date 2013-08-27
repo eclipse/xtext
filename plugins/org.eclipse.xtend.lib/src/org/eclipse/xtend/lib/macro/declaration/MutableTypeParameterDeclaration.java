@@ -17,8 +17,15 @@ public interface MutableTypeParameterDeclaration extends MutableDeclaration, Typ
 	public MutableTypeParameterDeclarator getTypeParameterDeclarator();
 
 	/**
-	 * @param upperBounds - the upper bounds
+	 * @param upperBounds - the upper bounds, must not be <code>null</code>
+	 * @exception IllegalArgumentException if <code>upperBounds</code> is <code>null</code> or contains <code>null</code>
 	 */
 	public void setUpperBounds(Iterable<? extends TypeReference> upperBounds);
+	
+	/**
+	 * This operation is not supported.
+	 * @exception UnsupportedOperationException always 
+	 */
+	public MutableAnnotationReference addAnnotation(Type annotationType);
 
 }

@@ -60,13 +60,15 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	 * sets the 'initializer' expression of this field declaration.
 	 * Automatically detaches any previously assigned initializers from this field declaration.
 	 * 
-	 * @param initializer
+	 * @param initializer the compilation strategy, must not be <code>null</code>
+	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
 	 */
 	void setInitializer(CompilationStrategy initializer);
 	
 	/**
 	 * sets the 'type' of this field declaration
-	 * @param type
+	 * @param type the type, must be not <code>null</code>
+	 * @exception IllegalArgumentException if the <code>type</code> is <code>null</code>l
 	 */
 	void setType(TypeReference type);
 }
