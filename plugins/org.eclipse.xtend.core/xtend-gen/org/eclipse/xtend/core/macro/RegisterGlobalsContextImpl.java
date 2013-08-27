@@ -13,6 +13,7 @@ import java.io.InputStream;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
@@ -88,6 +89,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   }
   
   private void setNameAndAccept(final JvmDeclaredType newType, final String qualifiedName) {
+    ConditionUtils.checkQualifiedName(qualifiedName, "qualifiedName");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     _compilationUnit.checkCanceled();
     final Pair<String,String> namespaceAndName = this.getNameParts(qualifiedName);

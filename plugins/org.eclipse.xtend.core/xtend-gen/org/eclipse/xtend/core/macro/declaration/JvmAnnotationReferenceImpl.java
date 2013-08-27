@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
@@ -104,6 +105,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public void set(final String name, final String... values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmStringAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
     if (_notEquals) {
@@ -118,6 +120,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public void set(final String name, final boolean... values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmBooleanAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
     if (_notEquals) {
@@ -132,6 +135,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public void set(final String name, final int... values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmIntAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
     if (_notEquals) {

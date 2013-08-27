@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTargetImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
@@ -37,6 +38,7 @@ public class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmForm
   }
   
   public void setSimpleName(final String name) {
+    ConditionUtils.checkJavaIdentifier(name, "name");
     JvmFormalParameter _delegate = this.getDelegate();
     _delegate.setName(name);
   }

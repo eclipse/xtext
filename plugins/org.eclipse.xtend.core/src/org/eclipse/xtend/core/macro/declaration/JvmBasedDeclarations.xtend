@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
+import com.google.common.base.Preconditions
 import com.google.common.collect.ImmutableList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -53,6 +54,8 @@ import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
+import static org.eclipse.xtend.core.macro.ConditionUtils.*
+
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
 	override remove() {
@@ -97,6 +100,7 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 	override findAnnotation(Type annotationType) {
 		annotations.findFirst[annotationTypeDeclaration == annotationType]
 	}
+
 }
 
 abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
@@ -133,6 +137,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	}
 	
 	override setSimpleName(String name) {
+		checkJavaIdentifier(name, "name");
 		switch (it: delegate) {
 			JvmMemberImplCustom : clearIdentifierCache
 		}
@@ -164,6 +169,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		// remove default constructor
 		val constructor = delegate.members.filter(JvmConstructor).findFirst[compilationUnit.typeExtensions.isSingleSyntheticDefaultConstructor(it)]
 		if (constructor != null) {
@@ -179,6 +185,8 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
+		checkJavaIdentifier(name, "name")
+		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		val newField = TypesFactory.eINSTANCE.createJvmField
 		newField.simpleName = name
 		newField.visibility = JvmVisibility.PRIVATE
@@ -189,6 +197,8 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+		checkJavaIdentifier(name, "name")
+		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		val newMethod = TypesFactory.eINSTANCE.createJvmOperation
 		newMethod.visibility = JvmVisibility.PUBLIC
 		newMethod.simpleName = name
@@ -200,6 +210,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override findDeclaredConstructor(TypeReference... parameterTypes) {
+		checkIterable(parameterTypes, "parameterTypes")
 		declaredConstructors.findFirst[constructor | constructor.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
@@ -208,6 +219,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override findDeclaredMethod(String name, TypeReference... parameterTypes) {
+		checkIterable(parameterTypes, "parameterTypes")
 		declaredMethods.findFirst[method | method.simpleName == name && method.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
@@ -231,6 +243,10 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		declaredMembers.filter(MutableInterfaceDeclaration)
 	}
 	
+	override setSimpleName(String name) {
+		throw new UnsupportedOperationException("The type cannot be renamed.")
+	}
+	
 }
 
 class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableInterfaceDeclaration {
@@ -241,6 +257,7 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 	}
 	
 	override setExtendedInterfaces(Iterable<? extends TypeReference> superinterfaces) {
+		checkIterable(superinterfaces, "superinterfaces")
 		delegate.superTypes.clear
 		for (typeRef : superinterfaces) {
 			switch typeRef { TypeReferenceImpl : {
@@ -272,6 +289,8 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 	}
 	
 	override addTypeParameter(String name, TypeReference... upperBounds) {
+		checkJavaIdentifier(name, "name");
+		checkIterable(upperBounds, "upperBounds")
 		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)
@@ -287,6 +306,10 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 }
 
 class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotationType> implements MutableAnnotationTypeDeclaration {
+	
+	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any constructors.")
+	}
 	
 }
 
@@ -359,6 +382,7 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	}
 	
 	override setImplementedInterfaces(Iterable<? extends TypeReference> superInterfaces) {
+		checkIterable(superInterfaces, "superIntefaces")
 		val oldInterfaces = delegate.superTypes.filter[it.type instanceof JvmGenericType && (type as JvmGenericType).isInterface]
 		delegate.superTypes.removeAll(oldInterfaces)
 		delegate.superTypes.addAll(superInterfaces.filter(TypeReferenceImpl).map[delegate.toJavaCompliantTypeReference])
@@ -369,6 +393,7 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	}
 	
 	override findDeclaredMethod(String name, TypeReference[] parameterTypes) {
+		checkIterable(parameterTypes, "parameterTypes")
 		declaredMembers.filter(MutableMethodDeclaration).findFirst[
 			it.simpleName == name 
 			&& it.parameters.map[type].toList == parameterTypes.toList
@@ -376,6 +401,8 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	}
 	
 	override addTypeParameter(String name, TypeReference... upperBounds) {
+		checkJavaIdentifier(name, "name")
+		checkIterable(upperBounds, "upperBounds")
 		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)
@@ -422,6 +449,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	override setExceptions(TypeReference... exceptions) {
+		checkIterable(exceptions, "exceptions")
 		delegate.exceptions.clear
 		for (exceptionType : exceptions) {
 			if (exceptionType != null) {
@@ -435,6 +463,8 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	override addTypeParameter(String name, TypeReference... upperBounds) {
+		checkJavaIdentifier(name, "name")
+		checkIterable(upperBounds, "upperBounds")
 		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)
@@ -448,10 +478,13 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	override setBody(CompilationStrategy compilationStrategy) {
+		Preconditions.checkArgument(compilationStrategy != null, "compilationStrategy cannot be null")
 		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
 	}
 	
 	override addParameter(String name, TypeReference type) {
+		checkJavaIdentifier(name, "name");
+		Preconditions.checkArgument(type != null, "type cannot be null");
 		val param = TypesFactory.eINSTANCE.createJvmFormalParameter
 		param.name = name
 		param.parameterType = compilationUnit.toJvmTypeReference(type)
@@ -472,6 +505,7 @@ class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParam
 	}
 	
 	override setSimpleName(String name) {
+		checkJavaIdentifier(name, "name");
 		delegate.name = name
 	}
 	
@@ -524,6 +558,7 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 	}
 
 	override setReturnType(TypeReference type) {
+		Preconditions.checkArgument(type != null, "returnType cannot be null");
 		delegate.setReturnType((type as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference)
 	}
 	
@@ -576,6 +611,7 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	}
 	
 	override setInitializer(CompilationStrategy initializer) {
+		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		compilationUnit.setCompilationStrategy(delegate, initializer)
 	}
 	
@@ -620,6 +656,7 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	}
 	
 	override setType(TypeReference type) {
+		Preconditions.checkArgument(type != null, "type cannot be null");
 		delegate.setType((type as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference)
 	}
 	
@@ -632,6 +669,7 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	}
 	
 	override setSimpleName(String name) {
+		checkJavaIdentifier(name, "name");
 		delegate.name = name
 	}
 	
@@ -668,6 +706,7 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	}
 	
 	override setUpperBounds(Iterable<? extends TypeReference> upperBounds) {
+		checkIterable(upperBounds, "upperBounds")
 		delegate.constraints.clear
 		for (upper : upperBounds) {
 			val typeRef = compilationUnit.toJvmTypeReference(upper)
@@ -720,6 +759,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override set(String name, String... values) {
+		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue
 		if (name != null)
 			newValue.setOperation(findOperation(name))
@@ -728,6 +768,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override set(String name, boolean... values) {
+		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue
 		if (name != null)
 			newValue.setOperation(findOperation(name))
@@ -736,6 +777,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override set(String name, int... values) {
+		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue
 		if (name != null)
 			newValue.setOperation(findOperation(name))

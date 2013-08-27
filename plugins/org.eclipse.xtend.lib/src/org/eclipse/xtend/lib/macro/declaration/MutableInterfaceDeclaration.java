@@ -19,7 +19,8 @@ public interface MutableInterfaceDeclaration extends MutableTypeParameterDeclara
 	void setStrictFloatingPoint(boolean isStrictFloatingPoint);
 
 	/**
-	 * @param superinterfaces the interfaces this class implements
+	 * @param superinterfaces the interfaces this class implements, must be not <code>null</code>
+	 * @exception IllegalArgumentException if <code>superinterfaces</code> is <code>null</code> or contains <code>null</code>
 	 */
 	public void setExtendedInterfaces(Iterable<? extends TypeReference> superinterfaces);
 }

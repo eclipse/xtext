@@ -16,7 +16,8 @@ import com.google.common.annotations.Beta;
 public interface MutableNamedElement extends NamedElement, MutableElement {
 	
 	/**
-	 * @param simpleName the simple name of this element
+	 * @param simpleName the simple name of this element, must not be <code>null</code>
+	 * @exception IllegalArgumentException if the <code>simpleName</code> is <code>null</code>
 	 */
 	void setSimpleName(String simpleName);
 }

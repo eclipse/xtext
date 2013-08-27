@@ -17,11 +17,17 @@ public interface MutableTypeParameterDeclarator extends MutableMemberDeclaration
 	public Iterable<MutableTypeParameterDeclaration> getTypeParameters();
 
 	/**
-	 * Creates and adds a new {@link MutableTypeParameterDeclaration} to this declarator.
-	 *  
-	 * @param name the name of the type parameter
-	 * @param upperBounds the upperbounds
+	 * Creates and adds a new {@link MutableTypeParameterDeclaration} to this
+	 * declarator.
+	 * 
+	 * @param name
+	 *            the name of the type parameter
+	 * @param upperBounds
+	 *            the upperbounds
 	 * @return the created and attached {@link MutableTypeParameterDeclaration}
+	 * @exception IllegalArgumentException
+	 *                <ol><li>if the <code>name</code> is not a valid java identifier</li>
+	 *                <li>if the <code>upperBounds</code> is <code>null</code> or contains <code>null</code></li></ol>
 	 */
 	MutableTypeParameterDeclaration addTypeParameter(String name, TypeReference... upperBounds);
 }
