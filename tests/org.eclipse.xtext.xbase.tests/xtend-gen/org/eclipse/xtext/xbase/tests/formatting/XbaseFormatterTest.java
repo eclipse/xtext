@@ -159,6 +159,14 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
+  public void formatClosuresEmptyParam() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val Iterable<Object> x = [|#[].iterator]");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
   public void formatClosuresMultiLine() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
