@@ -16,6 +16,8 @@ import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.lib.Pair
 
+import static org.eclipse.xtend.core.macro.ConditionUtils.*
+
 class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
 	@Property IJvmDeclaredTypeAcceptor acceptor
@@ -48,6 +50,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	}
 	
 	private def void setNameAndAccept(JvmDeclaredType newType, String qualifiedName) {
+		checkQualifiedName(qualifiedName, "qualifiedName")
 		compilationUnit.checkCanceled
 		val namespaceAndName = getNameParts(qualifiedName)
 		val headerText = compilationUnit.fileHeaderProvider.getFileHeader(compilationUnit.xtendFile.eResource)

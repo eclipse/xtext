@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
@@ -53,6 +54,8 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
   }
   
   public void setInitializer(final CompilationStrategy initializer) {
+    boolean _notEquals = (!Objects.equal(initializer, null));
+    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmField _delegate = this.getDelegate();
     _compilationUnit.setCompilationStrategy(_delegate, initializer);
@@ -116,6 +119,8 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
   }
   
   public void setType(final TypeReference type) {
+    boolean _notEquals = (!Objects.equal(type, null));
+    Preconditions.checkArgument(_notEquals, "type cannot be null");
     JvmField _delegate = this.getDelegate();
     LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) type).getLightWeightTypeReference();
     JvmTypeReference _javaCompliantTypeReference = _lightWeightTypeReference.toJavaCompliantTypeReference();

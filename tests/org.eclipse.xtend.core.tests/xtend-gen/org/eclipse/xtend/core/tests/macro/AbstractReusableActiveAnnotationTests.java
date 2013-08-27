@@ -1884,27 +1884,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
       this.THREE_ANNOTATIONS, _mappedTo, _function);
   }
   
-  @Test
-  public void testDeterministicExecutionOrder_03() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import myannotation.*");
-    _builder.newLine();
-    _builder.append("@_A @_B @_C class MyClass {");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
-    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-      public void apply(final CompilationUnitImpl it) {
-        TypeLookupImpl _typeLookup = it.getTypeLookup();
-        final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass_A_B_C");
-        Assert.assertNotNull(myClass);
-      }
-    };
-    this.assertProcessing(
-      this.THREE_ANNOTATIONS, _mappedTo, _function);
-  }
-  
   public abstract void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);
   
   @Test

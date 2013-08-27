@@ -16,7 +16,8 @@ import com.google.common.annotations.Beta;
 public interface MutableMethodDeclaration extends MutableExecutableDeclaration, MethodDeclaration {
 	
 	/**
-	 * @param type the return type of this method
+	 * @param type the return type of this method, must be not <code>null</code>
+	 * @exception IllegalArgumentException if the <code>type</code> is <code>null</code>
 	 */
 	void setReturnType(TypeReference type);
 	

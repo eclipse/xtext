@@ -8,8 +8,10 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
@@ -28,6 +30,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
@@ -112,6 +115,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setExceptions(final TypeReference... exceptions) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(exceptions)), "exceptions");
     T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     _exceptions.clear();
@@ -133,6 +137,8 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
+    ConditionUtils.checkJavaIdentifier(name, "name");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(upperBounds)), "upperBounds");
     final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
     param.setName(name);
     T _delegate = this.getDelegate();
@@ -153,12 +159,17 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setBody(final CompilationStrategy compilationStrategy) {
+    boolean _notEquals = (!Objects.equal(compilationStrategy, null));
+    Preconditions.checkArgument(_notEquals, "compilationStrategy cannot be null");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
     _compilationUnit.setCompilationStrategy(_delegate, compilationStrategy);
   }
   
   public MutableParameterDeclaration addParameter(final String name, final TypeReference type) {
+    ConditionUtils.checkJavaIdentifier(name, "name");
+    boolean _notEquals = (!Objects.equal(type, null));
+    Preconditions.checkArgument(_notEquals, "type cannot be null");
     final JvmFormalParameter param = TypesFactory.eINSTANCE.createJvmFormalParameter();
     param.setName(name);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

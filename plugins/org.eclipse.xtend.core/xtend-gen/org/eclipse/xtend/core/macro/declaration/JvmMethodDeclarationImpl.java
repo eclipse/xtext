@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmExecutableDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
@@ -79,6 +81,8 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
   }
   
   public void setReturnType(final TypeReference type) {
+    boolean _notEquals = (!Objects.equal(type, null));
+    Preconditions.checkArgument(_notEquals, "returnType cannot be null");
     JvmOperation _delegate = this.getDelegate();
     LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) type).getLightWeightTypeReference();
     JvmTypeReference _javaCompliantTypeReference = _lightWeightTypeReference.toJavaCompliantTypeReference();

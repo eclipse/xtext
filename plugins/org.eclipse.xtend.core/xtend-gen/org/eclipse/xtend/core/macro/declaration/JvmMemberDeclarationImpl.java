@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTargetImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
@@ -100,6 +101,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
   }
   
   public void setSimpleName(final String name) {
+    ConditionUtils.checkJavaIdentifier(name, "name");
     T _delegate = this.getDelegate();
     final T it = _delegate;
     boolean _matched = false;

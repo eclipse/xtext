@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
@@ -40,6 +41,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   }
   
   public void setSimpleName(final String name) {
+    ConditionUtils.checkJavaIdentifier(name, "name");
     JvmTypeParameter _delegate = this.getDelegate();
     _delegate.setName(name);
   }
@@ -99,6 +101,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   }
   
   public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {
+    ConditionUtils.checkIterable(upperBounds, "upperBounds");
     JvmTypeParameter _delegate = this.getDelegate();
     EList<JvmTypeConstraint> _constraints = _delegate.getConstraints();
     _constraints.clear();

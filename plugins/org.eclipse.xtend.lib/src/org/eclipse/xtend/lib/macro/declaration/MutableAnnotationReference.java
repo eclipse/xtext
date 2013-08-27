@@ -23,6 +23,7 @@ public interface MutableAnnotationReference extends AnnotationReference, Mutable
 	 * 
 	 * @param name
 	 * @param values
+	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code> 
 	 */
 	void set(String name, String... values);
 	
@@ -30,6 +31,7 @@ public interface MutableAnnotationReference extends AnnotationReference, Mutable
 	 * Sets the annotation property of the given name
 	 * @param name
 	 * @param values
+	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code>
 	 */
 	void set(String name, boolean... values);
 	
@@ -37,6 +39,7 @@ public interface MutableAnnotationReference extends AnnotationReference, Mutable
 	 * Sets the annotation property of the given name
 	 * @param name
 	 * @param values
+	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code>
 	 */
 	void set(String name, int... values);
 	

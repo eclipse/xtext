@@ -969,22 +969,6 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 
-	@Test def void testDeterministicExecutionOrder_03() {
-
-		// annotation processors are called in the order their annotations first occur in the file
-		assertProcessing(
-			THREE_ANNOTATIONS,
-			'MyClass.xtend' -> '''
-				import myannotation.*
-				@_A @_B @_C class MyClass {
-				}
-			'''
-		) [
-			val myClass = typeLookup.findClass('MyClass_A_B_C')
-			assertNotNull(myClass)
-		]
-	}
-
 	def void assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile,
 		(CompilationUnitImpl)=>void expectations)
 		

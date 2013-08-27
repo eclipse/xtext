@@ -45,6 +45,7 @@ public interface MutableClassDeclaration extends MutableTypeParameterDeclarator,
 	
 	/**
 	 * @param superinterfaces the interfaces this class implements
+	 * @exception IllegalArgumentException if <code>superinterfaces</code> is <code>null</code> or contains <code>null</code>
 	 */
 	public void setImplementedInterfaces(Iterable<? extends TypeReference> superinterfaces);
 	

@@ -40,10 +40,11 @@ public interface MutableTypeDeclaration extends MutableMemberDeclaration, TypeDe
 	/**
 	 * Adds a new field with the given name. 
 	 * 
-	 * @param name the name of the field to be added
-	 * @param initializer a callback for further initialization of the created field
+	 * @param name the name of the field to be added, must be not <code>null</code>
+	 * @param initializer a callback for further initialization of the created field, must be not <code>null</code>
 	 * @return the created field declaration
 	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
+	 * @exception IllegalArgumentException if the <code>name</code> is not a valid java identifier or the <code>initializer</code> is <code>null</code>
 	 */
 	MutableFieldDeclaration addField(String name, Procedures.Procedure1<MutableFieldDeclaration> initializer);
 
@@ -54,17 +55,24 @@ public interface MutableTypeDeclaration extends MutableMemberDeclaration, TypeDe
 	 * @param initializer a call back for further initialization of the method
 	 * @return the created method declaration
 	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
+	 * @exception IllegalArgumentException if the <code>name</code> is not a valid java identifier or the <code>initializer</code> is <code>null</code>
 	 */
 	MutableMethodDeclaration addMethod(String name, Procedures.Procedure1<MutableMethodDeclaration> initializer);
 	
 	/**
-	 * Adds a new method with the given name to this type declaration.
+	 * Adds a new constructor to this type declaration.
 	 * 
-	 * @param name the name of the method
-	 * @param initializer a call back for further initialization of the method
+	 * @param initializer a call back for further initialization of the constructor
 	 * @return the created constructor declaration
-	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
+	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing constructors.
+	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
 	 */
 	MutableConstructorDeclaration addConstructor(Procedures.Procedure1<MutableConstructorDeclaration> initializer);
+	
+	/**
+	 * It is not possible to rename a type. 
+	 * @exception UnsupportedOperationException always
+	 */
+	public void setSimpleName(String simpleName);
 	
 }

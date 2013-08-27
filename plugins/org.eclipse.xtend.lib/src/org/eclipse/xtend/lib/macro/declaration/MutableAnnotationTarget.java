@@ -18,6 +18,7 @@ public interface MutableAnnotationTarget extends MutableNamedElement, Annotation
 	/**
 	 * @param annotationType
 	 * @return a new annotation reference
+	 * @exception IllegalArgumentException if <code>annotationType</code> is not an annotation type
 	 */
 	MutableAnnotationReference addAnnotation(Type annotationType);
 	
