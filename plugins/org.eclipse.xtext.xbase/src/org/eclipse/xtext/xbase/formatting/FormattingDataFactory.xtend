@@ -23,10 +23,11 @@ class FormattingDataFactory {
 	def protected dispatch (FormattableDocument)=>Iterable<FormattingData> newFormattingData(HiddenLeafs leafs,
 		Void key, FormattingDataInit it) {
 		[ FormattableDocument doc |
-			if (leafs.newLinesInComments == 0 && (newLines == 0 || space == ""))
+			val int newLines2 = newLines ?: 0
+			if ((space == null && newLines == null) || (leafs.newLinesInComments == 0 && (newLines2 == 0 || space == "")))
 				return newWhitespaceData(leafs, space, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 			else
-				return newNewLineData(leafs, newLines, newLines, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
+				return newNewLineData(leafs, newLines2, newLines2, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 		]
 	}
 
@@ -206,7 +207,7 @@ class FormattingDataFactory {
 
 class FormattingDataInit {
 	public String space = null
-	public int newLines = 0
+	public Integer newLines = null
 	public int increaseIndentationChange = 0
 	public int decreaseIndentationChange = 0
 	public PreferenceKey key = null

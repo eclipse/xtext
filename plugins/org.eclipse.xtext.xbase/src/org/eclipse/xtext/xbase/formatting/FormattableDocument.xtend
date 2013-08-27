@@ -313,9 +313,9 @@ class FormattableDocument {
 }
 
 @Data class NewLineData extends FormattingData {
-	int newLines
+	Integer newLines
 	
 	override isEmpty() {
-		newLines == 0
+		newLines == null
 	}
 }
