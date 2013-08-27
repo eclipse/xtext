@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.editor;
 
+import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorMatchingStrategy;
 import org.eclipse.ui.IEditorPart;
@@ -65,16 +68,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			if (traceToSource == null) {
 				return false;
 			}
-			Iterable<ILocationInResource> allLocations = traceToSource.getAllAssociatedLocations();
-			boolean thisIsTheOnlyOne = false;
-			for(ILocationInResource location: allLocations) {
-				// more than one source found - this is unlikely to be the correct editor
-				if (!currentResource.equals(location.getStorage())) {
-					return false;
-				}
-				thisIsTheOnlyOne = true;
-			}
-			if (thisIsTheOnlyOne) {
+			if (isCurrentResource(currentResource, traceToSource)) {
 				IEditorPart existingEditor = editorRef.getEditor(true);
 				if (existingEditor instanceof XbaseEditor) {
 					((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newResource);
@@ -85,6 +79,15 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			logger.error(e.getMessage(), e);
 		}
 		return false;
+	}
+
+	protected boolean isCurrentResource(IResource currentResource, ITrace traceToSource) {
+		Iterator<ILocationInResource> iterator = traceToSource.getAllAssociatedLocations().iterator();
+		if (!iterator.hasNext()) {
+			return false;
+		}
+		IStorage storage = iterator.next().getStorage();
+		return currentResource.equals(storage);
 	}
 
 }
