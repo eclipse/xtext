@@ -61,7 +61,7 @@ public class ExtractTest {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableInterfaceDeclaration interf = ctx.findInterface("MyClassInterface");
         final MutableClassDeclaration clazz = ctx.findClass("MyClass");
-        List<TypeReference> _implementedInterfaces = clazz.getImplementedInterfaces();
+        Iterable<TypeReference> _implementedInterfaces = clazz.getImplementedInterfaces();
         TypeReference _head = IterableExtensions.<TypeReference>head(_implementedInterfaces);
         Type _type = _head.getType();
         Assert.assertEquals(_type, interf);

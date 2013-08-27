@@ -42,7 +42,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     String _interfaceName = this.getInterfaceName(annotatedClass);
     final MutableInterfaceDeclaration interfaceType = context.findInterface(_interfaceName);
-    List<TypeReference> _implementedInterfaces = annotatedClass.getImplementedInterfaces();
+    Iterable<TypeReference> _implementedInterfaces = annotatedClass.getImplementedInterfaces();
     TypeReference _newTypeReference = context.newTypeReference(interfaceType);
     Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_implementedInterfaces, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_newTypeReference)));
     annotatedClass.setImplementedInterfaces(_plus);
