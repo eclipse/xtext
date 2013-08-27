@@ -91,6 +91,84 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	@Test
+	def void test412083_03() {
+		assertCompilesTo('''
+			class Bug {
+				
+				def bar() {
+					foo(1)
+				}
+				def foo(Bug bug, int i) {}
+				def foo(int i) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public Object bar() {
+			    Object _foo = this.foo(1);
+			    return _foo;
+			  }
+			  
+			  public Object foo(final Bug bug, final int i) {
+			    return null;
+			  }
+			  
+			  public Object foo(final int i) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	@Test
+	def void test412083_04() {
+		assertCompilesTo('''
+			class Bug {
+				def bar(extension Foo foo) {
+					foo(1)
+				}
+			}
+			
+			class Foo {
+				def foo(Bug bug, int i) {}
+				def foo(int i) {}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public Object bar(@Extension final Foo foo) {
+			    Object _foo = foo.foo(1);
+			    return _foo;
+			  }
+			}
+		''')
+	}
+	@Test
+	def void test412083_05() {
+		assertCompilesTo('''
+			class Bug {
+				def bar(extension Foo foo, Bug it) {
+					foo(1)
+				}
+			}
+			
+			class Foo {
+				def foo(Bug bug, int i) {}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Extension;
+
+			@SuppressWarnings("all")
+			public class Bug {
+			  public Object bar(@Extension final Foo foo, final Bug it) {
+			    Object _foo = foo.foo(it, 1);
+			    return _foo;
+			  }
+			}
+		''')
+	}
 	
 	@Test
 	def testPreferStaticMethodsOverClassMembers() {

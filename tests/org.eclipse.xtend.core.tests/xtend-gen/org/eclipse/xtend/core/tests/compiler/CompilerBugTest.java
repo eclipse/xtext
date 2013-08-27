@@ -181,6 +181,175 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void test412083_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bug {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo(1)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(Bug bug, int i) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int i) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bug {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _foo = this.foo(1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _foo;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object foo(final Bug bug, final int i) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object foo(final int i) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void test412083_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bug {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar(extension Foo foo) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo(1)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(Bug bug, int i) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int i) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bug {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object bar(@Extension final Foo foo) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _foo = foo.foo(1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _foo;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void test412083_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bug {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar(extension Foo foo, Bug it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo(1)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(Bug bug, int i) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bug {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object bar(@Extension final Foo foo, final Bug it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _foo = foo.foo(it, 1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _foo;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testPreferStaticMethodsOverClassMembers() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import javax.xml.parsers.DocumentBuilderFactory");
