@@ -15,4 +15,10 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface EnumerationValueDeclaration extends MemberDeclaration {
+	
+	/**
+	 * @return the enumeration type declaring this value
+	 */
+	public EnumerationTypeDeclaration getDeclaringType();
+
 }
