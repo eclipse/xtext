@@ -4,9 +4,12 @@
  */
  
 val x = 'A final value'
-// A final value (void)
+x
+// A final value (String)
 var y = 'A non-final variable'
-// A non-final variable (void)
+y
+// A non-final variable (String)
+
 
 //x = 'not allowed'
 y = 'can be modified'
@@ -17,7 +20,8 @@ y = 'can be modified'
  */
  
 val String s = "my String"
-// my String (void)
+s
+// my String (String)
 
 /*
  * Generally, variable Declarations are only allowed within a block. In
@@ -37,4 +41,4 @@ val String s = "my String"
 		}
 	}
 }
-// foo (String)
+// my Stringfoo (String)

@@ -23,13 +23,14 @@ i
 // [C@388e28 (char[])
 
 'string'.toCharArray.get(3)
-// i (Character)
+// i (char)
 
 /*
  * Arrays are automatically coerced to Lists.
  */
 val java.util.List<Character> l = 'string'.toCharArray
-// [s, t, r, i, n, g] (void)
+l
+// [s, t, r, i, n, g] (List<Character>)
 
 /*
  * Closure Coercion
