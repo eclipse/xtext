@@ -1,5 +1,7 @@
 package org.eclipse.xtext.purexbase.ui.autoedit;
 
+import static com.google.common.collect.Sets.newHashSet;
+
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
@@ -38,8 +41,6 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import static com.google.common.collect.Sets.*;
-
 public class ReplAutoEdit implements IAutoEditStrategy {
 
 	@Inject
@@ -53,13 +54,9 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 
 	public void customizeDocumentCommand(final IDocument document,
 			final DocumentCommand command) {
-		String usedDelim = null;
-		for (String lineDelimiter : document.getLegalLineDelimiters()) {
-			if (command.text.equals(lineDelimiter))
-				usedDelim = lineDelimiter;
-		}
-		if (usedDelim == null)
+		if (!isLineDelimiter(document, command)) {
 			return;
+		}
 		try {
 
 			IXtextDocument doc = (IXtextDocument) document;
@@ -77,6 +74,16 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private boolean isLineDelimiter(IDocument document, DocumentCommand command) {
+		if (command.length != 0) {
+			return false;
+		}
+		String originalText = command.text;
+		String[] lineDelimiters = document.getLegalLineDelimiters();
+		int delimiterIndex = TextUtilities.startsWith(lineDelimiters, originalText);
+		return delimiterIndex != -1 && originalText.trim().length() == 0;
 	}
 
 	protected String computeResultText(final IDocument document,
