@@ -32,6 +32,9 @@ import org.junit.Test
 
 import static org.eclipse.xtend.core.tests.macro.MutableAssert.*
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.Visibility
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -158,6 +161,55 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 				  }
 				}
 			''')
+	}
+
+	@Test def void checkMutableEnumerationTypeDeclaration() {
+		'''
+			@«CheckMutableEnumerationTypeDeclaration.name»
+			enum Foo {
+			
+			}
+		'''.assertCompilesTo(
+			'''
+				import «CheckMutableEnumerationTypeDeclaration.name»;
+
+				@«CheckMutableEnumerationTypeDeclaration.simpleName»
+				@SuppressWarnings("all")
+				public enum Foo {
+				  A;
+				}
+			''')
+	}
+
+}
+
+@Active(CheckMutableEnumerationTypeDeclarationProcessor)
+annotation CheckMutableEnumerationTypeDeclaration {
+}
+
+class CheckMutableEnumerationTypeDeclarationProcessor implements RegisterGlobalsParticipant<EnumerationTypeDeclaration>, TransformationParticipant<MutableEnumerationTypeDeclaration>, CodeGenerationParticipant<EnumerationTypeDeclaration> {
+
+	override doRegisterGlobals(List<? extends EnumerationTypeDeclaration> annotatedSourceElements,
+		RegisterGlobalsContext context) {
+	}
+
+	override doTransform(List<? extends MutableEnumerationTypeDeclaration> annotatedTargetElements,
+		extension TransformationContext context) {
+		for (enumeration : annotatedTargetElements) {
+			assertValidJavaIdentifier("name") [ String identifier |
+				enumeration.addValue(identifier) [].remove
+			]
+			assertThrowable(IllegalArgumentException, "initializer cannot be null") [ |
+				enumeration.addValue("foo", null)
+			]
+			assertThrowable(UnsupportedOperationException, "It is not possible to change visibility of enumeration value.") [ |
+				enumeration.addValue("A") [].setVisibility(Visibility.PRIVATE)
+			]
+		}
+	}
+
+	override doGenerateCode(List<? extends EnumerationTypeDeclaration> annotatedSourceElements,
+		extension CodeGenerationContext context) {
 	}
 
 }

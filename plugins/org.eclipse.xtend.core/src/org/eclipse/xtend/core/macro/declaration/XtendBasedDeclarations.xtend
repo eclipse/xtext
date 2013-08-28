@@ -203,6 +203,14 @@ class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<XtendInterf
 
 class XtendEnumerationDeclarationImpl extends XtendTypeDeclarationImpl<XtendEnum> implements EnumerationTypeDeclaration {
 	
+	override findDeclaredValue(String name) {
+		declaredValues.findFirst[value | value.simpleName == name]
+	}
+	
+	override getDeclaredValues() {
+		declaredMembers.filter(EnumerationValueDeclaration)
+	}
+	
 }
 
 class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl<XtendAnnotationType> implements AnnotationTypeDeclaration {
@@ -377,6 +385,11 @@ class XtendEnumerationValueDeclarationImpl extends XtendMemberDeclarationImpl<Xt
 	override getSimpleName() {
 		delegate.name
 	}
+	
+	override EnumerationTypeDeclaration getDeclaringType() {
+		super.getDeclaringType() as EnumerationTypeDeclaration
+	}
+	
 }
 
 class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements AnnotationTypeElementDeclaration {

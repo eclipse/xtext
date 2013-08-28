@@ -12,6 +12,103 @@ import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
+	@Test def void testAccessAndModifyEnumerationValueDeclaration() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.CodeGenerationContext
+				import org.eclipse.xtend.lib.macro.CodeGenerationParticipant
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.Visibility
+				
+				import static com.google.common.base.Preconditions.*
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+				}
+				
+				class MyAnnotationProcessor implements RegisterGlobalsParticipant<EnumerationTypeDeclaration>, TransformationParticipant<MutableEnumerationTypeDeclaration>, CodeGenerationParticipant<EnumerationTypeDeclaration> {
+				
+					override doGenerateCode(List<? extends EnumerationTypeDeclaration> annotatedSourceElements,
+						extension CodeGenerationContext context) {
+					}
+				
+					override doRegisterGlobals(List<? extends EnumerationTypeDeclaration> annotatedSourceElements,
+						RegisterGlobalsContext context) {
+						for (enumeration : annotatedSourceElements) {
+							enumeration.checkState
+						}
+					}
+				
+					def checkState(EnumerationTypeDeclaration enumeration) {
+						val values = enumeration.declaredValues
+						checkState(values.size == 3, "enumeration.declaredValues.size != 3")
+						enumeration.findDeclaredValue(values.get(0).simpleName).checkState("A", enumeration)
+						enumeration.findDeclaredValue(values.get(1).simpleName).checkState("B", enumeration)
+						enumeration.findDeclaredValue(values.get(2).simpleName).checkState("C", enumeration)
+					}
+				
+					def checkState(EnumerationValueDeclaration value, String expectedSimpleName, TypeDeclaration expectedType) {
+						checkState(value.simpleName == expectedSimpleName, "value.simpleName != expectedSimpleName")
+						checkState(value.declaringType == expectedType, "value.declaringType != expectedType")
+						checkState(value.visibility == Visibility.PUBLIC, "value.visibility != Visibility.PUBLIC")
+						checkState(value.annotations.size == 0, "value.annotations.size != 0")
+						checkState(value.findAnnotation(null) == null, "value.findAnnotation(null) != null")
+					}
+
+					override doTransform(List<? extends MutableEnumerationTypeDeclaration> annotatedTargetElements,
+						extension TransformationContext context) {
+						for (enumeration : annotatedTargetElements) {
+							enumeration.checkState
+							for (value : enumeration.declaredValues) {
+								checkState(value.annotations.size == 0, value.annotations.size != 0)
+								value.addAnnotation(Deprecated.newTypeReference.type)
+								checkState(value.annotations.size == 1, value.annotations.size != 1)
+							}
+							enumeration.addValue("D") [
+								addAnnotation(Deprecated.newTypeReference.type)
+							]
+						}
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.MyAnnotation
+				
+				@MyAnnotation
+				enum UserCode {
+					A, 
+					B,
+					C
+				}
+			'''
+		) [
+			val enumerationType = typeLookup.findEnumerationType("myusercode.UserCode")
+			assertEquals(4, enumerationType.declaredValues.size)
+			
+			val deprecatedAnnotationType = typeReferenceProvider.newTypeReference(Deprecated).type
+			for (value : enumerationType.declaredValues) {
+				assertEquals(1, value.annotations.size)
+				assertNotNull(value.findAnnotation(deprecatedAnnotationType))
+			}
+			assertEquals("D", enumerationType.declaredValues.last.simpleName)
+			assertNotNull(enumerationType.findDeclaredValue("D"))
+		]
+	}
+	
 	@Test def void testModifyTypeParameters() {
 		assertProcessing(
 			'myannotation/MyAnnotation.xtend' -> '''

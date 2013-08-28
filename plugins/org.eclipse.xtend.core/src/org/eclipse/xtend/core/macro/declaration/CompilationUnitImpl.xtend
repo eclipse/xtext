@@ -96,6 +96,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import java.io.File
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -331,12 +332,16 @@ class CompilationUnitImpl implements CompilationUnit {
 						it.delegate = delegate
 						it.compilationUnit = this
 					]
+				JvmEnumerationLiteral:
+					new JvmEnumerationValueDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this		
+					]
 				JvmField:
 					new JvmFieldDeclarationImpl => [
 						it.delegate = delegate
 						it.compilationUnit = this
 					]
-			//TODO JvmEnumerationLiteral
 			}
 		]}
 	

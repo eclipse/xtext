@@ -55,6 +55,8 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
+import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -314,6 +316,26 @@ class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotat
 }
 
 class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumerationType> implements MutableEnumerationTypeDeclaration {
+	
+	override getDeclaredValues() {
+		declaredMembers.filter(MutableEnumerationValueDeclaration)
+	}
+	
+	override addValue(String name, Procedure1<MutableEnumerationValueDeclaration> initializer) {
+		checkJavaIdentifier(name, "name")
+		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		val jvmLiteral = TypesFactory.eINSTANCE.createJvmEnumerationLiteral
+		jvmLiteral.simpleName = name
+		jvmLiteral.visibility = JvmVisibility.PUBLIC
+		delegate.members.add(jvmLiteral)
+		val mutableEnumerationValueDeclaration = compilationUnit.toMemberDeclaration(jvmLiteral) as MutableEnumerationValueDeclaration
+		initializer.apply(mutableEnumerationValueDeclaration)
+		return mutableEnumerationValueDeclaration
+	}
+	
+	override findDeclaredValue(String name) {
+		declaredValues.findFirst[value | value.simpleName == name]
+	}
 	
 }
 
@@ -596,6 +618,18 @@ class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmCons
 	
 }
 
+class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnumerationLiteral> implements MutableEnumerationValueDeclaration {
+	
+	override setVisibility(Visibility visibility) {
+		throw new UnsupportedOperationException("It is not possible to change visibility of enumeration value.")
+	}
+	
+	override MutableEnumerationTypeDeclaration getDeclaringType() {
+		super.getDeclaringType() as MutableEnumerationTypeDeclaration
+	}
+
+}
+
 class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> implements MutableFieldDeclaration {
 	
 	override getInitializer() {
@@ -633,10 +667,6 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	
 	override getType() {
 		compilationUnit.toTypeReference(delegate.type)
-	}
-	
-	override MutableClassDeclaration getDeclaringType() {
-		super.getDeclaringType() as MutableClassDeclaration
 	}
 
 	override setFinal(boolean isFinal) {
