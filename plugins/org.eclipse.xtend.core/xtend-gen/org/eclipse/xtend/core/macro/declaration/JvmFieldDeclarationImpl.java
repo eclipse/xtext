@@ -14,9 +14,7 @@ import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmField;
@@ -91,11 +89,6 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     JvmTypeReference _type = _delegate.getType();
     TypeReference _typeReference = _compilationUnit.toTypeReference(_type);
     return _typeReference;
-  }
-  
-  public MutableClassDeclaration getDeclaringType() {
-    MutableTypeDeclaration _declaringType = super.getDeclaringType();
-    return ((MutableClassDeclaration) _declaringType);
   }
   
   public void setFinal(final boolean isFinal) {

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+import org.eclipse.xtext.xbase.lib.Procedures;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -15,5 +17,19 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface MutableEnumerationTypeDeclaration extends MutableTypeDeclaration, EnumerationTypeDeclaration {
+
+	Iterable<? extends MutableEnumerationValueDeclaration> getDeclaredValues();
+	
+	MutableEnumerationValueDeclaration findDeclaredValue(String name);
+	
+	/**
+	 * Adds a new value with the given name. 
+	 * 
+	 * @param name the name of the field to be added, must be not <code>null</code>
+	 * @param initializer a callback for further initialization of the created value, must be not <code>null</code>
+	 * @return the created value declaration
+	 * @exception IllegalArgumentException if the <code>name</code> is not a valid java identifier or the <code>initializer</code> is <code>null</code>
+	 */
+	MutableEnumerationValueDeclaration addValue(String name, Procedures.Procedure1<MutableEnumerationValueDeclaration> initializer);
 
 }

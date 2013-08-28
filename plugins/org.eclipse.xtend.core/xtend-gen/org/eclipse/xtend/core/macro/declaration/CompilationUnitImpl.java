@@ -31,6 +31,7 @@ import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeElementDeclarat
 import org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmEnumerationTypeDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmInterfaceDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
@@ -668,6 +669,21 @@ public class CompilationUnitImpl implements CompilationUnit {
               }
             };
             JvmConstructorDeclarationImpl _doubleArrow = ObjectExtensions.<JvmConstructorDeclarationImpl>operator_doubleArrow(_jvmConstructorDeclarationImpl, _function);
+            _switchResult = _doubleArrow;
+          }
+        }
+        if (!_matched) {
+          if (delegate instanceof JvmEnumerationLiteral) {
+            final JvmEnumerationLiteral _jvmEnumerationLiteral = (JvmEnumerationLiteral)delegate;
+            _matched=true;
+            JvmEnumerationValueDeclarationImpl _jvmEnumerationValueDeclarationImpl = new JvmEnumerationValueDeclarationImpl();
+            final Procedure1<JvmEnumerationValueDeclarationImpl> _function = new Procedure1<JvmEnumerationValueDeclarationImpl>() {
+              public void apply(final JvmEnumerationValueDeclarationImpl it) {
+                it.setDelegate(_jvmEnumerationLiteral);
+                it.setCompilationUnit(CompilationUnitImpl.this);
+              }
+            };
+            JvmEnumerationValueDeclarationImpl _doubleArrow = ObjectExtensions.<JvmEnumerationValueDeclarationImpl>operator_doubleArrow(_jvmEnumerationValueDeclarationImpl, _function);
             _switchResult = _doubleArrow;
           }
         }

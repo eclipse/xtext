@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.macro;
 
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend.core.tests.macro.CheckMutableClassDeclaration;
+import org.eclipse.xtend.core.tests.macro.CheckMutableEnumerationTypeDeclaration;
 import org.eclipse.xtend.core.tests.macro.CheckMutableFieldDeclaration;
 import org.eclipse.xtend.core.tests.macro.CheckMutableInterfaceDeclaration;
 import org.eclipse.xtend.core.tests.macro.CheckMutableMethodDeclaration;
@@ -249,6 +250,41 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("  ");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this._xtendCompilerTester.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void checkMutableEnumerationTypeDeclaration() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@");
+    String _name = CheckMutableEnumerationTypeDeclaration.class.getName();
+    _builder.append(_name, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("enum Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import ");
+    String _name_1 = CheckMutableEnumerationTypeDeclaration.class.getName();
+    _builder_1.append(_name_1, "");
+    _builder_1.append(";");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.newLine();
+    _builder_1.append("@");
+    String _simpleName = CheckMutableEnumerationTypeDeclaration.class.getSimpleName();
+    _builder_1.append(_simpleName, "");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public enum Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("A;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

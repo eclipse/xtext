@@ -14,5 +14,13 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface MutableEnumerationValueDeclaration extends MutableMemberDeclaration, EnumerationValueDeclaration {
+	
+	/**
+	 * It is not possible to change visibility of enumeration value.
+	 * @exception UnsupportedOperationException always
+	 */
+	public void setVisibility(Visibility visibility);
+	
+	public MutableEnumerationTypeDeclaration getDeclaringType();
 
 }

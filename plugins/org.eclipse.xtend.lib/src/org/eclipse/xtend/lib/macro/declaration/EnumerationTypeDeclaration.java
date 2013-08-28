@@ -14,4 +14,16 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface EnumerationTypeDeclaration extends TypeDeclaration {
+
+	/**
+	 * @return the values directly declared and contained in the enumeration type declaration
+	 */
+	Iterable<? extends EnumerationValueDeclaration> getDeclaredValues();
+	
+	/**
+	 * @param name of the feature
+	 * @return the declared value with the given name or <code>null</code> of no such value exists.
+	 */
+	EnumerationValueDeclaration findDeclaredValue(String name);
+	
 }

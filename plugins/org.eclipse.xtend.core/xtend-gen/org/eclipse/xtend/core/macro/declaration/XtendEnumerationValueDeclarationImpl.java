@@ -9,7 +9,9 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 
 @SuppressWarnings("all")
 public class XtendEnumerationValueDeclarationImpl extends XtendMemberDeclarationImpl<XtendEnumLiteral> implements EnumerationValueDeclaration {
@@ -17,5 +19,10 @@ public class XtendEnumerationValueDeclarationImpl extends XtendMemberDeclaration
     XtendEnumLiteral _delegate = this.getDelegate();
     String _name = _delegate.getName();
     return _name;
+  }
+  
+  public EnumerationTypeDeclaration getDeclaringType() {
+    TypeDeclaration _declaringType = super.getDeclaringType();
+    return ((EnumerationTypeDeclaration) _declaringType);
   }
 }
