@@ -1,0 +1,671 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Five simple steps to your JVM language</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="JvmDomainmodel"></a>
+<h1>Five simple steps to your JVM language</h1>
+<p>
+In this tutorial we will basically implement the domain model language again, but this time we will make use of
+the special JVM support shipped with Xtext 2.x. This kind of language really is a sweet spot for DSLs,
+so feel free to use this as a blueprint and add your project specific features later on.
+</p>
+<p>
+The revised domain model language supports expressions and cross links to Java types. It is directly
+translated to Java source code. The syntax should look very familiar. Here is an example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;java.util.List<br/>
+<br/>
+<span class="keyword">package</span>&nbsp;my.model&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Person&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;firstName:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;address&nbsp;:&nbsp;Address<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">op</span>&nbsp;getFullName()&nbsp;:&nbsp;String&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;firstName&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;name;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">op</span>&nbsp;getFriendsSortedByFullName()&nbsp;:&nbsp;List&lt;Person&gt;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;friends.sortBy[&nbsp;f&nbsp;|&nbsp;f.fullName&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Address&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;street:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;zip:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;city:&nbsp;String<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+As you can see, it supports all kinds of advanced features such as Java generics and full expressions
+even including lambda expressions. Don&apos;t panic you will not have to implement these concepts on your own but will
+reuse a lot of helpful infrastructure to build the language.
+</p>
+<p>
+We will now walk through the <em>five!</em> little steps needed to get this language fully working including
+its compiler.
+</p>
+<p>
+After you have installed Xtext on your machine, start Eclipse and set up a fresh workspace.
+</p>
+<a name="JvmDomainmodel_7"></a>
+<h2>Step One: Create A New Xtext Project</h2>
+<p>
+In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
+</p>
+<p>
+  <em>File -&gt; New -&gt; Project...  -&gt; Xtext -&gt; Xtext Project</em>
+</p>
+<p>
+Choose a meaningful project name, language name and file extension, e.g.
+</p>
+<p>
+<table>
+<tr>
+<td>
+<em>Main project name:</em>
+</td>
+<td>
+org.example.domainmodel
+</td>
+</tr>
+<tr>
+<td>
+<em>Language name:</em>
+</td>
+<td>
+org.example.domainmodel.Domainmodel
+</td>
+</tr>
+<tr>
+<td>
+<em>DSL-File extension:</em>
+</td>
+<td>
+dmodel
+</td>
+</tr>
+</table>
+</p>
+<p>
+Click on <em>Finish</em> to create the projects. 
+</p>
+<p>
+<div class="image" >
+<img src="images/30min_wizard.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+After you have successfully finished the wizard, you will find three new projects in your workspace.
+</p>
+<p>
+<table>
+<tr>
+<td>
+org.example.domainmodel
+</td>
+<td>
+Contains the grammar definition and all runtime components (parser, lexer, linker, validation, etc.)
+</td>
+</tr>
+<tr>
+<td>
+org.example.domainmodel.tests
+</td>
+<td>
+Unit tests go here.
+</td>
+</tr>
+<tr>
+<td>
+org.example.domainmodel.ui
+</td>
+<td>
+The Eclipse editor and all the other workbench related functionality.
+</td>
+</tr>
+</table>
+</p>
+<p>
+<div class="image" >
+<img src="images/30min_initialprojectlayout.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<a name="JvmDomainmodel_8"></a>
+<h2>Step Two: Write the Grammar</h2>
+<p>
+The wizard will automatically open the grammar file 
+<em>Domainmodel.xtext</em> in the editor. As you can see it already contains a simple <em>Hello World</em> grammar:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<br/>
+Model:<br/>
+&nbsp;&nbsp;greetings+=Greeting*;<br/>
+&nbsp;&nbsp;<br/>
+Greeting:<br/>
+&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;
+</p>
+</div>
+</div>
+</p>
+<p>
+Please replace that grammar definition with the one for our language:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<br/>
+Domainmodel:<br/>
+&nbsp;&nbsp;importSection=XImportSection?<br/>
+&nbsp;&nbsp;elements+=AbstractElement*;<br/>
+<br/>
+AbstractElement:<br/>
+&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity;<br/>
+<br/>
+PackageDeclaration:<br/>
+&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name=QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;elements+=AbstractElement*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
+<br/>
+Entity:<br/>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ValidID&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=JvmTypeReference)?&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;features+=Feature*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
+<br/>
+Feature:<br/>
+&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation;<br/>
+<br/>
+Property:<br/>
+&nbsp;&nbsp;name=ValidID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference;<br/>
+<br/>
+Operation:<br/>
+&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>(params+=FullJvmFormalParameter&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?<span class="string">&apos;)&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s have a look at what the different grammar constructs mean:
+</p>
+<p>
+<ol>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase
+		</p>
+		</div>
+		</div>
+		
+		    The first thing to note is that instead of inheriting from the usual <em>org.eclipse.xtext.common.Terminals</em>
+		    grammar, we make use of <em>org.eclipse.xtext.xbase.Xbase</em>. 
+		    
+		    Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Domainmodel:<br/>
+		&nbsp;&nbsp;importSection=XImportSection?<br/>
+		&nbsp;&nbsp;elements+=AbstractElement*;
+		</p>
+		</div>
+		</div>
+		
+		    
+		    The first rule in a grammar is always used as the entry or start rule.  
+		    
+		    It says that a <em>Domainmodel</em> contains an optional import section and an arbitrary number (<span class="inlinecode">*</span>) of <em>AbstractElement</em>s which will be added (<span class="inlinecode">+=</span>)
+		    to a feature called <span class="inlinecode">elements</span>. The concept of <em>XImportSection</em> is part of <em>org.eclipse.xtext.xbase.Xbase</em>
+		    and comes with tool support and syntax like you know it from Java.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		AbstractElement:<br/>
+		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity;
+		</p>
+		</div>
+		</div>
+		
+		    The rule <em>AbstractElement</em> delegates to either the rule <em>PackageDeclaration</em> or the rule <em>Entity</em>.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		PackageDeclaration:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name=QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;elements+=AbstractElement*<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
+		</p>
+		</div>
+		</div>
+		
+		    A <em>PackageDeclaration</em> is used to declare a name space which can again contain any number
+		    of <em>AbstractElement</em>s.
+		    
+		    Xtext has built-in support for qualified names and scoping based on the hierarchy
+		    of the produced model. The default
+		    implementation will add the package names as the prefix to contained entities and nested packages.
+		    The qualified name of an <em>Entity</em> &apos;Baz&apos; which is contained in a <em>PackageDeclaration</em> &apos;foo.bar&apos;
+		    will be &apos;foo.bar.Baz&apos;. In case you do not like the default behavior you will need
+		    to use a different implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a>.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Entity:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ValidID&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=JvmTypeReference)?&nbsp;<span class="string">&apos;{&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;features+=Feature*<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
+		</p>
+		</div>
+		</div>
+		
+		    The rule <em>Entity</em> starts with the definition of a keyword followed by a name.
+		    
+		    The <em>extends</em> clause which is parenthesized and optional (note the trailing <span class="inlinecode">?</span>) makes use of the rule
+		    <em>JvmTypeReference</em> which is defined in a super grammar. <em>JvmTypeReference</em> defines the
+		    syntax for full Java-like type names. That is everything from simple names, over fully qualified
+		    names to fully-fledged generics, including wildcards, lower bounds and upper bounds.
+		    
+		    Finally between curly braces there can be any number of <em>Features</em>, which leads us to the next rule.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Feature:<br/>
+		&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation;
+		</p>
+		</div>
+		</div>
+		
+		    
+		    The rule <em>Feature</em> delegates to either a <em>Property</em> or an <em>Operation</em>.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Property:<br/>
+		&nbsp;&nbsp;name=ValidID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference;
+		</p>
+		</div>
+		</div>
+		
+		    A <em>Property</em> has a name and makes again use of the inherited rule <em>JvmTypeReference</em>.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Operation:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<br/>
+		&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>(params+=FullJvmFormalParameter&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?<span class="string">&apos;)&apos;</span><br/>
+		&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
+		&nbsp;&nbsp;body=XBlockExpression;
+		</p>
+		</div>
+		</div>
+		
+		    <em>Operation</em>s also have a signature as expected. Note that also for formal parameters we can
+		    reuse a rule from the super grammar.
+		    The <em>Operation</em>&apos;s body, that is the actual implementation is defined by the rule <em>XBlockExpression</em>
+		    which is one of the most often used entry rules from Xbase. A block consist of any
+		    number of expressions between curly braces such as:
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		{<br/>
+		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"Hello&nbsp;World"</span>&nbsp;+&nbsp;<span class="string">"!"</span><br/>
+		}
+		</p>
+		</div>
+		</div>
+		
+	</li>
+</ol>
+</p>
+<a name="JvmDomainmodel_9"></a>
+<h2>Step Three: Generate Language Artifacts</h2>
+<p>
+Now that we have the grammar in place and defined we need to execute the code generator that will derive the
+various language components. To do so right click in the grammar editor. From the opened context menu, choose
+</p>
+<p>
+  <em>Run As -&gt; Generate Xtext Artifacts</em>.
+</p>
+<p>
+This will trigger the Xtext language generator. It generates the parser and 
+serializer and some additional infrastructure code. You will see its logging 
+messages in the Console View. 
+</p>
+<p>
+<div class="image" >
+<img src="images/JvmTutorial_RunGenerator.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<a name="JvmDomainmodel_10"></a>
+<h2>Step Four: Define the Mapping to JVM Concepts</h2>
+<p>
+The syntax alone is not enough to make the language work. We need to map the domain specific concepts to some other language
+in order to tell Xtext how it is executed. Usually you define a code generator or an interpreter for that matter,
+but languages using Xbase can omit this step and make use of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a>.
+</p>
+<p>
+The idea is that you translate your language concepts to any number of Java types (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmDeclaredType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType" >JvmDeclaredType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java" title="View Source Code" >(src)</a>). 
+Such a type can be a Java class, Java interface, Java annotation type or a Java enum and may contain
+any valid members. In the end you as a language developer are responsible to create a correct model
+according to the Java language.
+</p>
+<p>
+By mapping your language concepts to Java elements, you implicitly tell Xtext in what kind of scopes
+the various expressions live and what return types are expected from them. Xtext 2.x also comes with
+a code generator which can translate that Java model into readable Java code, including the expressions.
+</p>
+<p>
+If you have already triggered the &apos;Generate Xtext Artifacts&apos; action, you should find a stub called 
+<em>org/example/domainmodel/jvmmodel/DomainmodelJvmModelInferrer.xtend</em>
+in the src folder. Please replace its contents with the following :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;org.example.domainmodel.jvmmodel<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;com.google.inject.Inject<br/>
+<span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Entity<br/>
+<span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Operation<br/>
+<span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Property<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.naming.IQualifiedNameProvider<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder<br/>
+<br/>
+<span class="keyword">class</span>&nbsp;DomainmodelJvmModelInferrer&nbsp;<span class="keyword">extends</span>&nbsp;AbstractModelInferrer&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="comment">/**<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;a&nbsp;builder&nbsp;API&nbsp;to&nbsp;programmatically&nbsp;create&nbsp;Jvm&nbsp;elements&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;readable&nbsp;way.<br/>
+&nbsp;&nbsp;&nbsp;*/</span><br/>
+&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;JvmTypesBuilder<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IJvmDeclaredTypeAcceptor&nbsp;acceptor,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;element.toClass(&nbsp;element.fullyQualifiedName&nbsp;)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;).initializeLater&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;element.documentation<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(element.superType&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;element.superType.cloneWithProxies<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;feature&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;:&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operation&nbsp;:&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toMethod(feature.name,&nbsp;feature.type)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(p&nbsp;:&nbsp;feature.params)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;p.toParameter(p.name,&nbsp;p.parameterType)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the involved API
+for details, especially the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a>).
+</p>
+<p>
+<ol>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{
+		</p>
+		</div>
+		</div>
+		
+		    Using the dispatch keyword makes sure that the method is called for instances of type <em>Entity</em>
+		    only. Have a look at <a href="http://www.eclipse.org/xtend/documentation.html#polymorphicDispatch">the Xtend documentation</a> on polymorphic dispatch to 
+		    understand Xtend&apos;s dispatch functions. Extending <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer" >AbstractModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java" title="View Source Code" >(src)</a> makes 
+		    sure we don&apos;t have to walk the syntax model on our own.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;&nbsp;<br/>
+		...
+		</p>
+		</div>
+		</div>
+		
+		  Every <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmDeclaredType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType" >JvmDeclaredType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java" title="View Source Code" >(src)</a> you create in the model inference needs
+		  to be passed to the <em>acceptor</em> in order to get recognized.
+		  
+		  The extension method <em>toClass</em> comes from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a>.
+		  That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
+		  
+		  Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
+		  to the implicit variable <span class="inlinecode"><span class="keyword">it</span></span>. Therein you can further initialize the created Java element. 
+	</li>
+	<li>
+		
+		    <span class="inlinecode">).initializeLater&nbsp;[</span>
+		    The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
+		    and be passed to the <em>acceptor</em>.
+		    The types&apos; features are created in the second phase. The actions in this phase are specified in the lambda
+		    expression passed to <span class="inlinecode">initializeLater</span>. Think of it as an anonymous class.
+	</li>
+	<li>
+		
+		    <span class="inlinecode">documentation&nbsp;=&nbsp;element.documentation</span>
+		    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
+		    to an invocation of the method 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#setDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/common/types/JvmIdentifiableElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmIdentifiableElement" >JvmIdentifiableElement</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java" title="View Source Code" >(src)</a> element,String documentation)</em>
+		    and <span class="inlinecode">element.documentation</span> is in fact calling the extension method  
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#getDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> element)</em>
+		    
+		    Xtend&apos;s extension methods are explained in detail on the <a href="http://www.eclipse.org/xtend/documentation.html#extensionMethods">Xtend website</a>.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">if</span>&nbsp;(element.superType&nbsp;!=&nbsp;null)<br/>
+		&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;entity.superType.cloneWithProxies
+		</p>
+		</div>
+		</div>
+		
+		    Set the <em>superType</em> on the inferred element. Note that we have to clone the type reference from
+		    the <em>element.superType</em>. If we did not do that, the type reference would be automatically removed 
+		    from the <em>element</em>, as <em>superType</em> is an EMF containment reference.   
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;feature&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;:&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Operation&nbsp;:&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;}<br/>
+		}
+		</p>
+		</div>
+		</div>
+		
+		    When iterating over a list of heterogeneous types, the switch expression with its type guards comes in handy.
+		    If <em>feature</em> is of type <em>Property</em> the first block is executed. If it is an <em>Operation</em> the
+		    second block is executed. Note that the variable <em>feature</em> will be implicitly casted to the respective
+		    type within the blocks.
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Property&nbsp;:&nbsp;{<br/>
+		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
+		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
+		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
+		}
+		</p>
+		</div>
+		</div>
+		
+		    For each <em>Property</em> we create a field as well as a corresponding getter and setter.  
+	</li>
+	<li>
+		
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Operation&nbsp;:&nbsp;{<br/>
+		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toMethod(feature.name,&nbsp;feature.type)&nbsp;[<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(p&nbsp;:&nbsp;feature.params)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;p.toParameter(p.name,&nbsp;p.parameterType)<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
+		&nbsp;&nbsp;]<br/>
+		}
+		</p>
+		</div>
+		</div>
+		
+		    
+		    <em>Operations</em> are being mapped to a corresponding Java method. The documentation is translated and
+		    the parameters are added within the initializer.
+		    
+		    The line <span class="inlinecode">body&nbsp;=&nbsp;feature.body</span> registers the <em>Operation</em>&apos;s expression as the body of
+		    the newly created Java method. This defines the scope of the expression. The frameworks deduces the
+		    visible fields and parameters as well as the expected return type from that information.
+	</li>
+</ol>
+</p>
+<a name="JvmDomainmodel_11"></a>
+<h2>Step Five : Try the Editor!</h2>
+<p>
+We are now able to test the IDE integration, by spawning a new Eclipse using our plug-ins. To do so just
+use the launch shortcut called "Launch Runtime Eclipse", clicking on the green play button in the tool
+bar.
+</p>
+<p>
+<div class="image" >
+<img src="images/JvmTutorial_LaunchEditor.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+In the new workbench, create a Java project (<em>File -&gt; New -&gt; Project...  -&gt; Java Project</em>.
+Xbase relies on a small runtime library on the class path. To add this, right-click on the project and
+go to <em>Java Build Path -&gt; Libraries -&gt; Add Library</em> and choose <em>Xtend Library</em>. Then create a new file 
+with the file extension you chose in the beginning (<em>*.dmodel</em>) in the source folder of the Java project.
+This will open the generated entity editor. Try it and discover the rich functionality it provides. You 
+should also have a look at the preferences of your language to find out what can be individually configured 
+to your users needs.
+</p>
+<p>
+Have fun!
+</p>
+<p>
+<div class="image" >
+<img src="images/JvmTutorial_Editor.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Migrating from Xtext 0.7.x to 1.0</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="migrating_from_0_7"></a>
+<h1>Migrating from Xtext 0.7.x to 1.0</h1>
+<p>
+For the sake of completeness, here is how you migrate from Xtext 0.7.x to Xtext 1.0, so you might do
+a migration to 2.0 in two steps. Nevertheless, there have been so many new features and changes that 
+it probably makes more sense to just copy the grammar and start with a new Xtext 2.0 project. The grammar 
+language is fully backward compatible. 
+</p>
+<a name="migrating_from_0_7_2"></a>
+<h2>Migrating Step By Step</h2>
+<p>
+Once again, you should make sure that no old plug-ins are in your target platform. Some plug-ins from 
+Xtext 0.7.x have been merged and do no longer exist. 
+</p>
+<p>
+<em>Tip: The following steps try to use the Eclipse compiler to spot any source-incompatible changes 
+while fixing them with only a few well described user actions. Doing these steps in another order 
+causes most likely a higher effort.</em>
+</p>
+<a name="migrating_from_0_7_2_3"></a>
+<h3>Update the Plug-in Dependencies and Import Statements</h3>
+<p>
+You should update the constraints from version <em>0.7.x</em> to <em>[1.0.0,2.0.0)</em> in your manifest files 
+if you specified any concrete versions. Make sure that your <em>dsl.ui</em>-projects do not refer to the 
+plug-in <em>org.eclipse.xtext.ui.common</em> or <em>org.eclipse.xtext.ui.core</em> but to <em>org.eclipse.xtext.ui</em> 
+instead. The arguably easiest way is a global text-based search and replace across the manifest files. 
+The bundle <em>org.eclipse.xtext.log4j</em> is obsolete as well. The generator will create <em>import-package</em> 
+entries in the manifests later on.
+</p>
+<p>
+The next step is to fix the import statements in your classes to match the refactored naming scheme 
+in Xtext. Perform a global search for <span class="inlinecode"><span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.common.</span> and 
+<span class="inlinecode">org.eclipse.xtext.ui.core.</span> and replace the matches with <span class="inlinecode"><span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.</span>. 
+This fixes most of the problems in the manually written code. 
+</p>
+<a name="migrating_from_0_7_2_4"></a>
+<h3>Rename the Packages in the dsl.ui-Plug-in</h3>
+<p>
+We changed the naming pattern for artifacts in the <em>dsl.ui</em>-plug-in to match the OSGi conventions. 
+The easiest way to update your existing projects is to apply a "Rename Package" refactoring on the 
+packages in the <em>src</em>- and <em>src-gen</em> folder <em>before</em> you re-run the workflow that regenerates your 
+language. Make sure you ticked "Rename subpackages" in the rename dialog. It is error-prone to enable the 
+search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, 
+it is important to perform the rename operation in the <em>src-gen</em> folder, too. This ensures that the 
+references in your manually written code are properly updated.
+</p>
+<a name="migrating_from_0_7_2_5"></a>
+<h3>Update the Workflow</h3>
+<p>
+The <em>JavaScopingFragment</em> does no longer exist. It has been superseded by the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment" >ImportURIScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.java" title="View Source Code" >(src)</a> 
+in combination with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.exporting.SimpleNamesFragment" >SimpleNamesFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.java" title="View Source Code" >(src)</a>.
+Please replace  
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&lt;fragment&nbsp;class=<br/>
+&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.generator.scoping.JavaScopingFragment"</span>/&gt;
+</p>
+</div>
+</div>
+</p>
+<p>
+with
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&lt;fragment&nbsp;class=<br/>
+&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"</span>/&gt;<br/>
+&lt;fragment&nbsp;class=<br/>
+&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.generator.exporting.SimpleNamesFragment"</span>/&gt;
+</p>
+</div>
+</div>
+</p>
+<p>
+The <em>PackratParserFragment</em> has been abandoned as well. It is save to remove the reference to that one if it is activated 
+in your workflow. After you&apos;ve changed your workflow, it should be possible to regenerate your language without any 
+errors in the console. It is ok to have compilation errors prior to executing the workflow.
+</p>
+<a name="migrating_from_0_7_2_6"></a>
+<h3>MANIFEST.MF and plugin.xml</h3>
+<p>
+The previous rename package refactoring updated most of the entries in the <em>MANIFEST.MF</em> and and some entries in 
+the <em>plugin.xml</em>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems 
+in the manifest files but it is unlikely that it will spot the erroneous references in the <em>plugin.xml</em>.
+</p>
+<p>
+<ul>
+	<li>
+		
+		    In the generated UI plug-in&apos;s <em>MANIFEST.MF</em>, remove the package exports of no longer 
+		    existing packages and make sure the bundle activator points to the newly generated 
+		    one (with <em>.ui.</em> in its package name).  
+	</li>
+	<li>
+		
+		    It was already mentioned that the plug-ins <em>org.eclipse.xtext.ui.core</em> and <em>org.eclipse.xtext.ui.common</em> 
+		    have been merged into a new single plug-in <em>org.eclipse.xtext.ui</em>. The same happened to the respective 
+		    Java packages. Change eventually remaining bundle-dependencies in all manifests.
+	</li>
+	<li>
+		
+		    The plug-in <em>org.eclipse.xtext.log4j</em> no longer exists. We use a package import of <em>org.apache.log4j</em> instead. 
+		    Also remove the buddy registration. 
+	</li>
+	<li>
+		
+		    Due to renamed packages, you have to fix all references to classes therein in the <em>plugin.xml</em>. 
+		    A comparison with the <em>plugin.xml_gen</em> will be a great help. If you haven&apos;t added a lot manually, 
+		    consider merging these into the generated version instead of going the other way around. Note that 
+		    warnings in the <em>plugin.xml</em> can be considered to be real errors most of the time.
+		    Make sure the <em>MyDslExecutableExtensionFactory</em> has the <em>.ui.</em> package prefix.
+		    Classes from <em>org.eclipse.xtext.ui.common</em> and <em>org.eclipse.xtext.ui.core</em> are now usually 
+		    somewhere in <em>org.eclipse.xtext.ui</em>. They are also referenced by the 
+		    <em>MyDslExecutableExtensionFactory</em> and thus not covered by the validation of the <em>plugin.xml</em>.
+	</li>
+	<li>
+		
+		    A number of new features are being registered in the <em>plugin.xml</em>, e.g. <em>Find references</em>, <em>Quick Outline</em>, 
+		    and <em>Quick Fixes</em>. You can enable them by manually copying the respective entries from <em>plugin.xml_gen</em> to <em>plugin.xml</em>.
+	</li>
+	<li>
+		
+		    To run MWE2 workflows later on, you must change the plug-in dependencies from 
+		    <em>org.eclipse.emf.mwe.core</em> to <em>org.eclipse.emf.mwe2.launch</em> in your manifest. Optional resolution is fine.
+	</li>
+</ul>
+</p>
+<a name="migrating_from_0_7_2_7"></a>
+<h3>Noteworthy API Changes</h3>
+<p>
+The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually. 
+At least one new class has appeared in your <em>src</em>-folder of the <em>ui</em> plug-in. there will now be a 
+<em>MyDslStandaloneSetup</em> inheriting form the generated <em>MyDslStandaloneSetupGenerated</em> to allow customization.
+</p>
+<p>
+You will face a couple of compilation problems due to changes in the API. Here&apos;s a list of the most prominent changes. 
+It is usually only necessary to change your code, if you face any compilation problems.
+</p>
+<p>
+<ul>
+	<li>
+		
+		    The method <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider.getScope(EObject,EClass)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> has been 
+		    removed. Use <span class="inlinecode">getScope(EObject,EReference)</span> instead. 
+	</li>
+	<li>
+		
+		    Renamed <em>DefaultScopeProvider</em> to <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider" >SimpleLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.java" title="View Source Code" >(src)</a>. There have been 
+		    further significant changes in the scoping API that allow for optimized implementations. Consult the 
+		    <a href="050-heading-runtime.html#scoping" title="Go to &quot;Scoping&quot;">section on scoping</a> for details.
+	</li>
+	<li>
+		
+		    The return type of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/AbstractInjectableValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractInjectableValidator" >AbstractInjectableValidator.getEPackages()</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractInjectableValidator.java" title="View Source Code" >(src)</a> was 
+		    changed from <span class="inlinecode">List&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;EPackage&gt;</span> to <span class="inlinecode">List&lt;EPackage&gt;</span>.
+	</li>
+	<li>
+		
+		    The parser interfaces now use <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/Reader.html" title="View JavaDoc"><abbr title="java.io.Reader" >Reader</abbr></a> instead of <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/InputStream.html" title="View JavaDoc"><abbr title="java.io.InputStream" >InputStream</abbr></a> to explicitly address 
+		    encoding. Have a look at the <a href="050-heading-runtime.html#encoding" title="Go to &quot;Encoding in Xtext&quot;">section on encoding</a> for details.
+	</li>
+	<li>
+		
+		    The handling of <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.ILabelProvider" >ILabelProvider</abbr></a> in various contexts has been refactored. 
+		    The former base class <em>DefaultLabelProvider</em> no longer exists. Use the 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider" >DefaultEObjectLabelProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java" title="View Source Code" >(src)</a> instead. 
+		    See the <a href="120-heading-UI.html#labelProvider" title="Go to &quot;Label Provider&quot;">section on label providers</a> for details.
+	</li>
+	<li>
+		
+		    We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate.
+	</li>
+	<li>
+		
+		    The runtime and UI modules have separate base classes <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/service/DefaultRuntimeModule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.service.DefaultRuntimeModule" >DefaultRuntimeModule</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java" title="View Source Code" >(src)</a> and 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/DefaultUiModule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.DefaultUiModule" >DefaultUiModule</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/DefaultUiModule.java" title="View Source Code" >(src)</a> now. We use Guice&apos;s module overrides to combine them with the newly 
+		    introduced <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/shared/internal/SharedModule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.shared.internal.SharedModule" >SharedModule</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java" title="View Source Code" >(src)</a>. You have to add a constructor the your 
+		    <em>MyDslUiModule</em> that takes an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ui/plugin/AbstractUIPlugin.html" title="View JavaDoc"><abbr title="org.eclipse.ui.plugin.AbstractUIPlugin" >AbstractUIPlugin</abbr></a> as argument and pass that one to 
+		    the super constructor. <em>Tip: There is an Eclipse quick fix available for that one.</em>
+	</li>
+	<li>
+		
+		    The interfaces <em>ILexicalHighlightigConfiguration</em> and <em>ISemanticHighlightingConfiguration</em> have been merged into 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="View Source Code" >(src)</a>.
+	</li>
+	<li>
+		
+		    The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/templates/DefaultTemplateProposalProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider" >DefaultTemplateProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/DefaultTemplateProposalProvider.java" title="View Source Code" >(src)</a> takes an additional, injectable 
+		    constructor parameter of type <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/templates/ContextTypeIdHelper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper" >ContextTypeIdHelper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/ContextTypeIdHelper.java" title="View Source Code" >(src)</a>.
+	</li>
+	<li>
+		
+		    The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper" >HyperlinkHelper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java" title="View Source Code" >(src)</a> uses field injection instead of constructor 
+		    injection. The method <span class="inlinecode">createHyperlinksByOffset(..)</span> should be overridden instead of the former 
+		    <span class="inlinecode">findCrossLinkedEObject</span>.
+	</li>
+	<li>
+		
+		    The API to skip a node in the outline has changed. Instead of returning the <em>HIDDEN_NODE</em> you&apos;ll have to implement 
+		    <span class="inlinecode"><span class="keyword">boolean</span>&nbsp;consumeNode(MyType)</span> and return <em>false</em>.
+		    
+		    <em>Note: The outline has been re-implemented in Xtext 2.0</em>.
+	</li>
+	<li>
+		
+		    The <em>Readonly*Storage</em> implementations have been removed. There is a new API to open editors for objects with a 
+		    given URI. Please use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/editor/IURIEditorOpener.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.IURIEditorOpener" >IURIEditorOpener</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/IURIEditorOpener.java" title="View Source Code" >(src)</a> to create an editor or the 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/resource/IStorage2UriMapper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.resource.IStorage2UriMapper" >IStorage2UriMapper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/resource/IStorage2UriMapper.java" title="View Source Code" >(src)</a> to obtain an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/resources/IStorage.html" title="View JavaDoc"><abbr title="org.eclipse.core.resources.IStorage" >IStorage</abbr></a> 
+		    for a given <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a>.
+	</li>
+	<li>
+		
+		    The interfaces <em>IStateAccess</em> and <em>IEObjectHandle</em> have been moved along with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/util/concurrent/IUnitOfWork.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.util.concurrent.IUnitOfWork" >IUnitOfWork</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/concurrent/IUnitOfWork.java" title="View Source Code" >(src)</a> 
+		    to the package <em>org.eclipse.xtext.util.concurrent</em>.
+		    
+		    <em>Note: IStateAccess was split into IReadAccess and IWriteAccess in Xtext 2.0.</em>
+	</li>
+	<li>
+		
+		    The <em>ValidationJobFactory</em> is gone. Please implement a custom <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/validation/IResourceValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.IResourceValidator" >IResourceValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IResourceValidator.java" title="View Source Code" >(src)</a> 
+		    instead.
+	</li>
+	<li>
+		
+		    The grammar elements <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/Alternatives.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.Alternatives" >Alternatives</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/Alternatives.java" title="View Source Code" >(src)</a> and <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/Group.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.Group" >Group</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/Group.java" title="View Source Code" >(src)</a> have a new common 
+		    super type <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/CompoundElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.CompoundElement" >CompoundElement</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/CompoundElement.java" title="View Source Code" >(src)</a>. The methods <span class="inlinecode">getGroups()</span> and <span class="inlinecode">getTokens()</span> have been refactored to <span class="inlinecode">getElements()</span>.
+	</li>
+	<li>
+		
+		    Completion proposals take a <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr></a> instead of a plain string as display string.
+	</li>
+	<li>
+		
+		    The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/label/AbstractLabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.AbstractLabelProvider" >AbstractLabelProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java" title="View Source Code" >(src)</a> does no longer expose its 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/IImageHelper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.IImageHelper" >IImageHelper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/IImageHelper.java" title="View Source Code" >(src)</a>. Use <span class="inlinecode">convertToImage</span> instead or inject your own <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/ui/IImageHelper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.IImageHelper" >IImageHelper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/IImageHelper.java" title="View Source Code" >(src)</a>.
+	</li>
+	<li>
+		
+		    The implementation-classes from <em>org.eclipse.xtext.index</em> were superseded by the builder infrastructure. Use the 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment" >QualifiedNamesFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.java" title="View Source Code" >(src)</a> and the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a> 
+		    instead of the <em>ImportedNamespacesScopingFragment</em>. Please refer to the <a href="050-heading-runtime.html#index_based" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Class Path Based)&quot;">section about the builder infrastructure</a> for details.
+	</li>
+	<li>
+		
+		    All the Xtend-based fragments were removed.
+	</li>
+	<li>
+		
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/linking/ILinkingService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.ILinkingService" >ILinkingService.getLinkText</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java" title="View Source Code" >(src)</a> was removed. Have a look at the 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/linking/impl/LinkingHelper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.impl.LinkingHelper" >LinkingHelper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/LinkingHelper.java" title="View Source Code" >(src)</a> and the 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/parsetree/reconstr/impl/CrossReferenceSerializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer" >CrossReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/CrossReferenceSerializer.java" title="View Source Code" >(src)</a> if you relied on this method.
+	</li>
+	<li>
+		
+		    The <em>SerializerUtil</em> was renamed to <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.Serializer" >Serializer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a>. There were other 
+		    heavy refactorings that involved the serializer and its components like e.g. the 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.ITransientValueService" >ITransientValueService</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java" title="View Source Code" >(src)</a> but it should be pretty straight forward to 
+		    migrate existing client code.
+	</li>
+	<li>
+		
+		    The method-signatures of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/resource/IFragmentProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IFragmentProvider" >IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a> have changed. The <a href="050-heading-runtime.html#fragmentProvider" title="Go to &quot;Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)&quot;">documentation</a> 
+		    will give a clue on how to update existing implementations.
+	</li>
+	<li>
+		
+		    Some static methods were removed from utility classes such as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtext/EcoreUtil2.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.EcoreUtil2" >EcoreUtil2</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java" title="View Source Code" >(src)</a> and <em>ParsetreeUtil</em> 
+		    in favor of more sophisticated implementations.
+	</li>
+</ul>
+
+</p>
+</body>
+</html>

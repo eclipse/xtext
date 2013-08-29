@@ -1,0 +1,965 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>MWE2</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="MWE2"></a>
+<h1>MWE2</h1>
+<p>
+The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards 
+compatible implementation of the Modeling Workflow Engine (MWE). It 
+is a declarative, externally configurable generator engine. Users 
+can describe arbitrary object compositions by means of a simple, 
+concise syntax that allows to declare object instances, attribute 
+values and references. One use case - that&apos;s where the name had its 
+origins - is the definition of workflows. Such a workflow consists 
+usually of a number of components that interact with each other. 
+There are components to read EMF resources, to perform 
+operations (transformations) on them and to write them back or to generate 
+any number of other artifacts out of the information. Workflows are 
+typically executed in a single JVM. However there are no constraints 
+the prevent implementors to provide components that spawn multiple 
+threads or new processes.
+</p>
+<a name="MWE2Exampe"></a>
+<h2>Examples</h2>
+<p>
+Let&apos;s start with a couple of examples to demonstrate some usage 
+scenarios for MWE2. The first example is a simple <span class="inlinecode">HelloWorld</span> 
+module that does nothing but print a message to standard out. The 
+second module is assembled of three components that read an Ecore 
+file, transform the contained classifier-names to upper-case and 
+serialize the resource back to a new file. The last example uses 
+the life-cycle methods of the <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> 
+to print the execution time of the workflow.
+</p>
+<a name="MWE2HelloWorld"></a>
+<h3>The Simplest Workflow</h3>
+<p>
+The arguably shortest MWE2 module may look like the following 
+snippet:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;<br/>
+<br/>
+SayHello&nbsp;{<br/>
+&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+It configures a very simple workflow component with a message 
+that should be printed to <span class="inlinecode">System.out</span> when the workflow is 
+executed. The module begins with a declaration of its name. It must 
+fulfill the Java conventions for fully qualified class-names. That&apos;s 
+why the module <span class="inlinecode">HelloWorld</span> has to be placed into the default 
+package of a Java source folder. The second element in the module is 
+the class-name <span class="inlinecode">SayHello</span> which introduces the root element of the 
+module. The interpreter will create an instance of the given 
+type and configure it as declared between the curly braces. E.g. the 
+assignment <span class="inlinecode">message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span></span> in the module will be 
+interpreted as an invocation of the <span class="inlinecode">setMessage(String)</span> on the 
+instantiated object. As one can easily imagine, the implementation 
+of the class <span class="inlinecode">SayHello</span> looks straight forward:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SayHello&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMessage(String&nbsp;message)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.message&nbsp;=&nbsp;message;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getMessage()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;message;<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(getMessage());<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+It looks like a simple POJO and that&apos;s the philosophy behind MWE2. 
+It is easily possible to assemble completely independent objects in 
+a declarative manner. To make the workflow executable with the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java" title="View Source Code" >(src)</a>, the component 
+<span class="inlinecode">SayHello</span> must be nested in a root 
+workflow:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;<br/>
+<br/>
+Workflow&nbsp;{<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> 
+is implicitly imported in MWE2 modules to make the the modules more 
+concise. The execution result of this workflow will be revealed 
+after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as 
+</p>
+<p>
+<span class="inlinecode">Hello&nbsp;World!</span>
+</p>
+<a name="MWE2SimpleTransformation"></a>
+<h3>A Simple Transformation</h3>
+<p>
+The following workflow solves the exemplary task to rename every 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> in an <em>*.ecore</em> file.
+It consists of three components that read, modify and write the model file:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;Renamer<br/>
+Workflow&nbsp;{<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceReader&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"model.ecore"</span><br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;RenamingTransformer&nbsp;{}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceWriter&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"uppercaseModel.ecore"</span><br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The implementation of these components is surprisingly simple. It is easily possible to create
+own components even for minor operations to automate a process.
+</p>
+<p>
+The <span class="inlinecode">ResourceReader</span> simply reads the file with the given 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a> and stores it in a so called
+<em>slot</em> of the workflow context. A slot can be understood as a dictionary or map-entry.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceReader&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ResourceSet&nbsp;resourceSet&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ResourceSetImpl();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;fileURI&nbsp;=&nbsp;URI.createFileURI(uri);&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(fileURI,&nbsp;<span class="keyword">true</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The actual transformer takes the model from the slot and modifies it. It simply iterates the content
+of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> and sets its name. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;RenamingTransformer&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;toLowerCase&nbsp;=&nbsp;<span class="keyword">false</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil.resolveAll(resource);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Object&gt;&nbsp;contents&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;<span class="keyword">true</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EClassifier&gt;&nbsp;iter&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterators.filter(contents,&nbsp;EClassifier.<span class="keyword">class</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(iter.hasNext())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClassifier&nbsp;classifier&nbsp;=&nbsp;(EClassifier)&nbsp;iter.next();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classifier.setName(isToLowerCase()&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;classifier.getName().toLowerCase()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;classifier.getName().toUpperCase());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setToLowerCase(<span class="keyword">boolean</span>&nbsp;toLowerCase)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.toLowerCase&nbsp;=&nbsp;toLowerCase;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isToLowerCase()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;toLowerCase;<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+After the model has been modified it should be written to a new file. That&apos;s what the 
+<span class="inlinecode">ResourceWriter</span> does. It actually takes the resource from the given <em>slot</em> and saves it with
+the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceWriter&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;uri&nbsp;=&nbsp;URI.createFileURI(getUri());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;resource.getResourceSet().getURIConverter().normalize(uri);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;resource.setURI(uri);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.save(<span class="keyword">null</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;WrappedException(e);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Last but not least, the common super type for those components looks like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;WorkflowComponentWithSlot&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;slot&nbsp;=&nbsp;<span class="string">"model"</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSlot(String&nbsp;slot)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.slot&nbsp;=&nbsp;slot;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getSlot()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;slot;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Each of the mentioned implementations is rather simple and can be done in a couple of minutes. 
+Many tedious tasks that developers face in their daily work can be addressed by a chain of rather
+simple components. MWE2 can be used to automate these tasks with minimum effort.
+</p>
+<a name="MWE2Stopwatch"></a>
+<h3>A Stop-Watch</h3>
+<p>
+The last example demonstrates how to combine the MWE2 concepts to create a simple stop-watch that
+allows to measure the execution time of a set of components. The idea is to add the very same stop-watch
+twice as a component to a workflow. It will measure the time from the first pre-invoke to the last
+post-invoke event and print the elapsed milliseconds to the console.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;StopWatch&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">long</span>&nbsp;start;<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">false</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(shouldStop)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">long</span>&nbsp;elapsed&nbsp;=&nbsp;System.currentTimeMillis()&nbsp;-&nbsp;start;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"Time&nbsp;elapsed:&nbsp;"</span>&nbsp;+&nbsp;elapsed&nbsp;+&nbsp;<span class="string">"&nbsp;ms"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">true</span>;<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;=&nbsp;System.currentTimeMillis();<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Clients who want to leverage this kind of stop-watch may use the following pattern. The instance of the
+class <span class="inlinecode">StopWatch</span> has to be added as the first component and the last component to a workflow. 
+Every component in-between will be measured. In this case, it is another workflow that does not need know 
+about this decoration. The idea is to use a local identifier for the instantiated <span class="inlinecode">StopWatch</span> 
+and reuse this one at the end to receive the post-invoke life-cycle event twice. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;MeasuredWorkflow<br/>
+<br/>
+Workflow&nbsp;{<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;StopWatch:&nbsp;stopWatch&nbsp;{}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;@OtherWorkflow&nbsp;{}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;stopWatch<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="MWE2LanguageReference"></a>
+<h2>Language Reference</h2>
+<p>
+MWE2 has a few well defined concepts which can be combined to 
+assemble arbitrary object graphs in a compact and declarative 
+manner.
+</p>
+<p>
+<ul>
+	<li>
+		A MWE2 file defines a <span class="inlinecode"><span class="keyword">module</span></span> which exposes its root <span class="inlinecode">component</span> as reusable artifact.
+	</li>
+	<li>
+		<span class="inlinecode">Properties</span> can be used to extract reusable, configurable parts of the workflow.
+	</li>
+	<li>
+		Components are mapped to plain vanilla <em>Java objects</em>. Arbitrary <span class="inlinecode">setABC(..)</span> and <span class="inlinecode">addXYZ(..)</span> methods 
+		    are used to configure them.
+	</li>
+</ul>
+</p>
+<p>
+Let&apos;s consider the follow short example module and <span class="inlinecode">SampleClass</span> to 
+explain these concepts.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;java.util.*<br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+&nbsp;&nbsp;multiValue&nbsp;=&nbsp;ArrayList&nbsp;{}<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;{}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;com.mycompany;<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;java.util.List;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSingleValue(String&nbsp;value)&nbsp;{..}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addMultiValue(List&lt;?&gt;&nbsp;value)&nbsp;{..}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(SampleClass&nbsp;value)&nbsp;{..}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="MWE2JavaReferences"></a>
+<h3>Mapping to Java Classes</h3>
+<p>
+The module <span class="inlinecode">com.mycompany.Example</span> defines a root component of 
+type <span class="inlinecode">com.mycompany.SampleClass</span>. It is possible to use the simple 
+class-name because MWE2 uses the very same visibility rules as the 
+Java compiler. Classes that are in the same package as the module 
+can be referenced by their simple name. The same rule applies for 
+classes from the <span class="inlinecode">java.lang</span> package. For convenience reasons is the 
+package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> implicitly imported 
+as well as it exposes some library workflow components. However, the
+imports are more flexible then in Java since MWE2-imports can be relative, e.g. 
+the <span class="inlinecode"><span class="keyword">import</span>&nbsp;java.*</span> resolves the reference <span class="inlinecode">util.ArrayList</span> to 
+<span class="inlinecode">java.util.ArrayList</span>.  
+</p>
+<p>
+The root instance of type <span class="inlinecode">SampleClass</span> has to be configured 
+after it has been created. Therefore the method <span class="inlinecode">setSingleValue</span> 
+will be called at first. The given parameter is 
+<span class="inlinecode"><span class="string">&apos;a&nbsp;string&apos;</span></span>. The method is identified by its name which starts with 
+<span class="inlinecode">set</span>. To allow to assign multi-value properties, MWE provides 
+access to methods called <span class="inlinecode">add*</span> as well. 
+</p>
+<p>
+If the right side of the assignment in the workflow file does not 
+define a class explicitly, its type is inferred from the method 
+parameter. The line <span class="inlinecode">child&nbsp;=&nbsp;{}</span> is equivalent to 
+<span class="inlinecode">child&nbsp;=&nbsp;SampleClass&nbsp;{}</span> and creates a new instance of <span class="inlinecode">SampleClass</span>.
+</p>
+<p>
+MWE2 ships with nice tool support. The editor will provide 
+content assist for the allowed types and highlight incompatible 
+assignments. The available properties for Java classes will be 
+proposed as well.
+</p>
+<a name="MWE2Module"></a>
+<h3>Module</h3>
+<p>
+As MWE2 modules have a fully qualified name, it is possible to refer
+to them from other modules. The type of the module is derived from
+the type of its root component. The <span class="inlinecode">com.mycompany.Example</span> can be
+assigned at any place where a <span class="inlinecode">com.mycompany.SampleClass</span> is expected.
+</p>
+<p>
+Let&apos;s create a second module <span class="inlinecode">com.mycompany.Second</span> like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;com.mycompany.sub.Second<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;com.mycompany.*<br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;@Example&nbsp;{}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The <span class="inlinecode">child</span> value will be assigned to an instance of <span class="inlinecode">SampleClass</span> 
+that is configured as in the first example workflow. This enables
+nice composition and a very focused, reusable component design. 
+</p>
+<p>
+As the same rules apply in MWE2 like in Java, the module 
+<span class="inlinecode">com.mycompany.sub.Second</span> has to be defined in a file called 
+<em>Second.mwe2</em> in the package <span class="inlinecode">com.mycompany.sub</span>. The import semantic
+for other modules is the same as for classes. The import statement
+allows to refer to <span class="inlinecode">com.mycompany.Example</span> with a shortened name.
+</p>
+<a name="MWE2Properties"></a>
+<h3>Properties</h3>
+<p>
+MWE2 allows to extract arbitrary information into properties to 
+ensure that these pieces are not cluttered around the workflow and 
+to allow for easier external customization. The exemplary component 
+definition was only changed slightly by introducing a property 
+<span class="inlinecode">value</span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;value&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;value<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The type of the property will be derived from the default value 
+similar to the mechanism that is already known from <span class="inlinecode">set</span>- and 
+<span class="inlinecode">add</span>-methods. If no default value is given, <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> will
+be assumed. However, properties are not limited to strings. The 
+second built in type is boolean via the familiar literals <span class="inlinecode"><span class="keyword">true</span></span> and
+<span class="inlinecode"><span class="keyword">false</span></span>. More flexibility is available via actual component literals.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;childInstance&nbsp;=&nbsp;SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">"child"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;childInstance<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+If one wants to define string properties that are actual reusable
+parts for other properties, she may use defined variables inside other
+literals like this: 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">"part"</span><br/>
+<span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">"reuse&nbsp;the&nbsp;${part}&nbsp;here"</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+This is especially useful for file paths in workflows as one would
+usually want to define some common root directories only once in the
+workflow and reuse this fragment across certain other file locations.
+</p>
+<a name="MWE2Mandatory"></a>
+<h3>Mandatory Properties</h3>
+<p>
+It is not always feasible to define default values for properties. 
+That is where mandatory properties come into play. Modules define their
+interface not only via their fully qualified name and the type of the
+root component but also by means of the defined properties.    
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;optional&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+<span class="keyword">var</span>&nbsp;mandatory<br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;optional<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;mandatory<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+This version of the example module exposes two externally assignable
+properties. The second one has no default value assigned and is 
+thereby considered to be mandatory. The mandatory value must be assigned
+if we reuse <span class="inlinecode">org.mycompany.Example</span> in another module like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;com.mycompany.Second<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;newMandatory<br/>
+<br/>
+@Example&nbsp;{<br/>
+&nbsp;&nbsp;mandatory&nbsp;=&nbsp;<span class="string">"mandatoryValue"</span><br/>
+&nbsp;&nbsp;optional&nbsp;=&nbsp;newMandatory<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Note that it is even possible to reuse another module as the root
+component of a new module. In this case we set the mandatory 
+property of <span class="inlinecode">Example</span> to a specific constant value while the previously
+optional value is now redefined as mandatory by means of a new property
+without a default value.
+</p>
+<p>
+It is not only possible to define mandatory properties for MWE2 
+modules but for classes as well. Therefore MWE2 ships with the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a>, the module validation will fail if no value was assigned
+to that feature.
+</p>
+<a name="MWE2NamedComponents"></a>
+<h3>Named Components</h3>
+<p>
+Properties are not the only way to define something that can be reused.
+It is possible to assign a name to any instantiated component whether it&apos;s
+created from a class literal or from another component. This allows
+to refer to previously created and configured instances. Named instances
+can come handy for notification and call-back mechanisms or more general
+in terms of defined life-cycle events. 
+</p>
+<p>
+If we wanted to assign the created instance to a property of itself,
+we could use the following syntax:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+SampleClass&nbsp;:&nbsp;self&nbsp;{<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;self<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+A named component can be referenced immediately after its creation but
+it is not possible to use forward references in a MWE2 file.
+</p>
+<a name="MWE2AutoInject"></a>
+<h3>Auto Injection</h3>
+<p>
+Existing modules or classes often expose a set of properties that 
+will be assigned to features of its root component or set- and add- 
+methods respectively. In many cases its quite hard to come up with 
+yet another name for the very same concept which leads to the situation
+where the properties itself have the very same name as the component&apos;s
+feature. To avoid the overall repetition of assignments, MWE2 offers
+the possibility to use the <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span> modifier on the component 
+literal:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;child&nbsp;=&nbsp;SampleClass&nbsp;{}<br/>
+<br/>
+SampleClass&nbsp;<span class="keyword">auto</span>-<span class="keyword">inject</span>&nbsp;{<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+This example will implicitly assign the value of the property
+<span class="inlinecode">child</span> to the feature <span class="inlinecode">child</span> of the root component. This is especially
+useful for highly configurable workflows that expose dozens of optional
+parameters each of which can be assigned to one or more components.
+</p>
+<p>
+The <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span> modifier can be used for a subset of the available
+features as well. It will suppressed for the explicitly set values
+of a component.        
+</p>
+<a name="MWE2SyntaxReference"></a>
+<h2>Syntax Reference</h2>
+<p>
+The following chapter serves as a reference for the concrete syntax of 
+MWE2. The building blocks of a module will be described in a few words.
+</p>
+<p>
+MWE2 is not sensitive to white space and allows to define line-comments
+and block comments everywhere. The syntax is the same as one is used 
+to from the Java language:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;This&nbsp;is&nbsp;a&nbsp;comment<br/>
+</span><span class="comment">/*&nbsp;<br/>
+&nbsp;&nbsp;This&nbsp;is&nbsp;another&nbsp;one.<br/>
+*/</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Every name in MWE2 can be a fully qualified identifier and must follow 
+the Java conventions. However, in contrast to Java identifiers it is 
+not allowed to use German umlauts or Unicode escape sequences in 
+identifiers. A valid ID-segment in MWE2 starts with a letter or an 
+underscore and is followed by any number of letters, numbers or underscores.
+An identifier is composed from one or more segments which are delimited
+by a &apos;.&apos; dot.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Name:&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;<br/>
+ID:&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;
+</p>
+</div>
+</div>
+</p>
+<p>
+MWE2 does not use a semicolon as a statement delimiter at any place.
+</p>
+<a name="MWE2ModuleSyntax"></a>
+<h3>Module</h3>
+<p>
+<div class="image" >
+<img src="images/mwe2/module.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+A <span class="inlinecode"><span class="keyword">module</span></span> consists of four parts. The very first statement in a 
+<em>*.mwe2</em> file is the module declaration. The name of the module must 
+follow the naming convention for Java classes. That MWE2 file&apos;s name 
+must therefore be the same as the last segment of the module-name 
+and it has to be placed in the appropriate package of a Java source 
+path.
+</p>
+<p>
+It is allowed to define any number of import statements in a module.
+Imports are either suffixed by a wildcard or they import a concrete class 
+or module. MWE2 can handle relative imports in case one uses the 
+wildcard notation:
+</p>
+<p>
+<span class="inlinecode"><span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?</span>
+</p>
+<a name="MWE2PropertySyntax"></a>
+<h3>Property</h3>
+<p>
+The list of declared properties follows the optional import section.
+It is allowed to define modules without any properties. 
+</p>
+<p>
+<div class="image" >
+<img src="images/mwe2/property.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+Each declared property is locally visible in the module. It 
+furthermore defines an assignable feature of the module in case one 
+refers to it from another module. Properties may either have a 
+default value or they are considered to be <em>mandatory</em>. If the type
+of property is omitted it will be inferred from the default value. The
+default type of a property is <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>. That is, if no
+ default value is available, the property is <em>mandatory</em> and of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>.
+</p>
+<p>
+There are four types of values available in MWE2. One may either
+define a string, boolean or component literal or a reference to a
+previously defined property. 
+</p>
+<a name="MWE2ComponentSyntax"></a>
+<h3>Component</h3>
+<p>
+The building block of a module is the root component. It defines the externally
+visible type of the module and may either be created from a Java 
+type or from another module.
+</p>
+<p>
+<div class="image" >
+<img src="images/mwe2/component.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+The type of the component can be derived in many cases except for 
+the root component. That&apos;s why it&apos;s optional in the component literal.
+If no type is given, it will be inferred from the left side of the
+assignment. The assigned feature can either be a declared property
+of the module or a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method of a Java class.
+</p>
+<p>
+Components can be named to make them referable in subsequent assignments.
+Following the <span class="inlinecode"><span class="string">&apos;:&apos;</span></span> keyword, one can define an identifier for the 
+instantiated component. The identifier is locally visible in the module
+and any assignment that is defined after the named component can refer
+to this identifier and thereby exactly point to the instantiated object.
+</p>
+<p>
+The next option for a component is <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span>. If this modifier
+is set on a component, any available feature of the component that has
+the same name as a property or previously created named component will
+be automatically assigned.
+</p>
+<p>
+The core of a component is the list of assignments between the curly 
+braces. An arbitrary number of values can be set on the component by
+means of feature-to-value pairs. 
+</p>
+<p>
+<div class="image" >
+<img src="images/mwe2/assignment.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+The available constructs on the right hand side of the assignment
+are the same as for default values for properties. 
+</p>
+<a name="MWE2StringLiteralsSyntax"></a>
+<h3>String Literals</h3>
+<p>
+String values are likely to be the most used literals in MWE2. There 
+is a convenient syntax for string concatenation available due to
+the high relevance in a descriptive object composition and configuration 
+language. MWE2 strings are multi-line strings and can be composed of
+several parts.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;value&apos;</span><br/>
+<span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">&apos;It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into<br/>
+&nbsp;a&nbsp;multi-line&nbsp;string&apos;</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+This is especially convenient for path-substitution if one defines
+e.g. a common root directory and wants to specify other paths relative
+to the base. 
+</p>
+<p>
+There are two different delimiters available for strings. Users 
+are free to either use single- or double-quotes to start and end strings. 
+If a certain string contains a lot of single-quotes one would better
+choose double-quotes as delimiter and vice versa. There is no semantic 
+difference between both notations.
+</p>
+<p>
+The escape character in MWE2 is the back-slash <span class="inlinecode"><span class="string">"\\"</span></span>. It can be used
+to write line-breaks or tabular characters explicitly and to escape
+the beginning of substitution variables <span class="inlinecode">${</span> and the quotes itself. Allowed
+escape sequences are:
+</p>
+<p>
+<table>
+<tr>
+<td>
+\n
+</td>
+<td>
+..
+</td>
+<td>
+line break
+</td>
+</tr>
+<tr>
+<td>
+\r
+</td>
+<td>
+..
+</td>
+<td>
+carriage return
+</td>
+</tr>
+<tr>
+<td>
+\t
+</td>
+<td>
+..
+</td>
+<td>
+tabular character
+</td>
+</tr>
+<tr>
+<td>
+\&apos;
+</td>
+<td>
+..
+</td>
+<td>
+single-quote (can be omitted in double-quoted strings)
+</td>
+</tr>
+<tr>
+<td>
+\"
+</td>
+<td>
+..
+</td>
+<td>
+double-quote (can be omitted in single-quoted strings)
+</td>
+</tr>
+<tr>
+<td>
+\${
+</td>
+<td>
+..
+</td>
+<td>
+escape the substitution variable start ${
+</td>
+</tr>
+<tr>
+<td>
+\\ 
+</td>
+<td>
+..
+</td>
+<td>
+the back-slash itself
+</td>
+</tr>
+</table>
+</p>
+<p>
+Other escape sequence are illegal in MWE2 strings.
+</p>
+<a name="MWE2BooleanLiterals"></a>
+<h3>Boolean Literals</h3>
+<p>
+MWE2 has native support for the boolean type. The literals are <span class="inlinecode"><span class="keyword">true</span></span> and <span class="inlinecode"><span class="keyword">false</span></span>.
+</p>
+<a name="MWE2References"></a>
+<h3>References</h3>
+<p>
+Each assigned value in MWE2 either as default for properties or in a
+component assignment can be a reference to a previously declared property
+or named component. The can be referenced intuitively by their name.
+</p>
+</body>
+</html>

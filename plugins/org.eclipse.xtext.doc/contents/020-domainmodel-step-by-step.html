@@ -1,0 +1,614 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>15 Minutes Tutorial</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="DomainModelWalkThrough"></a>
+<h1>15 Minutes Tutorial</h1>
+<p>
+In this tutorial we will implement a small domain-specific language to model entities and properties
+similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">datatype</span>&nbsp;String<br/>
+<br/>
+<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
+&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
+}<br/>
+<br/>
+<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;author:&nbsp;String<br/>
+}<br/>
+<br/>
+<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
+}<br/>
+<br/>
+<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;content:&nbsp;String<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+After you have installed Xtext on your machine, start Eclipse and set up a fresh workspace.
+</p>
+<a name="DomainModelWalkThrough_4"></a>
+<h2>Create A New Xtext Project</h2>
+<p>
+In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
+</p>
+<p>
+  <em>File -&gt; New -&gt; Project...  -&gt; Xtext -&gt; Xtext project</em>
+</p>
+<p>
+Choose a meaningful project name, language name and file extension, e.g.
+</p>
+<p>
+<table>
+<tr>
+<td>
+<em>Main project name:</em>
+</td>
+<td>
+org.example.domainmodel
+</td>
+</tr>
+<tr>
+<td>
+<em>Language name:</em>
+</td>
+<td>
+org.example.domainmodel.Domainmodel
+</td>
+</tr>
+<tr>
+<td>
+<em>DSL-File extension:</em>
+</td>
+<td>
+dmodel
+</td>
+</tr>
+</table>
+</p>
+<p>
+Click on <em>Finish</em> to create the projects. 
+</p>
+<p>
+<div class="image" >
+<img src="images/30min_wizard.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+After you have successfully finished the wizard, you will find three new projects in your workspace.
+</p>
+<p>
+<table>
+<tr>
+<td>
+org.example.domainmodel
+</td>
+<td>
+Contains the grammar definition and all runtime components (parser, lexer, linker, validation, etc.)
+</td>
+</tr>
+<tr>
+<td>
+org.example.domainmodel.tests
+</td>
+<td>
+Unit tests go here.
+</td>
+</tr>
+<tr>
+<td>
+org.example.domainmodel.ui
+</td>
+<td>
+The Eclipse editor and all the other workbench related functionality.
+</td>
+</tr>
+</table>
+</p>
+<p>
+<div class="image" >
+<img src="images/30min_initialprojectlayout.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<a name="DomainModelWalkThrough_5"></a>
+<h2>Write Your Own Grammar</h2>
+<p>
+
+The wizard will automatically open the grammar file 
+<em>Domainmodel.xtext</em> in the editor. As you can see that it already contains a simple <em>Hello World</em> grammar:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<br/>
+Model:<br/>
+&nbsp;&nbsp;greetings+=Greeting*;<br/>
+&nbsp;&nbsp;<br/>
+Greeting:<br/>
+&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s now just replace that grammar definition with the one for our domain model language:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<br/>
+Domainmodel&nbsp;:<br/>
+&nbsp;&nbsp;(elements&nbsp;+=&nbsp;Type)*<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+Type:<br/>
+&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+DataType:<br/>
+&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name&nbsp;=&nbsp;ID<br/>
+;<br/>
+&nbsp;<br/>
+Entity:<br/>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+&nbsp;<br/>
+Feature:<br/>
+&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]<br/>
+;
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s have a more detailed look at what the different grammar rules mean:
+</p>
+<p>
+<ol>
+	<li>
+		
+		    The first rule in a grammar is always used as the entry or start rule.  
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Domainmodel&nbsp;:<br/>
+		&nbsp;&nbsp;(elements&nbsp;+=&nbsp;Type)*<br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+		    
+		    It says that a <em>Domainmodel</em> contains an arbitrary number (<span class="inlinecode">*</span>) of <em>Type</em>s which will be added (<span class="inlinecode">+=</span>)
+		    to a feature called <span class="inlinecode">elements</span>.
+	</li>
+	<li>
+		
+		    The rule <em>Type</em> delegates to either the rule <em>DataType</em> or (<span class="inlinecode">|</span>) the rule <em>Entity</em>.
+		      
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Type:<br/>
+		&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity<br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+	</li>
+	<li>
+		
+		    The rule <em>DataType</em> starts with a keyword <span class="inlinecode"><span class="string">&apos;datatype&apos;</span></span>, followed by an identifier
+		    which is parsed by a rule called <em>ID</em>. The rule <em>ID</em> is defined in the super grammar
+		    <em>org.eclipse.xtext.common.Terminals</em> and parses a single word, a.k.a identifier. You can navigate
+		    to the declaration by using <em>F3</em> on the rule call.
+		    The value returned by the call to <em>ID</em> is assigned (<span class="inlinecode">=</span>) to the feature <em>name</em>.
+		      
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		DataType:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name&nbsp;=&nbsp;ID<br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+	</li>
+	<li>
+		
+		    The rule <em>Entity</em> again starts with the definition of a keyword followed by a name.
+		    
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Entity&nbsp;:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+		    
+		    Next up there is the extends clause which is parenthesized and optional (<span class="inlinecode">?</span>). 
+		    Since the feature named <em>superType</em> is a cross reference (note the square brackets),
+		    the parser rule <em>Entity</em> is not called here, but only a single identifier (the <em>ID</em>-rule) is parsed.
+		    The actual <em>Entity</em> will be resolved during the linking phase.
+		    Finally between curly braces there can be any number of <em>Features</em>, which invokes the next rule.
+	</li>
+	<li>
+		
+		    Last but not least, the rule <em>Feature</em> is defined as follows:
+		    
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Feature:<br/>
+		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]&nbsp;<br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+		    
+		    The keyword <span class="inlinecode"><span class="keyword">many</span></span> is used to model a multi valued feature in the domain model
+		    DSL. The assignment operator (<span class="inlinecode">?=</span>) implies that the feature <em>many</em> is of type <em>boolean</em>. You are already familiar with
+		    the other syntax elements in this parser rule. 
+	</li>
+</ol>
+</p>
+<p>
+This domain model grammar already uses the most important concepts of Xtext&apos;s grammar language. 
+you have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (<span class="inlinecode">=</span>) 
+where the multi value assignment used a plus-equals (<span class="inlinecode">+=</span>). We have also seen the boolean assignment
+operator (<span class="inlinecode">?=</span>). Furthermore we saw how a cross reference can be declared and learned about
+different cardinalities (<span class="inlinecode">?</span> = optional, <span class="inlinecode">*</span> = any number, <span class="inlinecode">+</span> = at
+least once).  Please consult the <a href="020-grammar-language.html#grammarLanguage" title="Go to &quot;The Grammar Language&quot;">Grammar Language Reference</a> for more details.
+Let&apos;s now have a look what you can do with such a language description.
+</p>
+<a name="DomainModelWalkThrough_6"></a>
+<h2>Generate Language Artifacts</h2>
+<p>
+Now that we have the grammar in place and defined we need to execute the code generator that will derive the
+various language components. To do so, locate the file <em>GenerateDomainmodel.mwe2</em> file next to the grammar 
+file in the package explorer view. From its context menu, choose
+</p>
+<p>
+  <em>Run As -&gt; MWE2 Workflow</em>.
+</p>
+<p>
+This will trigger the Xtext language generator. It generates the parser and 
+serializer and some additional infrastructure code. You will see its logging 
+messages in the Console View. 
+</p>
+<p>
+<div class="image" >
+<img src="images/30min_rungenerator.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<a name="DomainModelWalkThrough_7"></a>
+<h2>Run the Generated IDE Plug-in</h2>
+<p>
+We are now able to test the IDE integration. If you select <em>Run -&gt; Run Configurations...</em> from the Eclipse menu, you can
+choose <em>Eclipse Application -&gt; Launch Runtime Eclipse</em>. This preconfigured launch shortcut already has appropriate
+memory settings and parameters set. Now you can hit <em>Run</em> to start a new Eclipse.
+</p>
+<p>
+<div class="image" >
+<img src="images/30min_launchconfiguration.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+This will spawn a new Eclipse workbench with your newly developed plug-ins installed. 
+In the new workbench, create a new project of your choice, e.g.
+<em>File -&gt; New -&gt; Project...  -&gt; Java Project</em> and therein a new file 
+with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open
+the generated entity editor. Try it and discover the default 
+functionality for code completion, syntax highlighting, syntactic validation, linking errors, 
+the outline view, find references etc.
+</p>
+<p>
+<div class="image" >
+<img src="images/30min_editor.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+<a name="DomainModelWalkThrough_8"></a>
+<h2>Second Iteration: Adding Packages and Imports</h2>
+<p>
+After you have created the your first DSL and had a look at the editor, the language should be refined
+and incrementally enhanced. The Domain Model language should support the notion of <em>Package</em>s in order to avoid name
+clashes and to better fit with the target environment (Java). A <em>Package</em> may contain <em>Types</em> and other packages. 
+In order to allow fort names in references, we will also add a way to declare imports.
+</p>
+<p>
+In the end we want to be able to split the previously used model into to distinct files :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;datatypes.dmodel<br/>
+</span><br/>
+<span class="keyword">datatype</span>&nbsp;String
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;commons.dmodel<br/>
+</span><br/>
+<span class="keyword">package</span>&nbsp;my.company.common&nbsp;{<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;blogs.dmodel<br/>
+</span><br/>
+<span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;my.company.common.HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s start enhancing the grammar. 
+</p>
+<p>
+<ol>
+	<li>
+		
+		    Since a <em>Domainmodel</em> no longer contains types but packages, too,
+		    the entry rule has to be modified. Furthermore, a common super type for <em>Packages</em> and <em>Types</em>
+		    should be introduced: the <em>AbstractElement</em>.
+		        
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Domainmodel:<br/>
+		&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+		;<br/>
+		<br/>
+		AbstractElement:<br/>
+		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type<br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+	</li>
+	<li>
+		
+		    A <span class="inlinecode">PackageDeclaration</span> in turn looks pretty much as expected. It contains a number
+		    of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-Domainmodel,
+		    too, we add them as an alternative to the rule <span class="inlinecode">AbstractElement</span>.
+		    
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		PackageDeclaration:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+		;<br/>
+		<br/>
+		AbstractElement:<br/>
+		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import<br/>
+		;<br/>
+		<br/>
+		QualifiedName:<br/>
+		&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+		    
+		    The <span class="inlinecode">QualifiedName</span> is a little special. It does not contain any assignments. Therefore,
+		    it serves as a data type rule, which returns a String. So the feature <em>name</em> of a <em>Package</em> is still of
+		    type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>.
+	</li>
+	<li>
+		
+		    Imports can be defined in a very convenient way with Xtext. If you use the name <em>importedNamespace</em>
+		    in a parser rule, the framework will treat the value as an import. It even supports wildcard
+		    and handles them as expected:
+		    
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Import:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard<br/>
+		;<br/>
+		&nbsp;&nbsp;&nbsp;QualifiedNameWithWildcard:<br/>
+		&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?<br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+		    
+		    Similar to the rule <span class="inlinecode">QualifiedName</span>, <span class="inlinecode">QualifiedNameWithWildcard</span> returns
+		    a plain string. 
+	</li>
+	<li>
+		
+		    The last step is to allow fully qualified names in cross references, too. Otherwise one could
+		    not refer to an entity without adding an import statement.
+		    
+		    <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Entity:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?<br/>
+		&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+		;<br/>
+		&nbsp;<br/>
+		Feature:<br/>
+		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
+		;
+		</p>
+		</div>
+		</div>
+		
+		    
+		    <em>Please note that the bar (<span class="inlinecode">|</span>) is not an alternative in the context of a cross reference,
+		    but used to specify the syntax of the parsed string.</em> 
+	</li>
+</ol>
+</p>
+<p>
+That&apos;s all for the grammar. It should now read as 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<br/>
+Domainmodel:<br/>
+&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+;<br/>
+<br/>
+PackageDeclaration:<br/>
+&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+<br/>
+AbstractElement:<br/>
+&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import<br/>
+;<br/>
+<br/>
+QualifiedName:<br/>
+&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
+;<br/>
+<br/>
+Import:<br/>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+QualifiedNameWithWildcard:<br/>
+&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+Type:<br/>
+&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+DataType:<br/>
+&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name=ID<br/>
+;<br/>
+&nbsp;<br/>
+Entity:<br/>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?<br/>
+&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+&nbsp;<br/>
+Feature:<br/>
+&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
+;
+</p>
+</div>
+</div>
+</p>
+<p>
+You should regenerate the language infrastructure as described in the 
+previous section, and give the editor another try. You can even split up your model 
+into smaller parts and have cross-references across file boundaries.
+</p>
+<p>
+<div class="image" >
+<img src="images/30min_multipleeditors.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+</body>
+</html>
