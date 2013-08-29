@@ -29,10 +29,10 @@ class Solution_009 {
 				if (c >= 0) {
 					if (a*a + b*b == c*c) {
 						println('''
-							a = «a»
-							b = «b»
-							c = «c»
-							product = «a*b*c»
+							a = Â«aÂ»
+							b = Â«bÂ»
+							c = Â«cÂ»
+							product = Â«a*b*cÂ»
 						''')
 					}
 				}
