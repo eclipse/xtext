@@ -276,9 +276,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	protected void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
 			IValueConverter<String> valueConverter, ITypesProposalProvider.Filter filter,
 			ICompletionProposalAcceptor acceptor) {
-		if (!getXbaseCrossReferenceProposalCreator().isShowTypeProposals()) {
-			return;
-		}
 		String prefix = context.getPrefix();
 		if (prefix.length() > 0) {
 			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
