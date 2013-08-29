@@ -447,7 +447,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 	}
 
 	@Test
-	public void testActionSameTypeInMultipleRules() throws Exception {
+	public void testActionSameTypeInMultipleRules1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Expr returns Expr: Abs | ({Op} op=('+' | '-') rhs=Abs);\n");
 		grammar.append("Abs returns Expr: Prim | ({Op} op='ABS' rhs=Prim);\n");
@@ -459,6 +459,29 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		expected.append("  Prim_NumberLiteral returns NumberLiteral: value=INT;\n");
 		expected.append("Abs: Abs_Expr_Op | Prim_NumberLiteral;\n");
 		expected.append("Prim: Abs_Expr_Op | Prim_NumberLiteral;");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testActionSameTypeInMultipleRules2() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Ex1 returns Ex: Ex2 (({o.l=current} o='a' r=Ex2)+ | {o.l=current} o='b' r=Ex2)?;\n");
+		grammar.append("Ex2 returns Ex: Ex3 ({o.l=current} o='c' r=Ex3)*;\n");
+		grammar.append("Ex3 returns Ex: name=ID ({o.l=current} o='d' name=ID)*;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Ex1: Ex1_Ex2_Ex3_o | Ex3_Ex;\n");
+		expected.append("  Ex1_Ex2_Ex3_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID) | (l=Ex1_o_1_0_0 o='a' r=Ex2) | (l=Ex1_o_1_1_0 o='b' r=Ex2));\n");
+		expected.append("  Ex3_Ex returns Ex: name=ID;\n");
+		expected.append("Ex1_o_1_0_0: Ex1_Ex2_Ex3_o_1_0_0_o | Ex3_Ex;\n");
+		expected.append("  Ex1_Ex2_Ex3_o_1_0_0_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID) | (l=Ex1_o_1_0_0 o='a' r=Ex2));\n");
+		expected.append("Ex1_o_1_1_0: Ex2_Ex3_o | Ex3_Ex;\n");
+		expected.append("  Ex2_Ex3_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID));\n");
+		expected.append("Ex2: Ex2_Ex3_o | Ex3_Ex;\n");
+		expected.append("Ex2_o_1_0: Ex2_Ex3_o | Ex3_Ex;\n");
+		expected.append("Ex3: Ex3_Ex | Ex3_o;\n");
+		expected.append("  Ex3_o returns o: (l=Ex3_o_1_0 o='d' name=ID);\n");
+		expected.append("Ex3_o_1_0: Ex3_Ex | Ex3_o;");
 		assertEquals(expected.toString(), actual);
 	}
 }
