@@ -19,7 +19,7 @@ class SolutionTriangle {
 	int result
 
 	new(String triangle) {
-		val it = new ArrayList(triangle.split('\n').map[ new ArrayList(split(' ').map[ parseInt ]) ]);
+		val it = new ArrayList(triangle.split('\\r?\\n').map[ new ArrayList(split(' ').map[ parseInt ]) ]);
 		((size-1)..1).forEach [ lineIndex |
 			val line = get(lineIndex)
 			(0..line.size - 2).forEach [ i |
