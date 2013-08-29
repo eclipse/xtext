@@ -240,6 +240,24 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected abstract EObject getMostSpecificContext();
 
+		protected Collection<EObject> getAllContext() {
+			Set<EObject> result = Sets.newLinkedHashSet();
+			result.add(getMostSpecificContext());
+			collectContexts(body, result);
+			return result;
+		}
+
+		protected void collectContexts(ConstraintElement ele, Set<EObject> result) {
+			if (ele != null) {
+				EObject context = ele.getContext();
+				if (context != null)
+					result.add(context);
+				if (ele.getChildren() != null)
+					for (IConstraintElement child : ele.getChildren())
+						collectContexts((ConstraintElement) child, result);
+			}
+		}
+
 		public Iterable<IFeatureInfo> getMultiAssignementFeatures() {
 			List<IFeatureInfo> result = Lists.newArrayList();
 			for (IFeatureInfo info : features)
@@ -1256,8 +1274,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		Set<Action> relevantActions = Sets.newHashSet();
 		Set<ParserRule> contextRules = Sets.newHashSet();
 		for (IConstraint c : equalConstraints)
-			if (((Constraint) c).getMostSpecificContext() instanceof ParserRule)
-				contextRules.add((ParserRule) ((Constraint) c).getMostSpecificContext());
+			for (EObject ctx : ((Constraint) c).getAllContext())
+				if (ctx instanceof ParserRule)
+					contextRules.add((ParserRule) ctx);
 		List<AbstractElement> ele = Lists.newArrayList();
 		IConstraint first = equalConstraints.iterator().next();
 		if (first.getBody() != null)
@@ -1265,14 +1284,15 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		for (AbstractElement e : ele)
 			relevantRules.add(GrammarUtil.containingParserRule(e));
 		for (IConstraint c : equalConstraints)
-			if (((Constraint) c).getMostSpecificContext() instanceof Action) {
-				Action action = (Action) ((Constraint) c).getMostSpecificContext();
-				ParserRule rule = GrammarUtil.containingParserRule(action);
-				if (!contextRules.contains(rule)) {
-					relevantActions.add(action);
-					relevantRules.add(rule);
+			for (EObject ctx : ((Constraint) c).getAllContext())
+				if (ctx instanceof Action) {
+					Action action = (Action) ctx;
+					ParserRule rule = GrammarUtil.containingParserRule(action);
+					if (!contextRules.contains(rule)) {
+						relevantActions.add(action);
+						relevantRules.add(rule);
+					}
 				}
-			}
 		if (relevantRules.isEmpty()) {
 			EClass type = first.getType();
 			if (type != null) {
