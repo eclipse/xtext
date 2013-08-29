@@ -91,7 +91,7 @@ public class GrammarAccessUtil {
 			// e.printStackTrace();
 		}
 		s = prefix
-				+ s.trim().replaceAll("[\\r\\n]", "\n" + prefix).replaceAll(
+				+ s.trim().replaceAll("(\\r?\\n)", "$1" + prefix).replaceAll(
 						"/\\*", "/ *").replaceAll("\\*/", "* /");
 		return s;
 	}
