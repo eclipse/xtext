@@ -43,6 +43,7 @@ class TestBatchCompiler {
     static String XTEND_SRC_DIRECTORY = "./batch-compiler-data/test data"
     static String BUG396747_SRC_DIRECTORY = "./batch-compiler-data/bug396747"
     static String BUG410594_SRC_DIRECTORY = "./batch-compiler-data/bug410594"
+    static String BUG416262_SRC_DIRECTORY = "./batch-compiler-data/bug416262"
     static String TEMP_DIRECTORY = "./test-temp-dir"
     static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
 
@@ -114,6 +115,12 @@ class TestBatchCompiler {
 	def void bug410594() {
 		batchCompiler.sourcePath = BUG410594_SRC_DIRECTORY
 		assertTrue("Compiling empty file pass", batchCompiler.compile)
+	}
+	
+	@Test
+	def void bug416262() {
+		batchCompiler.sourcePath = BUG416262_SRC_DIRECTORY
+		assertTrue("Compiling funny file pass", batchCompiler.compile)
 	}
 	
 	@Test
