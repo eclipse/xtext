@@ -56,6 +56,8 @@ public class TestBatchCompiler {
   
   private static String BUG410594_SRC_DIRECTORY = "./batch-compiler-data/bug410594";
   
+  private static String BUG416262_SRC_DIRECTORY = "./batch-compiler-data/bug416262";
+  
   private static String TEMP_DIRECTORY = "./test-temp-dir";
   
   private static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir";
@@ -182,6 +184,13 @@ public class TestBatchCompiler {
     this.batchCompiler.setSourcePath(TestBatchCompiler.BUG410594_SRC_DIRECTORY);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue("Compiling empty file pass", _compile);
+  }
+  
+  @Test
+  public void bug416262() {
+    this.batchCompiler.setSourcePath(TestBatchCompiler.BUG416262_SRC_DIRECTORY);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue("Compiling funny file pass", _compile);
   }
   
   @Test
