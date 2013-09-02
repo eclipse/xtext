@@ -249,6 +249,12 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  public void testFunctionTypes_12() {
+    this.isAssignableFrom("java.util.ArrayList<(int)=>boolean>", "java.util.ArrayList<$Function1<? super Long, ? extends Boolean>>");
+    this.isAssignableFrom("java.util.ArrayList<(int)=>boolean>", "java.util.ArrayList<(long)=>boolean>");
+  }
+  
+  @Test
   public void testFunctionTypeAsParameterized_01() {
     this.isAssignableFrom("$Procedure1<String>", "(CharSequence)=>void");
     this.isAssignableFrom("$Procedure1<? super String>", "(CharSequence)=>void");

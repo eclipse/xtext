@@ -189,7 +189,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		} else if (rightIsVoid) {
 			return flags;
 		}
-		if (leftReturnType != rightReturnType && !leftIsVoid && (doIsConformant(leftReturnType, rightReturnType, flags & ~ALLOW_PRIMITIVE_WIDENING) & SUCCESS) == 0) {
+		if (leftReturnType != rightReturnType && !leftIsVoid && (doIsConformant(leftReturnType, rightReturnType, flags & ~ALLOW_PRIMITIVE_WIDENING | ALLOW_BOXING_UNBOXING) & SUCCESS) == 0) {
 			return flags;
 		}
 		for(int i = 0; i < leftParameterTypes.size(); i++) {
@@ -198,7 +198,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			if (leftParameterType!=rightParameterType && (leftParameterType == null || rightParameterType == null)) {
 				return flags;
 			}
-			if ((doIsConformant(rightParameterType, leftParameterType, flags & ~ALLOW_PRIMITIVE_WIDENING) & SUCCESS) == 0) {
+			if ((doIsConformant(rightParameterType, leftParameterType, flags & ~ALLOW_PRIMITIVE_WIDENING | ALLOW_BOXING_UNBOXING) & SUCCESS) == 0) {
 				return flags;
 			} 
 		}

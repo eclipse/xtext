@@ -438,6 +438,30 @@ public abstract class CommonAssignabilityTest extends AbstractAssignabilityTest 
   public abstract void testFunctionTypes_08();
   
   @Test
+  public void testFunctionTypes_09() {
+    this.isAssignableFrom("java.util.ArrayList<$Function1<? super String, ? extends Boolean>>", "java.util.ArrayList<(String)=>boolean>");
+    this.isAssignableFrom("java.util.ArrayList<(String)=>boolean>", "java.util.ArrayList<$Function1<? super String, ? extends Boolean>>");
+  }
+  
+  @Test
+  public void testFunctionTypes_10() {
+    this.isAssignableFrom("java.util.ArrayList<$Function1<? super String, ? extends Boolean>>", "java.util.ArrayList<(String)=>Boolean>");
+    this.isAssignableFrom("java.util.ArrayList<(String)=>Boolean>", "java.util.ArrayList<$Function1<? super String, ? extends Boolean>>");
+  }
+  
+  @Test
+  public void testFunctionTypes_11() {
+    this.isAssignableFrom("java.util.ArrayList<$Function1<? super Integer, ? extends Boolean>>", "java.util.ArrayList<(int)=>boolean>");
+    this.isAssignableFrom("java.util.ArrayList<(int)=>boolean>", "java.util.ArrayList<$Function1<? super Integer, ? extends Boolean>>");
+  }
+  
+  @Test
+  public void testFunctionTypes_12() {
+    this.isNotAssignableFrom("java.util.ArrayList<(int)=>boolean>", "java.util.ArrayList<$Function1<? super Long, ? extends Boolean>>");
+    this.isNotAssignableFrom("java.util.ArrayList<(int)=>boolean>", "java.util.ArrayList<(long)=>boolean>");
+  }
+  
+  @Test
   public abstract void testFunctionTypeAsParameterized_01();
   
   @Test

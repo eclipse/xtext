@@ -517,6 +517,30 @@ abstract class CommonAssignabilityTest extends AbstractAssignabilityTest {
 	def void testFunctionTypes_08()
 	
 	@Test
+	def void testFunctionTypes_09() {
+		("java.util.ArrayList<$Function1<? super String, ? extends Boolean>>").isAssignableFrom("java.util.ArrayList<(String)=>boolean>")
+		("java.util.ArrayList<(String)=>boolean>").isAssignableFrom("java.util.ArrayList<$Function1<? super String, ? extends Boolean>>")
+	}
+	
+	@Test
+	def void testFunctionTypes_10() {
+		("java.util.ArrayList<$Function1<? super String, ? extends Boolean>>").isAssignableFrom("java.util.ArrayList<(String)=>Boolean>")
+		("java.util.ArrayList<(String)=>Boolean>").isAssignableFrom("java.util.ArrayList<$Function1<? super String, ? extends Boolean>>")
+	}
+	
+	@Test
+	def void testFunctionTypes_11() {
+		("java.util.ArrayList<$Function1<? super Integer, ? extends Boolean>>").isAssignableFrom("java.util.ArrayList<(int)=>boolean>")
+		("java.util.ArrayList<(int)=>boolean>").isAssignableFrom("java.util.ArrayList<$Function1<? super Integer, ? extends Boolean>>")
+	}
+	
+	@Test
+	def void testFunctionTypes_12() {
+		("java.util.ArrayList<(int)=>boolean>").isNotAssignableFrom("java.util.ArrayList<$Function1<? super Long, ? extends Boolean>>")
+		("java.util.ArrayList<(int)=>boolean>").isNotAssignableFrom("java.util.ArrayList<(long)=>boolean>")
+	}
+	
+	@Test
 	def void testFunctionTypeAsParameterized_01()
 	
 	@Test
@@ -1392,6 +1416,12 @@ class RawAssignabilityTest extends CommonAssignabilityTest {
 	override void testFunctionTypes_08() {
 		("()=>long").isAssignableFrom("()=>int")
 		("()=>int").isAssignableFrom("()=>long")
+	}
+	
+	@Test
+	override void testFunctionTypes_12() {
+		("java.util.ArrayList<(int)=>boolean>").isAssignableFrom("java.util.ArrayList<$Function1<? super Long, ? extends Boolean>>")
+		("java.util.ArrayList<(int)=>boolean>").isAssignableFrom("java.util.ArrayList<(long)=>boolean>")
 	}
 	
 	@Test
