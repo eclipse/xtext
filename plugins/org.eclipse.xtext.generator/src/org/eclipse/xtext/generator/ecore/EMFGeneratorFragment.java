@@ -170,6 +170,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 		};
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
 				new CvsIdFilteringGeneratorAdapterFactoryDescriptor());
+		genModel.setCanGenerate(true);
 		generator.setInput(genModel);
 		Diagnostic diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE,
 				new BasicMonitor());
