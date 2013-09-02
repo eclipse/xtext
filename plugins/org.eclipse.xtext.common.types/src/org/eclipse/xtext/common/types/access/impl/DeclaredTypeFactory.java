@@ -217,7 +217,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		InternalEObject internalEObject = (InternalEObject) enumLiteralProxy;
 		Class<?> type = e.getDeclaringClass();
 		try {
-			Field field = type.getDeclaredField(e.toString());
+			Field field = type.getDeclaredField(e.name());
 			internalEObject.eSetProxyURI(uriHelper.getFullURI(field));
 		} catch (Exception exception) {
 			log.error(exception.getMessage(), exception);

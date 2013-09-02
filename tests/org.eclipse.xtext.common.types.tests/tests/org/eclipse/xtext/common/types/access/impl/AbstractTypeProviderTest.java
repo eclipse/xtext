@@ -1899,7 +1899,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		String typeName = TestEnum.class.getName();
 		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(2, type.getLiterals().size());
-		Set<String> expectedLiterals = Sets.newHashSet(TestEnum.FirstValue.toString(), TestEnum.SecondValue.toString());
+		Set<String> expectedLiterals = Sets.newHashSet(TestEnum.FirstValue.name(), TestEnum.SecondValue.name());
 		for(JvmEnumerationLiteral literal: type.getLiterals()) {
 			assertTrue(expectedLiterals.remove(literal.getSimpleName()));
 			assertSame(type, literal.getEnumType());
@@ -2273,7 +2273,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(1, value.getValues().size());
 		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
 		assertFalse(enumLiteral.eIsProxy());
-		assertEquals(TestEnum.FirstValue.toString(), enumLiteral.getSimpleName());
+		assertEquals(TestEnum.FirstValue.name(), enumLiteral.getSimpleName());
 	}
 	
 	@Test public void testEnumAnnotationValue_02() throws Exception {
@@ -2281,7 +2281,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(1, value.getValues().size());
 		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
 		assertFalse(enumLiteral.eIsProxy());
-		assertEquals(TestEnum.FirstValue.toString(), enumLiteral.getSimpleName());
+		assertEquals(TestEnum.FirstValue.name(), enumLiteral.getSimpleName());
 	}
 	
 	@Test public void testEnumAnnotationValue_03() throws Exception {
@@ -2289,7 +2289,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(1, value.getValues().size());
 		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
 		assertFalse(enumLiteral.eIsProxy());
-		assertEquals(TestEnum.FirstValue.toString(), enumLiteral.getSimpleName());
+		assertEquals(TestEnum.FirstValue.name(), enumLiteral.getSimpleName());
 	}
 	
 	public JvmAnnotationValue getAnnotationValue(String name) {
