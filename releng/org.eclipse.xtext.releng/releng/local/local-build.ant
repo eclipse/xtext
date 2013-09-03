@@ -44,7 +44,7 @@
 		<exec executable="${buckminster.home}/buckminster">
 			<arg value="-Declipse.p2.mirrors=false" />
 			<arg value="-Dbuild.root=${build.root}" />
-			<arg value="-DWITH.MWE2=true" />
+			<arg value="-DWITH.MWE2=false" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-DtargetPlatformPath=${build.root}/target.platform" />
 			<arg value="-Dxtend.checkout.location=${checkout.location}" />
@@ -55,7 +55,7 @@
 			<arg line="-data ${build.root}/buckminster.workspace" />
 			<arg line="-configuration ${build.root}/configuration" />
 			<arg line="--displaystacktrace" />
-			<arg line="--loglevel DEBUG" />
+			<arg line="--loglevel INFO" />
 			<arg line="-S '${commands.file}'" />
 			<arg line="-vmargs -Xmx1g" />
 		</exec>

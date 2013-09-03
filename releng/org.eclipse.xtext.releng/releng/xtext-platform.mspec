@@ -5,5 +5,4 @@
   <mspec:property key="target.ws" value="*"/>
   <mspec:property key="eclipse.target.platform" mutable="true" value="${eclipse.download}/eclipse/updates/3.5"/>
   <mspec:property key="eclipse.latest.target.platform" mutable="true" value="${eclipse.download}/eclipse/updates/4.4-I-builds"/>
-  <mspec:property key="emf.target.platform" mutable="true" value="${eclipse.download}/modeling/emf/emf/updates/nightly"/>
 </mspec:mspec>
