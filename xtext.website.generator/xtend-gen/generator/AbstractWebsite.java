@@ -340,7 +340,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     {
       Iterable<Pair<String,String>> _pLevelMenu = this.topLevelMenu();
-      for(final Pair<String,String> it : _pLevelMenu) {
+      for(final Pair<String, String> it : _pLevelMenu) {
         _builder.append("\t\t\t\t\t");
         _builder.append("<li ");
         {

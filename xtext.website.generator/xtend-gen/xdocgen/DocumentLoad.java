@@ -44,12 +44,12 @@ public class DocumentLoad {
     final XtextResourceSet rs = this.provider.get();
     PathTraverser _pathTraverser = new PathTraverser();
     final Predicate<URI> _function = new Predicate<URI>() {
-        public boolean apply(final URI it) {
-          String _fileExtension = it.fileExtension();
-          boolean _equals = Objects.equal(_fileExtension, "xdoc");
-          return _equals;
-        }
-      };
+      public boolean apply(final URI it) {
+        String _fileExtension = it.fileExtension();
+        boolean _equals = Objects.equal(_fileExtension, "xdoc");
+        return _equals;
+      }
+    };
     Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(baseDirs)), _function);
     final Collection<URI> uris = _resolvePathes.values();
     Collection<URI> _xtendFiles = this.getXtendFiles();
@@ -65,48 +65,48 @@ public class DocumentLoad {
       EcoreUtil2.resolveAll(rs);
       EList<Resource> _resources = rs.getResources();
       final Function1<Resource,List<Issue>> _function_1 = new Function1<Resource,List<Issue>>() {
-          public List<Issue> apply(final Resource it) {
-            List<Issue> _switchResult = null;
-            boolean _matched = false;
-            if (!_matched) {
-              if (it instanceof XtextResource) {
-                final XtextResource _xtextResource = (XtextResource)it;
-                _matched=true;
-                List<Issue> _xblockexpression = null;
-                {
-                  IResourceServiceProvider _resourceServiceProvider = _xtextResource.getResourceServiceProvider();
-                  final IResourceValidator validator = _resourceServiceProvider.getResourceValidator();
-                  List<Issue> _validate = validator.validate(_xtextResource, CheckMode.ALL, null);
-                  _xblockexpression = (_validate);
-                }
-                _switchResult = _xblockexpression;
+        public List<Issue> apply(final Resource it) {
+          List<Issue> _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (it instanceof XtextResource) {
+              final XtextResource _xtextResource = (XtextResource)it;
+              _matched=true;
+              List<Issue> _xblockexpression = null;
+              {
+                IResourceServiceProvider _resourceServiceProvider = _xtextResource.getResourceServiceProvider();
+                final IResourceValidator validator = _resourceServiceProvider.getResourceValidator();
+                List<Issue> _validate = validator.validate(_xtextResource, CheckMode.ALL, null);
+                _xblockexpression = (_validate);
               }
+              _switchResult = _xblockexpression;
             }
-            if (!_matched) {
-              List<Issue> _emptyList = CollectionLiterals.<Issue>emptyList();
-              _switchResult = _emptyList;
-            }
-            return _switchResult;
           }
-        };
+          if (!_matched) {
+            List<Issue> _emptyList = CollectionLiterals.<Issue>emptyList();
+            _switchResult = _emptyList;
+          }
+          return _switchResult;
+        }
+      };
       List<List<Issue>> _map = ListExtensions.<Resource, List<Issue>>map(_resources, _function_1);
       final Iterable<Issue> issues = Iterables.<Issue>concat(_map);
       final Function1<Issue,Boolean> _function_2 = new Function1<Issue,Boolean>() {
-          public Boolean apply(final Issue i) {
-            Severity _severity = i.getSeverity();
-            boolean _equals = Objects.equal(_severity, Severity.ERROR);
-            return Boolean.valueOf(_equals);
-          }
-        };
+        public Boolean apply(final Issue i) {
+          Severity _severity = i.getSeverity();
+          boolean _equals = Objects.equal(_severity, Severity.ERROR);
+          return Boolean.valueOf(_equals);
+        }
+      };
       boolean _exists = IterableExtensions.<Issue>exists(issues, _function_2);
       if (_exists) {
         final Function1<Issue,String> _function_3 = new Function1<Issue,String>() {
-            public String apply(final Issue it) {
-              String _string = it.toString();
-              String _plus = ("\n\t" + _string);
-              return _plus;
-            }
-          };
+          public String apply(final Issue it) {
+            String _string = it.toString();
+            String _plus = ("\n\t" + _string);
+            return _plus;
+          }
+        };
         Iterable<String> _map_1 = IterableExtensions.<Issue, String>map(issues, _function_3);
         String _join = IterableExtensions.join(_map_1);
         IllegalStateException _illegalStateException = new IllegalStateException(_join);
@@ -116,11 +116,11 @@ public class DocumentLoad {
         boolean _not = (!_isEmpty);
         if (_not) {
           final Function1<Issue,String> _function_4 = new Function1<Issue,String>() {
-              public String apply(final Issue it) {
-                String _string = it.toString();
-                return _string;
-              }
-            };
+            public String apply(final Issue it) {
+              String _string = it.toString();
+              return _string;
+            }
+          };
           Iterable<String> _map_2 = IterableExtensions.<Issue, String>map(issues, _function_4);
           String _join_1 = IterableExtensions.join(_map_2, "\n");
           InputOutput.<String>println(_join_1);
@@ -141,12 +141,12 @@ public class DocumentLoad {
       final String[] entries = classPath.split(separator);
       PathTraverser _pathTraverser = new PathTraverser();
       final Predicate<URI> _function = new Predicate<URI>() {
-          public boolean apply(final URI it) {
-            String _fileExtension = it.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "xtend");
-            return _equals;
-          }
-        };
+        public boolean apply(final URI it) {
+          String _fileExtension = it.fileExtension();
+          boolean _equals = Objects.equal(_fileExtension, "xtend");
+          return _equals;
+        }
+      };
       Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(entries)), _function);
       Collection<URI> _values = _resolvePathes.values();
       _xblockexpression = (_values);
