@@ -179,6 +179,8 @@
 				</topic>
 				<topic href="contents/40-annotations.html#active_annotations_transformation_phase" label="Phase 2: Transformation" >
 				</topic>
+				<topic href="contents/40-annotations.html#active_annotations_code_generation" label="Phase 3: Code Generation" >
+				</topic>
 			</topic>
 			<topic href="contents/40-annotations.html#active_annotations_expression" label="On Expressions and Statements" >
 				<topic href="contents/40-annotations.html#active_annotations_compilation_strategies" label="Generating Blackbox Java Code" >

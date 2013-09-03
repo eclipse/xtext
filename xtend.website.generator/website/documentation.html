@@ -3083,7 +3083,7 @@ node Parent{
 						</h1>
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
-							<strong>Active Annotations</strong> allow developers to participate in the translation process of Xtend source code to Java code via library. That's useful in cases where Java requires you to 
+							<strong>Active Annotations</strong> allow developers to participate in the translation process of Xtend source code to Java code via library. That's useful in cases where Java requires to 
 							write a lot of boilerplate manually. For instance, many of the good old design patterns fall into this category. With <strong>Active Annotations</strong> you no longer need to remember how the 
 							<a href="http://en.wikipedia.org/wiki/Visitor_pattern">Visitor</a> or the <a href="http://en.wikipedia.org/wiki/Observer_pattern">Observer</a> pattern should be implemented. In Xtend you can implement the expansion 
 							of such patterns in a library and let the compiler do the heavy lifting for you.
@@ -3244,6 +3244,42 @@ annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[
 							A <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/declaration/TypeReference.html"><abbr title="org.eclipse.xtend.lib.macro.declaration.TypeReference">TypeReference</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java">(src)</a> can be created using one of the various
 							methods from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.html"><abbr title="org.eclipse.xtend.lib.macro.services.TypeReferenceProvider">TypeReferenceProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.java">(src)</a> which is a super type
 							of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a>. These utilities are available as extensions, too.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="active_annotations_code_generation" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Phase 3: Code Generation</h3>
+						<p>
+							A third phase in the lifecycle of the compiler lets you participate in writing and updating the files. In the IDE this phase is only executed on save
+							, while the previous two get executed after minor edits in the editor as well. In order to participate your processor needs to implement
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.CodeGenerationParticipant">CodeGenerationParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.java">(src)</a>. The extract interface example doesn't make use of this hook, but another example 
+							 for internationalization which is also included, generates a *.properties file, like this:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class ExternalizedProcessor extends AbstractClassProcessor {
+  
+  ...
+  
+  override doGenerateCode(List&lt;? extends ClassDeclaration&gt; annotatedSourceElements, extension CodeGenerationContext context) {
+    for (clazz : annotatedSourceElements) {
+      val filePath = clazz.compilationUnit.filePath
+      val file = filePath.targetFolder.append(clazz.qualifiedName.replace('.', '/') + ".properties")
+      file.contents = '''
+        &laquo;FOR field : clazz.declaredFields&raquo;
+          &laquo;field.simpleName&raquo; = &laquo;field.initializerAsString&raquo;
+        &laquo;ENDFOR&raquo;
+      '''
+    }
+  }
+
+}</pre>
+							<p>
+						</p>
+						<p>
+							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/CodeGenerationContext.html"><abbr title="org.eclipse.xtend.lib.macro.CodeGenerationContext">CodeGenerationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.2/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/CodeGenerationContext.java">(src)</a> provides all the services that are available during 
+							this phase. Have a look at the Java doc for more details.
 						</p>
 						</section>
 						</section>
