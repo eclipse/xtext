@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
@@ -59,6 +61,7 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -133,6 +136,11 @@ public class XtendBatchCompiler {
 	protected boolean deleteTempDirectory = true;
 	protected List<File> tempFolders = Lists.newArrayList();
 	protected boolean writeTraceFiles = true;
+	protected ClassLoader currentClassLoader = getClass().getClassLoader();
+	
+	public void setCurrentClassLoader(ClassLoader currentClassLoader) {
+		this.currentClassLoader = currentClassLoader;
+	}
 
 	public void setUseCurrentClassLoaderAsParent(boolean useCurrentClassLoaderAsParent) {
 		this.useCurrentClassLoaderAsParent = useCurrentClassLoaderAsParent;
@@ -339,8 +347,11 @@ public class XtendBatchCompiler {
 		for (Resource resource : resources) {
 			IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
 			for (IEObjectDescription jvmTypeDescription : description.getExportedObjects()) {
-
+				if (jvmTypeDescription.getUserData(XbaseResourceDescriptionStrategy.IS_NESTED_TYPE) != null) {
+					continue;
+				}
 				JvmDeclaredType jvmType = (JvmDeclaredType) jvmTypeDescription.getEObjectOrProxy();
+				
 				QualifiedName qualifiedName = jvmTypeDescription.getQualifiedName();
 				
 				StringBuilder classSignatureBuilder = new StringBuilder();
@@ -460,12 +471,12 @@ public class XtendBatchCompiler {
 		if (log.isDebugEnabled()) {
 			log.debug("classpath used for Xtend compilation : " + classPathUrls);
 		}
-		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), useCurrentClassLoaderAsParent ? getClass().getClassLoader() : null);
+		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), useCurrentClassLoaderAsParent ? currentClassLoader : null);
 		new ClasspathTypeProvider(urlClassLoader, resourceSet, skipIndexLookup ? null : indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 		
 		// for annotation processing we need to have the compiler's classpath as a parent.
-		URLClassLoader urlClassLoaderForAnnotationProcessing = new URLClassLoader(toArray(classPathUrls, URL.class), getClass().getClassLoader());
+		URLClassLoader urlClassLoaderForAnnotationProcessing = new URLClassLoader(toArray(classPathUrls, URL.class), currentClassLoader);
 		annotationProcessorFactory.setClassLoader(urlClassLoaderForAnnotationProcessing);
 	}
 
@@ -511,6 +522,9 @@ public class XtendBatchCompiler {
 			}
 		}
 		for (IEObjectDescription eObjectDescription : exportedObjectsByType) {
+			if (eObjectDescription.getUserData(XbaseResourceDescriptionStrategy.IS_NESTED_TYPE) != null) {
+				continue;
+			}
 			JvmDeclaredType jvmGenericType = (JvmDeclaredType) eObjectDescription.getEObjectOrProxy();
 //			JvmDeclaredType jvmGenericType = xtendJvmAssociations.getInferredType(xtendType);
 			CharSequence generatedType = generator.generateType(jvmGenericType, generatorConfigprovider.get(jvmGenericType));

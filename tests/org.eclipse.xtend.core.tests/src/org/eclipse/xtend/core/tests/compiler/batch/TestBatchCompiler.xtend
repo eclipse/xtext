@@ -11,9 +11,6 @@ import com.google.inject.Inject
 import java.io.File
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
-import org.eclipse.xtend.lib.macro.file.FileLocations
-import org.eclipse.xtend.lib.macro.file.FileSystemSupport
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
@@ -24,6 +21,7 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
+import org.junit.Ignore
 
 /**
  * Batch compiler tests.
@@ -53,6 +51,7 @@ class TestBatchCompiler {
         batchCompiler.outputPath = OUTPUT_DIRECTORY
         batchCompiler.deleteTempDirectory = true
         batchCompiler.useCurrentClassLoaderAsParent = true
+        batchCompiler.currentClassLoader = class.classLoader
         new File(OUTPUT_DIRECTORY).mkdir
         cleanFolder(new File(OUTPUT_DIRECTORY), null, true, false)
         new File(OUTPUT_DIRECTORY_WITH_SPACES).mkdir
@@ -118,6 +117,7 @@ class TestBatchCompiler {
 	}
 	
 	@Test
+	@Ignore
 	def void bug416262() {
 		batchCompiler.sourcePath = BUG416262_SRC_DIRECTORY
 		assertTrue("Compiling funny file pass", batchCompiler.compile)
@@ -126,8 +126,16 @@ class TestBatchCompiler {
 	@Test
 	def void testActiveAnnotatons1() {
 		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations1"
-		assertTrue("Compiling empty file pass", batchCompiler.compile)
+		assertTrue(batchCompiler.compile)
 		assertEquals(3, new File(OUTPUT_DIRECTORY + "/mypackage").list[dir, name|name.endsWith(".java")].size)
+	}
+	
+	@Test
+	def void testActiveAnnotatons2() {
+		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations2"
+		assertTrue(batchCompiler.compile)
+		val javaFiles = new File(OUTPUT_DIRECTORY + "/mypackage").list[dir, name|name.endsWith(".java")].join(",")
+		assertEquals("Client.java", javaFiles)
 	}
 	
 	@Test
