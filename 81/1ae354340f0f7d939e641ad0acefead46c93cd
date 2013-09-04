@@ -1,0 +1,10 @@
+Code-Review+1: Hudson CI
+Verified+1: Hudson CI
+Code-Review+2: Sven Efftinge <sven.efftinge@itemis.de>
+IP-Clean+1: Sven Efftinge <sven.efftinge@itemis.de>
+Verified+1: Sven Efftinge <sven.efftinge@itemis.de>
+Submitted-by: Sven Efftinge <sven.efftinge@itemis.de>
+Submitted-at: Wed, 04 Sep 2013 03:14:57 -0400
+Reviewed-on: https://git.eclipse.org/r/16091
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
