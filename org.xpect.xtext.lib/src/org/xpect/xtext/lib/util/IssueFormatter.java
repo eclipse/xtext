@@ -15,7 +15,7 @@ import com.google.common.base.Function;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class IssueFormatter implements Function<Object, String> {
+public class IssueFormatter implements Function<Issue, String> {
 
 	private final XtextResource resource;
 	private final boolean showSeverity;
@@ -26,24 +26,21 @@ public class IssueFormatter implements Function<Object, String> {
 		this.showSeverity = showSeverity;
 	}
 
-	public String apply(Object input) {
-		if (input instanceof Issue) {
-			Issue issue = (Issue) input;
-			StringBuffer result = new StringBuffer();
-			if (showSeverity) {
-				result.append(issue.getSeverity().name());
-				result.append(" ");
-			}
-			result.append('"');
-			result.append(issue.getMessage());
-			result.append('"');
-			result.append(" at \"");
-			result.append(getIssueLocationText(issue));
-			result.append("\"");
-			return result.toString();
-		} else if (input == null)
+	public String apply(Issue issue) {
+		if (issue == null)
 			return "null";
-		return input.getClass() + ": " + input.toString();
+		StringBuffer result = new StringBuffer();
+		if (showSeverity) {
+			result.append(issue.getSeverity().name());
+			result.append(" ");
+		}
+		result.append('"');
+		result.append(issue.getMessage());
+		result.append('"');
+		result.append(" at \"");
+		result.append(getIssueLocationText(issue));
+		result.append("\"");
+		return result.toString();
 	}
 
 	protected String getIssueLocationText(Issue issue) {

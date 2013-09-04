@@ -33,12 +33,23 @@ import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.TestingResourceValida
 import org.xpect.xtext.lib.util.IssueFormatter;
 import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @RunWith(XpectRunner.class)
 @XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class, ValidationTestModuleSetup.class })
 public class ValidationTest {
+
+	protected Function<? super Issue, String> createIssueFormatter(XtextResource resource, Severity severity) {
+		return new IssueFormatter(resource, false);
+	}
+
+	private Predicate<? super Issue> createRangePredicate(XtextResource resource, int offset, Severity severity) {
+		return new IssueOverlapsRangePredicate(resource, offset, severity);
+	}
 
 	@Xpect
 	public void errors(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource, @ThisOffset int offset) {
@@ -61,8 +72,8 @@ public class ValidationTest {
 	protected List<String> validate(XtextResource resource, int offset, Severity severity) {
 		TestingResourceValidator validator = (TestingResourceValidator) resource.getResourceServiceProvider().getResourceValidator();
 		Collection<Issue> allIssues = validator.unfilteredValidate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-		List<Issue> issuesInLine = newArrayList(filter(allIssues, new IssueOverlapsRangePredicate(resource, offset, severity)));
-		List<String> formattedIssues = newArrayList(transform(issuesInLine, new IssueFormatter(resource, false)));
+		List<Issue> issuesInLine = newArrayList(filter(allIssues, createRangePredicate(resource, offset, severity)));
+		List<String> formattedIssues = newArrayList(transform(issuesInLine, createIssueFormatter(resource, severity)));
 		return formattedIssues;
 	}
 
