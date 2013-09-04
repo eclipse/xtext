@@ -39,6 +39,7 @@ public class XbaseResourceDescriptionStrategy extends DefaultResourceDescription
 	private static final Logger LOG = Logger.getLogger(XbaseResourceDescriptionStrategy.class);
 
 	public static final String SIGNATURE_HASH_KEY = "sig";
+	public static final String IS_NESTED_TYPE = "nestedType";
 	public static final String IS_INTERFACE = "interface";
 	public static final String TYPE_PARAMETERS = "typeParameters";
 	
@@ -79,6 +80,9 @@ public class XbaseResourceDescriptionStrategy extends DefaultResourceDescription
 	protected void createUserData(EObject eObject, ImmutableMap.Builder<String, String> userData) {
 		if (eObject instanceof JvmDeclaredType) {
 			userData.put(SIGNATURE_HASH_KEY, hashProvider.getHash((JvmDeclaredType) eObject));
+			if (eObject.eContainer() != null) {
+				userData.put(IS_NESTED_TYPE, Boolean.TRUE.toString());
+			}
 		}
 		if (eObject instanceof JvmGenericType) {
 			JvmGenericType genericType = (JvmGenericType) eObject;
