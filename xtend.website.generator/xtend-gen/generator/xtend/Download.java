@@ -15,7 +15,7 @@ public class Download extends AbstractXtendWebsite {
   }
   
   public String getLink(final String platform) {
-    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-R-" + platform);
+    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-R-" + platform);
     String _fileExtension = this.fileExtension(platform);
     String _plus_1 = (_plus + _fileExtension);
     String _plus_2 = (_plus_1 + "&r=1");

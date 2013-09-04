@@ -7,7 +7,7 @@ class Download extends AbstractWebsite {
 	}
 
 	def String getLink(String platform) {
-		'http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/kepler/R/eclipse-dsl-kepler-R-' + platform + platform.fileExtension+'&r=1'
+		'http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-R-' + platform + platform.fileExtension+'&r=1'
 	}
 
 	def String fileExtension(String platform) {
