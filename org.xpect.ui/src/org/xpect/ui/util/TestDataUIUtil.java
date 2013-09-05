@@ -1,7 +1,6 @@
 package org.xpect.ui.util;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
@@ -16,17 +15,19 @@ import org.eclipse.jdt.junit.model.ITestSuiteElement;
 public class TestDataUIUtil {
 	public static class TestElementInfo {
 		private String clazz;
-		private String title;
 		private IFile file;
-		private URI uri;
+		private String filename;
 		private IJavaProject javaProject;
+		private String title;
+		private URI uri;
 
-		public IJavaProject getJavaProject() {
-			return javaProject;
-		}
-
-		public String getTitle() {
-			return title;
+		protected IFile findFile() {
+			IResource resource = javaProject.getProject().findMember(filename);
+			if (resource == null || !resource.exists())
+				throw new IllegalStateException("File " + filename + " does not exist.");
+			if (!(resource instanceof IFile))
+				throw new IllegalStateException(resource + " is not a file, but a " + resource.getClass().getSimpleName());
+			return (IFile) resource;
 		}
 
 		public String getClazz() {
@@ -34,7 +35,13 @@ public class TestDataUIUtil {
 		}
 
 		public IFile getFile() {
+			if (file == null)
+				file = findFile();
 			return file;
+		}
+
+		public IJavaProject getJavaProject() {
+			return javaProject;
 		}
 
 		public String getMethod() {
@@ -46,19 +53,13 @@ public class TestDataUIUtil {
 			return title.substring(0, i);
 		}
 
+		public String getTitle() {
+			return title;
+		}
+
 		public URI getURI() {
 			return uri;
 		}
-	}
-
-	protected static IFile findFile(ITestElement ele, String filename) {
-		IProject project = ele.getTestRunSession().getLaunchedProject().getProject();
-		IResource resource = project.findMember(filename);
-		if (resource == null || !resource.exists())
-			throw new IllegalStateException("File " + resource + " does not exist.");
-		if (!(resource instanceof IFile))
-			throw new IllegalStateException(resource + " is not a file, but a " + resource.getClass().getSimpleName());
-		return (IFile) resource;
 	}
 
 	public static TestElementInfo parse(ITestElement element) {
@@ -82,7 +83,7 @@ public class TestDataUIUtil {
 				}
 				URI base = URI.createPlatformResourceURI(project + "/", true);
 				result.uri = uri.resolve(base);
-				result.file = findFile(element, uri.trimFragment().toString());
+				result.filename = uri.trimFragment().toString();
 				String name = uri.fragment();
 				int tilde = name.indexOf('~');
 				if (tilde >= 0)
@@ -96,7 +97,7 @@ public class TestDataUIUtil {
 				String filename = methodName.substring(0, colon).trim();
 				String path = methodName.substring(colon + 1).trim();
 				result.uri = URI.createPlatformResourceURI(project + "/" + path + "/" + filename, true);
-				result.file = findFile(element, path + "/" + filename);
+				result.filename = path + "/" + filename;
 				result.title = tce.getTestMethodName();
 			} else {
 				result.title = tce.getTestMethodName();
@@ -110,7 +111,7 @@ public class TestDataUIUtil {
 				String filename = name.substring(0, colon).trim();
 				String path = name.substring(colon + 1).trim();
 				result.uri = URI.createPlatformResourceURI(project + "/" + path + "/" + filename, true);
-				result.file = findFile(element, path + "/" + filename);
+				result.filename = path + "/" + filename;
 			} else {
 				result.clazz = name;
 			}
