@@ -1,9 +1,11 @@
 package org.xpect.xtext.lib.util;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.AbstractNegatedToken;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Grammar;
@@ -12,6 +14,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.NegatedToken;
 import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -47,17 +50,28 @@ public class GrammarAnalyzer {
 		public String getEnd() {
 			return end;
 		}
+
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + ": '" + getStart() + "' -> '" + getEnd() + "'";
+		}
 	}
 
 	public static class SLCommentRule extends CommentRule {
 		public SLCommentRule(String start) {
 			super(start);
 		}
+
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + ": '" + getStart() + "' -> '\n'";
+		}
 	}
 
 	public enum XtextLanguageKind {
 		GENRAL, JAVA, XBASE
 	}
+
 	private List<CommentRule> commentRules;
 
 	private final Grammar grammar;
@@ -66,41 +80,78 @@ public class GrammarAnalyzer {
 		this.grammar = grammar;
 	}
 
-	protected String collectChars(AbstractElement ele) {
+	protected List<String> collectChars(AbstractElement ele) {
+		ele = resolve(ele);
 		if (GrammarUtil.isOptionalCardinality(ele))
-			return "";
-		if (ele instanceof Keyword)
-			return ((Keyword) ele).getValue();
-		if (ele instanceof Group) {
-			StringBuilder result = new StringBuilder();
-			for (AbstractElement e : ((Group) ele).getElements())
-				result.append(collectChars(e));
-			return result.toString();
+			return Collections.emptyList();
+		if (ele instanceof Keyword) {
+			String value = ((Keyword) ele).getValue();
+			if (!"\r".equals(value)) // it suffices to handle \n
+				return Collections.singletonList(value);
 		}
-		if (ele instanceof Alternatives)
-			return collectChars(((Alternatives) ele).getElements().get(0));
-		return "";
+		if (ele instanceof Group) {
+			return collectChars((Group) ele, 0, ((Group) ele).getElements().size());
+		}
+		if (ele instanceof Alternatives) {
+			List<String> current = Lists.newArrayList();
+			for (AbstractElement e : ((Alternatives) ele).getElements())
+				current.addAll(collectChars(e));
+			return current;
+		}
+		return Collections.emptyList();
+	}
+
+	protected List<String> collectChars(Group ele, int from, int to) {
+		List<String> last = Lists.newArrayList("");
+		List<String> current = Lists.newArrayList();
+		for (int i = from; i < to; i++) {
+			for (String l : last)
+				for (String append : collectChars(ele.getElements().get(i)))
+					current.add(l + append);
+			last = current;
+			current = Lists.newArrayList();
+		}
+		return last;
 	}
 
 	protected void collectCommentRules(AbstractElement ele, List<CommentRule> rules) {
+		ele = resolve(ele);
 		if (ele instanceof Group) {
 			Group group = (Group) ele;
-			if (group.getElements().size() == 3) {
-				AbstractElement middle = group.getElements().get(1);
-				if (middle instanceof NegatedToken) {
-					String start = collectChars(group.getElements().get(0));
-					String end = collectChars(group.getElements().get(2));
-					if ("".equals("") || end.contains("\n"))
-						rules.add(new SLCommentRule(start));
+			AbstractNegatedToken negated = null;
+			for (AbstractElement child : group.getElements())
+				if (child instanceof AbstractNegatedToken) {
+					if (negated == null)
+						negated = (AbstractNegatedToken) child;
 					else
-						rules.add(new MLCommentRule(start, end));
+						return;
 				}
-			} else if (group.getElements().size() == 2) {
-				AbstractElement middle = group.getElements().get(1);
-				if (middle instanceof UntilToken) {
-					String start = collectChars(group.getElements().get(0));
-					String end = collectChars(((UntilToken) middle).getTerminal());
-					rules.add(new MLCommentRule(start, end));
+			if (negated instanceof NegatedToken) {
+				int index = group.getElements().indexOf(negated);
+				if (index > 0 && index < group.getElements().size() - 1) {
+					List<String> starts = collectChars(group, 0, index);
+					List<String> ends = collectChars(group, index + 1, group.getElements().size());
+					if (ends.isEmpty()) {
+						for (String start : starts)
+							rules.add(new SLCommentRule(start));
+					} else {
+						for (String start : starts)
+							for (String end : ends)
+								if (end.contains("\n"))
+									rules.add(new SLCommentRule(start));
+								else
+									rules.add(new MLCommentRule(start, end));
+					}
+				}
+			} else if (negated instanceof UntilToken) {
+				int index = group.getElements().indexOf(negated);
+				if (index == group.getElements().size() - 1) {
+					List<String> starts = collectChars(group, 0, index);
+					List<String> ends = collectChars(((UntilToken) negated).getTerminal());
+					for (String start : starts) {
+						for (String end : ends)
+							rules.add(new MLCommentRule(start, end));
+					}
 				}
 			}
 		} else if (ele instanceof Alternatives) {
@@ -141,6 +192,15 @@ public class GrammarAnalyzer {
 		if (java)
 			return XtextLanguageKind.JAVA;
 		return XtextLanguageKind.GENRAL;
+	}
+
+	protected AbstractElement resolve(AbstractElement ele) {
+		if (ele instanceof RuleCall) {
+			AbstractRule rule = ((RuleCall) ele).getRule();
+			if (rule instanceof TerminalRule && ((TerminalRule) rule).isFragment())
+				return rule.getAlternatives();
+		}
+		return ele;
 	}
 
 }
