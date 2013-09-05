@@ -76,6 +76,11 @@ public class Text {
 		return new Replacement(prefix, length, replacement);
 	}
 
+	@Override
+	public String toString() {
+		return text.toString();
+	}
+
 	protected String trimRight(String str) {
 		int i = str.length() - 1;
 		while (i >= 0 && Character.isWhitespace(str.charAt(i)))

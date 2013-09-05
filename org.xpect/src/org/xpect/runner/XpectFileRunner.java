@@ -11,9 +11,13 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -30,17 +34,26 @@ import org.junit.runner.manipulation.Sorter;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XjmMethod;
+import org.xpect.XjmTest;
 import org.xpect.XjmTestMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
+import org.xpect.XpectPackage;
+import org.xpect.XpectTest;
+import org.xpect.services.XpectGrammarAccess;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.setup.SetupInitializer;
+import org.xpect.text.CharSequences;
+import org.xpect.text.IReplacement;
+import org.xpect.text.Replacement;
+import org.xpect.text.Text;
 import org.xpect.util.IssueVisualizer;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -115,6 +128,28 @@ public class XpectFileRunner implements Filterable, Sortable {
 		return children;
 	}
 
+	protected IReplacement getClassOrSuiteFix(XpectTest test, Set<String> allTests) {
+		String defaultTest = getRunner().getXpectJavaModel().getTestOrSuite().getJavaClass().getName();
+		for (INode node : NodeModelUtils.findNodesForFeature(test, XpectPackage.Literals.XPECT_TEST__TEST_CLASS_OR_SUITE)) {
+			StringBuilder result = new StringBuilder();
+			for (ILeafNode leaf : node.getLeafNodes())
+				if (!leaf.isHidden()) {
+					String t = leaf.getText();
+					result.append(t.startsWith("^") ? t.substring(1) : t);
+				}
+			if (result.length() > 0) {
+				String fix = CharSequences.getMostSimilarCandiate(allTests, defaultTest, result.toString());
+				return new Replacement(node.getOffset(), node.getLength(), fix);
+			}
+		}
+		XpectGrammarAccess grammarAccess = getRunner().getXpectInjector().getInstance(XpectGrammarAccess.class);
+		ICompositeNode testNode = NodeModelUtils.getNode(test);
+		for (ILeafNode node : testNode.getLeafNodes())
+			if (node.getGrammarElement() == grammarAccess.getLexicalspace_SetupAccess().getXPECT_SETUPKeyword_1())
+				return new Replacement(node.getOffset() + node.getLength(), 0, " " + defaultTest);
+		return new Replacement(testNode.getOffset(), 0, " " + defaultTest + " ");
+	}
+
 	public Description getDescription() {
 		if (description == null)
 			description = createDescription();
@@ -143,20 +178,17 @@ public class XpectFileRunner implements Filterable, Sortable {
 	}
 
 	protected XpectFile loadXpectFile(XtextResource res) throws IOException {
-		IResourceValidator validator = res.getResourceServiceProvider().get(IResourceValidator.class);
-		List<Issue> issues = validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
-		if (!issues.isEmpty()) {
-			String document = res.getParseResult().getRootNode().getText();
-			String errors = new IssueVisualizer().visualize(document, issues);
-			throw new ComparisonFailure("Errors in " + res.getURI(), document.trim(), errors.trim());
+		XpectFile file = !res.getContents().isEmpty() ? (XpectFile) res.getContents().get(0) : null;
+		if (file != null) {
+			validate(res, file);
+			XpectTest test = file.getTest();
+			if (test != null)
+				validate(res, test);
 		}
-		if (res.getContents().isEmpty())
+		validate(res);
+		if (file == null)
 			throw new IllegalStateException("Resource for " + res.getURI() + " is empty.");
-		EObject obj = res.getContents().get(0);
-		if (!(obj instanceof XpectFile))
-			throw new IllegalStateException("Root type differs from expectation: " + obj.eClass().getName() + " instead of "
-					+ XpectFile.class.getSimpleName());
-		return (XpectFile) obj;
+		return file;
 	}
 
 	protected XtextResource loadXpectResource(URI uri) throws IOException {
@@ -206,6 +238,42 @@ public class XpectFileRunner implements Filterable, Sortable {
 				return sorter.compare(o1.getDescription(), o2.getDescription());
 			}
 		});
+	}
+
+	protected void validate(XtextResource res) {
+		IResourceValidator validator = res.getResourceServiceProvider().get(IResourceValidator.class);
+		List<Issue> issues = validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
+		if (!issues.isEmpty()) {
+			String document = res.getParseResult().getRootNode().getText();
+			String errors = new IssueVisualizer().visualize(document, issues);
+			throw new ComparisonFailure("Errors in " + res.getURI(), document.trim(), errors.trim());
+		}
+	}
+
+	protected void validate(XtextResource res, XpectFile file) throws ComparisonFailure {
+		if (file.getTest() == null) {
+			String document = res.getParseResult().getRootNode().getText();
+			String setup = "XPECT_SETUP " + runner.getXpectJavaModel().getTestOrSuite().getJavaClass().getName() + " END_SETUP";
+			// FIXME: https://github.com/meysholdt/Xpect/issues/45
+			throw new ComparisonFailure("XPECT_SETUP messing in " + res.getURI(), document, setup + "\n" + document);
+		}
+	}
+
+	protected void validate(XtextResource res, XpectTest test) {
+		Set<String> allTests = Sets.newLinkedHashSet();
+		for (XjmTest xjmt : getRunner().getXpectJavaModel().getTests())
+			allTests.add(xjmt.getJavaClass().getName());
+		if (test.getTestClassOrSuite() == null || test.getTestClassOrSuite().eIsProxy()) {
+			IReplacement fix = getClassOrSuiteFix(test, allTests);
+			Text document = new Text(res.getParseResult().getRootNode().getText());
+			String msg = "Java Test or Suite Class not found in " + res.getURI();
+			throw new ComparisonFailure(msg, document.toString(), document.with(fix));
+		} else if (!allTests.contains(test.getTestClassOrSuite().getTestOrSuite().getJavaClass().getName())) {
+			IReplacement fix = getClassOrSuiteFix(test, allTests);
+			Text doc = new Text(res.getParseResult().getRootNode().getText());
+			String msg = "Java Test class from " + res.getURI() + " is not among the executed test classes.";
+			throw new ComparisonFailure(msg, doc.toString(), doc.with(fix));
+		}
 	}
 
 }
