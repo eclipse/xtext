@@ -62,7 +62,7 @@ public class XpectFileImplCustom extends XpectFileImpl {
 
 	@Override
 	public boolean isIgnore() {
-		return Iterables.isEmpty(Iterables.filter(getMembers(), XpectIgnore.class));
+		return !Iterables.isEmpty(Iterables.filter(getMembers(), XpectIgnore.class));
 	}
 
 	public void unsetInvocationIDs() {

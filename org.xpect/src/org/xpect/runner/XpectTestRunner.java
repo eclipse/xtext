@@ -97,7 +97,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 
 	@Override
 	protected boolean isIgnore() {
-		return invocation.isIgnore() || super.isIgnore();
+		return invocation.getFile().isIgnore() || invocation.isIgnore() || super.isIgnore();
 	}
 
 	@Override
