@@ -16,13 +16,16 @@ import java.util.Set;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.osgi.framework.internal.core.BundleContextImpl;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.xpect.registry.AbstractLanguageInfo;
 import org.xpect.registry.ILanguageInfo;
+import org.xpect.util.ReflectionUtil;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -33,6 +36,7 @@ import com.google.inject.Module;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class UILanugageRegistry implements ILanguageInfo.Registry {
 
 	public static class UILanguageInfo extends AbstractLanguageInfo {
@@ -66,9 +70,10 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 		protected Module getUIModule() {
 			if (uiModule == null) {
 				try {
-					@SuppressWarnings("deprecation")
-					Plugin plugin = Platform.getPlugin(bundleID);
-					Constructor<?> constructor = getUIModuleClass().getConstructor(AbstractUIPlugin.class);
+					Class<? extends Module> uiModuleClass = getUIModuleClass();
+					Bundle bundle = FrameworkUtil.getBundle(uiModuleClass);
+					Plugin plugin = ReflectionUtil.readField(BundleContextImpl.class, bundle.getBundleContext(), "activator", Plugin.class);
+					Constructor<?> constructor = uiModuleClass.getConstructor(AbstractUIPlugin.class);
 					uiModule = (Module) constructor.newInstance(plugin);
 				} catch (InstantiationException e) {
 					throw new RuntimeException(e);
