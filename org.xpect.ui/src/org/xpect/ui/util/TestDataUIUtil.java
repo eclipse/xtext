@@ -91,6 +91,13 @@ public class TestDataUIUtil {
 					result.title = name + ": " + description;
 				else
 					result.title = name;
+			} else if (methodName.contains(":")) {
+				int colon = methodName.indexOf(':');
+				String filename = methodName.substring(0, colon).trim();
+				String path = methodName.substring(colon + 1).trim();
+				result.uri = URI.createPlatformResourceURI(project + "/" + path + "/" + filename, true);
+				result.file = findFile(element, path + "/" + filename);
+				result.title = tce.getTestMethodName();
 			} else {
 				result.title = tce.getTestMethodName();
 			}
