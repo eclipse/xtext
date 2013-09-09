@@ -9,11 +9,16 @@ package org.eclipse.xtext.xbase.file;
 
 import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.InputSupplier;
+import com.google.common.io.OutputSupplier;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
@@ -101,7 +106,8 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     try {
       File _file = this.getFile(path);
       FileInputStream _fileInputStream = new FileInputStream(_file);
-      return _fileInputStream;
+      BufferedInputStream _bufferedInputStream = new BufferedInputStream(_fileInputStream);
+      return _bufferedInputStream;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -147,9 +153,20 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     try {
       Path _parent = path.getParent();
       this.mkdir(_parent);
-      File _file = this.getFile(path);
-      FileOutputStream _fileOutputStream = new FileOutputStream(_file);
-      ByteStreams.copy(stream, _fileOutputStream);
+      final InputSupplier<InputStream> _function = new InputSupplier<InputStream>() {
+        public InputStream getInput() throws IOException {
+          return stream;
+        }
+      };
+      final OutputSupplier<BufferedOutputStream> _function_1 = new OutputSupplier<BufferedOutputStream>() {
+        public BufferedOutputStream getOutput() throws IOException {
+          File _file = JavaIOFileSystemSupport.this.getFile(path);
+          FileOutputStream _fileOutputStream = new FileOutputStream(_file);
+          BufferedOutputStream _bufferedOutputStream = new BufferedOutputStream(_fileOutputStream);
+          return _bufferedOutputStream;
+        }
+      };
+      ByteStreams.copy(_function, _function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

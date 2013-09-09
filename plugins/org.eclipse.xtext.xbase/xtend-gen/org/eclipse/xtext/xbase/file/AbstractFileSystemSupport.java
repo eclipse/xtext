@@ -1,7 +1,9 @@
 package org.eclipse.xtext.xbase.file;
 
 import com.google.common.io.CharStreams;
+import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
@@ -25,25 +27,30 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   
   public CharSequence getContents(final Path path) {
     try {
-      InputStream _contentsAsStream = this.getContentsAsStream(path);
-      String _charset = this.getCharset(path);
-      InputStreamReader _inputStreamReader = new InputStreamReader(_contentsAsStream, _charset);
-      final InputStreamReader reader = _inputStreamReader;
-      try {
-        return CharStreams.toString(reader);
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    } catch (Throwable _e_1) {
-      throw Exceptions.sneakyThrow(_e_1);
+      final InputSupplier<InputStreamReader> _function = new InputSupplier<InputStreamReader>() {
+        public InputStreamReader getInput() throws IOException {
+          InputStream _contentsAsStream = AbstractFileSystemSupport.this.getContentsAsStream(path);
+          String _charset = AbstractFileSystemSupport.this.getCharset(path);
+          InputStreamReader _inputStreamReader = new InputStreamReader(_contentsAsStream, _charset);
+          return _inputStreamReader;
+        }
+      };
+      return CharStreams.<InputStreamReader>toString(_function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   public void setContents(final Path path, final CharSequence contents) {
-    Path _parent = path.getParent();
-    this.mkdir(_parent);
-    String _string = contents.toString();
-    StringInputStream _stringInputStream = new StringInputStream(_string);
-    this.setContentsAsStream(path, _stringInputStream);
+    try {
+      Path _parent = path.getParent();
+      this.mkdir(_parent);
+      String _string = contents.toString();
+      String _charset = this.getCharset(path);
+      StringInputStream _stringInputStream = new StringInputStream(_string, _charset);
+      this.setContentsAsStream(path, _stringInputStream);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

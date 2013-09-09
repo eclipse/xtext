@@ -31,6 +31,7 @@ public interface MutableFileSystemSupport extends FileSystemSupport {
 	
 	/**
 	 * Sets the contents of this file to the bytes in the given input stream.
+	 * The stream will be closed after the operation has finished.
 	 *
 	 * @param path the path to the file
 	 * @param source an input stream containing the new contents of the file
