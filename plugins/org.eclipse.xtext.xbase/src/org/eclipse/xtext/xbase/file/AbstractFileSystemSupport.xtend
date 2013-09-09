@@ -13,12 +13,11 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 	@Inject @Property IEncodingProvider encodingProvider
 	
 	override CharSequence getContents(Path path) {
-		val reader = new InputStreamReader(path.contentsAsStream, path.getCharset)
-		return CharStreams.toString(reader);
+		return CharStreams.toString [| new InputStreamReader(path.contentsAsStream, path.getCharset) ];
 	}
 	
 	override void setContents(Path path, CharSequence contents) {
 		path.parent.mkdir
-		path.setContentsAsStream(new StringInputStream(contents.toString))
+		path.setContentsAsStream(new StringInputStream(contents.toString, path.getCharset))
 	}
 }

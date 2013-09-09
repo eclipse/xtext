@@ -17,6 +17,8 @@ import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.util.Files
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -54,7 +56,7 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	}
 
 	override InputStream getContentsAsStream(Path path) {
-		return new FileInputStream(path.file)
+		return new BufferedInputStream(new FileInputStream(path.file))
 	}
 	
 	override boolean mkdir(Path path) {
@@ -80,6 +82,6 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 
 	override void setContentsAsStream(Path path, InputStream stream) {
 		path.parent.mkdir
-		ByteStreams.copy(stream, new FileOutputStream(path.file))
+		ByteStreams.copy(|stream) [| new BufferedOutputStream(new FileOutputStream(path.file))]
 	}
 }
