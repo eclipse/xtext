@@ -28,8 +28,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -88,6 +86,11 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				result = new NoExpectation(actualState, returnType);
 			}
 			return result;
+		}
+		
+		@Nullable
+		protected ConformanceHint getDefaultHint() {
+			return defaultHint;
 		}
 		
 		protected LightweightTypeReference getExpectedType() {
