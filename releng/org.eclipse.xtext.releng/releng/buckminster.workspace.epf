@@ -1,5 +1,7 @@
 #Fri May 24 12:14:53 CEST 2013
 file_export_version=3.0
 /instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources=false
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
+/instance/org.eclipse.pde.api.tools/MISSING_EE_DESCRIPTIONS=Warning
 /instance/org.eclipse.pde.api.tools/INVALID_REFERENCE_IN_SYSTEM_LIBRARIES=Error
 \!/=
