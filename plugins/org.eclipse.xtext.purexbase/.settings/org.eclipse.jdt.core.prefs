@@ -101,3 +101,4 @@ org.eclipse.jdt.core.compiler.problem.unusedTypeParameter=ignore
 org.eclipse.jdt.core.compiler.problem.unusedWarningToken=warning
 org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
 org.eclipse.jdt.core.compiler.source=1.5
+org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=*.launch,*.xtend,*._trace
