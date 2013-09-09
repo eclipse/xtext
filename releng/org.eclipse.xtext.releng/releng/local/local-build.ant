@@ -26,8 +26,8 @@
 	<!--<property name="commands.file" value="${releng.project.location}/releng/tests/Xtext-test-buckminster-commands.txt" />-->
 	<property name="commands.file" value="${releng.project.location}/releng/local/commands.txt" />
 
-	<!-- Against which platform to build (Galileo,Latest)-->
-	<property name="ECLIPSE.TARGET.ALIAS" value="Galileo" />
+	<!-- Against which platform to build (Galileo,Stable,Latest)-->
+	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
 
 	<!-- ================================= 
           target: Runs 
@@ -57,7 +57,8 @@
 			<arg line="--displaystacktrace" />
 			<arg line="--loglevel INFO" />
 			<arg line="-S '${commands.file}'" />
-			<arg line="-vmargs -Xmx1g" />
+			<arg line="-vm /Library/Java/JavaVirtualMachines/1.6.0_26-b03-383.jdk/Contents/Home/bin/java" />
+			<arg line="-vmargs -Xmx1500m" />
 		</exec>
 	</target>
 
@@ -69,6 +70,7 @@
 			<fileset dir="${build.root}" defaultexcludes="false">
 				<exclude name="**/target.platform/" />
 				<exclude name="configuration/**" />
+				<exclude name="runtime-EclipseApplication/**" />
 			</fileset>
 		</delete>
 	</target>
