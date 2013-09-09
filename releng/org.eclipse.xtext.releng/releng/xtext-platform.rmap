@@ -46,9 +46,13 @@
   <rm:locator pattern="^org\.jboss\.netty$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="maven"/>
   <rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven"/>
-  <rm:locator pattern="org.eclipse.jdt.annotation" searchPathRef="jdt.annotation"/>
+  <rm:locator pattern="^org.eclipse.jdt.annotation$" searchPathRef="jdt.annotation"/>
+  <rm:locator pattern="^org\.eclipse\.buckminster(?:\..+)?$" searchPathRef="headless"/>
+  <rm:locator pattern="^org\.eclipse\.core\.runtime\.compatibility\.auth(?:\..+)?$" searchPathRef="headless" failOnError="false" />
+  <rm:locator pattern="^org\.eclipse\.(?:egit|jgit)(?:\..+)?$" searchPathRef="headless" failOnError="false"/>
   
-  <rm:locator searchPathRef="platform"/>
+  <rm:locator searchPathRef="platform" failOnError="false"/>
+  
   <rm:searchPath name="google-maven">
     <rm:provider xsi:type="maven:MavenProvider" componentTypes="maven,osgi.bundle" readerType="maven2">
       <rm:uri format="{0}">
@@ -149,12 +153,28 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
+  <rm:searchPath name="headless">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/tools/buckminster/headless-4.2/">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
   <rm:searchPath name="platform">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Galileo)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="eclipse.target.platform"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Stable)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}">
+        <bc:propertyRef key="eclipse.stable.target.platform"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Latest)" readerType="p2" source="false" mutable="false">
