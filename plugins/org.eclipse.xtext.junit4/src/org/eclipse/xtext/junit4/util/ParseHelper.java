@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.LazyStringInputStream;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -78,7 +78,7 @@ public class ParseHelper<T extends EObject> {
 	}
 
 	protected InputStream getAsStream(CharSequence text) {
-		return new StringInputStream(text == null ? "" : text.toString());
+		return new LazyStringInputStream(text == null ? "" : text.toString());
 	}
 
 }

@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,8 +39,8 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
@@ -159,8 +161,18 @@ public class XtextResource extends ResourceImpl {
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		setEncodingFromOptions(options);
-		IParseResult result = parser.parse(new InputStreamReader(inputStream, getEncoding()));
+		IParseResult result = parser.parse(createReader(inputStream));
 		updateInternalState(this.parseResult, result);
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	protected Reader createReader(InputStream inputStream) throws IOException {
+		if (inputStream instanceof LazyStringInputStream) {
+			return new StringReader(((LazyStringInputStream) inputStream).getString());
+		}
+		return new InputStreamReader(inputStream, getEncoding());
 	}
 
 	protected void setEncodingFromOptions(Map<?, ?> options) {
@@ -183,7 +195,7 @@ public class XtextResource extends ResourceImpl {
 		try {
 			isUpdating = true;
 			clearInternalState();
-			doLoad(new StringInputStream(newContent, getEncoding()), null);
+			doLoad(new LazyStringInputStream(newContent, getEncoding()), null);
 			setModified(false);
 		} finally {
 			isUpdating = false;
