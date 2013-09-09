@@ -18,7 +18,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
-import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.LazyStringInputStream;
+
+import com.google.common.base.Charsets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -62,7 +64,7 @@ public class ExternalContentSupport implements IExternalContentSupport {
 
 		public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
 			if (contentProvider.hasContent(uri)) {
-				return new StringInputStream(contentProvider.getContent(uri));
+				return new LazyStringInputStream(contentProvider.getContent(uri), Charsets.UTF_8);
 			}
 			return delegate.createInputStream(uri, options);
 		}
