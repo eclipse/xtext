@@ -16,6 +16,144 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def void test416516_01() {
+		assertCompilesTo('''
+			class Bug {
+			    def void m(Bug... otherInstances) {
+			    }
+			    def void m2(Bug other) {
+			        this.m(other)
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Bug... otherInstances) {
+			  }
+			  
+			  public void m2(final Bug other) {
+			    this.m(other);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void test416516_02() {
+		assertCompilesTo('''
+			class Bug {
+			    def void m(Bug... otherInstances) {
+			    }
+			    def void m2(Bug other) {
+			        this.m
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Bug... otherInstances) {
+			  }
+			  
+			  public void m2(final Bug other) {
+			    this.m();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void test416516_03() {
+		assertCompilesTo('''
+			class Bug {
+			    def void m(Bug... otherInstances) {
+			    }
+			    def void m2(Bug it) {
+			        this.m
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Bug... otherInstances) {
+			  }
+			  
+			  public void m2(final Bug it) {
+			    this.m();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void test416516_04() {
+		assertCompilesTo('''
+			class Bug {
+			    def void m(Bug... otherInstances) {
+			    }
+			    def void m2(Bug it) {
+			        this.m(it)
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Bug... otherInstances) {
+			  }
+			  
+			  public void m2(final Bug it) {
+			    this.m(it);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void test416516_05() {
+		assertCompilesTo('''
+			class Bug {
+			    def void m(Bug... otherInstances) {
+			    }
+			    def void m2(Bug it) {
+			        m(it)
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Bug... otherInstances) {
+			  }
+			  
+			  public void m2(final Bug it) {
+			    it.m(it);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void test416516_06() {
+		assertCompilesTo('''
+			class Bug {
+			    def void m(Bug... otherInstances) {
+			    }
+			    def void m2(Bug it) {
+			        m
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Bug... otherInstances) {
+			  }
+			  
+			  public void m2(final Bug it) {
+			    it.m();
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void test412083() {
 		assertCompilesTo('''
 			class Bug {
