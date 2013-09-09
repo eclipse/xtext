@@ -17,9 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -187,11 +185,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 	
 	protected BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket) {
-		if (!(feature instanceof JvmOperation)) {
-			return null;
-		}
-		List<JvmFormalParameter> parameters = ((JvmExecutable) feature).getParameters();
-		if (parameters.isEmpty()) {
+		if (!isPossibleExtension(feature)) {
 			return null;
 		}
 		if (implicit) {

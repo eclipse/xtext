@@ -8,11 +8,16 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -183,6 +188,21 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Features that are valid extensions are all {@link JvmOperation operations}
+	 * with at least one {@link JvmExecutable#getParameters() parameter}.
+	 */
+	boolean isPossibleExtension(JvmFeature feature) {
+		if (!(feature instanceof JvmOperation)) {
+			return false;
+		}
+		List<JvmFormalParameter> parameters = ((JvmExecutable) feature).getParameters();
+		if (parameters.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 }

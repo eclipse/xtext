@@ -531,15 +531,19 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	// TODO some code is duplicated in ResolvedFeature - extract delegator
 	protected void resolveKnownArgumentType(XExpression argument, LightweightTypeReference knownType,
 			@Nullable LightweightTypeReference declaredType, ITypeComputationState argumentState) {
-		if (!(argumentState instanceof AbstractTypeComputationState))
+		if (!(argumentState instanceof AbstractLinkingCandidate.ArgumentTypeComputationState))
 			throw new IllegalArgumentException("argumentState was " + argumentState);
-		AbstractTypeComputationState castedArgumentState = (AbstractTypeComputationState) argumentState;
+		AbstractLinkingCandidate<?>.ArgumentTypeComputationState castedArgumentState = (AbstractLinkingCandidate<?>.ArgumentTypeComputationState) argumentState;
 		ResolvedTypes resolvedTypes = getState().getResolvedTypes();
 		LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
 		TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 		LightweightTypeReference copiedReceiverType = knownType.copyInto(resolvedTypes.getReferenceOwner());
 		// TODO should we use the result of #acceptType?
-		resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHint.UNCHECKED);
+		ConformanceHint defaultHint = castedArgumentState.getDefaultHint();
+		if (defaultHint == null)
+			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHint.UNCHECKED);
+		else
+			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHint.UNCHECKED, defaultHint);
 		if (copiedDeclaredType != null)
 			resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, castedArgumentState);
 	}

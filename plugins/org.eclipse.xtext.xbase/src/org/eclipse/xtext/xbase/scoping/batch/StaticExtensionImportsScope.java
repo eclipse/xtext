@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -63,13 +62,10 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	@Override
 	protected BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature,
 			TypeBucket bucket) {
-		if (!(feature instanceof JvmOperation)) {
+		if (!isPossibleExtension(feature)) {
 			return null;
 		}
 		List<JvmFormalParameter> parameters = ((JvmExecutable) feature).getParameters();
-		if (parameters.isEmpty()) {
-			return null;
-		}
 		JvmFormalParameter firstParameter = parameters.get(0);
 		JvmTypeReference type = firstParameter.getParameterType();
 		if (type == null)
