@@ -13,6 +13,11 @@
 <unit id="org.eclipse.xtext.sdk.feature.group" version="2.4.0.v201303201134"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.junit.source" version="4.11.0.v201303080030"/>
+<unit id="org.junit" version="4.11.0.v201303080030"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository/"/>
+</location>
 </locations>
 <environment>
 <nl>en_EN</nl>
