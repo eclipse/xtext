@@ -23,3 +23,4 @@ org.eclipse.jdt.core.compiler.problem.missingJavadocTagsMethodTypeParameters=dis
 org.eclipse.jdt.core.compiler.problem.missingJavadocTagsOverriding=disabled
 org.eclipse.jdt.core.compiler.problem.missingJavadocTagsVisibility=protected
 org.eclipse.jdt.core.compiler.source=1.5
+org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=*.launch,*.xtend,*._trace
