@@ -7,5 +7,5 @@ Bundle-SymbolicName: org.eclipse.xtext.logging;singleton:=true
 Bundle-Vendor: %providerName
 Bundle-Version: 1.2.15.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.eclipse.core.runtime,
+Import-Package: org.eclipse.core.runtime;bundle-version="3.5.0",
  org.osgi.framework;version="1.5.0"
