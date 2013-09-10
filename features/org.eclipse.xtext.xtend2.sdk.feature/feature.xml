@@ -23,7 +23,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtend.sdk" version="2.4.3" match="greaterOrEqual"/>
+      <import feature="org.eclipse.xtend.sdk" version="2.5.0" match="greaterOrEqual"/>
    </requires>
 
 </feature>
