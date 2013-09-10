@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtend.tests"
       label="%featureName"
-      version="2.4.3.qualifier"
+     version="2.5.0.qualifier"
       provider-name="%providerName">
 
    <description>
