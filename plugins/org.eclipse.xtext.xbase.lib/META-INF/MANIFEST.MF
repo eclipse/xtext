@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Runtime Library
 Bundle-SymbolicName: org.eclipse.xtext.xbase.lib
-Bundle-Version: 2.4.3.qualifier
+Bundle-Version: 2.5.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib,

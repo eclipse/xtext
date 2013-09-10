@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: org.eclipse.xtext.xbase.lib.gwt
-Bundle-Version: 2.4.3.qualifier
+Bundle-Version: 2.5.0.qualifier
 Export-Package: org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
