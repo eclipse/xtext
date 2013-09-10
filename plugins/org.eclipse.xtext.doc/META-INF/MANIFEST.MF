@@ -3,8 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.doc;singleton:=true
-Bundle-Version: 2.4.3.qualifier
+Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.help
+Require-Bundle: org.eclipse.help;bundle-version="3.4.0"
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
