@@ -52,6 +52,8 @@ public class Download extends AbstractXtendWebsite {
   
   public final static String WIN_32 = "win32";
   
+  private final String currentVersion = "2.4.3";
+  
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _headline = this.headline("Download");
@@ -66,7 +68,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<div class=\"container clearfix\">");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<h2>Download Options (Current Version is <a href=\"releasenotes_2_4.html\">2.4.2</a>)</h2>");
+    _builder.append("<h2>Download Options</h2>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<hr>");
@@ -502,8 +504,10 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("&lt;version&gt;2.4.2&lt;/version&gt;");
-    _builder.newLine();
+    _builder.append("&lt;version&gt;");
+    _builder.append(this.currentVersion, "  ");
+    _builder.append("&lt;/version&gt;");
+    _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("&lt;executions&gt;");
     _builder.newLine();
@@ -626,8 +630,10 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("&lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("&lt;version&gt;2.4.2&lt;/version&gt;");
-    _builder.newLine();
+    _builder.append("&lt;version&gt;");
+    _builder.append(this.currentVersion, "  ");
+    _builder.append("&lt;/version&gt;");
+    _builder.newLineIfNotEmpty();
     _builder.append("&lt;/dependency&gt;</pre>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");

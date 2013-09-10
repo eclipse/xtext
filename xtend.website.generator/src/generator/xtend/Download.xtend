@@ -27,13 +27,15 @@ class Download extends AbstractXtendWebsite {
 	public static val LINUX_32 = 'linux-gtk';
 	public static val WIN_64 = 'win32-x86_64';
 	public static val WIN_32 = 'win32';
+	
+	val currentVersion = "2.4.3";
 
 	override contents() '''
 		«headline('Download')»
 		<div id="page">
 			<div class="inner">
 				<div class="container clearfix">
-					<h2>Download Options (Current Version is <a href="releasenotes_2_4.html">2.4.2</a>)</h2>
+					<h2>Download Options</h2>
 					<hr>
 					<!--table one starts-->
 					<div class="span1">&nbsp;</div>
@@ -173,7 +175,7 @@ class Download extends AbstractXtendWebsite {
 		&lt;plugin&gt;
 		  &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
 		  &lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;
-		  &lt;version&gt;2.4.2&lt;/version&gt;
+		  &lt;version&gt;«currentVersion»&lt;/version&gt;
 		  &lt;executions&gt;
 		    &lt;execution&gt;
 		      &lt;goals&gt;
@@ -215,7 +217,7 @@ class Download extends AbstractXtendWebsite {
 		&lt;dependency&gt;
 		  &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
 		  &lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;
-		  &lt;version&gt;2.4.2&lt;/version&gt;
+		  &lt;version&gt;«currentVersion»&lt;/version&gt;
 		&lt;/dependency&gt;</pre>
 								<p>
 							</p>

@@ -16,7 +16,7 @@ class XtendWebsiteGenerator {
 			new News,
 			new Download, 
 			new Documentation, 
-			new ReleaseNotes24,
+//			new ReleaseNotes24,
 			new Community 
 		)
 		println("Done.")

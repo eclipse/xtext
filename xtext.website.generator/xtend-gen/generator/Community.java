@@ -783,7 +783,7 @@ public class Community extends AbstractWebsite {
     _builder.append("<td><a href=\"http://amishne.github.com/llvm-ir-editor/\">LLVM IR SDK</a></td>");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("<td>Editors for QVT Core and Relational languages.</td>");
+    _builder.append("<td>A rich LLVM IR editor plugin for Eclipse.</td>");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("<td>BSD</td>");

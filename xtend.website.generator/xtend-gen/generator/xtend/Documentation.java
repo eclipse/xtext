@@ -84,6 +84,8 @@ public class Documentation extends AbstractXtendWebsite {
   @Inject
   private PostProcessor processor;
   
+  private final String currentVersion = "2.4.3";
+  
   public CharSequence website() {
     CharSequence _website = super.website();
     String _postProcess = this.processor.postProcess(_website);
@@ -274,11 +276,15 @@ public class Documentation extends AbstractXtendWebsite {
     _builder.append("<li style=\"color : #333;\">Additional Resources</li>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<li><a href=\"documentation/2.4.0/Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
-    _builder.newLine();
+    _builder.append("<li><a href=\"documentation/");
+    _builder.append(this.currentVersion, "	");
+    _builder.append("/Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("<li><a href=\"api/2.4.0/index.html\">Runtime Library API</a>");
-    _builder.newLine();
+    _builder.append("<li><a href=\"api/");
+    _builder.append(this.currentVersion, "	");
+    _builder.append("/index.html\">Runtime Library API</a>");
+    _builder.newLineIfNotEmpty();
     _builder.append("</ul>");
     _builder.newLine();
     return _builder;

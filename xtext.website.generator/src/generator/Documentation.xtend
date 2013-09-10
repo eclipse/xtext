@@ -106,7 +106,7 @@ class Documentation extends AbstractXdocBaseWebsite {
 	def additionalLinks() '''
 		<li>&nbsp;</li>
 		<li style="color : #333;">Additional Resources
-		<li><a href="documentation/2.4.0/Documentation.pdf">Documentation <img src="images/pdf_icon.gif"></a>
+		<li><a href="documentation/2.4.3/Documentation.pdf">Documentation <img src="images/pdf_icon.gif"></a>
 		<li><a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/">API Documentation (JavaDoc)</a>
 	'''
 	
