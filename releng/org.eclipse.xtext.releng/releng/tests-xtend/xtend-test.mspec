@@ -6,6 +6,7 @@
 	<md:property key="target.os" value="*" />
 	<md:property key="target.arch" value="*" />
 	<md:property key="target.ws" value="*" />
-	<md:mspecNode namePattern="org\.junit.*" materializer="p2"
-		componentType="osgi.bundle" exclude="false" />
+	<md:mspecNode namePattern="org\.junit.*" materializer="p2" componentType="osgi.bundle" exclude="false" />
+	<md:mspecNode namePattern="org\.hamcrest\..*" materializer="p2" componentType="osgi.bundle" exclude="false" />
+	<md:mspecNode namePattern="org\.eclipse\.swtbot\..*" materializer="p2" componentType="osgi.bundle" exclude="false" />
 </md:mspec>

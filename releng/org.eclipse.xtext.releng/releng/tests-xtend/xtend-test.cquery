@@ -4,4 +4,6 @@
     <cq:property key="target.arch" value="*"/>
     <cq:property key="target.os" value="*"/>
     <cq:property key="target.ws" value="*"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtend\.swtbot(?:\..*)?$" skipComponent="true" filter="(!(SWTBOT=true))"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtend\.ide\.swtbot(?:\..*)?$" skipComponent="true" filter="(!(SWTBOT=true))"/>
 </cq:componentQuery>
