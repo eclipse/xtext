@@ -49,5 +49,10 @@
 <unit id="de.itemis.xtext.antlr.sdk.feature.group" version="0.0.0"/>
 <repository location="http://download.itemis.com/updates/releases/2.0.0"/>
 </location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.swtbot.eclipse.feature.group" version="2.1.1.201307101628"/>
+<unit id="org.eclipse.swtbot.eclipse.test.junit.feature.group" version="2.1.1.201307101628"/>
+<repository location="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+</location>
 </locations>
 </target>
