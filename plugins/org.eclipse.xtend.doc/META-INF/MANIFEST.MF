@@ -7,4 +7,4 @@ Bundle-Localization: plugin
 Bundle-Vendor: %providerName
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.help
+Require-Bundle: org.eclipse.help;bundle-version="3.4.0"
