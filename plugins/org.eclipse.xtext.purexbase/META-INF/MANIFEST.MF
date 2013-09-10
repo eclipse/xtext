@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.purexbase
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-Version: 2.4.3.qualifier
+Bundle-Version: 2.5.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.4.3";visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.5.0";visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
@@ -15,8 +15,8 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.4.3";visibility:=reexport,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types,
- org.eclipse.xtext.xbase;bundle-version="2.4.3";visibility:=reexport,
- org.eclipse.xtext.xbase.lib;bundle-version="2.4.3";visibility:=reexport,
+ org.eclipse.xtext.xbase;bundle-version="2.5.0";visibility:=reexport,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.5.0";visibility:=reexport,
  org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.15",

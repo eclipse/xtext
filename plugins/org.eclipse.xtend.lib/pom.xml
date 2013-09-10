@@ -3,7 +3,7 @@
 	<parent>
         <groupId>org.eclipse.xtend</groupId>
         <artifactId>org.eclipse.xtend.maven</artifactId>
-        <version>2.4.3-SNAPSHOT</version>
+        <version>2.5.0-SNAPSHOT</version>
         <relativePath>../org.eclipse.xtend.maven</relativePath>
     </parent>
 	<modelVersion>4.0.0</modelVersion>

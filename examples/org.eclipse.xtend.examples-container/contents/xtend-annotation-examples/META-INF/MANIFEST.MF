@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Active Annotations Example
 Bundle-SymbolicName: xtend-annotation-examples
-Bundle-Version: 2.4.3.qualifier
+Bundle-Version: 2.5.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtend.lib,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.junit;bundle-version="4.5.0",
- org.eclipse.xtend.standalone;bundle-version="2.4.3"
+ org.eclipse.xtend.standalone;bundle-version="2.5.0"
 Export-Package: extract,
  i18n,
  lazy,

@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Junit Support (Deprecated, use org.eclipse.xtext.junit4 instead)
 Bundle-SymbolicName: org.eclipse.xtext.junit
-Bundle-Version: 2.4.3.qualifier
+Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtend;bundle-version="1.1.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext;bundle-version="2.4.3";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext;bundle-version="2.5.0";resolution:=optional;x-installation:=greedy,
  org.junit;bundle-version="[3.0.0,4.0.0)";resolution:=optional;x-installation:=greedy;visibility:=reexport,
  org.eclipse.xtend.typesystem.emf;bundle-version="1.0.1";resolution:=optional;x-installation:=greedy
 Export-Package: org.eclipse.xtext.junit,
