@@ -73,7 +73,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.eclipse.xtend.sdk" version="2.4.3" match="equivalent"/>
+      <import feature="org.eclipse.xtend.sdk" version="2.5.0" match="equivalent"/>
       <import plugin="org.eclipse.emf.ecore" version="2.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common" version="2.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.source" version="2.9.0" match="greaterOrEqual"/>
