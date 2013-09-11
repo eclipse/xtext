@@ -114,13 +114,34 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	static final JvmType[] PRIMITIVE_PROXIES = new JvmType[TypeURIHelper.PRIMITIVE_URIS.length];
 	
 	private static JdtCompliance getComplianceLevel() {
-		Version jdtVersion = JavaCore.getPlugin().getBundle().getVersion();
-		if (compareVersions(jdtVersion, new Version(3, 6, 0)) >= 0) {
+		if (isJdtGreaterOrEqual(new Version(3,6,0))) {
 			return JdtCompliance.Other;
 		}
 		return JdtCompliance.Galileo;
 	}
 	
+	/**
+	 * TODO (dennis) consider to make it accessible from other (e.g. o.e.x.common.types.tests) bundles.
+	 * 
+	 * Checks if JDT's (Major,Minor) Version is higher or equals the given one.<br>
+	 * Service and qualifier Part will not be checked.
+	 * @return <code>true</code> if the avaiable JDT's Version (Major,Minor)  is higher or equals the given one.
+	 * 
+	 */
+	private static boolean isJdtGreaterOrEqual(Version version) {
+		Version installed = JavaCore.getPlugin().getBundle().getVersion();
+		int minMajor = version.getMajor();
+		int minMinor = version.getMinor();
+		if (installed.getMajor() < minMajor) {
+			return false;
+		}
+		if (installed.getMajor() == minMajor && installed.getMinor() < minMinor) {
+			return false;
+		}
+		return true;
+	}
+	
+
 	enum JdtCompliance {
 		Galileo {
 			@Override
@@ -235,53 +256,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 	}
 	
-	/**
-	 * Compares one {@code Version} object to another {@code Version}.
-	 * 
-	 * <p>
-	 * A version is considered to be <b>less than</b> another version if its
-	 * major component is less than the other version's major component, or the
-	 * major components are equal and its minor component is less than the other
-	 * version's minor component, or the major and minor components are equal
-	 * and its micro component is less than the other version's micro component,
-	 * or the major, minor and micro components are equal and it's qualifier
-	 * component is less than the other version's qualifier component (using
-	 * {@code String.compareTo}).
-	 * 
-	 * <p>
-	 * A version is considered to be <b>equal to</b> another version if the
-	 * major, minor and micro components are equal and the qualifier component
-	 * is equal (using {@code String.compareTo}).
-	 * 
-	 * @param one The {@code Version} to compare.
-	 * @param other The {@code Version} object to compare with.
-	 * @return A negative integer, zero, or a positive integer if one version
-	 *         is less than, equal to, or greater than the specified
-	 *         {@code Version} object.
-	 */
-	private static int compareVersions(Version one, Version other) {
-		if (other == one) { // quicktest
-			return 0;
-		}
 
-		int result = one.getMajor() - other.getMajor();
-		if (result != 0) {
-			return result;
-		}
-
-		result = one.getMinor() - other.getMinor();
-		if (result != 0) {
-			return result;
-		}
-
-		result = one.getMicro() - other.getMicro();
-		if (result != 0) {
-			return result;
-		}
-
-		return one.getQualifier().compareTo(other.getQualifier());
-	}
-	
 	private final TypeURIHelper uriHelper;
 	private final WorkingCopyOwner workingCopyOwner;
 	
