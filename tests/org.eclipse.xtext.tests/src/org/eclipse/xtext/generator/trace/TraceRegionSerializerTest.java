@@ -21,7 +21,7 @@ public class TraceRegionSerializerTest {
 	@Test
 	public void testReadTraceVersion3() throws IOException {
 		TraceRegionSerializer serializer = new TraceRegionSerializer();
-		InputStream in = getClass().getResourceAsStream("version3._trace");
+		InputStream in = getClass().getResourceAsStream("version3.trace");
 		AbstractTraceRegion traceRegion = serializer.readTraceRegionFrom(in);
 		in.close();
 		Assert.assertEquals("HelloWorld.xtend", traceRegion.getMergedAssociatedLocation().getPath().lastSegment());
