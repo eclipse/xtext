@@ -26,6 +26,9 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+/**
+ * @author dhuebner - Initial contribution and API
+ */
 public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 
 	@BeforeClass public static void createMockJavaProject() throws Exception {
@@ -50,14 +53,23 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 		};
 	}
 	
+	/**
+	 * The same as with JdtBasedTypeFactory.isJdtGreaterOrEqual(new Version(3.6.0))
+	 * 
+	 */
 	protected boolean isJDT_3_6_orLater() {
-		Version jdtVersion = JavaCore.getPlugin().getBundle().getVersion();
-		if (jdtVersion.compareTo(new Version(3, 6, 0)) >= 0) {
-			return true;
+		Version installed = JavaCore.getPlugin().getBundle().getVersion();
+		int minMajor = 3;
+		int minMinor = 6;
+		if (installed.getMajor() < minMajor) {
+			return false;
 		}
-		return false;
+		if (installed.getMajor() == minMajor && installed.getMinor() < minMinor) {
+			return false;
+		}
+		return true;
 	}
-	
+
 	@Test public void testDefaultArrayList_01() throws Exception {
 		//TODO use our own types, since ArrayList has changed in Java7
 		newBuilder().append("default ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
