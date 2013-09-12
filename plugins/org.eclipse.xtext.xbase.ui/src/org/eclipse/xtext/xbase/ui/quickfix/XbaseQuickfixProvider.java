@@ -1,6 +1,7 @@
 
 package org.eclipse.xtext.xbase.ui.quickfix;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.XtextResource;
@@ -71,11 +72,22 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 				@Override
 				public void process(XtextResource state) throws Exception {
-					EObject target = state.getEObject(issue.getUriToProblem().fragment());
-					EReference reference = getUnresolvedEReference(issue, target);
-					if(reference != null && reference.getEReferenceType() != null) 
-						createLinkingIssueQuickfixes(issue, issueResolutionAcceptor, xtextDocument, state, target,
-								reference);
+					try {
+						EObject target = state.getEObject(issue.getUriToProblem().fragment());
+						EReference reference = getUnresolvedEReference(issue, target);
+						if(reference != null && reference.getEReferenceType() != null) 
+							createLinkingIssueQuickfixes(
+									issue,
+									issueResolutionAcceptor,
+									xtextDocument,
+									state,
+									target,
+									reference);
+					} catch(WrappedException e) {
+						// issue information seems to be out of sync, e.g. there is no
+						// EObject with the given fragment
+						return;
+					}
 				}
 			});
 		}
