@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -59,6 +60,9 @@ public class FeatureScopes implements IFeatureNames {
 
 	@Inject
 	private OperatorMapping operatorMapping;
+	
+	@Inject
+	private IResolvedFeatures.Provider resolvedFeaturesProvider;
 	
 	@Inject
 	private SynonymTypesProvider synonymProvider;
@@ -155,7 +159,7 @@ public class FeatureScopes implements IFeatureNames {
 			@Override
 			protected boolean accept(LightweightTypeReference synonymType, EnumSet<ConformanceHint> hints) {
 				List<JvmType> rawTypes = synonymType.getRawTypes();
-				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, hints);
+				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, resolvedFeaturesProvider, hints);
 				CompoundTypeReference compoundTypeReference = new CompoundTypeReference(synonymType.getOwner(), true);
 				compoundTypeReference.addComponent(featureDeclarator);
 				compoundTypeReference.addComponent(synonymType);
@@ -164,10 +168,22 @@ public class FeatureScopes implements IFeatureNames {
 			}
 			
 		});
-		List<JvmType> rawTypes = featureDeclarator.getRawTypes();
-		TypeBucket typeBucket = new TypeBucket(-1, rawTypes);
-		IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping);
-		return result;
+		if (featureDeclarator.isMultiType()) {
+			List<LightweightTypeReference> components = featureDeclarator.getMultiTypeComponents();
+			IScope result = wrapper.get();
+			for(int i = components.size() - 1; i >= 0; i--) {
+				LightweightTypeReference component = components.get(i);
+				List<JvmType> rawTypes = component.getRawTypes();
+				TypeBucket typeBucket = new TypeBucket(-1 - i, rawTypes, resolvedFeaturesProvider);
+				result = new ReceiverFeatureScope(result, session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping);
+			}
+			return result;
+		} else {
+			List<JvmType> rawTypes = featureDeclarator.getRawTypes();
+			TypeBucket typeBucket = new TypeBucket(-1, rawTypes, resolvedFeaturesProvider);
+			IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping);
+			return result;
+		}
 	}
 
 	/**
@@ -300,20 +316,14 @@ public class FeatureScopes implements IFeatureNames {
 			result = createImplicitStaticScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
 		} else {
-			TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(receiverType.getType()));
+			TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(receiverType.getType()), resolvedFeaturesProvider);
 			return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
 		}
 	}
 
-	protected IScope createStaticScope(XAbstractFeatureCall featureCall, JvmType type, XExpression receiver, LightweightTypeReference receiverType,
-			IScope parent, IFeatureScopeSession session) {
-		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type));
-		return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
-	}
-	
 	protected IScope createStaticFeatureOnTypeLiteralScope(XAbstractFeatureCall featureCall, JvmType type, XExpression receiver, LightweightTypeReference receiverType,
 			IScope parent, IFeatureScopeSession session) {
-		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type));
+		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type), resolvedFeaturesProvider);
 		return new StaticFeatureOnTypeLiteralScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
 	}
 	
@@ -428,7 +438,7 @@ public class FeatureScopes implements IFeatureNames {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
 			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
 			if (type != null && !type.isUnknown()) {
-				TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type.getType()));
+				TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type.getType()), resolvedFeaturesProvider);
 				return new StaticFeatureScope(parent, session, featureCall, null, type, receiverBucket, operatorMapping);
 			}
 		}

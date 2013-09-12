@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -90,13 +91,19 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 			List<XImportDeclaration> imports = importSection.getImportDeclarations();
 			List<JvmType> staticFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
 			List<JvmType> staticExtensionFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
+			List<JvmType> bogusStaticExtensionFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
 			for(XImportDeclaration _import: imports) {
 				if (_import.isWildcard() && _import.isStatic()) {
-					staticFeatureProviders.add(_import.getImportedType());
 					if (_import.isExtension()) {
 						staticExtensionFeatureProviders.add(_import.getImportedType());
+						bogusStaticExtensionFeatureProviders.add(_import.getImportedType());
+					} else {
+						staticFeatureProviders.add(_import.getImportedType());
 					}
 				}
+			}
+			if (!bogusStaticExtensionFeatureProviders.isEmpty()) {
+				result = result.addTypesToStaticScope(bogusStaticExtensionFeatureProviders, Collections.<JvmType>emptyList());
 			}
 			if (!staticFeatureProviders.isEmpty() || !staticExtensionFeatureProviders.isEmpty()) {
 				result = result.addTypesToStaticScope(staticFeatureProviders, staticExtensionFeatureProviders);
