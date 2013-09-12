@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -50,6 +51,12 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 	@Override
 	public void computeArgumentTypes() {
 		// nothing to do
+	}
+	
+	// TODO java.awt.List / java.util.List
+	@Override
+	protected ILinkingCandidate createAmbiguousLinkingCandidate(AbstractPendingLinkingCandidate<?> second) {
+		return this;
 	}
 
 	/**
@@ -90,6 +97,7 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 		return false;
 	}
 	
+	@Override
 	public boolean isTypeLiteral() {
 		return true;
 	}

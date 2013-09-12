@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import java.util.Map
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import java.util.EnumSet
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 /**
  * A type bucket collects a number of types that originate in the 
@@ -29,6 +30,7 @@ import java.util.EnumSet
 class TypeBucket {
 	int id
 	List<? extends JvmType> types
+	CommonTypeComputationServices commonServices
 	def getHints() {
 		EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS)
 	}

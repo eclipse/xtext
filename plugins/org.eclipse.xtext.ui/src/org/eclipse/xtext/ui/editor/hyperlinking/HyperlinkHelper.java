@@ -47,7 +47,8 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		
 	}
 	
-	@Inject@HyperlinkLabelProvider
+	@Inject
+	@HyperlinkLabelProvider
 	private ILabelProvider labelProvider;
 
 	@Inject
@@ -62,6 +63,13 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	
 	protected ILabelProvider getLabelProvider() {
 		return labelProvider;
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	protected EObjectAtOffsetHelper getEObjectAtOffsetHelper() {
+		return eObjectAtOffsetHelper;
 	}
 	
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {

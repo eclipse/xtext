@@ -8,12 +8,8 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -22,9 +18,9 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.internal.util.FeatureKinds;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -71,7 +67,7 @@ public class ImplicitReceiver extends AbstractImplicitFeature {
 				if (feature == null || feature.eIsProxy() || !(feature instanceof JvmFeature))
 					return true;
 				// TODO validation may be suppressed
-				String typeName = getFeatureTypeName(feature);
+				String typeName = FeatureKinds.getTypeName(feature);
 				String message = String.format("Cannot make a static reference to the non-static %s %s from the type %s", typeName, feature.getSimpleName(), getFeature().getSimpleName());
 				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 						IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getOwner(),
@@ -94,23 +90,4 @@ public class ImplicitReceiver extends AbstractImplicitFeature {
 		return super.validate(result);
 	}
 	
-	protected String getFeatureTypeName(JvmIdentifiableElement feature) {
-		if (feature instanceof JvmFormalParameter) {
-			return "parameter";
-		}
-		if (feature instanceof XVariableDeclaration) {
-			return "local variable";
-		}
-		if (feature instanceof JvmField) {
-			return "field";
-		}
-		if (feature instanceof JvmOperation) {
-			return "method";
-		}
-		if (feature instanceof JvmConstructor) {
-			return "constructor";
-		}
-		throw new IllegalStateException();
-	}
-
 }

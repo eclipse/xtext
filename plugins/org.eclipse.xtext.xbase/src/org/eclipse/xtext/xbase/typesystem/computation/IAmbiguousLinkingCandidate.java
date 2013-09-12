@@ -5,25 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.tests.validation;
+package org.eclipse.xtext.xbase.typesystem.computation;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import java.util.List;
 
 /**
+ * A linking candidate may be ambiguous if the passed arguments do
+ * match multiple candidates equally well. In those cases, the applied
+ * candidate implements this interface.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-	CheckedExceptionTest.class,
-	FeatureCallValidationTest.class,
-	OverrideValidationTest.class,
-	RichStringValidationTest.class,
-	XtendValidationTest.class,
-	AnnotationValidationTest.class,
-	ModifierValidationTest.class,
-	AmbiguityValidationSuite.class,
-})
-public class ValidationSuite {
+public interface IAmbiguousLinkingCandidate {
+
+	/**
+	 * A readonly representation of all equally good candidates.
+	 * The list is never null or empty.
+	 * 
+	 * @return all the candidates.
+	 */
+	List<? extends ILinkingCandidate> getAlternatives();
+	
 }

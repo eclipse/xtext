@@ -1011,16 +1011,19 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) node.getSemanticElement();
 		boolean isExtension = featureCall.isExtension();
 		if (featureCall.isStatic() || isExtension) {
-			JvmFeature feature = (JvmFeature) featureCall.getFeature();
-			JvmDeclaredType declaringType = feature.getDeclaringType();
-			if (declaringType != null) {
-				JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
-				JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
-				if (!contains(featureCallOwner.getAllFeatures(), feature)) {
-					if (isExtension) {
-						extensionImports.remove(declaringType);
-					} else {
-						staticImports.remove(declaringType);
+			JvmIdentifiableElement element = featureCall.getFeature();
+			if (!element.eIsProxy()) {
+				JvmFeature feature = (JvmFeature) element;
+				JvmDeclaredType declaringType = feature.getDeclaringType();
+				if (declaringType != null) {
+					JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
+					JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
+					if (!contains(featureCallOwner.getAllFeatures(), feature)) {
+						if (isExtension) {
+							extensionImports.remove(declaringType);
+						} else {
+							staticImports.remove(declaringType);
+						}
 					}
 				}
 			}

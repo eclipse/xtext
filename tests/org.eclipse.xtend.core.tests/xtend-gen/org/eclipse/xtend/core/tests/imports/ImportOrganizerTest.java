@@ -2723,7 +2723,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("def Object test() {");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("return filter(null, null)");
+    _builder.append("return filter(null, null as Class<?>)");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -2743,7 +2743,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("def Object test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return filter(null, null)");
+    _builder_1.append("return filter(null, null as Class<?>)");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -704,6 +704,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			throw new IllegalStateException("Expression " + expression + " was already linked to: " + prev + "\nCannot relink to: " + candidate);
 		}
 	}
+	
+	void reassignLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
+		ILinkingCandidate prev = ensureLinkingMapExists().put(expression, candidate); 
+		if (prev == null) {
+			throw new IllegalStateException("Expression " + expression + " was never linked, cannot replace linking information");
+		}
+	}
 
 	protected DefaultReentrantTypeResolver getResolver() {
 		return resolver;
