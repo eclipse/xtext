@@ -24,7 +24,9 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.override.RawResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -62,7 +64,7 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 			public void accept(String simpleName, int order) {
 				for(JvmType type: bucket.getTypes()) {
 					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
+						Iterable<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getCommonServices());
 						Iterable<? extends JvmFeature> filtered = order == 1 ? features : filter(features, JvmOperation.class);
 						Iterables.addAll(allFeatures, filtered);
 					}
@@ -81,7 +83,7 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 		}
 		return allDescriptions;
 	}
-
+	
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
 		if (receiver != null) {
 			return new StaticFeatureDescriptionWithSyntacticReceiver(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));

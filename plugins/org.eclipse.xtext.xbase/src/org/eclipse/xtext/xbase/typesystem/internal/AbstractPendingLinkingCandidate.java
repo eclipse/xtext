@@ -59,6 +59,13 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public abstract class AbstractPendingLinkingCandidate<Expression extends XExpression> extends AbstractLinkingCandidate<Expression> { 
 	
+	enum CompareResult {
+		THIS,
+		OTHER,
+		EQUAL_VALID,
+		EQUAL_INVALID
+	}
+	
 	protected final IIdentifiableElementDescription description;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	
@@ -353,51 +360,104 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		if (other instanceof AbstractPendingLinkingCandidate) {
 			AbstractPendingLinkingCandidate<?> right = (AbstractPendingLinkingCandidate<?>) other;
-			int arityCompareResult = compareByArityWith(right);
-			if (arityCompareResult != 0) {
-				if (arityCompareResult <= 0) {
+			CompareResult compareResult = compareTo(right);
+			switch(compareResult) {
+				case EQUAL_VALID:
+					return createAmbiguousLinkingCandidate(right);
+				case EQUAL_INVALID:
+				case THIS:
 					return this;
-				}
-				return other;
+				case OTHER:
+					return other;
+				
 			}
+		}
+		throw new IllegalArgumentException("other was " + other);
+	}
+	
+	protected abstract ILinkingCandidate createAmbiguousLinkingCandidate(AbstractPendingLinkingCandidate<?> second);
+	
+	/**
+	 * Returns {@code -1} if this candidate is better, {@code +1} if the 
+	 * right candidate was better, {@code 0} if both candidates are valid
+	 * but ambiguous or {@code Integer.MIN_VALUE} if both candidates are 
+	 * ambiguous but erroneous.
+	 */
+	@SuppressWarnings("incomplete-switch")
+	protected CompareResult compareTo(AbstractPendingLinkingCandidate<?> right) {
+		boolean invalid = false;
+		{
+			CompareResult arityCompareResult = compareByArityWith(right);
+			switch(arityCompareResult) {
+				case EQUAL_INVALID:
+					invalid = true;
+					break;
+				case OTHER:
+				case THIS:
+					return arityCompareResult;
+				
+			}
+		}
+		{
 			boolean visible = isVisible();
 			if (visible != right.isVisible()) {
 				if (visible)
-					return this;
-				return other;
+					return CompareResult.THIS;
+				return CompareResult.OTHER;
+			} else if (!visible) {
+				invalid = true;
 			}
-			int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
-			if (typeArityCompareResult != 0) {
-				if (typeArityCompareResult <= 0) {
-					return this;
-				}
-				return other;
-			}
-			int argumentTypeCompareResult = compareByArgumentTypes(right);
-			if (argumentTypeCompareResult != 0) {
-				if (argumentTypeCompareResult <= 0) {
-					return this;
-				}
-				return other;
-			}
-			int typeArgumentCompareResult = compareByTypeArguments(right);
-			if (typeArgumentCompareResult != 0) {
-				if (typeArgumentCompareResult <= 0) {
-					return this;
-				}
-				return other;
-			}
-			if (isVarArgs() != right.isVarArgs()) {
-				if (isVarArgs())
-					return right;
-				return this;
-			}
-			if(isTypeLiteral() && !right.isTypeLiteral()) {
-				return right;
-			}
-			return this;
 		}
-		throw new IllegalArgumentException("other was " + other);
+		{
+			CompareResult typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
+			switch(typeArityCompareResult) {
+				case EQUAL_INVALID:
+					invalid = true;
+					break;
+				case OTHER:
+				case THIS:
+					return typeArityCompareResult;
+				
+			}
+		}
+		{
+			CompareResult argumentTypeCompareResult = compareByArgumentTypes(right);
+			switch(argumentTypeCompareResult) {
+				case EQUAL_INVALID:
+					invalid = true;
+					break;
+				case OTHER:
+				case THIS:
+					return argumentTypeCompareResult;
+				
+			}
+		}
+		{
+			CompareResult typeArgumentCompareResult = compareByTypeArguments(right);
+			switch(typeArgumentCompareResult) {
+				case EQUAL_INVALID:
+					invalid = true;
+					break;
+				case OTHER:
+				case THIS:
+					return typeArgumentCompareResult;
+				
+			}
+		}
+		if (isVarArgs() != right.isVarArgs()) {
+			if (isVarArgs())
+				return CompareResult.OTHER;
+			return CompareResult.THIS;
+		}
+		if(isTypeLiteral() && !right.isTypeLiteral()) {
+			return CompareResult.OTHER;
+		}
+		if (description.getBucketId() != right.description.getBucketId()) {
+			return CompareResult.THIS;
+		}
+		if (invalid)
+			return CompareResult.EQUAL_INVALID;
+		return CompareResult.EQUAL_VALID;
 	}
 	
 	protected boolean isVisible() {
@@ -412,27 +472,42 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return false;
 	}
 	
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
+	@SuppressWarnings("incomplete-switch")
+	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
-		
-		int result = compareByArgumentTypes(right, false);
-		if (result != 0)
-			return result;
-		result = compareExpectedArgumentTypes(right);
-		if (result != 0)
-			return result;
+		{
+			CompareResult argumentTypeResult = compareByArgumentTypes(right, false);
+			switch(argumentTypeResult) {
+				case EQUAL_INVALID:
+					// ignore since we have a second pass below
+					break;
+				case OTHER:
+				case THIS:
+					return argumentTypeResult;
+				
+			}
+		}
+		{
+			CompareResult parameterTypeResult = compareExpectedArgumentTypes(right);
+			switch(parameterTypeResult) {
+				case EQUAL_INVALID:
+					throw new IllegalStateException();
+				case OTHER:
+				case THIS:
+					return parameterTypeResult;
+				
+			}
+		}
 		// subsequent parameters may have altered the bound type arguments
 		// TODO this is more of a workaround than a real solution
 		// actually the order of added hints and their sources should take care of that case
 		// in a way that UnboundTypeConformance returns false for invalid combinations
-		result = compareByArgumentTypes(right, true);
-		if (result != 0)
-			return result;
-		return result;
+		CompareResult secondPassArgumentTypes = compareByArgumentTypes(right, true);
+		return secondPassArgumentTypes;
 	}
 	
-	protected int compareByTypeArguments(AbstractPendingLinkingCandidate<?> right) {
+	protected CompareResult compareByTypeArguments(AbstractPendingLinkingCandidate<?> right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
 		
@@ -440,10 +515,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int rightFailures = right.getTypeArgumentConformanceFailures(null);
 		if (leftFailures != rightFailures) {
 			if (leftFailures < rightFailures)
-				return -1;
-			return 1;
+				return CompareResult.THIS;
+			return CompareResult.OTHER;
 		}
-		return 0;
+		return leftFailures != 0 ? CompareResult.EQUAL_INVALID : CompareResult.EQUAL_VALID;
 	}
 
 	protected int getTypeArgumentConformanceFailures(@Nullable IAcceptor<? super AbstractDiagnostic> acceptor) {
@@ -495,18 +570,27 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return failures;
 	}
 	
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
+	@SuppressWarnings("incomplete-switch")
+	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
 		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
 		int leftDemand = 0;
 		int rightDemand = 0;
+		boolean invalid = false;
 		for(int i = 0; i < upTo; i++) {
 			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i, recompute);
 			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i, recompute);
-			int hintCompareResult = compareByArgumentTypes(right, i, leftConformance, rightConformance);
-			if (hintCompareResult != 0)
-				return hintCompareResult;
+			CompareResult hintCompareResult = compareByArgumentTypes(right, i, leftConformance, rightConformance);
+			switch(hintCompareResult) {
+				case EQUAL_INVALID:
+					invalid = true;
+					break;
+				case OTHER:
+				case THIS:
+					return hintCompareResult;
+				
+			}
 			if (leftConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
 				leftDemand++;
 			}
@@ -520,7 +604,14 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				rightBoxing++;
 			}
 		}
-		return compareByArgumentTypes(right, leftBoxing, rightBoxing, leftDemand, rightDemand);
+		CompareResult result = compareByArgumentTypes(right, leftBoxing, rightBoxing, leftDemand, rightDemand);
+		switch(result) {
+			case EQUAL_VALID:
+				if (invalid)
+					return CompareResult.EQUAL_INVALID;
+			default:
+				return result;
+		}
 	}
 
 	/**
@@ -533,9 +624,19 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * @param leftConformance the computed conformance in this linking candidate
 	 * @param rightConformance the computed conformance if the other candidate was chosen  
 	 */
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int argumentIndex, EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
+	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int argumentIndex, EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
 		int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
-		return hintCompareResult;
+		if (hintCompareResult == 0) {
+			if (leftConformance.contains(ConformanceHint.SUCCESS)) {
+				return CompareResult.EQUAL_VALID;
+			} else {
+				return CompareResult.EQUAL_INVALID;
+			}
+		} else if (hintCompareResult < 0) {
+			return CompareResult.THIS;
+		} else {
+			return CompareResult.OTHER;
+		}
 	}
 
 	/**
@@ -549,18 +650,18 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * @param leftDemand the number of required demand conversions if this candidate was chosen  
 	 * @param rightDemand the number of required demand conversions if the other candidate was chosen  
 	 */
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
+	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
 		if (leftDemand != rightDemand) {
 			if (leftDemand < rightDemand)
-				return -1;
-			return 1;
+				return CompareResult.THIS;
+			return CompareResult.OTHER;
 		}
 		if (leftBoxing != rightBoxing) {
 			if (leftBoxing < rightBoxing)
-				return -1;
-			return 1;
+				return CompareResult.THIS;
+			return CompareResult.OTHER;
 		}
-		return 0;
+		return CompareResult.EQUAL_VALID;
 	}
 	
 	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
@@ -577,7 +678,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
 	}
 
-	protected int compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
+	protected CompareResult compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
 		int result = 0;
 		int upTo = Math.min(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		for(int i = 0; i < upTo; i++) {
@@ -585,43 +686,50 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(i);
 			if (expectedArgumentType == null) {
 				if (rightExpectedArgumentType != null)
-					return 1;
+					return CompareResult.OTHER;
 			} else {
 				if (rightExpectedArgumentType == null) {
-					return -1;
+					return CompareResult.THIS;
 				}
 				if (expectedArgumentType.isAssignableFrom(rightExpectedArgumentType)) {
-					if (!rightExpectedArgumentType.isAssignableFrom(expectedArgumentType))
+					if (!rightExpectedArgumentType.isAssignableFrom(expectedArgumentType)) {
 						result++;
+					}
 				} else if (rightExpectedArgumentType.isAssignableFrom(expectedArgumentType)) {
 					result--;
 				}
 			}
 		}
-		return result;
+		if (result == 0) {
+			return CompareResult.EQUAL_VALID;
+		} else if (result < 0) {
+			return CompareResult.THIS;
+		} else {
+			return CompareResult.OTHER;
+		}
 	}
-	
-	protected int compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
-		int arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
+
+	protected CompareResult compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
+		CompareResult arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
 		return arityCompareResult;
 	}
 
-	protected int compareByArity(int leftArityMismatch, int rightArityMismatch) {
+	protected CompareResult compareByArity(int leftArityMismatch, int rightArityMismatch) {
 		if (leftArityMismatch != rightArityMismatch) {
 			if (leftArityMismatch == 0)
-				return -1;
+				return CompareResult.THIS;
 			if (rightArityMismatch == 0)
-				return 1;
+				return CompareResult.OTHER;
 			if (Math.abs(leftArityMismatch) < Math.abs(rightArityMismatch))
-				return -1;
+				return CompareResult.THIS;
 			if (Math.abs(leftArityMismatch) > Math.abs(rightArityMismatch))
-				return 1;
+				return CompareResult.OTHER;
 			if (leftArityMismatch > 0)
-				return -1;
+				return CompareResult.THIS;
 			if (rightArityMismatch > 0)
-				return 1;
+				return CompareResult.OTHER;
 		}
-		return 0;
+		return leftArityMismatch == 0 ? CompareResult.EQUAL_VALID : CompareResult.EQUAL_INVALID;
 	}
 	
 	/**
