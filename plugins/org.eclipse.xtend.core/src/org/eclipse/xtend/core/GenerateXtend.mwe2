@@ -19,7 +19,7 @@ var memoize = false
 Workflow {
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
-		platformUri = "${projectPath}/../.."
+		scanClassPath = true
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 	}
 	
