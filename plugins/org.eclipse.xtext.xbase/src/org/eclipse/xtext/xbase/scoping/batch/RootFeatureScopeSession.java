@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
 import com.google.inject.Inject;
@@ -37,6 +38,9 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	private ConstructorScopes constructorScopes;
 	
 	@Inject
+	private IResolvedFeatures.Provider resolvedFeaturesProvider;
+	
+	@Inject
 	private TypeScopes typeScopes;
 	
 	@Inject
@@ -48,6 +52,11 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	@Override
 	protected FeatureScopes getFeatureScopes() {
 		return featureScopes;
+	}
+	
+	@Override
+	protected IResolvedFeatures.Provider getResolvedFeaturesProvider() {
+		return resolvedFeaturesProvider;
 	}
 	
 	@Override

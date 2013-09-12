@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -571,6 +572,11 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 
 		@Override
 		protected FeatureScopes getFeatureScopes() {
+			throw new UnsupportedOperationException();
+		}
+		
+		@Override
+		protected IResolvedFeatures.Provider getResolvedFeaturesProvider() {
 			throw new UnsupportedOperationException();
 		}
 		

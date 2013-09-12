@@ -1393,7 +1393,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import static org.eclipse.xtext.xbase.lib.IterableExtensions.*
 			class Foo {
 			  def Object test() {
-			    return filter(null, null)
+			    return filter(null, null as Class<?>)
 			  }
 			}
 		'''.assertIsOrganizedTo('''
@@ -1403,7 +1403,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 			class Foo {
 			  def Object test() {
-			    return filter(null, null)
+			    return filter(null, null as Class<?>)
 			  }
 			}
 		''')

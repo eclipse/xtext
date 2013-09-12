@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -31,18 +30,19 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ResolvedOperations {
+public class ResolvedOperations extends AbstractResolvedFeatures {
 
-	private LightweightTypeReference type;
 	private List<IResolvedOperation> allOperations;
 	private List<IResolvedOperation> declaredOperations;
 	private List<IResolvedConstructor> declaredConstructors;
 	private ListMultimap<String, IResolvedOperation> allOperationsPerErasure;
-	private OverrideTester overrideTester;
-
+	
 	public ResolvedOperations(LightweightTypeReference type, OverrideTester overrideTester) {
-		this.type = type;
-		this.overrideTester = overrideTester;
+		super(type, overrideTester);
+	}
+	
+	public ResolvedOperations(LightweightTypeReference type) {
+		this(type, new OverrideTester());
 	}
 	
 	public List<IResolvedOperation> getAllOperations() {
@@ -70,7 +70,7 @@ public class ResolvedOperations {
 		List<IResolvedOperation> operations = getAllOperations(erasedSignature);
 		for(int i = 0; i < operations.size(); i++) {
 			IResolvedOperation current = operations.get(i);
-			if (current.getDeclaration().getDeclaringType() != type.getType()) {
+			if (current.getDeclaration().getDeclaringType() != getRawType()) {
 				return operations.subList(0, i);
 			}
 		}
@@ -94,7 +94,7 @@ public class ResolvedOperations {
 	}
 
 	protected List<IResolvedOperation> computeAllOperations() {
-		JvmType rawType = type.getType();
+		JvmType rawType = getRawType();
 		if (!(rawType instanceof JvmDeclaredType)) {
 			return Collections.emptyList();
 		}
@@ -105,8 +105,31 @@ public class ResolvedOperations {
 		return Collections.unmodifiableList(result);
 	}
 	
+	protected void computeAllOperations(JvmDeclaredType type, Multimap<String, AbstractResolvedOperation> processedOperations, Set<JvmDeclaredType> processedTypes, List<IResolvedOperation> result) {
+		if (type != null && !type.eIsProxy() && processedTypes.add(type)) {
+			Iterable<JvmOperation> operations = type.getDeclaredOperations();
+			for(JvmOperation operation: operations) {
+				String simpleName = operation.getSimpleName();
+				if (processedOperations.containsKey(simpleName)) {
+					if (isOverridden(operation, processedOperations.get(simpleName))) {
+						continue;
+					}
+				}
+				BottomResolvedOperation resolvedOperation = createResolvedOperation(operation);
+				processedOperations.put(simpleName, resolvedOperation);
+				result.add(resolvedOperation);
+			}
+			for(JvmTypeReference superType: type.getSuperTypes()) {
+				JvmType rawSuperType = superType.getType();
+				if (rawSuperType instanceof JvmDeclaredType) {
+					computeAllOperations((JvmDeclaredType) rawSuperType, processedOperations, processedTypes, result);
+				}
+			}
+		}
+	}
+	
 	protected List<IResolvedOperation> computeDeclaredOperations() {
-		JvmType rawType = type.getType();
+		JvmType rawType = getRawType();
 		if (!(rawType instanceof JvmDeclaredType)) {
 			return Collections.emptyList();
 		}
@@ -120,7 +143,7 @@ public class ResolvedOperations {
 	}
 	
 	protected List<IResolvedConstructor> computeDeclaredConstructors() {
-		JvmType rawType = type.getType();
+		JvmType rawType = getRawType();
 		if (!(rawType instanceof JvmGenericType)) {
 			return Collections.emptyList();
 		}
@@ -130,42 +153,5 @@ public class ResolvedOperations {
 		}
 		return Collections.unmodifiableList(result);
 	}
-	
-	protected void computeAllOperations(JvmDeclaredType type, Multimap<String, AbstractResolvedOperation> processedOperations, Set<JvmDeclaredType> processedTypes,
-			List<IResolvedOperation> result) {
-		if (type != null && !type.eIsProxy() && processedTypes.add(type)) {
-			Iterable<JvmOperation> operations = type.getDeclaredOperations();
-			for(JvmOperation operation: operations) {
-				String simpleName = operation.getSimpleName();
-				if (processedOperations.containsKey(simpleName)) {
-					if (isOverridden(operation, processedOperations.get(simpleName))) {
-						continue;
-					}
-				}
-				BottomResolvedOperation resolvedOperation = new BottomResolvedOperation(operation, getType(), overrideTester);
-				processedOperations.put(simpleName, resolvedOperation);
-				result.add(resolvedOperation);
-			}
-			for(JvmTypeReference superType: type.getSuperTypes()) {
-				JvmType rawSuperType = superType.getType();
-				if (rawSuperType instanceof JvmDeclaredType) {
-					computeAllOperations((JvmDeclaredType) rawSuperType, processedOperations, processedTypes, result);
-				}
-			}
-		}
-	}
 
-	protected boolean isOverridden(JvmOperation operation, Collection<AbstractResolvedOperation> processedOperations) {
-		for(AbstractResolvedOperation processed: processedOperations) {
-			if (overrideTester.isSubsignature(processed, operation, false).isOverridingOrImplementing()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public LightweightTypeReference getType() {
-		return type;
-	}
-	
 }

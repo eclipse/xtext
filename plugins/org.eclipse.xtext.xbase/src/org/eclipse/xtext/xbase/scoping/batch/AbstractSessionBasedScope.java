@@ -18,12 +18,14 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -62,6 +64,11 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	
 	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
 		acceptor.accept(name.toString(), 1);
+	}
+	
+	protected Iterable<JvmFeature> findAllFeaturesByName(JvmType type, String simpleName, IResolvedFeatures.Provider resolvedFeaturesProvider) {
+		IResolvedFeatures resolvedFeatures = resolvedFeaturesProvider.getResolvedFeatures(type);
+		return resolvedFeatures.getAllFeatures(simpleName);
 	}
 	
 	protected void processAsPropertyNames(QualifiedName name, NameAcceptor acceptor) {

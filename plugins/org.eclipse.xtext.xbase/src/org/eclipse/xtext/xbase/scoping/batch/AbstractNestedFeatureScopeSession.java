@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
 /**
  * An abstract nested feature scope session.
@@ -33,13 +34,15 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 	private final FeatureScopes featureScopes;
 	private final ConstructorScopes constructorScopes;
 	private final TypeScopes typeScopes;
-	private int id;
+	private final IResolvedFeatures.Provider resolvedFeaturesProvider;
+	private final int id;
 
 	protected AbstractNestedFeatureScopeSession(AbstractFeatureScopeSession parent) {
 		this.parent = parent;
 		this.featureScopes = parent.getFeatureScopes();
 		this.typeScopes = parent.getTypeScopes();
 		this.constructorScopes = parent.getConstructorScopes();
+		this.resolvedFeaturesProvider = parent.getResolvedFeaturesProvider();
 		this.id = parent.getId() + 1;
 	}
 	
@@ -51,6 +54,11 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 	@Override
 	protected FeatureScopes getFeatureScopes() {
 		return featureScopes;
+	}
+	
+	@Override
+	protected IResolvedFeatures.Provider getResolvedFeaturesProvider() {
+		return resolvedFeaturesProvider;
 	}
 	
 	@Override
