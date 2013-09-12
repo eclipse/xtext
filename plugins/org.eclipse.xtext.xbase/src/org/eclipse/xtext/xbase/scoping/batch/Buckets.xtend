@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch
 
+import java.util.EnumSet
 import java.util.List
-import org.eclipse.xtend.lib.Data
+import java.util.Map
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
-import java.util.Map
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedFeatures
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import java.util.EnumSet
 
 /**
  * A type bucket collects a number of types that originate in the 
@@ -29,6 +29,7 @@ import java.util.EnumSet
 class TypeBucket {
 	int id
 	List<? extends JvmType> types
+	IResolvedFeatures.Provider resolvedFeaturesProvider
 	def getHints() {
 		EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS)
 	}
@@ -46,6 +47,7 @@ class TypeBucket {
 class ExpressionBucket {
     int id
     Map<XExpression, LightweightTypeReference> extensionProviders
+    IResolvedFeatures.Provider resolvedFeaturesProvider
 }
 
 /**

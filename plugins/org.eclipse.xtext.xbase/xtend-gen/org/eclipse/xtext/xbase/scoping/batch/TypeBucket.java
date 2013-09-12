@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures.Provider;
 
 /**
  * A type bucket collects a number of types that originate in the
@@ -37,15 +38,22 @@ public class TypeBucket {
     return this._types;
   }
   
+  private final Provider _resolvedFeaturesProvider;
+  
+  public Provider getResolvedFeaturesProvider() {
+    return this._resolvedFeaturesProvider;
+  }
+  
   public EnumSet<ConformanceHint> getHints() {
     EnumSet<ConformanceHint> _of = EnumSet.<ConformanceHint>of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
     return _of;
   }
   
-  public TypeBucket(final int id, final List<? extends JvmType> types) {
+  public TypeBucket(final int id, final List<? extends JvmType> types, final Provider resolvedFeaturesProvider) {
     super();
     this._id = id;
     this._types = types;
+    this._resolvedFeaturesProvider = resolvedFeaturesProvider;
   }
   
   @Override
@@ -54,6 +62,7 @@ public class TypeBucket {
     int result = 1;
     result = prime * result + _id;
     result = prime * result + ((_types== null) ? 0 : _types.hashCode());
+    result = prime * result + ((_resolvedFeaturesProvider== null) ? 0 : _resolvedFeaturesProvider.hashCode());
     return result;
   }
   
@@ -72,6 +81,11 @@ public class TypeBucket {
       if (other._types != null)
         return false;
     } else if (!_types.equals(other._types))
+      return false;
+    if (_resolvedFeaturesProvider == null) {
+      if (other._resolvedFeaturesProvider != null)
+        return false;
+    } else if (!_resolvedFeaturesProvider.equals(other._resolvedFeaturesProvider))
       return false;
     return true;
   }

@@ -133,10 +133,10 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 		}
 		final List<IEObjectDescription> result = Lists.newArrayList();
 		
-		for (ExpressionBucket bucket : buckets) {
+		for (final ExpressionBucket bucket : buckets) {
 			Map<XExpression, LightweightTypeReference> extensionProviders = bucket.getExtensionProviders();
 			for (Map.Entry<XExpression, LightweightTypeReference> extensionProvider : extensionProviders.entrySet()) {
-				LightweightTypeReference extensionType = extensionProvider.getValue();
+				final LightweightTypeReference extensionType = extensionProvider.getValue();
 				if (extensionType == null)
 					throw new IllegalStateException("extensionType is null");
 				final List<JvmType> types = extensionType.getRawTypes();
@@ -145,7 +145,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 					public void accept(String simpleName, int order) {
 						for(JvmType type: types) {
 							if (type instanceof JvmDeclaredType) {
-								Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
+								Iterable<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
 								Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
 								Iterables.addAll(allFeatures, filtered);
 							}

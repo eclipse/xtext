@@ -64,8 +64,8 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
 import com.google.common.base.Joiner.MapJoiner;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -702,6 +702,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		ILinkingCandidate prev = ensureLinkingMapExists().put(expression, candidate); 
 		if (prev != null) {
 			throw new IllegalStateException("Expression " + expression + " was already linked to: " + prev + "\nCannot relink to: " + candidate);
+		}
+	}
+	
+	void reassignLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
+		ILinkingCandidate prev = ensureLinkingMapExists().put(expression, candidate); 
+		if (prev == null) {
+			throw new IllegalStateException("Expression " + expression + " was never linked, cannot replace linking information");
 		}
 	}
 

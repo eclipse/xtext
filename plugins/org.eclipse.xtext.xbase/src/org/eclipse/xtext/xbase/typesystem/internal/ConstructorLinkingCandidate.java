@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -51,6 +52,11 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	
 	public XConstructorCall getConstructorCall() {
 		return getExpression();
+	}
+	
+	@Override
+	protected ILinkingCandidate createAmbiguousLinkingCandidate(AbstractPendingLinkingCandidate<?> second) {
+		return new AmbiguousConstructorLinkingCandidate(this, second);
 	}
 
 	@Override

@@ -76,7 +76,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 				for(TypeBucket bucket: buckets) {
 					for(JvmType type: bucket.getTypes()) {
 						if (type instanceof JvmDeclaredType) {
-							Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
+							Iterable<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
 							for(JvmFeature feature: features) {
 								if (feature.isStatic() && (order == 1 || feature instanceof JvmOperation)) {
 									IIdentifiableElementDescription description = createDescription(name, feature, bucket);
