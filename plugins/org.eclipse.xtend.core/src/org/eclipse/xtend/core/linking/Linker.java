@@ -7,12 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.linking;
 
+import java.util.Iterator;
+import java.util.ListIterator;
+
+import org.eclipse.emf.common.util.AbstractTreeIterator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.EClassImpl;
+import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractElement;
@@ -70,7 +77,7 @@ public class Linker extends XbaseLazyLinker {
 				state.clearEncodeURIs();
 				clearReferences(model);
 				installProxies(state, model, producer);
-				TreeIterator<EObject> iterator = model.eAllContents();
+				TreeIterator<EObject> iterator = getAllNonDerivedContents(model);
 				while (iterator.hasNext()) {
 					EObject eObject = iterator.next();
 					clearReferences(eObject);
@@ -78,6 +85,50 @@ public class Linker extends XbaseLazyLinker {
 				}
 			}
 		});
+	}
+	
+	private TreeIterator<EObject> getAllNonDerivedContents(EObject root) {
+		/*
+		 * We cannot simply use root.eAllContents here since the iterator
+		 * will probe for #hasNext on each invocation of #next. This is usually
+		 * not a problem but with derived containment, it is an issue.
+		 * The accessor of XAbstractFeatureCall#getImplicitReceiver uses #getFeature
+		 * to initialize itself. This will cause the potential proxy feature
+		 * to be resolved which in turn tries to access the mapped proxy URI fragments
+		 * in the resource. Now these fragments are currently in the process of being
+		 * updated, e.g. there may not even be enough entries. Thus #getFeature
+		 * shall not be called here. Long story short, this iterator filters
+		 * derived containment features.
+		 */
+		return new AbstractTreeIterator<EObject>(root, false) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Iterator<EObject> getChildren(Object object) {
+				EObject eObject = (EObject) object;
+				return getNonDerivedContents(eObject);
+			}
+
+		};
+	}
+
+	private Iterator<EObject> getNonDerivedContents(EObject eObject) {
+		EStructuralFeature[] eStructuralFeatures = 
+		  ((EClassImpl.FeatureSubsetSupplier) eObject.eClass().getEAllStructuralFeatures()).containments();
+
+		return (eStructuralFeatures == null 
+				? EContentsEList.<EObject> emptyContentsEList()
+				: new EContentsEList<EObject>(eObject, eStructuralFeatures) {
+					@Override
+					protected ListIterator<EObject> newResolvingListIterator() {
+						return new ResolvingFeatureIteratorImpl<EObject>(eObject, eStructuralFeatures) {
+							@Override
+							protected boolean isIncluded(EStructuralFeature eStructuralFeature) {
+								return !eStructuralFeature.isDerived();
+							}
+						};
+					}
+				}).iterator();
 	}
 	
 	@Override
