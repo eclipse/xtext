@@ -18,7 +18,7 @@ import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.LazyStringInputStream;
 
 /**
  * The model access allows to obtain or manipulate the edited text.
@@ -69,7 +69,7 @@ public class EmbeddedEditorModelAccess {
 	protected XtextResource createResource(String content) {
 		XtextResource result = this.resourceProvider.createResource();
 		try {
-			result.load(new StringInputStream(content, result.getEncoding()), Collections.emptyMap());
+			result.load(new LazyStringInputStream(content, result.getEncoding()), Collections.emptyMap());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
