@@ -18,6 +18,22 @@ import com.google.common.annotations.GwtCompatible;
 @GwtCompatible public class StringExtensions {
 
 	/**
+	 * The binary <code>+</code> operator that concatenates a string and the string
+	 * reprentation of an object.
+	 * 
+	 * @param a
+	 *            a string.
+	 * @param b
+	 *            an object.
+	 * @return <code>a + b</code>
+	 */
+	@Pure /* not guaranteed, since toString() is invoked */
+	@Inline("($1 + $2)")
+	public static String operator_plus(String a, Object b) {
+		return a + b;
+	}
+	
+	/**
 	 * The binary <code>+</code> operator that concatenates two strings.
 	 * 
 	 * @param a
@@ -25,10 +41,12 @@ import com.google.common.annotations.GwtCompatible;
 	 * @param b
 	 *            another string.
 	 * @return <code>a + b</code>
+	 * 
+	 * @since 2.5
 	 */
 	@Pure /* not guaranteed, since toString() is invoked */
 	@Inline("($1 + $2)")
-	public static String operator_plus(String a, Object b) {
+	public static String operator_plus(String a, String b) {
 		return a + b;
 	}
 

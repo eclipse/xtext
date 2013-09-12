@@ -8,22 +8,27 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.typesystem.override.RawResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -62,6 +67,14 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	
 	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
 		acceptor.accept(name.toString(), 1);
+	}
+	
+	protected Iterable<JvmFeature> findAllFeaturesByName(JvmType type, String simpleName, CommonTypeComputationServices commonServices) {
+		if (type instanceof JvmDeclaredType && !type.eIsProxy()) {
+			RawResolvedFeatures resolvedFeatures = RawResolvedFeatures.getResolvedFeatures(type, commonServices);
+			return resolvedFeatures.getAllFeatures(simpleName);
+		}
+		return Collections.emptyList();
 	}
 	
 	protected void processAsPropertyNames(QualifiedName name, NameAcceptor acceptor) {

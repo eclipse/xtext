@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
  * A type bucket that was produced from the synonym of a type.
@@ -30,8 +31,8 @@ public class SynonymTypeBucket extends TypeBucket {
     return this._hints;
   }
   
-  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final EnumSet<ConformanceHint> hints) {
-    super(id, types);
+  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final CommonTypeComputationServices commonServices, final EnumSet<ConformanceHint> hints) {
+    super(id, types, commonServices);
     this._hints = hints;
   }
   

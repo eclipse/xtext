@@ -31,8 +31,11 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.override.ParameterizedResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.override.RawResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
@@ -75,7 +78,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 			public void accept(String simpleName, int order) {
 				for(JvmType type: bucket.getTypes()) {
 					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
+						Iterable<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getCommonServices());
 						Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
 						Iterables.addAll(allFeatures, filtered);
 					}
@@ -90,6 +93,16 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 				allDescriptions.add(createDescription(name, feature, bucket));
 		}
 		return allDescriptions;
+	}
+	
+	@Override
+	protected Iterable<JvmFeature> findAllFeaturesByName(JvmType type, String simpleName, CommonTypeComputationServices commonServices) {
+		if (type instanceof JvmDeclaredType) {
+			RawResolvedFeatures resolvedFeatures = RawResolvedFeatures.getResolvedFeatures(type, commonServices);
+			ParameterizedResolvedFeatures parameterizedView = resolvedFeatures.getParameterizedView(receiverType);
+			return parameterizedView.getAllFeatures(simpleName);
+		}
+		return Collections.emptyList();
 	}
 
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {

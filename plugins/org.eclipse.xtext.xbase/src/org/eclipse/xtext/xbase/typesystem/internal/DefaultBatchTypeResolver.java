@@ -111,7 +111,6 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 		if (currentAdapter == null) {
 			final AbstractRootedReentrantTypeResolver newResolver = createResolver();
 			final TypeResolutionStateAdapter newAdapter = new TypeResolutionStateAdapter(root, newResolver);
-			adapters.add(newAdapter);
 			AbstractRootedReentrantTypeResolver result = new AbstractRootedReentrantTypeResolver() {
 				
 				private int reentrance = 0;
