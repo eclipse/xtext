@@ -101,6 +101,14 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return append(model).append(Strings.newLine());
 	}
 
+	/**
+	 * Inserts the given text at the current cursor position.
+	 * The cursor position will be moved to the end of the inserted text.
+	 */
+	public ContentAssistProcessorTestBuilder insert(String model) throws Exception {
+		return insert(model, getCursorPosition());
+	}
+	
 	public ContentAssistProcessorTestBuilder insert(String model, int cursorPosition) throws Exception {
 		StringBuilder builder = new StringBuilder(getModel()).insert(cursorPosition, model);
 		return clone(builder.toString(), cursorPosition + model.length());
