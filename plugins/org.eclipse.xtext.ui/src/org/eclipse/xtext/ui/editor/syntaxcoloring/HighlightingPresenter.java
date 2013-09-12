@@ -551,8 +551,9 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	 * @param offset
 	 *            the offset
 	 * @return the index of the last position with an offset greater than the given offset
+	 * @since 2.5
 	 */
-	private int computeIndexAfterOffset(List<AttributedPosition> positions, int offset) {
+	protected int computeIndexAfterOffset(List<AttributedPosition> positions, int offset) {
 		int i = -1;
 		int j = positions.size();
 		while (j - i > 1) {
@@ -574,8 +575,37 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	 * @param offset
 	 *            the offset
 	 * @return the index of the last position with an offset equal or greater than the given offset
+	 * @since 2.5 
 	 */
-	private int computeIndexAtOffset(List<AttributedPosition> positions, int offset) {
+	protected int computeIndexEndingAtOrEnclosingOffset(List<AttributedPosition> positions, int offset) {
+		int i = -1;
+		int j = positions.size();
+		while (j - i > 1) {
+			int k = (i + j) >> 1;
+			AttributedPosition position = positions.get(k);
+			int positionOffset = position.getOffset();
+			if (positionOffset <= offset && positionOffset + position.getLength() > offset) {
+				return k;
+			}
+			if (position.getOffset() >= offset)
+				j = k;
+			else
+				i = k;
+		}
+		return j;
+	}
+	
+	/**
+	 * Returns the index of the first position with an offset equal or greater than the given offset.
+	 * 
+	 * @param positions
+	 *            the positions, must be ordered by offset and must not overlap
+	 * @param offset
+	 *            the offset
+	 * @return the index of the last position with an offset equal or greater than the given offset
+	 * @since 2.5 
+	 */
+	protected int computeIndexAtOffset(List<AttributedPosition> positions, int offset) {
 		int i = -1;
 		int j = positions.size();
 		while (j - i > 1) {
@@ -594,7 +624,7 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	 */
 	public void applyTextPresentation(TextPresentation textPresentation) {
 		IRegion region = textPresentation.getExtent();
-		int i = computeIndexAtOffset(fPositions, region.getOffset());
+		int i = computeIndexEndingAtOrEnclosingOffset(fPositions, region.getOffset());
 		int n = computeIndexAtOffset(fPositions, region.getOffset() + region.getLength());
 		if (n - i > 2) {
 			List<StyleRange> ranges = new ArrayList<StyleRange>(n - i);
@@ -706,7 +736,6 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 		fPresentationReconciler = backgroundPresentationReconciler;
 
 		fSourceViewer.prependTextPresentationListener(this);
-		fSourceViewer.addTextPresentationListener(this);
 		fSourceViewer.addTextInputListener(this);
 		manageDocument(fSourceViewer.getDocument());
 	}
