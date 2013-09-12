@@ -20,7 +20,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -41,8 +40,10 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.internal.util.FeatureKinds;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -65,6 +66,11 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IIdentifiableElementDescription description,
 			ExpressionTypeComputationState state) {
 		super(featureCall, description, state);
+	}
+	
+	@Override
+	protected ILinkingCandidate createAmbiguousLinkingCandidate(AbstractPendingLinkingCandidate<?> second) {
+		return new AmbiguousFeatureLinkingCandidate(this, second);
 	}
 	
 	@Override
@@ -241,25 +247,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	protected String getFeatureTypeName() {
 		JvmIdentifiableElement feature = getFeature();
-		if (feature instanceof JvmFormalParameter) {
-			return "parameter";
-		}
-		if (feature instanceof XVariableDeclaration) {
-			return "local variable";
-		}
-		if (feature instanceof JvmField) {
-			return "field";
-		}
-		if (feature instanceof JvmOperation) {
-			return "method";
-		}
-		if (feature instanceof JvmConstructor) {
-			return "constructor";
-		}
-		if (feature instanceof JvmType) {
-			return "type";
-		}
-		throw new IllegalStateException();
+		String result = FeatureKinds.getTypeName(feature);
+		return result;
 	}
 
 	protected boolean isStaticAccessSyntax() {
@@ -369,25 +358,25 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected int compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
-		int result = super.compareByArityWith(right);
-		if (result == 0) {
+	protected CompareResult compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
+		CompareResult result = super.compareByArityWith(right);
+		if (result == CompareResult.EQUAL_VALID) {
 			boolean isExecutable = getFeature() instanceof JvmExecutable;
 			if (isExecutable != right.getFeature() instanceof JvmExecutable && isVisible() == right.isVisible() && isTypeLiteral() == right.isTypeLiteral()) {
 				// TODO this code looks bogus to me (we need to verify why / if we need this)
 				if (getExpression() instanceof XAssignment) {
 					if (isExecutable)
-						return 1;
-					return -1;
+						return CompareResult.OTHER;
+					return CompareResult.THIS;
 				} else {
 					if (isExplicitOperationCall()) {
 						if (isExecutable)
-							return -1;
-						return 1;
+							return CompareResult.THIS;
+						return CompareResult.OTHER;
 					} else {
 						if (isExecutable)
-							return 1;
-						return -1;
+							return CompareResult.OTHER;
+						return CompareResult.THIS;
 					}
 				}
 			}
@@ -396,18 +385,19 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int argumentIndex, EnumSet<ConformanceHint> leftConformance,
+	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int argumentIndex, EnumSet<ConformanceHint> leftConformance,
 			EnumSet<ConformanceHint> rightConformance) {
-		int result = super.compareByArgumentTypes(right, argumentIndex, leftConformance, rightConformance);
-		if (result != 0 || leftConformance.contains(ConformanceHint.SUCCESS) || !(right instanceof FeatureLinkingCandidate))
+		CompareResult result = super.compareByArgumentTypes(right, argumentIndex, leftConformance, rightConformance);
+		if ((result != CompareResult.EQUAL_INVALID && result != CompareResult.EQUAL_VALID) 
+				|| leftConformance.contains(ConformanceHint.SUCCESS) || !(right instanceof FeatureLinkingCandidate))
 			return result;
 		// both types do not match - pick the one which is not an extension
 		boolean firstArgumentMismatch = isFirstArgument(argumentIndex);
 		boolean rightFirstArgumentMismatch = ((FeatureLinkingCandidate) right).isFirstArgument(argumentIndex);
 		if (firstArgumentMismatch != rightFirstArgumentMismatch) {
 			if (firstArgumentMismatch)
-				return 1;
-			return -1;
+				return CompareResult.OTHER;
+			return CompareResult.THIS;
 		}
 		return result;
 	}
@@ -421,40 +411,40 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
+	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
 		if (leftDemand != rightDemand) {
 			if (leftDemand < rightDemand)
-				return -1;
-			return 1;
+				return CompareResult.THIS;
+			return CompareResult.OTHER;
 		}
 		if (right instanceof FeatureLinkingCandidate) {
 			FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
 			if (isExtension() != casted.isExtension()) {
 				if (isExtension())
-					return 1;
-				return -1;
+					return CompareResult.OTHER;
+				return CompareResult.THIS;
 			}
 			if (isStatic() != casted.isStatic()) {
 				if (isSyntacticReceiverPossibleArgument() == casted.isSyntacticReceiverPossibleArgument()) {
 					if (isStatic()) {
-						return 1;
+						return CompareResult.OTHER;
 					}
-					return -1;
+					return CompareResult.THIS;
 				} else {
 					if (isStatic() && !isSyntacticReceiverPossibleArgument())
-						return -1;
+						return CompareResult.THIS;
 					if (casted.isStatic() && !casted.isSyntacticReceiverPossibleArgument()) {
-						return 1;
+						return CompareResult.OTHER;
 					}
 				}
 			}
 		}
 		if (leftBoxing != rightBoxing) {
 			if (leftBoxing < rightBoxing)
-				return -1;
-			return 1;
+				return CompareResult.THIS;
+			return CompareResult.OTHER;
 		}
-		return 0;
+		return CompareResult.EQUAL_VALID;
 	}
 	
 	@Override

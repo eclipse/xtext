@@ -574,6 +574,11 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 			throw new UnsupportedOperationException();
 		}
 		
+		@Override
+		protected CommonTypeComputationServices getCommonTypeComputationServices() {
+			throw new UnsupportedOperationException();
+		}
+		
 		public boolean isInstanceContext() {
 			throw new UnsupportedOperationException();
 		}

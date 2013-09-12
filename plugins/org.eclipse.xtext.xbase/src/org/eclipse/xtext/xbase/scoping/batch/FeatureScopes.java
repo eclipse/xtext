@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 
 import com.google.inject.Inject;
@@ -59,6 +60,9 @@ public class FeatureScopes implements IFeatureNames {
 
 	@Inject
 	private OperatorMapping operatorMapping;
+	
+	@Inject
+	private CommonTypeComputationServices commonServices;
 	
 	@Inject
 	private SynonymTypesProvider synonymProvider;
@@ -155,7 +159,7 @@ public class FeatureScopes implements IFeatureNames {
 			@Override
 			protected boolean accept(LightweightTypeReference synonymType, EnumSet<ConformanceHint> hints) {
 				List<JvmType> rawTypes = synonymType.getRawTypes();
-				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, hints);
+				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, commonServices, hints);
 				CompoundTypeReference compoundTypeReference = new CompoundTypeReference(synonymType.getOwner(), true);
 				compoundTypeReference.addComponent(featureDeclarator);
 				compoundTypeReference.addComponent(synonymType);
@@ -165,7 +169,7 @@ public class FeatureScopes implements IFeatureNames {
 			
 		});
 		List<JvmType> rawTypes = featureDeclarator.getRawTypes();
-		TypeBucket typeBucket = new TypeBucket(-1, rawTypes);
+		TypeBucket typeBucket = new TypeBucket(-1, rawTypes, commonServices);
 		IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping);
 		return result;
 	}
@@ -300,20 +304,20 @@ public class FeatureScopes implements IFeatureNames {
 			result = createImplicitStaticScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
 		} else {
-			TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(receiverType.getType()));
+			TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(receiverType.getType()), commonServices);
 			return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
 		}
 	}
 
 	protected IScope createStaticScope(XAbstractFeatureCall featureCall, JvmType type, XExpression receiver, LightweightTypeReference receiverType,
 			IScope parent, IFeatureScopeSession session) {
-		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type));
+		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type), commonServices);
 		return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
 	}
 	
 	protected IScope createStaticFeatureOnTypeLiteralScope(XAbstractFeatureCall featureCall, JvmType type, XExpression receiver, LightweightTypeReference receiverType,
 			IScope parent, IFeatureScopeSession session) {
-		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type));
+		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type), commonServices);
 		return new StaticFeatureOnTypeLiteralScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
 	}
 	
@@ -428,7 +432,7 @@ public class FeatureScopes implements IFeatureNames {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
 			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
 			if (type != null && !type.isUnknown()) {
-				TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type.getType()));
+				TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type.getType()), commonServices);
 				return new StaticFeatureScope(parent, session, featureCall, null, type, receiverBucket, operatorMapping);
 			}
 		}
