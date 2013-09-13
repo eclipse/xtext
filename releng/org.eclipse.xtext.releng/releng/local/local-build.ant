@@ -59,7 +59,6 @@
 			<arg line="--displaystacktrace" />
 			<arg line="--loglevel INFO" />
 			<arg line="-S '${commands.file}'" />
-			<arg line="-vm /Library/Java/JavaVirtualMachines/1.6.0_26-b03-383.jdk/Contents/Home/bin/java" />
 			<arg line="-vmargs -Xmx1500m" />
 		</exec>
 	</target>
