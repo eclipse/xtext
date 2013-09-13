@@ -28,7 +28,7 @@
         <cs:dependency name="de.itemis.xtext.antlr.feature" componentType="eclipse.feature" filter="(WITH.MWE2=true)"/>
         <cs:dependency name="org.eclipse.buckminster.core.headless.feature" componentType="eclipse.feature" filter="(BOOTSTRAP=true)"/>
         <cs:dependency name="org.eclipse.buckminster.pde.headless.feature" componentType="eclipse.feature" filter="(BOOTSTRAP=true)"/>
-        <!--<cs:dependency name="org.eclipse.buckminster.git.headless.feature" componentType="eclipse.feature"/>-->
+      	<cs:dependency name="org.eclipse.buckminster.git.headless.feature" componentType="eclipse.feature" filter="(BOOTSTRAP=true)"/>
         
         <cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.annotation" componentType="osgi.bundle" versionDesignator="1.0.0"/>
