@@ -205,6 +205,68 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
   }
   
   @Test
+  public void testAmbiguousMethods_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() { foo(\"foo\") }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(CharSequence x) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(Comparable<?> x) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("foo(CharSequence) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("foo(Comparable<?>) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testAmbiguousMethods_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() { foo }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def getFoo() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("foo() in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("getFoo() in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
   public void testUnambiguousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
