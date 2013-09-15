@@ -16,14 +16,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	CheckedExceptionTest.class,
-	FeatureCallValidationTest.class,
-	OverrideValidationTest.class,
-	RichStringValidationTest.class,
-	XtendValidationTest.class,
-	AnnotationValidationTest.class,
-	ModifierValidationTest.class,
-	AmbiguityValidationSuite.class,
+	AmbiguousPlainFeatureCallTest.class,
+	AmbiguousExtensionFeatureCallTest.class,
+	AmbiguousOperatorsTest.class,
+	AmbiguousGenericFeatureCallTest.class
 })
-public class ValidationSuite {
+public class AmbiguityValidationSuite {
+
 }
