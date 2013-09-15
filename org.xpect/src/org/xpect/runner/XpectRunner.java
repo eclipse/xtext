@@ -18,12 +18,12 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
-import org.xpect.Environment;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.util.AnnotationUtil;
+import org.xpect.util.EnvironmentUtil;
 import org.xpect.util.XpectJavaModelFactory;
 
 import com.google.common.collect.Lists;
@@ -77,16 +77,9 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		return result;
 	}
 
-	public Environment getEnvironment() {
-		if (EcorePlugin.IS_ECLIPSE_RUNNING)
-			return Environment.PLUGIN_TEST;
-		else
-			return Environment.STANDALONE_TEST;
-	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected IXpectRunnerSetup<Object, Object, Object, Object> createSetup() {
-		List<IXpectRunnerSetup> setups = xpectJavaModel.getSetups(IXpectRunnerSetup.class, getEnvironment());
+		List<IXpectRunnerSetup> setups = xpectJavaModel.getSetups(IXpectRunnerSetup.class, EnvironmentUtil.ENVIRONMENT);
 		if (setups.isEmpty())
 			return null;
 		if (setups.size() != 1)
@@ -135,7 +128,6 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		ctx.setAllFiles(getFiles());
 		ctx.setTestClass(getTestClass().getJavaClass());
 		ctx.setUriProvider(uriProvider);
-		ctx.setEnvironment(getEnvironment());
 		try {
 			if (setup != null)
 				setup.beforeClass(ctx);

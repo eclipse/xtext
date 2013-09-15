@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.xpect.Environment;
 import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
@@ -29,6 +28,7 @@ import org.xpect.parameter.IParameterProvider;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.runner.IXpectURIProvider;
 import org.xpect.setup.IXpectRunnerSetup.ITestSetupContext;
+import org.xpect.util.EnvironmentUtil;
 import org.xpect.util.URIDelegationHandler;
 
 import com.google.common.collect.Lists;
@@ -42,8 +42,6 @@ import com.google.inject.Module;
 public class SetupContext implements ITestSetupContext {
 
 	private Collection<URI> allFiles;
-
-	private Environment environment;
 
 	private Map<String, Injector> ext2Injector = Maps.newHashMap();
 
@@ -73,10 +71,6 @@ public class SetupContext implements ITestSetupContext {
 		return allFiles;
 	}
 
-	public Environment getEnvironment() {
-		return environment;
-	}
-
 	public Injector getInjector() {
 		return getInjector(xpectFile.eResource().getURI());
 	}
@@ -89,7 +83,7 @@ public class SetupContext implements ITestSetupContext {
 		ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(ext);
 		if (info == null)
 			throw new IllegalStateException("No Xtext language configuration found for file extension '" + ext + "'.");
-		EList<IXpectGuiceModuleSetup> moduleSetups = xpectJavaModel.getSetups(IXpectGuiceModuleSetup.class, getEnvironment());
+		EList<IXpectGuiceModuleSetup> moduleSetups = xpectJavaModel.getSetups(IXpectGuiceModuleSetup.class, EnvironmentUtil.ENVIRONMENT);
 		injector = info.getInjector();
 		if (!moduleSetups.isEmpty()) {
 			List<Module> modules = Lists.newArrayList();
@@ -178,10 +172,6 @@ public class SetupContext implements ITestSetupContext {
 
 	public void setAllFiles(Collection<URI> allFiles) {
 		this.allFiles = allFiles;
-	}
-
-	public void setEnvironment(Environment environment) {
-		this.environment = environment;
 	}
 
 	public void setMethod(XjmMethod method) {

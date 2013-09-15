@@ -15,7 +15,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.xpect.Environment;
 import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
@@ -37,8 +36,6 @@ public interface IXpectRunnerSetup<T, K, V, X> extends IXpectSetup {
 		Class<?> getTestClass();
 
 		XpectJavaModel getXpectJavaModel();
-
-		Environment getEnvironment();
 
 		void installParameterValue(Class<? extends Annotation> key, IParameterProvider provider);
 
