@@ -11,6 +11,7 @@ import java.util.Map;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures.Provider;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -36,10 +37,17 @@ public class ExpressionBucket {
     return this._extensionProviders;
   }
   
-  public ExpressionBucket(final int id, final Map<XExpression,LightweightTypeReference> extensionProviders) {
+  private final Provider _resolvedFeaturesProvider;
+  
+  public Provider getResolvedFeaturesProvider() {
+    return this._resolvedFeaturesProvider;
+  }
+  
+  public ExpressionBucket(final int id, final Map<XExpression,LightweightTypeReference> extensionProviders, final Provider resolvedFeaturesProvider) {
     super();
     this._id = id;
     this._extensionProviders = extensionProviders;
+    this._resolvedFeaturesProvider = resolvedFeaturesProvider;
   }
   
   @Override
@@ -48,6 +56,7 @@ public class ExpressionBucket {
     int result = 1;
     result = prime * result + _id;
     result = prime * result + ((_extensionProviders== null) ? 0 : _extensionProviders.hashCode());
+    result = prime * result + ((_resolvedFeaturesProvider== null) ? 0 : _resolvedFeaturesProvider.hashCode());
     return result;
   }
   
@@ -66,6 +75,11 @@ public class ExpressionBucket {
       if (other._extensionProviders != null)
         return false;
     } else if (!_extensionProviders.equals(other._extensionProviders))
+      return false;
+    if (_resolvedFeaturesProvider == null) {
+      if (other._resolvedFeaturesProvider != null)
+        return false;
+    } else if (!_resolvedFeaturesProvider.equals(other._resolvedFeaturesProvider))
       return false;
     return true;
   }
