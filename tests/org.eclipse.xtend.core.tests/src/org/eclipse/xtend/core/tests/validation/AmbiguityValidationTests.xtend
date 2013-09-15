@@ -630,6 +630,38 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
+	def void testAmbiguousMethods_06() {
+		'''
+			class C {
+				def bar() { foo("foo") }
+				def foo(CharSequence x) {}
+				def foo(Comparable<?> x) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				foo(CharSequence) in C and
+				foo(Comparable<?>) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousMethods_07() {
+		'''
+			class C {
+				def bar() { foo }
+				def foo() {}
+				def getFoo() {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				foo() in C and
+				getFoo() in C
+			both match.''')
+	}
+	
+	@Test
 	def void testUnambiguousMethods_01() {
 		'''
 			class C {
