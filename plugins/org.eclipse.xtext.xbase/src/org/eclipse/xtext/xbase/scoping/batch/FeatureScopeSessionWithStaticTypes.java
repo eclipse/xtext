@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
 import com.google.common.collect.Lists;
 
@@ -25,13 +26,16 @@ public class FeatureScopeSessionWithStaticTypes extends AbstractNestedFeatureSco
 	
 	private List<TypeBucket> staticallyImportedTypes;
 	private List<TypeBucket> staticallyImportedExtensions;
+	private IResolvedFeatures.Provider resolvedFeaturesProvider;
 
 	public FeatureScopeSessionWithStaticTypes(AbstractFeatureScopeSession featureScopeSession,
 			List<? extends JvmType> staticFeatureProviders,
-			List<? extends JvmType> extensionProviders) {
+			List<? extends JvmType> extensionProviders,
+			IResolvedFeatures.Provider resolvedFeaturesProvider) {
 		super(featureScopeSession);
 		this.staticFeatureProviders = staticFeatureProviders;
 		this.extensionProviders = extensionProviders;
+		this.resolvedFeaturesProvider = resolvedFeaturesProvider;
 	}
 	
 	@Override
@@ -53,7 +57,7 @@ public class FeatureScopeSessionWithStaticTypes extends AbstractNestedFeatureSco
 			return parentResult;
 		}
 		List<TypeBucket> result = Lists.newArrayListWithCapacity(3);
-		result.add(new TypeBucket(getId(), types));
+		result.add(new TypeBucket(getId(), types, resolvedFeaturesProvider));
 		result.addAll(parentResult);
 		return result;
 	}

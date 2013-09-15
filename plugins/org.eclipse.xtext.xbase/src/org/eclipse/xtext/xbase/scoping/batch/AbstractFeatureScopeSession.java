@@ -25,6 +25,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -62,10 +63,11 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 			List<? extends JvmType> extensionProviders) {
 		if (staticFeatureProviders.isEmpty() && extensionProviders.isEmpty())
 			return this;
-		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithStaticTypes(this, staticFeatureProviders, extensionProviders);
+		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithStaticTypes(this, staticFeatureProviders, extensionProviders, getResolvedFeaturesProvider());
 		return result;
 	}
 
+	protected abstract IResolvedFeatures.Provider getResolvedFeaturesProvider();
 	protected abstract FeatureScopes getFeatureScopes();
 	protected abstract ConstructorScopes getConstructorScopes();
 	protected abstract TypeScopes getTypeScopes();
@@ -79,7 +81,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	public IFeatureScopeSession addToExtensionScope(Map<XExpression, LightweightTypeReference> extensionProviders) {
 		if (extensionProviders.isEmpty())
 			return this;
-		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithDynamicExtensions(this, extensionProviders);
+		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithDynamicExtensions(this, extensionProviders, getResolvedFeaturesProvider());
 		return result;
 	}
 	

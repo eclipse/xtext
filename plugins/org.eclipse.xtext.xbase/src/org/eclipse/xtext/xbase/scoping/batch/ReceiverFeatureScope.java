@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
@@ -75,7 +76,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 			public void accept(String simpleName, int order) {
 				for(JvmType type: bucket.getTypes()) {
 					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
+						Iterable<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
 						Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
 						Iterables.addAll(allFeatures, filtered);
 					}
@@ -90,6 +91,12 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 				allDescriptions.add(createDescription(name, feature, bucket));
 		}
 		return allDescriptions;
+	}
+	
+	@Override
+	protected Iterable<JvmFeature> findAllFeaturesByName(JvmType type, String simpleName, IResolvedFeatures.Provider resolvedFeaturesProvider) {
+		IResolvedFeatures resolvedFeatures = resolvedFeaturesProvider.getResolvedFeatures(type).getParameterizedView(receiverType);
+		return resolvedFeatures.getAllFeatures(simpleName);
 	}
 
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {

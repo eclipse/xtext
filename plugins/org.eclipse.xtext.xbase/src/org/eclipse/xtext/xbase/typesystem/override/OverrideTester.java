@@ -35,8 +35,16 @@ import com.google.inject.Inject;
  */
 public class OverrideTester {
 
-	@Inject
 	private IVisibilityHelper visibilityHelper;
+	
+	@Inject
+	public OverrideTester(IVisibilityHelper visibilityHelper) {
+		this.visibilityHelper = visibilityHelper;
+	}
+	
+	public OverrideTester() {
+		this(IVisibilityHelper.ALL);
+	}
 	
 	/**
 	 * Checks if the overriding method and the given overridden candidate have compatible subsignatures
@@ -70,7 +78,7 @@ public class OverrideTester {
 		if (parameterCount != declaration.getParameters().size()) {
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.ARITY_MISMATCH);
 		}
-		if (!(new ContextualVisibilityHelper(new ParameterizedTypeReference(overriding.getContextType().getOwner(), declaration.getDeclaringType())).isVisible(overridden))) {
+		if (!(new ContextualVisibilityHelper(visibilityHelper, new ParameterizedTypeReference(overriding.getContextType().getOwner(), declaration.getDeclaringType())).isVisible(overridden))) {
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.NOT_VISIBLE);
 		}
 		if (declaration.isStatic() != overridden.isStatic()) {

@@ -18,6 +18,7 @@ public class IssueCodes {
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xbase.validation.IssueCodes.";
 
 	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
+	public static final String AMBIGUOUS_FEATURE_CALL = ISSUE_CODE_PREFIX + "ambiguous_feature_call";
 	public static final String ANNOTATIONS_ILLEGAL_ATTRIBUTE = ISSUE_CODE_PREFIX + "no_illegal_value";
 	public static final String ANNOTATIONS_NO_VALUE_ATTRIBUTE = ISSUE_CODE_PREFIX + "no_attribute_value";
 	public static final String ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION = ISSUE_CODE_PREFIX + "missing_attribute_definition";
