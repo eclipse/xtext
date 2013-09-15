@@ -41,8 +41,6 @@ public interface IXpectRunnerSetup<T, K, V, X> extends IXpectSetup {
 
 		<T> T getParameterValue(Class<? extends Annotation> key, Class<T> type);
 
-		Injector getInjector(URI uri);
-
 		IXpectURIProvider getURIProvider();
 	}
 

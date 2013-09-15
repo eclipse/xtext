@@ -22,12 +22,9 @@ import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.xpect.XpectConstants;
-import org.xpect.registry.ILanguageInfo;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.Injector;
 
 public class JvmAnnotationUtil {
 
@@ -114,11 +111,9 @@ public class JvmAnnotationUtil {
 		if (value == null || value.getValues().isEmpty())
 			return Collections.emptyList();
 		List<T> result = Lists.newArrayList();
-		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
-		IJavaReflectAccess reflectAccess = injector.getInstance(IJavaReflectAccess.class);
 		for (JvmTypeReference ref : value.getValues())
 			if (ref != null && !ref.eIsProxy() && ref.getType() != null && !ref.getType().eIsProxy()) {
-				Class<?> adapter = reflectAccess.getRawType(ref.getType());
+				Class<?> adapter = IJavaReflectAccess.INSTANCE.getRawType(ref.getType());
 				if (adapter != null) {
 					try {
 						Object instance = adapter.newInstance();
@@ -139,8 +134,6 @@ public class JvmAnnotationUtil {
 		if (type == null || type.eIsProxy())
 			return Collections.emptyList();
 		List<T> result = Lists.newArrayList();
-		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
-		IJavaReflectAccess reflectAccess = injector.getInstance(IJavaReflectAccess.class);
 		for (JvmAnnotationReference ref : type.getAnnotations()) {
 			if (ref.getAnnotation() == null || ref.getAnnotation().eIsProxy())
 				continue;
@@ -149,7 +142,7 @@ public class JvmAnnotationUtil {
 				continue;
 			for (JvmTypeReference val : value.getValues())
 				if (val != null && !val.eIsProxy() && val.getType() != null && !val.getType().eIsProxy()) {
-					Class<?> adapter = reflectAccess.getRawType(val.getType());
+					Class<?> adapter = IJavaReflectAccess.INSTANCE.getRawType(val.getType());
 					if (adapter != null) {
 						try {
 							Annotation param = newInstance(ref);
@@ -180,9 +173,7 @@ public class JvmAnnotationUtil {
 	}
 
 	public static Annotation newInstance(final JvmAnnotationReference ref) {
-		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
-		final IJavaReflectAccess reflectAccess = injector.getInstance(IJavaReflectAccess.class);
-		Class<?> annotation = reflectAccess.getRawType(ref.getAnnotation());
+		Class<?> annotation = IJavaReflectAccess.INSTANCE.getRawType(ref.getAnnotation());
 		return (Annotation) Proxy.newProxyInstance(annotation.getClassLoader(), new Class<?>[] { annotation }, new InvocationHandler() {
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 				for (JvmAnnotationValue value : ref.getValues())
@@ -205,7 +196,7 @@ public class JvmAnnotationUtil {
 				if (value instanceof JvmIntAnnotationValue)
 					return ((JvmIntAnnotationValue) value).getValues().get(0);
 				if (value instanceof JvmTypeAnnotationValue)
-					return reflectAccess.getRawType(((JvmTypeAnnotationValue) value).getValues().get(0).getType());
+					return IJavaReflectAccess.INSTANCE.getRawType(((JvmTypeAnnotationValue) value).getValues().get(0).getType());
 
 				throw new RuntimeException("Unhandled annotation value type: " + value.eClass().getName());
 			}

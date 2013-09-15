@@ -4,13 +4,9 @@ import static org.xpect.util.JvmAnnotationUtil.newInstancesViaAnnotation;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.xpect.XpectConstants;
 import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.XpectParameterAdapter;
-import org.xpect.registry.ILanguageInfo;
 import org.xpect.util.IJavaReflectAccess;
-
-import com.google.inject.Injector;
 
 public class XjmClassImplCustom extends XjmClassImpl {
 
@@ -29,8 +25,7 @@ public class XjmClassImplCustom extends XjmClassImpl {
 		JvmDeclaredType jvmClass = getJvmClass();
 		if (jvmClass == null || jvmClass.eIsProxy())
 			return null;
-		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
-		Class<?> type = injector.getInstance(IJavaReflectAccess.class).getRawType(jvmClass);
+		Class<?> type = IJavaReflectAccess.INSTANCE.getRawType(jvmClass);
 		super.setJavaClass(type);
 		return type;
 	}

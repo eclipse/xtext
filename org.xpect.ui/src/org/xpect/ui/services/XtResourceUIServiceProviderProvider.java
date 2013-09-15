@@ -7,12 +7,18 @@
  *******************************************************************************/
 package org.xpect.ui.services;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
+import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.util.Pair;
+import org.xpect.XpectJavaModel;
 import org.xpect.ui.internal.XpectActivator;
-import org.xpect.ui.util.XtInjectorSetupUtil;
-import org.xpect.util.URIDelegationHandler;
+import org.xpect.ui.util.XpectUtil;
+import org.xpect.util.IXtInjectorProvider;
 
 import com.google.inject.Injector;
 
@@ -21,12 +27,14 @@ import com.google.inject.Injector;
  */
 public class XtResourceUIServiceProviderProvider implements IResourceServiceProvider.Provider {
 	public IResourceServiceProvider get(URI uri, String contentType) {
-		String ext = new URIDelegationHandler().getOriginalFileExtension(uri.lastSegment());
-		if (ext != null) {
-			Injector injector = XtInjectorSetupUtil.getWorkbenchInjector(uri, ext);
-			if (injector != null)
-				return injector.getInstance(IResourceUIServiceProvider.class);
-		}
+		for (Pair<IStorage, IProject> p : Access.getIStorage2UriMapper().get().getStorages(uri))
+			if (p.getFirst() instanceof IFile) {
+				IFile file = (IFile) p.getFirst();
+				XpectJavaModel javaModel = XpectUtil.loadJavaModel(file);
+				Injector injector = IXtInjectorProvider.INSTANCE.getInjector(javaModel, uri);
+				if (injector != null)
+					return injector.getInstance(IResourceUIServiceProvider.class);
+			}
 		return XpectActivator.getInstance().getInjector(XpectActivator.ORG_XPECT_XPECT).getInstance(IResourceUIServiceProvider.class);
 	}
 }

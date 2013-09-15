@@ -15,8 +15,6 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.xpect.ui.highlighting.XpectTokenDefProvider;
 import org.xpect.ui.highlighting.XpectTokenToAttributeMapper;
 import org.xpect.ui.scoping.ClasspathOrJdtBasedTypeScopeProvider;
-import org.xpect.ui.util.UIJavaReflectAccess;
-import org.xpect.util.IJavaReflectAccess;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -37,10 +35,6 @@ public class XpectUiModule extends org.xpect.ui.AbstractXpectUiModule {
 
 	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return XpectTokenToAttributeMapper.class;
-	}
-
-	public Class<? extends IJavaReflectAccess> bindJavaReflectAccess() {
-		return UIJavaReflectAccess.class;
 	}
 
 	@Override

@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.xpect.registry;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
@@ -24,7 +25,7 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 
 	protected Injector injector;
 
-	protected Map<Set<Class<? extends Module>>, Injector> injectors = Maps.newHashMap();
+	protected Map<List<Class<? extends Module>>, Injector> injectors = Maps.newHashMap();
 
 	private final String rtLangName;
 
@@ -53,21 +54,26 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 		return fileExtensions;
 	}
 
-	public Injector getInjector(Module... modules) {
-		if (modules.length == 0) {
-			if (injector == null)
-				injector = createInjector();
-			return injector;
+	public Injector getInjector() {
+		if (injector == null)
+			injector = createInjector();
+		return injector;
+	}
+
+	public Injector getInjector(List<Class<? extends Module>> moduleClasses) {
+		if (moduleClasses.isEmpty()) {
+			return getInjector();
 		} else {
-			Set<Class<? extends Module>> key = Sets.newHashSetWithExpectedSize(modules.length);
-			for (Module m : modules) {
-				key.add(m.getClass());
-			}
+			List<Class<? extends Module>> key = ImmutableList.copyOf(moduleClasses);
 			Injector result = injectors.get(key);
-			if (result == null) {
-				result = createInjector(modules);
-				injectors.put(key, result);
-			}
+			if (result != null)
+				return result;
+			Injector defaultInjector = getInjector();
+			Module[] modules = new Module[moduleClasses.size()];
+			for (int i = 0; i < moduleClasses.size(); i++)
+				modules[i] = defaultInjector.getInstance(moduleClasses.get(i));
+			result = createInjector(modules);
+			injectors.put(key, result);
 			return result;
 		}
 	}

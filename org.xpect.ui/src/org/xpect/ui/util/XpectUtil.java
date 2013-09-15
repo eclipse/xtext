@@ -22,6 +22,8 @@ import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
 import org.xpect.XpectFile;
+import org.xpect.XpectJavaModel;
+import org.xpect.XpectTest;
 import org.xpect.runner.XpectRunner;
 import org.xpect.ui.internal.XpectActivator;
 
@@ -32,7 +34,7 @@ import com.google.inject.Injector;
  */
 @SuppressWarnings("restriction")
 public class XpectUtil {
-	public static XpectFile load(IFile file) {
+	public static XpectFile loadFile(IFile file) {
 		Injector injector = XpectActivator.getInstance().getInjector(XpectActivator.ORG_XPECT_XPECT);
 		XtextResourceSet rs = new XtextResourceSet();
 		IJavaProject javaProject = JavaCore.create(file.getProject());
@@ -57,4 +59,16 @@ public class XpectUtil {
 		}
 		return null;
 	}
+
+	public static XpectJavaModel loadJavaModel(IFile file) {
+		XpectFile xpectFile = XpectUtil.loadFile(file);
+		if (xpectFile != null) {
+			XpectTest xpectTest = xpectFile.getTest();
+			if (xpectTest != null && !xpectTest.eIsProxy()) {
+				return xpectTest.getTestClassOrSuite();
+			}
+		}
+		return null;
+	}
+
 }

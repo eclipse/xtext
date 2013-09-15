@@ -40,9 +40,11 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	private final IXpectURIProvider uriProvider;
 	private final Injector xpectInjector;
 	public static ClassLoader testClassloader = null;
+	public static XpectRunner INSTANCE = null;
 
 	public XpectRunner(Class<?> testClass) throws InitializationError {
 		super(testClass);
+		INSTANCE = this;
 		testClassloader = testClass.getClassLoader();
 		this.uriProvider = findUriProvider(testClass);
 		this.xpectInjector = findXpectInjector();

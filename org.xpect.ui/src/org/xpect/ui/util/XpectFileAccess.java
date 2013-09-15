@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.xpect.XpectConstants;
 import org.xpect.XpectFile;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.runner.XpectRunner;
@@ -85,7 +86,7 @@ public class XpectFileAccess {
 				return xpectResource;
 			}
 		ResourceSet rs = cloneResourceSet(resource.getResourceSet());
-		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension("xpect").getInjector();
+		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
 		XtextResource xpectResource = (XtextResource) injector.getInstance(XtextResourceFactory.class).createResource(resource.getURI());
 		rs.getResources().add(xpectResource);
 		load(xpectResource, document);

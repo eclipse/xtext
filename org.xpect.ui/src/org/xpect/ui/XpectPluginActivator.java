@@ -14,7 +14,11 @@ import org.xpect.ui.internal.XpectActivator;
 import org.xpect.ui.registry.ExtensionRegistryReader;
 import org.xpect.ui.registry.UILanugageRegistry;
 import org.xpect.ui.util.UIFileForClassProvider;
+import org.xpect.ui.util.UIJavaReflectAccess;
+import org.xpect.ui.util.UIXtInjectorProvider;
 import org.xpect.util.IFileForClassProvider;
+import org.xpect.util.IJavaReflectAccess;
+import org.xpect.util.IXtInjectorProvider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -33,6 +37,8 @@ public class XpectPluginActivator extends XpectActivator {
 		new ExtensionRegistryReader(lanugageRegistry).readRegistry();
 
 		((IFileForClassProvider.Delegate) IFileForClassProvider.INSTANCE).setDelegate(new UIFileForClassProvider());
+		((IXtInjectorProvider.Delegate) IXtInjectorProvider.INSTANCE).setDelegate(new UIXtInjectorProvider());
+		((IJavaReflectAccess.Delegate) IJavaReflectAccess.INSTANCE).setDelegate(new UIJavaReflectAccess());
 	}
 
 }

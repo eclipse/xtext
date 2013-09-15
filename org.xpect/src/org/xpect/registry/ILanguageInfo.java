@@ -10,6 +10,7 @@ package org.xpect.registry;
 import static org.eclipse.emf.common.EMFPlugin.IS_ECLIPSE_RUNNING;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import com.google.inject.Injector;
@@ -31,7 +32,9 @@ public interface ILanguageInfo {
 
 	public Set<String> getFileExtensions();
 
-	public Injector getInjector(Module... modules);
+	public Injector getInjector();
+
+	public Injector getInjector(List<Class<? extends Module>> moduleClasses);
 
 	public String getLanguageName();
 

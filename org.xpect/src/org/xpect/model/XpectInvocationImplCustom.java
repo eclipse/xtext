@@ -12,7 +12,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
 import org.xpect.XjmXpectMethod;
-import org.xpect.XpectConstants;
 import org.xpect.XpectPackage;
 import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterParser;
@@ -21,12 +20,10 @@ import org.xpect.parameter.IParameterParser.IMultiParameterParser;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterProvider;
-import org.xpect.registry.ILanguageInfo;
 import org.xpect.text.IRegion;
 import org.xpect.util.IJavaReflectAccess;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Injector;
 
 public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	public static class ClaimedRegion implements IClaimedRegion {
@@ -176,8 +173,6 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	}
 
 	protected Class<?> getParameterType(int paramIndex) {
-		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
-		IJavaReflectAccess reflectAccess = injector.getInstance(IJavaReflectAccess.class);
 		XjmXpectMethod xpectMethod = getMethod();
 		if (xpectMethod == null)
 			return null;
@@ -187,7 +182,7 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 		JvmTypeReference parameterType = jvmMethod.getParameters().get(paramIndex).getParameterType();
 		if (parameterType == null || parameterType.eIsProxy() || parameterType.getType() == null)
 			return null;
-		Class<?> expectedType = reflectAccess.getRawType(parameterType.getType());
+		Class<?> expectedType = IJavaReflectAccess.INSTANCE.getRawType(parameterType.getType());
 		return expectedType;
 	}
 

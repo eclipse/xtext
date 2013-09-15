@@ -135,7 +135,7 @@ public class JUnitJavaElementDelegate implements IAdaptable {
 	private IJavaElement getTestClassJavaElement(IFile iFile) {
 		if (new ContentTypeUtil().getContentType(iFile) != XpectContentType.XPECT)
 			return null;
-		XpectFile xpectFile = XpectUtil.load(iFile);
+		XpectFile xpectFile = XpectUtil.loadFile(iFile);
 		if (xpectFile != null)
 			return getTestClassJavaElement(xpectFile);
 		return null;
