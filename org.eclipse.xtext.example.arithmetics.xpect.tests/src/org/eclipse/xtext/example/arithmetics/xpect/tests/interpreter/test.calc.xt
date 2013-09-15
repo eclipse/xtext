@@ -2,6 +2,6 @@
 
 
 module foo
-
+// X_PECT_IGNORE
 // XPECT eval --> 7
 3 + 4;

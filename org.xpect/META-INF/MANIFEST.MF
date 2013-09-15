@@ -37,6 +37,7 @@ Export-Package: org.xpect,
  org.xpect.serializer,
  org.xpect.services,
  org.xpect.setup,
+ org.xpect.state,
  org.xpect.text,
  org.xpect.util,
  org.xpect.validation
