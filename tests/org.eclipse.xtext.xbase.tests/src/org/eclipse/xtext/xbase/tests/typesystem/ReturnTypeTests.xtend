@@ -10,10 +10,7 @@ package org.eclipse.xtext.xbase.tests.typesystem
 import com.google.inject.Inject
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
-import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XReturnExpression
