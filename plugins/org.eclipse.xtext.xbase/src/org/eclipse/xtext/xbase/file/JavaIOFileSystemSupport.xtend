@@ -28,35 +28,35 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	@Inject @Property Provider<WorkspaceConfig> projectInformationProvider
 	
 	override Iterable<? extends Path> getChildren(Path path) {
-		path.file.list.map[path.getAbsolutePath(it)]
+		path.javaIOFile.list.map[path.getAbsolutePath(it)]
 	}
 
-	protected def File getFile(Path path) {
+	protected def File getJavaIOFile(Path path) {
 		return new File(projectInformationProvider.get.absoluteFileSystemPath, path.toString())
 	}
 
 	override boolean exists(Path path) {
-		path.file.exists
+		path.javaIOFile.exists
 	}
 
 	override boolean isFolder(Path path) {
-		path.file.isDirectory
+		path.javaIOFile.isDirectory
 	}
 
 	override boolean isFile(Path path) {
-		path.file.isFile
+		path.javaIOFile.isFile
 	}
 
 	override long getLastModification(Path path) {
-		path.file.lastModified
+		path.javaIOFile.lastModified
 	}
 
 	override String getCharset(Path path) {
-		return encodingProvider.getEncoding(URI.createFileURI(path.file.absolutePath))
+		return encodingProvider.getEncoding(URI.createFileURI(path.javaIOFile.absolutePath))
 	}
 
 	override InputStream getContentsAsStream(Path path) {
-		return new BufferedInputStream(new FileInputStream(path.file))
+		return new BufferedInputStream(new FileInputStream(path.javaIOFile))
 	}
 	
 	override boolean mkdir(Path path) {
@@ -66,22 +66,22 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 		if (parent != null) {
 			parent.mkdir
 		}
-		path.file.mkdir
+		path.javaIOFile.mkdir
 		return true
 	}
 	
 	override boolean delete(Path path) {
 		if (!path.exists)
 			return false;
-		if (path.file.directory) {
-			Files.sweepFolder(path.file)
+		if (path.javaIOFile.directory) {
+			Files.sweepFolder(path.javaIOFile)
 		}
-		path.file.delete
+		path.javaIOFile.delete
 		return true
 	}
 
 	override void setContentsAsStream(Path path, InputStream stream) {
 		path.parent.mkdir
-		ByteStreams.copy(|stream) [| new BufferedOutputStream(new FileOutputStream(path.file))]
+		ByteStreams.copy(|stream) [| new BufferedOutputStream(new FileOutputStream(path.javaIOFile))]
 	}
 }

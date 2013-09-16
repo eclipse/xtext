@@ -7,7 +7,7 @@ import org.junit.Test
 class ReflectExtensionsTest {
 	
 	public extension ReflectExtensions ext = new ReflectExtensions
-	extension ReflectExtensions privateExt = new ReflectExtensions
+	ReflectExtensions privateExt = new ReflectExtensions
 	
 	@Test
 	def void testInvoke_01() {

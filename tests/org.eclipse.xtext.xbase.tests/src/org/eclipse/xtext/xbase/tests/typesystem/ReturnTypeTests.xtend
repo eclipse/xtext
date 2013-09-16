@@ -263,10 +263,6 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 		return resolvedType
 	}
 	
-	def linkingAndSyntaxErrors(Resource resource) {
-		resource.errors.filter[ it instanceof XtextSyntaxDiagnostic || it instanceof XtextLinkingDiagnostic]
-	}
-	
 	def void doResolvesTo(String expression, String type) {
 		val parsedExpression = expression(expression, false)
 		val resolvedTypes = getTypeResolver.resolveTypes(parsedExpression)
