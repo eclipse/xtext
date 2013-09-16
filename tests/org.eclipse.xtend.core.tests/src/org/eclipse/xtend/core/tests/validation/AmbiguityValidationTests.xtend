@@ -162,6 +162,115 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
+	def void testAmbiguousMethods_06() {
+		'''
+			class C {
+				def void n() {
+					m(#[ null ])
+				}
+				def void m(String[] s) {}
+				def void m(Boolean[] s) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(String[]) in C and
+				m(Boolean[]) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousMethods_07() {
+		'''
+			class C {
+				def void n() {
+					m(#[])
+				}
+				def void m(String[] s) {}
+				def void m(Boolean[] s) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(String[]) in C and
+				m(Boolean[]) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousMethods_08() {
+		'''
+			class C {
+				def void n() {
+					m(#[])
+				}
+				def void m(String... s) {}
+				def void m(Boolean... s) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(String[]) in C and
+				m(Boolean[]) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousMethods_09() {
+		'''
+			class C {
+				def void n() {
+					m(null)
+				}
+				def void m(String... s) {}
+				def void m(Boolean... s) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(String[]) in C and
+				m(Boolean[]) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousMethods_10() {
+		'''
+			class C {
+				def void n() {
+					m
+				}
+				def void m(String... s) {}
+				def void m(Boolean... s) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(String[]) in C and
+				m(Boolean[]) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousMethods_11() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m(#[])
+				}
+				def void m(List<String> s) {}
+				def void m(Collection<Boolean> s) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(List<String>) in C and
+				m(Collection<Boolean>) in C
+			both match.''')
+	}
+	
+	@Test
 	def void testUnambiguousMethods_01() {
 		'''
 			class C {
@@ -300,6 +409,138 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 				def static void m2() {}
 			}
 			class E extends D {}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_10() {
+		'''
+			class C {
+				def void n() {
+					m(#[ null ])
+				}
+				def void m(String[] s) {}
+				def void m(boolean[] s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_11() {
+		'''
+			class C {
+				def void n() {
+					m(#[ true ])
+				}
+				def void m(String[] s) {}
+				def void m(boolean[] s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_12() {
+		'''
+			class C {
+				def void n() {
+					m(#[ '' ])
+				}
+				def void m(String[] s) {}
+				def void m(boolean[] s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_13() {
+		'''
+			class C {
+				def void n() {
+					m(true)
+				}
+				def void m(String... s) {}
+				def void m(boolean... s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_14() {
+		'''
+			class C {
+				def void n() {
+					m('')
+				}
+				def void m(String... s) {}
+				def void m(boolean... s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_15() {
+		'''
+			class C {
+				def void n() {
+					m(#[ null ])
+				}
+				def void m(String... s) {}
+				def void m(boolean... s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_16() {
+		'''
+			class C {
+				def void n() {
+					m(#[ true ])
+				}
+				def void m(String... s) {}
+				def void m(boolean... s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_17() {
+		'''
+			class C {
+				def void n() {
+					m(#[ '' ])
+				}
+				def void m(String... s) {}
+				def void m(boolean... s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_18() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m(#[ true ])
+				}
+				def void m(List<String> s) {}
+				def void m(Collection<Boolean> s) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_19() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m(#[ '' ])
+				}
+				def void m(List<String> s) {}
+				def void m(Collection<Boolean> s) {}
+			}
 		'''.assertUnambiguous
 	}
 	
@@ -791,6 +1032,46 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
+	def void testAmbiguousMethods_09() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m(<StringBuilder>newArrayList)
+				}
+				def void m(Collection<? extends CharSequence> c) {}
+				def void m(List<? extends Appendable> c) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(Collection<? extends CharSequence>) in C and
+				m(List<? extends Appendable>) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousMethods_10() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m(<StringBuilder>newArrayList)
+				}
+				def void m(Collection<? extends CharSequence> c) {}
+				def void m(List<? extends Appendable> c) {}
+				def void m(Iterable<? extends StringBuilder> c) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(Collection<? extends CharSequence>) in C,
+				m(List<? extends Appendable>) in C and
+				m(Iterable<? extends StringBuilder>) in C
+			all match.''')
+	}
+	
+	@Test
 	def void testUnambiguousMethods_01() {
 		'''
 			class C {
@@ -845,6 +1126,22 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 					list.add(new ArrayList)
 					list.head.flatten.head
 				}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_05() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m(<StringBuilder>newArrayList)
+				}
+				def void m(Collection<? extends CharSequence> c) {}
+				def void m(List<? extends Appendable> c) {}
+				def void m(AbstractList<? extends StringBuilder> c) {}
+				def void m(Iterable<? extends StringBuilder> c) {}
 			}
 		'''.assertUnambiguous
 	}
