@@ -29,6 +29,7 @@ public enum ConformanceHint {
 	VAR_ARG, // argument will be wrapped in array
 	
 	CHECKED, // conformance computed
+	SEALED, // conformance computed and fix, e.g. a literal can provide a sealed type 
 	UNCHECKED, // nothing computed
 	
 //	UNDECIDED, // more than one type computed, results should not be merged but the better one should be used

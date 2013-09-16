@@ -304,6 +304,90 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
   }
   
   @Test
+  public void testAmbiguousMethods_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(<StringBuilder>newArrayList)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Collection<? extends CharSequence> c) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(List<? extends Appendable> c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Collection<? extends CharSequence>) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(List<? extends Appendable>) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testAmbiguousMethods_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(<StringBuilder>newArrayList)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Collection<? extends CharSequence> c) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(List<? extends Appendable> c) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Iterable<? extends StringBuilder> c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Collection<? extends CharSequence>) in C,");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(List<? extends Appendable>) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Iterable<? extends StringBuilder>) in C");
+    _builder_1.newLine();
+    _builder_1.append("all match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
   public void testUnambiguousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
@@ -411,6 +495,39 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(<StringBuilder>newArrayList)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Collection<? extends CharSequence> c) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(List<? extends Appendable> c) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(AbstractList<? extends StringBuilder> c) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Iterable<? extends StringBuilder> c) {}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

@@ -529,6 +529,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	protected EnumSet<ConformanceHint> getConformanceHints(TypeData typeData, boolean recompute) {
 		EnumSet<ConformanceHint> conformanceHints = typeData.getConformanceHints();
 		if (recompute) {
+			if (conformanceHints.contains(ConformanceHint.SEALED)) {
+				return conformanceHints;
+			}
 			conformanceHints.add(ConformanceHint.UNCHECKED);
 			conformanceHints.remove(ConformanceHint.INCOMPATIBLE);
 			conformanceHints.remove(ConformanceHint.SUCCESS);

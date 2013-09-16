@@ -204,6 +204,230 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
   }
   
   @Test
+  public void testAmbiguousMethods_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ null ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String[] s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Boolean[] s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(String[]) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Boolean[]) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testAmbiguousMethods_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String[] s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Boolean[] s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(String[]) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Boolean[]) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testAmbiguousMethods_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String... s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Boolean... s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(String[]) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Boolean[]) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testAmbiguousMethods_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(null)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String... s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Boolean... s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(String[]) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Boolean[]) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testAmbiguousMethods_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String... s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Boolean... s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(String[]) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Boolean[]) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testAmbiguousMethods_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(List<String> s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Collection<Boolean> s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(List<String>) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Collection<Boolean>) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
   public void testUnambiguousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
@@ -476,6 +700,260 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("class E extends D {}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ null ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String[] s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(boolean[] s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ true ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String[] s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(boolean[] s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_12() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ \'\' ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String[] s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(boolean[] s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_13() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String... s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(boolean... s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_14() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(\'\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String... s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(boolean... s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_15() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ null ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String... s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(boolean... s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_16() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ true ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String... s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(boolean... s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_17() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ \'\' ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String... s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(boolean... s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_18() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ true ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(List<String> s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Collection<Boolean> s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_19() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(#[ \'\' ])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(List<String> s) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Collection<Boolean> s) {}");
+    _builder.newLine();
+    _builder.append("}");
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }

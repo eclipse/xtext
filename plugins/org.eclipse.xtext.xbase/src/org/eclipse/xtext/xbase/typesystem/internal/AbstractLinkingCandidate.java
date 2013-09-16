@@ -559,6 +559,8 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			// don't use UnboundTypeReference.getRawTypeReference since that would potentially resolve the unbound candidate
 			if (expectedType instanceof UnboundTypeReference) {
 				expectedType = new ParameterizedTypeReference(expectedType.getOwner(), ((UnboundTypeReference) expectedType).getTypeParameter());
+			} else if (expectedType.isResolved()) {
+				return expectedType;
 			}
 			expectedType = expectedType.getRawTypeReference();
 		}

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.EnumSet;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
@@ -58,6 +59,11 @@ public class NoTypeResult implements ITypeComputationResult {
 	}
 	
 	public EnumSet<ConformanceHint> getConformanceHints() {
+		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
+	@NonNull
+	public EnumSet<ConformanceHint> getCheckedConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
 	}
 	
