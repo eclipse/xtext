@@ -167,6 +167,43 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
   }
   
   @Test
+  public void testAmbiguousMethods_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void getM2() {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m2() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m2() in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("getM2() in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
   public void testUnambiguousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
@@ -265,6 +302,180 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.append("def void m2() {}");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static D.*");
+    _builder.newLine();
+    _builder.append("class C extends D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void m2() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static D.*");
+    _builder.newLine();
+    _builder.append("class C extends D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void m2() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m2()");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("getM2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void getM2() {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m2() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String m2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void getM2() {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m2() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static D.*");
+    _builder.newLine();
+    _builder.append("import static E.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void m2() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class E extends D {}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static D.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("E.m2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void m2() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class E extends D {}");
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }

@@ -412,6 +412,13 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 						return CompareResult.THIS;
 					}
 				}
+			} else if (getFeature() == right.getFeature() && right instanceof FeatureLinkingCandidate) {
+				FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
+				// we link to identical static features with equal assumptions
+				// stop comparison and take this one
+				if (isStatic() && casted.isStatic() && getReceiver() == casted.getReceiver()) {
+					return CompareResult.THIS;
+				}
 			}
 		}
 		return result;
