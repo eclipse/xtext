@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.internal;
 
+import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -14,10 +15,11 @@ import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.texteditor.MarkerUtilities;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 import org.junit.Test;
 
 /**
@@ -27,6 +29,8 @@ public class InternalBuilderTest {
 
 	@Test
 	public void test() throws CoreException {
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
+
 		final IMarker[] markers = ResourcesPlugin.getWorkspace().getRoot()
 				.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
 		List<String> errors = new ArrayList<String>();
