@@ -35,6 +35,8 @@ public enum ConformanceHint {
 //	UNDECIDED, // more than one type computed, results should not be merged but the better one should be used
 	
 	RAW, // only raw conformance computed
+	LAMBDA_RAW_COMPATIBLE, // incompatible but raw types are compatible
+	LAMBDA_PARAMETER_COMPATIBLE, // incompatible but parameter list is compatible
 	MERGED, // merged from different conformance sets
 	EXPECTATION_INDEPENDENT, // does not depend on the expectation
 	
@@ -56,6 +58,16 @@ public enum ConformanceHint {
 	public static int compareHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
 		if (leftConformance.contains(ConformanceHint.SUCCESS) != rightConformance.contains(ConformanceHint.SUCCESS)) {
 			if (leftConformance.contains(ConformanceHint.SUCCESS))
+				return -1;
+			return 1;
+		}
+		if (leftConformance.contains(ConformanceHint.LAMBDA_RAW_COMPATIBLE) != rightConformance.contains(ConformanceHint.LAMBDA_RAW_COMPATIBLE)) {
+			if (leftConformance.contains(ConformanceHint.LAMBDA_RAW_COMPATIBLE))
+				return -1;
+			return 1;
+		}
+		if (leftConformance.contains(ConformanceHint.LAMBDA_PARAMETER_COMPATIBLE) != rightConformance.contains(ConformanceHint.LAMBDA_PARAMETER_COMPATIBLE)) {
+			if (leftConformance.contains(ConformanceHint.LAMBDA_PARAMETER_COMPATIBLE))
 				return -1;
 			return 1;
 		}
