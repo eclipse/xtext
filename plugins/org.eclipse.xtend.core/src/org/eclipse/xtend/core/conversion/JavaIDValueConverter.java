@@ -57,66 +57,70 @@ public class JavaIDValueConverter extends IDValueConverter {
 		while (off < end) {
 			aChar = in[off++];
 			if (aChar == '\\') {
-				aChar = in[off++];
-				switch (aChar) {
-					case 'u': {
-						// Read the xxxx
-						int value = 0;
-						if (off + 4 > end || !isHexSequence(in, off, 4)) {
-							error = true;
-							out[outLen++] = aChar;
-							break;
-						} else {
-							for (int i = 0; i < 4; i++) {
-								aChar = in[off++];
-								switch (aChar) {
-								case '0':
-								case '1':
-								case '2':
-								case '3':
-								case '4':
-								case '5':
-								case '6':
-								case '7':
-								case '8':
-								case '9':
-									value = (value << 4) + aChar - '0';
-									break;
-								case 'a':
-								case 'b':
-								case 'c':
-								case 'd':
-								case 'e':
-								case 'f':
-									value = (value << 4) + 10 + aChar - 'a';
-									break;
-								case 'A':
-								case 'B':
-								case 'C':
-								case 'D':
-								case 'E':
-								case 'F':
-									value = (value << 4) + 10 + aChar - 'A';
-									break;
-								default:
-									throw new IllegalArgumentException("Malformed \\uxxxx encoding.");
+				if (off < end) {
+					aChar = in[off++];
+					switch (aChar) {
+						case 'u': {
+							// Read the xxxx
+							int value = 0;
+							if (off + 4 > end || !isHexSequence(in, off, 4)) {
+								error = true;
+								out[outLen++] = aChar;
+								break;
+							} else {
+								for (int i = 0; i < 4; i++) {
+									aChar = in[off++];
+									switch (aChar) {
+									case '0':
+									case '1':
+									case '2':
+									case '3':
+									case '4':
+									case '5':
+									case '6':
+									case '7':
+									case '8':
+									case '9':
+										value = (value << 4) + aChar - '0';
+										break;
+									case 'a':
+									case 'b':
+									case 'c':
+									case 'd':
+									case 'e':
+									case 'f':
+										value = (value << 4) + 10 + aChar - 'a';
+										break;
+									case 'A':
+									case 'B':
+									case 'C':
+									case 'D':
+									case 'E':
+									case 'F':
+										value = (value << 4) + 10 + aChar - 'A';
+										break;
+									default:
+										throw new IllegalArgumentException("Malformed \\uxxxx encoding.");
+									}
 								}
+								if (setChar(outLen, out, (char)value)) {
+									outLen++;
+								} else {
+									badChar = true;
+								}
+								break;
 							}
-							if (setChar(outLen, out, (char)value)) {
+						}
+						default: {
+							if (setChar(outLen, out, aChar)) {
 								outLen++;
 							} else {
 								badChar = true;
 							}
-							break;
 						}
 					}
-					default: {
-						if (setChar(outLen, out, aChar)) {
-							outLen++;
-						} else {
-							badChar = true;
-						}
-					}
+				} else {
+					badChar = true;
 				}
 			} else {
 				if (setChar(outLen, out, aChar)) {
