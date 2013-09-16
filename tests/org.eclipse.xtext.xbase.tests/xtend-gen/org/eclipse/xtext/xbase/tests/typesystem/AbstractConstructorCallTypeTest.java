@@ -781,7 +781,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   
   @Test
   public void testDeferredTypeArgumentResolution_145() throws Exception {
-    this.resolvesConstructorCallsTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<ArrayList<Iterable<Iterable<String>>>>", "ArrayList<Iterable<Iterable<String>>>");
+    this.resolvesConstructorCallsTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<ArrayList<Iterable<? extends Iterable<String>>>>", "ArrayList<Iterable<? extends Iterable<String>>>");
   }
   
   @Test
@@ -791,7 +791,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   
   @Test
   public void testDeferredTypeArgumentResolution_147() throws Exception {
-    this.resolvesConstructorCallsTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval String s = list.head.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<ArrayList<Iterable<String>>>", "ArrayList<Iterable<String>>");
+    this.resolvesConstructorCallsTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval String s = list.head.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<ArrayList<Iterable<? extends String>>>", "ArrayList<Iterable<? extends String>>");
   }
   
   @Test

@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -242,12 +241,6 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 	
 	@Test override void testBlockExpression_09() throws Exception {
 		"{val Object x = if (false) return; x }".resolvesTo("Object")
-	}
-	
-	@Ignore("TODO this should work")
-	@Test
-	override testBug_391758() throws Exception {
-		super.testBug_391758()
 	}
 		
 }

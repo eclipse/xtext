@@ -437,7 +437,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testOverloadedVarArgs_04() throws Exception {
-		// TODO discuss: JDT binds to overloaded(Object, Object) thought the arity indicates overloaded(String...)
+		// TODO discuss: JDT binds to overloaded(Object, Object) though the arity indicates overloaded(String...)
 		"testdata::OverloadedMethods::overloadedVarArgs(new Object, new Object, new Object)".resolvesTo("int")
 	}
 	
@@ -4051,9 +4051,9 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
-			val Iterable<String> s = list.head.head.head
+			val Iterable<String> s = list.head.flatten.head
 			list.head
-		}".resolvesTo("ArrayList<Iterable<Iterable<String>>>")
+		}".resolvesTo("ArrayList<Iterable<? extends Iterable<String>>>")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_146() throws Exception {
@@ -4069,9 +4069,9 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
-			val String s = list.head.head.head
+			val String s = list.head.flatten.head
 			list.head
-		}".resolvesTo("ArrayList<Iterable<String>>")
+		}".resolvesTo("ArrayList<Iterable<? extends String>>")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_148() throws Exception {
@@ -4262,6 +4262,15 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 			list += 1.0
 			list
 		}".resolvesTo("ArrayList<Number & Comparable<?>>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_167() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val java.util.Iterator<String> s = list.head.flatten.head
+			list.head
+		}".resolvesTo("ArrayList<Iterable<? extends Iterator<String>>>")
 	}
 	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -243,11 +242,5 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   @Test
   public void testBlockExpression_09() throws Exception {
     this.resolvesTo("{val Object x = if (false) return; x }", "Object");
-  }
-  
-  @Ignore("TODO this should work")
-  @Test
-  public void testBug_391758() throws Exception {
-    super.testBug_391758();
   }
 }

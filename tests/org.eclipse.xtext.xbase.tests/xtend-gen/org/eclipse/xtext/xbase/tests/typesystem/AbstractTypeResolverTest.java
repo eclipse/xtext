@@ -3657,7 +3657,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testDeferredTypeArgumentResolution_145() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<Iterable<Iterable<String>>>");
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<Iterable<? extends Iterable<String>>>");
   }
   
   @Test
@@ -3667,7 +3667,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testDeferredTypeArgumentResolution_147() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval String s = list.head.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<Iterable<String>>");
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval String s = list.head.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<Iterable<? extends String>>");
   }
   
   @Test
@@ -3764,6 +3764,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testDeferredTypeArgumentResolution_166() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist += 1\n\t\t\tlist += 1.0\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_167() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval java.util.Iterator<String> s = list.head.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<Iterable<? extends Iterator<String>>>");
   }
   
   @Test

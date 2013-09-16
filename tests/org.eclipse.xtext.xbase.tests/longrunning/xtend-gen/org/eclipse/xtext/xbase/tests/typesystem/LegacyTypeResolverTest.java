@@ -37,10 +37,4 @@ public class LegacyTypeResolverTest extends AbstractOldAPITypeResolverTest {
   public void testIfExpression_10() throws Exception {
     super.testIfExpression_10();
   }
-  
-  @Ignore("TODO this should work")
-  @Test
-  public void testBug_391758() throws Exception {
-    super.testBug_391758();
-  }
 }

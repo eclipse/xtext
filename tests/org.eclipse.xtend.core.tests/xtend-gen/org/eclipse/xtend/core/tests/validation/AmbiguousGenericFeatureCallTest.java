@@ -267,6 +267,43 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
   }
   
   @Test
+  public void testAmbiguousMethods_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Iterable<String> m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val list = new java.util.ArrayList");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("list.add(new java.util.ArrayList)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("list.head.head.head");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The extension methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<T> head(Iterable<T>) in IterableExtensions and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<T> head(Iterator<T>) in IteratorExtensions");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
   public void testUnambiguousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
@@ -322,6 +359,58 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def void m(T t) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Iterable<String> m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val list = new java.util.ArrayList");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("list.add(new java.util.ArrayList)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("list.head.flatten.head");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Iterator<String> m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val list = new ArrayList");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("list.add(new ArrayList)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("list.head.flatten.head");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

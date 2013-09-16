@@ -37,7 +37,6 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -243,11 +242,5 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     final IResolvedTypes typeResolution = _typeResolver.resolveTypes(proxy);
     Assert.assertNotNull(typeResolution);
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
-  }
-  
-  @Ignore("TODO this should work")
-  @Test
-  public void testBug_391758() throws Exception {
-    super.testBug_391758();
   }
 }

@@ -66,16 +66,16 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		for(content: xExpression.eAllContents.toIterable) {
 			switch(content) {
 				XConstructorCall: {
-					val constructor = content.eGet(XbasePackage$Literals::XCONSTRUCTOR_CALL__CONSTRUCTOR, false) as InternalEObject
+					val constructor = content.eGet(XbasePackage.Literals::XCONSTRUCTOR_CALL__CONSTRUCTOR, false) as InternalEObject
 					assertNotNull(content.toString, constructor)
 					assertFalse(content.toString, constructor.eIsProxy())
 				}
 				XAbstractFeatureCall: {
-					val feature = content.eGet(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
+					val feature = content.eGet(XbasePackage.Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
 					assertNotNull(content.toString, feature)
 					assertFalse(content.toString, feature.eIsProxy())
 					if (content.implicitReceiver != null) {
-						val implicitFeature = content.implicitReceiver.eGet(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
+						val implicitFeature = content.implicitReceiver.eGet(XbasePackage.Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
 						assertNotNull(implicitFeature.toString, feature)
 						assertFalse(implicitFeature.toString, feature.eIsProxy())
 					}
@@ -126,12 +126,6 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		val typeResolution = typeResolver.resolveTypes(proxy)
 		assertNotNull(typeResolution);
 		assertEquals(IResolvedTypes::NULL, typeResolution)
-	}
-	
-	@Ignore("TODO this should work")
-	@Test
-	override testBug_391758() throws Exception {
-		super.testBug_391758()
 	}
 	
 }
