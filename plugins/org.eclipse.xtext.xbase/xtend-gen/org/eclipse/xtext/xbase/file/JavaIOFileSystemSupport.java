@@ -49,8 +49,8 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   public Iterable<? extends Path> getChildren(final Path path) {
-    File _file = this.getFile(path);
-    String[] _list = _file.list();
+    File _javaIOFile = this.getJavaIOFile(path);
+    String[] _list = _javaIOFile.list();
     final Function1<String,Path> _function = new Function1<String,Path>() {
       public Path apply(final String it) {
         Path _absolutePath = path.getAbsolutePath(it);
@@ -61,7 +61,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     return _map;
   }
   
-  protected File getFile(final Path path) {
+  protected File getJavaIOFile(final Path path) {
     Provider<WorkspaceConfig> _projectInformationProvider = this.getProjectInformationProvider();
     WorkspaceConfig _get = _projectInformationProvider.get();
     String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
@@ -71,41 +71,41 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   public boolean exists(final Path path) {
-    File _file = this.getFile(path);
-    boolean _exists = _file.exists();
+    File _javaIOFile = this.getJavaIOFile(path);
+    boolean _exists = _javaIOFile.exists();
     return _exists;
   }
   
   public boolean isFolder(final Path path) {
-    File _file = this.getFile(path);
-    boolean _isDirectory = _file.isDirectory();
+    File _javaIOFile = this.getJavaIOFile(path);
+    boolean _isDirectory = _javaIOFile.isDirectory();
     return _isDirectory;
   }
   
   public boolean isFile(final Path path) {
-    File _file = this.getFile(path);
-    boolean _isFile = _file.isFile();
+    File _javaIOFile = this.getJavaIOFile(path);
+    boolean _isFile = _javaIOFile.isFile();
     return _isFile;
   }
   
   public long getLastModification(final Path path) {
-    File _file = this.getFile(path);
-    long _lastModified = _file.lastModified();
+    File _javaIOFile = this.getJavaIOFile(path);
+    long _lastModified = _javaIOFile.lastModified();
     return _lastModified;
   }
   
   public String getCharset(final Path path) {
     IEncodingProvider _encodingProvider = this.getEncodingProvider();
-    File _file = this.getFile(path);
-    String _absolutePath = _file.getAbsolutePath();
+    File _javaIOFile = this.getJavaIOFile(path);
+    String _absolutePath = _javaIOFile.getAbsolutePath();
     URI _createFileURI = URI.createFileURI(_absolutePath);
     return _encodingProvider.getEncoding(_createFileURI);
   }
   
   public InputStream getContentsAsStream(final Path path) {
     try {
-      File _file = this.getFile(path);
-      FileInputStream _fileInputStream = new FileInputStream(_file);
+      File _javaIOFile = this.getJavaIOFile(path);
+      FileInputStream _fileInputStream = new FileInputStream(_javaIOFile);
       BufferedInputStream _bufferedInputStream = new BufferedInputStream(_fileInputStream);
       return _bufferedInputStream;
     } catch (Throwable _e) {
@@ -123,8 +123,8 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     if (_notEquals) {
       this.mkdir(parent);
     }
-    File _file = this.getFile(path);
-    _file.mkdir();
+    File _javaIOFile = this.getJavaIOFile(path);
+    _javaIOFile.mkdir();
     return true;
   }
   
@@ -135,14 +135,14 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       if (_not) {
         return false;
       }
-      File _file = this.getFile(path);
-      boolean _isDirectory = _file.isDirectory();
+      File _javaIOFile = this.getJavaIOFile(path);
+      boolean _isDirectory = _javaIOFile.isDirectory();
       if (_isDirectory) {
-        File _file_1 = this.getFile(path);
-        Files.sweepFolder(_file_1);
+        File _javaIOFile_1 = this.getJavaIOFile(path);
+        Files.sweepFolder(_javaIOFile_1);
       }
-      File _file_2 = this.getFile(path);
-      _file_2.delete();
+      File _javaIOFile_2 = this.getJavaIOFile(path);
+      _javaIOFile_2.delete();
       return true;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -160,8 +160,8 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       };
       final OutputSupplier<BufferedOutputStream> _function_1 = new OutputSupplier<BufferedOutputStream>() {
         public BufferedOutputStream getOutput() throws IOException {
-          File _file = JavaIOFileSystemSupport.this.getFile(path);
-          FileOutputStream _fileOutputStream = new FileOutputStream(_file);
+          File _javaIOFile = JavaIOFileSystemSupport.this.getJavaIOFile(path);
+          FileOutputStream _fileOutputStream = new FileOutputStream(_javaIOFile);
           BufferedOutputStream _bufferedOutputStream = new BufferedOutputStream(_fileOutputStream);
           return _bufferedOutputStream;
         }

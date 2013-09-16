@@ -11,7 +11,6 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator
 import org.junit.Test
 
-import static extension com.google.common.collect.Iterables.*
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 /**
@@ -38,7 +37,7 @@ class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
 		assertEquals(3, dependentElementURIs.size);
 		val fooFunction = fooClass.members.get(0) as XtendFunction
 		newArrayList(fooFunction, fooClass.inferredType, fooClass.inferredConstructor)
-			.forEach[assertTrue(it.toString, dependentElementURIs.contains(it.URI))]
+			.forEach[assertTrue(it.toString, dependentElementURIs.exists[ element | element == it.URI])]
 	}
 	
 	@Test def testPolymorphicDispatch() {
@@ -56,6 +55,6 @@ class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
 		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooMethod1, null)
 		assertEquals(5, dependentElementURIs.size);
 		(fooClass.members + fooClass.inferredType.members).filter[!(it instanceof JvmConstructor)].toList
-			.forEach[assertTrue(it.toString, dependentElementURIs.contains(it.URI))]
+			.forEach[assertTrue(it.toString, dependentElementURIs.exists[ element | element == it.URI])]
 	}
 }

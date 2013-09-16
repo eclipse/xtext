@@ -160,6 +160,6 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	override protected doGetImage(Object element) {
-		element?.imageDescriptor ?: super.doGetImage(element)
+		element?.imageDescriptor() ?: super.doGetImage(element)
 	}
 }

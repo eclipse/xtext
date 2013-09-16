@@ -18,7 +18,6 @@ public class ReflectExtensionsTest {
     }
   }.apply();
   
-  @Extension
   private ReflectExtensions privateExt = new Function0<ReflectExtensions>() {
     public ReflectExtensions apply() {
       ReflectExtensions _reflectExtensions = new ReflectExtensions();

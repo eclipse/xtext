@@ -1,6 +1,6 @@
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import com.google.common.base.Predicate;
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -68,7 +69,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       XtendTypeDeclaration _get = _xtendTypes.get(0);
       final XtendClass fooClass = ((XtendClass) _get);
       final Iterable<URI> dependentElementURIs = this.dependentElementsCalculator.getDependentElementURIs(fooClass, null);
-      int _size = Iterables.size(dependentElementURIs);
+      int _size = IterableExtensions.size(dependentElementURIs);
       Assert.assertEquals(3, _size);
       EList<XtendMember> _members = fooClass.getMembers();
       XtendMember _get_1 = _members.get(0);
@@ -79,9 +80,15 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
         public void apply(final EObject it) {
           String _string = it.toString();
-          URI _uRI = EcoreUtil.getURI(it);
-          boolean _contains = Iterables.contains(dependentElementURIs, _uRI);
-          Assert.assertTrue(_string, _contains);
+          final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
+            public Boolean apply(final URI element) {
+              URI _uRI = EcoreUtil.getURI(it);
+              boolean _equals = Objects.equal(element, _uRI);
+              return Boolean.valueOf(_equals);
+            }
+          };
+          boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function);
+          Assert.assertTrue(_string, _exists);
         }
       };
       IterableExtensions.<EObject>forEach(_newArrayList, _function);
@@ -118,26 +125,32 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       EList<XtendMember> _members = fooClass.getMembers();
       final XtendMember fooMethod1 = _members.get(1);
       final Iterable<URI> dependentElementURIs = this.dependentElementsCalculator.getDependentElementURIs(fooMethod1, null);
-      int _size = Iterables.size(dependentElementURIs);
+      int _size = IterableExtensions.size(dependentElementURIs);
       Assert.assertEquals(5, _size);
       EList<XtendMember> _members_1 = fooClass.getMembers();
       JvmGenericType _inferredType = this.associations.getInferredType(fooClass);
       EList<JvmMember> _members_2 = _inferredType.getMembers();
       Iterable<EObject> _plus = Iterables.<EObject>concat(_members_1, _members_2);
-      final Predicate<EObject> _function = new Predicate<EObject>() {
-        public boolean apply(final EObject it) {
+      final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
+        public Boolean apply(final EObject it) {
           boolean _not = (!(it instanceof JvmConstructor));
-          return _not;
+          return Boolean.valueOf(_not);
         }
       };
-      Iterable<EObject> _filter = Iterables.<EObject>filter(_plus, _function);
+      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_plus, _function);
       List<EObject> _list = IterableExtensions.<EObject>toList(_filter);
       final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
         public void apply(final EObject it) {
           String _string = it.toString();
-          URI _uRI = EcoreUtil.getURI(it);
-          boolean _contains = Iterables.contains(dependentElementURIs, _uRI);
-          Assert.assertTrue(_string, _contains);
+          final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
+            public Boolean apply(final URI element) {
+              URI _uRI = EcoreUtil.getURI(it);
+              boolean _equals = Objects.equal(element, _uRI);
+              return Boolean.valueOf(_equals);
+            }
+          };
+          boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function);
+          Assert.assertTrue(_string, _exists);
         }
       };
       IterableExtensions.<EObject>forEach(_list, _function_1);

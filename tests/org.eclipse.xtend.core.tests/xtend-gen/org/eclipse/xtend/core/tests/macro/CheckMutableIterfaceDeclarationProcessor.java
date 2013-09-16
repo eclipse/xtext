@@ -90,7 +90,7 @@ public class CheckMutableIterfaceDeclarationProcessor implements RegisterGlobals
         MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "values cannot contain null", _function_6);
         final Procedure0 _function_7 = new Procedure0() {
           public void apply() {
-            annotationReference.set(null, new String[] { null });
+            annotationReference.set(null, ((String[]) ((String[])Conversions.unwrapArray(Collections.<Object>unmodifiableList(Lists.<Object>newArrayList((Object)null)), String.class))));
           }
         };
         MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "values cannot contain null", _function_7);
@@ -107,7 +107,12 @@ public class CheckMutableIterfaceDeclarationProcessor implements RegisterGlobals
         };
         MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "values cannot be null", _function_9);
         annotationReference.set(null, "foo");
-        annotationReference.set(null, new String[] { "foo" });
+        String[] _xblockexpression = null;
+        {
+          final String[] array = { "foo" };
+          _xblockexpression = (array);
+        }
+        annotationReference.set(null, _xblockexpression);
         annotationReference.set(null, true);
         annotationReference.set(null, ((boolean[]) ((boolean[])Conversions.unwrapArray(Collections.<Boolean>unmodifiableList(Lists.<Boolean>newArrayList(true)), boolean.class))));
         annotationReference.set(null, 0);

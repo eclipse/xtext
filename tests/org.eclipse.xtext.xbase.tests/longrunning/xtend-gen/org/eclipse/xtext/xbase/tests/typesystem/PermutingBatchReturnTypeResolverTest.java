@@ -89,10 +89,10 @@ public class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolve
       String _simpleName = resolvedType.getSimpleName();
       Assert.assertEquals(replacedExpressionText, type, _simpleName);
       Resource _eResource_4 = xExpression.eResource();
-      Iterable<Diagnostic> _linkingAndSyntaxErrors = this.linkingAndSyntaxErrors(_eResource_4);
+      Iterable<Diagnostic> _linkingAndSyntaxErrors = this.getLinkingAndSyntaxErrors(_eResource_4);
       String _string_2 = _linkingAndSyntaxErrors.toString();
       Resource _eResource_5 = xExpression.eResource();
-      Iterable<Diagnostic> _linkingAndSyntaxErrors_1 = this.linkingAndSyntaxErrors(_eResource_5);
+      Iterable<Diagnostic> _linkingAndSyntaxErrors_1 = this.getLinkingAndSyntaxErrors(_eResource_5);
       boolean _isEmpty_2 = IterableExtensions.isEmpty(_linkingAndSyntaxErrors_1);
       Assert.assertTrue(_string_2, _isEmpty_2);
       Resource _eResource_6 = xExpression.eResource();

@@ -24,11 +24,11 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	
 	@Property @Inject IWorkspaceRoot workspaceRoot
 	
-	protected def getFile(Path path) {
+	protected def getEclipseFile(Path path) {
 		workspaceRoot.getFile(new org.eclipse.core.runtime.Path(path.toString))
 	}
 	
-	protected def getFolder(Path path) {
+	protected def getEclipseFolder(Path path) {
 		workspaceRoot.getFolder(new org.eclipse.core.runtime.Path(path.toString))
 	}
 	
@@ -41,7 +41,7 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	}
 
 	override Iterable<? extends Path> getChildren(Path path) {
-		path.folder.members.map[new Path(fullPath.toString)]
+		path.eclipseFolder.members.map[new Path(fullPath.toString)]
 	}
 
 	override boolean exists(Path path) {
@@ -62,16 +62,16 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 
 	override String getCharset(Path path) {
 		if (path.isFile) {
-			return path.file.charset
+			return path.eclipseFile.charset
 		} else if (path.isFolder) {
-			return path.folder.defaultCharset
+			return path.eclipseFolder.defaultCharset
 		} else {
 			return path.parent.getCharset
 		}
 	}
 
 	override InputStream getContentsAsStream(Path path) {
-		path.file.contents
+		path.eclipseFile.contents
 	}
 	
 	override delete(Path path) {
@@ -88,16 +88,16 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		if (!path.parent.exists) {
 			path.parent.mkdir
 		}
-		path.folder.create(true, true, null)
+		path.eclipseFolder.create(true, true, null)
 		return true;
 	}
 	
 	override setContentsAsStream(Path path, InputStream stream) {
 		if (path.exists) {
-			path.file.setContents(stream, true, true, null)
+			path.eclipseFile.setContents(stream, true, true, null)
 		} else {
 			path.parent.mkdir
-			path.file.create(stream, true, null)
+			path.eclipseFile.create(stream, true, null)
 		}
 	}
 	

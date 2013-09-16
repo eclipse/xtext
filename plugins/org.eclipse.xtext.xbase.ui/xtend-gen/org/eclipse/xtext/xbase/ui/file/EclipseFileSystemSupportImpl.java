@@ -41,7 +41,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     this._workspaceRoot = workspaceRoot;
   }
   
-  protected IFile getFile(final Path path) {
+  protected IFile getEclipseFile(final Path path) {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
@@ -49,7 +49,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return _file;
   }
   
-  protected IFolder getFolder(final Path path) {
+  protected IFolder getEclipseFolder(final Path path) {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
@@ -73,8 +73,8 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   
   public Iterable<? extends Path> getChildren(final Path path) {
     try {
-      IFolder _folder = this.getFolder(path);
-      IResource[] _members = _folder.members();
+      IFolder _eclipseFolder = this.getEclipseFolder(path);
+      IResource[] _members = _eclipseFolder.members();
       final Function1<IResource,Path> _function = new Function1<IResource,Path>() {
         public Path apply(final IResource it) {
           IPath _fullPath = it.getFullPath();
@@ -116,8 +116,8 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     boolean _isFile = this.isFile(path);
     if (_isFile) {
       try {
-        IFile _file = this.getFile(path);
-        return _file.getCharset();
+        IFile _eclipseFile = this.getEclipseFile(path);
+        return _eclipseFile.getCharset();
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
@@ -125,8 +125,8 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       boolean _isFolder = this.isFolder(path);
       if (_isFolder) {
         try {
-          IFolder _folder = this.getFolder(path);
-          return _folder.getDefaultCharset();
+          IFolder _eclipseFolder = this.getEclipseFolder(path);
+          return _eclipseFolder.getDefaultCharset();
         } catch (Throwable _e_1) {
           throw Exceptions.sneakyThrow(_e_1);
         }
@@ -139,8 +139,8 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   
   public InputStream getContentsAsStream(final Path path) {
     try {
-      IFile _file = this.getFile(path);
-      InputStream _contents = _file.getContents();
+      IFile _eclipseFile = this.getEclipseFile(path);
+      InputStream _contents = _eclipseFile.getContents();
       return _contents;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -174,8 +174,8 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         Path _parent_1 = path.getParent();
         this.mkdir(_parent_1);
       }
-      IFolder _folder = this.getFolder(path);
-      _folder.create(true, true, null);
+      IFolder _eclipseFolder = this.getEclipseFolder(path);
+      _eclipseFolder.create(true, true, null);
       return true;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -186,13 +186,13 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     try {
       boolean _exists = this.exists(path);
       if (_exists) {
-        IFile _file = this.getFile(path);
-        _file.setContents(stream, true, true, null);
+        IFile _eclipseFile = this.getEclipseFile(path);
+        _eclipseFile.setContents(stream, true, true, null);
       } else {
         Path _parent = path.getParent();
         this.mkdir(_parent);
-        IFile _file_1 = this.getFile(path);
-        _file_1.create(stream, true, null);
+        IFile _eclipseFile_1 = this.getEclipseFile(path);
+        _eclipseFile_1.create(stream, true, null);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

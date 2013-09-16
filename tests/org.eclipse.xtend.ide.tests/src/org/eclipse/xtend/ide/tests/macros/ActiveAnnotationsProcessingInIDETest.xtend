@@ -35,7 +35,6 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static org.junit.Assert.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
