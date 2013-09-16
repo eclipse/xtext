@@ -452,6 +452,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 						allHints.remove(ConformanceHint.SUCCESS);
 						allHints.add(ConformanceHint.SEALED);
 						allHints.add(ConformanceHint.CHECKED);
+						allHints.add(ConformanceHint.PROPAGATED_TYPE);
 						expectation.acceptActualType(expectedType, allHints.toArray(new ConformanceHint[allHints.size()]));
 					} else if (allHints.contains(ConformanceHint.SUCCESS)) {
 						allHints.add(ConformanceHint.SEALED);

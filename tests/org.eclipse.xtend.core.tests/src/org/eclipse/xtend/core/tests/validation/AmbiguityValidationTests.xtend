@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate
 import org.junit.Test
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,6 +29,7 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 	
 	@Inject extension ParseHelper<XtendFile>
 	@Inject extension IBatchTypeResolver
+	@Inject extension ValidationTestHelper
 	
 	protected def void assertAmbiguous(CharSequence contents, String... messageParts) {
 		val file = contents.parsedXtendFile
@@ -53,6 +55,7 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		val file = contents.parsedXtendFile
 		val errors = file.eResource.errors
 		assertEquals(errors.toString, 0, errors.size)
+		file.assertNoErrors
 	}
 	
 	private def getParsedXtendFile(CharSequence contents) {
@@ -312,11 +315,11 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 					}
 				}
 			}
-			class I {
-				def void m2() {}
+			interface I {
+				def void m2()
 			}
-			class J {
-				def void m2() {}
+			interface J {
+				def void m2()
 			}
 		'''.assertUnambiguous
 	}
@@ -369,7 +372,7 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 	def void testUnambiguousMethods_07() {
 		'''
 			class C {
-				def void m() {
+				def m() {
 					m2
 				}
 				String m2
@@ -1072,6 +1075,25 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
+	def void testAmbiguousMethods_11() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| '' ]
+				}
+				def void m(Runnable r) {}
+				def void m(Callable<String> c) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(Runnable) in C and
+				m(Callable<String>) in C
+			both match.''')
+	}
+	
+	@Test
 	def void testUnambiguousMethods_01() {
 		'''
 			class C {
@@ -1142,6 +1164,182 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 				def void m(List<? extends Appendable> c) {}
 				def void m(AbstractList<? extends StringBuilder> c) {}
 				def void m(Iterable<? extends StringBuilder> c) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_06() {
+		'''
+			class C {
+				def void n(L<String> list) {
+					list.addListener [
+						LC<String> c |
+					]
+				}
+			}
+			interface O {
+				def void addListener(IL listener)
+			}
+			interface L<E> extends O {
+				def void addListener(LL<? super E> listener)
+			}
+			interface LL<E> {
+				def void onChanged(LC<? extends E> c)
+			}
+			interface LC<E> {}
+			interface IL {
+				def void invalidated(O o)
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_07() {
+		'''
+			class C {
+				def void n(L<String> list) {
+					list.addListener [
+						LC<CharSequence> lc |
+					]
+				}
+			}
+			interface O {
+				def void addListener(IL listener)
+			}
+			interface L<E> extends O {
+				def void addListener(LL<? super E> listener)
+			}
+			interface LL<E> {
+				def void onChanged(LC<? extends E> c)
+			}
+			interface LC<E> {}
+			interface IL {
+				def void invalidated(O o)
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_08() {
+		'''
+			class C {
+				def void n(L<String> list) {
+					list.addListener [
+						O o |
+					]
+				}
+			}
+			interface O {
+				def void addListener(IL listener)
+			}
+			interface L<E> extends O {
+				def void addListener(LL<? super E> listener)
+			}
+			interface LL<E> {
+				def void onChanged(LC<? extends E> c)
+			}
+			interface LC<E> {}
+			interface IL {
+				def void invalidated(O o)
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_09() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| return; ]
+				}
+				def void m(Runnable r) {}
+				def void m(Callable<String> c) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_10() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| return ''; ]
+				}
+				def void m(Runnable r) {}
+				def void m(Callable<String> c) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_11() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| if (true) return '' ]
+				}
+				def void m(Runnable r) {}
+				def void m(Callable<String> c) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_12() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| if (true) return ''; '' ]
+				}
+				def void m(Runnable r) {}
+				def void m(Callable<String> c) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_13() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| if (true) return '' else '' ]
+				}
+				def void m(Runnable r) {}
+				def void m(Callable<String> c) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_14() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| '' ]
+				}
+				def void m(()=>String f) {}
+				def void m(Callable<Integer> c) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_15() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| 1 ]
+				}
+				def void m(()=>String f) {}
+				def void m(Callable<Integer> c) {}
 			}
 		'''.assertUnambiguous
 	}
