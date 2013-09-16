@@ -44,17 +44,14 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 			return RuntimeTestSetup.class.getClassLoader();
 		}
 
-		@SuppressWarnings("unused")
 		public XtendFactory bindFactory() {
 			return XtendFactory.eINSTANCE;
 		}
 
-		@SuppressWarnings("unused")
 		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
 			return CachingClasspathTypeProviderFactory.class;
 		}
 
-		@SuppressWarnings("unused")
 		public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
 			return SingletonPreferenceValuesProvider.class;
 		}
