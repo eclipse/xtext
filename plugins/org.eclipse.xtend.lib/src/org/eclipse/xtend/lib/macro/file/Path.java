@@ -9,6 +9,7 @@ package org.eclipse.xtend.lib.macro.file;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+import java.io.File;
 import java.util.List;
 
 import com.google.common.annotations.Beta;
@@ -54,7 +55,7 @@ public final class Path {
 		Iterable<String> iterable = splitter.split(pathAsString);
 		
 		// if the first element is empty it has a leading separator;
-		this.absolute = iterable.iterator().next().length() == 0;
+		this.absolute = iterable.iterator().next().length() == 0 || new File(pathAsString).isAbsolute();
 		
 		Iterable<String> withoutEmptySegements = Iterables.filter(iterable, new Predicate<String>() {
 

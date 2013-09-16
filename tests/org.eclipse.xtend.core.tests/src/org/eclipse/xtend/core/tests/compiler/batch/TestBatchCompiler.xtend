@@ -11,9 +11,6 @@ import com.google.inject.Inject
 import java.io.File
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
-import org.eclipse.xtend.lib.macro.file.FileLocations
-import org.eclipse.xtend.lib.macro.file.FileSystemSupport
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
@@ -74,7 +71,7 @@ class TestBatchCompiler {
 	@Test def void testWorkspaceConfig() {
 		batchCompiler.configureWorkspace();
 		val config = workspaceConfigProvider.get
-		assertEquals(new File('..').canonicalFile.absolutePath, config.absoluteFileSystemPath)
+		assertEquals(new File('..').canonicalFile.absoluteFile, new File(config.absoluteFileSystemPath))
 		val project = config.projects.values.head
 		val projectPath = "/"+new File(".").canonicalFile.name
 		assertEquals(projectPath, project.rootPath.toString)
