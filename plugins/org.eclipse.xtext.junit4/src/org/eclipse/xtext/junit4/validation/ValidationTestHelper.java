@@ -139,7 +139,8 @@ public class ValidationTestHelper {
 	 */
 	public void assertIssue(final EObject model, final EClass objectType, final String code, final int offset, final int length,  final Severity severity,
 			final String... messageParts) {
-		final Iterable<Issue> validate = matchIssues(model, objectType, code, offset, length, severity, validate(model), messageParts);
+		final List<Issue> allIssues = validate(model);
+		final Iterable<Issue> validate = matchIssues(model, objectType, code, offset, length, severity, allIssues, messageParts);
 		if (Iterables.isEmpty(validate)) {
 			StringBuilder message = new StringBuilder("Expected ")
 				.append(severity)
@@ -148,7 +149,7 @@ public class ValidationTestHelper {
 				.append("' on ")
 				.append(objectType.getName())
 				.append(" but got\n");
-			getIssuesAsString(model, validate, message);
+			getIssuesAsString(model, allIssues, message);
 			assertEquals(Joiner.on('\n').join(messageParts), message.toString());
 			fail(message.toString());
 		}
@@ -167,7 +168,8 @@ public class ValidationTestHelper {
 	 */
 	public void assertNoIssues(final EObject model, final EClass objectType, final String code, final int offset, final int length,  final Severity severity,
 			final String... messageParts) {
-		final Iterable<Issue> validate = matchIssues(model, objectType, code, offset, length, severity, validate(model), messageParts);
+		final List<Issue> allIssues = validate(model);
+		final Iterable<Issue> validate = matchIssues(model, objectType, code, offset, length, severity, allIssues, messageParts);
 		if (!Iterables.isEmpty(validate)) {
 			StringBuilder message = new StringBuilder("Expected no ")
 				.append(severity)
@@ -176,7 +178,7 @@ public class ValidationTestHelper {
 				.append("' on ")
 				.append(objectType.getName())
 				.append(" but got\n");
-			getIssuesAsString(model, validate, message);
+			getIssuesAsString(model, allIssues, message);
 			assertEquals(Joiner.on('\n').join(messageParts), message.toString());
 			fail(message.toString());
 		}

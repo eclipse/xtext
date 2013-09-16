@@ -154,6 +154,21 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		assertEquals(1, issue.getLineNumber().intValue());
 	}
 	
+	@Test
+	public void testOverloadedVarArgMethod() throws Exception {
+		XtendClass clazz = clazz(
+				"class Bar { " +
+				"	def void y(CharSequence s) {\n" + 
+				"		z(#[ true, '' ])\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def void z(boolean... s) {}\n" + 
+				"	def void z(String... s) {}" +
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to boolean");
+		helper.assertNoErrors(clazz, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
 	 */

@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -46,6 +47,10 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private IBatchTypeResolver _iBatchTypeResolver;
+  
+  @Inject
+  @Extension
+  private ValidationTestHelper _validationTestHelper;
   
   protected void assertAmbiguous(final CharSequence contents, final String... messageParts) {
     final XtendFile file = this.getParsedXtendFile(contents);
@@ -92,6 +97,7 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     String _string = errors.toString();
     int _size = errors.size();
     Assert.assertEquals(_string, 0, _size);
+    this._validationTestHelper.assertNoErrors(file);
   }
   
   private XtendFile getParsedXtendFile(final CharSequence contents) {
