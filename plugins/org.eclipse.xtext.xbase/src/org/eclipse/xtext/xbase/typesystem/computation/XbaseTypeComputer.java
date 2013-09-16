@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import static com.google.common.collect.Lists.*;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -420,7 +421,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 				LightweightTypeReference expectedType = expectation.getExpectedType();
 				if (expectedType != null) {
 					if (expectedType.isType(Character.TYPE) || expectedType.isType(Character.class)) {
-						expectation.acceptActualType(expectedType, ConformanceHint.CHECKED, ConformanceHint.SUCCESS, ConformanceHint.DEMAND_CONVERSION);
+						expectation.acceptActualType(expectedType, ConformanceHint.CHECKED, ConformanceHint.SUCCESS, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SEALED);
 					} else {
 						LightweightTypeReference type = getTypeForName(String.class, state);
 						expectation.acceptActualType(type, ConformanceHint.UNCHECKED);
@@ -439,13 +440,29 @@ public class XbaseTypeComputer implements ITypeComputer {
 			LightweightTypeReference elementTypeExpectation = null;
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if(expectedType != null) {
-				elementTypeExpectation = getElementOrComponentType(expectedType, state);
 				if(expectedType.isArray()) {
 					elementTypeExpectation = expectedType.getComponentType();
-					for(XExpression element: literal.getElements()) 
-						state.withExpectation(elementTypeExpectation).computeTypes(element);
-					expectation.acceptActualType(expectedType, ConformanceHint.UNCHECKED);
+					EnumSet<ConformanceHint> allHints = EnumSet.noneOf(ConformanceHint.class);
+					for(XExpression element: literal.getElements()) {
+						ITypeComputationResult elementTypeResult = state.withExpectation(elementTypeExpectation).computeTypes(element);
+						EnumSet<ConformanceHint> hints = elementTypeResult.getCheckedConformanceHints();
+						allHints.addAll(hints);
+					}
+					if (allHints.contains(ConformanceHint.INCOMPATIBLE)) {
+						allHints.remove(ConformanceHint.SUCCESS);
+						allHints.add(ConformanceHint.SEALED);
+						allHints.add(ConformanceHint.CHECKED);
+						expectation.acceptActualType(expectedType, allHints.toArray(new ConformanceHint[allHints.size()]));
+					} else if (allHints.contains(ConformanceHint.SUCCESS)) {
+						allHints.add(ConformanceHint.SEALED);
+						allHints.add(ConformanceHint.CHECKED);
+						expectation.acceptActualType(expectedType, allHints.toArray(new ConformanceHint[allHints.size()]));
+					} else {
+						expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.SEALED);
+					}
 					return; 
+				} else {
+					elementTypeExpectation = getElementOrComponentType(expectedType, state);
 				}
 			}
 			List<LightweightTypeReference> listTypeCandidates = computeCollectionTypeCandidates(literal, listType, elementTypeExpectation, state);

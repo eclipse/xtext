@@ -86,6 +86,11 @@ public interface ITypeComputationResult {
 	@NonNull
 	EnumSet<ConformanceHint> getConformanceHints();
 	
-//	EnumSet<ConformanceHint> getReturnTypeConformanceHints();
+	/**
+	 * Conformance information about the actual expression type and
+	 * the expectation.
+	 */
+	@NonNull
+	EnumSet<ConformanceHint> getCheckedConformanceHints();
 	
 }
