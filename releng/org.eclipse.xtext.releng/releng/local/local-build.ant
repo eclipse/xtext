@@ -45,8 +45,8 @@
 			<arg value="-Declipse.p2.mirrors=false" />
 			<arg value="-Dbuild.root=${build.root}" />
 			<arg value="-DWITH.MWE2=false" />
-			<arg value="-DBOOTSTRAP=false" />
-			<arg value="-DSWTBOT=true" />
+			<arg value="-DBOOTSTRAP=true" />
+			<arg value="-DSWTBOT=false" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-DtargetPlatformPath=${build.root}/target.platform" />
 			<arg value="-Dxtend.checkout.location=${checkout.location}" />
@@ -59,7 +59,8 @@
 			<arg line="--displaystacktrace" />
 			<arg line="--loglevel INFO" />
 			<arg line="-S '${commands.file}'" />
-			<arg line="-vmargs -Xmx1500m" />
+			<arg line="-vm '/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java'" />
+			<arg line="-vmargs -XX:MaxPermSize=300m -Xmx1500m" />
 		</exec>
 	</target>
 

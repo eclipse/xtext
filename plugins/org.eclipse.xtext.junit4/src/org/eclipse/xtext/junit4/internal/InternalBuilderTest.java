@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.Test;
 
 /**
@@ -23,7 +24,10 @@ public class InternalBuilderTest {
 
 	@Test
 	public void test() throws CoreException {
-		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD, null);
+		System.out.println("Build started");
+		ResourcesPlugin.getWorkspace().build(
+				IncrementalProjectBuilder.FULL_BUILD,  new NullProgressMonitor());
+		System.out.println("Build done");
 		assertTrue(
 				"Problems found",
 				ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length == 0);

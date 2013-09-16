@@ -10,8 +10,8 @@ addbaseline -A "api-baseline"
 import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtext-platform.mspec"
 resolve "${releng.project.location}/releng/xtext.cquery"
 #launch --stderr --stdout --launch "org.eclipse.xtext.language-generator/GenerateAllLanguages.mwe2.launch"
-#build
-#launch --stderr --stdout --launch "org.eclipse.xtext.build.feature/bootstrap-builder.launch"
+build
+junit --stderr --stdout --launch "org.eclipse.xtext.build.feature/bootstrap-build.launch"
 
 #build
 
@@ -19,9 +19,9 @@ resolve "${releng.project.location}/releng/xtext.cquery"
 #importtargetdefinition  -DuseMirror=true -A "${releng.project.location}/releng/tests/tests-buildserver.target
 
 #resolve "${releng.project.location}/releng/tests/xtext-test.mspec"
-resolve "${releng.project.location}/releng/tests-xtend/xtend-test.mspec"
-build
-junit --stderr --stdout --launch "org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SWTBot).launch" --flatXML --output "${build.root}/xtend.test.results/xtend.ide.swtbot.tests.slow.xml
+#resolve "${releng.project.location}/releng/tests-xtend/xtend-test.mspec"
+#build
+#junit --stderr --stdout --launch "org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SWTBot).launch" --flatXML --output "${build.root}/xtend.test.results/xtend.ide.swtbot.tests.slow.xml
 #perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#zip.examples"
 
 #build
