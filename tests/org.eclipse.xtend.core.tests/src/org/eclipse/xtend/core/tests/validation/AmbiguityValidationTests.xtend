@@ -144,6 +144,24 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
+	def void testAmbiguousMethods_05() {
+		'''
+			class C {
+				def void m() {
+					m2
+				}
+				def void getM2() {}
+				def void m2() {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m2() in C and
+				getM2() in C
+			both match.''')
+	}
+	
+	@Test
 	def void testUnambiguousMethods_01() {
 		'''
 			class C {
@@ -193,6 +211,98 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 			}
 		'''.assertUnambiguous
 	}
+	
+	@Test
+	def void testUnambiguousMethods_04() {
+		'''
+			import static D.*
+			class C extends D {
+				def void m() {
+					m2
+				}
+			}
+			class D {
+				def static void m2() {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_05() {
+		'''
+			import static D.*
+			class C extends D {
+				def void m() {
+					m2
+				}
+			}
+			class D {
+				def static void m2() {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_06() {
+		'''
+			class C {
+				def void m() {
+					m2()
+					getM2
+				}
+				def void getM2() {}
+				def void m2() {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_07() {
+		'''
+			class C {
+				def void m() {
+					m2
+				}
+				String m2
+				def void getM2() {}
+				def void m2() {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_08() {
+		'''
+			import static D.*
+			import static E.*
+			class C {
+				def void m() {
+					m2
+				}
+			}
+			class D {
+				def static void m2() {}
+			}
+			class E extends D {}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_09() {
+		'''
+			import static D.*
+			class C {
+				def void m() {
+					E.m2
+				}
+			}
+			class D {
+				def static void m2() {}
+			}
+			class E extends D {}
+		'''.assertUnambiguous
+	}
+	
 }
 
 /**
