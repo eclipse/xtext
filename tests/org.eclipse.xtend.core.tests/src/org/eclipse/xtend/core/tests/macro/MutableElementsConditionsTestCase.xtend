@@ -427,7 +427,8 @@ class CheckMutableIterfaceDeclarationProcessor implements RegisterGlobalsPartici
 				annotationReference.set(null, null as String)
 			]
 			assertThrowable(IllegalArgumentException, "values cannot contain null") [ |
-				annotationReference.set(null, #[null])
+				// TODO remove workaround (cast) below
+				annotationReference.set(null, #[null] as String[])
 			]
 			assertThrowable(IllegalArgumentException, "values cannot be null") [ |
 				annotationReference.set(null, null as boolean[])
@@ -436,7 +437,8 @@ class CheckMutableIterfaceDeclarationProcessor implements RegisterGlobalsPartici
 				annotationReference.set(null, null as int[])
 			]
 			annotationReference.set(null, "foo")
-			annotationReference.set(null, #["foo"])
+			// TODO remove workaround (cast) below
+			annotationReference.set(null, { val String[] array = #["foo"]; array })
 			annotationReference.set(null, true)
 			annotationReference.set(null, #[true] as boolean[])
 			annotationReference.set(null, 0)

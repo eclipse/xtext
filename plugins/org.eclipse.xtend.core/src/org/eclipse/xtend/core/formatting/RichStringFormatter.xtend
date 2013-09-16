@@ -232,7 +232,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 						if(ws.column > newContentStartColumn)
 							indentationStack.remove(ws)
 				if(_outdentThisLine) {
-					if(!indentationStack.empty)
+					if(!indentationStack.empty())
 						indentationStack.pop()
 					_outdentThisLine = false
 				}

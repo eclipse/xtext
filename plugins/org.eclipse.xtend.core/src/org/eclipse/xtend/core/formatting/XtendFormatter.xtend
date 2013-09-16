@@ -35,7 +35,6 @@ import org.eclipse.xtext.xtype.XImportSection
 
 import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
-import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 
 @SuppressWarnings("restriction")
