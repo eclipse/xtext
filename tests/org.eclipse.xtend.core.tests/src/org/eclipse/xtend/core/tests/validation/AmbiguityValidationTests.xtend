@@ -661,6 +661,25 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 			both match.''')
 	}
 	
+	
+	@Test
+	def void testAmbiguousMethods_08() {
+		'''
+			class C {
+				def Iterable<String> m() {
+					val list = new java.util.ArrayList
+					list.add(new java.util.ArrayList)
+					list.head.head.head
+				}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The extension methods
+				<T> head(Iterable<T>) in IterableExtensions and
+				<T> head(Iterator<T>) in IteratorExtensions
+			both match.''')
+	}
+	
 	@Test
 	def void testUnambiguousMethods_01() {
 		'''
@@ -689,6 +708,33 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 			class D<T> {
 				def void m(String s) {}
 				def void m(T t) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_03() {
+		'''
+			class C {
+				def Iterable<String> m() {
+					val list = new java.util.ArrayList
+					list.add(new java.util.ArrayList)
+					list.head.flatten.head
+				}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousMethods_04() {
+		'''
+			import java.util.*
+			class C {
+				def Iterator<String> m() {
+					val list = new ArrayList
+					list.add(new ArrayList)
+					list.head.flatten.head
+				}
 			}
 		'''.assertUnambiguous
 	}
