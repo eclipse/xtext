@@ -13,6 +13,7 @@ import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -26,7 +27,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -253,24 +253,117 @@ public class XtendBatchCompiler {
 		this.fileEncoding = encoding;
 	}
 	
-	public void configureWorkspace() {
-		Path source = new Path(new File(sourcePath).getAbsolutePath());
-		Path target = new Path(new File(outputPath).getAbsolutePath());
-		Path commonRoot = source;
-		while (!target.startsWith(commonRoot)) {
-			commonRoot = commonRoot.getParent();
+	public boolean configureWorkspace() {
+		List<File> sourceFileList = getSourcePathFileList();
+		File outputFile = getOutputPathFile();
+		if (sourceFileList == null || outputFile == null) {
+			return false;
 		}
+
+		File commonRoot = determineCommonRoot(outputFile, sourceFileList);
+
+		// We don't want to use root ("/") as a workspace folder, didn't we?
+		if (commonRoot == null || commonRoot.getParent() == null
+				|| commonRoot.getParentFile().getParent() == null) {
+			log.error("All source folders and the output folder should have "
+					+ "a common parent non-top level folder (like project folder)");
+			for (File sourceFile : sourceFileList) {
+				log.error("(Source folder: '" + sourceFile + "')");
+			}
+			log.error("(Output folder: '" + outputFile + "')");
+			return false;
+		}
+
 		WorkspaceConfig workspaceConfig = new WorkspaceConfig(commonRoot.getParent().toString());
-		ProjectConfig projectConfig = new ProjectConfig(commonRoot.getLastSegment());
-		projectConfig.addSourceFolderMapping(source.relativize(commonRoot).toString(), target.relativize(commonRoot).toString());
+		ProjectConfig projectConfig = new ProjectConfig(commonRoot.getName());
+
+		java.net.URI commonURI = commonRoot.toURI();
+		java.net.URI relativizedTarget = commonURI.relativize(outputFile.toURI());
+		if (relativizedTarget.isAbsolute()) {
+			log.error("Target folder '" + outputFile
+					+ "' must be a child of the project folder '" + commonRoot + "'");
+			return false;
+		}
+
+		for (File source : sourceFileList) {
+			java.net.URI relativizedSrc = commonURI.relativize(source.toURI());
+			if (relativizedSrc.isAbsolute()) {
+				log.error("Source folder '" + source
+						+ "' must be a child of the project folder '" + commonRoot + "'");
+				return false;
+			}
+			projectConfig.addSourceFolderMapping(relativizedSrc.getPath(), relativizedTarget.getPath());
+		}
 		workspaceConfig.addProjectConfig(projectConfig);
 		workspaceConfigProvider.setWorkspaceConfig(workspaceConfig);
+		return true;
+	}
+
+	private File getOutputPathFile() {
+		try {
+			return new File(outputPath).getCanonicalFile();
+		} catch (IOException e) {
+			log.error("Invalid target folder '" + outputPath + "' (" + e.getMessage() + ")");
+			return null;
+		}
+	}
+
+	private List<File> getSourcePathFileList() {
+		List<File> sourceFileList = new ArrayList<File>();
+		for (String path : getSourcePathDirectories()) {
+			try {
+				sourceFileList.add(new File(path).getCanonicalFile());
+			} catch (IOException e) {
+				log.error("Invalid source folder '" + path + "' (" + e.getMessage() + ")");
+				return null;
+			}
+		}
+		return sourceFileList;
+	}
+
+	private File determineCommonRoot(File outputFile, List<File> sourceFileList) {
+		List<File> pathList = new ArrayList<File>(sourceFileList);
+		pathList.add(outputFile);
+
+		List<List<File>> pathParts = new ArrayList<List<File>>();
+
+		for (File path : pathList) {
+			List<File> partsList = new ArrayList<File>();
+			File subdir = path;
+			while (subdir != null) {
+				partsList.add(subdir);
+				subdir = subdir.getParentFile();
+			}
+			pathParts.add(partsList);
+		}
+		int i = 1;
+		File result = null;
+		while (true) {
+			File compareWith = null;
+			for (List<File> parts : pathParts) {
+				if (parts.size() < i) {
+					return result;
+				}
+				File part = parts.get(parts.size() - i);
+				if (compareWith == null) {
+					compareWith = part;
+				} else {
+					if (!compareWith.equals(part)) {
+						return result;
+					}
+				}
+			}
+			result = compareWith;
+			i++;
+		}
 	}
 
 	public boolean compile() {
 		try {
 			if (workspaceConfigProvider.getWorkspaceConfig() == null) {
-				configureWorkspace();
+				if (!configureWorkspace()) {
+					return false;
+				}
 			}
 			ResourceSet resourceSet = resourceSetProvider.get();
 			File classDirectory = createTempDir("classes");
