@@ -1001,6 +1001,9 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_165() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_167() throws Exception {
+		fail("fails in old implementation")
+	}
 	
 	@Ignore("fails in old implementation") @Test override testRecursiveTypeArgumentResolution_03() throws Exception {
 		fail("fails in old implementation")
