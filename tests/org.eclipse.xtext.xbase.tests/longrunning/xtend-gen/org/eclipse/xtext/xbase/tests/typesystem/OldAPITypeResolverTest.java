@@ -1732,6 +1732,12 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   
   @Ignore("fails in old implementation")
   @Test
+  public void testDeferredTypeArgumentResolution_167() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testRecursiveTypeArgumentResolution_03() throws Exception {
     Assert.fail("fails in old implementation");
   }
