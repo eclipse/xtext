@@ -42,6 +42,9 @@ class TestBatchCompiler {
     static String BUG396747_SRC_DIRECTORY = "./batch-compiler-data/bug396747"
     static String BUG410594_SRC_DIRECTORY = "./batch-compiler-data/bug410594"
     static String BUG416262_SRC_DIRECTORY = "./batch-compiler-data/bug416262"
+    static String BUG417177_SRC_DIRECTORY_1 = "./batch-compiler-data/bug417177/dir1/src1/"
+    static String BUG417177_SRC_DIRECTORY_2 = "./batch-compiler-data/bug417177/dir2/dir2a/src2"
+    static String BUG417177_OUTPUT_DIRECTORY = "./batch-compiler-data/bug417177/dir3/bin"
     static String TEMP_DIRECTORY = "./test-temp-dir"
     static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
 
@@ -71,9 +74,9 @@ class TestBatchCompiler {
 	}
 	
 	@Test def void testWorkspaceConfig() {
-		batchCompiler.configureWorkspace();
+		assertTrue(batchCompiler.configureWorkspace());
 		val config = workspaceConfigProvider.get
-		assertEquals(new File('..').canonicalFile.absolutePath, config.absoluteFileSystemPath)
+		assertEquals(new File('..').canonicalPath, config.absoluteFileSystemPath)
 		val project = config.projects.values.head
 		val projectPath = "/"+new File(".").canonicalFile.name
 		assertEquals(projectPath, project.rootPath.toString)
@@ -82,6 +85,189 @@ class TestBatchCompiler {
 		val target = project.sourceFolderMappings.get(src)
 		assertEquals(projectPath+"/test-result",target.toString)
 	}
+
+	@Test def void testWorkspaceConfigMultipleSourceDirs1() {
+		batchCompiler.sourcePath = '''ws/prj1/src«File.pathSeparator»ws/prj1/src-gen'''
+		batchCompiler.outputPath = '''ws/prj1/bin'''
+
+		assertTrue(batchCompiler.configureWorkspace());
+
+		val config = workspaceConfigProvider.get
+		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
+		val project = config.projects.values.head
+		assertEquals("/prj1", project.rootPath.toString)
+		assertEquals(2, project.sourceFolderMappings.size)
+		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
+		keyPaths.get(0) => [
+			assertEquals("/prj1/src", toString)
+			assertEquals("/prj1/bin", project.sourceFolderMappings.get(it).toString)
+		]
+		keyPaths.get(1) => [
+			assertEquals("/prj1/src-gen", toString)
+			assertEquals("/prj1/bin", project.sourceFolderMappings.get(it).toString)
+		]
+	}
+
+	@Test def void testWorkspaceConfigMultipleSourceDirs2AbsPaths() {
+		batchCompiler.sourcePath = '''/tmp/ws/prj1/src«File.pathSeparator»/tmp/ws/prj1/src-gen'''
+		batchCompiler.outputPath = '''/tmp/ws/prj1/bin'''
+
+		assertTrue(batchCompiler.configureWorkspace());
+
+		val config = workspaceConfigProvider.get
+		assertEquals(new File('/tmp/ws').canonicalPath, config.absoluteFileSystemPath)
+		val project = config.projects.values.head
+		assertEquals("/prj1", project.rootPath.toString)
+		assertEquals(2, project.sourceFolderMappings.size)
+		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
+		keyPaths.get(0) => [
+			assertEquals("/prj1/src", toString)
+			assertEquals("/prj1/bin", project.sourceFolderMappings.get(it).toString)
+		]
+		keyPaths.get(1) => [
+			assertEquals("/prj1/src-gen", toString)
+			assertEquals("/prj1/bin", project.sourceFolderMappings.get(it).toString)
+		]
+	}
+
+	@Test def void testWorkspaceConfigMultipleSourceDirs3() {
+		batchCompiler.sourcePath = '''ws/prj1/dir1/src«File.pathSeparator»ws/prj1/src-gen'''
+		batchCompiler.outputPath = '''ws/prj1/dir2/bin'''
+
+		assertTrue(batchCompiler.configureWorkspace());
+
+		val config = workspaceConfigProvider.get
+		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
+		val project = config.projects.values.head
+		assertEquals("/prj1", project.rootPath.toString)
+		assertEquals(2, project.sourceFolderMappings.size)
+		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
+		keyPaths.get(0) => [
+			assertEquals("/prj1/dir1/src", toString)
+			assertEquals("/prj1/dir2/bin", project.sourceFolderMappings.get(it).toString)
+		]
+		keyPaths.get(1) => [
+			assertEquals("/prj1/src-gen", toString)
+			assertEquals("/prj1/dir2/bin", project.sourceFolderMappings.get(it).toString)
+		]
+	}
+
+	@Test def void testWorkspaceConfigMultipleSourceDirs4() {
+		batchCompiler.sourcePath = '''ws/prj1/src«File.pathSeparator»ws/prj1/dir1/src-gen'''
+		batchCompiler.outputPath = '''ws/prj1/bin'''
+
+		assertTrue(batchCompiler.configureWorkspace());
+
+		val config = workspaceConfigProvider.get
+		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
+		val project = config.projects.values.head
+		assertEquals("/prj1", project.rootPath.toString)
+		assertEquals(2, project.sourceFolderMappings.size)
+		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
+		keyPaths.get(0) => [
+			assertEquals("/prj1/src", toString)
+			assertEquals("/prj1/bin", project.sourceFolderMappings.get(it).toString)
+		]
+		keyPaths.get(1) => [
+			assertEquals("/prj1/dir1/src-gen", toString)
+			assertEquals("/prj1/bin", project.sourceFolderMappings.get(it).toString)
+		]
+	}
+
+	@Test def void testWorkspaceConfigMultipleSourceDirs5() {
+		batchCompiler.sourcePath = '''ws/prj1/dir1/dir1a/src«File.pathSeparator»ws/prj1/dir3/dir3a/src-gen'''
+		batchCompiler.outputPath = '''ws/prj1/dir2/dir2a/bin'''
+
+		assertTrue(batchCompiler.configureWorkspace());
+
+		val config = workspaceConfigProvider.get
+		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
+		val project = config.projects.values.head
+		assertEquals("/prj1", project.rootPath.toString)
+		assertEquals(2, project.sourceFolderMappings.size)
+		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
+		keyPaths.get(0) => [
+			assertEquals("/prj1/dir1/dir1a/src", toString)
+			assertEquals("/prj1/dir2/dir2a/bin", project.sourceFolderMappings.get(it).toString)
+		]
+		keyPaths.get(1) => [
+			assertEquals("/prj1/dir3/dir3a/src-gen", toString)
+			assertEquals("/prj1/dir2/dir2a/bin", project.sourceFolderMappings.get(it).toString)
+		]
+	}
+
+	@Test def void testWorkspaceConfigMultipleSourceDirs6() {
+		batchCompiler.sourcePath = '''dir1/ws/prj1/dir2/dir3/dir4/src1«File.pathSeparator
+								     »dir1/ws/prj1/dir2/dir3/src2«File.pathSeparator
+								     »dir1/ws/prj1/dir2/src3«File.pathSeparator
+								     »dir1/ws/prj1/src4'''
+		batchCompiler.outputPath = '''dir1/ws/prj1/dir2/dir3/dir4/dir5/bin'''
+
+		assertTrue(batchCompiler.configureWorkspace());
+
+		val config = workspaceConfigProvider.get
+		assertEquals(new File('dir1/ws').canonicalPath, config.absoluteFileSystemPath)
+		val project = config.projects.values.head
+		assertEquals("/prj1", project.rootPath.toString)
+		assertEquals(4, project.sourceFolderMappings.size)
+		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
+		keyPaths.get(0) => [
+			assertEquals("/prj1/dir2/dir3/dir4/src1", toString)
+			assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", project.sourceFolderMappings.get(it).toString)
+		]
+		keyPaths.get(1) => [
+			assertEquals("/prj1/dir2/dir3/src2", toString)
+			assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", project.sourceFolderMappings.get(it).toString)
+		]
+		keyPaths.get(2) => [
+			assertEquals("/prj1/dir2/src3", toString)
+			assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", project.sourceFolderMappings.get(it).toString)
+		]
+		keyPaths.get(3) => [
+			assertEquals("/prj1/src4", toString)
+			assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", project.sourceFolderMappings.get(it).toString)
+		]
+	}
+
+	@Test def void testWorkspaceConfigSameDir() {
+		batchCompiler.sourcePath = "ws/prj1"
+		batchCompiler.outputPath = "ws/prj1"
+
+		assertTrue(batchCompiler.configureWorkspace());
+
+		val config = workspaceConfigProvider.get
+		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
+		val project = config.projects.values.head
+		assertEquals("/prj1", project.rootPath.toString)
+		assertEquals(1, project.sourceFolderMappings.size)
+		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
+		keyPaths.get(0) => [
+			assertEquals("/prj1", toString)
+			assertEquals("/prj1", project.sourceFolderMappings.get(it).toString)
+		]
+	}
+
+	@Test def void testWorkspaceConfigWithoutCommonProjectDir() {
+		batchCompiler.sourcePath = '''/tmp/ws/prj1/src'''
+		batchCompiler.outputPath = '''/usr/local/tmp/ws/prj1/bin'''
+
+		assertFalse(batchCompiler.configureWorkspace());
+	}
+
+	@Test def void testWorkspaceConfigWithoutCommonWorkspaceDir() {
+		batchCompiler.sourcePath = '''/tmp/src'''
+		batchCompiler.outputPath = '''/tmp/bin'''
+
+		assertFalse(batchCompiler.configureWorkspace());
+	}
+
+	@Test def void testWorkspaceConfigWithTopLevelCommonWorkspaceDir() {
+		batchCompiler.sourcePath = '''/tmp/prj/src'''
+		batchCompiler.outputPath = '''/tmp/prj/bin'''
+
+		assertTrue(batchCompiler.configureWorkspace());
+	}
+
 
     @Test
 	def void bug368551() {
@@ -121,6 +307,19 @@ class TestBatchCompiler {
 	def void bug416262() {
 		batchCompiler.sourcePath = BUG416262_SRC_DIRECTORY
 		assertTrue("Compiling funny file pass", batchCompiler.compile)
+	}
+
+	@Test
+	def void bug417177() {
+		val outputDir = new File(BUG417177_OUTPUT_DIRECTORY)
+		outputDir.mkdirs();
+		new File(outputDir, "mypackage/Bug417177_1.java").delete
+		new File(outputDir, "mypackage/Bug417177_2.java").delete
+		batchCompiler.sourcePath = '''«BUG417177_SRC_DIRECTORY_1»«File.pathSeparator»«BUG417177_SRC_DIRECTORY_2»'''
+		batchCompiler.outputPath = BUG417177_OUTPUT_DIRECTORY
+		assertTrue("Compiling files from multiple source directories", batchCompiler.compile)
+		assertTrue(new File(outputDir, "mypackage/Bug417177_1.java").exists)
+		assertTrue(new File(outputDir, "mypackage/Bug417177_2.java").exists)
 	}
 	
 	@Test
