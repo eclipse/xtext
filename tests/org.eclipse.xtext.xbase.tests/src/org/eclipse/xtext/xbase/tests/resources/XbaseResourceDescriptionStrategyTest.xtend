@@ -9,10 +9,11 @@ package org.eclipse.xtext.xbase.tests.resources
 
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy
 import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.resource.IResourceDescription
 import org.junit.Test
 
 class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase {
@@ -28,7 +29,7 @@ class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase {
 		interfaceType.setSimpleName('MyType')
 		val list = <IEObjectDescription>newArrayList()
 		descriptionStrategy.createEObjectDescriptions(interfaceType, [ list += it ])
-		assertTrue(list.exists[ "true" == getUserData(XbaseResourceDescriptionStrategy::IS_INTERFACE) ])
+		assertTrue(list.exists[ "true" == getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE) ])
 	}
 	
 	@Test def void testInterfaceDescription_02() {
@@ -38,7 +39,7 @@ class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase {
 		interfaceType.setSimpleName('MyType')
 		val list = <IEObjectDescription>newArrayList()
 		descriptionStrategy.createEObjectDescriptions(interfaceType, [ list += it ])
-		assertFalse(list.exists[ "true" == getUserData(XbaseResourceDescriptionStrategy::IS_INTERFACE) ])
+		assertFalse(list.exists[ "true" == getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE) ])
 	}
 	
 	@Test def void testNoReferenceDescriptionsForPackageFragments() {
