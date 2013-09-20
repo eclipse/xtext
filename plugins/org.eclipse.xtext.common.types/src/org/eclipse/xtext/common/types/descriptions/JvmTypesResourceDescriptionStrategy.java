@@ -40,7 +40,7 @@ public class JvmTypesResourceDescriptionStrategy extends DefaultResourceDescript
 	public static final String SIGNATURE_HASH_KEY = "sig";
 	
 	@Inject
-	private org.eclipse.xtext.common.types.descriptions.JvmDeclaredTypeSignatureHashProvider hashProvider;
+	private JvmDeclaredTypeSignatureHashProvider hashProvider;
 	
 	@Override
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {

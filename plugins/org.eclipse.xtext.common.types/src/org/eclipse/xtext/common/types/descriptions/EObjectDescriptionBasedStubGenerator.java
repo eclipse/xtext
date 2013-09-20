@@ -9,7 +9,7 @@ package org.eclipse.xtext.common.types.descriptions;
 
 import static org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy.*;
 
-import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -22,27 +22,27 @@ import org.eclipse.xtext.util.Strings;
  * @since 2.5
  */
 public class EObjectDescriptionBasedStubGenerator implements IStubGenerator {
-	
+
 	public String getJavaStubSource(IEObjectDescription description) {
 		if (!isJvmDeclaredType(description)) {
 			return null;
 		}
 		QualifiedName qualifiedName = description.getQualifiedName();
-		
+
 		StringBuilder classSignatureBuilder = new StringBuilder();
-		if (qualifiedName.getSegments().size()>1) {
+		if (qualifiedName.getSegments().size() > 1) {
 			String string = qualifiedName.toString();
 			classSignatureBuilder.append("package " + string.substring(0, string.lastIndexOf('.')) + ";");
 			classSignatureBuilder.append("\n");
 		}
 		classSignatureBuilder.append("public ");
-		if(description.getEClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+		if (description.getEClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			if (description.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE) != null) {
 				classSignatureBuilder.append("interface ");
 			} else {
 				classSignatureBuilder.append("class ");
 			}
-		} else if(description.getEClass() == TypesPackage.Literals.JVM_ENUMERATION_TYPE) {
+		} else if (description.getEClass() == TypesPackage.Literals.JVM_ENUMERATION_TYPE) {
 			classSignatureBuilder.append("enum ");
 		} else if (description.getEClass() == TypesPackage.Literals.JVM_ANNOTATION_TYPE) {
 			classSignatureBuilder.append("@interface ");
@@ -55,7 +55,7 @@ public class EObjectDescriptionBasedStubGenerator implements IStubGenerator {
 		classSignatureBuilder.append("{}");
 		return classSignatureBuilder.toString();
 	}
-	
+
 	public String getJavaFileName(IEObjectDescription description) {
 		if (!isJvmDeclaredType(description)) {
 			return null;
@@ -65,11 +65,15 @@ public class EObjectDescriptionBasedStubGenerator implements IStubGenerator {
 	}
 
 	protected boolean isJvmDeclaredType(IEObjectDescription description) {
-		return description.getEObjectOrProxy() instanceof JvmDeclaredType && description.getUserData(IS_NESTED_TYPE) == null;
+		EClass eClass = description.getEClass();
+		return (eClass == TypesPackage.Literals.JVM_GENERIC_TYPE
+				|| eClass == TypesPackage.Literals.JVM_ENUMERATION_TYPE 
+				|| eClass == TypesPackage.Literals.JVM_ANNOTATION_TYPE)
+				&& description.getUserData(IS_NESTED_TYPE) == null;
 	}
 
 	public void doGenerateStubs(IFileSystemAccess access, IResourceDescription description) {
-		for (IEObjectDescription objectDesc: description.getExportedObjects()) {
+		for (IEObjectDescription objectDesc : description.getExportedObjects()) {
 			String javaFileName = getJavaFileName(objectDesc);
 			if (javaFileName != null) {
 				String javaStubSource = getJavaStubSource(objectDesc);
