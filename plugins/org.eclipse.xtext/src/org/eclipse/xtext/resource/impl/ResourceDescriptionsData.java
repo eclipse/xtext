@@ -5,22 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.builderState;
+package org.eclipse.xtext.resource.impl;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable;
 
+import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -31,8 +36,47 @@ import com.google.common.collect.Sets;
  * resource descriptions that export elements with a certain name.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.5
+ * 
  */
-public class ResourceDescriptionsData extends AbstractCompoundSelectable {
+@Beta public class ResourceDescriptionsData extends AbstractCompoundSelectable {
+	
+	public static class ResourceSetAdapter extends AdapterImpl {
+		
+		public ResourceSetAdapter(ResourceDescriptionsData data) {
+			super();
+			this.data = data;
+		}
+
+		public static ResourceDescriptionsData findResourceDescriptionsData(ResourceSet resourceSet) {
+			if (resourceSet != null) {
+				for (Adapter a : resourceSet.eAdapters()) {
+					if (a instanceof ResourceSetAdapter) {
+						return ((ResourceSetAdapter) a).getResourceDescriptionsData();
+					}
+				}
+			}
+			return null;
+		}
+		
+		public static void installResourceDescriptionsData(ResourceSet resourceSet, ResourceDescriptionsData data) {
+			if (findResourceDescriptionsData(resourceSet) != null) {
+				throw new IllegalStateException("Resource description data is already installed.");
+			}
+			ResourceSetAdapter resourceSetAdapter = new ResourceSetAdapter(data);
+			resourceSet.eAdapters().add(resourceSetAdapter);
+		}
+		
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return type == ResourceDescriptionsData.class;
+		}
+		
+		private ResourceDescriptionsData data;
+		public ResourceDescriptionsData getResourceDescriptionsData() {
+			return data;
+		}
+	}
 
 	private final Map<URI, IResourceDescription> resourceDescriptionMap;
 	/**
@@ -45,11 +89,14 @@ public class ResourceDescriptionsData extends AbstractCompoundSelectable {
 	private final Map<QualifiedName, Object> lookupMap;
 
 	public ResourceDescriptionsData(Iterable<IResourceDescription> descriptions) {
-		resourceDescriptionMap = Maps.uniqueIndex(descriptions, new Function<IResourceDescription, URI>() {
-			public URI apply(IResourceDescription from) {
-				return from.getURI();
-			}
-		});
+		int expectedSize = 500; // magic number in case it's not a Collection
+		if (descriptions instanceof Collection) {
+			expectedSize = ((Collection<?>) descriptions).size();
+		}
+		resourceDescriptionMap = Maps.newHashMapWithExpectedSize(expectedSize);
+		for (IResourceDescription desc : descriptions) {
+			resourceDescriptionMap.put(desc.getURI(), desc);
+		}
 		// magic number - it is assumend that we export at least 2 entries per resource description
 		lookupMap = Maps.newHashMapWithExpectedSize(resourceDescriptionMap.size() * 2);
 	    for (IResourceDescription description: descriptions) {

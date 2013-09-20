@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -238,6 +240,33 @@ public class ResourceSetBasedResourceDescriptionsTest extends Assert implements 
 			index++;
 		}
 		assertEquals(4, resourceSet.getResources().size());
+	}
+	
+	@Test public void testDataBasedResourceSetBasedResourceDescriptions() throws Exception {
+		ResourceDescriptionsData data = new ResourceDescriptionsData(new ArrayList<IResourceDescription>());
+		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, data);
+		resDescs.setContext(resourceSet);
+		
+		Resource resource = createResource();
+		QualifiedName name = QualifiedName.create("SomeName");
+		createNamedElement(name, EcorePackage.Literals.ECLASS, resource);
+		// still empty
+		assertFalse(resDescs.getAllResourceDescriptions().iterator().hasNext());
+		assertTrue(resDescs.isEmpty());
+		assertFalse(resDescs.getExportedObjectsByType(EcorePackage.Literals.ECLASS).iterator().hasNext());
+		assertFalse(resDescs.getExportedObjects(EcorePackage.Literals.ECLASS,name, false).iterator().hasNext());
+		assertFalse(resDescs.getExportedObjects().iterator().hasNext());
+		
+		// add resource description to data
+		IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
+		data.addDescription(description.getURI(), description);
+		// now contained
+		assertSame(description, resDescs.getAllResourceDescriptions().iterator().next());
+		assertFalse(resDescs.isEmpty());
+		assertTrue(resDescs.getExportedObjectsByType(EcorePackage.Literals.ECLASS).iterator().hasNext());
+		assertTrue(resDescs.getExportedObjects(EcorePackage.Literals.ECLASS,name, false).iterator().hasNext());
+		assertFalse(resDescs.getExportedObjects(EcorePackage.Literals.EATTRIBUTE,name, false).iterator().hasNext());
+		assertTrue(resDescs.getExportedObjects().iterator().hasNext());
 	}
 	
 }
