@@ -26,8 +26,10 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -47,8 +49,18 @@ public class SwtBotProjectHelper {
     SWTBotShell _xblockexpression = null;
     {
       final SWTBotShell shell = it.activeShell();
-      SWTBotView _viewByTitle = it.viewByTitle("Welcome");
-      _viewByTitle.close();
+      List<SWTBotView> _views = it.views();
+      final Function1<SWTBotView,Boolean> _function = new Function1<SWTBotView,Boolean>() {
+        public Boolean apply(final SWTBotView it) {
+          String _title = it.getTitle();
+          boolean _equals = Objects.equal(_title, "Welcome");
+          return Boolean.valueOf(_equals);
+        }
+      };
+      SWTBotView _findFirst = IterableExtensions.<SWTBotView>findFirst(_views, _function);
+      if (_findFirst!=null) {
+        _findFirst.close();
+      }
       SWTBotPerspective _perspectiveByLabel = it.perspectiveByLabel("Java");
       _perspectiveByLabel.activate();
       SWTBotMenu _menu = it.menu("File");
@@ -92,6 +104,18 @@ public class SwtBotProjectHelper {
     return _newJavaEditor;
   }
   
+  public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
+    String _plus = (SwtBotProjectHelper.defaultProject + "/src");
+    SWTBotEclipseEditor _newJavaEditor = SwtBotProjectHelper.newJavaEditor(it, typeName, "", _plus);
+    final Procedure1<SWTBotEclipseEditor> _function = new Procedure1<SWTBotEclipseEditor>() {
+      public void apply(final SWTBotEclipseEditor it) {
+        SwtBotProjectHelper.setContent(it, content);
+      }
+    };
+    SWTBotEclipseEditor _doubleArrow = ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newJavaEditor, _function);
+    return _doubleArrow;
+  }
+  
   public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final String sourceFolderPath) {
     SWTBotEclipseEditor _xblockexpression = null;
     {
@@ -117,10 +141,16 @@ public class SwtBotProjectHelper {
     return _xblockexpression;
   }
   
-  public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName) {
+  public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
     String _plus = (SwtBotProjectHelper.defaultProject + "/src");
     SWTBotEclipseEditor _newXtendEditor = SwtBotProjectHelper.newXtendEditor(it, typeName, "", _plus);
-    return _newXtendEditor;
+    final Procedure1<SWTBotEclipseEditor> _function = new Procedure1<SWTBotEclipseEditor>() {
+      public void apply(final SWTBotEclipseEditor it) {
+        SwtBotProjectHelper.setContent(it, content);
+      }
+    };
+    SWTBotEclipseEditor _doubleArrow = ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newXtendEditor, _function);
+    return _doubleArrow;
   }
   
   public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final String sourceFolderPath) {

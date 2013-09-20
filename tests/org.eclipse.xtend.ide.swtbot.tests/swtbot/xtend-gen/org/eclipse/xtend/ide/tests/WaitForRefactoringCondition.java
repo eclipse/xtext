@@ -21,14 +21,16 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class WaitForRefactoringCondition extends DefaultCondition {
   private SWTBotEclipseEditor editor;
   
-  public WaitForRefactoringCondition(final SWTBotEclipseEditor editor) {
+  private boolean isRedo;
+  
+  public WaitForRefactoringCondition(final SWTBotEclipseEditor editor, final boolean isRedo) {
     this.editor = editor;
+    this.isRedo = isRedo;
   }
   
   public String getFailureMessage() {
@@ -38,12 +40,20 @@ public class WaitForRefactoringCondition extends DefaultCondition {
   public boolean test() throws Exception {
     boolean _xblockexpression = false;
     {
-      IOperationHistory _operationHistory = OperationHistoryFactory.getOperationHistory();
-      IUndoContext _undoContext = this.getUndoContext();
-      IUndoableOperation _undoOperation = _operationHistory.getUndoOperation(_undoContext);
+      final IOperationHistory operationHistory = OperationHistoryFactory.getOperationHistory();
+      IUndoableOperation _xifexpression = null;
+      if (this.isRedo) {
+        IUndoContext _undoContext = this.getUndoContext();
+        IUndoableOperation _redoOperation = operationHistory.getRedoOperation(_undoContext);
+        _xifexpression = _redoOperation;
+      } else {
+        IUndoContext _undoContext_1 = this.getUndoContext();
+        IUndoableOperation _undoOperation = operationHistory.getUndoOperation(_undoContext_1);
+        _xifexpression = _undoOperation;
+      }
       String _label = null;
-      if (_undoOperation!=null) {
-        _label=_undoOperation.getLabel();
+      if (_xifexpression!=null) {
+        _label=_xifexpression.getLabel();
       }
       final String label = _label;
       boolean _startsWith = label.startsWith("Rename ");
@@ -58,13 +68,10 @@ public class WaitForRefactoringCondition extends DefaultCondition {
       IEditorReference _reference = this.editor.getReference();
       IEditorPart _editor = _reference.getEditor(true);
       final ITextEditor ed = ((ITextEditor) _editor);
-      IEditorInput _editorInput = ed.getEditorInput();
-      InputOutput.<IEditorInput>println(_editorInput);
       IDocumentProvider _documentProvider = ed.getDocumentProvider();
-      IEditorInput _editorInput_1 = ed.getEditorInput();
-      final IDocument document = _documentProvider.getDocument(_editorInput_1);
+      IEditorInput _editorInput = ed.getEditorInput();
+      final IDocument document = _documentProvider.getDocument(_editorInput);
       final IDocumentUndoManager undoManager = DocumentUndoManagerRegistry.getDocumentUndoManager(document);
-      InputOutput.<IDocumentUndoManager>println(undoManager);
       IUndoContext _undoContext = undoManager.getUndoContext();
       _xblockexpression = (_undoContext);
     }

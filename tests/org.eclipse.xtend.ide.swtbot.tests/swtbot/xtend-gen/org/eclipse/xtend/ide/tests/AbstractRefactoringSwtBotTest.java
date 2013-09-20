@@ -9,16 +9,27 @@ package org.eclipse.xtend.ide.tests;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.eclipse.xtend.ide.internal.XtendActivator;
+import org.eclipse.xtend.ide.tests.RefactoringTestParameters;
 import org.eclipse.xtend.ide.tests.SwtBotProjectHelper;
 import org.eclipse.xtend.ide.tests.WaitForLinkedModeCondition;
 import org.eclipse.xtend.ide.tests.WaitForRefactoringCondition;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -53,6 +64,14 @@ public abstract class AbstractRefactoringSwtBotTest {
     }
   }
   
+  @Inject
+  private RefactoringPreferences preferences;
+  
+  @Inject
+  private RenameRefactoringController controller;
+  
+  protected RefactoringTestParameters testParams;
+  
   @Before
   public void setUp() {
     XtendActivator _instance = XtendActivator.getInstance();
@@ -64,10 +83,130 @@ public abstract class AbstractRefactoringSwtBotTest {
   public void tearDown() {
     SwtBotProjectHelper.clearSourceFolderContents(AbstractRefactoringSwtBotTest.bot);
     AbstractRefactoringSwtBotTest.bot.closeAllEditors();
+    Display _default = Display.getDefault();
+    final Runnable _function = new Runnable() {
+      public void run() {
+        AbstractRefactoringSwtBotTest.this.preferences.setUseInlineRefactoring(true);
+        AbstractRefactoringSwtBotTest.this.preferences.setSaveAllBeforeRefactoring(true);
+      }
+    };
+    _default.syncExec(_function);
+  }
+  
+  public AbstractRefactoringSwtBotTest() {
+    RefactoringTestParameters _refactoringTestParameters = new RefactoringTestParameters();
+    this.testParams = _refactoringTestParameters;
+  }
+  
+  public AbstractRefactoringSwtBotTest(final RefactoringTestParameters testParams) {
+    this.testParams = testParams;
   }
   
   @Inject
-  private RenameRefactoringController controller;
+  public void initialize(final RefactoringPreferences preferences) {
+    this.preferences = preferences;
+    Display _default = Display.getDefault();
+    final Runnable _function = new Runnable() {
+      public void run() {
+        boolean _isUseInlineRefactoring = AbstractRefactoringSwtBotTest.this.testParams.isUseInlineRefactoring();
+        preferences.setUseInlineRefactoring(_isUseInlineRefactoring);
+        boolean _isSaveAllBeforeRefactoring = AbstractRefactoringSwtBotTest.this.testParams.isSaveAllBeforeRefactoring();
+        preferences.setSaveAllBeforeRefactoring(_isSaveAllBeforeRefactoring);
+      }
+    };
+    _default.syncExec(_function);
+  }
+  
+  public void renameInXtendEditor(final SWTBotEclipseEditor xtendEditor, final String newName, final String dialogName) {
+    final SWTBotMenu renameMenuItem = SwtBotProjectHelper.clickableContextMenu(xtendEditor, "Rename Element");
+    renameMenuItem.click();
+    boolean _isUseInlineRefactoring = this.testParams.isUseInlineRefactoring();
+    if (_isUseInlineRefactoring) {
+      this.waitForLinkedMode();
+      xtendEditor.typeText(newName);
+      boolean _isUsePreview = this.testParams.isUsePreview();
+      if (_isUsePreview) {
+        xtendEditor.pressShortcut(SWT.MOD4, SWT.CR);
+        SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
+        _shell.activate();
+        SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
+        _button.click();
+      } else {
+        KeyStroke _instance = KeyStroke.getInstance(SWT.LF);
+        xtendEditor.pressShortcut(_instance);
+      }
+    } else {
+      SWTBotShell _shell_1 = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
+      SWTBotShell _activate = _shell_1.activate();
+      SWTBot _bot = _activate.bot();
+      final Procedure1<SWTBot> _function = new Procedure1<SWTBot>() {
+        public void apply(final SWTBot it) {
+          SWTBotText _textWithLabel = it.textWithLabel("New name:");
+          _textWithLabel.setText(newName);
+          boolean _isUsePreview = AbstractRefactoringSwtBotTest.this.testParams.isUsePreview();
+          if (_isUsePreview) {
+            SWTBotButton _button = it.button("Preview >");
+            _button.click();
+          }
+          SWTBotButton _button_1 = it.button("OK");
+          _button_1.click();
+        }
+      };
+      ObjectExtensions.<SWTBot>operator_doubleArrow(_bot, _function);
+    }
+    this.waitForRefactoring(xtendEditor);
+  }
+  
+  public void renameInJavaEditor(final SWTBotEclipseEditor javaEditor, final String newName, final String dialogName) {
+    final SWTBotMenu renameMenuItem = SwtBotProjectHelper.clickableContextMenu(javaEditor, "Refactor", "Rename...");
+    renameMenuItem.click();
+    boolean _isUseInlineRefactoring = this.testParams.isUseInlineRefactoring();
+    if (_isUseInlineRefactoring) {
+      javaEditor.typeText(newName);
+      boolean _isUsePreview = this.testParams.isUsePreview();
+      if (_isUsePreview) {
+        javaEditor.pressShortcut(SWT.MOD4, SWT.CR);
+        SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
+        _shell.activate();
+        SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
+        _button.click();
+      } else {
+        KeyStroke _instance = KeyStroke.getInstance(SWT.LF);
+        javaEditor.pressShortcut(_instance);
+      }
+    } else {
+      SWTBotShell _shell_1 = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
+      SWTBotShell _activate = _shell_1.activate();
+      SWTBot _bot = _activate.bot();
+      final Procedure1<SWTBot> _function = new Procedure1<SWTBot>() {
+        public void apply(final SWTBot it) {
+          SWTBotText _textWithLabel = it.textWithLabel("New name:");
+          _textWithLabel.setText(newName);
+          boolean _isUsePreview = AbstractRefactoringSwtBotTest.this.testParams.isUsePreview();
+          if (_isUsePreview) {
+            SWTBotButton _button = it.button("Next");
+            _button.click();
+          }
+          SWTBotButton _button_1 = it.button("Finish");
+          _button_1.click();
+        }
+      };
+      ObjectExtensions.<SWTBot>operator_doubleArrow(_bot, _function);
+    }
+    this.waitForRefactoring(javaEditor);
+  }
+  
+  public void undo(final SWTBotEclipseEditor editor) {
+    editor.setFocus();
+    editor.pressShortcut(SWT.MOD1, 'Z');
+    SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell("Undo");
+    _shell.activate();
+    SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
+    _button.click();
+    SWTBot _sWTBot = new SWTBot();
+    WaitForRefactoringCondition _waitForRefactoringCondition = new WaitForRefactoringCondition(editor, true);
+    _sWTBot.waitUntil(_waitForRefactoringCondition, 15000);
+  }
   
   protected void waitForLinkedMode() {
     SWTBot _sWTBot = new SWTBot();
@@ -77,7 +216,7 @@ public abstract class AbstractRefactoringSwtBotTest {
   
   protected void waitForRefactoring(final SWTBotEclipseEditor editor) {
     SWTBot _sWTBot = new SWTBot();
-    WaitForRefactoringCondition _waitForRefactoringCondition = new WaitForRefactoringCondition(editor);
+    WaitForRefactoringCondition _waitForRefactoringCondition = new WaitForRefactoringCondition(editor, false);
     _sWTBot.waitUntil(_waitForRefactoringCondition, 15000);
   }
   

@@ -26,7 +26,7 @@ class SwtBotProjectHelper {
 	
 	static def newXtendProject(SWTWorkbenchBot it, String projectName) {
 		val shell = activeShell
-		viewByTitle("Welcome").close
+		views.findFirst[title == "Welcome"]?.close
 		perspectiveByLabel('Java').activate
 		menu('File').menu('New').menu('Project...').click
 		shell('New Project').activate
@@ -48,6 +48,12 @@ class SwtBotProjectHelper {
 		newJavaEditor(typeName, '', defaultProject + '/src')
 	}
 	
+	static def newJavaEditor(SWTWorkbenchBot it, String typeName, CharSequence content) {
+		newJavaEditor(typeName, '', defaultProject + '/src') => [
+			it.content = content
+		]
+	}
+	
 	static def newJavaEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
 		menu('File').menu('New').menu('Class').click
 		shell('New Java Class').activate
@@ -58,8 +64,10 @@ class SwtBotProjectHelper {
 		editorByTitle(typeName + '.java').toTextEditor
 	}
 	
-	static def newXtendEditor(SWTWorkbenchBot it, String typeName) {
-		newXtendEditor(typeName, '', defaultProject + '/src')
+	static def newXtendEditor(SWTWorkbenchBot it, String typeName, CharSequence content) {
+		newXtendEditor(typeName, '', defaultProject + '/src') => [
+			it.content = content
+		]
 	}
 	
 	static def newXtendEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
