@@ -42,6 +42,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -75,10 +76,24 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	@Override
 	protected void createReferenceUpdate(EObject referringElement, URI referringResourceURI, EReference reference,
 			int indexInList, EObject newTargetElement, IRefactoringUpdateAcceptor updateAcceptor) {
-		// skip constructor calls like this() or super()  
-		if (!(referringElement instanceof XFeatureCall && newTargetElement instanceof JvmConstructor))
+		if (referringElement instanceof XAbstractFeatureCall) {
+			if(newTargetElement instanceof JvmDeclaredType) {
+				if(isStaticExtensionFeatureCall(referringElement, reference, ((XAbstractFeatureCall) referringElement).getFeature())) {
+					((ImportAwareUpdateAcceptor)updateAcceptor).removeImport((JvmDeclaredType) newTargetElement, false, true);
+					((ImportAwareUpdateAcceptor)updateAcceptor).acceptImport((JvmDeclaredType) newTargetElement, false, true);
+					return;
+				} else if(isStaticFeatureCall(referringElement, reference, ((XAbstractFeatureCall) referringElement).getFeature())) { 
+					((ImportAwareUpdateAcceptor)updateAcceptor).removeImport((JvmDeclaredType) newTargetElement, true, false);
+					((ImportAwareUpdateAcceptor)updateAcceptor).acceptImport((JvmDeclaredType) newTargetElement, true, false);
+					return;
+				}
+			} 
+		}
+		if (!(referringElement instanceof XFeatureCall && newTargetElement instanceof JvmConstructor)) {
+			// skip constructor calls like this() or super()  
 			super.createReferenceUpdate(referringElement, referringResourceURI, reference, indexInList,
-					newTargetElement, updateAcceptor);
+					newTargetElement, updateAcceptor);				
+		}
 	}
 
 	@Override
@@ -93,8 +108,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 				});
 		RewritableImportSection importSection = importSectionFactory.parse((XtextResource) referringResource);
 		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(updateAcceptor, importSection);
-		super.processReferringResource(referringResource, nonImportReferences, elementRenameArguments,
-				importAwareUpdateAcceptor);
+		super.processReferringResource(referringResource, nonImportReferences, elementRenameArguments, importAwareUpdateAcceptor);
 		List<ReplaceRegion> importChanges = importSection.rewrite();
 		TextEdit importChangeEdit = replaceConverter.convertToTextEdit(importChanges);
 		if(importChangeEdit != null) 

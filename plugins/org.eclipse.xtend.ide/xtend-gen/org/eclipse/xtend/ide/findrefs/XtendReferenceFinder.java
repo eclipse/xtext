@@ -11,6 +11,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -18,12 +21,17 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
+import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -122,5 +130,57 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
       }
     }
     super.findLocalReferencesFromElement(targetURISet, sourceCandidate, localResource, acceptor, currentExportedContainerURI, exportedElementsMap);
+    boolean _matched_1 = false;
+    if (!_matched_1) {
+      if (sourceCandidate instanceof XFeatureCall) {
+        final XFeatureCall _xFeatureCall = (XFeatureCall)sourceCandidate;
+        boolean _and = false;
+        XExpression _actualReceiver = _xFeatureCall.getActualReceiver();
+        boolean _equals = Objects.equal(_actualReceiver, null);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _isStatic = _xFeatureCall.isStatic();
+          _and = (_equals && _isStatic);
+        }
+        if (_and) {
+          _matched_1=true;
+          this.addReferenceToTypeFromStaticImport(_xFeatureCall, targetURISet, acceptor, currentExportedContainerURI);
+        }
+      }
+    }
+    if (!_matched_1) {
+      if (sourceCandidate instanceof XMemberFeatureCall) {
+        final XMemberFeatureCall _xMemberFeatureCall = (XMemberFeatureCall)sourceCandidate;
+        _matched_1=true;
+        boolean _and = false;
+        boolean _isStatic = _xMemberFeatureCall.isStatic();
+        if (!_isStatic) {
+          _and = false;
+        } else {
+          boolean _isStaticWithDeclaringType = _xMemberFeatureCall.isStaticWithDeclaringType();
+          boolean _not = (!_isStaticWithDeclaringType);
+          _and = (_isStatic && _not);
+        }
+        if (_and) {
+          this.addReferenceToTypeFromStaticImport(_xMemberFeatureCall, targetURISet, acceptor, currentExportedContainerURI);
+        }
+      }
+    }
+  }
+  
+  protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
+    final JvmIdentifiableElement feature = sourceCandidate.getFeature();
+    if ((feature instanceof JvmMember)) {
+      final JvmDeclaredType type = ((JvmMember) feature).getDeclaringType();
+      final URI typeURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(type);
+      boolean _contains = targetURISet.contains(typeURI);
+      if (_contains) {
+        final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate);
+        int _minus = (-1);
+        DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, typeURI, Literals.XABSTRACT_FEATURE_CALL__FEATURE, _minus, currentExportedContainerURI);
+        acceptor.accept(_defaultReferenceDescription);
+      }
+    }
   }
 }
