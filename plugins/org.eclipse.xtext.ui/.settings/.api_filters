@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.ui" version="2">
+    <resource path="src/org/eclipse/xtext/ui/refactoring/impl/EditorDocumentChange.java" type="org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange">
+        <filter comment="We have to extend some Change subtype" id="571473929">
+            <message_arguments>
+                <message_argument value="TextChange"/>
+                <message_argument value="EditorDocumentChange"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
