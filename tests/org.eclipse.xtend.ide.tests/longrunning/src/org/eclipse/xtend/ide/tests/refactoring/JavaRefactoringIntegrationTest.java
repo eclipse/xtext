@@ -855,6 +855,40 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameXtendClassStaticImport() throws Exception {
+		try {
+			String xtendModel = "package test; class XtendClass { static def foo() {} }";
+			IFile xtendClass = testHelper.createFile("test/XtendClass.xtend", xtendModel);
+			IFile xtendClass2 = testHelper.createFile("test/XtendClass2.xtend", 
+					"package test; import static test.XtendClass.* class XtendClass2 { def bar() { foo } }");
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+			fileAsserts.assertFileExists("src/test/NewXtendClass.xtend");
+			fileAsserts.assertFileContains(xtendClass2, "import static test.NewXtendClass.*");
+		} finally {
+			testHelper.getProject().getFile("src/test/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
+			syncUtil.waitForBuild(null);
+		}
+	}
+
+	@Test
+	public void testRenameXtendClassStaticExtensionImport() throws Exception {
+		try {
+			String xtendModel = "package test; class XtendClass { static def foo(String s) {} }";
+			IFile xtendClass = testHelper.createFile("test/XtendClass.xtend", xtendModel);
+			IFile xtendClass2 = testHelper.createFile("test/XtendClass2.xtend", 
+					"package test; import static extension test.XtendClass.* class XtendClass2 { def bar() { ''.foo } }");
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+			fileAsserts.assertFileExists("src/test/NewXtendClass.xtend");
+			fileAsserts.assertFileContains(xtendClass2, "import static extension test.NewXtendClass.*");
+		} finally {
+			testHelper.getProject().getFile("src/test/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
+			syncUtil.waitForBuild(null);
+		}
+	}
+
+	@Test
 	public void testRenameXtendClassWithDelegateConstructorCall_1() throws Exception {
 		try {
 			String xtendModel = "class XtendClass { new() { this(1) } new(int foo) {} }";
