@@ -255,8 +255,8 @@ class TestBatchCompiler {
 	}
 
 	@Test def void testWorkspaceConfigWithoutCommonWorkspaceDir() {
-		batchCompiler.sourcePath = '''/tmp/src'''
-		batchCompiler.outputPath = '''/tmp/bin'''
+		batchCompiler.sourcePath = '''/some_non_existing_folder/src'''
+		batchCompiler.outputPath = '''/some_non_existing_folder/bin'''
 
 		assertFalse(batchCompiler.configureWorkspace());
 	}
