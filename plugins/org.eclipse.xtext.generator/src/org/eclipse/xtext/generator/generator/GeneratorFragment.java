@@ -28,7 +28,7 @@ import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 import org.eclipse.xtext.util.Strings;
 
 /**
- * An {@link IGeneratorFragment} to create a formatter for an Xtext language.
+ * An {@link IGeneratorFragment} to create a generator for an Xtext language.
  *
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
