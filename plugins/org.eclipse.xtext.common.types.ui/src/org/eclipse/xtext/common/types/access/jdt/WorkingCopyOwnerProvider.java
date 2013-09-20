@@ -18,6 +18,7 @@ import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.WorkingCopyOwner;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -42,6 +43,8 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 	@Inject private ResourceDescriptionsProvider descriptionsProvider;
 	
 	@Inject private IStorage2UriMapper storage2UriMapper;
+	
+	@Inject private EObjectDescriptionBasedStubGenerator stubGenerator;
 
 	public WorkingCopyOwner getWorkingCopyOwner(final IJavaProject javaProject, final ResourceSet resourceset) {
 		return new WorkingCopyOwner() {
@@ -86,30 +89,7 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 	}
 
 	protected String getSource(String typeName, String packageName, IEObjectDescription next, ResourceSet resourceset) {
-		StringBuilder result = new StringBuilder();
-		if (packageName != null) {
-			result.append("package ").append(packageName).append("; public ");
-		}
-		if (next.getEClass() == TypesPackage.Literals.JVM_ANNOTATION_TYPE) {
-			result.append("@interface ");
-		} else if (next.getEClass() == TypesPackage.Literals.JVM_ENUMERATION_TYPE) {
-			result.append("enum ");
-		} else {
-			// see org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy.IS_INTERFACE
-			if (next.getUserData("interface") != null) {
-				result.append("interface ");
-			} else {
-				result.append("class ");
-			}
-		}
-		result.append(typeName);
-		// see org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy.TYPE_PARAMETERS
-		String typeParameters = next.getUserData("typeParameters");
-		if (typeParameters != null) {
-			result.append(typeParameters);
-		}
-		result.append("{}");
-		return result.toString();
+		return stubGenerator.getJavaStubSource(next);
 	}
 
 	protected QualifiedName toQualifiedName(String packageName, String typeName) {

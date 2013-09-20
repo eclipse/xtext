@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -55,7 +56,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
       public Boolean apply(final IEObjectDescription it) {
-        String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
+        String _userData = it.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
         boolean _equals = Objects.equal("true", _userData);
         return Boolean.valueOf(_equals);
       }
@@ -79,7 +80,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
       public Boolean apply(final IEObjectDescription it) {
-        String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
+        String _userData = it.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
         boolean _equals = Objects.equal("true", _userData);
         return Boolean.valueOf(_equals);
       }

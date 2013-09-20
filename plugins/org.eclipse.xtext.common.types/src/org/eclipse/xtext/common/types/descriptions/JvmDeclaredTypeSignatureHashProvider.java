@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.resource;
+package org.eclipse.xtext.common.types.descriptions;
 
 import static com.google.common.collect.Iterables.*;
 

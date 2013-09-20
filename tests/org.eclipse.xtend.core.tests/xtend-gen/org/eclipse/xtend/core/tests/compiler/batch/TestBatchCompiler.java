@@ -636,10 +636,10 @@ public class TestBatchCompiler {
   @Test
   public void testWorkspaceConfigWithoutCommonWorkspaceDir() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/tmp/src");
+    _builder.append("/some_non_existing_folder/src");
     this.batchCompiler.setSourcePath(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("/tmp/bin");
+    _builder_1.append("/some_non_existing_folder/bin");
     this.batchCompiler.setOutputPath(_builder_1.toString());
     boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
     Assert.assertFalse(_configureWorkspace);
