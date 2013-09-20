@@ -20,7 +20,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -28,14 +27,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
+import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.mwe.NameBasedFilter;
@@ -61,7 +58,6 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
-import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -122,6 +118,8 @@ public class XtendBatchCompiler {
 	private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
 	@Inject
 	private CompilerPhases compilerPhases;
+	@Inject
+	private IStubGenerator stubGenerator;
 
 	protected Writer outputWriter;
 	protected Writer errorWriter;
@@ -439,39 +437,7 @@ public class XtendBatchCompiler {
 		List<Resource> resources = Lists.newArrayList(resourceSet.getResources());
 		for (Resource resource : resources) {
 			IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
-			for (IEObjectDescription jvmTypeDescription : description.getExportedObjects()) {
-				if (jvmTypeDescription.getUserData(XbaseResourceDescriptionStrategy.IS_NESTED_TYPE) != null) {
-					continue;
-				}
-				JvmDeclaredType jvmType = (JvmDeclaredType) jvmTypeDescription.getEObjectOrProxy();
-				
-				QualifiedName qualifiedName = jvmTypeDescription.getQualifiedName();
-				
-				StringBuilder classSignatureBuilder = new StringBuilder();
-				if (qualifiedName.getSegments().size()>1) {
-					String string = qualifiedName.toString();
-					classSignatureBuilder.append("package " + string.substring(0, string.lastIndexOf('.')) + ";");
-					classSignatureBuilder.append("\n");
-				}
-				classSignatureBuilder.append("public ");
-				if(jvmType instanceof JvmGenericType) {
-					JvmGenericType genericType = (JvmGenericType) jvmType;
-					if (genericType.isInterface()) {
-						classSignatureBuilder.append("interface ");
-					} else {
-						classSignatureBuilder.append("class ");
-					}
-				} else if(jvmType instanceof JvmEnumerationType) {
-					classSignatureBuilder.append("enum ");
-				} else if (jvmType instanceof JvmAnnotationType) {
-					classSignatureBuilder.append("@interface ");
-				}
-				classSignatureBuilder.append(qualifiedName.getLastSegment() + "{}");
-				if (log.isDebugEnabled()) {
-					log.debug("create java stub '" + qualifiedName + "'");
-				}
-				fileSystemAccess.generateFile(getJavaFileName(qualifiedName), classSignatureBuilder.toString());
-			}
+			stubGenerator.doGenerateStubs(fileSystemAccess, description);
 		}
 		return outputDirectory;
 	}
@@ -615,7 +581,7 @@ public class XtendBatchCompiler {
 			}
 		}
 		for (IEObjectDescription eObjectDescription : exportedObjectsByType) {
-			if (eObjectDescription.getUserData(XbaseResourceDescriptionStrategy.IS_NESTED_TYPE) != null) {
+			if (eObjectDescription.getUserData(JvmTypesResourceDescriptionStrategy.IS_NESTED_TYPE) != null) {
 				continue;
 			}
 			JvmDeclaredType jvmGenericType = (JvmDeclaredType) eObjectDescription.getEObjectOrProxy();

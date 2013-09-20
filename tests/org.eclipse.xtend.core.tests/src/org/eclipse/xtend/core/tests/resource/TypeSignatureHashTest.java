@@ -16,7 +16,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider;
+import org.eclipse.xtext.common.types.descriptions.JvmDeclaredTypeSignatureHashProvider;
 import org.junit.Test;
 
 import com.google.inject.Inject;
