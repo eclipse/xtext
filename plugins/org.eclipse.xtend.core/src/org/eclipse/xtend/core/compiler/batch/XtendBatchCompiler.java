@@ -637,7 +637,7 @@ public class XtendBatchCompiler {
 				try {
 					return new File(from).getCanonicalPath();
 				} catch (IOException e) {
-					throw new WrappedException(e);
+					throw new WrappedException("Invalid source path: '" + from + "'", e);
 				}
 			}
 		});
