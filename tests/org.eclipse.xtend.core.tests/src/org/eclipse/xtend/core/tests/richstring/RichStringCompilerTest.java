@@ -30,7 +30,7 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 		testHelper.assertEvaluatesTo(expectedOutput, richString);
 	}
 
-	@Test public void testIf_08() throws Exception {
+	@Test public void testIf_09() throws Exception {
 		assertOutput("foobar\n", 
 				"'''\n"+
 				"  «IF 'a'.charAt(0)!='a'»\n"+

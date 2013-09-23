@@ -720,7 +720,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (o instanceof Boolean) {
-			        final Boolean _boolean = (Boolean)o;
 			        _matched=true;
 			        final Iterable<Object> _function = new Iterable<Object>() {
 			          public Iterator<Object> iterator() {
@@ -767,7 +766,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (o instanceof Boolean) {
-			        final Boolean _boolean = (Boolean)o;
 			        _matched=true;
 			        final Iterable<Object> _function = new Iterable<Object>() {
 			          public Iterator<Object> iterator() {
@@ -781,7 +779,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			    if (!_matched) {
 			      if (o instanceof String) {
-			        final String _string = (String)o;
 			        _matched=true;
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
 			        return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
@@ -818,7 +815,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (o instanceof Boolean) {
-			        final Boolean _boolean = (Boolean)o;
 			        _matched=true;
 			        final Iterable<Object> _function = new Iterable<Object>() {
 			          public Iterator<Object> iterator() {
@@ -832,7 +828,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			    if (!_matched) {
 			      if (o instanceof String) {
-			        final String _string = (String)o;
 			        _matched=true;
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
 			        Object[] _array = _newArrayList.toArray();
@@ -874,7 +869,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (o instanceof Boolean) {
-			        final Boolean _boolean = (Boolean)o;
 			        _matched=true;
 			        final Iterable<Object> _function = new Iterable<Object>() {
 			          public Iterator<Object> iterator() {
@@ -888,7 +882,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			    if (!_matched) {
 			      if (o instanceof String) {
-			        final String _string = (String)o;
 			        _matched=true;
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
 			        Object[] _array = _newArrayList.toArray();
@@ -984,7 +977,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (o instanceof Boolean) {
-			        final Boolean _boolean = (Boolean)o;
 			        _matched=true;
 			        final Iterable<Object> _function = new Iterable<Object>() {
 			          public Iterator<Object> iterator() {
