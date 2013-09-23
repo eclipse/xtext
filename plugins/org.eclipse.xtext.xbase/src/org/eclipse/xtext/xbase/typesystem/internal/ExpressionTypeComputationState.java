@@ -66,6 +66,13 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	protected void markAsPropagated() {
 		getResolvedTypes().setPropagatedType(this.expression);
 	}
+	
+	protected void markAsRefinedTypeIfNecessary(IFeatureLinkingCandidate candidate) {
+		JvmIdentifiableElement feature = candidate.getFeature();
+		if (feature != null && resolvedTypes.isRefinedType(feature)) {
+			resolvedTypes.setRefinedType(candidate.getExpression());
+		}
+	}
 
 	@Override
 	protected ExpressionAwareStackedResolvedTypes pushTypes(XExpression expression) {

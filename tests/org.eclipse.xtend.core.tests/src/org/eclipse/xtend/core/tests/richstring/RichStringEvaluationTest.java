@@ -35,6 +35,8 @@ import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -296,5 +298,12 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 		classMatcher.find();
 		return pathName + classMatcher.group(1);
+	}
+
+	@Ignore("Evaluation test assumes that only string literals are used in expression contexts")
+	@Override
+	@Test
+	public void testIf_08() throws Exception {
+		super.testIf_08();
 	}
 }

@@ -70,7 +70,8 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   public IResolvedTypes resolve() {
     IResolvedTypes _resolve = super.resolve();
-    final Map<XExpression,ILinkingCandidate> firstRun = ((RecordingRootResolvedTypes) _resolve).getResolvedProxies();
+    final RecordingRootResolvedTypes firstResult = ((RecordingRootResolvedTypes) _resolve);
+    final Map<XExpression,ILinkingCandidate> firstRun = firstResult.getResolvedProxies();
     IResolvedTypes _resolve_1 = super.resolve();
     final RecordingRootResolvedTypes result = ((RecordingRootResolvedTypes) _resolve_1);
     final Map<XExpression,ILinkingCandidate> secondRun = result.getResolvedProxies();
@@ -110,11 +111,14 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     _builder_1.newLineIfNotEmpty();
     Set<XExpression> _keySet_2 = firstRun.keySet();
     Set<XExpression> _keySet_3 = secondRun.keySet();
-    Assert.assertEquals(_builder_1.toString(), ((Object) _keySet_2), _keySet_3);
+    Assert.assertEquals(_builder_1.toString(), _keySet_2, _keySet_3);
     final Procedure2<XExpression,ILinkingCandidate> _function = new Procedure2<XExpression,ILinkingCandidate>() {
       public void apply(final XExpression expression, final ILinkingCandidate firstLinkingData) {
         final ILinkingCandidate secondLinkingData = secondRun.get(expression);
         RecomputingReentrantTypeResolver.this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
+        boolean _isRefinedType = firstResult.isRefinedType(expression);
+        boolean _isRefinedType_1 = result.isRefinedType(expression);
+        Assert.assertEquals(Boolean.valueOf(_isRefinedType), Boolean.valueOf(_isRefinedType_1));
       }
     };
     MapExtensions.<XExpression, ILinkingCandidate>forEach(firstRun, _function);
@@ -349,7 +353,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
       }
     };
     List<String> _map_1 = ListExtensions.<LightweightTypeReference, String>map(right, _function_1);
-    Assert.assertEquals(message, ((Object) _map), _map_1);
+    Assert.assertEquals(message, _map, _map_1);
   }
   
   public void assertEqualMapping(final String message, final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> left, final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> right) {

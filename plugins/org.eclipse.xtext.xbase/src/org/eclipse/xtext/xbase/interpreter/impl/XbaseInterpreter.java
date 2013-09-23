@@ -294,7 +294,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 */
 	protected Object _doEvaluate(XStringLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		LightweightTypeReference type = typeResolver.resolveTypes(literal).getActualType(literal);
-		if (type.isType(Character.TYPE) || type.isType(Character.class)) {
+		if (type != null && (type.isType(Character.TYPE) || type.isType(Character.class))) {
 			return literal.getValue().charAt(0);
 		}
 		return literal.getValue();
@@ -345,7 +345,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				throw new InterpreterCanceledException();
 			list.add(internalEvaluate(element, context, indicator));
 		}
-		if(type.isArray())
+		if(type != null && type.isArray())
 			return Iterables.toArray(list, Object.class);
 		else
 			return Collections.unmodifiableList(list);
@@ -443,7 +443,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object _doEvaluate(XSwitchExpression switchExpression, IEvaluationContext context, CancelIndicator indicator) {
 		IEvaluationContext forkedContext = context.fork();
 		Object conditionResult = internalEvaluate(switchExpression.getSwitch(), forkedContext, indicator);
-		String simpleName = featureNameProvider.getSimpleName(switchExpression);
+		String simpleName = switchExpression.getLocalVarName() != null ? featureNameProvider.getSimpleName(switchExpression) : null;
 		if (simpleName != null) {
 			forkedContext.newValue(QualifiedName.create(simpleName), conditionResult);
 		}

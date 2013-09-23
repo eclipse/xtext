@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -40,7 +41,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
-	@Test public void testBug383551() throws Exception {
+	@Test public void testBug383551_01() throws Exception {
 		assertCompilesToStatement(
 				"\n" + 
 				"final java.util.List<String> list = null;\n" + 
@@ -48,9 +49,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
 				"  if (list instanceof java.util.ArrayList) {\n" + 
-				"    final java.util.ArrayList _arrayList = (java.util.ArrayList)list;\n" + 
 				"    _matched=true;\n" + 
-				"    Object _get = _arrayList.get(1);\n" + 
+				"    Object _get = ((java.util.ArrayList)list).get(1);\n" + 
 				"    _switchResult = _get;\n" + 
 				"  }\n" + 
 				"}\n" + 
@@ -62,6 +62,55 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"    java.util.ArrayList: list.get(1)\n" +
 				"  }\n" +
 				"  toString" + 
+				"}");
+	}
+
+	@Ignore("TODO automatically insert type arguments after instanceof expressions")
+	@Test public void testBug383551_02() throws Exception {
+		assertCompilesToStatement(
+				"\n" + 
+				"final java.util.List<String> list = null;\n" + 
+				"Object _switchResult = null;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (list instanceof java.util.ArrayList) {\n" + 
+				"    _matched=true;\n" + 
+				"    Object _get = ((java.util.ArrayList)list).get(1);\n" + 
+				"    _switchResult = _get;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"final String it = _switchResult;\n" + 
+				"it.substring(1);", 
+				"{" +
+				"  val java.util.List<String> list = null\n" +
+				"  val it = switch list {\n" +
+				"    java.util.ArrayList: list.get(1)\n" +
+				"  }\n" +
+				"  substring(1)" + 
+				"}");
+	}
+	
+	@Test public void testBug383551_03() throws Exception {
+		assertCompilesToStatement(
+				"\n" + 
+				"final java.util.List<String> list = null;\n" + 
+				"String _switchResult = null;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (list instanceof java.util.ArrayList) {\n" + 
+				"    _matched=true;\n" + 
+				"    String _get = ((java.util.ArrayList<String>)list).get(1);\n" + 
+				"    _switchResult = _get;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"final String it = _switchResult;\n" + 
+				"it.substring(1);", 
+				"{" +
+				"  val java.util.List<String> list = null\n" +
+				"  val it = switch list {\n" +
+				"    java.util.ArrayList<String>: list.get(1)\n" +
+				"  }\n" +
+				"  substring(1)" + 
 				"}");
 	}
 	
@@ -472,14 +521,13 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"if(!true) true==false else true!=false");
 	}
 	
-	@Test public void testSwitch_() throws Exception {
+	@Test public void testSwitch_01() throws Exception {
 		assertCompilesTo("String _xblockexpression = null;\n" + 
 				"{\n" + 
 				"  final Object o = \"foo\";\n" + 
 				"  boolean _matched = false;\n" + 
 				"  if (!_matched) {\n" + 
 				"    if (o instanceof String) {\n" + 
-				"      final String _string = (String)o;\n" + 
 				"      _matched=true;\n" + 
 				"      \"\".toString();\n" + 
 				"    }\n" + 
@@ -488,7 +536,6 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"  boolean _matched_1 = false;\n" + 
 				"  if (!_matched_1) {\n" + 
 				"    if (o instanceof String) {\n" + 
-				"      final String _string = (String)o;\n" + 
 				"      _matched_1=true;\n" + 
 				"      _switchResult_1 = \"\";\n" + 
 				"    }\n" + 
@@ -515,20 +562,18 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
 				"  if (x instanceof String) {\n" + 
-				"    final String _string = (String)x;\n" + 
 				"    _matched=true;\n" + 
-				"    String _substring = _string.substring(3);\n" + 
-				"    String _plus = (_substring + _string);\n" + 
+				"    String _substring = ((String)x).substring(3);\n" + 
+				"    String _plus = (_substring + ((String)x));\n" + 
 				"    _switchResult = _plus;\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (x instanceof Comparable) {\n" + 
-				"    final Comparable _comparable = (Comparable)x;\n" + 
 				"    _matched=true;\n" + 
-				"    int _compareTo = ((Comparable)_comparable).compareTo(\"jho\");\n" + 
+				"    int _compareTo = ((Comparable)x).compareTo(\"jho\");\n" + 
 				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
-				"    String _string = ((CharSequence)_comparable).toString();\n" + 
+				"    String _string = x.toString();\n" + 
 				"    String _plus_1 = (_plus + _string);\n" + 
 				"    _switchResult = _plus_1;\n" + 
 				"  }\n" + 
@@ -541,14 +586,6 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
-	/*
-	 * TODO output should be more straight forward, e.g. the cast of _comparable to CharSequence is unnecessary
-	 * it should more look like
-	 * int _compareTo = ..
-	 * int _plus = ..
-	 * int _length = x.length();
-	 * ..
-	 */
 	@Test public void testSwitchTypeGuards_02() throws Exception {
 		assertCompilesTo(
 				"String _switchResult = null;\n" + 
@@ -556,20 +593,18 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
 				"  if (x instanceof String) {\n" + 
-				"    final String _string = (String)x;\n" + 
 				"    _matched=true;\n" + 
-				"    String _substring = _string.substring(3);\n" + 
-				"    String _plus = (_substring + _string);\n" + 
+				"    String _substring = ((String)x).substring(3);\n" + 
+				"    String _plus = (_substring + ((String)x));\n" + 
 				"    _switchResult = _plus;\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (x instanceof Comparable) {\n" + 
-				"    final Comparable<String> _comparable = (Comparable<String>)x;\n" + 
 				"    _matched=true;\n" + 
-				"    int _compareTo = ((Comparable<String>)_comparable).compareTo(\"jho\");\n" + 
+				"    int _compareTo = ((Comparable<String>)x).compareTo(\"jho\");\n" + 
 				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
-				"    int _length = ((CharSequence)_comparable).length();\n" + 
+				"    int _length = x.length();\n" + 
 				"    String _plus_1 = (_plus + Integer.valueOf(_length));\n" + 
 				"    _switchResult = _plus_1;\n" + 
 				"  }\n" + 

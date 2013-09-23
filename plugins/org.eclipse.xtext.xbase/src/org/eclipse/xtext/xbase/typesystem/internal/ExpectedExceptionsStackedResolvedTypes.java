@@ -73,6 +73,11 @@ public class ExpectedExceptionsStackedResolvedTypes extends StackedResolvedTypes
 	}
 	
 	@Override
+	protected void setRefinedType(XExpression expression) {
+		getParent().setRefinedType(expression);
+	}
+	
+	@Override
 	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
 		getParent().setType(identifiable, reference);
 	}

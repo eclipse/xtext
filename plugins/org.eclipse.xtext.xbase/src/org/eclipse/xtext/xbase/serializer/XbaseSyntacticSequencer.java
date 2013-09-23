@@ -134,6 +134,9 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 						return;		
 					}
 				}
+			} else if (constructorCall.getArguments().isEmpty() && constructorCall.getTypeArguments().isEmpty() && nodes == null) {
+				acceptUnassignedKeyword(kw, kw.getValue(), null);
+				return;
 			}
 		}
 		super.emit_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(semanticObject, transition,	nodes);

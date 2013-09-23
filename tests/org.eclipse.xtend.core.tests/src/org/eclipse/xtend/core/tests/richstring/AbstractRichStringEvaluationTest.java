@@ -147,6 +147,16 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 				"'''");
 	}
 	
+	@Test public void testIf_08() throws Exception {
+		assertOutput("foobar\n", 
+				"'''\n"+
+				"  «var Object x = '_foobar'»" +
+				"  «IF x instanceof String»\n"+
+				"	  «x.substring(1)»\n" +
+				"  «ENDIF»\n"+
+				"'''");
+	}
+	
 	@Test public void testMultilineIf_01() throws Exception {
 		assertOutput(
 				"foobar\n", 

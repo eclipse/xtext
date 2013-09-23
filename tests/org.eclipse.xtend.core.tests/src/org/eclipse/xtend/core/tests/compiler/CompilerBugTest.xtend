@@ -16,6 +16,104 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def void test410794() {
+		assertCompilesTo('''
+			class BugSwitch {
+				var Number n
+				def test() {
+					switch(n) {
+						Integer : this.n = new Double(5)
+					}
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class BugSwitch {
+			  private Number n;
+			  
+			  public Number test() {
+			    Number _switchResult = null;
+			    final Number n = this.n;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (n instanceof Integer) {
+			        _matched=true;
+			        Double _double = new Double(5);
+			        Number _n = this.n = _double;
+			        _switchResult = _n;
+			      }
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void test416617() {
+		assertCompilesTo('''
+			class TestTypes {
+				def foo() {
+					var A tmp = null
+					switch (tmp) {
+						B: {
+							tmp = tmp.bar ?: tmp.baz
+						}
+					}
+				}
+				def B bar(Object x) {
+					return x as B
+				}
+				def C baz(Object x) {
+					return x as C
+				}
+			}
+			class A {}
+			class B extends A {}
+			class C extends A {}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			
+			@SuppressWarnings("all")
+			public class TestTypes {
+			  public A foo() {
+			    A _xblockexpression = null;
+			    {
+			      A tmp = null;
+			      A _switchResult = null;
+			      boolean _matched = false;
+			      if (!_matched) {
+			        if (tmp instanceof B) {
+			          _matched=true;
+			          A _elvis = null;
+			          B _bar = this.bar(tmp);
+			          if (_bar != null) {
+			            _elvis = _bar;
+			          } else {
+			            C _baz = this.baz(tmp);
+			            _elvis = ObjectExtensions.<A>operator_elvis(_bar, _baz);
+			          }
+			          A _tmp = tmp = _elvis;
+			          _switchResult = _tmp;
+			        }
+			      }
+			      _xblockexpression = (_switchResult);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public B bar(final Object x) {
+			    return ((B) x);
+			  }
+			  
+			  public C baz(final Object x) {
+			    return ((C) x);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void test416516_01() {
 		assertCompilesTo('''
 			class Bug {
@@ -1930,18 +2028,16 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (this instanceof Some) {
-			        final Some<T> _some = (Some<T>)this;
 			        _matched=true;
-			        Some<X> _some_1 = new Some<X>();
-			        _switchResult = _some_1;
+			        Some<X> _some = new Some<X>();
+			        _switchResult = _some;
 			      }
 			    }
 			    if (!_matched) {
 			      if (this instanceof None) {
-			        final None<T> _none = (None<T>)this;
 			        _matched=true;
-			        None<X> _none_1 = new None<X>();
-			        _switchResult = _none_1;
+			        None<X> _none = new None<X>();
+			        _switchResult = _none;
 			      }
 			    }
 			    return _switchResult;
@@ -1968,10 +2064,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (this instanceof E) {
-			        final E<C_T> _e = (E<C_T>)this;
 			        _matched=true;
-			        E<X> _e_1 = new E<X>();
-			        _switchResult = _e_1;
+			        E<X> _e = new E<X>();
+			        _switchResult = _e;
 			      }
 			    }
 			    return _switchResult;
@@ -2156,7 +2251,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (e instanceof String) {
-			        final String _string = (String)e;
 			        _matched=true;
 			        return "";
 			      }
