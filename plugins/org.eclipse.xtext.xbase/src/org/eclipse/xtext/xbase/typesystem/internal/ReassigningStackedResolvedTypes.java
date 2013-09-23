@@ -50,7 +50,12 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	protected void setPropagatedType(XExpression expression) {
 		getParent().setPropagatedType(expression);
 	}
-
+	
+	@Override
+	protected void setRefinedType(XExpression expression) {
+		getParent().setRefinedType(expression);
+	}
+	
 	@Override
 	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
 		getParent().setType(identifiable, reference);

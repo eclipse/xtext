@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -26,11 +27,14 @@ import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.Closures;
 
 import com.google.common.base.Predicate;
@@ -78,9 +82,32 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				});
 				return;
 			}
+			if (mustInsertTypeCast(obj, actualType)) {
+				doCastConversion(actualType, appendable, obj, new Later() {
+					public void exec(ITreeAppendable appendable) {
+						appendable = appendable.trace(obj, true);
+						internalToConvertedExpression(obj, appendable);
+					}
+				});
+				return;
+			}
 		}
 		final ITreeAppendable trace = appendable.trace(obj, true);
 		internalToConvertedExpression(obj, trace);
+	}
+
+	private boolean mustInsertTypeCast(XExpression expression, JvmTypeReference actualType) {
+		IResolvedTypes resolvedTypes = getTypeResolver().resolveTypes(expression);
+		if (resolvedTypes.isRefinedType(expression) || resolvedTypes.getActualType(expression).isMultiType()) {
+			if (expression instanceof XAbstractFeatureCall) {
+				LightweightTypeReference featureType = resolvedTypes.getActualType(((XAbstractFeatureCall) expression).getFeature());
+				if (featureType != null && featureType.isSubtypeOf(actualType.getType()) && !featureType.isMultiType()) {
+					return false;
+				}
+			} 
+			return true;
+		}
+		return false;
 	}
 
 	protected void internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable) {
@@ -110,6 +137,14 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		}
 	}
 	
+	protected void doCastConversion(final JvmTypeReference castTo, final ITreeAppendable b, XExpression context, final Later expression) {
+		b.append("((");
+		serialize(castTo, context, b);
+		b.append(")");
+		expression.exec(b);
+		b.append(")");
+	}
+	
 	protected boolean isFunction(JvmTypeReference typeReference) {
 		return identifierStartWith(typeReference, Functions.class.getCanonicalName());
 	}
@@ -137,14 +172,14 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				break;
 			}
 		}
-		if (castTo != null) {
+		if (castTo != null && mustInsertTypeCast(context, castTo)) {
 			b.append("((");
 			serialize(castTo, context, b, true, false);
 			b.append(")");
-		}
-		expression.exec(b);
-		if (castTo != null) {
+			expression.exec(b);
 			b.append(")");
+		} else {
+			expression.exec(b);
 		}
 	}
 

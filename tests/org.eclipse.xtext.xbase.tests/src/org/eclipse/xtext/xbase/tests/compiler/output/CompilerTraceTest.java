@@ -34,7 +34,6 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -1058,7 +1057,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"boolean _matched = false;\n" + 
 				"if (#!#_matched) {\n" + 
 				"  if (it instanceof String) {\n" + 
-				"    final String _string = (String)it;\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -1076,7 +1074,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
 				"  if (it instanceof St#ri#ng) {\n" + 
-				"    final String _string = (String)it;\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -1093,26 +1090,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"final Object it = null;\n" + 
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
-				"  if (it instanceof String) {\n" + 
-				"    final St#r#ing _string = (String)it;\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
-				"}\n" + 
-				"return _switchResult;", 
-				"switch it:null { #String# : '' }");
-	}
-	
-	@Test
-	public void testSwitchExpression_24() throws Exception {
-		assertTrace( 
-				"\n" + 
-				"String _switchResult = null;\n" + 
-				"final Object it = null;\n" + 
-				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (it instanceof String) {\n" + 
-				"    final String _string = (S#tr#ing)it;\n" + 
+				"  if (it in#s#tanceof String) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -1130,7 +1108,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"boolean _matched = false;\n" + 
 				"i#f (!_matched) {\n" + 
 				"  if (it instanceof String) {\n" + 
-				"    final String _string = (String)it;\n" + 
 				"    if (Objects.equal(it,\"\")) {\n" + 
 				"      _matched=true;\n" + 
 				"      _switchResult = \"\";\n" + 
@@ -1150,8 +1127,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
 				"  if (s instanceof String) {\n" + 
-				"    final String _string = (String)s;\n" + 
-				"    int _length = _string.length();\n" + 
+				"    int _length = s.length();\n" + 
 				"    boolean _equals = (_length == 0);\n" + 
 				"    if (_equals) {\n" + 
 				"      _matched=true;\n" + 

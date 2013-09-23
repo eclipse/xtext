@@ -93,6 +93,11 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return result;
 	}
 	
+	public boolean isRefinedType(XExpression expression) {
+		IResolvedTypes delegate = getDelegate(expression);
+		return delegate.isRefinedType(expression);
+	}
+	
 	public Collection<ILinkingCandidate> getFollowUpErrors() {
 		List<ILinkingCandidate> result = Lists.newArrayList();
 		for(IResolvedTypes delegate: this) {

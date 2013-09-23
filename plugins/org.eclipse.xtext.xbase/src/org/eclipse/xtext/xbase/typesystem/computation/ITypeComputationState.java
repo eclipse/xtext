@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -201,6 +202,13 @@ public interface ITypeComputationState {
 	 * @param extensionProvider the identifiable that points to the extension provider
 	 */
 	void addExtensionToCurrentScope(JvmIdentifiableElement extensionProvider);
+	
+	/**
+	 * Adds the given type to the static scope.
+	 * 
+	 * @param type the type that is added to the static scope.
+	 */
+	void addTypeToStaticImportScope(JvmDeclaredType type);
 	
 	/**
 	 * Adds the given elements as extension providers to the current scope.

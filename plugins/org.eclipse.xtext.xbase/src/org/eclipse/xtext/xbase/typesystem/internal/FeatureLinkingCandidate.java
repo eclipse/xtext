@@ -495,6 +495,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		if (implicitFirstArgument != null) {
 			new ImplicitFirstArgument(getFeatureCall(), (XAbstractFeatureCall) implicitFirstArgument, getState()).applyToComputationState();
 		}
+		getState().markAsRefinedTypeIfNecessary(this);
 	}
 	
 	protected void applyImplicitReceiver() {

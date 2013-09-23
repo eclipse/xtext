@@ -43,6 +43,10 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 		return delegate().getFollowUpErrors();
 	}
 	
+	public boolean isRefinedType(XExpression expression) {
+		return delegate().isRefinedType(expression);
+	}
+	
 	@Nullable
 	public LightweightTypeReference getReturnType(XExpression expression) {
 		return delegate().getReturnType(expression);

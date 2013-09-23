@@ -1016,19 +1016,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				typeGuardAppendable.trace(casePart.getTypeGuard()).append(casePart.getTypeGuard().getType());
 				typeGuardAppendable.append(") {");
 				typeGuardAppendable.increaseIndentation();
-				JvmIdentifiableElement switchOver = (expr.getLocalVarName() == null && isSimpleFeatureCall(expr.getSwitch())) ? ((XFeatureCall) expr.getSwitch()).getFeature() : expr;
 				typeGuardAppendable.openPseudoScope();
-				final String proposedName = getFavoriteVariableName(casePart.getTypeGuard().getType());
-				final String castedVariableName = typeGuardAppendable.declareSyntheticVariable(switchOver, proposedName);
-				typeGuardAppendable.newLine().append("final ");
-				serialize(casePart.getTypeGuard(), expr, typeGuardAppendable);
-				typeGuardAppendable.append(" ");
-				typeGuardAppendable.append(castedVariableName);
-				typeGuardAppendable.append(" = (");
-				serialize(casePart.getTypeGuard(), expr, typeGuardAppendable);
-				typeGuardAppendable.append(")");
-				typeGuardAppendable.append(variableName);
-				typeGuardAppendable.append(";");
 			}
 			if (casePart.getCase() != null) {
 				ITreeAppendable conditionAppendable = caseAppendable.trace(casePart.getCase(), true);

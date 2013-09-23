@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -203,6 +204,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			prototype.setFeature(extensionProvider);
 			featureScopeSession = featureScopeSession.addToExtensionScope(Collections.<XExpression, LightweightTypeReference>singletonMap(prototype, knownType));
 		}
+	}
+	
+	public void addTypeToStaticImportScope(JvmDeclaredType type) {
+		featureScopeSession = featureScopeSession.addTypesToStaticScope(Collections.<JvmType>singletonList(type), Collections.<JvmType>emptyList());
 	}
 	
 	public void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders) {
