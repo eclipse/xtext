@@ -1716,6 +1716,13 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testWhileLoop_04() throws Exception {
+		assertEvaluatesTo("hello", "{ val CharSequence x = new StringBuilder; while (x instanceof Appendable) { x.append('hello') return x.toString } x.toString }");
+	}
+	
 	@Test public void testDoWhileLoop_01() throws Exception {
 		assertEvaluatesTo("newValue", 
 				"{\n" +
@@ -1938,6 +1945,49 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"{ val Object o = '' switch x : o { String : x.length }}");
 	}
 	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testSwitchExpression_26() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{ val policy = java.lang.annotation.RetentionPolicy.SOURCE switch policy { case SOURCE: true } }");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testSwitchExpression_27() throws Exception {
+		assertEvaluatesTo(null, 
+				"{ val Object policy = java.lang.annotation.RetentionPolicy.SOURCE switch policy { java.lang.annotation.RetentionPolicy case CLASS: false } }");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testSwitchExpression_28() throws Exception {
+		assertEvaluatesTo(6, 
+				"switch it : 'abcdef' as Object { String : length }");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testSwitchExpression_29() throws Exception {
+		assertEvaluatesTo("a", 
+				"{ var Object o = ''\n" +
+				"  switch o { String : o = 'a' }\n" +
+				"  o\n" +
+				"}");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testSwitchExpression_30() throws Exception {
+		assertEvaluatesTo("Abcdef", 
+				"switch it : 'abcdef' as Object { String : toFirstUpper }");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
@@ -2116,6 +2166,34 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 */
 	@Test public void testInstanceOf_10() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "[|'foo'] instanceof org.eclipse.xtext.xbase.lib.Functions.Function0<?>");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testInstanceOf_11() throws Exception {
+		assertEvaluatesTo("hello", "{ val CharSequence x = new StringBuilder; (if (x instanceof Appendable) x.append('hello')).toString }");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testInstanceOf_12() throws Exception {
+		assertEvaluatesTo("el", "{ val Object x = 'hello' if (x instanceof CharSequence) x.subSequence(1,3) }");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testInstanceOf_13() throws Exception {
+		assertEvaluatesTo("0", "{ val CharSequence x = new StringBuilder; (if (x instanceof Appendable) x.append(x.length().toString())).toString }");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testInstanceOf_14() throws Exception {
+		assertEvaluatesTo("0", "{ val Object x = new StringBuilder; if (x instanceof Appendable) if (x instanceof CharSequence) x.append(x.length().toString()) x.toString }");
 	}
 	
 	@Test public void testClosure_01() throws Exception {
@@ -2410,6 +2488,13 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(newArrayList("foo"), 
 				"{ val (java.util.List<String>,String)=>java.util.List<String> functionReturningList = [a, b| a += b return a ] "
 				+ "#['foo'].fold(newArrayList, functionReturningList) }");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testClosure_34() throws Exception {
+		assertEvaluatesTo("hello", "{ val (Object)=>String x = [ if (it instanceof String) return it ] x.apply('hello') }");
 	}
 	
 	@Test public void testExceptionOnClosure() throws Exception {

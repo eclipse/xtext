@@ -59,7 +59,8 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 	}
 	
 	override resolve() {
-		val firstRun = (super.resolve as RecordingRootResolvedTypes).resolvedProxies
+		val firstResult = super.resolve as RecordingRootResolvedTypes
+		val firstRun = firstResult.resolvedProxies
 		val result = super.resolve as RecordingRootResolvedTypes
 		val secondRun = result.resolvedProxies
 		Assert::assertEquals('''
@@ -76,10 +77,11 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 			 	vs
 			 	
 			«setJoiner.join(secondRun.keySet)»
-		''', firstRun.keySet as Object /* TODO workaround for bug in linking */, secondRun.keySet)
+		''', firstRun.keySet, secondRun.keySet)
 		firstRun.forEach[ expression, firstLinkingData |
 			val secondLinkingData = secondRun.get(expression)
 			assertEqualLinkingData(firstLinkingData, secondLinkingData)
+			Assert::assertEquals(firstResult.isRefinedType(expression), result.isRefinedType(expression))
 		]
 		return result
 	}
@@ -188,7 +190,7 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 	}
 	
 	def void assertEqualReferences(String message, List<LightweightTypeReference> left, List<LightweightTypeReference> right) {
-		Assert::assertEquals(message, left.map[ toString ] as Object /* TODO workaround for bug in linking */, right.map[ toString ])
+		Assert::assertEquals(message, left.map[ toString ], right.map[ toString ])
 	}
 	
 	def void assertEqualMapping(String message, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> left, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> right) {

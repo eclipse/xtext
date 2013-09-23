@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -168,6 +169,12 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 	public void addExtensionToCurrentScope(JvmIdentifiableElement extensionProvider) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addExtensionToCurrentScope(extensionProvider);
+		}
+	}
+	
+	public void addTypeToStaticImportScope(JvmDeclaredType type) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].addTypeToStaticImportScope(type);
 		}
 	}
 	

@@ -78,11 +78,18 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		mergeLinkingCandidatesIntoParent(parent);
 		mergeQueuedDiagnostics(parent);
 		mergePropagatedTypes(parent);
+		mergeRefinedTypes(parent);
 	}
 	
 	protected void mergePropagatedTypes(ResolvedTypes parent) {
 		for(XExpression expression: basicGetPropagatedTypes()) {
 			parent.setPropagatedType(expression);
+		}
+	}
+	
+	protected void mergeRefinedTypes(ResolvedTypes parent) {
+		for(XExpression expression: basicGetRefinedTypes()) {
+			parent.setRefinedType(expression);
 		}
 	}
 	
@@ -92,6 +99,14 @@ public class StackedResolvedTypes extends ResolvedTypes {
 			return true;
 		}
 		return parent.isPropagatedType(expression);
+	}
+	
+	@Override
+	public boolean isRefinedType(XExpression expression) {
+		if (super.isRefinedType(expression)) {
+			return true;
+		}
+		return parent.isRefinedType(expression);
 	}
 
 	protected void mergeQueuedDiagnostics(ResolvedTypes parent) {
@@ -211,6 +226,14 @@ public class StackedResolvedTypes extends ResolvedTypes {
 			result = parent.doGetActualType(identifiable, ignoreReassignedTypes);
 		}
 		return result;
+	}
+	
+	@Override
+	protected boolean isRefinedType(JvmIdentifiableElement element) {
+		if (super.isRefinedType(element)) {
+			return true;
+		}
+		return parent.isRefinedType(element);
 	}
 	
 	@Override

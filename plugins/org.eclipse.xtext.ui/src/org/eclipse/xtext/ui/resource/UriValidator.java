@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.resource;
 
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 

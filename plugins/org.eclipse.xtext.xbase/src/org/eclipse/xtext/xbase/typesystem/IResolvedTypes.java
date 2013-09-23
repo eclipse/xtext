@@ -138,6 +138,16 @@ public interface IResolvedTypes {
 	 */
 	@Nullable
 	IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall);
+	
+	/**
+	 * Returns <code>true</code> if the expression's type is based on a type
+	 * refinement, e.g. an instanceof guard my specialize the type of the checked
+	 * reference. Any feature call to that reference is considered to be based on
+	 * a refined type.
+	 * @param expression the expression that may have been typed based on a refinement.
+	 * @return <code>true</code> if the type was refined, <code>false</code> otherwise.
+	 */
+	boolean isRefinedType(XExpression expression);
 
 	IResolvedTypes NULL = new NullResolvedTypes();
 
@@ -209,6 +219,10 @@ public interface IResolvedTypes {
 		@Nullable
 		public IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall) {
 			return null;
+		}
+		
+		public boolean isRefinedType(XExpression expression) {
+			return false;
 		}
 	}
 	

@@ -79,6 +79,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
 			resolvedTypes.acceptType(receiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
 		} 
+		getState().markAsRefinedTypeIfNecessary(this);
 		XExpression actualReceiver = getReceiver();
 		if (actualReceiver != null) {
 			LightweightTypeReference receiverType = getReceiverType();

@@ -36,8 +36,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * The template expression and its dedicated child expressions are handled.
  * 
- * TODO: RichStringIf with instanceof cascades should downcast the checked values iff immutable.
- * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
@@ -113,9 +111,11 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		LightweightTypeReference booleanType = getTypeForName(Boolean.TYPE, state);
 		
 		ITypeComputationState conditionExpectation = state.withExpectation(booleanType);
-		conditionExpectation.computeTypes(object.getIf());
-		// TODO instanceof may specialize the types in the nested expression
-		state.withExpectation(charSequence).computeTypes(object.getThen());
+		XExpression condition = object.getIf();
+		conditionExpectation.computeTypes(condition);
+		XExpression thenExpression = object.getThen();
+		ITypeComputationState thenState = reassignCheckedType(condition, thenExpression, state);
+		thenState.withExpectation(charSequence).computeTypes(thenExpression);
 		for(RichStringElseIf elseIf: object.getElseIfs()) {
 			state.withExpectation(booleanType).computeTypes(elseIf.getIf());
 			state.withExpectation(charSequence).computeTypes(elseIf.getThen());

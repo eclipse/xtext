@@ -1775,9 +1775,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.append("if (o instanceof Boolean) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final Boolean _boolean = (Boolean)o;");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("_matched=true;");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -1891,9 +1888,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.append("if (o instanceof Boolean) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final Boolean _boolean = (Boolean)o;");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("_matched=true;");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -1931,9 +1925,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (o instanceof String) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("final String _string = (String)o;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -2019,9 +2010,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.append("if (o instanceof Boolean) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final Boolean _boolean = (Boolean)o;");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("_matched=true;");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -2059,9 +2047,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (o instanceof String) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("final String _string = (String)o;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -2161,9 +2146,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.append("if (o instanceof Boolean) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final Boolean _boolean = (Boolean)o;");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("_matched=true;");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -2201,9 +2183,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (o instanceof String) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("final String _string = (String)o;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -2436,9 +2415,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (o instanceof Boolean) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("final Boolean _boolean = (Boolean)o;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");

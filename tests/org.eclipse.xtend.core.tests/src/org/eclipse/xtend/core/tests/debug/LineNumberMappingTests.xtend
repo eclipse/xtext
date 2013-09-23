@@ -83,10 +83,10 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 			
 			def void doStuff() {
 				switch x : "Hello" as Object { 		// 7..8
-					String case x.length > 4 : { 	// 9..15
-						println(					// 18
-							"It's a long one " 		// 17
-								+ x.length)			// 16
+					String case x.length > 4 : { 	// 9..14
+						println(					// 17
+							"It's a long one " 		// 16
+								+ x.length)			// 15
 					}
 				}
 			}
@@ -136,10 +136,10 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 			
 			def void doStuff() {
 				switch x : "Hello" { 		// 5..6
-					String 					// 7..9
+					String 					// 7..8
 						case 
-							x.length > 4 : {// 10..12
-						null			// 14
+							x.length > 4 : {// 9..11
+						null			// 13
 					}
 				}
 			}

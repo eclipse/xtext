@@ -123,6 +123,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Map<Object, UnboundTypeReference> unboundTypeParameters;
 	private Map<Object, List<LightweightBoundTypeArgument>> typeParameterHints;
 	private Set<Object> resolvedTypeParameters;
+	private Set<XExpression> refinedTypes;
 	private Set<XExpression> propagatedTypes;
 	private List<JvmTypeParameter> declaredTypeParameters;
 	
@@ -141,6 +142,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		typeParameterHints = null;
 		resolvedTypeParameters = null;
 		propagatedTypes = null;
+		refinedTypes = null;
 	}
 	
 	protected abstract IssueSeverities getSeverities();
@@ -489,6 +491,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			if (reassignedTypes != null)
 				ensureReassignedTypesMapExists().remove(identifiable);
 		}
+	}
+	
+	protected boolean isRefinedType(JvmIdentifiableElement element) {
+		if (reassignedTypes != null && reassignedTypes.get(element) != null) {
+			return !(element instanceof JvmType);
+		}
+		return false;
 	}
 	
 	public void reassignTypeWithoutMerge(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
@@ -956,6 +965,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return propagatedTypes != null && propagatedTypes.contains(expression);
 	}
 	
+	public boolean isRefinedType(XExpression expression) {
+		return refinedTypes != null && refinedTypes.contains(expression);
+	}
+	
 	protected void setPropagatedType(XExpression expression) {
 		if (propagatedTypes == null) {
 			propagatedTypes = Sets.newHashSet(expression);
@@ -964,8 +977,20 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
+	protected void setRefinedType(XExpression expression) {
+		if (refinedTypes == null) {
+			refinedTypes = Sets.newHashSet(expression);
+		} else {
+			refinedTypes.add(expression);
+		}
+	}
+	
 	protected Set<XExpression> basicGetPropagatedTypes() {
 		return propagatedTypes != null ? propagatedTypes : Collections.<XExpression>emptySet();
+	}
+	
+	protected Set<XExpression> basicGetRefinedTypes() {
+		return refinedTypes != null ? refinedTypes : Collections.<XExpression>emptySet();
 	}
 	
 	@Nullable
