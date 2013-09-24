@@ -505,6 +505,14 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("new ArrBloQu").assertText("java.util.concurrent.ArrayBlockingQueue");
 	}
 	
+	@Test public void testSwitchOnEnum_01() throws Exception {
+		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case ").assertText(expect(new String[]{"SOURCE", "CLASS", "RUNTIME"}, getKeywordsAndStatics()));
+	}
+	
+	@Test public void testSwitchOnEnum_02() throws Exception {
+		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case SOUR").assertProposal("SOURCE");
+	}
+	
 	/**
 	 * @since 2.3
 	 */

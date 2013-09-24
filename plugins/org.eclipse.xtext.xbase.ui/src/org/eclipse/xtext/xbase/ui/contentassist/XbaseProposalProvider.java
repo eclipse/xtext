@@ -6,7 +6,6 @@ package org.eclipse.xtext.xbase.ui.contentassist;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.util.Strings.*;
-import static org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider.*;
 
 import java.util.List;
 import java.util.Map;
@@ -21,9 +20,12 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -32,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
@@ -45,6 +48,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
@@ -65,6 +69,7 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
@@ -72,6 +77,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -82,6 +88,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
@@ -116,6 +123,8 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Inject
 	private CommonTypeComputationServices services; 
 	
+	@Inject
+	private IBatchTypeResolver typeResolver;
 
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
@@ -445,6 +454,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		super.completeXCasePart_Then(model, assignment, context, acceptor);
 		if (model instanceof XCasePart) {
 			createLocalVariableAndImplicitProposals(model, -1, context, acceptor);
+			
 		}
 	}
 	
@@ -454,6 +464,38 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		super.completeXCasePart_Case(model, assignment, context, acceptor);
 		if (model instanceof XCasePart) {
 			createLocalVariableAndImplicitProposals(model, -1, context, acceptor);
+		}
+		XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(model, XSwitchExpression.class);
+		if (switchExpression != null) {
+			LightweightTypeReference switchExpressionType = typeResolver.resolveTypes(switchExpression).getActualType(switchExpression.getSwitch());
+			if (switchExpressionType != null) {
+				JvmType rawType = switchExpressionType.getType();
+				if (rawType instanceof JvmEnumerationType) {
+					final Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), context);
+					Function<IEObjectDescription, ICompletionProposal> higherPriority = new Function<IEObjectDescription, ICompletionProposal>() {
+						public ICompletionProposal apply(IEObjectDescription input) {
+							ICompletionProposal result = proposalFactory.apply(input);
+							if (result instanceof ConfigurableCompletionProposal) {
+								ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
+								casted.setPriority(2* casted.getPriority());
+							}
+							return result;
+						}
+					};
+					IScope literals = new SimpleScope(Lists.transform(((JvmEnumerationType) rawType).getLiterals(), new Function<JvmEnumerationLiteral, IEObjectDescription>() {
+						public IEObjectDescription apply(JvmEnumerationLiteral literal) {
+							return EObjectDescription.create(literal.getSimpleName(), literal);
+						}
+					}));
+					getCrossReferenceProposalCreator().lookupCrossReference(
+							literals,
+							model,
+							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
+							acceptor,
+							getFeatureDescriptionPredicate(context),
+							higherPriority);
+				}
+			}
 		}
 	}
 	
@@ -637,7 +679,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				}
 				if (myCandidate instanceof IValidatedEObjectDescription && (isIdRule(ruleName))) {
 					ICompletionProposal result = null;
-					String key = ((IValidatedEObjectDescription) myCandidate).getKey();
 					String proposal = getQualifiedNameConverter().toString(myCandidate.getName());
 					if (ruleName != null) {
 						try {
