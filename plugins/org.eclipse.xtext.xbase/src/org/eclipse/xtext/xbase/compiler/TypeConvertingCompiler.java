@@ -91,6 +91,17 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				});
 				return;
 			}
+		} else {
+			JvmTypeReference actualType = getType(obj);
+			if (obj instanceof XAbstractFeatureCall && mustInsertTypeCast(obj, actualType)){
+				doCastConversion(actualType, appendable, obj, new Later() {
+					public void exec(ITreeAppendable appendable) {
+						appendable = appendable.trace(obj, true);
+						internalToConvertedExpression(obj, appendable);
+					}
+				});
+				return;
+			}
 		}
 		final ITreeAppendable trace = appendable.trace(obj, true);
 		internalToConvertedExpression(obj, trace);
