@@ -15,6 +15,8 @@
 		<module>../org.eclipse.xtext.xbase.lib</module>
 		<module>../org.eclipse.xtend.standalone.maven</module>
 		<module>../org.eclipse.xtext.standalone.maven</module>
+		<module>../org.eclipse.xtext.builder.standalone</module>
+		<module>../org.eclipse.xtext.maven.plugin</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
@@ -28,6 +30,8 @@
 		<xtend.repo.name>Xtend provisional repository</xtend.repo.name>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
 		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest</xtext-url>
 		<tycho-version>0.17.0</tycho-version>
 		<mirroring.phase>prepare-package</mirroring.phase>
@@ -64,8 +68,6 @@
 				<version>3.0</version>
 				<configuration>
 					<compilerId>eclipse</compilerId>
-					<source>1.5</source>
-					<target>1.5</target>
 					<optimize>true</optimize>
 				</configuration>
 				<dependencies>
@@ -113,7 +115,7 @@
 		<url>http://git.eclipse.org/c/tmf/org.eclipse.xtext.git</url>
 	</scm>
 	<profiles>
-		
+
 		<profile>
 			<id>local-build</id>
 			<properties>
@@ -134,12 +136,6 @@
 					<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
 				</snapshotRepository>
 			</distributionManagement>
-			<!-- <repositories> <repository> <releases> <enabled>false</enabled> </releases> 
-				<snapshots> <enabled>true</enabled> </snapshots> <id>local-nexus-snapshots</id> 
-				<name>Sonatype Nexus Snapshots</name> <url>http://localhost:8081/nexus/content/repositories/snapshots/</url> 
-				</repository> <repository> <snapshots> <enabled>false</enabled> </snapshots> 
-				<id>local-nexus</id> <name>Nexus Release Repository</name> <url>http://localhost:8081/nexus/content/repositories/releases/</url> 
-				</repository> </repositories> -->
 			<pluginRepositories>
 				<pluginRepository>
 					<releases>
@@ -207,16 +203,6 @@
 					<url>http://repo.maven.apache.org/maven2</url>
 				</pluginRepository>
 			</pluginRepositories>
-			<!-- <build> <plugins> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
-				<version>1.1.1</version> <executions> <execution> <id>Reindex nexus</id> 
-				<phase>deploy</phase> <goals> <goal>exec</goal> </goals> </execution> </executions> 
-				<configuration> <executable>java</executable> <workingDirectory>${deployment.folder}/</workingDirectory> 
-				<arguments> <argument>-jar</argument> <argument>${deployment.folder}/nexus-indexer-3.0.4-cli.jar</argument> 
-				<argument>-t</argument> <argument>min</argument> <argument>-i</argument> 
-				<argument>maven-index</argument> <argument>-r</argument> <argument>./</argument> 
-				<argument>-n</argument> <argument>${xtend.repo.name}</argument> <argument>-d</argument> 
-				<argument>.index</argument> </arguments> </configuration> </plugin> </plugins> 
-				</build> -->
 		</profile>
 		<profile>
 			<id>mirror</id>
