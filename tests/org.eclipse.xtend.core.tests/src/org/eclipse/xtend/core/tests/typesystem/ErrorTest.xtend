@@ -1099,6 +1099,31 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.processWithoutException
 	}
 	
+	@Test
+	def void testErrorModel_72() throws Exception {
+		'''
+			class TestTypes {
+				def foo() {
+					var A tmp = null
+					switch (tmp) {
+						B: {
+							tmp = tmp.bar ?: tmp.baz
+						}
+					}
+				}
+				def B bar(Object x) {
+					return x as B
+				}
+				def C baz(Object x) {
+					return x as C
+				}
+			}
+			class A {}
+			class B extends }
+			class C extends A {}
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
