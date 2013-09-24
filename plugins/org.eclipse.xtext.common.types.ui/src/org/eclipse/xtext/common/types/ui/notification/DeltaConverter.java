@@ -4,10 +4,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IField;
+import org.eclipse.jdt.core.IImportContainer;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IMethod;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 
@@ -130,58 +133,116 @@ public class DeltaConverter {
 	}
 
 	protected void convertCompilationUnit(IJavaElementDelta delta, List<IResourceDescription.Delta> result) {
-		if ((delta.getFlags() & IJavaElementDelta.F_CHILDREN) != 0) { // fine-grained delta
-			IJavaElementDelta[] children = delta.getAffectedChildren();
-			for(IJavaElementDelta child: children) {
-				IJavaElement childElement = child.getElement();
-				if (childElement instanceof IType) {
-					IType type = (IType) childElement;
-					if (!isDerived(type)) {
-						URI uri = getURIFor(type);
-						List<IEObjectDescription> exported = getExportedEObjects(type);
-						IResourceDescription oldDescription = null;
-						TypeResourceDescription newDescription = null;
-						if (child.getKind() == IJavaElementDelta.REMOVED) {
-							oldDescription = new TypeResourceDescription(uri, exported);
-						} else if (child.getKind() == IJavaElementDelta.ADDED) {
-							newDescription = new TypeResourceDescription(uri, exported);
-						} else {
-							newDescription = new TypeResourceDescription(uri, exported);
-							List<IEObjectDescription> additionallyExportedEObjects = getAdditionallyExportedEObjects(type, child);
-							oldDescription = new LayeredTypeResourceDescription(newDescription, additionallyExportedEObjects);
-						}
-						IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, newDescription);
-						result.add(resourceDelta);
-					}
+		if (isFineGrainedDelta(delta)) {
+			convertFineGrainedDelta(delta, result);
+		} else if (isCoarseGrainedDelta(delta)) {
+			convertCoarseGrainedDelta(delta, result);
+		}
+	}
+
+	private void convertCoarseGrainedDelta(IJavaElementDelta delta, List<IResourceDescription.Delta> result) {
+		// TODO secondary types are currently not considered
+		ICompilationUnit cu = (ICompilationUnit) delta.getElement();
+		String expectedPrimaryTypeName = getExpectedPrimaryTypeNameFor(cu);
+		IType primaryType = getPrimaryTypeFrom(cu);
+		if (primaryType != null) {
+			if (!isDerived(primaryType)) {
+				URI uri = getURIFor(primaryType);
+				List<IEObjectDescription> exported = getExportedEObjects(primaryType);
+				TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
+				TypeResourceDescription oldDescription = null;
+				if (primaryType.getFullyQualifiedName().equals(expectedPrimaryTypeName)) {
+					oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
+						new NameBasedEObjectDescription(nameConverter.toQualifiedName(expectedPrimaryTypeName))));
 				}
+				IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(primaryType, oldDescription, newDescription);
+				result.add(resourceDelta);
 			}
-		} else if ((delta.getFlags() & (IJavaElementDelta.F_FINE_GRAINED | IJavaElementDelta.F_PRIMARY_WORKING_COPY)) == 0) { // course-grained delta
-			// TODO secondary types are currently not considered
-			ICompilationUnit cu = (ICompilationUnit) delta.getElement();
-			String expectedPrimaryTypeName = getExpectedPrimaryTypeNameFor(cu);
-			IType primaryType = getPrimaryTypeFrom(cu);
-			if (primaryType != null) {
-				if (!isDerived(primaryType)) {
-					URI uri = getURIFor(primaryType);
-					List<IEObjectDescription> exported = getExportedEObjects(primaryType);
-					TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
-					TypeResourceDescription oldDescription = null;
-					if (primaryType.getFullyQualifiedName().equals(expectedPrimaryTypeName)) {
-						oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
-							new NameBasedEObjectDescription(nameConverter.toQualifiedName(expectedPrimaryTypeName))));
-	 				}
-					IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, newDescription);
+		}
+		if (primaryType == null || !primaryType.getFullyQualifiedName().equals(expectedPrimaryTypeName)) {
+			URI uri = uriHelper.createResourceURIForFQN(expectedPrimaryTypeName);
+			TypeResourceDescription oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
+					new NameBasedEObjectDescription(nameConverter.toQualifiedName(expectedPrimaryTypeName))));
+			IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(cu.getJavaProject().getProject(), expectedPrimaryTypeName, oldDescription, null);
+			result.add(resourceDelta);
+		}
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	protected Delta createResourceDescriptionDelta(IType primaryType, IResourceDescription oldDescription,
+			TypeResourceDescription newDescription) {
+		String fullyQualifiedName = primaryType.getFullyQualifiedName();
+		IProject project = primaryType.getCompilationUnit().getJavaProject().getProject();
+		return createResourceDescriptionDelta(project, fullyQualifiedName, oldDescription, newDescription);
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	protected IResourceDescription.Delta createResourceDescriptionDelta(IProject iProject, String primaryTypeName, IResourceDescription oldDescription, IResourceDescription newDescription) {
+		return new ChangedResourceDescriptionDelta(oldDescription, newDescription);
+	}
+
+	private void convertFineGrainedDelta(IJavaElementDelta delta, List<IResourceDescription.Delta> result) {
+		ICompilationUnit compilationUnit = (ICompilationUnit) delta.getElement();
+		IType primaryType = getPrimaryTypeFrom(compilationUnit);
+		IJavaElementDelta[] children = delta.getAffectedChildren();
+		for(IJavaElementDelta child: children) {
+			IJavaElement childElement = child.getElement();
+			if (childElement instanceof IType) {
+				IType type = (IType) childElement;
+				if (!isDerived(type)) {
+					URI uri = getURIFor(type);
+					List<IEObjectDescription> exported = getExportedEObjects(type);
+					IResourceDescription oldDescription = null;
+					TypeResourceDescription newDescription = null;
+					if (child.getKind() == IJavaElementDelta.REMOVED) {
+						oldDescription = new TypeResourceDescription(uri, exported);
+					} else if (child.getKind() == IJavaElementDelta.ADDED) {
+						newDescription = new TypeResourceDescription(uri, exported);
+					} else {
+						newDescription = new TypeResourceDescription(uri, exported);
+						List<IEObjectDescription> additionallyExportedEObjects = getAdditionallyExportedEObjects(type, child);
+						oldDescription = new LayeredTypeResourceDescription(newDescription, additionallyExportedEObjects);
+					}
+					IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(primaryType, oldDescription, newDescription);
 					result.add(resourceDelta);
 				}
+			} else if (childElement instanceof IImportContainer) {
+				try {
+					for(IType type: compilationUnit.getAllTypes()) {
+						if (!isDerived(type)) {
+							URI uri = getURIFor(type);
+							List<IEObjectDescription> exported = getExportedEObjects(type);
+							TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
+							IResourceDescription oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
+									new NameBasedEObjectDescription(nameConverter.toQualifiedName(type.getFullyQualifiedName()))));
+							IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(primaryType, oldDescription, newDescription);
+							result.add(resourceDelta);
+						}
+					}
+				} catch(JavaModelException e) {
+					if (logger.isDebugEnabled())
+						logger.debug(e, e);
+				}
 			}
-			if (primaryType == null || !primaryType.getFullyQualifiedName().equals(expectedPrimaryTypeName)) {
-				URI uri = uriHelper.createResourceURIForFQN(expectedPrimaryTypeName);
-				TypeResourceDescription oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
-						new NameBasedEObjectDescription(nameConverter.toQualifiedName(expectedPrimaryTypeName))));
-				IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, null);
-				result.add(resourceDelta);
- 			}
 		}
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	protected boolean isFineGrainedDelta(IJavaElementDelta delta) {
+		return (delta.getFlags() & IJavaElementDelta.F_CHILDREN) != 0;
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	protected boolean isCoarseGrainedDelta(IJavaElementDelta delta) {
+		return (delta.getFlags() & (IJavaElementDelta.F_FINE_GRAINED | IJavaElementDelta.F_PRIMARY_WORKING_COPY)) == 0;
 	}
 	
 	/**
@@ -268,7 +329,7 @@ public class DeltaConverter {
 								URI uri = getURIFor(type);
 								List<IEObjectDescription> exported = getExportedEObjects(type);
 								TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
-								IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(null, newDescription);
+								IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(type, null, newDescription);
 								result.add(resourceDelta);
 							}
 						}

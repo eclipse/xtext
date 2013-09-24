@@ -39,8 +39,10 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtext.Constants;
@@ -282,7 +284,20 @@ public class WorkbenchTestHelper extends Assert {
 		return workbench.getActiveWorkbenchWindow().getActivePage().openEditor(new FileEditorInput(file), editorId);
 	}
 
+	public ITextEditor openLikeTextEditor(IFile file) throws PartInitException {
+		IEditorPart editor = IDE.openEditor(workbench.getActiveWorkbenchWindow().getActivePage(), file);
+		if (editor instanceof ITextEditor) {
+			return (ITextEditor) editor;
+		}
+		return null;
+	}
+
 	public boolean closeEditor(IEditorPart editor, boolean save) {
 		return workbench.getActiveWorkbenchWindow().getActivePage().closeEditor(editor, save);
 	}
+
+	public boolean saveEditor(IEditorPart editor, boolean confirm) {
+		return workbench.getActiveWorkbenchWindow().getActivePage().saveEditor(editor, confirm);
+	}
+
 }
