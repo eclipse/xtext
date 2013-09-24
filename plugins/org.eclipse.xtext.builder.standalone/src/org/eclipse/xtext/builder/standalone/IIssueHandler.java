@@ -1,0 +1,55 @@
+/**
+ * 
+ */
+package org.eclipse.xtext.builder.standalone;
+
+import org.apache.log4j.Logger;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.validation.Issue;
+
+/**
+ * @author Dennis Huebner
+ * 
+ */
+public interface IIssueHandler {
+
+	/**
+	 * @param issues
+	 *            Validation issues to handle
+	 * @return <code>false</code> if issues has a severe problem,
+	 *         <code>true</code> otherwise
+	 */
+	boolean handleIssue(Iterable<Issue> issues);
+
+	class DefaultIssueHandler implements IIssueHandler {
+		private static final Logger LOG = Logger.getLogger(DefaultIssueHandler.class);
+
+		/**
+		 * @param issues
+		 *            Validation issues to handle
+		 * @return <code>true</code> if an {@link Issue} with
+		 *         {@link Severity#ERROR} was found, <code>false</code>
+		 *         otherwise
+		 */
+		public boolean handleIssue(Iterable<Issue> issues) {
+			boolean errorFree = true;
+			for (Issue issue : issues) {
+				switch (issue.getSeverity()) {
+				case ERROR:
+					LOG.error(issue.toString());
+					errorFree = false;
+					break;
+				case WARNING:
+					LOG.warn(issue.toString());
+					break;
+				case INFO:
+					LOG.info(issue.toString());
+					break;
+				default:
+					break;
+				}
+			}
+			return errorFree;
+		}
+	}
+}
