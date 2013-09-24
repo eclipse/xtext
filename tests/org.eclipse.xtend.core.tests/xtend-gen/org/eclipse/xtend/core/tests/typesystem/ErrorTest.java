@@ -2055,6 +2055,64 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_72() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class TestTypes {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("var A tmp = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch (tmp) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("B: {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("tmp = tmp.bar ?: tmp.baz");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def B bar(Object x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return x as B");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def C baz(Object x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return x as C");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class A {}");
+    _builder.newLine();
+    _builder.append("class B extends }");
+    _builder.newLine();
+    _builder.append("class C extends A {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

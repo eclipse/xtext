@@ -422,8 +422,13 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
 					for(JvmTypeReference superType: superTypes) {
 						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
-						if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1)
-							result.add(substitutor.substitute(lightweightSuperType));
+						if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1) {
+							if (!lightweightSuperType.isUnknown()) {
+								result.add(substitutor.substitute(lightweightSuperType));
+							} else if (superTypes.size() == 1) {
+								result.add(internalFindTopLevelType(Object.class));
+							}
+						}
 					}
 					return result;
 				} else {
@@ -431,8 +436,13 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
 					for(JvmTypeReference superType: superTypes) {
 						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
-						if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1)
-							result.add(substitutor.substitute(lightweightSuperType).getRawTypeReference());
+						if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1) {
+							if (!lightweightSuperType.isUnknown()) {
+								result.add(substitutor.substitute(lightweightSuperType).getRawTypeReference());
+							} else if (superTypes.size() == 1) {
+								result.add(internalFindTopLevelType(Object.class));
+							}
+						}
 					}
 					return result;
 				}
