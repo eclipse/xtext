@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -183,17 +184,18 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 		}
 	}
 
-	public void notifyChanged(Notification notification) {
+	public void notifyChanged(@Nullable Notification notification) {
 	}
 
+	@Nullable
 	public Notifier getTarget() {
 		return null;
 	}
 
-	public void setTarget(Notifier newTarget) {
+	public void setTarget(@Nullable Notifier newTarget) {
 	}
 
-	public boolean isAdapterForType(Object type) {
+	public boolean isAdapterForType(@Nullable Object type) {
 		return RawResolvedFeatures.class.equals(type);
 	}
 }
