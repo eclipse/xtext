@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.override;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -21,6 +22,7 @@ import com.google.common.collect.Multimap;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class ParameterizedResolvedFeatures implements IResolvedFeatures {
 
 	private LightweightTypeReference type;

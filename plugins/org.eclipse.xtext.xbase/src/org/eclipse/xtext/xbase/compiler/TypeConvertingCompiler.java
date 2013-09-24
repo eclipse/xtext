@@ -132,6 +132,8 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			convertFunctionType(left, right, appendable, expression, context);
 		} else if (isProcedure(right) || (isProcedure(left) && closures.findImplementingOperation(right, context.eResource()) != null)) {
 			convertFunctionType(left, right, appendable, expression, context);
+		} else if (mustInsertTypeCast(context, left)) {
+			doCastConversion(left, appendable, context, expression);
 		} else {
 			expression.exec(appendable);
 		}
