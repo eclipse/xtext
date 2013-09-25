@@ -69,6 +69,7 @@ Workflow {
                 
                 fragment = de.itemis.statefullexer.StatefulLexerFragment {
                 	runtime = true
+                	lexerBaseClass = "org.xpect.services.Lexer"
                 	antlrParam = "-lib"
                 	antlrParam = "${runtimeProject}/src-gen/org/xpect/parser/antlr/lexer"
                 }
@@ -107,16 +108,16 @@ Workflow {
                 // generates a more lightweight Antlr parser and lexer tailored for content assist
                 fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {}
                 
-                fragment = de.itemis.statefullexer.StatefulLexerFragment {
-//                	lexerGrammar = "org.xpect.ui.highlighting.CradleHighlightingLexer" 
-                	highlighting = true
-                	antlrParam = "-lib"
-                	antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"
-                }
+//                fragment = de.itemis.statefullexer.StatefulLexerFragment {
+////                	lexerGrammar = "org.xpect.ui.highlighting.CradleHighlightingLexer" 
+//                	highlighting = true
+//                	antlrParam = "-lib"
+//                	antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"
+//                }
     
                 
                 fragment = de.itemis.statefullexer.StatefulLexerFragment {
-//                	lexerGrammar = "org.xpect.ui.contentassist.XpectContentAssistLexer" 
+//                	lexerGrammar = "org.xpect.ui.contentassist.XpectContentAssistLexer"
                 	contentAssist = true
                 	antlrParam = "-lib"
                 	antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"

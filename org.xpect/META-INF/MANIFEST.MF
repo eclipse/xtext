@@ -27,6 +27,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.xpect,
  org.xpect.expectation,
  org.xpect.formatting,
+ org.xpect.lexer;x-friends:="org.xpect.tests",
  org.xpect.parameter,
  org.xpect.parser.antlr,
  org.xpect.parser.antlr.internal,
