@@ -3,12 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtext</groupId>
-	<version>1.0.0-SNAPSHOT</version>
-	<artifactId>simple-lang-test</artifactId>
+	<version>IT-SNAPSHOT</version>
+	<artifactId>org.eclipse.xtext.purexbase</artifactId>
 	<packaging>jar</packaging>
-	<properties>
-		<xtend.version>IT-SNAPSHOT</xtend.version>
-	</properties>
 	<build>
 		<resources>
 			<resource>
@@ -16,6 +13,9 @@
 			</resource>
 			<resource>
 				<directory>src-gen</directory>
+			</resource>
+			<resource>
+				<directory>xtend-gen</directory>
 			</resource>
 		</resources>
 
@@ -35,39 +35,20 @@
 						<configuration>
 							<sources>
 								<source>src-gen</source>
+								<source>xtend-gen</source>
 							</sources>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.eclipse.xtext</groupId>
-				<artifactId>xtext-maven-plugin</artifactId>
-				<version>${xtend.version}</version>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<languages>
-						<language>
-							<setup>org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup</setup>
-						</language>
-					</languages>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.eclipse.xtext</groupId>
-						<artifactId>org.eclipse.xtext.testlanguages</artifactId>
-						<version>IT-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
-			</plugin>
 		</plugins>
 	</build>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.standalone</artifactId>
+			<version>2.5.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
