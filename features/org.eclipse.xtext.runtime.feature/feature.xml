@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.runtime"
       label="%featureName"
-     version="2.5.0.qualifier"
+      version="2.5.0.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -122,6 +122,13 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.objectweb.asm"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.builder.standalone"
          download-size="0"
          install-size="0"
          version="0.0.0"
