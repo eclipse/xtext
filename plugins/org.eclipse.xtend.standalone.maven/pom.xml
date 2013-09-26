@@ -13,7 +13,6 @@
 	<packaging>jar</packaging>
 	<properties>
 		<tycho-version>0.17.0</tycho-version>
-		<galileo-url>http://download.eclipse.org/eclipse/updates/3.5</galileo-url>
 		<juno-url>http://download.eclipse.org/eclipse/updates/3.8</juno-url>
 		<orbit-url>http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/</orbit-url>
 		<emf-url>http://download.eclipse.org/modeling/emf/emf/updates/nightly</emf-url>
@@ -45,11 +44,6 @@
 					<source>
 						<!-- source repositories to mirror from -->
 						<repository>
-							<id>galileo</id>
-							<layout>p2</layout>
-							<url>${galileo-url}</url>
-						</repository>
-						<repository>
 							<id>juno</id>
 							<layout>p2</layout>
 							<url>${juno-url}</url>
@@ -80,14 +74,12 @@
 						</iu>
 						<iu>
 							<id>org.eclipse.jdt.core</id>
-							<version>3.5.2.v_981_R35x</version>
 						</iu>
 						<iu>
 							<id>org.eclipse.jdt.annotation</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.equinox.common</id>
-							<version>3.5.1.R35x_v20090807-1100</version>
 						</iu>
 						<iu>
 							<id>org.antlr.runtime</id>
@@ -132,14 +124,12 @@
 						</iu>
 						<iu>
 							<id>org.eclipse.jdt.core.source</id>
-							<version>3.5.2.v_981_R35x</version>
 						</iu>
 						<iu>
 							<id>org.eclipse.jdt.annotation.source</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.equinox.common.source</id>
-							<version>3.5.1.R35x_v20090807-1100</version>
 						</iu>
 						<iu>
 							<id>org.eclipse.xtext.source</id>

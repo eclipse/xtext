@@ -13,6 +13,9 @@
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
+				<directory>src</directory>
+			</resource>
+			<resource>
 				<directory>src-gen</directory>
 			</resource>
 		</resources>

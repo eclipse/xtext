@@ -15,6 +15,8 @@
 		<module>../org.eclipse.xtext.xbase.lib</module>
 		<module>../org.eclipse.xtend.standalone.maven</module>
 		<module>../org.eclipse.xtext.standalone.maven</module>
+		<module>../org.eclipse.xtext.builder.standalone</module>
+		<module>../org.eclipse.xtext.maven.plugin</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
