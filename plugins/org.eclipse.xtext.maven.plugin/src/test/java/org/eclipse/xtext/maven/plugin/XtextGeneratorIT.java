@@ -32,6 +32,14 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
 	}
 
+	@Test
+	public void javaLangBiRef() throws Exception {
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/java-lang-bi-ref");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/XbaseReferToJava.java");
+		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/XbaseReferToJava.class");
+		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/JavaClazz.class");
+	}
+
 	private Verifier verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {
 		return verifyErrorFreeLog(pathToTestProject, "clean", "verify");
 	}
