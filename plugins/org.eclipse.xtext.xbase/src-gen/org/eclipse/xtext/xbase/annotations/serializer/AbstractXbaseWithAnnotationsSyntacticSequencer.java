@@ -18,8 +18,8 @@ import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarA
 public abstract class AbstractXbaseWithAnnotationsSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected XbaseWithAnnotationsGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a;
-	protected AbstractElementAlias match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_p;
+	protected AbstractElementAlias match_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_a;
+	protected AbstractElementAlias match_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_p;
 	protected AbstractElementAlias match_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q;
 	protected AbstractElementAlias match_XBlockExpression_SemicolonKeyword_2_1_q;
 	protected AbstractElementAlias match_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q;
@@ -32,8 +32,8 @@ public abstract class AbstractXbaseWithAnnotationsSyntacticSequencer extends Abs
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (XbaseWithAnnotationsGrammarAccess) access;
-		match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a = new TokenAlias(true, true, grammarAccess.getXAnnotationElementValueAccess().getLeftParenthesisKeyword_7_0());
-		match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_p = new TokenAlias(true, false, grammarAccess.getXAnnotationElementValueAccess().getLeftParenthesisKeyword_7_0());
+		match_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_a = new TokenAlias(true, true, grammarAccess.getXAnnotationParameterizedExpressionAccess().getLeftParenthesisKeyword_0());
+		match_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_p = new TokenAlias(true, false, grammarAccess.getXAnnotationParameterizedExpressionAccess().getLeftParenthesisKeyword_0());
 		match_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXAnnotationAccess().getLeftParenthesisKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXAnnotationAccess().getRightParenthesisKeyword_3_2()));
 		match_XBlockExpression_SemicolonKeyword_2_1_q = new TokenAlias(false, true, grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1());
 		match_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4_2()));
@@ -81,10 +81,10 @@ public abstract class AbstractXbaseWithAnnotationsSyntacticSequencer extends Abs
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a.equals(syntax))
-				emit_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_p.equals(syntax))
-				emit_XAnnotationElementValue_LeftParenthesisKeyword_7_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
+			if(match_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_a.equals(syntax))
+				emit_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_p.equals(syntax))
+				emit_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q.equals(syntax))
 				emit_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XBlockExpression_SemicolonKeyword_2_1_q.equals(syntax))
@@ -109,7 +109,7 @@ public abstract class AbstractXbaseWithAnnotationsSyntacticSequencer extends Abs
 	 * Syntax:
 	 *     '('*
 	 */
-	protected void emit_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -117,7 +117,7 @@ public abstract class AbstractXbaseWithAnnotationsSyntacticSequencer extends Abs
 	 * Syntax:
 	 *     '('+
 	 */
-	protected void emit_XAnnotationElementValue_LeftParenthesisKeyword_7_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_XAnnotationParameterizedExpression_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -51,7 +51,6 @@ import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
@@ -129,17 +128,14 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 			case XAnnotationsPackage.XANNOTATION:
 				if(context == grammarAccess.getXAnnotationRule() ||
 				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0()) {
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule()) {
 					sequence_XAnnotation(context, (XAnnotation) semanticObject); 
-					return; 
-				}
-				else break;
-			case XAnnotationsPackage.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION:
-				if(context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0()) {
-					sequence_XAnnotationElementValueStringConcatenation(context, (XAnnotationElementValueBinaryOperation) semanticObject); 
 					return; 
 				}
 				else break;
@@ -214,6 +210,17 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 					sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(context, (XBinaryOperation) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule()) {
+					sequence_XAnnotationElementValueNoList_XAnnotationMultiplicativeExpression(context, (XBinaryOperation) semanticObject); 
+					return; 
+				}
 				else break;
 			case XbasePackage.XBLOCK_EXPRESSION:
 				if(context == grammarAccess.getXAdditiveExpressionRule() ||
@@ -258,8 +265,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXBooleanLiteralRule() ||
@@ -439,8 +451,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				else break;
 			case XbasePackage.XFEATURE_CALL:
 				if(context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule() ||
 				   context == grammarAccess.getXAnnotationValueFieldReferenceRule() ||
 				   context == grammarAccess.getXAnnotationValueMemberFieldReferenceRule() ||
 				   context == grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getXMemberFeatureCallMemberCallTargetAction_1_0()) {
@@ -578,13 +595,15 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				}
 				else break;
 			case XbasePackage.XLIST_LITERAL:
-				if(context == grammarAccess.getXAdditiveExpressionRule() ||
+				if(context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationListLiteralRule()) {
+					sequence_XAnnotationListLiteral(context, (XListLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXCastedExpressionRule() ||
@@ -617,8 +636,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				else break;
 			case XbasePackage.XMEMBER_FEATURE_CALL:
 				if(context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule() ||
 				   context == grammarAccess.getXAnnotationValueMemberFieldReferenceRule() ||
 				   context == grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getXMemberFeatureCallMemberCallTargetAction_1_0()) {
 					sequence_XAnnotationValueMemberFieldReference(context, (XMemberFeatureCall) semanticObject); 
@@ -695,8 +719,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXCastedExpressionRule() ||
@@ -800,8 +829,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXCastedExpressionRule() ||
@@ -936,8 +970,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXCastedExpressionRule() ||
@@ -968,7 +1007,18 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				}
 				else break;
 			case XbasePackage.XUNARY_OPERATION:
-				if(context == grammarAccess.getXAdditiveExpressionRule() ||
+				if(context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListRule() ||
+				   context == grammarAccess.getXAnnotationElementValueNoListAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionRule() ||
+				   context == grammarAccess.getXAnnotationMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationParameterizedExpressionRule() ||
+				   context == grammarAccess.getXAnnotationPrimaryExpressionRule() ||
+				   context == grammarAccess.getXAnnotationUnaryOperationRule()) {
+					sequence_XAnnotationUnaryOperation(context, (XUnaryOperation) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -1067,6 +1117,26 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	
 	/**
 	 * Constraint:
+	 *     (
+	 *         (
+	 *             leftOperand=XAnnotationElementValueNoList_XBinaryOperation_1_0_0_0 
+	 *             feature=[JvmIdentifiableElement|OpAdd] 
+	 *             rightOperand=XAnnotationMultiplicativeExpression
+	 *         ) | 
+	 *         (
+	 *             leftOperand=XAnnotationMultiplicativeExpression_XBinaryOperation_1_0_0_0 
+	 *             feature=[JvmIdentifiableElement|OpMulti] 
+	 *             rightOperand=XAnnotationUnaryOperation
+	 *         )
+	 *     )
+	 */
+	protected void sequence_XAnnotationElementValueNoList_XAnnotationMultiplicativeExpression(EObject context, XBinaryOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (element=[JvmOperation|ValidID] value=XAnnotationElementValue)
 	 */
 	protected void sequence_XAnnotationElementValuePair(EObject context, XAnnotationElementValuePair semanticObject) {
@@ -1086,27 +1156,19 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         leftOperand=XAnnotationElementValueStringConcatenation_XAnnotationElementValueBinaryOperation_1_0 
-	 *         operator='+' 
-	 *         rightOperand=XAnnotationElementValue
-	 *     )
+	 *     ((elements+=XAnnotationElementValueNoList elements+=XAnnotationElementValueNoList*)?)
 	 */
-	protected void sequence_XAnnotationElementValueStringConcatenation(EObject context, XAnnotationElementValueBinaryOperation semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__LEFT_OPERAND) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__LEFT_OPERAND));
-			if(transientValues.isValueTransient(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND));
-			if(transientValues.isValueTransient(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__OPERATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__OPERATOR));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0(), semanticObject.getLeftOperand());
-		feeder.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getOperatorPlusSignKeyword_1_1_0(), semanticObject.getOperator());
-		feeder.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getRightOperandXAnnotationElementValueParserRuleCall_1_2_0(), semanticObject.getRightOperand());
-		feeder.finish();
+	protected void sequence_XAnnotationListLiteral(EObject context, XListLiteral semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (feature=[JvmIdentifiableElement|OpUnary] operand=XAnnotationUnaryOperation)
+	 */
+	protected void sequence_XAnnotationUnaryOperation(EObject context, XUnaryOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

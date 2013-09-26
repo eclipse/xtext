@@ -22,23 +22,59 @@ ruleXAnnotationElementValuePair :
 	ruleValidID '=' ruleXAnnotationElementValue
 ;
 
-// Rule XAnnotationElementValueStringConcatenation
-ruleXAnnotationElementValueStringConcatenation :
-	ruleXAnnotationElementValue (
-		'+' ruleXAnnotationElementValue
+// Rule XAnnotationElementValue
+ruleXAnnotationElementValue :
+	ruleXAnnotationElementValueNoList |
+	ruleXAnnotationListLiteral
+;
+
+// Rule XAnnotationElementValueNoList
+ruleXAnnotationElementValueNoList :
+	ruleXAnnotationMultiplicativeExpression (
+		( (
+		ruleOpAdd
+		) => ruleOpAdd ) ruleXAnnotationMultiplicativeExpression
 	)*
 ;
 
-// Rule XAnnotationElementValue
-ruleXAnnotationElementValue :
+// Rule XAnnotationMultiplicativeExpression
+ruleXAnnotationMultiplicativeExpression :
+	ruleXAnnotationUnaryOperation (
+		( (
+		ruleOpMulti
+		) => ruleOpMulti ) ruleXAnnotationUnaryOperation
+	)*
+;
+
+// Rule XAnnotationUnaryOperation
+ruleXAnnotationUnaryOperation :
+	ruleOpUnary ruleXAnnotationUnaryOperation |
+	ruleXAnnotationPrimaryExpression
+;
+
+// Rule XAnnotationPrimaryExpression
+ruleXAnnotationPrimaryExpression :
 	ruleXAnnotation |
-	ruleXListLiteral |
 	ruleXStringLiteral |
 	ruleXBooleanLiteral |
 	ruleXNumberLiteral |
 	ruleXTypeLiteral |
 	ruleXAnnotationValueMemberFieldReference |
-	'(' ruleXAnnotationElementValueStringConcatenation ')'
+	ruleXAnnotationParameterizedExpression
+;
+
+// Rule XAnnotationParameterizedExpression
+ruleXAnnotationParameterizedExpression :
+	'(' ruleXAnnotationElementValueNoList ')'
+;
+
+// Rule XAnnotationListLiteral
+ruleXAnnotationListLiteral :
+	'#' '[' (
+		ruleXAnnotationElementValueNoList (
+			',' ruleXAnnotationElementValueNoList
+		)*
+	)? ']'
 ;
 
 // Rule XAnnotationValueMemberFieldReference

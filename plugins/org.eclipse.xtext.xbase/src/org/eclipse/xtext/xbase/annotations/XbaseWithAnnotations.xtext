@@ -26,19 +26,36 @@ XAnnotationElementValuePair :
 	element=[types::JvmOperation|ValidID] '=' value=XAnnotationElementValue	
 ;
 
-XAnnotationElementValueStringConcatenation returns xbase::XExpression :
-	XAnnotationElementValue ({XAnnotationElementValueBinaryOperation.leftOperand = current} operator='+' rightOperand=XAnnotationElementValue)*
-;
+XAnnotationElementValue returns xbase::XExpression:
+	XAnnotationElementValueNoList | XAnnotationListLiteral;
 
-XAnnotationElementValue returns xbase::XExpression :
+XAnnotationElementValueNoList returns xbase::XExpression:
+	XAnnotationMultiplicativeExpression (=>({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
+	rightOperand=XAnnotationMultiplicativeExpression)*;
+
+XAnnotationMultiplicativeExpression returns xbase::XExpression:
+	XAnnotationUnaryOperation (=>({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti]) rightOperand=XAnnotationUnaryOperation)*;
+
+XAnnotationUnaryOperation returns xbase::XExpression:
+	{xbase::XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XAnnotationUnaryOperation
+	| XAnnotationPrimaryExpression;
+
+XAnnotationPrimaryExpression returns xbase::XExpression :
 	XAnnotation |
-	XListLiteral |
 	XStringLiteral |
 	XBooleanLiteral |
 	XNumberLiteral |
 	XTypeLiteral |
 	XAnnotationValueMemberFieldReference |
-	'(' XAnnotationElementValueStringConcatenation ')'
+	XAnnotationParameterizedExpression
+;
+
+XAnnotationParameterizedExpression returns xbase::XExpression:
+	'(' XAnnotationElementValueNoList ')'
+;
+
+XAnnotationListLiteral returns xbase::XListLiteral:
+	{xbase::XListLiteral} '#' '[' (elements+=XAnnotationElementValueNoList (',' elements+=XAnnotationElementValueNoList )*)? ']'
 ;
 
 XAnnotationValueMemberFieldReference returns xbase::XExpression :

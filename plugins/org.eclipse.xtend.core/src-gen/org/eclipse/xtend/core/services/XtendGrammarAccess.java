@@ -2868,26 +2868,79 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getXAnnotationElementValuePairAccess().getRule();
 	}
 
-	//XAnnotationElementValueStringConcatenation returns xbase::XExpression:
-	//	XAnnotationElementValue ({XAnnotationElementValueBinaryOperation.leftOperand=current} operator="+"
-	//	rightOperand=XAnnotationElementValue)*;
-	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValueStringConcatenationElements getXAnnotationElementValueStringConcatenationAccess() {
-		return gaXbaseWithAnnotations.getXAnnotationElementValueStringConcatenationAccess();
-	}
-	
-	public ParserRule getXAnnotationElementValueStringConcatenationRule() {
-		return getXAnnotationElementValueStringConcatenationAccess().getRule();
-	}
-
 	//XAnnotationElementValue returns xbase::XExpression:
-	//	XAnnotation | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
-	//	XAnnotationValueMemberFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
+	//	XAnnotationElementValueNoList | XAnnotationListLiteral;
 	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValueElements getXAnnotationElementValueAccess() {
 		return gaXbaseWithAnnotations.getXAnnotationElementValueAccess();
 	}
 	
 	public ParserRule getXAnnotationElementValueRule() {
 		return getXAnnotationElementValueAccess().getRule();
+	}
+
+	//XAnnotationElementValueNoList returns xbase::XExpression:
+	//	XAnnotationMultiplicativeExpression (=> ({xbase::XBinaryOperation.leftOperand=current}
+	//	feature=[types::JvmIdentifiableElement|OpAdd]) rightOperand=XAnnotationMultiplicativeExpression)*;
+	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValueNoListElements getXAnnotationElementValueNoListAccess() {
+		return gaXbaseWithAnnotations.getXAnnotationElementValueNoListAccess();
+	}
+	
+	public ParserRule getXAnnotationElementValueNoListRule() {
+		return getXAnnotationElementValueNoListAccess().getRule();
+	}
+
+	//XAnnotationMultiplicativeExpression returns xbase::XExpression:
+	//	XAnnotationUnaryOperation (=> ({xbase::XBinaryOperation.leftOperand=current}
+	//	feature=[types::JvmIdentifiableElement|OpMulti]) rightOperand=XAnnotationUnaryOperation)*;
+	public XbaseWithAnnotationsGrammarAccess.XAnnotationMultiplicativeExpressionElements getXAnnotationMultiplicativeExpressionAccess() {
+		return gaXbaseWithAnnotations.getXAnnotationMultiplicativeExpressionAccess();
+	}
+	
+	public ParserRule getXAnnotationMultiplicativeExpressionRule() {
+		return getXAnnotationMultiplicativeExpressionAccess().getRule();
+	}
+
+	//XAnnotationUnaryOperation returns xbase::XExpression:
+	//	{xbase::XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XAnnotationUnaryOperation |
+	//	XAnnotationPrimaryExpression;
+	public XbaseWithAnnotationsGrammarAccess.XAnnotationUnaryOperationElements getXAnnotationUnaryOperationAccess() {
+		return gaXbaseWithAnnotations.getXAnnotationUnaryOperationAccess();
+	}
+	
+	public ParserRule getXAnnotationUnaryOperationRule() {
+		return getXAnnotationUnaryOperationAccess().getRule();
+	}
+
+	//XAnnotationPrimaryExpression returns xbase::XExpression:
+	//	XAnnotation | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral | XAnnotationValueMemberFieldReference
+	//	| XAnnotationParameterizedExpression;
+	public XbaseWithAnnotationsGrammarAccess.XAnnotationPrimaryExpressionElements getXAnnotationPrimaryExpressionAccess() {
+		return gaXbaseWithAnnotations.getXAnnotationPrimaryExpressionAccess();
+	}
+	
+	public ParserRule getXAnnotationPrimaryExpressionRule() {
+		return getXAnnotationPrimaryExpressionAccess().getRule();
+	}
+
+	//XAnnotationParameterizedExpression returns xbase::XExpression:
+	//	"(" XAnnotationElementValueNoList ")";
+	public XbaseWithAnnotationsGrammarAccess.XAnnotationParameterizedExpressionElements getXAnnotationParameterizedExpressionAccess() {
+		return gaXbaseWithAnnotations.getXAnnotationParameterizedExpressionAccess();
+	}
+	
+	public ParserRule getXAnnotationParameterizedExpressionRule() {
+		return getXAnnotationParameterizedExpressionAccess().getRule();
+	}
+
+	//XAnnotationListLiteral returns xbase::XListLiteral:
+	//	{xbase::XListLiteral} "#" "[" (elements+=XAnnotationElementValueNoList (","
+	//	elements+=XAnnotationElementValueNoList)*)? "]";
+	public XbaseWithAnnotationsGrammarAccess.XAnnotationListLiteralElements getXAnnotationListLiteralAccess() {
+		return gaXbaseWithAnnotations.getXAnnotationListLiteralAccess();
+	}
+	
+	public ParserRule getXAnnotationListLiteralRule() {
+		return getXAnnotationListLiteralAccess().getRule();
 	}
 
 	//XAnnotationValueMemberFieldReference returns xbase::XExpression:
