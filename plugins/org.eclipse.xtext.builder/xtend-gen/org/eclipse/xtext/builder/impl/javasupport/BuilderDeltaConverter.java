@@ -14,7 +14,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
-import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.builder.impl.javasupport.CommitResourceDescriptionDelta;
 import org.eclipse.xtext.builder.impl.javasupport.RollbackResourceDescriptionDelta;
 import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
 import org.eclipse.xtext.builder.impl.javasupport.UnsubmittedResourceDescriptionDelta;
@@ -34,33 +37,17 @@ public class BuilderDeltaConverter extends DeltaConverter {
     super(nameConverter, uriHelper);
   }
   
-  protected void convertCompilationUnit(final IJavaElementDelta delta, final List<Delta> result) {
-    super.convertCompilationUnit(delta, result);
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _isPrimaryWorkingCopy = this.isPrimaryWorkingCopy(delta);
-    if (!_isPrimaryWorkingCopy) {
-      _and_1 = false;
-    } else {
-      boolean _isFineGrainedDelta = this.isFineGrainedDelta(delta);
-      boolean _not = (!_isFineGrainedDelta);
-      _and_1 = (_isPrimaryWorkingCopy && _not);
+  protected void convertChangedCompilationUnit(final IJavaElementDelta it, final List<Delta> result) {
+    boolean _isPrimaryWorkingCopy = this.isPrimaryWorkingCopy(it);
+    if (_isPrimaryWorkingCopy) {
+      RollbackResourceDescriptionDelta _rollback = this.rollback(it);
+      result.add(_rollback);
     }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _isCoarseGrainedDelta = this.isCoarseGrainedDelta(delta);
-      boolean _not_1 = (!_isCoarseGrainedDelta);
-      _and = (_and_1 && _not_1);
-    }
-    if (_and) {
-      IJavaElement _element = delta.getElement();
-      final IType type = this.getPrimaryTypeFrom(((ICompilationUnit) _element));
-      boolean _notEquals = (!Objects.equal(type, null));
-      if (_notEquals) {
-        RollbackResourceDescriptionDelta _rollbackResourceDescriptionDelta = new RollbackResourceDescriptionDelta(type);
-        result.add(_rollbackResourceDescriptionDelta);
-      }
+    super.convertChangedCompilationUnit(it, result);
+    boolean _isPrimaryResource = this.isPrimaryResource(it);
+    if (_isPrimaryResource) {
+      CommitResourceDescriptionDelta _commit = this.commit(it);
+      result.add(_commit);
     }
   }
   
@@ -71,20 +58,86 @@ public class BuilderDeltaConverter extends DeltaConverter {
     return _notEquals;
   }
   
-  protected Delta createResourceDescriptionDelta(final IProject project, final String primaryTypeName, final IResourceDescription oldDescription, final IResourceDescription newDescription) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(oldDescription, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _equals_1 = Objects.equal(newDescription, null);
-      _or = (_equals || _equals_1);
-    }
-    if (_or) {
-      UnsubmittedResourceDescriptionDelta _unsubmittedResourceDescriptionDelta = new UnsubmittedResourceDescriptionDelta(primaryTypeName, oldDescription, newDescription);
-      return _unsubmittedResourceDescriptionDelta;
-    }
-    UnconfirmedStructuralChangesDelta _unconfirmedStructuralChangesDelta = new UnconfirmedStructuralChangesDelta(project, primaryTypeName, oldDescription, newDescription);
+  private boolean isPrimaryResource(final IJavaElementDelta delta) {
+    int _flags = delta.getFlags();
+    int _bitwiseAnd = (_flags & IJavaElementDelta.F_PRIMARY_RESOURCE);
+    boolean _notEquals = (_bitwiseAnd != 0);
+    return _notEquals;
+  }
+  
+  protected Delta createContentChangeDelta(final ICompilationUnit it, final IResourceDescription oldDescription, final IResourceDescription newDescription) {
+    String _compilationUnitName = this.getCompilationUnitName(it);
+    UnsubmittedResourceDescriptionDelta _unsubmittedResourceDescriptionDelta = new UnsubmittedResourceDescriptionDelta(_compilationUnitName, oldDescription, newDescription);
+    return _unsubmittedResourceDescriptionDelta;
+  }
+  
+  protected Delta createStructureChangeDelta(final ICompilationUnit it, final IResourceDescription oldDescription, final IResourceDescription newDescription) {
+    IProject _project = this.getProject(it);
+    String _compilationUnitName = this.getCompilationUnitName(it);
+    UnconfirmedStructuralChangesDelta _unconfirmedStructuralChangesDelta = new UnconfirmedStructuralChangesDelta(_project, _compilationUnitName, oldDescription, newDescription);
     return _unconfirmedStructuralChangesDelta;
+  }
+  
+  public RollbackResourceDescriptionDelta rollback(final IJavaElementDelta it) {
+    String _compilationUnitName = this.getCompilationUnitName(it);
+    RollbackResourceDescriptionDelta _rollbackResourceDescriptionDelta = new RollbackResourceDescriptionDelta(_compilationUnitName);
+    return _rollbackResourceDescriptionDelta;
+  }
+  
+  public CommitResourceDescriptionDelta commit(final IJavaElementDelta it) {
+    String _compilationUnitName = this.getCompilationUnitName(it);
+    CommitResourceDescriptionDelta _commitResourceDescriptionDelta = new CommitResourceDescriptionDelta(_compilationUnitName);
+    return _commitResourceDescriptionDelta;
+  }
+  
+  public String getCompilationUnitName(final IJavaElementDelta it) {
+    String _switchResult = null;
+    IJavaElement _element = it.getElement();
+    final IJavaElement element = _element;
+    boolean _matched = false;
+    if (!_matched) {
+      if (element instanceof ICompilationUnit) {
+        final ICompilationUnit _iCompilationUnit = (ICompilationUnit)element;
+        _matched=true;
+        String _compilationUnitName = this.getCompilationUnitName(_iCompilationUnit);
+        _switchResult = _compilationUnitName;
+      }
+    }
+    if (!_matched) {
+      _switchResult = null;
+    }
+    return _switchResult;
+  }
+  
+  public String getCompilationUnitName(final ICompilationUnit compilationUnit) {
+    final String fileName = compilationUnit.getElementName();
+    IJavaElement _parent = compilationUnit.getParent();
+    final IPackageFragment packageFragment = ((IPackageFragment) _parent);
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isDefaultPackage = packageFragment.isDefaultPackage();
+      boolean _not = (!_isDefaultPackage);
+      if (_not) {
+        String _elementName = packageFragment.getElementName();
+        _builder.append(_elementName, "");
+        _builder.append(".");
+      }
+    }
+    _builder.append(fileName, "");
+    return _builder.toString();
+  }
+  
+  public IProject getProject(final ICompilationUnit it) {
+    IProject _xblockexpression = null;
+    {
+      final IJavaProject javaProject = it.getJavaProject();
+      boolean _equals = Objects.equal(javaProject, null);
+      if (_equals) {
+        return null;
+      }
+      IProject _project = javaProject.getProject();
+      _xblockexpression = (_project);
+    }
+    return _xblockexpression;
   }
 }

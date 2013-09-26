@@ -54,7 +54,7 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 			val remainingQualifiedNames = <String>newHashSet(expectedStructucalChangedTypes)
 			for (type : deltas.types) {
 				val qualifiedName = expectedStructucalChangedTypes.findFirst[type == it]
-				assertNotNull(type, qualifiedName)
+				assertNotNull('''There are deltas for the following type: «type»''', qualifiedName)
 				remainingQualifiedNames.remove(qualifiedName)
 			}
 			assertEquals('''There are not deltas for the following types: «remainingQualifiedNames»''', 0,

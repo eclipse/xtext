@@ -29,8 +29,8 @@ public class UnconfirmedStructuralChangesDelta extends UnsubmittedResourceDescri
   
   private final IProject project;
   
-  public UnconfirmedStructuralChangesDelta(final IProject project, final String primaryTypeName, final IResourceDescription old, final IResourceDescription _new) {
-    super(primaryTypeName, old, _new);
+  public UnconfirmedStructuralChangesDelta(final IProject project, final String compilationUnitName, final IResourceDescription old, final IResourceDescription _new) {
+    super(compilationUnitName, old, _new);
     Preconditions.<IProject>checkNotNull(project);
     Preconditions.<IResourceDescription>checkNotNull(old);
     Preconditions.<IResourceDescription>checkNotNull(_new);

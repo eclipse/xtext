@@ -72,7 +72,176 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
   }
   
   @Test
-  public void renameTopLevelType() {
+  public void addPrimaryTopLevelType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypackage;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("// primary top level type");
+      _builder.newLine();
+      this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "// primary top level type", "public class Bar {}");
+        }
+      };
+      this.assertThereAreDeltas(_function, "mypackage.Bar");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void removePrimaryTopLevelType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypackage;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public class Bar {}");
+      _builder.newLine();
+      this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "public class Bar {}", "");
+        }
+      };
+      this.assertThereAreDeltas(_function, "mypackage.Bar");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void renamePrimaryTopLevelType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypackage;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public class Bar {}");
+      _builder.newLine();
+      this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "Bar", "Bar2");
+        }
+      };
+      this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar2");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void addPrimaryTopLevelTypeWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("// primary top level type");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("/Bar.java", "// primary top level type", "public class Bar {}");
+        }
+      };
+      this.assertThereAreDeltas(_function, "Bar");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void removePrimaryTopLevelTypeWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {}");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "public class Bar {}", "");
+        }
+      };
+      this.assertThereAreDeltas(_function, "Bar");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void renamePrimaryTopLevelTypeWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {}");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "Bar", "Bar2");
+        }
+      };
+      this.assertThereAreDeltas(_function, "Bar", "Bar2");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void addSecondaryTopLevelType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypackage;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("// secondary top level type");
+      _builder.newLine();
+      this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "// secondary top level type", "class Foo {}");
+        }
+      };
+      this.assertThereAreDeltas(_function, "mypackage.Foo");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void removeSecondaryTopLevelType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypackage;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {}");
+      _builder.newLine();
+      this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "class Foo {}", "");
+        }
+      };
+      this.assertThereAreDeltas(_function, "mypackage.Foo");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void renameSecondaryTopLevelType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypackage;");
@@ -100,7 +269,116 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
   }
   
   @Test
-  public void renameTopLevelType2() {
+  public void addSecondaryTopLevelTypeWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("// secondary top level type");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "// secondary top level type", "class Foo {}");
+        }
+      };
+      this.assertThereAreDeltas(_function, "Foo");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void removeSecondaryTopLevelTypeWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {}");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "class Foo {}", "");
+        }
+      };
+      this.assertThereAreDeltas(_function, "Foo");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void renameSecondaryTopLevelTypeWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Bar2 {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "Bar2", "Bar3");
+        }
+      };
+      this.assertThereAreDeltas(_function, "Bar2", "Bar3");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void addNestedTypes() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("// nested types");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("public class Foo {");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public class Foo3 {}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("public static class Foo2 {}");
+          _builder.newLine();
+          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "// nested types", _builder.toString());
+        }
+      };
+      this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$Foo$Foo3");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void removeNestedTypes() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypackage;");
@@ -110,13 +388,11 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public void bar() {");
+      _builder.append("public class Foo { public class Foo3 {} }");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("System.out.println(\"Hello world!\");");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("}");
+      _builder.append("public static class Foo2 {}");
       _builder.newLine();
       _builder.newLine();
       _builder.append("}");
@@ -124,10 +400,228 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
         public void apply() {
-          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "Bar", "Bar2");
+          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+            public ITextEditor apply(final ITextEditor it) {
+              ITextEditor _xblockexpression = null;
+              {
+                AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public class Foo { public class Foo3 {} }", "");
+                ITextEditor _changeContent = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public static class Foo2 {}", "");
+                _xblockexpression = (_changeContent);
+              }
+              return _xblockexpression;
+            }
+          };
+          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", _function);
         }
       };
-      this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar2");
+      this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void renameNestedTypes() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public class Foo {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public class Foo3 {}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public static class Foo2 {}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+            public ITextEditor apply(final ITextEditor it) {
+              ITextEditor _xblockexpression = null;
+              {
+                AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo ", " NewFoo ");
+                AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo2 ", " NewFoo2 ");
+                ITextEditor _changeContent = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo3 ", " NewFoo3 ");
+                _xblockexpression = (_changeContent);
+              }
+              return _xblockexpression;
+            }
+          };
+          AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", _function);
+        }
+      };
+      this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$NewFoo", 
+        "mypackage.Bar$NewFoo2", "mypackage.Bar$NewFoo$NewFoo3");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void addNestedTypesWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("// nested types");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("public class Foo {");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public class Foo3 {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("public static class Foo2 {}");
+          _builder.newLine();
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "// nested types", _builder.toString());
+        }
+      };
+      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo2", "Bar$Foo$Foo3");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void addNestedTypesWithinDefaultPackage2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public class Foo {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// nested types");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("public class Foo3 {}");
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "// nested types", _builder.toString());
+        }
+      };
+      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo$Foo3");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void removeNestedTypesWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public class Foo { public class Foo3 {} }");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public static class Foo2 {}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+            public ITextEditor apply(final ITextEditor it) {
+              ITextEditor _xblockexpression = null;
+              {
+                AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public class Foo { public class Foo3 {} }", "");
+                ITextEditor _changeContent = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public static class Foo2 {}", "");
+                _xblockexpression = (_changeContent);
+              }
+              return _xblockexpression;
+            }
+          };
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", _function);
+        }
+      };
+      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo2");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void renameNestedTypesWithinDefaultPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Bar {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public class Foo { public class Foo3 {} }");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public static class Foo2 {}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.testHelper.createFile("Bar.java", _builder.toString());
+      final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+            public ITextEditor apply(final ITextEditor it) {
+              ITextEditor _xblockexpression = null;
+              {
+                AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo ", " NewFoo ");
+                AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo2 ", " NewFoo2 ");
+                ITextEditor _changeContent = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo3 ", " NewFoo3 ");
+                _xblockexpression = (_changeContent);
+              }
+              return _xblockexpression;
+            }
+          };
+          AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", _function);
+        }
+      };
+      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo2", "Bar$NewFoo", "Bar$NewFoo2", "Bar$NewFoo$NewFoo3");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

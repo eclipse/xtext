@@ -14,7 +14,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -163,31 +162,23 @@ public class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
       Collection<Delta> _reconcileDeltas_2 = this.javaChangeQueueFiller.getReconcileDeltas();
       this.assertThereAreDeltas(_reconcileDeltas_2, "mypackage.Bar");
       Collection<UnconfirmedStructuralChangesDelta> _unconfirmedDeltas_2 = this.queuedBuildData.getUnconfirmedDeltas();
-      this.assertThereAreDeltas(_unconfirmedDeltas_2, "mypackage.Foo");
+      this.assertThereAreNotDeltas(_unconfirmedDeltas_2);
       Collection<Delta> _andRemovePendingDeltas_2 = this.queuedBuildData.getAndRemovePendingDeltas();
       this.assertThereAreNotDeltas(_andRemovePendingDeltas_2);
-      boolean _tryConfirmDeltas = this.tryConfirmDeltas();
-      Assert.assertFalse(_tryConfirmDeltas);
+      this._javaEditorExtension.save(barEditor);
       Collection<Delta> _reconcileDeltas_3 = this.javaChangeQueueFiller.getReconcileDeltas();
-      this.assertThereAreDeltas(_reconcileDeltas_3, "mypackage.Bar");
+      this.assertThereAreNotDeltas(_reconcileDeltas_3);
       Collection<UnconfirmedStructuralChangesDelta> _unconfirmedDeltas_3 = this.queuedBuildData.getUnconfirmedDeltas();
-      this.assertThereAreDeltas(_unconfirmedDeltas_3, "mypackage.Foo");
+      this.assertThereAreDeltas(_unconfirmedDeltas_3, "mypackage.Bar");
       Collection<Delta> _andRemovePendingDeltas_3 = this.queuedBuildData.getAndRemovePendingDeltas();
       this.assertThereAreNotDeltas(_andRemovePendingDeltas_3);
-      this._javaEditorExtension.save(barEditor);
+      this.confirmDeltas();
       Collection<Delta> _reconcileDeltas_4 = this.javaChangeQueueFiller.getReconcileDeltas();
       this.assertThereAreNotDeltas(_reconcileDeltas_4);
       Collection<UnconfirmedStructuralChangesDelta> _unconfirmedDeltas_4 = this.queuedBuildData.getUnconfirmedDeltas();
-      this.assertThereAreDeltas(_unconfirmedDeltas_4, "mypackage.Foo", "mypackage.Bar");
+      this.assertThereAreNotDeltas(_unconfirmedDeltas_4);
       Collection<Delta> _andRemovePendingDeltas_4 = this.queuedBuildData.getAndRemovePendingDeltas();
-      this.assertThereAreNotDeltas(_andRemovePendingDeltas_4);
-      this.confirmDeltas();
-      Collection<Delta> _reconcileDeltas_5 = this.javaChangeQueueFiller.getReconcileDeltas();
-      this.assertThereAreNotDeltas(_reconcileDeltas_5);
-      Collection<UnconfirmedStructuralChangesDelta> _unconfirmedDeltas_5 = this.queuedBuildData.getUnconfirmedDeltas();
-      this.assertThereAreNotDeltas(_unconfirmedDeltas_5);
-      Collection<Delta> _andRemovePendingDeltas_5 = this.queuedBuildData.getAndRemovePendingDeltas();
-      this.assertThereAreDeltas(_andRemovePendingDeltas_5, "mypackage.Bar");
+      this.assertThereAreDeltas(_andRemovePendingDeltas_4, "mypackage.Bar");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

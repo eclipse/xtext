@@ -11,12 +11,12 @@ import org.eclipse.xtext.builder.impl.javasupport.AbstractCompilationUnitDelta;
 
 /**
  * <p>
- * Intances of this delta type are used to rollback unsubmitted deltas for the given compilation unit.
+ * Intances of this delta type are used to commit unsubmitted deltas for the given compilation unit.
  * </p>
  */
 @SuppressWarnings("all")
-public class RollbackResourceDescriptionDelta extends AbstractCompilationUnitDelta {
-  public RollbackResourceDescriptionDelta(final String compilationUnitName) {
+public class CommitResourceDescriptionDelta extends AbstractCompilationUnitDelta {
+  public CommitResourceDescriptionDelta(final String compilationUnitName) {
     super(compilationUnitName);
   }
 }

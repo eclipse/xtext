@@ -86,7 +86,10 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
               }
             };
             final String qualifiedName = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(expectedStructucalChangedTypes)), _function);
-            Assert.assertNotNull(type, qualifiedName);
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("There are deltas for the following type: ");
+            _builder.append(type, "");
+            Assert.assertNotNull(_builder.toString(), qualifiedName);
             remainingQualifiedNames.remove(qualifiedName);
           }
         }

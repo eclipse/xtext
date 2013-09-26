@@ -38,7 +38,7 @@ public class JavaChangeQueueFiller implements IElementChangedListener {
 	/**
 	 * <p>
 	 * This map is used to collect unsubmitted deltas during reconcilation.<br>
-	 * A key is a fully qualified name of a compilation unit's primary type.<br>
+	 * A key is a fully qualified name of a compilation unit's name.<br>
 	 * A value is a unsubmitted delta for a compilation unit.
 	 * </p>
 	 */
@@ -89,12 +89,15 @@ public class JavaChangeQueueFiller implements IElementChangedListener {
 	private List<Delta> unionReconcileDeltas(List<Delta> deltas) {
 		List<Delta> result = new ArrayList<Delta>();
 		for (Delta delta : deltas) {
-			Collection<Delta> reconcileDeltas = uriToDeltas.removeAll(getKey(delta));
-			if (!reverted(delta)) {
-				result.add(delta);
+			if (commit(delta)) {
+				Collection<Delta> reconcileDeltas = uriToDeltas.removeAll(getCompilationUnitName(delta));
 				if (reconcileDeltas != null) {
 					result.addAll(reconcileDeltas);
 				}
+			} else if (rollback(delta)) {
+				uriToDeltas.removeAll(getCompilationUnitName(delta));
+			} else {
+				result.add(delta);
 			}
 		}
 		return result;
@@ -108,23 +111,19 @@ public class JavaChangeQueueFiller implements IElementChangedListener {
 	 * @param deltas
 	 *            a list of all deltas for the current event
 	 * @exception IllegalStateException
-	 *                - if a reconcile delta is not an intance of <code>UnsubmittedResourceDescriptionDelta</code>
+	 *                - if a reconcile delta is not an instance of <code>UnsubmittedResourceDescriptionDelta</code>
 	 */
 	private void putReconcileDeltas(List<Delta> deltas) {
 		for (Delta delta : deltas) {
-			Preconditions.checkState(unsubmitted(delta));
-			uriToDeltas.put(getKey(delta), delta);
+			Preconditions.checkState(unsubmitted(delta), delta);
+			uriToDeltas.put(getCompilationUnitName(delta), delta);
 		}
 	}
 
-	private String getKey(Delta delta) {
-		if (unsubmitted(delta)) {
-			UnsubmittedResourceDescriptionDelta unsubmittedResourceDescriptionDelta = (UnsubmittedResourceDescriptionDelta) delta;
-			return unsubmittedResourceDescriptionDelta.getPrimaryTypeName();
-		}
-		if (reverted(delta)) {
-			RollbackResourceDescriptionDelta primaryWorkingCopyDelta = (RollbackResourceDescriptionDelta) delta;
-			return primaryWorkingCopyDelta.getPrimaryTypeName();
+	private String getCompilationUnitName(Delta delta) {
+		if (delta instanceof CompilationUnitDelta) {
+			CompilationUnitDelta compilationUnitDelta = (CompilationUnitDelta) delta;
+			return compilationUnitDelta.getCompilationUnitName();
 		}
 		throw new IllegalStateException("Unknown delta type: " + delta);
 	}
@@ -133,8 +132,12 @@ public class JavaChangeQueueFiller implements IElementChangedListener {
 		return delta instanceof UnsubmittedResourceDescriptionDelta;
 	}
 
-	private boolean reverted(Delta delta) {
+	private boolean rollback(Delta delta) {
 		return delta instanceof RollbackResourceDescriptionDelta;
+	}
+
+	private boolean commit(Delta delta) {
+		return delta instanceof CommitResourceDescriptionDelta;
 	}
 
 }

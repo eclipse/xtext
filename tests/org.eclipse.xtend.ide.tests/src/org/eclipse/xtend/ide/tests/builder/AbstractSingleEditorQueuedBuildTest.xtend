@@ -47,7 +47,111 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "mypackage.Bar")
 	}
 
-	@Test def void renameTopLevelType() {
+	@Test def void addPrimaryTopLevelType() {
+		createFile('/mypackage/Bar.java',
+			'''
+				package mypackage;
+				
+				// primary top level type
+			''')
+		assertThereAreDeltas(
+			[ |
+				'/mypackage/Bar.java'.save("// primary top level type", "public class Bar {}")
+			], "mypackage.Bar")
+	}
+
+	@Test def void removePrimaryTopLevelType() {
+		createFile('/mypackage/Bar.java',
+			'''
+				package mypackage;
+				
+				public class Bar {}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'/mypackage/Bar.java'.save("public class Bar {}", "")
+			], "mypackage.Bar")
+	}
+
+	@Test def void renamePrimaryTopLevelType() {
+		createFile('/mypackage/Bar.java',
+			'''
+				package mypackage;
+				
+				public class Bar {}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'/mypackage/Bar.java'.save("Bar", "Bar2")
+			], "mypackage.Bar", "mypackage.Bar2")
+	}
+
+	@Test def void addPrimaryTopLevelTypeWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				// primary top level type
+			''')
+		assertThereAreDeltas(
+			[ |
+				'/Bar.java'.save("// primary top level type", "public class Bar {}")
+			], "Bar")
+	}
+
+	@Test def void removePrimaryTopLevelTypeWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				public class Bar {}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'Bar.java'.save("public class Bar {}", "")
+			], "Bar")
+	}
+
+	@Test def void renamePrimaryTopLevelTypeWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				public class Bar {}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'Bar.java'.save("Bar", "Bar2")
+			], "Bar", "Bar2")
+	}
+
+	@Test def public void addSecondaryTopLevelType() {
+		createFile('/mypackage/Bar.java',
+			'''
+				package mypackage;
+				
+				public class Bar {
+				}
+				
+				// secondary top level type
+			''')
+		assertThereAreDeltas(
+			[ |
+				'/mypackage/Bar.java'.save("// secondary top level type", "class Foo {}")
+			], "mypackage.Foo")
+	}
+
+	@Test def public void removeSecondaryTopLevelType() {
+		createFile('/mypackage/Bar.java',
+			'''
+				package mypackage;
+				
+				public class Bar {
+				}
+				
+				class Foo {}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'/mypackage/Bar.java'.save("class Foo {}", "")
+			], "mypackage.Foo")
+	}
+
+	@Test def void renameSecondaryTopLevelType() {
 		createFile('/mypackage/Bar.java',
 			'''
 				package mypackage;
@@ -64,23 +168,211 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "mypackage.Bar2", "mypackage.Bar3")
 	}
 
-	@Test def void renameTopLevelType2() {
+	@Test def public void addSecondaryTopLevelTypeWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				public class Bar {
+				}
+				
+				// secondary top level type
+			''')
+		assertThereAreDeltas(
+			[ |
+				'Bar.java'.save("// secondary top level type", "class Foo {}")
+			], "Foo")
+	}
+
+	@Test def public void removeSecondaryTopLevelTypeWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				public class Bar {
+				}
+				
+				class Foo {}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'Bar.java'.save("class Foo {}", "")
+			], "Foo")
+	}
+
+	@Test def void renameSecondaryTopLevelTypeWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				public class Bar {
+				}
+				
+				class Bar2 {
+				}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'Bar.java'.save("Bar2", "Bar3")
+			], "Bar2", "Bar3")
+	}
+
+	@Test def public void addNestedTypes() {
+		createFile('/mypackage/Bar.java',
+			'''
+				public class Bar {
+				
+					// nested types
+				
+				}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'/mypackage/Bar.java'.save("// nested types",
+					'''
+						public class Foo {
+						
+							public class Foo3 {}
+						
+						}
+						
+						public static class Foo2 {}
+					''')
+			], "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$Foo$Foo3")
+	}
+
+	@Test def public void removeNestedTypes() {
 		createFile('/mypackage/Bar.java',
 			'''
 				package mypackage;
 				
 				public class Bar {
 				
-					public void bar() {
-						System.out.println("Hello world!");
+					public class Foo { public class Foo3 {} }
+				
+					public static class Foo2 {}
+				
+				}
+			''')
+			
+		//FIXME: There have to be deltas for mypackage.Bar$Foo$Foo3 type
+		assertThereAreDeltas(
+			[ |
+				'/mypackage/Bar.java'.save [
+					changeContent("public class Foo { public class Foo3 {} }", "")
+					changeContent("public static class Foo2 {}", "")
+				]
+			], "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2")
+	}
+
+	@Test def void renameNestedTypes() {
+		createFile('/mypackage/Bar.java',
+			'''
+				public class Bar {
+				
+					public class Foo {
+				
+						public class Foo3 {}
+				
+					}
+				
+					public static class Foo2 {}
+				
+				}
+			''')
+
+		// FIXME: There have to be deltas for mypackage.Bar$Foo§Foo3 type
+		assertThereAreDeltas(
+			[ |
+				'/mypackage/Bar.java'.save [
+					changeContent(" Foo ", " NewFoo ")
+					changeContent(" Foo2 ", " NewFoo2 ")
+					changeContent(" Foo3 ", " NewFoo3 ")
+				]
+			], "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$NewFoo",
+			"mypackage.Bar$NewFoo2", "mypackage.Bar$NewFoo$NewFoo3")
+	}
+
+	@Test def public void addNestedTypesWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				public class Bar {
+				
+					// nested types
+				
+				}
+			''')
+		assertThereAreDeltas(
+			[ |
+				'Bar.java'.save("// nested types",
+					'''
+						public class Foo {
+
+							public class Foo3 {
+							}
+
+						}
+						
+						public static class Foo2 {}
+					''')
+			], "Bar", "Bar$Foo", "Bar$Foo2", "Bar$Foo$Foo3")
+	}
+
+	@Test def public void addNestedTypesWithinDefaultPackage2() {
+		createFile('Bar.java',
+			'''
+				public class Bar {
+				
+					public class Foo {
+
+						// nested types
+
 					}
 				
 				}
 			''')
 		assertThereAreDeltas(
 			[ |
-				'/mypackage/Bar.java'.save("Bar", "Bar2")
-			], "mypackage.Bar", "mypackage.Bar2")
+				'Bar.java'.save("// nested types", '''public class Foo3 {}''')
+			], "Bar", "Bar$Foo", "Bar$Foo$Foo3")
+	}
+
+	@Test def public void removeNestedTypesWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				public class Bar {
+				
+					public class Foo { public class Foo3 {} }
+				
+					public static class Foo2 {}
+				
+				}
+			''')
+		// FIXME: there have to be deltas for Bar$Foo$Foo3 type
+		assertThereAreDeltas(
+			[ |
+				'Bar.java'.save [
+					changeContent("public class Foo { public class Foo3 {} }", "")
+					changeContent("public static class Foo2 {}", "")
+				]
+			], "Bar", "Bar$Foo", "Bar$Foo2")
+	}
+
+	@Test def void renameNestedTypesWithinDefaultPackage() {
+		createFile('Bar.java',
+			'''
+				public class Bar {
+				
+					public class Foo { public class Foo3 {} }
+				
+					public static class Foo2 {}
+				
+				}
+			''')
+			
+		// FIXME: There have to be deltas for Bar$Foo$Foo3 type
+		assertThereAreDeltas(
+			[ |
+				'Bar.java'.save [
+					changeContent(" Foo ", " NewFoo ")
+					changeContent(" Foo2 ", " NewFoo2 ")
+					changeContent(" Foo3 ", " NewFoo3 ")
+				]
+			], "Bar", "Bar$Foo", "Bar$Foo2", "Bar$NewFoo", "Bar$NewFoo2", "Bar$NewFoo$NewFoo3")
 	}
 
 	@Test def void changePackageDeclaration() {
