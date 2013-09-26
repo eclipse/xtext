@@ -57,10 +57,10 @@ class Documentation extends AbstractXdocBaseWebsite {
 	def copyImages(Document doc, File targetDir) {
 		val iter = EcoreUtil::getAllContents(doc.eResource.resourceSet, true)
 		iter.filter(typeof(ImageRef)).forEach[
-			val source = new File(eResource.URI.trimSegments(1).toFileString, path)
+			val source = new File(eResource.URI.trimSegments(1).toFileString, it.path)
 			if (!source.exists)
 				throw new IllegalStateException("Referenced Image "+source.canonicalPath+" does not exist in "+eResource.URI.lastSegment+" line "+NodeModelUtils::getNode(it).startLine)
-			val target = new File(targetDir, path)
+			val target = new File(targetDir, it.path)
 			println(target.canonicalPath)
 			
 			source.newInputStreamSupplier.copy(target)
