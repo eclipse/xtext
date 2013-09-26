@@ -186,7 +186,7 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
       return true;
     }
     if ((obj instanceof TypeReference)) {
-      final TypeReference other = ((TypeReference) obj);
+      final TypeReference other = ((TypeReference) ((TypeReference)obj));
       boolean _and = false;
       boolean _isAssignableFrom = other.isAssignableFrom(this);
       if (!_isAssignableFrom) {

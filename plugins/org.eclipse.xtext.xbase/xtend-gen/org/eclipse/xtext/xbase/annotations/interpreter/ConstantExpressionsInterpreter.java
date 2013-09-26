@@ -35,7 +35,6 @@ public class ConstantExpressionsInterpreter {
     boolean _matched = false;
     if (!_matched) {
       if (expression instanceof XStringLiteral) {
-        final XStringLiteral _xStringLiteral = (XStringLiteral)expression;
         _matched=true;
         String _xblockexpression = null;
         {
@@ -45,10 +44,10 @@ public class ConstantExpressionsInterpreter {
           }
           boolean _equals = Objects.equal(_simpleName, "char");
           if (_equals) {
-            String _value = _xStringLiteral.getValue();
+            String _value = ((XStringLiteral)expression).getValue();
             _value.charAt(0);
           }
-          String _value_1 = _xStringLiteral.getValue();
+          String _value_1 = ((XStringLiteral)expression).getValue();
           _xblockexpression = (_value_1);
         }
         _switchResult = _xblockexpression;
@@ -56,15 +55,13 @@ public class ConstantExpressionsInterpreter {
     }
     if (!_matched) {
       if (expression instanceof XBooleanLiteral) {
-        final XBooleanLiteral _xBooleanLiteral = (XBooleanLiteral)expression;
         _matched=true;
-        boolean _isIsTrue = _xBooleanLiteral.isIsTrue();
+        boolean _isIsTrue = ((XBooleanLiteral)expression).isIsTrue();
         _switchResult = Boolean.valueOf(_isIsTrue);
       }
     }
     if (!_matched) {
       if (expression instanceof XNumberLiteral) {
-        final XNumberLiteral _xNumberLiteral = (XNumberLiteral)expression;
         _matched=true;
         Number _switchResult_1 = null;
         boolean _matched_1 = false;
@@ -76,7 +73,7 @@ public class ConstantExpressionsInterpreter {
           boolean _equals = Objects.equal(_simpleName, "long");
           if (_equals) {
             _matched_1=true;
-            String _value = _xNumberLiteral.getValue();
+            String _value = ((XNumberLiteral)expression).getValue();
             Long _valueOf = Long.valueOf(_value);
             _switchResult_1 = _valueOf;
           }
@@ -89,7 +86,7 @@ public class ConstantExpressionsInterpreter {
           boolean _equals_1 = Objects.equal(_simpleName_1, "short");
           if (_equals_1) {
             _matched_1=true;
-            String _value_1 = _xNumberLiteral.getValue();
+            String _value_1 = ((XNumberLiteral)expression).getValue();
             Short _valueOf_1 = Short.valueOf(_value_1);
             _switchResult_1 = _valueOf_1;
           }
@@ -102,7 +99,7 @@ public class ConstantExpressionsInterpreter {
           boolean _equals_2 = Objects.equal(_simpleName_2, "byte");
           if (_equals_2) {
             _matched_1=true;
-            String _value_2 = _xNumberLiteral.getValue();
+            String _value_2 = ((XNumberLiteral)expression).getValue();
             Byte _valueOf_2 = Byte.valueOf(_value_2);
             _switchResult_1 = _valueOf_2;
           }
@@ -115,7 +112,7 @@ public class ConstantExpressionsInterpreter {
           boolean _equals_3 = Objects.equal(_simpleName_3, "float");
           if (_equals_3) {
             _matched_1=true;
-            String _value_3 = _xNumberLiteral.getValue();
+            String _value_3 = ((XNumberLiteral)expression).getValue();
             Float _valueOf_3 = Float.valueOf(_value_3);
             _switchResult_1 = _valueOf_3;
           }
@@ -128,13 +125,13 @@ public class ConstantExpressionsInterpreter {
           boolean _equals_4 = Objects.equal(_simpleName_4, "double");
           if (_equals_4) {
             _matched_1=true;
-            String _value_4 = _xNumberLiteral.getValue();
+            String _value_4 = ((XNumberLiteral)expression).getValue();
             Double _valueOf_4 = Double.valueOf(_value_4);
             _switchResult_1 = _valueOf_4;
           }
         }
         if (!_matched_1) {
-          String _value_5 = _xNumberLiteral.getValue();
+          String _value_5 = ((XNumberLiteral)expression).getValue();
           Integer _valueOf_5 = Integer.valueOf(_value_5);
           _switchResult_1 = _valueOf_5;
         }
@@ -143,26 +140,23 @@ public class ConstantExpressionsInterpreter {
     }
     if (!_matched) {
       if (expression instanceof XTypeLiteral) {
-        final XTypeLiteral _xTypeLiteral = (XTypeLiteral)expression;
         _matched=true;
-        JvmType _type = _xTypeLiteral.getType();
+        JvmType _type = ((XTypeLiteral)expression).getType();
         _switchResult = _type;
       }
     }
     if (!_matched) {
       if (expression instanceof XAnnotation) {
-        final XAnnotation _xAnnotation = (XAnnotation)expression;
         _matched=true;
-        _switchResult = _xAnnotation;
+        _switchResult = expression;
       }
     }
     if (!_matched) {
       if (expression instanceof XListLiteral) {
-        final XListLiteral _xListLiteral = (XListLiteral)expression;
         _matched=true;
         Object[] _xblockexpression = null;
         {
-          EList<XExpression> _elements = _xListLiteral.getElements();
+          EList<XExpression> _elements = ((XListLiteral)expression).getElements();
           final Function1<XExpression,Object> _function = new Function1<XExpression,Object>() {
             public Object apply(final XExpression it) {
               Object _evaluate = ConstantExpressionsInterpreter.this.evaluate(it, null);
@@ -176,7 +170,6 @@ public class ConstantExpressionsInterpreter {
           boolean _matched_1 = false;
           if (!_matched_1) {
             if (_switchValue instanceof String) {
-              final String _string = (String)_switchValue;
               _matched_1=true;
               String[] _xblockexpression_1 = null;
               {
@@ -190,7 +183,6 @@ public class ConstantExpressionsInterpreter {
           }
           if (!_matched_1) {
             if (_switchValue instanceof JvmType) {
-              final JvmType _jvmType = (JvmType)_switchValue;
               _matched_1=true;
               JvmType[] _xblockexpression_1 = null;
               {
@@ -204,7 +196,6 @@ public class ConstantExpressionsInterpreter {
           }
           if (!_matched_1) {
             if (_switchValue instanceof Integer) {
-              final Integer _integer = (Integer)_switchValue;
               _matched_1=true;
               Integer[] _xblockexpression_1 = null;
               {
@@ -223,29 +214,27 @@ public class ConstantExpressionsInterpreter {
     }
     if (!_matched) {
       if (expression instanceof XBinaryOperation) {
-        final XBinaryOperation _xBinaryOperation = (XBinaryOperation)expression;
         _matched=true;
-        XExpression _leftOperand = _xBinaryOperation.getLeftOperand();
+        XExpression _leftOperand = ((XBinaryOperation)expression).getLeftOperand();
         final Object leftVal = this.evaluate(_leftOperand, null);
-        XExpression _rightOperand = _xBinaryOperation.getRightOperand();
+        XExpression _rightOperand = ((XBinaryOperation)expression).getRightOperand();
         final Object rightVal = this.evaluate(_rightOperand, null);
         return this.plus(leftVal, rightVal);
       }
     }
     if (!_matched) {
       if (expression instanceof XAnnotationElementValueBinaryOperation) {
-        final XAnnotationElementValueBinaryOperation _xAnnotationElementValueBinaryOperation = (XAnnotationElementValueBinaryOperation)expression;
         _matched=true;
         Object _switchResult_1 = null;
-        String _operator = _xAnnotationElementValueBinaryOperation.getOperator();
+        String _operator = ((XAnnotationElementValueBinaryOperation)expression).getOperator();
         final String _switchValue = _operator;
         boolean _matched_1 = false;
         if (!_matched_1) {
           if (Objects.equal(_switchValue,"+")) {
             _matched_1=true;
-            XExpression _leftOperand = _xAnnotationElementValueBinaryOperation.getLeftOperand();
+            XExpression _leftOperand = ((XAnnotationElementValueBinaryOperation)expression).getLeftOperand();
             final Object leftVal = this.evaluate(_leftOperand, null);
-            XExpression _rightOperand = _xAnnotationElementValueBinaryOperation.getRightOperand();
+            XExpression _rightOperand = ((XAnnotationElementValueBinaryOperation)expression).getRightOperand();
             final Object rightVal = this.evaluate(_rightOperand, null);
             return this.plus(leftVal, rightVal);
           }

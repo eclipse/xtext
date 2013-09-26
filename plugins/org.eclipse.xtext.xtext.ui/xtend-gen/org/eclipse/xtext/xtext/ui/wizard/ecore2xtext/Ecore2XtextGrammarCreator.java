@@ -250,26 +250,24 @@ public class Ecore2XtextGrammarCreator {
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof EAttribute) {
-        final EAttribute _eAttribute = (EAttribute)it;
         _matched=true;
-        String _assignedRuleCall = Ecore2XtextExtensions.assignedRuleCall(_eAttribute);
+        String _assignedRuleCall = Ecore2XtextExtensions.assignedRuleCall(((EAttribute)it));
         _switchResult = _assignedRuleCall;
       }
     }
     if (!_matched) {
       if (it instanceof EReference) {
-        final EReference _eReference = (EReference)it;
         _matched=true;
         CharSequence _xifexpression = null;
-        boolean _isContainment = _eReference.isContainment();
+        boolean _isContainment = ((EReference)it).isContainment();
         if (_isContainment) {
-          EClass _eReferenceType = _eReference.getEReferenceType();
+          EClass _eReferenceType = ((EReference)it).getEReferenceType();
           String _uniqueName = UniqueNameUtil.uniqueName(_eReferenceType);
           _xifexpression = _uniqueName;
         } else {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("[");
-          EClass _eReferenceType_1 = _eReference.getEReferenceType();
+          EClass _eReferenceType_1 = ((EReference)it).getEReferenceType();
           String _fqn = Ecore2XtextExtensions.fqn(_eReferenceType_1);
           _builder.append(_fqn, "");
           _builder.append("|EString]");
@@ -333,29 +331,28 @@ public class Ecore2XtextGrammarCreator {
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof EClass) {
-        final EClass _eClass = (EClass)it;
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
-        String _concreteRuleName = Ecore2XtextExtensions.concreteRuleName(_eClass);
+        String _concreteRuleName = Ecore2XtextExtensions.concreteRuleName(((EClass)it));
         _builder.append(_concreteRuleName, "");
         _builder.append(" returns ");
-        String _fqn = Ecore2XtextExtensions.fqn(_eClass);
+        String _fqn = Ecore2XtextExtensions.fqn(it);
         _builder.append(_fqn, "");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         {
-          boolean _onlyOptionalFeatures = Ecore2XtextExtensions.onlyOptionalFeatures(_eClass);
+          boolean _onlyOptionalFeatures = Ecore2XtextExtensions.onlyOptionalFeatures(((EClass)it));
           if (_onlyOptionalFeatures) {
             _builder.append("\t");
             _builder.append("{");
-            String _fqn_1 = Ecore2XtextExtensions.fqn(_eClass);
+            String _fqn_1 = Ecore2XtextExtensions.fqn(it);
             _builder.append(_fqn_1, "	");
             _builder.append("}");
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          Iterable<EStructuralFeature> _prefixFeatures = Ecore2XtextExtensions.prefixFeatures(_eClass);
+          Iterable<EStructuralFeature> _prefixFeatures = Ecore2XtextExtensions.prefixFeatures(((EClass)it));
           for(final EStructuralFeature strF : _prefixFeatures) {
             _builder.append("\t");
             CharSequence _assigment = this.assigment(strF);
@@ -365,15 +362,15 @@ public class Ecore2XtextGrammarCreator {
         }
         _builder.append("\t");
         _builder.append("\'");
-        String _name = _eClass.getName();
+        String _name = ((EClass)it).getName();
         _builder.append(_name, "	");
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        CharSequence _idAssignment = this.idAssignment(_eClass);
+        CharSequence _idAssignment = this.idAssignment(((EClass)it));
         _builder.append(_idAssignment, "	");
         {
-          Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(_eClass);
+          Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(((EClass)it));
           boolean _isEmpty = IterableExtensions.isEmpty(_inlinedFeatures);
           boolean _not = (!_isEmpty);
           if (_not) {
@@ -382,7 +379,7 @@ public class Ecore2XtextGrammarCreator {
             _builder.append("\'{\'");
             _builder.newLine();
             {
-              Iterable<EAttribute> _allAttributes = Ecore2XtextExtensions.allAttributes(_eClass);
+              Iterable<EAttribute> _allAttributes = Ecore2XtextExtensions.allAttributes(((EClass)it));
               for(final EAttribute attr : _allAttributes) {
                 _builder.append("\t");
                 _builder.append("\t");
@@ -392,7 +389,7 @@ public class Ecore2XtextGrammarCreator {
               }
             }
             {
-              Iterable<EReference> _allCrossReferences = Ecore2XtextExtensions.allCrossReferences(_eClass);
+              Iterable<EReference> _allCrossReferences = Ecore2XtextExtensions.allCrossReferences(((EClass)it));
               for(final EReference ref : _allCrossReferences) {
                 _builder.append("\t");
                 _builder.append("\t");
@@ -402,7 +399,7 @@ public class Ecore2XtextGrammarCreator {
               }
             }
             {
-              Iterable<EReference> _allContainmentReferences = Ecore2XtextExtensions.allContainmentReferences(_eClass);
+              Iterable<EReference> _allContainmentReferences = Ecore2XtextExtensions.allContainmentReferences(((EClass)it));
               for(final EReference conti : _allContainmentReferences) {
                 _builder.append("\t");
                 _builder.append("\t");
@@ -422,21 +419,20 @@ public class Ecore2XtextGrammarCreator {
     }
     if (!_matched) {
       if (it instanceof EDataType) {
-        final EDataType _eDataType = (EDataType)it;
         _matched=true;
         CharSequence _xifexpression = null;
-        boolean _isSerializable = _eDataType.isSerializable();
+        boolean _isSerializable = ((EDataType)it).isSerializable();
         if (_isSerializable) {
           StringConcatenation _builder = new StringConcatenation();
-          String _uniqueName = UniqueNameUtil.uniqueName(_eDataType);
+          String _uniqueName = UniqueNameUtil.uniqueName(it);
           _builder.append(_uniqueName, "");
           _builder.append(" returns ");
-          String _fqn = Ecore2XtextExtensions.fqn(_eDataType);
+          String _fqn = Ecore2XtextExtensions.fqn(it);
           _builder.append(_fqn, "");
           _builder.append(":");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          String _dataTypeRuleBody = Ecore2XtextExtensions.dataTypeRuleBody(_eDataType);
+          String _dataTypeRuleBody = Ecore2XtextExtensions.dataTypeRuleBody(((EDataType)it));
           _builder.append(_dataTypeRuleBody, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
@@ -447,20 +443,19 @@ public class Ecore2XtextGrammarCreator {
     }
     if (!_matched) {
       if (it instanceof EEnum) {
-        final EEnum _eEnum = (EEnum)it;
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("enum ");
-        String _name = _eEnum.getName();
+        String _name = ((EEnum)it).getName();
         String _quoteIfNeccesary = Ecore2XtextExtensions.quoteIfNeccesary(_name);
         _builder.append(_quoteIfNeccesary, "");
         _builder.append(" returns ");
-        String _fqn = Ecore2XtextExtensions.fqn(_eEnum);
+        String _fqn = Ecore2XtextExtensions.fqn(it);
         _builder.append(_fqn, "");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
-        EList<EEnumLiteral> _eLiterals = _eEnum.getELiterals();
+        EList<EEnumLiteral> _eLiterals = ((EEnum)it).getELiterals();
         final Function1<EEnumLiteral,String> _function = new Function1<EEnumLiteral,String>() {
           public String apply(final EEnumLiteral it) {
             String _name = it.getName();

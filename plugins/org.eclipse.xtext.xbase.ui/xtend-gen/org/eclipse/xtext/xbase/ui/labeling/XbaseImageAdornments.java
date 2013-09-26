@@ -93,10 +93,9 @@ public class XbaseImageAdornments {
     boolean _matched = false;
     if (!_matched) {
       if (overriddenOperation instanceof JvmOperation) {
-        final JvmOperation _jvmOperation = (JvmOperation)overriddenOperation;
         _matched=true;
         int _xifexpression = (int) 0;
-        boolean _isAbstract = _jvmOperation.isAbstract();
+        boolean _isAbstract = ((JvmOperation)overriddenOperation).isAbstract();
         if (_isAbstract) {
           _xifexpression = JavaElementImageDescriptor.IMPLEMENTS;
         } else {

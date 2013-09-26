@@ -202,9 +202,8 @@ public class XbaseEditorInputRedirector {
       boolean _matched = false;
       if (!_matched) {
         if (originalStorage instanceof IFile) {
-          final IFile _iFile = (IFile)originalStorage;
           _matched=true;
-          FileEditorInput _fileEditorInput = new FileEditorInput(_iFile);
+          FileEditorInput _fileEditorInput = new FileEditorInput(((IFile)originalStorage));
           return _fileEditorInput;
         }
       }

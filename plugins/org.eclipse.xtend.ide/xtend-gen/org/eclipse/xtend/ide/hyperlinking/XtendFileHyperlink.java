@@ -56,28 +56,25 @@ public class XtendFileHyperlink implements IHyperlink {
         boolean _matched = false;
         if (!_matched) {
           if (l instanceof AbstractSourceLookupDirector) {
-            final AbstractSourceLookupDirector _abstractSourceLookupDirector = (AbstractSourceLookupDirector)l;
             _matched=true;
-            final Object result = _abstractSourceLookupDirector.getSourceElement(this.fileName);
+            final Object result = ((AbstractSourceLookupDirector)l).getSourceElement(this.fileName);
             boolean _matched_1 = false;
             if (!_matched_1) {
               if (result instanceof IFile) {
-                final IFile _iFile = (IFile)result;
                 _matched_1=true;
                 IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
                 IWorkbenchPage _activePage = _activeWorkbenchWindow.getActivePage();
-                final IEditorPart editor = IDE.openEditor(_activePage, _iFile);
+                final IEditorPart editor = IDE.openEditor(_activePage, ((IFile)result));
                 boolean _matched_2 = false;
                 if (!_matched_2) {
                   if (editor instanceof XtextEditor) {
-                    final XtextEditor _xtextEditor = (XtextEditor)editor;
                     _matched_2=true;
-                    IXtextDocument _document = _xtextEditor.getDocument();
+                    IXtextDocument _document = ((XtextEditor)editor).getDocument();
                     int _minus = (this.lineNumber - 1);
                     final IRegion region = _document.getLineInformation(_minus);
                     int _offset = region.getOffset();
                     int _length = region.getLength();
-                    _xtextEditor.selectAndReveal(_offset, _length);
+                    ((XtextEditor)editor).selectAndReveal(_offset, _length);
                   }
                 }
               }

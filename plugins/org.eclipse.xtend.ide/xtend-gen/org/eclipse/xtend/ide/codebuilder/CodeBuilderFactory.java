@@ -241,16 +241,16 @@ public class CodeBuilderFactory {
   }
   
   public Object getSource(final JvmDeclaredType element) {
-    IJavaElement _xblockexpression = null;
+    IType _xblockexpression = null;
     {
       final EObject xtendType = this._iXtendJvmAssociations.getPrimarySourceElement(element);
       if ((xtendType instanceof XtendTypeDeclaration)) {
         return xtendType;
       }
       final IJavaElement jvmElement = this._iJavaElementFinder.findExactElementFor(element);
-      IJavaElement _xifexpression = null;
+      IType _xifexpression = null;
       if ((jvmElement instanceof IType)) {
-        _xifexpression = jvmElement;
+        _xifexpression = ((IType)jvmElement);
       } else {
         _xifexpression = null;
       }

@@ -127,16 +127,15 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
           boolean _matched = false;
           if (!_matched) {
             if (it instanceof XAbstractFeatureCall) {
-              final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)it;
               _matched=true;
               boolean _and = false;
               boolean _and_1 = false;
-              boolean _isTypeLiteral = _xAbstractFeatureCall.isTypeLiteral();
+              boolean _isTypeLiteral = ((XAbstractFeatureCall)it).isTypeLiteral();
               boolean _not = (!_isTypeLiteral);
               if (!_not) {
                 _and_1 = false;
               } else {
-                boolean _isPackageFragment = _xAbstractFeatureCall.isPackageFragment();
+                boolean _isPackageFragment = ((XAbstractFeatureCall)it).isPackageFragment();
                 boolean _not_1 = (!_isPackageFragment);
                 _and_1 = (_not && _not_1);
               }
@@ -144,21 +143,20 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
                 _and = false;
               } else {
                 boolean _or = false;
-                EList<JvmTypeReference> _typeArguments = _xAbstractFeatureCall.getTypeArguments();
+                EList<JvmTypeReference> _typeArguments = ((XAbstractFeatureCall)it).getTypeArguments();
                 boolean _isEmpty = _typeArguments.isEmpty();
                 boolean _not_2 = (!_isEmpty);
                 if (_not_2) {
                   _or = true;
                 } else {
                   boolean _switchResult_1 = false;
-                  JvmIdentifiableElement _feature = _xAbstractFeatureCall.getFeature();
+                  JvmIdentifiableElement _feature = ((XAbstractFeatureCall)it).getFeature();
                   final JvmIdentifiableElement feature = _feature;
                   boolean _matched_1 = false;
                   if (!_matched_1) {
                     if (feature instanceof JvmTypeParameterDeclarator) {
-                      final JvmTypeParameterDeclarator _jvmTypeParameterDeclarator = (JvmTypeParameterDeclarator)feature;
                       _matched_1=true;
-                      EList<JvmTypeParameter> _typeParameters = ((JvmTypeParameterDeclarator)_jvmTypeParameterDeclarator).getTypeParameters();
+                      EList<JvmTypeParameter> _typeParameters = ((JvmTypeParameterDeclarator)feature).getTypeParameters();
                       boolean _isEmpty_1 = _typeParameters.isEmpty();
                       boolean _not_3 = (!_isEmpty_1);
                       _switchResult_1 = _not_3;
@@ -176,16 +174,15 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
           }
           if (!_matched) {
             if (it instanceof XConstructorCall) {
-              final XConstructorCall _xConstructorCall = (XConstructorCall)it;
               _matched=true;
               boolean _or = false;
-              EList<JvmTypeReference> _typeArguments = _xConstructorCall.getTypeArguments();
+              EList<JvmTypeReference> _typeArguments = ((XConstructorCall)it).getTypeArguments();
               boolean _isEmpty = _typeArguments.isEmpty();
               boolean _not = (!_isEmpty);
               if (_not) {
                 _or = true;
               } else {
-                JvmConstructor _constructor = _xConstructorCall.getConstructor();
+                JvmConstructor _constructor = ((XConstructorCall)it).getConstructor();
                 JvmDeclaredType _declaringType = _constructor.getDeclaringType();
                 EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) _declaringType).getTypeParameters();
                 boolean _isEmpty_1 = _typeParameters.isEmpty();
@@ -209,14 +206,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
           boolean _matched = false;
           if (!_matched) {
             if (it instanceof XAbstractFeatureCall) {
-              final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)it;
               _matched=true;
               _switchResult = Literals.XABSTRACT_FEATURE_CALL__FEATURE;
             }
           }
           if (!_matched) {
             if (it instanceof XConstructorCall) {
-              final XConstructorCall _xConstructorCall = (XConstructorCall)it;
               _matched=true;
               _switchResult = Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
             }

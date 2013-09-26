@@ -261,7 +261,6 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     boolean _matched = false;
     if (!_matched) {
       if (typeReference instanceof JvmUnknownTypeReference) {
-        final JvmUnknownTypeReference _jvmUnknownTypeReference = (JvmUnknownTypeReference)typeReference;
         _matched=true;
         _switchResult = "java.lang.Object";
       }
@@ -278,9 +277,8 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     boolean _matched = false;
     if (!_matched) {
       if (t instanceof JvmGenericType) {
-        final JvmGenericType _jvmGenericType = (JvmGenericType)t;
         _matched=true;
-        boolean _isInterface = _jvmGenericType.isInterface();
+        boolean _isInterface = ((JvmGenericType)t).isInterface();
         _switchResult = _isInterface;
       }
     }

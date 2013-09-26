@@ -204,9 +204,9 @@ public class HiddenLeafAccess {
         {
           final INode next = ni.next();
           if ((next instanceof ILeafNode)) {
-            boolean _isHidden = ((ILeafNode) next).isHidden();
+            boolean _isHidden = ((ILeafNode) ((ILeafNode)next)).isHidden();
             if (_isHidden) {
-              result.add(((ILeafNode) next));
+              result.add(((ILeafNode) ((ILeafNode)next)));
             } else {
               return result;
             }

@@ -25,7 +25,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceSignificant(final ITreeAppendable appendable, final EObject source, final boolean useForDebugging) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, RegionDescription.SIGNIFICANT, useForDebugging);
+      TreeAppendable _trace = ((TreeAppendable) ((TreeAppendable)appendable)).trace(source, RegionDescription.SIGNIFICANT, useForDebugging);
       _xifexpression = _trace;
     } else {
       ITreeAppendable _xblockexpression = null;
@@ -55,7 +55,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceWithComments(final ITreeAppendable appendable, final EObject source) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, RegionDescription.INCLUDING_COMMENTS, false);
+      TreeAppendable _trace = ((TreeAppendable) ((TreeAppendable)appendable)).trace(source, RegionDescription.INCLUDING_COMMENTS, false);
       _xifexpression = _trace;
     } else {
       ITreeAppendable _xblockexpression = null;
@@ -65,9 +65,8 @@ public class TreeAppendableUtil {
         boolean _matched = false;
         if (!_matched) {
           if (locationProvider instanceof ILocationInFileProviderExtension) {
-            final ILocationInFileProviderExtension _iLocationInFileProviderExtension = (ILocationInFileProviderExtension)locationProvider;
             _matched=true;
-            ITextRegion _textRegion = ((ILocationInFileProviderExtension)_iLocationInFileProviderExtension).getTextRegion(source, RegionDescription.INCLUDING_COMMENTS);
+            ITextRegion _textRegion = ((ILocationInFileProviderExtension)this.locationProvider).getTextRegion(source, RegionDescription.INCLUDING_COMMENTS);
             _switchResult = _textRegion;
           }
         }

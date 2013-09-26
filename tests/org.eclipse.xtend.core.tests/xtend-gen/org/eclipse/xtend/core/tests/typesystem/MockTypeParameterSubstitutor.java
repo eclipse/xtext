@@ -50,7 +50,7 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
   public LightweightTypeReference doVisitParameterizedTypeReference(final ParameterizedTypeReference reference, final Set<JvmTypeParameter> visiting) {
     final JvmType type = reference.getType();
     if ((type instanceof JvmTypeParameter)) {
-      boolean _add = visiting.add(((JvmTypeParameter) type));
+      boolean _add = visiting.add(((JvmTypeParameter) ((JvmTypeParameter)type)));
       boolean _not = (!_add);
       if (_not) {
         return null;
@@ -65,11 +65,11 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
         } else {
           ITypeReferenceOwner _owner = this.getOwner();
           Object _object = new Object();
-          SimpleUnboundTypeReference _simpleUnboundTypeReference = new SimpleUnboundTypeReference(_owner, ((JvmTypeParameter) type), _object);
+          SimpleUnboundTypeReference _simpleUnboundTypeReference = new SimpleUnboundTypeReference(_owner, ((JvmTypeParameter) ((JvmTypeParameter)type)), _object);
           final SimpleUnboundTypeReference result = _simpleUnboundTypeReference;
           Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _typeParameterMapping_1 = this.getTypeParameterMapping();
           LightweightMergedBoundTypeArgument _lightweightMergedBoundTypeArgument = new LightweightMergedBoundTypeArgument(result, VarianceInfo.INVARIANT);
-          _typeParameterMapping_1.put(((JvmTypeParameter) type), _lightweightMergedBoundTypeArgument);
+          _typeParameterMapping_1.put(((JvmTypeParameter) ((JvmTypeParameter)type)), _lightweightMergedBoundTypeArgument);
           return result;
         }
       } finally {

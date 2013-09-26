@@ -101,21 +101,18 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     boolean _matched = false;
     if (!_matched) {
       if (expression instanceof XReturnExpression) {
-        final XReturnExpression _xReturnExpression = (XReturnExpression)expression;
         _matched=true;
         _switchResult = true;
       }
     }
     if (!_matched) {
       if (expression instanceof XThrowExpression) {
-        final XThrowExpression _xThrowExpression = (XThrowExpression)expression;
         _matched=true;
         _switchResult = true;
       }
     }
     if (!_matched) {
       if (expression instanceof XClosure) {
-        final XClosure _xClosure = (XClosure)expression;
         _matched=true;
         _switchResult = false;
       }
@@ -128,9 +125,8 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
           boolean _matched = false;
           if (!_matched) {
             if (content instanceof XExpression) {
-              final XExpression _xExpression = (XExpression)content;
               _matched=true;
-              boolean _hasReturnExpression = AbstractBatchReturnTypeTest.this.hasReturnExpression(_xExpression);
+              boolean _hasReturnExpression = AbstractBatchReturnTypeTest.this.hasReturnExpression(((XExpression)content));
               _switchResult = _hasReturnExpression;
             }
           }

@@ -324,9 +324,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     }
     if (!_matched) {
       if (ele instanceof Alternatives) {
-        final Alternatives _alternatives = (Alternatives)ele;
         _matched=true;
-        EList<AbstractElement> _elements = _alternatives.getElements();
+        EList<AbstractElement> _elements = ((Alternatives)ele).getElements();
         AbstractElement _head = IterableExtensions.<AbstractElement>head(_elements);
         String _defaultValue = this.defaultValue(_head, visited);
         _switchResult = _defaultValue;
@@ -334,9 +333,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     }
     if (!_matched) {
       if (ele instanceof Group) {
-        final Group _group = (Group)ele;
         _matched=true;
-        EList<AbstractElement> _elements = _group.getElements();
+        EList<AbstractElement> _elements = ((Group)ele).getElements();
         final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
           public String apply(final AbstractElement e) {
             String _defaultValue = AbstractSyntacticSequencer.this.defaultValue(e, visited);
@@ -350,17 +348,15 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     }
     if (!_matched) {
       if (ele instanceof Keyword) {
-        final Keyword _keyword = (Keyword)ele;
         _matched=true;
-        String _value = _keyword.getValue();
+        String _value = ((Keyword)ele).getValue();
         _switchResult = _value;
       }
     }
     if (!_matched) {
       if (ele instanceof RuleCall) {
-        final RuleCall _ruleCall = (RuleCall)ele;
         _matched=true;
-        AbstractRule _rule = _ruleCall.getRule();
+        AbstractRule _rule = ((RuleCall)ele).getRule();
         AbstractElement _alternatives = _rule.getAlternatives();
         String _defaultValue = this.defaultValue(_alternatives, visited);
         _switchResult = _defaultValue;
@@ -420,14 +416,13 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     boolean _matched = false;
     if (!_matched) {
       if (node instanceof ILeafNode) {
-        final ILeafNode _iLeafNode = (ILeafNode)node;
         boolean _or = false;
-        boolean _isHidden = _iLeafNode.isHidden();
+        boolean _isHidden = ((ILeafNode)node).isHidden();
         boolean _not = (!_isHidden);
         if (_not) {
           _or = true;
         } else {
-          String _text = _iLeafNode.getText();
+          String _text = ((ILeafNode)node).getText();
           String _trim = _text.trim();
           int _length = _trim.length();
           boolean _equals = (_length == 0);
@@ -435,16 +430,15 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         }
         if (_or) {
           _matched=true;
-          String _text_1 = _iLeafNode.getText();
+          String _text_1 = ((ILeafNode)node).getText();
           _switchResult = _text_1;
         }
       }
     }
     if (!_matched) {
       if (node instanceof ICompositeNode) {
-        final ICompositeNode _iCompositeNode = (ICompositeNode)node;
         _matched=true;
-        BidiIterable<INode> _children = _iCompositeNode.getChildren();
+        BidiIterable<INode> _children = ((ICompositeNode)node).getChildren();
         final Function1<INode,String> _function = new Function1<INode,String>() {
           public String apply(final INode it) {
             String _textWithoutComments = AbstractSyntacticSequencer.this.textWithoutComments(it);

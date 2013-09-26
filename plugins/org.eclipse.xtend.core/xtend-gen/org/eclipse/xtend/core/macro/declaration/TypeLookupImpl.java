@@ -35,9 +35,8 @@ public class TypeLookupImpl implements TypeLookup {
     boolean _matched = false;
     if (!_matched) {
       if (type instanceof MutableAnnotationTypeDeclaration) {
-        final MutableAnnotationTypeDeclaration _mutableAnnotationTypeDeclaration = (MutableAnnotationTypeDeclaration)type;
         _matched=true;
-        _switchResult = _mutableAnnotationTypeDeclaration;
+        _switchResult = ((MutableAnnotationTypeDeclaration)type);
       }
     }
     return _switchResult;
@@ -49,9 +48,8 @@ public class TypeLookupImpl implements TypeLookup {
     boolean _matched = false;
     if (!_matched) {
       if (type instanceof MutableClassDeclaration) {
-        final MutableClassDeclaration _mutableClassDeclaration = (MutableClassDeclaration)type;
         _matched=true;
-        _switchResult = _mutableClassDeclaration;
+        _switchResult = ((MutableClassDeclaration)type);
       }
     }
     return _switchResult;
@@ -63,9 +61,8 @@ public class TypeLookupImpl implements TypeLookup {
     boolean _matched = false;
     if (!_matched) {
       if (type instanceof MutableEnumerationTypeDeclaration) {
-        final MutableEnumerationTypeDeclaration _mutableEnumerationTypeDeclaration = (MutableEnumerationTypeDeclaration)type;
         _matched=true;
-        _switchResult = _mutableEnumerationTypeDeclaration;
+        _switchResult = ((MutableEnumerationTypeDeclaration)type);
       }
     }
     return _switchResult;
@@ -77,9 +74,8 @@ public class TypeLookupImpl implements TypeLookup {
     boolean _matched = false;
     if (!_matched) {
       if (type instanceof MutableInterfaceDeclaration) {
-        final MutableInterfaceDeclaration _mutableInterfaceDeclaration = (MutableInterfaceDeclaration)type;
         _matched=true;
-        _switchResult = _mutableInterfaceDeclaration;
+        _switchResult = ((MutableInterfaceDeclaration)type);
       }
     }
     return _switchResult;

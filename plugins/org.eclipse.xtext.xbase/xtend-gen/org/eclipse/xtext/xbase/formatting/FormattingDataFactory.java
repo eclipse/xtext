@@ -224,10 +224,9 @@ public class FormattingDataFactory {
         boolean _matched = false;
         if (!_matched) {
           if (leaf instanceof WhitespaceInfo) {
-            final WhitespaceInfo _whitespaceInfo = (WhitespaceInfo)leaf;
             _matched=true;
-            int _offset = _whitespaceInfo.getOffset();
-            int _length = _whitespaceInfo.getLength();
+            int _offset = ((WhitespaceInfo)leaf).getOffset();
+            int _length = ((WhitespaceInfo)leaf).getLength();
             int _xifexpression = (int) 0;
             if (isFirst) {
               _xifexpression = increaseIndentationChange;
@@ -252,7 +251,6 @@ public class FormattingDataFactory {
         }
         if (!_matched) {
           if (leaf instanceof CommentInfo) {
-            final CommentInfo _commentInfo = (CommentInfo)leaf;
             _matched=true;
           }
         }
@@ -272,13 +270,12 @@ public class FormattingDataFactory {
         boolean _matched = false;
         if (!_matched) {
           if (leaf instanceof WhitespaceInfo) {
-            final WhitespaceInfo _whitespaceInfo = (WhitespaceInfo)leaf;
             _matched=true;
             int _minus = (-1);
             int _multiply = (decreaseIndentationChange * _minus);
             final boolean equalIndentationChange = (increaseIndentationChange == _multiply);
             boolean _and = false;
-            CommentInfo _trailingComment = _whitespaceInfo.trailingComment();
+            CommentInfo _trailingComment = ((WhitespaceInfo)leaf).trailingComment();
             boolean _isTrailing = false;
             if (_trailingComment!=null) {
               _isTrailing=_trailingComment.isTrailing();
@@ -286,7 +283,7 @@ public class FormattingDataFactory {
             if (!_isTrailing) {
               _and = false;
             } else {
-              CommentInfo _trailingComment_1 = _whitespaceInfo.trailingComment();
+              CommentInfo _trailingComment_1 = ((WhitespaceInfo)leaf).trailingComment();
               boolean _isMultiline = false;
               if (_trailingComment_1!=null) {
                 _isMultiline=_trailingComment_1.isMultiline();
@@ -296,7 +293,7 @@ public class FormattingDataFactory {
             }
             if (_and) {
               String _xifexpression = null;
-              int _offset = _whitespaceInfo.getOffset();
+              int _offset = ((WhitespaceInfo)leaf).getOffset();
               boolean _equals = (_offset == 0);
               if (_equals) {
                 _xifexpression = "";
@@ -311,8 +308,8 @@ public class FormattingDataFactory {
                 _xifexpression = _xifexpression_1;
               }
               final String space = _xifexpression;
-              int _offset_1 = _whitespaceInfo.getOffset();
-              int _length = _whitespaceInfo.getLength();
+              int _offset_1 = ((WhitespaceInfo)leaf).getOffset();
+              int _length = ((WhitespaceInfo)leaf).getLength();
               RuntimeException _xifexpression_2 = null;
               if (trace) {
                 RuntimeException _runtimeException = new RuntimeException();
@@ -332,7 +329,7 @@ public class FormattingDataFactory {
                 if (!_lessThan) {
                   _and_2 = false;
                 } else {
-                  int _offset_2 = _whitespaceInfo.getOffset();
+                  int _offset_2 = ((WhitespaceInfo)leaf).getOffset();
                   boolean _greaterThan = (_offset_2 > 0);
                   _and_2 = (_lessThan && _greaterThan);
                 }
@@ -340,7 +337,7 @@ public class FormattingDataFactory {
                   _and_1 = false;
                 } else {
                   boolean _or = false;
-                  CommentInfo _leadingComment = _whitespaceInfo.leadingComment();
+                  CommentInfo _leadingComment = ((WhitespaceInfo)leaf).leadingComment();
                   boolean _isMultiline_1 = false;
                   if (_leadingComment!=null) {
                     _isMultiline_1=_leadingComment.isMultiline();
@@ -348,7 +345,7 @@ public class FormattingDataFactory {
                   if (_isMultiline_1) {
                     _or = true;
                   } else {
-                    CommentInfo _trailingComment_2 = _whitespaceInfo.trailingComment();
+                    CommentInfo _trailingComment_2 = ((WhitespaceInfo)leaf).trailingComment();
                     boolean _isMultiline_2 = false;
                     if (_trailingComment_2!=null) {
                       _isMultiline_2=_trailingComment_2.isMultiline();
@@ -360,7 +357,7 @@ public class FormattingDataFactory {
                 if (_and_1) {
                   newLines = 1;
                 }
-                CommentInfo _leadingComment_1 = _whitespaceInfo.leadingComment();
+                CommentInfo _leadingComment_1 = ((WhitespaceInfo)leaf).leadingComment();
                 boolean _endsWithNewLine = false;
                 if (_leadingComment_1!=null) {
                   _endsWithNewLine=_leadingComment_1.endsWithNewLine();
@@ -370,7 +367,7 @@ public class FormattingDataFactory {
                   newLines = _minus_1;
                 }
                 boolean _and_3 = false;
-                CommentInfo _leadingComment_2 = _whitespaceInfo.leadingComment();
+                CommentInfo _leadingComment_2 = ((WhitespaceInfo)leaf).leadingComment();
                 boolean _endsWithNewLine_1 = false;
                 if (_leadingComment_2!=null) {
                   _endsWithNewLine_1=_leadingComment_2.endsWithNewLine();
@@ -383,15 +380,15 @@ public class FormattingDataFactory {
                   _and_3 = (_not_2 && _equals_2);
                 }
                 if (_and_3) {
-                  int _offset_3 = _whitespaceInfo.getOffset();
-                  int _length_1 = _whitespaceInfo.getLength();
+                  int _offset_3 = ((WhitespaceInfo)leaf).getOffset();
+                  int _length_1 = ((WhitespaceInfo)leaf).getLength();
                   RuntimeException _xifexpression_3 = null;
                   if (trace) {
                     RuntimeException _runtimeException_1 = new RuntimeException();
                     _xifexpression_3 = _runtimeException_1;
                   }
                   String _xifexpression_4 = null;
-                  int _offset_4 = _whitespaceInfo.getOffset();
+                  int _offset_4 = ((WhitespaceInfo)leaf).getOffset();
                   boolean _equals_3 = (_offset_4 == 0);
                   if (_equals_3) {
                     _xifexpression_4 = "";
@@ -414,12 +411,12 @@ public class FormattingDataFactory {
                   } else {
                     List<LeafInfo> _leafs_1 = leafs.getLeafs();
                     LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs_1);
-                    boolean _notEquals = (!Objects.equal(_last, _whitespaceInfo));
+                    boolean _notEquals = (!Objects.equal(_last, leaf));
                     _and_4 = (equalIndentationChange && _notEquals);
                   }
                   if (_and_4) {
-                    int _offset_5 = _whitespaceInfo.getOffset();
-                    int _length_2 = _whitespaceInfo.getLength();
+                    int _offset_5 = ((WhitespaceInfo)leaf).getOffset();
+                    int _length_2 = ((WhitespaceInfo)leaf).getLength();
                     RuntimeException _xifexpression_6 = null;
                     if (trace) {
                       RuntimeException _runtimeException_2 = new RuntimeException();
@@ -428,8 +425,8 @@ public class FormattingDataFactory {
                     NewLineData _newLineData = new NewLineData(_offset_5, _length_2, increaseIndentationChange, decreaseIndentationChange, _xifexpression_6, Integer.valueOf(newLines));
                     result.add(_newLineData);
                   } else {
-                    int _offset_6 = _whitespaceInfo.getOffset();
-                    int _length_3 = _whitespaceInfo.getLength();
+                    int _offset_6 = ((WhitespaceInfo)leaf).getOffset();
+                    int _length_3 = ((WhitespaceInfo)leaf).getLength();
                     int _xifexpression_7 = (int) 0;
                     if (equalIndentationChange) {
                       _xifexpression_7 = 0;
@@ -454,7 +451,7 @@ public class FormattingDataFactory {
                 applied = true;
               } else {
                 int newLines_1 = 1;
-                CommentInfo _leadingComment_3 = _whitespaceInfo.leadingComment();
+                CommentInfo _leadingComment_3 = ((WhitespaceInfo)leaf).leadingComment();
                 boolean _endsWithNewLine_2 = false;
                 if (_leadingComment_3!=null) {
                   _endsWithNewLine_2=_leadingComment_3.endsWithNewLine();
@@ -469,12 +466,12 @@ public class FormattingDataFactory {
                 } else {
                   List<LeafInfo> _leafs_2 = leafs.getLeafs();
                   LeafInfo _last_1 = IterableExtensions.<LeafInfo>last(_leafs_2);
-                  boolean _notEquals_1 = (!Objects.equal(_last_1, _whitespaceInfo));
+                  boolean _notEquals_1 = (!Objects.equal(_last_1, leaf));
                   _and_5 = (equalIndentationChange && _notEquals_1);
                 }
                 if (_and_5) {
-                  int _offset_7 = _whitespaceInfo.getOffset();
-                  int _length_4 = _whitespaceInfo.getLength();
+                  int _offset_7 = ((WhitespaceInfo)leaf).getOffset();
+                  int _length_4 = ((WhitespaceInfo)leaf).getLength();
                   RuntimeException _xifexpression_10 = null;
                   if (trace) {
                     RuntimeException _runtimeException_4 = new RuntimeException();
@@ -483,8 +480,8 @@ public class FormattingDataFactory {
                   NewLineData _newLineData_2 = new NewLineData(_offset_7, _length_4, increaseIndentationChange, decreaseIndentationChange, _xifexpression_10, Integer.valueOf(newLines_1));
                   result.add(_newLineData_2);
                 } else {
-                  int _offset_8 = _whitespaceInfo.getOffset();
-                  int _length_5 = _whitespaceInfo.getLength();
+                  int _offset_8 = ((WhitespaceInfo)leaf).getOffset();
+                  int _length_5 = ((WhitespaceInfo)leaf).getLength();
                   RuntimeException _xifexpression_11 = null;
                   if (trace) {
                     RuntimeException _runtimeException_5 = new RuntimeException();
@@ -499,7 +496,6 @@ public class FormattingDataFactory {
         }
         if (!_matched) {
           if (leaf instanceof CommentInfo) {
-            final CommentInfo _commentInfo = (CommentInfo)leaf;
             _matched=true;
           }
         }

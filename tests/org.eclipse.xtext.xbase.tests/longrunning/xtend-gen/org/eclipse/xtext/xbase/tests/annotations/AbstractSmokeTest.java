@@ -72,41 +72,37 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
           boolean _matched = false;
           if (!_matched) {
             if (content instanceof XSwitchExpression) {
-              final XSwitchExpression _xSwitchExpression = (XSwitchExpression)content;
               _matched=true;
-              this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
-              String _localVarName = _xSwitchExpression.getLocalVarName();
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+              String _localVarName = ((XSwitchExpression)content).getLocalVarName();
               boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
               if (_notEquals_1) {
-                this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
+                this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
               }
             }
           }
           if (!_matched) {
             if (content instanceof XAbstractFeatureCall) {
-              final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)content;
               _matched=true;
-              this.assertExpressionTypeIsResolved(_xAbstractFeatureCall, resolvedTypes);
-              XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+              XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
               boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
               if (_notEquals_1) {
-                XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
+                XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
                 this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
               }
             }
           }
           if (!_matched) {
             if (content instanceof XExpression) {
-              final XExpression _xExpression = (XExpression)content;
               _matched=true;
-              this.assertExpressionTypeIsResolved(_xExpression, resolvedTypes);
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
             }
           }
           if (!_matched) {
             if (content instanceof JvmIdentifiableElement) {
-              final JvmIdentifiableElement _jvmIdentifiableElement = (JvmIdentifiableElement)content;
               _matched=true;
-              this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement, resolvedTypes);
+              this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
             }
           }
         }

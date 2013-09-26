@@ -103,13 +103,13 @@ public class TargetPaths {
   protected void traverseChildren(final Identifiable element, final TargetPathAdapter adapter, final String prefix, final String parentPath, final Function1<? super AbstractSection,? extends Boolean> predicate) {
     String thisPath = parentPath;
     if ((element instanceof AbstractSection)) {
-      final AbstractSection resolved = this._xdocExtensions.resolve(((AbstractSection) element));
+      final AbstractSection resolved = this._xdocExtensions.resolve(((AbstractSection) ((AbstractSection)element)));
       boolean _notEquals = (!Objects.equal(resolved, element));
       if (_notEquals) {
         this.traverseChildren(resolved, adapter, prefix, parentPath, predicate);
         return;
       }
-      Boolean _apply = predicate.apply(((AbstractSection) element));
+      Boolean _apply = predicate.apply(((AbstractSection) ((AbstractSection)element)));
       if ((_apply).booleanValue()) {
         String _xifexpression = null;
         List<AbstractSection> _targetFileRoots = adapter.getTargetFileRoots();
@@ -126,7 +126,7 @@ public class TargetPaths {
         }
         thisPath = _xifexpression;
         List<AbstractSection> _targetFileRoots_2 = adapter.getTargetFileRoots();
-        _targetFileRoots_2.add(((AbstractSection) element));
+        _targetFileRoots_2.add(((AbstractSection) ((AbstractSection)element)));
       }
     }
     Map<Identifiable,String> _targetPaths = adapter.getTargetPaths();

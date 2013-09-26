@@ -72,41 +72,37 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
         boolean _matched = false;
         if (!_matched) {
           if (content instanceof XSwitchExpression) {
-            final XSwitchExpression _xSwitchExpression = (XSwitchExpression)content;
             _matched=true;
-            this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
-            String _localVarName = _xSwitchExpression.getLocalVarName();
+            this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+            String _localVarName = ((XSwitchExpression)content).getLocalVarName();
             boolean _notEquals = (!Objects.equal(_localVarName, null));
             if (_notEquals) {
-              this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
+              this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
             }
           }
         }
         if (!_matched) {
           if (content instanceof XAbstractFeatureCall) {
-            final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)content;
             _matched=true;
-            this.assertExpressionTypeIsResolved(_xAbstractFeatureCall, resolvedTypes);
-            XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
+            this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+            XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
             boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
             if (_notEquals) {
-              XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
+              XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
               this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
             }
           }
         }
         if (!_matched) {
           if (content instanceof XExpression) {
-            final XExpression _xExpression = (XExpression)content;
             _matched=true;
-            this.assertExpressionTypeIsResolved(_xExpression, resolvedTypes);
+            this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
           }
         }
         if (!_matched) {
           if (content instanceof JvmIdentifiableElement) {
-            final JvmIdentifiableElement _jvmIdentifiableElement = (JvmIdentifiableElement)content;
             _matched=true;
-            this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement, resolvedTypes);
+            this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
           }
         }
       }
@@ -116,32 +112,30 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
         boolean _matched_1 = false;
         if (!_matched_1) {
           if (content_1 instanceof XConstructorCall) {
-            final XConstructorCall _xConstructorCall = (XConstructorCall)content_1;
             _matched_1=true;
-            Object _eGet = _xConstructorCall.eGet(Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+            Object _eGet = ((XConstructorCall)content_1).eGet(Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
             final InternalEObject constructor = ((InternalEObject) _eGet);
-            String _string_2 = _xConstructorCall.toString();
+            String _string_2 = ((XConstructorCall)content_1).toString();
             Assert.assertNotNull(_string_2, constructor);
-            String _string_3 = _xConstructorCall.toString();
+            String _string_3 = ((XConstructorCall)content_1).toString();
             boolean _eIsProxy = constructor.eIsProxy();
             Assert.assertFalse(_string_3, _eIsProxy);
           }
         }
         if (!_matched_1) {
           if (content_1 instanceof XAbstractFeatureCall) {
-            final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)content_1;
             _matched_1=true;
-            Object _eGet = _xAbstractFeatureCall.eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+            Object _eGet = ((XAbstractFeatureCall)content_1).eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
             final InternalEObject feature = ((InternalEObject) _eGet);
-            String _string_2 = _xAbstractFeatureCall.toString();
+            String _string_2 = ((XAbstractFeatureCall)content_1).toString();
             Assert.assertNotNull(_string_2, feature);
-            String _string_3 = _xAbstractFeatureCall.toString();
+            String _string_3 = ((XAbstractFeatureCall)content_1).toString();
             boolean _eIsProxy = feature.eIsProxy();
             Assert.assertFalse(_string_3, _eIsProxy);
-            XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
+            XExpression _implicitReceiver = ((XAbstractFeatureCall)content_1).getImplicitReceiver();
             boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
             if (_notEquals) {
-              XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
+              XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content_1).getImplicitReceiver();
               Object _eGet_1 = _implicitReceiver_1.eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
               final InternalEObject implicitFeature = ((InternalEObject) _eGet_1);
               String _string_4 = implicitFeature.toString();

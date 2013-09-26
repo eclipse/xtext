@@ -66,9 +66,8 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
           boolean _matched = false;
           if (!_matched) {
             if (it instanceof XClosure) {
-              final XClosure _xClosure = (XClosure)it;
               _matched=true;
-              JvmFormalParameter _implicitParameter = _xClosure.getImplicitParameter();
+              JvmFormalParameter _implicitParameter = ((XClosure)it).getImplicitParameter();
               _switchResult = _implicitParameter;
             }
           }
@@ -91,22 +90,19 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
             boolean _matched = false;
             if (!_matched) {
               if (it instanceof XVariableDeclaration) {
-                final XVariableDeclaration _xVariableDeclaration = (XVariableDeclaration)it;
                 _matched=true;
                 _switchResult = true;
               }
             }
             if (!_matched) {
               if (it instanceof JvmFormalParameter) {
-                final JvmFormalParameter _jvmFormalParameter = (JvmFormalParameter)it;
                 _matched=true;
                 _switchResult = true;
               }
             }
             if (!_matched) {
               if (it instanceof XSwitchExpression) {
-                final XSwitchExpression _xSwitchExpression = (XSwitchExpression)it;
-                String _localVarName = _xSwitchExpression.getLocalVarName();
+                String _localVarName = ((XSwitchExpression)it).getLocalVarName();
                 boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
                 if (_notEquals_1) {
                   _matched=true;

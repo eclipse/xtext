@@ -77,7 +77,7 @@ public class FeatureCallRequest extends AbstractFeatureCallRequest {
     boolean _while = _and;
     while (_while) {
       if ((context instanceof JvmTypeParameterDeclarator)) {
-        result = ((JvmTypeParameterDeclarator) context);
+        result = ((JvmTypeParameterDeclarator) ((JvmTypeParameterDeclarator)context));
       } else {
         ILogicalContainerProvider _contextProvider = this.getContextProvider();
         final JvmIdentifiableElement logicalContainer = _contextProvider.getLogicalContainer(context);
@@ -114,9 +114,8 @@ public class FeatureCallRequest extends AbstractFeatureCallRequest {
     boolean _matched = false;
     if (!_matched) {
       if (f instanceof JvmOperation) {
-        final JvmOperation _jvmOperation = (JvmOperation)f;
         _matched=true;
-        JvmTypeReference _returnType = _jvmOperation.getReturnType();
+        JvmTypeReference _returnType = ((JvmOperation)f).getReturnType();
         _switchResult = _returnType;
       }
     }

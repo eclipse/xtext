@@ -77,22 +77,19 @@ public class ProcessorInstanceForJvmTypeProvider {
     boolean _matched = false;
     if (!_matched) {
       if (resourceSet instanceof XtextResourceSet) {
-        final XtextResourceSet _xtextResourceSet = (XtextResourceSet)resourceSet;
         _matched=true;
-        final Object classLoaderCtx = _xtextResourceSet.getClasspathURIContext();
+        final Object classLoaderCtx = ((XtextResourceSet)resourceSet).getClasspathURIContext();
         boolean _matched_1 = false;
         if (!_matched_1) {
           if (classLoaderCtx instanceof ClassLoader) {
-            final ClassLoader _classLoader = (ClassLoader)classLoaderCtx;
             _matched_1=true;
-            return _classLoader;
+            return ((ClassLoader)classLoaderCtx);
           }
         }
         if (!_matched_1) {
           if (classLoaderCtx instanceof Class) {
-            final Class<?> _class = (Class<?>)classLoaderCtx;
             _matched_1=true;
-            return _class.getClassLoader();
+            return ((Class<? extends Object>)classLoaderCtx).getClassLoader();
           }
         }
       }

@@ -91,7 +91,7 @@ public class MemberFromSuperImplementor {
             for (final JvmTypeConstraint constraint : _constraints) {
               if ((constraint instanceof JvmUpperBound)) {
                 final JvmUpperBound upperBound = MemberFromSuperImplementor.this.typesFactory.createJvmUpperBound();
-                JvmTypeReference _typeReference = constraint.getTypeReference();
+                JvmTypeReference _typeReference = ((JvmUpperBound)constraint).getTypeReference();
                 LightweightTypeReference _substitute = substitutor.substitute(_typeReference);
                 JvmTypeReference _typeReference_1 = _substitute.toTypeReference();
                 upperBound.setTypeReference(_typeReference_1);
@@ -100,7 +100,7 @@ public class MemberFromSuperImplementor {
               } else {
                 if ((constraint instanceof JvmLowerBound)) {
                   final JvmLowerBound upperBound_1 = MemberFromSuperImplementor.this.typesFactory.createJvmLowerBound();
-                  JvmTypeReference _typeReference_2 = constraint.getTypeReference();
+                  JvmTypeReference _typeReference_2 = ((JvmLowerBound)constraint).getTypeReference();
                   LightweightTypeReference _substitute_1 = substitutor.substitute(_typeReference_2);
                   JvmTypeReference _typeReference_3 = _substitute_1.toTypeReference();
                   upperBound_1.setTypeReference(_typeReference_3);
@@ -237,7 +237,7 @@ public class MemberFromSuperImplementor {
       ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(owner, jvmOverrider);
       final ParameterizedTypeReference lightweightOverrider = _parameterizedTypeReference;
       if ((jvmOverrider instanceof JvmGenericType)) {
-        EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) jvmOverrider).getTypeParameters();
+        EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) ((JvmGenericType)jvmOverrider)).getTypeParameters();
         final Procedure1<JvmTypeParameter> _function = new Procedure1<JvmTypeParameter>() {
           public void apply(final JvmTypeParameter it) {
             ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(owner, it);

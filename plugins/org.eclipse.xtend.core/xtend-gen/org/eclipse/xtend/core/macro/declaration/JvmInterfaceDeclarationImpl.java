@@ -70,11 +70,10 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
       boolean _matched = false;
       if (!_matched) {
         if (typeRef instanceof TypeReferenceImpl) {
-          final TypeReferenceImpl _typeReferenceImpl = (TypeReferenceImpl)typeRef;
           _matched=true;
           JvmGenericType _delegate_1 = this.getDelegate();
           EList<JvmTypeReference> _superTypes_1 = _delegate_1.getSuperTypes();
-          LightweightTypeReference _delegate_2 = _typeReferenceImpl.getDelegate();
+          LightweightTypeReference _delegate_2 = ((TypeReferenceImpl)typeRef).getDelegate();
           JvmTypeReference _javaCompliantTypeReference = _delegate_2.toJavaCompliantTypeReference();
           _superTypes_1.add(_javaCompliantTypeReference);
         }

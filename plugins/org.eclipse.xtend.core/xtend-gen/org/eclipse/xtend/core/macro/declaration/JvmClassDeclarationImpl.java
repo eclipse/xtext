@@ -79,8 +79,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
         boolean _matched = false;
         if (!_matched) {
           if (it_1 instanceof JvmGenericType) {
-            final JvmGenericType _jvmGenericType = (JvmGenericType)it_1;
-            boolean _isInterface = _jvmGenericType.isInterface();
+            boolean _isInterface = ((JvmGenericType)it_1).isInterface();
             boolean _not = (!_isInterface);
             if (_not) {
               _matched=true;
@@ -162,9 +161,8 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     boolean _matched = false;
     if (!_matched) {
       if (superclass instanceof TypeReferenceImpl) {
-        final TypeReferenceImpl _typeReferenceImpl = (TypeReferenceImpl)superclass;
         _matched=true;
-        LightweightTypeReference _delegate = _typeReferenceImpl.getDelegate();
+        LightweightTypeReference _delegate = ((TypeReferenceImpl)superclass).getDelegate();
         JvmTypeReference _javaCompliantTypeReference = _delegate.toJavaCompliantTypeReference();
         _switchResult = _javaCompliantTypeReference;
       }

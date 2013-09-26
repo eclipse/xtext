@@ -70,17 +70,15 @@ public class CodeBuilderQuickfix {
       boolean _matched = false;
       if (!_matched) {
         if (builder instanceof Xtend) {
-          final Xtend _xtend = (Xtend)builder;
           _matched=true;
-          IModification _xtendModification = this.getXtendModification(_xtend);
+          IModification _xtendModification = this.getXtendModification(((Xtend)builder));
           _switchResult = _xtendModification;
         }
       }
       if (!_matched) {
         if (builder instanceof Java) {
-          final Java _java = (Java)builder;
           _matched=true;
-          IModification _javaModification = this.getJavaModification(_java);
+          IModification _javaModification = this.getJavaModification(((Java)builder));
           _switchResult = _javaModification;
         }
       }
@@ -186,7 +184,6 @@ public class CodeBuilderQuickfix {
         boolean _matched = false;
         if (!_matched) {
           if (builder instanceof JavaFieldBuilder) {
-            final JavaFieldBuilder _javaFieldBuilder = (JavaFieldBuilder)builder;
             _matched=true;
             String _string = content.toString();
             NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -196,7 +193,6 @@ public class CodeBuilderQuickfix {
         }
         if (!_matched) {
           if (builder instanceof JavaConstructorBuilder) {
-            final JavaConstructorBuilder _javaConstructorBuilder = (JavaConstructorBuilder)builder;
             _matched=true;
             String _string = content.toString();
             NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -206,7 +202,6 @@ public class CodeBuilderQuickfix {
         }
         if (!_matched) {
           if (builder instanceof JavaMethodBuilder) {
-            final JavaMethodBuilder _javaMethodBuilder = (JavaMethodBuilder)builder;
             _matched=true;
             String _string = content.toString();
             NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -217,7 +212,7 @@ public class CodeBuilderQuickfix {
         if (!_matched) {
           _switchResult = null;
         }
-        final Object element = _switchResult;
+        final Object element = ((Object)_switchResult);
         boolean _notEquals = (!Objects.equal(((IAnnotatable)element), null));
         if (_notEquals) {
           JdtHyperlink _jdtHyperlink = new JdtHyperlink();

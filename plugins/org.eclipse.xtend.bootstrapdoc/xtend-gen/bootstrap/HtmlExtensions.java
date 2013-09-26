@@ -86,25 +86,22 @@ public class HtmlExtensions {
       boolean _matched = false;
       if (!_matched) {
         if (id instanceof ChapterRef) {
-          final ChapterRef _chapterRef = (ChapterRef)id;
           _matched=true;
-          Chapter _chapter = _chapterRef.getChapter();
+          Chapter _chapter = ((ChapterRef)id).getChapter();
           _switchResult = _chapter;
         }
       }
       if (!_matched) {
         if (id instanceof SectionRef) {
-          final SectionRef _sectionRef = (SectionRef)id;
           _matched=true;
-          Section _section = _sectionRef.getSection();
+          Section _section = ((SectionRef)id).getSection();
           _switchResult = _section;
         }
       }
       if (!_matched) {
         if (id instanceof Section2Ref) {
-          final Section2Ref _section2Ref = (Section2Ref)id;
           _matched=true;
-          Section2 _section2 = _section2Ref.getSection2();
+          Section2 _section2 = ((Section2Ref)id).getSection2();
           _switchResult = _section2;
         }
       }
@@ -491,9 +488,8 @@ public class HtmlExtensions {
           boolean _matched = false;
           if (!_matched) {
             if (x instanceof TextOrMarkup) {
-              final TextOrMarkup _textOrMarkup = (TextOrMarkup)x;
               _matched=true;
-              EList<EObject> _contents_1 = _textOrMarkup.getContents();
+              EList<EObject> _contents_1 = ((TextOrMarkup)x).getContents();
               int _size = _contents_1.size();
               boolean _equals_1 = (_size == 1);
               _switchResult = _equals_1;

@@ -164,36 +164,32 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       boolean _matched = false;
       if (!_matched) {
         if (typeDeclaration instanceof JvmTypeDeclarationImpl) {
-          final JvmTypeDeclarationImpl<? extends JvmDeclaredType> _jvmTypeDeclarationImpl = (JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration;
           _matched=true;
-          JvmDeclaredType _delegate = _jvmTypeDeclarationImpl.getDelegate();
+          JvmDeclaredType _delegate = ((JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration).getDelegate();
           _switchResult = _delegate;
         }
       }
       if (!_matched) {
         if (typeDeclaration instanceof XtendTypeDeclarationImpl) {
-          final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xtendTypeDeclarationImpl = (XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)typeDeclaration;
           _matched=true;
           IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
-          XtendTypeDeclaration _delegate = _xtendTypeDeclarationImpl.getDelegate();
+          XtendTypeDeclaration _delegate = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)typeDeclaration).getDelegate();
           JvmDeclaredType _inferredType = _jvmAssociations.getInferredType(_delegate);
           _switchResult = _inferredType;
         }
       }
       if (!_matched) {
         if (typeDeclaration instanceof JvmTypeParameterDeclarationImpl) {
-          final JvmTypeParameterDeclarationImpl _jvmTypeParameterDeclarationImpl = (JvmTypeParameterDeclarationImpl)typeDeclaration;
           _matched=true;
-          JvmTypeParameter _delegate = _jvmTypeParameterDeclarationImpl.getDelegate();
+          JvmTypeParameter _delegate = ((JvmTypeParameterDeclarationImpl)typeDeclaration).getDelegate();
           _switchResult = _delegate;
         }
       }
       if (!_matched) {
         if (typeDeclaration instanceof PrimitiveTypeImpl) {
-          final PrimitiveTypeImpl _primitiveTypeImpl = (PrimitiveTypeImpl)typeDeclaration;
           _matched=true;
           TypeReference _switchResult_1 = null;
-          Kind _kind = _primitiveTypeImpl.getKind();
+          Kind _kind = ((PrimitiveTypeImpl)typeDeclaration).getKind();
           final Kind _switchValue = _kind;
           boolean _matched_1 = false;
           if (!_matched_1) {
@@ -257,7 +253,6 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       }
       if (!_matched) {
         if (typeDeclaration instanceof VoidTypeImpl) {
-          final VoidTypeImpl _voidTypeImpl = (VoidTypeImpl)typeDeclaration;
           _matched=true;
           return this.getPrimitiveVoid();
         }

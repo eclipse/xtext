@@ -63,7 +63,6 @@ public class AnnotationProcessor {
         boolean _matched = false;
         if (!_matched) {
           if (processor instanceof RegisterGlobalsParticipant) {
-            final RegisterGlobalsParticipant<NamedElement> _registerGlobalsParticipant = (RegisterGlobalsParticipant<NamedElement>)processor;
             _matched=true;
             Object _xblockexpression_1 = null;
             {
@@ -82,7 +81,7 @@ public class AnnotationProcessor {
                     }
                   };
                   List<MemberDeclaration> _map = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function);
-                  _registerGlobalsParticipant.doRegisterGlobals(_map, registerGlobalsCtx);
+                  ((RegisterGlobalsParticipant<NamedElement>)processor).doRegisterGlobals(_map, registerGlobalsCtx);
                 }
               };
               Object _runWithCancelIndiciator = this.runWithCancelIndiciator(ctx, monitor, _function);
@@ -113,7 +112,6 @@ public class AnnotationProcessor {
         boolean _matched = false;
         if (!_matched) {
           if (processor instanceof TransformationParticipant) {
-            final TransformationParticipant<MutableNamedElement> _transformationParticipant = (TransformationParticipant<MutableNamedElement>)processor;
             _matched=true;
             Object _xblockexpression_1 = null;
             {
@@ -129,19 +127,17 @@ public class AnnotationProcessor {
                       boolean _matched = false;
                       if (!_matched) {
                         if (it instanceof XtendMember) {
-                          final XtendMember _xtendMember = (XtendMember)it;
                           _matched=true;
                           CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(_xtendMember);
+                          MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
                           _switchResult = _xtendMemberDeclaration;
                         }
                       }
                       if (!_matched) {
                         if (it instanceof XtendParameter) {
-                          final XtendParameter _xtendParameter = (XtendParameter)it;
                           _matched=true;
                           CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(_xtendParameter);
+                          XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
                           _switchResult = _xtendParameterDeclaration;
                         }
                       }
@@ -150,7 +146,7 @@ public class AnnotationProcessor {
                     }
                   };
                   final List<MutableNamedElement> map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
-                  _transformationParticipant.doTransform(map, modifyCtx);
+                  ((TransformationParticipant<MutableNamedElement>)processor).doTransform(map, modifyCtx);
                 }
               };
               Object _runWithCancelIndiciator = this.runWithCancelIndiciator(ctx, monitor, _function);

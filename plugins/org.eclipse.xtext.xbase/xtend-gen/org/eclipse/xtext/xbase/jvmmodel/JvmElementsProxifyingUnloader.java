@@ -22,9 +22,8 @@ public class JvmElementsProxifyingUnloader implements IReferableElementsUnloader
     boolean _matched = false;
     if (!_matched) {
       if (root instanceof JvmMember) {
-        final JvmMember _jvmMember = (JvmMember)root;
         _matched=true;
-        this.unloadRecursively(_jvmMember);
+        this.unloadRecursively(((JvmIdentifiableElement)root));
       }
     }
   }
@@ -33,18 +32,16 @@ public class JvmElementsProxifyingUnloader implements IReferableElementsUnloader
     boolean _matched = false;
     if (!_matched) {
       if (element instanceof JvmDeclaredType) {
-        final JvmDeclaredType _jvmDeclaredType = (JvmDeclaredType)element;
         _matched=true;
-        EList<JvmMember> _members = _jvmDeclaredType.getMembers();
+        EList<JvmMember> _members = ((JvmDeclaredType)element).getMembers();
         for (final JvmMember child : _members) {
           this.unloadRecursively(child);
         }
         boolean _matched_1 = false;
         if (!_matched_1) {
-          if (_jvmDeclaredType instanceof JvmGenericType) {
-            final JvmGenericType _jvmGenericType = (JvmGenericType)_jvmDeclaredType;
+          if (element instanceof JvmGenericType) {
             _matched_1=true;
-            EList<JvmTypeParameter> _typeParameters = _jvmGenericType.getTypeParameters();
+            EList<JvmTypeParameter> _typeParameters = ((JvmGenericType)element).getTypeParameters();
             for (final JvmTypeParameter child_1 : _typeParameters) {
               this.unloadRecursively(child_1);
             }
@@ -54,13 +51,12 @@ public class JvmElementsProxifyingUnloader implements IReferableElementsUnloader
     }
     if (!_matched) {
       if (element instanceof JvmExecutable) {
-        final JvmExecutable _jvmExecutable = (JvmExecutable)element;
         _matched=true;
-        EList<JvmFormalParameter> _parameters = _jvmExecutable.getParameters();
+        EList<JvmFormalParameter> _parameters = ((JvmExecutable)element).getParameters();
         for (final JvmFormalParameter child : _parameters) {
           this.unloadRecursively(child);
         }
-        EList<JvmTypeParameter> _typeParameters = _jvmExecutable.getTypeParameters();
+        EList<JvmTypeParameter> _typeParameters = ((JvmExecutable)element).getTypeParameters();
         for (final JvmTypeParameter child_1 : _typeParameters) {
           this.unloadRecursively(child_1);
         }

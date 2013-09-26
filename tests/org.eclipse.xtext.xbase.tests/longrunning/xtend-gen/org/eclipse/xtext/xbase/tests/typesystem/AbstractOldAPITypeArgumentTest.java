@@ -53,16 +53,14 @@ public abstract class AbstractOldAPITypeArgumentTest extends AbstractTypeArgumen
     boolean _matched = false;
     if (!_matched) {
       if (expression instanceof XAbstractFeatureCall) {
-        final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)expression;
         _matched=true;
-        this.hasTypeArguments(_xAbstractFeatureCall, typeArguments);
+        this.hasTypeArguments(((XAbstractFeatureCall)expression), typeArguments);
       }
     }
     if (!_matched) {
       if (expression instanceof XConstructorCall) {
-        final XConstructorCall _xConstructorCall = (XConstructorCall)expression;
         _matched=true;
-        this.hasTypeArguments(_xConstructorCall, typeArguments);
+        this.hasTypeArguments(((XConstructorCall)expression), typeArguments);
       }
     }
     if (!_matched) {

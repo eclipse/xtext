@@ -215,17 +215,15 @@ public class ErrorSafeExtensions {
       boolean _matched = false;
       if (!_matched) {
         if (typeRef instanceof JvmSpecializedTypeReference) {
-          final JvmSpecializedTypeReference _jvmSpecializedTypeReference = (JvmSpecializedTypeReference)typeRef;
           _matched=true;
-          JvmTypeReference _equivalent = _jvmSpecializedTypeReference.getEquivalent();
+          JvmTypeReference _equivalent = ((JvmSpecializedTypeReference)typeRef).getEquivalent();
           this.serializeSafely(_equivalent, surrogateType, appendable);
         }
       }
       if (!_matched) {
         if (typeRef instanceof JvmUnknownTypeReference) {
-          final JvmUnknownTypeReference _jvmUnknownTypeReference = (JvmUnknownTypeReference)typeRef;
           _matched=true;
-          String _qualifiedName = _jvmUnknownTypeReference.getQualifiedName();
+          String _qualifiedName = ((JvmUnknownTypeReference)typeRef).getQualifiedName();
           appendable.append(_qualifiedName);
         }
       }

@@ -74,9 +74,8 @@ public class IndexingOwnedConverter extends OwnedConverter {
       boolean _matched = false;
       if (!_matched) {
         if (componentType instanceof JvmComponentType) {
-          final JvmComponentType _jvmComponentType = (JvmComponentType)componentType;
           _matched=true;
-          JvmArrayType _arrayType = _jvmComponentType.getArrayType();
+          JvmArrayType _arrayType = ((JvmComponentType)componentType).getArrayType();
           _switchResult = _arrayType;
         }
       }
@@ -141,23 +140,21 @@ public class IndexingOwnedConverter extends OwnedConverter {
     boolean _matched = false;
     if (!_matched) {
       if (proxy instanceof EObject) {
-        final EObject _eObject = (EObject)proxy;
-        boolean _eIsProxy = _eObject.eIsProxy();
+        boolean _eIsProxy = ((EObject)proxy).eIsProxy();
         if (_eIsProxy) {
           _matched=true;
-          final URI uri = ((InternalEObject) _eObject).eProxyURI();
+          final URI uri = ((InternalEObject) ((InternalEObject)proxy)).eProxyURI();
           Resource _eResource = it.eResource();
           ResourceSet _resourceSet = _eResource.getResourceSet();
-          EObject _eObject_1 = _resourceSet.getEObject(uri, true);
-          return ((JvmType) _eObject_1);
+          EObject _eObject = _resourceSet.getEObject(uri, true);
+          return ((JvmType) _eObject);
         }
       }
     }
     if (!_matched) {
       if (proxy instanceof JvmType) {
-        final JvmType _jvmType = (JvmType)proxy;
         _matched=true;
-        _switchResult = _jvmType;
+        _switchResult = ((JvmType)proxy);
       }
     }
     return _switchResult;

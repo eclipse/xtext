@@ -655,18 +655,16 @@ public class JvmModelGenerator implements IGenerator {
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof JvmAnnotationType) {
-        final JvmAnnotationType _jvmAnnotationType = (JvmAnnotationType)it;
         _matched=true;
         _switchResult = "java.lang.Annotation";
       }
     }
     if (!_matched) {
       if (it instanceof JvmEnumerationType) {
-        final JvmEnumerationType _jvmEnumerationType = (JvmEnumerationType)it;
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("java.lang.Enum<");
-        String _identifier = _jvmEnumerationType.getIdentifier();
+        String _identifier = ((JvmEnumerationType)it).getIdentifier();
         _builder.append(_identifier, "");
         _builder.append(">");
         String _string = _builder.toString();
@@ -1123,17 +1121,15 @@ public class JvmModelGenerator implements IGenerator {
           boolean _matched = false;
           if (!_matched) {
             if (op instanceof JvmOperation) {
-              final JvmOperation _jvmOperation = (JvmOperation)op;
               _matched=true;
-              JvmTypeReference _returnType = _jvmOperation.getReturnType();
+              JvmTypeReference _returnType = ((JvmOperation)op).getReturnType();
               _switchResult = _returnType;
             }
           }
           if (!_matched) {
             if (op instanceof JvmConstructor) {
-              final JvmConstructor _jvmConstructor = (JvmConstructor)op;
               _matched=true;
-              JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, _jvmConstructor);
+              JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, op);
               _switchResult = _typeForName;
             }
           }
@@ -1186,7 +1182,7 @@ public class JvmModelGenerator implements IGenerator {
           ITreeAppendable _append_2 = _increaseIndentation_1.append("{");
           _append_2.newLine();
           appendable.append("throw new UnsupportedOperationException(\"");
-          String _simpleName = op.getSimpleName();
+          String _simpleName = ((JvmOperation)op).getSimpleName();
           appendable.append(_simpleName);
           appendable.append(" is not implemented\");");
           ITreeAppendable _decreaseIndentation_2 = appendable.decreaseIndentation();
@@ -1774,7 +1770,7 @@ public class JvmModelGenerator implements IGenerator {
     } else {
       JvmGenericType _xifexpression_1 = null;
       if ((context instanceof JvmGenericType)) {
-        _xifexpression_1 = ((JvmGenericType) context);
+        _xifexpression_1 = ((JvmGenericType) ((JvmGenericType)context));
       } else {
         EObject _eContainer = context.eContainer();
         JvmGenericType _containerType = this.containerType(_eContainer);

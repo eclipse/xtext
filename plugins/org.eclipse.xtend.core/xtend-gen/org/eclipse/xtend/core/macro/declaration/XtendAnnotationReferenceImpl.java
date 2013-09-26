@@ -21,6 +21,7 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XExpression;
@@ -39,10 +40,9 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     boolean _matched = false;
     if (!_matched) {
       if (type instanceof JvmAnnotationType) {
-        final JvmAnnotationType _jvmAnnotationType = (JvmAnnotationType)type;
         _matched=true;
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_jvmAnnotationType);
+        MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(((JvmDeclaredType)type));
         _switchResult = ((AnnotationTypeDeclaration) _typeDeclaration);
       }
     }
@@ -69,24 +69,22 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       boolean _matched = false;
       if (!_matched) {
         if (proxy instanceof EObject) {
-          final EObject _eObject = (EObject)proxy;
-          boolean _eIsProxy = _eObject.eIsProxy();
+          boolean _eIsProxy = ((EObject)proxy).eIsProxy();
           if (_eIsProxy) {
             _matched=true;
-            final URI uri = ((InternalEObject) _eObject).eProxyURI();
+            final URI uri = ((InternalEObject) ((InternalEObject)proxy)).eProxyURI();
             XAnnotation _delegate_2 = this.getDelegate();
             Resource _eResource = _delegate_2.eResource();
             ResourceSet _resourceSet = _eResource.getResourceSet();
-            EObject _eObject_1 = _resourceSet.getEObject(uri, true);
-            return ((JvmType) _eObject_1);
+            EObject _eObject = _resourceSet.getEObject(uri, true);
+            return ((JvmType) _eObject);
           }
         }
       }
       if (!_matched) {
         if (proxy instanceof JvmType) {
-          final JvmType _jvmType = (JvmType)proxy;
           _matched=true;
-          _switchResult = _jvmType;
+          _switchResult = ((JvmType)proxy);
         }
       }
       _xblockexpression = (_switchResult);

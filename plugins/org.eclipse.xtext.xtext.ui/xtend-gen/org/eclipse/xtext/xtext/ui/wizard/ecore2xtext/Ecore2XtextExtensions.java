@@ -789,15 +789,14 @@ public class Ecore2XtextExtensions {
     boolean _matched = false;
     if (!_matched) {
       if (eClassifier instanceof EClass) {
-        final EClass _eClass = (EClass)eClassifier;
         _matched=true;
         boolean _and = false;
-        boolean _isAbstract = _eClass.isAbstract();
+        boolean _isAbstract = ((EClass)eClassifier).isAbstract();
         boolean _not = (!_isAbstract);
         if (!_not) {
           _and = false;
         } else {
-          boolean _isInterface = _eClass.isInterface();
+          boolean _isInterface = ((EClass)eClassifier).isInterface();
           boolean _not_1 = (!_isInterface);
           _and = (_not && _not_1);
         }
@@ -815,9 +814,8 @@ public class Ecore2XtextExtensions {
     boolean _matched = false;
     if (!_matched) {
       if (eClassifier instanceof EClass) {
-        final EClass _eClass = (EClass)eClassifier;
         _matched=true;
-        Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(_eClass);
+        Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(((EClass)eClassifier));
         final Function1<EClass,Boolean> _function = new Function1<EClass,Boolean>() {
           public Boolean apply(final EClass c) {
             boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(c);
@@ -846,16 +844,14 @@ public class Ecore2XtextExtensions {
     boolean _matched = false;
     if (!_matched) {
       if (eStrFeat instanceof EAttribute) {
-        final EAttribute _eAttribute = (EAttribute)eStrFeat;
         _matched=true;
         _switchResult = true;
       }
     }
     if (!_matched) {
       if (eStrFeat instanceof EReference) {
-        final EReference _eReference = (EReference)eStrFeat;
         _matched=true;
-        boolean _isContainment = _eReference.isContainment();
+        boolean _isContainment = ((EReference)eStrFeat).isContainment();
         _switchResult = _isContainment;
       }
     }

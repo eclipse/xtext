@@ -50,17 +50,15 @@ public class XdocExtensions {
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof Document) {
-        final Document _document = (Document)it;
         _matched=true;
-        Iterable<Chapter> _allChapters = this.getAllChapters(_document);
+        Iterable<Chapter> _allChapters = this.getAllChapters(((Document)it));
         _switchResult = _allChapters;
       }
     }
     if (!_matched) {
       if (it instanceof Part) {
-        final Part _part = (Part)it;
         _matched=true;
-        EList<Chapter> _chapters = _part.getChapters();
+        EList<Chapter> _chapters = ((Part)it).getChapters();
         final Function1<Chapter,AbstractSection> _function = new Function1<Chapter,AbstractSection>() {
           public AbstractSection apply(final Chapter it) {
             AbstractSection _resolve = XdocExtensions.this.resolve(it);
@@ -73,9 +71,8 @@ public class XdocExtensions {
     }
     if (!_matched) {
       if (it instanceof Chapter) {
-        final Chapter _chapter = (Chapter)it;
         _matched=true;
-        EList<Section> _subSections = _chapter.getSubSections();
+        EList<Section> _subSections = ((Chapter)it).getSubSections();
         final Function1<Section,AbstractSection> _function = new Function1<Section,AbstractSection>() {
           public AbstractSection apply(final Section it) {
             AbstractSection _resolve = XdocExtensions.this.resolve(it);
@@ -88,9 +85,8 @@ public class XdocExtensions {
     }
     if (!_matched) {
       if (it instanceof Section) {
-        final Section _section = (Section)it;
         _matched=true;
-        EList<Section2> _subSections = _section.getSubSections();
+        EList<Section2> _subSections = ((Section)it).getSubSections();
         final Function1<Section2,AbstractSection> _function = new Function1<Section2,AbstractSection>() {
           public AbstractSection apply(final Section2 it) {
             AbstractSection _resolve = XdocExtensions.this.resolve(it);
@@ -103,9 +99,8 @@ public class XdocExtensions {
     }
     if (!_matched) {
       if (it instanceof Section2) {
-        final Section2 _section2 = (Section2)it;
         _matched=true;
-        EList<Section3> _subSections = _section2.getSubSections();
+        EList<Section3> _subSections = ((Section2)it).getSubSections();
         final Function1<Section3,AbstractSection> _function = new Function1<Section3,AbstractSection>() {
           public AbstractSection apply(final Section3 it) {
             AbstractSection _resolve = XdocExtensions.this.resolve(it);
@@ -118,9 +113,8 @@ public class XdocExtensions {
     }
     if (!_matched) {
       if (it instanceof Section3) {
-        final Section3 _section3 = (Section3)it;
         _matched=true;
-        EList<Section4> _subSections = _section3.getSubSections();
+        EList<Section4> _subSections = ((Section3)it).getSubSections();
         final Function1<Section4,AbstractSection> _function = new Function1<Section4,AbstractSection>() {
           public AbstractSection apply(final Section4 it) {
             AbstractSection _resolve = XdocExtensions.this.resolve(it);
@@ -133,7 +127,6 @@ public class XdocExtensions {
     }
     if (!_matched) {
       if (it instanceof Section4) {
-        final Section4 _section4 = (Section4)it;
         _matched=true;
         List<AbstractSection> _emptyList = CollectionLiterals.<AbstractSection>emptyList();
         _switchResult = _emptyList;
@@ -147,25 +140,22 @@ public class XdocExtensions {
     boolean _matched = false;
     if (!_matched) {
       if (section instanceof ChapterRef) {
-        final ChapterRef _chapterRef = (ChapterRef)section;
         _matched=true;
-        Chapter _chapter = _chapterRef.getChapter();
+        Chapter _chapter = ((ChapterRef)section).getChapter();
         _switchResult = _chapter;
       }
     }
     if (!_matched) {
       if (section instanceof SectionRef) {
-        final SectionRef _sectionRef = (SectionRef)section;
         _matched=true;
-        Section _section = _sectionRef.getSection();
+        Section _section = ((SectionRef)section).getSection();
         _switchResult = _section;
       }
     }
     if (!_matched) {
       if (section instanceof Section2Ref) {
-        final Section2Ref _section2Ref = (Section2Ref)section;
         _matched=true;
-        Section2 _section2 = _section2Ref.getSection2();
+        Section2 _section2 = ((Section2Ref)section).getSection2();
         _switchResult = _section2;
       }
     }

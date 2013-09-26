@@ -73,11 +73,10 @@ public class XFunctionTypeRefs {
     boolean _matched = false;
     if (!_matched) {
       if (type instanceof JvmPrimitiveType) {
-        final JvmPrimitiveType _jvmPrimitiveType = (JvmPrimitiveType)type;
         _matched=true;
         JvmTypeReference _xblockexpression = null;
         {
-          final JvmType wrappedType = XFunctionTypeRefs.getWrappedType(_jvmPrimitiveType);
+          final JvmType wrappedType = XFunctionTypeRefs.getWrappedType(type);
           JvmTypeReference _xifexpression = null;
           boolean _equals = Objects.equal(wrappedType, null);
           if (_equals) {
@@ -99,15 +98,14 @@ public class XFunctionTypeRefs {
     }
     if (!_matched) {
       if (type instanceof JvmVoid) {
-        final JvmVoid _jvmVoid = (JvmVoid)type;
-        boolean _eIsProxy = _jvmVoid.eIsProxy();
+        boolean _eIsProxy = ((JvmVoid)type).eIsProxy();
         boolean _not = (!_eIsProxy);
         if (_not) {
           _matched=true;
           JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
           final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
             public void apply(final JvmParameterizedTypeReference it) {
-              JvmType _type = XFunctionTypeRefs.getType(Void.class, _jvmVoid);
+              JvmType _type = XFunctionTypeRefs.getType(Void.class, type);
               it.setType(_type);
             }
           };

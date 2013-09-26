@@ -47,10 +47,9 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     boolean _matched = false;
     if (!_matched) {
       if (annotationType instanceof JvmAnnotationTypeDeclarationImpl) {
-        final JvmAnnotationTypeDeclarationImpl _jvmAnnotationTypeDeclarationImpl = (JvmAnnotationTypeDeclarationImpl)annotationType;
         _matched=true;
         final JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-        JvmAnnotationType _delegate = _jvmAnnotationTypeDeclarationImpl.getDelegate();
+        JvmAnnotationType _delegate = ((JvmAnnotationTypeDeclarationImpl)annotationType).getDelegate();
         result.setAnnotation(_delegate);
         T _delegate_1 = this.getDelegate();
         EList<JvmAnnotationReference> _annotations = _delegate_1.getAnnotations();

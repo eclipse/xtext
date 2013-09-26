@@ -86,9 +86,8 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
     boolean _matched = false;
     if (!_matched) {
       if (reference instanceof JvmGenericArrayTypeReference) {
-        final JvmGenericArrayTypeReference _jvmGenericArrayTypeReference = (JvmGenericArrayTypeReference)reference;
         _matched=true;
-        JvmTypeReference _componentType = _jvmGenericArrayTypeReference.getComponentType();
+        JvmTypeReference _componentType = ((JvmGenericArrayTypeReference)reference).getComponentType();
         _switchResult = _componentType;
       }
     }

@@ -107,9 +107,8 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof JvmMemberImplCustom) {
-        final JvmMemberImplCustom _jvmMemberImplCustom = (JvmMemberImplCustom)it;
         _matched=true;
-        ((JvmMemberImplCustom)_jvmMemberImplCustom).clearIdentifierCache();
+        ((JvmMemberImplCustom)it).clearIdentifierCache();
       }
     }
     T _delegate_1 = this.getDelegate();

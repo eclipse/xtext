@@ -58,7 +58,6 @@ public class XtendGenerator extends JvmModelGenerator {
         boolean _matched = false;
         if (!_matched) {
           if (processor instanceof CodeGenerationParticipant) {
-            final CodeGenerationParticipant<NamedElement> _codeGenerationParticipant = (CodeGenerationParticipant<NamedElement>)processor;
             _matched=true;
             CodeGenerationContextImpl _codeGenerationContextImpl = new CodeGenerationContextImpl();
             final Procedure1<CodeGenerationContextImpl> _function = new Procedure1<CodeGenerationContextImpl>() {
@@ -81,7 +80,7 @@ public class XtendGenerator extends JvmModelGenerator {
               }
             };
             final List<MemberDeclaration> elements = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function_1);
-            _codeGenerationParticipant.doGenerateCode(elements, codeGenServices);
+            ((CodeGenerationParticipant<NamedElement>)processor).doGenerateCode(elements, codeGenServices);
           }
         }
       } catch (final Throwable _t) {

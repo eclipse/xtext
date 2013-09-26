@@ -257,7 +257,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
         final ResolvedTypes resolution = this._reflectExtensions.<ResolvedTypes>get(casted, "resolvedTypes");
         ExpressionTypeComputationState _get = this._reflectExtensions.<ExpressionTypeComputationState>get(casted, "parent");
         final ResolvedTypes parentResolution = this._reflectExtensions.<ResolvedTypes>get(_get, "resolvedTypes");
-        EObject _eContainer = expression.eContainer();
+        EObject _eContainer = ((XNullLiteral)expression).eContainer();
         LightweightTypeReference _actualType = parentResolution.getActualType(((XExpression) _eContainer));
         Assert.assertNull(_actualType);
         state.acceptActualType(expectedType);
@@ -267,7 +267,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
         LightweightTypeReference _actualType_2 = resolution.getActualType(expression);
         String _identifier_1 = _actualType_2.getIdentifier();
         Assert.assertEquals(_identifier, _identifier_1);
-        EObject _eContainer_1 = expression.eContainer();
+        EObject _eContainer_1 = ((XNullLiteral)expression).eContainer();
         LightweightTypeReference _actualType_3 = parentResolution.getActualType(((XExpression) _eContainer_1));
         Assert.assertNull(_actualType_3);
       } else {

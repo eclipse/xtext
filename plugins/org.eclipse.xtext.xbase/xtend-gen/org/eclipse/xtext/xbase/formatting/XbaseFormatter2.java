@@ -656,7 +656,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   protected void formatStaticQualifier(final INode node, final FormattableDocument document) {
     if ((node instanceof ICompositeNode)) {
-      final Iterable<ILeafNode> leafs = ((ICompositeNode) node).getLeafNodes();
+      final Iterable<ILeafNode> leafs = ((ICompositeNode) ((ICompositeNode)node)).getLeafNodes();
       for (final ILeafNode n : leafs) {
         boolean _and = false;
         EObject _grammarElement = n.getGrammarElement();
@@ -1048,16 +1048,15 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _matched = false;
     if (!_matched) {
       if (block instanceof XBlockExpression) {
-        final XBlockExpression _xBlockExpression = (XBlockExpression)block;
         _matched=true;
         boolean _and = false;
-        EList<XExpression> _expressions = _xBlockExpression.getExpressions();
+        EList<XExpression> _expressions = ((XBlockExpression)block).getExpressions();
         int _size = _expressions.size();
         boolean _greaterThan = (_size > 1);
         if (!_greaterThan) {
           _and = false;
         } else {
-          EList<XExpression> _expressions_1 = _xBlockExpression.getExpressions();
+          EList<XExpression> _expressions_1 = ((XBlockExpression)block).getExpressions();
           boolean _isEachExpressionInOwnLine = this.isEachExpressionInOwnLine(_expressions_1);
           _and = (_greaterThan && _isEachExpressionInOwnLine);
         }
@@ -1309,7 +1308,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _while = (top instanceof XMemberFeatureCall);
     while (_while) {
       {
-        calls.add(((XMemberFeatureCall) top));
+        calls.add(((XMemberFeatureCall) ((XMemberFeatureCall)top)));
         XExpression _memberCallTarget = ((XMemberFeatureCall) top).getMemberCallTarget();
         top = _memberCallTarget;
       }
@@ -1550,7 +1549,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
           AbstractRule _xifexpression_1 = null;
           if ((terminal instanceof RuleCall)) {
-            return ((RuleCall) terminal).getRule();
+            return ((RuleCall) ((RuleCall)terminal)).getRule();
           }
           _xblockexpression_1 = (_xifexpression_1);
         }
@@ -2510,9 +2509,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
       boolean _matched = false;
       if (!_matched) {
         if (obj instanceof XExpression) {
-          final XExpression _xExpression = (XExpression)obj;
           _matched=true;
-          this.format(_xExpression, format);
+          this.format(obj, format);
         }
       }
     }
@@ -2971,9 +2969,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _matched = false;
     if (!_matched) {
       if (x instanceof XBlockExpression) {
-        final XBlockExpression _xBlockExpression = (XBlockExpression)x;
         _matched=true;
-        EList<XExpression> _expressions = _xBlockExpression.getExpressions();
+        EList<XExpression> _expressions = ((XBlockExpression)x).getExpressions();
         _switchResult = _expressions;
       }
     }

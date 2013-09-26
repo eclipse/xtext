@@ -54,28 +54,25 @@ public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolve
         boolean _matched = false;
         if (!_matched) {
           if (content instanceof XSwitchExpression) {
-            final XSwitchExpression _xSwitchExpression = (XSwitchExpression)content;
             _matched=true;
-            this.assertExpressionTypeIsResolved(_xSwitchExpression);
-            String _localVarName = _xSwitchExpression.getLocalVarName();
+            this.assertExpressionTypeIsResolved(((XExpression)content));
+            String _localVarName = ((XSwitchExpression)content).getLocalVarName();
             boolean _notEquals = (!Objects.equal(_localVarName, null));
             if (_notEquals) {
-              this.assertIdentifiableTypeIsResolved(_xSwitchExpression);
+              this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content));
             }
           }
         }
         if (!_matched) {
           if (content instanceof XExpression) {
-            final XExpression _xExpression = (XExpression)content;
             _matched=true;
-            this.assertExpressionTypeIsResolved(_xExpression);
+            this.assertExpressionTypeIsResolved(((XExpression)content));
           }
         }
         if (!_matched) {
           if (content instanceof JvmIdentifiableElement) {
-            final JvmIdentifiableElement _jvmIdentifiableElement = (JvmIdentifiableElement)content;
             _matched=true;
-            this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement);
+            this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content));
           }
         }
       }

@@ -134,16 +134,14 @@ public class ActiveAnnotationContextProvider {
             boolean _matched = false;
             if (!_matched) {
               if (e instanceof VirtualMachineError) {
-                final VirtualMachineError _virtualMachineError = (VirtualMachineError)e;
                 _matched=true;
-                throw _virtualMachineError;
+                throw e;
               }
             }
             if (!_matched) {
               if (e instanceof LinkageError) {
-                final LinkageError _linkageError = (LinkageError)e;
                 _matched=true;
-                throw _linkageError;
+                throw e;
               }
             }
             Resource _eResource_1 = file.eResource();
@@ -169,9 +167,8 @@ public class ActiveAnnotationContextProvider {
     boolean _matched = false;
     if (!_matched) {
       if (element instanceof XtendFile) {
-        final XtendFile _xtendFile = (XtendFile)element;
         _matched=true;
-        EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+        EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile)element).getXtendTypes();
         final Procedure1<XtendTypeDeclaration> _function = new Procedure1<XtendTypeDeclaration>() {
           public void apply(final XtendTypeDeclaration it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
@@ -182,10 +179,9 @@ public class ActiveAnnotationContextProvider {
     }
     if (!_matched) {
       if (element instanceof XtendClass) {
-        final XtendClass _xtendClass = (XtendClass)element;
         _matched=true;
-        this.registerMacroAnnotations(_xtendClass, acceptor);
-        EList<XtendMember> _members = _xtendClass.getMembers();
+        this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
+        EList<XtendMember> _members = ((XtendClass)element).getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
           public void apply(final XtendMember it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
@@ -196,10 +192,9 @@ public class ActiveAnnotationContextProvider {
     }
     if (!_matched) {
       if (element instanceof XtendInterface) {
-        final XtendInterface _xtendInterface = (XtendInterface)element;
         _matched=true;
-        this.registerMacroAnnotations(_xtendInterface, acceptor);
-        EList<XtendMember> _members = _xtendInterface.getMembers();
+        this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
+        EList<XtendMember> _members = ((XtendInterface)element).getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
           public void apply(final XtendMember it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
@@ -210,10 +205,9 @@ public class ActiveAnnotationContextProvider {
     }
     if (!_matched) {
       if (element instanceof XtendEnum) {
-        final XtendEnum _xtendEnum = (XtendEnum)element;
         _matched=true;
-        this.registerMacroAnnotations(_xtendEnum, acceptor);
-        EList<XtendMember> _members = _xtendEnum.getMembers();
+        this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
+        EList<XtendMember> _members = ((XtendEnum)element).getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
           public void apply(final XtendMember it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
@@ -224,10 +218,9 @@ public class ActiveAnnotationContextProvider {
     }
     if (!_matched) {
       if (element instanceof XtendFunction) {
-        final XtendFunction _xtendFunction = (XtendFunction)element;
         _matched=true;
-        this.registerMacroAnnotations(_xtendFunction, acceptor);
-        EList<XtendParameter> _parameters = _xtendFunction.getParameters();
+        this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
+        EList<XtendParameter> _parameters = ((XtendFunction)element).getParameters();
         final Procedure1<XtendParameter> _function = new Procedure1<XtendParameter>() {
           public void apply(final XtendParameter it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
@@ -238,10 +231,9 @@ public class ActiveAnnotationContextProvider {
     }
     if (!_matched) {
       if (element instanceof XtendConstructor) {
-        final XtendConstructor _xtendConstructor = (XtendConstructor)element;
         _matched=true;
-        this.registerMacroAnnotations(_xtendConstructor, acceptor);
-        EList<XtendParameter> _parameters = _xtendConstructor.getParameters();
+        this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
+        EList<XtendParameter> _parameters = ((XtendConstructor)element).getParameters();
         final Procedure1<XtendParameter> _function = new Procedure1<XtendParameter>() {
           public void apply(final XtendParameter it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
@@ -252,9 +244,8 @@ public class ActiveAnnotationContextProvider {
     }
     if (!_matched) {
       if (element instanceof XtendAnnotationTarget) {
-        final XtendAnnotationTarget _xtendAnnotationTarget = (XtendAnnotationTarget)element;
         _matched=true;
-        this.registerMacroAnnotations(_xtendAnnotationTarget, acceptor);
+        this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
       }
     }
   }

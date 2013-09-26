@@ -37,11 +37,10 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     boolean _matched = false;
     if (!_matched) {
       if (container instanceof XtendTypeDeclaration) {
-        final XtendTypeDeclaration _xtendTypeDeclaration = (XtendTypeDeclaration)container;
         _matched=true;
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xtendTypeDeclaration_1 = _compilationUnit.toXtendTypeDeclaration(_xtendTypeDeclaration);
-        _switchResult = _xtendTypeDeclaration_1;
+        XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xtendTypeDeclaration = _compilationUnit.toXtendTypeDeclaration(((XtendTypeDeclaration)container));
+        _switchResult = _xtendTypeDeclaration;
       }
     }
     if (!_matched) {

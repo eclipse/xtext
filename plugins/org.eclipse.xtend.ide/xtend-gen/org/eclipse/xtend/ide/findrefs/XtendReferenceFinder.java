@@ -121,8 +121,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     boolean _matched = false;
     if (!_matched) {
       if (sourceCandidate instanceof XAbstractFeatureCall) {
-        final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)sourceCandidate;
-        boolean _isPackageFragment = _xAbstractFeatureCall.isPackageFragment();
+        boolean _isPackageFragment = ((XAbstractFeatureCall)sourceCandidate).isPackageFragment();
         if (_isPackageFragment) {
           _matched=true;
           return;
@@ -133,37 +132,35 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     boolean _matched_1 = false;
     if (!_matched_1) {
       if (sourceCandidate instanceof XFeatureCall) {
-        final XFeatureCall _xFeatureCall = (XFeatureCall)sourceCandidate;
         boolean _and = false;
-        XExpression _actualReceiver = _xFeatureCall.getActualReceiver();
+        XExpression _actualReceiver = ((XFeatureCall)sourceCandidate).getActualReceiver();
         boolean _equals = Objects.equal(_actualReceiver, null);
         if (!_equals) {
           _and = false;
         } else {
-          boolean _isStatic = _xFeatureCall.isStatic();
+          boolean _isStatic = ((XFeatureCall)sourceCandidate).isStatic();
           _and = (_equals && _isStatic);
         }
         if (_and) {
           _matched_1=true;
-          this.addReferenceToTypeFromStaticImport(_xFeatureCall, targetURISet, acceptor, currentExportedContainerURI);
+          this.addReferenceToTypeFromStaticImport(((XAbstractFeatureCall)sourceCandidate), targetURISet, acceptor, currentExportedContainerURI);
         }
       }
     }
     if (!_matched_1) {
       if (sourceCandidate instanceof XMemberFeatureCall) {
-        final XMemberFeatureCall _xMemberFeatureCall = (XMemberFeatureCall)sourceCandidate;
         _matched_1=true;
         boolean _and = false;
-        boolean _isStatic = _xMemberFeatureCall.isStatic();
+        boolean _isStatic = ((XMemberFeatureCall)sourceCandidate).isStatic();
         if (!_isStatic) {
           _and = false;
         } else {
-          boolean _isStaticWithDeclaringType = _xMemberFeatureCall.isStaticWithDeclaringType();
+          boolean _isStaticWithDeclaringType = ((XMemberFeatureCall)sourceCandidate).isStaticWithDeclaringType();
           boolean _not = (!_isStaticWithDeclaringType);
           _and = (_isStatic && _not);
         }
         if (_and) {
-          this.addReferenceToTypeFromStaticImport(_xMemberFeatureCall, targetURISet, acceptor, currentExportedContainerURI);
+          this.addReferenceToTypeFromStaticImport(((XAbstractFeatureCall)sourceCandidate), targetURISet, acceptor, currentExportedContainerURI);
         }
       }
     }
@@ -172,7 +169,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
   protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
     final JvmIdentifiableElement feature = sourceCandidate.getFeature();
     if ((feature instanceof JvmMember)) {
-      final JvmDeclaredType type = ((JvmMember) feature).getDeclaringType();
+      final JvmDeclaredType type = ((JvmMember) ((JvmMember)feature)).getDeclaringType();
       final URI typeURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(type);
       boolean _contains = targetURISet.contains(typeURI);
       if (_contains) {

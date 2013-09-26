@@ -79,13 +79,12 @@ public class ActiveAnnotationContext {
         boolean _matched = false;
         if (!_matched) {
           if (target instanceof XtendAnnotationTarget) {
-            final XtendAnnotationTarget _xtendAnnotationTarget = (XtendAnnotationTarget)target;
             _matched=true;
-            final EList<XAnnotation> annotations = _xtendAnnotationTarget.getAnnotations();
+            final EList<XAnnotation> annotations = ((XtendAnnotationTarget)target).getAnnotations();
             EObject _xifexpression = null;
             boolean _isEmpty = annotations.isEmpty();
             if (_isEmpty) {
-              _xifexpression = _xtendAnnotationTarget;
+              _xifexpression = target;
             } else {
               XAnnotation _head = IterableExtensions.<XAnnotation>head(annotations);
               _xifexpression = _head;

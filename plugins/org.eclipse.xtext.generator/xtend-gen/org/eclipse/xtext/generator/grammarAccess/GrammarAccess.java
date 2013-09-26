@@ -206,18 +206,16 @@ public class GrammarAccess {
     boolean _matched = false;
     if (!_matched) {
       if (cnt instanceof AbstractElement) {
-        final AbstractElement _abstractElement = (AbstractElement)cnt;
         _matched=true;
-        String _gaRuleElementAccessor = this.gaRuleElementAccessor(_abstractElement);
+        String _gaRuleElementAccessor = this.gaRuleElementAccessor(((AbstractElement)cnt));
         String _plus = (_gaRuleElementAccessor + ".getType()");
         _switchResult = _plus;
       }
     }
     if (!_matched) {
       if (cnt instanceof AbstractRule) {
-        final AbstractRule _abstractRule = (AbstractRule)cnt;
         _matched=true;
-        String _gaRuleAccessor = this.gaRuleAccessor(_abstractRule);
+        String _gaRuleAccessor = this.gaRuleAccessor(((AbstractRule)cnt));
         String _plus = (_gaRuleAccessor + ".getType()");
         _switchResult = _plus;
       }
@@ -243,17 +241,15 @@ public class GrammarAccess {
     boolean _matched = false;
     if (!_matched) {
       if (ele instanceof AbstractElement) {
-        final AbstractElement _abstractElement = (AbstractElement)ele;
         _matched=true;
-        String _gaRuleElementAccessor = this.gaRuleElementAccessor(_abstractElement);
+        String _gaRuleElementAccessor = this.gaRuleElementAccessor(((AbstractElement)ele));
         _switchResult = _gaRuleElementAccessor;
       }
     }
     if (!_matched) {
       if (ele instanceof AbstractRule) {
-        final AbstractRule _abstractRule = (AbstractRule)ele;
         _matched=true;
-        String _gaRuleAccessor = this.gaRuleAccessor(_abstractRule);
+        String _gaRuleAccessor = this.gaRuleAccessor(((AbstractRule)ele));
         _switchResult = _gaRuleAccessor;
       }
     }

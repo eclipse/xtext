@@ -54,16 +54,14 @@ public class UnexpectedProxiesException extends RuntimeException {
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof EObject) {
-        final EObject _eObject = (EObject)it;
         _matched=true;
-        URI _uRI = EcoreUtil.getURI(_eObject);
+        URI _uRI = EcoreUtil.getURI(((EObject)it));
         List<URI> _newImmutableList = CollectionLiterals.<URI>newImmutableList(_uRI);
         _switchResult = _newImmutableList;
       }
     }
     if (!_matched) {
       if (it instanceof List) {
-        final List<EObject> _list = (List<EObject>)it;
         _matched=true;
         final Function1<EObject,URI> _function = new Function1<EObject,URI>() {
           public URI apply(final EObject it) {
@@ -71,7 +69,7 @@ public class UnexpectedProxiesException extends RuntimeException {
             return _uRI;
           }
         };
-        List<URI> _map = ListExtensions.<EObject, URI>map(_list, _function);
+        List<URI> _map = ListExtensions.<EObject, URI>map(((List<EObject>)it), _function);
         _switchResult = _map;
       }
     }

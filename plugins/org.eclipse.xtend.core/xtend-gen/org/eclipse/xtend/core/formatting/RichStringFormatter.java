@@ -191,15 +191,13 @@ public class RichStringFormatter {
               boolean _matched = false;
               if (!_matched) {
                 if (chunk instanceof SemanticWhitespace) {
-                  final SemanticWhitespace _semanticWhitespace = (SemanticWhitespace)chunk;
                   _matched=true;
-                  CharSequence _text = _semanticWhitespace.getText();
+                  CharSequence _text = ((SemanticWhitespace)chunk).getText();
                   _switchResult = _text;
                 }
               }
               if (!_matched) {
                 if (chunk instanceof TemplateWhitespace) {
-                  final TemplateWhitespace _templateWhitespace = (TemplateWhitespace)chunk;
                   _matched=true;
                   String _indentation = doc.getIndentation(1);
                   _switchResult = _indentation;

@@ -221,26 +221,24 @@ public class FormattableDocument {
           boolean _matched = false;
           if (!_matched) {
             if (old instanceof NewLineData) {
-              final NewLineData _newLineData = (NewLineData)old;
               _matched=true;
-              int _offset = _newLineData.getOffset();
-              int _length = _newLineData.getLength();
-              Throwable _trace = _newLineData.getTrace();
-              Integer _newLines = _newLineData.getNewLines();
-              NewLineData _newLineData_1 = new NewLineData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _newLines);
-              _switchResult = _newLineData_1;
+              int _offset = ((NewLineData)old).getOffset();
+              int _length = ((NewLineData)old).getLength();
+              Throwable _trace = ((NewLineData)old).getTrace();
+              Integer _newLines = ((NewLineData)old).getNewLines();
+              NewLineData _newLineData = new NewLineData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _newLines);
+              _switchResult = _newLineData;
             }
           }
           if (!_matched) {
             if (old instanceof WhitespaceData) {
-              final WhitespaceData _whitespaceData = (WhitespaceData)old;
               _matched=true;
-              int _offset = _whitespaceData.getOffset();
-              int _length = _whitespaceData.getLength();
-              Throwable _trace = _whitespaceData.getTrace();
-              String _space = _whitespaceData.getSpace();
-              WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _space);
-              _switchResult = _whitespaceData_1;
+              int _offset = ((WhitespaceData)old).getOffset();
+              int _length = ((WhitespaceData)old).getLength();
+              Throwable _trace = ((WhitespaceData)old).getTrace();
+              String _space = ((WhitespaceData)old).getSpace();
+              WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _space);
+              _switchResult = _whitespaceData;
             }
           }
           _xblockexpression_1 = (_switchResult);
@@ -454,14 +452,13 @@ public class FormattableDocument {
             boolean _matched = false;
             if (!_matched) {
               if (f instanceof WhitespaceData) {
-                final WhitespaceData _whitespaceData = (WhitespaceData)f;
                 _matched=true;
-                String _space = _whitespaceData.getSpace();
+                String _space = ((WhitespaceData)f).getSpace();
                 boolean _notEquals = (!Objects.equal(_space, null));
                 if (_notEquals) {
-                  final String replacement = _whitespaceData.getSpace();
-                  int _offset_3 = _whitespaceData.getOffset();
-                  int _length_1 = _whitespaceData.getLength();
+                  final String replacement = ((WhitespaceData)f).getSpace();
+                  int _offset_3 = ((WhitespaceData)f).getOffset();
+                  int _length_1 = ((WhitespaceData)f).getLength();
                   TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
                   replacements.add(_textReplacement);
                 }
@@ -469,28 +466,27 @@ public class FormattableDocument {
             }
             if (!_matched) {
               if (f instanceof NewLineData) {
-                final NewLineData _newLineData = (NewLineData)f;
                 _matched=true;
                 int _xifexpression = (int) 0;
-                int _increaseIndentationChange = _newLineData.getIncreaseIndentationChange();
-                int _decreaseIndentationChange = _newLineData.getDecreaseIndentationChange();
+                int _increaseIndentationChange = ((NewLineData)f).getIncreaseIndentationChange();
+                int _decreaseIndentationChange = ((NewLineData)f).getDecreaseIndentationChange();
                 int _minus = (-1);
                 int _multiply = (_decreaseIndentationChange * _minus);
                 boolean _equals = (_increaseIndentationChange == _multiply);
                 if (_equals) {
-                  int _increaseIndentationChange_1 = _newLineData.getIncreaseIndentationChange();
+                  int _increaseIndentationChange_1 = ((NewLineData)f).getIncreaseIndentationChange();
                   int _plus_3 = (indentation + _increaseIndentationChange_1);
                   _xifexpression = _plus_3;
                 } else {
                   _xifexpression = indentation;
                 }
                 final int computedIndentation = _xifexpression;
-                Integer _newLines = _newLineData.getNewLines();
+                Integer _newLines = ((NewLineData)f).getNewLines();
                 String _wrap = this.getWrap((_newLines).intValue());
                 String _indentation = this.getIndentation(computedIndentation);
                 final String replacement = (_wrap + _indentation);
-                int _offset_3 = _newLineData.getOffset();
-                int _length_1 = _newLineData.getLength();
+                int _offset_3 = ((NewLineData)f).getOffset();
+                int _length_1 = ((NewLineData)f).getLength();
                 TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
                 replacements.add(_textReplacement);
               }
@@ -581,7 +577,7 @@ public class FormattableDocument {
           int _plus = (currentIndentation + _indentationChange);
           currentIndentation = _plus;
           if ((f instanceof NewLineData)) {
-            lastWrap = ((NewLineData) f);
+            lastWrap = ((NewLineData) ((NewLineData)f));
             lastIndentation = currentIndentation;
           }
         }
@@ -621,7 +617,7 @@ public class FormattableDocument {
       Collection<FormattingData> _values_2 = _subMap_1.values();
       for (final FormattingData f_2 : _values_2) {
         if ((f_2 instanceof WhitespaceData)) {
-          final String space = ((WhitespaceData) f_2).getSpace();
+          final String space = ((WhitespaceData) ((WhitespaceData)f_2)).getSpace();
           int _xifexpression = (int) 0;
           boolean _equals = Objects.equal(space, null);
           if (_equals) {
@@ -632,7 +628,7 @@ public class FormattableDocument {
           }
           final int length = _xifexpression;
           int _plus_3 = (lengthDiff + length);
-          int _length_2 = f_2.getLength();
+          int _length_2 = ((WhitespaceData)f_2).getLength();
           int _minus = (_plus_3 - _length_2);
           lengthDiff = _minus;
         }

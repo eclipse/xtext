@@ -81,60 +81,55 @@ public class Oven extends Assert {
           boolean _matched = false;
           if (!_matched) {
             if (content instanceof XSwitchExpression) {
-              final XSwitchExpression _xSwitchExpression = (XSwitchExpression)content;
               _matched=true;
-              this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
-              String _localVarName = _xSwitchExpression.getLocalVarName();
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+              String _localVarName = ((XSwitchExpression)content).getLocalVarName();
               boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
               if (_notEquals_1) {
-                this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
+                this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
               }
             }
           }
           if (!_matched) {
             if (content instanceof XAbstractFeatureCall) {
-              final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)content;
               _matched=true;
-              this.assertExpressionTypeIsResolved(_xAbstractFeatureCall, resolvedTypes);
-              XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+              XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
               boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
               if (_notEquals_1) {
-                XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
+                XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
                 this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
               }
-              XExpression _implicitFirstArgument = _xAbstractFeatureCall.getImplicitFirstArgument();
+              XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
               boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
               if (_notEquals_2) {
-                XExpression _implicitFirstArgument_1 = _xAbstractFeatureCall.getImplicitFirstArgument();
+                XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
                 this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
               }
             }
           }
           if (!_matched) {
             if (content instanceof XClosure) {
-              final XClosure _xClosure = (XClosure)content;
               _matched=true;
-              this.assertExpressionTypeIsResolved(_xClosure, resolvedTypes);
-              JvmFormalParameter _implicitParameter = _xClosure.getImplicitParameter();
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+              JvmFormalParameter _implicitParameter = ((XClosure)content).getImplicitParameter();
               boolean _notEquals_1 = (!Objects.equal(_implicitParameter, null));
               if (_notEquals_1) {
-                JvmFormalParameter _implicitParameter_1 = _xClosure.getImplicitParameter();
+                JvmFormalParameter _implicitParameter_1 = ((XClosure)content).getImplicitParameter();
                 this.assertIdentifiableTypeIsResolved(_implicitParameter_1, resolvedTypes);
               }
             }
           }
           if (!_matched) {
             if (content instanceof XExpression) {
-              final XExpression _xExpression = (XExpression)content;
               _matched=true;
-              this.assertExpressionTypeIsResolved(_xExpression, resolvedTypes);
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
             }
           }
           if (!_matched) {
             if (content instanceof JvmIdentifiableElement) {
-              final JvmIdentifiableElement _jvmIdentifiableElement = (JvmIdentifiableElement)content;
               _matched=true;
-              this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement, resolvedTypes);
+              this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
             }
           }
         }
@@ -161,11 +156,10 @@ public class Oven extends Assert {
       boolean _matched = false;
       if (!_matched) {
         if (internalTypes instanceof CompoundReentrantTypeResolver) {
-          final CompoundReentrantTypeResolver _compoundReentrantTypeResolver = (CompoundReentrantTypeResolver)internalTypes;
           _matched=true;
           TypeData _xblockexpression = null;
           {
-            final Object delegate = this._reflectExtensions.invoke(_compoundReentrantTypeResolver, "getDelegate", expression);
+            final Object delegate = this._reflectExtensions.invoke(internalTypes, "getDelegate", expression);
             TypeData _xifexpression = null;
             if ((delegate instanceof RootResolvedTypes)) {
               Object _invoke = this._reflectExtensions.invoke(delegate, "getTypeData", expression, Boolean.FALSE);

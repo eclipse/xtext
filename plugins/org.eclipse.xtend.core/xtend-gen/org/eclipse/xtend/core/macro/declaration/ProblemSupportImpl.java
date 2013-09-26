@@ -110,7 +110,6 @@ public class ProblemSupportImpl implements ProblemSupport {
     boolean _matched = false;
     if (!_matched) {
       if (obj instanceof XtendTypeDeclaration) {
-        final XtendTypeDeclaration _xtendTypeDeclaration = (XtendTypeDeclaration)obj;
         _matched=true;
         EAttribute _xtendTypeDeclaration_Name = XtendPackage.eINSTANCE.getXtendTypeDeclaration_Name();
         _switchResult = _xtendTypeDeclaration_Name;
@@ -118,7 +117,6 @@ public class ProblemSupportImpl implements ProblemSupport {
     }
     if (!_matched) {
       if (obj instanceof XtendField) {
-        final XtendField _xtendField = (XtendField)obj;
         _matched=true;
         EAttribute _xtendField_Name = XtendPackage.eINSTANCE.getXtendField_Name();
         _switchResult = _xtendField_Name;
@@ -126,7 +124,6 @@ public class ProblemSupportImpl implements ProblemSupport {
     }
     if (!_matched) {
       if (obj instanceof XtendFunction) {
-        final XtendFunction _xtendFunction = (XtendFunction)obj;
         _matched=true;
         EAttribute _xtendFunction_Name = XtendPackage.eINSTANCE.getXtendFunction_Name();
         _switchResult = _xtendFunction_Name;
@@ -134,7 +131,6 @@ public class ProblemSupportImpl implements ProblemSupport {
     }
     if (!_matched) {
       if (obj instanceof JvmFormalParameter) {
-        final JvmFormalParameter _jvmFormalParameter = (JvmFormalParameter)obj;
         _matched=true;
         EAttribute _jvmFormalParameter_Name = TypesPackage.eINSTANCE.getJvmFormalParameter_Name();
         _switchResult = _jvmFormalParameter_Name;
@@ -148,20 +144,19 @@ public class ProblemSupportImpl implements ProblemSupport {
     boolean _matched = false;
     if (!_matched) {
       if (element instanceof AbstractElementImpl) {
-        final AbstractElementImpl<? extends EObject> _abstractElementImpl = (AbstractElementImpl<? extends EObject>)element;
         _matched=true;
-        EObject _delegate = ((AbstractElementImpl<EObject>)_abstractElementImpl).getDelegate();
+        EObject _delegate = ((AbstractElementImpl<EObject>)element).getDelegate();
         final Resource resource = _delegate.eResource();
         XtendFile _xtendFile = this.compilationUnit.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
         boolean _equals = Objects.equal(resource, _eResource);
         if (_equals) {
           IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
-          EObject _delegate_1 = ((AbstractElementImpl<EObject>)_abstractElementImpl).getDelegate();
+          EObject _delegate_1 = ((AbstractElementImpl<EObject>)element).getDelegate();
           final EObject eobject = _jvmAssociations.getPrimarySourceElement(_delegate_1);
           boolean _equals_1 = Objects.equal(eobject, null);
           if (_equals_1) {
-            EObject _delegate_2 = ((AbstractElementImpl<EObject>)_abstractElementImpl).getDelegate();
+            EObject _delegate_2 = ((AbstractElementImpl<EObject>)element).getDelegate();
             return Pair.<Resource, EObject>of(resource, _delegate_2);
           }
           return Pair.<Resource, EObject>of(resource, eobject);

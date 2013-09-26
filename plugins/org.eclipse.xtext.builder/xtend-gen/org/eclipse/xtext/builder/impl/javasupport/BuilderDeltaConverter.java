@@ -97,9 +97,8 @@ public class BuilderDeltaConverter extends DeltaConverter {
     boolean _matched = false;
     if (!_matched) {
       if (element instanceof ICompilationUnit) {
-        final ICompilationUnit _iCompilationUnit = (ICompilationUnit)element;
         _matched=true;
-        String _compilationUnitName = this.getCompilationUnitName(_iCompilationUnit);
+        String _compilationUnitName = this.getCompilationUnitName(((ICompilationUnit)element));
         _switchResult = _compilationUnitName;
       }
     }

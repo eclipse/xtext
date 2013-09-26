@@ -89,9 +89,8 @@ public class FormatterTester {
       boolean _matched = false;
       if (!_matched) {
         if (formatter instanceof AbstractFormatter) {
-          final AbstractFormatter _abstractFormatter = (AbstractFormatter)formatter;
           _matched=true;
-          _abstractFormatter.setAllowIdentityEdits(true);
+          ((AbstractFormatter)this.formatter).setAllowIdentityEdits(true);
         }
       }
       String _prefix_1 = it.getPrefix();
@@ -107,9 +106,8 @@ public class FormatterTester {
       boolean _matched_1 = false;
       if (!_matched_1) {
         if (formatter_1 instanceof AbstractFormatter) {
-          final AbstractFormatter _abstractFormatter = (AbstractFormatter)formatter_1;
           _matched_1=true;
-          boolean _isConflictOccurred = _abstractFormatter.isConflictOccurred();
+          boolean _isConflictOccurred = ((AbstractFormatter)this.formatter).isConflictOccurred();
           if (_isConflictOccurred) {
             RuntimeException _runtimeException = new RuntimeException("There are conflicting text edits, see console for details.");
             throw _runtimeException;

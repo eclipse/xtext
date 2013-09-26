@@ -34,14 +34,12 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
     boolean _matched = false;
     if (!_matched) {
       if (result instanceof ResourceSetAware) {
-        final ResourceSetAware _resourceSetAware = (ResourceSetAware)result;
         _matched=true;
-        IResourceDescriptions _delegate = _resourceSetAware.getDelegate();
+        IResourceDescriptions _delegate = ((ResourceSetAware)result).getDelegate();
         final IResourceDescriptions d = _delegate;
         boolean _matched_1 = false;
         if (!_matched_1) {
           if (d instanceof CurrentDescriptions) {
-            final CurrentDescriptions _currentDescriptions = (CurrentDescriptions)d;
             _matched_1=true;
             boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
             if (_isIndexing) {
@@ -68,7 +66,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
                 return Boolean.valueOf(Objects.equal(_segment, _name));
               }
             };
-            FilteringResourceDescriptions _filteringResourceDescriptions = new FilteringResourceDescriptions(_resourceSetAware, _function);
+            FilteringResourceDescriptions _filteringResourceDescriptions = new FilteringResourceDescriptions(result, _function);
             return _filteringResourceDescriptions;
           }
         }

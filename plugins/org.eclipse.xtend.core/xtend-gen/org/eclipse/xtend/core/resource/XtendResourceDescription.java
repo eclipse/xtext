@@ -159,20 +159,19 @@ public class XtendResourceDescription extends DefaultResourceDescription {
       boolean _matched = false;
       if (!_matched) {
         if (type instanceof JvmGenericType) {
-          final JvmGenericType _jvmGenericType = (JvmGenericType)type;
           _matched=true;
-          JvmDeclaredType _declaringType = _jvmGenericType.getDeclaringType();
+          JvmDeclaredType _declaringType = ((JvmGenericType)type).getDeclaringType();
           this.registerAllTypes(_declaringType, acceptor);
           JvmTypeReference _extendedClass = null;
-          if (_jvmGenericType!=null) {
-            _extendedClass=_jvmGenericType.getExtendedClass();
+          if (((JvmGenericType)type)!=null) {
+            _extendedClass=((JvmGenericType)type).getExtendedClass();
           }
           JvmType _type = null;
           if (_extendedClass!=null) {
             _type=_extendedClass.getType();
           }
           this.registerAllTypes(_type, acceptor);
-          Iterable<JvmTypeReference> _extendedInterfaces = _jvmGenericType.getExtendedInterfaces();
+          Iterable<JvmTypeReference> _extendedInterfaces = ((JvmGenericType)type).getExtendedInterfaces();
           final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
             public void apply(final JvmTypeReference it) {
               JvmType _type = null;
