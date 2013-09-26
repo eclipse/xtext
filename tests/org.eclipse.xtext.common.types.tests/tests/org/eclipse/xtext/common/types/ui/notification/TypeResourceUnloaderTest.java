@@ -237,8 +237,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
-		assertEquals(1, event.getDeltas().size());
-		IResourceDescription.Delta delta = event.getDeltas().get(0);
+		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
+		IResourceDescription.Delta delta = event.getDeltas().get(2);
 		Collection<String> allNames = getNames(delta);
 		assertOriginalValues(allNames);
 		assertTrue(allNames.contains(NESTED_TYPES + "$Outer$Inner.method2"));
@@ -254,17 +254,18 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
-		assertEquals(2, event.getDeltas().size());
+		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		
-		Set<String> expectedURIs = Sets.newHashSet("java:/Objects/" + NESTED_TYPES, "java:/Objects/" + foobar);
+		Set<String> expectedURIs = Sets.newHashSet("java:/Objects/" + NESTED_TYPES, "java:/Objects/" + foobar, "java:/Objects/" + foobar + "$Outer");
 		assertTrue(expectedURIs.remove(delta.getUri().toString()));
 		assertTrue(expectedURIs.remove(event.getDeltas().get(1).getUri().toString()));
+		assertTrue(expectedURIs.remove(event.getDeltas().get(2).getUri().toString()));
 		assertTrue(expectedURIs.isEmpty());
 		
 		Collection<String> allNames = getNames(delta);
-		addNames(event.getDeltas().get(1).getOld(), allNames);
-		addNames(event.getDeltas().get(1).getNew(), allNames);
+		addNames(event.getDeltas().get(1).getNew(), allNames); //FooBar
+		addNames(event.getDeltas().get(2).getOld(), allNames); //NestedTypes
 		assertTrue(allNames.toString(), allNames.contains(foobar + ".method"));
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer.method"));
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner.method"));
@@ -272,7 +273,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer"));
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner"));
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner.Inner"));
-		assertTrue(allNames.contains(NESTED_TYPES));
+		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES));
 		assertEquals(8, allNames.size());
 	}
 	
