@@ -107,17 +107,12 @@ class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
 
 		fooEditor.close
 		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Bar")
-		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Foo")
-		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
-
-		assertFalse(tryConfirmDeltas)
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Bar")
-		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Foo")
+		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		barEditor.save
 		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
-		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Foo", "mypackage.Bar")
+		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		confirmDeltas
