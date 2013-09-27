@@ -114,6 +114,19 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
+	@Test public void testBug383551_04() throws Exception {
+		assertCompilesToStatement(
+				"\n" + 
+				"final Object o = null;\n" + 
+				"if ((o instanceof String)) {\n" + 
+				"  ((String) o).length();\n" + 
+				"}", 
+				"{" +
+				"  val Object o = null\n" +
+				"  if (o instanceof String) (o as String).length()" + 
+				"}");
+	}
+	
 	@Test public void testImplicitReferenceToMultitype() throws Exception {
 		assertCompilesTo(
 				// TODO AbstractStringBuilder is package private and should not be part of the resolved type
