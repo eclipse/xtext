@@ -16,7 +16,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -28,6 +27,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -59,6 +59,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	
 	/*
 	 * TODO Do the conversion as post processing of toJavaStatement
+	 * SZ: why was that todo added?
 	 */
 
 	@Override
@@ -115,7 +116,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				if (featureType != null && featureType.isSubtypeOf(actualType.getType()) && !featureType.isMultiType()) {
 					return false;
 				}
-			} 
+			}
+			if (expression.eContainer() instanceof XCastedExpression) {
+				return false;
+			}
 			return true;
 		}
 		return false;
