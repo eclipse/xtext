@@ -29,6 +29,10 @@ public class InternalBuilderTest {
 
 	@Test
 	public void test() throws CoreException {
+		long maxMem = Runtime.getRuntime().maxMemory() / (1024 * 1024);
+		long free = Runtime.getRuntime().freeMemory() / (1024 * 1024);
+		long used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
+		System.out.println("Starting build. Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
 		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
 
 		final IMarker[] markers = ResourcesPlugin.getWorkspace().getRoot()
@@ -47,6 +51,10 @@ public class InternalBuilderTest {
 		} else {
 			top10 = errors;
 		}
+		maxMem = Runtime.getRuntime().maxMemory() / (1024 * 1024);
+		free = Runtime.getRuntime().freeMemory() / (1024 * 1024);
+		used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
+		System.out.println("Finished build. Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
 		assertTrue("Problems found (" + top10.size() + " from " + errors.size() + "): " + join(errors, ", "),
 				errors.isEmpty());
 	}
