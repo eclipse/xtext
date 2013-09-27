@@ -71,6 +71,8 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		if (type == null)
 			return null;
 		JvmType rawParameterType = type.getType();
+		if (rawParameterType == null || rawParameterType.eIsProxy())
+			return null;
 		if (!(rawParameterType instanceof JvmTypeParameter)) {
 			LightweightTypeReference rawReceiverType = receiverType.getRawTypeReference();
 			if (rawReceiverType.isResolved()) {
