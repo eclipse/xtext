@@ -215,7 +215,7 @@ public class StandaloneBuilder {
     if (!_matched) {
       if (Objects.equal(result,CompilationResult.FAILED)) {
         _matched=true;
-        StandaloneBuilder.LOG.warn("Stubs compilation failed.");
+        StandaloneBuilder.LOG.warn("Stubs compilation finished with errors.");
       }
     }
     return stubsClasses.getAbsolutePath();

@@ -102,7 +102,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 				public void write(char[] data, int offset, int count) throws IOException {
 					String message = String.copyValueOf(data, offset, count);
 					if (!Strings.isEmpty(message.trim())) {
-						LOG.error(message);
+						LOG.warn(message);
 					}
 				}
 
