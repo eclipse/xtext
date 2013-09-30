@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="tests-buildserver" sequenceNumber="2">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.pde.core" version="0.0.0"/>
+<unit id="org.eclipse.pde.ui" version="0.0.0"/>
+<unit id="org.eclipse.ui.cheatsheets" version="0.0.0"/>
+<unit id="org.junit" version="0.0.0"/>
+<unit id="org.eclipse.jdt.annotation" version="0.0.0"/>
+<unit id="org.eclipse.emf.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="0.0.0"/>
+<unit id="com.google.guava" version="0.0.0"/>
+<unit id="com.google.inject" version="0.0.0"/>
+<unit id="org.apache.log4j" version="0.0.0"/>
+<unit id="org.apache.ant" version="1.8.4.v201303080030"/>
+<unit id="org.easymock" version="0.0.0"/>
+<unit id="org.antlr.runtime" version="0.0.0"/>
+<unit id="javax.inject" version="0.0.0"/>
+<unit id="org.objectweb.asm" version="0.0.0"/>
+<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/releases/kepler"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+<unit id="org.eclipse.swtbot.eclipse.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.swtbot.eclipse.test.junit.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/technology/swtbot/snapshots/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.xtend.sdk.feature.group" version="0.0.0"/>
+<repository location="${xtext.p2.repository}"/>
+</location>
+</locations>
+</target>

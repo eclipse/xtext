@@ -45,8 +45,7 @@
 			<arg value="-Declipse.p2.mirrors=false" />
 			<arg value="-Dbuild.root=${build.root}" />
 			<arg value="-DWITH.MWE2=false" />
-			<arg value="-DBOOTSTRAP=true" />
-			<arg value="-DSWTBOT=false" />
+			<arg value="-DSWTBOT=true" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-DtargetPlatformPath=${build.root}/target.platform" />
 			<arg value="-Dxtend.checkout.location=${checkout.location}" />
