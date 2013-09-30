@@ -7,10 +7,6 @@
 	<rm:locator
 		pattern="^org\.eclipse\.xtend\..*?(?:swtbot|tests|testlanguages)(?:\..+)?$"
 		searchPathRef="xtend.tests" />
-	<rm:locator pattern="^org\.eclipse\.swtbot(?:\..+)?$"
-		searchPathRef="swtbot" />
-	<rm:locator pattern="^org\.hamcrest(?:\..+)?$"
-		searchPathRef="swtbot" />
 
 	<rm:searchPath name="local.releng">
 		<rm:provider componentTypes="buckminster" readerType="local"
@@ -18,15 +14,6 @@
 			<rm:uri format="{0}/releng/{1}">
 				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
-			</rm:uri>
-		</rm:provider>
-	</rm:searchPath>
-
-	<rm:searchPath name="swtbot">
-		<rm:provider componentTypes="eclipse.feature,osgi.bundle"
-			readerType="p2" source="false" mutable="false">
-			<rm:uri format="{0}/technology/swtbot/snapshots/">
-				<bc:propertyRef key="eclipse.download" />
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
