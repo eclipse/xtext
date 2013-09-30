@@ -414,7 +414,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", _function);
         }
       };
-      this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2");
+      this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$Foo$Foo3");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -464,7 +464,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
         }
       };
       this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$NewFoo", 
-        "mypackage.Bar$NewFoo2", "mypackage.Bar$NewFoo$NewFoo3");
+        "mypackage.Bar$NewFoo2", "mypackage.Bar$NewFoo$NewFoo3", "mypackage.Bar$Foo$Foo3");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -540,7 +540,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
           AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "// nested types", _builder.toString());
         }
       };
-      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo$Foo3");
+      this.assertThereAreDeltas(_function, "Bar$Foo", "Bar$Foo$Foo3");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -580,7 +580,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
           AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", _function);
         }
       };
-      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo2");
+      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo2", "Bar$Foo$Foo3");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -621,7 +621,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
           AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", _function);
         }
       };
-      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo2", "Bar$NewFoo", "Bar$NewFoo2", "Bar$NewFoo$NewFoo3");
+      this.assertThereAreDeltas(_function, "Bar", "Bar$Foo", "Bar$Foo2", "Bar$NewFoo", "Bar$NewFoo2", "Bar$NewFoo$NewFoo3", "Bar$Foo$Foo3");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

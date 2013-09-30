@@ -9,8 +9,10 @@ package org.eclipse.xtext.builder.impl.javasupport;
 
 import com.google.common.base.Preconditions;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.xtext.builder.impl.javasupport.UnsubmittedResourceDescriptionDelta;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 /**
@@ -19,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
  * </p>
  */
 @SuppressWarnings("all")
-public class UnconfirmedStructuralChangesDelta extends UnsubmittedResourceDescriptionDelta {
+public class UnconfirmedStructuralChangesDelta extends ChangedResourceDescriptionDelta {
   private int buildNumber = new Function0<Integer>() {
     public Integer apply() {
       int _minus = (-1);
@@ -27,14 +29,14 @@ public class UnconfirmedStructuralChangesDelta extends UnsubmittedResourceDescri
     }
   }.apply();
   
-  private final IProject project;
+  private final IType type;
   
-  public UnconfirmedStructuralChangesDelta(final IProject project, final String compilationUnitName, final IResourceDescription old, final IResourceDescription _new) {
-    super(compilationUnitName, old, _new);
-    Preconditions.<IProject>checkNotNull(project);
+  public UnconfirmedStructuralChangesDelta(final IType type, final IResourceDescription old, final IResourceDescription _new) {
+    super(old, _new);
+    Preconditions.<IType>checkNotNull(type);
     Preconditions.<IResourceDescription>checkNotNull(old);
     Preconditions.<IResourceDescription>checkNotNull(_new);
-    this.project = project;
+    this.type = type;
   }
   
   public int getBuildNumber() {
@@ -47,6 +49,8 @@ public class UnconfirmedStructuralChangesDelta extends UnsubmittedResourceDescri
   }
   
   public IProject getProject() {
-    return this.project;
+    IJavaProject _javaProject = this.type.getJavaProject();
+    IProject _project = _javaProject.getProject();
+    return _project;
   }
 }

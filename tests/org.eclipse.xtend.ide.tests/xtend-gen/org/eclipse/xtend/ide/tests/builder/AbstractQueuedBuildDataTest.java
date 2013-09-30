@@ -11,9 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.builder.JavaEditorExtension;
@@ -22,13 +20,18 @@ import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
 import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
 /**
@@ -60,44 +63,51 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     super.tearDown();
   }
   
-  public Collection<? extends Delta> assertThereAreDeltas(final Procedure0 producer, final String... expectedStructucalChangedTypes) {
+  public Collection<? extends Delta> assertThereAreDeltas(final Procedure0 producer, final String... expectedExportedNames) {
     Collection<Delta> _assertDeltas = this.assertDeltas(producer);
-    Collection<? extends Delta> _assertThereAreDeltas = this.assertThereAreDeltas(_assertDeltas, expectedStructucalChangedTypes);
+    Collection<? extends Delta> _assertThereAreDeltas = this.assertThereAreDeltas(_assertDeltas, expectedExportedNames);
     return _assertThereAreDeltas;
   }
   
-  public Collection<? extends Delta> assertThereAreDeltas(final Collection<? extends Delta> deltas, final String... expectedStructucalChangedTypes) {
+  public Collection<? extends Delta> assertThereAreDeltas(final Collection<? extends Delta> deltas, final String... expectedExportedNames) {
     Collection<? extends Delta> _xblockexpression = null;
     {
       int _size = deltas.size();
       boolean _notEquals = (0 != _size);
       Assert.assertTrue("There are not deltas", _notEquals);
-      int _length = expectedStructucalChangedTypes.length;
+      int _length = expectedExportedNames.length;
       boolean _notEquals_1 = (_length != 0);
       if (_notEquals_1) {
-        final HashSet<String> remainingQualifiedNames = CollectionLiterals.<String>newHashSet(expectedStructucalChangedTypes);
-        Set<String> _types = this.getTypes(deltas);
-        for (final String type : _types) {
+        final HashSet<String> remainingExportedNames = CollectionLiterals.<String>newHashSet(expectedExportedNames);
+        final HashSet<String> unexpectedExportedNames = CollectionLiterals.<String>newHashSet();
+        HashSet<String> _exportedNames = this.getExportedNames(deltas);
+        for (final String exportedName : _exportedNames) {
           {
             final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
               public Boolean apply(final String it) {
-                boolean _equals = Objects.equal(type, it);
+                boolean _equals = Objects.equal(exportedName, it);
                 return Boolean.valueOf(_equals);
               }
             };
-            final String qualifiedName = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(expectedStructucalChangedTypes)), _function);
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("There are deltas for the following type: ");
-            _builder.append(type, "");
-            Assert.assertNotNull(_builder.toString(), qualifiedName);
-            remainingQualifiedNames.remove(qualifiedName);
+            final String qualifiedName = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(expectedExportedNames)), _function);
+            boolean _equals = Objects.equal(qualifiedName, null);
+            if (_equals) {
+              unexpectedExportedNames.add(exportedName);
+            } else {
+              remainingExportedNames.remove(qualifiedName);
+            }
           }
         }
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("There are not deltas for the following types: ");
-        _builder.append(remainingQualifiedNames, "");
-        int _length_1 = ((Object[])Conversions.unwrapArray(remainingQualifiedNames, Object.class)).length;
+        _builder.append("There are unexpected exported names: ");
+        _builder.append(unexpectedExportedNames, "");
+        int _length_1 = ((Object[])Conversions.unwrapArray(unexpectedExportedNames, Object.class)).length;
         Assert.assertEquals(_builder.toString(), 0, _length_1);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("There are not expected exported names ");
+        _builder_1.append(remainingExportedNames, "");
+        int _length_2 = ((Object[])Conversions.unwrapArray(remainingExportedNames, Object.class)).length;
+        Assert.assertEquals(_builder_1.toString(), 0, _length_2);
       }
       _xblockexpression = (deltas);
     }
@@ -117,8 +127,8 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   public Collection<? extends Delta> assertThereAreNotDeltas(final Collection<? extends Delta> deltas) {
     Collection<? extends Delta> _xblockexpression = null;
     {
-      Set<String> _types = this.getTypes(deltas);
-      String _plus = ("There are deltas: " + _types);
+      HashSet<String> _exportedNames = this.getExportedNames(deltas);
+      String _plus = ("There are deltas: " + _exportedNames);
       int _size = deltas.size();
       Assert.assertEquals(_plus, 0, _size);
       _xblockexpression = (deltas);
@@ -126,24 +136,65 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     return _xblockexpression;
   }
   
-  public Set<String> getTypes(final Collection<? extends Delta> deltas) {
-    final Function1<Delta,String> _function = new Function1<Delta,String>() {
-      public String apply(final Delta it) {
-        String _xblockexpression = null;
+  public HashSet<String> getExportedNames(final Collection<? extends Delta> deltas) {
+    final Function1<Delta,HashSet<String>> _function = new Function1<Delta,HashSet<String>>() {
+      public HashSet<String> apply(final Delta it) {
+        HashSet<String> _xblockexpression = null;
         {
-          URI _uri = it.getUri();
-          final String uri = _uri.toString();
-          int _lastIndexOf = uri.lastIndexOf("/");
-          int _plus = (_lastIndexOf + 1);
-          String _substring = uri.substring(_plus);
-          _xblockexpression = (_substring);
+          final HashSet<String> names = CollectionLiterals.<String>newHashSet();
+          boolean _haveEObjectDescriptionsChanged = it.haveEObjectDescriptionsChanged();
+          boolean _not = (!_haveEObjectDescriptionsChanged);
+          if (_not) {
+            return names;
+          }
+          IResourceDescription _new = it.getNew();
+          Iterable<IEObjectDescription> _exportedObjects = null;
+          if (_new!=null) {
+            _exportedObjects=_new.getExportedObjects();
+          }
+          if (_exportedObjects!=null) {
+            final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
+              public void apply(final IEObjectDescription it) {
+                QualifiedName _name = it.getName();
+                String _string = _name.toString();
+                names.add(_string);
+              }
+            };
+            IterableExtensions.<IEObjectDescription>forEach(_exportedObjects, _function);
+          }
+          IResourceDescription _old = it.getOld();
+          Iterable<IEObjectDescription> _exportedObjects_1 = null;
+          if (_old!=null) {
+            _exportedObjects_1=_old.getExportedObjects();
+          }
+          if (_exportedObjects_1!=null) {
+            final Procedure1<IEObjectDescription> _function_1 = new Procedure1<IEObjectDescription>() {
+              public void apply(final IEObjectDescription it) {
+                QualifiedName _name = it.getName();
+                String _string = _name.toString();
+                names.add(_string);
+              }
+            };
+            IterableExtensions.<IEObjectDescription>forEach(_exportedObjects_1, _function_1);
+          }
+          _xblockexpression = (names);
         }
         return _xblockexpression;
       }
     };
-    Iterable<String> _map = IterableExtensions.map(deltas, _function);
-    Set<String> _set = IterableExtensions.<String>toSet(_map);
-    return _set;
+    Iterable<HashSet<String>> _map = IterableExtensions.map(deltas, _function);
+    final Function2<HashSet<String>,HashSet<String>,HashSet<String>> _function_1 = new Function2<HashSet<String>,HashSet<String>,HashSet<String>>() {
+      public HashSet<String> apply(final HashSet<String> t, final HashSet<String> t2) {
+        HashSet<String> _xblockexpression = null;
+        {
+          t.addAll(t2);
+          _xblockexpression = (t);
+        }
+        return _xblockexpression;
+      }
+    };
+    HashSet<String> _reduce = IterableExtensions.<HashSet<String>>reduce(_map, _function_1);
+    return _reduce;
   }
   
   public Collection<Delta> assertDeltas(final Procedure0 producer) {
@@ -168,8 +219,8 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     final Collection<UnconfirmedStructuralChangesDelta> deltas = this.queuedBuildData.getUnconfirmedDeltas();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("There are unconfirmed changes: ");
-    Set<String> _types = this.getTypes(deltas);
-    _builder.append(_types, "");
+    HashSet<String> _exportedNames = this.getExportedNames(deltas);
+    _builder.append(_exportedNames, "");
     Assert.assertTrue(_builder.toString(), result);
   }
   

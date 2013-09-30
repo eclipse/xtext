@@ -141,15 +141,14 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
-		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
-		assertEquals(1, event.getDeltas().size());
+		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		assertNotNull(delta.getNew());
 		assertNotNull(delta.getOld());
 		assertEquals("java:/Objects/" + NESTED_TYPES, delta.getUri().toString());
-		Collection<String> allNames = getNames(delta);
+		Collection<String> allNames = getNames(event.getDeltas());
 		assertOriginalValues(allNames);
-		assertEquals(7, allNames.size());
+		assertEquals("" + allNames, 3, allNames.size());
 	}
 	
 	@Test public void testRemoveMethod() throws BadLocationException, JavaModelException, InterruptedException {
@@ -160,25 +159,20 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
-		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
-		assertEquals(1, event.getDeltas().size());
+		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		assertNotNull(delta.getNew());
 		assertNotNull(delta.getOld());
 		assertEquals("java:/Objects/" + NESTED_TYPES, delta.getUri().toString());
-		Collection<String> allNames = getNames(delta);
+		Collection<String> allNames = getNames(event.getDeltas());
 		assertOriginalValues(allNames);
-		assertEquals(7, allNames.size());
+		assertEquals("" + allNames, 3, allNames.size());
 	}
 
 	protected void assertOriginalValues(Collection<String> allNames) {
-		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + ".method"));
-		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer.method"));
-		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner.method"));
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES));
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer"));
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner"));
-		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner.Inner"));
 	}
 	
 	@Test public void testAddParam() throws BadLocationException, JavaModelException, InterruptedException {
@@ -188,12 +182,10 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
-		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
-		assertEquals(1, event.getDeltas().size());
-		IResourceDescription.Delta delta = event.getDeltas().get(0);
-		Collection<String> allNames = getNames(delta);
+		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
+		Collection<String> allNames = getNames(event.getDeltas());
 		assertOriginalValues(allNames);
-		assertEquals(7, allNames.size());
+		assertEquals("" + allNames, 3, allNames.size());
 	}
 	
 	@Test public void testAddMethod() throws BadLocationException, JavaModelException, InterruptedException {
@@ -204,13 +196,10 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
-		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
-		assertEquals(1, event.getDeltas().size());
-		IResourceDescription.Delta delta = event.getDeltas().get(0);
-		Collection<String> allNames = getNames(delta);
+		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
+		Collection<String> allNames = getNames(event.getDeltas());
 		assertOriginalValues(allNames);
-		assertTrue(allNames.contains(NESTED_TYPES + ".foobar"));
-		assertEquals(8, allNames.size());
+		assertEquals("" + allNames, 3, allNames.size());
 	}
 	
 	@Test public void testRenameMethod() throws BadLocationException, JavaModelException, InterruptedException {
@@ -220,13 +209,10 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
-		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
-		assertEquals(1, event.getDeltas().size());
-		IResourceDescription.Delta delta = event.getDeltas().get(0);
-		Collection<String> allNames = getNames(delta);
+		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
+		Collection<String> allNames = getNames(event.getDeltas());
 		assertOriginalValues(allNames);
-		assertTrue(allNames.contains(NESTED_TYPES + ".method2"));
-		assertEquals(8, allNames.size());
+		assertEquals("" + allNames, 3, allNames.size());
 	}
 	
 	@Test public void testRenameInnerMethod() throws BadLocationException, JavaModelException, InterruptedException {
@@ -236,13 +222,10 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
-		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
-		IResourceDescription.Delta delta = event.getDeltas().get(2);
-		Collection<String> allNames = getNames(delta);
+		Collection<String> allNames = getNames(event.getDeltas());
 		assertOriginalValues(allNames);
-		assertTrue(allNames.contains(NESTED_TYPES + "$Outer$Inner.method2"));
-		assertEquals(8, allNames.size());
+		assertEquals("" + allNames, 3, allNames.size());
 	}
 	
 	@Test public void testRenameClass() throws BadLocationException, JavaModelException, InterruptedException {
@@ -253,28 +236,45 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
-		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
-		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
+		assertEquals("" + event.getDeltas(), 6, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		
-		Set<String> expectedURIs = Sets.newHashSet("java:/Objects/" + NESTED_TYPES, "java:/Objects/" + foobar, "java:/Objects/" + foobar + "$Outer");
-		assertTrue(expectedURIs.remove(delta.getUri().toString()));
-		assertTrue(expectedURIs.remove(event.getDeltas().get(1).getUri().toString()));
-		assertTrue(expectedURIs.remove(event.getDeltas().get(2).getUri().toString()));
+		Set<String> expectedURIs = Sets.newHashSet("java:/Objects/" + NESTED_TYPES,
+				"java:/Objects/" + NESTED_TYPES + "$Outer", 
+				"java:/Objects/" + NESTED_TYPES + "$Outer$Inner",
+				"java:/Objects/" + foobar,
+				"java:/Objects/" + foobar + "$Outer", 
+				"java:/Objects/" + foobar + "$Outer$Inner");
+		assertTrue("" + delta.getUri(), expectedURIs.remove(delta.getUri().toString()));
+		for (int i = 1; i < 6; i++) {
+			String uri = event.getDeltas().get(i).getUri().toString();
+			assertTrue(uri, expectedURIs.remove(uri));
+		}
 		assertTrue(expectedURIs.isEmpty());
 		
 		Collection<String> allNames = getNames(delta);
-		addNames(event.getDeltas().get(1).getNew(), allNames); //FooBar
-		addNames(event.getDeltas().get(2).getOld(), allNames); //NestedTypes
-		assertTrue(allNames.toString(), allNames.contains(foobar + ".method"));
-		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer.method"));
-		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner.method"));
+		addNames(event.getDeltas().get(0).getNew(), allNames); //FooBar
+		addNames(event.getDeltas().get(1).getNew(), allNames); //FooBar$Outer
+		addNames(event.getDeltas().get(2).getNew(), allNames); //FooBar$Outer$Inner
+		addNames(event.getDeltas().get(3).getOld(), allNames); //NestedTypes
+		addNames(event.getDeltas().get(4).getOld(), allNames); //NestedTypes$Outer
+		addNames(event.getDeltas().get(5).getOld(), allNames); //NestedTypes$Outer$Inner
 		assertTrue(allNames.toString(), allNames.contains(foobar));
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer"));
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner"));
-		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner.Inner"));
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES));
-		assertEquals(8, allNames.size());
+		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer"));
+		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner"));
+		assertEquals("" + allNames, 6, allNames.size());
+	}
+	
+	protected Collection<String> getNames(List<IResourceDescription.Delta> deltas) {
+		Set<String> result = Sets.newHashSet();
+		for (IResourceDescription.Delta delta : deltas) {
+			addNames(delta.getNew(), result);
+			addNames(delta.getOld(), result);
+		}
+		return result;
 	}
 	
 	protected Collection<String> getNames(IResourceDescription.Delta delta) {

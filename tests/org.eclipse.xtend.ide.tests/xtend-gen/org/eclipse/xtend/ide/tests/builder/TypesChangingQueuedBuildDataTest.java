@@ -208,7 +208,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
         TypesChangingQueuedBuildDataTest.this.delete("Bar.java");
       }
     };
-    this.assertThereAreDeltas(_function, "Bar");
+    this.assertThereAreDeltas(_function, "Bar", "Foo");
   }
   
   @Test
@@ -234,7 +234,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
         TypesChangingQueuedBuildDataTest.this.delete("/mypackage/Bar.java");
       }
     };
-    this.assertThereAreDeltas(_function, "mypackage.Bar");
+    this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Foo");
   }
   
   @Test
@@ -270,7 +270,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
         TypesChangingQueuedBuildDataTest.this.delete("Bar.java");
       }
     };
-    this.assertThereAreDeltas(_function, "Bar");
+    this.assertThereAreDeltas(_function, "Bar", "Bar$Foo2", "Bar$Foo", "Bar$Foo$Foo3");
   }
   
   @Test
@@ -309,7 +309,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
         TypesChangingQueuedBuildDataTest.this.delete("/mypackage/Bar.java");
       }
     };
-    this.assertThereAreDeltas(_function, "mypackage.Bar");
+    this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar$Foo$Foo3", "mypackage.Bar$Foo2", "mypackage.Bar$Foo");
   }
   
   public String create(final String fileName, final String content) {
