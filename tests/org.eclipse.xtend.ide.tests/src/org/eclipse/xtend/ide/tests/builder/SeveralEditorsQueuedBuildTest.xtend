@@ -40,32 +40,26 @@ class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
 		reset
 
 		val fooEditor = '/mypackage/Foo.java'.reconcile("foo", "foo2")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		val barEditor = '/mypackage/Bar.java'.reconcile("bar", "bar2")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo", "mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		barEditor.save
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo")
 		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		confirmDeltas
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreDeltas("mypackage.Bar")
 
 		fooEditor.save
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
 		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Foo")
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		confirmDeltas
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreDeltas("mypackage.Foo")
 	}
@@ -96,27 +90,22 @@ class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
 		reset
 
 		val fooEditor = '/mypackage/Foo.java'.reconcile("foo", "foo2")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		val barEditor = '/mypackage/Bar.java'.reconcile("bar", "bar2")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo", "mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		fooEditor.close
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		barEditor.save
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
 		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		confirmDeltas
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreDeltas("mypackage.Bar")
 	}
@@ -147,32 +136,26 @@ class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
 		reset
 
 		val fooEditor = '/mypackage/Foo.java'.reconcile("foo", "foo2")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		val barEditor = '/mypackage/Bar.java'.reconcile("bar", "bar2")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo", "mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		fooEditor.reconcile("foo2", "foo")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo", "mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		fooEditor.close
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		barEditor.save
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
 		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		confirmDeltas
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreDeltas("mypackage.Bar")
 	}
@@ -203,37 +186,30 @@ class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
 		reset
 
 		val fooEditor = '/mypackage/Foo.java'.reconcile("foo", "foo2")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		val barEditor = '/mypackage/Bar.java'.reconcile("bar", "bar2")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo", "mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		fooEditor.reconcile("foo2", "foo")
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Foo", "mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		fooEditor.save
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Foo")
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		confirmDeltas
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		barEditor.save
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
 		queuedBuildData.unconfirmedDeltas.assertThereAreDeltas("mypackage.Bar")
 		queuedBuildData.andRemovePendingDeltas.assertThereAreNotDeltas
 
 		confirmDeltas
-		javaChangeQueueFiller.reconcileDeltas.assertThereAreNotDeltas
 		queuedBuildData.unconfirmedDeltas.assertThereAreNotDeltas
 		queuedBuildData.andRemovePendingDeltas.assertThereAreDeltas("mypackage.Bar")
 	}

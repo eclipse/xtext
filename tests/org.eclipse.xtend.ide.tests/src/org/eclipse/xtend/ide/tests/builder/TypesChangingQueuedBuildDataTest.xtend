@@ -140,12 +140,10 @@ class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTest {
 				
 				class Foo {}
 			''')
-
-		// FIXME : there have to be deltas for Foo type either
 		assertThereAreDeltas(
 			[ |
 				'Bar.java'.delete
-			], "Bar")
+			], "Bar", "Foo")
 	}
 
 	@Test def void deletePrimaryAndSecondaryType2() {
@@ -161,12 +159,10 @@ class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTest {
 				
 				}
 			''')
-
-		// FIXME : there have to be deltas for Foo type either
 		assertThereAreDeltas(
 			[ |
 				'/mypackage/Bar.java'.delete
-			], "mypackage.Bar")
+			], "mypackage.Bar", "mypackage.Foo")
 	}
 
 	@Test def void deletePrimaryAndNestedTypes() {
@@ -185,12 +181,10 @@ class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTest {
 				
 				}
 			''')
-			
-		// FIXME : there have to be deltas for Bar$Foo2, Bar$Foo, Bar$Foo$Foo3 types
 		assertThereAreDeltas(
 			[ |
 				'Bar.java'.delete
-			], "Bar")
+			], "Bar", "Bar$Foo2", "Bar$Foo", "Bar$Foo$Foo3")
 	}
 
 	@Test def void deletePrimaryAndNestedTypes2() {
@@ -211,12 +205,10 @@ class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTest {
 				
 				}
 			''')
-			
-		// FIXME : there have to be deltas for mypackage.Bar$Foo2, mypackage.Bar$Foo$Foo3, mypackage.Bar$Foo types
 		assertThereAreDeltas(
 			[ |
 				'/mypackage/Bar.java'.delete
-			], "mypackage.Bar")
+			], "mypackage.Bar", "mypackage.Bar$Foo$Foo3", "mypackage.Bar$Foo2", "mypackage.Bar$Foo")
 	}
 
 	def create(String fileName, String content) {

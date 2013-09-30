@@ -44,21 +44,27 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 		super.tearDown
 	}
 
-	def assertThereAreDeltas(=>void producer, String ... expectedStructucalChangedTypes) {
-		producer.assertDeltas.assertThereAreDeltas(expectedStructucalChangedTypes)
+	def assertThereAreDeltas(=>void producer, String ... expectedExportedNames) {
+		producer.assertDeltas.assertThereAreDeltas(expectedExportedNames)
 	}
 
-	def assertThereAreDeltas(Collection<? extends Delta> deltas, String... expectedStructucalChangedTypes) {
+	def assertThereAreDeltas(Collection<? extends Delta> deltas, String... expectedExportedNames) {
 		assertTrue("There are not deltas", 0 != deltas.size)
-		if (expectedStructucalChangedTypes.length != 0) {
-			val remainingQualifiedNames = <String>newHashSet(expectedStructucalChangedTypes)
-			for (type : deltas.types) {
-				val qualifiedName = expectedStructucalChangedTypes.findFirst[type == it]
-				assertNotNull('''There are deltas for the following type: «type»''', qualifiedName)
-				remainingQualifiedNames.remove(qualifiedName)
+		if (expectedExportedNames.length != 0) {
+			val remainingExportedNames = <String>newHashSet(expectedExportedNames)
+			val unexpectedExportedNames = <String>newHashSet
+			for (exportedName : deltas.exportedNames) {
+				val qualifiedName = expectedExportedNames.findFirst[exportedName == it]
+				if (qualifiedName == null) {
+					unexpectedExportedNames.add(exportedName)
+				} else {
+					remainingExportedNames.remove(qualifiedName)
+				}
 			}
-			assertEquals('''There are not deltas for the following types: «remainingQualifiedNames»''', 0,
-				remainingQualifiedNames.length)
+			assertEquals('''There are unexpected exported names: «unexpectedExportedNames»''', 0,
+				unexpectedExportedNames.length)
+			assertEquals('''There are not expected exported names «remainingExportedNames»''', 0,
+				remainingExportedNames.length)
 		}
 		deltas
 	}
@@ -69,16 +75,29 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 	}
 
 	def assertThereAreNotDeltas(Collection<? extends Delta> deltas) {
-		assertEquals("There are deltas: " + deltas.types, 0, deltas.size)
+		assertEquals("There are deltas: " + deltas.exportedNames, 0, deltas.size)
 		deltas
 	}
 
-	def getTypes(Collection<? extends Delta> deltas) {
+	def getExportedNames(Collection<? extends Delta> deltas) {
 		deltas.map[
 			{
-				val uri = uri.toString
-				uri.substring(uri.lastIndexOf("/") + 1)
-			}].toSet
+				val names = <String>newHashSet
+				if (!haveEObjectDescriptionsChanged) {
+					return names
+				}
+				getNew?.exportedObjects?.forEach [
+					names += name.toString
+				]
+				old?.exportedObjects?.forEach [
+					names += name.toString
+				]
+				names
+			}].reduce[t, t2|
+			{
+				t.addAll(t2)
+				t
+			}]
 	}
 
 	def assertDeltas(=>void producer) {
@@ -96,7 +115,7 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 	def confirmDeltas() {
 		val result = tryConfirmDeltas
 		val deltas = queuedBuildData.unconfirmedDeltas
-		assertTrue('''There are unconfirmed changes: «deltas.types»''', result)
+		assertTrue('''There are unconfirmed changes: «deltas.exportedNames»''', result)
 	}
 
 	def tryConfirmDeltas() {

@@ -248,15 +248,14 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 				
 				}
 			''')
-			
-		//FIXME: There have to be deltas for mypackage.Bar$Foo$Foo3 type
+
 		assertThereAreDeltas(
 			[ |
 				'/mypackage/Bar.java'.save [
 					changeContent("public class Foo { public class Foo3 {} }", "")
 					changeContent("public static class Foo2 {}", "")
 				]
-			], "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2")
+			], "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$Foo$Foo3")
 	}
 
 	@Test def void renameNestedTypes() {
@@ -274,8 +273,6 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 				
 				}
 			''')
-
-		// FIXME: There have to be deltas for mypackage.Bar$Foo§Foo3 type
 		assertThereAreDeltas(
 			[ |
 				'/mypackage/Bar.java'.save [
@@ -284,7 +281,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 					changeContent(" Foo3 ", " NewFoo3 ")
 				]
 			], "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$NewFoo",
-			"mypackage.Bar$NewFoo2", "mypackage.Bar$NewFoo$NewFoo3")
+			"mypackage.Bar$NewFoo2", "mypackage.Bar$NewFoo$NewFoo3", "mypackage.Bar$Foo$Foo3")
 	}
 
 	@Test def public void addNestedTypesWithinDefaultPackage() {
@@ -328,7 +325,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 		assertThereAreDeltas(
 			[ |
 				'Bar.java'.save("// nested types", '''public class Foo3 {}''')
-			], "Bar", "Bar$Foo", "Bar$Foo$Foo3")
+			], "Bar$Foo", "Bar$Foo$Foo3")
 	}
 
 	@Test def public void removeNestedTypesWithinDefaultPackage() {
@@ -342,14 +339,14 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 				
 				}
 			''')
-		// FIXME: there have to be deltas for Bar$Foo$Foo3 type
+
 		assertThereAreDeltas(
 			[ |
 				'Bar.java'.save [
 					changeContent("public class Foo { public class Foo3 {} }", "")
 					changeContent("public static class Foo2 {}", "")
 				]
-			], "Bar", "Bar$Foo", "Bar$Foo2")
+			], "Bar", "Bar$Foo", "Bar$Foo2", "Bar$Foo$Foo3")
 	}
 
 	@Test def void renameNestedTypesWithinDefaultPackage() {
@@ -363,8 +360,6 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 				
 				}
 			''')
-			
-		// FIXME: There have to be deltas for Bar$Foo$Foo3 type
 		assertThereAreDeltas(
 			[ |
 				'Bar.java'.save [
@@ -372,7 +367,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 					changeContent(" Foo2 ", " NewFoo2 ")
 					changeContent(" Foo3 ", " NewFoo3 ")
 				]
-			], "Bar", "Bar$Foo", "Bar$Foo2", "Bar$NewFoo", "Bar$NewFoo2", "Bar$NewFoo$NewFoo3")
+			], "Bar", "Bar$Foo", "Bar$Foo2", "Bar$NewFoo", "Bar$NewFoo2", "Bar$NewFoo$NewFoo3", "Bar$Foo$Foo3")
 	}
 
 	@Test def void changePackageDeclaration() {
