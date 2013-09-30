@@ -1,7 +1,7 @@
-setpref targetPlatformPath="${build.root}/target.platform"
+#setpref targetPlatformPath="${build.root}/target.platform"
 #setpref org.eclipse.buckminster.core.maxParallelResolutions=1
 #setpref org.eclipse.buckminster.core.maxParallelMaterializations=1
-importprefs -F ${releng.project.location}/releng/buckminster.workspace.epf
+#importprefs -F ${releng.project.location}/releng/buckminster.workspace.epf
 
 # Xtext compile
 #importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
@@ -18,9 +18,9 @@ importprefs -F ${releng.project.location}/releng/buckminster.workspace.epf
 #Xtext Testing
 importtargetdefinition -DuseMirror=true -A "${releng.project.location}/releng/tests/swtbot-tests-buildserver.target
 
-resolve "${releng.project.location}/releng/tests/xtext-test.mspec"
+#resolve "${releng.project.location}/releng/tests/xtext-test.mspec"
 resolve "${releng.project.location}/releng/tests-xtend/xtend-test.mspec"
-#build
+build
 junit --stderr --stdout --launch "org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SWTBot).launch" --flatXML --output "${build.root}/xtend.test.results/xtend.ide.swtbot.tests.slow.xml
 #perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#zip.examples"
 
