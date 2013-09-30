@@ -24,6 +24,7 @@ import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -242,7 +243,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 					result.append(newLine);	
 				}
 			}
-			return result.toString();
+			return result.toString().replace("\n", StringConcatenation.DEFAULT_LINE_DELIMITER);
 		}
 	}
 	

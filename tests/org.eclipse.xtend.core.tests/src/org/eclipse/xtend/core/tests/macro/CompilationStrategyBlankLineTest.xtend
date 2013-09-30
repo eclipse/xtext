@@ -5,6 +5,7 @@ import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.junit.Test
+import org.eclipse.xtend2.lib.StringConcatenation
 
 class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 	
@@ -74,7 +75,7 @@ class ArtificialMethodsProcessor extends AbstractClassProcessor {
 		])
 		annotatedClass.addMethod('blank_3', [
 			body = [
-				'\n'
+				StringConcatenation.DEFAULT_LINE_DELIMITER
 			]
 		])
 		annotatedClass.addMethod('blank_4', [

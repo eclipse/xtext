@@ -51,6 +51,11 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XtendValidationTest extends AbstractXtendTestCase {
+	
+	/**
+	 * {@link org.eclipse.xtext.documentation.impl.MultiLineJavaDocTypeReferenceProvider#lineDelimiter}
+	 */
+	protected String lineDelimiter = System.getProperty("line.separator");
 
 	@Inject
 	protected ValidationTestHelper helper;
@@ -1648,11 +1653,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	public void testJavaDocRefs_7() throws Exception {
+	public void testJavaDocRefs_see_withNewLineEnd() throws Exception {
 		XtendFile file = file(
 				"class Foo {\n" +
 					"/**" +
-					" * @see    List\n" +
+					" * @see    List" + lineDelimiter +
 					" */" +
 					"String field = '42'\n" +
 					"def doStuff(){}"+
@@ -1662,6 +1667,34 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(field, XTEND_FIELD, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
 	}
 	
+	@Test
+	public void testJavaDocRefs_see_withSpaceEnd() throws Exception {
+		XtendFile file = file(
+				"class Foo {\n" +
+					"/**" +
+					" * @see    List */" +
+					"String field = '42'\n" +
+					"def doStuff(){}"+
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendMember field = clazz.getMembers().get(0);
+		helper.assertError(field, XTEND_FIELD, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+	}
+
+	@Test
+	public void testJavaDocRefs_see_withoutEnd() throws Exception {
+		XtendFile file = file(
+				"class Foo {\n" +
+					"/**" +
+					" * @see    List*/" +
+					"String field = '42'\n" +
+					"def doStuff(){}"+
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendMember field = clazz.getMembers().get(0);
+		helper.assertNoErrors(field);
+	}
+
 	@Test
 	public void testInvalidNumOfTypeParameters_0() throws Exception {
 		XtendFile file = file(

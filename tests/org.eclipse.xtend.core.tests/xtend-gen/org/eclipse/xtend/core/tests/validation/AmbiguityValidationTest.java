@@ -17,6 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -67,7 +68,8 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     final Procedure1<String> _function = new Procedure1<String>() {
       public void apply(final String it) {
         final String message = singleError.getMessage();
-        boolean _contains = message.contains(it);
+        String _unixNewLine = AmbiguityValidationTest.this.toUnixNewLine(it);
+        boolean _contains = message.contains(_unixNewLine);
         boolean _not = (!_contains);
         if (_not) {
           Assert.assertEquals(it, message);
@@ -113,5 +115,10 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private String toUnixNewLine(final String string) {
+    String _replace = string.replace(StringConcatenation.DEFAULT_LINE_DELIMITER, "\n");
+    return _replace;
   }
 }

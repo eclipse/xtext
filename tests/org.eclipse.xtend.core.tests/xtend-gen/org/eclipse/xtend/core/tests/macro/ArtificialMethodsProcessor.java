@@ -54,7 +54,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
           public CharSequence compile(final CompilationContext it) {
-            return "\n";
+            return StringConcatenation.DEFAULT_LINE_DELIMITER;
           }
         };
         it.setBody(_function);

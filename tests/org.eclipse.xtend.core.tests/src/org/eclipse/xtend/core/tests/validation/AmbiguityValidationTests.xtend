@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate
 import org.junit.Test
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtend2.lib.StringConcatenation
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -39,7 +40,7 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		assertEquals(singleError.message, IssueCodes.AMBIGUOUS_FEATURE_CALL, singleError.code)
 		messageParts.forEach [
 			val message = singleError.message
-			if (!message.contains(it)) {
+			if (!message.contains(it.toUnixNewLine)) {
 				assertEquals(it, message)
 			}
 		]
@@ -67,6 +68,9 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		
 	}
 	
+	def private String toUnixNewLine(String string) {
+		string.replace(StringConcatenation.DEFAULT_LINE_DELIMITER, "\n")
+	}
 }
 
 /**

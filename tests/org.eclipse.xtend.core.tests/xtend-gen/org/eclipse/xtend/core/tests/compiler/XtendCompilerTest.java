@@ -7736,7 +7736,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  @Test(timeout = 10000)
+  @Test(timeout = 50000)
   public void testBug412853() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Bug {");
