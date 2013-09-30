@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.xtend2.lib.StringConcatenation;
+
 import com.google.common.collect.Lists;
 
 
@@ -19,14 +21,14 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class CommentInserter {
-	
 	private static boolean DISABLED = false;
 	
 	private Pattern pattern = Pattern.compile("('''|\u00BB)([^\u00AB]*)(\u00AB|''')");
 	
-	public List<String> getRichStringWithComments(String richString) {
+	public List<String> getRichStringWithComments(String platformRichString) {
 		if (DISABLED)
-			return Collections.singletonList(richString);
+			return Collections.singletonList(platformRichString);
+		String richString = platformRichString.replace(StringConcatenation.DEFAULT_LINE_DELIMITER, "\n");
 		List<String> result = Lists.newArrayList();
 		Matcher matcher = pattern.matcher(richString);
 		while(matcher.find()) {
@@ -44,6 +46,9 @@ public class CommentInserter {
 					result.add(begin + "\u00AB\n/* comment */\n\t\u00BB" + mid + "\u00AB\n/* comment */\n\t\u00BB" + end);
 				}
 			}
+		}
+		for (int i = 0; i < result.size(); i++) {
+			result.set(i, result.get(i).replace("\n", StringConcatenation.DEFAULT_LINE_DELIMITER));
 		}
 		return result;
 	}

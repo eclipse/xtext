@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.richstring;
 
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Assert;
@@ -20,6 +21,7 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
 public abstract class AbstractRichStringEvaluationTest extends Assert {
+	protected static final String NL = StringConcatenation.DEFAULT_LINE_DELIMITER;
 
 	public abstract void assertOutput(String expectedOutput, String richString) throws Exception;
 	
@@ -49,9 +51,9 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testExpressionTemplateWithTrailingLiteral() throws Exception {
 		assertOutput(
-			"start\n"+
-			"  first line\n" +
-			"  second line\n",
+			"start" + NL +
+			"  first line" + NL +
+			"  second line" + NL,
 			"'''«'start'»\n" +
 			"  first line\n" +
 			"  second line\n" +
@@ -59,20 +61,20 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	}
 	
 	@Test public void testMLExpressionTemplate() throws Exception {
-		assertOutput("foo\nbar", "'''«'foo\nbar'»'''");
+		assertOutput("foo" + NL + "bar", "'''«'foo\nbar'»'''");
 	}
 	
 	@Test public void testMLExpressionTemplateWithLeadingSpace() throws Exception {
-		assertOutput("  foo\n  bar", "'''  «'foo\nbar'»'''");
+		assertOutput("  foo" + NL + "  bar", "'''  «'foo\nbar'»'''");
 	}
 	
 	@Test public void testMLExpressionTemplateWithTrailingSpace() throws Exception {
-		assertOutput("foo\nbar   ", "'''«'foo\nbar'»   '''");
+		assertOutput("foo" + NL + "bar   ", "'''«'foo\nbar'»   '''");
 	}
 	
 	@Test public void testMultiLineTemplate() throws Exception {
 		assertOutput(
-				"foobar\n", 
+				"foobar" + NL, 
 				"'''\n" +
 				"  foobar\n" +
 				"'''");
@@ -80,9 +82,9 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testMultiLineTemplate_01() throws Exception {
 		assertOutput(
-				" foobar\n" +
-				"   foobar\n" +
-				"foobar\n",
+				" foobar" + NL +
+				"   foobar" + NL +
+				"foobar" + NL,
 				"'''\n" +
 				"  foobar\n" +
 				"    foobar\n" +
@@ -92,9 +94,9 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testMultiLineTemplate_02() throws Exception {
 		assertOutput(
-				"  foobar\n" +
-				"    foobar\n" +
-				" foobar\n",
+				"  foobar" + NL +
+				"    foobar" + NL +
+				" foobar" + NL,
 				"'''  foobar\n" +
 				"    foobar\n" +
 				" foobar\n" +
@@ -103,8 +105,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testMultiLineTemplate_03() throws Exception {
 		assertOutput(
-				"  foobar\n" +
-				"    foobar\n" +
+				"  foobar" + NL +
+				"    foobar" + NL +
 				" foobar  ",
 				"'''  foobar\n" +
 				"    foobar\n" +
@@ -132,7 +134,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	}
 	
 	@Test public void testIf_06() throws Exception {
-		assertOutput("foobar\n", 
+		assertOutput("foobar" + NL, 
 				"'''\n"+
 				"«IF true»\n"+
 				"	foobar«ENDIF»\n"+
@@ -140,7 +142,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	}
 	
 	@Test public void testIf_07() throws Exception {
-		assertOutput("foobar\n", 
+		assertOutput("foobar" + NL, 
 				"'''\n"+
 				"  «IF true»\n"+
 				"	  foobar«ENDIF»\n"+
@@ -148,7 +150,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	}
 	
 	@Test public void testIf_08() throws Exception {
-		assertOutput("foobar\n", 
+		assertOutput("foobar" + NL, 
 				"'''\n"+
 				"  «var Object x = '_foobar'»" +
 				"  «IF x instanceof String»\n"+
@@ -159,7 +161,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testMultilineIf_01() throws Exception {
 		assertOutput(
-				"foobar\n", 
+				"foobar" + NL, 
 				"'''\n" +
 				"  «IF true»\n" +
 				"    foobar\n" +
@@ -179,7 +181,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testMultilineIf_03() throws Exception {
 		assertOutput(
-				"zonk\n", 
+				"zonk" + NL, 
 				"'''\n" +
 				"«IF false»\n" +
 				"  foobar\n" +
@@ -191,7 +193,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testMultilineIf_04() throws Exception {
 		assertOutput(
-				"zonk\n", 
+				"zonk" + NL, 
 				"'''\n" +
 				"«IF false»\n" +
 				"	foobar\n" +
@@ -203,7 +205,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testMultilineIf_05() throws Exception {
 		assertOutput(
-				"zonk\n", 
+				"zonk" + NL, 
 				"'''\n" +
 				"		«IF false»\n" +
 				"				foobar\n" +
@@ -217,7 +219,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testNestedIf_01() throws Exception {
 		assertOutput(
-				"foobar\n", 
+				"foobar" + NL, 
 				"'''\n" +
 				"	«IF true»\n" +
 				"		«IF true»\n" +
@@ -229,7 +231,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testNestedIf_02() throws Exception {
 		assertOutput(
-				"foobar\n", 
+				"foobar" + NL, 
 				"'''\n" +
 				"	«IF true»\n" +
 				"		«IF true»foobar«ENDIF»\n" +
@@ -283,7 +285,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testInconsistentWhitespace_01() throws Exception {
 		assertOutput(
-				"foobar\n", 
+				"foobar" + NL,
 				"'''\n" +
 				"  «IF true»\n" +
 				"		«IF true»\n" +
@@ -295,7 +297,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingEmptyLine_01() throws Exception {
 		assertOutput(
-				"\n", 
+				NL, 
 				"'''\n" +
 				"		«IF false»\n" +
 				"				foobar\n" +
@@ -306,8 +308,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingEmptyLine_02() throws Exception {
 		assertOutput(
-				"foobar\n"+
-				"\n", 
+				"foobar" + NL +
+				NL, 
 				"'''\n" +
 				"		«IF true»\n" +
 				"				foobar\n" +
@@ -318,8 +320,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingEmptyLine_03() throws Exception {
 		assertOutput(
-				"foobar\n"+
-				"\n", 
+				"foobar" + NL +
+				NL, 
 				"'''\n" +
 				"		«IF true»\n" +
 				"				foobar\n" +
@@ -330,8 +332,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingEmptyLine_04() throws Exception {
 		assertOutput(
-				"foobar\n"+
-				"\n", 
+				"foobar" + NL +
+				NL, 
 				"'''\n" +
 				"		«IF true»\n" +
 				"				foobar\n" +
@@ -342,8 +344,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingEmptyLine_05() throws Exception {
 		assertOutput(
-				"foobar\n"+
-				"  \n", 
+				"foobar" + NL +
+				"  " + NL, 
 				"'''    \n" +
 				"		«IF true»\n" +
 				"				foobar\n" +
@@ -354,8 +356,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingEmptyLine_06() throws Exception {
 		assertOutput(
-				"foobar\n"+
-				"  \n", 
+				"foobar" + NL +
+				"  " + NL, 
 				"'''\n" +
 				"		foobar\n" +
 				"		  \n" +
@@ -364,8 +366,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingEmptyLine_07() throws Exception {
 		assertOutput(
-				"foobar\n"+
-				"  \n", 
+				"foobar" + NL +
+				"  " + NL, 
 				"'''\n" +
 				"		«IF true»foobar«ENDIF»\n" +
 				"		  \n" +
@@ -374,7 +376,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingEmptyLine_08() throws Exception {
 		assertOutput(
-				"\n", 
+				NL, 
 				"'''\n" +
 				"\n" +
 				"'''");
@@ -382,9 +384,9 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testEmptyLineInBetween_01() throws Exception {
 		assertOutput(
-				"test\n" +
-				"\n" +
-				"test\n", 
+				"test" + NL +
+				NL +
+				"test" + NL, 
 				"'''\n" +
 				"  test\n" +
 				"\n" +
@@ -394,9 +396,9 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testEmptyLineInBetween_02() throws Exception {
 		assertOutput(
-				"  test\n" +
-				"\n" +
-				"test\n", 
+				"  test" + NL +
+				NL +
+				"test" + NL, 
 				"'''\n" +
 				"    test\n" +
 				"\n" +
@@ -406,9 +408,9 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testEmptyLineInBetween_03() throws Exception {
 		assertOutput(
-				"test\n" +
-				"\n" +
-				"  test\n", 
+				"test" + NL +
+				NL +
+				"  test" + NL, 
 				"'''\n" +
 				"    test\n" +
 				"\n" +
@@ -418,7 +420,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTrailingWhitespace_01() throws Exception {
 		assertOutput(
-				"foobar \n", 
+				"foobar " + NL,
 				"'''\n" +
 				"\t\t«'foobar'» \n" +
 				"'''");
@@ -466,7 +468,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_06() throws Exception {
 		assertOutput(
-				"foobar\n",
+				"foobar" + NL,
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
 				"    foobar\n" +
@@ -482,7 +484,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_08() throws Exception {
 		assertOutput(
-				"foobar\n",
+				"foobar" + NL,
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
 				"    «FOR a1:'1'.toCharArray»\n" +
@@ -494,7 +496,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_10() throws Exception {
 		assertOutput(
-				"foobar\n",
+				"foobar" + NL,
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
 				"    «FOR a1:'1'.toCharArray»foobar«ENDFOR»\n" +
@@ -504,7 +506,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_11() throws Exception {
 		assertOutput(
-				"foobarfoobar\n",
+				"foobarfoobar" + NL,
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
 				"    «FOR a1:'12'.toCharArray»foobar«ENDFOR»\n" +
@@ -514,8 +516,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_12() throws Exception {
 		assertOutput(
-				"foobar\n" +
-				"foobar\n",
+				"foobar" + NL +
+				"foobar" + NL,
 				"'''\n" +
 				"  «FOR a:'12'.toCharArray»\n" +
 				"    «FOR a1:'1'.toCharArray»foobar«ENDFOR»\n" +
@@ -525,10 +527,10 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_13() throws Exception {
 		assertOutput(
-				"foobar\n" +
-				"foobar\n" +
-				"foobar\n" +
-				"foobar\n",
+				"foobar" + NL +
+				"foobar" + NL +
+				"foobar" + NL +
+				"foobar" + NL,
 				"'''\n" +
 				"  «FOR a:'12'.toCharArray»\n" +
 				"    «FOR a1:'12'.toCharArray»\n" +
@@ -540,10 +542,10 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_14() throws Exception {
 		assertOutput(
-				"foobar\n" +
-				"foobar\n" +
-				"foobar\n" +
-				"foobar\n",
+				"foobar" + NL +
+				"foobar" + NL +
+				"foobar" + NL +
+				"foobar" + NL,
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
 				"    «FOR a1:'12'.toCharArray»\n" +
@@ -555,10 +557,10 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_15() throws Exception {
 		assertOutput(
-				"  foobar\n" +
-				"foobar\n" +
-				"  foobar\n" +
-				"foobar\n",
+				"  foobar" + NL +
+				"foobar" + NL +
+				"  foobar" + NL +
+				"foobar" + NL,
 				"'''\n" +
 				"  «FOR a:'12'.toCharArray»\n" +
 				"    «FOR a1:'1'.toCharArray»\n" +
@@ -570,14 +572,14 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_16() throws Exception {
 		assertOutput(
-				"foobar\n" +
-				"  foobar\n" +
-				"foobar\n" +
-				"  foobar\n" +
-				"foobar\n" +
-				"  foobar\n" +
-				"foobar\n" +
-				"  foobar\n",
+				"foobar" + NL +
+				"  foobar" + NL +
+				"foobar" + NL +
+				"  foobar" + NL +
+				"foobar" + NL +
+				"  foobar" + NL +
+				"foobar" + NL +
+				"  foobar" + NL,
 				"'''\n" +
 				"  «FOR a:'12'.toCharArray»\n" +
 				"    «FOR a1:'12'.toCharArray»\n" +
@@ -625,7 +627,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_23() throws Exception {
 		assertOutput(
-				"  a,\n  a,\n  a,\n",
+				"  a," + NL + "  a," + NL + "  a," + NL,
 				"'''  «FOR a: '123'.toCharArray»\n" +
 				"      a,\n" +
 				"  «ENDFOR»'''");
@@ -633,7 +635,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_24() throws Exception {
 		assertOutput(
-				"  a,\n  a,\n  a\n",
+				"  a," + NL + "  a," + NL + "  a" + NL,
 				"'''  «FOR a: '123'.toCharArray SEPARATOR ','»\n" +
 				"      a\n" +
 				"  «ENDFOR»'''");
@@ -641,7 +643,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testForLoop_25() throws Exception {
 		assertOutput(
-				"  begin [\n  a,\n  a,\n  a\n  ]",
+				"  begin [" + NL + "  a," + NL + "  a," + NL + "  a" + NL + "  ]",
 				"'''  «FOR a: '123'.toCharArray BEFORE 'begin [' SEPARATOR ',' AFTER ']' »\n" +
 				"      a\n" +
 				"  «ENDFOR»'''");
@@ -650,18 +652,18 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	@Test 
 	public void testForLoop_26() throws Exception {
 		assertOutput(
-				" a,\n" +
-				"   \t\n" +
-				" a,\n" +
-				"   \t\n" +
-				" a\n", 
+				" a," + NL +
+				"   \t" + NL +
+				" a," + NL +
+				"   \t" + NL +
+				" a" + NL, 
 				"''' «FOR a: '123'.toCharArray SEPARATOR ',\n  \t'»\n" +
 				"      a\n" +
 				" «ENDFOR»'''");
 	}
 	
 	@Test public void testBug_365632() throws Exception {
-		assertOutput("before\n", 
+		assertOutput("before" + NL, 
 				"'''\n"+
 				"  «FOR s : '1'.toCharArray BEFORE 'before'»\n" + 
 				"  «ENDFOR»\n" + 
@@ -669,7 +671,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	}
 	
 	@Test public void testBug_365632_02() throws Exception {
-		assertOutput("after\n", 
+		assertOutput("after" + NL, 
 				"'''\n"+
 						"  «FOR s : '1'.toCharArray AFTER 'after'»\n" + 
 						"  «ENDFOR»\n" + 
@@ -677,7 +679,7 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	}
 	
 	@Test public void testBug342724_01() throws Exception {
-		assertOutput("test1\ntest3\n",
+		assertOutput("test1" + NL + "test3" + NL,
 				"'''\n" + 
 				"	«IF true»\n" + 
 				"			test1\n" + 
@@ -711,11 +713,11 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	}
 	
 	@Test public void testEmptyExpressions_05() throws Exception {
-		assertOutput("  \n",
+		assertOutput("  " + NL,
 				"'''\n" +
 				"  \n" +
 				"'''");
-		assertOutput("  \n",
+		assertOutput("  " + NL,
 				"'''\n" +
 				"  «»\n" +
 				"'''");
@@ -723,9 +725,9 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 
 	@Test public void testTemplateWithComments_01() throws Exception {
 		assertOutput(
-				" foobar\n" +
-				"   foobar\n" +
-				"foobar\n",
+				" foobar" + NL +
+				"   foobar" + NL +
+				"foobar" + NL,
 				"'''\n" +
 				"  foobar\n" +
 				"«««    comment\n" +
@@ -737,9 +739,9 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTemplateWithComments_02() throws Exception {
 		assertOutput(
-				"  foobar\n" +
-				"    foobar\n" +
-				" foobar\n",
+				"  foobar" + NL +
+				"    foobar" + NL +
+				" foobar" + NL,
 				"'''  foobar\n" +
 				"«««    comment\n" +
 				"    foobar\n" +
@@ -750,8 +752,8 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 	
 	@Test public void testTemplateWithComments_03() throws Exception {
 		assertOutput(
-				"  foobar\n" +
-				"    foobar\n" +
+				"  foobar" + NL +
+				"    foobar" + NL +
 				" foobar  ",
 				"'''  foobar\n" +
 				"«««    comment\n" +
