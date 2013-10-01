@@ -26,6 +26,13 @@ public class XtextGeneratorIT {
 	}
 
 	@Test
+	public void mavenConfiguration() throws Exception {
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/maven-config");
+		verifier.assertFileMatches(verifier.getBasedir() + "/model2-output/greetings.txt", "People to greet\\: maven2");
+		verifier.assertFilePresent(verifier.getBasedir() + "/model-output/IntegrationTestXbase.java");
+	}
+
+	@Test
 	public void purexbase() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/purexbase");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");

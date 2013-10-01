@@ -71,9 +71,7 @@ public class XtextGenerator extends AbstractMojo {
 	/**
 	 * Project source roots.
 	 * 
-	 * @parameter expression="${sourceRoots}"
-	 *            default-value="${project.compileSourceRoots}"
-	 * @required
+	 * @parameter
 	 */
 	private List<String> sourceRoots;
 
@@ -84,12 +82,12 @@ public class XtextGenerator extends AbstractMojo {
 	private List<Language> languages;
 
 	/**
-	 * @parameter default-value="false"
+	 * @parameter expression="${xtext.generator.skip}" default-value="false"
 	 */
 	private Boolean skip;
 
 	/**
-	 * @parameter default-value="false"
+	 * @parameter default-value="true"
 	 */
 	private Boolean failOnValidationError;
 
@@ -113,7 +111,14 @@ public class XtextGenerator extends AbstractMojo {
 			getLog().info("skipped.");
 		} else {
 			new MavenLog4JConfigurator().configureLog4j(getLog());
+			configureDefaults();
 			internalExecute();
+		}
+	}
+
+	private void configureDefaults() {
+		if (sourceRoots == null) {
+			sourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		}
 	}
 
@@ -126,7 +131,7 @@ public class XtextGenerator extends AbstractMojo {
 		builder.setLanguages(languages);
 		builder.setEncoding(encoding);
 		builder.setClassPathEntries(classPathEntries);
-		builder.setSourceDirs(Lists.newArrayList(sourceRoots));
+		builder.setSourceDirs(sourceRoots);
 		builder.setTempDir(createTempDir().getAbsolutePath());
 		configureCompiler(builder.getCompiler());
 		logState();
