@@ -9,11 +9,11 @@
         <bundles name="org.eclipse.ui.cheatsheets"/>
         <bundles name="org.junit4"/>
         <bundles name="org.junit"/>
-        <features name="org.eclipse.jdt.feature.group"/>
+        <features name="org.eclipse.jdt.feature.group" versionRange="[3.6.0,3.7.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/releases/helios">
-        <features name="org.eclipse.emf.compare.feature.group"/>
         <bundles name="org.eclipse.draw2d.feature.group"/>
+        <features name="org.eclipse.emf.compare.feature.group"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
         <bundles name="org.eclipse.jdt.annotation"/>

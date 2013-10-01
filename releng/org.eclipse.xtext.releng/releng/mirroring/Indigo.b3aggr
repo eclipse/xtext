@@ -8,7 +8,7 @@
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
         <bundles name="org.junit"/>
-        <features name="org.eclipse.jdt.feature.group"/>
+        <features name="org.eclipse.jdt.feature.group" versionRange="[3.7.0,3.8.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
         <bundles name="org.junit4"/>
