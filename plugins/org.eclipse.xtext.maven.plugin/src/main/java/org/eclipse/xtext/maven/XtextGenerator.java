@@ -155,7 +155,9 @@ public class XtextGenerator extends AbstractMojo {
 
 	private File createTempDir() {
 		File tmpDir = new File(tmpClassDirectory);
-		tmpDir.mkdirs();
+		if (!tmpDir.mkdirs() && !tmpDir.exists()) {
+			throw new IllegalArgumentException("Couldn't create directory '"+tmpClassDirectory+"'.");
+		}
 		return tmpDir;
 	}
 

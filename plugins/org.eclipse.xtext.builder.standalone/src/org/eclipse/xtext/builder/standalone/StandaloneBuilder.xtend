@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
+import com.google.common.io.Files
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -32,7 +33,7 @@ class StandaloneBuilder {
 	@Property Map<String, LanguageAccess> languages
 	@Property Iterable<String> sourceDirs
 	@Property Iterable<String> classPathEntries
-	@Property String tempDir
+	@Property File tempDir = Files.createTempDir
 	@Property String encoding
 
 	@Inject IndexedJvmTypeAccess jvmTypeAccess
@@ -41,6 +42,12 @@ class StandaloneBuilder {
 	@Inject IIssueHandler issueHandler
 	@Inject IEncodingProvider.Runtime encodingProvider
 	@Inject IJavaCompiler compiler
+	
+	def void setTempDir(String pathAsString) {
+		if (pathAsString != null) {
+			_tempDir = new File(pathAsString)
+		}
+	}
 
 	def launch() {
 		encodingProvider.setDefaultEncoding(encoding)
@@ -126,11 +133,11 @@ class StandaloneBuilder {
 	}
 
 	def protected createTempDir(String subDir) {
-		val file = new File(new File(tempDir), subDir)
-		if(!file.mkdirs) throw new IOException("Failed to create directory '" + file.absolutePath + "'")
+		val file = new File(tempDir, subDir)
+		if(!file.mkdirs && !file.exists) throw new IOException("Failed to create directory '" + file.absolutePath + "'")
 		return file
 	}
-
+	
 	def protected void installTypeProvider(Iterable<String> classPathRoots, XtextResourceSet resSet,
 		IndexedJvmTypeAccess typeAccess) {
 		val classLoader = createURLClassLoader(classPathRoots)

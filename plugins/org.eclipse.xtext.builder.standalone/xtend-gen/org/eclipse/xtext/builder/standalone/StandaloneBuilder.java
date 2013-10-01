@@ -3,6 +3,7 @@ package org.eclipse.xtext.builder.standalone;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.File;
@@ -90,13 +91,18 @@ public class StandaloneBuilder {
     this._classPathEntries = classPathEntries;
   }
   
-  private String _tempDir;
+  private File _tempDir = new Function0<File>() {
+    public File apply() {
+      File _createTempDir = Files.createTempDir();
+      return _createTempDir;
+    }
+  }.apply();
   
-  public String getTempDir() {
+  public File getTempDir() {
     return this._tempDir;
   }
   
-  public void setTempDir(final String tempDir) {
+  public void setTempDir(final File tempDir) {
     this._tempDir = tempDir;
   }
   
@@ -127,6 +133,14 @@ public class StandaloneBuilder {
   
   @Inject
   private IJavaCompiler compiler;
+  
+  public void setTempDir(final String pathAsString) {
+    boolean _notEquals = (!Objects.equal(pathAsString, null));
+    if (_notEquals) {
+      File _file = new File(pathAsString);
+      this._tempDir = _file;
+    }
+  }
   
   public boolean launch() {
     String _encoding = this.getEncoding();
@@ -293,13 +307,20 @@ public class StandaloneBuilder {
   
   protected File createTempDir(final String subDir) {
     try {
-      String _tempDir = this.getTempDir();
-      File _file = new File(_tempDir);
-      File _file_1 = new File(_file, subDir);
-      final File file = _file_1;
+      File _tempDir = this.getTempDir();
+      File _file = new File(_tempDir, subDir);
+      final File file = _file;
+      boolean _and = false;
       boolean _mkdirs = file.mkdirs();
       boolean _not = (!_mkdirs);
-      if (_not) {
+      if (!_not) {
+        _and = false;
+      } else {
+        boolean _exists = file.exists();
+        boolean _not_1 = (!_exists);
+        _and = (_not && _not_1);
+      }
+      if (_and) {
         String _absolutePath = file.getAbsolutePath();
         String _plus = ("Failed to create directory \'" + _absolutePath);
         String _plus_1 = (_plus + "\'");
