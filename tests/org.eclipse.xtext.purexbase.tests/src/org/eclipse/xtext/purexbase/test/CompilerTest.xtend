@@ -628,30 +628,27 @@ class CompilerTest {
 			          boolean _matched = false;
 			          if (!_matched) {
 			            if (shape instanceof Circle) {
-			              final Circle _circle = (Circle)shape;
 			              _matched=true;
-			              String _plus = ("a circle : diameter=" + Integer.valueOf(_circle.diameter));
+			              String _plus = ("a circle : diameter=" + Integer.valueOf(((Circle)shape).diameter));
 			              _switchResult = _plus;
 			            }
 			          }
 			          if (!_matched) {
 			            if (shape instanceof Rectangle) {
-			              final Rectangle _rectangle = (Rectangle)shape;
-			              boolean _equals = (_rectangle.height == _rectangle.width);
+			              boolean _equals = (((Rectangle)shape).height == ((Rectangle)shape).width);
 			              if (_equals) {
 			                _matched=true;
-			                String _plus = ("a square : size=" + Integer.valueOf(_rectangle.width));
+			                String _plus = ("a square : size=" + Integer.valueOf(((Rectangle)shape).width));
 			                _switchResult = _plus;
 			              }
 			            }
 			          }
 			          if (!_matched) {
 			            if (shape instanceof Rectangle) {
-			              final Rectangle _rectangle = (Rectangle)shape;
 			              _matched=true;
-			              String _plus = ("a rectangle : width=" + Integer.valueOf(_rectangle.width));
+			              String _plus = ("a rectangle : width=" + Integer.valueOf(((Rectangle)shape).width));
 			              String _plus_1 = (_plus + ", height=");
-			              String _plus_2 = (_plus_1 + Integer.valueOf(_rectangle.height));
+			              String _plus_2 = (_plus_1 + Integer.valueOf(((Rectangle)shape).height));
 			              _switchResult = _plus_2;
 			            }
 			          }
