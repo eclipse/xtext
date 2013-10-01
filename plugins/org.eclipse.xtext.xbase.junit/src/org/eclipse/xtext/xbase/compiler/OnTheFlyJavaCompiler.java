@@ -290,7 +290,7 @@ public class OnTheFlyJavaCompiler {
 	}
 	
 	public Map<String,Class<?>> compileToClasses(Map<String,String> sources) {
-		File tempDir = createTempDir();
+		File tempDir = com.google.common.io.Files.createTempDir();
 		try {
 			for (Entry<String, String> entry : sources.entrySet()) {
 				String classname = entry.getKey();
@@ -331,25 +331,7 @@ public class OnTheFlyJavaCompiler {
 		}
 	}
 
-	private File createTempDir() {
-		File rootTempDir = null;
-		String defTmpPath = System.getProperty("java.io.tmpdir");
-		if (defTmpPath != null) {
-			rootTempDir = new File(defTmpPath);
-		} else {
-			// use current directory, should be writable
-			rootTempDir = new File("./");
-		}
-		// VM unique temp dir
-		File tempDir = new File(rootTempDir, "otfjc"
-				+ OnTheFlyJavaCompiler.class.hashCode());
-		if (tempDir.exists()) {
-			tempDir.delete();
-		}
-		tempDir.mkdir();
-		return tempDir;
-	}
-
+	
 	private void cleanUpTmpFolder(File tempDir) {
 		try {
 			Files.cleanFolder(tempDir, new FileFilter() {
