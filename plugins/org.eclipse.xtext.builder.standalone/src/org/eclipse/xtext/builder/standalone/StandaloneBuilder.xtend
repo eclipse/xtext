@@ -50,24 +50,24 @@ class StandaloneBuilder {
 	}
 
 	def launch() {
-		encodingProvider.setDefaultEncoding(encoding)
-
-		//TODO skip some steps when java is not involved 
-		val needsJava = languages.values.findFirst[linkAgainstJava] != null
+		val needsJava = languages.values.exists[linksAgainstJava]
 		if (needsJava) {
 			LOG.info("Using common types.")
 		}
 
 		val resourceSet = resourceSetProvider.get
 		val allClassPathEntries = (sourceDirs + classPathEntries)
-
+		
 		collectResources(allClassPathEntries, resourceSet)
-		installTypeProvider(allClassPathEntries, resourceSet, null)
+		if (needsJava) {
+			installTypeProvider(allClassPathEntries, resourceSet, null)
+		}
 		val index = fillIndex(resourceSet)
 		val sourceResources = collectResources(sourceDirs, resourceSet)
-		val stubsClasses = compileStubs(generateStubs(index, sourceResources))
-
-		installTypeProvider(allClassPathEntries + newArrayList(stubsClasses), resourceSet, jvmTypeAccess)
+		if (needsJava) {
+			val stubsClasses = compileStubs(generateStubs(index, sourceResources))
+			installTypeProvider(allClassPathEntries + newArrayList(stubsClasses), resourceSet, jvmTypeAccess)
+		}
 		sourceResources.forEach[contents] // full initialize
 		sourceResources.forEach[EcoreUtil2.resolveLazyCrossReferences(it, CancelIndicator.NullImpl)]
 
@@ -102,8 +102,10 @@ class StandaloneBuilder {
 	def protected generateStubs(ResourceDescriptionsData data, List<? extends Resource> resources) {
 		val stubsDir = createTempDir("stubs")
 		LOG.info("Generating stubs into " + stubsDir.absolutePath)
+		if (encoding != null)
+			encodingProvider.setDefaultEncoding(encoding)
 		commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, stubsDir.absolutePath)
-		val generateStubs = resources.filter[languageAccess.linkAgainstJava]
+		val generateStubs = resources.filter[languageAccess.linksAgainstJava]
 		generateStubs.forEach [
 			languageAccess.stubGenerator.doGenerateStubs(commonFileAccess, data.getResourceDescription(URI))
 		]
@@ -123,7 +125,16 @@ class StandaloneBuilder {
 	def protected generate(List<Resource> sourceResources) {
 		for (Resource it : sourceResources) {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
-			languageAccess.encodingProvider.setDefaultEncoding(encoding)
+			if (encoding != null) {
+				switch provider : languageAccess.encodingProvider {
+					IEncodingProvider.Runtime : {
+						provider.setDefaultEncoding(encoding)
+					}
+					default : {
+						LOG.debug("Couldn't set encoding '"+encoding+"' for file '"+URI+"'. Only subclasses of IEncodingProvider.Runtime are supported.")
+					}
+				}
+			}
 			languageAccess.generator.doGenerate(it, languageAccess.fileSystemAccess);
 		}
 	}

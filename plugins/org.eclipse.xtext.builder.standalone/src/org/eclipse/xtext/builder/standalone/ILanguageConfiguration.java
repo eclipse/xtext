@@ -20,4 +20,9 @@ public interface ILanguageConfiguration {
 
 	@Nullable
 	Set<OutputConfiguration> getOutputConfigurations();
+	
+	/**
+	 * @return whether this language links or produces Java types
+	 */
+	boolean isJavaSupport();
 }
