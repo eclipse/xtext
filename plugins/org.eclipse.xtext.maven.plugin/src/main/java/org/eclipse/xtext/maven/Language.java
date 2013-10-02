@@ -17,6 +17,12 @@ import com.google.common.collect.Sets;
 public class Language implements ILanguageConfiguration {
 
 	/**
+	 * whether this language links or produces Java types
+	 * @property
+	 */
+	private boolean javaSupport = false;
+	
+	/**
 	 * @property
 	 * @required
 	 */
@@ -48,6 +54,14 @@ public class Language implements ILanguageConfiguration {
 
 	public void setOutputConfigurations(List<OutputConfiguration> outputConfiguration) {
 		this.outputConfigurations = outputConfiguration;
+	}
+	
+	public void setJavaSupport(boolean javaSupport) {
+		this.javaSupport = javaSupport;
+	}
+
+	public boolean isJavaSupport() {
+		return javaSupport;
 	}
 
 }

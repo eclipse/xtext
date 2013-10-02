@@ -31,16 +31,15 @@ public class LanguageAccessFactory {
 				}
 				setup = (ISetup) loadClass.newInstance();
 			} catch (Exception e) {
-				// TODO better exception handling
-				throw new RuntimeException("Failed to load language setup class.", e);
+				throw new IllegalStateException("Failed to load language setup for class '"+languageGenConf.getSetup()+"'.", e);
 			}
 
 			Injector injector = setup.createInjectorAndDoEMFRegistration();
 			IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 			FileExtensionProvider fileExtensionProvider = injector.getInstance(FileExtensionProvider.class);
-			LanguageAccess languageAccess = new LanguageAccess(languageGenConf.getOutputConfigurations(), serviceProvider);
-			for (String extesion : fileExtensionProvider.getFileExtensions()) {
-				result.put(extesion, languageAccess);
+			LanguageAccess languageAccess = new LanguageAccess(languageGenConf.getOutputConfigurations(), serviceProvider, languageGenConf.isJavaSupport());
+			for (String extension : fileExtensionProvider.getFileExtensions()) {
+				result.put(extension, languageAccess);
 			}
 		}
 		return result;

@@ -34,6 +34,7 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -143,18 +144,15 @@ public class StandaloneBuilder {
   }
   
   public boolean launch() {
-    String _encoding = this.getEncoding();
-    this.encodingProvider.setDefaultEncoding(_encoding);
     Map<String,LanguageAccess> _languages = this.getLanguages();
     Collection<LanguageAccess> _values = _languages.values();
     final Function1<LanguageAccess,Boolean> _function = new Function1<LanguageAccess,Boolean>() {
       public Boolean apply(final LanguageAccess it) {
-        boolean _isLinkAgainstJava = it.isLinkAgainstJava();
-        return Boolean.valueOf(_isLinkAgainstJava);
+        boolean _isLinksAgainstJava = it.isLinksAgainstJava();
+        return Boolean.valueOf(_isLinksAgainstJava);
       }
     };
-    LanguageAccess _findFirst = IterableExtensions.<LanguageAccess>findFirst(_values, _function);
-    final boolean needsJava = (!Objects.equal(_findFirst, null));
+    final boolean needsJava = IterableExtensions.<LanguageAccess>exists(_values, _function);
     if (needsJava) {
       StandaloneBuilder.LOG.info("Using common types.");
     }
@@ -163,15 +161,19 @@ public class StandaloneBuilder {
     Iterable<String> _classPathEntries = this.getClassPathEntries();
     final Iterable<String> allClassPathEntries = Iterables.<String>concat(_sourceDirs, _classPathEntries);
     this.collectResources(allClassPathEntries, resourceSet);
-    this.installTypeProvider(allClassPathEntries, resourceSet, null);
+    if (needsJava) {
+      this.installTypeProvider(allClassPathEntries, resourceSet, null);
+    }
     final ResourceDescriptionsData index = this.fillIndex(resourceSet);
     Iterable<String> _sourceDirs_1 = this.getSourceDirs();
     final List<Resource> sourceResources = this.collectResources(_sourceDirs_1, resourceSet);
-    File _generateStubs = this.generateStubs(index, sourceResources);
-    final String stubsClasses = this.compileStubs(_generateStubs);
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(stubsClasses);
-    Iterable<String> _plus = Iterables.<String>concat(allClassPathEntries, _newArrayList);
-    this.installTypeProvider(_plus, resourceSet, this.jvmTypeAccess);
+    if (needsJava) {
+      File _generateStubs = this.generateStubs(index, sourceResources);
+      final String stubsClasses = this.compileStubs(_generateStubs);
+      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(stubsClasses);
+      Iterable<String> _plus = Iterables.<String>concat(allClassPathEntries, _newArrayList);
+      this.installTypeProvider(_plus, resourceSet, this.jvmTypeAccess);
+    }
     final Procedure1<Resource> _function_1 = new Procedure1<Resource>() {
       public void apply(final Resource it) {
         it.getContents();
@@ -240,13 +242,19 @@ public class StandaloneBuilder {
     String _absolutePath = stubsDir.getAbsolutePath();
     String _plus = ("Generating stubs into " + _absolutePath);
     StandaloneBuilder.LOG.info(_plus);
+    String _encoding = this.getEncoding();
+    boolean _notEquals = (!Objects.equal(_encoding, null));
+    if (_notEquals) {
+      String _encoding_1 = this.getEncoding();
+      this.encodingProvider.setDefaultEncoding(_encoding_1);
+    }
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
     final Function1<Resource,Boolean> _function = new Function1<Resource,Boolean>() {
       public Boolean apply(final Resource it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
-        boolean _isLinkAgainstJava = _languageAccess.isLinkAgainstJava();
-        return Boolean.valueOf(_isLinkAgainstJava);
+        boolean _isLinksAgainstJava = _languageAccess.isLinksAgainstJava();
+        return Boolean.valueOf(_isLinksAgainstJava);
       }
     };
     final Iterable<? extends Resource> generateStubs = IterableExtensions.filter(resources, _function);
@@ -284,10 +292,30 @@ public class StandaloneBuilder {
         String _plus = ("Starting generator for input: \'" + _lastSegment);
         String _plus_1 = (_plus + "\'");
         StandaloneBuilder.LOG.info(_plus_1);
-        LanguageAccess _languageAccess = this.languageAccess(it);
-        org.eclipse.xtext.parser.IEncodingProvider.Runtime _encodingProvider = _languageAccess.getEncodingProvider();
         String _encoding = this.getEncoding();
-        _encodingProvider.setDefaultEncoding(_encoding);
+        boolean _notEquals = (!Objects.equal(_encoding, null));
+        if (_notEquals) {
+          LanguageAccess _languageAccess = this.languageAccess(it);
+          IEncodingProvider _encodingProvider = _languageAccess.getEncodingProvider();
+          final IEncodingProvider provider = _encodingProvider;
+          boolean _matched = false;
+          if (!_matched) {
+            if (provider instanceof org.eclipse.xtext.parser.IEncodingProvider.Runtime) {
+              _matched=true;
+              String _encoding_1 = this.getEncoding();
+              ((org.eclipse.xtext.parser.IEncodingProvider.Runtime)provider).setDefaultEncoding(_encoding_1);
+            }
+          }
+          if (!_matched) {
+            String _encoding_1 = this.getEncoding();
+            String _plus_2 = ("Couldn\'t set encoding \'" + _encoding_1);
+            String _plus_3 = (_plus_2 + "\' for file \'");
+            URI _uRI_1 = it.getURI();
+            String _plus_4 = (_plus_3 + _uRI_1);
+            String _plus_5 = (_plus_4 + "\'. Only subclasses of IEncodingProvider.Runtime are supported.");
+            StandaloneBuilder.LOG.debug(_plus_5);
+          }
+        }
         LanguageAccess _languageAccess_1 = this.languageAccess(it);
         IGenerator _generator = _languageAccess_1.getGenerator();
         LanguageAccess _languageAccess_2 = this.languageAccess(it);

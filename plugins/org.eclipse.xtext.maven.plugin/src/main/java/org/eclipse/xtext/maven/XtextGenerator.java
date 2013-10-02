@@ -46,7 +46,7 @@ public class XtextGenerator extends AbstractMojo {
 	/**
 	 * File encoding argument for the generator.
 	 * 
-	 * @parameter expression="${encoding}"
+	 * @parameter expression="${xtext.encoding}"
 	 *            default-value="${project.build.sourceEncoding}"
 	 */
 	protected String encoding;

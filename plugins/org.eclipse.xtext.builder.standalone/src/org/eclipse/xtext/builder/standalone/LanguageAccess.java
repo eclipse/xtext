@@ -9,9 +9,10 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.generator.OutputConfigurationProvider;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IEncodingProvider.Runtime;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -30,13 +31,19 @@ public class LanguageAccess {
 
 	private Set<OutputConfiguration> outputConfigs;
 	private IResourceServiceProvider resourceServiceProvider;
-	private boolean linkAgainstJava = true;
+	private boolean linksAgainstJava = false;
 	private JavaIoFileSystemAccess fsa;
 
 	public LanguageAccess(Set<OutputConfiguration> outputConfigurations,
 			IResourceServiceProvider resourceServiceProvider) {
+		this(outputConfigurations, resourceServiceProvider, false);
+	}
+	
+	public LanguageAccess(Set<OutputConfiguration> outputConfigurations,
+			IResourceServiceProvider resourceServiceProvider, boolean linksAgainstJavaTypes) {
 		this.outputConfigs = outputConfigurations;
 		this.resourceServiceProvider = resourceServiceProvider;
+		this.linksAgainstJava = linksAgainstJavaTypes;
 	}
 
 	public IGenerator getGenerator() {
@@ -85,11 +92,11 @@ public class LanguageAccess {
 		return resourceServiceProvider.getResourceDescriptionManager();
 	}
 
-	public OutputConfigurationProvider getOutputConfigurationProvider() {
-		return resourceServiceProvider.get(OutputConfigurationProvider.class);
+	public IOutputConfigurationProvider getOutputConfigurationProvider() {
+		return resourceServiceProvider.get(IOutputConfigurationProvider.class);
 	}
 
-	public Runtime getEncodingProvider() {
+	public IEncodingProvider getEncodingProvider() {
 		return resourceServiceProvider.get(Runtime.class);
 	}
 
@@ -97,11 +104,11 @@ public class LanguageAccess {
 		return resourceServiceProvider.getResourceValidator();
 	}
 
-	public void setLinkAgainstJava(boolean linkAgainstJava) {
-		this.linkAgainstJava = linkAgainstJava;
+	public void setLinksAgainstJava(boolean linksAgainstJava) {
+		this.linksAgainstJava = linksAgainstJava;
 	}
 
-	public boolean isLinkAgainstJava() {
-		return linkAgainstJava;
+	public boolean isLinksAgainstJava() {
+		return linksAgainstJava;
 	}
 }

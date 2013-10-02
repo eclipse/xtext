@@ -17,6 +17,7 @@ public class OutputConfiguration {
 
 	/**
 	 * a description to be shown in the UI.
+	 * @property
 	 */
 	private String description;
 
@@ -31,36 +32,25 @@ public class OutputConfiguration {
 	/**
 	 * whether the output directory should be created if t doesn't already
 	 * exist.
+	 * @property
 	 */
-	private boolean createOutputDirectory;
-
-	/**
-	 * whether derived resources should be deleted on clean.
-	 */
-	private boolean cleanUpDerivedResources = true;
+	private boolean createOutputDirectory = true;
 
 	/**
 	 * whether existing resources should be overridden.
+	 * @property
 	 */
 	private boolean overrideExistingResources = true;
-
-	/**
-	 * whether the resources should be flagged as 'derived' <b>Only used if the
-	 * underlying file system implementation supports such a property</b>
-	 */
-	private boolean setDerivedProperty = true;
-
-	/**
-	 * whether the whole outputDirectory can be cleared. This is usually used in
-	 * a CLEAN build.
-	 */
-	private boolean canClearOutputDirectory = false;
 
 	/**
 	 * whether the DSL files should be registered as primary source files for
 	 * debugging in the generated Java-class-files. If false, the Java source is
 	 * registered as primary source and the DSL files are registered as
 	 * secondary source via JSR-045 (SMAP).
+	 * 
+	 * This property is only support for languages using Xbase.
+	 * 
+	 * @property
 	 */
 	private boolean installDslAsPrimarySource = false;
 
@@ -69,6 +59,10 @@ public class OutputConfiguration {
 	 * synthetic local variables. Synthetic variables are the ones that have not
 	 * been declared in the DSL but have been introduced by the compiler. This
 	 * flag is only used when {@link #isInstallDslAsPrimarySource()} is true.
+	 * 
+	 * This property is only support for languages using Xbase.
+	 * 
+	 * @property
 	 */
 	private boolean hideSyntheticLocalVariables = true;
 
@@ -96,14 +90,6 @@ public class OutputConfiguration {
 		this.outputDirectory = outputDirectory;
 	}
 
-	public boolean isCleanUpDerivedResources() {
-		return cleanUpDerivedResources;
-	}
-
-	public void setCleanUpDerivedResources(boolean cleanUpDerivedResources) {
-		this.cleanUpDerivedResources = cleanUpDerivedResources;
-	}
-
 	public boolean isOverrideExistingResources() {
 		return overrideExistingResources;
 	}
@@ -112,28 +98,12 @@ public class OutputConfiguration {
 		this.overrideExistingResources = overrideExistingResources;
 	}
 
-	public boolean isSetDerivedProperty() {
-		return setDerivedProperty;
-	}
-
-	public void setSetDerivedProperty(boolean setDerivedProperty) {
-		this.setDerivedProperty = setDerivedProperty;
-	}
-
 	public boolean isCreateOutputDirectory() {
 		return createOutputDirectory;
 	}
 
 	public void setCreateOutputDirectory(boolean createOutputDirectory) {
 		this.createOutputDirectory = createOutputDirectory;
-	}
-
-	public boolean isCanClearOutputDirectory() {
-		return canClearOutputDirectory;
-	}
-
-	public void setCanClearOutputDirectory(boolean canClearOutputDirectory) {
-		this.canClearOutputDirectory = canClearOutputDirectory;
 	}
 
 	public boolean isInstallDslAsPrimarySource() {
@@ -154,15 +124,12 @@ public class OutputConfiguration {
 
 	public org.eclipse.xtext.generator.OutputConfiguration toOutputConfiguration() {
 		org.eclipse.xtext.generator.OutputConfiguration copy = new org.eclipse.xtext.generator.OutputConfiguration(name);
-		copy.setCanClearOutputDirectory(canClearOutputDirectory);
-		copy.setCleanUpDerivedResources(cleanUpDerivedResources);
 		copy.setCreateOutputDirectory(createOutputDirectory);
 		copy.setDescription(description);
 		copy.setHideSyntheticLocalVariables(hideSyntheticLocalVariables);
 		copy.setInstallDslAsPrimarySource(installDslAsPrimarySource);
 		copy.setOutputDirectory(outputDirectory);
 		copy.setOverrideExistingResources(overrideExistingResources);
-		copy.setSetDerivedProperty(setDerivedProperty);
 		return copy;
 	}
 
