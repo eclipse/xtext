@@ -31,7 +31,7 @@ public class LanguageAccess {
 
 	private Set<OutputConfiguration> outputConfigs;
 	private IResourceServiceProvider resourceServiceProvider;
-	private boolean linksAgainstJava = false;
+	private boolean linksAgainstJava = true;
 	private JavaIoFileSystemAccess fsa;
 
 	public LanguageAccess(Set<OutputConfiguration> outputConfigurations,
