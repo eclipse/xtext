@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext" version="2">
+    <resource path="src/org/eclipse/xtext/nodemodel/INode.java" type="org.eclipse.xtext.nodemodel.INode">
+        <filter id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getEndOffset()"/>
+            </message_arguments>
+        </filter>
+        <filter id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getTextRegion()"/>
+            </message_arguments>
+        </filter>
+        <filter id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getTextRegionWithLineInformation()"/>
+            </message_arguments>
+        </filter>
+        <filter id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getTotalTextRegion()"/>
+            </message_arguments>
+        </filter>
+        <filter id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getTotalTextRegionWithLineInformation()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

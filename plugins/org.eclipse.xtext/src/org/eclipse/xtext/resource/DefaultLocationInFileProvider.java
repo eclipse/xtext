@@ -30,6 +30,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.collect.Lists;
@@ -249,9 +250,10 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 		ITextRegion result = ITextRegion.EMPTY_REGION;
 		for (INode node : nodes) {
 			if (!isHidden(node)) {
-				int length = node.getLength();
-				if (length != 0)
-					result = result.merge(new TextRegionWithLineInformation(node.getOffset(), length, node.getStartLine() - 1, node.getEndLine() - 1));
+				ITextRegionWithLineInformation region = node.getTextRegionWithLineInformation();
+				if (region.getLength() != 0) {
+					result = result.merge(toZeroBasedRegion(region));
+				}
 			}
 		}
 		return result;
@@ -267,13 +269,21 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 		for (INode node : nodes) {
 			for(INode leafNode: node.getLeafNodes()) {
 				if (!isHidden(leafNode, query)) {
-					int length = leafNode.getLength();
-					if (length != 0)
-						result = result.merge(new TextRegionWithLineInformation(leafNode.getOffset(), length, leafNode.getStartLine() - 1, leafNode.getEndLine() - 1));
+					ITextRegionWithLineInformation region = leafNode.getTextRegionWithLineInformation();
+					if (region.getLength() != 0) {
+						result = result.merge(toZeroBasedRegion(region));
+					}
 				}
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	protected TextRegionWithLineInformation toZeroBasedRegion(ITextRegionWithLineInformation region) {
+		return new TextRegionWithLineInformation(region.getOffset(), region.getLength(), region.getLineNumber() - 1, region.getEndLineNumber() - 1);
 	}
 
 	/**

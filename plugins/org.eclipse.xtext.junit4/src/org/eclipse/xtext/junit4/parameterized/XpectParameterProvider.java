@@ -256,7 +256,7 @@ public class XpectParameterProvider implements IParameterProvider {
 			if (n instanceof ILeafNode && !((ILeafNode) n).isHidden())
 				return n.getOffset();
 		}
-		return node.getOffset() + node.getLength();
+		return node.getEndOffset();
 	}
 
 	protected Nfa<ProdElement> getParameterNfa(String syntax) {

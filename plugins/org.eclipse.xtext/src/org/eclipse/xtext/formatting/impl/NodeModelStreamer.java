@@ -67,7 +67,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		}
 		out.flush();
 		int rStart = nodes.get(0).getOffset();
-		int rLength = (nodes.get(nodes.size() - 1).getOffset() + nodes.get(nodes.size() - 1).getLength()) - rStart;
+		int rLength = nodes.get(nodes.size() - 1).getEndOffset() - rStart;
 		return new TextRegion(rStart, rLength);
 	}
 
@@ -94,7 +94,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 				INode node = iterator.next();
 				if (tokenUtil.isToken(node) || tokenUtil.isCommentNode(node)) {
 					iterator.prune();
-					if (node.getOffset() + node.getLength() >= fromOffset) {
+					if (node.getEndOffset() >= fromOffset) {
 						result.add(node);
 						break;
 					}
