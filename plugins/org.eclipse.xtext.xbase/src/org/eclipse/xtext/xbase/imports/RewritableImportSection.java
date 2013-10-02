@@ -260,7 +260,7 @@ public class RewritableImportSection {
 			for(XImportDeclaration removedImportDeclaration: removedImportDeclarations) {
 				ICompositeNode node = NodeModelUtils.findActualNodeFor(removedImportDeclaration);
 				if(node != null) {
-					ITextRegion textRegion = new TextRegion(node.getOffset(), node.getLength());
+					ITextRegion textRegion = node.getTextRegion();
 					textRegion = regionUtil.addTrailingSingleWhitespace(textRegion, lineSeparator, resource);
 					replaceRegions.add(new ReplaceRegion(textRegion, ""));
 				}

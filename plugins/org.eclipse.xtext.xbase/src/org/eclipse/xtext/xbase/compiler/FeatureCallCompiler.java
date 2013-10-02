@@ -658,10 +658,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		ITextRegionWithLineInformation result = ITextRegionWithLineInformation.EMPTY_REGION;
 		for (INode node : nodes) {
 			if (!isHidden(node)) {
-				int length = node.getLength();
-				if (length != 0)
-					result = result.merge(new TextRegionWithLineInformation(node.getOffset(), length, node
-							.getStartLine() - 1, node.getEndLine() - 1));
+				ITextRegionWithLineInformation region = node.getTextRegionWithLineInformation();
+				if (region.getLength() != 0) {
+					result = result.merge(new TextRegionWithLineInformation(region.getOffset(), region.getLength(), region.getLineNumber() - 1, region.getEndLineNumber() - 1));
+				}
 			}
 		}
 		if (result.getLength() == 0)

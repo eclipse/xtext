@@ -664,7 +664,7 @@ class JvmModelGenerator implements IGenerator {
 		if (!documentationNodes.empty) {
 			var documentationTrace = ITextRegionWithLineInformation.EMPTY_REGION
 			for(node: documentationNodes) {
-				documentationTrace = documentationTrace.merge(new TextRegionWithLineInformation(node.offset, node.length, node.startLine, node.endLine)) 
+				documentationTrace = documentationTrace.merge(node.textRegionWithLineInformation) 
 			}
 			appendable.trace(new LocationData(documentationTrace, null)).append(doc.toString)
 			appendable.newLine

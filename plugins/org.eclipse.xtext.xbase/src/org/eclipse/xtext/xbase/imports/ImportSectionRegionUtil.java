@@ -36,7 +36,7 @@ public class ImportSectionRegionUtil {
 			if(node == null) 
 				LOG.error("Cannot detect node for original import section");
 			else 
-				return new TextRegion(node.getOffset(), node.getLength());
+				return node.getTextRegion();
 		} 
 		return new TextRegion(config.getImportSectionOffset(resource), 0);
 	}

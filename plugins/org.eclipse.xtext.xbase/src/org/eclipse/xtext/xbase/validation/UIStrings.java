@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -143,7 +144,8 @@ public class UIStrings {
 						INode node = decoded.getThird();
 						if (node != null) {
 							String text = node.getRootNode().getText();
-							String result = text.substring(node.getOffset(), node.getLength() + node.getOffset());
+							ITextRegion textRegion = node.getTextRegion();
+							String result = text.substring(textRegion.getOffset(), textRegion.getLength() + textRegion.getOffset());
 							return result;
 						} else {
 							return defaultLabel;
