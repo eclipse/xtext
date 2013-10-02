@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.documentation.impl;
 
+import java.util.regex.Pattern;
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -15,7 +17,7 @@ import com.google.inject.name.Named;
  * @since 2.4
  */
 public class AbstractMultiLineCommentProvider {
-	
+
 	public final static String RULE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.ruleName";
 	public final static String WS_RULE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.ruleName";
 	public final static String START_TAG = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.startTag";
@@ -23,6 +25,33 @@ public class AbstractMultiLineCommentProvider {
 	public final static String LINE_PREFIX = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.linePrefix";
 	public final static String LINE_POSTFIX = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.linePostfix";
 	public final static String WHITESPACE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.whitespace";
+
+	/**
+	 * @since 2.5
+	 */
+	protected static class MultiLineCommentProviderProperties {
+
+		@Inject(optional = true)
+		@Named(START_TAG)
+		protected String startTag; // regular expression
+
+		@Inject(optional = true)
+		@Named(END_TAG)
+		protected String endTag; // regular expression
+
+		@Inject(optional = true)
+		@Named(LINE_PREFIX)
+		protected String linePrefix; // regular expression
+
+		@Inject(optional = true)
+		@Named(LINE_POSTFIX)
+		protected String linePostfix; // regular expression
+
+		@Inject(optional = true)
+		@Named(WHITESPACE)
+		protected String whitespace; // regular expression
+
+	}
 
 	@Inject(optional = true)
 	@Named(RULE)
@@ -32,35 +61,66 @@ public class AbstractMultiLineCommentProvider {
 	@Named(WS_RULE)
 	protected String wsRuleName = "WS";
 
-	@Inject(optional = true)
-	@Named(START_TAG)
 	protected String startTag = "/\\*\\*?"; // regular expression
 
-	@Inject(optional = true)
-	@Named(END_TAG)
 	protected String endTag = "\\*/"; // regular expression
 
-	@Inject(optional = true)
-	@Named(LINE_PREFIX)
 	protected String linePrefix = "\\** ?"; // regular expression
 
-	@Inject(optional = true)
-	@Named(LINE_POSTFIX)
 	protected String linePostfix = "\\**"; // regular expression
 
-	@Inject(optional = true)
-	@Named(WHITESPACE)
 	protected String whitespace = "( |\\t)*"; // regular expression
+
+	/**
+	 * @since 2.5
+	 */
+	protected Pattern startTagRegex;
+
+	/**
+	 * @since 2.5
+	 */
+	protected Pattern endTagRegex;
+
+	/**
+	 * @since 2.5
+	 */
+	protected Pattern linePrefixRegex;
+
+	/**
+	 * @since 2.5
+	 */
+	protected Pattern linePostfixRegex;
 	
+	/**
+	 * @since 2.5
+	 */
+	protected Pattern tagsAndPrefixRegex;
+
 	protected String getTextFromMultilineComment(String returnValue) {
 		if (returnValue != null) {
-			returnValue = returnValue.replaceAll("\\A" + startTag, "");
-			returnValue = returnValue.replaceAll(endTag + "\\z", "");
-			returnValue = returnValue.replaceAll("(?m)^"+ whitespace + linePrefix, "");
-			returnValue = returnValue.replaceAll("(?m)" + whitespace + linePostfix + whitespace + "$", "");
+			returnValue = startTagRegex.matcher(returnValue).replaceAll("");
+			returnValue = endTagRegex.matcher(returnValue).replaceAll("");
+			returnValue = linePrefixRegex.matcher(returnValue).replaceAll("");
+			returnValue = linePostfixRegex.matcher(returnValue).replaceAll("");
 			return returnValue.trim();
 		} else
 			return null;
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	@Inject
+	public void injectProperties(MultiLineCommentProviderProperties properties) {
+		this.startTag = properties.startTag != null ? properties.startTag : this.startTag;
+		this.endTag = properties.endTag != null ? properties.endTag : this.endTag;
+		this.linePrefix = properties.linePrefix != null ? properties.linePrefix : this.linePrefix;
+		this.linePostfix = properties.linePostfix != null ? properties.linePostfix : this.linePostfix;
+		this.whitespace = properties.whitespace != null ? properties.whitespace : this.whitespace;
+		this.startTagRegex = Pattern.compile("\\A" + startTag);
+		this.endTagRegex = Pattern.compile(endTag + "\\z");
+		this.linePrefixRegex = Pattern.compile("(?m)^" + whitespace + linePrefix);
+		this.linePostfixRegex = Pattern.compile("(?m)" + whitespace + linePostfix + whitespace + "$");
 	}
 
 }
