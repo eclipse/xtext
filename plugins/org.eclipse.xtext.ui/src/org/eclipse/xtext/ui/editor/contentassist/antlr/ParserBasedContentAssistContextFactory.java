@@ -56,6 +56,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Builder;
 import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
@@ -507,7 +508,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				}
 				else {
 					ILeafNode leaf = (ILeafNode) child;
-					if (leaf.getOffset() > completionOffset)
+					ITextRegion leafRegion = leaf.getTextRegion();
+					if (leafRegion.getOffset() > completionOffset)
 						return false;
 					if (leaf.isHidden()) {
 						if (result.length() != 0)
@@ -520,7 +522,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 						}
 						hiddens.clear();
 						result.append(getNodeTextUpToCompletionOffset(leaf));
-						if (leaf.getOffset() + leaf.getLength() > completionOffset)
+						if (leafRegion.getOffset() + leafRegion.getLength() > completionOffset)
 							return false;
 					}
 				}

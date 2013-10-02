@@ -26,7 +26,7 @@ public abstract class ProposalConflictHelper implements IProposalConflictHelper 
 		// hidden node between lastCompleteNode and currentNode?
 		INode lastCompleteNode = context.getLastCompleteNode();
 		Region replaceRegion = context.getReplaceRegion();
-		int nodeEnd = lastCompleteNode.getOffset() + lastCompleteNode.getLength();
+		int nodeEnd = lastCompleteNode.getEndOffset();
 		if (nodeEnd < replaceRegion.getOffset())
 			return false;
 		

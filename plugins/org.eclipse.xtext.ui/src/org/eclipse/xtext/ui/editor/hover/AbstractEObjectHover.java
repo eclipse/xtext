@@ -113,7 +113,8 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 						leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);
 					}
 					if (leafNode != null) {
-						return Tuples.create(crossLinkedEObject, (IRegion) new Region(leafNode.getOffset(), leafNode.getLength()));
+						ITextRegion leafRegion = leafNode.getTextRegion();
+						return Tuples.create(crossLinkedEObject, (IRegion) new Region(leafRegion.getOffset(), leafRegion.getLength()));
 					}
 				}
 			}

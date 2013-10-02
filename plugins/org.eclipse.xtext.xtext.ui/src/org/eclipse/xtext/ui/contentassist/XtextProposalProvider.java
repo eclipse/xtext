@@ -510,7 +510,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 							ICompositeNode node = NodeModelUtils.getNode(grammar.getMetamodelDeclarations().get(
 									grammar.getMetamodelDeclarations().size() - 1));
 							if(node != null)
-								offset = node.getOffset() + node.getLength();
+								offset = node.getEndOffset();
 						}
 						offset = Math.min(proposal.getReplacementOffset(), offset);
 

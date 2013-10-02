@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
@@ -127,11 +128,13 @@ public class SemanticHighlighter implements ISemanticHighlightingCalculator {
 		if (node == null)
 			return;
 		if (node instanceof ILeafNode) {
-			acceptor.addPosition(node.getOffset(), node.getLength(), id);
+			ITextRegion textRegion = node.getTextRegion();
+			acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), id);
 		} else {
 			for (ILeafNode leaf : node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
-					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
+					ITextRegion leafRegion = leaf.getTextRegion();
+					acceptor.addPosition(leafRegion.getOffset(), leafRegion.getLength(), id);
 				}
 			}
 		}
