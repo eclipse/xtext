@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.shared.internal;
 
+import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
-import org.eclipse.xtext.builder.impl.javasupport.ProjectClasspathChangeListener;
+import org.eclipse.xtext.builder.impl.javasupport.JdtQueuedBuildData;
 import org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer;
+import org.eclipse.xtext.builder.impl.javasupport.ProjectClasspathChangeListener;
 import org.eclipse.xtext.builder.trace.JarEntryAwareTrace;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
@@ -31,6 +33,7 @@ public class SharedModuleWithJdt extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		bind(QueuedBuildData.class).to(JdtQueuedBuildData.class);
 		bind(ToBeBuiltComputer.class).to(JdtToBeBuiltComputer.class);
 		bind(ProjectClasspathChangeListener.class).asEagerSingleton();
 		bind(IStorage2UriMapper.class).to(IStorage2UriMapperJdtExtensions.class);

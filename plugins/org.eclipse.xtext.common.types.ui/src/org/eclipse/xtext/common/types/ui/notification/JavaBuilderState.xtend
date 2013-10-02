@@ -7,14 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.notification
 
+import java.util.Set
 import org.apache.log4j.Level
 import org.apache.log4j.Logger
+import org.eclipse.core.resources.IProject
 import org.eclipse.jdt.core.ICompilationUnit
 import org.eclipse.jdt.core.IJavaElement
 import org.eclipse.jdt.core.IPackageFragment
 import org.eclipse.jdt.core.IPackageFragmentRoot
 import org.eclipse.jdt.internal.compiler.util.SimpleLookupTable
 import org.eclipse.jdt.internal.core.builder.State
+import org.eclipse.jdt.internal.core.builder.StringSet
+import org.eclipse.xtext.naming.QualifiedName
 
 import static org.eclipse.jdt.internal.core.JavaModelManager.*
 
@@ -26,12 +30,25 @@ class JavaBuilderState {
 
 	private val static LOG = Logger.getLogger(JavaBuilderState);
 
-	var SimpleLookupTable references
-
 	val State state
 
-	private new(State state) {
+	val IProject project
+
+	var Integer buildNumber
+
+	var SimpleLookupTable references
+
+	var Long lastStructuralBuildTime
+
+	var Set<QualifiedName> structurallyChangedTypes
+
+	private new(IProject project, State state) {
+		this.project = project
 		this.state = state
+	}
+
+	def getProject() {
+		project
 	}
 
 	static def getLastBuiltState(IJavaElement it) {
@@ -39,11 +56,52 @@ class JavaBuilderState {
 		if (javaProject == null) {
 			return null
 		}
-		new JavaBuilderState(
-			switch state : javaModelManager.getLastBuiltState(javaProject.project, null) {
+		javaProject.project.lastBuiltState
+	}
+
+	static def getLastBuiltState(IProject it) {
+		new JavaBuilderState(it,
+			switch state : javaModelManager.getLastBuiltState(it, null) {
 				State: state
 				default: null
 			})
+	}
+
+	def getLastStructuralBuildTime() {
+		if (lastStructuralBuildTime != null) {
+			return lastStructuralBuildTime
+		}
+		if (state == null) {
+			return lastStructuralBuildTime = -1l
+		}
+		lastStructuralBuildTime = state.readField("lastStructuralBuildTime", -1l) as Long
+	}
+
+	def getBuildNumber() {
+		if (buildNumber != null) {
+			return buildNumber
+		}
+		if (state == null) {
+			return buildNumber = -1
+		}
+		buildNumber = state.readField("buildNumber", -1) as Integer
+	}
+
+	def getStructurallyChangedTypes() {
+		if (structurallyChangedTypes != null) {
+			return structurallyChangedTypes
+		}
+		structurallyChangedTypes = newHashSet
+		switch types : state?.readField("structurallyChangedTypes", null) {
+			StringSet: {
+				for (name : types.values) {
+					if (name != null) {
+						structurallyChangedTypes += QualifiedName.create(name.split("/"))
+					}
+				}
+			}
+		}
+		structurallyChangedTypes
 	}
 
 	/**

@@ -11,7 +11,9 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Set;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -26,7 +28,9 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.internal.compiler.util.SimpleLookupTable;
 import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.jdt.internal.core.builder.State;
+import org.eclipse.jdt.internal.core.builder.StringSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -47,12 +51,25 @@ public class JavaBuilderState {
     }
   }.apply();
   
-  private SimpleLookupTable references;
-  
   private final State state;
   
-  private JavaBuilderState(final State state) {
+  private final IProject project;
+  
+  private Integer buildNumber;
+  
+  private SimpleLookupTable references;
+  
+  private Long lastStructuralBuildTime;
+  
+  private Set<QualifiedName> structurallyChangedTypes;
+  
+  private JavaBuilderState(final IProject project, final State state) {
+    this.project = project;
     this.state = state;
+  }
+  
+  public IProject getProject() {
+    return this.project;
   }
   
   public static JavaBuilderState getLastBuiltState(final IJavaElement it) {
@@ -63,23 +80,101 @@ public class JavaBuilderState {
       if (_equals) {
         return null;
       }
-      State _switchResult = null;
-      JavaModelManager _javaModelManager = JavaModelManager.getJavaModelManager();
       IProject _project = javaProject.getProject();
-      Object _lastBuiltState = _javaModelManager.getLastBuiltState(_project, null);
-      final Object state = _lastBuiltState;
+      JavaBuilderState _lastBuiltState = JavaBuilderState.getLastBuiltState(_project);
+      _xblockexpression = (_lastBuiltState);
+    }
+    return _xblockexpression;
+  }
+  
+  public static JavaBuilderState getLastBuiltState(final IProject it) {
+    State _switchResult = null;
+    JavaModelManager _javaModelManager = JavaModelManager.getJavaModelManager();
+    Object _lastBuiltState = _javaModelManager.getLastBuiltState(it, null);
+    final Object state = _lastBuiltState;
+    boolean _matched = false;
+    if (!_matched) {
+      if (state instanceof State) {
+        _matched=true;
+        _switchResult = ((State)state);
+      }
+    }
+    if (!_matched) {
+      _switchResult = null;
+    }
+    JavaBuilderState _javaBuilderState = new JavaBuilderState(it, _switchResult);
+    return _javaBuilderState;
+  }
+  
+  public Long getLastStructuralBuildTime() {
+    Long _xblockexpression = null;
+    {
+      boolean _notEquals = (!Objects.equal(this.lastStructuralBuildTime, null));
+      if (_notEquals) {
+        return this.lastStructuralBuildTime;
+      }
+      boolean _equals = Objects.equal(this.state, null);
+      if (_equals) {
+        long _minus = (-1l);
+        return this.lastStructuralBuildTime = Long.valueOf(_minus);
+      }
+      long _minus_1 = (-1l);
+      Object _readField = this.readField(this.state, "lastStructuralBuildTime", Long.valueOf(_minus_1));
+      Long _lastStructuralBuildTime = this.lastStructuralBuildTime = ((Long) _readField);
+      _xblockexpression = (_lastStructuralBuildTime);
+    }
+    return _xblockexpression;
+  }
+  
+  public Integer getBuildNumber() {
+    Integer _xblockexpression = null;
+    {
+      boolean _notEquals = (!Objects.equal(this.buildNumber, null));
+      if (_notEquals) {
+        return this.buildNumber;
+      }
+      boolean _equals = Objects.equal(this.state, null);
+      if (_equals) {
+        int _minus = (-1);
+        return this.buildNumber = Integer.valueOf(_minus);
+      }
+      int _minus_1 = (-1);
+      Object _readField = this.readField(this.state, "buildNumber", Integer.valueOf(_minus_1));
+      Integer _buildNumber = this.buildNumber = ((Integer) _readField);
+      _xblockexpression = (_buildNumber);
+    }
+    return _xblockexpression;
+  }
+  
+  public Set<QualifiedName> getStructurallyChangedTypes() {
+    Set<QualifiedName> _xblockexpression = null;
+    {
+      boolean _notEquals = (!Objects.equal(this.structurallyChangedTypes, null));
+      if (_notEquals) {
+        return this.structurallyChangedTypes;
+      }
+      HashSet<QualifiedName> _newHashSet = CollectionLiterals.<QualifiedName>newHashSet();
+      this.structurallyChangedTypes = _newHashSet;
+      Object _readField = null;
+      if (this.state!=null) {
+        _readField=this.readField(this.state, "structurallyChangedTypes", null);
+      }
+      final Object types = _readField;
       boolean _matched = false;
       if (!_matched) {
-        if (state instanceof State) {
+        if (types instanceof StringSet) {
           _matched=true;
-          _switchResult = ((State)state);
+          for (final String name : ((StringSet)types).values) {
+            boolean _notEquals_1 = (!Objects.equal(name, null));
+            if (_notEquals_1) {
+              String[] _split = name.split("/");
+              QualifiedName _create = QualifiedName.create(_split);
+              this.structurallyChangedTypes.add(_create);
+            }
+          }
         }
       }
-      if (!_matched) {
-        _switchResult = null;
-      }
-      JavaBuilderState _javaBuilderState = new JavaBuilderState(_switchResult);
-      _xblockexpression = (_javaBuilderState);
+      _xblockexpression = (this.structurallyChangedTypes);
     }
     return _xblockexpression;
   }
