@@ -17,6 +17,7 @@ public class OutputConfiguration {
 
 	/**
 	 * a description to be shown in the UI.
+	 * 
 	 * @property
 	 */
 	private String description;
@@ -32,12 +33,14 @@ public class OutputConfiguration {
 	/**
 	 * whether the output directory should be created if t doesn't already
 	 * exist.
+	 * 
 	 * @property
 	 */
 	private boolean createOutputDirectory = true;
 
 	/**
 	 * whether existing resources should be overridden.
+	 * 
 	 * @property
 	 */
 	private boolean overrideExistingResources = true;
@@ -65,6 +68,21 @@ public class OutputConfiguration {
 	 * @property
 	 */
 	private boolean hideSyntheticLocalVariables = true;
+
+	/**
+	 * whether the whole outputDirectory can be cleared. This is usually used in
+	 * a CLEAN build.
+	 * 
+	 * @property
+	 */
+	private boolean canClearOutputDirectory = false;
+
+	/**
+	 * whether derived resources should be deleted on clean.
+	 * 
+	 * @property
+	 */
+	private boolean cleanUpDerivedResources = true;
 
 	public OutputConfiguration() {
 		super();
@@ -122,8 +140,26 @@ public class OutputConfiguration {
 		this.hideSyntheticLocalVariables = hideSyntheticLocalVariables;
 	}
 
+	public boolean isCanClearOutputDirectory() {
+		return canClearOutputDirectory;
+	}
+
+	public void setCanClearOutputDirectory(boolean canClearOutputDirectory) {
+		this.canClearOutputDirectory = canClearOutputDirectory;
+	}
+
+	public boolean isCleanUpDerivedResources() {
+		return cleanUpDerivedResources;
+	}
+
+	public void setCleanUpDerivedResources(boolean cleanUpDerivedResources) {
+		this.cleanUpDerivedResources = cleanUpDerivedResources;
+	}
+
 	public org.eclipse.xtext.generator.OutputConfiguration toOutputConfiguration() {
 		org.eclipse.xtext.generator.OutputConfiguration copy = new org.eclipse.xtext.generator.OutputConfiguration(name);
+		copy.setCanClearOutputDirectory(canClearOutputDirectory);
+		copy.setCleanUpDerivedResources(cleanUpDerivedResources);
 		copy.setCreateOutputDirectory(createOutputDirectory);
 		copy.setDescription(description);
 		copy.setHideSyntheticLocalVariables(hideSyntheticLocalVariables);

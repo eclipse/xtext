@@ -20,7 +20,7 @@ public class Language implements ILanguageConfiguration {
 	 * whether this language links or produces Java types
 	 * @property
 	 */
-	private boolean javaSupport = false;
+	private boolean javaSupport = true;
 	
 	/**
 	 * @property

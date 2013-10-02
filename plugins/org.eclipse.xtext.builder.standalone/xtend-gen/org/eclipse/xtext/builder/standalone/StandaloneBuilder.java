@@ -117,6 +117,16 @@ public class StandaloneBuilder {
     this._encoding = encoding;
   }
   
+  private boolean _failOnValidationError = true;
+  
+  public boolean isFailOnValidationError() {
+    return this._failOnValidationError;
+  }
+  
+  public void setFailOnValidationError(final boolean failOnValidationError) {
+    this._failOnValidationError = failOnValidationError;
+  }
+  
   @Inject
   private IndexedJvmTypeAccess jvmTypeAccess;
   
@@ -187,6 +197,17 @@ public class StandaloneBuilder {
     };
     IterableExtensions.<Resource>forEach(sourceResources, _function_2);
     final boolean isErrorFree = this.validate(sourceResources);
+    boolean _and = false;
+    boolean _isFailOnValidationError = this.isFailOnValidationError();
+    if (!_isFailOnValidationError) {
+      _and = false;
+    } else {
+      boolean _not = (!isErrorFree);
+      _and = (_isFailOnValidationError && _not);
+    }
+    if (_and) {
+      return isErrorFree;
+    }
     this.generate(sourceResources);
     return isErrorFree;
   }
@@ -301,9 +322,10 @@ public class StandaloneBuilder {
           boolean _matched = false;
           if (!_matched) {
             if (provider instanceof org.eclipse.xtext.parser.IEncodingProvider.Runtime) {
+              final org.eclipse.xtext.parser.IEncodingProvider.Runtime _runtime = (org.eclipse.xtext.parser.IEncodingProvider.Runtime)provider;
               _matched=true;
               String _encoding_1 = this.getEncoding();
-              ((org.eclipse.xtext.parser.IEncodingProvider.Runtime)provider).setDefaultEncoding(_encoding_1);
+              _runtime.setDefaultEncoding(_encoding_1);
             }
           }
           if (!_matched) {
@@ -312,7 +334,8 @@ public class StandaloneBuilder {
             String _plus_3 = (_plus_2 + "\' for file \'");
             URI _uRI_1 = it.getURI();
             String _plus_4 = (_plus_3 + _uRI_1);
-            String _plus_5 = (_plus_4 + "\'. Only subclasses of IEncodingProvider.Runtime are supported.");
+            String _plus_5 = (_plus_4 + 
+              "\'. Only subclasses of IEncodingProvider.Runtime are supported.");
             StandaloneBuilder.LOG.debug(_plus_5);
           }
         }

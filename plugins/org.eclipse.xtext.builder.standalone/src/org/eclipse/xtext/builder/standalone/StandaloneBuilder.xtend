@@ -35,6 +35,7 @@ class StandaloneBuilder {
 	@Property Iterable<String> classPathEntries
 	@Property File tempDir = Files.createTempDir
 	@Property String encoding
+	@Property boolean failOnValidationError = true
 
 	@Inject IndexedJvmTypeAccess jvmTypeAccess
 	@Inject Provider<XtextResourceSet> resourceSetProvider
@@ -42,7 +43,7 @@ class StandaloneBuilder {
 	@Inject IIssueHandler issueHandler
 	@Inject IEncodingProvider.Runtime encodingProvider
 	@Inject IJavaCompiler compiler
-	
+
 	def void setTempDir(String pathAsString) {
 		if (pathAsString != null) {
 			_tempDir = new File(pathAsString)
@@ -57,7 +58,7 @@ class StandaloneBuilder {
 
 		val resourceSet = resourceSetProvider.get
 		val allClassPathEntries = (sourceDirs + classPathEntries)
-		
+
 		collectResources(allClassPathEntries, resourceSet)
 		if (needsJava) {
 			installTypeProvider(allClassPathEntries, resourceSet, null)
@@ -72,6 +73,9 @@ class StandaloneBuilder {
 		sourceResources.forEach[EcoreUtil2.resolveLazyCrossReferences(it, CancelIndicator.NullImpl)]
 
 		val isErrorFree = validate(sourceResources)
+		if (failOnValidationError && !isErrorFree) {
+			return isErrorFree
+		}
 		generate(sourceResources)
 		return isErrorFree
 	}
@@ -127,11 +131,13 @@ class StandaloneBuilder {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
 			if (encoding != null) {
 				switch provider : languageAccess.encodingProvider {
-					IEncodingProvider.Runtime : {
+					IEncodingProvider.Runtime: {
 						provider.setDefaultEncoding(encoding)
 					}
-					default : {
-						LOG.debug("Couldn't set encoding '"+encoding+"' for file '"+URI+"'. Only subclasses of IEncodingProvider.Runtime are supported.")
+					default: {
+						LOG.debug(
+							"Couldn't set encoding '" + encoding + "' for file '" + URI +
+								"'. Only subclasses of IEncodingProvider.Runtime are supported.")
 					}
 				}
 			}
@@ -148,7 +154,7 @@ class StandaloneBuilder {
 		if(!file.mkdirs && !file.exists) throw new IOException("Failed to create directory '" + file.absolutePath + "'")
 		return file
 	}
-	
+
 	def protected void installTypeProvider(Iterable<String> classPathRoots, XtextResourceSet resSet,
 		IndexedJvmTypeAccess typeAccess) {
 		val classLoader = createURLClassLoader(classPathRoots)

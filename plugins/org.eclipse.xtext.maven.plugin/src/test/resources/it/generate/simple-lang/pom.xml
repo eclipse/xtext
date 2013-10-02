@@ -10,36 +10,7 @@
 		<xtend.version>IT-SNAPSHOT</xtend.version>
 	</properties>
 	<build>
-		<resources>
-			<resource>
-				<directory>src</directory>
-			</resource>
-			<resource>
-				<directory>src-gen</directory>
-			</resource>
-		</resources>
-
-		<sourceDirectory>src</sourceDirectory>
-
 		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src-gen</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-maven-plugin</artifactId>
@@ -55,6 +26,7 @@
 				<configuration>
 					<languages>
 						<language>
+							<javaSupport>false</javaSupport>
 							<setup>org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup</setup>
 						</language>
 					</languages>

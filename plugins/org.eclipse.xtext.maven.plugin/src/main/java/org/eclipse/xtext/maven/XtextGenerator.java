@@ -39,7 +39,6 @@ public class XtextGenerator extends AbstractMojo {
 	 * Location of the generated source files.
 	 * 
 	 * @parameter expression="${project.build.directory}/xtext-temp"
-	 * @readonly
 	 */
 	private String tmpClassDirectory;
 
@@ -132,11 +131,12 @@ public class XtextGenerator extends AbstractMojo {
 		builder.setEncoding(encoding);
 		builder.setClassPathEntries(classPathEntries);
 		builder.setSourceDirs(sourceRoots);
+		builder.setFailOnValidationError(failOnValidationError);
 		builder.setTempDir(createTempDir().getAbsolutePath());
 		configureCompiler(builder.getCompiler());
 		logState();
 		boolean errorDetected = !builder.launch();
-		if (errorDetected && failOnValidationError) {
+		if (errorDetected) {
 			throw new MojoExecutionException("Execution failed due to a severe validation error.");
 		}
 	}

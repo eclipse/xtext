@@ -39,6 +39,13 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -46,7 +53,8 @@
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.standalone</artifactId>
-			<version>${project.version}</version>
+			<version>2.4.3</version>
 		</dependency>
 	</dependencies>
+	
 </project>
