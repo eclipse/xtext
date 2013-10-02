@@ -50,11 +50,6 @@ public class LeafNode extends AbstractNode implements ILeafNode {
 		return totalLength;
 	}
 	
-	@Override
-	protected int getLength(int offset) {
-		return getLength();
-	}
-	
 	protected void basicSetTotalOffset(int offset) {
 		this.totalOffset = offset;
 	}
