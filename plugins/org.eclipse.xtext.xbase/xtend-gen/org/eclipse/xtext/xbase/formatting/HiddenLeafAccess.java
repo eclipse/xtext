@@ -143,13 +143,8 @@ public class HiddenLeafAccess {
           List<LeafInfo> _leafs_3 = result.getLeafs();
           LeafInfo _last_1 = IterableExtensions.<LeafInfo>last(_leafs_3);
           ILeafNode _node = _last_1.getNode();
-          int _offset = _node.getOffset();
-          List<LeafInfo> _leafs_4 = result.getLeafs();
-          LeafInfo _last_2 = IterableExtensions.<LeafInfo>last(_leafs_4);
-          ILeafNode _node_1 = _last_2.getNode();
-          int _length = _node_1.getLength();
-          int _plus = (_offset + _length);
-          _xifexpression = _plus;
+          int _endOffset = _node.getEndOffset();
+          _xifexpression = _endOffset;
         }
         WhitespaceInfo _whitespaceInfo = new WhitespaceInfo(result, null, 0, _xifexpression);
         _leafs_1.add(_whitespaceInfo);
@@ -173,18 +168,16 @@ public class HiddenLeafAccess {
       HiddenLeafs _xifexpression = null;
       boolean _notEquals = (!Objects.equal(start, null));
       if (_notEquals) {
-        int _offset = start.getOffset();
-        int _length = start.getLength();
-        int _plus = (_offset + _length);
+        int _endOffset = start.getEndOffset();
         List<ILeafNode> _findNextHiddenLeafs = this.findNextHiddenLeafs(start);
-        HiddenLeafs _newHiddenLeafs = this.newHiddenLeafs(_plus, _findNextHiddenLeafs);
+        HiddenLeafs _newHiddenLeafs = this.newHiddenLeafs(_endOffset, _findNextHiddenLeafs);
         _xifexpression = _newHiddenLeafs;
       } else {
-        int _offset_1 = 0;
+        int _offset = 0;
         if (node!=null) {
-          _offset_1=node.getOffset();
+          _offset=node.getOffset();
         }
-        HiddenLeafs _hiddenLeafs = new HiddenLeafs(_offset_1);
+        HiddenLeafs _hiddenLeafs = new HiddenLeafs(_offset);
         _xifexpression = _hiddenLeafs;
       }
       _xblockexpression = (_xifexpression);
@@ -204,9 +197,9 @@ public class HiddenLeafAccess {
         {
           final INode next = ni.next();
           if ((next instanceof ILeafNode)) {
-            boolean _isHidden = ((ILeafNode) ((ILeafNode)next)).isHidden();
+            boolean _isHidden = ((ILeafNode) next).isHidden();
             if (_isHidden) {
-              result.add(((ILeafNode) ((ILeafNode)next)));
+              result.add(((ILeafNode) next));
             } else {
               return result;
             }

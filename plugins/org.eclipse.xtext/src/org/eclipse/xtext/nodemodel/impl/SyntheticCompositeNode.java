@@ -20,6 +20,8 @@ import org.eclipse.xtext.nodemodel.util.NodeIterable;
 import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
 import org.eclipse.xtext.nodemodel.util.ReversedBidiTreeIterable;
 import org.eclipse.xtext.nodemodel.util.SingletonBidiIterable;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 /**
  * Unfolds the array of grammar elements that is associated with a composite node.
@@ -190,6 +192,41 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 	@Override
 	public int hashCode() {
 		return delegate.hashCode() ^ grammarElementIdx;
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	public ITextRegion getTextRegion() {
+		return delegate.getTextRegion();
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	public ITextRegion getTotalTextRegion() {
+		return delegate.getTotalTextRegion();
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	public ITextRegionWithLineInformation getTextRegionWithLineInformation() {
+		return delegate.getTextRegionWithLineInformation();
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	public ITextRegionWithLineInformation getTotalTextRegionWithLineInformation() {
+		return delegate.getTotalTextRegionWithLineInformation();
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	public int getEndOffset() {
+		return delegate.getEndOffset();
 	}
 
 }

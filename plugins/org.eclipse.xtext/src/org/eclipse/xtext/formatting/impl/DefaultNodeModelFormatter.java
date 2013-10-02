@@ -82,9 +82,11 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 			EObject semanticElement = NodeModelUtils.findActualSemanticObjectFor(root);
 			if (semanticElement != null)
 				fmt = ((IFormatterExtension) formatter).createFormatterStream(semanticElement, indent, out, false);
-			else
+			else {
 				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380406
-				return new FormattedRegion(root.getOffset(), root.getLength(), root.getText());
+				ITextRegion rootRegion = root.getTextRegion();
+				return new FormattedRegion(rootRegion.getOffset(), rootRegion.getLength(), root.getText());
+			}
 		} else
 			fmt = formatter.createFormatterStream(indent, out, false);
 		try {

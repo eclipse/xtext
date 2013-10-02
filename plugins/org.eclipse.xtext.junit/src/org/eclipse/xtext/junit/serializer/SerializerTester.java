@@ -38,6 +38,7 @@ import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
@@ -133,8 +134,9 @@ public class SerializerTester {
 				String oldURI = semanticObject.eResource().getURIFragment(semanticObject);
 				List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
 				String serialized = serializeWithoutNodeModel(semanticObject);
-				String newtext = oldtext.substring(0, oldNode.getOffset()) + serialized
-						+ oldtext.substring(oldNode.getOffset() + oldNode.getLength());
+				ITextRegion oldRegion = oldNode.getTextRegion();
+				String newtext = oldtext.substring(0, oldRegion.getOffset()) + serialized
+						+ oldtext.substring(oldRegion.getOffset() + oldRegion.getLength());
 				EObject newmodel = parseHelper.parse(newtext, semanticObject.eResource().getResourceSet());
 				parsed = newmodel.eResource().getEObject(oldURI);
 				reattachNodes(nodes);

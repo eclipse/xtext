@@ -28,7 +28,7 @@ public class XtendOutlineNodeFactory extends OutlineNodeFactory {
 		XtendFeatureNode featureNode = new XtendFeatureNode(modelElement, parentNode, imageDescriptor, text, isLeaf);
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
-			featureNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
+			featureNode.setTextRegion(parserNode.getTextRegion());
 		if (isLocalElement(parentNode, modelElement))
 			featureNode.setShortTextRegion(getLocationInFileProvider().getSignificantTextRegion(modelElement));
 		featureNode.setStatic(isStatic(modelElement));

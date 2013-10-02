@@ -32,6 +32,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.IContextInformationAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -70,8 +71,9 @@ public class ParameterContextInformationProvider implements IContextInformationP
 		OwnedConverter converter = proposalProvider.getTypeConverter(context.getResource());
 		if (containerCall != null) {
 			ICompositeNode containerCallNode = NodeModelUtils.findActualNodeFor(containerCall);
-			if(containerCallNode.getOffset() > context.getOffset()
-					|| containerCallNode.getOffset() + containerCallNode.getLength() < context.getOffset()) 
+			ITextRegion containerCallRegion = containerCallNode.getTextRegion();
+			if(containerCallRegion.getOffset() > context.getOffset()
+					|| containerCallRegion.getOffset() + containerCallRegion.getLength() < context.getOffset()) 
 				return;
 			JvmIdentifiableElement calledFeature = getCalledFeature(containerCall);
 			if (calledFeature instanceof JvmExecutable) {
@@ -150,13 +152,13 @@ public class ParameterContextInformationProvider implements IContextInformationP
 			Keyword parameterListOpenParenthesis = getParameterListOpenParenthesis(containerCall);
 			for(ILeafNode leafNode: NodeModelUtils.findActualNodeFor(containerCall).getLeafNodes()) {
 				if(leafNode.getGrammarElement() == parameterListOpenParenthesis) {
-					return leafNode.getOffset() + leafNode.getLength();
+					return leafNode.getEndOffset();
 				}
 			}
 			int offset = 0;
 			for (INode node : NodeModelUtils.findNodesForFeature(containerCall,
 					getCalledFeatureReference(containerCall)))
-				offset = Math.max(offset, node.getOffset() + node.getLength());
+				offset = Math.max(offset, node.getEndOffset());
 			return offset;
 		} else {
 			INode node = NodeModelUtils.findActualNodeFor(arguments.get(0));

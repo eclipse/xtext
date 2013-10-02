@@ -24,6 +24,8 @@ import org.eclipse.xtext.common.types.TypesPackage.Literals;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -656,7 +658,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   protected void formatStaticQualifier(final INode node, final FormattableDocument document) {
     if ((node instanceof ICompositeNode)) {
-      final Iterable<ILeafNode> leafs = ((ICompositeNode) ((ICompositeNode)node)).getLeafNodes();
+      final Iterable<ILeafNode> leafs = ((ICompositeNode) node).getLeafNodes();
       for (final ILeafNode n : leafs) {
         boolean _and = false;
         EObject _grammarElement = n.getGrammarElement();
@@ -725,10 +727,15 @@ public class XbaseFormatter2 extends AbstractFormatter {
       String _xifexpression = null;
       boolean _notEquals = (!Objects.equal(node, null));
       if (_notEquals) {
-        int _offset = node.getOffset();
-        int _length = node.getLength();
-        String _renderToString = lookahead.renderToString(_offset, _length);
-        _xifexpression = _renderToString;
+        String _xblockexpression_1 = null;
+        {
+          final ITextRegion textRegion = node.getTextRegion();
+          int _offset = textRegion.getOffset();
+          int _length = textRegion.getLength();
+          String _renderToString = lookahead.renderToString(_offset, _length);
+          _xblockexpression_1 = (_renderToString);
+        }
+        _xifexpression = _xblockexpression_1;
       } else {
         _xifexpression = "";
       }
@@ -1308,7 +1315,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _while = (top instanceof XMemberFeatureCall);
     while (_while) {
       {
-        calls.add(((XMemberFeatureCall) ((XMemberFeatureCall)top)));
+        calls.add(((XMemberFeatureCall) top));
         XExpression _memberCallTarget = ((XMemberFeatureCall) top).getMemberCallTarget();
         top = _memberCallTarget;
       }
@@ -1325,9 +1332,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         final INode targetNode = this._nodeModelAccess.nodeForEObject(_memberCallTarget);
         boolean _notEquals = (!Objects.equal(targetNode, null));
         if (_notEquals) {
-          int _offset = targetNode.getOffset();
-          int _length = targetNode.getLength();
-          final int callOffset = (_offset + _length);
+          final int callOffset = targetNode.getEndOffset();
           String _switchResult = null;
           final XMemberFeatureCall it = call;
           boolean _matched = false;
@@ -1359,10 +1364,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
           boolean _isExplicitOperationCall = call.isExplicitOperationCall();
           if (_isExplicitOperationCall) {
             final INode callNode = this._nodeModelAccess.nodeForEObject(call);
-            int _offset_1 = callNode.getOffset();
-            int _length_1 = callNode.getLength();
-            int _plus = (_offset_1 + _length_1);
-            final int callLength = (_plus - callOffset);
+            int _endOffset = callNode.getEndOffset();
+            final int callLength = (_endOffset - callOffset);
             final ILeafNode open = this._nodeModelAccess.nodeForKeyword(call, "(");
             final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
@@ -1374,11 +1377,11 @@ public class XbaseFormatter2 extends AbstractFormatter {
             final int lineLength = format.lineLengthBefore(callOffset);
             boolean _isMultiParamInOwnLine = this.isMultiParamInOwnLine(call, format);
             if (_isMultiParamInOwnLine) {
-              int _length_2 = featureNode.getLength();
-              int _plus_1 = (lineLength + _length_2);
+              int _length = featureNode.getLength();
+              int _plus = (lineLength + _length);
               FormattingPreferenceValues _cfg = format.getCfg();
               int _get = _cfg.get(BasicFormatterPreferenceKeys.maxLineWidth);
-              boolean _lessThan = (_plus_1 < _get);
+              boolean _lessThan = (_plus < _get);
               if (_lessThan) {
                 final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
@@ -1400,12 +1403,12 @@ public class XbaseFormatter2 extends AbstractFormatter {
               this.formatFeatureCallParamsMultiline(open, _memberCallArguments, format);
             } else {
               boolean _or = false;
-              int _length_3 = featureNode.getLength();
-              int _multiply = (_length_3 * 2);
-              int _plus_2 = (lineLength + _multiply);
+              int _length_1 = featureNode.getLength();
+              int _multiply = (_length_1 * 2);
+              int _plus_1 = (lineLength + _multiply);
               FormattingPreferenceValues _cfg_1 = format.getCfg();
               int _get_1 = _cfg_1.get(BasicFormatterPreferenceKeys.maxLineWidth);
-              boolean _lessThan_1 = (_plus_2 < _get_1);
+              boolean _lessThan_1 = (_plus_1 < _get_1);
               if (_lessThan_1) {
                 _or = true;
               } else {
@@ -1458,8 +1461,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
             }
           } else {
             int _lineLengthBefore = format.lineLengthBefore(callOffset);
-            int _length_4 = featureNode.getLength();
-            final int shortLenght = (_lineLengthBefore + _length_4);
+            int _length_2 = featureNode.getLength();
+            final int shortLenght = (_lineLengthBefore + _length_2);
             FormattingPreferenceValues _cfg_2 = format.getCfg();
             int _get_2 = _cfg_2.get(BasicFormatterPreferenceKeys.maxLineWidth);
             boolean _lessThan_2 = (shortLenght < _get_2);
@@ -1549,7 +1552,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
           AbstractRule _xifexpression_1 = null;
           if ((terminal instanceof RuleCall)) {
-            return ((RuleCall) ((RuleCall)terminal)).getRule();
+            return ((RuleCall) terminal).getRule();
           }
           _xblockexpression_1 = (_xifexpression_1);
         }
@@ -1567,10 +1570,15 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if (!_notEquals) {
       _and = false;
     } else {
-      int _startLine = node.getStartLine();
-      int _endLine = node.getEndLine();
-      boolean _notEquals_1 = (_startLine != _endLine);
-      _and = (_notEquals && _notEquals_1);
+      boolean _xblockexpression = false;
+      {
+        final ITextRegionWithLineInformation textRegion = node.getTextRegionWithLineInformation();
+        int _lineNumber = textRegion.getLineNumber();
+        int _endLineNumber = textRegion.getEndLineNumber();
+        boolean _notEquals_1 = (_lineNumber != _endLineNumber);
+        _xblockexpression = (_notEquals_1);
+      }
+      _and = (_notEquals && _xblockexpression);
     }
     return _and;
   }

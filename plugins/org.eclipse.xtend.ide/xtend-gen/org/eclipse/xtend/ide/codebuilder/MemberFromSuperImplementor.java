@@ -237,7 +237,7 @@ public class MemberFromSuperImplementor {
       ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(owner, jvmOverrider);
       final ParameterizedTypeReference lightweightOverrider = _parameterizedTypeReference;
       if ((jvmOverrider instanceof JvmGenericType)) {
-        EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) ((JvmGenericType)jvmOverrider)).getTypeParameters();
+        EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) jvmOverrider).getTypeParameters();
         final Procedure1<JvmTypeParameter> _function = new Procedure1<JvmTypeParameter>() {
           public void apply(final JvmTypeParameter it) {
             ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(owner, it);

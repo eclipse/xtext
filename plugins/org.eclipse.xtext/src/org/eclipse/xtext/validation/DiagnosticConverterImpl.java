@@ -22,6 +22,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue.IssueImpl;
 
@@ -232,10 +233,11 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 	}
 
 	protected IssueLocation getLocationForNode(INode node) {
+		ITextRegionWithLineInformation nodeRegion = node.getTextRegionWithLineInformation();
 		IssueLocation result = new IssueLocation();
-		result.lineNumber = node.getStartLine();
-		result.offset = node.getOffset();
-		result.length = node.getLength();
+		result.lineNumber = nodeRegion.getLineNumber();
+		result.offset = nodeRegion.getOffset();
+		result.length = nodeRegion.getLength();
 		return result;
 	}
 

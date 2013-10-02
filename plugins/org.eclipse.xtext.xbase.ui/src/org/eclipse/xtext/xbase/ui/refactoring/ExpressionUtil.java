@@ -23,6 +23,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -91,21 +92,24 @@ public class ExpressionUtil {
 	}
 	
 	protected boolean isBeginOfASymbol(INode node, ITextSelection selection) {
-		return node.getOffset() == selection.getOffset() 
-				&& node.getLength() > 0 
+		ITextRegion textRegion = node.getTextRegion();
+		return textRegion.getOffset() == selection.getOffset() 
+				&& textRegion.getLength() > 0 
 				&& !Character.isLetterOrDigit(node.getText().charAt(0))
 				&& node.getText().charAt(0) != '['
 				&& node.getText().charAt(0) != '(';
 	}
 
 	protected boolean nodeContainsSelection(INode node, ITextSelection selection) {
-		return node.getOffset() <= selection.getOffset()
-				&& node.getOffset() + node.getLength() >= selection.getOffset() + selection.getLength();
+		ITextRegion textRegion = node.getTextRegion();
+		return textRegion.getOffset() <= selection.getOffset()
+				&& textRegion.getOffset() + textRegion.getLength() >= selection.getOffset() + selection.getLength();
 	}
 
 	protected boolean nodeIntersectsWithSelection(ITextSelection trimmedSelection, ICompositeNode node) {
-		return node.getOffset() <= trimmedSelection.getOffset() + trimmedSelection.getLength()
-				&& node.getOffset() + node.getLength() >= trimmedSelection.getOffset();
+		ITextRegion textRegion = node.getTextRegion();
+		return textRegion.getOffset() <= trimmedSelection.getOffset() + trimmedSelection.getLength()
+				&& textRegion.getOffset() + textRegion.getLength() >= trimmedSelection.getOffset();
 	}
 	
 	public XExpression findSuccessorExpressionForVariableDeclaration(EObject expression) {

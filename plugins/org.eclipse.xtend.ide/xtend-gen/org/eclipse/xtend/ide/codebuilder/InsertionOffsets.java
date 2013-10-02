@@ -104,10 +104,8 @@ public class InsertionOffsets {
     int _xblockexpression = (int) 0;
     {
       final ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
-      int _offset = node.getOffset();
-      int _length = node.getLength();
-      int _plus = (_offset + _length);
-      _xblockexpression = (_plus);
+      int _endOffset = node.getEndOffset();
+      _xblockexpression = (_endOffset);
     }
     return _xblockexpression;
   }
@@ -132,10 +130,8 @@ public class InsertionOffsets {
         int _plus = (_offset + 1);
         _xifexpression = _plus;
       } else {
-        int _offset_1 = classNode.getOffset();
-        int _length = classNode.getLength();
-        int _plus_1 = (_offset_1 + _length);
-        _xifexpression = _plus_1;
+        int _endOffset = classNode.getEndOffset();
+        _xifexpression = _endOffset;
       }
       _xblockexpression = (_xifexpression);
     }

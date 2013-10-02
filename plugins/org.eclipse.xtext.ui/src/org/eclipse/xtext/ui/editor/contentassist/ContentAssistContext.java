@@ -17,6 +17,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -334,7 +335,8 @@ public class ContentAssistContext {
 	public int getReplaceContextLength() {
 		if (replaceContextLength == null) {
 			int replacementOffset = getReplaceRegion().getOffset();
-			int replaceContextLength = getCurrentNode().getLength() - (replacementOffset - getCurrentNode().getOffset());
+			ITextRegion currentRegion = getCurrentNode().getTextRegion();
+			int replaceContextLength = currentRegion.getLength() - (replacementOffset - currentRegion.getOffset());
 			this.replaceContextLength = replaceContextLength;
 			return replaceContextLength;
 		}

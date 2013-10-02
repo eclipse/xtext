@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
@@ -62,10 +63,13 @@ public class DefaultCommentAssociater extends AbstractCommentAssociater {
 				currentComments.add((ILeafNode) node);
 			}
 			boolean isToken = tokenUtil.isToken(node);
-			if ((node instanceof ILeafNode || isToken) && node.getStartLine() != node.getEndLine() && currentEObject != null) {
-				// found a newline -> associating existing comments with currentEObject
-				addMapping(mapping, currentComments, currentEObject);
-				currentEObject = null;
+			if ((node instanceof ILeafNode || isToken) && currentEObject != null) {
+				ITextRegionWithLineInformation textRegion = node.getTextRegionWithLineInformation();
+				if (textRegion.getLineNumber() != textRegion.getEndLineNumber()) {
+					// found a newline -> associating existing comments with currentEObject
+					addMapping(mapping, currentComments, currentEObject);
+					currentEObject = null;
+				}
 			}
 			if (isToken) {
 				Pair<List<ILeafNode>, List<ILeafNode>> leadingAndTrailingHiddenTokens = tokenUtil
@@ -79,7 +83,7 @@ public class DefaultCommentAssociater extends AbstractCommentAssociater {
 				currentEObject = tokenUtil.getTokenOwner(node);
 				if (currentEObject != null) {
 					addMapping(mapping, currentComments, currentEObject);
-					if (node.getOffset() > rootNode.getOffset() + rootNode.getLength()) {
+					if (node.getOffset() > rootNode.getEndOffset()) {
 						// found next EObject outside rootNode
 						break;
 					}

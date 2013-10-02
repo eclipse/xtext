@@ -8,6 +8,8 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 /**
  * <p>A node in the parse tree. Clients will usually deal with fully initialized
@@ -115,6 +117,15 @@ public interface INode {
 	int getTotalEndOffset();
 	
 	/**
+	 * Returns the end offset (exclusive) of this node excluding hidden tokens. 
+	 * Yields the same result as {@link #getOffset() offset} <code>+</code> {@link #getLength() length}
+	 * but may be more efficient.
+	 * @return the end offset (exclusive) of this node excluding hidden tokens. 
+	 * @since 2.5
+	 */
+	int getEndOffset();
+	
+	/**
 	 * Returns the line number relative to the complete input where the node begins 
 	 *   (one based, including hidden tokens).
 	 * @return the line number relative to the complete input where the node begins. 
@@ -183,11 +194,102 @@ public interface INode {
 	SyntaxErrorMessage getSyntaxErrorMessage();
 	
 	/**
+	 * Returns a instance of type {@link ITextRegion} which has {@link #getOffset() offset} and {@link #getLength() length}.
+	 * 
 	 * Returns a tree iterable that uses this node as its origin and root instance. Its iterator will not return any
 	 * siblings of this root. However, the first element returned by {@link BidiTreeIterator#previous()}
 	 * or {@link BidiTreeIterator#next()} will be this instance.
 	 * @return a tree iterable where this node represents the root instance.
 	 */
 	BidiTreeIterable<INode> getAsTreeIterable();
+	
+	/**
+	 * <p>
+	 * Returns a {@link ITextRegion region} for this node excluding hidden tokens:
+	 * <ul>
+	 * <li>an {@link ITextRegion#getOffset() offset} of this region is the same as an {@link #getOffset() offset} of this node;</li>
+	 * <li>and a {@link ITextRegion#getLength() length} of this region is the same as a {@link #getLength() length} of this node.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * <p>
+	 * This method could be more efficient than calculating an {@link #getOffset() offset} and a {@link #getLength() length} of this node separately.
+	 * </p>
+	 * 
+	 * @return a {@link ITextRegion region} for this node excluding hidden tokens
+	 * @since 2.5
+	 */
+	ITextRegion getTextRegion();
+
+	/**
+	 * <p>
+	 * Returns a {@link ITextRegion region} for this node including hidden tokens:
+	 * <ul>
+	 * <li>an {@link ITextRegion#getOffset() offset} of this region is the same as a {@link #getTotalOffset() total offset} of this node;</li>
+	 * <li>and a {@link ITextRegion#getLength() length} of this region is the same as a {@link #getTotalLength() total length} of this node.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * <p>
+	 * This method could be more efficient than calculating a {@link #getTotalOffset() total offset} 
+	 * and a {@link #getTotalLength() total length} of this node separately.
+	 * </p>
+	 * 
+	 * @return a {@link ITextRegion region} for this node including hidden tokens
+	 * @since 2.5
+	 */
+	ITextRegion getTotalTextRegion();
+	
+	/**
+	 * <p>
+	 * Returns a {@link ITextRegionWithLineInformation region with line information} for this node excluding hidden tokens:
+	 * <ul>
+	 * <li>an {@link ITextRegionWithLineInformation#getOffset() offset} of this region is the same as an {@link #getOffset() offset} of this node;</li>
+	 * <li>a {@link ITextRegionWithLineInformation#getLength() length} of this region is the same as a {@link #getLength() length} of this node;</li>
+	 * <li>a {@link ITextRegionWithLineInformation#getLineNumber() line number} of this region is the same as a {@link #getStartLine() start line} of this node;</li>
+	 * <li>an {@link ITextRegionWithLineInformation#getEndLineNumber() end line number} of this region is the same as an {@link #getEndLine() end line} of this node.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * <p>
+	 * A {@link ITextRegionWithLineInformation#getLineNumber() line number} and 
+	 * an {@link ITextRegionWithLineInformation#getEndLineNumber() end line number} of the returned region are one based.
+	 * </p>
+	 * 
+	 * <p>
+	 * This method could be more efficient than calculating an {@link #getOffset() offset}, a {@link #getLength() length},
+	 * a {@link #getStartLine() start line} and an {@link #getEndLine() end line} of this node separately.
+	 * </p>
+	 * 
+	 * @return a {@link ITextRegionWithLineInformation region with line information} for this node excluding hidden tokens
+	 * @since 2.5
+	 */
+	ITextRegionWithLineInformation getTextRegionWithLineInformation();
+	
+	/**
+	 * <p>
+	 * Returns a {@link ITextRegionWithLineInformation region with line information} for this node including hidden tokens:
+	 * <ul>
+	 * <li>an {@link ITextRegionWithLineInformation#getOffset() offset} of this region is the same as a {@link #getTotalOffset() total offset} of this node;</li>
+	 * <li>a {@link ITextRegionWithLineInformation#getLength() length} of this region is the same as a {@link #getTotalLength() total length} of this node;</li>
+	 * <li>a {@link ITextRegionWithLineInformation#getLineNumber() line number} of this region is the same as a {@link #getTotalStartLine() total start line} of this node;</li>
+	 * <li>an {@link ITextRegionWithLineInformation#getEndLineNumber() end line number} of this region is the same as a {@link #getTotalEndLine() total end line} of this node.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * <p>
+	 * A {@link ITextRegionWithLineInformation#getLineNumber() line number} and 
+	 * an {@link ITextRegionWithLineInformation#getEndLineNumber() end line number} of the returned region are one based.
+	 * </p>
+	 * 
+	 * <p>
+	 * This method could be more efficient than calculating a {@link #getTotalOffset() total offset}, a {@link #getTotalLength() total length},
+	 * a {@link #getTotalStartLine() total start line} and a {@link #getTotalEndLine() total end line} of this node separately.
+	 * </p>
+	 * 
+	 * @return a {@link ITextRegionWithLineInformation region with line information} for this node including hidden tokens
+	 * @since 2.5
+	 */
+	ITextRegionWithLineInformation getTotalTextRegionWithLineInformation();
 
 }

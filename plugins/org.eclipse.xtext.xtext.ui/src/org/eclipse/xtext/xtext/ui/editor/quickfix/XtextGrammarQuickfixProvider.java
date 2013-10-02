@@ -68,6 +68,7 @@ import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
@@ -121,7 +122,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					public void apply(final EObject element, IModificationContext context) throws BadLocationException {
 						AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, ParserRule.class);
 						ICompositeNode node = NodeModelUtils.getNode(abstractRule);
-						int offset = node.getOffset() + node.getLength();
+						int offset = node.getEndOffset();
 						StringBuilder builder = new StringBuilder("\n\n");
 						if (abstractRule instanceof TerminalRule)
 							builder.append("terminal ");
@@ -419,7 +420,8 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 							for(RuleCall ruleCall: candidates){
 								List<INode> nodes = NodeModelUtils.findNodesForFeature(ruleCall, XtextPackage.eINSTANCE.getRuleCall_Rule());
 								for(INode node : nodes){
-									xtextDocument.replace(node.getOffset(), node.getLength(), upperCase);
+									ITextRegion textRegion = node.getTextRegion();
+									xtextDocument.replace(textRegion.getOffset(), textRegion.getLength(), upperCase);
 								}
 							}
 						}

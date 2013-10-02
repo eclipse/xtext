@@ -59,8 +59,10 @@ public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 			if(xtendFile.getImportSection() != null 
 				&& xtendFile.getImportSection().getImportDeclarations().size() >1) {
 					ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendFile.getImportSection());
-					if(node != null)
-						foldingRegionAcceptor.accept(node.getOffset(), node.getLength());
+					if(node != null) {
+						ITextRegion textRegion = node.getTextRegion();
+						foldingRegionAcceptor.accept(textRegion.getOffset(), textRegion.getLength());
+					}
 			}
 		}
 	}

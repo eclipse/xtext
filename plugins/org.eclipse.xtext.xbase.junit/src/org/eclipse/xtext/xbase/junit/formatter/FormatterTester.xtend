@@ -99,9 +99,10 @@ class FormatterTester {
 		var lastOffset = 0
 		for (leaf : res.parseResult?.rootNode?.leafNodes?:emptyList)
 			if (!leaf.hidden || !leaf.text.trim.nullOrEmpty) {
-				if ((lastOffset >= offset) && (leaf.offset <= offset + length) && !offsets.contains(lastOffset))
-					result += new TextReplacement(lastOffset, leaf.offset - lastOffset, "!!")
-				lastOffset = leaf.offset + leaf.length
+				val leafRegion = leaf.textRegion
+				if ((lastOffset >= offset) && (leafRegion.offset <= offset + length) && !offsets.contains(lastOffset))
+					result += new TextReplacement(lastOffset, leafRegion.offset - lastOffset, "!!")
+				lastOffset = leafRegion.offset + leafRegion.length
 			}
 		result
 	}

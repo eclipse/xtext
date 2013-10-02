@@ -143,12 +143,12 @@ public class JavaSearchHelper {
 			return ITextRegion.EMPTY_REGION;
 		if (result.size() == 1) {
 			INode node = result.get(0);
-			return new TextRegion(node.getOffset(), node.getLength());
+			return node.getTextRegion();
 		}
 		if (indexInList == -1 || indexInList > result.size())
 			return ITextRegion.EMPTY_REGION;
 		INode node = result.get(indexInList);
-		return new TextRegion(node.getOffset(), node.getLength());
+		return node.getTextRegion();
 	}
 	
 	protected ResourceSet getResourceSet(IProject project) {

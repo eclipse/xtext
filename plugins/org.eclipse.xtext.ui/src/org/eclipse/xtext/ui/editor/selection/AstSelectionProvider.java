@@ -169,10 +169,13 @@ public class AstSelectionProvider {
 
 	
 	protected ITextRegion computeInitialFineGrainedSelection(INode node, ITextRegion currentEditorSelection) {
-		if (node.getText().trim().length() > 0 && currentEditorSelection.getOffset() >= node.getOffset() 
-				&& getEndOffset(currentEditorSelection) < node.getOffset() + node.getLength()) {
-			//TODO enhance to just select a single word in a comment or string literal.
-			return new TextRegion(node.getOffset(), node.getLength());
+		if (node.getText().trim().length() > 0) {
+			ITextRegion textRegion = node.getTextRegion();
+			if (currentEditorSelection.getOffset() >= textRegion.getOffset()
+				&& getEndOffset(currentEditorSelection) < textRegion.getOffset() + textRegion.getLength()) {
+				//TODO enhance to just select a single word in a comment or string literal.
+				return textRegion;
+			}
 		}
 		return null;
 	}

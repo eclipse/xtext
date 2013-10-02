@@ -51,6 +51,7 @@ import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -173,11 +174,12 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		if (node != null) {
 			for (ILeafNode leafNode : node.getLeafNodes()) {
 				if (leafNode.getGrammarElement() == keyword) {
+					ITextRegion leafRegion = leafNode.getTextRegion();
 					String actualReplacement = replacement;
-					if (!Character.isWhitespace(document.getChar(leafNode.getOffset() - 1))) {
+					if (!Character.isWhitespace(document.getChar(leafRegion.getOffset() - 1))) {
 						actualReplacement = " " + replacement;
 					}
-					document.replace(leafNode.getOffset(), leafNode.getLength(), actualReplacement);
+					document.replace(leafRegion.getOffset(), leafRegion.getLength(), actualReplacement);
 				}
 			}
 		}
@@ -264,7 +266,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 									ICompositeNode functionNode = NodeModelUtils.findActualNodeFor(xtendFunction);
 									if (functionNode == null)
 										throw new IllegalStateException("functionNode may not be null");
-									insertPosition = functionNode.getOffset() + functionNode.getLength();
+									insertPosition = functionNode.getEndOffset();
 								} else {
 									ICompositeNode expressionNode = NodeModelUtils.findActualNodeFor(xtendFunction.getExpression());
 									if (expressionNode == null)
@@ -328,17 +330,18 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 									ICompositeNode toBeSurroundedNode = NodeModelUtils.findActualNodeFor(toBeSurrounded);
 									if (toBeSurroundedNode == null)
 										throw new IllegalStateException("toBeSurroundedNode may not be null");
+									ITextRegion toBeSurroundedRegion = toBeSurroundedNode.getTextRegion();
 									ReplacingAppendable appendable = appendableFactory.create(
 											context.getXtextDocument(),
 											(XtextResource) childThrowingException.eResource(), 
-											toBeSurroundedNode.getOffset(),
-											toBeSurroundedNode.getLength());
+											toBeSurroundedRegion.getOffset(),
+											toBeSurroundedRegion.getLength());
 									appendable
 											.append("try {")
 											.increaseIndentation()
 												.newLine()
-												.append(xtextDocument.get(toBeSurroundedNode.getOffset(),
-														toBeSurroundedNode.getLength()))
+												.append(xtextDocument.get(toBeSurroundedRegion.getOffset(),
+														toBeSurroundedRegion.getLength()))
 											.decreaseIndentation()
 											.newLine();
 									for(JvmType exceptionType: exceptions) {

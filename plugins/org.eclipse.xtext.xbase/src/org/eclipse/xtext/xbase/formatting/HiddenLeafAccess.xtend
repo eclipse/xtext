@@ -45,14 +45,14 @@ class HiddenLeafAccess {
 				trailing = false
 		}
 		if(!(result.leafs.last instanceof WhitespaceInfo))
-			result.leafs += new WhitespaceInfo(result, null, 0, if(result.leafs.empty) offset else result.leafs.last.node.offset + result.leafs.last.node.length)
+			result.leafs += new WhitespaceInfo(result, null, 0, if(result.leafs.empty) offset else result.leafs.last.node.endOffset)
 		result
 	}
 	
 	def HiddenLeafs getHiddenLeafsAfter(INode node) {
 		val start = node.findPreviousLeaf[!hidden]
 		if(start != null)
-			newHiddenLeafs(start.offset + start.length, start.findNextHiddenLeafs)
+			newHiddenLeafs(start.endOffset, start.findNextHiddenLeafs)
 		else 
 			new HiddenLeafs(node?.offset)
 	}

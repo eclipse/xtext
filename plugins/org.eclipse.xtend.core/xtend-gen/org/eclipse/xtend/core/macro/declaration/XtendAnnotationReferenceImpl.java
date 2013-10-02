@@ -72,7 +72,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
           boolean _eIsProxy = ((EObject)proxy).eIsProxy();
           if (_eIsProxy) {
             _matched=true;
-            final URI uri = ((InternalEObject) ((InternalEObject)proxy)).eProxyURI();
+            final URI uri = ((InternalEObject) proxy).eProxyURI();
             XAnnotation _delegate_2 = this.getDelegate();
             Resource _eResource = _delegate_2.eResource();
             ResourceSet _resourceSet = _eResource.getResourceSet();

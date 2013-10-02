@@ -147,7 +147,7 @@ public class XAnnotationExtensions {
         boolean _eIsProxy = ((EObject)proxy).eIsProxy();
         if (_eIsProxy) {
           _matched=true;
-          final URI uri = ((InternalEObject) ((InternalEObject)proxy)).eProxyURI();
+          final URI uri = ((InternalEObject) proxy).eProxyURI();
           Resource _eResource = it.eResource();
           String _fragment = uri.fragment();
           boolean _isCrossLinkFragment = this.encoder.isCrossLinkFragment(_eResource, _fragment);
@@ -164,7 +164,7 @@ public class XAnnotationExtensions {
             if (_not) {
               final EObject head = IterableExtensions.<EObject>head(candidates);
               if ((head instanceof JvmAnnotationType)) {
-                return this.isActiveAnnotation(((JvmAnnotationType) ((JvmAnnotationType)head)));
+                return this.isActiveAnnotation(((JvmAnnotationType) head));
               }
             }
           }
@@ -276,7 +276,7 @@ public class XAnnotationExtensions {
         boolean _eIsProxy = ((EObject)proxy).eIsProxy();
         if (_eIsProxy) {
           _matched=true;
-          final URI uri = ((InternalEObject) ((InternalEObject)proxy)).eProxyURI();
+          final URI uri = ((InternalEObject) proxy).eProxyURI();
           Resource _eResource = it.eResource();
           ResourceSet _resourceSet = _eResource.getResourceSet();
           EObject _eObject = _resourceSet.getEObject(uri, true);

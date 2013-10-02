@@ -39,6 +39,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -248,7 +249,8 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	
 	protected void highlightNumberLiterals(XNumberLiteral literal, IHighlightedPositionAcceptor acceptor) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(literal);
-		acceptor.addPosition(node.getOffset(), node.getLength(), DefaultHighlightingConfiguration.NUMBER_ID);
+		ITextRegion textRegion = node.getTextRegion();
+		acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), DefaultHighlightingConfiguration.NUMBER_ID);
 	}
 	
 
@@ -267,13 +269,14 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 
 	protected void highlightSpecialIdentifiers(ILeafNode leafNode, IHighlightedPositionAcceptor acceptor,
 			TerminalRule idRule) {
-		if (idLengthsToHighlight.get(leafNode.getLength())) {
+		ITextRegion leafRegion = leafNode.getTextRegion();
+		if (idLengthsToHighlight.get(leafRegion.getLength())) {
 			EObject element = leafNode.getGrammarElement();
 			if (element == idRule || (element instanceof RuleCall && ((RuleCall) element).getRule() == idRule)) {
 				String text = leafNode.getText();
 				String highlightingID = highlightedIdentifiers.get(text);
 				if (highlightingID != null) {
-					acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(), highlightingID);
+					acceptor.addPosition(leafRegion.getOffset(), leafRegion.getLength(), highlightingID);
 				}
 			}
 		}
@@ -311,11 +314,13 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		if (node == null)
 			return;
 		if (node instanceof ILeafNode) {
-			acceptor.addPosition(node.getOffset(), node.getLength(), id);
+			ITextRegion textRegion = node.getTextRegion();
+			acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), id);
 		} else {
 			for (ILeafNode leaf : node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
-					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
+					ITextRegion leafRegion = leaf.getTextRegion();
+					acceptor.addPosition(leafRegion.getOffset(), leafRegion.getLength(), id);
 				}
 			}
 		}

@@ -25,7 +25,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceSignificant(final ITreeAppendable appendable, final EObject source, final boolean useForDebugging) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      TreeAppendable _trace = ((TreeAppendable) ((TreeAppendable)appendable)).trace(source, RegionDescription.SIGNIFICANT, useForDebugging);
+      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, RegionDescription.SIGNIFICANT, useForDebugging);
       _xifexpression = _trace;
     } else {
       ITreeAppendable _xblockexpression = null;
@@ -55,7 +55,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceWithComments(final ITreeAppendable appendable, final EObject source) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      TreeAppendable _trace = ((TreeAppendable) ((TreeAppendable)appendable)).trace(source, RegionDescription.INCLUDING_COMMENTS, false);
+      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, RegionDescription.INCLUDING_COMMENTS, false);
       _xifexpression = _trace;
     } else {
       ITreeAppendable _xblockexpression = null;

@@ -71,9 +71,8 @@ public class JavaBuilderState {
       boolean _matched = false;
       if (!_matched) {
         if (state instanceof State) {
-          final State _state = (State)state;
           _matched=true;
-          _switchResult = _state;
+          _switchResult = ((State)state);
         }
       }
       if (!_matched) {
@@ -111,24 +110,23 @@ public class JavaBuilderState {
         boolean _matched = false;
         if (!_matched) {
           if (typeLocator instanceof String) {
-            final String _string = (String)typeLocator;
             _matched=true;
             IJavaProject _javaProject = it.getJavaProject();
             IProject _project = _javaProject.getProject();
-            IFile _file = _project.getFile(_string);
+            IFile _file = _project.getFile(((String)typeLocator));
             final IPath typeLocatorPath = _file.getProjectRelativePath();
             boolean _isPrefixOf = packagePath.isPrefixOf(typeLocatorPath);
             if (_isPrefixOf) {
               IPath _removeFirstSegments = typeLocatorPath.removeFirstSegments(srcPathSegmentCount);
               final IPath qulifiedPath = _removeFirstSegments.removeFileExtension();
               IPath _removeLastSegments = qulifiedPath.removeLastSegments(1);
-              String _string_1 = _removeLastSegments.toString();
-              final String typePackageName = _string_1.replace("/", ".");
+              String _string = _removeLastSegments.toString();
+              final String typePackageName = _string.replace("/", ".");
               boolean _equals_1 = packageName.equals(typePackageName);
               if (_equals_1) {
                 String _lastSegment = qulifiedPath.lastSegment();
                 final String simpleTypeName = _lastSegment.toString();
-                LinkedHashSet<String> _qualifiedTypeNames = this.getQualifiedTypeNames(_string, packageName, simpleTypeName);
+                LinkedHashSet<String> _qualifiedTypeNames = this.getQualifiedTypeNames(((String)typeLocator), packageName, simpleTypeName);
                 Iterables.<String>addAll(qualifiedTypeNames, _qualifiedTypeNames);
               }
             }
@@ -160,9 +158,8 @@ public class JavaBuilderState {
     boolean _matched = false;
     if (!_matched) {
       if (parent instanceof IPackageFragmentRoot) {
-        final IPackageFragmentRoot _iPackageFragmentRoot = (IPackageFragmentRoot)parent;
         _matched=true;
-        _switchResult = _iPackageFragmentRoot;
+        _switchResult = ((IPackageFragmentRoot)parent);
       }
     }
     if (!_matched) {
@@ -229,12 +226,11 @@ public class JavaBuilderState {
     boolean _matched = false;
     if (!_matched) {
       if (parent instanceof IPackageFragment) {
-        final IPackageFragment _iPackageFragment = (IPackageFragment)parent;
-        boolean _isDefaultPackage = _iPackageFragment.isDefaultPackage();
+        boolean _isDefaultPackage = ((IPackageFragment)parent).isDefaultPackage();
         boolean _not = (!_isDefaultPackage);
         if (_not) {
           _matched=true;
-          String _elementName = _iPackageFragment.getElementName();
+          String _elementName = ((IPackageFragment)parent).getElementName();
           _switchResult = _elementName;
         }
       }
@@ -273,9 +269,8 @@ public class JavaBuilderState {
       boolean _matched = false;
       if (!_matched) {
         if (references instanceof SimpleLookupTable) {
-          final SimpleLookupTable _simpleLookupTable = (SimpleLookupTable)references;
           _matched=true;
-          _switchResult = _simpleLookupTable;
+          _switchResult = ((SimpleLookupTable)references);
         }
       }
       if (!_matched) {

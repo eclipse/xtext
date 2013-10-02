@@ -143,7 +143,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
         boolean _eIsProxy = ((EObject)proxy).eIsProxy();
         if (_eIsProxy) {
           _matched=true;
-          final URI uri = ((InternalEObject) ((InternalEObject)proxy)).eProxyURI();
+          final URI uri = ((InternalEObject) proxy).eProxyURI();
           Resource _eResource = it.eResource();
           ResourceSet _resourceSet = _eResource.getResourceSet();
           EObject _eObject = _resourceSet.getEObject(uri, true);

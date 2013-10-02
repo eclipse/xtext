@@ -30,7 +30,11 @@ import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext;
 import org.eclipse.xtext.nodemodel.serialization.SerializationUtil;
 import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
 import org.eclipse.xtext.nodemodel.util.ReversedBidiTreeIterable;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.collect.Iterators;
 
@@ -48,6 +52,51 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	private AbstractNode next;
 	
 	private Object grammarElementOrArray;
+	
+	/**
+	 * @since 2.5
+	 */
+	public ITextRegion getTextRegion() {
+		int offset = getOffset();
+		int length = getLength(offset);
+		return new TextRegion(offset, length);
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public ITextRegion getTotalTextRegion() {
+		int totalOffset = getTotalOffset();
+		int totalLength = getTotalLength();
+		return new TextRegion(totalOffset, totalLength);
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public ITextRegionWithLineInformation getTextRegionWithLineInformation() {
+		int offset = getOffset();
+		int length = getLength(offset);
+		return getTextRegionWithLineInformation(offset, length);
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public ITextRegionWithLineInformation getTotalTextRegionWithLineInformation() {
+		int totalOffset = getTotalOffset();
+		int totalLength = getTotalLength();
+		return getTextRegionWithLineInformation(totalOffset, totalLength);
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	protected ITextRegionWithLineInformation getTextRegionWithLineInformation(int offset, int length) {
+		int startLine = getLine(offset);
+		int endLine = getLine(offset + length);
+		return new TextRegionWithLineInformation(offset, length, startLine, endLine);
+	}
 	
 	public ICompositeNode getParent() {
 		if (parent != null)
@@ -100,8 +149,7 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	public int getTotalStartLine() {
 		INode rootNode = getRootNode();
 		if (rootNode != null) {
-			int offset = getTotalOffset();
-			return basicGetLineOfOffset(rootNode, offset);
+			return basicGetLineOfOffset(rootNode, getTotalOffset());
 		}
 		return 1;
 	}
@@ -134,19 +182,30 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	}
 	
 	public int getEndLine() {
-		int offset = getOffset();
-		int length = getLength();
 		INode rootNode = getRootNode();
-		if (rootNode != null)
-			return basicGetLineOfOffset(rootNode, offset + length);
+		if (rootNode != null) {
+			return basicGetLineOfOffset(rootNode, getEndOffset());
+		}
 		return 1;
 	}
 	
 	public int getTotalEndLine() {
-		int offset = getTotalEndOffset();
 		INode rootNode = getRootNode();
-		if (rootNode != null)
+		if (rootNode != null) {
+			int offset = getTotalEndOffset();
 			return basicGetLineOfOffset(rootNode, offset);
+		}
+		return 1;
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	protected int getLine(int offset) {
+		INode rootNode = getRootNode();
+		if (rootNode != null) {
+			return basicGetLineOfOffset(rootNode, offset);
+		}
 		return 1;
 	}
 	
@@ -178,8 +237,31 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 		return getTotalLength();
 	}
 	
+	/**
+	 * @since 2.5
+	 */
+	protected int getLength(int offset) {
+		BidiIterator<AbstractNode> iter = basicIterator();
+		while(iter.hasPrevious()) {
+			INode prev = iter.previous();
+			if (prev instanceof ILeafNode && !((ILeafNode) prev).isHidden()) {
+				return prev.getTotalEndOffset() - offset;
+			}
+		}
+		return getTotalLength();
+	}
+	
 	public int getTotalEndOffset() {
 		return getTotalOffset() + getTotalLength();
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public int getEndOffset() {
+		int offset = getOffset();
+		int length = getLength(offset);
+		return offset + length;
 	}
 
 	public ICompositeNode getRootNode() {

@@ -214,10 +214,12 @@ class XbaseFormatter2 extends AbstractFormatter {
 		val lookahead = new FormattableDocument(fmt)
 		format(expression, lookahead)
 		val node = expression.nodeForEObject
-		if (node != null)
-			lookahead.renderToString(node.offset, node.length)
-		else
+		if (node != null) {
+			val textRegion = node.textRegion
+			lookahead.renderToString(textRegion.offset, textRegion.length)
+		} else {
 			""
+		}
 	}
 
 	def protected void formatFeatureCallParamsWrapIfNeeded(INode open, List<XExpression> params,
@@ -429,7 +431,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 			val featureNode = call.nodeForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
 			val targetNode = call.memberCallTarget.nodeForEObject
 			if (targetNode != null) {
-				val callOffset = targetNode.offset + targetNode.length
+				val callOffset = targetNode.endOffset
 				val op = call.nodeForKeyword(switch it: call {
 					case nullSafe: "?."
 					case explicitStatic: "::"
@@ -438,7 +440,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 				format += op.prepend[noSpace]
 				if (call.explicitOperationCall) {
 					val callNode = call.nodeForEObject
-					val callLength = callNode.offset + callNode.length - callOffset
+					val callLength = callNode.endOffset - callOffset
 					val open = call.nodeForKeyword("(")
 					format += featureNode.append[noSpace]
 
@@ -507,7 +509,10 @@ class XbaseFormatter2 extends AbstractFormatter {
 
 	def protected boolean isMultiline(XExpression expression, FormattableDocument doc) {
 		val node = expression.nodeForEObject
-		return node != null && node.startLine != node.endLine
+		return node != null && {
+			val textRegion = node.textRegionWithLineInformation
+			textRegion.lineNumber != textRegion.endLineNumber
+		}
 	}
 
 	def protected dispatch void format(XBinaryOperation expr, FormattableDocument format) {

@@ -115,7 +115,7 @@ public class XtextOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		if (isLocalRule) {
 			ICompositeNode parserNode = NodeModelUtils.getNode(rule);
 			if (parserNode != null)
-				ruleNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
+				ruleNode.setTextRegion(parserNode.getTextRegion());
 			ruleNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(rule));
 			ruleNode.setFullText(new StyledString().append(text).append(getReturnTypeText(rule)));
 		}

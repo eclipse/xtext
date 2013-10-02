@@ -81,7 +81,6 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -1399,11 +1398,7 @@ public class JvmModelGenerator implements IGenerator {
         {
           ITextRegionWithLineInformation documentationTrace = ITextRegionWithLineInformation.EMPTY_REGION;
           for (final INode node : documentationNodes) {
-            int _offset = node.getOffset();
-            int _length = node.getLength();
-            int _startLine = node.getStartLine();
-            int _endLine = node.getEndLine();
-            TextRegionWithLineInformation _textRegionWithLineInformation = new TextRegionWithLineInformation(_offset, _length, _startLine, _endLine);
+            ITextRegionWithLineInformation _textRegionWithLineInformation = node.getTextRegionWithLineInformation();
             ITextRegionWithLineInformation _merge = documentationTrace.merge(_textRegionWithLineInformation);
             documentationTrace = _merge;
           }
@@ -1770,7 +1765,7 @@ public class JvmModelGenerator implements IGenerator {
     } else {
       JvmGenericType _xifexpression_1 = null;
       if ((context instanceof JvmGenericType)) {
-        _xifexpression_1 = ((JvmGenericType) ((JvmGenericType)context));
+        _xifexpression_1 = ((JvmGenericType) context);
       } else {
         EObject _eContainer = context.eContainer();
         JvmGenericType _containerType = this.containerType(_eContainer);

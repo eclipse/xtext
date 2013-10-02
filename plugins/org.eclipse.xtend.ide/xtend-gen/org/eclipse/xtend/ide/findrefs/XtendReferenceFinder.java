@@ -169,7 +169,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
   protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
     final JvmIdentifiableElement feature = sourceCandidate.getFeature();
     if ((feature instanceof JvmMember)) {
-      final JvmDeclaredType type = ((JvmMember) ((JvmMember)feature)).getDeclaringType();
+      final JvmDeclaredType type = ((JvmMember) feature).getDeclaringType();
       final URI typeURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(type);
       boolean _contains = targetURISet.contains(typeURI);
       if (_contains) {

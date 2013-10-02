@@ -541,7 +541,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				ICompositeNode parentNode = containedNode.getParent();
 				while (parentNode != null && assignTokenDirect(parentNode, eObject2Token))
 					parentNode = parentNode.getParent();
-				if (containedNode.getOffset() > rootNode.getOffset() + rootNode.getLength()) {
+				if (containedNode.getOffset() > rootNode.getEndOffset()) {
 					break;
 				}
 			}
@@ -759,7 +759,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		ITextRegion currentLocation = location;
 		INode node = token.getNode();
 		if (node != null) {
-			currentLocation = currentLocation.merge(new TextRegion(node.getOffset(), node.getLength()));
+			currentLocation = currentLocation.merge(node.getTextRegion());
 		}
 		if (!token.getTokensForSemanticChildren().isEmpty()) {
 			for (AbstractToken t : token.getTokensForSemanticChildren())

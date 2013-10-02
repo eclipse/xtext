@@ -532,7 +532,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(memberFeatureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 				if (!nodesForFeature.isEmpty()) {
 					INode node = nodesForFeature.get(0);
-					if (node.getOffset() + node.getLength() <= contentAssistContext.getOffset() - contentAssistContext.getPrefix().length()) {
+					if (node.getEndOffset() <= contentAssistContext.getOffset() - contentAssistContext.getPrefix().length()) {
 						if (!Iterables.isEmpty(node.getLeafNodes())) {
 							createReceiverProposals(memberFeatureCall, crossReference, reference, contentAssistContext,	acceptor, filter);
 							return;

@@ -276,7 +276,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
         if (_hasNext) {
           final EObject next = i.next();
           if ((next instanceof JvmOperation)) {
-            return ((JvmOperation) ((JvmOperation)next)).getReturnType();
+            return ((JvmOperation) next).getReturnType();
           }
         }
       }

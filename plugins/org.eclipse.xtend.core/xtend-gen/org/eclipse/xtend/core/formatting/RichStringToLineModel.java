@@ -187,11 +187,9 @@ public class RichStringToLineModel extends ForLoopOnce {
       int _literalPrefixLenght = this.literalPrefixLenght(node);
       int _plus = (_offset + _literalPrefixLenght);
       this.offset = _plus;
-      int _offset_1 = node.getOffset();
-      int _length = node.getLength();
-      int _plus_1 = (_offset_1 + _length);
+      int _endOffset = node.getEndOffset();
       int _literalPostfixLenght = this.literalPostfixLenght(node);
-      int _minus = (_plus_1 - _literalPostfixLenght);
+      int _minus = (_endOffset - _literalPostfixLenght);
       this.lastLiteralEndOffset = _minus;
     }
     this.content = true;

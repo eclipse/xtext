@@ -19,6 +19,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.formatting.AbstractFormatter;
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
@@ -304,13 +305,14 @@ public class FormatterTester {
           _or = (_not || _not_1);
         }
         if (_or) {
+          final ITextRegion leafRegion = leaf.getTextRegion();
           boolean _and = false;
           boolean _and_1 = false;
           boolean _greaterEqualsThan = (lastOffset >= offset);
           if (!_greaterEqualsThan) {
             _and_1 = false;
           } else {
-            int _offset = leaf.getOffset();
+            int _offset = leafRegion.getOffset();
             int _plus = (offset + length);
             boolean _lessEqualsThan = (_offset <= _plus);
             _and_1 = (_greaterEqualsThan && _lessEqualsThan);
@@ -323,13 +325,13 @@ public class FormatterTester {
             _and = (_and_1 && _not_2);
           }
           if (_and) {
-            int _offset_1 = leaf.getOffset();
+            int _offset_1 = leafRegion.getOffset();
             int _minus = (_offset_1 - lastOffset);
             TextReplacement _textReplacement = new TextReplacement(lastOffset, _minus, "!!");
             result.add(_textReplacement);
           }
-          int _offset_2 = leaf.getOffset();
-          int _length = leaf.getLength();
+          int _offset_2 = leafRegion.getOffset();
+          int _length = leafRegion.getLength();
           int _plus_1 = (_offset_2 + _length);
           lastOffset = _plus_1;
         }

@@ -66,7 +66,7 @@ public class EObjectAtOffsetHelper {
 			if (crossRefNode == null && leaf != null && region.getLength()==0 && leaf.getOffset() == region.getOffset()) {
 				leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), region.getOffset() - 1);
 				return findCrossReferenceNode(leaf);
-			} else if (crossRefNode != null && crossRefNode.getOffset()+crossRefNode.getLength() >= region.getOffset() + region.getLength()) {
+			} else if (crossRefNode != null && crossRefNode.getEndOffset() >= region.getOffset() + region.getLength()) {
 				return crossRefNode;
 			}
 		}
