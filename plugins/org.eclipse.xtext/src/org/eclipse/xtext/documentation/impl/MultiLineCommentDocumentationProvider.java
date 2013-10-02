@@ -12,6 +12,7 @@ package org.eclipse.xtext.documentation.impl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -35,6 +37,11 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class MultiLineCommentDocumentationProvider extends AbstractMultiLineCommentProvider implements IEObjectDocumentationProvider, IEObjectDocumentationProviderExtension {
+
+	/**
+	 * @since 2.5
+	 */
+	protected Pattern commentStartTagRegex;
 
 	protected String findComment(EObject o) {
 		String returnValue = null;
@@ -62,7 +69,7 @@ public class MultiLineCommentDocumentationProvider extends AbstractMultiLineComm
 				if (leafNode.getGrammarElement() instanceof TerminalRule
 						&& ruleName.equalsIgnoreCase(((TerminalRule) leafNode.getGrammarElement()).getName())) {
 					String comment = leafNode.getText();
-					if (comment.matches("(?s)" + startTag + ".*")) {
+					if (commentStartTagRegex.matcher(comment).matches()) {
 						result = Collections.<INode>singletonList(leafNode);
 					}
 				}
@@ -70,9 +77,16 @@ public class MultiLineCommentDocumentationProvider extends AbstractMultiLineComm
 		}
 		return result;
 	}
-
+	
 	public String getDocumentation(EObject o) {
 		String returnValue = findComment(o);
 		return getTextFromMultilineComment(returnValue);
+	}
+	
+	@Override
+	@Inject
+	public void injectProperties(MultiLineCommentProviderProperties properties) {
+		super.injectProperties(properties);
+		this.commentStartTagRegex = Pattern.compile("(?s)" + startTag + ".*");
 	}
 }
