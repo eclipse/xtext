@@ -18,6 +18,7 @@ import org.eclipse.xtend.core.richstring.IRichStringPartAcceptor;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XbasePackage;
 
@@ -68,14 +69,15 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 					XbasePackage.Literals.XSTRING_LITERAL__VALUE);
 			if (featureNodes.size() == 1) {
 				INode node = featureNodes.get(0);
-				currentOffset = node.getOffset();
+				ITextRegion textRegion = node.getTextRegion();
+				currentOffset = textRegion.getOffset();
 				String nodeText = node.getText();
 				if (nodeText.endsWith("'''")) {
-					lastOffsetOfLiteral = currentOffset + node.getLength() - 3;
+					lastOffsetOfLiteral = currentOffset + textRegion.getLength() - 3;
 				} else if (nodeText.endsWith("''")) {
-					lastOffsetOfLiteral = currentOffset + node.getLength() - 2;
+					lastOffsetOfLiteral = currentOffset + textRegion.getLength() - 2;
 				} else if (nodeText.endsWith("'") || nodeText.endsWith("\u00AB")) {
-					lastOffsetOfLiteral = currentOffset + node.getLength() - 1;
+					lastOffsetOfLiteral = currentOffset + textRegion.getLength() - 1;
 				}
 				if (nodeText.charAt(0) == '\'') {
 					currentOffset += 3;

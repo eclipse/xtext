@@ -34,6 +34,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Predicate;
@@ -198,8 +199,9 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeInRichString(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		INode node = context.getCurrentNode();
-		int offset = node.getOffset();
-		int length = node.getLength();
+		ITextRegion textRegion = node.getTextRegion();
+		int offset = textRegion.getOffset();
+		int length = textRegion.getLength();
 		String currentNodeText = node.getText();
 		if (currentNodeText.startsWith("\u00BB") && offset + 1 <= context.getOffset()
 				|| currentNodeText.startsWith("'''") && offset + 3 <= context.getOffset()) {

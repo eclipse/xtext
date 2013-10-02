@@ -190,7 +190,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 		val node = nodeModelAccess.nodeForFeature(object, XbasePackage.Literals.XSTRING_LITERAL__VALUE)
 		if(node != null) {
 			offset = node.offset + node.literalPrefixLenght
-			lastLiteralEndOffset = (node.offset + node.length) - node.literalPostfixLenght
+			lastLiteralEndOffset = node.endOffset - node.literalPostfixLenght
 		}
 		content = true
 	}

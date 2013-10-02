@@ -89,7 +89,7 @@ public class ExtractMethodHandler extends AbstractHandler {
 		ICompositeNode lastNode = NodeModelUtils.getNode(expressions.get(expressions.size() - 1));
 		if (firstNode != null && lastNode != null) {
 			int correctedSelectionOffset = firstNode.getOffset();
-			int correctedSelectionLength = lastNode.getOffset() + lastNode.getLength() - correctedSelectionOffset;
+			int correctedSelectionLength = lastNode.getEndOffset() - correctedSelectionOffset;
 			editor.selectAndReveal(correctedSelectionOffset, correctedSelectionLength);
 		}
 	}

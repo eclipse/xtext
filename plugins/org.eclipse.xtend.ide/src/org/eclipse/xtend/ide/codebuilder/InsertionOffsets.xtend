@@ -63,7 +63,7 @@ class InsertionOffsets {
 
 	def protected after(EObject element) {
 		val node = NodeModelUtils.findActualNodeFor(element)
-		node.offset + node.length
+		node.endOffset
 	}
 	
 	def protected inEmpty(XtendTypeDeclaration ownerType) {
@@ -72,6 +72,6 @@ class InsertionOffsets {
 		if(openingBraceNode != null)
 			openingBraceNode.offset + 1
 		else 
-			classNode.offset + classNode.length
+			classNode.endOffset
 	}
 }
