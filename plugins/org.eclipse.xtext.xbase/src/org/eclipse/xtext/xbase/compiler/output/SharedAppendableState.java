@@ -122,5 +122,13 @@ public class SharedAppendableState {
 	public String getLineSeparator() {
 		return lineSeparator;
 	}
+	
+	ImportManager getImportManager() {
+		return importManager;
+	}
+	
+	String getIndentationString() {
+		return indentation;
+	}
 
 }

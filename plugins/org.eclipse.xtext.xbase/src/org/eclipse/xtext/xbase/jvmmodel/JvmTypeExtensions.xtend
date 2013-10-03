@@ -7,6 +7,8 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.xbase.compiler.CompilationTemplateAdapter
 
 class JvmTypeExtensions {
 	
@@ -17,8 +19,17 @@ class JvmTypeExtensions {
 		return adapter?.compilationStrategy
 	}
 	
+	def StringConcatenationClient getCompilationTemplate(JvmIdentifiableElement it) {
+		val adapter = eAdapters.filter(CompilationTemplateAdapter).head
+		return adapter?.compilationTemplate
+	}
+	
 	def isSingleSyntheticDefaultConstructor(JvmConstructor it) {
-		return parameters.empty && associatedExpression == null && compilationStrategy == null && declaringType.members.filter(JvmConstructor).size == 1
+		return parameters.empty && 
+			associatedExpression == null && 
+			compilationStrategy == null && 
+			compilationTemplate == null &&
+			declaringType.members.filter(JvmConstructor).size == 1
 	}
 	
 	def isSynthetic(JvmIdentifiableElement element) {
