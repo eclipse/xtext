@@ -25,6 +25,7 @@ import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -310,7 +311,7 @@ public class XtendCompiler extends XbaseCompiler {
 					tracingAppendable.append(".append(");
 				internalToJavaExpression(expression, tracingAppendable);
 				tracingAppendable.append(", \"");
-				tracingAppendable.append(indentation.toString());
+				tracingAppendable.append(Strings.convertToJavaString(indentation.toString(), false));
 				tracingAppendable.append("\");");
 			}
 		}
@@ -333,19 +334,46 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 
 	public void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
+		JvmType stringConcatenationClient = getTypeReferences().findDeclaredType(StringConcatenationClient.class, richString);
+		JvmTypeReference actualType = typeProvider.getType(richString);
 		b = b.trace(richString);
-		// declare variable
-		JvmTypeReference type = getTypeReferences().getTypeForName(StringConcatenation.class, richString);
-		String variableName = b.declareSyntheticVariable(richString, "_builder");
-		b.newLine();
-		serialize(type, richString, b);
-		b.append(" ");
-		b.append(variableName);
-		b.append(" = new ");
-		serialize(type, richString, b);
-		b.append("();");
-		RichStringPrepareCompiler compiler = new RichStringPrepareCompiler(b, variableName, richString);
-		richStringProcessor.process(richString, compiler, indentationHandler.get());
+		if (actualType.getType().equals(stringConcatenationClient)) {
+			String resultVariableName = b.declareSyntheticVariable(richString, "_client");
+			b.newLine();
+			serialize(actualType, richString, b);
+			b.append(" ");
+			b.append(resultVariableName);
+			b.append(" = new ");
+			serialize(actualType, richString, b);
+			b.append("() {");
+			b.openScope();
+			reassignThisInClosure(b, stringConcatenationClient);
+			b.increaseIndentation().newLine();
+			b.append("@");
+			serialize(getTypeReferences().getTypeForName(Override.class, richString), richString, b);
+			b.newLine().append("protected void appendTo(");
+			serialize(getTypeReferences().getTypeForName(StringConcatenationClient.TargetStringConcatenation.class, richString), richString, b);
+			String variableName = b.declareSyntheticVariable(richString, "_builder");
+			b.append(" ").append(variableName).append(") {");
+			b.increaseIndentation();
+			RichStringPrepareCompiler compiler = new RichStringPrepareCompiler(b, variableName, richString);
+			richStringProcessor.process(richString, compiler, indentationHandler.get());
+			b.closeScope();
+			b.decreaseIndentation().newLine().append("}").decreaseIndentation().newLine().append("};");
+		} else {
+			// declare variable
+			JvmTypeReference type = getTypeReferences().getTypeForName(StringConcatenation.class, richString);
+			String variableName = b.declareSyntheticVariable(richString, "_builder");
+			b.newLine();
+			serialize(type, richString, b);
+			b.append(" ");
+			b.append(variableName);
+			b.append(" = new ");
+			serialize(type, richString, b);
+			b.append("();");
+			RichStringPrepareCompiler compiler = new RichStringPrepareCompiler(b, variableName, richString);
+			richStringProcessor.process(richString, compiler, indentationHandler.get());
+		}
 	}
 
 	@Override

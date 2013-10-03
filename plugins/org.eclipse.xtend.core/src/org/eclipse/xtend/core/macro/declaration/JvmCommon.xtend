@@ -121,13 +121,14 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 		if (obj === this)
 			return true
 		if (obj instanceof TypeReference) {
-			val other = obj as TypeReference
-			return other.isAssignableFrom(this) && this.isAssignableFrom(other)
+			// TODO this logic is flawed since rawtype / generic types are assignable in both directions
+			return obj.isAssignableFrom(this) && this.isAssignableFrom(obj)
 		}
 		return false
 	}
 	
 	override hashCode() {
+		// TODO type may be null, e.g. for wildcards or unknown types
 		delegate.type.qualifiedName.hashCode
 	}
 	
