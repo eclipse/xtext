@@ -8,6 +8,7 @@
 package org.eclipse.xtend.lib.macro.declaration;
 
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 
 import com.google.common.annotations.Beta;
 
@@ -64,6 +65,15 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
 	 */
 	void setInitializer(CompilationStrategy initializer);
+
+	/**
+	 * sets the 'initializer' expression of this field declaration.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * 
+	 * @param template the compilation template, must not be <code>null</code>
+	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
+	 */
+	void setInitializer(StringConcatenationClient template);
 	
 	/**
 	 * sets the 'type' of this field declaration

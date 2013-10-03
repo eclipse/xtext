@@ -14,13 +14,6 @@ import org.junit.Test
 
 class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
 	@Test def void testWithoutPackage() {
-		{{
-			
-		'foo' => [
-						
-		]
-		}}
-		
 		'''
 			import org.eclipse.xtend.core.tests.macro.Accessors
 			

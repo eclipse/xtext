@@ -92,6 +92,7 @@ import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -1012,6 +1013,11 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.typesBuilder.setBody(executable, _function);
   }
   
+  public void setCompilationTemplate(final JvmExecutable executable, final StringConcatenationClient compilationTemplate) {
+    this.checkCanceled();
+    this.typesBuilder.setBody(executable, compilationTemplate);
+  }
+  
   protected CharSequence trimTrailingLinebreak(final CharSequence sequence, final EObject context) {
     CharSequence _xblockexpression = null;
     {
@@ -1087,6 +1093,11 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
     };
     this.typesBuilder.setInitializer(field, _function);
+  }
+  
+  public void setCompilationTemplate(final JvmField field, final StringConcatenationClient compilationTemplate) {
+    this.checkCanceled();
+    this.typesBuilder.setInitializer(field, compilationTemplate);
   }
   
   public AnnotationReference toAnnotationReference(final XAnnotation delegate) {

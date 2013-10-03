@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
@@ -70,6 +71,8 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		for(ITypeExpectation expectation: state.getExpectations()) {
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null && expectedType.isType(StringConcatenation.class)) {
+				expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.DEMAND_CONVERSION);
+			} else if (expectedType != null && expectedType.isType(StringConcatenationClient.class)) {
 				expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.DEMAND_CONVERSION);
 			} else if (expectedType != null && expectedType.isType(String.class)) {
 				expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.DEMAND_CONVERSION);

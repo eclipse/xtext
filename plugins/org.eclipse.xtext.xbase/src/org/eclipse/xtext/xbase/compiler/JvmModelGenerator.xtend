@@ -34,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmFloatAnnotationValue
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue
 import org.eclipse.xtext.common.types.JvmMember
@@ -64,16 +65,18 @@ import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.util.TextRegionWithLineInformation
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
 
@@ -91,6 +94,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject extension LoopExtensions
 	@Inject extension ErrorSafeExtensions
 	
+	@Inject CommonTypeComputationServices commonServices
 	@Inject XbaseCompiler compiler
 	@Inject ILocationInFileProvider locationProvider
 	@Inject IEObjectDocumentationProvider documentationProvider
@@ -248,6 +252,10 @@ class JvmModelGenerator implements IGenerator {
 			appendable.increaseIndentation
 			compilationStrategy.apply(appendable)
 			appendable.decreaseIndentation
+		} else if (compilationTemplate != null) {
+			appendable.append(" default ").increaseIndentation
+			appendCompilationTemplate(appendable, it)
+			appendable.decreaseIndentation
 		} else if (config.generateExpressions) {
 			val body = associatedExpression
 			if(body != null) {
@@ -265,6 +273,16 @@ class JvmModelGenerator implements IGenerator {
 					defaultValue.toJavaLiteral(appendable, config)
 				}
 			}
+		}
+	}
+	
+	private def void appendCompilationTemplate(ITreeAppendable appendable, JvmIdentifiableElement it) {
+		if (appendable instanceof TreeAppendable) {
+			val target = new ImportingStringConcatenation(appendable, new StandardTypeReferenceOwner(commonServices, it));
+			target.append(compilationTemplate)
+			appendable.append(target)			
+		} else {
+			throw new IllegalStateException("unexpected appendable: " + appendable.getClass.name)
 		}
 	}
 	
@@ -446,6 +464,10 @@ class JvmModelGenerator implements IGenerator {
 			appendable.increaseIndentation
 			compilationStrategy.apply(appendable)
 			appendable.decreaseIndentation
+		} else if (compilationTemplate != null) {
+			appendable.append(" = ").increaseIndentation
+			appendCompilationTemplate(appendable, it)
+			appendable.decreaseIndentation
 		} else {
 			val expression = associatedExpression
 			if (expression != null && config.generateExpressions) {
@@ -523,8 +545,8 @@ class JvmModelGenerator implements IGenerator {
 		tracedAppendable.traceSignificant(it).append(name)
 	}
 	
-	def hasBody(JvmExecutable op) {
-		op.compilationStrategy != null || op.associatedExpression != null
+	def hasBody(JvmExecutable it) {
+		compilationTemplate != null || compilationStrategy != null || associatedExpression != null
 	}
 
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable, GeneratorConfig config) {
@@ -533,6 +555,15 @@ class JvmModelGenerator implements IGenerator {
 			if(errors.empty) {
 				appendable.increaseIndentation.append("{").newLine
 				op.compilationStrategy.apply(appendable)
+				appendable.decreaseIndentation.newLine.append("}")
+			} else {
+				generateBodyWithIssues(appendable, errors)
+			}
+		} else if (op.compilationTemplate != null) {
+			val errors = op.errors
+			if(errors.empty) {
+				appendable.increaseIndentation.append("{").newLine
+				appendCompilationTemplate(appendable, op)
 				appendable.decreaseIndentation.newLine.append("}")
 			} else {
 				generateBodyWithIssues(appendable, errors)
@@ -813,7 +844,7 @@ class JvmModelGenerator implements IGenerator {
 		if(context == null) 
 			null
 		else if(context instanceof JvmGenericType)
-			context as JvmGenericType
+			context
 		else containerType(context.eContainer)
 	}
 	

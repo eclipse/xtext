@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -504,6 +505,11 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
 	}
 	
+	override setBody(StringConcatenationClient compilationTemplate) {
+		Preconditions.checkArgument(compilationTemplate != null, "compilationTemplate cannot be null")
+		compilationUnit.setCompilationTemplate(delegate, compilationTemplate)
+	}
+	
 	override addParameter(String name, TypeReference type) {
 		checkJavaIdentifier(name, "name");
 		Preconditions.checkArgument(type != null, "type cannot be null");
@@ -647,6 +653,11 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	override setInitializer(CompilationStrategy initializer) {
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		compilationUnit.setCompilationStrategy(delegate, initializer)
+	}
+	
+	override setInitializer(StringConcatenationClient template) {
+		Preconditions.checkArgument(template != null, "template cannot be null")
+		compilationUnit.setCompilationTemplate(delegate, template)
 	}
 	
 	override isFinal() {

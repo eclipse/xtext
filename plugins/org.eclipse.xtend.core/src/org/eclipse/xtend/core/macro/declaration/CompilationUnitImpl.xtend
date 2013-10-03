@@ -97,6 +97,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import java.io.File
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -485,6 +486,11 @@ class CompilationUnitImpl implements CompilationUnit {
 		]
 	}
 	
+	def void setCompilationTemplate(JvmExecutable executable, StringConcatenationClient compilationTemplate) {
+		checkCanceled
+		typesBuilder.setBody(executable, compilationTemplate)
+	}
+	
 	protected def trimTrailingLinebreak(CharSequence sequence, EObject context) {
 		val lineBreak = context?.eResource?.URI?.lineSeparatorInformation?.lineSeparator
 		if(sequence != null 
@@ -502,6 +508,11 @@ class CompilationUnitImpl implements CompilationUnit {
 			val context = new CompilationContextImpl(it, this)
 			it.append(compilationStrategy.compile(context))
 		]
+	}
+	
+	def void setCompilationTemplate(JvmField field, StringConcatenationClient compilationTemplate) {
+		checkCanceled
+		typesBuilder.setInitializer(field, compilationTemplate)
 	}
 	
 	def AnnotationReference toAnnotationReference(XAnnotation delegate) {

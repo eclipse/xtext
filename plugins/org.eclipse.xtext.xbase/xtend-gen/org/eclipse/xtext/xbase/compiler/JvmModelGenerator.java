@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -97,6 +99,7 @@ import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -111,6 +114,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
  * A generator implementation that processes the
@@ -142,6 +147,9 @@ public class JvmModelGenerator implements IGenerator {
   @Inject
   @Extension
   private ErrorSafeExtensions _errorSafeExtensions;
+  
+  @Inject
+  private CommonTypeComputationServices commonServices;
   
   @Inject
   private XbaseCompiler compiler;
@@ -470,35 +478,61 @@ public class JvmModelGenerator implements IGenerator {
       _compilationStrategy_1.apply(appendable);
       appendable.decreaseIndentation();
     } else {
-      boolean _isGenerateExpressions = config.isGenerateExpressions();
-      if (_isGenerateExpressions) {
-        final XExpression body = this._iLogicalContainerProvider.getAssociatedExpression(it);
-        boolean _notEquals_1 = (!Objects.equal(body, null));
-        if (_notEquals_1) {
-          boolean _hasErrors = this._errorSafeExtensions.hasErrors(body);
-          if (_hasErrors) {
-            appendable.append("/* skipped default expression with errors */");
-          } else {
-            appendable.append(" default ");
-            JvmTypeReference _returnType = it.getReturnType();
-            this.compiler.compileAsJavaExpression(body, appendable, _returnType);
-          }
-        } else {
-          JvmAnnotationValue _defaultValue = it.getDefaultValue();
-          boolean _notEquals_2 = (!Objects.equal(_defaultValue, null));
+      StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
+      boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
+      if (_notEquals_1) {
+        ITreeAppendable _append = appendable.append(" default ");
+        _append.increaseIndentation();
+        this.appendCompilationTemplate(appendable, it);
+        appendable.decreaseIndentation();
+      } else {
+        boolean _isGenerateExpressions = config.isGenerateExpressions();
+        if (_isGenerateExpressions) {
+          final XExpression body = this._iLogicalContainerProvider.getAssociatedExpression(it);
+          boolean _notEquals_2 = (!Objects.equal(body, null));
           if (_notEquals_2) {
-            JvmAnnotationValue _defaultValue_1 = it.getDefaultValue();
-            boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_defaultValue_1);
-            if (_hasErrors_1) {
+            boolean _hasErrors = this._errorSafeExtensions.hasErrors(body);
+            if (_hasErrors) {
               appendable.append("/* skipped default expression with errors */");
             } else {
               appendable.append(" default ");
-              JvmAnnotationValue _defaultValue_2 = it.getDefaultValue();
-              this.toJavaLiteral(_defaultValue_2, appendable, config);
+              JvmTypeReference _returnType = it.getReturnType();
+              this.compiler.compileAsJavaExpression(body, appendable, _returnType);
+            }
+          } else {
+            JvmAnnotationValue _defaultValue = it.getDefaultValue();
+            boolean _notEquals_3 = (!Objects.equal(_defaultValue, null));
+            if (_notEquals_3) {
+              JvmAnnotationValue _defaultValue_1 = it.getDefaultValue();
+              boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_defaultValue_1);
+              if (_hasErrors_1) {
+                appendable.append("/* skipped default expression with errors */");
+              } else {
+                appendable.append(" default ");
+                JvmAnnotationValue _defaultValue_2 = it.getDefaultValue();
+                this.toJavaLiteral(_defaultValue_2, appendable, config);
+              }
             }
           }
         }
       }
+    }
+  }
+  
+  private void appendCompilationTemplate(final ITreeAppendable appendable, final JvmIdentifiableElement it) {
+    if ((appendable instanceof TreeAppendable)) {
+      StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.commonServices, it);
+      ImportingStringConcatenation _importingStringConcatenation = new ImportingStringConcatenation(((TreeAppendable)appendable), _standardTypeReferenceOwner);
+      final ImportingStringConcatenation target = _importingStringConcatenation;
+      StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
+      target.append(_compilationTemplate);
+      ((TreeAppendable)appendable).append(target);
+    } else {
+      Class<? extends ITreeAppendable> _class = appendable.getClass();
+      String _name = _class.getName();
+      String _plus = ("unexpected appendable: " + _name);
+      IllegalStateException _illegalStateException = new IllegalStateException(_plus);
+      throw _illegalStateException;
     }
   }
   
@@ -911,23 +945,32 @@ public class JvmModelGenerator implements IGenerator {
       _compilationStrategy_1.apply(appendable);
       appendable.decreaseIndentation();
     } else {
-      final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
-      boolean _and = false;
-      boolean _notEquals_1 = (!Objects.equal(expression, null));
-      if (!_notEquals_1) {
-        _and = false;
+      StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
+      boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
+      if (_notEquals_1) {
+        ITreeAppendable _append = appendable.append(" = ");
+        _append.increaseIndentation();
+        this.appendCompilationTemplate(appendable, it);
+        appendable.decreaseIndentation();
       } else {
-        boolean _isGenerateExpressions = config.isGenerateExpressions();
-        _and = (_notEquals_1 && _isGenerateExpressions);
-      }
-      if (_and) {
-        boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression);
-        if (_hasErrors) {
-          appendable.append(" /* Skipped initializer because of errors */");
+        final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
+        boolean _and = false;
+        boolean _notEquals_2 = (!Objects.equal(expression, null));
+        if (!_notEquals_2) {
+          _and = false;
         } else {
-          appendable.append(" = ");
-          JvmTypeReference _type = it.getType();
-          this.compiler.compileAsJavaExpression(expression, appendable, _type);
+          boolean _isGenerateExpressions = config.isGenerateExpressions();
+          _and = (_notEquals_2 && _isGenerateExpressions);
+        }
+        if (_and) {
+          boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression);
+          if (_hasErrors) {
+            appendable.append(" /* Skipped initializer because of errors */");
+          } else {
+            appendable.append(" = ");
+            JvmTypeReference _type = it.getType();
+            this.compiler.compileAsJavaExpression(expression, appendable, _type);
+          }
         }
       }
     }
@@ -1070,16 +1113,24 @@ public class JvmModelGenerator implements IGenerator {
     _traceSignificant.append(name);
   }
   
-  public boolean hasBody(final JvmExecutable op) {
+  public boolean hasBody(final JvmExecutable it) {
     boolean _or = false;
-    Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
-    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
+    boolean _or_1 = false;
+    StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
+    boolean _notEquals = (!Objects.equal(_compilationTemplate, null));
     if (_notEquals) {
+      _or_1 = true;
+    } else {
+      Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
+      boolean _notEquals_1 = (!Objects.equal(_compilationStrategy, null));
+      _or_1 = (_notEquals || _notEquals_1);
+    }
+    if (_or_1) {
       _or = true;
     } else {
-      XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(op);
-      boolean _notEquals_1 = (!Objects.equal(_associatedExpression, null));
-      _or = (_notEquals || _notEquals_1);
+      XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(it);
+      boolean _notEquals_2 = (!Objects.equal(_associatedExpression, null));
+      _or = (_or_1 || _notEquals_2);
     }
     return _or;
   }
@@ -1103,95 +1154,113 @@ public class JvmModelGenerator implements IGenerator {
         this.generateBodyWithIssues(appendable, errors);
       }
     } else {
-      final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(op);
-      boolean _and = false;
-      boolean _notEquals_1 = (!Objects.equal(expression, null));
-      if (!_notEquals_1) {
-        _and = false;
-      } else {
-        boolean _isGenerateExpressions = config.isGenerateExpressions();
-        _and = (_notEquals_1 && _isGenerateExpressions);
-      }
-      if (_and) {
-        final Iterable<Issue> errors_1 = this._errorSafeExtensions.getErrors(expression);
+      StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(op);
+      boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
+      if (_notEquals_1) {
+        final Iterable<Issue> errors_1 = this._errorSafeExtensions.getErrors(op);
         boolean _isEmpty_1 = IterableExtensions.isEmpty(errors_1);
         if (_isEmpty_1) {
-          JvmTypeReference _switchResult = null;
-          boolean _matched = false;
-          if (!_matched) {
-            if (op instanceof JvmOperation) {
-              _matched=true;
-              JvmTypeReference _returnType = ((JvmOperation)op).getReturnType();
-              _switchResult = _returnType;
-            }
-          }
-          if (!_matched) {
-            if (op instanceof JvmConstructor) {
-              _matched=true;
-              JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, op);
-              _switchResult = _typeForName;
-            }
-          }
-          if (!_matched) {
-            _switchResult = null;
-          }
-          final JvmTypeReference returnType = _switchResult;
-          boolean _and_1 = false;
-          boolean _and_2 = false;
-          if (!(expression instanceof XBlockExpression)) {
-            _and_2 = false;
-          } else {
-            EList<XExpression> _expressions = ((XBlockExpression) expression).getExpressions();
-            int _size = _expressions.size();
-            boolean _notEquals_2 = (_size != 1);
-            _and_2 = ((expression instanceof XBlockExpression) && _notEquals_2);
-          }
-          if (!_and_2) {
-            _and_1 = false;
-          } else {
-            _and_1 = (_and_2 && (returnType instanceof JvmVoid));
-          }
-          if (_and_1) {
-            final XBlockExpression block = ((XBlockExpression) expression);
-            EList<XExpression> _expressions_1 = block.getExpressions();
-            boolean _isEmpty_2 = _expressions_1.isEmpty();
-            if (_isEmpty_2) {
-              appendable.append("{}");
-            } else {
-              EList<JvmTypeReference> _exceptions = op.getExceptions();
-              Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
-              this.compiler.compile(expression, appendable, returnType, _set);
-            }
-          } else {
-            ITreeAppendable _append_1 = appendable.append("{");
-            _append_1.increaseIndentation();
-            EList<JvmTypeReference> _exceptions_1 = op.getExceptions();
-            Set<JvmTypeReference> _set_1 = IterableExtensions.<JvmTypeReference>toSet(_exceptions_1);
-            this.compiler.compile(expression, appendable, returnType, _set_1);
-            ITreeAppendable _decreaseIndentation_1 = appendable.decreaseIndentation();
-            ITreeAppendable _newLine_1 = _decreaseIndentation_1.newLine();
-            _newLine_1.append("}");
-          }
+          ITreeAppendable _increaseIndentation_1 = appendable.increaseIndentation();
+          ITreeAppendable _append_1 = _increaseIndentation_1.append("{");
+          _append_1.newLine();
+          this.appendCompilationTemplate(appendable, op);
+          ITreeAppendable _decreaseIndentation_1 = appendable.decreaseIndentation();
+          ITreeAppendable _newLine_1 = _decreaseIndentation_1.newLine();
+          _newLine_1.append("}");
         } else {
           this.generateBodyWithIssues(appendable, errors_1);
         }
       } else {
-        if ((op instanceof JvmOperation)) {
-          ITreeAppendable _increaseIndentation_1 = appendable.increaseIndentation();
-          ITreeAppendable _append_2 = _increaseIndentation_1.append("{");
-          _append_2.newLine();
-          appendable.append("throw new UnsupportedOperationException(\"");
-          String _simpleName = ((JvmOperation)op).getSimpleName();
-          appendable.append(_simpleName);
-          appendable.append(" is not implemented\");");
-          ITreeAppendable _decreaseIndentation_2 = appendable.decreaseIndentation();
-          ITreeAppendable _newLine_2 = _decreaseIndentation_2.newLine();
-          _newLine_2.append("}");
+        final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(op);
+        boolean _and = false;
+        boolean _notEquals_2 = (!Objects.equal(expression, null));
+        if (!_notEquals_2) {
+          _and = false;
         } else {
-          if ((op instanceof JvmConstructor)) {
-            ITreeAppendable _append_3 = appendable.append("{");
-            ITreeAppendable _newLine_3 = _append_3.newLine();
+          boolean _isGenerateExpressions = config.isGenerateExpressions();
+          _and = (_notEquals_2 && _isGenerateExpressions);
+        }
+        if (_and) {
+          final Iterable<Issue> errors_2 = this._errorSafeExtensions.getErrors(expression);
+          boolean _isEmpty_2 = IterableExtensions.isEmpty(errors_2);
+          if (_isEmpty_2) {
+            JvmTypeReference _switchResult = null;
+            boolean _matched = false;
+            if (!_matched) {
+              if (op instanceof JvmOperation) {
+                _matched=true;
+                JvmTypeReference _returnType = ((JvmOperation)op).getReturnType();
+                _switchResult = _returnType;
+              }
+            }
+            if (!_matched) {
+              if (op instanceof JvmConstructor) {
+                _matched=true;
+                JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, op);
+                _switchResult = _typeForName;
+              }
+            }
+            if (!_matched) {
+              _switchResult = null;
+            }
+            final JvmTypeReference returnType = _switchResult;
+            boolean _and_1 = false;
+            boolean _and_2 = false;
+            if (!(expression instanceof XBlockExpression)) {
+              _and_2 = false;
+            } else {
+              EList<XExpression> _expressions = ((XBlockExpression) expression).getExpressions();
+              int _size = _expressions.size();
+              boolean _notEquals_3 = (_size != 1);
+              _and_2 = ((expression instanceof XBlockExpression) && _notEquals_3);
+            }
+            if (!_and_2) {
+              _and_1 = false;
+            } else {
+              _and_1 = (_and_2 && (returnType instanceof JvmVoid));
+            }
+            if (_and_1) {
+              final XBlockExpression block = ((XBlockExpression) expression);
+              EList<XExpression> _expressions_1 = block.getExpressions();
+              boolean _isEmpty_3 = _expressions_1.isEmpty();
+              if (_isEmpty_3) {
+                appendable.append("{}");
+              } else {
+                EList<JvmTypeReference> _exceptions = op.getExceptions();
+                Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
+                this.compiler.compile(expression, appendable, returnType, _set);
+              }
+            } else {
+              ITreeAppendable _append_2 = appendable.append("{");
+              _append_2.increaseIndentation();
+              EList<JvmTypeReference> _exceptions_1 = op.getExceptions();
+              Set<JvmTypeReference> _set_1 = IterableExtensions.<JvmTypeReference>toSet(_exceptions_1);
+              this.compiler.compile(expression, appendable, returnType, _set_1);
+              ITreeAppendable _decreaseIndentation_2 = appendable.decreaseIndentation();
+              ITreeAppendable _newLine_2 = _decreaseIndentation_2.newLine();
+              _newLine_2.append("}");
+            }
+          } else {
+            this.generateBodyWithIssues(appendable, errors_2);
+          }
+        } else {
+          if ((op instanceof JvmOperation)) {
+            ITreeAppendable _increaseIndentation_2 = appendable.increaseIndentation();
+            ITreeAppendable _append_3 = _increaseIndentation_2.append("{");
+            _append_3.newLine();
+            appendable.append("throw new UnsupportedOperationException(\"");
+            String _simpleName = ((JvmOperation)op).getSimpleName();
+            appendable.append(_simpleName);
+            appendable.append(" is not implemented\");");
+            ITreeAppendable _decreaseIndentation_3 = appendable.decreaseIndentation();
+            ITreeAppendable _newLine_3 = _decreaseIndentation_3.newLine();
             _newLine_3.append("}");
+          } else {
+            if ((op instanceof JvmConstructor)) {
+              ITreeAppendable _append_4 = appendable.append("{");
+              ITreeAppendable _newLine_4 = _append_4.newLine();
+              _newLine_4.append("}");
+            }
           }
         }
       }
@@ -1765,7 +1834,7 @@ public class JvmModelGenerator implements IGenerator {
     } else {
       JvmGenericType _xifexpression_1 = null;
       if ((context instanceof JvmGenericType)) {
-        _xifexpression_1 = ((JvmGenericType) context);
+        _xifexpression_1 = ((JvmGenericType)context);
       } else {
         EObject _eContainer = context.eContainer();
         JvmGenericType _containerType = this.containerType(_eContainer);
