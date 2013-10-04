@@ -118,6 +118,7 @@ Workflow {
                 
                 fragment = de.itemis.statefullexer.StatefulLexerFragment {
 //                	lexerGrammar = "org.xpect.ui.contentassist.XpectContentAssistLexer"
+					lexerBaseClass = "org.xpect.ui.services.Lexer"
                 	contentAssist = true
                 	antlrParam = "-lib"
                 	antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"
