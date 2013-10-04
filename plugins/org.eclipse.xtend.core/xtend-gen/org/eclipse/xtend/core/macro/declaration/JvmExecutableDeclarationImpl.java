@@ -21,6 +21,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -164,6 +165,14 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
     _compilationUnit.setCompilationStrategy(_delegate, compilationStrategy);
+  }
+  
+  public void setBody(final StringConcatenationClient compilationTemplate) {
+    boolean _notEquals = (!Objects.equal(compilationTemplate, null));
+    Preconditions.checkArgument(_notEquals, "compilationTemplate cannot be null");
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    T _delegate = this.getDelegate();
+    _compilationUnit.setCompilationTemplate(_delegate, compilationTemplate);
   }
   
   public MutableParameterDeclaration addParameter(final String name, final TypeReference type) {

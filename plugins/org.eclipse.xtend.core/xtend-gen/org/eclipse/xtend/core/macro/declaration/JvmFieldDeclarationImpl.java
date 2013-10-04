@@ -17,6 +17,7 @@ import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -57,6 +58,14 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmField _delegate = this.getDelegate();
     _compilationUnit.setCompilationStrategy(_delegate, initializer);
+  }
+  
+  public void setInitializer(final StringConcatenationClient template) {
+    boolean _notEquals = (!Objects.equal(template, null));
+    Preconditions.checkArgument(_notEquals, "template cannot be null");
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    _compilationUnit.setCompilationTemplate(_delegate, template);
   }
   
   public boolean isFinal() {

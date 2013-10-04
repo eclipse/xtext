@@ -490,6 +490,17 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return state;
 	}
 	
+	ImportManager getImportManager() {
+		return state.getImportManager();
+	}
+	
+	String getLineSeparator() {
+		return state.getLineSeparator();
+	}
+	
+	String getIndentationString() {
+		return state.getIndentationString();
+	}
 	
 	/**
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.

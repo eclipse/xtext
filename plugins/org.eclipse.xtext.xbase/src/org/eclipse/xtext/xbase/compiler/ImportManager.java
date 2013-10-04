@@ -82,6 +82,12 @@ public class ImportManager {
 		appendType(type, sb);
 		return sb;
 	}
+	
+	public CharSequence serialize(Class<?> type) {
+		StringBuilder sb = new StringBuilder();
+		appendType(type, sb);
+		return sb;
+	}
 
 	private Pattern JAVA_LANG_PACK = Pattern.compile("java\\.lang\\.[\\w]+");
 
@@ -96,21 +102,38 @@ public class ImportManager {
 		} else {
 			final String qualifiedName = type.getQualifiedName(innerTypeSeparator);
 			final String simpleName = type.getSimpleName();
-			if (allowsSimpleName(qualifiedName, simpleName)) {
-				builder.append(simpleName);
-			} else if (needsQualifiedName(qualifiedName, simpleName)) {
-				builder.append(qualifiedName);
-			} else {
-				if (imports.containsKey(simpleName)) {
-					if (qualifiedName.equals(imports.get(simpleName))) {
-						builder.append(simpleName);
-					} else {
-						builder.append(qualifiedName);
-					}
-				} else {
-					imports.put(simpleName, qualifiedName);
+			appendType(qualifiedName, simpleName, builder);
+		}
+	}
+
+	public void appendType(final Class<?> type, StringBuilder builder) {
+		if (type.isPrimitive()) {
+			builder.append(type.getSimpleName());
+		} else if (type.isArray()) {
+			appendType(type.getComponentType(), builder);
+			builder.append("[]");
+		} else {
+			final String qualifiedName = type.getCanonicalName();
+			final String simpleName = type.getSimpleName();
+			appendType(qualifiedName, simpleName, builder);
+		}
+	}
+	
+	protected void appendType(final String qualifiedName, final String simpleName, StringBuilder builder) {
+		if (allowsSimpleName(qualifiedName, simpleName)) {
+			builder.append(simpleName);
+		} else if (needsQualifiedName(qualifiedName, simpleName)) {
+			builder.append(qualifiedName);
+		} else {
+			if (imports.containsKey(simpleName)) {
+				if (qualifiedName.equals(imports.get(simpleName))) {
 					builder.append(simpleName);
+				} else {
+					builder.append(qualifiedName);
 				}
+			} else {
+				imports.put(simpleName, qualifiedName);
+				builder.append(simpleName);
 			}
 		}
 	}

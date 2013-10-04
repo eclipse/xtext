@@ -13,8 +13,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,12 +20,6 @@ import org.junit.Test;
 public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
   @Test
   public void testWithoutPackage() {
-    final Procedure1<String> _function = new Procedure1<String>() {
-      public void apply(final String it) {
-      }
-    };
-    ObjectExtensions.<String>operator_doubleArrow(
-      "foo", _function);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtend.core.tests.macro.Accessors");
     _builder.newLine();
@@ -41,7 +33,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final IAcceptor<CompilationResult> _function_1 = new IAcceptor<CompilationResult>() {
+    final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
       public void accept(final CompilationResult it) {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableClassDeclaration classA = ctx.findClass("A");
@@ -75,7 +67,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         Assert.assertNotNull(_findFirst_1);
       }
     };
-    this._xtendCompilerTester.compile(_builder, _function_1);
+    this._xtendCompilerTester.compile(_builder, _function);
   }
   
   @Test

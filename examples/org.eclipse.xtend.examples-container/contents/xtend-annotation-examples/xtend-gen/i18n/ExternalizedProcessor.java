@@ -83,7 +83,6 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                 boolean _matched = false;
                 if (!_matched) {
                   if (format instanceof NumberFormat) {
-                    final NumberFormat _numberFormat = (NumberFormat)format;
                     _matched=true;
                     TypeReference _primitiveInt = context.getPrimitiveInt();
                     _switchResult = _primitiveInt;
@@ -91,7 +90,6 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                 }
                 if (!_matched) {
                   if (format instanceof DateFormat) {
-                    final DateFormat _dateFormat = (DateFormat)format;
                     _matched=true;
                     TypeReference _newTypeReference = context.newTypeReference(Date.class);
                     _switchResult = _newTypeReference;

@@ -10,6 +10,7 @@ package org.eclipse.xtend.lib.macro.declaration;
 import java.util.List;
 
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 
 import com.google.common.annotations.Beta;
 
@@ -46,6 +47,16 @@ public interface MutableExecutableDeclaration extends MutableTypeParameterDeclar
 	 * @exception IllegalArgumentException if <code>compilationStrategy</code> is <code>null</code>
 	 */
 	void setBody(CompilationStrategy compilationStrategy);
+	
+	/**
+	 * Sets the given {@link StringConcatenationClient} as the body.
+	 * 
+	 * If this {@link MutableExecutableDeclaration} has already set another expression or compilation strategy the old one will be detached.
+	 * 
+	 * @param compilationTemplate the compilation strategy, must not be <code>null</code>
+	 * @exception IllegalArgumentException if <code>compilationStrategy</code> is <code>null</code>
+	 */
+	void setBody(StringConcatenationClient compilationTemplate);
 	
 	/**
 	 * Sets the declared exceptions.

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -69,6 +70,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
+import org.eclipse.xtext.xbase.compiler.CompilationTemplateAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.FileHeaderAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -174,7 +176,10 @@ public class JvmTypesBuilder {
 			// remove old adapters
 			Iterator<Adapter> iterator = member.eAdapters().iterator();
 			while (iterator.hasNext()) {
-				if (iterator.next() instanceof CompilationStrategyAdapter) {
+				Adapter adapter = iterator.next();
+				if (adapter instanceof CompilationStrategyAdapter) {
+					iterator.remove();
+				} else if (adapter instanceof CompilationTemplateAdapter) {
 					iterator.remove();
 				}
 			}
@@ -218,6 +223,18 @@ public class JvmTypesBuilder {
 	 * @param strategy the compilation strategy. If <code>null</code> this method does nothing.
 	 */
 	public void setBody(@Nullable JvmExecutable executable, @Nullable Procedures.Procedure1<ITreeAppendable> strategy) {
+		removeExistingBody(executable);
+		setCompilationStrategy(executable, strategy);
+	}
+	
+	/**
+	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
+	 * implement the {@link JvmExecutable} when it is translated to Java source code.
+	 * 
+	 * @param executable the operation or constructor to add the method body to. If <code>null</code> this method does nothing.
+	 * @param strategy the compilation strategy. If <code>null</code> this method does nothing.
+	 */
+	public void setBody(@Nullable JvmExecutable executable, @Nullable StringConcatenationClient strategy) {
 		removeExistingBody(executable);
 		setCompilationStrategy(executable, strategy);
 	}
@@ -1097,6 +1114,20 @@ public class JvmTypesBuilder {
 	}
 	
 	/**
+	 * Attaches the given compile strategy to the given {@link JvmField} such that the compiler knows how to
+	 * initialize the {@link JvmField} when it is translated to Java source code.
+	 * 
+	 * @param field the field to add the initializer to. If <code>null</code> this method does nothing. 
+	 * @param strategy the compilation strategy. If <code>null</code> this method does nothing. 
+	 */
+	public void setInitializer(@Nullable JvmField field, @Nullable StringConcatenationClient strategy) {
+		if (field == null || strategy == null)
+			return;
+		removeExistingBody(field);
+		setCompilationStrategy(field, strategy);
+	}
+	
+	/**
 	 * Sets the given {@link JvmField} as the logical container for the given {@link XExpression}.
 	 * This defines the context and the scope for the given expression.
 	 * 
@@ -1117,6 +1148,14 @@ public class JvmTypesBuilder {
 			return;
 		CompilationStrategyAdapter adapter = new CompilationStrategyAdapter();
 		adapter.setCompilationStrategy(strategy);
+		member.eAdapters().add(adapter);
+	}
+	
+	protected void setCompilationStrategy(@Nullable JvmMember member, @Nullable StringConcatenationClient strategy) {
+		if(member == null || strategy == null)
+			return;
+		CompilationTemplateAdapter adapter = new CompilationTemplateAdapter();
+		adapter.setCompilationTemplate(strategy);
 		member.eAdapters().add(adapter);
 	}
 
