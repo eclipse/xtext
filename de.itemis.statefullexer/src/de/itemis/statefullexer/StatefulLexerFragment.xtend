@@ -150,7 +150,7 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment { //	override get
 		
 		// Use our own Lexer superclass by means of import.
 		«IF contentAssist»
-			import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+			import «lexerBaseClass ?: "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer"»;
 		«ELSE» 
 			import «lexerBaseClass ?: "org.eclipse.xtext.parser.antlr.Lexer"»;
 		«ENDIF»
