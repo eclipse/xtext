@@ -16,8 +16,8 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.builder.JavaEditorExtension;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
+import org.eclipse.xtext.builder.impl.javasupport.JdtQueuedBuildData;
 import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -53,7 +53,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   protected WorkbenchTestHelper testHelper;
   
   @Inject
-  protected QueuedBuildData queuedBuildData;
+  protected JdtQueuedBuildData queuedBuildData;
   
   @Inject
   protected JavaChangeQueueFiller javaChangeQueueFiller;
@@ -229,8 +229,9 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     {
       IResourcesSetupUtil.waitForAutoBuild();
       IProject _project = this.testHelper.getProject();
-      boolean _tryConfirmAllChanges = this.queuedBuildData.tryConfirmAllChanges(_project);
-      _xblockexpression = (_tryConfirmAllChanges);
+      boolean _needRebuild = this.queuedBuildData.needRebuild(_project);
+      boolean _not = (!_needRebuild);
+      _xblockexpression = (_not);
     }
     return _xblockexpression;
   }

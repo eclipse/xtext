@@ -11,8 +11,8 @@ import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.builder.impl.QueuedBuildData
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller
+import org.eclipse.xtext.builder.impl.javasupport.JdtQueuedBuildData
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
@@ -34,7 +34,7 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 	protected extension WorkbenchTestHelper testHelper
 
 	@Inject
-	protected QueuedBuildData queuedBuildData
+	protected JdtQueuedBuildData queuedBuildData
 
 	@Inject
 	protected JavaChangeQueueFiller javaChangeQueueFiller
@@ -120,7 +120,7 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 
 	def tryConfirmDeltas() {
 		waitForAutoBuild
-		queuedBuildData.tryConfirmAllChanges(project)
+		!queuedBuildData.needRebuild(project)
 	}
 
 }
