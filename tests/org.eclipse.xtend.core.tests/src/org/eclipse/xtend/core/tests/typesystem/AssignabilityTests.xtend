@@ -25,6 +25,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
+import java.util.Map
 
 /**
  * @author Sebastian Zarnekow
@@ -817,6 +818,23 @@ abstract class CommonAssignabilityTest extends AbstractAssignabilityTest {
 		"java.lang.Comparable<String>".isAssignableFrom("String")
 	}
 	
+	@Test
+	def void testClassStringIntMapIsClassMap() {
+		"java.lang.Class<? extends java.util.Map>".isAssignableFrom("java.lang.Class<org.eclipse.xtend.core.tests.typesystem.StringIntMap>")
+		"java.lang.Class<? super java.util.Map>".isNotAssignableFrom("java.lang.Class<org.eclipse.xtend.core.tests.typesystem.StringIntMap>")
+		"java.lang.Class<? super org.eclipse.xtend.core.tests.typesystem.StringIntMap>".isAssignableFrom("java.lang.Class<java.util.Map>")
+	}
+	
+	@Test
+	def void testClassMapIsClassMapStringInteger() {
+		"java.lang.Class<? extends java.util.Map>".isAssignableFrom("java.lang.Class<? extends java.util.Map<String, Integer>>")
+		"java.lang.Class<? extends java.util.Map>".isAssignableFrom("java.lang.Class<? extends java.util.Map<?, ?>>")
+		"java.lang.Class<? super java.util.Map>".isNotAssignableFrom("java.lang.Class<? super java.util.Map<String, Integer>>")
+		"java.lang.Class<? super java.util.Map>".isNotAssignableFrom("java.lang.Class<? super java.util.Map<?, ?>>")
+		"java.lang.Class<? super java.util.Map<String, Integer>>".isAssignableFrom("java.lang.Class<? super java.util.Map>")
+		"java.lang.Class<? super java.util.Map<?, ?>>".isAssignableFrom("java.lang.Class<? super java.util.Map>")
+	}
+	
 	private def String strangeIterable(String typeParam) {
 		'''org.eclipse.xtend.core.tests.typesystem.StrangeIterable<«typeParam»>'''
 	}
@@ -1564,6 +1582,23 @@ class RawAssignabilityTest extends CommonAssignabilityTest {
 		"java.lang.Comparable<Integer>".isAssignableFrom("String")
 	}
 	
+	@Test
+	override testClassStringIntMapIsClassMap() {
+		"java.lang.Class<? extends java.util.Map>".isAssignableFrom("java.lang.Class<org.eclipse.xtend.core.tests.typesystem.StringIntMap>")
+		"java.lang.Class<? super java.util.Map>".isAssignableFrom("java.lang.Class<org.eclipse.xtend.core.tests.typesystem.StringIntMap>")
+		"java.lang.Class<? super org.eclipse.xtend.core.tests.typesystem.StringIntMap>".isAssignableFrom("java.lang.Class<java.util.Map>")
+	}
+	
+	@Test
+	override testClassMapIsClassMapStringInteger() {
+		"java.lang.Class<? extends java.util.Map>".isAssignableFrom("java.lang.Class<? extends java.util.Map<String, Integer>>")
+		"java.lang.Class<? extends java.util.Map>".isAssignableFrom("java.lang.Class<? extends java.util.Map<?, ?>>")
+		"java.lang.Class<? super java.util.Map>".isAssignableFrom("java.lang.Class<? super java.util.Map<String, Integer>>")
+		"java.lang.Class<? super java.util.Map>".isAssignableFrom("java.lang.Class<? super java.util.Map<?, ?>>")
+		"java.lang.Class<? super java.util.Map<String, Integer>>".isAssignableFrom("java.lang.Class<? super java.util.Map>")
+		"java.lang.Class<? super java.util.Map<?, ?>>".isAssignableFrom("java.lang.Class<? super java.util.Map>")
+	}
+	
 }
 
 @InjectWith(RuntimeInjectorProviderWithCustomSynonyms)
@@ -1582,3 +1617,4 @@ class AssignabilityWithCustomSynonymsTest extends AbstractAssignabilityTest {
 }
 
 interface StrangeIterable<T> extends Iterable {}
+interface StringIntMap extends Map<String, Integer> {}
