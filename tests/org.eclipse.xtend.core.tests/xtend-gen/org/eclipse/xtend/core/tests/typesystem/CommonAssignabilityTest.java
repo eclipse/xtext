@@ -774,6 +774,23 @@ public abstract class CommonAssignabilityTest extends AbstractAssignabilityTest 
     this.isAssignableFrom("java.lang.Comparable<String>", "String");
   }
   
+  @Test
+  public void testClassStringIntMapIsClassMap() {
+    this.isAssignableFrom("java.lang.Class<? extends java.util.Map>", "java.lang.Class<org.eclipse.xtend.core.tests.typesystem.StringIntMap>");
+    this.isNotAssignableFrom("java.lang.Class<? super java.util.Map>", "java.lang.Class<org.eclipse.xtend.core.tests.typesystem.StringIntMap>");
+    this.isAssignableFrom("java.lang.Class<? super org.eclipse.xtend.core.tests.typesystem.StringIntMap>", "java.lang.Class<java.util.Map>");
+  }
+  
+  @Test
+  public void testClassMapIsClassMapStringInteger() {
+    this.isAssignableFrom("java.lang.Class<? extends java.util.Map>", "java.lang.Class<? extends java.util.Map<String, Integer>>");
+    this.isAssignableFrom("java.lang.Class<? extends java.util.Map>", "java.lang.Class<? extends java.util.Map<?, ?>>");
+    this.isNotAssignableFrom("java.lang.Class<? super java.util.Map>", "java.lang.Class<? super java.util.Map<String, Integer>>");
+    this.isNotAssignableFrom("java.lang.Class<? super java.util.Map>", "java.lang.Class<? super java.util.Map<?, ?>>");
+    this.isAssignableFrom("java.lang.Class<? super java.util.Map<String, Integer>>", "java.lang.Class<? super java.util.Map>");
+    this.isAssignableFrom("java.lang.Class<? super java.util.Map<?, ?>>", "java.lang.Class<? super java.util.Map>");
+  }
+  
   private String strangeIterable(final String typeParam) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("org.eclipse.xtend.core.tests.typesystem.StrangeIterable<");

@@ -423,13 +423,21 @@ public class RawTypeConformanceComputer {
 		if ((flags & AS_TYPE_ARGUMENT) != 0) {
 			LightweightTypeReference lowerBound = left.getLowerBound();
 			if (lowerBound != null) {
-				int result = doIsConformant(right, lowerBound, flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS));
+				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS);
+				if (right.isRawType()) {
+					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
+				}
+				int result = doIsConformant(right, lowerBound, newFlags);
 				if ((result & SUCCESS) == 0) {
 					return result;
 				}
 			}
 			for(LightweightTypeReference leftUpperBound: left.getUpperBounds()) {
-				int result = doIsConformant(leftUpperBound, right, flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS));
+				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS);
+				if (leftUpperBound.isRawType()) {
+					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
+				}
+				int result = doIsConformant(leftUpperBound, right, newFlags);
 				if ((result & SUCCESS) == 0) {
 					return result;
 				}
@@ -445,20 +453,28 @@ public class RawTypeConformanceComputer {
 			if (leftLowerBound != null) {
 				LightweightTypeReference rightLowerBound = right.getLowerBound();
 				if (rightLowerBound != null) {
-					int result = doIsConformant(rightLowerBound, leftLowerBound, flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS));
+					int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS);
+					if (rightLowerBound.isRawType()) {
+						newFlags |= ALLOW_RAW_TYPE_CONVERSION;
+					}
+					int result = doIsConformant(rightLowerBound, leftLowerBound, newFlags);
 					return result;
 				}
 				return flags;
 			}
-			int rightIsSubtype = 0;
+			int subtypeOrRawConversion = 0;
 			for(LightweightTypeReference leftUpperBound: left.getUpperBounds()) {
-				int result = doIsConformant(leftUpperBound, (LightweightTypeReference) right, flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS));
+				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS);
+				if (leftUpperBound.isRawType()) {
+					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
+				}
+				int result = doIsConformant(leftUpperBound, (LightweightTypeReference) right, newFlags);
 				if ((result & SUCCESS) == 0) {
 					return result;
 				}
-				rightIsSubtype = rightIsSubtype | (result & SUBTYPE);
+				subtypeOrRawConversion = subtypeOrRawConversion | (result & (SUBTYPE | RAW_TYPE_CONVERSION));
 			}
-			return flags | SUCCESS | rightIsSubtype;
+			return flags | SUCCESS | subtypeOrRawConversion;
 		}
 		return flags;
 	}
