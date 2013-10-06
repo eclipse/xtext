@@ -427,6 +427,45 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
   }
   
   @Test
+  public void testAmbiguousMethods_12() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n(List<Integer> list) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(list)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(List list) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Collection<Integer> coll) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Ambiguous feature call.");
+    _builder_1.newLine();
+    _builder_1.append("The methods");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(List) in C and");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(Collection<Integer>) in C");
+    _builder_1.newLine();
+    _builder_1.append("both match.");
+    this.assertAmbiguous(_builder, _builder_1.toString());
+  }
+  
+  @Test
   public void testUnambiguousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

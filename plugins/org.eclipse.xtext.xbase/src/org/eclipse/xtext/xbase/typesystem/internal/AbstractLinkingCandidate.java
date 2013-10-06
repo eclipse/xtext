@@ -549,6 +549,11 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return state.getResolvedTypes().getActualType(expression);
 	}
 	
+	/**
+	 * Returns the substituted expected type for the argument at {@code argumentIndex}.
+	 * If the expected type is an unbound type parameter, a reference to the type parameter
+	 * itself is returned. 
+	 */
 	@Nullable
 	protected LightweightTypeReference getSubstitutedExpectedType(int argumentIndex) {
 		XExpression expression = arguments.getArgument(argumentIndex);
@@ -559,10 +564,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			// don't use UnboundTypeReference.getRawTypeReference since that would potentially resolve the unbound candidate
 			if (expectedType instanceof UnboundTypeReference) {
 				expectedType = new ParameterizedTypeReference(expectedType.getOwner(), ((UnboundTypeReference) expectedType).getTypeParameter());
-			} else if (expectedType.isResolved()) {
-				return expectedType;
 			}
-			expectedType = expectedType.getRawTypeReference();
 		}
 		return expectedType;
 	}
