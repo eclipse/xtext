@@ -172,6 +172,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			initializeMapping(declaredTypeParameter, typeParameterMapping);
 		}
 		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, getState().getReferenceOwner());
+		substitutor.enhanceMapping(getDeclaratorParameterMapping());
 		for(int i = size; i < declaredTypeParameters.size(); i++) {
 			JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
 			LightweightMergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(declaredTypeParameter);
