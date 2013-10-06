@@ -43,6 +43,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -789,12 +791,16 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				if (rightExpectedArgumentType == null) {
 					return CompareResult.THIS;
 				}
-				if (expectedArgumentType.isAssignableFrom(rightExpectedArgumentType)) {
-					if (!rightExpectedArgumentType.isAssignableFrom(expectedArgumentType)) {
+				TypeConformanceResult rightToLeftConformance = expectedArgumentType.internalIsAssignableFrom(rightExpectedArgumentType, new TypeConformanceComputationArgument());
+				if (rightToLeftConformance.isConformant()) {
+					if (!rightExpectedArgumentType.isAssignableFrom(expectedArgumentType) && !rightToLeftConformance.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION)) {
 						result++;
 					}
-				} else if (rightExpectedArgumentType.isAssignableFrom(expectedArgumentType)) {
-					result--;
+				} else {
+					TypeConformanceResult leftToRightConformance = rightExpectedArgumentType.internalIsAssignableFrom(expectedArgumentType, new TypeConformanceComputationArgument());
+					if (leftToRightConformance.isConformant() && !leftToRightConformance.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION)) {
+						result--;
+					}
 				}
 			}
 		}
