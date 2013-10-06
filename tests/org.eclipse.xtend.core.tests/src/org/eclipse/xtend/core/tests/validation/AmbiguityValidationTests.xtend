@@ -1094,6 +1094,25 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
+	def void testAmbiguousMethods_12() {
+		'''
+			import java.util.*
+			class C {
+				def void n(List<Integer> list) {
+					m(list)
+				}
+				def void m(List list) {}
+				def void m(Collection<Integer> coll) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(List) in C and
+				m(Collection<Integer>) in C
+			both match.''')
+	}
+	
+	@Test
 	def void testUnambiguousMethods_01() {
 		'''
 			class C {
