@@ -102,7 +102,6 @@ class CompilerBug417522Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	
 	@Test
 	def test_04() {
 		assertCompilesTo('''
