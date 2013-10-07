@@ -7,22 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,28 +32,9 @@ public class ConstraintAwareTypeArgumentCollector extends DeclaratorTypeArgument
 		JvmType type = reference.getType();
 		if (!type.eIsProxy() && data.getVisited().add(type)) {
 			if (type instanceof JvmTypeParameter) {
+				JvmTypeParameter typeParameter = (JvmTypeParameter) type;
 				if (!data.getTypeParameterMapping().containsKey(type)) {
-					List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
-					List<LightweightTypeReference> upperBounds = Lists.newArrayList();
-					OwnedConverter converter = new OwnedConverter(owner);
-					for(JvmTypeConstraint constraint: constraints) {
-						if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
-							LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
-							upperBound.accept(this, data);
-							upperBounds.add(upperBound);
-						}
-					}
-					if (upperBounds.size() > 1) {
-						CompoundTypeReference result = new CompoundTypeReference(owner, false);
-						for(LightweightTypeReference upperBound: upperBounds) {
-							result.addComponent(upperBound);
-						}
-						data.getTypeParameterMapping().put((JvmTypeParameter) type, new LightweightMergedBoundTypeArgument(result, VarianceInfo.INVARIANT));
-					} else if (upperBounds.size() == 1) {
-						data.getTypeParameterMapping().put((JvmTypeParameter) type, new LightweightMergedBoundTypeArgument(upperBounds.get(0), VarianceInfo.INVARIANT));
-					} else {
-						return Boolean.FALSE;
-					}
+					return addConstraintMapping(typeParameter, owner, data);
 				}
 			} else {
 				return doVisitParameterizedTypeReference(reference, type, data);
@@ -71,5 +42,5 @@ public class ConstraintAwareTypeArgumentCollector extends DeclaratorTypeArgument
 		}
 		return Boolean.FALSE;
 	}
-	
+
 }
