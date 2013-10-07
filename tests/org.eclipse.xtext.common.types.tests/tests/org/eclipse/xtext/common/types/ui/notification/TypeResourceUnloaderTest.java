@@ -30,6 +30,8 @@ import org.eclipse.xtext.common.types.tests.AbstractActivator;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
+import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -105,40 +107,82 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	@Test public void testNullChange() throws BadLocationException, InterruptedException {
-		int lastBrace = document.get().lastIndexOf("}");
-		document.replace(lastBrace, 0, " ");
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				try {
+					int lastBrace = document.get().lastIndexOf("}");
+					document.replace(lastBrace, 0, " ");
+				} catch (BadLocationException e) {
+					Assert.fail(e.getMessage());
+				}
+			}
+
+		});
 		assertNull(String.valueOf(firedElementChangedEvents), event);
 	}
 	
 	@Test public void testCloseEditor() throws InterruptedException {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);
+			}
+
+		});
 		assertNull(String.valueOf(firedElementChangedEvents), event);
 	}
 	
 	@Test public void testCloseAndReopenEditor() throws InterruptedException, PartInitException, JavaModelException {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);
-		editor = JavaUI.openInEditor(compilationUnit);
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+			
+			public void apply() {
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);
+				try {
+					editor = JavaUI.openInEditor(compilationUnit);
+				} catch (PartInitException e) {
+					fail(e.getMessage());
+				} catch (JavaModelException e) {
+					fail(e.getMessage());
+				}		
+			}
+		});
 		assertNull(String.valueOf(firedElementChangedEvents), event);
 	}
 	
 	@Test
 	public void testNonStructuralChange() throws BadLocationException, InterruptedException {
-		int methodBody = document.get().indexOf("{}") + 1;
-		assertNull("event is null before the document was modified", event);
-		document.replace(methodBody, 0, "ignored.toString();");
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+			
+			public void apply() {
+				int methodBody = document.get().indexOf("{}") + 1;
+				assertNull("event is null before the document was modified", event);
+				try {
+					document.replace(methodBody, 0, "ignored.toString();");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+				
+			}
+		});
 		assertNull(String.valueOf(firedElementChangedEvents), event);
 	}
 	
 	@Test public void testTypeParameterAdded() throws BadLocationException, JavaModelException, InterruptedException {
-		String lookup = "NestedTypes";
-		int idx = document.get().indexOf(lookup) + "NestedTypes".length();
-		assertNull("event is null before the document was modified", event);
-		document.replace(idx, 0, "<Abc>");
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				String lookup = "NestedTypes";
+				int idx = document.get().indexOf(lookup) + "NestedTypes".length();
+				assertNull("event is null before the document was modified", event);
+				try {
+					document.replace(idx, 0, "<Abc>");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		});
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
@@ -152,11 +196,20 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	@Test public void testRemoveMethod() throws BadLocationException, JavaModelException, InterruptedException {
-		String lookup = "abstract boolean method();";
-		int idx = document.get().lastIndexOf(lookup);
-		assertNull("event is null before the document was modified", event);
-		document.replace(idx, lookup.length(), "");
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				String lookup = "abstract boolean method();";
+				int idx = document.get().lastIndexOf(lookup);
+				assertNull("event is null before the document was modified", event);
+				try {
+					document.replace(idx, lookup.length(), "");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		});
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
@@ -176,10 +229,19 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	@Test public void testAddParam() throws BadLocationException, JavaModelException, InterruptedException {
-		int idx = document.get().lastIndexOf("(");
-		assertNull("event is null before the document was modified", event);
-		document.replace(idx + 1, 0, "int foobar");
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				int idx = document.get().lastIndexOf("(");
+				assertNull("event is null before the document was modified", event);
+				try {
+					document.replace(idx + 1, 0, "int foobar");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		});
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
@@ -189,11 +251,20 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	@Test public void testAddMethod() throws BadLocationException, JavaModelException, InterruptedException {
-		String lookup = "abstract boolean method();";
-		int idx = document.get().lastIndexOf(lookup);
-		assertNull("event is null before the document was modified", event);
-		document.replace(idx + lookup.length(), 0, "abstract int foobar();");
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				String lookup = "abstract boolean method();";
+				int idx = document.get().lastIndexOf(lookup);
+				assertNull("event is null before the document was modified", event);
+				try {
+					document.replace(idx + lookup.length(), 0, "abstract int foobar();");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		});
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
@@ -203,10 +274,19 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	@Test public void testRenameMethod() throws BadLocationException, JavaModelException, InterruptedException {
-		int idx = document.get().lastIndexOf("method(");
-		assertNull("event is null before the document was modified", event);
-		document.replace(idx + "method".length(), 0, "2");
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				int idx = document.get().lastIndexOf("method(");
+				assertNull("event is null before the document was modified", event);
+				try {
+					document.replace(idx + "method".length(), 0, "2");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		});
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
@@ -216,10 +296,19 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	@Test public void testRenameInnerMethod() throws BadLocationException, JavaModelException, InterruptedException {
-		int idx = document.get().indexOf("method(");
-		assertNull("event is null before the document was modified", event);
-		document.replace(idx + "method".length(), 0, "2");
-		waitForEvent();
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				int idx = document.get().indexOf("method(");
+				assertNull("event is null before the document was modified", event);
+				try {
+					document.replace(idx + "method".length(), 0, "2");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		});
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
@@ -229,11 +318,20 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	@Test public void testRenameClass() throws BadLocationException, JavaModelException, InterruptedException {
+		waitForEvent(new Procedure0() {
+
+			public void apply() {
+				int idx = document.get().indexOf("NestedTypes");
+				assertNull("event is null before the document was modified", event);
+				try {
+					document.replace(idx, "NestedTypes".length(), "FooBar");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		});
 		String foobar = "org.eclipse.xtext.common.types.testSetups.FooBar";
-		int idx = document.get().indexOf("NestedTypes");
-		assertNull("event is null before the document was modified", event);
-		document.replace(idx, "NestedTypes".length(), "FooBar");
-		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 6, event.getDeltas().size());
@@ -293,9 +391,10 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		}
 	}
 	
-	protected void waitForEvent() throws InterruptedException {
+	protected void waitForEvent(Procedures.Procedure0 procedure) throws InterruptedException {
 		try {
 			JavaCore.addElementChangedListener(this);
+			procedure.apply();
 			// the Java reconciler is blazingly fast, it should never
 			// be necessary to increase the counter here
 			int counter = 50;
@@ -306,7 +405,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		} finally {
 			JavaCore.removeElementChangedListener(this);
 		}
-	}
+	} 
 	
 	public void elementChanged(ElementChangedEvent elementChanged) {
 		if (firedElementChangedEvents != null)
