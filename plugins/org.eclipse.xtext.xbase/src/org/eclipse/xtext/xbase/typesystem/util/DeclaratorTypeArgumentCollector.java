@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -27,6 +28,8 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -76,14 +79,41 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 		}
 		return Boolean.FALSE;
 	}
+	
+	protected Boolean addConstraintMapping(JvmTypeParameter typeParameter, ITypeReferenceOwner owner, LightweightTraversalData data) {
+		List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
+		List<LightweightTypeReference> upperBounds = Lists.newArrayList();
+		OwnedConverter converter = new OwnedConverter(owner);
+		for(JvmTypeConstraint constraint: constraints) {
+			if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
+				LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
+				upperBound.accept(this, data);
+				upperBounds.add(upperBound);
+			}
+		}
+		if (upperBounds.size() > 1) {
+			CompoundTypeReference result = new CompoundTypeReference(owner, false);
+			for(LightweightTypeReference upperBound: upperBounds) {
+				result.addComponent(upperBound);
+			}
+			data.getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(result, VarianceInfo.INVARIANT));
+		} else if (upperBounds.size() == 1) {
+			data.getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(upperBounds.get(0), VarianceInfo.INVARIANT));
+		}
+		return Boolean.FALSE;
+	}
 
 	protected Boolean doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type,
 			LightweightTraversalData data) {
 		// TODO check constraints, add validation messages if necessary - error handling does not belong here
 		if (reference.isRawType()) {
-			return Boolean.FALSE;
-		}
-		if (type instanceof JvmTypeParameterDeclarator) {
+			if (type instanceof JvmTypeParameterDeclarator) {
+				List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) type).getTypeParameters();
+				for(JvmTypeParameter typeParameter: typeParameters) {
+					addConstraintMapping(typeParameter, reference.getOwner(), data);
+				}
+			}
+		} else if (type instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) type).getTypeParameters();
 			List<LightweightTypeReference> typeArguments = reference.getTypeArguments();
 			int size = Math.min(typeArguments.size(), typeParameters.size());
