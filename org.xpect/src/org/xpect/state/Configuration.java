@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -15,6 +16,7 @@ public class Configuration {
 	private final Multimap<Class<? extends Annotation>, Pair<Class<?>, Managed<?>>> values = LinkedHashMultimap.create();
 
 	public void addFactory(Class<?> factory) {
+		Preconditions.checkNotNull(factory);
 		factories.add(factory);
 	}
 

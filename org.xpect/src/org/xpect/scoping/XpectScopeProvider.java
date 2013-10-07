@@ -32,11 +32,11 @@ import org.eclipse.xtext.util.Strings;
 import org.xpect.AbstractComponent;
 import org.xpect.Component;
 import org.xpect.XjmMethod;
-import org.xpect.XjmPackage;
 import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
 import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
+import org.xpect.XpectJavaModelPackage;
 import org.xpect.XpectPackage;
 import org.xpect.XpectTest;
 
@@ -83,7 +83,7 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 	}
 
 	private IScope getScopeForTestClassOrSuite(XpectFile xpectFile) {
-		IScope scope = delegate.getScope(xpectFile, XjmPackage.Literals.XJM_CLASS__JVM_CLASS);
+		IScope scope = delegate.getScope(xpectFile, XpectJavaModelPackage.Literals.XJM_CLASS__JVM_CLASS);
 		ResourceSet resourceSet = xpectFile.eResource().getResourceSet();
 		return new XpectJavaModelScope(resourceSet, scope);
 	}
@@ -140,9 +140,11 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 				ImportNormalizer in = new ImportNormalizer(QualifiedName.create(pkg.split("\\.")), true, false);
 				scope = new ImportScope(Collections.singletonList(in), scope, null, reference.getEReferenceType(), false);
 			}
-			ImportNormalizer in = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.emf.ResourceSet".split("\\.")), false, false);
+			ImportNormalizer in = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.emf.ResourceSet".split("\\.")),
+					false, false);
 			scope = new ImportScope(Collections.singletonList(in), scope, null, reference.getEReferenceType(), false);
-			ImportNormalizer in2 = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.workspace.Workspace".split("\\.")), false, false);
+			ImportNormalizer in2 = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.workspace.Workspace".split("\\.")),
+					false, false);
 			scope = new ImportScope(Collections.singletonList(in2), scope, null, reference.getEReferenceType(), false);
 			return scope;
 		}

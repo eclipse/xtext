@@ -10,7 +10,6 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.xpect.XjmFactory;
 import org.xpect.XjmTest;
 import org.xpect.XpectJavaModel;
 
@@ -33,8 +32,9 @@ public class XpectJavaModelFactory {
 	}
 
 	private XpectJavaModel createJavaModel(JvmDeclaredType type) {
-		XpectJavaModel result = XjmFactory.eINSTANCE.createXpectJavaModel();
-		XjmTest test = XjmFactory.eINSTANCE.createXjmTest();
+		org.xpect.XpectJavaModelFactory fact = org.xpect.XpectJavaModelFactory.eINSTANCE;
+		XpectJavaModel result = fact.createXpectJavaModel();
+		XjmTest test = fact.createXjmTest();
 		test.setJvmClass(type);
 		result.setTestOrSuite(test);
 		return result;

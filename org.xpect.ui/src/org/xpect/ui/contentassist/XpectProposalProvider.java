@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.xpect.XjmPackage;
+import org.xpect.XpectJavaModelPackage;
 import org.xpect.XpectPackage;
 
 import com.google.common.base.Function;
@@ -26,7 +26,7 @@ public class XpectProposalProvider extends AbstractXpectProposalProvider {
 	protected void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 		if (reference == XpectPackage.Literals.XPECT_TEST__TEST_CLASS_OR_SUITE)
-			reference = XjmPackage.Literals.XJM_CLASS__JVM_CLASS;
+			reference = XpectJavaModelPackage.Literals.XJM_CLASS__JVM_CLASS;
 		super.lookupCrossReference(model, reference, acceptor, filter, proposalFactory);
 	}
 

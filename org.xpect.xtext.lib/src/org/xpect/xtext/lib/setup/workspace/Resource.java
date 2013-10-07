@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.core.resources.IResource;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
 import com.google.common.collect.Lists;
 
@@ -15,7 +15,7 @@ public class Resource<R extends IResource> {
 		this.configurators.add(configurator);
 	}
 
-	protected void configure(IFileSetupContext ctx, R resource) throws IOException {
+	protected void configure(FileSetupContext ctx, R resource) throws IOException {
 		for (IResourceConfigurator<? super R> configurator : configurators)
 			configurator.configure(ctx, resource);
 	}

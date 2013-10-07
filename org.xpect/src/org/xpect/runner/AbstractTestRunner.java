@@ -12,8 +12,9 @@ import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XjmMethod;
-import org.xpect.setup.IXpectRunnerSetup;
-import org.xpect.setup.SetupContext;
+import org.xpect.state.ResolvedConfiguration;
+import org.xpect.state.Configuration;
+import org.xpect.state.StateContainer;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -26,6 +27,13 @@ public abstract class AbstractTestRunner {
 	public AbstractTestRunner(XpectFileRunner uriRunner) {
 		super();
 		this.uriRunner = uriRunner;
+	}
+
+	public abstract StateContainer getState();
+
+	protected StateContainer createState(Configuration config) {
+		StateContainer parent = getUriRunner().getState();
+		return new StateContainer(parent, new ResolvedConfiguration(parent.getConfiguration(), config));
 	}
 
 	public abstract Description createDescription();
@@ -49,21 +57,27 @@ public abstract class AbstractTestRunner {
 		return annotation != null;
 	}
 
-	public void run(RunNotifier notifier, IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
-		notifier.fireTestStarted(getDescription());
+	public void run(RunNotifier notifier) {
 		try {
+			notifier.fireTestStarted(getDescription());
 			if (isIgnore())
 				notifier.fireTestIgnored(getDescription());
 			else {
-				runInternal(setup, ctx);
+				runInternal();
 			}
 		} catch (Throwable t) {
 			notifier.fireTestFailure(new Failure(getDescription(), t));
 		} finally {
-			notifier.fireTestFinished(getDescription());
+			try {
+				getState().invalidate();
+			} catch (Throwable t) {
+				notifier.fireTestFailure(new Failure(getDescription(), t));
+			} finally {
+				notifier.fireTestFinished(getDescription());
+			}
 		}
 	}
 
-	protected abstract void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable;
+	protected abstract void runInternal() throws Throwable;
 
 }

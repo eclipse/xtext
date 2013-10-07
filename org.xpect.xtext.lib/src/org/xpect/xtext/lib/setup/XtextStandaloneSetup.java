@@ -1,13 +1,7 @@
-/*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
 package org.xpect.xtext.lib.setup;
 
 import java.io.IOException;
+
 import java.util.EnumSet;
 
 import org.eclipse.emf.common.util.URI;
@@ -24,71 +18,41 @@ import org.xpect.xtext.lib.setup.XtextStandaloneSetup.Config;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup.TestCtx;
 import org.xpect.xtext.lib.setup.XtextWorkspaceSetup.FileCtx;
 import org.xpect.xtext.lib.setup.emf.File;
+import org.xpect.setup.ThisTestClass;
+import org.xpect.setup.XpectSetup;
+import org.xpect.state.Creates;
+import org.xpect.state.Precondition;
+import org.xpect.util.EnvironmentUtil;
 import org.xpect.xtext.lib.setup.emf.ResourceFactory;
-import org.xpect.xtext.lib.setup.generic.GenericResource;
 import org.xpect.xtext.lib.util.XtextOffsetAdapter;
+import org.xpect.xtext.lib.util.XtextTargetSyntaxSupport;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
-/**
- * @author Moritz Eysholdt - Initial contribution and API
- */
 @SuppressWarnings("restriction")
 @XpectParameterAdapter(XtextOffsetAdapter.class)
-public class XtextStandaloneSetup extends AbstractXtextSetup<ClassCtx, Config, TestCtx, Config> {
+@XpectSetup({ XtextTargetSyntaxSupport.class, XtextTestObjectSetup.class, InjectorSetup.class })
+public class XtextStandaloneSetup {
 
-	protected static class ClassCtx {
+	@Precondition
+	public static void checkApplicable() {
+		EnvironmentUtil.requireEnvironment(Environment.STANDALONE_TEST);
 	}
 
-	public static class Config extends AbstractXtextSetup.AbstractConfig {
+	private final FileSetupContext ctx;
+	private final org.xpect.xtext.lib.setup.emf.ResourceSet resourceSetConfig;
 
-		private org.xpect.xtext.lib.setup.emf.ResourceSet resourceSet = null;
+	@Inject
+	private Provider<ResourceSet> resourceSetProvider;
 
-		public void add(org.xpect.xtext.lib.setup.emf.ResourceSet resourceSet) {
-			if (this.resourceSet != null)
-				throw new IllegalStateException("Only one ResourceSet per test is supported.");
-			this.resourceSet = resourceSet;
-		}
-
-		public org.xpect.xtext.lib.setup.emf.ResourceSet getResourceSet() {
-			return resourceSet;
-		}
-
-	}
-
-	public class Defaults implements ISetupInitializer<Config> {
-		private final ISetupInitializer<Config> delegate;
-
-		public Defaults(ISetupInitializer<Config> delegate) {
-			this.delegate = delegate;
-		}
-
-		protected ResourceFactory convert(GenericResource res) {
-			if (res instanceof org.xpect.xtext.lib.setup.generic.File)
-				return new File((org.xpect.xtext.lib.setup.generic.File) res);
-			else if (res instanceof org.xpect.xtext.lib.setup.generic.ThisFile)
-				return new org.xpect.xtext.lib.setup.emf.ThisFile((org.xpect.xtext.lib.setup.generic.ThisFile) res);
-			throw new IllegalStateException();
-		}
-
-		public void initialize(Config object) {
-			delegate.initialize(object);
-			if (object.getResourceSet() == null)
-				object.add(new org.xpect.xtext.lib.setup.emf.ResourceSet());
-			for (GenericResource res : object.getGenericResources())
-				object.getResourceSet().add(convert(res));
-			if (!object.getResourceSet().hasThisFile())
-				object.getResourceSet().add(new org.xpect.xtext.lib.setup.emf.ThisFile());
-		}
-	}
-
-	protected static class TestCtx extends Config {
-	}
-
-	@Override
-	public ClassCtx beforeClass(IClassSetupContext frameworkCtx) {
+	public XtextStandaloneSetup(FileSetupContext ctx, org.xpect.xtext.lib.setup.emf.ResourceSet resourceSet, Injector injector) {
+		super();
+		this.resourceSetConfig = resourceSet;
+		this.ctx = ctx;
 		JvmModelInferrerRegistry.INSTANCE.setUseRegistry(false);
-		return new ClassCtx();
+		injector.injectMembers(this);
 	}
 
 	@Override
@@ -139,15 +103,33 @@ public class XtextStandaloneSetup extends AbstractXtextSetup<ClassCtx, Config, T
 
 	public XtextResource loadThisResource(Injector injector, IFileSetupContext frameworkCtx, Config config) throws Exception {
 		ResourceSet resourceSet = injector.getInstance(ResourceSet.class);
+	}
+	
+	@Creates(ThisResource.class)
+	public XtextResource createThisResource() throws IOException {
+		ResourceSet resourceSet = resourceSetProvider.get();
 		if (resourceSet instanceof XtextResourceSet)
-			((XtextResourceSet) resourceSet).setClasspathURIContext(frameworkCtx.getTestClass());
+			((XtextResourceSet) resourceSet).setClasspathURIContext(ctx.get(Class.class, ThisTestClass.class));
 		Resource result = null;
-		for (ResourceFactory file : config.getResourceSet().getFactories()) {
-			Resource res = file.create(frameworkCtx, resourceSet);
+		for (ResourceFactory file : resourceSetConfig.getFactories()) {
+			Resource res = file.create(ctx, resourceSet);
 			if (file instanceof org.xpect.xtext.lib.setup.emf.ThisFile)
 				result = res;
 		}
+		validate(result);
 		return (XtextResource) result;
+	}
+
+	protected org.xpect.xtext.lib.setup.emf.ResourceSet getResourceSetConfig() {
+		return resourceSetConfig;
+	}
+
+	protected FileSetupContext getSetupContext() {
+		return ctx;
+	}
+
+	protected void validate(Resource result) {
+		new AssertingValidator().validate(result);
 	}
 
 }

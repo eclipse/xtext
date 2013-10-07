@@ -48,7 +48,7 @@ public class LoggingTestData {
 			return "DefaultValue";
 		}
 
-		@Creates(annotatedWith = Ann.class)
+		@Creates(Ann.class)
 		public String getAnnotatedValue() {
 			logger.logMsg("AnnotatedValue");
 			return "AnnotatedValue";
@@ -80,7 +80,7 @@ public class LoggingTestData {
 			return new LoggingManaged(logger, "DefaultManaged");
 		}
 
-		@Creates(annotatedWith = Ann.class)
+		@Creates(Ann.class)
 		public Managed<String> getAnnotatedManaged() {
 			logger.logMsg("AnnotatedManaged");
 			return new LoggingManaged(logger, "AnnotatedManaged");
@@ -128,13 +128,13 @@ public class LoggingTestData {
 			this.annotatedValue = "derived" + annotatedValue;
 		}
 
-		@Creates(annotatedWith = AnnDerived1.class)
+		@Creates(AnnDerived1.class)
 		public String getDerived1() {
 			logger.logMsg(defaultValue);
 			return defaultValue;
 		}
 
-		@Creates(annotatedWith = AnnDerived2.class)
+		@Creates(AnnDerived2.class)
 		public String getDerived2() {
 			logger.logMsg(annotatedValue);
 			return annotatedValue;

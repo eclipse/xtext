@@ -65,6 +65,20 @@ public class JvmAnnotationUtil {
 		return null;
 	}
 
+	public static List<JvmDeclaredType> getAnnotationTypeValue(JvmAnnotationReference reference) {
+		JvmTypeAnnotationValue value = getAnnotationValue(reference, null, JvmTypeAnnotationValue.class);
+		List<JvmDeclaredType> result = Lists.newArrayList();
+		if (value != null)
+			for (JvmTypeReference ref : value.getValues())
+				if (ref != null && !ref.eIsProxy() && ref.getType() instanceof JvmDeclaredType && !ref.getType().eIsProxy())
+					result.add((JvmDeclaredType) ref.getType());
+		return result;
+	}
+
+	public static List<JvmDeclaredType> getAnnotationTypeValue(JvmAnnotationTarget target, Class<? extends Annotation> ann) {
+		return getAnnotationTypeValue(getAnnotation(target, ann));
+	}
+
 	public static <A extends JvmAnnotationValue> A getAnnotationValue(JvmAnnotationReference reference, Class<A> c) {
 		return getAnnotationValue(reference, null, c);
 	}
@@ -94,6 +108,37 @@ public class JvmAnnotationUtil {
 				return true;
 		}
 		return false;
+	}
+
+	public static Annotation newInstance(final JvmAnnotationReference ref) {
+		Class<?> annotation = IJavaReflectAccess.INSTANCE.getRawType(ref.getAnnotation());
+		return (Annotation) Proxy.newProxyInstance(annotation.getClassLoader(), new Class<?>[] { annotation }, new InvocationHandler() {
+			protected Object getValue(JvmAnnotationValue value) {
+				if (value instanceof JvmStringAnnotationValue)
+					return ((JvmStringAnnotationValue) value).getValues().get(0);
+				if (value instanceof JvmBooleanAnnotationValue)
+					return ((JvmBooleanAnnotationValue) value).getValues().get(0);
+				if (value instanceof JvmIntAnnotationValue)
+					return ((JvmIntAnnotationValue) value).getValues().get(0);
+				if (value instanceof JvmTypeAnnotationValue)
+					return IJavaReflectAccess.INSTANCE.getRawType(((JvmTypeAnnotationValue) value).getValues().get(0).getType());
+
+				throw new RuntimeException("Unhandled annotation value type: " + value.eClass().getName());
+			}
+
+			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+				for (JvmAnnotationValue value : ref.getValues())
+					if (value.getValueName().equals(method.getName()))
+						return getValue(value);
+				if ("toString".equals(method.getName()))
+					return ref.toString();
+				if ("hashCode".equals(method.getName()))
+					return ref.hashCode();
+				if ("equals".equals(method.getName()))
+					return ref.equals(args[0]);
+				throw new RuntimeException("method '" + method.getName() + "' not found in " + ref.getAnnotation().getIdentifier());
+			}
+		});
 	}
 
 	public static <T> T newInstanceFromAnnotation(JvmAnnotationTarget type, Class<T> expected, Class<? extends Annotation> ann) {
@@ -170,36 +215,5 @@ public class JvmAnnotationUtil {
 				}
 		}
 		return result;
-	}
-
-	public static Annotation newInstance(final JvmAnnotationReference ref) {
-		Class<?> annotation = IJavaReflectAccess.INSTANCE.getRawType(ref.getAnnotation());
-		return (Annotation) Proxy.newProxyInstance(annotation.getClassLoader(), new Class<?>[] { annotation }, new InvocationHandler() {
-			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-				for (JvmAnnotationValue value : ref.getValues())
-					if (value.getValueName().equals(method.getName()))
-						return getValue(value);
-				if ("toString".equals(method.getName()))
-					return ref.toString();
-				if ("hashCode".equals(method.getName()))
-					return ref.hashCode();
-				if ("equals".equals(method.getName()))
-					return ref.equals(args[0]);
-				throw new RuntimeException("method '" + method.getName() + "' not found in " + ref.getAnnotation().getIdentifier());
-			}
-
-			protected Object getValue(JvmAnnotationValue value) {
-				if (value instanceof JvmStringAnnotationValue)
-					return ((JvmStringAnnotationValue) value).getValues().get(0);
-				if (value instanceof JvmBooleanAnnotationValue)
-					return ((JvmBooleanAnnotationValue) value).getValues().get(0);
-				if (value instanceof JvmIntAnnotationValue)
-					return ((JvmIntAnnotationValue) value).getValues().get(0);
-				if (value instanceof JvmTypeAnnotationValue)
-					return IJavaReflectAccess.INSTANCE.getRawType(((JvmTypeAnnotationValue) value).getValues().get(0).getType());
-
-				throw new RuntimeException("Unhandled annotation value type: " + value.eClass().getName());
-			}
-		});
 	}
 }

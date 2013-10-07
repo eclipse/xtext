@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.xpect.parameter;
 
-import java.lang.annotation.Annotation;
-import java.util.Map;
+import org.xpect.state.StateContainer;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface IParameterProvider {
-	<T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context);
+	<T> T get(Class<T> expectedType, StateContainer context);
 
 	boolean canProvide(Class<?> expectedType);
 }

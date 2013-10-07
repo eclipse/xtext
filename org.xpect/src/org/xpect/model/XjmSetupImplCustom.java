@@ -32,15 +32,15 @@ public class XjmSetupImplCustom extends XjmSetupImpl {
 		if (result != null)
 			return result;
 		Class<?> cls = getJavaClass();
-		if (cls == null)
+		if (cls == null || !IXpectSetup.class.isAssignableFrom(cls))
 			return null;
 		try {
 			result = (IXpectSetup) cls.newInstance();
 			setInstance(result);
 		} catch (InstantiationException e) {
-			logger.error(e);
+			logger.error(e.getMessage(), e);
 		} catch (IllegalAccessException e) {
-			logger.error(e);
+			logger.error(e.getMessage(), e);
 		}
 		return result;
 	}

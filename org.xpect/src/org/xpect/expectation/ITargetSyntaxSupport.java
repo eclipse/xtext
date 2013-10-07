@@ -1,5 +1,8 @@
 package org.xpect.expectation;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 import org.xpect.text.IReplacement;
 
 /**
@@ -7,6 +10,7 @@ import org.xpect.text.IReplacement;
  * @author Moritz Eysholdt
  */
 public interface ITargetSyntaxSupport {
+	@Retention(RetentionPolicy.RUNTIME)
 	@interface Annotation {
 	}
 

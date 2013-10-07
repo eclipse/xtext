@@ -19,19 +19,24 @@ import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.XpectInvocation;
 import org.xpect.parameter.AbstractOffsetProvider;
+import org.xpect.parameter.IParameterProvider;
+import org.xpect.setup.XpectSetup;
+import org.xpect.state.Creates;
+import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD })
+@XpectSetup({ XtextStandaloneSetup.class, ThisOffsetProvider.class, XtextWorkspaceSetup.class })
 public @interface ThisOffset {
 
 	public static class ThisOffsetProvider extends AbstractOffsetProvider {
 		private final XpectInvocation invocation;
 		private final XtextResource resource;
 
-		public ThisOffsetProvider(XpectInvocation invocation, XtextResource resource) {
+		public ThisOffsetProvider(XpectInvocation invocation, @ThisResource XtextResource resource) {
 			this.invocation = invocation;
 			this.resource = resource;
 		}
@@ -41,6 +46,7 @@ public @interface ThisOffset {
 		}
 
 		@Override
+		@Creates(ThisOffset.class)
 		public int getOffset() {
 			INode invNode = NodeModelUtils.getNode(invocation);
 			int invEnd = invNode.getOffset() + invNode.getLength();
@@ -52,6 +58,11 @@ public @interface ThisOffset {
 					return next.getOffset();
 			}
 			return -1;
+		}
+
+		@Creates(ThisOffset.class)
+		public IParameterProvider getProvider() {
+			return this;
 		}
 
 		public XtextResource getResource() {

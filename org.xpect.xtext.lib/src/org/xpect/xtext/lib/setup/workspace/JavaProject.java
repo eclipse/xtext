@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -38,8 +38,8 @@ public class JavaProject extends Project {
 	}
 
 	@Override
-	public IProject create(IFileSetupContext ctx, IWorkspaceRoot container) throws CoreException, IOException {
-		IProject project = super.create(ctx, container);
+	public IProject create(FileSetupContext ctx, IWorkspaceRoot container, Workspace.Instance instance) throws CoreException, IOException {
+		IProject project = super.create(ctx, container, instance);
 		IJavaProject java = JavaCore.create(project);
 		LinkedHashSet<IClasspathEntry> classPath = Sets.newLinkedHashSet(Lists.newArrayList(java.getRawClasspath()));
 		classPath.remove(JavaCore.newSourceEntry(project.getFullPath()));

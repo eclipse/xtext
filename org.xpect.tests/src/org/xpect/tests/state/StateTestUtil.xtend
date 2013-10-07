@@ -1,8 +1,8 @@
 package org.xpect.tests.state
 
 import org.junit.Assert
-import org.xpect.state.AnalyzedConfiguration
 import org.xpect.state.Configuration
+import org.xpect.state.ResolvedConfiguration
 
 class StateTestUtil {
 	def static assertEquals(Object expected, Object actual) {
@@ -14,8 +14,8 @@ class StateTestUtil {
 		Assert.assertEquals(e, a)
 	}
 
-	def static AnalyzedConfiguration newAnalyzedConfiguration((Configuration)=>void init) {
-		return new AnalyzedConfiguration(new Configuration() => init)
+	def static ResolvedConfiguration newAnalyzedConfiguration((Configuration)=>void init) {
+		return new ResolvedConfiguration(new Configuration() => init)
 	}
 
 }

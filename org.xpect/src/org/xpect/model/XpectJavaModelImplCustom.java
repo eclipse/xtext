@@ -2,9 +2,7 @@ package org.xpect.model;
 
 import static org.xpect.util.JvmAnnotationUtil.getAnnotationValue;
 
-import java.lang.annotation.Annotation;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -20,10 +18,10 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.junit.Test;
 import org.xpect.Environment;
-import org.xpect.XjmFactory;
 import org.xpect.XjmMethod;
 import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
+import org.xpect.XpectJavaModelFactory;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectSuiteClasses;
 import org.xpect.setup.IXpectSetup;
@@ -33,7 +31,6 @@ import org.xpect.util.JvmAnnotationUtil;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
@@ -47,7 +44,7 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 		if (classOrSuite != null && !classOrSuite.eIsProxy()) {
 			XjmTest cls = result.get(classOrSuite.getQualifiedName());
 			if (cls == null) {
-				cls = XjmFactory.eINSTANCE.createXjmTest();
+				cls = XpectJavaModelFactory.eINSTANCE.createXjmTest();
 				cls.setJvmClass(classOrSuite);
 				result.put(classOrSuite.getQualifiedName(), cls);
 				JvmTypeAnnotationValue typeValue = getAnnotationValue(classOrSuite, XpectSuiteClasses.class, JvmTypeAnnotationValue.class);
@@ -57,11 +54,6 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 							collectTestClasses((JvmDeclaredType) ref.getType(), result);
 			}
 		}
-	}
-
-	private List<JvmDeclaredType> getAnnotated(JvmDeclaredType type, Class<? extends Annotation> singular) {
-		return getDeclaredType(JvmAnnotationUtil.getAnnotationValue(JvmAnnotationUtil.getAnnotation(type, singular),
-				JvmTypeAnnotationValue.class));
 	}
 
 	@Override
@@ -75,15 +67,6 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 			if (instance.getEnvironments().contains(env) && clazz.isInstance(instance))
 				result.add((T) instance);
 		}
-		return result;
-	}
-
-	private List<JvmDeclaredType> getDeclaredType(JvmTypeAnnotationValue value) {
-		List<JvmDeclaredType> result = Lists.newArrayList();
-		if (value != null)
-			for (JvmTypeReference ref : value.getValues())
-				if (ref != null && !ref.eIsProxy() && ref.getType() instanceof JvmDeclaredType && !ref.getType().eIsProxy())
-					result.add((JvmDeclaredType) ref.getType());
 		return result;
 	}
 
@@ -111,10 +94,10 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 
 		Map<String, XjmSetup> cache = Maps.newLinkedHashMap();
 		for (XjmTest test : getTests())
-			for (JvmDeclaredType p : getAnnotated(test.getJvmClass(), XpectSetup.class)) {
+			for (JvmDeclaredType p : JvmAnnotationUtil.getAnnotationTypeValue(test.getJvmClass(), XpectSetup.class)) {
 				XjmSetup setup = cache.get(p.getQualifiedName());
 				if (setup == null) {
-					setup = XjmFactory.eINSTANCE.createXjmSetup();
+					setup = XpectJavaModelFactory.eINSTANCE.createXjmSetup();
 					setup.setJvmClass(p);
 					cache.put(p.getQualifiedName(), setup);
 				}
@@ -152,7 +135,7 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 				}
 
 		// only add the methods for which only one exists.
-		XjmFactory factory = XjmFactory.eINSTANCE;
+		XpectJavaModelFactory factory = XpectJavaModelFactory.eINSTANCE;
 		EMap<String, XjmMethod> name2method = super.getMethods();
 		for (Map.Entry<Pair<Boolean, String>, Collection<Pair<XjmTest, JvmOperation>>> e : xpectMethods.asMap().entrySet())
 			if (e.getValue().size() == 1) {

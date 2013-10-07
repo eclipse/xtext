@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -32,7 +32,7 @@ public class File implements ResourceFactory {
 		delegate = new org.xpect.xtext.lib.setup.generic.File(name);
 	}
 
-	public Resource create(IFileSetupContext ctx, ResourceSet resourceSet) throws IOException {
+	public Resource create(FileSetupContext ctx, ResourceSet resourceSet) throws IOException {
 		return ctx.load(resourceSet, delegate.getResolvedURI(ctx), delegate.getContents(ctx));
 	}
 

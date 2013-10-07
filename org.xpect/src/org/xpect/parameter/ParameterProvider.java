@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.xpect.parameter;
 
-import java.lang.annotation.Annotation;
-import java.util.Map;
+import org.xpect.state.StateContainer;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -23,7 +22,7 @@ public class ParameterProvider implements IParameterProvider {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
+	public <T> T get(Class<T> expectedType, StateContainer context) {
 		if (expectedType.isInstance(value))
 			return (T) value;
 		return null;

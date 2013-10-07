@@ -55,7 +55,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpect.ecore#//StringLiteral/value"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Xjm" basePackage="org" classPackageSuffix="model" fileExtensions="xjm"
+  <genPackages prefix="XpectJavaModel" basePackage="org" classPackageSuffix="model" fileExtensions="xjm"
       ecorePackage="XpectJavaModel.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="XpectJavaModel.ecore#//Environment">
       <genEnumLiterals ecoreEnumLiteral="XpectJavaModel.ecore#//Environment/STANDALONE_TEST"/>

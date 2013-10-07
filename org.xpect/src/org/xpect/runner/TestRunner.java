@@ -10,9 +10,12 @@ package org.xpect.runner;
 import java.lang.reflect.InvocationTargetException;
 
 import org.junit.runner.Description;
+import org.xpect.XjmMethod;
 import org.xpect.XjmTestMethod;
-import org.xpect.setup.IXpectRunnerSetup;
-import org.xpect.setup.SetupContext;
+import org.xpect.setup.ThisTestClass;
+import org.xpect.setup.ThisTestObject;
+import org.xpect.state.Configuration;
+import org.xpect.state.StateContainer;
 
 import com.google.common.base.Preconditions;
 
@@ -23,10 +26,21 @@ public class TestRunner extends AbstractTestRunner {
 
 	private XjmTestMethod method;
 
+	private final StateContainer state;
+
 	public TestRunner(XpectFileRunner uriRunner, XjmTestMethod method) {
 		super(uriRunner);
 		Preconditions.checkNotNull(method);
 		this.method = method;
+		this.state = createState(createConfiguration());
+	}
+
+	protected Configuration createConfiguration() {
+		Configuration config = new Configuration();
+		config.addValue(ThisTestClass.class, Class.class, this.method.getTest().getJavaClass());
+		config.addDefaultValue(XjmTestMethod.class, this.method);
+		config.addDefaultValue(XjmMethod.class, this.method);
+		return config;
 	}
 
 	public Description createDescription() {
@@ -39,26 +53,32 @@ public class TestRunner extends AbstractTestRunner {
 	}
 
 	@Override
+	public StateContainer getState() {
+		return state;
+	}
+
+	@Override
 	protected String getTitle() {
 		return method.getName();
 	}
 
 	@Override
-	protected void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
-		Object test = method.getTest().getJavaClass().newInstance();
-		ctx.setMethod(method);
-		ctx.setTestInstance(test);
+	protected void runInternal() throws Throwable {
+		Object test = state.get(Object.class, ThisTestObject.class).get();
+		// Object test = method.getTest().getJavaClass().newInstance();
+		// ctx.setMethod(method);
+		// ctx.setTestInstance(test);
 		try {
-			if (setup != null)
-				ctx.setUserTestCtx(setup.beforeTest(ctx, ctx.getUserFileCtx()));
+			// if (setup != null)
+			// ctx.setUserTestCtx(setup.beforeTest(ctx, ctx.getUserFileCtx()));
 			method.getJavaMethod().invoke(test);
 		} catch (InvocationTargetException e) {
 			throw e.getCause();
-		} finally {
-			if (setup != null)
-				setup.afterTest(ctx, ctx.getUserTestCtx());
 		}
-
+		// finally {
+		// if (setup != null)
+		// setup.afterTest(ctx, ctx.getUserTestCtx());
+		// }
 	}
 
 }

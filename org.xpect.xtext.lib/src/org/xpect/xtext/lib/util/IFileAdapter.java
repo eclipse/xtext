@@ -1,12 +1,10 @@
 package org.xpect.xtext.lib.util;
 
-import java.lang.annotation.Annotation;
-import java.util.Map;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.xpect.parameter.IParameterProvider;
+import org.xpect.state.StateContainer;
 
 public class IFileAdapter implements IParameterProvider {
 
@@ -22,7 +20,7 @@ public class IFileAdapter implements IParameterProvider {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
+	public <T> T get(Class<T> expectedType, StateContainer context) {
 		if (expectedType.isInstance(file))
 			return (T) file;
 		if (expectedType.isAssignableFrom(IPath.class))

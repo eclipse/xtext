@@ -43,9 +43,10 @@ import org.xpect.XpectPackage;
 import org.xpect.XpectTest;
 import org.xpect.services.XpectGrammarAccess;
 import org.xpect.setup.ISetupInitializer;
-import org.xpect.setup.IXpectRunnerSetup;
-import org.xpect.setup.SetupContext;
 import org.xpect.setup.SetupInitializer;
+import org.xpect.state.ResolvedConfiguration;
+import org.xpect.state.Configuration;
+import org.xpect.state.StateContainer;
 import org.xpect.text.CharSequences;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
@@ -65,6 +66,7 @@ public class XpectFileRunner implements Filterable, Sortable {
 	private final XpectRunner runner;
 	private final URI uri;
 	private final XpectFile xpectFile;
+	private final StateContainer state;
 
 	public XpectFileRunner(XpectRunner runner, URI uri) {
 		this.runner = runner;
@@ -76,6 +78,23 @@ public class XpectFileRunner implements Filterable, Sortable {
 			this.error = t;
 		}
 		this.xpectFile = file;
+		this.state = createState(createConfiguration());
+	}
+
+	public StateContainer getState() {
+		return state;
+	}
+
+	protected Configuration createConfiguration() {
+		Configuration config = new Configuration();
+		config.addDefaultValue(XpectFile.class, this.xpectFile);
+		config.addDefaultValue(ISetupInitializer.class, createSetupInitializer());
+		return config;
+	}
+
+	protected StateContainer createState(Configuration config) {
+		StateContainer parent = this.getRunner().getState();
+		return new StateContainer(parent, new ResolvedConfiguration(parent.getConfiguration(), config));
 	}
 
 	protected List<AbstractTestRunner> createChildren() {
@@ -198,36 +217,43 @@ public class XpectFileRunner implements Filterable, Sortable {
 		return resource;
 	}
 
-	public void run(RunNotifier notifier, IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
-		if (error != null) {
-			notifier.fireTestFailure(new Failure(getDescription(), error));
-		} else if (xpectFile.getTest() == null) {
-			notifier.fireTestIgnored(getDescription());
-		} else {
-			ctx.setXpectFile(xpectFile);
-			try {
-				if (setup != null)
-					ctx.setUserFileCtx(setup.beforeFile(ctx, ctx.getUserClassCtx(), createSetupInitializer()));
+	public void run(RunNotifier notifier) {
+		try {
+			if (error != null) {
+				notifier.fireTestFailure(new Failure(getDescription(), error));
+			} else if (xpectFile.getTest() == null) {
+				notifier.fireTestIgnored(getDescription());
+			} else {
+				// ctx.setXpectFile(xpectFile);
+				// if (setup != null)
+				// ctx.setUserFileCtx(setup.beforeFile(ctx,
+				// ctx.getUserClassCtx(), createSetupInitializer()));
 				if (getChildren().isEmpty()) {
 					notifier.fireTestStarted(getDescription());
 					notifier.fireTestFinished(getDescription());
 				} else
 					for (AbstractTestRunner child : getChildren())
 						try {
-							child.run(notifier, setup, ctx);
+							// child.run(notifier, setup, ctx);
+							child.run(notifier);
 						} catch (Throwable t) {
 							notifier.fireTestFailure(new Failure(getDescription(), t));
 						}
+			}
+		} catch (Throwable t) {
+			notifier.fireTestFailure(new Failure(getDescription(), t));
+		} finally {
+			try {
+				state.invalidate();
 			} catch (Throwable t) {
 				notifier.fireTestFailure(new Failure(getDescription(), t));
-			} finally {
-				try {
-					if (setup != null)
-						setup.afterFile(ctx, ctx.getUserFileCtx());
-				} catch (Throwable t) {
-					notifier.fireTestFailure(new Failure(getDescription(), t));
-				}
 			}
+			// try {
+			// if (setup != null)
+			// setup.afterFile(ctx, ctx.getUserFileCtx());
+			// } catch (Throwable t) {
+			// notifier.fireTestFailure(new Failure(getDescription(), t));
+			// }
 		}
 	}
 

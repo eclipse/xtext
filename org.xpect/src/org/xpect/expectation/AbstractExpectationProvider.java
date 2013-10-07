@@ -1,13 +1,11 @@
 package org.xpect.expectation;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
-import org.xpect.parameter.IParameterProvider;
+import org.xpect.state.StateContainer;
 import org.xpect.text.IRegion;
 
 import com.google.common.base.Preconditions;
@@ -31,7 +29,7 @@ public abstract class AbstractExpectationProvider<E> implements IParsedParameter
 	protected abstract E createExpectation(ITargetSyntaxSupport targetSyntax);
 
 	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
+	public <T> T get(Class<T> expectedType, StateContainer context) {
 		if (canProvide(expectedType))
 			return (T) createExpectation(getTargetSyntax(context));
 		return null;
@@ -45,11 +43,8 @@ public abstract class AbstractExpectationProvider<E> implements IParsedParameter
 		return Collections.<IRegion> singletonList(region);
 	}
 
-	private ITargetSyntaxSupport getTargetSyntax(Map<Class<? extends Annotation>, IParameterProvider> context) {
-		IParameterProvider provider = context.get(ITargetSyntaxSupport.Annotation.class);
-		if (provider != null)
-			return provider.get(ITargetSyntaxSupport.class, context);
-		return null;
+	private ITargetSyntaxSupport getTargetSyntax(StateContainer context) {
+		return context.get(ITargetSyntaxSupport.class, ITargetSyntaxSupport.Annotation.class).get();
 	}
 
 }

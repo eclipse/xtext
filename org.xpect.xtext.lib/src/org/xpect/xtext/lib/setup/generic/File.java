@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
 public class File extends GenericResource {
 	private String from;
@@ -17,7 +17,7 @@ public class File extends GenericResource {
 		super(name);
 	}
 
-	public InputStream getContents(IFileSetupContext ctx) throws IOException {
+	public InputStream getContents(FileSetupContext ctx) throws IOException {
 		URI source = ctx.resolve(getFrom() == null ? getName() : getFrom());
 		return ctx.getXpectFile().eResource().getResourceSet().getURIConverter().createInputStream(source);
 	}
@@ -26,11 +26,11 @@ public class File extends GenericResource {
 		return from;
 	}
 
-	public String getLocalName(IFileSetupContext ctx) {
+	public String getLocalName(FileSetupContext ctx) {
 		return getName() == null ? from : getName();
 	}
 
-	public URI getResolvedURI(IFileSetupContext ctx) {
+	public URI getResolvedURI(FileSetupContext ctx) {
 		return ctx.resolve(getLocalName(ctx));
 	}
 

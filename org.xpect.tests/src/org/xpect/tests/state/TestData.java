@@ -11,7 +11,7 @@ public class TestData {
 			return "DefaultValue";
 		}
 
-		@Creates(annotatedWith = Ann.class)
+		@Creates(Ann.class)
 		public String getAnnotatedValue() {
 			return "AnnotatedValue";
 		}
@@ -24,7 +24,7 @@ public class TestData {
 			return new ManagedImpl<String>("DefaultManaged");
 		}
 
-		@Creates(annotatedWith = Ann.class)
+		@Creates(Ann.class)
 		public Managed<String> getAnnotatedManaged() {
 			return new ManagedImpl<String>("AnnotatedManaged");
 		}

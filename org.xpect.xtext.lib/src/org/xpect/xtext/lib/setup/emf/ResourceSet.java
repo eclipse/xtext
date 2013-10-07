@@ -9,13 +9,16 @@ package org.xpect.xtext.lib.setup.emf;
 
 import java.util.List;
 
+import org.xpect.setup.XpectSetup;
+
 import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@XpectSetup(ResourceSetDefaultsSetup.class)
 public class ResourceSet {
-	private List<ResourceFactory> factories = Lists.newArrayList();
+	private final List<ResourceFactory> factories = Lists.newArrayList();
 
 	public void add(ResourceFactory file) {
 		factories.add(file);
@@ -23,13 +26,6 @@ public class ResourceSet {
 
 	public List<ResourceFactory> getFactories() {
 		return factories;
-	}
-
-	public boolean hasThisFile() {
-		for (ResourceFactory fact : factories)
-			if (fact instanceof ThisFile)
-				return true;
-		return false;
 	}
 
 }

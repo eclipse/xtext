@@ -45,7 +45,8 @@ public class XpectFileAccess {
 	protected static ResourceSet cloneResourceSet(ResourceSet rs) {
 		XtextResourceSet result = new XtextResourceSet();
 		result.setPackageRegistry(rs.getPackageRegistry());
-		result.setResourceFactoryRegistry(rs.getResourceFactoryRegistry());
+		// need delegation or nothing because of "java" protocol
+		// result.setResourceFactoryRegistry(rs.getResourceFactoryRegistry());
 		result.setURIConverter(rs.getURIConverter());
 		if (XpectRunner.testClassloader != null) {
 			result.setClasspathURIContext(XpectRunner.testClassloader);

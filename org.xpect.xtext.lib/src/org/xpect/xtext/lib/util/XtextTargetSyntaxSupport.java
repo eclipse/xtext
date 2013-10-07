@@ -5,9 +5,11 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.expectation.ITargetSyntaxSupport;
+import org.xpect.state.Creates;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
 import org.xpect.text.Text;
+import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.CommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.MLCommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.SLCommentRule;
@@ -17,7 +19,7 @@ public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
 	private final XtextResource resource;
 	private final GrammarAnalyzer grammarAnalyzer;
 
-	public XtextTargetSyntaxSupport(XtextResource resource) {
+	public XtextTargetSyntaxSupport(@ThisResource XtextResource resource) {
 		this.resource = resource;
 		this.grammarAnalyzer = new GrammarAnalyzer(resource.getResourceServiceProvider().get(IGrammarAccess.class).getGrammar());
 	}
@@ -110,6 +112,11 @@ public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
 
 	public boolean supportsMultiLineLiteral() {
 		return true;
+	}
+
+	@Creates(ITargetSyntaxSupport.Annotation.class)
+	public ITargetSyntaxSupport create() {
+		return this;
 	}
 
 }

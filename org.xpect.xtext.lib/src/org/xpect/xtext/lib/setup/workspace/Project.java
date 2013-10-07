@@ -9,7 +9,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
 @SuppressWarnings("restriction")
 public class Project extends Container<IProject> implements IResourceFactory<IProject, IWorkspaceRoot> {
@@ -24,12 +24,12 @@ public class Project extends Container<IProject> implements IResourceFactory<IPr
 		addBuilder(XtextProjectHelper.BUILDER_ID);
 	}
 
-	public IProject create(IFileSetupContext ctx, IWorkspaceRoot container) throws CoreException, IOException {
+	public IProject create(FileSetupContext ctx, IWorkspaceRoot container, Workspace.Instance instance) throws CoreException, IOException {
 		IProject project = container.getProject(description.getName());
 		project.create(description, new NullProgressMonitor());
 		project.open(new NullProgressMonitor());
 		configure(ctx, project);
-		createMembers(ctx, project);
+		createMembers(ctx, project, instance);
 		return project;
 	}
 

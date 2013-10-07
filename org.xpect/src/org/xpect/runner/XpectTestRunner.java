@@ -11,18 +11,21 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.runner.Description;
+import org.xpect.XjmMethod;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
 import org.xpect.model.XpectInvocationImplCustom;
 import org.xpect.parameter.IParameterProvider;
-import org.xpect.setup.IXpectRunnerSetup;
-import org.xpect.setup.SetupContext;
+import org.xpect.parameter.ParameterProvider;
+import org.xpect.setup.ThisTestClass;
+import org.xpect.setup.ThisTestObject;
+import org.xpect.state.Configuration;
+import org.xpect.state.StateContainer;
 
 import com.google.common.base.Preconditions;
 
@@ -32,29 +35,50 @@ import com.google.common.base.Preconditions;
 public class XpectTestRunner extends AbstractTestRunner {
 
 	private final XpectInvocation invocation;
+	private final StateContainer state;
 
 	public XpectTestRunner(XpectFileRunner uriRunner, XpectInvocation invocation) {
 		super(uriRunner);
 		Preconditions.checkNotNull(invocation);
 		this.invocation = invocation;
+		this.state = createState(createConfiguration());
 	}
 
-	protected List<IParameterProvider> collectParameters(Map<Class<? extends Annotation>, IParameterProvider> setupValues) {
+	@Override
+	public StateContainer getState() {
+		return state;
+	}
+
+	protected Configuration createConfiguration() {
+		Configuration config = new Configuration();
+		config.addValue(ThisTestClass.class, Class.class, this.invocation.getMethod().getTest().getJavaClass());
+		config.addDefaultValue(XpectInvocation.class, this.invocation);
+		config.addDefaultValue(XjmXpectMethod.class, this.invocation.getMethod());
+		config.addDefaultValue(XjmMethod.class, this.invocation.getMethod());
+		return config;
+	}
+
+	protected List<IParameterProvider> collectParameters() {
 		XjmXpectMethod method = getMethod();
 		int count = method.getParameterCount();
 		List<IParameterProvider> result = Arrays.asList(new IParameterProvider[count]);
 		EList<IParameterProvider> parameters = getInvocation().getParameters();
+		Annotation[][] annotations = method.getJavaMethod().getParameterAnnotations();
+		Class<?>[] parameterTypes = method.getJavaMethod().getParameterTypes();
 		for (int i = 0; i < count; i++) {
 			if (parameters.get(i) != null)
 				result.set(i, parameters.get(i));
 			else {
-				for (Annotation ann : method.getJavaMethod().getParameterAnnotations()[i]) {
-					IParameterProvider provider = setupValues.get(ann.annotationType());
-					if (provider != null) {
-						Class<?> expectedType = method.getJavaMethod().getParameterTypes()[i];
-						result.set(i, ((XpectInvocationImplCustom) getInvocation()).adaptParameter(provider, expectedType));
-						continue;
-					}
+				Class<?> expectedType = parameterTypes[i];
+				IParameterProvider provider = state.tryGet(IParameterProvider.class, (Object[]) annotations[i]);
+				if (provider == null) {
+					Object value = state.tryGet(expectedType, (Object[]) annotations[i]);
+					if (value != null)
+						provider = new ParameterProvider(value);
+				}
+				if (provider != null) {
+					result.set(i, ((XpectInvocationImplCustom) getInvocation()).adaptParameter(provider, expectedType));
+					continue;
 				}
 			}
 		}
@@ -71,14 +95,13 @@ public class XpectTestRunner extends AbstractTestRunner {
 			return Description.createTestDescription(javaClass, uri.toString());
 	}
 
-	protected Object[] createParameterValues(List<IParameterProvider> proposedParameters,
-			Map<Class<? extends Annotation>, IParameterProvider> setupValues) {
+	protected Object[] createParameterValues(List<IParameterProvider> proposedParameters) {
 		XjmXpectMethod method = getMethod();
 		Object[] params = new Object[method.getParameterCount()];
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			Class<?>[] expectedTypes = method.getJavaMethod().getParameterTypes();
 			if (proposedParameters.get(i) != null)
-				params[i] = proposedParameters.get(i).get(expectedTypes[i], setupValues);
+				params[i] = proposedParameters.get(i).get(expectedTypes[i], state);
 		}
 		return params;
 	}
@@ -101,24 +124,26 @@ public class XpectTestRunner extends AbstractTestRunner {
 	}
 
 	@Override
-	protected void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
-		Object test = getInvocation().getMethod().getTest().getJavaClass().newInstance();
-		ctx.setXpectInvocation(getInvocation());
-		ctx.setMethod(getMethod());
-		ctx.setTestInstance(test);
+	protected void runInternal() throws Throwable {
+		Object test = state.get(Object.class, ThisTestObject.class).get();
+		// Object test =
+		// getInvocation().getMethod().getTest().getJavaClass().newInstance();
+		// ctx.setXpectInvocation(getInvocation());
+		// ctx.setMethod(getMethod());
+		// ctx.setTestInstance(test);
 		try {
-			if (setup != null)
-				ctx.setUserTestCtx(setup.beforeTest(ctx, ctx.getUserFileCtx()));
-			List<IParameterProvider> parameterProviders = collectParameters(ctx.getParamValues());
-			Object[] params = createParameterValues(parameterProviders, ctx.getParamValues());
+			// if (setup != null)
+			// ctx.setUserTestCtx(setup.beforeTest(ctx, ctx.getUserFileCtx()));
+			List<IParameterProvider> parameterProviders = collectParameters();
+			Object[] params = createParameterValues(parameterProviders);
 			getMethod().getJavaMethod().invoke(test, params);
 		} catch (InvocationTargetException e) {
 			throw e.getCause();
-		} finally {
-			if (setup != null)
-				setup.afterTest(ctx, ctx.getUserTestCtx());
 		}
-
+		// finally {
+		// if (setup != null)
+		// setup.afterTest(ctx, ctx.getUserTestCtx());
+		// }
 	}
 
 }

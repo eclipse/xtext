@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.runtime.CoreException;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
 import com.google.common.collect.Lists;
 
@@ -17,9 +17,9 @@ public class Container<C extends IContainer> extends Resource<C> {
 		this.memberFactories.add(factory);
 	}
 
-	protected void createMembers(IFileSetupContext ctx, C container) throws IOException, CoreException {
+	protected void createMembers(FileSetupContext ctx, C container, Workspace.Instance instance) throws IOException, CoreException {
 		for (IResourceFactory<?, ? super C> factory : memberFactories)
-			factory.create(ctx, container);
+			factory.create(ctx, container, instance);
 	}
 
 	public List<IResourceFactory<?, ? super C>> getMemberFactories() {

@@ -4,7 +4,7 @@ import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.StringInputStream;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
 public class ThisFile extends GenericResource {
 
@@ -16,16 +16,16 @@ public class ThisFile extends GenericResource {
 		super(name);
 	}
 
-	public InputStream getContents(IFileSetupContext ctx) {
+	public InputStream getContents(FileSetupContext ctx) {
 		return new StringInputStream(ctx.getXpectFile().getDocument());
 	}
 
-	public String getLocalName(IFileSetupContext ctx) {
-		return getName() == null ? ctx.getXpectFile().eResource().getURI().lastSegment() : getName();
+	public String getLocalName(FileSetupContext ctx) {
+		return getName() == null ? ctx.getXpectFileURI().lastSegment() : getName();
 	}
 
-	public URI getResolvedURI(IFileSetupContext ctx) {
-		return getName() == null ? ctx.getXpectFile().eResource().getURI() : ctx.resolve(getName());
+	public URI getResolvedURI(FileSetupContext ctx) {
+		return getName() == null ? ctx.getXpectFileURI() : ctx.resolve(getName());
 	}
 
 }

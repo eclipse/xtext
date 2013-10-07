@@ -38,11 +38,14 @@
         eType="#//XjmSetup" transient="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
         eType="#//XjmMethod" containment="true" resolveProxies="false" eOpposite="#//XjmMethod/test"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="factories" upperBound="-1"
+        eType="#//XjmFactory" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XjmSetup" eSuperTypes="#//XjmClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instance" eType="#//XpectSetup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XjmFactory" eSuperTypes="#//XjmClass"/>
   <eClassifiers xsi:type="ecore:EClass" name="XjmMethod" abstract="true">
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="#//XjmTest"
@@ -60,6 +63,8 @@
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiParameterProviders"
         upperBound="-1" eType="#//MultiParameterProvider" changeable="false" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="factories" upperBound="-1"
+        eType="#//XjmFactory" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NameToMethodEntry" instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

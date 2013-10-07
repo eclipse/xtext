@@ -1,10 +1,12 @@
 package org.xpect.state;
 
-import java.lang.annotation.Annotation;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Creates {
-	Class<? extends Annotation> value() default Default.class;
+@Target(ElementType.METHOD)
+public @interface Precondition {
+
 }

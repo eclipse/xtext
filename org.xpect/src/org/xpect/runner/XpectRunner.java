@@ -18,12 +18,18 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
+import org.xpect.XjmFactory;
+import org.xpect.XjmMethod;
+import org.xpect.XjmTest;
+import org.xpect.XjmXpectMethod;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
-import org.xpect.setup.IXpectRunnerSetup;
-import org.xpect.setup.SetupContext;
+import org.xpect.setup.ThisRootTestClass;
+import org.xpect.setup.ThisTestObject.TestObjectSetup;
+import org.xpect.state.ResolvedConfiguration;
+import org.xpect.state.Configuration;
+import org.xpect.state.StateContainer;
 import org.xpect.util.AnnotationUtil;
-import org.xpect.util.EnvironmentUtil;
 import org.xpect.util.XpectJavaModelFactory;
 
 import com.google.common.collect.Lists;
@@ -39,6 +45,7 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	private final XpectJavaModel xpectJavaModel;
 	private final IXpectURIProvider uriProvider;
 	private final Injector xpectInjector;
+	private final StateContainer state;
 	public static ClassLoader testClassloader = null;
 	public static XpectRunner INSTANCE = null;
 
@@ -49,6 +56,32 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		this.uriProvider = findUriProvider(testClass);
 		this.xpectInjector = findXpectInjector();
 		this.xpectJavaModel = this.xpectInjector.getInstance(XpectJavaModelFactory.class).createJavaModel(testClass);
+		this.state = createState(createConfiguration());
+	}
+
+	public StateContainer getState() {
+		return state;
+	}
+
+	protected Configuration createConfiguration() {
+		Configuration config = new Configuration();
+		config.addValue(ThisRootTestClass.class, super.getTestClass().getJavaClass());
+		config.addFactory(TestObjectSetup.class);
+		config.addDefaultValue(IXpectURIProvider.class, this.uriProvider);
+		config.addDefaultValue(XpectJavaModel.class, this.xpectJavaModel);
+		for (XjmTest test : this.xpectJavaModel.getTests()) {
+			for (XjmFactory fact : test.getFactories())
+				config.addFactory(fact.getJavaClass());
+			for (XjmMethod method : test.getMethods())
+				if (method instanceof XjmXpectMethod)
+					for (XjmFactory fact : ((XjmXpectMethod) method).getFactories())
+						config.addFactory(fact.getJavaClass());
+		}
+		return config;
+	}
+
+	protected StateContainer createState(Configuration config) {
+		return new StateContainer(new ResolvedConfiguration(config));
 	}
 
 	protected Injector getXpectInjector() {
@@ -77,20 +110,6 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		for (URI uri : getFiles())
 			result.add(createChild(clazz, uri));
 		return result;
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected IXpectRunnerSetup<Object, Object, Object, Object> createSetup() {
-		List<IXpectRunnerSetup> setups = xpectJavaModel.getSetups(IXpectRunnerSetup.class, EnvironmentUtil.ENVIRONMENT);
-		if (setups.isEmpty())
-			return null;
-		if (setups.size() != 1)
-			throw new IllegalStateException("For now, only one setup per test/suite is supported.");
-		return setups.get(0);
-	}
-
-	protected SetupContext createSetupContext(IXpectRunnerSetup<Object, Object, Object, Object> setup) {
-		return new SetupContext();
 	}
 
 	@Override
@@ -123,26 +142,42 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	}
 
 	@Override
-	protected void runChild(XpectFileRunner child, RunNotifier notifier) {
-		IXpectRunnerSetup<Object, Object, Object, Object> setup = createSetup();
-		SetupContext ctx = createSetupContext(setup);
-		ctx.setXpectJavaModel(xpectJavaModel);
-		ctx.setAllFiles(getFiles());
-		ctx.setTestClass(getTestClass().getJavaClass());
-		ctx.setUriProvider(uriProvider);
+	public void run(RunNotifier notifier) {
 		try {
-			if (setup != null)
-				setup.beforeClass(ctx);
-			child.run(notifier, setup, ctx);
-		} catch (Throwable t) {
-			notifier.fireTestFailure(new Failure(getDescription(), t));
+			super.run(notifier);
 		} finally {
 			try {
-				if (setup != null)
-					setup.afterClass(ctx, ctx.getUserClassCtx());
+				state.invalidate();
 			} catch (Throwable t) {
 				notifier.fireTestFailure(new Failure(getDescription(), t));
 			}
 		}
+	}
+
+	@Override
+	protected void runChild(XpectFileRunner child, RunNotifier notifier) {
+		// IXpectRunnerSetup<Object, Object, Object, Object> setup =
+		// createSetup();
+		// SetupContext ctx = createSetupContext(setup);
+		// ctx.setXpectJavaModel(xpectJavaModel);?
+		// ctx.setAllFiles(getFiles());
+		// ctx.setTestClass(getTestClass().getJavaClass());
+		// ctx.setUriProvider(uriProvider);
+		try {
+			// if (setup != null)
+			// setup.beforeClass(ctx);
+			// child.run(notifier, setup, ctx);
+			child.run(notifier);
+		} catch (Throwable t) {
+			notifier.fireTestFailure(new Failure(child.getDescription(), t));
+		}
+		// finally {
+		// try {
+		// if (setup != null)
+		// setup.afterClass(ctx, ctx.getUserClassCtx());
+		// } catch (Throwable t) {
+		// notifier.fireTestFailure(new Failure(getDescription(), t));
+		// }
+		// }
 	}
 }

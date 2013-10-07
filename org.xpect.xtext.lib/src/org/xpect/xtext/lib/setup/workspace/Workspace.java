@@ -3,7 +3,9 @@ package org.xpect.xtext.lib.setup.workspace;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -14,32 +16,76 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.setup.XpectSetup;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
+@XpectSetup(WorkspaceDefaultsSetup.class)
 public class Workspace extends Container<IWorkspaceRoot> {
+
+	public static class Instance {
+		private IFile thisFile;
+		private IProject thisProject;
+		private IWorkspace workspace;
+
+		public IFile getThisFile() {
+			return thisFile;
+		}
+
+		public IProject getThisProject() {
+			return thisProject;
+		}
+
+		public IWorkspace getWorkspace() {
+			return workspace;
+		}
+
+		public void setThisFile(IFile thisFile) {
+			this.thisFile = thisFile;
+		}
+
+		public void setThisProject(IProject thisProject) {
+			this.thisProject = thisProject;
+		}
+
+		public void setWorkspace(IWorkspace workspace) {
+			this.workspace = workspace;
+		}
+	}
 
 	public Workspace() {
 	}
 
-	public void cleanWorkspace() throws CoreException {
+	public void cleanWorkspace() {
 		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 		for (int i = projects.length - 1; i >= 0; i--)
-			projects[i].delete(true, new NullProgressMonitor());
+			try {
+				projects[i].delete(true, new NullProgressMonitor());
+			} catch (CoreException e) {
+				throw new RuntimeException(e);
+			}
 	}
 
-	public void configureWorkspace(final IFileSetupContext ctx) throws Exception {
-		new WorkspaceModifyOperation() {
-			@Override
-			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-				try {
-					configure(ctx, root);
-					createMembers(ctx, root);
-				} catch (IOException e) {
-					throw new CoreException(new Status(IStatus.ERROR, "", "Error initializing test workspace", e));
+	public Workspace.Instance configureWorkspace(final FileSetupContext ctx) {
+		final Instance instance = new Instance();
+		try {
+			new WorkspaceModifyOperation() {
+				@Override
+				protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+					IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+					try {
+						configure(ctx, root);
+						createMembers(ctx, root, instance);
+					} catch (IOException e) {
+						throw new CoreException(new Status(IStatus.ERROR, "", "Error initializing test workspace", e));
+					}
 				}
-			}
-		}.run(new NullProgressMonitor());
+			}.run(new NullProgressMonitor());
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+		return instance;
 	}
 
 	@SuppressWarnings("unchecked")

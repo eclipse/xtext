@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 import org.xpect.xtext.lib.util.IFileUtil;
 
 public class File implements IResourceFactory<IFile, IContainer> {
@@ -23,7 +23,7 @@ public class File implements IResourceFactory<IFile, IContainer> {
 		delegate = new org.xpect.xtext.lib.setup.generic.File(name);
 	}
 
-	public IFile create(IFileSetupContext ctx, IContainer container) throws IOException {
+	public IFile create(FileSetupContext ctx, IContainer container, Workspace.Instance instance) throws IOException {
 		return IFileUtil.create(container, delegate.getLocalName(ctx), delegate.getContents(ctx));
 	}
 

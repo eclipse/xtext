@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.util;
 
-import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -28,6 +26,7 @@ import org.xpect.parameter.AbstractOffsetProvider;
 import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterProvider;
+import org.xpect.state.StateContainer;
 import org.xpect.text.IRegion;
 import org.xpect.xtext.lib.setup.ThisResource;
 
@@ -168,8 +167,8 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 		}
 
 		@SuppressWarnings("unchecked")
-		public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
-			XtextResource xtextResource = context.get(ThisResource.class).get(XtextResource.class, context);
+		public <T> T get(Class<T> expectedType, StateContainer context) {
+			XtextResource xtextResource = context.get(XtextResource.class, ThisResource.class).get();
 			EObject result = find(xtextResource, getOffset(), expectedType);
 			if (expectedType.isInstance(result))
 				return (T) result;
@@ -269,8 +268,8 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 		}
 
 		@SuppressWarnings("unchecked")
-		public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
-			XtextResource xtextResource = context.get(ThisResource.class).get(XtextResource.class, context);
+		public <T> T get(Class<T> expectedType, StateContainer context) {
+			XtextResource xtextResource = context.get(XtextResource.class, ThisResource.class).get();
 			return (T) find(xtextResource, getOffset());
 		}
 
@@ -311,8 +310,8 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 		}
 
 		@SuppressWarnings("unchecked")
-		public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
-			XtextResource xtextResource = context.get(ThisResource.class).get(XtextResource.class, context);
+		public <T> T get(Class<T> expectedType, StateContainer context) {
+			XtextResource xtextResource = context.get(XtextResource.class, ThisResource.class).get();
 			return (T) NodeModelUtils.findLeafNodeAtOffset(xtextResource.getParseResult().getRootNode(), getOffset());
 		}
 

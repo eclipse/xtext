@@ -4,16 +4,18 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.util.IAcceptor;
-import org.xpect.state.AnalyzedConfiguration.DerivedValue;
-import org.xpect.state.AnalyzedConfiguration.Factory;
-import org.xpect.state.AnalyzedConfiguration.PrimaryValue;
-import org.xpect.state.AnalyzedConfiguration.Value;
+import org.xpect.state.ResolvedConfiguration.DerivedValue;
+import org.xpect.state.ResolvedConfiguration.Factory;
+import org.xpect.state.ResolvedConfiguration.PrimaryValue;
+import org.xpect.state.ResolvedConfiguration.Value;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -78,11 +80,11 @@ public class StateContainer {
 		}
 	}
 
-	private final AnalyzedConfiguration config;
+	private final ResolvedConfiguration config;
 
 	private final State state;
 
-	public StateContainer(AnalyzedConfiguration config) {
+	public StateContainer(ResolvedConfiguration config) {
 		this.config = config;
 		this.state = new State();
 	}
@@ -90,11 +92,11 @@ public class StateContainer {
 	public StateContainer(IAcceptor<Configuration> config) {
 		Configuration cfg = new Configuration();
 		config.accept(cfg);
-		this.config = new AnalyzedConfiguration(cfg);
+		this.config = new ResolvedConfiguration(cfg);
 		this.state = new State();
 	}
 
-	public StateContainer(StateContainer parent, AnalyzedConfiguration config) {
+	public StateContainer(StateContainer parent, ResolvedConfiguration config) {
 		this.config = config;
 		this.state = parent.state;
 		if (parent.config != this.config.getParent())
@@ -104,7 +106,7 @@ public class StateContainer {
 	public StateContainer(StateContainer parent, IAcceptor<Configuration> config) {
 		Configuration cfg = new Configuration();
 		config.accept(cfg);
-		this.config = new AnalyzedConfiguration(cfg);
+		this.config = new ResolvedConfiguration(cfg);
 		this.state = parent.state;
 		if (parent.config != this.config.getParent())
 			throw new IllegalStateException("Parent configs must be the same");
@@ -184,6 +186,35 @@ public class StateContainer {
 		return new ValueInstance(key, value);
 	}
 
+	public <T> Managed<T> get(Class<T> expectedType, Object... annotations) {
+		return get(expectedType, true, annotations);
+	}
+
+	public <T> T tryGet(Class<T> expectedType, Object... annotations) {
+		Managed<T> managed = get(expectedType, false, annotations);
+		if (managed != null)
+			return managed.get();
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected <T> Managed<T> get(Class<T> expectedType, boolean throwException, Object... annotations) {
+		if (expectedType == StateContainer.class)
+			return (Managed<T>) new ManagedInstance(null, new ManagedImpl<T>((T) this));
+		Class<? extends Annotation> annotatedWith = getAnnotation(annotations);
+		Value value = config.getValue(annotatedWith, expectedType);
+		if (value == null) {
+			if (throwException)
+				throw new IllegalStateException("Unknown key @" + annotatedWith.getName() + " " + expectedType.getName());
+			else
+				return null;
+		}
+		Instance instance = state.value2instance.get(value);
+		if (instance == null)
+			state.value2instance.put(value, instance = createInstance(value));
+		return (Managed<T>) instance;
+	}
+
 	@SuppressWarnings("unchecked")
 	protected Class<? extends Annotation> getAnnotation(Object... annotations) {
 		if (annotations.length == 0)
@@ -196,16 +227,8 @@ public class StateContainer {
 		throw new IllegalStateException();
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> Managed<T> get(Class<T> expectedType, Object... annotations) {
-		Class<? extends Annotation> annotatedWith = getAnnotation(annotations);
-		Value value = config.getValue(annotatedWith, expectedType);
-		if (value == null)
-			throw new IllegalStateException("Unknown key @" + annotatedWith.getName() + " " + expectedType.getName());
-		Instance instance = state.value2instance.get(value);
-		if (instance == null)
-			state.value2instance.put(value, instance = createInstance(value));
-		return (Managed<T>) instance;
+	public ResolvedConfiguration getConfiguration() {
+		return config;
 	}
 
 	protected FactoryInstance getFactory(Factory factory) {
@@ -271,5 +294,26 @@ public class StateContainer {
 			state.value2instance.remove(inst.key);
 		for (FactoryInstance fact : factories)
 			state.factory2instance.remove(fact.factory);
+	}
+
+	@Override
+	public String toString() {
+		List<String> values = Lists.newArrayList();
+		List<String> factories = Lists.newArrayList();
+		for (Map.Entry<Value, Instance> e : state.value2instance.entrySet())
+			values.add(e.getKey() + " -> " + e.getValue().toString().replace("\n", "\n  "));
+		for (Map.Entry<Factory, FactoryInstance> e : state.factory2instance.entrySet())
+			factories.add(e.getKey() + " -> " + e.getValue().toString().replace("\n", "\n  "));
+		Collections.sort(values);
+		Collections.sort(factories);
+		StringBuilder result = new StringBuilder();
+		result.append(getClass().getSimpleName());
+		result.append(" {\n  Values {\n    ");
+		result.append(Joiner.on("\n").join(values).replace("\n", "\n    "));
+		result.append("\n  } Factories {\n    ");
+		result.append(Joiner.on("\n").join(factories).replace("\n", "\n    "));
+		result.append("\n  } Configuration {\n    ");
+		result.append(config.toString().replace("\n", "\n    "));
+		return result.toString();
 	}
 }

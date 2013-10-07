@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
+import org.xpect.xtext.lib.setup.FileSetupContext;
 
 public abstract class GenericResource {
 	private final String name;
@@ -17,14 +17,14 @@ public abstract class GenericResource {
 		this.name = name;
 	}
 
-	public abstract InputStream getContents(IFileSetupContext ctx) throws IOException;
+	public abstract InputStream getContents(FileSetupContext ctx) throws IOException;
 
-	public abstract String getLocalName(IFileSetupContext ctx);
+	public abstract String getLocalName(FileSetupContext ctx);
 
 	public String getName() {
 		return name;
 	}
 
-	public abstract URI getResolvedURI(IFileSetupContext ctx);
+	public abstract URI getResolvedURI(FileSetupContext ctx);
 
 }

@@ -1,8 +1,12 @@
 package org.xpect.state;
 
 import java.lang.annotation.Annotation;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,10 +16,13 @@ import java.util.Set;
 
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.xpect.setup.IXpectSetup;
+import org.xpect.setup.XpectSetup;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -23,7 +30,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
-public class AnalyzedConfiguration {
+public class ResolvedConfiguration {
 
 	public static class DerivedValue extends Value {
 		private Factory factory;
@@ -38,7 +45,7 @@ public class AnalyzedConfiguration {
 		}
 
 		public Class<? extends Annotation> getAnnotatedWith() {
-			return method.getAnnotation(Creates.class).annotatedWith();
+			return method.getAnnotation(Creates.class).value();
 		}
 
 		public Factory getFactory() {
@@ -83,7 +90,7 @@ public class AnalyzedConfiguration {
 		public Factory(Constructor<?> constructor, List<Value> in, Collection<DerivedValue> out) {
 			super();
 			this.constructor = constructor;
-			this.in = Collections.unmodifiableList(in);
+			this.in = in == null ? null : Collections.unmodifiableList(in);
 			this.out = Collections.unmodifiableCollection(out);
 		}
 
@@ -107,6 +114,19 @@ public class AnalyzedConfiguration {
 			return in != null;
 		}
 
+		@Override
+		public String toString() {
+			List<String> f = Lists.newArrayList();
+			if (isResolved())
+				for (Value in : getIn())
+					f.add("  in " + in);
+			else
+				f.add("unresolved!");
+			for (Value out : getOut())
+				f.add("  out " + out);
+			Collections.sort(f);
+			return getConstructor() + "{\n  " + Joiner.on('\n').join(f) + "\n}";
+		}
 	}
 
 	public static class PrimaryValue extends Value {
@@ -149,41 +169,44 @@ public class AnalyzedConfiguration {
 		public abstract Class<?> getType();
 	}
 
+	private final Map<Class<?>, List<Throwable>> deactivatedFactories;
 	private final List<Throwable> errors;
 	private final List<Class<?>> overwrittenFactories;
-	private final AnalyzedConfiguration parent;
+	private final ResolvedConfiguration parent;
 	private final List<Factory> resolvedFactories;
 	private final List<Factory> unresolvedFactories;
 	private final Multimap<Class<? extends Annotation>, Value> values;
 
-	public AnalyzedConfiguration(AnalyzedConfiguration parent, Configuration configuration) {
+	public ResolvedConfiguration(ResolvedConfiguration parent, Configuration configuration) {
 		this.parent = parent;
 		this.errors = Lists.newArrayList();
-		Set<Class<?>> allFactoryClasses = collectAllFactorClasses(parent, configuration);
+		Set<Class<?>> allFactoryClasses = collectAllFactoryClasses(parent, configuration);
 		Set<Class<?>> overwrittenFactoryClasses = collectOverwrittenClasses(allFactoryClasses);
 		Set<Class<?>> unoverwrittenFactoryClasses = Sets.difference(allFactoryClasses, overwrittenFactoryClasses);
-		Multimap<Class<? extends Annotation>, Value> allValues = collectAllValues(unoverwrittenFactoryClasses, configuration);
+		Map<Class<?>, List<Throwable>> deactivatedFactoryClasses = collectDeactivatedClasses(unoverwrittenFactoryClasses);
+		Set<Class<?>> activeFactoryClasses = Sets.difference(unoverwrittenFactoryClasses, deactivatedFactoryClasses.keySet());
+		Multimap<Class<? extends Annotation>, Value> allValues = collectAllValues(activeFactoryClasses, configuration);
 		Multimap<Class<?>, DerivedValue> annotatio2value = collectDerivedValuesByFactory(allValues.values());
 		Set<Factory> allFactories = collectAllFactories(allValues, annotatio2value);
 		Set<Factory> resolvedFactories = collectResolvedFactories(allFactories);
 		Multimap<Class<? extends Annotation>, Value> resolvedValues = collectValues(allValues, resolvedFactories);
+		this.deactivatedFactories = ImmutableMap.copyOf(deactivatedFactoryClasses);
 		this.overwrittenFactories = ImmutableList.copyOf(overwrittenFactoryClasses);
 		this.resolvedFactories = ImmutableList.copyOf(resolvedFactories);
 		this.unresolvedFactories = ImmutableList.copyOf(Sets.difference(allFactories, resolvedFactories));
 		this.values = ImmutableMultimap.copyOf(resolvedValues);
 	}
 
-	public AnalyzedConfiguration(Configuration configuration) {
+	public ResolvedConfiguration(Configuration configuration) {
 		this(null, configuration);
 	}
 
-	protected Set<Class<?>> collectAllFactorClasses(AnalyzedConfiguration parent, Configuration cfg) {
-		Set<Class<?>> result = Sets.newLinkedHashSet();
-		if (parent != null)
-			for (Factory fact : parent.getUnresolvedFactories())
-				result.add(fact.getOwner());
-		result.addAll(cfg.getFactories());
-		return result;
+	protected void checkRetention(Class<? extends Annotation> annotation) {
+		Retention retention = annotation.getAnnotation(Retention.class);
+		if (retention == null)
+			throw new IllegalStateException("@Retention annotation missing on @" + annotation.getName());
+		if (retention.value() != RetentionPolicy.RUNTIME)
+			throw new IllegalStateException("RetentionPolicy on @" + annotation.getName() + " must be RUNTIME");
 	}
 
 	protected Set<Factory> collectAllFactories(Multimap<Class<? extends Annotation>, Value> all, Multimap<Class<?>, DerivedValue> derived) {
@@ -203,11 +226,52 @@ public class AnalyzedConfiguration {
 		return result;
 	}
 
+	protected Set<Class<?>> collectAllFactoryClasses(ResolvedConfiguration parent, Configuration cfg) {
+		Set<Class<?>> result = Sets.newLinkedHashSet();
+		if (parent != null)
+			for (Factory fact : parent.getUnresolvedFactories())
+				result.add(fact.getOwner());
+		for (Class<?> factory : cfg.getFactories())
+			collectAllFactoryClasses(factory, result);
+		return result;
+	}
+
+	protected void collectAllFactoryClasses(Class<?> clazz, Set<Class<?>> result) {
+		if (IXpectSetup.class.isAssignableFrom(clazz))
+			return;
+		if (!result.add(clazz))
+			return;
+		collectAllFactoryClasses(clazz.getAnnotation(XpectSetup.class), result);
+		for (Constructor<?> constructor : clazz.getConstructors()) {
+			for (Class<?> parameter : constructor.getParameterTypes())
+				collectAllFactoryClasses(parameter.getAnnotation(XpectSetup.class), result);
+			for (Annotation[] annotations : constructor.getParameterAnnotations())
+				for (Annotation annotation : annotations)
+					collectAllFactoryClasses(annotation.annotationType().getAnnotation(XpectSetup.class), result);
+		}
+		for (Method method : clazz.getMethods()) {
+			for (Class<?> parameter : method.getParameterTypes())
+				collectAllFactoryClasses(parameter.getAnnotation(XpectSetup.class), result);
+			for (Annotation[] annotations : method.getParameterAnnotations())
+				for (Annotation annotation : annotations)
+					collectAllFactoryClasses(annotation.annotationType().getAnnotation(XpectSetup.class), result);
+		}
+	}
+
+	protected void collectAllFactoryClasses(XpectSetup annotation, Set<Class<?>> result) {
+		if (annotation != null)
+			for (Class<?> clazz : annotation.value())
+				collectAllFactoryClasses(clazz, result);
+	}
+
 	protected Multimap<Class<? extends Annotation>, Value> collectAllValues(Collection<Class<?>> factories2, Configuration config) {
 		Multimap<Class<? extends Annotation>, Value> annotatio2value = LinkedHashMultimap.create();
+		annotatio2value.put(Default.class, new PrimaryValue(Default.class, StateContainer.class, new ManagedImpl<Object>(null)));
 		for (Map.Entry<Class<? extends Annotation>, Collection<Pair<Class<?>, Managed<?>>>> e : config.getValues().asMap().entrySet())
-			for (Pair<Class<?>, Managed<?>> value : e.getValue())
+			for (Pair<Class<?>, Managed<?>> value : e.getValue()) {
+				checkRetention(e.getKey());
 				annotatio2value.put(e.getKey(), new PrimaryValue(e.getKey(), value.getFirst(), value.getSecond()));
+			}
 		for (Class<?> factory : factories2) {
 			boolean found = false;
 			Map<Pair<Class<? extends Annotation>, Class<?>>, DerivedValue> values = Maps.newHashMap();
@@ -217,8 +281,9 @@ public class AnalyzedConfiguration {
 				if (annotation != null) {
 					found = true;
 					DerivedValue value = new DerivedValue(factory, m);
-					annotatio2value.put(annotation.annotatedWith(), value);
-					values.put(Tuples.<Class<? extends Annotation>, Class<?>> create(annotation.annotatedWith(), value.getType()), value);
+					checkRetention(annotation.value());
+					annotatio2value.put(annotation.value(), value);
+					values.put(Tuples.<Class<? extends Annotation>, Class<?>> create(annotation.value(), value.getType()), value);
 				}
 			}
 			if (!found)
@@ -246,6 +311,16 @@ public class AnalyzedConfiguration {
 			}
 		}
 		return annotatio2value;
+	}
+
+	protected Map<Class<?>, List<Throwable>> collectDeactivatedClasses(Set<Class<?>> classes) {
+		Map<Class<?>, List<Throwable>> deactivated = Maps.newLinkedHashMap();
+		for (Class<?> c : classes) {
+			List<Throwable> reasons = getFactoryDeactivationReasons(c);
+			if (!reasons.isEmpty())
+				deactivated.put(c, ImmutableList.copyOf(reasons));
+		}
+		return deactivated;
 	}
 
 	protected Multimap<Class<?>, DerivedValue> collectDerivedValuesByFactory(Collection<Value> values) {
@@ -297,6 +372,9 @@ public class AnalyzedConfiguration {
 			if (vals == null)
 				return null;
 			Value value = findValue(vals, parameterTypes[i]);
+			if (value == null && parent != null) // FIXME: cleanup
+				value = parent.getValue(parameterAnnotations[i].length > 0 ? parameterAnnotations[i][0].annotationType() : Default.class,
+						parameterTypes[i]);
 			if (value == null)
 				return null;
 			result.add(value);
@@ -322,15 +400,45 @@ public class AnalyzedConfiguration {
 		return null;
 	}
 
+	public Map<Class<?>, List<Throwable>> getDeactivatedFactories() {
+		return deactivatedFactories;
+	}
+
 	public List<Throwable> getErrors() {
 		return errors;
+	}
+
+	protected List<Throwable> getFactoryDeactivationReasons(Class<?> clazz) {
+		List<Throwable> result = Lists.newArrayList();
+		for (Method method : clazz.getMethods()) {
+			if (method.getAnnotation(Precondition.class) != null) {
+				if (!Modifier.isStatic(method.getModifiers())) {
+					this.errors.add(new IllegalStateException("Method " + method + " needs to be static"));
+					continue;
+				}
+				if (method.getParameterTypes().length != 0) {
+					this.errors.add(new IllegalStateException("Method " + method + " can not (yet) have parameters."));
+					continue;
+				}
+				try {
+					method.invoke(null);
+				} catch (IllegalAccessException e) {
+					result.add(e);
+				} catch (IllegalArgumentException e) {
+					result.add(e);
+				} catch (InvocationTargetException e) {
+					result.add(e.getCause());
+				}
+			}
+		}
+		return result;
 	}
 
 	public List<Class<?>> getOverwrittenFactories() {
 		return overwrittenFactories;
 	}
 
-	public AnalyzedConfiguration getParent() {
+	public ResolvedConfiguration getParent() {
 		return parent;
 	}
 
@@ -354,6 +462,8 @@ public class AnalyzedConfiguration {
 		for (Value val : values.get(annotatedWith))
 			if (expectedType.isAssignableFrom(val.getType()))
 				return val;
+		if (parent != null)
+			return parent.getValue(annotatedWith, expectedType);
 		return null;
 	}
 
@@ -362,7 +472,7 @@ public class AnalyzedConfiguration {
 	}
 
 	protected boolean isResolved(Factory fact, Map<Factory, Boolean> cache) {
-		if (!fact.isResolved())
+		if (fact == null || !fact.isResolved())
 			return false;
 		Boolean result = cache.get(fact);
 		if (result != null)
@@ -409,6 +519,10 @@ public class AnalyzedConfiguration {
 			result.add("    }");
 		}
 		result.add("}");
+		if (parent != null) {
+			result.add("--- Parent --");
+			result.add(parent.toString());
+		}
 		return Joiner.on("\n").join(result);
 	}
 }
