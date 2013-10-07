@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -2796,13 +2795,12 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore("Type inference fails currently for flatMap [ null ] - it should become (String)=>Object")
   public void testBug404051_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def void m(Iterable<String> iterable) {");
+    _builder.append("def m(Iterable<String> iterable) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("iterable.flatMap[ null ].sortBy [ hashCode ]");
@@ -2822,7 +2820,77 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("TODO");
+    _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public List<? extends Object> m(final Iterable<String> iterable) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Function1<String,Object> _function = new Function1<String,Object>() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public Object apply(final String it) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Iterable<? extends Object> _flatMap = this.<String, Object>flatMap(iterable, _function);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Function1<Object,Integer> _function_1 = new Function1<Object,Integer>() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public Integer apply(final Object it) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("int _hashCode = it.hashCode();");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("return Integer.valueOf(_hashCode);");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("List<? extends Object> _sortBy = IterableExtensions.sortBy(_flatMap, _function_1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _sortBy;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
@@ -5168,9 +5236,9 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def method() ");
-    _builder.append("\'\'\'«", "	");
+    _builder.append("\'\'\'«", "\t");
     _builder.append("logSomething");
-    _builder.append("»\'\'\'", "	");
+    _builder.append("»\'\'\'", "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("def void logSomething() {println(\"zonk\")}");
