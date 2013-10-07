@@ -1,5 +1,8 @@
 package org.eclipse.xtend.core.tests.macro;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
@@ -7,6 +10,8 @@ import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationCo
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -75,5 +80,47 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
       }
     };
     annotatedClass.addMethod("blank_4", _function_4);
+    final Procedure1<MutableMethodDeclaration> _function_5 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(TargetStringConcatenation _builder) {
+            _builder.append("int foo = 42;");
+            _builder.newLine();
+          }
+        };
+        it.setBody(_client);
+      }
+    };
+    annotatedClass.addMethod("blank_5", _function_5);
+    final Procedure1<MutableMethodDeclaration> _function_6 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(TargetStringConcatenation _builder) {
+            _builder.append("int foo = 42;");
+          }
+        };
+        it.setBody(_client);
+      }
+    };
+    annotatedClass.addMethod("blank_6", _function_6);
+    final Procedure1<MutableMethodDeclaration> _function_7 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(TargetStringConcatenation _builder) {
+            _builder.append(List.class, "");
+            _builder.append("<? extends Object> list = new ");
+            _builder.append(ArrayList.class, "");
+            _builder.append("<");
+            _builder.append(BigDecimal.class, "");
+            _builder.append(">();");
+          }
+        };
+        it.setBody(_client);
+      }
+    };
+    annotatedClass.addMethod("blank_7", _function_7);
   }
 }

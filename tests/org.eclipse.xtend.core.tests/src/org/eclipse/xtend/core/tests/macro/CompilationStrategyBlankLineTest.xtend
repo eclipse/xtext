@@ -5,6 +5,9 @@ import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.junit.Test
+import java.util.List
+import java.util.ArrayList
+import java.math.BigDecimal
 
 class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 	
@@ -17,6 +20,9 @@ class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 			}
 		'''.compile [
 			assertEquals('''
+				import java.math.BigDecimal;
+				import java.util.ArrayList;
+				import java.util.List;
 				import org.eclipse.xtend.core.tests.macro.ArtificialMethods;
 				
 				@ArtificialMethods
@@ -40,6 +46,18 @@ class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 				  
 				  public void blank_4() {
 				    int foo = 42;
+				  }
+				  
+				  public void blank_5() {
+				    int foo = 42;
+				  }
+				  
+				  public void blank_6() {
+				    int foo = 42;
+				  }
+				  
+				  public void blank_7() {
+				    List<? extends Object> list = new ArrayList<BigDecimal>();
 				  }
 				}
 			 '''.toString, getGeneratedCode("A"))
@@ -83,6 +101,18 @@ class ArtificialMethodsProcessor extends AbstractClassProcessor {
 					int foo = 42;
 				'''
 			]
+		])
+		annotatedClass.addMethod('blank_5', [
+			body = '''
+				int foo = 42;
+			'''
+		])
+		annotatedClass.addMethod('blank_6', [
+			body = '''int foo = 42;'''
+		])
+		annotatedClass.addMethod('blank_7', [
+			body = '''
+				«List»<? extends Object> list = new «ArrayList»<«BigDecimal»>();'''
 		])
 	}
 	
