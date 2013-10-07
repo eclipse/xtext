@@ -1266,11 +1266,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	@Ignore("Type inference fails currently for flatMap [ null ] - it should become (String)=>Object")
 	def testBug404051_01() {
 		assertCompilesTo('''
 			class C {
-				def void m(Iterable<String> iterable) {
+				def m(Iterable<String> iterable) {
 					iterable.flatMap[ null ].sortBy [ hashCode ]
 				}
 				def <A,B> Iterable<? extends B> flatMap(Iterable<? extends A> iterable, (A)=>B map) {
@@ -1278,7 +1277,33 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			TODO
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public List<? extends Object> m(final Iterable<String> iterable) {
+			    final Function1<String,Object> _function = new Function1<String,Object>() {
+			      public Object apply(final String it) {
+			        return null;
+			      }
+			    };
+			    Iterable<? extends Object> _flatMap = this.<String, Object>flatMap(iterable, _function);
+			    final Function1<Object,Integer> _function_1 = new Function1<Object,Integer>() {
+			      public Integer apply(final Object it) {
+			        int _hashCode = it.hashCode();
+			        return Integer.valueOf(_hashCode);
+			      }
+			    };
+			    List<? extends Object> _sortBy = IterableExtensions.sortBy(_flatMap, _function_1);
+			    return _sortBy;
+			  }
+			  
+			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {
+			    return null;
+			  }
+			}
 		''')
 	}
 	
