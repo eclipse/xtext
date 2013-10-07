@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -29,7 +30,7 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
+ * TODO JavaDoc, toString, performance, noise in the gc
  */
 @Singleton
 public class BoundTypeArgumentMerger {
@@ -43,8 +44,7 @@ public class BoundTypeArgumentMerger {
 			return null;
 		if (allArguments.size() == 1) {
 			LightweightBoundTypeArgument argument = Iterables.getOnlyElement(allArguments);
-			return new LightweightMergedBoundTypeArgument(argument.getTypeReference(), 
-					argument.getDeclaredVariance().mergeDeclaredWithActual(argument.getActualVariance()));
+			return getSingleArgumentAsMergedArgument(argument);
 		}
 		List<LightweightTypeReference> invariantTypes = Lists.newArrayListWithCapacity(3);
 		List<VarianceInfo> invariantVariances = Lists.newArrayListWithCapacity(3);
@@ -130,6 +130,17 @@ public class BoundTypeArgumentMerger {
 			variance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 		}
 		return new LightweightMergedBoundTypeArgument(type, variance);
+	}
+
+	protected LightweightMergedBoundTypeArgument getSingleArgumentAsMergedArgument(LightweightBoundTypeArgument argument) {
+		LightweightTypeReference typeReference = argument.getTypeReference();
+		VarianceInfo varianceInfo = argument.getDeclaredVariance().mergeDeclaredWithActual(argument.getActualVariance());
+		if (argument.getDeclaredVariance() == VarianceInfo.IN && varianceInfo == VarianceInfo.INVARIANT) {
+			if (typeReference instanceof WildcardTypeReference) {
+				typeReference = ((WildcardTypeReference) typeReference).getInvariantBoundSubstitute();
+			}
+		}
+		return new LightweightMergedBoundTypeArgument(typeReference, varianceInfo);
 	}
 	
 	public boolean isPossibleMergeResult(List<LightweightBoundTypeArgument> allArguments, LightweightTypeReference candidate) {
