@@ -42,20 +42,20 @@ public @interface StringExpectation {
 			if (string == null)
 				throw new NullPointerException("Object is null");
 			String actual = string.toString();
+			String escapedActual = getTargetSyntaxLiteral().escape(actual);
 			String originalExpectation = getExpectation();
 			String migratedExpectation;
 			if (!annotation.whitespaceSensitive()) {
 				FormattingMigrator migrator = new FormattingMigrator();
-				migratedExpectation = migrator.migrate(actual, originalExpectation);
+				migratedExpectation = migrator.migrate(escapedActual, originalExpectation);
 			} else
 				migratedExpectation = originalExpectation;
-			if ((annotation.caseSensitive() && !migratedExpectation.equals(actual))
-					|| (!annotation.caseSensitive() && !migratedExpectation.equalsIgnoreCase(actual))) {
+			if ((annotation.caseSensitive() && !migratedExpectation.equals(escapedActual))
+					|| (!annotation.caseSensitive() && !migratedExpectation.equalsIgnoreCase(escapedActual))) {
 				String expDoc = replaceInDocument(migratedExpectation);
-				String actDoc = replaceInDocument(actual);
+				String actDoc = replaceInDocument(escapedActual);
 				throw new ComparisonFailure("", expDoc, actDoc);
 			}
-
 		}
 
 		public StringExpectation getAnnotation() {

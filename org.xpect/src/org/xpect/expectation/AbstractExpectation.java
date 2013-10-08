@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.xpect.expectation;
 
+import org.xpect.expectation.ITargetSyntaxSupport.ITargetLiteralSupport;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
 import org.xpect.text.Text;
@@ -20,6 +21,7 @@ import com.google.common.base.Strings;
  */
 public class AbstractExpectation {
 	private final IExpectationRegion region;
+	private final ITargetLiteralSupport targetLiteral;
 	private final ITargetSyntaxSupport targetSyntax;
 
 	public AbstractExpectation(ITargetSyntaxSupport targetSyntax, IExpectationRegion region) {
@@ -27,6 +29,7 @@ public class AbstractExpectation {
 		Preconditions.checkPositionIndex(region.getOffset(), region.getDocument().length());
 		Preconditions.checkPositionIndex(region.getOffset() + region.getLength(), region.getDocument().length());
 		this.targetSyntax = targetSyntax;
+		this.targetLiteral = targetSyntax.getLiteralSupport(region.getOffset());
 		this.region = region;
 	}
 
@@ -44,7 +47,7 @@ public class AbstractExpectation {
 		throw new IllegalStateException();
 	}
 
-	protected String getExpectation() {
+	public String getExpectation() {
 		if (region.getLength() < 0)
 			return "";
 		String substring = region.getDocument().toString().substring(region.getOffset(), region.getOffset() + region.getLength());
@@ -119,16 +122,15 @@ public class AbstractExpectation {
 		return targetSyntax;
 	}
 
+	public ITargetLiteralSupport getTargetSyntaxLiteral() {
+		return targetLiteral;
+	}
+
 	protected String replaceInDocument(String value) {
 		Text text = new Text(region.getDocument());
-		if (targetSyntax != null) {
-			boolean multiline = targetSyntax.supportsMultiLineLiteral() && value.contains("\n");
-			IReplacement replacement = getReplacement(value, multiline);
-			IReplacement targetReplacement = targetSyntax.adoptToTargetSyntax(replacement, multiline);
-			return text.with(targetReplacement);
-		} else {
-			IReplacement replacement = getReplacement(value, false);
-			return text.with(replacement);
-		}
+		boolean multiline = targetSyntax.supportsMultiLineLiteral() && value.contains("\n");
+		IReplacement replacement = getReplacement(value, multiline);
+		IReplacement targetReplacement = targetLiteral.adoptToTargetSyntax(replacement, multiline);
+		return text.with(targetReplacement);
 	}
 }

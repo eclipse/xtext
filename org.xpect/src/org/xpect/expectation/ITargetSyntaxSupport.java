@@ -1,8 +1,5 @@
 package org.xpect.expectation;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 import org.xpect.text.IReplacement;
 
 /**
@@ -10,11 +7,14 @@ import org.xpect.text.IReplacement;
  * @author Moritz Eysholdt
  */
 public interface ITargetSyntaxSupport {
-	@Retention(RetentionPolicy.RUNTIME)
-	@interface Annotation {
-	}
 
 	boolean supportsMultiLineLiteral();
 
-	IReplacement adoptToTargetSyntax(IReplacement replacement, boolean enforceMultilineLiteral);
+	ITargetLiteralSupport getLiteralSupport(int offset);
+
+	interface ITargetLiteralSupport {
+		String escape(String value);
+
+		public IReplacement adoptToTargetSyntax(IReplacement replacement, boolean enforceMultilineLiteral);
+	}
 }

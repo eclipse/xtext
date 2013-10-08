@@ -16,38 +16,51 @@ import org.xpect.xtext.lib.util.GrammarAnalyzer.SLCommentRule;
 
 public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
 
-	private final XtextResource resource;
+	public class XtextTargetSyntaxLiteral implements ITargetLiteralSupport {
+
+		private final CommentRule commentRule;
+		private final ILeafNode leaf;
+
+		public XtextTargetSyntaxLiteral(ILeafNode leaf, CommentRule commentRule) {
+			super();
+			this.leaf = leaf;
+			this.commentRule = commentRule;
+		}
+
+		public IReplacement adoptToTargetSyntax(IReplacement replacement, boolean enforceMultilineLiteral) {
+			if (leaf.getOffset() > replacement.getOffset())
+				return replacement;
+			if (leaf.getOffset() + leaf.getLength() < replacement.getOffset() + replacement.getLength())
+				return replacement;
+			if (commentRule instanceof SLCommentRule) {
+				if (enforceMultilineLiteral)
+					return convertToMultiLine(leaf, (SLCommentRule) commentRule, replacement);
+			} else if (commentRule instanceof MLCommentRule) {
+				MLCommentRule mlCommentRule = (MLCommentRule) commentRule;
+				if (replacement.getReplacement().contains(mlCommentRule.getEnd()))
+					return escapeTextInMultiLineComment(mlCommentRule, replacement);
+			}
+			return replacement;
+		}
+
+		public String escape(String value) {
+			if (commentRule instanceof MLCommentRule)
+				return escapeTextInMultiLineComment((MLCommentRule) commentRule, value);
+			return value;
+		}
+
+		public boolean isMultiline() {
+			return commentRule instanceof MLCommentRule;
+		}
+
+	}
+
 	private final GrammarAnalyzer grammarAnalyzer;
+	private final XtextResource resource;
 
 	public XtextTargetSyntaxSupport(@ThisResource XtextResource resource) {
 		this.resource = resource;
 		this.grammarAnalyzer = new GrammarAnalyzer(resource.getResourceServiceProvider().get(IGrammarAccess.class).getGrammar());
-	}
-
-	protected CommentRule findCommentRule(ILeafNode leaf) {
-		String text = leaf.getText();
-		for (CommentRule rule : grammarAnalyzer.getCommentRules())
-			if (text.startsWith(rule.getStart()))
-				return rule;
-		return null;
-	}
-
-	public IReplacement adoptToTargetSyntax(IReplacement replacement, boolean enforceMultilineLiteral) {
-		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), replacement.getOffset());
-		if (leaf.getOffset() > replacement.getOffset())
-			return replacement;
-		if (leaf.getOffset() + leaf.getLength() < replacement.getOffset() + replacement.getLength())
-			return replacement;
-		CommentRule commentRule = findCommentRule(leaf);
-		if (commentRule instanceof SLCommentRule) {
-			if (enforceMultilineLiteral)
-				return convertToMultiLine(leaf, (SLCommentRule) commentRule, replacement);
-		} else if (commentRule instanceof MLCommentRule) {
-			MLCommentRule mlCommentRule = (MLCommentRule) commentRule;
-			if (replacement.getReplacement().contains(mlCommentRule.getEnd()))
-				return escapeTextInMultiLineComment(mlCommentRule, replacement);
-		}
-		return replacement;
 	}
 
 	protected IReplacement convertToMultiLine(ILeafNode leaf, SLCommentRule slRule, IReplacement replacement) {
@@ -83,19 +96,28 @@ public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
 		}
 	}
 
-	protected MLCommentRule getFirstMLCommentRule() {
-		for (CommentRule rule : grammarAnalyzer.getCommentRules())
-			if (rule instanceof MLCommentRule)
-				return (MLCommentRule) rule;
-		return null;
+	@Creates
+	public ITargetSyntaxSupport create() {
+		return this;
 	}
 
 	protected IReplacement escapeTextInMultiLineComment(MLCommentRule commentRule, IReplacement replacement) {
-		String text = replacement.getReplacement();
+		String text = escapeTextInMultiLineComment(commentRule, replacement.getReplacement());
+		return new Replacement(replacement.getOffset(), replacement.getLength(), text);
+	}
+
+	protected String escapeTextInMultiLineComment(MLCommentRule commentRule, String replacement) {
 		String escapedStart = getEscapeString(commentRule.getStart());
 		String escapedEnd = getEscapeString(commentRule.getEnd());
-		String escaped = text.replace(commentRule.getStart(), escapedStart).replace(commentRule.getEnd(), escapedEnd);
-		return new Replacement(replacement.getOffset(), replacement.getLength(), escaped);
+		return replacement.replace(commentRule.getStart(), escapedStart).replace(commentRule.getEnd(), escapedEnd);
+	}
+
+	protected CommentRule findCommentRule(ILeafNode leaf) {
+		String text = leaf.getText();
+		for (CommentRule rule : grammarAnalyzer.getCommentRules())
+			if (text.startsWith(rule.getStart()))
+				return rule;
+		return null;
 	}
 
 	protected String getEscapeString(String startOrEnd) {
@@ -106,17 +128,25 @@ public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
 		return startOrEnd;
 	}
 
+	protected MLCommentRule getFirstMLCommentRule() {
+		for (CommentRule rule : grammarAnalyzer.getCommentRules())
+			if (rule instanceof MLCommentRule)
+				return (MLCommentRule) rule;
+		return null;
+	}
+
+	public ITargetLiteralSupport getLiteralSupport(int offset) {
+		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+		CommentRule commentRule = findCommentRule(leaf);
+		return new XtextTargetSyntaxLiteral(leaf, commentRule);
+	}
+
 	public XtextResource getResource() {
 		return resource;
 	}
 
 	public boolean supportsMultiLineLiteral() {
-		return true;
-	}
-
-	@Creates(ITargetSyntaxSupport.Annotation.class)
-	public ITargetSyntaxSupport create() {
-		return this;
+		return getFirstMLCommentRule() != null;
 	}
 
 }

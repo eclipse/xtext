@@ -44,7 +44,7 @@ public abstract class AbstractExpectationProvider<E> implements IParsedParameter
 	}
 
 	private ITargetSyntaxSupport getTargetSyntax(StateContainer context) {
-		return context.get(ITargetSyntaxSupport.class, ITargetSyntaxSupport.Annotation.class).get();
+		return context.get(ITargetSyntaxSupport.class).get();
 	}
 
 }

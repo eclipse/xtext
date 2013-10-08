@@ -58,6 +58,7 @@ public @interface CommaSeparatedValuesExpectation {
 			exp.init(getExpectation());
 
 			ActualCollection act = new ActualCollection();
+			act.setTargetLiteralSupport(getTargetSyntaxLiteral());
 			act.setCaseSensitive(annotation.caseSensitive());
 			act.setOrdered(annotation.ordered());
 			act.setQuoted(annotation.quoted());

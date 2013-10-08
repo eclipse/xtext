@@ -9,6 +9,7 @@ package org.xpect.expectation;
 
 import org.eclipse.xtext.util.Exceptions;
 import org.xpect.expectation.ActualCollection.ActualItem;
+import org.xpect.expectation.ITargetSyntaxSupport.ITargetLiteralSupport;
 
 import com.google.common.base.Function;
 
@@ -17,15 +18,37 @@ import com.google.common.base.Function;
  */
 public class ActualCollection extends StringCollection<ActualItem> {
 
+	public class ActualItem extends StringCollection<ActualItem>.Item {
+		public ActualItem(String pure) {
+			super(pure);
+		}
+	}
+
 	public static class ToString implements Function<Object, String> {
 		public String apply(Object from) {
 			return from == null ? "null" : from.toString();
 		}
 	}
 
-	public class ActualItem extends StringCollection<ActualItem>.Item {
-		public ActualItem(String pure) {
-			super(pure);
+	private ITargetLiteralSupport targetLiteralSupport;
+
+	public ITargetLiteralSupport getTargetLiteralSupport() {
+		return targetLiteralSupport;
+	}
+
+	public void init(Iterable<?> actual, Class<? extends Function<Object, String>> functionClass) {
+		items = createCollection();
+		try {
+			Function<Object, String> func = functionClass.newInstance();
+			for (Object obj : actual) {
+				String string = func.apply(obj);
+				String escaped = targetLiteralSupport.escape(string);
+				items.add(new ActualItem(escaped));
+			}
+		} catch (InstantiationException e) {
+			Exceptions.throwUncheckedException(e);
+		} catch (IllegalAccessException e) {
+			Exceptions.throwUncheckedException(e);
 		}
 	}
 
@@ -35,16 +58,7 @@ public class ActualCollection extends StringCollection<ActualItem> {
 			items.add(new ActualItem(obj));
 	}
 
-	public void init(Iterable<?> actual, Class<? extends Function<Object, String>> functionClass) {
-		items = createCollection();
-		try {
-			Function<Object, String> func = functionClass.newInstance();
-			for (Object obj : actual)
-				items.add(new ActualItem(func.apply(obj)));
-		} catch (InstantiationException e) {
-			Exceptions.throwUncheckedException(e);
-		} catch (IllegalAccessException e) {
-			Exceptions.throwUncheckedException(e);
-		}
+	public void setTargetLiteralSupport(ITargetLiteralSupport targetLiteralSupport) {
+		this.targetLiteralSupport = targetLiteralSupport;
 	}
 }
