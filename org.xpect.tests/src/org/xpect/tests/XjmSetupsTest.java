@@ -1,17 +1,28 @@
 package org.xpect.tests;
 
+import java.util.EnumSet;
+
 import org.junit.Test;
+import org.xpect.Environment;
 import org.xpect.runner.XpectSuiteClasses;
-import org.xpect.setup.AbstractXpectSetup;
+import org.xpect.setup.IXpectSetup;
 import org.xpect.setup.XpectSetup;
 import org.xpect.tests.XjmSetupsTest.SetupsAndSuite.SetupsAndSuiteTest;
 
 public class XjmSetupsTest extends AbstractXjmTest {
 
-	public static class NullSetup extends AbstractXpectSetup<Object, Object, Object, Object> {
+	public static class NullSetup implements IXpectSetup {
+
+		public EnumSet<Environment> getEnvironments() {
+			return null;
+		}
 	}
 
-	public static class OtherSetup extends AbstractXpectSetup<Object, Object, Object, Object> {
+	public static class OtherSetup implements IXpectSetup {
+
+		public EnumSet<Environment> getEnvironments() {
+			return null;
+		}
 	}
 
 	@XpectSetup({ NullSetup.class })
