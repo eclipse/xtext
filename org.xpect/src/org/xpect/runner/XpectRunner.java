@@ -67,6 +67,7 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		Configuration config = new Configuration();
 		config.addValue(ThisRootTestClass.class, super.getTestClass().getJavaClass());
 		config.addFactory(TestObjectSetup.class);
+		config.addFactory(ValidatingSetup.class);
 		config.addDefaultValue(IXpectURIProvider.class, this.uriProvider);
 		config.addDefaultValue(XpectJavaModel.class, this.xpectJavaModel);
 		for (XjmTest test : this.xpectJavaModel.getTests()) {

@@ -224,6 +224,7 @@ public class XpectFileRunner implements Filterable, Sortable {
 			} else if (xpectFile.getTest() == null) {
 				notifier.fireTestIgnored(getDescription());
 			} else {
+				state.get(ValidatingSetup.class).get().validate();
 				// ctx.setXpectFile(xpectFile);
 				// if (setup != null)
 				// ctx.setUserFileCtx(setup.beforeFile(ctx,

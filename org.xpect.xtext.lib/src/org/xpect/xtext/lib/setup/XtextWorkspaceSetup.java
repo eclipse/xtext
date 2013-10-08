@@ -7,7 +7,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -28,7 +27,8 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 @XpectParameterAdapter(XtextOffsetAdapter.class)
-@XpectSetup({ WorkspaceDefaultsSetup.class, XtextTargetSyntaxSupport.class, XtextTestObjectSetup.class, InjectorSetup.class })
+@XpectSetup({ WorkspaceDefaultsSetup.class, XtextTargetSyntaxSupport.class, XtextTestObjectSetup.class, InjectorSetup.class,
+		XtextValidatingSetup.class })
 public class XtextWorkspaceSetup {
 
 	@Precondition
@@ -90,12 +90,7 @@ public class XtextWorkspaceSetup {
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		ResourceSet resourceSet = resourceSetProvider.get(instance.getThisProject());
 		XtextResource resource = (XtextResource) ctx.load(resourceSet, uri, file.getContents());
-		validate(resource);
 		return resource;
-	}
-
-	protected void validate(Resource result) {
-		new AssertingValidator().validate(result);
 	}
 
 }
