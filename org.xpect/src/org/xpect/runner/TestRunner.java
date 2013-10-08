@@ -44,7 +44,7 @@ public class TestRunner extends AbstractTestRunner {
 	}
 
 	public Description createDescription() {
-		Class<?> javaClass = getMethod().getTest().getJavaClass();
+		Class<?> javaClass = getUriRunner().getRunner().getTestClass().getJavaClass();
 		return Description.createTestDescription(javaClass, getTitle());
 	}
 
