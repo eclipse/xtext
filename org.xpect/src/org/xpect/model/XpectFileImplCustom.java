@@ -46,7 +46,7 @@ public class XpectFileImplCustom extends XpectFileImpl {
 	}
 
 	public void initalizeInvocationsIDs() {
-		id2invocation = Maps.newHashMap();
+		Map<String, XpectInvocation> id2invocation = Maps.newHashMap();
 		Map<String, Integer> counter = Maps.newHashMap();
 		for (XpectInvocation inv : getInvocations()) {
 			XpectInvocationImplCustom impl = (XpectInvocationImplCustom) inv;
@@ -58,6 +58,7 @@ public class XpectFileImplCustom extends XpectFileImpl {
 			impl.setId(id);
 			id2invocation.put(id, inv);
 		}
+		this.id2invocation = id2invocation;
 	}
 
 	@Override
