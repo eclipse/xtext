@@ -146,6 +146,10 @@ class TransformationContextImpl implements TransformationContext {
 		unit.typeReferenceProvider.newWildcardTypeReference(upperBound)
 	}
 
+	override newWildcardTypeReferenceWithLowerBound(TypeReference upperBound) {
+		unit.typeReferenceProvider.newWildcardTypeReferenceWithLowerBound(upperBound)
+	}
+
 	override findInterface(String qualifiedName) {
 		unit.typeLookup.findInterface(qualifiedName)
 	}

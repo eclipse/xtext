@@ -134,6 +134,14 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 		}
 	}
 	
+	override newWildcardTypeReferenceWithLowerBound(TypeReference lowerBound) {
+		if (lowerBound == null) {
+			toTypeReference(typeReferences.wildCard())
+		} else {
+			toTypeReference(typeReferences.wildCardSuper(lowerBound.toJvmTypeReference))
+		}
+	}
+	
 	override newTypeReference(Class<? extends Object> clazz, TypeReference... typeArguments) {
 		newTypeReference(clazz.name, typeArguments)
 	}
