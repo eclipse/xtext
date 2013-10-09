@@ -269,6 +269,13 @@ public class TransformationContextImpl implements TransformationContext {
     return _newWildcardTypeReference;
   }
   
+  public TypeReference newWildcardTypeReferenceWithLowerBound(final TypeReference upperBound) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
+    TypeReference _newWildcardTypeReferenceWithLowerBound = _typeReferenceProvider.newWildcardTypeReferenceWithLowerBound(upperBound);
+    return _newWildcardTypeReferenceWithLowerBound;
+  }
+  
   public MutableInterfaceDeclaration findInterface(final String qualifiedName) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();

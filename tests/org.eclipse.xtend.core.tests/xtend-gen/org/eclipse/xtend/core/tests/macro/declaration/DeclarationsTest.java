@@ -589,6 +589,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         TypeReference _set_1 = _typeReferenceProvider_17.getSet(_newWildcardTypeReference_1);
         String _string_6 = _set_1.toString();
         Assert.assertEquals("Set<? extends List<String>>", _string_6);
+        TypeReferenceProvider _typeReferenceProvider_19 = it.getTypeReferenceProvider();
+        TypeReferenceProvider _typeReferenceProvider_20 = it.getTypeReferenceProvider();
+        TypeReference _newWildcardTypeReferenceWithLowerBound = _typeReferenceProvider_20.newWildcardTypeReferenceWithLowerBound(listOfStringType);
+        TypeReference _set_2 = _typeReferenceProvider_19.getSet(_newWildcardTypeReferenceWithLowerBound);
+        String _string_7 = _set_2.toString();
+        Assert.assertEquals("Set<? super List<String>>", _string_7);
       }
     };
     this.asCompilationUnit(_validFile, _function);

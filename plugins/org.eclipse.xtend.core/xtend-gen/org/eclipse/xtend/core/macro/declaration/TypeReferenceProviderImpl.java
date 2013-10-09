@@ -305,6 +305,24 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return _xifexpression;
   }
   
+  public TypeReference newWildcardTypeReferenceWithLowerBound(final TypeReference lowerBound) {
+    TypeReference _xifexpression = null;
+    boolean _equals = Objects.equal(lowerBound, null);
+    if (_equals) {
+      TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
+      JvmWildcardTypeReference _wildCard = _typeReferences.wildCard();
+      TypeReference _typeReference = this.compilationUnit.toTypeReference(_wildCard);
+      _xifexpression = _typeReference;
+    } else {
+      TypeReferences _typeReferences_1 = this.compilationUnit.getTypeReferences();
+      JvmTypeReference _jvmTypeReference = this.compilationUnit.toJvmTypeReference(lowerBound);
+      JvmWildcardTypeReference _wildCardSuper = _typeReferences_1.wildCardSuper(_jvmTypeReference);
+      TypeReference _typeReference_1 = this.compilationUnit.toTypeReference(_wildCardSuper);
+      _xifexpression = _typeReference_1;
+    }
+    return _xifexpression;
+  }
+  
   public TypeReference newTypeReference(final Class<? extends Object> clazz, final TypeReference... typeArguments) {
     String _name = clazz.getName();
     TypeReference _newTypeReference = this.newTypeReference(_name, typeArguments);

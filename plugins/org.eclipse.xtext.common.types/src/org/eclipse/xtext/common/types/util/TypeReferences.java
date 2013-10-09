@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -165,6 +166,14 @@ public class TypeReferences {
 		JvmUpperBound upperBound = factory.createJvmUpperBound();
 		upperBound.setTypeReference(clone);
 		result.getConstraints().add(upperBound);
+		return result;
+	}
+
+	public JvmWildcardTypeReference wildCardSuper(JvmTypeReference clone) {
+		JvmWildcardTypeReference result = factory.createJvmWildcardTypeReference();
+		JvmLowerBound lowerBound = factory.createJvmLowerBound();
+		lowerBound.setTypeReference(clone);
+		result.getConstraints().add(lowerBound);
 		return result;
 	}
 

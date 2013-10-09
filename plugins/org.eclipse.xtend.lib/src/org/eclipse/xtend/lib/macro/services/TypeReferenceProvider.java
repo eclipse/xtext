@@ -62,11 +62,18 @@ public interface TypeReferenceProvider {
 	 * @return a wildcard type references with upperBound {@link Object}
 	 */
 	TypeReference newWildcardTypeReference();
+	
 	 /**
 	  * @param upperBound the upper bound of the wildcard type
 	  * @return a wildcard type references with the given upperBound.
 	  */
 	TypeReference newWildcardTypeReference(TypeReference upperBound);
+	
+	 /**
+	  * @param lowerBound the lower bound of the wildcard type
+	  * @return a wildcard type references with the given lowerBound.
+	  */
+	TypeReference newWildcardTypeReferenceWithLowerBound(TypeReference lowerBound);
 	
 	/**
 	 * @return a type reference pointing to {@link Object}

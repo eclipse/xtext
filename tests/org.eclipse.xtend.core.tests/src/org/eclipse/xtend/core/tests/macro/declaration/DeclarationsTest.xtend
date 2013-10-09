@@ -247,6 +247,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals('String',setOfString.actualTypeArguments.head.toString)
 			assertEquals('Set<?>', typeReferenceProvider.getSet(typeReferenceProvider.newWildcardTypeReference).toString)
 			assertEquals('Set<? extends List<String>>', typeReferenceProvider.getSet(typeReferenceProvider.newWildcardTypeReference(listOfStringType)).toString)
+			assertEquals('Set<? super List<String>>', typeReferenceProvider.getSet(typeReferenceProvider.newWildcardTypeReferenceWithLowerBound(listOfStringType)).toString)
 		]
 	}
 	
