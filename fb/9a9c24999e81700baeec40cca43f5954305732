@@ -1,0 +1,9 @@
+Code-Review-1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Code-Review+2: Dennis Huebner <dennis.huebner@itemis.de>
+IP-Clean+1: Dennis Huebner <dennis.huebner@itemis.de>
+Verified+1: Dennis Huebner <dennis.huebner@itemis.de>
+Submitted-by: Dennis Huebner <dennis.huebner@itemis.de>
+Submitted-at: Wed, 09 Oct 2013 05:27:16 -0400
+Reviewed-on: https://git.eclipse.org/r/17191
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
