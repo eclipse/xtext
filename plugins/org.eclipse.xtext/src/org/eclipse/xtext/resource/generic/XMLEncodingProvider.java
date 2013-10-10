@@ -27,6 +27,9 @@ public class XMLEncodingProvider implements IEncodingProvider {
 	private static final Logger LOG = Logger.getLogger(XMLEncodingProvider.class);
 
 	public String getEncoding(URI uri) {
+		if (uri == null) {
+			return Charset.defaultCharset().name();
+		}
 		try {
 			byte[] buffer = null;
 			InputStream inputStream = URIConverter.INSTANCE.createInputStream(uri);
