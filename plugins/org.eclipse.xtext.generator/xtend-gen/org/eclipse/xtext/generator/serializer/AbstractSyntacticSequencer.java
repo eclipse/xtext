@@ -98,7 +98,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("protected ");
       String _gaFQName = this.grammarAccess.gaFQName(this.grammar);
       String _imported = file.imported(_gaFQName);
-      _builder.append(_imported, "	");
+      _builder.append(_imported, "\t");
       _builder.append(" grammarAccess;");
       _builder.newLineIfNotEmpty();
       {
@@ -107,10 +107,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append("\t");
           _builder.append("protected ");
           String _imported_1 = file.imported("org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias");
-          _builder.append(_imported_1, "	");
+          _builder.append(_imported_1, "\t");
           _builder.append(" match_");
           String _first = group.getFirst();
-          _builder.append(_first, "	");
+          _builder.append(_first, "\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -127,7 +127,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("grammarAccess = (");
       String _gaFQName_1 = this.grammarAccess.gaFQName(this.grammar);
       String _imported_2 = file.imported(_gaFQName_1);
-      _builder.append(_imported_2, "		");
+      _builder.append(_imported_2, "\t\t");
       _builder.append(") access;");
       _builder.newLineIfNotEmpty();
       {
@@ -136,11 +136,11 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append("\t\t");
           _builder.append("match_");
           String _first_1 = group_1.getFirst();
-          _builder.append(_first_1, "		");
+          _builder.append(_first_1, "\t\t");
           _builder.append(" = ");
           AbstractElementAlias _second = group_1.getSecond();
           String _elementAliasToConstructor = this.util.elementAliasToConstructor(_second, file);
-          _builder.append(_elementAliasToConstructor, "		");
+          _builder.append(_elementAliasToConstructor, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -152,7 +152,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       _builder.append("\t");
       CharSequence _genGetUnassignedRuleCallTokens = this.genGetUnassignedRuleCallTokens(file);
-      _builder.append(_genGetUnassignedRuleCallTokens, "	");
+      _builder.append(_genGetUnassignedRuleCallTokens, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
@@ -163,11 +163,11 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           if (!_hasElements) {
             _hasElements = true;
           } else {
-            _builder.appendImmediate("\n", "	");
+            _builder.appendImmediate("\n", "\t");
           }
           _builder.append("\t");
           CharSequence _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule);
-          _builder.append(_genGetUnassignedRuleCallToken, "	");
+          _builder.append(_genGetUnassignedRuleCallToken, "\t");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -175,7 +175,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       _builder.append("\t");
       CharSequence _genEmitUnassignedTokens = this.genEmitUnassignedTokens(file);
-      _builder.append(_genEmitUnassignedTokens, "	");
+      _builder.append(_genEmitUnassignedTokens, "\t");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
@@ -192,7 +192,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append(" ");
           _builder.append("*     ");
           AbstractElementAlias _second_1 = group_2.getSecond();
-          _builder.append(_second_1, "	 ");
+          _builder.append(_second_1, "\t ");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append(" ");
@@ -201,10 +201,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           _builder.append("\t");
           _builder.append("protected void emit_");
           String _first_2 = group_2.getFirst();
-          _builder.append(_first_2, "	");
+          _builder.append(_first_2, "\t");
           _builder.append("(EObject semanticObject, ");
           String _imported_3 = file.imported(ISynNavigable.class);
-          _builder.append(_imported_3, "	");
+          _builder.append(_imported_3, "\t");
           _builder.append(" transition, List<INode> nodes) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -391,14 +391,14 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         }
         _builder.append("if(ruleCall.getRule() == grammarAccess.");
         String _gaAccessor = this.grammarAccess.gaAccessor(rule);
-        _builder.append(_gaAccessor, "	");
+        _builder.append(_gaAccessor, "\t");
         _builder.append(")");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("return ");
         CharSequence _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
-        _builder.append(_unassignedCalledTokenRuleName, "		");
+        _builder.append(_unassignedCalledTokenRuleName, "\t\t");
         _builder.append("(semanticObject, ruleCall, node);");
         _builder.newLineIfNotEmpty();
       }
@@ -488,7 +488,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     HashSet<AbstractElement> _newHashSet = CollectionLiterals.<AbstractElement>newHashSet();
     String _defaultValue = this.defaultValue(_alternatives, _newHashSet);
     String _convertToJavaString = Strings.convertToJavaString(_defaultValue);
-    _builder.append(_convertToJavaString, "	");
+    _builder.append(_convertToJavaString, "\t");
     _builder.append("\";");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
@@ -531,14 +531,14 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         }
         _builder.append("if(match_");
         String _first = group.getFirst();
-        _builder.append(_first, "		");
+        _builder.append(_first, "\t\t");
         _builder.append(".equals(syntax))");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("\t");
         _builder.append("emit_");
         String _first_1 = group.getFirst();
-        _builder.append(_first_1, "			");
+        _builder.append(_first_1, "\t\t\t");
         _builder.append("(semanticObject, getLastNavigableState(), syntaxNodes);");
         _builder.newLineIfNotEmpty();
       }

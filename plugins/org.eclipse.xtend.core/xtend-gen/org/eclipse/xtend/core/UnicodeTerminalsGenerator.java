@@ -36,7 +36,7 @@ class UnicodeTerminalsGenerator {
       }
     };
     StringWriter _generateUnicodeRules = UnicodeTerminalsGenerator.generateUnicodeRules(_function);
-    _builder.append(_generateUnicodeRules, "	");
+    _builder.append(_generateUnicodeRules, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append(";");
     _builder.newLine();
@@ -67,7 +67,7 @@ class UnicodeTerminalsGenerator {
       }
     };
     StringWriter _generateUnicodeRules_1 = UnicodeTerminalsGenerator.generateUnicodeRules(_function_1);
-    _builder.append(_generateUnicodeRules_1, "	");
+    _builder.append(_generateUnicodeRules_1, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append(";");
     _builder.newLine();

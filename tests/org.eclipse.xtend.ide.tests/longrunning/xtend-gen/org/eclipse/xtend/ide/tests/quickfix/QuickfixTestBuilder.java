@@ -361,7 +361,7 @@ public class QuickfixTestBuilder {
     _builder.append("\t");
     _builder.append("\'");
     String _join = IterableExtensions.join(expected, ", ");
-    _builder.append(_join, "	");
+    _builder.append(_join, "\t");
     _builder.append("\'  ");
     _builder.newLineIfNotEmpty();
     _builder.append("but got ");
@@ -369,7 +369,7 @@ public class QuickfixTestBuilder {
     _builder.append("\t");
     _builder.append("\'");
     String _join_1 = IterableExtensions.join(actual, ", ");
-    _builder.append(_join_1, "	");
+    _builder.append(_join_1, "\t");
     _builder.append("\'");
     _builder.newLineIfNotEmpty();
     String _string = _builder.toString();

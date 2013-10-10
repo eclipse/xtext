@@ -111,14 +111,12 @@ public class BasicExpressions {
     boolean _matched_1 = false;
     if (!_matched_1) {
       if (someValue instanceof Number) {
-        final Number _number = (Number)someValue;
         _matched_1=true;
         _switchResult_1 = "number";
       }
     }
     if (!_matched_1) {
       if (someValue instanceof String) {
-        final String _string = (String)someValue;
         _matched_1=true;
         _switchResult_1 = "string";
       }

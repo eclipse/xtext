@@ -14,7 +14,7 @@ public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append(string, "	");
+    _builder.append(string, "\t");
     _builder.append(" x");
     _builder.newLineIfNotEmpty();
     _builder.append("}");

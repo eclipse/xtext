@@ -53,7 +53,7 @@ public class BuildScriptCreator {
     _builder.append("\t\t\t\t\t\t\t");
     _builder.append("Default: ${projects.location}/");
     String _projectName = projectInfo.getProjectName();
-    _builder.append(_projectName, "							");
+    _builder.append(_projectName, "\t\t\t\t\t\t\t");
     _builder.append("/commands.txt");
     _builder.newLineIfNotEmpty();
     _builder.append("-->");
@@ -78,7 +78,7 @@ public class BuildScriptCreator {
     } else {
       _xifexpression = "Add_buckminster_headless_location_here";
     }
-    _builder.append(_xifexpression, "	");
+    _builder.append(_xifexpression, "\t");
     _builder.append("\" />");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -87,7 +87,7 @@ public class BuildScriptCreator {
     _builder.append("\t");
     _builder.append("<property name=\"commands.file\" location=\"${projects.location}/");
     String _projectName_1 = projectInfo.getProjectName();
-    _builder.append(_projectName_1, "	");
+    _builder.append(_projectName_1, "\t");
     _builder.append("/commands.txt\" />");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -164,7 +164,7 @@ public class BuildScriptCreator {
     _builder.append("\t\t");
     _builder.append("<echo message=\"Updatesite output in: ${build.root}/buckminster.output/");
     String _siteFeatureProjectName = projectInfo.getSiteFeatureProjectName();
-    _builder.append(_siteFeatureProjectName, "		");
+    _builder.append(_siteFeatureProjectName, "\t\t");
     _builder.append("_*-eclipse.feature/site.p2/\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

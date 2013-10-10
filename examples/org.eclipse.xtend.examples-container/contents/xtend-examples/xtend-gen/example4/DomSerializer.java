@@ -24,22 +24,20 @@ public class DomSerializer {
     boolean _matched = false;
     if (!_matched) {
       if (n instanceof Contents) {
-        final Contents _contents = (Contents)n;
         _matched=true;
-        CharSequence _text = _contents.getText();
+        CharSequence _text = ((Contents)n).getText();
         _switchResult = _text;
       }
     }
     if (!_matched) {
       if (n instanceof A) {
-        final A _a = (A)n;
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("<a href=\"");
-        String _href = _a.getHref();
+        String _href = ((A)n).getHref();
         _builder.append(_href, "");
         _builder.append("\">");
-        String _applyContents = this.applyContents(_a);
+        String _applyContents = this.applyContents(n);
         _builder.append(_applyContents, "");
         _builder.append("</a>");
         _switchResult = _builder;
@@ -54,7 +52,7 @@ public class DomSerializer {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       String _applyContents = this.applyContents(n);
-      _builder.append(_applyContents, "	");
+      _builder.append(_applyContents, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("</");
       String _tagName_1 = n.tagName();

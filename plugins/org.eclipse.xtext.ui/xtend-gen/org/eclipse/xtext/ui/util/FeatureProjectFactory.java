@@ -120,7 +120,7 @@ public class FeatureProjectFactory extends ProjectFactory {
       String _plus = (this.projectName + " Feature");
       _xifexpression = _plus;
     }
-    _builder.append(_xifexpression, "	");
+    _builder.append(_xifexpression, "\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -134,7 +134,7 @@ public class FeatureProjectFactory extends ProjectFactory {
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("id=\"");
-        _builder.append(includedFeature, "		");
+        _builder.append(includedFeature, "\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -151,7 +151,7 @@ public class FeatureProjectFactory extends ProjectFactory {
         _builder.append("\t");
         _builder.append("\t\t");
         _builder.append("id=\"");
-        _builder.append(containedBundle, "			");
+        _builder.append(containedBundle, "\t\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -187,7 +187,7 @@ public class FeatureProjectFactory extends ProjectFactory {
       for(final String includedFeature : this.includedFeatures) {
         _builder.append("\t");
         _builder.append("<feature id=\"");
-        _builder.append(includedFeature, "	");
+        _builder.append(includedFeature, "\t");
         _builder.append("\" version=\"0.0.0\">");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -203,7 +203,7 @@ public class FeatureProjectFactory extends ProjectFactory {
         if (includedFeature!=null) {
           _sourceFeatureName=this.sourceFeatureName(includedFeature);
         }
-        _builder.append(_sourceFeatureName, "	");
+        _builder.append(_sourceFeatureName, "\t");
         _builder.append("\" version=\"0.0.0\">");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");

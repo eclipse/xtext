@@ -214,14 +214,14 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.append("private ");
       String _gaFQName = this.grammarAccess.gaFQName(this.grammar);
       String _imported_2 = file.imported(_gaFQName);
-      _builder.append(_imported_2, "	");
+      _builder.append(_imported_2, "\t");
       _builder.append(" grammarAccess;");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       CharSequence _genMethodCreateSequence = this.genMethodCreateSequence(file);
-      _builder.append(_genMethodCreateSequence, "	");
+      _builder.append(_genMethodCreateSequence, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
@@ -250,7 +250,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         }
       };
       String _join = IterableExtensions.<IConstraint>join(_sort, "\n\n", _function_2);
-      _builder.append(_join, "	");
+      _builder.append(_join, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
@@ -309,7 +309,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         }
         _builder.append("if(semanticObject.eClass().getEPackage() == ");
         String _importedGenTypeLiteral = file.importedGenTypeLiteral(pkg);
-        _builder.append(_importedGenTypeLiteral, "	");
+        _builder.append(_importedGenTypeLiteral, "\t");
         _builder.append(") switch(semanticObject.eClass().getClassifierID()) {");
         _builder.newLineIfNotEmpty();
         {
@@ -319,7 +319,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             _builder.append("\t");
             _builder.append("case ");
             String _importedGenIntLiteral = file.importedGenIntLiteral(type);
-            _builder.append(_importedGenIntLiteral, "		");
+            _builder.append(_importedGenIntLiteral, "\t\t");
             _builder.append(":");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -365,11 +365,11 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                     if (!_hasElements) {
                       _hasElements = true;
                     } else {
-                      _builder.appendImmediate(" ||\n   ", "			");
+                      _builder.appendImmediate(" ||\n   ", "\t\t\t");
                     }
                     _builder.append("context == grammarAccess.");
                     String _gaAccessor = this.grammarAccess.gaAccessor(c);
-                    _builder.append(_gaAccessor, "			");
+                    _builder.append(_gaAccessor, "\t\t\t");
                   }
                 }
                 _builder.append(") {");
@@ -401,10 +401,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("\t");
                 _builder.append("sequence_");
                 String _simpleName = constraint.getSimpleName();
-                _builder.append(_simpleName, "				");
+                _builder.append(_simpleName, "\t\t\t\t");
                 _builder.append("(context, (");
                 String _importedGenTypeName = file.importedGenTypeName(type);
-                _builder.append(_importedGenTypeName, "				");
+                _builder.append(_importedGenTypeName, "\t\t\t\t");
                 _builder.append(") semanticObject); ");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -502,25 +502,25 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("if(transientValues.isValueTransient(");
-            _builder.append(cast, "		");
+            _builder.append(cast, "\t\t");
             _builder.append("semanticObject, ");
             EStructuralFeature _feature = f.getFeature();
             String _importedGenTypeLiteral = file.importedGenTypeLiteral(_feature);
-            _builder.append(_importedGenTypeLiteral, "		");
+            _builder.append(_importedGenTypeLiteral, "\t\t");
             _builder.append(") == ");
             String _imported = file.imported(ValueTransient.class);
-            _builder.append(_imported, "		");
+            _builder.append(_imported, "\t\t");
             _builder.append(".YES)");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(");
-            _builder.append(cast, "			");
+            _builder.append(cast, "\t\t\t");
             _builder.append("semanticObject, ");
             EStructuralFeature _feature_1 = f.getFeature();
             String _importedGenTypeLiteral_1 = file.importedGenTypeLiteral(_feature_1);
-            _builder.append(_importedGenTypeLiteral_1, "			");
+            _builder.append(_importedGenTypeLiteral_1, "\t\t\t");
             _builder.append("));");
             _builder.newLineIfNotEmpty();
           }
@@ -530,16 +530,16 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         _builder.newLine();
         _builder.append("\t");
         String _imported_1 = file.imported(INodesForEObjectProvider.class);
-        _builder.append(_imported_1, "	");
+        _builder.append(_imported_1, "\t");
         _builder.append(" nodes = createNodeProvider(");
-        _builder.append(cast, "	");
+        _builder.append(cast, "\t");
         _builder.append("semanticObject);");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         String _imported_2 = file.imported(SequenceFeeder.class);
-        _builder.append(_imported_2, "	");
+        _builder.append(_imported_2, "\t");
         _builder.append(" feeder = createSequencerFeeder(");
-        _builder.append(cast, "	");
+        _builder.append(cast, "\t");
         _builder.append("semanticObject, nodes);");
         _builder.newLineIfNotEmpty();
         {
@@ -581,11 +581,11 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             _builder.append("feeder.accept(grammarAccess.");
             AbstractElement _grammarElement = assignment.getGrammarElement();
             String _gaAccessor = this.grammarAccess.gaAccessor(_grammarElement);
-            _builder.append(_gaAccessor, "	");
+            _builder.append(_gaAccessor, "\t");
             _builder.append(", semanticObject.");
             EStructuralFeature _feature_2 = f_1.getFeature();
             String _getAccessor = file.getGetAccessor(_feature_2);
-            _builder.append(_getAccessor, "	");
+            _builder.append(_getAccessor, "\t");
             _builder.append("());");
             _builder.newLineIfNotEmpty();
           }
@@ -596,7 +596,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       } else {
         _builder.append("\t");
         _builder.append("genericSequencer.createSequence(context, ");
-        _builder.append(cast, "	");
+        _builder.append(cast, "\t");
         _builder.append("semanticObject);");
         _builder.newLineIfNotEmpty();
       }

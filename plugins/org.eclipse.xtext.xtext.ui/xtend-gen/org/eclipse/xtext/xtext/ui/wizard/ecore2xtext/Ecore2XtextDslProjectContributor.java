@@ -126,7 +126,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
       for(final String ePackageInfo : _filterNull) {
         _builder.append("\t\t");
         _builder.append("registerGeneratedEPackage = \"");
-        _builder.append(ePackageInfo, "		");
+        _builder.append(ePackageInfo, "\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
       }
@@ -145,7 +145,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
       for(final String genmodelURI : _set) {
         _builder.append("\t\t");
         _builder.append("registerGenModelFile = \"");
-        _builder.append(genmodelURI, "		");
+        _builder.append(genmodelURI, "\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
       }

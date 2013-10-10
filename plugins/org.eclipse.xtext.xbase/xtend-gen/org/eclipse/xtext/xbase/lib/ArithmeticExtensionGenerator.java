@@ -84,7 +84,7 @@ public class ArithmeticExtensionGenerator {
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               CharSequence _generateAllOperations = this.generateAllOperations(type);
-              _builder.append(_generateAllOperations, "	");
+              _builder.append(_generateAllOperations, "\t");
               _builder.newLineIfNotEmpty();
               String _endMarker = this.endMarker();
               int _indexOf_1 = content.indexOf(_endMarker);
@@ -166,7 +166,7 @@ public class ArithmeticExtensionGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     CharSequence _generateAllOperations = this.generateAllOperations(type);
-    _builder.append(_generateAllOperations, "	");
+    _builder.append(_generateAllOperations, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
@@ -312,7 +312,7 @@ public class ArithmeticExtensionGenerator {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("return a ");
-        _builder.append(operator, "	");
+        _builder.append(operator, "\t");
         _builder.append(" b;");
         _builder.newLineIfNotEmpty();
         _builder.append("}");

@@ -39,7 +39,7 @@ public abstract class AbstractXtendFormatterTest {
     _builder.append("class bar {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append(expression, "	");
+    _builder.append(expression, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();

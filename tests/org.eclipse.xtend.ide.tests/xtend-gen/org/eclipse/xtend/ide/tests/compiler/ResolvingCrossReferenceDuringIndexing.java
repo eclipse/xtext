@@ -369,7 +369,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder.append("val type = declaredField.type");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append(expectations, "		");
+      _builder.append(expectations, "\t\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("returnType.assertProxies(\"After\")");
@@ -446,7 +446,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("var ");
-      _builder_1.append(functionType, "	");
+      _builder_1.append(functionType, "\t");
       _builder_1.append(" function");
       _builder_1.newLineIfNotEmpty();
       _builder_1.newLine();

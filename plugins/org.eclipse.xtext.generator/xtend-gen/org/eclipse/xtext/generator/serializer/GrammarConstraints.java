@@ -90,10 +90,10 @@ public class GrammarConstraints extends GeneratedFile {
             if (!_hasElements_2) {
               _hasElements_2 = true;
             } else {
-              _builder.appendImmediate(" | ", "	");
+              _builder.appendImmediate(" | ", "\t");
             }
             String _name_5 = constraint.getName();
-            _builder.append(_name_5, "	");
+            _builder.append(_name_5, "\t");
           }
         }
         _builder.append(";");
@@ -136,13 +136,13 @@ public class GrammarConstraints extends GeneratedFile {
             if (_type_1!=null) {
               _name_8=_type_1.getName();
             }
-            _builder.append(_name_8, "	");
+            _builder.append(_name_8, "\t");
             _builder.append("};");
             _builder.newLineIfNotEmpty();
           } else {
             _builder.append("\t");
             IConstraintElement _body_1 = constraint_1.getBody();
-            _builder.append(_body_1, "	");
+            _builder.append(_body_1, "\t");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           }

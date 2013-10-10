@@ -163,7 +163,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("def bar() {");
     _builder_3.newLine();
     _builder_3.append("\t\t");
-    _builder_3.append(QuickfixTest.defaultBody, "		");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
     _builder_3.newLineIfNotEmpty();
     _builder_3.append("\t");
     _builder_3.append("}");
@@ -191,7 +191,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_4.append("def getBar() {");
     _builder_4.newLine();
     _builder_4.append("\t\t");
-    _builder_4.append(QuickfixTest.defaultBody, "		");
+    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
     _builder_4.newLineIfNotEmpty();
     _builder_4.append("\t");
     _builder_4.append("}");
@@ -240,7 +240,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -384,7 +384,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def setBar(long l) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -454,7 +454,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -504,7 +504,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("def getBar() {");
     _builder_3.newLine();
     _builder_3.append("\t\t");
-    _builder_3.append(QuickfixTest.defaultBody, "		");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
     _builder_3.newLineIfNotEmpty();
     _builder_3.append("\t");
     _builder_3.append("}");
@@ -553,7 +553,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -602,7 +602,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -652,7 +652,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("def getBar() {");
     _builder_3.newLine();
     _builder_3.append("\t\t");
-    _builder_3.append(QuickfixTest.defaultBody, "		");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
     _builder_3.newLineIfNotEmpty();
     _builder_3.append("\t");
     _builder_3.append("}");
@@ -696,7 +696,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def foo() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -730,7 +730,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def getFoo() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "		");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
     _builder_2.newLineIfNotEmpty();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -776,7 +776,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("def foo(Foo foo) {");
     _builder_3.newLine();
     _builder_3.append("\t\t");
-    _builder_3.append(QuickfixTest.defaultBody, "		");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
     _builder_3.newLineIfNotEmpty();
     _builder_3.append("\t");
     _builder_3.append("}");
@@ -807,7 +807,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_4.append("def getFoo(Foo foo) {");
     _builder_4.newLine();
     _builder_4.append("\t\t");
-    _builder_4.append(QuickfixTest.defaultBody, "		");
+    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
     _builder_4.newLineIfNotEmpty();
     _builder_4.append("\t");
     _builder_4.append("}");
@@ -850,7 +850,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def static foo() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -884,7 +884,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def static getFoo() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "		");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
     _builder_2.newLineIfNotEmpty();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -948,7 +948,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -993,7 +993,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def foo() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1040,7 +1040,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def foo(Foo foo) {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "		");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
     _builder_2.newLineIfNotEmpty();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -1085,7 +1085,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def static foo() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1148,7 +1148,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def static getBar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1176,7 +1176,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def static bar() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "		");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
     _builder_2.newLineIfNotEmpty();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -1235,7 +1235,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def static getBar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1257,7 +1257,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def static bar() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "		");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
     _builder_2.newLineIfNotEmpty();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -1310,7 +1310,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def getBar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1332,7 +1332,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def bar() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "		");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
     _builder_2.newLineIfNotEmpty();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -1388,7 +1388,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("new(int i) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1446,7 +1446,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("new(int i) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1491,7 +1491,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("new(int i) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1552,7 +1552,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("override bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1597,7 +1597,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("override compareTo(Foo o) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1662,7 +1662,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def operator_multiply(Foo foo) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1721,7 +1721,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def operator_multiply(Foo foo, Bar bar) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1740,7 +1740,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def operator_multiply(Bar bar) {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "		");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
     _builder_2.newLineIfNotEmpty();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -1774,7 +1774,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def bar() ");
-    _builder.append(tripleQuotes, "	");
+    _builder.append(tripleQuotes, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("tab");
@@ -1783,7 +1783,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("|space");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append(tripleQuotes, "	");
+    _builder.append(tripleQuotes, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
@@ -1795,7 +1795,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("def bar() ");
-    _builder_1.append(tripleQuotes, "	");
+    _builder_1.append(tripleQuotes, "\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t\t");
     _builder_1.append("tab");
@@ -1804,7 +1804,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("space");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append(tripleQuotes, "	");
+    _builder_1.append(tripleQuotes, "\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -2580,7 +2580,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar(int i, Object object) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -2633,7 +2633,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("override <T> test(List<T> t, (Object)=>String a) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
