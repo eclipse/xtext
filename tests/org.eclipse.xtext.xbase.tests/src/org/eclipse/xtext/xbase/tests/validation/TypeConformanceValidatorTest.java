@@ -99,6 +99,11 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertNoCastError("42 as byte");
 	}
 	
+	@Test
+	public void testCast_07a() throws Exception {
+		assertNoCastError("42 as long");
+	}
+	
 	@Test 
 	public void testCast_08() throws Exception {
 		assertCastError("true as Integer", TypesPackage.Literals.JVM_TYPE_REFERENCE, "Cannot", "boolean", "Integer");
@@ -120,6 +125,16 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test 
+	public void testCast_11a() throws Exception {
+		assertCastError("(null as Integer) as short", TypesPackage.Literals.JVM_TYPE_REFERENCE, "Cannot", "Integer", "short");
+	}
+
+	@Test 
+	public void testCast_11b() throws Exception {
+		assertNoCastError("(null as Integer) as long");
+	}
+
+	@Test 
 	public void testCast_12() throws Exception {
 		assertCastError("true as int", TypesPackage.Literals.JVM_TYPE_REFERENCE, "Cannot", "boolean", "int");
 	}
@@ -129,6 +144,14 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		final XExpression xExpression = expression("true as boolean", false);
 		helper.assertWarning(xExpression, TypesPackage.Literals.JVM_TYPE_REFERENCE, OBSOLETE_CAST, "boolean");
 	}
+	
+	@Test 
+	public void testCast_14() throws Exception {
+		assertCastError("new Object as int", TypesPackage.Literals.JVM_TYPE_REFERENCE, "Cannot", "Object", "int");
+	}
+	
+	
+
 	
 	@Test public void testSwitch_TypeGuard_01() throws Exception {
 		String expression = "switch ('foo') { Integer : null }";

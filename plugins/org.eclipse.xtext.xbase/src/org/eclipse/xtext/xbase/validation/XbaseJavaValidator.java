@@ -200,6 +200,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				}
 			}
 		}
+		if(toType.isPrimitive() && !(fromType.isPrimitive() || fromType.isWrapper())) {
+				error("Cannot cast from " + getNameOfTypes(fromType) + " to "
+						+ canonicalName(toType), concreteSyntax, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						INVALID_CAST);
+		}
 		/*
 		 * TODO: JDT reports no unncessary cast of List<?> but for List<String> ... why is there an exception?
 		 * 

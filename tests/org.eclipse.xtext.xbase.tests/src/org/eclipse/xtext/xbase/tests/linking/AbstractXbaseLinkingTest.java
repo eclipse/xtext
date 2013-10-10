@@ -84,7 +84,7 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testBinaryOperation_3() throws Exception {
-		XBinaryOperation operation = (XBinaryOperation) expression("(null as char) + '1'", true);
+		XBinaryOperation operation = (XBinaryOperation) expression("(1 as char) + '1'", true);
 		assertEquals("org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_plus(java.lang.Object,java.lang.String)",operation.getFeature().getIdentifier());
 	}
 	
