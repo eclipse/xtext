@@ -47,21 +47,29 @@ public class WorkspaceEncodingProvider implements IEncodingProvider {
 
 	public String getEncoding(URI uri) {
 		if (workspace != null) {
-			Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri).iterator();
-			while (storages.hasNext()) {
-				Pair<IStorage, IProject> storage = storages.next();
-				if (storage.getFirst() instanceof IEncodedStorage) {
-					try {
-						return ((IEncodedStorage) storage.getFirst()).getCharset();
-					} catch (CoreException e) {
-						LOG.error("Error getting file encoding", e);
-					}
-				}
+			if (uri == null) {
 				try {
-					String result = storage.getSecond().getDefaultCharset(true);
-					return result;
+					return workspace.getRoot().getDefaultCharset();
 				} catch (CoreException e) {
 					LOG.error("Error getting project's default encoding", e);
+				}
+			} else {
+				Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri).iterator();
+				while (storages.hasNext()) {
+					Pair<IStorage, IProject> storage = storages.next();
+					if (storage.getFirst() instanceof IEncodedStorage) {
+						try {
+							return ((IEncodedStorage) storage.getFirst()).getCharset();
+						} catch (CoreException e) {
+							LOG.error("Error getting file encoding", e);
+						}
+					}
+					try {
+						String result = storage.getSecond().getDefaultCharset(true);
+						return result;
+					} catch (CoreException e) {
+						LOG.error("Error getting project's default encoding", e);
+					}
 				}
 			}
 		}
