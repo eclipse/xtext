@@ -173,7 +173,10 @@ public class TypeReferences {
 		JvmWildcardTypeReference result = factory.createJvmWildcardTypeReference();
 		JvmLowerBound lowerBound = factory.createJvmLowerBound();
 		lowerBound.setTypeReference(clone);
+		JvmUpperBound upperBound = factory.createJvmUpperBound();
+		upperBound.setTypeReference(getTypeForName(Object.class, clone.getType()));
 		result.getConstraints().add(lowerBound);
+		result.getConstraints().add(upperBound);
 		return result;
 	}
 
