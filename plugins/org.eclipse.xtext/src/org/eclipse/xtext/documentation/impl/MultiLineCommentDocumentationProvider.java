@@ -83,6 +83,9 @@ public class MultiLineCommentDocumentationProvider extends AbstractMultiLineComm
 		return getTextFromMultilineComment(returnValue);
 	}
 	
+	/**
+	 * @since 2.5
+	 */
 	@Override
 	@Inject
 	public void injectProperties(MultiLineCommentProviderProperties properties) {
