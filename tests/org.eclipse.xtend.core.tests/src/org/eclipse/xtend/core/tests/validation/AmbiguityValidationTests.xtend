@@ -289,21 +289,6 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
-	def void testUnambiguousMethods_02() {
-		'''
-			class C {
-				def void m(StringBuilder b, D it) {
-					m2(b)
-				}
-				def void m2(Appendable a) {}
-			}
-			class D {
-				def void m2(Object o) {}
-			}
-		'''.assertUnambiguous
-	}
-	
-	@Test
 	def void testUnambiguousMethods_03() {
 		'''
 			class C {

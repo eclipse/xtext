@@ -457,35 +457,6 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
   }
   
   @Test
-  public void testUnambiguousMethods_02() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class C {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void m(StringBuilder b, D it) {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("m2(b)");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void m2(Appendable a) {}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("class D {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void m2(Object o) {}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.assertUnambiguous(_builder);
-  }
-  
-  @Test
   public void testUnambiguousMethods_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

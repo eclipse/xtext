@@ -25,7 +25,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractPendingLinkingCandidate.CompareResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -56,8 +55,8 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		if (other instanceof AbstractPendingLinkingCandidate) {
 			AbstractPendingLinkingCandidate<?> right = (AbstractPendingLinkingCandidate<?>) other;
-			CompareResult compareResult = compareTo(right);
-			switch(compareResult) {
+			CandidateCompareResult candidateCompareResult = compareTo(right);
+			switch(candidateCompareResult) {
 				case AMBIGUOUS:
 					addCandidate(right);
 				case EQUALLY_INVALID:
@@ -71,9 +70,9 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 		throw new IllegalArgumentException("other was " + other);
 	}
 	
-	protected CompareResult compareTo(AbstractPendingLinkingCandidate<?> right) {
+	protected CandidateCompareResult compareTo(AbstractPendingLinkingCandidate<?> right) {
 		Candidate primaryCandidate = getPrimaryCandidate();
-		CompareResult result = primaryCandidate.compareTo(right);
+		CandidateCompareResult result = primaryCandidate.compareTo(right);
 		return result;
 	}
 	

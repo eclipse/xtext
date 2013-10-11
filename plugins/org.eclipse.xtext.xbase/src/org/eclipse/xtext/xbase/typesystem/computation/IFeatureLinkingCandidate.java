@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
  * it can be an {@link #isExtension() extension}, or a {@link #isTypeLiteral() type literal}. 
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO toString
  */
 @NonNullByDefault
 public interface IFeatureLinkingCandidate extends ILinkingCandidate {
