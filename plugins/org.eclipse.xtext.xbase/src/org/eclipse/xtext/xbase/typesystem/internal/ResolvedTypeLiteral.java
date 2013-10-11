@@ -50,6 +50,7 @@ public class ResolvedTypeLiteral extends AbstractResolvedReference<XAbstractFeat
 		return getFeatureCall().isExtension();
 	}
 
+	@Override
 	public boolean isTypeLiteral() {
 		return getFeatureCall().isTypeLiteral();
 	}
@@ -78,7 +79,6 @@ public class ResolvedTypeLiteral extends AbstractResolvedReference<XAbstractFeat
 		return Collections.emptyList();
 	}
 
-	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}

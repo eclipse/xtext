@@ -12,17 +12,24 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.XtendRuntimeModule;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtend.core.scoping.XtendScopeProvider;
+import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
+import org.eclipse.xtext.validation.SeverityConverter;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -59,6 +66,20 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 		@Override
 		public Class<? extends IScopeProvider> bindIScopeProvider() {
 			return DisabledXtendScopeProvider.class;
+		}
+		
+		@Override
+		public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
+			return SuspiciousOverloadIsErrorInTests.class;
+		}
+	}
+	
+	@Singleton
+	public static class SuspiciousOverloadIsErrorInTests extends XtendConfigurableIssueCodes {
+		@Override
+		protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
+			super.initialize(iAcceptor);
+			iAcceptor.accept(create(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, SeverityConverter.SEVERITY_ERROR));
 		}
 	}
 

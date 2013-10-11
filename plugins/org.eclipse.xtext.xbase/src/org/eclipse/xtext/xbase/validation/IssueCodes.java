@@ -19,6 +19,12 @@ public class IssueCodes {
 
 	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
 	public static final String AMBIGUOUS_FEATURE_CALL = ISSUE_CODE_PREFIX + "ambiguous_feature_call";
+	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397062 */
+	/**
+	 * This indicates an overload problem, e.g. if two implicit receivers provide methods
+	 * and the outer receiver wins ('it' looses against 'this').
+	 */
+	public static final String SUSPICIOUSLY_OVERLOADED_FEATURE = ISSUE_CODE_PREFIX + "suspiciously_overloaded_feature";
 	public static final String ANNOTATIONS_ILLEGAL_ATTRIBUTE = ISSUE_CODE_PREFIX + "no_illegal_value";
 	public static final String ANNOTATIONS_NO_VALUE_ATTRIBUTE = ISSUE_CODE_PREFIX + "no_attribute_value";
 	public static final String ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION = ISSUE_CODE_PREFIX + "missing_attribute_definition";

@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ISuspiciouslyOverloadedCandidate;
 import org.eclipse.xtext.xbase.ui.navigation.TypeLiteralAwareHyperlinkHelper;
 
 import com.google.common.collect.Iterables;
@@ -98,7 +99,10 @@ public class XtendHyperlinkHelper extends TypeLiteralAwareHyperlinkHelper {
 				if (casted.getFeature() == crossLinkedEObject) {
 					IFeatureLinkingCandidate candidate = typeResolver.resolveTypes(casted).getLinkingCandidate(casted);
 					if (candidate instanceof IAmbiguousLinkingCandidate) {
-						createAmbiguousLinks(resource, crossRefNode, ((IAmbiguousLinkingCandidate) candidate).getAlternatives(), acceptor);
+						createMultipleLinks(resource, crossRefNode, ((IAmbiguousLinkingCandidate) candidate).getAlternatives(), acceptor);
+					} else if (candidate instanceof ISuspiciouslyOverloadedCandidate) {
+						ISuspiciouslyOverloadedCandidate castedCandidate = (ISuspiciouslyOverloadedCandidate) candidate;
+						createMultipleLinks(resource, crossRefNode, Lists.newArrayList(castedCandidate.getChosenCandidate(), castedCandidate.getRejectedCandidate()), acceptor);
 					} else {
 						createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 					}
@@ -108,7 +112,7 @@ public class XtendHyperlinkHelper extends TypeLiteralAwareHyperlinkHelper {
 				if (casted.getConstructor() == crossLinkedEObject) {
 					IConstructorLinkingCandidate candidate = typeResolver.resolveTypes(casted).getLinkingCandidate(casted);
 					if (candidate instanceof IAmbiguousLinkingCandidate) {
-						createAmbiguousLinks(resource, crossRefNode, ((IAmbiguousLinkingCandidate) candidate).getAlternatives(), acceptor);
+						createMultipleLinks(resource, crossRefNode, ((IAmbiguousLinkingCandidate) candidate).getAlternatives(), acceptor);
 					} else {
 						createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 					}
@@ -119,7 +123,7 @@ public class XtendHyperlinkHelper extends TypeLiteralAwareHyperlinkHelper {
 		}
 	}
 
-	private void createAmbiguousLinks(XtextResource resource, INode crossRefNode,
+	private void createMultipleLinks(XtextResource resource, INode crossRefNode,
 			List<? extends ILinkingCandidate> alternatives, IHyperlinkAcceptor acceptor) {
 		for(ILinkingCandidate alternative: alternatives) {
 			createHyperlinksTo(resource, crossRefNode, alternative.getFeature(), acceptor);
