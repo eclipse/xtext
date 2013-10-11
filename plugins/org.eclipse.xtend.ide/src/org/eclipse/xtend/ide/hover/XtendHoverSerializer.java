@@ -59,10 +59,11 @@ public class XtendHoverSerializer implements IFeatureNames {
 						stringBuilder.append(((XMemberFeatureCall) receiver).getFeature().getSimpleName()).append(DELIMITER);
 					} else if (receiver instanceof XAbstractFeatureCall) {
 						JvmIdentifiableElement receiverFeature = ((XAbstractFeatureCall) receiver).getFeature();
-						if (receiverFeature.getSimpleName().equals(IT.toString()))
-							stringBuilder.append(IT).append(DELIMITER);
-						if (receiverFeature == feature.eContainer())
+						if (receiverFeature == feature.eContainer()) {
 							stringBuilder.append(THIS).append(DELIMITER);
+						} else {
+							stringBuilder.append(receiverFeature.getSimpleName()).append(DELIMITER);
+						}
 					}
 					stringBuilder.append(feature.getSimpleName());
 					if (feature instanceof JvmExecutable)
