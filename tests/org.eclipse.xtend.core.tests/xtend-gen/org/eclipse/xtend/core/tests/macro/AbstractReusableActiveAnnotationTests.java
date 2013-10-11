@@ -961,9 +961,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("body=");
-    _builder.append("\'\'\'", "			");
+    _builder.append("\'\'\'", "\t\t\t");
     _builder.append("System.out.println(\"Hello World\");");
-    _builder.append("\'\'\'", "			");
+    _builder.append("\'\'\'", "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("]");

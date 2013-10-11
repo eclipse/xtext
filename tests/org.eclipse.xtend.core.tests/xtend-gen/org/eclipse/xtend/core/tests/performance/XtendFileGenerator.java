@@ -67,10 +67,10 @@ public class XtendFileGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("extension ");
-        _builder.append(injectedExt, "	");
+        _builder.append(injectedExt, "\t");
         _builder.append(" ext");
         int _indexOf = conf.injectedExtensionTypes.indexOf(injectedExt);
-        _builder.append(_indexOf, "	");
+        _builder.append(_indexOf, "\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -879,15 +879,15 @@ public class XtendFileGenerator {
     }
     _builder.append("writeLetterTo(Person p) ");
     String _TQ = this.TQ();
-    _builder.append(_TQ, "	");
+    _builder.append(_TQ, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("Dear ");
     String _GO = this.GO();
-    _builder.append(_GO, "		");
+    _builder.append(_GO, "\t\t");
     _builder.append("p.forename");
     String _GC = this.GC();
-    _builder.append(_GC, "		");
+    _builder.append(_GC, "\t\t");
     _builder.append(",");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -909,14 +909,14 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     String _GO_1 = this.GO();
-    _builder.append(_GO_1, "			");
+    _builder.append(_GO_1, "\t\t\t");
     _builder.append("signature");
     String _GC_1 = this.GC();
-    _builder.append(_GC_1, "			");
+    _builder.append(_GC_1, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     String _TQ_1 = this.TQ();
-    _builder.append(_TQ_1, "	");
+    _builder.append(_TQ_1, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
@@ -929,7 +929,7 @@ public class XtendFileGenerator {
     }
     _builder.append("signature() ");
     String _TQ_2 = this.TQ();
-    _builder.append(_TQ_2, "	");
+    _builder.append(_TQ_2, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("Bla bla Foo Bar");
@@ -942,7 +942,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("\t");
     String _TQ_3 = this.TQ();
-    _builder.append(_TQ_3, "	");
+    _builder.append(_TQ_3, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();

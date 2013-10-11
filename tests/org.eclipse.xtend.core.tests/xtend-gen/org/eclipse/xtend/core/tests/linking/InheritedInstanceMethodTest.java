@@ -27,7 +27,7 @@ public class InheritedInstanceMethodTest extends AbstractOverloadedInstanceMetho
     _builder.append("def void m() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append(invocation, "		");
+    _builder.append(invocation, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("}");

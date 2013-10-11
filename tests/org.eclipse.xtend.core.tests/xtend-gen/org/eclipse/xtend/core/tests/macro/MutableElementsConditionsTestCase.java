@@ -144,7 +144,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder.append("\t");
     _builder.append("@");
     String _name = CheckMutableMethodDeclaration.class.getName();
-    _builder.append(_name, "	");
+    _builder.append(_name, "\t");
     _builder.append(" def void foo () {}");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -186,7 +186,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder.append("\t");
     _builder.append("@");
     String _name = CheckMutableFieldDeclaration.class.getName();
-    _builder.append(_name, "	");
+    _builder.append(_name, "\t");
     _builder.append(" Object foo");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -225,7 +225,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder.append("\t");
     _builder.append("def void foo (@");
     String _name = CheckMutableParameterDeclaration.class.getName();
-    _builder.append(_name, "	");
+    _builder.append(_name, "\t");
     _builder.append(" Object foo) {}");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

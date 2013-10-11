@@ -12,7 +12,7 @@ public class TypeReferenceFormatterTest extends AbstractXbaseFormatterTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("var ");
-    _builder.append(toBeFormatted, "	");
+    _builder.append(toBeFormatted, "\t");
     _builder.append(" x");
     _builder.newLineIfNotEmpty();
     _builder.append("}");

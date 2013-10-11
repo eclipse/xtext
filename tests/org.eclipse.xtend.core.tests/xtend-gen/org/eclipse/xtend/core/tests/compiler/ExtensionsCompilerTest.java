@@ -1764,7 +1764,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder.newLine();
     _builder.append("    \t");
     _builder.append("(\"\"->");
-    _builder.append("\'\'\'\'\'\'", "    	");
+    _builder.append("\'\'\'\'\'\'", "    \t");
     _builder.append(").m");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

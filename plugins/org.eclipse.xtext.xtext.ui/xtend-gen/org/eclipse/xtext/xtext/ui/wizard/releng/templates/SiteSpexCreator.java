@@ -46,7 +46,7 @@ public class SiteSpexCreator implements IProjectFactoryContributor {
         _builder.append("\t\t");
         _builder.append("<cs:dependency name=\"");
         String _name = testProject.getName();
-        _builder.append(_name, "		");
+        _builder.append(_name, "\t\t");
         _builder.append("\" componentType=\"osgi.bundle\" />");
         _builder.newLineIfNotEmpty();
       }

@@ -116,7 +116,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                 _builder.append("\t");
                 _builder.append("String msg = RESOURCE_BUNDLE.getString(\"");
                 String _simpleName = field.getSimpleName();
-                _builder.append(_simpleName, "	");
+                _builder.append(_simpleName, "\t");
                 _builder.append("\");");
                 _builder.newLineIfNotEmpty();
                 {
@@ -127,7 +127,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                     _builder.append("msg = ");
                     TypeReference _newTypeReference = context.newTypeReference(MessageFormat.class);
                     String _javaCode = it.toJavaCode(_newTypeReference);
-                    _builder.append(_javaCode, "	");
+                    _builder.append(_javaCode, "\t");
                     _builder.append(".format(msg,");
                     final Function1<MutableParameterDeclaration,String> _function = new Function1<MutableParameterDeclaration,String>() {
                       public String apply(final MutableParameterDeclaration it) {
@@ -137,7 +137,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                     };
                     List<String> _map = ListExtensions.<MutableParameterDeclaration, String>map(params, _function);
                     String _join = IterableExtensions.join(_map, ",");
-                    _builder.append(_join, "	");
+                    _builder.append(_join, "\t");
                     _builder.append(");");
                     _builder.newLineIfNotEmpty();
                   }
@@ -156,7 +156,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                 _builder.newLine();
                 _builder.append("\t");
                 _builder.append("return \"");
-                _builder.append(initializer, "	");
+                _builder.append(initializer, "\t");
                 _builder.append("\";");
                 _builder.newLineIfNotEmpty();
                 _builder.append("}");

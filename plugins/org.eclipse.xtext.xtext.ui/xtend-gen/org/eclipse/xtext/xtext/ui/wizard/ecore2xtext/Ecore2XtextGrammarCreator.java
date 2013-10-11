@@ -126,7 +126,7 @@ public class Ecore2XtextGrammarCreator {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         String _subClassAlternatives = this.subClassAlternatives(it);
-        _builder.append(_subClassAlternatives, "	");
+        _builder.append(_subClassAlternatives, "\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -346,7 +346,7 @@ public class Ecore2XtextGrammarCreator {
             _builder.append("\t");
             _builder.append("{");
             String _fqn_1 = Ecore2XtextExtensions.fqn(it);
-            _builder.append(_fqn_1, "	");
+            _builder.append(_fqn_1, "\t");
             _builder.append("}");
             _builder.newLineIfNotEmpty();
           }
@@ -356,19 +356,19 @@ public class Ecore2XtextGrammarCreator {
           for(final EStructuralFeature strF : _prefixFeatures) {
             _builder.append("\t");
             CharSequence _assigment = this.assigment(strF);
-            _builder.append(_assigment, "	");
+            _builder.append(_assigment, "\t");
             _builder.newLineIfNotEmpty();
           }
         }
         _builder.append("\t");
         _builder.append("\'");
         String _name = ((EClass)it).getName();
-        _builder.append(_name, "	");
+        _builder.append(_name, "\t");
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         CharSequence _idAssignment = this.idAssignment(((EClass)it));
-        _builder.append(_idAssignment, "	");
+        _builder.append(_idAssignment, "\t");
         {
           Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(((EClass)it));
           boolean _isEmpty = IterableExtensions.isEmpty(_inlinedFeatures);
@@ -384,7 +384,7 @@ public class Ecore2XtextGrammarCreator {
                 _builder.append("\t");
                 _builder.append("\t");
                 CharSequence _assigment_1 = this.assigment(attr);
-                _builder.append(_assigment_1, "		");
+                _builder.append(_assigment_1, "\t\t");
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -394,7 +394,7 @@ public class Ecore2XtextGrammarCreator {
                 _builder.append("\t");
                 _builder.append("\t");
                 CharSequence _assigment_2 = this.assigment(ref);
-                _builder.append(_assigment_2, "		");
+                _builder.append(_assigment_2, "\t\t");
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -404,7 +404,7 @@ public class Ecore2XtextGrammarCreator {
                 _builder.append("\t");
                 _builder.append("\t");
                 CharSequence _assigment_3 = this.assigment(conti);
-                _builder.append(_assigment_3, "		");
+                _builder.append(_assigment_3, "\t\t");
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -433,7 +433,7 @@ public class Ecore2XtextGrammarCreator {
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           String _dataTypeRuleBody = Ecore2XtextExtensions.dataTypeRuleBody(((EDataType)it));
-          _builder.append(_dataTypeRuleBody, "	");
+          _builder.append(_dataTypeRuleBody, "\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
           _xifexpression = _builder;
@@ -468,7 +468,7 @@ public class Ecore2XtextGrammarCreator {
         };
         List<String> _map = ListExtensions.<EEnumLiteral, String>map(_eLiterals, _function);
         String _join = IterableExtensions.join(_map, " | ");
-        _builder.append(_join, "				");
+        _builder.append(_join, "\t\t\t\t");
         _builder.append(";");
         _switchResult = _builder;
       }

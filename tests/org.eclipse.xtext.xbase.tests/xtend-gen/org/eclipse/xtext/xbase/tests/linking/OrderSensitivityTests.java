@@ -83,12 +83,12 @@ public class OrderSensitivityTests extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var ");
-      _builder.append(declarator, "	");
+      _builder.append(declarator, "\t");
       _builder.append(" receiver = null");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("receiver.");
-      _builder.append(invocation, "	");
+      _builder.append(invocation, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();

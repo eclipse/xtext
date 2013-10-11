@@ -391,7 +391,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("barCharSequence(42, ");
-    _builder.append("\'\'\'", "		");
+    _builder.append("\'\'\'", "\t\t");
     _builder.append("   Test   Test");
     _builder.newLineIfNotEmpty();
     _builder.append("Test");
