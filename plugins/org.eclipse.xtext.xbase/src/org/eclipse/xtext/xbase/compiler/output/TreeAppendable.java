@@ -486,7 +486,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	/**
 	 * @since 2.4
 	 */
-	protected SharedAppendableState getState() {
+	public SharedAppendableState getState() {
 		return state;
 	}
 	

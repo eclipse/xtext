@@ -29,7 +29,7 @@ class ImportingStringConcatenation extends StringConcatenation {
 	val ImportManager importManager
 	val ITypeReferenceOwner typeReferenceOwner
 
-	new(TreeAppendable state, ITypeReferenceOwner typeReferenceOwner) {
+	new(SharedAppendableState state, ITypeReferenceOwner typeReferenceOwner) {
 		super(state.lineSeparator)
 		this.importManager = state.importManager
 		this.typeReferenceOwner = typeReferenceOwner
