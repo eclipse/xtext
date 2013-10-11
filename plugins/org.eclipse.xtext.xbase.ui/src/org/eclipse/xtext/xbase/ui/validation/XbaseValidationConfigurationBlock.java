@@ -73,6 +73,7 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		comboBoxBuilder.addComboBox(IssueCodes.EQUALS_WITH_NULL, "Equals comparison with 'null':");
 		comboBoxBuilder.addComboBox(IssueCodes.UNHANDLED_EXCEPTION, "Unhandled checked exceptions:");
 		comboBoxBuilder.addComboBox(IssueCodes.JAVA_STYLE_TYPE_CAST, "Type cast with Java syntax:");
+		comboBoxBuilder.addComboBox(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, "Method overloading with multiple implicit receivers:");
 	}
 
 	protected void fillRestrictedApiSection(ComboBoxBuilder comboBoxBuilder) {

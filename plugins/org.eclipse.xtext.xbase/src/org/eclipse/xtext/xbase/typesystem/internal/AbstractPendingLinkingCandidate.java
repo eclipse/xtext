@@ -69,28 +69,6 @@ import com.google.common.collect.Lists;
 public abstract class AbstractPendingLinkingCandidate<Expression extends XExpression> extends AbstractLinkingCandidate<Expression> { 
 	
 	/**
-	 * The result of the comparison of two linking candidates. 
-	 */
-	enum CompareResult {
-		/**
-		 * Indicates that the current candidate is a better match than the other one.
-		 */
-		THIS,
-		/**
-		 * Indicates that the current candidate is worse than the other one.
-		 */
-		OTHER,
-		/**
-		 * Indicates that both candidates are equally valid. The situation may be ambiguous.
-		 */
-		AMBIGUOUS,
-		/**
-		 * Indicates that both candidates are equally invalid. Pick the first one.
-		 */
-		EQUALLY_INVALID
-	}
-	
-	/**
 	 * The backing feature descriptions. It carries the information about the potentially
 	 * resolved feature, e.g. the implicit receiver, whether it's an extension and more.
 	 */
@@ -432,14 +410,15 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * The result is not necessarily this or the other, but may also be a third instance,
 	 * e.g. in order to disambiguate certain error conditions.
 	 */
-	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		if (other instanceof AbstractPendingLinkingCandidate) {
 			AbstractPendingLinkingCandidate<?> right = (AbstractPendingLinkingCandidate<?>) other;
-			CompareResult compareResult = compareTo(right);
-			switch(compareResult) {
+			CandidateCompareResult candidateCompareResult = compareTo(right);
+			switch(candidateCompareResult) {
 				case AMBIGUOUS:
 					return createAmbiguousLinkingCandidate(right);
+				case SUSPICIOUS_OTHER:
+					return createSuspiciousLinkingCandidate(right);
 				case EQUALLY_INVALID:
 				case THIS:
 					return this;
@@ -454,19 +433,30 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * Produce a candidate that carries the information about ambiguous candidates.
 	 */
 	protected abstract ILinkingCandidate createAmbiguousLinkingCandidate(AbstractPendingLinkingCandidate<?> second);
+	/**
+	 * Produce a candidate that carries the information about suspicious overload resolution where
+	 * a member on 'this' wins over a member on 'it'.
+	 * 
+	 * @param chosenCandidate the candidate that was picked.
+	 */
+	protected ILinkingCandidate createSuspiciousLinkingCandidate(AbstractPendingLinkingCandidate<?> chosenCandidate) {
+		throw new UnsupportedOperationException();
+	}
 	
 	/**
-	 * Returns {@code CompareResult#THIS} if this candidate is better, {@code CompareResult#OTHER} if the 
-	 * right candidate was better, {@code CompareResult#AMBIGUOUS} if both candidates are valid
-	 * but ambiguous or {@code CompareResult#EQUALLY_INVALID} if both candidates are 
+	 * Returns {@code CandidateCompareResult#THIS} if this candidate is better, {@code CandidateCompareResult#OTHER} if the 
+	 * right candidate was better, {@code CandidateCompareResult#AMBIGUOUS} if both candidates are valid
+	 * but ambiguous or {@code CandidateCompareResult#EQUALLY_INVALID} if both candidates are 
 	 * ambiguous but erroneous.
 	 */
 	@SuppressWarnings("incomplete-switch")
-	protected CompareResult compareTo(AbstractPendingLinkingCandidate<?> right) {
+	protected CandidateCompareResult compareTo(AbstractPendingLinkingCandidate<?> right) {
 		boolean invalid = false;
 		{
-			CompareResult arityCompareResult = compareByArityWith(right);
+			CandidateCompareResult arityCompareResult = compareByArityWith(right);
 			switch(arityCompareResult) {
+				case SUSPICIOUS_OTHER:
+					throw new IllegalStateException();
 				case EQUALLY_INVALID:
 					invalid = true;
 					break;
@@ -480,15 +470,17 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			boolean visible = isVisible();
 			if (visible != right.isVisible()) {
 				if (visible)
-					return CompareResult.THIS;
-				return CompareResult.OTHER;
+					return CandidateCompareResult.THIS;
+				return CandidateCompareResult.OTHER;
 			} else if (!visible) {
 				invalid = true;
 			}
 		}
 		{
-			CompareResult typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
+			CandidateCompareResult typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
 			switch(typeArityCompareResult) {
+				case SUSPICIOUS_OTHER:
+					throw new IllegalStateException();
 				case EQUALLY_INVALID:
 					invalid = true;
 					break;
@@ -499,11 +491,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			}
 		}
 		{
-			CompareResult argumentTypeCompareResult = compareByArgumentTypes(right);
+			CandidateCompareResult argumentTypeCompareResult = compareByArgumentTypes(right);
 			switch(argumentTypeCompareResult) {
 				case EQUALLY_INVALID:
 					invalid = true;
 					break;
+				case SUSPICIOUS_OTHER:
 				case OTHER:
 				case THIS:
 					return argumentTypeCompareResult;
@@ -511,8 +504,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			}
 		}
 		{
-			CompareResult typeArgumentCompareResult = compareByTypeArguments(right);
+			CandidateCompareResult typeArgumentCompareResult = compareByTypeArguments(right);
 			switch(typeArgumentCompareResult) {
+				case SUSPICIOUS_OTHER:
+					throw new IllegalStateException();
 				case EQUALLY_INVALID:
 					invalid = true;
 					break;
@@ -524,15 +519,17 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		}
 		if (isVarArgs() != right.isVarArgs()) {
 			if (isVarArgs())
-				return CompareResult.OTHER;
-			return CompareResult.THIS;
+				return CandidateCompareResult.OTHER;
+			return CandidateCompareResult.THIS;
 		}
 		if(isTypeLiteral() && !right.isTypeLiteral()) {
-			return CompareResult.OTHER;
+			return CandidateCompareResult.OTHER;
 		}
 		{
-			CompareResult bucketCompareResult = compareByBucket(right);
+			CandidateCompareResult bucketCompareResult = compareByBucket(right);
 			switch(bucketCompareResult) {
+				case SUSPICIOUS_OTHER:
+					throw new IllegalStateException();
 				case EQUALLY_INVALID:
 					invalid = true;
 					break;
@@ -543,15 +540,15 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			}
 		}
 		if (invalid)
-			return CompareResult.EQUALLY_INVALID;
-		return CompareResult.AMBIGUOUS;
+			return CandidateCompareResult.EQUALLY_INVALID;
+		return CandidateCompareResult.AMBIGUOUS;
 	}
 	
-	protected CompareResult compareByBucket(AbstractPendingLinkingCandidate<?> right) {
+	protected CandidateCompareResult compareByBucket(AbstractPendingLinkingCandidate<?> right) {
 		if (description.getBucketId() != right.description.getBucketId()) {
-			return CompareResult.THIS;
+			return CandidateCompareResult.THIS;
 		}
-		return CompareResult.AMBIGUOUS;
+		return CandidateCompareResult.AMBIGUOUS;
 	}
 	
 	protected boolean isVisible() {
@@ -567,14 +564,18 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	@SuppressWarnings("incomplete-switch")
-	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
+	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
+		boolean hadIssues = false;
 		{
-			CompareResult argumentTypeResult = compareByArgumentTypes(right, false);
+			CandidateCompareResult argumentTypeResult = compareByArgumentTypes(right, false);
 			switch(argumentTypeResult) {
+				case SUSPICIOUS_OTHER:
+					throw new IllegalStateException();
 				case EQUALLY_INVALID:
 					// ignore since we have a second pass below
+					hadIssues = true;
 					break;
 				case OTHER:
 				case THIS:
@@ -583,10 +584,14 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			}
 		}
 		{
-			CompareResult parameterTypeResult = compareExpectedArgumentTypes(right);
+			CandidateCompareResult parameterTypeResult = compareExpectedArgumentTypes(right);
 			switch(parameterTypeResult) {
 				case EQUALLY_INVALID:
 					throw new IllegalStateException();
+				case SUSPICIOUS_OTHER:
+					if (hadIssues) {
+						return CandidateCompareResult.OTHER;
+					}
 				case OTHER:
 				case THIS:
 					return parameterTypeResult;
@@ -597,11 +602,13 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		// TODO this is more of a workaround than a real solution
 		// actually the order of added hints and their sources should take care of that case
 		// in a way that UnboundTypeConformance returns false for invalid combinations
-		CompareResult secondPassArgumentTypes = compareByArgumentTypes(right, true);
+		CandidateCompareResult secondPassArgumentTypes = compareByArgumentTypes(right, true);
+		if (secondPassArgumentTypes == CandidateCompareResult.SUSPICIOUS_OTHER)
+			throw new IllegalStateException();
 		return secondPassArgumentTypes;
 	}
 	
-	protected CompareResult compareByTypeArguments(AbstractPendingLinkingCandidate<?> right) {
+	protected CandidateCompareResult compareByTypeArguments(AbstractPendingLinkingCandidate<?> right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
 		
@@ -609,10 +616,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int rightFailures = right.getTypeArgumentConformanceFailures(null);
 		if (leftFailures != rightFailures) {
 			if (leftFailures < rightFailures)
-				return CompareResult.THIS;
-			return CompareResult.OTHER;
+				return CandidateCompareResult.THIS;
+			return CandidateCompareResult.OTHER;
 		}
-		return leftFailures != 0 ? CompareResult.EQUALLY_INVALID : CompareResult.AMBIGUOUS;
+		return leftFailures != 0 ? CandidateCompareResult.EQUALLY_INVALID : CandidateCompareResult.AMBIGUOUS;
 	}
 
 	protected int getTypeArgumentConformanceFailures(@Nullable IAcceptor<? super AbstractDiagnostic> acceptor) {
@@ -665,7 +672,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	@SuppressWarnings("incomplete-switch")
-	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
+	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
 		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
@@ -675,8 +682,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		for(int i = 0; i < upTo; i++) {
 			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i, recompute);
 			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i, recompute);
-			CompareResult hintCompareResult = compareByArgumentTypes(right, i, leftConformance, rightConformance);
+			CandidateCompareResult hintCompareResult = compareByArgumentTypes(right, i, leftConformance, rightConformance);
 			switch(hintCompareResult) {
+				case SUSPICIOUS_OTHER:
+					throw new IllegalStateException();
 				case EQUALLY_INVALID:
 					invalid = true;
 					break;
@@ -698,11 +707,11 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				rightBoxing++;
 			}
 		}
-		CompareResult result = compareByArgumentTypes(right, leftBoxing, rightBoxing, leftDemand, rightDemand);
+		CandidateCompareResult result = compareByArgumentTypes(right, leftBoxing, rightBoxing, leftDemand, rightDemand);
 		switch(result) {
 			case AMBIGUOUS:
 				if (invalid)
-					return CompareResult.EQUALLY_INVALID;
+					return CandidateCompareResult.EQUALLY_INVALID;
 			default:
 				return result;
 		}
@@ -711,9 +720,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	/**
 	 * Compare this linking candidate with the given {@code other} candidate at {@code argumentIndex}
 	 * 
-	 * Returns {@code CompareResult#THIS} if this candidate is better, {@code CompareResult#OTHER} if the 
-	 * right candidate was better, {@code CompareResult#AMBIGUOUS} if both candidates are valid
-	 * but ambiguous or {@code CompareResult#EQUALLY_INVALID} if both candidates are 
+	 * Returns {@code CandidateCompareResult#THIS} if this candidate is better, {@code CandidateCompareResult#OTHER} if the 
+	 * right candidate was better, {@code CandidateCompareResult#AMBIGUOUS} if both candidates are valid
+	 * but ambiguous or {@code CandidateCompareResult#EQUALLY_INVALID} if both candidates are 
 	 * ambiguous but erroneous.
 	 * 
 	 * @param other the other candidate
@@ -721,27 +730,27 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * @param leftConformance the computed conformance in this linking candidate
 	 * @param rightConformance the computed conformance if the other candidate was chosen  
 	 */
-	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int argumentIndex, EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
+	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int argumentIndex, EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
 		int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
 		if (hintCompareResult == 0) {
 			if (leftConformance.contains(ConformanceHint.SUCCESS)) {
-				return CompareResult.AMBIGUOUS;
+				return CandidateCompareResult.AMBIGUOUS;
 			} else {
-				return CompareResult.EQUALLY_INVALID;
+				return CandidateCompareResult.EQUALLY_INVALID;
 			}
 		} else if (hintCompareResult < 0) {
-			return CompareResult.THIS;
+			return CandidateCompareResult.THIS;
 		} else {
-			return CompareResult.OTHER;
+			return CandidateCompareResult.OTHER;
 		}
 	}
 
 	/**
 	 * Compare this linking candidate with the given {@code other} candidate at {@code argumentIndex}
 	 * 
-	 * Returns {@code CompareResult#THIS} if this candidate is better, {@code CompareResult#OTHER} if the 
-	 * right candidate was better, {@code CompareResult#AMBIGUOUS} if both candidates are valid
-	 * but ambiguous or {@code CompareResult#EQUALLY_INVALID} if both candidates are 
+	 * Returns {@code CandidateCompareResult#THIS} if this candidate is better, {@code CandidateCompareResult#OTHER} if the 
+	 * right candidate was better, {@code CandidateCompareResult#AMBIGUOUS} if both candidates are valid
+	 * but ambiguous or {@code CandidateCompareResult#EQUALLY_INVALID} if both candidates are 
 	 * ambiguous but erroneous.
 	 * 
 	 * @param other the other candidate (the rhs of the comparison)
@@ -750,18 +759,18 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * @param leftDemand the number of required demand conversions if this candidate was chosen  
 	 * @param rightDemand the number of required demand conversions if the other candidate was chosen  
 	 */
-	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
+	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
 		if (leftDemand != rightDemand) {
 			if (leftDemand < rightDemand)
-				return CompareResult.THIS;
-			return CompareResult.OTHER;
+				return CandidateCompareResult.THIS;
+			return CandidateCompareResult.OTHER;
 		}
 		if (leftBoxing != rightBoxing) {
 			if (leftBoxing < rightBoxing)
-				return CompareResult.THIS;
-			return CompareResult.OTHER;
+				return CandidateCompareResult.THIS;
+			return CandidateCompareResult.OTHER;
 		}
-		return CompareResult.AMBIGUOUS;
+		return CandidateCompareResult.AMBIGUOUS;
 	}
 	
 	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
@@ -778,7 +787,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
 	}
 
-	protected CompareResult compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
+	protected CandidateCompareResult compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
 		int result = 0;
 		int upTo = Math.min(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		for(int i = 0; i < upTo; i++) {
@@ -786,10 +795,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(i);
 			if (expectedArgumentType == null) {
 				if (rightExpectedArgumentType != null)
-					return CompareResult.OTHER;
+					return CandidateCompareResult.OTHER;
 			} else {
 				if (rightExpectedArgumentType == null) {
-					return CompareResult.THIS;
+					return CandidateCompareResult.THIS;
 				}
 				boolean leftResolved = expectedArgumentType.isResolved();
 				if (!leftResolved) {
@@ -815,35 +824,44 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			}
 		}
 		if (result == 0) {
-			return CompareResult.AMBIGUOUS;
+			return CandidateCompareResult.AMBIGUOUS;
 		} else if (result < 0) {
-			return CompareResult.THIS;
+			return CandidateCompareResult.THIS;
 		} else {
-			return CompareResult.OTHER;
+			return getExpectedTypeCompareResultOther(right);
 		}
 	}
 
-	protected CompareResult compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
-		CompareResult arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
+	/**
+	 * Returns the compare result for the declared parameter types if the given other candidate had won.
+	 * 
+	 * @param other the winner of the comparison.
+	 */
+	protected CandidateCompareResult getExpectedTypeCompareResultOther(AbstractPendingLinkingCandidate<?> other) {
+		return CandidateCompareResult.OTHER;
+	}
+
+	protected CandidateCompareResult compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
+		CandidateCompareResult arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
 		return arityCompareResult;
 	}
 
-	protected CompareResult compareByArity(int leftArityMismatch, int rightArityMismatch) {
+	protected CandidateCompareResult compareByArity(int leftArityMismatch, int rightArityMismatch) {
 		if (leftArityMismatch != rightArityMismatch) {
 			if (leftArityMismatch == 0)
-				return CompareResult.THIS;
+				return CandidateCompareResult.THIS;
 			if (rightArityMismatch == 0)
-				return CompareResult.OTHER;
+				return CandidateCompareResult.OTHER;
 			if (Math.abs(leftArityMismatch) < Math.abs(rightArityMismatch))
-				return CompareResult.THIS;
+				return CandidateCompareResult.THIS;
 			if (Math.abs(leftArityMismatch) > Math.abs(rightArityMismatch))
-				return CompareResult.OTHER;
+				return CandidateCompareResult.OTHER;
 			if (leftArityMismatch > 0)
-				return CompareResult.THIS;
+				return CandidateCompareResult.THIS;
 			if (rightArityMismatch > 0)
-				return CompareResult.OTHER;
+				return CandidateCompareResult.OTHER;
 		}
-		return leftArityMismatch == 0 ? CompareResult.AMBIGUOUS : CompareResult.EQUALLY_INVALID;
+		return leftArityMismatch == 0 ? CandidateCompareResult.AMBIGUOUS : CandidateCompareResult.EQUALLY_INVALID;
 	}
 	
 	/**

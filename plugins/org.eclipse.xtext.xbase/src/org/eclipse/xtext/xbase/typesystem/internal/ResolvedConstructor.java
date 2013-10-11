@@ -30,7 +30,6 @@ public class ResolvedConstructor extends AbstractResolvedReference<XConstructorC
 		super(constructorCall, constructor, state);
 	}
 	
-	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}
