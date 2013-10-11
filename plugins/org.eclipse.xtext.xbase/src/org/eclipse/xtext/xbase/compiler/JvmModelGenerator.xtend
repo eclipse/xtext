@@ -277,12 +277,16 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	private def void appendCompilationTemplate(ITreeAppendable appendable, JvmIdentifiableElement it) {
-		if (appendable instanceof TreeAppendable) {
-			val target = new ImportingStringConcatenation(appendable, new StandardTypeReferenceOwner(commonServices, it));
-			target.append(compilationTemplate)
-			appendable.append(target)			
-		} else {
+		switch appendable {
+			TreeAppendable: {
+				val target = new ImportingStringConcatenation(appendable.state, new StandardTypeReferenceOwner(commonServices, it));
+				target.append(compilationTemplate)
+				appendable.append(target)			
+			} 
+		default: {
 			throw new IllegalStateException("unexpected appendable: " + appendable.getClass.name)
+		}
+		
 		}
 	}
 	

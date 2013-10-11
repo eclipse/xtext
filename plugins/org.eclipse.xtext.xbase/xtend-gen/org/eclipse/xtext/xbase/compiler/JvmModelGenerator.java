@@ -100,6 +100,7 @@ import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation;
+import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -520,14 +521,20 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   private void appendCompilationTemplate(final ITreeAppendable appendable, final JvmIdentifiableElement it) {
-    if ((appendable instanceof TreeAppendable)) {
-      StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.commonServices, it);
-      ImportingStringConcatenation _importingStringConcatenation = new ImportingStringConcatenation(((TreeAppendable)appendable), _standardTypeReferenceOwner);
-      final ImportingStringConcatenation target = _importingStringConcatenation;
-      StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
-      target.append(_compilationTemplate);
-      ((TreeAppendable)appendable).append(target);
-    } else {
+    boolean _matched = false;
+    if (!_matched) {
+      if (appendable instanceof TreeAppendable) {
+        _matched=true;
+        SharedAppendableState _state = ((TreeAppendable)appendable).getState();
+        StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.commonServices, it);
+        ImportingStringConcatenation _importingStringConcatenation = new ImportingStringConcatenation(_state, _standardTypeReferenceOwner);
+        final ImportingStringConcatenation target = _importingStringConcatenation;
+        StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
+        target.append(_compilationTemplate);
+        ((TreeAppendable)appendable).append(target);
+      }
+    }
+    if (!_matched) {
       Class<? extends ITreeAppendable> _class = appendable.getClass();
       String _name = _class.getName();
       String _plus = ("unexpected appendable: " + _name);

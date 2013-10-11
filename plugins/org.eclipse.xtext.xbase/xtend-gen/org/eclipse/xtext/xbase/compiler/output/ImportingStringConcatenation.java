@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -36,7 +36,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
   
   private final ITypeReferenceOwner typeReferenceOwner;
   
-  public ImportingStringConcatenation(final TreeAppendable state, final ITypeReferenceOwner typeReferenceOwner) {
+  public ImportingStringConcatenation(final SharedAppendableState state, final ITypeReferenceOwner typeReferenceOwner) {
     super(new Function0<String>() {
       public String apply() {
         String _lineSeparator = state.getLineSeparator();
