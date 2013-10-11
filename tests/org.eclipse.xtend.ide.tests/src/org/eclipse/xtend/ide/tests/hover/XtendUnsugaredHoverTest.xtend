@@ -336,6 +336,23 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		val call = block.expressions.get(0)
 		assertEquals("this._extensionJava.bar(it, 40 + 2)", serializer.computeUnsugaredExpression(call))
 	}
+
+	@Test
+	def void testExtensionParameter() throws Exception {
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
+			class B {
+			  def foo(CharSequence chars) {}
+			  def bar(extension B a) {
+			    "".foo() 
+			  }
+			}
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals('a.foo("")', serializer.computeUnsugaredExpression(call))
+	}
 	
 	@Test
 	def testBug373054() throws Exception {
