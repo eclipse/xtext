@@ -528,8 +528,6 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	protected abstract List<XExpression> getArguments();
 	
-	public abstract ILinkingCandidate getPreferredCandidate(ILinkingCandidate other);
-	
 	@Nullable
 	protected LightweightTypeReference getExpectedType(XExpression expression) {
 		return state.getResolvedTypes().getExpectedType(expression);

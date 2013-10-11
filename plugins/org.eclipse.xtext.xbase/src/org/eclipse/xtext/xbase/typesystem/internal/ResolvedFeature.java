@@ -53,7 +53,6 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		this.helper = helper;
 	}
 	
-	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}

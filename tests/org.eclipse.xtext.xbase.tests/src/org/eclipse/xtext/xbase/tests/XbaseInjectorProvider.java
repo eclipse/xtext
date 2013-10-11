@@ -13,16 +13,23 @@ import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
+import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.SynchronizedXtextResourceSetProvider;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
+import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * An injector provider for plain Xbase tests.
@@ -91,6 +98,20 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		@Override
 		public Class<? extends IScopeProvider> bindIScopeProvider() {
 			return DisabledXbaseScopeProvider.class;
+		}
+		
+		@Override
+		public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
+			return SuspiciousOverloadIsErrorInTests.class;
+		}
+	}
+	
+	@Singleton
+	public static class SuspiciousOverloadIsErrorInTests extends XbaseConfigurableIssueCodes {
+		@Override
+		protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
+			super.initialize(iAcceptor);
+			iAcceptor.accept(create(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, SeverityConverter.SEVERITY_ERROR));
 		}
 	}
 	

@@ -57,8 +57,10 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import com.google.common.collect.Lists;
 
 /**
+ * A linking candidate that represents a feature call and allows to resolve
+ * overloaded members.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
 @NonNullByDefault
 public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall> implements IFeatureLinkingCandidate, IFeatureNames {
@@ -71,6 +73,11 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	protected ILinkingCandidate createAmbiguousLinkingCandidate(AbstractPendingLinkingCandidate<?> second) {
 		return new AmbiguousFeatureLinkingCandidate(this, second);
+	}
+	
+	@Override
+	protected ILinkingCandidate createSuspiciousLinkingCandidate(AbstractPendingLinkingCandidate<?> chosenCandidate) {
+		return new SuspiciouslyOverloadedCandidate((FeatureLinkingCandidate) chosenCandidate, this);
 	}
 	
 	@Override
@@ -107,6 +114,21 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return syntacticArguments;
 	}
 	
+	/**
+	 * Validates this linking candidate and adds respective diagnostics to the given queue.
+	 * 
+	 * In addition to the checks that are inherited from {@link AbstractPendingLinkingCandidate#validate(IAcceptor)},
+	 * the candidate is validated according these criteria:
+	 * 
+	 * <ol>
+	 * <li>{@link #isInvalidStaticSyntax() syntax for static feature calls},</li>
+	 * <li>{@link #isStatic() static context for static members},</li>
+	 * <li>field accessed as a method, e.g. with parentheses,</li>
+	 * <li>attempt to access {@code this} in a static context,</li>
+	 * <li>attempt to enclose a non-final local variable in a lambda expression,</li>
+	 * <li>{@link #isGetClassOnTypeLiteral() errorprone invocation of getClass()}.</li>
+	 * </ol>
+	 */
 	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		if (isInvalidStaticSyntax()) {
@@ -192,22 +214,12 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return true;
 	}
 	
-	protected boolean isGetClassOnTypeLiteral() {
-		JvmIdentifiableElement feature = getFeature();
-		if (isGetClass(feature)) {
-			XExpression receiver = getSyntacticReceiver();
-			if (receiver instanceof XAbstractFeatureCall) {
-				IFeatureLinkingCandidate linkingCandidate = getState().getResolvedTypes().getLinkingCandidate((XAbstractFeatureCall) receiver);
-				if (linkingCandidate != null && linkingCandidate.isTypeLiteral()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
+	/**
+	 * Returns <code>true</code> if a static member is accessed with an instance receiver,
+	 * e.g. {@code myLocalVariable.STATIC_METHOD(..)} or {@code myLocalVariable.STATIC_FIELD = null}.
+	 */
 	protected boolean isInvalidStaticSyntax() {
-		boolean result = isStatic() && !isExtension() && (isSimpleAssignment() && !isStaticWithDeclaringType());
+		boolean result = isStatic() && !isExtension() && isAssignmentOrMemberFeatureCall() && !isStaticWithDeclaringType();
 		if (result)
 			return true;
 		return false;
@@ -259,7 +271,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return false;
 	}
 	
-	protected boolean isSimpleAssignment() {
+	protected boolean isAssignmentOrMemberFeatureCall() {
 		if (getImplicitReceiverType() != null)
 			return true;
 		XAbstractFeatureCall featureCall = getFeatureCall();
@@ -278,7 +290,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		List<XExpression> result = Lists.newArrayListWithExpectedSize(tail.size() + 1);
 		result.add(head);
 		for(XExpression expression: tail) {
-			// addAll will convert the tail to an array, first
+			// addAll will convert the tail to an array, first which is not necessary at all
 			result.add(expression);
 		}
 		return result;
@@ -332,6 +344,21 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
+	protected CandidateCompareResult getExpectedTypeCompareResultOther(AbstractPendingLinkingCandidate<?> right) {
+		if (!(right instanceof FeatureLinkingCandidate) || getState().isIgnored(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE))
+			return CandidateCompareResult.OTHER;
+		
+		FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
+		XExpression otherImplicitReceiver = casted.getImplicitReceiver();
+		if (otherImplicitReceiver instanceof XAbstractFeatureCall && getImplicitReceiver() instanceof XAbstractFeatureCall) {
+			JvmIdentifiableElement otherImplicitReceiverFeature = ((XAbstractFeatureCall) otherImplicitReceiver).getFeature();
+			if (otherImplicitReceiverFeature != ((XAbstractFeatureCall) getImplicitReceiver()).getFeature())
+				return CandidateCompareResult.SUSPICIOUS_OTHER;
+		}
+		return CandidateCompareResult.OTHER;
+	}
+	
+	@Override
 	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
 		if (idx == 0) {
 			if (getReceiver() != null) {
@@ -358,18 +385,18 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected CompareResult compareByBucket(AbstractPendingLinkingCandidate<?> right) {
+	protected CandidateCompareResult compareByBucket(AbstractPendingLinkingCandidate<?> right) {
 		if (isExtension() && right.isExtension()) {
 			if (description.getShadowingKey().equals(right.description.getShadowingKey())) {
 				if (description.getBucketId() == right.description.getBucketId()) {
-					return CompareResult.AMBIGUOUS;
+					return CandidateCompareResult.AMBIGUOUS;
 				}
 				if (isAmbiguousExtensionProvider(right)) {
-					return CompareResult.AMBIGUOUS;
+					return CandidateCompareResult.AMBIGUOUS;
 				}
-				return CompareResult.THIS;
+				return CandidateCompareResult.THIS;
 			}
-			return CompareResult.AMBIGUOUS;
+			return CandidateCompareResult.AMBIGUOUS;
 		}
 		return super.compareByBucket(right);
 	}
@@ -391,25 +418,25 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected CompareResult compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
-		CompareResult result = super.compareByArityWith(right);
-		if (result == CompareResult.AMBIGUOUS) {
+	protected CandidateCompareResult compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
+		CandidateCompareResult result = super.compareByArityWith(right);
+		if (result == CandidateCompareResult.AMBIGUOUS) {
 			boolean isExecutable = getFeature() instanceof JvmExecutable;
 			if (isExecutable != right.getFeature() instanceof JvmExecutable && isVisible() == right.isVisible() && isTypeLiteral() == right.isTypeLiteral()) {
 				// TODO this code looks bogus to me (we need to verify why / if we need this)
 				if (getExpression() instanceof XAssignment) {
 					if (isExecutable)
-						return CompareResult.OTHER;
-					return CompareResult.THIS;
+						return CandidateCompareResult.OTHER;
+					return CandidateCompareResult.THIS;
 				} else {
 					if (isExplicitOperationCall()) {
 						if (isExecutable)
-							return CompareResult.THIS;
-						return CompareResult.OTHER;
+							return CandidateCompareResult.THIS;
+						return CandidateCompareResult.OTHER;
 					} else {
 						if (isExecutable)
-							return CompareResult.OTHER;
-						return CompareResult.THIS;
+							return CandidateCompareResult.OTHER;
+						return CandidateCompareResult.THIS;
 					}
 				}
 			} else if (getFeature() == right.getFeature() && right instanceof FeatureLinkingCandidate) {
@@ -417,7 +444,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				// we link to identical static features with equal assumptions
 				// stop comparison and take this one
 				if (isStatic() && casted.isStatic() && getReceiver() == casted.getReceiver()) {
-					return CompareResult.THIS;
+					return CandidateCompareResult.THIS;
 				}
 			}
 		}
@@ -425,10 +452,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int argumentIndex, EnumSet<ConformanceHint> leftConformance,
+	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int argumentIndex, EnumSet<ConformanceHint> leftConformance,
 			EnumSet<ConformanceHint> rightConformance) {
-		CompareResult result = super.compareByArgumentTypes(right, argumentIndex, leftConformance, rightConformance);
-		if ((result != CompareResult.EQUALLY_INVALID && result != CompareResult.AMBIGUOUS) 
+		CandidateCompareResult result = super.compareByArgumentTypes(right, argumentIndex, leftConformance, rightConformance);
+		if ((result != CandidateCompareResult.EQUALLY_INVALID && result != CandidateCompareResult.AMBIGUOUS) 
 				|| leftConformance.contains(ConformanceHint.SUCCESS) || !(right instanceof FeatureLinkingCandidate))
 			return result;
 		// both types do not match - pick the one which is not an extension
@@ -436,8 +463,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		boolean rightFirstArgumentMismatch = ((FeatureLinkingCandidate) right).isFirstArgument(argumentIndex);
 		if (firstArgumentMismatch != rightFirstArgumentMismatch) {
 			if (firstArgumentMismatch)
-				return CompareResult.OTHER;
-			return CompareResult.THIS;
+				return CandidateCompareResult.OTHER;
+			return CandidateCompareResult.THIS;
 		}
 		return result;
 	}
@@ -451,40 +478,40 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected CompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
+	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
 		if (leftDemand != rightDemand) {
 			if (leftDemand < rightDemand)
-				return CompareResult.THIS;
-			return CompareResult.OTHER;
+				return CandidateCompareResult.THIS;
+			return CandidateCompareResult.OTHER;
 		}
 		if (right instanceof FeatureLinkingCandidate) {
 			FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
 			if (isExtension() != casted.isExtension()) {
 				if (isExtension())
-					return CompareResult.OTHER;
-				return CompareResult.THIS;
+					return CandidateCompareResult.OTHER;
+				return CandidateCompareResult.THIS;
 			}
 			if (isStatic() != casted.isStatic()) {
 				if (isSyntacticReceiverPossibleArgument() == casted.isSyntacticReceiverPossibleArgument()) {
 					if (isStatic()) {
-						return CompareResult.OTHER;
+						return CandidateCompareResult.OTHER;
 					}
-					return CompareResult.THIS;
+					return CandidateCompareResult.THIS;
 				} else {
 					if (isStatic() && !isSyntacticReceiverPossibleArgument())
-						return CompareResult.THIS;
+						return CandidateCompareResult.THIS;
 					if (casted.isStatic() && !casted.isSyntacticReceiverPossibleArgument()) {
-						return CompareResult.OTHER;
+						return CandidateCompareResult.OTHER;
 					}
 				}
 			}
 		}
 		if (leftBoxing != rightBoxing) {
 			if (leftBoxing < rightBoxing)
-				return CompareResult.THIS;
-			return CompareResult.OTHER;
+				return CandidateCompareResult.THIS;
+			return CandidateCompareResult.OTHER;
 		}
-		return CompareResult.AMBIGUOUS;
+		return CandidateCompareResult.AMBIGUOUS;
 	}
 	
 	@Override
@@ -731,6 +758,24 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			return result;
 		}
 		return super.getDeclaredType(feature);
+	}
+	
+	/**
+	 * Returns <code>true</code> if the method {@link Class#getClass()} is bound and
+	 * the receiver is a type literal. This may indicate a bug.
+	 */
+	protected boolean isGetClassOnTypeLiteral() {
+		JvmIdentifiableElement feature = getFeature();
+		if (isGetClass(feature)) {
+			XExpression receiver = getSyntacticReceiver();
+			if (receiver instanceof XAbstractFeatureCall) {
+				IFeatureLinkingCandidate linkingCandidate = getState().getResolvedTypes().getLinkingCandidate((XAbstractFeatureCall) receiver);
+				if (linkingCandidate != null && linkingCandidate.isTypeLiteral()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	protected boolean isGetClass(JvmIdentifiableElement feature) {

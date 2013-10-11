@@ -65,6 +65,8 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(create(IssueCodes.IMPORT_DUPLICATE, SeverityConverter.SEVERITY_WARNING));
 		
 		iAcceptor.accept(create(IssueCodes.JAVA_STYLE_TYPE_CAST, SeverityConverter.SEVERITY_ERROR));
+		
+		iAcceptor.accept(create(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, SeverityConverter.SEVERITY_WARNING));
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {
