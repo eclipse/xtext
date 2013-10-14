@@ -295,6 +295,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		}
 		result.put("this", DefaultHighlightingConfiguration.KEYWORD_ID);
 		result.put("it", DefaultHighlightingConfiguration.KEYWORD_ID);
+		result.put("self", DefaultHighlightingConfiguration.KEYWORD_ID);
 		return result;
 	}
 
