@@ -219,6 +219,19 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		highlight(model);
 	}
 	
+	@Test public void testSelf() {
+		String model = "val Runnable runnable = [| self.run ]";
+		expectAbsolute(model.indexOf("self"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
+		highlight(model);
+	}
+	
+	@Test public void testSelf_2() {
+		String model = "{ val self = 1 }";
+		expectAbsolute(model.indexOf("self"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
+		expectAbsolute(model.indexOf('1'), 1, DefaultHighlightingConfiguration.NUMBER_ID);
+		highlight(model);
+	}
+	
 	@Test public void testInt() {
 		String model = "{ var int i = 1 }";
 		expectAbsolute(model.indexOf("int"), 3, DefaultHighlightingConfiguration.KEYWORD_ID);
