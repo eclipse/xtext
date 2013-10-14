@@ -61,7 +61,7 @@ public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 		int i = 0; // TODO sz: investigate how to speed things up here (parallelism)?
 		smokeTestModels = Lists.newArrayList();
 		while (true) {
-			String location = SmokeTest.class.getPackage().getName().replace('.', '/') + "/Case_" + i + ".xtend";
+			String location = SmokeTest.class.getPackage().getName().replace('.', '/') + "/Case_" + i + ".xtend.smoke";
 			URL resource = getClass().getClassLoader().getResource(location);
 			if (resource == null)
 				resource = getClass().getClassLoader().getResource("/" + location);
