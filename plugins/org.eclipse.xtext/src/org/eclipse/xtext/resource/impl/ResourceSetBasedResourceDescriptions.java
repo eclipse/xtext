@@ -34,6 +34,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Holger Schill
+ * @since 2.5
  */
 public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelectable implements
 		IResourceDescriptions.IContextAware {
@@ -128,6 +129,9 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 		return "[" + getClass().getSimpleName() + "\n  " + Joiner.on("\n  ").join(getAllResourceDescriptions()) + "\n]";
 	}
 
+	/**
+	 * @since 2.5
+	 */
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		if (data != null) {
@@ -136,6 +140,9 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 		return super.getExportedObjects();
 	}
 
+	/**
+	 * @since 2.5
+	 */
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		if (data != null) {
@@ -144,6 +151,9 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 		return super.getExportedObjectsByType(type);
 	}
 
+	/**
+	 * @since 2.5
+	 */
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
 		if (data != null) {
@@ -152,6 +162,9 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 		return super.getExportedObjects(type, qualifiedName, ignoreCase);
 	}
 
+	/**
+	 * @since 2.5
+	 */
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		if (data != null) {
