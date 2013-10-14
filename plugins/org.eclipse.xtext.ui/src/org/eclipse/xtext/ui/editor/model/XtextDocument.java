@@ -72,6 +72,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public void disposeInput() {
 		// clients may override
+		resource = null;
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
