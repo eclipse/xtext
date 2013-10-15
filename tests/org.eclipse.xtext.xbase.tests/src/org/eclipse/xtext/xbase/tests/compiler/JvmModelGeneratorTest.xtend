@@ -255,7 +255,30 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		compile(expression.eResource, clazz)
 
 	}
-    
+
+	@Test
+	def void testBug419430(){
+		val expression = expression("null")
+		val clazz = expression.toClass("my.test.Foo") [
+			members += expression.toMethod("doStuff",references.getTypeForName("java.lang.Object", expression)) [
+				setBody(expression)
+				val annotation = expression.toAnnotation(typeof(TestAnnotations))
+				val annotationAnnotationValue = typesFactory.createJvmAnnotationAnnotationValue
+
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotation.values += annotationAnnotationValue
+				annotations += annotation
+			]
+		]
+		compile(expression.eResource, clazz)
+		val compiledClazz = compile(expression.eResource, clazz)
+		val method = compiledClazz.getMethod("doStuff")
+		val methodAnnotation = method.getAnnotation(TestAnnotations)
+		assertEquals(3, methodAnnotation.value.size)
+	}
+
     @Test
     def void testBug377002(){
         val expression = expression("null")
