@@ -205,6 +205,9 @@ public class SmokeTest extends AbstractSmokeTest {
 		assertEquals(text, node.getGrammarElement(), other.getGrammarElement());
 		assertEquals(text, node.hasDirectSemanticElement(), other.hasDirectSemanticElement());
 		assertEquals(text, node.getSyntaxErrorMessage(), other.getSyntaxErrorMessage());
+		if (node instanceof ICompositeNode) {
+			assertEquals(text, ((ICompositeNode)node).getLookAhead(), ((ICompositeNode) other).getLookAhead());
+		}
 	}
 
 	@Override
