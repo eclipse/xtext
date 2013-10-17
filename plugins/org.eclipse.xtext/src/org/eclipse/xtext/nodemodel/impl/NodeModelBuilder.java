@@ -334,7 +334,7 @@ public class NodeModelBuilder {
 	public void replaceAndTransferLookAhead(INode oldNode, INode newRootNode) {
 		AbstractNode newNode = ((CompositeNode) newRootNode).basicGetFirstChild();
 		replaceWithoutChildren((AbstractNode) oldNode, newNode);
-		if (oldNode instanceof ICompositeNode) {
+		if (oldNode instanceof ICompositeNode && newNode instanceof CompositeNode) {
 			CompositeNode newCompositeNode = (CompositeNode) newNode;
 			newCompositeNode.basicSetLookAhead(((ICompositeNode) oldNode).getLookAhead());
 			// todo: unfold both nodes and compress afterwards
