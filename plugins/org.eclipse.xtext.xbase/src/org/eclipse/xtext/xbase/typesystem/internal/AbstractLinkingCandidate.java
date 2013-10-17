@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -231,7 +232,11 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	protected List<JvmTypeParameter> getDeclaredTypeParameters() {
 		JvmIdentifiableElement feature = getFeature();
-		if (feature instanceof JvmTypeParameterDeclarator) {
+		if (feature instanceof JvmExecutable) {
+			// we are only interested in exectubles
+			// types e.g. this, super or self may have
+			// type parameters but these don't have an impact
+			// on the linking
 			return ((JvmTypeParameterDeclarator) feature).getTypeParameters();
 		}
 		return Collections.emptyList();
