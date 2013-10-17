@@ -462,6 +462,32 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 					}
 					return super.getBoundTypeArgument(reference, type, visiting);
 				}
+				
+				@Override
+				protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, Set<JvmTypeParameter> visiting) {
+					if (reference.isResolved() && reference.isOwnedBy(getOwner()))
+						return reference;
+					WildcardTypeReference result = new WildcardTypeReference(getOwner());
+					LightweightTypeReference lowerBound = reference.getLowerBound();
+					if (lowerBound != null) {
+						LightweightTypeReference visited = visitTypeArgument(lowerBound, visiting, true);
+						if (visited.isWildcard()) {
+							LightweightTypeReference substitute = visited.getInvariantBoundSubstitute();
+							result.setLowerBound(substitute);
+						} else {
+							result.setLowerBound(visited);
+						}
+					} 
+					for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
+						LightweightTypeReference visitedArgument = visitTypeArgument(upperBound, visiting);
+						LightweightTypeReference upperBoundSubstitute = visitedArgument.getUpperBoundSubstitute();
+						result.addUpperBound(upperBoundSubstitute);
+					}
+					if (result.getUpperBounds().isEmpty()) {
+						throw new IllegalStateException("UpperBounds may not be empty");
+					}
+					return result;
+				}
 			};
 			substitutor.enhanceMapping(getTypeParameterMapping());
 			return substitutor;
