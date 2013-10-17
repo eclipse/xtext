@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.core.BindingKey;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
@@ -84,6 +85,7 @@ import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -341,7 +343,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 		parser.setWorkingCopyOwner(workingCopyOwner);
 		parser.setIgnoreMethodBodies(true);
-		parser.setProject(jdtType.getJavaProject());
+		
+		IJavaProject project = jdtType.getJavaProject();
+		parser.setProject(project);
+		
+		Map options = Maps.newHashMap(project.getOptions(true));
+		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.DISABLED);
+		parser.setCompilerOptions(options);
 
 		IBinding[] bindings = parser.createBindings(new IJavaElement[] { jdtType }, null);
 		resolveBinding.stop();
