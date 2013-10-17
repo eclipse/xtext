@@ -243,6 +243,9 @@ public class NodeModelBuilder {
 			RootNode root = (RootNode) result;
 			if (casted.basicGetFirstChild() != null) {
 				AbstractNode firstChild = casted.basicGetFirstChild();
+				if (firstChild instanceof ILeafNode && !firstChild.basicHasNextSibling()) {
+					return result;
+				}
 				root.basicSetFirstChild(firstChild);
 				firstChild.basicSetParent(root);
 				AbstractNode child = firstChild;
@@ -334,7 +337,7 @@ public class NodeModelBuilder {
 	public void replaceAndTransferLookAhead(INode oldNode, INode newRootNode) {
 		AbstractNode newNode = ((CompositeNode) newRootNode).basicGetFirstChild();
 		replaceWithoutChildren((AbstractNode) oldNode, newNode);
-		if (oldNode instanceof ICompositeNode) {
+		if (oldNode instanceof ICompositeNode && newNode instanceof CompositeNode) {
 			CompositeNode newCompositeNode = (CompositeNode) newNode;
 			newCompositeNode.basicSetLookAhead(((ICompositeNode) oldNode).getLookAhead());
 			// todo: unfold both nodes and compress afterwards
