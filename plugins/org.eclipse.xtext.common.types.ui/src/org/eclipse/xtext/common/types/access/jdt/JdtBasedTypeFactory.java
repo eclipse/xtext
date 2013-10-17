@@ -85,7 +85,6 @@ import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -347,7 +346,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		IJavaProject project = jdtType.getJavaProject();
 		parser.setProject(project);
 		
-		Map options = Maps.newHashMap(project.getOptions(true));
+		@SuppressWarnings("unchecked")
+		Map<Object, Object> options = project.getOptions(true);
+		
 		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.DISABLED);
 		parser.setCompilerOptions(options);
 
