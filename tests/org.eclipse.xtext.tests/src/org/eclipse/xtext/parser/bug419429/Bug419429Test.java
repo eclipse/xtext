@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.bug419429;
 
-import java.io.IOException;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.AbstractPartialParserTest;
@@ -20,7 +18,6 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Wrapper;
