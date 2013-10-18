@@ -397,7 +397,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			procedure.apply();
 			// the Java reconciler is blazingly fast, it should never
 			// be necessary to increase the counter here
-			int counter = 50;
+			int counter = 100;
 			while(event == null && counter > 0) {
 				counter--;
 				Thread.sleep(15);
