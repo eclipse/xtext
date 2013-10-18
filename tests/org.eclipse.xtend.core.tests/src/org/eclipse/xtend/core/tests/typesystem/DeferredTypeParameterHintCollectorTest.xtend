@@ -172,7 +172,7 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 	override doVisitParameterizedTypeReference(ParameterizedTypeReference reference, Set<JvmTypeParameter> visiting) {
 		val type = reference.getType();
 		if (type instanceof JvmTypeParameter) {
-			if (!visiting.add(type as JvmTypeParameter)) {
+			if (!visiting.add(type)) {
 				return null;
 			}
 			try {
@@ -180,8 +180,8 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 				if (mappedReference != null) {
 					return mappedReference.typeReference.accept(this, visiting)
 				} else {
-					val result = new SimpleUnboundTypeReference(owner, type as JvmTypeParameter, new Object)
-					typeParameterMapping.put(type as JvmTypeParameter, new LightweightMergedBoundTypeArgument(result, INVARIANT))
+					val result = new SimpleUnboundTypeReference(owner, type, new Object)
+					typeParameterMapping.put(type, new LightweightMergedBoundTypeArgument(result, INVARIANT))
 					return result
 				}
 			} finally {

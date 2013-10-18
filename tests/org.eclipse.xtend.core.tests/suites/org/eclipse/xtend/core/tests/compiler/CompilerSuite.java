@@ -38,6 +38,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConfiguredCompilerTest.class,
 	ExtensionsCompilerTest.class,
 	DataCompilerTest.class,
+	Java8OverloadCompilerTest.class,
 	OverloadedExtensionCompilerTest.class,
 	ParameterizedTypeCompilerTest.class,
 	PropertyCompilerTest.class,

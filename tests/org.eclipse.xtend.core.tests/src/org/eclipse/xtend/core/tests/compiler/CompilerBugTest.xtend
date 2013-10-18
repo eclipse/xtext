@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -3187,6 +3186,60 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      _text=e.text;
 			    }
 			    return _text;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug410990() {
+		assertCompilesTo('''
+			class Bug {
+				def bug(Foo foo) {}
+				def bug(Bar bar) {}
+				
+				def test() {
+					bug [Foo foo | foo.foo(foo)]
+					bug [Bar bar | bar.bar(bar)] // closure is typed as Foo instead of Bar
+				}
+			}
+			
+			interface Foo {
+				def void foo(Foo foo) 
+			}
+			
+			interface Bar {
+				def void bar(Bar bar)
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public Object bug(final Foo foo) {
+			    return null;
+			  }
+			  
+			  public Object bug(final Bar bar) {
+			    return null;
+			  }
+			  
+			  public Object test() {
+			    Object _xblockexpression = null;
+			    {
+			      final Foo _function = new Foo() {
+			        public void foo(final Foo foo) {
+			          foo.foo(foo);
+			        }
+			      };
+			      this.bug(_function);
+			      final Bar _function_1 = new Bar() {
+			        public void bar(final Bar bar) {
+			          bar.bar(bar);
+			        }
+			      };
+			      Object _bug = this.bug(_function_1);
+			      _xblockexpression = (_bug);
+			    }
+			    return _xblockexpression;
 			  }
 			}
 		''')
