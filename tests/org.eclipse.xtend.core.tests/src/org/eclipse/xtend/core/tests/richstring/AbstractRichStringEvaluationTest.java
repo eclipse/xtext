@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.richstring;
 
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Assert;
@@ -20,6 +21,15 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
 public abstract class AbstractRichStringEvaluationTest extends Assert {
+
+	/**
+	 * Default line separator to use.
+	 * 
+	 * @return {@link StringConcatenation#DEFAULT_LINE_DELIMITER}
+	 */
+	protected String nl() {
+		return StringConcatenation.DEFAULT_LINE_DELIMITER;
+	}
 
 	public abstract void assertOutput(String expectedOutput, String richString) throws Exception;
 	
