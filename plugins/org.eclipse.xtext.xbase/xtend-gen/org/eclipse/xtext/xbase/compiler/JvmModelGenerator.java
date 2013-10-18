@@ -1526,46 +1526,6 @@ public class JvmModelGenerator implements IGenerator {
     this._errorSafeExtensions.<JvmAnnotationReference>forEachSafely(appendable, annotations, _function_1, _function_2);
   }
   
-  public void generateAnnotations(final JvmAnnotationAnnotationValue it, final ITreeAppendable appendable, final boolean withLineBreak, final GeneratorConfig config) {
-    EList<JvmAnnotationReference> _values = it.getValues();
-    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-      public void apply(final LoopParams it) {
-        final Function1<ITreeAppendable,ITreeAppendable> _function = new Function1<ITreeAppendable,ITreeAppendable>() {
-          public ITreeAppendable apply(final ITreeAppendable it) {
-            ITreeAppendable _xifexpression = null;
-            if (withLineBreak) {
-              ITreeAppendable _append = it.append(",");
-              ITreeAppendable _newLine = _append.newLine();
-              _xifexpression = _newLine;
-            } else {
-              ITreeAppendable _append_1 = it.append(", ");
-              _xifexpression = _append_1;
-            }
-            return _xifexpression;
-          }
-        };
-        it.setSeparator(_function);
-        final Function1<ITreeAppendable,ITreeAppendable> _function_1 = new Function1<ITreeAppendable,ITreeAppendable>() {
-          public ITreeAppendable apply(final ITreeAppendable it) {
-            ITreeAppendable _xifexpression = null;
-            if (withLineBreak) {
-              ITreeAppendable _newLine = it.newLine();
-              _xifexpression = _newLine;
-            }
-            return _xifexpression;
-          }
-        };
-        it.setSuffix(_function_1);
-      }
-    };
-    final Procedure2<JvmAnnotationReference,ITreeAppendable> _function_1 = new Procedure2<JvmAnnotationReference,ITreeAppendable>() {
-      public void apply(final JvmAnnotationReference it, final ITreeAppendable app) {
-        JvmModelGenerator.this.generateAnnotation(it, app, config);
-      }
-    };
-    this._errorSafeExtensions.<JvmAnnotationReference>forEachSafely(appendable, _values, _function, _function_1);
-  }
-  
   public void generateAnnotation(final JvmAnnotationReference it, final ITreeAppendable appendable, final GeneratorConfig config) {
     appendable.append("@");
     JvmAnnotationType _annotation = it.getAnnotation();
@@ -1610,7 +1570,7 @@ public class JvmModelGenerator implements IGenerator {
     EList<JvmAnnotationReference> _values = value.getValues();
     final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
       public void apply(final JvmAnnotationReference it) {
-        JvmModelGenerator.this.generateAnnotations(value, appendable, false, config);
+        JvmModelGenerator.this.generateAnnotation(it, appendable, config);
       }
     };
     this._loopExtensions.<JvmAnnotationReference>forEachWithShortcut(appendable, _values, _function);

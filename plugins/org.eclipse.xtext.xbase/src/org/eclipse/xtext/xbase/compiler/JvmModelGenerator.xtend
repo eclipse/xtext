@@ -718,15 +718,6 @@ class JvmModelGenerator implements IGenerator {
 			])
 	}
 
-	def void generateAnnotations(JvmAnnotationAnnotationValue it, ITreeAppendable appendable, boolean withLineBreak, GeneratorConfig config) {
-		appendable.forEachSafely(values, [
-				separator = [ITreeAppendable it |  if(withLineBreak) append(',').newLine else append(', ') ]
-				suffix = [ITreeAppendable it |  if(withLineBreak) newLine ]
-			], [
-				it, app | it.generateAnnotation(app, config)
-			])
-	}
-
 	def void generateAnnotation(JvmAnnotationReference it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.append("@")
 		appendable.append(annotation)
@@ -748,7 +739,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 		
 	def dispatch void toJavaLiteral(JvmAnnotationAnnotationValue value, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.forEachWithShortcut(value.values, [value.generateAnnotations(appendable, false, config)])
+		appendable.forEachWithShortcut(value.values, [generateAnnotation(appendable, config)])
 	}
 		
 	def dispatch void toJavaLiteral(JvmShortAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {

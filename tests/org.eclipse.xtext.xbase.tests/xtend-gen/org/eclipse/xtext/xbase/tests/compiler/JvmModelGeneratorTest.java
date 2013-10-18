@@ -561,6 +561,55 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testBug419430() {
+    try {
+      final XExpression expression = this.expression("null");
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
+          EList<JvmMember> _members = it.getMembers();
+          JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName("java.lang.Object", expression);
+          final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+            public void apply(final JvmOperation it) {
+              JvmModelGeneratorTest.this.builder.setBody(it, expression);
+              final JvmAnnotationReference annotation = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotations.class);
+              final JvmAnnotationAnnotationValue annotationAnnotationValue = JvmModelGeneratorTest.this.typesFactory.createJvmAnnotationAnnotationValue();
+              EList<JvmAnnotationReference> _values = annotationAnnotationValue.getValues();
+              JvmAnnotationReference _annotation = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
+              JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_values, _annotation);
+              EList<JvmAnnotationReference> _values_1 = annotationAnnotationValue.getValues();
+              JvmAnnotationReference _annotation_1 = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
+              JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_values_1, _annotation_1);
+              EList<JvmAnnotationReference> _values_2 = annotationAnnotationValue.getValues();
+              JvmAnnotationReference _annotation_2 = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
+              JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_values_2, _annotation_2);
+              EList<JvmAnnotationValue> _values_3 = annotation.getValues();
+              JvmModelGeneratorTest.this.builder.<JvmAnnotationAnnotationValue>operator_add(_values_3, annotationAnnotationValue);
+              EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+              JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_annotations, annotation);
+            }
+          };
+          JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
+          JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+        }
+      };
+      final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      final String code = this.generate(_eResource, clazz);
+      boolean _contains = code.contains("@TestAnnotations({ @TestAnnotation, @TestAnnotation, @TestAnnotation })");
+      Assert.assertTrue(code, _contains);
+      Resource _eResource_1 = expression.eResource();
+      final Class<? extends Object> compiledClazz = this.compileToClass(_eResource_1, clazz, code);
+      final Method method = compiledClazz.getMethod("doStuff");
+      final TestAnnotations methodAnnotation = method.<TestAnnotations>getAnnotation(TestAnnotations.class);
+      TestAnnotation[] _value = methodAnnotation.value();
+      int _size = ((List<TestAnnotation>)Conversions.doWrapArray(_value)).size();
+      Assert.assertEquals(3, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testBug377002() {
     try {
       final XExpression expression = this.expression("null");
@@ -909,25 +958,43 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   }
   
   public Class<? extends Object> compile(final Resource res, final JvmDeclaredType type) {
-    res.eSetDeliver(false);
-    EList<EObject> _contents = res.getContents();
-    this.builder.<JvmDeclaredType>operator_add(_contents, type);
-    res.eSetDeliver(true);
-    InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
-    final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;
-    this.generator.doGenerate(res, fsa);
-    Map<String,CharSequence> _files = fsa.getFiles();
-    String _identifier = type.getIdentifier();
-    String _replace = _identifier.replace(".", "/");
-    String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
-    String _plus_1 = (_plus + ".java");
-    CharSequence _get = _files.get(_plus_1);
-    final String code = _get.toString();
-    String _identifier_1 = type.getIdentifier();
-    final Class<? extends Object> compiledClass = this.javaCompiler.compileToClass(_identifier_1, code);
-    EList<EObject> _contents_1 = res.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents_1);
-    this.helper.assertNoErrors(_head);
-    return compiledClass;
+    String _generate = this.generate(res, type);
+    Class<? extends Object> _compileToClass = this.compileToClass(res, type, _generate);
+    return _compileToClass;
+  }
+  
+  public String generate(final Resource res, final JvmDeclaredType type) {
+    String _xblockexpression = null;
+    {
+      res.eSetDeliver(false);
+      EList<EObject> _contents = res.getContents();
+      this.builder.<JvmDeclaredType>operator_add(_contents, type);
+      res.eSetDeliver(true);
+      InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
+      final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;
+      this.generator.doGenerate(res, fsa);
+      Map<String,CharSequence> _files = fsa.getFiles();
+      String _identifier = type.getIdentifier();
+      String _replace = _identifier.replace(".", "/");
+      String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
+      String _plus_1 = (_plus + ".java");
+      CharSequence _get = _files.get(_plus_1);
+      String _string = _get.toString();
+      _xblockexpression = (_string);
+    }
+    return _xblockexpression;
+  }
+  
+  public Class<? extends Object> compileToClass(final Resource res, final JvmDeclaredType type, final String code) {
+    Class<? extends Object> _xblockexpression = null;
+    {
+      String _identifier = type.getIdentifier();
+      final Class<? extends Object> compiledClass = this.javaCompiler.compileToClass(_identifier, code);
+      EList<EObject> _contents = res.getContents();
+      EObject _head = IterableExtensions.<EObject>head(_contents);
+      this.helper.assertNoErrors(_head);
+      _xblockexpression = (compiledClass);
+    }
+    return _xblockexpression;
   }
 }

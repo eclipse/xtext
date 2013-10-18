@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.generator.IFileSystemAccess
@@ -27,7 +28,7 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler$EclipseRuntimeDependentJavaCompiler
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
@@ -37,7 +38,6 @@ import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjecto
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.common.types.JvmVisibility
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
@@ -241,7 +241,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def void testBug380754_2(){
+	def void testBug380754_2() {
 		val expression = expression("null")
 		val clazz = expression.toClass("my.test.Foo") [
 			members += expression.toMethod("doStuff",references.getTypeForName("java.lang.Object", expression)) [
@@ -253,7 +253,30 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 			]
 		]
 		compile(expression.eResource, clazz)
-
+	}
+	
+	@Test
+	def void testBug419430() {
+		val expression = expression("null")
+		val clazz = expression.toClass("my.test.Foo") [
+			members += expression.toMethod("doStuff", references.getTypeForName("java.lang.Object", expression)) [
+				setBody(expression)
+				val annotation = expression.toAnnotation(typeof(TestAnnotations))
+				val annotationAnnotationValue = typesFactory.createJvmAnnotationAnnotationValue
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotation.values += annotationAnnotationValue
+				annotations += annotation
+			]
+		]
+		val code = expression.eResource.generate(clazz)
+		assertTrue(code, code.contains("@TestAnnotations({ @TestAnnotation, @TestAnnotation, @TestAnnotation })"))
+		
+		val compiledClazz = expression.eResource.compileToClass(clazz, code)
+		val method = compiledClazz.getMethod("doStuff")
+		val methodAnnotation = method.getAnnotation(TestAnnotations)
+		assertEquals(3, methodAnnotation.value.size)
 	}
     
     @Test
@@ -377,15 +400,22 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	}
 	
 	def Class<?> compile(Resource res, JvmDeclaredType type) {
+		res.compileToClass(type, res.generate(type))
+	}
+	
+	def generate(Resource res, JvmDeclaredType type) {
 		res.eSetDeliver(false)
 		res.contents += type
 		res.eSetDeliver(true)
 		val fsa = new InMemoryFileSystemAccess()
 		generator.doGenerate(res, fsa)
-		val code = fsa.files.get(IFileSystemAccess::DEFAULT_OUTPUT + type.identifier.replace('.','/')+".java").toString
+		fsa.files.get(IFileSystemAccess::DEFAULT_OUTPUT + type.identifier.replace('.','/')+".java").toString
+	}
+	
+	def compileToClass(Resource res, JvmDeclaredType type, String code) {
 		val compiledClass = javaCompiler.compileToClass(type.identifier, code)
 		helper.assertNoErrors(res.contents.head)
-		return compiledClass
+		compiledClass
 	}
 }
 
