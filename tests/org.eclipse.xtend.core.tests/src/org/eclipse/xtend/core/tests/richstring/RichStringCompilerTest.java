@@ -27,7 +27,8 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 
 	@Override
 	public void assertOutput(String expectedOutput, String richString) throws Exception {
-		testHelper.assertEvaluatesTo(expectedOutput, richString);
+		String platformExpectedOutput = expectedOutput.replace("\n", nl());
+		testHelper.assertEvaluatesTo(platformExpectedOutput, richString);
 	}
 
 	@Test public void testIf_09() throws Exception {
