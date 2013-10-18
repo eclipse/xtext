@@ -45,18 +45,46 @@ class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 				  }
 				  
 				  public void blank_4() {
-				    int foo = 42;
+				    
 				  }
 				  
 				  public void blank_5() {
+				    
+				  }
+				  
+				  public void newline_1() {
+				    
+				    
+				  }
+				  
+				  public void newline_2() {
+				    
+				    
+				  }
+				  
+				  public void newline_3() {
+				    
+				    
+				  }
+				  
+				  public void newline_4() {
+				    
+				    
+				  }
+				  
+				  public void def_1() {
 				    int foo = 42;
 				  }
 				  
-				  public void blank_6() {
+				  public void def_2() {
 				    int foo = 42;
 				  }
 				  
-				  public void blank_7() {
+				  public void def_3() {
+				    int foo = 42;
+				  }
+				  
+				  public void def_4() {
 				    List<? extends Object> list = new ArrayList<BigDecimal>();
 				  }
 				}
@@ -92,25 +120,55 @@ class ArtificialMethodsProcessor extends AbstractClassProcessor {
 		])
 		annotatedClass.addMethod('blank_3', [
 			body = [
-				'\n'
+				'\n' // Linux
 			]
 		])
 		annotatedClass.addMethod('blank_4', [
+			body = [
+				"\r\n" // Windows
+			]
+		])
+		annotatedClass.addMethod('blank_5', [
+			body = [
+				'\r' // Mac
+			]
+		])
+		annotatedClass.addMethod('newline_1', [
+			body = [
+				"\n\n" // Linux
+			]
+		])
+		annotatedClass.addMethod('newline_2', [
+			body = [
+				"\r\n\r\n" // Windows
+			]
+		])
+		annotatedClass.addMethod('newline_3', [
+			body = [
+				"\r\r" // Mac
+			]
+		])
+		annotatedClass.addMethod('newline_4', [
+			body = [
+				"\n\r" // Mix
+			]
+		])
+		annotatedClass.addMethod('def_1', [
 			body = [
 				'''
 					int foo = 42;
 				'''
 			]
 		])
-		annotatedClass.addMethod('blank_5', [
+		annotatedClass.addMethod('def_2', [
 			body = '''
 				int foo = 42;
 			'''
 		])
-		annotatedClass.addMethod('blank_6', [
+		annotatedClass.addMethod('def_3', [
 			body = '''int foo = 42;'''
 		])
-		annotatedClass.addMethod('blank_7', [
+		annotatedClass.addMethod('def_4', [
 			body = '''
 				«List»<? extends Object> list = new «ArrayList»<«BigDecimal»>();'''
 		])

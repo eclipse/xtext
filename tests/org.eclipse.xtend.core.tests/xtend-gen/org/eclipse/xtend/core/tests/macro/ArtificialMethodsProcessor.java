@@ -70,6 +70,72 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
           public CharSequence compile(final CompilationContext it) {
+            return "\r\n";
+          }
+        };
+        it.setBody(_function);
+      }
+    };
+    annotatedClass.addMethod("blank_4", _function_4);
+    final Procedure1<MutableMethodDeclaration> _function_5 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        final CompilationStrategy _function = new CompilationStrategy() {
+          public CharSequence compile(final CompilationContext it) {
+            return "\r";
+          }
+        };
+        it.setBody(_function);
+      }
+    };
+    annotatedClass.addMethod("blank_5", _function_5);
+    final Procedure1<MutableMethodDeclaration> _function_6 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        final CompilationStrategy _function = new CompilationStrategy() {
+          public CharSequence compile(final CompilationContext it) {
+            return "\n\n";
+          }
+        };
+        it.setBody(_function);
+      }
+    };
+    annotatedClass.addMethod("newline_1", _function_6);
+    final Procedure1<MutableMethodDeclaration> _function_7 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        final CompilationStrategy _function = new CompilationStrategy() {
+          public CharSequence compile(final CompilationContext it) {
+            return "\r\n\r\n";
+          }
+        };
+        it.setBody(_function);
+      }
+    };
+    annotatedClass.addMethod("newline_2", _function_7);
+    final Procedure1<MutableMethodDeclaration> _function_8 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        final CompilationStrategy _function = new CompilationStrategy() {
+          public CharSequence compile(final CompilationContext it) {
+            return "\r\r";
+          }
+        };
+        it.setBody(_function);
+      }
+    };
+    annotatedClass.addMethod("newline_3", _function_8);
+    final Procedure1<MutableMethodDeclaration> _function_9 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        final CompilationStrategy _function = new CompilationStrategy() {
+          public CharSequence compile(final CompilationContext it) {
+            return "\n\r";
+          }
+        };
+        it.setBody(_function);
+      }
+    };
+    annotatedClass.addMethod("newline_4", _function_9);
+    final Procedure1<MutableMethodDeclaration> _function_10 = new Procedure1<MutableMethodDeclaration>() {
+      public void apply(final MutableMethodDeclaration it) {
+        final CompilationStrategy _function = new CompilationStrategy() {
+          public CharSequence compile(final CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("int foo = 42;");
             _builder.newLine();
@@ -79,8 +145,8 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
         it.setBody(_function);
       }
     };
-    annotatedClass.addMethod("blank_4", _function_4);
-    final Procedure1<MutableMethodDeclaration> _function_5 = new Procedure1<MutableMethodDeclaration>() {
+    annotatedClass.addMethod("def_1", _function_10);
+    final Procedure1<MutableMethodDeclaration> _function_11 = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -92,8 +158,8 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
         it.setBody(_client);
       }
     };
-    annotatedClass.addMethod("blank_5", _function_5);
-    final Procedure1<MutableMethodDeclaration> _function_6 = new Procedure1<MutableMethodDeclaration>() {
+    annotatedClass.addMethod("def_2", _function_11);
+    final Procedure1<MutableMethodDeclaration> _function_12 = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -104,8 +170,8 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
         it.setBody(_client);
       }
     };
-    annotatedClass.addMethod("blank_6", _function_6);
-    final Procedure1<MutableMethodDeclaration> _function_7 = new Procedure1<MutableMethodDeclaration>() {
+    annotatedClass.addMethod("def_3", _function_12);
+    final Procedure1<MutableMethodDeclaration> _function_13 = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -121,6 +187,6 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
         it.setBody(_client);
       }
     };
-    annotatedClass.addMethod("blank_7", _function_7);
+    annotatedClass.addMethod("def_4", _function_13);
   }
 }

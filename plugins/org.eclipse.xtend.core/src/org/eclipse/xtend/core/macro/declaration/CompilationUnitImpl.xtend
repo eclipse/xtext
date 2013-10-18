@@ -492,14 +492,14 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	protected def trimTrailingLinebreak(CharSequence sequence, EObject context) {
-		val lineBreak = context?.eResource?.URI?.lineSeparatorInformation?.lineSeparator
-		if(sequence != null 
-			&& lineBreak != null 
-			&& sequence.length >= lineBreak.length
-			&& lineBreak.equals(sequence.subSequence(sequence.length - lineBreak.length, sequence.length)))
-			sequence.subSequence(0, sequence.length - lineBreak.length)
-		else 
-			sequence
+		var result = sequence
+		if (result.length > 0 && "\n".equals(result.subSequence(result.length - 1, result.length))) {
+			result = result.subSequence(0, result.length - 1)
+		}
+		if (result.length > 0 && "\r".equals(result.subSequence(result.length - 1, result.length))) {
+			result = result.subSequence(0, result.length - 1)
+		}
+		result
 	} 
 	
 	def void setCompilationStrategy(JvmField field, CompilationStrategy compilationStrategy) {

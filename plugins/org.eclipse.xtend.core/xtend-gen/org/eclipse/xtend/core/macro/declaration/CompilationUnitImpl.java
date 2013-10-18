@@ -129,7 +129,6 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
-import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.xbase.XExpression;
@@ -1021,63 +1020,46 @@ public class CompilationUnitImpl implements CompilationUnit {
   protected CharSequence trimTrailingLinebreak(final CharSequence sequence, final EObject context) {
     CharSequence _xblockexpression = null;
     {
-      ILineSeparatorInformation _lineSeparatorInformation = null;
-      Resource _eResource = null;
-      if (context!=null) {
-        _eResource=context.eResource();
-      }
-      URI _uRI = null;
-      if (_eResource!=null) {
-        _uRI=_eResource.getURI();
-      }
-      if (_uRI!=null) {
-        _lineSeparatorInformation=this._iWhitespaceInformationProvider.getLineSeparatorInformation(_uRI);
-      }
-      String _lineSeparator = null;
-      if (_lineSeparatorInformation!=null) {
-        _lineSeparator=_lineSeparatorInformation.getLineSeparator();
-      }
-      final String lineBreak = _lineSeparator;
-      CharSequence _xifexpression = null;
+      CharSequence result = sequence;
       boolean _and = false;
-      boolean _and_1 = false;
-      boolean _and_2 = false;
-      boolean _notEquals = (!Objects.equal(sequence, null));
-      if (!_notEquals) {
-        _and_2 = false;
-      } else {
-        boolean _notEquals_1 = (!Objects.equal(lineBreak, null));
-        _and_2 = (_notEquals && _notEquals_1);
-      }
-      if (!_and_2) {
-        _and_1 = false;
-      } else {
-        int _length = sequence.length();
-        int _length_1 = lineBreak.length();
-        boolean _greaterEqualsThan = (_length >= _length_1);
-        _and_1 = (_and_2 && _greaterEqualsThan);
-      }
-      if (!_and_1) {
+      int _length = result.length();
+      boolean _greaterThan = (_length > 0);
+      if (!_greaterThan) {
         _and = false;
       } else {
-        int _length_2 = sequence.length();
-        int _length_3 = lineBreak.length();
-        int _minus = (_length_2 - _length_3);
-        int _length_4 = sequence.length();
-        CharSequence _subSequence = sequence.subSequence(_minus, _length_4);
-        boolean _equals = lineBreak.equals(_subSequence);
-        _and = (_and_1 && _equals);
+        int _length_1 = result.length();
+        int _minus = (_length_1 - 1);
+        int _length_2 = result.length();
+        CharSequence _subSequence = result.subSequence(_minus, _length_2);
+        boolean _equals = "\n".equals(_subSequence);
+        _and = (_greaterThan && _equals);
       }
       if (_and) {
-        int _length_5 = sequence.length();
-        int _length_6 = lineBreak.length();
-        int _minus_1 = (_length_5 - _length_6);
-        CharSequence _subSequence_1 = sequence.subSequence(0, _minus_1);
-        _xifexpression = _subSequence_1;
-      } else {
-        _xifexpression = sequence;
+        int _length_3 = result.length();
+        int _minus_1 = (_length_3 - 1);
+        CharSequence _subSequence_1 = result.subSequence(0, _minus_1);
+        result = _subSequence_1;
       }
-      _xblockexpression = (_xifexpression);
+      boolean _and_1 = false;
+      int _length_4 = result.length();
+      boolean _greaterThan_1 = (_length_4 > 0);
+      if (!_greaterThan_1) {
+        _and_1 = false;
+      } else {
+        int _length_5 = result.length();
+        int _minus_2 = (_length_5 - 1);
+        int _length_6 = result.length();
+        CharSequence _subSequence_2 = result.subSequence(_minus_2, _length_6);
+        boolean _equals_1 = "\r".equals(_subSequence_2);
+        _and_1 = (_greaterThan_1 && _equals_1);
+      }
+      if (_and_1) {
+        int _length_7 = result.length();
+        int _minus_3 = (_length_7 - 1);
+        CharSequence _subSequence_3 = result.subSequence(0, _minus_3);
+        result = _subSequence_3;
+      }
+      _xblockexpression = (result);
     }
     return _xblockexpression;
   }
