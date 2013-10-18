@@ -85,10 +85,14 @@
             location="TOP_RIGHT"
             state="true">
          <enablement>
-            <objectState
-                  name="nature"
-                  value="org.eclipse.xtext.ui.shared.xtextNature">
-            </objectState>
+         	<and>
+		     	<objectClass
+		              name="org.eclipse.core.resources.IProject"/>
+		        <objectState
+		              name="nature"
+		              value="org.eclipse.xtext.ui.shared.xtextNature">
+		        </objectState>
+            </and>
          </enablement>
       </decorator>
    </extension>
