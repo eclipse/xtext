@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
@@ -48,8 +49,13 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 
 	private FeatureLinkHelper helper;
 
-	public ResolvedFeature(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, FeatureLinkHelper helper, ExpressionTypeComputationState state) {
-		super(featureCall, feature, state);
+	public ResolvedFeature(
+			XAbstractFeatureCall featureCall,
+			JvmIdentifiableElement feature,
+			FeatureLinkHelper helper,
+			ITypeExpectation expectation,
+			ExpressionTypeComputationState state) {
+		super(featureCall, feature, expectation, state);
 		this.helper = helper;
 	}
 	

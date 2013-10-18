@@ -523,7 +523,7 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 			val fun = [ CharSequence x | x ]
 			val java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)
 			fun
-		}".bindTypeArgumentsTo("CharSequence", "CharSequence").and("CharSequence").done
+		}".bindTypeArgumentsTo("CharSequence", "String").and("CharSequence").done
 	}
 	
 	@Test def void testClosure_23() throws Exception {
@@ -2645,6 +2645,10 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	
 	@Test def void testStaticMethods_05() throws Exception {
 		"newHashMap()".bindTypeArgumentsTo("Object", "Object").done
+	}
+	
+	@Test def void testJava8Inferrence_01() throws Exception {
+		"{ val Iterable<Iterable<Number>> l = java.util.Collections.singleton(java.util.Collections.singleton(1)) }".bindTypeArgumentsTo("Iterable<Number>").and("Number").done
 	}
 	
 }

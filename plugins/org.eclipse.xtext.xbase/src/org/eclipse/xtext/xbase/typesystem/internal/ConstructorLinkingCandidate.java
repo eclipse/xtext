@@ -42,8 +42,12 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate<XConstructorCall> implements IConstructorLinkingCandidate {
 
-	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IIdentifiableElementDescription description, ExpressionTypeComputationState state) {
-		super(constructorCall, description, state);
+	public ConstructorLinkingCandidate(
+			XConstructorCall constructorCall,
+			IIdentifiableElementDescription description,
+			ITypeExpectation expectation,
+			ExpressionTypeComputationState state) {
+		super(constructorCall, description, expectation, state);
 	}
 
 	public JvmConstructor getConstructor() {

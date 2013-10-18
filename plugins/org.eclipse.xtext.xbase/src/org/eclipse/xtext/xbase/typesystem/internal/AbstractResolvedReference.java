@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 
 /**
@@ -26,9 +27,12 @@ public abstract class AbstractResolvedReference<Expression extends XExpression> 
 	protected final JvmIdentifiableElement resolvedElement;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	
-	protected AbstractResolvedReference(Expression expression, JvmIdentifiableElement resolvedElement,
+	protected AbstractResolvedReference(
+			Expression expression, 
+			JvmIdentifiableElement resolvedElement,
+			ITypeExpectation expectation,
 			ExpressionTypeComputationState state) {
-		super(expression, state);
+		super(expression, expectation, state);
 		this.resolvedElement = resolvedElement;
 		this.typeParameterMapping = initializeTypeParameterMapping();
 	}

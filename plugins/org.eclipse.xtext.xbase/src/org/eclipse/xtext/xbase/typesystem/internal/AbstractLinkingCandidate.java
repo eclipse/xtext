@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
+import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
@@ -132,12 +133,14 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	}
 	
 	private final ExpressionTypeComputationState state;
+	private final ITypeExpectation expectation;
 	private final Expression expression;
 	protected List<LightweightTypeReference> typeArguments;
 	protected IFeatureCallArguments arguments;
 	
-	protected AbstractLinkingCandidate(Expression expression, ExpressionTypeComputationState state) {
+	protected AbstractLinkingCandidate(Expression expression, ITypeExpectation expectation, ExpressionTypeComputationState state) {
 		this.expression = expression;
+		this.expectation = expectation;
 		this.state = state;
 	}
 
@@ -174,6 +177,28 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		}
 		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, getState().getReferenceOwner());
 		substitutor.enhanceMapping(getDeclaratorParameterMapping());
+		LightweightTypeReference expectedType = expectation.getExpectedType();
+		if (expectedType != null) {
+			LightweightTypeReference declaredFeatureType = getDeclaredType(getFeature());
+			LightweightTypeReference substitutedFeatureType = substitutor.substitute(declaredFeatureType);
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(expectation.getReferenceOwner()) {
+				@Override
+				protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
+					if (!typeParameter.internalIsResolved()
+							&& getExpectedVariance() == VarianceInfo.INVARIANT
+							&& getExpectedVariance() == getActualVariance()
+							&& reference.getKind() != LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+						typeParameter.acceptHint(
+								reference.getWrapperTypeIfPrimitive(),
+								BoundTypeArgumentSource.RESOLVED,
+								getOrigin(),
+								getExpectedVariance(),
+								getActualVariance());
+					}
+				}
+			};
+			collector.processPairedReferences(substitutedFeatureType, expectedType);
+		}
 		for(int i = size; i < declaredTypeParameters.size(); i++) {
 			JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
 			LightweightMergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(declaredTypeParameter);
@@ -191,13 +216,15 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	}
 	
 	protected void initializeConstraintMapping(JvmTypeParameter typeParameter, UnboundTypeParameterPreservingSubstitutor substitutor, UnboundTypeReference typeReference) {
-		List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
-		for(JvmTypeConstraint constraint: constraints) {
-			JvmTypeReference constraintReference = constraint.getTypeReference();
-			if (constraintReference != null) {
-				LightweightTypeReference substitute = substitutor.substitute(constraintReference);
-				if (!substitute.isType(Object.class) && !substitute.isPrimitiveVoid()) {
-					typeReference.acceptHint(substitute, BoundTypeArgumentSource.CONSTRAINT, constraint, VarianceInfo.OUT, VarianceInfo.OUT);
+		if (!typeReference.internalIsResolved()) {
+			List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
+			for(JvmTypeConstraint constraint: constraints) {
+				JvmTypeReference constraintReference = constraint.getTypeReference();
+				if (constraintReference != null) {
+					LightweightTypeReference substitute = substitutor.substitute(constraintReference);
+					if (!substitute.isType(Object.class) && !substitute.isPrimitiveVoid()) {
+						typeReference.acceptHint(substitute, BoundTypeArgumentSource.CONSTRAINT, constraint, VarianceInfo.OUT, VarianceInfo.OUT);
+					}
 				}
 			}
 		}
@@ -246,94 +273,92 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		preApply();
 		JvmIdentifiableElement feature = getFeature();
 		LightweightTypeReference featureType = getDeclaredType(feature);
-		for(ITypeExpectation expectation: state.getExpectations()) {
-			// TODO implement bounds / type parameter resolution
-			// TODO consider expectation if any
-			
-			TypeParameterSubstitutor<?> substitutor = null;
-			if (!isRawTypeContext()) {
-				final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();
-				substitutor = new TypeParameterByUnboundSubstitutor(declaratorParameterMapping, expectation.getReferenceOwner()) {
-	
-					private boolean wasCapturedWildcard = false;
-					
-					@Override
-					protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
-						UnboundTypeReference result = state.getResolvedTypes().createUnboundTypeReference(expression, type);
-						return result;
+		
+		// TODO implement bounds / type parameter resolution
+		// TODO consider expectation if any
+		TypeParameterSubstitutor<?> substitutor = null;
+		if (!isRawTypeContext()) {
+			final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();
+			substitutor = new TypeParameterByUnboundSubstitutor(declaratorParameterMapping, expectation.getReferenceOwner()) {
+
+				private boolean wasCapturedWildcard = false;
+				
+				@Override
+				protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
+					UnboundTypeReference result = state.getResolvedTypes().createUnboundTypeReference(expression, type);
+					return result;
+				}
+				
+				@Override
+				@Nullable
+				protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
+						ConstraintVisitingInfo visiting) {
+					if (getOwner().getDeclaredTypeParameters().contains(type)) {
+						return null;
 					}
-					
-					@Override
-					@Nullable
-					protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
-							ConstraintVisitingInfo visiting) {
-						if (getOwner().getDeclaredTypeParameters().contains(type)) {
-							return null;
-						}
-						return super.getBoundTypeArgument(reference, type, visiting);
-					}
-					
-					@Override
-					@Nullable
-					protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter typeParameter,
-							ConstraintVisitingInfo info) {
-						LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(typeParameter, info);
-						if (result != null) {
-							LightweightTypeReference typeReference = result.getTypeReference();
-							if (result.getVariance() == VarianceInfo.INVARIANT) {
-								if (typeReference.isWildcard() && typeReference.getLowerBoundSubstitute().isAny() && typeReference.getUpperBoundSubstitute().isType(Object.class)) {
-									// assume unbound wildcard - use the constraints of the respective type parameter
-									if (!typeParameter.getConstraints().isEmpty()) {
-										JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
-										if (constraint instanceof JvmUpperBound) {
-											LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
-											return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.OUT);
-										}
+					return super.getBoundTypeArgument(reference, type, visiting);
+				}
+				
+				@Override
+				@Nullable
+				protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter typeParameter,
+						ConstraintVisitingInfo info) {
+					LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(typeParameter, info);
+					if (result != null) {
+						LightweightTypeReference typeReference = result.getTypeReference();
+						if (result.getVariance() == VarianceInfo.INVARIANT) {
+							if (typeReference.isWildcard() && typeReference.getLowerBoundSubstitute().isAny() && typeReference.getUpperBoundSubstitute().isType(Object.class)) {
+								// assume unbound wildcard - use the constraints of the respective type parameter
+								if (!typeParameter.getConstraints().isEmpty()) {
+									JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
+									if (constraint instanceof JvmUpperBound) {
+										LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+										return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.OUT);
 									}
 								}
 							}
-							if (declaratorParameterMapping.containsKey(typeParameter) && typeReference.isWildcard()) {
-								wasCapturedWildcard = true;
-							}
 						}
-						return result;
+						if (declaratorParameterMapping.containsKey(typeParameter) && typeReference.isWildcard()) {
+							wasCapturedWildcard = true;
+						}
 					}
-					
-					@Override
-					protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type,
-							ConstraintVisitingInfo visiting) {
-						boolean convertToWildcard = false;
-						ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
-						for(int i = 0; i < reference.getTypeArguments().size(); i++) {
-							wasCapturedWildcard = false;
-							LightweightTypeReference argument = reference.getTypeArguments().get(i);
-							visiting.pushInfo(type instanceof JvmTypeParameterDeclarator ? (JvmTypeParameterDeclarator) type : null, i);
-							LightweightTypeReference visitedArgument = argument.accept(this, visiting);
-							if (wasCapturedWildcard)
-								convertToWildcard = true;
-							wasCapturedWildcard = false;
-							result.addTypeArgument(visitedArgument);
-						}
-						if (convertToWildcard) {
-							WildcardTypeReference wildcard = new WildcardTypeReference(result.getOwner());
-							wildcard.addUpperBound(result);
-							return wildcard;
-						}
-						return result;
+					return result;
+				}
+				
+				@Override
+				protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type,
+						ConstraintVisitingInfo visiting) {
+					boolean convertToWildcard = false;
+					ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
+					for(int i = 0; i < reference.getTypeArguments().size(); i++) {
+						wasCapturedWildcard = false;
+						LightweightTypeReference argument = reference.getTypeArguments().get(i);
+						visiting.pushInfo(type instanceof JvmTypeParameterDeclarator ? (JvmTypeParameterDeclarator) type : null, i);
+						LightweightTypeReference visitedArgument = argument.accept(this, visiting);
+						if (wasCapturedWildcard)
+							convertToWildcard = true;
+						wasCapturedWildcard = false;
+						result.addTypeArgument(visitedArgument);
 					}
-					
-				};
-				substitutor.enhanceMapping(getTypeParameterMapping());
-			} else {
-				substitutor = new RawTypeSubstitutor(expectation.getReferenceOwner());
-			}
-			// TODO enhance with expectation
-			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType).getUpperBoundSubstitute();
-			if (!expectation.isNoTypeExpectation()) {
-				substitutedFeatureType = deferredBindTypeArgument(expectation, substitutedFeatureType);
-			}
-			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED);
+					if (convertToWildcard) {
+						WildcardTypeReference wildcard = new WildcardTypeReference(result.getOwner());
+						wildcard.addUpperBound(result);
+						return wildcard;
+					}
+					return result;
+				}
+				
+			};
+			substitutor.enhanceMapping(getTypeParameterMapping());
+		} else {
+			substitutor = new RawTypeSubstitutor(expectation.getReferenceOwner());
 		}
+		// TODO enhance with expectation
+		LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType).getUpperBoundSubstitute();
+		if (!expectation.isNoTypeExpectation()) {
+			substitutedFeatureType = deferredBindTypeArgument(expectation, substitutedFeatureType);
+		}
+		expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED);
 		state.getStackedResolvedTypes().mergeIntoParent();
 	}
 	
@@ -396,6 +421,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	protected void initializeArgumentTypeComputation() {
 		if (arguments != null)
 			return;
+		getTypeParameterMapping(); // trigger lazy init
 		arguments = state.getResolver().getExpressionArgumentFactory().createExpressionArguments(expression, this);
 	}
 	

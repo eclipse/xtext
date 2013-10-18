@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -29,8 +30,12 @@ public class ResolvedTypeLiteral extends AbstractResolvedReference<XAbstractFeat
 
 	private TypeLiteralHelper helper;
 
-	protected ResolvedTypeLiteral(XAbstractFeatureCall featureCall, JvmIdentifiableElement resolvedElement, ExpressionTypeComputationState state) {
-		super(featureCall, resolvedElement, state);
+	protected ResolvedTypeLiteral(
+			XAbstractFeatureCall featureCall,
+			JvmIdentifiableElement resolvedElement,
+			ITypeExpectation expectation,
+			ExpressionTypeComputationState state) {
+		super(featureCall, resolvedElement, expectation, state);
 		this.helper = new TypeLiteralHelper(state);
 	}
 
