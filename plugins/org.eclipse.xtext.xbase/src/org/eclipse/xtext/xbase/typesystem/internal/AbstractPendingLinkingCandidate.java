@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
@@ -73,13 +74,15 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * resolved feature, e.g. the implicit receiver, whether it's an extension and more.
 	 */
 	protected final IIdentifiableElementDescription description;
-	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
+	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	
-	protected AbstractPendingLinkingCandidate(Expression expression, IIdentifiableElementDescription description,
+	protected AbstractPendingLinkingCandidate(
+			Expression expression, 
+			IIdentifiableElementDescription description,
+			ITypeExpectation expectation,
 			ExpressionTypeComputationState state) {
-		super(expression, state);
+		super(expression, expectation, state);
 		this.description = description;
-		this.typeParameterMapping = initializeTypeParameterMapping();
 	}
 	
 	/**
@@ -89,6 +92,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 */
 	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
+		if (typeParameterMapping == null) {
+			typeParameterMapping = initializeTypeParameterMapping();
+		}
 		return typeParameterMapping;
 	}
 	

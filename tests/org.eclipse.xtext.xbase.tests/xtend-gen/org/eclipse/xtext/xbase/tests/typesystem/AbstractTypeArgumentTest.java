@@ -746,7 +746,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_22() throws Exception {
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ \n\t\t\tval fun = [ CharSequence x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "CharSequence", "CharSequence");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ \n\t\t\tval fun = [ CharSequence x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "CharSequence", "String");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "CharSequence");
     this.done(_and);
   }
@@ -3164,5 +3164,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   public void testStaticMethods_05() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newHashMap()", "Object", "Object");
     this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testJava8Inferrence_01() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<Iterable<Number>> l = java.util.Collections.singleton(java.util.Collections.singleton(1)) }", "Iterable<Number>");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Number");
+    this.done(_and);
   }
 }

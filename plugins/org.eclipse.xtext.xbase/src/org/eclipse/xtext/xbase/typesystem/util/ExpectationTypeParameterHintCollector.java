@@ -35,6 +35,7 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 			boolean constraintSeen = false;
 			boolean constraintsMatch = true;
 			boolean othersSeen = false;
+			boolean declarationMatches = getExpectedVariance() != VarianceInfo.OUT;
 			if (reference.getTypeParameter() != declaration.getType()) {
 				List<LightweightBoundTypeArgument> hints = reference.getAllHints();
 				for(int i = 0; i < hints.size(); i++) {
@@ -48,6 +49,16 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 					} else {
 						othersSeen = true;
 						// we don't break the list traversal here since we want to do the paired outerVisit for all constraints
+						if (declarationMatches) {
+							if (hint.getActualVariance() == VarianceInfo.OUT && hint.getDeclaredVariance() == VarianceInfo.OUT && 
+									(hint.getSource() == BoundTypeArgumentSource.INFERRED || hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER)) {
+								if (!declaration.isAssignableFrom(hint.getTypeReference())) {
+									declarationMatches = false;
+								}
+							} else {
+								declarationMatches = false;
+							}
+						}
 					}
 				}
 			} else {
@@ -60,6 +71,8 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 				reference.acceptHint(declaration, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 			} else if (!constraintSeen && !reference.internalIsResolved() && declaration.isResolved() && !getOwner().isResolved(reference.getHandle()) && reference.canResolveTo(declaration)) {
 				reference.acceptHint(declaration, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+			} else if (othersSeen && declarationMatches) {
+				reference.acceptHint(declaration, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 			} else {
 				reference.tryResolve();
 				if (reference.internalIsResolved()) {

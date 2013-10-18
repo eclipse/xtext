@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.util.FeatureKinds;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -65,9 +66,12 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall> implements IFeatureLinkingCandidate, IFeatureNames {
 
-	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IIdentifiableElementDescription description,
+	public FeatureLinkingCandidate(
+			XAbstractFeatureCall featureCall,
+			IIdentifiableElementDescription description,
+			ITypeExpectation expectation,
 			ExpressionTypeComputationState state) {
-		super(featureCall, description, state);
+		super(featureCall, description, expectation, state);
 	}
 	
 	@Override

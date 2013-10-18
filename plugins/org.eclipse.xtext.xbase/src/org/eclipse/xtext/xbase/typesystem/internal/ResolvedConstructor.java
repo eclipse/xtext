@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
@@ -26,8 +27,12 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public class ResolvedConstructor extends AbstractResolvedReference<XConstructorCall> implements IConstructorLinkingCandidate {
 
-	public ResolvedConstructor(XConstructorCall constructorCall, JvmConstructor constructor, ExpressionTypeComputationState state) {
-		super(constructorCall, constructor, state);
+	public ResolvedConstructor(
+			XConstructorCall constructorCall,
+			JvmConstructor constructor,
+			ITypeExpectation expectation, 
+			ExpressionTypeComputationState state) {
+		super(constructorCall, constructor, expectation, state);
 	}
 	
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {

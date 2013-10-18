@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -38,10 +39,12 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 
 	private TypeLiteralHelper helper;
 
-	public TypeLiteralLinkingCandidate(XAbstractFeatureCall featureCall, 
+	public TypeLiteralLinkingCandidate(
+			XAbstractFeatureCall featureCall, 
 			IIdentifiableElementDescription description,
+			ITypeExpectation expectation, 
 			ExpressionTypeComputationState state) {
-		super(featureCall, description, state);
+		super(featureCall, description, expectation, state);
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax()) {
 			throw new IllegalArgumentException("Cannot be a type literal: " + String.valueOf(featureCall));
 		}

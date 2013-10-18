@@ -390,9 +390,9 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			child.computeTypes(implicitFirstArgument);
 		}
 		if (featureCall.isTypeLiteral() || featureCall.isPackageFragment()) {
-			return new ResolvedTypeLiteral(featureCall, resolvedTo, state);
+			return new ResolvedTypeLiteral(featureCall, resolvedTo, getSingleExpectation(state), state);
 		}
-		return new ResolvedFeature(featureCall, resolvedTo, helper, state);
+		return new ResolvedFeature(featureCall, resolvedTo, helper, getSingleExpectation(state), state);
 	}
 	
 	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, final StackedResolvedTypes demandComputedTypes, IIdentifiableElementDescription description) {
@@ -410,10 +410,18 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			}
 			return new UnresolvableFeatureCall(featureCall, errorDescription.getNode(), description.getName().toString(), state);
 		} else if (description.isTypeLiteral()) {
-			return new TypeLiteralLinkingCandidate(featureCall, description, state);
+			return new TypeLiteralLinkingCandidate(featureCall, description, getSingleExpectation(state), state);
 		} else {
-			return new FeatureLinkingCandidate(featureCall, description, state);
+			return new FeatureLinkingCandidate(featureCall, description, getSingleExpectation(state), state);
 		}
+	}
+	
+	protected ITypeExpectation getSingleExpectation(ITypeComputationState state) {
+		List<? extends ITypeExpectation> result = state.getExpectations();
+		if (result.size() != 1) {
+			throw new IllegalStateException();
+		}
+		return result.get(0);
 	}
 
 	protected IFeatureLinkingCandidate createCandidateWithReceiverType(XAbstractFeatureCall featureCall, final StackedResolvedTypes demandComputedTypes,
@@ -440,7 +448,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				}
 			};
 		} else if (description.isTypeLiteral()) {
-			return new TypeLiteralLinkingCandidate(featureCall, description, state) {
+			return new TypeLiteralLinkingCandidate(featureCall, description, getSingleExpectation(state), state) {
 				@Override
 				public void applyToComputationState() {
 					super.applyToComputationState();
@@ -448,7 +456,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				}
 			};
 		} 
-		return new FeatureLinkingCandidate(featureCall, description, state) {
+		return new FeatureLinkingCandidate(featureCall, description, getSingleExpectation(state), state) {
 			@Override
 			public void applyToComputationState() {
 				super.applyToComputationState();
@@ -497,7 +505,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected IConstructorLinkingCandidate createResolvedLink(XConstructorCall constructorCall, JvmConstructor resolvedTo) {
 		StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(constructorCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);
-		return new ResolvedConstructor(constructorCall, resolvedTo, state);
+		return new ResolvedConstructor(constructorCall, resolvedTo, getSingleExpectation(state), state);
 	}
 	
 	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IIdentifiableElementDescription description) {
@@ -508,7 +516,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		} else if (description.getElementOrProxy() instanceof JvmType) {
 			return new TypeInsteadOfConstructorLinkingCandidate(constructorCall, description, state);
 		} else {
-			return new ConstructorLinkingCandidate(constructorCall, description, state);
+			return new ConstructorLinkingCandidate(constructorCall, description, getSingleExpectation(state), state);
 		}
 	}
 

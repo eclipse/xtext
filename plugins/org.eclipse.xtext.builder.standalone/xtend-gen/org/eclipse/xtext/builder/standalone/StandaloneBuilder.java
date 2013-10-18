@@ -322,10 +322,9 @@ public class StandaloneBuilder {
           boolean _matched = false;
           if (!_matched) {
             if (provider instanceof org.eclipse.xtext.parser.IEncodingProvider.Runtime) {
-              final org.eclipse.xtext.parser.IEncodingProvider.Runtime _runtime = (org.eclipse.xtext.parser.IEncodingProvider.Runtime)provider;
               _matched=true;
               String _encoding_1 = this.getEncoding();
-              _runtime.setDefaultEncoding(_encoding_1);
+              ((org.eclipse.xtext.parser.IEncodingProvider.Runtime)provider).setDefaultEncoding(_encoding_1);
             }
           }
           if (!_matched) {
