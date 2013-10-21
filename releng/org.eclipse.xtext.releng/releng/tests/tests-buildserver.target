@@ -6,7 +6,7 @@
 <unit id="org.eclipse.pde.core" version="0.0.0"/>
 <unit id="org.eclipse.pde.ui" version="0.0.0"/>
 <unit id="org.eclipse.ui.cheatsheets" version="0.0.0"/>
-<unit id="org.junit4" version="4.8.1.v20120523-1257"/>
+<unit id="org.junit4" version="0.0.0"/>
 <unit id="org.junit" version="4.10.0.v4_10_0_v20120426-0900"/>
 <unit id="org.junit" version="3.8.2.v3_8_2_v20100427-1100"/>
 <unit id="org.eclipse.jdt.annotation" version="0.0.0"/>
