@@ -10,6 +10,8 @@ package org.eclipse.xtext.junit4.internal;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,9 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.eclipse.xtext.util.Files;
 import org.junit.Test;
 
 /**
@@ -28,13 +32,17 @@ import org.junit.Test;
 public class InternalBuilderTest {
 
 	@Test
-	public void test() throws CoreException {
-		long maxMem = Runtime.getRuntime().maxMemory() / (1024 * 1024);
-		long free = Runtime.getRuntime().freeMemory() / (1024 * 1024);
-		long used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
-		System.out.println("Starting build. Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
-		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
+	public void test() throws CoreException, FileNotFoundException {
 
+		reportMemoryState("Starting build.");
+
+		try {
+			File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
+			Files.sweepFolder(jdtMetadata);
+			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
+		} finally {
+			reportMemoryState("Finished build.");
+		}
 		final IMarker[] markers = ResourcesPlugin.getWorkspace().getRoot()
 				.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
 		List<String> errors = new ArrayList<String>();
@@ -51,12 +59,15 @@ public class InternalBuilderTest {
 		} else {
 			top10 = errors;
 		}
-		maxMem = Runtime.getRuntime().maxMemory() / (1024 * 1024);
-		free = Runtime.getRuntime().freeMemory() / (1024 * 1024);
-		used = Runtime.getRuntime().totalMemory() / (1024 * 1024);
-		System.out.println("Finished build. Memory max=" + maxMem + "m, total=" + used + "m, free=" + free + "m");
+
 		assertTrue("Problems found (" + top10.size() + " from " + errors.size() + "): " + join(errors, ", "),
 				errors.isEmpty());
+	}
+
+	private void reportMemoryState(String reportName) {
+		System.out.println(reportName + " Memory max=" + Runtime.getRuntime().maxMemory() / (1024 * 1024) + "m, total="
+				+ Runtime.getRuntime().totalMemory() / (1024 * 1024) + "m, free=" + Runtime.getRuntime().freeMemory()
+				/ (1024 * 1024) + "m");
 	}
 
 }
