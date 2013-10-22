@@ -7,7 +7,6 @@
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
-        <bundles name="org.junit4" versionRange="[4.5.0.v20090824]"/>
         <features name="org.eclipse.jdt.feature.group" versionRange="[3.5.2,3.5.3)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/releases/galileo">
