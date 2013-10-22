@@ -332,11 +332,17 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	
-	private void cleanUpTmpFolder(File tempDir) {
+	protected void cleanUpTmpFolder(File tempDir) {
 		try {
+			tempDir.deleteOnExit();
+			// Classloader needs .class files to lazy load an anonymous non static classes
 			Files.cleanFolder(tempDir, new FileFilter() {
 				public boolean accept(File pathname) {
-					return !pathname.getName().endsWith(".class");
+					boolean isClass = pathname.getName().endsWith(".class");
+					if(isClass) {
+						pathname.deleteOnExit();
+					}
+					return !isClass;
 				}
 			}, true, true);
 		} catch (FileNotFoundException e) {
