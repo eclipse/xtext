@@ -11,7 +11,7 @@
         <features name="org.eclipse.jdt.feature.group" versionRange="[3.7.0,3.8.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
-        <bundles name="org.junit4"/>
+        <bundles name="org.junit4" versionRange="[4.8.1.v20120523-1257]"/>
         <bundles name="org.eclipse.jdt.annotation"/>
       </repositories>
       <repositories location="http://download.eclipse.org/releases/indigo/">

@@ -17,7 +17,7 @@
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
         <bundles name="org.eclipse.jdt.annotation"/>
-        <bundles name="org.junit4" versionRange="[4.8.1,4.8.2)"/>
+        <bundles name="org.junit4" versionRange="[4.8.1.v20120523-1257]"/>
         <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
       </repositories>
       <repositories location="http://download.eclipse.org/technology/m2e/releases/1.4">
