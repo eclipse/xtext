@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtext.builder.standalone;
 
+import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,6 +21,8 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -33,17 +36,19 @@ public class LanguageAccess {
 	private IResourceServiceProvider resourceServiceProvider;
 	private boolean linksAgainstJava = true;
 	private JavaIoFileSystemAccess fsa;
+	private File baseDir;
 
 	public LanguageAccess(Set<OutputConfiguration> outputConfigurations,
-			IResourceServiceProvider resourceServiceProvider) {
-		this(outputConfigurations, resourceServiceProvider, false);
+			IResourceServiceProvider resourceServiceProvider, File baseDir) {
+		this(outputConfigurations, resourceServiceProvider, false, baseDir);
 	}
-	
+
 	public LanguageAccess(Set<OutputConfiguration> outputConfigurations,
-			IResourceServiceProvider resourceServiceProvider, boolean linksAgainstJavaTypes) {
+			IResourceServiceProvider resourceServiceProvider, boolean linksAgainstJavaTypes, File baseDir) {
 		this.outputConfigs = outputConfigurations;
 		this.resourceServiceProvider = resourceServiceProvider;
 		this.linksAgainstJava = linksAgainstJavaTypes;
+		this.baseDir = baseDir;
 	}
 
 	public IGenerator getGenerator() {
@@ -74,8 +79,14 @@ public class LanguageAccess {
 			}
 		}
 		confsForFsa.addAll(getOutputConfigurationProvider().getOutputConfigurations());
-		Map<String, OutputConfiguration> asMap = IterableExtensions.toMap(confsForFsa,
-				new Function1<OutputConfiguration, String>() {
+		Map<String, OutputConfiguration> asMap = IterableExtensions.toMap(
+				Iterables.transform(confsForFsa, new Function<OutputConfiguration, OutputConfiguration>() {
+
+					public OutputConfiguration apply(OutputConfiguration output) {
+						output.setOutputDirectory(resolveToBaseDir(output.getOutputDirectory()));
+						return output;
+					}
+				}), new Function1<OutputConfiguration, String>() {
 					public String apply(final OutputConfiguration it) {
 						return it.getName();
 					}
@@ -110,5 +121,13 @@ public class LanguageAccess {
 
 	public boolean isLinksAgainstJava() {
 		return linksAgainstJava;
+	}
+
+	protected String resolveToBaseDir(final String directory) {
+		File outDir = new File(directory);
+		if (!outDir.isAbsolute()) {
+			outDir = new File(baseDir, directory);
+		}
+		return outDir.getAbsolutePath();
 	}
 }

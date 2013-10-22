@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtext.builder.standalone;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import com.google.inject.Injector;
  */
 public class LanguageAccessFactory {
 
-	public Map<String,LanguageAccess> createLanguageAccess(List<? extends ILanguageConfiguration> languageConfigs, ClassLoader compilerClassLoder) {
+	public Map<String,LanguageAccess> createLanguageAccess(List<? extends ILanguageConfiguration> languageConfigs, ClassLoader compilerClassLoder, File baseDir) {
 		Map<String,LanguageAccess> result = new HashMap<String, LanguageAccess>();
 		for (ILanguageConfiguration languageGenConf : languageConfigs) {
 			ISetup setup;
@@ -37,7 +38,7 @@ public class LanguageAccessFactory {
 			Injector injector = setup.createInjectorAndDoEMFRegistration();
 			IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 			FileExtensionProvider fileExtensionProvider = injector.getInstance(FileExtensionProvider.class);
-			LanguageAccess languageAccess = new LanguageAccess(languageGenConf.getOutputConfigurations(), serviceProvider, languageGenConf.isJavaSupport());
+			LanguageAccess languageAccess = new LanguageAccess(languageGenConf.getOutputConfigurations(), serviceProvider, languageGenConf.isJavaSupport(), baseDir);
 			for (String extension : fileExtensionProvider.getFileExtensions()) {
 				result.put(extension, languageAccess);
 			}
