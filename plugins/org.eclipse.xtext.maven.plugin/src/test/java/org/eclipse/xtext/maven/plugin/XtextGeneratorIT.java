@@ -49,7 +49,7 @@ public class XtextGeneratorIT {
 	
 	@Test
 	public void aggregation() throws Exception {
-		Verifier verifier = verifyErrorFreeLog(ROOT + "/aggregation");
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/aggregate");
 		verifier.assertFilePresent(verifier.getBasedir() + "/purexbase/src-gen/IntegrationTestXbase.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/purexbase/target/xtext-temp/classes/IntegrationTestXbase.class");
 	}
