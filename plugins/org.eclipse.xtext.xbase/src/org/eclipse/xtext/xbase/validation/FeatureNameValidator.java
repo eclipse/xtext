@@ -35,5 +35,14 @@ public class FeatureNameValidator implements IFeatureNames {
 	public boolean isDisallowedName(QualifiedName name) {
 		return false;
 	}
+
+	/**
+	 * Returns <code>true</code> if it is discouraged to define the given name.
+	 * @param name the name that is to-be-defined.
+	 * @return <code>true</code> if the name should not be used.
+	 */
+	public boolean isDiscouragedName(QualifiedName name) {
+		return SELF.equals(name);
+	}
 	
 }

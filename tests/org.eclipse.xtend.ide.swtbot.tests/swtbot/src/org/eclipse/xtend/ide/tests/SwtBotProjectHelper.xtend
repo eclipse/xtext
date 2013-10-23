@@ -12,6 +12,7 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor
 import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -130,15 +131,19 @@ class SwtBotProjectHelper {
 	}
 	
 	static def clearSourceFolderContents(SWTWorkbenchBot it, String project) {
-		val srcNode = tree.expandNode(project).expandNode('src')
-		for(source: srcNode.items) {
-			if(!source.widget.disposed) {
-				println(text)
-				srcNode.select(source.text)
-				source.contextMenu('Delete').click
-				shell('Delete').activate
-				button('OK').click
+		try {
+			val srcNode = tree.expandNode(project).expandNode('src')
+			for(source: srcNode.items) {
+				if(!source.widget.disposed) {
+					println(text)
+					srcNode.select(source.text)
+					source.contextMenu('Delete').click
+					shell('Delete').activate
+					button('OK').click
+				}
 			}
+		} catch(WidgetNotFoundException exc) {
+			// ignore
 		}
 	}
 }
