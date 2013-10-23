@@ -4,7 +4,7 @@
     <contributions href="../aggregator/xtext.b3aggrcon#/"/>
     <contributions href="../aggregator/common.b3aggrcon#/"/>
     <validationRepositories location="http://download.eclipse.org/eclipse/updates/4.3/"/>
-    <validationRepositories location="http://download.eclipse.org/releases/kepler"/>
+    <validationRepositories location="http://download.eclipse.org/releases/kepler/"/>
   </validationSets>
   <configurations/>
 </aggregator:Aggregation>
