@@ -15,6 +15,7 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotPerspective;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
@@ -25,6 +26,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -263,30 +265,42 @@ public class SwtBotProjectHelper {
     return _xblockexpression;
   }
   
-  public static void clearSourceFolderContents(final SWTWorkbenchBot it) {
-    SwtBotProjectHelper.clearSourceFolderContents(it, SwtBotProjectHelper.defaultProject);
+  public static Object clearSourceFolderContents(final SWTWorkbenchBot it) {
+    Object _clearSourceFolderContents = SwtBotProjectHelper.clearSourceFolderContents(it, SwtBotProjectHelper.defaultProject);
+    return _clearSourceFolderContents;
   }
   
-  public static void clearSourceFolderContents(final SWTWorkbenchBot it, final String project) {
-    SWTBotTree _tree = it.tree();
-    SWTBotTreeItem _expandNode = _tree.expandNode(project);
-    final SWTBotTreeItem srcNode = _expandNode.expandNode("src");
-    SWTBotTreeItem[] _items = srcNode.getItems();
-    for (final SWTBotTreeItem source : _items) {
-      boolean _isDisposed = source.widget.isDisposed();
-      boolean _not = (!_isDisposed);
-      if (_not) {
-        SWTBotText _text = it.text();
-        InputOutput.<SWTBotText>println(_text);
-        String _text_1 = source.getText();
-        srcNode.select(_text_1);
-        SWTBotMenu _contextMenu = source.contextMenu("Delete");
-        _contextMenu.click();
-        SWTBotShell _shell = it.shell("Delete");
-        _shell.activate();
-        SWTBotButton _button = it.button("OK");
-        _button.click();
+  public static Object clearSourceFolderContents(final SWTWorkbenchBot it, final String project) {
+    Object _xtrycatchfinallyexpression = null;
+    try {
+      SWTBotTree _tree = it.tree();
+      SWTBotTreeItem _expandNode = _tree.expandNode(project);
+      final SWTBotTreeItem srcNode = _expandNode.expandNode("src");
+      SWTBotTreeItem[] _items = srcNode.getItems();
+      for (final SWTBotTreeItem source : _items) {
+        boolean _isDisposed = source.widget.isDisposed();
+        boolean _not = (!_isDisposed);
+        if (_not) {
+          SWTBotText _text = it.text();
+          InputOutput.<SWTBotText>println(_text);
+          String _text_1 = source.getText();
+          srcNode.select(_text_1);
+          SWTBotMenu _contextMenu = source.contextMenu("Delete");
+          _contextMenu.click();
+          SWTBotShell _shell = it.shell("Delete");
+          _shell.activate();
+          SWTBotButton _button = it.button("OK");
+          _button.click();
+        }
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof WidgetNotFoundException) {
+        final WidgetNotFoundException exc = (WidgetNotFoundException)_t;
+        _xtrycatchfinallyexpression = null;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
     }
+    return _xtrycatchfinallyexpression;
   }
 }

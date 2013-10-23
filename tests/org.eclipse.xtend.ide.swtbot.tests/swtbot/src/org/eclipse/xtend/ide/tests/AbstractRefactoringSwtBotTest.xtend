@@ -47,6 +47,7 @@ abstract class AbstractRefactoringSwtBotTest {
 	
 	@AfterClass
 	static def void terminate() {
+		bot.closeAllEditors
 		cleanWorkspace
 	}
 	
@@ -57,14 +58,14 @@ abstract class AbstractRefactoringSwtBotTest {
 	protected RefactoringTestParameters testParams
 
 	@Before
-	def setUp() {
-		XtendActivator.instance.getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND).injectMembers(this)	
+	def void setUp() {
+		XtendActivator.instance.getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND).injectMembers(this)
+		bot.closeAllEditors
+		bot.clearSourceFolderContents
 	}
  
-	@After
+ 	@After
 	def void tearDown() {
-		bot.clearSourceFolderContents
-		bot.closeAllEditors
 		Display.getDefault.syncExec[|
 			preferences.useInlineRefactoring = true
 			preferences.saveAllBeforeRefactoring = true

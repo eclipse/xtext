@@ -58,6 +58,7 @@ public abstract class AbstractRefactoringSwtBotTest {
   @AfterClass
   public static void terminate() {
     try {
+      AbstractRefactoringSwtBotTest.bot.closeAllEditors();
       IResourcesSetupUtil.cleanWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -77,12 +78,12 @@ public abstract class AbstractRefactoringSwtBotTest {
     XtendActivator _instance = XtendActivator.getInstance();
     Injector _injector = _instance.getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND);
     _injector.injectMembers(this);
+    AbstractRefactoringSwtBotTest.bot.closeAllEditors();
+    SwtBotProjectHelper.clearSourceFolderContents(AbstractRefactoringSwtBotTest.bot);
   }
   
   @After
   public void tearDown() {
-    SwtBotProjectHelper.clearSourceFolderContents(AbstractRefactoringSwtBotTest.bot);
-    AbstractRefactoringSwtBotTest.bot.closeAllEditors();
     Display _default = Display.getDefault();
     final Runnable _function = new Runnable() {
       public void run() {
