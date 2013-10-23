@@ -70,6 +70,7 @@ public class IssueCodes {
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
 	public static final String VARIABLE_NAME_SHADOWING = ISSUE_CODE_PREFIX + "variable_name_shadowing";
 	public static final String VARIABLE_NAME_DISALLOWED = ISSUE_CODE_PREFIX + "variable_name_disallowed";
+	public static final String VARIABLE_NAME_DISCOURAGED = ISSUE_CODE_PREFIX + "variable_name_discouraged";
 	public static final String NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive";
 	public static final String NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive_valued_feature";
 	public static final String PRIMITIVE_COMPARED_TO_NULL = ISSUE_CODE_PREFIX	+ "primitive_compared_to_null";

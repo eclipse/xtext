@@ -242,6 +242,17 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 					null));
 			return;
 		}
+		if (getResolver().isDiscouragedName(elementName)) {
+			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.WARNING,
+					IssueCodes.VARIABLE_NAME_DISCOURAGED, 
+					"'" + elementName + "' is a discouraged name", 
+					getResolver().getSourceElement(element),
+					element.eClass().getEStructuralFeature("name"),
+					-1,
+					null));
+			return;
+		}
 		if (raiseIssueIfShadowing) {
 			IEObjectDescription existingElement = featureScopeSession.getLocalElement(elementName);
 			if (existingElement != null) {

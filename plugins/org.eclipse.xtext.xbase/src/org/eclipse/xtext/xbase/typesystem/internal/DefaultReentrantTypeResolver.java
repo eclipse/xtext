@@ -358,6 +358,10 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		return featureNameValidator.isDisallowedName(name);
 	}
 	
+	protected boolean isDiscouragedName(QualifiedName name) {
+		return featureNameValidator.isDiscouragedName(name);
+	}
+	
 	protected ITypeComputer getTypeComputer() {
 		return typeComputer;
 	}
