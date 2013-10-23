@@ -28,12 +28,21 @@ public class FeatureNameValidator implements IFeatureNames {
 	}
 	
 	/**
-	 * Returns <code>true</code> if it is legal to define the given name.
+	 * Returns <code>true</code> if it is illegal to define the given name.
 	 * @param name the name that is to-be-defined.
-	 * @return <code>true</code> if the name may be used.
+	 * @return <code>true</code> if the name may not be used.
 	 */
 	public boolean isDisallowedName(QualifiedName name) {
 		return false;
+	}
+	
+	/**
+	 * Returns <code>true</code> if it is discouraged to define the given name.
+	 * @param name the name that is to-be-defined.
+	 * @return <code>true</code> if the name may not be used.
+	 */
+	public boolean isDiscouragedName(QualifiedName name) {
+		return SELF.equals(name);
 	}
 	
 }
