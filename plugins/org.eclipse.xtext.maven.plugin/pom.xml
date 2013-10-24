@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.standalone</artifactId>
-			<version>2.4.3</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -131,5 +131,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	
 </project>

@@ -15,6 +15,8 @@
 		<module>../org.eclipse.xtext.xbase.lib</module>
 		<module>../org.eclipse.xtend.standalone.maven</module>
 		<module>../org.eclipse.xtext.standalone.maven</module>
+		<module>../org.eclipse.xtext.builder.standalone</module>
+		<module>../org.eclipse.xtext.maven.plugin</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
@@ -30,7 +32,7 @@
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 		<maven.compiler.source>1.5</maven.compiler.source>
 		<maven.compiler.target>1.5</maven.compiler.target>
-		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest</xtext-url>
+		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly</xtext-url>
 		<tycho-version>0.17.0</tycho-version>
 		<mirroring.phase>prepare-package</mirroring.phase>
 		<skipMirroring>false</skipMirroring>
