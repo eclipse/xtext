@@ -63,12 +63,13 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		this(javaProject, resourceSet, indexedJvmTypeAccess, null);
 	}
-	
+
 	/**
 	 * @since 2.4
 	 * @noreference This constructor is not intended to be referenced by clients.
 	 */
-	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, WorkingCopyOwner workingCopyOwner) {
+	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet,
+			IndexedJvmTypeAccess indexedJvmTypeAccess, WorkingCopyOwner workingCopyOwner) {
 		super(resourceSet, indexedJvmTypeAccess);
 		if (javaProject == null)
 			throw new IllegalArgumentException("javaProject may not be null");
@@ -77,7 +78,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		this.workingCopyOwner = workingCopyOwner;
 		this.typeFactory = createTypeFactory();
 	}
-	
+
 	protected JdtBasedTypeFactory createTypeFactory() {
 		return new JdtBasedTypeFactory(typeUriHelper, workingCopyOwner);
 	}
@@ -85,7 +86,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	protected TypeURIHelper createTypeURIHelper() {
 		return new TypeURIHelper();
 	}
-	
+
 	@Override
 	public JvmType findTypeByName(String name) {
 		String signature = getSignature(name);
@@ -98,7 +99,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			return findObjectType(signature, resourceURI);
 		}
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
@@ -109,13 +110,13 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			return result;
 		}
 		ClassNameVariants nameVariants = new ClassNameVariants(name);
-		while(result == null && nameVariants.hasNext()) {
+		while (result == null && nameVariants.hasNext()) {
 			String nextVariant = nameVariants.next();
 			result = findTypeByName(nextVariant);
 		}
 		return result;
 	}
-	
+
 	@Nullable
 	private String getSignature(String name) {
 		if (Strings.isEmpty(name))
@@ -153,7 +154,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	@Nullable
-	private JvmType findLoadedOrDerivedObjectType(@NonNull String signature, @NonNull URI resourceURI, @Nullable TypeResource resource) {
+	private JvmType findLoadedOrDerivedObjectType(@NonNull String signature, @NonNull URI resourceURI,
+			@Nullable TypeResource resource) {
 		JvmType result = resource != null ? findTypeBySignature(signature, resource) : null;
 		if (result != null) {
 			return result;
@@ -166,25 +168,27 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	@Nullable
-	private JvmType findObjectTypeInJavaProject(@NonNull String signature, @NonNull URI resourceURI) throws JavaModelException {
+	private JvmType findObjectTypeInJavaProject(@NonNull String signature, @NonNull URI resourceURI)
+			throws JavaModelException {
 		IType type = findObjectTypeInJavaProject(resourceURI);
 		if (type != null) {
 			try {
 				return createResourceAndFindType(resourceURI, type, signature);
-			} catch(IOException ioe) {
+			} catch (IOException ioe) {
 				return null;
-			} catch(WrappedException wrapped) {
+			} catch (WrappedException wrapped) {
 				if (wrapped.getCause() instanceof IOException) {
 					return null;
 				}
 				throw wrapped;
 			}
-		} 
+		}
 		return null;
 	}
 
 	@Nullable
-	private JvmType createResourceAndFindType(@NonNull URI resourceURI, @NonNull IType type, @NonNull String signature) throws IOException {
+	private JvmType createResourceAndFindType(@NonNull URI resourceURI, @NonNull IType type, @NonNull String signature)
+			throws IOException {
 		TypeResource resource = createResource(resourceURI, type);
 		resource.load(null);
 		return findTypeBySignature(signature, resource);
@@ -216,35 +220,36 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 		return type;
 	}
-	
+
 	private boolean canLink(String typeName) {
-		if (typeName != null) {
+		if (typeName == null) {
+			return false;
+		}
+		IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
+		if (indexedJvmTypeAccess != null && indexedJvmTypeAccess.isIndexingPhase(getResourceSet())) {
 			// during indexing we don't see project local types.
 			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=410594
 			try {
-				IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
-				if (indexedJvmTypeAccess != null 
-						&& indexedJvmTypeAccess.isIndexingPhase(getResourceSet())) {
-					IType type = javaProject.findType(typeName);
-					if (type != null) {
-						IResource underlyingResource = type.getUnderlyingResource();
-						if (underlyingResource == null) {
-							return true;
-						}
-						for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots()) {
-							if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
-								IResource srcUnderlyingResource = root.getUnderlyingResource();
-								if (srcUnderlyingResource != null && srcUnderlyingResource.contains(underlyingResource)) {
-									return false;
-								}
-							}
-						}
+				IType type = javaProject.findType(typeName);
+				if (type != null && type.exists()) {
+					IResource underlyingResource = type.getUnderlyingResource();
+					if (underlyingResource == null) {
 						return true;
 					}
+					for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots()) {
+						if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
+							IResource srcUnderlyingResource = root.getUnderlyingResource();
+							if (srcUnderlyingResource != null && srcUnderlyingResource.contains(underlyingResource)) {
+								return false;
+							}
+						}
+					}
+					return true;
 				}
 			} catch (JavaModelException e) {
 				LOG.error(e.getMessage(), e);
 			}
+			return false;
 		}
 		return true;
 	}
@@ -301,8 +306,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			if (type == null || !type.exists())
 				return null;
 			return createMirror(type);
-		}
-		catch (JavaModelException e) {
+		} catch (JavaModelException e) {
 			return null;
 		}
 	}
