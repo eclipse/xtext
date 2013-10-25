@@ -226,7 +226,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 				if (indexedJvmTypeAccess != null 
 						&& indexedJvmTypeAccess.isIndexingPhase(getResourceSet())) {
 					IType type = javaProject.findType(typeName);
-					if (type != null) {
+					if (type != null && type.exists()) {
 						IResource underlyingResource = type.getUnderlyingResource();
 						if (underlyingResource == null) {
 							return true;
@@ -246,7 +246,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 				LOG.error(e.getMessage(), e);
 			}
 		}
-		return true;
+		return false;
 	}
 
 	private JvmType findObjectTypeInIndex(@NonNull String signature, @NonNull URI resourceURI) {
