@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 
 public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
@@ -42,7 +43,7 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 		Keyword kw = grammarAccess.getXParenthesizedExpressionAccess().getLeftParenthesisKeyword_0();
 
 		if (nodes == null) {
-			if (semanticObject instanceof XIfExpression) {
+			if (semanticObject instanceof XIfExpression || semanticObject instanceof XTryCatchFinallyExpression) {
 				EObject cnt = semanticObject.eContainer();
 				if (cnt instanceof XExpression && !(cnt instanceof XBlockExpression)
 						&& !(cnt instanceof XForLoopExpression))

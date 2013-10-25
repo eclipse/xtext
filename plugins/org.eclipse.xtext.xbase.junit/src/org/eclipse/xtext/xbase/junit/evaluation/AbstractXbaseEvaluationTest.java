@@ -2000,6 +2000,18 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null, "null as Integer");
 	}
 	
+	@Test public void testCastedExpression_05() throws Exception {
+		assertEvaluatesTo("MyString", "(if (true) { 'MyString' } else { throw new Exception() }) as String");
+	}
+	
+	@Test public void testCastedExpression_06() throws Exception {
+		assertEvaluatesTo("MyString", "(try { 'MyString' } finally { 'bla'.length }) as String");
+	}
+	
+	@Test public void testCastedExpression_07() throws Exception {
+		assertEvaluatesTo("MyString", "(try { 'MyString' } catch (Exception e) { throw e }) as String");
+	}
+	
 	@Test public void testTryCatch_01() throws Exception {
 		assertEvaluatesTo("caught", "try { 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}");
 	}
