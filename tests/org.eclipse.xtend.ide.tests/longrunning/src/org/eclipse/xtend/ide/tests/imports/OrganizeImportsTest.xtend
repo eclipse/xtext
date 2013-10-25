@@ -311,4 +311,30 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			class Foo {}
 		''')
 	}
+	
+	@Test def testJavaDocReference2() {
+		'''
+			package repro
+			
+			class Foo {
+				
+				/**
+				 * @see java.lang.String
+				 */
+				@SupressWarnings('all')
+				def void foo() {}
+			}
+		'''.assertIsOrganizedTo("repro/Foo", '''
+			package repro
+			
+			class Foo {
+				
+				/**
+				 * @see String
+				 */
+				@SupressWarnings('all')
+				def void foo() {}
+			}
+		''')
+	}
 }
