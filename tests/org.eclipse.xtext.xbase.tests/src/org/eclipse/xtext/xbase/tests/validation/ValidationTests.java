@@ -551,6 +551,14 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, INVALID_CAST);
 	}
 	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=418578
+	 */
+	@Test public void testCast_5() throws Exception {
+		XExpression expression = expression("if ('f'=='l') { 'bla' } else { throw new Exception() } as String");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST);
+	}
+	
 	@Test
 	public void testCastInSwitch() throws Exception {
 		XExpression expression = expression("switch('foo') { String: it }");

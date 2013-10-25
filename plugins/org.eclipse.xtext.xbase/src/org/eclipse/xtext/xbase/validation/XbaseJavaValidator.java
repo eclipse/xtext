@@ -199,6 +199,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					}
 				}
 			}
+		} else if (fromType.isPrimitiveVoid()) {
+			error("Cannot cast from void to "
+					+ canonicalName(toType), concreteSyntax, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					INVALID_CAST);
 		}
 		if(toType.isPrimitive() && !(fromType.isPrimitive() || fromType.isWrapper())) {
 				error("Cannot cast from " + getNameOfTypes(fromType) + " to "
