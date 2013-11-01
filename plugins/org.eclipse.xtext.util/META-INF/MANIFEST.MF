@@ -11,8 +11,8 @@ Export-Package: org.eclipse.xtext.util,
  org.eclipse.xtext.util.formallang;x-internal:=true,
  org.eclipse.xtext.util.internal;x-internal:=true
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.3.2",
- com.google.guava;bundle-version="[10.0.1,15.0.0)";resolution:=optional;x-installation:=greedy;visibility:=reexport,
- com.google.inject;bundle-version="3.0.0";resolution:=optional;x-installation:=greedy;visibility:=reexport,
- javax.inject;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy;visibility:=reexport,
+ com.google.guava;bundle-version="[10.0.1,16.0.0)";resolution:=optional;visibility:=reexport;x-installation:=greedy,
+ com.google.inject;bundle-version="3.0.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
+ javax.inject;bundle-version="1.0.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy
 Import-Package: org.apache.log4j;version="1.2.15"

@@ -14,8 +14,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 
-import com.google.common.base.Function;
-import com.google.common.collect.MapMaker;
+import com.google.common.collect.Maps;
 
 /**
  * It caches the {@link JvmDeclaredType} per {@link Class}.
@@ -40,17 +39,8 @@ public class CachingDeclaredTypeFactory extends DeclaredTypeFactory {
 	private static final Logger log = Logger.getLogger(CachingDeclaredTypeFactory.class);
 
 	private final DeclaredTypeFactory delegate;
-	@SuppressWarnings("deprecation")
-	private final Map<Class<?>, JvmDeclaredType> typeCache = new MapMaker()
-			.softValues()
-			.weakKeys()
-			.makeComputingMap(new Function<Class<?>, JvmDeclaredType>() {
-				public JvmDeclaredType apply(Class<?> key) {
-					if (log.isDebugEnabled())
-						log.debug("Hit:" + key.getCanonicalName());
-					return delegate.createType(key);
-				}
-			});
+
+	private final Map<Class<?>, JvmDeclaredType> typeCache = Maps.newHashMap();
 
 	public CachingDeclaredTypeFactory(DeclaredTypeFactory delegate) {
 		super(delegate.getUriHelper());
@@ -60,7 +50,7 @@ public class CachingDeclaredTypeFactory extends DeclaredTypeFactory {
 	@Override
 	public JvmDeclaredType createType(Class<?> clazz) {
 		try {
-			JvmDeclaredType cachedResult = typeCache.get(clazz);
+			JvmDeclaredType cachedResult = get(clazz);
 			// the cached result contains proxies and is not 
 			// contained in a resource set. clone it since the
 			// client of #createClass will usually put the result
@@ -73,6 +63,21 @@ public class CachingDeclaredTypeFactory extends DeclaredTypeFactory {
 			}
 			return delegate.createType(clazz);
 		}
+	}
+
+	private JvmDeclaredType get(Class<?> key) {
+		JvmDeclaredType cachedResult = typeCache.get(key);
+		if (cachedResult == null) {
+			cachedResult = load(key);
+			typeCache.put(key, cachedResult);
+		}
+		return cachedResult;
+	}
+
+	private JvmDeclaredType load(Class<?> key) {
+		if (log.isDebugEnabled())
+			log.debug("Hit:" + key.getCanonicalName());
+		return delegate.createType(key);
 	}
 	
 }

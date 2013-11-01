@@ -8,5 +8,5 @@ Export-Package: org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.xbase.lib.internal;x-internal:=true,
  org.eclipse.xtext.xbase.lib.util
-Require-Bundle: com.google.guava;visibility:=reexport;bundle-version="[10.0.1,15.0.0)"
+Require-Bundle: com.google.guava;visibility:=reexport;bundle-version="[10.0.1,16.0.0)"
 Bundle-Vendor: Eclipse Modeling Project

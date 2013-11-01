@@ -21,8 +21,7 @@ import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 
-import com.google.common.base.Function;
-import com.google.common.collect.MapMaker;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -38,19 +37,18 @@ public class EclipsePreferencesProvider implements IPreferenceValuesProvider {
 		final IPreferenceStore store = project != null ?
 			access.getContextPreferenceStore(project) :
 			access.getPreferenceStore();
-		
-		@SuppressWarnings("deprecation")
-		final Map<String, String> computingMap = new MapMaker().makeComputingMap(
-				new Function<String, String>() {
-					public String apply(String input) {
-						return store.getString(input);
-					}
-				});
+			
+		final Map<String, String> preferenceCache = Maps.newHashMap();
 		
 		return new IPreferenceValues() {
 			public String getPreference(PreferenceKey key) {
 				try {
-					final String string = computingMap.get(key.getId());
+					String id = key.getId();
+					String string = preferenceCache.get(id);
+					if (string == null) {
+						string = store.getString(id);
+						preferenceCache.put(id, string);
+					}
 					return org.eclipse.jface.preference.IPreferenceStore.STRING_DEFAULT_DEFAULT.equals(string) ? key.getDefaultValue() : string;
 				} catch (Exception e) {
 					log.error("Error getting preference for key '"+key.getId()+"'.", e);
