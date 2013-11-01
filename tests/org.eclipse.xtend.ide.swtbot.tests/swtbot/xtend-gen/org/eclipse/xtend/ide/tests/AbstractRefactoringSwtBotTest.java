@@ -127,7 +127,7 @@ public abstract class AbstractRefactoringSwtBotTest {
       xtendEditor.typeText(newName);
       boolean _isUsePreview = this.testParams.isUsePreview();
       if (_isUsePreview) {
-        xtendEditor.pressShortcut(SWT.MOD4, SWT.CR);
+        xtendEditor.pressShortcut(SWT.CTRL, SWT.CR);
         SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
         _shell.activate();
         SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
@@ -166,7 +166,7 @@ public abstract class AbstractRefactoringSwtBotTest {
       javaEditor.typeText(newName);
       boolean _isUsePreview = this.testParams.isUsePreview();
       if (_isUsePreview) {
-        javaEditor.pressShortcut(SWT.MOD4, SWT.CR);
+        javaEditor.pressShortcut(SWT.CTRL, SWT.CR);
         SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
         _shell.activate();
         SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
