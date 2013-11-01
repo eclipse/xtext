@@ -10,10 +10,10 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface PdaFactory<PDA extends Pda<STATE, STACKITEM>, STATE, STACKITEM, TOKEN> extends
-		NfaFactory<PDA, STATE, TOKEN> {
+public interface PdaFactory<P extends Pda<STATE, STACKITEM>, STATE, STACKITEM, TOKEN> extends
+		NfaFactory<P, STATE, TOKEN> {
 
-	STATE createPop(PDA pda, TOKEN token);
+	STATE createPop(P pda, TOKEN token);
 
-	STATE createPush(PDA pda, TOKEN token);
+	STATE createPush(P pda, TOKEN token);
 }
