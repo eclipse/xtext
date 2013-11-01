@@ -3570,7 +3570,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test(timeout = 10000)
+	@Test(timeout = 20000)
 	def void testBug412853 () {
 		'''
 			class Bug {
