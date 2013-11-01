@@ -1,51 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.eclipse.xtext</groupId>
-  <artifactId>xtext-util</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <name>Xtext Util</name>
-  <description>Manually created POM</description>
-  
-  <dependencies>
-	<!-- own stuff -->
-	<dependency>
-		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>log4j</artifactId>
-		<version>1.2.15</version>
-		<scope>runtime</scope>
-	</dependency>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.xtext</groupId>
+	<artifactId>org.eclipse.xtext.util</artifactId>
+	<name>Xtext Util</name>
+	<description>Manually created POM</description>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<compilerId>eclipse</compilerId>
+					<verbose>true</verbose>
+					<compilerReuseStrategy>alwaysNew</compilerReuseStrategy>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-compiler-eclipse</artifactId>
+						<version>2.3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jmxtools</artifactId>
+					<groupId>com.sun.jdmk</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jmxri</artifactId>
+					<groupId>com.sun.jmx</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jms</artifactId>
+					<groupId>javax.jms</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>mail</artifactId>
+					<groupId>javax.mail</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>[2.9.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>[2.9.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.eclipse.lib.maven</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 
-	<!-- Eclipse stuff -->
-	<dependency>
-		<groupId>org.eclipse.emf</groupId>
-		<artifactId>ecore</artifactId>
-		<version>2.5.0</version>
-	</dependency>
-	
-	<!-- other stuff -->  
-	<dependency>
-		<groupId>com.google</groupId>
-		<artifactId>collect</artifactId>
-		<version>0.8.0</version>
-	</dependency>
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>3.8.2</version>
-		<scope>test</scope>
-	</dependency>
-  </dependencies>
-
-  <licenses>
-    <license>
-      <name>Eclipse Public License</name>
-      <url>http://www.eclipse.org/legal/epl-v10.html</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <organization>
-    <name>Eclipse</name>
-    <url>http://www.eclipse.org</url>
-  </organization>
+	<parent>
+		<relativePath>../org.eclipse.xtend.maven</relativePath>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>org.eclipse.xtend.maven</artifactId>
+		<version>2.5.0-SNAPSHOT</version>
+	</parent>
 </project>
