@@ -96,7 +96,7 @@ abstract class AbstractRefactoringSwtBotTest {
 			waitForLinkedMode
 			xtendEditor.typeText(newName)
 			if(testParams.usePreview) {
-				xtendEditor.pressShortcut(SWT.MOD4, SWT.CR)
+				xtendEditor.pressShortcut(SWT.CTRL, SWT.CR)
 				bot.shell(dialogName).activate
 				bot.button('OK').click
 			} else {
@@ -119,7 +119,7 @@ abstract class AbstractRefactoringSwtBotTest {
 		if(testParams.useInlineRefactoring) {
 			javaEditor.typeText(newName)
 			if(testParams.usePreview) {
-				javaEditor.pressShortcut(SWT.MOD4, SWT.CR)
+				javaEditor.pressShortcut(SWT.CTRL, SWT.CR)
 				bot.shell(dialogName).activate
 				bot.button('OK').click
 			} else {
