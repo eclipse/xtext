@@ -210,7 +210,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						INVALID_CAST);
 		}
 		/*
-		 * TODO: JDT reports no unncessary cast of List<?> but for List<String> ... why is there an exception?
+		 * TODO: JDT reports no unnecessary cast of List<?> but for List<String> ... why is there an exception?
 		 * 
 		 * 
 		 */
