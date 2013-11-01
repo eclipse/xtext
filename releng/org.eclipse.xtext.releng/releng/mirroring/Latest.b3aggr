@@ -9,6 +9,7 @@
         <bundles name="org.eclipse.ui.cheatsheets"/>
         <bundles name="org.junit" versionRange="[4.10.0.v4_10_0_v20120426-0900]"/>
         <bundles name="org.eclipse.jdt.annotation"/>
+        <bundles name="org.eclipse.core.databinding.beans" versionRange="1.2.0"/>
         <features name="org.eclipse.jdt.feature.group"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
