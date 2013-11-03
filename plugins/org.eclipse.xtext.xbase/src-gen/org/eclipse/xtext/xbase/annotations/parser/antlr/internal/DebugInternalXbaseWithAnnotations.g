@@ -9,8 +9,12 @@ ruleXAnnotation :
 		( (
 		'('
 		) => '(' ) (
-			ruleXAnnotationElementValuePair (
-				',' ruleXAnnotationElementValuePair
+			( (
+			ruleValidID '='
+			) => ruleXAnnotationElementValuePair ) (
+				',' ( (
+				ruleValidID '='
+				) => ruleXAnnotationElementValuePair )
 			)* |
 			ruleXAnnotationElementValue
 		)? ')'
@@ -19,41 +23,24 @@ ruleXAnnotation :
 
 // Rule XAnnotationElementValuePair
 ruleXAnnotationElementValuePair :
-	ruleValidID '=' ruleXAnnotationElementValue
-;
-
-// Rule XAnnotationElementValueStringConcatenation
-ruleXAnnotationElementValueStringConcatenation :
-	ruleXAnnotationElementValue (
-		'+' ruleXAnnotationElementValue
-	)*
+	( (
+	ruleValidID '='
+	) => (
+		ruleValidID '='
+	) ) ruleXAnnotationElementValue
 ;
 
 // Rule XAnnotationElementValue
 ruleXAnnotationElementValue :
 	ruleXAnnotation |
-	ruleXListLiteral |
-	ruleXStringLiteral |
-	ruleXBooleanLiteral |
-	ruleXNumberLiteral |
-	ruleXTypeLiteral |
-	ruleXAnnotationValueMemberFieldReference |
-	'(' ruleXAnnotationElementValueStringConcatenation ')'
-;
-
-// Rule XAnnotationValueMemberFieldReference
-ruleXAnnotationValueMemberFieldReference :
-	ruleXAnnotationValueFieldReference (
-		(
-			'.' |
-			'::'
-		) ruleIdOrSuper
-	)*
-;
-
-// Rule XAnnotationValueFieldReference
-ruleXAnnotationValueFieldReference :
-	ruleIdOrSuper
+	( (
+	'#' '[' ruleXAnnotation
+	) => (
+		'#' '[' ruleXAnnotation
+	) ) (
+		',' ruleXAnnotation
+	)* ']' |
+	ruleXExpression
 ;
 
 // Rule XExpression

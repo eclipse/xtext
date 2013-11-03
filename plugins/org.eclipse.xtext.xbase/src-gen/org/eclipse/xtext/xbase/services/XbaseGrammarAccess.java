@@ -2959,8 +2959,10 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValidIDParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cColonColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		////FOR "better" downwards compatibility
-		//StaticQualifier:
+		/// **
+		// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+		// * which makes downstream grammars break on classloading, when a rule is removed.
+		// * / StaticQualifier:
 		//	(ValidID "::")+;
 		public ParserRule getRule() { return rule; }
 
@@ -3673,8 +3675,10 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getNumberAccess().getRule();
 	}
 
-	////FOR "better" downwards compatibility
-	//StaticQualifier:
+	/// **
+	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+	// * which makes downstream grammars break on classloading, when a rule is removed.
+	// * / StaticQualifier:
 	//	(ValidID "::")+;
 	public StaticQualifierElements getStaticQualifierAccess() {
 		return (pStaticQualifier != null) ? pStaticQualifier : (pStaticQualifier = new StaticQualifierElements());
