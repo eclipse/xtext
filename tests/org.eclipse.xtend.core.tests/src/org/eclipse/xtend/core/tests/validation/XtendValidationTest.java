@@ -495,6 +495,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoError(clazz, VARIABLE_NAME_DISCOURAGED);
 	}
 	
+	@Test public void testSelf_2() throws Exception {
+		XtendClass clazz = clazz("class X { public val self = '' }");
+		helper.assertWarning(clazz, XTEND_FIELD, VARIABLE_NAME_DISCOURAGED);
+	}
+	
+	@Test public void testSelf_3() throws Exception {
+		XtendClass clazz = clazz("class X { def foo(String self) {} }");
+		helper.assertWarning(clazz, XTEND_PARAMETER, VARIABLE_NAME_DISCOURAGED);
+	}
+	
 	@Test public void testVoidInDependency() throws Exception {
 		XtendClass clazz = clazz("class X { @Inject void v }");
 		helper.assertError(clazz, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
