@@ -1400,6 +1400,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	public void checkFieldsAreCalledSelf(XtendField field) {
+		if ("self".equals(field.getName())) {
+			addIssue("'self' is a discouraged name", field, XTEND_FIELD__NAME, VARIABLE_NAME_DISCOURAGED);
+		}
+	}
+	
+	@Check
 	public void checkFinalFieldInitialization(XtendClass clazz) {
 		JvmGenericType inferredType = associations.getInferredType(clazz);
 		if (inferredType == null)
