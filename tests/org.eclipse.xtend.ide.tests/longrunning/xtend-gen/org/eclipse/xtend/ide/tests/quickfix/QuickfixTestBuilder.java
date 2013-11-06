@@ -421,4 +421,19 @@ public class QuickfixTestBuilder {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  public QuickfixTestBuilder removeFile(final String fileName) {
+    try {
+      QuickfixTestBuilder _xblockexpression = null;
+      {
+        IFile _file = this._workbenchTestHelper.getFile(fileName);
+        NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+        _file.delete(true, _nullProgressMonitor);
+        _xblockexpression = (this);
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

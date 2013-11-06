@@ -82,7 +82,7 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
 		}
 		EClass referenceType = context.getReference().getEReferenceType();
 		String msg = String.format("%s cannot be resolved%s.", linkText, getTypeName(referenceType, context.getReference()));
-		return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
+		return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText);
 	}
 
 	protected boolean isStaticMemberCallTarget(EObject contextObject) {
