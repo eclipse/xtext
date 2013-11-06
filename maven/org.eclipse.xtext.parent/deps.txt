@@ -1,0 +1,31 @@
+Xtend standalone
+<id>org.eclipse.equinox.common</id>			<-- 3.6.200 (04.2013) von birt group
+
+<id>org.eclipse.jdt.core</id> 				<-- 3.9 eclipse repo <-- maven central 3.9 tycho group
+<id>org.eclipse.jdt.annotation</id>
+
+<id>org.eclipse.emf.ecore</id>				<-- 2.9 maven repo Martin Taal
+<id>org.eclipse.emf.ecore.xmi</id>			<-- 2.9 maven repo
+<id>org.eclipse.emf.common</id>				<-- 2.9 maven repo
+<id>org.eclipse.emf.codegen</id>			<-- ???
+						
+<id>org.antlr.runtime</id>					<-- 3.2 maven repo/probably wrong version  Sep 24 2009 - orbit is 3.2.0.v201101
+
+<id>org.eclipse.xtext</id>
+<id>org.eclipse.xtext.common.types</id>
+<id>org.eclipse.xtext.util</id>
+<id>org.eclipse.xtext.smap</id>
+<id>org.eclipse.xtext.junit4</id>
+<id>org.eclipse.xtext.xbase</id>
+<id>org.eclipse.xtext.xbase.junit</id>
+<id>org.eclipse.xtend.core</id>
+
+Xtext standalone
+<id>org.eclipse.xtext.ecore</id>
+<id>org.eclipse.xtext.generator</id>
+<id>org.eclipse.xtend</id>
+<id>org.eclipse.xpand</id>
+<id>org.eclipse.xtend.typesystem.emf</id>
+
+<id>org.eclipse.emf.mwe.utils</id>
+<id>org.eclipse.emf.mwe2.launch</id>

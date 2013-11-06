@@ -1,0 +1,13 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>my-module</module>
+    <!-- //https://bugs.eclipse.org/bugs/show_bug.cgi?id=409759 -->
+    <module>relativeoutput-module</module>
+  </modules>
+</project>
