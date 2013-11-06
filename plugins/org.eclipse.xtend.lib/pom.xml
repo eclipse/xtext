@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-        <groupId>org.eclipse.xtend</groupId>
-        <artifactId>org.eclipse.xtend.maven</artifactId>
+        <groupId>org.eclipse.xtext</groupId>
+        <artifactId>org.eclipse.xtext.parent</artifactId>
         <version>2.5.0-SNAPSHOT</version>
-        <relativePath>../org.eclipse.xtend.maven</relativePath>
+        <relativePath>../../maven/org.eclipse.xtext.parent</relativePath>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.eclipse.xtend.lib</artifactId>
@@ -25,4 +25,5 @@
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 	</build>
+	<groupId>org.eclipse.xtend</groupId>
 </project>
