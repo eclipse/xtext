@@ -30,12 +30,11 @@ import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
 import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
 import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
+import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.common.types.xtext.ui.JdtTypeRelevance;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -52,10 +51,18 @@ import org.eclipse.xtext.ui.editor.quickfix.ISimilarityMatcher;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
-import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
+import org.eclipse.xtext.xbase.ui.document.DocumentRewriter;
+import org.eclipse.xtext.xbase.ui.document.DocumentRewriter.Section;
+import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
@@ -86,10 +93,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	private IJavaProjectProvider projectProvider;
 
 	@Inject
-	private TypeReferences typeRefs;
-	
-	@Inject
-	private VisibilityService visibilityService;
+	private CommonTypeComputationServices services;
 
 	@Inject
 	private JdtTypeRelevance jdtTypeRelevance;
@@ -98,8 +102,14 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	private ReplacingAppendable.Factory appendableFactory;
 	
 	@Inject
-	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
+	private TypeNameGuesser typeNameGuesser;
 	
+	@Inject
+	private DocumentRewriter.Factory rewriterFactory;
+
+	@Inject 
+	private ReplaceConverter replaceConverter;
+
 	@NonNullByDefault
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, 
@@ -111,7 +121,11 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		if (useJavaSearch) {
 			JvmDeclaredType jvmType = importsConfiguration.getContextJvmDeclaredType(referenceOwner);
 			IJavaSearchScope javaSearchScope = getJavaSearchScope(referenceOwner);
-			createImportProposals(jvmType, issue, issueString, javaSearchScope, issueResolutionAcceptor);
+			boolean proposeImports = true;
+			if(isConstructorReference(unresolvedReference))
+				proposeImports = !createConstructorProposals(jvmType, issue, issueString, javaSearchScope, issueResolutionAcceptor);
+			if(proposeImports)
+				createImportProposals(jvmType, issue, issueString, javaSearchScope, issueResolutionAcceptor);
 			scope = getImportedTypesScope(referenceOwner, issueString, scope, javaSearchScope);
 		}
 		List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
@@ -141,11 +155,19 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 
 	protected boolean isUseJavaSearch(EReference unresolvedReference, Issue issue) {
-		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(unresolvedReference.getEReferenceType()))
+		if (isConstructorReference(unresolvedReference))
 			return true;
-		if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(unresolvedReference.getEReferenceType()))
+		if (isTypeReference(unresolvedReference))
 			return true;
 		return false;
+	}
+
+	protected boolean isTypeReference(EReference unresolvedReference) {
+		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(unresolvedReference.getEReferenceType());
+	}
+
+	protected boolean isConstructorReference(EReference unresolvedReference) {
+		return TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(unresolvedReference.getEReferenceType());
 	}
 
 	protected void createResolution(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, String issueString, IEObjectDescription solution) {
@@ -289,14 +311,16 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		return fqNameAsString;
 	}
 
-	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, String typeSimpleName, IJavaSearchScope searchScope,
+	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, String typeName, IJavaSearchScope searchScope,
 			final IssueResolutionAcceptor acceptor) throws JavaModelException {
 		if(contextType != null) {
-			final String wantedTypeName = typeSimpleName.contains("::") 
-				? typeSimpleName.substring(0, typeSimpleName.indexOf("::")) 
-				: typeSimpleName;
+			final IVisibilityHelper visibilityHelper = getVisibilityHelper(contextType);
+			final Pair<String, String> packageAndType = typeNameGuesser.guessPackageAndTypeName(contextType, typeName);
+			final String wantedPackageName = packageAndType.getFirst();
 			BasicSearchEngine searchEngine = new BasicSearchEngine();
-			searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
+			final char[] wantedPackageChars = (isEmpty(wantedPackageName)) ? null : wantedPackageName.toCharArray();
+			final String wantedTypeName = packageAndType.getSecond();
+			searchEngine.searchAllTypeNames(wantedPackageChars, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
 					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new IRestrictedAccessTypeRequestor() {
 						
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
@@ -304,9 +328,9 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
 									simpleTypeName);
 							if(access == null || (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())){
-								JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType);
+								JvmType importType = services.getTypeReferences().findDeclaredType(qualifiedTypeName, contextType);
 								if(importType instanceof JvmDeclaredType
-										&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
+										&& visibilityHelper.isVisible((JvmDeclaredType)importType)) {
 									StringBuilder label = new StringBuilder("Import '");
 									label.append(simpleTypeName);
 									label.append("' (");
@@ -322,7 +346,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 										public void apply(EObject element, IModificationContext context) throws Exception {
 											ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
 													(XtextResource) element.eResource(), 0, 0);
-											appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
+											appendable.append(services.getTypeReferences().findDeclaredType(qualifiedTypeName, element));
 											appendable.insertNewImports();
 										}
 									}, jdtTypeRelevance.getRelevance(qualifiedTypeName, wantedTypeName) + 100);
@@ -331,5 +355,69 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 						}
 					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
 		}
+	}
+
+	protected ContextualVisibilityHelper getVisibilityHelper(final JvmDeclaredType contextType) {
+		final ParameterizedTypeReference contextTypeRef = new ParameterizedTypeReference(new StandardTypeReferenceOwner(services, contextType), contextType);
+		final ContextualVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(contextTypeRef);
+		return visibilityHelper;
+	}
+	
+	protected boolean createConstructorProposals(final JvmDeclaredType contextType, final Issue issue, String typeName,
+			IJavaSearchScope searchScope, final IssueResolutionAcceptor acceptor) throws JavaModelException {
+		final boolean[] result = new boolean[] { false };
+		if(contextType != null) {
+			final IVisibilityHelper visibilityHelper = getVisibilityHelper(contextType);
+			final Pair<String, String> packageAndType = typeNameGuesser.guessPackageAndTypeName(contextType, typeName);
+			final String wantedPackageName = packageAndType.getFirst();
+			final String wantedTypeName = packageAndType.getSecond();
+			BasicSearchEngine searchEngine = new BasicSearchEngine();
+			final char[] wantedPackageChars = (isEmpty(wantedPackageName)) ? null : wantedPackageName.toCharArray();
+			searchEngine.searchAllTypeNames(wantedPackageChars, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
+					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new IRestrictedAccessTypeRequestor() {
+						
+						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
+								String path, AccessRestriction access) {
+							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
+									simpleTypeName);
+							if(access == null || (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())){
+								JvmType importType = services.getTypeReferences().findDeclaredType(qualifiedTypeName, contextType);
+								if(importType instanceof JvmDeclaredType
+										&& visibilityHelper.isVisible((JvmDeclaredType)importType)) {
+									result[0] = true;
+									StringBuilder label = new StringBuilder("Change to constructor call 'new ");
+									label.append(simpleTypeName);
+									label.append("()'");
+									if(!equal(wantedPackageName, new String(packageName))) {
+										label.append(" (");
+										label.append(packageName);
+										if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
+											for(char[] enclosingTypeName: enclosingTypeNames) {
+												label.append(".");
+												label.append(enclosingTypeName);
+											}
+										}
+										label.append(")");
+									}
+									acceptor.accept(issue, label.toString(), label.toString(), "impc_obj.gif", new ISemanticModification() {
+										public void apply(EObject element, IModificationContext context) throws Exception {
+											IXtextDocument document = context.getXtextDocument();
+											DocumentRewriter rewriter = rewriterFactory.create(document,
+													(XtextResource) element.eResource());
+											final int typeEndOffset = document.get().indexOf(wantedTypeName, 
+													issue.getOffset() + wantedPackageName.length()) + wantedTypeName.length();
+											final Section section = rewriter.newSection(issue.getOffset(), typeEndOffset - issue.getOffset());
+											section.append(services.getTypeReferences().findDeclaredType(qualifiedTypeName, element));
+											section.append("()");
+											final TextEdit textEdit = replaceConverter.convertToTextEdit(rewriter.getChanges());
+											textEdit.apply(document);
+										}
+									}, jdtTypeRelevance.getRelevance(qualifiedTypeName, wantedTypeName) + 100);
+								}
+							}
+						}
+					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
+		}
+		return result[0];
 	}
 }

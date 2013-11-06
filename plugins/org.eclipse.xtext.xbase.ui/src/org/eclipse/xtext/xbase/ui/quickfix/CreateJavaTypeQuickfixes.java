@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.quickfix;
 
 import static org.eclipse.xtext.ui.util.DisplayRunHelper.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -41,8 +42,10 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -62,28 +65,39 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	
 	@Inject 
 	private ProjectUtil projectUtil;
-
+	
+	@Inject
+	private TypeNameGuesser typeNameGuesser;
+	
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, 
 			EObject referenceOwner, EReference unresolvedReference)
 			throws Exception {
-		String typeName = xtextDocument.get(issue.getOffset(), issue.getLength());
+		String typeString = (issue.getData() != null && issue.getData().length > 0) 
+				? issue.getData()[0] 
+				: xtextDocument.get(issue.getOffset(), issue.getLength());
+		Pair<String, String> packageAndType = typeNameGuesser.guessPackageAndTypeName(referenceOwner, typeString);
+		String packageName = packageAndType.getFirst();
+		if(isEmpty(packageAndType.getSecond()))
+			return;
+		String typeName = packageAndType.getSecond();
 		if (unresolvedReference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
 			if(((XConstructorCall)referenceOwner).getConstructor().eIsProxy())
-				newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newJavaClassQuickfix(typeName, packageName, resource, issue, issueResolutionAcceptor);
 		} else if(unresolvedReference == XbasePackage.Literals.XTYPE_LITERAL__TYPE
 				|| unresolvedReference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) {
-			newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
-			newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+			newJavaClassQuickfix(typeName, packageName, resource, issue, issueResolutionAcceptor);
+			newJavaInterfaceQuickfix(typeName, packageName, resource, issue, issueResolutionAcceptor);
 		} else if(unresolvedReference == XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE) {
-			newJavaAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+			newJavaAnnotationQuickfix(typeName, packageName, resource, issue, issueResolutionAcceptor);
 		}
 	}
 
-	protected void newJavaInterfaceQuickfix(final String typeName, final XtextResource resource, Issue issue,
+	protected void newJavaInterfaceQuickfix(final String typeName, final String explicitPackage, final XtextResource resource, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
-		issueResolutionAcceptor.accept(issue, "Create Java interface '" + typeName + "'",
-				"Opens the new Java interface wizard to create the type '" + typeName + "'",
+		String packageDescription = getPackageDescription(explicitPackage);
+		issueResolutionAcceptor.accept(issue, "Create Java interface '" + typeName + "'" + packageDescription,
+				"Opens the new Java interface wizard to create the type '" + typeName + "'" + packageDescription,
 				"java_interface.gif", new IModification() {
 					public void apply(@Nullable IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
@@ -91,7 +105,7 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 								NewInterfaceWizardPage classWizardPage = new NewInterfaceWizardPage();
 								NewInterfaceCreationWizard wizard = new NewInterfaceCreationWizard(classWizardPage, true);
 								WizardDialog dialog = createWizardDialog(wizard);
-								configureWizardPage(classWizardPage, resource.getURI(), typeName);
+								configureWizardPage(classWizardPage, resource.getURI(), typeName, explicitPackage);
 								dialog.open();
 							}
 						});
@@ -99,18 +113,19 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 				});
 	}
 
-	protected void newJavaClassQuickfix(final String typeName, final XtextResource resource, Issue issue,
+	protected void newJavaClassQuickfix(final String typeName, final String explicitPackage, final XtextResource resource, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
-		issueResolutionAcceptor.accept(issue, "Create Java class '" + typeName + "'",
-				"Opens the new Java class wizard to create the type '" + typeName + "'", "java_file.gif",
-				new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
+		String packageDescription = getPackageDescription(explicitPackage);
+		issueResolutionAcceptor.accept(issue, "Create Java class '" + typeName + "'" + packageDescription,
+				"Opens the new Java class wizard to create the type '" + typeName + "'" + packageDescription, "java_file.gif",
+				new ISemanticModification() {
+					public void apply(EObject element, IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
 							public void run() {
 								NewClassWizardPage classWizardPage = new NewClassWizardPage();
 								NewClassCreationWizard wizard = new NewClassCreationWizard(classWizardPage, true);
 								WizardDialog dialog = createWizardDialog(wizard);
-								configureWizardPage(classWizardPage, resource.getURI(), typeName);
+								configureWizardPage(classWizardPage, resource.getURI(), typeName, explicitPackage);
 								dialog.open();
 							}
 						});
@@ -118,10 +133,17 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 				});
 	}
 
-	protected void newJavaAnnotationQuickfix(final String typeName, final XtextResource resource, Issue issue,
+	protected String getPackageDescription(final String explicitPackage) {
+		return (!isEmpty(explicitPackage))
+				? " in package '" + explicitPackage + "'"
+				: "";
+	}
+
+	protected void newJavaAnnotationQuickfix(final String typeName, final String explicitPackage, final XtextResource resource, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
-		issueResolutionAcceptor.accept(issue, "Create Java annotation '@" + typeName + "'",
-				"Opens the new Java annotation wizard to create the type '@" + typeName + "'", "java_file.gif",
+		String packageDescription = getPackageDescription(explicitPackage);
+		issueResolutionAcceptor.accept(issue, "Create Java annotation '@" + typeName + "'" + packageDescription,
+				"Opens the new Java annotation wizard to create the type '@" + typeName + "'" + packageDescription, "java_file.gif",
 				new IModification() {
 					public void apply(@Nullable IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
@@ -129,7 +151,7 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 								NewAnnotationWizardPage annotationWizardPage = new NewAnnotationWizardPage();
 								NewAnnotationCreationWizard wizard = new NewAnnotationCreationWizard(annotationWizardPage, true);
 								WizardDialog dialog = createWizardDialog(wizard);
-								configureWizardPage(annotationWizardPage, resource.getURI(), typeName);
+								configureWizardPage(annotationWizardPage, resource.getURI(), typeName, explicitPackage);
 								dialog.open();
 							}
 						});
@@ -147,19 +169,25 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 
 	
-	protected void configureWizardPage(NewTypeWizardPage page, URI contextUri, String typeName) {
-		setPackageName(page, contextUri);
+	protected void configureWizardPage(NewTypeWizardPage page, URI contextUri, String typeName, String packageName) {
+		setPackageName(page, contextUri, packageName);
 		page.setTypeName(typeName, true);
 	}
 
-	protected void setPackageName(NewTypeWizardPage page, URI contextUri) {
+	protected void setPackageName(NewTypeWizardPage page, URI contextUri, String packageName) {
 		IJavaProject javaProject = getJavaProject(contextUri);
 		String path = contextUri.trimSegments(1).toPlatformString(true);
 		try {
 			if(javaProject != null) {
-				IPackageFragment packageFragment = javaProject.findPackageFragment(new Path(path));
-				IPackageFragmentRoot root = (IPackageFragmentRoot) packageFragment
+				IPackageFragment contextPackageFragment = javaProject.findPackageFragment(new Path(path));
+				IPackageFragmentRoot root = (IPackageFragmentRoot) contextPackageFragment
 						.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT);
+				IPackageFragment packageFragment;
+				if(!isEmpty(packageName)) {
+					packageFragment = root.getPackageFragment(packageName);
+				} else {
+					packageFragment = contextPackageFragment;
+				}
 				page.setPackageFragment(packageFragment, true);
 				page.setPackageFragmentRoot(root, true);
 			}
@@ -176,5 +204,4 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		}
 		return JavaCore.create(project);
 	}
-
 }
