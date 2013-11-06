@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>org.eclipse.xtext.standalone.parent</artifactId>
+		<version>2.5.0-SNAPSHOT</version>
+		<relativePath>../org.eclipse.xtext.standalone.parent</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>org.eclipse.xtext</artifactId>
+	<name>Xtext Runtime Library</name>
+	<packaging>jar</packaging>
+	<properties>
+		<scripts.dir>${project.parent.relativePath}</scripts.dir>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-p2-extras-plugin</artifactId>
+				<configuration>
+					<source>
+						<!-- source repositories to mirror from -->
+						<repository>
+							<id>xtext</id>
+							<layout>p2</layout>
+							<url>${xtext-url}</url>
+						</repository>
+					</source>
+					<ius>
+						<iu>
+							<id>org.eclipse.xtext</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.xtext.util</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.xtext.junit4</id>
+						</iu>
+
+						<!-- Sources -->
+						<iu>
+							<id>org.eclipse.xtext.source</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.xtext.util.source</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.xtext.junit4.source</id>
+						</iu>
+
+					</ius>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.dependencies</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>${google-inject.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+	</dependencies>
+</project>

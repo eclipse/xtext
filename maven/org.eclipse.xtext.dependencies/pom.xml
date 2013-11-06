@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>org.eclipse.xtext.standalone.parent</artifactId>
+		<version>2.5.0-SNAPSHOT</version>
+		<relativePath>../org.eclipse.xtext.standalone.parent</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>org.eclipse.xtext.dependencies</artifactId>
+	<name>3rd Party Dependencies - Library</name>
+	<packaging>jar</packaging>
+	<properties>
+		<scripts.dir>${project.parent.relativePath}</scripts.dir>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-p2-extras-plugin</artifactId>
+				<configuration>
+					<source>
+						<!-- source repositories to mirror from -->
+						<repository>
+							<id>juno</id>
+							<layout>p2</layout>
+							<url>${juno-url}</url>
+						</repository>
+					</source>
+					<ius>
+						<iu>
+							<id>org.eclipse.jdt.core</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.jdt.annotation</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.equinox.common</id>
+						</iu>
+
+						<!-- Sources -->
+						<iu>
+							<id>org.eclipse.jdt.core.source</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.jdt.annotation.source</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.equinox.common.source</id>
+						</iu>
+					</ius>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>org.eclipse.xtext.parent</artifactId>
+		<version>2.5.0-SNAPSHOT</version>
+		<relativePath>../org.eclipse.xtext.parent</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.xtext</groupId>
+	<artifactId>org.eclipse.xtext.standalone.parent</artifactId>
+	<name>Xtext Standalone Library parent</name>
+	<packaging>pom</packaging>
+	<properties>
+		<juno-url>http://download.eclipse.org/eclipse/updates/3.8</juno-url>
+		<emf-url>http://download.eclipse.org/modeling/emf/emf/updates/milestones</emf-url>
+		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly</xtext-url>
+		<scripts.dir>${basedir}</scripts.dir>
+	</properties>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho.extras</groupId>
+					<artifactId>tycho-p2-extras-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<executions>
+						<execution>
+							<phase>${mirroring.phase}</phase>
+							<goals>
+								<goal>mirror</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<destination>${project.build.directory}/dependencies-mvn</destination>
+						<followStrictOnly>true</followStrictOnly>
+						<includeOptional>false</includeOptional>
+						<includeNonGreedy>false</includeNonGreedy>
+						<latestVersionOnly>false</latestVersionOnly>
+						<mirrorMetadataOnly>false</mirrorMetadataOnly>
+						<compress>true</compress>
+						<append>false</append>
+						<includePacked>false</includePacked>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.7</version>
+					<executions>
+						<execution>
+							<id>prepare</id>
+							<phase>prepare-package</phase>
+							<configuration>
+								<target>
+									<echo message="Prepare jar content:" />
+									<ant antfile="${scripts.dir}/create-uberjar.ant" target="run"
+										dir="${basedir}">
+										<property name="local.build" value="${local.build}" />
+										<property name="maven.artifactid" value="${project.artifactId}" />
+										<property name="maven.version" value="${project.version}" />
+										<property name="maven.output" value="${project.build.directory}" />
+										<property name="binJarTemp" value="${project.build.outputDirectory}" />
+										<property name="sourceJarTemp"
+											value="${project.build.directory}/sourcesJarTemp" />
+									</ant>
+								</target>
+							</configuration>
+							<goals>
+								<goal>run</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<descriptors>
+							<descriptor>${project.parent.basedir}/assembly-src.xml</descriptor>
+							<descriptor>${project.parent.basedir}/assembly-javadoc.xml</descriptor>
+						</descriptors>
+					</configuration>
+					<executions>
+						<execution>
+							<id>make-assembly</id>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

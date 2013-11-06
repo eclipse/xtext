@@ -8,17 +8,20 @@
 	<packaging>jar</packaging>
 	<build>
 		<resources>
+			<!-- Add XMI and other to bin jar -->
 			<resource>
 				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
 			</resource>
 			<resource>
 				<directory>src-gen</directory>
-			</resource>
-			<resource>
-				<directory>xtend-gen</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
 			</resource>
 		</resources>
-
 		<sourceDirectory>src</sourceDirectory>
 
 		<plugins>
@@ -47,8 +50,39 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.standalone</artifactId>
+			<artifactId>org.eclipse.xtext.xbase</artifactId>
 			<version>2.5.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>2.5.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>[2.9,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>[2.9,)</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr-runtime</artifactId>
+			<version>[3.2]</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>stringtemplate</artifactId>
+					<groupId>org.antlr</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 </project>

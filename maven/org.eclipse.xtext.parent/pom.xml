@@ -1,0 +1,288 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+	<groupId>org.eclipse.xtext</groupId>
+	<artifactId>org.eclipse.xtext.parent</artifactId>
+	<packaging>pom</packaging>
+	<version>2.5.0-SNAPSHOT</version>
+	<modules>
+		<module>../../plugins/org.eclipse.xtend.lib</module>
+		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
+        <module>../../plugins/org.eclipse.xtend.lib.gwt</module>
+		<module>../../plugins/org.eclipse.xtext.xbase.lib.gwt</module>
+		
+        <module>../org.eclipse.xtext.standalone.parent</module>
+        <module>../org.eclipse.xtext.dependencies</module>
+		<module>../org.eclipse.xtext</module>
+        <module>../org.eclipse.xtext.xbase</module>
+		<module>../org.eclipse.xtend.core</module>
+        <module>../org.eclipse.xtext.xtext</module>
+        
+		<module>../../plugins/org.eclipse.xtext.builder.standalone</module>
+		<module>../org.eclipse.xtext.maven.plugin</module>
+		<module>../org.eclipse.xtend.maven.plugin</module>
+		<module>../org.eclipse.xtend.maven.archetype</module>
+		<module>../org.eclipse.xtend.maven.android.archetype</module>
+	</modules>
+	<name>Xtext Parent/Container</name>
+
+	<properties>
+		<mavenVersion>3.0.4</mavenVersion>
+		<tycho-version>0.17.0</tycho-version>
+		<emf.version>[2.9.0,)</emf.version>
+		<guava.version>[10.0.1,14.0]</guava.version>
+		<javax-inject.version>1</javax-inject.version>
+		<google-inject.version>3.0</google-inject.version>
+		<log4j.version>1.2.15</log4j.version>
+		
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
+		<mirroring.phase>prepare-package</mirroring.phase>
+		<skipMirroring>false</skipMirroring>
+	</properties>
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 1.0</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<executable>/usr/local/bin/gpg</executable>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<compilerId>eclipse</compilerId>
+					<optimize>true</optimize>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-compiler-eclipse</artifactId>
+						<version>2.3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<scm>
+		<connection>scm:git:git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git</connection>
+		<developerConnection>scm:git:ssh://git.eclipse.org:29418/tmf/org.eclipse.xtext.git</developerConnection>
+		<url>http://git.eclipse.org/c/tmf/org.eclipse.xtext.git</url>
+	</scm>
+	<profiles>
+
+		<profile>
+			<id>local-build</id>
+			<properties>
+				<!-- local.build changes ant script behavior which creates standalone 
+					jars -->
+				<local.build>true</local.build>
+			</properties>
+
+			<distributionManagement>
+				<repository>
+					<id>local-nexus</id>
+					<name>Nexus Release Repository</name>
+					<url>http://localhost:8081/nexus/content/repositories/releases/</url>
+				</repository>
+				<snapshotRepository>
+					<id>local-nexus-snapshots</id>
+					<name>Sonatype Nexus Snapshots</name>
+					<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+				</snapshotRepository>
+			</distributionManagement>
+			<pluginRepositories>
+				<pluginRepository>
+					<releases>
+						<updatePolicy>never</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>central</id>
+					<name>Central Repository</name>
+					<url>http://repo.maven.apache.org/maven2</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+		<profile>
+			<id>eclipse-hudson-build</id>
+			<properties>
+				<deployment.folder>/shared/common/xtend/maven/</deployment.folder>
+				<deployment.url>file:///shared/common/xtend/maven/</deployment.url>
+			</properties>
+
+			<distributionManagement>
+				<repository>
+					<id>xtend-eclipse-local</id>
+					<name>build.eclipse.org Release Repository</name>
+					<url>file:///shared/common/xtend/maven</url>
+				</repository>
+				<snapshotRepository>
+					<id>xtend-eclipse-local</id>
+					<name>build.eclipse.org Release Repository</name>
+					<url>file:///shared/common/xtend/maven</url>
+				</snapshotRepository>
+			</distributionManagement>
+			<repositories>
+				<repository>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+					<id>build-eclipse-snapshots</id>
+					<name>Sonatype Nexus Snapshots</name>
+					<url>http://build.eclipse.org/common/xtend/maven/</url>
+				</repository>
+				<repository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>build-eclipse</id>
+					<name>Nexus Release Repository</name>
+					<url>http://build.eclipse.org/common/xtend/maven/</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<releases>
+						<updatePolicy>never</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>central</id>
+					<name>Central Repository</name>
+					<url>http://repo.maven.apache.org/maven2</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+		<profile>
+			<id>mirror</id>
+			<activation>
+				<property>
+					<name>skipMirroring</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<mirroring.phase>never</mirroring.phase>
+			</properties>
+		</profile>
+	</profiles>
+	<url>http://www.eclipse.org/xtend/</url>
+	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
+	<developers>
+		<developer>
+			<id>dennis.huebner</id>
+			<name>Dennis</name>
+			<email>dennis.huebner@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>holger.schill</id>
+			<name>Holger</name>
+			<email>Holger.Schill@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>jan.koehnlein</id>
+			<name>Jan</name>
+			<email>jan.koehnlein@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>knut.wannheden</id>
+			<name>Knut</name>
+			<email>knut.wannheden@paranor.ch</email>
+			<organization>Paranor</organization>
+		</developer>
+		<developer>
+			<id>michael.clay</id>
+			<name>Michael</name>
+			<email>michael.clay@codeworkz.at</email>
+			<organization>Codeworkz</organization>
+		</developer>
+		<developer>
+			<id>moritz.eysholdt</id>
+			<name>Moritz</name>
+			<email>moritz.eysholdt@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>sebastian.zarnekow</id>
+			<name>Sebastian</name>
+			<email>sebastian.Zarnekow@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>sven.efftinge</id>
+			<name>Sven</name>
+			<email>sven.efftinge@itemis.de</email>
+			<organization>itemis AG</organization>
+			<roles>
+				<role>project lead</role>
+			</roles>
+		</developer>
+	</developers>
+</project>
