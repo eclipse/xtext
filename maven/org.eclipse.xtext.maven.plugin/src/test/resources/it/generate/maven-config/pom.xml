@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.xtext</groupId>
+	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>maven-config-test</artifactId>
+	<packaging>jar</packaging>
+	<properties>
+		<xtend.version>IT-SNAPSHOT</xtend.version>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-maven-plugin</artifactId>
+				<version>${xtend.version}</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<sourceRoots>
+						<sourceRoot>model2</sourceRoot>
+						<sourceRoot>model</sourceRoot>
+					</sourceRoots>
+					<languages>
+						<language>
+							<setup>org.eclipse.xtext.purexbase.PureXbaseStandaloneSetup</setup>
+							<outputConfigurations>
+								<outputConfiguration>
+									<outputDirectory>model-output</outputDirectory>
+								</outputConfiguration>
+							</outputConfigurations>
+						</language>
+						<language>
+							<setup>org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup</setup>
+							<outputConfigurations>
+								<outputConfiguration>
+									<outputDirectory>model2-output</outputDirectory>
+								</outputConfiguration>
+							</outputConfigurations>
+						</language>
+					</languages>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.purexbase</artifactId>
+						<version>IT-SNAPSHOT</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.testlanguages</artifactId>
+						<version>IT-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
