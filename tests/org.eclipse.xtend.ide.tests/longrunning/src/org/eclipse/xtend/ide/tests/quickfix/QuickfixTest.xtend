@@ -3,12 +3,12 @@ package org.eclipse.xtend.ide.tests.quickfix
 import com.google.inject.Inject
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtext.diagnostics.Diagnostic
+import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.After
 import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
-import org.eclipse.xtext.xbase.validation.IssueCodes
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
@@ -434,7 +434,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			
 			class Bar {
 				def bar() {
-					Foo::foo|
+					Foo.foo|
 				}
 			}
 		''')
@@ -451,7 +451,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			
 			class Bar {
 				def bar() {
-					Foo::foo
+					Foo.foo
 				}
 			}
 		''')
@@ -466,7 +466,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			
 			class Bar {
 				def bar() {
-					Foo::foo
+					Foo.foo
 				}
 			}
 		''')
@@ -551,7 +551,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			
 			class Bar {
 				def bar() {
-					Foo::foo|()
+					Foo.foo|()
 				}
 			}
 		''')
@@ -568,7 +568,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			
 			class Bar {
 				def bar() {
-					Foo::foo()
+					Foo.foo()
 				}
 			}
 		''')
@@ -781,6 +781,56 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def void missingConstructorCallParentheses() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {}
+			}
+			
+			class Bar {
+				def bar() {
+					new Foo.foo|
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Change to constructor call 'new Foo()'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				def foo() {}
+			}
+			
+			class Bar {
+				def bar() {
+					new Foo().foo
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void missingConstructorCallParentheses_1() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					new ArrayList.size|
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Change to constructor call 'new ArrayList()' (java.util)")
+		.assertModelAfterQuickfix("Change to constructor call 'new ArrayList()' (java.util)", '''
+			import java.util.ArrayList
+			
+			class Foo {
+				def foo() {
+					new ArrayList().size
+				}
+			}
+		''')
+	}
+	
+	@Test
 	def void missingConcreteMembers() {
 		create('Foo.xtend', '''
 			abstract class Foo {
@@ -850,7 +900,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
 		.assertResolutionLabels("Create method 'operator_multiply(Foo)'", "Change to '+'")
 		.assertModelAfterQuickfix("Create method 'operator_multiply(Foo)'", '''
 			class Foo {
@@ -881,7 +931,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
 		.assertResolutionLabels("Create extension method 'operator_multiply(Foo, Bar)'", "Create method 'operator_multiply(Bar)' in 'Foo'", "Change to '+'")
 		.assertModelAfterQuickfix("Create extension method 'operator_multiply(Foo, Bar)'", '''
 			class Foo {
@@ -1023,7 +1073,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Test 
 	def void unhandledCheckedException() {
-		setSeverity(IssueCodes::UNHANDLED_EXCEPTION, "error")
+		setSeverity(IssueCodes.UNHANDLED_EXCEPTION, "error")
 		create('Foo.xtend', '''
 			class Foo {
 				def void bar() {
@@ -1055,7 +1105,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Test 
 	def void unhandledCheckedExceptions() {
-		setSeverity(IssueCodes::UNHANDLED_EXCEPTION, "warning")
+		setSeverity(IssueCodes.UNHANDLED_EXCEPTION, "warning")
 		create('Foo.xtend', '''
 			class Foo {
 				def void bar() {
@@ -1160,7 +1210,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				Bar| bar
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create Java interface 'Bar'", 
 				"Create local Xtend class 'Bar'", "Create local Xtend interface 'Bar'")
 		.assertModelAfterQuickfix("Create local Xtend class 'Bar'", '''
@@ -1182,6 +1232,17 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def void missingClassOtherPackage() {
+		create('Foo.xtend', '''
+			class Foo {
+				bar.Bar| bar
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Create Xtend class 'Bar' in package 'bar'", "Create Java class 'Bar' in package 'bar'", "Create Java interface 'Bar' in package 'bar'")
+	}
+	
+	@Test
 	def void missingClassAndConstructor() {
 		create('Foo.xtend', '''
 			class Foo {
@@ -1190,7 +1251,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create local Xtend class 'Bar'")
 		.assertModelAfterQuickfix("Create local Xtend class 'Bar'", '''
 			class Foo {
@@ -1205,12 +1266,25 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	def void missingClassAndConstructorOtherPackage() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					new bar.Bar|
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Create Xtend class 'Bar' in package 'bar'", "Create Java class 'Bar' in package 'bar'")
+	}
+
+	@Test
 	def void missingSuperClass() {
 		create('Foo.xtend', '''
 			class Foo extends Bar| {
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, CLASS_EXPECTED)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, CLASS_EXPECTED)
 		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create local Xtend class 'Bar'")
 		.assertNoResolutionLabels("Create Java interface 'Bar'", "Create Xtend interface 'Bar'", "Create local Xtend interface 'Bar'")
 	}
@@ -1221,7 +1295,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			class Foo implements Bar| {
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, INTERFACE_EXPECTED)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, INTERFACE_EXPECTED)
 		.assertResolutionLabelsSubset("Create Java interface 'Bar'", "Create Xtend interface 'Bar'", "Create local Xtend interface 'Bar'")
 		.assertNoResolutionLabels("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create local Xtend class 'Bar'")
 	}
@@ -1232,7 +1306,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			interface Foo extends Bar| {
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, INTERFACE_EXPECTED)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, INTERFACE_EXPECTED)
 		.assertResolutionLabelsSubset("Create Java interface 'Bar'", "Create Xtend interface 'Bar'", "Create local Xtend interface 'Bar'")
 		.assertNoResolutionLabels("Create Java class 'Bar'", "Create Xtend class 'Bar'", "Create local Xtend class 'Bar'")
 		.assertModelAfterQuickfix("Create local Xtend interface 'Bar'", '''
@@ -1253,7 +1327,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				annotation Foo {
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Create Java interface 'Bar'", "Create Xtend interface 'Bar'", "Create local Xtend interface 'Bar'", 
 			"Create Java class 'Bar'", "Create Xtend class 'Bar'", "Create local Xtend class 'Bar'")
 		.assertModelAfterQuickfix("Create local Xtend interface 'Bar'", '''
@@ -1283,18 +1357,18 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		create('Foo.xtend', '''
 			class Foo {
 				def foo() {
-					Collections|::sort
+					Collections|.sort
 				}
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Import 'Collections' (java.util)")
 		.assertModelAfterQuickfix('''
 			import java.util.Collections
 			
 			class Foo {
 				def foo() {
-					Collections::sort
+					Collections.sort
 				}
 			}
 		''')	
@@ -1350,7 +1424,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			@QuickFixMe|
 			class Foo {}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Import 'QuickFixMe' (org.eclipse.xtend.ide.tests.data.quickfix)")
 		.assertModelAfterQuickfix('''
 			import org.eclipse.xtend.ide.tests.data.quickfix.QuickFixMe
@@ -1368,7 +1442,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			class Foo {
 			}
 		''')
-		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Create local Xtend annotation '@Bar'", "Create Java annotation '@Bar'")
 		.assertModelAfterQuickfix("Create local Xtend annotation '@Bar'", '''
 			@Bar
