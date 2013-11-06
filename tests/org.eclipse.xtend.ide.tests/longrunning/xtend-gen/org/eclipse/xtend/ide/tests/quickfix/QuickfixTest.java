@@ -831,7 +831,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("def bar() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("Foo::foo|");
+    _builder.append("Foo.foo|");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -867,7 +867,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("Foo::foo");
+    _builder_1.append("Foo.foo");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -901,7 +901,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def bar() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append("Foo::foo");
+    _builder_2.append("Foo.foo");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -1066,7 +1066,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("def bar() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("Foo::foo|()");
+    _builder.append("Foo.foo|()");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -1101,7 +1101,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("Foo::foo()");
+    _builder_1.append("Foo.foo()");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -1515,6 +1515,97 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void missingConstructorCallParentheses() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Foo.foo|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change to constructor call \'new Foo()\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new Foo().foo");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void missingConstructorCallParentheses_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new ArrayList.size|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Change to constructor call \'new ArrayList()\' (java.util)");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.ArrayList");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new ArrayList().size");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabelsSubset.assertModelAfterQuickfix("Change to constructor call \'new ArrayList()\' (java.util)", _builder_1);
   }
   
   @Test
@@ -2235,6 +2326,21 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingClassOtherPackage() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("bar.Bar| bar");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\' in package \'bar\'", "Create Java class \'Bar\' in package \'bar\'", "Create Java interface \'Bar\' in package \'bar\'");
+  }
+  
+  @Test
   public void missingClassAndConstructor() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -2273,6 +2379,27 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend class \'Bar\'", _builder_1);
+  }
+  
+  @Test
+  public void missingClassAndConstructorOtherPackage() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new bar.Bar|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\' in package \'bar\'", "Create Java class \'Bar\' in package \'bar\'");
   }
   
   @Test
@@ -2387,7 +2514,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("def foo() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("Collections|::sort");
+    _builder.append("Collections|.sort");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -2407,7 +2534,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def foo() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("Collections::sort");
+    _builder_1.append("Collections.sort");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");

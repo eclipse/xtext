@@ -163,4 +163,9 @@ class QuickfixTestBuilder {
 		yieldToQueuedDisplayJobs(null)
 	}
 	
+	def removeFile(String fileName) {
+		getFile(fileName).delete(true, new NullProgressMonitor)
+		this
+	}
+	
 }
