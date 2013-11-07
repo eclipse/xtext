@@ -318,13 +318,7 @@
 
 
 		<!-- change Group owner  -->
-		<fileset id="repository.resources" dir="${composite.repository.directory}">
-			<or>
-				<filename name="compositeContent.*" />
-				<filename name="compositeArtifacts.*" />
-				<filename name="${saved.build.id}/**" />
-			</or>
-		</fileset>
+		<fileset id="repository.resources" dir="${composite.repository.directory}"/>
 
 		<antcall target="-change.group.owner" inheritall="true">
 			<reference refid="repository.resources" torefid="change.group.owner.resources" />
