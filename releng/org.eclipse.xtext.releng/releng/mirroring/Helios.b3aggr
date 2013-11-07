@@ -8,7 +8,7 @@
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
         <bundles name="org.junit4"/>
-        <bundles name="org.junit"/>
+        <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
         <features name="org.eclipse.jdt.feature.group" versionRange="[3.6.0,3.7.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/releases/helios">
@@ -18,7 +18,7 @@
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
         <bundles name="org.eclipse.jdt.annotation"/>
         <bundles name="org.junit4" versionRange="[4.8.1.v20120523-1257]"/>
-        <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
+        <bundles name="org.junit" versionRange="[4.10.0.v4_10_0_v20120426-0900]"/>
       </repositories>
       <repositories location="http://download.eclipse.org/technology/m2e/releases/1.4">
         <bundles name="org.eclipse.m2e.core"/>
