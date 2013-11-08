@@ -20,7 +20,6 @@ import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
@@ -209,7 +208,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 					.addTypeToType(ILocationInFileProvider.class.getName(),
 							"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
 					.addTypeToType(IGlobalScopeProvider.class.getName(),
-							TypesAwareDefaultGlobalScopeProvider.class.getName())
+							"org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider")
 					.addTypeToType("org.eclipse.xtext.xbase.validation.FeatureNameValidator",
 							"org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator")
 					.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver",

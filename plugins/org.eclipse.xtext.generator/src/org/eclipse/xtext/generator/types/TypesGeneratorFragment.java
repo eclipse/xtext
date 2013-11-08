@@ -9,14 +9,8 @@ package org.eclipse.xtext.generator.types;
 
 import java.util.Set;
 
+import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
-import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider;
-import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
@@ -28,17 +22,17 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 
 	static {
-		TypesPackage.eINSTANCE.getJvmArrayType();
+		new StandaloneSetup().addRegisterGeneratedEPackage("org.eclipse.xtext.common.types.TypesPackage");
 	}
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 		     .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
-		     .addTypeToInstance(TypesFactory.class.getName(), "org.eclipse.xtext.common.types.TypesFactory.eINSTANCE")
-			 .addTypeToType(IJvmTypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
-			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
-			 .addTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
+		     .addTypeToInstance("org.eclipse.xtext.common.types.TypesFactory", "org.eclipse.xtext.common.types.TypesFactory.eINSTANCE")
+			 .addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory")
+			 .addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider")
+			 .addTypeToType(IGlobalScopeProvider.class.getName(), "org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider")
 			 .getBindings();
 	}
 
@@ -46,8 +40,8 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
 			 .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
-			 .addTypeToType(IJvmTypeProvider.Factory.class.getName(), "org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory")
-			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), "org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider")
+			 .addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory")
+			 .addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider")
 			 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider",
 					 	"org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")
 			 .addTypeToType("org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider",
