@@ -37,6 +37,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.JavaModelManager;
 
 import com.google.common.collect.Lists;
@@ -169,15 +170,40 @@ public class JavaProjectSetupUtil {
 
 	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName) throws CoreException,
 			JavaModelException {
+		return addSourceFolder(javaProject, folderName, null, null);
+	}
+
+	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName, String[] inclusionPatterns, String[] exclusionPatterns) throws CoreException,
+			JavaModelException {
+		
 		IProject project = javaProject.getProject();
 		IPath projectPath = project.getFullPath();
 
 		deleteClasspathEntry(javaProject, projectPath);
 
 		IFolder srcFolder = createSubFolder(project, folderName); //$NON-NLS-1$
-		IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(srcFolder.getFullPath());
+		IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(srcFolder.getFullPath(), getInclusionPatterns(inclusionPatterns), getExclusionPatterns(exclusionPatterns), null);
 		addToClasspath(javaProject, srcFolderClasspathEntry);
 		return srcFolder;
+	}
+
+	private static IPath[] getExclusionPatterns(String[] exclusionPatterns) {
+		return toPatterns(exclusionPatterns, ClasspathEntry.EXCLUDE_NONE);
+	}
+
+	private static IPath[] getInclusionPatterns(String[] inclusionPatterns) {
+		return toPatterns(inclusionPatterns, ClasspathEntry.INCLUDE_ALL);
+	}
+
+	private static IPath[] toPatterns(String[] patterns, IPath[] defaultResult) {
+		if (patterns == null || patterns.length == 0) {
+			return defaultResult;
+		}
+		IPath[] result = new IPath[patterns.length];
+		for (int i = 0; i < patterns.length; i++) {
+			result[i] = new Path(patterns[i]);
+		}
+		return result;
 	}
 
 	public static void deleteClasspathEntry(IJavaProject javaProject, IPath path) throws JavaModelException {
