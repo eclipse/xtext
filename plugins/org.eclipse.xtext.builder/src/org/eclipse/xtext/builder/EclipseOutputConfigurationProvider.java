@@ -35,6 +35,10 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	public static final String OUTPUT_CLEANUP_DERIVED = "cleanupDerived";
 	public static final String OUTPUT_DERIVED = "derived";
 	/**
+	 * @since 2.5
+	 */
+	public static final String OUTPUT_KEEP_LOCAL_HISTORY = "keepLocalHistory";
+	/**
 	 * @since 2.4
 	 */
 	public static final String INSTALL_DSL_AS_PRIMARY_SOURCE = "installDslAsPrimarySource";
@@ -90,6 +94,8 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 		result.setDescription(description);
 		String directory = getString(output, OUTPUT_DIRECTORY, store, output.getOutputDirectory());
 		result.setOutputDirectory(directory);
+		boolean keepLocalHistory = getBoolean(output, OUTPUT_KEEP_LOCAL_HISTORY, store, output.isKeepLocalHistory());
+		result.setKeepLocalHistory(keepLocalHistory);
 		return result;
 	}
 
