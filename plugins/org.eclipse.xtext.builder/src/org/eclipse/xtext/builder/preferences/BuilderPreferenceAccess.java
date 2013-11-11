@@ -64,6 +64,7 @@ public class BuilderPreferenceAccess {
 				store.setDefault(getKey(configuration, OUTPUT_CLEANUP_DERIVED), configuration.isCleanUpDerivedResources());
 				store.setDefault(getKey(configuration, INSTALL_DSL_AS_PRIMARY_SOURCE), configuration.isInstallDslAsPrimarySource());
 				store.setDefault(getKey(configuration, HIDE_LOCAL_SYNTHETIC_VARIABLES), configuration.isHideSyntheticLocalVariables());
+				store.setDefault(getKey(configuration, OUTPUT_KEEP_LOCAL_HISTORY), configuration.isKeepLocalHistory());
 			}
 		}
 

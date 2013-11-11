@@ -28,6 +28,7 @@ public class OutputConfigurationProvider implements IOutputConfigurationProvider
 		defaultOutput.setCreateOutputDirectory(true);
 		defaultOutput.setCleanUpDerivedResources(true);
 		defaultOutput.setSetDerivedProperty(true);
+		defaultOutput.setKeepLocalHistory(true);
 		return newHashSet(defaultOutput);
 	}
 }

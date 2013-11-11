@@ -30,6 +30,7 @@ public class XtendOutputConfigurationProvider extends OutputConfigurationProvide
 		defaultOutput.setCanClearOutputDirectory(false);
 		defaultOutput.setCleanUpDerivedResources(true);
 		defaultOutput.setSetDerivedProperty(true);
+		defaultOutput.setKeepLocalHistory(false);
 		return newHashSet(defaultOutput);
 	}
 }

@@ -68,6 +68,11 @@ public class OutputConfiguration {
 	 */
 	private boolean hideSyntheticLocalVariables = true;
 
+	/**
+	 * whether local history should be kept for generated files.
+	 */
+	private boolean keepLocalHistory = false;
+
 	public OutputConfiguration(String name) {
 		super();
 		this.name = name;
@@ -159,6 +164,20 @@ public class OutputConfiguration {
 	 */
 	public void setHideSyntheticLocalVariables(boolean hideSyntheticLocalVariables) {
 		this.hideSyntheticLocalVariables = hideSyntheticLocalVariables;
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	public Boolean isKeepLocalHistory() {
+		return keepLocalHistory;
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public void setKeepLocalHistory(Boolean keepLocalHistory) {
+		this.keepLocalHistory = keepLocalHistory;
 	}
 
 	@Override

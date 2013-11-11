@@ -147,6 +147,9 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 			GridData hideLocalButtonData = new GridData();
 			hideLocalButtonData.horizontalIndent = 32;
 			hideLocalButton.setLayoutData(hideLocalButtonData);
+			addCheckBox(othersComposite, Messages.OutputConfigurationPage_KeepLocalHistory, 
+					BuilderPreferenceAccess.getKey(outputConfiguration,
+							EclipseOutputConfigurationProvider.OUTPUT_KEEP_LOCAL_HISTORY), trueFalseValues, 0);
 		}
 		registerKey(OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
 		IDialogSettings section = Activator.getDefault().getDialogSettings().getSection(SETTINGS_SECTION_NAME);
