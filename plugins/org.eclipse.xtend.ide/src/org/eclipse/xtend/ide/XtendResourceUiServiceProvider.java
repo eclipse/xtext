@@ -16,6 +16,8 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.ClasspathEntry;
+import org.eclipse.jdt.internal.core.util.Util;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 
@@ -60,11 +62,47 @@ public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProv
 			IClasspathEntry entry = classpath[i];
 			if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
 				IPath entryPath = entry.getPath();
-				if (entryPath.isPrefixOf(path)) {
+				if (entryPath.isPrefixOf(path) && !isExcluded(entry, path)) {
 					return true;
 				}
 			}
 		}
 		return false;
 	}
+	
+	public boolean isExcluded(IClasspathEntry entry, IPath path) {
+		char[][] inclusionPatterns = getInclusionPatterns(entry);
+		char[][] exclusionPatterns = getExclusionPatterns(entry);
+		return Util.isExcluded(path, inclusionPatterns, exclusionPatterns, false);
+	}
+
+	private char[][] getInclusionPatterns(IClasspathEntry entry) {
+		if (entry instanceof ClasspathEntry) {
+			ClasspathEntry classpathEntry = (ClasspathEntry) entry;
+			return classpathEntry.fullInclusionPatternChars();
+		}
+		return toFullPatternChars(entry, entry.getInclusionPatterns());
+	}
+
+	private char[][] getExclusionPatterns(IClasspathEntry entry) {
+		if (entry instanceof ClasspathEntry) {
+			ClasspathEntry classpathEntry = (ClasspathEntry) entry;
+			return classpathEntry.fullExclusionPatternChars();
+		}
+		return toFullPatternChars(entry, entry.getExclusionPatterns());
+	}
+	
+	private char[][] toFullPatternChars(IClasspathEntry entry, IPath[] patterns) {
+		if (patterns == null) {
+			return null;
+		}
+		int length = patterns.length;
+		char[][] fullPatternChars = new char[length][];
+		IPath prefixPath = entry.getPath().removeTrailingSeparator();
+		for (int i = 0; i < length; i++) {
+			fullPatternChars[i] = prefixPath.append(patterns[i]).toString().toCharArray();
+		}
+		return fullPatternChars;
+	}
+	
 }
