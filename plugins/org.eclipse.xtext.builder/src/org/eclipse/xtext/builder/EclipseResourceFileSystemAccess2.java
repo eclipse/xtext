@@ -173,7 +173,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 						// reset to offset zero allows to reuse internal byte[]
 						// no need to convert the string twice
 						newContent.reset();
-						file.setContents(newContent, true, true, monitor);
+						file.setContents(newContent, true, outputConfig.isKeepLocalHistory(), monitor);
 					} else {
 						file.touch(getMonitor());
 					}
@@ -222,7 +222,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 						// reset to offset zero allows to reuse internal byte[]
 						// no need to convert the string twice
 						content.reset();
-						file.setContents(content, true, true, monitor);
+						file.setContents(content, true, outputConfig.isKeepLocalHistory(), monitor);
 					} else {
 						file.touch(getMonitor());
 					}
@@ -394,7 +394,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			// avoid copying the byte array
 			InputStream input = new ByteArrayInputStream(data.internalBuffer(), 0, data.internalLength());
 			if (traceFile.exists()) {
-				traceFile.setContents(input, false, true, monitor);
+				traceFile.setContents(input, false, false, monitor);
 			} else {
 				traceFile.create(input, true, monitor);
 			}
@@ -402,7 +402,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			return;
 		}
 		if (traceFile.exists()) {
-			traceFile.delete(IResource.KEEP_HISTORY, monitor);
+			traceFile.delete(IResource.NONE, monitor);
 		}
 	}
 	

@@ -281,12 +281,12 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		}
 		if (config.isCanClearOutputDirectory()) {
 			for (IResource resource : container.members()) {
-				resource.delete(IResource.KEEP_HISTORY, monitor);
+				resource.delete(config.isKeepLocalHistory() ? IResource.KEEP_HISTORY : IResource.NONE, monitor);
 			}
 		} else if (config.isCleanUpDerivedResources()) {
 			List<IFile> resources = derivedResourceMarkers.findDerivedResources(container, null);
 			for (IFile iFile : resources) {
-				iFile.delete(IResource.KEEP_HISTORY, monitor);
+				iFile.delete(config.isKeepLocalHistory() ? IResource.KEEP_HISTORY : IResource.NONE, monitor);
 			}
 		}
 	}
