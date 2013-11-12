@@ -18,6 +18,7 @@ import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,6 +27,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class BuildPathFilteringTest extends AbstractXtendUITestCase {
+  @After
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }

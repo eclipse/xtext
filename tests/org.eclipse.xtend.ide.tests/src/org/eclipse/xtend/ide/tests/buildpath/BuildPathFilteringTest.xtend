@@ -15,12 +15,14 @@ import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static extension org.eclipse.jdt.core.JavaCore.*
 import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import org.junit.After
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 class BuildPathFilteringTest extends AbstractXtendUITestCase {
 
+	@After
 	override tearDown() throws Exception {
 		cleanWorkspace
 	}

@@ -194,6 +194,15 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 		}
 		return null;
 	}
+	
+	public boolean isTraceFile(IStorage storage) {
+		if (!(storage instanceof IFile)) {
+			return false;
+		}
+		IFile file = (IFile) storage;
+		String originLastSegment = file.getFullPath().lastSegment();
+		return traceFileNameProvider.isTraceFileName(originLastSegment);
+	}
 
 	protected @Nullable IStorage getGeneratedFileForTraceFile(IStorage traceFile) {
 		if (traceFile instanceof IFile) {

@@ -7,12 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
+import java.util.regex.Pattern;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class TraceFileNameProvider {
 
 	public static final String TRACE_FILE_EXTENSION = "._trace";
+	
+	private static final Pattern TRACE_FILE_NAME_PATTERN = Pattern.compile(".*/?\\..+\\._trace");
+	
+	public boolean isTraceFileName(String traceFileName) {
+		return TRACE_FILE_NAME_PATTERN.matcher(traceFileName).matches();
+	}
 
 	public String getTraceFromJava(String javaFileName) {
 		int i = javaFileName.lastIndexOf('/');

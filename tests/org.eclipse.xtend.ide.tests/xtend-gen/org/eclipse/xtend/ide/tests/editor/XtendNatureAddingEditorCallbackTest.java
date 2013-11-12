@@ -19,6 +19,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,6 +31,7 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
   
+  @After
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }

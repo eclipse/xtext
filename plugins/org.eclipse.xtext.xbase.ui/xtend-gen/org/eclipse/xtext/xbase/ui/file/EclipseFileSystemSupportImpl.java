@@ -11,17 +11,25 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -40,6 +48,10 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
     this._workspaceRoot = workspaceRoot;
   }
+  
+  @Inject
+  @Extension
+  private EclipseOutputConfigurationProvider _eclipseOutputConfigurationProvider;
   
   protected IFile getEclipseFile(final Path path) {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
@@ -69,6 +81,23 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
     return _path;
+  }
+  
+  protected int getUpdateFlags(final IResource it) {
+    Boolean _isKeepLocalHistory = this.isKeepLocalHistory(it);
+    boolean _not = (!(_isKeepLocalHistory).booleanValue());
+    if (_not) {
+      return IResource.FORCE;
+    }
+    return (IResource.KEEP_HISTORY | IResource.FORCE);
+  }
+  
+  protected Boolean isKeepLocalHistory(final IResource it) {
+    IProject _project = it.getProject();
+    Set<OutputConfiguration> _outputConfigurations = this._eclipseOutputConfigurationProvider.getOutputConfigurations(_project);
+    OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(_outputConfigurations);
+    Boolean _isKeepLocalHistory = _head.isKeepLocalHistory();
+    return _isKeepLocalHistory;
   }
   
   public Iterable<? extends Path> getChildren(final Path path) {
@@ -148,54 +177,82 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   }
   
   public boolean delete(final Path path) {
-    try {
-      boolean _exists = this.exists(path);
-      if (_exists) {
-        IResource _findResource = this.findResource(path);
-        _findResource.delete(true, null);
-        return true;
-      }
-      return false;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    boolean _exists = this.exists(path);
+    if (_exists) {
+      IResource _findResource = this.findResource(path);
+      final Procedure1<IResource> _function = new Procedure1<IResource>() {
+        public void apply(final IResource it) {
+          try {
+            int _updateFlags = EclipseFileSystemSupportImpl.this.getUpdateFlags(it);
+            it.delete(_updateFlags, null);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      ObjectExtensions.<IResource>operator_doubleArrow(_findResource, _function);
+      return true;
     }
+    return false;
   }
   
   public boolean mkdir(final Path path) {
-    try {
-      boolean _exists = this.exists(path);
-      if (_exists) {
-        return false;
-      }
-      Path _parent = path.getParent();
-      boolean _exists_1 = this.exists(_parent);
-      boolean _not = (!_exists_1);
-      if (_not) {
-        Path _parent_1 = path.getParent();
-        this.mkdir(_parent_1);
-      }
-      IFolder _eclipseFolder = this.getEclipseFolder(path);
-      _eclipseFolder.create(true, true, null);
-      return true;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    boolean _exists = this.exists(path);
+    if (_exists) {
+      return false;
     }
+    Path _parent = path.getParent();
+    boolean _exists_1 = this.exists(_parent);
+    boolean _not = (!_exists_1);
+    if (_not) {
+      Path _parent_1 = path.getParent();
+      this.mkdir(_parent_1);
+    }
+    IFolder _eclipseFolder = this.getEclipseFolder(path);
+    final Procedure1<IFolder> _function = new Procedure1<IFolder>() {
+      public void apply(final IFolder it) {
+        try {
+          int _updateFlags = EclipseFileSystemSupportImpl.this.getUpdateFlags(it);
+          it.create(_updateFlags, true, null);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    ObjectExtensions.<IFolder>operator_doubleArrow(_eclipseFolder, _function);
+    return true;
   }
   
   public void setContentsAsStream(final Path path, final InputStream stream) {
-    try {
-      boolean _exists = this.exists(path);
-      if (_exists) {
-        IFile _eclipseFile = this.getEclipseFile(path);
-        _eclipseFile.setContents(stream, true, true, null);
-      } else {
-        Path _parent = path.getParent();
-        this.mkdir(_parent);
-        IFile _eclipseFile_1 = this.getEclipseFile(path);
-        _eclipseFile_1.create(stream, true, null);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    boolean _exists = this.exists(path);
+    if (_exists) {
+      IFile _eclipseFile = this.getEclipseFile(path);
+      final Procedure1<IFile> _function = new Procedure1<IFile>() {
+        public void apply(final IFile it) {
+          try {
+            int _updateFlags = EclipseFileSystemSupportImpl.this.getUpdateFlags(it);
+            it.setContents(stream, _updateFlags, null);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      ObjectExtensions.<IFile>operator_doubleArrow(_eclipseFile, _function);
+    } else {
+      Path _parent = path.getParent();
+      this.mkdir(_parent);
+      IFile _eclipseFile_1 = this.getEclipseFile(path);
+      final Procedure1<IFile> _function_1 = new Procedure1<IFile>() {
+        public void apply(final IFile it) {
+          try {
+            int _updateFlags = EclipseFileSystemSupportImpl.this.getUpdateFlags(it);
+            it.create(stream, _updateFlags, null);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      ObjectExtensions.<IFile>operator_doubleArrow(_eclipseFile_1, _function_1);
     }
   }
 }

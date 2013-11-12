@@ -15,6 +15,7 @@ import org.junit.Test
 import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 import static extension org.eclipse.xtext.ui.XtextProjectHelper.*
+import org.junit.After
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -24,6 +25,7 @@ class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase {
 	@Inject
 	WorkbenchTestHelper workbenchTestHelper
 
+	@After
 	override tearDown() throws Exception {
 		cleanWorkspace
 	}
