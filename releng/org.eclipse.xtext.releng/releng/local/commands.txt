@@ -4,24 +4,24 @@
 #importprefs -F ${releng.project.location}/releng/buckminster.workspace.epf
 
 # Xtext compile
-#importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
-#addbaseline -A "api-baseline"
+importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
+addbaseline -A "api-baseline"
 
-#import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtext-platform.mspec"
-#resolve "${releng.project.location}/releng/xtext.cquery"
+import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtext-platform.mspec"
+resolve "${releng.project.location}/releng/xtext.cquery"
 #launch --stderr --stdout --launch "org.eclipse.xtext.language-generator/GenerateAllLanguages.mwe2.launch"
-#build
-#junit --stderr --stdout --launch "org.eclipse.xtext.build.feature/bootstrap-build.launch"
+build
+junit --stderr --stdout --launch "org.eclipse.xtext.build.feature/bootstrap-build.launch"
 
 #build
 
 #Xtext Testing
-importtargetdefinition -DuseMirror=true -A "${releng.project.location}/releng/tests/swtbot-tests-buildserver.target
+#importtargetdefinition -DuseMirror=true -A "${releng.project.location}/releng/tests/swtbot-tests-buildserver.target
 
 #resolve "${releng.project.location}/releng/tests/xtext-test.mspec"
-resolve "${releng.project.location}/releng/tests-xtend/xtend-test.mspec"
-build
-junit --stderr --stdout --launch "org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SWTBot).launch" --flatXML --output "${build.root}/xtend.test.results/xtend.ide.swtbot.tests.slow.xml
+#resolve "${releng.project.location}/releng/tests-xtend/xtend-test.mspec"
+#build
+#junit --stderr --stdout --launch "org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SWTBot).launch" --flatXML --output "${build.root}/xtend.test.results/xtend.ide.swtbot.tests.slow.xml
 #perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#zip.examples"
 
 #build

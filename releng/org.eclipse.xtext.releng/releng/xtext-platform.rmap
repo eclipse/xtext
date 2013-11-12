@@ -45,6 +45,7 @@
   <rm:locator pattern="^org\.eclipse\.m2e(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.jboss\.netty$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="maven"/>
+  <rm:locator pattern="^org\.eclipse\.(?:egit|jgit)(?:\..+)?$" searchPathRef="egit"/>
   <rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator pattern="^org.eclipse.jdt.annotation$" searchPathRef="jdt.annotation"/>
   
@@ -104,6 +105,15 @@
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">
         <bc:propertyRef key="orbit.p2.repository"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="egit">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/releases/juno/">
+        <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
