@@ -38,7 +38,9 @@ public class InternalBuilderTest {
 
 		try {
 			File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
-			Files.sweepFolder(jdtMetadata);
+			boolean success = Files.sweepFolder(jdtMetadata);
+			System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": "
+					+ (success ? "success" : "fail"));
 			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
 		} finally {
 			reportMemoryState("Finished build.");
