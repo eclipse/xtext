@@ -11,9 +11,13 @@ import com.google.inject.Inject
 import java.io.InputStream
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
+import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IWorkspaceRoot
 import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
+
+import static org.eclipse.core.resources.IResource.*
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -23,6 +27,9 @@ import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	
 	@Property @Inject IWorkspaceRoot workspaceRoot
+	
+	@Inject
+	extension EclipseOutputConfigurationProvider
 	
 	protected def getEclipseFile(Path path) {
 		workspaceRoot.getFile(new org.eclipse.core.runtime.Path(path.toString))
@@ -38,6 +45,17 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	
 	protected def toEclipsePath(Path path) {
 		new org.eclipse.core.runtime.Path(path.toString)
+	}
+	
+	protected def getUpdateFlags(IResource it) {
+		if (!keepLocalHistory) {
+			return FORCE
+		}
+		return KEEP_HISTORY.bitwiseOr(FORCE)
+	}
+	
+	protected def isKeepLocalHistory(IResource it) {
+		project.outputConfigurations.head.keepLocalHistory
 	}
 
 	override Iterable<? extends Path> getChildren(Path path) {
@@ -76,7 +94,7 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	
 	override delete(Path path) {
 		if (path.exists) {
-			path.findResource.delete(true, null)
+			path.findResource => [delete(updateFlags, null)]
 			return true
 		}
 		return false
@@ -88,16 +106,16 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		if (!path.parent.exists) {
 			path.parent.mkdir
 		}
-		path.eclipseFolder.create(true, true, null)
+		path.eclipseFolder => [create(updateFlags, true, null)]
 		return true;
 	}
 	
 	override setContentsAsStream(Path path, InputStream stream) {
 		if (path.exists) {
-			path.eclipseFile.setContents(stream, true, true, null)
+			path.eclipseFile => [setContents(stream, updateFlags, null)]
 		} else {
 			path.parent.mkdir
-			path.eclipseFile.create(stream, true, null)
+			path.eclipseFile => [create(stream, updateFlags, null)]
 		}
 	}
 	

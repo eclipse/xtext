@@ -40,6 +40,7 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.GetGrammarElement;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -448,6 +449,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		}
 		sourceTraces = null;
 	}
+	
+	/**
+	 * @since 2.5
+	 */
+	protected boolean isTraceFile(IFile file) {
+		return fileBasedTraceInformation.isTraceFile(file);
+	}
 
 	/**
 	 * @since 2.3
@@ -477,7 +485,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	public void deleteFile(String fileName, String outputName) {
 		try {
 			IFile file = getFile(fileName, outputName);
-			deleteFile(file, monitor);
+			deleteFile(file, outputName, monitor);
 		} catch (CoreException e) {
 			throw new RuntimeIOException(e);
 		}
@@ -487,16 +495,24 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 * @since 2.3
 	 */
 	public void deleteFile(IFile file, IProgressMonitor monitor) throws CoreException {
+		deleteFile(file, DEFAULT_OUTPUT, monitor);
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public void deleteFile(IFile file, String outputName, IProgressMonitor monitor) throws CoreException {
+		OutputConfiguration outputConfig = getOutputConfig(outputName);
 		IFileCallback callBack = getCallBack();
-		if ((callBack == null || callBack.beforeFileDeletion(file)) && file.exists()) {
+		if ((callBack == null || callBack.beforeFileDeletion(file)) && file.exists() && !isTraceFile(file)) {
 			IFile traceFile = getTraceFile(file);
-			file.delete(IResource.KEEP_HISTORY, monitor);
+			file.delete(outputConfig.isKeepLocalHistory() ? IResource.KEEP_HISTORY : IResource.NONE, monitor);
 			if (traceFile != null && traceFile.exists()) {
-				traceFile.delete(IResource.KEEP_HISTORY, monitor);
+				traceFile.delete(IResource.NONE, monitor);
 			}
 		}
 	}
-	
+
 	protected IFile getFile(String fileName, String outputName) {
 		OutputConfiguration configuration = getOutputConfig(outputName);
 		IContainer container = getContainer(configuration);
