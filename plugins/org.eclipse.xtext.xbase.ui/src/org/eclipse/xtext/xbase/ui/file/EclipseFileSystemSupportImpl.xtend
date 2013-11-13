@@ -28,8 +28,8 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	
 	@Property @Inject IWorkspaceRoot workspaceRoot
 	
-	@Inject
-	extension EclipseOutputConfigurationProvider
+	@Property @Inject
+	extension EclipseOutputConfigurationProvider eclipseOutputConfigurationProvider
 	
 	protected def getEclipseFile(Path path) {
 		workspaceRoot.getFile(new org.eclipse.core.runtime.Path(path.toString))

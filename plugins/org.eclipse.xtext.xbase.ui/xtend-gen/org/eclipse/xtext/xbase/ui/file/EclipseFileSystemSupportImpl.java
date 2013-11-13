@@ -53,6 +53,14 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   @Extension
   private EclipseOutputConfigurationProvider _eclipseOutputConfigurationProvider;
   
+  public EclipseOutputConfigurationProvider getEclipseOutputConfigurationProvider() {
+    return this._eclipseOutputConfigurationProvider;
+  }
+  
+  public void setEclipseOutputConfigurationProvider(final EclipseOutputConfigurationProvider eclipseOutputConfigurationProvider) {
+    this._eclipseOutputConfigurationProvider = eclipseOutputConfigurationProvider;
+  }
+  
   protected IFile getEclipseFile(final Path path) {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
