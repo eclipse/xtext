@@ -716,8 +716,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 
 	protected LightweightTypeReference getAndEnhanceIterableOrArrayFromComponent(LightweightTypeReference parameterType, JvmGenericType iterableType,
 			final CompoundTypeReference compoundResult) {
-		if (parameterType.isUnknown())
+		if (parameterType.isUnknown()) {
+			compoundResult.addComponent(parameterType);
 			return parameterType;
+		}
 		ITypeReferenceOwner owner = compoundResult.getOwner();
 		LightweightTypeReference iterableOrArray = null;
 		LightweightTypeReference addAsArrayComponentAndIterable = null;
