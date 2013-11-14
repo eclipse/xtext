@@ -26,6 +26,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import com.google.common.io.Files
+import java.util.regex.Pattern
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -35,6 +36,7 @@ class StandaloneBuilder {
 	@Property Iterable<String> classPathEntries
 	@Property File tempDir = Files.createTempDir
 	@Property String encoding
+	@Property String classPathLookUpFilter
 	@Property boolean failOnValidationError = true
 
 	@Inject IndexedJvmTypeAccess jvmTypeAccess
@@ -57,16 +59,30 @@ class StandaloneBuilder {
 		}
 
 		val resourceSet = resourceSetProvider.get
-		val allClassPathEntries = (sourceDirs + classPathEntries)
 
-		collectResources(allClassPathEntries, resourceSet)
+		LOG.info("Collecting source models.")
+		val startedAt = System.currentTimeMillis
+		var rootsToTravers = classPathEntries
+		if (classPathLookUpFilter != null) {
+			LOG.info("Class path look up filter is active.")
+			val cpLookUpFilter = Pattern.compile(classPathLookUpFilter)
+			rootsToTravers = classPathEntries.filter[root|cpLookUpFilter.matcher(root).matches]
+			LOG.info(
+				"Investigating " + rootsToTravers.length + " of " + classPathEntries.length + " class path entries.");
+		}
+		collectResources((sourceDirs + rootsToTravers), resourceSet)
+		LOG.debug("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
+
+		val allClassPathEntries = (sourceDirs + classPathEntries)
 		if (needsJava) {
+			LOG.info("Installing type provider.")
 			installTypeProvider(allClassPathEntries, resourceSet, null)
 		}
 		val index = fillIndex(resourceSet)
 		val sourceResources = collectResources(sourceDirs, resourceSet)
 		if (needsJava) {
 			val stubsClasses = compileStubs(generateStubs(index, sourceResources))
+			LOG.info("Installing type provider for stubs.")
 			installTypeProvider(allClassPathEntries + newArrayList(stubsClasses), resourceSet, jvmTypeAccess)
 		}
 		sourceResources.forEach[contents] // full initialize
@@ -98,7 +114,7 @@ class StandaloneBuilder {
 			case CompilationResult.SKIPPED:
 				LOG.info("Nothing to compile. Stubs compilation was skipped.")
 			case CompilationResult.FAILED:
-				LOG.warn("Stubs compilation finished with errors.")
+				LOG.debug("Stubs compilation finished with errors.")
 		}
 		return stubsClasses.absolutePath
 	}
@@ -169,13 +185,13 @@ class StandaloneBuilder {
 
 	def protected List<Resource> collectResources(Iterable<String> roots, ResourceSet resourceSet) {
 		val extensions = languages.keySet.join("|")
-		val nameBasedFilter = new NameBasedFilter();
+		val nameBasedFilter = new NameBasedFilter
 
 		//TODO test with whitespaced file extensions
 		nameBasedFilter.setRegularExpression(".*\\.(?:(" + extensions + "))$");
-		val PathTraverser pathTraverser = new PathTraverser();
 		val List<Resource> resources = newArrayList();
-		pathTraverser.resolvePathes(
+
+		new PathTraverser().resolvePathes(
 			roots.toList,
 			[ input |
 				val matches = nameBasedFilter.matches(input)

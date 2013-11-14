@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -117,6 +119,16 @@ public class StandaloneBuilder {
     this._encoding = encoding;
   }
   
+  private String _classPathLookUpFilter;
+  
+  public String getClassPathLookUpFilter() {
+    return this._classPathLookUpFilter;
+  }
+  
+  public void setClassPathLookUpFilter(final String classPathLookUpFilter) {
+    this._classPathLookUpFilter = classPathLookUpFilter;
+  }
+  
   private boolean _failOnValidationError = true;
   
   public boolean isFailOnValidationError() {
@@ -167,35 +179,73 @@ public class StandaloneBuilder {
       StandaloneBuilder.LOG.info("Using common types.");
     }
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+    StandaloneBuilder.LOG.info("Collecting source models.");
+    final long startedAt = System.currentTimeMillis();
+    Iterable<String> rootsToTravers = this.getClassPathEntries();
+    String _classPathLookUpFilter = this.getClassPathLookUpFilter();
+    boolean _notEquals = (!Objects.equal(_classPathLookUpFilter, null));
+    if (_notEquals) {
+      StandaloneBuilder.LOG.info("Class path look up filter is active.");
+      String _classPathLookUpFilter_1 = this.getClassPathLookUpFilter();
+      final Pattern cpLookUpFilter = Pattern.compile(_classPathLookUpFilter_1);
+      Iterable<String> _classPathEntries = this.getClassPathEntries();
+      final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
+        public Boolean apply(final String root) {
+          Matcher _matcher = cpLookUpFilter.matcher(root);
+          boolean _matches = _matcher.matches();
+          return Boolean.valueOf(_matches);
+        }
+      };
+      Iterable<String> _filter = IterableExtensions.<String>filter(_classPathEntries, _function_1);
+      rootsToTravers = _filter;
+      final Iterable<String> _converted_rootsToTravers = (Iterable<String>)rootsToTravers;
+      int _length = ((Object[])Conversions.unwrapArray(_converted_rootsToTravers, Object.class)).length;
+      String _plus = ("Investigating " + Integer.valueOf(_length));
+      String _plus_1 = (_plus + " of ");
+      Iterable<String> _classPathEntries_1 = this.getClassPathEntries();
+      int _length_1 = ((Object[])Conversions.unwrapArray(_classPathEntries_1, Object.class)).length;
+      String _plus_2 = (_plus_1 + Integer.valueOf(_length_1));
+      String _plus_3 = (_plus_2 + " class path entries.");
+      StandaloneBuilder.LOG.info(_plus_3);
+    }
     Iterable<String> _sourceDirs = this.getSourceDirs();
-    Iterable<String> _classPathEntries = this.getClassPathEntries();
-    final Iterable<String> allClassPathEntries = Iterables.<String>concat(_sourceDirs, _classPathEntries);
-    this.collectResources(allClassPathEntries, resourceSet);
+    Iterable<String> _plus_4 = Iterables.<String>concat(_sourceDirs, rootsToTravers);
+    this.collectResources(_plus_4, resourceSet);
+    long _currentTimeMillis = System.currentTimeMillis();
+    long _minus = (_currentTimeMillis - startedAt);
+    String _plus_5 = ("Finished collecting source models. Took: " + Long.valueOf(_minus));
+    String _plus_6 = (_plus_5 + " ms.");
+    StandaloneBuilder.LOG.debug(_plus_6);
+    Iterable<String> _sourceDirs_1 = this.getSourceDirs();
+    Iterable<String> _classPathEntries_2 = this.getClassPathEntries();
+    final Iterable<String> allClassPathEntries = Iterables.<String>concat(_sourceDirs_1, _classPathEntries_2);
     if (needsJava) {
+      StandaloneBuilder.LOG.info("Installing type provider.");
       this.installTypeProvider(allClassPathEntries, resourceSet, null);
     }
     final ResourceDescriptionsData index = this.fillIndex(resourceSet);
-    Iterable<String> _sourceDirs_1 = this.getSourceDirs();
-    final List<Resource> sourceResources = this.collectResources(_sourceDirs_1, resourceSet);
+    Iterable<String> _sourceDirs_2 = this.getSourceDirs();
+    final List<Resource> sourceResources = this.collectResources(_sourceDirs_2, resourceSet);
     if (needsJava) {
       File _generateStubs = this.generateStubs(index, sourceResources);
       final String stubsClasses = this.compileStubs(_generateStubs);
+      StandaloneBuilder.LOG.info("Installing type provider for stubs.");
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(stubsClasses);
-      Iterable<String> _plus = Iterables.<String>concat(allClassPathEntries, _newArrayList);
-      this.installTypeProvider(_plus, resourceSet, this.jvmTypeAccess);
+      Iterable<String> _plus_7 = Iterables.<String>concat(allClassPathEntries, _newArrayList);
+      this.installTypeProvider(_plus_7, resourceSet, this.jvmTypeAccess);
     }
-    final Procedure1<Resource> _function_1 = new Procedure1<Resource>() {
+    final Procedure1<Resource> _function_2 = new Procedure1<Resource>() {
       public void apply(final Resource it) {
         it.getContents();
       }
     };
-    IterableExtensions.<Resource>forEach(sourceResources, _function_1);
-    final Procedure1<Resource> _function_2 = new Procedure1<Resource>() {
+    IterableExtensions.<Resource>forEach(sourceResources, _function_2);
+    final Procedure1<Resource> _function_3 = new Procedure1<Resource>() {
       public void apply(final Resource it) {
         EcoreUtil2.resolveLazyCrossReferences(it, CancelIndicator.NullImpl);
       }
     };
-    IterableExtensions.<Resource>forEach(sourceResources, _function_2);
+    IterableExtensions.<Resource>forEach(sourceResources, _function_3);
     final boolean isErrorFree = this.validate(sourceResources);
     boolean _and = false;
     boolean _isFailOnValidationError = this.isFailOnValidationError();
@@ -251,7 +301,7 @@ public class StandaloneBuilder {
     if (!_matched) {
       if (Objects.equal(result,CompilationResult.FAILED)) {
         _matched=true;
-        StandaloneBuilder.LOG.warn("Stubs compilation finished with errors.");
+        StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
       }
     }
     return stubsClasses.getAbsolutePath();
@@ -413,9 +463,8 @@ public class StandaloneBuilder {
     NameBasedFilter _nameBasedFilter = new NameBasedFilter();
     final NameBasedFilter nameBasedFilter = _nameBasedFilter;
     nameBasedFilter.setRegularExpression(((".*\\.(?:(" + extensions) + "))$"));
-    PathTraverser _pathTraverser = new PathTraverser();
-    final PathTraverser pathTraverser = _pathTraverser;
     final List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
+    PathTraverser _pathTraverser = new PathTraverser();
     List<String> _list = IterableExtensions.<String>toList(roots);
     final Predicate<URI> _function = new Predicate<URI>() {
       public boolean apply(final URI input) {
@@ -431,7 +480,7 @@ public class StandaloneBuilder {
         return matches;
       }
     };
-    pathTraverser.resolvePathes(_list, _function);
+    _pathTraverser.resolvePathes(_list, _function);
     return resources;
   }
   
