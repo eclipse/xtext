@@ -7,22 +7,15 @@
  */
 package org.eclipse.xtext.xbase.ui.tests.file;
 
-import com.google.common.collect.Sets;
-import java.util.Collections;
-import java.util.Set;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.file.JavaIoFileSystemTest;
 import org.eclipse.xtext.xbase.ui.file.EclipseFileSystemSupportImpl;
-import org.eclipse.xtext.xbase.ui.tests.file.MockEclipseOutputConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,20 +42,6 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
           it.setWorkspaceRoot(root);
           org.eclipse.xtext.parser.IEncodingProvider.Runtime _runtime = new org.eclipse.xtext.parser.IEncodingProvider.Runtime();
           it.setEncodingProvider(_runtime);
-          final Function1<IProject,Set<OutputConfiguration>> _function = new Function1<IProject,Set<OutputConfiguration>>() {
-            public Set<OutputConfiguration> apply(final IProject it) {
-              OutputConfiguration _outputConfiguration = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
-              final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-                public void apply(final OutputConfiguration it) {
-                  it.setKeepLocalHistory(Boolean.valueOf(false));
-                }
-              };
-              OutputConfiguration _doubleArrow = ObjectExtensions.<OutputConfiguration>operator_doubleArrow(_outputConfiguration, _function);
-              return Collections.<OutputConfiguration>unmodifiableSet(Sets.<OutputConfiguration>newHashSet(_doubleArrow));
-            }
-          };
-          MockEclipseOutputConfiguration _mockEclipseOutputConfiguration = new MockEclipseOutputConfiguration(_function);
-          it.setEclipseOutputConfigurationProvider(_mockEclipseOutputConfiguration);
         }
       };
       EclipseFileSystemSupportImpl _doubleArrow = ObjectExtensions.<EclipseFileSystemSupportImpl>operator_doubleArrow(_eclipseFileSystemSupportImpl, _function);
