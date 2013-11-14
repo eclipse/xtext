@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.core.resources.IEncodedStorage;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
@@ -54,6 +55,7 @@ import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -108,12 +110,22 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Inject
 	private IResourceForEditorInputFactory resourceForEditorInputFactory;
+	
+	@Inject
+	private UriValidator uriValidator;
 
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
 
 	@Inject
 	private IEncodingProvider encodingProvider;
+	
+	/**
+	 * @since 2.5
+	 */
+	protected UriValidator getUriValidator() {
+		return uriValidator;
+	}
 	
 	/**
 	 * @since 2.4
@@ -260,12 +272,18 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	 */
 	protected void registerAnnotationInfoProcessor(ElementInfo info) {
 		XtextDocument doc = (XtextDocument) info.fDocument;
-		if(info.fModel != null) {
+		if(info.fModel != null && canBuild(doc)) {
 			AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel,
 				issueResolutionProvider);
 			ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor, CheckMode.FAST_ONLY);
 			doc.setValidationJob(job);
 		}
+	}
+
+	private boolean canBuild(XtextDocument document) {
+		IFile file = document.getAdapter(IFile.class);
+		URI uri = storage2UriMapper.getUri(file);
+		return uriValidator.canBuild(uri, file);
 	}
 	
 	private UnchangedElementListener listener;
