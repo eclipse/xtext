@@ -23,6 +23,7 @@ import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.resource.UriValidator;
 
 import com.google.inject.Inject;
 
@@ -31,6 +32,9 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt
  */
 public class XbaseResourceForEditorInputFactory extends JavaClassPathResourceForIEditorInputFactory {
+	
+	@Inject
+	private UriValidator uriValidator;
 
 	@Inject
 	private ITraceForTypeRootProvider typeForTypeRootProvider;
@@ -53,15 +57,30 @@ public class XbaseResourceForEditorInputFactory extends JavaClassPathResourceFor
 	}
 
 	@Override
-	protected boolean isValidationDisabled(IStorage storage) {
+	protected boolean isValidationDisabled(URI uri, IStorage storage) {
 		if (storage instanceof IFile) {
 			IFile file = (IFile) storage;
 			IJavaProject javaProject = JavaCore.create(file.getProject());
 			if (javaProject == null || !javaProject.exists() || !javaProject.isOpen()) {
 				return true;
 			}
+			if (!canBuild(uri, storage)) {
+				return true;
+			}
 		}
-		return super.isValidationDisabled(storage);
+		return super.isValidationDisabled(uri, storage);
+	}
+
+	private boolean canBuild(URI uri, IStorage storage) {
+		if (uri == null) {
+			return uriValidator.canBuild(getStorageToUriMapper().getUri(storage), storage);
+		}
+		return uriValidator.canBuild(uri, storage);
+	}
+
+	@Override
+	protected boolean isValidationDisabled(IStorage storage) {
+		return isValidationDisabled(null, storage);
 	}
 
 	protected Resource createResource(IClassFile classFile) {

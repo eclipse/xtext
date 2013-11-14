@@ -99,15 +99,23 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		}
 		XtextResource resource = (XtextResource) resourceFactory.createResource(uriForResource);
 		resourceSet.getResources().add(resource);
-		resource.setValidationDisabled(isValidationDisabled(storage));
+		resource.setValidationDisabled(isValidationDisabled(uri, storage));
 		return resource;
+	}
+
+	/**
+	 * @param uri 
+	 * @since 2.5
+	 */
+	protected boolean isValidationDisabled(URI uri, IStorage storage) {
+		return false;
 	}
 
 	/**
 	 * @since 2.4
 	 */
 	protected boolean isValidationDisabled(IStorage storage) {
-		return false;
+		return isValidationDisabled(null, storage);
 	}
 
 	protected XtextResource createResource(ResourceSet resourceSet, URI uri) {
