@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.ui.tests.file
 
 import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.OutputConfiguration
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xbase.tests.file.JavaIoFileSystemTest
 import org.eclipse.xtext.xbase.ui.file.EclipseFileSystemSupportImpl
@@ -32,13 +30,6 @@ class EclipseFileSystemTest extends JavaIoFileSystemTest {
 		fs = new EclipseFileSystemSupportImpl => [
 			workspaceRoot = root
 			encodingProvider = new IEncodingProvider.Runtime()
-			eclipseOutputConfigurationProvider = new MockEclipseOutputConfiguration [
-				#{
-					new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT) => [
-						keepLocalHistory = false
-					]
-				}
-			]
 		]
 	}
 	
