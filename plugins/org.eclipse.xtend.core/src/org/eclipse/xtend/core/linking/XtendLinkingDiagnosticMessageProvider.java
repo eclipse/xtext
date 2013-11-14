@@ -59,6 +59,9 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
 		} catch (IllegalNodeException e){
 			linkText = e.getNode().getText();
 		}
+		if (linkText == null) {
+			return null;
+		}
 		EObject contextObject = context.getContext();
 		if (isStaticMemberCallTarget(contextObject)) {
 			String message = String.format("%s cannot be resolved to a type.", linkText);
