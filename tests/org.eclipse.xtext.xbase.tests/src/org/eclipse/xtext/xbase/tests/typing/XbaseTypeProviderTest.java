@@ -124,7 +124,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 							"  Object : return null\n" + 
 							"}");
 		JvmTypeReference type = typeProvider.getType(expression);
-		assertTrue(type instanceof JvmAnyTypeReference);
+		assertEquals("void", type.getIdentifier());
 	}
 	
 	@Test public void testTypeGuardedCase_0() throws Exception {

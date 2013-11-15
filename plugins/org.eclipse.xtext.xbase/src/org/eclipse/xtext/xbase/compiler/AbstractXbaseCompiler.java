@@ -493,7 +493,7 @@ public abstract class AbstractXbaseCompiler {
 				}
 			}
 			if (expectedType!=null && !typeReferences.is(expectedType, Void.TYPE))
-				type = expectedType;
+				type = getPrimitives().asWrapperTypeIfPrimitive(expectedType);
 		}
 		return type;
 	}

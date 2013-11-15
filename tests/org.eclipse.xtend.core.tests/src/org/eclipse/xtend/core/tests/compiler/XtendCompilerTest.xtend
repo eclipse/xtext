@@ -370,6 +370,95 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def void testIfWithVoidButNonVoidExpectation_04() {
+		assertCompilesTo('''
+			public class C  {
+				def m(Object x) {
+					val r = switch x { String: return '' };
+					r
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m(final Object x) {
+			    Object _xblockexpression = null;
+			    {
+			      Object _switchResult = null;
+			      boolean _matched = false;
+			      if (!_matched) {
+			        if (x instanceof String) {
+			          _matched=true;
+			          return "";
+			        }
+			      }
+			      final Object r = _switchResult;
+			      _xblockexpression = (r);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIfWithVoidButNonVoidExpectation_05() {
+		assertCompilesTo('''
+			public class C  {
+				def void m(Object o) {
+					val Object x = switch o { String: return };
+					x.toString
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Object o) {
+			    Object _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (o instanceof String) {
+			        _matched=true;
+			        return;
+			      }
+			    }
+			    final Object x = _switchResult;
+			    x.toString();
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIfWithVoidButNonVoidExpectation_06() {
+		assertCompilesTo('''
+			public class C  {
+				def m(Object o) {
+					val x = switch o { String: return };
+					voidFunction(x)
+				}
+				def void voidFunction(Object o) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Object o) {
+			    Object _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (o instanceof String) {
+			        _matched=true;
+			        return;
+			      }
+			    }
+			    final Object x = _switchResult;
+			    this.voidFunction(x);
+			  }
+			  
+			  public void voidFunction(final Object o) {
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testWorkWithArrays_01() {
 		assertCompilesTo('''
 			public class Foo  {
@@ -1052,7 +1141,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testSwitchWithNonVoidReturn() {
+	@Test def void testSwitchWithNonVoidReturn_01() {
 		assertCompilesTo('''
 			public class C  {
 			    def m(Object a) {
@@ -1070,7 +1159,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final Object a) {
-			    String _switchResult = null;
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (Objects.equal(a,"b")) {
@@ -1085,11 +1173,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(a,"c")) {
 			        _matched=true;
-			        String _xifexpression = null;
 			        if (true) {
 			          return "a";
 			        }
-			        _switchResult = _xifexpression;
 			      }
 			    }
 			    if (!_matched) {
@@ -1101,7 +1187,55 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        }
 			      }
 			    }
-			    return _switchResult;
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testSwitchWithNonVoidReturn_02() {
+		assertCompilesTo('''
+			public class C  {
+			    def m(Object a) {
+			    	val String s = switch a {
+			    		case 'a': { while(true) ''.toString '' }
+			    		case 'b': if (true) return 'a'
+			    	}
+				}
+			}
+		''', '''
+			import com.google.common.base.Objects;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final Object a) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (Objects.equal(a,"a")) {
+			        _matched=true;
+			        String _xblockexpression = null;
+			        {
+			          boolean _while = true;
+			          while (_while) {
+			            "".toString();
+			            _while = true;
+			          }
+			          _xblockexpression = ("");
+			        }
+			        _switchResult = _xblockexpression;
+			      }
+			    }
+			    if (!_matched) {
+			      if (Objects.equal(a,"b")) {
+			        _matched=true;
+			        if (true) {
+			          return "a";
+			        }
+			      }
+			    }
+			    final String s = _switchResult;
+			    return null;
 			  }
 			}
 		''')

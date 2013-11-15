@@ -318,7 +318,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	
 	@Test def void testOverloadedOperators_14() throws Exception {
 		"(0..Math::sqrt(1l).intValue).filter[ i | if (true) return 1l % i == 0 ].isEmpty"
-			.resolvesClosuresTo("(Integer)=>Boolean")
+			.resolvesClosuresTo("(Integer)=>boolean")
 			.withEquivalents("Function1<Integer, Boolean>")
 	}
 	
@@ -330,7 +330,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	
 	@Test def void testOverloadedOperators_16() throws Exception {
 		"(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>Integer")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>int")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 	
@@ -348,13 +348,13 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	
 	@Test def void testOverloadedOperators_19() throws Exception {
 		"(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>int")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>int")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 	
 	@Test def void testOverloadedOperators_20() throws Exception {
 		"(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>Integer")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>Integer")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 	
@@ -416,7 +416,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	
 	@Test def void testOverloadedOperators_30() throws Exception {
 		"(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>Integer")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>int")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 	
@@ -428,25 +428,25 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	
 	@Test def void testOverloadedOperators_32() throws Exception {
 		"(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>int")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>int")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 	
 	@Test def void testOverloadedOperators_33() throws Exception {
 		"(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>Integer")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>Integer")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 	
 	@Test def void testOverloadedOperators_34() throws Exception {
 		"(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>int")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>int")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 	
 	@Test def void testOverloadedOperators_35() throws Exception {
 		"(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>Integer")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>Integer")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 	
@@ -458,7 +458,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	
 	@Test def void testOverloadedOperators_37() throws Exception {
 		"(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]"
-			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>Integer")
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>int")
 			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
 	}
 

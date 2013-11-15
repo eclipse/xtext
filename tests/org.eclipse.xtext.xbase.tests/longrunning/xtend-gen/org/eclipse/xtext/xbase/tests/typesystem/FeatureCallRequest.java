@@ -77,7 +77,7 @@ public class FeatureCallRequest extends AbstractFeatureCallRequest {
     boolean _while = _and;
     while (_while) {
       if ((context instanceof JvmTypeParameterDeclarator)) {
-        result = ((JvmTypeParameterDeclarator) context);
+        result = ((JvmTypeParameterDeclarator)context);
       } else {
         ILogicalContainerProvider _contextProvider = this.getContextProvider();
         final JvmIdentifiableElement logicalContainer = _contextProvider.getLogicalContainer(context);
