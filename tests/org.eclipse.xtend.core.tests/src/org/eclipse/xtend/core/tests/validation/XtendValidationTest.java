@@ -2040,7 +2040,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	public void testBug413680_0() throws Exception {
 		XtendFile file = file(
 			"class B extends A {" +
-				"def static hello() {}" +
+			"	def static hello() {}" +
 			"}" +
 			"class A {" +
 				"def static hello() {}" +
@@ -2052,7 +2052,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	public void testBug413680_1() throws Exception {
 		XtendFile file = file(
 			"class B extends A {" +
-				"override static hello() {}" +
+			"	override static hello() {}" +
 			"}" +
 			"class A {" +
 				"def static hello() {}" +
@@ -2064,10 +2064,65 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	public void testBug413680_2() throws Exception {
 		XtendFile file = file(
 			"class B extends A {" +
-				"override static hello() {}" +
+			"	override static hello() {}" +
 			"}" +
 			"class A {}");
 		helper.assertError(file, XTEND_FUNCTION, OBSOLETE_OVERRIDE, "must override a superclass method");
 	}
 
+	@Test public void testPrimitiveDefaultValueSynthesized_01() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def int m() { if (true) 1 }" +
+				"}");
+		helper.assertWarning(file, XIF_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
+	@Test public void testPrimitiveDefaultValueSynthesized_02() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def void m() { if (true) 1 }" +
+				"}");
+		helper.assertNoWarnings(file, XIF_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
+	@Test public void testPrimitiveDefaultValueSynthesized_03() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def int m() { if (true) return 1 }" +
+				"}");
+		helper.assertWarning(file, XIF_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
+	@Test public void testPrimitiveDefaultValueSynthesized_04() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def int m(Object o) { switch o { String: 1 CharSequence: 2 } }" +
+				"}");
+		helper.assertWarning(file, XSWITCH_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
+	@Test public void testPrimitiveDefaultValueSynthesized_05() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def void m(Object o) { switch o { String: 1 CharSequence: 2 } }" +
+				"}");
+		helper.assertNoWarnings(file, XSWITCH_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
+	@Test public void testPrimitiveDefaultValueSynthesized_06() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def int m(Object o) { switch o { String: return 1 CharSequence: return 2 } }" +
+				"}");
+		helper.assertWarning(file, XSWITCH_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+
+	@Test public void testPrimitiveDefaultValueSynthesized_07() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def int m(Object o) { switch o { String: 1 CharSequence: return 2 } }" +
+				"}");
+		helper.assertWarning(file, XSWITCH_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
 }
