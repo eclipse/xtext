@@ -4073,10 +4073,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("_matched=true;");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("boolean _equals = (1 == 2);");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("if (_equals) {");
+    _builder_1.append("if ((1 == 2)) {");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("return \"b\";");

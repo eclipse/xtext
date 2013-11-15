@@ -905,9 +905,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public String returnString(final String x, final String y) {
-			    String _plus = (x + "");
-			    String _plus_1 = (_plus + y);
-			    return _plus_1;
+			    return ((x + "") + y);
 			  }
 			}
 		''')

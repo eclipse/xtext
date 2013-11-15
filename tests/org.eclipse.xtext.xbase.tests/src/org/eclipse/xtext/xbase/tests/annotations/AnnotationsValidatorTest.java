@@ -136,7 +136,9 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 				+ "typeValue = String,"
 				+ "typeArrayValue = #[String],"
 				+ "annotation2Value = @testdata.Annotation2(#['foo']),"
-				+ "annotation2ArrayValue = #[@testdata.Annotation2(#['foo'])]"
+				+ "annotation2ArrayValue = #[@testdata.Annotation2(#['foo'])],"
+				+ "enumValue = testdata.Enum1.RED,"
+				+ "enumArrayValue = #[testdata.Enum1.RED]"
 				+ ")", false);
 		validator.assertNoErrors(annotation);
 	}
@@ -144,7 +146,7 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 	@Test public void testConstantExpression_7() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation3("
 				+ "intValue = 1 + 4 + 6 * 42 - 4 / 45,"
-				+ "longValue = 42 + 4 + 6 * 42 - 4 / 45,"
+				+ "longValue = 42 + 4 + 6 * 42 - testdata.Constants1.INT_CONSTANT / 45,"
 				+ "stringValue = 'foo' + 'baz',"
 				+ "booleanArrayValue = #[true, false],"
 				+ "intArrayValue = #[ -1, 34 + 45, 2 - 6 ],"
@@ -165,9 +167,17 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		validator.assertError(annotation, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
 	}
 	
+	
 	@Test public void testConstantExpression_9() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation3("
 				+ "typeValue = 'foo'.class,"
+				+ ")", false);
+		validator.assertError(annotation, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
+	}
+	
+	@Test public void testConstantExpression_10() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation3("
+				+ "intValue = testdata.Constants1.NOT_A_INT_CONSTANT,"
 				+ ")", false);
 		validator.assertError(annotation, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
 	}

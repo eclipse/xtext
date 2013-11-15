@@ -188,13 +188,13 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.append("def void doStuff() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("println(\t\t// 8");
+    _builder.append("println(\t\t// 7");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("\'foo\' \t\t// 7");
+    _builder.append("\'foo\' \t\t// 8");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("+ \'bar\')\t// 7");
+    _builder.append("+ \'bar\')\t// 8");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

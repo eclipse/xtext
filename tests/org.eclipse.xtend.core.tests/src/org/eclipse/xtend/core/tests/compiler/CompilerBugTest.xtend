@@ -1792,8 +1792,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(_switchValue,"c")) {
 			        _matched=true;
-			        boolean _equals = (1 == 2);
-			        if (_equals) {
+			        if ((1 == 2)) {
 			          return "b";
 			        } else {
 			          return "c";

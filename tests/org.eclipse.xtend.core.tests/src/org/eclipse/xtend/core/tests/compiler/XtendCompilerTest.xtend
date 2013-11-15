@@ -2556,8 +2556,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public String returnString(final String x, final String y) {
-			    String _plus = (x + "");
-			    return (_plus + y);
+			    return ((x + "") + y);
 			  }
 			}
 		''')
@@ -2580,8 +2579,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public String returnString(final String x, final String y) {
-			    String _plus = (x + "");
-			    final String z = (_plus + y);
+			    final String z = ((x + "") + y);
 			    return z;
 			  }
 			}
@@ -2624,8 +2622,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			          _matched=true;
 			          final Procedure1<String> _function = new Procedure1<String>() {
 			            public void apply(final String break_) {
-			              String _plus = (break_ + continue_);
-			              _plus.toString();
+			              (break_ + continue_).toString();
 			            }
 			          };
 			          IterableExtensions.<String>forEach(synchronized_, _function);
@@ -3558,9 +3555,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _tempMap.put(_plus == null ? null : _plus.getKey(), _plus == null ? null : _plus.getValue());
 			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
 			    final Map<Object,Object> map2 = _xsetliteral;
-			    int _multiply = (1 * 2);
 			    Pair<String,Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet(_multiply, _mappedTo));
+			    final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
 			  }
 			  
 			  public Pair<Object,Object> operator_plus(final int operant, final int operand2) {
