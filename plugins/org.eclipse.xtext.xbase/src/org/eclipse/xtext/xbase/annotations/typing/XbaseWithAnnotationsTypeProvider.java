@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
@@ -38,8 +37,6 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 			boolean rawType) {
 		if (container instanceof XAnnotation) {
 			return _expectedType((XAnnotation)container, reference, index, rawType);
-		} else if (container instanceof XAnnotationElementValueBinaryOperation) {
-			return _expectedType((XAnnotationElementValueBinaryOperation)container, reference, index, rawType);
 		} else if (container instanceof XAnnotationElementValuePair) {
 			return _expectedType((XAnnotationElementValuePair)container, reference, index, rawType);
 		} else {
@@ -79,23 +76,10 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 		return null;
 	}
 	
-	/**
-	 * @param index unused but required in dispatch signature 
-	 */
-	protected JvmTypeReference _expectedType(XAnnotationElementValueBinaryOperation binaryOp, EReference reference, int index,
-			boolean rawType) {
-		if (reference == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND) {
-			return getType(binaryOp.getLeftOperand(), rawType);
-		}
-		return null;
-	}
-		
 	@Override
 	protected JvmTypeReference type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		if (expression instanceof XAnnotation) {
 			return _type((XAnnotation)expression, rawExpectation, rawType);
-		} else if (expression instanceof XAnnotationElementValueBinaryOperation) {
-			return _type((XAnnotationElementValueBinaryOperation)expression, rawExpectation, rawType);
 		} else {
 			return super.type(expression, rawExpectation, rawType);
 		}
@@ -111,10 +95,6 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 			return null;
 		}
 		return getTypeReferences().createTypeRef(annotationType);
-	}
-	
-	protected JvmTypeReference _type(XAnnotationElementValueBinaryOperation annotation, JvmTypeReference rawExpectation, boolean rawType) {
-		return getType(annotation.getLeftOperand(), rawExpectation, rawType);
 	}
 	
 }

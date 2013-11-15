@@ -20,7 +20,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
@@ -44,8 +43,6 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
 		if (expression instanceof XAnnotation) {
 			_computeTypes((XAnnotation)expression, state);
-		} else if (expression instanceof XAnnotationElementValueBinaryOperation) {
-			_computeTypes((XAnnotationElementValueBinaryOperation)expression, state);
 		} else {
 			super.computeTypes(expression, state);
 		}
@@ -157,9 +154,4 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		}
 	}
 
-	protected void _computeTypes(XAnnotationElementValueBinaryOperation object, ITypeComputationState state) {
-		state.computeTypes(object.getLeftOperand());
-		state.computeTypes(object.getRightOperand());
-	}
-	
 }
