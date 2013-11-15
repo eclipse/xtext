@@ -19,6 +19,8 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import testdata.Annotation2;
+
 import com.google.inject.Inject;
 
 /**
@@ -91,15 +93,83 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		validator.assertError(annotation, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "int");
 	}
 	
-	@Ignore
-	@Test public void testSideEffect() throws Exception {
+	@Test public void testConstantExpression_0() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['' + ''])", false);
 		validator.assertNoErrors(annotation);
 	}
 	
-	@Test public void testSideEffect_1() throws Exception {
+	@Test public void testConstantExpression_1() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['foo'.replace('foo', 'bar')])", false);
 		validator.assertError(annotation, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
+	}
+	
+	@Test public void testConstantExpression_2() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['foo'.replace('foo', 'bar')])", false);
+		validator.assertError(annotation, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
+	}
+	
+	@Test public void testConstantExpression_3() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['foo' + ('foo' as Object))])", false);
+		validator.assertError(annotation, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
+	}
+	
+	@Test public void testConstantExpression_4() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['foo' + 'foo'.toString])", false);
+		validator.assertError(annotation, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
+	}
+	
+	@Test public void testConstantExpression_5() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['' + ''])", false);
+		validator.assertNoErrors(annotation);
+	}
+	
+	@Test public void testConstantExpression_6() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation3("
+				+ "booleanValue = true,"
+				+ "intValue = 1,"
+				+ "longValue = 42,"
+				+ "stringValue = 'foo',"
+				+ "booleanArrayValue = #[true],"
+				+ "intArrayValue = #[1],"
+				+ "longArrayValue = #[42],"
+				+ "stringArrayValue = #['foo'],"
+				+ "typeValue = String,"
+				+ "typeArrayValue = #[String],"
+				+ "annotation2Value = @testdata.Annotation2(#['foo']),"
+				+ "annotation2ArrayValue = #[@testdata.Annotation2(#['foo'])]"
+				+ ")", false);
+		validator.assertNoErrors(annotation);
+	}
+	
+	@Test public void testConstantExpression_7() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation3("
+				+ "intValue = 1 + 4 + 6 * 42 - 4 / 45,"
+				+ "longValue = 42 + 4 + 6 * 42 - 4 / 45,"
+				+ "stringValue = 'foo' + 'baz',"
+				+ "booleanArrayValue = #[true, false],"
+				+ "intArrayValue = #[ -1, 34 + 45, 2 - 6 ],"
+				+ "longArrayValue = #[42, 5 * -3],"
+				+ "stringArrayValue = #['foo', 'bla' + 'buzz'],"
+				+ "typeValue = String,"
+				+ "typeArrayValue = #[String, Integer],"
+				+ "annotation2Value = @testdata.Annotation2(#['foo' + 'wuppa']),"
+				+ "annotation2ArrayValue = #[@testdata.Annotation2(#['foo']), @testdata.Annotation2(#['foo'+'wuppa'])]"
+				+ ")", false);
+		validator.assertNoErrors(annotation);
+	}
+	
+	@Test public void testConstantExpression_8() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation3("
+				+ "intValue = 'foo'.length,"
+				+ ")", false);
+		validator.assertError(annotation, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
+	}
+	
+	@Test public void testConstantExpression_9() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation3("
+				+ "typeValue = 'foo'.class,"
+				+ ")", false);
+		validator.assertError(annotation, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
 	}
 	
 	@Test public void testEmptyValueList_03() throws Exception {
