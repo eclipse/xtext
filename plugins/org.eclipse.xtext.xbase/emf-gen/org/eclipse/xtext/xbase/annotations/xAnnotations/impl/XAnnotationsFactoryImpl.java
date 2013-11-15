@@ -71,7 +71,6 @@ public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotation
 		{
 			case XAnnotationsPackage.XANNOTATION: return createXAnnotation();
 			case XAnnotationsPackage.XANNOTATION_ELEMENT_VALUE_PAIR: return createXAnnotationElementValuePair();
-			case XAnnotationsPackage.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION: return createXAnnotationElementValueBinaryOperation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -97,17 +96,6 @@ public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotation
 	{
 		XAnnotationElementValuePairImpl xAnnotationElementValuePair = new XAnnotationElementValuePairImpl();
 		return xAnnotationElementValuePair;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XAnnotationElementValueBinaryOperation createXAnnotationElementValueBinaryOperation()
-	{
-		XAnnotationElementValueBinaryOperationImpl xAnnotationElementValueBinaryOperation = new XAnnotationElementValueBinaryOperationImpl();
-		return xAnnotationElementValueBinaryOperation;
 	}
 
 	/**
