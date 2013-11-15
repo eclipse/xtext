@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -20,6 +21,9 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestCase {
+  @Inject
+  private XbaseResourceForEditorInputFactory editorInputFactory;
+  
   @Test
   public void testValidationIsDisabled_01() {
     try {
@@ -27,7 +31,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
       final IProject project = _root.getProject("simpleProject");
       project.create(null);
       project.open(null);
-      final IFile file = project.getFile("Hello.txt");
+      final IFile file = project.getFile("Hello.xtext");
       final InputStream _function = new InputStream() {
         @Override
         public int read() throws IOException {
@@ -47,7 +51,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
   public void testValidationIsDisabled_02() {
     try {
       final IProject project = AbstractXbaseUITestCase.createPluginProject("my.plugin.project");
-      final IFile file = project.getFile("Hello.txt");
+      final IFile file = project.getFile("Hello.xtext");
       final InputStream _function = new InputStream() {
         @Override
         public int read() throws IOException {
@@ -92,13 +96,11 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
   
   public boolean isValidationDisabled(final IStorage storage) {
     try {
-      XbaseResourceForEditorInputFactory _xbaseResourceForEditorInputFactory = new XbaseResourceForEditorInputFactory();
-      final XbaseResourceForEditorInputFactory factory = _xbaseResourceForEditorInputFactory;
-      Class<? extends XbaseResourceForEditorInputFactory> _class = factory.getClass();
+      Class<? extends XbaseResourceForEditorInputFactory> _class = this.editorInputFactory.getClass();
       final Method method = _class.getDeclaredMethod("isValidationDisabled", IStorage.class);
       method.setAccessible(true);
       try {
-        Object _invoke = method.invoke(factory, storage);
+        Object _invoke = method.invoke(this.editorInputFactory, storage);
         return (((Boolean) _invoke)).booleanValue();
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
