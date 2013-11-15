@@ -988,6 +988,41 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null, "if (false) return 'fail'");
 	}
 	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testIfExpression_06() throws Exception {
+		// this is compiled without expectation thus nothing is inserted during type compilation
+		// e.g. the if expression has type 'void' but the compiler / interpreter returns 'void' since
+		// the evaluation expects a hardcoded 'Object'
+		assertEvaluatesTo(null, 
+				"if (false) return 1");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testIfExpression_07() throws Exception {
+		assertEvaluatesTo(null, 
+				"if (false) return 1L");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testIfExpression_08() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"if (false) 1");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testIfExpression_09() throws Exception {
+		assertEvaluatesTo(Long.valueOf(0), 
+				"if (false) 1L");
+	}
+	
 	@Test public void testBug342021_01() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, 
 				"{\n" +
@@ -1957,8 +1992,8 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 * @since 2.5
 	 */
 	@Test public void testSwitchExpression_27() throws Exception {
-		assertEvaluatesTo(null, 
-				"{ val Object policy = java.lang.annotation.RetentionPolicy.SOURCE switch policy { java.lang.annotation.RetentionPolicy case CLASS: false } }");
+		assertEvaluatesTo(Boolean.FALSE, 
+				"{ val Object policy = java.lang.annotation.RetentionPolicy.SOURCE switch policy { java.lang.annotation.RetentionPolicy case CLASS: true } }");
 	}
 	
 	/**

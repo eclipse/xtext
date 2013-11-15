@@ -168,7 +168,7 @@ class FeatureCallRequest extends XbaseTypeArgumentContextProvider$AbstractFeatur
 		var JvmTypeParameterDeclarator result = null;
 		while (context != null && result == null) {
 			if (context instanceof JvmTypeParameterDeclarator) {
-				result = context as JvmTypeParameterDeclarator;
+				result = context
 			} else {
 				val JvmIdentifiableElement logicalContainer = contextProvider.getLogicalContainer(context);
 				if (logicalContainer != null) {
