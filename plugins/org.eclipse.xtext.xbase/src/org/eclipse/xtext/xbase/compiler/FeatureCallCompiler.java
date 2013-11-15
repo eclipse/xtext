@@ -22,6 +22,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -59,6 +60,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -322,6 +324,29 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (featureCall.isTypeLiteral() || featureCall.isPackageFragment()) {
 				return false;
 			}
+			// we need to prefer expressions for constant expressions, so they get compiled correctly.
+			// a binary or unary operator is constant if it's method is annotated with @Inline(..., constantExpression=true)
+			// and all arguments don't require variableDeclarations.
+			if (featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation) {
+				JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(featureCall);
+				if (inlineAnnotation == null)
+					return true;
+				for (XExpression argument : featureCall.getActualArguments()) {
+					if (isVariableDeclarationRequired(argument, b)) {
+						return true;
+					}
+				}
+				for (JvmAnnotationValue value: inlineAnnotation.getValues()) {
+					if (value instanceof JvmBooleanAnnotationValue && value.getValueName().equals("constantExpression")) {
+						EList<Boolean> values = ((JvmBooleanAnnotationValue )value).getValues();
+						if (!values.isEmpty()) {
+							return !values.get(0);
+						}
+					}
+				}
+				return true;
+			}
+			
 			if (featureCall instanceof XMemberFeatureCall && isVariableDeclarationRequired((XMemberFeatureCall) featureCall, b))
 				return true;
 			JvmIdentifiableElement feature = featureCall.getFeature();
