@@ -19,4 +19,7 @@ public @interface Annotation3 {
 	
 	Annotation2 annotation2Value() default @Annotation2({"foo"});
 	Annotation2[] annotation2ArrayValue() default {@Annotation2({"foo"})};
+	
+	Enum1 enumValue() default Enum1.BLUE; 
+	Enum1[] enumArrayValue() default {Enum1.BLUE}; 
 }
