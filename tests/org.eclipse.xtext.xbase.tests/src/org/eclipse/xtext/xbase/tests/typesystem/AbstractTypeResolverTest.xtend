@@ -22,7 +22,11 @@ import org.junit.Test
  */
 abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase {
 	
-	def Reference resolvesTo(String expression, String type)
+	final def Reference resolvesTo(String expression, String type) {
+		expression.resolvesTo(type, false)
+	}
+	
+	def Reference resolvesTo(String expression, String type, boolean expectWarning)
 	
 	def void isFunctionAndEquivalentTo(Reference reference, String type)
 	
@@ -1294,7 +1298,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testIfExpression_03() throws Exception {
-		"if (true) return 'foo'".resolvesTo("null")
+		"if (true) return 'foo'".resolvesTo("void")
 	}
 	
 	@Test def void testIfExpression_04() throws Exception {
@@ -1350,7 +1354,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testIfExpression_17() throws Exception {
-		"if (true) return 1".resolvesTo("null")
+		"if (true) return 1".resolvesTo("void")
 	}
 	
 	@Test def void testIfExpression_18() throws Exception {
@@ -1429,7 +1433,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testSwitchExpression_2() throws Exception {
 		"switch null {
 		  Object : return null 
-		}".resolvesTo("null")
+		}".resolvesTo("void")
 	}
 	
 	@Test def void testSwitchExpression_3() throws Exception {
@@ -1438,7 +1442,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 			switch c {
 	            CharSequence: 1
 	    	}
-		}".resolvesTo("Integer")
+		}".resolvesTo("int", true)
 	}
 	
 	@Test def void testSwitchExpression_4() throws Exception {
@@ -1451,7 +1455,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
                     }
                 }
         	}
-		}".resolvesTo("Character")
+		}".resolvesTo("char", true)
 	}
 	
 	@Test def void testSwitchExpression_5() throws Exception {
@@ -1477,7 +1481,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
                     }
                 }
         	}
-		}".resolvesTo("Integer")
+		}".resolvesTo("int", true)
 	}
 	
 	@Test def void testSwitchExpression_7() throws Exception {
@@ -1490,7 +1494,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
                     }
                 }
         	}
-		}".resolvesTo("Character")
+		}".resolvesTo("char", true)
 	}
 	
 	@Test def void testSwitchExpression_8() throws Exception {
@@ -1516,7 +1520,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
                     }
                 }
         	}
-		}".resolvesTo("Integer")
+		}".resolvesTo("int", true)
 	}
 	
 	@Test def void testSwitchExpression_10() throws Exception {

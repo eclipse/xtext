@@ -154,7 +154,7 @@ class RecomputingBatchIdentifiableTypeTest extends BatchIdentifiableTypeTest {
  */
 class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolverTest {
 	
-	override resolvesTo(String expression, String type) {
+	override resolvesTo(String expression, String type, boolean expectWarning) {
 		val replacedExpressionText = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
 		val xExpression = expression(replacedExpressionText, false /* true */);
 		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
@@ -172,7 +172,7 @@ class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolverTest {
 		val resolvedType = resolvedTypes.getReturnType(xExpression)
 		assertEquals(replacedExpressionText, type, resolvedType.simpleName);
 		assertTrue(xExpression.eResource.linkingAndSyntaxErrors.toString, xExpression.eResource.linkingAndSyntaxErrors.isEmpty)
-		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
+		assertEquals(xExpression.eResource.warnings.toString, !expectWarning, xExpression.eResource.warnings.isEmpty)
 		return resolvedType
 	}
 	

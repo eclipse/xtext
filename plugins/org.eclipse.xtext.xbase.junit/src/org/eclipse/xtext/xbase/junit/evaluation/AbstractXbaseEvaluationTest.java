@@ -1957,8 +1957,8 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 * @since 2.5
 	 */
 	@Test public void testSwitchExpression_27() throws Exception {
-		assertEvaluatesTo(null, 
-				"{ val Object policy = java.lang.annotation.RetentionPolicy.SOURCE switch policy { java.lang.annotation.RetentionPolicy case CLASS: false } }");
+		assertEvaluatesTo(Boolean.FALSE, 
+				"{ val Object policy = java.lang.annotation.RetentionPolicy.SOURCE switch policy { java.lang.annotation.RetentionPolicy case CLASS: true } }");
 	}
 	
 	/**

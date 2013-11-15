@@ -804,4 +804,33 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XTYPE_LITERAL, INVALID_TYPE);
 	}
 	
+	@Test public void testPrimitiveDefaultValueSynthesized_01() throws Exception {
+		XExpression expression = expression("{ val int i = if (true) 1 }");
+		helper.assertWarning(expression, XIF_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
+	@Test public void testPrimitiveDefaultValueSynthesized_02() throws Exception {
+		XExpression expression = expression("{ val int i = switch null as Object { String: 1 } }");
+		helper.assertWarning(expression, XSWITCH_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
+	@Test public void testPrimitiveDefaultValueSynthesized_03() throws Exception {
+		XExpression expression = expression("{ val x = if (true) return 1 x }");
+		helper.assertNoWarnings(expression, XIF_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
+	@Test public void testPrimitiveDefaultValueSynthesized_04() throws Exception {
+		XExpression expression = expression("{\n" + 
+				"			val Comparable<Object> it = null\n" + 
+				"			switch it {\n" + 
+				"	            CharSequence: switch(it) {\n" + 
+				"                    Appendable: {\n" + 
+				"                        charAt(1)\n" + 
+				"                    }\n" + 
+				"                }\n" + 
+				"        	}\n" + 
+				"		}");
+		helper.assertWarning(expression, XSWITCH_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+	}
+	
 }

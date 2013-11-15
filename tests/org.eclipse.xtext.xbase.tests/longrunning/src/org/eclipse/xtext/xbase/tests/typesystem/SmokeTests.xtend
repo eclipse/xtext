@@ -28,7 +28,7 @@ abstract class AbstractSmokeTest extends AbstractTypeResolverTest<LightweightTyp
 	
 	@Inject extension Oven
 	
-	override resolvesTo(String expression, String type) {
+	override resolvesTo(String expression, String type, boolean expectWarning) {
 		expression.assertNonSmoking
 		return null
 	}

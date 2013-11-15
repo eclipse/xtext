@@ -69,7 +69,7 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 	}
 	
 	@Test override testIfExpression_17() throws Exception {
-		"if (true) return 1".resolvesTo("Integer")
+		"if (true) return 1".resolvesTo("int")
 	}
 	
 	@Test override void testIfExpression_28() throws Exception {
@@ -78,6 +78,12 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 	
 	@Test override testSwitchExpression_1() throws Exception {
 		"switch true { case true : return 's' default: null}".resolvesTo("String")
+	}
+	
+	@Test override void testSwitchExpression_2() throws Exception {
+		"switch null {
+		  Object : return null 
+		}".resolvesTo("null")
 	}
 	
 	@Test override testForExpression_05() throws Exception {
@@ -247,7 +253,7 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
  */
 abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<LightweightTypeReference> {
 	
-	override LightweightTypeReference resolvesTo(String expression, String type) {
+	override LightweightTypeReference resolvesTo(String expression, String type, boolean expectWarning) {
 		val replacedExpressionText = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
 		val xExpression = expression(replacedExpressionText, false /* true */);
 		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
@@ -256,7 +262,7 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 		val resolvedType = resolvedTypes.getReturnType(xExpression)
 		assertEquals(replacedExpressionText, type, resolvedType.simpleName);
 		assertTrue(xExpression.eResource.linkingAndSyntaxErrors.toString, xExpression.eResource.linkingAndSyntaxErrors.isEmpty)
-		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
+		assertEquals(xExpression.eResource.warnings.toString, !expectWarning, xExpression.eResource.warnings.isEmpty)
 		return resolvedType
 	}
 	

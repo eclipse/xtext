@@ -31,7 +31,12 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractTypeResolverTest<Reference extends Object> extends AbstractXbaseTestCase {
-  public abstract Reference resolvesTo(final String expression, final String type);
+  public final Reference resolvesTo(final String expression, final String type) {
+    Reference _resolvesTo = this.resolvesTo(expression, type, false);
+    return _resolvesTo;
+  }
+  
+  public abstract Reference resolvesTo(final String expression, final String type, final boolean expectWarning);
   
   public abstract void isFunctionAndEquivalentTo(final Reference reference, final String type);
   
@@ -1449,7 +1454,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testIfExpression_03() throws Exception {
-    this.resolvesTo("if (true) return \'foo\'", "null");
+    this.resolvesTo("if (true) return \'foo\'", "void");
   }
   
   @Test
@@ -1524,7 +1529,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testIfExpression_17() throws Exception {
-    this.resolvesTo("if (true) return 1", "null");
+    this.resolvesTo("if (true) return 1", "void");
   }
   
   @Test
@@ -1620,17 +1625,17 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testSwitchExpression_2() throws Exception {
-    this.resolvesTo("switch null {\n\t\t  Object : return null \n\t\t}", "null");
+    this.resolvesTo("switch null {\n\t\t  Object : return null \n\t\t}", "void");
   }
   
   @Test
   public void testSwitchExpression_3() throws Exception {
-    this.resolvesTo("{\n\t\t\tval Object c = null\n\t\t\tswitch c {\n\t            CharSequence: 1\n\t    \t}\n\t\t}", "Integer");
+    this.resolvesTo("{\n\t\t\tval Object c = null\n\t\t\tswitch c {\n\t            CharSequence: 1\n\t    \t}\n\t\t}", "int", true);
   }
   
   @Test
   public void testSwitchExpression_4() throws Exception {
-    this.resolvesTo("{\n\t\t\tval Comparable<Object> c = null\n\t\t\tswitch c {\n\t            CharSequence: switch(c) {\n                    Appendable: {\n                        c.charAt(1)\n                    }\n                }\n        \t}\n\t\t}", "Character");
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> c = null\n\t\t\tswitch c {\n\t            CharSequence: switch(c) {\n                    Appendable: {\n                        c.charAt(1)\n                    }\n                }\n        \t}\n\t\t}", "char", true);
   }
   
   @Test
@@ -1640,12 +1645,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testSwitchExpression_6() throws Exception {
-    this.resolvesTo("{\n\t\t\tval Comparable<Object> c = null\n\t\t\tswitch c {\n\t            CharSequence: switch(c) {\n                    Appendable: {\n                        c.compareTo(null)\n                    }\n                }\n        \t}\n\t\t}", "Integer");
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> c = null\n\t\t\tswitch c {\n\t            CharSequence: switch(c) {\n                    Appendable: {\n                        c.compareTo(null)\n                    }\n                }\n        \t}\n\t\t}", "int", true);
   }
   
   @Test
   public void testSwitchExpression_7() throws Exception {
-    this.resolvesTo("{\n\t\t\tval Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: switch(it) {\n                    Appendable: {\n                        charAt(1)\n                    }\n                }\n        \t}\n\t\t}", "Character");
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: switch(it) {\n                    Appendable: {\n                        charAt(1)\n                    }\n                }\n        \t}\n\t\t}", "char", true);
   }
   
   @Test
@@ -1655,7 +1660,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testSwitchExpression_9() throws Exception {
-    this.resolvesTo("{\n\t\t\tval Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: switch(it) {\n                    Appendable: {\n                        compareTo(null)\n                    }\n                }\n        \t}\n\t\t}", "Integer");
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: switch(it) {\n                    Appendable: {\n                        compareTo(null)\n                    }\n                }\n        \t}\n\t\t}", "int", true);
   }
   
   @Test

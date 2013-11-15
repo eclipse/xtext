@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -177,6 +178,85 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return getTypeForName(Void.TYPE, state);
 	}
 	
+	protected static abstract class BranchExpressionProcessor {
+		protected boolean earlyExit = true;
+		protected boolean allVoid = true;
+		protected boolean allPrimitive = true;
+		protected boolean resultProcessed = false;
+		private final ITypeComputationState state;
+		private final XExpression expression;
+		
+		public BranchExpressionProcessor(ITypeComputationState state, XExpression expression) {
+			this.state = state;
+			this.expression = expression;
+		}
+		
+		public void process(ITypeComputationResult result) {
+			resultProcessed = true;
+						
+			LightweightTypeReference expressionReturnType = result.getReturnType();
+			if (expressionReturnType != null) {
+				if (earlyExit) {
+					boolean isExit = result.getCheckedConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN);
+					if (!(expressionReturnType.isPrimitiveVoid() && isExit)) {
+						earlyExit = false;
+					}
+				}
+				if (allVoid || allPrimitive) {
+					LightweightTypeReference expressionType = result.getActualExpressionType();
+					if (allVoid && !(expressionType != null && expressionType.isPrimitiveVoid())) {
+						allVoid = false;
+					}
+					if (allPrimitive && !(expressionType != null && expressionType.isPrimitive() || expressionReturnType.isPrimitive())) {
+						allPrimitive = false;
+					}
+				}
+			}
+		}
+		
+		public void commit() {
+			if (!resultProcessed) {
+				return;
+			}
+			if (earlyExit || allVoid || allPrimitive) {
+				for(ITypeExpectation expectation: state.getExpectations()) {
+					if (earlyExit && allVoid) {
+						if (!expectation.isVoidTypeAllowed()) {
+							AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
+							expectation.acceptActualType(anyType, ConformanceHint.UNCHECKED);
+							allPrimitive = false;
+						}
+					} else if (!expectation.isVoidTypeAllowed() && expectation.getExpectedType() == null) {
+						if (!allPrimitive || allVoid) {
+							AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
+							expectation.acceptActualType(anyType, ConformanceHint.UNCHECKED);
+						}
+						allPrimitive = false;
+					}
+					if (expectation.isVoidTypeAllowed() && (earlyExit || allVoid)) {
+						allPrimitive = false;
+					}
+				}
+				
+				if (!state.isIgnored(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE) && allPrimitive) {
+					AbstractDiagnostic diagnostic = new DiagnosticOnFirstKeyword(
+							state.getSeverity(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE),
+							IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, 
+							getMessage(),
+							expression,
+							null);
+					state.addDiagnostic(diagnostic);
+				}
+				return;
+			} else {
+				AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
+				state.acceptActualType(anyType);
+			}
+		}
+
+		protected abstract String getMessage();
+	}
+	
 	protected void _computeTypes(XIfExpression object, ITypeComputationState state) {
 		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
 		XExpression condition = object.getIf();
@@ -190,18 +270,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (elseExpression != null) {
 			state.computeTypes(elseExpression);
 		} else {
-			LightweightTypeReference expressionReturnType = thenResult.getReturnType();
-			if (expressionReturnType != null && expressionReturnType.isPrimitiveVoid()) {
-				for(ITypeExpectation expectation: state.getExpectations()) {
-					if (!expectation.isVoidTypeAllowed()) {
-						AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
-						expectation.acceptActualType(anyType, ConformanceHint.UNCHECKED);
-					}
+			BranchExpressionProcessor processor = new BranchExpressionProcessor(state, object) {
+				@Override
+				protected String getMessage() {
+					return "Missing else branch for conditional expression with primitive type";
 				}
-				return;
-			}
-			AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
-			state.acceptActualType(anyType);
+			};
+			processor.process(thenResult);
+			processor.commit();
 		}
 	}
 
@@ -254,7 +330,12 @@ public class XbaseTypeComputer implements ITypeComputer {
 		}
 		JvmType potentialEnumType = expressionType != null ? expressionType.getType() : null;
 		boolean isEnum = potentialEnumType instanceof JvmEnumerationType;
-		boolean casesAreVoid = true;
+		BranchExpressionProcessor branchExpressionProcessor = object.getDefault() == null ? new BranchExpressionProcessor(state, object) {
+				@Override
+				protected String getMessage() {
+					return "Missing default branch for switch expression with primitive type";
+				}
+		}: null;
 		// TODO case expressions may influence the expected type of other cases
 		for(XCasePart casePart: getCases(object)) {
 			// assign the type for the switch expression if possible and use that one for the remaining things
@@ -289,28 +370,15 @@ public class XbaseTypeComputer implements ITypeComputer {
 				caseState.computeTypes(casePart.getCase());
 			}
 			ITypeComputationResult thenResult = casePartState.computeTypes(casePart.getThen());
-			if (casesAreVoid) {
-				LightweightTypeReference expressionReturnType = thenResult.getReturnType();
-				if (expressionReturnType == null || !expressionReturnType.isPrimitiveVoid()) {
-					casesAreVoid = false;
-				}
+			if (branchExpressionProcessor != null) {
+				branchExpressionProcessor.process(thenResult);
 			}
 		}
 		XExpression defaultCase = object.getDefault();
 		if (defaultCase != null) {
 			allCasePartsState.computeTypes(object.getDefault());
-		} else {
-			if (casesAreVoid) {
-				for(ITypeExpectation expectation: state.getExpectations()) {
-					if (!expectation.isVoidTypeAllowed()) {
-						AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
-						expectation.acceptActualType(anyType, ConformanceHint.UNCHECKED);
-					}
-				}
-				return;
-			}
-			AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
-			state.acceptActualType(anyType);
+		} else if (branchExpressionProcessor != null) {
+			branchExpressionProcessor.commit();
 		}
 	}
 

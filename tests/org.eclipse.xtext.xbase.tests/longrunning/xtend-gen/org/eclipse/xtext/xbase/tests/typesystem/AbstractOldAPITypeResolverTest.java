@@ -30,7 +30,7 @@ import org.junit.Assert;
  */
 @SuppressWarnings("all")
 public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> {
-  public JvmTypeReference resolvesTo(final String expression, final String type) {
+  public JvmTypeReference resolvesTo(final String expression, final String type, final boolean expectWarning) {
     try {
       final XExpression xExpression = this.expression(expression, false);
       Resource _eResource = xExpression.eResource();

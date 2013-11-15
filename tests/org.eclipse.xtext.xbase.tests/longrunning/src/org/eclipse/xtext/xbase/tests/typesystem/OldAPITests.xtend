@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider
  */
 abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> {
 	
-	override JvmTypeReference resolvesTo(String expression, String type) {
+	override JvmTypeReference resolvesTo(String expression, String type, boolean expectWarning) {
 		val xExpression = expression(expression, false /* true */);
 		assertTrue(xExpression.eResource.errors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.isEmpty)
@@ -168,7 +168,7 @@ class FeatureCallRequest extends XbaseTypeArgumentContextProvider$AbstractFeatur
 		var JvmTypeParameterDeclarator result = null;
 		while (context != null && result == null) {
 			if (context instanceof JvmTypeParameterDeclarator) {
-				result = context as JvmTypeParameterDeclarator;
+				result = context
 			} else {
 				val JvmIdentifiableElement logicalContainer = contextProvider.getLogicalContainer(context);
 				if (logicalContainer != null) {

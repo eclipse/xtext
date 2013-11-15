@@ -25,7 +25,7 @@ public abstract class AbstractSmokeTest extends AbstractTypeResolverTest<Lightwe
   @Extension
   private Oven _oven;
   
-  public LightweightTypeReference resolvesTo(final String expression, final String type) {
+  public LightweightTypeReference resolvesTo(final String expression, final String type, final boolean expectWarning) {
     try {
       this.assertNonSmoking(expression);
       return null;

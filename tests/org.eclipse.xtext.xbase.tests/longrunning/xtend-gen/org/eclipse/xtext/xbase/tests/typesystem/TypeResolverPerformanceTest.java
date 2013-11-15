@@ -33,7 +33,7 @@ public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
     }
   }.apply();
   
-  public LightweightTypeReference resolvesTo(final String expression, final String type) {
+  public LightweightTypeReference resolvesTo(final String expression, final String type, final boolean expectWarning) {
     try {
       String _replace = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
       final XExpression xExpression = this.expression(_replace, false);

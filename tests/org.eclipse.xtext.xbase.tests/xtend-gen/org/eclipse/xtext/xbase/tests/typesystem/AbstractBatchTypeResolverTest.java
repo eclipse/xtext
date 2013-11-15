@@ -44,7 +44,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<LightweightTypeReference> {
-  public LightweightTypeReference resolvesTo(final String expression, final String type) {
+  public LightweightTypeReference resolvesTo(final String expression, final String type, final boolean expectWarning) {
     try {
       final XExpression xExpression = this.expression(expression, false);
       Resource _eResource = xExpression.eResource();
@@ -157,10 +157,12 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
       Resource _eResource_6 = xExpression.eResource();
       EList<Diagnostic> _warnings_2 = _eResource_6.getWarnings();
       String _string_3 = _warnings_2.toString();
+      String _plus = ("warnings in " + _string_3);
+      boolean _not = (!expectWarning);
       Resource _eResource_7 = xExpression.eResource();
       EList<Diagnostic> _warnings_3 = _eResource_7.getWarnings();
       boolean _isEmpty_3 = _warnings_3.isEmpty();
-      Assert.assertTrue(_string_3, _isEmpty_3);
+      Assert.assertEquals(_plus, Boolean.valueOf(_not), Boolean.valueOf(_isEmpty_3));
       return resolvedType;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

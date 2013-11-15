@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -132,7 +133,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
 			final ITreeAppendable appendable, XExpression context, final Later expression) {
 		if(getPrimitives().isPrimitive(left) && !getPrimitives().isPrimitive(right)) {
-			convertWrapperToPrimitive(right, getPrimitives().asPrimitiveIfWrapperType(right), context, appendable, expression);
+			if (right instanceof JvmAnyTypeReference) {
+				convertWrapperToPrimitive(left, getPrimitives().asPrimitiveIfWrapperType(left), context, appendable, expression);
+			} else {
+				convertWrapperToPrimitive(right, getPrimitives().asPrimitiveIfWrapperType(right), context, appendable, expression);
+			}
 		} else if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
 			convertPrimitiveToWrapper(right, getPrimitives().asWrapperTypeIfPrimitive(right), context, appendable, expression);
 		} else if (right instanceof JvmMultiTypeReference) {

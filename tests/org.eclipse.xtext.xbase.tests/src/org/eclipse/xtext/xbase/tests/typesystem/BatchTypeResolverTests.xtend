@@ -34,7 +34,7 @@ import org.junit.rules.ErrorCollector
  */
 abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<LightweightTypeReference> {
 	
-	override LightweightTypeReference resolvesTo(String expression, String type) {
+	override LightweightTypeReference resolvesTo(String expression, String type, boolean expectWarning) {
 		val xExpression = expression(expression, false /* true */);
 		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
@@ -83,7 +83,7 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 			}
 		}
 		assertTrue(xExpression.eResource.linkingAndSyntaxErrors.toString, xExpression.eResource.linkingAndSyntaxErrors.isEmpty)
-		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
+		assertEquals('warnings in ' + xExpression.eResource.warnings.toString, !expectWarning, xExpression.eResource.warnings.isEmpty)
 		return resolvedType
 	}
 	

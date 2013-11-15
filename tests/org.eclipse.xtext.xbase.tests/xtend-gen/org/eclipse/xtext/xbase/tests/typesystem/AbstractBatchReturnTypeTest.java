@@ -40,7 +40,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<LightweightTypeReference> {
-  public LightweightTypeReference resolvesTo(final String expression, final String type) {
+  public LightweightTypeReference resolvesTo(final String expression, final String type, final boolean expectWarning) {
     try {
       final String replacedExpressionText = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
       final XExpression xExpression = this.expression(replacedExpressionText, false);
@@ -73,10 +73,11 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
       Resource _eResource_6 = xExpression.eResource();
       EList<Diagnostic> _warnings_2 = _eResource_6.getWarnings();
       String _string_3 = _warnings_2.toString();
+      boolean _not = (!expectWarning);
       Resource _eResource_7 = xExpression.eResource();
       EList<Diagnostic> _warnings_3 = _eResource_7.getWarnings();
       boolean _isEmpty_3 = _warnings_3.isEmpty();
-      Assert.assertTrue(_string_3, _isEmpty_3);
+      Assert.assertEquals(_string_3, Boolean.valueOf(_not), Boolean.valueOf(_isEmpty_3));
       return resolvedType;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
