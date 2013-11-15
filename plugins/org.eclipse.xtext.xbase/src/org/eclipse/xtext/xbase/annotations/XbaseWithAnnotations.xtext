@@ -23,32 +23,11 @@ XAnnotation :
 ;
 
 XAnnotationElementValuePair :
-	element=[types::JvmOperation|ValidID] '=' value=XAnnotationElementValue	
-;
-
-XAnnotationElementValueStringConcatenation returns xbase::XExpression :
-	XAnnotationElementValue ({XAnnotationElementValueBinaryOperation.leftOperand = current} operator='+' rightOperand=XAnnotationElementValue)*
+	=>(element=[types::JvmOperation|ValidID] '=') value=XAnnotationElementValue	
 ;
 
 XAnnotationElementValue returns xbase::XExpression :
 	XAnnotation |
-	XListLiteral |
-	XStringLiteral |
-	XBooleanLiteral |
-	XNumberLiteral |
-	XTypeLiteral |
-	XAnnotationValueMemberFieldReference |
-	'(' XAnnotationElementValueStringConcatenation ')'
-;
-
-XAnnotationValueMemberFieldReference returns xbase::XExpression :
-	XAnnotationValueFieldReference (
-		{xbase::XMemberFeatureCall.memberCallTarget=current} ("."|explicitStatic?="::")
-		feature=[types::JvmIdentifiableElement|IdOrSuper] 
-	)*
-;
-
-XAnnotationValueFieldReference returns xbase::XExpression :
-	{xbase::XFeatureCall} 
-	feature=[types::JvmIdentifiableElement|IdOrSuper] 
+	{xbase::XListLiteral} =>('#' '[' elements+=XAnnotation) (',' elements+=XAnnotation )* ']' |
+	XExpression
 ;

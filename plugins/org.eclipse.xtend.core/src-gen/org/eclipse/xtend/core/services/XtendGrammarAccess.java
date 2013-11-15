@@ -2859,7 +2859,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XAnnotationElementValuePair:
-	//	element=[types::JvmOperation|ValidID] "=" value=XAnnotationElementValue;
+	//	=> (element=[types::JvmOperation|ValidID] "=") value=XAnnotationElementValue;
 	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValuePairElements getXAnnotationElementValuePairAccess() {
 		return gaXbaseWithAnnotations.getXAnnotationElementValuePairAccess();
 	}
@@ -2868,47 +2868,14 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getXAnnotationElementValuePairAccess().getRule();
 	}
 
-	//XAnnotationElementValueStringConcatenation returns xbase::XExpression:
-	//	XAnnotationElementValue ({XAnnotationElementValueBinaryOperation.leftOperand=current} operator="+"
-	//	rightOperand=XAnnotationElementValue)*;
-	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValueStringConcatenationElements getXAnnotationElementValueStringConcatenationAccess() {
-		return gaXbaseWithAnnotations.getXAnnotationElementValueStringConcatenationAccess();
-	}
-	
-	public ParserRule getXAnnotationElementValueStringConcatenationRule() {
-		return getXAnnotationElementValueStringConcatenationAccess().getRule();
-	}
-
 	//XAnnotationElementValue returns xbase::XExpression:
-	//	XAnnotation | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
-	//	XAnnotationValueMemberFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
+	//	XAnnotation | {xbase::XListLiteral} => ("#" "[" elements+=XAnnotation) ("," elements+=XAnnotation)* "]" | XExpression;
 	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValueElements getXAnnotationElementValueAccess() {
 		return gaXbaseWithAnnotations.getXAnnotationElementValueAccess();
 	}
 	
 	public ParserRule getXAnnotationElementValueRule() {
 		return getXAnnotationElementValueAccess().getRule();
-	}
-
-	//XAnnotationValueMemberFieldReference returns xbase::XExpression:
-	//	XAnnotationValueFieldReference ({xbase::XMemberFeatureCall.memberCallTarget=current} ("." | explicitStatic?="::")
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper])*;
-	public XbaseWithAnnotationsGrammarAccess.XAnnotationValueMemberFieldReferenceElements getXAnnotationValueMemberFieldReferenceAccess() {
-		return gaXbaseWithAnnotations.getXAnnotationValueMemberFieldReferenceAccess();
-	}
-	
-	public ParserRule getXAnnotationValueMemberFieldReferenceRule() {
-		return getXAnnotationValueMemberFieldReferenceAccess().getRule();
-	}
-
-	//XAnnotationValueFieldReference returns xbase::XExpression:
-	//	{xbase::XFeatureCall} feature=[types::JvmIdentifiableElement|IdOrSuper];
-	public XbaseWithAnnotationsGrammarAccess.XAnnotationValueFieldReferenceElements getXAnnotationValueFieldReferenceAccess() {
-		return gaXbaseWithAnnotations.getXAnnotationValueFieldReferenceAccess();
-	}
-	
-	public ParserRule getXAnnotationValueFieldReferenceRule() {
-		return getXAnnotationValueFieldReferenceAccess().getRule();
 	}
 
 	//XExpression:

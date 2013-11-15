@@ -3827,7 +3827,12 @@ ruleXAnnotation returns [EObject current=null]
     {
     	newLeafNode(otherlv_3, grammarAccess.getXAnnotationAccess().getLeftParenthesisKeyword_3_0());
     }
-)(((
+)((((((
+(
+		ruleValidID
+)
+)	'=' 
+))=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXAnnotationAccess().getElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_0_0()); 
@@ -3849,7 +3854,12 @@ ruleXAnnotation returns [EObject current=null]
     {
     	newLeafNode(otherlv_5, grammarAccess.getXAnnotationAccess().getCommaKeyword_3_1_0_1_0());
     }
+((((
 (
+		ruleValidID
+)
+)	'=' 
+))=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXAnnotationAccess().getElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_1_1_0()); 
@@ -3911,7 +3921,12 @@ ruleXAnnotationElementValuePair returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(((((
+(
+		ruleValidID
+)
+)	'=' 
+))=>((
 (
 		{
 			if ($current==null) {
@@ -3919,7 +3934,7 @@ ruleXAnnotationElementValuePair returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationElementValuePairAccess().getElementJvmOperationCrossReference_0_0()); 
+	        newCompositeNode(grammarAccess.getXAnnotationElementValuePairAccess().getElementJvmOperationCrossReference_0_0_0_0()); 
 	    }
 		ruleValidID		{ 
 	        afterParserOrEnumRuleCall();
@@ -3928,12 +3943,12 @@ ruleXAnnotationElementValuePair returns [EObject current=null]
 )
 )	otherlv_1='=' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getXAnnotationElementValuePairAccess().getEqualsSignKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getXAnnotationElementValuePairAccess().getEqualsSignKeyword_0_0_1());
     }
-(
+))(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationElementValuePairAccess().getValueXAnnotationElementValueParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getXAnnotationElementValuePairAccess().getValueXAnnotationElementValueParserRuleCall_1_0()); 
 	    }
 		lv_value_2_0=ruleXAnnotationElementValue		{
 	        if ($current==null) {
@@ -3949,75 +3964,6 @@ ruleXAnnotationElementValuePair returns [EObject current=null]
 
 )
 ))
-;
-
-
-
-
-
-// Entry rule entryRuleXAnnotationElementValueStringConcatenation
-entryRuleXAnnotationElementValueStringConcatenation returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getXAnnotationElementValueStringConcatenationRule()); }
-	 iv_ruleXAnnotationElementValueStringConcatenation=ruleXAnnotationElementValueStringConcatenation 
-	 { $current=$iv_ruleXAnnotationElementValueStringConcatenation.current; } 
-	 EOF 
-;
-
-// Rule XAnnotationElementValueStringConcatenation
-ruleXAnnotationElementValueStringConcatenation returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueParserRuleCall_0()); 
-    }
-    this_XAnnotationElementValue_0=ruleXAnnotationElementValue
-    { 
-        $current = $this_XAnnotationElementValue_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-((
-    {
-        $current = forceCreateModelElementAndSet(
-            grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0(),
-            $current);
-    }
-)(
-(
-		lv_operator_2_0=	'+' 
-    {
-        newLeafNode(lv_operator_2_0, grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getOperatorPlusSignKeyword_1_1_0());
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getXAnnotationElementValueStringConcatenationRule());
-	        }
-       		setWithLastConsumed($current, "operator", lv_operator_2_0, "+");
-	    }
-
-)
-)(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getRightOperandXAnnotationElementValueParserRuleCall_1_2_0()); 
-	    }
-		lv_rightOperand_3_0=ruleXAnnotationElementValue		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getXAnnotationElementValueStringConcatenationRule());
-	        }
-       		set(
-       			$current, 
-       			"rightOperand",
-        		lv_rightOperand_3_0, 
-        		"XAnnotationElementValue");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*)
 ;
 
 
@@ -4048,197 +3994,81 @@ ruleXAnnotationElementValue returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 
-    |
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXListLiteralParserRuleCall_1()); 
-    }
-    this_XListLiteral_1=ruleXListLiteral
-    { 
-        $current = $this_XListLiteral_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXStringLiteralParserRuleCall_2()); 
-    }
-    this_XStringLiteral_2=ruleXStringLiteral
-    { 
-        $current = $this_XStringLiteral_2.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXBooleanLiteralParserRuleCall_3()); 
-    }
-    this_XBooleanLiteral_3=ruleXBooleanLiteral
-    { 
-        $current = $this_XBooleanLiteral_3.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXNumberLiteralParserRuleCall_4()); 
-    }
-    this_XNumberLiteral_4=ruleXNumberLiteral
-    { 
-        $current = $this_XNumberLiteral_4.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXTypeLiteralParserRuleCall_5()); 
-    }
-    this_XTypeLiteral_5=ruleXTypeLiteral
-    { 
-        $current = $this_XTypeLiteral_5.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXAnnotationValueMemberFieldReferenceParserRuleCall_6()); 
-    }
-    this_XAnnotationValueMemberFieldReference_6=ruleXAnnotationValueMemberFieldReference
-    { 
-        $current = $this_XAnnotationValueMemberFieldReference_6.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |(	otherlv_7='(' 
-    {
-    	newLeafNode(otherlv_7, grammarAccess.getXAnnotationElementValueAccess().getLeftParenthesisKeyword_7_0());
-    }
-
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXAnnotationElementValueStringConcatenationParserRuleCall_7_1()); 
-    }
-    this_XAnnotationElementValueStringConcatenation_8=ruleXAnnotationElementValueStringConcatenation
-    { 
-        $current = $this_XAnnotationElementValueStringConcatenation_8.current; 
-        afterParserOrEnumRuleCall();
-    }
-	otherlv_9=')' 
-    {
-    	newLeafNode(otherlv_9, grammarAccess.getXAnnotationElementValueAccess().getRightParenthesisKeyword_7_2());
-    }
-))
-;
-
-
-
-
-
-// Entry rule entryRuleXAnnotationValueMemberFieldReference
-entryRuleXAnnotationValueMemberFieldReference returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getXAnnotationValueMemberFieldReferenceRule()); }
-	 iv_ruleXAnnotationValueMemberFieldReference=ruleXAnnotationValueMemberFieldReference 
-	 { $current=$iv_ruleXAnnotationValueMemberFieldReference.current; } 
-	 EOF 
-;
-
-// Rule XAnnotationValueMemberFieldReference
-ruleXAnnotationValueMemberFieldReference returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getXAnnotationValueFieldReferenceParserRuleCall_0()); 
-    }
-    this_XAnnotationValueFieldReference_0=ruleXAnnotationValueFieldReference
-    { 
-        $current = $this_XAnnotationValueFieldReference_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-((
-    {
-        $current = forceCreateModelElementAndSet(
-            grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getXMemberFeatureCallMemberCallTargetAction_1_0(),
-            $current);
-    }
-)(	otherlv_2='.' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getFullStopKeyword_1_1_0());
-    }
-
-    |(
-(
-		lv_explicitStatic_3_0=	'::' 
-    {
-        newLeafNode(lv_explicitStatic_3_0, grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getExplicitStaticColonColonKeyword_1_1_1_0());
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getXAnnotationValueMemberFieldReferenceRule());
-	        }
-       		setWithLastConsumed($current, "explicitStatic", true, "::");
-	    }
-
-)
-))(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getXAnnotationValueMemberFieldReferenceRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationValueMemberFieldReferenceAccess().getFeatureJvmIdentifiableElementCrossReference_1_2_0()); 
-	    }
-		ruleIdOrSuper		{ 
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*)
-;
-
-
-
-
-
-// Entry rule entryRuleXAnnotationValueFieldReference
-entryRuleXAnnotationValueFieldReference returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getXAnnotationValueFieldReferenceRule()); }
-	 iv_ruleXAnnotationValueFieldReference=ruleXAnnotationValueFieldReference 
-	 { $current=$iv_ruleXAnnotationValueFieldReference.current; } 
-	 EOF 
-;
-
-// Rule XAnnotationValueFieldReference
-ruleXAnnotationValueFieldReference returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
+    |((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getXAnnotationValueFieldReferenceAccess().getXFeatureCallAction_0(),
+            grammarAccess.getXAnnotationElementValueAccess().getXListLiteralAction_1_0(),
             $current);
     }
-)(
+)(((	'#' 
+	'[' 
 (
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getXAnnotationValueFieldReferenceRule());
-	        }
-        }
+(
+ruleXAnnotation
+)
+)))=>(	otherlv_2='#' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getXAnnotationElementValueAccess().getNumberSignKeyword_1_1_0_0());
+    }
+	otherlv_3='[' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getXAnnotationElementValueAccess().getLeftSquareBracketKeyword_1_1_0_1());
+    }
+(
+(
 		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationValueFieldReferenceAccess().getFeatureJvmIdentifiableElementCrossReference_1_0()); 
+	        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getElementsXAnnotationParserRuleCall_1_1_0_2_0()); 
 	    }
-		ruleIdOrSuper		{ 
+		lv_elements_4_0=ruleXAnnotation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXAnnotationElementValueRule());
+	        }
+       		add(
+       			$current, 
+       			"elements",
+        		lv_elements_4_0, 
+        		"XAnnotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))
+)))(	otherlv_5=',' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getXAnnotationElementValueAccess().getCommaKeyword_1_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getElementsXAnnotationParserRuleCall_1_2_1_0()); 
+	    }
+		lv_elements_6_0=ruleXAnnotation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXAnnotationElementValueRule());
+	        }
+       		add(
+       			$current, 
+       			"elements",
+        		lv_elements_6_0, 
+        		"XAnnotation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_7=']' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getXAnnotationElementValueAccess().getRightSquareBracketKeyword_1_3());
+    }
+)
+    |
+    { 
+        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXExpressionParserRuleCall_2()); 
+    }
+    this_XExpression_8=ruleXExpression
+    { 
+        $current = $this_XExpression_8.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
 ;
 
 
