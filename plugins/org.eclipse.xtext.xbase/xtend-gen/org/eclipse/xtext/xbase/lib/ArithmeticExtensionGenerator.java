@@ -208,7 +208,7 @@ public class ArithmeticExtensionGenerator {
     _builder.newLine();
     _builder.append("@Pure");
     _builder.newLine();
-    _builder.append("@Inline(\"(-$1)\")");
+    _builder.append("@Inline(value=\"(-$1)\", constantExpression=true)");
     _builder.newLine();
     _builder.append("public static ");
     String _returnType = this.returnType(type, OperatorMapping.MINUS, type);
@@ -294,9 +294,9 @@ public class ArithmeticExtensionGenerator {
         _builder.newLine();
         _builder.append("@Pure");
         _builder.newLine();
-        _builder.append("@Inline(\"($1 ");
+        _builder.append("@Inline(value=\"($1 ");
         _builder.append(operator, "");
-        _builder.append(" $2)\")");
+        _builder.append(" $2)\", constantExpression=true)");
         _builder.newLineIfNotEmpty();
         _builder.append("public static ");
         String _returnType = this.returnType(op1, operator, op2);
@@ -419,7 +419,7 @@ public class ArithmeticExtensionGenerator {
     _builder.newLine();
     _builder.append("@Pure");
     _builder.newLine();
-    _builder.append("@Inline(\"($1 == $2)\")");
+    _builder.append("@Inline(value=\"($1 == $2)\", constantExpression=true)");
     _builder.newLine();
     _builder.append("public static boolean ");
     QualifiedName _methodName_3 = this._operatorMapping.getMethodName(OperatorMapping.TRIPLE_EQUALS);
@@ -478,7 +478,7 @@ public class ArithmeticExtensionGenerator {
     _builder.newLine();
     _builder.append("@Pure");
     _builder.newLine();
-    _builder.append("@Inline(\"($1 != $2)\")");
+    _builder.append("@Inline(value=\"($1 != $2)\", constantExpression=true)");
     _builder.newLine();
     _builder.append("public static boolean ");
     QualifiedName _methodName_4 = this._operatorMapping.getMethodName(OperatorMapping.TRIPLE_NOT_EQUALS);

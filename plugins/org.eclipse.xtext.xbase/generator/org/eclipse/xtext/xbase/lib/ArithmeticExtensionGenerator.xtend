@@ -86,7 +86,7 @@ class ArithmeticExtensionGenerator {
 		 * @since «since»
 		 */
 		@Pure
-		@Inline("(-$1)")
+		@Inline(value="(-$1)", constantExpression=true)
 		public static «returnType(type, MINUS, type)» «MINUS.methodName»(«type» a) {
 			return -a;
 		}
@@ -108,7 +108,7 @@ class ArithmeticExtensionGenerator {
 			 * @since «since»
 			 */
 			@Pure
-			@Inline("($1 «operator» $2)")
+			@Inline(value="($1 «operator» $2)", constantExpression=true)
 			public static «returnType(op1, operator, op2)» «operator.methodName»(«op1» a, «op2» b) {
 				return a «operator» b;
 			}
@@ -138,7 +138,7 @@ class ArithmeticExtensionGenerator {
 		 * @since 2.4
 		 */
 		@Pure
-		@Inline("($1 == $2)")
+		@Inline(value="($1 == $2)", constantExpression=true)
 		public static boolean «TRIPLE_EQUALS.methodName»(«op1» a, «op2» b) {
 			return a == b;
 		}
@@ -153,7 +153,7 @@ class ArithmeticExtensionGenerator {
 		 * @since 2.4
 		 */
 		@Pure
-		@Inline("($1 != $2)")
+		@Inline(value="($1 != $2)", constantExpression=true)
 		public static boolean «TRIPLE_NOT_EQUALS.methodName»(«op1» a, «op2» b) {
 			return a != b;
 		}
