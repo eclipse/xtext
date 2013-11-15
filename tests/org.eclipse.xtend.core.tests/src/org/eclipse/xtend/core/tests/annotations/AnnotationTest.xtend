@@ -39,7 +39,7 @@ class AnnotationTest extends AbstractXtendTestCase {
 		annotation Click {
 			int[] value
 		}
-		'''.compileToJavaCode.assertContains('@Click(2)')
+		'''.compileToJavaCode.assertContains('@Click({ 2 })')
 	}
 
 	@Test
@@ -75,7 +75,7 @@ class AnnotationTest extends AbstractXtendTestCase {
 		annotation Click {
 			int[] value
 		}
-		'''.compileToJavaCode.assertContains('@Click(value = 2)')
+		'''.compileToJavaCode.assertContains('@Click(value = { 2 })')
 	}
 
 	@Test

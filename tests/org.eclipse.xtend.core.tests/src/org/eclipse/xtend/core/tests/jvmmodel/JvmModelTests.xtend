@@ -1,13 +1,14 @@
 package org.eclipse.xtend.core.tests.jvmmodel
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.junit.Test
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import com.google.inject.Inject
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.common.types.JvmStringAnnotationValue
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.xbase.XListLiteral
+import org.junit.Test
 
 class JvmModelTests extends AbstractXtendTestCase {
 	
@@ -51,8 +52,8 @@ class JvmModelTests extends AbstractXtendTestCase {
 			}
 		'''.toString.annotationType.inferredAnnotationType.members.head as JvmOperation
 		assertEquals('java.lang.String[]', inferred.returnType.identifier)
-		assertTrue(inferred.defaultValue instanceof JvmStringAnnotationValue)
-		assertTrue((inferred.defaultValue as JvmStringAnnotationValue).values.empty)
+		assertTrue(inferred.defaultValue instanceof JvmCustomAnnotationValue)
+		assertTrue((inferred.defaultValue as JvmCustomAnnotationValue).values.head instanceof XListLiteral)
 	}
 
 	@Test

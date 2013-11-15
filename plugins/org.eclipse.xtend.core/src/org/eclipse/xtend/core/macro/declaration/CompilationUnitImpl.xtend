@@ -10,12 +10,14 @@ package org.eclipse.xtend.core.macro.declaration
 import com.google.common.collect.ImmutableList
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.io.File
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
+import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
@@ -47,6 +49,7 @@ import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
@@ -59,6 +62,7 @@ import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
@@ -85,7 +89,6 @@ import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
@@ -95,9 +98,6 @@ import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import java.io.File
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral
-import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -147,7 +147,12 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
 	@Inject IXtendJvmAssociations associations
-	@Inject ConstantExpressionsInterpreter interpreter
+	ConstantExpressionsInterpreter interpreter
+	
+	@Inject def void setConstantExpressionsInterpreter(ConstantExpressionsInterpreter interpreter) {
+		interpreter.compilationUnit = this
+		this.interpreter = interpreter
+	}
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject JvmTypeExtensions typeExtensions
@@ -557,7 +562,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	def Object evaluate(XExpression expression) {
-		return interpreter.evaluate(expression, null)
+		return interpreter.evaluate(expression).result
 	}
 	
 }
