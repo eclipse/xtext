@@ -45,7 +45,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.5
 	 */
 	@Pure /* not guaranteed, since toString() is invoked */
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static String operator_plus(String a, String b) {
 		return a + b;
 	}

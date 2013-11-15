@@ -24,29 +24,26 @@ import com.google.common.annotations.GwtCompatible;
 @Beta
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.METHOD })
-@GwtCompatible public @interface Inline {
+@GwtCompatible
+public @interface Inline {
 
 	/**
 	 * The inline format string. Placeholders like {@code $1, $2} etc can be used where the {@code 1..n} parameters of
 	 * the inlined method are used for {@code $1} to {@code $n} and the {@link #imported()} types are used for
 	 * subsequent indices. The next index {@code $n} can be used to insert all type parameters of the original
-	 * declaration. And finally the last indices refer to the upper bound substitute of the type parameters individually.
+	 * declaration. And finally the last indices refer to the upper bound substitute of the type parameters
+	 * individually.
 	 * 
-	 * So the order is arguments, imports, all type parameters at once incl. brackets and upper bounds of the individual type parameters without brackets
+	 * So the order is arguments, imports, all type parameters at once incl. brackets and upper bounds of the individual
+	 * type parameters without brackets
 	 * 
 	 * Example:
 	 * 
-	 * For the following signatures
-	 * <code>
-	 *   @Inline(value=".." imported = BigDecimal.class)
-	 *   public void <T1, T2> myMethod(String p1, String p2) { ... }
-	 * </code>
-	 * $1 refers to p1
-	 * $2 refers to p2
-	 * $3 refers to BigDecimal
-	 * $4 refers to <T1, T2>
-	 * $5 refers to the upper bound of T1
-	 * $6 refers to the upper bound of T2
+	 * For the following signatures <code>
+	 * 
+	 * @Inline(value=".." imported = BigDecimal.class) public void <T1, T2> myMethod(String p1, String p2) { ... }
+	 *                    </code> $1 refers to p1 $2 refers to p2 $3 refers to BigDecimal $4 refers to <T1, T2> $5
+	 *                    refers to the upper bound of T1 $6 refers to the upper bound of T2
 	 * 
 	 */
 	String value();
@@ -62,5 +59,14 @@ import com.google.common.annotations.GwtCompatible;
 	 * Java Language Specification, Third Edition</a> )
 	 */
 	boolean statementExpression() default false;
+
+	/**
+	 * Whether the compiled Java is a constant expression operator. (see <a
+	 * href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.28">15.28. Constant Expressions in Java
+	 * Language Specification, Third Edition</a>
+	 * 
+	 * @since 2.5
+	 */
+	boolean constantExpression() default false;
 
 }

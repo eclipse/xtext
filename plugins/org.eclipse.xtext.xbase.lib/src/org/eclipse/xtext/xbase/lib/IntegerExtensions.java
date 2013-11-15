@@ -234,7 +234,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("(-$1)")
+	@Inline(value="(-$1)", constantExpression=true)
 	public static int operator_minus(int a) {
 		return -a;
 	}
@@ -248,7 +248,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static double operator_plus(int a, double b) {
 		return a + b;
 	}
@@ -262,7 +262,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 - $2)")
+	@Inline(value="($1 - $2)", constantExpression=true)
 	public static double operator_minus(int a, double b) {
 		return a - b;
 	}
@@ -276,7 +276,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 * $2)")
+	@Inline(value="($1 * $2)", constantExpression=true)
 	public static double operator_multiply(int a, double b) {
 		return a * b;
 	}
@@ -290,7 +290,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 / $2)")
+	@Inline(value="($1 / $2)", constantExpression=true)
 	public static double operator_divide(int a, double b) {
 		return a / b;
 	}
@@ -304,7 +304,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 % $2)")
+	@Inline(value="($1 % $2)", constantExpression=true)
 	public static double operator_modulo(int a, double b) {
 		return a % b;
 	}
@@ -318,7 +318,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 < $2)")
+	@Inline(value="($1 < $2)", constantExpression=true)
 	public static boolean operator_lessThan(int a, double b) {
 		return a < b;
 	}
@@ -332,7 +332,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 <= $2)")
+	@Inline(value="($1 <= $2)", constantExpression=true)
 	public static boolean operator_lessEqualsThan(int a, double b) {
 		return a <= b;
 	}
@@ -346,7 +346,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 > $2)")
+	@Inline(value="($1 > $2)", constantExpression=true)
 	public static boolean operator_greaterThan(int a, double b) {
 		return a > b;
 	}
@@ -360,7 +360,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >= $2)")
+	@Inline(value="($1 >= $2)", constantExpression=true)
 	public static boolean operator_greaterEqualsThan(int a, double b) {
 		return a >= b;
 	}
@@ -374,7 +374,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_equals(int a, double b) {
 		return a == b;
 	}
@@ -388,7 +388,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_notEquals(int a, double b) {
 		return a != b;
 	}
@@ -417,7 +417,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_tripleEquals(int a, double b) {
 		return a == b;
 	}
@@ -432,7 +432,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_tripleNotEquals(int a, double b) {
 		return a != b;
 	}
@@ -446,7 +446,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static float operator_plus(int a, float b) {
 		return a + b;
 	}
@@ -460,7 +460,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 - $2)")
+	@Inline(value="($1 - $2)", constantExpression=true)
 	public static float operator_minus(int a, float b) {
 		return a - b;
 	}
@@ -474,7 +474,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 * $2)")
+	@Inline(value="($1 * $2)", constantExpression=true)
 	public static float operator_multiply(int a, float b) {
 		return a * b;
 	}
@@ -488,7 +488,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 / $2)")
+	@Inline(value="($1 / $2)", constantExpression=true)
 	public static float operator_divide(int a, float b) {
 		return a / b;
 	}
@@ -502,7 +502,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 % $2)")
+	@Inline(value="($1 % $2)", constantExpression=true)
 	public static float operator_modulo(int a, float b) {
 		return a % b;
 	}
@@ -516,7 +516,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 < $2)")
+	@Inline(value="($1 < $2)", constantExpression=true)
 	public static boolean operator_lessThan(int a, float b) {
 		return a < b;
 	}
@@ -530,7 +530,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 <= $2)")
+	@Inline(value="($1 <= $2)", constantExpression=true)
 	public static boolean operator_lessEqualsThan(int a, float b) {
 		return a <= b;
 	}
@@ -544,7 +544,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 > $2)")
+	@Inline(value="($1 > $2)", constantExpression=true)
 	public static boolean operator_greaterThan(int a, float b) {
 		return a > b;
 	}
@@ -558,7 +558,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >= $2)")
+	@Inline(value="($1 >= $2)", constantExpression=true)
 	public static boolean operator_greaterEqualsThan(int a, float b) {
 		return a >= b;
 	}
@@ -572,7 +572,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_equals(int a, float b) {
 		return a == b;
 	}
@@ -586,7 +586,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_notEquals(int a, float b) {
 		return a != b;
 	}
@@ -615,7 +615,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_tripleEquals(int a, float b) {
 		return a == b;
 	}
@@ -630,7 +630,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_tripleNotEquals(int a, float b) {
 		return a != b;
 	}
@@ -644,7 +644,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static long operator_plus(int a, long b) {
 		return a + b;
 	}
@@ -658,7 +658,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 - $2)")
+	@Inline(value="($1 - $2)", constantExpression=true)
 	public static long operator_minus(int a, long b) {
 		return a - b;
 	}
@@ -672,7 +672,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 * $2)")
+	@Inline(value="($1 * $2)", constantExpression=true)
 	public static long operator_multiply(int a, long b) {
 		return a * b;
 	}
@@ -686,7 +686,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 / $2)")
+	@Inline(value="($1 / $2)", constantExpression=true)
 	public static long operator_divide(int a, long b) {
 		return a / b;
 	}
@@ -700,7 +700,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 % $2)")
+	@Inline(value="($1 % $2)", constantExpression=true)
 	public static long operator_modulo(int a, long b) {
 		return a % b;
 	}
@@ -714,7 +714,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 < $2)")
+	@Inline(value="($1 < $2)", constantExpression=true)
 	public static boolean operator_lessThan(int a, long b) {
 		return a < b;
 	}
@@ -728,7 +728,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 <= $2)")
+	@Inline(value="($1 <= $2)", constantExpression=true)
 	public static boolean operator_lessEqualsThan(int a, long b) {
 		return a <= b;
 	}
@@ -742,7 +742,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 > $2)")
+	@Inline(value="($1 > $2)", constantExpression=true)
 	public static boolean operator_greaterThan(int a, long b) {
 		return a > b;
 	}
@@ -756,7 +756,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >= $2)")
+	@Inline(value="($1 >= $2)", constantExpression=true)
 	public static boolean operator_greaterEqualsThan(int a, long b) {
 		return a >= b;
 	}
@@ -770,7 +770,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_equals(int a, long b) {
 		return a == b;
 	}
@@ -784,7 +784,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_notEquals(int a, long b) {
 		return a != b;
 	}
@@ -813,7 +813,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_tripleEquals(int a, long b) {
 		return a == b;
 	}
@@ -828,7 +828,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_tripleNotEquals(int a, long b) {
 		return a != b;
 	}
@@ -842,7 +842,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static int operator_plus(int a, int b) {
 		return a + b;
 	}
@@ -856,7 +856,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 - $2)")
+	@Inline(value="($1 - $2)", constantExpression=true)
 	public static int operator_minus(int a, int b) {
 		return a - b;
 	}
@@ -870,7 +870,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 * $2)")
+	@Inline(value="($1 * $2)", constantExpression=true)
 	public static int operator_multiply(int a, int b) {
 		return a * b;
 	}
@@ -884,7 +884,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 / $2)")
+	@Inline(value="($1 / $2)", constantExpression=true)
 	public static int operator_divide(int a, int b) {
 		return a / b;
 	}
@@ -898,7 +898,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 % $2)")
+	@Inline(value="($1 % $2)", constantExpression=true)
 	public static int operator_modulo(int a, int b) {
 		return a % b;
 	}
@@ -912,7 +912,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 < $2)")
+	@Inline(value="($1 < $2)", constantExpression=true)
 	public static boolean operator_lessThan(int a, int b) {
 		return a < b;
 	}
@@ -926,7 +926,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 <= $2)")
+	@Inline(value="($1 <= $2)", constantExpression=true)
 	public static boolean operator_lessEqualsThan(int a, int b) {
 		return a <= b;
 	}
@@ -940,7 +940,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 > $2)")
+	@Inline(value="($1 > $2)", constantExpression=true)
 	public static boolean operator_greaterThan(int a, int b) {
 		return a > b;
 	}
@@ -954,7 +954,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >= $2)")
+	@Inline(value="($1 >= $2)", constantExpression=true)
 	public static boolean operator_greaterEqualsThan(int a, int b) {
 		return a >= b;
 	}
@@ -968,7 +968,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_equals(int a, int b) {
 		return a == b;
 	}
@@ -982,7 +982,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_notEquals(int a, int b) {
 		return a != b;
 	}
@@ -1011,7 +1011,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_tripleEquals(int a, int b) {
 		return a == b;
 	}
@@ -1026,7 +1026,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_tripleNotEquals(int a, int b) {
 		return a != b;
 	}
@@ -1040,7 +1040,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static int operator_plus(int a, char b) {
 		return a + b;
 	}
@@ -1054,7 +1054,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 - $2)")
+	@Inline(value="($1 - $2)", constantExpression=true)
 	public static int operator_minus(int a, char b) {
 		return a - b;
 	}
@@ -1068,7 +1068,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 * $2)")
+	@Inline(value="($1 * $2)", constantExpression=true)
 	public static int operator_multiply(int a, char b) {
 		return a * b;
 	}
@@ -1082,7 +1082,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 / $2)")
+	@Inline(value="($1 / $2)", constantExpression=true)
 	public static int operator_divide(int a, char b) {
 		return a / b;
 	}
@@ -1096,7 +1096,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 % $2)")
+	@Inline(value="($1 % $2)", constantExpression=true)
 	public static int operator_modulo(int a, char b) {
 		return a % b;
 	}
@@ -1110,7 +1110,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 < $2)")
+	@Inline(value="($1 < $2)", constantExpression=true)
 	public static boolean operator_lessThan(int a, char b) {
 		return a < b;
 	}
@@ -1124,7 +1124,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 <= $2)")
+	@Inline(value="($1 <= $2)", constantExpression=true)
 	public static boolean operator_lessEqualsThan(int a, char b) {
 		return a <= b;
 	}
@@ -1138,7 +1138,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 > $2)")
+	@Inline(value="($1 > $2)", constantExpression=true)
 	public static boolean operator_greaterThan(int a, char b) {
 		return a > b;
 	}
@@ -1152,7 +1152,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >= $2)")
+	@Inline(value="($1 >= $2)", constantExpression=true)
 	public static boolean operator_greaterEqualsThan(int a, char b) {
 		return a >= b;
 	}
@@ -1166,7 +1166,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_equals(int a, char b) {
 		return a == b;
 	}
@@ -1180,7 +1180,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_notEquals(int a, char b) {
 		return a != b;
 	}
@@ -1209,7 +1209,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_tripleEquals(int a, char b) {
 		return a == b;
 	}
@@ -1224,7 +1224,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_tripleNotEquals(int a, char b) {
 		return a != b;
 	}
@@ -1238,7 +1238,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static int operator_plus(int a, short b) {
 		return a + b;
 	}
@@ -1252,7 +1252,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 - $2)")
+	@Inline(value="($1 - $2)", constantExpression=true)
 	public static int operator_minus(int a, short b) {
 		return a - b;
 	}
@@ -1266,7 +1266,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 * $2)")
+	@Inline(value="($1 * $2)", constantExpression=true)
 	public static int operator_multiply(int a, short b) {
 		return a * b;
 	}
@@ -1280,7 +1280,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 / $2)")
+	@Inline(value="($1 / $2)", constantExpression=true)
 	public static int operator_divide(int a, short b) {
 		return a / b;
 	}
@@ -1294,7 +1294,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 % $2)")
+	@Inline(value="($1 % $2)", constantExpression=true)
 	public static int operator_modulo(int a, short b) {
 		return a % b;
 	}
@@ -1308,7 +1308,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 < $2)")
+	@Inline(value="($1 < $2)", constantExpression=true)
 	public static boolean operator_lessThan(int a, short b) {
 		return a < b;
 	}
@@ -1322,7 +1322,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 <= $2)")
+	@Inline(value="($1 <= $2)", constantExpression=true)
 	public static boolean operator_lessEqualsThan(int a, short b) {
 		return a <= b;
 	}
@@ -1336,7 +1336,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 > $2)")
+	@Inline(value="($1 > $2)", constantExpression=true)
 	public static boolean operator_greaterThan(int a, short b) {
 		return a > b;
 	}
@@ -1350,7 +1350,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >= $2)")
+	@Inline(value="($1 >= $2)", constantExpression=true)
 	public static boolean operator_greaterEqualsThan(int a, short b) {
 		return a >= b;
 	}
@@ -1364,7 +1364,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_equals(int a, short b) {
 		return a == b;
 	}
@@ -1378,7 +1378,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_notEquals(int a, short b) {
 		return a != b;
 	}
@@ -1407,7 +1407,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_tripleEquals(int a, short b) {
 		return a == b;
 	}
@@ -1422,7 +1422,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_tripleNotEquals(int a, short b) {
 		return a != b;
 	}
@@ -1436,7 +1436,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static int operator_plus(int a, byte b) {
 		return a + b;
 	}
@@ -1450,7 +1450,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 - $2)")
+	@Inline(value="($1 - $2)", constantExpression=true)
 	public static int operator_minus(int a, byte b) {
 		return a - b;
 	}
@@ -1464,7 +1464,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 * $2)")
+	@Inline(value="($1 * $2)", constantExpression=true)
 	public static int operator_multiply(int a, byte b) {
 		return a * b;
 	}
@@ -1478,7 +1478,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 / $2)")
+	@Inline(value="($1 / $2)", constantExpression=true)
 	public static int operator_divide(int a, byte b) {
 		return a / b;
 	}
@@ -1492,7 +1492,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 % $2)")
+	@Inline(value="($1 % $2)", constantExpression=true)
 	public static int operator_modulo(int a, byte b) {
 		return a % b;
 	}
@@ -1506,7 +1506,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 < $2)")
+	@Inline(value="($1 < $2)", constantExpression=true)
 	public static boolean operator_lessThan(int a, byte b) {
 		return a < b;
 	}
@@ -1520,7 +1520,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 <= $2)")
+	@Inline(value="($1 <= $2)", constantExpression=true)
 	public static boolean operator_lessEqualsThan(int a, byte b) {
 		return a <= b;
 	}
@@ -1534,7 +1534,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 > $2)")
+	@Inline(value="($1 > $2)", constantExpression=true)
 	public static boolean operator_greaterThan(int a, byte b) {
 		return a > b;
 	}
@@ -1548,7 +1548,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >= $2)")
+	@Inline(value="($1 >= $2)", constantExpression=true)
 	public static boolean operator_greaterEqualsThan(int a, byte b) {
 		return a >= b;
 	}
@@ -1562,7 +1562,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_equals(int a, byte b) {
 		return a == b;
 	}
@@ -1576,7 +1576,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_notEquals(int a, byte b) {
 		return a != b;
 	}
@@ -1605,7 +1605,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_tripleEquals(int a, byte b) {
 		return a == b;
 	}
@@ -1620,12 +1620,13 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_tripleNotEquals(int a, byte b) {
 		return a != b;
 	}
 	
 	// END generated code
+
 
 
 
