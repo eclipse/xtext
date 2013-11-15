@@ -7,7 +7,6 @@ import java.util.List
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmAnnotationType
-import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumerationType
@@ -83,14 +82,6 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def void testPrimitiveAnnotationDefaultValue() {
-		val e = expression("true");
-		val annotationValue = toJvmAnnotationValue(e, true) as JvmBooleanAnnotationValue
-		assertFalse(annotationValue.values.empty)
-		assertEquals(Boolean::TRUE, annotationValue.values.head)
-	}
-	
-	@Test
 	def void testStringAnnotationWithNullExpression() {
 		val f = XAnnotationsFactory::eINSTANCE
 		val context = expression("'Foo'");
@@ -127,46 +118,6 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertTrue(value.values.head instanceof XNumberLiteral)
 	}
 
-	@Test
-	def void testStringArrayAnnotation() {
-		val f = XAnnotationsFactory::eINSTANCE
-		val f2 = XbaseFactory::eINSTANCE
-		val e = expression("'Foo'");
-		val e2 = expression("'Bar'");
-		
-		val anno = f.createXAnnotation
-		anno.annotationType = references.findDeclaredType(typeof(Inject), e) as JvmAnnotationType
-		val array = f2.createXListLiteral
-		anno.value = array
-		array.elements += e
-		array.elements += e2
-		
-		val type = typesFactory.createJvmGenericType
-		newArrayList(anno).translateAnnotationsTo(type)
-		
-		assertEquals(anno.annotationType, type.annotations.head.annotation)
-		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.head instanceof XStringLiteral)
-		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.get(1) instanceof XStringLiteral)
-	}
-	
-	@Test
-	def void testStringArrayAnnotationWithNullExpression() {
-		val f = XAnnotationsFactory::eINSTANCE
-		val f2 = XbaseFactory::eINSTANCE
-		val context = expression('"foo"')
-		
-		val anno = f.createXAnnotation
-		anno.annotationType = references.findDeclaredType(typeof(Inject), context) as JvmAnnotationType
-		val array = f2.createXListLiteral
-		anno.value = array
-		
-		val type = typesFactory.createJvmGenericType
-		newArrayList(anno).translateAnnotationsTo(type)
-		
-		assertEquals(anno.annotationType, type.annotations.head.annotation)
-		assertTrue(type.annotations.head.values.empty)
-	}
-	
 	@Test
 	def void testAnnotationCreation() {
 		val e = expression("'foo'")

@@ -66,6 +66,9 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -269,7 +272,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected boolean canUseArrayInitializer(XListLiteral literal, ITreeAppendable appendable) {
-		if (literal.eContainingFeature() == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT) {
+		if (literal.eContainingFeature() == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT
+			|| literal.eContainingFeature() == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE
+			|| literal.eContainingFeature() == XAnnotationsPackage.Literals.XANNOTATION__VALUE
+			) {
 			return canUseArrayInitializerImpl(literal, appendable);
 		}
 		return false;
@@ -425,6 +431,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaExpression((XCastedExpression) obj, appendable);
 		} else if (obj instanceof XClosure) {
 			_toJavaExpression((XClosure) obj, appendable);
+		} else if (obj instanceof XAnnotation) {
+			_toJavaExpression((XAnnotation) obj, appendable);
 		} else if (obj instanceof XConstructorCall) {
 			_toJavaExpression((XConstructorCall) obj, appendable);
 		} else if (obj instanceof XIfExpression) {
@@ -1300,6 +1308,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+		if (expr instanceof XAnnotation) {
+			return false;
+		}
 		if (expr instanceof XListLiteral) {
 			return false;
 		}
@@ -1327,5 +1338,31 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@SuppressWarnings("deprecation")
 	protected org.eclipse.xtext.xbase.typing.Closures getClosures() {
 		return closures;
+	}
+	
+	protected void _toJavaExpression(final XAnnotation annotation, final ITreeAppendable b) {
+		b.append("@");
+		b.append(annotation.getAnnotationType());
+		XExpression value = annotation.getValue();
+		if (value != null) {
+			b.append("(");
+			internalToJavaExpression(value, b);
+			b.append(")");
+		} else {
+			EList<XAnnotationElementValuePair> valuePairs = annotation.getElementValuePairs();
+			if (valuePairs.isEmpty())
+				return;
+			b.append("(");
+			for (int i = 0; i < valuePairs.size(); i++) {
+				XAnnotationElementValuePair pair = valuePairs.get(i);
+				b.append(pair.getElement().getSimpleName());
+				b.append(" = ");
+				internalToJavaExpression(pair.getValue(), b);
+				if (i < valuePairs.size()-1) {
+					b.append(", ");
+				}
+			}
+			b.append(")");
+		}
 	}
 }

@@ -11,14 +11,15 @@ import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -121,11 +122,11 @@ public class JvmModelTests extends AbstractXtendTestCase {
       String _identifier = _returnType.getIdentifier();
       Assert.assertEquals("java.lang.String[]", _identifier);
       JvmAnnotationValue _defaultValue = inferred.getDefaultValue();
-      Assert.assertTrue((_defaultValue instanceof JvmStringAnnotationValue));
+      Assert.assertTrue((_defaultValue instanceof JvmCustomAnnotationValue));
       JvmAnnotationValue _defaultValue_1 = inferred.getDefaultValue();
-      EList<String> _values = ((JvmStringAnnotationValue) _defaultValue_1).getValues();
-      boolean _isEmpty = _values.isEmpty();
-      Assert.assertTrue(_isEmpty);
+      EList<Object> _values = ((JvmCustomAnnotationValue) _defaultValue_1).getValues();
+      Object _head_1 = IterableExtensions.<Object>head(_values);
+      Assert.assertTrue((_head_1 instanceof XListLiteral));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

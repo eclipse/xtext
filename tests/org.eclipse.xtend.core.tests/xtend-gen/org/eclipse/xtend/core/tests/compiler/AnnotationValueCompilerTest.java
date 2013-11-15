@@ -17,6 +17,41 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class AnnotationValueCompilerTest extends AbstractXtendCompilerTest {
   @Test
+  public void testAnnotationValues_annoArr() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("@test.Annotation(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("annotation2ArrayValue = #[@test.Annotation2(\'foo\')]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(") class Bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import test.Annotation;");
+    _builder_1.newLine();
+    _builder_1.append("import test.Annotation2;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Annotation(annotation2ArrayValue = { @Annotation2(\"foo\") })");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testAnnotationValues_1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -73,7 +108,7 @@ public class AnnotationValueCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import test.Annotation2;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@Annotation(booleanValue = true, intValue = 1, longValue = 42, stringValue = \"foo\", booleanArrayValue = true, intArrayValue = 1, longArrayValue = 42, stringArrayValue = \"foo\", typeValue = String.class, typeArrayValue = String.class, annotation2Value = @Annotation2(\"foo\"), annotation2ArrayValue = @Annotation2(\"foo\"))");
+    _builder_1.append("@Annotation(booleanValue = true, intValue = 1, longValue = 42, stringValue = \"foo\", booleanArrayValue = { true }, intArrayValue = { 1 }, longArrayValue = { 42 }, stringArrayValue = { \"foo\" }, typeValue = String.class, typeArrayValue = { String.class }, annotation2Value = @Annotation2(\"foo\"), annotation2ArrayValue = { @Annotation2(\"foo\") })");
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();

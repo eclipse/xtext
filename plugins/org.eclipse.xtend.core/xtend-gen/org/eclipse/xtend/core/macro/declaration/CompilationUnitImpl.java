@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
+import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
@@ -133,10 +134,10 @@ import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -236,8 +237,13 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private IXtendJvmAssociations associations;
   
-  @Inject
   private ConstantExpressionsInterpreter interpreter;
+  
+  @Inject
+  public void setConstantExpressionsInterpreter(final ConstantExpressionsInterpreter interpreter) {
+    interpreter.setCompilationUnit(this);
+    this.interpreter = interpreter;
+  }
   
   @Inject
   private IEObjectDocumentationProvider documentationProvider;
@@ -1267,6 +1273,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public Object evaluate(final XExpression expression) {
-    return this.interpreter.evaluate(expression, null);
+    IEvaluationResult _evaluate = this.interpreter.evaluate(expression);
+    return _evaluate.getResult();
   }
 }

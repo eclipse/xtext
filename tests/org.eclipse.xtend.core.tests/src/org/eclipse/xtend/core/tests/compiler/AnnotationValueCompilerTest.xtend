@@ -15,6 +15,26 @@ import org.junit.Test
 class AnnotationValueCompilerTest extends AbstractXtendCompilerTest {
 
 	@Test
+	def testAnnotationValues_annoArr() {
+		assertCompilesTo('''
+			package foo
+			@test.Annotation(
+				annotation2ArrayValue = #[@test.Annotation2('foo')]
+				) class Bar {
+			}
+		''', '''
+			package foo;
+			
+			import test.Annotation;
+			import test.Annotation2;
+			
+			@Annotation(annotation2ArrayValue = { @Annotation2("foo") })
+			@SuppressWarnings("all")
+			public class Bar {
+			}
+		''')
+	}
+	@Test
 	def testAnnotationValues_1() {
 		assertCompilesTo('''
 			package foo
@@ -39,7 +59,7 @@ class AnnotationValueCompilerTest extends AbstractXtendCompilerTest {
 			import test.Annotation;
 			import test.Annotation2;
 			
-			@Annotation(booleanValue = true, intValue = 1, longValue = 42, stringValue = "foo", booleanArrayValue = true, intArrayValue = 1, longArrayValue = 42, stringArrayValue = "foo", typeValue = String.class, typeArrayValue = String.class, annotation2Value = @Annotation2("foo"), annotation2ArrayValue = @Annotation2("foo"))
+			@Annotation(booleanValue = true, intValue = 1, longValue = 42, stringValue = "foo", booleanArrayValue = { true }, intArrayValue = { 1 }, longArrayValue = { 42 }, stringArrayValue = { "foo" }, typeValue = String.class, typeArrayValue = { String.class }, annotation2Value = @Annotation2("foo"), annotation2ArrayValue = { @Annotation2("foo") })
 			@SuppressWarnings("all")
 			public class Bar {
 			}

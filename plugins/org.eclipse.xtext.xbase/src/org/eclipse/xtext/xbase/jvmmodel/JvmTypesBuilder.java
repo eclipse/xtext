@@ -8,26 +8,19 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -64,8 +57,6 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XListLiteral;
-import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
@@ -79,11 +70,6 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -123,13 +109,6 @@ public class JvmTypesBuilder {
 	
 	@Inject
 	private AnnotationLookup annotationLookup;
-	
-	@Inject 
-	private ConstantExpressionsInterpreter constantExpressionsInterpreter;
-	
-	@Inject
-	private CommonTypeComputationServices commonTypeComputationServices;
-	
 	
 	/**
 	 * Overrides  the default <code>operator_add()</code> to ignore <code>null</code> elements.
@@ -1273,191 +1252,13 @@ public class JvmTypesBuilder {
 	 * @since 2.4
 	 */
 	@Nullable 
-	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value, @Nullable JvmTypeReference explicitType, boolean evaluate) {
+	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value) {
 		if (value != null) {
-			AnnotationValueTranslator translator = null;
-			JvmAnnotationValue result = null;
-			if (value instanceof XListLiteral) {
-				List<XExpression> elements = ((XListLiteral) value).getElements();
-				if(elements.isEmpty()) {
-					ResourceSet resourceSetOrNull = EcoreUtil2.getResourceSet(value);
-					StandardTypeReferenceOwner typeReferenceOwner = new StandardTypeReferenceOwner(commonTypeComputationServices, resourceSetOrNull);
-					final OwnedConverter ownedConverter = new OwnedConverter(typeReferenceOwner);
-					LightweightTypeReference type = ownedConverter.apply(explicitType);
-					if(type.isArray()) {
-						return createEmptyAnnotationValueArray(((ArrayTypeReference)type).getComponentType());
-					}
-				}
-				for (XExpression expr : elements) {
-					if(translator == null) 
-						translator = translator(expr, evaluate);
-					if(translator != null) {
-						if(result == null) { 
-							result = translator.createValue(expr);
-							if (result == null) {
-								return null;
-							}
-						}
-						translator.appendValue(result, expr);
-					}
-				}
-			} else {
-				translator = translator(value, evaluate);
-				if(translator != null) {
-					result = translator.createValue(value);
-					if (result == null) {
-						return result;
-					}
-					translator.appendValue(result, value);
-				}
-			}
-			return result;
+			JvmCustomAnnotationValue annotationValue = typesFactory.createJvmCustomAnnotationValue();
+			annotationValue.getValues().add(value);
+			return annotationValue;
 		}
 		return null;
-	}
-	
-	protected JvmAnnotationValue createEmptyAnnotationValueArray(LightweightTypeReference componentType) {
-		if(componentType.isWrapper()) {
-			return createEmptyAnnotationValueArray(componentType.getPrimitiveIfWrapperType());
-		} else {
-			String identifier = componentType.getIdentifier();
-			if(equal("java.lang.String", identifier)) {
-				return typesFactory.createJvmStringAnnotationValue();
-			} else if(componentType.isPrimitive()) {
-				if(equal("boolean", identifier)) 
-					return typesFactory.createJvmBooleanAnnotationValue();
-				else if(equal("byte", identifier)) 
-					return typesFactory.createJvmByteAnnotationValue();
-				else if(equal("short", identifier)) 
-					return typesFactory.createJvmShortAnnotationValue();
-				else if(equal("char", identifier)) 
-					return typesFactory.createJvmCharAnnotationValue();
-				else if(equal("int", identifier)) 
-					return typesFactory.createJvmIntAnnotationValue();
-				else if(equal("long", identifier)) 
-					return typesFactory.createJvmLongAnnotationValue();
-				else if(equal("float", identifier)) 
-					return typesFactory.createJvmFloatAnnotationValue();
-				else if(equal("double", identifier)) 
-					return typesFactory.createJvmDoubleAnnotationValue();
-			}
-		}
-		return typesFactory.createJvmCustomAnnotationValue();
-	}
-	
-	@Nullable 
-	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value) {
-		return toJvmAnnotationValue(value, false);
-	}
-	
-	@Nullable 
-	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value, boolean evaluate) {
-		return toJvmAnnotationValue(value, null, evaluate);
-	}
-
-	@Nullable 
-	protected AnnotationValueTranslator translator(@Nullable XExpression obj, final boolean evaluate) {
-		if (obj == null)
-			return null;
-		if (obj.eClass() == XAnnotationsPackage.Literals.XANNOTATION) {
-			return new AnnotationValueTranslator() {
-				public JvmAnnotationValue createValue(XExpression expr) {
-					return typesFactory.createJvmAnnotationAnnotationValue();
-				}
-
-				public void appendValue(JvmAnnotationValue value, XExpression expr) {
-					JvmAnnotationAnnotationValue annotationValue = (JvmAnnotationAnnotationValue) value;
-					JvmAnnotationReference annotationReference = getJvmAnnotationReference((XAnnotation) expr);
-					annotationValue.getValues().add(annotationReference);
-				}
-			};
-		} else if (evaluate) {
-			StandardTypeReferenceOwner typeReferenceOwner = new StandardTypeReferenceOwner(commonTypeComputationServices, obj);
-			final OwnedConverter ownedConverter = new OwnedConverter(typeReferenceOwner);
-			return new AnnotationValueTranslator() {
-				
-				LightweightTypeReference expectedType = null;
-				
-				@Nullable
-				public JvmAnnotationValue createValue(XExpression expr) {
-					Object value;
-					try {
-						value = constantExpressionsInterpreter.evaluate(expr, null);
-					} catch (Exception exc) {
-						// ignore
-						return null;
-					}
-					if(value instanceof Boolean) {
-						setExpectedType(Boolean.TYPE, expr);
-						return typesFactory.createJvmBooleanAnnotationValue();
-					} else if(value instanceof Byte) {
-						setExpectedType(Byte.TYPE, expr);
-						return typesFactory.createJvmByteAnnotationValue();
-					} else if(value instanceof Short) {
-						setExpectedType(Short.TYPE, expr);
-						return typesFactory.createJvmShortAnnotationValue();
-					} else if(value instanceof Character) {
-						setExpectedType(Character.TYPE, expr);
-						return typesFactory.createJvmCharAnnotationValue();
-					} else if(value instanceof Integer) {
-						setExpectedType(Integer.TYPE, expr);
-						return typesFactory.createJvmIntAnnotationValue();
-					} else if(value instanceof Long) {
-						setExpectedType(Long.TYPE, expr);
-						return typesFactory.createJvmLongAnnotationValue();
-					} else if(value instanceof Float) {
-						setExpectedType(Float.TYPE, expr);
-						return typesFactory.createJvmFloatAnnotationValue();
-					} else if(value instanceof Double) {
-						setExpectedType(Double.TYPE, expr);
-						return typesFactory.createJvmDoubleAnnotationValue();
-					} else if(value instanceof String) {
-						setExpectedType(String.class, expr);
-						return typesFactory.createJvmStringAnnotationValue();
-					} else 
-						return typesFactory.createJvmCustomAnnotationValue();
-				}
-				
-				protected void setExpectedType(Class<?> expectedJavaType, XExpression expr) {
-					this.expectedType = ownedConverter.apply(newTypeRef(expr, expectedJavaType));
-				}
-
-				public void appendValue(JvmAnnotationValue annotationValue, XExpression expr) {
-					Object value;
-					try {
-						value = constantExpressionsInterpreter.evaluate(expr, expectedType);
-					} catch (Exception exc) {
-						// ignore
-						return;
-					}
-					if (value != null) {
-						EStructuralFeature valueAttribute = annotationValue.eClass().getEStructuralFeature("values");
-						EClassifier valueAttributeType = valueAttribute.getEType();
-						if(valueAttributeType.isInstance(value)) {
-							@SuppressWarnings("unchecked")
-							List<Object> values = (List<Object>) annotationValue.eGet(valueAttribute);
-							values.add(value);
-						}
-					}
-				}
-			};
-		} else {
-			return new AnnotationValueTranslator() {
-				public JvmAnnotationValue createValue(XExpression expr) {
-					return typesFactory.createJvmCustomAnnotationValue();
-				}
-				
-				public void appendValue(JvmAnnotationValue annotationValue, XExpression expr) {
-					((JvmCustomAnnotationValue)annotationValue).getValues().add(expr);
-				}
-			};
-		}
-	}
-	protected interface AnnotationValueTranslator {
-		@Nullable
-		JvmAnnotationValue createValue(XExpression expr);
-
-		void appendValue(JvmAnnotationValue value, XExpression expr);
 	}
 	
 }
