@@ -10,7 +10,6 @@ import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation
 
 class ConstantExpressionsInterpreter {
 	
@@ -65,15 +64,6 @@ class ConstantExpressionsInterpreter {
 				val leftVal = evaluate(expression.leftOperand, null)
 				val rightVal = evaluate(expression.rightOperand, null)
 				return leftVal.plus(rightVal)
-			}
-			XAnnotationElementValueBinaryOperation: {
-				switch expression.operator {
-					case "+": {
-						val leftVal = evaluate(expression.leftOperand, null)
-						val rightVal = evaluate(expression.rightOperand, null)
-						return leftVal.plus(rightVal)
-					}
-				}
 			}
 			default : throw new IllegalArgumentException("Couldn't interpret expression : "+expression+".")
 		}

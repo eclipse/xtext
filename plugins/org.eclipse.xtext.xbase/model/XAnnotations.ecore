@@ -14,13 +14,4 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XAnnotationElementValueBinaryOperation"
-      eSuperTypes="Xbase.ecore#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass Xbase.ecore#//XExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass Xbase.ecore#//XExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="+"/>
-  </eClassifiers>
 </ecore:EPackage>

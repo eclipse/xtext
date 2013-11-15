@@ -44,7 +44,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 
 @Singleton
@@ -132,8 +131,6 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _type((XVariableDeclaration)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAnnotation) {
       return _type((XAnnotation)binaryOperation, rawExpectation, rawType);
-    } else if (binaryOperation instanceof XAnnotationElementValueBinaryOperation) {
-      return _type((XAnnotationElementValueBinaryOperation)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation != null) {
       return _type(binaryOperation, rawExpectation, rawType);
     } else {
@@ -179,8 +176,6 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _expectedType((XVariableDeclaration)assignment, reference, index, rawType);
     } else if (assignment instanceof XAnnotation) {
       return _expectedType((XAnnotation)assignment, reference, index, rawType);
-    } else if (assignment instanceof XAnnotationElementValueBinaryOperation) {
-      return _expectedType((XAnnotationElementValueBinaryOperation)assignment, reference, index, rawType);
     } else if (assignment instanceof XCasePart) {
       return _expectedType((XCasePart)assignment, reference, index, rawType);
     } else if (assignment instanceof XCatchClause) {
