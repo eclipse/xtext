@@ -1931,13 +1931,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public String returnString(final String x, final String y) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _plus = (x + \"\");");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("String _plus_1 = (_plus + y);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _plus_1;");
+    _builder_1.append("return ((x + \"\") + y);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

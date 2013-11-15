@@ -102,9 +102,9 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 		class Test {
 			
 			def void doStuff() {
-				println(		// 8
-					'foo' 		// 7
-					+ 'bar')	// 7
+				println(		// 7
+					'foo' 		// 8
+					+ 'bar')	// 8
 			}
 		}
 		''')

@@ -1,9 +1,9 @@
-package testdata;
+package test;
 
 /**
  * @since 2.5
  */
-public @interface Annotation3 {
+public @interface Annotation {
 	boolean booleanValue() default true;
 	int intValue() default 1;
 	long longValue() default 42;
@@ -17,9 +17,10 @@ public @interface Annotation3 {
 	Class<?> typeValue() default String.class;
 	Class<?>[] typeArrayValue() default {String.class};
 	
-	Annotation2 annotation2Value() default @Annotation2({"foo"});
-	Annotation2[] annotation2ArrayValue() default {@Annotation2({"foo"})};
+	Annotation2 annotation2Value() default @Annotation2;
+	Annotation2[] annotation2ArrayValue() default {@Annotation2};
 	
-	Enum1 enumValue() default Enum1.BLUE; 
-	Enum1[] enumArrayValue() default {Enum1.BLUE}; 
+	Enum1 enumValue() default Enum1.BLUE;
+	Enum1[] enumArrayValue() default {Enum1.BLUE, Enum1.RED};
 }
+

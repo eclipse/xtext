@@ -714,8 +714,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_01() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _plus = (1 #+# 1);\n" + 
-				"return _plus;", 
+				"return (1 #+# 1);", 
 				"#1 + 1#");
 	}
 	
@@ -723,8 +722,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_02() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _plus = (1 + 1);\n" + 
-				"return _pl#u#s;", 
+				"return (1 + 1#)#;", 
 				"#1 + 1#");
 	}
 	
@@ -732,8 +730,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_03() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"i#nt _pl#us = (1 + 1);\n" + 
-				"return _plus;", 
+				"return (#1 +# 1);", 
 				"#1 + 1#");
 	}
 	
@@ -741,8 +738,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_04() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _plus = (#1# + 1);\n" + 
-				"return _plus;", 
+				"return (#1# + 1);", 
 				"#1# + 1");
 	}
 	
@@ -750,8 +746,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_05() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _plus = (1## + 1);\n" + 
-				"return _plus;", 
+				"return (1## + 1);", 
 				"#1# + 1");
 	}
 	
@@ -759,8 +754,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_06() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _plus = (##1 + 1);\n" + 
-				"return _plus;", 
+				"return (##1 + 1);", 
 				"#1# + 1");
 	}
 	
@@ -768,8 +762,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_07() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _plus = (1 + ##1);\n" + 
-				"return _plus;", 
+				"return (1 + ##1);", 
 				"1 + #1#");
 	}
 	
@@ -777,8 +770,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_08() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _plus = (1 + 1##);\n" + 
-				"return _plus;", 
+				"return (1 + 1##);", 
 				"1 + #1#");
 	}
 	
@@ -786,8 +778,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testBinaryExpression_09() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _plus = (1 + #1#);\n" + 
-				"return _plus;", 
+				"return (1 + #1#);", 
 				"( (( 1 )) + (  #1#/*comment*/  ))");
 	}
 	
@@ -831,8 +822,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testUnaryExpression_01() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _minus = (#-#1);\n" + 
-				"return _minus;", 
+				"return (#-#1);", 
 				"#- 1#");
 	}
 	
@@ -840,8 +830,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testUnaryExpression_02() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _minus = (-#1#);\n" + 
-				"return _minus;", 
+				"return (-#1#);", 
 				"-\n#1#");
 	}
 	
@@ -849,8 +838,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testUnaryExpression_03() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"int _minus = #(#-1);\n" + 
-				"return _minus;", 
+				"return #(#-1);", 
 				"(( #- (1)#))");
 	}
 	

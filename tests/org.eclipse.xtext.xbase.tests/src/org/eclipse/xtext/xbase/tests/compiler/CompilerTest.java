@@ -512,8 +512,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	@Test public void testInline_01() throws Exception {
 		assertCompilesTo(
 				"\n" + 
-				"String _plus = (\"a\" + \"b\");\n" + 
-				"String _string = _plus.toString();\n" + 
+				"String _string = (\"a\" + \"b\").toString();\n" + 
 				"return _string;",
 				"('a'+'b').toString");
 	}
@@ -701,10 +700,10 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testNewLines_withinline1() throws Exception {
 		assertCompilesTo(
-				"String _plus = (\"foo\" + \n" + 
-				"  \"bar\");\n" + 
-				"java.util.ArrayList<String> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(_plus);\n" + 
-				"return _newArrayList;", 
+				"java.util.ArrayList<String> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\n" + 
+				"  (\"foo\" + \n" + 
+				"    \"bar\"));\n" + 
+				"return _newArrayList;",
 				"newArrayList(\n'foo' + \n'bar')");
 	}
 	

@@ -5661,10 +5661,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public String returnString(final String x, final String y) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _plus = (x + \"\");");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return (_plus + y);");
+    _builder_1.append("return ((x + \"\") + y);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -5708,10 +5705,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public String returnString(final String x, final String y) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _plus = (x + \"\");");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("final String z = (_plus + y);");
+    _builder_1.append("final String z = ((x + \"\") + y);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return z;");
@@ -5812,10 +5806,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void apply(final String break_) {");
     _builder_1.newLine();
     _builder_1.append("              ");
-    _builder_1.append("String _plus = (break_ + continue_);");
-    _builder_1.newLine();
-    _builder_1.append("              ");
-    _builder_1.append("_plus.toString();");
+    _builder_1.append("(break_ + continue_).toString();");
     _builder_1.newLine();
     _builder_1.append("            ");
     _builder_1.append("}");
@@ -7709,13 +7700,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Map<Object,Object> map2 = _xsetliteral;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("int _multiply = (1 * 2);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("Pair<String,Integer> _mappedTo = Pair.<String, Integer>of(\"Banana\", Integer.valueOf(2));");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet(_multiply, _mappedTo));");
+    _builder_1.append("final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -7736,7 +7724,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  @Test(timeout = 10000)
+  @Test(timeout = 20000)
   public void testBug412853() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Bug {");
