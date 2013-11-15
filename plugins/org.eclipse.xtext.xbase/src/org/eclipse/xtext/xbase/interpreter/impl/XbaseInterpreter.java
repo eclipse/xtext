@@ -435,7 +435,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return internalEvaluate(ifExpression.getThen(), context, indicator);
 		} else {
 			if (ifExpression.getElse() == null)
-				return null;
+				return getDefaultObjectValue(typeResolver.resolveTypes(ifExpression).getActualType(ifExpression));
 			return internalEvaluate(ifExpression.getElse(), context, indicator);
 		}
 	}
@@ -474,7 +474,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			Object defaultResult = internalEvaluate(switchExpression.getDefault(), forkedContext, indicator);
 			return defaultResult;
 		}
-		return null;
+		return getDefaultObjectValue(typeResolver.resolveTypes(switchExpression).getActualType((XExpression)switchExpression));
 	}
 
 	protected Object _doEvaluate(XCastedExpression castedExpression, IEvaluationContext context, CancelIndicator indicator) {
