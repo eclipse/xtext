@@ -383,7 +383,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverloadedOperators_14() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(0..Math::sqrt(1l).intValue).filter[ i | if (true) return 1l % i == 0 ].isEmpty", "(Integer)=>Boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(0..Math::sqrt(1l).intValue).filter[ i | if (true) return 1l % i == 0 ].isEmpty", "(Integer)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Boolean>");
   }
   
@@ -395,7 +395,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverloadedOperators_16() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>int", "(Integer, Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   
@@ -413,13 +413,13 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverloadedOperators_19() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>Integer", "(Integer, Integer)=>int");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>int", "(Integer, Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   
   @Test
   public void testOverloadedOperators_20() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>int", "(Integer, Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   
@@ -481,7 +481,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverloadedOperators_30() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>int", "(Integer, Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   
@@ -493,25 +493,25 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverloadedOperators_32() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>Integer", "(Integer, Integer)=>int");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>int", "(Integer, Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   
   @Test
   public void testOverloadedOperators_33() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>int", "(Integer, Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   
   @Test
   public void testOverloadedOperators_34() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>Integer", "(Integer, Integer)=>int");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>int", "(Integer, Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   
   @Test
   public void testOverloadedOperators_35() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>int", "(Integer, Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   
@@ -523,7 +523,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverloadedOperators_37() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>int", "(Integer, Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
   }
   

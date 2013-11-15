@@ -67,7 +67,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   
   @Test
   public void testIfExpression_17() throws Exception {
-    this.resolvesTo("if (true) return 1", "Integer");
+    this.resolvesTo("if (true) return 1", "int");
   }
   
   @Test
@@ -78,6 +78,11 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   @Test
   public void testSwitchExpression_1() throws Exception {
     this.resolvesTo("switch true { case true : return \'s\' default: null}", "String");
+  }
+  
+  @Test
+  public void testSwitchExpression_2() throws Exception {
+    this.resolvesTo("switch null {\n\t\t  Object : return null \n\t\t}", "null");
   }
   
   @Test

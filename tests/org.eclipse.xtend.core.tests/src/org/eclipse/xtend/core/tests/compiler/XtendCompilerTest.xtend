@@ -370,6 +370,95 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def void testIfWithVoidButNonVoidExpectation_04() {
+		assertCompilesTo('''
+			public class C  {
+				def m(Object x) {
+					val r = switch x { String: return '' };
+					r
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m(final Object x) {
+			    Object _xblockexpression = null;
+			    {
+			      Object _switchResult = null;
+			      boolean _matched = false;
+			      if (!_matched) {
+			        if (x instanceof String) {
+			          _matched=true;
+			          return "";
+			        }
+			      }
+			      final Object r = _switchResult;
+			      _xblockexpression = (r);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIfWithVoidButNonVoidExpectation_05() {
+		assertCompilesTo('''
+			public class C  {
+				def void m(Object o) {
+					val Object x = switch o { String: return };
+					x.toString
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Object o) {
+			    void _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (o instanceof String) {
+			        _matched=true;
+			        return;
+			      }
+			    }
+			    final Object x = _switchResult;
+			    x.toString();
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIfWithVoidButNonVoidExpectation_06() {
+		assertCompilesTo('''
+			public class C  {
+				def m(Object o) {
+					val x = switch o { String: return };
+					voidFunction(x)
+				}
+				def void voidFunction(Object o) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Object o) {
+			    Object _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (o instanceof String) {
+			        _matched=true;
+			        return;
+			      }
+			    }
+			    final Object x = _switchResult;
+			    this.voidFunction(x);
+			  }
+			  
+			  public void voidFunction(final Object o) {
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testWorkWithArrays_01() {
 		assertCompilesTo('''
 			public class Foo  {
@@ -1085,11 +1174,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(a,"c")) {
 			        _matched=true;
-			        String _xifexpression = null;
 			        if (true) {
 			          return "a";
 			        }
-			        _switchResult = _xifexpression;
 			      }
 			    }
 			    if (!_matched) {
