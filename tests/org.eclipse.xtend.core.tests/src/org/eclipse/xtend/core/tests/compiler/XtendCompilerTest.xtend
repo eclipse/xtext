@@ -3553,8 +3553,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					    String _xblockexpression = null;
 					    {
 					      int i = 1;
-					      String _plus = ("" + Integer.valueOf(i));
-					      _xblockexpression = (_plus);
+					      _xblockexpression = (("" + Integer.valueOf(i)));
 					    }
 					    String _string_2 = null;
 					    if (_xblockexpression!=null) {

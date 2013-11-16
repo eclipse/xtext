@@ -720,6 +720,100 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     this.asCompilationUnit(_validFile, _function);
   }
   
+  @Test
+  public void testAnnotationReferenceValues() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("@test.Annotation(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("intValue = 2 / 2 + 2 * 3 - 4 % 1,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("longValue = 42 + 4 + 6 * 42 - 4 / 45,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("stringValue = \'foo\' + \'baz\',");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("booleanArrayValue = #[true, false],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("intArrayValue = #[ -1, 34 + 45, 2 - 6 ],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("longArrayValue = #[42, 5 * -3],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("stringArrayValue = #[\'foo\', \'bla\' + \'buzz\'],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("typeValue = String,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("typeArrayValue = #[String, Integer],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("annotation2Value = @test.Annotation2(\'foo\' + \'wuppa\'),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("annotation2ArrayValue = #[@test.Annotation2(\'foo\'), @test.Annotation2(\'foo\'+\'wuppa\')]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(") class Bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration baseClass = _typeLookup.findClass("foo.Bar");
+        Iterable<? extends MutableAnnotationReference> _annotations = baseClass.getAnnotations();
+        final MutableAnnotationReference annoRef = IterableExtensions.head(_annotations);
+        int _divide = (2 / 2);
+        int _multiply = (2 * 3);
+        int _plus = (_divide + _multiply);
+        int _modulo = (4 % 1);
+        int _minus = (_plus - _modulo);
+        Object _value = annoRef.getValue("intValue");
+        Assert.assertEquals(Integer.valueOf(_minus), _value);
+        int _plus_1 = (42 + 4);
+        int _multiply_1 = (6 * 42);
+        int _plus_2 = (_plus_1 + _multiply_1);
+        int _divide_1 = (4 / 45);
+        int _minus_1 = (_plus_2 - _divide_1);
+        Object _value_1 = annoRef.getValue("longValue");
+        Assert.assertEquals(Integer.valueOf(_minus_1), _value_1);
+        Object _value_2 = annoRef.getValue("stringValue");
+        Assert.assertEquals("foobaz", _value_2);
+        Object _value_3 = annoRef.getValue("booleanArrayValue");
+        final Boolean[] bools = ((Boolean[]) _value_3);
+        Boolean _get = bools[0];
+        Assert.assertTrue((_get).booleanValue());
+        Boolean _get_1 = bools[1];
+        Assert.assertFalse((_get_1).booleanValue());
+        int _minus_2 = (-1);
+        int _plus_3 = (34 + 45);
+        int _minus_3 = (2 - 6);
+        Object _value_4 = annoRef.getValue("intArrayValue");
+        Assert.assertArrayEquals(new Object[] { Integer.valueOf(_minus_2), Integer.valueOf(_plus_3), Integer.valueOf(_minus_3) }, ((Integer[]) _value_4));
+        Object _value_5 = annoRef.getValue("typeArrayValue");
+        final Type[] type = ((Type[]) _value_5);
+        TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
+        Type _findTypeGlobally = _typeLookup_1.findTypeGlobally(Integer.class);
+        Object _get_2 = type[1];
+        Assert.assertSame(_findTypeGlobally, _get_2);
+        final Object anno = annoRef.getValue("annotation2Value");
+        Assert.assertTrue((anno instanceof AnnotationReference));
+        Object _value_6 = ((AnnotationReference) anno).getValue("value");
+        Assert.assertEquals("foowuppa", _value_6);
+      }
+    };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
   public void checkPrimitive(final TypeReference primitiveType, final String wrapperTypeName) {
     String _string = primitiveType.toString();
     boolean _isPrimitive = primitiveType.isPrimitive();

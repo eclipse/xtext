@@ -362,7 +362,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 		if(type != null && type.isArray()) {
 			try {
-				LightweightTypeReference componentType = type.getComponentType();
+				LightweightTypeReference componentType = type.getComponentType().getWrapperTypeIfPrimitive();
 				return Iterables.toArray(list, (Class<Object>)getJavaType(componentType.getType()));
 			} catch (ClassNotFoundException e) {
 			}

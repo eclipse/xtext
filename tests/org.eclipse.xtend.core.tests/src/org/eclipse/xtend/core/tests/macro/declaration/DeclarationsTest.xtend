@@ -13,6 +13,8 @@ import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
+import org.eclipse.xtend.lib.macro.declaration.Type
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
@@ -314,6 +316,47 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			
 			baseClass.implementedInterfaces = #[]
 			assertTrue(baseClass.implementedInterfaces.empty)
+		]
+	}
+	
+	@Test def testAnnotationReferenceValues() {
+		validFile('''
+			package foo
+			@test.Annotation(
+				intValue = 2 / 2 + 2 * 3 - 4 % 1,
+				longValue = 42 + 4 + 6 * 42 - 4 / 45,
+				stringValue = 'foo' + 'baz',
+				booleanArrayValue = #[true, false],
+				intArrayValue = #[ -1, 34 + 45, 2 - 6 ],
+				longArrayValue = #[42, 5 * -3],
+				stringArrayValue = #['foo', 'bla' + 'buzz'],
+				typeValue = String,
+				typeArrayValue = #[String, Integer],
+				annotation2Value = @test.Annotation2('foo' + 'wuppa'),
+				annotation2ArrayValue = #[@test.Annotation2('foo'), @test.Annotation2('foo'+'wuppa')]
+				) class Bar {
+			}
+		''').asCompilationUnit [
+			val baseClass = typeLookup.findClass('foo.Bar')
+			val annoRef = baseClass.annotations.head
+			
+			assertEquals(2 / 2 + 2 * 3 - 4 % 1, annoRef.getValue("intValue"))
+			assertEquals(42 + 4 + 6 * 42 - 4 / 45, annoRef.getValue("longValue"))
+			assertEquals('foobaz', annoRef.getValue("stringValue"))
+			
+			val bools = annoRef.getValue("booleanArrayValue") as Boolean[]
+			assertTrue(bools.get(0))
+			assertFalse(bools.get(1))
+			
+			assertArrayEquals(#[ -1, 34 + 45, 2 - 6 ], annoRef.getValue("intArrayValue") as Integer[])
+			
+			val type = annoRef.getValue('typeArrayValue') as Type[]
+			
+			assertSame(typeLookup.findTypeGlobally(Integer), type.get(1)) 
+			
+			val anno = annoRef.getValue('annotation2Value')
+			assertTrue(anno instanceof AnnotationReference)
+			assertEquals('foowuppa', (anno as AnnotationReference).getValue('value'))
 		]
 	}
 	

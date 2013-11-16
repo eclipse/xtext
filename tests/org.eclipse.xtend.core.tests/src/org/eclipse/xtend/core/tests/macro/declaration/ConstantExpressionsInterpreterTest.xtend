@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.tests.macro.declaration
 import com.google.inject.Inject
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.junit.Test
 

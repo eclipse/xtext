@@ -7704,10 +7704,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("int i = 1;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("String _plus = (\"\" + Integer.valueOf(i));");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_plus);");
+    _builder_1.append("_xblockexpression = ((\"\" + Integer.valueOf(i)));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
