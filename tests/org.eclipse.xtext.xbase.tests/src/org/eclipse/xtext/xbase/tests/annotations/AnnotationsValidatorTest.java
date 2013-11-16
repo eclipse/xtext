@@ -182,6 +182,14 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		validator.assertError(annotation, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
 	}
 	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=398086
+	 */
+	@Test public void testBug398086() throws Exception {
+		XAnnotation annotation = annotation("@SuppressWarnings(('' + 1 + 2)) ", false);
+		validator.assertNoErrors(annotation);
+	}
+	
 	@Test public void testEmptyValueList_03() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = #[])", false);
 		validator.assertNoErrors(annotation);
@@ -219,4 +227,5 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		assertEquals(1, singleIssue.getOffset().intValue());
 		assertEquals("java.lang.Object".length(), singleIssue.getLength().intValue());
 	}
+	
 }
