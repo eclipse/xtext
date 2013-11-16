@@ -28,7 +28,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a + b</code>
 	 */
 	@Pure /* not guaranteed, since toString() is invoked */
-	@Inline("($1 + $2)")
+	@Inline(value="($1 + $2)", constantExpression=true)
 	public static String operator_plus(String a, Object b) {
 		return a + b;
 	}

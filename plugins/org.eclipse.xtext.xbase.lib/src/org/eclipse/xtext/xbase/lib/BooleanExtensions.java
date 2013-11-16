@@ -28,7 +28,7 @@ import com.google.common.primitives.Booleans;
 	 * @return <code>a && b</code>
 	 */
 	@Pure
-	@Inline("($1 && $2)")
+	@Inline(value="($1 && $2)", constantExpression=true)
 	public static boolean operator_and(boolean a, boolean b) {
 		return a && b;
 	}
@@ -43,7 +43,7 @@ import com.google.common.primitives.Booleans;
 	 * @return <code>a || b</code>
 	 */
 	@Pure
-	@Inline("($1 || $2)")
+	@Inline(value="($1 || $2)", constantExpression=true)
 	public static boolean operator_or(boolean a, boolean b) {
 		return a || b;
 	}
@@ -56,7 +56,7 @@ import com.google.common.primitives.Booleans;
 	 * @return <code>!b</code>
 	 */
 	@Pure
-	@Inline("(!$1)")
+	@Inline(value="(!$1)", constantExpression=true)
 	public static boolean operator_not(boolean b) {
 		return !b;
 	}
@@ -71,7 +71,7 @@ import com.google.common.primitives.Booleans;
 	 * @return <code>a==b</code>
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value="($1 == $2)", constantExpression=true)
 	public static boolean operator_equals(boolean a, boolean b) {
 		return a == b;
 	}
@@ -86,7 +86,7 @@ import com.google.common.primitives.Booleans;
 	 * @return <code>a!=b</code>
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value="($1 != $2)", constantExpression=true)
 	public static boolean operator_notEquals(boolean a, boolean b) {
 		return a != b;
 	}
