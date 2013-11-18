@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
+import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 
 @SuppressWarnings("all")
 public class ConstantExpressionsInterpreter extends XbaseInterpreter {
@@ -62,12 +63,20 @@ public class ConstantExpressionsInterpreter extends XbaseInterpreter {
     return _annotationReference;
   }
   
-  protected Object translateJvmTypeToResult(final JvmType type) {
+  protected Object translateJvmTypeToResult(final JvmType type, final int arrayDimensions) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
     Type _type = _compilationUnit_1.toType(type);
-    return _typeReferenceProvider.newTypeReference(_type);
+    TypeReference resultTypeRef = _typeReferenceProvider.newTypeReference(_type);
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, arrayDimensions, true);
+    for (final Integer i : _doubleDotLessThan) {
+      CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
+      TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_2.getTypeReferenceProvider();
+      TypeReference _newArrayTypeReference = _typeReferenceProvider_1.newArrayTypeReference(resultTypeRef);
+      resultTypeRef = _newArrayTypeReference;
+    }
+    return resultTypeRef;
   }
   
   protected Class<? extends Object> getJavaType(final JvmType type) throws ClassNotFoundException {

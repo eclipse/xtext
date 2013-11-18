@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -67,6 +67,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
+import org.eclipse.xtext.xbase.typesystem.internal.ITypeLiteralLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -358,6 +359,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 					if (typeGuard instanceof JvmEnumerationType) {
 						localIsEnum = true; 
 						localPotentialEnumType = typeGuard;
+					}
+					if (typeGuard instanceof JvmTypeParameter) {
+						state.addDiagnostic(new EObjectDiagnosticImpl(
+								Severity.ERROR,
+								IssueCodes.INVALID_USE_OF_TYPE_PARAMETER,
+								"Cannot perform type switch against type parameter "+typeGuard.getSimpleName()+". Use its erasure Object instead since further generic type information will be erased at runtime.",
+								casePart.getTypeGuard(),
+								null,
+								-1,
+								new String[] { 
+								}));
 					}
 				}
 			}
@@ -900,6 +912,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (type == null) {
 			return;
 		}
+		checkTypeParameterNotAllowedAsLiteral(object, type, state);
 		ITypeReferenceOwner owner = state.getReferenceOwner();
 		LightweightTypeReference clazz = new ParameterizedTypeReference(owner, object.getType());
 		for (int i = 0; i < object.getArrayDimensions().size(); i++) {
@@ -921,10 +934,36 @@ public class XbaseTypeComputer implements ITypeComputer {
 		result.addTypeArgument(clazz);
 		state.acceptActualType(result);
 	}
+	
+	private void checkTypeParameterNotAllowedAsLiteral(EObject ctx, JvmType type, ITypeComputationState state) {
+		if (type instanceof JvmTypeParameter) {
+			state.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.INVALID_USE_OF_TYPE_PARAMETER,
+					"Illegal class literal for the type parameter " + type.getSimpleName()+".",
+					ctx,
+					null,
+					-1,
+					new String[] { 
+					}));
+		}
+	}
 
 	protected void _computeTypes(XInstanceOfExpression object, ITypeComputationState state) {
 		ITypeComputationState expressionState = state.withExpectation(getRawTypeForName(Object.class, state.getReferenceOwner()));
 		expressionState.computeTypes(object.getExpression());
+		JvmTypeReference type = object.getType();
+		if (type.getType() instanceof JvmTypeParameter) {
+			state.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.INVALID_USE_OF_TYPE_PARAMETER,
+					"Cannot perform instanceof check against type parameter "+type.getSimpleName()+". Use its erasure Object instead since further generic type information will be erased at runtime.",
+					object.getType(),
+					null,
+					-1,
+					new String[] { 
+					}));
+		}
 		LightweightTypeReference bool = getTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
 	}
@@ -1010,6 +1049,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(final XAbstractFeatureCall featureCall, ITypeComputationState state) {
 		List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(featureCall);
 		ILinkingCandidate best = getBestCandidate(candidates);
+		if (best instanceof ITypeLiteralLinkingCandidate) {
+			ITypeLiteralLinkingCandidate candidate = (ITypeLiteralLinkingCandidate) best;
+			checkTypeParameterNotAllowedAsLiteral(featureCall, candidate.getType(), state);
+		}
 		best.applyToComputationState();
 	}
 	

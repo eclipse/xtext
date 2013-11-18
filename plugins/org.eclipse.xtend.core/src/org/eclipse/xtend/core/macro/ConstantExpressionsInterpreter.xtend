@@ -20,8 +20,12 @@ class ConstantExpressionsInterpreter extends XbaseInterpreter {
 		getCompilationUnit.toAnnotationReference(literal)
 	}
 	
-	override protected translateJvmTypeToResult(JvmType type) {
-		return getCompilationUnit.typeReferenceProvider.newTypeReference(compilationUnit.toType(type))
+	override protected translateJvmTypeToResult(JvmType type, int arrayDimensions) {
+		var resultTypeRef = getCompilationUnit.typeReferenceProvider.newTypeReference(compilationUnit.toType(type))
+		for (i:0..<arrayDimensions) {
+			resultTypeRef = compilationUnit.typeReferenceProvider.newArrayTypeReference(resultTypeRef)
+		}
+		return resultTypeRef
 	}
 	
 	override protected getJavaType(JvmType type) throws ClassNotFoundException {

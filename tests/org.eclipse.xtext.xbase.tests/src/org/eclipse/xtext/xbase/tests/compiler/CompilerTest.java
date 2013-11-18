@@ -521,13 +521,10 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"\n" + 
 				"boolean _xifexpression = false;\n" + 
-				"boolean _not = (!true);\n" + 
-				"if (_not) {\n" + 
-				"  boolean _equals = (true == false);\n" + 
-				"  _xifexpression = _equals;\n" + 
-				"} else {\n" + 
-				"  boolean _notEquals = (true != false);\n" + 
-				"  _xifexpression = _notEquals;\n" + 
+				"if ((!true)) {\n" +
+				"  _xifexpression = (true == false);\n" +
+				"} else {\n" +
+				"  _xifexpression = (true != false);\n" +
 				"}\n" + 
 				"return _xifexpression;",
 				"if(!true) true==false else true!=false");

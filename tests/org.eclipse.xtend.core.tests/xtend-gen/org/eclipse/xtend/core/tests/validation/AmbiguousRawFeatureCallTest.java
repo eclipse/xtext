@@ -81,6 +81,8 @@ public class AmbiguousRawFeatureCallTest extends AmbiguityValidationTest {
   @Test
   public void testUnambiguousMethods_02() {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Collection");
+    _builder.newLine();
     _builder.append("class C {");
     _builder.newLine();
     _builder.append("\t");

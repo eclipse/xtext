@@ -343,13 +343,13 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals(42 + 4 + 6 * 42 - 4 / 45, annoRef.getValue("longValue"))
 			assertEquals('foobaz', annoRef.getValue("stringValue"))
 			
-			val bools = annoRef.getValue("booleanArrayValue") as Object[]
-			assertTrue(bools.get(0) as Boolean)
-			assertFalse(bools.get(1) as Boolean)
+			val bools = annoRef.getValue("booleanArrayValue") as boolean[]
+			assertTrue(bools.get(0))
+			assertFalse(bools.get(1))
 			
-			assertArrayEquals(#[ -1, 34 + 45, 2 - 6 ], annoRef.getValue("intArrayValue") as Object[])
+			assertArrayEquals(#[ -1, 34 + 45, 2 - 6 ], annoRef.getValue("intArrayValue") as int[])
 			
-			val type = annoRef.getValue('typeArrayValue') as Object[]
+			val type = annoRef.getValue('typeArrayValue') as TypeReference[]
 			
 			assertEquals(typeReferenceProvider.newTypeReference(Integer), type.get(1)) 
 			
