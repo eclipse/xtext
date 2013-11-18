@@ -1349,3 +1349,52 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 }
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class AmbiguousRawFeatureCallTest extends AmbiguityValidationTest {
+	@Test
+	def void testAmbiguousMethods_01() {
+		'''
+			class C {
+				def void n() {
+					m(newArrayList)
+				}
+				def void m(Iterable i) {}
+				def void m(java.io.Serializable s) {}
+			}
+		'''.assertAmbiguous('''
+		Ambiguous feature call.
+		The methods
+			m(Iterable) in C and
+			m(Serializable) in C
+		both match.''')
+	}
+	
+	@Test
+	def void testUnambiguousMethods_01() {
+		'''
+			class C {
+				def void n() {
+					m(newArrayList)
+				}
+				def void m(Iterable i) {}
+				def void m(Object o) {}
+			}
+		'''.assertUnambiguous
+	}
+
+	@Test
+	def void testUnambiguousMethods_02() {
+		'''
+			class C {
+				def void n() {
+					new C(newArrayList)
+				}
+				new(Collection i) {}
+				new(Object s) {}
+			}
+		'''.assertUnambiguous
+	}		
+}

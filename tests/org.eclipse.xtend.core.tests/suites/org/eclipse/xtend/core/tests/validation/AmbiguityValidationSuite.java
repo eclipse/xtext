@@ -19,7 +19,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	AmbiguousPlainFeatureCallTest.class,
 	AmbiguousExtensionFeatureCallTest.class,
 	AmbiguousOperatorsTest.class,
-	AmbiguousGenericFeatureCallTest.class
+	AmbiguousGenericFeatureCallTest.class,
+	AmbiguousRawFeatureCallTest.class
 })
 public class AmbiguityValidationSuite {
 
