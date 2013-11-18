@@ -46,7 +46,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -97,7 +96,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
-import com.google.common.collect.Iterables;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -117,19 +116,6 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 	
-	protected static class PrefixMethodFilter extends PolymorphicDispatcher.MethodNameFilter {
-
-		public PrefixMethodFilter(String prefix, int minParams, int maxParams) {
-			super(prefix, minParams, maxParams);
-		}
-
-		@Override
-		public boolean apply(Method param) {
-			return param.getName().startsWith(methodName) && param.getParameterTypes().length >= minParams
-					&& param.getParameterTypes().length <= maxParams;
-		}
-	}
-
 	public XbaseInterpreter() {
 	}
 
@@ -310,9 +296,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(literal);
 		LightweightTypeReference expectedType = resolvedTypes.getExpectedType(literal);
 		Class<? extends Number> type = numberLiterals.getJavaType(literal);
-		if (expectedType != null && !expectedType.isAny()) {
+		if (expectedType != null && expectedType.isSubtypeOf(Number.class)) {
 			try {
-				Class<?> expectedClassType = getJavaType(expectedType.getType());
+				Class<?> expectedClassType = getJavaType(expectedType.toJavaCompliantTypeReference().getType());
 				if (expectedClassType.isPrimitive()) {
 					expectedClassType = ReflectionUtil.getObjectType(expectedClassType);
 				}
@@ -346,11 +332,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				throw new EvaluationException(new ClassNotFoundException());
 			throw new EvaluationException(new ClassNotFoundException(nodesForFeature.get(0).getText()));
 		}
-		Object result = translateJvmTypeToResult(literal.getType());
-		return result;
+		try {
+			return classFinder.forName(literal.getType().getIdentifier() + Joiner.on("").join(literal.getArrayDimensions()));
+		} catch (ClassNotFoundException e) {
+			throw new EvaluationException(e);
+		}
 	}
 
-	@SuppressWarnings("unchecked")
 	protected Object _doEvaluate(XListLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		IResolvedTypes resolveTypes = typeResolver.resolveTypes(literal);
 		LightweightTypeReference type = resolveTypes.getActualType(literal);
@@ -362,8 +350,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 		if(type != null && type.isArray()) {
 			try {
-				LightweightTypeReference componentType = type.getComponentType().getWrapperTypeIfPrimitive();
-				return Iterables.toArray(list, (Class<Object>)getJavaType(componentType.getType()));
+				LightweightTypeReference componentType = type.getComponentType();
+				return Conversions.unwrapArray(list, getJavaType(componentType.getType()));
 			} catch (ClassNotFoundException e) {
 			}
 		}
