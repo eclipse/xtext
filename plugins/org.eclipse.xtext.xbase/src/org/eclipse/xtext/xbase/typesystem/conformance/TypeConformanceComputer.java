@@ -540,8 +540,17 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		}
 		Set<String> allNames = Sets.newHashSet();
 		Set<String> allBoundNames = Sets.newHashSet();
+		boolean allResolved = true;
+		for(int i = 0; i < types.size() && allResolved; i++) {
+			allResolved = types.get(i).isResolved();
+		}
 		for(int i = 0; i < types.size(); i++) {
-			LightweightTypeReference type = types.get(i).getInvariantBoundSubstitute();
+			LightweightTypeReference type = types.get(i);
+			if (allResolved) {
+				type = type.getUpperBoundSubstitute();
+			} else {
+				type = type.getInvariantBoundSubstitute();
+			}
 			types.set(i, type);
 			addIdentifier(type, allNames, allBoundNames);
 		}
