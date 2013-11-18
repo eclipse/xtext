@@ -96,7 +96,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -332,11 +331,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				throw new EvaluationException(new ClassNotFoundException());
 			throw new EvaluationException(new ClassNotFoundException(nodesForFeature.get(0).getText()));
 		}
-		try {
-			return classFinder.forName(literal.getType().getIdentifier() + Joiner.on("").join(literal.getArrayDimensions()));
-		} catch (ClassNotFoundException e) {
-			throw new EvaluationException(e);
-		}
+		JvmType type = literal.getType();
+		Object result = translateJvmTypeToResult(type, literal.getArrayDimensions().size());
+		return result;
 	}
 
 	protected Object _doEvaluate(XListLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
@@ -720,7 +717,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object _doEvaluate(final XMemberFeatureCall featureCall, final IEvaluationContext context, final CancelIndicator indicator) {
 		if (featureCall.isTypeLiteral()) {
 			JvmType type = (JvmType) featureCall.getFeature();
-			Object result = translateJvmTypeToResult(type);
+			Object result = translateJvmTypeToResult(type, 0);
 			return result;
 		} else {
 			XExpression receiver = getActualReceiver(featureCall); //, featureCall.getFeature(), featureCall.getImplicitReceiver());
@@ -732,9 +729,12 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected Object translateJvmTypeToResult(JvmType type) {
+	protected Object translateJvmTypeToResult(JvmType type, int arrayDims) {
 		try {
-			return classFinder.forName(type.getQualifiedName());
+			String arrayDimensions = "";
+			for (int i=0;i<arrayDims;i++)
+				arrayDimensions+="[]";
+			return classFinder.forName(type.getQualifiedName()+arrayDimensions);
 		} catch (ClassNotFoundException e) {
 			throw new EvaluationException(e);
 		}
@@ -823,7 +823,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object _doEvaluate(XFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
 		if (featureCall.isTypeLiteral()) {
 			JvmType type = (JvmType) featureCall.getFeature();
-			Object result = translateJvmTypeToResult(type);
+			Object result = translateJvmTypeToResult(type, 0);
 			return result;
 		} else {
 			return _doEvaluate((XAbstractFeatureCall) featureCall, context, indicator);
