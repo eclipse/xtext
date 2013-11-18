@@ -453,6 +453,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testCommonSuperType_72() {
 		"Function1<?, ?>".isSuperTypeOf("$$Function1<Object, Object>", "$$Function1<String, String>")
 	}
+	
+	@Test
+	def void testCommonSuperType_73() {
+		"Iterable<?>".isSuperTypeOf("Iterable<? super CharSequence>", "Iterable<String>")
+	}
 }
 
 /**
