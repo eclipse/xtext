@@ -465,9 +465,6 @@ code[Xtend][
 In addition ref:activeAnnotations[Active Annotations] allow users to participate in compilation of
 Xtend code to Java source code.
 
-Please note that it is currently not possible to use nested annotation values in lists. This notation
-is not yet supported but will be implemented in a future release: code[Xtend][@Anno( values = #\[ @Anno(..) \]].
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:extensionMethods[Extension Methods]
 
