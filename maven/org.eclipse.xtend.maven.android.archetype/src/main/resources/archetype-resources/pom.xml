@@ -10,24 +10,43 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<android.plugin.version>3.6.1</android.plugin.version>
 		<xtend.version>${project.version}</xtend.version>
-		<sdkPath>\${sdk_path}</sdkPath>
 		<platform.version>\${platform_version}</platform.version>
-		<avd.name>\${avd_name}</avd.name>
 	</properties>
+
+	<!--
+	Uncomment this (and the dependency below) to use support-v4.jar and friends.
+	You will need ANDROID_HOME set, and the 'android support repository' installed
+	on your machine.
+	Alternatively you can try using https://github.com/mosabua/maven-android-sdk-deployer
+	<repositories>
+		<repository>
+			<id>android-support-repository</id>
+			<url>file:///\${env.ANDROID_HOME}/extras/android/m2repository/</url>
+		</repository>
+	</repositories>
+	-->
 
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
-			<version>2.2.1</version>
+			<version>4.1.1.4</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
 			<version>${xtend.version}</version>
 		</dependency>
+		<!--
+		<dependency>
+			<groupId>com.android.support</groupId>
+			<artifactId>support-v4</artifactId>
+			<version>18.0.0</version>
+		</dependency>
+		-->
 	</dependencies>
 
 	<build>
@@ -37,7 +56,7 @@
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
-				<version>${xtend.version}</version>
+				<version>\${xtend.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -45,56 +64,24 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<outputDirectory>target/generated-sources/</outputDirectory>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
 				<extensions>true</extensions>
 				<configuration>
-					<genDirectory>gen</genDirectory>
+					<genDirectory>target/generated-sources/</genDirectory>
 					<run>
 						<debug>true</debug>
 					</run>
 					<sdk>
-						<platform>${platform.version}</platform>
-						<path>${sdkPath}</path>
+						<platform>\${platform.version}</platform>
 					</sdk>
-					<emulator>
-						<avd>${avd.name}</avd>
-						<wait>180000</wait>
-					</emulator>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<excludeScope>provided</excludeScope>
-							<outputDirectory>\${basedir}/libs</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 
@@ -103,47 +90,8 @@
 				<plugin>
 					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 					<artifactId>android-maven-plugin</artifactId>
-					<version>3.5.3</version>
+					<version>\${android.plugin.version}</version>
 					<extensions>true</extensions>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>com.jayway.maven.plugins.android.generation2</groupId>
-										<artifactId>android-maven-plugin</artifactId>
-										<versionRange>[3.5.1,)</versionRange>
-										<goals>
-											<goal>generate-sources</goal>
-											<goal>proguard</goal>
-											<goal>run</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-dependency-plugin</artifactId>
-										<versionRange>[2.6,)</versionRange>
-										<goals>
-											<goal>copy-dependencies</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
