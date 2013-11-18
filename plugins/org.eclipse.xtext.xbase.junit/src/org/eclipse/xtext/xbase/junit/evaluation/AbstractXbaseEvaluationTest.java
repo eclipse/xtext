@@ -531,6 +531,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testGenerics_07() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(23),
+				"{" +
+						" val x = newArrayList(23, 23d)" +
+						" x.head" +
+				"}");
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341246
 	 */
@@ -3458,6 +3466,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=403357
 	public void testListLiteral_5() throws Exception {
 		assertEvaluatesTo(newArrayList(null, ""), "#[null, '']");
+	}
+	
+	@Test 
+	public void testListLiteral_6() throws Exception {
+		assertEvaluatesTo("", "{ val char[] c = #[] String.valueOf(c) }");
 	}
 		
 	@Test 
