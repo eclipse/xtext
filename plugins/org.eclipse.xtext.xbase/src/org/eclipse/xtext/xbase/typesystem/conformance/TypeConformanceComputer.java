@@ -129,7 +129,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		if ((flags & RAW_TYPE) != 0 || ((left.isRawType() || right.isRawType()) && (flags & ALLOW_RAW_TYPE_CONVERSION) != 0)) {
 			int result = rawTypeConformanceComputer.isConformant(left, right, flags);
 			if ((result & SUCCESS) != 0) {
-				if (left.isRawType() != right.isRawType()) {
+				if (left.isRawType() != right.isRawType() && left.getTypeArguments().isEmpty() != right.getTypeArguments().isEmpty()) {
 					result |= RAW_TYPE_CONVERSION;
 				}
 			} else {
