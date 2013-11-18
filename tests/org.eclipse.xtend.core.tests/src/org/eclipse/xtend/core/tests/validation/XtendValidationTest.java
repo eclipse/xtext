@@ -40,6 +40,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.junit.After;
 import org.junit.Before;
@@ -2015,6 +2016,52 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "}");
 		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
 	}
+	
+	@Test 
+	public void testTypeParameterReferencedInTypeLiteral_02() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+						+ "  def <T> Class<? extends T> foo() {"
+						+ "    return typeof(T)"
+						+ "  }"
+						+ "}");
+		helper.assertError(file, XbasePackage.Literals.XTYPE_LITERAL, INVALID_USE_OF_TYPE_PARAMETER);		
+	}
+	
+	@Test 
+	public void testTypeParameterReferencedInTypeLiteral_01() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+						+ "  def <T> Class<? extends T> foo() {"
+						+ "    return T"
+						+ "  }"
+						+ "}");
+		helper.assertError(file, XbasePackage.Literals.XABSTRACT_FEATURE_CALL, INVALID_USE_OF_TYPE_PARAMETER);		
+	}
+	
+	@Test 
+	public void testTypeParameterReferencedInInstanceof_01() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+						+ "  def <T> boolean foo() {"
+						+ "    return '' instanceof T"
+						+ "  }"
+						+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER);		
+	}
+	
+	@Test 
+	public void testTypeParameterReferencedInSwitch() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+						+ "  def <T> boolean foo() {"
+						+ "    return switch '' { T : 'foo'  default : 'bla'}"
+						+ "  }"
+						+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER);		
+	}
+	
+	
 	
 	@Test
 	public void testFieldInitializerNonVoid_0() throws Exception {

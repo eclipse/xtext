@@ -1388,6 +1388,7 @@ class AmbiguousRawFeatureCallTest extends AmbiguityValidationTest {
 	@Test
 	def void testUnambiguousMethods_02() {
 		'''
+			import java.util.Collection
 			class C {
 				def void n() {
 					new C(newArrayList)
