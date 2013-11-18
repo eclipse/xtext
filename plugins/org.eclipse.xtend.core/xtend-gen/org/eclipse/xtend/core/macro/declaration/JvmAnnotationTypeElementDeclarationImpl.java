@@ -15,6 +15,7 @@ import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 
 @SuppressWarnings("all")
 public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements MutableAnnotationTypeElementDeclaration {
@@ -22,7 +23,12 @@ public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclaratio
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmOperation _delegate = this.getDelegate();
     JvmAnnotationValue _defaultValue = _delegate.getDefaultValue();
-    return _compilationUnit.translateAnnotationValue(_defaultValue);
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    TypeReferences _typeReferences = _compilationUnit_1.getTypeReferences();
+    JvmOperation _delegate_1 = this.getDelegate();
+    JvmTypeReference _returnType = _delegate_1.getReturnType();
+    boolean _isArray = _typeReferences.isArray(_returnType);
+    return _compilationUnit.translateAnnotationValue(_defaultValue, _isArray);
   }
   
   public TypeReference getType() {

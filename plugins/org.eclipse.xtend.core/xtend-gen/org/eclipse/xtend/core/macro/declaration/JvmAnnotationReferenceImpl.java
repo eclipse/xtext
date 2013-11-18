@@ -14,22 +14,34 @@ import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
+import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
@@ -71,11 +83,6 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       }
     };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
-    boolean _notEquals = (!Objects.equal(annotationValue, null));
-    if (_notEquals) {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.translateAnnotationValue(annotationValue);
-    }
     JvmAnnotationReference _delegate_1 = this.getDelegate();
     JvmAnnotationType _annotation = _delegate_1.getAnnotation();
     Iterable<JvmOperation> _declaredOperations = _annotation.getDeclaredOperations();
@@ -88,18 +95,35 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     };
     final JvmOperation op = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
     boolean _and = false;
-    boolean _notEquals_1 = (!Objects.equal(op, null));
-    if (!_notEquals_1) {
+    boolean _notEquals = (!Objects.equal(op, null));
+    if (!_notEquals) {
       _and = false;
     } else {
-      JvmAnnotationValue _defaultValue = op.getDefaultValue();
-      boolean _notEquals_2 = (!Objects.equal(_defaultValue, null));
-      _and = (_notEquals_1 && _notEquals_2);
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
+      JvmTypeReference _returnType = op.getReturnType();
+      boolean _isArray = _typeReferences.isArray(_returnType);
+      _and = (_notEquals && _isArray);
     }
-    if (_and) {
+    final boolean isArrayType = _and;
+    boolean _notEquals_1 = (!Objects.equal(annotationValue, null));
+    if (_notEquals_1) {
       CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      return _compilationUnit_1.translateAnnotationValue(annotationValue, isArrayType);
+    }
+    boolean _and_1 = false;
+    boolean _notEquals_2 = (!Objects.equal(op, null));
+    if (!_notEquals_2) {
+      _and_1 = false;
+    } else {
+      JvmAnnotationValue _defaultValue = op.getDefaultValue();
+      boolean _notEquals_3 = (!Objects.equal(_defaultValue, null));
+      _and_1 = (_notEquals_2 && _notEquals_3);
+    }
+    if (_and_1) {
+      CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
       JvmAnnotationValue _defaultValue_1 = op.getDefaultValue();
-      return _compilationUnit_1.translateAnnotationValue(_defaultValue_1);
+      return _compilationUnit_2.translateAnnotationValue(_defaultValue_1, isArrayType);
     }
     return null;
   }
@@ -114,6 +138,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     }
     EList<String> _values = newValue.getValues();
     CollectionExtensions.<String>addAll(_values, values);
+    this.remove(name);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
     _values_1.add(newValue);
@@ -129,6 +154,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     }
     EList<Boolean> _values = newValue.getValues();
     _values.addAll(((Collection<? extends Boolean>)Conversions.doWrapArray(values)));
+    this.remove(name);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
     _values_1.add(newValue);
@@ -144,9 +170,83 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     }
     EList<Integer> _values = newValue.getValues();
     _values.addAll(((Collection<? extends Integer>)Conversions.doWrapArray(values)));
+    this.remove(name);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
     _values_1.add(newValue);
+  }
+  
+  public void set(final String name, final double... values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmDoubleAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    EList<Double> _values = newValue.getValues();
+    _values.addAll(((Collection<? extends Double>)Conversions.doWrapArray(values)));
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
+  }
+  
+  public void set(final String name, final TypeReference... values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmTypeAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
+      public void apply(final TypeReference it) {
+        boolean _matched = false;
+        if (!_matched) {
+          if (it instanceof TypeReferenceImpl) {
+            _matched=true;
+            EList<JvmTypeReference> _values = newValue.getValues();
+            LightweightTypeReference _delegate = ((TypeReferenceImpl)it).getDelegate();
+            JvmTypeReference _typeReference = _delegate.toTypeReference();
+            _values.add(_typeReference);
+          }
+        }
+      }
+    };
+    IterableExtensions.<TypeReference>forEach(((Iterable<TypeReference>)Conversions.doWrapArray(values)), _function);
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values = _delegate.getValues();
+    _values.add(newValue);
+  }
+  
+  public void set(final String name, final EnumerationValueDeclaration... values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmEnumAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    final Procedure1<EnumerationValueDeclaration> _function = new Procedure1<EnumerationValueDeclaration>() {
+      public void apply(final EnumerationValueDeclaration it) {
+        boolean _matched = false;
+        if (!_matched) {
+          if (it instanceof JvmEnumerationValueDeclarationImpl) {
+            _matched=true;
+            EList<JvmEnumerationLiteral> _values = newValue.getValues();
+            JvmEnumerationLiteral _delegate = ((JvmEnumerationValueDeclarationImpl)it).getDelegate();
+            _values.add(_delegate);
+          }
+        }
+      }
+    };
+    IterableExtensions.<EnumerationValueDeclaration>forEach(((Iterable<EnumerationValueDeclaration>)Conversions.doWrapArray(values)), _function);
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values = _delegate.getValues();
+    _values.add(newValue);
   }
   
   public boolean remove(final String name) {
@@ -154,10 +254,18 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     EList<JvmAnnotationValue> _values = _delegate.getValues();
     final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
       public Boolean apply(final JvmAnnotationValue it) {
+        String _xifexpression = null;
         JvmOperation _operation = it.getOperation();
-        String _simpleName = _operation.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, name);
-        return Boolean.valueOf(_equals);
+        boolean _equals = Objects.equal(_operation, null);
+        if (_equals) {
+          _xifexpression = "value";
+        } else {
+          JvmOperation _operation_1 = it.getOperation();
+          String _simpleName = _operation_1.getSimpleName();
+          _xifexpression = _simpleName;
+        }
+        boolean _equals_1 = Objects.equal(_xifexpression, name);
+        return Boolean.valueOf(_equals_1);
       }
     };
     final JvmAnnotationValue found = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);

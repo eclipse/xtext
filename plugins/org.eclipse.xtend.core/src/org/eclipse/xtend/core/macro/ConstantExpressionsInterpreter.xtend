@@ -1,12 +1,16 @@
 package org.eclipse.xtend.core.macro
 
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 
 class ConstantExpressionsInterpreter extends XbaseInterpreter {
 	
@@ -17,14 +21,24 @@ class ConstantExpressionsInterpreter extends XbaseInterpreter {
 	}
 	
 	override protected translateJvmTypeToResult(JvmType type) {
-		return getCompilationUnit.toType(type)
+		return getCompilationUnit.typeReferenceProvider.newTypeReference(compilationUnit.toType(type))
 	}
 	
 	override protected getJavaType(JvmType type) throws ClassNotFoundException {
 		if (type.getQualifiedName() == 'java.lang.Class') {
-			return TypeDeclaration
+			return TypeReference
+		}
+		if (type instanceof JvmEnumerationType) {
+			return EnumerationValueDeclaration
 		}
 		super.getJavaType(type)
+	}
+	
+	dispatch protected override doEvaluate(XMemberFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
+		switch f : featureCall.feature {
+			JvmEnumerationLiteral : compilationUnit.toNamedElement(f)
+			default : super._doEvaluate(featureCall, context, indicator)  
+		}
 	}
 	
 }

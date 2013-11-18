@@ -58,6 +58,7 @@ import static org.eclipse.xtend.core.macro.ConditionUtils.*
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -762,7 +763,7 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements MutableAnnotationTypeElementDeclaration {
 	
 	override getDefaultValue() {
-		return compilationUnit.translateAnnotationValue(delegate.defaultValue)
+		return compilationUnit.translateAnnotationValue(delegate.defaultValue, compilationUnit.typeReferences.isArray(delegate.returnType))
 	}
 	
 	override getType() {
@@ -789,12 +790,13 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		val annotationValue = delegate.values.findFirst[
 			valueName == property || (valueName == null && property == 'value')
 		]
-		if (annotationValue != null)
-			return compilationUnit.translateAnnotationValue(annotationValue)
-		
 		val op = delegate.annotation.declaredOperations.findFirst[simpleName == property]
+		val isArrayType = op!=null && compilationUnit.typeReferences.isArray(op.returnType)
+		if (annotationValue != null)
+			return compilationUnit.translateAnnotationValue(annotationValue, isArrayType)
+		
 		if (op != null && op.defaultValue != null) {
-			return compilationUnit.translateAnnotationValue(op.defaultValue)
+			return compilationUnit.translateAnnotationValue(op.defaultValue, isArrayType)
 		}
 		return null
 	}
@@ -805,6 +807,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		if (name != null)
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
+		remove(name);
 		delegate.getValues.add(newValue)
 	}
 	
@@ -814,6 +817,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		if (name != null)
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
+		remove(name);
 		delegate.getValues.add(newValue)
 	}
 	
@@ -823,11 +827,54 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		if (name != null)
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	override set(String name, double... values) {
+		checkIterable(values, "values")
+		val newValue = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		newValue.values.addAll(values)
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	override set(String name, TypeReference... values) {
+		checkIterable(values, "values")
+		val newValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		values.forEach[
+			switch it {
+				TypeReferenceImpl : {
+					newValue.values.add(delegate.toTypeReference)
+				}
+			}
+		]
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	override set(String name, EnumerationValueDeclaration... values) {
+		checkIterable(values, "values")
+		val newValue = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		values.forEach[
+			switch it {
+				JvmEnumerationValueDeclarationImpl : {
+					newValue.values.add(delegate)
+				}
+			}
+		]
+		remove(name);
 		delegate.getValues.add(newValue)
 	}
 	
 	override remove(String name) {
-		val found = delegate.values.findFirst[operation.simpleName==name]
+		val found = delegate.values.findFirst[(if (operation==null) 'value' else operation.simpleName)==name]
 		if (found != null) {
 			delegate.values.remove(found)
 			return true;

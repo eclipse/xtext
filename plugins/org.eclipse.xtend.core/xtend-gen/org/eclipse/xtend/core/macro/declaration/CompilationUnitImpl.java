@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -1142,7 +1141,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _orCreate;
   }
   
-  public Object translateAnnotationValue(final JvmAnnotationValue value) {
+  public Object translateAnnotationValue(final JvmAnnotationValue value, final boolean isArray) {
     List<? extends Object> _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
@@ -1157,8 +1156,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           }
         };
         Iterable<Object> _map = IterableExtensions.<XExpression, Object>map(_filter, _function);
-        List<Object> _list = IterableExtensions.<Object>toList(_map);
-        _switchResult = _list;
+        return IterableExtensions.<Object>head(_map);
       }
     }
     if (!_matched) {
@@ -1235,7 +1233,14 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (value instanceof JvmEnumAnnotationValue) {
         _matched=true;
         EList<JvmEnumerationLiteral> _values = ((JvmEnumAnnotationValue)value).getValues();
-        _switchResult = _values;
+        final Function1<JvmEnumerationLiteral,MutableNamedElement> _function = new Function1<JvmEnumerationLiteral,MutableNamedElement>() {
+          public MutableNamedElement apply(final JvmEnumerationLiteral it) {
+            MutableNamedElement _namedElement = CompilationUnitImpl.this.toNamedElement(it);
+            return _namedElement;
+          }
+        };
+        List<MutableNamedElement> _map = ListExtensions.<JvmEnumerationLiteral, MutableNamedElement>map(_values, _function);
+        _switchResult = _map;
       }
     }
     if (!_matched) {
@@ -1264,10 +1269,8 @@ public class CompilationUnitImpl implements CompilationUnit {
       _switchResult = _emptyList;
     }
     final List<?> result = _switchResult;
-    int _size = result.size();
-    boolean _greaterThan = (_size > 1);
-    if (_greaterThan) {
-      return ImmutableList.<Object>copyOf(result);
+    if (isArray) {
+      return Iterables.<Object>toArray(result, Object.class);
     }
     return IterableExtensions.head(result);
   }

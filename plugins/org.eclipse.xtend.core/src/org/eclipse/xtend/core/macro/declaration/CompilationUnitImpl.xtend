@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
-import com.google.common.collect.ImmutableList
+import com.google.common.collect.Iterables
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
@@ -539,25 +539,29 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	
-	def Object translateAnnotationValue(JvmAnnotationValue value) {
+	def Object translateAnnotationValue(JvmAnnotationValue value, boolean isArray) {
 		val List<?> result = switch value {
-			JvmCustomAnnotationValue : value.values.filter(XExpression).map[evaluate(it)].toList
-			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)]
-			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)]
-			JvmStringAnnotationValue : value.values
+			JvmCustomAnnotationValue : {
+				// custom values always contain a single expression and will already return an array if it's a multi value.
+				return value.values.filter(XExpression).map[evaluate(it)].head
+			}
+			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)] 
+			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)] 
+			JvmStringAnnotationValue : value.values 
 			JvmBooleanAnnotationValue : value.values
-			JvmIntAnnotationValue : value.values
+			JvmIntAnnotationValue : value.values 
 			JvmByteAnnotationValue : value.values
 			JvmCharAnnotationValue : value.values
 			JvmDoubleAnnotationValue : value.values
-			JvmEnumAnnotationValue : value.values
+			JvmEnumAnnotationValue : value.values.map[toNamedElement(it)]
 			JvmFloatAnnotationValue : value.values
 			JvmLongAnnotationValue : value.values
 			JvmShortAnnotationValue : value.values
 			default : emptyList
 		}
-		if (result.size > 1)
-			return ImmutableList.copyOf(result)
+		if (isArray) {
+			return Iterables.<Object>toArray(result, Object)
+		}
 		return result.head
 	}
 	

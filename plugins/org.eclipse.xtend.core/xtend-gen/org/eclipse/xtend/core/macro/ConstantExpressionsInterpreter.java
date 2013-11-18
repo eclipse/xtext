@@ -4,7 +4,14 @@ import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
+import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -57,7 +64,10 @@ public class ConstantExpressionsInterpreter extends XbaseInterpreter {
   
   protected Object translateJvmTypeToResult(final JvmType type) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    return _compilationUnit.toType(type);
+    TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    Type _type = _compilationUnit_1.toType(type);
+    return _typeReferenceProvider.newTypeReference(_type);
   }
   
   protected Class<? extends Object> getJavaType(final JvmType type) throws ClassNotFoundException {
@@ -66,12 +76,35 @@ public class ConstantExpressionsInterpreter extends XbaseInterpreter {
       String _qualifiedName = type.getQualifiedName();
       boolean _equals = Objects.equal(_qualifiedName, "java.lang.Class");
       if (_equals) {
-        return TypeDeclaration.class;
+        return TypeReference.class;
+      }
+      if ((type instanceof JvmEnumerationType)) {
+        return EnumerationValueDeclaration.class;
       }
       Class<? extends Object> _javaType = super.getJavaType(type);
       _xblockexpression = (_javaType);
     }
     return _xblockexpression;
+  }
+  
+  protected Object _doEvaluate(final XMemberFeatureCall featureCall, final IEvaluationContext context, final CancelIndicator indicator) {
+    Object _switchResult = null;
+    JvmIdentifiableElement _feature = featureCall.getFeature();
+    final JvmIdentifiableElement f = _feature;
+    boolean _matched = false;
+    if (!_matched) {
+      if (f instanceof JvmEnumerationLiteral) {
+        _matched=true;
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        MutableNamedElement _namedElement = _compilationUnit.toNamedElement(f);
+        _switchResult = _namedElement;
+      }
+    }
+    if (!_matched) {
+      Object __doEvaluate = super._doEvaluate(featureCall, context, indicator);
+      _switchResult = __doEvaluate;
+    }
+    return _switchResult;
   }
   
   protected Object doEvaluate(final XExpression assignment, final IEvaluationContext context, final CancelIndicator indicator) {
