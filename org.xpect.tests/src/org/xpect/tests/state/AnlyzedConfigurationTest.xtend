@@ -147,7 +147,7 @@ class Singleton2 {
 		this.param = param;
 	}
 
-	@Creates(annotatedWith=Annotation)
+	@Creates(Annotation)
 	def StringBuffer getBuffer() {
 		return new StringBuffer("buffer " + param);
 	}
