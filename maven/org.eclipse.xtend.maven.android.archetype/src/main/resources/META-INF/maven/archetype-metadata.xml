@@ -5,14 +5,8 @@
 	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<requiredProperties>
-		<requiredProperty key="sdk_path">
-			<defaultValue>/opt/local/android-sdk-macosx</defaultValue>
-		</requiredProperty>
 		<requiredProperty key="platform_version">
-			<defaultValue>4.2.2</defaultValue>
-		</requiredProperty>
-		<requiredProperty key="avd_name">
-			<defaultValue>Android_2.1</defaultValue>
+			<defaultValue>4.3</defaultValue>
 		</requiredProperty>
 	</requiredProperties>
 	<fileSets>
@@ -24,6 +18,24 @@
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>res/layout</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>res/values</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>res/values-v11</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>res/values-v14</directory>
 			<includes>
 				<include>**/*.xml</include>
 			</includes>
@@ -96,6 +108,7 @@
 				<include>AndroidManifest.xml</include>
 				<include>proguard-project.txt</include>
 				<include>project.properties</include>
+				<include>README</include>
 			</includes>
 		</fileSet>
 		<fileSet encoding="UTF-8">
