@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.tests.macro
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtext.xbase.lib.Pair
@@ -11,6 +12,91 @@ import org.junit.Test
 import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
+	
+	@Test def void testAnnotationValueSetting() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.*
+				import org.eclipse.xtend.lib.macro.declaration.*
+				
+				import static com.google.common.base.Preconditions.*
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+					BlackOrWhite color
+					BlackOrWhite[] colors
+					Class<?> type
+					Class<?>[] types
+				}
+				
+				enum BlackOrWhite {
+					BLACK, WHITE
+				}
+				
+				class MyAnnotationProcessor extends AbstractClassProcessor {
+				
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						val anno = annotatedClass.annotations.head
+						val enumType = findTypeGlobally('myannotation.BlackOrWhite') as EnumerationTypeDeclaration
+						val white = enumType.findDeclaredValue('WHITE')
+						val black = enumType.findDeclaredValue('BLACK')
+						
+						val existingValue = anno.getValue('color')
+						if (existingValue !=  white)
+							throw new AssertionError("color")
+						anno.set('color', black)
+							
+						val existingColorsValue = anno.getValue('colors') as Object[]
+						if (existingColorsValue.get(0) !=  white && existingColorsValue.get(1) != black && existingColorsValue.length != 2)
+							throw new AssertionError("colors")
+							
+						anno.set('colors', black, white)
+						
+						val existingType = anno.getValue('type')
+						if (existingType != string)
+							throw new AssertionError("type")
+						anno.set('type', annotatedClass.newTypeReference)
+							
+						val existingTypes = anno.getValue('types') as Object[]
+						if (existingTypes.get(0) !=  primitiveInt && existingTypes.get(1) != annotatedClass.newTypeReference && existingTypes.length != 2)
+							throw new AssertionError("types")
+							
+						anno.set('types', primitiveBoolean)
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.*
+				
+				@MyAnnotation(color=BlackOrWhite.WHITE, colors=#[BlackOrWhite.WHITE, BlackOrWhite.BLACK], type = String, types=#[Integer, MyClass])
+				class MyClass {
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass("myusercode.MyClass")
+			val colorEnum = typeLookup.findTypeGlobally("myannotation.BlackOrWhite") as EnumerationTypeDeclaration
+			val annotation = clazz.annotations.head
+			
+			assertEquals(colorEnum.findDeclaredValue('BLACK'), annotation.getValue('color'))
+			
+			val colors =  annotation.getValue('colors') as Object[]
+			assertEquals(2, colors.length)
+			assertEquals(colorEnum.findDeclaredValue('BLACK'), colors.get(0))
+			assertEquals(colorEnum.findDeclaredValue('WHITE'), colors.get(1))
+			
+			assertEquals(typeReferenceProvider.newTypeReference(clazz), annotation.getValue('type'))
+			
+			val types =  annotation.getValue('types') as Object[]
+			assertEquals(1, types.length)
+			assertEquals(typeReferenceProvider.primitiveBoolean, types.get(0))
+			
+		]
+	}
 	
 	@Test def void testAccessAndModifyEnumerationValueDeclaration() {
 		assertProcessing(
@@ -737,11 +823,11 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val clazz = typeLookup.findClass('myusercode.MyClass')
 			val annotation = clazz.findAnnotation(
 				typeReferenceProvider.newTypeReference('myannotation.MyAnnotation').type)
-			assertEquals(#['foo', 'bar', 'baz'], annotation.getValue('value'))
+			assertArrayEquals(#['foo', 'bar', 'baz'], annotation.getValue('value') as Object[])
 			assertEquals('foo', annotation.getValue('singleValue'))
-			assertEquals(#[true, false, true], annotation.getValue('booleans'))
+			assertArrayEquals(#[true, false, true], annotation.getValue('booleans') as Object[])
 			assertEquals(true, annotation.getValue('singleBoolean'))
-			assertEquals(#[1, 2, 3], annotation.getValue('numbers'))
+			assertArrayEquals(#[1, 2, 3], annotation.getValue('numbers') as Object[])
 			assertEquals(1, annotation.getValue('singleNumber'))
 		]
 	}

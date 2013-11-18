@@ -6,6 +6,7 @@ import java.lang.reflect.AccessibleObject
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
@@ -13,8 +14,6 @@ import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
-import org.eclipse.xtend.lib.macro.declaration.Type
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
@@ -344,15 +343,15 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals(42 + 4 + 6 * 42 - 4 / 45, annoRef.getValue("longValue"))
 			assertEquals('foobaz', annoRef.getValue("stringValue"))
 			
-			val bools = annoRef.getValue("booleanArrayValue") as Boolean[]
-			assertTrue(bools.get(0))
-			assertFalse(bools.get(1))
+			val bools = annoRef.getValue("booleanArrayValue") as Object[]
+			assertTrue(bools.get(0) as Boolean)
+			assertFalse(bools.get(1) as Boolean)
 			
-			assertArrayEquals(#[ -1, 34 + 45, 2 - 6 ], annoRef.getValue("intArrayValue") as Integer[])
+			assertArrayEquals(#[ -1, 34 + 45, 2 - 6 ], annoRef.getValue("intArrayValue") as Object[])
 			
-			val type = annoRef.getValue('typeArrayValue') as Type[]
+			val type = annoRef.getValue('typeArrayValue') as Object[]
 			
-			assertSame(typeLookup.findTypeGlobally(Integer), type.get(1)) 
+			assertEquals(typeReferenceProvider.newTypeReference(Integer), type.get(1)) 
 			
 			val anno = annoRef.getValue('annotation2Value')
 			assertTrue(anno instanceof AnnotationReference)
