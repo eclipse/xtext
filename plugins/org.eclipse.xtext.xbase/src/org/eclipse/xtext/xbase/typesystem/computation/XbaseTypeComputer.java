@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -900,6 +900,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (type == null) {
 			return;
 		}
+		checkTypeParameterNotAllowedAsLiteral(object, type, state);
 		ITypeReferenceOwner owner = state.getReferenceOwner();
 		LightweightTypeReference clazz = new ParameterizedTypeReference(owner, object.getType());
 		for (int i = 0; i < object.getArrayDimensions().size(); i++) {
@@ -921,10 +922,36 @@ public class XbaseTypeComputer implements ITypeComputer {
 		result.addTypeArgument(clazz);
 		state.acceptActualType(result);
 	}
+	
+	private void checkTypeParameterNotAllowedAsLiteral(EObject ctx, JvmType type, ITypeComputationState state) {
+		if (type instanceof JvmTypeParameter) {
+			state.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.INVALID_USE_OF_TYPE_PARAMETER,
+					"Illegal class literal for the type parameter " + type.getSimpleName()+".",
+					ctx,
+					null,
+					-1,
+					new String[] { 
+					}));
+		}
+	}
 
 	protected void _computeTypes(XInstanceOfExpression object, ITypeComputationState state) {
 		ITypeComputationState expressionState = state.withExpectation(getRawTypeForName(Object.class, state.getReferenceOwner()));
 		expressionState.computeTypes(object.getExpression());
+		JvmTypeReference type = object.getType();
+		if (type.getType() instanceof JvmTypeParameter) {
+			state.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.INVALID_USE_OF_TYPE_PARAMETER,
+					"Cannot perform instanceof check against type parameter "+type.getSimpleName()+". Use its erasure Object instead since further generic type information will be erased at runtime.",
+					object.getType(),
+					null,
+					-1,
+					new String[] { 
+					}));
+		}
 		LightweightTypeReference bool = getTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
 	}
@@ -1010,6 +1037,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(final XAbstractFeatureCall featureCall, ITypeComputationState state) {
 		List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(featureCall);
 		ILinkingCandidate best = getBestCandidate(candidates);
+		JvmIdentifiableElement feature = best.getFeature();
+		if (feature instanceof JvmType) {
+			checkTypeParameterNotAllowedAsLiteral(featureCall, (JvmType)feature, state);
+		}
 		best.applyToComputationState();
 	}
 	

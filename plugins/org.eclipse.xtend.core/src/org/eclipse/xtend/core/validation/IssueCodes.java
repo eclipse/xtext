@@ -68,7 +68,6 @@ public final class IssueCodes {
 	public static final String CONSTRUCTOR_NOT_PERMITTED = ISSUE_CODE_PREFIX + "constructor_not_permitted";
 
 	public static final String INVALID_USE_OF_STATIC = ISSUE_CODE_PREFIX + "invalid_use_of_static";
-	public static final String INVALID_USE_OF_TYPEPARAMS = ISSUE_CODE_PREFIX + "invalid_use_of_typeParams";
 	public static final String INVALID_USE_OF_VAR_ARG = ISSUE_CODE_PREFIX + "invalid_use_of_varArg";
 	public static final String INVALID_ANNOTATION_VALUE_TYPE = ISSUE_CODE_PREFIX + "invalid_annotation_value_type";
 
