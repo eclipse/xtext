@@ -657,10 +657,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object wrapOrUnwrapArray(Object result, LightweightTypeReference expectedType) {
-		if (expectedType.isArray()) {
-			Class<?> arrayType = getJavaReflectAccess().getRawType(expectedType.getType());
-			return Conversions.unwrapArray(result, arrayType.getComponentType());
-		} else if (expectedType.isSubtypeOf(Iterable.class)) {
+		if (expectedType.isArray() && !(result instanceof Object[])) {
+			Class<?> arrayType;
+			try {
+				arrayType = getJavaType(expectedType.getComponentType().getType());
+				return Conversions.unwrapArray(result, arrayType);
+			} catch (ClassNotFoundException e) {
+				return result;
+			}
+		} else if (!expectedType.isArray() && expectedType.isSubtypeOf(Iterable.class)) {
 			return Conversions.doWrapArray(result);
 		}
 		return result;
