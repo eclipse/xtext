@@ -160,12 +160,9 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   private Pair<String,String> getNameParts(final String string) {
     final char dot = '.';
     final int index = string.lastIndexOf(dot);
-    int _minus = (-1);
-    boolean _notEquals = (index != _minus);
-    if (_notEquals) {
+    if ((index != (-1))) {
       String _substring = string.substring(0, index);
-      int _plus = (index + 1);
-      String _substring_1 = string.substring(_plus);
+      String _substring_1 = string.substring((index + 1));
       return Pair.<String, String>of(_substring, _substring_1);
     } else {
       return Pair.<String, String>of(null, string);

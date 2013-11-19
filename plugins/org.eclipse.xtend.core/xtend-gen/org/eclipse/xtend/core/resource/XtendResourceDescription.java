@@ -104,11 +104,10 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           public LightweightTypeReference apply(final JvmIdentifiableElement it) {
             LightweightTypeReference _xifexpression = null;
             boolean _or = false;
-            boolean _not = (!(it instanceof JvmType));
-            if (_not) {
+            if ((!(it instanceof JvmType))) {
               _or = true;
             } else {
-              _or = (_not || (it instanceof JvmDeclaredType));
+              _or = ((!(it instanceof JvmType)) || (it instanceof JvmDeclaredType));
             }
             if (_or) {
               LightweightTypeReference _actualType = types.getActualType(it);

@@ -258,8 +258,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         }
       }
       if (!_matched) {
-        String _plus = ("couldn\'t construct type reference for type " + typeDeclaration);
-        IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus);
+        IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(("couldn\'t construct type reference for type " + typeDeclaration));
         throw _illegalArgumentException;
       }
       final JvmComponentType type = _switchResult;

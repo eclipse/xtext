@@ -104,14 +104,14 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
     final Function1<ConstructorDeclaration,Boolean> _function = new Function1<ConstructorDeclaration,Boolean>() {
       public Boolean apply(final ConstructorDeclaration constructor) {
-        List<? extends ParameterDeclaration> _parameters = constructor.getParameters();
+        Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
         final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
           public TypeReference apply(final ParameterDeclaration it) {
             TypeReference _type = it.getType();
             return _type;
           }
         };
-        List<TypeReference> _map = ListExtensions.map(_parameters, _function);
+        Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
         List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
         List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
         boolean _equals = Objects.equal(_list, _list_1);
@@ -145,14 +145,14 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
         if (!_equals) {
           _and = false;
         } else {
-          List<? extends ParameterDeclaration> _parameters = method.getParameters();
+          Iterable<? extends ParameterDeclaration> _parameters = method.getParameters();
           final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
             public TypeReference apply(final ParameterDeclaration it) {
               TypeReference _type = it.getType();
               return _type;
             }
           };
-          List<TypeReference> _map = ListExtensions.map(_parameters, _function);
+          Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
           List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
           List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
           boolean _equals_1 = Objects.equal(_list, _list_1);

@@ -58,9 +58,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
         return _compilationUnit.toAnnotationReference(result);
       }
     }
-    String _plus = ("" + annotationType);
-    String _plus_1 = (_plus + " is not an annotation type.");
-    IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus_1);
+    IllegalArgumentException _illegalArgumentException = new IllegalArgumentException((("" + annotationType) + " is not an annotation type."));
     throw _illegalArgumentException;
   }
   

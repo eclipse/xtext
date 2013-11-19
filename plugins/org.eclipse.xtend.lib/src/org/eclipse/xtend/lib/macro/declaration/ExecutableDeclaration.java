@@ -8,8 +8,6 @@
 
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import org.eclipse.xtend.lib.macro.expression.Expression;
 
 import com.google.common.annotations.Beta;
@@ -35,10 +33,10 @@ public interface ExecutableDeclaration extends TypeParameterDeclarator {
 	/**
 	 * @return the declared parameters
 	 */
-	List<? extends ParameterDeclaration> getParameters();
+	Iterable<? extends ParameterDeclaration> getParameters();
 	
 	/**
 	 * @return the declared exceptions
 	 */
-	List<TypeReference> getExceptions();
+	Iterable<? extends TypeReference> getExceptions();
 }

@@ -42,26 +42,11 @@ public class RichStringToLineModel extends ForLoopOnce {
     return this._model;
   }
   
-  private int offset = new Function0<Integer>() {
-    public Integer apply() {
-      int _minus = (-1);
-      return _minus;
-    }
-  }.apply();
+  private int offset = (-1);
   
-  private int contentStartOffset = new Function0<Integer>() {
-    public Integer apply() {
-      int _minus = (-1);
-      return _minus;
-    }
-  }.apply();
+  private int contentStartOffset = (-1);
   
-  private int contentStartColumn = new Function0<Integer>() {
-    public Integer apply() {
-      int _minus = (-1);
-      return _minus;
-    }
-  }.apply();
+  private int contentStartColumn = (-1);
   
   private Stack<Chunk> indentationStack = new Function0<Stack<Chunk>>() {
     public Stack<Chunk> apply() {
@@ -170,12 +155,10 @@ public class RichStringToLineModel extends ForLoopOnce {
   public void announceNextLiteral(final RichStringLiteral object) {
     super.announceNextLiteral(object);
     boolean _and = false;
-    boolean _greaterThan = (this.lastLiteralEndOffset > 0);
-    if (!_greaterThan) {
+    if (!(this.lastLiteralEndOffset > 0)) {
       _and = false;
     } else {
-      boolean _lessThan = (this.contentStartOffset < 0);
-      _and = (_greaterThan && _lessThan);
+      _and = ((this.lastLiteralEndOffset > 0) && (this.contentStartOffset < 0));
     }
     if (_and) {
       this.contentStartOffset = this.lastLiteralEndOffset;
@@ -198,21 +181,18 @@ public class RichStringToLineModel extends ForLoopOnce {
   public void acceptSemanticLineBreak(final int charCount, final RichStringLiteral origin, final boolean controlStructureSeen) {
     super.acceptSemanticLineBreak(charCount, origin, controlStructureSeen);
     this.acceptLineBreak(charCount, true, true);
-    int _plus = (this.offset + charCount);
-    this.offset = _plus;
+    this.offset = (this.offset + charCount);
   }
   
   public void acceptTemplateLineBreak(final int charCount, final RichStringLiteral origin) {
     super.acceptTemplateLineBreak(charCount, origin);
     this.acceptLineBreak(charCount, false, true);
-    int _plus = (this.offset + charCount);
-    this.offset = _plus;
+    this.offset = (this.offset + charCount);
   }
   
   public void acceptLineBreak(final int charCount, final boolean semantic, final boolean startNewLine) {
     this.startContent();
-    boolean _greaterThan = (this.contentStartOffset > 0);
-    if (_greaterThan) {
+    if ((this.contentStartOffset > 0)) {
       final String lastLinesContent = this.document.substring(this.contentStartOffset, this.offset);
       LineModel _model = this.getModel();
       List<Line> _lines = _model.getLines();
@@ -232,23 +212,20 @@ public class RichStringToLineModel extends ForLoopOnce {
         final int newContentStartColumn = (this.contentStartOffset - _plus);
         boolean _isLeadingSemanticNewLine = lastLine.isLeadingSemanticNewLine();
         if (_isLeadingSemanticNewLine) {
-          boolean _greaterThan_1 = (newContentStartColumn > this.contentStartColumn);
-          if (_greaterThan_1) {
+          if ((newContentStartColumn > this.contentStartColumn)) {
             final int length = (newContentStartColumn - this.contentStartColumn);
-            int _minus = (this.contentStartOffset - length);
-            final String text = this.document.substring(_minus, this.contentStartOffset);
+            final String text = this.document.substring((this.contentStartOffset - length), this.contentStartOffset);
             SemanticWhitespace _semanticWhitespace = new SemanticWhitespace(text, newContentStartColumn);
             this.indentationStack.push(_semanticWhitespace);
           }
         }
-        boolean _lessThan = (newContentStartColumn < this.contentStartColumn);
-        if (_lessThan) {
+        if ((newContentStartColumn < this.contentStartColumn)) {
           Iterable<SemanticWhitespace> _filter = Iterables.<SemanticWhitespace>filter(this.indentationStack, SemanticWhitespace.class);
           List<SemanticWhitespace> _list = IterableExtensions.<SemanticWhitespace>toList(_filter);
           for (final SemanticWhitespace ws : _list) {
             int _column = ws.getColumn();
-            boolean _greaterThan_2 = (_column > newContentStartColumn);
-            if (_greaterThan_2) {
+            boolean _greaterThan = (_column > newContentStartColumn);
+            if (_greaterThan) {
               this.indentationStack.remove(ws);
             }
           }
@@ -262,8 +239,7 @@ public class RichStringToLineModel extends ForLoopOnce {
           this._outdentThisLine = false;
         }
         lastLine.setIndentLength(newContentStartColumn);
-        boolean _notEquals = (newContentStartColumn != 0);
-        if (_notEquals) {
+        if ((newContentStartColumn != 0)) {
           this.contentStartColumn = newContentStartColumn;
         }
         LineModel _model_3 = this.getModel();
@@ -278,8 +254,7 @@ public class RichStringToLineModel extends ForLoopOnce {
       this.indentationStack.push(_templateWhitespace);
       this.indentNextLine = false;
     }
-    int _minus_1 = (-1);
-    this.contentStartOffset = _minus_1;
+    this.contentStartOffset = (-1);
     this.content = false;
     if (startNewLine) {
       LineModel _model_4 = this.getModel();
@@ -290,8 +265,7 @@ public class RichStringToLineModel extends ForLoopOnce {
   }
   
   public void startContent() {
-    boolean _not = (!this.content);
-    if (_not) {
+    if ((!this.content)) {
       this.contentStartOffset = this.offset;
       this.content = true;
     }
@@ -299,8 +273,7 @@ public class RichStringToLineModel extends ForLoopOnce {
   
   public void acceptSemanticText(final CharSequence text, final RichStringLiteral origin) {
     super.acceptSemanticText(text, origin);
-    boolean _not = (!this.content);
-    if (_not) {
+    if ((!this.content)) {
       boolean _and = false;
       int _length = text.length();
       boolean _greaterThan = (_length > 0);
@@ -338,8 +311,7 @@ public class RichStringToLineModel extends ForLoopOnce {
   
   public void acceptTemplateText(final CharSequence text, final RichStringLiteral origin) {
     super.acceptTemplateText(text, origin);
-    boolean _not = (!this.content);
-    if (_not) {
+    if ((!this.content)) {
       LineModel _model = this.getModel();
       int _rootIndentLenght = _model.getRootIndentLenght();
       boolean _lessThan = (_rootIndentLenght < 0);

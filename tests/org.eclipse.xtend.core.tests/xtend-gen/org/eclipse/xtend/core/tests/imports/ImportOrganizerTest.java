@@ -68,10 +68,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
             _and = (_notEquals && _greaterThan);
           }
           if (_and) {
-            String _plus = ("Overlapping text edits: " + lastChange);
-            String _plus_1 = (_plus + " and ");
-            String _plus_2 = (_plus_1 + it);
-            Assert.fail(_plus_2);
+            Assert.fail(((("Overlapping text edits: " + lastChange) + " and ") + it));
           }
           lastChange = it;
         }

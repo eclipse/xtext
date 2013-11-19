@@ -52,10 +52,9 @@ public class SkipTokensInBetweenPropertyCompilerSmokeTest extends AbstractProper
         String _text = token.getText();
         final int length = _text.length();
         String _substring = string.substring(0, start);
-        int _plus = (start + length);
-        String _substring_1 = string.substring(_plus);
-        String _plus_1 = (_substring + _substring_1);
-        this.processFile(_plus_1);
+        String _substring_1 = string.substring((start + length));
+        String _plus = (_substring + _substring_1);
+        this.processFile(_plus);
       }
     }
   }

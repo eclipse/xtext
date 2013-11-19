@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> implements ClassDeclaration {
-  public Iterable<TypeReference> getImplementedInterfaces() {
+  public Iterable<? extends TypeReference> getImplementedInterfaces() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeReference> _implements = _delegate.getImplements();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {

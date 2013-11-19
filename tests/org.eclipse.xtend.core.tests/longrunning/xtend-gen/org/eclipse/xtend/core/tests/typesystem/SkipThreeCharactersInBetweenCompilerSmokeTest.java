@@ -25,10 +25,9 @@ public class SkipThreeCharactersInBetweenCompilerSmokeTest extends AbstractCompi
       IntegerRange _upTo = new IntegerRange(0, _minus);
       for (final Integer i : _upTo) {
         String _substring = string.substring(0, (i).intValue());
-        int _plus = ((i).intValue() + 3);
-        String _substring_1 = string.substring(_plus);
-        String _plus_1 = (_substring + _substring_1);
-        this.processFile(_plus_1);
+        String _substring_1 = string.substring(((i).intValue() + 3));
+        String _plus = (_substring + _substring_1);
+        this.processFile(_plus);
       }
     }
   }

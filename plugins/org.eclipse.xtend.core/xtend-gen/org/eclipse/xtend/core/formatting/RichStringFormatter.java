@@ -123,8 +123,7 @@ public class RichStringFormatter {
           _and_2 = (canIndent && _equals_1);
         }
         if (_and_2) {
-          int _minus = (-1);
-          _xifexpression_1 = _minus;
+          _xifexpression_1 = (-1);
         } else {
           _xifexpression_1 = 0;
         }

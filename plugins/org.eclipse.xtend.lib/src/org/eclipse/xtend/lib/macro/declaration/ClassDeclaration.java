@@ -47,6 +47,6 @@ public interface ClassDeclaration extends TypeDeclaration,
 	/**
 	 * @return the interfaces directly implemented by the class declaration
 	 */
-	Iterable<TypeReference> getImplementedInterfaces();
+	Iterable<? extends TypeReference> getImplementedInterfaces();
 
 }

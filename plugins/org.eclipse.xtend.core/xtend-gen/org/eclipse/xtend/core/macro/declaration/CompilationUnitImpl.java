@@ -364,18 +364,14 @@ public class CompilationUnitImpl implements CompilationUnit {
       boolean _startsWith = absolutefilePath.startsWith(workspacePath);
       boolean _not = (!_startsWith);
       if (_not) {
-        String _plus = ("Couldn\'t determine file path. The file (\'" + absolutefilePath);
-        String _plus_1 = (_plus + "\') doesn\'t seem to be contained in the workspace (\'");
-        String _plus_2 = (_plus_1 + workspacePath);
-        String _plus_3 = (_plus_2 + "\')");
-        IllegalStateException _illegalStateException = new IllegalStateException(_plus_3);
+        IllegalStateException _illegalStateException = new IllegalStateException((((("Couldn\'t determine file path. The file (\'" + absolutefilePath) + "\') doesn\'t seem to be contained in the workspace (\'") + workspacePath) + "\')"));
         throw _illegalStateException;
       }
       int _length = workspacePath.length();
       final String filePath = absolutefilePath.substring(_length);
       String _string = filePath.toString();
-      String _plus_4 = ("/" + _string);
-      Path _path_1 = new Path(_plus_4);
+      String _plus = ("/" + _string);
+      Path _path_1 = new Path(_plus);
       return _path_1;
     }
     String _path_2 = uri.path();
@@ -729,8 +725,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           }
         }
         if (!_matched) {
-          String _plus = ("Couldn\'t translate \'" + delegate);
-          UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus);
+          UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(("Couldn\'t translate \'" + delegate));
           throw _unsupportedOperationException;
         }
         return _switchResult;

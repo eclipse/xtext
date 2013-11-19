@@ -34,8 +34,7 @@ public class Case_0 {
       String _xifexpression = null;
       boolean _isUpper = this.isUpper(a);
       if (_isUpper) {
-        String _plus_2 = (b + "holla");
-        String _another = this.another(a, _plus_2);
+        String _another = this.another(a, (b + "holla"));
         _xifexpression = _another;
       } else {
         String _xblockexpression_1 = null;
@@ -43,8 +42,7 @@ public class Case_0 {
           String x = a;
           char[] _charArray = b.toCharArray();
           for (final char y : _charArray) {
-            String _plus_3 = (x + Character.valueOf(y));
-            x = _plus_3;
+            x = (x + Character.valueOf(y));
           }
           _xblockexpression_1 = (x);
         }
@@ -62,8 +60,7 @@ public class Case_0 {
   }
   
   public String another(final String x, final String y) {
-    String _plus = (y + x);
-    return _plus;
+    return (y + x);
   }
   
   public Case_0(final int id) {

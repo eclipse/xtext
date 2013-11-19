@@ -20,12 +20,7 @@ public class LineModel {
     this._leadingText = leadingText;
   }
   
-  private int _rootIndentLenght = new Function0<Integer>() {
-    public Integer apply() {
-      int _minus = (-1);
-      return _minus;
-    }
-  }.apply();
+  private int _rootIndentLenght = (-1);
   
   public int getRootIndentLenght() {
     return this._rootIndentLenght;

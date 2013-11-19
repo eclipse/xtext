@@ -294,8 +294,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
         boolean _notEquals = (!Objects.equal(mapping, null));
         if (_notEquals) {
           int _indexOf = line.indexOf("//");
-          int _minus_1 = (-1);
-          boolean _equals = (_indexOf == _minus_1);
+          boolean _equals = (_indexOf == (-1));
           if (_equals) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Line ");
@@ -315,15 +314,13 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
           int expTargetStart = (-1);
           int expTargetEnd = (-1);
           int _indexOf_2 = expectation.indexOf("..");
-          int _minus_2 = (-1);
-          boolean _notEquals_1 = (_indexOf_2 != _minus_2);
+          boolean _notEquals_1 = (_indexOf_2 != (-1));
           if (_notEquals_1) {
             final int idx = expectation.indexOf("..");
             String _substring_1 = expectation.substring(0, idx);
             int _parseInt = Integer.parseInt(_substring_1);
             expTargetStart = _parseInt;
-            int _plus_1 = (idx + 2);
-            String _substring_2 = expectation.substring(_plus_1);
+            String _substring_2 = expectation.substring((idx + 2));
             int _parseInt_1 = Integer.parseInt(_substring_2);
             expTargetEnd = _parseInt_1;
           } else {
@@ -332,15 +329,12 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
             expTargetStart = _expTargetEnd;
           }
           Assert.assertEquals(line, expTargetStart, mapping.targetStartLine);
-          String _plus_2 = ("unexpected end in line : " + line);
-          Assert.assertEquals(_plus_2, expTargetEnd, mapping.targetEndLine);
+          Assert.assertEquals(("unexpected end in line : " + line), expTargetEnd, mapping.targetEndLine);
         } else {
           int _indexOf_3 = line.indexOf("//");
-          int _minus_3 = (-1);
-          boolean _notEquals_2 = (_indexOf_3 != _minus_3);
+          boolean _notEquals_2 = (_indexOf_3 != (-1));
           if (_notEquals_2) {
-            String _plus_3 = ("Unmatched expectation : " + line);
-            Assert.fail(_plus_3);
+            Assert.fail(("Unmatched expectation : " + line));
           }
         }
       }
@@ -349,9 +343,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
   
   public LineMapping findMapping(final List<LineMapping> mappings, final Integer sourceLine) {
     for (final LineMapping m : mappings) {
-      int _plus = ((sourceLine).intValue() + 1);
-      boolean _equals = (m.sourceStartLine == _plus);
-      if (_equals) {
+      if ((m.sourceStartLine == ((sourceLine).intValue() + 1))) {
         return m;
       }
     }

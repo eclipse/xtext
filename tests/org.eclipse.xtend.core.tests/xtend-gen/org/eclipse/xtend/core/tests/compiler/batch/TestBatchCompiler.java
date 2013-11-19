@@ -143,14 +143,12 @@ public class TestBatchCompiler {
       Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings.keySet();
       final Path src = IterableExtensions.<Path>head(_keySet);
-      String _plus = (projectPath + "/batch-compiler-data/test data");
       String _string_1 = src.toString();
-      Assert.assertEquals(_plus, _string_1);
+      Assert.assertEquals((projectPath + "/batch-compiler-data/test data"), _string_1);
       Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       final Path target = _sourceFolderMappings_1.get(src);
-      String _plus_1 = (projectPath + "/test-result");
       String _string_2 = target.toString();
-      Assert.assertEquals(_plus_1, _string_2);
+      Assert.assertEquals((projectPath + "/test-result"), _string_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -663,8 +661,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
     this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
     this.batchCompiler.compile();
-    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test");
-    File _file = new File(_plus);
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test"));
     String[] _list = _file.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(14, _size);
@@ -677,8 +674,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
     this.batchCompiler.setClassPath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
     this.batchCompiler.compile();
-    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test");
-    File _file = new File(_plus);
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test"));
     final File compilerOutputDir = _file;
     boolean _exists = compilerOutputDir.exists();
     Assert.assertTrue("Compiler output exists", _exists);
@@ -739,8 +735,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations1");
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
-    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage");
-    File _file = new File(_plus);
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
     final FilenameFilter _function = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
         boolean _endsWith = name.endsWith(".java");
@@ -757,8 +752,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations2");
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
-    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage");
-    File _file = new File(_plus);
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
     final FilenameFilter _function = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
         boolean _endsWith = name.endsWith(".java");
@@ -782,8 +776,7 @@ public class TestBatchCompiler {
   public void testCompileTestDataWithTrace() {
     this.batchCompiler.setWriteTraceFiles(true);
     this.batchCompiler.compile();
-    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
-    File _file = new File(_plus);
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
         boolean _endsWith = name.endsWith(".java");
@@ -793,8 +786,7 @@ public class TestBatchCompiler {
     String[] _list = _file.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(7, _size);
-    String _plus_1 = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
-    File _file_1 = new File(_plus_1);
+    File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function_1 = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
         boolean _endsWith = name.endsWith("._trace");
@@ -810,8 +802,7 @@ public class TestBatchCompiler {
   public void testCompileTestDataWithoutTrace() {
     this.batchCompiler.setWriteTraceFiles(false);
     this.batchCompiler.compile();
-    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
-    File _file = new File(_plus);
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
         boolean _endsWith = name.endsWith(".java");
@@ -821,8 +812,7 @@ public class TestBatchCompiler {
     String[] _list = _file.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(7, _size);
-    String _plus_1 = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
-    File _file_1 = new File(_plus_1);
+    File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function_1 = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
         boolean _endsWith = name.endsWith("._trace");

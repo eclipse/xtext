@@ -72,7 +72,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return _exists;
   }
   
-  public List<TypeReference> getExceptions() {
+  public Iterable<? extends TypeReference> getExceptions() {
     XtendConstructor _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
@@ -86,7 +86,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return _map;
   }
   
-  public List<? extends ParameterDeclaration> getParameters() {
+  public Iterable<? extends ParameterDeclaration> getParameters() {
     XtendConstructor _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter,XtendParameterDeclarationImpl> _function = new Function1<XtendParameter,XtendParameterDeclarationImpl>() {

@@ -112,12 +112,8 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
           public void apply(final ProjectConfig it) {
             Map<Path,Path> _sourceFolderMappings = it.getSourceFolderMappings();
-            String _plus = ("/" + ActiveAnnotationsRuntimeTest.this.macroProject);
-            String _plus_1 = (_plus + "/src");
-            Path _path = new Path(_plus_1);
-            String _plus_2 = ("/" + ActiveAnnotationsRuntimeTest.this.macroProject);
-            String _plus_3 = (_plus_2 + "/xtend-gen");
-            Path _path_1 = new Path(_plus_3);
+            Path _path = new Path((("/" + ActiveAnnotationsRuntimeTest.this.macroProject) + "/src"));
+            Path _path_1 = new Path((("/" + ActiveAnnotationsRuntimeTest.this.macroProject) + "/xtend-gen"));
             _sourceFolderMappings.put(_path, _path_1);
           }
         };
@@ -127,12 +123,8 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
           public void apply(final ProjectConfig it) {
             Map<Path,Path> _sourceFolderMappings = it.getSourceFolderMappings();
-            String _plus = ("/" + ActiveAnnotationsRuntimeTest.this.clientProject);
-            String _plus_1 = (_plus + "/src");
-            Path _path = new Path(_plus_1);
-            String _plus_2 = ("/" + ActiveAnnotationsRuntimeTest.this.clientProject);
-            String _plus_3 = (_plus_2 + "/xtend-gen");
-            Path _path_1 = new Path(_plus_3);
+            Path _path = new Path((("/" + ActiveAnnotationsRuntimeTest.this.clientProject) + "/src"));
+            Path _path_1 = new Path((("/" + ActiveAnnotationsRuntimeTest.this.clientProject) + "/xtend-gen"));
             _sourceFolderMappings.put(_path, _path_1);
           }
         };
@@ -168,19 +160,17 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   }
   
   protected URI copyToDisk(final String projectName, final Pair<String,String> fileRepresentation) {
-    String _plus = ("/" + projectName);
-    String _plus_1 = (_plus + "/src/");
     String _key = fileRepresentation.getKey();
-    String _plus_2 = (_plus_1 + _key);
-    Path _path = new Path(_plus_2);
+    String _plus = ((("/" + projectName) + "/src/") + _key);
+    Path _path = new Path(_plus);
     final Path path = _path;
     String _value = fileRepresentation.getValue();
     this.fileSystemSupport.setContents(path, _value);
     WorkspaceConfig _workspaceConfig = this.configProvider.getWorkspaceConfig();
     String _absoluteFileSystemPath = _workspaceConfig.getAbsoluteFileSystemPath();
     String _string = path.toString();
-    String _plus_3 = (_absoluteFileSystemPath + _string);
-    return URI.createFileURI(_plus_3);
+    String _plus_1 = (_absoluteFileSystemPath + _string);
+    return URI.createFileURI(_plus_1);
   }
   
   public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {

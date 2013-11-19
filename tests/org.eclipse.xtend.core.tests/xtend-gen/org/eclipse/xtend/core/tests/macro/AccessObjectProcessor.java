@@ -68,15 +68,12 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         if (_equals) {
           ctx.addError(it, "Cannot find Serializable");
         }
-        String _plus = (pkg + "P");
         String _simpleName_1 = it.getSimpleName();
-        final String PVersionName = (_plus + _simpleName_1);
+        final String PVersionName = ((pkg + "P") + _simpleName_1);
         final MutableClassDeclaration p = ctx.findClass(PVersionName);
         boolean _equals_1 = Objects.equal(p, null);
         if (_equals_1) {
-          String _plus_1 = ("Class " + PVersionName);
-          String _plus_2 = (_plus_1 + " not found");
-          ctx.addError(it, _plus_2);
+          ctx.addError(it, (("Class " + PVersionName) + " not found"));
         }
         boolean _and = false;
         boolean _notEquals = (!Objects.equal(p, null));
@@ -92,15 +89,12 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
           pIfcs.add(ser);
           p.setImplementedInterfaces(pIfcs);
         }
-        String _plus_3 = (pkg + "G");
         String _simpleName_2 = it.getSimpleName();
-        final String GVersionName = (_plus_3 + _simpleName_2);
+        final String GVersionName = ((pkg + "G") + _simpleName_2);
         final MutableClassDeclaration g = ctx.findClass(GVersionName);
         boolean _equals_2 = Objects.equal(g, null);
         if (_equals_2) {
-          String _plus_4 = ("Class " + GVersionName);
-          String _plus_5 = (_plus_4 + " not found");
-          ctx.addError(it, _plus_5);
+          ctx.addError(it, (("Class " + GVersionName) + " not found"));
         }
         boolean _and_1 = false;
         boolean _notEquals_2 = (!Objects.equal(g, null));
@@ -131,12 +125,10 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         int _length_1 = _simpleName.length();
         int _minus = (_length - _length_1);
         final String pkg = _qualifiedName.substring(0, _minus);
-        String _plus = (pkg + "P");
         String _simpleName_1 = it.getSimpleName();
-        final String PVersionName = (_plus + _simpleName_1);
-        String _plus_1 = (pkg + "G");
+        final String PVersionName = ((pkg + "P") + _simpleName_1);
         String _simpleName_2 = it.getSimpleName();
-        final String GVersionName = (_plus_1 + _simpleName_2);
+        final String GVersionName = ((pkg + "G") + _simpleName_2);
         ctx.registerClass(PVersionName);
         ctx.registerClass(GVersionName);
       }

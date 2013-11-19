@@ -407,8 +407,7 @@ public class XtendFormatter extends XbaseFormatter2 {
           boolean _lessThan = ((i).intValue() < _minus_1);
           if (_lessThan) {
             EList<XtendMember> _members_4 = type.getMembers();
-            int _plus = ((i).intValue() + 1);
-            final XtendMember next = _members_4.get(_plus);
+            final XtendMember next = _members_4.get(((i).intValue() + 1));
             boolean _and = false;
             if (!(current instanceof XtendField)) {
               _and = false;

@@ -56,8 +56,7 @@ public class SkipNodesInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTe
         {
           final int offset = node.getTotalOffset();
           final int length = node.getTotalLength();
-          boolean _notEquals_1 = (length != 0);
-          if (_notEquals_1) {
+          if ((length != 0)) {
             boolean _or = false;
             boolean _or_1 = false;
             boolean _equals = Objects.equal(region, null);
@@ -65,15 +64,15 @@ public class SkipNodesInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTe
               _or_1 = true;
             } else {
               int _offset = region.getOffset();
-              boolean _notEquals_2 = (_offset != offset);
-              _or_1 = (_equals || _notEquals_2);
+              boolean _notEquals_1 = (_offset != offset);
+              _or_1 = (_equals || _notEquals_1);
             }
             if (_or_1) {
               _or = true;
             } else {
               int _length = region.getLength();
-              boolean _notEquals_3 = (_length != length);
-              _or = (_or_1 || _notEquals_3);
+              boolean _notEquals_2 = (_length != length);
+              _or = (_or_1 || _notEquals_2);
             }
             if (_or) {
               ReplaceRegion _replaceRegion = new ReplaceRegion(offset, length, "");
