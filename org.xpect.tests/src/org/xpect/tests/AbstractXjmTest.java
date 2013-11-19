@@ -2,11 +2,10 @@ package org.xpect.tests;
 
 import java.lang.reflect.Constructor;
 
-import junit.framework.Assert;
-
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.xpect.XpectInjectorProvider;
 import org.xpect.XpectJavaModel;

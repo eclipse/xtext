@@ -9,6 +9,6 @@
 		<groupId>org.xpect</groupId>
 		<artifactId>org.xpect.parent</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
-		<relativePath>../maven-parent</relativePath>
+		<relativePath>../maven-plugin-parent</relativePath>
 	</parent>
 </project>

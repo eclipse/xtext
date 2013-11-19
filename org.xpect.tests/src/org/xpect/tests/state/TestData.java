@@ -1,5 +1,8 @@
 package org.xpect.tests.state;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 import org.xpect.state.Creates;
 import org.xpect.state.Managed;
 import org.xpect.state.ManagedImpl;
@@ -30,6 +33,7 @@ public class TestData {
 		}
 	}
 
+	@Retention(RetentionPolicy.RUNTIME)
 	public @interface Ann {
 	}
 

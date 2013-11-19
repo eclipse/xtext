@@ -9,7 +9,7 @@
 		<groupId>org.xpect</groupId>
 		<artifactId>org.xpect.parent</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
-		<relativePath>../org.xpect.releng/maven-parent</relativePath>
+		<relativePath>../org.xpect.releng/maven-plugin-parent</relativePath>
 	</parent>
 	<build>
 		<resources>

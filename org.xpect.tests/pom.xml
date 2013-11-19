@@ -5,52 +5,12 @@
 	<artifactId>org.xpect.tests</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
+
 	<parent>
 		<groupId>org.xpect</groupId>
-		<artifactId>org.xpect.parent</artifactId>
+		<artifactId>org.xpect.test.parent</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
-		<relativePath>../org.xpect.releng/maven-parent</relativePath>
+		<relativePath>../org.xpect.releng/maven-test-parent</relativePath>
 	</parent>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
-				<version>2.4.3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<!-- <goal>testCompile</goal> -->
-						</goals>
-						<!-- optionally you can configure a different target folder <configuration> 
-							<outputDirectory>xtend-gen</outputDirectory> </configuration> -->
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.16</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<testClassesDirectory>target/classes</testClassesDirectory>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit47</artifactId>
-						<version>2.16</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>
-	</build>
 </project>

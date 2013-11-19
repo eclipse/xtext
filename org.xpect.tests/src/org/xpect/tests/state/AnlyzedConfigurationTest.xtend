@@ -4,6 +4,8 @@ import org.junit.Test
 import org.xpect.state.Creates
 
 import static org.xpect.tests.state.StateTestUtil.*
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
 
 class AnlyzedConfigurationTest {
 
@@ -18,6 +20,7 @@ class AnlyzedConfigurationTest {
 		val expected = '''
 			Primary Values {
 			    PrimaryValue[@MyAnnotaion1 String Managed[MyString2]]
+			    PrimaryValue[StateContainer Managed[null]]
 			    PrimaryValue[String Managed[MyString1]]
 			}
 			Derived Values {
@@ -25,7 +28,7 @@ class AnlyzedConfigurationTest {
 			        out DerivedValue[StringBuffer Singleton1.getBuffer()]
 			    }
 			    org.xpect.tests.state.Singleton2{
-			        in PrimaryValue[String Managed[MyString1]]
+			        in PrimaryValue[@MyAnnotaion1 String Managed[MyString2]]
 			        out DerivedValue[@Annotation StringBuffer Singleton2.getBuffer()]
 			    }
 			}
@@ -40,6 +43,7 @@ class AnlyzedConfigurationTest {
 		]
 		val expected = '''
 			Primary Values {
+			    PrimaryValue[StateContainer Managed[null]]
 			}
 			Derived Values {
 			    org.xpect.tests.state.TestData$StaticValueProvider{
@@ -58,6 +62,7 @@ class AnlyzedConfigurationTest {
 		]
 		val expected = '''
 			Primary Values {
+			    PrimaryValue[StateContainer Managed[null]]
 			}
 			Derived Values {
 			    org.xpect.tests.state.TestData$StaticManagedProvider{
@@ -79,6 +84,7 @@ class AnlyzedConfigurationTest {
 		val expected = '''
 			Primary Values {
 			    PrimaryValue[EventLogger Managed[]]
+			    PrimaryValue[StateContainer Managed[null]]
 			}
 			Derived Values {
 			    org.xpect.tests.state.LoggingTestData$StaticValueLoggingProvider{
@@ -108,6 +114,7 @@ class AnlyzedConfigurationTest {
 		val expected = '''
 			Primary Values {
 			    PrimaryValue[EventLogger Managed[]]
+			    PrimaryValue[StateContainer Managed[null]]
 			}
 			Derived Values {
 			    org.xpect.tests.state.LoggingTestData$StaticManagedLoggingProvider{
@@ -129,6 +136,7 @@ class AnlyzedConfigurationTest {
 
 }
 
+@Retention(RetentionPolicy.RUNTIME)
 annotation MyAnnotaion1 {
 }
 
@@ -153,5 +161,6 @@ class Singleton2 {
 	}
 }
 
+@Retention(RetentionPolicy.RUNTIME)
 annotation Annotation {
 }

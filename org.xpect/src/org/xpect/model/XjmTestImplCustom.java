@@ -1,5 +1,6 @@
 package org.xpect.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -12,6 +13,7 @@ import org.xpect.setup.XpectSetup;
 import org.xpect.util.JvmAnnotationUtil;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 public class XjmTestImplCustom extends XjmTestImpl {
@@ -57,11 +59,16 @@ public class XjmTestImplCustom extends XjmTestImpl {
 
 	@Override
 	public String toString() {
-		List<Object> items = Lists.newArrayList();
+		List<String> setups = Lists.newArrayList();
 		for (XjmSetup setup : getSetups())
-			items.add(setup.getJvmClass().getSimpleName());
-		items.addAll(getMethods());
-		String body = items.isEmpty() ? " {}" : " {\n  " + Joiner.on("\n").join(items).replace("\n", "\n  ") + "\n}";
+			setups.add(setup.getJvmClass().getSimpleName());
+		List<String> methods = Lists.newArrayList();
+		for (XjmMethod method : getMethods())
+			methods.add(method.toString());
+		Collections.sort(setups);
+		Collections.sort(methods);
+		Iterable<String> items = Iterables.concat(setups, methods);
+		String body = Iterables.isEmpty(items) ? " {}" : " {\n  " + Joiner.on("\n").join(items).replace("\n", "\n  ") + "\n}";
 		return "test " + getJvmClass().getQualifiedName() + body;
 	}
 
