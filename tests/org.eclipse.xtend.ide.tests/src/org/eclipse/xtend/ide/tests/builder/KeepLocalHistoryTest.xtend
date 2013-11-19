@@ -130,7 +130,7 @@ class KeepLocalHistoryTest extends AbstractXtendUITestCase {
 
 	def assertDelete(IFile it, int expectedLocalHistorySize) {
 		delete(true, null)
-		waitForAutoBuild
+		fullBuild
 		GENERATE_FILE_NAME.assertFileLocalHistory(expectedLocalHistorySize)
 		GENERATE_TRACK_FILE_NAME.assertFileLocalHistoryEmpty
 	}
@@ -141,7 +141,7 @@ class KeepLocalHistoryTest extends AbstractXtendUITestCase {
 	}
 
 	def assertGeneratedFiles(int expectedLocalHistorySize) {
-		waitForAutoBuild
+		fullBuild
 		GENERATE_FILE_NAME.assertExist.assertFileLocalHistory(expectedLocalHistorySize)
 		GENERATE_TRACK_FILE_NAME.assertExist.assertFileLocalHistoryEmpty
 	}
