@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -168,7 +169,8 @@ public class CompilationTestHelper {
 	 */
 	public void compile(final ResourceSet resourceSet, IAcceptor<Result> acceptor) {
 		try {
-			boolean hasErrors = false; 
+			boolean hasErrors = false;
+			List<Issue> allErrors = newArrayList();
 			List<Resource> resourcesToCheck = newArrayList(resourceSet.getResources());
 			for (Resource resource : resourcesToCheck) {
 				if (resource instanceof XtextResource) {
@@ -181,6 +183,7 @@ public class CompilationTestHelper {
 						if (issue.getSeverity() == Severity.ERROR) {
 							hasErrors = true;
 							log.error(issue);
+							allErrors.add(issue);
 						} else {
 							log.info(issue);
 						}
@@ -188,7 +191,7 @@ public class CompilationTestHelper {
 				}
 			}
 			if (hasErrors) {
-				throw new IllegalStateException("One or more resources contained errors. Check the logs.");
+				throw new IllegalStateException("One or more resources contained errors : "+Joiner.on(',').join(allErrors));
 			}
 			
 			final InMemoryFileSystemAccess access = fileSystemAccessProvider.get();
