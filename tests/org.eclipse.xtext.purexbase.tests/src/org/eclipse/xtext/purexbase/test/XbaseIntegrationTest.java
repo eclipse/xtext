@@ -75,4 +75,19 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		assertEvaluatesTo("zonk", "return if (false) while(false) ('foo'+'bar').length else 'zonk'");
 	}
 	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testIfExpression_06() throws Exception {
+		assertEvaluatesTo(0, 
+				"if (false) return 1");
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testIfExpression_07() throws Exception {
+		assertEvaluatesTo(0l, 
+				"if (false) return 1L");
+	}
 }

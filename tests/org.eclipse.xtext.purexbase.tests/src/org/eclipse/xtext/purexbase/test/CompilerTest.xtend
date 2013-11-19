@@ -190,8 +190,7 @@ class CompilerTest {
 			      String _xblockexpression_1 = null;
 			      {
 			        final String s1 = "foo";
-			        String _plus = (s + s1);
-			        _xblockexpression_1 = (_plus);
+			        _xblockexpression_1 = ((s + s1));
 			      }
 			      _xblockexpression = (_xblockexpression_1);
 			    }
@@ -283,8 +282,7 @@ class CompilerTest {
 			      final String x = "Hello ";
 			      final Function1<String,String> _function = new Function1<String,String>() {
 			        public String apply(final String e) {
-			          String _plus = (x + e);
-			          return _plus;
+			          return (x + e);
 			        }
 			      };
 			      final Function1<String,String> f = _function;
@@ -475,8 +473,7 @@ class CompilerTest {
 			          String _get = list.get(i);
 			          String _plus = ("whiled-" + _get);
 			          result.add(_plus);
-			          int _plus_1 = (i + 1);
-			          i = _plus_1;
+			          i = (i + 1);
 			        }
 			        int _size_1 = list.size();
 			        boolean _lessThan_1 = (i < _size_1);
@@ -629,27 +626,21 @@ class CompilerTest {
 			          if (!_matched) {
 			            if (shape instanceof Circle) {
 			              _matched=true;
-			              String _plus = ("a circle : diameter=" + Integer.valueOf(((Circle)shape).diameter));
-			              _switchResult = _plus;
+			              _switchResult = ("a circle : diameter=" + Integer.valueOf(((Circle)shape).diameter));
 			            }
 			          }
 			          if (!_matched) {
 			            if (shape instanceof Rectangle) {
-			              boolean _equals = (((Rectangle)shape).height == ((Rectangle)shape).width);
-			              if (_equals) {
+			              if ((((Rectangle)shape).height == ((Rectangle)shape).width)) {
 			                _matched=true;
-			                String _plus = ("a square : size=" + Integer.valueOf(((Rectangle)shape).width));
-			                _switchResult = _plus;
+			                _switchResult = ("a square : size=" + Integer.valueOf(((Rectangle)shape).width));
 			              }
 			            }
 			          }
 			          if (!_matched) {
 			            if (shape instanceof Rectangle) {
 			              _matched=true;
-			              String _plus = ("a rectangle : width=" + Integer.valueOf(((Rectangle)shape).width));
-			              String _plus_1 = (_plus + ", height=");
-			              String _plus_2 = (_plus_1 + Integer.valueOf(((Rectangle)shape).height));
-			              _switchResult = _plus_2;
+			              _switchResult = ((("a rectangle : width=" + Integer.valueOf(((Rectangle)shape).width)) + ", height=") + Integer.valueOf(((Rectangle)shape).height));
 			            }
 			          }
 			          return _switchResult;
