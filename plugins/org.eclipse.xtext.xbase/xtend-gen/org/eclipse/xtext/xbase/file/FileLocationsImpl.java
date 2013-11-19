@@ -43,9 +43,7 @@ public class FileLocationsImpl implements FileLocations {
     final ProjectConfig projectConfig = _projects.get(string);
     boolean _equals = Objects.equal(projectConfig, null);
     if (_equals) {
-      String _plus = ("The project \'" + string);
-      String _plus_1 = (_plus + "\' has not been configured.");
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus_1);
+      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException((("The project \'" + string) + "\' has not been configured."));
       throw _illegalArgumentException;
     }
     return projectConfig;

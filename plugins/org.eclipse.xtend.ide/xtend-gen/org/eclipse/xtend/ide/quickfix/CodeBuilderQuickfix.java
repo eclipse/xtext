@@ -129,8 +129,7 @@ public class CodeBuilderQuickfix {
         final XtendTypeDeclaration xtendClass = builder.getXtendType();
         URI _uRI = EcoreUtil.getURI(xtendClass);
         final IEditorPart editor = CodeBuilderQuickfix.this.editorOpener.open(_uRI, false);
-        boolean _not = (!(editor instanceof XtextEditor));
-        if (_not) {
+        if ((!(editor instanceof XtextEditor))) {
           return;
         }
         final XtextEditor xtextEditor = ((XtextEditor) editor);
@@ -149,9 +148,8 @@ public class CodeBuilderQuickfix {
         final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.create(document, ((XtextResource) _eResource), offset, 0, _doubleArrow);
         builder.build(appendable);
         appendable.commitChanges();
-        int _plus = (offset + 1);
         int _length = appendable.length();
-        xtextEditor.setHighlightRange(_plus, _length, true);
+        xtextEditor.setHighlightRange((offset + 1), _length, true);
       }
     };
     return _function;

@@ -103,13 +103,11 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   }
   
   public void setGenerateStub(final boolean generateStub) {
-    boolean _not = (!generateStub);
-    this.srcGenOnly = _not;
+    this.srcGenOnly = (!generateStub);
   }
   
   public boolean isGenerateStub() {
-    boolean _not = (!this.srcGenOnly);
-    return _not;
+    return (!this.srcGenOnly);
   }
   
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {

@@ -32,13 +32,11 @@ public class FormattingDataInit {
   }
   
   public void increaseIndentation() {
-    int _plus = (this.increaseIndentationChange + 1);
-    this.increaseIndentationChange = _plus;
+    this.increaseIndentationChange = (this.increaseIndentationChange + 1);
   }
   
   public void decreaseIndentation() {
-    int _minus = (this.decreaseIndentationChange - 1);
-    this.decreaseIndentationChange = _minus;
+    this.decreaseIndentationChange = (this.decreaseIndentationChange - 1);
   }
   
   public String toString() {

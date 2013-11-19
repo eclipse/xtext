@@ -36,7 +36,6 @@ public class XbaseEditorInputRedirectorTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenDerivedFileFromBin() {
     try {
-      String _plus = (WorkbenchTestHelper.TESTPROJECT_NAME + "/src/mypack/HelloXtend.xtend");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypack");
       _builder.newLine();
@@ -50,8 +49,7 @@ public class XbaseEditorInputRedirectorTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IFile fileInSrc = this.helper.createFileImpl(_plus, _builder.toString());
-      String _plus_1 = (WorkbenchTestHelper.TESTPROJECT_NAME + "/bin/mypack/HelloXtend.xtend");
+      final IFile fileInSrc = this.helper.createFileImpl((WorkbenchTestHelper.TESTPROJECT_NAME + "/src/mypack/HelloXtend.xtend"), _builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package mypack");
       _builder_1.newLine();
@@ -65,7 +63,7 @@ public class XbaseEditorInputRedirectorTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      final IFile fileInBin = this.helper.createFileImpl(_plus_1, _builder_1.toString());
+      final IFile fileInBin = this.helper.createFileImpl((WorkbenchTestHelper.TESTPROJECT_NAME + "/bin/mypack/HelloXtend.xtend"), _builder_1.toString());
       FileEditorInput _fileEditorInput = new FileEditorInput(fileInBin);
       final IEditorInput result = this.redirector.findOriginalSource(_fileEditorInput);
       IFile _file = ResourceUtil.getFile(result);

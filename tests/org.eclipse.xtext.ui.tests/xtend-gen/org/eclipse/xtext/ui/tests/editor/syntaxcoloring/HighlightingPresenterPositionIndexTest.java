@@ -32,8 +32,7 @@ public class HighlightingPresenterPositionIndexTest extends HighlightingPresente
   
   @Test
   public void testIndexAtOffset() {
-    int _minus = (-1);
-    int _computeIndexAtOffset = this.computeIndexAtOffset(this.positions, _minus);
+    int _computeIndexAtOffset = this.computeIndexAtOffset(this.positions, (-1));
     Assert.assertEquals(0, _computeIndexAtOffset);
     int _computeIndexAtOffset_1 = this.computeIndexAtOffset(this.positions, 0);
     Assert.assertEquals(0, _computeIndexAtOffset_1);
@@ -49,8 +48,7 @@ public class HighlightingPresenterPositionIndexTest extends HighlightingPresente
   
   @Test
   public void testIndexAfterOffset() {
-    int _minus = (-1);
-    int _computeIndexAfterOffset = this.computeIndexAfterOffset(this.positions, _minus);
+    int _computeIndexAfterOffset = this.computeIndexAfterOffset(this.positions, (-1));
     Assert.assertEquals(0, _computeIndexAfterOffset);
     int _computeIndexAfterOffset_1 = this.computeIndexAfterOffset(this.positions, 0);
     Assert.assertEquals(1, _computeIndexAfterOffset_1);
@@ -66,8 +64,7 @@ public class HighlightingPresenterPositionIndexTest extends HighlightingPresente
   
   @Test
   public void testIndexEndingAtOrEnclosingOffset() {
-    int _minus = (-1);
-    int _computeIndexEndingAtOrEnclosingOffset = this.computeIndexEndingAtOrEnclosingOffset(this.positions, _minus);
+    int _computeIndexEndingAtOrEnclosingOffset = this.computeIndexEndingAtOrEnclosingOffset(this.positions, (-1));
     Assert.assertEquals(0, _computeIndexEndingAtOrEnclosingOffset);
     int _computeIndexEndingAtOrEnclosingOffset_1 = this.computeIndexEndingAtOrEnclosingOffset(this.positions, 0);
     Assert.assertEquals(0, _computeIndexEndingAtOrEnclosingOffset_1);

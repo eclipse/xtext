@@ -82,8 +82,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
       boolean _add = AbstractClosureTypeTest.seenExpressions.add(string);
       boolean _not = (!_add);
       if (_not) {
-        String _plus = ("Duplicate expression under test: " + expression);
-        Assert.fail(_plus);
+        Assert.fail(("Duplicate expression under test: " + expression));
       }
       XExpression _expression = super.expression(expression, resolve);
       _xblockexpression = (_expression);
@@ -649,25 +648,19 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_02() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|e)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>Object");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|e)\n") + 
+      "}"), "(Object)=>Object");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_03() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|false)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|false)\n") + 
+      "}"), "(Object)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Boolean>");
   }
   
@@ -794,13 +787,10 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_24() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  $$ListExtensions::map(list) [e|e]\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>Object");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  $$ListExtensions::map(list) [e|e]\n") + 
+      "}"), "(Object)=>Object");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
   }
   
@@ -836,25 +826,19 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_30() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e| return e)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>Object");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e| return e)\n") + 
+      "}"), "(Object)=>Object");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_31() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e| return false)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e| return false)\n") + 
+      "}"), "(Object)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Boolean>");
   }
   
@@ -993,13 +977,10 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_55() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  $$ListExtensions::map(list) [e| return e]\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>Object");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  $$ListExtensions::map(list) [e| return e]\n") + 
+      "}"), "(Object)=>Object");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
   }
   
@@ -1450,25 +1431,19 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_050() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "$$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| $$BooleanExtensions::operator_not(b) )");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(String)=>boolean", "(Boolean)=>boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("newArrayList(\'\').map(s|" + 
+      "$$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| $$BooleanExtensions::operator_not(b) )"), "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
   public void testFeatureCall_051() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "$$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| $$BooleanExtensions::operator_not(b) ).head");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(String)=>boolean", "(Boolean)=>boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("newArrayList(\'\').map(s|" + 
+      "$$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| $$BooleanExtensions::operator_not(b) ).head"), "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
@@ -1883,25 +1858,19 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_120() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "return $$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| return $$BooleanExtensions::operator_not(b) )");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(String)=>boolean", "(Boolean)=>boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("newArrayList(\'\').map(s|" + 
+      "return $$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| return $$BooleanExtensions::operator_not(b) )"), "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
   public void testFeatureCall_121() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "return $$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| return $$BooleanExtensions::operator_not(b) ).head");
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(String)=>boolean", "(Boolean)=>boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(((("newArrayList(\'\').map(s|" + 
+      "return $$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| return $$BooleanExtensions::operator_not(b) ).head"), "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   

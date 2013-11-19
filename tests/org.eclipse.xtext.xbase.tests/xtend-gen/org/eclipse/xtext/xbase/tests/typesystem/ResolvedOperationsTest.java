@@ -129,7 +129,6 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(_string, 2, _size);
     String _string_1 = all.toString();
-    int _plus = (1 + 6);
     final Function1<IResolvedOperation,Boolean> _function_1 = new Function1<IResolvedOperation,Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
@@ -139,7 +138,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     };
     Iterable<IResolvedOperation> _filter_1 = IterableExtensions.<IResolvedOperation>filter(all, _function_1);
     int _size_1 = IterableExtensions.size(_filter_1);
-    Assert.assertEquals(_string_1, _plus, _size_1);
+    Assert.assertEquals(_string_1, (1 + 6), _size_1);
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
     int _size_2 = declared.size();
     Assert.assertEquals(1, _size_2);
@@ -152,7 +151,6 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     String _string = all.toString();
-    int _plus = (1 + 1);
     final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
@@ -162,7 +160,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
     int _size = IterableExtensions.size(_filter);
-    Assert.assertEquals(_string, _plus, _size);
+    Assert.assertEquals(_string, (1 + 1), _size);
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
     final Function1<IResolvedOperation,Boolean> _function_1 = new Function1<IResolvedOperation,Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
@@ -212,8 +210,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
           }
         }
         if (!_matched) {
-          String _plus = ("Unexpected constructor: " + it);
-          Assert.fail(_plus);
+          Assert.fail(("Unexpected constructor: " + it));
         }
       }
     };
@@ -256,8 +253,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
           }
         }
         if (!_matched) {
-          String _plus = ("Unexpected constructor: " + it);
-          Assert.fail(_plus);
+          Assert.fail(("Unexpected constructor: " + it));
         }
       }
     };

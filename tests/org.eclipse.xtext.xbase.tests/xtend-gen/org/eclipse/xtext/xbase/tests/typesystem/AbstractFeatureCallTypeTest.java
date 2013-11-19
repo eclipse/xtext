@@ -98,8 +98,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
       boolean _add = AbstractFeatureCallTypeTest.seenExpressions.add(string);
       boolean _not = (!_add);
       if (_not) {
-        String _plus = ("Duplicate expression under test: " + expression);
-        Assert.fail(_plus);
+        Assert.fail(("Duplicate expression under test: " + expression));
       }
       XExpression _expression = super.expression(expression, resolve);
       _xblockexpression = (_expression);
@@ -364,24 +363,18 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   
   @Test
   public void testClosure_03() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|e)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesFeatureCallsTo(_plus_2, "List<? super String>", "List<Object>", "Object");
+    this.resolvesFeatureCallsTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|e)\n") + 
+      "}"), "List<? super String>", "List<Object>", "Object");
   }
   
   @Test
   public void testClosure_04() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|false)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesFeatureCallsTo(_plus_2, "List<? super String>", "List<Boolean>");
+    this.resolvesFeatureCallsTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|false)\n") + 
+      "}"), "List<? super String>", "List<Boolean>");
   }
   
   @Test
@@ -441,13 +434,10 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   
   @Test
   public void testClosure_31() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  $$ListExtensions::map(list) [e|e]\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesFeatureCallsTo(_plus_2, "List<Object>", "List<? super String>", "Object");
+    this.resolvesFeatureCallsTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  $$ListExtensions::map(list) [e|e]\n") + 
+      "}"), "List<Object>", "List<? super String>", "Object");
   }
   
   @Test

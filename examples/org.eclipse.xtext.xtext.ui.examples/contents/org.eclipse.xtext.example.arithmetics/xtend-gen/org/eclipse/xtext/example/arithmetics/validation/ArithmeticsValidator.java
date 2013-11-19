@@ -77,10 +77,9 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
     int _length = _string.length();
     boolean _lessEqualsThan = (_length <= 8);
     if (_lessEqualsThan) {
-      String _plus = ("Expression could be normalized to constant \'" + decimal);
-      String _plus_1 = (_plus + "\'");
       String _string_1 = decimal.toString();
-      this.warning(_plus_1, 
+      this.warning(
+        (("Expression could be normalized to constant \'" + decimal) + "\'"), 
         null, 
         ValidationMessageAcceptor.INSIGNIFICANT_INDEX, 
         ArithmeticsValidator.NORMALIZABLE, _string_1);

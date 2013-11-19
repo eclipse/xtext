@@ -800,20 +800,19 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
     };
     final Iterable<String> dispatchOperations = IterableExtensions.<JvmOperation, String>map(_allDispatchOperations, _function);
     for (final String signature : signatures) {
-      String _plus = (signature + " not found. Only got ");
       String _join = IterableExtensions.join(dispatchOperations, "\n");
-      String _plus_1 = (_plus + _join);
+      String _plus = ((signature + " not found. Only got ") + _join);
       boolean _contains = Iterables.contains(dispatchOperations, signature);
-      Assert.assertTrue(_plus_1, _contains);
+      Assert.assertTrue(_plus, _contains);
     }
     String _join_1 = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(signatures)), "\n");
-    String _plus_2 = ("Expected " + _join_1);
-    String _plus_3 = (_plus_2 + "but got ");
+    String _plus_1 = ("Expected " + _join_1);
+    String _plus_2 = (_plus_1 + "but got ");
     String _join_2 = IterableExtensions.join(dispatchOperations, "\n");
-    String _plus_4 = (_plus_3 + _join_2);
+    String _plus_3 = (_plus_2 + _join_2);
     int _size = ((List<String>)Conversions.doWrapArray(signatures)).size();
     int _size_1 = Iterables.size(dispatchOperations);
-    Assert.assertEquals(_plus_4, _size, _size_1);
+    Assert.assertEquals(_plus_3, _size, _size_1);
   }
   
   public String signature(final JvmOperation it) {

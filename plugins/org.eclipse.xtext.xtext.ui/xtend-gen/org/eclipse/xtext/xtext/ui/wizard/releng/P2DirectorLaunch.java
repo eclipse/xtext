@@ -48,15 +48,9 @@ public class P2DirectorLaunch {
   }
   
   private static String args(final String destination) {
-    String _plus = ("-repository  " + P2DirectorLaunch.REPOSITORY);
-    String _plus_1 = (_plus + " -destination \"");
-    String _plus_2 = (_plus_1 + destination);
-    String _plus_3 = (_plus_2 + "\" -profile ");
-    String _plus_4 = (_plus_3 + P2DirectorLaunch.PROFILE);
-    String _plus_5 = (_plus_4 + " -i ");
     String _join = IterableExtensions.join(P2DirectorLaunch.IUS, " -i ");
-    String _plus_6 = (_plus_5 + _join);
-    return _plus_6;
+    String _plus = ((((((("-repository  " + P2DirectorLaunch.REPOSITORY) + " -destination \"") + destination) + "\" -profile ") + P2DirectorLaunch.PROFILE) + " -i ") + _join);
+    return _plus;
   }
   
   public static void setupLaunchConfiguration(final ILaunchConfigurationWorkingCopy launchConfiguration, final String destinationPath) {

@@ -110,9 +110,7 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable t = (Throwable)_t;
-        String _plus = ("Expression was: \'" + expression);
-        String _plus_1 = (_plus + "\"");
-        RuntimeException _runtimeException = new RuntimeException(_plus_1, t);
+        RuntimeException _runtimeException = new RuntimeException((("Expression was: \'" + expression) + "\""), t);
         throw _runtimeException;
       } else {
         throw Exceptions.sneakyThrow(_t);

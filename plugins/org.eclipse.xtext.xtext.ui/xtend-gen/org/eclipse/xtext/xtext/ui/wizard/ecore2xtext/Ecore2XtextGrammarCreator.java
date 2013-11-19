@@ -474,8 +474,7 @@ public class Ecore2XtextGrammarCreator {
       }
     }
     if (!_matched) {
-      String _plus = ("No rule template for " + it);
-      IllegalStateException _illegalStateException = new IllegalStateException(_plus);
+      IllegalStateException _illegalStateException = new IllegalStateException(("No rule template for " + it));
       throw _illegalStateException;
     }
     return _switchResult;

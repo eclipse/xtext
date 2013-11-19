@@ -230,8 +230,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
               final OwnedConverter converter = _ownedConverter;
               for (final JvmUpperBound upperBound : upperBounds) {
                 {
-                  boolean _not_1 = (!isFirst);
-                  if (_not_1) {
+                  if ((!isFirst)) {
                     appendable.append(" & ");
                   }
                   isFirst = false;

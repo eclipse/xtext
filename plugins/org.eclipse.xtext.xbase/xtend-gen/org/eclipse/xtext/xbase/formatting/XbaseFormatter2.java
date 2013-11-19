@@ -238,8 +238,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             };
             Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(n, _function_3);
             format.operator_add(_append_3);
-            boolean _not = (!indented);
-            if (_not) {
+            if ((!indented)) {
               final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
                   it.increaseIndentation();
@@ -782,8 +781,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
               };
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_1 = this._formattingDataFactory.prepend(head, _function_2);
               format.operator_add(_prepend_1);
-              boolean _not = (!indented);
-              if (_not) {
+              if ((!indented)) {
                 final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
                     it.increaseIndentation();
@@ -814,8 +812,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 };
                 Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(node, _function_5);
                 format.operator_add(_append_2);
-                boolean _not_1 = (!indented);
-                if (_not_1) {
+                if ((!indented)) {
                   final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
                       it.increaseIndentation();
@@ -1444,8 +1441,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 };
                 Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_4 = this._formattingDataFactory.append(op, _function_6);
                 format.operator_add(_append_4);
-                boolean _not = (!indented);
-                if (_not) {
+                if ((!indented)) {
                   indented = true;
                   final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
@@ -1482,8 +1478,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
               };
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_7 = this._formattingDataFactory.append(op, _function_9);
               format.operator_add(_append_7);
-              boolean _not_1 = (!indented);
-              if (_not_1) {
+              if ((!indented)) {
                 indented = true;
                 final Procedure1<FormattingDataInit> _function_10 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
@@ -1496,8 +1491,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
             }
             EList<XExpression> _memberCallArguments_2 = call.getMemberCallArguments();
             boolean _isEmpty = _memberCallArguments_2.isEmpty();
-            boolean _not_2 = (!_isEmpty);
-            if (_not_2) {
+            boolean _not = (!_isEmpty);
+            if (_not) {
               EList<XExpression> _memberCallArguments_3 = call.getMemberCallArguments();
               final XClosure builder = this.builder(_memberCallArguments_3);
               INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(builder);
@@ -1533,34 +1528,23 @@ public class XbaseFormatter2 extends AbstractFormatter {
   }
   
   protected AbstractRule binaryOperationPrecedence(final EObject op) {
-    AbstractRule _xblockexpression = null;
-    {
-      final INode node = this._nodeModelAccess.nodeForFeature(op, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-      AbstractRule _xifexpression = null;
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(node, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        EObject _grammarElement = node.getGrammarElement();
-        _and = (_notEquals && (_grammarElement instanceof CrossReference));
-      }
-      if (_and) {
-        AbstractRule _xblockexpression_1 = null;
-        {
-          EObject _grammarElement_1 = node.getGrammarElement();
-          final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
-          AbstractRule _xifexpression_1 = null;
-          if ((terminal instanceof RuleCall)) {
-            return ((RuleCall) terminal).getRule();
-          }
-          _xblockexpression_1 = (_xifexpression_1);
-        }
-        _xifexpression = _xblockexpression_1;
-      }
-      _xblockexpression = (_xifexpression);
+    final INode node = this._nodeModelAccess.nodeForFeature(op, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(node, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      EObject _grammarElement = node.getGrammarElement();
+      _and = (_notEquals && (_grammarElement instanceof CrossReference));
     }
-    return _xblockexpression;
+    if (_and) {
+      EObject _grammarElement_1 = node.getGrammarElement();
+      final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
+      if ((terminal instanceof RuleCall)) {
+        return ((RuleCall) terminal).getRule();
+      }
+    }
+    return null;
   }
   
   protected boolean isMultiline(final XExpression expression, final FormattableDocument doc) {
@@ -1639,8 +1623,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           };
           Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(op, _function_2);
           format.operator_add(_append_1);
-          boolean _not = (!indented);
-          if (_not) {
+          if ((!indented)) {
             indented = true;
             final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
@@ -1797,8 +1780,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         format.operator_add(_append_4);
       }
     } else {
-      boolean _not = (!multiline);
-      if (_not) {
+      if ((!multiline)) {
         final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.oneSpace();
@@ -1863,8 +1845,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       if ((_else_5 instanceof XIfExpression)) {
         _or_3 = true;
       } else {
-        boolean _not_1 = (!multiline);
-        _or_3 = ((_else_5 instanceof XIfExpression) || _not_1);
+        _or_3 = ((_else_5 instanceof XIfExpression) || (!multiline));
       }
       if (_or_3) {
         final Procedure1<FormattingDataInit> _function_13 = new Procedure1<FormattingDataInit>() {
@@ -2534,22 +2515,20 @@ public class XbaseFormatter2 extends AbstractFormatter {
     };
     final boolean containsBlockExpr = IterableExtensions.<XCasePart>exists(_cases, _function);
     boolean _and = false;
-    boolean _not = (!containsBlockExpr);
-    if (!_not) {
+    if (!(!containsBlockExpr)) {
       _and = false;
     } else {
       INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(expr);
       String _text = _nodeForEObject.getText();
       String _trim = _text.trim();
       boolean _contains = _trim.contains("\n");
-      boolean _not_1 = (!_contains);
-      _and = (_not && _not_1);
+      boolean _not = (!_contains);
+      _and = ((!containsBlockExpr) && _not);
     }
     final boolean switchSL = _and;
     boolean _and_1 = false;
     boolean _and_2 = false;
-    boolean _not_2 = (!containsBlockExpr);
-    if (!_not_2) {
+    if (!(!containsBlockExpr)) {
       _and_2 = false;
     } else {
       EList<XCasePart> _cases_1 = expr.getCases();
@@ -2563,8 +2542,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
         }
       };
       boolean _exists = IterableExtensions.<XCasePart>exists(_cases_1, _function_1);
-      boolean _not_3 = (!_exists);
-      _and_2 = (_not_2 && _not_3);
+      boolean _not_1 = (!_exists);
+      _and_2 = ((!containsBlockExpr) && _not_1);
     }
     if (!_and_2) {
       _and_1 = false;
@@ -2582,8 +2561,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
       if (_text_1!=null) {
         _contains_1=_text_1.contains("\n");
       }
-      boolean _not_4 = (!_contains_1);
-      _and_1 = (_and_2 && _not_4);
+      boolean _not_2 = (!_contains_1);
+      _and_1 = (_and_2 && _not_2);
     }
     final boolean caseSL = _and_1;
     final ILeafNode open = this._nodeModelAccess.nodeForKeyword(expr, "{");
@@ -2823,8 +2802,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 final Procedure1<FormattingDataInit> _function_20 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
                     it.newLine();
-                    int _minus = (-2);
-                    it.decreaseIndentationChange = _minus;
+                    it.decreaseIndentationChange = (-2);
                   }
                 };
                 Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_8 = this._formattingDataFactory.append(cnode, _function_20);
@@ -2873,8 +2851,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             final Procedure1<FormattingDataInit> _function_19 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
                 it.newLine();
-                int _minus = (-2);
-                it.decreaseIndentationChange = _minus;
+                it.decreaseIndentationChange = (-2);
               }
             };
             Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_3 = this._formattingDataFactory.surround(_nodeForEObject_5, _function_18, _function_19);
@@ -3177,8 +3154,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(last, _function_2);
           format.operator_add(_append_1);
         } else {
-          boolean _not_1 = (!indented);
-          if (_not_1) {
+          if ((!indented)) {
             indented = true;
             final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {

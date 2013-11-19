@@ -89,10 +89,9 @@ public class QuickfixTestBuilder {
     try {
       QuickfixTestBuilder _xblockexpression = null;
       {
-        int _minus = (-1);
         String _string = model.toString();
         int _indexOf = _string.indexOf("|");
-        Assert.assertNotSame("No position marker | found in model", Integer.valueOf(_minus), Integer.valueOf(_indexOf));
+        Assert.assertNotSame("No position marker | found in model", Integer.valueOf((-1)), Integer.valueOf(_indexOf));
         String _string_1 = model.toString();
         String _replace = _string_1.replace("|", "");
         final IFile file = this._workbenchTestHelper.createFile(fileName, _replace);
@@ -192,12 +191,10 @@ public class QuickfixTestBuilder {
       final Set<String> actualLabels = IterableExtensions.<String>toSet(_map_1);
       final Procedure1<String> _function_2 = new Procedure1<String>() {
         public void apply(final String it) {
-          String _plus = ("Label \'" + it);
-          String _plus_1 = (_plus + "\' missing. Got ");
           String _join = IterableExtensions.join(actualLabels, ", ");
-          String _plus_2 = (_plus_1 + _join);
+          String _plus = ((("Label \'" + it) + "\' missing. Got ") + _join);
           boolean _contains = actualLabels.contains(it);
-          Assert.assertTrue(_plus_2, _contains);
+          Assert.assertTrue(_plus, _contains);
         }
       };
       IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedLabels)), _function_2);
@@ -228,12 +225,10 @@ public class QuickfixTestBuilder {
       final Set<String> actualLabels = IterableExtensions.<String>toSet(_map_1);
       final Procedure1<String> _function_2 = new Procedure1<String>() {
         public void apply(final String it) {
-          String _plus = ("Label \'" + it);
-          String _plus_1 = (_plus + "\' should not appear. Got ");
           String _join = IterableExtensions.join(actualLabels, ", ");
-          String _plus_2 = (_plus_1 + _join);
+          String _plus = ((("Label \'" + it) + "\' should not appear. Got ") + _join);
           boolean _contains = actualLabels.contains(it);
-          Assert.assertFalse(_plus_2, _contains);
+          Assert.assertFalse(_plus, _contains);
         }
       };
       IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(unExpectedLabels)), _function_2);

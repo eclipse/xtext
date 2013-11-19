@@ -35,8 +35,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
       final InputStream _function = new InputStream() {
         @Override
         public int read() throws IOException {
-          int _minus = (-1);
-          return _minus;
+          return (-1);
         }
       };
       file.create(_function, true, null);
@@ -55,8 +54,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
       final InputStream _function = new InputStream() {
         @Override
         public int read() throws IOException {
-          int _minus = (-1);
-          return _minus;
+          return (-1);
         }
       };
       file.create(_function, true, null);

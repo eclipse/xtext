@@ -104,8 +104,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
       boolean _add = AbstractTypeArgumentTest.seenExpressions.add(string);
       boolean _not = (!_add);
       if (_not) {
-        String _plus = ("Duplicate expression under test: " + expression);
-        Assert.fail(_plus);
+        Assert.fail(("Duplicate expression under test: " + expression));
       }
       XExpression _expression = super.expression(string, resolve);
       _xblockexpression = (_expression);
@@ -616,37 +615,28 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_03() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|e)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(_plus_2, "? super String", "Object");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|e)\n") + 
+      "}"), "? super String", "Object");
     this.done(_bindTypeArgumentsTo);
   }
   
   @Test
   public void testClosure_04() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|false)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(_plus_2, "? super String", "Boolean");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|false)\n") + 
+      "}"), "? super String", "Boolean");
     this.done(_bindTypeArgumentsTo);
   }
   
   @Test
   public void testClosure_05() throws Exception {
-    String _plus = ("{\n" + 
-      "  val func = [|\'literal\']\n");
-    String _plus_1 = (_plus + 
-      "  new testdata.ClosureClient().useProvider(func)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(_plus_2, "String");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(((("{\n" + 
+      "  val func = [|\'literal\']\n") + 
+      "  new testdata.ClosureClient().useProvider(func)\n") + 
+      "}"), "String");
     this.done(_bindTypeArgumentsTo);
   }
   
@@ -1454,13 +1444,10 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_58() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "$$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| $$BooleanExtensions::operator_not(b) )");
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(_plus_2, "String");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(((("newArrayList(\'\').map(s|" + 
+      "$$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| $$BooleanExtensions::operator_not(b) )"), "String");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String", "Boolean");
     Iterator<XExpression> _and_1 = this.and(_and, "Boolean", "Boolean");
     this.done(_and_1);
@@ -1468,13 +1455,10 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_59() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "$$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| $$BooleanExtensions::operator_not(b) ).head");
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(_plus_2, "String");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(((("newArrayList(\'\').map(s|" + 
+      "$$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| $$BooleanExtensions::operator_not(b) ).head"), "String");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String", "Boolean");
     Iterator<XExpression> _and_1 = this.and(_and, "Boolean", "Boolean");
     Iterator<XExpression> _and_2 = this.and(_and_1, "Boolean");

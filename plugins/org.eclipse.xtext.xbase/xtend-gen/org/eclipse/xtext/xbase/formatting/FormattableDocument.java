@@ -150,8 +150,7 @@ public class FormattableDocument {
             _builder_1.append("---------------------------------------------------------------------------------");
             _builder_1.newLine();
             FormattableDocument.log.error(_builder_1);
-            String _plus_1 = ("Can non format non-whitespace: " + oldText);
-            IllegalStateException _illegalStateException_1 = new IllegalStateException(_plus_1);
+            IllegalStateException _illegalStateException_1 = new IllegalStateException(("Can non format non-whitespace: " + oldText));
             throw _illegalStateException_1;
           }
         }
@@ -211,8 +210,7 @@ public class FormattableDocument {
       if (_notEquals) {
         FormattingData _xblockexpression_1 = null;
         {
-          boolean _greaterThan = (indentationChange > 0);
-          if (_greaterThan) {
+          if ((indentationChange > 0)) {
             increaseIndentationChange = indentationChange;
           } else {
             decreaseIndentationChange = indentationChange;
@@ -269,15 +267,12 @@ public class FormattableDocument {
       final Function2<Integer,Integer,Integer> _function = new Function2<Integer,Integer,Integer>() {
         public Integer apply(final Integer last, final Integer i) {
           int _xifexpression = (int) 0;
-          boolean _greaterThan = ((last).intValue() > 0);
-          if (_greaterThan) {
+          if (((last).intValue() > 0)) {
             String _document = FormattableDocument.this.getDocument();
-            int _minus = ((last).intValue() - 1);
-            int _lastIndexOf = _document.lastIndexOf("\n", _minus);
+            int _lastIndexOf = _document.lastIndexOf("\n", ((last).intValue() - 1));
             _xifexpression = _lastIndexOf;
           } else {
-            int _minus_1 = (-1);
-            _xifexpression = _minus_1;
+            _xifexpression = (-1);
           }
           return Integer.valueOf(_xifexpression);
         }
@@ -288,31 +283,26 @@ public class FormattableDocument {
       final Function2<Integer,Integer,Integer> _function_1 = new Function2<Integer,Integer,Integer>() {
         public Integer apply(final Integer last, final Integer i) {
           int _xifexpression = (int) 0;
-          boolean _greaterThan = ((last).intValue() > 0);
-          if (_greaterThan) {
+          if (((last).intValue() > 0)) {
             String _document = FormattableDocument.this.getDocument();
-            int _plus = ((last).intValue() + 1);
-            int _indexOf = _document.indexOf("\n", _plus);
+            int _indexOf = _document.indexOf("\n", ((last).intValue() + 1));
             _xifexpression = _indexOf;
           } else {
-            int _minus = (-1);
-            _xifexpression = _minus;
+            _xifexpression = (-1);
           }
           return Integer.valueOf(_xifexpression);
         }
       };
       final Integer forward = IterableExtensions.<Integer, Integer>fold(_upTo_1, Integer.valueOf(_offset_1), _function_1);
       Integer _xifexpression = null;
-      boolean _greaterEqualsThan = ((back).intValue() >= 0);
-      if (_greaterEqualsThan) {
+      if (((back).intValue() >= 0)) {
         _xifexpression = back;
       } else {
         _xifexpression = Integer.valueOf(0);
       }
       final Integer fiveLinesBackOffset = _xifexpression;
       Integer _xifexpression_1 = null;
-      boolean _greaterEqualsThan_1 = ((forward).intValue() >= 0);
-      if (_greaterEqualsThan_1) {
+      if (((forward).intValue() >= 0)) {
         _xifexpression_1 = forward;
       } else {
         String _document = this.getDocument();
@@ -442,8 +432,7 @@ public class FormattableDocument {
             int _offset_1 = f.getOffset();
             int _length = f.getLength();
             int _plus_1 = (_offset_1 + _length);
-            int _plus_2 = (offset + length);
-            boolean _lessEqualsThan = (_plus_1 <= _plus_2);
+            boolean _lessEqualsThan = (_plus_1 <= (offset + length));
             _and = (_greaterEqualsThan && _lessEqualsThan);
           }
           if (_and) {
@@ -470,13 +459,12 @@ public class FormattableDocument {
                 int _xifexpression = (int) 0;
                 int _increaseIndentationChange = ((NewLineData)f).getIncreaseIndentationChange();
                 int _decreaseIndentationChange = ((NewLineData)f).getDecreaseIndentationChange();
-                int _minus = (-1);
-                int _multiply = (_decreaseIndentationChange * _minus);
+                int _multiply = (_decreaseIndentationChange * (-1));
                 boolean _equals = (_increaseIndentationChange == _multiply);
                 if (_equals) {
                   int _increaseIndentationChange_1 = ((NewLineData)f).getIncreaseIndentationChange();
-                  int _plus_3 = (indentation + _increaseIndentationChange_1);
-                  _xifexpression = _plus_3;
+                  int _plus_2 = (indentation + _increaseIndentationChange_1);
+                  _xifexpression = _plus_2;
                 } else {
                   _xifexpression = indentation;
                 }
@@ -492,8 +480,8 @@ public class FormattableDocument {
               }
             }
             int _length_1 = f.getLength();
-            int _plus_3 = (textlength + _length_1);
-            oldOffset = _plus_3;
+            int _plus_2 = (textlength + _length_1);
+            oldOffset = _plus_2;
           }
         }
       }
@@ -537,8 +525,7 @@ public class FormattableDocument {
         }
       }
       String _document = this.getDocument();
-      int _plus = (offset + length);
-      final String text = _document.substring(lastOffset, _plus);
+      final String text = _document.substring(lastOffset, (offset + length));
       newDocument.append(text);
       String _string = newDocument.toString();
       _xblockexpression = (_string);
@@ -597,16 +584,14 @@ public class FormattableDocument {
           int _offset_3 = f_1.getOffset();
           final String text = _document.substring(lastOffset, _offset_3);
           final int index = text.lastIndexOf("\n");
-          boolean _greaterEqualsThan = (index >= 0);
-          if (_greaterEqualsThan) {
-            int _plus_2 = (index + lastOffset);
-            lineStart = _plus_2;
+          if ((index >= 0)) {
+            lineStart = (index + lastOffset);
             currentIndentation = 0;
           }
           int _offset_4 = f_1.getOffset();
           int _length_1 = f_1.getLength();
-          int _plus_3 = (_offset_4 + _length_1);
-          lastOffset = _plus_3;
+          int _plus_2 = (_offset_4 + _length_1);
+          lastOffset = _plus_2;
         }
       }
       int lengthDiff = 0;
@@ -627,17 +612,15 @@ public class FormattableDocument {
             _xifexpression = _length_1;
           }
           final int length = _xifexpression;
-          int _plus_3 = (lengthDiff + length);
           int _length_2 = ((WhitespaceData)f_2).getLength();
-          int _minus = (_plus_3 - _length_2);
+          int _minus = ((lengthDiff + length) - _length_2);
           lengthDiff = _minus;
         }
       }
-      int _minus_1 = (offset - lineStart);
       int _indentationLenght = this.getIndentationLenght(currentIndentation);
-      int _plus_4 = (_minus_1 + _indentationLenght);
-      int _plus_5 = (_plus_4 + lengthDiff);
-      _xblockexpression = (_plus_5);
+      int _plus_3 = ((offset - lineStart) + _indentationLenght);
+      int _plus_4 = (_plus_3 + lengthDiff);
+      _xblockexpression = (_plus_4);
     }
     return _xblockexpression;
   }
@@ -715,14 +698,12 @@ public class FormattableDocument {
   
   public String getIndentation(final int levels) {
     String _xifexpression = null;
-    boolean _greaterThan = (levels > 0);
-    if (_greaterThan) {
+    if ((levels > 0)) {
       String _xblockexpression = null;
       {
         FormattingPreferenceValues _cfg = this.getCfg();
         final String indent = _cfg.get(BasicFormatterPreferenceKeys.indentation);
-        int _minus = (levels - 1);
-        IntegerRange _upTo = new IntegerRange(0, _minus);
+        IntegerRange _upTo = new IntegerRange(0, (levels - 1));
         final Function1<Integer,String> _function = new Function1<Integer,String>() {
           public String apply(final Integer it) {
             return indent;
@@ -748,14 +729,12 @@ public class FormattableDocument {
   
   public String getWrap(final int levels) {
     String _xifexpression = null;
-    boolean _greaterThan = (levels > 0);
-    if (_greaterThan) {
+    if ((levels > 0)) {
       String _xblockexpression = null;
       {
         FormattingPreferenceValues _cfg = this.getCfg();
         final String sep = _cfg.get(BasicFormatterPreferenceKeys.lineSeparator);
-        int _minus = (levels - 1);
-        IntegerRange _upTo = new IntegerRange(0, _minus);
+        IntegerRange _upTo = new IntegerRange(0, (levels - 1));
         final Function1<Integer,String> _function = new Function1<Integer,String>() {
           public String apply(final Integer it) {
             return sep;

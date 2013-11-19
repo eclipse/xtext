@@ -23,12 +23,9 @@ public class FileAsserts {
     {
       IProject _project = this._workbenchTestHelper.getProject();
       final IResource file = _project.findMember(fileName);
-      String _plus = (fileName + " is not an IFile");
-      Assert.assertTrue(_plus, (file instanceof IFile));
-      String _plus_1 = ("File " + fileName);
-      String _plus_2 = (_plus_1 + " doesn\'t exist");
+      Assert.assertTrue((fileName + " is not an IFile"), (file instanceof IFile));
       boolean _exists = file.exists();
-      Assert.assertTrue(_plus_2, _exists);
+      Assert.assertTrue((("File " + fileName) + " doesn\'t exist"), _exists);
       _xblockexpression = (((IFile) file));
     }
     return _xblockexpression;

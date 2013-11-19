@@ -380,8 +380,7 @@ public class JvmModelGenerator implements IGenerator {
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
       final Function1<JvmMember,Boolean> _function_2 = new Function1<JvmMember,Boolean>() {
         public Boolean apply(final JvmMember it) {
-          boolean _not = (!(it instanceof JvmEnumerationLiteral));
-          return Boolean.valueOf(_not);
+          return Boolean.valueOf((!(it instanceof JvmEnumerationLiteral)));
         }
       };
       Iterable<JvmMember> _filter = IterableExtensions.<JvmMember>filter(_membersToBeCompiled, _function_2);
@@ -1069,10 +1068,9 @@ public class JvmModelGenerator implements IGenerator {
       IntegerRange _upTo = new IntegerRange(0, _minus);
       for (final Integer i : _upTo) {
         {
-          int _plus = ((i).intValue() + 1);
           EList<JvmFormalParameter> _parameters_2 = it.getParameters();
           int _size_1 = _parameters_2.size();
-          final boolean last = (_plus == _size_1);
+          final boolean last = (((i).intValue() + 1) == _size_1);
           EList<JvmFormalParameter> _parameters_3 = it.getParameters();
           final JvmFormalParameter p = _parameters_3.get((i).intValue());
           boolean _and = false;
@@ -1083,8 +1081,7 @@ public class JvmModelGenerator implements IGenerator {
             _and = (last && _isVarArgs);
           }
           this.generateParameter(p, appendable, _and, config);
-          boolean _not_1 = (!last);
-          if (_not_1) {
+          if ((!last)) {
             appendable.append(", ");
           }
         }
@@ -1099,8 +1096,7 @@ public class JvmModelGenerator implements IGenerator {
     tracedAppendable.append("final ");
     if (vararg) {
       JvmTypeReference _parameterType = it.getParameterType();
-      boolean _not = (!(_parameterType instanceof JvmGenericArrayTypeReference));
-      if (_not) {
+      if ((!(_parameterType instanceof JvmGenericArrayTypeReference))) {
         tracedAppendable.append("/* Internal Error: Parameter was vararg but not an array type. */");
       } else {
         JvmTypeReference _parameterType_1 = it.getParameterType();
@@ -1816,8 +1812,7 @@ public class JvmModelGenerator implements IGenerator {
     String _xifexpression = null;
     boolean _isJavaKeyword = this.keywords.isJavaKeyword(name);
     if (_isJavaKeyword) {
-      String _plus = (name + "_");
-      _xifexpression = _plus;
+      _xifexpression = (name + "_");
     } else {
       _xifexpression = name;
     }

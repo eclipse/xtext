@@ -83,8 +83,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   protected void handleDuplicateExpression(final CharSequence expression) {
-    String _plus = ("Duplicate expression under test: " + expression);
-    Assert.fail(_plus);
+    Assert.fail(("Duplicate expression under test: " + expression));
   }
   
   @Test
@@ -1194,24 +1193,18 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testClosure_03() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|e)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesTo(_plus_2, "List<Object>");
+    this.resolvesTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|e)\n") + 
+      "}"), "List<Object>");
   }
   
   @Test
   public void testClosure_04() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|false)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesTo(_plus_2, "List<Boolean>");
+    this.resolvesTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|false)\n") + 
+      "}"), "List<Boolean>");
   }
   
   @Test
@@ -1379,13 +1372,10 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testClosure_31() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  $$ListExtensions::map(list) [e|e]\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesTo(_plus_2, "List<Object>");
+    this.resolvesTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  $$ListExtensions::map(list) [e|e]\n") + 
+      "}"), "List<Object>");
   }
   
   @Ignore("TODO deferred closure body typing")
@@ -1713,19 +1703,9 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     final int max = 1000;
     IntegerRange _upTo = new IntegerRange(1, max);
     for (final Integer i : _upTo) {
-      String _plus = (input + " val s");
-      int _plus_1 = ((i).intValue() + 1);
-      String _plus_2 = (_plus + Integer.valueOf(_plus_1));
-      String _plus_3 = (_plus_2 + " = s");
-      String _plus_4 = (_plus_3 + i);
-      String _plus_5 = (_plus_4 + "\n");
-      input = _plus_5;
+      input = (((((input + " val s") + Integer.valueOf(((i).intValue() + 1))) + " = s") + i) + "\n");
     }
-    String _plus_6 = (input + " s");
-    int _plus_7 = (max + 1);
-    String _plus_8 = (_plus_6 + Integer.valueOf(_plus_7));
-    String _plus_9 = (_plus_8 + "}");
-    input = _plus_9;
+    input = (((input + " s") + Integer.valueOf((max + 1))) + "}");
     this.resolvesTo(input, "String");
   }
   
@@ -2425,24 +2405,18 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testFeatureCall_24_a() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "$$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| $$BooleanExtensions::operator_not(b) )");
-    this.resolvesTo(_plus_2, "List<Boolean>");
+    this.resolvesTo(((("newArrayList(\'\').map(s|" + 
+      "$$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| $$BooleanExtensions::operator_not(b) )"), "List<Boolean>");
   }
   
   @Test
   public void testFeatureCall_24_b() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "$$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| $$BooleanExtensions::operator_not(b) ).head");
-    this.resolvesTo(_plus_2, "Boolean");
+    this.resolvesTo(((("newArrayList(\'\').map(s|" + 
+      "$$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| $$BooleanExtensions::operator_not(b) ).head"), "Boolean");
   }
   
   @Test

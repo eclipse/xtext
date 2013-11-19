@@ -13,7 +13,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 /**
  * <p>
@@ -22,12 +21,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
  */
 @SuppressWarnings("all")
 public class UnconfirmedStructuralChangesDelta extends ChangedResourceDescriptionDelta {
-  private int buildNumber = new Function0<Integer>() {
-    public Integer apply() {
-      int _minus = (-1);
-      return _minus;
-    }
-  }.apply();
+  private int buildNumber = (-1);
   
   private final IType type;
   

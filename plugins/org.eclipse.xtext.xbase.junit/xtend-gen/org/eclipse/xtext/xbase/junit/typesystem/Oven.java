@@ -139,9 +139,7 @@ public class Oven extends Assert {
         final Throwable t = (Throwable)_t;
         t.printStackTrace();
         InputOutput.<String>println(input);
-        String _plus = ("Expression was: \'" + input);
-        String _plus_1 = (_plus + "\"");
-        RuntimeException _runtimeException = new RuntimeException(_plus_1, t);
+        RuntimeException _runtimeException = new RuntimeException((("Expression was: \'" + input) + "\""), t);
         throw _runtimeException;
       } else {
         throw Exceptions.sneakyThrow(_t);

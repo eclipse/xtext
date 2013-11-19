@@ -26,8 +26,7 @@ public class Xbase08_Loops {
           String _get = list.get(i);
           String _plus = ("whiled-" + _get);
           result.add(_plus);
-          int _plus_1 = (i + 1);
-          i = _plus_1;
+          i = (i + 1);
         }
         int _size_1 = list.size();
         boolean _lessThan_1 = (i < _size_1);

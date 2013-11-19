@@ -40,24 +40,22 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
   
   public IFile createWorkflowFile(final IFileCreator creator) {
     CharSequence _workflow = this.workflow();
-    String _plus = (this.modelFolder + "/");
     String _basePackagePath = this.projectInfo.getBasePackagePath();
-    String _plus_1 = (_plus + _basePackagePath);
-    String _plus_2 = (_plus_1 + "/Generate");
+    String _plus = ((this.modelFolder + "/") + _basePackagePath);
+    String _plus_1 = (_plus + "/Generate");
     String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
-    String _plus_3 = (_plus_2 + _languageNameAbbreviation);
-    String _plus_4 = (_plus_3 + ".mwe2");
-    IFile _writeToFile = creator.writeToFile(_workflow, _plus_4);
+    String _plus_2 = (_plus_1 + _languageNameAbbreviation);
+    String _plus_3 = (_plus_2 + ".mwe2");
+    IFile _writeToFile = creator.writeToFile(_workflow, _plus_3);
     return _writeToFile;
   }
   
   public IFile createGrammarFile(final IFileCreator creator) {
     Ecore2XtextGrammarCreator _ecore2XtextGrammarCreator = new Ecore2XtextGrammarCreator();
     CharSequence _grammar = _ecore2XtextGrammarCreator.grammar(this.projectInfo);
-    String _plus = (this.modelFolder + "/");
     String _grammarFilePath = this.projectInfo.getGrammarFilePath();
-    String _plus_1 = (_plus + _grammarFilePath);
-    IFile _writeToFile = creator.writeToFile(_grammar, _plus_1);
+    String _plus = ((this.modelFolder + "/") + _grammarFilePath);
+    IFile _writeToFile = creator.writeToFile(_grammar, _plus);
     return _writeToFile;
   }
   

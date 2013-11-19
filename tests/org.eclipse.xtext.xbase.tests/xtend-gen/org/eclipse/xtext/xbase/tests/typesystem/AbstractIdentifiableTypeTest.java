@@ -155,8 +155,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       boolean _add = AbstractIdentifiableTypeTest.seenExpressions.add(string);
       boolean _not = (!_add);
       if (_not) {
-        String _plus = ("Duplicate expression under test: " + expression);
-        Assert.fail(_plus);
+        Assert.fail(("Duplicate expression under test: " + expression));
       }
       XExpression _expression = super.expression(expression, resolve);
       _xblockexpression = (_expression);
@@ -352,24 +351,18 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testClosure_03() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|e)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesIdentifiablesTo(_plus_2, "List<? super String>", "Object");
+    this.resolvesIdentifiablesTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|e)\n") + 
+      "}"), "List<? super String>", "Object");
   }
   
   @Test
   public void testClosure_04() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  list.map(e|false)\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesIdentifiablesTo(_plus_2, "List<? super String>", "Object");
+    this.resolvesIdentifiablesTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  list.map(e|false)\n") + 
+      "}"), "List<? super String>", "Object");
   }
   
   @Test
@@ -450,13 +443,10 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testClosure_31() throws Exception {
-    String _plus = ("{\n" + 
-      "  var java.util.List<? super String> list = null;\n");
-    String _plus_1 = (_plus + 
-      "  $$ListExtensions::map(list) [e|e]\n");
-    String _plus_2 = (_plus_1 + 
-      "}");
-    this.resolvesIdentifiablesTo(_plus_2, "List<? super String>", "Object");
+    this.resolvesIdentifiablesTo(((("{\n" + 
+      "  var java.util.List<? super String> list = null;\n") + 
+      "  $$ListExtensions::map(list) [e|e]\n") + 
+      "}"), "List<? super String>", "Object");
   }
   
   @Test
@@ -661,13 +651,10 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testFeatureCall_24_a() throws Exception {
-    String _plus = ("newArrayList(\'\').map(s|" + 
-      "$$ObjectExtensions::operator_equals(");
-    String _plus_1 = (_plus + 
-      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
-    String _plus_2 = (_plus_1 + 
-      ").map(b| $$BooleanExtensions::operator_not(b) )");
-    this.resolvesIdentifiablesTo(_plus_2, "String", "Boolean");
+    this.resolvesIdentifiablesTo(((("newArrayList(\'\').map(s|" + 
+      "$$ObjectExtensions::operator_equals(") + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)") + 
+      ").map(b| $$BooleanExtensions::operator_not(b) )"), "String", "Boolean");
   }
   
   @Test

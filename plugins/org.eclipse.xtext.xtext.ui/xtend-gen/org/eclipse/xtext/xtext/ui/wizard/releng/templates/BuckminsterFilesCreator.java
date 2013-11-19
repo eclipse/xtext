@@ -7,7 +7,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xtext.ui.wizard.releng.P2DirectorLaunch;
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo;
 
@@ -22,33 +21,13 @@ public class BuckminsterFilesCreator {
   
   private static String PROJECT = "project";
   
-  private static String PROJECT_CQUERY_NAME = new Function0<String>() {
-    public String apply() {
-      String _plus = (BuckminsterFilesCreator.PROJECT + ".cquery");
-      return _plus;
-    }
-  }.apply();
+  private static String PROJECT_CQUERY_NAME = (BuckminsterFilesCreator.PROJECT + ".cquery");
   
-  private static String PLATFORM_CQUERY_NAME = new Function0<String>() {
-    public String apply() {
-      String _plus = (BuckminsterFilesCreator.PROJECT + "s-platform.cquery");
-      return _plus;
-    }
-  }.apply();
+  private static String PLATFORM_CQUERY_NAME = (BuckminsterFilesCreator.PROJECT + "s-platform.cquery");
   
-  private static String PROJECT_RMAP_NAME = new Function0<String>() {
-    public String apply() {
-      String _plus = (BuckminsterFilesCreator.PROJECT + ".rmap");
-      return _plus;
-    }
-  }.apply();
+  private static String PROJECT_RMAP_NAME = (BuckminsterFilesCreator.PROJECT + ".rmap");
   
-  private static String PLATFORM_RMAP_NAME = new Function0<String>() {
-    public String apply() {
-      String _plus = (BuckminsterFilesCreator.PROJECT + "s-platform.rmap");
-      return _plus;
-    }
-  }.apply();
+  private static String PLATFORM_RMAP_NAME = (BuckminsterFilesCreator.PROJECT + "s-platform.rmap");
   
   private static String COMMANDS_FILE_NAME = "commands.txt";
   

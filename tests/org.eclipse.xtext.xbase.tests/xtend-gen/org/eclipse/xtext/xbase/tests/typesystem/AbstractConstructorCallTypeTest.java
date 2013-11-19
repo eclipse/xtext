@@ -85,8 +85,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
       boolean _add = AbstractConstructorCallTypeTest.seenExpressions.add(string);
       boolean _not = (!_add);
       if (_not) {
-        String _plus = ("Duplicate expression under test: " + expression);
-        Assert.fail(_plus);
+        Assert.fail(("Duplicate expression under test: " + expression));
       }
       XExpression _expression = super.expression(expression, resolve);
       _xblockexpression = (_expression);

@@ -32,24 +32,22 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     try {
       String _defaultCharset = project.getDefaultCharset();
       CharSequence _workflow = this.workflow(_defaultCharset);
-      String _plus = (this.sourceRoot + "/");
       String _basePackagePath = this.projectInfo.getBasePackagePath();
-      String _plus_1 = (_plus + _basePackagePath);
-      String _plus_2 = (_plus_1 + "/Generate");
+      String _plus = ((this.sourceRoot + "/") + _basePackagePath);
+      String _plus_1 = (_plus + "/Generate");
       String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
-      String _plus_3 = (_plus_2 + _languageNameAbbreviation);
-      String _plus_4 = (_plus_3 + ".mwe2");
-      creator.writeToFile(_workflow, _plus_4);
+      String _plus_2 = (_plus_1 + _languageNameAbbreviation);
+      String _plus_3 = (_plus_2 + ".mwe2");
+      creator.writeToFile(_workflow, _plus_3);
       CharSequence _grammar = this.grammar();
-      String _plus_5 = (this.sourceRoot + "/");
       String _grammarFilePath = this.projectInfo.getGrammarFilePath();
-      String _plus_6 = (_plus_5 + _grammarFilePath);
-      creator.writeToFile(_grammar, _plus_6);
+      String _plus_4 = ((this.sourceRoot + "/") + _grammarFilePath);
+      creator.writeToFile(_grammar, _plus_4);
       CharSequence _wfLaunchConfig = this.wfLaunchConfig();
       String _projectName = this.projectInfo.getProjectName();
-      String _plus_7 = (".launch/Generate Language Infrastructure (" + _projectName);
-      String _plus_8 = (_plus_7 + ").launch");
-      creator.writeToFile(_wfLaunchConfig, _plus_8);
+      String _plus_5 = (".launch/Generate Language Infrastructure (" + _projectName);
+      String _plus_6 = (_plus_5 + ").launch");
+      creator.writeToFile(_wfLaunchConfig, _plus_6);
       boolean _isCreateEclipseRuntimeLaunchConfig = this.projectInfo.isCreateEclipseRuntimeLaunchConfig();
       if (_isCreateEclipseRuntimeLaunchConfig) {
         CharSequence _launchConfig = this.launchConfig();

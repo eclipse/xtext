@@ -16,7 +16,6 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.After;
 import org.junit.Assert;
@@ -33,16 +32,10 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
   
   private static String FILEEXTENSION = ".xtend";
   
-  private static String FILEPATH = new Function0<String>() {
-    public String apply() {
-      String _plus = ("testpackage/Foo" + XtendUnsugaredHoverTest.FILEEXTENSION);
-      return _plus;
-    }
-  }.apply();
+  private static String FILEPATH = ("testpackage/Foo" + XtendUnsugaredHoverTest.FILEEXTENSION);
   
   @Before
   public void createExtensionClass() throws Exception {
-    String _plus = ("testpackage/Extension" + XtendUnsugaredHoverTest.FILEEXTENSION);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package testpackage");
     _builder.newLine();
@@ -83,7 +76,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.newLine();
     String _string = _builder.toString();
-    this.testHelper.createFile(_plus, _string);
+    this.testHelper.createFile(("testpackage/Extension" + XtendUnsugaredHoverTest.FILEEXTENSION), _string);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package testpackage;");
     _builder_1.newLine();

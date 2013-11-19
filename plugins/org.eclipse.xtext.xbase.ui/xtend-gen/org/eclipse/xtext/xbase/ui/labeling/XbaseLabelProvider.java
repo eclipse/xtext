@@ -269,8 +269,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       String _parameters = this.uiStrings.parameters(element);
       String _plus = (simpleName + _parameters);
       StyledString _styledString = new StyledString(_plus);
-      String _plus_1 = (" : " + returnTypeString);
-      StyledString _styledString_1 = new StyledString(_plus_1, StyledString.DECORATIONS_STYLER);
+      StyledString _styledString_1 = new StyledString((" : " + returnTypeString), StyledString.DECORATIONS_STYLER);
       StyledString _append = _styledString.append(_styledString_1);
       _xblockexpression = (_append);
     }

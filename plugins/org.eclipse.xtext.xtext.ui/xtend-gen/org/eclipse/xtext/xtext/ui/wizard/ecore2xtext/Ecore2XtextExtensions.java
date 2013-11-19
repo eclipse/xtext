@@ -570,8 +570,7 @@ public class Ecore2XtextExtensions {
     String _xifexpression = null;
     boolean _isXtextKeyword = Ecore2XtextExtensions.isXtextKeyword(str);
     if (_isXtextKeyword) {
-      String _plus = ("^" + str);
-      _xifexpression = _plus;
+      _xifexpression = ("^" + str);
     } else {
       _xifexpression = str;
     }

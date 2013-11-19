@@ -23,9 +23,6 @@ public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
   public void normalize(final Issue issue, final IssueResolutionAcceptor acceptor) {
     String[] _data = issue.getData();
     final String string = _data[0];
-    String _plus = ("Replace with " + string);
-    String _plus_1 = ("Replace expression with \'" + string);
-    String _plus_2 = (_plus_1 + "\'");
     final IModification _function = new IModification() {
       public void apply(final IModificationContext it) throws Exception {
         IXtextDocument _xtextDocument = it.getXtextDocument();
@@ -34,6 +31,6 @@ public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
         _xtextDocument.replace((_offset).intValue(), (_length).intValue(), string);
       }
     };
-    acceptor.accept(issue, _plus, _plus_2, "upcase.png", _function);
+    acceptor.accept(issue, ("Replace with " + string), (("Replace expression with \'" + string) + "\'"), "upcase.png", _function);
   }
 }

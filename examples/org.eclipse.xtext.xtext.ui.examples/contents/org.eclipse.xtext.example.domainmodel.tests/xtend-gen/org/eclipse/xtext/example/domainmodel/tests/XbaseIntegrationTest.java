@@ -66,9 +66,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
     try {
       Object _xblockexpression = null;
       {
-        String _plus = ("entity Foo { op doStuff() : Object { " + expression);
-        String _plus_1 = (_plus + " } } ");
-        final DomainModel parse = this.parseHelper.parse(_plus_1);
+        final DomainModel parse = this.parseHelper.parse((("entity Foo { op doStuff() : Object { " + expression) + " } } "));
         this.validationHelper.assertNoErrors(parse);
         InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
         final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;

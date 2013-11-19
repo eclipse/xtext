@@ -133,8 +133,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       Iterable<EObject> _plus = Iterables.<EObject>concat(_members_1, _members_2);
       final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
         public Boolean apply(final EObject it) {
-          boolean _not = (!(it instanceof JvmConstructor));
-          return Boolean.valueOf(_not);
+          return Boolean.valueOf((!(it instanceof JvmConstructor)));
         }
       };
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_plus, _function);

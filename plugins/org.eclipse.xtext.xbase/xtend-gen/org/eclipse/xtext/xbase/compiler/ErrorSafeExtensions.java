@@ -119,25 +119,21 @@ public class ErrorSafeExtensions {
       if (_not) {
         ITreeAppendable _closeErrorAppendable = this.closeErrorAppendable(appendable, currentAppendable);
         currentAppendable = _closeErrorAppendable;
-        boolean _not_1 = (!isFirst);
-        if (_not_1) {
+        if ((!isFirst)) {
           loopParams.appendSeparator(appendable);
         }
         isFirst = false;
         body.apply(element, appendable);
       } else {
-        boolean _not_2 = (!allElementsBroken);
-        if (_not_2) {
+        if ((!allElementsBroken)) {
           ITreeAppendable _openErrorAppendable_1 = this.openErrorAppendable(appendable, currentAppendable, element);
           currentAppendable = _openErrorAppendable_1;
         }
         boolean _or = false;
-        boolean _not_3 = (!isFirst);
-        if (_not_3) {
+        if ((!isFirst)) {
           _or = true;
         } else {
-          boolean _not_4 = (!isFirstBroken);
-          _or = (_not_3 || _not_4);
+          _or = ((!isFirst) || (!isFirstBroken));
         }
         if (_or) {
           loopParams.appendSeparator(currentAppendable);
@@ -168,8 +164,7 @@ public class ErrorSafeExtensions {
   
   protected ITreeAppendable openErrorAppendable(final ITreeAppendable parent, final ITreeAppendable child, final EObject context) {
     ITreeAppendable _xifexpression = null;
-    boolean _not = (!(child instanceof ErrorTreeAppendable));
-    if (_not) {
+    if ((!(child instanceof ErrorTreeAppendable))) {
       ErrorTreeAppendable _errorChild = parent.errorChild(context);
       ITreeAppendable _append = _errorChild.append("/* ");
       _xifexpression = _append;

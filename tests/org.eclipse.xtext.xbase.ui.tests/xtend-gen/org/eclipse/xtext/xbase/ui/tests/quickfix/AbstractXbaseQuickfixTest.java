@@ -92,8 +92,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
   public XtextResource getResourceFor(final InputStream stream) {
     try {
       XtextResourceSet _resourceSet = this.getResourceSet();
-      String _plus = ("Test." + this.fileExtension);
-      URI _createURI = URI.createURI(_plus);
+      URI _createURI = URI.createURI(("Test." + this.fileExtension));
       Resource _createResource = _resourceSet.createResource(_createURI);
       final XtextResource result = ((XtextResource) _createResource);
       result.load(stream, null);

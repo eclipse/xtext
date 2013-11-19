@@ -115,11 +115,9 @@ public class JavaBuilderState {
       }
       boolean _equals = Objects.equal(this.state, null);
       if (_equals) {
-        long _minus = (-1l);
-        return this.lastStructuralBuildTime = Long.valueOf(_minus);
+        return this.lastStructuralBuildTime = Long.valueOf((-1l));
       }
-      long _minus_1 = (-1l);
-      Object _readField = this.readField(this.state, "lastStructuralBuildTime", Long.valueOf(_minus_1));
+      Object _readField = this.readField(this.state, "lastStructuralBuildTime", Long.valueOf((-1l)));
       Long _lastStructuralBuildTime = this.lastStructuralBuildTime = ((Long) _readField);
       _xblockexpression = (_lastStructuralBuildTime);
     }
@@ -135,11 +133,9 @@ public class JavaBuilderState {
       }
       boolean _equals = Objects.equal(this.state, null);
       if (_equals) {
-        int _minus = (-1);
-        return this.buildNumber = Integer.valueOf(_minus);
+        return this.buildNumber = Integer.valueOf((-1));
       }
-      int _minus_1 = (-1);
-      Object _readField = this.readField(this.state, "buildNumber", Integer.valueOf(_minus_1));
+      Object _readField = this.readField(this.state, "buildNumber", Integer.valueOf((-1)));
       Integer _buildNumber = this.buildNumber = ((Integer) _readField);
       _xblockexpression = (_buildNumber);
     }

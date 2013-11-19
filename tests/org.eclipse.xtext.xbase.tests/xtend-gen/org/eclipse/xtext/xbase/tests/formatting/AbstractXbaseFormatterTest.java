@@ -65,8 +65,7 @@ public abstract class AbstractXbaseFormatterTest {
         if (_equals) {
           _xifexpression = it;
         } else {
-          String _plus = (indent + it);
-          _xifexpression = _plus;
+          _xifexpression = (indent + it);
         }
         return _xifexpression;
       }

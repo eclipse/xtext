@@ -179,9 +179,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       String _replaceAll = originalSignature.replaceAll("\\bT\\b", "String");
       String _plus = (prefix + _replaceAll);
       String _plus_1 = (_plus + suffix);
-      String _plus_2 = (prefix + originalSignature);
-      String _plus_3 = (_plus_2 + suffix);
-      String _resolveSignatureInHtml = this.hoverGenericsResolver.resolveSignatureInHtml(call, javaElement, _plus_3);
+      String _resolveSignatureInHtml = this.hoverGenericsResolver.resolveSignatureInHtml(call, javaElement, ((prefix + originalSignature) + suffix));
       Assert.assertEquals(_plus_1, _resolveSignatureInHtml);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

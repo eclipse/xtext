@@ -69,22 +69,22 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     for (final URI uri : targetURIs) {
       final IUnitOfWork<Boolean,ResourceSet> _function_2 = new IUnitOfWork<Boolean,ResourceSet>() {
         public Boolean exec(final ResourceSet it) throws Exception {
-          Boolean _xblockexpression = null;
+          boolean _xblockexpression = false;
           {
             EObject _eObject = it.getEObject(uri, true);
             final JvmType obj = EcoreUtil2.<JvmType>getContainerOfType(_eObject, JvmType.class);
-            Boolean _xifexpression = null;
+            boolean _xifexpression = false;
             boolean _notEquals = (!Objects.equal(obj, null));
             if (_notEquals) {
               String _identifier = obj.getIdentifier();
               QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
               QualifiedName _lowerCase = _qualifiedName.toLowerCase();
               boolean _add = names.add(_lowerCase);
-              _xifexpression = Boolean.valueOf(_add);
+              _xifexpression = _add;
             }
             _xblockexpression = (_xifexpression);
           }
-          return _xblockexpression;
+          return Boolean.valueOf(_xblockexpression);
         }
       };
       localResourceAccess.<Boolean>readOnly(uri, _function_2);
@@ -174,8 +174,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
       boolean _contains = targetURISet.contains(typeURI);
       if (_contains) {
         final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate);
-        int _minus = (-1);
-        DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, typeURI, Literals.XABSTRACT_FEATURE_CALL__FEATURE, _minus, currentExportedContainerURI);
+        DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, typeURI, Literals.XABSTRACT_FEATURE_CALL__FEATURE, (-1), currentExportedContainerURI);
         acceptor.accept(_defaultReferenceDescription);
       }
     }

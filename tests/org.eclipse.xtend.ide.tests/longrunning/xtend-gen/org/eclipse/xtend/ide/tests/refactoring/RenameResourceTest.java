@@ -103,8 +103,7 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
         this.workspace.run(_function, _nullProgressMonitor_2);
         IProject _project = this._workbenchTestHelper.getProject();
-        String _plus = ("src/" + newFileName);
-        Path _path = new Path(_plus);
+        Path _path = new Path(("src/" + newFileName));
         final IResource newFile = _project.findMember(_path);
         boolean _exists = newFile.exists();
         Assert.assertTrue(_exists);

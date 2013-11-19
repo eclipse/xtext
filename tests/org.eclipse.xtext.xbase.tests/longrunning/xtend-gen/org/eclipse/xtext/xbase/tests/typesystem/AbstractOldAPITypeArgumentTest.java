@@ -64,8 +64,7 @@ public abstract class AbstractOldAPITypeArgumentTest extends AbstractTypeArgumen
       }
     }
     if (!_matched) {
-      String _plus = ("Unexpected expression: " + expression);
-      Assert.fail(_plus);
+      Assert.fail(("Unexpected expression: " + expression));
     }
   }
   

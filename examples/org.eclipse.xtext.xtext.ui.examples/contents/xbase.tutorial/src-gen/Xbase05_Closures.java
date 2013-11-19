@@ -11,8 +11,7 @@ public class Xbase05_Closures {
       final String x = "Hello ";
       final Function1<String,String> _function = new Function1<String,String>() {
         public String apply(final String e) {
-          String _plus = (x + e);
-          return _plus;
+          return (x + e);
         }
       };
       final Function1<String,String> f = _function;

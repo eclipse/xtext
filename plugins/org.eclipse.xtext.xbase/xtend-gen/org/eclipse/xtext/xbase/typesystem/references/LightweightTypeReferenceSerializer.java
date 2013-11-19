@@ -111,8 +111,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
         boolean isFirst = true;
         for (final LightweightTypeReference upperBound : relevantUpperBounds) {
           {
-            boolean _not_1 = (!isFirst);
-            if (_not_1) {
+            if ((!isFirst)) {
               this.appender.append(" & ");
             }
             isFirst = false;
@@ -127,8 +126,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     boolean isFirst = true;
     for (final LightweightTypeReference reference : references) {
       {
-        boolean _not = (!isFirst);
-        if (_not) {
+        if ((!isFirst)) {
           this.appender.append(", ");
         }
         isFirst = false;

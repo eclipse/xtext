@@ -507,9 +507,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       try {
         boolean _notEquals = (!Objects.equal(javaSeverity, "error"));
         if (_notEquals) {
-          String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
-          String _plus_1 = (_plus + "\' should be \'error\' by default");
-          Assert.fail(_plus_1);
+          Assert.fail((("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE) + "\' should be \'error\' by default"));
         }
         String otherSeverity = "warning";
         StringConcatenation _builder = new StringConcatenation();
@@ -609,9 +607,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
     try {
       boolean _notEquals = (!Objects.equal(javaSeverity, "ignore"));
       if (_notEquals) {
-        String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_INVALID_JAVADOC);
-        String _plus_1 = (_plus + "\' should be \'ignore\' by default");
-        Assert.fail(_plus_1);
+        Assert.fail((("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_INVALID_JAVADOC) + "\' should be \'ignore\' by default"));
       }
       String otherSeverity = "warning";
       StringConcatenation _builder = new StringConcatenation();

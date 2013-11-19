@@ -335,11 +335,9 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
           return;
         }
       }
-      String _plus = ("Expected an error marker containing \'" + msgPart);
-      String _plus_1 = (_plus + "\' on ");
       IPath _fullPath = file.getFullPath();
-      String _plus_2 = (_plus_1 + _fullPath);
-      String _plus_3 = (_plus_2 + " but found ");
+      String _plus = ((("Expected an error marker containing \'" + msgPart) + "\' on ") + _fullPath);
+      String _plus_1 = (_plus + " but found ");
       final Function1<IMarker,String> _function = new Function1<IMarker,String>() {
         public String apply(final IMarker it) {
           String _message = MarkerUtilities.getMessage(it);
@@ -348,8 +346,8 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       };
       List<String> _map = ListExtensions.<IMarker, String>map(((List<IMarker>)Conversions.doWrapArray(findMarkers)), _function);
       String _join = IterableExtensions.join(_map, ",");
-      String _plus_4 = (_plus_3 + _join);
-      Assert.fail(_plus_4);
+      String _plus_2 = (_plus_1 + _join);
+      Assert.fail(_plus_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

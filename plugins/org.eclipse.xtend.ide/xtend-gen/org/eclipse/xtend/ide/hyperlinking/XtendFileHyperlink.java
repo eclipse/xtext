@@ -31,13 +31,10 @@ public class XtendFileHyperlink implements IHyperlink {
   
   public XtendFileHyperlink(final String fileName, final IWorkbench workbench, final TextConsole console) {
     final int indexOfColon = fileName.indexOf(":");
-    int _minus = (-1);
-    boolean _notEquals = (indexOfColon != _minus);
-    if (_notEquals) {
+    if ((indexOfColon != (-1))) {
       String _substring = fileName.substring(0, indexOfColon);
       this.fileName = _substring;
-      int _plus = (indexOfColon + 1);
-      String _substring_1 = fileName.substring(_plus);
+      String _substring_1 = fileName.substring((indexOfColon + 1));
       Integer _valueOf = Integer.valueOf(_substring_1);
       this.lineNumber = (_valueOf).intValue();
     } else {
@@ -70,8 +67,7 @@ public class XtendFileHyperlink implements IHyperlink {
                   if (editor instanceof XtextEditor) {
                     _matched_2=true;
                     IXtextDocument _document = ((XtextEditor)editor).getDocument();
-                    int _minus = (this.lineNumber - 1);
-                    final IRegion region = _document.getLineInformation(_minus);
+                    final IRegion region = _document.getLineInformation((this.lineNumber - 1));
                     int _offset = region.getOffset();
                     int _length = region.getLength();
                     ((XtextEditor)editor).selectAndReveal(_offset, _length);

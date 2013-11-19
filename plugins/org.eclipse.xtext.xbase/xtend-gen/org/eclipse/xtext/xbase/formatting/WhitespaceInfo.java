@@ -34,8 +34,7 @@ public class WhitespaceInfo extends LeafInfo {
       int _indexOf = _leafs.indexOf(this);
       final int i = (_indexOf - 1);
       CommentInfo _xifexpression = null;
-      boolean _greaterEqualsThan = (i >= 0);
-      if (_greaterEqualsThan) {
+      if ((i >= 0)) {
         HiddenLeafs _container_1 = this.getContainer();
         List<LeafInfo> _leafs_1 = _container_1.getLeafs();
         LeafInfo _get = _leafs_1.get(i);

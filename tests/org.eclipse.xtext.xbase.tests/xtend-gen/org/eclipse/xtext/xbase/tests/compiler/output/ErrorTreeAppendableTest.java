@@ -38,8 +38,7 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
       Assert.assertEquals(app, _trace);
       TreeAppendable _trace_1 = app.trace(e, true);
       Assert.assertEquals(app, _trace_1);
-      int _minus = (-1);
-      ITreeAppendable _trace_2 = app.trace(e, Literals.XNUMBER_LITERAL__VALUE, _minus);
+      ITreeAppendable _trace_2 = app.trace(e, Literals.XNUMBER_LITERAL__VALUE, (-1));
       Assert.assertEquals(app, _trace_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

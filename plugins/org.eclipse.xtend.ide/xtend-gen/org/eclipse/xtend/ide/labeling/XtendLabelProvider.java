@@ -245,8 +245,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
         if (_notEquals_1) {
           String _name_1 = element.getName();
           StyledString _styledString_1 = new StyledString(_name_1);
-          String _plus = (" : " + type);
-          StyledString _styledString_2 = new StyledString(_plus, StyledString.DECORATIONS_STYLER);
+          StyledString _styledString_2 = new StyledString((" : " + type), StyledString.DECORATIONS_STYLER);
           return _styledString_1.append(_styledString_2);
         }
       }

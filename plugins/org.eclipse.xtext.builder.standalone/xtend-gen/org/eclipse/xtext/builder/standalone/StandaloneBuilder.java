@@ -202,8 +202,7 @@ public class StandaloneBuilder {
     if (!_isFailOnValidationError) {
       _and = false;
     } else {
-      boolean _not = (!isErrorFree);
-      _and = (_isFailOnValidationError && _not);
+      _and = (_isFailOnValidationError && (!isErrorFree));
     }
     if (_and) {
       return isErrorFree;
@@ -413,9 +412,7 @@ public class StandaloneBuilder {
     final String extensions = IterableExtensions.join(_keySet, "|");
     NameBasedFilter _nameBasedFilter = new NameBasedFilter();
     final NameBasedFilter nameBasedFilter = _nameBasedFilter;
-    String _plus = (".*\\.(?:(" + extensions);
-    String _plus_1 = (_plus + "))$");
-    nameBasedFilter.setRegularExpression(_plus_1);
+    nameBasedFilter.setRegularExpression(((".*\\.(?:(" + extensions) + "))$"));
     PathTraverser _pathTraverser = new PathTraverser();
     final PathTraverser pathTraverser = _pathTraverser;
     final List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
@@ -426,9 +423,7 @@ public class StandaloneBuilder {
         if (matches) {
           boolean _isDebugEnabled = StandaloneBuilder.LOG.isDebugEnabled();
           if (_isDebugEnabled) {
-            String _plus = ("Adding file \'" + input);
-            String _plus_1 = (_plus + "\'");
-            StandaloneBuilder.LOG.debug(_plus_1);
+            StandaloneBuilder.LOG.debug((("Adding file \'" + input) + "\'"));
           }
           Resource _resource = resourceSet.getResource(input, true);
           resources.add(_resource);

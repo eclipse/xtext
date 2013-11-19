@@ -166,8 +166,7 @@ public class EditorValidationTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final String bar = _builder_1.toString();
-      String _plus = (contentWithoutBar + bar);
-      final IFile file = this.helper.createFile("SomeClass.xtend", _plus);
+      final IFile file = this.helper.createFile("SomeClass.xtend", (contentWithoutBar + bar));
       this._syncUtil.waitForBuild(null);
       IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       int _length = _findMarkers.length;
@@ -193,8 +192,7 @@ public class EditorValidationTest extends AbstractXtendUITestCase {
       };
       _document_1.<Object>readOnly(_function);
       IXtextDocument _document_2 = editor.getDocument();
-      String _plus_1 = (contentWithoutBar + bar);
-      _document_2.set(_plus_1);
+      _document_2.set((contentWithoutBar + bar));
       this._syncUtil.waitForReconciler(editor);
       IXtextDocument _document_3 = editor.getDocument();
       final IUnitOfWork<Object,XtextResource> _function_1 = new IUnitOfWork<Object,XtextResource>() {

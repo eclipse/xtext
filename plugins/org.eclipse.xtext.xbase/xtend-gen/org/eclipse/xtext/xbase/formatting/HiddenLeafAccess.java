@@ -92,8 +92,7 @@ public class HiddenLeafAccess {
                 String _string = Character.valueOf(c).toString();
                 boolean _equals = Objects.equal(_string, "\n");
                 if (_equals) {
-                  int _plus = (newLines + 1);
-                  newLines = _plus;
+                  newLines = (newLines + 1);
                 } else {
                   boolean _isWhitespace = Character.isWhitespace(c);
                   boolean _not_1 = (!_isWhitespace);
@@ -107,8 +106,7 @@ public class HiddenLeafAccess {
           if (comment) {
             List<LeafInfo> _leafs = result.getLeafs();
             LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs);
-            boolean _not_1 = (!(_last instanceof WhitespaceInfo));
-            if (_not_1) {
+            if ((!(_last instanceof WhitespaceInfo))) {
               List<LeafInfo> _leafs_1 = result.getLeafs();
               int _offset = node.getOffset();
               WhitespaceInfo _whitespaceInfo = new WhitespaceInfo(result, null, 0, _offset);
@@ -123,16 +121,14 @@ public class HiddenLeafAccess {
             WhitespaceInfo _whitespaceInfo_1 = new WhitespaceInfo(result, node, newLines, _offset_1);
             _leafs_3.add(_whitespaceInfo_1);
           }
-          boolean _greaterThan = (newLines > 0);
-          if (_greaterThan) {
+          if ((newLines > 0)) {
             trailing = false;
           }
         }
       }
       List<LeafInfo> _leafs = result.getLeafs();
       LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs);
-      boolean _not = (!(_last instanceof WhitespaceInfo));
-      if (_not) {
+      if ((!(_last instanceof WhitespaceInfo))) {
         List<LeafInfo> _leafs_1 = result.getLeafs();
         int _xifexpression = (int) 0;
         List<LeafInfo> _leafs_2 = result.getLeafs();

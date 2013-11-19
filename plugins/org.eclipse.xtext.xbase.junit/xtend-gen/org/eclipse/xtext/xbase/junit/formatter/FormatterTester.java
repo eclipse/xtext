@@ -308,14 +308,12 @@ public class FormatterTester {
           final ITextRegion leafRegion = leaf.getTextRegion();
           boolean _and = false;
           boolean _and_1 = false;
-          boolean _greaterEqualsThan = (lastOffset >= offset);
-          if (!_greaterEqualsThan) {
+          if (!(lastOffset >= offset)) {
             _and_1 = false;
           } else {
             int _offset = leafRegion.getOffset();
-            int _plus = (offset + length);
-            boolean _lessEqualsThan = (_offset <= _plus);
-            _and_1 = (_greaterEqualsThan && _lessEqualsThan);
+            boolean _lessEqualsThan = (_offset <= (offset + length));
+            _and_1 = ((lastOffset >= offset) && _lessEqualsThan);
           }
           if (!_and_1) {
             _and = false;
@@ -332,8 +330,8 @@ public class FormatterTester {
           }
           int _offset_2 = leafRegion.getOffset();
           int _length = leafRegion.getLength();
-          int _plus_1 = (_offset_2 + _length);
-          lastOffset = _plus_1;
+          int _plus = (_offset_2 + _length);
+          lastOffset = _plus;
         }
       }
       _xblockexpression = (result);

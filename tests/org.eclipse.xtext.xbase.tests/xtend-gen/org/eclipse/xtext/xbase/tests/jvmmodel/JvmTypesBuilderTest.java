@@ -294,7 +294,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       Assert.assertEquals("MyEnum", _simpleName);
       String _documentation = this._jvmTypesBuilder.getDocumentation(myEnum);
       Assert.assertEquals("Foo", _documentation);
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("LITERAL0", "LITERAL1");
+      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList("LITERAL0", "LITERAL1");
       EList<JvmEnumerationLiteral> _literals = myEnum.getLiterals();
       final Function1<JvmEnumerationLiteral,String> _function_1 = new Function1<JvmEnumerationLiteral,String>() {
         public String apply(final JvmEnumerationLiteral it) {

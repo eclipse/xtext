@@ -44,27 +44,21 @@ public class Xbase10_Switch {
           if (!_matched) {
             if (shape instanceof Circle) {
               _matched=true;
-              String _plus = ("a circle : diameter=" + Integer.valueOf(((Circle)shape).diameter));
-              _switchResult = _plus;
+              _switchResult = ("a circle : diameter=" + Integer.valueOf(((Circle)shape).diameter));
             }
           }
           if (!_matched) {
             if (shape instanceof Rectangle) {
-              boolean _equals = (((Rectangle)shape).height == ((Rectangle)shape).width);
-              if (_equals) {
+              if ((((Rectangle)shape).height == ((Rectangle)shape).width)) {
                 _matched=true;
-                String _plus = ("a square : size=" + Integer.valueOf(((Rectangle)shape).width));
-                _switchResult = _plus;
+                _switchResult = ("a square : size=" + Integer.valueOf(((Rectangle)shape).width));
               }
             }
           }
           if (!_matched) {
             if (shape instanceof Rectangle) {
               _matched=true;
-              String _plus = ("a rectangle : width=" + Integer.valueOf(((Rectangle)shape).width));
-              String _plus_1 = (_plus + ", height=");
-              String _plus_2 = (_plus_1 + Integer.valueOf(((Rectangle)shape).height));
-              _switchResult = _plus_2;
+              _switchResult = ((("a rectangle : width=" + Integer.valueOf(((Rectangle)shape).width)) + ", height=") + Integer.valueOf(((Rectangle)shape).height));
             }
           }
           return _switchResult;

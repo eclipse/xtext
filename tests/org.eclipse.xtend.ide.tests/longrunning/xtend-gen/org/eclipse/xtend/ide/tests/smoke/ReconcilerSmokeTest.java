@@ -2496,8 +2496,7 @@ public class ReconcilerSmokeTest extends AbstractXtendUITestCase {
           int _minus = (_indexOf - 1);
           int _plus = (_minus + (i).intValue());
           String _switchResult = null;
-          int _modulo = ((i).intValue() % 4);
-          final int _switchValue = _modulo;
+          final int _switchValue = ((i).intValue() % 4);
           boolean _matched = false;
           if (!_matched) {
             if (Objects.equal(_switchValue,0)) {
