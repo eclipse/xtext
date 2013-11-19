@@ -60,6 +60,12 @@ class ArrayExtensionsTest {
 		assertTrue(doubleArray.equals(doubleArray))
 		assertTrue(stringArray.equals(stringArray))
 		assertTrue(charArray.equals(charArray))
+		assertFalse(intArray.equals(intArray.clone))
+		assertFalse(booleanArray.equals(booleanArray.clone))
+		assertFalse(longArray.equals(longArray.clone))
+		assertFalse(doubleArray.equals(doubleArray.clone))
+		assertFalse(stringArray.equals(stringArray.clone))
+		assertFalse(charArray.equals(charArray.clone))
 	}
 	
 	def int objectHashCode(Object x) {
