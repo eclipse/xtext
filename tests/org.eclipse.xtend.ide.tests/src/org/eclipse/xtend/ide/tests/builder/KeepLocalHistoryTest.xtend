@@ -141,7 +141,7 @@ class KeepLocalHistoryTest extends AbstractXtendUITestCase {
 	}
 
 	def assertGeneratedFiles(int expectedLocalHistorySize) {
-		waitForAutoBuild
+		fullBuild
 		GENERATE_FILE_NAME.assertExist.assertFileLocalHistory(expectedLocalHistorySize)
 		GENERATE_TRACK_FILE_NAME.assertExist.assertFileLocalHistoryEmpty
 	}

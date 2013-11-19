@@ -51,9 +51,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("import static com.google.common.base.Preconditions.*");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("@Active(MyAnnotationProcessor)");
+    _builder.append("@Active(ConfigurableAnnotationProcessor)");
     _builder.newLine();
-    _builder.append("annotation MyAnnotation {");
+    _builder.append("annotation ConfigurableAnnotation {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("BlackOrWhite color");
@@ -78,7 +78,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("class MyAnnotationProcessor extends AbstractClassProcessor {");
+    _builder.append("class ConfigurableAnnotationProcessor extends AbstractClassProcessor {");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
@@ -161,7 +161,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/ConfigurableAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -169,7 +169,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.append("import myannotation.*");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@MyAnnotation(color=BlackOrWhite.WHITE, colors=#[BlackOrWhite.WHITE, BlackOrWhite.BLACK], type = String, types=#[Integer, MyClass])");
+    _builder_1.append("@ConfigurableAnnotation(color=BlackOrWhite.WHITE, colors=#[BlackOrWhite.WHITE, BlackOrWhite.BLACK], type = String, types=#[Integer, MyClass])");
     _builder_1.newLine();
     _builder_1.append("class MyClass {");
     _builder_1.newLine();
