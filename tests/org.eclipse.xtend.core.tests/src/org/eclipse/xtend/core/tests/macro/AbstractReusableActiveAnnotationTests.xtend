@@ -15,7 +15,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Test def void testAnnotationValueSetting() {
 		assertProcessing(
-			'myannotation/MyAnnotation.xtend' -> '''
+			'myannotation/ConfigurableAnnotation.xtend' -> '''
 				package myannotation
 
 				import java.util.List
@@ -24,8 +24,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 				import static com.google.common.base.Preconditions.*
 				
-				@Active(MyAnnotationProcessor)
-				annotation MyAnnotation {
+				@Active(ConfigurableAnnotationProcessor)
+				annotation ConfigurableAnnotation {
 					BlackOrWhite color
 					BlackOrWhite[] colors
 					Class<?> type
@@ -36,7 +36,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 					BLACK, WHITE
 				}
 				
-				class MyAnnotationProcessor extends AbstractClassProcessor {
+				class ConfigurableAnnotationProcessor extends AbstractClassProcessor {
 				
 					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 						val anno = annotatedClass.annotations.head
@@ -73,7 +73,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 
 				import myannotation.*
 				
-				@MyAnnotation(color=BlackOrWhite.WHITE, colors=#[BlackOrWhite.WHITE, BlackOrWhite.BLACK], type = String, types=#[Integer, MyClass])
+				@ConfigurableAnnotation(color=BlackOrWhite.WHITE, colors=#[BlackOrWhite.WHITE, BlackOrWhite.BLACK], type = String, types=#[Integer, MyClass])
 				class MyClass {
 				}
 			'''
@@ -775,7 +775,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 
 	@Test def void testAddAnnotationValue() {
 		assertProcessing(
-			'myannotation/AbstractAnnotation.xtend' -> '''
+			'myannotation/AddAnnotation.xtend' -> '''
 				package myannotation
 				
 				import java.util.List
@@ -784,8 +784,9 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget
 				
-				@Active(typeof(AddAnnotationProcessor))
+				@Active(AddAnnotationProcessor)
 				annotation AddAnnotation { }
+				
 				class AddAnnotationProcessor implements TransformationParticipant<MutableAnnotationTarget> {
 					
 					override doTransform(List<? extends MutableAnnotationTarget> annotationTargets, extension TransformationContext context) {

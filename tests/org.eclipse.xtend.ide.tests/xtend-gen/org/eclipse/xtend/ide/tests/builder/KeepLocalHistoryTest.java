@@ -189,7 +189,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   public void assertDelete(final IFile it, final int expectedLocalHistorySize) {
     try {
       it.delete(true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.fullBuild();
       this.assertFileLocalHistory(KeepLocalHistoryTest.GENERATE_FILE_NAME, expectedLocalHistorySize);
       this.assertFileLocalHistoryEmpty(KeepLocalHistoryTest.GENERATE_TRACK_FILE_NAME);
     } catch (Throwable _e) {
@@ -207,11 +207,15 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   }
   
   public void assertGeneratedFiles(final int expectedLocalHistorySize) {
-    IResourcesSetupUtil.waitForAutoBuild();
-    String _assertExist = this.assertExist(KeepLocalHistoryTest.GENERATE_FILE_NAME);
-    this.assertFileLocalHistory(_assertExist, expectedLocalHistorySize);
-    String _assertExist_1 = this.assertExist(KeepLocalHistoryTest.GENERATE_TRACK_FILE_NAME);
-    this.assertFileLocalHistoryEmpty(_assertExist_1);
+    try {
+      IResourcesSetupUtil.fullBuild();
+      String _assertExist = this.assertExist(KeepLocalHistoryTest.GENERATE_FILE_NAME);
+      this.assertFileLocalHistory(_assertExist, expectedLocalHistorySize);
+      String _assertExist_1 = this.assertExist(KeepLocalHistoryTest.GENERATE_TRACK_FILE_NAME);
+      this.assertFileLocalHistoryEmpty(_assertExist_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public void assertFileLocalHistoryEmpty(final String it) {
