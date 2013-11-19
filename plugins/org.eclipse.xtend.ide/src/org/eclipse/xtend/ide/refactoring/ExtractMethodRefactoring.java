@@ -30,13 +30,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.internal.corext.refactoring.ParameterInfo;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
-import org.eclipse.ltk.core.refactoring.DocumentChange;
 import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -51,7 +48,6 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
@@ -391,8 +387,11 @@ public class ExtractMethodRefactoring extends Refactoring {
 			LightweightTypeReference expressionReturnType = resolvedTypes.getReturnType(expression);
 			if(expressionReturnType != null)
 				returnTypes.add(expressionReturnType);
-		}		
-		returnTypes.add(resolvedTypes.getActualType(lastExpression));
+		}
+		LightweightTypeReference actualType = resolvedTypes.getActualType(lastExpression);
+		//TODO this is a hack! Branching expressions without a default branch but all other branches are returns, will be of type void.
+		if (!actualType.isPrimitiveVoid())
+			returnTypes.add(actualType);
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(typeComputationServices, xtendClass);
 		return typeComputationServices.getTypeConformanceComputer().getCommonSuperType(returnTypes, owner);
 	}

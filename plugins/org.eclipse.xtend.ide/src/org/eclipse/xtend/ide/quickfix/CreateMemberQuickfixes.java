@@ -171,8 +171,19 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 
 	protected boolean isStaticAccess(XAbstractFeatureCall call) {
-		return call instanceof XMemberFeatureCall && ((XMemberFeatureCall)call).isExplicitStatic()
-				|| isStatic(logicalContainerProvider.getNearestLogicalContainer(call)); 
+		if (call instanceof XMemberFeatureCall) {
+			XMemberFeatureCall featureCall = (XMemberFeatureCall) call;
+			if (featureCall.isExplicitStatic()) {
+				return true;
+			}
+			if (featureCall.getMemberCallTarget() instanceof XAbstractFeatureCall) {
+				XAbstractFeatureCall targetCall = (XAbstractFeatureCall) featureCall.getMemberCallTarget();
+				if ( targetCall.isTypeLiteral()) {
+					return true;
+				}
+			}
+		}
+		return false; 
 	}
 	
 	protected boolean isStatic(JvmIdentifiableElement element) {
