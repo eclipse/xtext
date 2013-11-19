@@ -775,7 +775,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 
 	@Test def void testAddAnnotationValue() {
 		assertProcessing(
-			'myannotation/AddAnnotation.xtend' -> '''
+			'myannotation/AddAnnotationValue.xtend' -> '''
 				package myannotation
 				
 				import java.util.List
@@ -784,10 +784,10 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget
 				
-				@Active(AddAnnotationProcessor)
-				annotation AddAnnotation { }
+				@Active(AddAnnotationValueProcessor)
+				annotation AddAnnotationValue { }
 				
-				class AddAnnotationProcessor implements TransformationParticipant<MutableAnnotationTarget> {
+				class AddAnnotationValueProcessor implements TransformationParticipant<MutableAnnotationTarget> {
 					
 					override doTransform(List<? extends MutableAnnotationTarget> annotationTargets, extension TransformationContext context) {
 						annotationTargets.forEach [
@@ -815,7 +815,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'myusercode/UserCode.xtend' -> '''
 				package myusercode
 				
-				@myannotation.AddAnnotation
+				@myannotation.AddAnnotationValue
 				class MyClass {
 					
 				}
