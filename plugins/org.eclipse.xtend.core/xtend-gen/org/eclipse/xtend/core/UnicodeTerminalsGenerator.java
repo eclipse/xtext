@@ -88,15 +88,13 @@ class UnicodeTerminalsGenerator {
       {
         Boolean _apply = guard.apply(Integer.valueOf(((int) c)));
         if ((_apply).booleanValue()) {
-          boolean _not = (!run);
-          if (_not) {
+          if ((!run)) {
             prev = Character.valueOf(c);
             run = true;
           }
         } else {
           if (run) {
-            boolean _not_1 = (!first);
-            if (_not_1) {
+            if ((!first)) {
               printer.print("| ");
             } else {
               printer.print("  ");
@@ -109,13 +107,11 @@ class UnicodeTerminalsGenerator {
             String _plus_1 = (_plus + "\'");
             printer.print(_plus_1);
             char _charValue = prev.charValue();
-            int _minus = (c - 1);
-            boolean _equals = (_charValue == _minus);
+            boolean _equals = (_charValue == (c - 1));
             if (_equals) {
               printer.println();
             } else {
-              int _minus_1 = (c - 1);
-              String _hexString_1 = Integer.toHexString(_minus_1);
+              String _hexString_1 = Integer.toHexString((c - 1));
               String _upperCase_1 = _hexString_1.toUpperCase();
               String _padStart_1 = Strings.padStart(_upperCase_1, 4, '0');
               String _plus_2 = ("..\'\\u" + _padStart_1);
@@ -126,10 +122,8 @@ class UnicodeTerminalsGenerator {
             run = false;
           }
         }
-        int _plus_4 = (c + 1);
-        c = ((char) _plus_4);
-        boolean _equals_1 = (c == Character.MAX_VALUE);
-        if (_equals_1) {
+        c = ((char) (c + 1));
+        if ((c == Character.MAX_VALUE)) {
           return result;
         }
       }

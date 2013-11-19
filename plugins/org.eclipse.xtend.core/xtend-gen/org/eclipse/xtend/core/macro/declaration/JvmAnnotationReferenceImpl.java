@@ -293,12 +293,10 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
     boolean _equals = Objects.equal(jvmOperation, null);
     if (_equals) {
-      String _plus = ("The annotation property \'" + name);
-      String _plus_1 = (_plus + "\' is not declared on the annotation type \'");
       String _identifier = jvmAnnoType.getIdentifier();
-      String _plus_2 = (_plus_1 + _identifier);
-      String _plus_3 = (_plus_2 + "\'.");
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus_3);
+      String _plus = ((("The annotation property \'" + name) + "\' is not declared on the annotation type \'") + _identifier);
+      String _plus_1 = (_plus + "\'.");
+      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus_1);
       throw _illegalArgumentException;
     }
     return jvmOperation;

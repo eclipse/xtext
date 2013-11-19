@@ -56,8 +56,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     EObject _value = resAndObj.getValue();
     EObject _value_1 = resAndObj.getValue();
     EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
-    int _minus = (-1);
-    EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "user.issue", message, _value, _significantFeature, _minus, null);
+    EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "user.issue", message, _value, _significantFeature, (-1), null);
     _errors.add(_eObjectDiagnosticImpl);
   }
   
@@ -69,8 +68,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     EObject _value = resAndObj.getValue();
     EObject _value_1 = resAndObj.getValue();
     EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
-    int _minus = (-1);
-    EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.WARNING, "user.issue", message, _value, _significantFeature, _minus, null);
+    EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.WARNING, "user.issue", message, _value, _significantFeature, (-1), null);
     _warnings.add(_eObjectDiagnosticImpl);
   }
   

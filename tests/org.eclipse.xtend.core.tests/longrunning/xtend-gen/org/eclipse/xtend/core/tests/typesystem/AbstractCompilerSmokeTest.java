@@ -25,97 +25,62 @@ public abstract class AbstractCompilerSmokeTest extends CompilerTest {
   private Oven _oven;
   
   public void testBug_350932_13() throws Exception {
-    String _plus = ("package x class Z {" + 
-      "  def bug(){\n");
-    String _plus_1 = (_plus + 
-      "    val x = if (true) return Boolean::FALSE x\n");
-    String _plus_2 = (_plus_1 + 
-      "  }\n");
-    String _plus_3 = (_plus_2 + 
-      "  def invoke() {\n");
-    String _plus_4 = (_plus_3 + 
-      "    val boolean b = bug\n");
-    String _plus_5 = (_plus_4 + 
-      "  }\n");
-    final String code = (_plus_5 + 
+    final String code = ((((((("package x class Z {" + 
+      "  def bug(){\n") + 
+      "    val x = if (true) return Boolean::FALSE x\n") + 
+      "  }\n") + 
+      "  def invoke() {\n") + 
+      "    val boolean b = bug\n") + 
+      "  }\n") + 
       "}\n");
     this.assertNonSmoking(code);
   }
   
   public void testBug_350932_14() throws Exception {
-    String _plus = ("package x class Z {" + 
-      "  def bug(){\n");
-    String _plus_1 = (_plus + 
-      "    val x = if (true) return Boolean::FALSE else null x\n");
-    String _plus_2 = (_plus_1 + 
-      "  }\n");
-    String _plus_3 = (_plus_2 + 
-      "  def invoke() {\n");
-    String _plus_4 = (_plus_3 + 
-      "    val boolean b = bug\n");
-    String _plus_5 = (_plus_4 + 
-      "  }\n");
-    final String code = (_plus_5 + 
+    final String code = ((((((("package x class Z {" + 
+      "  def bug(){\n") + 
+      "    val x = if (true) return Boolean::FALSE else null x\n") + 
+      "  }\n") + 
+      "  def invoke() {\n") + 
+      "    val boolean b = bug\n") + 
+      "  }\n") + 
       "}\n");
     this.assertNonSmoking(code);
   }
   
   public void testBug_352849_02() throws Exception {
-    String _plus = ("package x\n" + 
-      "import java.util.Collection\n");
-    String _plus_1 = (_plus + 
-      "import java.util.List\n");
-    String _plus_2 = (_plus_1 + 
-      "class Z {");
-    String _plus_3 = (_plus_2 + 
-      "  \tdef generate() {\n");
-    String _plus_4 = (_plus_3 + 
-      "\t\tval List<CharSequence> seq = null\n");
-    String _plus_5 = (_plus_4 + 
-      "\t\tval List<String> strings = null\n");
-    String _plus_6 = (_plus_5 + 
-      "\t\tval result1 = seq.addAll2(strings)\n");
-    String _plus_7 = (_plus_6 + 
-      "\t\tval Collection<String> test1 = result1\n");
-    String _plus_8 = (_plus_7 + 
-      "\t\tval result2 = strings.addAll3(seq)\n");
-    String _plus_9 = (_plus_8 + 
-      "\t\tval Collection<String> test2 = result2\n");
-    String _plus_10 = (_plus_9 + 
-      "\t}\n");
-    String _plus_11 = (_plus_10 + 
-      "\tdef <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n");
-    String _plus_12 = (_plus_11 + 
-      "\t    collection.addAll(elements)\n");
-    String _plus_13 = (_plus_12 + 
-      "\t    null\n");
-    String _plus_14 = (_plus_13 + 
-      "\t}\n");
-    String _plus_15 = (_plus_14 + 
-      "\tdef <T> Collection<T> addAll3(Iterable<? extends T> elements, Collection<? super T> collection){\n");
-    String _plus_16 = (_plus_15 + 
-      "\t    collection.addAll(elements)\n");
-    String _plus_17 = (_plus_16 + 
-      "\t    null\n");
-    String _plus_18 = (_plus_17 + 
-      "\t}\n");
-    final String code = (_plus_18 + 
+    final String code = (((((((((((((((((((("package x\n" + 
+      "import java.util.Collection\n") + 
+      "import java.util.List\n") + 
+      "class Z {") + 
+      "  \tdef generate() {\n") + 
+      "\t\tval List<CharSequence> seq = null\n") + 
+      "\t\tval List<String> strings = null\n") + 
+      "\t\tval result1 = seq.addAll2(strings)\n") + 
+      "\t\tval Collection<String> test1 = result1\n") + 
+      "\t\tval result2 = strings.addAll3(seq)\n") + 
+      "\t\tval Collection<String> test2 = result2\n") + 
+      "\t}\n") + 
+      "\tdef <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n") + 
+      "\t    collection.addAll(elements)\n") + 
+      "\t    null\n") + 
+      "\t}\n") + 
+      "\tdef <T> Collection<T> addAll3(Iterable<? extends T> elements, Collection<? super T> collection){\n") + 
+      "\t    collection.addAll(elements)\n") + 
+      "\t    null\n") + 
+      "\t}\n") + 
       "}");
     this.assertNonSmoking(code);
   }
   
   public void testBug343096_01() throws Exception {
-    String _plus = ("package x class Y {" + 
-      "def <T> bug343096() {\n");
-    String _plus_1 = (_plus + 
-      "  [T t|switch t {\n");
-    String _plus_2 = (_plus_1 + 
-      "    case t : bug343096\n");
-    String _plus_3 = (_plus_2 + 
-      "  }]");
-    String _plus_4 = (_plus_3 + 
-      "}}");
-    this.compileJavaCode("x.Y", _plus_4);
+    this.compileJavaCode("x.Y", 
+      ((((("package x class Y {" + 
+        "def <T> bug343096() {\n") + 
+        "  [T t|switch t {\n") + 
+        "    case t : bug343096\n") + 
+        "  }]") + 
+        "}}"));
   }
   
   @Ignore

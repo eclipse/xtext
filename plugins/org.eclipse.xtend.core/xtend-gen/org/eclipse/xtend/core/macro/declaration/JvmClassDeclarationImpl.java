@@ -40,7 +40,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableClassDeclaration {
-  public Iterable<TypeReference> getImplementedInterfaces() {
+  public Iterable<? extends TypeReference> getImplementedInterfaces() {
     List<TypeReference> _xblockexpression = null;
     {
       JvmGenericType _delegate = this.getDelegate();

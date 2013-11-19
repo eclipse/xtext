@@ -330,8 +330,7 @@ public class PerformanceTest extends AbstractXtendTestCase {
       IntegerRange _upTo = new IntegerRange(0, num);
       for (final Integer i : _upTo) {
         {
-          String _plus = ("MyGeneratedType" + i);
-          config.className = _plus;
+          config.className = ("MyGeneratedType" + i);
           CharSequence _contents = this.fileGenerator.getContents(config);
           String _string = _contents.toString();
           files.add(_string);

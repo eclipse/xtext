@@ -40,7 +40,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
         Assert.assertNotNull(_findDeclaredMethod);
         final MutableClassDeclaration classPA = ctx.findClass("PA");
-        Iterable<TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
+        Iterable<? extends TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function = new Function1<TypeReference,Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
@@ -50,10 +50,10 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
             return Boolean.valueOf(_equals);
           }
         };
-        TypeReference _findFirst = IterableExtensions.<TypeReference>findFirst(_implementedInterfaces, _function);
+        TypeReference _findFirst = IterableExtensions.findFirst(_implementedInterfaces, _function);
         Assert.assertNotNull(_findFirst);
         final MutableClassDeclaration classGA = ctx.findClass("GA");
-        Iterable<TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
+        Iterable<? extends TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function_1 = new Function1<TypeReference,Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
@@ -63,7 +63,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
             return Boolean.valueOf(_equals);
           }
         };
-        TypeReference _findFirst_1 = IterableExtensions.<TypeReference>findFirst(_implementedInterfaces_1, _function_1);
+        TypeReference _findFirst_1 = IterableExtensions.findFirst(_implementedInterfaces_1, _function_1);
         Assert.assertNotNull(_findFirst_1);
       }
     };
@@ -94,7 +94,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
         Assert.assertNotNull(_findDeclaredMethod);
         final MutableClassDeclaration classPA = ctx.findClass("my.pack.PA");
-        Iterable<TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
+        Iterable<? extends TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function = new Function1<TypeReference,Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
@@ -104,10 +104,10 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
             return Boolean.valueOf(_equals);
           }
         };
-        TypeReference _findFirst = IterableExtensions.<TypeReference>findFirst(_implementedInterfaces, _function);
+        TypeReference _findFirst = IterableExtensions.findFirst(_implementedInterfaces, _function);
         Assert.assertNotNull(_findFirst);
         final MutableClassDeclaration classGA = ctx.findClass("my.pack.GA");
-        Iterable<TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
+        Iterable<? extends TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
         final Function1<TypeReference,Boolean> _function_1 = new Function1<TypeReference,Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
@@ -117,7 +117,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
             return Boolean.valueOf(_equals);
           }
         };
-        TypeReference _findFirst_1 = IterableExtensions.<TypeReference>findFirst(_implementedInterfaces_1, _function_1);
+        TypeReference _findFirst_1 = IterableExtensions.findFirst(_implementedInterfaces_1, _function_1);
         Assert.assertNotNull(_findFirst_1);
       }
     };

@@ -359,9 +359,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       boolean _isIgnoreLinebreaks = this.isIgnoreLinebreaks();
       if (_isIgnoreLinebreaks) {
         String _string = sequence.toString();
-        String _plus = ("(" + lineSeparator);
-        String _plus_1 = (_plus + ")+");
-        String _replaceAll = _string.replaceAll(_plus_1, " ");
+        String _replaceAll = _string.replaceAll((("(" + lineSeparator) + ")+"), " ");
         _xifexpression = _replaceAll;
       } else {
         String _string_1 = sequence.toString();

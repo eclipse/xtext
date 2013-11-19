@@ -71,7 +71,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     return _map;
   }
   
-  public List<TypeReference> getExceptions() {
+  public Iterable<? extends TypeReference> getExceptions() {
     T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {

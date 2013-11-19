@@ -267,7 +267,6 @@ public class XAnnotationExtensions {
   }
   
   public JvmAnnotationType tryFindAnnotationType(final XAnnotation it) {
-    JvmAnnotationType _switchResult = null;
     Object _eGet = it.eGet(Literals.XANNOTATION__ANNOTATION_TYPE, false);
     final Object proxy = _eGet;
     boolean _matched = false;
@@ -290,7 +289,7 @@ public class XAnnotationExtensions {
         return ((JvmAnnotationType)proxy);
       }
     }
-    return _switchResult;
+    return null;
   }
   
   protected boolean isActiveAnnotation(final JvmAnnotationType annotationType) {

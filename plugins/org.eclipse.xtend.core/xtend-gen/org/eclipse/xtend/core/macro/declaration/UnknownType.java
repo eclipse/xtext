@@ -30,8 +30,7 @@ public class UnknownType implements Type {
       String _qualifiedName = this.getQualifiedName();
       final int idx = _qualifiedName.lastIndexOf(".");
       String _xifexpression = null;
-      boolean _greaterThan = (idx > 0);
-      if (_greaterThan) {
+      if ((idx > 0)) {
         String _qualifiedName_1 = this.getQualifiedName();
         String _substring = _qualifiedName_1.substring(idx);
         _xifexpression = _substring;

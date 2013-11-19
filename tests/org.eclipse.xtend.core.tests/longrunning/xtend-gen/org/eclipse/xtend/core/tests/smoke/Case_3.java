@@ -48,8 +48,7 @@ public class Case_3 {
         Integer.valueOf(x).toString();
         int x2 = y;
         final int y2 = 1;
-        int _plus = (x2 + y2);
-        _xblockexpression_1 = (_plus);
+        _xblockexpression_1 = ((x2 + y2));
       }
       _xblockexpression = (_xblockexpression_1);
     }

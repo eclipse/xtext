@@ -104,9 +104,8 @@ public class ActiveAnnotationContextProvider {
                       String _identifier = processorType.getIdentifier();
                       String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
                       String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
-                      int _minus = (-1);
                       EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
-                        IssueCodes.PROCESSING_ERROR, _plus_1, file, null, _minus, null);
+                        IssueCodes.PROCESSING_ERROR, _plus_1, file, null, (-1), null);
                       _errors.add(_eObjectDiagnosticImpl);
                     }
                     Map<JvmAnnotationType,ActiveAnnotationContext> _contexts_1 = result.getContexts();

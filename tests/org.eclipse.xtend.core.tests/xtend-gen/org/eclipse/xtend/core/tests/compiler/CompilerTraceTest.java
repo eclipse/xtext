@@ -1557,16 +1557,14 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   
   public void tracesTo(final CharSequence xtend, final CharSequence java) {
     try {
-      String _plus = (" " + xtend);
-      final String xtendWithSpaces = (_plus + " ");
+      final String xtendWithSpaces = ((" " + xtend) + " ");
       final Matcher xtendMatcher = this.p.matcher(xtendWithSpaces);
       boolean _matches = xtendMatcher.matches();
       Assert.assertTrue("xtendMatcher.matches", _matches);
       final String xtendGroup1 = xtendMatcher.group(1);
       final String xtendGroup2 = xtendMatcher.group(2);
       final String xtendGroup3 = xtendMatcher.group(3);
-      String _plus_1 = (xtendGroup1 + xtendGroup2);
-      final String actualXtendCode = (_plus_1 + xtendGroup3);
+      final String actualXtendCode = ((xtendGroup1 + xtendGroup2) + xtendGroup3);
       final XtendFile file = this.file(actualXtendCode, true);
       EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
@@ -1582,8 +1580,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       final String javaGroup1 = javaMatcher.group(1);
       final String javaGroup2 = javaMatcher.group(2);
       final String javaGroup3 = javaMatcher.group(3);
-      String _plus_2 = (javaGroup1 + javaGroup2);
-      final String actualJavaExpectation = (_plus_2 + javaGroup3);
+      final String actualJavaExpectation = ((javaGroup1 + javaGroup2) + javaGroup3);
       String _string_1 = compiledCode.toString();
       Assert.assertEquals(actualJavaExpectation, _string_1);
       AbstractTraceRegion _traceRegion = ((ITraceRegionProvider) compiledCode).getTraceRegion();
@@ -1612,10 +1609,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
           return;
         }
       }
-      String _plus_3 = ("locations did not match expectation: " + locations);
-      String _plus_4 = (_plus_3 + " / ");
-      String _plus_5 = (_plus_4 + expectedRegion);
-      Assert.fail(_plus_5);
+      Assert.fail(((("locations did not match expectation: " + locations) + " / ") + expectedRegion));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

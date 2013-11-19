@@ -89,14 +89,12 @@ public class ActiveAnnotationContext {
               XAnnotation _head = IterableExtensions.<XAnnotation>head(annotations);
               _xifexpression = _head;
             }
-            int _minus = (-1);
-            EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, _xifexpression, null, _minus, null);
+            EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, _xifexpression, null, (-1), null);
             errors.add(_eObjectDiagnosticImpl);
           }
         }
         if (!_matched) {
-          int _minus = (-1);
-          EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, _minus, null);
+          EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, (-1), null);
           errors.add(_eObjectDiagnosticImpl);
         }
       }

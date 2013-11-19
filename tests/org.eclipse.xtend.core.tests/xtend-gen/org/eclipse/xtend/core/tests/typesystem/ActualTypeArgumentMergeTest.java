@@ -91,8 +91,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
         JvmTypeReference _parameterType = _get.getParameterType();
         LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
-        int _plus = ((i).intValue() + 1);
-        JvmFormalParameter _get_1 = _parameters_1.get(_plus);
+        JvmFormalParameter _get_1 = _parameters_1.get(((i).intValue() + 1));
         JvmTypeReference _parameterType_1 = _get_1.getParameterType();
         LightweightTypeReference _lightweightReference_1 = this.toLightweightReference(_parameterType_1);
         collector.populateTypeParameterMapping(_lightweightReference, _lightweightReference_1);

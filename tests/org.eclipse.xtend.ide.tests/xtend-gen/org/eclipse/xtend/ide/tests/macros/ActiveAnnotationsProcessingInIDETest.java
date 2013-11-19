@@ -243,9 +243,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       this.newSource(this.macroProject, _key, _string);
       String _key_1 = macroFile.getKey();
       final int lidx = _key_1.lastIndexOf("/");
-      int _minus = (-1);
-      boolean _notEquals = (lidx != _minus);
-      if (_notEquals) {
+      if ((lidx != (-1))) {
         String _key_2 = macroFile.getKey();
         String _substring = _key_2.substring(0, lidx);
         final String packageName = _substring.replace("/", ".");
@@ -262,8 +260,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       this.sourceFile = _newSource;
       IResourcesSetupUtil.waitForAutoBuild();
       IProject _project = this.macroProject.getProject();
-      int _minus_1 = (-1);
-      IMarker[] _findMarkers = _project.findMarkers(IMarker.PROBLEM, true, _minus_1);
+      IMarker[] _findMarkers = _project.findMarkers(IMarker.PROBLEM, true, (-1));
       final Function1<IMarker,Boolean> _function = new Function1<IMarker,Boolean>() {
         public Boolean apply(final IMarker it) {
           try {
@@ -297,8 +294,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       int _length = ((Object[])Conversions.unwrapArray(markers, Object.class)).length;
       Assert.assertEquals(_join, 0, _length);
       IProject _project_1 = this.userProject.getProject();
-      int _minus_2 = (-1);
-      IMarker[] _findMarkers_1 = _project_1.findMarkers(IMarker.PROBLEM, true, _minus_2);
+      IMarker[] _findMarkers_1 = _project_1.findMarkers(IMarker.PROBLEM, true, (-1));
       final Function1<IMarker,Boolean> _function_2 = new Function1<IMarker,Boolean>() {
         public Boolean apply(final IMarker it) {
           try {
@@ -385,8 +381,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   public IFile newSource(final IJavaProject it, final String fileName, final String contents) {
     try {
       IProject _project = it.getProject();
-      String _plus = ("src/" + fileName);
-      final IFile result = _project.getFile(_plus);
+      final IFile result = _project.getFile(("src/" + fileName));
       IContainer parent = result.getParent();
       boolean _exists = parent.exists();
       boolean _not = (!_exists);

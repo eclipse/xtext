@@ -1922,8 +1922,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TypeReference _type = _head_3.getType();
         Type _type_1 = _type.getType();
         Assert.assertSame(_head_2, _type_1);
-        List<TypeReference> _exceptions = method.getExceptions();
-        int _size = _exceptions.size();
+        Iterable<? extends TypeReference> _exceptions = method.getExceptions();
+        int _size = IterableExtensions.size(_exceptions);
         Assert.assertEquals(1, _size);
       }
     };
