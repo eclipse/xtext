@@ -90,9 +90,7 @@ class ArrayExtensionsGenerator {
 	
 	def generateEquals(String string) '''
 		/**
-		 * Returns whether the array and the given other object are equal.
-		 * 
-		 * Delegates to {@link Arrays#equals(«string»[], «string»[])}
+		 * Delegates to {@link Object#equals(Object)}
 		 * 
 		 * @param array
 		 *            the array
@@ -102,11 +100,9 @@ class ArrayExtensionsGenerator {
 		 * @since 2.5
 		 */
 		@Pure
+		@Inline("$1.equals($2)")
 		public static boolean equals(«string»[] array, Object other) {
-			if (other instanceof «string»[]) {
-				return Arrays.equals(array, («string»[]) other);
-			}
-			return false;
+			return array.equals(other);
 		}
 	'''
 	

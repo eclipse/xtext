@@ -102,11 +102,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(Object[] array, Object other) {
-		if (other instanceof Object[]) {
-			return Arrays.equals(array, (Object[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**
@@ -173,11 +171,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(boolean[] array, Object other) {
-		if (other instanceof boolean[]) {
-			return Arrays.equals(array, (boolean[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**
@@ -258,11 +254,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(double[] array, Object other) {
-		if (other instanceof double[]) {
-			return Arrays.equals(array, (double[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**
@@ -343,11 +337,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(float[] array, Object other) {
-		if (other instanceof float[]) {
-			return Arrays.equals(array, (float[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**
@@ -428,11 +420,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(long[] array, Object other) {
-		if (other instanceof long[]) {
-			return Arrays.equals(array, (long[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**
@@ -513,11 +503,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(int[] array, Object other) {
-		if (other instanceof int[]) {
-			return Arrays.equals(array, (int[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**
@@ -598,11 +586,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(char[] array, Object other) {
-		if (other instanceof char[]) {
-			return Arrays.equals(array, (char[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**
@@ -683,11 +669,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(short[] array, Object other) {
-		if (other instanceof short[]) {
-			return Arrays.equals(array, (short[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**
@@ -768,11 +752,9 @@ public class ArrayExtensions {
 	 * @since 2.5
 	 */
 	@Pure
+	@Inline("$1.equals($2)")
 	public static boolean equals(byte[] array, Object other) {
-		if (other instanceof byte[]) {
-			return Arrays.equals(array, (byte[]) other);
-		}
-		return false;
+		return array.equals(other);
 	}
 	
 	/**

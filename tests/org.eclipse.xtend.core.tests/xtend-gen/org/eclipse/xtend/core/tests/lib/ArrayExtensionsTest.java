@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.lib;
 
 import java.util.Arrays;
-import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -83,18 +82,36 @@ public class ArrayExtensionsTest {
   
   @Test
   public void testEquals() {
-    boolean _equals = ArrayExtensions.equals(this.intArray, this.intArray);
+    boolean _equals = this.intArray.equals(this.intArray);
     Assert.assertTrue(_equals);
-    boolean _equals_1 = ArrayExtensions.equals(this.booleanArray, this.booleanArray);
+    boolean _equals_1 = this.booleanArray.equals(this.booleanArray);
     Assert.assertTrue(_equals_1);
-    boolean _equals_2 = ArrayExtensions.equals(this.longArray, this.longArray);
+    boolean _equals_2 = this.longArray.equals(this.longArray);
     Assert.assertTrue(_equals_2);
-    boolean _equals_3 = ArrayExtensions.equals(this.doubleArray, this.doubleArray);
+    boolean _equals_3 = this.doubleArray.equals(this.doubleArray);
     Assert.assertTrue(_equals_3);
-    boolean _equals_4 = ArrayExtensions.equals(this.stringArray, this.stringArray);
+    boolean _equals_4 = this.stringArray.equals(this.stringArray);
     Assert.assertTrue(_equals_4);
-    boolean _equals_5 = ArrayExtensions.equals(this.charArray, this.charArray);
+    boolean _equals_5 = this.charArray.equals(this.charArray);
     Assert.assertTrue(_equals_5);
+    int[] _clone = this.intArray.clone();
+    boolean _equals_6 = this.intArray.equals(_clone);
+    Assert.assertFalse(_equals_6);
+    boolean[] _clone_1 = this.booleanArray.clone();
+    boolean _equals_7 = this.booleanArray.equals(_clone_1);
+    Assert.assertFalse(_equals_7);
+    long[] _clone_2 = this.longArray.clone();
+    boolean _equals_8 = this.longArray.equals(_clone_2);
+    Assert.assertFalse(_equals_8);
+    double[] _clone_3 = this.doubleArray.clone();
+    boolean _equals_9 = this.doubleArray.equals(_clone_3);
+    Assert.assertFalse(_equals_9);
+    String[] _clone_4 = this.stringArray.clone();
+    boolean _equals_10 = this.stringArray.equals(_clone_4);
+    Assert.assertFalse(_equals_10);
+    char[] _clone_5 = this.charArray.clone();
+    boolean _equals_11 = this.charArray.equals(_clone_5);
+    Assert.assertFalse(_equals_11);
   }
   
   public int objectHashCode(final Object x) {
