@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -536,7 +537,16 @@ public abstract class LightweightTypeReference {
 		// TODO interfaces don't inherit from non-interfaces, primitives, arrays, object
 		// A final type does not have any subtypes
 		// check for type == this.type
-		ParameterizedTypeReference other = new ParameterizedTypeReference(getOwner(), type);
+		LightweightTypeReference other;
+		if (type instanceof JvmArrayType) {
+			JvmArrayType arrayType = (JvmArrayType) type;
+			other = new ParameterizedTypeReference(getOwner(), arrayType.getComponentType());
+			for (int i = 0; i < arrayType.getDimensions(); i++) {
+				other = new ArrayTypeReference(getOwner(), other);
+			}
+		} else {
+			other = new ParameterizedTypeReference(getOwner(), type);
+		}
 		boolean result = other.isAssignableFrom(this);
 		return result;
 	}
