@@ -2031,6 +2031,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"switch it : 'abcdef' as Object { String : toFirstUpper }");
 	}
 	
+	/**
+	 * @since 2.5
+	 */
+	@Test public void testSwitchExpression_31() throws Exception {
+		assertEvaluatesTo(1, 
+				"{ val int[] myArray = #[1,2] switch it : myArray as Object { int[] : it.get(0) default : 42 }}");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
