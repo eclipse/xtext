@@ -1609,12 +1609,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("\t\t\t\t");
     _builder.append("set(\'singleBoolean\', true)");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("set(\'numbers\', 1,2,3)");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("set(\'singleNumber\', 1)");
-    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("]");
     _builder.newLine();
@@ -1643,10 +1637,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("boolean singleBoolean");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("int[] numbers");
+    _builder.append("int[] numbers = #[1,2,3]");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("int singleNumber");
+    _builder.append("int singleNumber = 1");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

@@ -796,8 +796,9 @@ abstract class AbstractReusableActiveAnnotationTests {
 								set('singleValue', 'foo')
 								set('booleans', true, false, true)
 								set('singleBoolean', true)
-								set('numbers', 1,2,3)
-								set('singleNumber', 1)
+ллл								DEACTIVATED because of a compiler bug in Galileo's JDT
+ллл								set('numbers', 1,2,3)
+ллл								set('singleNumber', 1)
 							]
 						]
 					}
@@ -808,8 +809,11 @@ abstract class AbstractReusableActiveAnnotationTests {
 					String singleValue
 					boolean[] booleans
 					boolean singleBoolean
-					int[] numbers
-					int singleNumber
+ллл					CHANGED because of a compiler bug in Galileo's JDT
+ллл					int[] numbers
+ллл					int singleNumber
+					int[] numbers = #[1,2,3]
+					int singleNumber = 1
 				}
 			''',
 			'myusercode/UserCode.xtend' -> '''
