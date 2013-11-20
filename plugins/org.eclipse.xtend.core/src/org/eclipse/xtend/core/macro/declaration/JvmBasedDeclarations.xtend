@@ -59,6 +59,8 @@ import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaratio
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.xbase.XExpression
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -783,6 +785,14 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getExpression(String property) {
+		val annotationValue = delegate.values.findFirst[
+			valueName == property || (valueName == null && property == 'value')
+		]
+		switch annotationValue {
+			JvmCustomAnnotationValue : {
+				return compilationUnit.toExpression(annotationValue.values.head as XExpression)
+			}
+		}
 		return null
 	}
 	
