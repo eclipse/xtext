@@ -210,7 +210,11 @@ public class CompilationTestHelper {
 				
 				public Map<String,Class<?>> getCompiledClasses() {
 					if (compiledClasses == null) {
-						compiledClasses = javaCompiler.compileToClasses(getGeneratedCode());
+						try {
+							compiledClasses = javaCompiler.compileToClasses(getGeneratedCode());
+						} catch (IllegalArgumentException e) {
+							throw new AssertionError(e);
+						}
 					}
 					return compiledClasses;
 				}

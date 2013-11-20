@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -54,6 +56,41 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public Expression getExpression(final String property) {
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values = _delegate.getValues();
+    final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
+      public Boolean apply(final JvmAnnotationValue it) {
+        boolean _or = false;
+        String _valueName = it.getValueName();
+        boolean _equals = Objects.equal(_valueName, property);
+        if (_equals) {
+          _or = true;
+        } else {
+          boolean _and = false;
+          String _valueName_1 = it.getValueName();
+          boolean _equals_1 = Objects.equal(_valueName_1, null);
+          if (!_equals_1) {
+            _and = false;
+          } else {
+            boolean _equals_2 = Objects.equal(property, "value");
+            _and = (_equals_1 && _equals_2);
+          }
+          _or = (_equals || _and);
+        }
+        return Boolean.valueOf(_or);
+      }
+    };
+    final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
+    boolean _matched = false;
+    if (!_matched) {
+      if (annotationValue instanceof JvmCustomAnnotationValue) {
+        _matched=true;
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        EList<Object> _values_1 = ((JvmCustomAnnotationValue)annotationValue).getValues();
+        Object _head = IterableExtensions.<Object>head(_values_1);
+        return _compilationUnit.toExpression(((XExpression) _head));
+      }
+    }
     return null;
   }
   
