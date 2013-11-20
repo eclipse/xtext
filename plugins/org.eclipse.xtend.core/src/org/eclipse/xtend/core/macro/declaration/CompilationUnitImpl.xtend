@@ -8,9 +8,18 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import com.google.common.collect.Iterables
+import com.google.common.primitives.Booleans
+import com.google.common.primitives.Bytes
+import com.google.common.primitives.Chars
+import com.google.common.primitives.Doubles
+import com.google.common.primitives.Floats
+import com.google.common.primitives.Ints
+import com.google.common.primitives.Longs
+import com.google.common.primitives.Shorts
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
+import java.util.Collection
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CancellationException
@@ -93,11 +102,13 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -540,29 +551,45 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	
 	def Object translateAnnotationValue(JvmAnnotationValue value, boolean isArray) {
-		val List<?> result = switch value {
+		val Pair<List<?>, Class<?>> result = switch value {
 			JvmCustomAnnotationValue : {
 				// custom values always contain a single expression and will already return an array if it's a multi value.
 				return value.values.filter(XExpression).map[evaluate(it)].head
 			}
-			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)] 
-			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)] 
-			JvmStringAnnotationValue : value.values 
-			JvmBooleanAnnotationValue : value.values
-			JvmIntAnnotationValue : value.values 
-			JvmByteAnnotationValue : value.values
-			JvmCharAnnotationValue : value.values
-			JvmDoubleAnnotationValue : value.values
-			JvmEnumAnnotationValue : value.values.map[toNamedElement(it)]
-			JvmFloatAnnotationValue : value.values
-			JvmLongAnnotationValue : value.values
-			JvmShortAnnotationValue : value.values
-			default : emptyList
+			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)] -> TypeReference 
+			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)] -> AnnotationReference 
+			JvmStringAnnotationValue : value.values -> String
+			JvmBooleanAnnotationValue : value.values -> boolean
+			JvmIntAnnotationValue : value.values  -> int
+			JvmByteAnnotationValue : value.values -> byte
+			JvmCharAnnotationValue : value.values -> char
+			JvmDoubleAnnotationValue : value.values -> double
+			JvmEnumAnnotationValue : value.values.map[toNamedElement(it)] -> EnumerationValueDeclaration
+			JvmFloatAnnotationValue : value.values -> float
+			JvmLongAnnotationValue : value.values -> long
+			JvmShortAnnotationValue : value.values -> short
+			default : emptyList -> Object
 		}
 		if (isArray) {
-			return Iterables.<Object>toArray(result, Object)
+			return toArrayOfType(result.key, result.value)
+		} else {
+			return result.key.head
 		}
-		return result.head
+	}
+	
+	private def Object toArrayOfType(Iterable<?> iterable, Class<?> componentType) {
+		val Collection<?> collection = if (iterable instanceof Collection<?>) iterable else iterable.toList
+		return switch componentType {
+			case int : Ints.toArray(collection as List<Integer>)
+			case long : Longs.toArray(collection as List<Long>)
+			case char : Chars.toArray(collection as List<Character>)
+			case boolean : Booleans.toArray(collection as List<Boolean>)
+			case byte : Bytes.toArray(collection as List<Byte>)
+			case short : Shorts.toArray(collection as List<Short>)
+			case float : Floats.toArray(collection as List<Float>)
+			case double : Doubles.toArray(collection as List<Double>)
+			default : Iterables.toArray(collection, componentType as Class<Object>) 
+		}
 	}
 	
 	def Object evaluate(XExpression expression) {

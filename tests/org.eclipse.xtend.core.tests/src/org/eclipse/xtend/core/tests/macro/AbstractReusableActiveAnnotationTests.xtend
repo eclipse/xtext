@@ -796,8 +796,9 @@ abstract class AbstractReusableActiveAnnotationTests {
 								set('singleValue', 'foo')
 								set('booleans', true, false, true)
 								set('singleBoolean', true)
-								set('numbers', 1,2,3)
-								set('singleNumber', 1)
+ллл								DEACTIVATED because of a compiler bug in Galileo's JDT
+ллл								set('numbers', 1,2,3)
+ллл								set('singleNumber', 1)
 							]
 						]
 					}
@@ -808,8 +809,11 @@ abstract class AbstractReusableActiveAnnotationTests {
 					String singleValue
 					boolean[] booleans
 					boolean singleBoolean
-					int[] numbers
-					int singleNumber
+ллл					CHANGED because of a compiler bug in Galileo's JDT
+ллл					int[] numbers
+ллл					int singleNumber
+					int[] numbers = #[1,2,3]
+					int singleNumber = 1
 				}
 			''',
 			'myusercode/UserCode.xtend' -> '''
@@ -826,9 +830,10 @@ abstract class AbstractReusableActiveAnnotationTests {
 				typeReferenceProvider.newTypeReference('myannotation.MyAnnotation').type)
 			assertArrayEquals(#['foo', 'bar', 'baz'], annotation.getValue('value') as Object[])
 			assertEquals('foo', annotation.getValue('singleValue'))
-			assertArrayEquals(#[true, false, true], annotation.getValue('booleans') as Object[])
+			val booleans = annotation.getValue('booleans') as boolean[]
+			assertTrue(booleans.get(2))
 			assertEquals(true, annotation.getValue('singleBoolean'))
-			assertArrayEquals(#[1, 2, 3], annotation.getValue('numbers') as Object[])
+			assertArrayEquals(#[1, 2, 3], annotation.getValue('numbers') as int[])
 			assertEquals(1, annotation.getValue('singleNumber'))
 		]
 	}

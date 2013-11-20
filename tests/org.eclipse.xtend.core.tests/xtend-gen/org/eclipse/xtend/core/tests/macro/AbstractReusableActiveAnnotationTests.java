@@ -1609,12 +1609,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("\t\t\t\t");
     _builder.append("set(\'singleBoolean\', true)");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("set(\'numbers\', 1,2,3)");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("set(\'singleNumber\', 1)");
-    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("]");
     _builder.newLine();
@@ -1643,10 +1637,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("boolean singleBoolean");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("int[] numbers");
+    _builder.append("int[] numbers = #[1,2,3]");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("int singleNumber");
+    _builder.append("int singleNumber = 1");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -1677,11 +1671,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Object _value_1 = annotation.getValue("singleValue");
         Assert.assertEquals("foo", _value_1);
         Object _value_2 = annotation.getValue("booleans");
-        Assert.assertArrayEquals(new Object[] { Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true) }, ((Object[]) _value_2));
+        final boolean[] booleans = ((boolean[]) _value_2);
+        boolean _get = booleans[2];
+        Assert.assertTrue(_get);
         Object _value_3 = annotation.getValue("singleBoolean");
         Assert.assertEquals(Boolean.valueOf(true), _value_3);
         Object _value_4 = annotation.getValue("numbers");
-        Assert.assertArrayEquals(new Object[] { Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3) }, ((Object[]) _value_4));
+        Assert.assertArrayEquals(new int[] { 1, 2, 3 }, ((int[]) _value_4));
         Object _value_5 = annotation.getValue("singleNumber");
         Assert.assertEquals(Integer.valueOf(1), _value_5);
       }

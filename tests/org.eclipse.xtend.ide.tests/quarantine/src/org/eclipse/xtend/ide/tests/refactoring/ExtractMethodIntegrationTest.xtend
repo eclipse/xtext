@@ -199,6 +199,30 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test def testVoidStatements() {
+		'''
+			class Foo {
+				def foo(int x) {
+					$for (i : x..45) {
+						println(i)
+					}$
+				}
+			}
+		'''.assertAfterExtract([explicitlyDeclareReturnType = true], '''
+			class Foo {
+				def foo(int x) {
+					bar(x)
+				}
+				
+				def void bar(int x) {
+					for (i : x..45) {
+						println(i)
+					}
+				}
+			}
+		''')
+	}
+	
 	@Test def testClosure_0() {
 		'''
 			class Foo {
