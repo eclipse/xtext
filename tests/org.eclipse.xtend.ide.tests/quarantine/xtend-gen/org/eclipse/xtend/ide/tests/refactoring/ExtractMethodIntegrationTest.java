@@ -483,6 +483,67 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testVoidStatements() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$for (i : x..45) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("println(i)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+        it.setExplicitlyDeclareReturnType(true);
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(int x) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar(x)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void bar(int x) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("for (i : x..45) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("println(i)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
   public void testClosure_0() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
