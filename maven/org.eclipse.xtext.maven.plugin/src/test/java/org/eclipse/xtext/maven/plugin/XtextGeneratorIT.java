@@ -2,6 +2,7 @@ package org.eclipse.xtext.maven.plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
@@ -9,6 +10,8 @@ import org.apache.maven.it.util.ResourceExtractor;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.google.common.base.Joiner;
 
 public class XtextGeneratorIT {
 
@@ -18,6 +21,8 @@ public class XtextGeneratorIT {
 	static public void setUpOnce() throws IOException, VerificationException {
 		new XtextGeneratorIT().verifyErrorFreeLog(ROOT, "clean", "install");
 	}
+
+	private final static boolean debug = false;
 
 	@Test
 	public void simpleLang() throws Exception {
@@ -65,18 +70,26 @@ public class XtextGeneratorIT {
 			verifier.executeGoal(goal);
 		}
 		verifier.verifyErrorFreeLog();
+		if (debug) {
+			List<String> lines = verifier.loadFile(verifier.getBasedir(), verifier.getLogFileName(), false);
+			System.out.println(Joiner.on('\n').join(lines));
+		}
 		verifier.resetStreams();
 		return verifier;
 	}
 
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		return new Verifier(testDir.getAbsolutePath());
+		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debug );
+		verifier.setMavenDebug(debug);
+		verifier.setForkJvm(!debug);
+		return verifier;
 	}
 
 	@AfterClass
 	static public void tearDownOnce() throws IOException, VerificationException {
-		new XtextGeneratorIT().verifyErrorFreeLog(ROOT, "clean");
+		if (!debug)
+			new XtextGeneratorIT().verifyErrorFreeLog(ROOT, "clean");
 	}
 
 }
