@@ -125,7 +125,7 @@
 				<include name=".*" />
 				<include name="plugin.*" />
 				<include name="*.png" />
-				<include name="**/*.ecore" />
+				<!--include name="**/*.ecore" /-->
 				<include name="META-INF/**" />
 				<include name="testdata/**" />
 			</fileset>
