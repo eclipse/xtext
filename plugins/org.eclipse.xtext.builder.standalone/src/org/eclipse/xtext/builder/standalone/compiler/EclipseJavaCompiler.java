@@ -57,7 +57,9 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		commandLine.add("-source " + configuration.getSourceLevel());
 		commandLine.add("-target " + configuration.getTargetLevel());
 		commandLine.add("-proceedOnError");
-		commandLine.add(IterableExtensions.join(validSourceRoots, " "));
+		for (String src : validSourceRoots) {
+			commandLine.add("\""+ src +"\"");
+		}
 		String cmdLine = concat(" ", commandLine);
 		if (LOG.isDebugEnabled()) {
 			// FIXME any debug logs when using -X-e in maven
