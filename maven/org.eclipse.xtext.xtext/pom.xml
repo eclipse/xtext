@@ -49,6 +49,18 @@
 						<iu>
 							<id>org.eclipse.emf.mwe2.launch</id>
 						</iu>
+						<iu>
+							<id>org.eclipse.emf.mwe2.language</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.emf.mwe2.runtime</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.emf.mwe2.lib</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.emf.mwe.core</id>
+						</iu>
 						<!-- Sources -->
 						<iu>
 							<id>org.eclipse.xtext.ecore.source</id>
@@ -71,6 +83,15 @@
 						<iu>
 							<id>org.eclipse.emf.mwe2.launch.source</id>
 						</iu>
+						<iu>
+							<id>org.eclipse.emf.mwe2.runtime.source</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.emf.mwe2.lib.source</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.emf.mwe.core.source</id>
+						</iu>
 					</ius>
 				</configuration>
 			</plugin>
@@ -87,6 +108,11 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
 			<version>${emf.version}</version>
@@ -97,9 +123,40 @@
 			<version>${emf.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>${icu4j.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
 			<version>${google-inject.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>${commons-cli.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${commons-logging.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.antlr</groupId>
