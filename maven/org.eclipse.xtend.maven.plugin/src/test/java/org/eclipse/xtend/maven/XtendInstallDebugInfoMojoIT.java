@@ -32,7 +32,6 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt.append("    void apply() { // XtendA.java:18, XtendA.xtend:6\n");
 		xpt.append("      void this;\n");
 		xpt.append("      void it;\n");
-		xpt.append("      void _lessThan;\n");
 		xpt.append("    }\n");
 		xpt.append("    \n");
 		xpt.append("  }\n");
@@ -120,7 +119,6 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt.append("    void apply() { // XtendA.xtend:6\n");
 		xpt.append("      void this;\n");
 		xpt.append("      void it;\n");
-		xpt.append("      void _lessThan;\n");
 		xpt.append("    }\n");
 		xpt.append("    \n");
 		xpt.append("  }\n");
