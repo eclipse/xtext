@@ -30,6 +30,13 @@
 		<Bug pattern="EC_UNRELATED_TYPES_USING_POINTER_EQUALITY" />
 	</Match>
 	
+	<!-- someArray.hashCode() is desired -->
+	<Match>
+		<Class
+			name="org.eclipse.xtext.xbase.lib.ArrayExtensions" />
+		<Bug pattern="DMI_INVOKING_HASHCODE_ON_ARRAY" />
+	</Match>
+	
 	<!-- Deprecated -->
 	<Match>
 		<Class name="~org\.eclipse\.xtext\.generator\.MergeableManifes.*" />
