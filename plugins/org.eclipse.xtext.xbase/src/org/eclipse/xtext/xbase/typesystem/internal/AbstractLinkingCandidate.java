@@ -181,16 +181,17 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (expectedType != null) {
 			LightweightTypeReference declaredFeatureType = getDeclaredType(getFeature());
 			LightweightTypeReference substitutedFeatureType = substitutor.substitute(declaredFeatureType);
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(expectation.getReferenceOwner()) {
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(state.getReferenceOwner()) {
 				@Override
 				protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 					if (!typeParameter.internalIsResolved()
-							&& getExpectedVariance() == VarianceInfo.INVARIANT
+							&& (getExpectedVariance() == VarianceInfo.INVARIANT)
 							&& getExpectedVariance() == getActualVariance()
-							&& reference.getKind() != LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+							&& reference.getKind() != LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE
+						) {
 						typeParameter.acceptHint(
 								reference.getWrapperTypeIfPrimitive(),
-								BoundTypeArgumentSource.RESOLVED,
+								BoundTypeArgumentSource.INFERRED,
 								getOrigin(),
 								getExpectedVariance(),
 								getActualVariance());

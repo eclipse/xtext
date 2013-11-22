@@ -343,7 +343,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCallVarArgument_03() {
     AbstractExpectationTest _expects = this.expects("{ val Iterable<String> iterable = newArrayList(null) }");
-    AbstractExpectationTest _types = _expects.types("String[]", "String");
+    AbstractExpectationTest _types = _expects.types("Unbound[T][]", "Unbound[T]");
     _types.finalizedAs("String[]", "String");
   }
   
@@ -530,7 +530,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   @Test
   public void testExpectationFromTypeParameter_01() {
     AbstractExpectationTest _expects = this.expects("{ val Iterable<Number> iterable = newArrayList(null) }");
-    AbstractExpectationTest _types = _expects.types("Number", "Number[]");
+    AbstractExpectationTest _types = _expects.types("Unbound[T]", "Unbound[T][]");
     _types.finalizedAs("Number", "Number[]");
   }
   
@@ -538,7 +538,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void testExpectationFromTypeParameter_02() {
     AbstractExpectationTest _expects = this.expects("{ val Iterable<Iterable<Number>> iterable = newArrayList(newArrayList(null)) }");
     AbstractExpectationTest _types = _expects.types(
-      "Number", "Number[]", "Unbound[T]", "Unbound[T][]");
+      "Unbound[T]", "Unbound[T][]", "Unbound[T]", "Unbound[T][]");
     _types.finalizedAs("Number", "Number[]", "Iterable<Number>", "Iterable<Number>[]");
   }
 }

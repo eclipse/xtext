@@ -222,7 +222,7 @@ abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
 	@Test
 	def void testFeatureCallVarArgument_03() {
 		"{ val Iterable<String> iterable = newArrayList(null) }".expects
-			.types('String[]', 'String')
+			.types('Unbound[T][]', 'Unbound[T]')
 			.finalizedAs('String[]', 'String')
 	}
 	
@@ -339,13 +339,13 @@ abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testExpectationFromTypeParameter_01() {
-		"{ val Iterable<Number> iterable = newArrayList(null) }".expects.types('Number', 'Number[]').finalizedAs('Number', 'Number[]')
+		"{ val Iterable<Number> iterable = newArrayList(null) }".expects.types('Unbound[T]', 'Unbound[T][]').finalizedAs('Number', 'Number[]')
 	}
 	
 	@Test
 	def void testExpectationFromTypeParameter_02() {
 		"{ val Iterable<Iterable<Number>> iterable = newArrayList(newArrayList(null)) }".expects.types(
-			'Number', 'Number[]', 'Unbound[T]', 'Unbound[T][]').finalizedAs('Number', 'Number[]', 'Iterable<Number>', 'Iterable<Number>[]')
+			'Unbound[T]', 'Unbound[T][]', 'Unbound[T]', 'Unbound[T][]').finalizedAs('Number', 'Number[]', 'Iterable<Number>', 'Iterable<Number>[]')
 	}
 	
 }
