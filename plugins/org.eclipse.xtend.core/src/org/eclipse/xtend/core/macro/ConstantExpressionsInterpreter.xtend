@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XFeatureCall
 
 class ConstantExpressionsInterpreter extends XbaseInterpreter {
 	
@@ -44,7 +45,7 @@ class ConstantExpressionsInterpreter extends XbaseInterpreter {
 	}
 	
 	override protected getJavaType(JvmType type) throws ClassNotFoundException {
-		if (type.getQualifiedName() == 'java.lang.Class') {
+		if (type.identifier == 'java.lang.Class') {
 			return TypeReference
 		}
 		if (type instanceof JvmEnumerationType) {
@@ -54,6 +55,13 @@ class ConstantExpressionsInterpreter extends XbaseInterpreter {
 	}
 	
 	dispatch protected override doEvaluate(XMemberFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
+		switch f : featureCall.feature {
+			JvmEnumerationLiteral : compilationUnit.toNamedElement(f)
+			default : super._doEvaluate(featureCall, context, indicator)  
+		}
+	}
+	
+	dispatch protected override doEvaluate(XFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
 		switch f : featureCall.feature {
 			JvmEnumerationLiteral : compilationUnit.toNamedElement(f)
 			default : super._doEvaluate(featureCall, context, indicator)  

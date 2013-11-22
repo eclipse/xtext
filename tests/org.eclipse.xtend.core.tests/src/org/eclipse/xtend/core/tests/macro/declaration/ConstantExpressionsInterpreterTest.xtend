@@ -5,10 +5,35 @@ import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.junit.Test
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import com.google.inject.Provider
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 
 class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 	
 	@Inject ConstantExpressionsInterpreter interpreter
+	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
+	
+	@Test def void testEnumLiteral_01() {
+		val function = function('@test.Annotation(enumValue=test.Enum1.YELLOW) def void testFoo() {}')
+		val cu = compilationUnitProvider.get
+		cu.xtendFile = EcoreUtil2.getContainerOfType(function, XtendFile)
+		interpreter.compilationUnit = cu
+		val blue = interpreter.evaluate(function.annotations.head.elementValuePairs.head.value).result as EnumerationValueDeclaration
+		assertEquals("YELLOW", blue.simpleName)
+	}
+	
+	@Test def void testEnumLiteral_02() {
+		val file = file('import static test.Enum1.* class C { @test.Annotation(enumValue=RED) def void testFoo() {} }')
+		val function = file.xtendTypes.head.members.head
+		val cu = compilationUnitProvider.get
+		cu.xtendFile = EcoreUtil2.getContainerOfType(function, XtendFile)
+		interpreter.compilationUnit = cu
+		val blue = interpreter.evaluate(function.annotations.head.elementValuePairs.head.value).result as EnumerationValueDeclaration
+		assertEquals("RED", blue.simpleName)
+	}
 	
 	@Test def void testBooleanLiteral() {
 		val function = function('@test.Annotation(booleanValue=true) def void testFoo() {}')

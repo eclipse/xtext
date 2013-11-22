@@ -105,8 +105,8 @@ public class ConstantExpressionsInterpreter extends XbaseInterpreter {
   protected Class<? extends Object> getJavaType(final JvmType type) throws ClassNotFoundException {
     Class<? extends Object> _xblockexpression = null;
     {
-      String _qualifiedName = type.getQualifiedName();
-      boolean _equals = Objects.equal(_qualifiedName, "java.lang.Class");
+      String _identifier = type.getIdentifier();
+      boolean _equals = Objects.equal(_identifier, "java.lang.Class");
       if (_equals) {
         return TypeReference.class;
       }
@@ -120,6 +120,26 @@ public class ConstantExpressionsInterpreter extends XbaseInterpreter {
   }
   
   protected Object _doEvaluate(final XMemberFeatureCall featureCall, final IEvaluationContext context, final CancelIndicator indicator) {
+    Object _switchResult = null;
+    JvmIdentifiableElement _feature = featureCall.getFeature();
+    final JvmIdentifiableElement f = _feature;
+    boolean _matched = false;
+    if (!_matched) {
+      if (f instanceof JvmEnumerationLiteral) {
+        _matched=true;
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        MutableNamedElement _namedElement = _compilationUnit.toNamedElement(f);
+        _switchResult = _namedElement;
+      }
+    }
+    if (!_matched) {
+      Object __doEvaluate = super._doEvaluate(featureCall, context, indicator);
+      _switchResult = __doEvaluate;
+    }
+    return _switchResult;
+  }
+  
+  protected Object _doEvaluate(final XFeatureCall featureCall, final IEvaluationContext context, final CancelIndicator indicator) {
     Object _switchResult = null;
     JvmIdentifiableElement _feature = featureCall.getFeature();
     final JvmIdentifiableElement f = _feature;
