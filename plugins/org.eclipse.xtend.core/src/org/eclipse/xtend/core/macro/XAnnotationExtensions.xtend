@@ -69,7 +69,7 @@ class XAnnotationExtensions {
 					if (!candidates.isEmpty) {
 						val head = candidates.head
 						if (head instanceof JvmAnnotationType)
-							return (head as JvmAnnotationType).isActiveAnnotation
+							return head.isActiveAnnotation
 					}
 				}
 			}

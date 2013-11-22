@@ -36,7 +36,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public abstract class AbstractReusableActiveAnnotationTests {
   @Test
-  public void testAnnotationValueSetting() {
+  public void testAnnotationValueSetting_1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");
     _builder.newLine();
@@ -210,6 +210,98 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TypeReference _primitiveBoolean = _typeReferenceProvider_1.getPrimitiveBoolean();
         Object _get_2 = types[0];
         Assert.assertEquals(_primitiveBoolean, _get_2);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
+  public void testAnnotationValueSetting_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import static com.google.common.base.Preconditions.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(ConfigurableAnnotationProcessor)");
+    _builder.newLine();
+    _builder.append("annotation ConfigurableAnnotation {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int someValue");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Constants {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public static val MYCONSTANT = Integer.MAX_VALUE - 42");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class ConfigurableAnnotationProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val anno = annotatedClass.annotations.head");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val existingValue = anno.getValue(\'someValue\')");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("annotatedClass.docComment = \'\'+existingValue");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/ConfigurableAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@ConfigurableAnnotation(someValue=MoreConstants.MY_CONSTANT * 1)");
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MoreConstants {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("public static val MY_CONSTANT = myannotation.Constants.MYCONSTANT - Integer.MAX_VALUE + 42 * 2");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
+        String _docComment = clazz.getDocComment();
+        Assert.assertEquals("42", _docComment);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);

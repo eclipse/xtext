@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -68,15 +69,36 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     }
   }
   
+  public ClassLoader getClassLoader(final EObject ctx) {
+    Resource _eResource = ctx.eResource();
+    ResourceSet _resourceSet = _eResource.getResourceSet();
+    Object _classpathURIContext = ((XtextResourceSet) _resourceSet).getClasspathURIContext();
+    final IJavaProject project = ((IJavaProject) _classpathURIContext);
+    return this.createClassLoaderForJavaProject(project);
+  }
+  
   protected ClassLoader createClassLoader(final String typeName, final IJavaProject javaProject) {
     try {
-      final IType type = javaProject.findType(typeName);
-      boolean _equals = Objects.equal(type, null);
-      if (_equals) {
-        Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
-        return _class.getClassLoader();
+      URLClassLoader _xblockexpression = null;
+      {
+        final IType type = javaProject.findType(typeName);
+        boolean _equals = Objects.equal(type, null);
+        if (_equals) {
+          Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
+          return _class.getClassLoader();
+        }
+        final IJavaProject projectToUse = type.getJavaProject();
+        URLClassLoader _createClassLoaderForJavaProject = this.createClassLoaderForJavaProject(projectToUse);
+        _xblockexpression = (_createClassLoaderForJavaProject);
       }
-      final IJavaProject projectToUse = type.getJavaProject();
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected URLClassLoader createClassLoaderForJavaProject(final IJavaProject projectToUse) {
+    try {
       final IClasspathEntry[] resolvedClasspath = projectToUse.getResolvedClasspath(true);
       final List<URL> urls = CollectionLiterals.<URL>newArrayList();
       List<URL> _outputFolders = this.getOutputFolders(projectToUse);
@@ -140,8 +162,8 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           }
         }
       }
-      Class<? extends JdtBasedProcessorProvider> _class_1 = this.getClass();
-      ClassLoader _classLoader = _class_1.getClassLoader();
+      Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
+      ClassLoader _classLoader = _class.getClassLoader();
       URLClassLoader _uRLClassLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
       return _uRLClassLoader;
     } catch (Throwable _e) {

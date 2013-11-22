@@ -1,7 +1,9 @@
 package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.Arrays;
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
@@ -11,6 +13,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -42,7 +45,10 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
+import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
+import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 
 @SuppressWarnings("all")
@@ -55,6 +61,23 @@ public class ConstantExpressionsInterpreter extends XbaseInterpreter {
   
   public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
     this._compilationUnit = compilationUnit;
+  }
+  
+  @Inject
+  private ILogicalContainerProvider containerProvider;
+  
+  @Inject
+  private ProcessorInstanceForJvmTypeProvider classLoaderProvider;
+  
+  public IEvaluationResult evaluate(final XExpression expression, final IEvaluationContext context, final CancelIndicator indicator) {
+    IEvaluationResult _xblockexpression = null;
+    {
+      ClassLoader _classLoader = this.classLoaderProvider.getClassLoader(expression);
+      this.setClassLoader(_classLoader);
+      IEvaluationResult _evaluate = super.evaluate(expression, context, indicator);
+      _xblockexpression = (_evaluate);
+    }
+    return _xblockexpression;
   }
   
   protected Object _doEvaluate(final XAnnotation literal, final IEvaluationContext context, final CancelIndicator indicator) {
@@ -114,6 +137,26 @@ public class ConstantExpressionsInterpreter extends XbaseInterpreter {
       _switchResult = __doEvaluate;
     }
     return _switchResult;
+  }
+  
+  protected Object _invokeFeature(final JvmField jvmField, final XAbstractFeatureCall featureCall, final Object receiver, final IEvaluationContext context, final CancelIndicator indicator) {
+    boolean _and = false;
+    boolean _isFinal = jvmField.isFinal();
+    if (!_isFinal) {
+      _and = false;
+    } else {
+      boolean _isStatic = jvmField.isStatic();
+      _and = (_isFinal && _isStatic);
+    }
+    if (_and) {
+      final XExpression expression = this.containerProvider.getAssociatedExpression(jvmField);
+      boolean _notEquals = (!Objects.equal(expression, null));
+      if (_notEquals) {
+        DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
+        return this.doEvaluate(expression, _defaultEvaluationContext, indicator);
+      }
+    }
+    return super._invokeFeature(jvmField, featureCall, receiver, context, indicator);
   }
   
   protected Object doEvaluate(final XExpression assignment, final IEvaluationContext context, final CancelIndicator indicator) {

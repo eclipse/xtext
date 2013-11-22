@@ -14,6 +14,7 @@ import org.apache.log4j.Logger
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.runtime.IPath
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
@@ -37,11 +38,20 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		}
 	}
 	
+	override getClassLoader(EObject ctx) {
+		val project = (ctx.eResource.resourceSet as XtextResourceSet).classpathURIContext as IJavaProject
+		return createClassLoaderForJavaProject(project)
+	}
+	
 	def protected ClassLoader createClassLoader(String typeName, IJavaProject javaProject) {
 		val type = javaProject.findType(typeName)
 		if (type == null)
 			return getClass.classLoader
 		val projectToUse = type.javaProject
+		createClassLoaderForJavaProject(projectToUse);
+	}
+	
+	protected def createClassLoaderForJavaProject(IJavaProject projectToUse) {
 		val resolvedClasspath = projectToUse.getResolvedClasspath(true)
 		val List<URL> urls = newArrayList()
 		urls.addAll(getOutputFolders(projectToUse));
@@ -75,7 +85,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 				urls.add(url);
 			}
 		}
-		return new URLClassLoader(urls, getClass().getClassLoader());
+		return new URLClassLoader(urls, getClass().getClassLoader())
 	}
 	
 	def private getWorkspaceRoot(IJavaProject javaProject) {
