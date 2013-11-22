@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -21,7 +23,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
@@ -72,12 +73,13 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
             EList<JvmFormalParameter> _parameters = it.getParameters();
             JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toParameter(entity, "initializer", procedure);
             DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
-            final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-              public void apply(final ITreeAppendable it) {
-                it.append("initializer.apply(this);");
+            StringConcatenationClient _client = new StringConcatenationClient() {
+              @Override
+              protected void appendTo(TargetStringConcatenation _builder) {
+                _builder.append("initializer.apply(this);");
               }
             };
-            DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+            DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _client);
           }
         };
         JvmConstructor _constructor_1 = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toConstructor(entity, _function_1);
