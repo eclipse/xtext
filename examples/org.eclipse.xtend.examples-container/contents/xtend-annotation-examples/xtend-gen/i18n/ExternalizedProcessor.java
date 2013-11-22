@@ -78,7 +78,6 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
           public void apply(final MutableMethodDeclaration it) {
             final Procedure2<Format,Integer> _function = new Procedure2<Format,Integer>() {
               public void apply(final Format format, final Integer idx) {
-                String _plus = ("arg" + idx);
                 TypeReference _switchResult = null;
                 boolean _matched = false;
                 if (!_matched) {
@@ -99,7 +98,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                   TypeReference _string = context.getString();
                   _switchResult = _string;
                 }
-                it.addParameter(_plus, _switchResult);
+                it.addParameter(("arg" + idx), _switchResult);
               }
             };
             IterableExtensions.<Format>forEach(((Iterable<Format>)Conversions.doWrapArray(formats)), _function);

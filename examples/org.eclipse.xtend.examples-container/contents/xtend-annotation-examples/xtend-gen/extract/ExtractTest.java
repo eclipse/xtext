@@ -8,7 +8,6 @@
 package extract;
 
 import extract.Extract;
-import java.util.List;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester.CompilationResult;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -61,8 +60,8 @@ public class ExtractTest {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableInterfaceDeclaration interf = ctx.findInterface("MyClassInterface");
         final MutableClassDeclaration clazz = ctx.findClass("MyClass");
-        Iterable<TypeReference> _implementedInterfaces = clazz.getImplementedInterfaces();
-        TypeReference _head = IterableExtensions.<TypeReference>head(_implementedInterfaces);
+        Iterable<? extends TypeReference> _implementedInterfaces = clazz.getImplementedInterfaces();
+        TypeReference _head = IterableExtensions.head(_implementedInterfaces);
         Type _type = _head.getType();
         Assert.assertEquals(_type, interf);
         Iterable<? extends MutableMethodDeclaration> _declaredMethods = interf.getDeclaredMethods();
@@ -75,8 +74,8 @@ public class ExtractTest {
             TypeReference _returnType = it.getReturnType();
             Assert.assertEquals(_string, _returnType);
             TypeReference _newTypeReference = ctx.newTypeReference(IllegalArgumentException.class);
-            List<TypeReference> _exceptions = it.getExceptions();
-            TypeReference _head = IterableExtensions.<TypeReference>head(_exceptions);
+            Iterable<? extends TypeReference> _exceptions = it.getExceptions();
+            TypeReference _head = IterableExtensions.head(_exceptions);
             Assert.assertEquals(_newTypeReference, _head);
           }
         };

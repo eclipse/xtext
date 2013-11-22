@@ -164,7 +164,7 @@ public class XAnnotationExtensions {
             if (_not) {
               final EObject head = IterableExtensions.<EObject>head(candidates);
               if ((head instanceof JvmAnnotationType)) {
-                return this.isActiveAnnotation(((JvmAnnotationType) head));
+                return this.isActiveAnnotation(((JvmAnnotationType)head));
               }
             }
           }

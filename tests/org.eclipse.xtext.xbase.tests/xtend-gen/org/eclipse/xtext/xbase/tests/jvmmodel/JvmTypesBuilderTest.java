@@ -10,6 +10,8 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
@@ -369,6 +371,69 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       }
     };
     this._jvmTypesBuilder.setBody(op, _function_1);
+    EList<Adapter> _eAdapters_2 = op.eAdapters();
+    int _size_2 = _eAdapters_2.size();
+    Assert.assertEquals(1, _size_2);
+    JvmIdentifiableElement _logicalContainer_1 = this.containerProvider.getLogicalContainer(expr);
+    Assert.assertNull(_logicalContainer_1);
+  }
+  
+  @Test
+  public void testSetBody_03() {
+    final JvmOperation op = this.typesFactory.createJvmOperation();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(TargetStringConcatenation _builder) {
+        _builder.append("foo");
+      }
+    };
+    this._jvmTypesBuilder.setBody(op, _client);
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(TargetStringConcatenation _builder) {
+        _builder.append("bar");
+      }
+    };
+    this._jvmTypesBuilder.setBody(op, _client_1);
+    EList<Adapter> _eAdapters = op.eAdapters();
+    int _size = _eAdapters.size();
+    Assert.assertEquals(1, _size);
+  }
+  
+  @Test
+  public void testSetBody_04() {
+    final XNullLiteral expr = XbaseFactory.eINSTANCE.createXNullLiteral();
+    XtextResource _xtextResource = new XtextResource();
+    final XtextResource res = _xtextResource;
+    res.setLanguageName("org.eclipse.xtext.xbase.Xbase");
+    final JvmOperation op = this.typesFactory.createJvmOperation();
+    EList<EObject> _contents = res.getContents();
+    this._jvmTypesBuilder.<JvmOperation>operator_add(_contents, op);
+    EList<EObject> _contents_1 = res.getContents();
+    this._jvmTypesBuilder.<XNullLiteral>operator_add(_contents_1, expr);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(TargetStringConcatenation _builder) {
+        _builder.append("bar");
+      }
+    };
+    this._jvmTypesBuilder.setBody(op, _client);
+    EList<Adapter> _eAdapters = op.eAdapters();
+    int _size = _eAdapters.size();
+    Assert.assertEquals(1, _size);
+    this._jvmTypesBuilder.setBody(op, expr);
+    JvmIdentifiableElement _logicalContainer = this.containerProvider.getLogicalContainer(expr);
+    Assert.assertEquals(op, _logicalContainer);
+    EList<Adapter> _eAdapters_1 = op.eAdapters();
+    int _size_1 = _eAdapters_1.size();
+    Assert.assertEquals(0, _size_1);
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(TargetStringConcatenation _builder) {
+        _builder.append("bar");
+      }
+    };
+    this._jvmTypesBuilder.setBody(op, _client_1);
     EList<Adapter> _eAdapters_2 = op.eAdapters();
     int _size_2 = _eAdapters_2.size();
     Assert.assertEquals(1, _size_2);
