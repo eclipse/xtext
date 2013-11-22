@@ -27,7 +27,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 			members += entity.toConstructor() []
 			members += entity.toConstructor() [
 				parameters += entity.toParameter("initializer", procedure)
-				body = [it.append("initializer.apply(this);")]
+				body = '''initializer.apply(this);'''
 			]
 			val fields = <JvmField>newArrayList()
 			for ( f : entity.features ) {
