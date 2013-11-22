@@ -13,7 +13,7 @@ import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
-	@Test def void testAnnotationValueSetting() {
+	@Test def void testAnnotationValueSetting_1() {
 		assertProcessing(
 			'myannotation/ConfigurableAnnotation.xtend' -> '''
 				package myannotation
@@ -95,6 +95,56 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(1, types.length)
 			assertEquals(typeReferenceProvider.primitiveBoolean, types.get(0))
 			
+		]
+	}
+	
+	@Test def void testAnnotationValueSetting_2() {
+		assertProcessing(
+			'myannotation/ConfigurableAnnotation.xtend' -> '''
+				package myannotation
+
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.*
+				import org.eclipse.xtend.lib.macro.declaration.*
+				
+				import static com.google.common.base.Preconditions.*
+				
+				@Active(ConfigurableAnnotationProcessor)
+				annotation ConfigurableAnnotation {
+					int someValue
+				}
+				
+				class Constants {
+					public static val MYCONSTANT = Integer.MAX_VALUE - 42
+				}
+				
+				class ConfigurableAnnotationProcessor extends AbstractClassProcessor {
+				
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						val anno = annotatedClass.annotations.head
+						
+						val existingValue = anno.getValue('someValue')
+						
+						annotatedClass.docComment = ''+existingValue
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.*
+				
+				@ConfigurableAnnotation(someValue=MoreConstants.MY_CONSTANT * 1)
+				class MyClass {
+				}
+				
+				class MoreConstants {
+					public static val MY_CONSTANT = myannotation.Constants.MYCONSTANT - Integer.MAX_VALUE + 42 * 2
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass("myusercode.MyClass")
+			assertEquals("42",clazz.docComment)
 		]
 	}
 	
