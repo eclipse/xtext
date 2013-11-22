@@ -499,7 +499,7 @@ public class RawTypeConformanceComputer {
 			}
 			return flags | SUCCESS;
 		}
-		right.tryResolve();
+		right.tryResolve(false);
 		LightweightTypeReference resolvedTo = right.getResolvedTo();
 		if (resolvedTo != null) {
 			return doIsConformant(left, resolvedTo, flags);
