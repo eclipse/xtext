@@ -182,6 +182,32 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	def void testSetBody_03() {
+		val op = typesFactory.createJvmOperation
+		op.body = '''foo'''
+		op.body = '''bar'''
+		assertEquals(1, op.eAdapters.size)
+	}
+	
+	@Test
+	def void testSetBody_04() {
+		val expr = XbaseFactory::eINSTANCE.createXNullLiteral;
+		val res = new XtextResource()
+		res.languageName = 'org.eclipse.xtext.xbase.Xbase'
+		val op = typesFactory.createJvmOperation
+		res.contents += op
+		res.contents += expr
+		op.body = '''bar'''
+		assertEquals(1, op.eAdapters.size)
+		op.body = expr
+		assertEquals(op, containerProvider.getLogicalContainer(expr))
+		assertEquals(0, op.eAdapters.size)
+		op.body = '''bar'''
+		assertEquals(1, op.eAdapters.size)
+		assertNull(containerProvider.getLogicalContainer(expr))
+	}
+	
+	@Test
 	def void testAddNull() {
 		val list = new BasicEList<String>();
 		list += null
