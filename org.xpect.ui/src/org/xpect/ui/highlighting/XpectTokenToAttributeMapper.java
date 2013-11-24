@@ -19,13 +19,12 @@ import com.google.common.collect.ImmutableSet;
  */
 public class XpectTokenToAttributeMapper extends DefaultAntlrTokenToAttributeIdMapper {
 
-	private final Set<String> keywords = ImmutableSet.of("KEYWORD_11", "KEYWORD_10", "KEYWORD_7", "KEYWORD_6", "KEYWORD_8", "KEYWORD_9");
+	private final Set<String> keywords = ImmutableSet.of("KEYWORD_8", "KEYWORD_6", "KEYWORD_9", "KEYWORD_11", "KEYWORD_7", "KEYWORD_10");
 
 	@Override
 	protected String calculateId(String tokenName, int tokenType) {
-		if (keywords.contains(tokenName)) {
+		if (keywords.contains(tokenName))
 			return DefaultHighlightingConfiguration.KEYWORD_ID;
-		}
 		if (tokenName.startsWith("KEYWORD_"))
 			return DefaultHighlightingConfiguration.PUNCTUATION_ID;
 		return super.calculateId(tokenName, tokenType);
