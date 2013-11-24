@@ -107,14 +107,13 @@ Workflow {
 			// generates a more lightweight Antlr parser and lexer tailored for content assist
 			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {}
 
-			//                fragment = de.itemis.statefullexer.StatefulLexerFragment {
-			////                	lexerGrammar = "org.xpect.ui.highlighting.CradleHighlightingLexer" 
-			//                	highlighting = true
-			//                	antlrParam = "-lib"
-			//                	antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"
-			//                }
 			fragment = de.itemis.statefullexer.StatefulLexerFragment {
-			//                	lexerGrammar = "org.xpect.ui.contentassist.XpectContentAssistLexer"
+				lexerBaseClass = "org.xpect.services.Lexer"
+				highlighting = true
+				antlrParam = "-lib"
+				antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"
+			}
+			fragment = de.itemis.statefullexer.StatefulLexerFragment {
 				lexerBaseClass = "org.xpect.ui.services.Lexer"
 				contentAssist = true
 				antlrParam = "-lib"
@@ -123,12 +122,6 @@ Workflow {
 
 			// generates junit test support classes into Generator#pathTestProject
 			fragment = junit.Junit4Fragment {}
-
-			// project wizard (optional)
-			// fragment = projectWizard.SimpleProjectWizardFragment {
-			//      generatorProjectName = "${projectName}"
-			//      modelFileExtension = file.extensions
-			// }
 
 			// rename refactoring
 			fragment = refactoring.RefactorElementNameFragment {}
