@@ -37,6 +37,10 @@ public class JavaProject extends Project {
 		classpathEntries.add(path);
 	}
 
+	public void addContainer(String name) {
+		this.classpathEntries.add(JavaCore.newContainerEntry(new Path(name)));
+	}
+
 	@Override
 	public IProject create(FileSetupContext ctx, IWorkspaceRoot container, Workspace.Instance instance) throws CoreException, IOException {
 		IProject project = super.create(ctx, container, instance);
