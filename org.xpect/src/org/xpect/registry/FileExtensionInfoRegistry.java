@@ -228,7 +228,7 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		Multimap<String, ExtensionPointData> ext2info = HashMultimap.create();
 		for (ExtensionPointData info : infos)
 			for (String ext : info.fileExtensions)
-				if (ext != null && !ext.startsWith("__"))
+				if (ext != null && !ext.startsWith("__") && !"xt".equals(ext))
 					ext2info.put(ext, info);
 
 		List<IEmfFileExtensionInfo> allInfos = Lists.newArrayList();

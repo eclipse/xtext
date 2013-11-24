@@ -487,11 +487,6 @@
             fileExtension="ecore"
             xtextUiModule="org.eclipse.xtext.ui.ecore.EcoreUiModule">
       </fileExtension>
-      <fileExtension
-            fileExtension="xt"
-            xtextResourceUIServiceProvider="org.xpect.ui.services.XtResourceUIServiceProviderProvider"
-            xtextUiModule="org.xpect.ui.XtUIModule">
-      </fileExtension>
    </extension>
    
 

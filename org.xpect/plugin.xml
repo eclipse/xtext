@@ -18,12 +18,6 @@
             xtextLanguageName="org.eclipse.emf.ecore.presentation.EcoreEditorID"
             xtextRuntimeModule="org.eclipse.xtext.ecore.EcoreRuntimeModule">
       </fileExtension>
-      <fileExtension
-            fileExtension="xt"
-            xtextLanguageName="org.xpect.Xt"
-            xtextResourceServiceProvider="org.xpect.services.XtResourceServiceProviderProvider"
-            xtextRuntimeModule="org.xpect.XtRuntimeModule">
-      </fileExtension>
    </extension>
 
 </plugin>
