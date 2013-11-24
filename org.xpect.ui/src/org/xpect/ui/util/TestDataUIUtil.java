@@ -65,55 +65,58 @@ public class TestDataUIUtil {
 	public static TestElementInfo parse(ITestElement element) {
 		TestElementInfo result = new TestElementInfo();
 		result.javaProject = element.getTestRunSession().getLaunchedProject();
-		String project = result.javaProject.getProject().getName();
-		if (element instanceof ITestCaseElement) {
-			ITestCaseElement tce = (ITestCaseElement) element;
-			result.clazz = tce.getTestClassName();
-			String methodName = tce.getTestMethodName();
-			if (methodName.contains("~")) {
-				int colon = methodName.indexOf(':');
-				String description;
-				URI uri;
-				if (colon >= 0) {
-					description = methodName.substring(colon + 1).trim();
-					uri = URI.createURI(methodName.substring(0, colon).trim());
+		// null, when opening xml files instead of running tests.
+		if (result.javaProject != null) {
+			String project = result.javaProject.getProject().getName();
+			if (element instanceof ITestCaseElement) {
+				ITestCaseElement tce = (ITestCaseElement) element;
+				result.clazz = tce.getTestClassName();
+				String methodName = tce.getTestMethodName();
+				if (methodName.contains("~")) {
+					int colon = methodName.indexOf(':');
+					String description;
+					URI uri;
+					if (colon >= 0) {
+						description = methodName.substring(colon + 1).trim();
+						uri = URI.createURI(methodName.substring(0, colon).trim());
+					} else {
+						description = null;
+						uri = URI.createURI(methodName);
+					}
+					URI base = URI.createPlatformResourceURI(project + "/", true);
+					result.uri = uri.resolve(base);
+					result.filename = uri.trimFragment().toString();
+					String name = uri.fragment();
+					int tilde = name.indexOf('~');
+					if (tilde >= 0)
+						name = name.substring(0, tilde);
+					if (description != null)
+						result.title = name + ": " + description;
+					else
+						result.title = name;
+				} else if (methodName.contains(":")) {
+					int colon = methodName.indexOf(':');
+					String filename = methodName.substring(0, colon).trim();
+					String path = methodName.substring(colon + 1).trim();
+					result.uri = URI.createPlatformResourceURI(project + "/" + path + "/" + filename, true);
+					result.filename = path + "/" + filename;
+					result.title = tce.getTestMethodName();
 				} else {
-					description = null;
-					uri = URI.createURI(methodName);
+					result.title = tce.getTestMethodName();
 				}
-				URI base = URI.createPlatformResourceURI(project + "/", true);
-				result.uri = uri.resolve(base);
-				result.filename = uri.trimFragment().toString();
-				String name = uri.fragment();
-				int tilde = name.indexOf('~');
-				if (tilde >= 0)
-					name = name.substring(0, tilde);
-				if (description != null)
-					result.title = name + ": " + description;
-				else
-					result.title = name;
-			} else if (methodName.contains(":")) {
-				int colon = methodName.indexOf(':');
-				String filename = methodName.substring(0, colon).trim();
-				String path = methodName.substring(colon + 1).trim();
-				result.uri = URI.createPlatformResourceURI(project + "/" + path + "/" + filename, true);
-				result.filename = path + "/" + filename;
-				result.title = tce.getTestMethodName();
-			} else {
-				result.title = tce.getTestMethodName();
-			}
-		} else if (element instanceof ITestSuiteElement) {
-			ITestSuiteElement tse = (ITestSuiteElement) element;
-			String name = tse.getSuiteTypeName();
-			result.title = tse.getSuiteTypeName();
-			if (name.contains(":")) {
-				int colon = name.indexOf(':');
-				String filename = name.substring(0, colon).trim();
-				String path = name.substring(colon + 1).trim();
-				result.uri = URI.createPlatformResourceURI(project + "/" + path + "/" + filename, true);
-				result.filename = path + "/" + filename;
-			} else {
-				result.clazz = name;
+			} else if (element instanceof ITestSuiteElement) {
+				ITestSuiteElement tse = (ITestSuiteElement) element;
+				String name = tse.getSuiteTypeName();
+				result.title = tse.getSuiteTypeName();
+				if (name.contains(":")) {
+					int colon = name.indexOf(':');
+					String filename = name.substring(0, colon).trim();
+					String path = name.substring(colon + 1).trim();
+					result.uri = URI.createPlatformResourceURI(project + "/" + path + "/" + filename, true);
+					result.filename = path + "/" + filename;
+				} else {
+					result.clazz = name;
+				}
 			}
 		}
 		return result;
