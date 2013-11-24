@@ -7,165 +7,34 @@
  *******************************************************************************/
 package org.xpect.registry;
 
-import java.lang.reflect.Field;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.Modules2;
 import org.xpect.registry.StandalonePluginXMLParser.EMFExtensionParserInfo;
 import org.xpect.registry.StandalonePluginXMLParser.EMFGeneratedPackageInfo;
 import org.xpect.registry.StandalonePluginXMLParser.EditorInfo;
 import org.xpect.registry.StandalonePluginXMLParser.ExtensionInfo;
+import org.xpect.XpectConstants;
+import org.xpect.registry.IEmfFileExtensionInfo.IXtextFileExtensionInfo;
+import org.xpect.services.XtResourceServiceProviderProvider;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 
-	protected static class EPackageDescriptorImpl implements EPackage.Descriptor {
-		private final EMFGeneratedPackageInfo info;
-		private EPackage pkg = null;
-
-		public EPackageDescriptorImpl(EMFGeneratedPackageInfo info) {
-			super();
-			this.info = info;
-		}
-
-		public EFactory getEFactory() {
-			if (pkg != null)
-				return pkg.getEFactoryInstance();
-			return null;
-		}
-
-		public EPackage getEPackage() {
-			if (pkg == null)
-				try {
-					Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(info.getClazz());
-					Field field = clazz.getField("eINSTANCE");
-					pkg = (EPackage) field.get(null);
-				} catch (ClassNotFoundException e) {
-					throw new RuntimeException(e);
-				} catch (IllegalAccessException e) {
-					throw new RuntimeException(e);
-				} catch (SecurityException e) {
-					throw new RuntimeException(e);
-				} catch (NoSuchFieldException e) {
-					throw new RuntimeException(e);
-				}
-			return pkg;
-		}
-
-		public EMFGeneratedPackageInfo getInfo() {
-			return info;
-		}
-
-	}
-
-	protected static class ResourceFactoryDescriptorForEMF implements Resource.Factory.Descriptor {
-
-		private final String clazz;
-		private Factory factory;
-
-		public ResourceFactoryDescriptorForEMF(String clazz) {
-			super();
-			this.clazz = clazz;
-		}
-
-		public Factory createFactory() {
-			if (factory == null)
-				try {
-					factory = (Factory) ClassLoader.getSystemClassLoader().loadClass(clazz).newInstance();
-				} catch (InstantiationException e) {
-					throw new RuntimeException(e);
-				} catch (IllegalAccessException e) {
-					throw new RuntimeException(e);
-				} catch (ClassNotFoundException e) {
-					throw new RuntimeException(e);
-				}
-			return factory;
-		}
-
-		public String getClazz() {
-			return clazz;
-		}
-
-	}
-
-	protected static class ResourceFactoryDescriptorForXtext implements Resource.Factory.Descriptor {
-		private final String clazz;
-		private Factory factory;
-
-		private final ILanguageInfo info;
-
-		public ResourceFactoryDescriptorForXtext(ILanguageInfo info, String clazz) {
-			this.clazz = clazz;
-			this.info = info;
-		}
-
-		public Factory createFactory() {
-			if (factory == null)
-				try {
-					Class<?> loaded = ClassLoader.getSystemClassLoader().loadClass(clazz);
-					factory = (Factory) info.getInjector().getInstance(loaded);
-				} catch (ClassNotFoundException e) {
-					throw new RuntimeException(e);
-				}
-			return factory;
-		}
-
-		public String getClazz() {
-			return clazz;
-		}
-
-		public ILanguageInfo getInfo() {
-			return info;
-		}
-
-	}
-
-	protected static class ResourceServiceProviderProviderImpl implements Provider<IResourceServiceProvider> {
-
-		private final ILanguageInfo info;
-		private IResourceServiceProvider provider;
-
-		public ResourceServiceProviderProviderImpl(ILanguageInfo info) {
-			super();
-			this.info = info;
-		}
-
-		public IResourceServiceProvider get() {
-			if (provider == null)
-				provider = info.getInjector().getInstance(IResourceServiceProvider.class);
-			return provider;
-		}
-
-		public ILanguageInfo getInfo() {
-			return info;
-		}
-	}
-
 	protected static class StandaloneLanguageInfoImpl extends AbstractLanguageInfo {
-		public StandaloneLanguageInfoImpl(String rtLangName, String uiLangName, Set<String> fileExtensions) {
-			super(rtLangName, uiLangName, fileExtensions);
+		public StandaloneLanguageInfoImpl(IXtextFileExtensionInfo info) {
+			super(info);
 		}
 
 		protected Injector createInjector(Module... modules) {
@@ -175,27 +44,6 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 				return Guice.createInjector(getRuntimeModule());
 		}
 
-		protected Module getUIModule() {
-			if (uiModule == null) {
-				try {
-					uiModule = (Module) getUIModuleClass().newInstance();
-				} catch (InstantiationException e) {
-					throw new RuntimeException(e);
-				} catch (IllegalAccessException e) {
-					throw new RuntimeException(e);
-				}
-			}
-			return uiModule;
-		}
-
-		@Override
-		protected Class<?> loadClass(String name) {
-			try {
-				return ClassLoader.getSystemClassLoader().loadClass(name);
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException(e);
-			}
-		}
 	}
 
 	private static final Logger LOG = Logger.getLogger(StandaloneLanguageRegistry.class);
@@ -234,31 +82,20 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 		if (running)
 			throw new IllegalStateException("I want to be a singleton!");
 		running = true;
-		List<ExtensionInfo> extensionInfos = new StandalonePluginXMLParser().parse();
-		Multimap<String, EMFExtensionParserInfo> uiName2ExtParser = HashMultimap.create();
-		Multimap<String, EditorInfo> uiName2Editor = HashMultimap.create();
-		for (ExtensionInfo info : extensionInfos)
-			if (info instanceof EditorInfo) {
-				EditorInfo ei = (EditorInfo) info;
-				uiName2Editor.put(ei.getUiLang(), ei);
-			} else if (info instanceof EMFExtensionParserInfo) {
-				EMFExtensionParserInfo parserInfo = (EMFExtensionParserInfo) info;
-				if (parserInfo.getUiLangName() != null)
-					uiName2ExtParser.put(parserInfo.getUiLangName(), parserInfo);
-				else
-					registerEFactoryWithoutInjector(parserInfo);
-			} else if (info instanceof EMFGeneratedPackageInfo)
-				registerEPackage((EMFGeneratedPackageInfo) info);
-		for (String uiName : Sets.union(uiName2Editor.keySet(), uiName2ExtParser.keySet())) {
-			Collection<EditorInfo> editors = uiName2Editor.get(uiName);
-			Collection<EMFExtensionParserInfo> extParsers = uiName2ExtParser.get(uiName);
-			ILanguageInfo info = registerEFactoryWithInjector(uiName, editors, extParsers);
-			if (info != null) {
-				name2language.put(info.getLanguageName(), info);
+
+		for (String nsURI : IEPackageInfo.Registry.INSTANCE.getNamespaceURIs())
+			EPackageRegistrar.register(IEPackageInfo.Registry.INSTANCE.getEPackageInfo(nsURI));
+
+		for (IEmfFileExtensionInfo info : IEmfFileExtensionInfo.Registry.INSTANCE.getFileExtensionInfos()) {
+			FileExtensionRegistrar.register(info);
+			if (info instanceof IXtextFileExtensionInfo) {
+				StandaloneLanguageInfoImpl infoImpl = new StandaloneLanguageInfoImpl((IXtextFileExtensionInfo) info);
+				name2language.put(infoImpl.getLanguageName(), infoImpl);
 				for (String ext : info.getFileExtensions())
-					ext2language.put(ext, info);
+					ext2language.put(ext, infoImpl);
 			}
 		}
+<<<<<<< Upstream, based on ab758eabcbd837e460cbeb6f775e18e54587191d
 	}
 
 	protected ILanguageInfo registerEFactoryWithInjector(String uiName, Collection<EditorInfo> editors,
@@ -292,5 +129,8 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 		else {
 			LOG.warn("No GenModel found for EPackage " + info.getUri());
 		}
+=======
+		registerRSPProviderForXt();
+>>>>>>> 719c471 improved detection of installed Xtext languages
 	}
 }

@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.xpect.registry.IEmfFileExtensionInfo.IXtextFileExtensionInfo;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.inject.Injector;
@@ -21,24 +23,18 @@ import com.google.inject.Module;
  */
 public abstract class AbstractLanguageInfo implements ILanguageInfo {
 
-	private final Set<String> fileExtensions;
+	private final IXtextFileExtensionInfo info;
 
 	protected Injector injector;
 
 	protected Map<List<Class<? extends Module>>, Injector> injectors = Maps.newHashMap();
 
-	private final String rtLangName;
-
 	protected Module runtimeModule = null;
-
-	private final String uiLangName;
 
 	protected Module uiModule = null;
 
-	public AbstractLanguageInfo(String rtLangName, String uiLangName, Set<String> fileExtensions) {
-		this.rtLangName = rtLangName;
-		this.uiLangName = uiLangName;
-		this.fileExtensions = fileExtensions;
+	public AbstractLanguageInfo(IXtextFileExtensionInfo info) {
+		this.info = info;
 	}
 
 	protected abstract Injector createInjector(Module... modules);
@@ -47,11 +43,11 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 	public boolean equals(Object obj) {
 		if (obj == null || obj.getClass() != getClass())
 			return false;
-		return rtLangName.equals(((AbstractLanguageInfo) obj).rtLangName);
+		return info.getLanguageID().equals(((AbstractLanguageInfo) obj).info.getLanguageID());
 	}
 
 	public Set<String> getFileExtensions() {
-		return fileExtensions;
+		return info.getFileExtensions();
 	}
 
 	public Injector getInjector() {
@@ -79,13 +75,7 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 	}
 
 	public String getLanguageName() {
-		return rtLangName;
-	}
-
-	@SuppressWarnings("unchecked")
-	public Class<? extends Module> getRuntimeModuleClass() {
-		String className = rtLangName + "RuntimeModule";
-		return (Class<? extends Module>) loadClass(className);
+		return info.getLanguageID();
 	}
 
 	protected Module getRuntimeModule() {
@@ -103,21 +93,21 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 		return runtimeModule;
 	}
 
-	public String getUiLangName() {
-		return uiLangName;
+	public Class<? extends Module> getRuntimeModuleClass() {
+		return info.getRuntimeModule().load();
 	}
 
-	@SuppressWarnings("unchecked")
+	public String getUiLangName() {
+		return info.getUIModule().getName();
+	}
+
 	public Class<? extends Module> getUIModuleClass() {
-		String className = uiLangName + "UiModule";
-		return (Class<? extends Module>) loadClass(className);
+		return info.getUIModule().load();
 	}
 
 	@Override
 	public int hashCode() {
-		return rtLangName.hashCode();
+		return info.getLanguageID().hashCode();
 	}
-
-	protected abstract Class<?> loadClass(String name);
 
 }

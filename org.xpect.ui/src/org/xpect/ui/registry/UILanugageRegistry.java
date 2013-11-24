@@ -11,9 +11,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
-import org.eclipse.core.runtime.Platform;
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.osgi.framework.internal.core.BundleContextImpl;
@@ -24,11 +23,12 @@ import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.xpect.registry.AbstractLanguageInfo;
+import org.xpect.registry.IEmfFileExtensionInfo;
+import org.xpect.registry.IEmfFileExtensionInfo.IXtextFileExtensionInfo;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.util.ReflectionUtil;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -41,11 +41,8 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 
 	public static class UILanguageInfo extends AbstractLanguageInfo {
 
-		private final String bundleID;
-
-		public UILanguageInfo(String bundleID, String rtLangName, String uiLangName, Set<String> fileExtensions) {
-			super(rtLangName, uiLangName, fileExtensions);
-			this.bundleID = bundleID;
+		public UILanguageInfo(IXtextFileExtensionInfo info) {
+			super(info);
 		}
 
 		@Override
@@ -61,10 +58,6 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 				Module override = Modules2.mixin(modules);
 				return Guice.createInjector(Modules2.mixin(runtimeModule, sharedStateModule, uiModule, override));
 			}
-		}
-
-		public String getBundleID() {
-			return bundleID;
 		}
 
 		protected Module getUIModule() {
@@ -92,13 +85,25 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 			return uiModule;
 		}
 
-		@Override
-		protected Class<?> loadClass(String name) {
-			try {
-				Bundle bundle = Platform.getBundle(bundleID);
-				return bundle.loadClass(name);
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException(e);
+	}
+
+	private static final Logger LOG = Logger.getLogger(UILanugageRegistry.class);
+
+	public UILanugageRegistry() {
+		try {
+			init();
+		} catch (Throwable e) {
+			LOG.error("Error initalizing language registry", e);
+		}
+	}
+
+	private void init() {
+		for (IEmfFileExtensionInfo info : IEmfFileExtensionInfo.Registry.INSTANCE.getFileExtensionInfos()) {
+			if (info instanceof IXtextFileExtensionInfo) {
+				UILanguageInfo infoImpl = new UILanguageInfo((IXtextFileExtensionInfo) info);
+				name2language.put(infoImpl.getLanguageName(), infoImpl);
+				for (String ext : info.getFileExtensions())
+					fileExtension2language.put(ext, infoImpl);
 			}
 		}
 	}
@@ -106,18 +111,6 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 	protected Map<String, ILanguageInfo> fileExtension2language = Maps.newLinkedHashMap();
 
 	protected Map<String, ILanguageInfo> name2language = Maps.newLinkedHashMap();
-
-	public void addLanguage(String bundleID, String rtLangName, String uiLangName, String[] fileExtensions) {
-		UILanguageInfo info = (UILanguageInfo) name2language.get(rtLangName);
-		if (info == null) {
-			info = new UILanguageInfo(bundleID, rtLangName, uiLangName, Sets.newHashSet(fileExtensions));
-			name2language.put(rtLangName, info);
-		} else {
-			info.getFileExtensions().addAll(Sets.newHashSet(fileExtensions));
-		}
-		for (String ext : fileExtensions)
-			fileExtension2language.put(ext, info);
-	}
 
 	public ILanguageInfo getLanguageByFileExtension(String fileExtension) {
 		return fileExtension2language.get(fileExtension);
@@ -131,14 +124,4 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 		return name2language.values();
 	}
 
-	public void removeLanguage(String language, String[] fileExtensions) {
-		UILanguageInfo info = (UILanguageInfo) name2language.get(language);
-		if (info != null) {
-			info.getFileExtensions().removeAll(Sets.newHashSet(fileExtensions));
-			if (info.getFileExtensions().isEmpty())
-				name2language.remove(language);
-		}
-		for (String ext : fileExtensions)
-			fileExtension2language.remove(ext);
-	}
 }

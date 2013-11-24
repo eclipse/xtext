@@ -8,10 +8,12 @@
 package org.xpect.ui;
 
 import org.osgi.framework.BundleContext;
+import org.xpect.registry.DelegatingExtensionInfoRegistry;
 import org.xpect.registry.DelegatingLanguageRegistry;
+import org.xpect.registry.IExtensionInfo;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.ui.internal.XpectActivator;
-import org.xpect.ui.registry.ExtensionRegistryReader;
+import org.xpect.ui.registry.UIExtensionInfoRegistry;
 import org.xpect.ui.registry.UILanugageRegistry;
 import org.xpect.ui.util.UIFileForClassProvider;
 import org.xpect.ui.util.UIJavaReflectAccess;
@@ -32,10 +34,8 @@ public class XpectPluginActivator extends XpectActivator {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 
-		UILanugageRegistry lanugageRegistry = new UILanugageRegistry();
-		((DelegatingLanguageRegistry) ILanguageInfo.Registry.INSTANCE).setDelegate(lanugageRegistry);
-		new ExtensionRegistryReader(lanugageRegistry).readRegistry();
-
+		((DelegatingExtensionInfoRegistry) IExtensionInfo.Registry.INSTANCE).setDelegate(new UIExtensionInfoRegistry());
+		((DelegatingLanguageRegistry) ILanguageInfo.Registry.INSTANCE).setDelegate(new UILanugageRegistry());
 		((IFileForClassProvider.Delegate) IFileForClassProvider.INSTANCE).setDelegate(new UIFileForClassProvider());
 		((IXtInjectorProvider.Delegate) IXtInjectorProvider.INSTANCE).setDelegate(new UIXtInjectorProvider());
 		((IJavaReflectAccess.Delegate) IJavaReflectAccess.INSTANCE).setDelegate(new UIJavaReflectAccess());
