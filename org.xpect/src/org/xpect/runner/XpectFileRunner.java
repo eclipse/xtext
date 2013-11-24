@@ -121,7 +121,12 @@ public class XpectFileRunner implements Filterable, Sortable {
 	}
 
 	protected ISetupInitializer<Object> createSetupInitializer() {
-		return new SetupInitializer<Object>(xpectFile.getTest());
+		if (xpectFile != null) {
+			XpectTest test = xpectFile.getTest();
+			if (test != null && !test.eIsProxy())
+				return new SetupInitializer<Object>(xpectFile.getTest());
+		}
+		return new ISetupInitializer.Null<Object>();
 	}
 
 	protected TestRunner createTestRunner(XjmMethod method) {
