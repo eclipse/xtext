@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
@@ -12,6 +13,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -134,6 +136,18 @@ public class UIJavaReflectAccess implements IJavaReflectAccess {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public Method getMethod(JvmOperation operation) {
+		Class<?> rawType = getRawType(operation.getDeclaringType());
+		if (rawType != null) {
+			String name = operation.getSimpleName();
+			for (Method method : rawType.getMethods()) {
+				if (name.equals(method.getName()))
+					return method;
+			}
+		}
+		return null;
 	}
 
 }
