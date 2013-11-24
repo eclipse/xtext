@@ -10,12 +10,14 @@ package org.xpect.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.autoedit.MultiLineTerminalsEditStrategy;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.xpect.ui.highlighting.XpectTokenDefProvider;
 import org.xpect.ui.highlighting.XpectTokenToAttributeMapper;
 import org.xpect.ui.scoping.ClasspathOrJdtBasedTypeScopeProvider;
+import org.xpect.ui.services.XpectEObjectAtOffsetHelper;
 import org.xpect.ui.services.XpectMultiLineTerminalsEditStrategyFactory;
 
 import com.google.inject.Binder;
@@ -46,6 +48,10 @@ public class XpectUiModule extends org.xpect.ui.AbstractXpectUiModule {
 
 	public Class<? extends MultiLineTerminalsEditStrategy.Factory> bindMultiLineTerminalsEditStrategyFactory() {
 		return XpectMultiLineTerminalsEditStrategyFactory.class;
+	}
+
+	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
+		return XpectEObjectAtOffsetHelper.class;
 	}
 
 }
