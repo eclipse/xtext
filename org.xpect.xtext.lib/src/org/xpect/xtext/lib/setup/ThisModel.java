@@ -28,7 +28,7 @@ import com.google.common.base.Joiner;
 @Target({ ElementType.PARAMETER, ElementType.FIELD })
 @XpectSetup(ThisModelFactory.class)
 public @interface ThisModel {
-	class ThisModelFactory {
+	public class ThisModelFactory {
 		private final XtextResource resource;
 
 		public ThisModelFactory(@ThisResource XtextResource resource) {
