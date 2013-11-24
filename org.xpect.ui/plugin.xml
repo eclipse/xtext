@@ -391,11 +391,11 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.xpect.ui.editor.XtEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
-            id="org.xpect.Xt"
-            name="Xpect+Xtext Editor">
+              class="org.xpect.ui.editor.XtEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="true"
+              id="org.xpect.Xt"
+              name="Xpect+Xtext Editor">
         </editor>
     </extension>
     <extension point="org.eclipse.debug.ui.launchShortcuts">
@@ -480,6 +480,18 @@
         adaptableType="org.xpect.ui.launching.JUnitJavaElementDelegate">
         <adapter type="org.eclipse.jdt.core.IJavaElement"/>
      </factory>
+   </extension>
+   <extension
+         point="org.xpect.fileExtensions">
+      <fileExtension
+            fileExtension="ecore"
+            xtextUiModule="org.eclipse.xtext.ui.ecore.EcoreUiModule">
+      </fileExtension>
+      <fileExtension
+            fileExtension="xt"
+            xtextResourceUIServiceProvider="org.xpect.ui.services.XtResourceUIServiceProviderProvider"
+            xtextUiModule="org.xpect.ui.XtUIModule">
+      </fileExtension>
    </extension>
    
 

@@ -1,6 +1,6 @@
 package org.xpect.tests.state
 
-import static org.xpect.tests.state.StateTestUtil.*
+import static org.xpect.tests.TestUtil.*
 import org.junit.Test
 import org.xpect.state.StateContainer
 import org.xpect.tests.state.LoggingTestData.AnnDerived1

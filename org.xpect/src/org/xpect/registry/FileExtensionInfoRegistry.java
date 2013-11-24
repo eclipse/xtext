@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.xpect.registry.IEmfFileExtensionInfo.IXtextFileExtensionInfo;
-import org.xpect.registry.IExtensionInfo.Registry;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -30,64 +29,39 @@ import com.google.inject.Module;
 
 public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry {
 
-	private static class EditorInfo extends Info {
+	private abstract static class Data {
+		protected String languageID = null;
+		protected LazyClass<Factory> resFact = null;
+		protected LazyClass<IResourceServiceProvider> resSvP = null;
+		protected LazyClass<IResourceServiceProvider> resUISvP = null;
+		protected LazyClass<Module> runtimeModule = null;
+		protected LazyClass<Module> uiModule = null;
+		protected LazyClass<Object> editor = null;
 
-		private final String languageID;
-		private final LazyClass<Module> runtimeModule;
-		private final LazyClass<Module> uiModule;
-
-		public EditorInfo(IExtensionInfo source) {
-			super(source, "extensions");
-			this.languageID = source.getAttributeValue("id");
-			this.runtimeModule = LazyClass.create(Module.class, this.languageID + "RuntimeModule", source);
-			LazyClass<Object> editorClass = LazyClass.create(Object.class, source, "class");
-			this.uiModule = newUIModule(editorClass);
-		}
+		abstract protected String getFileExtensionString();
 
 		@Override
-		public String getLanguageID() {
-			return languageID;
+		public String toString() {
+			ToStringHelper result = Objects.toStringHelper(this).add("fileExtension", getFileExtensionString());
+			if (resFact != null && !DEFAULT_RESOURCE_FACTORY.equals(resFact.getName()))
+				result.add("resourceFactory", resFact);
+			if (languageID != null)
+				result.add("languageID", languageID);
+			if (runtimeModule != null)
+				result.add("runtimeModule", runtimeModule);
+			if (uiModule != null)
+				result.add("uiModule", uiModule);
+			if (resSvP != null && !DEFAULT_RESOURCE_SERVICE_PROVIDER.equals(resSvP.getName()))
+				result.add("resourceServiceProvider", resSvP);
+			if (resUISvP != null && !DEFAULT_RESOURCE_UI_SERVICE_PROVIDER.equals(resUISvP.getName()))
+				result.add("resourceUIServiceProvider", resUISvP);
+			return result.toString();
 		}
-
-		@Override
-		public LazyClass<Module> getRuntimeModule() {
-			return runtimeModule;
-		}
-
-		@Override
-		public LazyClass<Module> getUIModule() {
-			return uiModule;
-		}
-
-	}
-
-	private static class EmfExtensionParserInfo extends Info {
-
-		private final LazyClass<Factory> resourceFactory;
-		private final LazyClass<Module> uiModule;
-
-		public EmfExtensionParserInfo(IExtensionInfo source) {
-			super(source, "type");
-			this.resourceFactory = LazyClass.create(Factory.class, source, "class");
-			this.uiModule = newUIModule(resourceFactory);
-		}
-
-		@Override
-		public LazyClass<Factory> getResourceFactory() {
-			return resourceFactory;
-		}
-
-		@Override
-		public LazyClass<Module> getUIModule() {
-			return uiModule;
-		}
-
 	}
 
 	public static class EmfFileExtensionInfo implements IEmfFileExtensionInfo {
 		private final Set<String> fileExtensions;
 		private final LazyClass<Factory> resourceFactory;
-
 		private final Set<IExtensionInfo> traces;
 
 		public EmfFileExtensionInfo(Set<String> fileExtensions, LazyClass<Factory> resourceFactory, Set<IExtensionInfo> traces) {
@@ -119,55 +93,11 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 
 	}
 
-	public static class FileExtensionInfo {
-		private final String fileExtension;
-		private final String languageID;
-		private final LazyClass<Factory> resourceFactory;
-		private final LazyClass<IResourceServiceProvider> resourceServiceProvider;
-		private final LazyClass<IResourceServiceProvider> resourceUIServiceProvider;
-		private final LazyClass<Module> runtimeModule;
-		private final Set<IExtensionInfo> traces;
-		private final LazyClass<Module> uiModule;
-
-		public FileExtensionInfo(String fileExtension, String languageID, LazyClass<Factory> resourceFactory,
-				LazyClass<IResourceServiceProvider> resourceServiceProvider, LazyClass<IResourceServiceProvider> resourceUIServiceProvider,
-				LazyClass<Module> runtimeModule, LazyClass<Module> uiModule, Set<IExtensionInfo> traces) {
-			super();
-			this.fileExtension = fileExtension;
-			this.languageID = languageID;
-			this.resourceFactory = resourceFactory;
-			this.resourceServiceProvider = resourceServiceProvider;
-			this.resourceUIServiceProvider = resourceUIServiceProvider;
-			this.runtimeModule = runtimeModule;
-			this.uiModule = uiModule;
-			this.traces = ImmutableSet.copyOf(traces);
-		}
-
-		@Override
-		public String toString() {
-			ToStringHelper result = Objects.toStringHelper(this).add("fileExtension", fileExtension);
-			if (resourceFactory != null && !DEFAULT_RESOURCE_FACTORY.equals(resourceFactory.getName()))
-				result.add("resourceFactory", resourceFactory);
-			if (languageID != null)
-				result.add("languageID", languageID);
-			if (runtimeModule != null)
-				result.add("runtimeModule", runtimeModule);
-			if (uiModule != null)
-				result.add("uiModule", uiModule);
-			if (resourceServiceProvider != null && !DEFAULT_RESOURCE_SERVICE_PROVIDER.equals(resourceServiceProvider.getName()))
-				result.add("resourceServiceProvider", resourceServiceProvider);
-			if (resourceUIServiceProvider != null && !DEFAULT_RESOURCE_UI_SERVICE_PROVIDER.equals(resourceUIServiceProvider.getName()))
-				result.add("resourceUIServiceProvider", resourceUIServiceProvider);
-			return result.toString();
-		}
-	}
-
-	private static class Info {
-
+	private static class ExtensionPointData extends Data {
 		private Set<String> fileExtensions;
 		private IExtensionInfo trace;
 
-		public Info(IExtensionInfo trace, String fileExtensionAttributeName) {
+		public ExtensionPointData(IExtensionInfo trace, String fileExtensionAttributeName) {
 			this.trace = trace;
 			this.fileExtensions = Sets.newHashSet();
 			String exts = trace.getAttributeValue(fileExtensionAttributeName);
@@ -176,42 +106,20 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 					this.fileExtensions.add(ext.trim());
 		}
 
-		public Collection<String> getFileExtensions() {
-			return fileExtensions;
+		@Override
+		protected String getFileExtensionString() {
+			return Joiner.on(", ").join(fileExtensions);
 		}
 
-		public String getLanguageID() {
-			return null;
-		}
+	}
 
-		public LazyClass<Resource.Factory> getResourceFactory() {
-			return null;
-		}
+	private static class FileExtensionData extends Data {
+		protected String fileExtension;
+		protected Set<IExtensionInfo> traces;
 
-		public LazyClass<IResourceServiceProvider> getResourceServiceProvider() {
-			return null;
-		}
-
-		public LazyClass<IResourceServiceProvider> getResourceUIServiceProvider() {
-			return null;
-		}
-
-		public LazyClass<Module> getRuntimeModule() {
-			return null;
-		}
-
-		public IExtensionInfo getTrace() {
-			return trace;
-		}
-
-		public LazyClass<Module> getUIModule() {
-			return null;
-		}
-
-		protected LazyClass<Module> newUIModule(LazyClass<?> clazz) {
-			if (clazz != null && clazz.getFactory() != null)
-				return LazyClass.create(Module.class, clazz.getFactory() + "UiModule", clazz.getLoader());
-			return null;
+		@Override
+		protected String getFileExtensionString() {
+			return fileExtension;
 		}
 	}
 
@@ -220,7 +128,6 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		private final LazyClass<IResourceServiceProvider> resourceServiceProvider;
 		private final LazyClass<IResourceServiceProvider> resourceUIServiceProvider;
 		private final LazyClass<Module> runtimeModule;
-
 		private final LazyClass<Module> uiModule;
 
 		public XtextFileExtensionInfo(Set<String> fileExtensions, LazyClass<Factory> resourceFactory, String languageID,
@@ -279,29 +186,6 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 
 	}
 
-	private static class XtextResourceServiceProviderInfo extends Info {
-
-		private final LazyClass<IResourceServiceProvider> resourceUIServiceProvider;
-		private final LazyClass<Module> uiModule;
-
-		public XtextResourceServiceProviderInfo(IExtensionInfo source) {
-			super(source, "uriExtension");
-			this.resourceUIServiceProvider = LazyClass.create(IResourceServiceProvider.class, source, "class");
-			this.uiModule = newUIModule(resourceUIServiceProvider);
-		}
-
-		@Override
-		public LazyClass<IResourceServiceProvider> getResourceUIServiceProvider() {
-			return resourceUIServiceProvider;
-		}
-
-		@Override
-		public LazyClass<Module> getUIModule() {
-			return uiModule;
-		}
-
-	}
-
 	private static final String DEFAULT_RESOURCE_FACTORY = IResourceFactory.class.getName();
 
 	private static final String DEFAULT_RESOURCE_SERVICE_PROVIDER = IResourceServiceProvider.class.getName();
@@ -314,32 +198,43 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		System.out.println(new FileExtensionInfoRegistry());
 	}
 
-	private final List<IEmfFileExtensionInfo> allInfos = ImmutableList.copyOf(collectFileExtensionInfos());
+	private final Map<String, IEmfFileExtensionInfo> fileExtension2Info;
 
-	private final Map<String, IEmfFileExtensionInfo> fileExtensio2Info = ImmutableMap.copyOf(collectFileExtensionInfosByExt(allInfos));
+	private final List<IEmfFileExtensionInfo> infos;
 
-	private List<IEmfFileExtensionInfo> collectFileExtensionInfos() {
-		List<Info> infos = Lists.newArrayList();
-		Registry registry = IExtensionInfo.Registry.INSTANCE;
+	public FileExtensionInfoRegistry() {
+		this(IExtensionInfo.Registry.INSTANCE);
+	}
+
+	public FileExtensionInfoRegistry(IExtensionInfo.Registry registry) {
+		this.infos = ImmutableList.copyOf(collectFileExtensionInfos(registry));
+		this.fileExtension2Info = ImmutableMap.copyOf(collectFileExtensionInfosByExt(infos));
+	}
+
+	private List<IEmfFileExtensionInfo> collectFileExtensionInfos(IExtensionInfo.Registry registry) {
+		List<ExtensionPointData> infos = Lists.newArrayList();
 		for (IExtensionInfo ext : registry.getExtensions("org.eclipse.emf.ecore.extension_parser"))
-			infos.add(new EmfExtensionParserInfo(ext));
+			infos.add(parseEmfExtensionParser(ext));
 		for (IExtensionInfo ext : registry.getExtensions("org.eclipse.xtext.extension_resourceServiceProvider"))
-			infos.add(new XtextResourceServiceProviderInfo(ext));
+			infos.add(parseXtextResourceUIServiceProvider(ext));
 		for (IExtensionInfo ext : registry.getExtensions("org.eclipse.ui.editors")) {
-			EditorInfo editorInfo = new EditorInfo(ext);
-			if (editorInfo.getUIModule() != null)
+			ExtensionPointData editorInfo = parseEditorExtension(ext);
+			if (editorInfo.editor != null && editorInfo.editor.getFactory() != null)
 				infos.add(editorInfo);
 		}
+		for (IExtensionInfo ext : registry.getExtensions("org.xpect.fileExtensions"))
+			infos.add(parseXpectFileExtensionInfo(ext));
 
-		Multimap<String, Info> ext2info = HashMultimap.create();
-		for (Info info : infos)
-			for (String ext : info.getFileExtensions())
-				ext2info.put(ext, info);
+		Multimap<String, ExtensionPointData> ext2info = HashMultimap.create();
+		for (ExtensionPointData info : infos)
+			for (String ext : info.fileExtensions)
+				if (ext != null && !ext.startsWith("__"))
+					ext2info.put(ext, info);
 
 		List<IEmfFileExtensionInfo> allInfos = Lists.newArrayList();
-		Multimap<String, FileExtensionInfo> name2xtextInfo = HashMultimap.create();
+		Multimap<String, FileExtensionData> name2xtextInfo = HashMultimap.create();
 		for (String ext : ext2info.keySet()) {
-			FileExtensionInfo merged = mergeByFileExt(ext, ext2info.get(ext));
+			FileExtensionData merged = mergeByFileExt(ext, ext2info.get(ext));
 			if (merged.languageID == null)
 				allInfos.add(toEmfFileExtensionInfo(merged));
 			else
@@ -360,11 +255,11 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 	}
 
 	public IEmfFileExtensionInfo getEmfFileExtensionInfo(String fileExtension) {
-		return fileExtensio2Info.get(fileExtension);
+		return fileExtension2Info.get(fileExtension);
 	}
 
 	public Collection<IEmfFileExtensionInfo> getFileExtensionInfos() {
-		return allInfos;
+		return infos;
 	}
 
 	private <T> T merge(T o1, T o2, Collection<IExtensionInfo> traceIn, Set<IExtensionInfo> tracOut, String name, String context) {
@@ -392,30 +287,25 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		return o1;
 	}
 
-	private FileExtensionInfo mergeByFileExt(String fileExtension, Collection<Info> infos) {
-		Set<IExtensionInfo> traces = Sets.newHashSet();
-		String languageID = null;
-		LazyClass<Factory> resourceFactory = null;
-		LazyClass<IResourceServiceProvider> rsp = null;
-		LazyClass<IResourceServiceProvider> rUIsp = null;
-		LazyClass<Module> runtimeModule = null;
-		LazyClass<Module> uiModule = null;
-
+	private FileExtensionData mergeByFileExt(String fileExtension, Collection<ExtensionPointData> infos) {
+		FileExtensionData result = new FileExtensionData();
+		result.fileExtension = fileExtension;
+		result.traces = Sets.newHashSet();
 		String context = "FileExtension: " + fileExtension;
-		for (Info info : infos) {
-			Collection<IExtensionInfo> traceIn = Collections.singleton(info.getTrace());
-			languageID = merge(languageID, info.getLanguageID(), traceIn, traces, "Xtext LanguageIDs", context);
-			resourceFactory = merge(resourceFactory, info.getResourceFactory(), traceIn, traces, "EMF Resource Factories", context);
-			rsp = merge(rsp, info.getResourceServiceProvider(), traceIn, traces, "Xtext Resource Service Provider", context);
-			rUIsp = merge(rUIsp, info.getResourceUIServiceProvider(), traceIn, traces, "Xtext Resource UI Service Provider", context);
-			runtimeModule = merge(runtimeModule, info.getRuntimeModule(), traceIn, traces, "Xtext Runtime Modules", context);
-			uiModule = merge(uiModule, info.getUIModule(), traceIn, traces, "Xtext UI Modules", context);
+		for (ExtensionPointData info : infos) {
+			Collection<IExtensionInfo> traceIn = Collections.singleton(info.trace);
+			result.languageID = merge(result.languageID, info.languageID, traceIn, result.traces, "Xtext LanguageIDs", context);
+			result.resFact = merge(result.resFact, info.resFact, traceIn, result.traces, "EMF Resource Factories", context);
+			result.resSvP = merge(result.resSvP, info.resSvP, traceIn, result.traces, "Xtext Resource Service Provider", context);
+			result.resUISvP = merge(result.resUISvP, info.resUISvP, traceIn, result.traces, "Xtext Resource UI Service Provider", context);
+			result.runtimeModule = merge(result.runtimeModule, info.runtimeModule, traceIn, result.traces, "Xtext Runtime Modules", context);
+			result.uiModule = merge(result.uiModule, info.uiModule, traceIn, result.traces, "Xtext UI Modules", context);
+			result.editor = merge(result.editor, info.editor, traceIn, result.traces, null, context);
 		}
-
-		return new FileExtensionInfo(fileExtension, languageID, resourceFactory, rsp, rUIsp, runtimeModule, uiModule, traces);
+		return result;
 	}
 
-	private XtextFileExtensionInfo mergeByLang(String langID, Collection<FileExtensionInfo> infos) {
+	private XtextFileExtensionInfo mergeByLang(String langID, Collection<FileExtensionData> infos) {
 		Set<IExtensionInfo> traces = Sets.newHashSet();
 		Set<String> fileExtensions = Sets.newHashSet();
 		LazyClass<Factory> resourceFactory = null;
@@ -423,15 +313,17 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		LazyClass<IResourceServiceProvider> rUIsp = null;
 		LazyClass<Module> runtimeModule = null;
 		LazyClass<Module> uiModule = null;
+		LazyClass<Object> editor = null;
 
 		String context = "XtextLanguageID: " + langID;
-		for (FileExtensionInfo info : infos) {
+		for (FileExtensionData info : infos) {
 			fileExtensions.add(info.fileExtension);
-			resourceFactory = merge(resourceFactory, info.resourceFactory, info.traces, traces, "EMF Resource Factories", context);
-			rsp = merge(rsp, info.resourceServiceProvider, info.traces, traces, "Xtext Resource Service Provider", context);
-			rUIsp = merge(rUIsp, info.resourceUIServiceProvider, info.traces, traces, "Xtext Resource UI Service Provider", context);
+			resourceFactory = merge(resourceFactory, info.resFact, info.traces, traces, "EMF Resource Factories", context);
+			rsp = merge(rsp, info.resSvP, info.traces, traces, "Xtext Resource Service Provider", context);
+			rUIsp = merge(rUIsp, info.resUISvP, info.traces, traces, "Xtext Resource UI Service Provider", context);
 			runtimeModule = merge(runtimeModule, info.runtimeModule, info.traces, traces, "Xtext Runtime Modules", context);
 			uiModule = merge(uiModule, info.uiModule, info.traces, traces, "Xtext UI Modules", context);
+			editor = merge(editor, info.editor, info.traces, traces, null, context);
 		}
 
 		if (resourceFactory == null && runtimeModule != null)
@@ -440,24 +332,61 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 			rsp = LazyClass.create(IResourceServiceProvider.class, DEFAULT_RESOURCE_SERVICE_PROVIDER, runtimeModule.getLoader());
 		if (rUIsp == null && uiModule != null)
 			rUIsp = LazyClass.create(IResourceServiceProvider.class, DEFAULT_RESOURCE_UI_SERVICE_PROVIDER, uiModule.getLoader());
+		if (uiModule == null)
+			for (LazyClass<?> clazz : new LazyClass[] { resourceFactory, rsp, rUIsp, editor })
+				if (clazz != null && clazz.getFactory() != null) {
+					uiModule = LazyClass.create(Module.class, clazz.getFactory() + "UiModule", clazz.getLoader());
+					break;
+				}
 
 		return new XtextFileExtensionInfo(fileExtensions, resourceFactory, langID, rsp, rUIsp, runtimeModule, uiModule, traces);
 	}
 
-	private EmfFileExtensionInfo toEmfFileExtensionInfo(FileExtensionInfo info) {
-		warnIfSet(info, info.resourceServiceProvider, "resourceServiceProvider");
-		warnIfSet(info, info.resourceUIServiceProvider, "resourceUIServiceProvider");
+	private ExtensionPointData parseEditorExtension(IExtensionInfo info) {
+		ExtensionPointData result = new ExtensionPointData(info, "extensions");
+		result.languageID = info.getAttributeValue("id");
+		result.runtimeModule = LazyClass.create(Module.class, result.languageID + "RuntimeModule", info);
+		result.editor = LazyClass.create(Object.class, info, "class");
+		return result;
+	}
+
+	private ExtensionPointData parseEmfExtensionParser(IExtensionInfo info) {
+		ExtensionPointData result = new ExtensionPointData(info, "type");
+		result.resFact = LazyClass.create(Factory.class, info, "class");
+		return result;
+	}
+
+	private ExtensionPointData parseXpectFileExtensionInfo(IExtensionInfo info) {
+		ExtensionPointData result = new ExtensionPointData(info, "fileExtension");
+		result.resFact = LazyClass.create(Resource.Factory.class, info, "emfResourceFactory");
+		result.languageID = info.getAttributeValue("xtextLanguageName");
+		result.resSvP = LazyClass.create(IResourceServiceProvider.class, info, "xtextResourceServiceProvider");
+		result.resUISvP = LazyClass.create(IResourceServiceProvider.class, info, "xtextResourceUIServiceProvider");
+		result.runtimeModule = LazyClass.create(Module.class, info, "xtextRuntimeModule");
+		result.uiModule = LazyClass.create(Module.class, info, "xtextUiModule");
+		return result;
+	}
+
+	private ExtensionPointData parseXtextResourceUIServiceProvider(IExtensionInfo info) {
+		ExtensionPointData result = new ExtensionPointData(info, "uriExtension");
+		result.resUISvP = LazyClass.create(IResourceServiceProvider.class, info, "class");
+		return result;
+	}
+
+	private EmfFileExtensionInfo toEmfFileExtensionInfo(FileExtensionData info) {
+		warnIfSet(info, info.resSvP, "resourceServiceProvider");
+		warnIfSet(info, info.resUISvP, "resourceUIServiceProvider");
 		warnIfSet(info, info.runtimeModule, "runtimeModule");
-		warnIfSet(info, info.uiModule, "uiModule");
-		return new EmfFileExtensionInfo(Collections.singleton(info.fileExtension), info.resourceFactory, info.traces);
+		// warnIfSet(info, info.uiModule, "uiModule");
+		return new EmfFileExtensionInfo(Collections.singleton(info.fileExtension), info.resFact, info.traces);
 	}
 
 	@Override
 	public String toString() {
-		return Joiner.on("\n").join(allInfos);
+		return Joiner.on("\n").join(infos);
 	}
 
-	private void warnIfSet(FileExtensionInfo info, Object value, String name) {
+	private void warnIfSet(FileExtensionData info, Object value, String name) {
 		if (value != null)
 			LOG.warn("Ignoring " + name + " '" + value + "' for fileExtension '" + info.fileExtension + "'");
 	}

@@ -2,6 +2,7 @@
 <?eclipse version="3.0"?>
 
 <plugin>
+   <extension-point id="fileExtensions" name="fileExtensions" schema="schema/fileExtensions.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Xpect -->
@@ -9,6 +10,20 @@
             uri="http://www.eclipse.org/xpect/XpectJavaModel"
             class="org.xpect.XpectJavaModelPackage"
             genModel="model/Xpect.genmodel"/>
+   </extension>
+   <extension
+         point="org.xpect.fileExtensions">
+      <fileExtension
+            fileExtension="ecore"
+            xtextLanguageName="org.eclipse.emf.ecore.presentation.EcoreEditorID"
+            xtextRuntimeModule="org.eclipse.xtext.ecore.EcoreRuntimeModule">
+      </fileExtension>
+      <fileExtension
+            fileExtension="xt"
+            xtextLanguageName="org.xpect.Xt"
+            xtextResourceServiceProvider="org.xpect.services.XtResourceServiceProviderProvider"
+            xtextRuntimeModule="org.xpect.XtRuntimeModule">
+      </fileExtension>
    </extension>
 
 </plugin>

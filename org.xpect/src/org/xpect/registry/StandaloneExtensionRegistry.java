@@ -29,6 +29,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.google.common.io.Closeables;
 
 public class StandaloneExtensionRegistry implements IExtensionInfo.Registry {
 
@@ -143,27 +144,30 @@ public class StandaloneExtensionRegistry implements IExtensionInfo.Registry {
 		System.out.println(new StandaloneExtensionRegistry().toString());
 	}
 
-	private final Multimap<String, IExtensionInfo> extensions = ImmutableMultimap.copyOf(collectExtensions());
+	private final Multimap<String, IExtensionInfo> extensions;
+
+	public StandaloneExtensionRegistry() {
+		this.extensions = ImmutableMultimap.copyOf(collectExtensions());
+	}
+
+	public StandaloneExtensionRegistry(URL url, InputStream in) {
+		this.extensions = ImmutableMultimap.copyOf(collectExtensions(url, in));
+	}
 
 	private Multimap<String, IExtensionInfo> collectExtensions() {
 		Multimap<String, IExtensionInfo> result = HashMultimap.create();
 		try {
 			XMLReader reader = XMLReaderFactory.createXMLReader();
-			for (URL u : getAllPluginResourceURLs()) {
-				reader.setContentHandler(new PluginXMLContentHandler(u, result));
+			for (URL url : getAllPluginResourceURLs()) {
+				reader.setContentHandler(new PluginXMLContentHandler(url, result));
 				InputStream openStream = null;
 				try {
-					openStream = u.openStream();
+					openStream = url.openStream();
 					reader.parse(new InputSource(openStream));
 				} catch (Throwable e) {
-					LOG.error("Error parsing " + u, e);
+					LOG.error("Error parsing " + url, e);
 				} finally {
-					if (openStream != null)
-						try {
-							openStream.close();
-						} catch (IOException e) {
-							LOG.error(e.getMessage(), e);
-						}
+					Closeables.closeQuietly(openStream);
 				}
 			}
 		} catch (Throwable e) {
@@ -172,8 +176,20 @@ public class StandaloneExtensionRegistry implements IExtensionInfo.Registry {
 		return result;
 	}
 
+	private Multimap<String, IExtensionInfo> collectExtensions(URL url, InputStream in) {
+		Multimap<String, IExtensionInfo> result = HashMultimap.create();
+		try {
+			XMLReader reader = XMLReaderFactory.createXMLReader();
+			reader.setContentHandler(new PluginXMLContentHandler(url, result));
+			reader.parse(new InputSource(in));
+		} catch (Throwable e) {
+			LOG.error("Error parsing " + url, e);
+		}
+		return result;
+	}
+
 	@SuppressWarnings("resource")
-	protected Collection<URL> getAllPluginResourceURLs() {
+	private Collection<URL> getAllPluginResourceURLs() {
 		Set<URL> result = Sets.newLinkedHashSet();
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 		try {

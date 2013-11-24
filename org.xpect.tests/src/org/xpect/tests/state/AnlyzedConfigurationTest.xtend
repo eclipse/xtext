@@ -1,8 +1,10 @@
 package org.xpect.tests.state;
 
 import org.junit.Test
+
 import org.xpect.state.Creates
 
+import static org.xpect.tests.TestUtil.*
 import static org.xpect.tests.state.StateTestUtil.*
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
