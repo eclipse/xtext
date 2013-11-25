@@ -4470,8 +4470,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();

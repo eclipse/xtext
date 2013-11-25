@@ -722,8 +722,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.openPseudoScope();
 		internalToJavaStatement(expr.getBody(), b, false);
 		internalToJavaStatement(expr.getPredicate(), b, true);
-		b.newLine();
 		if (!earlyExitComputer.isEarlyExit(expr.getBody())) {
+			b.newLine();
 			b.append(varName).append(" = ");
 			internalToJavaExpression(expr.getPredicate(), b);
 			b.append(";");

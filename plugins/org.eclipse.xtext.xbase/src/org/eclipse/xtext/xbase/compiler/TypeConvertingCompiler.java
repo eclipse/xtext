@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -75,6 +76,9 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			@Nullable JvmTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {
 			JvmTypeReference actualType = getType(obj);
+			if (isPrimitiveVoid(actualType)) {
+				actualType = toBeConvertedTo;
+			}
 			if (!EcoreUtil.equals(toBeConvertedTo, actualType)) {
 				doConversion(toBeConvertedTo, actualType, appendable, obj, new Later() {
 					public void exec(ITreeAppendable appendable) {
