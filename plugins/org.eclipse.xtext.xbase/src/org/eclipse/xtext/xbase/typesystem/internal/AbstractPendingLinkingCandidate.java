@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -321,16 +323,24 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				XExpression argument = arguments.get(i);
 				if (isDefiniteEarlyExit(argument)) {
 					XExpression errorOn = getExpression();
+					String message = "Unreachable code.";
+					EStructuralFeature errorFeature = null;
 					if (i < arguments.size() - 1) {
 						errorOn = arguments.get(i + 1);
+					} else {
+						errorFeature = getDefaultValidationFeature();
+						if (errorOn instanceof XBinaryOperation) {
+							message = "Unreachable code. The right argument expression does not complete normally.";
+						} else {
+							message = "Unreachable code. The last argument expression does not complete normally.";
+						}
 					}
-					String message = "Unreachable code.";
 					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 							Severity.ERROR, 
 							IssueCodes.UNREACHABLE_CODE, 
 							message, 
 							errorOn, 
-							null, 
+							errorFeature, 
 							-1, null);
 					result.accept(diagnostic);
 					return false;

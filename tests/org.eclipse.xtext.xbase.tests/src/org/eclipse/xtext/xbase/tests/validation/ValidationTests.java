@@ -500,7 +500,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"	while (false) " +
 				"      throw new Exception() " +
 				"   null" +
-		"}");
+				"}");
 		helper.assertNoErrors(expression);
 	}
 	
@@ -511,14 +511,39 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"      throw new Exception() " +
 				"   while (false)" +
 				"   null" +
-		"}");
+				"}");
 		helper.assertError(((XBlockExpression)expression).getExpressions().get(1), XbasePackage.Literals.XNULL_LITERAL, UNREACHABLE_CODE);
+	}
+	
+	@Test public void testUnreachableCode421508_01() throws Exception {
+		XExpression expression = expression(
+				"{  val a = true val b = true" +
+				"	a.equals(b) && {\n" + 
+				"		if (a == b) {\n" + 
+				"			return true\n" + 
+				"		}\n" + 
+				"		return false\n" + 
+				"	}" +
+				"}");
+		helper.assertError(((XBlockExpression)expression).getExpressions().get(1), XbasePackage.Literals.XBINARY_OPERATION, UNREACHABLE_CODE);
+	}
+
+	@Test public void testUnreachableCode421508_02() throws Exception {
+		XExpression expression = expression(
+				"{  val a = true val b = true" +
+				"	a.equals(b) && {\n" + 
+				"		if (a == b) {\n" + 
+				"			return true\n" + 
+				"		}\n" + 
+				"		false\n" + 
+				"	}" +
+				"}");
+		helper.assertNoErrors(expression);
 	}
 
 	@Test public void testNewAbstractClass() throws Exception {
 		XExpression expression = expression("new testdata.AbstractClassWithPublicConstructor()");
-		helper.assertError(expression, XCONSTRUCTOR_CALL, ABSTRACT_CLASS_INSTANTIATION, "abstract", "instantiate",
-				"class");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, ABSTRACT_CLASS_INSTANTIATION, "abstract", "instantiate", "class");
 	}
 
 	@Test public void testCast_0() throws Exception {
