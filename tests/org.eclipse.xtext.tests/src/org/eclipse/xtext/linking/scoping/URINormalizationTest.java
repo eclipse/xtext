@@ -9,6 +9,7 @@ package org.eclipse.xtext.linking.scoping;
 
 import static com.google.common.collect.Iterables.*;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
@@ -34,7 +35,13 @@ public class URINormalizationTest extends AbstractXtextTests {
 		Type foo = bar.getExtends();
 		assertNotNull(foo);
 		assertFalse(foo.eIsProxy());
-		assertEquals("classpath", EcoreUtil.getURI(foo).scheme());
+		// we don't put contextual classpath:/ uris into the index thus
+		// they are partially normalized
+		if (Platform.isRunning()) {
+			assertEquals("bundleresource", EcoreUtil.getURI(foo).scheme());
+		} else {
+			assertEquals("file", EcoreUtil.getURI(foo).scheme());
+		}
 		IScopeProvider scopeProvider = get(IScopeProvider.class);
 		IScope scope = scopeProvider.getScope(bar, ImportedURIPackage.Literals.TYPE__EXTENDS);
 		Iterable<IEObjectDescription> elements = scope.getElements(foo);
