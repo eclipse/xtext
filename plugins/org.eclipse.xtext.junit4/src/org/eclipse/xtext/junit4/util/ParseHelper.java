@@ -16,14 +16,13 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.LazyStringInputStream;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 /**
  * Some convenience methods for parsing (i.e. testing, etc.)
@@ -38,9 +37,15 @@ public class ParseHelper<T extends EObject> {
 	@Inject
 	private IResourceFactory resourceFactory;
 
-	@Inject
-	@Named(Constants.FILE_EXTENSIONS)
 	public String fileExtension;
+	
+	/**
+	 * @since 2.5
+	 */
+	@Inject
+	public void setFileExtensionProvider(FileExtensionProvider extensionProvider) {
+		fileExtension = extensionProvider.getPrimaryFileExtension();
+	}
 
 	@SuppressWarnings("unchecked")
 	public T parse(InputStream in, URI uriToUse, Map<?, ?> options, ResourceSet resourceSet) {
