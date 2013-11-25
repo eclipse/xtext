@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -87,8 +88,13 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	public void checkDeadCode(XBlockExpression block) {
 		List<XExpression> expressions = block.getExpressions();
 		for(int i = 0; i < expressions.size() - 1; i++) {
-			if (earlyExitComputer.isEarlyExit(expressions.get(i))) {
-				error("Unreachable expression.", expressions.get(i + 1), null, IssueCodes.UNREACHABLE_CODE);
+			XExpression expression = expressions.get(i);
+			if (earlyExitComputer.isEarlyExit(expression)) {
+				if (!(expression instanceof XAbstractFeatureCall)) {
+					// XAbstractFeatureCall does already a decent job for its argument lists
+					// no additional error necessary
+					error("Unreachable expression.", expressions.get(i + 1), null, IssueCodes.UNREACHABLE_CODE);
+				}
 				return;
 			}
 		}

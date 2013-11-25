@@ -100,6 +100,13 @@ public class ExtendedEarlyExitComputer {
 				return true;
 			}
 			return false;
+		} else if (expression instanceof XBlockExpression) {
+			List<XExpression> expressions = ((XBlockExpression) expression).getExpressions();
+			for(int i = expressions.size() - 1; i >= 0; i--) {
+				if (isDefiniteEarlyExit(expressions.get(i))) {
+					return true;
+				}
+			}
 		}
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
 	}
