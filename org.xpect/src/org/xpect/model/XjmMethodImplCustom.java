@@ -25,8 +25,7 @@ public class XjmMethodImplCustom extends XjmMethodImpl {
 		JvmOperation jvmOperation = super.getJvmMethod();
 		if (jvmOperation == null || jvmOperation.eIsProxy())
 			return null;
-		super.javaMethod = IJavaReflectAccess.INSTANCE.getMethod(jvmOperation);
-		return result;
+		return super.javaMethod = IJavaReflectAccess.INSTANCE.getMethod(jvmOperation);
 	}
 
 }
