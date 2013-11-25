@@ -41,7 +41,7 @@ public class PathTraverser {
 	public Set<URI> findAllResourceUris(String path, Predicate<URI> isValidPredicate) {
 		File file = new File(path);
 		if(!file.exists()) {
-			LOG.warn("File under : " + path + " doesn't exist.");
+			LOG.debug("File under : " + path + " doesn't exist.");
 			return Sets.newHashSet();
 		} else if (file.isDirectory()) {
 			return traverseDir(file, isValidPredicate);

@@ -4,10 +4,10 @@ Xtend standalone
 <id>org.eclipse.jdt.core</id> 				<-- 3.9 eclipse repo <-- maven central 3.9 tycho group
 <id>org.eclipse.jdt.annotation</id>
 
-<id>org.eclipse.emf.ecore</id>				<-- 2.9 maven repo Martin Taal
-<id>org.eclipse.emf.ecore.xmi</id>			<-- 2.9 maven repo
-<id>org.eclipse.emf.common</id>				<-- 2.9 maven repo
-<id>org.eclipse.emf.codegen</id>			<-- ???
+<id>org.eclipse.emf.ecore</id>				<-- 2.10 maven repo Martin Taal
+<id>org.eclipse.emf.ecore.xmi</id>			<-- 2.10 maven repo
+<id>org.eclipse.emf.common</id>				<-- 2.10 maven repo
+<id>org.eclipse.emf.codegen</id>			<-- 2.10
 						
 <id>org.antlr.runtime</id>					<-- 3.2 maven repo/probably wrong version  Sep 24 2009 - orbit is 3.2.0.v201101
 
