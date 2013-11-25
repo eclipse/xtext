@@ -41,28 +41,6 @@ class AmbiguityBug421831Test extends AmbiguityValidationTest {
 			both match.''')
 	}
 	
-	@Ignore("TODO fix me")
-	@Test
-	def void testAmbiguousStaticImports_02() {
-		'''
-			import static MockitoMatchers.* 
-			import static HarmcrestMatchers.*
-			
-			class Bug {
-			  def static accept(Bug bug) {
-			    any(Bug)
-			  }
-			}
-			class MockitoMatchers {
-				static def <T> Matcher<T> any(Class<T> type) {}
-			}
-			class Matcher<T> {}
-			class HarmcrestMatchers {
-				static def <T extends Bug> T any(Class<T> clazz) {}
-			}
-		'''.assertUnambiguous
-	}
-	
 	@Test
 	def void testUnambiguousStaticImports_01() {
 		'''
@@ -80,6 +58,50 @@ class AmbiguityBug421831Test extends AmbiguityValidationTest {
 			class Matcher<T> {}
 			class HarmcrestMatchers {
 				static def <T> T any(Class<T> clazz) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Ignore("TODO fix me")
+	@Test
+	def void testUnambiguousStaticImports_02() {
+		'''
+			import static MockitoMatchers.* 
+			import static HarmcrestMatchers.*
+			
+			class Bug {
+			  def static accept(Bug bug) {
+			    any(Bug)
+			  }
+			}
+			class MockitoMatchers {
+				static def <T> Matcher<T> any(Class<T> type) {}
+			}
+			class Matcher<T> {}
+			class HarmcrestMatchers {
+				static def Bug any(Class<? extends Bug> clazz) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Ignore("TODO fix me")
+	@Test
+	def void testUnambiguousStaticImports_03() {
+		'''
+			import static MockitoMatchers.* 
+			import static HarmcrestMatchers.*
+			
+			class Bug {
+			  def static accept(Bug bug) {
+			    any(Bug)
+			  }
+			}
+			class MockitoMatchers {
+				static def <T> Matcher<T> any(Class<T> type) {}
+			}
+			class Matcher<T> {}
+			class HarmcrestMatchers {
+				static def <T extends Bug> T any(Class<T> clazz) {}
 			}
 		'''.assertUnambiguous
 	}
