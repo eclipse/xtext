@@ -35,8 +35,6 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XReturnExpression;
-import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -50,6 +48,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -337,6 +336,8 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					return false;
 				}
 			}
+		} else {
+			return false;
 		}
 		return true;
 	}
@@ -402,8 +403,8 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	protected boolean isDefiniteEarlyExit(XExpression expression) {
-		// TODO this needs some serious refinement
-		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
+		CommonTypeComputationServices services = getState().getReferenceOwner().getServices();
+		return services.getEarlyExitComputer().isDefiniteEarlyExit(expression);
 	}
 	
 	protected List<XExpression> getSyntacticArguments() {

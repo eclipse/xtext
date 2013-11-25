@@ -66,6 +66,10 @@ class CommonTypeComputationServices {
 	@Property
 	IJvmModelAssociations jvmModelAssociations
 	
+	@Inject
+	@Property
+	ExtendedEarlyExitComputer earlyExitComputer
+	
 	@Inject(optional = true)
 	@Property
 	XtypeFactory xtypeFactory = XtypeFactory.eINSTANCE;
