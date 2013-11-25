@@ -32,7 +32,7 @@ public class XpectOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	public String _text(XpectFile file) {
 		String filename = file.eResource().getURI().lastSegment();
 		XpectTest test = file.getTest();
-		if (!test.eIsProxy()) {
+		if (test != null && !test.eIsProxy()) {
 			XpectJavaModel model = test.getTestClassOrSuite();
 			if (model != null && !model.eIsProxy()) {
 				XjmTest suite = model.getTestOrSuite();
