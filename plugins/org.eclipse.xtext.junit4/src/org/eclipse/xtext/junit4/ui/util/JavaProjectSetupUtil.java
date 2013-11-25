@@ -136,12 +136,20 @@ public class JavaProjectSetupUtil {
 	}
 	
 	public static void removeProjectReference(IJavaProject from, IJavaProject to) throws CoreException {
+		removeFromClasspath(from, IClasspathEntry.CPE_PROJECT, to.getPath());
+	}
+	
+	public static void removeJarFromClasspath(IJavaProject from, IFile to) throws CoreException {
+		removeFromClasspath(from, IClasspathEntry.CPE_LIBRARY, to.getFullPath());
+	}
+	
+	public static void removeFromClasspath(IJavaProject from, int entryKind, IPath path) throws CoreException {
 		List<IClasspathEntry> classpath = Lists.newArrayList(from.getRawClasspath());
 		Iterator<IClasspathEntry> iterator = classpath.iterator();
 		while (iterator.hasNext()) {
 			IClasspathEntry entry = iterator.next();
-			if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
-				if (entry.getPath().equals(to.getPath()))
+			if (entry.getEntryKind() == entryKind) {
+				if (entry.getPath().equals(path))
 					iterator.remove();
 			}
 		}
