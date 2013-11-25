@@ -25,21 +25,14 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.validation.IssueSeverities;
-import org.eclipse.xtext.xbase.XAbstractWhileExpression;
-import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XForLoopExpression;
-import org.eclipse.xtext.xbase.XIfExpression;
-import org.eclipse.xtext.xbase.XReturnExpression;
-import org.eclipse.xtext.xbase.XThrowExpression;
-import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Sets;
@@ -180,35 +173,8 @@ public class RootResolvedTypes extends ResolvedTypes {
 	 * </pre>
 	 */
 	protected boolean isIntentionalEarlyExit(@Nullable XExpression expression) {
-		if (expression == null) {
-			return true;
-		}
-		if (expression instanceof XBlockExpression) {
-			XBlockExpression block = (XBlockExpression) expression;
-			List<XExpression> children = block.getExpressions();
-			for(XExpression child: children) {
-				if (isIntentionalEarlyExit(child)) {
-					return true;
-				}
-			}
-		} else if (expression instanceof XIfExpression) {
-			return isIntentionalEarlyExit(((XIfExpression) expression).getThen()) && isIntentionalEarlyExit(((XIfExpression) expression).getElse());
-		} else if (expression instanceof XTryCatchFinallyExpression) {
-			XTryCatchFinallyExpression tryCatchFinally = (XTryCatchFinallyExpression) expression;
-			if (isIntentionalEarlyExit(tryCatchFinally.getExpression())) {
-				for(XCatchClause catchClause: tryCatchFinally.getCatchClauses()) {
-					if (!isIntentionalEarlyExit(catchClause.getExpression()))
-						return false;
-				}
-				return true;
-			}
-			return false;
-		} else if (expression instanceof XAbstractWhileExpression) {
-			return isIntentionalEarlyExit(((XAbstractWhileExpression) expression).getBody());
-		} else if (expression instanceof XForLoopExpression) {
-			return isIntentionalEarlyExit(((XForLoopExpression) expression).getEachExpression());
-		}
-		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
+		ExtendedEarlyExitComputer earlyExitComputer = getReferenceOwner().getServices().getEarlyExitComputer();
+		return earlyExitComputer.isIntentionalEarlyExit(expression);
 	}
 	
 	protected AbstractDiagnostic createTypeDiagnostic(XExpression expression, LightweightTypeReference actualType, LightweightTypeReference expectedType) {
