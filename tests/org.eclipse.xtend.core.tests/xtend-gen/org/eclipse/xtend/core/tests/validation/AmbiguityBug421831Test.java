@@ -69,47 +69,6 @@ public class AmbiguityBug421831Test extends AmbiguityValidationTest {
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
   
-  @Ignore("TODO fix me")
-  @Test
-  public void testAmbiguousStaticImports_02() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import static MockitoMatchers.* ");
-    _builder.newLine();
-    _builder.append("import static HarmcrestMatchers.*");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("class Bug {");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("def static accept(Bug bug) {");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("any(Bug)");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("class MockitoMatchers {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("static def <T> Matcher<T> any(Class<T> type) {}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("class Matcher<T> {}");
-    _builder.newLine();
-    _builder.append("class HarmcrestMatchers {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("static def <T extends Bug> T any(Class<T> clazz) {}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.assertUnambiguous(_builder);
-  }
-  
   @Test
   public void testUnambiguousStaticImports_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -144,6 +103,88 @@ public class AmbiguityBug421831Test extends AmbiguityValidationTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("static def <T> T any(Class<T> clazz) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Ignore("TODO fix me")
+  @Test
+  public void testUnambiguousStaticImports_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static MockitoMatchers.* ");
+    _builder.newLine();
+    _builder.append("import static HarmcrestMatchers.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bug {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def static accept(Bug bug) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("any(Bug)");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class MockitoMatchers {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static def <T> Matcher<T> any(Class<T> type) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Matcher<T> {}");
+    _builder.newLine();
+    _builder.append("class HarmcrestMatchers {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static def Bug any(Class<? extends Bug> clazz) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Ignore("TODO fix me")
+  @Test
+  public void testUnambiguousStaticImports_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static MockitoMatchers.* ");
+    _builder.newLine();
+    _builder.append("import static HarmcrestMatchers.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bug {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def static accept(Bug bug) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("any(Bug)");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class MockitoMatchers {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static def <T> Matcher<T> any(Class<T> type) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Matcher<T> {}");
+    _builder.newLine();
+    _builder.append("class HarmcrestMatchers {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static def <T extends Bug> T any(Class<T> clazz) {}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
