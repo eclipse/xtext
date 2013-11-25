@@ -183,7 +183,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 				}
 			}
 		}
-		return false; 
+		return isStatic(logicalContainerProvider.getNearestLogicalContainer(call)); 
 	}
 	
 	protected boolean isStatic(JvmIdentifiableElement element) {
