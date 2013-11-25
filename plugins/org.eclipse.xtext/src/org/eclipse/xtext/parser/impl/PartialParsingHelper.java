@@ -151,9 +151,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			EStructuralFeature feature = oldSemanticElement.eContainingFeature();
 			if (feature == null)
 				return fullyReparse(parser, previousParseResult, replaceRegion);
-// 8< the fix is here
 			oldSemanticParentElement = oldSemanticElement.eContainer();
-// >8
 			if (feature.isMany()) {
 				List featureValueList = (List) oldSemanticParentElement.eGet(feature);
 				int index = featureValueList.indexOf(oldSemanticElement);
