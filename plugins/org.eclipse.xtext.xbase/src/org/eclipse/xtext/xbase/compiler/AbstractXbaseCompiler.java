@@ -143,7 +143,7 @@ public abstract class AbstractXbaseCompiler {
 	public ITreeAppendable compileAsJavaExpression(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedType) {
 		ITreeAppendable appendable = parentAppendable.trace(obj, true);
 		
-		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedType, Void.TYPE); 
+		final boolean isPrimitiveVoidExpected = isPrimitiveVoid(expectedType); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
 		boolean needsSneakyThrow = needsSneakyThrow(obj, Collections.<JvmTypeReference>emptySet());
@@ -258,7 +258,7 @@ public abstract class AbstractXbaseCompiler {
 			declaredExceptions = newHashSet();
 			assert declaredExceptions != null;
 		}
-		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
+		final boolean isPrimitiveVoidExpected = isPrimitiveVoid(expectedReturnType); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
 		boolean needsSneakyThrow = needsSneakyThrow(obj, declaredExceptions);
@@ -291,7 +291,7 @@ public abstract class AbstractXbaseCompiler {
 	 * this one trims the outer block
 	 */
 	public ITreeAppendable compile(XBlockExpression expr, ITreeAppendable b, JvmTypeReference expectedReturnType) {
-		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
+		final boolean isPrimitiveVoidExpected = isPrimitiveVoid(expectedReturnType); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(expr);
 		final boolean earlyExit = exitComputer.isEarlyExit(expr);
 		final boolean isImplicitReturn = !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit;
@@ -312,6 +312,10 @@ public abstract class AbstractXbaseCompiler {
 		return b;
 	}
 
+	protected boolean isPrimitiveVoid(JvmTypeReference typeRef) {
+		return typeReferences.is(typeRef, Void.TYPE);
+	}
+
 	protected JvmTypeReference getType(XExpression expr) {
 		return getTypeProvider().getType(expr);
 	}
@@ -321,7 +325,7 @@ public abstract class AbstractXbaseCompiler {
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
 		JvmTypeReference type = getType(xExpression);
-		return typeReferences.is(type, Void.TYPE);
+		return isPrimitiveVoid(type);
 	}
 
 	protected final void internalToJavaStatement(XExpression obj, ITreeAppendable builder, boolean isReferenced) {
@@ -459,7 +463,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String getDefaultValueLiteral(XExpression expr) {
-		JvmTypeReference type = getType(expr);
+		JvmTypeReference type = getTypeForVariableDeclaration(expr);
 		if (primitives.isPrimitive(type)) {
 			if (primitives.primitiveKind((JvmPrimitiveType) type.getType()) == Primitive.Boolean) {
 				return "false";
@@ -484,7 +488,7 @@ public abstract class AbstractXbaseCompiler {
 	protected JvmTypeReference getTypeForVariableDeclaration(XExpression expr) {
 		JvmTypeReference type = getType(expr);
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
-		if (type instanceof JvmAnyTypeReference) {
+		if (type instanceof JvmAnyTypeReference || isPrimitiveVoid(type)) {
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
 			if (expectedType == null) {
 				expectedType = getTypeProvider().getExpectedReturnType(expr, false);
@@ -492,8 +496,9 @@ public abstract class AbstractXbaseCompiler {
 					expectedType = getTypeProvider().getCommonReturnType(expr, true);
 				}
 			}
-			if (expectedType!=null && !typeReferences.is(expectedType, Void.TYPE))
-				type = getPrimitives().asWrapperTypeIfPrimitive(expectedType);
+			if (expectedType != null && !isPrimitiveVoid(expectedType)) {
+				type = expectedType;
+			}
 		}
 		return type;
 	}

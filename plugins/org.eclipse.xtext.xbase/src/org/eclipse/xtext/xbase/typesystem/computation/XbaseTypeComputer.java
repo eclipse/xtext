@@ -83,6 +83,7 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -492,7 +493,24 @@ public class XbaseTypeComputer implements ITypeComputer {
 			 * val Object o = ""
 			 * o.substring(1)
 			 */
-			LightweightTypeReference variableType = lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType();
+			LightweightTypeReference variableType = null;
+			if (lightweightTypeReference != null) {
+				variableType = lightweightTypeReference;
+				ExtendedEarlyExitComputer earlyExitComputer = state.getReferenceOwner().getServices().getEarlyExitComputer();
+				if (earlyExitComputer.isDefiniteEarlyExit(computedType.getExpression())) {
+					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+							Severity.ERROR,
+							IssueCodes.UNREACHABLE_CODE, 
+							"Dead code: The variable " + object.getSimpleName() + " will never be assigned.",
+							object,
+							XbasePackage.Literals.XVARIABLE_DECLARATION__NAME,
+							-1,
+							null);
+					state.addDiagnostic(diagnostic);
+				}
+			} else {
+				variableType = computedType.getActualExpressionType();
+			}
 			if (variableType != null && variableType.isPrimitiveVoid()) {
 				variableType = new UnknownTypeReference(variableType.getOwner());
 			}

@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
 /**
@@ -125,6 +126,17 @@ public class CommonTypeComputationServices {
   
   public void setJvmModelAssociations(final IJvmModelAssociations jvmModelAssociations) {
     this._jvmModelAssociations = jvmModelAssociations;
+  }
+  
+  @Inject
+  private ExtendedEarlyExitComputer _earlyExitComputer;
+  
+  public ExtendedEarlyExitComputer getEarlyExitComputer() {
+    return this._earlyExitComputer;
+  }
+  
+  public void setEarlyExitComputer(final ExtendedEarlyExitComputer earlyExitComputer) {
+    this._earlyExitComputer = earlyExitComputer;
   }
   
   @Inject(optional = true)

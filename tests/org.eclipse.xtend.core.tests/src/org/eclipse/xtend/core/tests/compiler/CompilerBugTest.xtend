@@ -1954,7 +1954,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			          throw Exceptions.sneakyThrow(_t);
 			        }
 			      }
-			      
 			    }
 			    return null;
 			  }
