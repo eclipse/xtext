@@ -12,17 +12,23 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.resource.ClasspathUriResolutionException;
+import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.common.base.Predicate;
@@ -75,19 +81,65 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		}
 		return scope;
 	}
+	
+	/**
+	 * The default acceptor for import URIs.
+	 * 
+	 * It normalizes potentially given class-path URIs.
+	 * 
+	 * @see ImportUriGlobalScopeProvider#createURICollector(Resource, Set)
+	 * @since 2.5
+	 */
+	public static class URICollector implements IAcceptor<String> {
+		
+		private IClasspathUriResolver uriResolver;
+		private Object uriContext;
+		private Set<URI> result;
+
+		public URICollector(ResourceSet resourceSet, Set<URI> result) {
+			this.result = result;
+			if (resourceSet instanceof XtextResourceSet) {
+				uriResolver = ((XtextResourceSet) resourceSet).getClasspathUriResolver();
+				uriContext = ((XtextResourceSet) resourceSet).getClasspathURIContext();
+			}
+		}
+
+		public URI resolve(String uriAsString) throws IllegalArgumentException {
+			URI uri = URI.createURI(uriAsString);
+			if (uriResolver != null) {
+				try {
+					return uriResolver.resolve(uriContext, uri);
+				} catch(ClasspathUriResolutionException e) {
+					return uri;
+				}
+			}
+			return uri;
+		}
+
+		public void accept(String uriAsString) {
+			if (uriAsString == null) {
+				return;
+			}
+			try {
+				URI importUri = resolve(uriAsString);
+				if (importUri != null) {
+					result.add(importUri);
+				}
+			} catch(IllegalArgumentException e) {
+				// ignore, invalid uri given
+			}
+		}
+	}
 
 	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
 		return cache.get(ImportUriGlobalScopeProvider.class.getName(), resource, new Provider<LinkedHashSet<URI>>(){
 			public LinkedHashSet<URI> get() {
+				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(5);
+				IAcceptor<String> collector = createURICollector(resource, uniqueImportURIs);
 				TreeIterator<EObject> iterator = resource.getAllContents();
-				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(10);
 				while (iterator.hasNext()) {
 					EObject object = iterator.next();
-					String uri = importResolver.apply(object);
-					if (uri != null) {
-						URI importUri = URI.createURI(uri);
-						uniqueImportURIs.add(importUri);
-					}
+					collector.accept(importResolver.apply(object));
 				}
 				Iterator<URI> uriIter = uniqueImportURIs.iterator();
 				while(uriIter.hasNext()) {
@@ -97,6 +149,20 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 				return uniqueImportURIs;
 			}
 		});
+	}
+	
+	/**
+	 * Provides the acceptor for import URI strings that will populate the given {@link Set set of URIs}.
+	 * 
+	 * The default implementation 
+	 * creates a new {@link URICollector}. I creates the imported URIs and normalizes
+	 * potentially given class-path URIs to platform or file URIs.
+	 * 
+	 * @since 2.5
+	 */
+	protected IAcceptor<String> createURICollector(Resource resource, Set<URI> collectInto) {
+		ResourceSet resourceSet = resource.getResourceSet();
+		return new URICollector(resourceSet, collectInto);
 	}
 
 	protected IScope createLazyResourceScope(IScope parent, final URI uri, final IResourceDescriptions descriptions,
