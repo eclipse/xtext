@@ -11,4 +11,52 @@
 		<version>0.1.0-SNAPSHOT</version>
 		<relativePath>../maven-plugin-parent</relativePath>
 	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<!-- <configuration> <includeAllDependencies>true</includeAllDependencies> 
+					</configuration> -->
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>assemble-repository</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-p2-extras-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>mirror</id>
+						<phase>install</phase>
+						<goals>
+							<goal>mirror</goal>
+						</goals>
+						<configuration>
+							<source>
+								<!-- source repositories to mirror from -->
+								<repository>
+									<url>${project.build.directory}/repository</url>
+									<layout>p2</layout>
+								</repository>
+							</source>
+
+							<destination>${basedir}/../../../Xpect_pages/updatesite/nightly/local</destination>
+
+							<!-- whether to append to the target repository content -->
+							<append>true</append>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

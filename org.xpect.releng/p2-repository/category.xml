@@ -2,9 +2,9 @@
 <site>
 	<feature url="features/org.xpect.sdk_0.1.0.qualifier.jar" id="org.xpect.sdk"
 		version="0.1.0.qualifier">
-		<category name="org.xpect.category" />
+		<category name="Xpect 0.1.0" />
 	</feature>
-	<category-def name="org.xpect.category" label="Xpect - Tests for Xtext Languages">
+	<category-def name="Xpect 0.1.0" label="Xpect 0.1.0">
 		<description>
 			Tests for Xtext Languages
 		</description>
