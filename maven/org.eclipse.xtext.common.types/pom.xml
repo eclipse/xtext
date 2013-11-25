@@ -7,8 +7,8 @@
 		<relativePath>../org.eclipse.xtext.standalone.parent</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>org.eclipse.xtext.xbase</artifactId>
-	<name>Xbase Runtime Library</name>
+	<artifactId>org.eclipse.xtext.common.types</artifactId>
+	<name>Common Types Runtime Library</name>
 	<packaging>jar</packaging>
 	<properties>
 		<scripts.dir>${project.parent.relativePath}</scripts.dir>
@@ -29,26 +29,14 @@
 					</source>
 					<ius>
 						<iu>
-							<id>org.eclipse.xtext.smap</id>
+							<id>org.eclipse.xtext.common.types</id>
 						</iu>
-						<iu>
-							<id>org.eclipse.xtext.xbase</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtext.xbase.junit</id>
-						</iu>
-
+						
 						<!-- Sources -->
 						<iu>
-							<id>org.eclipse.xtext.smap.source</id>
+							<id>org.eclipse.xtext.common.types.source</id>
 						</iu>
-						<iu>
-							<id>org.eclipse.xtext.xbase.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtext.xbase.junit.source</id>
-						</iu>
-					</ius>
+                    </ius>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -61,16 +49,6 @@
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.common.types</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

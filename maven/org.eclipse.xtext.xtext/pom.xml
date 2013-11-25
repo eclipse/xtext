@@ -109,7 +109,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase</artifactId>
+			<artifactId>org.eclipse.xtext.common.types</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
