@@ -61,7 +61,10 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	
 	private static final Logger log = Logger.getLogger(Storage2UriMapperJavaImpl.class);
 	
-	static class PackageFragmentRootData {
+	/**
+	 * @since 2.5
+	 */
+	public static class PackageFragmentRootData {
 		public URI uriPrefix;
 		public final Object modificationStamp;
 		public final Map<String, IPackageFragmentRoot> associatedRoots;
