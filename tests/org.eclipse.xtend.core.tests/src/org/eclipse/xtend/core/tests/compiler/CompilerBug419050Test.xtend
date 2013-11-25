@@ -19,9 +19,9 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def boolean m(boolean b) { 
-				   if (b) { 
-				     return true 
-				   }
+					if (b) { 
+						return true 
+					}
 				}
 			}
 		''', '''
@@ -42,9 +42,9 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def boolean m1(boolean x) {
-				  while(x) {
-				    return true
-				  }
+					while(x) {
+						return true
+					}
 				}
 				def m2(boolean x) {
 				  while(x) {
@@ -59,7 +59,6 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			    boolean _while = x;
 			    while (_while) {
 			      return true;
-			      
 			    }
 			    return false;
 			  }
@@ -68,7 +67,6 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			    boolean _while = x;
 			    while (_while) {
 			      return true;
-			      
 			    }
 			    return null;
 			  }
@@ -82,7 +80,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			class C {
 				def boolean m(Object o) { 
 					switch o { 
-				   		String: return true 
+						String: return true 
 					}
 				}
 			}
@@ -132,9 +130,9 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def m(boolean b) { 
-				   if (b) { 
-				     while(false) {}
-				   }
+					if (b) { 
+						while(false) {}
+					}
 				}
 			}
 		''', '''
@@ -147,6 +145,139 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			        _while = false;
 			      }
 			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_06() {
+		assertCompilesTo('''
+			class C {
+				def m(boolean b) { 
+					var boolean y = if (b) return true
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public Boolean m(final boolean b) {
+			    boolean _xifexpression = false;
+			    if (b) {
+			      return true;
+			    }
+			    boolean y = _xifexpression;
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_07() {
+		assertCompilesTo('''
+			class C {
+				def m(boolean b) { 
+					val boolean x = if (b) true
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final boolean b) {
+			    boolean _xifexpression = false;
+			    if (b) {
+			      _xifexpression = true;
+			    }
+			    final boolean x = _xifexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_08() {
+		assertCompilesTo('''
+			class C {
+				def m(boolean b) { 
+					while(true) return false
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public Boolean m(final boolean b) {
+			    boolean _while = true;
+			    while (_while) {
+			      return false;
+			    }
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_09() {
+		assertCompilesTo('''
+			class C {
+				def boolean m(boolean b) { 
+					while(true) return false
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public boolean m(final boolean b) {
+			    boolean _while = true;
+			    while (_while) {
+			      return false;
+			    }
+			    return false;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug417371_01() {
+		assertCompilesTo('''
+			class C {
+				def m(Iterable<String> iter) {
+					iter.filter [
+						if (length < 2) {
+							return true
+						} else if (length > 2) {
+							return false
+						}
+					] 
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Iterable<String> m(final Iterable<String> iter) {
+			    final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+			      public Boolean apply(final String it) {
+			        int _length = it.length();
+			        boolean _lessThan = (_length < 2);
+			        if (_lessThan) {
+			          return Boolean.valueOf(true);
+			        } else {
+			          int _length_1 = it.length();
+			          boolean _greaterThan = (_length_1 > 2);
+			          if (_greaterThan) {
+			            return Boolean.valueOf(false);
+			          }
+			        }
+			        return null;
+			      }
+			    };
+			    Iterable<String> _filter = IterableExtensions.<String>filter(iter, _function);
+			    return _filter;
 			  }
 			}
 		''')
