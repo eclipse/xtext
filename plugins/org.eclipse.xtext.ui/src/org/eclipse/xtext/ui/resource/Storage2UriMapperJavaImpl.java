@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -63,17 +64,40 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	static class PackageFragmentRootData {
 		public URI uriPrefix;
 		public final Object modificationStamp;
-		public final IPackageFragmentRoot root;
-		public PackageFragmentRootData(IPackageFragmentRoot root, Object modificationStamp) {
+		public final Map<String, IPackageFragmentRoot> associatedRoots;
+
+		public PackageFragmentRootData(Object modificationStamp) {
 			this.modificationStamp = modificationStamp;
-			this.root = root;
+			this.associatedRoots = newHashMap();
 		}
+
 		public Map<URI, IStorage> uri2Storage = newLinkedHashMap();
 		
 		@Override
 		public String toString() {
-			return root.toString() + " / " + uriPrefix;
+			return getPath() + " / " + uriPrefix;
 		}
+
+		public boolean exists() {
+			if (associatedRoots.size() == 0) {
+				return false;
+			}
+			return associatedRoots.values().iterator().next().exists();
+		}
+
+		public IPath getPath() {
+			if (associatedRoots.size() == 0) {
+				return null;
+			}
+			return associatedRoots.values().iterator().next().getPath();
+		}
+
+		public void addRoot(IPackageFragmentRoot root) {
+			if (root != null) {
+				associatedRoots.put(root.getHandleIdentifier(), root);
+			}
+		}
+
 	}
 	
 	
@@ -156,19 +180,21 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	}
 
 	private PackageFragmentRootData getCachedData(IPackageFragmentRoot root) {
-		final String id = root.getHandleIdentifier();
+		final String path = root.getPath().toString();
 		synchronized (cachedPackageFragmentRootData) {
-			if(cachedPackageFragmentRootData.containsKey(id)) {
-				final PackageFragmentRootData data = cachedPackageFragmentRootData.get(id);
-				if (isUpToDate(data, root)) 
+			if(cachedPackageFragmentRootData.containsKey(path)) {
+				final PackageFragmentRootData data = cachedPackageFragmentRootData.get(path);
+				if (isUpToDate(data, root)) {
+					data.addRoot(root);
 					return data;
-				else 
-					cachedPackageFragmentRootData.remove(id);
+				} else {
+					cachedPackageFragmentRootData.remove(path);
+				}
 			}
 		}
 		PackageFragmentRootData data = initializeData(root);
 		synchronized (cachedPackageFragmentRootData) {
-			cachedPackageFragmentRootData.put(id, data);
+			cachedPackageFragmentRootData.put(path, data);
 		}
 		return data;
 	}
@@ -196,7 +222,8 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	 * @since 2.4
 	 */
 	protected PackageFragmentRootData initializeData(final IPackageFragmentRoot root) {
-		final PackageFragmentRootData data = new PackageFragmentRootData(root, computeModificationStamp(root));
+		final PackageFragmentRootData data = new PackageFragmentRootData(computeModificationStamp(root));
+		data.addRoot(root);
 		try {
 			final SourceAttachmentPackageFragmentRootWalker<Void> walker = new SourceAttachmentPackageFragmentRootWalker<Void>() {
 				
@@ -250,11 +277,13 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		Iterator<PackageFragmentRootData> iterator = packageFragmentRootDatas.iterator();
 		while (iterator.hasNext()) {
 			PackageFragmentRootData data = iterator.next();
-			if (data.root.exists()) {
+			if (data.exists()) {
 				if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
 					IStorage storage = data.uri2Storage.get(uri);
 					if (storage != null) {
-						result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
+						for (IPackageFragmentRoot root : data.associatedRoots.values()) {
+							result.add(Tuples.create(storage, root.getJavaProject().getProject()));
+						}
 					}
 				}
 			} else {
@@ -268,13 +297,15 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			if (archiveURI.isFile() || archiveURI.isPlatformResource()) {
 				IPath archivePath = new Path(archiveURI.isPlatformResource()? archiveURI.toPlatformString(true): archiveURI.toFileString());
 				for (PackageFragmentRootData data : packageFragmentRootDatas) {
-					if (data.uriPrefix != null && archivePath.equals(data.root.getPath())) {
+					if (data.uriPrefix != null && archivePath.equals(data.getPath())) {
 						// prefixes have an empty last segment.
 						URI prefix = data.uriPrefix.lastSegment().length()==0 ? data.uriPrefix.trimSegments(1) : data.uriPrefix;
 						URI expectedURI = prefix.appendSegments(uri.segments());
 						IStorage storage = data.uri2Storage.get(expectedURI);
 						if (storage != null) {
-							result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
+							for (IPackageFragmentRoot root : data.associatedRoots.values()) {
+								result.add(Tuples.create(storage, root.getJavaProject().getProject()));
+							}
 						}
 					}
 				}
@@ -334,8 +365,18 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			values = newArrayList(cachedPackageFragmentRootData.values());
 		}
 		List<PackageFragmentRootData> toBeRemoved = newArrayList();
-		for(PackageFragmentRootData data: values) {
-			if(data.root != null && project.equals(data.root.getJavaProject()) && !toBeKept.contains(data)) {
+		for (PackageFragmentRootData data : values) {
+			if (toBeKept.contains(data)) {
+				continue;
+			}
+			Iterator<Entry<String, IPackageFragmentRoot>> i = data.associatedRoots.entrySet().iterator();
+			while (i.hasNext()) {
+				Entry<String, IPackageFragmentRoot> root = i.next();
+				if (project.equals(root.getValue().getJavaProject())) {
+					i.remove();
+				}
+			}
+			if (data.associatedRoots.size() == 0) {
 				toBeRemoved.add(data);
 			}
 		}
@@ -361,9 +402,9 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 				public void elementChanged(ElementChangedEvent event) {
 					Set<IJavaProject> javaProjectsWithClasspathChange = getJavaProjectsWithClasspathChange(event.getDelta());
 					if(!javaProjectsWithClasspathChange.isEmpty()) {
-						for(IJavaProject project: javaProjectsWithClasspathChange)
+						for(IJavaProject project: javaProjectsWithClasspathChange) {
 							updateCache(project);
-						return;
+						}
 					} 
 					for(IJavaElementDelta projectDelta: getProjectDeltas(event.getDelta())) {
 						IJavaProject project = (IJavaProject) projectDelta.getElement();
@@ -372,7 +413,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 							return;
 						} 
 						switch(projectDelta.getFlags()) {
-							case IJavaElementDelta.F_OPENED:
+							case IJavaElementDelta.F_OPENED: 
 								updateCache(project);
 								break;
 							case IJavaElementDelta.F_CLOSED:
@@ -393,14 +434,12 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		}
 		Set<IJavaElementDelta> result = null;
 		if(element instanceof IJavaModel) {
-			if(delta.getAddedChildren()!=null) {
-				for(IJavaElementDelta child: delta.getAffectedChildren()) {
-					Set<IJavaElementDelta> projectDeltas = getProjectDeltas(child);
-					if(!projectDeltas.isEmpty()) {
-						if(result == null)
-							result = newLinkedHashSet(); 
-						result.addAll(projectDeltas);
-					}
+			for(IJavaElementDelta child: delta.getAffectedChildren()) {
+				Set<IJavaElementDelta> projectDeltas = getProjectDeltas(child);
+				if(!projectDeltas.isEmpty()) {
+					if(result == null)
+						result = newLinkedHashSet(); 
+					result.addAll(projectDeltas);
 				}
 			}
 		}
