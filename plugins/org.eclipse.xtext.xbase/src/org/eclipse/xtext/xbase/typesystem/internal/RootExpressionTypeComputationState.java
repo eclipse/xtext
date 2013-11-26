@@ -36,7 +36,7 @@ public class RootExpressionTypeComputationState extends ExpressionTypeComputatio
 		@Override
 		public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
 			if (Arrays.contains(hints, ConformanceHint.EXPLICIT_VOID_RETURN)) {
-				rootState.expectedType = type;
+				rootState.expectedReturnType = type;
 			}
 			super.acceptActualType(type, hints);
 		}
@@ -44,27 +44,31 @@ public class RootExpressionTypeComputationState extends ExpressionTypeComputatio
 		@Override
 		@Nullable
 		public LightweightTypeReference getExpectedType() {
-			return rootState.expectedType;
+			if (rootState.expectedReturnType != null) {
+				return rootState.expectedReturnType;
+			}
+			return super.getExpectedType();
 		}
 
 		@Override
 		public boolean isNoTypeExpectation() {
-			if (rootState.expectedType == null) {
-				return super.isNoTypeExpectation();
+			if (rootState.expectedReturnType != null) {
+				return false;
 			}
-			return false;
+			return super.isNoTypeExpectation();
 		}
 
 		@Override
 		public boolean isVoidTypeAllowed() {
-			if (rootState.expectedType == null) {
-				return super.isVoidTypeAllowed();
+			if (rootState.expectedReturnType != null) {
+				return true;
 			}
-			return true;
+			return super.isVoidTypeAllowed();
 		}
 	}
 
-	private LightweightTypeReference expectedType;
+	private final LightweightTypeReference expectedType;
+	private LightweightTypeReference expectedReturnType;
 
 	protected RootExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
@@ -73,28 +77,31 @@ public class RootExpressionTypeComputationState extends ExpressionTypeComputatio
 			@Nullable LightweightTypeReference expectedType) {
 		super(resolvedTypes, featureScopeSession, parent, expression);
 		this.expectedType = expectedType;
+		this.expectedReturnType = expectedType;
 	}
 
 	@Override
 	public List<AbstractTypeExpectation> getExpectations(
 			AbstractTypeComputationState actualState) {
-		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, true);
+		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, true, false);
 		return Collections.singletonList(result);
 	}
 
 	@Override
 	protected List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asActualExpectation) {
-		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, !asActualExpectation);
+		AbstractTypeExpectation result = createTypeExpectation(expectedReturnType, actualState, !asActualExpectation, true);
 		return Collections.singletonList(result);
 	}
 	
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean voidAllowed) {
+	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean voidAllowed, boolean returnType) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());
 			result = new RootTypeExpectation(copied, actualState);
-		} else {
+		} else if (returnType) {
 			result = new PendingRootExpectation(actualState, this, voidAllowed);
+		} else {
+			result = new RootNoExpectation(actualState, voidAllowed);
 		}
 		return result;
 	}

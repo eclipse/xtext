@@ -304,14 +304,14 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public Object m() {
-			    Object _xblockexpression = null;
+			  public String m() {
+			    String _xblockexpression = null;
 			    {
-			      Object _xifexpression = null;
+			      String _xifexpression = null;
 			      if (false) {
 			        return "";
 			      }
-			      final Object x = _xifexpression;
+			      final String x = _xifexpression;
 			      _xblockexpression = (x);
 			    }
 			    return _xblockexpression;
@@ -381,10 +381,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public Object m(final Object x) {
-			    Object _xblockexpression = null;
+			  public String m(final Object x) {
+			    String _xblockexpression = null;
 			    {
-			      Object _switchResult = null;
+			      String _switchResult = null;
 			      boolean _matched = false;
 			      if (!_matched) {
 			        if (x instanceof String) {
@@ -392,7 +392,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			          return "";
 			        }
 			      }
-			      final Object r = _switchResult;
+			      final String r = _switchResult;
 			      _xblockexpression = (r);
 			    }
 			    return _xblockexpression;

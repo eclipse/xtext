@@ -71,6 +71,26 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   }
   
   @Test
+  public void testIfExpression_19() throws Exception {
+    this.resolvesTo("if (true) return else null", "void");
+  }
+  
+  @Test
+  public void testIfExpression_23() throws Exception {
+    this.resolvesTo("{ val x = if (true) return 1 x }", "Integer");
+  }
+  
+  @Test
+  public void testIfExpression_24() throws Exception {
+    this.resolvesTo("{ val x = if (true) return; x }", "void");
+  }
+  
+  @Test
+  public void testIfExpression_25() throws Exception {
+    this.resolvesTo("{ val x = if (true) return else null x }", "void");
+  }
+  
+  @Test
   public void testIfExpression_28() throws Exception {
     this.resolvesTo("if (true) return \'\' else 1", "Comparable<?> & Serializable");
   }
@@ -246,6 +266,21 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   
   @Test
   public void testBlockExpression_09() throws Exception {
-    this.resolvesTo("{val Object x = if (false) return; x }", "Object");
+    this.resolvesTo("{val Object x = if (false) return; x }", "void");
+  }
+  
+  @Test
+  public void testBlockExpression_10() throws Exception {
+    this.resolvesTo("{ ( if (true) {val Object x = if (false) return; x } ) }", "void");
+  }
+  
+  @Test
+  public void testBlockExpression_11() throws Exception {
+    this.resolvesTo("{ ( if (true) {val Object x = if (false) return; x } ) {val Object x = if (false) return; x } }", "void");
+  }
+  
+  @Test
+  public void testBlockExpression_12() throws Exception {
+    this.resolvesTo("{ ( if (true) if (true) return else null ) { if (true) return else null } }", "void");
   }
 }

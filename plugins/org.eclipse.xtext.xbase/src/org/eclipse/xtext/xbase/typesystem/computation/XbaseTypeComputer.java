@@ -62,7 +62,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
@@ -406,31 +405,36 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected void _computeTypes(XBlockExpression object, ITypeComputationState state) {
-		for (ITypeExpectation expectation: state.getExpectations()) {
-			LightweightTypeReference expectedType = expectation.getExpectedType();
-			if (expectedType != null && expectedType.isPrimitiveVoid()) {
-				List<XExpression> expressions = object.getExpressions();
-				if (!expressions.isEmpty()) {
-					for(XExpression expression: expressions) {
-						ITypeComputationState expressionState = state.withoutExpectation(); // no expectation
-						expressionState.computeTypes(expression);
-						if (expression instanceof XVariableDeclaration) {
-							addLocalToCurrentScope((XVariableDeclaration)expression, state);
-						}
-					}
+		List<XExpression> children = object.getExpressions();
+		if (children.isEmpty()) {
+			for (ITypeExpectation expectation: state.getExpectations()) {
+				LightweightTypeReference expectedType = expectation.getExpectedType();
+				if (expectedType != null && expectedType.isPrimitiveVoid()) {
+					expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+				} else {
+					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHint.UNCHECKED);
 				}
-				expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
-			} else {
-				List<XExpression> expressions = object.getExpressions();
-				if (!expressions.isEmpty()) {
-					for(XExpression expression: expressions.subList(0, expressions.size() - 1)) {
-						ITypeComputationState expressionState = state.withoutExpectation();
-						expressionState.computeTypes(expression);
-						if (expression instanceof XVariableDeclaration) {
-							addLocalToCurrentScope((XVariableDeclaration)expression, state);
-						}
+			}
+		} else {
+			for(int i = 0; i < children.size() - 1; i++) {
+				XExpression expression = children.get(i);
+				ITypeComputationState expressionState = state.withoutExpectation(); // no expectation
+				expressionState.computeTypes(expression);
+				if (expression instanceof XVariableDeclaration) {
+					addLocalToCurrentScope((XVariableDeclaration)expression, state);
+				}
+			}
+			XExpression lastExpression = children.get(children.size() - 1);
+			for (ITypeExpectation expectation: state.getExpectations()) {
+				LightweightTypeReference expectedType = expectation.getExpectedType();
+				if (expectedType != null && expectedType.isPrimitiveVoid()) {
+					ITypeComputationState expressionState = state.withoutExpectation(); // no expectation
+					expressionState.computeTypes(lastExpression);
+					if (lastExpression instanceof XVariableDeclaration) {
+						addLocalToCurrentScope((XVariableDeclaration)lastExpression, state);
 					}
-					XExpression lastExpression = IterableExtensions.last(expressions);
+					expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+				} else {
 					state.computeTypes(lastExpression);
 					// add the last expression to the scope, too in order validate for duplicate names, even
 					// though the variable declaration could be removed automatically to keep only the side effect
@@ -438,8 +442,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 					if (lastExpression instanceof XVariableDeclaration) {
 						addLocalToCurrentScope((XVariableDeclaration)lastExpression, state);
 					}
-				} else {
-					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHint.UNCHECKED);
 				}
 			}
 		}
@@ -1023,12 +1025,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(XReturnExpression object, ITypeComputationState state) {
 		XExpression returnValue = object.getExpression();
 		ITypeComputationState expressionState = state.withReturnExpectation();
+		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		if (returnValue != null) {
 			expressionState.computeTypes(returnValue);
-			state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
+			state.acceptActualType(primitiveVoid, ConformanceHint.NO_IMPLICIT_RETURN);
 		} else {
-			state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.EXPLICIT_VOID_RETURN);
-			state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
+			state.acceptActualType(primitiveVoid, ConformanceHint.EXPLICIT_VOID_RETURN);
+			state.acceptActualType(primitiveVoid, ConformanceHint.NO_IMPLICIT_RETURN);
 		}
 	}
 	

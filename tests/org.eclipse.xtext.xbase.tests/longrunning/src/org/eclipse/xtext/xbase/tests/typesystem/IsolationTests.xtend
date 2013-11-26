@@ -189,7 +189,7 @@ class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolverTest {
 //		}".resolvesTo("void")
 		"return switch null {
 		  Object : return 
-		}".resolvesTo("null")
+		}".resolvesTo("void")
 	}
 	
 }

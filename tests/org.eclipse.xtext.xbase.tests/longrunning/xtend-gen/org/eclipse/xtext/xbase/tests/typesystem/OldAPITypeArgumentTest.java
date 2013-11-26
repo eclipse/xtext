@@ -224,6 +224,12 @@ public class OldAPITypeArgumentTest extends AbstractOldAPITypeArgumentTest {
   
   @Ignore("fails in old implementation")
   @Test
+  public void testClosure_22() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testClosure_24() throws Exception {
     Assert.fail("fails in old implementation");
   }

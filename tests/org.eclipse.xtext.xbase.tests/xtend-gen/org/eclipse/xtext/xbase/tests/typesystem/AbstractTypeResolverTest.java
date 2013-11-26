@@ -1740,6 +1740,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testBlockExpression_10() throws Exception {
+    this.resolvesTo("{ ( if (true) {val Object x = if (false) return; x } ) }", "Object");
+  }
+  
+  @Test
+  public void testBlockExpression_11() throws Exception {
+    this.resolvesTo("{ ( if (true) {val Object x = if (false) return; x } ) {val Object x = if (false) return; x } }", "Object");
+  }
+  
+  @Test
+  public void testBlockExpression_12() throws Exception {
+    this.resolvesTo("{ ( if (true) if (true) return else null ) { if (true) return else null } }", "null");
+  }
+  
+  @Test
   public void testEntrySet_01() throws Exception {
     this.resolvesTo("(null as java.util.Map<? extends String,? extends String>).entrySet", "Set<? extends Entry<? extends String, ? extends String>>");
   }

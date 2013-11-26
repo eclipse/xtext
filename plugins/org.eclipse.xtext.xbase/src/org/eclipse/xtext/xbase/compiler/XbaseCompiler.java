@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -700,6 +701,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			type = varDeclaration.getType();
 		} else {
 			type = getType(varDeclaration.getRight());
+			if (type instanceof JvmAnyTypeReference) {
+				type = getTypeForVariableDeclaration(varDeclaration.getRight());
+			}
 		}
 		serialize(type, varDeclaration, appendable);
 		appendable.append(" ");

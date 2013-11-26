@@ -315,6 +315,15 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		for (TypeData value : values) {
 			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
 			if (reference.isPrimitiveVoid()) {
+				if (value.getConformanceHints().contains(ConformanceHint.EXPLICIT_VOID_RETURN)) {
+					mergeData.references.clear();
+					mergeData.references.add(reference);
+					mergeData.mergedHints.clear();
+					mergeData.mergedHints.addAll(value.getConformanceHints());
+					mergeData.expectation = value.getExpectation();
+					mergeData.voidSeen = false;
+					return;
+				}
 				mergeData.voidSeen = true;
 			} else {
 				mergeData.references.add(reference);

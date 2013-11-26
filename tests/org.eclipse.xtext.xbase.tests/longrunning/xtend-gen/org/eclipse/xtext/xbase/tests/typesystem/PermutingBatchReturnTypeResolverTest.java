@@ -115,6 +115,6 @@ public class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolve
   
   @Test
   public void testSwitchExpression_11() throws Exception {
-    this.resolvesTo("return switch null {\n\t\t  Object : return \n\t\t}", "null");
+    this.resolvesTo("return switch null {\n\t\t  Object : return \n\t\t}", "void");
   }
 }

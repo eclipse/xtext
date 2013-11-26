@@ -38,6 +38,30 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
     this.resolvesTo("{\n            val (Integer, Double, Boolean) => void fun1 = null\n            val (byte[], Object) => double[] fun2 = null\n            val test = newArrayList.map[1 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]\n            val test2 = newArrayList.map[2 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]\n            val test3 = com::google::common::collect::Iterables::concat(test, test2).toMap[key].entrySet.map[value].toList\n            test3\n        }", "List<Pair<Integer, Pair<Procedure3<? super Integer, ? super Double, ? super Boolean>, Function2<? super byte[], ? super Object, ? extends double[]>>>>");
   }
   
+  @Ignore("fails in old implementation")
+  @Test
+  public void testBlockExpression_09() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testBlockExpression_10() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testBlockExpression_11() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testBlockExpression_12() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
   @Ignore("not a timeout but too slow")
   @Test
   public void testFeatureCall_15_b() throws Exception {
@@ -544,6 +568,12 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   
   @Ignore("fails in old implementation")
   @Test
+  public void testIfExpression_25() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testIfExpression_27() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -568,7 +598,25 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   
   @Ignore("fails in old implementation")
   @Test
+  public void testSwitchExpression_2() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testSwitchExpression_3() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testSwitchExpression_4() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testSwitchExpression_6() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -581,6 +629,12 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   @Ignore("fails in old implementation")
   @Test
   public void testSwitchExpression_8() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testSwitchExpression_9() throws Exception {
     Assert.fail("fails in old implementation");
   }
   

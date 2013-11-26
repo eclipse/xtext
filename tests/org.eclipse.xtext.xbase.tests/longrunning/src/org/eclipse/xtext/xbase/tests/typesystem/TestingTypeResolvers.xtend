@@ -116,7 +116,7 @@ class EagerArgumentTypeComputer extends XbaseTypeComputer {
 	override protected ILinkingCandidate getBestCandidate(List<? extends ILinkingCandidate> candidates) {
 		candidates.forEach[
 			if (it instanceof AbstractPendingLinkingCandidate<?>)
-				(it as AbstractPendingLinkingCandidate<?>).computeArgumentTypes()
+				it.computeArgumentTypes()
 		]
 		super.getBestCandidate(candidates)
 	}
