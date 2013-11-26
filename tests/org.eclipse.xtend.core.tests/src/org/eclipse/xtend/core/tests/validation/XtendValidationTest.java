@@ -2039,6 +2039,28 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test 
+	public void testTypeParameterReferencedInInstanceof_02() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+						+ "  def <T extends CharSequence> boolean foo() {"
+						+ "    return '' instanceof T"
+						+ "  }"
+						+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER, "CharSequence");		
+	}
+	
+	@Test 
+	public void testTypeParameterReferencedInInstanceof_03() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+						+ "  def <T extends CharSequence & Iterable<? extends Character>> boolean foo() {"
+						+ "    return '' instanceof T"
+						+ "  }"
+						+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER, "CharSequence & Iterable");		
+	}
+	
+	@Test 
 	public void testTypeParameterReferencedInSwitch() throws Exception {
 		XtendFile file = file(
 				"class Foo {"
