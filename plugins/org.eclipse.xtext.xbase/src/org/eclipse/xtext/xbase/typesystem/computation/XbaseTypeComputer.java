@@ -971,7 +971,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		ITypeComputationState expressionState = state.withExpectation(getRawTypeForName(Object.class, state.getReferenceOwner()));
 		expressionState.computeTypes(object.getExpression());
 		JvmTypeReference type = object.getType();
-		if (type.getType() instanceof JvmTypeParameter) {
+		if (type != null && type.getType() instanceof JvmTypeParameter) {
 			state.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.ERROR,
 					IssueCodes.INVALID_USE_OF_TYPE_PARAMETER,
