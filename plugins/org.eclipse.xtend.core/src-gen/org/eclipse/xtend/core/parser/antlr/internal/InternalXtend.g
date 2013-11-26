@@ -8834,10 +8834,10 @@ ruleJvmTypeParameter returns [EObject current=null]
 	    }
 
 )
-)(((
+)((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getJvmTypeParameterAccess().getConstraintsJvmUpperBoundParserRuleCall_1_0_0_0()); 
+	        newCompositeNode(grammarAccess.getJvmTypeParameterAccess().getConstraintsJvmUpperBoundParserRuleCall_1_0_0()); 
 	    }
 		lv_constraints_1_0=ruleJvmUpperBound		{
 	        if ($current==null) {
@@ -8855,7 +8855,7 @@ ruleJvmTypeParameter returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getJvmTypeParameterAccess().getConstraintsJvmUpperBoundAndedParserRuleCall_1_0_1_0()); 
+	        newCompositeNode(grammarAccess.getJvmTypeParameterAccess().getConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0()); 
 	    }
 		lv_constraints_2_0=ruleJvmUpperBoundAnded		{
 	        if ($current==null) {
@@ -8870,26 +8870,7 @@ ruleJvmTypeParameter returns [EObject current=null]
 	    }
 
 )
-)*)
-    |(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getJvmTypeParameterAccess().getConstraintsJvmLowerBoundParserRuleCall_1_1_0()); 
-	    }
-		lv_constraints_3_0=ruleJvmLowerBound		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getJvmTypeParameterRule());
-	        }
-       		add(
-       			$current, 
-       			"constraints",
-        		lv_constraints_3_0, 
-        		"JvmLowerBound");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))?)
+)*)?)
 ;
 
 
