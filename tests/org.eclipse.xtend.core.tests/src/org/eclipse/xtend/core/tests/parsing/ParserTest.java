@@ -320,15 +320,6 @@ public class ParserTest extends AbstractXtendTestCase {
 		}
 	}
 
-	@Test public void testTypeParams_4() throws Exception {
-		XtendFunction func = function("def <T super Foo> foo(T t) { t}");
-		assertEquals(1, func.getTypeParameters().size());
-		JvmTypeParameter tp = func.getTypeParameters().get(0);
-		assertEquals("T", tp.getName());
-		assertEquals(1, tp.getConstraints().size());
-		assertTrue(tp.getConstraints().get(0) instanceof JvmLowerBound);
-	}
-	
 	@Test public void testFunctionTypeRef_0() throws Exception {
 		XtendFunction func = function("def =>Boolean foo() { [|true]}");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();

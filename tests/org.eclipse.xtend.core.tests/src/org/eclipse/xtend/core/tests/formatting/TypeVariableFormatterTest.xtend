@@ -26,12 +26,12 @@ class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
 		assertFormatted('''
 			import java.util.*
 			
-			class Foo<T super Collection<?>, K super Collection<?>> {
+			class Foo<T extends Collection<?>, K extends Collection<?>> {
 			
-				new<A super Collection<?>, B super Collection<?>>() {
+				new<A extends Collection<?>, B extends Collection<?>>() {
 				}
 			
-				def <U super Collection<?>, V super Collection<?>> void methode() {
+				def <U extends Collection<?>, V extends Collection<?>> void methode() {
 				}
 			}
 		''')
@@ -48,25 +48,13 @@ class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
 	@Test def tparamUpperBound() {
 		assertTypeParam("<T extends String>")
 	}
-
-	@Test def tparamLowerBound() {
-		assertTypeParam("<T super String>")
-	}
 	
 	@Test def tparamUpperBound2() {
 		assertTypeParam("<T extends Collection<?>>")
 	}
 
-	@Test def tparamLowerBound2() {
-		assertTypeParam("<T super Collection<?>>")
-	}
-	
 	@Test def tparamUpperBound3() {
 		assertTypeParam("<T extends Collection<?>, K extends Collection<?>>")
-	}
-
-	@Test def tparamLowerBound3() {
-		assertTypeParam("<T super Collection<?>, K super Collection<?>>")
 	}
 	
 	@Test def tparamUpperBound4() {

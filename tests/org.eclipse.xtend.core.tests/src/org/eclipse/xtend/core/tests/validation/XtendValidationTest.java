@@ -1925,20 +1925,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test 
-	public void testInvalidTypeParameterConstraint_1() throws Exception {
-		XtendFunction function = function("def <T super (Object)=>void> foo(T x) {}");
-		helper.assertNoError(function, INVALID_TYPE_PARAMETER_BOUNDS);
-	}
-	
-	@Test 
 	public void testInvalidTypeParameterConstraint_2() throws Exception {
 		XtendFunction function = function("def <T extends Comparable<String[]>> foo(T x) {}");
-		helper.assertNoError(function, INVALID_TYPE_PARAMETER_BOUNDS);
-	}
-	
-	@Test 
-	public void testInvalidTypeParameterConstraint_3() throws Exception {
-		XtendFunction function = function("def <T super Comparable<?>> foo(T x) {}");
 		helper.assertNoError(function, INVALID_TYPE_PARAMETER_BOUNDS);
 	}
 	
