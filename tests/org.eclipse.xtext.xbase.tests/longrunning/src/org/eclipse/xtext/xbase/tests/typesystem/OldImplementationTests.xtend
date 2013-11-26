@@ -43,6 +43,22 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
         }".resolvesTo("List<Pair<Integer, Pair<Procedure3<? super Integer, ? super Double, ? super Boolean>, Function2<? super byte[], ? super Object, ? extends double[]>>>>")
     }
     
+	@Ignore("fails in old implementation") @Test override testBlockExpression_09() throws Exception {
+		fail("fails in old implementation")
+	}
+    
+	@Ignore("fails in old implementation") @Test override testBlockExpression_10() throws Exception {
+		fail("fails in old implementation")
+	}
+    
+	@Ignore("fails in old implementation") @Test override testBlockExpression_11() throws Exception {
+		fail("fails in old implementation")
+	}
+    
+	@Ignore("fails in old implementation") @Test override testBlockExpression_12() throws Exception {
+		fail("fails in old implementation")
+	}
+    
 	@Ignore("not a timeout but too slow")
 	@Test
 	override testFeatureCall_15_b() throws Exception {
@@ -391,6 +407,9 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testIfExpression_24() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_25() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testIfExpression_27() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -405,13 +424,25 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testSwitchExpression_2() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testSwitchExpression_3() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testSwitchExpression_4() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testSwitchExpression_6() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testSwitchExpression_7() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testSwitchExpression_8() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testSwitchExpression_9() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testSwitchExpression_10() throws Exception {
@@ -1245,6 +1276,9 @@ class OldAPITypeArgumentTest extends AbstractOldAPITypeArgumentTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testClosure_21() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testClosure_22() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testClosure_24() throws Exception {

@@ -1628,6 +1628,18 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{val Object x = if (false) return; x }".resolvesTo("Object")
 	}
     
+    @Test def void testBlockExpression_10() throws Exception {
+		"{ ( if (true) {val Object x = if (false) return; x } ) }".resolvesTo("Object")
+	}
+    
+    @Test def void testBlockExpression_11() throws Exception {
+		"{ ( if (true) {val Object x = if (false) return; x } ) {val Object x = if (false) return; x } }".resolvesTo("Object")
+	}
+	
+	@Test def void testBlockExpression_12() throws Exception {
+		"{ ( if (true) if (true) return else null ) { if (true) return else null } }".resolvesTo("null")
+	}
+    
     @Test def void testEntrySet_01() throws Exception {
 		"(null as java.util.Map<? extends String,? extends String>).entrySet".resolvesTo("Set<? extends Entry<? extends String, ? extends String>>")
 	}

@@ -12,7 +12,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -42,6 +44,16 @@ public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedT
 		} 
 		result = new TypeExpectation(null, actualState, false);
 		return result;
+	}
+	
+	@Override
+	protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types,
+			AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType,
+			ConformanceHint... hints) {
+		if (returnType) {
+			getParent().acceptType(alreadyHandled, types, expectation, type, returnType, hints);
+		}
+		return super.acceptType(alreadyHandled, types, expectation, type, returnType, hints);
 	}
 
 }

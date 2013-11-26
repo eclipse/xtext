@@ -25,8 +25,8 @@ public class RootExpressionTypeComputationStateWithNonVoidExpectation extends Ro
 	}
 	
 	@Override
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean voidAllowed) {
-		return super.createTypeExpectation(expectedType, actualState, false);
+	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean voidAllowed, boolean returnType) {
+		return super.createTypeExpectation(expectedType, actualState, false, returnType);
 	}
 
 }

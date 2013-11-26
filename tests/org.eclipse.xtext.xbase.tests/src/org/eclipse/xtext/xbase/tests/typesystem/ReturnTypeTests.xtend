@@ -72,6 +72,22 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		"if (true) return 1".resolvesTo("int")
 	}
 	
+	@Test override void testIfExpression_19() throws Exception {
+		"if (true) return else null".resolvesTo("void")
+	}
+	
+	@Test override void testIfExpression_23() throws Exception {
+		"{ val x = if (true) return 1 x }".resolvesTo("Integer")
+	}
+	
+	@Test override void testIfExpression_24() throws Exception {
+		"{ val x = if (true) return; x }".resolvesTo("void")
+	}
+	
+	@Test override void testIfExpression_25() throws Exception {
+		"{ val x = if (true) return else null x }".resolvesTo("void")
+	}
+	
 	@Test override void testIfExpression_28() throws Exception {
 		"if (true) return '' else 1".resolvesTo("Comparable<?> & Serializable")
 	}
@@ -243,9 +259,21 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 	}
 	
 	@Test override void testBlockExpression_09() throws Exception {
-		"{val Object x = if (false) return; x }".resolvesTo("Object")
+		"{val Object x = if (false) return; x }".resolvesTo("void")
 	}
-		
+    
+    @Test override void testBlockExpression_10() throws Exception {
+		"{ ( if (true) {val Object x = if (false) return; x } ) }".resolvesTo("void")
+	}
+    
+    @Test override void testBlockExpression_11() throws Exception {
+		"{ ( if (true) {val Object x = if (false) return; x } ) {val Object x = if (false) return; x } }".resolvesTo("void")
+	}
+	
+	@Test override void testBlockExpression_12() throws Exception {
+		"{ ( if (true) if (true) return else null ) { if (true) return else null } }".resolvesTo("void")
+	}
+	
 }
 
 /**
