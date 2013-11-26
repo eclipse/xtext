@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -222,11 +223,16 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	@Nullable
 	protected TypeData getTypeData(XExpression expression, boolean returnType) {
+		return getTypeData(expression, returnType, false);
+	}
+	
+	@Nullable
+	protected TypeData getTypeData(XExpression expression, boolean returnType, boolean nullIfEmpty) {
 		Collection<TypeData> values = doGetTypeData(expression);
 		if (values == null) {
 			return null;
 		}
-		TypeData result = mergeTypeData(expression, values, returnType, false);
+		TypeData result = mergeTypeData(expression, values, returnType, nullIfEmpty);
 		return result;
 	}
 	
@@ -442,7 +448,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	@Nullable
 	protected LightweightTypeReference doGetExpectedType(XExpression expression, boolean returnType) {
-		TypeData typeData = getTypeData(expression, returnType);
+		TypeData typeData = getTypeData(expression, returnType, true);
 		if (typeData != null) {
 			return typeData.getExpectation().getExpectedType();
 		}

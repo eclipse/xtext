@@ -12,8 +12,10 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.util.Arrays;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -21,7 +23,48 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @NonNullByDefault
 public class RootExpressionTypeComputationState extends ExpressionTypeComputationState {
-	protected LightweightTypeReference expectedType;
+	
+	protected static class PendingRootExpectation extends RootNoExpectation {
+		
+		private RootExpressionTypeComputationState rootState;
+
+		public PendingRootExpectation(AbstractTypeComputationState state, RootExpressionTypeComputationState rootState, boolean voidAllowed) {
+			super(state, voidAllowed);
+			this.rootState = rootState;
+		}
+
+		@Override
+		public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+			if (Arrays.contains(hints, ConformanceHint.EXPLICIT_VOID_RETURN)) {
+				rootState.expectedType = type;
+			}
+			super.acceptActualType(type, hints);
+		}
+		
+		@Override
+		@Nullable
+		public LightweightTypeReference getExpectedType() {
+			return rootState.expectedType;
+		}
+
+		@Override
+		public boolean isNoTypeExpectation() {
+			if (rootState.expectedType == null) {
+				return super.isNoTypeExpectation();
+			}
+			return false;
+		}
+
+		@Override
+		public boolean isVoidTypeAllowed() {
+			if (rootState.expectedType == null) {
+				return super.isVoidTypeAllowed();
+			}
+			return true;
+		}
+	}
+
+	private LightweightTypeReference expectedType;
 
 	protected RootExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
@@ -51,7 +94,7 @@ public class RootExpressionTypeComputationState extends ExpressionTypeComputatio
 			LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());
 			result = new RootTypeExpectation(copied, actualState);
 		} else {
-			result = new RootNoExpectation(actualState, voidAllowed);
+			result = new PendingRootExpectation(actualState, this, voidAllowed);
 		}
 		return result;
 	}

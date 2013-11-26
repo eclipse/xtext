@@ -49,6 +49,11 @@ public enum ConformanceHint {
 	NO_IMPLICIT_RETURN,
 	
 	/**
+	 * Used to indicate an explicit void return value
+	 */
+	EXPLICIT_VOID_RETURN,
+	
+	/**
 	 * Indicates that the type of this expression is derived from a child which can provide better conformance information.
 	 */
 	PROPAGATED_TYPE;  

@@ -316,7 +316,8 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		actualHints.add(ConformanceHint.UNCHECKED);
 		actualHints.add(ConformanceHint.EXPECTATION_INDEPENDENT);
 		ConformanceHint[] actualHintsAsArray = actualHints.toArray(new ConformanceHint[actualHints.size()]);
-		for(ITypeExpectation expectation: getExpectations()) {
+		List<? extends ITypeExpectation> expectations = actualHints.contains(ConformanceHint.EXPLICIT_VOID_RETURN) ? getReturnExpectations() : getExpectations();
+		for(ITypeExpectation expectation: expectations) {
 			expectation.acceptActualType(type, actualHintsAsArray);
 		}
 	}
