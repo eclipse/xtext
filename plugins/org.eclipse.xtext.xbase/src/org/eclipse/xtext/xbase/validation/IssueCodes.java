@@ -48,6 +48,10 @@ public class IssueCodes {
 	public static final String INVALID_CONSTRUCTOR_ARGUMENT = ISSUE_CODE_PREFIX + "invalid_constructor_argument";
 	public static final String INVALID_EARLY_EXIT = ISSUE_CODE_PREFIX + "invalid_early_exit";
 	public static final String INVALID_GENERIC_ARGUMENT_TYPES = ISSUE_CODE_PREFIX + "invalid_generic_argument_types";
+	/**
+	 * Used to indicate expressions that don't cause any effect, e.g. they are pure but not 
+	 * used in a return context / as an implicit return value.
+	 */
 	public static final String INVALID_INNER_EXPRESSION = ISSUE_CODE_PREFIX + "invalid_inner_expression";
 	public static final String INVALID_INSTANCEOF = ISSUE_CODE_PREFIX + "invalid_instanceof";
 	public static final String INVALID_MUTABLE_VARIABLE_ACCESS = ISSUE_CODE_PREFIX + "invalid_mutable_variable_access";

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -25,9 +26,11 @@ public abstract class AbstractRootTypeExpectation extends AbstractTypeExpectatio
 	}
 	
 	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-		if (!Arrays.asList(hints).contains(ConformanceHint.NO_IMPLICIT_RETURN))
+		List<ConformanceHint> hintsAsList = Arrays.asList(hints);
+		if (!hintsAsList.contains(ConformanceHint.NO_IMPLICIT_RETURN))
 			getState().acceptType(getResolvedTypes(), this, type, true, hints);
-		getState().acceptType(getResolvedTypes(), this, type, false, hints);
+		if (!hintsAsList.contains(ConformanceHint.EXPLICIT_VOID_RETURN))
+			getState().acceptType(getResolvedTypes(), this, type, false, hints);
 	}
 
 }

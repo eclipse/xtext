@@ -409,7 +409,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testReturnStatement5() throws Exception {
 		XtendClass clazz = clazz("class Z { def foo() { val Object x = if (false) return; x }}");
-		helper.assertError(clazz, XRETURN_EXPRESSION, INVALID_RETURN);
+		helper.assertError(clazz, XFEATURE_CALL, INVALID_INNER_EXPRESSION);
 	}
 
 	@Test public void testReturnStatement6() throws Exception {

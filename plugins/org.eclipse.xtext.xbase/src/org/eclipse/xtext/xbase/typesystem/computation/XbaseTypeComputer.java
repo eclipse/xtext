@@ -1021,17 +1021,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(XReturnExpression object, ITypeComputationState state) {
 		XExpression returnValue = object.getExpression();
 		ITypeComputationState expressionState = state.withReturnExpectation();
-		if (returnValue != null)
+		if (returnValue != null) {
 			expressionState.computeTypes(returnValue);
-		else {
-			for(ITypeExpectation expectation: expressionState.getExpectations()) {
-				if (expectation.isNoTypeExpectation() || expectation.isVoidTypeAllowed()) {
-					expressionState.acceptActualType(getPrimitiveVoid(state));
-					break;
-				}
-			}
+			state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
+		} else {
+			state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.EXPLICIT_VOID_RETURN);
+			state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
 		}
-		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
 	}
 	
 	protected void _computeTypes(XTryCatchFinallyExpression object, ITypeComputationState state) {
