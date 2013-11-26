@@ -972,10 +972,12 @@ public class XbaseTypeComputer implements ITypeComputer {
 		expressionState.computeTypes(object.getExpression());
 		JvmTypeReference type = object.getType();
 		if (type != null && type.getType() instanceof JvmTypeParameter) {
+			LightweightTypeReference lightweightReference = state.getConverter().toLightweightReference(type);
+			LightweightTypeReference rawTypeRef = lightweightReference.getRawTypeReference();
 			state.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.ERROR,
 					IssueCodes.INVALID_USE_OF_TYPE_PARAMETER,
-					"Cannot perform instanceof check against type parameter "+type.getSimpleName()+". Use its erasure Object instead since further generic type information will be erased at runtime.",
+					"Cannot perform instanceof check against type parameter "+lightweightReference.getSimpleName()+". Use its erasure "+rawTypeRef.getSimpleName()+" instead since further generic type information will be erased at runtime.",
 					object.getType(),
 					null,
 					-1,
