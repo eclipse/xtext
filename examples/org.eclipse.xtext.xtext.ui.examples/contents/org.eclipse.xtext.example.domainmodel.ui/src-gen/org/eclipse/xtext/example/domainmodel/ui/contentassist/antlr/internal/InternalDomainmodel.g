@@ -3337,7 +3337,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-
 rule__XImportDeclaration__Alternatives_1
     @init {
 		int stackSize = keepStackSize();
@@ -17993,7 +17992,6 @@ rule__JvmLowerBound__TypeReferenceAssignment_1
 finally {
 	restoreStackSize(stackSize);
 }
-
 
 
 

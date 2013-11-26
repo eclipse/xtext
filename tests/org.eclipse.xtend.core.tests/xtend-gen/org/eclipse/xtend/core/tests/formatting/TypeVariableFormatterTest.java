@@ -47,18 +47,18 @@ public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
     _builder.append("import java.util.*");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("class Foo<T super Collection<?>, K super Collection<?>> {");
+    _builder.append("class Foo<T extends Collection<?>, K extends Collection<?>> {");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("new<A super Collection<?>, B super Collection<?>>() {");
+    _builder.append("new<A extends Collection<?>, B extends Collection<?>>() {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def <U super Collection<?>, V super Collection<?>> void methode() {");
+    _builder.append("def <U extends Collection<?>, V extends Collection<?>> void methode() {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -84,28 +84,13 @@ public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
   }
   
   @Test
-  public void tparamLowerBound() {
-    this.assertTypeParam("<T super String>");
-  }
-  
-  @Test
   public void tparamUpperBound2() {
     this.assertTypeParam("<T extends Collection<?>>");
   }
   
   @Test
-  public void tparamLowerBound2() {
-    this.assertTypeParam("<T super Collection<?>>");
-  }
-  
-  @Test
   public void tparamUpperBound3() {
     this.assertTypeParam("<T extends Collection<?>, K extends Collection<?>>");
-  }
-  
-  @Test
-  public void tparamLowerBound3() {
-    this.assertTypeParam("<T super Collection<?>, K super Collection<?>>");
   }
   
   @Test

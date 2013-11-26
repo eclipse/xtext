@@ -961,8 +961,7 @@ ruleJvmLowerBound :
 // Rule JvmTypeParameter
 ruleJvmTypeParameter :
 	ruleValidID (
-		ruleJvmUpperBound ruleJvmUpperBoundAnded* |
-		ruleJvmLowerBound
+		ruleJvmUpperBound ruleJvmUpperBoundAnded*
 	)?
 ;
 

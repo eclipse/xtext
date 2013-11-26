@@ -341,20 +341,17 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameValidIDParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
-		private final Assignment cConstraintsAssignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
-		private final RuleCall cConstraintsJvmUpperBoundParserRuleCall_1_0_0_0 = (RuleCall)cConstraintsAssignment_1_0_0.eContents().get(0);
-		private final Assignment cConstraintsAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cConstraintsJvmUpperBoundAndedParserRuleCall_1_0_1_0 = (RuleCall)cConstraintsAssignment_1_0_1.eContents().get(0);
-		private final Assignment cConstraintsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cConstraintsJvmLowerBoundParserRuleCall_1_1_0 = (RuleCall)cConstraintsAssignment_1_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cConstraintsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cConstraintsJvmUpperBoundParserRuleCall_1_0_0 = (RuleCall)cConstraintsAssignment_1_0.eContents().get(0);
+		private final Assignment cConstraintsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0 = (RuleCall)cConstraintsAssignment_1_1.eContents().get(0);
 		
 		//JvmTypeParameter:
-		//	name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound)?;
+		//	name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?;
 		public ParserRule getRule() { return rule; }
 
-		//name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound)?
+		//name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?
 		public Group getGroup() { return cGroup; }
 
 		//name=ValidID
@@ -363,29 +360,20 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_0_0() { return cNameValidIDParserRuleCall_0_0; }
 
-		//(constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound)?
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-
-		//constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*
-		public Group getGroup_1_0() { return cGroup_1_0; }
+		//(constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?
+		public Group getGroup_1() { return cGroup_1; }
 
 		//constraints+=JvmUpperBound
-		public Assignment getConstraintsAssignment_1_0_0() { return cConstraintsAssignment_1_0_0; }
+		public Assignment getConstraintsAssignment_1_0() { return cConstraintsAssignment_1_0; }
 
 		//JvmUpperBound
-		public RuleCall getConstraintsJvmUpperBoundParserRuleCall_1_0_0_0() { return cConstraintsJvmUpperBoundParserRuleCall_1_0_0_0; }
+		public RuleCall getConstraintsJvmUpperBoundParserRuleCall_1_0_0() { return cConstraintsJvmUpperBoundParserRuleCall_1_0_0; }
 
 		//constraints+=JvmUpperBoundAnded*
-		public Assignment getConstraintsAssignment_1_0_1() { return cConstraintsAssignment_1_0_1; }
-
-		//JvmUpperBoundAnded
-		public RuleCall getConstraintsJvmUpperBoundAndedParserRuleCall_1_0_1_0() { return cConstraintsJvmUpperBoundAndedParserRuleCall_1_0_1_0; }
-
-		//constraints+=JvmLowerBound
 		public Assignment getConstraintsAssignment_1_1() { return cConstraintsAssignment_1_1; }
 
-		//JvmLowerBound
-		public RuleCall getConstraintsJvmLowerBoundParserRuleCall_1_1_0() { return cConstraintsJvmLowerBoundParserRuleCall_1_1_0; }
+		//JvmUpperBoundAnded
+		public RuleCall getConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0() { return cConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0; }
 	}
 
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
@@ -701,7 +689,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JvmTypeParameter:
-	//	name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound)?;
+	//	name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?;
 	public JvmTypeParameterElements getJvmTypeParameterAccess() {
 		return (pJvmTypeParameter != null) ? pJvmTypeParameter : (pJvmTypeParameter = new JvmTypeParameterElements());
 	}

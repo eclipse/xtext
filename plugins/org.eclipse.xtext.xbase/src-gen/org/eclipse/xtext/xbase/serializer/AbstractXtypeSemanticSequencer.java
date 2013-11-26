@@ -126,7 +126,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	
 	/**
 	 * Constraint:
-	 *     (name=ValidID ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | constraints+=JvmLowerBound)?)
+	 *     (name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?)
 	 */
 	protected void sequence_JvmTypeParameter(EObject context, JvmTypeParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
