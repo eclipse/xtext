@@ -260,6 +260,9 @@ public abstract class LightweightTypeReference {
 		return getServices().getRawTypeHelper().getAllRawTypes(this, getOwner().getContextResourceSet());
 	}
 	
+	/**
+	 * @return the erasure type of this type reference
+	 */
 	public LightweightTypeReference getRawTypeReference() {
 		return getServices().getRawTypeHelper().getRawTypeReference(this, getOwner().getContextResourceSet());
 	}
