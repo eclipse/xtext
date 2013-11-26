@@ -43,8 +43,7 @@ JvmLowerBound :
 
 JvmTypeParameter :
   name=ValidID 
-  ((constraints+=JvmUpperBound (constraints+=JvmUpperBoundAnded)*) |
-   (constraints+=JvmLowerBound))?;
+  (constraints+=JvmUpperBound (constraints+=JvmUpperBoundAnded)*)?;
 
 QualifiedName:
   ValidID ('.' ValidID)*;
