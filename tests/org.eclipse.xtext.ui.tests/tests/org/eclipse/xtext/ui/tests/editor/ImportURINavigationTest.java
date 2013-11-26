@@ -64,7 +64,7 @@ public class ImportURINavigationTest {
 			public URI exec(IFile file) throws Exception {
 				return URI.createURI(file.getLocationURI().toURL().toString());
 			}
-		});
+		}, true);
 	}
 	
 
@@ -74,10 +74,10 @@ public class ImportURINavigationTest {
 			public URI exec(IFile file) throws Exception {
 				return URI.createURI("classpath:/first.importuriuitestlanguage");
 			}
-		});
+		}, false);
 	}
 
-	protected void doTestNavigation(IUnitOfWork<URI, IFile> uriComputation) throws Exception {
+	protected void doTestNavigation(IUnitOfWork<URI, IFile> uriComputation, boolean expectFQN) throws Exception {
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject("importuriuitestlanguage.project");
 		try {
 			IFile first = project.getProject().getFile("src/first.importuriuitestlanguage");
@@ -96,7 +96,11 @@ public class ImportURINavigationTest {
 			Assert.assertEquals(1, hyperlinks.length);
 			IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 			Assert.assertNull(activePage.getActiveEditor());
-			Assert.assertEquals(first.getLocationURI().toURL().toString(), ((XtextHyperlink)hyperlinks[0]).getURI().trimFragment().toString());
+			if (expectFQN) {
+				Assert.assertEquals(URI.createURI(first.getLocationURI().toString()), ((XtextHyperlink)hyperlinks[0]).getURI().trimFragment());
+			} else {
+				Assert.assertEquals(URI.createPlatformResourceURI(first.getFullPath().toString(), true), ((XtextHyperlink)hyperlinks[0]).getURI().trimFragment());
+			}
 			hyperlinks[0].open();
 			IEditorPart editor = activePage.getActiveEditor();
 			Assert.assertNotNull(editor);
