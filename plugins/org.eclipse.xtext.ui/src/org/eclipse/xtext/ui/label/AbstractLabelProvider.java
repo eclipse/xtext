@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 

@@ -22,7 +22,6 @@ import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
@@ -50,10 +49,6 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 	
 	@Inject 
 	private IDirtyStateManager dirtyStateManager;
-
-	public ProjectClasspathChangeListener() {
-		JavaCore.addElementChangedListener(this);
-	}
 
 	public void elementChanged(ElementChangedEvent event) {
 		if (workspace != null && workspace.isAutoBuilding()) {

@@ -16,9 +16,16 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
+import com.google.common.collect.ImmutableList;
+import com.google.inject.Inject;
+
 /**
+ * Extensible trace implementation that uses {@link StorageAwareTraceContribution contributions}
+ * to resolve trace URIs. 
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
@@ -27,6 +34,13 @@ public class StorageAwareTrace extends AbstractTrace {
 	private IStorage localStorage;
 
 	private String projectName;
+
+	private ImmutableList<? extends StorageAwareTraceContribution> contributions = ImmutableList.of();
+	
+	@Inject
+	private void initializeContributions(SharedStateContributionRegistry registry) {
+		contributions = registry.getContributedInstances(StorageAwareTraceContribution.class);
+	}
 
 	public IStorage getLocalStorage() {
 		return localStorage;
@@ -43,10 +57,23 @@ public class StorageAwareTrace extends AbstractTrace {
 		return findProject(projectName);
 	}
 	
+	/**
+	 * Resolve the given path in the context of the known {@link #getLocalStorage() local storage}.
+	 * 
+	 * Try to resolve it by querying the {@link StorageAwareTraceContribution contributions}.
+	 * 
+	 * @see StorageAwareTraceContribution#tryResolvePath(IStorage, URI)
+	 */
 	@Override
 	protected URI resolvePath(URI path) {
 		if (!path.isRelative())
 			return path;
+		for (int i = 0, size = contributions.size(); i < size; i++) {
+			URI result = contributions.get(i).tryResolvePath(localStorage, path);
+			if (result != null) {
+				return result;
+			}
+		}
 		if (localStorage instanceof IFile) {
 			IProject project = ((IFile) localStorage).getProject();
 			if (project != null) {

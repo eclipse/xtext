@@ -7,8 +7,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
 
 import com.google.inject.Provider;
@@ -26,11 +24,6 @@ public class NoJdtTestLanguageUiModule
 	@Override
 	public Provider<IAllContainersState> provideIAllContainersState() {
 		return Access.getWorkspaceProjectsState();
-	}
-
-	@Override
-	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
-		return SimpleResourceSetProvider.class;
 	}
 
 	@Override
