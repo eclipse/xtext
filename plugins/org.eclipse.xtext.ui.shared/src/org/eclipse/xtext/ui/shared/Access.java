@@ -19,6 +19,7 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Provider;
@@ -93,4 +94,10 @@ public class Access {
 		return Access.<IJdtHelper>provider(IJdtHelper.class);
 	}
 
+	/**
+	 * @since 2.5
+	 */
+	public static Provider<SharedStateContributionRegistry> getSharedStateContributionRegistry() {
+		return Access.<SharedStateContributionRegistry>provider(SharedStateContributionRegistry.class);
+	}
 }
