@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.shared;
 
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Provider;
@@ -93,4 +95,17 @@ public class Access {
 		return Access.<IJdtHelper>provider(IJdtHelper.class);
 	}
 
+	/**
+	 * @since 2.5
+	 */
+	public static Provider<SharedStateContributionRegistry> getSharedStateContributionRegistry() {
+		return Access.<SharedStateContributionRegistry>provider(SharedStateContributionRegistry.class);
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public static Provider<QueuedBuildData> getQueuedBuildData() {
+		return Access.<QueuedBuildData>provider(QueuedBuildData.class);
+	}
 }
