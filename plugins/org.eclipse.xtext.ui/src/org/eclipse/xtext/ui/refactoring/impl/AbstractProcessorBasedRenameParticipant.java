@@ -33,14 +33,12 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
-import org.eclipse.xtext.ui.refactoring.ui.SaveHelper;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 
 import com.google.inject.Inject;

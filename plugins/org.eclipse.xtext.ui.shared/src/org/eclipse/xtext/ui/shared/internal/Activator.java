@@ -41,23 +41,19 @@ public class Activator extends Plugin {
 	private Injector injector;
 
 	@Inject
-	private ComposedResourceChangeListener resourceChangeListener;
+	private IWorkspace workspace;
 	
 	@Inject
-	private IWorkspace workspace;
+	private EagerContributionInitializer initializer;
 
 	public Injector getInjector() {
 		return injector;
 	}
 	
-	protected void initializeInjector() {
+	protected void initializeInjector(BundleContext context) {
 		IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(PLUGIN_ID+".overridingGuiceModule");
 		IExtension[] extensions = point.getExtensions();
-		Module module = new SharedModule();
-		if (isJavaEnabled()) {
-			module = Modules.override(module).with(
-					new SharedModuleWithJdt());
-		}
+		Module module = new SharedModule(context);
 		if (extensions.length!=0) {
 			int numberOfMixedInModules=0;
 			for (IExtension iExtension : extensions) {
@@ -71,7 +67,7 @@ public class Activator extends Plugin {
 							log.warn("Multiple overriding guice modules. Will use them in unspecified order.");
 						}
 					} catch (CoreException e1) {
-						log.error(e1);
+						log.error(e1.getMessage(), e1);
 					}
 				}
 			}
@@ -99,30 +95,21 @@ public class Activator extends Plugin {
 		try {
 			super.start(context);
 			plugin = this;
-			initializeInjector();
-			registerListeners();
+			initializeInjector(context);
+			initializer.initialize();
 		} catch (Exception e) {
-			log.error("Error initializing " + PLUGIN_ID + ":" + e.getMessage(),
-					e);
+			log.error("Error initializing " + PLUGIN_ID + ":" + e.getMessage(),	e);
 		}
-	}
-
-	protected void registerListeners() {
-		workspace.addResourceChangeListener(resourceChangeListener);
-	}
-	
-	protected void unregisterListeners() {
-		if (resourceChangeListener != null)
-			workspace.removeResourceChangeListener(resourceChangeListener);
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		unregisterListeners();
 		plugin = null;
 		injector = null;
+		initializer.discard();
+		initializer = null;
+		workspace = null;
 		super.stop(context);
 	}
-
 
 }

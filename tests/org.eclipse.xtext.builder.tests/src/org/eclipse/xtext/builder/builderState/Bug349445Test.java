@@ -43,7 +43,7 @@ public class Bug349445Test extends Assert implements PersistedStateProvider, IMa
 
 	@Before
 	public void setUp() throws Exception {
-		Injector injector = Guice.createInjector(Modules2.mixin(new SharedModule(), new AbstractModule() {
+		Injector injector = Guice.createInjector(Modules2.mixin(new SharedModule(null), new AbstractModule() {
 			@Override
 			protected void configure() {
 				bind(PersistedStateProvider.class).toInstance(Bug349445Test.this);
@@ -56,7 +56,7 @@ public class Bug349445Test extends Assert implements PersistedStateProvider, IMa
 	}
 	
 	@Test public void testUpdate() {
-		testMe.update(new BuildData(null, null, new ToBeBuilt(), new QueuedBuildData()), null);
+		testMe.update(new BuildData(null, null, new ToBeBuilt(), new QueuedBuildData(null)), null);
 		assertEquals(1, loadCalled);
 	}
 	

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
@@ -32,6 +31,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJarEntryResource;
@@ -57,7 +57,7 @@ import com.google.inject.Singleton;
  * @noextend This class is not intended to be subclassed by clients.
  */
 @Singleton
-public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements IStorage2UriMapperJdtExtensions, IStorage2UriMapperExtension {
+public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtensions, Storage2UriMapperContribution {
 	
 	private static final Logger log = Logger.getLogger(Storage2UriMapperJavaImpl.class);
 	
@@ -105,38 +105,62 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	
 	
 	@Inject private JarEntryLocator locator;
-	@Inject private UriValidator uriValidator;
 	@Inject private IJdtHelper jdtHelper;
+	@Inject private UriValidator uriValidator;
+	
+	@Inject private IStorage2UriMapper host;
 	
 	/**
+	 * Public for testing purpose
+	 * 
 	 * @since 2.4
-	 */
-	@Override public void setUriValidator(UriValidator uriValidator) {
-		super.setUriValidator(uriValidator);
-		this.uriValidator = uriValidator;
-	}
-	
-	/**
-	 * @since 2.4
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public void setJdtHelper(IJdtHelper jdtHelper) {
 		this.jdtHelper = jdtHelper;
 	}
 	
+	/**
+	 * Public for testing purpose
+	 * 
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public void setLocator(JarEntryLocator locator) {
 		this.locator = locator;
+	}
+	
+	/**
+	 * Public for testing purpose
+	 * 
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setUriValidator(UriValidator uriValidator) {
+		this.uriValidator = uriValidator;
+	}
+	
+	/**
+	 * Public for testing purpose
+	 * 
+	 * @since 2.5
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setHost(IStorage2UriMapper host) {
+		this.host = host;
 	}
 	
 	private Map<String, PackageFragmentRootData> cachedPackageFragmentRootData = newLinkedHashMap();
 	
 	/**
-	 * Ignores Java output folders when traversing a project.
-	 * @return <code>false</code> if the folder is a java output folder. Otherwise <code>true</code>.
-	 * @since 2.4
+	 * Rejects Java output folders when traversing a project.
+	 * @return <code>true</code> if the folder is a java output folder. Otherwise <code>false</code>.
+	 * @since 2.5
 	 */
-	@Override
-	protected boolean isHandled(IFolder folder) {
-		return super.isHandled(folder) && jdtHelper != null && !jdtHelper.isFromOutputPath(folder);
+	public boolean isRejected(@NonNull IFolder folder) {
+		return jdtHelper.isFromOutputPath(folder);
 	}
 	
 	/**
@@ -163,7 +187,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	public Map<URI, IStorage> getAllEntries(IPackageFragmentRoot root) {
 		try {
 			if (root.getUnderlyingResource() instanceof IFolder) {
-				return getAllEntries((IFolder)root.getUnderlyingResource());
+				return host.getAllEntries((IFolder)root.getUnderlyingResource());
 			}
 		} catch (JavaModelException e) {
 			log.error(e.getMessage(), e);
@@ -266,12 +290,8 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		return data;
 	}
 	
-	@Override
-	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
-		Iterable<Pair<IStorage, IProject>> storages = super.getStorages(uri);
-		if (!isEmpty(storages))
-			return storages;
-
+	@NonNull
+	public Iterable<Pair<IStorage, IProject>> getStorages(@NonNull URI uri) {
 		List<Pair<IStorage, IProject>> result = newArrayListWithCapacity(1);
 		List<PackageFragmentRootData> packageFragmentRootDatas;
 		synchronized(cachedPackageFragmentRootData) {
@@ -317,14 +337,10 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		return result;
 	}
 	
-
-	@Override
-	protected URI internalGetUri(IStorage storage) {
-		if (!uriValidator.isPossiblyManaged(storage))
-			return null;
-		URI uri = super.internalGetUri(storage);
-		if (uri != null)
-			return uri;
+	/**
+	 * @since 2.5
+	 */
+	public URI getUri(@NonNull IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			final IJarEntryResource storage2 = (IJarEntryResource) storage;
 			Map<URI, IStorage> data = getAllEntries(storage2.getPackageFragmentRoot());
