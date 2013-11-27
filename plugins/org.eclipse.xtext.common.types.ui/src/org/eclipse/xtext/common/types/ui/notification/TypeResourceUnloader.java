@@ -12,11 +12,9 @@ import java.util.List;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaElementDelta;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
-import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 
 import com.google.inject.Inject;
 
@@ -32,11 +30,12 @@ public class TypeResourceUnloader extends AbstractResourceDescriptionChangeEvent
 
 	private final DeltaConverter deltaConverter;
 
+	/**
+	 * @since 2.5
+	 */
 	@Inject
-	public TypeResourceUnloader(IStateChangeEventBroker stateChangeEventBroker, DeltaConverter deltaConverter) {
+	public TypeResourceUnloader(DeltaConverter deltaConverter) {
 		this.deltaConverter = deltaConverter;
-		addListener(stateChangeEventBroker);
-		JavaCore.addElementChangedListener(this, ElementChangedEvent.POST_RECONCILE);
 	}
 	
 	public void elementChanged(ElementChangedEvent event) {

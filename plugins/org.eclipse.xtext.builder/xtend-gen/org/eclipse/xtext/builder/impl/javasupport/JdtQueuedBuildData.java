@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.impl.javasupport;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -36,6 +38,11 @@ public class JdtQueuedBuildData extends QueuedBuildData {
   private Map<String,JavaBuilderState> javaBuildState;
   
   private Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltas;
+  
+  @Inject
+  public JdtQueuedBuildData(final IStorage2UriMapper mapper) {
+    super(mapper);
+  }
   
   public void reset() {
     super.reset();

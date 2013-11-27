@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.ui.notification.DeltaConverter
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta
+import org.eclipse.xtext.builder.builderState.IBuilderState
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -22,8 +23,8 @@ import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta
 class BuilderDeltaConverter extends DeltaConverter {
 
 	@Inject
-	new(IQualifiedNameConverter nameConverter, TypeURIHelper uriHelper) {
-		super(nameConverter, uriHelper)
+	new(IQualifiedNameConverter nameConverter, TypeURIHelper uriHelper, IBuilderState builderState) {
+		super(nameConverter, uriHelper, builderState)
 	}
 
 	override createStructureChangeDelta(IType type, IResourceDescription oldDescription,
