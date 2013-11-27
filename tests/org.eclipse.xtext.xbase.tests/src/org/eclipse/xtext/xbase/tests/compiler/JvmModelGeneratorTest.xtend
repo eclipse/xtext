@@ -82,7 +82,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		generator.doGenerate(expression.eResource, fsa)
 		val code = fsa.files.get(IFileSystemAccess::DEFAULT_OUTPUT + clazz.identifier.replace('.','/')+".java").toString
 		assertFalse(code.contains("import"))
-		assertTrue(code.contains("java.lang.String foo"))
+		assertTrue(code, code.contains("java.lang.String foo"))
 		val compiledClass = javaCompiler.compileToClass(clazz.identifier, code)
 		helper.assertNoErrors(expression.eResource.contents.head)
 		assertEquals(2, compiledClass.declaredClasses.size)
