@@ -41,25 +41,21 @@ public class Activator extends Plugin {
 	private Injector injector;
 
 	@Inject
-	private ComposedResourceChangeListener resourceChangeListener;
-	
-	@Inject
 	private IWorkspace workspace;
 
 	public Injector getInjector() {
 		return injector;
 	}
-	
+
 	protected void initializeInjector() {
-		IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(PLUGIN_ID+".overridingGuiceModule");
+		IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(PLUGIN_ID + ".overridingGuiceModule");
 		IExtension[] extensions = point.getExtensions();
 		Module module = new SharedModule();
 		if (isJavaEnabled()) {
-			module = Modules.override(module).with(
-					new SharedModuleWithJdt());
+			module = Modules.override(module).with(new SharedModuleWithJdt());
 		}
-		if (extensions.length!=0) {
-			int numberOfMixedInModules=0;
+		if (extensions.length != 0) {
+			int numberOfMixedInModules = 0;
 			for (IExtension iExtension : extensions) {
 				IConfigurationElement[] elements = iExtension.getConfigurationElements();
 				for (IConfigurationElement e : elements) {
@@ -67,7 +63,7 @@ public class Activator extends Plugin {
 						Module m = (Module) e.createExecutableExtension("class");
 						module = Modules.override(module).with(m);
 						numberOfMixedInModules++;
-						if (numberOfMixedInModules==2) {
+						if (numberOfMixedInModules == 2) {
 							log.warn("Multiple overriding guice modules. Will use them in unspecified order.");
 						}
 					} catch (CoreException e1) {
@@ -76,7 +72,7 @@ public class Activator extends Plugin {
 				}
 			}
 		}
-			
+
 		injector = Guice.createInjector(module);
 		injector.injectMembers(this);
 	}
@@ -88,7 +84,7 @@ public class Activator extends Plugin {
 			TypeResourceUnloader.class.getName();
 			return true;
 		} catch (Throwable e) {
-			log.warn("Disabling JDT use. : "+e.getMessage());
+			log.warn("Disabling JDT use. : " + e.getMessage());
 			log.debug(e.getMessage(), e);
 		}
 		return false;
@@ -100,29 +96,16 @@ public class Activator extends Plugin {
 			super.start(context);
 			plugin = this;
 			initializeInjector();
-			registerListeners();
 		} catch (Exception e) {
-			log.error("Error initializing " + PLUGIN_ID + ":" + e.getMessage(),
-					e);
+			log.error("Error initializing " + PLUGIN_ID + ":" + e.getMessage(), e);
 		}
-	}
-
-	protected void registerListeners() {
-		workspace.addResourceChangeListener(resourceChangeListener);
-	}
-	
-	protected void unregisterListeners() {
-		if (resourceChangeListener != null)
-			workspace.removeResourceChangeListener(resourceChangeListener);
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		unregisterListeners();
 		plugin = null;
 		injector = null;
 		super.stop(context);
 	}
-
 
 }
