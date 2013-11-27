@@ -6251,8 +6251,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import test.ReturnTypeUsesTypeParameter;");
     _builder_1.newLine();
-    _builder_1.append("import test.ReturnTypeUsesTypeParameter.Inner;");
-    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -6295,8 +6293,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
     _builder_1.newLine();
     _builder_1.append("import test.ReturnTypeUsesTypeParameter;");
-    _builder_1.newLine();
-    _builder_1.append("import test.ReturnTypeUsesTypeParameter.Inner;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");

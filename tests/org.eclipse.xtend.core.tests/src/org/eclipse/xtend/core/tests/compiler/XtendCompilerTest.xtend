@@ -2810,7 +2810,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			''', '''
 				import test.ReturnTypeUsesTypeParameter;
-				import test.ReturnTypeUsesTypeParameter.Inner;
 				
 				@SuppressWarnings("all")
 				public class MyClass implements ReturnTypeUsesTypeParameter {
@@ -2836,7 +2835,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			''', '''
 				import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 				import test.ReturnTypeUsesTypeParameter;
-				import test.ReturnTypeUsesTypeParameter.Inner;
 				
 				@SuppressWarnings("all")
 				public class MyClass implements ReturnTypeUsesTypeParameter {

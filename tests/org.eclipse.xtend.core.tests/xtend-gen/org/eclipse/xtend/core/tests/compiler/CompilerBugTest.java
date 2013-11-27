@@ -3117,8 +3117,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.Map;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.Map.Entry;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Set;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");

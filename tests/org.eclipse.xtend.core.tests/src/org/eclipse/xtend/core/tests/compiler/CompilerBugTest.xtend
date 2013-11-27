@@ -1400,7 +1400,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		''', '''
 			import java.util.HashMap;
 			import java.util.Map;
-			import java.util.Map.Entry;
 			import java.util.Set;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
