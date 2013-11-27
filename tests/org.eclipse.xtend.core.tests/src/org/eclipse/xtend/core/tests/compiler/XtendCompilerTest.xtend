@@ -17,7 +17,17 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 
 	@Inject protected IFilePostProcessor postProcessor
 
-
+	@Test def testInnerTypeImports() {
+		assertCompilesTo('''
+			class Foo extends types.SomeClassWithNestedInterface implements types.SomeClassWithNestedInterface.NestedInterface {}
+		''', '''
+			import types.SomeClassWithNestedInterface;
+			
+			@SuppressWarnings("all")
+			public class Foo extends SomeClassWithNestedInterface implements SomeClassWithNestedInterface.NestedInterface {
+			}
+		''')
+	}
 
 	@Test
 	def testBug411861() {
@@ -2879,7 +2889,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				
 				@SuppressWarnings("all")
 				public class MyClass implements ReturnTypeUsesTypeParameter {
-				  public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {
+				  public <LocalName extends CharSequence> ReturnTypeUsesTypeParameter.Inner<LocalName> accept(final LocalName param) {
 				    return null;
 				  }
 				}
@@ -2904,8 +2914,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				
 				@SuppressWarnings("all")
 				public class MyClass implements ReturnTypeUsesTypeParameter {
-				  public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {
-				    final Inner<LocalName> _function = new Inner<LocalName>() {
+				  public <LocalName extends CharSequence> ReturnTypeUsesTypeParameter.Inner<LocalName> accept(final LocalName param) {
+				    final ReturnTypeUsesTypeParameter.Inner<LocalName> _function = new ReturnTypeUsesTypeParameter.Inner<LocalName>() {
 				      public void useProcedure(final Procedure1<? super LocalName> it) {
 				        if (true) {
 				          if (it!=null) {
