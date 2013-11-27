@@ -3132,13 +3132,13 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void putAll(final Map<? extends K,? extends V> t) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Set<? extends Entry<? extends K,? extends V>> _entrySet = t.entrySet();");
+    _builder_1.append("Set<? extends Map.Entry<? extends K,? extends V>> _entrySet = t.entrySet();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<Entry<? extends K,? extends V>> _function = new Procedure1<Entry<? extends K,? extends V>>() {");
+    _builder_1.append("final Procedure1<Map.Entry<? extends K,? extends V>> _function = new Procedure1<Map.Entry<? extends K,? extends V>>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final Entry<? extends K,? extends V> it) {");
+    _builder_1.append("public void apply(final Map.Entry<? extends K,? extends V> it) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("K _key = it.getKey();");

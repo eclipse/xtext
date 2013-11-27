@@ -29,6 +29,24 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   protected IFilePostProcessor postProcessor;
   
   @Test
+  public void testInnerTypeImports() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo extends types.SomeClassWithNestedInterface implements types.SomeClassWithNestedInterface.NestedInterface {}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import types.SomeClassWithNestedInterface;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo extends SomeClassWithNestedInterface implements SomeClassWithNestedInterface.NestedInterface {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug411861() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class Test {");
@@ -6423,7 +6441,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class MyClass implements ReturnTypeUsesTypeParameter {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {");
+    _builder_1.append("public <LocalName extends CharSequence> ReturnTypeUsesTypeParameter.Inner<LocalName> accept(final LocalName param) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null;");
@@ -6466,10 +6484,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class MyClass implements ReturnTypeUsesTypeParameter {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {");
+    _builder_1.append("public <LocalName extends CharSequence> ReturnTypeUsesTypeParameter.Inner<LocalName> accept(final LocalName param) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Inner<LocalName> _function = new Inner<LocalName>() {");
+    _builder_1.append("final ReturnTypeUsesTypeParameter.Inner<LocalName> _function = new ReturnTypeUsesTypeParameter.Inner<LocalName>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void useProcedure(final Procedure1<? super LocalName> it) {");
