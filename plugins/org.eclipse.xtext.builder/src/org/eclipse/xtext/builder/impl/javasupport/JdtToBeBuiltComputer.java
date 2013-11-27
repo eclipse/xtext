@@ -15,8 +15,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspace.ProjectOrder;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -31,14 +31,14 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
-import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
+import org.eclipse.xtext.builder.impl.ToBeBuiltComputerContribution;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
@@ -46,7 +46,7 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
+public class JdtToBeBuiltComputer implements ToBeBuiltComputerContribution {
 	
 	private final static Logger log = Logger.getLogger(JdtToBeBuiltComputer.class);
 
@@ -55,6 +55,9 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	
 	@Inject
 	private QueuedBuildData queuedBuildData;
+	
+	@Inject
+	private IWorkspace workspace;
 	
 	@Inject
 	private ModificationStampCache modificationStampCache;
@@ -66,39 +69,34 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	private UriValidator uriValidator; 
 	
 	@Inject
-	private Storage2UriMapperJavaImpl storage2UriMapperJavaImpl;
+	private IStorage2UriMapperJdtExtensions jdtUriMapperExtension;
 	
 	@Singleton
 	public static class ModificationStampCache {
 		protected Map<String, Long> projectToModificationStamp = Maps.newHashMap();
 	}
 	
-	@Override
-	public ToBeBuilt removeProject(IProject project, IProgressMonitor monitor) {
-		ToBeBuilt toBeBuilt = super.removeProject(project, monitor);
+	public void removeProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) {
 		if (toBeBuilt.getToBeDeleted().isEmpty() && toBeBuilt.getToBeUpdated().isEmpty())
-			return toBeBuilt;
+			return;
 		modificationStampCache.projectToModificationStamp.clear();
-		return toBeBuilt;
 	}
 	
-	@Override
-	public ToBeBuilt updateProject(final IProject project, IProgressMonitor monitor) throws CoreException {
+	public void updateProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-		final ToBeBuilt toBeBuilt = super.updateProject(project, progress.newChild(1));
 		if (!project.isAccessible() || progress.isCanceled())
-			return toBeBuilt;
+			return;
 		IJavaProject javaProject = JavaCore.create(project);
 		if (javaProject.exists()) {
 			IPackageFragmentRoot[] roots = javaProject.getPackageFragmentRoots();
 			progress.setWorkRemaining(roots.length);
 			final Map<String, Long> updated = Maps.newHashMap();
-			ProjectOrder orderedProjects = ResourcesPlugin.getWorkspace().computeProjectOrder(ResourcesPlugin.getWorkspace().getRoot().getProjects());
+			ProjectOrder orderedProjects = workspace.computeProjectOrder(workspace.getRoot().getProjects());
 			for (final IPackageFragmentRoot root : roots) {
 				if (progress.isCanceled())
-					return toBeBuilt;
+					return;
 				if (shouldHandle(root) && !isBuiltByUpstream(root, project, orderedProjects.projects)) {
-					Map<URI, IStorage> rootData = storage2UriMapperJavaImpl.getAllEntries(root);
+					Map<URI, IStorage> rootData = jdtUriMapperExtension.getAllEntries(root);
 					for (Map.Entry<URI, IStorage> e : rootData.entrySet())
 						if (uriValidator.canBuild(e.getKey(), e.getValue())) {
 							toBeBuilt.getToBeDeleted().add(e.getKey());
@@ -111,7 +109,6 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 				modificationStampCache.projectToModificationStamp.putAll(updated);
 			}
 		}
-		return toBeBuilt;
 	}
 	
 	protected boolean isBuiltByUpstream(IPackageFragmentRoot root, IProject project, IProject[] projectsInCorrectBuildOrder) {
@@ -147,27 +144,21 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		}
 	}
 
-	@Override
-	public boolean removeStorage(IProgressMonitor monitor, ToBeBuilt toBeBuilt, IStorage storage) {
-		if (storage instanceof IFile && JavaCore.isJavaLikeFileName(storage.getFullPath().lastSegment())) {
+	public boolean removeStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
+		if (storage instanceof IFile && JavaCore.isJavaLikeFileName(storage.getName())) {
 			IJavaElement element = JavaCore.create(((IFile)storage).getParent());
-			String fileName = storage.getFullPath().lastSegment();
+			String fileName = storage.getName();
 			String typeName = fileName.substring(0, fileName.lastIndexOf('.'));
 			if (element instanceof IPackageFragmentRoot) {
 				queueJavaChange(typeName);
+				return true;
 			} else if (element instanceof IPackageFragment) {
 				IPackageFragment packageFragment = (IPackageFragment) element;
 				queueJavaChange(packageFragment.getElementName() + "." + typeName);
-			}
-		} else {
-			if (!isHandled(storage))
 				return true;
-			URI uri = getUri(storage);
-			if (uri != null) {
-				toBeBuilt.getToBeDeleted().add(uri);
 			}
 		}
-		return true;
+		return false;
 	}
 
 	protected void queueJavaChange(String typeName) {
@@ -177,20 +168,16 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		queuedBuildData.queueChanges(Collections.singleton(delta));
 	}
 
-	@Override
-	protected boolean isHandled(IStorage resource) {
-		if (!uriValidator.isPossiblyManaged(resource))
-			return false;
-		return (resource instanceof IJarEntryResource) || super.isHandled(resource);
+	public boolean isPossiblyHandled(IStorage resource) {
+		return resource instanceof IJarEntryResource;
 	}
 	
 	/**
 	 * Ignores Java output folders when traversing a project.
-	 * @return <code>false</code> if the folder is a java output folder. Otherwise <code>true</code>.
+	 * @return <code>true</code> if the folder is a java output folder. Otherwise <code>false</code>.
 	 */
-	@Override
-	protected boolean isHandled(IFolder folder) {
-		boolean result = super.isHandled(folder) && !jdtHelper.isFromOutputPath(folder);
+	public boolean isRejected(IFolder folder) {
+		boolean result = jdtHelper.isFromOutputPath(folder);
 		return result;
 	}
 }

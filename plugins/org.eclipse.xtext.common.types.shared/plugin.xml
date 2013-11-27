@@ -44,5 +44,11 @@
             targetId="org.eclipse.jdt.ui.javaCode">
       </hyperlinkDetector>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.shared.sharedStateContributingModule">
+      <module
+            class="org.eclipse.xtext.common.types.shared.CommonTypesContribution">
+      </module>
+   </extension>
    
 </plugin>

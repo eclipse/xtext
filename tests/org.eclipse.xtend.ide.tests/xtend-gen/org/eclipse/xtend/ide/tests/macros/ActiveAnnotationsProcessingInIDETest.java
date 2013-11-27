@@ -318,8 +318,8 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       Iterable<IResource> _map_1 = IterableExtensions.<IMarker, IResource>map(markers2, _function_3);
       Set<IResource> _set = IterableExtensions.<IResource>toSet(_map_1);
       Iterable<IFile> _filter = Iterables.<IFile>filter(_set, IFile.class);
-      final Function1<IFile,Long> _function_4 = new Function1<IFile,Long>() {
-        public Long apply(final IFile it) {
+      final Procedure1<IFile> _function_4 = new Procedure1<IFile>() {
+        public void apply(final IFile it) {
           try {
             final InputSupplier<InputStreamReader> _function = new InputSupplier<InputStreamReader>() {
               public InputStreamReader getInput() throws IOException {
@@ -332,14 +332,13 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
                 }
               }
             };
-            long _copy = CharStreams.<InputStreamReader>copy(_function, buffer);
-            return Long.valueOf(_copy);
+            CharStreams.<InputStreamReader>copy(_function, buffer);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
         }
       };
-      /* IterableExtensions.<IFile, Long>map(_filter, _function_4); */
+      IterableExtensions.<IFile>forEach(_filter, _function_4);
       InputOutput.<StringBuilder>println(buffer);
       final Function1<IMarker,String> _function_5 = new Function1<IMarker,String>() {
         public String apply(final IMarker it) {
