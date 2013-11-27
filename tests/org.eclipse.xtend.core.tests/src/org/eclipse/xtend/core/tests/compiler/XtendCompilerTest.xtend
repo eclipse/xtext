@@ -28,6 +28,25 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def testInnerTypeImports_1() {
+		assertCompilesTo('''
+			class Foo extends types.SomeClassWithNestedInterface {
+				override types.SomeClassWithNestedInterface.String convert(java.lang.String s) {
+					return null;
+				}
+			}
+		''', '''
+			import types.SomeClassWithNestedInterface;
+			
+			@SuppressWarnings("all")
+			public class Foo extends SomeClassWithNestedInterface {
+			  public SomeClassWithNestedInterface.String convert(final java.lang.String s) {
+			    return null;
+			  }
+			}
+		''')
+	}
 
 	@Test
 	def testBug411861() {

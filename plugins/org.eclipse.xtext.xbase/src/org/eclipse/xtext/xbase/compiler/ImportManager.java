@@ -30,8 +30,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 
-import com.google.common.base.Functions;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -71,6 +69,23 @@ public class ImportManager {
 			thisTypeSimpleNames.add(thisType.getSimpleName());
 			thisTypeQualifiedNames.add(thisType.getQualifiedName(innerTypeSeparator));
 			thisCollidesWithJavaLang |= CodeGenUtil.isJavaLangType(thisType.getSimpleName());
+			registerSimpleNamesOfInnerClasses(thisType, new LinkedHashSet<JvmType>());
+		}
+	}
+
+	protected void registerSimpleNamesOfInnerClasses(JvmDeclaredType thisType, LinkedHashSet<JvmType> handled) {
+		if (!handled.add(thisType))
+			return;
+		List<JvmDeclaredType> nested = EcoreUtil2.typeSelect(thisType.getMembers(), JvmDeclaredType.class);
+		for (JvmDeclaredType jvmDeclaredType : nested) {
+			thisTypeSimpleNames.add(jvmDeclaredType.getSimpleName());
+			thisTypeQualifiedNames.add(jvmDeclaredType.getQualifiedName(innerTypeSeparator));
+			thisCollidesWithJavaLang |= CodeGenUtil.isJavaLangType(jvmDeclaredType.getSimpleName());
+		}
+		for (JvmTypeReference superType: thisType.getSuperTypes()) {
+			if (superType.getType() instanceof JvmDeclaredType) {
+				registerSimpleNamesOfInnerClasses((JvmDeclaredType) superType.getType(), handled);
+			}
 		}
 	}
 

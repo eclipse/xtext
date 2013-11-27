@@ -12,4 +12,9 @@ package types;
  */
 public class SomeClassWithNestedInterface {
 	public static interface NestedInterface {}
+	public static interface String {}
+	
+	public String convert(java.lang.String s) {
+		return null;
+	}
 }
