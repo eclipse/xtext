@@ -25,6 +25,9 @@ public class Activator implements BundleActivator {
 	}
 
 	static Injector getInjector() {
+		if (injector == null && context != null) {
+			Activator.injector = Guice.createInjector(Modules.override(new SharedStateModule()).with(new SharedCommonTypesModule()));
+		}
 		return injector;
 	}
 	/*
@@ -33,7 +36,6 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		Activator.injector = Guice.createInjector(Modules.override(new SharedStateModule()).with(new SharedCommonTypesModule()));
 	}
 
 	/*

@@ -24,4 +24,39 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/IStorage2UriMapperJdtExtensions.java" type="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions">
+        <filter comment="Refactored towards greater extensibility" id="404791350">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/Storage2UriMapperImpl.java" type="org.eclipse.xtext.ui.resource.Storage2UriMapperImpl">
+        <filter comment="Removed deprecated nullimpl method" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperImpl"/>
+                <message_argument value="resourceChanged(IResourceChangeEvent)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/Storage2UriMapperJavaImpl.java" type="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl">
+        <filter id="337682486">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Refactored towards better extensibility" id="338849923">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/XtextResourceSetProvider.java" type="org.eclipse.xtext.ui.resource.XtextResourceSetProvider">
+        <filter comment="Moved initialization of resource set to IResourceSetInitializer" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.XtextResourceSetProvider"/>
+                <message_argument value="computePlatformURIMap(IJavaProject)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

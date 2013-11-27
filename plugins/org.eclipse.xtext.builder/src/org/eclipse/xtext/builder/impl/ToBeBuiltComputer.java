@@ -24,9 +24,11 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.UriValidator;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -48,8 +50,19 @@ public class ToBeBuiltComputer {
 	@Inject
 	private UriValidator uriValidator;
 
+	private ImmutableList<? extends ToBeBuiltComputerContribution> contributions;
+
+	@Inject
+	private void initializeContributions(SharedStateContributionRegistry registry) {
+		contributions = registry.getContributedInstances(ToBeBuiltComputerContribution.class);
+	}
+	
 	public ToBeBuilt removeProject(IProject project, IProgressMonitor monitor) {
-		return doRemoveProject(project, monitor);
+		ToBeBuilt toBeBuilt = doRemoveProject(project, monitor);
+		for(int i = 0; i < contributions.size(); i++) {
+			contributions.get(i).removeProject(toBeBuilt, project, monitor);
+		}
+		return toBeBuilt;
 	}
 
 	protected ToBeBuilt doRemoveProject(IProject project, IProgressMonitor monitor) {
@@ -113,6 +126,9 @@ public class ToBeBuiltComputer {
 				return true;
 			}
 		});
+		for(int i = 0; i < contributions.size(); i++) {
+			contributions.get(i).updateProject(toBeBuilt, project, monitor);
+		}
 		return toBeBuilt;
 	}
 
@@ -127,6 +143,11 @@ public class ToBeBuiltComputer {
 	}
 
 	public boolean removeStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
+		for(int i = 0; i < contributions.size(); i++) {
+			if (contributions.get(i).removeStorage(toBeBuilt, storage, monitor)) {
+				return true;
+			}
+		}
 		if (!isHandled(storage))
 			return true;
 		URI uri = getUri(storage);
@@ -136,18 +157,30 @@ public class ToBeBuiltComputer {
 		return true;
 	}
 
-	protected boolean isHandled(IStorage resource) {
-		return resource instanceof IFile;
+	protected boolean isHandled(IStorage storage) {
+		boolean possiblyManaged = false;
+		for(int i = 0; i < contributions.size() && !possiblyManaged; i++) {
+			possiblyManaged = contributions.get(i).isPossiblyHandled(storage);
+		}
+		if ((possiblyManaged || storage instanceof IFile) && uriValidator.isPossiblyManaged(storage)) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**
 	 * Return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
 	 * Defaults to <code>true</code> for all folders.
-	 * @see org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer#isHandled(IFolder)
+	 * @see org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer#isRejected(IFolder)
 	 * @return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
 	 * @since 2.1
 	 */
 	protected boolean isHandled(IFolder folder) {
+		for(int i = 0; i < contributions.size(); i++) {
+			if (contributions.get(i).isRejected(folder)) {
+				return false;
+			}
+		}
 		return true;
 	}
 
