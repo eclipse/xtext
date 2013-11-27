@@ -47,6 +47,20 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 	@Inject
 	private IWorkspace workspace;
 	
+	@Inject
+	private IStorage2UriMapperJdtExtensions uriMapperExtensions;
+	
+	/**
+	 * Public for testing purpose
+	 * 
+	 * @since 2.5
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setUriMapperExtensions(IStorage2UriMapperJdtExtensions uriMapperExtensions) {
+		this.uriMapperExtensions = uriMapperExtensions;
+	}
+	
 	public String initHandle(URI uri) {
 		IPackageFragmentRoot root = getPackageFragmentRoot(uri);
 		if (root != null)
@@ -75,7 +89,7 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 			if (!isAccessibleXtextProject(javaProject.getProject())) {
 				return Collections.emptyList();
 			}
-			Map<URI, IStorage> entries = ((IStorage2UriMapperJdtExtensions)super.getMapper()).getAllEntries(root);
+			Map<URI, IStorage> entries = uriMapperExtensions.getAllEntries(root);
 			return entries.keySet();
 		}
 		return Collections.emptyList();

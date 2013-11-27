@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.shared.internal;
 
-import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -17,26 +16,34 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
+import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
-import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
+import org.eclipse.xtext.builder.impl.QueuedBuildData;
+import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.DirtyStateManager;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperExtension;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.eclipse.xtext.ui.resource.UriValidator;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.JdtHelper;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.osgi.framework.BundleContext;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
@@ -48,21 +55,33 @@ import com.google.inject.name.Names;
  */
 public class SharedModule extends AbstractModule {
 
+	private BundleContext context;
+
+	public SharedModule(BundleContext context) {
+		this.context = context;
+	}
+
 	@Override
 	protected void configure() {
+		if (context != null)
+			bind(BundleContext.class).toInstance(context);
+		
 		bind(IBuilderState.class).to(ClusteringBuilderState.class).in(Scopes.SINGLETON);
 		bind(IResourceDescriptions.class).to(DirtyStateAwareResourceDescriptions.class).in(Scopes.SINGLETON);
 		bind(IResourceServiceProvider.Registry.class).toInstance(IResourceServiceProvider.Registry.INSTANCE);
-		bind(IResourceSetProvider.class).to(SimpleResourceSetProvider.class);
+		bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
 		bind(IExtensionRegistry.class).toInstance(Platform.getExtensionRegistry());
-		bind(IResourceChangeListener.class).annotatedWith(Names.named(ProjectOpenedOrClosedListener.class.getName())).to(ProjectOpenedOrClosedListener.class);
+		bind(BuildScheduler.class);
+		bind(ToBeBuiltComputer.class);
+		bind(IQualifiedNameConverter.class).to(IQualifiedNameConverter.DefaultImpl.class);
 
 		bind(IExternalContentSupport.IExternalContentProvider.class).to(IDirtyStateManager.class).in(Scopes.SINGLETON);
 		bind(IDirtyStateManager.class).to(DirtyStateManager.class).in(Scopes.SINGLETON);
 		bind(IStateChangeEventBroker.class).to(StateChangeEventBroker.class).in(Scopes.SINGLETON);
 
 		bind(IncrementalProjectBuilder.class).to(XtextBuilder.class);
-		bind(IStorage2UriMapper.class).to(Storage2UriMapperImpl.class).in(Scopes.SINGLETON);
+		bind(IStorage2UriMapper.class).to(IStorage2UriMapperExtension.class);
+		bind(IStorage2UriMapperExtension.class).to(Storage2UriMapperImpl.class).in(Scopes.SINGLETON);
 		
 		bind(ITraceForStorageProvider.class).to(TraceForStorageProvider.class);
 
@@ -81,6 +100,10 @@ public class SharedModule extends AbstractModule {
 		});
 
 		bind(IJdtHelper.class).to(JdtHelper.class).asEagerSingleton();
+		bind(WorkspaceProjectsStateHelper.class);
+		bind(QueuedBuildData.class);
+		bind(UriValidator.class);
+		bind(SharedStateContributionRegistry.class).to(SharedStateContributionRegistryImpl.class);
 
 		boolean parallel = false;
 		if (parallel) {

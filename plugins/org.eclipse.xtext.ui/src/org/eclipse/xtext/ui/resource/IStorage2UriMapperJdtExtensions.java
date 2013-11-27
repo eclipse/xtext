@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.Pair;
  * @since 2.4
  * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface IStorage2UriMapperJdtExtensions extends IStorage2UriMapper {
+public interface IStorage2UriMapperJdtExtensions {
 
 	/**
 	 * @return all managed uris and their corresponding storages contained in the given {@link IPackageFragmentRoot}
