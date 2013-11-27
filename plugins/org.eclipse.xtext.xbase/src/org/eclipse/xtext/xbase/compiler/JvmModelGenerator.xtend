@@ -844,7 +844,9 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def protected String makeJavaIdentifier(String name) {
-		if (keywords.isJavaKeyword(name)) {
+		if (name == null) {
+			return "__unknown__";
+		} else if (keywords.isJavaKeyword(name)) {
 			name+"_"
 		} else {
 			name
