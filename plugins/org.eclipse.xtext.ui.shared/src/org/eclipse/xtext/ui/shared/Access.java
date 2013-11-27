@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ui.shared;
 
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.internal.Activator;
+import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.containers.JavaProjectsState;
@@ -19,8 +19,11 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.internal.Activator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class Access {
@@ -38,8 +41,34 @@ public class Access {
 			if (Activator.getDefault()==null) {
 				throw new IllegalStateException("The bundle has not been started!");
 			}
-			return org.eclipse.xtext.ui.shared.internal.Activator.getDefault().getInjector().getInstance(clazz);
+			return Activator.getDefault().getInjector().getInstance(clazz);
 		}
+	}
+	
+	static class InternalProviderForContribution<T> implements Provider<T> {
+		private Class<? extends T> clazz;
+		
+		private Provider<? extends T> delegate;
+		
+		public InternalProviderForContribution(Class<? extends T> clazz) {
+			this.clazz = clazz;
+		}
+
+		@Inject
+		private void inject(SharedStateContributionRegistry registry) {
+			delegate = registry.getLazySingleContributedInstances(clazz);
+		}
+
+		public T get() {
+			return delegate.get();
+		}
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public static <T> Provider<T> contributedProvider(Class<? extends T> clazz) {
+		return new InternalProviderForContribution<T>(clazz);
 	}
 	
 	public static <T> Provider<T> provider(Class<? extends T> clazz) {
@@ -78,19 +107,32 @@ public class Access {
 	}
 	
 	public static Provider<IAllContainersState> getWorkspaceProjectsState() {
-		return Access.<IAllContainersState>provider(WorkspaceProjectsState.class);
+		return Access.<IAllContainersState>contributedProvider(WorkspaceProjectsState.class);
 	}
 	
 	public static Provider<IAllContainersState> getJavaProjectsState() {
-		return Access.<IAllContainersState>provider(JavaProjectsState.class);
+		return Access.<IAllContainersState>contributedProvider(JavaProjectsState.class);
 	}
 	
 	public static Provider<IAllContainersState> getStrictJavaProjectsState() {
-		return Access.<IAllContainersState>provider(StrictJavaProjectsState.class);
+		return Access.<IAllContainersState>contributedProvider(StrictJavaProjectsState.class);
 	}
 
 	public static Provider<IJdtHelper> getJdtHelper() {
 		return Access.<IJdtHelper>provider(IJdtHelper.class);
 	}
 
+	/**
+	 * @since 2.5
+	 */
+	public static Provider<SharedStateContributionRegistry> getSharedStateContributionRegistry() {
+		return Access.<SharedStateContributionRegistry>provider(SharedStateContributionRegistry.class);
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public static Provider<QueuedBuildData> getQueuedBuildData() {
+		return Access.<QueuedBuildData>provider(QueuedBuildData.class);
+	}
 }

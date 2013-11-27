@@ -11,11 +11,15 @@ import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller
 import org.eclipse.xtext.builder.impl.javasupport.JdtQueuedBuildData
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper
+import org.eclipse.xtext.builder.impl.javasupport.BuilderDeltaConverter
+import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller
+import org.eclipse.jdt.core.JavaCore
+import org.eclipse.jdt.core.ElementChangedEvent
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -32,14 +36,27 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 
 	@Inject
 	protected extension WorkbenchTestHelper testHelper
+	
+	@Inject
+	private IStorage2UriMapper mapper
 
 	@Inject
+	protected BuilderDeltaConverter converter;
+	
 	protected JdtQueuedBuildData queuedBuildData
+	protected JavaChangeQueueFiller queueFiller
 
-	@Inject
-	protected JavaChangeQueueFiller javaChangeQueueFiller
+	override setUp() throws Exception {
+		super.setUp()
+		queuedBuildData = new JdtQueuedBuildData(mapper)
+		queueFiller = new JavaChangeQueueFiller(queuedBuildData, converter)
+		JavaCore.addElementChangedListener(queueFiller, ElementChangedEvent.POST_CHANGE);
+	}
 
 	override tearDown() throws Exception {
+		JavaCore.removeElementChangedListener(queueFiller)
+		queueFiller = null
+		queuedBuildData = null
 		testHelper.tearDown
 		super.tearDown
 	}

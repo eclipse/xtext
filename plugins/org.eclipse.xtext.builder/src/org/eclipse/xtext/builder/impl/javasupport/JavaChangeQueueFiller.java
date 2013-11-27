@@ -11,26 +11,28 @@ import java.util.List;
 
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
-import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class JavaChangeQueueFiller implements IElementChangedListener {
 
-	@Inject
-	private JdtQueuedBuildData queue;
+	private QueuedBuildData queue;
 
-	@Inject
 	private BuilderDeltaConverter deltaConverter;
 
-	public JavaChangeQueueFiller() {
-		JavaCore.addElementChangedListener(this, ElementChangedEvent.POST_CHANGE);
+	@Inject
+	public JavaChangeQueueFiller(QueuedBuildData queue, BuilderDeltaConverter deltaConverter) {
+		this.queue = queue;
+		this.deltaConverter = deltaConverter;
 	}
-
+	
 	public void elementChanged(ElementChangedEvent event) {
 		List<Delta> deltas = deltaConverter.convert(event.getDelta());
 		if (deltas != null && !deltas.isEmpty()) {

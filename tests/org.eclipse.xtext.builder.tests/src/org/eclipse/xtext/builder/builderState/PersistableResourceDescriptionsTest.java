@@ -57,7 +57,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new BuilderTestLanguageStandaloneSetup());
-		SharedModule module = new SharedModule();
+		SharedModule module = new SharedModule(null);
 		builderInjector = Guice.createInjector(module);
 		builderState = builderInjector.getInstance(ClusteringBuilderState.class);
 		uriConverter = new ExtensibleURIConverterImpl() {

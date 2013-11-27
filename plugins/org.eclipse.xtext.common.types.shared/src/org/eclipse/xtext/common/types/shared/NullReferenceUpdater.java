@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
  * A null reference updater. Does nothing since Java references are handled by JDT. 
  * @author Sebastian Zarnekow
  */
+@SuppressWarnings("restriction")
 public class NullReferenceUpdater implements IReferenceUpdater {
 
 	public void createReferenceUpdates(

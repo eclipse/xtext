@@ -24,4 +24,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/XtextResourceSetProvider.java" type="org.eclipse.xtext.ui.resource.XtextResourceSetProvider">
+        <filter comment="Moved initialization of resource set to IResourceSetInitializer" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.XtextResourceSetProvider"/>
+                <message_argument value="computePlatformURIMap(IJavaProject)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
