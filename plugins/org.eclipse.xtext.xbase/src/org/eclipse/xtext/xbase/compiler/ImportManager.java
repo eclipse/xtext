@@ -7,28 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import static com.google.common.collect.Collections2.filter;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Sets;
 
 /**
@@ -39,7 +39,6 @@ public class ImportManager {
 	private Map<String, String> imports = newHashMap();
 
 	private boolean organizeImports;
-	
 
 	private Set<String> thisTypeSimpleNames = Sets.newHashSet();
 	private Set<String> thisTypeQualifiedNames = Sets.newHashSet();
@@ -53,26 +52,40 @@ public class ImportManager {
 	public ImportManager() {
 		this(true, null);
 	}
-	
+
 	public ImportManager(boolean organizeImports) {
 		this(organizeImports, null);
 	}
-	
+
 	public ImportManager(boolean organizeImports, JvmDeclaredType thisType) {
 		this(organizeImports, thisType, '.');
 	}
-	
+
 	public ImportManager(boolean organizeImports, JvmDeclaredType thisType, char innerTypeSeparator) {
 		this.organizeImports = organizeImports;
 		this.innerTypeSeparator = innerTypeSeparator;
 		if (thisType != null) {
 			thisTypeSimpleNames.add(thisType.getSimpleName());
 			thisTypeQualifiedNames.add(thisType.getQualifiedName(innerTypeSeparator));
-			thisCollidesWithJavaLang = CodeGenUtil.isJavaLangType(thisType.getSimpleName());
-			for (JvmMember jvmMember : filter(thisType.getMembers(), Predicates.instanceOf(JvmDeclaredType.class))) {
+			thisCollidesWithJavaLang |= CodeGenUtil.isJavaLangType(thisType.getSimpleName());
+			registerInnerTypesAsVisible(thisType, innerTypeSeparator, new LinkedHashSet<JvmType>());
+		}
+	}
+
+	protected void registerInnerTypesAsVisible(JvmDeclaredType thisType, char innerTypeSeparator, LinkedHashSet<JvmType> alreadyHandled) {
+		if (thisType != null) {
+			if (!alreadyHandled.add(thisType)) {
+				return;
+			}
+			for (JvmDeclaredType jvmMember : EcoreUtil2.typeSelect(thisType.getMembers(), JvmDeclaredType.class)) {
 				thisTypeSimpleNames.add(jvmMember.getSimpleName());
 				thisTypeQualifiedNames.add(jvmMember.getQualifiedName(innerTypeSeparator));
 				thisCollidesWithJavaLang |= CodeGenUtil.isJavaLangType(jvmMember.getSimpleName());
+			}
+			for (JvmTypeReference superType : thisType.getSuperTypes()) {
+				if (superType.getType() instanceof JvmDeclaredType) {
+					registerInnerTypesAsVisible((JvmDeclaredType) superType.getType(), innerTypeSeparator, alreadyHandled);
+				}
 			}
 		}
 	}
@@ -82,7 +95,7 @@ public class ImportManager {
 		appendType(type, sb);
 		return sb;
 	}
-	
+
 	public CharSequence serialize(Class<?> type) {
 		StringBuilder sb = new StringBuilder();
 		appendType(type, sb);
@@ -118,7 +131,7 @@ public class ImportManager {
 			appendType(qualifiedName, simpleName, builder);
 		}
 	}
-	
+
 	protected void appendType(final String qualifiedName, final String simpleName, StringBuilder builder) {
 		if (allowsSimpleName(qualifiedName, simpleName)) {
 			builder.append(simpleName);
@@ -139,22 +152,19 @@ public class ImportManager {
 	}
 
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
-		return thisTypeQualifiedNames.contains(qualifiedName)
-				|| (!thisCollidesWithJavaLang && JAVA_LANG_PACK.matcher(qualifiedName).matches())
+		return thisTypeQualifiedNames.contains(qualifiedName) || (!thisCollidesWithJavaLang && JAVA_LANG_PACK.matcher(qualifiedName).matches())
 				|| equal(qualifiedName, simpleName);
 	}
 
 	protected boolean needsQualifiedName(String qualifiedName, String simpleName) {
-		return !organizeImports
-				|| (thisTypeSimpleNames.contains(simpleName) && !thisTypeQualifiedNames.contains(qualifiedName))
+		return !organizeImports || (thisTypeSimpleNames.contains(simpleName) && !thisTypeQualifiedNames.contains(qualifiedName))
 				|| CodeGenUtil.isJavaLangType(simpleName);
 	}
 
 	public boolean addImportFor(JvmType type) {
 		final String qualifiedName = type.getQualifiedName(innerTypeSeparator);
 		final String simpleName = type.getSimpleName();
-		if (!allowsSimpleName(qualifiedName, simpleName) && !needsQualifiedName(qualifiedName, simpleName)
-				&& !imports.containsKey(simpleName)) {
+		if (!allowsSimpleName(qualifiedName, simpleName) && !needsQualifiedName(qualifiedName, simpleName) && !imports.containsKey(simpleName)) {
 			imports.put(simpleName, qualifiedName);
 			return true;
 		}
