@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.common.types.ui" version="2">
+    <resource path="src/org/eclipse/xtext/common/types/ui/notification/DeltaConverter.java" type="org.eclipse.xtext.common.types.ui.notification.DeltaConverter">
+        <filter comment="Changed the constructor to take an explicit resource descriptions instance" id="338722907">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.ui.notification.DeltaConverter"/>
+                <message_argument value="DeltaConverter(IQualifiedNameConverter, TypeURIHelper)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

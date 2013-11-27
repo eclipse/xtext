@@ -2,6 +2,8 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="overridingGuiceModule" name="overridingGuiceModule" schema="schema/overridingGuiceModule.exsd"/>
+   <extension-point id="sharedStateContributingModule" name="sharedStateContributingModule" schema="schema/sharedStateContributingModule.exsd"/>
+   <extension-point id="eagerInitializationModule" name="eagerInitializationModule" schema="schema/eagerInitializationModule.exsd"/>
    <extension
         id="xtextBuilder"
         name="%XtextBuilder.name"
@@ -140,4 +142,10 @@
             requiredSourceLevel="1.4">
       </compilationParticipant>
    </extension>
+  <extension
+        point="org.eclipse.xtext.ui.shared.eagerInitializationModule">
+     <module
+           class="org.eclipse.xtext.ui.shared.internal.GlobalListenerModule">
+     </module>
+  </extension>
 </plugin>

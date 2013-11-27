@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.shared.internal;
 
-import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -17,13 +16,14 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
+import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
-import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -36,6 +36,7 @@ import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.shared.JdtHelper;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.AbstractModule;
@@ -55,7 +56,8 @@ public class SharedModule extends AbstractModule {
 		bind(IResourceServiceProvider.Registry.class).toInstance(IResourceServiceProvider.Registry.INSTANCE);
 		bind(IResourceSetProvider.class).to(SimpleResourceSetProvider.class);
 		bind(IExtensionRegistry.class).toInstance(Platform.getExtensionRegistry());
-		bind(IResourceChangeListener.class).annotatedWith(Names.named(ProjectOpenedOrClosedListener.class.getName())).to(ProjectOpenedOrClosedListener.class);
+		bind(BuildScheduler.class);
+		bind(IQualifiedNameConverter.class).to(IQualifiedNameConverter.DefaultImpl.class);
 
 		bind(IExternalContentSupport.IExternalContentProvider.class).to(IDirtyStateManager.class).in(Scopes.SINGLETON);
 		bind(IDirtyStateManager.class).to(DirtyStateManager.class).in(Scopes.SINGLETON);
@@ -81,6 +83,8 @@ public class SharedModule extends AbstractModule {
 		});
 
 		bind(IJdtHelper.class).to(JdtHelper.class).asEagerSingleton();
+		
+		bind(SharedStateContributionRegistry.class).to(SharedStateContributionRegistryImpl.class);
 
 		boolean parallel = false;
 		if (parallel) {
