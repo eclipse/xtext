@@ -7,9 +7,12 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
+import java.util.Iterator;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -34,10 +37,12 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -2180,6 +2185,59 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_76() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def String m(boolean b) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch \'a\' {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case \'b\': \'a\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case \'c\': {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("if ");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("return \'b\'");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("else");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("return \'c\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final XtendFile file = this.processWithoutException(_builder);
+    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
+    TreeIterator<EObject> _eAllContents = file.eAllContents();
+    Iterator<XIfExpression> _filter = Iterators.<XIfExpression>filter(_eAllContents, XIfExpression.class);
+    final XIfExpression ifExpression = IteratorExtensions.<XIfExpression>head(_filter);
+    XExpression _then = ifExpression.getThen();
+    Assert.assertNull(_then);
+    XExpression _else = ifExpression.getElse();
+    Assert.assertNull(_else);
+    LightweightTypeReference _actualType = resolvedTypes.getActualType(ifExpression);
+    Assert.assertNotNull(_actualType);
   }
   
   public XtendFile processWithoutException(final CharSequence input) throws Exception {

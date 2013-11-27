@@ -184,6 +184,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		protected boolean allVoid = true;
 		protected boolean allPrimitive = true;
 		protected boolean resultProcessed = false;
+		protected boolean nonNullResultProcessed = false;
 		private final ITypeComputationState state;
 		private final XExpression expression;
 		
@@ -194,7 +195,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 		
 		public void process(ITypeComputationResult result) {
 			resultProcessed = true;
-						
+			if (!result.getConformanceHints().isEmpty() /* equivalent to getActualExpressionType != null */) {
+				nonNullResultProcessed = true;
+			}
 			LightweightTypeReference expressionReturnType = result.getReturnType();
 			if (expressionReturnType != null) {
 				boolean isExit = result.getCheckedConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN);
@@ -217,6 +220,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 		}
 		
 		public void commit() {
+			if (!nonNullResultProcessed) {
+				AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
+				state.acceptActualType(anyType);
+			}
 			if (!resultProcessed) {
 				return;
 			}
