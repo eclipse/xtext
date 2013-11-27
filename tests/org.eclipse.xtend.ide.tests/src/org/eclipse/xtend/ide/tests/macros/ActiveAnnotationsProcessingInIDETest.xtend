@@ -143,7 +143,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		
 		val markers2 = userProject.project.findMarkers(IMarker.PROBLEM,true,-1).filter[getAttribute(IMarker.SEVERITY) == IMarker.SEVERITY_ERROR]
 		val buffer = new StringBuilder()
-		markers2.map[resource].toSet.filter(IFile).map[CharStreams.copy([|new InputStreamReader(it.contents)], buffer)]
+		markers2.map[resource].toSet.filter(IFile).forEach[CharStreams.copy([|new InputStreamReader(it.contents)], buffer)]
 		println(buffer)
 		assertEquals(markers2.map['file'+resource.fullPath.lastSegment+" - "+getAttribute(IMarker.MESSAGE)].join(","), 0, markers2.length)
 		

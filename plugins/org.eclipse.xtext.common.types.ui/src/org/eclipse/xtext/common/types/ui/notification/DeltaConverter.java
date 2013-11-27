@@ -101,13 +101,16 @@ public class DeltaConverter {
 	 */
 	private final IQualifiedNameConverter nameConverter;
 
+	/**
+	 * @since 2.5
+	 */
 	@Inject
-	public DeltaConverter(IQualifiedNameConverter nameConverter, TypeURIHelper uriHelper) {
+	public DeltaConverter(IQualifiedNameConverter nameConverter, TypeURIHelper uriHelper, IResourceDescriptions resourceDescriptions) {
 		this.nameConverter = nameConverter;
 		this.uriHelper = uriHelper;
+		this.resourceDescriptions = resourceDescriptions;
 	}
 
-	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
 	/**
