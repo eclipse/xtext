@@ -254,6 +254,67 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		doTestUpdateAtOffset(model, 170, 1, "apply", "EqualNodeModels.xtend");
 	}
 	
+	@Test public void testEqualNodeModels_06() throws Exception {
+		String model = "package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"@Data\n" + 
+				"class Case_0 {\n" + 
+				"	int id\n" + 
+				"\n" + 
+				"	def String foo(String a, String b) {\n" + 
+				"		var list = newArrayList()\n" + 
+				"		for(i: 0..list.size - 1) {\n" + 
+				"			println(i.toString + \" \" + list.get(i))\n" + 
+				"		}\n" + 
+				"		if (isUpper(a)) {\n" + 
+				"			another(a,b+'holla')\n" + 
+				"		} else {\n" + 
+				"			var x = a;\n" + 
+				"			for (y : b.toCharArray) {\n" + 
+				"				x = x+y\n" + 
+				"			}\n" + 
+				"			x\n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def isUpper(String s) {\n" + 
+				"		s.toUpperCase== s\n" + 
+				"	}\n" + 
+				"		\n" + 
+				"	def another(String x, String y) { \n" + 
+				"		y+x\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 385, 1, " ", "Case_0.xtend");
+	}
+	
+	@Test public void testEqualNodeModels_07() throws Exception {
+		String model = "package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"import .eclipse.xtend.lib.Property\n" + 
+				"\n" + 
+				"class Case_1 {\n" + 
+				"	@Property\n" + 
+				"	int id\n" + 
+				"\n" + 
+				"	def testFunction1() {\n" + 
+				"		42\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def testFunction2() {\n" + 
+				"		42\n" + 
+				"	} \n" + 
+				"		\n" + 
+				"	def Integer testFunction3() {\n" + 
+				"		42\n" + 
+				"	} \n" + 
+				"		\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 51, 1, "org", "Case_1.xtend");
+	}
+	
 	@Test public void testEqualModels_01() throws Exception {
 		String model = "package org.eclipse.xtend.core.tests.smoke\n" + 
 				"\n" + 
