@@ -32,6 +32,7 @@ import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,7 +68,6 @@ public class ImportURINavigationTest {
 		}, true);
 	}
 	
-
 	@Test
 	public void testNavigateToClasspathURI() throws Exception {
 		doTestNavigation(new IUnitOfWork<URI, IFile>() {
@@ -75,6 +75,11 @@ public class ImportURINavigationTest {
 				return URI.createURI("classpath:/first.importuriuitestlanguage");
 			}
 		}, false);
+	}
+	
+	@After
+	public void tearDown() {
+		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 	}
 
 	protected void doTestNavigation(IUnitOfWork<URI, IFile> uriComputation, boolean expectFQN) throws Exception {
