@@ -17,6 +17,8 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
 import org.eclipse.xtext.ui.containers.StrictJavaProjectsState;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
+import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.shared.JdtHelper;
 import org.junit.Test;
 
@@ -32,6 +34,7 @@ public class StrictJavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		result.setJdtHelper(new JdtHelper());
 		JavaProjectsStateHelper javaProjectsStateHelper = new JavaProjectsStateHelper();
 		javaProjectsStateHelper.setMapper(mapper);
+		javaProjectsStateHelper.setUriMapperExtensions((IStorage2UriMapperJdtExtensions) ((Storage2UriMapperImpl)mapper).getContribution());
 		javaProjectsStateHelper.setWorkspace(ResourcesPlugin.getWorkspace());
 		result.setHelper(javaProjectsStateHelper);
 		return result;

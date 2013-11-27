@@ -22,37 +22,37 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.util.Pair;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JarEntryAwareTrace extends StorageAwareTrace {
+public class JarEntryAwareTrace implements StorageAwareTraceContribution {
 
 	private static final Logger log = Logger.getLogger(JarEntryAwareTrace.class);
 	
-	@Override
-	protected URI resolvePath(URI path) {
-		if (!path.isRelative())
-			return path;
-		IStorage localStorage = getLocalStorage();
+	@Inject
+	private IStorage2UriMapperJdtExtensions uriMapperExtensions;
+	
+	public URI getResolvedPathOrNull(IStorage localStorage, URI path) {
 		if (localStorage instanceof IFile) {
 			IProject project = ((IFile) localStorage).getProject();
 			if (project != null) {
 				IJavaProject javaProject = JavaCore.create(project);
 				if (javaProject != null && javaProject.exists())
 					return resolvePath(javaProject, path);
-				return resolvePath(project, path);
+				return null;
 			}
 		} else if (localStorage instanceof IJarEntryResource) {
 			return resolvePath((IJarEntryResource) localStorage, path);
 		}
-		return path;
+		return null;
 	}
 	
 	protected URI resolvePath(IJarEntryResource jarEntry, URI path) {
 		IPackageFragmentRoot packageFragmentRoot = jarEntry.getPackageFragmentRoot();
 		try {
-			IStorage2UriMapperJdtExtensions uriMapperJdtExtensions = (IStorage2UriMapperJdtExtensions) getStorage2uriMapper();
-			Pair<URI, URI> pair = uriMapperJdtExtensions.getURIMapping(packageFragmentRoot);
+			Pair<URI, URI> pair = uriMapperExtensions.getURIMapping(packageFragmentRoot);
 			if (pair != null) {
 				URI first = pair.getFirst();
 				if (first != null)
@@ -79,7 +79,7 @@ public class JarEntryAwareTrace extends StorageAwareTrace {
 		} catch (JavaModelException e) {
 			log.error(e);
 		}
-		return resolvePath(javaProject.getProject(), path);
+		return null;
 	}
 	
 }

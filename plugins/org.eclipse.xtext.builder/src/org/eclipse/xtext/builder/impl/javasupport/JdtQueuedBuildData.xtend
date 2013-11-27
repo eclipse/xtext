@@ -20,6 +20,8 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta
 
 import static extension java.util.Collections.*
 import static extension org.eclipse.xtext.common.types.ui.notification.JavaBuilderState.*
+import com.google.inject.Inject
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -30,6 +32,11 @@ class JdtQueuedBuildData extends QueuedBuildData {
 	var Map<String, JavaBuilderState> javaBuildState
 
 	var Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltas
+	
+	@Inject
+	new(IStorage2UriMapper mapper) {
+		super(mapper)
+	}
 
 	override reset() {
 		super.reset

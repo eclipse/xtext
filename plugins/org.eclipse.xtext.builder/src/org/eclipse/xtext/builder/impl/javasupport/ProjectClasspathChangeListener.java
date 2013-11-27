@@ -51,10 +51,6 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 	@Inject 
 	private IDirtyStateManager dirtyStateManager;
 
-	public ProjectClasspathChangeListener() {
-		JavaCore.addElementChangedListener(this);
-	}
-
 	public void elementChanged(ElementChangedEvent event) {
 		if (workspace != null && workspace.isAutoBuilding()) {
 			try {

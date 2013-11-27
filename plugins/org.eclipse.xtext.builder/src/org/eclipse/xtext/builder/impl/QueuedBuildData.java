@@ -39,14 +39,15 @@ public class QueuedBuildData {
 	private LinkedList<URI> uris;
 	private Collection<IResourceDescription.Delta> deltas;
 	private Map<String, LinkedList<URI>> projectNameToChangedResource;
+	
+	private final IStorage2UriMapper mapper;
 
 	@Inject
-	private IStorage2UriMapper mapper;
-
-	public QueuedBuildData() {
+	public QueuedBuildData(IStorage2UriMapper mapper) {
+		this.mapper = mapper;
 		reset();
 	}
-
+	
 	public void reset() {
 		uris = Lists.newLinkedList();
 		deltas = Lists.newArrayList();
@@ -56,7 +57,7 @@ public class QueuedBuildData {
 	public final synchronized boolean needRebuild(IProject project) {
 		return doNeedRebuild(project);
 	}
-
+	
 	/**
 	 * <p>
 	 * Returns <code>true</code> if rebuild is required; otherwise <code>false</code>.
