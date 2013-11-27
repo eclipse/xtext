@@ -1810,11 +1810,18 @@ public class JvmModelGenerator implements IGenerator {
   
   protected String makeJavaIdentifier(final String name) {
     String _xifexpression = null;
-    boolean _isJavaKeyword = this.keywords.isJavaKeyword(name);
-    if (_isJavaKeyword) {
-      _xifexpression = (name + "_");
+    boolean _equals = Objects.equal(name, null);
+    if (_equals) {
+      return "__unknown__";
     } else {
-      _xifexpression = name;
+      String _xifexpression_1 = null;
+      boolean _isJavaKeyword = this.keywords.isJavaKeyword(name);
+      if (_isJavaKeyword) {
+        _xifexpression_1 = (name + "_");
+      } else {
+        _xifexpression_1 = name;
+      }
+      _xifexpression = _xifexpression_1;
     }
     return _xifexpression;
   }
