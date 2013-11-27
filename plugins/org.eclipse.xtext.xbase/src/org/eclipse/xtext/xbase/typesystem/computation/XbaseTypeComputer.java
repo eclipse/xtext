@@ -806,7 +806,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
 			if (forExpressionType != null) {
-				if (forExpressionType.isResolved() && !forExpressionType.isAny() && (iterable.isAssignableFrom(forExpressionType) || forExpressionType.isArray())) {
+				if (!forExpressionType.isAny() && (iterable.isAssignableFrom(forExpressionType) || forExpressionType.isArray())) {
 					iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
 				}
 				parameterType = getElementOrComponentType(forExpressionType, state);
