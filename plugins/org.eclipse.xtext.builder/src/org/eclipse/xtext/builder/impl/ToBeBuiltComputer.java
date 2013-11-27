@@ -24,16 +24,20 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.UriValidator;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
- * Encapsulates the decision about the resources that
- * should be built.
+ * Encapsulates the decision about the resources that should be built.
  * 
+ * The resource processing can be extended by means of {@link ToBeBuiltComputerContribution contributions}. 
+ * 
+ * @see ToBeBuiltComputerContribution
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
@@ -48,8 +52,25 @@ public class ToBeBuiltComputer {
 	@Inject
 	private UriValidator uriValidator;
 
+	private ImmutableList<? extends ToBeBuiltComputerContribution> contributions;
+
+	@Inject
+	private void initializeContributions(SharedStateContributionRegistry registry) {
+		contributions = registry.getContributedInstances(ToBeBuiltComputerContribution.class);
+	}
+
+	/**
+	 * Announce that the given project was removed / closed or a clean build was triggered. 
+	 * All contained resources are considered to be no longer available.
+	 * 
+	 * @see ToBeBuiltComputerContribution#removeProject(ToBeBuilt, IProject, IProgressMonitor)
+	 */
 	public ToBeBuilt removeProject(IProject project, IProgressMonitor monitor) {
-		return doRemoveProject(project, monitor);
+		ToBeBuilt toBeBuilt = doRemoveProject(project, monitor);
+		for (int i = 0, size = contributions.size(); i < size; i++) {
+			contributions.get(i).removeProject(toBeBuilt, project, monitor);
+		}
+		return toBeBuilt;
 	}
 
 	protected ToBeBuilt doRemoveProject(IProject project, IProgressMonitor monitor) {
@@ -60,7 +81,7 @@ public class ToBeBuiltComputer {
 			Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(description.getURI());
 			boolean onlyOnThisProject = true;
 			Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
-			while(iterator.hasNext() && onlyOnThisProject) {
+			while (iterator.hasNext() && onlyOnThisProject) {
 				Pair<IStorage, IProject> storage2Project = iterator.next();
 				final boolean isSameProject = project.equals(storage2Project.getSecond());
 				onlyOnThisProject = isSameProject || !storage2Project.getSecond().isAccessible();
@@ -72,18 +93,20 @@ public class ToBeBuiltComputer {
 		return result;
 	}
 
+	/**
+	 * Recovery build was triggered, remove all cached information for resources that are no
+	 * longer contained in the project.
+	 */
 	public ToBeBuilt updateProjectNewResourcesOnly(IProject project, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingReosurces, 1);
 		progress.subTask(Messages.ToBeBuiltComputer_CollectingReosurces);
 		ToBeBuilt toBeBuilt = updateProject(project, progress.newChild(1));
-		Iterable<URI> existingURIs = Iterables.transform(
-				builderState.getAllResourceDescriptions(), 
+		Iterable<URI> existingURIs = Iterables.transform(builderState.getAllResourceDescriptions(),
 				new Function<IResourceDescription, URI>() {
 					public URI apply(IResourceDescription from) {
 						return from.getURI();
 					}
-				}
-		);
+				});
 		for (URI existingURI : existingURIs) {
 			toBeBuilt.getToBeDeleted().remove(existingURI);
 			toBeBuilt.getToBeUpdated().remove(existingURI);
@@ -91,6 +114,14 @@ public class ToBeBuiltComputer {
 		return toBeBuilt;
 	}
 
+	/**
+	 * Full build was triggered. Update all information that is available for the given project.
+	 * All contained resources are processed by {@link #updateStorage(IProgressMonitor, ToBeBuilt, IStorage)}.
+	 * 
+	 * @see #updateStorage(IProgressMonitor, ToBeBuilt, IStorage)
+	 * @see #isHandled(IFolder)
+	 * @see ToBeBuiltComputerContribution#updateProject(ToBeBuilt, IProject, IProgressMonitor)
+	 */
 	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException {
 		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingReosurces, 1);
 		progress.subTask(Messages.ToBeBuiltComputer_CollectingReosurces);
@@ -108,14 +139,24 @@ public class ToBeBuiltComputer {
 					return updateStorage(null, toBeBuilt, (IStorage) resource);
 				}
 				if (resource instanceof IFolder) {
-					return isHandled((IFolder)resource);
+					return isHandled((IFolder) resource);
 				}
 				return true;
 			}
 		});
+		for (int i = 0; i < contributions.size(); i++) {
+			contributions.get(i).updateProject(toBeBuilt, project, monitor);
+		}
 		return toBeBuilt;
 	}
 
+	/**
+	 * Update the information that is available for the given storage. This is used by a full build
+	 * and the incremental build.
+	 * 
+	 * @see #isHandled(IStorage)
+	 * @see #getUri(IStorage)
+	 */
 	public boolean updateStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
 		if (!isHandled(storage))
 			return true;
@@ -126,7 +167,18 @@ public class ToBeBuiltComputer {
 		return true;
 	}
 
+	/**
+	 * Removes the information that is associated with the given storage. Used by the incremental build.
+	 * 
+	 * @see #isHandled(IStorage)
+	 * @see ToBeBuiltComputerContribution#removeStorage(ToBeBuilt, IStorage, IProgressMonitor)
+	 */
 	public boolean removeStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
+		for (int i = 0; i < contributions.size(); i++) {
+			if (contributions.get(i).removeStorage(toBeBuilt, storage, monitor)) {
+				return true;
+			}
+		}
 		if (!isHandled(storage))
 			return true;
 		URI uri = getUri(storage);
@@ -136,32 +188,57 @@ public class ToBeBuiltComputer {
 		return true;
 	}
 
-	protected boolean isHandled(IStorage resource) {
-		return resource instanceof IFile;
-	}
-	
 	/**
-	 * Return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
-	 * Defaults to <code>true</code> for all folders.
-	 * @see org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer#isHandled(IFolder)
-	 * @return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
+	 * Returns <code>true</code> if the storage should be processed by the builder.
+	 * That is, it is known to the {@link UriValidator} and a {@link ToBeBuiltComputerContribution contribution}
+	 * can possibly manage it or it is a file.
+	 * 
+	 * @see UriValidator#isPossiblyManaged(IStorage)
+	 * @see ToBeBuiltComputerContribution#isPossiblyHandled(IStorage)
+	 */
+	protected boolean isHandled(IStorage storage) {
+		boolean possiblyManaged = false;
+		for (int i = 0; i < contributions.size() && !possiblyManaged; i++) {
+			possiblyManaged = contributions.get(i).isPossiblyHandled(storage);
+		}
+		if ((possiblyManaged || storage instanceof IFile) && uriValidator.isPossiblyManaged(storage)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Return <code>true</code> if the folder should be traversed. <code>False</code> otherwise. Defaults to
+	 * <code>true</code> for all folders. If a contribution rejects the folder, <code>false</code> is returned.
+	 * 
+	 * @see org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer#isRejected(IFolder)
+	 * @return <code>true</code> if the folder should be traversed. <code>false</code> otherwise.
 	 * @since 2.1
 	 */
 	protected boolean isHandled(IFolder folder) {
+		for (int i = 0; i < contributions.size(); i++) {
+			if (contributions.get(i).isRejected(folder)) {
+				return false;
+			}
+		}
 		return true;
 	}
 
+	/**
+	 * Returns the URI of the given storage if it is buildable.
+	 */
 	protected URI getUri(IStorage file) {
 		URI uri = mapper.getUri(file);
 		return uri != null && isValid(uri, file) ? uri : null;
 	}
 
+	/**
+	 * Ask the {@link UriValidator} whether the storage is buildable.
+	 * 
+	 * @see UriValidator#canBuild(URI, IStorage)
+	 */
 	protected boolean isValid(URI uri, IStorage storage) {
 		return uriValidator.canBuild(uri, storage);
-	}
-	
-	protected IStorage2UriMapper getMapper() {
-		return mapper;
 	}
 
 }

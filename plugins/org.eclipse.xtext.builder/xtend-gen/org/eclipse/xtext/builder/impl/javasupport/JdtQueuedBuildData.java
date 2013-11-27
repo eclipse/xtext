@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.xtext.builder.impl.QueuedBuildData;
+import org.eclipse.xtext.builder.impl.QueuedBuildDataContribution;
 import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
 import org.eclipse.xtext.common.types.ui.notification.JavaBuilderState;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -31,46 +31,38 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class JdtQueuedBuildData extends QueuedBuildData {
+public class JdtQueuedBuildData implements QueuedBuildDataContribution {
   private Map<String,JavaBuilderState> javaBuildState;
   
   private Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltas;
   
   public void reset() {
-    super.reset();
     HashMap<String,JavaBuilderState> _newHashMap = CollectionLiterals.<String, JavaBuilderState>newHashMap();
     this.javaBuildState = _newHashMap;
     ArrayList<UnconfirmedStructuralChangesDelta> _newArrayList = CollectionLiterals.<UnconfirmedStructuralChangesDelta>newArrayList();
     this.unconfirmedDeltas = _newArrayList;
   }
   
+  /**
+   * Public for testing purpose
+   */
   public Collection<UnconfirmedStructuralChangesDelta> getUnconfirmedDeltas() {
     Collection<UnconfirmedStructuralChangesDelta> _unmodifiableCollection = Collections.<UnconfirmedStructuralChangesDelta>unmodifiableCollection(this.unconfirmedDeltas);
     return _unmodifiableCollection;
   }
   
-  public void doQueueChanges(final Collection<IResourceDescription.Delta> queuedDeltas) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(queuedDeltas, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      int _size = queuedDeltas.size();
-      boolean _equals_1 = (_size == 0);
-      _or = (_equals || _equals_1);
-    }
-    if (_or) {
-      return;
-    }
-    for (final IResourceDescription.Delta delta : queuedDeltas) {
-      boolean _matched = false;
-      if (!_matched) {
-        if (delta instanceof UnconfirmedStructuralChangesDelta) {
-          _matched=true;
+  public boolean queueChange(final IResourceDescription.Delta delta) {
+    boolean _switchResult = false;
+    boolean _matched = false;
+    if (!_matched) {
+      if (delta instanceof UnconfirmedStructuralChangesDelta) {
+        _matched=true;
+        boolean _xblockexpression = false;
+        {
           final IProject project = ((UnconfirmedStructuralChangesDelta)delta).getProject();
           JavaBuilderState state = this.javaBuildState.get(project);
-          boolean _equals_2 = Objects.equal(state, null);
-          if (_equals_2) {
+          boolean _equals = Objects.equal(state, null);
+          if (_equals) {
             String _name = project.getName();
             JavaBuilderState _lastBuiltState = JavaBuilderState.getLastBuiltState(project);
             JavaBuilderState _state = state = _lastBuiltState;
@@ -79,16 +71,18 @@ public class JdtQueuedBuildData extends QueuedBuildData {
           Integer _buildNumber = state.getBuildNumber();
           ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());
           this.unconfirmedDeltas.add(((UnconfirmedStructuralChangesDelta)delta));
+          _xblockexpression = (true);
         }
-      }
-      if (!_matched) {
-        Collection<IResourceDescription.Delta> _deltas = this.getDeltas();
-        _deltas.add(delta);
+        _switchResult = _xblockexpression;
       }
     }
+    if (!_matched) {
+      _switchResult = false;
+    }
+    return _switchResult;
   }
   
-  public boolean doNeedRebuild(final IProject it) {
+  public boolean needsRebuild(final IProject it, final Collection<IResourceDescription.Delta> deltas) {
     boolean _xblockexpression = false;
     {
       String _name = it.getName();
@@ -120,8 +114,7 @@ public class JdtQueuedBuildData extends QueuedBuildData {
               _or = (_namesIntersect || _namesIntersect_1);
             }
             if (_or) {
-              Collection<IResourceDescription.Delta> _deltas = JdtQueuedBuildData.this.getDeltas();
-              _deltas.add(it);
+              deltas.add(it);
             }
           }
         };
@@ -135,7 +128,7 @@ public class JdtQueuedBuildData extends QueuedBuildData {
     return _xblockexpression;
   }
   
-  public boolean doNeedRebuild(final JavaBuilderState it, final Procedure1<? super UnconfirmedStructuralChangesDelta> processor) {
+  protected boolean doNeedRebuild(final JavaBuilderState it, final Procedure1<? super UnconfirmedStructuralChangesDelta> processor) {
     boolean _xblockexpression = false;
     {
       final Iterator<UnconfirmedStructuralChangesDelta> i = this.unconfirmedDeltas.iterator();
@@ -174,7 +167,7 @@ public class JdtQueuedBuildData extends QueuedBuildData {
     return _xblockexpression;
   }
   
-  public boolean namesIntersect(final IResourceDescription resourceDescription, final Set<QualifiedName> names) {
+  protected boolean namesIntersect(final IResourceDescription resourceDescription, final Set<QualifiedName> names) {
     boolean _xblockexpression = false;
     {
       boolean _equals = Objects.equal(resourceDescription, null);

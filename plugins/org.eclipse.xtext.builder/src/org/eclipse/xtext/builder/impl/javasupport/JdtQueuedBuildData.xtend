@@ -12,7 +12,6 @@ import java.util.Collection
 import java.util.Map
 import java.util.Set
 import org.eclipse.core.resources.IProject
-import org.eclipse.xtext.builder.impl.QueuedBuildData
 import org.eclipse.xtext.common.types.ui.notification.JavaBuilderState
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IResourceDescription
@@ -20,49 +19,48 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta
 
 import static extension java.util.Collections.*
 import static extension org.eclipse.xtext.common.types.ui.notification.JavaBuilderState.*
+import org.eclipse.xtext.builder.impl.QueuedBuildDataContribution
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 @Singleton
-class JdtQueuedBuildData extends QueuedBuildData {
+class JdtQueuedBuildData implements QueuedBuildDataContribution {
 
 	var Map<String, JavaBuilderState> javaBuildState
 
 	var Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltas
-
+	
 	override reset() {
-		super.reset
 		javaBuildState = newHashMap
 		unconfirmedDeltas = newArrayList
 	}
 
+	/**
+	 * Public for testing purpose
+	 */
 	def getUnconfirmedDeltas() {
 		unconfirmedDeltas.unmodifiableCollection
 	}
 
-	override doQueueChanges(Collection<Delta> queuedDeltas) {
-		if (queuedDeltas == null || queuedDeltas.size == 0) {
-			return
-		}
-		for (delta : queuedDeltas) {
-			switch delta {
-				UnconfirmedStructuralChangesDelta: {
-					val project = delta.project
-					var state = javaBuildState.get(project)
-					if (state == null) {
-						javaBuildState.put(project.name, state = project.lastBuiltState)
-					}
-					delta.buildNumber = state.buildNumber
-					unconfirmedDeltas += delta
+	override queueChange(Delta delta) {
+		switch delta {
+			UnconfirmedStructuralChangesDelta: {
+				val project = delta.project
+				var state = javaBuildState.get(project)
+				if (state == null) {
+					javaBuildState.put(project.name, state = project.lastBuiltState)
 				}
-				default:
-					deltas += delta
+				delta.buildNumber = state.buildNumber
+				unconfirmedDeltas += delta
+				true
 			}
+			default:
+				false
 		}
 	}
 
-	override doNeedRebuild(IProject it) {
+	override needsRebuild(IProject it, Collection<Delta> deltas) {
 		val oldState = javaBuildState.get(name)
 		val newState = lastBuiltState
 		newState.doNeedRebuild(
@@ -78,7 +76,7 @@ class JdtQueuedBuildData extends QueuedBuildData {
 			})
 	}
 
-	def doNeedRebuild(JavaBuilderState it, (UnconfirmedStructuralChangesDelta)=>void processor) {
+	protected def doNeedRebuild(JavaBuilderState it, (UnconfirmedStructuralChangesDelta)=>void processor) {
 		val i = unconfirmedDeltas.iterator
 		while (i.hasNext) {
 			val unconfirmed = i.next
@@ -92,7 +90,7 @@ class JdtQueuedBuildData extends QueuedBuildData {
 		unconfirmedDeltas.size != 0
 	}
 
-	def namesIntersect(IResourceDescription resourceDescription, Set<QualifiedName> names) {
+	protected def namesIntersect(IResourceDescription resourceDescription, Set<QualifiedName> names) {
 		if (resourceDescription == null) {
 			return false
 		}

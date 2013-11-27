@@ -12,10 +12,14 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jdt.core.ElementChangedEvent;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.builder.JavaEditorExtension;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.builder.impl.QueuedBuildData;
+import org.eclipse.xtext.builder.impl.javasupport.BuilderDeltaConverter;
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
 import org.eclipse.xtext.builder.impl.javasupport.JdtQueuedBuildData;
 import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
@@ -23,6 +27,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -52,12 +57,32 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   protected WorkbenchTestHelper testHelper;
   
   @Inject
-  protected JdtQueuedBuildData queuedBuildData;
+  private IStorage2UriMapper mapper;
   
   @Inject
-  protected JavaChangeQueueFiller javaChangeQueueFiller;
+  protected BuilderDeltaConverter converter;
+  
+  protected QueuedBuildData queuedBuildData;
+  
+  protected JdtQueuedBuildData queuedBuildDataContribution;
+  
+  protected JavaChangeQueueFiller queueFiller;
+  
+  public void setUp() throws Exception {
+    super.setUp();
+    JdtQueuedBuildData _jdtQueuedBuildData = new JdtQueuedBuildData();
+    this.queuedBuildDataContribution = _jdtQueuedBuildData;
+    QueuedBuildData _queuedBuildData = new QueuedBuildData(this.mapper, this.queuedBuildDataContribution);
+    this.queuedBuildData = _queuedBuildData;
+    JavaChangeQueueFiller _javaChangeQueueFiller = new JavaChangeQueueFiller(this.queuedBuildData, this.converter);
+    this.queueFiller = _javaChangeQueueFiller;
+    JavaCore.addElementChangedListener(this.queueFiller, ElementChangedEvent.POST_CHANGE);
+  }
   
   public void tearDown() throws Exception {
+    JavaCore.removeElementChangedListener(this.queueFiller);
+    this.queueFiller = null;
+    this.queuedBuildData = null;
     this.testHelper.tearDown();
     super.tearDown();
   }
@@ -215,7 +240,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   
   public void confirmDeltas() {
     final boolean result = this.tryConfirmDeltas();
-    final Collection<UnconfirmedStructuralChangesDelta> deltas = this.queuedBuildData.getUnconfirmedDeltas();
+    final Collection<UnconfirmedStructuralChangesDelta> deltas = this.queuedBuildDataContribution.getUnconfirmedDeltas();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("There are unconfirmed changes: ");
     HashSet<String> _exportedNames = this.getExportedNames(deltas);

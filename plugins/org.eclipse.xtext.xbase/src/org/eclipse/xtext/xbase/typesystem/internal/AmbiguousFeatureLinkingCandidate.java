@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -21,7 +20,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -86,13 +84,13 @@ public class AmbiguousFeatureLinkingCandidate extends AbstractAmbiguousLinkingCa
 		if (expression.isExplicitOperationCallOrBuilderSyntax()) {
 			return null;
 		}
-		Set<String> data = Sets.newHashSet();
+		Set<String> data = Sets.newLinkedHashSet();
 		for (ILinkingCandidate candidate : getAlternatives()) {
 			JvmIdentifiableElement feature = candidate.getFeature();
 			String simpleName = feature.getSimpleName();
 			data.add(simpleName + "()");
 		}
-		return data.toArray(new String[0]);
+		return data.toArray(new String[data.size()]);
 	}
 
 }

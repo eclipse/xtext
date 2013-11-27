@@ -8,6 +8,54 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
+        <filter comment="Intentional extends clause" id="571473929">
+            <message_arguments>
+                <message_argument value="ProjectionViewer"/>
+                <message_argument value="XtextSourceViewer"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/hover/html/XtextBrowserInformationControl.java" type="org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControl">
+        <filter comment="Intentional extends clause" id="576720909">
+            <message_arguments>
+                <message_argument value="BrowserInformationControl"/>
+                <message_argument value="XtextBrowserInformationControl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/hover/html/XtextBrowserInformationControlInput.java" type="org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="BrowserInformationControlInput"/>
+                <message_argument value="XtextBrowserInformationControlInput"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/info/ResourceWorkingCopyFileEditorInput.java" type="org.eclipse.xtext.ui.editor.info.ResourceWorkingCopyFileEditorInput">
+        <filter comment="Intentional extends clause" id="571473929">
+            <message_arguments>
+                <message_argument value="FileEditorInput"/>
+                <message_argument value="ResourceWorkingCopyFileEditorInput"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/model/JarFileMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.model.JarFileMarkerAnnotationModel">
+        <filter comment="Intentional extends clause" id="571473929">
+            <message_arguments>
+                <message_argument value="ResourceMarkerAnnotationModel"/>
+                <message_argument value="JarFileMarkerAnnotationModel"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/quickfix/XtextResourceMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel">
+        <filter comment="Intentional extends clause" id="571473929">
+            <message_arguments>
+                <message_argument value="ResourceMarkerAnnotationModel"/>
+                <message_argument value="XtextResourceMarkerAnnotationModel"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/notification/StateChangeEventBroker.java" type="org.eclipse.xtext.ui.notification.StateChangeEventBroker">
         <filter id="338886760">
             <message_arguments>
@@ -21,6 +69,49 @@
             <message_arguments>
                 <message_argument value="TextChange"/>
                 <message_argument value="EditorDocumentChange"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/IStorage2UriMapperJdtExtensions.java" type="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions">
+        <filter comment="Refactored towards greater extensibility" id="404791350">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/Storage2UriMapperImpl.java" type="org.eclipse.xtext.ui.resource.Storage2UriMapperImpl">
+        <filter comment="Removed deprecated nullimpl method" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperImpl"/>
+                <message_argument value="resourceChanged(IResourceChangeEvent)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/Storage2UriMapperJavaImpl.java" type="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl">
+        <filter id="337682486">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Refactored towards better extensibility" id="338849923">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/XtextResourceSetProvider.java" type="org.eclipse.xtext.ui.resource.XtextResourceSetProvider">
+        <filter comment="Moved initialization of resource set to IResourceSetInitializer" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.XtextResourceSetProvider"/>
+                <message_argument value="computePlatformURIMap(IJavaProject)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/validation/AbstractValidatorConfigurationBlock.java" type="org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock">
+        <filter comment="Intention extends clause" id="576720909">
+            <message_arguments>
+                <message_argument value="OptionsConfigurationBlock"/>
+                <message_argument value="AbstractValidatorConfigurationBlock"/>
             </message_arguments>
         </filter>
     </resource>

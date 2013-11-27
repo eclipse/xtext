@@ -13,6 +13,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
@@ -24,7 +25,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Binder;
@@ -38,13 +39,6 @@ public class SharedStateModule extends AbstractGenericModule {
 
 	public Provider<IStorage2UriMapper> provideIStorage2UriMapper() {
 		return Access.getIStorage2UriMapper();
-	}
-	
-	/**
-	 * @since 2.4
-	 */
-	public Provider<IStorage2UriMapperJdtExtensions> provideIStorage2UriMapperJdtExtensions() {
-		return Access.getIStorage2UriMapperJdtExtensions();
 	}
 	
 	/**
@@ -96,6 +90,20 @@ public class SharedStateModule extends AbstractGenericModule {
 	 */
 	public Provider<IJdtHelper> provideJdtHelper() {
 		return Access.getJdtHelper();
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public Provider<SharedStateContributionRegistry> provideSharedStateContributionRegistry() {
+		return Access.getSharedStateContributionRegistry();
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public Provider<QueuedBuildData> provideQueuedBuildData() {
+		return Access.getQueuedBuildData();
 	}
 
 	public Provider<IWorkspace> provideIWorkspace() {

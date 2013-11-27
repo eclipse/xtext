@@ -11,18 +11,22 @@ import java.util.AbstractQueue;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -31,30 +35,136 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
+ * An extensible implementation that allows third party plugins to contribute deltas for changes which should be
+ * processed by the Xtext builder in subsequent runs.
+ * 
+ * Clients who want to contribute plain {@link org.eclipse.xtext.resource.IResourceDescription.Delta deltas} should use
+ * {@link #queueChanges(List)} or {@link #queueChange(Delta)} to announce a delta. If a client wants to announce a
+ * special kind of delta, a {@link QueuedBuildDataContribution} could be necessary that can handle this contribution.
+ * 
+ * @see QueuedBuildDataContribution
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
 public class QueuedBuildData {
 
+	/**
+	 * A composite structure for {@link QueuedBuildDataContribution contributions}.
+	 * 
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	public static class CompositeContribution implements QueuedBuildDataContribution {
+
+		private final List<? extends QueuedBuildDataContribution> components;
+
+		public CompositeContribution(List<? extends QueuedBuildDataContribution> components) {
+			this.components = components;
+		}
+
+		/**
+		 * Resets all known components.
+		 */
+		public void reset() {
+			for (int i = 0; i < components.size(); i++) {
+				components.get(i).reset();
+			}
+		}
+
+		/**
+		 * Ask each component to handle the delta. Stop on the first success.
+		 */
+		public boolean queueChange(Delta delta) {
+			for (int i = 0; i < components.size(); i++) {
+				QueuedBuildDataContribution contribution = components.get(i);
+				if (contribution.queueChange(delta)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/**
+		 * Ask each component whether a rebuild is necessary. Each contribution gets the chance to enhance the given
+		 * list of deltas.
+		 */
+		public boolean needsRebuild(IProject project, Collection<Delta> deltas) {
+			boolean result = false;
+			for (int i = 0; i < components.size(); i++) {
+				QueuedBuildDataContribution contribution = components.get(i);
+				if (contribution.needsRebuild(project, deltas)) {
+					result = true;
+				}
+			}
+			return result;
+		}
+
+	}
+
+	public static class NullContribution implements QueuedBuildDataContribution {
+
+		public void reset() {
+			// nothing to do
+		}
+
+		public boolean queueChange(Delta delta) {
+			// nothing to do
+			return false;
+		}
+
+		public boolean needsRebuild(IProject project, Collection<Delta> deltas) {
+			// nothing to do
+			return false;
+		}
+
+	}
+
 	private LinkedList<URI> uris;
 	private Collection<IResourceDescription.Delta> deltas;
 	private Map<String, LinkedList<URI>> projectNameToChangedResource;
 
-	@Inject
-	private IStorage2UriMapper mapper;
+	private QueuedBuildDataContribution contribution;
+	private final IStorage2UriMapper mapper;
 
-	public QueuedBuildData() {
+	@Inject
+	public QueuedBuildData(IStorage2UriMapper mapper) {
+		this.mapper = mapper;
+	}
+
+	@Inject
+	private void initializeContributions(SharedStateContributionRegistry registry) {
+		contribution = getContribution(registry.getContributedInstances(QueuedBuildDataContribution.class));
 		reset();
+	}
+
+	/**
+	 * Public for testing purpose
+	 * 
+	 * @noreference This constructor is not intended to be referenced by clients.
+	 */
+	public QueuedBuildData(IStorage2UriMapper mapper, QueuedBuildDataContribution contribution) {
+		this.mapper = mapper;
+		this.contribution = contribution;
+		reset();
+	}
+
+	private QueuedBuildDataContribution getContribution(
+			ImmutableList<? extends QueuedBuildDataContribution> contributions) {
+		switch (contributions.size()) {
+			case 0:
+				return new NullContribution();
+			case 1:
+				return contributions.get(0);
+			default:
+				return new CompositeContribution(contributions);
+		}
 	}
 
 	public void reset() {
 		uris = Lists.newLinkedList();
 		deltas = Lists.newArrayList();
 		projectNameToChangedResource = Maps.newHashMap();
-	}
-
-	public final synchronized boolean needRebuild(IProject project) {
-		return doNeedRebuild(project);
+		contribution.reset();
 	}
 
 	/**
@@ -63,20 +173,23 @@ public class QueuedBuildData {
 	 * </p>
 	 * 
 	 * @param project
-	 *            - a project
-	 * @return <code>true</code> if rebuild is required; otherwise <code>false</code>
+	 *            the project that may have to be rebuild.
+	 * @return <code>true</code> if rebuild is required; otherwise <code>false</code>. Default is <code>false</code>.
+	 * @see QueuedBuildDataContribution#needsRebuild(IProject, Collection)
 	 */
-	protected boolean doNeedRebuild(IProject project) {
-		return false;
+	public synchronized boolean needRebuild(IProject project) {
+		return contribution.needsRebuild(project, deltas);
 	}
 
-	public synchronized void queueChanges(Collection<IResourceDescription.Delta> deltas) {
-		doQueueChanges(deltas);
+	public synchronized void queueChanges(@NonNull List<IResourceDescription.Delta> deltas) {
+		for (int i = 0, size = deltas.size(); i < size; i++) {
+			queueChange(deltas.get(i));
+		}
 	}
 
-	protected void doQueueChanges(Collection<Delta> deltas) {
-		if (deltas != null && !deltas.isEmpty()) {
-			this.deltas.addAll(deltas);
+	public synchronized void queueChange(@NonNull IResourceDescription.Delta delta) {
+		if (!contribution.queueChange(delta)) {
+			deltas.add(delta);
 		}
 	}
 
@@ -109,7 +222,7 @@ public class QueuedBuildData {
 		}
 	}
 
-	public Collection<IResourceDescription.Delta> getAndRemovePendingDeltas() {
+	public synchronized Collection<IResourceDescription.Delta> getAndRemovePendingDeltas() {
 		Collection<IResourceDescription.Delta> result = deltas;
 		deltas = Lists.newArrayList();
 		return result;
@@ -157,19 +270,4 @@ public class QueuedBuildData {
 		return Iterables.concat(uris, Iterables.concat(projectNameToChangedResource.values()));
 	}
 
-	protected IStorage2UriMapper getMapper() {
-		return mapper;
-	}
-
-	protected Collection<IResourceDescription.Delta> getDeltas() {
-		return deltas;
-	}
-
-	protected Map<String, LinkedList<URI>> getProjectNameToChangedResource() {
-		return projectNameToChangedResource;
-	}
-
-	protected LinkedList<URI> getUris() {
-		return uris;
-	}
 }
