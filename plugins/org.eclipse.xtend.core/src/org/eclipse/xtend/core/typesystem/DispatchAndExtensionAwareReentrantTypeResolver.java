@@ -445,6 +445,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					preparedResolvedTypes.put(dispatchCase, null);
 					OperationBodyComputationState state = new DispatchOperationBodyComputationState(dispatchCaseResolvedTypes, 
 							dispatchCase.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), dispatchCase, dispatcher);
+					addExtensionProviders(state, dispatchCase.getParameters());
 					ITypeComputationResult dispatchCaseResult = state.computeTypes();
 					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
 						if (declaredDispatcherType == null) {
