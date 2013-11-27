@@ -157,7 +157,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       boolean _contains = code.contains("import");
       Assert.assertFalse(_contains);
       boolean _contains_1 = code.contains("java.lang.String foo");
-      Assert.assertTrue(_contains_1);
+      Assert.assertTrue(code, _contains_1);
       String _identifier_1 = clazz.getIdentifier();
       final Class<? extends Object> compiledClass = this.javaCompiler.compileToClass(_identifier_1, code);
       Resource _eResource_4 = expression.eResource();

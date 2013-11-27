@@ -47,6 +47,44 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testInnerTypeImports_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo extends types.SomeClassWithNestedInterface {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override types.SomeClassWithNestedInterface.String convert(java.lang.String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return null;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import types.SomeClassWithNestedInterface;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo extends SomeClassWithNestedInterface {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public SomeClassWithNestedInterface.String convert(final java.lang.String s) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug411861() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class Test {");
