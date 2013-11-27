@@ -17,6 +17,72 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 
 	@Inject protected IFilePostProcessor postProcessor
 
+
+
+	@Test
+	def testBug411861() {
+		assertCompilesTo('''
+			public class Test {
+			  // does not work, Java error
+			  def <T,R> nonWorkingExample((T)=>R... functionList) {
+			    var value = 0
+			    for (function : functionList)
+			    {
+			      value = value + 1
+			    }
+			    return value
+			  }
+			  
+			  // does not work, Java error
+			  def <T> nonWorkingExample2(T... list) {
+			    var value = 0
+			    for (loc_item : list) {
+			      value = value + 1
+			    }
+			    return value
+			  }
+			  
+			  // does not work, Java error
+			  def <T> nonWorkingExample3(T[] list) {
+			    var value = 0
+			    for (loc_item : list) {
+			      value = value + 1
+			    }
+			    return value
+			  }
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  public <T extends Object, R extends Object> int nonWorkingExample(final Function1<? super T,? extends R>... functionList) {
+			    int value = 0;
+			    for (final Function1<? super T,? extends R> function : functionList) {
+			      value = (value + 1);
+			    }
+			    return value;
+			  }
+			  
+			  public <T extends Object> int nonWorkingExample2(final T... list) {
+			    int value = 0;
+			    for (final T loc_item : list) {
+			      value = (value + 1);
+			    }
+			    return value;
+			  }
+			  
+			  public <T extends Object> int nonWorkingExample3(final T[] list) {
+			    int value = 0;
+			    for (final T loc_item : list) {
+			      value = (value + 1);
+			    }
+			    return value;
+			  }
+			}
+		''')
+	}
+	
 	@Test
 	def testClassAndLocalVarConflict() {
 		assertCompilesTo('''
