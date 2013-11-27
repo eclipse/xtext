@@ -22,6 +22,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -161,8 +162,18 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 
 	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
 			EReference reference, EObject resolvedReferencedObject) {
-		if(resolvedReferencedObject instanceof JvmAnnotationType){
+		highlightDeprecation(acceptor, referencer, reference, resolvedReferencedObject);
+		if (resolvedReferencedObject instanceof JvmAnnotationType){
 			highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.ANNOTATION);
+		}
+	}
+
+	protected void highlightDeprecation(IHighlightedPositionAcceptor acceptor, EObject referencer,
+			EReference reference, EObject resolvedReferencedObject) {
+		if (resolvedReferencedObject instanceof JvmAnnotationTarget) {
+			JvmAnnotationTarget annoTarget = (JvmAnnotationTarget) resolvedReferencedObject;
+			if(DeprecationUtil.isDeprecated(annoTarget))
+				highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		}
 	}
 
@@ -226,6 +237,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	}
 
 	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor, String id) {
+//		highlightDeprecation(acceptor, featureCall, null, featureCall.getFeature());
 		if (featureCall.isTypeLiteral()) {
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(featureCall);
 			highlightNode(node, id, acceptor);
@@ -243,7 +255,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				if(firstLeafNode != null)
 					highlightNode(firstLeafNode, XbaseHighlightingConfiguration.ANNOTATION, acceptor);
 			}
-			highlightObjectAtFeature(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, XbaseHighlightingConfiguration.ANNOTATION);
+			highlightReferenceJvmType(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, annotationType);
 		}
 	}
 	
