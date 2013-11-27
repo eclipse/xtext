@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
+import org.eclipse.xtext.xbase.XIfExpression
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -1159,6 +1160,30 @@ class ErrorTest extends AbstractXtendTestCase {
 				}
 			}
 		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_76() throws Exception {
+		val file = '''
+			class C {
+				def String m(boolean b) {
+					switch 'a' {
+						case 'b': 'a'
+						case 'c': {
+							if 
+								return 'b'
+							else
+								return 'c'
+						}
+					}
+			    }
+			}
+		'''.processWithoutException
+		val resolvedTypes = typeResolver.resolveTypes(file)
+		val ifExpression = file.eAllContents.filter(XIfExpression).head
+		assertNull(ifExpression.then)
+		assertNull(ifExpression.^else)
+		assertNotNull(resolvedTypes.getActualType(ifExpression))
 	}
 	
 	def processWithoutException(CharSequence input) throws Exception {
