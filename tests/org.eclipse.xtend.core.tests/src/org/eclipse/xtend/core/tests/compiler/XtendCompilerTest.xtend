@@ -1773,6 +1773,98 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	@Test
+	def testSneakyThrow_02() { 
+		assertCompilesTo('''
+			package foo
+			
+			import java.io.IOException
+			
+			class Bar {
+				def void doStuff(java.io.File file) {
+					throw new IllegalStateException(file.canonicalPath)
+				}
+			}
+		''', '''
+			package foo;
+			
+			import java.io.File;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  public void doStuff(final File file) {
+			    try {
+			      String _canonicalPath = file.getCanonicalPath();
+			      IllegalStateException _illegalStateException = new IllegalStateException(_canonicalPath);
+			      throw _illegalStateException;
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+	@Test
+	def testSneakyThrow_04() { 
+		assertCompilesTo('''
+			package foo
+			
+			import java.io.IOException
+			
+			class Bar {
+				def Object doStuff(java.io.File file) {
+					return new IllegalStateException(file.canonicalPath)
+				}
+			}
+		''', '''
+			package foo;
+			
+			import java.io.File;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  public Object doStuff(final File file) {
+			    try {
+			      String _canonicalPath = file.getCanonicalPath();
+			      IllegalStateException _illegalStateException = new IllegalStateException(_canonicalPath);
+			      return _illegalStateException;
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+	@Test
+	def testSneakyThrow_03() { 
+		assertCompilesTo('''
+			package foo
+			
+			import java.io.IOException
+			
+			class Bar {
+				def void doStuff(java.io.File file) throws IOException {
+					throw new IllegalStateException(file.canonicalPath)
+				}
+			}
+		''', '''
+			package foo;
+			
+			import java.io.File;
+			import java.io.IOException;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  public void doStuff(final File file) throws IOException {
+			    String _canonicalPath = file.getCanonicalPath();
+			    IllegalStateException _illegalStateException = new IllegalStateException(_canonicalPath);
+			    throw _illegalStateException;
+			  }
+			}
+		''')
+	}
 
 	@Test
 	def testSimple() { 
