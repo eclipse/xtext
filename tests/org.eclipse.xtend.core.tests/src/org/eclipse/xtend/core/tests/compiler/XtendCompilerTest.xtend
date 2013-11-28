@@ -1594,19 +1594,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			package foo;
 			
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class Bar {
-			  private String s = new Function0<String>() {
-			    public String apply() {
-			      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			      String _string = _newArrayList.toString();
-			      return _string;
-			    }
-			  }.apply();
+			  private String s = CollectionLiterals.<Object>newArrayList().toString();
 			}
 		''')
 	}
@@ -1621,18 +1613,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			package foo;
 
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
-
 			@SuppressWarnings("all")
 			public class Bar {
-			  private String s = new Function0<String>() {
-			    public String apply() {
-			      String _string = Bar.this.toString();
-			      String _string_1 = Bar.super.toString();
-			      String _plus = (_string + _string_1);
-			      return _plus;
-			    }
-			  }.apply();
+			  private String s = (this.toString() + super.toString());
 			}
 		''')
 	}
@@ -1699,17 +1682,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			package foo;
 			
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
-
 			@SuppressWarnings("all")
 			public class Bar {
 			  public Bar() {
-			    this(new Function0<String>() {
-			      public String apply() {
-			        String _string = Integer.valueOf(123).toString();
-			        return _string;
-			      }
-			    }.apply());
+			    this(Integer.valueOf(123).toString());
 			  }
 			  
 			  public Bar(final String s) {
@@ -3843,18 +3819,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			import java.util.Collections;
 			import java.util.Map;
 			import java.util.Set;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			import org.eclipse.xtext.xbase.lib.Pair;
 			import org.xtext.example.mydsl.Bug412642_2;
 			
 			@SuppressWarnings("all")
 			public class Bug412642 {
-			  private final Pair<String,Integer> pairField = new Function0<Pair<String,Integer>>() {
-			    public Pair<String,Integer> apply() {
-			      Pair<String,Integer> _mappedTo = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
-			      return _mappedTo;
-			    }
-			  }.apply();
+			  private final Pair<String,Integer> pairField = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
 			  
 			  public void bar() {
 			    final Pair<String,Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));

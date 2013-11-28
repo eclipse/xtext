@@ -228,18 +228,12 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			import java.util.ArrayList;
 			import org.eclipse.xtend.lib.Data;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
 			public class Node {
-			  private final ArrayList<Node> _contents = new Function0<ArrayList<Node>>() {
-			    public ArrayList<Node> apply() {
-			      ArrayList<Node> _newArrayList = CollectionLiterals.<Node>newArrayList();
-			      return _newArrayList;
-			    }
-			  }.apply();
+			  private final ArrayList<Node> _contents = CollectionLiterals.<Node>newArrayList();
 			  
 			  public ArrayList<Node> getContents() {
 			    return this._contents;
