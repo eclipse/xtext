@@ -67,9 +67,14 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	private boolean useInferredJvmModel = true;
 	private boolean jdtTypeHierarchy = true;
 	private boolean jdtCallHierarchy = true;
+	private boolean skipExportedPackage = false;
 	
 	protected boolean usesXbaseGrammar(Grammar grammar) {
 		return doesUseXbase(grammar);
+	}
+	
+	public void setSkipExportedPackage(boolean skipExportedPackage) {
+		this.skipExportedPackage = skipExportedPackage;
 	}
 	
 	public static boolean doesUseXbase(Grammar grammar) {
@@ -365,7 +370,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		if(usesXbaseGrammar(grammar) && (generateXtendInferrer || useInferredJvmModel)) {
+		if(usesXbaseGrammar(grammar) && (generateXtendInferrer || useInferredJvmModel) && !skipExportedPackage) {
 			return new String[] { Strings.skipLastToken(getJvmModelInferrerName(grammar, getNaming()), ".") };
 		}
 		return null;
