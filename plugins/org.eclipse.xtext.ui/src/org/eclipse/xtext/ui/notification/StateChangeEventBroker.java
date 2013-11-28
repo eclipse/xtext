@@ -7,31 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.notification;
 
-import java.util.Collection;
-
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class StateChangeEventBroker extends AbstractResourceDescriptionChangeEventSource implements IStateChangeEventBroker {
 
-	public static class StateChangeEventBrokerEvent extends ResourceDescriptionChangeEvent {
-
-		public StateChangeEventBrokerEvent(Collection<IResourceDescription.Delta> delta, IStateChangeEventBroker sender) {
-			super(delta, sender);
-		}
-
-		@Override
-		public IStateChangeEventBroker getSender() {
-			return (IStateChangeEventBroker) super.getSender();
-		}
-	}
-	
 	public void descriptionsChanged(IResourceDescription.Event event) {
-		notifyListeners(new StateChangeEventBrokerEvent(event.getDeltas(), this));
+		notifyListeners(event);
 	}
 	
 }

@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.IShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
+import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
@@ -61,6 +62,10 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 	}
 	
 	public void dirtyDescriptionsChanged(IResourceDescription.Event event) {
+		if (event instanceof CoarseGrainedChangeEvent) {
+			notifyListeners(event);
+			return;
+		}
 		ResourceDescriptionChangeEvent changeEvent = new ResourceDescriptionChangeEvent(
 				Iterables.transform(event.getDeltas(), new Function<IResourceDescription.Delta, IResourceDescription.Delta>() {
 					public IResourceDescription.Delta apply(IResourceDescription.Delta from) {
@@ -72,7 +77,7 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 						}
 						return result;
 					}
-				}), this);
+				}));
 		notifyListeners(changeEvent);
 	}
 	
@@ -87,7 +92,7 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 						URI uri = input.getUri();
 						return !dirtyStateManager.hasContent(uri);
 					}
-				}), this);
+				}));
 		notifyListeners(changeEvent);
 	}
 

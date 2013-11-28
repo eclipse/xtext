@@ -24,6 +24,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.impl.BuildScheduler;
+import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -45,6 +47,9 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 	
 	@Inject 
 	private BuildScheduler buildManager;
+	
+	@Inject 
+	private IDirtyStateManager dirtyStateManager;
 
 	public ProjectClasspathChangeListener() {
 		JavaCore.addElementChangedListener(this);
@@ -62,6 +67,7 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 										return from.getProject();
 									}
 								}), Predicates.notNull()));
+						dirtyStateManager.notifyListeners(new CoarseGrainedChangeEvent());
 						buildManager.scheduleBuildIfNecessary(projects);
 					}
 				}

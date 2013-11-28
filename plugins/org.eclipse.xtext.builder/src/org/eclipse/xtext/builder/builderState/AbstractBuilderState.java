@@ -113,7 +113,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		final ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(result, this);
+		final ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(result);
 		// update the reference
 		setResourceDescriptionsData(newData);
 		notifyListeners(event);
@@ -141,7 +141,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		for (IResourceDescription.Delta delta : deltas) {
 			newData.removeDescription(delta.getOld().getURI());
 		}
-		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
+		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas);
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
 		subMonitor.setWorkRemaining(event.getDeltas().size());

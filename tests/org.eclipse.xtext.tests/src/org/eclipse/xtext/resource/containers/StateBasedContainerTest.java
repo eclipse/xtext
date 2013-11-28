@@ -61,7 +61,7 @@ public class StateBasedContainerTest extends ResourceDescriptionsBasedContainerT
 	@Test public void testBug352214() {
 		container.getResourceDescriptions(); // initialize uri map
 		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(Collections.<IResourceDescription.Delta>singletonList(
-				new ChangedResourceDescriptionDelta(resourceDescription, null)), null);
+				new ChangedResourceDescriptionDelta(resourceDescription, null)));
 		simulateEmpty = true;
 		container.descriptionsChanged(event);
 		assertEquals(0, container.getResourceDescriptionCount());

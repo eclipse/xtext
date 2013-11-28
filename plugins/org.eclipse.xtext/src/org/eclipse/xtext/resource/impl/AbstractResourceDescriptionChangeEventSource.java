@@ -39,7 +39,10 @@ public class AbstractResourceDescriptionChangeEventSource implements IResourceDe
 		listenerList.removeAll(listeners);
 	}
 	
-	protected void notifyListeners(IResourceDescription.Event event) {
+	/**
+	 * @since 2.5
+	 */
+	public void notifyListeners(IResourceDescription.Event event) {
 		if (event == null)
 			throw new IllegalArgumentException("event may not be null");
 		for(IResourceDescription.Event.Listener listener: listenerList) {

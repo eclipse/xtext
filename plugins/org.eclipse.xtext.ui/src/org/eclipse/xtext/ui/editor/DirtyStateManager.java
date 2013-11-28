@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentMap;
@@ -18,9 +17,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
@@ -34,19 +32,6 @@ import com.google.common.collect.MapMaker;
 // TODO: batch events according to the contract of IDirtyStateManager
 public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSource implements IDirtyStateManager {
 
-	protected static class Event extends ResourceDescriptionChangeEvent {
-
-		public Event(Collection<Delta> delta, Source sender) {
-			super(delta, sender);
-		}
-
-		@Override
-		public IDirtyStateManager getSender() {
-			return (IDirtyStateManager) super.getSender();
-		}
-
-	}
-	
 	private ConcurrentMap<URI, IDirtyResource> managedResources;
 	
 	public DirtyStateManager() {
@@ -83,7 +68,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 					return dirtyResource.getURI();
 				}
 			};
-			notifyListeners(new Event(Collections.singletonList(delta), this));
+			notifyListeners(new ResourceDescriptionChangeEvent(Collections.singletonList(delta)));
 		} else {
 			IResourceDescription.Delta delta = new IResourceDescription.Delta() {
 				public boolean haveEObjectDescriptionsChanged() {
@@ -101,7 +86,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 					return dirtyResource.getURI();
 				}
 			};
-			notifyListeners(new Event(Collections.singletonList(delta), this));
+			notifyListeners(new ResourceDescriptionChangeEvent(Collections.singletonList(delta)));
 		}
 	}
 
