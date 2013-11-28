@@ -1468,6 +1468,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			JvmTypeReference type = getType(expr.getExpression());
 			if (type != null)
 				acceptor.returns.add(type);
+			internalCollectEarlyExits(expr.getExpression(), acceptor);
 		}
 	}
 	
@@ -1476,6 +1477,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			JvmTypeReference type = getType(expr.getExpression());
 			if (type != null)
 				acceptor.thrown.add(type);
+			internalCollectEarlyExits(expr.getExpression(), acceptor);
 		}
 	}
 	
