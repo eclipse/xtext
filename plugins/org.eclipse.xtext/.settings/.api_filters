@@ -32,4 +32,34 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/resource/IResourceDescription.java" type="org.eclipse.xtext.resource.IResourceDescription$Event">
+        <filter id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.resource.IResourceDescription.Event"/>
+                <message_argument value="getSender()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/resource/IResourceDescription.java" type="org.eclipse.xtext.resource.IResourceDescription$Event$Source">
+        <filter id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.resource.IResourceDescription.Event.Source"/>
+                <message_argument value="notifyListeners(IResourceDescription.Event)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/resource/impl/ResourceDescriptionChangeEvent.java" type="org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent">
+        <filter id="338722907">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent"/>
+                <message_argument value="ResourceDescriptionChangeEvent(Iterable&lt;IResourceDescription.Delta&gt;, IResourceDescription.Event.Source)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent"/>
+                <message_argument value="getSender()"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

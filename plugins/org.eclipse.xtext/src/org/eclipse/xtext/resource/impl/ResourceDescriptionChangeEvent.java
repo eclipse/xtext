@@ -17,20 +17,17 @@ import com.google.common.collect.ImmutableList;
  */
 public class ResourceDescriptionChangeEvent implements IResourceDescription.Event {
 
-	private final Source sender;
 	private final ImmutableList<Delta> delta;
 
-	public ResourceDescriptionChangeEvent(Iterable<IResourceDescription.Delta> delta, Source sender) {
-		this.sender = sender;
+	/**
+	 * @since 2.5
+	 */
+	public ResourceDescriptionChangeEvent(Iterable<IResourceDescription.Delta> delta) {
 		this.delta = ImmutableList.copyOf(delta);
 	}
 	
 	public ImmutableList<IResourceDescription.Delta> getDeltas() {
 		return delta;
-	}
-
-	public Source getSender() {
-		return sender;
 	}
 
 }

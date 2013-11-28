@@ -134,11 +134,6 @@ public interface IResourceDescription extends ISelectable {
 		 */
 		ImmutableList<Delta> getDeltas();
 
-		/**
-		 * @return the sender of this event. Is never <code>null</code>.
-		 */
-		Source getSender();
-
 		interface Source {
 
 			/**
@@ -161,6 +156,16 @@ public interface IResourceDescription extends ISelectable {
 			 *            the listener to be removed. May not be <code>null</code>.
 			 */
 			void removeListener(Listener listener);
+
+			/**
+			 * <p>
+			 * Notify listeners about the given event.
+			 * </p>
+			 * @param event
+			 * 				the fired event. My not be <code>null</code>.
+			 * @since 2.5
+			 */
+			void notifyListeners(IResourceDescription.Event event);
 		}
 
 		/**
@@ -187,6 +192,24 @@ public interface IResourceDescription extends ISelectable {
 			 */
 			void descriptionsChanged(Event event);
 		}
+	}
+	
+	/**
+	 * 
+	 * <p>
+	 * This event is used to indicate that there were changes but it was not possible to determine what kind of changes
+	 * had been done. This event does not contain any deltas.
+	 * </p>
+	 * 
+	 * @since 2.5
+	 */
+	interface CoarseGrainedEvent extends Event {
+		
+		/**
+		 * @return the empty list of changes. It is never <code>null</code> but always empty.
+		 */
+		ImmutableList<Delta> getDeltas();
+		
 	}
 
 }
