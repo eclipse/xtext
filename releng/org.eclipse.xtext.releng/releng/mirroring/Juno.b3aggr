@@ -16,6 +16,7 @@
         <bundles name="org.eclipse.m2e.core"/>
         <features name="org.eclipse.emf.compare.feature.group"/>
         <bundles name="org.eclipse.draw2d.feature.group"/>
+        <bundles name="org.eclipse.egit.feature.group"/>
       </repositories>
     </contributions>
   </validationSets>
