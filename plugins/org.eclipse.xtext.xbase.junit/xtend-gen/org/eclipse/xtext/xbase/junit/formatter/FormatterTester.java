@@ -11,7 +11,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -68,10 +67,10 @@ public class FormatterTester {
       boolean _not = (!_isAllowErrors);
       if (_not) {
         Resource _eResource = parsed.eResource();
-        EList<Diagnostic> _errors = _eResource.getErrors();
+        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
         String _join = IterableExtensions.join(_errors, "\n");
         Resource _eResource_1 = parsed.eResource();
-        EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
+        EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
         int _size = _errors_1.size();
         Assert.assertEquals(_join, 0, _size);
       }
@@ -153,7 +152,7 @@ public class FormatterTester {
       boolean _not_2 = (!_isAllowErrors_2);
       if (_not_2) {
         Resource _eResource_6 = parsed2.eResource();
-        EList<Diagnostic> _errors_2 = _eResource_6.getErrors();
+        EList<Resource.Diagnostic> _errors_2 = _eResource_6.getErrors();
         int _size_1 = _errors_2.size();
         Assert.assertEquals(0, _size_1);
       }

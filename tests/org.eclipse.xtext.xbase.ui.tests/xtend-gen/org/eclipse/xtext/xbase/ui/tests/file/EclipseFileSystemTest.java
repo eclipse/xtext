@@ -11,6 +11,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -40,7 +41,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       final Procedure1<EclipseFileSystemSupportImpl> _function = new Procedure1<EclipseFileSystemSupportImpl>() {
         public void apply(final EclipseFileSystemSupportImpl it) {
           it.setWorkspaceRoot(root);
-          org.eclipse.xtext.parser.IEncodingProvider.Runtime _runtime = new org.eclipse.xtext.parser.IEncodingProvider.Runtime();
+          IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
           it.setEncodingProvider(_runtime);
         }
       };

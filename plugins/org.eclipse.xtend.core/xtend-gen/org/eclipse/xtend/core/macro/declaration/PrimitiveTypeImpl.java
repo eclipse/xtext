@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType;
-import org.eclipse.xtend.lib.macro.declaration.PrimitiveType.Kind;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
@@ -19,57 +18,57 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 
 @SuppressWarnings("all")
 public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> implements PrimitiveType {
-  public Kind getKind() {
-    Kind _switchResult = null;
+  public PrimitiveType.Kind getKind() {
+    PrimitiveType.Kind _switchResult = null;
     String _simpleName = this.getSimpleName();
     final String getSimpleName = _simpleName;
     boolean _matched = false;
     if (!_matched) {
       if (Objects.equal(getSimpleName,"boolean")) {
         _matched=true;
-        _switchResult = Kind.BOOLEAN;
+        _switchResult = PrimitiveType.Kind.BOOLEAN;
       }
     }
     if (!_matched) {
       if (Objects.equal(getSimpleName,"int")) {
         _matched=true;
-        _switchResult = Kind.INT;
+        _switchResult = PrimitiveType.Kind.INT;
       }
     }
     if (!_matched) {
       if (Objects.equal(getSimpleName,"char")) {
         _matched=true;
-        _switchResult = Kind.CHAR;
+        _switchResult = PrimitiveType.Kind.CHAR;
       }
     }
     if (!_matched) {
       if (Objects.equal(getSimpleName,"double")) {
         _matched=true;
-        _switchResult = Kind.DOUBLE;
+        _switchResult = PrimitiveType.Kind.DOUBLE;
       }
     }
     if (!_matched) {
       if (Objects.equal(getSimpleName,"long")) {
         _matched=true;
-        _switchResult = Kind.LONG;
+        _switchResult = PrimitiveType.Kind.LONG;
       }
     }
     if (!_matched) {
       if (Objects.equal(getSimpleName,"short")) {
         _matched=true;
-        _switchResult = Kind.SHORT;
+        _switchResult = PrimitiveType.Kind.SHORT;
       }
     }
     if (!_matched) {
       if (Objects.equal(getSimpleName,"float")) {
         _matched=true;
-        _switchResult = Kind.FLOAT;
+        _switchResult = PrimitiveType.Kind.FLOAT;
       }
     }
     if (!_matched) {
       if (Objects.equal(getSimpleName,"byte")) {
         _matched=true;
-        _switchResult = Kind.BYTE;
+        _switchResult = PrimitiveType.Kind.BYTE;
       }
     }
     return _switchResult;

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.generator.IInheriting.Util;
+import org.eclipse.xtext.generator.IInheriting;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -53,7 +53,7 @@ public class ValidatorNaming extends Naming {
   public String getValidatorSuperClassName(final boolean isInheritImplementation) {
     String _xblockexpression = null;
     {
-      final Grammar superGrammar = Util.getNonTerminalsSuperGrammar(this.grammar);
+      final Grammar superGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar);
       String _xifexpression = null;
       boolean _and = false;
       if (!isInheritImplementation) {

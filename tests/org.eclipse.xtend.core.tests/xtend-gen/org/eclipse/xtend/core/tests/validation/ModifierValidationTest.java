@@ -19,7 +19,7 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -41,7 +41,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("private class Foo{}");
       XtendClass _clazz = this.clazz(_builder.toString());
-      this._validationTestHelper.assertError(_clazz, Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package class Foo{}");
       XtendClass _clazz_1 = this.clazz(_builder_1.toString());
@@ -49,7 +49,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected class Foo{}");
       XtendClass _clazz_2 = this.clazz(_builder_2.toString());
-      this._validationTestHelper.assertError(_clazz_2, Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_clazz_2, XtendPackage.Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("public class Foo{}");
       XtendClass _clazz_3 = this.clazz(_builder_3.toString());
@@ -65,7 +65,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("dispatch class Foo{}");
       XtendClass _clazz_6 = this.clazz(_builder_6.toString());
-      this._validationTestHelper.assertError(_clazz_6, Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_clazz_6, XtendPackage.Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("final class Foo{}");
       XtendClass _clazz_7 = this.clazz(_builder_7.toString());
@@ -81,7 +81,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("private interface Foo{}");
       XtendInterface _interfaze = this.interfaze(_builder.toString());
-      this._validationTestHelper.assertError(_interfaze, Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_interfaze, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package interface Foo{}");
       XtendInterface _interfaze_1 = this.interfaze(_builder_1.toString());
@@ -89,7 +89,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected interface Foo{}");
       XtendInterface _interfaze_2 = this.interfaze(_builder_2.toString());
-      this._validationTestHelper.assertError(_interfaze_2, Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_interfaze_2, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("public interface Foo{}");
       XtendInterface _interfaze_3 = this.interfaze(_builder_3.toString());
@@ -97,7 +97,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("static interface Foo{}");
       XtendInterface _interfaze_4 = this.interfaze(_builder_4.toString());
-      this._validationTestHelper.assertError(_interfaze_4, Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_interfaze_4, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("abstract interface Foo{}");
       XtendInterface _interfaze_5 = this.interfaze(_builder_5.toString());
@@ -105,11 +105,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("dispatch interface Foo{}");
       XtendInterface _interfaze_6 = this.interfaze(_builder_6.toString());
-      this._validationTestHelper.assertError(_interfaze_6, Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_interfaze_6, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("final interface Foo{}");
       XtendInterface _interfaze_7 = this.interfaze(_builder_7.toString());
-      this._validationTestHelper.assertError(_interfaze_7, Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_interfaze_7, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -121,7 +121,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("private enum Foo{}");
       XtendEnum _enumeration = this.enumeration(_builder.toString());
-      this._validationTestHelper.assertError(_enumeration, Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_enumeration, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package enum Foo{}");
       XtendEnum _enumeration_1 = this.enumeration(_builder_1.toString());
@@ -129,7 +129,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected enum Foo{}");
       XtendEnum _enumeration_2 = this.enumeration(_builder_2.toString());
-      this._validationTestHelper.assertError(_enumeration_2, Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_enumeration_2, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("public enum Foo{}");
       XtendEnum _enumeration_3 = this.enumeration(_builder_3.toString());
@@ -137,19 +137,19 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("static enum Foo{}");
       XtendEnum _enumeration_4 = this.enumeration(_builder_4.toString());
-      this._validationTestHelper.assertError(_enumeration_4, Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_enumeration_4, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("abstract enum Foo{}");
       XtendEnum _enumeration_5 = this.enumeration(_builder_5.toString());
-      this._validationTestHelper.assertError(_enumeration_5, Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_enumeration_5, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("dispatch enum Foo{}");
       XtendEnum _enumeration_6 = this.enumeration(_builder_6.toString());
-      this._validationTestHelper.assertError(_enumeration_6, Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_enumeration_6, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("final enum Foo{}");
       XtendEnum _enumeration_7 = this.enumeration(_builder_7.toString());
-      this._validationTestHelper.assertError(_enumeration_7, Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_enumeration_7, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -161,7 +161,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("private annotation Foo{}");
       XtendAnnotationType _annotationType = this.annotationType(_builder.toString());
-      this._validationTestHelper.assertError(_annotationType, Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_annotationType, XtendPackage.Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package annotation Foo{}");
       XtendAnnotationType _annotationType_1 = this.annotationType(_builder_1.toString());
@@ -169,7 +169,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected annotation Foo{}");
       XtendAnnotationType _annotationType_2 = this.annotationType(_builder_2.toString());
-      this._validationTestHelper.assertError(_annotationType_2, Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_annotationType_2, XtendPackage.Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("public annotation Foo{}");
       XtendAnnotationType _annotationType_3 = this.annotationType(_builder_3.toString());
@@ -177,7 +177,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("static annotation Foo{}");
       XtendAnnotationType _annotationType_4 = this.annotationType(_builder_4.toString());
-      this._validationTestHelper.assertError(_annotationType_4, Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_annotationType_4, XtendPackage.Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("abstract annotation Foo{}");
       XtendAnnotationType _annotationType_5 = this.annotationType(_builder_5.toString());
@@ -185,11 +185,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("dispatch annotation Foo{}");
       XtendAnnotationType _annotationType_6 = this.annotationType(_builder_6.toString());
-      this._validationTestHelper.assertError(_annotationType_6, Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_annotationType_6, XtendPackage.Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("final annotation Foo{}");
       XtendAnnotationType _annotationType_7 = this.annotationType(_builder_7.toString());
-      this._validationTestHelper.assertError(_annotationType_7, Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_annotationType_7, XtendPackage.Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -240,15 +240,15 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("private def foo() {}");
     XtendMember _memberInInterface = this.memberInInterface(_builder.toString());
-    this._validationTestHelper.assertError(_memberInInterface, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package def foo() {}");
     XtendMember _memberInInterface_1 = this.memberInInterface(_builder_1.toString());
-    this._validationTestHelper.assertError(_memberInInterface_1, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_1, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("protected def foo() {}");
     XtendMember _memberInInterface_2 = this.memberInInterface(_builder_2.toString());
-    this._validationTestHelper.assertError(_memberInInterface_2, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_2, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("public def foo() {}");
     XtendMember _memberInInterface_3 = this.memberInInterface(_builder_3.toString());
@@ -260,7 +260,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder_5 = new StringConcatenation();
     _builder_5.append("static def foo() {}");
     XtendMember _memberInInterface_5 = this.memberInInterface(_builder_5.toString());
-    this._validationTestHelper.assertError(_memberInInterface_5, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_5, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_6 = new StringConcatenation();
     _builder_6.append("abstract def int foo()");
     XtendMember _memberInInterface_6 = this.memberInInterface(_builder_6.toString());
@@ -268,11 +268,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder_7 = new StringConcatenation();
     _builder_7.append("dispatch def foo (int i){}");
     XtendMember _memberInInterface_7 = this.memberInInterface(_builder_7.toString());
-    this._validationTestHelper.assertError(_memberInInterface_7, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_7, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_8 = new StringConcatenation();
     _builder_8.append("final def foo() {}");
     XtendMember _memberInInterface_8 = this.memberInInterface(_builder_8.toString());
-    this._validationTestHelper.assertError(_memberInInterface_8, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_8, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
   }
   
   @Test
@@ -297,19 +297,19 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("static new() {}");
       XtendConstructor _constructor_4 = this.constructor(_builder_4.toString());
-      this._validationTestHelper.assertError(_constructor_4, Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_constructor_4, XtendPackage.Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("abstract new() {}");
       XtendConstructor _constructor_5 = this.constructor(_builder_5.toString());
-      this._validationTestHelper.assertError(_constructor_5, Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_constructor_5, XtendPackage.Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("dispatch new (){}");
       XtendConstructor _constructor_6 = this.constructor(_builder_6.toString());
-      this._validationTestHelper.assertError(_constructor_6, Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_constructor_6, XtendPackage.Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("final new() {}");
       XtendConstructor _constructor_7 = this.constructor(_builder_7.toString());
-      this._validationTestHelper.assertError(_constructor_7, Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_constructor_7, XtendPackage.Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -341,11 +341,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("abstract int foo");
       XtendField _field_5 = this.field(_builder_5.toString());
-      this._validationTestHelper.assertError(_field_5, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_field_5, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("dispatch int foo");
       XtendField _field_6 = this.field(_builder_6.toString());
-      this._validationTestHelper.assertError(_field_6, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_field_6, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("final int foo = 42");
       XtendField _field_7 = this.field(_builder_7.toString());
@@ -364,15 +364,15 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("private int foo");
     XtendMember _memberInInterface = this.memberInInterface(_builder.toString());
-    this._validationTestHelper.assertError(_memberInInterface, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package int foo");
     XtendMember _memberInInterface_1 = this.memberInInterface(_builder_1.toString());
-    this._validationTestHelper.assertError(_memberInInterface_1, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_1, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("protected int foo");
     XtendMember _memberInInterface_2 = this.memberInInterface(_builder_2.toString());
-    this._validationTestHelper.assertError(_memberInInterface_2, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_2, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("public int foo = 42");
     XtendMember _memberInInterface_3 = this.memberInInterface(_builder_3.toString());
@@ -384,11 +384,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder_5 = new StringConcatenation();
     _builder_5.append("abstract int foo");
     XtendMember _memberInInterface_5 = this.memberInInterface(_builder_5.toString());
-    this._validationTestHelper.assertError(_memberInInterface_5, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_5, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_6 = new StringConcatenation();
     _builder_6.append("dispatch int foo");
     XtendMember _memberInInterface_6 = this.memberInInterface(_builder_6.toString());
-    this._validationTestHelper.assertError(_memberInInterface_6, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_6, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_7 = new StringConcatenation();
     _builder_7.append("final int foo = 42");
     XtendMember _memberInInterface_7 = this.memberInInterface(_builder_7.toString());
@@ -396,7 +396,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder_8 = new StringConcatenation();
     _builder_8.append("extension int foo");
     XtendMember _memberInInterface_8 = this.memberInInterface(_builder_8.toString());
-    this._validationTestHelper.assertError(_memberInInterface_8, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInInterface_8, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
   }
   
   @Test
@@ -404,15 +404,15 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("private int foo");
     XtendMember _memberInAnnotation = this.memberInAnnotation(_builder.toString());
-    this._validationTestHelper.assertError(_memberInAnnotation, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInAnnotation, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package int foo");
     XtendMember _memberInAnnotation_1 = this.memberInAnnotation(_builder_1.toString());
-    this._validationTestHelper.assertError(_memberInAnnotation_1, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInAnnotation_1, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("protected int foo");
     XtendMember _memberInAnnotation_2 = this.memberInAnnotation(_builder_2.toString());
-    this._validationTestHelper.assertError(_memberInAnnotation_2, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInAnnotation_2, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("public int foo");
     XtendMember _memberInAnnotation_3 = this.memberInAnnotation(_builder_3.toString());
@@ -424,11 +424,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder_5 = new StringConcatenation();
     _builder_5.append("abstract int foo");
     XtendMember _memberInAnnotation_5 = this.memberInAnnotation(_builder_5.toString());
-    this._validationTestHelper.assertError(_memberInAnnotation_5, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInAnnotation_5, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_6 = new StringConcatenation();
     _builder_6.append("dispatch int foo");
     XtendMember _memberInAnnotation_6 = this.memberInAnnotation(_builder_6.toString());
-    this._validationTestHelper.assertError(_memberInAnnotation_6, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertError(_memberInAnnotation_6, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_7 = new StringConcatenation();
     _builder_7.append("final int foo = 42");
     XtendMember _memberInAnnotation_7 = this.memberInAnnotation(_builder_7.toString());
@@ -441,35 +441,35 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("private private def foo() {}");
       XtendFunction _function = this.function(_builder.toString());
-      this._validationTestHelper.assertError(_function, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package package def foo() {}");
       XtendFunction _function_1 = this.function(_builder_1.toString());
-      this._validationTestHelper.assertError(_function_1, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_1, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected protected def foo() {}");
       XtendFunction _function_2 = this.function(_builder_2.toString());
-      this._validationTestHelper.assertError(_function_2, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_2, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("public public def foo() {}");
       XtendFunction _function_3 = this.function(_builder_3.toString());
-      this._validationTestHelper.assertError(_function_3, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_3, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("static static def foo() {}");
       XtendFunction _function_4 = this.function(_builder_4.toString());
-      this._validationTestHelper.assertError(_function_4, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_4, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("abstract abstract def foo() {}");
       XtendFunction _function_5 = this.function(_builder_5.toString());
-      this._validationTestHelper.assertError(_function_5, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_5, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("dispatch dispatch def foo (int i){}");
       XtendFunction _function_6 = this.function(_builder_6.toString());
-      this._validationTestHelper.assertError(_function_6, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_6, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("final final def foo() {}");
       XtendFunction _function_7 = this.function(_builder_7.toString());
-      this._validationTestHelper.assertError(_function_7, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_7, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -481,19 +481,19 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("private package def foo() {}");
       XtendFunction _function = this.function(_builder.toString());
-      this._validationTestHelper.assertError(_function, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package protected def foo() {}");
       XtendFunction _function_1 = this.function(_builder_1.toString());
-      this._validationTestHelper.assertError(_function_1, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_1, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("protected public def foo() {}");
       XtendFunction _function_2 = this.function(_builder_2.toString());
-      this._validationTestHelper.assertError(_function_2, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_2, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("public private def foo() {}");
       XtendFunction _function_3 = this.function(_builder_3.toString());
-      this._validationTestHelper.assertError(_function_3, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_3, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -505,11 +505,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("abstract static int foo=42");
       XtendField _field = this.field(_builder.toString());
-      this._validationTestHelper.assertError(_field, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_field, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("static abstract int foo=42");
       XtendField _field_1 = this.field(_builder_1.toString());
-      this._validationTestHelper.assertError(_field_1, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_field_1, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -521,11 +521,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("abstract final def foo() ");
       XtendFunction _function = this.function(_builder.toString());
-      this._validationTestHelper.assertError(_function, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("final abstract def foo() ");
       XtendFunction _function_1 = this.function(_builder_1.toString());
-      this._validationTestHelper.assertError(_function_1, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function_1, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -537,7 +537,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("abstract def foo() {}");
       XtendFunction _function = this.function(_builder.toString());
-      this._validationTestHelper.assertError(_function, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("abstract def foo()");
       XtendFunction _function_1 = this.function(_builder_1.toString());
@@ -553,7 +553,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("final def foo()");
       XtendFunction _function = this.function(_builder.toString());
-      this._validationTestHelper.assertError(_function, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_function, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("final def foo() {}");
       XtendFunction _function_1 = this.function(_builder_1.toString());
@@ -569,11 +569,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("final var int i=42");
       XtendField _field = this.field(_builder.toString());
-      this._validationTestHelper.assertError(_field, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_field, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("var final int i=42");
       XtendField _field_1 = this.field(_builder_1.toString());
-      this._validationTestHelper.assertError(_field_1, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+      this._validationTestHelper.assertError(_field_1, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("final val int i=42");
       XtendField _field_2 = this.field(_builder_2.toString());

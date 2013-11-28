@@ -6,7 +6,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.xtext.ui.wizard.releng.P2DirectorLaunch;
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo;
 
@@ -33,9 +33,9 @@ public class BuckminsterFilesCreator {
   
   private static String INSTALL_BUCKY_LAUNCH = ".InstallHeadlessBuckminster.launch";
   
-  private IFileCreator fileCreator;
+  private IProjectFactoryContributor.IFileCreator fileCreator;
   
-  public BuckminsterFilesCreator(final IFileCreator fileCreator) {
+  public BuckminsterFilesCreator(final IProjectFactoryContributor.IFileCreator fileCreator) {
     this.fileCreator = fileCreator;
   }
   

@@ -13,7 +13,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Test;
@@ -56,7 +56,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XNUMBER_LITERAL, IssueCodes.INVALID_INNER_EXPRESSION);
+      this.helper.assertError(file, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INVALID_INNER_EXPRESSION);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -89,7 +89,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -122,7 +122,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XNUMBER_LITERAL, IssueCodes.INVALID_INNER_EXPRESSION);
+      this.helper.assertError(file, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INVALID_INNER_EXPRESSION);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -161,7 +161,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XNUMBER_LITERAL, IssueCodes.INVALID_INNER_EXPRESSION);
+      this.helper.assertError(file, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INVALID_INNER_EXPRESSION);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -203,7 +203,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -245,7 +245,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XNUMBER_LITERAL, IssueCodes.INVALID_INNER_EXPRESSION);
+      this.helper.assertError(file, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INVALID_INNER_EXPRESSION);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -281,7 +281,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -317,7 +317,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -353,7 +353,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -389,7 +389,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -425,7 +425,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -461,7 +461,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -506,7 +506,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -548,7 +548,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -590,7 +590,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -635,7 +635,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -677,7 +677,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -722,7 +722,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

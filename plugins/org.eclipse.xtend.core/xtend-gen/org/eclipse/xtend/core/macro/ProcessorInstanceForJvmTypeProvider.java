@@ -16,17 +16,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @Singleton
 @SuppressWarnings("all")
 public class ProcessorInstanceForJvmTypeProvider {
-  private final static Logger logger = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider.class);
-      return _logger;
-    }
-  }.apply();
+  private final static Logger logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider.class);
   
   private ClassLoader classLoader;
   
@@ -46,15 +40,11 @@ public class ProcessorInstanceForJvmTypeProvider {
         _loadClass=_classLoader.loadClass(_identifier);
       }
       final Class<? extends Object> loadClass = _loadClass;
-      try {
-        Object _newInstance = null;
-        if (loadClass!=null) {
-          _newInstance=loadClass.newInstance();
-        }
-        return _newInstance;
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
+      Object _newInstance = null;
+      if (loadClass!=null) {
+        _newInstance=loadClass.newInstance();
       }
+      return _newInstance;
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;

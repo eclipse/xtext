@@ -23,7 +23,6 @@ import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
@@ -33,12 +32,7 @@ public class EclipseProjectConfig extends ProjectConfig {
   private EclipseOutputConfigurationProvider configurationProvider;
   
   public EclipseProjectConfig(final IProject project, final EclipseOutputConfigurationProvider configurationProvider) {
-    super(new Function0<String>() {
-      public String apply() {
-        String _name = project.getName();
-        return _name;
-      }
-    }.apply());
+    super(project.getName());
     this.project = project;
     this.configurationProvider = configurationProvider;
   }

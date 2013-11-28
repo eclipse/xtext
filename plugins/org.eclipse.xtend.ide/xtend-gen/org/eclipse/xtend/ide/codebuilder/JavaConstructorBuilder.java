@@ -9,13 +9,13 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
+import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
 @SuppressWarnings("all")
-public class JavaConstructorBuilder extends AbstractConstructorBuilder implements Java {
+public class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Java {
   public ISourceAppender build(final ISourceAppender appendable) {
     JvmVisibility _visibility = this.getVisibility();
     ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);

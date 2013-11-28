@@ -15,12 +15,10 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
-import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -42,12 +40,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
   
-  private List<AbstractParameterBuilder> _parameterBuilders = new Function0<List<AbstractParameterBuilder>>() {
-    public List<AbstractParameterBuilder> apply() {
-      List<AbstractParameterBuilder> _emptyList = CollectionLiterals.<AbstractParameterBuilder>emptyList();
-      return _emptyList;
-    }
-  }.apply();
+  private List<AbstractParameterBuilder> _parameterBuilders = CollectionLiterals.<AbstractParameterBuilder>emptyList();
   
   public List<AbstractParameterBuilder> getParameterBuilders() {
     return this._parameterBuilders;
@@ -57,12 +50,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     this._parameterBuilders = parameterBuilders;
   }
   
-  private List<LightweightTypeReference> _exceptions = new Function0<List<LightweightTypeReference>>() {
-    public List<LightweightTypeReference> apply() {
-      List<LightweightTypeReference> _emptyList = CollectionLiterals.<LightweightTypeReference>emptyList();
-      return _emptyList;
-    }
-  }.apply();
+  private List<LightweightTypeReference> _exceptions = CollectionLiterals.<LightweightTypeReference>emptyList();
   
   public List<LightweightTypeReference> getExceptions() {
     return this._exceptions;
@@ -72,12 +60,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     this._exceptions = exceptions;
   }
   
-  private List<JvmTypeParameter> _typeParameters = new Function0<List<JvmTypeParameter>>() {
-    public List<JvmTypeParameter> apply() {
-      List<JvmTypeParameter> _emptyList = CollectionLiterals.<JvmTypeParameter>emptyList();
-      return _emptyList;
-    }
-  }.apply();
+  private List<JvmTypeParameter> _typeParameters = CollectionLiterals.<JvmTypeParameter>emptyList();
   
   public List<JvmTypeParameter> getTypeParameters() {
     return this._typeParameters;
@@ -192,7 +175,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
             String _identifier = _type.getIdentifier();
             EObject _context = this.getContext();
             this._jdtVariableCompletions.getVariableProposals(_identifier, _context, 
-              VariableType.PARAMETER, notAllowed, acceptor);
+              JdtVariableCompletions.VariableType.PARAMETER, notAllowed, acceptor);
             String _variableName = acceptor.getVariableName();
             parameterBuilder.setName(_variableName);
           }

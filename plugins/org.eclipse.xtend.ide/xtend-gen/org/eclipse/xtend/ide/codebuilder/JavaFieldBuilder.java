@@ -10,13 +10,13 @@ package org.eclipse.xtend.ide.codebuilder;
 import com.google.common.base.Objects;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
+import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
-public class JavaFieldBuilder extends AbstractFieldBuilder implements Java {
+public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
   public boolean isValid() {
     boolean _and = false;
     boolean _and_1 = false;

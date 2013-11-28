@@ -12,7 +12,6 @@ import java.beans.PropertyChangeSupport;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
@@ -36,7 +35,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
           public void apply(final MutableMethodDeclaration it) {
             it.setReturnType(fieldType);
             final CompilationStrategy _function = new CompilationStrategy() {
-              public CharSequence compile(final CompilationContext it) {
+              public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("return this.");
                 _builder.append(fieldName, "");
@@ -54,7 +53,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
           public void apply(final MutableMethodDeclaration it) {
             it.addParameter(fieldName, fieldType);
             final CompilationStrategy _function = new CompilationStrategy() {
-              public CharSequence compile(final CompilationContext it) {
+              public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append(fieldType, "");
                 _builder.append(" _oldValue = this.");
@@ -87,7 +86,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
       public void apply(final MutableFieldDeclaration it) {
         it.setType(changeSupportType);
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("new ");
             String _javaCode = it.toJavaCode(changeSupportType);
@@ -105,7 +104,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
       public void apply(final MutableMethodDeclaration it) {
         it.addParameter("listener", propertyChangeListener);
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("this._propertyChangeSupport.addPropertyChangeListener(listener);");
             return _builder;
@@ -119,7 +118,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
       public void apply(final MutableMethodDeclaration it) {
         it.addParameter("listener", propertyChangeListener);
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("this._propertyChangeSupport.removePropertyChangeListener(listener);");
             return _builder;

@@ -12,7 +12,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.ElementIssueProvider.Factory;
+import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
@@ -36,7 +36,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   private IJvmModelAssociations jvmModelAssociations;
   
   @Inject
-  private Factory issueProviderFactory;
+  private ElementIssueProvider.Factory issueProviderFactory;
   
   @Inject
   private ITraceURIConverter converter;

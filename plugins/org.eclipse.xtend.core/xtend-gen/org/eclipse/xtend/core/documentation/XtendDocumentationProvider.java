@@ -12,7 +12,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
-import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.documentation.impl.MultiLineCommentDocumentationProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -59,7 +59,7 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
       _and = false;
     } else {
       EStructuralFeature _eContainingFeature = o.eContainingFeature();
-      boolean _equals = Objects.equal(_eContainingFeature, Literals.XTEND_MEMBER__ANNOTATION_INFO);
+      boolean _equals = Objects.equal(_eContainingFeature, XtendPackage.Literals.XTEND_MEMBER__ANNOTATION_INFO);
       _and = ((o instanceof XtendAnnotationTarget) && _equals);
     }
     boolean _not = (!_and);

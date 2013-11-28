@@ -14,7 +14,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures.Provider;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
 /**
  * A type bucket that was produced from the synonym of a type.
@@ -31,7 +31,7 @@ public class SynonymTypeBucket extends TypeBucket {
     return this._hints;
   }
   
-  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final Provider resolvedFeaturesProvider, final EnumSet<ConformanceHint> hints) {
+  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final EnumSet<ConformanceHint> hints) {
     super(id, types, resolvedFeaturesProvider);
     this._hints = hints;
   }

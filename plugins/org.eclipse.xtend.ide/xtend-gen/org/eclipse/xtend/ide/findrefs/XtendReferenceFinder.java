@@ -20,18 +20,17 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -41,12 +40,12 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
   private IQualifiedNameConverter nameConverter;
   
   @Inject
-  public XtendReferenceFinder(final IResourceDescriptions indexData, final Registry serviceProviderRegistry, final IQualifiedNameConverter nameConverter) {
+  public XtendReferenceFinder(final IResourceDescriptions indexData, final IResourceServiceProvider.Registry serviceProviderRegistry, final IQualifiedNameConverter nameConverter) {
     super(indexData, serviceProviderRegistry);
     this.nameConverter = nameConverter;
   }
   
-  public void findReferences(final Set<URI> targetURIs, final IResourceDescription resourceDescription, final IAcceptor<IReferenceDescription> acceptor, final IProgressMonitor monitor, final ILocalResourceAccess localResourceAccess) {
+  public void findReferences(final Set<URI> targetURIs, final IResourceDescription resourceDescription, final IAcceptor<IReferenceDescription> acceptor, final IProgressMonitor monitor, final IReferenceFinder.ILocalResourceAccess localResourceAccess) {
     final Function1<URI,URI> _function = new Function1<URI,URI>() {
       public URI apply(final URI it) {
         URI _trimFragment = it.trimFragment();
@@ -174,7 +173,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
       boolean _contains = targetURISet.contains(typeURI);
       if (_contains) {
         final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate);
-        DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, typeURI, Literals.XABSTRACT_FEATURE_CALL__FEATURE, (-1), currentExportedContainerURI);
+        DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, typeURI, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, (-1), currentExportedContainerURI);
         acceptor.accept(_defaultReferenceDescription);
       }
     }

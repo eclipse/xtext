@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider.Acceptor;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -98,7 +97,7 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
       }
       final LightweightTypeReference primary = _xifexpression;
       final HashSet<String> actualSynonyms = CollectionLiterals.<String>newHashSet();
-      final Acceptor _function = new Acceptor() {
+      final SynonymTypesProvider.Acceptor _function = new SynonymTypesProvider.Acceptor() {
         @Override
         protected boolean accept(final LightweightTypeReference type, final EnumSet<ConformanceHint> conformance) {
           String _simpleName = type.getSimpleName();

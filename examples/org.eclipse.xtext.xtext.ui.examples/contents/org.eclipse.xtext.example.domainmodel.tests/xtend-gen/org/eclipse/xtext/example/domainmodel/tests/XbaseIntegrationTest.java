@@ -16,7 +16,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -40,7 +40,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
   @Inject
-  private EclipseRuntimeDependentJavaCompiler javaCompiler;
+  private OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler javaCompiler;
   
   @Inject
   private ParseHelper<DomainModel> parseHelper;

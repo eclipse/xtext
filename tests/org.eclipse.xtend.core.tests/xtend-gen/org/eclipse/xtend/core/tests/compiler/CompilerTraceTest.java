@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -1548,12 +1547,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     this.tracesTo(_builder, _builder_1);
   }
   
-  private Pattern p = new Function0<Pattern>() {
-    public Pattern apply() {
-      Pattern _compile = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
-      return _compile;
-    }
-  }.apply();
+  private Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
   
   public void tracesTo(final CharSequence xtend, final CharSequence java) {
     try {

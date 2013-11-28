@@ -16,7 +16,6 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -37,7 +36,7 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
   protected void _infer(final Entity entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexingPhase) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(entity);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
-    IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
+    IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
       public void apply(final JvmGenericType it) {
         String _documentation = TutorialJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);

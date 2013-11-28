@@ -22,7 +22,6 @@ import com.google.inject.Provider;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CancellationException;
@@ -311,12 +310,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this._typeLookup;
   }
   
-  private Map<EObject,Object> identityCache = new Function0<Map<EObject,Object>>() {
-    public Map<EObject,Object> apply() {
-      HashMap<EObject,Object> _newHashMap = CollectionLiterals.<EObject, Object>newHashMap();
-      return _newHashMap;
-    }
-  }.apply();
+  private Map<EObject,Object> identityCache = CollectionLiterals.<EObject, Object>newHashMap();
   
   private OwnedConverter typeRefConverter;
   

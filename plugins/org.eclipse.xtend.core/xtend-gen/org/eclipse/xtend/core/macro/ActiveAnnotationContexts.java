@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -18,17 +17,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class ActiveAnnotationContexts extends AdapterImpl {
-  private final Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = new Function0<Map<JvmAnnotationType,ActiveAnnotationContext>>() {
-    public Map<JvmAnnotationType,ActiveAnnotationContext> apply() {
-      LinkedHashMap<JvmAnnotationType,ActiveAnnotationContext> _newLinkedHashMap = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
-      return _newLinkedHashMap;
-    }
-  }.apply();
+  private final Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
   
   public Map<JvmAnnotationType,ActiveAnnotationContext> getContexts() {
     return this._contexts;

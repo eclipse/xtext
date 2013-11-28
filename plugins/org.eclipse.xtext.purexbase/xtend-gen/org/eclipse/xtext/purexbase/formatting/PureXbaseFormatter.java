@@ -9,14 +9,11 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
-import org.eclipse.xtext.formatting.impl.FormattingConfig.LinewrapLocator;
-import org.eclipse.xtext.formatting.impl.FormattingConfig.NoSpaceLocator;
 import org.eclipse.xtext.purexbase.services.PureXbaseGrammarAccess;
-import org.eclipse.xtext.purexbase.services.PureXbaseGrammarAccess.SpecialBlockExpressionElements;
 import org.eclipse.xtext.xbase.formatting.XbaseFormatter;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
-import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.XImportSectionElements;
+import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 
 /**
  * This class contains custom formatting description.
@@ -36,27 +33,27 @@ public class PureXbaseFormatter extends AbstractDeclarativeFormatter {
   protected void configureFormatting(final FormattingConfig c) {
     XbaseGrammarAccess _xbaseGrammarAccess = this._pureXbaseGrammarAccess.getXbaseGrammarAccess();
     this.xbaseFormatter.configure(c, _xbaseGrammarAccess);
-    final SpecialBlockExpressionElements sbee = this._pureXbaseGrammarAccess.getSpecialBlockExpressionAccess();
-    LinewrapLocator _setLinewrap = c.setLinewrap(1, 2, 3);
+    final PureXbaseGrammarAccess.SpecialBlockExpressionElements sbee = this._pureXbaseGrammarAccess.getSpecialBlockExpressionAccess();
+    FormattingConfig.LinewrapLocator _setLinewrap = c.setLinewrap(1, 2, 3);
     Assignment _expressionsAssignment_1_0 = sbee.getExpressionsAssignment_1_0();
     _setLinewrap.after(_expressionsAssignment_1_0);
-    LinewrapLocator _setLinewrap_1 = c.setLinewrap(1, 2, 3);
+    FormattingConfig.LinewrapLocator _setLinewrap_1 = c.setLinewrap(1, 2, 3);
     Keyword _semicolonKeyword_1_1 = sbee.getSemicolonKeyword_1_1();
     _setLinewrap_1.after(_semicolonKeyword_1_1);
-    NoSpaceLocator _setNoSpace = c.setNoSpace();
+    FormattingConfig.NoSpaceLocator _setNoSpace = c.setNoSpace();
     Keyword _semicolonKeyword_1_1_1 = sbee.getSemicolonKeyword_1_1();
     _setNoSpace.before(_semicolonKeyword_1_1_1);
-    LinewrapLocator _setLinewrap_2 = c.setLinewrap(1, 2, 3);
-    XImportSectionElements _xImportSectionAccess = this._pureXbaseGrammarAccess.getXImportSectionAccess();
+    FormattingConfig.LinewrapLocator _setLinewrap_2 = c.setLinewrap(1, 2, 3);
+    XtypeGrammarAccess.XImportSectionElements _xImportSectionAccess = this._pureXbaseGrammarAccess.getXImportSectionAccess();
     Assignment _importDeclarationsAssignment = _xImportSectionAccess.getImportDeclarationsAssignment();
     _setLinewrap_2.after(_importDeclarationsAssignment);
-    LinewrapLocator _setLinewrap_3 = c.setLinewrap(0, 1, 3);
+    FormattingConfig.LinewrapLocator _setLinewrap_3 = c.setLinewrap(0, 1, 3);
     TerminalRule _sL_COMMENTRule = this._pureXbaseGrammarAccess.getSL_COMMENTRule();
     _setLinewrap_3.before(_sL_COMMENTRule);
-    LinewrapLocator _setLinewrap_4 = c.setLinewrap(0, 1, 3);
+    FormattingConfig.LinewrapLocator _setLinewrap_4 = c.setLinewrap(0, 1, 3);
     TerminalRule _mL_COMMENTRule = this._pureXbaseGrammarAccess.getML_COMMENTRule();
     _setLinewrap_4.before(_mL_COMMENTRule);
-    LinewrapLocator _setLinewrap_5 = c.setLinewrap(0, 1, 3);
+    FormattingConfig.LinewrapLocator _setLinewrap_5 = c.setLinewrap(0, 1, 3);
     TerminalRule _mL_COMMENTRule_1 = this._pureXbaseGrammarAccess.getML_COMMENTRule();
     _setLinewrap_5.after(_mL_COMMENTRule_1);
   }

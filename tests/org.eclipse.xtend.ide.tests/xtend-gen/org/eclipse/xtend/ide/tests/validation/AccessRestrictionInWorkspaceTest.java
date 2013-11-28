@@ -29,7 +29,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.TypesPackage.Literals;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -63,7 +63,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       final XtendClass c = ((XtendClass) _head);
-      this._validationTestHelper.assertError(c, Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
+      this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -77,7 +77,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       final XtendClass c = ((XtendClass) _head);
-      this._validationTestHelper.assertWarning(c, Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE, "Discouraged access: The type B is not accessible", "on required project firstProject");
+      this._validationTestHelper.assertWarning(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE, "Discouraged access: The type B is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -136,7 +136,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       final XtendClass c = ((XtendClass) _head);
-      this._validationTestHelper.assertError(c, Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
+      this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -150,7 +150,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       final XtendClass c = ((XtendClass) _head);
-      this._validationTestHelper.assertWarning(c, Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE, "Discouraged access: The type B is not accessible", "on required project firstProject");
+      this._validationTestHelper.assertWarning(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE, "Discouraged access: The type B is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -179,7 +179,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       final XtendClass c = ((XtendClass) _head);
-      this._validationTestHelper.assertError(c, Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
+      this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

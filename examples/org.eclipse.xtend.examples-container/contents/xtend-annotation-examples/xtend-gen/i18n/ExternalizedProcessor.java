@@ -15,7 +15,6 @@ import org.eclipse.xtend.lib.macro.CodeGenerationParticipant;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -108,7 +107,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
             it.setStatic(true);
             final List<MutableParameterDeclaration> params = it.getParameters();
             final CompilationStrategy _function_1 = new CompilationStrategy() {
-              public CharSequence compile(final CompilationContext it) {
+              public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("try {");
                 _builder.newLine();
@@ -183,7 +182,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
         TypeReference _newTypeReference = context.newTypeReference(ResourceBundle.class);
         it.setType(_newTypeReference);
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("ResourceBundle.getBundle(\"");
             String _qualifiedName = annotatedClass.getQualifiedName();

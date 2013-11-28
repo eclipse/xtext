@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -52,7 +51,7 @@ public class Case_14 extends AbstractXtendTestCase {
         final JvmGenericType secondType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
         Resource _eResource = secondType.eResource();
         Assert.assertNull(_eResource);
-        IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);
+        IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);
         final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             it.setAbstract(true);
@@ -63,7 +62,7 @@ public class Case_14 extends AbstractXtendTestCase {
           }
         };
         _accept.initializeLater(_function);
-        IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(secondType);
+        IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(secondType);
         final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             it.setAbstract(true);

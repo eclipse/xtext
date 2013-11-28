@@ -9,14 +9,14 @@ import org.eclipse.xtend.core.formatting.Line;
 import org.eclipse.xtend.core.formatting.LineModel;
 import org.eclipse.xtend.core.formatting.SemanticWhitespace;
 import org.eclipse.xtend.core.formatting.TemplateWhitespace;
-import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor.ForLoopOnce;
+import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
-public class RichStringToLineModel extends ForLoopOnce {
+public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
   private final RichString string;
   
   private final String document;
@@ -163,7 +163,7 @@ public class RichStringToLineModel extends ForLoopOnce {
     if (_and) {
       this.contentStartOffset = this.lastLiteralEndOffset;
     }
-    final INode node = this.nodeModelAccess.nodeForFeature(object, Literals.XSTRING_LITERAL__VALUE);
+    final INode node = this.nodeModelAccess.nodeForFeature(object, XbasePackage.Literals.XSTRING_LITERAL__VALUE);
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       int _offset = node.getOffset();

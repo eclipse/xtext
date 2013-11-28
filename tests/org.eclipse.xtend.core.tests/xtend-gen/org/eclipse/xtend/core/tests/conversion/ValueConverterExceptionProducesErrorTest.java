@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
@@ -34,11 +33,11 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
   @Test
   public void testUnclosedTerminal_01() throws Exception {
     final Resource resource = this.toResource("class C { def m() \'\'\'");
-    EList<Diagnostic> _errors = resource.getErrors();
+    EList<Resource.Diagnostic> _errors = resource.getErrors();
     int _size = _errors.size();
     Assert.assertEquals(1, _size);
-    EList<Diagnostic> _errors_1 = resource.getErrors();
-    final Diagnostic error = IterableExtensions.<Diagnostic>head(_errors_1);
+    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
+    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
     Assert.assertNotNull(error);
     String _message = error.getMessage();
     Assert.assertEquals("String literal is not closed", _message);
@@ -48,11 +47,11 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
   @Test
   public void testUnclosedTerminal_02() throws Exception {
     final Resource resource = this.toResource("class C { def m() \'\'\'abc");
-    EList<Diagnostic> _errors = resource.getErrors();
+    EList<Resource.Diagnostic> _errors = resource.getErrors();
     int _size = _errors.size();
     Assert.assertEquals(1, _size);
-    EList<Diagnostic> _errors_1 = resource.getErrors();
-    final Diagnostic error = IterableExtensions.<Diagnostic>head(_errors_1);
+    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
+    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
     Assert.assertNotNull(error);
     String _message = error.getMessage();
     Assert.assertEquals("String literal is not closed", _message);

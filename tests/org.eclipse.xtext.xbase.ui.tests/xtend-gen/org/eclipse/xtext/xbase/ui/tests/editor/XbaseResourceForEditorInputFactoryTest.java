@@ -97,14 +97,10 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
       Class<? extends XbaseResourceForEditorInputFactory> _class = this.editorInputFactory.getClass();
       final Method method = _class.getDeclaredMethod("isValidationDisabled", IStorage.class);
       method.setAccessible(true);
-      try {
-        Object _invoke = method.invoke(this.editorInputFactory, storage);
-        return (((Boolean) _invoke)).booleanValue();
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    } catch (Throwable _e_1) {
-      throw Exceptions.sneakyThrow(_e_1);
+      Object _invoke = method.invoke(this.editorInputFactory, storage);
+      return (((Boolean) _invoke)).booleanValue();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
 }

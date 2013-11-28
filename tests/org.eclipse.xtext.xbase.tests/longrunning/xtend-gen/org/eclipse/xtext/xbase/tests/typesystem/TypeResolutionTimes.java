@@ -8,36 +8,14 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")
 public class TypeResolutionTimes {
-  public final StoppedTask getFeatureTask = new Function0<StoppedTask>() {
-    public StoppedTask apply() {
-      StoppedTask _forTask = Stopwatches.forTask("StackedResolvedTypes.getFeature");
-      return _forTask;
-    }
-  }.apply();
+  public final Stopwatches.StoppedTask getFeatureTask = Stopwatches.forTask("StackedResolvedTypes.getFeature");
   
-  public final StoppedTask getHintsTask = new Function0<StoppedTask>() {
-    public StoppedTask apply() {
-      StoppedTask _forTask = Stopwatches.forTask("StackedResolvedTypes.getHints");
-      return _forTask;
-    }
-  }.apply();
+  public final Stopwatches.StoppedTask getHintsTask = Stopwatches.forTask("StackedResolvedTypes.getHints");
   
-  public final StoppedTask getActualTypeTask = new Function0<StoppedTask>() {
-    public StoppedTask apply() {
-      StoppedTask _forTask = Stopwatches.forTask("StackedResolvedTypes.getActualType(identifiable)");
-      return _forTask;
-    }
-  }.apply();
+  public final Stopwatches.StoppedTask getActualTypeTask = Stopwatches.forTask("StackedResolvedTypes.getActualType(identifiable)");
   
-  public final StoppedTask getActualExpressionTypeTask = new Function0<StoppedTask>() {
-    public StoppedTask apply() {
-      StoppedTask _forTask = Stopwatches.forTask("StackedResolvedTypes.getActualType(expression)");
-      return _forTask;
-    }
-  }.apply();
+  public final Stopwatches.StoppedTask getActualExpressionTypeTask = Stopwatches.forTask("StackedResolvedTypes.getActualType(expression)");
 }

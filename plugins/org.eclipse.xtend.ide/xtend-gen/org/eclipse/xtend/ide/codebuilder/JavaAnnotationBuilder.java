@@ -3,12 +3,12 @@ package org.eclipse.xtend.ide.codebuilder;
 import com.google.common.base.Objects;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
+import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
 @SuppressWarnings("all")
-public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements Java {
+public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder.Java {
   public boolean isValid() {
     boolean _and = false;
     boolean _isValid = super.isValid();

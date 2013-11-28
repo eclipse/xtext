@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
-public class CompilationContextImpl implements CompilationContext {
+public class CompilationContextImpl implements CompilationStrategy.CompilationContext {
   @Extension
   private ReflectExtensions reflectExtensions = new Function0<ReflectExtensions>() {
     public ReflectExtensions apply() {

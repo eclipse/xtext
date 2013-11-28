@@ -21,7 +21,6 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.BrokenTypeRefDetector;
 import org.eclipse.xtext.xbase.compiler.IElementIssueProvider;
-import org.eclipse.xtext.xbase.compiler.IElementIssueProvider.Factory;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable;
@@ -44,7 +43,7 @@ public class ErrorSafeExtensions {
   private TypeReferenceSerializer _typeReferenceSerializer;
   
   @Inject
-  private Factory issueProviderFactory;
+  private IElementIssueProvider.Factory issueProviderFactory;
   
   public Iterable<Issue> getErrors(final EObject element) {
     Iterable<Issue> _xblockexpression = null;

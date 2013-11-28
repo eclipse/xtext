@@ -19,14 +19,14 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
-import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest;
+import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 
 /**
  * @author Sebastian Zarnekow
  */
 @Data
 @SuppressWarnings("all")
-public class FeatureCallRequest extends AbstractFeatureCallRequest {
+public class FeatureCallRequest extends XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest {
   private final XAbstractFeatureCall _call;
   
   public XAbstractFeatureCall getCall() {

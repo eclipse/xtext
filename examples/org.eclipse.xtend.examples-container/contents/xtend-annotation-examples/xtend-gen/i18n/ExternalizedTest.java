@@ -3,7 +3,6 @@ package i18n;
 import extract.Extract;
 import junit.framework.Assert;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
-import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester.CompilationResult;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -12,19 +11,13 @@ import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class ExternalizedTest {
   @Extension
-  private XtendCompilerTester compilerTester = new Function0<XtendCompilerTester>() {
-    public XtendCompilerTester apply() {
-      XtendCompilerTester _newXtendCompilerTester = XtendCompilerTester.newXtendCompilerTester(Extract.class);
-      return _newXtendCompilerTester;
-    }
-  }.apply();
+  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Extract.class);
   
   @Test
   public void testExtractAnnotation() {
@@ -44,8 +37,8 @@ public class ExternalizedTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-      public void accept(final CompilationResult it) {
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      public void accept(final XtendCompilerTester.CompilationResult it) {
         @Extension
         final TransformationContext ctx = it.getTransformationContext();
         final MutableClassDeclaration clazz = ctx.findClass("i18n.MyMessages");

@@ -16,11 +16,10 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -133,7 +132,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
       UnexpectedResourcesException _unexpectedResourcesException = new UnexpectedResourcesException(otherResourceSet);
       throw _unexpectedResourcesException;
     }
-    final Map<EObject,Collection<Setting>> unresolved = UnresolvedProxyCrossReferencer.find(otherResourceSet);
+    final Map<EObject,Collection<EStructuralFeature.Setting>> unresolved = EcoreUtil.UnresolvedProxyCrossReferencer.find(otherResourceSet);
     boolean _isEmpty = unresolved.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {

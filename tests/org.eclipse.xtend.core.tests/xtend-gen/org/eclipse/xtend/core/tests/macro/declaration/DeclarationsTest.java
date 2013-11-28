@@ -16,7 +16,6 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
@@ -445,7 +444,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
             it.setReturnType(_string);
             it.setVisibility(Visibility.PRIVATE);
             final CompilationStrategy _function = new CompilationStrategy() {
-              public CharSequence compile(final CompilationContext it) {
+              public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("return \"foo\";");
                 _builder.newLine();

@@ -31,7 +31,6 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.validation.ValidatorNaming;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -74,12 +73,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   @Named("fileHeader")
   private String fileHeader;
   
-  private final ArrayList<String> composedChecks = new Function0<ArrayList<String>>() {
-    public ArrayList<String> apply() {
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-      return _newArrayList;
-    }
-  }.apply();
+  private final ArrayList<String> composedChecks = CollectionLiterals.<String>newArrayList();
   
   public boolean addComposedCheck(final String composedCheckValidator) {
     boolean _add = this.composedChecks.add(composedCheckValidator);

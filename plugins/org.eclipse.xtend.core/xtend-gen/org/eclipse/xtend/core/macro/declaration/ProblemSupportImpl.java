@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -52,7 +51,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
     Resource _key = resAndObj.getKey();
-    EList<Diagnostic> _errors = _key.getErrors();
+    EList<Resource.Diagnostic> _errors = _key.getErrors();
     EObject _value = resAndObj.getValue();
     EObject _value_1 = resAndObj.getValue();
     EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
@@ -64,7 +63,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
     Resource _key = resAndObj.getKey();
-    EList<Diagnostic> _warnings = _key.getWarnings();
+    EList<Resource.Diagnostic> _warnings = _key.getWarnings();
     EObject _value = resAndObj.getValue();
     EObject _value_1 = resAndObj.getValue();
     EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
@@ -76,9 +75,9 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
     final Resource resource = resAndObj.getKey();
-    EList<Diagnostic> _errors = resource.getErrors();
-    EList<Diagnostic> _warnings = resource.getWarnings();
-    Iterable<Diagnostic> _plus = Iterables.<Diagnostic>concat(_errors, _warnings);
+    EList<Resource.Diagnostic> _errors = resource.getErrors();
+    EList<Resource.Diagnostic> _warnings = resource.getWarnings();
+    Iterable<Resource.Diagnostic> _plus = Iterables.<Resource.Diagnostic>concat(_errors, _warnings);
     final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(_plus, EObjectDiagnosticImpl.class);
     final Function1<EObjectDiagnosticImpl,Boolean> _function = new Function1<EObjectDiagnosticImpl,Boolean>() {
       public Boolean apply(final EObjectDiagnosticImpl diag) {
@@ -94,7 +93,7 @@ public class ProblemSupportImpl implements ProblemSupport {
         String _code = diag.getCode();
         String _message = diag.getMessage();
         Severity _severity = diag.getSeverity();
-        org.eclipse.xtend.lib.macro.services.Problem.Severity _translateSeverity = ProblemSupportImpl.this.translateSeverity(_severity);
+        Problem.Severity _translateSeverity = ProblemSupportImpl.this.translateSeverity(_severity);
         ProblemImpl _problemImpl = new ProblemImpl(_code, _message, _translateSeverity);
         return ((Problem) _problemImpl);
       }
@@ -165,31 +164,31 @@ public class ProblemSupportImpl implements ProblemSupport {
     throw _illegalArgumentException;
   }
   
-  private org.eclipse.xtend.lib.macro.services.Problem.Severity translateSeverity(final Severity severity) {
-    org.eclipse.xtend.lib.macro.services.Problem.Severity _switchResult = null;
+  private Problem.Severity translateSeverity(final Severity severity) {
+    Problem.Severity _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (Objects.equal(severity,Severity.ERROR)) {
         _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.ERROR;
+        _switchResult = Problem.Severity.ERROR;
       }
     }
     if (!_matched) {
       if (Objects.equal(severity,Severity.WARNING)) {
         _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.WARNING;
+        _switchResult = Problem.Severity.WARNING;
       }
     }
     if (!_matched) {
       if (Objects.equal(severity,Severity.INFO)) {
         _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.INFO;
+        _switchResult = Problem.Severity.INFO;
       }
     }
     if (!_matched) {
       if (Objects.equal(severity,Severity.IGNORE)) {
         _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.IGNORE;
+        _switchResult = Problem.Severity.IGNORE;
       }
     }
     return _switchResult;

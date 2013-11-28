@@ -11,18 +11,12 @@ import lazy.Lazy;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class LazyTest {
   @Extension
-  private XtendCompilerTester compilerTester = new Function0<XtendCompilerTester>() {
-    public XtendCompilerTester apply() {
-      XtendCompilerTester _newXtendCompilerTester = XtendCompilerTester.newXtendCompilerTester(Lazy.class);
-      return _newXtendCompilerTester;
-    }
-  }.apply();
+  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Lazy.class);
   
   @Test
   public void testLazy() {

@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import java.lang.reflect.Constructor;
-import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester.CompilationResult;
+import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
@@ -27,8 +27,8 @@ public class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-      public void accept(final CompilationResult it) {
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      public void accept(final XtendCompilerTester.CompilationResult it) {
         final Class<? extends Object> clazz = it.getCompiledClass();
         final Constructor<? extends Object>[] constr = clazz.getDeclaredConstructors();
         int _length = constr.length;

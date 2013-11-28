@@ -8,11 +8,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtend.ide.builder.FilteringResourceDescriptions;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
-import org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceDescriptions.NullImpl;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
@@ -33,9 +31,9 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
     final IJavaProject project = this.projectProvider.getJavaProject(resourceSet);
     boolean _matched = false;
     if (!_matched) {
-      if (result instanceof ResourceSetAware) {
+      if (result instanceof CurrentDescriptions.ResourceSetAware) {
         _matched=true;
-        IResourceDescriptions _delegate = ((ResourceSetAware)result).getDelegate();
+        IResourceDescriptions _delegate = ((CurrentDescriptions.ResourceSetAware)result).getDelegate();
         final IResourceDescriptions d = _delegate;
         boolean _matched_1 = false;
         if (!_matched_1) {
@@ -43,7 +41,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
             _matched_1=true;
             boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
             if (_isIndexing) {
-              NullImpl _nullImpl = new NullImpl();
+              IResourceDescriptions.NullImpl _nullImpl = new IResourceDescriptions.NullImpl();
               return _nullImpl;
             }
             final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {

@@ -24,8 +24,6 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.JavaConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaMethodBuilder;
@@ -46,8 +44,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
-import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable.Factory;
-import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
+import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender;
 
 /**
  * Creates quickfixes using {@link ICodeBuilder}s.
@@ -61,7 +58,7 @@ public class CodeBuilderQuickfix {
   private IURIEditorOpener editorOpener;
   
   @Inject
-  private Factory appendableFactory;
+  private ReplacingAppendable.Factory appendableFactory;
   
   public void addQuickfix(final ICodeBuilder builder, final String label, final Issue issue, final IssueResolutionAcceptor acceptor) {
     boolean _isValid = builder.isValid();
@@ -69,16 +66,16 @@ public class CodeBuilderQuickfix {
       IModification _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
-        if (builder instanceof Xtend) {
+        if (builder instanceof ICodeBuilder.Xtend) {
           _matched=true;
-          IModification _xtendModification = this.getXtendModification(((Xtend)builder));
+          IModification _xtendModification = this.getXtendModification(((ICodeBuilder.Xtend)builder));
           _switchResult = _xtendModification;
         }
       }
       if (!_matched) {
-        if (builder instanceof Java) {
+        if (builder instanceof ICodeBuilder.Java) {
           _matched=true;
-          IModification _javaModification = this.getJavaModification(((Java)builder));
+          IModification _javaModification = this.getJavaModification(((ICodeBuilder.Java)builder));
           _switchResult = _javaModification;
         }
       }
@@ -123,7 +120,7 @@ public class CodeBuilderQuickfix {
     return (_ownerSource instanceof XtendClass);
   }
   
-  protected IModification getXtendModification(final Xtend builder) {
+  protected IModification getXtendModification(final ICodeBuilder.Xtend builder) {
     final IModification _function = new IModification() {
       public void apply(final IModificationContext it) throws Exception {
         final XtendTypeDeclaration xtendClass = builder.getXtendType();
@@ -136,15 +133,15 @@ public class CodeBuilderQuickfix {
         final IXtextDocument document = xtextEditor.getDocument();
         int offset = builder.getInsertOffset();
         Resource _eResource = xtendClass.eResource();
-        OptionalParameters _optionalParameters = new OptionalParameters();
-        final Procedure1<OptionalParameters> _function = new Procedure1<OptionalParameters>() {
-          public void apply(final OptionalParameters it) {
+        DocumentSourceAppender.Factory.OptionalParameters _optionalParameters = new DocumentSourceAppender.Factory.OptionalParameters();
+        final Procedure1<DocumentSourceAppender.Factory.OptionalParameters> _function = new Procedure1<DocumentSourceAppender.Factory.OptionalParameters>() {
+          public void apply(final DocumentSourceAppender.Factory.OptionalParameters it) {
             int _indentationLevel = builder.getIndentationLevel();
             it.baseIndentationLevel = _indentationLevel;
             it.ensureEmptyLinesAround = true;
           }
         };
-        OptionalParameters _doubleArrow = ObjectExtensions.<OptionalParameters>operator_doubleArrow(_optionalParameters, _function);
+        DocumentSourceAppender.Factory.OptionalParameters _doubleArrow = ObjectExtensions.<DocumentSourceAppender.Factory.OptionalParameters>operator_doubleArrow(_optionalParameters, _function);
         final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.create(document, ((XtextResource) _eResource), offset, 0, _doubleArrow);
         builder.build(appendable);
         appendable.commitChanges();
@@ -155,7 +152,7 @@ public class CodeBuilderQuickfix {
     return _function;
   }
   
-  protected IModification getJavaModification(final Java builder) {
+  protected IModification getJavaModification(final ICodeBuilder.Java builder) {
     final IModification _function = new IModification() {
       public void apply(final IModificationContext it) throws Exception {
         final IType type = builder.getIType();
@@ -210,7 +207,7 @@ public class CodeBuilderQuickfix {
         if (!_matched) {
           _switchResult = null;
         }
-        final Object element = ((Object)_switchResult);
+        final Object element = _switchResult;
         boolean _notEquals = (!Objects.equal(((IAnnotatable)element), null));
         if (_notEquals) {
           JdtHyperlink _jdtHyperlink = new JdtHyperlink();

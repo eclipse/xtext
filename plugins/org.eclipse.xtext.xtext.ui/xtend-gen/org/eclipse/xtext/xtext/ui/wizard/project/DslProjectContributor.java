@@ -2,7 +2,7 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor;
@@ -28,7 +28,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     this.sourceRoot = sourceRoot;
   }
   
-  public void contributeFiles(final IProject project, final IFileCreator creator) {
+  public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator creator) {
     try {
       String _defaultCharset = project.getDefaultCharset();
       CharSequence _workflow = this.workflow(_defaultCharset);

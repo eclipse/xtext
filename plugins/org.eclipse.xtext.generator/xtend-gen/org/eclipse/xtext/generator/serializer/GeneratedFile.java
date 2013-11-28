@@ -8,11 +8,11 @@
 package org.eclipse.xtext.generator.serializer;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName;
+import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
 
 @SuppressWarnings("all")
 public class GeneratedFile {
-  public CharSequence getFileContents(final GenFileName filename) {
+  public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<not implemented>");
     _builder.newLine();

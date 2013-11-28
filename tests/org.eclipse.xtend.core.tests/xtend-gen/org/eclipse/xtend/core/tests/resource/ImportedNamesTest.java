@@ -10,7 +10,6 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -20,7 +19,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ImportedNamesTest extends AbstractXtendTestCase {
   @Inject
-  private Manager resourceDescriptionManager;
+  private IResourceDescription.Manager resourceDescriptionManager;
   
   private final List<String> primitives = Collections.<String>unmodifiableList(Lists.<String>newArrayList("boolean", "int", "char", "byte", "short", "long", "float", "double", "void"));
   

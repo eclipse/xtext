@@ -23,7 +23,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
-import org.eclipse.xtext.common.types.TypesPackage.Literals;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImplCustom;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XtypePackage;
 import org.eclipse.xtext.xtype.impl.XFunctionTypeRefImplCustom;
 import org.eclipse.xtext.xtype.util.XFunctionTypeRefs;
 
@@ -88,12 +89,12 @@ public class IndexingOwnedConverter extends OwnedConverter {
   }
   
   protected JvmType _getType(final JvmParameterizedTypeReference it) {
-    JvmType _type = this.getType(it, Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+    JvmType _type = this.getType(it, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
     return _type;
   }
   
   protected JvmType _getType(final XFunctionTypeRef it) {
-    JvmType _type = this.getType(it, org.eclipse.xtext.xtype.XtypePackage.Literals.XFUNCTION_TYPE_REF__TYPE);
+    JvmType _type = this.getType(it, XtypePackage.Literals.XFUNCTION_TYPE_REF__TYPE);
     return _type;
   }
   

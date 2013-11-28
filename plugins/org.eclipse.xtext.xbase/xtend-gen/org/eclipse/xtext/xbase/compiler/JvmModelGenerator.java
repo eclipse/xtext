@@ -62,7 +62,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
-import org.eclipse.xtext.common.types.TypesPackage.Literals;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
@@ -1388,7 +1388,7 @@ public class JvmModelGenerator implements IGenerator {
               _and_1 = (_equals && _notEquals_1);
             }
             if (_and_1) {
-              final IScope scope = this.scopeProvider.getScope(context, Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+              final IScope scope = this.scopeProvider.getScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
               final IEObjectDescription candidate = scope.getSingleElement(fqn);
               boolean _notEquals_2 = (!Objects.equal(candidate, null));
               if (_notEquals_2) {

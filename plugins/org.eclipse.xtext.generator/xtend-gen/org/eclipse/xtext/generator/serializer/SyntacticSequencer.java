@@ -12,7 +12,6 @@ import com.google.inject.name.Named;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
-import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName;
 
 @SuppressWarnings("all")
 public class SyntacticSequencer extends GeneratedFile {
@@ -27,7 +26,7 @@ public class SyntacticSequencer extends GeneratedFile {
   @Named("fileHeader")
   private String fileHeader;
   
-  public CharSequence getFileContents(final GenFileName filename) {
+  public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     CharSequence _xifexpression = null;
     if ((this.generateXtendStub).booleanValue()) {
       StringConcatenation _builder = new StringConcatenation();
@@ -48,7 +47,7 @@ public class SyntacticSequencer extends GeneratedFile {
       String _simpleName = filename.getSimpleName();
       _builder.append(_simpleName, "");
       _builder.append(" extends ");
-      GenFileName _abstractSyntacticSequencer = this.names.getAbstractSyntacticSequencer();
+      SerializerGenFileNames.GenFileName _abstractSyntacticSequencer = this.names.getAbstractSyntacticSequencer();
       String _simpleName_1 = _abstractSyntacticSequencer.getSimpleName();
       _builder.append(_simpleName_1, "");
       _builder.append(" {");
@@ -76,7 +75,7 @@ public class SyntacticSequencer extends GeneratedFile {
       String _simpleName_2 = filename.getSimpleName();
       _builder_1.append(_simpleName_2, "");
       _builder_1.append(" extends ");
-      GenFileName _abstractSyntacticSequencer_1 = this.names.getAbstractSyntacticSequencer();
+      SerializerGenFileNames.GenFileName _abstractSyntacticSequencer_1 = this.names.getAbstractSyntacticSequencer();
       String _simpleName_3 = _abstractSyntacticSequencer_1.getSimpleName();
       _builder_1.append(_simpleName_3, "");
       _builder_1.append(" {");

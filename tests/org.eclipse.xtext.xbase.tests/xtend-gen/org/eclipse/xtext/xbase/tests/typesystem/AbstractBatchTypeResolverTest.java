@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -25,7 +24,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -48,17 +47,17 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     try {
       final XExpression xExpression = this.expression(expression, false);
       Resource _eResource = xExpression.eResource();
-      EList<Diagnostic> _errors = _eResource.getErrors();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       String _string = _errors.toString();
       Resource _eResource_1 = xExpression.eResource();
-      EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
+      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
       boolean _isEmpty = _errors_1.isEmpty();
       Assert.assertTrue(_string, _isEmpty);
       Resource _eResource_2 = xExpression.eResource();
-      EList<Diagnostic> _warnings = _eResource_2.getWarnings();
+      EList<Resource.Diagnostic> _warnings = _eResource_2.getWarnings();
       String _string_1 = _warnings.toString();
       Resource _eResource_3 = xExpression.eResource();
-      EList<Diagnostic> _warnings_1 = _eResource_3.getWarnings();
+      EList<Resource.Diagnostic> _warnings_1 = _eResource_3.getWarnings();
       boolean _isEmpty_1 = _warnings_1.isEmpty();
       Assert.assertTrue(_string_1, _isEmpty_1);
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
@@ -113,7 +112,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
         if (!_matched_1) {
           if (content_1 instanceof XConstructorCall) {
             _matched_1=true;
-            Object _eGet = ((XConstructorCall)content_1).eGet(Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+            Object _eGet = ((XConstructorCall)content_1).eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
             final InternalEObject constructor = ((InternalEObject) _eGet);
             String _string_2 = ((XConstructorCall)content_1).toString();
             Assert.assertNotNull(_string_2, constructor);
@@ -125,7 +124,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
         if (!_matched_1) {
           if (content_1 instanceof XAbstractFeatureCall) {
             _matched_1=true;
-            Object _eGet = ((XAbstractFeatureCall)content_1).eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+            Object _eGet = ((XAbstractFeatureCall)content_1).eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
             final InternalEObject feature = ((InternalEObject) _eGet);
             String _string_2 = ((XAbstractFeatureCall)content_1).toString();
             Assert.assertNotNull(_string_2, feature);
@@ -136,7 +135,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
             if (_notEquals) {
               XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content_1).getImplicitReceiver();
-              Object _eGet_1 = _implicitReceiver_1.eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+              Object _eGet_1 = _implicitReceiver_1.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
               final InternalEObject implicitFeature = ((InternalEObject) _eGet_1);
               String _string_4 = implicitFeature.toString();
               Assert.assertNotNull(_string_4, feature);
@@ -148,17 +147,17 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
         }
       }
       Resource _eResource_4 = xExpression.eResource();
-      Iterable<Diagnostic> _linkingAndSyntaxErrors = this.getLinkingAndSyntaxErrors(_eResource_4);
+      Iterable<Resource.Diagnostic> _linkingAndSyntaxErrors = this.getLinkingAndSyntaxErrors(_eResource_4);
       String _string_2 = _linkingAndSyntaxErrors.toString();
       Resource _eResource_5 = xExpression.eResource();
-      Iterable<Diagnostic> _linkingAndSyntaxErrors_1 = this.getLinkingAndSyntaxErrors(_eResource_5);
+      Iterable<Resource.Diagnostic> _linkingAndSyntaxErrors_1 = this.getLinkingAndSyntaxErrors(_eResource_5);
       boolean _isEmpty_2 = IterableExtensions.isEmpty(_linkingAndSyntaxErrors_1);
       Assert.assertTrue(_string_2, _isEmpty_2);
       Resource _eResource_6 = xExpression.eResource();
-      EList<Diagnostic> _warnings_2 = _eResource_6.getWarnings();
+      EList<Resource.Diagnostic> _warnings_2 = _eResource_6.getWarnings();
       String _string_3 = _warnings_2.toString();
       Resource _eResource_7 = xExpression.eResource();
-      EList<Diagnostic> _warnings_3 = _eResource_7.getWarnings();
+      EList<Resource.Diagnostic> _warnings_3 = _eResource_7.getWarnings();
       boolean _isEmpty_3 = _warnings_3.isEmpty();
       Assert.assertTrue(_string_3, _isEmpty_3);
       return resolvedType;

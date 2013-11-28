@@ -7,15 +7,12 @@
  */
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 
@@ -26,23 +23,13 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 @Data
 @SuppressWarnings("all")
 public class LightweightTraversalData {
-  private final Set<JvmType> _visited = new Function0<Set<JvmType>>() {
-    public Set<JvmType> apply() {
-      HashSet<JvmType> _newHashSet = CollectionLiterals.<JvmType>newHashSet();
-      return _newHashSet;
-    }
-  }.apply();
+  private final Set<JvmType> _visited = CollectionLiterals.<JvmType>newHashSet();
   
   public Set<JvmType> getVisited() {
     return this._visited;
   }
   
-  private final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _typeParameterMapping = new Function0<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>() {
-    public Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> apply() {
-      LinkedHashMap<JvmTypeParameter,LightweightMergedBoundTypeArgument> _newLinkedHashMap = CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>newLinkedHashMap();
-      return _newLinkedHashMap;
-    }
-  }.apply();
+  private final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _typeParameterMapping = CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>newLinkedHashMap();
   
   public Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
     return this._typeParameterMapping;

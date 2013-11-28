@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.tests.linking.AbstractXbaseLinkingTest;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -94,7 +94,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
         if (!_matched_1) {
           if (content_1 instanceof XConstructorCall) {
             _matched_1=true;
-            Object _eGet = ((XConstructorCall)content_1).eGet(Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+            Object _eGet = ((XConstructorCall)content_1).eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
             final InternalEObject constructor = ((InternalEObject) _eGet);
             String _string = ((XConstructorCall)content_1).toString();
             Assert.assertNotNull(_string, constructor);
@@ -106,7 +106,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
         if (!_matched_1) {
           if (content_1 instanceof XAbstractFeatureCall) {
             _matched_1=true;
-            Object _eGet = ((XAbstractFeatureCall)content_1).eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+            Object _eGet = ((XAbstractFeatureCall)content_1).eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
             final InternalEObject feature = ((InternalEObject) _eGet);
             String _string = ((XAbstractFeatureCall)content_1).toString();
             Assert.assertNotNull(_string, feature);

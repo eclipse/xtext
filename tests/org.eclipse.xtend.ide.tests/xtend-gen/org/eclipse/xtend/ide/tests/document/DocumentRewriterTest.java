@@ -38,8 +38,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.document.DocumentRewriter;
-import org.eclipse.xtext.xbase.ui.document.DocumentRewriter.Factory;
-import org.eclipse.xtext.xbase.ui.document.DocumentRewriter.Section;
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
 import org.junit.Assert;
 import org.junit.Test;
@@ -51,7 +49,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
   private WorkbenchTestHelper _workbenchTestHelper;
   
   @Inject
-  private Factory factory;
+  private DocumentRewriter.Factory factory;
   
   @Inject
   @Extension
@@ -72,11 +70,11 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
-        Section _newSection = it.newSection(3, 1);
+        DocumentRewriter.Section _newSection = it.newSection(3, 1);
         _newSection.append("one");
-        Section _newSection_1 = it.newSection(4, 2);
+        DocumentRewriter.Section _newSection_1 = it.newSection(4, 2);
         _newSection_1.append("two");
-        Section _newSection_2 = it.newSection(6, 1);
+        DocumentRewriter.Section _newSection_2 = it.newSection(6, 1);
         _newSection_2.append("three");
         final Procedure1<DocumentRewriter> _function = new Procedure1<DocumentRewriter>() {
           public void apply(final DocumentRewriter it) {
@@ -136,11 +134,11 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
-        Section _newSection = it.newSection(6, 1);
+        DocumentRewriter.Section _newSection = it.newSection(6, 1);
         _newSection.append("one");
-        Section _newSection_1 = it.newSection(4, 2);
+        DocumentRewriter.Section _newSection_1 = it.newSection(4, 2);
         _newSection_1.append("two");
-        Section _newSection_2 = it.newSection(3, 1);
+        DocumentRewriter.Section _newSection_2 = it.newSection(3, 1);
         _newSection_2.append("three");
         final Procedure1<DocumentRewriter> _function = new Procedure1<DocumentRewriter>() {
           public void apply(final DocumentRewriter it) {
@@ -214,16 +212,16 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("class");
-        Section _newSection = it.newSection(_indexOf, 0);
+        DocumentRewriter.Section _newSection = it.newSection(_indexOf, 0);
         _newSection.append("abstract ");
         int _indexOf_1 = model.indexOf("foo");
-        Section _newSection_1 = it.newSection(_indexOf_1, 0);
+        DocumentRewriter.Section _newSection_1 = it.newSection(_indexOf_1, 0);
         _newSection_1.append("static ");
         int _indexOf_2 = model.indexOf("bar");
-        Section _newSection_2 = it.newSection(_indexOf_2, 0);
+        DocumentRewriter.Section _newSection_2 = it.newSection(_indexOf_2, 0);
         _newSection_2.append("private int ");
         int _lastIndexOf = model.lastIndexOf("{}");
-        Section _newSection_3 = it.newSection(_lastIndexOf, 2);
+        DocumentRewriter.Section _newSection_3 = it.newSection(_lastIndexOf, 2);
         _newSection_3.append("{ 42 }");
       }
     };
@@ -265,7 +263,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
-        final Section beforeFoo = it.newSection(_indexOf, 0);
+        final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
         TypeReferences _typeReferences = DocumentRewriterTest.this.services.getTypeReferences();
         JvmType _findDeclaredType = _typeReferences.findDeclaredType(Serializable.class, r);
         beforeFoo.append(_findDeclaredType);
@@ -313,9 +311,9 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
-        final Section beforeFoo = it.newSection(_indexOf, 0);
+        final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
         int _indexOf_1 = model.indexOf("bar");
-        final Section beforeBar = it.newSection(_indexOf_1, 0);
+        final DocumentRewriter.Section beforeBar = it.newSection(_indexOf_1, 0);
         StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(DocumentRewriterTest.this.services, r);
         final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
         OwnedConverter _ownedConverter = new OwnedConverter(owner);
@@ -380,9 +378,9 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
-        final Section beforeFoo = it.newSection(_indexOf, 0);
+        final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
         int _indexOf_1 = model.indexOf("bar");
-        final Section beforeBar = it.newSection(_indexOf_1, 0);
+        final DocumentRewriter.Section beforeBar = it.newSection(_indexOf_1, 0);
         StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(DocumentRewriterTest.this.services, r);
         final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
         OwnedConverter _ownedConverter = new OwnedConverter(owner);
@@ -444,7 +442,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("def bar");
-        final Section beforeDefBar = it.newSection(_indexOf, 0, true);
+        final DocumentRewriter.Section beforeDefBar = it.newSection(_indexOf, 0, true);
         beforeDefBar.append("val x = 42");
       }
     };
@@ -491,15 +489,15 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("{}");
         int _plus = (_indexOf + 3);
-        Section _newSection = it.newSection(_plus, 0, true);
+        DocumentRewriter.Section _newSection = it.newSection(_plus, 0, true);
         _newSection.append("val x = 42");
         int _lastIndexOf = model.lastIndexOf("{\n");
         int _plus_1 = (_lastIndexOf + 1);
-        Section _newSection_1 = it.newSection(_plus_1, 0, 2, true);
+        DocumentRewriter.Section _newSection_1 = it.newSection(_plus_1, 0, 2, true);
         _newSection_1.append("val y = 43");
         int _indexOf_1 = model.indexOf("\t}");
         int _plus_2 = (_indexOf_1 + 2);
-        Section _newSection_2 = it.newSection(_plus_2, 0, true);
+        DocumentRewriter.Section _newSection_2 = it.newSection(_plus_2, 0, true);
         _newSection_2.append("val z = 44");
       }
     };

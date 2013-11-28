@@ -13,7 +13,6 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
-import org.eclipse.xtext.builder.standalone.IIssueHandler.DefaultIssueHandler;
 import org.eclipse.xtext.builder.standalone.XtextResourceSetProvider;
 import org.eclipse.xtext.builder.standalone.compiler.EclipseJavaCompiler;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
@@ -64,7 +63,7 @@ public class StandaloneBuilderModule extends AbstractModule {
   }
   
   protected Class<? extends IIssueHandler> bindIIssueHandler() {
-    return DefaultIssueHandler.class;
+    return IIssueHandler.DefaultIssueHandler.class;
   }
   
   protected Class<JavaIoFileSystemAccess> bindJavaIoFileSystemAccess() {
@@ -72,6 +71,6 @@ public class StandaloneBuilderModule extends AbstractModule {
   }
   
   protected Class<? extends IEncodingProvider> bindIEncodingProvider() {
-    return org.eclipse.xtext.parser.IEncodingProvider.Runtime.class;
+    return IEncodingProvider.Runtime.class;
   }
 }

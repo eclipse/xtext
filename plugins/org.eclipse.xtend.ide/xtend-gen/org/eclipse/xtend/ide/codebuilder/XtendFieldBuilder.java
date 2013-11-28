@@ -12,7 +12,7 @@ import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
+import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
-public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
+public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xtend {
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;

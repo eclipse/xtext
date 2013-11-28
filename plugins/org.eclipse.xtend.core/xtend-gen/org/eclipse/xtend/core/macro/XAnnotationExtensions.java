@@ -44,7 +44,7 @@ import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -139,7 +139,7 @@ public class XAnnotationExtensions {
    * Checks whether this annotation is pointing to a processed annotation, without resolving the proxy
    */
   public boolean isProcessed(final XAnnotation it) {
-    Object _eGet = it.eGet(Literals.XANNOTATION__ANNOTATION_TYPE, false);
+    Object _eGet = it.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
     final Object proxy = _eGet;
     boolean _matched = false;
     if (!_matched) {
@@ -267,7 +267,7 @@ public class XAnnotationExtensions {
   }
   
   public JvmAnnotationType tryFindAnnotationType(final XAnnotation it) {
-    Object _eGet = it.eGet(Literals.XANNOTATION__ANNOTATION_TYPE, false);
+    Object _eGet = it.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
     final Object proxy = _eGet;
     boolean _matched = false;
     if (!_matched) {

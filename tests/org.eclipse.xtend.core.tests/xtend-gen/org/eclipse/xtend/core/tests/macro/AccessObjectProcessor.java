@@ -10,7 +10,6 @@ import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
@@ -39,7 +38,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
                 TypeReference _type = field.getType();
                 it.setReturnType(_type);
                 final CompilationStrategy _function = new CompilationStrategy() {
-                  public CharSequence compile(final CompilationContext it) {
+                  public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                     StringConcatenation _builder = new StringConcatenation();
                     _builder.append("return this.");
                     String _simpleName = field.getSimpleName();

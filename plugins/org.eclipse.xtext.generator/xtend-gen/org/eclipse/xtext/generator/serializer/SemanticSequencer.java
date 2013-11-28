@@ -12,7 +12,6 @@ import com.google.inject.name.Named;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
-import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName;
 
 /**
  * @author Moritz Eyshold - Initial contribution and API
@@ -31,7 +30,7 @@ public class SemanticSequencer extends GeneratedFile {
   @Named("fileHeader")
   private String fileHeader;
   
-  public CharSequence getFileContents(final GenFileName filename) {
+  public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     CharSequence _xifexpression = null;
     if ((this.generateXtendStub).booleanValue()) {
       StringConcatenation _builder = new StringConcatenation();
@@ -52,7 +51,7 @@ public class SemanticSequencer extends GeneratedFile {
       String _simpleName = filename.getSimpleName();
       _builder.append(_simpleName, "");
       _builder.append(" extends ");
-      GenFileName _abstractSemanticSequencer = this.names.getAbstractSemanticSequencer();
+      SerializerGenFileNames.GenFileName _abstractSemanticSequencer = this.names.getAbstractSemanticSequencer();
       String _simpleName_1 = _abstractSemanticSequencer.getSimpleName();
       _builder.append(_simpleName_1, "");
       _builder.append(" {");
@@ -80,7 +79,7 @@ public class SemanticSequencer extends GeneratedFile {
       String _simpleName_2 = filename.getSimpleName();
       _builder_1.append(_simpleName_2, "");
       _builder_1.append(" extends ");
-      GenFileName _abstractSemanticSequencer_1 = this.names.getAbstractSemanticSequencer();
+      SerializerGenFileNames.GenFileName _abstractSemanticSequencer_1 = this.names.getAbstractSemanticSequencer();
       String _simpleName_3 = _abstractSemanticSequencer_1.getSimpleName();
       _builder_1.append(_simpleName_3, "");
       _builder_1.append(" {");

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage.Literals;
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Div;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
@@ -37,7 +37,7 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
     double _doubleValue = bigDecimal.doubleValue();
     boolean _equals = (_doubleValue == 0.0);
     if (_equals) {
-      this.error("Division by zero detected.", Literals.DIV__RIGHT);
+      this.error("Division by zero detected.", ArithmeticsPackage.Literals.DIV__RIGHT);
     }
   }
   

@@ -16,13 +16,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -58,7 +57,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
     try {
       final XExpression xExpression = this.expression(expression, false);
       Resource _eResource = xExpression.eResource();
-      EList<Diagnostic> _errors = _eResource.getErrors();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
       Assert.assertTrue(_isEmpty);
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
@@ -66,7 +65,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
       final List<XConstructorCall> closures = IteratorExtensions.<XConstructorCall>toList(_filter);
       final Function1<XConstructorCall,Integer> _function = new Function1<XConstructorCall,Integer>() {
         public Integer apply(final XConstructorCall it) {
-          List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+          List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
           INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
           int _offset = _head.getOffset();
           return Integer.valueOf(_offset);

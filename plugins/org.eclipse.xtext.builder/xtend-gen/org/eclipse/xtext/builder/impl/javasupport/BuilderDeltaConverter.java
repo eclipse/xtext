@@ -14,7 +14,6 @@ import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.notification.DeltaConverter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -26,7 +25,7 @@ public class BuilderDeltaConverter extends DeltaConverter {
     super(nameConverter, uriHelper);
   }
   
-  public Delta createStructureChangeDelta(final IType type, final IResourceDescription oldDescription, final IResourceDescription newDescription) {
+  public IResourceDescription.Delta createStructureChangeDelta(final IType type, final IResourceDescription oldDescription, final IResourceDescription newDescription) {
     UnconfirmedStructuralChangesDelta _unconfirmedStructuralChangesDelta = new UnconfirmedStructuralChangesDelta(type, oldDescription, newDescription);
     return _unconfirmedStructuralChangesDelta;
   }

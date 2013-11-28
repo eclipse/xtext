@@ -5,7 +5,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo;
@@ -24,7 +23,7 @@ public class SiteSpexCreator implements IProjectFactoryContributor {
     this.projectInfo = projectInfo;
   }
   
-  public void contributeFiles(final IProject project, final IFileCreator fileCreator) {
+  public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator fileCreator) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     _builder.newLine();
@@ -59,7 +58,7 @@ public class SiteSpexCreator implements IProjectFactoryContributor {
     this.writeToFile(_builder, fileCreator, "buckminster.cspex");
   }
   
-  private IFile writeToFile(final CharSequence chrSeq, final IFileCreator fCreator, final String fileName) {
+  private IFile writeToFile(final CharSequence chrSeq, final IProjectFactoryContributor.IFileCreator fCreator, final String fileName) {
     return fCreator.writeToFile(chrSeq, fileName);
   }
 }

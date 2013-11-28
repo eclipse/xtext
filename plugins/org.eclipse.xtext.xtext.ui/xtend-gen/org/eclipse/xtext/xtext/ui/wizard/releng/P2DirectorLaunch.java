@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
@@ -13,27 +12,15 @@ public class P2DirectorLaunch {
   
   private final static String PROFILE = "Buckminster";
   
-  private final static ArrayList<String> IUS = new Function0<ArrayList<String>>() {
-    public ArrayList<String> apply() {
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(
-        "org.eclipse.buckminster.cmdline.product", 
-        "org.eclipse.buckminster.pde.headless.feature.feature.group", 
-        "org.eclipse.buckminster.core.headless.feature.feature.group", 
-        "org.eclipse.buckminster.cvs.headless.feature.feature.group", 
-        "org.eclipse.buckminster.git.headless.feature.feature.group", 
-        "org.eclipse.buckminster.maven.headless.feature.feature.group");
-      return _newArrayList;
-    }
-  }.apply();
+  private final static ArrayList<String> IUS = CollectionLiterals.<String>newArrayList(
+    "org.eclipse.buckminster.cmdline.product", 
+    "org.eclipse.buckminster.pde.headless.feature.feature.group", 
+    "org.eclipse.buckminster.core.headless.feature.feature.group", 
+    "org.eclipse.buckminster.cvs.headless.feature.feature.group", 
+    "org.eclipse.buckminster.git.headless.feature.feature.group", 
+    "org.eclipse.buckminster.maven.headless.feature.feature.group");
   
-  public final static String DESTINATION_JAVA = new Function0<String>() {
-    public String apply() {
-      String _property = System.getProperty("user.home");
-      String _plus = (_property + Character.valueOf(File.separatorChar));
-      String _plus_1 = (_plus + "buckminster");
-      return _plus_1;
-    }
-  }.apply();
+  public final static String DESTINATION_JAVA = ((System.getProperty("user.home") + Character.valueOf(File.separatorChar)) + "buckminster");
   
   public final static String LOCATION = "${workspace_loc}/../runtime-InstallHeadlessBuckminster";
   

@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.tests.lib.internal;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")
 public class MyEntity {
@@ -11,12 +10,7 @@ public class MyEntity {
   
   private final int intProp = 42;
   
-  private final ArrayList<String> myList = new Function0<ArrayList<String>>() {
-    public ArrayList<String> apply() {
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
-      return _newArrayList;
-    }
-  }.apply();
+  private final ArrayList<String> myList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
   
   private final MyEntity friend;
   

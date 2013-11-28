@@ -19,7 +19,7 @@ import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
@@ -27,6 +27,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory;
@@ -289,7 +290,7 @@ public class RichStringFormatter {
     };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function, _function_1);
     doc.operator_add(_surround);
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, Literals.RICH_STRING_ELSE_IF__IF);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XtendPackage.Literals.RICH_STRING_ELSE_IF__IF);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.noSpace();
@@ -339,7 +340,7 @@ public class RichStringFormatter {
     };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function, _function_1);
     doc.operator_add(_surround);
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, Literals.RICH_STRING_ELSE_IF__IF);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XtendPackage.Literals.RICH_STRING_ELSE_IF__IF);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.noSpace();
@@ -414,7 +415,7 @@ public class RichStringFormatter {
     doc.operator_add(_surround_4);
     XExpression _after = expr.getAfter();
     formatter.apply(_after, doc);
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION);
     final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.noSpace();

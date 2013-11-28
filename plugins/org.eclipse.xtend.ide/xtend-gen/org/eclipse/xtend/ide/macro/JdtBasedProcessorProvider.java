@@ -44,11 +44,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       final ClassLoader classLoader = this.createClassLoader(_identifier, project);
       String _identifier_1 = type.getIdentifier();
       final Class<? extends Object> result = classLoader.loadClass(_identifier_1);
-      try {
-        return result.newInstance();
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
+      return result.newInstance();
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;

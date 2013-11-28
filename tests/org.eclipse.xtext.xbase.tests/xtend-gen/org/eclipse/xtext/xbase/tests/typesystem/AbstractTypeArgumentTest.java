@@ -29,7 +29,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -206,13 +206,13 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
           if (!_matched) {
             if (it instanceof XAbstractFeatureCall) {
               _matched=true;
-              _switchResult = Literals.XABSTRACT_FEATURE_CALL__FEATURE;
+              _switchResult = XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
             }
           }
           if (!_matched) {
             if (it instanceof XConstructorCall) {
               _matched=true;
-              _switchResult = Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
+              _switchResult = XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
             }
           }
           final EReference structuralFeature = _switchResult;

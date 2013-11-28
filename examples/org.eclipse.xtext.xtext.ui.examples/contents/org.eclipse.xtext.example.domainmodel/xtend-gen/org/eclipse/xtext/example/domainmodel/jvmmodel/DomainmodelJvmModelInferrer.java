@@ -7,7 +7,6 @@ import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -45,7 +43,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   protected void _infer(final Entity entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(entity);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
-    IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
+    IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
       public void apply(final JvmGenericType it) {
         String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
@@ -75,7 +73,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
             DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
             StringConcatenationClient _client = new StringConcatenationClient() {
               @Override
-              protected void appendTo(TargetStringConcatenation _builder) {
+              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                 _builder.append("initializer.apply(this);");
               }
             };

@@ -34,7 +34,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -44,12 +43,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class JavaBuilderState {
-  private final static Logger LOG = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(JavaBuilderState.class);
-      return _logger;
-    }
-  }.apply();
+  private final static Logger LOG = Logger.getLogger(JavaBuilderState.class);
   
   private final State state;
   

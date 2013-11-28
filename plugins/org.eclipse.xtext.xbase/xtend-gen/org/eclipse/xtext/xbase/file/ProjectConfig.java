@@ -1,11 +1,9 @@
 package org.eclipse.xtext.xbase.file;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")
 public class ProjectConfig {
@@ -21,12 +19,7 @@ public class ProjectConfig {
     return this._name;
   }
   
-  private final Map<Path,Path> _sourceFolderMappings = new Function0<Map<Path,Path>>() {
-    public Map<Path,Path> apply() {
-      LinkedHashMap<Path,Path> _newLinkedHashMap = CollectionLiterals.<Path, Path>newLinkedHashMap();
-      return _newLinkedHashMap;
-    }
-  }.apply();
+  private final Map<Path,Path> _sourceFolderMappings = CollectionLiterals.<Path, Path>newLinkedHashMap();
   
   public Map<Path,Path> getSourceFolderMappings() {
     return this._sourceFolderMappings;

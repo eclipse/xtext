@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -35,12 +34,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class ActiveAnnotationContext {
-  private final List<XtendAnnotationTarget> _annotatedSourceElements = new Function0<List<XtendAnnotationTarget>>() {
-    public List<XtendAnnotationTarget> apply() {
-      ArrayList<XtendAnnotationTarget> _newArrayList = CollectionLiterals.<XtendAnnotationTarget>newArrayList();
-      return _newArrayList;
-    }
-  }.apply();
+  private final List<XtendAnnotationTarget> _annotatedSourceElements = CollectionLiterals.<XtendAnnotationTarget>newArrayList();
   
   public List<XtendAnnotationTarget> getAnnotatedSourceElements() {
     return this._annotatedSourceElements;

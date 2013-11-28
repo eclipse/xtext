@@ -7,7 +7,6 @@ import java.util.List;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
@@ -34,7 +33,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
               it.addParameter(_simpleName, _type);
             }
             final CompilationStrategy _function = new CompilationStrategy() {
-              public CharSequence compile(final CompilationContext it) {
+              public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 {
                   for(final MutableFieldDeclaration f : fields) {
@@ -66,7 +65,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                 TypeReference _type = f.getType();
                 it.setReturnType(_type);
                 final CompilationStrategy _function = new CompilationStrategy() {
-                  public CharSequence compile(final CompilationContext it) {
+                  public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                     StringConcatenation _builder = new StringConcatenation();
                     _builder.append("return ");
                     String _simpleName = f.getSimpleName();
@@ -89,7 +88,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
             Type _findTypeGlobally = context.findTypeGlobally(Override.class);
             it.addAnnotation(_findTypeGlobally);
             final CompilationStrategy _function = new CompilationStrategy() {
-              public CharSequence compile(final CompilationContext it) {
+              public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("final int prime = 31;");
                 _builder.newLine();

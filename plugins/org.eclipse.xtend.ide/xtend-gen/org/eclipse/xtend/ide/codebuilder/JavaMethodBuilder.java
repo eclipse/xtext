@@ -11,14 +11,14 @@ import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
+import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
-public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
+public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Java {
   public boolean isValid() {
     boolean _and = false;
     boolean _isValid = super.isValid();

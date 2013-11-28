@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.ui.notification.JavaBuilderState;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -50,7 +49,7 @@ public class JdtQueuedBuildData extends QueuedBuildData {
     return _unmodifiableCollection;
   }
   
-  public void doQueueChanges(final Collection<Delta> queuedDeltas) {
+  public void doQueueChanges(final Collection<IResourceDescription.Delta> queuedDeltas) {
     boolean _or = false;
     boolean _equals = Objects.equal(queuedDeltas, null);
     if (_equals) {
@@ -63,7 +62,7 @@ public class JdtQueuedBuildData extends QueuedBuildData {
     if (_or) {
       return;
     }
-    for (final Delta delta : queuedDeltas) {
+    for (final IResourceDescription.Delta delta : queuedDeltas) {
       boolean _matched = false;
       if (!_matched) {
         if (delta instanceof UnconfirmedStructuralChangesDelta) {
@@ -83,7 +82,7 @@ public class JdtQueuedBuildData extends QueuedBuildData {
         }
       }
       if (!_matched) {
-        Collection<Delta> _deltas = this.getDeltas();
+        Collection<IResourceDescription.Delta> _deltas = this.getDeltas();
         _deltas.add(delta);
       }
     }
@@ -95,7 +94,7 @@ public class JdtQueuedBuildData extends QueuedBuildData {
       String _name = it.getName();
       final JavaBuilderState oldState = this.javaBuildState.get(_name);
       final JavaBuilderState newState = JavaBuilderState.getLastBuiltState(it);
-      Procedure1<Delta> _xifexpression = null;
+      Procedure1<IResourceDescription.Delta> _xifexpression = null;
       boolean _or = false;
       boolean _equals = Objects.equal(oldState, null);
       if (_equals) {
@@ -107,8 +106,8 @@ public class JdtQueuedBuildData extends QueuedBuildData {
         _or = (_equals || _notEquals);
       }
       if (_or) {
-        final Procedure1<Delta> _function = new Procedure1<Delta>() {
-          public void apply(final Delta it) {
+        final Procedure1<IResourceDescription.Delta> _function = new Procedure1<IResourceDescription.Delta>() {
+          public void apply(final IResourceDescription.Delta it) {
             final Set<QualifiedName> structurallyChangedTypes = newState.getStructurallyChangedTypes();
             boolean _or = false;
             IResourceDescription _new = it.getNew();
@@ -121,7 +120,7 @@ public class JdtQueuedBuildData extends QueuedBuildData {
               _or = (_namesIntersect || _namesIntersect_1);
             }
             if (_or) {
-              Collection<Delta> _deltas = JdtQueuedBuildData.this.getDeltas();
+              Collection<IResourceDescription.Delta> _deltas = JdtQueuedBuildData.this.getDeltas();
               _deltas.add(it);
             }
           }

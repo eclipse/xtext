@@ -12,7 +12,6 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.LineMappingProvider;
-import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -281,7 +280,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
   
   public void assertLineNumbers(final CharSequence xtendCodeWithLineNumbers) {
     final AbstractTraceRegion region = this.getTraceRegion(xtendCodeWithLineNumbers);
-    final List<LineMapping> normalizedMappings = this.lineMappingProvider.getLineMapping(region);
+    final List<LineMappingProvider.LineMapping> normalizedMappings = this.lineMappingProvider.getLineMapping(region);
     String _string = xtendCodeWithLineNumbers.toString();
     final String[] lines = _string.split("\n");
     int _size = ((List<String>)Conversions.doWrapArray(lines)).size();
@@ -289,7 +288,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     IntegerRange _upTo = new IntegerRange(0, _minus);
     for (final Integer lineNumber : _upTo) {
       {
-        final LineMapping mapping = this.findMapping(normalizedMappings, lineNumber);
+        final LineMappingProvider.LineMapping mapping = this.findMapping(normalizedMappings, lineNumber);
         final String line = lines[(lineNumber).intValue()];
         boolean _notEquals = (!Objects.equal(mapping, null));
         if (_notEquals) {
@@ -341,8 +340,8 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     }
   }
   
-  public LineMapping findMapping(final List<LineMapping> mappings, final Integer sourceLine) {
-    for (final LineMapping m : mappings) {
+  public LineMappingProvider.LineMapping findMapping(final List<LineMappingProvider.LineMapping> mappings, final Integer sourceLine) {
+    for (final LineMappingProvider.LineMapping m : mappings) {
       if ((m.sourceStartLine == ((sourceLine).intValue() + 1))) {
         return m;
       }

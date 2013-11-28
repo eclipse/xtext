@@ -9,7 +9,6 @@ package extract;
 
 import extract.Extract;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
-import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester.CompilationResult;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
@@ -19,7 +18,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -29,12 +27,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ExtractTest {
   @Extension
-  private XtendCompilerTester compilerTester = new Function0<XtendCompilerTester>() {
-    public XtendCompilerTester apply() {
-      XtendCompilerTester _newXtendCompilerTester = XtendCompilerTester.newXtendCompilerTester(Extract.class);
-      return _newXtendCompilerTester;
-    }
-  }.apply();
+  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Extract.class);
   
   @Test
   public void testExtractAnnotation() {
@@ -54,8 +47,8 @@ public class ExtractTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-      public void accept(final CompilationResult it) {
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      public void accept(final XtendCompilerTester.CompilationResult it) {
         @Extension
         final TransformationContext ctx = it.getTransformationContext();
         final MutableInterfaceDeclaration interf = ctx.findInterface("MyClassInterface");
