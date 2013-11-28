@@ -14,7 +14,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.validation.IssueCodes;
@@ -73,7 +72,7 @@ public class ActiveAnnotationContext {
         throw t;
       }
       final String msg = this.getMessageWithStackTrace(t);
-      final EList<Diagnostic> errors = resource.getErrors();
+      final EList<Resource.Diagnostic> errors = resource.getErrors();
       final List<? extends EObject> sourceElements = this.getAnnotatedSourceElements();
       for (final EObject target : sourceElements) {
         boolean _matched = false;
