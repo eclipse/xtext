@@ -25,7 +25,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -899,22 +898,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 */
 	protected void _toJavaStatement(XReturnExpression expr, ITreeAppendable b, boolean isReferenced) {
 		if (expr.getExpression()!=null) {
-			JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getNearestLogicalContainer(expr);
-			boolean needsSneakyThrow = false;
-			if(logicalContainer instanceof JvmExecutable) {
-				List<JvmTypeReference> declaredExceptions = ((JvmExecutable) logicalContainer).getExceptions();
-				needsSneakyThrow = needsSneakyThrow(expr.getExpression(), declaredExceptions);
-			}
-			if (needsSneakyThrow) {
-				b.newLine().append("try {").increaseIndentation();
-			}
 			internalToJavaStatement(expr.getExpression(), b, true);
 			b.newLine().append("return ");
 			internalToJavaExpression(expr.getExpression(), b);
 			b.append(";");
-			if (needsSneakyThrow) {
-				generateCheckedExceptionHandling(expr, b);
-			}
 		} else {
 			b.newLine().append("return;");
 		}
