@@ -73,18 +73,12 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.lang.ref.WeakReference;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
 			@SuppressWarnings("all")
 			public class MyRef<U extends Object> extends WeakReference<U> {
 			  public MyRef(final Iterable<U> u) {
-			    super(new Function0<U>() {
-			      public U apply() {
-			        U _head = IterableExtensions.<U>head(u);
-			        return _head;
-			      }
-			    }.apply());
+			    super(IterableExtensions.<U>head(u));
 			  }
 			}
 		''')
@@ -98,17 +92,11 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			import java.lang.ref.WeakReference;
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class MyRef<U extends Object> extends WeakReference<U> {
 			  public MyRef(final List<U> list) {
-			    super(new Function0<U>() {
-			      public U apply() {
-			        U _get = list.get(0);
-			        return _get;
-			      }
-			    }.apply());
+			    super(list.get(0));
 			  }
 			}
 		''')
@@ -122,7 +110,6 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.lang.ref.WeakReference;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class MyRef<U extends CharSequence> extends WeakReference<String> {
@@ -131,12 +118,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public MyRef(final Object o) {
-			    super(new Function0<String>() {
-			      public String apply() {
-			        String _string = o.toString();
-			        return _string;
-			      }
-			    }.apply());
+			    super(o.toString());
 			  }
 			}
 		''')
@@ -149,19 +131,12 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.lang.ref.WeakReference;
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class MyRef<U extends Object> extends WeakReference<Iterable<U>> {
 			  public MyRef() {
-			    super(new Function0<Iterable<U>>() {
-			      public Iterable<U> apply() {
-			        ArrayList<U> _newArrayList = CollectionLiterals.<U>newArrayList();
-			        return _newArrayList;
-			      }
-			    }.apply());
+			    super(CollectionLiterals.<U>newArrayList());
 			  }
 			}
 		''')
@@ -174,19 +149,12 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.lang.ref.WeakReference;
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class MyRef<U extends Object> extends WeakReference<Iterable<U>> {
 			  public MyRef() {
-			    super(new Function0<Iterable<U>>() {
-			      public Iterable<U> apply() {
-			        ArrayList<U> _newArrayList = CollectionLiterals.<U>newArrayList(null);
-			        return _newArrayList;
-			      }
-			    }.apply());
+			    super(CollectionLiterals.<U>newArrayList(null));
 			  }
 			}
 		''')
@@ -199,19 +167,12 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.lang.ref.WeakReference;
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class MyRef<U extends Object> extends WeakReference<Iterable<U>> {
 			  public MyRef(final U u) {
-			    super(new Function0<Iterable<U>>() {
-			      public Iterable<U> apply() {
-			        ArrayList<U> _newArrayList = CollectionLiterals.<U>newArrayList(u);
-			        return _newArrayList;
-			      }
-			    }.apply());
+			    super(CollectionLiterals.<U>newArrayList(u));
 			  }
 			}
 		''')
@@ -243,19 +204,12 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.lang.ref.WeakReference;
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class MyRef<AAA extends Object, AA extends AAA> extends WeakReference<Iterable<AAA>> {
 			  public MyRef(final AA a) {
-			    super(new Function0<Iterable<AAA>>() {
-			      public Iterable<AAA> apply() {
-			        ArrayList<AAA> _newArrayList = CollectionLiterals.<AAA>newArrayList(a);
-			        return _newArrayList;
-			      }
-			    }.apply());
+			    super(CollectionLiterals.<AAA>newArrayList(a));
 			  }
 			}
 		''')
@@ -270,19 +224,12 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.lang.ref.WeakReference;
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class MyRef<AAA extends Object, AA extends AAA> extends WeakReference<Iterable<AA>> {
 			  public MyRef(final AAA a) {
-			    this(new Function0<Iterable<AA>>() {
-			      public Iterable<AA> apply() {
-			        ArrayList<AA> _newArrayList = CollectionLiterals.<AA>newArrayList(((AA) a));
-			        return _newArrayList;
-			      }
-			    }.apply());
+			    this(CollectionLiterals.<AA>newArrayList(((AA) a)));
 			  }
 			  
 			  public MyRef(final Iterable<AA> iter) {
@@ -319,19 +266,12 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.ArrayList;
-			import java.util.Collection;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class MyList<T extends Object, U extends T> extends ArrayList<T> {
 			  public MyList(final U u) {
-			    super(new Function0<Collection<? extends T>>() {
-			      public Collection<? extends T> apply() {
-			        ArrayList<U> _newArrayList = CollectionLiterals.<U>newArrayList(u);
-			        return _newArrayList;
-			      }
-			    }.apply());
+			    super(CollectionLiterals.<U>newArrayList(u));
 			  }
 			}
 		''')

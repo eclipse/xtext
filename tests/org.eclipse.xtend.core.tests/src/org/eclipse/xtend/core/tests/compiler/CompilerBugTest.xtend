@@ -694,22 +694,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.ArrayList;
 			import java.util.Collection;
 			import java.util.List;
 			import java.util.Map;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
 			@SuppressWarnings("all")
 			public class Bug {
-			  private List<String> list = new Function0<List<String>>() {
-			    public List<String> apply() {
-			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-			      return _newArrayList;
-			    }
-			  }.apply();
+			  private List<String> list = CollectionLiterals.<String>newArrayList();
 			  
 			  public List<String> doSomething(final Map<String,String> mapping) {
 			    Collection<String> _values = mapping.values();
@@ -1723,16 +1716,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				val String[] f = #["a", "b", 1.toString ] 
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
-			
 			@SuppressWarnings("all")
 			public class C {
-			  private final String[] f = new Function0<String[]>() {
-			    public String[] apply() {
-			      String _string = Integer.valueOf(1).toString();
-			      return new String[] { "a", "b", _string };
-			    }
-			  }.apply();
+			  private final String[] f = new String[] { "a", "b", Integer.valueOf(1).toString() };
 			}
 		''')
 	}
