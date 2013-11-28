@@ -13,7 +13,6 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -32,17 +31,9 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")
 public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
-  private final static Logger LOG = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(JdtBasedProcessorProvider.class);
-      return _logger;
-    }
-  }.apply();
-  
   public Object getProcessorInstance(final JvmType type) {
     try {
       Resource _eResource = type.eResource();
@@ -61,8 +52,13 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        JdtBasedProcessorProvider.LOG.info(e);
-        return null;
+        String _identifier_2 = type.getIdentifier();
+        String _plus = ("Problem during instantiation of " + _identifier_2);
+        String _plus_1 = (_plus + " : ");
+        String _message = e.getMessage();
+        String _plus_2 = (_plus_1 + _message);
+        IllegalStateException _illegalStateException = new IllegalStateException(_plus_2, e);
+        throw _illegalStateException;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

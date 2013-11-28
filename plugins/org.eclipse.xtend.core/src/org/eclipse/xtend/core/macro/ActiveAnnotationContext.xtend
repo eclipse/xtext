@@ -138,13 +138,15 @@ class ActiveAnnotationContextProvider {
 						val fa = new ActiveAnnotationContext
 						fa.compilationUnit = compilationUnit
 						val processorType = key.getProcessorType
-						val processorInstance = processorType.processorInstance
-						if (processorInstance != null) {
+						try {
+							val processorInstance = processorType.processorInstance
+							if (processorInstance == null) {
+								throw new IllegalStateException("Couldn't instantiate the referenced annotation processor of type '" + processorType.identifier + "'. This is usually the case when the processor resides in the same project as the annotated element.");
+							}
 							fa.setProcessorInstance(processorInstance)
-						} else {
+						} catch (IllegalStateException e) {
 							file.eResource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 
-								IssueCodes.PROCESSING_ERROR, "Couldn't instantiate the referenced annotation processor of type '"+processorType.identifier
-								+"'. This is usually the case when the processor resides in the same project as the annotated element.", file, null, -1, null))
+								IssueCodes.PROCESSING_ERROR, e.message , file, null, -1, null))
 						}
 						result.contexts.put(key, fa)
 					}

@@ -15,7 +15,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
@@ -38,7 +37,6 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -71,7 +69,7 @@ public class ActiveAnnotationContextProvider {
     try {
       ActiveAnnotationContexts _xblockexpression = null;
       {
-        final StoppedTask task = Stopwatches.forTask("[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)");
+        final Stopwatches.StoppedTask task = Stopwatches.forTask("[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)");
         task.start();
         ActiveAnnotationContexts _xtrycatchfinallyexpression = null;
         try {
@@ -94,19 +92,29 @@ public class ActiveAnnotationContextProvider {
                     fa.setCompilationUnit(compilationUnit);
                     JvmAnnotationType _key_1 = it.getKey();
                     final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
-                    final Object processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
-                    boolean _notEquals = (!Objects.equal(processorInstance, null));
-                    if (_notEquals) {
+                    try {
+                      final Object processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
+                      boolean _equals = Objects.equal(processorInstance, null);
+                      if (_equals) {
+                        String _identifier = processorType.getIdentifier();
+                        String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
+                        String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
+                        IllegalStateException _illegalStateException = new IllegalStateException(_plus_1);
+                        throw _illegalStateException;
+                      }
                       fa.setProcessorInstance(processorInstance);
-                    } else {
-                      Resource _eResource = file.eResource();
-                      EList<Diagnostic> _errors = _eResource.getErrors();
-                      String _identifier = processorType.getIdentifier();
-                      String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
-                      String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
-                      EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
-                        IssueCodes.PROCESSING_ERROR, _plus_1, file, null, (-1), null);
-                      _errors.add(_eObjectDiagnosticImpl);
+                    } catch (final Throwable _t) {
+                      if (_t instanceof IllegalStateException) {
+                        final IllegalStateException e = (IllegalStateException)_t;
+                        Resource _eResource = file.eResource();
+                        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+                        String _message = e.getMessage();
+                        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
+                          IssueCodes.PROCESSING_ERROR, _message, file, null, (-1), null);
+                        _errors.add(_eObjectDiagnosticImpl);
+                      } else {
+                        throw Exceptions.sneakyThrow(_t);
+                      }
                     }
                     Map<JvmAnnotationType,ActiveAnnotationContext> _contexts_1 = result.getContexts();
                     JvmAnnotationType _key_2 = it.getKey();

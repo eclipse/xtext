@@ -58,9 +58,13 @@ public class ProcessorInstanceForJvmTypeProvider {
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        String _string = e.toString();
-        ProcessorInstanceForJvmTypeProvider.logger.error(_string);
-        return null;
+        String _identifier_1 = type.getIdentifier();
+        String _plus = ("Problem during instantiation of " + _identifier_1);
+        String _plus_1 = (_plus + " : ");
+        String _message = e.getMessage();
+        String _plus_2 = (_plus_1 + _message);
+        IllegalStateException _illegalStateException = new IllegalStateException(_plus_2, e);
+        throw _illegalStateException;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
