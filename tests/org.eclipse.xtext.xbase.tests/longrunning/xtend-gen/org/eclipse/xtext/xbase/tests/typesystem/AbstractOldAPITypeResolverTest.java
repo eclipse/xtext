@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -34,11 +33,11 @@ public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolve
     try {
       final XExpression xExpression = this.expression(expression, false);
       Resource _eResource = xExpression.eResource();
-      EList<Diagnostic> _errors = _eResource.getErrors();
+      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       boolean _isEmpty = _errors.isEmpty();
       Assert.assertTrue(_isEmpty);
       Resource _eResource_1 = xExpression.eResource();
-      EList<Diagnostic> _warnings = _eResource_1.getWarnings();
+      EList<Resource.Diagnostic> _warnings = _eResource_1.getWarnings();
       boolean _isEmpty_1 = _warnings.isEmpty();
       Assert.assertTrue(_isEmpty_1);
       ITypeProvider _typeProvider = this.getTypeProvider();
@@ -77,14 +76,14 @@ public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolve
         }
       }
       Resource _eResource_2 = xExpression.eResource();
-      Iterable<Diagnostic> _linkingAndSyntaxErrors = this.getLinkingAndSyntaxErrors(_eResource_2);
+      Iterable<Resource.Diagnostic> _linkingAndSyntaxErrors = this.getLinkingAndSyntaxErrors(_eResource_2);
       String _string = _linkingAndSyntaxErrors.toString();
       Resource _eResource_3 = xExpression.eResource();
-      Iterable<Diagnostic> _linkingAndSyntaxErrors_1 = this.getLinkingAndSyntaxErrors(_eResource_3);
+      Iterable<Resource.Diagnostic> _linkingAndSyntaxErrors_1 = this.getLinkingAndSyntaxErrors(_eResource_3);
       boolean _isEmpty_2 = IterableExtensions.isEmpty(_linkingAndSyntaxErrors_1);
       Assert.assertTrue(_string, _isEmpty_2);
       Resource _eResource_4 = xExpression.eResource();
-      EList<Diagnostic> _warnings_1 = _eResource_4.getWarnings();
+      EList<Resource.Diagnostic> _warnings_1 = _eResource_4.getWarnings();
       boolean _isEmpty_3 = _warnings_1.isEmpty();
       Assert.assertTrue(_isEmpty_3);
       return resolvedType;

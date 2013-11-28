@@ -17,10 +17,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
-import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName;
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
+import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
@@ -32,7 +30,7 @@ public class GrammarConstraints extends GeneratedFile {
   @Extension
   private SemanticSequencerUtil sequencerUtil;
   
-  public CharSequence getFileContents(final GenFileName filename) {
+  public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar ");
     String _name = this.grammar.getName();
@@ -63,9 +61,9 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.append("// ******** constraint contexts ********");
     _builder.newLine();
     {
-      List<IConstraintContext> _grammarConstraintContexts = this.sequencerUtil.getGrammarConstraintContexts(this.grammar);
+      List<IGrammarConstraintProvider.IConstraintContext> _grammarConstraintContexts = this.sequencerUtil.getGrammarConstraintContexts(this.grammar);
       boolean _hasElements_1 = false;
-      for(final IConstraintContext gcc : _grammarConstraintContexts) {
+      for(final IGrammarConstraintProvider.IConstraintContext gcc : _grammarConstraintContexts) {
         if (!_hasElements_1) {
           _hasElements_1 = true;
         } else {
@@ -84,9 +82,9 @@ public class GrammarConstraints extends GeneratedFile {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         {
-          List<IConstraint> _constraints = gcc.getConstraints();
+          List<IGrammarConstraintProvider.IConstraint> _constraints = gcc.getConstraints();
           boolean _hasElements_2 = false;
-          for(final IConstraint constraint : _constraints) {
+          for(final IGrammarConstraintProvider.IConstraint constraint : _constraints) {
             if (!_hasElements_2) {
               _hasElements_2 = true;
             } else {
@@ -106,9 +104,9 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.append("// ******** constraints ********");
     _builder.newLine();
     {
-      Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
+      Collection<IGrammarConstraintProvider.IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
       boolean _hasElements_3 = false;
-      for(final IConstraint constraint_1 : _grammarConstraints) {
+      for(final IGrammarConstraintProvider.IConstraint constraint_1 : _grammarConstraints) {
         if (!_hasElements_3) {
           _hasElements_3 = true;
         } else {
@@ -126,7 +124,7 @@ public class GrammarConstraints extends GeneratedFile {
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         {
-          IConstraintElement _body = constraint_1.getBody();
+          IGrammarConstraintProvider.IConstraintElement _body = constraint_1.getBody();
           boolean _equals = Objects.equal(_body, null);
           if (_equals) {
             _builder.append("\t");
@@ -141,7 +139,7 @@ public class GrammarConstraints extends GeneratedFile {
             _builder.newLineIfNotEmpty();
           } else {
             _builder.append("\t");
-            IConstraintElement _body_1 = constraint_1.getBody();
+            IGrammarConstraintProvider.IConstraintElement _body_1 = constraint_1.getBody();
             _builder.append(_body_1, "\t");
             _builder.append(";");
             _builder.newLineIfNotEmpty();

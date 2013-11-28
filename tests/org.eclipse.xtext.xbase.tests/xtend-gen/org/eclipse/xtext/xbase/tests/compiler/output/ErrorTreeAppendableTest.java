@@ -7,7 +7,7 @@ import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -38,7 +38,7 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
       Assert.assertEquals(app, _trace);
       TreeAppendable _trace_1 = app.trace(e, true);
       Assert.assertEquals(app, _trace_1);
-      ITreeAppendable _trace_2 = app.trace(e, Literals.XNUMBER_LITERAL__VALUE, (-1));
+      ITreeAppendable _trace_2 = app.trace(e, XbasePackage.Literals.XNUMBER_LITERAL__VALUE, (-1));
       Assert.assertEquals(app, _trace_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

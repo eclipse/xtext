@@ -10,7 +10,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.generator.IFilePostProcessor;
-import org.eclipse.xtext.xbase.compiler.ElementIssueProvider.Factory;
+import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -25,7 +25,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   private JvmModelGenerator generator;
   
   @Inject
-  private Factory issueProviderFactory;
+  private ElementIssueProvider.Factory issueProviderFactory;
   
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;

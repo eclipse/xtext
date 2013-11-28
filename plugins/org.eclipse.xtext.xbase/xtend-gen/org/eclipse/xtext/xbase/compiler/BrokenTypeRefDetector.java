@@ -15,12 +15,12 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor.InheritanceAware;
+import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
-public class BrokenTypeRefDetector extends InheritanceAware<Boolean> {
+public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.InheritanceAware<Boolean> {
   protected Boolean handleNullReference() {
     return Boolean.valueOf(true);
   }

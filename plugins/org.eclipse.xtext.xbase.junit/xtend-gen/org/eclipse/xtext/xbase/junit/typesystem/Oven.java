@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.junit.typesystem.SimpleBloomFilter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
@@ -48,12 +47,7 @@ public class Oven extends Assert {
   @Inject
   private IBatchTypeResolver typeResolver;
   
-  private final SimpleBloomFilter alreadyBaked = new Function0<SimpleBloomFilter>() {
-    public SimpleBloomFilter apply() {
-      SimpleBloomFilter _create = SimpleBloomFilter.create(5000000);
-      return _create;
-    }
-  }.apply();
+  private final SimpleBloomFilter alreadyBaked = SimpleBloomFilter.create(5000000);
   
   @Inject
   @Extension

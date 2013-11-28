@@ -19,7 +19,6 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -68,7 +67,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
           _builder.append(_name, "");
           _builder.append("; only primitive type, String, Class, annotation, enumeration are permitted or 1-dimensional arrays thereof");
           this.error(_builder.toString(), it_1, 
-            Literals.XTEND_FIELD__TYPE, 
+            XtendPackage.Literals.XTEND_FIELD__TYPE, 
             IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
         }
         XExpression _initialValue = it_1.getInitialValue();

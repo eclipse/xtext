@@ -13,7 +13,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XVARIABLE_DECLARATION, IssueCodes.UNREACHABLE_CODE);
+      this.helper.assertError(file, XbasePackage.Literals.XVARIABLE_DECLARATION, IssueCodes.UNREACHABLE_CODE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -74,7 +74,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XASSIGNMENT, IssueCodes.UNREACHABLE_CODE);
+      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.UNREACHABLE_CODE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -101,7 +101,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XASSIGNMENT, IssueCodes.UNREACHABLE_CODE);
+      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.UNREACHABLE_CODE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -125,7 +125,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertWarning(file, Literals.XIF_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+      this.helper.assertWarning(file, XbasePackage.Literals.XIF_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -152,7 +152,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertWarning(file, Literals.XIF_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+      this.helper.assertWarning(file, XbasePackage.Literals.XIF_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -194,7 +194,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertWarning(file, Literals.XIF_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+      this.helper.assertWarning(file, XbasePackage.Literals.XIF_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

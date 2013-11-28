@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.lib.macro.services.Problem;
-import org.eclipse.xtend.lib.macro.services.Problem.Severity;
 
 @SuppressWarnings("all")
 public class ProblemImpl implements Problem {
@@ -16,9 +15,9 @@ public class ProblemImpl implements Problem {
   
   private String message;
   
-  private Severity severity;
+  private Problem.Severity severity;
   
-  public ProblemImpl(final String id, final String message, final Severity severity) {
+  public ProblemImpl(final String id, final String message, final Problem.Severity severity) {
     this.id = id;
     this.message = message;
     this.severity = severity;
@@ -32,7 +31,7 @@ public class ProblemImpl implements Problem {
     return this.message;
   }
   
-  public Severity getSeverity() {
+  public Problem.Severity getSeverity() {
     return this.severity;
   }
 }

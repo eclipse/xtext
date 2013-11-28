@@ -1,11 +1,9 @@
 package org.eclipse.xtext.xbase.file;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -17,12 +15,7 @@ public class WorkspaceConfig {
     return this._absoluteFileSystemPath;
   }
   
-  private final Map<String,ProjectConfig> _projects = new Function0<Map<String,ProjectConfig>>() {
-    public Map<String,ProjectConfig> apply() {
-      LinkedHashMap<String,ProjectConfig> _newLinkedHashMap = CollectionLiterals.<String, ProjectConfig>newLinkedHashMap();
-      return _newLinkedHashMap;
-    }
-  }.apply();
+  private final Map<String,ProjectConfig> _projects = CollectionLiterals.<String, ProjectConfig>newLinkedHashMap();
   
   public Map<String,ProjectConfig> getProjects() {
     return this._projects;

@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -40,7 +40,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XTEND_FIELD, IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
+      this.helper.assertError(file, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -89,7 +89,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, Literals.XTEND_FIELD, IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
+      this.helper.assertError(file, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

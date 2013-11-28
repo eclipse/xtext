@@ -6,7 +6,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
@@ -33,12 +33,12 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     this.modelFolder = modelFolder;
   }
   
-  public void contributeFiles(final IProject project, final IFileCreator creator) {
+  public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator creator) {
     this.createWorkflowFile(creator);
     this.createGrammarFile(creator);
   }
   
-  public IFile createWorkflowFile(final IFileCreator creator) {
+  public IFile createWorkflowFile(final IProjectFactoryContributor.IFileCreator creator) {
     CharSequence _workflow = this.workflow();
     String _basePackagePath = this.projectInfo.getBasePackagePath();
     String _plus = ((this.modelFolder + "/") + _basePackagePath);
@@ -50,7 +50,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     return _writeToFile;
   }
   
-  public IFile createGrammarFile(final IFileCreator creator) {
+  public IFile createGrammarFile(final IProjectFactoryContributor.IFileCreator creator) {
     Ecore2XtextGrammarCreator _ecore2XtextGrammarCreator = new Ecore2XtextGrammarCreator();
     CharSequence _grammar = _ecore2XtextGrammarCreator.grammar(this.projectInfo);
     String _grammarFilePath = this.projectInfo.getGrammarFilePath();

@@ -14,7 +14,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTestData.NestedList;
+import org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTestData;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,7 +45,7 @@ public abstract class AbstractTypeParameterSubstitutorTest extends AbstractXbase
   
   @Test
   public void testResolve_01() {
-    final JvmTypeReference declaration = this.typeReferences.getTypeForName(NestedList.class, this.resourceSet);
+    final JvmTypeReference declaration = this.typeReferences.getTypeForName(TypeResolutionTestData.NestedList.class, this.resourceSet);
     final JvmTypeReference resolveMe = declaration;
     final String resolved = this.resolve(declaration, resolveMe);
     Assert.assertEquals("NestedList<T>", resolved);
@@ -53,7 +53,7 @@ public abstract class AbstractTypeParameterSubstitutorTest extends AbstractXbase
   
   @Test
   public void testResolve_02() {
-    final JvmTypeReference declaration = this.typeReferences.getTypeForName(NestedList.class, this.resourceSet);
+    final JvmTypeReference declaration = this.typeReferences.getTypeForName(TypeResolutionTestData.NestedList.class, this.resourceSet);
     final JvmTypeReference resolveMe = this.typeReferences.getTypeForName(List.class, this.resourceSet);
     final String resolved = this.resolve(declaration, resolveMe);
     Assert.assertEquals("List<List<T>>", resolved);
@@ -61,7 +61,7 @@ public abstract class AbstractTypeParameterSubstitutorTest extends AbstractXbase
   
   @Test
   public void testResolve_03() {
-    final JvmTypeReference declaration = this.typeReferences.getTypeForName(NestedList.class, this.resourceSet);
+    final JvmTypeReference declaration = this.typeReferences.getTypeForName(TypeResolutionTestData.NestedList.class, this.resourceSet);
     final JvmTypeReference resolveMe = this.typeReferences.getTypeForName(Iterable.class, this.resourceSet);
     final String resolved = this.resolve(declaration, resolveMe);
     Assert.assertEquals("Iterable<List<T>>", resolved);
@@ -69,7 +69,7 @@ public abstract class AbstractTypeParameterSubstitutorTest extends AbstractXbase
   
   @Test
   public void testResolve_04() {
-    final JvmTypeReference declaration = this.typeReferences.getTypeForName(NestedList.class, this.resourceSet);
+    final JvmTypeReference declaration = this.typeReferences.getTypeForName(TypeResolutionTestData.NestedList.class, this.resourceSet);
     final JvmTypeReference resolveMe = this.typeReferences.getTypeForName(Iterable.class, this.resourceSet);
     final String resolved = this.resolve(declaration, resolveMe);
     Assert.assertEquals("Iterable<List<T>>", resolved);

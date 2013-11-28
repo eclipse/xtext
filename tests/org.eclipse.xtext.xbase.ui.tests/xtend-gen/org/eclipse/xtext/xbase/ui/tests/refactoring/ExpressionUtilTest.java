@@ -61,6 +61,8 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper]$", "[it|toFirstUpper]");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper$]", "[it|toFirstUpper]");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper$]", "[it|toFirstUpper]");
+    this.assertExpressionSelected("newArrayList($$\'jan\')", "\'jan\'");
+    this.assertExpressionSelected("newArrayList($\'jan\'$)", "\'jan\'");
   }
   
   @Test

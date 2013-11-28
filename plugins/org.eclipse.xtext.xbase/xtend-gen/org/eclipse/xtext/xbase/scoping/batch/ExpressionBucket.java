@@ -11,7 +11,7 @@ import java.util.Map;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
-import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures.Provider;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -37,13 +37,13 @@ public class ExpressionBucket {
     return this._extensionProviders;
   }
   
-  private final Provider _resolvedFeaturesProvider;
+  private final IResolvedFeatures.Provider _resolvedFeaturesProvider;
   
-  public Provider getResolvedFeaturesProvider() {
+  public IResolvedFeatures.Provider getResolvedFeaturesProvider() {
     return this._resolvedFeaturesProvider;
   }
   
-  public ExpressionBucket(final int id, final Map<XExpression,LightweightTypeReference> extensionProviders, final Provider resolvedFeaturesProvider) {
+  public ExpressionBucket(final int id, final Map<XExpression,LightweightTypeReference> extensionProviders, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
     super();
     this._id = id;
     this._extensionProviders = extensionProviders;

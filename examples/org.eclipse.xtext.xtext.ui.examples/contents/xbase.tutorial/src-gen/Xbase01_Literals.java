@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -26,7 +25,7 @@ public class Xbase01_Literals {
       /* new BigDecimal("0.123456789123456789123456789123456789e4242") */
       /* String.class */
       String.class.getField("CASE_INSENSITIVE_ORDER");
-      /* Entry.class */
+      /* Map.Entry.class */
       /* CollectionLiterals.<Integer>newArrayList(Integer.valueOf(3), Integer.valueOf(5), Integer.valueOf(7)); */
       /* CollectionLiterals.<String>newHashSet("foo", "bar", "baz"); */
       Pair<Integer,String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(1), "one");

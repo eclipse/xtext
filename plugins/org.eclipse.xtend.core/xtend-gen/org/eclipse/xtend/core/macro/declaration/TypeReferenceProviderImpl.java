@@ -11,7 +11,7 @@ import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.PrimitiveType.Kind;
+import org.eclipse.xtend.lib.macro.declaration.PrimitiveType;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
@@ -189,60 +189,60 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         if (typeDeclaration instanceof PrimitiveTypeImpl) {
           _matched=true;
           TypeReference _switchResult_1 = null;
-          Kind _kind = ((PrimitiveTypeImpl)typeDeclaration).getKind();
-          final Kind _switchValue = _kind;
+          PrimitiveType.Kind _kind = ((PrimitiveTypeImpl)typeDeclaration).getKind();
+          final PrimitiveType.Kind _switchValue = _kind;
           boolean _matched_1 = false;
           if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.BOOLEAN)) {
+            if (Objects.equal(_switchValue,PrimitiveType.Kind.BOOLEAN)) {
               _matched_1=true;
               TypeReference _primitiveBoolean = this.getPrimitiveBoolean();
               _switchResult_1 = _primitiveBoolean;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.BYTE)) {
+            if (Objects.equal(_switchValue,PrimitiveType.Kind.BYTE)) {
               _matched_1=true;
               TypeReference _primitiveByte = this.getPrimitiveByte();
               _switchResult_1 = _primitiveByte;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.CHAR)) {
+            if (Objects.equal(_switchValue,PrimitiveType.Kind.CHAR)) {
               _matched_1=true;
               TypeReference _primitiveChar = this.getPrimitiveChar();
               _switchResult_1 = _primitiveChar;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.DOUBLE)) {
+            if (Objects.equal(_switchValue,PrimitiveType.Kind.DOUBLE)) {
               _matched_1=true;
               TypeReference _primitiveDouble = this.getPrimitiveDouble();
               _switchResult_1 = _primitiveDouble;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.FLOAT)) {
+            if (Objects.equal(_switchValue,PrimitiveType.Kind.FLOAT)) {
               _matched_1=true;
               TypeReference _primitiveFloat = this.getPrimitiveFloat();
               _switchResult_1 = _primitiveFloat;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.INT)) {
+            if (Objects.equal(_switchValue,PrimitiveType.Kind.INT)) {
               _matched_1=true;
               TypeReference _primitiveInt = this.getPrimitiveInt();
               _switchResult_1 = _primitiveInt;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.LONG)) {
+            if (Objects.equal(_switchValue,PrimitiveType.Kind.LONG)) {
               _matched_1=true;
               TypeReference _primitiveLong = this.getPrimitiveLong();
               _switchResult_1 = _primitiveLong;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.SHORT)) {
+            if (Objects.equal(_switchValue,PrimitiveType.Kind.SHORT)) {
               _matched_1=true;
               TypeReference _primitiveShort = this.getPrimitiveShort();
               _switchResult_1 = _primitiveShort;

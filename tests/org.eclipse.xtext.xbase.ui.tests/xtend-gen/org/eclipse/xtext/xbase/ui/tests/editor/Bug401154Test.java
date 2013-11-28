@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder.ProposalTester;
 import org.eclipse.xtext.xbase.ui.tests.editor.AbstractXbaseContentAssistBugTest;
 import org.junit.Test;
 
@@ -28,7 +27,7 @@ public class Bug401154Test extends AbstractXbaseContentAssistBugTest {
     _builder.append("CharSequence: ");
     _builder.newLine();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ProposalTester _assertProposal = _append.assertProposal("length");
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("length");
     _assertProposal.withDisplayString("length : int - CharSequence.length()");
   }
   
@@ -42,7 +41,7 @@ public class Bug401154Test extends AbstractXbaseContentAssistBugTest {
     _builder.append("CharSequence: {");
     _builder.newLine();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ProposalTester _assertProposal = _append.assertProposal("length");
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("length");
     _assertProposal.withDisplayString("length : int - CharSequence.length()");
   }
   
@@ -56,7 +55,7 @@ public class Bug401154Test extends AbstractXbaseContentAssistBugTest {
     _builder.append("CharSequence: { length ");
     _builder.newLine();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ProposalTester _assertProposal = _append.assertProposal("length");
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("length");
     _assertProposal.withDisplayString("length : int - CharSequence.length()");
   }
   
@@ -89,7 +88,7 @@ public class Bug401154Test extends AbstractXbaseContentAssistBugTest {
     _builder.append("Appendable: { ");
     _builder.newLine();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ProposalTester _assertProposal = _append.assertProposal("length");
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("length");
     _assertProposal.withDisplayString("length : int - CharSequence.length()");
   }
   
@@ -103,7 +102,7 @@ public class Bug401154Test extends AbstractXbaseContentAssistBugTest {
     _builder.append("CharSequence: it.");
     _builder.newLine();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ProposalTester _assertProposal = _append.assertProposal("length");
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("length");
     _assertProposal.withDisplayString("length : int - CharSequence.length()");
   }
   
@@ -117,7 +116,7 @@ public class Bug401154Test extends AbstractXbaseContentAssistBugTest {
     _builder.append("CharSequence: ");
     _builder.newLine();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ProposalTester _assertProposal = _append.assertProposal("charAt()");
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("charAt()");
     _assertProposal.withDisplayString("charAt(int index) : char - AbstractStringBuilder");
   }
 }

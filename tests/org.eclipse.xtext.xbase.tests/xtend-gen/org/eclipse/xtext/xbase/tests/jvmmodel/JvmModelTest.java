@@ -11,11 +11,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -31,7 +30,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
   private ValidationTestHelper helper;
   
   @Inject
-  private Manager manager;
+  private IResourceDescription.Manager manager;
   
   @Inject
   @Extension
@@ -89,7 +88,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
   public void testReturnTypeConformance() {
     try {
       final XExpression expression = this.expression("return");
-      this.helper.assertError(expression, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this.helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

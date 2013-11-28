@@ -26,7 +26,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -78,6 +78,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -105,7 +106,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(_nodeForEObject, _function);
     format.operator_add(_prepend);
-    final INode pkg = this._nodeModelAccess.nodeForFeature(xtendFile, Literals.XTEND_FILE__PACKAGE);
+    final INode pkg = this._nodeModelAccess.nodeForFeature(xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE);
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.oneSpace();
@@ -234,7 +235,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
     document.operator_add(_append);
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(imp, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION__STATIC);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(imp, XtypePackage.Literals.XIMPORT_DECLARATION__STATIC);
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.oneSpace();
@@ -242,7 +243,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(_nodeForFeature, _function_1);
     document.operator_add(_append_1);
-    INode _nodeForFeature_1 = this._nodeModelAccess.nodeForFeature(imp, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION__EXTENSION);
+    INode _nodeForFeature_1 = this._nodeModelAccess.nodeForFeature(imp, XtypePackage.Literals.XIMPORT_DECLARATION__EXTENSION);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.oneSpace();
@@ -763,10 +764,10 @@ public class XtendFormatter extends XbaseFormatter2 {
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword_1, _function_1, _function_2);
       format.operator_add(_surround);
     }
-    final INode nameNode = this._nodeModelAccess.nodeForFeature(func, Literals.XTEND_FUNCTION__NAME);
+    final INode nameNode = this._nodeModelAccess.nodeForFeature(func, XtendPackage.Literals.XTEND_FUNCTION__NAME);
     final ILeafNode open = this._nodeModelAccess.immediatelyFollowingKeyword(nameNode, "(");
     final ILeafNode close = this._nodeModelAccess.nodeForKeyword(func, ")");
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(func, Literals.XTEND_FUNCTION__RETURN_TYPE);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(func, XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE);
     final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.oneSpace();
@@ -806,7 +807,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     String _name = field.getName();
     boolean _notEquals = (!Objects.equal(_name, null));
     if (_notEquals) {
-      INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(field, Literals.XTEND_FIELD__TYPE);
+      INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(field, XtendPackage.Literals.XTEND_FIELD__TYPE);
       final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.oneSpace();
@@ -838,7 +839,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     this.formatAnnotations(param, format, XbaseFormatterPreferenceKeys.newLineAfterParameterAnnotations);
     JvmTypeReference _parameterType = param.getParameterType();
     this.format(_parameterType, format);
-    final INode nameNode = this._nodeModelAccess.nodeForFeature(param, Literals.XTEND_PARAMETER__NAME);
+    final INode nameNode = this._nodeModelAccess.nodeForFeature(param, XtendPackage.Literals.XTEND_PARAMETER__NAME);
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.oneSpace();

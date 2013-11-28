@@ -6,12 +6,10 @@ import java.util.List;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -21,7 +19,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             return _builder;
           }
@@ -33,7 +31,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("\t\t\t\t");
             _builder.newLine();
@@ -47,7 +45,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             return "";
           }
         };
@@ -58,7 +56,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     final Procedure1<MutableMethodDeclaration> _function_3 = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             return "\n";
           }
         };
@@ -69,7 +67,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     final Procedure1<MutableMethodDeclaration> _function_4 = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
-          public CharSequence compile(final CompilationContext it) {
+          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("int foo = 42;");
             _builder.newLine();
@@ -84,7 +82,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
-          protected void appendTo(TargetStringConcatenation _builder) {
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("int foo = 42;");
             _builder.newLine();
           }
@@ -97,7 +95,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
-          protected void appendTo(TargetStringConcatenation _builder) {
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("int foo = 42;");
           }
         };
@@ -109,7 +107,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
-          protected void appendTo(TargetStringConcatenation _builder) {
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append(List.class, "");
             _builder.append("<? extends Object> list = new ");
             _builder.append(ArrayList.class, "");

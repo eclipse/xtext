@@ -11,7 +11,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -28,7 +27,7 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
   
   public void infer(final EObject e, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     JvmGenericType _class = this._jvmTypesBuilder.toClass(((XExpression) e), "Test");
-    IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
+    IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
       public void apply(final JvmGenericType it) {
         EList<JvmMember> _members = it.getMembers();

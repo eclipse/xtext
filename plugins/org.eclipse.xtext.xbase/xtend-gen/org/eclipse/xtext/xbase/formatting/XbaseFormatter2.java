@@ -20,7 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage.Literals;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -48,6 +48,7 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.formatting.AbstractFormatter;
@@ -69,9 +70,6 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
-import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XConstructorCallElements;
-import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XFeatureCallElements;
-import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallElements;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 @SuppressWarnings("all")
@@ -574,7 +572,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   }
   
   protected void _format(final JvmTypeConstraint constraint, final FormattableDocument document) {
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(constraint, Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(constraint, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE);
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.oneSpace();
@@ -603,7 +601,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(_nodeForKeyword_1, _function_1);
     format.operator_add(_append_1);
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XVARIABLE_DECLARATION__TYPE);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XVARIABLE_DECLARATION__TYPE);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.oneSpace();
@@ -895,13 +893,13 @@ public class XbaseFormatter2 extends AbstractFormatter {
         XClosure _xifexpression_1 = null;
         boolean _or = false;
         boolean _or_1 = false;
-        XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
+        XbaseGrammarAccess.XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
         RuleCall _memberCallArgumentsXClosureParserRuleCall_1_1_4_0 = _xMemberFeatureCallAccess.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0();
         boolean _equals = Objects.equal(grammarElement, _memberCallArgumentsXClosureParserRuleCall_1_1_4_0);
         if (_equals) {
           _or_1 = true;
         } else {
-          XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
+          XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
           RuleCall _featureCallArgumentsXClosureParserRuleCall_4_0 = _xFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_4_0();
           boolean _equals_1 = Objects.equal(grammarElement, _featureCallArgumentsXClosureParserRuleCall_4_0);
           _or_1 = (_equals || _equals_1);
@@ -909,7 +907,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         if (_or_1) {
           _or = true;
         } else {
-          XConstructorCallElements _xConstructorCallAccess = this._xbaseGrammarAccess.getXConstructorCallAccess();
+          XbaseGrammarAccess.XConstructorCallElements _xConstructorCallAccess = this._xbaseGrammarAccess.getXConstructorCallAccess();
           RuleCall _argumentsXClosureParserRuleCall_5_0 = _xConstructorCallAccess.getArgumentsXClosureParserRuleCall_5_0();
           boolean _equals_2 = Objects.equal(grammarElement, _argumentsXClosureParserRuleCall_5_0);
           _or = (_or_1 || _equals_2);
@@ -1091,7 +1089,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   }
   
   protected void _format(final XConstructorCall expr, final FormattableDocument format) {
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.oneSpace();
@@ -1324,7 +1322,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     for (final XMemberFeatureCall call : _reverse) {
       {
         this.formatFeatureCallTypeParameters(call, format);
-        final INode featureNode = this._nodeModelAccess.nodeForFeature(call, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+        final INode featureNode = this._nodeModelAccess.nodeForFeature(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
         XExpression _memberCallTarget = call.getMemberCallTarget();
         final INode targetNode = this._nodeModelAccess.nodeForEObject(_memberCallTarget);
         boolean _notEquals = (!Objects.equal(targetNode, null));
@@ -1528,7 +1526,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   }
   
   protected AbstractRule binaryOperationPrecedence(final EObject op) {
-    final INode node = this._nodeModelAccess.nodeForFeature(op, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+    final INode node = this._nodeModelAccess.nodeForFeature(op, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
     boolean _and = false;
     boolean _notEquals = (!Objects.equal(node, null));
     if (!_notEquals) {
@@ -1589,7 +1587,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     List<XBinaryOperation> _reverse = ListExtensions.<XBinaryOperation>reverse(calls);
     for (final XBinaryOperation call : _reverse) {
       {
-        final INode op = this._nodeModelAccess.nodeForFeature(call, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+        final INode op = this._nodeModelAccess.nodeForFeature(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
         final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.oneSpace();
@@ -1725,7 +1723,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _or = (_or_1 || _contains_1);
     }
     final boolean multiline = _or;
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XIF_EXPRESSION__IF);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XIF_EXPRESSION__IF);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
         it.noSpace();
@@ -2210,7 +2208,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   }
   
   protected void _format(final XTypeLiteral expr, final FormattableDocument format) {
-    final INode typeNode = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XTYPE_LITERAL__TYPE);
+    final INode typeNode = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "typeof");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
       public void apply(final FormattingDataInit it) {
@@ -2874,8 +2872,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
           _and_3 = (_notEquals_3 && _notEquals_4);
         }
         if (_and_3) {
-          final INode typenode = this._nodeModelAccess.nodeForFeature(c_3, org.eclipse.xtext.xbase.XbasePackage.Literals.XCASE_PART__TYPE_GUARD);
-          final INode casenode = this._nodeModelAccess.nodeForFeature(c_3, org.eclipse.xtext.xbase.XbasePackage.Literals.XCASE_PART__CASE);
+          final INode typenode = this._nodeModelAccess.nodeForFeature(c_3, XbasePackage.Literals.XCASE_PART__TYPE_GUARD);
+          final INode casenode = this._nodeModelAccess.nodeForFeature(c_3, XbasePackage.Literals.XCASE_PART__CASE);
           final Procedure1<FormattingDataInit> _function_20 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
               it.oneSpace();
@@ -2901,7 +2899,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           JvmTypeReference _typeGuard_1 = c_3.getTypeGuard();
           boolean _notEquals_5 = (!Objects.equal(_typeGuard_1, null));
           if (_notEquals_5) {
-            final INode typenode_1 = this._nodeModelAccess.nodeForFeature(c_3, org.eclipse.xtext.xbase.XbasePackage.Literals.XCASE_PART__TYPE_GUARD);
+            final INode typenode_1 = this._nodeModelAccess.nodeForFeature(c_3, XbasePackage.Literals.XCASE_PART__TYPE_GUARD);
             final Procedure1<FormattingDataInit> _function_23 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
                 it.noSpace();
@@ -2913,7 +2911,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             XExpression _case_1 = c_3.getCase();
             boolean _notEquals_6 = (!Objects.equal(_case_1, null));
             if (_notEquals_6) {
-              final INode casenode_1 = this._nodeModelAccess.nodeForFeature(c_3, org.eclipse.xtext.xbase.XbasePackage.Literals.XCASE_PART__CASE);
+              final INode casenode_1 = this._nodeModelAccess.nodeForFeature(c_3, XbasePackage.Literals.XCASE_PART__CASE);
               final Procedure1<FormattingDataInit> _function_24 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
                   it.oneSpace();
@@ -3007,7 +3005,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   protected void formatClosureMultiLine(final XClosure expr, final INode open, final Collection<XExpression> children, final INode close, final FormattableDocument format) {
     this.formatClosureParameters(expr, format);
-    final INode explicit = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
+    final INode explicit = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
     boolean _notEquals = (!Objects.equal(explicit, null));
     if (_notEquals) {
       final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
@@ -3120,7 +3118,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(open, _function);
       format.operator_add(_append);
-      INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
+      INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
       last = _nodeForFeature;
       EList<JvmFormalParameter> _declaredFormalParameters = expr.getDeclaredFormalParameters();
       boolean _isEmpty = _declaredFormalParameters.isEmpty();

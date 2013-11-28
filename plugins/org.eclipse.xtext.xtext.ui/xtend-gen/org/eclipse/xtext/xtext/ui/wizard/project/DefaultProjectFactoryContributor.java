@@ -3,7 +3,6 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 
 /**
  * Default implemetation of org.eclipse.xtext.ui.util.IProjectFactoryContributor
@@ -12,10 +11,10 @@ import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
  */
 @SuppressWarnings("all")
 public class DefaultProjectFactoryContributor implements IProjectFactoryContributor {
-  public void contributeFiles(final IProject project, final IFileCreator fileWriter) {
+  public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator fileWriter) {
   }
   
-  protected IFile writeToFile(final CharSequence chrSeq, final IFileCreator fCreator, final String fileName) {
+  protected IFile writeToFile(final CharSequence chrSeq, final IProjectFactoryContributor.IFileCreator fCreator, final String fileName) {
     return fCreator.writeToFile(chrSeq, fileName);
   }
 }

@@ -4,7 +4,6 @@ import java.util.List;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
@@ -32,7 +31,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
             TypeReference _type = f.getType();
             it.setReturnType(_type);
             final CompilationStrategy _function = new CompilationStrategy() {
-              public CharSequence compile(final CompilationContext it) {
+              public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("return ");
                 String _simpleName = f.getSimpleName();
@@ -58,7 +57,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
               TypeReference _type = f.getType();
               it.addParameter(_simpleName, _type);
               final CompilationStrategy _function = new CompilationStrategy() {
-                public CharSequence compile(final CompilationContext it) {
+                public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                   StringConcatenation _builder = new StringConcatenation();
                   _builder.append("this.");
                   String _simpleName = f.getSimpleName();

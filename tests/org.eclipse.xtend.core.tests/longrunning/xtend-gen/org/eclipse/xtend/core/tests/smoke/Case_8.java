@@ -5,7 +5,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -26,9 +25,9 @@ public class Case_8 {
   @Extension
   private IQualifiedNameProvider qualifiedNameProvider;
   
-  public EList<Diagnostic> getErrors(final EObject obj) {
+  public EList<Resource.Diagnostic> getErrors(final EObject obj) {
     Resource _eResource = obj.eResource();
-    EList<Diagnostic> _errors = _eResource.getErrors();
+    EList<Resource.Diagnostic> _errors = _eResource.getErrors();
     return _errors;
   }
   

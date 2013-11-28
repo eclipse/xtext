@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.xbase.XExpression;
@@ -65,10 +64,10 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     return _xblockexpression;
   }
   
-  public Iterable<Diagnostic> getLinkingAndSyntaxErrors(final Resource resource) {
-    EList<Diagnostic> _errors = resource.getErrors();
-    final Function1<Diagnostic,Boolean> _function = new Function1<Diagnostic,Boolean>() {
-      public Boolean apply(final Diagnostic it) {
+  public Iterable<Resource.Diagnostic> getLinkingAndSyntaxErrors(final Resource resource) {
+    EList<Resource.Diagnostic> _errors = resource.getErrors();
+    final Function1<Resource.Diagnostic,Boolean> _function = new Function1<Resource.Diagnostic,Boolean>() {
+      public Boolean apply(final Resource.Diagnostic it) {
         boolean _or = false;
         if ((it instanceof XtextSyntaxDiagnostic)) {
           _or = true;
@@ -78,7 +77,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
         return Boolean.valueOf(_or);
       }
     };
-    Iterable<Diagnostic> _filter = IterableExtensions.<Diagnostic>filter(_errors, _function);
+    Iterable<Resource.Diagnostic> _filter = IterableExtensions.<Resource.Diagnostic>filter(_errors, _function);
     return _filter;
   }
   

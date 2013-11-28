@@ -5,14 +5,14 @@ import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
+import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
-public class XtendClassBuilder extends AbstractClassBuilder implements Xtend {
+public class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xtend {
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;

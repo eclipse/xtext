@@ -14,7 +14,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
 /**
@@ -30,12 +29,7 @@ public class ArrayExtensionsGenerator {
     return "// END generated code";
   }
   
-  private final ArrayList<String> primitiveTypes = new Function0<ArrayList<String>>() {
-    public ArrayList<String> apply() {
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("boolean", "double", "float", "long", "int", "char", "short", "byte");
-      return _newArrayList;
-    }
-  }.apply();
+  private final ArrayList<String> primitiveTypes = CollectionLiterals.<String>newArrayList("boolean", "double", "float", "long", "int", "char", "short", "byte");
   
   public static void main(final String[] args) {
     ArrayExtensionsGenerator _arrayExtensionsGenerator = new ArrayExtensionsGenerator();

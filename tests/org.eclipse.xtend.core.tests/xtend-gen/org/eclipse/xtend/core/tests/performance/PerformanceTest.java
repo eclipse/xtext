@@ -10,7 +10,6 @@ import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend.core.tests.performance.XtendFileGenerator;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -336,7 +335,7 @@ public class PerformanceTest extends AbstractXtendTestCase {
           files.add(_string);
         }
       }
-      final StoppedTask task = Stopwatches.forTask("PerformanceTest.doCompile");
+      final Stopwatches.StoppedTask task = Stopwatches.forTask("PerformanceTest.doCompile");
       task.start();
       this.files(true, ((String[]) ((String[])Conversions.unwrapArray(files, String.class))));
       task.stop();

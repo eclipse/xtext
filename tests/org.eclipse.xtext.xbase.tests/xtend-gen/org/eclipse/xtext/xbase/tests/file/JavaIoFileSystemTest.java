@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Map;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
@@ -72,7 +73,7 @@ public class JavaIoFileSystemTest {
             }
           };
           it.setProjectInformationProvider(_function);
-          org.eclipse.xtext.parser.IEncodingProvider.Runtime _runtime = new org.eclipse.xtext.parser.IEncodingProvider.Runtime();
+          IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
           it.setEncodingProvider(_runtime);
         }
       };

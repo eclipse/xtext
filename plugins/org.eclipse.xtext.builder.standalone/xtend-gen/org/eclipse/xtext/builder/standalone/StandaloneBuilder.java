@@ -26,7 +26,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
-import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler.CompilationResult;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
@@ -38,10 +37,8 @@ import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData.ResourceSetAdapter;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -49,7 +46,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -57,12 +53,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class StandaloneBuilder {
-  private final static Logger LOG = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(StandaloneBuilder.class);
-      return _logger;
-    }
-  }.apply();
+  private final static Logger LOG = Logger.getLogger(StandaloneBuilder.class);
   
   private Map<String,LanguageAccess> _languages;
   
@@ -94,12 +85,7 @@ public class StandaloneBuilder {
     this._classPathEntries = classPathEntries;
   }
   
-  private File _tempDir = new Function0<File>() {
-    public File apply() {
-      File _createTempDir = Files.createTempDir();
-      return _createTempDir;
-    }
-  }.apply();
+  private File _tempDir = Files.createTempDir();
   
   public File getTempDir() {
     return this._tempDir;
@@ -152,7 +138,7 @@ public class StandaloneBuilder {
   private IIssueHandler issueHandler;
   
   @Inject
-  private org.eclipse.xtext.parser.IEncodingProvider.Runtime encodingProvider;
+  private IEncodingProvider.Runtime encodingProvider;
   
   @Inject
   private IJavaCompiler compiler;
@@ -267,7 +253,7 @@ public class StandaloneBuilder {
     final Function1<Resource,IResourceDescription> _function = new Function1<Resource,IResourceDescription>() {
       public IResourceDescription apply(final Resource it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
-        Manager _resourceDescriptionManager = _languageAccess.getResourceDescriptionManager();
+        IResourceDescription.Manager _resourceDescriptionManager = _languageAccess.getResourceDescriptionManager();
         IResourceDescription _resourceDescription = _resourceDescriptionManager.getResourceDescription(it);
         return _resourceDescription;
       }
@@ -275,7 +261,7 @@ public class StandaloneBuilder {
     final List<IResourceDescription> descriptions = ListExtensions.<Resource, IResourceDescription>map(_arrayList, _function);
     ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(descriptions);
     final ResourceDescriptionsData index = _resourceDescriptionsData;
-    ResourceSetAdapter.installResourceDescriptionsData(set, index);
+    ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(set, index);
     return index;
   }
   
@@ -290,16 +276,16 @@ public class StandaloneBuilder {
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
     Iterable<String> _plus_1 = Iterables.<String>concat(_sourceDirs, _newArrayList);
-    final CompilationResult result = this.compiler.compile(_plus_1, stubsClasses);
+    final IJavaCompiler.CompilationResult result = this.compiler.compile(_plus_1, stubsClasses);
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(result,CompilationResult.SKIPPED)) {
+      if (Objects.equal(result,IJavaCompiler.CompilationResult.SKIPPED)) {
         _matched=true;
         StandaloneBuilder.LOG.info("Nothing to compile. Stubs compilation was skipped.");
       }
     }
     if (!_matched) {
-      if (Objects.equal(result,CompilationResult.FAILED)) {
+      if (Objects.equal(result,IJavaCompiler.CompilationResult.FAILED)) {
         _matched=true;
         StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
       }
@@ -370,10 +356,10 @@ public class StandaloneBuilder {
           final IEncodingProvider provider = _encodingProvider;
           boolean _matched = false;
           if (!_matched) {
-            if (provider instanceof org.eclipse.xtext.parser.IEncodingProvider.Runtime) {
+            if (provider instanceof IEncodingProvider.Runtime) {
               _matched=true;
               String _encoding_1 = this.getEncoding();
-              ((org.eclipse.xtext.parser.IEncodingProvider.Runtime)provider).setDefaultEncoding(_encoding_1);
+              ((IEncodingProvider.Runtime)provider).setDefaultEncoding(_encoding_1);
             }
           }
           if (!_matched) {

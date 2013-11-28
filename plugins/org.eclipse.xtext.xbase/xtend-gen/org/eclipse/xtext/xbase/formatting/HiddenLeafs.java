@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import com.google.common.collect.Iterables;
-import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -9,7 +8,6 @@ import org.eclipse.xtext.xbase.formatting.CommentInfo;
 import org.eclipse.xtext.xbase.formatting.LeafInfo;
 import org.eclipse.xtext.xbase.formatting.WhitespaceInfo;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
@@ -23,12 +21,7 @@ public class HiddenLeafs {
     return this._offset;
   }
   
-  private final List<LeafInfo> _leafs = new Function0<List<LeafInfo>>() {
-    public List<LeafInfo> apply() {
-      ArrayList<LeafInfo> _newArrayList = CollectionLiterals.<LeafInfo>newArrayList();
-      return _newArrayList;
-    }
-  }.apply();
+  private final List<LeafInfo> _leafs = CollectionLiterals.<LeafInfo>newArrayList();
   
   public List<LeafInfo> getLeafs() {
     return this._leafs;

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Joiner.MapJoiner;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
@@ -55,13 +53,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   @Extension
   private ReflectExtensions _reflectExtensions;
   
-  private final MapJoiner mapJoiner = new Function0<MapJoiner>() {
-    public MapJoiner apply() {
-      Joiner _on = Joiner.on("\n");
-      MapJoiner _withKeyValueSeparator = _on.withKeyValueSeparator("=");
-      return _withKeyValueSeparator;
-    }
-  }.apply();
+  private final Joiner.MapJoiner mapJoiner = Joiner.on("\n").withKeyValueSeparator("=");
   
   public RootResolvedTypes createResolvedTypes() {
     RecordingRootResolvedTypes _recordingRootResolvedTypes = new RecordingRootResolvedTypes(this);

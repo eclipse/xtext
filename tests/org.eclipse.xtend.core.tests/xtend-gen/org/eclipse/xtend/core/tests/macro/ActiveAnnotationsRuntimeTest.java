@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -37,7 +36,6 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
@@ -177,8 +175,8 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
     EList<Resource> _resources = resourceSet.getResources();
     final Resource singleResource = IterableExtensions.<Resource>head(_resources);
-    final IAcceptor<Result> _function = new IAcceptor<Result>() {
-      public void accept(final Result it) {
+    final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+      public void accept(final CompilationTestHelper.Result it) {
         final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
         EList<EObject> _contents = singleResource.getContents();
         Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
@@ -186,7 +184,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         ActiveAnnotationsRuntimeTest.this.validationTestHelper.assertNoErrors(xtendFile);
         unit.setXtendFile(xtendFile);
         expectations.apply(unit);
-        EList<Diagnostic> _errors = singleResource.getErrors();
+        EList<Resource.Diagnostic> _errors = singleResource.getErrors();
         boolean _isEmpty = _errors.isEmpty();
         Assert.assertTrue(_isEmpty);
       }
@@ -227,8 +225,8 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       macroResourceSet.createResource(macroURI);
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
       resourceSet.createResource(clientURI);
-      final IAcceptor<Result> _function = new IAcceptor<Result>() {
-        public void accept(final Result result) {
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result result) {
           Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
           ClassLoader _classLoader = _class.getClassLoader();
           final Function1<String,Class<? extends Object>> _function = new Function1<String,Class<? extends Object>>() {

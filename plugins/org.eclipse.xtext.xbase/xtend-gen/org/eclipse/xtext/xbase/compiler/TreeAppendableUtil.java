@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.ILocationInFileProviderExtension;
-import org.eclipse.xtext.resource.ILocationInFileProviderExtension.RegionDescription;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -25,7 +24,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceSignificant(final ITreeAppendable appendable, final EObject source, final boolean useForDebugging) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, RegionDescription.SIGNIFICANT, useForDebugging);
+      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.SIGNIFICANT, useForDebugging);
       _xifexpression = _trace;
     } else {
       ITreeAppendable _xblockexpression = null;
@@ -55,7 +54,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceWithComments(final ITreeAppendable appendable, final EObject source) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, RegionDescription.INCLUDING_COMMENTS, false);
+      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS, false);
       _xifexpression = _trace;
     } else {
       ITreeAppendable _xblockexpression = null;
@@ -66,7 +65,7 @@ public class TreeAppendableUtil {
         if (!_matched) {
           if (locationProvider instanceof ILocationInFileProviderExtension) {
             _matched=true;
-            ITextRegion _textRegion = ((ILocationInFileProviderExtension)this.locationProvider).getTextRegion(source, RegionDescription.INCLUDING_COMMENTS);
+            ITextRegion _textRegion = ((ILocationInFileProviderExtension)this.locationProvider).getTextRegion(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS);
             _switchResult = _textRegion;
           }
         }

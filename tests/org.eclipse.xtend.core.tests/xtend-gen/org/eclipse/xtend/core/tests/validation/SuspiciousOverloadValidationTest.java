@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -32,7 +31,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -68,11 +67,11 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
   protected void assertSuspicious(final CharSequence contents, final String... messageParts) {
     final XtendFile file = this.getParsedXtendFile(contents);
     Resource _eResource = file.eResource();
-    final EList<Diagnostic> errors = _eResource.getErrors();
+    final EList<Resource.Diagnostic> errors = _eResource.getErrors();
     String _string = errors.toString();
     int _size = errors.size();
     Assert.assertEquals(_string, 1, _size);
-    Diagnostic _head = IterableExtensions.<Diagnostic>head(errors);
+    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(errors);
     final AbstractDiagnostic singleError = ((AbstractDiagnostic) _head);
     String _message = singleError.getMessage();
     String _code = singleError.getCode();
@@ -101,7 +100,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
       public Boolean apply(final XAbstractFeatureCall it) {
         boolean _and = false;
         EStructuralFeature _eContainingFeature = it.eContainingFeature();
-        boolean _notEquals = (!Objects.equal(_eContainingFeature, Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER));
+        boolean _notEquals = (!Objects.equal(_eContainingFeature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER));
         if (!_notEquals) {
           _and = false;
         } else {
@@ -120,7 +119,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
   protected void assertValid(final CharSequence contents) {
     final XtendFile file = this.getParsedXtendFile(contents);
     Resource _eResource = file.eResource();
-    final EList<Diagnostic> errors = _eResource.getErrors();
+    final EList<Resource.Diagnostic> errors = _eResource.getErrors();
     String _string = errors.toString();
     int _size = errors.size();
     Assert.assertEquals(_string, 0, _size);
@@ -131,7 +130,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     try {
       final XtendFile file = this._parseHelper.parse(contents);
       Resource _eResource = file.eResource();
-      final EList<Diagnostic> errors = _eResource.getErrors();
+      final EList<Resource.Diagnostic> errors = _eResource.getErrors();
       String _string = errors.toString();
       boolean _isEmpty = errors.isEmpty();
       Assert.assertTrue(_string, _isEmpty);

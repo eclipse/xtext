@@ -5,7 +5,6 @@ import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -46,8 +45,8 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
         _problemSupport.addError(_head, "error on source");
         XtendFile _xtendFile = it.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
-        EList<Diagnostic> _errors = _eResource.getErrors();
-        Diagnostic _head_1 = IterableExtensions.<Diagnostic>head(_errors);
+        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+        Resource.Diagnostic _head_1 = IterableExtensions.<Resource.Diagnostic>head(_errors);
         String _message = _head_1.getMessage();
         Assert.assertEquals("error on source", _message);
         XtendFile _xtendFile_1 = it.getXtendFile();
@@ -55,8 +54,8 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
         XtendTypeDeclaration _head_2 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
         XtendFile _xtendFile_2 = it.getXtendFile();
         Resource _eResource_1 = _xtendFile_2.eResource();
-        EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
-        Diagnostic _head_3 = IterableExtensions.<Diagnostic>head(_errors_1);
+        EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+        Resource.Diagnostic _head_3 = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
         EObject _problematicObject = ((EObjectDiagnosticImpl) _head_3).getProblematicObject();
         Assert.assertEquals(_head_2, _problematicObject);
       }
@@ -83,8 +82,8 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
         _problemSupport.addError(derived, "error on derived element");
         XtendFile _xtendFile = it.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
-        EList<Diagnostic> _errors = _eResource.getErrors();
-        Diagnostic _head = IterableExtensions.<Diagnostic>head(_errors);
+        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+        Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
         String _message = _head.getMessage();
         Assert.assertEquals("error on derived element", _message);
         XtendFile _xtendFile_1 = it.getXtendFile();
@@ -92,8 +91,8 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
         XtendTypeDeclaration _head_1 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
         XtendFile _xtendFile_2 = it.getXtendFile();
         Resource _eResource_1 = _xtendFile_2.eResource();
-        EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
-        Diagnostic _head_2 = IterableExtensions.<Diagnostic>head(_errors_1);
+        EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
+        Resource.Diagnostic _head_2 = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
         EObject _problematicObject = ((EObjectDiagnosticImpl) _head_2).getProblematicObject();
         Assert.assertEquals(_head_1, _problematicObject);
       }

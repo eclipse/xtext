@@ -31,7 +31,7 @@ public class Case_6 {
   protected List<? extends Object> _transform(final EStructuralFeature entity) {
     ArrayList<EObject> _xblockexpression = null;
     {
-      final Object inferredType = null;
+      final List<? extends Object> inferredType = null;
       ArrayList<EObject> _newArrayList = CollectionLiterals.<EObject>newArrayList(((EObject) inferredType));
       _xblockexpression = (_newArrayList);
     }

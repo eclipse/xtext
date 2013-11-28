@@ -11,7 +11,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
-import org.eclipse.xtext.xtype.XtypePackage.Literals;
+import org.eclipse.xtext.xtype.XtypePackage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,7 +35,7 @@ public class ValidationTests {
     _builder.append("entity X {}");
     _builder.newLine();
     final DomainModel model = this.parse(_builder);
-    this.validationTestHelper.assertWarning(model, Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
+    this.validationTestHelper.assertWarning(model, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
   }
   
   @Test
@@ -51,7 +51,7 @@ public class ValidationTests {
     _builder.append("}");
     _builder.newLine();
     final DomainModel model = this.parse(_builder);
-    this.validationTestHelper.assertWarning(model, Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
+    this.validationTestHelper.assertWarning(model, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
   }
   
   @Test
@@ -204,7 +204,7 @@ public class ValidationTests {
     _builder.append("}");
     _builder.newLine();
     final DomainModel model = this.parse(_builder);
-    this.validationTestHelper.assertWarning(model, Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_DUPLICATE);
+    this.validationTestHelper.assertWarning(model, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_DUPLICATE);
   }
   
   @Test
@@ -231,7 +231,7 @@ public class ValidationTests {
     _builder.append("}");
     _builder.newLine();
     final DomainModel model = this.parse(_builder);
-    this.validationTestHelper.assertError(model, Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_COLLISION);
+    this.validationTestHelper.assertError(model, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_COLLISION);
   }
   
   @Test
@@ -258,7 +258,7 @@ public class ValidationTests {
     _builder.append("}");
     _builder.newLine();
     final DomainModel model = this.parse(_builder);
-    this.validationTestHelper.assertWarning(model, Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
+    this.validationTestHelper.assertWarning(model, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
   }
   
   @Test
@@ -273,7 +273,7 @@ public class ValidationTests {
     _builder.append("}");
     _builder.newLine();
     final DomainModel model = this.parse(_builder);
-    this.validationTestHelper.assertError(model, Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_CONFLICT);
+    this.validationTestHelper.assertError(model, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_CONFLICT);
   }
   
   @Test

@@ -28,7 +28,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -53,7 +52,7 @@ public class AnnotationProcessor {
   public Object indexingPhase(final ActiveAnnotationContext ctx, final IJvmDeclaredTypeAcceptor acceptor, final CancelIndicator monitor) {
     Object _xblockexpression = null;
     {
-      final StoppedTask task = Stopwatches.forTask("[macros] indexingPhase (AnnotationProcessor.indexingPhase)");
+      final Stopwatches.StoppedTask task = Stopwatches.forTask("[macros] indexingPhase (AnnotationProcessor.indexingPhase)");
       task.start();
       Object _xtrycatchfinallyexpression = null;
       try {
@@ -102,7 +101,7 @@ public class AnnotationProcessor {
   public Object inferencePhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
     Object _xblockexpression = null;
     {
-      final StoppedTask task = Stopwatches.forTask("[macros] inferencePhase (AnnotationProcessor.inferencePhase)");
+      final Stopwatches.StoppedTask task = Stopwatches.forTask("[macros] inferencePhase (AnnotationProcessor.inferencePhase)");
       task.start();
       Object _xtrycatchfinallyexpression = null;
       try {

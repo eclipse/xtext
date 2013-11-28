@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -33,12 +32,7 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
   private final PublicResolvedTypes resolvedTypes;
   
   public MockTypeParameterSubstitutor(final ITypeReferenceOwner owner, final PublicResolvedTypes resolvedTypes) {
-    super(new Function0<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>() {
-      public Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> apply() {
-        Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _emptyMap = CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap();
-        return _emptyMap;
-      }
-    }.apply(), owner);
+    super(CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), owner);
     this.resolvedTypes = resolvedTypes;
   }
   

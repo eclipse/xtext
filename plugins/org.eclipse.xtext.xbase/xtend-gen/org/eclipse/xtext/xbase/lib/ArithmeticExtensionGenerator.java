@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -15,7 +14,6 @@ import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
@@ -30,28 +28,13 @@ public class ArithmeticExtensionGenerator {
   
   private String since = "2.3";
   
-  private List<String> types = new Function0<List<String>>() {
-    public List<String> apply() {
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("double", "float", "long", "int", "char", "short", "byte");
-      return _newArrayList;
-    }
-  }.apply();
+  private List<String> types = CollectionLiterals.<String>newArrayList("double", "float", "long", "int", "char", "short", "byte");
   
-  private List<QualifiedName> comparators = new Function0<List<QualifiedName>>() {
-    public List<QualifiedName> apply() {
-      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.LESS_THAN, OperatorMapping.LESS_EQUALS_THAN, 
-        OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
-      return _newArrayList;
-    }
-  }.apply();
+  private List<QualifiedName> comparators = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.LESS_THAN, OperatorMapping.LESS_EQUALS_THAN, 
+    OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
   
-  private List<QualifiedName> operators = new Function0<List<QualifiedName>>() {
-    public List<QualifiedName> apply() {
-      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.PLUS, OperatorMapping.MINUS, OperatorMapping.MULTIPLY, OperatorMapping.DIVIDE, OperatorMapping.MODULO, OperatorMapping.LESS_THAN, 
-        OperatorMapping.LESS_EQUALS_THAN, OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
-      return _newArrayList;
-    }
-  }.apply();
+  private List<QualifiedName> operators = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.PLUS, OperatorMapping.MINUS, OperatorMapping.MULTIPLY, OperatorMapping.DIVIDE, OperatorMapping.MODULO, OperatorMapping.LESS_THAN, 
+    OperatorMapping.LESS_EQUALS_THAN, OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
   
   @Inject
   @Extension

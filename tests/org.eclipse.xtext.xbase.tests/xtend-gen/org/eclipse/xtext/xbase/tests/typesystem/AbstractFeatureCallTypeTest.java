@@ -19,7 +19,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -59,7 +59,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
       final List<XAbstractFeatureCall> featureCalls = IteratorExtensions.<XAbstractFeatureCall>toList(_filter);
       final Function1<XAbstractFeatureCall,Integer> _function = new Function1<XAbstractFeatureCall,Integer>() {
         public Integer apply(final XAbstractFeatureCall it) {
-          List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+          List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
           INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
           int _offset = _head.getOffset();
           return Integer.valueOf(_offset);

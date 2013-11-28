@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionSt
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -39,7 +38,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
   private XbaseResourceDescriptionStrategy descriptionStrategy;
   
   @Inject
-  private Manager resourceDescriptionManager;
+  private IResourceDescription.Manager resourceDescriptionManager;
   
   @Test
   public void testInterfaceDescription_01() {

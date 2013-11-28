@@ -113,27 +113,23 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   }
   
   public String getCharset(final Path path) {
-    boolean _isFile = this.isFile(path);
-    if (_isFile) {
-      try {
+    try {
+      boolean _isFile = this.isFile(path);
+      if (_isFile) {
         IFile _eclipseFile = this.getEclipseFile(path);
         return _eclipseFile.getCharset();
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    } else {
-      boolean _isFolder = this.isFolder(path);
-      if (_isFolder) {
-        try {
+      } else {
+        boolean _isFolder = this.isFolder(path);
+        if (_isFolder) {
           IFolder _eclipseFolder = this.getEclipseFolder(path);
           return _eclipseFolder.getDefaultCharset();
-        } catch (Throwable _e_1) {
-          throw Exceptions.sneakyThrow(_e_1);
+        } else {
+          Path _parent = path.getParent();
+          return this.getCharset(_parent);
         }
-      } else {
-        Path _parent = path.getParent();
-        return this.getCharset(_parent);
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   

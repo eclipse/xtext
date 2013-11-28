@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.validation;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -55,11 +54,11 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
   protected void assertAmbiguous(final CharSequence contents, final String... messageParts) {
     final XtendFile file = this.getParsedXtendFile(contents);
     Resource _eResource = file.eResource();
-    final EList<Diagnostic> errors = _eResource.getErrors();
+    final EList<Resource.Diagnostic> errors = _eResource.getErrors();
     String _string = errors.toString();
     int _size = errors.size();
     Assert.assertEquals(_string, 1, _size);
-    Diagnostic _head = IterableExtensions.<Diagnostic>head(errors);
+    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(errors);
     final AbstractDiagnostic singleError = ((AbstractDiagnostic) _head);
     String _message = singleError.getMessage();
     String _code = singleError.getCode();
@@ -93,7 +92,7 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
   protected void assertUnambiguous(final CharSequence contents) {
     final XtendFile file = this.getParsedXtendFile(contents);
     Resource _eResource = file.eResource();
-    final EList<Diagnostic> errors = _eResource.getErrors();
+    final EList<Resource.Diagnostic> errors = _eResource.getErrors();
     String _string = errors.toString();
     int _size = errors.size();
     Assert.assertEquals(_string, 0, _size);
@@ -104,7 +103,7 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     try {
       final XtendFile file = this._parseHelper.parse(contents);
       Resource _eResource = file.eResource();
-      final EList<Diagnostic> errors = _eResource.getErrors();
+      final EList<Resource.Diagnostic> errors = _eResource.getErrors();
       String _string = errors.toString();
       boolean _isEmpty = errors.isEmpty();
       Assert.assertTrue(_string, _isEmpty);

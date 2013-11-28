@@ -3,7 +3,7 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 
@@ -20,12 +20,12 @@ public class TestProjectContributor extends DefaultProjectFactoryContributor {
     this.projectInfo = projectInfo;
   }
   
-  public void contributeFiles(final IProject project, final IFileCreator fileWriter) {
+  public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator fileWriter) {
     this.contributeBuildProperties(fileWriter);
     this.contributeLaunchConfig(fileWriter);
   }
   
-  private IFile contributeBuildProperties(final IFileCreator fileWriter) {
+  private IFile contributeBuildProperties(final IProjectFactoryContributor.IFileCreator fileWriter) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("source.. = src/,\\");
     _builder.newLine();
@@ -44,7 +44,7 @@ public class TestProjectContributor extends DefaultProjectFactoryContributor {
     return _writeToFile;
   }
   
-  private IFile contributeLaunchConfig(final IFileCreator fileWriter) {
+  private IFile contributeLaunchConfig(final IProjectFactoryContributor.IFileCreator fileWriter) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
     _builder.newLine();

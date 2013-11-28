@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -59,12 +58,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   @Inject
   private DefaultReentrantTypeResolver resolver;
   
-  private ListMultimap<Object,LightweightBoundTypeArgument> hints = new Function0<ListMultimap<Object,LightweightBoundTypeArgument>>() {
-    public ListMultimap<Object,LightweightBoundTypeArgument> apply() {
-      ListMultimap<Object,LightweightBoundTypeArgument> _newLinkedHashListMultimap = Multimaps2.<Object, LightweightBoundTypeArgument>newLinkedHashListMultimap();
-      return _newLinkedHashListMultimap;
-    }
-  }.apply();
+  private ListMultimap<Object,LightweightBoundTypeArgument> hints = Multimaps2.<Object, LightweightBoundTypeArgument>newLinkedHashListMultimap();
   
   public JvmOperation operation(final String typeParameters, final String expectedType, final String actualType) {
     try {

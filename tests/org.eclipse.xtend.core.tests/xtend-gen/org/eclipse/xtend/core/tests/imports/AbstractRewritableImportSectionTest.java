@@ -17,7 +17,6 @@ import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
-import org.eclipse.xtext.xbase.imports.RewritableImportSection.Factory;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -30,7 +29,7 @@ import org.junit.Test;
 public abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase {
   @Inject
   @Extension
-  private Factory _rewritableImportSection$Factory;
+  private RewritableImportSection.Factory _rewritableImportSection$Factory;
   
   @Inject
   @Extension

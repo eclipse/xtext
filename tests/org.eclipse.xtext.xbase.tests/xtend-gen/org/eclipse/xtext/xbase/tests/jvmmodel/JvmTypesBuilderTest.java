@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
@@ -383,14 +382,14 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     final JvmOperation op = this.typesFactory.createJvmOperation();
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
-      protected void appendTo(TargetStringConcatenation _builder) {
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("foo");
       }
     };
     this._jvmTypesBuilder.setBody(op, _client);
     StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
-      protected void appendTo(TargetStringConcatenation _builder) {
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("bar");
       }
     };
@@ -413,7 +412,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     this._jvmTypesBuilder.<XNullLiteral>operator_add(_contents_1, expr);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
-      protected void appendTo(TargetStringConcatenation _builder) {
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("bar");
       }
     };
@@ -429,7 +428,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     Assert.assertEquals(0, _size_1);
     StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
-      protected void appendTo(TargetStringConcatenation _builder) {
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("bar");
       }
     };

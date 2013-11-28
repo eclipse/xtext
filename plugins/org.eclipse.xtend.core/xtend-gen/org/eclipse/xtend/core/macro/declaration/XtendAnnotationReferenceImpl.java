@@ -27,7 +27,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -64,7 +64,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       }
       JvmType _switchResult = null;
       XAnnotation _delegate_1 = this.getDelegate();
-      Object _eGet = _delegate_1.eGet(Literals.XANNOTATION__ANNOTATION_TYPE, false);
+      Object _eGet = _delegate_1.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
       final Object proxy = _eGet;
       boolean _matched = false;
       if (!_matched) {

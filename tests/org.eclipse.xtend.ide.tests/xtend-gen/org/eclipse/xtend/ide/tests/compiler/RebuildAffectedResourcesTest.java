@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.util.internal.Stopwatches.NumbersForTask;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -296,22 +294,22 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   
   public void assertNumberOfBuilds(final int numberOfBuild) {
     IResourcesSetupUtil.waitForAutoBuild();
-    Map<String,NumbersForTask> _allNumbers = Stopwatches.allNumbers();
-    Set<Entry<String,NumbersForTask>> _entrySet = _allNumbers.entrySet();
-    final Function1<Entry<String,NumbersForTask>,Boolean> _function = new Function1<Entry<String,NumbersForTask>,Boolean>() {
-      public Boolean apply(final Entry<String,NumbersForTask> it) {
+    Map<String,Stopwatches.NumbersForTask> _allNumbers = Stopwatches.allNumbers();
+    Set<Map.Entry<String,Stopwatches.NumbersForTask>> _entrySet = _allNumbers.entrySet();
+    final Function1<Map.Entry<String,Stopwatches.NumbersForTask>,Boolean> _function = new Function1<Map.Entry<String,Stopwatches.NumbersForTask>,Boolean>() {
+      public Boolean apply(final Map.Entry<String,Stopwatches.NumbersForTask> it) {
         String _key = it.getKey();
         boolean _equals = Objects.equal(_key, "XtextBuilder.build");
         return Boolean.valueOf(_equals);
       }
     };
-    Iterable<Entry<String,NumbersForTask>> _filter = IterableExtensions.<Entry<String,NumbersForTask>>filter(_entrySet, _function);
-    final Entry<String,NumbersForTask> builderEntry = IterableExtensions.<Entry<String,NumbersForTask>>head(_filter);
+    Iterable<Map.Entry<String,Stopwatches.NumbersForTask>> _filter = IterableExtensions.<Map.Entry<String,Stopwatches.NumbersForTask>>filter(_entrySet, _function);
+    final Map.Entry<String,Stopwatches.NumbersForTask> builderEntry = IterableExtensions.<Map.Entry<String,Stopwatches.NumbersForTask>>head(_filter);
     boolean _equals = Objects.equal(builderEntry, null);
     if (_equals) {
       Assert.assertEquals(numberOfBuild, 0);
     } else {
-      NumbersForTask _value = builderEntry.getValue();
+      Stopwatches.NumbersForTask _value = builderEntry.getValue();
       final int actualMeasurements = _value.getNumberOfMeasurements();
       Assert.assertEquals(numberOfBuild, actualMeasurements);
     }

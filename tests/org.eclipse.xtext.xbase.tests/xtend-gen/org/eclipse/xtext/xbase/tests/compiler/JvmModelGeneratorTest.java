@@ -48,7 +48,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter;
@@ -85,7 +85,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   private JvmModelGenerator generator;
   
   @Inject
-  private EclipseRuntimeDependentJavaCompiler javaCompiler;
+  private OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler javaCompiler;
   
   @Inject
   private TypesFactory typesFactory;

@@ -1,10 +1,8 @@
 package org.eclipse.xtend.core.formatting;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend.core.formatting.Chunk;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
@@ -27,12 +25,7 @@ public class Line {
     return this._newLineCharCount;
   }
   
-  private final List<Chunk> _chunks = new Function0<List<Chunk>>() {
-    public List<Chunk> apply() {
-      ArrayList<Chunk> _newArrayList = CollectionLiterals.<Chunk>newArrayList();
-      return _newArrayList;
-    }
-  }.apply();
+  private final List<Chunk> _chunks = CollectionLiterals.<Chunk>newArrayList();
   
   public List<Chunk> getChunks() {
     return this._chunks;

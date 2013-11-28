@@ -13,7 +13,7 @@ import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures.Provider;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
 /**
  * A type bucket collects a number of types that originate in the
@@ -38,9 +38,9 @@ public class TypeBucket {
     return this._types;
   }
   
-  private final Provider _resolvedFeaturesProvider;
+  private final IResolvedFeatures.Provider _resolvedFeaturesProvider;
   
-  public Provider getResolvedFeaturesProvider() {
+  public IResolvedFeatures.Provider getResolvedFeaturesProvider() {
     return this._resolvedFeaturesProvider;
   }
   
@@ -49,7 +49,7 @@ public class TypeBucket {
     return _of;
   }
   
-  public TypeBucket(final int id, final List<? extends JvmType> types, final Provider resolvedFeaturesProvider) {
+  public TypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
     super();
     this._id = id;
     this._types = types;

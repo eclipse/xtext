@@ -2,7 +2,7 @@ package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.base.Objects;
 import java.io.Serializable;
-import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester.CompilationResult;
+import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -33,8 +33,8 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-      public void accept(final CompilationResult it) {
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      public void accept(final XtendCompilerTester.CompilationResult it) {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableClassDeclaration classA = ctx.findClass("A");
         MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
@@ -87,8 +87,8 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final IAcceptor<CompilationResult> _function = new IAcceptor<CompilationResult>() {
-      public void accept(final CompilationResult it) {
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      public void accept(final XtendCompilerTester.CompilationResult it) {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableClassDeclaration classA = ctx.findClass("my.pack.A");
         MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");

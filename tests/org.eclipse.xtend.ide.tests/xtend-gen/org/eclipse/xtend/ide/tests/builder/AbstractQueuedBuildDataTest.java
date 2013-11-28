@@ -23,7 +23,6 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -63,14 +62,14 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     super.tearDown();
   }
   
-  public Collection<? extends Delta> assertThereAreDeltas(final Procedure0 producer, final String... expectedExportedNames) {
-    Collection<Delta> _assertDeltas = this.assertDeltas(producer);
-    Collection<? extends Delta> _assertThereAreDeltas = this.assertThereAreDeltas(_assertDeltas, expectedExportedNames);
+  public Collection<? extends IResourceDescription.Delta> assertThereAreDeltas(final Procedure0 producer, final String... expectedExportedNames) {
+    Collection<IResourceDescription.Delta> _assertDeltas = this.assertDeltas(producer);
+    Collection<? extends IResourceDescription.Delta> _assertThereAreDeltas = this.assertThereAreDeltas(_assertDeltas, expectedExportedNames);
     return _assertThereAreDeltas;
   }
   
-  public Collection<? extends Delta> assertThereAreDeltas(final Collection<? extends Delta> deltas, final String... expectedExportedNames) {
-    Collection<? extends Delta> _xblockexpression = null;
+  public Collection<? extends IResourceDescription.Delta> assertThereAreDeltas(final Collection<? extends IResourceDescription.Delta> deltas, final String... expectedExportedNames) {
+    Collection<? extends IResourceDescription.Delta> _xblockexpression = null;
     {
       int _size = deltas.size();
       boolean _notEquals = (0 != _size);
@@ -114,18 +113,18 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     return _xblockexpression;
   }
   
-  public Collection<? extends Delta> assertThereAreNotDeltas(final Procedure0 producer) {
-    Collection<? extends Delta> _xblockexpression = null;
+  public Collection<? extends IResourceDescription.Delta> assertThereAreNotDeltas(final Procedure0 producer) {
+    Collection<? extends IResourceDescription.Delta> _xblockexpression = null;
     {
-      final Collection<Delta> deltas = this.assertDeltas(producer);
-      Collection<? extends Delta> _assertThereAreNotDeltas = this.assertThereAreNotDeltas(deltas);
+      final Collection<IResourceDescription.Delta> deltas = this.assertDeltas(producer);
+      Collection<? extends IResourceDescription.Delta> _assertThereAreNotDeltas = this.assertThereAreNotDeltas(deltas);
       _xblockexpression = (_assertThereAreNotDeltas);
     }
     return _xblockexpression;
   }
   
-  public Collection<? extends Delta> assertThereAreNotDeltas(final Collection<? extends Delta> deltas) {
-    Collection<? extends Delta> _xblockexpression = null;
+  public Collection<? extends IResourceDescription.Delta> assertThereAreNotDeltas(final Collection<? extends IResourceDescription.Delta> deltas) {
+    Collection<? extends IResourceDescription.Delta> _xblockexpression = null;
     {
       HashSet<String> _exportedNames = this.getExportedNames(deltas);
       String _plus = ("There are deltas: " + _exportedNames);
@@ -136,9 +135,9 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     return _xblockexpression;
   }
   
-  public HashSet<String> getExportedNames(final Collection<? extends Delta> deltas) {
-    final Function1<Delta,HashSet<String>> _function = new Function1<Delta,HashSet<String>>() {
-      public HashSet<String> apply(final Delta it) {
+  public HashSet<String> getExportedNames(final Collection<? extends IResourceDescription.Delta> deltas) {
+    final Function1<IResourceDescription.Delta,HashSet<String>> _function = new Function1<IResourceDescription.Delta,HashSet<String>>() {
+      public HashSet<String> apply(final IResourceDescription.Delta it) {
         HashSet<String> _xblockexpression = null;
         {
           final HashSet<String> names = CollectionLiterals.<String>newHashSet();
@@ -197,13 +196,13 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     return _reduce;
   }
   
-  public Collection<Delta> assertDeltas(final Procedure0 producer) {
-    Collection<Delta> _xblockexpression = null;
+  public Collection<IResourceDescription.Delta> assertDeltas(final Procedure0 producer) {
+    Collection<IResourceDescription.Delta> _xblockexpression = null;
     {
       this.reset();
       producer.apply();
       this.confirmDeltas();
-      Collection<Delta> _andRemovePendingDeltas = this.queuedBuildData.getAndRemovePendingDeltas();
+      Collection<IResourceDescription.Delta> _andRemovePendingDeltas = this.queuedBuildData.getAndRemovePendingDeltas();
       _xblockexpression = (_andRemovePendingDeltas);
     }
     return _xblockexpression;

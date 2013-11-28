@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.formatting.WhitespaceData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -26,12 +25,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class FormattableDocument {
-  private final static Logger log = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(FormattableDocument.class);
-      return _logger;
-    }
-  }.apply();
+  private final static Logger log = Logger.getLogger(FormattableDocument.class);
   
   private final FormattingPreferenceValues _cfg;
   
