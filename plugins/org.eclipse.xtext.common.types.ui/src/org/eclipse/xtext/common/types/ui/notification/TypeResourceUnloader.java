@@ -49,7 +49,7 @@ public class TypeResourceUnloader extends AbstractResourceDescriptionChangeEvent
 		List<IResourceDescription.Delta> deltas = deltaConverter.convert(delta);
 		if (deltas == null || deltas.isEmpty())
 			return null;
-		return new ResourceDescriptionChangeEvent(deltas, this);
+		return new ResourceDescriptionChangeEvent(deltas);
 	}
 	
 }

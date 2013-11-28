@@ -61,6 +61,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
 	protected class UpdateEditorStateJob extends Job {
+
+		private boolean coarseGrainedChange;
+
 		private Queue<IResourceDescription.Delta> pendingChanges;
 
 		protected UpdateEditorStateJob(ISchedulingRule rule) {
@@ -75,6 +78,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		
 		protected void scheduleFor(IResourceDescription.Event event) {
 			cancel();
+			coarseGrainedChange = coarseGrainedChange || event instanceof IResourceDescription.CoarseGrainedEvent;
 			pendingChanges.addAll(event.getDeltas());
 			schedule(getDelay());
 		}
@@ -100,57 +104,81 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 				}
 				size++;
 			}
-			IResourceDescription.Event event = new ResourceDescriptionChangeEvent(uriToDelta.values(), dirtyStateManager);
+			IResourceDescription.Event event = new ResourceDescriptionChangeEvent(uriToDelta.values());
 			return Tuples.create(event, size);
 		}
 
 		@Override
 		protected IStatus run(final IProgressMonitor monitor) {
 			IDirtyStateEditorSupportClient myClient = currentClient;
-			if (myClient == null || monitor.isCanceled())
+			if (myClient == null || monitor.isCanceled()) {
 				return Status.OK_STATUS;
+			}
 			final IXtextDocument document = myClient.getDocument();
-			if (document == null)
+			if (document == null) {
 				return Status.OK_STATUS;
-			final boolean[] isReparseRequired = new boolean[] {false};
-			final Pair<IResourceDescription.Event,Integer> event = mergePendingDeltas();
-			final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
-				public Collection<Resource> exec(XtextResource resource) throws Exception {
-					if (resource == null || resource.getResourceSet() == null)
-						return null;
-					Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());
-					if (monitor.isCanceled() || !affectedResources.isEmpty())
-						return affectedResources;
-					isReparseRequired[0] = isReparseRequired(resource, event.getFirst());
-					return affectedResources;
-				}
-			});
-			if (monitor.isCanceled())
-				return Status.OK_STATUS;
-			if (affectedResources != null && !affectedResources.isEmpty() || isReparseRequired[0]) {
-				Assert.isLegal(document instanceof XtextDocument);
-				((XtextDocument)document).internalModify(new IUnitOfWork.Void<XtextResource>() {
-					@Override
-					public void process(XtextResource resource) throws Exception {
-						if (resource == null || resource.getResourceSet() == null)
-							return;
-						ResourceSet resourceSet = resource.getResourceSet();
-						if (affectedResources != null) {
-							for(Resource affectedResource: affectedResources) {
-								affectedResource.unload();
-								resourceSet.getResources().remove(affectedResource);
+			}
+			final boolean[] isReparseRequired = new boolean[] { coarseGrainedChange };
+			final Pair<IResourceDescription.Event, Integer> event = mergePendingDeltas();
+			Collection<Resource> affectedResources = document.readOnly(
+					new IUnitOfWork<Collection<Resource>, XtextResource>() {
+				
+						public Collection<Resource> exec(XtextResource resource) throws Exception {
+							if (resource == null || resource.getResourceSet() == null) {
+								return null;
 							}
+							Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());
+							if (monitor.isCanceled() || !affectedResources.isEmpty()) {
+								return affectedResources;
+							}
+							if (!isReparseRequired[0]) {
+								isReparseRequired[0] = isReparseRequired(resource, event.getFirst());
+							}
+							return affectedResources;
 						}
-						resource.reparse(document.get());
-					}
-				});
+				
+					});
+			if (monitor.isCanceled()) {
+				return Status.OK_STATUS;
 			}
-			for(int i = 0; i < event.getSecond(); i++) {
-				pendingChanges.poll();
+			try {
+				unloadAffectedResourcesAndReparseDocument(document, affectedResources, isReparseRequired[0]);
+				for (int i = 0; i < event.getSecond(); i++) {
+					pendingChanges.poll();
+				}
+				return Status.OK_STATUS;
+			} finally {
+				coarseGrainedChange = false;	
 			}
-			return Status.OK_STATUS;
 		}
-		
+
+		private void unloadAffectedResourcesAndReparseDocument(final IXtextDocument document,
+				final Collection<Resource> affectedResources, boolean reparseRequired) {
+			if ((affectedResources == null || affectedResources.isEmpty()) && !reparseRequired) {
+				return;
+			}
+			Assert.isLegal(document instanceof XtextDocument);
+			XtextDocument xtextDocument = (XtextDocument) document;
+			xtextDocument.internalModify(new IUnitOfWork.Void<XtextResource>() {
+
+				@Override
+				public void process(XtextResource resource) throws Exception {
+					if (resource == null || resource.getResourceSet() == null) {
+						return;
+					}
+					ResourceSet resourceSet = resource.getResourceSet();
+					if (affectedResources != null) {
+						for (Resource affectedResource : affectedResources) {
+							affectedResource.unload();
+							resourceSet.getResources().remove(affectedResource);
+						}
+					}
+					resource.reparse(document.get());
+				}
+
+			});
+		}
+
 	}
 
 	/**

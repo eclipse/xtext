@@ -138,7 +138,7 @@ public class ResourceDescriptionsBasedContainerTest extends Assert implements IR
 	@Test public void testBug352214() {
 		container.getResourceDescriptions(); // initialize uri map
 		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(Collections.<IResourceDescription.Delta>singletonList(
-				new ChangedResourceDescriptionDelta(resourceDescription, null)), null);
+				new ChangedResourceDescriptionDelta(resourceDescription, null)));
 		container.descriptionsChanged(event);
 		assertEquals(0, container.getResourceDescriptionCount());
 		assertTrue(Iterables.all(container.getResourceDescriptions(), Predicates.notNull()));
