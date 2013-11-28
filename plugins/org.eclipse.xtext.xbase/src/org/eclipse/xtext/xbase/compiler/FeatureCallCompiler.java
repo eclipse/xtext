@@ -300,6 +300,23 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		b.decreaseIndentation().newLine().append("}");
 	}
 	
+	@Override
+	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
+		if (expression instanceof XAbstractFeatureCall) {
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
+			for (XExpression arg : featureCall.getActualArguments()) {
+				if (!this.internalCanCompileToJavaExpression(arg, appendable)) {
+					return false;
+				}
+			}
+			if (featureCall.getActualReceiver() != null && !internalCanCompileToJavaExpression(featureCall.getActualReceiver(), appendable)) {
+				return false;
+			}
+			return true;
+		}
+		return super.internalCanCompileToJavaExpression(expression, appendable);
+	}
+	
 	protected boolean isVariableDeclarationRequired(XMemberFeatureCall expr, @SuppressWarnings("unused") ITreeAppendable b) {
 		return expr.isNullSafe();
 	}
