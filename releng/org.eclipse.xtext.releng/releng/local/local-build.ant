@@ -16,7 +16,7 @@
 	<!-- Where to build -->
 	<property name="build.root" location="${user.home}/hudsonbuild/tmf-xtext-head/buildroot" />
 
-	<!-- Buckminster headless 3.7 to use. See http://www.eclipse.org/buckminster/downloads.html -->
+	<!-- Buckminster headless to use. See http://www.eclipse.org/buckminster/downloads.html -->
 	<property name="buckminster.home" location="${user.home}/buckminster" />
 
 	<!-- Local Xtext git repository -->
@@ -42,10 +42,10 @@
          ================================= -->
 	<target name="run.headless.buckminster" description="description" depends="cleanup">
 		<exec executable="${buckminster.home}/buckminster" >
-			<arg value="-Declipse.p2.mirrors=false" />
+			<arg value="-Declipse.p2.mirrors=true" />
 			<arg value="-Dbuild.root=${build.root}" />
 			<arg value="-DWITH.MWE2=false" />
-			<arg value="-DSWTBOT=true" />
+			<arg value="-DSWTBOT=false" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-DtargetPlatformPath=${build.root}/target.platform" />
 			<arg value="-Dxtend.checkout.location=${checkout.location}" />

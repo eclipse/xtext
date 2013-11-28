@@ -40,12 +40,13 @@
   <rm:locator pattern="^org\.objectweb\.asm(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
   <rm:locator pattern="^org\.junit4$" searchPathRef="jdt.annotation"/>
-  <rm:locator pattern="^org\.junit$" searchPathRef="orbit"/>
+  <rm:locator pattern="^org\.junit$" searchPathRef="orbit" failOnError="false"/>
   <rm:locator pattern="^org\.hamcrest(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.m2e(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.jboss\.netty$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.eclipse\.(?:egit|jgit)(?:\..+)?$" searchPathRef="egit"/>
+  <rm:locator pattern="^org\.kohsuke\.args4j(?:\..+)?$" searchPathRef="egit"/>
   <rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator pattern="^org.eclipse.jdt.annotation$" searchPathRef="jdt.annotation"/>
   
