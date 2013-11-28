@@ -1,4 +1,4 @@
-#setpref targetPlatformPath="${build.root}/target.platform"
+setpref targetPlatformPath="${build.root}/target.platform"
 #setpref org.eclipse.buckminster.core.maxParallelResolutions=1
 #setpref org.eclipse.buckminster.core.maxParallelMaterializations=1
 #importprefs -F ${releng.project.location}/releng/buckminster.workspace.epf
