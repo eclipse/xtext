@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
 import org.eclipse.xtext.xbase.XIfExpression
+import org.eclipse.xtext.xbase.XCastedExpression
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -1184,6 +1185,23 @@ class ErrorTest extends AbstractXtendTestCase {
 		assertNull(ifExpression.then)
 		assertNull(ifExpression.^else)
 		assertNotNull(resolvedTypes.getActualType(ifExpression))
+	}
+	
+	@Test
+	def void testErrorModel_77() throws Exception {
+		val file = '''
+			class C {
+				def m() {
+					try return 'literal' as as Boolean
+					  catch(NullPointerException e) return 'second thing is thrown'		  
+					  catch(ClassCastException e) throw new NullPointerException()
+			    }
+			}
+		'''.processWithoutException
+		val resolvedTypes = typeResolver.resolveTypes(file)
+		val casted = file.eAllContents.filter(XCastedExpression).last
+		assertNull(casted.type)
+		assertNotNull(resolvedTypes.getActualType(casted))
 	}
 	
 	def processWithoutException(CharSequence input) throws Exception {
