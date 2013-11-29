@@ -11,6 +11,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -44,6 +45,18 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(IssueCodes.IMPORT_WILDCARD_DEPRECATED)
 	public void fixDuplicateWildcardUse(final Issue issue, IssueResolutionAcceptor acceptor) {
 		organizeImports(issue, acceptor);
+	}
+
+	@Fix(IssueCodes.AMBIGUOUS_FEATURE_CALL)
+	public void fixAmbiguousMethodCall(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String[] data = issue.getData();
+		if (data == null || data.length == 0) {
+			return;
+		}
+		for (String replacement : data) {
+			String replaceLabel = "Change to '" + replacement + "'";
+			acceptor.accept(issue, replaceLabel, replaceLabel, null, new ReplaceModification(issue, replacement));
+		}
 	}
 
 	protected void organizeImports(final Issue issue, IssueResolutionAcceptor acceptor) {
