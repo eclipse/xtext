@@ -35,7 +35,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -52,9 +51,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class ActiveAnnotationContextProvider {
   @Inject
-  private OnChangeEvictingCache cache;
-  
-  @Inject
   @Extension
   private XAnnotationExtensions _xAnnotationExtensions;
   
@@ -67,101 +63,88 @@ public class ActiveAnnotationContextProvider {
   
   public ActiveAnnotationContexts computeContext(final XtendFile file) {
     try {
-      ActiveAnnotationContexts _xblockexpression = null;
-      {
-        final Stopwatches.StoppedTask task = Stopwatches.forTask("[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)");
-        task.start();
-        ActiveAnnotationContexts _xtrycatchfinallyexpression = null;
-        try {
-          Resource _eResource = file.eResource();
-          final Provider<ActiveAnnotationContexts> _function = new Provider<ActiveAnnotationContexts>() {
-            public ActiveAnnotationContexts get() {
-              Resource _eResource = file.eResource();
-              final ActiveAnnotationContexts result = ActiveAnnotationContexts.installNew(_eResource);
-              final CompilationUnitImpl compilationUnit = ActiveAnnotationContextProvider.this.compilationUnitProvider.get();
-              compilationUnit.setXtendFile(file);
-              final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
-                public void accept(final Pair<JvmAnnotationType,XAnnotation> it) {
-                  Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = result.getContexts();
-                  JvmAnnotationType _key = it.getKey();
-                  boolean _containsKey = _contexts.containsKey(_key);
-                  boolean _not = (!_containsKey);
-                  if (_not) {
-                    ActiveAnnotationContext _activeAnnotationContext = new ActiveAnnotationContext();
-                    final ActiveAnnotationContext fa = _activeAnnotationContext;
-                    fa.setCompilationUnit(compilationUnit);
-                    JvmAnnotationType _key_1 = it.getKey();
-                    final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
-                    try {
-                      final Object processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
-                      boolean _equals = Objects.equal(processorInstance, null);
-                      if (_equals) {
-                        String _identifier = processorType.getIdentifier();
-                        String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
-                        String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
-                        IllegalStateException _illegalStateException = new IllegalStateException(_plus_1);
-                        throw _illegalStateException;
-                      }
-                      fa.setProcessorInstance(processorInstance);
-                    } catch (final Throwable _t) {
-                      if (_t instanceof IllegalStateException) {
-                        final IllegalStateException e = (IllegalStateException)_t;
-                        Resource _eResource = file.eResource();
-                        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-                        String _message = e.getMessage();
-                        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
-                          IssueCodes.PROCESSING_ERROR, _message, file, null, (-1), null);
-                        _errors.add(_eObjectDiagnosticImpl);
-                      } else {
-                        throw Exceptions.sneakyThrow(_t);
-                      }
-                    }
-                    Map<JvmAnnotationType,ActiveAnnotationContext> _contexts_1 = result.getContexts();
-                    JvmAnnotationType _key_2 = it.getKey();
-                    _contexts_1.put(_key_2, fa);
-                  }
-                  Map<JvmAnnotationType,ActiveAnnotationContext> _contexts_2 = result.getContexts();
-                  JvmAnnotationType _key_3 = it.getKey();
-                  ActiveAnnotationContext _get = _contexts_2.get(_key_3);
-                  List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
-                  XAnnotation _value = it.getValue();
-                  XtendAnnotationTarget _annotatedTarget = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getAnnotatedTarget(_value);
-                  _annotatedSourceElements.add(_annotatedTarget);
+      final Stopwatches.StoppedTask task = Stopwatches.forTask("[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)");
+      task.start();
+      try {
+        Resource _eResource = file.eResource();
+        final ActiveAnnotationContexts result = ActiveAnnotationContexts.installNew(_eResource);
+        final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
+        compilationUnit.setXtendFile(file);
+        final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
+          public void accept(final Pair<JvmAnnotationType,XAnnotation> it) {
+            Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = result.getContexts();
+            JvmAnnotationType _key = it.getKey();
+            boolean _containsKey = _contexts.containsKey(_key);
+            boolean _not = (!_containsKey);
+            if (_not) {
+              ActiveAnnotationContext _activeAnnotationContext = new ActiveAnnotationContext();
+              final ActiveAnnotationContext fa = _activeAnnotationContext;
+              fa.setCompilationUnit(compilationUnit);
+              JvmAnnotationType _key_1 = it.getKey();
+              final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
+              try {
+                final Object processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
+                boolean _equals = Objects.equal(processorInstance, null);
+                if (_equals) {
+                  String _identifier = processorType.getIdentifier();
+                  String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
+                  String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
+                  IllegalStateException _illegalStateException = new IllegalStateException(_plus_1);
+                  throw _illegalStateException;
                 }
-              };
-              ActiveAnnotationContextProvider.this.searchAnnotatedElements(file, _function);
-              return result;
-            }
-          };
-          ActiveAnnotationContexts _get = this.cache.<ActiveAnnotationContexts>get("annotation context", _eResource, _function);
-          _xtrycatchfinallyexpression = _get;
-        } catch (final Throwable _t) {
-          if (_t instanceof Throwable) {
-            final Throwable e = (Throwable)_t;
-            boolean _matched = false;
-            if (!_matched) {
-              if (e instanceof VirtualMachineError) {
-                _matched=true;
-                throw e;
+                fa.setProcessorInstance(processorInstance);
+              } catch (final Throwable _t) {
+                if (_t instanceof IllegalStateException) {
+                  final IllegalStateException e = (IllegalStateException)_t;
+                  Resource _eResource = file.eResource();
+                  EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+                  String _message = e.getMessage();
+                  EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
+                    IssueCodes.PROCESSING_ERROR, _message, file, null, (-1), null);
+                  _errors.add(_eObjectDiagnosticImpl);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
               }
+              Map<JvmAnnotationType,ActiveAnnotationContext> _contexts_1 = result.getContexts();
+              JvmAnnotationType _key_2 = it.getKey();
+              _contexts_1.put(_key_2, fa);
             }
-            if (!_matched) {
-              if (e instanceof LinkageError) {
-                _matched=true;
-                throw e;
-              }
-            }
-            Resource _eResource_1 = file.eResource();
-            return ActiveAnnotationContexts.installNew(_eResource_1);
-          } else {
-            throw Exceptions.sneakyThrow(_t);
+            Map<JvmAnnotationType,ActiveAnnotationContext> _contexts_2 = result.getContexts();
+            JvmAnnotationType _key_3 = it.getKey();
+            ActiveAnnotationContext _get = _contexts_2.get(_key_3);
+            List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
+            XAnnotation _value = it.getValue();
+            XtendAnnotationTarget _annotatedTarget = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getAnnotatedTarget(_value);
+            _annotatedSourceElements.add(_annotatedTarget);
           }
-        } finally {
-          task.stop();
+        };
+        this.searchAnnotatedElements(file, _function);
+        return result;
+      } catch (final Throwable _t) {
+        if (_t instanceof Throwable) {
+          final Throwable e = (Throwable)_t;
+          boolean _matched = false;
+          if (!_matched) {
+            if (e instanceof VirtualMachineError) {
+              _matched=true;
+              throw e;
+            }
+          }
+          if (!_matched) {
+            if (e instanceof LinkageError) {
+              _matched=true;
+              throw e;
+            }
+          }
+          Resource _eResource_1 = file.eResource();
+          return ActiveAnnotationContexts.installNew(_eResource_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
-        _xblockexpression = (_xtrycatchfinallyexpression);
+      } finally {
+        task.stop();
       }
-      return _xblockexpression;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

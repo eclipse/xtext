@@ -119,7 +119,6 @@ class ActiveAnnotationContexts extends AdapterImpl {
  */
 class ActiveAnnotationContextProvider {
 	
-	@Inject OnChangeEvictingCache cache
 	@Inject extension XAnnotationExtensions
 	@Inject extension ProcessorInstanceForJvmTypeProvider
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
@@ -129,31 +128,29 @@ class ActiveAnnotationContextProvider {
 		val task = Stopwatches.forTask('[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)')
 		task.start
 		try {
-			cache.get('annotation context', file.eResource) [|
-				val result = ActiveAnnotationContexts.installNew(file.eResource)
-				val compilationUnit = compilationUnitProvider.get
-				compilationUnit.xtendFile = file
-				searchAnnotatedElements(file) [
-					if (!result.contexts.containsKey(key)) {
-						val fa = new ActiveAnnotationContext
-						fa.compilationUnit = compilationUnit
-						val processorType = key.getProcessorType
-						try {
-							val processorInstance = processorType.processorInstance
-							if (processorInstance == null) {
-								throw new IllegalStateException("Couldn't instantiate the referenced annotation processor of type '" + processorType.identifier + "'. This is usually the case when the processor resides in the same project as the annotated element.");
-							}
-							fa.setProcessorInstance(processorInstance)
-						} catch (IllegalStateException e) {
-							file.eResource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 
-								IssueCodes.PROCESSING_ERROR, e.message , file, null, -1, null))
+			val result = ActiveAnnotationContexts.installNew(file.eResource)
+			val compilationUnit = compilationUnitProvider.get
+			compilationUnit.xtendFile = file
+			searchAnnotatedElements(file) [
+				if (!result.contexts.containsKey(key)) {
+					val fa = new ActiveAnnotationContext
+					fa.compilationUnit = compilationUnit
+					val processorType = key.getProcessorType
+					try {
+						val processorInstance = processorType.processorInstance
+						if (processorInstance == null) {
+							throw new IllegalStateException("Couldn't instantiate the referenced annotation processor of type '" + processorType.identifier + "'. This is usually the case when the processor resides in the same project as the annotated element.");
 						}
-						result.contexts.put(key, fa)
+						fa.setProcessorInstance(processorInstance)
+					} catch (IllegalStateException e) {
+						file.eResource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 
+							IssueCodes.PROCESSING_ERROR, e.message , file, null, -1, null))
 					}
-					result.contexts.get(key).annotatedSourceElements += value.annotatedTarget
-				]
-				return result
+					result.contexts.put(key, fa)
+				}
+				result.contexts.get(key).annotatedSourceElements += value.annotatedTarget
 			]
+			return result
 		} catch (Throwable e) {
 			switch e {
 				VirtualMachineError : throw e
