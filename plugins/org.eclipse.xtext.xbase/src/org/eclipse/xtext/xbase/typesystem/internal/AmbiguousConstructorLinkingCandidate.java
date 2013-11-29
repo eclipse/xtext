@@ -43,5 +43,10 @@ public class AmbiguousConstructorLinkingCandidate extends AbstractAmbiguousLinki
 	protected EStructuralFeature getFeatureToMark() {
 		return XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
 	}
+
+	@Override
+	protected String[] getDiagnosticData() {
+		return null;
+	}
 	
 }
