@@ -1,0 +1,19 @@
+<lifecycleMappingMetadata>
+  <pluginExecutions>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>org.eclipse.xtext</groupId>
+        <artifactId>xtext-maven-plugin</artifactId>
+        <versionRange>[2.4.0,)</versionRange>
+        <goals>
+          <goal>generate</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+           <configurator>
+             <id>org.eclipse.xtext.m2e.xtextConfigurator</id>
+           </configurator>
+         </action>
+    </pluginExecution>
+  </pluginExecutions>
+</lifecycleMappingMetadata>
