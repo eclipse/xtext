@@ -28,6 +28,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
@@ -2237,6 +2239,39 @@ public class ErrorTest extends AbstractXtendTestCase {
     XExpression _else = ifExpression.getElse();
     Assert.assertNull(_else);
     LightweightTypeReference _actualType = resolvedTypes.getActualType(ifExpression);
+    Assert.assertNotNull(_actualType);
+  }
+  
+  @Test
+  public void testErrorModel_77() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("try return \'literal\' as as Boolean");
+    _builder.newLine();
+    _builder.append("\t\t  ");
+    _builder.append("catch(NullPointerException e) return \'second thing is thrown\'\t\t  ");
+    _builder.newLine();
+    _builder.append("\t\t  ");
+    _builder.append("catch(ClassCastException e) throw new NullPointerException()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final XtendFile file = this.processWithoutException(_builder);
+    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
+    TreeIterator<EObject> _eAllContents = file.eAllContents();
+    Iterator<XCastedExpression> _filter = Iterators.<XCastedExpression>filter(_eAllContents, XCastedExpression.class);
+    final XCastedExpression casted = IteratorExtensions.<XCastedExpression>last(_filter);
+    JvmTypeReference _type = casted.getType();
+    Assert.assertNull(_type);
+    LightweightTypeReference _actualType = resolvedTypes.getActualType(casted);
     Assert.assertNotNull(_actualType);
   }
   
