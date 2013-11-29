@@ -37,12 +37,10 @@ public class InternalBuilderTest {
 		reportMemoryState("Starting build.");
 
 		try {
-			File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
-			boolean success = Files.sweepFolder(jdtMetadata);
-			System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": "
-					+ (success ? "success" : "fail"));
+			clearJdtIndex();
 			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
 		} finally {
+			clearJdtIndex();
 			reportMemoryState("Finished build.");
 		}
 		final IMarker[] markers = ResourcesPlugin.getWorkspace().getRoot()
@@ -64,6 +62,13 @@ public class InternalBuilderTest {
 
 		assertTrue("Problems found (" + top10.size() + " from " + errors.size() + "): " + join(errors, ", "),
 				errors.isEmpty());
+	}
+
+	private void clearJdtIndex() throws FileNotFoundException {
+		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
+		boolean success = Files.sweepFolder(jdtMetadata);
+		System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": "
+				+ (success ? "success" : "fail"));
 	}
 
 	private void reportMemoryState(String reportName) {
