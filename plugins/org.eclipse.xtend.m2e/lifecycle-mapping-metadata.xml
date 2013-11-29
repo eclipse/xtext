@@ -11,8 +11,10 @@
         </goals>
       </pluginExecutionFilter>
       <action>
-        <ignore />
-      </action>
+           <configurator>
+             <id>org.eclipse.xtend.m2e.xtendConfigurator</id>
+           </configurator>
+         </action>
     </pluginExecution>
   </pluginExecutions>
 </lifecycleMappingMetadata>
