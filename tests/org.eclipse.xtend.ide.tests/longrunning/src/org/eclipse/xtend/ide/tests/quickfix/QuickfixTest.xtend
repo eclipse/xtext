@@ -1488,6 +1488,159 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test
+	def void ambiguousImplicitMethodCall() {
+		create('Foo.xtend', '''
+			class Foo {
+				
+				def foo() {
+					|name
+				}
+				
+				def String name() {
+					null
+				}
+				
+				def String getName() {
+					null
+				}
+			}
+		''')
+		.assertIssueCodes(AMBIGUOUS_FEATURE_CALL)
+		.assertResolutionLabels("Change to 'name()'", "Change to 'getName()'")
+		.assertModelAfterQuickfix("Change to 'name()'",'''
+			class Foo {
+				
+				def foo() {
+					name()
+				}
+				
+				def String name() {
+					null
+				}
+				
+				def String getName() {
+					null
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Change to 'getName()'",'''
+			class Foo {
+				
+				def foo() {
+					getName()
+				}
+				
+				def String name() {
+					null
+				}
+				
+				def String getName() {
+					null
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void ambiguousImplicitMethodCallWithExtensionMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+			
+				extension FooExtension
+			
+				def foo(String it) {
+					|name
+				}
+			
+				def name(String it) {
+					it
+				}
+			
+				def getName(String it) {
+					it
+				}
+			
+			}
+			
+			class FooExtension {
+			
+				def name(String it) {
+					it
+				}
+			
+				def getName(String it) {
+					it
+				}
+			
+			}
+		''')
+		.assertIssueCodes(AMBIGUOUS_FEATURE_CALL)
+		.assertResolutionLabels("Change to 'name()'", "Change to 'getName()'")
+		.assertModelAfterQuickfix("Change to 'name()'",'''
+			class Foo {
+			
+				extension FooExtension
+			
+				def foo(String it) {
+					name()
+				}
+			
+				def name(String it) {
+					it
+				}
+			
+				def getName(String it) {
+					it
+				}
+			
+			}
+			
+			class FooExtension {
+			
+				def name(String it) {
+					it
+				}
+			
+				def getName(String it) {
+					it
+				}
+			
+			}
+		''')
+		.assertModelAfterQuickfix("Change to 'getName()'",'''
+			class Foo {
+			
+				extension FooExtension
+			
+				def foo(String it) {
+					getName()
+				}
+			
+				def name(String it) {
+					it
+				}
+			
+				def getName(String it) {
+					it
+				}
+			
+			}
+			
+			class FooExtension {
+			
+				def name(String it) {
+					it
+				}
+			
+				def getName(String it) {
+					it
+				}
+			
+			}
+		''')
+	}
 
 }
 

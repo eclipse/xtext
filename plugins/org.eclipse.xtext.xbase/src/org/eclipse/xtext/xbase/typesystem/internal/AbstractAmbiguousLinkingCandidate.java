@@ -128,13 +128,15 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 			}
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 					IssueCodes.AMBIGUOUS_FEATURE_CALL, messageBuilder.toString(), getExpression(),
-					getFeatureToMark(), -1, null);
+					getFeatureToMark(), -1, getDiagnosticData());
 			result.accept(diagnostic);
 			return false;
 		}
 		return false;
 	}
 	
+	protected abstract String[] getDiagnosticData();
+
 	protected String getFeatureTypeName() {
 		return getPrimaryCandidate().getFeatureTypeName();
 	}
