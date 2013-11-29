@@ -731,10 +731,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 		 *   o.substring(1) // valid, too - compiler could insert the cast back to String
 		 * }
 		 */
-		state.withNonVoidExpectation().computeTypes(object.getTarget());
 		JvmTypeReference type = object.getType();
-		if (type != null)
+		if (type != null) {
+			state.withNonVoidExpectation().computeTypes(object.getTarget());
 			state.acceptActualType(state.getConverter().toLightweightReference(type));
+		} else {
+			state.computeTypes(object.getTarget());
+		}
 	}
 
 	protected void _computeTypes(final XForLoopExpression object, final ITypeComputationState state) {
