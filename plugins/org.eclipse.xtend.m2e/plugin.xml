@@ -4,5 +4,13 @@
    <extension
          point="org.eclipse.m2e.core.lifecycleMappingMetadataSource">
    </extension>
+   <extension
+        point="org.eclipse.m2e.core.projectConfigurators">
+     <configurator
+           class="org.eclipse.xtend.m2e.XtendProjectConfigurator"
+           id="org.eclipse.xtend.m2e.xtendConfigurator"
+           name="Xtend Project Configurator">
+     </configurator>
+  </extension>
 
 </plugin>
