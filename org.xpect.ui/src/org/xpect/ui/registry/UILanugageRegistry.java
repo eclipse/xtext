@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.osgi.framework.internal.core.BundleContextImpl;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
@@ -53,7 +52,7 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 				return provider.get(Injector.class);
 			} else {
 				Module runtimeModule = getRuntimeModule();
-				Module sharedStateModule = new SharedStateModule();
+				Module sharedStateModule = getSharedStateModule();
 				Module uiModule = getUIModule();
 				Module override = Modules2.mixin(modules);
 				return Guice.createInjector(Modules2.mixin(runtimeModule, sharedStateModule, uiModule, override));
@@ -66,6 +65,8 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 					Class<? extends Module> uiModuleClass = getUIModuleClass();
 					Bundle bundle = FrameworkUtil.getBundle(uiModuleClass);
 					Plugin plugin = ReflectionUtil.readField(BundleContextImpl.class, bundle.getBundleContext(), "activator", Plugin.class);
+					if (plugin == null)
+						throw new IllegalStateException("Could not access Activator of bundle '" + bundle.getBundleId() + "'. ");
 					Constructor<?> constructor = uiModuleClass.getConstructor(AbstractUIPlugin.class);
 					uiModule = (Module) constructor.newInstance(plugin);
 				} catch (InstantiationException e) {

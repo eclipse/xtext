@@ -31,6 +31,8 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 
 	protected Module runtimeModule = null;
 
+	protected Module sharedModule = null;
+
 	protected Module uiModule = null;
 
 	public AbstractLanguageInfo(IXtextFileExtensionInfo info) {
@@ -80,7 +82,6 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 
 	protected Module getRuntimeModule() {
 		if (runtimeModule == null) {
-
 			try {
 				Class<? extends Module> clazz = getRuntimeModuleClass();
 				runtimeModule = clazz.newInstance();
@@ -95,6 +96,20 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 
 	public Class<? extends Module> getRuntimeModuleClass() {
 		return info.getRuntimeModule().load();
+	}
+
+	protected Module getSharedStateModule() {
+		if (sharedModule == null) {
+			Class<Module> module = info.getSharedModule().load();
+			try {
+				sharedModule = module.newInstance();
+			} catch (InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return sharedModule;
 	}
 
 	public String getUiLangName() {

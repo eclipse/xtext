@@ -12,7 +12,6 @@ import org.osgi.framework.Bundle;
 import org.xpect.registry.IExtensionInfo;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
 public class UIExtensionInfoRegistry implements IExtensionInfo.Registry {

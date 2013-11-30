@@ -113,6 +113,16 @@
                </appInfo>
             </annotation>
          </attribute>
+         <attribute name="xtextSharedStateModule" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":com.google.inject.Module"/>
+               </appInfo>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

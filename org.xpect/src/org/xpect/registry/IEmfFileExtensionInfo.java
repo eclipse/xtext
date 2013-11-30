@@ -22,6 +22,7 @@ public interface IEmfFileExtensionInfo {
 
 		LazyClass<Module> getUIModule();
 
+		LazyClass<Module> getSharedModule();
 	}
 
 	public interface Registry {
