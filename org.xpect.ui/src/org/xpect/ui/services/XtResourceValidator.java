@@ -45,11 +45,11 @@ public class XtResourceValidator implements IResourceValidator {
 		return issues;
 	}
 
-	protected List<Issue> validateDelegate(Resource resource, CheckMode mode, CancelIndicator indicator) {
+	public List<Issue> validateDelegate(Resource resource, CheckMode mode, CancelIndicator indicator) {
 		return delegate.validate(resource, mode, indicator);
 	}
 
-	protected List<Issue> validateXpect(Resource resource, CheckMode mode, CancelIndicator indicator) {
+	public List<Issue> validateXpect(Resource resource, CheckMode mode, CancelIndicator indicator) {
 		XtextResource xpectResource = XpectFileAccess.getXpectResource(resource);
 		IResourceValidator validator = xpectResource.getResourceServiceProvider().getResourceValidator();
 		return validator.validate(xpectResource, mode, indicator);
