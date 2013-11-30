@@ -5,14 +5,14 @@ import java.util.List;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.XpectSetup;
 import org.xpect.state.Creates;
-import org.xpect.xtext.lib.setup.generic.GenericResource;
+import org.xpect.xtext.lib.setup.generic.Resource;
 
 import com.google.common.collect.Lists;
 
 @XpectSetup(ResourceSetDefaultsSetup.class)
 public class ResourceSetDefaultsSetup {
 
-	private List<GenericResource> genericResources = Lists.newArrayList();
+	private List<Resource> genericResources = Lists.newArrayList();
 
 	private ResourceSet resourceSet = null;
 
@@ -21,7 +21,7 @@ public class ResourceSetDefaultsSetup {
 		initialize(initializer);
 	}
 
-	public void add(GenericResource genericResource) {
+	public void add(Resource genericResource) {
 		this.genericResources.add(genericResource);
 	}
 
@@ -33,16 +33,19 @@ public class ResourceSetDefaultsSetup {
 
 	protected void addThisFileIfNeeded() {
 		for (ResourceFactory fact : this.resourceSet.getFactories())
-			if (fact instanceof ThisFile)
+			if (fact instanceof ThisResource)
 				return;
-		this.resourceSet.add(new ThisFile());
+		this.resourceSet.add(new ThisResource());
 	}
 
-	protected ResourceFactory convert(GenericResource res) {
-		if (res instanceof org.xpect.xtext.lib.setup.generic.File)
-			return new File((org.xpect.xtext.lib.setup.generic.File) res);
-		else if (res instanceof org.xpect.xtext.lib.setup.generic.ThisFile)
-			return new org.xpect.xtext.lib.setup.emf.ThisFile((org.xpect.xtext.lib.setup.generic.ThisFile) res);
+	protected void convert(Resource res) {
+		if (res instanceof org.xpect.xtext.lib.setup.generic.ThisFile)
+			this.resourceSet.add(new org.xpect.xtext.lib.setup.emf.ThisResource((org.xpect.xtext.lib.setup.generic.ThisFile) res));
+		else if (res instanceof org.xpect.xtext.lib.setup.generic.File)
+			this.resourceSet.add(new org.xpect.xtext.lib.setup.emf.Resource((org.xpect.xtext.lib.setup.generic.File) res));
+		else if (res instanceof org.xpect.xtext.lib.setup.generic.Folder)
+			for (Resource child : ((org.xpect.xtext.lib.setup.generic.Folder) res).getChildren())
+				convert(child);
 		throw new IllegalStateException();
 	}
 
@@ -59,8 +62,8 @@ public class ResourceSetDefaultsSetup {
 		initializer.initialize(this);
 		if (resourceSet == null)
 			resourceSet = createResourceSet();
-		for (GenericResource generic : genericResources)
-			this.resourceSet.add(convert(generic));
+		for (Resource res : genericResources)
+			convert(res);
 		addThisFileIfNeeded();
 	}
 

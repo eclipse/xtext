@@ -114,7 +114,7 @@ public class XtextStandaloneSetup {
 		Resource result = null;
 		for (ResourceFactory file : resourceSetConfig.getFactories()) {
 			Resource res = file.create(ctx, resourceSet);
-			if (file instanceof org.xpect.xtext.lib.setup.emf.ThisFile)
+			if (file instanceof org.xpect.xtext.lib.setup.emf.ThisResource)
 				result = res;
 		}
 		return (XtextResource) result;

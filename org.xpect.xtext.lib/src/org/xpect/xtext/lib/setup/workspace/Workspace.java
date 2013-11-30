@@ -76,7 +76,7 @@ public class Workspace extends Container<IWorkspaceRoot> {
 						configure(ctx, root);
 						createMembers(ctx, root, instance);
 					} catch (IOException e) {
-						throw new CoreException(new Status(IStatus.ERROR, "", "Error initializing test workspace", e));
+						throw new CoreException(new Status(IStatus.ERROR, "org.xpect.xtext.lib", "Error initializing test workspace", e));
 					}
 				}
 			}.run(new NullProgressMonitor());

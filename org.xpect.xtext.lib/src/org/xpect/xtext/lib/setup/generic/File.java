@@ -5,36 +5,39 @@ import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.xpect.xtext.lib.setup.FileSetupContext;
+import org.xpect.xtext.lib.util.URIUtil;
 
-public class File extends GenericResource {
-	private String from;
+public class File implements Resource {
+	private URI from = null;
+	private final URI local;
 
 	public File() {
-		super();
+		this.local = null;
 	}
 
 	public File(String name) {
-		super(name);
+		this.local = URIUtil.createLocalURI(name);
 	}
 
 	public InputStream getContents(FileSetupContext ctx) throws IOException {
-		URI source = ctx.resolve(getFrom() == null ? getName() : getFrom());
+		URI source = ctx.resolve(getFrom() == null ? getLocalURI(ctx).lastSegment() : getFrom().toString());
 		return ctx.getXpectFile().eResource().getResourceSet().getURIConverter().createInputStream(source);
 	}
 
-	public String getFrom() {
+	public URI getFrom() {
 		return from;
 	}
 
-	public String getLocalName(FileSetupContext ctx) {
-		return getName() == null ? from : getName();
-	}
-
-	public URI getResolvedURI(FileSetupContext ctx) {
-		return ctx.resolve(getLocalName(ctx));
-	}
-
 	public void setFrom(String from) {
-		this.from = from;
+		this.from = URI.createURI(from);
 	}
+
+	public URI getLocalURI(FileSetupContext ctx) {
+		if (local != null)
+			return local;
+		if (this.from != null)
+			return URI.createURI(from.lastSegment());
+		return null;
+	}
+
 }

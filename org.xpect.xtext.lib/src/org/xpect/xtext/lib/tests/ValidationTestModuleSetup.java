@@ -100,14 +100,13 @@ public class ValidationTestModuleSetup implements IXpectGuiceModuleSetup {
 					Set<Issue> issues = Sets.newLinkedHashSet(issuesFromDelegate);
 					XpectFile xpectFile = XpectFileAccess.getXpectFile(resource);
 					Set<Issue> matched = Sets.newHashSet();
-					for (XpectInvocation inv : xpectFile.getInvocations())
-						if (!inv.isIgnore()) {
-							int offset = new ThisOffsetProvider(inv, xresource).getOffset();
-							Iterable<Issue> selected = filter(issues, new IssueOverlapsRangePredicate(xresource, offset,
-									getExpectedSeverity(inv)));
-							result.putAll(offset, selected);
-							addAll(matched, selected);
-						}
+					for (XpectInvocation inv : xpectFile.getInvocations()) {
+						int offset = new ThisOffsetProvider(inv, xresource).getOffset();
+						Iterable<Issue> selected = filter(issues, new IssueOverlapsRangePredicate(xresource, offset,
+								getExpectedSeverity(inv)));
+						result.putAll(offset, selected);
+						addAll(matched, selected);
+					}
 					issues.removeAll(matched);
 					result.putAll(UNMATCHED, issues);
 				}

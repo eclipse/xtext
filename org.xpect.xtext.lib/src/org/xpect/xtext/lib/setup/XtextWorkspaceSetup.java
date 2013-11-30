@@ -27,8 +27,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 @XpectParameterAdapter(XtextOffsetAdapter.class)
-@XpectSetup({ WorkspaceDefaultsSetup.class, XtextTargetSyntaxSupport.class, XtextTestObjectSetup.class, InjectorSetup.class,
-		XtextValidatingSetup.class })
+@XpectSetup({ WorkspaceDefaultsSetup.class, XtextTargetSyntaxSupport.class, XtextTestObjectSetup.class, InjectorSetup.class, XtextValidatingSetup.class })
 public class XtextWorkspaceSetup {
 
 	@Precondition
@@ -69,6 +68,7 @@ public class XtextWorkspaceSetup {
 			workspaceConfig.cleanWorkspace();
 			workspace = workspaceConfig.configureWorkspace(ctx);
 			workspaceConfig.waitForAutoBuild();
+			// System.out.println(new IResourceFormatter().formatWorkspace());
 		}
 		return workspace;
 	}

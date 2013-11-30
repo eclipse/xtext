@@ -10,18 +10,17 @@ package org.xpect.xtext.lib.setup.emf;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@Deprecated
-public class ThisFile extends ThisResource {
+public class ThisResource extends Resource {
 
-	public ThisFile() {
+	public ThisResource() {
 		super(new org.xpect.xtext.lib.setup.generic.ThisFile());
 	}
 
-	public ThisFile(org.xpect.xtext.lib.setup.generic.ThisFile file) {
+	public ThisResource(org.xpect.xtext.lib.setup.generic.ThisFile file) {
 		super(file);
 	}
 
-	public ThisFile(String name) {
+	public ThisResource(String name) {
 		super(name);
 	}
 

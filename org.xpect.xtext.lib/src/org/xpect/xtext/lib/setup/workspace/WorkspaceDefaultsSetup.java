@@ -3,7 +3,7 @@ package org.xpect.xtext.lib.setup.workspace;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.IGrammarAccess;
@@ -11,7 +11,6 @@ import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.XpectSetup;
 import org.xpect.state.Creates;
 import org.xpect.xtext.lib.setup.InjectorSetup;
-import org.xpect.xtext.lib.setup.generic.GenericResource;
 import org.xpect.xtext.lib.util.GrammarAnalyzer;
 
 import com.google.common.collect.Lists;
@@ -22,7 +21,7 @@ public class WorkspaceDefaultsSetup {
 
 	public static final Path XTEND_LIBRARY_PATH = new Path("org.eclipse.xtend.XTEND_CONTAINER");
 
-	private List<GenericResource> genericResources = Lists.newArrayList();
+	private List<org.xpect.xtext.lib.setup.generic.Resource> genericResources = Lists.newArrayList();
 
 	private Workspace workspace;
 
@@ -31,7 +30,7 @@ public class WorkspaceDefaultsSetup {
 		initialize(initializer, injector);
 	}
 
-	public void add(GenericResource file) {
+	public void add(org.xpect.xtext.lib.setup.generic.Resource file) {
 		this.genericResources.add(file);
 	}
 
@@ -41,11 +40,13 @@ public class WorkspaceDefaultsSetup {
 		this.workspace = workspace;
 	}
 
-	protected IResourceFactory<IFile, IContainer> convert(GenericResource res) {
+	protected IResourceFactory<? extends IResource, IContainer> convert(org.xpect.xtext.lib.setup.generic.Resource res) {
+		if (res instanceof org.xpect.xtext.lib.setup.generic.ThisFile)
+			return new org.xpect.xtext.lib.setup.workspace.ThisFile((org.xpect.xtext.lib.setup.generic.ThisFile) res);
 		if (res instanceof org.xpect.xtext.lib.setup.generic.File)
 			return new File((org.xpect.xtext.lib.setup.generic.File) res);
-		else if (res instanceof org.xpect.xtext.lib.setup.generic.ThisFile)
-			return new org.xpect.xtext.lib.setup.workspace.ThisFile((org.xpect.xtext.lib.setup.generic.ThisFile) res);
+		if (res instanceof org.xpect.xtext.lib.setup.generic.Folder)
+			return new Folder((org.xpect.xtext.lib.setup.generic.Folder) res);
 		throw new IllegalStateException();
 	}
 
@@ -53,7 +54,7 @@ public class WorkspaceDefaultsSetup {
 		return new Workspace();
 	}
 
-	public List<GenericResource> getGenericResources() {
+	public List<org.xpect.xtext.lib.setup.generic.Resource> getGenericResources() {
 		return genericResources;
 	}
 
@@ -84,7 +85,7 @@ public class WorkspaceDefaultsSetup {
 		if (workspace.getDefaultProject() == null)
 			workspace.add(new Project("default_project"));
 		Project defaultProject = workspace.getDefaultProject();
-		for (GenericResource res : getGenericResources())
+		for (org.xpect.xtext.lib.setup.generic.Resource res : getGenericResources())
 			defaultProject.add(convert(res));
 		if (workspace.getThisFile() == null)
 			defaultProject.add(new org.xpect.xtext.lib.setup.workspace.ThisFile());
@@ -101,7 +102,7 @@ public class WorkspaceDefaultsSetup {
 		if (javaProject.getMember(SrcFolder.class) == null)
 			javaProject.add(new SrcFolder("src"));
 		SrcFolder srcFolder = javaProject.getMember(SrcFolder.class);
-		for (GenericResource res : getGenericResources())
+		for (org.xpect.xtext.lib.setup.generic.Resource res : getGenericResources())
 			srcFolder.add(convert(res));
 		if (workspace.getThisFile() == null)
 			srcFolder.add(new org.xpect.xtext.lib.setup.workspace.ThisFile());

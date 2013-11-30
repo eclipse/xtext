@@ -4,28 +4,24 @@ import java.io.IOException;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.xpect.xtext.lib.setup.FileSetupContext;
-import org.xpect.xtext.lib.util.IFileUtil;
 
-public class ThisFile extends org.xpect.xtext.lib.setup.generic.ThisFile implements IResourceFactory<IFile, IContainer> {
-
-	public final org.xpect.xtext.lib.setup.generic.ThisFile delegate;
+public class ThisFile extends File implements IResourceFactory<IFile, IContainer> {
 
 	public ThisFile() {
-		delegate = new org.xpect.xtext.lib.setup.generic.ThisFile();
+		super(new org.xpect.xtext.lib.setup.generic.ThisFile());
 	}
 
 	public ThisFile(org.xpect.xtext.lib.setup.generic.ThisFile file) {
-		delegate = file;
+		super(file);
 	}
 
 	public ThisFile(String name) {
-		delegate = new org.xpect.xtext.lib.setup.generic.ThisFile(name);
+		super(name);
 	}
 
-	public IFile create(FileSetupContext ctx, IContainer container, Workspace.Instance instance) throws IOException, CoreException {
-		IFile file = IFileUtil.create(container, getLocalName(ctx), getContents(ctx));
+	public IFile create(FileSetupContext ctx, IContainer container, Workspace.Instance instance) throws IOException {
+		IFile file = super.create(ctx, container, instance);
 		instance.setThisFile(file);
 		instance.setThisProject(file.getProject());
 		return file;

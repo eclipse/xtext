@@ -7,37 +7,22 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.setup.emf;
 
-import java.io.IOException;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.xpect.xtext.lib.setup.FileSetupContext;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class File implements ResourceFactory {
-
-	private final org.xpect.xtext.lib.setup.generic.File delegate;
+@Deprecated
+public class File extends org.xpect.xtext.lib.setup.emf.Resource {
 
 	public File() {
-		delegate = new org.xpect.xtext.lib.setup.generic.File();
+		super();
 	}
 
 	public File(org.xpect.xtext.lib.setup.generic.File file) {
-		delegate = file;
+		super(file);
 	}
 
 	public File(String name) {
-		delegate = new org.xpect.xtext.lib.setup.generic.File(name);
-	}
-
-	public Resource create(FileSetupContext ctx, ResourceSet resourceSet) throws IOException {
-		return ctx.load(resourceSet, delegate.getResolvedURI(ctx), delegate.getContents(ctx));
-	}
-
-	public void setFrom(String from) {
-		delegate.setFrom(from);
+		super(new org.xpect.xtext.lib.setup.generic.File(name));
 	}
 
 }

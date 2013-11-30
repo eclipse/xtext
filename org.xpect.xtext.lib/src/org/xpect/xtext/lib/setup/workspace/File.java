@@ -11,12 +11,12 @@ public class File implements IResourceFactory<IFile, IContainer> {
 
 	private final org.xpect.xtext.lib.setup.generic.File delegate;
 
-	public File() {
-		delegate = new org.xpect.xtext.lib.setup.generic.File();
-	}
-
 	public File(org.xpect.xtext.lib.setup.generic.File file) {
 		delegate = file;
+	}
+
+	public File() {
+		delegate = new org.xpect.xtext.lib.setup.generic.File();
 	}
 
 	public File(String name) {
@@ -24,7 +24,7 @@ public class File implements IResourceFactory<IFile, IContainer> {
 	}
 
 	public IFile create(FileSetupContext ctx, IContainer container, Workspace.Instance instance) throws IOException {
-		return IFileUtil.create(container, delegate.getLocalName(ctx), delegate.getContents(ctx));
+		return IFileUtil.create(container, delegate.getLocalURI(ctx), delegate.getContents(ctx));
 	}
 
 	public void setFrom(String name) {
