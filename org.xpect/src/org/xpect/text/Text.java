@@ -8,6 +8,8 @@ import java.util.Stack;
 
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -17,13 +19,47 @@ import com.google.common.collect.Sets;
  */
 public class Text {
 
+	private String nl;
+
 	private final CharSequence text;
 
 	public Text(CharSequence text) {
-		super();
-		if (text == null || text.length() == 0)
-			throw new NullPointerException();
+		Preconditions.checkNotNull(text);
 		this.text = text;
+	}
+
+	public char charAt(int c) {
+		return text.charAt(c);
+	}
+
+	public int currentLineEnd(int offset) {
+		int nl = indexOf('\n', offset);
+		if (nl > 0)
+			return text.charAt(nl - 1) == '\r' ? nl - 1 : nl;
+		return nl;
+	}
+
+	public int currentLineStart(int offset) {
+		return lastIndexOf('\n', offset) + 1;
+	}
+
+	protected String determineNL() {
+		boolean lastIsR = false;
+		for (int i = 0; i < text.length(); i++)
+			switch (text.charAt(i)) {
+			case '\r':
+				lastIsR = true;
+				break;
+			case '\n':
+				return lastIsR ? "\r\n" : "\n";
+			default:
+				lastIsR = false;
+			}
+		return "\n";
+	}
+
+	public String escapeNewLines() {
+		return text.toString().replace("\n", "\\n").replace("\r", "\\r");
 	}
 
 	public String findIndentation(int offset) {
@@ -51,8 +87,54 @@ public class Text {
 		return result.toString();
 	}
 
+	public String getNL() {
+		if (nl == null)
+			nl = determineNL();
+		return nl;
+	}
+
 	public CharSequence getText() {
 		return text;
+	}
+
+	public String indentWith(String indentation) {
+		return text.toString().replace("\n", "\n" + indentation);
+	}
+
+	public int indexOf(char c, int fromIndex) {
+		return text.toString().indexOf(c, fromIndex);
+	}
+
+	public int indexOf(String str, int fromIndex) {
+		return text.toString().indexOf(str, fromIndex);
+	}
+
+	public boolean isMultiline() {
+		return indexOf('\n', 0) >= 0;
+	}
+
+	public int lastIndexOf(char c, int fromIndex) {
+		return text.toString().lastIndexOf(c, fromIndex);
+	}
+
+	public int length() {
+		return text.length();
+	}
+
+	public int nextLineStart(int offset) {
+		return indexOf('\n', offset) + 1;
+	}
+
+	public int previousLineEnd(int offset) {
+		int nl = lastIndexOf('\n', offset);
+		if (nl > 0)
+			return text.charAt(nl - 1) == '\r' ? nl - 1 : nl;
+		return nl;
+	}
+
+	public int previousLineStart(int offset) {
+		int prevEnd = previousLineEnd(offset);
+		return currentLineStart(prevEnd - 1);
 	}
 
 	public IReplacement replacementTo(String other) {
@@ -74,6 +156,24 @@ public class Text {
 		int endIndex = other.length() - suffix + 1;
 		String replacement = prefix < endIndex ? other.substring(prefix, endIndex) : "";
 		return new Replacement(prefix, length, replacement);
+	}
+
+	public List<String> splitIntoLines() {
+		// ... because string.split() ignores trailing whitespace (wtf!)
+		List<String> result = Lists.newArrayList();
+		String document = text.toString();
+		int index, lastIndex = 0;
+		while ((index = document.indexOf('\n', lastIndex)) >= 0) {
+			int end = index > 0 && document.charAt(index - 1) == '\r' ? index - 1 : index;
+			result.add(document.substring(lastIndex, end));
+			lastIndex = index + 1;
+		}
+		result.add(document.substring(lastIndex, document.length()));
+		return ImmutableList.copyOf(result);
+	}
+
+	public String substring(int beginIndex, int endIndex) {
+		return text.toString().substring(beginIndex, endIndex);
 	}
 
 	@Override

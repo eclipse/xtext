@@ -24,6 +24,7 @@ import org.xpect.expectation.ExpectationCollection.ExpectationItem;
 import org.xpect.expectation.LinesExpectation.LinesExpectationParser;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterParser.SingleParameterParser;
+import org.xpect.text.Text;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -87,8 +88,9 @@ public @interface LinesExpectation {
 					if (pair.getSecond() != null)
 						actString.add(pair.getSecond().getEscaped());
 				}
-				String expDoc = replaceInDocument(Joiner.on('\n').join(expString));
-				String actDoc = replaceInDocument(Joiner.on('\n').join(actString));
+				String nl = new Text(getRegion().getDocument()).getNL();
+				String expDoc = replaceInDocument(Joiner.on(nl).join(expString));
+				String actDoc = replaceInDocument(Joiner.on(nl).join(actString));
 				throw new ComparisonFailure(message, expDoc, actDoc);
 			}
 		}

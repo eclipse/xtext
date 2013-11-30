@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.validation.Issue;
+import org.xpect.text.Text;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -25,25 +26,12 @@ public class IssueVisualizer {
 		StringBuffer result = new StringBuffer();
 		result.append(issue.getSeverity().toString().toLowerCase());
 		result.append(" - ");
-		result.append(issue.getMessage().replace("\n", "\\n"));
+		result.append(new Text(issue.getMessage()).escapeNewLines());
 		return result.toString();
 	}
 
-	/**
-	 * ... because string.split() ignores trailing whitespace (wtf!)
-	 */
-	protected List<String> splitIntoLines(String document) {
-		List<String> result = Lists.newArrayList();
-		int index, lastIndex = 0;
-		while ((index = document.indexOf('\n', lastIndex)) >= 0) {
-			result.add(document.substring(lastIndex, index));
-			lastIndex = index + 1;
-		}
-		result.add(document.substring(lastIndex, document.length()));
-		return result;
-	}
-
-	public String visualize(String document, List<Issue> issues) {
+	public String visualize(String documentString, List<Issue> issues) {
+		Text document = new Text(documentString);
 		@SuppressWarnings("unchecked")
 		List<Issue>[] mapped = new List[document.length()];
 		List<Issue> unmapped = Lists.newArrayList();
@@ -62,23 +50,23 @@ public class IssueVisualizer {
 		StringBuffer result = new StringBuffer();
 		for (Issue issue : unmapped) {
 			if (result.length() > 0)
-				result.append("\n");
+				result.append(document.getNL());
 			result.append(issueToString(issue));
 		}
 		boolean first = true;
 		int offset = 0;
-		for (String line : splitIntoLines(document)) {
+		for (String line : document.splitIntoLines()) {
 			if (first)
 				first = false;
 			else
-				result.append("\n");
+				result.append(document.getNL());
 			result.append(line);
 			boolean lineHasIssue = false;
 			for (int i = offset; i < offset + line.length(); i++)
 				if (mapped[i] != null)
 					lineHasIssue = true;
 			if (lineHasIssue) {
-				result.append("\n");
+				result.append(document.getNL());
 				Set<Issue> lineIssues = Sets.newLinkedHashSet();
 				for (int i = offset; i < offset + line.length(); i++)
 					if (mapped[i] != null) {
@@ -91,13 +79,13 @@ public class IssueVisualizer {
 						result.append(document.charAt(i) == '\t' ? "\t" : " ");
 				for (Issue issue : lineIssues) {
 					int id = 1 << Iterables.indexOf(lineIssues, Predicates.equalTo(issue));
-					result.append("\n");
+					result.append(document.getNL());
 					result.append(id);
 					result.append(": ");
 					result.append(issueToString(issue));
 				}
 			}
-			offset += line.length() + 1;
+			offset += line.length() + document.getNL().length();
 		}
 		return result.toString();
 	}

@@ -23,6 +23,7 @@ import org.xpect.expectation.CommaSeparatedValuesExpectation.CommaSeparatedValue
 import org.xpect.expectation.ExpectationCollection.ExpectationItem;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterParser.SingleParameterParser;
+import org.xpect.text.Text;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -76,6 +77,7 @@ public @interface CommaSeparatedValuesExpectation {
 			else
 				throw new NullPointerException();
 
+			String nl = new Text(this.getRegion().getDocument()).getNL();
 			if (!exp.matches(act)) {
 				StringBuilder expString = new StringBuilder();
 				StringBuilder actString = new StringBuilder();
@@ -106,14 +108,14 @@ public @interface CommaSeparatedValuesExpectation {
 					}
 					if (expItem != null && expString.length() > 0) {
 						if (expWrap) {
-							expString.append(expEmpty ? "\n" : ",\n");
+							expString.append(expEmpty ? nl : "," + nl);
 							expWrap = false;
 						} else
 							expString.append(expEmpty ? "  " : ", ");
 					}
 					if (actItem != null && actString.length() > 0) {
 						if (actWrap) {
-							actString.append(",\n");
+							actString.append("," + nl);
 							actWrap = false;
 							lineCount = 0;
 							lineLength = 0;

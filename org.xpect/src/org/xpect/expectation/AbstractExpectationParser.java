@@ -77,9 +77,9 @@ public class AbstractExpectationParser {
 
 	public IExpectationRegion claimRegion(XpectInvocation invocation, int paramIndex) {
 		INode node = NodeModelUtils.getNode(invocation);
-		String document = node.getRootNode().getText();
+		Text document = new Text(node.getRootNode().getText());
 		int paramStart = node.getOffset() + node.getLength();
-		int paramEnd = document.indexOf('\n', paramStart);
+		int paramEnd = document.currentLineEnd(paramStart);
 		if (paramEnd < 0)
 			paramEnd = document.length();
 		String param = document.substring(paramStart, paramEnd);
@@ -92,7 +92,7 @@ public class AbstractExpectationParser {
 			if (tokenStart < param.length() && Character.isWhitespace(param.charAt(tokenStart)))
 				tokenStart++;
 			int start = paramStart + tokenStart;
-			return new SingleLineExpectationRegion(document, start, paramEnd - start, SEP, paramStart + slStart);
+			return new SingleLineExpectationRegion(document.toString(), start, paramEnd - start, SEP, paramStart + slStart);
 		}
 
 		// try to match a multi-line-expectation
@@ -107,12 +107,14 @@ public class AbstractExpectationParser {
 		if (separator.length() > 2) {
 			int closingSepStart = document.indexOf(separator, paramEnd);
 			if (closingSepStart >= 0) {
-				String indentationPrefix = document.substring(document.lastIndexOf('\n', node.getOffset()) + 1, node.getOffset());
-				int expectationStart = paramEnd + 1;
-				int expectationEnd = document.lastIndexOf('\n', closingSepStart);
-				String indentation = new Text(document).findIndentation(indentationPrefix, expectationStart);
-				return new MultiLineExpectationRegion(document, expectationStart, expectationEnd - expectationStart, indentation,
-						separator, (openingSeparatorEnd + 1) - separator.length(), closingSepStart);
+				String indentationPrefix = document.substring(document.currentLineStart(node.getOffset()), node.getOffset());
+				int expectationStart = document.nextLineStart(paramStart);
+				int expectationEnd = document.previousLineEnd(closingSepStart);
+				String indentation = document.findIndentation(indentationPrefix, expectationStart);
+				int lenght = expectationEnd - expectationStart;
+				int openingSepOffset = (openingSeparatorEnd + 1) - separator.length();
+				return new MultiLineExpectationRegion(document.toString(), expectationStart, lenght, indentation, separator,
+						openingSepOffset, closingSepStart);
 			}
 		}
 		return null;

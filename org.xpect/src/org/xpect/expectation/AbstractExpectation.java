@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.xpect.expectation;
 
+import java.util.List;
+
 import org.xpect.expectation.ITargetSyntaxSupport.ITargetLiteralSupport;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
@@ -50,19 +52,19 @@ public class AbstractExpectation {
 	public String getExpectation() {
 		if (region.getLength() < 0)
 			return "";
-		String substring = region.getDocument().toString().substring(region.getOffset(), region.getOffset() + region.getLength());
+		Text substring = new Text(region.getDocument().toString().substring(region.getOffset(), region.getOffset() + region.getLength()));
 		if (region instanceof IMultiLineExpectationRegion) {
 			String indentation = ((IMultiLineExpectationRegion) region).getIndentation();
-			String[] lines = substring.split("\\n");
-			String newLines[] = new String[lines.length];
-			for (int i = 0; i < lines.length; i++)
-				if (lines[i].startsWith(indentation))
-					newLines[i] = lines[i].substring(indentation.length());
+			List<String> lines = substring.splitIntoLines();
+			String newLines[] = new String[lines.size()];
+			for (int i = 0; i < lines.size(); i++)
+				if (lines.get(i).startsWith(indentation))
+					newLines[i] = lines.get(i).substring(indentation.length());
 				else
-					newLines[i] = lines[i];
-			return Joiner.on("\n").join(newLines);
+					newLines[i] = lines.get(i);
+			return Joiner.on(substring.getNL()).join(newLines);
 		} else {
-			return substring;
+			return substring.getText().toString();
 		}
 	}
 
@@ -70,17 +72,17 @@ public class AbstractExpectation {
 		return region;
 	}
 
-	protected IReplacement getReplacement(String value, boolean enforceMultiLine) {
-		String document = region.getDocument().toString();
+	protected IReplacement getReplacement(Text value, boolean enforceMultiLine) {
+		Text document = new Text(region.getDocument());
 		if (region instanceof IMultiLineExpectationRegion) {
 			IMultiLineExpectationRegion mlRegion = (IMultiLineExpectationRegion) region;
 			String indentation = mlRegion.getIndentation();
-			String separator = findValidSeparator(value, mlRegion.getSeparator());
+			String separator = findValidSeparator(value.toString(), mlRegion.getSeparator());
 			int sepOpening = mlRegion.getOpeningSeparatorOffset();
 			int sepClosing = mlRegion.getClosingSeparatorOffset();
 			String betweenSeparatorAndExpectation = document.substring(sepOpening + mlRegion.getSeparator().length(), mlRegion.getOffset());
 			String betweenExpectationAndSeparator = document.substring(mlRegion.getOffset() + mlRegion.getLength(), sepClosing);
-			String indented = indentation + value.replace("\n", "\n" + indentation);
+			String indented = indentation + value.indentWith(indentation);
 			StringBuilder builder = new StringBuilder();
 			builder.append(separator);
 			builder.append(betweenSeparatorAndExpectation);
@@ -91,8 +93,8 @@ public class AbstractExpectation {
 		} else if (region instanceof ISingleLineExpectationRegion) {
 			ISingleLineExpectationRegion slRegion = (ISingleLineExpectationRegion) region;
 			if (enforceMultiLine) {
-				String separator = findValidSeparator(value, null);
-				String indentation = new Text(document).findIndentation(slRegion.getOpeningSeparatorOffset());
+				String separator = findValidSeparator(value.toString(), null);
+				String indentation = document.findIndentation(slRegion.getOpeningSeparatorOffset());
 				String insideIndentation = indentation;
 				if (insideIndentation.length() > 0) {
 					char first = insideIndentation.charAt(0);
@@ -101,18 +103,18 @@ public class AbstractExpectation {
 					else
 						insideIndentation += "" + first + first + first + first;
 				}
-				String indented = insideIndentation + value.replace("\n", "\n" + insideIndentation);
+				String indented = insideIndentation + value.indentWith(insideIndentation);
 				StringBuilder builder = new StringBuilder();
 				builder.append(separator);
-				builder.append("\n");
+				builder.append(document.getNL());
 				builder.append(indented);
-				builder.append("\n");
+				builder.append(document.getNL());
 				builder.append(indentation);
 				builder.append(separator);
 				int length = (slRegion.getOffset() - slRegion.getOpeningSeparatorOffset()) + slRegion.getLength();
 				return new Replacement(slRegion.getOpeningSeparatorOffset(), length, builder.toString());
 			} else {
-				return new Replacement(region.getOffset(), region.getLength(), value);
+				return new Replacement(region.getOffset(), region.getLength(), value.toString());
 			}
 		}
 		throw new IllegalStateException();
@@ -126,11 +128,12 @@ public class AbstractExpectation {
 		return targetLiteral;
 	}
 
-	protected String replaceInDocument(String value) {
-		Text text = new Text(region.getDocument());
-		boolean multiline = targetSyntax.supportsMultiLineLiteral() && value.contains("\n");
+	protected String replaceInDocument(String newValue) {
+		Text document = new Text(region.getDocument());
+		Text value = new Text(newValue);
+		boolean multiline = targetSyntax.supportsMultiLineLiteral() && value.isMultiline();
 		IReplacement replacement = getReplacement(value, multiline);
 		IReplacement targetReplacement = targetLiteral.adoptToTargetSyntax(replacement, multiline);
-		return text.with(targetReplacement);
+		return document.with(targetReplacement);
 	}
 }

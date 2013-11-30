@@ -10,6 +10,7 @@ package org.xpect.runner;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.xpect.XpectInvocation;
+import org.xpect.text.Text;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -25,10 +26,11 @@ public class XpectTestTitleProvider implements IXpectTestTitleProvider {
 		return title;
 	}
 
-	protected String findTitle(String document, int offset) {
-		int lineStart = document.lastIndexOf("\n", offset);
+	protected String findTitle(String documentString, int offset) {
+		Text document = new Text(documentString);
+		int lineStart = document.currentLineStart(offset);
 		if (lineStart > 0) {
-			String prefix = document.substring(lineStart + 1, offset);
+			String prefix = document.substring(lineStart, offset);
 			String trimmedPrefix = prefix.trim();
 			if (trimmedPrefix.length() > 0)
 				for (int i = 0; i < trimmedPrefix.length(); i++) {
@@ -36,9 +38,9 @@ public class XpectTestTitleProvider implements IXpectTestTitleProvider {
 					if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
 						return trimmedPrefix;
 				}
-			int prevLine = document.lastIndexOf("\n", lineStart - 1);
+			int prevLine = document.previousLineStart(offset);
 			if (prevLine >= 0) {
-				String prevPrefix = document.substring(prevLine + 1, prevLine + 1 + prefix.length());
+				String prevPrefix = document.substring(prevLine, prevLine + prefix.length());
 				if (prefix.equals(prevPrefix)) {
 					String title = document.substring(prevLine + prefix.length(), lineStart).trim();
 					if (title.length() > 0)
