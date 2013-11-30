@@ -61,8 +61,7 @@ public class XtLanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next().getFirst();
-				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage)
-						: new XtextReadonlyEditorInput(storage);
+				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage) : new XtextReadonlyEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 				IEditorPart editor = IDE.openEditor(activePage, editorInput, XpectPluginActivator.XT_EDITOR_ID);
 				selectAndReveal(editor, uri, crossReference, indexInList, select);
@@ -76,8 +75,7 @@ public class XtLanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		return null;
 	}
 
-	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference, final int indexInList,
-			final boolean select) {
+	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference, final int indexInList, final boolean select) {
 		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
 			xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
@@ -88,10 +86,9 @@ public class XtLanguageSpecificURIEditorOpener implements IURIEditorOpener {
 					EObject object = findEObjectByURI(uri, resource);
 					if (object == null)
 						return;
-					ILocationInFileProvider locationProvider = ((XtextResource) object.eResource()).getResourceServiceProvider().get(
-							ILocationInFileProvider.class);
-					ITextRegion location = (crossReference != null) ? locationProvider.getSignificantTextRegion(object, crossReference,
-							indexInList) : locationProvider.getSignificantTextRegion(object);
+					ILocationInFileProvider locationProvider = ((XtextResource) object.eResource()).getResourceServiceProvider().get(ILocationInFileProvider.class);
+					ITextRegion location = (crossReference != null) ? locationProvider.getSignificantTextRegion(object, crossReference, indexInList) : locationProvider
+							.getSignificantTextRegion(object);
 					if (select) {
 						xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
 					} else {
@@ -112,6 +109,7 @@ public class XtLanguageSpecificURIEditorOpener implements IURIEditorOpener {
 				EObject result = xpectResource.getEObject(uri.fragment());
 				return result;
 			} catch (WrappedException e) {
+			} catch (IllegalArgumentException e) {
 			}
 			try {
 				EObject result = resource.getEObject(uri.fragment());
