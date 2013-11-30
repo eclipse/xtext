@@ -113,8 +113,11 @@ public @interface XpectTestFiles {
 
 		public Collection<URI> getAllURIs() {
 			List<URI> result = Lists.newArrayList();
-			result.addAll(collectFilesWithExt(getBaseDirs(), ctx.fileExtensions()));
-			result.addAll(collectFiles(getBaseDirs(), ctx.files()));
+			Collection<File> baseDirs = getBaseDirs();
+			if (ctx.files().length == 0)
+				result.addAll(collectFilesWithExt(baseDirs, ctx.fileExtensions()));
+			else
+				result.addAll(collectFiles(getBaseDirs(), ctx.files()));
 			return result;
 		}
 
