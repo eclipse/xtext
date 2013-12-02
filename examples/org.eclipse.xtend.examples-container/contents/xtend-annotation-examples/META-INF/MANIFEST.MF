@@ -8,7 +8,8 @@ Require-Bundle: org.eclipse.xtend.lib,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.junit;bundle-version="4.5.0",
- org.eclipse.xtend.standalone;bundle-version="2.5.0"
+ org.eclipse.xtend.core;bundle-version="2.5.0",
+ org.eclipse.xtext;bundle-version="2.5.0"
 Export-Package: extract,
  i18n,
  lazy,

@@ -32,7 +32,7 @@ class BasicExpressions {
 		// There are various static methods to create collections
 		// and numerous extension methods which make working with them
 		// convenient.
-		val list = newArrayList('Hello', 'World')
+		val list = #['Hello', 'World']
 		assertEquals('HELLO', list.map[toUpperCase].head)
 		
 		val set  = newHashSet(1, 3, 5)
@@ -82,7 +82,7 @@ class BasicExpressions {
 		}
 		
 		// while loop
-		val iterator = newArrayList(1,2,3,4,5).iterator
+		val iterator = #[1,2,3,4,5].iterator
 		counter = 1
 		while(iterator.hasNext) {
 			val i = iterator.next
