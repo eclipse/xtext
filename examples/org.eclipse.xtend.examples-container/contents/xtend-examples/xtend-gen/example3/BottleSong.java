@@ -42,8 +42,7 @@ public class BottleSong {
         _builder.append(" of beer.");
         _builder.newLineIfNotEmpty();
         _builder.append("Take one down and pass it around, ");
-        int _minus = ((i).intValue() - 1);
-        String _bottles_1 = BottleSupport.bottles(_minus);
+        String _bottles_1 = BottleSupport.bottles(((i).intValue() - 1));
         _builder.append(_bottles_1, "");
         _builder.append(" of beer on the wall.");
         _builder.newLineIfNotEmpty();

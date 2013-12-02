@@ -15,11 +15,10 @@ public class Download extends AbstractXtendWebsite {
   }
   
   public String getLink(final String platform) {
-    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-R-" + platform);
     String _fileExtension = this.fileExtension(platform);
-    String _plus_1 = (_plus + _fileExtension);
-    String _plus_2 = (_plus_1 + "&r=1");
-    return _plus_2;
+    String _plus = (("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-R-" + platform) + _fileExtension);
+    String _plus_1 = (_plus + "&r=1");
+    return _plus_1;
   }
   
   public String fileExtension(final String platform) {
@@ -265,7 +264,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link = this.getLink(Download.OSX_64);
-    _builder.append(_link, "						    	");
+    _builder.append(_link, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -274,7 +273,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_1 = this.getLink(Download.OSX_32);
-    _builder.append(_link_1, "						    	");
+    _builder.append(_link_1, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -295,7 +294,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_2 = this.getLink(Download.LINUX_64);
-    _builder.append(_link_2, "						    	");
+    _builder.append(_link_2, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -307,7 +306,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_3 = this.getLink(Download.LINUX_32);
-    _builder.append(_link_3, "						    	");
+    _builder.append(_link_3, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -328,7 +327,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_4 = this.getLink(Download.WIN_64);
-    _builder.append(_link_4, "						    	");
+    _builder.append(_link_4, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -340,7 +339,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_5 = this.getLink(Download.WIN_32);
-    _builder.append(_link_5, "						    	");
+    _builder.append(_link_5, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");

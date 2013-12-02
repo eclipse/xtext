@@ -62,11 +62,11 @@ public class Menu {
             _builder.append("\t\t\t\t");
             _builder.append("<li><a href=\"");
             String _href = this._htmlExtensions.href(s);
-            _builder.append(_href, "				");
+            _builder.append(_href, "\t\t\t\t");
             _builder.append("\">");
             TextOrMarkup _title = s.getTitle();
             CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
-            _builder.append(_htmlText, "				");
+            _builder.append(_htmlText, "\t\t\t\t");
             _builder.append("</a></li>");
             _builder.newLineIfNotEmpty();
           } else {
@@ -78,7 +78,7 @@ public class Menu {
             _builder.append("<a class=\"dropdown-toggle\" data-toggle=\"dropdown\">");
             TextOrMarkup _title_1 = s.getTitle();
             CharSequence _htmlText_1 = this._htmlExtensions.toHtmlText(_title_1);
-            _builder.append(_htmlText_1, "					");
+            _builder.append(_htmlText_1, "\t\t\t\t\t");
             _builder.append(" <b class=\"caret\"></b></a>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t\t");
@@ -92,11 +92,11 @@ public class Menu {
                 _builder.append("\t\t");
                 _builder.append("<li><a href=\"");
                 String _href_1 = this._htmlExtensions.href(subSection);
-                _builder.append(_href_1, "						");
+                _builder.append(_href_1, "\t\t\t\t\t\t");
                 _builder.append("\">");
                 TextOrMarkup _title_2 = subSection.getTitle();
                 CharSequence _htmlText_2 = this._htmlExtensions.toHtmlText(_title_2);
-                _builder.append(_htmlText_2, "						");
+                _builder.append(_htmlText_2, "\t\t\t\t\t\t");
                 _builder.append("</a></li>");
                 _builder.newLineIfNotEmpty();
               }

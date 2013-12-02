@@ -17,7 +17,7 @@ public class ReleaseNotes24 extends AbstractXtendWebsite {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t");
     CharSequence _headline = this.headline("Release Notes - Version 2.4.2 (June 2013)");
-    _builder.append(_headline, "	");
+    _builder.append(_headline, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<div id=\"page\">");

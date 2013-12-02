@@ -174,8 +174,7 @@ public class GenerateBootstrapDoc {
     final Collection<URI> uris = _resolvePathes.values();
     for (final URI uri : uris) {
       {
-        String _plus = ("Loading " + uri);
-        InputOutput.<String>println(_plus);
+        InputOutput.<String>println(("Loading " + uri));
         rs.getResource(uri, true);
       }
     }
@@ -236,11 +235,11 @@ public class GenerateBootstrapDoc {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     CharSequence _menu = this._menu.menu(document);
-    _builder.append(_menu, "	");
+    _builder.append(_menu, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     CharSequence _body = this._body.body(document);
-    _builder.append(_body, "	");
+    _builder.append(_body, "\t");
     _builder.newLineIfNotEmpty();
     CharSequence _footer = this.mainSite.footer("../bootstrap");
     _builder.append(_footer, "");

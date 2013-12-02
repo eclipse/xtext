@@ -158,7 +158,7 @@ public class Documentation extends AbstractXtendWebsite {
     _builder.newLine();
     _builder.append("\t\t");
     CharSequence _body = this._body.body(this.doc);
-    _builder.append(_body, "		");
+    _builder.append(_body, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</div>");
@@ -178,11 +178,11 @@ public class Documentation extends AbstractXtendWebsite {
         _builder.append("\t");
         _builder.append("<li><a href=\"");
         String _href = this._htmlExtensions.href(chapter);
-        _builder.append(_href, "	");
+        _builder.append(_href, "\t");
         _builder.append("\">");
         TextOrMarkup _title = chapter.getTitle();
         CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
-        _builder.append(_htmlText, "	");
+        _builder.append(_htmlText, "\t");
         _builder.append("</a>");
         _builder.newLineIfNotEmpty();
         {
@@ -191,21 +191,21 @@ public class Documentation extends AbstractXtendWebsite {
           for(final Section section : _subSections) {
             if (!_hasElements) {
               _hasElements = true;
-              _builder.append("<ul>", "	");
+              _builder.append("<ul>", "\t");
             }
             _builder.append("\t");
             _builder.append("<li><a href=\"");
             String _href_1 = this._htmlExtensions.href(section);
-            _builder.append(_href_1, "	");
+            _builder.append(_href_1, "\t");
             _builder.append("\">");
             TextOrMarkup _title_1 = section.getTitle();
             CharSequence _htmlText_1 = this._htmlExtensions.toHtmlText(_title_1);
-            _builder.append(_htmlText_1, "	");
+            _builder.append(_htmlText_1, "\t");
             _builder.append("</a></li>");
             _builder.newLineIfNotEmpty();
           }
           if (_hasElements) {
-            _builder.append("</ul>", "	");
+            _builder.append("</ul>", "\t");
           }
         }
         _builder.append("\t");
@@ -223,7 +223,7 @@ public class Documentation extends AbstractXtendWebsite {
         _builder.append("<li style=\"color : #333;\">");
         TextOrMarkup _title_2 = part.getTitle();
         CharSequence _htmlText_2 = this._htmlExtensions.toHtmlText(_title_2);
-        _builder.append(_htmlText_2, "	");
+        _builder.append(_htmlText_2, "\t");
         _builder.append("</li>");
         _builder.newLineIfNotEmpty();
         {
@@ -232,11 +232,11 @@ public class Documentation extends AbstractXtendWebsite {
             _builder.append("\t");
             _builder.append("<li><a href=\"");
             String _href_2 = this._htmlExtensions.href(chapter_1);
-            _builder.append(_href_2, "	");
+            _builder.append(_href_2, "\t");
             _builder.append("\">");
             TextOrMarkup _title_3 = chapter_1.getTitle();
             CharSequence _htmlText_3 = this._htmlExtensions.toHtmlText(_title_3);
-            _builder.append(_htmlText_3, "	");
+            _builder.append(_htmlText_3, "\t");
             _builder.append("</a>");
             _builder.newLineIfNotEmpty();
             {
@@ -245,21 +245,21 @@ public class Documentation extends AbstractXtendWebsite {
               for(final Section section_1 : _subSections_1) {
                 if (!_hasElements_1) {
                   _hasElements_1 = true;
-                  _builder.append("<ul>", "	");
+                  _builder.append("<ul>", "\t");
                 }
                 _builder.append("\t");
                 _builder.append("<li><a href=\"");
                 String _href_3 = this._htmlExtensions.href(section_1);
-                _builder.append(_href_3, "	");
+                _builder.append(_href_3, "\t");
                 _builder.append("\">");
                 TextOrMarkup _title_4 = section_1.getTitle();
                 CharSequence _htmlText_4 = this._htmlExtensions.toHtmlText(_title_4);
-                _builder.append(_htmlText_4, "	");
+                _builder.append(_htmlText_4, "\t");
                 _builder.append("</a></li>");
                 _builder.newLineIfNotEmpty();
               }
               if (_hasElements_1) {
-                _builder.append("</ul>", "	");
+                _builder.append("</ul>", "\t");
               }
             }
             _builder.append("\t");
@@ -277,12 +277,12 @@ public class Documentation extends AbstractXtendWebsite {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<li><a href=\"documentation/");
-    _builder.append(this.currentVersion, "	");
+    _builder.append(this.currentVersion, "\t");
     _builder.append("/Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<li><a href=\"api/");
-    _builder.append(this.currentVersion, "	");
+    _builder.append(this.currentVersion, "\t");
     _builder.append("/index.html\">Runtime Library API</a>");
     _builder.newLineIfNotEmpty();
     _builder.append("</ul>");

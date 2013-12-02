@@ -103,30 +103,29 @@ public class TargetPaths {
   protected void traverseChildren(final Identifiable element, final TargetPathAdapter adapter, final String prefix, final String parentPath, final Function1<? super AbstractSection,? extends Boolean> predicate) {
     String thisPath = parentPath;
     if ((element instanceof AbstractSection)) {
-      final AbstractSection resolved = this._xdocExtensions.resolve(((AbstractSection) ((AbstractSection)element)));
+      final AbstractSection resolved = this._xdocExtensions.resolve(((AbstractSection) element));
       boolean _notEquals = (!Objects.equal(resolved, element));
       if (_notEquals) {
         this.traverseChildren(resolved, adapter, prefix, parentPath, predicate);
         return;
       }
-      Boolean _apply = predicate.apply(((AbstractSection) ((AbstractSection)element)));
+      Boolean _apply = predicate.apply(((AbstractSection) element));
       if ((_apply).booleanValue()) {
         String _xifexpression = null;
         List<AbstractSection> _targetFileRoots = adapter.getTargetFileRoots();
         boolean _isEmpty = _targetFileRoots.isEmpty();
         if (_isEmpty) {
-          String _plus = (prefix + ".html");
-          _xifexpression = _plus;
+          _xifexpression = (prefix + ".html");
         } else {
           List<AbstractSection> _targetFileRoots_1 = adapter.getTargetFileRoots();
           int _size = _targetFileRoots_1.size();
-          String _plus_1 = (prefix + Integer.valueOf(_size));
-          String _plus_2 = (_plus_1 + ".html");
-          _xifexpression = _plus_2;
+          String _plus = (prefix + Integer.valueOf(_size));
+          String _plus_1 = (_plus + ".html");
+          _xifexpression = _plus_1;
         }
         thisPath = _xifexpression;
         List<AbstractSection> _targetFileRoots_2 = adapter.getTargetFileRoots();
-        _targetFileRoots_2.add(((AbstractSection) ((AbstractSection)element)));
+        _targetFileRoots_2.add(((AbstractSection) element));
       }
     }
     Map<Identifiable,String> _targetPaths = adapter.getTargetPaths();

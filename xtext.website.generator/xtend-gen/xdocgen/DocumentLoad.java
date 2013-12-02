@@ -56,8 +56,7 @@ public class DocumentLoad {
     Iterable<URI> _plus = Iterables.<URI>concat(uris, _xtendFiles);
     for (final URI uri : _plus) {
       {
-        String _plus_1 = ("Loading " + uri);
-        InputOutput.<String>println(_plus_1);
+        InputOutput.<String>println(("Loading " + uri));
         rs.getResource(uri, true);
       }
     }
@@ -70,13 +69,12 @@ public class DocumentLoad {
           boolean _matched = false;
           if (!_matched) {
             if (it instanceof XtextResource) {
-              final XtextResource _xtextResource = (XtextResource)it;
               _matched=true;
               List<Issue> _xblockexpression = null;
               {
-                IResourceServiceProvider _resourceServiceProvider = _xtextResource.getResourceServiceProvider();
+                IResourceServiceProvider _resourceServiceProvider = ((XtextResource)it).getResourceServiceProvider();
                 final IResourceValidator validator = _resourceServiceProvider.getResourceValidator();
-                List<Issue> _validate = validator.validate(_xtextResource, CheckMode.ALL, null);
+                List<Issue> _validate = validator.validate(it, CheckMode.ALL, null);
                 _xblockexpression = (_validate);
               }
               _switchResult = _xblockexpression;

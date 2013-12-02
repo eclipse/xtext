@@ -41,7 +41,6 @@ class ObservableTests {
 			    String _oldValue = this.name;
 			    this.name = name;
 			    _propertyChangeSupport.firePropertyChange("name", _oldValue, name);
-			    
 			  }
 			  
 			  private PropertyChangeSupport _propertyChangeSupport = new PropertyChangeSupport(this);

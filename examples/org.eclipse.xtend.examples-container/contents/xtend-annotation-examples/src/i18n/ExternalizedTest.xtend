@@ -20,7 +20,6 @@ class ExternalizedTest {
 				val DATE_MESSAGE = "Today, is ${0,date}."
 			}
 		'''.compile [
-			
 			val extension ctx = transformationContext
 			val clazz = findClass('i18n.MyMessages')
 			

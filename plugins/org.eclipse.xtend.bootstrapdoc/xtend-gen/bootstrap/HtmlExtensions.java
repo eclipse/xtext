@@ -55,7 +55,7 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 import org.eclipse.xtext.xdoc.xdoc.TextPart;
 import org.eclipse.xtext.xdoc.xdoc.Todo;
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList;
-import org.eclipse.xtext.xdoc.xdoc.XdocPackage.Literals;
+import org.eclipse.xtext.xdoc.xdoc.XdocPackage;
 
 @SuppressWarnings("all")
 public class HtmlExtensions {
@@ -193,7 +193,7 @@ public class HtmlExtensions {
             _builder.append("<p>");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append(contentsToHtml, "	");
+            _builder.append(contentsToHtml, "\t");
             _builder.newLineIfNotEmpty();
             _builder.append("</p>");
             _builder.newLine();
@@ -287,7 +287,7 @@ public class HtmlExtensions {
       for(final Item item : _items) {
         _builder.append("\t");
         CharSequence _html = this.toHtml(item, state);
-        _builder.append(_html, "	");
+        _builder.append(_html, "\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -317,7 +317,7 @@ public class HtmlExtensions {
       for(final Item item : _items) {
         _builder.append("\t");
         CharSequence _html = this.toHtml(item, state);
-        _builder.append(_html, "	");
+        _builder.append(_html, "\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -343,19 +343,19 @@ public class HtmlExtensions {
       _builder.append("\t");
       _builder.append("<img src=\"");
       String _path = it.getPath();
-      _builder.append(_path, "	");
+      _builder.append(_path, "\t");
       _builder.append("\" alt=\"");
-      _builder.append(caption, "	");
+      _builder.append(caption, "\t");
       _builder.append("\" ");
       {
         boolean _notEquals = (!Objects.equal(dimension, null));
         if (_notEquals) {
           _builder.append("width=\"");
           int _width = dimension.getWidth();
-          _builder.append(_width, "	");
+          _builder.append(_width, "\t");
           _builder.append("\" height=\"");
           int _height = dimension.getHeight();
-          _builder.append(_height, "	");
+          _builder.append(_height, "\t");
           _builder.append("\"");
         }
       }
@@ -478,7 +478,7 @@ public class HtmlExtensions {
         if (_eContainer!=null) {
           _eContainingFeature=_eContainer.eContainingFeature();
         }
-        boolean _equals = Objects.equal(_eContainingFeature, Literals.ABSTRACT_SECTION__CONTENTS);
+        boolean _equals = Objects.equal(_eContainingFeature, XdocPackage.Literals.ABSTRACT_SECTION__CONTENTS);
         if (!_equals) {
           _and = false;
         } else {
@@ -527,9 +527,9 @@ public class HtmlExtensions {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         String _trimCode = this.trimCode(code);
-        _builder.append(_trimCode, "			");
+        _builder.append(_trimCode, "\t\t\t");
         String _markCodeEnd = this.markCodeEnd();
-        _builder.append(_markCodeEnd, "			");
+        _builder.append(_markCodeEnd, "\t\t\t");
         _builder.append("</pre>");
         CharSequence _insert = this.insert(_builder, state);
         _xifexpression = _insert;
@@ -669,14 +669,12 @@ public class HtmlExtensions {
         _and = false;
       } else {
         boolean _or = false;
-        int _plus = (start + 1);
-        String _substring = it.substring(start, _plus);
+        String _substring = it.substring(start, (start + 1));
         boolean _equals = Objects.equal(_substring, " ");
         if (_equals) {
           _or = true;
         } else {
-          int _plus_1 = (start + 1);
-          String _substring_1 = it.substring(start, _plus_1);
+          String _substring_1 = it.substring(start, (start + 1));
           boolean _equals_1 = Objects.equal(_substring_1, "\t");
           _or = (_equals || _equals_1);
         }
@@ -684,8 +682,7 @@ public class HtmlExtensions {
       }
       boolean _while = _and;
       while (_while) {
-        int _plus_2 = (start + 1);
-        start = _plus_2;
+        start = (start + 1);
         boolean _and_1 = false;
         int _length_1 = it.length();
         int _minus_1 = (_length_1 - 1);
@@ -694,14 +691,12 @@ public class HtmlExtensions {
           _and_1 = false;
         } else {
           boolean _or_1 = false;
-          int _plus_3 = (start + 1);
-          String _substring_2 = it.substring(start, _plus_3);
+          String _substring_2 = it.substring(start, (start + 1));
           boolean _equals_2 = Objects.equal(_substring_2, " ");
           if (_equals_2) {
             _or_1 = true;
           } else {
-            int _plus_4 = (start + 1);
-            String _substring_3 = it.substring(start, _plus_4);
+            String _substring_3 = it.substring(start, (start + 1));
             boolean _equals_3 = Objects.equal(_substring_3, "\t");
             _or_1 = (_equals_2 || _equals_3);
           }
@@ -709,41 +704,35 @@ public class HtmlExtensions {
         }
         _while = _and_1;
       }
-      int _plus_2 = (start + 1);
-      String _substring_2 = it.substring(start, _plus_2);
+      String _substring_2 = it.substring(start, (start + 1));
       boolean _equals_2 = Objects.equal(_substring_2, "\n");
       if (_equals_2) {
-        int _plus_3 = (start + 1);
-        start = _plus_3;
+        start = (start + 1);
       }
       int _length_1 = it.length();
       int end = (_length_1 - 1);
       boolean _and_1 = false;
-      boolean _greaterThan = (end > 0);
-      if (!_greaterThan) {
+      if (!(end > 0)) {
         _and_1 = false;
       } else {
         char _charAt = it.charAt(end);
         boolean _isWhitespace = Character.isWhitespace(_charAt);
-        _and_1 = (_greaterThan && _isWhitespace);
+        _and_1 = ((end > 0) && _isWhitespace);
       }
       boolean _while_1 = _and_1;
       while (_while_1) {
-        int _minus_1 = (end - 1);
-        end = _minus_1;
+        end = (end - 1);
         boolean _and_2 = false;
-        boolean _greaterThan_1 = (end > 0);
-        if (!_greaterThan_1) {
+        if (!(end > 0)) {
           _and_2 = false;
         } else {
           char _charAt_1 = it.charAt(end);
           boolean _isWhitespace_1 = Character.isWhitespace(_charAt_1);
-          _and_2 = (_greaterThan_1 && _isWhitespace_1);
+          _and_2 = ((end > 0) && _isWhitespace_1);
         }
         _while_1 = _and_2;
       }
-      int _plus_4 = (end + 1);
-      String _substring_3 = it.substring(start, _plus_4);
+      String _substring_3 = it.substring(start, (end + 1));
       _xblockexpression = (_substring_3);
     }
     return _xblockexpression;

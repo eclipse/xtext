@@ -70,8 +70,6 @@ public class LazyTest {
     _builder_1.append("    ");
     _builder_1.append("return name;");
     _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();

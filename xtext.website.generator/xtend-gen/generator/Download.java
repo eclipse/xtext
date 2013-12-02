@@ -11,11 +11,10 @@ public class Download extends AbstractWebsite {
   }
   
   public String getLink(final String platform) {
-    String _plus = ("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-R-" + platform);
     String _fileExtension = this.fileExtension(platform);
-    String _plus_1 = (_plus + _fileExtension);
-    String _plus_2 = (_plus_1 + "&r=1");
-    return _plus_2;
+    String _plus = (("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-R-" + platform) + _fileExtension);
+    String _plus_1 = (_plus + "&r=1");
+    return _plus_1;
   }
   
   public String fileExtension(final String platform) {
@@ -259,7 +258,7 @@ public class Download extends AbstractWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link = this.getLink(Download.OSX_64);
-    _builder.append(_link, "						    	");
+    _builder.append(_link, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -268,7 +267,7 @@ public class Download extends AbstractWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_1 = this.getLink(Download.OSX_32);
-    _builder.append(_link_1, "						    	");
+    _builder.append(_link_1, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -289,7 +288,7 @@ public class Download extends AbstractWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_2 = this.getLink(Download.LINUX_64);
-    _builder.append(_link_2, "						    	");
+    _builder.append(_link_2, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -301,7 +300,7 @@ public class Download extends AbstractWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_3 = this.getLink(Download.LINUX_32);
-    _builder.append(_link_3, "						    	");
+    _builder.append(_link_3, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -322,7 +321,7 @@ public class Download extends AbstractWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_4 = this.getLink(Download.WIN_64);
-    _builder.append(_link_4, "						    	");
+    _builder.append(_link_4, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -334,7 +333,7 @@ public class Download extends AbstractWebsite {
     _builder.append("\t\t\t\t\t\t    \t");
     _builder.append("<a href=\"");
     String _link_5 = this.getLink(Download.WIN_32);
-    _builder.append(_link_5, "						    	");
+    _builder.append(_link_5, "\t\t\t\t\t\t    \t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t\t    \t");
@@ -599,7 +598,7 @@ public class Download extends AbstractWebsite {
     _builder_1.append("When in Eclipse open the <i>\"Help\"</i> menu and click on <i>\"Install new Software...\"</i>.");
     _builder_1.newLine();
     CharSequence _faqEntry = this.faqEntry("What is an update site?", _builder_1);
-    _builder.append(_faqEntry, "				    ");
+    _builder.append(_faqEntry, "\t\t\t\t    ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t    ");
     StringConcatenation _builder_2 = new StringConcatenation();
@@ -613,7 +612,7 @@ public class Download extends AbstractWebsite {
     _builder_2.append("</p>");
     _builder_2.newLine();
     CharSequence _faqEntry_1 = this.faqEntry("What is the license of Xtext?", _builder_2);
-    _builder.append(_faqEntry_1, "				    ");
+    _builder.append(_faqEntry_1, "\t\t\t\t    ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t    ");
     StringConcatenation _builder_3 = new StringConcatenation();
@@ -628,7 +627,7 @@ public class Download extends AbstractWebsite {
     _builder_3.append("See <a target=\"_blank\" href=\"http://xtext.itemis.com\">xtext.itemis.com</a> for more details.");
     _builder_3.newLine();
     CharSequence _faqEntry_2 = this.faqEntry("If Xtext is open-source, how can I get professional support?", _builder_3);
-    _builder.append(_faqEntry_2, "				    ");
+    _builder.append(_faqEntry_2, "\t\t\t\t    ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t    ");
     StringConcatenation _builder_4 = new StringConcatenation();
@@ -637,7 +636,7 @@ public class Download extends AbstractWebsite {
     _builder_4.append("please have a look at the following site : <a href=\"http://www.eclipse.org/modeling/tmf/downloads/\">http://www.eclipse.org/modeling/tmf/downloads/</a></p>");
     _builder_4.newLine();
     CharSequence _faqEntry_3 = this.faqEntry("Can I download the update site as a zip?", _builder_4);
-    _builder.append(_faqEntry_3, "				    ");
+    _builder.append(_faqEntry_3, "\t\t\t\t    ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
     _builder.append("</div>");
@@ -670,11 +669,11 @@ public class Download extends AbstractWebsite {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#accordion2\" href=\"#");
-    _builder.append(key, "	");
+    _builder.append(key, "\t");
     _builder.append("\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t  ");
-    _builder.append(question, "	  ");
+    _builder.append(question, "\t  ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</a>");
@@ -691,7 +690,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<div class=\"accordion-inner\">");
     _builder.newLine();
     _builder.append("\t  ");
-    _builder.append(answer, "	  ");
+    _builder.append(answer, "\t  ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</div>");

@@ -8,8 +8,9 @@
 package example2;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,21 +29,17 @@ public class BasicExpressions {
   @Test
   public void literals() {
     Assert.assertEquals("Hello", "Hello");
-    int _plus = (20 + 20);
-    int _multiply = (1 * 2);
-    int _plus_1 = (_plus + _multiply);
-    Assert.assertEquals(42, _plus_1);
-    BigDecimal _plus_2 = new BigDecimal("0.00").add(BigDecimal.valueOf(42L));
-    Assert.assertEquals(new BigDecimal("42.00"), _plus_2);
-    boolean _not = (!false);
-    Assert.assertEquals(Boolean.valueOf(true), Boolean.valueOf(_not));
+    Assert.assertEquals(42, ((20 + 20) + (1 * 2)));
+    BigDecimal _plus = new BigDecimal("0.00").add(BigDecimal.valueOf(42L));
+    Assert.assertEquals(new BigDecimal("42.00"), _plus);
+    Assert.assertEquals(Boolean.valueOf(true), Boolean.valueOf((!false)));
     Class<? extends BasicExpressions> _class = this.getClass();
     Assert.assertEquals(_class, BasicExpressions.class);
   }
   
   @Test
   public void collections() {
-    final ArrayList<String> list = CollectionLiterals.<String>newArrayList("Hello", "World");
+    final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList("Hello", "World"));
     final Function1<String,String> _function = new Function1<String,String>() {
       public String apply(final String it) {
         String _upperCase = it.toUpperCase();
@@ -55,8 +52,7 @@ public class BasicExpressions {
     final HashSet<Integer> set = CollectionLiterals.<Integer>newHashSet(Integer.valueOf(1), Integer.valueOf(3), Integer.valueOf(5));
     final Function1<Integer,Boolean> _function_1 = new Function1<Integer,Boolean>() {
       public Boolean apply(final Integer it) {
-        boolean _greaterEqualsThan = ((it).intValue() >= 3);
-        return Boolean.valueOf(_greaterEqualsThan);
+        return Boolean.valueOf(((it).intValue() >= 3));
       }
     };
     Iterable<Integer> _filter = IterableExtensions.<Integer>filter(set, _function_1);
@@ -80,8 +76,7 @@ public class BasicExpressions {
       if (_notEquals) {
         _xifexpression = 42;
       } else {
-        int _minus = (-24);
-        _xifexpression = _minus;
+        _xifexpression = (-24);
       }
       Assert.assertEquals(42, _xifexpression);
     } else {
@@ -131,12 +126,10 @@ public class BasicExpressions {
     for (final Integer i : _upTo) {
       {
         Assert.assertEquals(counter, (i).intValue());
-        int _plus = (counter + 1);
-        counter = _plus;
+        counter = (counter + 1);
       }
     }
-    ArrayList<Integer> _newArrayList = CollectionLiterals.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4), Integer.valueOf(5));
-    final Iterator<Integer> iterator = _newArrayList.iterator();
+    final Iterator<Integer> iterator = Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(1, 2, 3, 4, 5)).iterator();
     counter = 1;
     boolean _hasNext = iterator.hasNext();
     boolean _while = _hasNext;
@@ -144,8 +137,7 @@ public class BasicExpressions {
       {
         final Integer i_1 = iterator.next();
         Assert.assertEquals(counter, (i_1).intValue());
-        int _plus = (counter + 1);
-        counter = _plus;
+        counter = (counter + 1);
       }
       boolean _hasNext_1 = iterator.hasNext();
       _while = _hasNext_1;

@@ -95,8 +95,7 @@ public class Movies {
     Iterable<Long> _map = IterableExtensions.<Movie, Long>map(_take, _function_1);
     final Function2<Long,Long,Long> _function_2 = new Function2<Long,Long,Long>() {
       public Long apply(final Long a, final Long b) {
-        long _plus = ((a).longValue() + (b).longValue());
-        return Long.valueOf(_plus);
+        return Long.valueOf(((a).longValue() + (b).longValue()));
       }
     };
     final long movies = (IterableExtensions.<Long>reduce(_map, _function_2)).longValue();

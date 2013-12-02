@@ -1,13 +1,10 @@
 package bootstrap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.Identifiable;
@@ -15,23 +12,13 @@ import org.eclipse.xtext.xdoc.xdoc.Identifiable;
 @Data
 @SuppressWarnings("all")
 public class TargetPathAdapter extends AdapterImpl {
-  private final Map<Identifiable,String> _targetPaths = new Function0<Map<Identifiable,String>>() {
-    public Map<Identifiable,String> apply() {
-      HashMap<Identifiable,String> _newHashMap = CollectionLiterals.<Identifiable, String>newHashMap();
-      return _newHashMap;
-    }
-  }.apply();
+  private final Map<Identifiable,String> _targetPaths = CollectionLiterals.<Identifiable, String>newHashMap();
   
   public Map<Identifiable,String> getTargetPaths() {
     return this._targetPaths;
   }
   
-  private final List<AbstractSection> _targetFileRoots = new Function0<List<AbstractSection>>() {
-    public List<AbstractSection> apply() {
-      ArrayList<AbstractSection> _newArrayList = CollectionLiterals.<AbstractSection>newArrayList();
-      return _newArrayList;
-    }
-  }.apply();
+  private final List<AbstractSection> _targetFileRoots = CollectionLiterals.<AbstractSection>newArrayList();
   
   public List<AbstractSection> getTargetFileRoots() {
     return this._targetFileRoots;

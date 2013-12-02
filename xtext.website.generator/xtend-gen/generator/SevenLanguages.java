@@ -69,7 +69,7 @@ public class SevenLanguages extends AbstractWebsite {
     _builder_1.append("It translates to a Java class with a main method.");
     _builder_1.newLine();
     CharSequence _language = this.language("Scripting Language", "7languagesDoc.html#scripting", "images/red-glossy-scripting.png", _builder_1);
-    _builder.append(_language, "			");
+    _builder.append(_language, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("</div>");
@@ -84,7 +84,7 @@ public class SevenLanguages extends AbstractWebsite {
     _builder_2.append("Much like a nice and concise Ant or a statically typed Gradle.");
     _builder_2.newLine();
     CharSequence _language_1 = this.language("Build Language", "7languagesDoc.html#builddsl", "images/red-glossy-helmet.png", _builder_2);
-    _builder.append(_language_1, "			");
+    _builder.append(_language_1, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     StringConcatenation _builder_3 = new StringConcatenation();
@@ -93,7 +93,7 @@ public class SevenLanguages extends AbstractWebsite {
     _builder_3.append("a handy Java API to interact with MongoDB in a statically typed and structured manner.");
     _builder_3.newLine();
     CharSequence _language_2 = this.language("DSL for MongoDB", "7languagesDoc.html#mongoDB", "images/red-glossy-database.png", _builder_3);
-    _builder.append(_language_2, "			");
+    _builder.append(_language_2, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("</div>");
@@ -108,7 +108,7 @@ public class SevenLanguages extends AbstractWebsite {
     _builder_4.append("Thereby many of the runtime checks can be done at compile time.");
     _builder_4.newLine();
     CharSequence _language_3 = this.language("DSL for Guice", "7languagesDoc.html#guice", "images/red-glossy-guice.png", _builder_4);
-    _builder.append(_language_3, "			");
+    _builder.append(_language_3, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     StringConcatenation _builder_5 = new StringConcatenation();
@@ -117,7 +117,7 @@ public class SevenLanguages extends AbstractWebsite {
     _builder_5.append("Similar to how the Play! framework does it, but with great Eclipse integration and not limited to static methods.");
     _builder_5.newLine();
     CharSequence _language_4 = this.language("Http Routing Language", "7languagesDoc.html#httpRouting", "images/red-glossy-web.png", _builder_5);
-    _builder.append(_language_4, "			");
+    _builder.append(_language_4, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("</div>");
@@ -132,14 +132,14 @@ public class SevenLanguages extends AbstractWebsite {
     _builder_6.append("named arguments with default values.");
     _builder_6.newLine();
     CharSequence _language_5 = this.language("Template Language", "7languagesDoc.html#template", "images/red-glossy-template.png", _builder_6);
-    _builder.append(_language_5, "			");
+    _builder.append(_language_5, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     StringConcatenation _builder_7 = new StringConcatenation();
     _builder_7.append("Remember Logo? A cute little tortoise painting on a canvas whatever you want.");
     _builder_7.newLine();
     CharSequence _language_6 = this.language("Little Tortoise", "7languagesDoc.html#tortoise", "images/red-glossy-turtle.png", _builder_7);
-    _builder.append(_language_6, "			");
+    _builder.append(_language_6, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("</div>");
@@ -170,7 +170,7 @@ public class SevenLanguages extends AbstractWebsite {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<img class=\"language-icon\" src=\"");
-    _builder.append(img, "			");
+    _builder.append(img, "\t\t\t");
     _builder.append("\" alt=\"Image\" />");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -181,14 +181,14 @@ public class SevenLanguages extends AbstractWebsite {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<h2>");
-    _builder.append(title, "			");
+    _builder.append(title, "\t\t\t");
     _builder.append("</h2>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append(description, "				");
+    _builder.append(description, "\t\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("</p>");

@@ -43,7 +43,7 @@ public class Body {
       for(final AbstractSection chapter : _filter) {
         _builder.append("\t");
         CharSequence _h1 = this.h1(chapter);
-        _builder.append(_h1, "	");
+        _builder.append(_h1, "\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -73,7 +73,7 @@ public class Body {
     _builder.append("\t\t\t\t");
     TextOrMarkup _title = section.getTitle();
     CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
-    _builder.append(_htmlText, "				");
+    _builder.append(_htmlText, "\t\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("</h1>");
@@ -83,7 +83,7 @@ public class Body {
       for(final TextOrMarkup content : _contents) {
         _builder.append("\t\t\t");
         CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(content);
-        _builder.append(_htmlParagraph, "			");
+        _builder.append(_htmlParagraph, "\t\t\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -92,7 +92,7 @@ public class Body {
       for(final AbstractSection subSection : _sections) {
         _builder.append("\t\t\t");
         CharSequence _h2 = this.h2(subSection);
-        _builder.append(_h2, "			");
+        _builder.append(_h2, "\t\t\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -173,8 +173,7 @@ public class Body {
     {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(section);
       for(final AbstractSection subSection : _sections) {
-        int _plus = (hLevel + 1);
-        CharSequence _h3plus = this.h3plus(subSection, _plus);
+        CharSequence _h3plus = this.h3plus(subSection, (hLevel + 1));
         _builder.append(_h3plus, "");
         _builder.newLineIfNotEmpty();
       }

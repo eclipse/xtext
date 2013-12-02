@@ -26,8 +26,8 @@ public class PostProcessor {
         String _markCodeEnd = this._htmlExtensions.markCodeEnd();
         String _quote_1 = Pattern.quote(_markCodeEnd);
         String _plus_1 = (_plus + _quote_1);
-        int _plus_2 = (Pattern.MULTILINE + Pattern.DOTALL);
-        Pattern _compile = Pattern.compile(_plus_1, _plus_2);
+        Pattern _compile = Pattern.compile(_plus_1, 
+          (Pattern.MULTILINE + Pattern.DOTALL));
         this._codePattern = _compile;
       }
       _xblockexpression = (this._codePattern);

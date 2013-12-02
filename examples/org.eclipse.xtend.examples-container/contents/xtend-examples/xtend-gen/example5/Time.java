@@ -62,20 +62,17 @@ public class Time {
   }
   
   public static Time sec(final int sec) {
-    int _multiply = (sec * 1000);
-    Time _msec = Time.msec(_multiply);
+    Time _msec = Time.msec((sec * 1000));
     return _msec;
   }
   
   public static Time min(final int min) {
-    int _multiply = (min * 60);
-    Time _sec = Time.sec(_multiply);
+    Time _sec = Time.sec((min * 60));
     return _sec;
   }
   
   public static Time h(final int h) {
-    int _multiply = (h * 60);
-    Time _min = Time.min(_multiply);
+    Time _min = Time.min((h * 60));
     return _min;
   }
   

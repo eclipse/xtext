@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -16,12 +15,7 @@ import org.eclipse.xtext.xdoc.generator.util.JavaDocExtension;
 
 @SuppressWarnings("all")
 public class CodeRefs {
-  private final static Logger LOG = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(CodeRefs.class);
-      return _logger;
-    }
-  }.apply();
+  private final static Logger LOG = Logger.getLogger(CodeRefs.class);
   
   @Inject
   @Extension
@@ -31,19 +25,9 @@ public class CodeRefs {
   @Extension
   private JavaDocExtension _javaDocExtension;
   
-  private final static HashSet<String> NO_JAVADOC_PACKAGE_PREFIXES = new Function0<HashSet<String>>() {
-    public HashSet<String> apply() {
-      HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet("org.xtext.");
-      return _newHashSet;
-    }
-  }.apply();
+  private final static HashSet<String> NO_JAVADOC_PACKAGE_PREFIXES = CollectionLiterals.<String>newHashSet("org.xtext.");
   
-  private final static HashSet<String> NO_SOURCE_PACKAGE_PREFIXES = new Function0<HashSet<String>>() {
-    public HashSet<String> apply() {
-      HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet("java.", "org.eclipse.", "javax.", "com.mongodb.", "com.google.", "org.junit.");
-      return _newHashSet;
-    }
-  }.apply();
+  private final static HashSet<String> NO_SOURCE_PACKAGE_PREFIXES = CollectionLiterals.<String>newHashSet("java.", "org.eclipse.", "javax.", "com.mongodb.", "com.google.", "org.junit.");
   
   public String getJavaDocURI(final JvmIdentifiableElement element) {
     String _xblockexpression = null;

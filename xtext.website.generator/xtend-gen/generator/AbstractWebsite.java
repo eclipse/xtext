@@ -42,9 +42,7 @@ public abstract class AbstractWebsite implements Resource {
       CharSequence _website = this.website();
       OutputSupplier<OutputStreamWriter> _newWriterSupplier = Files.newWriterSupplier(file, Charsets.UTF_8);
       CharStreams.<OutputStreamWriter>write(_website, _newWriterSupplier);
-      String _plus = ("generated \'" + file);
-      String _plus_1 = (_plus + "\'");
-      InputOutput.<String>println(_plus_1);
+      InputOutput.<String>println((("generated \'" + file) + "\'"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -71,7 +69,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t");
     _builder.append("<title>");
     String _websiteTitle = this.websiteTitle();
-    _builder.append(_websiteTitle, "	");
+    _builder.append(_websiteTitle, "\t");
     _builder.append("</title>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -83,7 +81,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t");
     _builder.append("content=\"");
     String _websiteDescription = this.websiteDescription();
-    _builder.append(_websiteDescription, "		");
+    _builder.append(_websiteDescription, "\t\t");
     _builder.append("\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -91,11 +89,11 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("\t");
     CharSequence _stylesheets = this.stylesheets();
-    _builder.append(_stylesheets, "	");
+    _builder.append(_stylesheets, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     CharSequence _javaScriptDocumentStart = this.javaScriptDocumentStart();
-    _builder.append(_javaScriptDocumentStart, "	");
+    _builder.append(_javaScriptDocumentStart, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("</head>");
     _builder.newLine();
@@ -103,18 +101,18 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("\t");
     CharSequence _navBar = this.navBar();
-    _builder.append(_navBar, "	");
+    _builder.append(_navBar, "\t");
     _builder.newLineIfNotEmpty();
     CharSequence _contents = this.contents();
     _builder.append(_contents, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     CharSequence _quickLinksAndTweets = this.quickLinksAndTweets();
-    _builder.append(_quickLinksAndTweets, "	");
+    _builder.append(_quickLinksAndTweets, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     CharSequence _javaScriptAtTheEnd = this.javaScriptAtTheEnd();
-    _builder.append(_javaScriptAtTheEnd, "	");
+    _builder.append(_javaScriptAtTheEnd, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("</body>");
     _builder.newLine();
@@ -147,7 +145,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("\t\t");
     CharSequence _jsOnLoad = this.jsOnLoad();
-    _builder.append(_jsOnLoad, "		");
+    _builder.append(_jsOnLoad, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("     ");
     _builder.append("});");
@@ -163,7 +161,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("  \t");
     _builder.append("_gaq.push([ \'_setAccount\', \'");
     String _analyticsAccount = this.analyticsAccount();
-    _builder.append(_analyticsAccount, "  	");
+    _builder.append(_analyticsAccount, "  \t");
     _builder.append("\' ]);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -353,10 +351,10 @@ public abstract class AbstractWebsite implements Resource {
         }
         _builder.append("><a href=\"");
         String _key_1 = it.getKey();
-        _builder.append(_key_1, "					");
+        _builder.append(_key_1, "\t\t\t\t\t");
         _builder.append("\">");
         String _value = it.getValue();
-        _builder.append(_value, "					");
+        _builder.append(_value, "\t\t\t\t\t");
         _builder.append("</a></li>");
         _builder.newLineIfNotEmpty();
       }
@@ -376,7 +374,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t          ");
     _builder.append("<g:plusone href=\"");
     String _plusoneURL = this.plusoneURL();
-    _builder.append(_plusoneURL, "	          ");
+    _builder.append(_plusoneURL, "\t          ");
     _builder.append("\"></g:plusone>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t        ");

@@ -562,7 +562,7 @@ public class Index extends AbstractXtendWebsite {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<td><h2>");
-    _builder.append(framework, "		");
+    _builder.append(framework, "\t\t");
     _builder.append("</h2></td>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");

@@ -73,15 +73,15 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
                     if (!_hasElements) {
                       _hasElements = true;
                     } else {
-                      _builder_1.appendImmediate("|", "	");
+                      _builder_1.appendImmediate("|", "\t");
                     }
-                    _builder_1.append(keyword, "	");
+                    _builder_1.append(keyword, "\t");
                   }
                 }
                 _builder_1.append("\', \'");
                 String _name_3 = lang.getName();
                 String _lowerCase = _name_3.toLowerCase();
-                _builder_1.append(_lowerCase, "	");
+                _builder_1.append(_lowerCase, "\t");
                 _builder_1.append("\');");
                 _builder_1.newLineIfNotEmpty();
               }

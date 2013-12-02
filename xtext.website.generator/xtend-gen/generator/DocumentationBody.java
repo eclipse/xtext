@@ -41,7 +41,7 @@ public class DocumentationBody extends Body {
     _builder.append("\t\t\t\t");
     TextOrMarkup _title = chapter.getTitle();
     CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
-    _builder.append(_htmlText, "				");
+    _builder.append(_htmlText, "\t\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("</h1>");
@@ -57,7 +57,7 @@ public class DocumentationBody extends Body {
         if (content!=null) {
           _htmlParagraph=this._htmlExtensions.toHtmlParagraph(content);
         }
-        _builder.append(_htmlParagraph, "			");
+        _builder.append(_htmlParagraph, "\t\t\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -66,7 +66,7 @@ public class DocumentationBody extends Body {
       for(final AbstractSection section : _sections) {
         _builder.append("\t\t\t");
         CharSequence _h2 = this.h2(section);
-        _builder.append(_h2, "			");
+        _builder.append(_h2, "\t\t\t");
         _builder.newLineIfNotEmpty();
       }
     }

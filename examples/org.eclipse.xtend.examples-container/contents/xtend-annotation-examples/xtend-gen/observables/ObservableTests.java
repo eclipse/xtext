@@ -75,8 +75,6 @@ public class ObservableTests {
     _builder_1.append("    ");
     _builder_1.append("_propertyChangeSupport.firePropertyChange(\"name\", _oldValue, name);");
     _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();

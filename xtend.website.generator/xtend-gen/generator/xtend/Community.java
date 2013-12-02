@@ -48,7 +48,7 @@ public class Community extends AbstractXtendWebsite {
     _builder_4.append("<br>Please ask any questions clearly and with sufficient information attached.</p>");
     _builder_4.newLine();
     CharSequence _entry = this.entry(_builder_1.toString(), _builder_2.toString(), _builder_3.toString(), _builder_4.toString());
-    _builder.append(_entry, "		");
+    _builder.append(_entry, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     StringConcatenation _builder_5 = new StringConcatenation();
@@ -68,7 +68,7 @@ public class Community extends AbstractXtendWebsite {
     _builder_8.append("Also please explain the concrete use case when requesting enhancements.</p>");
     _builder_8.newLine();
     CharSequence _entry_1 = this.entry(_builder_5.toString(), _builder_6.toString(), _builder_7.toString(), _builder_8.toString());
-    _builder.append(_entry_1, "		");
+    _builder.append(_entry_1, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     StringConcatenation _builder_9 = new StringConcatenation();
@@ -84,7 +84,7 @@ public class Community extends AbstractXtendWebsite {
     _builder_12.append("<p>If you are on twitter and want to get notified about all things Xtend, you should consider following <strong>@xtendlang</strong>.</p>");
     _builder_12.newLine();
     CharSequence _entry_2 = this.entry(_builder_9.toString(), _builder_10.toString(), _builder_11.toString(), _builder_12.toString());
-    _builder.append(_entry_2, "		");
+    _builder.append(_entry_2, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     StringConcatenation _builder_13 = new StringConcatenation();
@@ -100,7 +100,7 @@ public class Community extends AbstractXtendWebsite {
     _builder_16.append("<p>If you don\'t like Twitter but are on Google +. You might want to add Xtend to one of your circles.</p>");
     _builder_16.newLine();
     CharSequence _entry_3 = this.entry(_builder_13.toString(), _builder_14.toString(), _builder_15.toString(), _builder_16.toString());
-    _builder.append(_entry_3, "		");
+    _builder.append(_entry_3, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</div>");
@@ -113,7 +113,7 @@ public class Community extends AbstractXtendWebsite {
     _builder.newLine();
     _builder.append("\t");
     CharSequence _printArticles = this.printArticles();
-    _builder.append(_printArticles, "	");
+    _builder.append(_printArticles, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("</div>");
     _builder.newLine();
@@ -255,7 +255,7 @@ public class Community extends AbstractXtendWebsite {
     };
     List<CharSequence> _map = ListExtensions.<Article, CharSequence>map(_articles, _function_17);
     String _join = IterableExtensions.join(_map);
-    _builder.append(_join, "		");
+    _builder.append(_join, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</table>");
@@ -321,13 +321,13 @@ public class Community extends AbstractXtendWebsite {
     _builder.append("\t    ");
     _builder.append("<img src=\"images/");
     String _trim_1 = img.trim();
-    _builder.append(_trim_1, "	    ");
+    _builder.append(_trim_1, "\t    ");
     _builder.append("\" alt=\"image\" class=\"image_left\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t    ");
     _builder.append("<h3 style=\"padding-top: 0px; margin-top: 0px;\">");
     String _trim_2 = title.trim();
-    _builder.append(_trim_2, "	    ");
+    _builder.append(_trim_2, "\t    ");
     _builder.append("</h3>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t \t");
@@ -337,7 +337,7 @@ public class Community extends AbstractXtendWebsite {
     _builder.append("<div class=\"span5 \">");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append(description, "			");
+    _builder.append(description, "\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("</div>");

@@ -37,7 +37,6 @@ class LazyTest {
 			    if (name==null)
 			      name = _initname();
 			    return name;
-			    
 			  }
 			}
 		''')

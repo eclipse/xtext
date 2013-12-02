@@ -62,20 +62,17 @@ public class Distance {
   }
   
   public static Distance cm(final int centimeters) {
-    int _multiply = (centimeters * 10);
-    Distance _mm = Distance.mm(_multiply);
+    Distance _mm = Distance.mm((centimeters * 10));
     return _mm;
   }
   
   public static Distance m(final int meters) {
-    int _multiply = (meters * 100);
-    Distance _cm = Distance.cm(_multiply);
+    Distance _cm = Distance.cm((meters * 100));
     return _cm;
   }
   
   public static Distance km(final int kilometers) {
-    int _multiply = (kilometers * 1000);
-    Distance _m = Distance.m(_multiply);
+    Distance _m = Distance.m((kilometers * 1000));
     return _m;
   }
   
