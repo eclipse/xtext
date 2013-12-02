@@ -27,9 +27,6 @@
    <feature id="org.eclipse.xtend.sdk" version="0.0.0">
       <category name="xtend"/>
    </feature>
-   <feature id="org.eclipse.xtend.m2e" version="0.0.0">
-      <category name="xtend"/>
-   </feature>
    <feature id="org.eclipse.xtend.gwt" version="0.0.0">
       <category name="gwt-related"/>
    </feature>

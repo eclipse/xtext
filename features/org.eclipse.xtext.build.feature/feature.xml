@@ -42,17 +42,5 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <includes
          id="org.eclipse.xtend.gwt"
          version="0.0.0"/>
-	
-	<includes
-         id="org.eclipse.xtend.m2e"
-         version="0.0.0"/>
-   
-   <includes
-         id="org.eclipse.xtext.xtend2.sdk"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.xtend2.m2e"
-         version="0.0.0"/>
 
 </feature>
