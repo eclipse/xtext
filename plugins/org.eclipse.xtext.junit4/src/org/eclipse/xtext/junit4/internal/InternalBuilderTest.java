@@ -60,7 +60,7 @@ public class InternalBuilderTest {
 			top10 = errors;
 		}
 
-		assertTrue("Problems found (" + top10.size() + " from " + errors.size() + "): " + join(errors, ", "),
+		assertTrue("Problems found (" + top10.size() + " of " + errors.size() + "): " + join(errors, ", "),
 				errors.isEmpty());
 	}
 
