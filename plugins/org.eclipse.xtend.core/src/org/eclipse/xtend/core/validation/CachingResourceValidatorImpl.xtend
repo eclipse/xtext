@@ -1,12 +1,12 @@
 package org.eclipse.xtend.core.validation
 
-import org.eclipse.xtext.validation.ResourceValidatorImpl
-import javax.inject.Inject
+import com.google.inject.Inject
+import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.OnChangeEvictingCache
-import org.eclipse.core.runtime.OperationCanceledException
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.ResourceValidatorImpl
 
 class CachingResourceValidatorImpl extends ResourceValidatorImpl {
 

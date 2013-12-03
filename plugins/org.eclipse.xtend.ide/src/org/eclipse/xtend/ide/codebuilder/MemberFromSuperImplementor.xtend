@@ -1,6 +1,6 @@
 package org.eclipse.xtend.ide.codebuilder
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmConstructor
