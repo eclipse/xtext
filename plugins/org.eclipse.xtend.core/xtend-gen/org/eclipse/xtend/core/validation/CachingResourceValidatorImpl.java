@@ -1,9 +1,9 @@
 package org.eclipse.xtend.core.validation;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
-import javax.inject.Inject;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.util.CancelIndicator;

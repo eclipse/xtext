@@ -9,8 +9,8 @@ package org.eclipse.xtext.xbase.validation;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.util.Arrays;
-import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;

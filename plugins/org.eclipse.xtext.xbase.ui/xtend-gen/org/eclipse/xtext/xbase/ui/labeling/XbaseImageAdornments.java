@@ -1,8 +1,8 @@
 package org.eclipse.xtext.xbase.ui.labeling;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.Arrays;
-import javax.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
