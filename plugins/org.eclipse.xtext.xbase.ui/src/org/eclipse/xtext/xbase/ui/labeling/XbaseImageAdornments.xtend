@@ -1,16 +1,17 @@
 package org.eclipse.xtext.xbase.ui.labeling
 
+import com.google.inject.Inject
+import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmExecutable
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 
 import static org.eclipse.jdt.ui.JavaElementImageDescriptor.*
-import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
-import javax.inject.Inject
+
 import static extension org.eclipse.xtext.common.types.util.DeprecationUtil.*
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmConstructor
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.common.types.JvmExecutable
 
 class XbaseImageAdornments {
 	
