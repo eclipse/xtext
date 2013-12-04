@@ -123,7 +123,7 @@ public class QueuedBuildData {
 	private Collection<IResourceDescription.Delta> deltas;
 	private Map<String, LinkedList<URI>> projectNameToChangedResource;
 
-	private IQueuedBuildDataContribution contribution;
+	private IQueuedBuildDataContribution contribution = new NullContribution();
 	private final IStorage2UriMapper mapper;
 
 	@Inject
