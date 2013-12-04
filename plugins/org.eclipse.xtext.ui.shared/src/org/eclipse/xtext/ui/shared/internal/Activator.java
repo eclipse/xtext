@@ -20,6 +20,7 @@ import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
 import org.osgi.framework.BundleContext;
 
+import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -74,7 +75,11 @@ public class Activator extends Plugin {
 		}
 
 		injector = Guice.createInjector(module);
-		injector.injectMembers(this);
+		injector.createChildInjector(new Module() {
+			public void configure(Binder binder) {
+				binder.bind(EagerContributionInitializer.class);
+			}
+		}).injectMembers(this);
 	}
 
 	public static boolean isJavaEnabled() {

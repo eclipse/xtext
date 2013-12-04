@@ -12,6 +12,7 @@ import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.notification.DeltaConverter;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
 
 import com.google.inject.Binder;
@@ -24,6 +25,8 @@ import com.google.inject.Module;
 public class CommonTypesContribution implements Module {
 
 	public void configure(Binder binder) {
+		binder.bind(IQualifiedNameConverter.class);
+		
 		binder.bind(BuilderDeltaConverter.class);
 		binder.bind(DeltaConverter.class);
 		binder.bind(TypeURIHelper.class);

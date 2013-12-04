@@ -9,7 +9,7 @@
          This module is used to create an injector that uses the shared injector as its parent.
 
 An instance of org.eclipse.xtext.ui.shared.contribution.SharedStateContribution will be created by that injector and
-clients may use this instance to obtain extensions to shared services.
+clients may use this instance to obtain extensions to shared services. The module may not rely on JIT bindings.
       </documentation>
    </annotation>
 
