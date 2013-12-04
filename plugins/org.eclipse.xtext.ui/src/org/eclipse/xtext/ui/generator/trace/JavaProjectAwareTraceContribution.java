@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class JavaProjectAwareTraceContribution implements TraceURIConverterContribution {
+public class JavaProjectAwareTraceContribution implements ITraceURIConverterContribution {
 
 	private final static Logger LOG = Logger.getLogger(JavaProjectAwareTraceContribution.class);
 	

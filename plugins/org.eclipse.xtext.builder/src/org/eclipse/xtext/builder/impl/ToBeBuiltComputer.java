@@ -24,7 +24,7 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.UriValidator;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.base.Function;
@@ -35,9 +35,9 @@ import com.google.inject.Inject;
 /**
  * Encapsulates the decision about the resources that should be built.
  * 
- * The resource processing can be extended by means of {@link ToBeBuiltComputerContribution contributions}. 
+ * The resource processing can be extended by means of {@link IToBeBuiltComputerContribution contributions}. 
  * 
- * @see ToBeBuiltComputerContribution
+ * @see IToBeBuiltComputerContribution
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
@@ -52,18 +52,18 @@ public class ToBeBuiltComputer {
 	@Inject
 	private UriValidator uriValidator;
 
-	private ImmutableList<? extends ToBeBuiltComputerContribution> contributions;
+	private ImmutableList<? extends IToBeBuiltComputerContribution> contributions;
 
 	@Inject
-	private void initializeContributions(SharedStateContributionRegistry registry) {
-		contributions = registry.getContributedInstances(ToBeBuiltComputerContribution.class);
+	private void initializeContributions(ISharedStateContributionRegistry registry) {
+		contributions = registry.getContributedInstances(IToBeBuiltComputerContribution.class);
 	}
 
 	/**
 	 * Announce that the given project was removed / closed or a clean build was triggered. 
 	 * All contained resources are considered to be no longer available.
 	 * 
-	 * @see ToBeBuiltComputerContribution#removeProject(ToBeBuilt, IProject, IProgressMonitor)
+	 * @see IToBeBuiltComputerContribution#removeProject(ToBeBuilt, IProject, IProgressMonitor)
 	 */
 	public ToBeBuilt removeProject(IProject project, IProgressMonitor monitor) {
 		ToBeBuilt toBeBuilt = doRemoveProject(project, monitor);
@@ -120,7 +120,7 @@ public class ToBeBuiltComputer {
 	 * 
 	 * @see #updateStorage(IProgressMonitor, ToBeBuilt, IStorage)
 	 * @see #isHandled(IFolder)
-	 * @see ToBeBuiltComputerContribution#updateProject(ToBeBuilt, IProject, IProgressMonitor)
+	 * @see IToBeBuiltComputerContribution#updateProject(ToBeBuilt, IProject, IProgressMonitor)
 	 */
 	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException {
 		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingReosurces, 1);
@@ -171,7 +171,7 @@ public class ToBeBuiltComputer {
 	 * Removes the information that is associated with the given storage. Used by the incremental build.
 	 * 
 	 * @see #isHandled(IStorage)
-	 * @see ToBeBuiltComputerContribution#removeStorage(ToBeBuilt, IStorage, IProgressMonitor)
+	 * @see IToBeBuiltComputerContribution#removeStorage(ToBeBuilt, IStorage, IProgressMonitor)
 	 */
 	public boolean removeStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
 		for (int i = 0; i < contributions.size(); i++) {
@@ -190,11 +190,11 @@ public class ToBeBuiltComputer {
 
 	/**
 	 * Returns <code>true</code> if the storage should be processed by the builder.
-	 * That is, it is known to the {@link UriValidator} and a {@link ToBeBuiltComputerContribution contribution}
+	 * That is, it is known to the {@link UriValidator} and a {@link IToBeBuiltComputerContribution contribution}
 	 * can possibly manage it or it is a file.
 	 * 
 	 * @see UriValidator#isPossiblyManaged(IStorage)
-	 * @see ToBeBuiltComputerContribution#isPossiblyHandled(IStorage)
+	 * @see IToBeBuiltComputerContribution#isPossiblyHandled(IStorage)
 	 */
 	protected boolean isHandled(IStorage storage) {
 		boolean possiblyManaged = false;

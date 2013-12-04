@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.shared.contribution;
 
-import org.eclipse.xtext.ui.generator.trace.TraceURIConverterContribution;
+import org.eclipse.xtext.ui.generator.trace.ITraceURIConverterContribution;
 import org.eclipse.xtext.ui.resource.IResourceSetInitializer;
-import org.eclipse.xtext.ui.resource.Storage2UriMapperContribution;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperContribution;
 
 import com.google.inject.ConfigurationException;
 import com.google.inject.Inject;
@@ -25,13 +25,13 @@ import com.google.inject.ProvisionException;
  * 
  * The framework uses the following contribution types internally:
  * <ul>
- * <li>{@link TraceURIConverterContribution}</li>
+ * <li>{@link ITraceURIConverterContribution}</li>
  * <li>org.eclipse.xtext.builder.impl.QueuedBuildDataContribution</li>
  * <li>org.eclipse.xtext.builder.impl.ToBeBuiltComputerContribution</li>
  * <li>org.eclipse.xtext.builder.trace.StorageAwareTraceContribution</li>
- * <li>{@link Storage2UriMapperContribution}</li>
+ * <li>{@link IStorage2UriMapperContribution}</li>
  * <li>{@link IResourceSetInitializer}</li>
- * <li>{@link EagerContribution}</li>
+ * <li>{@link IEagerContribution}</li>
  * </ul>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API

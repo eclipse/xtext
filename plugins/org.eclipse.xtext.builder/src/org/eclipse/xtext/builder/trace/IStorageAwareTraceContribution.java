@@ -5,30 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.resource;
+package org.eclipse.xtext.builder.trace;
 
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.util.Pair;
+
+import com.google.common.annotations.Beta;
 
 /**
+ * This contributions allows to extend the lookup of paths that are
+ * found in trace files.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.5
  */
-public interface Storage2UriMapperContribution {
-	
-	void initializeCache();
-	
-	boolean isRejected(@NonNull IFolder folder);
-	
-	@NonNull
-	Iterable<Pair<IStorage, IProject>> getStorages(@NonNull URI uri);
-	
-	@Nullable
-	URI getUri(@NonNull IStorage storage);
+@Beta
+public interface IStorageAwareTraceContribution {
+
+	/**
+	 * Try to resolve the given path in the context of the local storage.
+	 * Return <code>null</code> if it cannot be resolved.
+	 */
+	URI tryResolvePath(IStorage localStorage, URI path);
 	
 }

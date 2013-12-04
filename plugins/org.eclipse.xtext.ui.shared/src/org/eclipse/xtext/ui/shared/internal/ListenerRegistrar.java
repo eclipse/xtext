@@ -9,14 +9,14 @@ package org.eclipse.xtext.ui.shared.internal;
 
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
-import org.eclipse.xtext.ui.shared.contribution.EagerContribution;
+import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ListenerRegistrar implements EagerContribution {
+public class ListenerRegistrar implements IEagerContribution {
 	
 	@Inject
 	private ProjectOpenedOrClosedListener listener;

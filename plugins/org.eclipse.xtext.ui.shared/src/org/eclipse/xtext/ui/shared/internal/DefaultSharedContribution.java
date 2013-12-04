@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.shared.internal;
 
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
-import org.eclipse.xtext.ui.shared.contribution.EagerContribution;
+import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -21,7 +21,7 @@ public class DefaultSharedContribution implements Module {
 
 	public void configure(Binder binder) {
 		binder.bind(ProjectOpenedOrClosedListener.class);
-		binder.bind(EagerContribution.class).to(ListenerRegistrar.class);
+		binder.bind(IEagerContribution.class).to(ListenerRegistrar.class);
 		binder.bind(WorkspaceProjectsState.class);
 	}
 

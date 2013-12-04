@@ -11,13 +11,16 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.common.annotations.Beta;
+
 /**
  * A contribution that allows to customize the computation
  * of a trace URI for an {@link XtextResource} or an {@link URI}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface TraceURIConverterContribution {
+@Beta
+public interface ITraceURIConverterContribution {
 
 	/**
 	 * Compute the trace URI that points to the location of the given

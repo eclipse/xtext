@@ -16,14 +16,14 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
- * Extensible trace implementation that uses {@link StorageAwareTraceContribution contributions}
+ * Extensible trace implementation that uses {@link IStorageAwareTraceContribution contributions}
  * to resolve trace URIs. 
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,11 +35,11 @@ public class StorageAwareTrace extends AbstractTrace {
 
 	private String projectName;
 
-	private ImmutableList<? extends StorageAwareTraceContribution> contributions = ImmutableList.of();
+	private ImmutableList<? extends IStorageAwareTraceContribution> contributions = ImmutableList.of();
 	
 	@Inject
-	private void initializeContributions(SharedStateContributionRegistry registry) {
-		contributions = registry.getContributedInstances(StorageAwareTraceContribution.class);
+	private void initializeContributions(ISharedStateContributionRegistry registry) {
+		contributions = registry.getContributedInstances(IStorageAwareTraceContribution.class);
 	}
 
 	public IStorage getLocalStorage() {
@@ -60,9 +60,9 @@ public class StorageAwareTrace extends AbstractTrace {
 	/**
 	 * Resolve the given path in the context of the known {@link #getLocalStorage() local storage}.
 	 * 
-	 * Try to resolve it by querying the {@link StorageAwareTraceContribution contributions}.
+	 * Try to resolve it by querying the {@link IStorageAwareTraceContribution contributions}.
 	 * 
-	 * @see StorageAwareTraceContribution#tryResolvePath(IStorage, URI)
+	 * @see IStorageAwareTraceContribution#tryResolvePath(IStorage, URI)
 	 */
 	@Override
 	protected URI resolvePath(URI path) {

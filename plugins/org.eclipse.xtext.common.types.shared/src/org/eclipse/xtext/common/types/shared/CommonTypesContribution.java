@@ -12,7 +12,7 @@ import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.notification.DeltaConverter;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
-import org.eclipse.xtext.ui.shared.contribution.EagerContribution;
+import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -31,7 +31,7 @@ public class CommonTypesContribution implements Module {
 		binder.bind(TypeResourceUnloader.class);
 		binder.bind(JavaChangeQueueFiller.class);
 		
-		binder.bind(EagerContribution.class).to(ListenerRegistrar.class);
+		binder.bind(IEagerContribution.class).to(ListenerRegistrar.class);
 	}
 
 }

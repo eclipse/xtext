@@ -12,7 +12,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
-import org.eclipse.xtext.ui.shared.contribution.EagerContribution;
+import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
 
 import com.google.inject.Inject;
 
@@ -21,7 +21,7 @@ import com.google.inject.Inject;
  * @since 2.5
  */
 @SuppressWarnings("restriction")
-public class ListenerRegistrar implements EagerContribution {
+public class ListenerRegistrar implements IEagerContribution {
 
 	@Inject
 	private IStateChangeEventBroker eventBroker;

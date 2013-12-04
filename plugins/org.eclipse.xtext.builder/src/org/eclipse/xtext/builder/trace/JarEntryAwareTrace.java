@@ -27,7 +27,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JarEntryAwareTrace implements StorageAwareTraceContribution {
+public class JarEntryAwareTrace implements IStorageAwareTraceContribution {
 
 	private static final Logger log = Logger.getLogger(JarEntryAwareTrace.class);
 	

@@ -19,13 +19,13 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta
 
 import static extension java.util.Collections.*
 import static extension org.eclipse.xtext.common.types.ui.notification.JavaBuilderState.*
-import org.eclipse.xtext.builder.impl.QueuedBuildDataContribution
+import org.eclipse.xtext.builder.impl.IQueuedBuildDataContribution
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 @Singleton
-class JdtQueuedBuildData implements QueuedBuildDataContribution {
+class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 
 	var Map<String, JavaBuilderState> javaBuildState
 

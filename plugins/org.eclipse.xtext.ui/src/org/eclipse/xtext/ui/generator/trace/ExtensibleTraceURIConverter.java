@@ -11,14 +11,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
  * An extension of the {@link DefaultTraceURIConverter} that allows to use
- * {@link TraceURIConverterContribution contributions} to resolve trace URIs.
+ * {@link ITraceURIConverterContribution contributions} to resolve trace URIs.
  * 
  * The available contributions are used before the behavior of the {@link DefaultTraceURIConverter}
  * is used to resolve the URIs.
@@ -28,11 +28,11 @@ import com.google.inject.Inject;
  */
 public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 
-	public static class CompositeContribution implements TraceURIConverterContribution {
+	public static class CompositeContribution implements ITraceURIConverterContribution {
 
-		private ImmutableList<? extends TraceURIConverterContribution> contributions;
+		private ImmutableList<? extends ITraceURIConverterContribution> contributions;
 
-		public CompositeContribution(ImmutableList<? extends TraceURIConverterContribution> contributions) {
+		public CompositeContribution(ImmutableList<? extends ITraceURIConverterContribution> contributions) {
 			this.contributions = contributions;
 		}
 
@@ -59,7 +59,7 @@ public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 		}
 		
 	}
-	public static final class NullContribution implements TraceURIConverterContribution {
+	public static final class NullContribution implements ITraceURIConverterContribution {
 
 		@Nullable
 		public URI getURIForTrace(XtextResource context) {
@@ -73,14 +73,14 @@ public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 		
 	}
 	
-	private TraceURIConverterContribution contribution;
+	private ITraceURIConverterContribution contribution;
 	
 	@Inject
-	private void initializeContribution(SharedStateContributionRegistry registry) {
-		contribution = getContribution(registry.getContributedInstances(TraceURIConverterContribution.class));
+	private void initializeContribution(ISharedStateContributionRegistry registry) {
+		contribution = getContribution(registry.getContributedInstances(ITraceURIConverterContribution.class));
 	}
 	
-	private TraceURIConverterContribution getContribution(ImmutableList<? extends TraceURIConverterContribution> allContributions) {
+	private ITraceURIConverterContribution getContribution(ImmutableList<? extends ITraceURIConverterContribution> allContributions) {
 		switch(allContributions.size()) {
 			case 0: return new NullContribution();
 			case 1: return allContributions.get(0);
