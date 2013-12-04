@@ -129,6 +129,7 @@ public class QueuedBuildData {
 	@Inject
 	public QueuedBuildData(IStorage2UriMapper mapper) {
 		this.mapper = mapper;
+		reset();
 	}
 
 	@Inject
