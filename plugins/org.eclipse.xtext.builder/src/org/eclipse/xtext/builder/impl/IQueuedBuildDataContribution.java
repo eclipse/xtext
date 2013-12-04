@@ -15,6 +15,8 @@ import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDe
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Allows to extend the {@link QueuedBuildData} with changes that are not produced by Xtext languages.
  * 
@@ -22,7 +24,8 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface QueuedBuildDataContribution {
+@Beta
+public interface IQueuedBuildDataContribution {
 
 	/**
 	 * Resets internal state of the contribution.

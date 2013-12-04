@@ -25,7 +25,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Binder;
@@ -95,7 +95,7 @@ public class SharedStateModule extends AbstractGenericModule {
 	/**
 	 * @since 2.5
 	 */
-	public Provider<SharedStateContributionRegistry> provideSharedStateContributionRegistry() {
+	public Provider<ISharedStateContributionRegistry> provideSharedStateContributionRegistry() {
 		return Access.getSharedStateContributionRegistry();
 	}
 	

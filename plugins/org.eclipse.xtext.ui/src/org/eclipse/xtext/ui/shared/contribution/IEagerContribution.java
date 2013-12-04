@@ -7,14 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.shared.contribution;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Clients that want to register shared services on startup of the Xtext framework /
- * contributions, should bind an {@link EagerContribution} as a {@link SharedStateContribution}. 
+ * contributions, should bind an {@link IEagerContribution} as a {@link SharedStateContribution}. 
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.5
  */
-public interface EagerContribution {
+@Beta
+public interface IEagerContribution {
 
 	/**
 	 * Initialize the contribution eagerly.

@@ -13,13 +13,16 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import com.google.common.annotations.Beta;
+
 /**
  * This contribution allows to participate in the {@link ToBeBuiltComputer}, e.g. language
  * specific dependencies may be traversed in addition to the plain project contents.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ToBeBuiltComputerContribution {
+@Beta
+public interface IToBeBuiltComputerContribution {
 
 	/**
 	 * Triggered by a clean build or for closed projects.

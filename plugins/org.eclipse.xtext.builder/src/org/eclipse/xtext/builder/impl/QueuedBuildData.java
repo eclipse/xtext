@@ -23,7 +23,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.ImmutableList;
@@ -40,9 +40,9 @@ import com.google.inject.Singleton;
  * 
  * Clients who want to contribute plain {@link org.eclipse.xtext.resource.IResourceDescription.Delta deltas} should use
  * {@link #queueChanges(List)} or {@link #queueChange(Delta)} to announce a delta. If a client wants to announce a
- * special kind of delta, a {@link QueuedBuildDataContribution} could be necessary that can handle this contribution.
+ * special kind of delta, a {@link IQueuedBuildDataContribution} could be necessary that can handle this contribution.
  * 
- * @see QueuedBuildDataContribution
+ * @see IQueuedBuildDataContribution
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -50,15 +50,15 @@ import com.google.inject.Singleton;
 public class QueuedBuildData {
 
 	/**
-	 * A composite structure for {@link QueuedBuildDataContribution contributions}.
+	 * A composite structure for {@link IQueuedBuildDataContribution contributions}.
 	 * 
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
-	public static class CompositeContribution implements QueuedBuildDataContribution {
+	public static class CompositeContribution implements IQueuedBuildDataContribution {
 
-		private final List<? extends QueuedBuildDataContribution> components;
+		private final List<? extends IQueuedBuildDataContribution> components;
 
-		public CompositeContribution(List<? extends QueuedBuildDataContribution> components) {
+		public CompositeContribution(List<? extends IQueuedBuildDataContribution> components) {
 			this.components = components;
 		}
 
@@ -76,7 +76,7 @@ public class QueuedBuildData {
 		 */
 		public boolean queueChange(Delta delta) {
 			for (int i = 0; i < components.size(); i++) {
-				QueuedBuildDataContribution contribution = components.get(i);
+				IQueuedBuildDataContribution contribution = components.get(i);
 				if (contribution.queueChange(delta)) {
 					return true;
 				}
@@ -91,7 +91,7 @@ public class QueuedBuildData {
 		public boolean needsRebuild(IProject project, Collection<Delta> deltas) {
 			boolean result = false;
 			for (int i = 0; i < components.size(); i++) {
-				QueuedBuildDataContribution contribution = components.get(i);
+				IQueuedBuildDataContribution contribution = components.get(i);
 				if (contribution.needsRebuild(project, deltas)) {
 					result = true;
 				}
@@ -101,7 +101,7 @@ public class QueuedBuildData {
 
 	}
 
-	public static class NullContribution implements QueuedBuildDataContribution {
+	public static class NullContribution implements IQueuedBuildDataContribution {
 
 		public void reset() {
 			// nothing to do
@@ -123,7 +123,7 @@ public class QueuedBuildData {
 	private Collection<IResourceDescription.Delta> deltas;
 	private Map<String, LinkedList<URI>> projectNameToChangedResource;
 
-	private QueuedBuildDataContribution contribution;
+	private IQueuedBuildDataContribution contribution;
 	private final IStorage2UriMapper mapper;
 
 	@Inject
@@ -132,8 +132,8 @@ public class QueuedBuildData {
 	}
 
 	@Inject
-	private void initializeContributions(SharedStateContributionRegistry registry) {
-		contribution = getContribution(registry.getContributedInstances(QueuedBuildDataContribution.class));
+	private void initializeContributions(ISharedStateContributionRegistry registry) {
+		contribution = getContribution(registry.getContributedInstances(IQueuedBuildDataContribution.class));
 		reset();
 	}
 
@@ -142,14 +142,14 @@ public class QueuedBuildData {
 	 * 
 	 * @noreference This constructor is not intended to be referenced by clients.
 	 */
-	public QueuedBuildData(IStorage2UriMapper mapper, QueuedBuildDataContribution contribution) {
+	public QueuedBuildData(IStorage2UriMapper mapper, IQueuedBuildDataContribution contribution) {
 		this.mapper = mapper;
 		this.contribution = contribution;
 		reset();
 	}
 
-	private QueuedBuildDataContribution getContribution(
-			ImmutableList<? extends QueuedBuildDataContribution> contributions) {
+	private IQueuedBuildDataContribution getContribution(
+			ImmutableList<? extends IQueuedBuildDataContribution> contributions) {
 		switch (contributions.size()) {
 			case 0:
 				return new NullContribution();
@@ -175,7 +175,7 @@ public class QueuedBuildData {
 	 * @param project
 	 *            the project that may have to be rebuild.
 	 * @return <code>true</code> if rebuild is required; otherwise <code>false</code>. Default is <code>false</code>.
-	 * @see QueuedBuildDataContribution#needsRebuild(IProject, Collection)
+	 * @see IQueuedBuildDataContribution#needsRebuild(IProject, Collection)
 	 */
 	public synchronized boolean needRebuild(IProject project) {
 		return contribution.needsRebuild(project, deltas);

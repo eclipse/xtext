@@ -57,7 +57,7 @@ import com.google.inject.Singleton;
  * @noextend This class is not intended to be subclassed by clients.
  */
 @Singleton
-public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtensions, Storage2UriMapperContribution {
+public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtensions, IStorage2UriMapperContribution {
 	
 	private static final Logger log = Logger.getLogger(Storage2UriMapperJavaImpl.class);
 	

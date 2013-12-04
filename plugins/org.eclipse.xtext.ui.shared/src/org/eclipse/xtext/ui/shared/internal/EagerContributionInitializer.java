@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.shared.internal;
 
-import org.eclipse.xtext.ui.shared.contribution.EagerContribution;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
@@ -16,13 +16,13 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class EagerContributionInitializer implements EagerContribution {
+public class EagerContributionInitializer implements IEagerContribution {
 
-	private ImmutableList<? extends EagerContribution> contributions;
+	private ImmutableList<? extends IEagerContribution> contributions;
 
 	@Inject
-	private void setContributions(SharedStateContributionRegistry registry) {
-		contributions = registry.getContributedInstances(EagerContribution.class);
+	private void setContributions(ISharedStateContributionRegistry registry) {
+		contributions = registry.getContributedInstances(IEagerContribution.class);
 	}
 	
 	public void initialize() {

@@ -31,7 +31,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
-import org.eclipse.xtext.builder.impl.ToBeBuiltComputerContribution;
+import org.eclipse.xtext.builder.impl.IToBeBuiltComputerContribution;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -46,7 +46,7 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-public class JdtToBeBuiltComputer implements ToBeBuiltComputerContribution {
+public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	
 	private final static Logger log = Logger.getLogger(JdtToBeBuiltComputer.class);
 

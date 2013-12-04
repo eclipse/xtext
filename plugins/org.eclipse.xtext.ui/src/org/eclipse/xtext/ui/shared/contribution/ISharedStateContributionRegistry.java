@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.shared.contribution;
 
+import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Provider;
 
@@ -27,7 +28,8 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.5
  */
-public interface SharedStateContributionRegistry {
+@Beta
+public interface ISharedStateContributionRegistry {
 
 	/**
 	 * Returns all contribution handles. The result is never <code>null</code> but possibly empty.
@@ -43,7 +45,7 @@ public interface SharedStateContributionRegistry {
 	 * Initialize and return the single known contribution for the given type. Throws an {@link IllegalStateException}
 	 * if there is no such contribution or more than one contribution for that type.
 	 */
-	<T> T getSingleContributedInstances(Class<T> type) throws IllegalStateException;
+	<T> T getSingleContributedInstance(Class<T> type) throws IllegalStateException;
 
 	/**
 	 * Returns providers for all known contribution for the given type. The result is never <code>null</code> but
@@ -55,6 +57,6 @@ public interface SharedStateContributionRegistry {
 	 * Return a provider the single known contribution for the given type. Throws an {@link IllegalStateException} if
 	 * there is no such contribution or more than one contribution for that type.
 	 */
-	<T> Provider<? extends T> getLazySingleContributedInstances(Class<T> type) throws IllegalStateException;
+	<T> Provider<? extends T> getLazySingleContributedInstance(Class<T> type) throws IllegalStateException;
 
 }

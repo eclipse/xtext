@@ -43,7 +43,7 @@ import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.JdtHelper;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.osgi.framework.BundleContext;
 
@@ -106,7 +106,7 @@ public class SharedModule extends AbstractModule {
 		bind(WorkspaceProjectsStateHelper.class);
 		bind(QueuedBuildData.class);
 		bind(UriValidator.class);
-		bind(SharedStateContributionRegistry.class).to(SharedStateContributionRegistryImpl.class);
+		bind(ISharedStateContributionRegistry.class).to(SharedStateContributionRegistryImpl.class);
 
 		boolean parallel = false;
 		if (parallel) {

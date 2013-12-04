@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.xtext.builder.impl.QueuedBuildDataContribution;
+import org.eclipse.xtext.builder.impl.IQueuedBuildDataContribution;
 import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
 import org.eclipse.xtext.common.types.ui.notification.JavaBuilderState;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class JdtQueuedBuildData implements QueuedBuildDataContribution {
+public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
   private Map<String,JavaBuilderState> javaBuildState;
   
   private Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltas;

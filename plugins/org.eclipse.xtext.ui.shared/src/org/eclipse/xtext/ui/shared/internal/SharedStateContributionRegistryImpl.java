@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.xtext.ui.shared.contribution.SharedStateContribution;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Binder;
@@ -29,7 +29,7 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class SharedStateContributionRegistryImpl implements SharedStateContributionRegistry {
+public class SharedStateContributionRegistryImpl implements ISharedStateContributionRegistry {
 
 	private static final String EXTENSION_POINT = Activator.PLUGIN_ID + ".sharedStateContributingModule";
 	private static final Logger logger = Logger.getLogger(SharedStateContributionRegistryImpl.class);
@@ -78,7 +78,7 @@ public class SharedStateContributionRegistryImpl implements SharedStateContribut
 		return listBuilder.build();
 	}
 	
-	public <T> Provider<? extends T> getLazySingleContributedInstances(Class<T> type) {
+	public <T> Provider<? extends T> getLazySingleContributedInstance(Class<T> type) {
 		Provider<? extends T> result = null;
 		for(SharedStateContribution contribution: getContributions()) {
 			if (contribution.isContributionSupported(type)) {
@@ -95,8 +95,8 @@ public class SharedStateContributionRegistryImpl implements SharedStateContribut
 		return result;
 	}
 	
-	public <T> T getSingleContributedInstances(Class<T> type) {
-		return getLazySingleContributedInstances(type).get();
+	public <T> T getSingleContributedInstance(Class<T> type) {
+		return getLazySingleContributedInstance(type).get();
 	}
 	
 	public <T> ImmutableList<? extends Provider<? extends T>> getLazyContributedInstances(Class<T> type) {

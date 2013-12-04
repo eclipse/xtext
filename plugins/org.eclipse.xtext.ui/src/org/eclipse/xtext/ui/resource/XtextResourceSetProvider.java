@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.resource;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
@@ -18,6 +18,11 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
+ * An extensible implementation of the {@link IResourceSetProvider}.
+ * It accepts a list of contributed {@link IResourceSetInitializer initializers}
+ * which may configure the newly created resource set in the context of the given
+ * {@link IProject project}.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @Singleton
@@ -29,7 +34,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 	private ImmutableList<? extends IResourceSetInitializer> initializers = ImmutableList.of();
 
 	@Inject
-	private void setContributions(SharedStateContributionRegistry contributionRegistry) {
+	private void setContributions(ISharedStateContributionRegistry contributionRegistry) {
 		initializers = contributionRegistry.getContributedInstances(IResourceSetInitializer.class);
 	}
 

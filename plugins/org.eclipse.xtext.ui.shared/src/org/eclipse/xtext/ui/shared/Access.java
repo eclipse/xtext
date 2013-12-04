@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.ui.shared.internal.Activator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
@@ -54,8 +54,8 @@ public class Access {
 		}
 
 		@Inject
-		private void inject(SharedStateContributionRegistry registry) {
-			delegate = registry.getLazySingleContributedInstances(clazz);
+		private void inject(ISharedStateContributionRegistry registry) {
+			delegate = registry.getLazySingleContributedInstance(clazz);
 		}
 
 		public T get() {
@@ -117,8 +117,8 @@ public class Access {
 	/**
 	 * @since 2.5
 	 */
-	public static Provider<SharedStateContributionRegistry> getSharedStateContributionRegistry() {
-		return Access.<SharedStateContributionRegistry>provider(SharedStateContributionRegistry.class);
+	public static Provider<ISharedStateContributionRegistry> getSharedStateContributionRegistry() {
+		return Access.<ISharedStateContributionRegistry>provider(ISharedStateContributionRegistry.class);
 	}
 	
 	/**

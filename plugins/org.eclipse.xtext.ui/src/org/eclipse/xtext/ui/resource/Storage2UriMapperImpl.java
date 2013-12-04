@@ -29,7 +29,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.ui.shared.contribution.SharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
@@ -52,7 +52,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	@Inject private IResourceServiceProvider.Registry resourceServiceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
 	@Inject private UriValidator uriValidator;
 
-	private Storage2UriMapperContribution contribution = new Storage2UriMapperContribution() {
+	private IStorage2UriMapperContribution contribution = new IStorage2UriMapperContribution() {
 		public void initializeCache() {
 			// nothing to do
 		}
@@ -83,7 +83,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	public void setContribution(Storage2UriMapperContribution contribution) {
+	public void setContribution(IStorage2UriMapperContribution contribution) {
 		this.contribution = contribution;
 	}
 	
@@ -94,13 +94,13 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	public Storage2UriMapperContribution getContribution() {
+	public IStorage2UriMapperContribution getContribution() {
 		return contribution;
 	}
 	
 	@Inject
-	private void initializeContributions(SharedStateContributionRegistry registry) {
-		final ImmutableList<? extends Storage2UriMapperContribution> allContributions = registry.getContributedInstances(Storage2UriMapperContribution.class);
+	private void initializeContributions(ISharedStateContributionRegistry registry) {
+		final ImmutableList<? extends IStorage2UriMapperContribution> allContributions = registry.getContributedInstances(IStorage2UriMapperContribution.class);
 		final int size = allContributions.size();
 		switch(size) {
 			case 0: 
@@ -110,9 +110,9 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 				contribution = allContributions.get(0);
 				break;
 			default:
-				contribution = new Storage2UriMapperContribution() {
+				contribution = new IStorage2UriMapperContribution() {
 					public void initializeCache() {
-						for(Storage2UriMapperContribution contribution: allContributions) {
+						for(IStorage2UriMapperContribution contribution: allContributions) {
 							contribution.initializeCache();
 						}
 					}
@@ -127,9 +127,9 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 					@SuppressWarnings("null")
 					@NonNull
 					public Iterable<Pair<IStorage, IProject>> getStorages(@NonNull final URI uri) {
-						return Iterables.concat(Lists.transform(allContributions, new Function<Storage2UriMapperContribution, Iterable<Pair<IStorage, IProject>>>() {
+						return Iterables.concat(Lists.transform(allContributions, new Function<IStorage2UriMapperContribution, Iterable<Pair<IStorage, IProject>>>() {
 							@NonNull
-							public Iterable<Pair<IStorage, IProject>> apply(Storage2UriMapperContribution contribution) {
+							public Iterable<Pair<IStorage, IProject>> apply(IStorage2UriMapperContribution contribution) {
 								return contribution.getStorages(uri);
 							}
 						}));
