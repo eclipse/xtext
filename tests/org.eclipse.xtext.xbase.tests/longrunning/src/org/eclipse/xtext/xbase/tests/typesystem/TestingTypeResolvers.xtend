@@ -74,7 +74,7 @@ class EagerBatchTypeResolver extends DefaultBatchTypeResolver {
 class InvariantCheckingEagerBatchTypeResolver extends DefaultBatchTypeResolver {
 
 	@Inject
-	Provider<EagerReentrantTypeResolver> resolverProvider
+	Provider<InvariantCheckingEagerReentrantTypeResolver> resolverProvider
 
 	override protected createResolver() {
 		resolverProvider.get
