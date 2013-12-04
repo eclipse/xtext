@@ -16,9 +16,12 @@ import org.eclipse.xtext.builder.impl.javasupport.ProjectClasspathChangeListener
 import org.eclipse.xtext.builder.trace.JarEntryAwareTrace;
 import org.eclipse.xtext.builder.trace.StorageAwareTraceContribution;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
+import org.eclipse.xtext.generator.trace.TraceURIHelper;
 import org.eclipse.xtext.ui.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
 import org.eclipse.xtext.ui.containers.StrictJavaProjectsState;
+import org.eclipse.xtext.ui.generator.trace.JavaProjectAwareTraceContribution;
+import org.eclipse.xtext.ui.generator.trace.TraceURIConverterContribution;
 import org.eclipse.xtext.ui.resource.IResourceSetInitializer;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
@@ -67,6 +70,9 @@ public class SharedContributionWithJDT implements Module {
 			binder.bind(QueuedBuildDataContribution.class).to(JdtQueuedBuildData.class);
 			binder.bind(TypeURIHelper.class);
 			binder.bind(ModificationStampCache.class);
+			
+			binder.bind(TraceURIHelper.class);
+			binder.bind(TraceURIConverterContribution.class).to(JavaProjectAwareTraceContribution.class);
 		}
 		
 	}

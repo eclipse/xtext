@@ -12,11 +12,25 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
+ * A contribution that allows to customize the computation
+ * of a trace URI for an {@link XtextResource} or an {@link URI}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface TraceURIConverterContribution {
 
-	@Nullable URI getURIForTrace(XtextResource context);
+	/**
+	 * Compute the trace URI that points to the location of the given
+	 * resource. Return <code>null</code> if the resource is not handled
+	 * by this contribution.
+	 */
+	@Nullable URI getURIForTrace(XtextResource resource);
+	
+	/**
+	 * Compute the trace URI that points to the location of the given uri.
+	 * Return <code>null</code> if the uri's location is not handled by
+	 * this contribution.
+	 */
 	@Nullable URI getURIForTrace(URI uri);
 	
 }

@@ -17,6 +17,12 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
+ * An extension of the {@link DefaultTraceURIConverter} that allows to use
+ * {@link TraceURIConverterContribution contributions} to resolve trace URIs.
+ * 
+ * The available contributions are used before the behavior of the {@link DefaultTraceURIConverter}
+ * is used to resolve the URIs.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Holger Schill
  */
