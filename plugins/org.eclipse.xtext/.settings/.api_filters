@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.5.0"/>
+                <message_argument value="2.4.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.resource.IndexingOrderer">
+        <filter comment="Removed @Beta API" id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.resource.IndexingOrderer"/>
+                <message_argument value="org.eclipse.xtext_2.5.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/nodemodel/INode.java" type="org.eclipse.xtext.nodemodel.INode">
         <filter id="403804204">
             <message_arguments>

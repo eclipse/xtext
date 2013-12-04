@@ -40,7 +40,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.IndexingOrderer;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -81,9 +80,6 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     
     @Inject
     private IWorkspace workspace;
-    
-    @Inject
-    private IndexingOrderer indexingOrderer;
     
     @Inject
 	private CompilerPhases compilerPhases;
@@ -315,7 +311,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             final IProgressMonitor monitor) {
         int index = 0;
         ResourceSet resourceSet = buildData.getResourceSet();
-        List<URI> toBeUpdated = indexingOrderer.getOrderedUris(resourceSet, buildData.getToBeUpdated());
+        Set<URI> toBeUpdated = buildData.getToBeUpdated();
         final int n = toBeUpdated.size();
         final SubMonitor subMonitor = SubMonitor.convert(monitor, "Write new resource descriptions", n); // TODO: NLS
         IProject currentProject = getBuiltProject(buildData);
