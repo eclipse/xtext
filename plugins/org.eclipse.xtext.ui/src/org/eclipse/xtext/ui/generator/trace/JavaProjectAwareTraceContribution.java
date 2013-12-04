@@ -29,7 +29,11 @@ import org.eclipse.xtext.util.Pair;
 import com.google.inject.Inject;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * A contribution that is aware of Java projects and therefore returns
+ * the source folder relative path of resources that reside in {@link IJavaProject java projects}.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class JavaProjectAwareTraceContribution implements TraceURIConverterContribution {
 
