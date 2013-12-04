@@ -16,7 +16,7 @@ public class TraceFileNameProvider {
 
 	public static final String TRACE_FILE_EXTENSION = "._trace";
 	
-	private static final Pattern TRACE_FILE_NAME_PATTERN = Pattern.compile(".*/?\\..+\\._trace");
+	private static final Pattern TRACE_FILE_NAME_PATTERN = Pattern.compile(".*/?\\..+\\._trace$");
 	
 	public boolean isTraceFileName(String traceFileName) {
 		return TRACE_FILE_NAME_PATTERN.matcher(traceFileName).matches();
