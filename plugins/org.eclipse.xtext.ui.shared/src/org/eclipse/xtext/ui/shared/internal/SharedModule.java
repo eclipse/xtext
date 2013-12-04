@@ -15,25 +15,41 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.builderState.IMarkerUpdater;
+import org.eclipse.xtext.builder.builderState.PersistedStateProvider;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
+import org.eclipse.xtext.builder.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
+import org.eclipse.xtext.builder.impl.RegistryBuilderParticipant;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
+import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
+import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.DirtyStateManager;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultContentProvider;
+import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultLabelProvider;
+import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPage;
+import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewSorter;
 import org.eclipse.xtext.ui.generator.trace.ExtensibleTraceURIConverter;
+import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -42,12 +58,15 @@ import org.eclipse.xtext.ui.resource.IStorage2UriMapperExtension;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.search.IXtextEObjectSearch;
+import org.eclipse.xtext.ui.search.OpenXtextElementHandler;
 import org.eclipse.xtext.ui.shared.JdtHelper;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.PrivateModule;
 import com.google.inject.Provider;
 import com.google.inject.Scopes;
 import com.google.inject.name.Names;
@@ -65,17 +84,26 @@ public class SharedModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		// TODO enable for 2.6 - https://bugs.eclipse.org/bugs/show_bug.cgi?id=423184
+//		binder().requireExplicitBindings();
 		if (context != null)
 			bind(BundleContext.class).toInstance(context);
 		
 		bind(IBuilderState.class).to(ClusteringBuilderState.class).in(Scopes.SINGLETON);
 		bind(IResourceDescriptions.class).to(DirtyStateAwareResourceDescriptions.class).in(Scopes.SINGLETON);
 		bind(IResourceServiceProvider.Registry.class).toInstance(IResourceServiceProvider.Registry.INSTANCE);
-		bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
+		binder().install(new PrivateModule() {
+			@Override
+			protected void configure() {
+				bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
+				bind(XtextResourceSet.class);
+				expose(IResourceSetProvider.class);
+			}
+		});
+		
 		bind(IExtensionRegistry.class).toInstance(Platform.getExtensionRegistry());
 		bind(BuildScheduler.class);
 		bind(ToBeBuiltComputer.class);
-		bind(IQualifiedNameConverter.class).to(IQualifiedNameConverter.DefaultImpl.class);
 
 		bind(IExternalContentSupport.IExternalContentProvider.class).to(IDirtyStateManager.class).in(Scopes.SINGLETON);
 		bind(IDirtyStateManager.class).to(DirtyStateManager.class).in(Scopes.SINGLETON);
@@ -85,8 +113,26 @@ public class SharedModule extends AbstractModule {
 		bind(IStorage2UriMapper.class).to(IStorage2UriMapperExtension.class);
 		bind(IStorage2UriMapperExtension.class).to(Storage2UriMapperImpl.class).in(Scopes.SINGLETON);
 		
-		bind(ITraceForStorageProvider.class).to(TraceForStorageProvider.class);
-		bind(DefaultTraceURIConverter.class).to(ExtensibleTraceURIConverter.class);
+		binder().install(new PrivateModule() {
+			
+			@Override
+			protected void configure() {
+				bind(ITraceForStorageProvider.class).to(TraceForStorageProvider.class);
+				bind(ITraceURIConverter.class).to(DefaultTraceURIConverter.class);
+				bind(DefaultTraceURIConverter.class).to(ExtensibleTraceURIConverter.class);
+				
+				bind(TraceFileNameProvider.class);
+				bind(TraceMarkers.class);
+				bind(TraceRegionSerializer.class);
+				bind(StorageAwareTrace.class);
+				
+				expose(ITraceURIConverter.class);
+				expose(TraceFileNameProvider.class);
+				expose(ITraceForStorageProvider.class);
+				expose(StorageAwareTrace.class);
+			}
+		});
+		
 
 		bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
 			public IWorkbench get() {
@@ -128,6 +174,29 @@ public class SharedModule extends AbstractModule {
 			bind(IResourceLoader.class).annotatedWith(Names.named(ClusteringBuilderState.RESOURCELOADER_CROSS_LINKING))
 					.toProvider(ResourceLoaderProviders.getSerialLoader());
 		}
+		
+		bind(IMarkerUpdater.class);
+		bind(PersistedStateProvider.class);
+		bind(IResourceClusteringPolicy.class);
+		bind(CompilerPhases.class);
+		bind(RegistryBuilderParticipant.class);
+		bind(IResourceLoader.Sorter.class);
+		bind(IURIEditorOpener.class);
+		bind(OpenXtextElementHandler.class);
+		bind(GlobalDescriptionLabelProvider.class);
+		bind(IXtextEObjectSearch.class);
+		
+		binder().install(new PrivateModule() {
+			@Override
+			protected void configure() {
+				bind(ReferenceSearchViewPage.class);
+				bind(ReferenceSearchResultLabelProvider.class);
+				bind(ReferenceSearchResultContentProvider.class);
+				bind(ReferenceSearchViewSorter.class);
+				
+				expose(ReferenceSearchViewPage.class);
+			}
+		});
 	}
 
 }

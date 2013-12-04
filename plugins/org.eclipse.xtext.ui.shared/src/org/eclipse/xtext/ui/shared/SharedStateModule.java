@@ -17,12 +17,13 @@ import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
-import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.generator.trace.ExtensibleTraceURIConverter;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
@@ -51,8 +52,8 @@ public class SharedStateModule extends AbstractGenericModule {
 	/**
 	 * @since 2.4
 	 */
-	public Provider<DefaultTraceURIConverter> provideDefaultTraceURIConverter() {
-		return Access.provider(DefaultTraceURIConverter.class);
+	public Provider<ITraceURIConverter> provideDefaultTraceURIConverter() {
+		return Access.<ITraceURIConverter>provider(ExtensibleTraceURIConverter.class);
 	}
 
 	public Provider<IStateChangeEventBroker> provideIStateChangeEventBroker() {
