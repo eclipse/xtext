@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.generator.trace.TraceURIHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -36,6 +37,9 @@ public class JavaProjectAwareTraceContribution implements TraceURIConverterContr
 	
 	@Inject
 	private IStorage2UriMapper mapper;
+	
+	@Inject
+	private TraceURIHelper traceURIHelper;
 	
 	@Nullable
 	public URI getURIForTrace(XtextResource context) {
@@ -81,28 +85,11 @@ public class JavaProjectAwareTraceContribution implements TraceURIConverterContr
 		for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots()) {
 			if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
 				URI prefix = URI.createPlatformResourceURI(root.getResource().getFullPath().addTrailingSeparator().toString(), true);
-				if (isPrefix(prefix, uri))
+				if (traceURIHelper.isPrefix(prefix, uri))
 					return uri.deresolve(prefix).trimFragment().trimQuery();
 			}
 		}
 		return null;
 	}
 	
-	protected boolean isPrefix(URI prefix, URI uri) {
-		if (prefix.scheme() == null || !prefix.scheme().equals(uri.scheme()))
-			return false;
-		String[] prefixSeg = prefix.segments();
-		String[] uriSeg = uri.segments();
-		if (prefixSeg.length == 0 || uriSeg.length == 0)
-			return false;
-		if (!"".equals(prefixSeg[prefixSeg.length - 1])) // this is true when the URI has a trailing slash ("/").
-			return false;
-		if (uriSeg.length < prefixSeg.length - 1)
-			return false;
-		for (int i = 0; i < prefixSeg.length - 1; i++)
-			if (!uriSeg[i].equals(prefixSeg[i]))
-				return false;
-		return true;
-	}
-
 }
