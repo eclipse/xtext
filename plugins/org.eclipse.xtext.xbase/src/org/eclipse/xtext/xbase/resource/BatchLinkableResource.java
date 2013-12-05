@@ -23,6 +23,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -44,6 +45,9 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	
 	@Inject
 	private BatchLinkingService batchLinkingService;
+	
+	@Inject
+	private CompilerPhases compilerPhases;
 	
 	/**
 	 * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
@@ -94,6 +98,8 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 				if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
 					Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
 					if (batchLinkingService.isBatchLinkable(triple.getSecond())) {
+						if (compilerPhases.isIndexing(this))
+							log.error("Don't resolve expressions during indexing!", new IllegalStateException("Resource URI : "+getURI()+", fragment : "+uriFragment));
 						return batchLinkingService.resolveBatched(triple.getFirst(), triple.getSecond(), uriFragment);
 					}
 					return super.getEObject(uriFragment, triple);
