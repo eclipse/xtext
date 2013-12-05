@@ -50,6 +50,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
 import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*
+import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
 
 abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> {
 	
@@ -214,6 +215,14 @@ class XtendEnumerationDeclarationImpl extends XtendTypeDeclarationImpl<XtendEnum
 }
 
 class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl<XtendAnnotationType> implements AnnotationTypeDeclaration {
+	
+	override findDeclaredAnnotationTypeElement(String name) {
+		declaredAnnotationTypeElements.findFirst[simpleName == name]
+	}
+	
+	override getDeclaredAnnotationTypeElements() {
+		delegate.members.map[compilationUnit.toXtendMemberDeclaration(it)].filter(AnnotationTypeElementDeclaration)
+	}
 	
 }
 
@@ -401,7 +410,7 @@ class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationIm
 	override getDefaultValue() {
 		if (delegate.initialValue == null)
 			return null
-		compilationUnit.evaluate(delegate.initialValue)
+		compilationUnit.evaluate(delegate.initialValue, delegate.type)
 	}
 	
 	override getDefaultValueExpression() {
@@ -489,12 +498,13 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getValue(String property) {
 		if (property == 'value' && delegate.value != null) {
-			return compilationUnit.evaluate(delegate.value)
+			return compilationUnit.evaluate(delegate.value, null)
 		}
-		val expression = delegate.elementValuePairs.findFirst[element.simpleName == property]?.value
+		val annoValue = delegate.elementValuePairs.findFirst[element.simpleName == property]
+		val expression = annoValue?.value
 		if (expression != null)
-			return compilationUnit.evaluate(expression)
-		return null
+			return compilationUnit.evaluate(expression, annoValue.element?.returnType)
+		return annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property).defaultValue
 	}
 	
 }
