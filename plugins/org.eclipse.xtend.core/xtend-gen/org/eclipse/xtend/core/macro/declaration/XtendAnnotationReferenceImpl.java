@@ -18,12 +18,14 @@ import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
@@ -148,7 +150,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
       XAnnotation _delegate_1 = this.getDelegate();
       XExpression _value_1 = _delegate_1.getValue();
-      return _compilationUnit.evaluate(_value_1);
+      return _compilationUnit.evaluate(_value_1, null);
     }
     XAnnotation _delegate_2 = this.getDelegate();
     EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
@@ -160,17 +162,24 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
         return Boolean.valueOf(_equals);
       }
     };
-    XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
+    final XAnnotationElementValuePair annoValue = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
     XExpression _value_2 = null;
-    if (_findFirst!=null) {
-      _value_2=_findFirst.getValue();
+    if (annoValue!=null) {
+      _value_2=annoValue.getValue();
     }
     final XExpression expression = _value_2;
     boolean _notEquals_1 = (!Objects.equal(expression, null));
     if (_notEquals_1) {
       CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-      return _compilationUnit_1.evaluate(expression);
+      JvmOperation _element = annoValue.getElement();
+      JvmTypeReference _returnType = null;
+      if (_element!=null) {
+        _returnType=_element.getReturnType();
+      }
+      return _compilationUnit_1.evaluate(expression, _returnType);
     }
-    return null;
+    AnnotationTypeDeclaration _annotationTypeDeclaration = this.getAnnotationTypeDeclaration();
+    AnnotationTypeElementDeclaration _findDeclaredAnnotationTypeElement = _annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property);
+    return _findDeclaredAnnotationTypeElement.getDefaultValue();
   }
 }

@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.tests.macro.declaration
 
 import com.google.inject.Inject
@@ -15,6 +22,9 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
 
+/**
+ * @author Sven Efftinge
+ */
 class DeclarationsTest extends AbstractXtendTestCase {
 	
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
@@ -59,7 +69,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals(javaClass.qualifiedName, sourceClazz.qualifiedName)
 			
 			val field = sourceClazz.declaredFields.head
-			assertNull(field.annotations.head.getValue('optional'))
+			assertEquals(Boolean.FALSE, field.annotations.head.getValue('optional'))
 			
 			val javaField = javaClass.declaredFields.head
 			assertFalse(javaField.annotations.head.getValue('optional') as Boolean)
@@ -332,7 +342,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 				typeValue = String,
 				typeArrayValue = #[String, Integer],
 				annotation2Value = @test.Annotation2('foo' + 'wuppa'),
-				annotation2ArrayValue = #[@test.Annotation2('foo'), @test.Annotation2('foo'+'wuppa')]
+				annotation2ArrayValue = #[@test.Annotation2, @test.Annotation2('foo'+'wuppa')]
 				) class Bar {
 			}
 		''').asCompilationUnit [
@@ -340,7 +350,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val annoRef = baseClass.annotations.head
 			
 			assertEquals(2 / 2 + 2 * 3 - 4 % 1, annoRef.getValue("intValue"))
-			assertEquals(42 + 4 + 6 * 42 - 4 / 45, annoRef.getValue("longValue"))
+			assertEquals((42 + 4 + 6 * 42 - 4 / 45) as long, annoRef.getValue("longValue"))
 			assertEquals('foobaz', annoRef.getValue("stringValue"))
 			
 			val bools = annoRef.getValue("booleanArrayValue") as boolean[]
@@ -353,9 +363,11 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			
 			assertEquals(typeReferenceProvider.newTypeReference(Integer), type.get(1)) 
 			
-			val anno = annoRef.getValue('annotation2Value')
-			assertTrue(anno instanceof AnnotationReference)
-			assertEquals('foowuppa', (anno as AnnotationReference).getValue('value'))
+			val anno = annoRef.getValue('annotation2Value') as AnnotationReference
+			assertEquals('foowuppa', anno.getValue('value'))
+			
+			val annoArray = annoRef.getValue('annotation2ArrayValue') as AnnotationReference[]
+			assertEquals("HUBBA BUBBA!", annoArray.get(0).getValue('value'))
 		]
 	}
 	

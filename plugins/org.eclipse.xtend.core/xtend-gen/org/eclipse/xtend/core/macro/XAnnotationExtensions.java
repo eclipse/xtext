@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -32,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
@@ -41,8 +41,7 @@ import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -55,6 +54,9 @@ public class XAnnotationExtensions {
   
   @Inject
   private ILinkingService linkingService;
+  
+  @Inject
+  private ConstantExpressionsInterpreter constantExpressionsInterpreter;
   
   public XtendAnnotationTarget getAnnotatedTarget(final XAnnotation annotation) {
     XtendAnnotationTarget _switchResult = null;
@@ -229,32 +231,16 @@ public class XAnnotationExtensions {
     if (!_matched) {
       if (annoVal instanceof JvmCustomAnnotationValue) {
         _matched=true;
-        Object _head = null;
         EList<Object> _values_1 = ((JvmCustomAnnotationValue)annoVal).getValues();
-        if (_values_1!=null) {
-          _head=IterableExtensions.<Object>head(_values_1);
+        Object _head = IterableExtensions.<Object>head(_values_1);
+        JvmOperation _operation = ((JvmCustomAnnotationValue)annoVal).getOperation();
+        JvmTypeReference _returnType = null;
+        if (_operation!=null) {
+          _returnType=_operation.getReturnType();
         }
-        final Object customAnnoVal = _head;
-        boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (customAnnoVal instanceof XTypeLiteral) {
-            _matched_1=true;
-            return ((XTypeLiteral)customAnnoVal).getType();
-          }
-        }
-        if (!_matched_1) {
-          if (customAnnoVal instanceof XFeatureCall) {
-            _matched_1=true;
-            JvmIdentifiableElement _feature = ((XFeatureCall)customAnnoVal).getFeature();
-            final JvmIdentifiableElement feature = _feature;
-            boolean _matched_2 = false;
-            if (!_matched_2) {
-              if (feature instanceof JvmType) {
-                _matched_2=true;
-                return ((JvmType)feature);
-              }
-            }
-          }
+        final Object type = this.constantExpressionsInterpreter.evaluate(((XExpression) _head), _returnType);
+        if ((type instanceof JvmTypeReference)) {
+          return ((JvmTypeReference)type).getType();
         }
       }
     }

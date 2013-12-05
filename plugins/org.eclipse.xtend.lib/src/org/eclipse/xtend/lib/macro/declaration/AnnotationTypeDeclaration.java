@@ -15,4 +15,15 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface AnnotationTypeDeclaration extends TypeDeclaration {
+	
+	/**
+	 * @param name the name of the annotation element
+	 * @return the annotation type element with the given name, declared by this annotation type declaration or <code>null</code> if no such annotation type element exists
+	 */
+	AnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(String name);
+	
+	/**
+	 * @return the annotation type elements declared by this annotation type declaration
+	 */
+	Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements();
 }

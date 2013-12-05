@@ -61,6 +61,7 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -315,6 +316,34 @@ class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotat
 	
 	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
 		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any constructors.")
+	}
+	
+	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
+		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any fields.")
+	}
+	
+	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any methods.")
+	}
+	
+	override MutableAnnotationTypeElementDeclaration addAnnotationTypeElement(String name, Procedure1<MutableAnnotationTypeElementDeclaration> initializer) {
+		checkJavaIdentifier(name, "name")
+		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		val newAnnotationElement = TypesFactory.eINSTANCE.createJvmOperation
+		newAnnotationElement.simpleName = name
+		newAnnotationElement.visibility = JvmVisibility.PUBLIC
+		delegate.members.add(newAnnotationElement)
+		val mutableAnnotationTypeElementDeclaration = compilationUnit.toMemberDeclaration(newAnnotationElement) as MutableAnnotationTypeElementDeclaration
+		initializer.apply(mutableAnnotationTypeElementDeclaration)
+		return mutableAnnotationTypeElementDeclaration
+	}
+	
+	override MutableAnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(String name) {
+		declaredAnnotationTypeElements.findFirst[simpleName == name]
+	}
+	
+	override Iterable<? extends MutableAnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
+		delegate.members.map[compilationUnit.toMemberDeclaration(it)].filter(MutableAnnotationTypeElementDeclaration)
 	}
 	
 }
@@ -797,16 +826,20 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getValue(String property) {
-		val annotationValue = delegate.values.findFirst[
-			valueName == property || (valueName == null && property == 'value')
-		]
-		val op = delegate.annotation.declaredOperations.findFirst[simpleName == property]
-		val isArrayType = op!=null && compilationUnit.typeReferences.isArray(op.returnType)
-		if (annotationValue != null)
-			return compilationUnit.translateAnnotationValue(annotationValue, isArrayType)
-		
-		if (op != null && op.defaultValue != null) {
-			return compilationUnit.translateAnnotationValue(op.defaultValue, isArrayType)
+		try {
+			val annotationValue = delegate.values.findFirst[
+				valueName == property || (valueName == null && property == 'value')
+			]
+			val op = delegate.annotation.declaredOperations.findFirst[simpleName == property]
+			val isArrayType = op!=null && compilationUnit.typeReferences.isArray(op.returnType)
+			if (annotationValue != null)
+				return compilationUnit.translateAnnotationValue(annotationValue, isArrayType)
+			
+			if (op != null && op.defaultValue != null) {
+				return compilationUnit.translateAnnotationValue(op.defaultValue, isArrayType)
+			}
+		} catch (ConstantExpressionEvaluationException e) {
+			compilationUnit.problemSupport.addError(this, e.getMessage)
 		}
 		return null
 	}

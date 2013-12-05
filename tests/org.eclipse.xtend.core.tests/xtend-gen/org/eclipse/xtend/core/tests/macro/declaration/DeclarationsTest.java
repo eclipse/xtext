@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.tests.macro.declaration;
 
 import com.google.common.collect.Iterables;
@@ -45,6 +52,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * @author Sven Efftinge
+ */
 @SuppressWarnings("all")
 public class DeclarationsTest extends AbstractXtendTestCase {
   @Inject
@@ -130,7 +140,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         Iterable<? extends AnnotationReference> _annotations = field.getAnnotations();
         AnnotationReference _head_1 = IterableExtensions.head(_annotations);
         Object _value = _head_1.getValue("optional");
-        Assert.assertNull(_value);
+        Assert.assertEquals(Boolean.FALSE, _value);
         Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = javaClass.getDeclaredFields();
         final MutableFieldDeclaration javaField = IterableExtensions.head(_declaredFields_1);
         Iterable<? extends MutableAnnotationReference> _annotations_1 = javaField.getAnnotations();
@@ -757,7 +767,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.append("annotation2Value = @test.Annotation2(\'foo\' + \'wuppa\'),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("annotation2ArrayValue = #[@test.Annotation2(\'foo\'), @test.Annotation2(\'foo\'+\'wuppa\')]");
+    _builder.append("annotation2ArrayValue = #[@test.Annotation2, @test.Annotation2(\'foo\'+\'wuppa\')]");
     _builder.newLine();
     _builder.append("\t");
     _builder.append(") class Bar {");
@@ -774,7 +784,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         Object _value = annoRef.getValue("intValue");
         Assert.assertEquals(Integer.valueOf((((2 / 2) + (2 * 3)) - (4 % 1))), _value);
         Object _value_1 = annoRef.getValue("longValue");
-        Assert.assertEquals(Integer.valueOf((((42 + 4) + (6 * 42)) - (4 / 45))), _value_1);
+        Assert.assertEquals(Long.valueOf(((long) (((42 + 4) + (6 * 42)) - (4 / 45)))), _value_1);
         Object _value_2 = annoRef.getValue("stringValue");
         Assert.assertEquals("foobaz", _value_2);
         Object _value_3 = annoRef.getValue("booleanArrayValue");
@@ -791,10 +801,15 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(Integer.class);
         Object _get_2 = type[1];
         Assert.assertEquals(_newTypeReference, _get_2);
-        final Object anno = annoRef.getValue("annotation2Value");
-        Assert.assertTrue((anno instanceof AnnotationReference));
-        Object _value_6 = ((AnnotationReference) anno).getValue("value");
-        Assert.assertEquals("foowuppa", _value_6);
+        Object _value_6 = annoRef.getValue("annotation2Value");
+        final AnnotationReference anno = ((AnnotationReference) _value_6);
+        Object _value_7 = anno.getValue("value");
+        Assert.assertEquals("foowuppa", _value_7);
+        Object _value_8 = annoRef.getValue("annotation2ArrayValue");
+        final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_8);
+        AnnotationReference _get_3 = annoArray[0];
+        Object _value_9 = _get_3.getValue("value");
+        Assert.assertEquals("HUBBA BUBBA!", _value_9);
       }
     };
     this.asCompilationUnit(_validFile, _function);

@@ -14,29 +14,30 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.eclipse.xtend.core.xtend.XtendEnum
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtext.common.types.JvmAnnotationType
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
+import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.linking.ILinkingService
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
 import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*
-import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
-import org.eclipse.xtext.xbase.XTypeLiteral
-import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtend.core.xtend.XtendInterface
-import org.eclipse.xtend.core.xtend.XtendEnum
-import org.eclipse.xtend.core.xtend.XtendEnumLiteral
-import org.eclipse.xtext.xbase.XFeatureCall
 
 class XAnnotationExtensions {
 	
 	@Inject LazyURIEncoder encoder
 	@Inject ILinkingService linkingService
+	@Inject ConstantExpressionsInterpreter constantExpressionsInterpreter
 	
 	def XtendAnnotationTarget getAnnotatedTarget(XAnnotation annotation) {
 		// ignore synthetic containers
@@ -93,13 +94,9 @@ class XAnnotationExtensions {
 				return annoVal.values.head?.type
 			}
 			JvmCustomAnnotationValue : {
-				switch customAnnoVal : annoVal.values?.head {
-					XTypeLiteral: return customAnnoVal.type
-					XFeatureCall: {
-						switch feature:customAnnoVal.feature {
-							JvmType: return feature
-						}
-					}
+				val type = constantExpressionsInterpreter.evaluate(annoVal.values.head as XExpression, annoVal.operation?.returnType)
+				if (type instanceof JvmTypeReference) {
+					return type.type
 				}
 			}
 		}

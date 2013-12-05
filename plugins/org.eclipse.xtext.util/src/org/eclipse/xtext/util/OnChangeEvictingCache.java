@@ -125,6 +125,8 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		try {
 			cacheAdapter.ignoreNotifications();
 			return transaction.exec(resource);
+		} catch (RuntimeException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new WrappedException(e);
 		} finally {

@@ -28,14 +28,11 @@ public interface AnnotationReference extends Element {
 
 	/**
 	 * Returns the value for the given property.
-	 * For source annotation references where {@link Tracability#isSource(NamedElement)} returns <code>true</code>, 
-	 * this method returns <code>null</code> if no value is specified on the annotation reference directly.
-	 * 
-	 * For generated or external annotation references where {@link Tracability#isSource(NamedElement)} returns <code>false</code>,
-	 * the default value of the annotation property is returned.
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned. 
 	 * 
 	 * @param property the name of the property
-	 * @return the value set on this annotation reference, the default value of the property or <code>null</code>.
+	 * @return the value set on this annotation reference, the default value of the annotation type element or <code>null</code>.
 	 */
 	Object getValue(String property);
 	

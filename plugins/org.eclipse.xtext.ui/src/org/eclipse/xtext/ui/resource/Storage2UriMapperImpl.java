@@ -49,7 +49,6 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	
 	private final static Logger log = Logger.getLogger(Storage2UriMapperImpl.class);
 	
-	@Inject private IResourceServiceProvider.Registry resourceServiceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
 	@Inject private UriValidator uriValidator;
 
 	private IStorage2UriMapperContribution contribution = new IStorage2UriMapperContribution() {

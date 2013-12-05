@@ -28,7 +28,6 @@ import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation

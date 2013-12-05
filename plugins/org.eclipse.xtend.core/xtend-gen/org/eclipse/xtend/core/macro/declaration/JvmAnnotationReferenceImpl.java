@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
+import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
@@ -22,6 +23,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -95,72 +98,84 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public Object getValue(final String property) {
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _values = _delegate.getValues();
-    final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
-      public Boolean apply(final JvmAnnotationValue it) {
-        boolean _or = false;
-        String _valueName = it.getValueName();
-        boolean _equals = Objects.equal(_valueName, property);
-        if (_equals) {
-          _or = true;
-        } else {
-          boolean _and = false;
-          String _valueName_1 = it.getValueName();
-          boolean _equals_1 = Objects.equal(_valueName_1, null);
-          if (!_equals_1) {
-            _and = false;
+    try {
+      JvmAnnotationReference _delegate = this.getDelegate();
+      EList<JvmAnnotationValue> _values = _delegate.getValues();
+      final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
+        public Boolean apply(final JvmAnnotationValue it) {
+          boolean _or = false;
+          String _valueName = it.getValueName();
+          boolean _equals = Objects.equal(_valueName, property);
+          if (_equals) {
+            _or = true;
           } else {
-            boolean _equals_2 = Objects.equal(property, "value");
-            _and = (_equals_1 && _equals_2);
+            boolean _and = false;
+            String _valueName_1 = it.getValueName();
+            boolean _equals_1 = Objects.equal(_valueName_1, null);
+            if (!_equals_1) {
+              _and = false;
+            } else {
+              boolean _equals_2 = Objects.equal(property, "value");
+              _and = (_equals_1 && _equals_2);
+            }
+            _or = (_equals || _and);
           }
-          _or = (_equals || _and);
+          return Boolean.valueOf(_or);
         }
-        return Boolean.valueOf(_or);
+      };
+      final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
+      JvmAnnotationReference _delegate_1 = this.getDelegate();
+      JvmAnnotationType _annotation = _delegate_1.getAnnotation();
+      Iterable<JvmOperation> _declaredOperations = _annotation.getDeclaredOperations();
+      final Function1<JvmOperation,Boolean> _function_1 = new Function1<JvmOperation,Boolean>() {
+        public Boolean apply(final JvmOperation it) {
+          String _simpleName = it.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, property);
+          return Boolean.valueOf(_equals);
+        }
+      };
+      final JvmOperation op = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
+      boolean _and = false;
+      boolean _notEquals = (!Objects.equal(op, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
+        JvmTypeReference _returnType = op.getReturnType();
+        boolean _isArray = _typeReferences.isArray(_returnType);
+        _and = (_notEquals && _isArray);
       }
-    };
-    final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
-    JvmAnnotationReference _delegate_1 = this.getDelegate();
-    JvmAnnotationType _annotation = _delegate_1.getAnnotation();
-    Iterable<JvmOperation> _declaredOperations = _annotation.getDeclaredOperations();
-    final Function1<JvmOperation,Boolean> _function_1 = new Function1<JvmOperation,Boolean>() {
-      public Boolean apply(final JvmOperation it) {
-        String _simpleName = it.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, property);
-        return Boolean.valueOf(_equals);
+      final boolean isArrayType = _and;
+      boolean _notEquals_1 = (!Objects.equal(annotationValue, null));
+      if (_notEquals_1) {
+        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+        return _compilationUnit_1.translateAnnotationValue(annotationValue, isArrayType);
       }
-    };
-    final JvmOperation op = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(op, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
-      JvmTypeReference _returnType = op.getReturnType();
-      boolean _isArray = _typeReferences.isArray(_returnType);
-      _and = (_notEquals && _isArray);
-    }
-    final boolean isArrayType = _and;
-    boolean _notEquals_1 = (!Objects.equal(annotationValue, null));
-    if (_notEquals_1) {
-      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-      return _compilationUnit_1.translateAnnotationValue(annotationValue, isArrayType);
-    }
-    boolean _and_1 = false;
-    boolean _notEquals_2 = (!Objects.equal(op, null));
-    if (!_notEquals_2) {
-      _and_1 = false;
-    } else {
-      JvmAnnotationValue _defaultValue = op.getDefaultValue();
-      boolean _notEquals_3 = (!Objects.equal(_defaultValue, null));
-      _and_1 = (_notEquals_2 && _notEquals_3);
-    }
-    if (_and_1) {
-      CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-      JvmAnnotationValue _defaultValue_1 = op.getDefaultValue();
-      return _compilationUnit_2.translateAnnotationValue(_defaultValue_1, isArrayType);
+      boolean _and_1 = false;
+      boolean _notEquals_2 = (!Objects.equal(op, null));
+      if (!_notEquals_2) {
+        _and_1 = false;
+      } else {
+        JvmAnnotationValue _defaultValue = op.getDefaultValue();
+        boolean _notEquals_3 = (!Objects.equal(_defaultValue, null));
+        _and_1 = (_notEquals_2 && _notEquals_3);
+      }
+      if (_and_1) {
+        CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
+        JvmAnnotationValue _defaultValue_1 = op.getDefaultValue();
+        return _compilationUnit_2.translateAnnotationValue(_defaultValue_1, isArrayType);
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof ConstantExpressionEvaluationException) {
+        final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
+        CompilationUnitImpl _compilationUnit_3 = this.getCompilationUnit();
+        ProblemSupport _problemSupport = _compilationUnit_3.getProblemSupport();
+        String _message = e.getMessage();
+        _problemSupport.addError(this, _message);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
     return null;
   }

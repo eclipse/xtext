@@ -115,7 +115,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				}
 				
 				class Constants {
-					public static val MYCONSTANT = Integer.MAX_VALUE - 42
+					public static val int MYCONSTANT = Integer.MAX_VALUE - 42
 				}
 				
 				class ConfigurableAnnotationProcessor extends AbstractClassProcessor {
@@ -139,7 +139,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				}
 				
 				class MoreConstants {
-					public static val MY_CONSTANT = myannotation.Constants.MYCONSTANT - Integer.MAX_VALUE + 42 * 2
+					public static val int MY_CONSTANT = myannotation.Constants.MYCONSTANT - Integer.MAX_VALUE + 42 * 2
 				}
 			'''
 		) [
@@ -780,6 +780,66 @@ abstract class AbstractReusableActiveAnnotationTests {
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
 			assertTrue(clazz.declaredMethods.head.parameters.forall[simpleName.endsWith('foo')])
+		]
+	}
+	
+	@Test def void testConstantExpressionEvaluation() {
+		assertProcessing(
+			'annotations/MyAnnotation.xtend' -> '''
+				package annotations
+				
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.Visibility
+				
+				@Active(Processor)
+				annotation MyAnnotation {
+					String value
+				}
+				
+				class Processor extends AbstractClassProcessor {
+					
+					override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
+						val value = annotatedClass.annotations.head.getValue('value') as String
+						registerClass(annotatedClass.qualifiedName+'.'+value)
+					}
+					
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						val value = annotatedClass.annotations.head.getValue('value') as String
+						val newClass = findClass(annotatedClass.qualifiedName+'.'+value)
+						for (method : annotatedClass.declaredMethods) {
+							method.addParameter(value, newClass.newTypeReference)
+						}
+						newClass.addField(value) [
+							type = string
+							visibility = Visibility.PUBLIC
+							initializer = '«»''"FOO"'«»''
+						]
+					}
+					
+				}
+			''',
+			'application/MyAnnotation.xtend' -> '''
+				package application
+				
+				import annotations.MyAnnotation
+				
+				@MyAnnotation("FOO") class MyClient {
+					def myMethod() {
+						FOO.FOO
+					}  
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('application.MyClient.FOO')
+			assertEquals("FOO",clazz.declaredFields.head.simpleName)
+			
+			val clazz2 = typeLookup.findClass('application.MyClient')
+			assertEquals("FOO",clazz2.declaredMethods.head.parameters.head.simpleName)
 		]
 	}
 

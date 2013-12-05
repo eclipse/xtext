@@ -42,6 +42,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
@@ -108,7 +109,9 @@ import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl
+import org.eclipse.xtext.diagnostics.Severity
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -158,12 +161,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
 	@Inject IXtendJvmAssociations associations
-	ConstantExpressionsInterpreter interpreter
-	
-	@Inject def void setConstantExpressionsInterpreter(ConstantExpressionsInterpreter interpreter) {
-		interpreter.compilationUnit = this
-		this.interpreter = interpreter
-	}
+	@Inject ConstantExpressionsInterpreter interpreter
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject JvmTypeExtensions typeExtensions
@@ -554,7 +552,8 @@ class CompilationUnitImpl implements CompilationUnit {
 		val Pair<List<?>, Class<?>> result = switch value {
 			JvmCustomAnnotationValue : {
 				// custom values always contain a single expression and will already return an array if it's a multi value.
-				return value.values.filter(XExpression).map[evaluate(it)].head
+				val expectedType = findExpectedType(value)
+				return value.values.filter(XExpression).map[evaluate(it, expectedType)].head
 			}
 			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)] -> TypeReference 
 			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)] -> AnnotationReference 
@@ -577,6 +576,23 @@ class CompilationUnitImpl implements CompilationUnit {
 		}
 	}
 	
+	protected def findExpectedType(JvmAnnotationValue value) {
+		if (value.operation != null) {
+			return value.operation.returnType
+		}
+		return switch container : value.eContainer {
+			JvmOperation : {
+				container.returnType
+			}
+			JvmAnnotationReference : {
+				val defaultOp = container.annotation.findAllFeaturesByName('value').filter(JvmOperation).head
+				if (defaultOp != null) {
+					defaultOp.returnType
+				}
+			}
+		}
+	}
+	
 	private def Object toArrayOfType(Iterable<?> iterable, Class<?> componentType) {
 		val Collection<?> collection = if (iterable instanceof Collection<?>) iterable else iterable.toList
 		return switch componentType {
@@ -592,8 +608,49 @@ class CompilationUnitImpl implements CompilationUnit {
 		}
 	}
 	
-	def Object evaluate(XExpression expression) {
-		return interpreter.evaluate(expression).result
+	def Object evaluate(XExpression expression, JvmTypeReference expectedType) {
+		try {
+			val result = interpreter.evaluate(expression, expectedType)
+			return translate(result)
+		} catch (ConstantExpressionEvaluationException e) {
+			val error = new EObjectDiagnosticImpl(Severity.ERROR, 'constant_expression_evaluation_problem', e.message, expression, null, -1, null)
+			expression.eResource.errors.add(error)
+			return null
+		}
+	}
+	
+	protected def Object translate(Object object) {
+		if (object instanceof XAnnotation[]) {
+			val AnnotationReference[] result = newArrayOfSize(object.length)
+			for (i : 0..<object.length) {
+				result.set(i, translate(object.get(i)) as AnnotationReference)
+			}
+			return result
+		}
+		if (object instanceof XAnnotation) {
+			return toAnnotationReference(object)
+		}
+		if (object instanceof JvmTypeReference[]) {
+			val TypeReference[] result = newArrayOfSize(object.length)
+			for (i : 0..<object.length) {
+				result.set(i, translate(object.get(i)) as TypeReference)
+			}
+			return result
+		}
+		if (object instanceof JvmTypeReference) {
+			return toTypeReference(object)
+		}
+		if (object instanceof JvmEnumerationLiteral[]) {
+			val EnumerationValueDeclaration[] result = newArrayOfSize(object.length)
+			for (i : 0..<object.length) {
+				result.set(i, translate(object.get(i)) as EnumerationValueDeclaration)
+			}
+			return result
+		}
+		if (object instanceof JvmEnumerationLiteral) {
+			return toMemberDeclaration(object)
+		}
+		return object
 	}
 	
 }
