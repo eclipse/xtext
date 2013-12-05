@@ -32,8 +32,6 @@ class QuickfixTestBuilder {
 	
 	int caretOffset
 	
-	IFile file
-	
 	XtextEditor editor
 	
 	List<Issue> issues
@@ -150,8 +148,8 @@ class QuickfixTestBuilder {
 	def tearDown() {
 		if(editor != null)
 			closeEditor(editor, false)
-		if(file != null)
-			file.delete(true, null)
+		files.forEach[ delete(true, null) ]
+		files.clear
 		if (modifiedIssueCodes != null) {
 			preferenceStore => [
 				modifiedIssueCodes.forEach [ code |
