@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.generator.trace.ExtensibleTraceURIConverter;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
@@ -40,6 +41,13 @@ public class SharedStateModule extends AbstractGenericModule {
 
 	public Provider<IStorage2UriMapper> provideIStorage2UriMapper() {
 		return Access.getIStorage2UriMapper();
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Provider<IStorage2UriMapperJdtExtensions> provideIStorage2UriMapperJdtExtensions() {
+		return Access.getIStorage2UriMapperJdtExtensions();
 	}
 	
 	/**
