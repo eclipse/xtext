@@ -60,8 +60,6 @@ public class QuickfixTestBuilder {
   
   private int caretOffset;
   
-  private IFile file;
-  
   private XtextEditor editor;
   
   private List<Issue> issues;
@@ -386,35 +384,40 @@ public class QuickfixTestBuilder {
   }
   
   public void tearDown() {
-    try {
-      boolean _notEquals = (!Objects.equal(this.editor, null));
-      if (_notEquals) {
-        this._workbenchTestHelper.closeEditor(this.editor, false);
-      }
-      boolean _notEquals_1 = (!Objects.equal(this.file, null));
-      if (_notEquals_1) {
-        this.file.delete(true, null);
-      }
-      boolean _notEquals_2 = (!Objects.equal(this.modifiedIssueCodes, null));
-      if (_notEquals_2) {
-        IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
-        final Procedure1<IPersistentPreferenceStore> _function = new Procedure1<IPersistentPreferenceStore>() {
-          public void apply(final IPersistentPreferenceStore it) {
-            final Procedure1<String> _function = new Procedure1<String>() {
-              public void apply(final String code) {
-                it.setToDefault(code);
-              }
-            };
-            IterableExtensions.<String>forEach(QuickfixTestBuilder.this.modifiedIssueCodes, _function);
-          }
-        };
-        ObjectExtensions.<IPersistentPreferenceStore>operator_doubleArrow(_preferenceStore, _function);
-        this.modifiedIssueCodes = null;
-      }
-      this._syncUtil.yieldToQueuedDisplayJobs(null);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    boolean _notEquals = (!Objects.equal(this.editor, null));
+    if (_notEquals) {
+      this._workbenchTestHelper.closeEditor(this.editor, false);
     }
+    Set<IFile> _files = this._workbenchTestHelper.getFiles();
+    final Procedure1<IFile> _function = new Procedure1<IFile>() {
+      public void apply(final IFile it) {
+        try {
+          it.delete(true, null);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    IterableExtensions.<IFile>forEach(_files, _function);
+    Set<IFile> _files_1 = this._workbenchTestHelper.getFiles();
+    _files_1.clear();
+    boolean _notEquals_1 = (!Objects.equal(this.modifiedIssueCodes, null));
+    if (_notEquals_1) {
+      IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
+      final Procedure1<IPersistentPreferenceStore> _function_1 = new Procedure1<IPersistentPreferenceStore>() {
+        public void apply(final IPersistentPreferenceStore it) {
+          final Procedure1<String> _function = new Procedure1<String>() {
+            public void apply(final String code) {
+              it.setToDefault(code);
+            }
+          };
+          IterableExtensions.<String>forEach(QuickfixTestBuilder.this.modifiedIssueCodes, _function);
+        }
+      };
+      ObjectExtensions.<IPersistentPreferenceStore>operator_doubleArrow(_preferenceStore, _function_1);
+      this.modifiedIssueCodes = null;
+    }
+    this._syncUtil.yieldToQueuedDisplayJobs(null);
   }
   
   public QuickfixTestBuilder removeFile(final String fileName) {
