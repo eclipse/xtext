@@ -7,12 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.compiler.batch;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.log4j.BasicConfigurator;
 import org.eclipse.xtend.core.XtendInjectorSingleton;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Injector;
 
 /**
@@ -42,7 +46,10 @@ public class Main {
 			} else if ("-useCurrentClassLoader".equals(argument.trim())) {
 				xtendBatchCompiler.setUseCurrentClassLoaderAsParent(true);
 			} else {
-				xtendBatchCompiler.setSourcePath(argument);
+				List<String> existingDirs = new ArrayList<String>(xtendBatchCompiler.getSourcePathDirectories());
+				existingDirs.add(argument);
+				String pathes = Joiner.on(File.pathSeparator).join(existingDirs);
+				xtendBatchCompiler.setSourcePath(pathes);
 			}
 		}
 		if (!xtendBatchCompiler.compile()) {

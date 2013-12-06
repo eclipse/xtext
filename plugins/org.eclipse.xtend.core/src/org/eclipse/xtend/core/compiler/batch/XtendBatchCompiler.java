@@ -60,9 +60,11 @@ import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -409,18 +411,26 @@ public class XtendBatchCompiler {
 		final NameBasedFilter nameBasedFilter = new NameBasedFilter();
 		nameBasedFilter.setExtension(fileExtensionProvider.getPrimaryFileExtension());
 		PathTraverser pathTraverser = new PathTraverser();
-		pathTraverser.resolvePathes(getSourcePathDirectories(), new Predicate<URI>() {
+		List<String> sourcePathDirectories = getSourcePathDirectories(); 
+		Multimap<String, URI> pathes = pathTraverser.resolvePathes(sourcePathDirectories, new Predicate<URI>() {
 			public boolean apply(URI input) {
 				boolean matches = nameBasedFilter.matches(input);
-				if (matches) {
-					if (log.isDebugEnabled()) {
-						log.debug("load xtend file '" + input + "'");
-					}
-					resourceSet.getResource(input, true);
-				}
 				return matches;
 			}
 		});
+		for (String src : pathes.keySet()) {
+			URI baseDir = URI.createFileURI(src+"/");
+			String identifier = Joiner.on("_").join(baseDir.segments());
+			URI platformResourceURI = URI.createPlatformResourceURI(identifier+"/", true);
+			resourceSet.getURIConverter().getURIMap().put(platformResourceURI,baseDir);
+			for (URI uri :  pathes.get(src)) {
+				if (log.isDebugEnabled()) {
+					log.debug("load xtend file '" + uri + "'");
+				}
+				URI uriToUse = uri.replacePrefix(baseDir, platformResourceURI);
+				resourceSet.getResource(uriToUse, true);
+			}
+		}
 		return resourceSet;
 	}
 	
