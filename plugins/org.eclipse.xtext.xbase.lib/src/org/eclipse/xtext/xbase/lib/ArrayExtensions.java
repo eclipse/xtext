@@ -90,15 +90,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(Object[], Object[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
