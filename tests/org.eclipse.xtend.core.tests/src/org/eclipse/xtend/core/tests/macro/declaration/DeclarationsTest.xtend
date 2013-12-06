@@ -76,6 +76,21 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		]
 	}
 	
+	@Test def testAnnotation3() {
+		validFile('''
+		@test.Annotation
+		class MyClass {
+			@test.Annotation2 String foo
+		}
+		
+		''').asCompilationUnit [
+			val anno = typeLookup.findClass("MyClass").annotations.head
+			val anno2 = typeLookup.findClass("MyClass").declaredFields.head.annotations.head
+			anno.set("annotation2Value", anno2)
+			assertEquals(typeLookup.findClass("MyClass").declaredFields.head.annotations.head.annotationTypeDeclaration, (anno.getValue('annotation2Value') as AnnotationReference).annotationTypeDeclaration)
+		]
+	}
+	
 	@Test def testSimpleClassWithField() {
 		validFile('''
 		package foo

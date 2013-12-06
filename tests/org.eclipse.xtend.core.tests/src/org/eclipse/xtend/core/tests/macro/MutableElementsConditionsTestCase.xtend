@@ -420,22 +420,7 @@ class CheckMutableIterfaceDeclarationProcessor implements RegisterGlobalsPartici
 			]
 			annotatedTargetElement.extendedInterfaces = emptyList
 			val annotationReference = annotatedTargetElement.addAnnotation(Deprecated.newTypeReference.type)
-			assertThrowable(IllegalArgumentException, "values cannot be null") [ |
-				annotationReference.set(null, null as String[])
-			]
-			assertThrowable(IllegalArgumentException, "values cannot contain null") [ |
-				annotationReference.set(null, null as String)
-			]
-			assertThrowable(IllegalArgumentException, "values cannot contain null") [ |
-				// TODO remove workaround (cast) below
-				annotationReference.set(null, #[null] as String[])
-			]
-			assertThrowable(IllegalArgumentException, "values cannot be null") [ |
-				annotationReference.set(null, null as boolean[])
-			]
-			assertThrowable(IllegalArgumentException, "values cannot be null") [ |
-				annotationReference.set(null, null as int[])
-			]
+			annotationReference.set(null, null)
 			annotationReference.set(null, "foo")
 			// TODO remove workaround (cast) below
 			annotationReference.set(null, { val String[] array = #["foo"]; array })
