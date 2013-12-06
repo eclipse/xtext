@@ -11,7 +11,6 @@ import com.google.common.base.Preconditions
 import com.google.common.collect.ImmutableList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget
@@ -21,6 +20,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableElement
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration
@@ -35,11 +35,12 @@ import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.expression.Expression
-import org.eclipse.xtext.common.types.JvmAnnotationReference
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.common.types.JvmAnnotationTarget
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
@@ -55,15 +56,6 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
-import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral
-import org.eclipse.xtend2.lib.StringConcatenationClient
-import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
-import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
-import org.eclipse.xtext.EcoreUtil2
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -809,252 +801,3 @@ class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<J
 	
 }
 
-class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
-	
-	override getAnnotationTypeDeclaration() {
-		compilationUnit.toTypeDeclaration(delegate.annotation) as AnnotationTypeDeclaration
-	}
-	
-	override getExpression(String property) {
-		val annotationValue = delegate.values.findFirst[
-			valueName == property || (valueName == null && property == 'value')
-		]
-		switch annotationValue {
-			JvmCustomAnnotationValue : {
-				return compilationUnit.toExpression(annotationValue.values.head as XExpression)
-			}
-		}
-		return null
-	}
-	
-	override getValue(String property) {
-		try {
-			val annotationValue = delegate.values.findFirst[
-				valueName == property || (valueName == null && property == 'value')
-			]
-			val op = delegate.annotation.declaredOperations.findFirst[simpleName == property]
-			val isArrayType = op!=null && compilationUnit.typeReferences.isArray(op.returnType)
-			if (annotationValue != null)
-				return compilationUnit.translateAnnotationValue(annotationValue, isArrayType)
-			
-			if (op != null && op.defaultValue != null) {
-				return compilationUnit.translateAnnotationValue(op.defaultValue, isArrayType)
-			}
-		} catch (ConstantExpressionEvaluationException e) {
-			compilationUnit.problemSupport.addError(this, e.getMessage)
-		}
-		return null
-	}
-	
-	override set(String name, Object value) {
-		internalSet(name, value)
-	}
-	
-	def dispatch void internalSet(String name, Void value) {
-		remove(name)
-	}
-	
-	def dispatch void internalSet(String name, Object values) {
-		throw new IllegalArgumentException("Cannot set annotation values of type "+values?.class?.name) 
-	}
-	
-	def dispatch void internalSet(String name, String value) {
-		_internalSet(name, #[value])
-	}
-	
-	def dispatch void internalSet(String name, String[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, Boolean value) {
-		_internalSet(name, #[value.booleanValue])
-	}
-	
-	def dispatch void internalSet(String name, boolean[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, Integer value) {
-		_internalSet(name, #[value.intValue] as int[])
-	}
-	
-	def dispatch void internalSet(String name, int[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, Short value) {
-		_internalSet(name, #[value.shortValue] as short[])
-	}
-	
-	def dispatch void internalSet(String name, short[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmShortAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, Long value) {
-		_internalSet(name, #[value.longValue] as long[])
-	}
-	
-	def dispatch void internalSet(String name, long[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmLongAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, Double value) {
-		_internalSet(name, #[value.doubleValue] as double[])
-	}
-	
-	def dispatch void internalSet(String name, double[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, Float value) {
-		_internalSet(name, #[value.floatValue] as float[])
-	}
-	
-	def dispatch void internalSet(String name, float[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, TypeReference value) {
-		_internalSet(name, #[value])
-	}
-	
-	def dispatch void internalSet(String name, TypeReference[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		values.forEach[
-			switch it {
-				TypeReferenceImpl : {
-					newValue.values.add(delegate.toTypeReference)
-				}
-			}
-		]
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, EnumerationValueDeclaration value) {
-		_internalSet(name, #[value])
-	}
-	
-	def dispatch void internalSet(String name, EnumerationValueDeclaration[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		values.forEach[
-			switch it {
-				JvmEnumerationValueDeclarationImpl : {
-					newValue.values.add(delegate)
-				}
-				XtendEnumerationValueDeclarationImpl : {
-					throw new IllegalArgumentException("Cannot set source elements.")
-				}
-			}
-		]
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, XtendAnnotationReferenceImpl value) {
-		val newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.add(value.delegate)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, ExpressionImpl value) {
-		val newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		newValue.values.add(value.delegate)
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	def dispatch void internalSet(String name, AnnotationReference value) {
-		_internalSet(name, #[value])
-	}
-	
-	def dispatch void internalSet(String name, AnnotationReference[] values) {
-		checkIterable(values, "values")
-		val newValue = TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
-		values.forEach[
-			switch it {
-				JvmAnnotationReferenceImpl : {
-					newValue.values.add(EcoreUtil2.cloneWithProxies(delegate))
-				}
-				XtendAnnotationReferenceImpl : {
-					throw new IllegalArgumentException("Multiple source annotations cannot be set as values. Please the the expression not the value.")
-				}
-			}
-		]
-		remove(name);
-		delegate.getValues.add(newValue)
-	}
-	
-	override remove(String name) {
-		val found = delegate.values.findFirst[(if (operation==null) 'value' else operation.simpleName)==name]
-		if (found != null) {
-			delegate.values.remove(found)
-			return true;
-		}
-		return false;
-	}
-	
-	private def findOperation(String name) {
-		val jvmAnnoType = (annotationTypeDeclaration as JvmAnnotationTypeDeclarationImpl).delegate
-		val jvmOperation = jvmAnnoType.declaredOperations.findFirst[it.simpleName == name]
-		if (jvmOperation == null) {
-			throw new IllegalArgumentException("The annotation property '"+name+"' is not declared on the annotation type '"+jvmAnnoType.identifier+"'.")
-		}
-		return jvmOperation
-	} 
-}

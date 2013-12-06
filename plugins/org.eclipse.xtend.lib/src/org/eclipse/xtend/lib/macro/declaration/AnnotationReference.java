@@ -37,14 +37,278 @@ public interface AnnotationReference extends Element {
 	Object getValue(String property);
 	
 	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	int getIntValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	int[] getIntArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	long getLongValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	long[] getLongArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	short getShortValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	short[] getShortArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	float getFloatValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	float[] getFloatArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	double getDoubleValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	double[] getDoubleArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	byte getByteValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	byte[] getByteArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	boolean getBooleanValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	boolean[] getBooleanArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	char getCharValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	char[] getCharArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	String getStringValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	String[] getStringArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	TypeReference getClassValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	TypeReference[] getClassArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	EnumerationValueDeclaration getEnumValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	EnumerationValueDeclaration[] getEnumArrayValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	AnnotationReference getAnnotationValue(String name);
+	
+	/**
+	 * Returns the value for the given property.
+	 * 
+	 * If no value was specified on the reference the default value of the corresponding {@link AnnotationTypeElementDeclaration}
+	 * will be returned.
+	 * 
+	 * @param name
+	 * @return the value set on this annotation reference or the default value of the annotation type element.
+	 */
+	AnnotationReference[] getAnnotationArrayValue(String name);
+	
+	/**
 	 * Returns the expression for the given annotation property.
 	 * Returns <code>null</code> if no expression is set, or this annotation reference is an external element
 	 * (i.e. {@link Tracability#isExternal(NamedElement)} returns <code>true</code>). 
 	 * 
-	 * @param property the name of the property
+	 * @param name
 	 * @return the expression
 	 */
-	Expression getExpression(String property);
+	Expression getExpression(String name);
 
 	
 }

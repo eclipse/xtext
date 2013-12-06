@@ -43,7 +43,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val suppressWarning = clazz.annotations.head
 			val supressWarningsDeclaration = suppressWarning.annotationTypeDeclaration
 			assertEquals('java.lang.SuppressWarnings', supressWarningsDeclaration.qualifiedName)
-			assertEquals('unused', suppressWarning.getValue('value'))
+			assertEquals('unused', suppressWarning.getStringValue('value'))
 			
 			assertEquals(2, supressWarningsDeclaration.annotations.size)
 			
@@ -382,6 +382,49 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals('foowuppa', anno.getValue('value'))
 			
 			val annoArray = annoRef.getValue('annotation2ArrayValue') as AnnotationReference[]
+			assertEquals("HUBBA BUBBA!", annoArray.get(0).getValue('value'))
+		]
+	}
+	
+	@Test def testAnnotationReferenceValues_2() {
+		validFile('''
+			package foo
+			@test.Annotation(
+				intValue = 2 / 2 + 2 * 3 - 4 % 1,
+				longValue = 42 + 4 + 6 * 42 - 4 / 45,
+				stringValue = 'foo' + 'baz',
+				booleanArrayValue = #[true, false],
+				intArrayValue = #[ -1, 34 + 45, 2 - 6 ],
+				longArrayValue = #[42, 5 * -3],
+				stringArrayValue = #['foo', 'bla' + 'buzz'],
+				typeValue = String,
+				typeArrayValue = #[String, Integer],
+				annotation2Value = @test.Annotation2('foo' + 'wuppa'),
+				annotation2ArrayValue = #[@test.Annotation2, @test.Annotation2('foo'+'wuppa')]
+				) class Bar {
+			}
+		''').asCompilationUnit [
+			val baseClass = typeLookup.findClass('foo.Bar')
+			val annoRef = baseClass.annotations.head
+			
+			assertEquals(2 / 2 + 2 * 3 - 4 % 1, annoRef.getIntValue("intValue"))
+			assertEquals(42 + 4 + 6 * 42 - 4 / 45, annoRef.getLongValue("longValue"))
+			assertEquals('foobaz', annoRef.getStringValue("stringValue"))
+			
+			val bools = annoRef.getBooleanArrayValue("booleanArrayValue")
+			assertTrue(bools.get(0))
+			assertFalse(bools.get(1))
+			
+			assertArrayEquals(#[ -1, 34 + 45, 2 - 6 ], annoRef.getIntArrayValue("intArrayValue"))
+			
+			val type = annoRef.getClassArrayValue('typeArrayValue')
+			
+			assertEquals(typeReferenceProvider.newTypeReference(Integer), type.get(1)) 
+			
+			val anno = annoRef.getAnnotationValue('annotation2Value')
+			assertEquals('foowuppa', anno.getStringValue('value'))
+			
+			val annoArray = annoRef.getAnnotationArrayValue('annotation2ArrayValue')
 			assertEquals("HUBBA BUBBA!", annoArray.get(0).getValue('value'))
 		]
 	}

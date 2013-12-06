@@ -8,10 +8,8 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException;
@@ -37,6 +35,8 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
+import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
+import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
@@ -216,7 +216,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final String value) {
-    this._internalSet(name, new String[] { value });
+    final String[] arr = { value };
+    this._internalSet(name, arr);
   }
   
   protected void _internalSet(final String name, final String[] values) {
@@ -237,7 +238,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   
   protected void _internalSet(final String name, final Boolean value) {
     boolean _booleanValue = value.booleanValue();
-    this._internalSet(name, new boolean[] { _booleanValue });
+    final boolean[] arr = new boolean[] { _booleanValue };
+    this._internalSet(name, arr);
   }
   
   protected void _internalSet(final String name, final boolean[] values) {
@@ -258,7 +260,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   
   protected void _internalSet(final String name, final Integer value) {
     int _intValue = value.intValue();
-    this._internalSet(name, ((int[]) ((int[])Conversions.unwrapArray(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(_intValue)), int.class))));
+    final int[] arr = new int[] { _intValue };
+    this._internalSet(name, arr);
   }
   
   protected void _internalSet(final String name, final int[] values) {
@@ -279,7 +282,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   
   protected void _internalSet(final String name, final Short value) {
     short _shortValue = value.shortValue();
-    this._internalSet(name, ((short[]) ((short[])Conversions.unwrapArray(Collections.<Short>unmodifiableList(Lists.<Short>newArrayList(_shortValue)), short.class))));
+    final short[] arr = new short[] { _shortValue };
+    this._internalSet(name, arr);
   }
   
   protected void _internalSet(final String name, final short[] values) {
@@ -300,7 +304,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   
   protected void _internalSet(final String name, final Long value) {
     long _longValue = value.longValue();
-    this._internalSet(name, ((long[]) ((long[])Conversions.unwrapArray(Collections.<Long>unmodifiableList(Lists.<Long>newArrayList(_longValue)), long.class))));
+    final long[] arr = new long[] { _longValue };
+    this._internalSet(name, arr);
   }
   
   protected void _internalSet(final String name, final long[] values) {
@@ -321,7 +326,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   
   protected void _internalSet(final String name, final Double value) {
     double _doubleValue = value.doubleValue();
-    this._internalSet(name, ((double[]) ((double[])Conversions.unwrapArray(Collections.<Double>unmodifiableList(Lists.<Double>newArrayList(_doubleValue)), double.class))));
+    final double[] arr = new double[] { _doubleValue };
+    this._internalSet(name, arr);
   }
   
   protected void _internalSet(final String name, final double[] values) {
@@ -342,7 +348,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   
   protected void _internalSet(final String name, final Float value) {
     float _floatValue = value.floatValue();
-    this._internalSet(name, ((float[]) ((float[])Conversions.unwrapArray(Collections.<Float>unmodifiableList(Lists.<Float>newArrayList(_floatValue)), float.class))));
+    final float[] arr = new float[] { _floatValue };
+    this._internalSet(name, arr);
   }
   
   protected void _internalSet(final String name, final float[] values) {
@@ -355,6 +362,50 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     }
     EList<Float> _values = newValue.getValues();
     _values.addAll(((Collection<? extends Float>)Conversions.doWrapArray(values)));
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
+  }
+  
+  protected void _internalSet(final String name, final Character value) {
+    char _charValue = value.charValue();
+    final char[] arr = new char[] { _charValue };
+    this._internalSet(name, arr);
+  }
+  
+  protected void _internalSet(final String name, final char[] values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmCharAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    EList<Character> _values = newValue.getValues();
+    _values.addAll(((Collection<? extends Character>)Conversions.doWrapArray(values)));
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
+  }
+  
+  protected void _internalSet(final String name, final Byte value) {
+    byte _byteValue = value.byteValue();
+    final byte[] arr = new byte[] { _byteValue };
+    this._internalSet(name, arr);
+  }
+  
+  protected void _internalSet(final String name, final byte[] values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmByteAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    EList<Byte> _values = newValue.getValues();
+    _values.addAll(((Collection<? extends Byte>)Conversions.doWrapArray(values)));
     this.remove(name);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
@@ -558,9 +609,184 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return jvmOperation;
   }
   
+  public void setExpression(final String name, final Expression value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setAnnotationValue(final String name, final AnnotationReference... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setBooleanValue(final String name, final boolean... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setByteValue(final String name, final byte... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setCharValue(final String name, final char... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setClassValue(final String name, final TypeReference... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setDoubleValue(final String name, final double... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setEnumValue(final String name, final EnumerationValueDeclaration... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setFloatValue(final String name, final float... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setIntValue(final String name, final int... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setLongValue(final String name, final long... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setShortValue(final String name, final short... value) {
+    this.internalSet(name, value);
+  }
+  
+  public void setStringValue(final String name, final String... value) {
+    this.internalSet(name, value);
+  }
+  
+  public AnnotationReference getAnnotationValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((AnnotationReference) _value);
+  }
+  
+  public AnnotationReference[] getAnnotationArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((AnnotationReference[]) _value);
+  }
+  
+  public boolean[] getBooleanArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((boolean[]) _value);
+  }
+  
+  public boolean getBooleanValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Boolean) _value)).booleanValue();
+  }
+  
+  public byte[] getByteArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((byte[]) _value);
+  }
+  
+  public byte getByteValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Byte) _value)).byteValue();
+  }
+  
+  public char[] getCharArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((char[]) _value);
+  }
+  
+  public char getCharValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Character) _value)).charValue();
+  }
+  
+  public TypeReference getClassValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((TypeReference) _value);
+  }
+  
+  public TypeReference[] getClassArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((TypeReference[]) _value);
+  }
+  
+  public double[] getDoubleArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((double[]) _value);
+  }
+  
+  public double getDoubleValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Double) _value)).doubleValue();
+  }
+  
+  public EnumerationValueDeclaration getEnumValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((EnumerationValueDeclaration) _value);
+  }
+  
+  public EnumerationValueDeclaration[] getEnumArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((EnumerationValueDeclaration[]) _value);
+  }
+  
+  public float[] getFloatArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((float[]) _value);
+  }
+  
+  public float getFloatValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Float) _value)).floatValue();
+  }
+  
+  public int[] getIntArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((int[]) _value);
+  }
+  
+  public int getIntValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Integer) _value)).intValue();
+  }
+  
+  public long[] getLongArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((long[]) _value);
+  }
+  
+  public long getLongValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Long) _value)).longValue();
+  }
+  
+  public short[] getShortArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((short[]) _value);
+  }
+  
+  public short getShortValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Short) _value)).shortValue();
+  }
+  
+  public String[] getStringArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((String[]) _value);
+  }
+  
+  public String getStringValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((String) _value);
+  }
+  
   public void internalSet(final String name, final Object value) {
     if (value instanceof EnumerationValueDeclaration) {
       _internalSet(name, (EnumerationValueDeclaration)value);
+      return;
+    } else if (value instanceof Byte) {
+      _internalSet(name, (Byte)value);
       return;
     } else if (value instanceof Double) {
       _internalSet(name, (Double)value);
@@ -586,6 +812,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     } else if (value instanceof Boolean) {
       _internalSet(name, (Boolean)value);
       return;
+    } else if (value instanceof Character) {
+      _internalSet(name, (Character)value);
+      return;
     } else if (value instanceof String) {
       _internalSet(name, (String)value);
       return;
@@ -597,6 +826,12 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       return;
     } else if (value instanceof boolean[]) {
       _internalSet(name, (boolean[])value);
+      return;
+    } else if (value instanceof byte[]) {
+      _internalSet(name, (byte[])value);
+      return;
+    } else if (value instanceof char[]) {
+      _internalSet(name, (char[])value);
       return;
     } else if (value instanceof double[]) {
       _internalSet(name, (double[])value);

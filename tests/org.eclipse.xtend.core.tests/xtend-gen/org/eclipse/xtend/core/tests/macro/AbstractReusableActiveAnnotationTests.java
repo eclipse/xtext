@@ -111,7 +111,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("throw new AssertionError(\"color\")");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("anno.set(\'color\', black)");
+    _builder.append("anno.setAnnotationValue(\'color\', black)");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.newLine();
@@ -127,7 +127,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("\t\t\t");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("anno.set(\'colors\', #[black, white] as EnumerationValueDeclaration[])");
+    _builder.append("anno.setAnnotationValue(\'colors\', black, white)");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.newLine();
@@ -141,7 +141,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("throw new AssertionError(\"type\")");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("anno.set(\'type\', annotatedClass.newTypeReference)");
+    _builder.append("anno.setClassValue(\'type\', annotatedClass.newTypeReference)");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.newLine();
@@ -157,7 +157,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("\t\t\t");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("anno.set(\'types\', #[primitiveBoolean] as TypeReference[])");
+    _builder.append("anno.setClassValue(\'types\', primitiveBoolean)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -205,8 +205,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(clazz);
         Object _value_2 = annotation.getValue("type");
         Assert.assertEquals(_newTypeReference, _value_2);
-        Object _value_3 = annotation.getValue("types");
-        final Object[] types = ((Object[]) _value_3);
+        final TypeReference[] types = annotation.getClassArrayValue("types");
         int _length_1 = types.length;
         Assert.assertEquals(1, _length_1);
         TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();

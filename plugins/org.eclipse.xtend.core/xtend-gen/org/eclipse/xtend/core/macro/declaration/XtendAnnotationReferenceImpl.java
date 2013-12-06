@@ -19,7 +19,9 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -181,5 +183,125 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     AnnotationTypeDeclaration _annotationTypeDeclaration = this.getAnnotationTypeDeclaration();
     AnnotationTypeElementDeclaration _findDeclaredAnnotationTypeElement = _annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property);
     return _findDeclaredAnnotationTypeElement.getDefaultValue();
+  }
+  
+  public AnnotationReference getAnnotationValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((AnnotationReference) _value);
+  }
+  
+  public AnnotationReference[] getAnnotationArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((AnnotationReference[]) _value);
+  }
+  
+  public boolean[] getBooleanArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((boolean[]) _value);
+  }
+  
+  public boolean getBooleanValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Boolean) _value)).booleanValue();
+  }
+  
+  public byte[] getByteArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((byte[]) _value);
+  }
+  
+  public byte getByteValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Byte) _value)).byteValue();
+  }
+  
+  public char[] getCharArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((char[]) _value);
+  }
+  
+  public char getCharValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Character) _value)).charValue();
+  }
+  
+  public TypeReference getClassValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((TypeReference) _value);
+  }
+  
+  public TypeReference[] getClassArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((TypeReference[]) _value);
+  }
+  
+  public double[] getDoubleArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((double[]) _value);
+  }
+  
+  public double getDoubleValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Double) _value)).doubleValue();
+  }
+  
+  public EnumerationValueDeclaration getEnumValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((EnumerationValueDeclaration) _value);
+  }
+  
+  public EnumerationValueDeclaration[] getEnumArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((EnumerationValueDeclaration[]) _value);
+  }
+  
+  public float[] getFloatArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((float[]) _value);
+  }
+  
+  public float getFloatValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Float) _value)).floatValue();
+  }
+  
+  public int[] getIntArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((int[]) _value);
+  }
+  
+  public int getIntValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Integer) _value)).intValue();
+  }
+  
+  public long[] getLongArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((long[]) _value);
+  }
+  
+  public long getLongValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Long) _value)).longValue();
+  }
+  
+  public short[] getShortArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((short[]) _value);
+  }
+  
+  public short getShortValue(final String name) {
+    Object _value = this.getValue(name);
+    return (((Short) _value)).shortValue();
+  }
+  
+  public String[] getStringArrayValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((String[]) _value);
+  }
+  
+  public String getStringValue(final String name) {
+    Object _value = this.getValue(name);
+    return ((String) _value);
   }
 }

@@ -50,24 +50,24 @@ abstract class AbstractReusableActiveAnnotationTests {
 						val existingValue = anno.getValue('color')
 						if (existingValue !=  white)
 							throw new AssertionError("color")
-						anno.set('color', black)
+						anno.setAnnotationValue('color', black)
 							
 						val existingColorsValue = anno.getValue('colors') as Object[]
 						if (existingColorsValue.get(0) !=  white && existingColorsValue.get(1) != black && existingColorsValue.length != 2)
 							throw new AssertionError("colors")
 							
-						anno.set('colors', #[black, white] as EnumerationValueDeclaration[])
+						anno.setAnnotationValue('colors', black, white)
 						
 						val existingType = anno.getValue('type')
 						if (existingType != string)
 							throw new AssertionError("type")
-						anno.set('type', annotatedClass.newTypeReference)
+						anno.setClassValue('type', annotatedClass.newTypeReference)
 							
 						val existingTypes = anno.getValue('types') as Object[]
 						if (existingTypes.get(0) !=  primitiveInt && existingTypes.get(1) != annotatedClass.newTypeReference && existingTypes.length != 2)
 							throw new AssertionError("types")
 							
-						anno.set('types', #[primitiveBoolean] as TypeReference[])
+						anno.setClassValue('types', primitiveBoolean)
 					}
 				}
 			''',
@@ -94,7 +94,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			
 			assertEquals(typeReferenceProvider.newTypeReference(clazz), annotation.getValue('type'))
 			
-			val types =  annotation.getValue('types') as Object[]
+			val types =  annotation.getClassArrayValue('types')
 			assertEquals(1, types.length)
 			assertEquals(typeReferenceProvider.primitiveBoolean, types.get(0))
 			

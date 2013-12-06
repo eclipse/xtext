@@ -88,8 +88,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         final AnnotationTypeDeclaration supressWarningsDeclaration = suppressWarning.getAnnotationTypeDeclaration();
         String _qualifiedName_1 = supressWarningsDeclaration.getQualifiedName();
         Assert.assertEquals("java.lang.SuppressWarnings", _qualifiedName_1);
-        Object _value = suppressWarning.getValue("value");
-        Assert.assertEquals("unused", _value);
+        String _stringValue = suppressWarning.getStringValue("value");
+        Assert.assertEquals("unused", _stringValue);
         Iterable<? extends AnnotationReference> _annotations_1 = supressWarningsDeclaration.getAnnotations();
         int _size = IterableExtensions.size(_annotations_1);
         Assert.assertEquals(2, _size);
@@ -106,8 +106,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         final FieldDeclaration field = ((FieldDeclaration) _head_1);
         Iterable<? extends AnnotationReference> _annotations_2 = field.getAnnotations();
         final AnnotationReference inject = IterableExtensions.head(_annotations_2);
-        Object _value_1 = inject.getValue("optional");
-        Assert.assertTrue((((Boolean) _value_1)).booleanValue());
+        Object _value = inject.getValue("optional");
+        Assert.assertTrue((((Boolean) _value)).booleanValue());
       }
     };
     this.asCompilationUnit(_validFile, _function);
@@ -852,6 +852,88 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         AnnotationReference _get_3 = annoArray[0];
         Object _value_9 = _get_3.getValue("value");
         Assert.assertEquals("HUBBA BUBBA!", _value_9);
+      }
+    };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
+  public void testAnnotationReferenceValues_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("@test.Annotation(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("intValue = 2 / 2 + 2 * 3 - 4 % 1,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("longValue = 42 + 4 + 6 * 42 - 4 / 45,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("stringValue = \'foo\' + \'baz\',");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("booleanArrayValue = #[true, false],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("intArrayValue = #[ -1, 34 + 45, 2 - 6 ],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("longArrayValue = #[42, 5 * -3],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("stringArrayValue = #[\'foo\', \'bla\' + \'buzz\'],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("typeValue = String,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("typeArrayValue = #[String, Integer],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("annotation2Value = @test.Annotation2(\'foo\' + \'wuppa\'),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("annotation2ArrayValue = #[@test.Annotation2, @test.Annotation2(\'foo\'+\'wuppa\')]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(") class Bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration baseClass = _typeLookup.findClass("foo.Bar");
+        Iterable<? extends MutableAnnotationReference> _annotations = baseClass.getAnnotations();
+        final MutableAnnotationReference annoRef = IterableExtensions.head(_annotations);
+        int _intValue = annoRef.getIntValue("intValue");
+        Assert.assertEquals((((2 / 2) + (2 * 3)) - (4 % 1)), _intValue);
+        long _longValue = annoRef.getLongValue("longValue");
+        Assert.assertEquals((((42 + 4) + (6 * 42)) - (4 / 45)), _longValue);
+        String _stringValue = annoRef.getStringValue("stringValue");
+        Assert.assertEquals("foobaz", _stringValue);
+        final boolean[] bools = annoRef.getBooleanArrayValue("booleanArrayValue");
+        boolean _get = bools[0];
+        Assert.assertTrue(_get);
+        boolean _get_1 = bools[1];
+        Assert.assertFalse(_get_1);
+        int[] _intArrayValue = annoRef.getIntArrayValue("intArrayValue");
+        Assert.assertArrayEquals(new int[] { (-1), (34 + 45), (2 - 6) }, _intArrayValue);
+        final TypeReference[] type = annoRef.getClassArrayValue("typeArrayValue");
+        TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
+        TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(Integer.class);
+        Object _get_2 = type[1];
+        Assert.assertEquals(_newTypeReference, _get_2);
+        final AnnotationReference anno = annoRef.getAnnotationValue("annotation2Value");
+        String _stringValue_1 = anno.getStringValue("value");
+        Assert.assertEquals("foowuppa", _stringValue_1);
+        final AnnotationReference[] annoArray = annoRef.getAnnotationArrayValue("annotation2ArrayValue");
+        AnnotationReference _get_3 = annoArray[0];
+        Object _value = _get_3.getValue("value");
+        Assert.assertEquals("HUBBA BUBBA!", _value);
       }
     };
     this.asCompilationUnit(_validFile, _function);
