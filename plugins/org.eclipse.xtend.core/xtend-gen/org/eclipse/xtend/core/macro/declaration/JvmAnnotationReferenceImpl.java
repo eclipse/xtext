@@ -8,15 +8,22 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendEnumerationValueDeclarationImpl;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
@@ -24,6 +31,8 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
@@ -32,14 +41,18 @@ import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
+import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -180,7 +193,33 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return null;
   }
   
-  public void set(final String name, final String... values) {
+  public void set(final String name, final Object value) {
+    this.internalSet(name, value);
+  }
+  
+  protected void _internalSet(final String name, final Void value) {
+    this.remove(name);
+  }
+  
+  protected void _internalSet(final String name, final Object values) {
+    Class<? extends Object> _class = null;
+    if (values!=null) {
+      _class=values.getClass();
+    }
+    String _name = null;
+    if (_class!=null) {
+      _name=_class.getName();
+    }
+    String _plus = ("Cannot set annotation values of type " + _name);
+    IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus);
+    throw _illegalArgumentException;
+  }
+  
+  protected void _internalSet(final String name, final String value) {
+    this._internalSet(name, new String[] { value });
+  }
+  
+  protected void _internalSet(final String name, final String[] values) {
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmStringAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
@@ -196,7 +235,12 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     _values_1.add(newValue);
   }
   
-  public void set(final String name, final boolean... values) {
+  protected void _internalSet(final String name, final Boolean value) {
+    boolean _booleanValue = value.booleanValue();
+    this._internalSet(name, new boolean[] { _booleanValue });
+  }
+  
+  protected void _internalSet(final String name, final boolean[] values) {
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmBooleanAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
@@ -212,7 +256,12 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     _values_1.add(newValue);
   }
   
-  public void set(final String name, final int... values) {
+  protected void _internalSet(final String name, final Integer value) {
+    int _intValue = value.intValue();
+    this._internalSet(name, ((int[]) ((int[])Conversions.unwrapArray(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(_intValue)), int.class))));
+  }
+  
+  protected void _internalSet(final String name, final int[] values) {
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmIntAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
@@ -228,7 +277,54 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     _values_1.add(newValue);
   }
   
-  public void set(final String name, final double... values) {
+  protected void _internalSet(final String name, final Short value) {
+    short _shortValue = value.shortValue();
+    this._internalSet(name, ((short[]) ((short[])Conversions.unwrapArray(Collections.<Short>unmodifiableList(Lists.<Short>newArrayList(_shortValue)), short.class))));
+  }
+  
+  protected void _internalSet(final String name, final short[] values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmShortAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    EList<Short> _values = newValue.getValues();
+    _values.addAll(((Collection<? extends Short>)Conversions.doWrapArray(values)));
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
+  }
+  
+  protected void _internalSet(final String name, final Long value) {
+    long _longValue = value.longValue();
+    this._internalSet(name, ((long[]) ((long[])Conversions.unwrapArray(Collections.<Long>unmodifiableList(Lists.<Long>newArrayList(_longValue)), long.class))));
+  }
+  
+  protected void _internalSet(final String name, final long[] values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmLongAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    EList<Long> _values = newValue.getValues();
+    _values.addAll(((Collection<? extends Long>)Conversions.doWrapArray(values)));
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
+  }
+  
+  protected void _internalSet(final String name, final Double value) {
+    double _doubleValue = value.doubleValue();
+    this._internalSet(name, ((double[]) ((double[])Conversions.unwrapArray(Collections.<Double>unmodifiableList(Lists.<Double>newArrayList(_doubleValue)), double.class))));
+  }
+  
+  protected void _internalSet(final String name, final double[] values) {
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmDoubleAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
@@ -244,7 +340,32 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     _values_1.add(newValue);
   }
   
-  public void set(final String name, final TypeReference... values) {
+  protected void _internalSet(final String name, final Float value) {
+    float _floatValue = value.floatValue();
+    this._internalSet(name, ((float[]) ((float[])Conversions.unwrapArray(Collections.<Float>unmodifiableList(Lists.<Float>newArrayList(_floatValue)), float.class))));
+  }
+  
+  protected void _internalSet(final String name, final float[] values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmFloatAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    EList<Float> _values = newValue.getValues();
+    _values.addAll(((Collection<? extends Float>)Conversions.doWrapArray(values)));
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
+  }
+  
+  protected void _internalSet(final String name, final TypeReference value) {
+    this._internalSet(name, new TypeReference[] { value });
+  }
+  
+  protected void _internalSet(final String name, final TypeReference[] values) {
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmTypeAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
@@ -273,7 +394,11 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     _values.add(newValue);
   }
   
-  public void set(final String name, final EnumerationValueDeclaration... values) {
+  protected void _internalSet(final String name, final EnumerationValueDeclaration value) {
+    this._internalSet(name, new EnumerationValueDeclaration[] { value });
+  }
+  
+  protected void _internalSet(final String name, final EnumerationValueDeclaration[] values) {
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmEnumAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
     boolean _notEquals = (!Objects.equal(name, null));
@@ -292,9 +417,88 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
             _values.add(_delegate);
           }
         }
+        if (!_matched) {
+          if (it instanceof XtendEnumerationValueDeclarationImpl) {
+            _matched=true;
+            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("Cannot set source elements.");
+            throw _illegalArgumentException;
+          }
+        }
       }
     };
     IterableExtensions.<EnumerationValueDeclaration>forEach(((Iterable<EnumerationValueDeclaration>)Conversions.doWrapArray(values)), _function);
+    this.remove(name);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values = _delegate.getValues();
+    _values.add(newValue);
+  }
+  
+  protected void _internalSet(final String name, final XtendAnnotationReferenceImpl value) {
+    final JvmCustomAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    EList<Object> _values = newValue.getValues();
+    XAnnotation _delegate = value.getDelegate();
+    _values.add(_delegate);
+    this.remove(name);
+    JvmAnnotationReference _delegate_1 = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate_1.getValues();
+    _values_1.add(newValue);
+  }
+  
+  protected void _internalSet(final String name, final ExpressionImpl value) {
+    final JvmCustomAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    EList<Object> _values = newValue.getValues();
+    XExpression _delegate = value.getDelegate();
+    _values.add(_delegate);
+    this.remove(name);
+    JvmAnnotationReference _delegate_1 = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate_1.getValues();
+    _values_1.add(newValue);
+  }
+  
+  protected void _internalSet(final String name, final AnnotationReference value) {
+    this._internalSet(name, new AnnotationReference[] { value });
+  }
+  
+  protected void _internalSet(final String name, final AnnotationReference[] values) {
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
+    final JvmAnnotationAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
+    boolean _notEquals = (!Objects.equal(name, null));
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
+    final Procedure1<AnnotationReference> _function = new Procedure1<AnnotationReference>() {
+      public void apply(final AnnotationReference it) {
+        boolean _matched = false;
+        if (!_matched) {
+          if (it instanceof JvmAnnotationReferenceImpl) {
+            _matched=true;
+            EList<JvmAnnotationReference> _values = newValue.getValues();
+            JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl)it).getDelegate();
+            JvmAnnotationReference _cloneWithProxies = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(_delegate);
+            _values.add(_cloneWithProxies);
+          }
+        }
+        if (!_matched) {
+          if (it instanceof XtendAnnotationReferenceImpl) {
+            _matched=true;
+            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("Multiple source annotations cannot be set as values. Please the the expression not the value.");
+            throw _illegalArgumentException;
+          }
+        }
+      }
+    };
+    IterableExtensions.<AnnotationReference>forEach(((Iterable<AnnotationReference>)Conversions.doWrapArray(values)), _function);
     this.remove(name);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values = _delegate.getValues();
@@ -352,5 +556,84 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       throw _illegalArgumentException;
     }
     return jvmOperation;
+  }
+  
+  public void internalSet(final String name, final Object value) {
+    if (value instanceof EnumerationValueDeclaration) {
+      _internalSet(name, (EnumerationValueDeclaration)value);
+      return;
+    } else if (value instanceof Double) {
+      _internalSet(name, (Double)value);
+      return;
+    } else if (value instanceof Float) {
+      _internalSet(name, (Float)value);
+      return;
+    } else if (value instanceof Integer) {
+      _internalSet(name, (Integer)value);
+      return;
+    } else if (value instanceof Long) {
+      _internalSet(name, (Long)value);
+      return;
+    } else if (value instanceof Short) {
+      _internalSet(name, (Short)value);
+      return;
+    } else if (value instanceof ExpressionImpl) {
+      _internalSet(name, (ExpressionImpl)value);
+      return;
+    } else if (value instanceof XtendAnnotationReferenceImpl) {
+      _internalSet(name, (XtendAnnotationReferenceImpl)value);
+      return;
+    } else if (value instanceof Boolean) {
+      _internalSet(name, (Boolean)value);
+      return;
+    } else if (value instanceof String) {
+      _internalSet(name, (String)value);
+      return;
+    } else if (value instanceof AnnotationReference) {
+      _internalSet(name, (AnnotationReference)value);
+      return;
+    } else if (value instanceof TypeReference) {
+      _internalSet(name, (TypeReference)value);
+      return;
+    } else if (value instanceof boolean[]) {
+      _internalSet(name, (boolean[])value);
+      return;
+    } else if (value instanceof double[]) {
+      _internalSet(name, (double[])value);
+      return;
+    } else if (value instanceof float[]) {
+      _internalSet(name, (float[])value);
+      return;
+    } else if (value instanceof int[]) {
+      _internalSet(name, (int[])value);
+      return;
+    } else if (value instanceof String[]) {
+      _internalSet(name, (String[])value);
+      return;
+    } else if (value == null) {
+      _internalSet(name, (Void)null);
+      return;
+    } else if (value instanceof long[]) {
+      _internalSet(name, (long[])value);
+      return;
+    } else if (value instanceof AnnotationReference[]) {
+      _internalSet(name, (AnnotationReference[])value);
+      return;
+    } else if (value instanceof EnumerationValueDeclaration[]) {
+      _internalSet(name, (EnumerationValueDeclaration[])value);
+      return;
+    } else if (value instanceof TypeReference[]) {
+      _internalSet(name, (TypeReference[])value);
+      return;
+    } else if (value instanceof short[]) {
+      _internalSet(name, (short[])value);
+      return;
+    } else if (value != null) {
+      _internalSet(name, value);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(name, value).toString());
+    }
   }
 }

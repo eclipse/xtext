@@ -53,7 +53,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -250,6 +249,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         this.addExportedPackage(this.macroProject, packageName);
       }
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
+        "org.eclipse.xtend.core.tests", 
         "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       IJavaProject _create_1 = JavaCore.create(_createPluginProject_1);
       this.userProject = _create_1;
@@ -339,7 +339,6 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         }
       };
       IterableExtensions.<IFile>forEach(_filter, _function_4);
-      InputOutput.<StringBuilder>println(buffer);
       final Function1<IMarker,String> _function_5 = new Function1<IMarker,String>() {
         public String apply(final IMarker it) {
           try {
@@ -357,7 +356,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         }
       };
       Iterable<String> _map_2 = IterableExtensions.<IMarker, String>map(markers2, _function_5);
-      String _join_1 = IterableExtensions.join(_map_2, ",");
+      String _join_1 = IterableExtensions.join(_map_2, "\n");
       int _length_1 = ((Object[])Conversions.unwrapArray(markers2, Object.class)).length;
       Assert.assertEquals(_join_1, 0, _length_1);
       IProject _project_2 = this.userProject.getProject();

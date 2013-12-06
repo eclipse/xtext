@@ -62,6 +62,8 @@ import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
+import org.eclipse.xtext.EcoreUtil2
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
 	
@@ -844,7 +846,23 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		return null
 	}
 	
-	override set(String name, String... values) {
+	override set(String name, Object value) {
+		internalSet(name, value)
+	}
+	
+	def dispatch void internalSet(String name, Void value) {
+		remove(name)
+	}
+	
+	def dispatch void internalSet(String name, Object values) {
+		throw new IllegalArgumentException("Cannot set annotation values of type "+values?.class?.name) 
+	}
+	
+	def dispatch void internalSet(String name, String value) {
+		_internalSet(name, #[value])
+	}
+	
+	def dispatch void internalSet(String name, String[] values) {
 		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue
 		if (name != null)
@@ -854,7 +872,11 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		delegate.getValues.add(newValue)
 	}
 	
-	override set(String name, boolean... values) {
+	def dispatch void internalSet(String name, Boolean value) {
+		_internalSet(name, #[value.booleanValue])
+	}
+	
+	def dispatch void internalSet(String name, boolean[] values) {
 		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue
 		if (name != null)
@@ -864,7 +886,11 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		delegate.getValues.add(newValue)
 	}
 	
-	override set(String name, int... values) {
+	def dispatch void internalSet(String name, Integer value) {
+		_internalSet(name, #[value.intValue] as int[])
+	}
+	
+	def dispatch void internalSet(String name, int[] values) {
 		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue
 		if (name != null)
@@ -874,7 +900,39 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		delegate.getValues.add(newValue)
 	}
 	
-	override set(String name, double... values) {
+	def dispatch void internalSet(String name, Short value) {
+		_internalSet(name, #[value.shortValue] as short[])
+	}
+	
+	def dispatch void internalSet(String name, short[] values) {
+		checkIterable(values, "values")
+		val newValue = TypesFactory.eINSTANCE.createJvmShortAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		newValue.values.addAll(values)
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	def dispatch void internalSet(String name, Long value) {
+		_internalSet(name, #[value.longValue] as long[])
+	}
+	
+	def dispatch void internalSet(String name, long[] values) {
+		checkIterable(values, "values")
+		val newValue = TypesFactory.eINSTANCE.createJvmLongAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		newValue.values.addAll(values)
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	def dispatch void internalSet(String name, Double value) {
+		_internalSet(name, #[value.doubleValue] as double[])
+	}
+	
+	def dispatch void internalSet(String name, double[] values) {
 		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue
 		if (name != null)
@@ -884,7 +942,25 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		delegate.getValues.add(newValue)
 	}
 	
-	override set(String name, TypeReference... values) {
+	def dispatch void internalSet(String name, Float value) {
+		_internalSet(name, #[value.floatValue] as float[])
+	}
+	
+	def dispatch void internalSet(String name, float[] values) {
+		checkIterable(values, "values")
+		val newValue = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		newValue.values.addAll(values)
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	def dispatch void internalSet(String name, TypeReference value) {
+		_internalSet(name, #[value])
+	}
+	
+	def dispatch void internalSet(String name, TypeReference[] values) {
 		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue
 		if (name != null)
@@ -900,7 +976,11 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		delegate.getValues.add(newValue)
 	}
 	
-	override set(String name, EnumerationValueDeclaration... values) {
+	def dispatch void internalSet(String name, EnumerationValueDeclaration value) {
+		_internalSet(name, #[value])
+	}
+	
+	def dispatch void internalSet(String name, EnumerationValueDeclaration[] values) {
 		checkIterable(values, "values")
 		val newValue = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue
 		if (name != null)
@@ -909,6 +989,50 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			switch it {
 				JvmEnumerationValueDeclarationImpl : {
 					newValue.values.add(delegate)
+				}
+				XtendEnumerationValueDeclarationImpl : {
+					throw new IllegalArgumentException("Cannot set source elements.")
+				}
+			}
+		]
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	def dispatch void internalSet(String name, XtendAnnotationReferenceImpl value) {
+		val newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		newValue.values.add(value.delegate)
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	def dispatch void internalSet(String name, ExpressionImpl value) {
+		val newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		newValue.values.add(value.delegate)
+		remove(name);
+		delegate.getValues.add(newValue)
+	}
+	
+	def dispatch void internalSet(String name, AnnotationReference value) {
+		_internalSet(name, #[value])
+	}
+	
+	def dispatch void internalSet(String name, AnnotationReference[] values) {
+		checkIterable(values, "values")
+		val newValue = TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue
+		if (name != null)
+			newValue.setOperation(findOperation(name))
+		values.forEach[
+			switch it {
+				JvmAnnotationReferenceImpl : {
+					newValue.values.add(EcoreUtil2.cloneWithProxies(delegate))
+				}
+				XtendAnnotationReferenceImpl : {
+					throw new IllegalArgumentException("Multiple source annotations cannot be set as values. Please the the expression not the value.")
 				}
 			}
 		]

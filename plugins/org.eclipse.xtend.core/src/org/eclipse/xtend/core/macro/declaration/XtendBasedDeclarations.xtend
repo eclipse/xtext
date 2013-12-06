@@ -50,7 +50,6 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
 import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
 
 abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> {
 	

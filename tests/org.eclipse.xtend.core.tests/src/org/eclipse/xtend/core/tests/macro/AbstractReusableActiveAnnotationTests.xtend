@@ -10,6 +10,9 @@ import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -53,7 +56,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 						if (existingColorsValue.get(0) !=  white && existingColorsValue.get(1) != black && existingColorsValue.length != 2)
 							throw new AssertionError("colors")
 							
-						anno.set('colors', black, white)
+						anno.set('colors', #[black, white] as EnumerationValueDeclaration[])
 						
 						val existingType = anno.getValue('type')
 						if (existingType != string)
@@ -64,7 +67,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 						if (existingTypes.get(0) !=  primitiveInt && existingTypes.get(1) != annotatedClass.newTypeReference && existingTypes.length != 2)
 							throw new AssertionError("types")
 							
-						anno.set('types', primitiveBoolean)
+						anno.set('types', #[primitiveBoolean] as TypeReference[])
 					}
 				}
 			''',
@@ -145,6 +148,204 @@ abstract class AbstractReusableActiveAnnotationTests {
 		) [
 			val clazz = typeLookup.findClass("myusercode.MyClass")
 			assertEquals("42",clazz.docComment)
+		]
+	}
+	
+	@Test def void testAnnotationValueSetting_3() {
+		assertProcessing(
+			'myannotation/MoveValues.xtend' -> '''
+				package myannotation
+				
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.TypeReference
+				import org.eclipse.xtend.lib.macro.Active
+				
+				@Active(MoveAnnotationValuesProcessor)
+				annotation MoveValues {}
+				
+				class MoveAnnotationValuesProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						val classAnnotation = annotatedClass.annotations.head
+						val fieldAnnotation = annotatedClass.declaredFields.head.annotations.head
+						
+						fieldAnnotation.set('booleanValue', classAnnotation.getValue('booleanValue'))
+						fieldAnnotation.set('intValue', classAnnotation.getValue('intValue'))
+						fieldAnnotation.set('longValue', classAnnotation.getValue('longValue'))
+						fieldAnnotation.set('stringValue', classAnnotation.getValue('stringValue'))
+						fieldAnnotation.set('booleanArrayValue', classAnnotation.getValue('booleanArrayValue'))
+						fieldAnnotation.set('intArrayValue', classAnnotation.getValue('intArrayValue'))
+						fieldAnnotation.set('longArrayValue', classAnnotation.getValue('longArrayValue'))
+						fieldAnnotation.set('stringArrayValue', classAnnotation.getValue('stringArrayValue'))
+						fieldAnnotation.set('typeValue', classAnnotation.getValue('typeValue'))
+						fieldAnnotation.set('typeArrayValue', classAnnotation.getValue('typeArrayValue'))
+				  		fieldAnnotation.set('annotation2Value', classAnnotation.getValue('annotation2Value'))
+				  		fieldAnnotation.set('annotation2ArrayValue', classAnnotation.getExpression('annotation2ArrayValue'))
+						fieldAnnotation.set('enumValue', classAnnotation.getValue('enumValue'))
+						fieldAnnotation.set('enumArrayValue', classAnnotation.getValue('enumArrayValue'))
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				import test.Annotation
+				import test.Annotation2
+				import myannotation.MoveValues
+				
+				@Annotation(
+					intValue = 2 / 2 + 2 * 3 - 4 % 1,
+					longValue = 42 + 4 + 6 * 42 - 4 / 45,
+					stringValue = 'foo' + 'baz',
+					booleanArrayValue = #[true, false],
+					intArrayValue = #[ -1, 34 + 45, 2 - 6 ],
+					longArrayValue = #[42, 5 * -3],
+					stringArrayValue = #['foo', 'bla' + 'buzz'],
+					typeValue = String,
+					typeArrayValue = #[String, Integer],
+					annotation2Value = @Annotation2('foo' + 'wuppa'),
+					annotation2ArrayValue = #[@Annotation2, @Annotation2('foo'+'wuppa')],
+					enumValue = test.Enum1.YELLOW,
+					enumArrayValue = #[test.Enum1.YELLOW, test.Enum1.RED]
+				)
+				@MoveValues 
+				class UserCode {
+					@Annotation() String foo
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass("myusercode.UserCode")
+			val annoRef = clazz.declaredFields.head.annotations.head
+			
+			assertEquals(2 / 2 + 2 * 3 - 4 % 1, annoRef.getValue("intValue"))
+			assertEquals((42 + 4 + 6 * 42 - 4 / 45) as long, annoRef.getValue("longValue"))
+			assertEquals('foobaz', annoRef.getValue("stringValue"))
+			
+			val bools = annoRef.getValue("booleanArrayValue") as boolean[]
+			assertTrue(bools.get(0))
+			assertFalse(bools.get(1))
+			
+			assertArrayEquals(#[ -1, 34 + 45, 2 - 6 ], annoRef.getValue("intArrayValue") as int[])
+			
+			val type = annoRef.getValue('typeArrayValue') as TypeReference[]
+			
+			assertEquals(typeReferenceProvider.newTypeReference(Integer), type.get(1)) 
+			
+			val anno = annoRef.getValue('annotation2Value') as AnnotationReference
+			assertEquals('foowuppa', anno.getValue('value'))
+			
+			val annoArray = annoRef.getValue('annotation2ArrayValue') as AnnotationReference[]
+			assertEquals("HUBBA BUBBA!", annoArray.get(0).getValue('value'))
+			
+			val enum1 = annoRef.getValue('enumValue') as EnumerationValueDeclaration
+			assertEquals('YELLOW', enum1.simpleName)
+			
+			val enumArray = annoRef.getValue('enumArrayValue') as EnumerationValueDeclaration[]
+			assertEquals("YELLOW", enumArray.head.simpleName)
+		]
+	}
+	
+	@Test def void testAnnotationValueSetting_AsExpression() {
+		assertProcessing(
+			'myannotation/MoveValues.xtend' -> '''
+				package myannotation
+				
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.TypeReference
+				import org.eclipse.xtend.lib.macro.Active
+				
+				@Active(MoveAnnotationValuesProcessor)
+				annotation MoveValues {}
+				
+				class MoveAnnotationValuesProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						val classAnnotation = annotatedClass.annotations.head
+						val fieldAnnotation = annotatedClass.declaredFields.head.annotations.head
+						
+						fieldAnnotation.set('booleanValue', classAnnotation.getExpression('booleanValue'))
+						fieldAnnotation.set('intValue', classAnnotation.getExpression('intValue'))
+						fieldAnnotation.set('longValue', classAnnotation.getExpression('longValue'))
+						fieldAnnotation.set('stringValue', classAnnotation.getExpression('stringValue'))
+						fieldAnnotation.set('booleanArrayValue', classAnnotation.getExpression('booleanArrayValue'))
+						fieldAnnotation.set('intArrayValue', classAnnotation.getExpression('intArrayValue'))
+						fieldAnnotation.set('longArrayValue', classAnnotation.getExpression('longArrayValue'))
+						fieldAnnotation.set('stringArrayValue', classAnnotation.getExpression('stringArrayValue'))
+						fieldAnnotation.set('typeValue', classAnnotation.getExpression('typeValue'))
+						fieldAnnotation.set('typeArrayValue', classAnnotation.getExpression('typeArrayValue'))
+				  		fieldAnnotation.set('annotation2Value', classAnnotation.getExpression('annotation2Value'))
+				  		fieldAnnotation.set('annotation2ArrayValue', classAnnotation.getExpression('annotation2ArrayValue'))
+						fieldAnnotation.set('enumValue', classAnnotation.getExpression('enumValue'))
+						fieldAnnotation.set('enumArrayValue', classAnnotation.getExpression('enumArrayValue'))
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				import test.Annotation
+				import test.Annotation2
+				import myannotation.MoveValues
+				
+				@Annotation(
+					intValue = 2 / 2 + 2 * 3 - 4 % 1,
+					longValue = 42 + 4 + 6 * 42 - 4 / 45,
+					stringValue = 'foo' + 'baz',
+					booleanValue = true,
+					booleanArrayValue = #[true, false],
+					intArrayValue = #[ -1, 34 + 45, 2 - 6 ],
+					longArrayValue = #[42, 5 * -3],
+					stringArrayValue = #['foo', 'bla' + 'buzz'],
+					typeValue = String,
+					typeArrayValue = #[String, Integer],
+					annotation2Value = @Annotation2('foo' + 'wuppa'),
+					annotation2ArrayValue = #[@Annotation2, @Annotation2('foo'+'wuppa')],
+					enumValue = test.Enum1.YELLOW,
+					enumArrayValue = #[test.Enum1.YELLOW, test.Enum1.RED]
+				)
+				@MoveValues 
+				class UserCode {
+					@Annotation() String foo
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass("myusercode.UserCode")
+			val annoRef = clazz.declaredFields.head.annotations.head
+			
+			assertEquals(2 / 2 + 2 * 3 - 4 % 1, annoRef.getValue("intValue"))
+			assertEquals((42 + 4 + 6 * 42 - 4 / 45) as long, annoRef.getValue("longValue"))
+			assertEquals('foobaz', annoRef.getValue("stringValue"))
+			
+			assertTrue(annoRef.getValue("booleanValue") as Boolean)
+			val bools = annoRef.getValue("booleanArrayValue") as boolean[]
+			assertTrue(bools.get(0))
+			assertFalse(bools.get(1))
+			
+			assertArrayEquals(#[ -1, 34 + 45, 2 - 6 ], annoRef.getValue("intArrayValue") as int[])
+			
+			val type = annoRef.getValue('typeArrayValue') as TypeReference[]
+			
+			assertEquals(typeReferenceProvider.newTypeReference(Integer), type.get(1)) 
+			
+			val anno = annoRef.getValue('annotation2Value') as AnnotationReference
+			assertEquals('foowuppa', anno.getValue('value'))
+			
+			val annoArray = annoRef.getValue('annotation2ArrayValue') as AnnotationReference[]
+			assertEquals("HUBBA BUBBA!", annoArray.get(0).getValue('value'))
+			
+			val enum1 = annoRef.getValue('enumValue') as EnumerationValueDeclaration
+			assertEquals('YELLOW', enum1.simpleName)
+			
+			val enumArray = annoRef.getValue('enumArrayValue') as EnumerationValueDeclaration[]
+			assertEquals("YELLOW", enumArray.head.simpleName)
 		]
 	}
 	
@@ -902,13 +1103,12 @@ abstract class AbstractReusableActiveAnnotationTests {
 					override doTransform(List<? extends MutableAnnotationTarget> annotationTargets, extension TransformationContext context) {
 						annotationTargets.forEach [
 							addAnnotation(typeof(MyAnnotation).findTypeGlobally) => [
-								set(null, 'foo','bar','baz')
+								set(null, #['foo','bar','baz'] as String[])
 								set('singleValue', 'foo')
-								set('booleans', true, false, true)
+								set('booleans', #[true, false, true] as boolean[])
 								set('singleBoolean', true)
-ллл								DEACTIVATED because of a compiler bug in Galileo's JDT
-ллл								set('numbers', 1,2,3)
-ллл								set('singleNumber', 1)
+								set('numbers', #[1,2,3] as int[])
+								set('singleNumber', 1)
 							]
 						]
 					}
@@ -919,11 +1119,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 					String singleValue
 					boolean[] booleans
 					boolean singleBoolean
-ллл					CHANGED because of a compiler bug in Galileo's JDT
-ллл					int[] numbers
-ллл					int singleNumber
-					int[] numbers = #[1,2,3]
-					int singleNumber = 1
+					int[] numbers
+					int singleNumber
 				}
 			''',
 			'myusercode/UserCode.xtend' -> '''
@@ -938,7 +1135,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val clazz = typeLookup.findClass('myusercode.MyClass')
 			val annotation = clazz.findAnnotation(
 				typeReferenceProvider.newTypeReference('myannotation.MyAnnotation').type)
-			assertArrayEquals(#['foo', 'bar', 'baz'], annotation.getValue('value') as Object[])
+			assertArrayEquals(#['foo', 'bar', 'baz'] as String[], annotation.getValue('value') as String[])
 			assertEquals('foo', annotation.getValue('singleValue'))
 			val booleans = annotation.getValue('booleans') as boolean[]
 			assertTrue(booleans.get(2))

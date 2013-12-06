@@ -32,7 +32,6 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 	@Inject
 	private IJavaElementFinder javaElementFinder;
 	
-	
 	@Test
 	def testGenerics_1(){
 		val xtendFile = parseHelper.parse('''

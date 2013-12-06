@@ -21,51 +21,26 @@ public interface MutableAnnotationReference extends AnnotationReference, Mutable
 	/**
 	 * Sets the annotation property of the given name
 	 * 
+	 * Depending of the respective annotation type element, the following values are permitted:
+	 * <ul>
+	 * 	<li>Short or short[]</li>
+	 * 	<li>Integer or int[]</li>
+	 * 	<li>Long or long[]</li>
+	 * 	<li>Float or float[]</li>
+	 * 	<li>Double or double[]</li>
+	 * 	<li>Boolean or boolean[]</li>
+	 * 	<li>TypeReference or TypeReference[] - for elements of type Class<?></li>
+	 * 	<li>AnnotationReference or AnnotationReference[] - for elements of an annotation type</li>
+	 * 	<li>EnumerationValueDeclaration or EnumerationValueDeclaration[] - for elements of an enum type</li>
+	 *  <li>Expression - for any element type that matches the given expression's type</li>
+	 *  <li>null - will {@link #remove()} any existing value for the given element name</li>
+	 * </ul>
+	 * 
 	 * @param name
-	 * @param values
-	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code> 
+	 * @param value
+	 * @exception IllegalArgumentException if the value is not valid. See explanation above. 
 	 */
-	void set(String name, String... values);
-	
-	/**
-	 * Sets the annotation property of the given name
-	 * @param name
-	 * @param values
-	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code>
-	 */
-	void set(String name, boolean... values);
-	
-	/**
-	 * Sets the annotation property of the given name
-	 * @param name
-	 * @param values
-	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code>
-	 */
-	void set(String name, int... values);
-	
-	/**
-	 * Sets the annotation property of the given name
-	 * @param name
-	 * @param values
-	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code>
-	 */
-	void set(String name, double... values);
-	
-	/**
-	 * Sets the annotation property of the given name
-	 * @param name
-	 * @param values
-	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code>
-	 */
-	void set(String name, TypeReference... values);
-	
-	/**
-	 * Sets the annotation property of the given name
-	 * @param name
-	 * @param values
-	 * @exception IllegalArgumentException if <code>values</code> is <code>null</code> or contains <code>null</code>
-	 */
-	void set(String name, EnumerationValueDeclaration... values);
+	void set(String name, Object value);
 	
 	/**
 	 * Removes the annotation property with the given name (resets to default if existent).

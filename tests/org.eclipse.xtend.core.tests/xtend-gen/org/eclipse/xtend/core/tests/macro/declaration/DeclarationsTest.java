@@ -153,6 +153,48 @@ public class DeclarationsTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testAnnotation3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@test.Annotation");
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@test.Annotation2 String foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        MutableClassDeclaration _findClass = _typeLookup.findClass("MyClass");
+        Iterable<? extends MutableAnnotationReference> _annotations = _findClass.getAnnotations();
+        final MutableAnnotationReference anno = IterableExtensions.head(_annotations);
+        TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_1 = _typeLookup_1.findClass("MyClass");
+        Iterable<? extends MutableFieldDeclaration> _declaredFields = _findClass_1.getDeclaredFields();
+        MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
+        Iterable<? extends MutableAnnotationReference> _annotations_1 = _head.getAnnotations();
+        final MutableAnnotationReference anno2 = IterableExtensions.head(_annotations_1);
+        anno.set("annotation2Value", anno2);
+        TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_2 = _typeLookup_2.findClass("MyClass");
+        Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = _findClass_2.getDeclaredFields();
+        MutableFieldDeclaration _head_1 = IterableExtensions.head(_declaredFields_1);
+        Iterable<? extends MutableAnnotationReference> _annotations_2 = _head_1.getAnnotations();
+        MutableAnnotationReference _head_2 = IterableExtensions.head(_annotations_2);
+        AnnotationTypeDeclaration _annotationTypeDeclaration = _head_2.getAnnotationTypeDeclaration();
+        Object _value = anno.getValue("annotation2Value");
+        AnnotationTypeDeclaration _annotationTypeDeclaration_1 = ((AnnotationReference) _value).getAnnotationTypeDeclaration();
+        Assert.assertEquals(_annotationTypeDeclaration, _annotationTypeDeclaration_1);
+      }
+    };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
   public void testSimpleClassWithField() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
