@@ -8,6 +8,8 @@
 
 package org.eclipse.xtend.lib.macro.declaration;
 
+import org.eclipse.xtend.lib.macro.expression.Expression;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -41,6 +43,110 @@ public interface MutableAnnotationReference extends AnnotationReference, Mutable
 	 * @exception IllegalArgumentException if the value is not valid. See explanation above. 
 	 */
 	void set(String name, Object value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setIntValue(String name, int... value);
+
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setLongValue(String name, long... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setShortValue(String name, short... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setDoubleValue(String name, double... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setFloatValue(String name, float... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setByteValue(String name, byte... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setBooleanValue(String name, boolean... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setCharValue(String name, char... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setStringValue(String name, String... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setClassValue(String name, TypeReference... value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setEnumValue(String name, EnumerationValueDeclaration... value);
+	
+	/**
+	 * Sets the given expression for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setExpression(String name, Expression value);
+	
+	/**
+	 * Sets the given value for the given annotation element name.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	void setAnnotationValue(String name, AnnotationReference... value);
 	
 	/**
 	 * Removes the annotation property with the given name (resets to default if existent).

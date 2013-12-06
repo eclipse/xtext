@@ -506,4 +506,100 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 		return annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property).defaultValue
 	}
 	
+		override getAnnotationValue(String name) {
+		getValue(name) as AnnotationReference
+	}
+	
+	override getAnnotationArrayValue(String name) {
+		getValue(name) as AnnotationReference[]
+	}
+	
+	override getBooleanArrayValue(String name) {
+		getValue(name) as boolean[]
+	}
+	
+	override getBooleanValue(String name) {
+		getValue(name) as Boolean
+	}
+	
+	override getByteArrayValue(String name) {
+		getValue(name) as byte[]
+	}
+	
+	override getByteValue(String name) {
+		getValue(name) as Byte
+	}
+	
+	override getCharArrayValue(String name) {
+		getValue(name) as char[]
+	}
+	
+	override getCharValue(String name) {
+		getValue(name) as Character
+	}
+	
+	override getClassValue(String name) {
+		getValue(name) as TypeReference
+	}
+	
+	override getClassArrayValue(String name) {
+		getValue(name) as TypeReference[]
+	}
+	
+	override getDoubleArrayValue(String name) {
+		getValue(name) as double[]
+	}
+	
+	override getDoubleValue(String name) {
+		getValue(name) as Double
+	}
+	
+	override getEnumValue(String name) {
+		getValue(name) as EnumerationValueDeclaration
+	}
+	
+	override getEnumArrayValue(String name) {
+		getValue(name) as EnumerationValueDeclaration[]
+	}
+	
+	override getFloatArrayValue(String name) {
+		getValue(name) as float[]
+	}
+	
+	override getFloatValue(String name) {
+		getValue(name) as Float
+	}
+	
+	override getIntArrayValue(String name) {
+		getValue(name) as int[]
+	}
+	
+	override getIntValue(String name) {
+		getValue(name) as Integer
+	}
+	
+	override getLongArrayValue(String name) {
+		getValue(name) as long[]
+	}
+	
+	override getLongValue(String name) {
+		getValue(name) as Long
+	}
+	
+	override getShortArrayValue(String name) {
+		getValue(name) as short[]
+	}
+	
+	override getShortValue(String name) {
+		getValue(name) as Short
+	}
+	
+	override getStringArrayValue(String name) {
+		getValue(name) as String[]
+	}
+	
+	override getStringValue(String name) {
+		getValue(name) as String
+	}
+	
 }
