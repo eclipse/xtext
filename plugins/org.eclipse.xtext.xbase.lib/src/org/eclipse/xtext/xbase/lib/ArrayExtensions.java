@@ -159,15 +159,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(boolean[], boolean[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
@@ -242,15 +242,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(double[], double[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
@@ -325,15 +325,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(float[], float[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
@@ -408,15 +408,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(long[], long[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
@@ -491,15 +491,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(int[], int[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
@@ -574,15 +574,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(char[], char[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
@@ -657,15 +657,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(short[], short[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
@@ -740,15 +740,15 @@ public class ArrayExtensions {
 	}
 	
 	/**
-	 * Returns whether the array and the given other object are equal.
+	 * Returns whether the array and the given other object are identical.
 	 * 
-	 * Delegates to {@link Arrays#equals(byte[], byte[])}
+	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
 	 *            the array
 	 * @param other
 	 *            the other element to compare to
-	 * @return the hash code
+	 * @return whether the two given argument are identical 
 	 * @since 2.5
 	 */
 	@Pure
