@@ -160,6 +160,12 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 		}
 		return false;
 	}
+	
+	public boolean updateStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
+		// nothing to do
+		// structural java changes will be queued in a fine grained fashion by the JavaChangeQueueFiller
+		return false;
+	}
 
 	protected void queueJavaChange(String typeName) {
 		URI typeURI = typeURIHelper.createResourceURIForFQN(typeName);

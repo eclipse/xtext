@@ -37,9 +37,16 @@ public interface IToBeBuiltComputerContribution {
 	void updateProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) throws CoreException;
 	
 	/**
-	 * The storage was removed. Discard associated information.
+	 * The storage was removed. Discard associated information and schedule transitive changes.
+	 * @return <code>true</code> if the storage was processed by the contribution.
 	 */
 	boolean removeStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor);
+	
+	/**
+	 * The storage was updated. Update associated information and schedule transitive changes.
+	 * @return <code>true</code> if the storage was processed by the contribution.
+	 */
+	boolean updateStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor);
 	
 	/**
 	 * Returns <code>true</code> if the given storage is possibly process-able by the builder.
