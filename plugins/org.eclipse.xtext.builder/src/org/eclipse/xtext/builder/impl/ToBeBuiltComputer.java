@@ -52,11 +52,107 @@ public class ToBeBuiltComputer {
 	@Inject
 	private UriValidator uriValidator;
 
-	private ImmutableList<? extends IToBeBuiltComputerContribution> contributions;
+	private IToBeBuiltComputerContribution contribution;
+	
+	public static class NullContribution implements IToBeBuiltComputerContribution {
+
+		public void removeProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) {
+			// nothing to do
+		}
+
+		public void updateProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) throws CoreException {
+			// nothing to do
+		}
+
+		public boolean removeStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
+			return false;
+		}
+
+		public boolean updateStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
+			return false;
+		}
+
+		public boolean isPossiblyHandled(IStorage storage) {
+			return false;
+		}
+
+		public boolean isRejected(IFolder folder) {
+			return false;
+		}
+		
+	}
+	
+	public static class CompositeContribution implements IToBeBuiltComputerContribution {
+
+		private ImmutableList<? extends IToBeBuiltComputerContribution> contributions;
+
+		protected CompositeContribution(ImmutableList<? extends IToBeBuiltComputerContribution> contributions) {
+			this.contributions = contributions;
+		}
+		
+		public void removeProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) {
+			for (int i = 0, size = contributions.size(); i < size; i++) {
+				contributions.get(i).removeProject(toBeBuilt, project, monitor);
+			}
+		}
+
+		public void updateProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) throws CoreException {
+			for (int i = 0; i < contributions.size(); i++) {
+				contributions.get(i).updateProject(toBeBuilt, project, monitor);
+			}
+		}
+
+		public boolean removeStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
+			for (int i = 0; i < contributions.size(); i++) {
+				if (contributions.get(i).removeStorage(toBeBuilt, storage, monitor)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public boolean updateStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
+			for (int i = 0; i < contributions.size(); i++) {
+				if (contributions.get(i).updateStorage(toBeBuilt, storage, monitor)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public boolean isPossiblyHandled(IStorage storage) {
+			boolean result = false;
+			for (int i = 0; i < contributions.size() && !result; i++) {
+				result = contributions.get(i).isPossiblyHandled(storage);
+			}
+			return result;
+		}
+
+		public boolean isRejected(IFolder folder) {
+			for (int i = 0; i < contributions.size(); i++) {
+				if (contributions.get(i).isRejected(folder)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+	}
 
 	@Inject
 	private void initializeContributions(ISharedStateContributionRegistry registry) {
-		contributions = registry.getContributedInstances(IToBeBuiltComputerContribution.class);
+		contribution = getContribution(registry.getContributedInstances(IToBeBuiltComputerContribution.class));
+	}
+
+	private IToBeBuiltComputerContribution getContribution(ImmutableList<? extends IToBeBuiltComputerContribution> contributedInstances) {
+		switch(contributedInstances.size()) {
+			case 0:
+				return new NullContribution();
+			case 1:
+				return contributedInstances.get(0);
+			default:
+				return new CompositeContribution(contributedInstances);
+		}
 	}
 
 	/**
@@ -67,9 +163,7 @@ public class ToBeBuiltComputer {
 	 */
 	public ToBeBuilt removeProject(IProject project, IProgressMonitor monitor) {
 		ToBeBuilt toBeBuilt = doRemoveProject(project, monitor);
-		for (int i = 0, size = contributions.size(); i < size; i++) {
-			contributions.get(i).removeProject(toBeBuilt, project, monitor);
-		}
+		contribution.removeProject(toBeBuilt, project, monitor);
 		return toBeBuilt;
 	}
 
@@ -144,9 +238,7 @@ public class ToBeBuiltComputer {
 				return true;
 			}
 		});
-		for (int i = 0; i < contributions.size(); i++) {
-			contributions.get(i).updateProject(toBeBuilt, project, monitor);
-		}
+		contribution.updateProject(toBeBuilt, project, monitor);
 		return toBeBuilt;
 	}
 
@@ -158,6 +250,9 @@ public class ToBeBuiltComputer {
 	 * @see #getUri(IStorage)
 	 */
 	public boolean updateStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
+		if (contribution.updateStorage(toBeBuilt, storage, monitor)) {
+			return true;
+		}
 		if (!isHandled(storage))
 			return true;
 		URI uri = getUri(storage);
@@ -174,10 +269,8 @@ public class ToBeBuiltComputer {
 	 * @see IToBeBuiltComputerContribution#removeStorage(ToBeBuilt, IStorage, IProgressMonitor)
 	 */
 	public boolean removeStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
-		for (int i = 0; i < contributions.size(); i++) {
-			if (contributions.get(i).removeStorage(toBeBuilt, storage, monitor)) {
-				return true;
-			}
+		if (contribution.removeStorage(toBeBuilt, storage, monitor)) {
+			return true;
 		}
 		if (!isHandled(storage))
 			return true;
@@ -197,10 +290,7 @@ public class ToBeBuiltComputer {
 	 * @see IToBeBuiltComputerContribution#isPossiblyHandled(IStorage)
 	 */
 	protected boolean isHandled(IStorage storage) {
-		boolean possiblyManaged = false;
-		for (int i = 0; i < contributions.size() && !possiblyManaged; i++) {
-			possiblyManaged = contributions.get(i).isPossiblyHandled(storage);
-		}
+		boolean possiblyManaged = contribution.isPossiblyHandled(storage);
 		if ((possiblyManaged || storage instanceof IFile) && uriValidator.isPossiblyManaged(storage)) {
 			return true;
 		}
@@ -216,12 +306,7 @@ public class ToBeBuiltComputer {
 	 * @since 2.1
 	 */
 	protected boolean isHandled(IFolder folder) {
-		for (int i = 0; i < contributions.size(); i++) {
-			if (contributions.get(i).isRejected(folder)) {
-				return false;
-			}
-		}
-		return true;
+		return !contribution.isRejected(folder);
 	}
 
 	/**
