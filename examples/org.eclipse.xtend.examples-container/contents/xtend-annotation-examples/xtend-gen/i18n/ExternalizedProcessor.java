@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
@@ -105,7 +104,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
             it.setReturnType(_string);
             it.setDocComment(initializer);
             it.setStatic(true);
-            final List<MutableParameterDeclaration> params = it.getParameters();
+            final Iterable<? extends MutableParameterDeclaration> params = it.getParameters();
             final CompilationStrategy _function_1 = new CompilationStrategy() {
               public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
@@ -133,7 +132,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                         return _simpleName;
                       }
                     };
-                    List<String> _map = ListExtensions.<MutableParameterDeclaration, String>map(params, _function);
+                    Iterable<String> _map = IterableExtensions.map(params, _function);
                     String _join = IterableExtensions.join(_map, ",");
                     _builder.append(_join, "\t");
                     _builder.append(");");

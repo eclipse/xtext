@@ -388,8 +388,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         TypeReference _type_2 = _head_8.getType();
         String _string_3 = _type_2.toString();
         Assert.assertEquals("T2", _string_3);
-        Iterable<MutableTypeParameterDeclaration> _typeParameters_3 = genMethod.getTypeParameters();
-        MutableTypeParameterDeclaration _head_9 = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters_3);
+        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters_3 = genMethod.getTypeParameters();
+        MutableTypeParameterDeclaration _head_9 = IterableExtensions.head(_typeParameters_3);
         Iterable<? extends ParameterDeclaration> _parameters_4 = method.getParameters();
         ParameterDeclaration _head_10 = IterableExtensions.head(_parameters_4);
         TypeReference _type_3 = _head_10.getType();
@@ -400,8 +400,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         TypeReference _type_5 = _get.getType();
         String _string_4 = _type_5.toString();
         Assert.assertEquals("T", _string_4);
-        Iterable<MutableTypeParameterDeclaration> _typeParameters_4 = genClazz.getTypeParameters();
-        MutableTypeParameterDeclaration _head_11 = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters_4);
+        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters_4 = genClazz.getTypeParameters();
+        MutableTypeParameterDeclaration _head_11 = IterableExtensions.head(_typeParameters_4);
         Iterable<? extends ParameterDeclaration> _parameters_6 = method.getParameters();
         ParameterDeclaration _get_1 = ((ParameterDeclaration[])Conversions.unwrapArray(_parameters_6, ParameterDeclaration.class))[1];
         TypeReference _type_6 = _get_1.getType();

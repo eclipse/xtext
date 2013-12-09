@@ -14,7 +14,8 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface MutableTypeParameterDeclarator extends MutableMemberDeclaration, TypeParameterDeclarator {
-	public Iterable<MutableTypeParameterDeclaration> getTypeParameters();
+	
+	Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters();
 
 	/**
 	 * Creates and adds a new {@link MutableTypeParameterDeclaration} to this

@@ -127,7 +127,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
   }
   
-  public Iterable<MutableTypeParameterDeclaration> getTypeParameters() {
+  public Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
@@ -272,14 +272,14 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
           if (!_equals) {
             _and = false;
           } else {
-            List<MutableParameterDeclaration> _parameters = it.getParameters();
+            Iterable<? extends MutableParameterDeclaration> _parameters = it.getParameters();
             final Function1<MutableParameterDeclaration,TypeReference> _function = new Function1<MutableParameterDeclaration,TypeReference>() {
               public TypeReference apply(final MutableParameterDeclaration it) {
                 TypeReference _type = it.getType();
                 return _type;
               }
             };
-            List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
+            Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
             List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
             boolean _equals_1 = Objects.equal(_list, _list_1);

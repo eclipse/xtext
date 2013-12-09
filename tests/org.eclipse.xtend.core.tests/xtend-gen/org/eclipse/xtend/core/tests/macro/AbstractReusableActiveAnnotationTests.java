@@ -1074,11 +1074,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
           public void apply(final MutableTypeParameterDeclarator it) {
-            Iterable<MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
+            Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
             int _size = IterableExtensions.size(_typeParameters);
             Assert.assertEquals(1, _size);
-            Iterable<MutableTypeParameterDeclaration> _typeParameters_1 = it.getTypeParameters();
-            final MutableTypeParameterDeclaration typeParameter = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters_1);
+            Iterable<? extends MutableTypeParameterDeclaration> _typeParameters_1 = it.getTypeParameters();
+            final MutableTypeParameterDeclaration typeParameter = IterableExtensions.head(_typeParameters_1);
             String _simpleName = typeParameter.getSimpleName();
             Assert.assertEquals("T", _simpleName);
             Iterable<? extends TypeReference> _upperBounds = typeParameter.getUpperBounds();
@@ -1200,7 +1200,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
           public void apply(final MutableTypeParameterDeclarator it) {
-            Iterable<MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
+            Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
             int _size = IterableExtensions.size(_typeParameters);
             Assert.assertEquals(0, _size);
           }
@@ -1312,11 +1312,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
           public void apply(final MutableTypeParameterDeclarator it) {
-            Iterable<MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
+            Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
             int _size = IterableExtensions.size(_typeParameters);
             Assert.assertEquals(1, _size);
-            Iterable<MutableTypeParameterDeclaration> _typeParameters_1 = it.getTypeParameters();
-            final MutableTypeParameterDeclaration typeParameter = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters_1);
+            Iterable<? extends MutableTypeParameterDeclaration> _typeParameters_1 = it.getTypeParameters();
+            final MutableTypeParameterDeclaration typeParameter = IterableExtensions.head(_typeParameters_1);
             Iterable<? extends TypeReference> _upperBounds = typeParameter.getUpperBounds();
             int _size_1 = IterableExtensions.size(_upperBounds);
             Assert.assertEquals(1, _size_1);
@@ -1535,8 +1535,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Assert.assertEquals(1, _size);
         Iterable<? extends MutableConstructorDeclaration> _declaredConstructors_1 = clazz.getDeclaredConstructors();
         MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors_1);
-        List<MutableParameterDeclaration> _parameters = _head.getParameters();
-        MutableParameterDeclaration _head_1 = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
+        Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
+        MutableParameterDeclaration _head_1 = IterableExtensions.head(_parameters);
         String _simpleName = _head_1.getSimpleName();
         Assert.assertEquals("foo", _simpleName);
       }
@@ -1607,8 +1607,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Assert.assertEquals(1, _size);
         Iterable<? extends MutableConstructorDeclaration> _declaredConstructors_1 = clazz.getDeclaredConstructors();
         MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors_1);
-        List<MutableParameterDeclaration> _parameters = _head.getParameters();
-        boolean _isEmpty = _parameters.isEmpty();
+        Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
+        boolean _isEmpty = IterableExtensions.isEmpty(_parameters);
         Assert.assertTrue(_isEmpty);
       }
     };
@@ -1682,8 +1682,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Assert.assertEquals(1, _size);
         Iterable<? extends MutableConstructorDeclaration> _declaredConstructors_1 = clazz.getDeclaredConstructors();
         MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors_1);
-        List<MutableParameterDeclaration> _parameters = _head.getParameters();
-        boolean _isEmpty = _parameters.isEmpty();
+        Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
+        boolean _isEmpty = IterableExtensions.isEmpty(_parameters);
         Assert.assertTrue(_isEmpty);
       }
     };
@@ -1977,7 +1977,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
         Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
         MutableMethodDeclaration _head = IterableExtensions.head(_declaredMethods);
-        List<MutableParameterDeclaration> _parameters = _head.getParameters();
+        Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
         final Function1<MutableParameterDeclaration,Boolean> _function = new Function1<MutableParameterDeclaration,Boolean>() {
           public Boolean apply(final MutableParameterDeclaration it) {
             String _simpleName = it.getSimpleName();
@@ -1985,7 +1985,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
             return Boolean.valueOf(_endsWith);
           }
         };
-        boolean _forall = IterableExtensions.<MutableParameterDeclaration>forall(_parameters, _function);
+        boolean _forall = IterableExtensions.forall(_parameters, _function);
         Assert.assertTrue(_forall);
       }
     };
@@ -2117,8 +2117,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final MutableClassDeclaration clazz2 = _typeLookup_1.findClass("application.MyClient");
         Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz2.getDeclaredMethods();
         MutableMethodDeclaration _head_1 = IterableExtensions.head(_declaredMethods);
-        List<MutableParameterDeclaration> _parameters = _head_1.getParameters();
-        MutableParameterDeclaration _head_2 = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
+        Iterable<? extends MutableParameterDeclaration> _parameters = _head_1.getParameters();
+        MutableParameterDeclaration _head_2 = IterableExtensions.head(_parameters);
         String _simpleName_1 = _head_2.getSimpleName();
         Assert.assertEquals("FOO", _simpleName_1);
       }
@@ -2461,12 +2461,12 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TypeReference _returnType_2 = setter.getReturnType();
         String _string_1 = _returnType_2.toString();
         Assert.assertEquals("void", _string_1);
-        List<MutableParameterDeclaration> _parameters = setter.getParameters();
-        MutableParameterDeclaration _head = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
+        Iterable<? extends MutableParameterDeclaration> _parameters = setter.getParameters();
+        MutableParameterDeclaration _head = IterableExtensions.head(_parameters);
         String _simpleName_2 = _head.getSimpleName();
         Assert.assertEquals("myField", _simpleName_2);
-        List<MutableParameterDeclaration> _parameters_1 = setter.getParameters();
-        MutableParameterDeclaration _head_1 = IterableExtensions.<MutableParameterDeclaration>head(_parameters_1);
+        Iterable<? extends MutableParameterDeclaration> _parameters_1 = setter.getParameters();
+        MutableParameterDeclaration _head_1 = IterableExtensions.head(_parameters_1);
         TypeReference _type = _head_1.getType();
         String _string_2 = _type.toString();
         Assert.assertEquals("String", _string_2);
@@ -2550,18 +2550,18 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
         Iterable<? extends MutableMethodDeclaration> _declaredMethods = type.getDeclaredMethods();
         final MutableMethodDeclaration method = IterableExtensions.head(_declaredMethods);
-        Iterable<MutableTypeParameterDeclaration> _typeParameters = method.getTypeParameters();
-        MutableTypeParameterDeclaration _head = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters);
+        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = method.getTypeParameters();
+        MutableTypeParameterDeclaration _head = IterableExtensions.head(_typeParameters);
         String _simpleName = _head.getSimpleName();
         Assert.assertEquals("A", _simpleName);
-        List<MutableParameterDeclaration> _parameters = method.getParameters();
-        MutableParameterDeclaration _head_1 = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
+        Iterable<? extends MutableParameterDeclaration> _parameters = method.getParameters();
+        MutableParameterDeclaration _head_1 = IterableExtensions.head(_parameters);
         String _simpleName_1 = _head_1.getSimpleName();
         Assert.assertEquals("myParam", _simpleName_1);
-        Iterable<MutableTypeParameterDeclaration> _typeParameters_1 = method.getTypeParameters();
-        MutableTypeParameterDeclaration _head_2 = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters_1);
-        List<MutableParameterDeclaration> _parameters_1 = method.getParameters();
-        MutableParameterDeclaration _head_3 = IterableExtensions.<MutableParameterDeclaration>head(_parameters_1);
+        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters_1 = method.getTypeParameters();
+        MutableTypeParameterDeclaration _head_2 = IterableExtensions.head(_typeParameters_1);
+        Iterable<? extends MutableParameterDeclaration> _parameters_1 = method.getParameters();
+        MutableParameterDeclaration _head_3 = IterableExtensions.head(_parameters_1);
         TypeReference _type = _head_3.getType();
         Type _type_1 = _type.getType();
         Assert.assertSame(_head_2, _type_1);

@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 
@@ -19,7 +17,8 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface MutableExecutableDeclaration extends MutableTypeParameterDeclarator, ExecutableDeclaration {
-	public List<MutableParameterDeclaration> getParameters();
+	
+	Iterable<? extends MutableParameterDeclaration> getParameters();
 	
 	/**
 	 * @param isVarArgs whether the last argument is a var arg.

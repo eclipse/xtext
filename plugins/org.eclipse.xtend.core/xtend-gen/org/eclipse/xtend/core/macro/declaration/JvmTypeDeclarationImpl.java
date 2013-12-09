@@ -166,14 +166,14 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
       Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
       final Function1<MutableConstructorDeclaration,Boolean> _function = new Function1<MutableConstructorDeclaration,Boolean>() {
         public Boolean apply(final MutableConstructorDeclaration constructor) {
-          List<MutableParameterDeclaration> _parameters = constructor.getParameters();
+          Iterable<? extends MutableParameterDeclaration> _parameters = constructor.getParameters();
           final Function1<MutableParameterDeclaration,TypeReference> _function = new Function1<MutableParameterDeclaration,TypeReference>() {
             public TypeReference apply(final MutableParameterDeclaration it) {
               TypeReference _type = it.getType();
               return _type;
             }
           };
-          List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
+          Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
           List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
           List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
           boolean _equals = Objects.equal(_list, _list_1);
@@ -212,14 +212,14 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
           if (!_equals) {
             _and = false;
           } else {
-            List<MutableParameterDeclaration> _parameters = method.getParameters();
+            Iterable<? extends MutableParameterDeclaration> _parameters = method.getParameters();
             final Function1<MutableParameterDeclaration,TypeReference> _function = new Function1<MutableParameterDeclaration,TypeReference>() {
               public TypeReference apply(final MutableParameterDeclaration it) {
                 TypeReference _type = it.getType();
                 return _type;
               }
             };
-            List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
+            Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
             List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
             boolean _equals_1 = Objects.equal(_list, _list_1);

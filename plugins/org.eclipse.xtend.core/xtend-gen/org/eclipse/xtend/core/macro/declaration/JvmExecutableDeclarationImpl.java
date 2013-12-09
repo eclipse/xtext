@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends JvmMemberDeclarationImpl<T> implements MutableExecutableDeclaration {
-  public Iterable<MutableTypeParameterDeclaration> getTypeParameters() {
+  public Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
     T _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
@@ -57,7 +57,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     return _isVarArgs;
   }
   
-  public List<MutableParameterDeclaration> getParameters() {
+  public Iterable<? extends MutableParameterDeclaration> getParameters() {
     T _delegate = this.getDelegate();
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
     final Function1<JvmFormalParameter,MutableParameterDeclaration> _function = new Function1<JvmFormalParameter,MutableParameterDeclaration>() {

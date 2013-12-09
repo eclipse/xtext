@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import java.util.Collections;
-import java.util.List;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -58,7 +57,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
             it.setDocComment(_docComment);
             TypeReference _returnType = method.getReturnType();
             it.setReturnType(_returnType);
-            List<MutableParameterDeclaration> _parameters = method.getParameters();
+            Iterable<? extends MutableParameterDeclaration> _parameters = method.getParameters();
             for (final MutableParameterDeclaration p : _parameters) {
               String _simpleName = p.getSimpleName();
               TypeReference _type = p.getType();
