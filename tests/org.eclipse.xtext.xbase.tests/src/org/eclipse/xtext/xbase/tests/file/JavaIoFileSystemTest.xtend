@@ -39,6 +39,7 @@ class JavaIoFileSystemTest {
 			]]
 			encodingProvider = new IEncodingProvider.Runtime()
 		]
+		new Path("/foo").mkdir
 	}
 	
 	@Test def void testMakeandDeleteFolder() {
@@ -82,4 +83,43 @@ class JavaIoFileSystemTest {
 		assertTrue(mod < path.lastModification)
 	}
 	
+	@Test def void testGetWorkspaceChildren() {
+		assertEquals(1, Path.ROOT.children.size)
+		
+		assertTrue(new Path("/bar").mkdir)
+		
+		assertEquals(2, Path.ROOT.children.size)
+	}
+	
+	@Test def void testGetProjectChildren() {
+		val projectFolder = new Path('/foo')
+		assertTrue(projectFolder.exists)
+		val expectedChildrenSize = projectFolder.children.size + 1
+		
+		new Path("/foo/Foo.text").contents = "Hello Foo"
+		assertEquals(expectedChildrenSize, projectFolder.children.size)
+	}
+	
+	@Test def void testGetFolderChildren() {
+		val folder = new Path('/foo/bar')
+		assertFalse(folder.exists)
+		
+		folder.mkdir
+		assertTrue(folder.exists)
+		assertEquals(0, folder.children.size)
+		
+		new Path("/foo/bar/Foo.text").contents = "Hello Foo"
+		assertEquals(1, folder.children.size)
+	}
+	
+	@Test def void testGetFileChildren() {
+		val file = new Path("/foo/bar/Foo.text")
+		assertFalse(file.exists)
+		assertEquals(0, file.children.size)
+		 
+		file.contents = "Hello Foo"
+		assertTrue(file.exists)
+		assertEquals(0, file.children.size)
+	}
+
 }

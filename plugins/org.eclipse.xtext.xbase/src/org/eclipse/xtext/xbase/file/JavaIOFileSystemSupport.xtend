@@ -28,6 +28,12 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	@Inject @Property Provider<WorkspaceConfig> projectInformationProvider
 	
 	override Iterable<? extends Path> getChildren(Path path) {
+		if (!path.exists) {
+			return emptyList
+		}
+		if (path.file) {
+			return emptyList
+		}
 		path.javaIOFile.list.map[path.getAbsolutePath(it)]
 	}
 
