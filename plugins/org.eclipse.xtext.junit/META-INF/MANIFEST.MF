@@ -7,10 +7,12 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtend;bundle-version="1.1.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext;bundle-version="2.5.0";resolution:=optional;x-installation:=greedy,
- org.junit;bundle-version="[3.0.0,4.0.0)";resolution:=optional;x-installation:=greedy;visibility:=reexport,
- org.eclipse.xtend.typesystem.emf;bundle-version="1.0.1";resolution:=optional;x-installation:=greedy
+ org.eclipse.xtend.typesystem.emf;bundle-version="1.0.1";resolution:=optional;x-installation:=greedy,
+ org.junit;bundle-version="[3.8.0,4.0.0)";resolution:=optional;visibility:=reexport
 Export-Package: org.eclipse.xtext.junit,
  org.eclipse.xtext.junit.serializer,
  org.eclipse.xtext.junit.util,
  org.eclipse.xtext.junit.validation
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: junit.framework,
+ org.apache.log4j;version="1.2.15"
+

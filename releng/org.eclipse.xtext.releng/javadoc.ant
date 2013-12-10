@@ -1,12 +1,12 @@
 <project name="javadoc-project">
 	<target name="create.javadoc">
-
+		<buckminster.targetPlatformLocation property="target.platform.location" />
 		<property name="projectName" value="Xtext" />
 
 		<!-- workspace default properties -->
 		<property name="output" value="./javadoc" />
 		<property name="checkoutLocation" value="../.." />
-		<property name="targetPlatform" value="${eclipse.home}" />
+		<property name="targetPlatform" value="${target.platform.location}" />
 
 		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
 		<condition property="build.stable" value="yes">
@@ -26,7 +26,7 @@
 		<echo message="Build id ${build.id}" />
 		<echo message="Build stable? ${build.stable}" />
 		<echo message="Force javadoc generation? ${force.javadoc}" />
-		<echo message="Skip javadoc generation? ${skip.javadoc}" />
+		<echo message="Do javadoc generation unless: ${skip.javadoc} is set." />
 		<antcall target="-generate.javadoc" inheritall="true" />
 	</target>
 
