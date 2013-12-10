@@ -2,6 +2,7 @@
 file_export_version=3.0
 /instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources=false
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
+/instance/org.eclipse.debug.ui/org.eclipse.debug.ui.build_before_launch=false
 /instance/org.eclipse.pde.api.tools/MISSING_EE_DESCRIPTIONS=Ignore
 /instance/org.eclipse.pde.api.tools/INVALID_REFERENCE_IN_SYSTEM_LIBRARIES=Error
 \!/=
