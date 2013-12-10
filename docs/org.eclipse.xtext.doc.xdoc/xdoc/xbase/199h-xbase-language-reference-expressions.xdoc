@@ -2,7 +2,7 @@ section2:xbaseLanguageRef_Expressions[Expressions]
 
 Expressions are the main language constructs which are used to express behavior and compute values. The concept of 
 statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
-be helpful. An expression always results in a value (it might be the value code[Xbase][null] though). In addition, every resolved expression is
+be helpful. An expression always results in a value (it might be the value code[Xbase][null] or of type code[Xbase][void] though). In addition, every resolved expression is
 of a static type.
 
 section3:Xbase_Expressions_Literals[Literals]
@@ -98,7 +98,7 @@ ul[
 
 Consequently it is possible to access the members of a type reflectively by using its plain name code[Xbase][String.getDeclaredFields].
 
-Older versions of Xbase used the dollar as the delimiter character for nested types:
+Previous versions of Xbase used the dollar as the delimiter character for nested types:
 
 ul[
   item[code[Xbase][typeof(Map$Entry)] yields code[Java][Map.Entry.class]]
@@ -294,10 +294,14 @@ section4:Xbase_Expressions_staticFeatureCalls[Static Feature Calls]
 
 Static feature calls use the same notation as in Java, e.g. it is possible write code[Xbase][Collections.emptyList()]
 in Xbase. To make the static invocation more explicit, the double colon can be used as the delimiter.
-The following snippet is fully equivalent to the previous example:
+The following snippets are fully equivalent:
 
 code[Xbase][
    java.util.Collections::emptyList
+]
+
+code[Xbase][
+   java.util.Collections.emptyList
 ]
 
 Prior to Xbase 2.4.2, this more verbose variant was the only supported syntax to invoke static methods:
@@ -484,7 +488,10 @@ like Java's ternary operator (code[Java][predicate ? thenPart : elsePart]), i.e.
 if expressions deeply nested within other expressions.
 
 An expression code[Xbase][if (p) e1 else e2] results in either the value code[e1] or code[e2] depending on whether the predicate code[p] 
-evaluates to code[Xbase][true] or code[Xbase][false]. The else part is optional which is a shorthand for code[Xbase][else null].
+evaluates to code[Xbase][true] or code[Xbase][false]. The else part is optional which is a shorthand for a default value, e.g code[Xbase][else null]
+if the type of the code[Xbase][if] expression is a reference type. If the type is a primitive type, its default
+value is assumed accordingly, e.g. code[Xbase][else false] for code[Xbase][boolean] or code[Xbase][else 1] for numbers. 
+
 That means 
 
 code[Xbase][
@@ -499,8 +506,9 @@ code[Xbase][
 
 section4:Xbase_Expressions_IfTypeInference[Typing]
 
-The type of an if expression is calculated by the return types code[T1] and code[T2] of the two expression code[e1] and code[e2].
-It uses the rules defined in ref:Xbase_Types_CommonSuperType.
+The type of an code[Xbase][if] expression is calculated from the types code[T1] and code[T2] of the two expression code[e1] and code[e2].
+It uses the rules defined in ref:Xbase_Types_CommonSuperType, if an explicit code[Xbase][else] branch is given. If it is ommitted,
+the type of the code[Xbase][if] expression is the type code[T] of the expression code[e] of the form code[Xbase][if (b) e].
 
 section4[Examples]
 
@@ -535,7 +543,7 @@ expression evaluates to code[Xbase][true].
 Then the right hand expression of the case evaluated and the result is returned.
 
 If none of the guards matches the default expression is evaluated and returned. If no default expression
-is specified the expression evaluates to code[Xbase][null].
+is specified the expression evaluates to the default value of the common type of all available case expressions. 
 
 Example:
 
@@ -561,7 +569,7 @@ switch x {
 }
 ]
 
-Only if the switch value passes a type guard, i.e. an instanceof operation returns code[Xbase][true], the case's guard expression is executed
+Only if the switch value passes a type guard, i.e. an code[Xbase][instanceof] test succeeds, the case's guard expression is executed
 using the same semantics as explained above. 
 If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
 the type guard works like an automated cast. All subsequent references to the switch value will be of the type specified in the type guard,
@@ -569,11 +577,9 @@ unless it is reassigned to a new value.
 
 section4[Typing]
 
-The return type of a switch expression is computed using the rules defined in the
+The type of a switch expression is computed using the rules defined in the
 section on ref:Xbase_Types_CommonSuperType[common super types]. The set of types from which the common 
-super type is computed corresponds to the types of each case's result expression. If a switch expression's
-type is computed using the expected type from the context, it is sufficient to return the expected type if all 
-case branches types conform to the expected type.
+super type is computed corresponds to the types of each case expression.
 
 section4[Examples]
 
@@ -627,7 +633,7 @@ the lambda expression.
 
 section4[Typing]
 
-The return type of a variable declaration expression is always code[Xbase][void]. 
+The type of a variable declaration expression is always code[Xbase][void]. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 Here is an example for an explicitly declared type:
 code[Xbase][
@@ -643,7 +649,7 @@ code[Xbase][
 section3:Xbase_Expressions_Blocks[Blocks]
 
 The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
-The return type of a block is also the type of the last expression. Empty blocks return code[Xbase][null]. 
+The type of a block is also the type of the last expression. Empty blocks return code[Xbase][null]. 
 ref:Xbase_Expressions_VariableDeclaration[Variable declarations] are only allowed within blocks and cannot be used as a block's last expression.
 
 A block expression is surrounded by curly braces and contains at least one expression.
@@ -674,9 +680,9 @@ The for loop code[Xbase][for (T1 variable : iterableOfT1) expression] is used to
 array of an instance of codeRef[java.lang.Iterable].
 The local code[variable] is final, hence cannot be updated. 
 
-The return type of a for loop is code[Xbase][void].
-The type of the local variable can be left out. In that case it is inferred from the type of the array
-or codeRef[java.lang.Iterable] returned by the iterable expression.
+The type of a for loop is code[Xbase][void].
+The type of the local variable can optionally be inferred from the type of the array
+or the element type of the codeRef[java.lang.Iterable] returned by the iterable expression.
 
 ul[
   item[
@@ -698,7 +704,7 @@ ul[
 section3:Xbase_Expressions_WhileExpression[While Loop]
 
 A while loop code[Xbase][while (predicate) expression] is used to execute a certain expression unless the predicate is evaluated to code[Xbase][false].
-The return type of a while loop is code[Xbase][void].
+The type of a while loop is code[Xbase][void].
 
 section4[Examples]
 
@@ -718,7 +724,7 @@ section3:Xbase_Expressions_DoWhileExpression[Do-While Loop]
 
 A do-while loop code[Xbase][do expression while (predicate)] is used to execute a certain expression until the predicate is evaluated to code[Xbase][false].
 The difference to the ref:Xbase_Expressions_WhileExpression[while loop] is that the execution starts by executing the block once before evaluating the predicate for the first time.
-The return type of a do-while loop is code[Xbase][void].
+The type of a do-while loop is code[Xbase][void].
 
 section4[Examples]
 
@@ -749,7 +755,7 @@ code[Xbase][
 
 section3:Xbase_Expressions_Throw[Throwing Exceptions]
 
-Like in Java it is possible to throw codeRef[java.lang.Throwable]. The syntax is exactly the same as in Java.
+It is possible to throw codeRef[java.lang.Throwable]. The syntax is exactly the same as in Java.
 
 code[Xbase][
 {
@@ -766,7 +772,6 @@ The try-catch-finally expression is used to handle exceptional situations.
 You are not forced to declare checked exceptions. If you don't catch checked exceptions, they are thrown in a way the compiler
 does not complain about a missing throws clause, using the sneaky-throw technique introduced by 
 link[http://projectlombok.org/features/SneakyThrows.html][Lombok].
-The syntax again is the same known from Java.
 
 code[Xbase][
   try {

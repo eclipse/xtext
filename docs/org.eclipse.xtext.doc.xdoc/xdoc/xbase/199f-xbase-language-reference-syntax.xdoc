@@ -23,7 +23,7 @@ section4[Syntax]
 
 code[Xtext][
 terminal ID: 
-  '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+  '^'? ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9')*
 ;
 ]
 
@@ -35,6 +35,7 @@ ul[
   item[code[FOO]]
   item[code[_42]]
   item[code[_foo]]
+  item[code[$$foo$$]]
   item[code[^extends]]
 ]
 
