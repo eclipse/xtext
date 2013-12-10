@@ -14,6 +14,9 @@ import org.eclipse.core.resources.IFolder
 import org.eclipse.core.resources.IWorkspaceRoot
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
+import com.google.common.base.Preconditions
+import org.eclipse.core.resources.IContainer
+import org.eclipse.core.resources.IProject
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -32,6 +35,21 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		workspaceRoot.getFolder(new org.eclipse.core.runtime.Path(path.toString))
 	}
 	
+	protected def IContainer getEclipseContainer(Path path) {
+		Preconditions.checkState(path.absolute, '''The given path has to be absolute: '«path»'.''')
+		switch segments : path.segments {
+			case segments.size == 0: {
+				workspaceRoot
+			}
+			case segments.size == 1: {
+				workspaceRoot.getProject(path.segments.head)	
+			}
+			default: {
+				workspaceRoot.getFolder(new org.eclipse.core.runtime.Path(path.toString))
+			}
+		}
+	}
+	
 	protected def findResource(Path path) {
 		workspaceRoot.findMember(new org.eclipse.core.runtime.Path(path.toString))
 	}
@@ -41,7 +59,11 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	}
 
 	override Iterable<? extends Path> getChildren(Path path) {
-		path.eclipseFolder.members.map[new Path(fullPath.toString)]
+		val container = path.eclipseContainer
+		if (!container.exists) {
+			return emptyList
+		} 
+		container.members.map[new Path(fullPath.toString)]
 	}
 
 	override boolean exists(Path path) {
@@ -49,7 +71,7 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	}
 
 	override boolean isFolder(Path path) {
-		path.findResource instanceof IFolder
+		path.findResource instanceof IContainer
 	}
 
 	override boolean isFile(Path path) {
@@ -64,7 +86,7 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		if (path.isFile) {
 			return path.eclipseFile.charset
 		} else if (path.isFolder) {
-			return path.eclipseFolder.defaultCharset
+			return path.eclipseContainer.defaultCharset
 		} else {
 			return path.parent.getCharset
 		}
@@ -88,8 +110,18 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		if (!path.parent.exists) {
 			path.parent.mkdir
 		}
-		path.eclipseFolder.create(true, true, null)
-		return true;
+		switch container : path.eclipseContainer {
+			IFolder: {
+				container.create(true, true, null)
+				true
+			}
+			IProject: {
+				container.create(null)
+				true
+			}
+			default: 
+				false
+		}
 	}
 	
 	override setContentsAsStream(Path path, InputStream stream) {
