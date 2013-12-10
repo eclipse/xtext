@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
@@ -94,13 +95,29 @@ public class ActiveAnnotationContextProvider {
                 }
                 fa.setProcessorInstance(processorInstance);
               } catch (final Throwable _t) {
-                if (_t instanceof IllegalStateException) {
-                  final IllegalStateException e = (IllegalStateException)_t;
+                if (_t instanceof VirtualMachineError) {
+                  final VirtualMachineError e = (VirtualMachineError)_t;
+                } else if (_t instanceof Throwable) {
+                  final Throwable e_1 = (Throwable)_t;
+                  Serializable _switchResult = null;
+                  boolean _matched = false;
+                  if (!_matched) {
+                    if (e_1 instanceof ExceptionInInitializerError) {
+                      _matched=true;
+                      Throwable _exception = ((ExceptionInInitializerError)e_1).getException();
+                      _switchResult = _exception;
+                    }
+                  }
+                  if (!_matched) {
+                    String _message = e_1.getMessage();
+                    _switchResult = _message;
+                  }
+                  final Serializable msg = _switchResult;
                   Resource _eResource = file.eResource();
                   EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-                  String _message = e.getMessage();
+                  XAnnotation _value = it.getValue();
                   EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
-                    IssueCodes.PROCESSING_ERROR, _message, file, null, (-1), null);
+                    IssueCodes.PROCESSING_ERROR, ("Problem during loading of annotation processor class: " + msg), _value, null, (-1), null);
                   _errors.add(_eObjectDiagnosticImpl);
                 } else {
                   throw Exceptions.sneakyThrow(_t);
@@ -114,8 +131,8 @@ public class ActiveAnnotationContextProvider {
             JvmAnnotationType _key_3 = it.getKey();
             ActiveAnnotationContext _get = _contexts_2.get(_key_3);
             List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
-            XAnnotation _value = it.getValue();
-            XtendAnnotationTarget _annotatedTarget = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getAnnotatedTarget(_value);
+            XAnnotation _value_1 = it.getValue();
+            XtendAnnotationTarget _annotatedTarget = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getAnnotatedTarget(_value_1);
             _annotatedSourceElements.add(_annotatedTarget);
           }
         };

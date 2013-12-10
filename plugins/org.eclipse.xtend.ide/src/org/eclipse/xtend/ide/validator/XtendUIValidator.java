@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.validator;
 
+import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
@@ -21,15 +22,22 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
+import org.eclipse.xtend.core.macro.XAnnotationExtensions;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
 
 import com.google.inject.Inject;
@@ -46,11 +54,27 @@ public class XtendUIValidator extends XbaseUIValidator {
 	@Inject 
 	private IStorage2UriMapper storage2UriMapper;
 	
+	@Inject private XAnnotationExtensions annotationExtensions;
+	@Inject private IJavaProjectProvider projectProvider;
+	
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> packages = super.getEPackages();
 		packages.add(XtendPackage.eINSTANCE);
+		packages.add(XAnnotationsPackage.eINSTANCE);
 		return packages;
+	}
+	
+	@Check
+	protected void checkAnnotationInSameProject(XAnnotation annotation) throws JavaModelException {
+		if (annotationExtensions.isProcessed(annotation)) {
+			JvmType annotationType = annotation.getAnnotationType();
+			IJavaProject project = projectProvider.getJavaProject(annotation.eResource().getResourceSet());
+			IType type = project.findType(annotationType.getIdentifier());
+			if (type.getJavaProject() == project) {
+				error("The referenced active annotation cannot be used from within the same project.",XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, -1, ACTIVE_ANNOTAION_IN_SAME_CONTAINER);
+			}
+		}
 	}
 
 	@Check
