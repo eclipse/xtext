@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -79,6 +80,8 @@ public class JavaIoFileSystemTest {
       };
       JavaIOFileSystemSupport _doubleArrow = ObjectExtensions.<JavaIOFileSystemSupport>operator_doubleArrow(_javaIOFileSystemSupport, _function);
       this.fs = _doubleArrow;
+      Path _path = new Path("/foo");
+      this.fs.mkdir(_path);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -149,5 +152,70 @@ public class JavaIoFileSystemTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testGetWorkspaceChildren() {
+    Iterable<? extends Path> _children = this.fs.getChildren(Path.ROOT);
+    int _size = IterableExtensions.size(_children);
+    Assert.assertEquals(1, _size);
+    Path _path = new Path("/bar");
+    boolean _mkdir = this.fs.mkdir(_path);
+    Assert.assertTrue(_mkdir);
+    Iterable<? extends Path> _children_1 = this.fs.getChildren(Path.ROOT);
+    int _size_1 = IterableExtensions.size(_children_1);
+    Assert.assertEquals(2, _size_1);
+  }
+  
+  @Test
+  public void testGetProjectChildren() {
+    Path _path = new Path("/foo");
+    final Path projectFolder = _path;
+    boolean _exists = this.fs.exists(projectFolder);
+    Assert.assertTrue(_exists);
+    Iterable<? extends Path> _children = this.fs.getChildren(projectFolder);
+    int _size = IterableExtensions.size(_children);
+    final int expectedChildrenSize = (_size + 1);
+    Path _path_1 = new Path("/foo/Foo.text");
+    this.fs.setContents(_path_1, "Hello Foo");
+    Iterable<? extends Path> _children_1 = this.fs.getChildren(projectFolder);
+    int _size_1 = IterableExtensions.size(_children_1);
+    Assert.assertEquals(expectedChildrenSize, _size_1);
+  }
+  
+  @Test
+  public void testGetFolderChildren() {
+    Path _path = new Path("/foo/bar");
+    final Path folder = _path;
+    boolean _exists = this.fs.exists(folder);
+    Assert.assertFalse(_exists);
+    this.fs.mkdir(folder);
+    boolean _exists_1 = this.fs.exists(folder);
+    Assert.assertTrue(_exists_1);
+    Iterable<? extends Path> _children = this.fs.getChildren(folder);
+    int _size = IterableExtensions.size(_children);
+    Assert.assertEquals(0, _size);
+    Path _path_1 = new Path("/foo/bar/Foo.text");
+    this.fs.setContents(_path_1, "Hello Foo");
+    Iterable<? extends Path> _children_1 = this.fs.getChildren(folder);
+    int _size_1 = IterableExtensions.size(_children_1);
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testGetFileChildren() {
+    Path _path = new Path("/foo/bar/Foo.text");
+    final Path file = _path;
+    boolean _exists = this.fs.exists(file);
+    Assert.assertFalse(_exists);
+    Iterable<? extends Path> _children = this.fs.getChildren(file);
+    int _size = IterableExtensions.size(_children);
+    Assert.assertEquals(0, _size);
+    this.fs.setContents(file, "Hello Foo");
+    boolean _exists_1 = this.fs.exists(file);
+    Assert.assertTrue(_exists_1);
+    Iterable<? extends Path> _children_1 = this.fs.getChildren(file);
+    int _size_1 = IterableExtensions.size(_children_1);
+    Assert.assertEquals(0, _size_1);
   }
 }

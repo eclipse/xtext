@@ -27,6 +27,7 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -49,16 +50,29 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   public Iterable<? extends Path> getChildren(final Path path) {
-    File _javaIOFile = this.getJavaIOFile(path);
-    String[] _list = _javaIOFile.list();
-    final Function1<String,Path> _function = new Function1<String,Path>() {
-      public Path apply(final String it) {
-        Path _absolutePath = path.getAbsolutePath(it);
-        return _absolutePath;
+    List<Path> _xblockexpression = null;
+    {
+      boolean _exists = this.exists(path);
+      boolean _not = (!_exists);
+      if (_not) {
+        return CollectionLiterals.<Path>emptyList();
       }
-    };
-    List<Path> _map = ListExtensions.<String, Path>map(((List<String>)Conversions.doWrapArray(_list)), _function);
-    return _map;
+      boolean _isFile = this.isFile(path);
+      if (_isFile) {
+        return CollectionLiterals.<Path>emptyList();
+      }
+      File _javaIOFile = this.getJavaIOFile(path);
+      String[] _list = _javaIOFile.list();
+      final Function1<String,Path> _function = new Function1<String,Path>() {
+        public Path apply(final String it) {
+          Path _absolutePath = path.getAbsolutePath(it);
+          return _absolutePath;
+        }
+      };
+      List<Path> _map = ListExtensions.<String, Path>map(((List<String>)Conversions.doWrapArray(_list)), _function);
+      _xblockexpression = (_map);
+    }
+    return _xblockexpression;
   }
   
   protected File getJavaIOFile(final Path path) {

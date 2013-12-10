@@ -8,19 +8,25 @@
 package org.eclipse.xtext.xbase.ui.file;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import java.io.InputStream;
 import java.util.List;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
@@ -57,6 +63,52 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return _folder;
   }
   
+  protected IContainer getEclipseContainer(final Path path) {
+    IContainer _xblockexpression = null;
+    {
+      boolean _isAbsolute = path.isAbsolute();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("The given path has to be absolute: \'");
+      _builder.append(path, "");
+      _builder.append("\'.");
+      Preconditions.checkState(_isAbsolute, _builder);
+      IContainer _switchResult = null;
+      List<String> _segments = path.getSegments();
+      final List<String> segments = _segments;
+      boolean _matched = false;
+      if (!_matched) {
+        int _size = segments.size();
+        boolean _equals = (_size == 0);
+        if (_equals) {
+          _matched=true;
+          IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
+          _switchResult = _workspaceRoot;
+        }
+      }
+      if (!_matched) {
+        int _size_1 = segments.size();
+        boolean _equals_1 = (_size_1 == 1);
+        if (_equals_1) {
+          _matched=true;
+          IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot();
+          List<String> _segments_1 = path.getSegments();
+          String _head = IterableExtensions.<String>head(_segments_1);
+          IProject _project = _workspaceRoot_1.getProject(_head);
+          _switchResult = _project;
+        }
+      }
+      if (!_matched) {
+        IWorkspaceRoot _workspaceRoot_2 = this.getWorkspaceRoot();
+        String _string = path.toString();
+        org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
+        IFolder _folder = _workspaceRoot_2.getFolder(_path);
+        _switchResult = _folder;
+      }
+      _xblockexpression = (_switchResult);
+    }
+    return _xblockexpression;
+  }
+  
   protected IResource findResource(final Path path) {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
@@ -73,18 +125,27 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   
   public Iterable<? extends Path> getChildren(final Path path) {
     try {
-      IFolder _eclipseFolder = this.getEclipseFolder(path);
-      IResource[] _members = _eclipseFolder.members();
-      final Function1<IResource,Path> _function = new Function1<IResource,Path>() {
-        public Path apply(final IResource it) {
-          IPath _fullPath = it.getFullPath();
-          String _string = _fullPath.toString();
-          Path _path = new Path(_string);
-          return _path;
+      List<Path> _xblockexpression = null;
+      {
+        final IContainer container = this.getEclipseContainer(path);
+        boolean _exists = container.exists();
+        boolean _not = (!_exists);
+        if (_not) {
+          return CollectionLiterals.<Path>emptyList();
         }
-      };
-      List<Path> _map = ListExtensions.<IResource, Path>map(((List<IResource>)Conversions.doWrapArray(_members)), _function);
-      return _map;
+        IResource[] _members = container.members();
+        final Function1<IResource,Path> _function = new Function1<IResource,Path>() {
+          public Path apply(final IResource it) {
+            IPath _fullPath = it.getFullPath();
+            String _string = _fullPath.toString();
+            Path _path = new Path(_string);
+            return _path;
+          }
+        };
+        List<Path> _map = ListExtensions.<IResource, Path>map(((List<IResource>)Conversions.doWrapArray(_members)), _function);
+        _xblockexpression = (_map);
+      }
+      return _xblockexpression;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -98,7 +159,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   
   public boolean isFolder(final Path path) {
     IResource _findResource = this.findResource(path);
-    return (_findResource instanceof IFolder);
+    return (_findResource instanceof IContainer);
   }
   
   public boolean isFile(final Path path) {
@@ -121,8 +182,8 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       } else {
         boolean _isFolder = this.isFolder(path);
         if (_isFolder) {
-          IFolder _eclipseFolder = this.getEclipseFolder(path);
-          return _eclipseFolder.getDefaultCharset();
+          IContainer _eclipseContainer = this.getEclipseContainer(path);
+          return _eclipseContainer.getDefaultCharset();
         } else {
           Path _parent = path.getParent();
           return this.getCharset(_parent);
@@ -159,20 +220,51 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   
   public boolean mkdir(final Path path) {
     try {
-      boolean _exists = this.exists(path);
-      if (_exists) {
-        return false;
+      boolean _xblockexpression = false;
+      {
+        boolean _exists = this.exists(path);
+        if (_exists) {
+          return false;
+        }
+        Path _parent = path.getParent();
+        boolean _exists_1 = this.exists(_parent);
+        boolean _not = (!_exists_1);
+        if (_not) {
+          Path _parent_1 = path.getParent();
+          this.mkdir(_parent_1);
+        }
+        boolean _switchResult = false;
+        IContainer _eclipseContainer = this.getEclipseContainer(path);
+        final IContainer container = _eclipseContainer;
+        boolean _matched = false;
+        if (!_matched) {
+          if (container instanceof IFolder) {
+            _matched=true;
+            boolean _xblockexpression_1 = false;
+            {
+              ((IFolder)container).create(true, true, null);
+              _xblockexpression_1 = (true);
+            }
+            _switchResult = _xblockexpression_1;
+          }
+        }
+        if (!_matched) {
+          if (container instanceof IProject) {
+            _matched=true;
+            boolean _xblockexpression_1 = false;
+            {
+              ((IProject)container).create(null);
+              _xblockexpression_1 = (true);
+            }
+            _switchResult = _xblockexpression_1;
+          }
+        }
+        if (!_matched) {
+          _switchResult = false;
+        }
+        _xblockexpression = (_switchResult);
       }
-      Path _parent = path.getParent();
-      boolean _exists_1 = this.exists(_parent);
-      boolean _not = (!_exists_1);
-      if (_not) {
-        Path _parent_1 = path.getParent();
-        this.mkdir(_parent_1);
-      }
-      IFolder _eclipseFolder = this.getEclipseFolder(path);
-      _eclipseFolder.create(true, true, null);
-      return true;
+      return _xblockexpression;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
