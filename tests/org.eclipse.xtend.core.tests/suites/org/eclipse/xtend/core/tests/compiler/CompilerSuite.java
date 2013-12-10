@@ -36,6 +36,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerBug419050Test.class,
 	CompilerBug419688Test.class,
 	CompilerBug421999Test.class,
+	CompilerBug423631Test.class,
 	CompilerTraceTest.class,
 	ConfiguredCompilerTest.class,
 	ExtensionsCompilerTest.class,

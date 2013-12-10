@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.jvmmodel;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 @NonNullByDefault
@@ -45,6 +47,9 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 	
 	@Inject
 	private CommonTypeComputationServices services;
+	
+	@Inject
+	private DispatchHelper sorter;
 	
 	private List<JvmOperation> sortedDispatchOperations;
 
@@ -60,6 +65,8 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			throw new IllegalArgumentException("a is never null");
 		boolean needsElse = true;
 		int parameterCount = dispatchOperation.getParameters().size();
+		List<JvmOperation> sortedDispatchOperations = Lists.newArrayList(this.sortedDispatchOperations);
+		sorter.sort(sortedDispatchOperations);
 		boolean[] allCasesSameType = new boolean[parameterCount];
 		for(int i = 0; i < parameterCount; i++) {
 			allCasesSameType[i] = true;
