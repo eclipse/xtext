@@ -224,28 +224,28 @@
     </extension>
 
 
-    <!-- marker definitions for org.eclipse.xtext.example.fowlerdsl.Statemachine -->
-    <extension
-            id="statemachine.check.fast"
-            name="Statemachine Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.fast"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="statemachine.check.normal"
-            name="Statemachine Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.normal"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="statemachine.check.expensive"
-            name="Statemachine Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.expensive"/>
-        <persistent value="true"/>
-    </extension>
+	<!-- marker definitions for org.eclipse.xtext.example.fowlerdsl.Statemachine -->
+	<extension
+	        id="statemachine.check.fast"
+	        name="Statemachine Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.fast"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="statemachine.check.normal"
+	        name="Statemachine Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.normal"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="statemachine.check.expensive"
+	        name="Statemachine Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.expensive"/>
+	    <persistent value="true"/>
+	</extension>
 
    <extension
          point="org.eclipse.xtext.builder.participant">

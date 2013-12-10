@@ -103,7 +103,7 @@ public abstract class AbstractStatemachineUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.example.fowlerdsl.ui.quickfix.StatemachineQuickfixProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
+	// contributed by org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.example.fowlerdsl.ui.contentassist.StatemachineProposalProvider.class;
 	}
@@ -126,6 +126,31 @@ public abstract class AbstractStatemachineUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.example.fowlerdsl.ui.contentassist.antlr.internal.InternalStatemachineLexer.class);
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameStrategy> bindIRenameStrategy() {
+		return org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IReferenceUpdater> bindIReferenceUpdater() {
+		return org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public void configureIPreferenceStoreInitializer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).annotatedWith(com.google.inject.name.Names.named("RefactoringPreferences")).to(org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences.Initializer.class);
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider> bindIRenameRefactoringProvider() {
+		return org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory> bindIRenameSupport$Factory() {
+		return org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
@@ -206,31 +231,6 @@ public abstract class AbstractStatemachineUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser> bindIPartialContentAssistParser() {
 		return org.eclipse.xtext.example.fowlerdsl.ui.contentassist.antlr.PartialStatemachineContentAssistParser.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameStrategy> bindIRenameStrategy() {
-		return org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.IReferenceUpdater> bindIReferenceUpdater() {
-		return org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
-	public void configureIPreferenceStoreInitializer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).annotatedWith(com.google.inject.name.Names.named("RefactoringPreferences")).to(org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences.Initializer.class);
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider> bindIRenameRefactoringProvider() {
-		return org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory> bindIRenameSupport$Factory() {
-		return org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment

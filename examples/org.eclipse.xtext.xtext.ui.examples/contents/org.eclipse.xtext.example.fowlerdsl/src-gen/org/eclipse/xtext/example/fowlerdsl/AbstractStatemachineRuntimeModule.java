@@ -89,9 +89,9 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.example.fowlerdsl.validation.StatemachineJavaValidator> bindStatemachineJavaValidator() {
-		return org.eclipse.xtext.example.fowlerdsl.validation.StatemachineJavaValidator.class;
+	// contributed by org.eclipse.xtext.generator.validation.ValidatorFragment
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator> bindStatemachineValidator() {
+		return org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment

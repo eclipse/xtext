@@ -40,6 +40,5 @@ public class StatemachineStandaloneSetupGenerated implements ISetup {
 		
 
 
-
 	}
 }

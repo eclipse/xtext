@@ -10,6 +10,11 @@ import org.eclipse.xtext.example.fowlerdsl.statemachine.Statemachine
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 
+/**
+ * Generates code from your model files on save.
+ * 
+ * see http://www.eclipse.org/Xtext/documentation.html#TutorialCodeGeneration
+ */
 class StatemachineGenerator implements IGenerator {
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {

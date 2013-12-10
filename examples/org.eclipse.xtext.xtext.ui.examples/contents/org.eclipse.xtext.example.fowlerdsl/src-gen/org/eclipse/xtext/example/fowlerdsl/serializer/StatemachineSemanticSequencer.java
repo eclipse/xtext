@@ -22,7 +22,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public abstract class AbstractStatemachineSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
 	private StatemachineGrammarAccess grammarAccess;
