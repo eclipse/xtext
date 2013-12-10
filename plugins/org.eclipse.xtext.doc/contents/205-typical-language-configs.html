@@ -1,0 +1,191 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Typical Language Configurations</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="special_languages"></a>
+<h1>Typical Language Configurations</h1>
+<a name="case_insensitive_languages"></a>
+<h2>Case Insensitive Languages</h2>
+<p>
+In some cases, e.g. if your <em>SHIFT</em> key is broken, you might want to design a case insensitive language. Xtext offers options
+on some its <a href="030-generator.html#generator_fragment" title="Go to &quot;Generator Fragments&quot;">generator fragments</a> for this purpose. 
+</p>
+<p>
+For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;The&nbsp;antlr&nbsp;parser&nbsp;generator&nbsp;fragment.<br/>
+</span>fragment&nbsp;=&nbsp;parser.antlr.XtextAntlrGeneratorFragment&nbsp;{<br/>
+<span class="comment">//&nbsp;&nbsp;options&nbsp;=&nbsp;{<br/>
+</span><span class="comment">//&nbsp;&nbsp;&nbsp;&nbsp;backtrack&nbsp;=&nbsp;true<br/>
+</span><span class="comment">//&nbsp;&nbsp;}<br/>
+</span>}<br/>
+...<br/>
+<br/>
+<span class="comment">//&nbsp;generates&nbsp;a&nbsp;more&nbsp;lightweight&nbsp;ANTLR&nbsp;parser&nbsp;and&nbsp;lexer&nbsp;tailored&nbsp;...<br/>
+</span>fragment&nbsp;=&nbsp;parser.antlr.XtextAntlrUiGeneratorFragment&nbsp;{<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+with
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;The&nbsp;antlr&nbsp;parser&nbsp;generator&nbsp;fragment.<br/>
+</span>fragment&nbsp;=&nbsp;parser.antlr.ex.rt.AntlrGeneratorFragment&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+...<br/>
+<br/>
+<span class="comment">//&nbsp;generates&nbsp;a&nbsp;more&nbsp;lightweight&nbsp;ANTLR&nbsp;parser&nbsp;and&nbsp;lexer&nbsp;tailored&nbsp;...<br/>
+</span>fragment&nbsp;=&nbsp;parser.antlr.ex.ca.ContentAssistParserGeneratorFragment&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+For case insensitive element names, use the <em>ignoreCase</em> option in your scope fragment, i.e.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fragment&nbsp;=&nbsp;scoping.ImportNamespacesScopingFragment&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+or if you are using <a href="050-heading-runtime.html#import_uri" title="Go to &quot;Global Scopes Based On Explicit Imports (ImportURI Mechanism)&quot;">importURI based global scopes</a>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fragment&nbsp;=&nbsp;scoping.ImportURIScopingFragment&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="java_independent_languages"></a>
+<h2>Languages Independent of JDT</h2>
+<p>
+The following section describes how you make your language independent of Eclipse&apos;s Java Development Toolkit (JDT).
+</p>
+<p>
+In the <em>UIModule</em> of your language you have to overwrite two bindings. First, remove the bindings to components 
+with support for the <em>&apos;classpath:&apos;</em> URI protocol, i.e. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Override<br/>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IResourceForEditorInputFactory&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bindIResourceForEditorInputFactory()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ResourceForIEditorInputFactory.<span class="keyword">class</span>;<br/>
+}<br/>
+<br/>
+@Override<br/>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IResourceSetProvider&gt;&nbsp;bindIResourceSetProvider()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;SimpleResourceSetProvider.<span class="keyword">class</span>;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Second, configure the global scope provider to scan project root folders instead of the class path of Java projects.   
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Override<br/>
+<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The remaining steps show you how to adapt the  
+project wizard for your language, if you have generated one.
+The best way to do this is to create a new subclass of the generated 
+<em>IProjectCreator</em> in the <em>src/</em> folder of the <em>ui</em> project and 
+apply the necessary changes there. First, remove the JDT project configuration 
+by overriding <em>configureProject</em> with an empty body. 
+</p>
+<p>
+The next thing is to redefine the project natures and builders that should be
+applied to you language projects.
+</p>
+<p>
+In in this case just remove the JDT stuff in this way:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">protected</span>&nbsp;String[]&nbsp;getProjectNatures()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;String[]&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.pde.PluginNature"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.ui.shared.xtextNature"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;};<br/>
+}<br/>
+<br/>
+<span class="keyword">protected</span>&nbsp;String[]&nbsp;getBuilders()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;String[]&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.pde.ManifestBuilder"</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.pde.SchemaBuilder"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;};<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+After that you have to bind the new <em>IProjectCreator</em>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Override<br/>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCreator()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;JDTFreeMyDslProjectCreator.<span class="keyword">class</span>;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Now your language and its IDE should now no longer depend on JDT.
+</p>
+</body>
+</html>

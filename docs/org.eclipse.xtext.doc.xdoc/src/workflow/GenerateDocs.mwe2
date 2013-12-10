@@ -11,7 +11,7 @@ Workflow {
 		modelPath = modelPath
 		targetDir = targetDir
 		document = "Xtext 2.5 Documentation"
-		pdfLatex = "/opt/local/bin/pdflatex"
+		pdfLatex = "/usr/texbin/pdflatex"
 		release = true
 //		cleanAfterRun = false
 	}

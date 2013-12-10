@@ -3,7 +3,8 @@ chapter:special_languages[Typical Language Configurations]
 
 section:case_insensitive_languages[Case Insensitive Languages]
 
-In some cases, e.g. if your e[SHIFT] key is broken, you might want to design a case insensitive language. Xtext offers separate ref:generator_fragment[generator fragments] for this purpose. 
+In some cases, e.g. if your e[SHIFT] key is broken, you might want to design a case insensitive language. Xtext offers options
+on some its ref:generator_fragment[generator fragments] for this purpose. 
 
 For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: 
 
@@ -38,7 +39,7 @@ fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
 }
 ]
 
-For case insensitve element names, use the e[ignoreCase] option in your scope fragment, i.e.
+For case insensitive element names, use the e[ignoreCase] option in your scope fragment, i.e.
 
 code[MWE2][fragment = scoping.ImportNamespacesScopingFragment {
     ignoreCase = true
@@ -56,7 +57,7 @@ section:java_independent_languages[Languages Independent of JDT]
 
 The following section describes how you make your language independent of Eclipse's Java Development Toolkit (JDT).
 
-In the e[UIModule] of your language you have to overwrite some bindings. First, remove the bindings to components 
+In the e[UIModule] of your language you have to overwrite two bindings. First, remove the bindings to components 
 with support for the e['classpath:'] URI protocol, i.e. 
 
 code[Java][@Override
@@ -74,16 +75,13 @@ public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 Second, configure the global scope provider to scan project root folders instead of the class path of Java projects.   
 
 code[Java][@Override
-public com.google.inject.Provider
-    <org.eclipse.xtext.resource.containers.IAllContainersState>
-    provideIAllContainersState() {
-    return 
-      org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
+public Provider<IAllContainersState> provideIAllContainersState() {
+  return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
 }
 ]
 
 The remaining steps show you how to adapt the  
-ref:projectwizard[project wizard] for your language, if you have generated one.
+project wizard for your language, if you have generated one.
 The best way to do this is to create a new subclass of the generated 
 e[IProjectCreator] in the e[src/] folder of the e[ui] project and 
 apply the necessary changes there. First, remove the JDT project configuration 
@@ -117,6 +115,6 @@ public Class<? extends IProjectCreator> bindIProjectCreator() {
 }
 ]
 
-That's all. Your language and its IDE should now no longer depend on JDT.
+Now your language and its IDE should now no longer depend on JDT.
 
-section-ref[expressions]
+%% section-ref[expressions]
