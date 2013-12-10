@@ -565,7 +565,7 @@ elements of the original context. Here is an example code snippet how to call th
 <p>
 This document describes the expression language library Xbase. Xbase is a partial programming language
 implemented in Xtext and is meant to be embedded and extended within other programming languages and 
-domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development 
+domain-specific languages (DSL) written in Xtext. Xtext is a highly extendible language development 
 framework covering all aspects of language infrastructure such as parsers, linkers, compilers, 
 interpreters and even full-blown IDE support based on Eclipse.  
 </p>
@@ -653,7 +653,7 @@ In such cases you can use the escaped identifier <span class="inlinecode">^servi
 <div class="incode">
 <p class="code">
 <span class="keyword">terminal</span>&nbsp;ID:&nbsp;<br/>
-&nbsp;&nbsp;<span class="string">&apos;^&apos;</span>?&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;^&apos;</span>?&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;$&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;$&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*<br/>
 ;
 </p>
 </div>
@@ -677,6 +677,9 @@ In such cases you can use the escaped identifier <span class="inlinecode">^servi
 	</li>
 	<li>
 		<span class="inlinecode">_foo</span>
+	</li>
+	<li>
+		<span class="inlinecode">$$foo$$</span>
 	</li>
 	<li>
 		<span class="inlinecode">^extends</span>
@@ -937,7 +940,7 @@ the hierarchy, their qualified name is used as the compare-key to ensure determi
 <p>
 Expressions are the main language constructs which are used to express behavior and compute values. The concept of 
 statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
-be helpful. An expression always results in a value (it might be the value <span class="inlinecode"><span class="keyword">null</span></span> though). In addition, every resolved expression is
+be helpful. An expression always results in a value (it might be the value <span class="inlinecode"><span class="keyword">null</span></span> or of type <span class="inlinecode"><span class="keyword">void</span></span> though). In addition, every resolved expression is
 of a static type.
 </p>
 <a name="Xbase_Expressions_Literals"></a>
@@ -1084,7 +1087,7 @@ To disambiguate the expression, type literals may also be specified using the ke
 Consequently it is possible to access the members of a type reflectively by using its plain name <span class="inlinecode">String.getDeclaredFields</span>.
 </p>
 <p>
-Older versions of Xbase used the dollar as the delimiter character for nested types:
+Previous versions of Xbase used the dollar as the delimiter character for nested types:
 </p>
 <p>
 <ul>
@@ -1587,10 +1590,13 @@ one can write
 <p>
 Static feature calls use the same notation as in Java, e.g. it is possible write <span class="inlinecode">Collections.emptyList()</span>
 in Xbase. To make the static invocation more explicit, the double colon can be used as the delimiter.
-The following snippet is fully equivalent to the previous example:
+The following snippets are fully equivalent:
 </p>
 <p>
 <span class="inlinecode">java.util.Collections::emptyList</span>
+</p>
+<p>
+<span class="inlinecode">java.util.Collections.emptyList</span>
 </p>
 <p>
 Prior to Xbase 2.4.2, this more verbose variant was the only supported syntax to invoke static methods:
@@ -1826,7 +1832,11 @@ if expressions deeply nested within other expressions.
 </p>
 <p>
 An expression <span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> 
-evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>.
+evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for a default value, e.g <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>
+if the type of the <span class="inlinecode"><span class="keyword">if</span></span> expression is a reference type. If the type is a primitive type, its default
+value is assumed accordingly, e.g. <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">false</span></span> for <span class="inlinecode"><span class="keyword">boolean</span></span> or <span class="inlinecode"><span class="keyword">else</span>&nbsp;1</span> for numbers. 
+</p>
+<p>
 That means 
 </p>
 <p>
@@ -1841,10 +1851,11 @@ is the a short hand for
 <a name="Xbase_Expressions_IfTypeInference"></a>
 <h5>Typing</h5>
 <p>
-The type of an if expression is calculated by the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
-It uses the rules defined in <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
+The type of an <span class="inlinecode"><span class="keyword">if</span></span> expression is calculated from the types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
+It uses the rules defined in <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>, if an explicit <span class="inlinecode"><span class="keyword">else</span></span> branch is given. If it is ommitted,
+the type of the <span class="inlinecode"><span class="keyword">if</span></span> expression is the type <span class="inlinecode">T</span> of the expression <span class="inlinecode">e</span> of the form <span class="inlinecode"><span class="keyword">if</span>&nbsp;(b)&nbsp;e</span>.
 </p>
-<a name="Xbase_Expressions_IfExpression_7"></a>
+<a name="Xbase_Expressions_IfExpression_8"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -1892,7 +1903,7 @@ Then the right hand expression of the case evaluated and the result is returned.
 </p>
 <p>
 If none of the guards matches the default expression is evaluated and returned. If no default expression
-is specified the expression evaluates to <span class="inlinecode"><span class="keyword">null</span></span>.
+is specified the expression evaluates to the default value of the common type of all available case expressions. 
 </p>
 <p>
 Example:
@@ -1930,7 +1941,7 @@ Example:
 </div>
 </p>
 <p>
-Only if the switch value passes a type guard, i.e. an instanceof operation returns <span class="inlinecode"><span class="keyword">true</span></span>, the case&apos;s guard expression is executed
+Only if the switch value passes a type guard, i.e. an <span class="inlinecode"><span class="keyword">instanceof</span></span> test succeeds, the case&apos;s guard expression is executed
 using the same semantics as explained above. 
 If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
 the type guard works like an automated cast. All subsequent references to the switch value will be of the type specified in the type guard,
@@ -1939,11 +1950,9 @@ unless it is reassigned to a new value.
 <a name="Xbase_Expressions_SwitchExpression_8"></a>
 <h5>Typing</h5>
 <p>
-The return type of a switch expression is computed using the rules defined in the
+The type of a switch expression is computed using the rules defined in the
 section on <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;">common super types</a>. The set of types from which the common 
-super type is computed corresponds to the types of each case&apos;s result expression. If a switch expression&apos;s
-type is computed using the expected type from the context, it is sufficient to return the expected type if all 
-case branches types conform to the expected type.
+super type is computed corresponds to the types of each case expression.
 </p>
 <a name="Xbase_Expressions_SwitchExpression_9"></a>
 <h5>Examples</h5>
@@ -2018,7 +2027,7 @@ the lambda expression.
 <a name="Xbase_Expressions_VariableDeclaration_5"></a>
 <h5>Typing</h5>
 <p>
-The return type of a variable declaration expression is always <span class="inlinecode"><span class="keyword">void</span></span>. 
+The type of a variable declaration expression is always <span class="inlinecode"><span class="keyword">void</span></span>. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 Here is an example for an explicitly declared type:
 <span class="inlinecode"><span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();</span>
@@ -2032,7 +2041,7 @@ Alternatively the type can be left out and will be inferred from the initializat
 <h4>Blocks</h4>
 <p>
 The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
-The return type of a block is also the type of the last expression. Empty blocks return <span class="inlinecode"><span class="keyword">null</span></span>. 
+The type of a block is also the type of the last expression. Empty blocks return <span class="inlinecode"><span class="keyword">null</span></span>. 
 <a href="199-xtext-and-java.html#Xbase_Expressions_VariableDeclaration" title="Go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as a block&apos;s last expression.
 </p>
 <p>
@@ -2076,9 +2085,9 @@ array of an instance of <a class="jdoc" href="http://download.oracle.com/javase/
 The local <span class="inlinecode">variable</span> is final, hence cannot be updated. 
 </p>
 <p>
-The return type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>.
-The type of the local variable can be left out. In that case it is inferred from the type of the array
-or <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" >Iterable</abbr></a> returned by the iterable expression.
+The type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>.
+The type of the local variable can optionally be inferred from the type of the array
+or the element type of the <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" >Iterable</abbr></a> returned by the iterable expression.
 </p>
 <p>
 <ul>
@@ -2113,7 +2122,7 @@ or <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/l
 <h4>While Loop</h4>
 <p>
 A while loop <span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
-The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
+The type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xbase_Expressions_WhileExpression_2"></a>
 <h5>Examples</h5>
@@ -2147,7 +2156,7 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 <p>
 A do-while loop <span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> is used to execute a certain expression until the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
 The difference to the <a href="199-xtext-and-java.html#Xbase_Expressions_WhileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
-The return type of a do-while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
+The type of a do-while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xbase_Expressions_DoWhileExpression_2"></a>
 <h5>Examples</h5>
@@ -2192,7 +2201,7 @@ listOfStrings.map&nbsp;[&nbsp;e&nbsp;|<br/>
 <a name="Xbase_Expressions_Throw"></a>
 <h4>Throwing Exceptions</h4>
 <p>
-Like in Java it is possible to throw <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Throwable.html" title="View JavaDoc"><abbr title="java.lang.Throwable" >Throwable</abbr></a>. The syntax is exactly the same as in Java.
+It is possible to throw <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Throwable.html" title="View JavaDoc"><abbr title="java.lang.Throwable" >Throwable</abbr></a>. The syntax is exactly the same as in Java.
 </p>
 <p>
 <div class="literallayout">
@@ -2215,7 +2224,6 @@ The try-catch-finally expression is used to handle exceptional situations.
 You are not forced to declare checked exceptions. If you don&apos;t catch checked exceptions, they are thrown in a way the compiler
 does not complain about a missing throws clause, using the sneaky-throw technique introduced by 
 <a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>.
-The syntax again is the same known from Java.
 </p>
 <p>
 <div class="literallayout">

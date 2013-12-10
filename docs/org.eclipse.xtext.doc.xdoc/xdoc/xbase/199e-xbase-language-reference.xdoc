@@ -2,7 +2,7 @@ section:xbaseLanguageRef_Introduction[Xbase Language Reference]
 
 This document describes the expression language library Xbase. Xbase is a partial programming language
 implemented in Xtext and is meant to be embedded and extended within other programming languages and 
-domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development 
+domain-specific languages (DSL) written in Xtext. Xtext is a highly extendible language development 
 framework covering all aspects of language infrastructure such as parsers, linkers, compilers, 
 interpreters and even full-blown IDE support based on Eclipse.  
 
