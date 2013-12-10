@@ -441,7 +441,7 @@ dispatch methods is prohibited.
 section:Annotations[Annotations]
 
 Annotations are available on classes, fields, methods and parameters. They are prefixed
-with the code[@] character and accept a number of key-value pairs or a single default value
+with the code[@] character and accept a number of key-value pairs or a default value
 for the annotation property named code[value]. Annotation
 values that expect arrays can handle single values, too. Value arrays are enclosed in array 
 literals code[Xtend][#\['first', 'second'\]].

@@ -117,4 +117,4 @@ public Class<? extends IProjectCreator> bindIProjectCreator() {
 
 Now your language and its IDE should now no longer depend on JDT.
 
-%% section-ref[expressions]
+section-ref[expressions]

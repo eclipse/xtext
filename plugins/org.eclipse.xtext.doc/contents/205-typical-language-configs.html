@@ -187,5 +187,329 @@ After that you have to bind the new <em>IProjectCreator</em>
 <p>
 Now your language and its IDE should now no longer depend on JDT.
 </p>
+<a name="expressions"></a>
+<h2>Parsing Expressions with Xtext</h2>
+<p>
+Parsing simple XML-like, structural languages with Xtext is a no-brainer. However, 
+parsing nested expressions is often considered complicated. This is the perception 
+due to their recursive nature and the properties of the parser technology used by Xtext.
+You have to avoid left recursive parser rules. As the underlying Antlr parser 
+uses a top-down approach it would recurse endlessly if you had a left recursive grammar.
+</p>
+<p>
+Let&apos;s have a look at parsing a simple arithmetic expression:
+</p>
+<p>
+<span class="inlinecode">2&nbsp;+&nbsp;20&nbsp;*&nbsp;2</span>
+</p>
+<p>
+If you know EBNF a bit and wouldn&apos;t think about avoiding left recursion, operator precedence 
+or associativity, you&apos;ld probably write a grammar like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Expression&nbsp;:<br/>
+&nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;Expression&nbsp;|<br/>
+&nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;*&apos;</span>&nbsp;Expression&nbsp;|<br/>
+&nbsp;&nbsp;INT;
+</p>
+</div>
+</div>
+</p>
+<p>
+This grammar would be left recursive because the parser reads the grammar top down and left to 
+right and would endlessly call the Expression rule without consuming any characters, i.e. altering 
+the underlying state of the parser. While this kind of grammar can be written for bottom-up parsers, 
+you would still have to deal with operator precedence in addition. That is define that a multiplication 
+has higher precedence than an addition for example.
+</p>
+<p>
+In Xtext you define the precedence implicitly when left-factoring such a grammar. Left-factoring means 
+you get rid of left recursion by applying a certain idiom, which is described in the following.
+</p>
+<p>
+Here is a left-factored grammar (not yet working with Xtext) for the expression language above:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;:<br/>
+&nbsp;&nbsp;Multiplication&nbsp;(<span class="string">&apos;+&apos;</span>&nbsp;Multiplication)*;<br/>
+<br/>
+Multiplication:<br/>
+&nbsp;&nbsp;NumberLiteral&nbsp;(<span class="string">&apos;*&apos;</span>&nbsp;NumberLiteral)*;<br/>
+<br/>
+NumberLiteral:<br/>
+&nbsp;&nbsp;INT;
+</p>
+</div>
+</div>
+</p>
+<p>
+As you can see the main difference is that it uses three rules instead of one and if you look a bit closer 
+you see, that there&apos;s a certain delegation pattern involved. The rule Addition doesn&apos;t call itself but calls 
+Multiplication instead. The operator precedence is defined by the order of delegation. The later the rule 
+is called the higher is its precedence. This is at least the case for the first two rules which are of a 
+left recursive nature (but we&apos;ve left-factored them now). The last rule is not left recursive which is why 
+you can implement it without applying this pattern.
+</p>
+<p>
+The next task is to allow users to explicitly adjust precedence by adding parentheses,
+e.g. write something like <span class="inlinecode">(2&nbsp;+&nbsp;20)&nbsp;*&nbsp;2</span>.
+So let&apos;s add support for that (note that the grammar is still not working with Xtext):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;:<br/>
+&nbsp;&nbsp;Multiplication&nbsp;(<span class="string">&apos;+&apos;</span>&nbsp;Multiplication)*;<br/>
+<br/>
+Multiplication:<br/>
+&nbsp;&nbsp;Primary&nbsp;(<span class="string">&apos;*&apos;</span>&nbsp;Primary)*;<br/>
+<br/>
+Primary&nbsp;:<br/>
+&nbsp;&nbsp;NumberLiteral&nbsp;|<br/>
+&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;<br/>
+<br/>
+NumberLiteral:<br/>
+&nbsp;&nbsp;INT;
+</p>
+</div>
+</div>
+</p>
+<p>
+Once again: if you have some construct that recurses on the left hand side, you need to put it into the 
+delegation chain according to the operator precedence. The pattern is always the same: the thing that 
+recurses delegates to the rule with the next higher precedence.
+</p>
+<a name="expressions_14"></a>
+<h3>Construction of an AST</h3>
+<p>
+Now that left recursion is avoided, the parser should produce a proper syntax tree. In Xtext each 
+rule returns a value. Production rules return AST nodes (i.e. instances of EObject), enum rules return enum 
+literals and data type rules as well as terminal rules return simple values like strings.
+Xtext can automatically infer whether some rule is a production rule, i.e. constructs and returns an AST node, 
+or if it is a data type rule that returns a value. The grammar above only consists of data type rules all of 
+them returning plain strings.
+In order to construct an AST we need to add assignments and actions to the grammar.
+</p>
+<p>
+The return type of a rule can be specified explicitly using the <span class="inlinecode"><span class="keyword">returns</span></span> keyword but can be 
+inferred if the type&apos;s name is the same as the rule&apos;s name.
+That is
+</p>
+<p>
+<span class="inlinecode">NumberLiteral&nbsp;:&nbsp;...&nbsp;;</span>
+</p>
+<p>
+is a short form of
+</p>
+<p>
+<span class="inlinecode">NumberLiteral&nbsp;<span class="keyword">returns</span>&nbsp;NumberLiteral&nbsp;:&nbsp;...&nbsp;;</span>
+</p>
+<p>
+However in the case of the expression grammar above, all rules need to return the same type since they are 
+recursive. In order to make the grammar valid, a common return type has to be added explicitly 
+(but the grammar is still missing some bits):
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;Multiplication&nbsp;(<span class="string">&apos;+&apos;</span>&nbsp;Multiplication)*;<br/>
+&nbsp;&nbsp;<br/>
+Multiplication&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;Primary&nbsp;(<span class="string">&apos;*&apos;</span>&nbsp;Primary)*;<br/>
+&nbsp;&nbsp;<br/>
+Primary&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;NumberLiteral&nbsp;|<br/>
+&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;<br/>
+&nbsp;&nbsp;<br/>
+NumberLiteral:<br/>
+&nbsp;&nbsp;INT;
+</p>
+</div>
+</div>
+</p>
+<p>
+The AST type inference mechanism of Xtext will infer two types: Expression and NumberLiteral. Assignments and actions 
+have to added to store all the important information in the AST and to create reasonable subtypes for the 
+additive and multiplicative expressions. The fully working Xtext grammar is this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)*;<br/>
+&nbsp;&nbsp;<br/>
+Multiplication&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;Primary&nbsp;({Multiplication.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;*&apos;</span>&nbsp;right=Primary)*;<br/>
+&nbsp;&nbsp;<br/>
+Primary&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;NumberLiteral&nbsp;|<br/>
+&nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;<br/>
+&nbsp;&nbsp;<br/>
+NumberLiteral:<br/>
+&nbsp;&nbsp;value=INT;
+</p>
+</div>
+</div>
+</p>
+<p>
+This is how the parser processes the following expression:
+</p>
+<p>
+<span class="inlinecode">(1&nbsp;+&nbsp;20)&nbsp;*&nbsp;2</span>
+</p>
+<p>
+It always starts with the first rule (Addition). Therein the first element is an unassigned rule call 
+to Multiplication which in turn calls Primary. Primary now has two alternatives. The first one is calling 
+NumberLiteral which consists only of one assignment to a feature called &apos;value&apos;. The type of &apos;value&apos; has to be 
+compatible to the return type of the INT rule.
+</p>
+<p>
+But as the first token in the sample expression is an opening parenthesis &apos;(&apos; the parser will take the second 
+alternative in Primary: it consumes the &apos;(&apos; and calls the rule Addition. Now the value &apos;1&apos; is the lookahead token 
+and again Addition calls Multiplication and Multiplication calls Primary. This time the parser takes the first 
+alternative because &apos;1&apos; was consumed by the INT rule.
+</p>
+<p>
+As soon as the parser hits an assignment it checks whether an AST node for the current rule was already created. 
+Otherwise it will create one based on the return type of the current rule, which is NumberLiteral. 
+The Xtext generator created the EClass &apos;NumberLiteral&apos; before which can now be instantiated. That type will also have 
+a property called value of type int , which will get the value &apos;1&apos; set. This is what the 
+Java equivalent looks like:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;value=INT<br/>
+</span><span class="keyword">if</span>&nbsp;(current&nbsp;==&nbsp;<span class="keyword">null</span>)<br/>
+&nbsp;current&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;NumberLiteral();<br/>
+current.setValue(ruleINT());<br/>
+...
+</p>
+</div>
+</div>
+</p>
+<p>
+Now that the rule has been completed the produced EObject is returned to the calling rule Primary, which in turn 
+returns the object unchanged to its own caller. Within Multiplication the rule Primary has been successfully 
+parsed and returned an instance of NumberLiteral. The remainder of the rule (everything within the parentheses) 
+is a so called group. The asterisk behind the closing parenthesis states that this part can be consumed zero or more 
+times. The first token to consume in this group is the multiplication operator &apos;*&apos;. Unfortunately in the current 
+input the next token to accept is the plus sign &apos;+&apos;, so the group is not consumed at all and the rule returns 
+the NumberLiteral that was returned from the previous unassigned rule call.
+</p>
+<p>
+In rule Addition there is a similar group but this time it expects the correct operator. The parser steps into the group.
+The first element in the group is an assigned action. It will create a new instance of type Addition and assigns what 
+was the to-be-returned object to the feature &apos;left&apos;. In Java this would have been something like:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;Multiplication&nbsp;rule&nbsp;call<br/>
+</span>current&nbsp;=&nbsp;ruleMultiplication();<br/>
+<span class="comment">//&nbsp;{Addition.left=current}<br/>
+</span>Addition&nbsp;temp&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Addition();<br/>
+temp.setLeft(current);<br/>
+current&nbsp;=&nbsp;temp;<br/>
+...
+</p>
+</div>
+</div>
+</p>
+<p>
+As a result the rule would now return an instance of Addition which has a NumberLiteral set to its property left. 
+Next up the parser consumes the &apos;+&apos; operator. The operator itself is not stored in the AST because there is an explicit 
+Addition type. It implicitly contains this information.
+The assignment <span class="inlinecode">right=Multiplication</span> calls the rule Multiplication another time and assigns its result object 
+(a NumberLiteral of value=20) to the property <span class="inlinecode">right</span>.
+The closing parenthesis is matched afterwards, consumed and the parser stack is reduced once more.
+</p>
+<p>
+The parser is now in the rule Multiplication and has the multiplication operator &apos;*&apos; on the lookahead. It steps into 
+the group and applies the action. Finally it calls the Primary rule, produces another instance of NumberLiteral (value=2), 
+assigns it as the &apos;right&apos; operand of the Multiplication and returns the Multiplication to the rule Addition which 
+in turn returns the very same object as there&apos;s nothing left to parse.
+</p>
+<p>
+The resulting AST looks like this:
+</p>
+<p>
+<div class="image" >
+<img src="images/expression-ast.png" class=" " 
+ style=" " />
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+visualizes and explains the details.
+</p>
+<a name="expressions_15"></a>
+<h3>Associativity</h3>
+<p>
+There is still one topic worth to mention, which is associativity. There is left and right associativity as well as non-associativity.
+The example implemented left associativity. Associativity tells the parser how to construct the AST when 
+there are two infix operations with the same precedence. The following example is taken from the corresponding wikipedia entry:
+</p>
+<p>
+Consider the expression a ~ b ~ c. If the operator ~ has left associativity, this expression would be interpreted as 
+(a ~ b) ~ c and evaluated left-to-right. If the operator has right associativity, the expression would be interpreted 
+as a ~ (b ~ c) and evaluated right-to-left. If the operator is non-associative, the expression might be a syntax error, 
+or it might have some special meaning.
+The most common variant is left associativity:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)*;
+</p>
+</div>
+</div>
+
+Right associativity is done using a slightly modified pattern. Note the quantity operator and the call to the rule itself in the group:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Addition)?;
+</p>
+</div>
+</div>
+</p>
+<p>
+Non-associativity can be implemented in a similar way, but this time the final rule call is not immediately recursive but delegates
+to the next precedence level:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)?;
+</p>
+</div>
+</div>
+</p>
+<p>
+Sometimes it&apos;s more convenient to allow associativity on parser level, but forbid it later using validation. This allows
+more descriptive diagnostics. Also the whole parsing process won&apos;t rely on error recovery but the editor will generally 
+be more forgiving.
+</p>
 </body>
 </html>

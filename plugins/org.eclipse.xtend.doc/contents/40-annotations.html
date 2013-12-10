@@ -141,7 +141,7 @@ The <span class="inlinecode">ExtractProcessor</span> implements the method <span
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;the&nbsp;public&nbsp;methods&nbsp;to&nbsp;the&nbsp;interface<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(method&nbsp;:&nbsp;annotatedClass.declaredMethods)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(method.visibility&nbsp;==&nbsp;Visibility::PUBLIC)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(method.visibility&nbsp;==&nbsp;Visibility.PUBLIC)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interfaceType.addMethod(method.simpleName)&nbsp;[<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;docComment&nbsp;=&nbsp;method.docComment<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnType&nbsp;=&nbsp;method.returnType<br/>
@@ -283,7 +283,7 @@ The following code performs this transformation:
 <br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;synthetic&nbsp;init-method<br/>
 </span>&nbsp;&nbsp;field.declaringType.addMethod(<span class="string">&apos;_init&apos;</span>&nbsp;+&nbsp;field.simpleName)&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;visibility&nbsp;=&nbsp;Visibility::PRIVATE<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;visibility&nbsp;=&nbsp;Visibility.PRIVATE<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;returnType&nbsp;=&nbsp;field.type<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;reassign&nbsp;the&nbsp;initializer&nbsp;expression&nbsp;to&nbsp;be&nbsp;the&nbsp;init&nbsp;method&apos;s&nbsp;body<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;this&nbsp;automatically&nbsp;removes&nbsp;the&nbsp;expression&nbsp;as&nbsp;the&nbsp;field&apos;s&nbsp;initializer<br/>

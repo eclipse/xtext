@@ -99,7 +99,7 @@ class ExtractProcessor extends AbstractClassProcessor {
     
     // add the public methods to the interface
     for (method : annotatedClass.declaredMethods) {
-      if (method.visibility == Visibility::PUBLIC) {
+      if (method.visibility == Visibility.PUBLIC) {
         interfaceType.addMethod(method.simpleName) \[
           docComment = method.docComment
           returnType = method.returnType
@@ -212,7 +212,7 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 
   // add synthetic init-method
   field.declaringType.addMethod('_init' + field.simpleName) \[
-    visibility = Visibility::PRIVATE
+    visibility = Visibility.PRIVATE
     returnType = field.type
     // reassign the initializer expression to be the init method's body
     // this automatically removes the expression as the field's initializer

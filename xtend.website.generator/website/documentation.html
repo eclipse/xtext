@@ -1188,7 +1188,7 @@ public String label(final Object it) {
 						<h2 style="padding-top: 15px;">Annotations</h2>
 						<p>
 							Annotations are available on classes, fields, methods and parameters. They are prefixed
-							with the <code class="prettyprint lang-xtend">@</code> character and accept a number of key-value pairs or a single default value
+							with the <code class="prettyprint lang-xtend">@</code> character and accept a number of key-value pairs or a default value
 							for the annotation property named <code class="prettyprint lang-xtend">value</code>. Annotation
 							values that expect arrays can handle single values, too. Value arrays are enclosed in array 
 							literals <code class="prettyprint lang-xtend">#['first', 'second']</code>.
@@ -1603,7 +1603,7 @@ val char c = 'c'</pre>
 							The keyword <code class="prettyprint lang-xtend">typeof</code> is mandatory for references to array types, e.g. <code class="prettyprint lang-xtend">typeof(int[]</code>
 						</p>
 						<p>
-							Older versions of Xtend (2.4.1 and before) used the dollar as the delimiter character for nested types and
+							Previous versions of Xtend (2.4.1 and before) used the dollar as the delimiter character for nested types and
 							enforced the use of <code class="prettyprint lang-xtend">typeof</code> for all type literals:
 						</p>
 						<p>
@@ -2317,12 +2317,20 @@ name = 'Horst' // translates to 'it.setName("Horst");'</pre>
 						<section id="staticAccess" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Static Access</h3>
 						<p>
-							For accessing a static field or method you have to use the double colon <code class="prettyprint lang-xtend">::</code> like in this example:
+							For accessing a static field or method you can use the Java syntax or the more explicit double colon <code class="prettyprint lang-xtend">::</code>. The
+							following epxressions are equivalent:
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 MyClass::myField
+MyClass.myField</pre>
+							<p>
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+com.acme.MyClass.myMethod('foo')
 com::acme::MyClass::myMethod('foo')</pre>
 							<p>
 						</p>
@@ -2565,7 +2573,9 @@ if (p) e1 else e2</pre>
 							<p>
 							 
 							results in either the value <code class="prettyprint lang-xtend">e1</code> or <code class="prettyprint lang-xtend">e2</code> depending on whether the predicate <code class="prettyprint lang-xtend">p</code> evaluates 
-							to <code class="prettyprint lang-xtend">true</code> or <code class="prettyprint lang-xtend">false</code>. The else part is optional which is a shorthand for <code class="prettyprint lang-xtend">else null</code>. That means
+							to <code class="prettyprint lang-xtend">true</code> or <code class="prettyprint lang-xtend">false</code>. The else part is optional which is a shorthand for an else branch
+							that returns the default value of the current type, e.g. for reference type this is equivalent to <code class="prettyprint lang-xtend">else null</code>.
+							That means
 						</p>
 						<p>
 							</p>
@@ -3202,7 +3212,7 @@ class ExtractProcessor extends AbstractClassProcessor {
     
     // add the public methods to the interface
     for (method : annotatedClass.declaredMethods) {
-      if (method.visibility == Visibility::PUBLIC) {
+      if (method.visibility == Visibility.PUBLIC) {
         interfaceType.addMethod(method.simpleName) [
           docComment = method.docComment
           returnType = method.returnType
@@ -3343,7 +3353,7 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 
   // add synthetic init-method
   field.declaringType.addMethod('_init' + field.simpleName) [
-    visibility = Visibility::PRIVATE
+    visibility = Visibility.PRIVATE
     returnType = field.type
     // reassign the initializer expression to be the init method's body
     // this automatically removes the expression as the field's initializer

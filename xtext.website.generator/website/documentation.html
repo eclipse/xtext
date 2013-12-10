@@ -192,6 +192,7 @@
 		<li><a href="#special_languages">Typical Language Configurations</a>
 	<ul>	<li><a href="#case_insensitive_languages">Case Insensitive Languages</a></li>
 		<li><a href="#java_independent_languages">Languages Independent of JDT</a></li>
+		<li><a href="#expressions">Parsing Expressions with Xtext</a></li>
 	</ul>	</li>
 		<li><a href="#emf_integration">Integration with EMF and Other EMF Editors</a>
 	<ul>	<li><a href="#model_metamodel">Model, Ecore Model, and Ecore</a></li>
@@ -7830,7 +7831,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 						<p>
 							This document describes the expression language library Xbase. Xbase is a partial programming language
 							implemented in Xtext and is meant to be embedded and extended within other programming languages and 
-							domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development 
+							domain-specific languages (DSL) written in Xtext. Xtext is a highly extendible language development 
 							framework covering all aspects of language infrastructure such as parsers, linkers, compilers, 
 							interpreters and even full-blown IDE support based on Eclipse.
 						</p>
@@ -7910,7 +7911,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 							</p>
 							<pre class="prettyprint lang-xtext linenums">
 terminal ID: 
-  '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+  '^'? ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9')*
 ;</pre>
 							<p>
 						</p>
@@ -7926,6 +7927,7 @@ terminal ID:
 								<li><code class="prettyprint lang-xtend">FOO</code></li>
 								<li><code class="prettyprint lang-xtend">_42</code></li>
 								<li><code class="prettyprint lang-xtend">_foo</code></li>
+								<li><code class="prettyprint lang-xtend">$$foo$$</code></li>
 								<li><code class="prettyprint lang-xtend">^extends</code></li>
 							</ul>
 							<p>
@@ -8144,7 +8146,7 @@ terminal ID:
 						<p>
 							Expressions are the main language constructs which are used to express behavior and compute values. The concept of 
 							statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
-							be helpful. An expression always results in a value (it might be the value <code class="prettyprint lang-xbase">null</code> though). In addition, every resolved expression is
+							be helpful. An expression always results in a value (it might be the value <code class="prettyprint lang-xbase">null</code> or of type <code class="prettyprint lang-xbase">void</code> though). In addition, every resolved expression is
 							of a static type.
 						</p>
 						<!-- subsection -->
@@ -8280,7 +8282,7 @@ terminal ID:
 							Consequently it is possible to access the members of a type reflectively by using its plain name <code class="prettyprint lang-xbase">String.getDeclaredFields</code>.
 						</p>
 						<p>
-							Older versions of Xbase used the dollar as the delimiter character for nested types:
+							Previous versions of Xbase used the dollar as the delimiter character for nested types:
 						</p>
 						<p>
 							</p>
@@ -8615,12 +8617,18 @@ myRef?.doStuff()</pre>
 						<p>
 							Static feature calls use the same notation as in Java, e.g. it is possible write <code class="prettyprint lang-xbase">Collections.emptyList()</code>
 							in Xbase. To make the static invocation more explicit, the double colon can be used as the delimiter.
-							The following snippet is fully equivalent to the previous example:
+							The following snippets are fully equivalent:
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xbase linenums">
 java.util.Collections::emptyList</pre>
+							<p>
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xbase linenums">
+java.util.Collections.emptyList</pre>
 							<p>
 						</p>
 						<p>
@@ -8879,7 +8887,11 @@ val AbstractIterator&lt;String&gt; emptyIterator = [
 						</p>
 						<p>
 							An expression <code class="prettyprint lang-xbase">if (p) e1 else e2</code> results in either the value <code class="prettyprint lang-xtend">e1</code> or <code class="prettyprint lang-xtend">e2</code> depending on whether the predicate <code class="prettyprint lang-xtend">p</code> 
-							evaluates to <code class="prettyprint lang-xbase">true</code> or <code class="prettyprint lang-xbase">false</code>. The else part is optional which is a shorthand for <code class="prettyprint lang-xbase">else null</code>.
+							evaluates to <code class="prettyprint lang-xbase">true</code> or <code class="prettyprint lang-xbase">false</code>. The else part is optional which is a shorthand for a default value, e.g <code class="prettyprint lang-xbase">else null</code>
+							if the type of the <code class="prettyprint lang-xbase">if</code> expression is a reference type. If the type is a primitive type, its default
+							value is assumed accordingly, e.g. <code class="prettyprint lang-xbase">else false</code> for <code class="prettyprint lang-xbase">boolean</code> or <code class="prettyprint lang-xbase">else 1</code> for numbers.
+						</p>
+						<p>
 							That means
 						</p>
 						<p>
@@ -8901,8 +8913,9 @@ if (foo) x else null</pre>
 						<section id="Xbase_Expressions_IfTypeInference" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Typing</h5>
 						<p>
-							The type of an if expression is calculated by the return types <code class="prettyprint lang-xtend">T1</code> and <code class="prettyprint lang-xtend">T2</code> of the two expression <code class="prettyprint lang-xtend">e1</code> and <code class="prettyprint lang-xtend">e2</code>.
-							It uses the rules defined in <a href="#Xbase_Types_CommonSuperType"></a>.
+							The type of an <code class="prettyprint lang-xbase">if</code> expression is calculated from the types <code class="prettyprint lang-xtend">T1</code> and <code class="prettyprint lang-xtend">T2</code> of the two expression <code class="prettyprint lang-xtend">e1</code> and <code class="prettyprint lang-xtend">e2</code>.
+							It uses the rules defined in <a href="#Xbase_Types_CommonSuperType"></a>, if an explicit <code class="prettyprint lang-xbase">else</code> branch is given. If it is ommitted,
+							the type of the <code class="prettyprint lang-xbase">if</code> expression is the type <code class="prettyprint lang-xtend">T</code> of the expression <code class="prettyprint lang-xtend">e</code> of the form <code class="prettyprint lang-xbase">if (b) e</code>.
 						</p>
 						</section>
 						<!-- subsection -->
@@ -8950,7 +8963,7 @@ switch e {
 						</p>
 						<p>
 							If none of the guards matches the default expression is evaluated and returned. If no default expression
-							is specified the expression evaluates to <code class="prettyprint lang-xbase">null</code>.
+							is specified the expression evaluates to the default value of the common type of all available case expressions.
 						</p>
 						<p>
 							Example:
@@ -8983,7 +8996,7 @@ switch x {
 							<p>
 						</p>
 						<p>
-							Only if the switch value passes a type guard, i.e. an instanceof operation returns <code class="prettyprint lang-xbase">true</code>, the case's guard expression is executed
+							Only if the switch value passes a type guard, i.e. an <code class="prettyprint lang-xbase">instanceof</code> test succeeds, the case's guard expression is executed
 							using the same semantics as explained above. 
 							If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
 							the type guard works like an automated cast. All subsequent references to the switch value will be of the type specified in the type guard,
@@ -8994,11 +9007,9 @@ switch x {
 						<section id="_94" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Typing</h5>
 						<p>
-							The return type of a switch expression is computed using the rules defined in the
+							The type of a switch expression is computed using the rules defined in the
 							section on <a href="#Xbase_Types_CommonSuperType">common super types</a>. The set of types from which the common 
-							super type is computed corresponds to the types of each case's result expression. If a switch expression's
-							type is computed using the expected type from the context, it is sufficient to return the expected type if all 
-							case branches types conform to the expected type.
+							super type is computed corresponds to the types of each case expression.
 						</p>
 						</section>
 						<!-- subsection -->
@@ -9060,7 +9071,7 @@ switch x : foo.bar.complicated('hello', 42) {
 						<section id="_96" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Typing</h5>
 						<p>
-							The return type of a variable declaration expression is always <code class="prettyprint lang-xbase">void</code>. 
+							The type of a variable declaration expression is always <code class="prettyprint lang-xbase">void</code>. 
 							The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 							Here is an example for an explicitly declared type:
 							</p>
@@ -9084,7 +9095,7 @@ var msg = new ArrayList&lt;String&gt; // -&gt; type ArrayList&lt;String&gt;</pre
 						<h4>Blocks</h4>
 						<p>
 							The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
-							The return type of a block is also the type of the last expression. Empty blocks return <code class="prettyprint lang-xbase">null</code>. 
+							The type of a block is also the type of the last expression. Empty blocks return <code class="prettyprint lang-xbase">null</code>. 
 							<a href="#Xbase_Expressions_VariableDeclaration">Variable declarations</a> are only allowed within blocks and cannot be used as a block's last expression.
 						</p>
 						<p>
@@ -9126,9 +9137,9 @@ var msg = new ArrayList&lt;String&gt; // -&gt; type ArrayList&lt;String&gt;</pre
 							The local <code class="prettyprint lang-xtend">variable</code> is final, hence cannot be updated.
 						</p>
 						<p>
-							The return type of a for loop is <code class="prettyprint lang-xbase">void</code>.
-							The type of the local variable can be left out. In that case it is inferred from the type of the array
-							or <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html"><abbr title="java.lang.Iterable">Iterable</abbr></a> returned by the iterable expression.
+							The type of a for loop is <code class="prettyprint lang-xbase">void</code>.
+							The type of the local variable can optionally be inferred from the type of the array
+							or the element type of the <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html"><abbr title="java.lang.Iterable">Iterable</abbr></a> returned by the iterable expression.
 						</p>
 						<p>
 							</p>
@@ -9149,7 +9160,7 @@ for (s : myStrings)
 						<h4>While Loop</h4>
 						<p>
 							A while loop <code class="prettyprint lang-xbase">while (predicate) expression</code> is used to execute a certain expression unless the predicate is evaluated to <code class="prettyprint lang-xbase">false</code>.
-							The return type of a while loop is <code class="prettyprint lang-xbase">void</code>.
+							The type of a while loop is <code class="prettyprint lang-xbase">void</code>.
 						</p>
 						<!-- subsection -->
 						<section id="_98" style="padding-top: 68px; margin-top: -68px;">
@@ -9175,7 +9186,7 @@ while ( ( i = i + 1 ) &lt; max )
 						<p>
 							A do-while loop <code class="prettyprint lang-xbase">do expression while (predicate)</code> is used to execute a certain expression until the predicate is evaluated to <code class="prettyprint lang-xbase">false</code>.
 							The difference to the <a href="#Xbase_Expressions_WhileExpression">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
-							The return type of a do-while loop is <code class="prettyprint lang-xbase">void</code>.
+							The type of a do-while loop is <code class="prettyprint lang-xbase">void</code>.
 						</p>
 						<!-- subsection -->
 						<section id="_99" style="padding-top: 68px; margin-top: -68px;">
@@ -9217,7 +9228,7 @@ listOfStrings.map [ e |
 						<section id="Xbase_Expressions_Throw" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Throwing Exceptions</h4>
 						<p>
-							Like in Java it is possible to throw <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Throwable.html"><abbr title="java.lang.Throwable">Throwable</abbr></a>. The syntax is exactly the same as in Java.
+							It is possible to throw <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Throwable.html"><abbr title="java.lang.Throwable">Throwable</abbr></a>. The syntax is exactly the same as in Java.
 						</p>
 						<p>
 							</p>
@@ -9239,7 +9250,6 @@ listOfStrings.map [ e |
 							You are not forced to declare checked exceptions. If you don't catch checked exceptions, they are thrown in a way the compiler
 							does not complain about a missing throws clause, using the sneaky-throw technique introduced by 
 							<a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>.
-							The syntax again is the same known from Java.
 						</p>
 						<p>
 							</p>
@@ -10373,7 +10383,7 @@ public Provider&lt;IAllContainersState&gt; provideIAllContainersState() {
 						</p>
 						<p>
 							The remaining steps show you how to adapt the  
-							<a href="#projectwizard">project wizard</a> for your language, if you have generated one.
+							project wizard for your language, if you have generated one.
 							The best way to do this is to create a new subclass of the generated 
 							<strong>IProjectCreator</strong> in the <strong>src/</strong> folder of the <strong>ui</strong> project and 
 							apply the necessary changes there. First, remove the JDT project configuration 
@@ -10419,6 +10429,317 @@ public Class&lt;? extends IProjectCreator&gt; bindIProjectCreator() {
 						<p>
 							Now your language and its IDE should now no longer depend on JDT.
 						</p>
+						</section>
+						<!--  section -->
+						<section id="expressions" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Parsing Expressions with Xtext</h2>
+						<p>
+							Parsing simple XML-like, structural languages with Xtext is a no-brainer. However, 
+							parsing nested expressions is often considered complicated. This is the perception 
+							due to their recursive nature and the properties of the parser technology used by Xtext.
+							You have to avoid left recursive parser rules. As the underlying Antlr parser 
+							uses a top-down approach it would recurse endlessly if you had a left recursive grammar.
+						</p>
+						<p>
+							Let's have a look at parsing a simple arithmetic expression:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+2 + 20 * 2</pre>
+							<p>
+						</p>
+						<p>
+							If you know EBNF a bit and wouldn't think about avoiding left recursion, operator precedence 
+							or associativity, you'ld probably write a grammar like this:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Expression :
+  Expression '+' Expression |
+  Expression '*' Expression |
+  INT;</pre>
+							<p>
+						</p>
+						<p>
+							This grammar would be left recursive because the parser reads the grammar top down and left to 
+							right and would endlessly call the Expression rule without consuming any characters, i.e. altering 
+							the underlying state of the parser. While this kind of grammar can be written for bottom-up parsers, 
+							you would still have to deal with operator precedence in addition. That is define that a multiplication 
+							has higher precedence than an addition for example.
+						</p>
+						<p>
+							In Xtext you define the precedence implicitly when left-factoring such a grammar. Left-factoring means 
+							you get rid of left recursion by applying a certain idiom, which is described in the following.
+						</p>
+						<p>
+							Here is a left-factored grammar (not yet working with Xtext) for the expression language above:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Addition :
+  Multiplication ('+' Multiplication)*;
+
+Multiplication:
+  NumberLiteral ('*' NumberLiteral)*;
+
+NumberLiteral:
+  INT;</pre>
+							<p>
+						</p>
+						<p>
+							As you can see the main difference is that it uses three rules instead of one and if you look a bit closer 
+							you see, that there's a certain delegation pattern involved. The rule Addition doesn't call itself but calls 
+							Multiplication instead. The operator precedence is defined by the order of delegation. The later the rule 
+							is called the higher is its precedence. This is at least the case for the first two rules which are of a 
+							left recursive nature (but we've left-factored them now). The last rule is not left recursive which is why 
+							you can implement it without applying this pattern.
+						</p>
+						<p>
+							The next task is to allow users to explicitly adjust precedence by adding parentheses,
+							e.g. write something like <code class="prettyprint lang-java">(2 + 20) * 2</code>.
+							So let's add support for that (note that the grammar is still not working with Xtext):
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Addition :
+  Multiplication ('+' Multiplication)*;
+
+Multiplication:
+  Primary ('*' Primary)*;
+
+Primary :
+  NumberLiteral |
+  '(' Addition ')';
+
+NumberLiteral:
+  INT;</pre>
+							<p>
+						</p>
+						<p>
+							Once again: if you have some construct that recurses on the left hand side, you need to put it into the 
+							delegation chain according to the operator precedence. The pattern is always the same: the thing that 
+							recurses delegates to the rule with the next higher precedence.
+						</p>
+						<!-- subsection -->
+						<section id="_101" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Construction of an AST</h3>
+						<p>
+							Now that left recursion is avoided, the parser should produce a proper syntax tree. In Xtext each 
+							rule returns a value. Production rules return AST nodes (i.e. instances of EObject), enum rules return enum 
+							literals and data type rules as well as terminal rules return simple values like strings.
+							Xtext can automatically infer whether some rule is a production rule, i.e. constructs and returns an AST node, 
+							or if it is a data type rule that returns a value. The grammar above only consists of data type rules all of 
+							them returning plain strings.
+							In order to construct an AST we need to add assignments and actions to the grammar.
+						</p>
+						<p>
+							The return type of a rule can be specified explicitly using the <code class="prettyprint lang-xtext">returns</code> keyword but can be 
+							inferred if the type's name is the same as the rule's name.
+							That is
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+NumberLiteral : ... ;</pre>
+							<p>
+						</p>
+						<p>
+							is a short form of
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+NumberLiteral returns NumberLiteral : ... ;</pre>
+							<p>
+						</p>
+						<p>
+							However in the case of the expression grammar above, all rules need to return the same type since they are 
+							recursive. In order to make the grammar valid, a common return type has to be added explicitly 
+							(but the grammar is still missing some bits):
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Addition returns Expression:
+  Multiplication ('+' Multiplication)*;
+  
+Multiplication returns Expression:
+  Primary ('*' Primary)*;
+  
+Primary returns Expression:
+  NumberLiteral |
+  '(' Addition ')';
+  
+NumberLiteral:
+  INT;</pre>
+							<p>
+						</p>
+						<p>
+							The AST type inference mechanism of Xtext will infer two types: Expression and NumberLiteral. Assignments and actions 
+							have to added to store all the important information in the AST and to create reasonable subtypes for the 
+							additive and multiplicative expressions. The fully working Xtext grammar is this:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Addition returns Expression:
+  Multiplication ({Addition.left=current} '+' right=Multiplication)*;
+  
+Multiplication returns Expression:
+  Primary ({Multiplication.left=current} '*' right=Primary)*;
+  
+Primary returns Expression:
+  NumberLiteral |
+  '(' Addition ')';
+  
+NumberLiteral:
+  value=INT;</pre>
+							<p>
+						</p>
+						<p>
+							This is how the parser processes the following expression:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+(1 + 20) * 2</pre>
+							<p>
+						</p>
+						<p>
+							It always starts with the first rule (Addition). Therein the first element is an unassigned rule call 
+							to Multiplication which in turn calls Primary. Primary now has two alternatives. The first one is calling 
+							NumberLiteral which consists only of one assignment to a feature called 'value'. The type of 'value' has to be 
+							compatible to the return type of the INT rule.
+						</p>
+						<p>
+							But as the first token in the sample expression is an opening parenthesis '(' the parser will take the second 
+							alternative in Primary: it consumes the '(' and calls the rule Addition. Now the value '1' is the lookahead token 
+							and again Addition calls Multiplication and Multiplication calls Primary. This time the parser takes the first 
+							alternative because '1' was consumed by the INT rule.
+						</p>
+						<p>
+							As soon as the parser hits an assignment it checks whether an AST node for the current rule was already created. 
+							Otherwise it will create one based on the return type of the current rule, which is NumberLiteral. 
+							The Xtext generator created the EClass 'NumberLiteral' before which can now be instantiated. That type will also have 
+							a property called value of type int , which will get the value '1' set. This is what the 
+							Java equivalent looks like:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+// value=INT
+if (current == null)
+ current = new NumberLiteral();
+current.setValue(ruleINT());
+...</pre>
+							<p>
+						</p>
+						<p>
+							Now that the rule has been completed the produced EObject is returned to the calling rule Primary, which in turn 
+							returns the object unchanged to its own caller. Within Multiplication the rule Primary has been successfully 
+							parsed and returned an instance of NumberLiteral. The remainder of the rule (everything within the parentheses) 
+							is a so called group. The asterisk behind the closing parenthesis states that this part can be consumed zero or more 
+							times. The first token to consume in this group is the multiplication operator '*'. Unfortunately in the current 
+							input the next token to accept is the plus sign '+', so the group is not consumed at all and the rule returns 
+							the NumberLiteral that was returned from the previous unassigned rule call.
+						</p>
+						<p>
+							In rule Addition there is a similar group but this time it expects the correct operator. The parser steps into the group.
+							The first element in the group is an assigned action. It will create a new instance of type Addition and assigns what 
+							was the to-be-returned object to the feature 'left'. In Java this would have been something like:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+// Multiplication rule call
+current = ruleMultiplication();
+// {Addition.left=current}
+Addition temp = new Addition();
+temp.setLeft(current);
+current = temp;
+...</pre>
+							<p>
+						</p>
+						<p>
+							As a result the rule would now return an instance of Addition which has a NumberLiteral set to its property left. 
+							Next up the parser consumes the '+' operator. The operator itself is not stored in the AST because there is an explicit 
+							Addition type. It implicitly contains this information.
+							The assignment <code class="prettyprint lang-xtext">right=Multiplication</code> calls the rule Multiplication another time and assigns its result object 
+							(a NumberLiteral of value=20) to the property <code class="prettyprint lang-xtend">right</code>.
+							The closing parenthesis is matched afterwards, consumed and the parser stack is reduced once more.
+						</p>
+						<p>
+							The parser is now in the rule Multiplication and has the multiplication operator '*' on the lookahead. It steps into 
+							the group and applies the action. Finally it calls the Primary rule, produces another instance of NumberLiteral (value=2), 
+							assigns it as the 'right' operand of the Multiplication and returns the Multiplication to the rule Addition which 
+							in turn returns the very same object as there's nothing left to parse.
+						</p>
+						<p>
+							The resulting AST looks like this:
+						</p>
+						<p>
+							</p>
+							<div class="thumbnail">
+								<img src="images/expression-ast.png" alt="" width="556" height="290">
+							</div>
+							<p>
+						</p>
+						<p>
+							visualizes and explains the details.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="_102" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Associativity</h3>
+						<p>
+							There is still one topic worth to mention, which is associativity. There is left and right associativity as well as non-associativity.
+							The example implemented left associativity. Associativity tells the parser how to construct the AST when 
+							there are two infix operations with the same precedence. The following example is taken from the corresponding wikipedia entry:
+						</p>
+						<p>
+							Consider the expression a ~ b ~ c. If the operator ~ has left associativity, this expression would be interpreted as 
+							(a ~ b) ~ c and evaluated left-to-right. If the operator has right associativity, the expression would be interpreted 
+							as a ~ (b ~ c) and evaluated right-to-left. If the operator is non-associative, the expression might be a syntax error, 
+							or it might have some special meaning.
+							The most common variant is left associativity:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Addition returns Expression:
+  Multiplication ({Addition.left=current} '+' right=Multiplication)*;</pre>
+							<p>
+							
+							Right associativity is done using a slightly modified pattern. Note the quantity operator and the call to the rule itself in the group:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Addition returns Expression:
+  Multiplication ({Addition.left=current} '+' right=Addition)?;</pre>
+							<p>
+						</p>
+						<p>
+							Non-associativity can be implemented in a similar way, but this time the final rule call is not immediately recursive but delegates
+							to the next precedence level:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Addition returns Expression:
+  Multiplication ({Addition.left=current} '+' right=Multiplication)?;</pre>
+							<p>
+						</p>
+						<p>
+							Sometimes it's more convenient to allow associativity on parser level, but forbid it later using validation. This allows
+							more descriptive diagnostics. Also the whole parsing process won't rely on error recovery but the editor will generally 
+							be more forgiving.
+						</p>
+						</section>
 						</section>
 					</div>
 				</div>
@@ -10767,7 +11088,7 @@ public Class&lt;? extends IProjectCreator&gt; bindIProjectCreator() {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_101" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_103" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Stage 2: Calling the Xtext Parser to Parse GMF Labels</h3>
 						<p>
 							GMF's generated parser for the labels is a bit poor: It will work on attributes only, and will fail for 
@@ -10825,7 +11146,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_102" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_104" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Stage 3: A Popup Xtext Editor (experimental)</h3>
 						<p>
 							<strong>SimplePropertyPopupXtextEditorEditPartOverride</strong> demonstrates how to spawn an Xtext editor to edit a model 
@@ -10886,7 +11207,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 							likely a higher effort.</strong>
 						</p>
 						<!-- subsection -->
-						<section id="_103" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_105" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Update the Plug-in Dependencies and Import Statements</h3>
 						<p>
 							You should update the version constraints of the plug-in dependencies in your manifest files from version 
@@ -10899,7 +11220,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_104" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_106" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Introduction of the Qualified Name</h3>
 						<p>
 							With Xtext 2.0 an object for dealing with qualified names has been introduced: <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/naming/QualifiedName.html"><abbr title="org.eclipse.xtext.naming.QualifiedName">QualifiedName</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java">(src)</a>. 
@@ -10926,7 +11247,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_105" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_107" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Changes in the index and in find references</h3>
 						<p>
 							In Xtext 1.0.x the interfaces <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/resource/IResourceDescriptions.html"><abbr title="org.eclipse.xtext.resource.IResourceDescriptions">IResourceDescriptions</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java">(src)</a>, 
@@ -10954,7 +11275,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_106" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_108" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Rewritten Node Model</h3>
 						<p>
 							To reduce memory consumption, the node model has been redesigned in Xtext 2.0. We no longer
@@ -10979,7 +11300,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_107" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_109" style="padding-top: 68px; margin-top: -68px;">
 						<h3>New Outline</h3>
 						<p>
 							The outline view has been completely re-implemented. To use the new one remove the following fragments from
@@ -11005,7 +11326,7 @@ fragment = outline.OutlineTreeProviderFragment {}</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_108" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_110" style="padding-top: 68px; margin-top: -68px;">
 						<h3>AutoEditStrategy</h3>
 						<p>
 							In Xtext 1.0.x your AutoEditStrategy extends the class <strong>DefaultAutoEditStrategy</strong> which implements the
@@ -11049,7 +11370,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_109" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_111" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Other Noteworthy API Changes</h3>
 						<p>
 							The <strong>src</strong> folders are generated once, so existing code will not be overwritten but has to be updated manually.
@@ -11147,7 +11468,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 							causes most likely a higher effort.</strong>
 						</p>
 						<!-- subsection -->
-						<section id="_110" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_112" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Update the Plug-in Dependencies and Import Statements</h3>
 						<p>
 							You should update the constraints from version <strong>0.7.x</strong> to <strong>[1.0.0,2.0.0)</strong> in your manifest files 
@@ -11165,7 +11486,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_111" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_113" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Rename the Packages in the dsl.ui-Plug-in</h3>
 						<p>
 							We changed the naming pattern for artifacts in the <strong>dsl.ui</strong>-plug-in to match the OSGi conventions. 
@@ -11178,7 +11499,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_112" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_114" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Update the Workflow</h3>
 						<p>
 							The <strong>JavaScopingFragment</strong> does no longer exist. It has been superseded by the 
@@ -11212,7 +11533,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_113" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_115" style="padding-top: 68px; margin-top: -68px;">
 						<h3>MANIFEST.MF and plugin.xml</h3>
 						<p>
 							The previous rename package refactoring updated most of the entries in the <strong>MANIFEST.MF</strong> and and some entries in 
@@ -11247,7 +11568,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_114" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_116" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Noteworthy API Changes</h3>
 						<p>
 							The <strong>src</strong> folders are generated once, so existing code will not be overwritten but has to be updated manually. 

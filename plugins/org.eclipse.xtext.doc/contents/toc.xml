@@ -528,6 +528,12 @@
 			</topic>
 			<topic href="contents/205-typical-language-configs.html#java_independent_languages" label="Languages Independent of JDT" >
 			</topic>
+			<topic href="contents/205-typical-language-configs.html#expressions" label="Parsing Expressions with Xtext" >
+				<topic href="contents/205-typical-language-configs.html#expressions_14" label="Construction of an AST" >
+				</topic>
+				<topic href="contents/205-typical-language-configs.html#expressions_15" label="Associativity" >
+				</topic>
+			</topic>
 		</topic>
 		<topic href="contents/210-emf-integration.html#emf_integration" label="Integration with EMF and Other EMF Editors" >
 			<topic href="contents/210-emf-integration.html#model_metamodel" label="Model, Ecore Model, and Ecore" >

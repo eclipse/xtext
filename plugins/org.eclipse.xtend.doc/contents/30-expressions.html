@@ -156,7 +156,7 @@ Consequently it is possible to access the members of a type reflectively by usin
 The keyword <span class="inlinecode"><span class="keyword">typeof</span></span> is mandatory for references to array types, e.g. <span class="inlinecode"><span class="keyword">typeof</span>(<span class="keyword">int</span>[]</span>
 </p>
 <p>
-Older versions of Xtend (2.4.1 and before) used the dollar as the delimiter character for nested types and
+Previous versions of Xtend (2.4.1 and before) used the dollar as the delimiter character for nested types and
 enforced the use of <span class="inlinecode"><span class="keyword">typeof</span></span> for all type literals:
 </p>
 <p>
@@ -1035,13 +1035,24 @@ higher precedence than <span class="inlinecode"><span class="keyword">this</span
 <a name="staticAccess"></a>
 <h3>Static Access</h3>
 <p>
-For accessing a static field or method you have to use the double colon <span class="inlinecode">::</span> like in this example:
+For accessing a static field or method you can use the Java syntax or the more explicit double colon <span class="inlinecode">::</span>. The
+following epxressions are equivalent:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
 MyClass::myField<br/>
+MyClass.myField
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+com.acme.MyClass.myMethod(<span class="string">&apos;foo&apos;</span>)<br/>
 com::acme::MyClass::myMethod(<span class="string">&apos;foo&apos;</span>)
 </p>
 </div>
@@ -1295,7 +1306,9 @@ An if-expression is used to choose between two different values based on a predi
 An expression 
 <span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> 
 results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> evaluates 
-to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>. That means 
+to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for an else branch
+that returns the default value of the current type, e.g. for reference type this is equivalent to <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>.
+That means 
 </p>
 <p>
 <span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x</span>

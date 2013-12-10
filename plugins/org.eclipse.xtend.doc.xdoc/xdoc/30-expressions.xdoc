@@ -114,7 +114,7 @@ Consequently it is possible to access the members of a type reflectively by usin
 
 The keyword code[Xtend][typeof] is mandatory for references to array types, e.g. code[Xtend][typeof(int\[\]]
 
-Older versions of Xtend (2.4.1 and before) used the dollar as the delimiter character for nested types and
+Previous versions of Xtend (2.4.1 and before) used the dollar as the delimiter character for nested types and
 enforced the use of code[Xtend][typeof] for all type literals:
 
 ul[
@@ -591,10 +591,16 @@ higher precedence than code[Xtend][this.myProperty].
 
 section2:staticAccess[Static Access]
 
-For accessing a static field or method you have to use the double colon code[::] like in this example:
+For accessing a static field or method you can use the Java syntax or the more explicit double colon code[::]. The
+following epxressions are equivalent:
 
 code[Xtend][
    MyClass::myField
+   MyClass.myField
+]
+
+code[Xtend][
+   com.acme.MyClass.myMethod('foo')
    com::acme::MyClass::myMethod('foo')
 ]
 
@@ -779,7 +785,9 @@ code[Xtend][
   if (p) e1 else e2
 ] 
 results in either the value code[e1] or code[e2] depending on whether the predicate code[p] evaluates 
-to code[Xtend][true] or code[Xtend][false]. The else part is optional which is a shorthand for code[Xtend][else null]. That means 
+to code[Xtend][true] or code[Xtend][false]. The else part is optional which is a shorthand for an else branch
+that returns the default value of the current type, e.g. for reference type this is equivalent to code[Xtend][else null].
+That means 
 
 code[Xtend][
   if (foo) x 
