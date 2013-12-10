@@ -51,7 +51,7 @@ public class Download extends AbstractXtendWebsite {
   
   public final static String WIN_32 = "win32";
   
-  private final String currentVersion = "2.4.3";
+  private final String currentVersion = "2.5.0";
   
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();

@@ -1,4 +1,4 @@
-document[Xtext 2.4.2 Documentation]
+document[Xtext 2.5 Documentation]
 
 codelanguage-def[Java][
   abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
@@ -133,7 +133,9 @@ chapter-ref[Xbase]
 chapter-ref[MWE2]
 
 %% chapter-ref[Xtend]
-%% chapter-ref[special_languages]
+%%
+chapter-ref[special_languages]
+
 chapter-ref[emf_integration]
 
 part[Appendix]

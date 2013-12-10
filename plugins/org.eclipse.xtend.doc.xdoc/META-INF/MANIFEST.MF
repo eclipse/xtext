@@ -11,4 +11,4 @@ Require-Bundle: org.eclipse.emf.mwe2.launch;bundle-version="2.2.0";resolution:=o
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.core,
- org.junit;bundle-version="4.11.0"
+ org.junit;bundle-version="4.10.0"

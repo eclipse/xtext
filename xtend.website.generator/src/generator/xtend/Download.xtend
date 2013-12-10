@@ -28,7 +28,7 @@ class Download extends AbstractXtendWebsite {
 	public static val WIN_64 = 'win32-x86_64';
 	public static val WIN_32 = 'win32';
 	
-	val currentVersion = "2.4.3";
+	val currentVersion = "2.5.0";
 
 	override contents() '''
 		«headline('Download')»
