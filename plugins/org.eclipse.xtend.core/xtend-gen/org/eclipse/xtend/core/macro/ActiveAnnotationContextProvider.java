@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
@@ -32,6 +31,7 @@ import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -39,6 +39,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -89,7 +90,7 @@ public class ActiveAnnotationContextProvider {
                   boolean _equals = Objects.equal(processorInstance, null);
                   if (_equals) {
                     String _identifier = processorType.getIdentifier();
-                    String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
+                    String _plus = ("Couldn\'t instantiate the annotation processor of type \'" + _identifier);
                     String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
                     IllegalStateException _illegalStateException = new IllegalStateException(_plus_1);
                     throw _illegalStateException;
@@ -101,25 +102,30 @@ public class ActiveAnnotationContextProvider {
                     throw e;
                   } else if (_t instanceof Throwable) {
                     final Throwable e_1 = (Throwable)_t;
-                    Serializable _switchResult = null;
+                    String _switchResult = null;
                     boolean _matched = false;
                     if (!_matched) {
                       if (e_1 instanceof ExceptionInInitializerError) {
                         _matched=true;
                         Throwable _exception = ((ExceptionInInitializerError)e_1).getException();
-                        _switchResult = _exception;
+                        String _message = _exception.getMessage();
+                        _switchResult = _message;
                       }
                     }
                     if (!_matched) {
                       String _message = e_1.getMessage();
                       _switchResult = _message;
                     }
-                    final Serializable msg = _switchResult;
+                    final String msg = _switchResult;
                     Resource _eResource = file.eResource();
                     EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+                    StringConcatenation _builder = new StringConcatenation();
+                    _builder.append("Problem while loading annotation processor: ");
+                    _builder.append(msg, "");
                     XAnnotation _value = it.getValue();
                     EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
-                      IssueCodes.PROCESSING_ERROR, ("Problem during loading of annotation processor class: " + msg), _value, null, (-1), null);
+                      IssueCodes.PROCESSING_ERROR, _builder.toString(), _value, 
+                      XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, (-1), null);
                     _errors.add(_eObjectDiagnosticImpl);
                   } else {
                     throw Exceptions.sneakyThrow(_t);

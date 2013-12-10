@@ -32,6 +32,7 @@ import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 /**
  * @author Sven Efftinge
@@ -138,18 +139,19 @@ class ActiveAnnotationContextProvider {
 					try {
 						val processorInstance = processorType.processorInstance
 						if (processorInstance == null) {
-							throw new IllegalStateException("Couldn't instantiate the referenced annotation processor of type '" + processorType.identifier + "'. This is usually the case when the processor resides in the same project as the annotated element.");
+							throw new IllegalStateException("Couldn't instantiate the annotation processor of type '" + processorType.identifier + "'. This is usually the case when the processor resides in the same project as the annotated element.");
 						}
 						fa.setProcessorInstance(processorInstance)
 					} catch (VirtualMachineError e) {
 						throw e
 					} catch (Throwable e) {
 						val msg = switch e {
-							ExceptionInInitializerError : e.exception
+							ExceptionInInitializerError : e.exception.message
 							default : e.message
 						} 
 						file.eResource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 
-							IssueCodes.PROCESSING_ERROR, "Problem during loading of annotation processor class: "+msg , value, null, -1, null))
+							IssueCodes.PROCESSING_ERROR, '''Problem while loading annotation processor: «msg»''', value,
+							XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, -1, null))
 					}
 					result.contexts.put(key, fa)
 				}
