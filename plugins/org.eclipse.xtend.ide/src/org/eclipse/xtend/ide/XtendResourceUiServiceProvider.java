@@ -77,11 +77,7 @@ public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProv
 	}
 
 	private char[][] getInclusionPatterns(IClasspathEntry entry) {
-		if (entry instanceof ClasspathEntry) {
-			ClasspathEntry classpathEntry = (ClasspathEntry) entry;
-			return classpathEntry.fullInclusionPatternChars();
-		}
-		return toFullPatternChars(entry, entry.getInclusionPatterns());
+		return null;
 	}
 
 	private char[][] getExclusionPatterns(IClasspathEntry entry) {
