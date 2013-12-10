@@ -35,7 +35,7 @@ module that does nothing but print a message to standard out. The
 second module is assembled of three components that read an Ecore 
 file, transform the contained classifier-names to upper-case and 
 serialize the resource back to a new file. The last example uses 
-the life-cycle methods of the <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> 
+the life-cycle methods of the <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> 
 to print the execution time of the workflow.
 </p>
 <a name="MWE2HelloWorld"></a>
@@ -104,7 +104,7 @@ of the class <span class="inlinecode">SayHello</span> looks straight forward:
 It looks like a simple POJO and that&apos;s the philosophy behind MWE2. 
 It is easily possible to assemble completely independent objects in 
 a declarative manner. To make the workflow executable with the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java" title="View Source Code" >(src)</a>, the component 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java" title="View Source Code" >(src)</a>, the component 
 <span class="inlinecode">SayHello</span> must be nested in a root 
 workflow:
 </p>
@@ -124,7 +124,7 @@ Workflow&nbsp;{<br/>
 </div>
 </p>
 <p>
-The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> 
+The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> 
 is implicitly imported in MWE2 modules to make the the modules more 
 concise. The execution result of this workflow will be revealed 
 after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as 
@@ -136,7 +136,7 @@ after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as
 <h3>A Simple Transformation</h3>
 <p>
 The following workflow solves the exemplary task to rename every 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> in an <em>*.ecore</em> file.
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> in an <em>*.ecore</em> file.
 It consists of three components that read, modify and write the model file:
 </p>
 <p>
@@ -163,7 +163,7 @@ own components even for minor operations to automate a process.
 </p>
 <p>
 The <span class="inlinecode">ResourceReader</span> simply reads the file with the given 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a> and stores it in a so called
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a> and stores it in a so called
 <em>slot</em> of the workflow context. A slot can be understood as a dictionary or map-entry.
 </p>
 <p>
@@ -192,7 +192,7 @@ The <span class="inlinecode">ResourceReader</span> simply reads the file with th
 </p>
 <p>
 The actual transformer takes the model from the slot and modifies it. It simply iterates the content
-of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> and sets its name. 
+of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> and sets its name. 
 </p>
 <p>
 <div class="literallayout">
@@ -228,7 +228,7 @@ of the resource, identifies each <a class="jdoc" href="http://download.eclipse.o
 <p>
 After the model has been modified it should be written to a new file. That&apos;s what the 
 <span class="inlinecode">ResourceWriter</span> does. It actually takes the resource from the given <em>slot</em> and saves it with
-the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a>:
+the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a>:
 </p>
 <p>
 <div class="literallayout">
@@ -603,8 +603,8 @@ without a default value.
 <p>
 It is not only possible to define mandatory properties for MWE2 
 modules but for classes as well. Therefore MWE2 ships with the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
-<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a>, the module validation will fail if no value was assigned
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a>, the module validation will fail if no value was assigned
 to that feature.
 </p>
 <a name="MWE2NamedComponents"></a>
