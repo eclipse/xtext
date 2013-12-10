@@ -141,9 +141,15 @@ class ActiveAnnotationContextProvider {
 							throw new IllegalStateException("Couldn't instantiate the referenced annotation processor of type '" + processorType.identifier + "'. This is usually the case when the processor resides in the same project as the annotated element.");
 						}
 						fa.setProcessorInstance(processorInstance)
-					} catch (IllegalStateException e) {
+					} catch (VirtualMachineError e) {
+						throw e
+					} catch (Throwable e) {
+						val msg = switch e {
+							ExceptionInInitializerError : e.exception
+							default : e.message
+						} 
 						file.eResource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 
-							IssueCodes.PROCESSING_ERROR, e.message , file, null, -1, null))
+							IssueCodes.PROCESSING_ERROR, "Problem during loading of annotation processor class: "+msg , value, null, -1, null))
 					}
 					result.contexts.put(key, fa)
 				}

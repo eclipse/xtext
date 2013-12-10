@@ -180,8 +180,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
-	@Inject private XAnnotationExtensions annotationExtensions;
-
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Map<Class<?>, ElementType> targetInfos;
 	
@@ -1548,14 +1546,4 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		annotationTypeModifierValidator.checkModifiers(annotation, "annotation type " + annotation.getName());
 	}
 	
-	@Check
-	protected void checkAnnotationInSameProject(XAnnotation annotation) {
-		if (annotationExtensions.isProcessed(annotation)) {
-			ActiveAnnotationContexts annotationContexts = ActiveAnnotationContexts.find(annotation.eResource());
-			if (!annotationContexts.getContexts().containsKey(annotation.getAnnotationType())) {
-				error("The referenced active annotation cannot be used from within the same project.",XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, -1, ACTIVE_ANNOTAION_IN_SAME_CONTAINER);
-			}
-		}
-	}
-
 }
