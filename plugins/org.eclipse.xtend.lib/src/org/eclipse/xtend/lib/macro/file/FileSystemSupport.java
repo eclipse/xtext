@@ -23,7 +23,8 @@ public interface FileSystemSupport {
 
 	/**
 	 * @param path
-	 * @return the children of the folder the given path points to.
+	 * @return the children of the folder the given path points to; 
+	 * 		   empty iterable if the path points to a non existent resource or to an existent file 
 	 */
 	Iterable<? extends Path> getChildren(Path path);
 	
