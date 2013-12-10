@@ -7,11 +7,9 @@
     <package 
        uri = "http://www.eclipse.org/xtext/example/fowlerdsl/Statemachine" 
        class = "org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage"
-       genModel = "org/eclipse/xtext/example/fowlerdsl/Statemachine.genmodel" /> 
+       genModel = "model/generated/Statemachine.genmodel" /> 
 	
   </extension>
-
-
 
 
 
