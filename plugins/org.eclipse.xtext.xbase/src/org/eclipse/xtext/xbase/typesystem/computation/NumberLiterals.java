@@ -121,7 +121,7 @@ public class NumberLiterals {
 		return (explicitType == null) ? (isFloatingPoint(literal)) ? Double.TYPE : Integer.TYPE : explicitType;
 	}
 
-	public Number numberValue(XNumberLiteral literal, Class<? extends Number> numberType) {
+	public Number numberValue(XNumberLiteral literal, Class<?> numberType) {
 		if (numberType == Integer.TYPE || numberType == Integer.class) {
 			BigInteger asBigInt = toBigInteger(literal);
 			BigInteger shiftRight = asBigInt.shiftRight(32);
@@ -138,6 +138,8 @@ public class NumberLiterals {
 			return asBigInt.longValue();
 		} else if (numberType == Float.TYPE || numberType == Float.class)
 			return Float.parseFloat(getDigits(literal));
+		else if (numberType == Byte.TYPE || numberType == Byte.class)
+			return Byte.parseByte(getDigits(literal));
 		else if (numberType == BigInteger.class)
 			return toBigInteger(literal);
 		else if (numberType == BigDecimal.class)
