@@ -30,12 +30,13 @@ public abstract class AbstractXtendWebsite extends AbstractWebsite {
   
   public Iterable<Pair<String,String>> topLevelMenu() {
     Pair<String,String> _mappedTo = Pair.<String, String>of("news.html", "News");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("download.html", "Download");
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("documentation.html", "Documentation");
-    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("community.html", "Community");
-    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("http://xtext.org", "Xtext");
-    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
-    ArrayList<Pair<String,String>> _newArrayList = CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5);
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("releasenotes.html", "Release Notes");
+    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("download.html", "Download");
+    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("documentation.html", "Documentation");
+    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("community.html", "Community");
+    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("http://xtext.org", "Xtext");
+    Pair<String,String> _mappedTo_6 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
+    ArrayList<Pair<String,String>> _newArrayList = CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6);
     return _newArrayList;
   }
   

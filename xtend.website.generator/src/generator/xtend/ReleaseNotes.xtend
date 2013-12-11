@@ -1,9 +1,9 @@
 package generator.xtend
 
-class ReleaseNotes24 extends AbstractXtendWebsite {
+class ReleaseNotes extends AbstractXtendWebsite {
 
 	override path() {
-		"releasenotes_2_4.html"
+		"releasenotes.html"
 	}
 	
 	override protected isPrettyPrint() {
@@ -11,11 +11,133 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	}
 	
 	override contents() '''
-		«headline('Release Notes - Version 2.4.2 (June 2013)')»
+		«headline('Release Notes')»
 		<div id="page">
 	  <div class="inner">
+	        <div class="container clearfix">
+	    <h2>Xtend 2.5.0 Release Notes (Dec 11th, 2013)</h2>
+	    <hr>
+	    <div class="span1">&nbsp;</div>
+	      <div class="span9">
+	        <p>
+	          With over <a href="http://goo.gl/7zorrn">100 bugfixes</a> Version 2.5.0 is mainly a bugfix and
+	          performance release. The team has been working on ironing out any glitches in the user experience
+	          and further improving a fluent workflow with the language and the tools.
+	        </p>
+	        <section id="annotations_2_5" style="padding-top: 68px; margin-top: -68px;">
+	          <h2>Full support for Java 7 Annotations</h2>
+	          <p>
+	            The Xtend compiler now supports all annotation values and constant expressions in annotations.
+	            These annotation can be evaluated during compilation within active annotations. Also all values
+	            supported in Java can now be set during annotation processing.
+	          </p>
+	<pre class="prettyprint lang-xtend linenums">
+	annotation Columns {
+	  Column[] value = #[ @Column('id') ]
+	}
+	annotation Column {
+	  String value
+	  int length = 2 << 16
+	}
+	</pre>
+	<pre class="prettyprint lang-xtend linenums">
+	class Entity {
+	  @Columns(#[@Column('id'), @Column(value = 'timestamp', length = 2 * 3 * 7)])
+	  CompositeKey key
+	}
+	</pre>
+	        </section>
+	        <section id="annotations_2_5" style="padding-top: 68px; margin-top: -68px;">
+	          <h2>Improved Compiler Checks</h2>
+	          <p>
+	            The Xtend compiler is now more picky when overloaded methods are invoked.
+	          </p>
+	          <h3 id="ambiguous_methods">Method overload validation</h3>
+	          <p>
+	            Ambiguous method invocations are checked and reported with a detailled message.
+	            The compiler optionally detects valid but suspiciously overloaded methods
+	            that could be implemented by accident. This is especially handy when property access and 
+	            extension methods come into play.
+	          </p>
+	<pre class="prettyprint lang-xtend linenums">
+	class A {
+	  def isCheck() {..}
+	}
+	class B extends A {
+	  def m() {
+	    /*
+	     * Ambiguous feature call.
+	     * The methods
+	     * 	getCheck() in B and
+	     * 	isCheck() in A
+	     * both match.
+	     */ 
+	    this.check
+	  }
+	  def getCheck() {..}
+	}
+	</pre>
+	          <h3 id="ambiguous_methods">Discouraged variable names</h3>
+	          <p>
+	            Some variable names are used implicitely by Xtend, for example the variable name 'self'.
+	            The compiler optionally reports if these names were picked manually.
+	          </p>
+	        </section>
+	        <section id="language_enhancements_2_5" style="padding-top: 68px; margin-top: -68px;">
+	          <h2>Small Language Enhancements</h2>
+	          <p>
+	            Some refinements have been made to the Xtend language semantics to improve the overall experience.
+	          </p>
+	          <h3 id="improved_auto_casts">Auto casts</h3>
+	          <p>
+	            Xtend supported auto-casts right from the beginning with its powerful switch expression.
+	            In 2.5, the more familiar syntax with instance-of checks caught up and also applies automatic
+	            casts in if expressions and while loops. 
+	          </p>
+	<pre class="prettyprint lang-xtend linenums">
+	def m(CharSequence c) {
+	  if (c instanceof String) {
+	    c.substring(42)
+	  }
+	}
+	</pre>
+	          <h3 id="switch_enum">Switch over enums</h3>
+	          <p>
+	            One of the few places where Xtend's syntax could be improved compared to Java, was a switch expression
+	            over enumeration values. Now it's no longer necessary to use a qualified name or static imports for the enum values but
+	            the literals are available automatically for the case guards. 
+	          </p>
+	<pre class="prettyprint lang-xtend linenums">
+	def m(RetentionPolicy p) {
+	  switch p {
+	    case CLASS: 1
+	    case RUNTIME: 2
+	    case SOURCE: 3
+	  }
+	}
+	</pre> 
+	        </section>
+	        <section id="template_expression_2_5" style="padding-top: 68px; margin-top: -68px;">
+	          <h2>Customizable template expression</h2>
+	          <p>
+	            The template expressions can now be semantically enhanced via target typing.
+	            One use case is code generation where imports are automatically added when concatenating a type
+	            or if the appended object does not have a proper string representation. It is also possible
+	            to pass an explicit line delimiter rather than using the platform default.
+	          </p>
+	<pre class="prettyprint lang-xtend linenums">
+	def StringConcatenationClient m() '«»''my template'«»'' // uses target type
+	
+	// caller code
+	val result = new StringConcatenation(lineDelimiter) // custom line delimiter or subtype
+	result.append(m)
+	return result.toString()
+	</pre>
+	        </section>
+	      </div>
+	    </div>
 	    <div class="container clearfix">
-	    <h2>Xtend 2.4.2 Release Notes (June 26th, 2013)</h2>
+	    <h2>Xtend 2.4.3 Release Notes (Sep 04th, 2013)</h2>
 	    <hr>
 	    <div class="span1">&nbsp;</div>
 	      <div class="span9">
