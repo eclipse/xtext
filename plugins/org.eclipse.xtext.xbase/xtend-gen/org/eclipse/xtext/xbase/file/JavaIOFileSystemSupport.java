@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Files;
@@ -190,5 +193,38 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     File _javaIOFile = this.getJavaIOFile(path);
     java.net.URI _uRI = _javaIOFile.toURI();
     return _uRI;
+  }
+  
+  public Path getPath(final Resource res) {
+    ResourceSet _resourceSet = res.getResourceSet();
+    URIConverter _uRIConverter = _resourceSet.getURIConverter();
+    URI _uRI = res.getURI();
+    final URI uri = _uRIConverter.normalize(_uRI);
+    boolean _isFile = uri.isFile();
+    if (_isFile) {
+      Provider<WorkspaceConfig> _projectInformationProvider = this.getProjectInformationProvider();
+      WorkspaceConfig _get = _projectInformationProvider.get();
+      String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
+      File _file = new File(_absoluteFileSystemPath);
+      java.net.URI _uRI_1 = _file.toURI();
+      final String workspacePath = _uRI_1.getPath();
+      String _fileString = uri.toFileString();
+      File _file_1 = new File(_fileString);
+      java.net.URI _uRI_2 = _file_1.toURI();
+      final String absolutefilePath = _uRI_2.getPath();
+      boolean _startsWith = absolutefilePath.startsWith(workspacePath);
+      boolean _not = (!_startsWith);
+      if (_not) {
+        IllegalStateException _illegalStateException = new IllegalStateException((((("Couldn\'t determine file path. The file (\'" + absolutefilePath) + "\') doesn\'t seem to be contained in the workspace (\'") + workspacePath) + "\')"));
+        throw _illegalStateException;
+      }
+      int _length = workspacePath.length();
+      final String filePath = absolutefilePath.substring(_length);
+      String _string = filePath.toString();
+      String _plus = ("/" + _string);
+      Path _path = new Path(_plus);
+      return _path;
+    }
+    return null;
   }
 }

@@ -18,7 +18,6 @@ import com.google.common.primitives.Longs
 import com.google.common.primitives.Shorts
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.io.File
 import java.util.Collection
 import java.util.List
 import java.util.Map
@@ -26,6 +25,7 @@ import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
+import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
@@ -94,12 +94,15 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.resource.CompilerPhases
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
@@ -109,9 +112,6 @@ import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
-import org.eclipse.xtext.validation.EObjectDiagnosticImpl
-import org.eclipse.xtext.diagnostics.Severity
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -166,7 +166,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject JvmTypeExtensions typeExtensions
 
-	@Inject MutableFileSystemSupport fileSystemSupport
+	@Inject AbstractFileSystemSupport fileSystemSupport
 	@Inject FileLocations fileLocations
 	@Inject Provider<WorkspaceConfig> workspaceConfigProvider
 	
@@ -212,20 +212,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	override Path getFilePath() {
-		val uri = xtendFile.eResource.URI
-		if (uri.platform) {
-			return new Path(uri.toPlatformString(false))
-		}
-		if (uri.file) {
-			val workspacePath = new File(workspaceConfigProvider.get.absoluteFileSystemPath).toURI.path
-			val absolutefilePath = new File(uri.toFileString).toURI.path
-			if (!absolutefilePath.startsWith(workspacePath)) {
-				throw new IllegalStateException("Couldn't determine file path. The file ('"+absolutefilePath+"') doesn't seem to be contained in the workspace ('"+workspacePath+"')")
-			}
-			val filePath = absolutefilePath.substring(workspacePath.length)
-			return new Path('/'+filePath.toString)
-		}
-		return new Path(uri.path);
+		return fileSystemSupport.getPath(xtendFile.eResource)
 	}
 	
 	def void setXtendFile(XtendFile xtendFile) {

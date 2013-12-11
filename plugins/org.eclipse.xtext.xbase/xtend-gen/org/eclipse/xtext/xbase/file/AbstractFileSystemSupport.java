@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -53,4 +54,6 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  public abstract Path getPath(final Resource res);
 }

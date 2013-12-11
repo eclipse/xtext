@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
@@ -296,5 +297,21 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     IPath _append = _location.append(_string);
     URI _uRI = URIUtil.toURI(_append);
     return _uRI;
+  }
+  
+  public Path getPath(final Resource res) {
+    org.eclipse.emf.common.util.URI _uRI = res.getURI();
+    boolean _isPlatform = _uRI.isPlatform();
+    boolean _not = (!_isPlatform);
+    if (_not) {
+      org.eclipse.emf.common.util.URI _uRI_1 = res.getURI();
+      String _plus = ("Expecting platform URI but was : " + _uRI_1);
+      IllegalStateException _illegalStateException = new IllegalStateException(_plus);
+      throw _illegalStateException;
+    }
+    org.eclipse.emf.common.util.URI _uRI_2 = res.getURI();
+    String _platformString = _uRI_2.toPlatformString(false);
+    Path _path = new Path(_platformString);
+    return _path;
   }
 }

@@ -19,7 +19,6 @@ import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -149,6 +148,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -265,7 +265,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   private JvmTypeExtensions typeExtensions;
   
   @Inject
-  private MutableFileSystemSupport fileSystemSupport;
+  private AbstractFileSystemSupport fileSystemSupport;
   
   @Inject
   private FileLocations fileLocations;
@@ -349,40 +349,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   public Path getFilePath() {
     XtendFile _xtendFile = this.getXtendFile();
     Resource _eResource = _xtendFile.eResource();
-    final URI uri = _eResource.getURI();
-    boolean _isPlatform = uri.isPlatform();
-    if (_isPlatform) {
-      String _platformString = uri.toPlatformString(false);
-      Path _path = new Path(_platformString);
-      return _path;
-    }
-    boolean _isFile = uri.isFile();
-    if (_isFile) {
-      WorkspaceConfig _get = this.workspaceConfigProvider.get();
-      String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
-      File _file = new File(_absoluteFileSystemPath);
-      java.net.URI _uRI = _file.toURI();
-      final String workspacePath = _uRI.getPath();
-      String _fileString = uri.toFileString();
-      File _file_1 = new File(_fileString);
-      java.net.URI _uRI_1 = _file_1.toURI();
-      final String absolutefilePath = _uRI_1.getPath();
-      boolean _startsWith = absolutefilePath.startsWith(workspacePath);
-      boolean _not = (!_startsWith);
-      if (_not) {
-        IllegalStateException _illegalStateException = new IllegalStateException((((("Couldn\'t determine file path. The file (\'" + absolutefilePath) + "\') doesn\'t seem to be contained in the workspace (\'") + workspacePath) + "\')"));
-        throw _illegalStateException;
-      }
-      int _length = workspacePath.length();
-      final String filePath = absolutefilePath.substring(_length);
-      String _string = filePath.toString();
-      String _plus = ("/" + _string);
-      Path _path_1 = new Path(_plus);
-      return _path_1;
-    }
-    String _path_2 = uri.path();
-    Path _path_3 = new Path(_path_2);
-    return _path_3;
+    return this.fileSystemSupport.getPath(_eResource);
   }
   
   public void setXtendFile(final XtendFile xtendFile) {
