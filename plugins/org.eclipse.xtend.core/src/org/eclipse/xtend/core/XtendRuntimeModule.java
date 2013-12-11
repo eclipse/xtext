@@ -57,6 +57,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
+import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.FileLocationsImpl;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
@@ -220,6 +221,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	}
 	
 	public Class<? extends MutableFileSystemSupport> bindFileHandleFactory() {
+		return AbstractFileSystemSupport.class;
+	}
+	
+	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
 		return JavaIOFileSystemSupport.class;
 	}
 	

@@ -22,7 +22,7 @@ public class MavenTraceURIConverter extends DefaultTraceURIConverter {
 	@Override
 	public URI getURIForTrace(XtextResource context) {
 		MavenProject project = MavenProjectAdapter.get(context.getResourceSet());
-		URI uri = context.getURI();
+		URI uri = context.getResourceSet().getURIConverter().normalize(context.getURI());
 		URI result = deresolve(project, uri);
 		return result;
 	}
