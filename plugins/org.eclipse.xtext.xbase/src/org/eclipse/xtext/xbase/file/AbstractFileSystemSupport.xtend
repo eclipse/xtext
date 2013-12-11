@@ -7,6 +7,7 @@ import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.emf.ecore.resource.Resource
 
 abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 
@@ -20,4 +21,6 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 		path.parent.mkdir
 		path.setContentsAsStream(new StringInputStream(contents.toString, path.getCharset))
 	}
+	
+	def Path getPath(Resource res);
 }

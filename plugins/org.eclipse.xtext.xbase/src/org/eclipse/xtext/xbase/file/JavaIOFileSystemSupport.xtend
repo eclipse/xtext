@@ -19,6 +19,7 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
+import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -93,6 +94,19 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	
 	override toURI(Path path) {
 		path.javaIOFile.toURI
+	}
+	
+	override getPath(Resource res) {
+		val uri = res.resourceSet.URIConverter.normalize(res.URI)
+		if (uri.file) {
+			val workspacePath = new File(projectInformationProvider.get.absoluteFileSystemPath).toURI.path
+			val absolutefilePath = new File(uri.toFileString).toURI.path
+			if (!absolutefilePath.startsWith(workspacePath)) {
+				throw new IllegalStateException("Couldn't determine file path. The file ('"+absolutefilePath+"') doesn't seem to be contained in the workspace ('"+workspacePath+"')")
+			}
+			val filePath = absolutefilePath.substring(workspacePath.length)
+			return new Path('/'+filePath.toString)
+		}
 	}
 	
 }
