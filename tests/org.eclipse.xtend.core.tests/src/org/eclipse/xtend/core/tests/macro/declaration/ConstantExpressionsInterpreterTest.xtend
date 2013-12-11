@@ -101,6 +101,55 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 		}
 	}
 	
+	@Test def void testOperators() {
+		assertEvaluatesTo( 1 === 2 , '1'->'int', '2'->'int', '===')
+		assertEvaluatesTo( true , '1'->'int', '1'->'byte', '===')
+		assertEvaluatesTo( true , '1'->'int', '1'->'float', '===')
+		assertEvaluatesTo( true , '1'->'int', '1'->'long', '===')
+		assertEvaluatesTo( true , '1'->'int', '1'->'double', '===')
+		
+		assertEvaluatesTo( true , '1'->'int', '1'->'byte', '<=')
+		assertEvaluatesTo( true , '1'->'int', '1'->'float', '<=')
+		assertEvaluatesTo( true , '1'->'int', '1'->'long', '<=')
+		assertEvaluatesTo( true , '1'->'int', '1'->'double', '<=')
+		
+		assertEvaluatesTo( true , '1'->'int', '1'->'byte', '>=')
+		assertEvaluatesTo( true , '1'->'int', '1'->'float', '>=')
+		assertEvaluatesTo( true , '1'->'int', '1'->'long', '>=')
+		assertEvaluatesTo( true , '1'->'int', '1'->'double', '>=')
+		
+		assertEvaluatesTo( false , '1'->'int', '1'->'byte', '!==')
+		assertEvaluatesTo( false , '1'->'int', '1'->'float', '!==')
+		assertEvaluatesTo( false , '1'->'int', '1'->'long', '!==')
+		assertEvaluatesTo( false , '1'->'int', '1'->'double', '!==')
+		
+		assertEvaluatesTo( false , '1'->'int', '1'->'byte', '<')
+		assertEvaluatesTo( false , '1'->'int', '1'->'float', '<')
+		assertEvaluatesTo( false , '1'->'int', '1'->'long', '<')
+		assertEvaluatesTo( false , '1'->'int', '1'->'double', '<')
+		
+		assertEvaluatesTo( false , '1'->'int', '1'->'byte', '>')
+		assertEvaluatesTo( false , '1'->'int', '1'->'float', '>')
+		assertEvaluatesTo( false , '1'->'int', '1'->'long', '>')
+		assertEvaluatesTo( false , '1'->'int', '1'->'double', '>')
+	}
+	
+	protected def void assertEvaluatesTo(Object expectation, Pair<String,String> left, Pair<String,String> right, String op) {
+		val file = file('''
+			import static MyConstants.*
+			
+			class C { 
+				static val result = A «op» B
+			}
+			class MyConstants {
+				static val «left.value» A = «left.key» as «left.value»
+				static val «right.value» B = «right.key» as «right.value»
+			}
+		''')
+		val stringField = file.xtendTypes.head.members.filter(XtendField).head
+		assertEquals(expectation, interpreter.evaluate(stringField.initialValue, null))
+	}
+	
 	@Test def void testEnumLiteral() {
 		'test.Enum1.YELLOW'.evaluatesTo [
 			assertEquals("YELLOW", (it as JvmEnumerationLiteral).simpleName)

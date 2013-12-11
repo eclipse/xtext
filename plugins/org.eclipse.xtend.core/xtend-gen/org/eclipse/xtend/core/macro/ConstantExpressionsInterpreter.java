@@ -56,6 +56,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XListLiteral;
@@ -250,6 +251,12 @@ public class ConstantExpressionsInterpreter {
     String _plus_1 = (_plus + "\'");
     ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(_plus_1, expression);
     throw _constantExpressionEvaluationException;
+  }
+  
+  protected Object _internalEvaluate(final XCastedExpression expression, final Context ctx) {
+    XExpression _target = expression.getTarget();
+    Object _internalEvaluate = this.internalEvaluate(_target, ctx);
+    return _internalEvaluate;
   }
   
   protected Object _internalEvaluate(final XStringLiteral it, final Context ctx) {
@@ -627,43 +634,43 @@ public class ConstantExpressionsInterpreter {
       if (!_matched) {
         if (Objects.equal(op,"<")) {
           _matched=true;
-          Object _lessThan = this.constantOperators.lessThan(left, right);
-          _switchResult = _lessThan;
+          boolean _lessThan = this.constantOperators.lessThan(left, right);
+          _switchResult = Boolean.valueOf(_lessThan);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,">")) {
           _matched=true;
-          Object _greaterThan = this.constantOperators.greaterThan(left, right);
-          _switchResult = _greaterThan;
+          boolean _greaterThan = this.constantOperators.greaterThan(left, right);
+          _switchResult = Boolean.valueOf(_greaterThan);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"<=")) {
           _matched=true;
-          Object _lessEquals = this.constantOperators.lessEquals(left, right);
-          _switchResult = _lessEquals;
+          boolean _lessEquals = this.constantOperators.lessEquals(left, right);
+          _switchResult = Boolean.valueOf(_lessEquals);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,">=")) {
           _matched=true;
-          Object _greaterEquals = this.constantOperators.greaterEquals(left, right);
-          _switchResult = _greaterEquals;
+          boolean _greaterEquals = this.constantOperators.greaterEquals(left, right);
+          _switchResult = Boolean.valueOf(_greaterEquals);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"===")) {
           _matched=true;
-          Object _same = this.constantOperators.same(left, right);
-          _switchResult = _same;
+          boolean _same = this.constantOperators.same(left, right);
+          _switchResult = Boolean.valueOf(_same);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"!==")) {
           _matched=true;
-          Object _notSame = this.constantOperators.notSame(left, right);
-          _switchResult = _notSame;
+          boolean _notSame = this.constantOperators.notSame(left, right);
+          _switchResult = Boolean.valueOf(_notSame);
         }
       }
       if (!_matched) {
@@ -814,6 +821,8 @@ public class ConstantExpressionsInterpreter {
       return _internalEvaluate((XUnaryOperation)it, ctx);
     } else if (it instanceof XBooleanLiteral) {
       return _internalEvaluate((XBooleanLiteral)it, ctx);
+    } else if (it instanceof XCastedExpression) {
+      return _internalEvaluate((XCastedExpression)it, ctx);
     } else if (it instanceof XNumberLiteral) {
       return _internalEvaluate((XNumberLiteral)it, ctx);
     } else if (it instanceof XStringLiteral) {
