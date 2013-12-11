@@ -1035,15 +1035,15 @@ higher precedence than <span class="inlinecode"><span class="keyword">this</span
 <a name="staticAccess"></a>
 <h3>Static Access</h3>
 <p>
-For accessing a static field or method you can use the Java syntax or the more explicit double colon <span class="inlinecode">::</span>. The
-following epxressions are equivalent:
+For accessing a static field or method you can use the recommended Java syntax or the more explicit double colon <span class="inlinecode">::</span>. 
+That means, the following epxressions are pairwise equivalent:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-MyClass::myField<br/>
-MyClass.myField
+MyClass.myField<br/>
+MyClass::myField
 </p>
 </div>
 </div>
@@ -1053,13 +1053,14 @@ MyClass.myField
 <div class="incode">
 <p class="code">
 com.acme.MyClass.myMethod(<span class="string">&apos;foo&apos;</span>)<br/>
+com.acme.MyClass::myMethod(<span class="string">&apos;foo&apos;</span>)<br/>
 com::acme::MyClass::myMethod(<span class="string">&apos;foo&apos;</span>)
 </p>
 </div>
 </div>
 </p>
 <p>
-Alternatively you could import the method using a <a href="20-classes-and-functions.html#imports" title="Go to &quot;Imports&quot;">static import</a>.
+Alternatively you could import the method or field using a <a href="20-classes-and-functions.html#imports" title="Go to &quot;Imports&quot;">static import</a>.
 </p>
 <a name="nullSafeFeatureCalls"></a>
 <h3>Null-Safe Feature Call</h3>

@@ -363,7 +363,7 @@ e[Active Annotations] are a powerful and unique concept that allows to solve a l
 IDE wizards, many code generators or manually writing boilerplate code are no longer state of the art. Active annotations basically e[is] a means of code generation,
 but its simple integration with existing projects and the fast development turn-arounds diminish the typical downsides of code generation.
 
-e[Important note: The Active Annotation-API as of version 2.4 is provisional, and might be changed and improved in later releases.]
+e[Important note: The Active Annotation-API as of version 2.5 is provisional, and might be changed and improved in future releases.]
 
 section[Existing Active Annotations]
 

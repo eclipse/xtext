@@ -2317,25 +2317,26 @@ name = 'Horst' // translates to 'it.setName("Horst");'</pre>
 						<section id="staticAccess" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Static Access</h3>
 						<p>
-							For accessing a static field or method you can use the Java syntax or the more explicit double colon <code class="prettyprint lang-xtend">::</code>. The
-							following epxressions are equivalent:
+							For accessing a static field or method you can use the recommended Java syntax or the more explicit double colon <code class="prettyprint lang-xtend">::</code>. 
+							That means, the following epxressions are pairwise equivalent:
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-MyClass::myField
-MyClass.myField</pre>
+MyClass.myField
+MyClass::myField</pre>
 							<p>
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 com.acme.MyClass.myMethod('foo')
+com.acme.MyClass::myMethod('foo')
 com::acme::MyClass::myMethod('foo')</pre>
 							<p>
 						</p>
 						<p>
-							Alternatively you could import the method using a <a href="#imports">static import</a>.
+							Alternatively you could import the method or field using a <a href="#imports">static import</a>.
 						</p>
 						</section>
 						<!-- subsection -->
@@ -3533,7 +3534,7 @@ class LazyTest {
 							but its simple integration with existing projects and the fast development turn-arounds diminish the typical downsides of code generation.
 						</p>
 						<p>
-							<strong>Important note: The Active Annotation-API as of version 2.4 is provisional, and might be changed and improved in later releases.</strong>
+							<strong>Important note: The Active Annotation-API as of version 2.5 is provisional, and might be changed and improved in future releases.</strong>
 						</p>
 						</section>
 						</section>

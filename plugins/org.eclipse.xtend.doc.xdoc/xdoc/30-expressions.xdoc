@@ -591,20 +591,21 @@ higher precedence than code[Xtend][this.myProperty].
 
 section2:staticAccess[Static Access]
 
-For accessing a static field or method you can use the Java syntax or the more explicit double colon code[::]. The
-following epxressions are equivalent:
+For accessing a static field or method you can use the recommended Java syntax or the more explicit double colon code[::]. 
+That means, the following epxressions are pairwise equivalent:
 
 code[Xtend][
-   MyClass::myField
    MyClass.myField
+   MyClass::myField
 ]
 
 code[Xtend][
    com.acme.MyClass.myMethod('foo')
+   com.acme.MyClass::myMethod('foo')
    com::acme::MyClass::myMethod('foo')
 ]
 
-Alternatively you could import the method using a ref:imports[static import].
+Alternatively you could import the method or field using a ref:imports[static import].
 
 section2:nullSafeFeatureCalls[Null-Safe Feature Call]
 

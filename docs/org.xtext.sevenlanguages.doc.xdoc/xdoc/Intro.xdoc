@@ -68,7 +68,7 @@ chapter:common_requirements[Common Requirements]
 
 To run any of the examples, you will need link[http://www.eclipse.org/downloads][Eclipse 3.5 or better]
 for your platform. In addition, you have to install link[http://www.eclipse.org/xtend/download.html][Xtend]
-and of course link[http://www.eclipse.org/Xtext/download.html][Xtext 2.4].
+and of course link[http://www.eclipse.org/Xtext/download.html][Xtext 2.5].
 
 If you prefer a simple all-inclusive installation, consider downloading the latest
 link[http://www.eclipse.org/Xtext/download.html][Xtext distribution].

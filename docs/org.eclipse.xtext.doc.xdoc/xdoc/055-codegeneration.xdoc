@@ -18,7 +18,7 @@ item[An instance of codeRef[org.eclipse.xtext.generator.IFileSystemAccess]]
 
 The codeRef[org.eclipse.xtext.generator.IFileSystemAccess] API abstracts over the different file systems the code generator my run over.
 These are typically Eclipse's file system, when the code generator is triggered from within the incremental build infrastructure in Eclipse,
-and code[java.io.File] when the code generator is executed outside Eclipse, say in a build.
+and code[java.io.File] when the code generator is executed outside Eclipse, say in a headless build.
 
 A very simple implementation of a code generator for the ref:statemachine[example statemachine language] introduced earlier could be the following:
 

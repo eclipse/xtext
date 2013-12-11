@@ -110,7 +110,7 @@ changed or should be translated otherwise. The two parameters passed in to this 
 <p>
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/IFileSystemAccess.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IFileSystemAccess" >IFileSystemAccess</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IFileSystemAccess.java" title="View Source Code" >(src)</a> API abstracts over the different file systems the code generator my run over.
 These are typically Eclipse&apos;s file system, when the code generator is triggered from within the incremental build infrastructure in Eclipse,
-and <span class="inlinecode">java.io.File</span> when the code generator is executed outside Eclipse, say in a build.
+and <span class="inlinecode">java.io.File</span> when the code generator is executed outside Eclipse, say in a headless build.
 </p>
 <p>
 A very simple implementation of a code generator for the <a href="020-grammar-language.html#statemachine" title="Go to &quot;A First Example&quot;">example statemachine language</a> introduced earlier could be the following:
