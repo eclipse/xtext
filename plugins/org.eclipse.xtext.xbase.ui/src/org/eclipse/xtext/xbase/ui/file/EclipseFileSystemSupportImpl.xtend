@@ -18,6 +18,7 @@ import com.google.common.base.Preconditions
 import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.filesystem.URIUtil
+import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -136,6 +137,13 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	
 	override toURI(Path path) {
 		URIUtil.toURI(workspaceRoot.location.append(path.toString))
+	}
+	
+	override getPath(Resource res) {
+		if (!res.URI.platform) {
+			throw new IllegalStateException("Expecting platform URI but was : " + res.URI)
+		}
+		return new Path(res.URI.toPlatformString(false))
 	}
 	
 }
