@@ -19,6 +19,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
+import java.io.FileInputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -120,6 +121,26 @@ class JavaIoFileSystemTest {
 		file.contents = "Hello Foo"
 		assertTrue(file.exists)
 		assertEquals(0, file.children.size)
+	}
+	
+	@Test def void testGetURI() {
+		val file = new Path("/foo/bar/Foo.text")
+		assertFalse(file.exists)
+		assertNotNull(file.toURI)
+
+		file.contents = "Hello Foo"
+		assertTrue(file.exists)
+		assertNotNull(file.toURI)
+		
+		val javaIoFile = new File(file.toURI)
+		assertTrue(javaIoFile.exists)
+		
+		val data = newByteArrayOfSize(javaIoFile.length as int)
+		val fis = new FileInputStream(javaIoFile)
+		fis.read(data)
+		fis.close
+		
+		assertEquals("Hello Foo", new String(data))
 	}
 
 }

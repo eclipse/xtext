@@ -90,4 +90,9 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 		path.parent.mkdir
 		ByteStreams.copy(|stream) [| new BufferedOutputStream(new FileOutputStream(path.javaIOFile))]
 	}
+	
+	override toURI(Path path) {
+		path.javaIOFile.toURI
+	}
+	
 }
