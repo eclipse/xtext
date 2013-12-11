@@ -222,3 +222,5 @@ tr[td[codeRef[org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFrag
 ]
 
 section-ref[dependencyInjection]
+
+section-ref[continuousIntegration]

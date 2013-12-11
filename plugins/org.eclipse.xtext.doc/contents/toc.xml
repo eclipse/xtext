@@ -168,6 +168,22 @@
 				<topic href="contents/030-generator.html#dependencyInjection_9" label="Obtaining an Injector" >
 				</topic>
 			</topic>
+			<topic href="contents/030-generator.html#continuousIntegration" label="Continuous Integration (with Maven)" >
+				<topic href="contents/030-generator.html#continuousIntegration_3" label="An overview of the example projects" >
+				</topic>
+				<topic href="contents/030-generator.html#tychoBuild" label="Building an Xtext language with Maven and Tycho" >
+					<topic href="contents/030-generator.html#tychoBuild_2" label="The releng project (my.mavenized.herolanguage.releng)" >
+					</topic>
+					<topic href="contents/030-generator.html#tychoBuild_3" label="The update site project (my.mavenized.herolanguage.updatesite)" >
+					</topic>
+					<topic href="contents/030-generator.html#tychoBuild_4" label="The feature project (my.mavenized.herolanguage.sdk)" >
+					</topic>
+					<topic href="contents/030-generator.html#tychoBuild_5" label="The core language project (my.mavenized.herolanguage)" >
+					</topic>
+				</topic>
+				<topic href="contents/030-generator.html#standaloneBuild" label="Integration in Standard Maven Builds" >
+				</topic>
+			</topic>
 		</topic>
 		<topic href="contents/050-heading-runtime.html#runtime_concepts" label="Runtime Concepts" >
 			<topic href="contents/050-heading-runtime.html#runtimeSetup" label="Runtime Setup (ISetup)" >

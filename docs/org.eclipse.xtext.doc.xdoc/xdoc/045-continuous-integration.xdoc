@@ -1,0 +1,240 @@
+section:continuousIntegration[Continuous Integration (with Maven)]
+
+There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language, 
+that runs all tests and creates an Eclipse update site and other needed artifacts and secondly you may want to have your language and its corresponding
+code generator integrated in your application builds. We will discuss both cases in the section along a set of example projects, which you
+can clone, inspect or download from link[https://github.com/svenefftinge/maven-xtext-example][https://github.com/svenefftinge/maven-xtext-example].
+
+To follow this section you need to have a basic understanding of how Maven works. Please read a tutorial on Maven if you don't know anything about it.  
+
+section2[An overview of the example projects]
+
+If you have a look at the example, you'll find seven different projects of which six are for the various aspects of the language and its build.
+First we have the language's runtime project, ui project and test project. In addition we need a feature project, an update site project and a project
+where we put the parent pom. The seventh project is called code[example-project] and is really a small application project that uses the built language and
+triggers the code generator through a dedicated maven plug-in. Let's first have a look at how to build the language.
+
+section2:tychoBuild[Building an Xtext language with Maven and Tycho]
+
+Although the runtime aspects of an Xtext language is not dependent on Eclipse or its OSGi container, an Xtext language is developed
+in the form of OSGi bundles. For this kind of builds most people rely on link[http://eclipse.org/tycho/][Tycho], which is an OSGi/P2 adapter plug-in for Maven builds.
+Tycho obtains much information from the OSGi bundle's manifest. Additionally needed information is configured through the pom.xml file which sits at the root of each project.
+
+section3[The releng project (my.mavenized.herolanguage.releng)]
+
+All of the projects are aggregated in a parent pom in code[my.mavenized.herolanguage.releng]. Information defined in the parent pom is automatically inherited by
+the aggregated child projects, so you don't need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:
+
+ul[
+item[The Xtend compiler plug-in will generate the Java source code for any Xtend files during the 'generate-sources' phase
+code[XML][
+<pluginManagement>
+  <plugins>
+    <!-- xtend-maven-plugin is in pluginManagement instead of in plugins
+       so that it doesn't run before the exec-maven-plugin's *.mwe2 gen;
+       this way we can list it after. 
+      -->
+      
+    <plugin>
+      <groupId>org.eclipse.xtend</groupId>
+      <artifactId>xtend-maven-plugin</artifactId>
+      <version>${xtext.version}</version>
+      <executions>
+  <execution>
+    <goals>
+      <goal>compile</goal>
+      <goal>xtend-install-debug-info</goal>
+      <goal>testCompile</goal>
+      <goal>xtend-test-install-debug-info</goal>
+    </goals>
+  </execution>
+      </executions>
+      <configuration>
+  <outputDirectory>xtend-gen</outputDirectory>
+      </configuration>
+    </plugin>
+  </plugins>
+</pluginManagement>
+]
+]
+item[The Tycho plug-in will pick up and use Eclipse plug-in specific configuration data from the projects in order to build Eclipse conformant OSGi bundles, features and an update site.
+code[XML][
+<plugins>
+  <plugin>
+    <groupId>org.eclipse.tycho</groupId>
+    <artifactId>tycho-maven-plugin</artifactId>
+    <version>${tycho-version}</version>
+    <extensions>true</extensions>
+  </plugin>
+</plugins>
+]
+]
+]
+
+section3[The update site project (my.mavenized.herolanguage.updatesite)]
+
+The project code[my.mavenized.herolanguage.updatesite] denotes the updatesite project and only contains a pom.xml and a file called category.xml. The latter includes information about which features
+are contained in the update site. As you can see, the code[category.xml] file points to the single feature, which is defined in ...
+
+section3[The feature project (my.mavenized.herolanguage.sdk)]
+
+This is another project made up on configuration data solely. It contains the code[feature.xml] file which points to the Eclipse plug-ins (bundles) included in this feature.
+
+section3[The core language project (my.mavenized.herolanguage)]
+
+The code[pom.xml] for the language project contains information about how Maven should run Xtext's code generator.  The first used plug-in cleans 
+the directories containing generated resources during the clean phase:
+code[XML][
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-clean-plugin</artifactId>
+  <version>2.5</version>
+  <configuration>
+    <filesets>
+      <fileset>
+  <directory>${basedir}/src-gen</directory>
+      </fileset>
+      <fileset>
+  <directory>${basedir}/xtend-gen</directory>
+      </fileset>
+      <!-- clean ui plugin as well -->
+      <fileset>
+  <directory>${basedir}/../${project.artifactId}.ui/src-gen</directory>
+      </fileset>
+      <fileset>
+  <directory>${basedir}/../${project.artifactId}.ui/xtend-gen</directory>
+      </fileset>
+      <!-- clean test fragment as well -->
+      <fileset>
+  <directory>${basedir}/../${project.artifactId}.tests/src-gen</directory>
+      </fileset>
+      <fileset>
+  <directory>${basedir}/../${project.artifactId}.tests/xtend-gen</directory>
+      </fileset>
+    </filesets>
+  </configuration>
+</plugin>
+]
+
+The second plug-in invokes the MWE2 file through a standard Java process:
+
+code[XML][
+<plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>exec-maven-plugin</artifactId>
+  <version>1.2.1</version>
+  <executions>
+    <execution>
+      <phase>generate-sources</phase>
+      <goals>
+  <goal>java</goal>
+      </goals>
+    </execution>
+  </executions>
+  <configuration>
+    <includeProjectDependencies>false</includeProjectDependencies>
+    <includePluginDependencies>true</includePluginDependencies>
+    <mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
+    <arguments>
+      <argument>${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2</argument>
+    </arguments>
+  </configuration>
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.xtext</groupId>
+      <artifactId>org.eclipse.xtext.xtext</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.xtext</groupId>
+      <artifactId>org.eclipse.xtext.xbase</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+  </dependencies>
+</plugin>
+]
+
+You need to adjust the mwe file as well to be able to run it this way. There are three important adjustments you need to make:
+
+First you need to use a e[platform:resource] code[URI] instead of a e[classpath] code[URI] to point to your Xtext grammar file. This is because we don't 
+have the source folder on the classpath of the exec plug-in. To do so open the mwe file and change the declaration of the grammarURI to a platform URI similar 
+to how it is done in the example: 
+
+code[MWE2][
+  // grammarURI has to be platform:/resource as it is not on the classpath
+  var grammarURI = "platform:/resource/${projectName}/src/my/mavenized/HeroLanguage.xtext"
+]
+
+Next we need to register some URI mappings and make sure we use an codeRef[org.eclipse.xtext.resource.XtextResourceSet] in the build process.
+This is only needed if you have ecore file references (also transitively) via platform URI. As we are using Xbase in the example
+it is needed to resolve the URIs to the Xbase related EPackages.
+
+code[MWE2][
+  // use an XtextResourceset throughout the process, which is able to resolve classpath:/ URIs.
+  resourceSet = org.eclipse.xtext.resource.XtextResourceSet:theResourceSet {}
+  
+  // add mappings from platform:/resource to classpath:/
+  uriMap = {
+    from = "platform:/resource/org.eclipse.xtext.xbase/"
+    to = "classpath:/"
+  }
+  uriMap = {
+    from = "platform:/resource/org.eclipse.xtext.common.types/"
+    to = "classpath:/"
+  }
+]
+
+Finally we need to tell the generator to use the created code[XtextResourceSe]t by adding this line :
+
+code[MWE2][
+  ....
+  language = auto-inject {
+    // make sure we use the resourceSet created during standalone setup.
+    forcedResourceSet = theResourceSet
+    ...
+]
+
+section2:standaloneBuild[Integration in Standard Maven Builds]
+
+Now that we can build our language we need to be able to integrate our language compiler in the integration build of application projects. For that
+a dedicated maven-plugin is available in Maven central. We now refer to the project code[example-project] which is a standard Java-project that shouldn't
+contain any Eclipse plug-in specific information nor should it be built with Tycho. Let's have a look at the pom.xml and therein the Xtext plug-in.
+
+code[XML][
+<plugin>
+  <groupId>org.eclipse.xtext</groupId>
+  <artifactId>xtext-maven-plugin</artifactId>
+  <version>2.5.0-SNAPSHOT</version>
+  <executions>
+    <execution>
+      <goals>
+  <goal>generate</goal>
+      </goals>
+    </execution>
+  </executions>
+  <configuration>
+    <languages>
+      <!-- Add additional standalone setups if you have more than one language -->
+      <language>
+  <setup>my.mavenized.HeroLanguageStandaloneSetup</setup>
+  <outputConfigurations>
+    <outputConfiguration>
+      <outputDirectory>src/main/generated-sources/xtend/</outputDirectory>
+    </outputConfiguration>
+  </outputConfigurations>
+      </language>
+    </languages>
+  </configuration>
+  <dependencies>
+    <!-- add a dependency to the language core bundle, this will only be needed during geneeration and will not pollute your project's classpath. -->
+    <dependency>
+      <groupId>my.mavenized.herolanguage</groupId>
+      <artifactId>my.mavenized.herolanguage</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+</plugin>
+]
+
+As the comments suggest, you may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties 
+just as you can do within Eclipse preferences. 
