@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.io.InputStream;
+import java.net.URI;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -244,5 +245,12 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
     boolean _isFolder = _fileSystemSupport.isFolder(path);
     return _isFolder;
+  }
+  
+  public URI toURI(final Path path) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+    URI _uRI = _fileSystemSupport.toURI(path);
+    return _uRI;
   }
 }

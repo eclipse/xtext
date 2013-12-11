@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -393,5 +394,12 @@ public class TransformationContextImpl implements TransformationContext {
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
     boolean _isFolder = _fileSystemSupport.isFolder(path);
     return _isFolder;
+  }
+  
+  public URI toURI(final Path path) {
+    CompilationUnitImpl _unit = this.getUnit();
+    MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
+    URI _uRI = _fileSystemSupport.toURI(path);
+    return _uRI;
   }
 }

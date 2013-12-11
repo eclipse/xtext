@@ -141,5 +141,10 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
 	override isFolder(Path path) {
 		compilationUnit.fileSystemSupport.isFolder(path)
-	}	
+	}
+	
+	override toURI(Path path) {
+		compilationUnit.fileSystemSupport.toURI(path)
+	}
+	
 }

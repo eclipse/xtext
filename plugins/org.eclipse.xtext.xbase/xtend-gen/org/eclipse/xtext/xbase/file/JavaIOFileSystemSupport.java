@@ -185,4 +185,10 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  public java.net.URI toURI(final Path path) {
+    File _javaIOFile = this.getJavaIOFile(path);
+    java.net.URI _uRI = _javaIOFile.toURI();
+    return _uRI;
+  }
 }
