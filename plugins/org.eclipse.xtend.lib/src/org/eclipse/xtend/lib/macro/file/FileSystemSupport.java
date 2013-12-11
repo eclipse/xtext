@@ -86,7 +86,12 @@ public interface FileSystemSupport {
 	/**
 	 * Returns the URI representing the given path.
 	 * 
-	 * @param path the path
+	 * <p>
+	 * <b>Warning</b>: Don't use this method to get write access.
+	 * </p>
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the URI representing the given path
 	 */
 	URI toURI(Path path);
