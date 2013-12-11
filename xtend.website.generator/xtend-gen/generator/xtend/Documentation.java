@@ -84,7 +84,7 @@ public class Documentation extends AbstractXtendWebsite {
   @Inject
   private PostProcessor processor;
   
-  private final String currentVersion = "2.4.3";
+  private final String currentVersion = "2.5.0";
   
   public CharSequence website() {
     CharSequence _website = super.website();
@@ -278,7 +278,7 @@ public class Documentation extends AbstractXtendWebsite {
     _builder.append("\t");
     _builder.append("<li><a href=\"documentation/");
     _builder.append(this.currentVersion, "\t");
-    _builder.append("/Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
+    _builder.append("/Xtend%20User%20Guide.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<li><a href=\"api/");

@@ -6,6 +6,7 @@ var targetDir = "../../xtend.website.generator/website/documentation/2.5.0"
 var modelPath = "xdoc"
 
 Workflow {
+	bean = workflow.Headless {}
 	component = @workflow.XDocGenerator { 
 		// or define search scope explicitly
 		modelPath = modelPath

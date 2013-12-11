@@ -6,6 +6,7 @@ var targetDir = "manual"
 var modelPath = "xdoc"
 
 Workflow {
+	bean = workflow.Headless {}
 	component = @workflow.XDocGenerator { 
 		// or define search scope explicitly
 		modelPath = modelPath

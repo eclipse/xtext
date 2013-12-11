@@ -57,7 +57,7 @@ class Documentation extends AbstractXtendWebsite {
 	@Inject extension HtmlExtensions
 	@Inject PostProcessor processor
 	
-	val currentVersion = "2.4.3"
+	val currentVersion = "2.5.0"
 	
 	override website() {
 		processor.postProcess(super.website())
@@ -113,7 +113,7 @@ class Documentation extends AbstractXtendWebsite {
 			«ENDFOR»
 			<li>&nbsp;</li>
 			<li style="color : #333;">Additional Resources</li>
-			<li><a href="documentation/«currentVersion»/Documentation.pdf">Documentation <img src="images/pdf_icon.gif"></a>
+			<li><a href="documentation/«currentVersion»/Xtend%20User%20Guide.pdf">Documentation <img src="images/pdf_icon.gif"></a>
 			<li><a href="api/«currentVersion»/index.html">Runtime Library API</a>
 		</ul>
 	'''
