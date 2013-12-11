@@ -81,4 +81,8 @@ class CodeGenerationContextImpl implements CodeGenerationContext {
 		fileSystemSupport.isFolder(path)
 	}
 	
+	override toURI(Path path) {
+		fileSystemSupport.toURI(path)
+	}
+	
 }

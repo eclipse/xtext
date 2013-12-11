@@ -121,5 +121,15 @@ class JavaIoFileSystemTest {
 		assertTrue(file.exists)
 		assertEquals(0, file.children.size)
 	}
+	
+	@Test def void testGetURI() {
+		val file = new Path("/foo/bar/Foo.text")
+		assertFalse(file.exists)
+		assertNotNull(file.toURI)
+
+		file.contents = "Hello Foo"
+		assertTrue(file.exists)
+		assertNotNull(file.toURI)
+	}
 
 }

@@ -11,7 +11,9 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.List;
+import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -285,5 +287,14 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public URI toURI(final Path path) {
+    IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
+    IPath _location = _workspaceRoot.getLocation();
+    String _string = path.toString();
+    IPath _append = _location.append(_string);
+    URI _uRI = URIUtil.toURI(_append);
+    return _uRI;
   }
 }

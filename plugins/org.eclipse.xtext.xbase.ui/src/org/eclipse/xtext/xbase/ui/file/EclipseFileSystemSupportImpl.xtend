@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 import com.google.common.base.Preconditions
 import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IProject
+import org.eclipse.core.filesystem.URIUtil
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -131,6 +132,10 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 			path.parent.mkdir
 			path.eclipseFile.create(stream, true, null)
 		}
+	}
+	
+	override toURI(Path path) {
+		URIUtil.toURI(workspaceRoot.location.append(path.toString))
 	}
 	
 }
