@@ -48,6 +48,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 import java.util.Set
 import java.util.LinkedHashSet
 import org.eclipse.xtext.common.types.JvmAnnotationType
+import org.eclipse.xtext.xbase.XCastedExpression
 
 /**
  * An interpreter for evaluating constant expressions in annotation values.
@@ -140,6 +141,10 @@ class ConstantExpressionsInterpreter {
 
 	def dispatch Object internalEvaluate(XExpression expression, Context ctx) {
 		throw new ConstantExpressionEvaluationException("Not a constant expression : '" + expression.toText + "'", expression)
+	}
+	
+	def dispatch Object internalEvaluate(XCastedExpression expression, Context ctx) {
+		internalEvaluate(expression.target, ctx)
 	}
 
 	def dispatch Object internalEvaluate(XStringLiteral it, Context ctx) {
