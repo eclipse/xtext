@@ -8,6 +8,7 @@
 package org.eclipse.xtend.lib.macro.file;
 
 import java.io.InputStream;
+import java.net.URI;
 
 import com.google.common.annotations.Beta;
 
@@ -81,4 +82,12 @@ public interface FileSystemSupport {
 	 * @exception IllegalArgumentException if the path points a non existent resource or a folder
 	 */
 	InputStream getContentsAsStream(Path path);
+	
+	/**
+	 * Returns the URI representing the given path.
+	 * 
+	 * @param path the path
+	 * @return the URI representing the given path
+	 */
+	URI toURI(Path path);
 }

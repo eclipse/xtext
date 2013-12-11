@@ -218,4 +218,8 @@ class TransformationContextImpl implements TransformationContext {
 		unit.fileSystemSupport.isFolder(path)
 	}
 	
+	override toURI(Path path) {
+		unit.fileSystemSupport.toURI(path)
+	}
+	
 }

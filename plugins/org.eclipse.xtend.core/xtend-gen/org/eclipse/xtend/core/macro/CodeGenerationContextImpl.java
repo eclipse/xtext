@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro;
 
 import java.io.InputStream;
+import java.net.URI;
 import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
@@ -124,5 +125,11 @@ public class CodeGenerationContextImpl implements CodeGenerationContext {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
     boolean _isFolder = _fileSystemSupport.isFolder(path);
     return _isFolder;
+  }
+  
+  public URI toURI(final Path path) {
+    MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
+    URI _uRI = _fileSystemSupport.toURI(path);
+    return _uRI;
   }
 }

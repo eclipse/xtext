@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.tests.file;
 
 import com.google.inject.Provider;
 import java.io.File;
+import java.io.FileInputStream;
+import java.net.URI;
 import java.util.Map;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
@@ -217,5 +219,37 @@ public class JavaIoFileSystemTest {
     Iterable<? extends Path> _children_1 = this.fs.getChildren(file);
     int _size_1 = IterableExtensions.size(_children_1);
     Assert.assertEquals(0, _size_1);
+  }
+  
+  @Test
+  public void testGetURI() {
+    try {
+      Path _path = new Path("/foo/bar/Foo.text");
+      final Path file = _path;
+      boolean _exists = this.fs.exists(file);
+      Assert.assertFalse(_exists);
+      URI _uRI = this.fs.toURI(file);
+      Assert.assertNotNull(_uRI);
+      this.fs.setContents(file, "Hello Foo");
+      boolean _exists_1 = this.fs.exists(file);
+      Assert.assertTrue(_exists_1);
+      URI _uRI_1 = this.fs.toURI(file);
+      Assert.assertNotNull(_uRI_1);
+      URI _uRI_2 = this.fs.toURI(file);
+      File _file = new File(_uRI_2);
+      final File javaIoFile = _file;
+      boolean _exists_2 = javaIoFile.exists();
+      Assert.assertTrue(_exists_2);
+      long _length = javaIoFile.length();
+      final byte[] data = new byte[((int) _length)];
+      FileInputStream _fileInputStream = new FileInputStream(javaIoFile);
+      final FileInputStream fis = _fileInputStream;
+      fis.read(data);
+      fis.close();
+      String _string = new String(data);
+      Assert.assertEquals("Hello Foo", _string);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }
