@@ -176,6 +176,12 @@
 			</topic>
 			<topic href="contents/050-heading-runtime.html#runtime_concepts_4" label="Logging" >
 			</topic>
+			<topic href="contents/050-heading-runtime.html#codegeneration" label="Code Generation / Compilation" >
+				<topic href="contents/050-heading-runtime.html#codegeneration_2" label="IGenerator" >
+				</topic>
+				<topic href="contents/050-heading-runtime.html#codegeneration_3" label="Output Configurations" >
+				</topic>
+			</topic>
 			<topic href="contents/050-heading-runtime.html#validation" label="Validation" >
 				<topic href="contents/050-heading-runtime.html#validation_2" label="Automatic Validation" >
 					<topic href="contents/050-heading-runtime.html#syntactical_validation" label="Lexer/Parser: Syntactical Validation" >

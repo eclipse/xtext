@@ -61,6 +61,8 @@ e[log4j.properties] in previous class path entries.
 In OSGi you provide configuration by creating a fragment for e[org.apache.log4j]. In this case you need to make 
 sure that there is not any second fragment contributing a e[log4j.properties] file.
 
+section-ref[codegeneration]
+
 section-ref[validation]
 
 section-ref[linking]

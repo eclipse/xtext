@@ -1,0 +1,51 @@
+section:codegeneration[Code Generation / Compilation]
+
+Once you have a language you probably want to do something with it. There are two options, you can either
+write an interpreter that inspects the AST and does something based on that or you translate your language to another programming language or configuration files.
+ 
+In this section we're going to show how to implement a code generator for an Xtext-based language.
+
+section2[IGenerator]
+
+If you go with the default MWE workflow for your language and you haven't used Xbase, than you'll be provided with a callback stub that
+implements codeRef[org.eclipse.xtext.generator.IGenerator]. It has one method that is called from the builder infrastructure whenever a DSL file has 
+changed or should be translated otherwise. The two parameters passed in to this method are:
+
+ul[
+item[The resource to be processed]
+item[An instance of codeRef[org.eclipse.xtext.generator.IFileSystemAccess]]
+]
+
+The codeRef[org.eclipse.xtext.generator.IFileSystemAccess] API abstracts over the different file systems the code generator my run over.
+These are typically Eclipse's file system, when the code generator is triggered from within the incremental build infrastructure in Eclipse,
+and code[java.io.File] when the code generator is executed outside Eclipse, say in a build.
+
+A very simple implementation of a code generator for the ref:statemachine[example statemachine language] introduced earlier could be the following:
+
+code[Xtend][
+class StatemachineGenerator implements IGenerator {
+
+  override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    fsa.generateFile("relative/path/AllTheStates.txt", '''
+      «FOR state : resource.allContents.filter(State).toIterable»
+        State «state.name»
+      «ENDFOR»
+    ''')
+  }
+}
+]
+
+We use Xtend for implementing code generators as it is much better suited for that task then Java (or any other language on the planet :-)). 
+Please refer to the Xtend documentation on link[http://www.xtend-lang.org][xtend-lang.org] for further details. For Java developers it's extremely easy to learn,
+as the basics are similar and you only need to learn the additional powerful concepts.
+
+section2[Output Configurations]
+
+You don't want to deal with platform or even installation dependent paths in your code generator, rather you want to be able to configure the code generator
+with some basic outlet roots where the different generated files should be placed under. This is what output configurations are made for.
+
+By default every language will have a single outlet, that points to code[<project-root>/src-gen/]. The files that go here are treated as fully derived and will be erased
+by the compiler automatically when a new file should be generated. If you need additional outlets or want to have a different default configuration, you need to implement the
+interface codeRef[org.eclipse.xtext.generator.IOutputConfigurationProvider]. It's straight forward to understand and the default implementation gives you a good idea about how to implement it.
+
+With this implementation you lay out the basic defaults which can be changed by users on a workspace or per project level using the preferences.

@@ -82,6 +82,76 @@ you have to do is putting such a <em>log4j.properties</em> in place and make sur
 In OSGi you provide configuration by creating a fragment for <em>org.apache.log4j</em>. In this case you need to make 
 sure that there is not any second fragment contributing a <em>log4j.properties</em> file.
 </p>
+<a name="codegeneration"></a>
+<h2>Code Generation / Compilation</h2>
+<p>
+Once you have a language you probably want to do something with it. There are two options, you can either
+write an interpreter that inspects the AST and does something based on that or you translate your language to another programming language or configuration files.
+ 
+In this section we&apos;re going to show how to implement a code generator for an Xtext-based language.
+</p>
+<a name="codegeneration_2"></a>
+<h3>IGenerator</h3>
+<p>
+If you go with the default MWE workflow for your language and you haven&apos;t used Xbase, than you&apos;ll be provided with a callback stub that
+implements <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/IGenerator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IGenerator" >IGenerator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java" title="View Source Code" >(src)</a>. It has one method that is called from the builder infrastructure whenever a DSL file has 
+changed or should be translated otherwise. The two parameters passed in to this method are:
+</p>
+<p>
+<ul>
+	<li>
+		The resource to be processed
+	</li>
+	<li>
+		An instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/IFileSystemAccess.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IFileSystemAccess" >IFileSystemAccess</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IFileSystemAccess.java" title="View Source Code" >(src)</a>
+	</li>
+</ul>
+</p>
+<p>
+The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/IFileSystemAccess.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IFileSystemAccess" >IFileSystemAccess</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IFileSystemAccess.java" title="View Source Code" >(src)</a> API abstracts over the different file systems the code generator my run over.
+These are typically Eclipse&apos;s file system, when the code generator is triggered from within the incremental build infrastructure in Eclipse,
+and <span class="inlinecode">java.io.File</span> when the code generator is executed outside Eclipse, say in a build.
+</p>
+<p>
+A very simple implementation of a code generator for the <a href="020-grammar-language.html#statemachine" title="Go to &quot;A First Example&quot;">example statemachine language</a> introduced earlier could be the following:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;StatemachineGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<span class="string">"relative/path/AllTheStates.txt"</span>,&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;state&nbsp;:&nbsp;resource.allContents.filter(State).toIterable<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;State&nbsp;&laquo;</span>state.name<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>)<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+We use Xtend for implementing code generators as it is much better suited for that task then Java (or any other language on the planet :-)). 
+Please refer to the Xtend documentation on <a href="http://www.xtend-lang.org">xtend-lang.org</a> for further details. For Java developers it&apos;s extremely easy to learn,
+as the basics are similar and you only need to learn the additional powerful concepts.
+</p>
+<a name="codegeneration_3"></a>
+<h3>Output Configurations</h3>
+<p>
+You don&apos;t want to deal with platform or even installation dependent paths in your code generator, rather you want to be able to configure the code generator
+with some basic outlet roots where the different generated files should be placed under. This is what output configurations are made for.
+</p>
+<p>
+By default every language will have a single outlet, that points to <span class="inlinecode">&lt;project-root&gt;/src-gen/</span>. The files that go here are treated as fully derived and will be erased
+by the compiler automatically when a new file should be generated. If you need additional outlets or want to have a different default configuration, you need to implement the
+interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/IOutputConfigurationProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IOutputConfigurationProvider" >IOutputConfigurationProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IOutputConfigurationProvider.java" title="View Source Code" >(src)</a>. It&apos;s straight forward to understand and the default implementation gives you a good idea about how to implement it.
+</p>
+<p>
+With this implementation you lay out the basic defaults which can be changed by users on a workspace or per project level using the preferences.
+</p>
 <a name="validation"></a>
 <h2>Validation</h2>
 <p>
