@@ -12,6 +12,7 @@ import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IContainer;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
@@ -291,12 +293,35 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   }
   
   public URI toURI(final Path path) {
-    IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
-    IPath _location = _workspaceRoot.getLocation();
-    String _string = path.toString();
-    IPath _append = _location.append(_string);
-    URI _uRI = URIUtil.toURI(_append);
+    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
+    URI _uRI = this.toURI(path, _newArrayList);
     return _uRI;
+  }
+  
+  protected URI toURI(final Path path, final List<String> trailingSegments) {
+    URI _xblockexpression = null;
+    {
+      final IResource resource = this.findResource(path);
+      boolean _equals = Objects.equal(resource, null);
+      if (_equals) {
+        String _lastSegment = path.getLastSegment();
+        trailingSegments.add(_lastSegment);
+        Path _parent = path.getParent();
+        return this.toURI(_parent, trailingSegments);
+      }
+      List<String> _reverse = ListExtensions.<String>reverse(trailingSegments);
+      IPath _location = resource.getLocation();
+      final Function2<IPath,String,IPath> _function = new Function2<IPath,String,IPath>() {
+        public IPath apply(final IPath location, final String segment) {
+          IPath _append = location.append(segment);
+          return _append;
+        }
+      };
+      IPath _fold = IterableExtensions.<String, IPath>fold(_reverse, _location, _function);
+      URI _uRI = URIUtil.toURI(_fold);
+      _xblockexpression = (_uRI);
+    }
+    return _xblockexpression;
   }
   
   public Path getPath(final Resource res) {

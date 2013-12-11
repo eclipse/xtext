@@ -7,18 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.file
 
+import com.google.common.base.Preconditions
 import com.google.inject.Inject
 import java.io.InputStream
+import java.net.URI
+import java.util.List
+import org.eclipse.core.filesystem.URIUtil
+import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
+import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IWorkspaceRoot
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
-import com.google.common.base.Preconditions
-import org.eclipse.core.resources.IContainer
-import org.eclipse.core.resources.IProject
-import org.eclipse.core.filesystem.URIUtil
-import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -136,7 +138,16 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	}
 	
 	override toURI(Path path) {
-		URIUtil.toURI(workspaceRoot.location.append(path.toString))
+		toURI(path, newArrayList)
+	}
+	
+	protected def URI toURI(Path path, List<String> trailingSegments) {
+		val resource = path.findResource
+		if (resource == null) {
+			trailingSegments += path.lastSegment
+			return toURI(path.parent, trailingSegments)
+		}
+		URIUtil.toURI(trailingSegments.reverse.fold(resource.location)[location, segment|location.append(segment)])
 	}
 	
 	override getPath(Resource res) {
