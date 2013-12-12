@@ -15,6 +15,72 @@ import org.junit.Test
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def void testAutocast_01() {
+		assertCompilesTo('''
+			class C {
+				def void m() {
+					var A a = null
+					if(a instanceof B) {
+						a = a.get
+					}
+				}	
+			}
+			class A {
+			}
+			class B extends A {
+				def A get() {
+					null
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    A a = null;
+			    if ((a instanceof B)) {
+			      A _get = ((B)a).get();
+			      a = _get;
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testAutocast_02() {
+		assertCompilesTo('''
+			class C {
+				def void m() {
+					var A a = null
+					while(a instanceof B) {
+						a = a.get
+					}
+				}	
+			}
+			class A {
+			}
+			class B extends A {
+				def A get() {
+					null
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    A a = null;
+			    boolean _while = (a instanceof B);
+			    while (_while) {
+			      A _get = ((B)a).get();
+			      a = _get;
+			      _while = (a instanceof B);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void test410794() {
 		assertCompilesTo('''
 			class BugSwitch {
