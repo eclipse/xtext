@@ -3,7 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/com.google.caliper-0.5-rc1.jar"/>
+	<classpathentry kind="lib" path="lib/com.google.caliper-0.5-rc1.jar" sourcepath="/Users/zarnekow/.m2/repository/com/google/caliper/caliper/0.5-rc1/caliper-0.5-rc1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/com.google.gson_2.1.0.v201203072145.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -12,7 +12,8 @@ Require-Bundle: com.google.inject;bundle-version="3.0.0",
  org.eclipse.xtext;bundle-version="2.5.0",
  org.eclipse.xtext.xbase;bundle-version="2.5.0",
  org.eclipse.xtend.core;bundle-version="2.5.0",
- org.eclipse.xtend.core.tests;bundle-version="2.5.0"
+ org.eclipse.xtend.core.tests;bundle-version="2.5.0",
+ org.eclipse.jdt.core;resolution:=optional
 Bundle-ClassPath: .,
  lib/com.google.caliper-0.5-rc1.jar,
  lib/com.google.gson_2.1.0.v201203072145.jar

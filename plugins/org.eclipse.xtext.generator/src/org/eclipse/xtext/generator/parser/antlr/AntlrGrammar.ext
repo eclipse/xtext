@@ -56,11 +56,14 @@ isCalled(Grammar grammar, AbstractRule this) :
 		x.allContents().flatten().typeSelect(RuleCall).select(call|call.rule!=null).rule.contains(this);
 
 localVar(Assignment this, AbstractElement terminal) : 
-	'lv_'+feature + '_' + containingParserRule().contentsAsList().indexOf(this) + '_' + this.allContents().indexOf(terminal);
+	terminal.localVar();
 	
-localVar(RuleCall this) : 'this_'+rule.name + '_' + containingParserRule().contentsAsList().indexOf(this);
-localVar(AbstractElement this) : 'otherlv_' + containingParserRule().contentsAsList().indexOf(this);
-localVar(EnumLiteralDeclaration this) : 'enumLiteral_' + containingEnumRule().alternatives.contentsAsList().indexOf(this);
+localVar(RuleCall this) : 'this_'+ rule.localVarSuffix();
+localVar(AbstractElement this) : 'other';
+localVar(EnumLiteralDeclaration this) : 'enumLiteral';
+
+localVarSuffix(AbstractRule this): 'token';
+localVarSuffix(ParserRule this): isDatatypeRule() ? 'dataType' : 'object';
 
 List[AbstractElement] contentsAsList(ParserRule this):
 	alternatives.contentsAsList();
@@ -84,10 +87,22 @@ String toJavaStringImpl(String this):
 	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.toStringInAntlrAction(java.lang.String);
 	
 toStringLiteral(RuleCall this) :
-	rule!=null ? '"'+this.rule.name+'"' :  "null";
+	rule!=null ? this.rule.toStringLiteral() : "null";
+
+toStringLiteral(AbstractRule this) :
+	'"'+name+'"';
+	
+toStringLiteral(ParserRule this) :
+	isDatatypeRule() ? '"'+name+'"' : "null";
 
 toStringLiteral(Keyword this) :
 	'"'+this.value.toJavaStringImpl()+'"';
+	
+toStringLiteralInAssignment(Keyword this) :
+	"null";
+
+toStringLiteralInAssignment(AbstractElement this) :
+	toStringLiteral();
 	
 String toLexerBody(TerminalRule this):
 	JAVA org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.toLexerBody(org.eclipse.xtext.TerminalRule);
@@ -111,6 +126,15 @@ String grammarElementAccess(AbstractRule this):
 
 String grammarElementAccess(AbstractElement element):
 	gaRuleElementAccessor(element);
+
+String grammarElementAccessInRule(EObject object):
+	"Unsupported : grammarElementAccessInRule for: " + object.toString();
+		
+String grammarElementAccessInRule(AbstractElement element):
+	"elementAccess." + element.gaElementAccessor();
+	
+String grammarElementAccessInRule(AbstractRule rule):
+	"elementAccess.getRule()";
 
 List[String] initialHiddenTokens(Grammar this):
   if (definesHiddenTokens) then 
