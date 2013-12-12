@@ -103,9 +103,9 @@ First the e[Dependencies] are translated to Java fields. This is almost a one-to
 
 code[Xtend][
 // translate the dependencies to fields annotated with @Inject
-for (field : model.declarations.filter(typeof(Dependency))) {
+for (field : model.declarations.filter(Dependency)) {
   members += field.toField(field.name, field.type) \[
-    annotations += field.toAnnotation(typeof(Inject))
+    annotations += field.toAnnotation(Inject)
     field.annotations.translateAnnotationsTo(it)
   \]
 }
@@ -183,14 +183,14 @@ code[Xtend][
    * Gives scope and live to the expression.
    */
   def protected toRouteCallMethod(Route route) {
-    route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void::TYPE)) \[
+    route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void.TYPE)) \[
       parameters += route.toParameter("request",  
           route.newTypeRef(HTTP_REQUEST))
       parameters += route.toParameter("response", 
           route.newTypeRef(HTTP_RESPONSE))
       for (variable : route.url.variables) {
         parameters += variable.toParameter(variable.name, 
-          route.newTypeRef(typeof(String)))
+          route.newTypeRef(String))
       }
       body = route.call
     \]

@@ -146,10 +146,10 @@ class TemplateJvmModelInferrer extends AbstractModelInferrer {
 ...
       // generate a method accepting an initializer lambda expression
       members += element.toMethod("generate", 
-          element.newTypeRef(typeof(String))) \[
+          element.newTypeRef(String)) \[
         parameters += element.toParameter(
           "init", 
-          element.newTypeRef(typeof(Procedures$Procedure1), 
+          element.newTypeRef(Procedures.Procedure1, 
               newTypeRef(javaClass))
         )
         body = \[
@@ -192,7 +192,7 @@ code[Xtend][
 for (param : element.params) {
   val type = param.type 
     ?: param.defaultexp?.inferredType 
-    ?: element.newTypeRef(typeof(String))
+    ?: element.newTypeRef(String)
   members += param.toField(param.name, type) \[
     if (param.defaultexp != null)
       initializer = param.defaultexp
@@ -348,12 +348,12 @@ class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
 	protected def _computeTypes(RichString expression, ITypeComputationState state) {
 		super._computeTypes(expression as XBlockExpression, state)
-		state.acceptActualType(getTypeForName(typeof(StringBuilder), state))
+		state.acceptActualType(getTypeForName(StringBuilder, state))
 	}
 	 
 	protected def _computeTypes(RichStringForLoop expression, ITypeComputationState state) {
 		super._computeTypes(expression as XForLoopExpression, state)
-		state.acceptActualType(getTypeForName(typeof(StringBuilder), state))
+		state.acceptActualType(getTypeForName(StringBuilder, state))
 	}
 }
 ]

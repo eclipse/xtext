@@ -100,9 +100,9 @@ class ScriptingJvmModelInferrer extends AbstractModelInferrer {
     val className = script.eResource.URI.trimFileExtension.lastSegment
    	acceptor.accept(script.toClass(className)).initializeLater \[
       // the class gets one main method
-      members += script.toMethod('main', script.newTypeRef(Void::TYPE)) \[
+      members += script.toMethod('main', script.newTypeRef(Void.TYPE)) \[
    	    parameters += script.toParameter("args", 
-   	        script.newTypeRef(typeof(String)).addArrayTypeDimension)
+   	        script.newTypeRef(String).addArrayTypeDimension)
    	    static = true
         varArgs = true
         // Associate the script as the body of the main method

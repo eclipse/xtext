@@ -183,7 +183,7 @@ code[Xtend][
 def dispatch void infer(MongoFile file, 
                         IJvmDeclaredTypeAcceptor acceptor, 
                         boolean isPreIndexingPhase) {
-  for(bean : file.eAllOfType(typeof(MongoBean))) {
+  for(bean : file.eAllOfType(MongoBean)) {
        acceptor.accept(bean.toClass(bean.fullyQualifiedName))
          .initializeLater(\[
            documentation = bean.documentation
@@ -401,11 +401,11 @@ class MongoQualifiedNameProvider extends XbaseQualifiedNameProvider {
   
   def qualifiedName(MongoBean mongoBean) {
     val packageDeclaration = 
-      mongoBean.getContainerOfType(typeof(PackageDeclaration))
+      mongoBean.getContainerOfType(PackageDeclaration)
     if(packageDeclaration != null) 
       packageDeclaration.fullyQualifiedName.append(mongoBean.name)
     else
-      return QualifiedName::create(mongoBean.name)
+      return QualifiedName.create(mongoBean.name)
   }
 }
 ]
@@ -459,7 +459,7 @@ We have implemented a quick fix to replace the invalid name:
 code[Xtend][
 class MongoBeansQuickfixProvider extends XbaseWithAnnotationsQuickfixProvider {
 
-  @Fix(MongoBeansValidator::ILLEGAL_PROPERTY_NAME)
+  @Fix(MongoBeansValidator.ILLEGAL_PROPERTY_NAME)
   def void capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
     acceptor.accept(issue, 
         'Rename to ' + issue.data.head, 

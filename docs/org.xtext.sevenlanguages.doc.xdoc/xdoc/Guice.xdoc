@@ -204,7 +204,7 @@ for (binding : module.bindings) {
   if (binding.toInstance != null) {
     members += binding.toMethod(binding.syntheticToInstanceName, 
         binding.from.type) \[
-      visibility = JvmVisibility::PRIVATE
+      visibility = JvmVisibility.PRIVATE
       body = binding.toInstance
     \]
   } 
@@ -245,14 +245,14 @@ for (binding : module.bindings) {
   if (binding.to?.annotation != null) {
     members += binding.toField(binding.to.syntheticName, binding.to.type) \[
       newHashSet(binding.to.annotation).translateAnnotationsTo(it)
-      visibility = JvmVisibility::PRIVATE
+      visibility = JvmVisibility.PRIVATE
     \]
   }
   if (binding.from.annotation != null) {
     members += binding.toField(binding.from.syntheticName, 
         binding.from.type) \[
       newHashSet(binding.from.annotation).translateAnnotationsTo(it)
-      visibility = JvmVisibility::PRIVATE
+      visibility = JvmVisibility.PRIVATE
     \]
   }
 }
@@ -281,7 +281,7 @@ code[Xtend][
     switch type : annotationType {
       JvmAnnotationType: 
         if(!type.annotations.exists\[ 
-            annotation.is(typeof(BindingAnnotation)) 
+            annotation.is(BindingAnnotation) 
            \])
 		  error("The annotation is not annotated with @BindingAnnotation", 
 		  XANNOTATION__ANNOTATION_TYPE)

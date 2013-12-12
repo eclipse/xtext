@@ -65,7 +65,7 @@ class Tortoise {
   @Property int lineWidth
   @Property Color lineColor
 
-  List<ITortoiseEvent$Listener> listeners = newArrayList()
+  List<ITortoiseEvent.Listener> listeners = newArrayList()
 ...
 ]
 
@@ -133,10 +133,10 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
                           IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
     acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater \[
-      superTypes += program.newTypeRef(typeof(Tortoise))
+      superTypes += program.newTypeRef(Tortoise)
       if(program.body != null)
         members += program.toMethod("main", 
-            program.newTypeRef(Void::TYPE)) \[
+            program.newTypeRef(Void.TYPE)) \[
           body = program.body
         \]
       for(subProgram: program.subPrograms)
@@ -175,15 +175,15 @@ code[Xtend][
     val executable = operation.sourceElements.head
     if (executable instanceof Executable) {
       val context = createContext
-      context.newValue(XbaseScopeProvider::THIS, tortoise)
+      context.newValue(XbaseScopeProvider.THIS, tortoise)
       var index = 0
       for (param : operation.parameters) {
-        context.newValue(QualifiedName::create(param.name), 
+        context.newValue(QualifiedName.create(param.name), 
             argumentValues.get(index))
         index = index + 1  
       }
       val result = evaluate((executable as Executable).body, 
-          context, CancelIndicator::NullImpl)
+          context, CancelIndicator.NullImpl)
       if(result.exception != null)
         throw result.exception
       result.result
@@ -210,8 +210,8 @@ code[Xtend][
       this.tortoise = tortoise
       this.stopAtLine = stopAtLine
       try {
-        program.jvmElements.filter(typeof(JvmOperation)).head
-          ?.invokeOperation(null, Collections::emptyList)
+        program.jvmElements.filter(JvmOperation).head
+          ?.invokeOperation(null, Collections.emptyList)
       } catch (StopLineReachedException exc) {
         // ignore
       }
@@ -227,7 +227,7 @@ code[Xtend][
   override protected internalEvaluate(XExpression expression, 
                                       IEvaluationContext context, 
                                       CancelIndicator indicator) {
-    val line = NodeModelUtils::findActualNodeFor(expression)?.startLine
+    val line = NodeModelUtils.findActualNodeFor(expression)?.startLine
     if(line-1 == stopAtLine)
       throw new StopLineReachedException
     super.internalEvaluate(expression, context, indicator)
@@ -242,7 +242,7 @@ callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.Torto
 code[Xtend][
 class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedTypes {
   override protected getStaticImportClasses() {
-    (super.getStaticImportClasses() + #\[typeof(Math), typeof(ColorConstants)\])
+    (super.getStaticImportClasses() + #\[Math, ColorConstants\])
       .toList
 	}
   }

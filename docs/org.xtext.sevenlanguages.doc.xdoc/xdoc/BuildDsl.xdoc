@@ -103,13 +103,13 @@ class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
                           IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
     val fqn = file.javaClassName
-    val scriptName = Strings::lastToken(fqn, ".")
+    val scriptName = Strings.lastToken(fqn, ".")
     acceptor.accept(file.toClass(fqn)).initializeLater \[
-      superTypes += file.newTypeRef(typeof(BuildScript))
+      superTypes += file.newTypeRef(BuildScript)
 ...      
       val stringArray = 
-          file.newTypeRef(typeof(String)).addArrayTypeDimension
-      members += file.toMethod("main", file.newTypeRef(Void::TYPE)) \[
+          file.newTypeRef(String).addArrayTypeDimension
+      members += file.toMethod("main", file.newTypeRef(Void.TYPE)) \[
         parameters += toParameter("args", stringArray)
         varArgs = true
         static = true
@@ -146,9 +146,9 @@ The annotation part may be interesting, so here is the snippet from the inferrer
  
 code[Xtend][
 // a method for the actual task body
-members += file.tasks.map\[ task | toMethod(task.methodName, task.newTypeRef(Void::TYPE)) \[
-  visibility = JvmVisibility::PROTECTED
-  annotations += task.toAnnotation(typeof(DependsOn)) => \[
+members += file.tasks.map\[ task | toMethod(task.methodName, task.newTypeRef(Void.TYPE)) \[
+  visibility = JvmVisibility.PROTECTED
+  annotations += task.toAnnotation(DependsOn) => \[
     values += createJvmStringAnnotationValue => \[
       values += task.depends.map\[name\]
     \]
@@ -180,7 +180,7 @@ code[Xtend][
 ...
 val type = declaredParameter.type 
 	?: declaredParameter?.init?.inferredType
-	?: file.newTypeRef(typeof(String))
+	?: file.newTypeRef(String)
 ]
 
 section:builddsl_validation[Validation]
@@ -224,7 +224,7 @@ class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedTypes {
 	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
 	 */
 	override protected getExtensionClasses() {
-		(super.getExtensionClasses() + #\[typeof(FileExtensions), typeof(ClassExtensions)\])
+		(super.getExtensionClasses() + #\[FileExtensions, ClassExtensions\])
 			.toList
 	}
 }

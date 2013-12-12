@@ -837,6 +837,16 @@ expression using code[Object.equals(Object)].
 If a case is a match, that is it evaluates to code[Xtend][true] or the result equals the one we are switching
 over, the case expression after the colon is evaluated and is the result of the whole switch expression.
 
+The main expression can also be a computed value instead of a field or variable. If you want to reuse that value
+in the body of the switch expression, you can create a local value for that by using the following notation which
+is similar to the syntax in ref:forLoop[code[Xtend][for] loops].
+
+code[Xtend][
+  switch myString : someComputation() {
+    ..
+  }
+]
+
 section2[Type guards]
 
 Instead of or in addition to the case guard you can specify a e[type guard]. The case only matches if the 

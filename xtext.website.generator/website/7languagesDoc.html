@@ -649,9 +649,9 @@ class ScriptingJvmModelInferrer extends AbstractModelInferrer {
     val className = script.eResource.URI.trimFileExtension.lastSegment
    	acceptor.accept(script.toClass(className)).initializeLater [
       // the class gets one main method
-      members += script.toMethod('main', script.newTypeRef(Void::TYPE)) [
+      members += script.toMethod('main', script.newTypeRef(Void.TYPE)) [
    	    parameters += script.toParameter("args", 
-   	        script.newTypeRef(typeof(String)).addArrayTypeDimension)
+   	        script.newTypeRef(String).addArrayTypeDimension)
    	    static = true
         varArgs = true
         // Associate the script as the body of the main method
@@ -835,13 +835,13 @@ class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
                           IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
     val fqn = file.javaClassName
-    val scriptName = Strings::lastToken(fqn, ".")
+    val scriptName = Strings.lastToken(fqn, ".")
     acceptor.accept(file.toClass(fqn)).initializeLater [
-      superTypes += file.newTypeRef(typeof(BuildScript))
+      superTypes += file.newTypeRef(BuildScript)
 ...      
       val stringArray = 
-          file.newTypeRef(typeof(String)).addArrayTypeDimension
-      members += file.toMethod("main", file.newTypeRef(Void::TYPE)) [
+          file.newTypeRef(String).addArrayTypeDimension
+      members += file.toMethod("main", file.newTypeRef(Void.TYPE)) [
         parameters += toParameter("args", stringArray)
         varArgs = true
         static = true
@@ -891,9 +891,9 @@ protected void print() {
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 // a method for the actual task body
-members += file.tasks.map[ task | toMethod(task.methodName, task.newTypeRef(Void::TYPE)) [
-  visibility = JvmVisibility::PROTECTED
-  annotations += task.toAnnotation(typeof(DependsOn)) =&gt; [
+members += file.tasks.map[ task | toMethod(task.methodName, task.newTypeRef(Void.TYPE)) [
+  visibility = JvmVisibility.PROTECTED
+  annotations += task.toAnnotation(DependsOn) =&gt; [
     values += createJvmStringAnnotationValue =&gt; [
       values += task.depends.map[name]
     ]
@@ -938,7 +938,7 @@ public String name = "World";</pre>
 ...
 val type = declaredParameter.type 
 	?: declaredParameter?.init?.inferredType
-	?: file.newTypeRef(typeof(String))</pre>
+	?: file.newTypeRef(String)</pre>
 							<p>
 						</p>
 						</section>
@@ -994,7 +994,7 @@ class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedTypes {
 	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
 	 */
 	override protected getExtensionClasses() {
-		(super.getExtensionClasses() + #[typeof(FileExtensions), typeof(ClassExtensions)])
+		(super.getExtensionClasses() + #[FileExtensions, ClassExtensions])
 			.toList
 	}
 }</pre>
@@ -1304,7 +1304,7 @@ public class Artist implements IMongoBean {  ...</pre>
 def dispatch void infer(MongoFile file, 
                         IJvmDeclaredTypeAcceptor acceptor, 
                         boolean isPreIndexingPhase) {
-  for(bean : file.eAllOfType(typeof(MongoBean))) {
+  for(bean : file.eAllOfType(MongoBean)) {
        acceptor.accept(bean.toClass(bean.fullyQualifiedName))
          .initializeLater([
            documentation = bean.documentation
@@ -1560,11 +1560,11 @@ class MongoQualifiedNameProvider extends XbaseQualifiedNameProvider {
   
   def qualifiedName(MongoBean mongoBean) {
     val packageDeclaration = 
-      mongoBean.getContainerOfType(typeof(PackageDeclaration))
+      mongoBean.getContainerOfType(PackageDeclaration)
     if(packageDeclaration != null) 
       packageDeclaration.fullyQualifiedName.append(mongoBean.name)
     else
-      return QualifiedName::create(mongoBean.name)
+      return QualifiedName.create(mongoBean.name)
   }
 }</pre>
 							<p>
@@ -1632,7 +1632,7 @@ class MongoBeansValidator extends XbaseJavaValidator {
 							<pre class="prettyprint lang-xtend linenums">
 class MongoBeansQuickfixProvider extends XbaseWithAnnotationsQuickfixProvider {
 
-  @Fix(MongoBeansValidator::ILLEGAL_PROPERTY_NAME)
+  @Fix(MongoBeansValidator.ILLEGAL_PROPERTY_NAME)
   def void capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
     acceptor.accept(issue, 
         'Rename to ' + issue.data.head, 
@@ -1955,7 +1955,7 @@ for (binding : module.bindings) {
   if (binding.toInstance != null) {
     members += binding.toMethod(binding.syntheticToInstanceName, 
         binding.from.type) [
-      visibility = JvmVisibility::PRIVATE
+      visibility = JvmVisibility.PRIVATE
       body = binding.toInstance
     ]
   } 
@@ -2006,14 +2006,14 @@ for (binding : module.bindings) {
   if (binding.to?.annotation != null) {
     members += binding.toField(binding.to.syntheticName, binding.to.type) [
       newHashSet(binding.to.annotation).translateAnnotationsTo(it)
-      visibility = JvmVisibility::PRIVATE
+      visibility = JvmVisibility.PRIVATE
     ]
   }
   if (binding.from.annotation != null) {
     members += binding.toField(binding.from.syntheticName, 
         binding.from.type) [
       newHashSet(binding.from.annotation).translateAnnotationsTo(it)
-      visibility = JvmVisibility::PRIVATE
+      visibility = JvmVisibility.PRIVATE
     ]
   }
 }
@@ -2049,7 +2049,7 @@ def guiceKey(KeyAST it) '''
   switch type : annotationType {
     JvmAnnotationType: 
       if(!type.annotations.exists[ 
-          annotation.is(typeof(BindingAnnotation)) 
+          annotation.is(BindingAnnotation) 
          ])
 		error("The annotation is not annotated with @BindingAnnotation", 
 		XANNOTATION__ANNOTATION_TYPE)
@@ -2205,9 +2205,9 @@ Variable :
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 // translate the dependencies to fields annotated with @Inject
-for (field : model.declarations.filter(typeof(Dependency))) {
+for (field : model.declarations.filter(Dependency)) {
   members += field.toField(field.name, field.type) [
-    annotations += field.toAnnotation(typeof(Inject))
+    annotations += field.toAnnotation(Inject)
     field.annotations.translateAnnotationsTo(it)
   ]
 }</pre>
@@ -2299,14 +2299,14 @@ public class NumberGuessing extends HttpServlet {
  * Gives scope and live to the expression.
  */
 def protected toRouteCallMethod(Route route) {
-  route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void::TYPE)) [
+  route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void.TYPE)) [
     parameters += route.toParameter("request",  
         route.newTypeRef(HTTP_REQUEST))
     parameters += route.toParameter("response", 
         route.newTypeRef(HTTP_RESPONSE))
     for (variable : route.url.variables) {
       parameters += variable.toParameter(variable.name, 
-        route.newTypeRef(typeof(String)))
+        route.newTypeRef(String))
     }
     body = route.call
   ]
@@ -2511,10 +2511,10 @@ class TemplateJvmModelInferrer extends AbstractModelInferrer {
 ...
       // generate a method accepting an initializer lambda expression
       members += element.toMethod("generate", 
-          element.newTypeRef(typeof(String))) [
+          element.newTypeRef(String)) [
         parameters += element.toParameter(
           "init", 
-          element.newTypeRef(typeof(Procedures$Procedure1), 
+          element.newTypeRef(Procedures.Procedure1, 
               newTypeRef(javaClass))
         )
         body = [
@@ -2571,7 +2571,7 @@ public String getTitle() {
 for (param : element.params) {
   val type = param.type 
     ?: param.defaultexp?.inferredType 
-    ?: element.newTypeRef(typeof(String))
+    ?: element.newTypeRef(String)
   members += param.toField(param.name, type) [
     if (param.defaultexp != null)
       initializer = param.defaultexp
@@ -2758,12 +2758,12 @@ class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
 	protected def _computeTypes(RichString expression, ITypeComputationState state) {
 		super._computeTypes(expression as XBlockExpression, state)
-		state.acceptActualType(getTypeForName(typeof(StringBuilder), state))
+		state.acceptActualType(getTypeForName(StringBuilder, state))
 	}
 	 
 	protected def _computeTypes(RichStringForLoop expression, ITypeComputationState state) {
 		super._computeTypes(expression as XForLoopExpression, state)
-		state.acceptActualType(getTypeForName(typeof(StringBuilder), state))
+		state.acceptActualType(getTypeForName(StringBuilder, state))
 	}
 }</pre>
 							<p>
@@ -2909,7 +2909,7 @@ class Tortoise {
   @Property int lineWidth
   @Property Color lineColor
 
-  List&lt;ITortoiseEvent$Listener&gt; listeners = newArrayList()
+  List&lt;ITortoiseEvent.Listener&gt; listeners = newArrayList()
 ...</pre>
 							<p>
 						</p>
@@ -2996,10 +2996,10 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
                           IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
     acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater [
-      superTypes += program.newTypeRef(typeof(Tortoise))
+      superTypes += program.newTypeRef(Tortoise)
       if(program.body != null)
         members += program.toMethod("main", 
-            program.newTypeRef(Void::TYPE)) [
+            program.newTypeRef(Void.TYPE)) [
           body = program.body
         ]
       for(subProgram: program.subPrograms)
@@ -3046,15 +3046,15 @@ override protected invokeOperation(JvmOperation operation,
   val executable = operation.sourceElements.head
   if (executable instanceof Executable) {
     val context = createContext
-    context.newValue(XbaseScopeProvider::THIS, tortoise)
+    context.newValue(XbaseScopeProvider.THIS, tortoise)
     var index = 0
     for (param : operation.parameters) {
-      context.newValue(QualifiedName::create(param.name), 
+      context.newValue(QualifiedName.create(param.name), 
           argumentValues.get(index))
       index = index + 1  
     }
     val result = evaluate((executable as Executable).body, 
-        context, CancelIndicator::NullImpl)
+        context, CancelIndicator.NullImpl)
     if(result.exception != null)
       throw result.exception
     result.result
@@ -3085,8 +3085,8 @@ override run(Tortoise tortoise, EObject program, int stopAtLine) {
     this.tortoise = tortoise
     this.stopAtLine = stopAtLine
     try {
-      program.jvmElements.filter(typeof(JvmOperation)).head
-        ?.invokeOperation(null, Collections::emptyList)
+      program.jvmElements.filter(JvmOperation).head
+        ?.invokeOperation(null, Collections.emptyList)
     } catch (StopLineReachedException exc) {
       // ignore
     }
@@ -3105,7 +3105,7 @@ override run(Tortoise tortoise, EObject program, int stopAtLine) {
 override protected internalEvaluate(XExpression expression, 
                                     IEvaluationContext context, 
                                     CancelIndicator indicator) {
-  val line = NodeModelUtils::findActualNodeFor(expression)?.startLine
+  val line = NodeModelUtils.findActualNodeFor(expression)?.startLine
   if(line-1 == stopAtLine)
     throw new StopLineReachedException
   super.internalEvaluate(expression, context, indicator)
@@ -3125,7 +3125,7 @@ override protected internalEvaluate(XExpression expression,
 							<pre class="prettyprint lang-xtend linenums">
 class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedTypes {
   override protected getStaticImportClasses() {
-    (super.getStaticImportClasses() + #[typeof(Math), typeof(ColorConstants)])
+    (super.getStaticImportClasses() + #[Math, ColorConstants])
       .toList
 	}
   }
