@@ -105,4 +105,37 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testExtendedInterfaces() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo implements List {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.file(_builder.toString());
+      Resource _eResource = file.eResource();
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
+      final Iterable<QualifiedName> importedNames = description.getImportedNames();
+      final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
+        public Boolean apply(final QualifiedName it) {
+          String _lastSegment = it.getLastSegment();
+          boolean _equals = _lastSegment.equals("collection");
+          return Boolean.valueOf(_equals);
+        }
+      };
+      boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
+      Assert.assertTrue(("" + importedNames), _exists);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
