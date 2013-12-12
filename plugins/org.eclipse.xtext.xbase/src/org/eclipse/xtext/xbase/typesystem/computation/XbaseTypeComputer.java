@@ -66,7 +66,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
-import org.eclipse.xtext.xbase.typesystem.internal.ITypeLiteralLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -1068,19 +1067,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(final XAssignment assignment, ITypeComputationState state) {
 		List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(assignment);
 		ILinkingCandidate best = getBestCandidate(candidates);
-		JvmIdentifiableElement feature = best.getFeature();
-		if (feature != null && mustDiscardRefinement(feature)) {
-			state.discardReassignedTypes(feature);
-		}
 		best.applyToComputationState();
 	}
 	
 	protected void _computeTypes(final XAbstractFeatureCall featureCall, ITypeComputationState state) {
 		List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(featureCall);
-		ILinkingCandidate best = getBestCandidate(candidates);
-		if (best instanceof ITypeLiteralLinkingCandidate) {
-			ITypeLiteralLinkingCandidate candidate = (ITypeLiteralLinkingCandidate) best;
-			checkTypeParameterNotAllowedAsLiteral(featureCall, candidate.getType(), state);
+		IFeatureLinkingCandidate best = (IFeatureLinkingCandidate) getBestCandidate(candidates);
+		if (best.isTypeLiteral()) {
+			checkTypeParameterNotAllowedAsLiteral(featureCall, (JvmType) best.getFeature(), state);
 		}
 		best.applyToComputationState();
 	}
@@ -1116,16 +1110,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 				|| feature instanceof XSwitchExpression
 				|| feature instanceof JvmFormalParameter 
 				|| feature instanceof JvmField;
-	}
-	
-	protected boolean mustDiscardRefinement(JvmIdentifiableElement feature) {
-		if (feature instanceof XVariableDeclaration) {
-			return ((XVariableDeclaration) feature).isWriteable();
-		}
-		if (feature instanceof JvmField) {
-			return !((JvmField) feature).isFinal();
-		}
-		return false;
 	}
 	
 }
