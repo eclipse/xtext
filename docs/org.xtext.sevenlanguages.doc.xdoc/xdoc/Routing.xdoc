@@ -49,7 +49,7 @@ Java Application. Then point your browser to the URL link[http://localhost:8080/
 section:routing_grammar[Grammar]
 
 The Routing DSL extends e[org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations] to make use of expressions
-predefined by link[http://www.eclipse.org/Xtext/#xbase][Xbase] plus support for Annotations.
+predefined by link[documentation.html#xbaseExpressions][Xbase] plus support for Annotations.
 code[Xtext][
 grammar org.xtext.httprouting.Route 
   with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
