@@ -43,4 +43,21 @@ class ImportedNamesTest extends AbstractXtendTestCase {
 //		println(description.getImportedNames.toString().replace(',','\n'))
 		assertFalse(description.importedNames.exists[ primitives.contains(it.lastSegment) ]);
 	}
+	
+	@Test
+	def void testExtendedInterfaces() {
+		val file = file('''
+			package foo
+			
+			import java.util.List
+			
+			class Foo implements List {
+			
+			}
+		''')
+		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
+		val importedNames = description.importedNames
+		assertTrue('' + importedNames, importedNames.exists[it.lastSegment.equals('collection')]);
+	}
+	
 }

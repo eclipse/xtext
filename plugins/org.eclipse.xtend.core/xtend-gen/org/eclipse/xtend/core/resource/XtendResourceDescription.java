@@ -66,8 +66,6 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   
   public Iterable<QualifiedName> getImportedNames() {
     final HashSet<QualifiedName> result = CollectionLiterals.<QualifiedName>newHashSet();
-    Iterable<QualifiedName> _importedNames = super.getImportedNames();
-    Iterables.<QualifiedName>addAll(result, _importedNames);
     Resource _resource = this.getResource();
     EList<EObject> _contents = _resource.getContents();
     for (final EObject eobject : _contents) {
@@ -135,6 +133,8 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         }
       }
     }
+    Iterable<QualifiedName> _importedNames = super.getImportedNames();
+    Iterables.<QualifiedName>addAll(result, _importedNames);
     final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
       public Boolean apply(final QualifiedName it) {
         String _lastSegment = it.getLastSegment();

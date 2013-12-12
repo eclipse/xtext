@@ -53,7 +53,6 @@ class XtendResourceDescription extends DefaultResourceDescription {
 
 	def override Iterable<QualifiedName> getImportedNames() {
 		val result = newHashSet()
-		result.addAll(super.getImportedNames())
 		for (eobject : resource.contents) {
 			val types = typeResolver.resolveTypes(eobject)
 			val actualTypes = EcoreUtil.getAllContents(eobject, true).filter(XExpression).map[types.getActualType(it)].toIterable
@@ -76,6 +75,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 				}
 			}
 		}
+		result.addAll(super.getImportedNames())
 		return result.filter [
 			!primitivesFilter.contains(it.lastSegment)
 		].toSet
