@@ -822,5 +822,13 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			}
 		}
 	}
+	
+	@Override
+	protected Severity getUnhandledExceptionSeverity(JvmExecutable executable) {
+		if (getFeature() instanceof JvmConstructor) {
+			return Severity.ERROR;
+		}
+		return super.getUnhandledExceptionSeverity(executable);
+	}
 
 }

@@ -353,10 +353,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	protected boolean validateUnhandledExceptions(IAcceptor<? super AbstractDiagnostic> result) {
-		if (!getState().isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && getFeature() instanceof JvmExecutable) {
+		if (getFeature() instanceof JvmExecutable) {
 			JvmExecutable executable = (JvmExecutable) getFeature();
-			if (!executable.getExceptions().isEmpty()) {
-				return validateUnhandledExceptions(executable, result);
+			if (getUnhandledExceptionSeverity(executable) != Severity.IGNORE) {
+				if (!executable.getExceptions().isEmpty()) {
+					return validateUnhandledExceptions(executable, result);
+				}
 			}
 		}
 		return true;
@@ -399,7 +401,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			}
 			data[data.length - 1] = EcoreUtil.getURI(getExpression()).toString();
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
-					getState().getSeverity(IssueCodes.UNHANDLED_EXCEPTION), 
+					getUnhandledExceptionSeverity(executable), 
 					IssueCodes.UNHANDLED_EXCEPTION,
 					message, 
 					getExpression(),
@@ -410,6 +412,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			return false;
 		}
 		return true;
+	}
+
+	protected Severity getUnhandledExceptionSeverity(JvmExecutable executable) {
+		return getState().getSeverity(IssueCodes.UNHANDLED_EXCEPTION);
 	}
 	
 	protected boolean isDefiniteEarlyExit(XExpression expression) {
