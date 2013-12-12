@@ -2214,6 +2214,71 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test
+	def testConstructor_5() {
+		'''
+			class Foo {
+			
+				new () {
+					super()
+					foo
+				}
+			
+				def foo() throws Exception {
+				}
+			
+			}
+		'''.assertCompilesTo(
+			'''
+				import org.eclipse.xtext.xbase.lib.Exceptions;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public Foo() {
+				    super();
+				    try {
+				      this.foo();
+				    } catch (Throwable _e) {
+				      throw Exceptions.sneakyThrow(_e);
+				    }
+				  }
+				  
+				  public Object foo() throws Exception {
+				    return null;
+				  }
+				}
+			'''
+		)
+	}
+	
+	@Test
+	def testConstructor_6() {
+		'''
+			class Foo {
+			
+				new () throws Exception {
+					this('Hello world!')
+				}
+			
+				new (String foo) throws Exception {
+				}
+			
+			}
+		'''.assertCompilesTo(
+			'''
+				@SuppressWarnings("all")
+				public class Foo {
+				  public Foo() throws Exception {
+				    this("Hello world!");
+				  }
+				  
+				  public Foo(final String foo) throws Exception {
+				  }
+				}
+			'''
+		)
+	}
 
 	@Test
 	def testSuperCall_01() {

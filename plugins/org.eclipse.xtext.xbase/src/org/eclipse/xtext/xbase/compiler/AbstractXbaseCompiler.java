@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -253,15 +254,19 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable JvmTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {
-		ITreeAppendable appendable = parentAppendable.trace(obj, true);
 		if (declaredExceptions == null) {
 			declaredExceptions = newHashSet();
 			assert declaredExceptions != null;
 		}
+		ITreeAppendable appendable = parentAppendable.trace(obj, true);
 		final boolean isPrimitiveVoidExpected = isPrimitiveVoid(expectedReturnType); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
 		boolean needsSneakyThrow = needsSneakyThrow(obj, declaredExceptions);
+		if (needsSneakyThrow && isPrimitiveVoidExpected && hasJvmConstructorCall(obj)) {
+			compileWithJvmConstructorCall((XBlockExpression) obj, appendable);
+			return parentAppendable;
+		}
 		if (needsSneakyThrow) {
 			appendable.newLine().append("try {").increaseIndentation();
 		}
@@ -279,6 +284,41 @@ public abstract class AbstractXbaseCompiler {
 			generateCheckedExceptionHandling(obj, appendable);
 		}
 		return parentAppendable;
+	}
+	
+	protected void compileWithJvmConstructorCall(XBlockExpression obj, ITreeAppendable apendable) {
+		EList<XExpression> expressions = obj.getExpressions();
+		internalToJavaStatement(expressions.get(0), apendable.trace(obj, false), false);
+		if (expressions.size() == 1) {
+			return;
+		}
+		
+		apendable.newLine().append("try {").increaseIndentation();
+		
+		ITreeAppendable b = apendable.trace(obj, false);
+		for (int i = 1; i < expressions.size(); i++) {
+			XExpression ex = expressions.get(i);
+			internalToJavaStatement(ex, b, false);
+		}
+		
+		generateCheckedExceptionHandling(obj, apendable);
+	}
+	
+	protected boolean hasJvmConstructorCall(XExpression obj) {
+		if (!(obj instanceof XBlockExpression)) {
+			return false;
+		}
+		XBlockExpression blockExpression = (XBlockExpression) obj;
+		EList<XExpression> expressions = blockExpression.getExpressions();
+		if (expressions.isEmpty()) {
+			return false;
+		}
+		XExpression expr = expressions.get(0);
+		if (!(expr instanceof XFeatureCall)) {
+			return false;
+		}
+		XFeatureCall featureCall = (XFeatureCall) expr;
+		return featureCall.getFeature() instanceof JvmConstructor;
 	}
 
 	protected boolean needsSneakyThrow(XExpression obj, Collection<JvmTypeReference> declaredExceptions) {
