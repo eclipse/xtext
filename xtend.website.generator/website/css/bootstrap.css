@@ -490,7 +490,6 @@ em {
   color: #EBEBEB;
 }
 abbr[title] {
-  cursor: help;
   border-bottom: 1px dotted #ddd;
 }
 abbr.initialism {
