@@ -27,7 +27,6 @@ abstract class AbstractXtendWebsite extends AbstractWebsite {
 	override topLevelMenu() {
 		newArrayList(
 			'news.html' -> 'News',
-			'releasenotes.html' -> 'Release Notes',
 			'download.html' -> 'Download',
 			'documentation.html' -> 'Documentation',
 			'community.html' -> 'Community',

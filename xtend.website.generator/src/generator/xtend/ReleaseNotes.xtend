@@ -48,7 +48,7 @@ class ReleaseNotes extends AbstractXtendWebsite {
 	</pre>
 	        </section>
 	        <section id="annotations_2_5" style="padding-top: 68px; margin-top: -68px;">
-	          <h2>Improved Compiler Checks</h2>
+	          <h2>Improved compiler checks</h2>
 	          <p>
 	            The Xtend compiler is now more picky when overloaded methods are invoked.
 	          </p>
@@ -77,6 +77,10 @@ class ReleaseNotes extends AbstractXtendWebsite {
 	  def getCheck() {..}
 	}
 	</pre>
+			  <em>Important note:</em>
+			  <p>
+			    You have to make sure to use the library in version 2.5 along with the introduced compiler checks.
+			  </p>
 	          <h3 id="ambiguous_methods">Discouraged variable names</h3>
 	          <p>
 	            Some variable names are used implicitely by Xtend, for example the variable name 'self'.
@@ -84,7 +88,7 @@ class ReleaseNotes extends AbstractXtendWebsite {
 	          </p>
 	        </section>
 	        <section id="language_enhancements_2_5" style="padding-top: 68px; margin-top: -68px;">
-	          <h2>Small Language Enhancements</h2>
+	          <h2>Small language enhancements</h2>
 	          <p>
 	            Some refinements have been made to the Xtend language semantics to improve the overall experience.
 	          </p>
@@ -133,6 +137,23 @@ class ReleaseNotes extends AbstractXtendWebsite {
 	result.append(m)
 	return result.toString()
 	</pre>
+	        </section>
+	        <section id="primitive_types_2_5" style="padding-top: 68px; margin-top: -68px;">
+	          <h2>Improved type inference with primitive values</h2>
+	          <p>
+	            The local type inference has been improved when primitive types are involved. Their wrapper
+	            types will be used in fewer cases which prevents unexpected exceptions at runtime.
+	            An optional compiler check can point to places where primitive defaults are used rather than
+	            explicit values.
+	          </p>
+	        </section>
+	        <section id="mvn_android_2_5" style="padding-top: 68px; margin-top: -68px;">
+	          <h2>Better experience with Maven and Android</h2>
+	          <p>
+	            The Android archetype for Maven was improved. It
+	            properly configures the compiler and debug settings, uses the latest Android libraries and the produced
+	            Eclipse project matches the structure that is created by the ADT wizards.
+	          </p>
 	        </section>
 	      </div>
 	    </div>
