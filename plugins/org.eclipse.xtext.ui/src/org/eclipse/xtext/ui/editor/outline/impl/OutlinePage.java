@@ -150,17 +150,19 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	}
 
 	protected void configureModelListener() {
-		modelListener = new IXtextModelListener() {
-			public void modelChanged(XtextResource resource) {
-				try {
-					scheduleRefresh();
-				} catch (Throwable t) {
-					LOG.error("Error refreshing outline", t);
+		if (xtextDocument != null) { // possibly disposed in the meantime
+			modelListener = new IXtextModelListener() {
+				public void modelChanged(XtextResource resource) {
+					try {
+						scheduleRefresh();
+					} catch (Throwable t) {
+						LOG.error("Error refreshing outline", t);
+					}
 				}
-			}
-
-		};
-		xtextDocument.addModelListener(modelListener);
+	
+			};
+			xtextDocument.addModelListener(modelListener);
+		}
 	}
 
 	protected void configureActions() {
