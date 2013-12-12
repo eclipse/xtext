@@ -124,7 +124,7 @@ public class ReleaseNotes extends AbstractXtendWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("            ");
-    _builder.append("The Xtend compiler is now more picky when overloaded methods are invoked.");
+    _builder.append("The Xtend compiler now detects ambiguously overloaded methods.");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("</p>");

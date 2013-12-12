@@ -12,6 +12,7 @@ class Generator {
 		out.generateFiles(
 			new Index,
 			new News,
+			new ReleaseNotes,
 			new Download, 
 			new SevenLanguages,
 			new SevenLanguagesDocumentation, 

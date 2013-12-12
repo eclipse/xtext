@@ -108,7 +108,7 @@ public class Index extends AbstractXtendWebsite {
     _builder.append("<p style=\"font-family: \'Lato\', sans-serif; font-size: 16px; font-weight: 300; color: #fff;word-spacing: 3px;\">");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("Get the new release and learn how to write efficient Android applications without the tedious boiler-plate code.<br/>");
+    _builder.append("Get the <a href=\"releasenotes.html\">new release</a> and learn how to write efficient Android applications without the tedious boiler-plate code.<br/>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("Leverage the full power of Xtend by enhancing the compiler with <a href=\"documentation.html#activeAnnotations\">Active Annotations</a> a unique macro system for Java.<br/>");

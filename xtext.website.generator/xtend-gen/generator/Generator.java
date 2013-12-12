@@ -5,6 +5,7 @@ import generator.Documentation;
 import generator.Download;
 import generator.Index;
 import generator.News;
+import generator.ReleaseNotes;
 import generator.Resource;
 import generator.SevenLanguages;
 import generator.SevenLanguagesDocumentation;
@@ -21,12 +22,13 @@ public class Generator {
     final File out = _file;
     Index _index = new Index();
     News _news = new News();
+    ReleaseNotes _releaseNotes = new ReleaseNotes();
     Download _download = new Download();
     SevenLanguages _sevenLanguages = new SevenLanguages();
     SevenLanguagesDocumentation _sevenLanguagesDocumentation = new SevenLanguagesDocumentation();
     Documentation _documentation = new Documentation();
     Community _community = new Community();
-    Generator.generateFiles(out, _index, _news, _download, _sevenLanguages, _sevenLanguagesDocumentation, _documentation, _community);
+    Generator.generateFiles(out, _index, _news, _releaseNotes, _download, _sevenLanguages, _sevenLanguagesDocumentation, _documentation, _community);
     InputOutput.<String>println("Done.");
   }
   

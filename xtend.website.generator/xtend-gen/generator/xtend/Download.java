@@ -70,6 +70,18 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<h2>Download Options</h2>");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("<p>");
+    _builder.newLine();
+    _builder.append("\t\t      ");
+    _builder.append("<strong>Check the <a href=\"releasenotes.html\">release notes</a>.");
+    _builder.newLine();
+    _builder.append("\t\t      ");
+    _builder.append("</strong>");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("</p>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<hr>");
     _builder.newLine();
     _builder.append("\t\t\t");

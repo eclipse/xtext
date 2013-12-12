@@ -45,7 +45,7 @@ class Index extends AbstractXtendWebsite {
 	<div class="container">
 		<h1>Get the New Release!</h1>
 		<p style="font-family: 'Lato', sans-serif; font-size: 16px; font-weight: 300; color: #fff;word-spacing: 3px;">
-		Get the new release and learn how to write efficient Android applications without the tedious boiler-plate code.<br/>
+		Get the <a href="releasenotes.html">new release</a> and learn how to write efficient Android applications without the tedious boiler-plate code.<br/>
 		Leverage the full power of Xtend by enhancing the compiler with <a href="documentation.html#activeAnnotations">Active Annotations</a> a unique macro system for Java.<br/>
 		Enjoy the many new IDE and language features and the much improved type inference algorithm.</p>
 	</div>
