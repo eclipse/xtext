@@ -115,7 +115,7 @@ public class ReleaseNotes extends AbstractXtendWebsite {
     _builder.append("</section>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<section id=\"annotations_2_5\" style=\"padding-top: 68px; margin-top: -68px;\">");
+    _builder.append("<section id=\"compiler_checks_2_5\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<h2>Improved compiler checks</h2>");
@@ -211,7 +211,7 @@ public class ReleaseNotes extends AbstractXtendWebsite {
     _builder.append("</p>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<h3 id=\"ambiguous_methods\">Discouraged variable names</h3>");
+    _builder.append("<h3 id=\"discouraged_variable_names\">Discouraged variable names</h3>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<p>");
@@ -487,7 +487,7 @@ public class ReleaseNotes extends AbstractXtendWebsite {
     _builder.append("<li><a href=\"#collection_literals\">Collection Literals and Array Access</a>");
     _builder.newLine();
     _builder.append("            ");
-    _builder.append("<li><a href=\"#extension_values\">Extension Values</a>");
+    _builder.append("<li><a href=\"#extension_provider\">Extension Providers</a>");
     _builder.newLine();
     _builder.append("            ");
     _builder.append("<li><a href=\"#interfaces_enums_annotations\">Interfaces, Enumerations and Annotations</a>");

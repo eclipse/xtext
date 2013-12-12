@@ -47,7 +47,7 @@ class ReleaseNotes extends AbstractXtendWebsite {
 	}
 	</pre>
 	        </section>
-	        <section id="annotations_2_5" style="padding-top: 68px; margin-top: -68px;">
+	        <section id="compiler_checks_2_5" style="padding-top: 68px; margin-top: -68px;">
 	          <h2>Improved compiler checks</h2>
 	          <p>
 	            The Xtend compiler now detects ambiguously overloaded methods.
@@ -81,7 +81,7 @@ class ReleaseNotes extends AbstractXtendWebsite {
 			  <p>
 			    You have to make sure to use the library in version 2.5 along with the introduced compiler checks.
 			  </p>
-	          <h3 id="ambiguous_methods">Discouraged variable names</h3>
+	          <h3 id="discouraged_variable_names">Discouraged variable names</h3>
 	          <p>
 	            Some variable names are used implicitely by Xtend, for example the variable name 'self'.
 	            The compiler optionally reports if these names were picked manually.
@@ -178,7 +178,7 @@ class ReleaseNotes extends AbstractXtendWebsite {
 	            <li><a href="#streamlined">Streamlined Syntax Changes</a>
 	            <li><a href="#active_annotations">Active Annotations</a>
 	            <li><a href="#collection_literals">Collection Literals and Array Access</a>
-	            <li><a href="#extension_values">Extension Values</a>
+	            <li><a href="#extension_provider">Extension Providers</a>
 	            <li><a href="#interfaces_enums_annotations">Interfaces, Enumerations and Annotations</a>
 	            <li><a href="#sam_types">SAM Type Conversion</a>
 	            <li><a href="#new_operators">New Operators</a>
