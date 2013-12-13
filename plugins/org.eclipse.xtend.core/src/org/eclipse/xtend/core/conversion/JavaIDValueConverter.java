@@ -7,15 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.conversion;
 
+import java.io.StringReader;
+
+import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JavaIDValueConverter extends IDValueConverter {
+	
+	@Inject
+	private FlexerFactory flexerFactory;
 	
 	@Override
 	public String toValue(String string, INode node) {
@@ -30,6 +39,11 @@ public class JavaIDValueConverter extends IDValueConverter {
 		} catch (IllegalArgumentException e) {
 			throw new ValueConverterException(e.getMessage(), node, e);
 		}
+	}
+	
+	@Override
+	protected TokenSource getTokenSource(String escapedValue) {
+		return flexerFactory.createTokenSource(new StringReader(escapedValue));
 	}
 	
 	public static boolean isValidIdentifierStart(char c) {
