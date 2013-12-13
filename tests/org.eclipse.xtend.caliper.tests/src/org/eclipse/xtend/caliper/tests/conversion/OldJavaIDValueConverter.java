@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.conversion;
+package org.eclipse.xtend.caliper.tests.conversion;
 
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
@@ -15,7 +15,7 @@ import org.eclipse.xtext.nodemodel.INode;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JavaIDValueConverter extends IDValueConverter {
+public class OldJavaIDValueConverter extends IDValueConverter {
 	
 	@Override
 	public String toValue(String string, INode node) {
@@ -40,44 +40,36 @@ public class JavaIDValueConverter extends IDValueConverter {
 		return Character.isJavaIdentifierPart(c);
 	}
 
-	public static String convertFromJavaIdentifier(String identifier, INode node) {
-		int idx = identifier.indexOf('\\');
-		if (idx < 0) {
-			return identifier;
-		}
-		return doConvertFromJavaString(identifier, idx, node);
-	}
-
 	/**
 	 * Mostly copied from {@link Strings#convertFromJavaString(String, boolean)}
 	 */
-	private static String doConvertFromJavaString(String identifier, int firstEscapeSequence, INode node) {
-		int off = firstEscapeSequence;
+	public static String convertFromJavaIdentifier(String identifier, INode node) {
+		char[] in = identifier.toCharArray();
+		int off = 0;
 		int len = identifier.length();
 		char[] convtBuf = new char[len];
 		char aChar;
 		char[] out = convtBuf;
-		identifier.getChars(0, firstEscapeSequence, out, 0);
-		int outLen = firstEscapeSequence;
-		int end = len;
+		int outLen = 0;
+		int end = off + len;
 		boolean error = false;
 		boolean badChar = false;
 		while (off < end) {
-			aChar = identifier.charAt(off++);
+			aChar = in[off++];
 			if (aChar == '\\') {
 				if (off < end) {
-					aChar = identifier.charAt(off++);
+					aChar = in[off++];
 					switch (aChar) {
 						case 'u': {
 							// Read the xxxx
 							int value = 0;
-							if (off + 4 > end || !isHexSequence(identifier, off, 4)) {
+							if (off + 4 > end || !isHexSequence(in, off, 4)) {
 								error = true;
 								out[outLen++] = aChar;
 								break;
 							} else {
 								for (int i = 0; i < 4; i++) {
-									aChar = identifier.charAt(off++);
+									aChar = in[off++];
 									switch (aChar) {
 									case '0':
 									case '1':
@@ -165,9 +157,9 @@ public class JavaIDValueConverter extends IDValueConverter {
 		return true;
 	}
 
-	private static boolean isHexSequence(String in, int off, int chars) {
-		for(int i = off; i < in.length() && i < off + chars; i++) {
-			char c = in.charAt(i);
+	private static boolean isHexSequence(char[] in, int off, int chars) {
+		for(int i = off; i < in.length && i < off + chars; i++) {
+			char c = in[i];
 			switch (c) {
 				case '0':
 				case '1':
