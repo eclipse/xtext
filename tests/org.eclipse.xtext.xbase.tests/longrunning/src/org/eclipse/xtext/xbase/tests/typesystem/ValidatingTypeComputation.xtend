@@ -345,7 +345,7 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	override reassignType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
-		if (!reference.isOwnedBy(getReferenceOwner()))
+		if (reference != null && !reference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.reassignType(identifiable, reference)
 	}
