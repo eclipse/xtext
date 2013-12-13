@@ -2,15 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common Xtext Testlanguages For UI and Runtime - Runtime
 Bundle-Vendor: Eclipse.org
-Bundle-Version: 2.5.0.qualifier
+Bundle-Version: 2.5.1.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.testlanguages; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.5.0",
- org.eclipse.xtext.generator;bundle-version="2.5.0";resolution:=optional;x-installation:=greedy,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.5.1",
+ org.eclipse.xtext.generator;bundle-version="2.5.1";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.util;bundle-version="2.5.0",
+ org.eclipse.xtext.util;bundle-version="2.5.1",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime
