@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Removed @Beta API" id="923795461">
-            <message_arguments>
-                <message_argument value="2.5.0"/>
-                <message_argument value="2.4.3"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.resource.IndexingOrderer">
         <filter comment="Removed @Beta API" id="305422471">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.resource.IndexingOrderer"/>
                 <message_argument value="org.eclipse.xtext.ui_2.4.3"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/DirtyStateManager.java" type="org.eclipse.xtext.ui.editor.DirtyStateManager">
-        <filter id="338886760">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.DirtyStateManager.Event"/>
-                <message_argument value="org.eclipse.xtext.ui_2.5.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -72,14 +56,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/ui/notification/StateChangeEventBroker.java" type="org.eclipse.xtext.ui.notification.StateChangeEventBroker">
-        <filter id="338886760">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.notification.StateChangeEventBroker.StateChangeEventBrokerEvent"/>
-                <message_argument value="org.eclipse.xtext.ui_2.5.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/refactoring/impl/EditorDocumentChange.java" type="org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange">
         <filter comment="We have to extend some Change subtype" id="571473929">
             <message_arguments>
@@ -95,14 +71,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/ui/resource/Storage2UriMapperImpl.java" type="org.eclipse.xtext.ui.resource.Storage2UriMapperImpl">
-        <filter comment="Removed deprecated nullimpl method" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperImpl"/>
-                <message_argument value="resourceChanged(IResourceChangeEvent)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/resource/Storage2UriMapperJavaImpl.java" type="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl">
         <filter id="337682486">
             <message_arguments>
@@ -112,14 +80,6 @@
         <filter comment="Refactored towards better extensibility" id="338849923">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/resource/XtextResourceSetProvider.java" type="org.eclipse.xtext.ui.resource.XtextResourceSetProvider">
-        <filter comment="Moved initialization of resource set to IResourceSetInitializer" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.XtextResourceSetProvider"/>
-                <message_argument value="computePlatformURIMap(IJavaProject)"/>
             </message_arguments>
         </filter>
     </resource>

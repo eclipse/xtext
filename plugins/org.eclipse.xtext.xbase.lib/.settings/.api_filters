@@ -1,34 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.xbase.lib" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter id="923795461">
-            <message_arguments>
-                <message_argument value="2.5.0"/>
-                <message_argument value="2.4.3"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.EvictionListeners">
-        <filter comment="guava" id="305422471">
+        <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.EvictionListeners"/>
-                <message_argument value="org.eclipse.xtext.xbase.lib_2.4.3"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib_2.5.0"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.MapEvictionListener">
-        <filter comment="guava" id="305422471">
+        <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.MapEvictionListener"/>
-                <message_argument value="org.eclipse.xtext.xbase.lib_2.4.3"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib_2.5.0"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.SortedMaps">
-        <filter comment="guava" id="305422471">
+        <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.SortedMaps"/>
-                <message_argument value="org.eclipse.xtext.xbase.lib_2.4.3"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib_2.5.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -39,12 +31,24 @@
                 <message_argument value="org.eclipse.xtext.xbase.lib_2.4.3"/>
             </message_arguments>
         </filter>
+        <filter comment="Guava Update" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.AbstractListenableFuture"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib_2.5.0"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.UninterruptibleFuture">
         <filter comment="guava" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.util.concurrent.UninterruptibleFuture"/>
                 <message_argument value="org.eclipse.xtext.xbase.lib_2.4.3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Guava Update" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.UninterruptibleFuture"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib_2.5.0"/>
             </message_arguments>
         </filter>
     </resource>

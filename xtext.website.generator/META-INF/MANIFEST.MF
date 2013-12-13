@@ -4,13 +4,13 @@ Bundle-Name: Generator
 Bundle-SymbolicName: xtext.website.generator
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.5.0",
+Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.5.1",
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.bootstrapdoc;bundle-version="1.0.0",
  org.eclipse.xtext.xdoc;bundle-version="0.1.0",
- org.eclipse.xtext.doc.xdoc;bundle-version="2.5.0",
+ org.eclipse.xtext.doc.xdoc;bundle-version="2.5.1",
  org.xtext.sevenlanguages.doc.xdoc;bundle-version="1.0.0",
- org.eclipse.xtend.core;bundle-version="2.5.0";visibility:=reexport
+ org.eclipse.xtend.core;bundle-version="2.5.1";visibility:=reexport
 Export-Package: generator,
  xdocgen

@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Generator
 Bundle-SymbolicName: xtend.website.generator
 Bundle-Version: 1.0.0.qualifier
-Require-Bundle: org.eclipse.xtend.doc.xdoc;bundle-version="2.5.0",
+Require-Bundle: org.eclipse.xtend.doc.xdoc;bundle-version="2.5.1",
  org.eclipse.xtext.xdoc;bundle-version="0.1.0",
- org.eclipse.xtext.xbase.lib;bundle-version="2.5.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.5.1",
  org.eclipse.xtend.bootstrapdoc;bundle-version="1.0.0",
  xtext.website.generator;bundle-version="1.0.0",
- org.eclipse.xtend.lib;bundle-version="2.5.0",
- org.eclipse.xtend.core;bundle-version="2.5.0"
+ org.eclipse.xtend.lib;bundle-version="2.5.1",
+ org.eclipse.xtend.core;bundle-version="2.5.1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.generator" version="2">
+    <resource path="xtend-gen/org/eclipse/xtext/generator/grammarAccess/GrammarAccess.java" type="org.eclipse.xtext.generator.grammarAccess.GrammarAccess">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.grammarAccess.GrammarAccess"/>
+                <message_argument value="org.eclipse.xtext.generator_2.5.1"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/generator/validation/ValidatorFragment.java" type="org.eclipse.xtext.generator.validation.ValidatorFragment">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.validation.ValidatorFragment"/>
+                <message_argument value="org.eclipse.xtext.generator_2.5.1"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/generator/validation/ValidatorNaming.java" type="org.eclipse.xtext.generator.validation.ValidatorNaming">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.validation.ValidatorNaming"/>
+                <message_argument value="org.eclipse.xtext.generator_2.5.1"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/ui/generator/contentAssist/ContentAssistFragment.java" type="org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragment">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragment"/>
+                <message_argument value="org.eclipse.xtext.generator_2.5.1"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
