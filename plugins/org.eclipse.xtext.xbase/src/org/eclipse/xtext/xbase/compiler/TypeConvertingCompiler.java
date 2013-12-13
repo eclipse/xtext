@@ -353,6 +353,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			final ITreeAppendable appendable,
 			final Later expression) {
 		appendable.append("(");
+		if (mustInsertTypeCast(context, wrapper)) {
+			appendable.append("(");
+			serialize(wrapper, context, appendable);
+			appendable.append(") ");
+		} 
 		expression.exec(appendable);
 		appendable.append(")");
 		appendable.append(".");
