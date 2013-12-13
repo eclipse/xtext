@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.linking.LinkingProxyAwareResource;
 import org.eclipse.xtend.core.linking.URIEncoder;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
+import org.eclipse.xtend.core.parser.ParserWithoutPartialParsing;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionManager;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;

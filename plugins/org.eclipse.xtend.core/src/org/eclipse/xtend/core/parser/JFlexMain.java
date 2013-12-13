@@ -5,26 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core;
-
-import org.eclipse.xtend.core.parser.antlr.XtendParser;
-
-import com.google.inject.Singleton;
+package org.eclipse.xtend.core.parser;
 
 /**
- * Disable partial parsing for Xtend. The partial parsing regions
- * almost always covered the complete file anyway and it is conceptually
- * hard to get the lookahead right.
- * 
- * @since 2.5
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Singleton
-public class ParserWithoutPartialParsing extends XtendParser {
+public interface JFlexMain {
 
-	@Override
-	protected boolean isReparseSupported() {
-		return false;
-	}
+	void runJFlex(String... args);
 	
 }
