@@ -1,0 +1,107 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::emf::ecore»
+
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::Parser»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+
+«DEFINE generate(String macros) FOR Grammar»
+«FILE (getGrammarFileName().toJavaPackage() + "." + getGrammarFileName().toSimpleName()).asPath()+"Flexer.flex" SRC_GEN-»
+/*
+«fileHeader()»
+*/
+package «getGrammarFileName().toJavaPackage()»;
+
+import static «getGrammarFileName()»Parser.*;
+
+import org.antlr.runtime.Token;
+import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.TokenSource;
+
+@SuppressWarnings({"all"})
+%%
+
+%{
+
+  public «getGrammarFileName().toSimpleName()»Flexer() {
+    this((java.io.Reader)null);
+  }
+
+  public int getTokenLength() {
+    return yylength();
+  }
+  
+  public String getTokenText() {
+    return yytext();
+  }
+  
+%}
+
+%unicode
+%public
+%class «getGrammarFileName().toSimpleName()»Flexer
+%function advance
+%int
+%eofval{
+return Token.EOF;
+%eofval}
+	
+«macros»
+
+%%
+
+«EXPAND tokens-»
+
+<YYINITIAL> {ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
+
+«FOREACH allTerminalRules().select(r | !r.fragment ) AS rule-»
+<YYINITIAL> {«rule.name»} { return RULE_«rule.name»; }
+«ENDFOREACH-»
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE tokens FOR Grammar-»
+«LET {} AS allKeywords-»
+«EXPAND collectTokens(allKeywords) FOREACH allParserRules()-»
+«EXPAND collectTokens(allKeywords) FOREACH allEnumRules()-»
+
+«EXPAND state FOREACH allKeywords.sortBy(s|s)»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE state FOR String-»
+<YYINITIAL> "«this.toAntlrString()»" { return KW_«this.toJavaIdentifier(true)»; }
+«ENDDEFINE»
+
+«DEFINE collectTokens(List[String] known) FOR AbstractRule-»
+«EXPAND collectTokens(known) FOR alternatives-»
+«ENDDEFINE»
+
+«DEFINE collectTokens(List[String] known) FOR Keyword-»
+«IF !known.contains(value) && known.add(value) != null-»«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE collectTokens(List[String] known) FOR EObject-»
+«EXPAND collectTokens(known) FOREACH eContents()-»
+«ENDDEFINE»
+
+
+«DEFINE addToPluginXmlRt(String macros) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(String macros) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(String macros) FOR Grammar»«ENDDEFINE»

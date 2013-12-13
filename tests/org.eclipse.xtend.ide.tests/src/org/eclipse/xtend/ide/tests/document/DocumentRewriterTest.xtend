@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.ui.document.DocumentRewriter
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter
 import org.junit.Test
 import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory
 
 class DocumentRewriterTest extends AbstractXtendUITestCase {
 
@@ -33,6 +34,8 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 	@Inject extension CommonTypeComputationServices services
 	
 	@Inject extension TypesFactory
+	
+	@Inject FlexerFactory flexerFactory
 	
 	@Test
 	def void testSectionOverlap() {
@@ -291,6 +294,7 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 				antlrTokenFileProvider = new XtendAntlrTokenFileProvider
 			]
 			lexer = [|new InternalXtendLexer() as Lexer]
+			it.flexerFactory = this.flexerFactory 
 		]
 		val document = new XtextDocument(source, null)
 		document.set(content)
