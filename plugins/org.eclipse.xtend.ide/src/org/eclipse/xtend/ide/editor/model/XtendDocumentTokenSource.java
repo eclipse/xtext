@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.editor.model;
 
+import java.io.StringReader;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexTokenSource;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
@@ -28,6 +31,9 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 	public static final int JAVA_DOC_TOKEN_TYPE = -10000;
 
 	protected int multilineTokenType = -1;
+	
+	@Inject
+	private FlexerFactory flexerFactory;
 
 	@Inject
 	public void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
@@ -44,7 +50,7 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 
 	@Override
 	protected TokenSource createTokenSource(String string) {
-		final TokenSource delegate = super.createTokenSource(string);
+		final FlexTokenSource delegate = flexerFactory.createTokenSource(new StringReader(string));
 		return new TokenSource() {
 
 			public Token nextToken() {
@@ -62,6 +68,14 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 				return delegate.getSourceName();
 			}
 		};
+	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	public void setFlexerFactory(FlexerFactory flexerFactory) {
+		this.flexerFactory = flexerFactory;
 	}
 }
 

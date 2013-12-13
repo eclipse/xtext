@@ -1,11 +1,16 @@
 package org.eclipse.xtend.ide.tests.editor;
 
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtend.core.parser.antlr.XtendAntlrTokenFileProvider;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
@@ -14,9 +19,15 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
+  @Inject
+  private FlexerFactory flexerFactory;
+  
   protected Lexer createLexer() {
     InternalXtendLexer _internalXtendLexer = new InternalXtendLexer();
     return _internalXtendLexer;
@@ -184,6 +195,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
             }
           };
           it.setLexer(_function_1);
+          it.setFlexerFactory(PresentationDamagerTest.this.flexerFactory);
         }
       };
       final XtendDocumentTokenSource source = ObjectExtensions.<XtendDocumentTokenSource>operator_doubleArrow(_xtendDocumentTokenSource, _function);

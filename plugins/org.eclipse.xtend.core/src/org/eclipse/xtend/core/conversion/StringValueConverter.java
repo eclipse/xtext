@@ -5,26 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core;
+package org.eclipse.xtend.core.conversion;
 
-import org.eclipse.xtend.core.parser.antlr.XtendParser;
+import java.io.StringReader;
 
-import com.google.inject.Singleton;
+import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
+import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
+
+import com.google.inject.Inject;
 
 /**
- * Disable partial parsing for Xtend. The partial parsing regions
- * almost always covered the complete file anyway and it is conceptually
- * hard to get the lookahead right.
- * 
- * @since 2.5
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Singleton
-public class ParserWithoutPartialParsing extends XtendParser {
+public class StringValueConverter extends STRINGValueConverter {
 
+	@Inject
+	private FlexerFactory flexerFactory;
+	
 	@Override
-	protected boolean isReparseSupported() {
-		return false;
+	protected TokenSource getTokenSource(String escapedValue) {
+		return flexerFactory.createTokenSource(new StringReader(escapedValue));
 	}
 	
 }

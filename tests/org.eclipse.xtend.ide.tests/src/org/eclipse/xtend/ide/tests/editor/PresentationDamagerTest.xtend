@@ -1,15 +1,26 @@
 package org.eclipse.xtend.ide.tests.editor
 
+import com.google.inject.Inject
 import org.eclipse.jface.text.Document
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
-import org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest
-import org.junit.Test
-import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource
-import org.eclipse.xtext.ui.editor.model.XtextDocument
-import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
 import org.eclipse.xtend.core.parser.antlr.XtendAntlrTokenFileProvider
+import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
+import org.eclipse.xtext.ui.editor.model.XtextDocument
+import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider)
 class PresentationDamagerTest extends AbstractDamagerRepairerTest {
+	
+	@Inject
+	FlexerFactory flexerFactory
 	
 	override protected createLexer() {
 		new InternalXtendLexer()
@@ -91,6 +102,7 @@ class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 				antlrTokenFileProvider = new XtendAntlrTokenFileProvider
 			]
 			lexer = [|createLexer]
+			it.flexerFactory = this.flexerFactory
 		]
 		val document = new XtextDocument(source, null)
 		document.set(before)
