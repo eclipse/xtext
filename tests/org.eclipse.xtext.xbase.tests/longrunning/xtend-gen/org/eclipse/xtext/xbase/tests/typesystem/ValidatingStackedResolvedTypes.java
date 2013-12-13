@@ -60,10 +60,17 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   }
   
   public void reassignType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
-    boolean _not = (!_isOwnedBy);
-    if (_not) {
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(reference, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+      boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
+      boolean _not = (!_isOwnedBy);
+      _and = (_notEquals && _not);
+    }
+    if (_and) {
       IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
       throw _illegalArgumentException;
     }

@@ -527,22 +527,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			new ImplicitFirstArgument(getFeatureCall(), (XAbstractFeatureCall) implicitFirstArgument, getState()).applyToComputationState();
 		}
 		getState().markAsRefinedTypeIfNecessary(this);
-		if (mustDiscardRefinement()) {
-			getState().discardReassignedTypes(getFeature());
-		}
-	}
-	
-	protected boolean mustDiscardRefinement() {
-		if (getExpression() instanceof XAssignment) {
-			JvmIdentifiableElement feature = getFeature();
-			if (feature instanceof XVariableDeclaration) {
-				return ((XVariableDeclaration) feature).isWriteable();
-			}
-			if (feature instanceof JvmField) {
-				return !((JvmField) feature).isFinal();
-			}
-		}
-		return false;
+		discardRefinementTypeIfReassigned();
 	}
 	
 	protected void applyImplicitReceiver() {
