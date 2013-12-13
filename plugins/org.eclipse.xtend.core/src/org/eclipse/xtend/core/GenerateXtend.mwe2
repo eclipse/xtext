@@ -79,7 +79,7 @@ Workflow {
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = file.extensions
 			}
-			fragment = XtextAntlrGeneratorFragment {
+			fragment = parser.ParserGenerator {
 				options = auto-inject {}
 			}
 			fragment = DebugAntlrGeneratorFragment {

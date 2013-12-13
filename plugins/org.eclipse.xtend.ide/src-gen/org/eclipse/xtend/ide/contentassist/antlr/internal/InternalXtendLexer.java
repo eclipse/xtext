@@ -27,8 +27,8 @@ public class InternalXtendLexer extends Lexer {
     public static final int T__93=93;
     public static final int T__94=94;
     public static final int T__91=91;
-    public static final int T__92=92;
     public static final int RULE_HEX=5;
+    public static final int T__92=92;
     public static final int T__90=90;
     public static final int RULE_RICH_TEXT_END=13;
     public static final int RULE_DECIMAL=7;
@@ -100,8 +100,8 @@ public class InternalXtendLexer extends Lexer {
     public static final int T__111=111;
     public static final int T__110=110;
     public static final int T__113=113;
-    public static final int RULE_INT=6;
     public static final int RULE_UNICODE_ESCAPE=16;
+    public static final int RULE_INT=6;
     public static final int T__112=112;
     public static final int T__50=50;
     public static final int T__42=42;
