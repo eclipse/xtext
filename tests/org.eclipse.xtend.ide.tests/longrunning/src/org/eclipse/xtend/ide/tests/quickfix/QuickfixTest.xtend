@@ -1104,6 +1104,77 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test 
+	def void unhandledCheckedExceptionForJvmConstructor() {
+		setSeverity(IssueCodes.UNHANDLED_EXCEPTION, "error")
+		create('Foo.xtend', '''
+			class Foo {
+				new() {
+					this|('lalala')
+				}
+			
+				new(String foo) throws Exception {
+				}
+			}
+		''')
+		.assertIssueCodes(UNHANDLED_EXCEPTION)
+		.assertResolutionLabels("Add throws declaration")
+		.assertModelAfterQuickfix("Add throws declaration", '''
+			class Foo {
+				new() throws Exception {
+					this('lalala')
+				}
+			
+				new(String foo) throws Exception {
+				}
+			}
+		''')
+	}
+	
+	@Test 
+	def void unhandledCheckedExceptionForJvmConstructor2() {
+		setSeverity(IssueCodes.UNHANDLED_EXCEPTION, "error")
+		create('Foo.xtend', '''
+			class Foo {
+				new() {
+					super()
+					foo|()
+				}
+			
+				def foo() throws Exception {
+				}
+			}
+		''')
+		.assertIssueCodes(UNHANDLED_EXCEPTION)
+		.assertResolutionLabels("Add throws declaration", "Surround with try/catch block")
+		.assertModelAfterQuickfix("Add throws declaration", '''
+			class Foo {
+				new() throws Exception {
+					super()
+					foo()
+				}
+			
+				def foo() throws Exception {
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Surround with try/catch block", '''
+			class Foo {
+				new() {
+					super()
+					try {
+						foo()
+					} catch (Exception exc) {
+						throw new RuntimeException("auto-generated try/catch", exc)
+					}
+				}
+			
+				def foo() throws Exception {
+				}
+			}
+		''')
+	}
+	
+	@Test 
 	def void unhandledCheckedExceptions() {
 		setSeverity(IssueCodes.UNHANDLED_EXCEPTION, "warning")
 		create('Foo.xtend', '''
