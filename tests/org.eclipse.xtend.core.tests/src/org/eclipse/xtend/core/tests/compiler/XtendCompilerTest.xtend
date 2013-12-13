@@ -2824,6 +2824,74 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def testExplicitBoxingUnboxing_03() {
+		assertCompilesTo('''
+			class X {
+				def foo(Object o) {
+					if (o instanceof Long) {
+						o.bar
+					}
+				}
+				
+				def bar(long o) {
+					
+				}
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class X {
+			  public Object foo(final Object o) {
+			    Object _xifexpression = null;
+			    if ((o instanceof Long)) {
+			      Object _bar = this.bar(((Long) o).longValue());
+			      _xifexpression = _bar;
+			    }
+			    return _xifexpression;
+			  }
+			  
+			  public Object bar(final long o) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test def testExplicitBoxingUnboxing_04() {
+		assertCompilesTo('''
+			class X {
+				def foo(Object o) {
+					switch o {
+						Long: o.bar
+					}
+				}
+				
+				def bar(long o) {
+					
+				}
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class X {
+			  public Object foo(final Object o) {
+			    Object _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (o instanceof Long) {
+			        _matched=true;
+			        Object _bar = this.bar(((Long) o).longValue());
+			        _switchResult = _bar;
+			      }
+			    }
+			    return _switchResult;
+			  }
+			  
+			  public Object bar(final long o) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
 	@Test
 	def testOptionalSemicola() {
 		assertCompilesTo('''
