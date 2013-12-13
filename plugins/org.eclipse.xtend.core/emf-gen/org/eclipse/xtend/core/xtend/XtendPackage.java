@@ -368,6 +368,97 @@ public interface XtendPackage extends EPackage
 	int XTEND_CLASS_FEATURE_COUNT = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendExecutableImpl <em>Executable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendExecutableImpl
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendExecutable()
+	 * @generated
+	 */
+	int XTEND_EXECUTABLE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE__ANNOTATIONS = XTEND_MEMBER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE__MODIFIERS = XTEND_MEMBER__MODIFIERS;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE__DECLARING_TYPE = XTEND_MEMBER__DECLARING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE__EXPRESSION = XTEND_MEMBER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Executable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_EXECUTABLE_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 4;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl <em>Function</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -384,7 +475,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__ANNOTATIONS = XTEND_MEMBER__ANNOTATIONS;
+	int XTEND_FUNCTION__ANNOTATIONS = XTEND_EXECUTABLE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
@@ -393,7 +484,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
+	int XTEND_FUNCTION__ANNOTATION_INFO = XTEND_EXECUTABLE__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
@@ -402,7 +493,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__MODIFIERS = XTEND_MEMBER__MODIFIERS;
+	int XTEND_FUNCTION__MODIFIERS = XTEND_EXECUTABLE__MODIFIERS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -411,61 +502,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__DECLARING_TYPE = XTEND_MEMBER__DECLARING_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__NAME = XTEND_MEMBER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__EXPRESSION = XTEND_MEMBER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__RETURN_TYPE = XTEND_MEMBER_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Create Extension Info</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__CREATE_EXTENSION_INFO = XTEND_MEMBER_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 5;
+	int XTEND_FUNCTION__DECLARING_TYPE = XTEND_EXECUTABLE__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
@@ -474,7 +511,61 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 6;
+	int XTEND_FUNCTION__EXCEPTIONS = XTEND_EXECUTABLE__EXCEPTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__TYPE_PARAMETERS = XTEND_EXECUTABLE__TYPE_PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__EXPRESSION = XTEND_EXECUTABLE__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__PARAMETERS = XTEND_EXECUTABLE__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__NAME = XTEND_EXECUTABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__RETURN_TYPE = XTEND_EXECUTABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Create Extension Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__CREATE_EXTENSION_INFO = XTEND_EXECUTABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Function</em>' class.
@@ -483,7 +574,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 7;
+	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_EXECUTABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl <em>Field</em>}' class.
@@ -906,7 +997,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__ANNOTATIONS = XTEND_MEMBER__ANNOTATIONS;
+	int XTEND_CONSTRUCTOR__ANNOTATIONS = XTEND_EXECUTABLE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
@@ -915,7 +1006,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
+	int XTEND_CONSTRUCTOR__ANNOTATION_INFO = XTEND_EXECUTABLE__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
@@ -924,7 +1015,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__MODIFIERS = XTEND_MEMBER__MODIFIERS;
+	int XTEND_CONSTRUCTOR__MODIFIERS = XTEND_EXECUTABLE__MODIFIERS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -933,34 +1024,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__DECLARING_TYPE = XTEND_MEMBER__DECLARING_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CONSTRUCTOR__EXPRESSION = XTEND_MEMBER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CONSTRUCTOR__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CONSTRUCTOR__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 2;
+	int XTEND_CONSTRUCTOR__DECLARING_TYPE = XTEND_EXECUTABLE__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
@@ -969,7 +1033,34 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 3;
+	int XTEND_CONSTRUCTOR__EXCEPTIONS = XTEND_EXECUTABLE__EXCEPTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CONSTRUCTOR__TYPE_PARAMETERS = XTEND_EXECUTABLE__TYPE_PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CONSTRUCTOR__EXPRESSION = XTEND_EXECUTABLE__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CONSTRUCTOR__PARAMETERS = XTEND_EXECUTABLE__PARAMETERS;
 
 	/**
 	 * The number of structural features of the '<em>Constructor</em>' class.
@@ -978,7 +1069,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 4;
+	int XTEND_CONSTRUCTOR_FEATURE_COUNT = XTEND_EXECUTABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendAnnotationTypeImpl <em>Annotation Type</em>}' class.
@@ -1573,17 +1664,6 @@ public interface XtendPackage extends EPackage
 	EAttribute getXtendFunction_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendFunction#getExpression <em>Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFunction#getExpression()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EReference getXtendFunction_Expression();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendFunction#getReturnType <em>Return Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1595,17 +1675,6 @@ public interface XtendPackage extends EPackage
 	EReference getXtendFunction_ReturnType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFunction#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFunction#getParameters()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EReference getXtendFunction_Parameters();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1615,28 +1684,6 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EReference getXtendFunction_CreateExtensionInfo();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFunction#getTypeParameters <em>Type Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFunction#getTypeParameters()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EReference getXtendFunction_TypeParameters();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFunction#getExceptions <em>Exceptions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Exceptions</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFunction#getExceptions()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EReference getXtendFunction_Exceptions();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendField <em>Field</em>}'.
@@ -1927,50 +1974,6 @@ public interface XtendPackage extends EPackage
 	EClass getXtendConstructor();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getExpression <em>Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendConstructor#getExpression()
-	 * @see #getXtendConstructor()
-	 * @generated
-	 */
-	EReference getXtendConstructor_Expression();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendConstructor#getParameters()
-	 * @see #getXtendConstructor()
-	 * @generated
-	 */
-	EReference getXtendConstructor_Parameters();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getTypeParameters <em>Type Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendConstructor#getTypeParameters()
-	 * @see #getXtendConstructor()
-	 * @generated
-	 */
-	EReference getXtendConstructor_TypeParameters();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getExceptions <em>Exceptions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Exceptions</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendConstructor#getExceptions()
-	 * @see #getXtendConstructor()
-	 * @generated
-	 */
-	EReference getXtendConstructor_Exceptions();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration <em>Type Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2116,6 +2119,60 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXtendFormalParameter_Extension();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendExecutable <em>Executable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Executable</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendExecutable
+	 * @generated
+	 */
+	EClass getXtendExecutable();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendExecutable#getExceptions <em>Exceptions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Exceptions</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendExecutable#getExceptions()
+	 * @see #getXtendExecutable()
+	 * @generated
+	 */
+	EReference getXtendExecutable_Exceptions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendExecutable#getTypeParameters <em>Type Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendExecutable#getTypeParameters()
+	 * @see #getXtendExecutable()
+	 * @generated
+	 */
+	EReference getXtendExecutable_TypeParameters();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendExecutable#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendExecutable#getExpression()
+	 * @see #getXtendExecutable()
+	 * @generated
+	 */
+	EReference getXtendExecutable_Expression();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendExecutable#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendExecutable#getParameters()
+	 * @see #getXtendExecutable()
+	 * @generated
+	 */
+	EReference getXtendExecutable_Parameters();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2279,14 +2336,6 @@ public interface XtendPackage extends EPackage
 		EAttribute XTEND_FUNCTION__NAME = eINSTANCE.getXtendFunction_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_FUNCTION__EXPRESSION = eINSTANCE.getXtendFunction_Expression();
-
-		/**
 		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2295,36 +2344,12 @@ public interface XtendPackage extends EPackage
 		EReference XTEND_FUNCTION__RETURN_TYPE = eINSTANCE.getXtendFunction_ReturnType();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_FUNCTION__PARAMETERS = eINSTANCE.getXtendFunction_Parameters();
-
-		/**
 		 * The meta object literal for the '<em><b>Create Extension Info</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference XTEND_FUNCTION__CREATE_EXTENSION_INFO = eINSTANCE.getXtendFunction_CreateExtensionInfo();
-
-		/**
-		 * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_FUNCTION__TYPE_PARAMETERS = eINSTANCE.getXtendFunction_TypeParameters();
-
-		/**
-		 * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_FUNCTION__EXCEPTIONS = eINSTANCE.getXtendFunction_Exceptions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl <em>Field</em>}' class.
@@ -2561,38 +2586,6 @@ public interface XtendPackage extends EPackage
 		EClass XTEND_CONSTRUCTOR = eINSTANCE.getXtendConstructor();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_CONSTRUCTOR__EXPRESSION = eINSTANCE.getXtendConstructor_Expression();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_CONSTRUCTOR__PARAMETERS = eINSTANCE.getXtendConstructor_Parameters();
-
-		/**
-		 * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_CONSTRUCTOR__TYPE_PARAMETERS = eINSTANCE.getXtendConstructor_TypeParameters();
-
-		/**
-		 * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_CONSTRUCTOR__EXCEPTIONS = eINSTANCE.getXtendConstructor_Exceptions();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendTypeDeclarationImpl <em>Type Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2717,6 +2710,48 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_FORMAL_PARAMETER__EXTENSION = eINSTANCE.getXtendFormalParameter_Extension();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendExecutableImpl <em>Executable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendExecutableImpl
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendExecutable()
+		 * @generated
+		 */
+		EClass XTEND_EXECUTABLE = eINSTANCE.getXtendExecutable();
+
+		/**
+		 * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_EXECUTABLE__EXCEPTIONS = eINSTANCE.getXtendExecutable_Exceptions();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_EXECUTABLE__TYPE_PARAMETERS = eINSTANCE.getXtendExecutable_TypeParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_EXECUTABLE__EXPRESSION = eINSTANCE.getXtendExecutable_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_EXECUTABLE__PARAMETERS = eINSTANCE.getXtendExecutable_Parameters();
 
 	}
 
