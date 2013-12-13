@@ -91,45 +91,96 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 	
 	public static class StatefulFactory implements Function<ContentAssistContext.Builder, ContentAssistContext> {
 		
+		/**
+		 * @since 2.5
+		 */
 		@Inject
-		private IContentAssistParser parser;
+		protected IContentAssistParser parser;
 		
+		/**
+		 * @since 2.5
+		 */
 		@Inject
 		@Named(LexerUIBindings.CONTENT_ASSIST)
-		private Lexer lexer; 
+		protected Lexer lexer; 
 		
+		/**
+		 * @since 2.5
+		 */
 		@Inject
-		private Provider<ContentAssistContext.Builder> contentAssistContextProvider;
+		protected Provider<ContentAssistContext.Builder> contentAssistContextProvider;
 		
+		/**
+		 * @since 2.5
+		 */
 		@Inject
-		private PrefixMatcher matcher;
+		protected PrefixMatcher matcher;
 		
+		/**
+		 * @since 2.5
+		 */
 		@Inject
-		private ITokenDefProvider tokenDefProvider;
+		protected ITokenDefProvider tokenDefProvider;
 		
-		private ITextViewer viewer;
+		/**
+		 * @since 2.5
+		 */
+		protected ITextViewer viewer;
 
-		private XtextResource resource;
+		/**
+		 * @since 2.5
+		 */
+		protected XtextResource resource;
 
-		private ICompositeNode rootNode;
+		/**
+		 * @since 2.5
+		 */
+		protected ICompositeNode rootNode;
 
-		private INode lastCompleteNode;
+		/**
+		 * @since 2.5
+		 */
+		protected INode lastCompleteNode;
 
-		private INode currentNode;
+		/**
+		 * @since 2.5
+		 */
+		protected INode currentNode;
 
-		private INode lastVisibleNode;
+		/**
+		 * @since 2.5
+		 */
+		protected INode lastVisibleNode;
 
-		private EObject currentModel;
+		/**
+		 * @since 2.5
+		 */
+		protected EObject currentModel;
 
-		private List<ContentAssistContext.Builder> contextBuilders;
+		/**
+		 * @since 2.5
+		 */
+		protected List<ContentAssistContext.Builder> contextBuilders;
 
-		private IParseResult parseResult;
+		/**
+		 * @since 2.5
+		 */
+		protected IParseResult parseResult;
 
-		private INode datatypeNode;
+		/**
+		 * @since 2.5
+		 */
+		protected INode datatypeNode;
 
-		private int completionOffset;
+		/**
+		 * @since 2.5
+		 */
+		protected int completionOffset;
 
-		private ITextSelection selection;
+		/**
+		 * @since 2.5
+		 */
+		protected ITextSelection selection;
 
 		public ContentAssistContext apply(Builder from) {
 			return from.toContext();
@@ -147,6 +198,13 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			if (parseResult == null)
 				throw new NullPointerException("parseResult is null");
 			return doCreateContexts(offset);
+		}
+		
+		/**
+		 * @since 2.5
+		 */
+		protected INode getCurrentNode() {
+			return currentNode;
 		}
 
 		protected ContentAssistContext[] doCreateContexts(int offset) throws BadLocationException {

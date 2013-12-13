@@ -1,0 +1,108 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::emf::ecore»
+«IMPORT org::eclipse::xtext::generator::parser::antlr::AntlrOptions»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::Parser»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+
+«AROUND org::eclipse::xtext::generator::parser::antlr::AntlrGrammar::grammar(AntlrOptions options, boolean debugGrammar) FOR Grammar»
+«IF debugGrammar»
+«targetDef.proceed()»
+«ELSE»
+«FILE (getGrammarFileName().toJavaPackage() + "." + getGrammarFileName().toSimpleName()).asPath()+".g" SRC_GEN-»
+/*
+«fileHeader()»
+*/
+grammar «getGrammarFileName().toSimpleName()»;
+
+options {
+	superClass=AbstractInternalAntlrParser;
+}
+
+tokens {
+«EXPAND tokens-»
+}
+
+@lexer::header {
+package «getGrammarFileName().toJavaPackage()»;
+
+// Hack: Use our own Lexer superclass by means of import. 
+// Currently there is no other way to specify the superclass for the lexer.
+import org.eclipse.xtext.parser.antlr.Lexer;
+}
+
+@parser::header {
+package «getGrammarFileName().toJavaPackage()»; 
+
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+«IF !allEnumRules().isEmpty-»
+import org.eclipse.emf.common.util.Enumerator;
+«ENDIF-»
+import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+«IF !allParserRules().allContents().typeSelect(UnorderedGroup).isEmpty && options.backtrack-»
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
+«ENDIF-»
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import «gaFQName()»;
+
+}
+
+@parser::members {
+
+ 	private «gaSimpleName()» grammarAccess;
+ 	
+    public «getInternalParserClassName().toSimpleName()»(TokenStream input, «gaSimpleName()» grammarAccess) {
+        this(input);
+        this.grammarAccess = grammarAccess;
+        registerRules(grammarAccess.getGrammar());
+    }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "«allParserRules().first().name»";	
+   	}
+   	
+   	@Override
+   	protected «gaSimpleName()» getGrammarAccess() {
+   		return grammarAccess;
+   	}
+}
+
+@rulecatch { 
+    catch (RecognitionException re) { 
+        recover(input,re); 
+        appendSkippedTokens();
+    } 
+}
+«EXPAND org::eclipse::xtext::generator::parser::antlr::AntlrGrammar::antlrRules(options, debugGrammar)»
+«ENDFILE»
+«ENDIF»
+«ENDAROUND»
+
+«DEFINE tokens FOR Grammar-»
+«LET {} AS allKeywords-»
+«EXPAND TokenNames::tokens(allKeywords) FOREACH allParserRules()-»
+«EXPAND TokenNames::tokens(allKeywords) FOREACH allEnumRules()-»
+«ENDLET-»
+«ENDDEFINE»
+
