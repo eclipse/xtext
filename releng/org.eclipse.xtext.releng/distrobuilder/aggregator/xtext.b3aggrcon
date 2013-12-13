@@ -6,10 +6,9 @@
     <features name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
   </repositories>
   <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/">
-    <features name="org.eclipse.xtext.sdk.feature.group" versionRange="2.4.3"/>
+    <features name="org.eclipse.xtext.sdk.feature.group" versionRange="2.5.0"/>
     <features name="org.eclipse.xtend.sdk.feature.group"/>
     <features name="org.eclipse.xtend.gwt.feature.group"/>
-    <features name="org.eclipse.xtend.m2e.feature.group"/>
   </repositories>
   <repositories location="http://download.itemis.com/updates/">
     <features name="de.itemis.xtext.antlr.sdk.feature.group" versionRange="2.1.0"/>
