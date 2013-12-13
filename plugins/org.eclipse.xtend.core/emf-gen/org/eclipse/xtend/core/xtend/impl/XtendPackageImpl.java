@@ -26,6 +26,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
+import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -200,6 +201,13 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * @generated
 	 */
 	private EClass xtendFormalParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xtendExecutableEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -434,7 +442,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendFunction_Expression()
+	public EReference getXtendFunction_ReturnType()
 	{
 		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(1);
 	}
@@ -444,49 +452,9 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendFunction_ReturnType()
-	{
-		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXtendFunction_Parameters()
-	{
-		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getXtendFunction_CreateExtensionInfo()
 	{
-		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXtendFunction_TypeParameters()
-	{
-		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXtendFunction_Exceptions()
-	{
-		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(6);
+		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -764,46 +732,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendConstructor_Expression()
-	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXtendConstructor_Parameters()
-	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXtendConstructor_TypeParameters()
-	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXtendConstructor_Exceptions()
-	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getXtendTypeDeclaration()
 	{
 		return xtendTypeDeclarationEClass;
@@ -944,6 +872,56 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXtendExecutable()
+	{
+		return xtendExecutableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendExecutable_Exceptions()
+	{
+		return (EReference)xtendExecutableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendExecutable_TypeParameters()
+	{
+		return (EReference)xtendExecutableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendExecutable_Expression()
+	{
+		return (EReference)xtendExecutableEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendExecutable_Parameters()
+	{
+		return (EReference)xtendExecutableEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XtendFactory getXtendFactory()
 	{
 		return (XtendFactory)getEFactoryInstance();
@@ -989,12 +967,8 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		xtendFunctionEClass = createEClass(XTEND_FUNCTION);
 		createEAttribute(xtendFunctionEClass, XTEND_FUNCTION__NAME);
-		createEReference(xtendFunctionEClass, XTEND_FUNCTION__EXPRESSION);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__RETURN_TYPE);
-		createEReference(xtendFunctionEClass, XTEND_FUNCTION__PARAMETERS);
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__CREATE_EXTENSION_INFO);
-		createEReference(xtendFunctionEClass, XTEND_FUNCTION__TYPE_PARAMETERS);
-		createEReference(xtendFunctionEClass, XTEND_FUNCTION__EXCEPTIONS);
 
 		xtendFieldEClass = createEClass(XTEND_FIELD);
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__NAME);
@@ -1031,10 +1005,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		createEAttribute(createExtensionInfoEClass, CREATE_EXTENSION_INFO__NAME);
 
 		xtendConstructorEClass = createEClass(XTEND_CONSTRUCTOR);
-		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__EXPRESSION);
-		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__PARAMETERS);
-		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__TYPE_PARAMETERS);
-		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__EXCEPTIONS);
 
 		xtendTypeDeclarationEClass = createEClass(XTEND_TYPE_DECLARATION);
 		createEAttribute(xtendTypeDeclarationEClass, XTEND_TYPE_DECLARATION__NAME);
@@ -1056,6 +1026,12 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		xtendFormalParameterEClass = createEClass(XTEND_FORMAL_PARAMETER);
 		createEAttribute(xtendFormalParameterEClass, XTEND_FORMAL_PARAMETER__EXTENSION);
+
+		xtendExecutableEClass = createEClass(XTEND_EXECUTABLE);
+		createEReference(xtendExecutableEClass, XTEND_EXECUTABLE__EXCEPTIONS);
+		createEReference(xtendExecutableEClass, XTEND_EXECUTABLE__TYPE_PARAMETERS);
+		createEReference(xtendExecutableEClass, XTEND_EXECUTABLE__EXPRESSION);
+		createEReference(xtendExecutableEClass, XTEND_EXECUTABLE__PARAMETERS);
 	}
 
 	/**
@@ -1095,14 +1071,14 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		// Add supertypes to classes
 		xtendClassEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
 		xtendMemberEClass.getESuperTypes().add(this.getXtendAnnotationTarget());
-		xtendFunctionEClass.getESuperTypes().add(this.getXtendMember());
+		xtendFunctionEClass.getESuperTypes().add(this.getXtendExecutable());
 		xtendFieldEClass.getESuperTypes().add(this.getXtendMember());
 		xtendParameterEClass.getESuperTypes().add(this.getXtendAnnotationTarget());
 		richStringEClass.getESuperTypes().add(theXbasePackage.getXBlockExpression());
 		richStringLiteralEClass.getESuperTypes().add(theXbasePackage.getXStringLiteral());
 		richStringForLoopEClass.getESuperTypes().add(theXbasePackage.getXForLoopExpression());
 		richStringIfEClass.getESuperTypes().add(theXbasePackage.getXExpression());
-		xtendConstructorEClass.getESuperTypes().add(this.getXtendMember());
+		xtendConstructorEClass.getESuperTypes().add(this.getXtendExecutable());
 		xtendTypeDeclarationEClass.getESuperTypes().add(this.getXtendMember());
 		xtendAnnotationTypeEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
 		xtendInterfaceEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
@@ -1110,6 +1086,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		xtendEnumLiteralEClass.getESuperTypes().add(this.getXtendMember());
 		xtendVariableDeclarationEClass.getESuperTypes().add(theXbasePackage.getXVariableDeclaration());
 		xtendFormalParameterEClass.getESuperTypes().add(theTypesPackage.getJvmFormalParameter());
+		xtendExecutableEClass.getESuperTypes().add(this.getXtendMember());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xtendFileEClass, XtendFile.class, "XtendFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1142,12 +1119,8 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		initEClass(xtendFunctionEClass, XtendFunction.class, "XtendFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendFunction_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendFunction_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_ReturnType(), theTypesPackage.getJvmTypeReference(), null, "returnType", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendFunction_Parameters(), this.getXtendParameter(), null, "parameters", null, 0, -1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFunction_CreateExtensionInfo(), this.getCreateExtensionInfo(), null, "createExtensionInfo", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendFunction_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendFunction_Exceptions(), theTypesPackage.getJvmTypeReference(), null, "exceptions", null, 0, -1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xtendFunctionEClass, ecorePackage.getEBoolean(), "isAbstract", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1192,10 +1165,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEAttribute(getCreateExtensionInfo_Name(), ecorePackage.getEString(), "name", "it", 0, 1, CreateExtensionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendConstructorEClass, XtendConstructor.class, "XtendConstructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getXtendConstructor_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendConstructor_Parameters(), this.getXtendParameter(), null, "parameters", null, 0, -1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendConstructor_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendConstructor_Exceptions(), theTypesPackage.getJvmTypeReference(), null, "exceptions", null, 0, -1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendTypeDeclarationEClass, XtendTypeDeclaration.class, "XtendTypeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendTypeDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendTypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1217,6 +1186,12 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		initEClass(xtendFormalParameterEClass, XtendFormalParameter.class, "XtendFormalParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendFormalParameter_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendFormalParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xtendExecutableEClass, XtendExecutable.class, "XtendExecutable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXtendExecutable_Exceptions(), theTypesPackage.getJvmTypeReference(), null, "exceptions", null, 0, -1, XtendExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendExecutable_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendExecutable_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendExecutable_Parameters(), this.getXtendParameter(), null, "parameters", null, 0, -1, XtendExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

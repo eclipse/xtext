@@ -968,8 +968,14 @@ public class XtendFormatter extends XbaseFormatter2 {
     } else if (annotationType instanceof XtendClass) {
       _format((XtendClass)annotationType, format);
       return;
+    } else if (annotationType instanceof XtendConstructor) {
+      _format((XtendConstructor)annotationType, format);
+      return;
     } else if (annotationType instanceof XtendEnum) {
       _format((XtendEnum)annotationType, format);
+      return;
+    } else if (annotationType instanceof XtendFunction) {
+      _format((XtendFunction)annotationType, format);
       return;
     } else if (annotationType instanceof XtendInterface) {
       _format((XtendInterface)annotationType, format);
@@ -980,14 +986,8 @@ public class XtendFormatter extends XbaseFormatter2 {
     } else if (annotationType instanceof RichString) {
       _format((RichString)annotationType, format);
       return;
-    } else if (annotationType instanceof XtendConstructor) {
-      _format((XtendConstructor)annotationType, format);
-      return;
     } else if (annotationType instanceof XtendField) {
       _format((XtendField)annotationType, format);
-      return;
-    } else if (annotationType instanceof XtendFunction) {
-      _format((XtendFunction)annotationType, format);
       return;
     } else if (annotationType instanceof JvmFormalParameter) {
       _format((JvmFormalParameter)annotationType, format);
