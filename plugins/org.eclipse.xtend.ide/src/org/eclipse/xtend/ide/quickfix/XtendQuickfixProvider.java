@@ -26,6 +26,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
@@ -53,9 +54,11 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.StopWatch;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
@@ -257,27 +260,27 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							String[] issueData = issue.getData(); 
-							XtendFunction xtendFunction = EcoreUtil2.getContainerOfType(element, XtendFunction.class);
-							XtextResource xtextResource = (XtextResource) xtendFunction.eResource();
+							XtendExecutable xtendExecutable = EcoreUtil2.getContainerOfType(element, XtendExecutable.class);
+							XtextResource xtextResource = (XtextResource) xtendExecutable.eResource();
 							List<JvmType> exceptions = getExceptions(issueData, xtextResource);
 							if (exceptions.size() > 0) {
 								int insertPosition;
-								if (xtendFunction.getExpression() == null) {
-									ICompositeNode functionNode = NodeModelUtils.findActualNodeFor(xtendFunction);
+								if (xtendExecutable.getExpression() == null) {
+									ICompositeNode functionNode = NodeModelUtils.findActualNodeFor(xtendExecutable);
 									if (functionNode == null)
 										throw new IllegalStateException("functionNode may not be null");
 									insertPosition = functionNode.getEndOffset();
 								} else {
-									ICompositeNode expressionNode = NodeModelUtils.findActualNodeFor(xtendFunction.getExpression());
+									ICompositeNode expressionNode = NodeModelUtils.findActualNodeFor(xtendExecutable.getExpression());
 									if (expressionNode == null)
 										throw new IllegalStateException("expressionNode may not be null");
 									insertPosition = expressionNode.getOffset();
 								}
 								ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
-										(XtextResource) xtendFunction.eResource(), insertPosition, 0);
-								if (xtendFunction.getExpression() == null) 
+										(XtextResource) xtendExecutable.eResource(), insertPosition, 0);
+								if (xtendExecutable.getExpression() == null) 
 									appendable.append(" ");
-								EList<JvmTypeReference> thrownExceptions = xtendFunction.getExceptions();
+								EList<JvmTypeReference> thrownExceptions = xtendExecutable.getExceptions();
 								if (thrownExceptions.isEmpty())
 									appendable.append("throws ");
 								else
@@ -289,7 +292,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 										appendable.append(", ");
 									}
 								}
-								if (xtendFunction.getExpression() != null) 
+								if (xtendExecutable.getExpression() != null) 
 									appendable.append(" ");
 								appendable.commitChanges();
 							}
@@ -314,51 +317,78 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION)
 	public void surroundWithTryCatch(final Issue issue, IssueResolutionAcceptor acceptor) {
-		if (issue.getData() != null && issue.getData().length > 1)
-			acceptor.accept(issue, "Surround with try/catch block", "Surround with try/catch block", "fix_indent.gif",
-					new ISemanticModification() {
-						public void apply(EObject element, IModificationContext context) throws Exception {
-							String[] issueData = issue.getData();
-							URI childURI = URI.createURI(issueData[issueData.length - 1]);
-							XtextResource xtextResource = (XtextResource) element.eResource();
-							List<JvmType> exceptions = getExceptions(issueData, xtextResource);
-							if (exceptions.size() > 0) {
-								EObject childThrowingException = xtextResource.getResourceSet().getEObject(childURI, true);
-								XExpression toBeSurrounded = findContainerExpressionInBlockExpression(childThrowingException);
-								IXtextDocument xtextDocument = context.getXtextDocument();
-								if (toBeSurrounded != null) {
-									ICompositeNode toBeSurroundedNode = NodeModelUtils.findActualNodeFor(toBeSurrounded);
-									if (toBeSurroundedNode == null)
-										throw new IllegalStateException("toBeSurroundedNode may not be null");
-									ITextRegion toBeSurroundedRegion = toBeSurroundedNode.getTextRegion();
-									ReplacingAppendable appendable = appendableFactory.create(
-											context.getXtextDocument(),
-											(XtextResource) childThrowingException.eResource(), 
-											toBeSurroundedRegion.getOffset(),
-											toBeSurroundedRegion.getLength());
+		if (issue.getData() == null || issue.getData().length <= 1) {
+			return;
+		}
+		IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
+		IXtextDocument xtextDocument = modificationContext.getXtextDocument();
+		if (xtextDocument == null) {
+			return;
+		}
+		if (isJvmConstructorCall(xtextDocument, issue)) {
+			return;
+		}
+		acceptor.accept(issue, "Surround with try/catch block", "Surround with try/catch block", "fix_indent.gif",
+				new ISemanticModification() {
+					public void apply(EObject element, IModificationContext context) throws Exception {
+						String[] issueData = issue.getData();
+						URI childURI = URI.createURI(issueData[issueData.length - 1]);
+						XtextResource xtextResource = (XtextResource) element.eResource();
+						List<JvmType> exceptions = getExceptions(issueData, xtextResource);
+						if (exceptions.size() > 0) {
+							EObject childThrowingException = xtextResource.getResourceSet().getEObject(childURI, true);
+							XExpression toBeSurrounded = findContainerExpressionInBlockExpression(childThrowingException);
+							IXtextDocument xtextDocument = context.getXtextDocument();
+							if (toBeSurrounded != null) {
+								ICompositeNode toBeSurroundedNode = NodeModelUtils.findActualNodeFor(toBeSurrounded);
+								if (toBeSurroundedNode == null)
+									throw new IllegalStateException("toBeSurroundedNode may not be null");
+								ITextRegion toBeSurroundedRegion = toBeSurroundedNode.getTextRegion();
+								ReplacingAppendable appendable = appendableFactory.create(
+										context.getXtextDocument(),
+										(XtextResource) childThrowingException.eResource(), 
+										toBeSurroundedRegion.getOffset(),
+										toBeSurroundedRegion.getLength());
+								appendable
+										.append("try {")
+										.increaseIndentation()
+											.newLine()
+											.append(xtextDocument.get(toBeSurroundedRegion.getOffset(),
+													toBeSurroundedRegion.getLength()))
+										.decreaseIndentation()
+										.newLine();
+								for(JvmType exceptionType: exceptions) {
 									appendable
-											.append("try {")
-											.increaseIndentation()
-												.newLine()
-												.append(xtextDocument.get(toBeSurroundedRegion.getOffset(),
-														toBeSurroundedRegion.getLength()))
-											.decreaseIndentation()
-											.newLine();
-									for(JvmType exceptionType: exceptions) {
-										appendable
-											.append("} catch (")
-										// TODO type ref?
-											.append(exceptionType).append(" exc) {").increaseIndentation()
-												.newLine()
-												.append("throw new RuntimeException(\"auto-generated try/catch\", exc)").decreaseIndentation()
-											.newLine();
-									}
-									appendable.append("}");
-									appendable.commitChanges();
+										.append("} catch (")
+									// TODO type ref?
+										.append(exceptionType).append(" exc) {").increaseIndentation()
+											.newLine()
+											.append("throw new RuntimeException(\"auto-generated try/catch\", exc)").decreaseIndentation()
+										.newLine();
 								}
+								appendable.append("}");
+								appendable.commitChanges();
 							}
 						}
-					});
+					}
+				});
+	}
+
+	private Boolean isJvmConstructorCall(IXtextDocument xtextDocument, final Issue issue) {
+		return xtextDocument.readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+
+			public Boolean exec(XtextResource xtextResource) throws Exception {
+				String[] issueData = issue.getData();
+				URI childURI = URI.createURI(issueData[issueData.length - 1]);
+				EObject childThrowingException = xtextResource.getResourceSet().getEObject(childURI, true);
+				if (!(childThrowingException instanceof XFeatureCall)) {
+					return false;
+				}
+				XFeatureCall featureCall = (XFeatureCall) childThrowingException;
+				return featureCall.getFeature() instanceof JvmConstructor;
+			}
+			
+		});
 	}
 	
 	@Fix(IssueCodes.WRONG_PACKAGE)
