@@ -1,0 +1,96 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtend.ide.contentassist.antlr;
+
+import java.io.IOException;
+import java.io.StringReader;
+
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendFlexer;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ProposalConflictHelper;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
+/**
+ * <p>An implementation that relies on the lexer to detect proposals that conflict
+ * with the input in the document.</p>
+ * <p>A proposal is considered to be conflicting if the lexer would not produce
+ * two distinct tokens for the previous sibling and the proposal itself but consume
+ * parts of the proposal as part of the first token. 
+ * Example:</p>
+ * <code>
+ * === Grammar:<br/>
+ * 	MyParserRule: name=ID other=[MyParserRule];<br/>
+ * === Input:<br/>
+ *  MyId|<br/>
+ * </code>
+ * <p>where <code>|</code> denotes the cursor position. A valid follow
+ * token for the parser is the ID of the cross reference. However, since
+ * <code>MyIdSomethingElse</code> would be consumed as a single ID by the lexer,
+ * the proposal <code>SomethingElse</code> is invalid.</p> 
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class FlexProposalConflictHelper extends ProposalConflictHelper {
+
+	private InternalXtendFlexer proposalLexer = new InternalXtendFlexer();
+
+	private InternalXtendFlexer lastCompleteLexer = new InternalXtendFlexer();
+	
+	private InternalXtendFlexer combinedLexer = new InternalXtendFlexer();
+
+	@Override
+	public boolean existsConflict(String lastCompleteText, String proposal, ContentAssistContext context) {
+		initTokenSources(lastCompleteText, proposal, context);
+		try {
+			if (!equalTokenSequence(lastCompleteLexer, combinedLexer))
+				return true;
+			if (!equalTokenSequence(proposalLexer, combinedLexer))
+				return true;
+			int lastToken = proposalLexer.advance();
+			if (lastToken != Token.EOF)
+				return true;
+			return false;
+		} catch(IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	protected boolean equalTokenSequence(InternalXtendFlexer first, InternalXtendFlexer second) throws IOException {
+		int token;
+		while((token = first.advance()) != Token.EOF) {
+			int otherToken = second.advance();
+			if (token != otherToken) {
+				return false;
+			}
+			if (first.getTokenLength() != second.getTokenLength()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	protected void initTokenSources(String lastCompleteText, String proposal, ContentAssistContext context) {
+		String combinedText = lastCompleteText.concat(proposal);
+		initTokenSource(combinedText, combinedLexer, context);
+		initTokenSource(lastCompleteText, lastCompleteLexer, context);
+		initTokenSource(proposal, proposalLexer, context);
+	}
+
+	protected void initTokenSource(String text, InternalXtendFlexer tokenSource, ContentAssistContext context) {
+		tokenSource.yyreset(new StringReader(text));
+	}
+
+}

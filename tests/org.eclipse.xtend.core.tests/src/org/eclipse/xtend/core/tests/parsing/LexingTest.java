@@ -7,6 +7,7 @@ import java.util.List;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.Token;
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
@@ -18,9 +19,6 @@ import com.google.inject.Inject;
 
 @SuppressWarnings("unchecked")
 public class LexingTest extends AbstractXtendTestCase {
-	
-	@Inject
-	private Lexer lexer;
 	
 	@Inject
 	private ITokenDefProvider tokenDefProvider;
@@ -133,6 +131,7 @@ public class LexingTest extends AbstractXtendTestCase {
 	}
 	
 	protected void assertLexing(String input, Pair<String,String>... expectedTokens) {
+		Lexer lexer = new InternalXtendLexer(null);
 		CharStream stream = new ANTLRStringStream(input);
 		lexer.setCharStream(stream);
 		XtextTokenStream tokenStream = new XtextTokenStream(lexer, tokenDefProvider);
@@ -145,5 +144,9 @@ public class LexingTest extends AbstractXtendTestCase {
 			String actual = tokenDefProvider.getTokenDefMap().get(token.getType());
 			assertEquals("expected "+expected+" but was "+actual, expected, actual);
 		}
+	}
+	
+	protected ITokenDefProvider getTokenDefProvider() {
+		return tokenDefProvider;
 	}
 }

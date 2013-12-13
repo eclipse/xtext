@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.editor.model;
 
+import java.io.StringReader;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexTokenSource;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
@@ -44,7 +46,7 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 
 	@Override
 	protected TokenSource createTokenSource(String string) {
-		final TokenSource delegate = super.createTokenSource(string);
+		final FlexTokenSource delegate = new FlexTokenSource(new StringReader(string));
 		return new TokenSource() {
 
 			public Token nextToken() {

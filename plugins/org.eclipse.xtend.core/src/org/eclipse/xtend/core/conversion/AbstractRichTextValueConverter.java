@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.conversion;
 
+import java.io.StringReader;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexTokenSource;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
@@ -35,6 +38,11 @@ public abstract class AbstractRichTextValueConverter extends AbstractLexerBasedC
 	@Override
 	protected String toEscapedString(String value) {
 		return getLeadingTerminal() + value + getTrailingTerminal();
+	}
+	
+	@Override
+	protected TokenSource getTokenSource(String escapedValue) {
+		return new FlexTokenSource(new StringReader(escapedValue));
 	}
 	
 	@Override

@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.conversion;
 
+import java.io.StringReader;
+
+import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexTokenSource;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
@@ -30,6 +34,11 @@ public class JavaIDValueConverter extends IDValueConverter {
 		} catch (IllegalArgumentException e) {
 			throw new ValueConverterException(e.getMessage(), node, e);
 		}
+	}
+	
+	@Override
+	protected TokenSource getTokenSource(String escapedValue) {
+		return new FlexTokenSource(new StringReader(escapedValue));
 	}
 	
 	public static boolean isValidIdentifierStart(char c) {
