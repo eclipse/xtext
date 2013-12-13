@@ -123,6 +123,7 @@ public class XtendSwitch<T> extends Switch<T>
 			{
 				XtendFunction xtendFunction = (XtendFunction)theEObject;
 				T result = caseXtendFunction(xtendFunction);
+				if (result == null) result = caseXtendExecutable(xtendFunction);
 				if (result == null) result = caseXtendMember(xtendFunction);
 				if (result == null) result = caseXtendAnnotationTarget(xtendFunction);
 				if (result == null) result = defaultCase(theEObject);
@@ -198,6 +199,7 @@ public class XtendSwitch<T> extends Switch<T>
 			{
 				XtendConstructor xtendConstructor = (XtendConstructor)theEObject;
 				T result = caseXtendConstructor(xtendConstructor);
+				if (result == null) result = caseXtendExecutable(xtendConstructor);
 				if (result == null) result = caseXtendMember(xtendConstructor);
 				if (result == null) result = caseXtendAnnotationTarget(xtendConstructor);
 				if (result == null) result = defaultCase(theEObject);
@@ -268,6 +270,15 @@ public class XtendSwitch<T> extends Switch<T>
 				if (result == null) result = caseJvmFormalParameter(xtendFormalParameter);
 				if (result == null) result = caseJvmAnnotationTarget(xtendFormalParameter);
 				if (result == null) result = caseJvmIdentifiableElement(xtendFormalParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtendPackage.XTEND_EXECUTABLE:
+			{
+				XtendExecutable xtendExecutable = (XtendExecutable)theEObject;
+				T result = caseXtendExecutable(xtendExecutable);
+				if (result == null) result = caseXtendMember(xtendExecutable);
+				if (result == null) result = caseXtendAnnotationTarget(xtendExecutable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -607,6 +618,22 @@ public class XtendSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseXtendFormalParameter(XtendFormalParameter object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Executable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Executable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendExecutable(XtendExecutable object)
 	{
 		return null;
 	}

@@ -33,8 +33,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
-import org.eclipse.xtend.core.macro.XAnnotationExtensions;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
@@ -99,7 +97,6 @@ import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
@@ -762,7 +759,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			message.append('.');
 			message.append(exceptionMismatch.get(i).getSimpleSignature());
 		}
-		error(message.toString(), function, XTEND_FUNCTION__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);
+		error(message.toString(), function, XTEND_EXECUTABLE__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);
 	}
 
 	@Nullable
@@ -888,13 +885,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			String leftParameterName = function.getParameters().get(i).getName();
 			for (int j = i + 1; j < function.getParameters().size(); ++j) {
 				if (equal(leftParameterName, function.getParameters().get(j).getName())) {
-					error("Duplicate parameter " + leftParameterName, XTEND_FUNCTION__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
-					error("Duplicate parameter " + leftParameterName, XTEND_FUNCTION__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
 				}
 			}
 			if (function.getCreateExtensionInfo() != null) {
 				if (equal(leftParameterName, function.getCreateExtensionInfo().getName())) {
-					error("Duplicate parameter " + leftParameterName, XTEND_FUNCTION__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
 					if (function.getCreateExtensionInfo().eIsSet(CREATE_EXTENSION_INFO__NAME))
 						error("Duplicate parameter " + leftParameterName, function.getCreateExtensionInfo(),
 								CREATE_EXTENSION_INFO__NAME, DUPLICATE_PARAMETER_NAME);
@@ -949,8 +946,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			String leftParameterName = constructor.getParameters().get(i).getName();
 			for (int j = i + 1; j < constructor.getParameters().size(); ++j) {
 				if (equal(leftParameterName, constructor.getParameters().get(j).getName())) {
-					error("Duplicate parameter " + leftParameterName, XTEND_CONSTRUCTOR__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
-					error("Duplicate parameter " + leftParameterName, XTEND_CONSTRUCTOR__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
 				}
 			}
 		}
@@ -1280,7 +1277,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkDeclaredExceptions(XtendConstructor constructor){
 		JvmConstructor jvmType = associations.getInferredConstructor(constructor);
-		checkExceptions(constructor, jvmType.getExceptions(), XtendPackage.Literals.XTEND_CONSTRUCTOR__EXCEPTIONS);
+		checkExceptions(constructor, jvmType.getExceptions(), XtendPackage.Literals.XTEND_EXECUTABLE__EXCEPTIONS);
 	}
 	
 	@Check
@@ -1301,7 +1298,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkTypeParametersAreUnsupported(XtendConstructor constructor){
 		if (!constructor.getTypeParameters().isEmpty()) {
-			error("Type parameters are not supported for constructors", XtendPackage.Literals.XTEND_CONSTRUCTOR__TYPE_PARAMETERS, INSIGNIFICANT_INDEX, CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED);
+			error("Type parameters are not supported for constructors", XtendPackage.Literals.XTEND_EXECUTABLE__TYPE_PARAMETERS, INSIGNIFICANT_INDEX, CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED);
 		}
 	}
 	
@@ -1309,7 +1306,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkDeclaredExceptions(XtendFunction function){
 		JvmOperation jvmOperation = associations.getDirectlyInferredOperation(function);
 		if (jvmOperation != null) {
-			checkExceptions(function,jvmOperation.getExceptions(), XtendPackage.Literals.XTEND_FUNCTION__EXCEPTIONS);
+			checkExceptions(function,jvmOperation.getExceptions(), XtendPackage.Literals.XTEND_EXECUTABLE__EXCEPTIONS);
 		}
 	}
 	

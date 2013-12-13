@@ -301,20 +301,20 @@ public class XtendLabelProvider extends XbaseLabelProvider {
       return _imageDescriptor((XtendAnnotationType)constructor);
     } else if (constructor instanceof XtendClass) {
       return _imageDescriptor((XtendClass)constructor);
+    } else if (constructor instanceof XtendConstructor) {
+      return _imageDescriptor((XtendConstructor)constructor);
     } else if (constructor instanceof XtendEnum) {
       return _imageDescriptor((XtendEnum)constructor);
+    } else if (constructor instanceof XtendFunction) {
+      return _imageDescriptor((XtendFunction)constructor);
     } else if (constructor instanceof XtendInterface) {
       return _imageDescriptor((XtendInterface)constructor);
     } else if (constructor instanceof JvmTypeParameter) {
       return _imageDescriptor((JvmTypeParameter)constructor);
-    } else if (constructor instanceof XtendConstructor) {
-      return _imageDescriptor((XtendConstructor)constructor);
     } else if (constructor instanceof XtendEnumLiteral) {
       return _imageDescriptor((XtendEnumLiteral)constructor);
     } else if (constructor instanceof XtendField) {
       return _imageDescriptor((XtendField)constructor);
-    } else if (constructor instanceof XtendFunction) {
-      return _imageDescriptor((XtendFunction)constructor);
     } else if (constructor instanceof JvmFormalParameter) {
       return _imageDescriptor((JvmFormalParameter)constructor);
     } else if (constructor instanceof XVariableDeclaration) {
