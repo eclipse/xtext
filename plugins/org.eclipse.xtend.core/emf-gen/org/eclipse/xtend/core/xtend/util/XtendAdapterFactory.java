@@ -195,6 +195,11 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 				return createXtendFormalParameterAdapter();
 			}
 			@Override
+			public Adapter caseXtendExecutable(XtendExecutable object)
+			{
+				return createXtendExecutableAdapter();
+			}
+			@Override
 			public Adapter caseXExpression(XExpression object)
 			{
 				return createXExpressionAdapter();
@@ -567,6 +572,21 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXtendFormalParameterAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.XtendExecutable <em>Executable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.XtendExecutable
+	 * @generated
+	 */
+	public Adapter createXtendExecutableAdapter()
 	{
 		return null;
 	}
