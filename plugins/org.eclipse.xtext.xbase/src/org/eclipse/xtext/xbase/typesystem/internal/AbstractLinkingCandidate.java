@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -22,7 +23,9 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -647,6 +650,26 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	protected ExpressionTypeComputationState getState() {
 		return state;
+	}
+
+	protected boolean mustDiscardRefinement() {
+		Expression expression = getExpression();
+		if (expression instanceof XAssignment) {
+			JvmIdentifiableElement feature = getFeature();
+			if (feature instanceof XVariableDeclaration) {
+				return ((XVariableDeclaration) feature).isWriteable();
+			}
+			if (feature instanceof JvmField) {
+				return !((JvmField) feature).isFinal();
+			}
+		}
+		return false;
+	}
+	
+	protected void discardRefinementTypeIfReassigned() {
+		if (mustDiscardRefinement()) {
+			getState().discardReassignedTypes(getFeature());
+		}
 	}
 	
 }
