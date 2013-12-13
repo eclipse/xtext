@@ -57,6 +57,8 @@ Workflow {
 	component = DirectoryCleaner {
 		directory = "${uiProjectPath}/src-gen"
 	}
+	
+	component = parser.JFlexLoader : jFlexMain {}
 
 	component = Generator {
 		pathRtProject = projectPath
@@ -79,7 +81,7 @@ Workflow {
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = file.extensions
 			}
-			fragment = XtextAntlrGeneratorFragment {
+			fragment = parser.ParserGenerator {
 				options = auto-inject {}
 			}
 			fragment = DebugAntlrGeneratorFragment {
@@ -99,9 +101,10 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = XtextAntlrUiGeneratorFragment {
+			fragment = parser.ContentAssistParserGenerator {
 				removeBacktrackingGuards = true
 				lookaheadThreshold = '5'
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 				options = auto-inject {}
 			}
 			fragment = refactoring.RefactorElementNameFragment {
@@ -112,6 +115,10 @@ Workflow {
 				generateXtendInferrer = false
 			}
 			fragment = templates.CodetemplatesGeneratorFragment {}
+			
+			fragment = parser.JFlexGeneratorFragment auto-inject {
+				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
+			}
 		}
 	}
 }
