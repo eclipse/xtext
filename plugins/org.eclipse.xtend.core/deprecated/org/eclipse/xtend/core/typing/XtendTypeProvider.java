@@ -113,7 +113,7 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 	}
 	
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index, boolean rawType) {
-		if (reference == XtendPackage.Literals.XTEND_FUNCTION__EXPRESSION) {
+		if (reference == XtendPackage.Literals.XTEND_EXECUTABLE__EXPRESSION) {
 			if (function.getCreateExtensionInfo()!=null)
 				return getTypeReferences().getTypeForName(Void.TYPE, function);
 			JvmTypeReference declaredOrInferredReturnType = returnTypeProvider.getDeclaredOrOverriddenReturnType(function);
@@ -135,7 +135,7 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 	}
 	
 	protected JvmTypeReference _expectedType(XtendConstructor constructor, EReference reference, int index, boolean rawType) {
-		if (reference == XtendPackage.Literals.XTEND_CONSTRUCTOR__EXPRESSION) {
+		if (reference == XtendPackage.Literals.XTEND_EXECUTABLE__EXPRESSION) {
 			return getTypeReferences().getTypeForName(Void.TYPE, constructor);
 		}
 		return null;

@@ -548,10 +548,10 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  }
 			}
 		'''.assertIsOrganizedTo('''
-			import java.awt.List
+			import java.util.List
 
 			class Foo {
-			  def List test(java.util.List<String> s) {
+			  def java.awt.List test(List<String> s) {
 			    return null
 			  }
 			}
@@ -566,10 +566,10 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  }
 			}
 		'''.assertIsOrganizedTo('''
-			import java.util.List
+			import java.awt.List
 
 			class Foo {
-			  def List<String> test(java.awt.List s) {
+			  def java.util.List<String> test(List s) {
 			    return null
 			  }
 			}
