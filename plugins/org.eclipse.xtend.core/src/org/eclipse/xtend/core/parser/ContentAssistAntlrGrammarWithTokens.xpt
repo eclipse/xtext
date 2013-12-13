@@ -1,0 +1,99 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::emf::ecore»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+
+«AROUND org::eclipse::xtext::generator::parser::antlr::AntlrContentAssistGrammar::grammar(AntlrOptions options) FOR Grammar»
+«FILE getGrammarFileName().asPath()+".g" SRC_GEN_UI-»
+/*
+«fileHeader()»
+*/
+grammar «getGrammarFileName().toSimpleName()»;
+
+options {
+	superClass=AbstractInternalContentAssistParser;
+	«IF options.backtrack || !allPredicatedElements().isEmpty-»
+	backtrack=true;
+	«ENDIF-»
+	«IF options.memoize-»
+	 memoize=true;
+	«ENDIF-»
+	«IF options.k>=0»
+	 k=«options.k»;
+	«ENDIF»
+}
+
+tokens {
+«EXPAND tokens-»
+}
+
+@lexer::header {
+package «getGrammarFileName().toJavaPackage()»;
+
+// Hack: Use our own Lexer superclass by means of import. 
+// Currently there is no other way to specify the superclass for the lexer.
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+}
+
+@parser::header {
+package «getGrammarFileName().toJavaPackage()»; 
+
+import java.io.InputStream;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
+import «gaFQName()»;
+
+}
+
+@parser::members {
+ 
+ 	private «gaSimpleName()» grammarAccess;
+ 	
+    public void setGrammarAccess(«gaSimpleName()» grammarAccess) {
+    	this.grammarAccess = grammarAccess;
+    }
+    
+    @Override
+    protected Grammar getGrammar() {
+    	return grammarAccess.getGrammar();
+    }
+    
+    @Override
+    protected String getValueForTokenName(String tokenName) {
+    	return tokenName;
+    }
+
+}
+
+«EXPAND org::eclipse::xtext::generator::parser::antlr::AntlrContentAssistGrammar::antlrRules»
+«ENDFILE»
+«ENDAROUND»
+
+«DEFINE tokens FOR Grammar-»
+«LET {} AS allKeywords-»
+«EXPAND TokenNames::tokens(allKeywords) FOREACH allParserRules()-»
+«EXPAND TokenNames::tokens(allKeywords) FOREACH allEnumRules()-»
+«ENDLET-»
+«ENDDEFINE»
+

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtend.core.parser.antlr.XtendAntlrTokenFileProvider;
+import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -62,6 +63,9 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private TypesFactory _typesFactory;
+  
+  @Inject
+  private FlexerFactory flexerFactory;
   
   @Test
   public void testSectionOverlap() {
@@ -618,6 +622,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
             }
           };
           it.setLexer(_function_1);
+          it.setFlexerFactory(DocumentRewriterTest.this.flexerFactory);
         }
       };
       final XtendDocumentTokenSource source = ObjectExtensions.<XtendDocumentTokenSource>operator_doubleArrow(_xtendDocumentTokenSource, _function);
