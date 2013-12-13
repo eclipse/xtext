@@ -22,6 +22,10 @@ import org.eclipse.xtend.ide.contentassist.EscapeSequenceAwarePrefixMatcher;
 import org.eclipse.xtend.ide.contentassist.OperatorAwareComparator;
 import org.eclipse.xtend.ide.contentassist.TemplateProposalProvider;
 import org.eclipse.xtend.ide.contentassist.XtendContentAssistFactory;
+import org.eclipse.xtend.ide.contentassist.antlr.DisabledInternalLexer;
+import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistContextFactory;
+import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistParser;
+import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.ide.editor.InitiallyCollapsableAwareFoldingStructureProvider;
 import org.eclipse.xtend.ide.editor.OccurrenceComputer;
 import org.eclipse.xtend.ide.editor.OverrideIndicatorModelListener;
@@ -69,8 +73,10 @@ import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -84,6 +90,9 @@ import org.eclipse.xtext.ui.editor.contentassist.IContentProposalPriorities;
 import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
@@ -115,7 +124,6 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
@@ -446,6 +454,26 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends IContentProposalPriorities> bindIContentProposalPriorities() {
 		return XbaseContentProposalPriorities.class;
+	}
+	
+	@Override
+	public Class<? extends IContentAssistParser> bindIContentAssistParser() {
+		return FlexerBasedContentAssistParser.class;
+	}
+	
+	@Override
+	public void configureContentAssistLexerProvider(Binder binder) {
+		binder.bind(InternalXtendLexer.class).toProvider(LexerProvider.create(DisabledInternalLexer.class));
+		binder.bind(DisabledInternalLexer.class).toProvider(LexerProvider.create(DisabledInternalLexer.class));
+	}
+
+	@Override
+	public void configureContentAssistLexer(Binder binder) {
+		binder.bind(Lexer.class).annotatedWith(Names.named(LexerUIBindings.CONTENT_ASSIST)).to(DisabledInternalLexer.class);
+	}
+	
+	public Class<? extends ParserBasedContentAssistContextFactory.StatefulFactory> bindStatefulFactoryCAContextFactory() {
+		return FlexerBasedContentAssistContextFactory.class;
 	}
 
 }
