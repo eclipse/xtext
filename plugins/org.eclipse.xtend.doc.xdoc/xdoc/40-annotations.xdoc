@@ -270,13 +270,13 @@ The maven dependency is
 code[
 <dependency>
   <groupId>org.eclipse.xtend</groupId>
-  <artifactId>org.eclipse.xtend.standalone</artifactId>
+  <artifactId>org.eclipse.xtend.core</artifactId>
   <version>2.5.0</version>
   <scope>test</scope>
 </dependency>
 ]
 
-and the equivalent OSGI bundle is code[org.eclipse.xtend.standalone].
+and the equivalent OSGI bundle is code[org.eclipse.xtend.core].
 
 section2:active_annotation_CompilerTester[Testing]
 

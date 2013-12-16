@@ -136,7 +136,7 @@ code[XML][
     <includePluginDependencies>true</includePluginDependencies>
     <mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
     <arguments>
-      <argument>${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2</argument>
+      <argument>file://${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2</argument>
     </arguments>
   </configuration>
   <dependencies>

@@ -1364,7 +1364,23 @@ expression using <span class="inlinecode">Object.equals(Object)</span>.
 If a case is a match, that is it evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or the result equals the one we are switching
 over, the case expression after the colon is evaluated and is the result of the whole switch expression.
 </p>
-<a name="switchExpression_4"></a>
+<p>
+The main expression can also be a computed value instead of a field or variable. If you want to reuse that value
+in the body of the switch expression, you can create a local value for that by using the following notation which
+is similar to the syntax in <a href="30-expressions.html#forLoop" title="Go to &quot;For Loop&quot;"><span class="inlinecode"><span class="keyword">for</span></span> loops</a>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">switch</span>&nbsp;myString&nbsp;:&nbsp;someComputation()&nbsp;{<br/>
+&nbsp;&nbsp;..<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="switchExpression_6"></a>
 <h3>Type guards</h3>
 <p>
 Instead of or in addition to the case guard you can specify a <em>type guard</em>. The case only matches if the 

@@ -808,8 +808,8 @@ The second plug-in invokes the MWE2 file through a standard Java process:
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;includePluginDependencies&gt;true&lt;/includePluginDependencies&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;mainClass&gt;org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher&lt;/mainClass&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;arguments&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;argument&gt;${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2&lt;/argument&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/arguments&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;argument&gt;file:<span class="comment">//${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2&lt;/argument&gt;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/arguments&gt;<br/>
 &nbsp;&nbsp;&lt;/configuration&gt;<br/>
 &nbsp;&nbsp;&lt;dependencies&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;<br/>
