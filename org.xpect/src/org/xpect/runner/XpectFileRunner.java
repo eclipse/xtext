@@ -287,7 +287,7 @@ public class XpectFileRunner implements Filterable, Sortable {
 			String document = res.getParseResult().getRootNode().getText();
 			String setup = "XPECT_SETUP " + runner.getXpectJavaModel().getTestOrSuite().getJavaClass().getName() + " END_SETUP";
 			// FIXME: https://github.com/meysholdt/Xpect/issues/45
-			throw new ComparisonFailure("XPECT_SETUP messing in " + res.getURI(), document, setup + "\n" + document);
+			throw new ComparisonFailure("XPECT_SETUP missing in " + res.getURI(), document, setup + "\n" + document);
 		}
 	}
 
