@@ -38,7 +38,6 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 		assertExpressionSelected('12$3+$456', '123+456')
 		assertExpressionSelected('123$+4$56', '123+456')
 		
-		assertExpressionSelected('if($$true) null', 'true')
 		assertExpressionSelected('if(true$$) null', 'true')
 		assertExpressionSelected('if(true)$$ null', 'if(true) null')
 		assertExpressionSelected('if(true) null$$ else null', 'null')
@@ -49,6 +48,19 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map$[it|toFirstUpper]$", '[it|toFirstUpper]')
 		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map$[it|toFirstUpper$]", '[it|toFirstUpper]')
 		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map$[it|toFirstUpper$]", '[it|toFirstUpper]')
+	}
+	@Test
+	def testSelectedExpression_01() {
+		assertExpressionSelected("newArrayList($$true)", "true")
+		assertExpressionSelected("newArrayList($$'ru')", "'ru'")
+		assertExpressionSelected("newArrayList($'ru'$)", "'ru'")
+		assertExpressionSelected("newArrayList('ru'$$)", "'ru'")
+		assertExpressionSelected("newArrayList('ru$$')", "'ru'")
+		assertExpressionSelected("newArrayList('$ru$')", "'ru'")
+	}
+	@Test
+	def testSelectedExpression_02() {
+		assertExpressionSelected('if($$true) null', 'true')
 	}
 	
 	@Test
