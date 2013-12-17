@@ -96,6 +96,8 @@ public class ExpressionUtil {
 		return textRegion.getOffset() == selection.getOffset() 
 				&& textRegion.getLength() > 0 
 				&& !Character.isLetterOrDigit(node.getText().charAt(0))
+				&& node.getText().charAt(0) != '\''
+				&& node.getText().charAt(0) != '"'
 				&& node.getText().charAt(0) != '['
 				&& node.getText().charAt(0) != '(';
 	}

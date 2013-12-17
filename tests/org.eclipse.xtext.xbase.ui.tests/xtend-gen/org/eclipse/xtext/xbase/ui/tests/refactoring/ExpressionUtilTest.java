@@ -51,7 +51,6 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     this.assertExpressionSelected("123$+$456", "123+456");
     this.assertExpressionSelected("12$3+$456", "123+456");
     this.assertExpressionSelected("123$+4$56", "123+456");
-    this.assertExpressionSelected("if($$true) null", "true");
     this.assertExpressionSelected("if(true$$) null", "true");
     this.assertExpressionSelected("if(true)$$ null", "if(true) null");
     this.assertExpressionSelected("if(true) null$$ else null", "null");
@@ -61,6 +60,21 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper]$", "[it|toFirstUpper]");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper$]", "[it|toFirstUpper]");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper$]", "[it|toFirstUpper]");
+  }
+  
+  @Test
+  public void testSelectedExpression_01() {
+    this.assertExpressionSelected("newArrayList($$true)", "true");
+    this.assertExpressionSelected("newArrayList($$\'ru\')", "\'ru\'");
+    this.assertExpressionSelected("newArrayList($\'ru\'$)", "\'ru\'");
+    this.assertExpressionSelected("newArrayList(\'ru\'$$)", "\'ru\'");
+    this.assertExpressionSelected("newArrayList(\'ru$$\')", "\'ru\'");
+    this.assertExpressionSelected("newArrayList(\'$ru$\')", "\'ru\'");
+  }
+  
+  @Test
+  public void testSelectedExpression_02() {
+    this.assertExpressionSelected("if($$true) null", "true");
   }
   
   @Test

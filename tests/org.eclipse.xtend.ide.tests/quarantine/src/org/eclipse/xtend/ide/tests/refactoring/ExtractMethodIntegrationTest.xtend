@@ -471,6 +471,26 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 			}
 		'''.assertExtractForbidden([parameterInfos.get(1).newName = 'x'], 'duplicate')
 	}
+	
+	@Test def testBug_404244() {
+		'''
+			class Foo {
+				def foo() {
+					"foo".contains($"my string"$)
+				}
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo() {
+					"foo".contains(bar())
+				}
+				
+				def bar() {
+					"my string"
+				}
+			}
+		''')
+	}
 
 	def protected assertAfterExtract(CharSequence input, (ExtractMethodRefactoring)=>void initializer,
 		CharSequence expected) {
