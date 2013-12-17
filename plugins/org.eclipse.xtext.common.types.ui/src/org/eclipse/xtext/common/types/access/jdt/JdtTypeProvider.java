@@ -215,7 +215,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			packageName = topLevelType.substring(0, lastDot);
 		}
 		IType type = javaProject.findType(packageName, typeName /*, workingCopyOwner */);
-		if (!canLink(type.getFullyQualifiedName())) {
+		if (type != null && !canLink(type.getFullyQualifiedName())) {
 			return null;
 		}
 		return type;
