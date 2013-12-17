@@ -78,6 +78,26 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testSelectedExpression_03() {
+    this.assertExpressionSelected("newArrayList($$#[42])", "#[42]");
+  }
+  
+  @Test
+  public void testSelectedExpression_04() {
+    this.assertExpressionSelected("newArrayList($$#{42})", "#{42}");
+  }
+  
+  @Test
+  public void testSelectedExpression_05() {
+    this.assertExpressionSelected("newArrayList($${42})", "{42}");
+  }
+  
+  @Test
+  public void testSelectedExpression_06() {
+    this.assertExpressionSelected("newArrayList($ {$42})", "{42}");
+  }
+  
+  @Test
   public void testBug401082() {
     this.assertExpressionSelected("{ var Object x val result = ($(x as String).toString$ ?:\"foo\") }", "(x as String).toString");
     this.assertExpressionSelected("{ var Object x val result = ($(x as String).$toString ?:\"foo\") }", "(x as String).toString");
@@ -100,6 +120,7 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     this.assertSiblingExpressionsSelected("if($$true) null", "true");
     this.assertSiblingExpressionsSelected("if(true$$) null", "true");
     this.assertSiblingExpressionsSelected("if(true)$$ null", "if(true) null");
+    this.assertSiblingExpressionsSelected("if(true) $$null", "null");
     this.assertSiblingExpressionsSelected("if(true) null$$ else null", "null");
     this.assertSiblingExpressionsSelected("if(true) null $$else null", "if(true) null else null");
   }

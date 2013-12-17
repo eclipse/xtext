@@ -64,6 +64,24 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	def testSelectedExpression_03() {
+		assertExpressionSelected('newArrayList($$#[42])', '#[42]')
+	}
+	@Test
+	def testSelectedExpression_04() {
+		assertExpressionSelected('newArrayList($$#{42})', '#{42}')
+	}
+	@Test
+	def testSelectedExpression_05() {
+		assertExpressionSelected('newArrayList($${42})', '{42}')
+	}
+	
+	@Test
+	def testSelectedExpression_06() {
+		assertExpressionSelected('newArrayList($ {$42})', '{42}')
+	}
+	
+	@Test
 	def testBug401082() {
 		assertExpressionSelected('{ var Object x val result = ($(x as String).toString$ ?:"foo") }', '(x as String).toString')
 		assertExpressionSelected('{ var Object x val result = ($(x as String).$toString ?:"foo") }', '(x as String).toString')
@@ -83,10 +101,10 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 		assertSiblingExpressionsSelected('123$+$456', '123+456')
 		assertSiblingExpressionsSelected('12$3+$456', '123+456')
 		assertSiblingExpressionsSelected('123$+4$56', '123+456')
-		
 		assertSiblingExpressionsSelected('if($$true) null', 'true')
 		assertSiblingExpressionsSelected('if(true$$) null', 'true')
 		assertSiblingExpressionsSelected('if(true)$$ null', 'if(true) null')
+		assertSiblingExpressionsSelected('if(true) $$null', 'null')
 		assertSiblingExpressionsSelected('if(true) null$$ else null', 'null')
 		assertSiblingExpressionsSelected('if(true) null $$else null', 'if(true) null else null')
 	}
