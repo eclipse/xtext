@@ -538,7 +538,13 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("&lt;/goals&gt;");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("&lt;!-- optionally you can configure a different target folder --&gt;");
+    _builder.append("&lt;!-- By default the plugin will look for eclipse settings, and if non were found will generate to --&gt;");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("&lt;!-- ${basedir}/src/main/generated-sources/xtend --&gt;");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("&lt;!-- You can optionally configure a different target folder like so : --&gt;");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("&lt;!--");
@@ -547,7 +553,10 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("&lt;configuration&gt;");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("&lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;");
+    _builder.append("&lt;outputDirectory&gt;${basedir}/src/main/xtend-gen&lt;/outputDirectory&gt;");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("&lt;testOutputDirectory&gt;${basedir}/src/test/xtend-gen&lt;/testOutputDirectory&gt;");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("&lt;/configuration&gt;");

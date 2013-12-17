@@ -255,10 +255,13 @@ mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend -DarchetypeArtifactI
         &lt;goal&gt;compile&lt;/goal&gt;
         &lt;!-- &lt;goal&gt;testCompile&lt;/goal&gt; --&gt;
       &lt;/goals&gt;
-      &lt;!-- optionally you can configure a different target folder --&gt;
+      &lt;!-- By default the plugin will look for eclipse settings, and if non were found will generate to --&gt;
+      &lt;!-- ${basedir}/src/main/generated-sources/xtend --&gt;
+      &lt;!-- You can optionally configure a different target folder like so : --&gt;
       &lt;!--
       &lt;configuration&gt;
-        &lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;
+        &lt;outputDirectory&gt;${basedir}/src/main/xtend-gen&lt;/outputDirectory&gt;
+        &lt;testOutputDirectory&gt;${basedir}/src/test/xtend-gen&lt;/testOutputDirectory&gt;
       &lt;/configuration&gt;
       --&gt;
     &lt;/execution&gt;
