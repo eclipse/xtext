@@ -3769,13 +3769,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					  private ReflectExtensions _reflectExtensions;
 					  
 					  public Object bar() throws Throwable {
-					    Object _get = null;
 					    String _string = new String();
-					    Object _get_1 = this._reflectExtensions.<Object>get(_string, "toString");
-					    if (_get_1!=null) {
-					      _get=this._reflectExtensions.<Object>get(_get_1, "substring");
+					    Object _get = this._reflectExtensions.<Object>get(_string, "toString");
+					    Object _get_1 = null;
+					    if (_get!=null) {
+					      _get_1=this._reflectExtensions.<Object>get(_get, "substring");
 					    }
-					    return _get;
+					    return _get_1;
 					  }
 					}
 				''');
@@ -3884,7 +3884,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					@SuppressWarnings("all")
 					public class StrangeBug {
 					  public List<String> getAnzuwendendeModi(final String source) {
-					    List<String> _list = null;
 					    AbstractCollection<String> _xifexpression = null;
 					    if (true) {
 					      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
@@ -3893,6 +3892,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					      HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
 					      _xifexpression = _newHashSet;
 					    }
+					    List<String> _list = null;
 					    if (_xifexpression!=null) {
 					      _list=IterableExtensions.<String>toList(_xifexpression);
 					    }
