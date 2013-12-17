@@ -38,11 +38,19 @@ public class ExpressionUtil {
 	public XExpression findSelectedExpression(XtextResource resource, ITextSelection selection) {
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult != null) {
-			INode node = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), selection.getOffset());
-			if (node != null &&
-					(((ILeafNode) node).isHidden() || isBeginOfASymbol(node, selection))) {
-				node = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(),
-						selection.getOffset() - 1);
+			ICompositeNode rootNode = parseResult.getRootNode();
+			INode node = NodeModelUtils.findLeafNodeAtOffset(rootNode, selection.getOffset());
+			if (node == null) {
+				return null;
+			}
+			if (isHidden(node)) {
+				if (selection.getLength()>node.getLength()) {
+					node = NodeModelUtils.findLeafNodeAtOffset(rootNode, node.getEndOffset());
+				} else {
+					node = NodeModelUtils.findLeafNodeAtOffset(rootNode, selection.getOffset() - 1);
+				}
+			} else if (node.getOffset() == selection.getOffset() && !isBeginOfExpression(node)){ 
+				node = NodeModelUtils.findLeafNodeAtOffset(rootNode, selection.getOffset() - 1);
 			}
 			if(node != null) {
 				EObject currentSemanticElement =  NodeModelUtils.findActualSemanticObjectFor(node);
@@ -57,6 +65,10 @@ public class ExpressionUtil {
 			}
 		}
 		return null;
+	}
+	
+	private boolean isHidden(INode node) {
+		return node instanceof ILeafNode && ((ILeafNode)node).isHidden();
 	}
 
 	/**
@@ -91,19 +103,27 @@ public class ExpressionUtil {
 		return null;
 	}
 	
-	protected boolean isBeginOfASymbol(INode node, ITextSelection selection) {
+	/**
+	 * @return whether the given selection is zero length
+	 */
+	protected boolean isBeginOfExpression(INode node) {
 		ITextRegion textRegion = node.getTextRegion();
-		return textRegion.getOffset() == selection.getOffset() 
-				&& textRegion.getLength() > 0 
-				&& !Character.isLetterOrDigit(node.getText().charAt(0))
-				&& node.getText().charAt(0) != '\''
-				&& node.getText().charAt(0) != '"'
-				&& node.getText().charAt(0) != '['
-				&& node.getText().charAt(0) != '(';
+		if (textRegion.getLength() == 0)
+			return false;
+		char firstChar = node.getText().charAt(0);
+		return Character.isLetterOrDigit(firstChar)
+				|| firstChar == '\''
+				|| firstChar == '"'
+				|| firstChar == '['
+				|| firstChar == '('
+				|| firstChar == '{'
+				|| firstChar == '#'
+				|| firstChar == '@'
+				;
 	}
 
 	protected boolean nodeContainsSelection(INode node, ITextSelection selection) {
-		ITextRegion textRegion = node.getTextRegion();
+		ITextRegion textRegion = node.getTotalTextRegion();
 		return textRegion.getOffset() <= selection.getOffset()
 				&& textRegion.getOffset() + textRegion.getLength() >= selection.getOffset() + selection.getLength();
 	}
