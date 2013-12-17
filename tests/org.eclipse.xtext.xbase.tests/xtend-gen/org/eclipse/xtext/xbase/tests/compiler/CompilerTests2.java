@@ -461,4 +461,26 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testNullSafe_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(\'foo\'.toUpperCase as CharSequence)?.subSequence(0,2)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("String _upperCase = \"foo\".toUpperCase();");
+    _builder_1.newLine();
+    _builder_1.append("CharSequence _subSequence = null;");
+    _builder_1.newLine();
+    _builder_1.append("if (((CharSequence) _upperCase)!=null) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("_subSequence=((CharSequence) _upperCase).subSequence(0, 2);");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("return _subSequence;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
 }

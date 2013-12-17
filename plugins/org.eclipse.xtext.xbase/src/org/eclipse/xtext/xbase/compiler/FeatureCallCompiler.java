@@ -159,10 +159,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else if (expressionHelper.isShortCircuitOperation(expr)) {
 			generateShortCircuitInvocation(expr, b);
 		} else {
-			XExpression receiver = getActualReceiver(expr);
-			if (receiver != null) {
-				prepareExpression(receiver, b);
-			}
 			if (expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isNullSafe()) {
 				XExpression memberCallTarget = normalizeBlockExpression(((XMemberFeatureCall) expr).getMemberCallTarget());
 				if (!isReferenced) {
@@ -194,9 +190,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 							appendNullValueUntyped(getTypeForVariableDeclaration(expr), expr, appendable);
 						}
 					};
-					declareFreshLocalVariable(expr, b, later);
 					if (nullSafeMemberFeatureCallExpressionNeedsPreparation(memberCallTarget, b))
 						prepareExpression(memberCallTarget, b);
+					declareFreshLocalVariable(expr, b, later);
 					b.newLine().append("if (");
 					internalToJavaExpression(memberCallTarget, b);
 					b.append("!=null) {").increaseIndentation();
@@ -215,6 +211,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					}
 				}
 			} else {
+				XExpression receiver = getActualReceiver(expr);
+				if (receiver != null) {
+					prepareExpression(receiver, b);
+				}
 				for (XExpression arg : getActualArguments(expr)) {
 					prepareExpression(arg, b);
 				}

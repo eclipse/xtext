@@ -273,5 +273,18 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		''')
 	}
+	
+	@Test def void testNullSafe_01() throws Exception {
+		'''
+			('foo'.toUpperCase as CharSequence)?.subSequence(0,2)
+		'''.compilesTo('''
+			String _upperCase = "foo".toUpperCase();
+			CharSequence _subSequence = null;
+			if (((CharSequence) _upperCase)!=null) {
+			  _subSequence=((CharSequence) _upperCase).subSequence(0, 2);
+			}
+			return _subSequence;
+		''')
+	}
 }
 
