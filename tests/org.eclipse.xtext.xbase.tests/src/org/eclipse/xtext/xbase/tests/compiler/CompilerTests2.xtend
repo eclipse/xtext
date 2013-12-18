@@ -11,6 +11,42 @@ import org.junit.Test
 
 class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=424279
+	 */
+	@Test def void testBug_424279() throws Exception {
+		'''
+			{
+				val treeIt = <CharSequence>newArrayList.iterator;
+				while (treeIt.hasNext) {
+					val o = treeIt.next;
+					if (o instanceof java.util.List<?>) {
+						return o;
+					} else {
+						return o;
+					}
+				}
+				return null;
+			}
+		'''.compilesTo('''
+			java.util.ArrayList<CharSequence> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<CharSequence>newArrayList();
+			final java.util.Iterator<CharSequence> treeIt = _newArrayList.iterator();
+			boolean _hasNext = treeIt.hasNext();
+			boolean _while = _hasNext;
+			while (_while) {
+			  {
+			    final CharSequence o = treeIt.next();
+			    if ((o instanceof java.util.List<?>)) {
+			      return o;
+			    } else {
+			      return o;
+			    }
+			  }
+			}
+			return null;
+		''')
+	}
+	
 	@Test def void testAbstractIterator() throws Exception {
 		'''
 			{
