@@ -824,7 +824,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.append("(");
 			List<XExpression> arguments = getActualArguments(call);
 			if (!arguments.isEmpty()) {
-				XExpression receiver = (call instanceof XMemberFeatureCall) ? ((XMemberFeatureCall)call).getMemberCallTarget() : null;
+				XExpression receiver = null;
+				if (call instanceof XMemberFeatureCall) {
+					receiver = ((XMemberFeatureCall) call).getMemberCallTarget();
+				} else if (call instanceof XAssignment) {
+					receiver = ((XAssignment) call).getAssignable();
+				}
 				boolean shouldBreakFirstArgument = receiver == null || arguments.get(0) != receiver;
 				appendArguments(arguments, b, shouldBreakFirstArgument);
 			}
