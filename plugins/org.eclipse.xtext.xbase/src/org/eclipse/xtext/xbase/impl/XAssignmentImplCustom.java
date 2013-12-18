@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.impl;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -35,16 +36,25 @@ public class XAssignmentImplCustom extends XAssignmentImpl {
 	
 	@Override
 	public EList<XExpression> getActualArguments() {
+		if (isStaticWithDeclaringType()) {
+			return ECollections.singletonEList(getValue());
+		}
 		return getActualArguments(getAssignable(), getValue());
 	}
 	
 	@Override
 	public XExpression getActualReceiver() {
+		if (isStaticWithDeclaringType()) {
+			return null;
+		}
 		return getActualReceiver(getAssignable());
 	}
 	
 	@Override
 	public boolean isExtension() {
-		return isExtension(getAssignable());
+		if (isStaticWithDeclaringType()) {
+			return false;
+		}
+		return isExtension(assignable);
 	}
 }

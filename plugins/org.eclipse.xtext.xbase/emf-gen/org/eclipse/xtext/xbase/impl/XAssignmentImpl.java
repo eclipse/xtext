@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getAssignable <em>Assignable</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#isExplicitStatic <em>Explicit Static</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,6 +76,26 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * @ordered
 	 */
 	protected boolean explicitStatic = EXPLICIT_STATIC_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isStaticWithDeclaringType() <em>Static With Declaring Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStaticWithDeclaringType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATIC_WITH_DECLARING_TYPE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStaticWithDeclaringType() <em>Static With Declaring Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStaticWithDeclaringType()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean staticWithDeclaringType = STATIC_WITH_DECLARING_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,6 +242,29 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isStaticWithDeclaringType()
+	{
+		return staticWithDeclaringType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStaticWithDeclaringType(boolean newStaticWithDeclaringType)
+	{
+		boolean oldStaticWithDeclaringType = staticWithDeclaringType;
+		staticWithDeclaringType = newStaticWithDeclaringType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XASSIGNMENT__STATIC_WITH_DECLARING_TYPE, oldStaticWithDeclaringType, staticWithDeclaringType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -250,6 +294,8 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 				return getValue();
 			case XbasePackage.XASSIGNMENT__EXPLICIT_STATIC:
 				return isExplicitStatic();
+			case XbasePackage.XASSIGNMENT__STATIC_WITH_DECLARING_TYPE:
+				return isStaticWithDeclaringType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -272,6 +318,9 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 				return;
 			case XbasePackage.XASSIGNMENT__EXPLICIT_STATIC:
 				setExplicitStatic((Boolean)newValue);
+				return;
+			case XbasePackage.XASSIGNMENT__STATIC_WITH_DECLARING_TYPE:
+				setStaticWithDeclaringType((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -296,6 +345,9 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 			case XbasePackage.XASSIGNMENT__EXPLICIT_STATIC:
 				setExplicitStatic(EXPLICIT_STATIC_EDEFAULT);
 				return;
+			case XbasePackage.XASSIGNMENT__STATIC_WITH_DECLARING_TYPE:
+				setStaticWithDeclaringType(STATIC_WITH_DECLARING_TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -316,6 +368,8 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 				return value != null;
 			case XbasePackage.XASSIGNMENT__EXPLICIT_STATIC:
 				return explicitStatic != EXPLICIT_STATIC_EDEFAULT;
+			case XbasePackage.XASSIGNMENT__STATIC_WITH_DECLARING_TYPE:
+				return staticWithDeclaringType != STATIC_WITH_DECLARING_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -333,6 +387,8 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (explicitStatic: ");
 		result.append(explicitStatic);
+		result.append(", staticWithDeclaringType: ");
+		result.append(staticWithDeclaringType);
 		result.append(')');
 		return result.toString();
 	}

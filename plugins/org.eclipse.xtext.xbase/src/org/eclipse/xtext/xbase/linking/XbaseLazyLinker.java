@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -40,6 +41,8 @@ public class XbaseLazyLinker extends LazyLinker {
 				casted.setTypeLiteral(false);
 				casted.setPackageFragment(false);
 				casted.setStaticWithDeclaringType(false);
+			} else if (featureCall instanceof XAssignment) {
+				((XAssignment) featureCall).setStaticWithDeclaringType(false);
 			}
 		} else if (obj instanceof JvmSpecializedTypeReference) {
 			((JvmSpecializedTypeReference) obj).setEquivalent(null);

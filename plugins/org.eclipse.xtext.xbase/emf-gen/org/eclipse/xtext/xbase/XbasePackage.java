@@ -1587,13 +1587,22 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__EXPLICIT_STATIC = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Static With Declaring Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__STATIC_WITH_DECLARING_TYPE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>XAssignment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
+	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl <em>XReturn Expression</em>}' class.
@@ -2694,6 +2703,17 @@ public interface XbasePackage extends EPackage
 	EAttribute getXAssignment_ExplicitStatic();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAssignment#isStaticWithDeclaringType <em>Static With Declaring Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static With Declaring Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment#isStaticWithDeclaringType()
+	 * @see #getXAssignment()
+	 * @generated
+	 */
+	EAttribute getXAssignment_StaticWithDeclaringType();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XReturnExpression <em>XReturn Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3598,6 +3618,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XASSIGNMENT__EXPLICIT_STATIC = eINSTANCE.getXAssignment_ExplicitStatic();
+
+		/**
+		 * The meta object literal for the '<em><b>Static With Declaring Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XASSIGNMENT__STATIC_WITH_DECLARING_TYPE = eINSTANCE.getXAssignment_StaticWithDeclaringType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl <em>XReturn Expression</em>}' class.

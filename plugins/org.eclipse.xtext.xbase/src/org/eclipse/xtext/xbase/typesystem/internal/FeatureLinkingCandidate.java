@@ -799,15 +799,28 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		if (featureCall instanceof XMemberFeatureCall) {
 			XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
 			XExpression syntacticReceiver = casted.getMemberCallTarget();
-			if (isStatic() && syntacticReceiver instanceof XAbstractFeatureCall && !isExtension()) {
-				IFeatureLinkingCandidate candidate = getState().getResolvedTypes().getLinkingCandidate((XAbstractFeatureCall) syntacticReceiver);
-				if (candidate != null && candidate.isTypeLiteral()) {
-					((XMemberFeatureCall) featureCall).setStaticWithDeclaringType(true);
-				}
+			if (isStaticWithDeclaringType(syntacticReceiver)) {
+				casted.setStaticWithDeclaringType(true);
+			}
+		} else if (featureCall instanceof XAssignment) {
+			XAssignment casted = (XAssignment) featureCall;
+			XExpression syntacticReceiver = casted.getAssignable();
+			if (isStaticWithDeclaringType(syntacticReceiver)) {
+				casted.setStaticWithDeclaringType(true);
 			}
 		}
 	}
 	
+	private boolean isStaticWithDeclaringType(XExpression syntacticReceiver) {
+		if (isStatic() && syntacticReceiver instanceof XAbstractFeatureCall && !isExtension()) {
+			IFeatureLinkingCandidate candidate = getState().getResolvedTypes().getLinkingCandidate((XAbstractFeatureCall) syntacticReceiver);
+			if (candidate != null && candidate.isTypeLiteral()) {
+				return true;
+			}
+		}
+		return false;
+	}
+ 	
 	@Override
 	protected Severity getUnhandledExceptionSeverity(JvmExecutable executable) {
 		if (getFeature() instanceof JvmConstructor) {
