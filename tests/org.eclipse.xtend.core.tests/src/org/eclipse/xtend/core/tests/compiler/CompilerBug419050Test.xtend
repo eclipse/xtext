@@ -66,7 +66,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			  public Boolean m2(final boolean x) {
 			    boolean _while = x;
 			    while (_while) {
-			      return true;
+			      return Boolean.valueOf(true);
 			    }
 			    return null;
 			  }
@@ -164,7 +164,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			  public Boolean m(final boolean b) {
 			    boolean _xifexpression = false;
 			    if (b) {
-			      return true;
+			      return Boolean.valueOf(true);
 			    }
 			    boolean y = _xifexpression;
 			    return null;
@@ -209,7 +209,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			  public Boolean m(final boolean b) {
 			    boolean _while = true;
 			    while (_while) {
-			      return false;
+			      return Boolean.valueOf(false);
 			    }
 			    return null;
 			  }
@@ -232,6 +232,78 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			    boolean _while = true;
 			    while (_while) {
 			      return false;
+			    }
+			    return false;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_10() {
+		assertCompilesTo('''
+			class C {
+				def boolean m(boolean b) { 
+					val func = [String s|while(true) return false]
+					while(true) 
+						return func.apply("foo")
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public boolean m(final boolean b) {
+			    final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+			      public Boolean apply(final String s) {
+			        boolean _while = true;
+			        while (_while) {
+			          return Boolean.valueOf(false);
+			        }
+			        return null;
+			      }
+			    };
+			    final Function1<String,Boolean> func = _function;
+			    boolean _while = true;
+			    while (_while) {
+			      return (func.apply("foo")).booleanValue();
+			    }
+			    return false;
+			  }
+			}
+		''')
+	}
+
+	@Test
+	def test_11() {
+		assertCompilesTo('''
+			class C {
+				def boolean m(boolean b) {
+					val com.google.common.base.Predicate<String> func = [while(true) return false]
+					while(true) 
+						return func.apply("foo")
+				}
+			}
+		''', '''
+			import com.google.common.base.Predicate;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public boolean m(final boolean b) {
+			    final Predicate<String> _function = new Predicate<String>() {
+			      public boolean apply(final String it) {
+			        boolean _while = true;
+			        while (_while) {
+			          return false;
+			        }
+			        return false;
+			      }
+			    };
+			    final Predicate<String> func = _function;
+			    boolean _while = true;
+			    while (_while) {
+			      return func.apply("foo");
 			    }
 			    return false;
 			  }

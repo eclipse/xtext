@@ -14,6 +14,154 @@ import org.junit.Test
  */
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
+	@Test def void testReturnExpressionConverted_01() {
+		assertCompilesTo('''
+			class C {
+				def Iterable<?> m() {
+					val java.util.List<?> a = null
+					val Object[] b = null
+					if ('foo'=='bar') {
+						return a;
+					} else {
+						return b;
+					}
+				}
+			}
+		''','''
+			import com.google.common.base.Objects;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Conversions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Iterable<? extends Object> m() {
+			    final List<?> a = null;
+			    final Object[] b = null;
+			    boolean _equals = Objects.equal("foo", "bar");
+			    if (_equals) {
+			      return a;
+			    } else {
+			      return ((Iterable<? extends Object>)Conversions.doWrapArray(b));
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testReturnExpressionConverted_02() {
+		assertCompilesTo('''
+			class C {
+				def Object[] m() {
+					val java.util.List<?> a = null
+					val Object[] b = null
+					if ('foo'=='bar') {
+						return a;
+					} else {
+						return b;
+					}
+				}
+			}
+		''','''
+			import com.google.common.base.Objects;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Conversions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Object[] m() {
+			    final List<?> a = null;
+			    final Object[] b = null;
+			    boolean _equals = Objects.equal("foo", "bar");
+			    if (_equals) {
+			      return ((Object[])Conversions.unwrapArray(a, Object.class));
+			    } else {
+			      return b;
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testReturnExpressionConverted_03() {
+		assertCompilesTo('''
+			class C {
+				def m() {
+					val java.util.List<?> a = null
+					val Object[] b = null
+					if ('foo'=='bar') {
+						return a;
+					} else {
+						return b;
+					}
+				}
+			}
+		''','''
+			import com.google.common.base.Objects;
+			import java.util.List;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m() {
+			    final List<?> a = null;
+			    final Object[] b = null;
+			    boolean _equals = Objects.equal("foo", "bar");
+			    if (_equals) {
+			      return a;
+			    } else {
+			      return b;
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testReturnExpressionConverted_04() {
+		assertCompilesTo('''
+			class C {
+				def foo() {
+				   if ('foo'==null) {
+				      return myGuavaPredicate()
+				    } else {
+				       return [String s| true]
+				    }
+				}
+				
+				def com.google.common.base.Predicate<String> myGuavaPredicate() {
+					return null;
+				}
+			}
+		''','''
+			import com.google.common.base.Objects;
+			import com.google.common.base.Predicate;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Function1<String,Boolean> foo() {
+			    boolean _equals = Objects.equal("foo", null);
+			    if (_equals) {
+			      return new Function1<String,Boolean>() {
+			          public Boolean apply(String arg0) {
+			            return C.this.myGuavaPredicate().apply(arg0);
+			          }
+			      };
+			    } else {
+			      final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+			        public Boolean apply(final String s) {
+			          return true;
+			        }
+			      };
+			      return _function;
+			    }
+			  }
+			  
+			  public Predicate<String> myGuavaPredicate() {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
 	@Test
 	def void testAutocast_01() {
 		assertCompilesTo('''
