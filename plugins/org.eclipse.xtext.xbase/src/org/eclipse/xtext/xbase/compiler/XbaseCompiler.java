@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -71,6 +73,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -114,6 +117,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@SuppressWarnings("deprecation")
 	@Inject
 	private org.eclipse.xtext.xbase.typing.Closures closures;
+	
+	@Inject
+	private ILogicalContainerProvider logicalContainerProvider;
 	
 	/**
 	 * @param isReferenced unused in this context but necessary for dispatch signature 
@@ -724,8 +730,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(") {").increaseIndentation();
 		b.openPseudoScope();
 		internalToJavaStatement(expr.getBody(), b, false);
-		internalToJavaStatement(expr.getPredicate(), b, true);
 		if (!earlyExitComputer.isEarlyExit(expr.getBody())) {
+			internalToJavaStatement(expr.getPredicate(), b, true);
 			b.newLine();
 			b.append(varName).append(" = ");
 			internalToJavaExpression(expr.getPredicate(), b);
@@ -900,11 +906,39 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getExpression()!=null) {
 			internalToJavaStatement(expr.getExpression(), b, true);
 			b.newLine().append("return ");
-			internalToJavaExpression(expr.getExpression(), b);
+			JvmTypeReference realReturnType = findRealReturnType(expr);
+			internalToConvertedExpression(expr.getExpression(), b, realReturnType);
 			b.append(";");
 		} else {
 			b.newLine().append("return;");
 		}
+	}
+	
+	private JvmTypeReference findRealReturnType(XExpression expression) {
+		if (expression == null)
+			return null;
+		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getLogicalContainer(expression);
+		if (logicalContainer instanceof JvmOperation) {
+			return ((JvmOperation) logicalContainer).getReturnType();
+		}
+		if (expression instanceof XClosure) {
+			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(expression);
+			LightweightTypeReference type = resolvedTypes.getExpectedType(expression);
+			if (type == null) {
+				type = resolvedTypes.getActualType(expression);
+			}
+			if (type == null) {
+				return null;
+			}
+			JvmOperation operation = getTypeComputationServices().getFunctionTypes().findImplementingOperation(type);
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(type);
+			ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
+			OwnedConverter converter = new OwnedConverter(owner);
+			LightweightTypeReference parameterType = converter.toLightweightReference(operation.getReturnType());
+			LightweightTypeReference lightWeightReturnType = new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
+			return lightWeightReturnType.getRawTypeReference().toJavaCompliantTypeReference();
+		}
+		return findRealReturnType(EcoreUtil2.getContainerOfType(expression.eContainer(), XExpression.class));
 	}
 	
 	protected void _toJavaExpression(XCastedExpression expr, ITreeAppendable b) {

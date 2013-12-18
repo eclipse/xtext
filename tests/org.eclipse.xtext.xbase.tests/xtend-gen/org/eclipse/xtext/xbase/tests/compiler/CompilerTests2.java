@@ -13,6 +13,88 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=424279
+   */
+  @Test
+  public void testBug_424279() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val treeIt = <CharSequence>newArrayList.iterator;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("while (treeIt.hasNext) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val o = treeIt.next;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (o instanceof java.util.List<?>) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return o;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("} else {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return o;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return null;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("java.util.ArrayList<CharSequence> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<CharSequence>newArrayList();");
+    _builder_1.newLine();
+    _builder_1.append("final java.util.Iterator<CharSequence> treeIt = _newArrayList.iterator();");
+    _builder_1.newLine();
+    _builder_1.append("boolean _hasNext = treeIt.hasNext();");
+    _builder_1.newLine();
+    _builder_1.append("boolean _while = _hasNext;");
+    _builder_1.newLine();
+    _builder_1.append("while (_while) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("{");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final CharSequence o = treeIt.next();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if ((o instanceof java.util.List<?>)) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return o;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return o;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
+  
   @Test
   public void testAbstractIterator() throws Exception {
     StringConcatenation _builder = new StringConcatenation();

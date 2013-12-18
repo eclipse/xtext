@@ -344,7 +344,7 @@ public abstract class AbstractXbaseCompiler {
 				internalToJavaStatement(ex, b.trace(ex, true), isImplicitReturn);
 				if (isImplicitReturn) {
 					b.newLine().append("return (");
-					internalToConvertedExpression(ex, b, getType(expr));
+					internalToConvertedExpression(ex, b, expectedReturnType);
 					b.append(");");
 				}
 			}
