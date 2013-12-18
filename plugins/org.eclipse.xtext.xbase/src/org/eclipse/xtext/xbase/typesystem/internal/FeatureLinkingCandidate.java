@@ -447,7 +447,9 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
 				// we link to identical static features with equal assumptions
 				// stop comparison and take this one
-				if (isStatic() && casted.isStatic() && getReceiver() == casted.getReceiver()) {
+				if (isStatic() && casted.isStatic() 
+						&& getReceiver() == casted.getReceiver() 
+						&& isSyntacticReceiverPossibleArgument() == casted.isSyntacticReceiverPossibleArgument()) {
 					return CandidateCompareResult.THIS;
 				}
 			}
