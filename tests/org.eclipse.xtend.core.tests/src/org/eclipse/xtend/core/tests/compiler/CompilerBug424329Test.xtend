@@ -292,7 +292,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final String[] args) {
-			    A.setMainDir(B.class, null);
+			    B.setMainDir(null);
 			  }
 			}
 		''')
@@ -337,6 +337,28 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug_424329_16() {
+		assertCompilesTo('''
+			class A {
+				public def static void setMainDir(Class<? extends A> c, String... s){}
+				def static void main(String[] args) {
+					B.setMainDir(null, null)
+				}
+			}
+			class B extends A {}
+		''', '''
+			@SuppressWarnings("all")
+			public class A {
+			  public static void setMainDir(final Class<? extends A> c, final String... s) {
+			  }
+			  
+			  public static void main(final String[] args) {
+			    B.setMainDir(null, null);
 			  }
 			}
 		''')

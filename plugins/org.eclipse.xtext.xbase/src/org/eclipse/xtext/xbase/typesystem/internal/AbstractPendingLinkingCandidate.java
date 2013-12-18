@@ -414,6 +414,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return true;
 	}
 
+	/**
+	 * Obtain the currently applicable severity for uncaught exceptions.
+	 * Sneaky throw techniques cannot be applied to delegating constructor calls.
+	 * Therefore it's possible to raise the severity for them by checking the linked executable.
+	 * @param executable the executable that declares the exception.
+	 */
 	protected Severity getUnhandledExceptionSeverity(JvmExecutable executable) {
 		return getState().getSeverity(IssueCodes.UNHANDLED_EXCEPTION);
 	}
