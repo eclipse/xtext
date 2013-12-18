@@ -630,7 +630,7 @@ public class CompilerBug424329Test extends AbstractXtendCompilerTest {
     _builder_1.append("public static void main(final String[] args) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("A.setMainDir(B.class, null);");
+    _builder_1.append("B.setMainDir(null);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -727,6 +727,54 @@ public class CompilerBug424329Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("A.setMainDir(B.class);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug_424329_16() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public def static void setMainDir(Class<? extends A> c, String... s){}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void main(String[] args) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("B.setMainDir(null, null)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B extends A {}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static void setMainDir(final Class<? extends A> c, final String... s) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static void main(final String[] args) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("B.setMainDir(null, null);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
