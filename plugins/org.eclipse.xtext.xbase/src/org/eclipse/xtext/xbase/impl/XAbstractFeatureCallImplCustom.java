@@ -15,12 +15,17 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 
@@ -126,7 +131,15 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 	}
 	
 	protected boolean isExtension(XExpression syntacticReceiver) {
-		return (isStatic() || getImplicitReceiver() != null) && (syntacticReceiver != null || getImplicitFirstArgument() != null);
+		if (isStatic() && syntacticReceiver != null) {
+			JvmIdentifiableElement element = getFeature();
+			int args = 0;
+			if (element instanceof JvmOperation) {
+				args = ((JvmOperation) element).getParameters().size();
+			}
+			return getExplicitArguments().size()==args;
+		}
+		return ((isStatic() || getImplicitReceiver() != null) && (syntacticReceiver != null || getImplicitFirstArgument() != null));
 	}
 	
 	protected XExpression getActualReceiver(XExpression syntacticReceiver) {
@@ -147,6 +160,13 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 	
 	protected EList<XExpression> getActualArguments(XExpression syntacticReceiver, EList<XExpression> syntacticArguments) {
 		if (isStatic()) {
+			// Handle TypeLiteral.foo(arg) where foo is declared as static TypeLiteral.foo(SomeType arg)
+			if (syntacticReceiver instanceof XAbstractFeatureCall) {
+				XAbstractFeatureCall featureCall = (XAbstractFeatureCall) syntacticReceiver;
+				if (featureCall.isTypeLiteral() && !isExtension()) {
+					return syntacticArguments;
+				}
+			}
 			if (syntacticReceiver != null) {
 				return createArgumentList(syntacticReceiver, syntacticArguments);
 			}
