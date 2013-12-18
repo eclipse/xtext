@@ -14,6 +14,28 @@ import org.junit.Test
  */
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
+	@Test def void testBug_454564() {
+		assertCompilesTo('''
+			class A {
+				public def static void setMainDir(String s){
+				}
+				def static void main(String[] args) {
+					A.mainDir = "D:" 
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class A {
+			  public static void setMainDir(final String s) {
+			  }
+			  
+			  public static void main(final String[] args) {
+			    A.setMainDir("D:");
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testReturnExpressionConverted_01() {
 		assertCompilesTo('''
 			class C {
