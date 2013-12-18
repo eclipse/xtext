@@ -417,35 +417,26 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (type instanceof JvmDeclaredType) {
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
 			if (!superTypes.isEmpty()) {
-				if (!isRawType()) {
-					OwnedConverter converter = new OwnedConverter(getOwner());
-					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
-					for(JvmTypeReference superType: superTypes) {
-						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
-						if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1) {
-							if (!lightweightSuperType.isUnknown()) {
+				OwnedConverter converter = new OwnedConverter(getOwner());
+				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
+				boolean isRawType = isRawType();
+				for (JvmTypeReference superType : superTypes) {
+					LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
+					if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1) {
+						if (!lightweightSuperType.isUnknown()) {
+							if (!isRawType) {
 								result.add(substitutor.substitute(lightweightSuperType));
-							} else if (superTypes.size() == 1) {
-								result.add(internalFindTopLevelType(Object.class));
-							}
-						}
-					}
-					return result;
-				} else {
-					OwnedConverter converter = new OwnedConverter(getOwner());
-					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
-					for(JvmTypeReference superType: superTypes) {
-						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
-						if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1) {
-							if (!lightweightSuperType.isUnknown()) {
+							} else {
 								result.add(substitutor.substitute(lightweightSuperType).getRawTypeReference());
-							} else if (superTypes.size() == 1) {
-								result.add(internalFindTopLevelType(Object.class));
 							}
+						} else if (superTypes.size() == 1) {
+							LightweightTypeReference topLevelType = internalFindTopLevelType(Object.class);
+							if (topLevelType != null)
+								result.add(topLevelType);
 						}
 					}
-					return result;
 				}
+				return result;
 			}
 		} else if (type instanceof JvmTypeParameter) {
 			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
