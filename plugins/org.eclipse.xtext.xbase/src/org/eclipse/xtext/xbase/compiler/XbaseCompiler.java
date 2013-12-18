@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
@@ -930,13 +929,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (type == null) {
 				return null;
 			}
-			JvmOperation operation = getTypeComputationServices().getFunctionTypes().findImplementingOperation(type);
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(type);
-			ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
-			OwnedConverter converter = new OwnedConverter(owner);
-			LightweightTypeReference parameterType = converter.toLightweightReference(operation.getReturnType());
-			LightweightTypeReference lightWeightReturnType = new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
-			return lightWeightReturnType.getRawTypeReference().toJavaCompliantTypeReference();
+			FunctionTypeReference functionType = type.tryConvertToFunctionTypeReference(false);
+			if (functionType != null) {
+				return functionType.getReturnType().toJavaCompliantTypeReference();
+			}
+			return null;
 		}
 		return findRealReturnType(EcoreUtil2.getContainerOfType(expression.eContainer(), XExpression.class));
 	}
