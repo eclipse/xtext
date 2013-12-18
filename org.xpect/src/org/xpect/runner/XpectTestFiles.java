@@ -20,8 +20,10 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.xpect.runner.XpectTestFiles.XpectTestFileCollector;
 import org.xpect.util.DotClasspath;
+import org.xpect.util.IBundleInfo;
 import org.xpect.util.IFileForClassProvider;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -111,6 +113,10 @@ public @interface XpectTestFiles {
 			return URI.createFileURI(file.getAbsolutePath());
 		}
 
+		public URI deresolveToProject(URI uri) {
+			return uri.deresolve(getProjectURI());
+		}
+
 		public Collection<URI> getAllURIs() {
 			List<URI> result = Lists.newArrayList();
 			Collection<File> baseDirs = getBaseDirs();
@@ -173,6 +179,10 @@ public @interface XpectTestFiles {
 			throw new IllegalStateException("not .project file found in containing folder of " + classFile);
 		}
 
+		protected URI getProjectURI() {
+			return URI.createFileURI(getProjectRootFolder(owner).toString() + "/");
+		}
+
 		protected Collection<File> getRoots() {
 			switch (ctx.relativeTo()) {
 			case CURRENT:
@@ -185,13 +195,31 @@ public @interface XpectTestFiles {
 			throw new UnsupportedOperationException();
 		}
 
-		public URI resolveURI(URI base, String newURI) {
-			return URI.createURI(newURI).resolve(base);
+		protected URI resolvePlatformResourceURI(URI uri) {
+			List<String> segments = uri.segmentsList();
+			if (segments.size() < 2)
+				throw new RuntimeException("URI " + uri + " has an invalid format");
+			String symbolicName = segments.get(1);
+			IBundleInfo bundle = IBundleInfo.Registry.INSTANCE.getBundle(symbolicName);
+			if (bundle == null)
+				throw new RuntimeException("Bundle " + symbolicName + " not found.");
+			URI uriInBundle = URI.createURI(Joiner.on('/').join(segments.subList(2, segments.size())));
+			return uriInBundle.resolve(bundle.getLocationURI());
 		}
 
-		public URI deresolveToProject(URI uri) {
-			URI projectURI = URI.createFileURI(getProjectRootFolder(owner).toString() + "/");
-			return uri.deresolve(projectURI);
+		protected URI resolveProjectRelativeURI(URI uri) {
+			List<String> segments = uri.segmentsList();
+			URI uriInProject = URI.createURI(Joiner.on('/').join(segments));
+			return uriInProject.resolve(getProjectURI());
+		}
+
+		public URI resolveURI(URI base, String newURI) {
+			URI uri = URI.createURI(newURI);
+			if (uri.isPlatformResource())
+				return resolvePlatformResourceURI(uri);
+			if (uri.hasAbsolutePath())
+				return resolveProjectRelativeURI(uri);
+			return uri.resolve(base);
 		}
 
 	}

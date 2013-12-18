@@ -4,15 +4,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.jar.JarFile;
-import java.util.jar.Manifest;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
@@ -23,69 +25,15 @@ import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
+import org.xpect.util.ClasspathUtil;
 import org.xpect.util.IJavaReflectAccess;
+
+import com.google.common.collect.Lists;
 
 @SuppressWarnings("restriction")
 public class UIJavaReflectAccess implements IJavaReflectAccess {
-	private static final String BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName";
 
-	private IPackageFragmentRoot getPackageFragmentRoot(IJavaElement ele) {
-		IJavaElement current = ele;
-		while (current != null) {
-			if (current instanceof IPackageFragmentRoot)
-				return (IPackageFragmentRoot) current;
-			current = current.getParent();
-		}
-		return null;
-	}
-
-	private String getBundleNameFromDir(File file) {
-		File current = file;
-		int counter = 5;
-		while (current != null && counter > 0) {
-			File cand = new File(current + "/META-INF/MANIFEST.MF");
-			if (cand.isFile()) {
-				InputStream in = null;
-				try {
-					in = new FileInputStream(cand);
-					return getBundleNameFromJar(new Manifest(in));
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-					return null;
-				} catch (IOException e) {
-					e.printStackTrace();
-					return null;
-				} finally {
-					try {
-						in.close();
-					} catch (IOException e) {
-						return null;
-					}
-				}
-			}
-			current = current.getParentFile();
-		}
-		return null;
-	}
-
-	private String getBundleNameFromJar(Manifest manifest) {
-		String name = manifest.getMainAttributes().getValue(BUNDLE_SYMBOLIC_NAME);
-		if (name != null) {
-			int i = name.indexOf(';');
-			if (i >= 0)
-				name = name.substring(0, i);
-		}
-		return name;
-	}
-
-	private String getBundleNameFromJar(File file) {
-		try {
-			return getBundleNameFromJar(new JarFile(file).getManifest());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+	private final static Logger LOG = Logger.getLogger(UIJavaReflectAccess.class);
 
 	private Bundle getBundle(ClassMirror mirror) {
 		Class<?> mirroredClass = mirror.getMirroredClass();
@@ -108,6 +56,65 @@ public class UIJavaReflectAccess implements IJavaReflectAccess {
 		if (bundleName == null)
 			return null;
 		return Platform.getBundle(bundleName);
+	}
+
+	private String getBundleNameFromDir(File file) {
+		File current = file;
+		int counter = 5;
+		while (current != null && counter > 0) {
+			File cand = new File(current + "/META-INF/MANIFEST.MF");
+			if (cand.isFile()) {
+				try {
+					return ClasspathUtil.getSymbolicName(new FileInputStream(cand));
+				} catch (FileNotFoundException e) {
+					LOG.error("Can't get symbolic name from " + cand, e);
+					return null;
+				}
+			}
+			current = current.getParentFile();
+		}
+		return null;
+	}
+
+	private String getBundleNameFromJar(File file) {
+		try {
+			return ClasspathUtil.getSymbolicName(new JarFile(file).getManifest());
+		} catch (IOException e) {
+			LOG.error("Can't get symbolic name from " + file, e);
+			return null;
+		}
+	}
+
+	public Method getMethod(JvmOperation operation) {
+		Class<?> rawType = getRawType(operation.getDeclaringType());
+		if (rawType == null)
+			return null;
+		Class<?>[] paramTypes = getParamTypes(operation);
+		try {
+			return rawType.getDeclaredMethod(operation.getSimpleName(), paramTypes);
+		} catch (Exception e) {
+			LOG.error("Can't find " + operation.getIdentifier(), e);
+			return null;
+		}
+	}
+
+	private IPackageFragmentRoot getPackageFragmentRoot(IJavaElement ele) {
+		IJavaElement current = ele;
+		while (current != null) {
+			if (current instanceof IPackageFragmentRoot)
+				return (IPackageFragmentRoot) current;
+			current = current.getParent();
+		}
+		return null;
+	}
+
+	private Class<?>[] getParamTypes(JvmExecutable exe) {
+		List<JvmFormalParameter> parameters = exe.getParameters();
+		List<Class<?>> result = Lists.newArrayList();
+		for (JvmFormalParameter p : parameters) {
+			result.add(getRawType(p.getParameterType().getType()));
+		}
+		return result.toArray(new Class<?>[result.size()]);
 	}
 
 	public Class<?> getRawType(JvmType jvmType) {
@@ -133,21 +140,9 @@ public class UIJavaReflectAccess implements IJavaReflectAccess {
 		try {
 			return bundle.loadClass(className);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			LOG.error("Could not find Java class for " + jvmType.eClass().getName() + " " + jvmType.getIdentifier(), e);
 			return null;
 		}
-	}
-
-	public Method getMethod(JvmOperation operation) {
-		Class<?> rawType = getRawType(operation.getDeclaringType());
-		if (rawType != null) {
-			String name = operation.getSimpleName();
-			for (Method method : rawType.getMethods()) {
-				if (name.equals(method.getName()))
-					return method;
-			}
-		}
-		return null;
 	}
 
 }

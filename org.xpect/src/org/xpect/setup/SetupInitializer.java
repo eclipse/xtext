@@ -13,7 +13,6 @@ import java.lang.reflect.Method;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.xpect.AbstractComponent;
 import org.xpect.Assignment;
 import org.xpect.BooleanLiteral;
@@ -22,17 +21,15 @@ import org.xpect.Component;
 import org.xpect.IntLiteral;
 import org.xpect.StringLiteral;
 import org.xpect.Value;
-import org.xpect.runner.XpectRunner;
+import org.xpect.util.IJavaReflectAccess;
 
 import com.google.common.base.Joiner;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class SetupInitializer<T> implements ISetupInitializer<T> {
 
-	private JavaReflectAccess jra = new JavaReflectAccess();
 	private final AbstractComponent rootInstance;
 
 	public SetupInitializer(AbstractComponent rootInstance) {
@@ -44,11 +41,11 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 	}
 
 	protected Object create(ClassLiteral val) {
-		return new JavaReflectAccess().getRawType(val.getType());
+		return IJavaReflectAccess.INSTANCE.getRawType(val.getType());
 	}
 
 	protected Object create(Component val) {
-		Class<?> type = jra.getRawType(val.getComponentClass());
+		Class<?> type = IJavaReflectAccess.INSTANCE.getRawType(val.getComponentClass());
 		try {
 			Object[] params = new Object[val.getParameters().size()];
 			for (int i = 0; i < val.getParameters().size(); i++)
@@ -106,13 +103,13 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 		if (result != null) {
 			if (result.eIsProxy())
 				throw new RuntimeException("unresolved proxy:" + result);
-			return jra.getMethod(result);
+			return IJavaReflectAccess.INSTANCE.getMethod(result);
 		}
 		Value val = assignment.getValue();
 		if (val instanceof Component) {
 			JvmDeclaredType toBeAssigned = ((Component) val).getComponentClass();
 			if (toBeAssigned != null && !toBeAssigned.eIsProxy()) {
-				Class<?> toBeAssignedJava = jra.getRawType(toBeAssigned);
+				Class<?> toBeAssignedJava = IJavaReflectAccess.INSTANCE.getRawType(toBeAssigned);
 				if (toBeAssignedJava != null)
 					for (Method candidate : target.getClass().getMethods())
 						if ("add".equals(candidate.getName()) && candidate.getParameterTypes().length == 1) {
@@ -144,7 +141,6 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 	}
 
 	public void initialize(T object) {
-		jra.setClassLoader(XpectRunner.testClassloader);
 		if (rootInstance != null)
 			initialize(object, rootInstance);
 	}

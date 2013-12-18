@@ -1,17 +1,11 @@
 package org.xpect.registry;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
@@ -20,6 +14,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
+import org.xpect.util.ClasspathUtil;
 
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
@@ -28,7 +23,6 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 import com.google.common.io.Closeables;
 
 public class StandaloneExtensionRegistry implements IExtensionInfo.Registry {
@@ -158,7 +152,7 @@ public class StandaloneExtensionRegistry implements IExtensionInfo.Registry {
 		Multimap<String, IExtensionInfo> result = HashMultimap.create();
 		try {
 			XMLReader reader = XMLReaderFactory.createXMLReader();
-			for (URL url : getAllPluginResourceURLs()) {
+			for (URL url : ClasspathUtil.findResources("plugin.xml")) {
 				reader.setContentHandler(new PluginXMLContentHandler(url, result));
 				InputStream openStream = null;
 				try {
@@ -184,45 +178,6 @@ public class StandaloneExtensionRegistry implements IExtensionInfo.Registry {
 			reader.parse(new InputSource(in));
 		} catch (Throwable e) {
 			LOG.error("Error parsing " + url, e);
-		}
-		return result;
-	}
-
-	@SuppressWarnings("resource")
-	private Collection<URL> getAllPluginResourceURLs() {
-		Set<URL> result = Sets.newLinkedHashSet();
-		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-		try {
-			Enumeration<URL> resources = classLoader.getResources("plugin.xml");
-			while (resources.hasMoreElements())
-				result.add(resources.nextElement());
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-		}
-		if (classLoader instanceof URLClassLoader) {
-			URLClassLoader ucl = (URLClassLoader) classLoader;
-			for (URL u : ucl.getURLs())
-				if (!u.getFile().endsWith(".jar")) {
-					try {
-						java.io.File f = new java.io.File(u.toURI());
-						if (f.isDirectory()) {
-							int levels = 5;
-							while (levels >= 0 && f != null) {
-								java.io.File pl = new java.io.File(f + "/" + "plugin.xml");
-								if (pl.isFile()) {
-									result.add(pl.toURI().toURL());
-									break;
-								}
-								levels--;
-								f = f.getParentFile();
-							}
-						}
-					} catch (URISyntaxException e) {
-						LOG.error(e.getMessage(), e);
-					} catch (MalformedURLException e) {
-						LOG.error(e.getMessage(), e);
-					}
-				}
 		}
 		return result;
 	}

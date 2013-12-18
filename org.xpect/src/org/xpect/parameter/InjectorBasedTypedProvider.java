@@ -10,10 +10,9 @@ package org.xpect.parameter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import javax.inject.Inject;
-
 import org.xpect.state.StateContainer;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
