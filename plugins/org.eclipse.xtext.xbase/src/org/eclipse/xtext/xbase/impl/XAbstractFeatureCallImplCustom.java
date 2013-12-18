@@ -21,6 +21,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 
@@ -147,6 +148,11 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 	
 	protected EList<XExpression> getActualArguments(XExpression syntacticReceiver, EList<XExpression> syntacticArguments) {
 		if (isStatic()) {
+			if (syntacticReceiver instanceof XAbstractFeatureCall) {
+				XAbstractFeatureCall featureCall = (XAbstractFeatureCall) syntacticReceiver;
+				if (featureCall.isTypeLiteral() && !isExtension())
+					return syntacticArguments;
+			}
 			if (syntacticReceiver != null) {
 				return createArgumentList(syntacticReceiver, syntacticArguments);
 			}
