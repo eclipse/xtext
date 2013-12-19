@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.trace;
 
 import static com.google.common.collect.Lists.*;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,7 +97,11 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 						} catch (Exception e) {
 							log.error(e.getMessage(), e);
 						} finally {
-							Closeables.closeQuietly(contents);
+							try {
+								Closeables.close(contents, true);
+							} catch (IOException e) {
+								//never thrown, swallowed by Closeables.close
+							}
 						}
 					}
 				}
@@ -138,7 +143,11 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 									} catch (Exception e) {
 										log.error(e.getMessage(), e);
 									} finally {
-										Closeables.closeQuietly(contents);
+										try {
+											Closeables.close(contents, true);
+										} catch (IOException e) {
+											//never thrown, swallowed by Closeables.close
+										}
 									}
 								}
 							}

@@ -509,7 +509,11 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 				IStatus s= new Status(IStatus.ERROR, Activator.PLUGIN_ID, IResourceStatus.FAILED_WRITE_LOCAL, message, null);
 				throw new CoreException(s);
 			} finally {
-				Closeables.closeQuietly(stream);
+				try {
+					Closeables.close(stream, true);
+				} catch (IOException e) {
+					//never thrown, swallowed by Closeables.close
+				}
 			}
 			return;
 		}
