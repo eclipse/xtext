@@ -905,8 +905,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getExpression()!=null) {
 			internalToJavaStatement(expr.getExpression(), b, true);
 			b.newLine().append("return ");
-			JvmTypeReference realReturnType = findRealReturnType(expr);
-			internalToConvertedExpression(expr.getExpression(), b, realReturnType);
+			JvmTypeReference returnTypeToCompile = findRealReturnType(expr);
+			internalToConvertedExpression(expr.getExpression(), b, returnTypeToCompile);
 			b.append(";");
 		} else {
 			b.newLine().append("return;");
@@ -935,7 +935,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			return null;
 		}
-		return findRealReturnType(EcoreUtil2.getContainerOfType(expression.eContainer(), XExpression.class));
+		XExpression containerExpression = EcoreUtil2.getContainerOfType(expression.eContainer(), XExpression.class);
+		if (containerExpression == null) {
+			LightweightTypeReference returnType = getTypeResolver().resolveTypes(expression).getReturnType(expression);
+			return returnType.toJavaCompliantTypeReference();
+		}
+		return findRealReturnType(containerExpression);
 	}
 	
 	protected void _toJavaExpression(XCastedExpression expr, ITreeAppendable b) {
