@@ -23,8 +23,10 @@ import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry
 import org.eclipse.xtext.ui.shared.internal.Activator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.ProvisionException;
 
 public class Access {
 	
@@ -64,6 +66,31 @@ public class Access {
 		}
 	}
 	
+	private static class InternalProviderForOptionalContribution<T> implements Provider<T> {
+		private Class<? extends T> clazz;
+		
+		private Provider<? extends T> delegate;
+		
+		private InternalProviderForOptionalContribution(Class<? extends T> clazz) {
+			this.clazz = clazz;
+		}
+
+		@Inject
+		private void inject(ISharedStateContributionRegistry registry) {
+			ImmutableList<?> allContributions = registry.getLazyContributedInstances(clazz);
+			if (allContributions.size() == 1) {
+				delegate = registry.getLazySingleContributedInstance(clazz);	
+			}
+		}
+
+		public T get() {
+			if (delegate == null) {
+				throw new ProvisionException("Missing contribution for " + clazz.getName());
+			}
+			return delegate.get();
+		}
+	}
+	
 	/**
 	 * @since 2.5
 	 */
@@ -87,7 +114,7 @@ public class Access {
 	 * @since 2.4
 	 */
 	public static Provider<IStorage2UriMapperJdtExtensions> getIStorage2UriMapperJdtExtensions() {
-		return contributedProvider(IStorage2UriMapperJdtExtensions.class);
+		return new InternalProviderForOptionalContribution<IStorage2UriMapperJdtExtensions>(IStorage2UriMapperJdtExtensions.class);
 	}
 	
 	public static Provider<IStateChangeEventBroker> getIStateChangeEventBroker() {
