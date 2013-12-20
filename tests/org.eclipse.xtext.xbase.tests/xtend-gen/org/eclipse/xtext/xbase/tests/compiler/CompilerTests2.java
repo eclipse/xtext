@@ -74,7 +74,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.append("if ((o instanceof java.util.List<?>)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("return ((Object)o);");
+    _builder_1.append("return o;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("} else {");

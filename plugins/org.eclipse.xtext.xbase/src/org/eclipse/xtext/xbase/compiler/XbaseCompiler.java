@@ -905,8 +905,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getExpression()!=null) {
 			internalToJavaStatement(expr.getExpression(), b, true);
 			b.newLine().append("return ");
-			JvmTypeReference realReturnType = findRealReturnType(expr);
-			internalToConvertedExpression(expr.getExpression(), b, realReturnType);
+			JvmTypeReference returnTypeToCompile = findRealReturnType(expr);
+			if (returnTypeToCompile == null) {
+				returnTypeToCompile = getType(expr);
+			}
+			internalToConvertedExpression(expr.getExpression(), b, returnTypeToCompile);
 			b.append(";");
 		} else {
 			b.newLine().append("return;");
