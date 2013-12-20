@@ -68,6 +68,8 @@ public class ReorderedFeatureCallArguments extends StandardFeatureCallArguments 
 			}
 			return shiftedArguments.get(idx - parameters.size());
 		}
+		if (idx>=arguments.size())
+			return null;
 		return arguments.get(idx);
 	}
 	
