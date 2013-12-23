@@ -139,10 +139,10 @@ public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPag
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 					InterruptedException {
+				if (monitor == null) {
+					monitor = new NullProgressMonitor();
+				}
 				try {
-					if (monitor == null) {
-						monitor = new NullProgressMonitor();
-					}
 					if (!getPackageFragment().exists()) {
 						try {
 							getPackageFragmentRoot().createPackageFragment(getPackageFragment().getElementName(), true,
