@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aggregator:Contribution xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xpand, MWE and Orbit">
   <repositories location="http://download.eclipse.org/modeling/m2t/xpand/updates/nightly/">
-    <features name="org.eclipse.xpand.feature.group" versionRange="1.4.0"/>
+    <bundles name="org.eclipse.xpand"/>
+    <bundles name="org.eclipse.xtend"/>
+    <bundles name="org.eclipse.xtend.typesystem.emf"/>
   </repositories>
   <repositories location="http://download.eclipse.org/modeling/emft/mwe/updates/nightly/">
     <features name="org.eclipse.emf.mwe.sdk.feature.group"/>
